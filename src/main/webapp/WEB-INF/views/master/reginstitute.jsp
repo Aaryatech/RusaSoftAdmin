@@ -176,12 +176,14 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-																Chairman/President Name :<span class="text-danger">*</span>
+																Chairman/President Name(Board of Governance) :<span
+																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
 																	name="page_order"
-																	placeholder="Name of Chairman/President" required>
+																	placeholder="Name of Chairman/President(Board of Governance)"
+																	required>
 															</div>
 														</div>
 

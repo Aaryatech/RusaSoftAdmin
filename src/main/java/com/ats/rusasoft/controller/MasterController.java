@@ -62,15 +62,15 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showHodAfterLogin", method = RequestMethod.GET)
-	public ModelAndView showHodAfterLogin(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
+	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
 
 			model = new ModelAndView("master/regstaff");
 
-			model.addObject("title", "Register Staff");
+			model.addObject("title", "Register Faculty");
 
 		} catch (Exception e) {
 
@@ -116,7 +116,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/staffList");
 
-			model.addObject("title", "Staff List");
+			model.addObject("title", "Faculty List");
 
 		} catch (Exception e) {
 

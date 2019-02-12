@@ -131,7 +131,7 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
+															<label class="control-label col-sm-2" for="status">Highest
 																Qualification : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -139,9 +139,8 @@
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
-
-
-
+																	<option value="2">UG & PG</option>
+																	<option value="3">Any Other Course</option>
 																</select>
 															</div>
 														</div>
@@ -187,18 +186,28 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Is
-																Regular :<span class="text-danger">*</span>
+																Working Today :<span class="text-danger">*</span>
 															</label>
 
 
 															<div class="col-sm-10">
 																No <input type="radio" name="isReg" id="isReg"
 																	onchange="GSTBillNo(this.value)" checked value="0">
-																	Yes<input type="radio" name="isReg" id="isReg"
+																Yes<input type="radio" name="isReg" id="isReg"
 																	onchange="GSTBillNo(this.value)" value="1">
 															</div>
 
-															 
+
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Realiving
+																Date :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="date" class="form-control" id="page_order"
+																	name="page_order" placeholder="Contact No" required>
+															</div>
 														</div>
 
 
@@ -233,6 +242,8 @@
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
+																	<option value="2">UG & PG</option>
+																	<option value="3">Any Other Course</option>
 
 
 																</select>

@@ -53,7 +53,7 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showHodAfterLogin"><button
+								<a href="${pageContext.request.contextPath}/showRegisterStaff"><button
 										type="button" class="btn btn-success">Register Staff</button></a>
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
