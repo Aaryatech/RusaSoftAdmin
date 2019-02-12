@@ -40,4 +40,28 @@ public class MasterController {
 
 	}
 
+	// iqacreg
+
+	@RequestMapping(value = "/showIqacAfterLogin", method = RequestMethod.GET)
+	public ModelAndView showIqacAfterLogin(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/iqaclogin");
+
+			model.addObject("title", "Fill Institute Information");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showIqacAfterLogin at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 }

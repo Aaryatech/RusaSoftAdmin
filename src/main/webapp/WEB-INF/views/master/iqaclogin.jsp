@@ -118,8 +118,8 @@
 
 													<div class="col-xs-12">
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Institute
-																Name<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="page_name">IQAC
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_name"
