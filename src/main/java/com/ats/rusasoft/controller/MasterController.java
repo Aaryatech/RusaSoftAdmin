@@ -40,8 +40,6 @@ public class MasterController {
 
 	}
 
-	// iqacreg
-
 	@RequestMapping(value = "/showIqacAfterLogin", method = RequestMethod.GET)
 	public ModelAndView showIqacAfterLogin(HttpServletRequest request, HttpServletResponse response) {
 
@@ -55,6 +53,74 @@ public class MasterController {
 		} catch (Exception e) {
 
 			System.err.println("exception In showIqacAfterLogin at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showHodAfterLogin", method = RequestMethod.GET)
+	public ModelAndView showHodAfterLogin(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/regstaff");
+
+			model.addObject("title", "Register Staff");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showHodAfterLogin at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	// instituteList
+
+	@RequestMapping(value = "/showInstituteList", method = RequestMethod.GET)
+	public ModelAndView showInstituteList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/instituteList");
+
+			model.addObject("title", "Institute List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showInstituteList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showStaffList", method = RequestMethod.GET)
+	public ModelAndView showStaffList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/staffList");
+
+			model.addObject("title", "Staff List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
 
