@@ -103,7 +103,7 @@
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
+													<i class="fa fa-home"></i> Information
 											</a></li>
 
 
@@ -118,7 +118,7 @@
 
 													<div class="col-xs-12">
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_name">No.
+															<label class="control-label col-sm-4" for="page_name" style="text-align: left;">No.
 																of Full Time Faculty in Institute <span
 																class="text-danger">*</span>
 															</label>
@@ -126,14 +126,14 @@
 																<input type="text" class="form-control" id="page_name"
 																	name="page_name"
 																	placeholder="No. of Full Time Faculty in Institute"
-																	value="${page.pageName}">
+																	value="${page.pageName}" required>
 															</div>
 														</div>
 
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">No.
+															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">No.
 																of Full Time Nonteaching Including Office Staff:<span
 																class="text-danger">*</span>
 															</label>
@@ -148,7 +148,7 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">No.
+															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">No.
 																of Support Staff :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -159,7 +159,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">No.
+															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">No.
 																of current admitted student :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">

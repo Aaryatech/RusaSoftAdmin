@@ -60,7 +60,7 @@
         <div class="page-title">
 
             <div class="pull-left">
-                <!-- PAGE HEADING TAG - START --><h1 class="title">HOD Registration</h1><!-- PAGE HEADING TAG - END -->                            </div>
+                <!-- PAGE HEADING TAG - START --><h1 class="title">Add Faculty</h1><!-- PAGE HEADING TAG - END -->                            </div>
 			 
                                 
         </div>
@@ -78,7 +78,7 @@
         <section class="box ">
        
                 <header class="panel_header">
-                    <h2 class="title pull-left">HOD Registration Form</h2>
+                    <h2 class="title pull-left">Add Department</h2>
                    
                     <div class="actions panel_actions pull-right">
                 	      <a href="${pageContext.request.contextPath}/hodList"><button type="button" class="btn btn-info"><< Back</button></a>
@@ -94,64 +94,20 @@
                          <form class="form-horizontal" action="${pageContext.request.contextPath}/insertCmsForm" method="post" enctype="multipart/form-data" name="form_sample_2" id="form_sample_2" 
                          onsubmit="return confirm('Do you really want to submit the form?');">               
                     
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#home" data-toggle="tab">
-                                <i class="fa fa-home"></i> Register
-                            </a>
-                        </li>
-                        
-                    </ul>
+                     
 
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="home">
-
-                            <div>
- 
-                      
+                    
                       <div class="col-xs-12"> 
                       
-                       <div class="form-group">
-                                <label class="control-label col-sm-2" for="status">Select Department : <span class="text-danger">*</span></label>
-                                <div class="col-sm-10">
-                                <select id="deptId" name="deptId" class="form-control" required >
-                                                                    <option value="0" >Information Technology</option>
-                    									<option value="1" >Computer</option>
-                     
-                 
-                                  </select>
-                                </div>
-                              </div>
-                              
+                        
                     		 <div class="form-group">
-                                <label class="control-label col-sm-2" for="page_name">Name :<span class="text-danger">*</span></label>
+                                <label class="control-label col-sm-2" for="page_name">Department Name:<span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="hodName" name="hodName" placeholder="Name" value="${page.pageName}"   required>
                                 </div>
                               </div>
                        
-                    		   <div class="form-group">
-                                <label class="control-label col-sm-2" for="page_name">Qualification :<span class="text-danger">*</span></label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Qualification" value="${page.pageName}"   required>
-                                </div>
-                              </div>
-                              
-                          <div class="form-group">
-                                <label class="control-label col-sm-2" for="smallheading">Contact No. : <span class="text-danger">*</span></label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="contactNo" name="contactNo"pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7-9 and remaing 9 digit with 0-9"
-                                   placeholder="Contact No" value="" required>
-                                </div>
-                              </div>
-                              
-                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="smallheading">Email : <span class="text-danger">*</span></label>
-                                <div class="col-sm-10">
-                                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="" required>
-                                </div>
-                              </div>
-                              
+                    		     
                               <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                   <button type="submit" class="btn btn-primary">Submit</button>  <button type="reset" class="btn btn-default">Reset</button> 
@@ -159,15 +115,7 @@
                               </div>
                               
                              </div>
-                      
-                        
-                        <div class="clearfix"></div>
-
-                            </div>
-
-                        </div>
-                         
-                    </div>
+                       
  				</form>
                 </div>
                     

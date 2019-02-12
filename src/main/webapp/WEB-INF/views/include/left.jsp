@@ -31,75 +31,31 @@
             <li class="">
                 <a href="javascript:;">
                 <i class="fa fa-columns"></i>
-                <span class="title">Admin</span>
+                <span class="title">User Registration</span>
                 <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu" >
                		 <li>
-                        <a class="" href="${pageContext.request.contextPath}/addUser" >Add Admin  </a>
-                        <a class="" href="${pageContext.request.contextPath}/userList" >Admin List </a>
-                    </li>
-                    
-                     
-                </ul>
-            </li>
-            
-            <li class="">
-                <a href="javascript:;">
-                <i class="fa fa-columns"></i>
-                <span class="title">Front End Control</span>
-                <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu" >
-               		 
-                    
-                    <li>
-                        <a href="${pageContext.request.contextPath}/addLogo">Add Logo</a>
-                    </li>
-                     <li>
-                        <a href="${pageContext.request.contextPath}/addMetaNew">Add Meta Data</a>
-                    </li>
-                     <li>
-                        <a href="${pageContext.request.contextPath}/addMetaNew">Add Social Links</a>
-                    </li>
-                      <li>
-                        <a href="${pageContext.request.contextPath}/sliderPicList">Header Slider</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/uploadOtherMedia">Upload Media/Files</a>
-                    </li>
-                     <li>
-                        <a href="${pageContext.request.contextPath}/maintenanceMode">Maintenance Mode</a>
+                        <a class="" href="${pageContext.request.contextPath}/showRegisterInstitute" > Institute Registration</a>
+                        <a class="" href="${pageContext.request.contextPath}/iqacRegistration" >IQAC Registration</a>
+                        <a class="" href="${pageContext.request.contextPath}/hodRegistration" >HOD Registration</a>
+                        <a class="" href="${pageContext.request.contextPath}/showHodAfterLogin" >Staff Registration</a>
+                        <a class="" href="${pageContext.request.contextPath}/showIqacAfterLogin" >Fill Institute Information</a>
                     </li>
                      
                 </ul>
             </li>
             
-            <li class="">
+             <li class="">
                 <a href="javascript:;">
                 <i class="fa fa-columns"></i>
-                <span class="title">Section</span>
+                <span class="title">Master</span>
                 <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu" >
                		 <li>
-                        <a class="" href="${pageContext.request.contextPath}/sectionList" >Section List </a>
-                    </li>
-                    <li>
-                        <a class="" href="${pageContext.request.contextPath}/categoryList" >Menu List </a>
-                    </li>
-                    <li>
-                        <a class="" href="${pageContext.request.contextPath}/subCategoryList" >Sub Menu List</a>
-                    </li>
-                     <li>
-                        <a href="${pageContext.request.contextPath}/sectionTreeList">Add Content</a>
-                    </li>
-                    
-                    <li>
-                        <a href="${pageContext.request.contextPath}/addLogo">Add Logo</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/uploadDocForm">Upload Document</a>
+                        <a class="" href="${pageContext.request.contextPath}/addFaculty" >Add Department</a>
+                         
                     </li>
                      
                 </ul>

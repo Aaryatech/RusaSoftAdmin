@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/cmsList"><button
+								<a href="${pageContext.request.contextPath}/showStaffList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
@@ -118,10 +118,10 @@
 
 													<div class="col-xs-12">
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_name">Faculty
+															<label class="control-label col-sm-2" for="page_name">Faculty
 																Member Name <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_name"
 																	name="page_name" placeholder="Faculty Member Name"
 																	value="${page.pageName}">
@@ -131,10 +131,10 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="status">Select
+															<label class="control-label col-sm-2" for="status">Select
 																Qualification : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<select id="deptId" name="deptId" class="form-control"
 																	required>
 																	<option value="0">UG</option>
@@ -147,11 +147,11 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">Year
+															<label class="control-label col-sm-2" for="page_order">Year
 																of highest Qualification Required :<span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
 																	name="page_order"
 																	placeholder="Year of highest Qualification Required"
@@ -160,10 +160,10 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="status">Current
+															<label class="control-label col-sm-2" for="status">Current
 																Designation : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<select id="designation" name="designation"
 																	class="form-control" required>
 																	<option value="0">Professor</option>
@@ -176,39 +176,38 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">Joining
+															<label class="control-label col-sm-2" for="page_order">Joining
 																Date :<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<input type="date" class="form-control" id="page_order"
 																	name="page_order" placeholder="Contact No" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">Is
+															<label class="control-label col-sm-2" for="page_order">Is
 																Regular :<span class="text-danger">*</span>
 															</label>
 
 
-															<div class="col-md-1">
+															<div class="col-sm-10">
 																No <input type="radio" name="isReg" id="isReg"
 																	onchange="GSTBillNo(this.value)" checked value="0">
-															</div>
-
-															<div class="col-md-1">
-																Yes<input type="radio" name="isReg" id="isReg"
+																	Yes<input type="radio" name="isReg" id="isReg"
 																	onchange="GSTBillNo(this.value)" value="1">
 															</div>
+
+															 
 														</div>
 
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">Contact
+															<label class="control-label col-sm-2" for="page_order">Contact
 																No :<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
 																	name="page_order" placeholder="Contact No" required>
@@ -216,20 +215,20 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">Email
+															<label class="control-label col-sm-2" for="page_order">Email
 																:<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
 																	name="page_order" placeholder="Email" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-4" for="status">Teaching
+															<label class="control-label col-sm-2" for="status">Teaching
 																to : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-8">
+															<div class="col-sm-10">
 																<select id="teachTo" name="teachTo" class="form-control"
 																	required>
 																	<option value="0">UG</option>
