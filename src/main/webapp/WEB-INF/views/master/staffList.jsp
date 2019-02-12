@@ -96,8 +96,11 @@
 										<tfoot>
 											<tr>
 												<th width="5%">Sr No</th>
-												<th>Page Name</th>
-												<th>Desc</th>
+												<th>Staff Name</th>
+												<th>Qualification</th>
+												<th>Joining Date</th>
+												<th>Contact No</th>
+												<th>Email</th>
 												<th width="10%">Action</th>
 											</tr>
 										</tfoot>

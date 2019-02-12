@@ -97,8 +97,11 @@
 										<tfoot>
 											<tr>
 												<th width="5%">Sr No</th>
-												<th>Page Name</th>
-												<th>Desc</th>
+												<th>Institute Name</th>
+												<th>Trust Name</th>
+												<th>Principal Name</th>
+												<th>Contact No</th>
+												<th>Email</th>
 												<th width="10%">Action</th>
 											</tr>
 										</tfoot>
