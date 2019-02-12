@@ -118,12 +118,14 @@
 
 													<div class="col-xs-12">
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">IQAC
-																<span class="text-danger">*</span>
+															<label class="control-label col-sm-4" for="page_name">No.
+																of Full Time Faculty in Institute <span
+																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-8">
 																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Institute Name"
+																	name="page_name"
+																	placeholder="No. of Full Time Faculty in Institute"
 																	value="${page.pageName}">
 															</div>
 														</div>
@@ -131,78 +133,39 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Institute
-																Add :<span class="text-danger">*</span>
+															<label class="control-label col-sm-4" for="page_order">No.
+																of Full Time Nonteaching Including Office Staff:<span
+																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order" placeholder="Institute Address"
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Name :<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order" placeholder="Trust/Society Name"
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Add :<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order" placeholder="Trust/Society Address"
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-																Chairman/President Name :<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-8">
 																<input type="text" class="form-control" id="page_order"
 																	name="page_order"
-																	placeholder="Name of Chairman/President" required>
+																	placeholder="No. of Full Time Nonteaching Including Office Staff"
+																	value="" required>
+															</div>
+														</div>
+
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-4" for="page_order">No.
+																of Support Staff :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order" placeholder="No. of Support Staff"
+																	value="" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+															<label class="control-label col-sm-4" for="page_order">No.
+																of current admitted student :<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="Email" required>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order"
+																	placeholder="No. of current admitted student" required>
 															</div>
 														</div>
 
