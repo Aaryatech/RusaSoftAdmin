@@ -307,8 +307,12 @@
 														</h5>
 
 														<div class="col-xs-12"></div>
-
+														<label class="control-label col-sm-3" for="smallheading">Educational
+															Qualifications : <span class="text-danger">*</span>
+														</label>
 														<div class="col-xs-12">
+
+
 
 
 															<table id="example1"
@@ -396,7 +400,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">M.phill/Ph.Guide
+															<label class="control-label col-sm-2" for="page_order">M.phill/Ph.D.Guide
 																:<span class="text-danger">*</span>
 															</label>
 
@@ -418,7 +422,7 @@
 
 
 															<label class="control-label col-sm-2" for="smallheading">Valid
-																Up to : <span class="text-danger">*</span>
+																up to : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<input type="date" class="form-control" id="dor"
@@ -452,7 +456,7 @@
 
 
 
-															<label class="control-label col-sm-1" for="page_name">Ph.D
+															<label class="control-label col-sm-1" for="page_name">Ph.D.
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
@@ -462,8 +466,9 @@
 															</div>
 														</div>
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Use
-																of ICT :<span class="text-danger">*</span>
+															<label class="control-label col-sm-4" for="page_order">Use
+																of ICT(Information Communication Technology) :<span
+																class="text-danger">*</span>
 															</label>
 
 
@@ -490,8 +495,8 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th width="50%">Year of Passing</th>
-																		<th width="40%">No of Students</th>
+																		<th width="45%">Year</th>
+																		<th width="45%">No of Students</th>
 																	</tr>
 																</thead>
 
@@ -541,7 +546,7 @@
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-3">
 																	National <input type="radio" name="conat" id="conat"
 																		checked value="0"> International<input
 																		type="radio" name="conat" id="conat" value="1">
@@ -555,8 +560,8 @@
 																		name="dob" placeholder="DOB" value="" required>
 																</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Venue
-																	: <span class="text-danger">*</span>
+																<label class="control-label col-sm-1" for="smallheading">Venue
+																	: <span class="text-danger"></span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -598,7 +603,7 @@
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-3">
 																	National <input type="radio" name="pub" id="pub"
 																		checked value="0"> International<input
 																		type="radio" name="pub" id="pub" value="1">
@@ -613,7 +618,7 @@
 																		required>
 																</div>
 
-																<label class="control-label col-sm-2" for="page_order">Scopus/DIO
+																<label class="control-label col-sm-1" for="page_order">Scopus/DIO
 																	:<span class="text-danger">*</span>
 																</label>
 
@@ -700,14 +705,14 @@
 																	for="smallheading">Title of Book : <span
 																	class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob" placeholder="Title of Book" value=""
 																		required>
 																</div>
 
 
-																<label class="control-label col-sm-1" for="page_order">Edition
+																<label class="control-label col-sm-2" for="page_order">Edition
 																	:<span class="text-danger">*</span>
 																</label>
 
@@ -717,20 +722,11 @@
 																		name="issue" placeholder="Edition" value="" required>
 																</div>
 
-																<label class="control-label col-sm-1" for="page_order">ISBN
-																	No :<span class="text-danger">*</span>
-																</label>
 
-
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="isbn"
-																		name="isbn" placeholder="ISBN No" value="" required>
-																</div>
 
 
 
 															</div>
-
 
 															<div class="form-group">
 
@@ -739,12 +735,33 @@
 																</label>
 
 
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Name of Authors/Co-Authors "
 																		value="" required>
 																</div>
+																<div class="col-sm-1"></div>
 
+																<div class="col-sm-3">
+																	Publication <input type="radio" name="publication"
+																		id="publication" checked value="0"> Publisher<input
+																		type="radio" name="publication" id="publication"
+																		value="1">
+																</div>
+
+															</div>
+
+															<div class="form-group">
+
+																<label class="control-label col-sm-2" for="page_order">ISBN
+																	No :<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-3">
+																	<input type="text" class="form-control" id="isbn"
+																		name="isbn" placeholder="ISBN No" value="" required>
+																</div>
 
 
 																<label class="control-label col-sm-2" for="smallheading">Year
@@ -757,18 +774,10 @@
 																</div>
 
 
-
-
-																<div class="col-sm-2">
-																	Publication <input type="radio" name="publication"
-																		id="publication" checked value="0"> Publisher<input
-																		type="radio" name="publication" id="publication"
-																		value="1">
-																</div>
-
-
-
 															</div>
+
+
+
 															<hr>
 
 															<h5 class="title pull-left">
@@ -787,12 +796,12 @@
 																</div>
 
 
-																<label class="control-label col-sm-2" for="page_order">Sponsoring
+																<label class="control-label col-sm-3" for="page_order">Sponsoring
 																	Authority :<span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-4">
+																<div class="col-sm-3">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Sponsoring Authority"
 																		value="" required>
@@ -947,7 +956,7 @@
 															<div class="col-sm-12"></div>
 
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
+																<label class="control-label col-sm-2" for="smallheading">Nature
 																	of Consultancy: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
@@ -979,15 +988,15 @@
 																		value="" required>
 																</div>
 
-																<label class="control-label col-sm-2" for="page_order">Period
-																	of Consultancy :<span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="page_order">Consultancy
+																	Period :<span class="text-danger">*</span>
 																</label>
 
 
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dor"
-																		name="dor" placeholder="Period of Consultancy"
-																		value="" required>
+																		name="dor" placeholder="Consultancy Period" value=""
+																		required>
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Project
@@ -1520,7 +1529,7 @@
 
 															</div>
 
-															<hr>
+
 
 															<h5 class="title pull-left">
 																<strong>Subject Details :</strong>
@@ -1692,7 +1701,7 @@
 
 															<div class="form-group">
 
-																<label class="control-label col-sm-2" for="smallheading">Ph.D
+																<label class="control-label col-sm-2" for="smallheading">Ph.D.
 																	Guide : <span class="text-danger">*</span>
 																</label>
 
@@ -1731,7 +1740,7 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Ph.D Scholar: <span class="text-danger">*</span>
+																	of Ph.D. Scholar: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
