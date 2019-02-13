@@ -63,7 +63,7 @@
 					<ul class="sub-menu">
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showFacultyDetails">Faculty
-								Details Form Department</a></li>
+								Details Form </a></li>
 
 					</ul></li>
 
