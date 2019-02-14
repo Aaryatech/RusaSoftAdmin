@@ -45,16 +45,16 @@
 
 					</ul></li>
 
-				<li class=""><a href="javascript:;"> <i
+				<%-- 	<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">Master</span> <span
 						class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
 						<li><a class=""
 							href="${pageContext.request.contextPath}/addFaculty">Add
-								Department</a></li>
+								Department</a></li></ul></li>
+ --%>
 
-					</ul></li>
 
 				<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">Faulty
@@ -63,6 +63,28 @@
 					<ul class="sub-menu">
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showFacultyDetails">Faculty
+								Details Form </a></li>
+
+					</ul></li>
+
+				<li class=""><a href="javascript:;"> <i
+						class="fa fa-columns"></i> <span class="title">Research And
+							Innovation </span> <span class="arrow "></span>
+				</a>
+					<ul class="sub-menu">
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showResearchAndInnovationForm">Research
+								And Innovation Form </a></li>
+
+					</ul></li>
+
+				<li class=""><a href="javascript:;"> <i
+						class="fa fa-columns"></i> <span class="title">Program
+							Details Module </span> <span class="arrow "></span>
+				</a>
+					<ul class="sub-menu">
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showProgramDetails">Program
 								Details Form </a></li>
 
 					</ul></li>
