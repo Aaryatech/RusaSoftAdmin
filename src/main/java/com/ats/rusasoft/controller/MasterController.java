@@ -173,5 +173,28 @@ public class MasterController {
 		return model;
 
 	}
+	// res&innoForm
+
+	@RequestMapping(value = "/showResearchAndInnovationForm", method = RequestMethod.GET)
+	public ModelAndView showResearchAndInnovationForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/res&innoForm");
+
+			model.addObject("title", "Research And Innvovation Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showResearchAndInnovationForm at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 }
