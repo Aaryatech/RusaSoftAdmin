@@ -152,4 +152,26 @@ public class MasterController {
 
 	}
 
+	@RequestMapping(value = "/showProgramDetails", method = RequestMethod.GET)
+	public ModelAndView showProgramDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/programDetails");
+
+			model.addObject("title", "Program Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showProgramDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 }
