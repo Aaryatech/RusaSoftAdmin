@@ -89,6 +89,18 @@
 
 					</ul></li>
 
+				<li class=""><a href="javascript:;"> <i
+						class="fa fa-columns"></i> <span class="title">Infrastructure
+							Module </span> <span class="arrow "></span>
+				</a>
+					<ul class="sub-menu">
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showInfrastructureForm">Infrastructure
+								Form </a></li>
+
+					</ul></li>
+
+
 
 
 				<li><a href="#"> <i class="fa fa-lock"></i> <span
