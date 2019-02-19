@@ -84,6 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+							<a href="#myModal1"
+														data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
 								<a href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
@@ -117,10 +120,6 @@
 													<div class="col-xs-12">
 
 										
-														
-
-
-
 														<label class="control-label col-sm-3" for="page_name">Mentoring
 															to the Students :<span class="text-danger">*</span>
 														</label>
@@ -137,25 +136,15 @@
 																	<tr>
 																		<th width="10%">Sr No</th>
 																		<th width="45%">Year</th>
-																		<th width="45%">No of Students<a href="#myModal1"
-														data-toggle="modal"><button type="submit"
-																class="btn btn-primary">Add</button></a></th>
+																		<th width="45%">No of Students</th>
 																	</tr>
 																</thead>
 
 
 
-																<tbody>
+																<!-- <tbody>
 
 																	<tr>
-																		<td>1</td>
-																		<td>2018-2019</td>
-
-																		<td><input type="text" class="form-control"
-																			id="curExp" name="curExp" value="" required></td>
-
-																	</tr>
-																	<!-- <tr>
 																		<td>2</td>
 																		<td>2019-2020</td>
 
@@ -171,9 +160,9 @@
 																			id="curExp" name="curExp" value="" required></td>
 
 																	</tr>
- -->
 
-																</tbody>
+
+																</tbody> -->
 															</table>
 														
 </div>
@@ -230,9 +219,9 @@
 					<h4 class="modal-title">Mentoring to Student</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form"
+					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
+						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId">
 						
@@ -241,9 +230,9 @@
 	<div class="form-group">
 							<label class="control-label col-sm-3" for="page_name">Year of Passing</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="0">2018-2019</option>
-								<option value="1">2017-2018</option>
-								<option value="3">2016-2017</option>
+								<option value="2018-2019">2018-2019</option>
+								<option value="2017-2018">2017-2018</option>
+								<option value="2016-2017">2016-2017</option>
 								
 							</select>
 						</div>
@@ -259,34 +248,40 @@
 	
 						
 
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-	<script>
-	function showForm() {
-	document.getElementById("abc").style = "display:none"
-		var index=document.getElementById("qualType").value
+<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var year=document.getElementById("qualType").value;
+		//alert("year"+year);
+		var noStud=document.getElementById("hodName").value;
+		//alert("noStud"+noStud);
+		var dataTable = $('#example-2')
+		.DataTable();
 		
-
-		if (index == 6) {
-
-			document.getElementById("abc").style = "visible"
-
-		} 
-	
+		dataTable.row
+		.add(
+				[
+					i+1,	
+					year,
+					noStud
+						 ])
+		.draw();
+		
+		
+		
 	}
-	function showForm1() {
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-	
+
 	</script>
+	
+	
 	
 	
 	

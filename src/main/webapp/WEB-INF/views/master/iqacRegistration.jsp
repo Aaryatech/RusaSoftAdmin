@@ -85,7 +85,7 @@
 				
 
 						<header class="panel_header">
-						<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name</h4>
+						<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name:abc</h4>
 							<h2 class="title pull-left">IQAC Registration Form</h2>
 
 							<div class="actions panel_actions pull-right">
@@ -177,7 +177,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email"
-																	name="email" placeholder="abc@gmail.com" value="" required>
+																	name="email" placeholder="abc@xyz.com" value="" required>
 															</div>
 														</div>
 

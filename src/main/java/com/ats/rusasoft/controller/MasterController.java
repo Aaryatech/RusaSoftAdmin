@@ -290,7 +290,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/publicationDetail");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Publication Details Form");
 			model.addObject("formindex", 2);
 
 		} catch (Exception e) {
@@ -314,7 +314,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/researchProDetail");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Research Details Form");
 			
 
 		} catch (Exception e) {
@@ -337,7 +337,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/consultancy");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Consultancy Details Form");
 			
 
 		} catch (Exception e) {
@@ -360,7 +360,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/FacultyDetails/patentDetails");
 
- 			model.addObject("title", "Faculty Details Form");
+ 			model.addObject("title", "Patent Details Form");
  			
 
  		} catch (Exception e) {
@@ -382,7 +382,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/FacultyDetails/awardDetails");
 
- 			model.addObject("title", "Faculty Details Form");
+ 			model.addObject("title", "Award Details Form");
  			
 
  		} catch (Exception e) {
@@ -404,7 +404,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/outReach");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Out Reach Activity Form");
 			
 
 		} catch (Exception e) {
@@ -427,7 +427,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/FacultyDetails/organized");
 
- 			model.addObject("title", "Faculty Details Form");
+ 			model.addObject("title", "Organized Details Form");
  			
 
  		} catch (Exception e) {
@@ -451,7 +451,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/subDetails");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Subject Details Form");
 			
 
 		} catch (Exception e) {
@@ -474,7 +474,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/academicDetails");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Academic Details Form");
 			
 
 		} catch (Exception e) {
@@ -497,7 +497,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/FacultyDetails/personalDetail");
 
- 			model.addObject("title", "Faculty Details Form");
+ 			model.addObject("title", "Personal Details Form");
  			
 
  		} catch (Exception e) {
@@ -521,7 +521,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/mPhillDetail");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "M.phill/Ph.D.  Details Form");
 			
 
 		} catch (Exception e) {
@@ -544,7 +544,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/studMentor");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Mentoring Details Form");
 			
 
 		} catch (Exception e) {
@@ -567,7 +567,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/phdGuidence");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "Ph.D. Guide Details Form");
 			
 
 		} catch (Exception e) {
@@ -590,7 +590,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/FacultyDetails/swoc");
 
-			model.addObject("title", "Faculty Details Form");
+			model.addObject("title", "SWOC Details Form");
 			
 
 		} catch (Exception e) {

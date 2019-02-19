@@ -84,8 +84,12 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+							<a href="#myModal"
+														data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
 								<a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
+										type="button" class="btn btn-info">Back</button></a> 
+										<a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -136,15 +140,13 @@
 																		<th width="10%">Sr No</th>
 																		<th width="30%">Qualification</th>
 																		<th width="30%">Year of Passing</th>
-																		<th width="30%">Class<a href="#myModal"
-														data-toggle="modal"><button type="submit"
-																class="btn btn-primary">Add</button></a></th>
+																		<th width="30%">Class</th>
 																	</tr>
 																</thead>
 
 
 
-																<tbody>
+															<!-- 	<tbody>
 
 																	<tr>
 																		<td>1</td>
@@ -157,7 +159,7 @@
 																	</tr>
 																	
 
-																</tbody>
+																</tbody> -->
 															</table>
 
 
@@ -217,21 +219,21 @@
 					<h4 class="modal-title">Academic Details</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form"
+					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
+						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
 									<div class="form-group">
 							<label class="control-label col-sm-3" for="page_name">Qualification</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="0">Diploma</option>
-								<option value="1">Bachelors</option>
-								<option value="3">Masters</option>
-								<option value="4">Doctorates</option>
-							<option value="5">Post Doctorates</option>
-								<option value="6">M.Phill/Ph.D. Guide</option>
+								<option value="Diploma">Diploma</option>
+								<option value="Bachelors">Bachelors</option>
+								<option value="Masters">Masters</option>
+								<option value="Doctorates">Doctorates</option>
+							<option value="Post Doctorates">Post Doctorates</option>
+								<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
 								
 								<option value="7">Any Other</option>
 
@@ -247,8 +249,8 @@
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="qualName"
-									name="qualName" placeholder="No." value="${page.pageName}"
-									required>
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
 							<!-- </div> -->
 	</div>
 						
@@ -257,8 +259,8 @@
 							<label class="control-label col-sm-1" for="page_name">Class
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="No." value="${page.pageName}"
+								<input type="text" class="form-control" id="className"
+									name="className" placeholder="" value="${page.pageName}"
 									required>
 							</div>
 	</div>
@@ -267,17 +269,13 @@
 							</label>
 							<div class="col-sm-3">
 								<input type="date" class="form-control"
-								id="curExp" name="curExp" value="" required>
+								id="year" name="year" value="" required>
 							</div>
 
 </div>
 
-
-					
-
-
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+				<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
@@ -290,14 +288,21 @@
 	<script>
 	function showForm() {
 	document.getElementById("abc").style = "display:none"
-		var index=document.getElementById("qualType").value
+		var qualType=document.getElementById("qualType").value
+		var qualName=document.getElementById("qualName").value
+		var className=document.getElementById("className").value
+		var year=document.getElementById("year").value
+
 		
 
-		if (index == 6) {
+		if (qualType == 7) {
 
-			document.getElementById("abc").style = "visible"
+			temp=qualType;
 
 		} 
+		else{
+			
+		}
 	
 	}
 	function showForm1() {
@@ -308,6 +313,43 @@
 	
 	</script>
 	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var qualType=document.getElementById("qualType").value
+		var qualName=document.getElementById("qualName").value
+		//alert(qualName);
+		var className=document.getElementById("className").value
+		var year=document.getElementById("year").value
+		var temp;
+		if (qualType == 7) {
+
+			temp=qualName;
+			//alert(temp);
+		} 
+		else{
+			temp=qualType;
+		}
+
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					temp,
+					year,
+					className
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
 	
 	
 

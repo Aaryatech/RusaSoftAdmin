@@ -84,6 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+							<a href="#myModal"
+														data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
 								<a href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
@@ -134,13 +137,13 @@
 																			<th width="10%">Year</th>
 																			<th width="10%">Semester</th>
 																			<th width="15%">Subject Taught</th>
-																			<th width="20%">Subject
-																				Type(Regular/Elective/Any other)</th>
+																			<th width="20%">Subject Type
+																				</th>
 																			<th width="15%">No. of Students Appeared</th>
 																			<th width="10%">Passed</th>
 																			<th width="10%">% of Result</th>
 																			<th width="10%">Course Outcome</th>
-																			<th width="5%">Action</th>
+																			<th width="30%">Action</th>
 																		</tr>
 																	</thead>
 
@@ -148,79 +151,7 @@
 
 																	<tbody>
 
-																		<tr>
-																			<td>1</td>
-
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><button type="submit"
-																					class="btn btn-primary">Add</button></td>
-																		</tr>
-																		<tr>
-																			<td>2</td>
-
-
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><button type="submit"
-																					class="btn btn-primary">Add</button></td>
-																		</tr>
-
-																		<tr>
-																			<td>3</td>
-
-
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><input type="text" class="form-control"
-																				id="curExp" name="curExp" value="" required></td>
-																			<td><button type="submit"
-																					class="btn btn-primary">Add</button></td>
-																		</tr>
-
+																		
 																	</tbody>
 																</table>
 
@@ -237,15 +168,14 @@
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
-
-													</div>
+								</div>
 
 
 													<div class="clearfix"></div>
 
 												</div>
 
-											</div>
+											
 										</div>
 									</form>
 								</div>
@@ -270,6 +200,165 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Subject Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+							<div class="form-group">
+						<label class="control-label col-sm-4" for="page_name">Year of Passing
+							</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control"
+								id="year" name="year" value="" required>
+							</div>
 
+</div>
+							
+				
+									<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">Semester</label> <select
+								id="sem" name="sem" class="form-control" onchange="showForm()" required>
+								<option value="0">I</option>
+								<option value="1">II</option>
+								<option value="3">III</option>
+								<option value="4">IV</option>
+							
+							
+
+
+							</select>
+						</div>
+						
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Subject Taught
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="subTaut"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+		
+									<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">Subject Type</label> <select
+								id="subType" name="subType" class="form-control" onchange="showForm()" required>
+								<option value="0">Regular</option>
+								<option value="1">Elective</option>
+								<option value="3">Other</option>
+								
+							</select>
+						</div>				
+					<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">No. of Student Appeared
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="noStud"
+									name="noStud"  value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Passed
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="pass"
+									name="pass" placeholder="No." value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">% of Result
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="rslt"
+									name="rslt" placeholder="No." value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+	
+						
+<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Course Outcome
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="course"
+									name="course" placeholder="No." value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var year=document.getElementById("year").value
+		var sem=document.getElementById("sem").value
+		
+		var subTaut=document.getElementById("subTaut").value
+		var subType=document.getElementById("subType").value
+		
+		var noStud=document.getElementById("noStud").value
+	
+		var pass=document.getElementById("pass").value
+		var rslt=document.getElementById("rslt").value
+		var course=document.getElementById("course").value
+		var t="-";
+
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					year,
+					sem,
+					subTaut,
+					subType,
+					noStud,
+					pass,
+					rslt,
+					course,
+				    t
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
+	
+	
 </body>
 </html>

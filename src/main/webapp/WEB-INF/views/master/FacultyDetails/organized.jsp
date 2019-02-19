@@ -238,7 +238,8 @@
 																		value="0"> No<input type="radio" name="bos"
 																		id="bos" value="1">
 																</div>
-
+																	</div>
+																	<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
 																	of BOS: <span class="text-danger">*</span>
 																</label>
@@ -299,7 +300,8 @@
 																		checked value="0"> No<input type="radio"
 																		name="faculty" id="faculty" value="1">
 																</div>
-
+</div>
+<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
 																	of Faculty: <span class="text-danger">*</span>
 																</label>
@@ -362,10 +364,13 @@
 																		value="1">
 																</div>
 
-																<label class="control-label col-sm-3" for="smallheading">Name
+															</div>
+
+															<div class="form-group">
+																<label class="control-label col-sm-2" for="smallheading">Name
 																	of Academic Council: <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-3">
+																<div class="col-sm-5">
 																	<input type="text" class="form-control" id="dob"
 																		name="Grant" placeholder="Name of Academic Council"
 																		value="" required>

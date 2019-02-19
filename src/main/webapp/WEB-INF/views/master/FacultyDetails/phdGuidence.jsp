@@ -130,18 +130,20 @@
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-4">
 																	Yes <input type="radio" name="phdGuide" id="phdGuide"
 																		checked value="0"> No<input type="radio"
 																		name="phdGuide" id="phdGuide" value="1">
 																</div>
+</div>
 
-																<label class="control-label col-sm-1" for="smallheading">Co-Guide
+															<div class="form-group">
+																<label class="control-label col-sm-2" for="smallheading">Co-Guide
 																	: <span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-4">
 																	Yes <input type="radio" name="coGuide" id="coGuide"
 																		checked value="0"> No<input type="radio"
 																		name="coGuide" id="coGuide" value="1">
@@ -150,7 +152,7 @@
 																<label class="control-label col-sm-2" for="smallheading">Name
 																	of Co-Guide: <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-3">
+																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
 																		name="Grant" placeholder="Name of Co_Guide" value=""
 																		required>

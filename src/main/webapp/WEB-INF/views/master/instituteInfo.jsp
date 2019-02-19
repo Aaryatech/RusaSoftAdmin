@@ -74,22 +74,22 @@
                     <tr>
                    		<th width="5%">Sr No</th>
                         <th>Academic Year</th> 
-                        <th>No. of Full Time Faculty</th> 
-                        <th>No. of Full Time Nonteaching Including Office Staff</th> 
-                        <th>No.of Support Staff </th> 
-                       <th> No. of current admitted student</th>
+                        <th>Faculty</th> 
+                        <th>Nonteaching Including Office Staff</th> 
+                        <th>Support Staff </th> 
+                       <th> Current admitted student</th>
                         <th width="10%">Action</th> 
                     </tr>
                 </thead>
 
                 <tfoot>
-                   <tr>
+                    <tr>
                    		<th width="5%">Sr No</th>
                         <th>Academic Year</th> 
-                        <th>No. of Full Time Faculty</th> 
-                        <th>No. of Full Time Nonteaching Including Office Staff</th> 
-                        <th>No.of Support Staff </th> 
-                       <th> No. of current admitted student</th>
+                        <th>Faculty</th> 
+                        <th>Nonteaching Including Office Staff</th> 
+                        <th>Support Staff </th> 
+                       <th> Current admitted student</th>
                         <th width="10%">Action</th> 
                     </tr>
                 </tfoot>

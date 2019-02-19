@@ -197,7 +197,8 @@
 																		checked value="0"> International<input
 																		type="radio" name="pub" id="pub" value="1">
 																</div>
-
+</div>
+<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
 																	of Journal : <span class="text-danger">*</span>
 																</label>
@@ -207,7 +208,7 @@
 																		required>
 																</div>
 
-																<label class="control-label col-sm-1" for="page_order">Scopus/DIO
+																<label class="control-label col-sm-2" for="page_order">Scopus/DIO
 																	:<span class="text-danger">*</span>
 																</label>
 
@@ -353,7 +354,7 @@
 																</div>
 
 
-																<label class="control-label col-sm-2" for="smallheading">Year
+																<label class="control-label col-sm-1" for="smallheading">Year
 																	of Publication : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">

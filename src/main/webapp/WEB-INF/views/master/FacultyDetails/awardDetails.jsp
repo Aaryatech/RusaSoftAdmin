@@ -152,7 +152,7 @@
 																		value="" required>
 																</div>
 
-																<label class="control-label col-sm-1" for="smallheading">Date
+																<label class="control-label col-sm-2" for="smallheading">Date
 																	: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
@@ -160,7 +160,10 @@
 																		name="Grant" placeholder="Awarding Agency" value=""
 																		required>
 																</div>
-																<label class="control-label col-sm-1" for="smallheading">Validity
+																
+																</div>
+																<div class="form-group">
+																<label class="control-label col-sm-2" for="smallheading">Validity
 																	: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
