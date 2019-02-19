@@ -62,8 +62,66 @@
 				</a>
 					<ul class="sub-menu">
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails">Faculty
-								Details Form </a></li>
+							href="${pageContext.request.contextPath}/showFacultyDetails/1">Personal
+								Details  </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/2">Academic
+								Details </a></li>
+								
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/3">M.phill/Ph.D.Guide  </a></li>
+						
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/4">Publication/Presentation Details </a></li>		
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/5">Research Project
+								Details </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/6">Consultancy
+								Details  </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/7">Patent Details
+								 </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/8">Award Recognition Details
+
+								 </a></li>
+								 
+								 
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/13">Out Reach Activity
+
+								 </a></li>
+								
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/9">Organized Details
+
+
+
+							</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/10">Subject Details 
+
+								 </a></li>
+									
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/11">SWOC for HODs
+
+								Details </a></li>
+									
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFacultyDetails/12">Ph.D Guidance 
+
+								Details </a></li>
+								
+								
 
 					</ul></li>
 

@@ -86,6 +86,7 @@
 												<th width="5%">Sr No</th>
 												<th>Staff Name</th>
 												<th>Qualification</th>
+												<th>Department</th>
 												<th>Joining Date</th>
 												<th>Contact No</th>
 												<th>Email</th>
@@ -98,6 +99,7 @@
 												<th width="5%">Sr No</th>
 												<th>Staff Name</th>
 												<th>Qualification</th>
+												<th>Department</th>
 												<th>Joining Date</th>
 												<th>Contact No</th>
 												<th>Email</th>
@@ -106,7 +108,7 @@
 										</tfoot>
 
 										<tbody>
-											<c:forEach items="${getPagesModuleList}"
+											<%-- <c:forEach items="${getPagesModuleList}"
 												var="getPagesModuleList" varStatus="count">
 												<tr>
 													<td>${count.index+1}</td>
@@ -126,7 +128,24 @@
 														data-original-title="Delete  record"><span
 															class="glyphicon glyphicon-remove"></span></a></td>
 												</tr>
-											</c:forEach>
+											</c:forEach> --%>
+											<tr>
+											<td>1</td>
+											<td>ABC</td>
+											<td>Ph.D.</td>
+												<td>Information Technology</td>
+												<td>1-08-2018</td>
+												<td>8956231213</td>
+												<td>xyz@gmail.com</td>
+												<td> <a
+											href="${pageContext.request.contextPath}/showFacultyDetails"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Faculty Details"><span
+												class="glyphicon glyphicon-list"></span></a></td>
+											
+											
+											
+											
+											</tr>
 										</tbody>
 									</table>
 

@@ -81,6 +81,19 @@
 					<section class="box ">
 
 						<header class="panel_header">
+							<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							Department Name</h4>
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
@@ -103,7 +116,7 @@
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
+													<i class="fa fa-home"></i> Register Faculty
 											</a></li>
 
 
@@ -201,7 +214,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Realiving
+															<label class="control-label col-sm-2" for="page_order">Relieving
 																Date :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -219,17 +232,17 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																	name="page_order" placeholder="Mobile Number" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email
+															<label class="control-label col-sm-2" for="page_order">Email ID
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="Email" required>
+																	name="page_order" placeholder="abc@gmail.com" required>
 															</div>
 														</div>
 

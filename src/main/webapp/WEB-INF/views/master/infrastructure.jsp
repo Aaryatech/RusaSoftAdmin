@@ -542,19 +542,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 										<div class="form-group">
 
 
@@ -602,6 +589,63 @@
 											</tbody>
 										</table>
 
+<h5 class="title pull-left">
+											<strong>e-Content Development Facilities</strong>
+										</h5>
+										<div class="col-xs-12"></div>
+
+										<div class="form-group">
+
+
+
+											<label class="control-label col-sm-6" for="page_name">Name 
+												of the e-content development facilities:<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-2">
+												<input type="text" class="form-control" id="hodName"
+													name="hodName" placeholder="" value="${page.pageName}"
+													required>
+											</div>
+									</div>
+											<table class="table table-striped dt-responsive display">
+											<thead></thead>
+											<tr>
+													
+													<td>Number of Computer with LAN </td>
+
+														<td><input type="text" class="form-control"
+														id="curExp" name="curExp" value="" required></td>
+														
+												</tr>
+												
+										</table>
+										<div class="form-group">
+											
+											<label class="control-label col-sm-6" for="page_name">Link to videos of media centre
+												and recording facility:<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-2">
+												<input type="text" class="form-control" id="hodName"
+													name="hodName" placeholder="" value="${page.pageName}"
+													required>
+											</div>
+												</div>
+											
+											<table class="table table-striped dt-responsive display">
+											<thead></thead>
+											<tr>
+													
+													<td>Computer with Internet Facility</td>
+
+														<td><input type="text" class="form-control"
+														id="curExp" name="curExp" value="" required></td>
+														
+												</tr>
+												
+										</table>
+										
 
 
 

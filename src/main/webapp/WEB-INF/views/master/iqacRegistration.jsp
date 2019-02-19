@@ -75,12 +75,17 @@
 
 				<div class="col-lg-12"></div>
 
-
+	
 
 				<div class="col-lg-12">
 					<section class="box ">
+					
+					
+					
+				
 
 						<header class="panel_header">
+						<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name</h4>
 							<h2 class="title pull-left">IQAC Registration Form</h2>
 
 							<div class="actions panel_actions pull-right">
@@ -103,7 +108,7 @@
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
+													<i class="fa fa-home"></i> Register IQAC 
 											</a></li>
 
 										</ul>
@@ -116,7 +121,7 @@
 
 													<div class="col-xs-12">
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Name
+															<label class="control-label col-sm-2" for="page_name">IQAC I/C Name
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -162,17 +167,17 @@
 																<input type="text" class="form-control" id="contactNo"
 																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Contact No" value="" required>
+																	placeholder="Mobile Number" value="" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Email
+															<label class="control-label col-sm-2" for="smallheading">Email ID
 																: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email"
-																	name="email" placeholder="Email" value="" required>
+																	name="email" placeholder="abc@gmail.com" value="" required>
 															</div>
 														</div>
 

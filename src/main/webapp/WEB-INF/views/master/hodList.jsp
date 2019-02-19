@@ -74,18 +74,22 @@
                     <tr>
                    		<th width="5%">Sr No</th>
                         <th>HOD Name</th> 
+                        <th>Department</th> 
                         <th>Contact No.</th> 
+                          <th>Email ID</th> 
                         <th width="10%">Action</th> 
                     </tr>
                 </thead>
 
                 <tfoot>
                     <tr>
-                    	<th width="5%">Sr No</th>
+                    		<th width="5%">Sr No</th>
                         <th>HOD Name</th> 
+                        <th>Department</th> 
                         <th>Contact No.</th> 
-                        <th width="10%">Action</th> 
-                    </tr>
+                          <th>Email ID</th> 
+                        <th width="10%">Action</th>                   
+                          </tr>
                 </tfoot>
 
                 <tbody>

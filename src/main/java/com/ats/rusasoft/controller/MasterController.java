@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
@@ -108,6 +109,31 @@ public class MasterController {
 
 	}
 
+	
+	
+	
+	@RequestMapping(value = "/showInstituteInfoList", method = RequestMethod.GET)
+	public ModelAndView showInstituteInfoList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/instituteInfo");
+
+			model.addObject("title", "Institute List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showInstituteList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showStaffList", method = RequestMethod.GET)
 	public ModelAndView showStaffList(HttpServletRequest request, HttpServletResponse response) {
 
@@ -130,27 +156,7 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showFacultyDetails", method = RequestMethod.GET)
-	public ModelAndView showFacultyDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/facultyDetails");
-
-			model.addObject("title", "Faculty Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/showProgramDetails", method = RequestMethod.GET)
 	public ModelAndView showProgramDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -218,5 +224,61 @@ public class MasterController {
 		return model;
 
 	}
+	
+	
+	
+	///////////////////////////****faculty details****//////////////////////////////////
+	
+	
+	@RequestMapping(value = "/showFacultyDetails/{type}", method = RequestMethod.GET)
+	public ModelAndView showFacultyDetails(HttpServletRequest request, HttpServletResponse response, @PathVariable int type) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/facultyDetails");
+
+			model.addObject("title", "Faculty Details Form");
+			System.out.println("type is"+type);
+			model.addObject("formindex",type);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	/*@RequestMapping(value = "/showFacultyDetails/", method = RequestMethod.GET)
+	public ModelAndView showFacultyDetails2(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/facultyDetails");
+
+			model.addObject("title", "Faculty Details Form");
+			model.addObject("formindex", 2);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}*/
+	
+	
+	
 
 }

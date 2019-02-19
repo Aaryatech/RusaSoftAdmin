@@ -132,7 +132,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Institute
-																Add :<span class="text-danger">*</span>
+																Address :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -154,7 +154,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Add :<span class="text-danger">*</span>
+																Address :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -170,7 +170,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																	name="page_order" placeholder="Mobile No" required>
 															</div>
 														</div>
 
@@ -194,17 +194,17 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																	name="page_order" placeholder="Mobile No" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email
+															<label class="control-label col-sm-2" for="page_order">Email ID:
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="Email" required>
+																	name="page_order" placeholder="abc@gmail.com" required>
 															</div>
 														</div>
 

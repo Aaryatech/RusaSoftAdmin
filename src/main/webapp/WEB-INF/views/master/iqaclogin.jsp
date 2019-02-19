@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/cmsList"><button
+								<a href="${pageContext.request.contextPath}/showInstituteInfoList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
@@ -117,6 +117,25 @@
 
 
 													<div class="col-xs-12">
+													
+													
+													<div class="form-group">
+															<label class="control-label col-sm-4" for="page_name" style="text-align: left;">Academic
+																Year <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" id="page_name"
+																	name="page_name"
+																	placeholder="Academic Year"
+																	value="${page.pageName}" required>
+															</div>
+														</div>
+													
+													
+													
+													
+													
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_name" style="text-align: left;">No.
 																of Full Time Faculty in Institute <span
