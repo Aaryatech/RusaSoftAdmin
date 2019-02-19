@@ -204,7 +204,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="abc@gmail.com" required>
+																	name="page_order" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
 

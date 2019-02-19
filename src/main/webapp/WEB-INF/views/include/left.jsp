@@ -62,56 +62,68 @@
 				</a>
 					<ul class="sub-menu">
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/1">Personal
+							href="${pageContext.request.contextPath}/showPersonalDetails">Personal
 								Details  </a></li>
-								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/2">Academic
+							href="${pageContext.request.contextPath}/showAcademicDetails">Academic
+								Details </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showMphillDetails">M.Phill/Ph.D.
+								Details </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudMentor">Student Mentoring
 								Details </a></li>
 								
 								
-								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/3">M.phill/Ph.D.Guide  </a></li>
+								
 						
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/4">Publication/Presentation Details </a></li>		
+							href="${pageContext.request.contextPath}/showPublicationDetails">Publication/Presentation Details </a></li>		
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/5">Research Project
+							href="${pageContext.request.contextPath}/showResearchDetails">Research Project
 								Details </a></li>
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/6">Consultancy
+							href="${pageContext.request.contextPath}/showConsultancyDetails">Consultancy
 								Details  </a></li>
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/7">Patent Details
+							href="${pageContext.request.contextPath}/showPatentDetails">Patent Details
 								 </a></li>
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/8">Award Recognition Details
+							href="${pageContext.request.contextPath}/showAwardDetails">Award Recognition Details
 
 								 </a></li>
 								 
 								 
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/13">Out Reach Activity
+							href="${pageContext.request.contextPath}/showOutReachDetails">Out Reach Activity
 
 								 </a></li>
 								
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/9">Organized Details
+							href="${pageContext.request.contextPath}/showOrganized">Organized Details
 
 
 
 							</a></li>
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/10">Subject Details 
+							href="${pageContext.request.contextPath}/showSubDetails">Subject Details 
+
+								 </a></li>
+								 	<li><a class=""
+							href="${pageContext.request.contextPath}/showSWOC">SWOC Details 
+
+								 </a></li>
+								 	<li><a class=""
+							href="${pageContext.request.contextPath}/showPhdGuide">Ph.D. Guidence Details 
 
 								 </a></li>
 									
-								<li><a class=""
+								<%-- <li><a class=""
 							href="${pageContext.request.contextPath}/showFacultyDetails/11">SWOC for HODs
 
 								Details </a></li>
@@ -119,7 +131,7 @@
 								<li><a class=""
 							href="${pageContext.request.contextPath}/showFacultyDetails/12">Ph.D Guidance 
 
-								Details </a></li>
+								Details </a></li> --%>
 								
 								
 
