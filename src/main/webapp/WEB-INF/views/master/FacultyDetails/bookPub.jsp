@@ -116,73 +116,137 @@
 
 													<div class="col-xs-12">
 
-
-															<h5 class="title pull-left">
-																<strong>Patent Details</strong>
-															</h5>
-															<div class="col-sm-12"></div>
+<div class="form-group">
 
 
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Title : <span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="smallheading">Book
+																	Publication : <span class="text-danger">*</span>
+																</label> <label class="control-label col-sm-2"
+																	for="smallheading">Title of Book : <span
+																	class="text-danger">*</span>
 																</label>
-																<div class="col-sm-6">
+																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Patent Title" value=""
+																		name="dob" placeholder="Title of Book" value=""
 																		required>
 																</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Filling Date : <span class="text-danger">*</span>
+
+																<label class="control-label col-sm-2" for="page_order">Edition
+																	:<span class="text-danger">*</span>
 																</label>
+
+
 																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Sponsoring Agency/Industry"
-																		value="" required>
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Edition" value="" required>
 																</div>
+
+
+
+
 
 															</div>
 
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-assistant/Guide : <span class="text-danger">*</span>
+
+																<label class="control-label col-sm-2" for="page_order">Name
+																	of Author<span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Co-assistant/Guide"
+
+
+																<div class="col-sm-3">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Name of Authors/Co-Authors "
 																		value="" required>
 																</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Date
+
+
+												<label class="control-label col-sm-2" for="page_order">Name
+																	of Co-Author 1<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-3">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Name of Co-Authors "
+																		value="" required>
+																</div>
+															</div>
+															
+																
+																<div class="form-group">
+
+																<label class="control-label col-sm-2" for="page_order">Name
+																	of Co-Author 2<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-3">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Name of Co-Authors "
+																		value="" required>
+																</div>
+
+
+													<label class="control-label col-sm-2" for="page_order">Name
+																	of Co-Author 3<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-3">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Name of Co-Authors "
+																		value="" required>
+																</div>
+													
+															</div>
+															
+																
+															<div class="form-group">
+
+																<label class="control-label col-sm-2" for="page_order">Name
+																	of Publication/Publisher<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-6">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Name of Publication/Publisher  "
+																		value="" required>
+																</div>
+
+															</div>
+															
+
+															<div class="form-group">
+
+																<label class="control-label col-sm-2" for="page_order">ISBN
+																	No :<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-3">
+																	<input type="text" class="form-control" id="isbn"
+																		name="isbn" placeholder="ISBN No" value="" required>
+																</div>
+
+
+																<label class="control-label col-sm-1" for="smallheading">Year
 																	of Publication : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
-																		name="Grant" value="" required>
-																</div>
-																<label class="control-label col-sm-2" for="smallheading">Academic
-																	Year : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Academic Year"
+																		name="dob" placeholder="Title of Book" value=""
 																		required>
 																</div>
 
-															</div>
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Patent File No.
-																	 : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Patent Number"
-																		required>
-																</div>
+
 															</div>
 														
+
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>

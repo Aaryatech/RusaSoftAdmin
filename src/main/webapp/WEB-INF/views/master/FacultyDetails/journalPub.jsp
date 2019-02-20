@@ -116,73 +116,111 @@
 
 													<div class="col-xs-12">
 
+v>
 
-															<h5 class="title pull-left">
-																<strong>Patent Details</strong>
-															</h5>
-															<div class="col-sm-12"></div>
 
 
 
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Title : <span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="page_order">Journal
+																	Publication :<span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-6">
+
+
+																<div class="col-sm-3">
+																	National <input type="radio" name="pub" id="pub"
+																		checked value="0"> International<input
+																		type="radio" name="pub" id="pub" value="1">
+																</div>
+</div>
+<div class="form-group">
+																<label class="control-label col-sm-2" for="smallheading">Name
+																	of Journal : <span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Patent Title" value=""
+																		name="dob" placeholder="Name of journal" value=""
 																		required>
 																</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Filling Date : <span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="page_order">Scopus/DIO/UGC Recognized
+																	:<span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Sponsoring Agency/Industry"
-																		value="" required>
-																</div>
 
+
+																<div class="col-sm-2">
+																	Yes <input type="radio" name="dio" id="dio" checked
+																		value="0"> No<input type="radio" name="dio"
+																		id="dio" value="1">
+																</div>
 															</div>
-
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-assistant/Guide : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Co-assistant/Guide"
-																		value="" required>
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Date
+																<label class="control-label col-sm-2" for="smallheading">Year
 																	of Publication : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
-																		name="Grant" value="" required>
-																</div>
-																<label class="control-label col-sm-2" for="smallheading">Academic
-																	Year : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Academic Year"
-																		required>
+																		name="dob" placeholder="Date" value="" required>
 																</div>
 
-															</div>
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Patent File No.
-																	 : <span class="text-danger">*</span>
+
+																<label class="control-label col-sm-2" for="page_order">Issue
+																	:<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-2">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="Issue" value="" required>
+																</div>
+
+
+																<label class="control-label col-sm-2" for="smallheading">Volume
+																	: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Patent Number"
-																		required>
+																		name="dob" placeholder="Volume" value="" required>
 																</div>
+
+
 															</div>
-														
+
+
+
+															<div class="form-group">
+
+
+
+																<label class="control-label col-sm-2" for="smallheading">Page
+																	No : <span class="text-danger">*</span>
+																</label> <label class="control-label col-sm-1"
+																	for="smallheading">From : <span
+																	class="text-danger">*</span>
+																</label>
+																<div class="col-sm-2">
+																	<input type="text" class="form-control" id="dob"
+																		name="dob" placeholder="From" value="" required>
+																</div>
+
+
+																<label class="control-label col-sm-1" for="page_order">To
+																	:<span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-2">
+																	<input type="text" class="form-control" id="issue"
+																		name="issue" placeholder="To" value="" required>
+																</div>
+
+
+
+															</div>
+
+
+
+
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>

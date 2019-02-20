@@ -116,73 +116,116 @@
 
 													<div class="col-xs-12">
 
-
-															<h5 class="title pull-left">
-																<strong>Patent Details</strong>
+		<h5 class="title pull-left">
+																<strong>Outreach Contribution</strong>
 															</h5>
 															<div class="col-sm-12"></div>
-
-
+	
 
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Title : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Patent Title" value=""
-																		required>
-																</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Filling Date : <span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="status">Select
+																	Level: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Sponsoring Agency/Industry"
-																		value="" required>
+																	<select id="salutation" name="salutation"
+																		class="form-control" required>
+																		<option value="0">BOS</option>
+																		<option value="1">Faculty</option>
+																		<option value="2">Academic Council</option>
+																				</select>
 																</div>
 
-															</div>
 
-															<div class="form-group">
+																
+																	</div>
+																	<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-assistant/Guide : <span class="text-danger">*</span>
+																	: <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-5">
 																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Co-assistant/Guide"
-																		value="" required>
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Publication : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" value="" required>
-																</div>
-																<label class="control-label col-sm-2" for="smallheading">Academic
-																	Year : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Academic Year"
+																		name="Grant" placeholder="Name " value=""
 																		required>
 																</div>
 
+
 															</div>
+
 															<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Patent File No.
-																	 : <span class="text-danger">*</span>
+
+																<label class="control-label col-sm-2" for="smallheading">University
+																	: <span class="text-danger">*</span>
+																</label>
+
+																<div class="col-sm-4">
+																	<input type="text" class="form-control" id="dob"
+																		name="Grant" placeholder="University" value=""
+																		required>
+																</div>
+
+
+																<label class="control-label col-sm-1" for="smallheading">From
+																	: <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Patent Number"
-																		required>
+																		name="Grant" placeholder="From" value="" required>
 																</div>
+
+																<label class="control-label col-sm-1" for="smallheading">To
+																	: <span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-2">
+																	<input type="text" class="form-control" id="dob"
+																		name="to" placeholder="To" value="" required>
+																</div>
+
+
+
 															</div>
+
 														
+
+															<div class="form-group">
+
+																<label class="control-label col-sm-2" for="smallheading">Examination
+																	Paper Setting : <span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-2">
+																	Yes <input type="radio" name="examSetting"
+																		id="examSetting" checked value="0"> No<input
+																		type="radio" name="examSetting" id="examSetting"
+																		value="1">
+																</div>
+
+																<label class="control-label col-sm-2" for="smallheading">Answer
+																	Sheet Evaluation : <span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-2">
+																	Yes <input type="radio" name="ansEvaluation"
+																		id="ansEvaluation" checked value="0"> No<input
+																		type="radio" name="ansEvaluation" id="ansEvaluation"
+																		value="1">
+																</div>
+
+																<label class="control-label col-sm-2" for="smallheading">Answer
+																	Sheet Moderation : <span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-2">
+																	Yes <input type="radio" name="ansmod" id="ansmod"
+																		checked value="0"> No<input type="radio"
+																		name="ansmod" id="ansmod" value="1">
+																</div>
+
+															</div>
+
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>

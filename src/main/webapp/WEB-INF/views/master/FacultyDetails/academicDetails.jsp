@@ -125,9 +125,9 @@
 														</h5>
 
 														<div class="col-xs-12"></div>
-														<label class="control-label col-sm-3" for="smallheading">Educational
+														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
 															Qualifications : <span class="text-danger">*</span>
-														</label>
+														</label> -->
 														<div class="col-xs-12">
 
 
@@ -355,3 +355,17 @@
 
 </body>
 </html>
+
+
+
+<!-- 
+														<h5 class="title pull-left">
+																<strong>Consultancy</strong>
+															</h5>
+															<div class="col-sm-1"></div>
+															<div class="col-sm-2">
+																Yes <input type="radio" name="consultancy"
+																	id="consultancy" checked value="0"> No<input
+																	type="radio" name="consultancy" id="consultancy"
+																	value="1">
+															</div> -->

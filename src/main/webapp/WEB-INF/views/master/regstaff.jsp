@@ -152,7 +152,10 @@
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
-																	<option value="2">UG & PG</option>
+																	<option value="2">M.phill</option>
+																	<option value="2">Ph.D.</option>
+																	<option value="2">Post Docterate</option>
+																	
 																	<option value="3">Any Other Course</option>
 																</select>
 															</div>
@@ -160,7 +163,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Year
-																of highest Qualification Required :<span
+																of highest Qualification Aquired :<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -223,7 +226,23 @@
 															</div>
 														</div>
 
+															<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Teaching
+																to : <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="teachTo" name="teachTo" class="form-control"
+																	required>
+																	<option value="0">UG</option>
+																	<option value="1">PG</option>
+																	<option value="2">UG & PG</option>
+																	<option value="3">Any Other Course</option>
 
+
+																</select>
+															</div>
+														</div>
+															
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
@@ -246,23 +265,7 @@
 															</div>
 														</div>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Teaching
-																to : <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="teachTo" name="teachTo" class="form-control"
-																	required>
-																	<option value="0">UG</option>
-																	<option value="1">PG</option>
-																	<option value="2">UG & PG</option>
-																	<option value="3">Any Other Course</option>
-
-
-																</select>
-															</div>
-														</div>
-
+														
 
 
 

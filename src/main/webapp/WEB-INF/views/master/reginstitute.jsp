@@ -210,6 +210,42 @@
 
 
 
+											<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">
+															Principle Name :<span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order"
+																	placeholder="Name of Principle"
+																	required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Contact
+																No :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																	maxlength="10" class="form-control" id="page_order"
+																	name="page_order" placeholder="Mobile No" required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Email ID:
+																:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="email" class="form-control" id="page_order"
+																	name="page_order" placeholder="abc@xyz.com" required>
+															</div>
+														</div>
+											
+
+
 													</div>
 
 												</div>

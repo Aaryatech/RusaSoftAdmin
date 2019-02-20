@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " >
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -84,8 +84,12 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+							<a href="#myModal"
+														data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
 								<a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
+										type="button" class="btn btn-info">Back</button></a> 
+										<a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -116,80 +120,48 @@
 
 													<div class="col-xs-12">
 
-
 														<h5 class="title pull-left">
-																<strong>Consultancy</strong>
-															</h5>
-															<div class="col-sm-1"></div>
-															<div class="col-sm-2">
+															<strong>Consultancy Details</strong>
+														</h5>
+
+														<div class="col-xs-12"></div>
+														 <label class="control-label col-sm-3" for="smallheading">
+														Consultancy <span class="text-danger">*</span>
+														</label> 
+														<div class="col-sm-2">
 																Yes <input type="radio" name="consultancy"
 																	id="consultancy" checked value="0"> No<input
 																	type="radio" name="consultancy" id="consultancy"
 																	value="1">
-															</div>
-															<div class="col-sm-12"></div>
-
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Nature
-																	of Consultancy: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Consultancy"
-																		value="" required>
-																</div>
-
-																<label class="control-label col-sm-3" for="smallheading">Sponsoring
-																	Agency/Industry : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-3">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Sponsoring Agency/Industry"
-																		value="" required>
-																</div>
-
-															</div>
-															
-															
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Amount
-																	of Consultancy : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Amount of Consultancy"
-																		value="" required>
-																</div>
-
-																<label class="control-label col-sm-3" for="smallheading">Consultancy
-																	Period  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-3">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Sponsoring Agency/Industry"
-																		value="" required>
-																</div>
-
-															</div>
-
-															
-<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Project
-																	Completed : <span class="text-danger">*</span>
-																</label>
+															</div> 
+														<div class="col-xs-12">
 
 
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="projectComp"
-																		id="projectComp" checked value="0"> No<input
-																		type="radio" name="projectComp" id="projectComp"
-																		value="1">
-																</div>
 
 
-															</div>
+															<table id="example1"
+																class="table table-striped dt-responsive display">
+																<thead>
+																	<tr>
+																		<th width="10%">Sr No</th>
+																		<th width="30%">Nature of Consultancy</th>
+																		<th width="30%">Sponsoring Industry</th>
+																		<th width="30%">Consultancy Amount</th>
+																		<th width="30%">Consultancy Period</th>
+																		<th width="30%">Project Completed</th>
+																	</tr>
+																</thead>
+
+
+
+															</table>
+
+
+
+
+														</div>
+
 														
-
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
@@ -228,7 +200,138 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Consultancy Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+									
+						
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Nature of Consultancy
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="nature"
+									name="nature" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	                    </div>
+	                    
+	                    	<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Sponsoring Agency/Industry
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="sponser"
+									name="sponser" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	                    </div>
+	                    
+	                    <div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Amount of Consultancy
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="amount"
+									name="amount" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	                    </div>
+	                    <div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Consultancy Period
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="conPeriod"
+									name="conPeriod" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	                    </div>
+					
+<label class="control-label col-sm-3" for="page_name">Project Completed
+							</label>
+                                                                <div class="col-sm-1"></div>
+															<div class="col-sm-2">
+																Yes <input type="radio" name="consultancy"
+																	id="consultancy" checked value="Yes"> No<input
+																	type="radio" name="consultancy" id="consultancy"
+																	value="No">
+															</div> 
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+				<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 
+
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var nature=document.getElementById("nature").value
+		var sponser=document.getElementById("sponser").value
+		//alert(qualName);
+		var amount=document.getElementById("amount").value
+		var conPeriod=document.getElementById("conPeriod").value
+		var consultancy=document.getElementById("consultancy").value
+		
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					nature,
+					sponser,
+					amount,
+					conPeriod,
+					consultancy
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
+	
+	
 
 </body>
 </html>
+
+
+
+<!-- 
+														<h5 class="title pull-left">
+																<strong>Consultancy</strong>
+															</h5>
+															<div class="col-sm-1"></div>
+															<div class="col-sm-2">
+																Yes <input type="radio" name="consultancy"
+																	id="consultancy" checked value="0"> No<input
+																	type="radio" name="consultancy" id="consultancy"
+																	value="1">
+															</div> -->

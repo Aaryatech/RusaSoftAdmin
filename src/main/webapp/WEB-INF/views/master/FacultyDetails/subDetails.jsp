@@ -216,16 +216,6 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-							<div class="form-group">
-						<label class="control-label col-sm-4" for="page_name">Year of Passing
-							</label>
-							<div class="col-sm-4">
-								<input type="date" class="form-control"
-								id="year" name="year" value="" required>
-							</div>
-
-</div>
-							
 				
 									<div class="form-group">
 						<label class="control-label col-sm-2" for="page_name">Semester</label> <select
@@ -308,7 +298,17 @@
 									required>
 							<!-- </div> -->
 	</div>
-	
+		
+							<div class="form-group">
+						<label class="control-label col-sm-4" for="page_name">Year of Passing
+							</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control"
+								id="year" name="year" value="" required>
+							</div>
+
+</div>
+						
 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->

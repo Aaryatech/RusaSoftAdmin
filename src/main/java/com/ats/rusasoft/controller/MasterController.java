@@ -605,7 +605,366 @@ public class MasterController {
 
 	}
 	
- 	
+  @RequestMapping(value = "/showRegAcc", method = RequestMethod.GET)
+	public ModelAndView showRefAcc(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/accReg");
+
+			model.addObject("title", "Account Officer Registration");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  
+  @RequestMapping(value = "/showAccList", method = RequestMethod.GET)
+ 	public ModelAndView showAccList(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/accList");
+
+ 			model.addObject("title", "Account Officer List");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+
+  
+  @RequestMapping(value = "/showRegDean", method = RequestMethod.GET)
+ 	public ModelAndView showRegDean(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/deanReg");
+
+ 			model.addObject("title", "Dean  Registration");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  
+  @RequestMapping(value = "/showDeanList", method = RequestMethod.GET)
+	public ModelAndView showDeanList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/deanList");
+
+			model.addObject("title", "Dean R & D List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  @RequestMapping(value = "/showRegLib", method = RequestMethod.GET)
+	public ModelAndView showRegLib(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/libReg");
+
+			model.addObject("title", "Librarian Registration");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  
+  @RequestMapping(value = "/showLibList", method = RequestMethod.GET)
+	public ModelAndView showLibList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/libList");
+
+			model.addObject("title", "Librarian List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  @RequestMapping(value = "/showRegStud", method = RequestMethod.GET)
+ 	public ModelAndView showRegStud(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/studReg");
+
+ 			model.addObject("title", "Student Registration");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  
+  @RequestMapping(value = "/showStudList", method = RequestMethod.GET)
+ 	public ModelAndView showStudList(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/studList");
+
+ 			model.addObject("title", "Student List");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  
+  @RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
+	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/FacultyDetails/bookPub");
+
+			model.addObject("title", "Book Publication");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  @RequestMapping(value = "/showJournalPub", method = RequestMethod.GET)
+	public ModelAndView showJournalPub(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/FacultyDetails/journalPub");
+
+			model.addObject("title", "Journal Publication");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  
+  @RequestMapping(value = "/showOutReachContri", method = RequestMethod.GET)
+ 	public ModelAndView showOutReachContri(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/FacultyDetails/outReachContri");
+
+ 			model.addObject("title", "Out Reach Contribution");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+
+  
+  @RequestMapping(value = "/showLinkage", method = RequestMethod.GET)
+	public ModelAndView showLinkage(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ResearchInnovation/linkage");
+
+			model.addObject("title", "Research & Innovation");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  @RequestMapping(value = "/showMOUs", method = RequestMethod.GET)
+ 	public ModelAndView showMOUs(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ResearchInnovation/mous");
+
+ 			model.addObject("title", "Research & Innovation");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  @RequestMapping(value = "/showExtAct", method = RequestMethod.GET)
+	public ModelAndView showExtAct(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ResearchInnovation/extActivities");
+
+			model.addObject("title", "Research & Innovation");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  @RequestMapping(value = "/showGenIssue", method = RequestMethod.GET)
+ 	public ModelAndView showGenIssue(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ResearchInnovation/genderIssue");
+
+ 			model.addObject("title", "Research & Innovation");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  @RequestMapping(value = "/showComAct", method = RequestMethod.GET)
+	public ModelAndView showComAct(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ResearchInnovation/comActivities");
+
+			model.addObject("title", "Research & Innovation");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	
 
 }

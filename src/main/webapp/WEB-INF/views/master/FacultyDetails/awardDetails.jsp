@@ -131,7 +131,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Awarding
-																	Agency : <span class="text-danger">*</span>
+																	Agency/Authority : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -168,10 +168,28 @@
 																</label>
 																<div class="col-sm-2">
 																	Duration <input type="radio" name="validity"
-																		id="validity" checked value="0"> Lifetime<input
-																		type="radio" name="validity" id="validity" value="1">
+																		id="validity" checked value="0"  onclick="check1()"> Lifetime<input
+																		 onclick="check()" type="radio" name="validity" id="validity" value="1">
+																</div>
+																
+																
+																<label class="control-label col-sm-2" id="label1" for="smallheading">From
+																	 : <span class="text-danger"></span>
+																</label>
+																<div class="col-sm-2">
+																	<input type="date" class="form-control" id="label2"
+																		name="Grant" value="" required>
 																</div>
 
+																
+																<label class="control-label col-sm-2" id="sp" for="smallheading">To
+																	 : <span class="text-danger" ></span>
+																</label>
+																<div class="col-sm-2">
+																	<input type="date" class="form-control" id="label4"
+																		name="Grant" value="" required>
+																</div>
+																
 															</div>
 
 														<div class="form-group">
@@ -213,6 +231,33 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script type="text/javascript">
+	function check() {
+	//alert("hii");
+		
+		document.getElementById("label1").style = "display:none"
+			document.getElementById("label2").style = "display:none"
+				document.getElementById("sp").style = "display:none"
+			
+					document.getElementById("label4").style = "display:none"
+					//	document.getElementById("hide_div").style = "visible"
 
+
+	}
+	function check1() {
+		//alert("hii");
+			
+			document.getElementById("label1").style ="visible"
+				document.getElementById("label2").style = "visible"
+					document.getElementById("sp").style = "visible"
+				
+						document.getElementById("label4").style ="visible"
+						//	document.getElementById("hide_div").style = "visible"
+
+
+		}
+
+	</script>
+	
 </body>
 </html>

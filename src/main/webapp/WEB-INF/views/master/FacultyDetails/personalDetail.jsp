@@ -176,11 +176,13 @@
 															<label class="control-label col-sm-2" for="smallheading">Mobile
 																No. : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																<input type="text" class="form-control" id="contactNo"
 																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile No" value="" required>
+															</div>
+															<div class="col-sm-2">
 															</div>
 
 															<label class="control-label col-sm-2" for="smallheading">Phone No
@@ -203,12 +205,15 @@
 															<label class="control-label col-sm-2" for="smallheading">Resident:
 																 </label>
 														
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																<input type="text" class="form-control" id="residentNo"
 																	name="residentNo" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Resident No" value="" required>
 															</div>
+															<div class="col-sm-2">
+															</div>
+															
 															<label class="control-label col-sm-2" for="smallheading">Email ID:
 																: <span class="text-danger">*</span>
 															</label>
@@ -230,9 +235,11 @@
 														<label class="control-label col-sm-2" for="smallheading">PAN
 																No : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																<input type="text" class="form-control" id="panNo"
 																	name="panNo" placeholder="PAN No" value="" required>
+															</div>
+														<div class="col-sm-2">
 															</div>
 														
 														<label class="control-label col-sm-2" for="smallheading">Aadhar
@@ -249,7 +256,7 @@
 															<label class="control-label col-sm-2" for="status">Select
 																Designation : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																<select id="designation" name="designation"
 																	class="form-control" required>
 																	<option value="0">Assistant Professor</option>
@@ -259,6 +266,9 @@
 																	<option value="4">Any Other</option>
 																</select>
 															</div>
+															<div class="col-sm-2">
+															</div>
+															
 															<label class="control-label col-sm-2" for="smallheading">Date
 																of Birth : <span class="text-danger">*</span>
 															</label>
@@ -274,10 +284,12 @@
 														<label class="control-label col-sm-2" for="smallheading">Date
 																of Joining : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="doj"
 																	name="doj" placeholder="Date of Joining" value=""
 																	required>
+															</div>
+<div class="col-sm-2">
 															</div>
 
 															<label class="control-label col-sm-2" for="smallheading">Previous
@@ -298,7 +310,7 @@
 														<label class="control-label col-sm-2" for="smallheading">Current
 																Experience : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																<input type="text" class="form-control" id="curExp"
 																	name="curExp" placeholder="Current Experience" value=""
 																	required>
