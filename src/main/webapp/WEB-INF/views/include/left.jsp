@@ -201,9 +201,16 @@
 							Details Module </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
+					
+					
+					<%-- <li><a class=""
+							href="${pageContext.request.contextPath}/showProgramDetails">Program
+								</a></li> --%>
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showProgDetail1">Program
 								Details Form </a></li>
+								
+								
 								
 								<li><a class=""
 							href="${pageContext.request.contextPath}/showStudAddmit">Student Adimitted
@@ -226,7 +233,7 @@
 								Activity Form </a></li>
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showStudAct">Alumini Association/Contribution 
+							href="${pageContext.request.contextPath}/showAlumini">Alumini Association/Contribution 
 								Activity Form </a></li>
 								
 
@@ -237,8 +244,14 @@
 							Module </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
+					<li><a class=""
+							href="${pageContext.request.contextPath}/showInfrastructureForm">
+								Form </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showinfra">Infrastructure
+							href="${pageContext.request.contextPath}/showinfra">Infrastructure Facilities
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showPhysicalFacilities">Physical Facilities
 								Form </a></li>
 								<li><a class=""
 							href="${pageContext.request.contextPath}/showInstruct">Instructional

@@ -1197,7 +1197,7 @@ public class MasterController {
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("master/InfrastructureModule/ameneties");
+			model = new ModelAndView("master/InfrastructureModule/amenities");
 
 			model.addObject("title", "Infrastructure Detail");
  
@@ -1278,6 +1278,29 @@ public class MasterController {
  		return model;
 
  	}
+
+  
+  @RequestMapping(value = "/showPhysicalFacilities", method = RequestMethod.GET)
+	public ModelAndView showPhysicalFacilities(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/InfrastructureModule/physicalFacilities");
+
+			model.addObject("title", "Infrastructure Detail");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 
   

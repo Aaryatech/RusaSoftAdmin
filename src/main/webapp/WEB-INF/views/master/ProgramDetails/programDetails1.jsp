@@ -66,6 +66,45 @@
 							<div class="row">
 
 
+
+
+								<div class="col-xs-12">
+
+
+									<table class="table table-striped dt-responsive display" id="ex1">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												<th width="20%">Vision</th>
+												<th width="20%">Mission</th>
+												<th width="20%">Program Outcome (as per NBA Manual)</th>
+												<th width="20%">UG/PG</th>
+												
+													<th width="20%">Program Specific Outcomes(Define By the Program )</th>
+												<th width="20%">UG/PG &nbsp; &nbsp;<a href="#myModal"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a></th>
+											</tr>
+
+                                               </thead>
+														</table>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 								<div class="col-xs-12">
 
 
@@ -359,6 +398,140 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+	
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Subject Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Vision
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="vision"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Mission
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="mission"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+			
+						<div class="form-group">
+						
+							<label class="control-label col-sm-8" for="page_name">Program Outcome (as per NBA Manual)
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="po"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+				
+									<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">UG/PG</label> <select
+								id="ug" name="ug" class="form-control" onchange="showForm()" required>
+								<option value="UG">UG</option>
+								<option value="PG">PG</option>
+								
+							
+							</select>
+						</div>
+						
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-10" for="page_name">Program Specific Outcomes(Define By the Program )
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="pso"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+		
+									<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">UG/PG</label> <select
+								id="ug" name="pg" class="form-control" onchange="showForm()" required>
+								<option value="UG">UG</option>
+								<option value="PG">PG</option>
+								
+							
+							</select>
+						</div>
+					
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var vision=document.getElementById("vision").value
+		var mission=document.getElementById("mission").value
+		var po=document.getElementById("po").value
+		
+		
+		var pso=document.getElementById("pso").value
+		var ug=document.getElementById("ug").value
+		
+		var pg=document.getElementById("pg").value
+	
+
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					year,
+					sem,
+					code,
+					subTaut,
+					subType,
+					noStud,
+					pass,
+					rslt,
+					course,
+				    t
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
