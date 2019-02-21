@@ -71,7 +71,7 @@
 								
 
 								<h5 class="title pull-left">
-									<strong>No. of Students Admitted Category wise</strong>
+									<strong>No. of Students Admitted Location wise</strong>
 								</h5>
 
 								
@@ -80,7 +80,7 @@
 										<thead>
 											<tr>
 												<th width="25%">Sr No</th>
-												<th width="25%">Category</th>
+												<th width="25%">Location</th>
 												<th width="25%">Gender</th>
 												<th width="25%" >No.
 													of Students</th>
@@ -136,15 +136,14 @@
 								
 						
 									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Category</label> <select
+						<label class="control-label col-sm-2" for="page_name">Location</label> <select
 								id="cat" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="SC">SC</option>
-								<option value="ST">ST</option>
-								<option value="OBC">OBC</option>
-								<option value="VJ">VJ</option>
-								<option value="NT">NT-I,NT-II,NT-III</option>
-								<option value="General">General</option>
-							
+								<option value="State">State</option>
+															<option value="Other State">Other State</option>
+															<option value="NRI">NRI</option>
+															<option value="PIO">PIO</option>
+															<option value="Foreign">Foreign</option>
+															<option value="PWD">PWD</option>
 							
 
 
@@ -191,7 +190,7 @@
 		var gen=document.getElementById("gen").value
 		var stud=document.getElementById("stud").value
 		
-		alert(stud);
+		//alert(stud);
 		
 		var dataTable = $('#example10')
 		.DataTable();

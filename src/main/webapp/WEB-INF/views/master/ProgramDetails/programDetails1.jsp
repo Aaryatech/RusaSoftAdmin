@@ -71,7 +71,7 @@
 								<div class="col-xs-12">
 
 
-									<table class="table table-striped dt-responsive display" id="ex1">
+									<table class="table table-striped dt-responsive display" id="example8">
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
@@ -91,16 +91,28 @@
 </div>
 
 
+<div class="col-xs-12">
+<div class="form-group">
 
+									<table class="table table-striped dt-responsive display" id="example10">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												
+												<th width="20%">Program Outcome (as per NBA Manual)</th>
+											
+												
+													<th width="20%">PSO(Define By the Program )</th>
+													<th width="20%">Mapping(Yes/No)</th>
+												<th width="20%">Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal2"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a></th>
+											</tr>
 
+                                               </thead>
+														</table>
+														</div>
 
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -108,19 +120,20 @@
 								<div class="col-xs-12">
 
 
-									<table class="table table-striped dt-responsive display">
+									<table class="table table-striped dt-responsive display" id="example9">
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
 												<th width="10%">Program Type</th>
 												<th width="10%">Duration Months</th>
 												<th width="20%">Name of Program</th>
-												<th width="30%" style="text-align: center;" colspan="2">No.
-													of Students Admitted</th>
+												<!-- <th width="30%" style="text-align: center;" colspan="2">No.
+													of Students Admitted</th> -->
 												<th width="10%">Date/Year of Introduction</th>
-												<th width="15%">Approved by</th>
+												<th width="15%">Approved by  &nbsp; &nbsp;&nbsp; &nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a></th>
 											</tr>
-
+<!-- 
 											<tr>
 												<th width="5%"></th>
 												<th width="10%"></th>
@@ -130,11 +143,11 @@
 												<th width="15%">Admitted Student</th>
 												<th width="10%"></th>
 												<th width="15%"></th>
-											</tr>
+											</tr> -->
 										</thead>
 
 
-
+<!-- 
 										<tbody>
 
 											<tr>
@@ -371,12 +384,18 @@
 												<td></td>
 												<td><button type="submit" class="btn btn-primary">Add</button></td>
 											</tr>
-										</tbody>
+										</tbody> -->
 									</table>
 								</div>
 
 								
 							
+														<div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
+																<button type="submit" class="btn btn-primary">Submit</button>
+																<button type="reset" class="btn btn-default">Reset</button>
+															</div>
+														</div>
 
 
 
@@ -476,7 +495,7 @@
 		
 									<div class="form-group">
 						<label class="control-label col-sm-2" for="page_name">UG/PG</label> <select
-								id="ug" name="pg" class="form-control" onchange="showForm()" required>
+								id="pg" name="pg" class="form-control"  required>
 								<option value="UG">UG</option>
 								<option value="PG">PG</option>
 								
@@ -492,38 +511,210 @@
 		</div>
 	</div>
 	
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Program Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+							<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">Program Type</label> <select
+								id="type" name="ug" class="form-control" required>
+								
+								<option value="Certificate">Certificate</option>
+								<option value="UG">UG</option>
+								<option value="PG">PG</option>
+								<option value="Diploma">Diploma</option>
+								<option value="Ph.D.">Ph.D.</option>
+								<option value="Post Doc.">Post Doc.</option>
+								<option value="-">Any Other</option>
+								
+							
+							</select>
+						</div>
+						
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Duration(in months)
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="duration"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Name of Program
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="name"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+			
+						<div class="form-group">
+						
+							<label class="control-label col-sm-8" for="page_name">Date/Year of Introduction
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="date"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+				
+						
+						
+							<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">Approved By</label> <select
+								id="approve" name="approve" class="form-control" onchange="showForm()" required>
+								
+								<option value="BOS/AC">BOS/AC</option>
+															<option value="Industry">Industry</option>
+															<option value="AICTE">AICTE</option>
+															<option value="NCTE">NCTE</option>
+															<option value="MCI">MCI</option>
+															<option value="DCI">DCI</option>
+															<option value="PCI">PCI</option>
+															<option value="-">Any Other</option>
+						
+								
+							
+							</select>
+						</div>
+						
+					
+					
+
+						<button type="submit" class="btn btn-primary" onclick="getData1()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Subject Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+						
+									<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">Program Outcome (as per NBA)</label> <select
+								id="nba" name="ug" class="form-control" onchange="showForm()" required>
+								<option value="Good">Good</option>
+								<option value="Better">Better</option>
+								<option value="Best">Best</option>
+								
+							
+							</select>
+						</div>
+						
+						
+						
+						
+		
+									<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">PSO(Define By Program)</label> <select
+								id="ps" name="ps" class="form-control"  required>
+								<option value="Good">Good</option>
+								<option value="Better">Better</option>
+								<option value="Best">Best</option>
+							
+							</select>
+						</div>
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_order">Mapping(Yes/No)
+							 :<span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-6">
+							Yes <input type="radio" name="stu" id="stu" checked value="yes">
+							No<input type="radio" name="stu" id="stu" value="1">
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="page_name">Satisfying
+							Value</label> <select id="val" name="val" class="form-control"
+							onchange="showForm()" required>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="-">-</option>
+
+						</select>
+					</div>
+
+					
+
+						<button type="submit" class="btn btn-primary" onclick="getData3()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-		var i=0;
-		var vision=document.getElementById("vision").value
-		var mission=document.getElementById("mission").value
-		var po=document.getElementById("po").value
-		
-		
-		var pso=document.getElementById("pso").value
-		var ug=document.getElementById("ug").value
-		
-		var pg=document.getElementById("pg").value
+	
 	
 
-		var dataTable = $('#example1')
+	function getData3() {
+		
+		var i=0;
+		var nba=document.getElementById("nba").value
+		//alert(vision);
+		
+		var ps=document.getElementById("ps").value
+		//alert(mission);
+		var stu=document.getElementById("stu").value
+		//alert(po);
+		
+		var val=document.getElementById("val").value
+		
+		
+	
+		var dataTable = $('#example10')
 		.DataTable();
 		
 		dataTable.row
 		.add(
 				[
 					i+1,
-					year,
-					sem,
-					code,
-					subTaut,
-					subType,
-					noStud,
-					pass,
-					rslt,
-					course,
-				    t
+					nba,
+					ps,
+					stu,
+					val
+					
+					
 						 ])
 		.draw();
 		
@@ -531,6 +722,88 @@
 		
 	}
 
+	function getData() {
+	
+		var i=0;
+		var vision=document.getElementById("vision").value
+		//alert(vision);
+		
+		var mission=document.getElementById("mission").value
+		//alert(mission);
+		var po=document.getElementById("po").value
+		//alert(po);
+		
+		var ug=document.getElementById("ug").value
+		//alert(ug);
+		var pso=document.getElementById("pso").value
+		//alert(pso);
+		
+		
+		var pg=document.getElementById("pg").value
+		alert(pg);
+		//alert("hii");
+		var dataTable = $('#example8')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					vision,
+					mission,
+					po,
+					ug,
+					pso,
+					pg
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+	
+	
+	function getData1() {
+		
+		var i=0;
+		var type=document.getElementById("type").value
+		//alert(vision);
+		
+		var duration=document.getElementById("duration").value
+		//alert(mission);
+		var name=document.getElementById("name").value
+		//alert(po);
+		
+		var date=document.getElementById("date").value
+		//alert(ug);
+		var approve=document.getElementById("approve").value
+		//alert(approve);
+		
+		
+	
+		var dataTable = $('#example9')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					type,
+					duration,
+					name,
+					date,
+					approve
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	
+	
 	</script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
@@ -549,3 +822,13 @@
 	</script>
 </body>
 </html>
+
+<!-- <select id="salutation" name="salutation"
+															class="form-control" required>
+															<option value="0">State</option>
+															<option value="1">Other State</option>
+															<option value="2">NRI</option>
+															<option value="3">PIO</option>
+															<option value="4">Foreign</option>
+															<option value="5">PWD</option>
+														</select> -->

@@ -213,8 +213,12 @@
 								
 								
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showStudAddmit">Student Adimitted
-								Details Form </a></li>
+							href="${pageContext.request.contextPath}/showStudAddmit">Student Adimitted Category Wise
+							 Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAddmitLoc">Student Adimitted Location Wise
+								 Form </a></li>
 								
 								<li><a class=""
 							href="${pageContext.request.contextPath}/showStudSupp">Student Support Scheme
