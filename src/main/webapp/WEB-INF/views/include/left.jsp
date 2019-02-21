@@ -168,9 +168,9 @@
 							Innovation </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
-						<li><a class=""
+						<%-- <li><a class=""
 							href="${pageContext.request.contextPath}/showResearchAndInnovationForm">Research
-								And Innovation Form </a></li>
+								And Innovation Form </a></li> --%>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showLinkage">Research
@@ -189,7 +189,8 @@
 						
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showComAct">Community Activities
-								 Form </a></li>
+							 Form </a></li>
+						
 						
 					</ul></li>
 					
@@ -201,8 +202,33 @@
 				</a>
 					<ul class="sub-menu">
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showProgramDetails">Program
+							href="${pageContext.request.contextPath}/showProgDetail1">Program
 								Details Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAddmit">Student Adimitted
+								Details Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudSupp">Student Support Scheme
+							 Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudTran">Student Training
+								 Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showHighEdu">Higher Education
+							Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAct">Student 
+								Activity Form </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAct">Alumini Association/Contribution 
+								Activity Form </a></li>
+								
 
 					</ul></li>
 

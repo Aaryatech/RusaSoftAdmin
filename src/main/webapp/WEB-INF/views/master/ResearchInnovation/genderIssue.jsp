@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
+										type="button" class="btn btn-info">< Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -134,7 +134,7 @@
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Title of Linkage"
+														name="hodName" placeholder="No. of Participant"
 														value="${page.pageName}" required>
 												</div>
 											</div>
@@ -146,7 +146,7 @@
 																</label>
 																
 																
-																<label class="control-label col-sm-2" id="label1" for="smallheading">From
+																<label class="control-label col-sm-1" id="label1" for="smallheading">From
 																	 : <span class="text-danger"></span>
 																</label>
 																<div class="col-sm-2">
@@ -164,7 +164,41 @@
 																</div>
 																
 															</div>
-												<table class="table table-striped dt-responsive display">
+															
+															
+															<div class="form-group">
+															
+															<label class="control-label col-sm-2" for="smallheading">    
+																	 <span class="text-danger"></span>
+																</label>
+																
+												<label class="control-label col-sm-1" for="status">
+													Year : <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
+
+
+													</select>
+													</div>
+													<label class="control-label col-sm-2" id="label1" for="smallheading">Number:
+																	  <span class="text-danger"></span>
+																</label>
+																<div class="col-sm-2">
+																	<input type="text" class="form-control" id="label2"
+																		name="Grant" value=""  placeholder="Number" required>
+																</div>
+													
+												
+										
+															
+												</div>			
+												<!-- <table class="table table-striped dt-responsive display">
 													<thead>
 														<tr>
 
@@ -189,10 +223,47 @@
 
 
 													</tbody>
-												</table>
+												</table> -->
 											</div>
 
-
+													<div class="form-group">
+													
+													<label class="control-label col-sm-3" for="page_order">Gender Equity in Safety/Security
+													:<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													Yes <input type="radio" name="stu" id="stu" checked
+														value="0"> No<input type="radio" name="stu"
+														id="stu" value="1">
+												</div>
+													
+													</div>
+													
+													<div class="form-group">
+													
+													<label class="control-label col-sm-3" for="page_order">Gender Equity in Counseling
+													:<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													Yes <input type="radio" name="stu" id="stu" checked
+														value="0"> No<input type="radio" name="stu"
+														id="stu" value="1">
+												</div>
+													
+													</div>
+													
+													<div class="form-group">
+													
+													<label class="control-label col-sm-3" for="page_order">Gender Equity in Common Room
+													:<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													Yes <input type="radio" name="stu" id="stu" checked
+														value="0"> No<input type="radio" name="stu"
+														id="stu" value="1">
+												</div>
+													
+													</div>
 
 
 
@@ -213,6 +284,31 @@
 					</section>
 
 				</div>
+
+
+<!-- <label class="control-label col-sm-1" for="page_order">Students
+													:<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													Yes <input type="radio" name="stu" id="stu" checked
+														value="0"> No<input type="radio" name="stu"
+														id="stu" value="1">
+												</div>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 				<!-- MAIN CONTENT AREA ENDS -->

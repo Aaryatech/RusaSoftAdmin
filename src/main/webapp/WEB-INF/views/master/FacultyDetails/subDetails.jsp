@@ -136,6 +136,7 @@
 																			<th width="5%">Sr No</th>
 																			<th width="10%">Year</th>
 																			<th width="10%">Semester</th>
+																			<th width="10%">Subject Code</th>
 																			<th width="15%">Subject Taught</th>
 																			<th width="20%">Subject Type
 																				</th>
@@ -216,6 +217,18 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Subject Code
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="code"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
 				
 									<div class="form-group">
 						<label class="control-label col-sm-2" for="page_name">Semester</label> <select
@@ -323,6 +336,8 @@
 		var i=0;
 		var year=document.getElementById("year").value
 		var sem=document.getElementById("sem").value
+		var code=document.getElementById("code").value
+		
 		
 		var subTaut=document.getElementById("subTaut").value
 		var subType=document.getElementById("subType").value
@@ -343,6 +358,7 @@
 					i+1,
 					year,
 					sem,
+					code,
 					subTaut,
 					subType,
 					noStud,

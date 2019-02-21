@@ -949,7 +949,7 @@ public class MasterController {
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("master/ResearchInnovation/comActivities");
+			model = new ModelAndView("master/ResearchInnovation/comActivties");
 
 			model.addObject("title", "Research & Innovation");
 
@@ -965,6 +965,166 @@ public class MasterController {
 
 	}
 
-	
+	/////////////////Program Details///////////////////
+  
+  @RequestMapping(value = "/showProgDetail1", method = RequestMethod.GET)
+	public ModelAndView showProgDetail1(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ProgramDetails/programDetails1");
+
+			model.addObject("title", "Program Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  
+  @RequestMapping(value = "/showStudAddmit", method = RequestMethod.GET)
+ 	public ModelAndView showStudAddmit(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ProgramDetails/studAdmitted");
+
+ 			model.addObject("title", "Student Addmitted");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+
+  @RequestMapping(value = "/showStudSupp", method = RequestMethod.GET)
+	public ModelAndView showProgDetail(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ProgramDetails/StudSuppSch");
+
+			model.addObject("title", "Program Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+ 
+  @RequestMapping(value = "/showStudTran", method = RequestMethod.GET)
+ 	public ModelAndView showStudTran(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ProgramDetails/training");
+
+ 			model.addObject("title", "Program Details");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+
+  @RequestMapping(value = "/showHighEdu", method = RequestMethod.GET)
+	public ModelAndView showHighEdu(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ProgramDetails/highEdu");
+
+			model.addObject("title", "Program Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  @RequestMapping(value = "/showStudAct", method = RequestMethod.GET)
+ 	public ModelAndView showStudAct(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ProgramDetails/studActivity");
+
+ 			model.addObject("title", "Program Details");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  @RequestMapping(value = "/showAlumini", method = RequestMethod.GET)
+	public ModelAndView showAlumini(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ProgramDetails/alumini");
+
+			model.addObject("title", "Program Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+///////////////////////infrastructure////////////////////////////
+  
+ 
 
 }

@@ -115,167 +115,326 @@
 											<div class="col-xs-12"></div>
 
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="status">NSS
+												<label class="control-label col-sm-1" for="status">NSS
 													: <span class="text-danger">*</span>
-												</label> <label class="control-label col-sm-1" for="status">Year
-													: <span class="text-danger">*</span>
+												</label> 
+												
+												<label class="control-label col-sm-1" for="status">
+													Year : <span class="text-danger">*</span>
 												</label>
-												<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Year" value="${page.pageName}"
-														required>
-												</div>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
 
 
+													</select>
+</div>
 
 												<label class="control-label col-sm-2" for="page_name">No
 													of Students Participated :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="No.of Students"
+														name="hodName" placeholder="No."
 														value="${page.pageName}" required>
 												</div>
-												<label class="control-label col-sm-2" for="page_name">Total
-													No. of Students :<span class="text-danger">*</span>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													 Students :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName" placeholder="Total No. of Students"
 														value="${page.pageName}" required>
 												</div>
+												
+									
+												
 											</div>
+
+	                                  <div class="form-group">
+	                                  <label class="control-label col-sm-1" for="status"></label>
+	                                   <label class="control-label col-sm-2" for="status"></label>
+	                                  <div class="col-sm-1"></div>
+	                                  
+	                                  <label class="control-label col-sm-2" for="page_name">No
+													of Faculties Participated :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="No."
+														value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													Faculties :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="Total No. of Students"
+														value="${page.pageName}" required>
+												</div>
+	                                 </div>
+
+
+
+<div class="form-group">
+												<label class="control-label col-sm-1" for="status">NCC
+													: <span class="text-danger">*</span>
+												</label> 
+												
+												<label class="control-label col-sm-1" for="status">
+													Year : <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
+
+
+													</select>
+</div>
+
+												<label class="control-label col-sm-2" for="page_name">No
+													of Students Participated :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="No."
+														value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													 Students :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="Total No. of Students"
+														value="${page.pageName}" required>
+												</div>
+												
+									
+												
+											</div>
+
+	                                  <div class="form-group">
+	                                  <label class="control-label col-sm-1" for="status"></label>
+	                                   <label class="control-label col-sm-2" for="status"></label>
+	                                  <div class="col-sm-1"></div>
+	                                  
+	                                  <label class="control-label col-sm-2" for="page_name">No
+													of Faculties Participated :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="No."
+														value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													Faculties :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="Total No. of Students"
+														value="${page.pageName}" required>
+												</div>
+	                                 </div>
+
+<div class="form-group">
+												<label class="control-label col-sm-1" for="status">Swachh Bharat
+													: <span class="text-danger">*</span>
+												</label> 
+												
+												<label class="control-label col-sm-1" for="status">
+													Year : <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
+
+
+													</select>
+</div>
+
+												<label class="control-label col-sm-2" for="page_name">No
+													of Students Participated :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="No."
+														value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													 Students :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="Total No. of Students"
+														value="${page.pageName}" required>
+												</div>
+												
+									
+												
+											</div>
+
+	                                  <div class="form-group">
+	                                  <label class="control-label col-sm-1" for="status"></label>
+	                                   <label class="control-label col-sm-2" for="status"></label>
+	                                  <div class="col-sm-1"></div>
+	                                  
+	                                  <label class="control-label col-sm-2" for="page_name">No
+													of Faculties Participated :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="No."
+														value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													Faculties :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="Total No. of Students"
+														value="${page.pageName}" required>
+												</div>
+	                                 </div>
 
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="status">NCC
+												<label class="control-label col-sm-1" for="status">Red Cross
 													: <span class="text-danger">*</span>
-												</label> <label class="control-label col-sm-1" for="status">Year
-													: <span class="text-danger">*</span>
+												</label> 
+												
+												<label class="control-label col-sm-1" for="status">
+													Year : <span class="text-danger">*</span>
 												</label>
-												<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Year" value="${page.pageName}"
-														required>
-												</div>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
 
 
+													</select>
+</div>
 
 												<label class="control-label col-sm-2" for="page_name">No
 													of Students Participated :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="No.of Students"
+														name="hodName" placeholder="No."
 														value="${page.pageName}" required>
 												</div>
-												<label class="control-label col-sm-2" for="page_name">Total
-													No. of Students :<span class="text-danger">*</span>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													 Students :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName" placeholder="Total No. of Students"
 														value="${page.pageName}" required>
 												</div>
+												
+									
+												
 											</div>
 
-
+	                                  <div class="form-group">
+	                                  <label class="control-label col-sm-1" for="status"></label>
+	                                   <label class="control-label col-sm-2" for="status"></label>
+	                                  <div class="col-sm-1"></div>
+	                                  
+	                                  <label class="control-label col-sm-2" for="page_name">No
+													of Faculties Participated :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="No."
+														value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													Faculties :<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" placeholder="Total No. of Students"
+														value="${page.pageName}" required>
+												</div>
+	                                 </div>
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="status">Red
-													Cross : <span class="text-danger">*</span>
-												</label> <label class="control-label col-sm-1" for="status">Year
+												<label class="control-label col-sm-1" for="status">AIDs Awareness
 													: <span class="text-danger">*</span>
+												</label> 
+												
+												<label class="control-label col-sm-1" for="status">
+													Year : <span class="text-danger">*</span>
 												</label>
-												<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Year" value="${page.pageName}"
-														required>
-												</div>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
 
 
+													</select>
+</div>
 
 												<label class="control-label col-sm-2" for="page_name">No
 													of Students Participated :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="No.of Students"
+														name="hodName" placeholder="No."
 														value="${page.pageName}" required>
 												</div>
-												<label class="control-label col-sm-2" for="page_name">Total
-													No. of Students :<span class="text-danger">*</span>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													 Students :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName" placeholder="Total No. of Students"
 														value="${page.pageName}" required>
 												</div>
+												
+									
+												
 											</div>
 
-											<div class="form-group">
-												<label class="control-label col-sm-2" for="status">Swachh
-													Bharat : <span class="text-danger">*</span>
-												</label> <label class="control-label col-sm-1" for="status">Year
-													: <span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Year" value="${page.pageName}"
-														required>
-												</div>
-
-
-
-												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
+	                                  <div class="form-group">
+	                                  <label class="control-label col-sm-1" for="status"></label>
+	                                   <label class="control-label col-sm-2" for="status"></label>
+	                                  <div class="col-sm-1"></div>
+	                                  
+	                                  <label class="control-label col-sm-2" for="page_name">No
+													of Faculties Participated :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="No.of Students"
+														name="hodName" placeholder="No."
 														value="${page.pageName}" required>
 												</div>
-												<label class="control-label col-sm-2" for="page_name">Total
-													No. of Students :<span class="text-danger">*</span>
+												<label class="control-label col-sm-2" for="page_name">Total No.of
+													Faculties :<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName" placeholder="Total No. of Students"
 														value="${page.pageName}" required>
 												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="control-label col-sm-2" for="status">AIDS
-													Awareness : <span class="text-danger">*</span>
-												</label> <label class="control-label col-sm-1" for="status">Year
-													: <span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Year" value="${page.pageName}"
-														required>
-												</div>
-
-
-
-												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-2">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="No.of Students"
-														value="${page.pageName}" required>
-												</div>
-												<label class="control-label col-sm-2" for="page_name">Total
-													No. of Students :<span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-2">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Total No. of Students"
-														value="${page.pageName}" required>
-												</div>
-											</div>
-
-
+	                                 </div>
+											
 
 											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-10">
