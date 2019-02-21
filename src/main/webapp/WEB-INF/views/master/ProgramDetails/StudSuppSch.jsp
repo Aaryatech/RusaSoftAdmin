@@ -28,7 +28,7 @@
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
 		<!-- START CONTENT -->
-		<section id="main-content" class=" ">
+		  <section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
 				<div class='col-xs-12'>
@@ -307,7 +307,7 @@
 
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
-		</section>
+		</section>  
 		<!-- END CONTENT -->
 
 
@@ -319,7 +319,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 	
 	
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -329,9 +329,9 @@
 					<h4 class="modal-title">Support Scheme Details </h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -416,12 +416,12 @@
 
 </div>
 
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+						<button type="button" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>  
 	
 	<script type="text/javascript">
 	function getData() {
@@ -465,33 +465,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	<script>
-		function clearSessionAttribute() {
-
-			$.getJSON('${clearSessionAttribute}', {
-
-				ajax : 'true',
-
-			}, function(data) {
-
-			});
-
-		}
-	</script>
-
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	<script>
-		function clearSessionAttribute() {
-
-			$.getJSON('${clearSessionAttribute}', {
-
-				ajax : 'true',
-
-			}, function(data) {
-
-			});
-
-		}
-	</script>
+ 
+	 
 </body>
 </html>

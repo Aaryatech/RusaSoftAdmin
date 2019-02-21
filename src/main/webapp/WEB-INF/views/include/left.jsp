@@ -309,7 +309,7 @@
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/rareBookInformation">
-								Rare Books Information</a></li> 
+								Rare Books Information</a></li>
 
 					</ul></li>
 
