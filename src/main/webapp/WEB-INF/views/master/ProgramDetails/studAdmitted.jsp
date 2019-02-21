@@ -191,7 +191,7 @@
 		var gen=document.getElementById("gen").value
 		var stud=document.getElementById("stud").value
 		
-		alert(stud);
+		//alert(stud);
 		
 		var dataTable = $('#example10')
 		.DataTable();

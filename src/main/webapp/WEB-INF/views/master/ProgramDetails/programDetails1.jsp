@@ -132,6 +132,7 @@
 												<th width="10%">Date/Year of Introduction</th>
 												<th width="15%">Approved by  &nbsp; &nbsp;&nbsp; &nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
+												
 											</tr>
 <!-- 
 											<tr>
