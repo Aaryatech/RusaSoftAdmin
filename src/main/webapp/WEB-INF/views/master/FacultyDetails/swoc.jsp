@@ -102,89 +102,228 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
+											<li class="active"><a href="#strength" data-toggle="tab">
+													<i class="fa fa-home"></i> Strength
 											</a></li>
-											
+											<li><a href="#weak" data-toggle="tab"> <i
+													class="fa fa-home"></i> Weakness
+											</a></li>
+											<li><a href="#oppt" data-toggle="tab"> <i
+													class="fa fa-home"></i> Opportunity
+											</a></li>
+											<li><a href="#challenge" data-toggle="tab"> <i
+													class="fa fa-home"></i> Challenges
+											</a></li>
+											<li><a href="#copo" data-toggle="tab"> <i
+													class="fa fa-home"></i> CO-PO Mapping
+											</a></li>
+
 										</ul>
 
 										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										<!-- 1 -->
+											<div class="tab-pane fade in active " id="strength">
 
 												<div>
 
 
+
+													<h5 class="title pull-left">
+														<strong> Strength:</strong>
+													</h5>
 													<div class="col-xs-12">
-						<h5 class="title pull-left">
-																<strong>SWOC for HODs :</strong>
-															</h5>
-															<div class="col-sm-12"></div>
+
+														<table id="example1"
+															class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="30%">Strength&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		<a href="#myModal" data-toggle="modal"><button
+																				type="submit" class="btn btn-info">Add</button></a>
+																	</th>
+
+																</tr>
+															</thead>
 
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Strength
-																	: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-10">
-																	<textarea id="off_add" name="off_add"
-																		class="form-control" style="width: 100%;" required></textarea>
-																</div>
-															</div>
 
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Weakness
-																	: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-10">
-																	<textarea id="off_add" name="off_add"
-																		class="form-control" style="width: 100%;" required></textarea>
-																</div>
-															</div>
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Opportunity
-																	: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-10">
-																	<textarea id="off_add" name="off_add"
-																		class="form-control" style="width: 100%;" required></textarea>
-																</div>
-
-
-															</div>
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Challenges
-																	: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-10">
-																	<textarea id="off_add" name="off_add"
-																		class="form-control" style="width: 100%;" required></textarea>
-																</div>
-
-
-															</div>
-
-															
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+														</table>
 
 													</div>
 
+													<div class="clearfix"></div>
+												</div>
+
+											</div>
+													<div class="tab-pane fade in " id="weak">
+
+												<div>
+
+
+
+													<h5 class="title pull-left">
+														<strong> Weakness
+														:</strong>
+													</h5>
+													<div class="col-xs-12">
+
+														<table id="example7"
+															class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="30%">Weakness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		<a href="#myModal1" data-toggle="modal"><button
+																				type="submit" class="btn btn-info">Add</button></a>
+																	</th>
+
+																</tr>
+															</thead>
+
+
+
+														</table>
+
+													</div>
 
 													<div class="clearfix"></div>
+												</div>
+
+											</div>
+
+													
+											
+
+											<div class="tab-pane " id="oppt">
+
+												<div>
+
+
+
+													<h5 class="title pull-left">
+														<strong> Opportunity:</strong>
+													</h5>
+													<div class="col-sm-12"></div>
+
+
+													<div class="form-group">
+														<table id="example3"
+															class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="30%">Opportunity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		<a href="#myModal2" data-toggle="modal"><button
+																				type="submit" class="btn btn-info">Add</button></a>
+																	</th>
+
+																</tr>
+															</thead>
+
+
+
+														</table>
+													</div>
+
+
 
 												</div>
 
 											</div>
+
+											<div class="tab-pane " id="challenge">
+
+												<div>
+
+
+
+													<h5 class="title pull-left">
+														<strong> Challenges:</strong>
+													</h5>
+													<div class="col-sm-12"></div>
+
+
+													<div class="form-group">
+														<table id="example4"
+															class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="30%">Challenges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		<a href="#myModal3" data-toggle="modal"><button
+																				type="submit" class="btn btn-info">Add</button></a>
+																	</th>
+
+																</tr>
+															</thead>
+
+
+
+														</table>
+													</div>
+
+
+
+												</div>
+
+											</div>
+
+
+
+											<div class="tab-pane " id="copo">
+
+												<div>
+
+
+
+													<h5 class="title pull-left">
+														<strong> CO-PO Mapping:</strong>
+													</h5>
+													<div class="col-sm-12"></div>
+
+
+													<div class="form-group">
+														<table id="example5"
+															class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="10%">Course Outcome</th>
+																	<th width="10%">Program Outcome</th>
+																	<th width="10%">Is CO/PO Mapped</th>
+																	<th width="30%">Satisfying
+																		Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+																		href="#myModalcopo" data-toggle="modal"><button
+																				type="submit" class="btn btn-info">Add</button></a>
+																	</th>
+
+																</tr>
+															</thead>
+
+
+
+														</table>
+													</div>
+
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<button type="submit" class="btn btn-primary">Submit</button>
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
+
+												</div>
+
+											</div>
+
+
+
 										</div>
+
+
+
+										<!--  -->
 									</form>
 								</div>
 
@@ -207,6 +346,295 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Strength</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="page_name">Strength
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="abc" name="abc"
+								placeholder="" value="${page.pageName}" required>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" onclick="getinfo()">Submit</button>
+					<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Weakness</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="page_name">Weakness
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="xyz" name="xyz"
+								placeholder="" value="${page.pageName}" required>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" onclick="getWeak()">Submit</button>
+					<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Opportunity</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="page_name">Opportunity
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="opt" name="opt"
+								placeholder="" value="${page.pageName}" required>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" onclick="getOpt()">Submit</button>
+					<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Challenges</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="page_name">Challenges
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="chl" name="chl"
+								placeholder="" value="${page.pageName}" required>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" onclick="getData3()">Submit</button>
+					<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModalcopo"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">COPO Mapping</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="page_name">Course
+							Outcome</label> <select id="co" name="co" class="form-control"
+							onchange="showForm()" required>
+							<option value="Good">Good</option>
+							<option value="Better">Better</option>
+							<option value="Best">Best</option>
+
+
+
+
+						</select>
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="page_name">Program
+							Outcome</label> <select id="po" name="po" class="form-control"
+							onchange="showForm()" required>
+							<option value="Good">Good</option>
+							<option value="Better">Better</option>
+							<option value="Best">Best</option>
+
+						</select>
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="page_name">Satisfying
+							Value</label> <select id="val" name="val" class="form-control"
+							onchange="showForm()" required>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="-">-</option>
+
+						</select>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_order">Is
+							CO/PO Mapped :<span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-6">
+							Yes <input type="radio" name="stu" id="stu" checked value="yes">
+							No<input type="radio" name="stu" id="stu" value="1">
+						</div>
+					</div>
+
+
+
+
+
+					<button type="submit" class="btn btn-primary" onclick="getCOPO()">Submit</button>
+					<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		function getinfo() {
+			//alert("hii");
+			var i = 0;
+			var abc = document.getElementById("abc").value
+
+			var dataTable = $('#example1').DataTable();
+
+			dataTable.row.add([ i + 1, abc
+
+			]).draw();
+
+		}
+		function getWeak() {
+			alert("hii");
+			var i = 0;
+			var xyz = document.getElementById("xyz").value
+			alert(xyz);
+
+			var dataTable = $('#example7').DataTable();
+
+			dataTable.row.add([ i + 1, xyz
+
+			]).draw();
+
+		}
+		function getOpt() {
+			//alert("hii");
+			var i = 0;
+			var oppt = document.getElementById("opt").value
+			//alert(oppt);
+
+			var dataTable = $('#example3').DataTable();
+
+			dataTable.row.add([ i + 1, oppt
+
+			]).draw();
+
+		}
+		function getData3() {
+			//alert("hii");
+			var i = 0;
+			var chl = document.getElementById("chl").value
+
+			var dataTable = $('#example4').DataTable();
+
+			dataTable.row.add([ i + 1, chl
+
+			]).draw();
+
+		}
+		function getCOPO() {
+			//alert("hii");
+			var i = 0;
+			var co = document.getElementById("co").value
+			var po = document.getElementById("po").value
+			//alert(qualName);
+			var stu = document.getElementById("stu").value
+			var val = document.getElementById("val").value
+
+			var dataTable = $('#example5').DataTable();
+
+			dataTable.row.add([ i + 1, co, po, stu, val ]).draw();
+
+		}
+	</script>
 
 
 </body>

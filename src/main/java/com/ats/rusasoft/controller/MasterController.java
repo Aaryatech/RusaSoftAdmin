@@ -1125,6 +1125,162 @@ public class MasterController {
 
 ///////////////////////infrastructure////////////////////////////
   
+  
+  @RequestMapping(value = "/showinfra", method = RequestMethod.GET)
+	public ModelAndView showinfra(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/InfrastructureModule/facilities");
+
+			model.addObject("title", "Infrastructure Detail");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  @RequestMapping(value = "/showInstruct", method = RequestMethod.GET)
+ 	public ModelAndView showInstruct(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/InfrastructureModule/institutional");
+
+ 			model.addObject("title", "Infrastructure Detail");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  @RequestMapping(value = "/showAdmin", method = RequestMethod.GET)
+	public ModelAndView showAdmin(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/InfrastructureModule/administrative");
+
+			model.addObject("title", "Infrastructure Detail");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  @RequestMapping(value = "/showAmeneties", method = RequestMethod.GET)
+	public ModelAndView showAmeneties(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/InfrastructureModule/ameneties");
+
+			model.addObject("title", "Infrastructure Detail");
+ 
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
+  @RequestMapping(value = "/showITinfra", method = RequestMethod.GET)
+ 	public ModelAndView showITinfra(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/InfrastructureModule/ITinfra");
+
+ 			model.addObject("title", "Infrastructure Detail");
+  
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  @RequestMapping(value = "/showInternetCon", method = RequestMethod.GET)
+	public ModelAndView showInternetCon(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/InfrastructureModule/internetCon");
+
+			model.addObject("title", "Infrastructure Detail");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  @RequestMapping(value = "/showeContent", method = RequestMethod.GET)
+ 	public ModelAndView showeContent(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/InfrastructureModule/eContent");
+
+ 			model.addObject("title", "Infrastructure Detail");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+
+
+  
  
 
 }

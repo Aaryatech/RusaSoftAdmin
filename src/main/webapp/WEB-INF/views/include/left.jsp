@@ -238,7 +238,25 @@
 				</a>
 					<ul class="sub-menu">
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showInfrastructureForm">Infrastructure
+							href="${pageContext.request.contextPath}/showinfra">Infrastructure
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showInstruct">Instructional
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showAdmin">Administrative
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showAmeneties">Amenities
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showITinfra">IT Infrastructure
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showInternetCon">Internet Connection
+								Form </a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showeContent">e-Content
 								Form </a></li>
 
 					</ul></li>

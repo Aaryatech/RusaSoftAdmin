@@ -90,7 +90,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/iqacList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
+										type="button" class="btn btn-info">< Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -119,7 +119,6 @@
 												<div>
 
 
-													<div class="col-xs-12">
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">IQAC I/C Name
 																:<span class="text-danger">*</span>
@@ -139,11 +138,11 @@
 															<div class="col-sm-10">
 																<select id="designation" name="designation"
 																	class="form-control" required>
-																	<option value="0">Assistant Professor</option>
-																	<option value="1">Associate Professor</option>
-																	<option value="2">Professor</option>
-																	<option value="3">Registrar</option>
-																	<option value="4">Any Other</option>
+																	<option value="Assistant Professor">Assistant Professor</option>
+																	<option value="Associate Professor">Associate Professor</option>
+																	<option value="Professor">Professor</option>
+																	<option value="Registrar">Registrar</option>
+																	<option value="-">Any Other</option>
 																</select>
 															</div>
 														</div>
@@ -183,15 +182,19 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
+															
+															<a href="#myModal2"
+														data-toggle="modal"><button type="submit" onclick="getCOPO()"
+																class="btn btn-info">Confirm</button></a>
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
 
-													</div>
+												
 
 
-													<div class="clearfix"></div>
+													
 
 												</div>
 
@@ -208,6 +211,7 @@
 
 				</div>
 
+	
 
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
@@ -219,8 +223,126 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+	
+	
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">IQAC Detail Comfirmation</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+						
+								
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">IQAC I/C Name
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="iqacName1"
+									name="iqacName1" placeholder="" value="${page.pageName}" readonly
+									>
+							<!-- </div> -->
+	</div>
+					
+					<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Designation : 
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="designation1" readonly
+									name="designation1" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+					
+					<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Date
+				              Of Joining : : 
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="dateOfJoin1" readonly
+									name="dateOfJoin1" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+	
+	
+	
+	
+					<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Contact 
+									No :
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="contactNo1" readonly
+									name="contactNo1" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Email
+									
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="email1" readonly
+									name="email1" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+					</div>
+	
+	
+						<!-- <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button> -->
+				<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+	
+	function getCOPO() {
+		//alert("hii");
+			
+			var iqacName=document.getElementById("iqacName").value
+			var designation=document.getElementById("designation").value
+			
+			var dateOfJoin=document.getElementById("dateOfJoin").value
+			var contactNo=document.getElementById("contactNo").value
+			var email=document.getElementById("email").value
+			
+			
+			document.getElementById("iqacName1").value=iqacName;
+			
+			document.getElementById("designation1").value=designation;
+			document.getElementById("dateOfJoin1").value=dateOfJoin;
+			document.getElementById("contactNo1").value=contactNo;
+			document.getElementById("email1").value=email;
+			
+			
+			
+		}
+
+	
+	
+	
+	</script>
 
 	<script type="text/javascript">
 		jQuery(document).ready(

@@ -146,20 +146,6 @@
 
 
 
-															<!-- 	<tbody>
-
-																	<tr>
-																		<td>1</td>
-																		<td>Diploma</td>
-
-																		<td><input type="date" class="form-control"
-																			id="curExp" name="curExp" value="" required></td>
-																		<td><input type="text" class="form-control"
-																			id="curExp" name="curExp" value="0" required></td>
-																	</tr>
-																	
-
-																</tbody> -->
 															</table>
 
 

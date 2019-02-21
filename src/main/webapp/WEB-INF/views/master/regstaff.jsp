@@ -130,6 +130,60 @@
 
 
 													<div class="col-xs-12">
+													
+													<div class="form-group">
+													<label class="control-label col-sm-2" for="status">
+													Year : <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
+
+
+													</select>
+                                       </div>
+										</div>			
+													
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">No. of Faculty
+																Required <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_name"
+																	name="page_name" placeholder="No. of Faculty Required "
+																
+																	value="${page.pageName}">
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">No. of Faculty
+																Available<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_name"
+																	name="page_name" placeholder="No. of Faculty Available"
+																
+																	value="${page.pageName}">
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-6" for="page_name">Total Student Strength as per Sanction Intake
+																(second year/third year/last year/including direct second year )<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="page_name"
+																	name="page_name" placeholder="Student Strength"
+																	value="${page.pageName}">
+															</div>
+														</div>
+													
+													
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">Faculty
 																Member Name <span class="text-danger">*</span>

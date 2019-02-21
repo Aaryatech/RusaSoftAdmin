@@ -253,6 +253,7 @@
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
+													
 														<button type="submit" class="btn btn-primary">Submit</button>
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
@@ -284,7 +285,78 @@
 
 	<!-- END CONTENT -->
 
+<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Academic Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+									<div class="form-group">
+							<label class="control-label col-sm-3" for="page_name">Qualification</label> <select
+								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
+								<option value="Diploma">Diploma</option>
+								<option value="Bachelors">Bachelors</option>
+								<option value="Masters">Masters</option>
+								<option value="Doctorates">Doctorates</option>
+							<option value="Post Doctorates">Post Doctorates</option>
+								<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
+								
+								<option value="7">Any Other</option>
 
+
+
+							</select>
+						</div>
+						
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Other Qualification
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="qualName"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-1" for="page_name">Class
+							</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="className"
+									name="className" placeholder="" value="${page.pageName}"
+									required>
+							</div>
+	</div>
+	<div class="form-group">
+							<label class="control-label col-sm-2" for="page_name">Year of Passing
+							</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control"
+								id="year" name="year" value="" required>
+							</div>
+
+</div>
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+				<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
 
 
 
