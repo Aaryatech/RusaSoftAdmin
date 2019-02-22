@@ -228,7 +228,7 @@
 								
 						
 	<div class="form-group">
-							<label class="control-label col-sm-3" for="page_name">Year of Passing</label> <select
+							<label class="control-label col-sm-6" for="page_name">Year of Passing</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
 								<option value="2018-2019">2018-2019</option>
 								<option value="2017-2018">2017-2018</option>

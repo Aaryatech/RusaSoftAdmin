@@ -231,7 +231,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Other Qualification
+							<label class="control-label col-sm-6" for="page_name">Other Qualification
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="qualName"

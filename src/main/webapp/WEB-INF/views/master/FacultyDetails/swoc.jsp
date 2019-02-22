@@ -508,7 +508,7 @@
 					<input type="hidden" class="form-control" id="pageId" name="pageId">
 
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="page_name">Course
+						<label class="control-label col-sm-6" for="page_name">Course
 							Outcome</label> <select id="co" name="co" class="form-control"
 							onchange="showForm()" required>
 							<option value="Good">Good</option>
@@ -523,7 +523,7 @@
 
 
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="page_name">Program
+						<label class="control-label col-sm-6" for="page_name">Program
 							Outcome</label> <select id="po" name="po" class="form-control"
 							onchange="showForm()" required>
 							<option value="Good">Good</option>
@@ -535,7 +535,7 @@
 
 
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="page_name">Satisfying
+						<label class="control-label col-sm-6" for="page_name">Satisfying
 							Value</label> <select id="val" name="val" class="form-control"
 							onchange="showForm()" required>
 							<option value="1">1</option>

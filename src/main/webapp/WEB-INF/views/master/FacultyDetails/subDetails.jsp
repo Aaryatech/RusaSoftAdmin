@@ -219,7 +219,7 @@
 								
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Subject Code
+							<label class="control-label col-sm-6" for="page_name">Subject Code
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="code"
@@ -230,7 +230,7 @@
 						
 				
 									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Semester</label> <select
+						<label class="control-label col-sm-6" for="page_name">Semester</label> <select
 								id="sem" name="sem" class="form-control" onchange="showForm()" required>
 								<option value="0">I</option>
 								<option value="1">II</option>
@@ -246,7 +246,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Subject Taught
+							<label class="control-label col-sm-6" for="page_name">Subject Taught
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="subTaut"
@@ -257,7 +257,7 @@
 						
 		
 									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Subject Type</label> <select
+						<label class="control-label col-sm-6" for="page_name">Subject Type</label> <select
 								id="subType" name="subType" class="form-control" onchange="showForm()" required>
 								<option value="0">Regular</option>
 								<option value="1">Elective</option>
@@ -267,7 +267,7 @@
 						</div>				
 					<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">No. of Student Appeared
+							<label class="control-label col-sm-6" for="page_name">No. of Student Appeared
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="noStud"
@@ -277,11 +277,11 @@
 	</div>
 	<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Passed
+							<label class="control-label col-sm-6" for="page_name">Passed
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="pass"
-									name="pass" placeholder="No." value="${page.pageName}"
+									name="pass"  value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
@@ -289,11 +289,11 @@
 	
 	<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">% of Result
+							<label class="control-label col-sm-6" for="page_name">% of Result
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="rslt"
-									name="rslt" placeholder="No." value="${page.pageName}"
+									name="rslt"  value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
@@ -302,17 +302,17 @@
 						
 <div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Course Outcome
+							<label class="control-label col-sm-6" for="page_name">Course Outcome
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="course"
-									name="course" placeholder="No." value="${page.pageName}"
+									name="course"value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
 		
 							<div class="form-group">
-						<label class="control-label col-sm-4" for="page_name">Year of Passing
+						<label class="control-label col-sm-6" for="page_name">Year of Passing
 							</label>
 							<div class="col-sm-4">
 								<input type="date" class="form-control"

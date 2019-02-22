@@ -53,8 +53,8 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add</button></a> <a
+								<a href="#myModal3"	data-toggle="modal"><button type="submit"
+																class="btn btn-primary">Add</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -96,7 +96,7 @@
 
 										</div>
 
-										<table class="table table-striped dt-responsive display">
+										<table class="table table-striped dt-responsive display"id="example1">
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
@@ -104,12 +104,12 @@
 
 													<th width="10%">Date of Purchase</th>
 													<th width="10%">Amount</th>
-													<th width="10%">Total Students utilizing Computer</th>
+													<th width="10%">Total Students Utilizing Computer</th>
 												</tr>
 											</thead>
 
 
-
+<!-- 
 											<tbody>
 
 												<tr>
@@ -125,7 +125,7 @@
 														id="curExp" name="curExp" value="" required></td>
 												</tr>
 
-											</tbody>
+											</tbody> -->
 										</table>
 
 										<div class="form-group">
@@ -300,7 +300,7 @@
 		</div>
 	</div>
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
+	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -315,55 +315,169 @@
 						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId">
+						
 						<div class="form-group">
-							<label for="modalname1" class="form-label">Title</label> <select
-								id="salutation" name="salutation" class="form-control" required>
-								<option value="0">Toilets Ladies/Gents</option>
-								<option value="1">Boys Common Room</option>
-								<option value="2">Girls Common Room</option>
-								<option value="2">Cafeteria</option>
-								<option value="2">Reprographic Facilities</option>
-								<option value="2">First Aid cus Sick Room</option>
-								<option value="2">Principals Quarter</option>
-								<option value="2">Guest House</option>
-								<option value="2">Sports Club/Gym</option>
-								<option value="2">Auditorium/Amphitheatre</option>
-								<option value="2">Boys Hostel</option>
-								<option value="2">Girls Hostel</option>
-
-
-
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-1" for="page_name">No.
+							<label class="control-label col-sm-3" for="page_name">No. of Computers
 							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="No." value="${page.pageName}"
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="qualType"
+									name="qualType" placeholder="No." value="${page.pageName}"
 									required>
 							</div>
+							
+							
+							</div>
+								<div class="form-group">
 
-							<label class="control-label col-sm-2" for="page_name">Location
+							<label class="control-label col-sm-3" for="page_name">Date of Purchase
 							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
+							<div class="col-sm-6">
+								<input type="date" class="form-control" id="qualName"
+									name="hodName" placeholder="Location" value="${page.pageName}"
+									required>
+							</div>
+							</div>
+							
+	<div class="form-group">
+<label class="control-label col-sm-3" for="page_name">Amount
+							</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="className"
+									name="hodName" placeholder="Location" value="${page.pageName}"
+									required>
+							</div>
+							</div>
+							
+							<div class="form-group">
+
+<label class="control-label col-sm-3" for="page_name">Total Student Utilizing the Computer
+							</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="abc"
 									name="hodName" placeholder="Location" value="${page.pageName}"
 									required>
 							</div>
 
 
 
-
 						</div>
 
 
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div> --%>
+	
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Facility Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+									
+						
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">No. of Computers
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="qualType"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Date of Purchase
+						
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="date" class="form-control" id="qualName"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Amount
+						
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="className"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+				
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Total Student Utilizing Computer
+						
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="abc"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+					
+	
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+				<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+
+		var qualType=document.getElementById("qualType").value
+		var qualName=document.getElementById("qualName").value
+		var className=document.getElementById("className").value
+		var abc=document.getElementById("abc").value
+
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					qualType,
+					qualName,
+					className,
+					abc
+					
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

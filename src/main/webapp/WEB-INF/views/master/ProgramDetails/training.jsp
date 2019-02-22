@@ -172,7 +172,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Name of Employer
+							<label class="control-label col-sm-6" for="page_name">Name of Employer
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="empName"
@@ -183,7 +183,7 @@
 	
 		<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Name of Program
+							<label class="control-label col-sm-6" for="page_name">Name of Program
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="progName"
@@ -196,7 +196,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">No. of Students Placed
+							<label class="control-label col-sm-6" for="page_name">No. of Students Placed
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="stud"
@@ -209,7 +209,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Address of Employer
+							<label class="control-label col-sm-6" for="page_name">Address of Employer
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="address"
@@ -220,7 +220,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Contact Details
+							<label class="control-label col-sm-6" for="page_name">Contact Details
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="contact"
@@ -231,7 +231,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Package Offered
+							<label class="control-label col-sm-6" for="page_name">Package Offered
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="package"

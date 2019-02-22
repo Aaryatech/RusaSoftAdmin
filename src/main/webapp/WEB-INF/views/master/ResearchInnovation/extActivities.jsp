@@ -173,7 +173,7 @@
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Total No. of Students"
+														name="hodName" placeholder="Total No. of Faculties"
 														value="${page.pageName}" required>
 												</div>
 	                                 </div>
@@ -239,7 +239,7 @@
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Total No. of Students"
+														name="hodName" placeholder="Total No. of Faculties"
 														value="${page.pageName}" required>
 												</div>
 	                                 </div>
@@ -303,7 +303,7 @@
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Total No. of Students"
+														name="hodName" placeholder="Total No. of Faculties"
 														value="${page.pageName}" required>
 												</div>
 	                                 </div>
@@ -367,7 +367,7 @@
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Total No. of Students"
+														name="hodName" placeholder="Total No. of Faculties"
 														value="${page.pageName}" required>
 												</div>
 	                                 </div>
@@ -430,7 +430,7 @@
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
-														name="hodName" placeholder="Total No. of Students"
+														name="hodName" placeholder="Total No. of Faculties"
 														value="${page.pageName}" required>
 												</div>
 	                                 </div>

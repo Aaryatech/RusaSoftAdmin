@@ -53,8 +53,8 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add</button></a> <a
+								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
+										type="button" class="btn btn-success">Add</button></a> --%> <a
 									class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -157,10 +157,10 @@
 													name="hodName" placeholder="Any Other Similar Facility"
 													value="${page.pageName}" required>
 											</div>
-											<div class="col-sm-2">
+											<!-- <div class="col-sm-2">
 												<button type="submit" class="btn btn-primary">Add</button>
 											</div>
-
+ -->
 										</div>
 
 										</div>
@@ -170,7 +170,10 @@
 					</form>
 				</div>
 			</div>
+			</section>
 		</div>
+		</section>
+		</section>
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->

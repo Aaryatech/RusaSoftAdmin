@@ -100,7 +100,12 @@
 												
 													<th >PSO(Define By the Program )</th>
 													<th >Mapping(Yes/No)</th>
-												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal2"	data-toggle="modal"><button type="submit"
+												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="#myModal2"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 											</tr>
 
@@ -119,7 +124,12 @@
 												<!-- <th width="30%" style="text-align: center;" colspan="2">No.
 													of Students Admitted</th> -->
 												<th >Date/Year of Introduction</th>
-												<th >Approved by  &nbsp; &nbsp;&nbsp; &nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
+												<th >Approved by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 												
 											</tr>
@@ -450,7 +460,7 @@
 			
 						<div class="form-group">
 						
-							<label class="control-label col-sm-8" for="page_name">Program Outcome (as per NBA Manual)
+							<label class="control-label col-sm-10" for="page_name">Program Outcome (as per NBA Manual)
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="po"
@@ -519,7 +529,7 @@
 							name="pageId" >
 							
 							<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Program Type</label> <select
+						<label class="control-label col-sm-6" for="page_name">Program Type</label> <select
 								id="type" name="ug" class="form-control" required>
 								
 								<option value="Certificate">Certificate</option>
@@ -537,7 +547,7 @@
 								
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Duration(in months)
+							<label class="control-label col-sm-6" for="page_name">Duration(in months)
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="duration"
@@ -548,7 +558,7 @@
 								
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Name of Program
+							<label class="control-label col-sm-6" for="page_name">Name of Program
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="name"
@@ -572,7 +582,7 @@
 						
 						
 							<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Approved By</label> <select
+						<label class="control-label col-sm-6" for="page_name">Approved By</label> <select
 								id="approve" name="approve" class="form-control" onchange="showForm()" required>
 								
 								<option value="BOS/AC">BOS/AC</option>
@@ -606,7 +616,7 @@
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Subject Details</h4>
+					<h4 class="modal-title">Program Details</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
@@ -617,7 +627,7 @@
 							
 						
 									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Program Outcome (as per NBA)</label> <select
+						<label class="control-label col-sm-6" for="page_name">Program Outcome (as per NBA)</label> <select
 								id="nba" name="ug" class="form-control" onchange="showForm()" required>
 								<option value="Good">Good</option>
 								<option value="Better">Better</option>
@@ -632,7 +642,7 @@
 						
 		
 									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">PSO(Define By Program)</label> <select
+						<label class="control-label col-sm-6" for="page_name">PSO(Define By Program)</label> <select
 								id="ps" name="ps" class="form-control"  required>
 								<option value="Good">Good</option>
 								<option value="Better">Better</option>
@@ -640,6 +650,19 @@
 							
 							</select>
 						</div>
+						
+						
+						<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Satisfying
+							Value</label> <select id="val" name="val" class="form-control"
+							onchange="showForm()" required>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="-">-</option>
+
+						</select>
+					</div>
 					<div class="form-group">
 
 						<label class="control-label col-sm-6" for="page_order">Mapping(Yes/No)
@@ -652,17 +675,7 @@
 					</div>
 					
 					
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="page_name">Satisfying
-							Value</label> <select id="val" name="val" class="form-control"
-							onchange="showForm()" required>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="-">-</option>
-
-						</select>
-					</div>
+					
 
 					
 

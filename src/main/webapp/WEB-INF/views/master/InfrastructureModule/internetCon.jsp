@@ -53,8 +53,8 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add</button></a> <a
+								<a href="#myModal3"	data-toggle="modal"><button type="submit"
+																class="btn btn-primary">Add</button></a>  <a
 									class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -120,7 +120,7 @@
 
 										</div> --%>
 
-										<table class="table table-striped dt-responsive display">
+										<table class="table table-striped dt-responsive display" id="example1">
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
@@ -134,7 +134,7 @@
 
 
 
-											<tbody>
+											<!-- <tbody>
 
 												<tr>
 													<td>1</td>
@@ -148,7 +148,7 @@
 
 												</tr>
 
-											</tbody>
+											</tbody> -->
 										</table>
 
 
@@ -170,37 +170,7 @@
 
 										</div>
 
-										<table class="table table-striped dt-responsive display">
-											<thead>
-												<tr>
-													<th width="5%">Sr No</th>
-													<th width="10%">ISP</th>
-
-													<th width="10%">Date</th>
-													<th width="10%">Bandwidth</th>
-
-												</tr>
-											</thead>
-
-
-
-											<tbody>
-
-												<tr>
-													<td>1</td>
-													<td><input type="text" class="form-control"
-														id="curExp" name="curExp" value="" required></td>
-
-													<td><input type="date" class="form-control"
-														id="curExp" name="curExp" value="" required></td>
-													<td><input type="text" class="form-control"
-														id="curExp" name="curExp" value="" required></td>
-
-												</tr>
-
-											</tbody>
-										</table>
-
+										
 
 
 
@@ -233,200 +203,101 @@
 
 	</div>
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title"></h4>
+					<h4 class="modal-title">Facility Details</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form"
+					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
+						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
-							name="pageId">
+							name="pageId" >
+							
+									
+						
+						
 						<div class="form-group">
-							<label for="modalname1" class="form-label">Title</label> <select
-								id="salutation" name="salutation" class="form-control" required>
-								<option value="0">Classrooms</option>
-								<option value="1">Tutorial Rooms</option>
-								<option value="2">Computer Laboratory</option>
-								<option value="2">Computer Center</option>
-								<option value="2">Seminar Hall</option>
-								<option value="2">Library</option>
-								<option value="2">Laboratories</option>
-								<option value="2">Studio/Workshops</option>
-								<option value="2">Language Lab</option>
-								<option value="2">Any Other</option>
-
-
-
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label class="control-label col-sm-1" for="page_name">No.
+						
+							<label class="control-label col-sm-6" for="page_name">ISP
 							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="No." value="${page.pageName}"
-									required>
-							</div>
-
-							<label class="control-label col-sm-2" for="page_name">Location
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="qualType"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Date
+						
 							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="Location" value="${page.pageName}"
-									required>
-							</div>
-
-
-
-
-						</div>
-
-
-
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+							<!-- <div class="col-sm-3"> -->
+								<input type="date" class="form-control" id="qualName"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Badwidth
+						
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="className"
+									name="qualName" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
+				
+				
+				
+					
+	
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+				<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title"></h4>
-				</div>
-				<div class="modal-body">
-					<form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId">
-						<div class="form-group">
-							<label for="modalname1" class="form-label">Title</label> <select
-								id="salutation" name="salutation" class="form-control" required>
-								<option value="0">Principal Office</option>
-								<option value="1">Board Room</option>
-								<option value="2">Office All Inclusive</option>
-								<option value="2">HOD Office/Cabin</option>
-								<option value="2">Faculty Rooms</option>
-								<option value="2">Central Rooms</option>
-								<option value="2">Maintenance Rooms</option>
-								<option value="2">Security</option>
-								<option value="2">Housekeeping</option>
-								<option value="2">Pantry for Staff</option>
-								<option value="2">Examination Control Office</option>
-								<option value="2">Placement Office</option>
-
-
-
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-1" for="page_name">No.
-							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="No." value="${page.pageName}"
-									required>
-							</div>
-
-							<label class="control-label col-sm-2" for="page_name">Location
-							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="Location" value="${page.pageName}"
-									required>
-							</div>
-
-
-
-
-						</div>
-
-
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title"></h4>
-				</div>
-				<div class="modal-body">
-					<form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId">
-						<div class="form-group">
-							<label for="modalname1" class="form-label">Title</label> <select
-								id="salutation" name="salutation" class="form-control" required>
-								<option value="0">Toilets Ladies/Gents</option>
-								<option value="1">Boys Common Room</option>
-								<option value="2">Girls Common Room</option>
-								<option value="2">Cafeteria</option>
-								<option value="2">Reprographic Facilities</option>
-								<option value="2">First Aid cus Sick Room</option>
-								<option value="2">Principals Quarter</option>
-								<option value="2">Guest House</option>
-								<option value="2">Sports Club/Gym</option>
-								<option value="2">Auditorium/Amphitheatre</option>
-								<option value="2">Boys Hostel</option>
-								<option value="2">Girls Hostel</option>
-
-
-
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-1" for="page_name">No.
-							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="No." value="${page.pageName}"
-									required>
-							</div>
-
-							<label class="control-label col-sm-2" for="page_name">Location
-							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="Location" value="${page.pageName}"
-									required>
-							</div>
-
-
-
-
-						</div>
-
-
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+		var qualType=document.getElementById("qualType").value
+		var qualName=document.getElementById("qualName").value
+		var className=document.getElementById("className").value
+	
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					qualType,
+					qualName,
+					className
+					
+					
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

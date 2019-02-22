@@ -223,7 +223,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Nature of Consultancy
+							<label class="control-label col-sm-6" for="page_name">Nature of Consultancy
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="nature"
@@ -234,7 +234,7 @@
 	                    
 	                    	<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Sponsoring Agency/Industry
+							<label class="control-label col-sm-6" for="page_name">Sponsoring Agency/Industry
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="sponser"
@@ -245,7 +245,7 @@
 	                    
 	                    <div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Amount of Consultancy
+							<label class="control-label col-sm-6" for="page_name">Amount of Consultancy
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="amount"
@@ -255,7 +255,7 @@
 	                    </div>
 	                    <div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Consultancy Period
+							<label class="control-label col-sm-6" for="page_name">Consultancy Period
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="conPeriod"
