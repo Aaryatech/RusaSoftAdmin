@@ -53,8 +53,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a>
+							<a href="#myModal"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
+										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -73,14 +75,13 @@
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display">
+									<table class="table table-striped dt-responsive display" id="example10">
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
+												<th width="15%">Name of Employer</th>
 												<th width="15%">Name of Program</th>
 												<th width="15%">No. of Students Placed</th>
-												<th width="10%">Name of
-													Employer(Company/Industry/Organization)</th>
 												<th width="10%">Address of Employer</th>
 												<th width="10%">Contact Details</th>
 												<th width="15%">Package Offered</th>
@@ -90,7 +91,7 @@
 										</thead>
 
 
-
+<!-- 
 										<tbody>
 											<tr>
 												<td>1</td>
@@ -116,12 +117,17 @@
 
 
 
-										</tbody>
+										</tbody> -->
 									</table>
 								</div>
 
 								
-
+	<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<button type="submit" class="btn btn-primary">Submit</button>
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
 
 
 
@@ -141,6 +147,145 @@
 
 
 	</div>
+	
+	
+	
+
+<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Training Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+								
+									
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Name of Employer
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="empName"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+		<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Name of Program
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="progName"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+							
+									
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">No. of Students Placed
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="stud"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+						
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Address of Employer
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="address"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Contact Details
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="contact"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Package Offered
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="package"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+		
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var empName=document.getElementById("empName").value
+		var progName=document.getElementById("progName").value
+		var stud=document.getElementById("stud").value
+		var address=document.getElementById("address").value
+		var contact=document.getElementById("contact").value
+		var package1=document.getElementById("package").value
+	
+		
+		
+		//alert(stud);
+		
+		var dataTable = $('#example10')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					empName,
+					progName,
+					stud,
+					address,
+					contact,
+					package1
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

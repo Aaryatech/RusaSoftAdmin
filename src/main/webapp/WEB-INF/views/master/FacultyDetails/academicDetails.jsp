@@ -87,8 +87,8 @@
 							<a href="#myModal"
 														data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a>
-								<a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> 
+								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
+										type="button" class="btn btn-info">Back</button></a>  --%>
 										<a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>

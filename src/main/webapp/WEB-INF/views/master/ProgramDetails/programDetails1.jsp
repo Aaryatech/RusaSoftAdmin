@@ -53,8 +53,8 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
+										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -69,42 +69,38 @@
 
 
 								<div class="col-xs-12">
-
+<div class="form-group">
 
 									<table class="table table-striped dt-responsive display" id="example8">
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
-												<th width="20%">Vision</th>
-												<th width="20%">Mission</th>
-												<th width="20%">Program Outcome (as per NBA Manual)</th>
-												<th width="20%">UG/PG</th>
+												<th >Vision</th>
+												<th >Mission</th>
+												<th >Program Outcome (as per NBA Manual)</th>
+												<th>UG/PG</th>
 												
-													<th width="20%">Program Specific Outcomes(Define By the Program )</th>
-												<th width="20%">UG/PG &nbsp; &nbsp;<a href="#myModal"	data-toggle="modal"><button type="submit"
+													<th>Program Specific Outcomes(Define By the Program )</th>
+												<th >UG/PG &nbsp; &nbsp;<a href="#myModal"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 											</tr>
 
                                                </thead>
 														</table>
-
 </div>
-
-
-<div class="col-xs-12">
-<div class="form-group">
+									<div class="form-group">
 
 									<table class="table table-striped dt-responsive display" id="example10">
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
 												
-												<th width="20%">Program Outcome (as per NBA Manual)</th>
+												<th >Program Outcome (as per NBA Manual)</th>
 											
 												
-													<th width="20%">PSO(Define By the Program )</th>
-													<th width="20%">Mapping(Yes/No)</th>
-												<th width="20%">Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal2"	data-toggle="modal"><button type="submit"
+													<th >PSO(Define By the Program )</th>
+													<th >Mapping(Yes/No)</th>
+												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal2"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 											</tr>
 
@@ -112,25 +108,18 @@
 														</table>
 														</div>
 
-</div>
-
-
-
-
-								<div class="col-xs-12">
-
-
+<div class="form-group">
 									<table class="table table-striped dt-responsive display" id="example9">
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
-												<th width="10%">Program Type</th>
-												<th width="10%">Duration Months</th>
-												<th width="20%">Name of Program</th>
+												<th >Program Type</th>
+												<th >Duration Months</th>
+												<th >Name of Program</th>
 												<!-- <th width="30%" style="text-align: center;" colspan="2">No.
 													of Students Admitted</th> -->
-												<th width="10%">Date/Year of Introduction</th>
-												<th width="15%">Approved by  &nbsp; &nbsp;&nbsp; &nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
+												<th >Date/Year of Introduction</th>
+												<th >Approved by  &nbsp; &nbsp;&nbsp; &nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 												
 											</tr>
@@ -146,7 +135,7 @@
 												<th width="15%"></th>
 											</tr> -->
 										</thead>
-
+</table>
 
 <!-- 
 										<tbody>
@@ -386,9 +375,9 @@
 												<td><button type="submit" class="btn btn-primary">Add</button></td>
 											</tr>
 										</tbody> -->
-									</table>
+									
 								</div>
-
+</div>
 								
 							
 														<div class="form-group">
@@ -427,7 +416,7 @@
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Subject Details</h4>
+					<h4 class="modal-title">Program Details</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
@@ -741,7 +730,7 @@
 		
 		
 		var pg=document.getElementById("pg").value
-		alert(pg);
+		//alert(pg);
 		//alert("hii");
 		var dataTable = $('#example8')
 		.DataTable();

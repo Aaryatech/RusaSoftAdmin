@@ -86,8 +86,8 @@
 							<div class="actions panel_actions pull-right">
 							<a href="#myModal"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a>
-								<a href="${pageContexts.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
+								<%-- <a href="${pageContexts.request.contextPath}/publicationList"><button
+										type="button" class="btn btn-info">Back</button></a> --%> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 

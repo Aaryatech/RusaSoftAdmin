@@ -220,7 +220,12 @@
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showStudAct">Student
-								Activity Form </a></li>
+								Activity (Organized) </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudActAtten">Student
+								Activity (Attended)</a></li>
+								
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showAlumini">Alumini
@@ -234,9 +239,9 @@
 							Module </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
-						<li><a class=""
+						<%-- <li><a class=""
 							href="${pageContext.request.contextPath}/showInfrastructureForm">
-								Form </a></li>
+								Form </a></li> --%>
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showinfra">Infrastructure
 								Facilities Form </a></li>

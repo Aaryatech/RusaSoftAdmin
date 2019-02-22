@@ -1124,6 +1124,28 @@ public class MasterController {
 
  	}
   
+  @RequestMapping(value = "/showStudActAtten", method = RequestMethod.GET)
+	public ModelAndView showStudActAtten(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/ProgramDetails/studActivityAttend");
+
+			model.addObject("title", "Program Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+  
   @RequestMapping(value = "/showAlumini", method = RequestMethod.GET)
 	public ModelAndView showAlumini(HttpServletRequest request, HttpServletResponse response) {
 

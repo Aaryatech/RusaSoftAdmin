@@ -53,8 +53,7 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a>
+								
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -69,7 +68,7 @@
 
 
 								<h5 class="title pull-left">
-									<strong>Higher Education</strong>
+									<strong>Migration to Higher Education</strong>
 								</h5>
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
@@ -135,6 +134,12 @@
 								</div>
 
 
+<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<button type="submit" class="btn btn-primary">Submit</button>
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
 
 
 

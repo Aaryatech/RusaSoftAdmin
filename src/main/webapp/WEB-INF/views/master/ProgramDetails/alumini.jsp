@@ -52,9 +52,12 @@
 					<section class="box ">
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
+						
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a>
+									<a href="#myModal"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
+										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -76,7 +79,7 @@
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display">
+									<table class="table table-striped dt-responsive display" id="example10">
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
@@ -90,7 +93,7 @@
 										</thead>
 
 
-
+<!-- 
 										<tbody>
 
 											<tr>
@@ -129,7 +132,7 @@
 											</tr>
 
 
-										</tbody>
+										</tbody> -->
 									</table>
 								</div>
 
@@ -151,6 +154,138 @@
 
 
 	</div>
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Alumini Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+								
+							
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Name of Alumini
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="name"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>		
+						
+					
+								
+		<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Passing Year
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="date" class="form-control" id="year"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Nature of Contribution</label> <select
+								id="nature" name="sem" class="form-control" onchange="showForm()" required>
+								<option value="Financial">Financial</option>
+												<option value="Non Financial">Non Financial</option>
+								
+								
+							</select>
+						</div>
+			
+									
+						
+											
+		<div class="form-group">
+						
+							<label class="control-label col-sm-3" for="page_name">Year of Contribution
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="date" class="form-control" id="year1"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+						
+					
+									<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Benefit To</label> <select
+								id="level" name="sem" class="form-control" onchange="showForm()" required>
+								<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Faculty">Faculty</option>
+															<option value="Department">Department</option>
+															<option value="Institute">Institute</option>
+															<option value="Society">Society</option>
+															<option value="-">Any Other</option>
+								
+								
+							</select>
+						</div>
+						
+						
+		
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+		var name=document.getElementById("name").value
+	
+		var year=document.getElementById("year").value
+		var nature=document.getElementById("nature").value
+		var year1=document.getElementById("year1").value
+		
+		
+		var package1=document.getElementById("level").value
+		
+	
+		
+		
+		//alert(stud);
+		
+		var dataTable = $('#example10')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					name,
+					year,
+					nature,
+					year1,
+					package1
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

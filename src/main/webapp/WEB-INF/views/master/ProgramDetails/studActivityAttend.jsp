@@ -71,7 +71,7 @@
 
 
 								<h5 class="title pull-left">
-									<strong>Students Activity(Organized)</strong>
+									<strong>Students Activity(Attended)</strong>
 								</h5>
 								
 								<div class="col-xs-12"></div>
