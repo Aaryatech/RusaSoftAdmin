@@ -152,7 +152,7 @@
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title"></h4>
+					<h4 class="modal-title">Amenities Details</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
