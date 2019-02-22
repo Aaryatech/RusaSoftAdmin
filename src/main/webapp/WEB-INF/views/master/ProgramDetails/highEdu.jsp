@@ -53,8 +53,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								
+									<a href="#myModal"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
 								<a class="box_toggle fa fa-chevron-down"></a>
+								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -73,7 +75,7 @@
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display">
+									<table class="table table-striped dt-responsive display" id="example1">
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
@@ -86,7 +88,7 @@
 										</thead>
 
 
-
+<!-- 
 										<tbody>
 											<tr>
 												<td>1</td>
@@ -129,7 +131,7 @@
 
 
 
-										</tbody>
+										</tbody> -->
 									</table>
 								</div>
 
@@ -158,6 +160,109 @@
 
 
 	</div>
+	
+	
+	
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Higher Education Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId">
+						<div class="form-group">
+							<label for="modalname1" class="form-label">Program Type</label> <select
+								id="qualType" name="salutation" class="form-control" required>
+								<option value="UG">UG</option>
+								<option value="PG">PG</option>
+								<option value="M.Phill">M.Phill</option>
+								<option value="Ph.D.">Ph.D.</option>
+								<option value="Post Doct.">Post Doct.</option>
+								
+
+
+
+							</select>
+						</div>
+						
+						
+							<div class="form-group">
+							<label for="modalname1" class="form-label">Proceeding To </label> <select
+								id="qualName" name="salutation" class="form-control" required>
+								
+								<option value="PG">PG</option>
+									<option value="Ph.D.">Ph.D.</option>
+										<option value="Ph.D.">Ph.D.</option>
+								
+							
+								<option value="Post Doct.">Post Doct.</option>
+									<option value="-">Pls. Specify</option>
+								
+
+
+
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="page_name">No. of Student
+							</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="className"
+									name="hodName" placeholder="No." value="${page.pageName}"
+									required>
+							</div>
+
+
+
+
+						</div>
+
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i=0;
+
+		var qualType=document.getElementById("qualType").value
+		var qualName=document.getElementById("qualName").value
+		var className=document.getElementById("className").value
+
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					qualType,
+					qualName,
+					className
+					
+					
+						 ])
+		.draw();
+		
+		
+		
+	}
+
+	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
