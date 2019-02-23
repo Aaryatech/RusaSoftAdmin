@@ -125,8 +125,8 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																			<th >Academic Year</th>
-																		<th>Title of IPR-Industry-Academic Initiative Practice</th>
+																		<th >Academic Year</th>
+																		<th>Title of Professional Development Program for Teaching Staff</th>
 																		<th>From Date</th>
 																		<th >To Date</th>
 																		<th>No. of Participants</th>
@@ -192,13 +192,13 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Intellectual Property Rights & Industries – Academic Innovative Practices
-
+					<h4 class="modal-title">Governance, Leadership and Management  
 </h4>
 				</div>
 				<div class="modal-body">
-				
-				
+
+
+
 <div class="form-group">
 						<label class="control-label col-sm-3" for="finantialYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
@@ -210,19 +210,31 @@
 						</select>
 					</div>
 					
-
 					<div class="form-group">
 
 						<label class="control-label col-sm-6" for="title">
-Title of IPR-Industry-Academic Initiative Practice
+Title of Professional Development Program for Teaching Staff
+
 
 						</label> <input type="text" class="form-control"
 							id="title" name="title"
-							placeholder="Title of IPR-Industry-Academic Initiative Practice"
+							placeholder="Title of Professional Development Program for Teaching Staff"
 							value="${page.pageName}" required>
 					</div>
 					
+					
+					
 					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="participant">No. of Participants
+						</label> <input type="text" class="form-control"
+							id="participant" name="participant"
+							placeholder="No. of Participants"
+							value="${page.pageName}" required>
+					</div>
+
+				
+						<div class="form-group">
 
 						<label class="control-label col-sm-3" for="fromDate">From Date
 					 </label> 
@@ -242,18 +254,6 @@ Title of IPR-Industry-Academic Initiative Practice
 							value="${page.pageName}" required>
 					</div>
 					
-					
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="participant">No. of Participants
-						</label> <input type="text" class="form-control"
-							id="participant" name="participant"
-							placeholder="No. of Participants"
-							value="${page.pageName}" required>
-					</div>
-
-				
-						
 						
 					
 					
@@ -291,7 +291,7 @@ Title of IPR-Industry-Academic Initiative Practice
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, year,title, fromDate, toDate, participant  ])
+					[ i + 1,year, title,fromDate, toDate ,participant ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

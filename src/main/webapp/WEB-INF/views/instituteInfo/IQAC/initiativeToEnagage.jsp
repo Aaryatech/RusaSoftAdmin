@@ -125,6 +125,7 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
+																		<th >Academic Year</th>
 																		<th>Title of Programme</th>
 																		<th>From Date</th>
 																		<th >To Date</th>
@@ -194,6 +195,18 @@
 					<h4 class="modal-title">Initiative to Engage & Contribute To Local Community</h4>
 				</div>
 				<div class="modal-body">
+				
+				
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="finantialYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+
+						</select>
+					</div>
 
 					<div class="form-group">
 
@@ -262,6 +275,7 @@
 	<script type="text/javascript">
 		function getData() {
 			//alert("hii");
+				var year = document.getElementById("academicYear").value;
 			var i = parseInt(document.getElementById("index").value);
 			var title = document.getElementById("title").value;
 			var participant = document.getElementById("participant").value;
@@ -272,7 +286,7 @@
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, title, participant, fromDate, toDate  ])
+					[ i + 1,year, title,  fromDate, toDate,participant  ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

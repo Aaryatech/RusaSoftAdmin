@@ -117,19 +117,22 @@
 
 
 													<div class="col-xs-12">
- 
-														<div class="col-xs-12">
+													
+															<div class="col-xs-12">
 
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																			<th >Academic Year</th>
-																		<th>Title of IPR-Industry-Academic Initiative Practice</th>
-																		<th>From Date</th>
-																		<th >To Date</th>
-																		<th>No. of Participants</th>
+																		<th>Title of MoU</th>
+																		<th>MoU Duration / Period</th>
+																		<th >Functional MoU with Institution</th>
+																		<th>Academic Year</th>
+																	     <th>Beneficiary of MoU</th>
+																		<th >No. of Participants / Beneficiary</th>
+																		
+																		
 																	</tr>
 																
 																</thead>
@@ -143,12 +146,12 @@
 															</table>
 
 														</div>
-														<!-- <div class="form-group">
+														 <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> -->
+														</div> 
 
 													</div>
 
@@ -192,15 +195,47 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Intellectual Property Rights & Industries – Academic Innovative Practices
+					<h4 class="modal-title">Functional MoUs
 
 </h4>
 				</div>
 				<div class="modal-body">
 				
+					
+				<div class="form-group">
+
+						<label class="control-label col-sm-3" for="title">Title of MoU
+						</label> <input type="text" class="form-control"
+							id="title" name="title"
+							placeholder="Title of MoU"
+							value="${page.pageName}" required>
+					</div>
+				<div class="form-group">
+
+						<label class="control-label col-sm-3" for="mouDuration">MoU Duration / Period
+						</label> <input type="text" class="form-control"
+							id="mouDuration" name="mouDuration"
+							placeholder="MoU Duration / Period"
+							value="${page.pageName}" required>
+					</div>
 				
-<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Academic
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="functionalMOU">Functional MoU with Agency
+							</label> <select id="functionalMOU" name="functionalMOU"
+							class="form-control" required>
+							<option value="IIT">IIT</option>
+							<option value="NIT">NIT</option>
+							<option value="IIIT">IIIT</option>
+								<option value="University">University</option>
+									<option value="Industries">Industries</option>
+									<option value="Corporate Houses">Corporate Houses</option>
+									<option value="Any other Institute of National Importance">Any other Institute of National Importance</option>
+
+						</select>
+					</div>
+				
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
@@ -210,55 +245,31 @@
 						</select>
 					</div>
 					
+				
+				
 
-					<div class="form-group">
+				<div class="form-group">
 
-						<label class="control-label col-sm-6" for="title">
-Title of IPR-Industry-Academic Initiative Practice
-
+						<label class="control-label col-sm-3" for="beneficiaryMOU">Beneficiary of MOU
 						</label> <input type="text" class="form-control"
-							id="title" name="title"
-							placeholder="Title of IPR-Industry-Academic Initiative Practice"
+							id="beneficiaryMOU" name="beneficiaryMOU"
+							placeholder="Beneficiary of Collaboration / Linkage"
 							value="${page.pageName}" required>
 					</div>
+				
+	
 					
-					<div class="form-group">
+<div class="form-group">
 
-						<label class="control-label col-sm-3" for="fromDate">From Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="fromDate" name="fromDate"
-							
-							value="${page.pageName}" required>
-							
-							
-							<label class="control-label col-sm-3" for="toDate">To Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="toDate" name="toDate"
-							
-							value="${page.pageName}" required>
-					</div>
-					
-					
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="participant">No. of Participants
+						<label class="control-label col-sm-3" for="totalParticipants">No. of Participants / Beneficiary
 						</label> <input type="text" class="form-control"
-							id="participant" name="participant"
-							placeholder="No. of Participants"
+							id="totalParticipants" name="totalParticipants"
+							placeholder="No. of Participants / Beneficiary"
 							value="${page.pageName}" required>
 					</div>
 
 				
-						
-						
-					
-					
-					
-					
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -281,17 +292,18 @@ Title of IPR-Industry-Academic Initiative Practice
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			var year = document.getElementById("academicYear").value;
 			var title = document.getElementById("title").value;
-			var participant = document.getElementById("participant").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
+			var mouDuration = document.getElementById("mouDuration").value;
+			var academicYear = document.getElementById("academicYear").value;
+			var functionalMOU = document.getElementById("functionalMOU").value;
+			var beneficiaryMOU = document.getElementById("beneficiaryMOU").value;
+			
+			var totalParticipants = document.getElementById("totalParticipants").value;
 		
-			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, year,title, fromDate, toDate, participant  ])
+					[ i + 1,title,mouDuration,functionalMOU, academicYear, beneficiaryMOU,totalParticipants ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

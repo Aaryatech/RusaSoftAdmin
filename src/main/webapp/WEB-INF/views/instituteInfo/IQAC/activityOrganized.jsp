@@ -117,19 +117,23 @@
 
 
 													<div class="col-xs-12">
- 
-														<div class="col-xs-12">
+													
+															<div class="col-xs-12">
 
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																			<th >Academic Year</th>
-																		<th>Title of IPR-Industry-Academic Initiative Practice</th>
+																		
+																		<th>Academic Year</th>
+																		<th>Name of Activity</th>
 																		<th>From Date</th>
 																		<th >To Date</th>
-																		<th>No. of Participants</th>
+																		<th >Total Participants</th>
+																		<th >Level of Activity/Competition</th>
+																	<th >Type of Activity/Competition</th>
+																		
 																	</tr>
 																
 																</thead>
@@ -143,12 +147,12 @@
 															</table>
 
 														</div>
-														<!-- <div class="form-group">
+														 <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> -->
+														</div> 
 
 													</div>
 
@@ -192,15 +196,14 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Intellectual Property Rights & Industries – Academic Innovative Practices
+					<h4 class="modal-title">Sports / Cultural Activity / Competition organized at Institute
 
 </h4>
 				</div>
 				<div class="modal-body">
 				
-				
-<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Academic
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
@@ -210,18 +213,18 @@
 						</select>
 					</div>
 					
+				
+				<div class="form-group">
 
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="title">
-Title of IPR-Industry-Academic Initiative Practice
-
+						<label class="control-label col-sm-3" for="activityName">Name of Activity
 						</label> <input type="text" class="form-control"
-							id="title" name="title"
-							placeholder="Title of IPR-Industry-Academic Initiative Practice"
+							id="activityName" name="activityName"
+							placeholder="Name of Activity"
 							value="${page.pageName}" required>
 					</div>
-					
+
+				
+	
 					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="fromDate">From Date
@@ -241,23 +244,40 @@ Title of IPR-Industry-Academic Initiative Practice
 							
 							value="${page.pageName}" required>
 					</div>
-					
-					
-					<div class="form-group">
+<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">No. of Participants
+						<label class="control-label col-sm-3" for="totalParticipants">Total Participants
 						</label> <input type="text" class="form-control"
-							id="participant" name="participant"
-							placeholder="No. of Participants"
+							id="totalParticipants" name="totalParticipants"
+							placeholder="Total Participants"
 							value="${page.pageName}" required>
 					</div>
 
 				
-						
-						
+
 					
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="activityLevel">Level of Activity
+							Year</label> <select id="activityLevel" name="activityLevel"
+							class="form-control" required>
+							<option value="State">State</option>
+							<option value="National">National</option>
+							<option value="International">International</option>
+
+						</select>
+					</div>
 					
-					
+							
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="activityType">Type of Activity
+							Year</label> <select id="activityType" name="activityType"
+							class="form-control" required>
+							<option value="Sports">Sports</option>
+							<option value="Cultural">Cultural</option>
+							
+
+						</select>
+					</div>
 					
 					<!-- Link on Website for Activity Report -->
 
@@ -281,17 +301,19 @@ Title of IPR-Industry-Academic Initiative Practice
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			var year = document.getElementById("academicYear").value;
-			var title = document.getElementById("title").value;
-			var participant = document.getElementById("participant").value;
+			var activityName = document.getElementById("activityName").value;
+			var academicYear = document.getElementById("academicYear").value;
+			
+			var totalParticipants = document.getElementById("totalParticipants").value;
+			var activityLevel = document.getElementById("activityLevel").value;
 			var fromDate = document.getElementById("fromDate").value;
 			var toDate = document.getElementById("toDate").value;
-		
+			var activityType = document.getElementById("activityType").value;
 			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, year,title, fromDate, toDate, participant  ])
+					[ i + 1,activityName, academicYear, fromDate, toDate,totalParticipants ,activityLevel,activityType])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

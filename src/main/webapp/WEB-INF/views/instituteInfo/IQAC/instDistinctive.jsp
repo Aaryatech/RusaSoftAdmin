@@ -125,6 +125,7 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
+																		<th > Academic Year</th>
 																		<th>Title of Distinctiveness</th>
 																		<th >Applicable from Academic Year</th>
 																		
@@ -196,7 +197,16 @@
 				<div class="modal-body">
 
 
+<div class="form-group">
+						<label class="control-label col-sm-3" for="academicYear1">Academic
+							Year</label> <select id="academicYear1" name="academicYear1"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
 
+						</select>
+					</div>
 <div class="form-group">
 
 						<label class="control-label col-sm-3" for="title">Title of Distinctiveness
@@ -252,6 +262,7 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
+			var year1 = document.getElementById("academicYear1").value;
 			var year = document.getElementById("academicYear").value;
 			var befStake = document.getElementById("befStake").value;
 			
@@ -260,7 +271,7 @@
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, title,year, befStake])
+					[ i + 1, year1,title,year, befStake])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

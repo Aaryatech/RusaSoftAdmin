@@ -31,7 +31,291 @@ public class InstituteProfileController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
+	public ModelAndView showVisionMission(HttpServletRequest request, HttpServletResponse response) {
 
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/visionMission");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showInstituteSupport", method = RequestMethod.GET)
+	public ModelAndView showInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+
+	@RequestMapping(value = "/showActivityOrganized", method = RequestMethod.GET)
+	public ModelAndView showActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/activityOrganized");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	
+	@RequestMapping(value = "/showEContentFacilities", method = RequestMethod.GET)
+	public ModelAndView showEContentFacilities(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/eContentFacilities");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showReforms", method = RequestMethod.GET)
+	public ModelAndView showReforms(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/reforms");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	
+
+	@RequestMapping(value = "/showStudentPerformance", method = RequestMethod.GET)
+	public ModelAndView showStudentPerformance(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/studentPerformance");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	
+
+	@RequestMapping(value = "/showTransparentGrievance", method = RequestMethod.GET)
+	public ModelAndView showTransparentGrievance(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/transparentGrievances");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showTimeBoundGrievance", method = RequestMethod.GET)
+	public ModelAndView showTimeBoundGrievance(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/timeBoundGrievances");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showEfficienttGrievance", method = RequestMethod.GET)
+	public ModelAndView showEfficienttGrievance(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/efficientGrievances");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+
+	@RequestMapping(value = "/showInstituteOfferingCourse", method = RequestMethod.GET)
+	public ModelAndView showInstituteOfferingCourse(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instituteOffersCourse");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showCurriculum", method = RequestMethod.GET)
+	public ModelAndView showCurriculum(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/curriculumCrosscutting");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	/*@RequestMapping(value = "/showEGovernanceFacilities", method = RequestMethod.GET)
+	public ModelAndView showEGovernanceFacilities(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/eGovernance");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}*/
+	
+	
+	@RequestMapping(value = "/showCollaborationLinkages", method = RequestMethod.GET)
+	public ModelAndView showCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/collaborationLinkages");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showFunctionalMOUs", method = RequestMethod.GET)
+	public ModelAndView showFunctionalMOUs(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
 	
 	
 	@RequestMapping(value = "/showIncubationCentreDetail", method = RequestMethod.GET)
@@ -189,6 +473,32 @@ public class InstituteProfileController {
 		return model;
 
 	}
+	
+	
+
+	@RequestMapping(value = "/showProfDevelopment", method = RequestMethod.GET)
+	public ModelAndView showProfDevelopment(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/profDevelpment");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	
+	
+	
 
 
 }

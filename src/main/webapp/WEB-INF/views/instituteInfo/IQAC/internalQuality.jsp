@@ -209,14 +209,27 @@
 						</select>
 					</div>
 					
+					
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="initiativeName">Name of Quality Initiative
-							</label> 
-							 <input type="text" class="form-control"
-							id="initiativeName" name="initiativeName"
-							placeholder="Name of Quality Initiative"
-							value="${page.pageName}" required>
+							</label> <select id="initiativeName" name="initiativeName"
+							class="form-control" required>
+							<option value="AQAR prepared or submitted">AQAR prepared or submitted</option>
+							<option value="Academic – Administrative Audit Conducted">Academic – Administrative Audit Conducted	</option>
+							
+							<option value="AQAR prepared or submitted">AQAR prepared or submitted</option>
+							
+							
+							
+							<option value="Institute Participated in NIRF">Institute Participated in NIRF</option>
+							<option value="ISO Certification obtained">ISO Certification obtained	</option>
+							
+							<option value="NBA Certification received">NBA Certification received</option>
+							<option value="Any other quality based certification ">Any other quality based certification </option>
+
+						</select>
 					</div>
+					
 					
 					
 					<div class="form-group">
