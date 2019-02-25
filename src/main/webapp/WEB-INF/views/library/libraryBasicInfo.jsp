@@ -125,7 +125,7 @@
 																using Integrated Library Management System : <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-3">
 																<input type="radio" id="isUsingSoft" name="isUsingSoft"
 																	onclick="showDiv(1)" value="1" checked>Yes <input
 																	type="radio" id="isUsingSoft" name="isUsingSoft"
@@ -218,7 +218,7 @@
 																style="text-align: left;"> e-Journals : <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-2">
 																<input type="radio" id="eJournals" name="eJournals"
 																	value="1" checked>Yes <input type="radio"
 																	id="eJournals" name="eJournals" value="0">No
@@ -238,7 +238,7 @@
 																style="text-align: left;"> e-Shodh Sindhu : <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-2">
 																<input type="radio" id="shodhsindhu" name="shodhsindhu"
 																	value="1" checked>Yes <input type="radio"
 																	id="shodhsindhu" name="shodhsindhu" value="0">No
@@ -259,7 +259,7 @@
 																style="text-align: left;"> Shodh Ganga
 																Membership : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-2">
 																<input type="radio" id="gangaMembership"
 																	name="gangaMembership" value="1" checked>Yes <input
 																	type="radio" id="gangaMembership"
@@ -280,7 +280,7 @@
 																style="text-align: left;"> e-Books : <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-2">
 																<input type="radio" id="eBooks" name="eBooks" value="1"
 																	checked>Yes <input type="radio" id="eBooks"
 																	name="eBooks" value="0">No
@@ -300,7 +300,7 @@
 																style="text-align: left;"> Database : <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-2">
 																<input type="radio" id="database" name="database"
 																	value="1" checked>Yes <input type="radio"
 																	id="database" name="database" value="0">No
@@ -340,6 +340,197 @@
 															</div>
 
 
+                                              <h4>e-Content Facilities</h4>
+															
+														 
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Media Center Available : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="mediacenter" name="mediacenter"
+																	value="1" checked>Yes <input type="radio"
+																	id="mediacenter" name="mediacenter" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearMediacenter"
+																	name="yearMediacenter" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="recordingFacility"
+																style="text-align: left;"> Recording Facility Available: <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="recordingFacility" name="recordingFacility"
+																	value="1" checked>Yes <input type="radio"
+																	id="recordingFacility" name="recordingFacility" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearRecordingFacility"
+																	name="yearRecordingFacility" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="lectuteCap"
+																style="text-align: left;"> Lecture Capturing System : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="lectuteCap" name="lectuteCap"
+																	value="1" checked>Yes <input type="radio"
+																	id="lectuteCap" name="lectuteCap" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearLectuteCap"
+																	name="yearLectuteCap" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Any other e-Content Development Facility 
+(Please Specify) 
+ : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="eContentFacility" name="eContentFacility"
+																	value="1" checked>Yes <input type="radio"
+																	id="eContentFacility" name="eContentFacility" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearEContentFacility"
+																	name="yearEContentFacility" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+
+														
+														  <h4>e-Governance Facilities</h4>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="planning"
+																style="text-align: left;">Planning	 : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="planning" name="planning"
+																	value="1" checked>Yes <input type="radio"
+																	id="planning" name="planning" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearPlanning"
+																	name="yearPlanning" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="recordingFacility"
+																style="text-align: left;"> Administration : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="administration" name="administration"
+																	value="1" checked>Yes <input type="radio"
+																	id="recordingFacility" name="recordingFacility" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearAdministration"
+																	name="yearAdministration" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="lectuteCap"
+																style="text-align: left;">Finance & Accounts : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="finance" name="finance"
+																	value="1" checked>Yes <input type="radio"
+																	id="lectuteCap" name="lectuteCap" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearFinance"
+																	name="yearFinance" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="studAddmission"
+																style="text-align: left;"> Student Admission & Support 
+ : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="studAddmission" name="studAddmission"
+																	value="1" checked>Yes <input type="radio"
+																	id="studAddmission" name="studAddmission" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearStudAddmission"
+																	name="yearStudAddmission" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+
+
+<div class="form-group">
+															<label class="control-label col-sm-3" for="examinations"
+																style="text-align: left;"> Examinations  
+ : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="examinations" name="examinations"
+																	value="1" checked>Yes <input type="radio"
+																	id="eContentFacility" name="eContentFacility" value="0">No
+															</div>
+															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-3">
+
+																<input type="date" class="form-control" id="yearExaminations"
+																	name="yearExaminations" placeholder="Membership Details"
+																	value="" required>
+
+															</div>
+														</div>
+
+
+												
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>

@@ -42,8 +42,7 @@
 								Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/showRegAcc">Account
 								Officer Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showRegDean">Dean/R
-								& D Registration</a> <a class=""
+							href="${pageContext.request.contextPath}/showRegDean">Dean/R&D Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/showRegLib">Librarian
 								Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/showRegStud">Student
@@ -52,17 +51,205 @@
 								Institute Information</a></li>
 
 					</ul></li>
-
-				<%-- 	<li class=""><a href="javascript:;"> <i
-						class="fa fa-columns"></i> <span class="title">Master</span> <span
-						class="arrow "></span>
+					
+					
+						
+				<li class=""><a href="javascript:;"> <i
+						class="fa fa-columns"></i> <span class="title">Institute
+							Profile Module </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
-						<li><a class=""
-							href="${pageContext.request.contextPath}/addFaculty">Add
-								Department</a></li></ul></li>
- --%>
 
+
+						<%-- <li><a class=""
+							href="${pageContext.request.contextPath}/showProgramDetails">Program
+								</a></li> --%>
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showInstProf">Institute Profile </a></li>
+
+
+
+						
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showEContentFacilities">Common Details
+								Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showCollaborationLinkages">Collaboration & Linkages
+								 Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showFunctionalMOUs">Functional 
+								MOUs </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showReforms">Evaluation Process and Reforms
+								</a></li>
+								
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showTransparentGrievance">Mechanism of Examination Related Grievances(Transparent)
+								</a></li>
+								
+								
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showTimeBoundGrievance">Mechanism of Examination Related Grievances
+							(Time Bound)
+								</a></li>
+								
+										
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showEfficienttGrievance">Mechanism of Examination Related Grievances
+							(Efficient)
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudentPerformance">Student Performance
+							
+								</a></li>
+								
+									
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showCurriculum">Curriculum and Crosscutting Issues 
+							
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showUderTakingProv">Provision for Undertaking
+							
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showFeedback">Feedback
+							
+								</a></li>
+								
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showProfDevelopment">Governance, Leadership and Management (Professional Development )
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showProfDevelopment">Governance, Leadership and Management 
+							(Administrative Process  )
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showInternalQualityInitiative">Internal Quality Initiatives
+						
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showIntellectualProperty">Intellectual Property Rights & Industries
+						
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showGenderEquity">
+						Gender Equality Programme
+								</a></li>
+								
+									<li><a class=""
+							href="${pageContext.request.contextPath}/showInitiativeToEngage">
+					Initiative to Engage and Contribute to Local Community
+								</a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showGenderSensitivity">
+					Gender Sensitivity Facility
+								</a></li>
+								
+					<li><a class=""
+							href="${pageContext.request.contextPath}/showEnvConciuosness">
+					Environmental Consciousness and Sustainability
+								</a></li>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showGreenPractices">
+				Green Practices
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showSpecInitiatives">
+				Specific Initiatves
+								</a></li>
+								
+									<li><a class=""
+							href="${pageContext.request.contextPath}/showInstituteOfferingCourse">
+					Institute Offers a Course on Humanities
+								</a></li>
+								
+										<li><a class=""
+							href="${pageContext.request.contextPath}/showHumanValues">
+					Activities Conducted
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showBestPractice">
+				Best Practices of the Institute
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showProgDistinctive">
+				Institutional Distinctiveness
+								</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showIncubationCentreDetail">
+				Incubation Centre
+								</a></li>
+								
+								
+
+
+					</ul></li>
+					
+					
+				<li class=""><a href="javascript:;"> <i
+						class="fa fa-columns"></i> <span class="title">Program Details Module </span> <span class="arrow "></span>
+				</a>
+					<ul class="sub-menu">
+
+
+						<%-- <li><a class=""
+							href="${pageContext.request.contextPath}/showProgramDetails">Program
+								</a></li> --%>
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showProgDetail1">Program Details
+								 Form </a></li>
+
+
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAddmit">Student Adimitted Category Wise Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAddmitLoc">Student
+								Adimitted Location Wise Form </a></li>
+
+						<li><a class=""/jf
+							href="${pageContext.request.contextPath}/showStudSupp">Student Support Scheme Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showStudTran">Student Training Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showHighEdu">Higher Education Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showStudAct">Student Activity (Organized) </a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showStudActAtten">Student
+								Activity (Attended)</a></li>
+								
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showAlumini">Alumini Association/Contribution Activity Form </a></li>
+ 
+
+					</ul></li>
+					
+ 
 
 				<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">Faulty
@@ -79,8 +266,7 @@
 							href="${pageContext.request.contextPath}/showMphillDetails">M.Phill/Ph.D.
 								Details </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudMentor">Student
-								Mentoring Details </a></li>
+							href="${pageContext.request.contextPath}/showStudMentor">Student Mentoring Details </a></li>
 
 
 
@@ -89,15 +275,12 @@
 							href="${pageContext.request.contextPath}/showPublicationDetails">Publication/Presentation
 								Details </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showBookPub">Book
-								Publication Details </a></li>
+							href="${pageContext.request.contextPath}/showBookPub">Book Publication Details </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showJournalPub">Journal
-								Publication Details </a></li>
+							href="${pageContext.request.contextPath}/showJournalPub">Journal Publication Details </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showResearchDetails">Research
-								Project Details </a></li>
+							href="${pageContext.request.contextPath}/showResearchDetails">Research Project Details </a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showConsultancyDetails">Consultancy
@@ -107,13 +290,11 @@
 								Details </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showAwardDetails">Award
-								Recognition Details </a></li>
+							href="${pageContext.request.contextPath}/showAwardDetails">Award Recognition Details </a></li>
 
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showOutReachDetails">Out
-								Reach Activity </a></li>
+							href="${pageContext.request.contextPath}/showOutReachDetails">Out Reach Activity </a></li>
 
 
 						<li><a class=""
@@ -121,8 +302,7 @@
 								Details </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showOutReachContri">Outreach
-								Contribution Details </a></li>
+							href="${pageContext.request.contextPath}/showOutReachContri">Outreach Contribution Details </a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showSubDetails">Subject
@@ -131,110 +311,14 @@
 							href="${pageContext.request.contextPath}/showSWOC">SWOC
 								Details </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showPhdGuide">Ph.D.
-								Guidence Details </a></li>
+							href="${pageContext.request.contextPath}/showPhdGuide">Ph.D.Guidence Details </a></li>
 
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/11">SWOC for HODs
-
-								Details </a></li>
-									
-								<li><a class=""
-							href="${pageContext.request.contextPath}/showFacultyDetails/12">Ph.D Guidance 
-
-								Details </a></li> --%>
-
-
+						
 
 					</ul></li>
-
-				<li class=""><a href="javascript:;"> <i
-						class="fa fa-columns"></i> <span class="title">Research And
-							Innovation </span> <span class="arrow "></span>
-				</a>
-					<ul class="sub-menu">
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showResearchAndInnovationForm">Research
-								And Innovation Form </a></li> --%>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showLinkage">Research
-								And Innovation Linkage Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showMOUs"> MOUsForm
-						</a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showExtAct">Extension
-								Activities Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showGenIssue">Gender
-								Issue Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showComAct">Community
-								Activities Form </a></li>
-
-
-					</ul></li>
-
-
-
-				<li class=""><a href="javascript:;"> <i
-						class="fa fa-columns"></i> <span class="title">Program
-							Details Module </span> <span class="arrow "></span>
-				</a>
-					<ul class="sub-menu">
-
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showProgramDetails">Program
-								</a></li> --%>
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showProgDetail1">Program
-								Details Form </a></li>
-
-
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudAddmit">Student
-								Adimitted Category Wise Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudAddmitLoc">Student
-								Adimitted Location Wise Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudSupp">Student
-								Support Scheme Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudTran">Student
-								Training Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showHighEdu">Higher
-								Education Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudAct">Student
-								Activity (Organized) </a></li>
-								
-								<li><a class=""
-							href="${pageContext.request.contextPath}/showStudActAtten">Student
-								Activity (Attended)</a></li>
-								
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showAlumini">Alumini
-								Association/Contribution Activity Form </a></li>
-
-
-					</ul></li>
-
-				<li class=""><a href="javascript:;"> <i
+					
+					
+					<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">Infrastructure
 							Module </span> <span class="arrow "></span>
 				</a>
@@ -243,8 +327,7 @@
 							href="${pageContext.request.contextPath}/showInfrastructureForm">
 								Form </a></li> --%>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showinfra">Infrastructure
-								Facilities Form </a></li>
+							href="${pageContext.request.contextPath}/showinfra">Infrastructure Facilities Form </a></li>
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showPhysicalFacilities">Physical
 								Facilities Form </a></li>
@@ -258,26 +341,24 @@
 							href="${pageContext.request.contextPath}/showAmeneties">Amenities
 								Form </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showITinfra">IT
-								Infrastructure Form </a></li>
+							href="${pageContext.request.contextPath}/showITinfra">IT Infrastructure Form </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showInternetCon">Internet
-								Connection Form </a></li>
+							href="${pageContext.request.contextPath}/showInternetCon">Internet Connection Form </a></li>
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showeContent">e-Content
 								Form </a></li>
 
 					</ul></li>
-
-				<li class=""><a href="javascript:;"> <i
+					
+					
+						<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">Budget</span> <span
 						class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/budgetInfrastructureFacility">Budget
-								on Infrastructure Facility </a></li>
+							href="${pageContext.request.contextPath}/budgetInfrastructureFacility">Budget on Infrastructure Facility </a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/budgetOnLibrary">
@@ -288,20 +369,19 @@
 								Budget on Physical Facilities </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/budgetOnAcadamicSupportFacilities">Academic
-								Support Facilities </a></li>
+							href="${pageContext.request.contextPath}/budgetOnAcadamicSupportFacilities">Academic Support Facilities </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/budgetOnGreenInitiativesAndWasteMngmnt">Waste
-								Management </a></li>
+							href="${pageContext.request.contextPath}/budgetOnGreenInitiativesAndWasteMngmnt">Waste Management </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/budgetOnLibraryBooks">Budget
-								on Library Books</a></li>
+							href="${pageContext.request.contextPath}/budgetOnLibraryBooks">Budget on Library Books</a></li>
 
 
 					</ul></li>
-
+					
+					
+					
 				<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">Library</span> <span
 						class="arrow "></span>
@@ -309,15 +389,55 @@
 					<ul class="sub-menu">
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/libraryBasicInfo">Basic
-								Information</a></li>
+							href="${pageContext.request.contextPath}/libraryBasicInfo">Basic Information</a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/rareBookInformation">
-								Rare Books Information</a></li>
+							href="${pageContext.request.contextPath}/rareBookInformation">Rare Books Information</a></li>
+								
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showVisionMission">Institute Vision Mission
+								 Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showInstituteSupport">Institute Support Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showActivityOrganized">Activity Organized 
+								Form </a></li>
 
 					</ul></li>
+					
+						<li class=""><a href="javascript:;"> <i
+						class="fa fa-columns"></i> <span class="title">Research And Innovation </span> <span class="arrow "></span>
+				</a>
+					<ul class="sub-menu">
+						<%-- <li><a class=""
+							href="${pageContext.request.contextPath}/showResearchAndInnovationForm">Research
+								And Innovation Form </a></li> --%>
 
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showLinkage">Research And Innovation Linkage Form
+								 </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showMOUs"> MOUs Form
+						</a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showExtAct">Extension Activities Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showGenIssue">Gender Issue Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showComAct">Community Activities Form </a></li>
+
+
+					</ul></li>
+					
+					
+					
+				
 				<li><a href="#"> <i class="fa fa-lock"></i> <span
 						class="title">Logout</span>
 				</a></li>

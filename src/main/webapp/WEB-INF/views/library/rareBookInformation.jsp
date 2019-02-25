@@ -121,7 +121,7 @@
 																style="text-align: left;">Rare Books available
 																in Library : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-1">
+															<div class="col-sm-2">
 																<input type="radio" id="isUsingSoft" name="isUsingSoft"
 																	onclick="showDiv(1)" value="1" checked>Yes <input
 																	type="radio" id="isUsingSoft" name="isUsingSoft"

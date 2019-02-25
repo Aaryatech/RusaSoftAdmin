@@ -85,11 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add Vision </button></a>
-									<a href="#myModal2" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add Mission </button></a>	
-										
-										 <a
+										type="submit" class="btn btn-info">Add</button></a> <a
 									href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
@@ -123,16 +119,17 @@
 													<div class="col-xs-12">
  
 														<div class="col-xs-12">
-														
-														<h5>Visions:</h5>
 
-															<table id="example1"
+															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th>Vision                            </th>
-																		
+																		<th >Academic Year</th>
+																		<th>Title of administrative training program organized for non-teaching staff</th>
+																		<th>From Date</th>
+																		<th >To Date</th>
+																		<th>No. of Participants</th>
 																	</tr>
 																
 																</thead>
@@ -146,39 +143,12 @@
 															</table>
 
 														</div>
-														 <div class="form-group"></div>
-														 	 <div class="form-group"></div>
-														
-														
-														<div class="col-xs-12">
-															<h5>Missions:</h5>
-
-															<table id="example9"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Mission  </th>
-																		
-																	</tr>
-																
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														 <div class="form-group">
+														<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> 
+														</div> -->
 
 													</div>
 
@@ -215,96 +185,113 @@
 
 
 
-
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
+	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog" style="width: 65%">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Institute Vision</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Governance, Leadership and Management  
+</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
 
 
+
+<div class="form-group">
+						<label class="control-label col-sm-3" for="finantialYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+
+						</select>
+					</div>
+					
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="page_name">Vision
-						</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="vis" name="vis"
-								placeholder="vision" value="${page.pageName}" required>
-						</div>
+						<label class="control-label col-sm-6" for="title">
+Title of administrative training program organized for non-teaching staff
+
+
+						</label> <input type="text" class="form-control"
+							id="title" name="title"
+							placeholder="Title of Professional Development Program for Teaching Staff"
+							value="${page.pageName}" required>
+					</div>
+					
+					
+					
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="participant">No. of Participants
+						</label> <input type="text" class="form-control"
+							id="participant" name="participant"
+							placeholder="No. of Participants"
+							value="${page.pageName}" required>
+					</div>
+
+				
+						<div class="form-group">
+
+						<label class="control-label col-sm-3" for="fromDate">From Date
+					 </label> 
+							
+							<input type="date" class="form-control"
+							id="fromDate" name="fromDate"
+							
+							value="${page.pageName}" required>
+							
+							
+							<label class="control-label col-sm-3" for="toDate">To Date
+					 </label> 
+							
+							<input type="date" class="form-control"
+							id="toDate" name="toDate"
+							
+							value="${page.pageName}" required>
+					</div>
+					
 						
-						<input type="hidden"  id="index" name="index"
-								  value="0"  >
+					
+					
+					
+					
+					<!-- Link on Website for Activity Report -->
+
+					<div class="form-group" style="text-align: center;">
+
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					</div>
 
-					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- 	</form> -->
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+					<input type="hidden" id="index" name="index" value="0">
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Institute Mission</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Mission
-						</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="mission" name="mission"
-								placeholder="mission" value="${page.pageName}" required>
-								
-								<input type="hidden"  id="index1" name="index1"
-								  value="0"  >
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getData1()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 
 
 	<script type="text/javascript">
 		function getData() {
-		//alert("hii");
+			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			//alert("i"+i);
-			var vis = document.getElementById("vis").value;
-			
-			//alert("vision"+vis);
-			var dataTable = $('#example1').DataTable();
+			var year = document.getElementById("academicYear").value;
+			var title = document.getElementById("title").value;
+			var participant = document.getElementById("participant").value;
+			var fromDate = document.getElementById("fromDate").value;
+			var toDate = document.getElementById("toDate").value;
+		
+			//alert("noStud"+noStud);
+			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,vis ])
+					[ i + 1,year, title,fromDate, toDate ,participant ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}
@@ -313,22 +300,6 @@
 
 
 
-<script type="text/javascript">
-		function getData1() {
-			//alert("hii");
-			var i1 = parseInt(document.getElementById("index1").value);
-			
-			var mission = document.getElementById("mission").value;
-			
-			//alert("noStud"+noStud);
-			var dataTable = $('#example9').DataTable();
-
-			dataTable.row.add(
-					[ i1 + 1,mission ])
-					.draw();
-			document.getElementById("index1").value = i1 + 1;
-		}
-	</script>
 
 
 </body>

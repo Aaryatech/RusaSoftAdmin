@@ -33,6 +33,25 @@ public class InstituteProfileController {
 	}
 	
 	
+	@RequestMapping(value = "/showInstProf", method = RequestMethod.GET)
+	public ModelAndView showInstProf(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instProf");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
 	@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
 	public ModelAndView showVisionMission(HttpServletRequest request, HttpServletResponse response) {
 
@@ -242,6 +261,27 @@ public class InstituteProfileController {
 	public ModelAndView showCurriculum(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/curriculumCrosscutting");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+
+	@RequestMapping(value = "/showFeedback", method = RequestMethod.GET)
+	public ModelAndView showFeedback(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/feedBack");
 		try {
 
 			
@@ -496,7 +536,121 @@ public class InstituteProfileController {
 	}
 	
 	
+	@RequestMapping(value = "/showAdminDevelopment", method = RequestMethod.GET)
+	public ModelAndView showAdminDevelopment(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/administrativeDevlop");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 	
+	@RequestMapping(value = "/showGenderSensitivity", method = RequestMethod.GET)
+	public ModelAndView showGenderSensitivity(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/genderSensitivity");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showEnvConciuosness", method = RequestMethod.GET)
+	public ModelAndView showEnvConciuosness(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/envConciousness");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showGreenPractices", method = RequestMethod.GET)
+	public ModelAndView showGreenPractices(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/greenPractices");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showSpecInitiatives", method = RequestMethod.GET)
+	public ModelAndView showSpecInitiatives(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/specInitiatives");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showUderTakingProv", method = RequestMethod.GET)
+	public ModelAndView showUderTakingProv(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/provForUndertaking");
+		try {
+
+			
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 	
 	
 

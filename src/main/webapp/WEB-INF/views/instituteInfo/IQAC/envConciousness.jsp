@@ -117,152 +117,112 @@
 
 													<div class="col-xs-12">
 
-														
+                                              <h5> Environmental Consciousness and Sustainability</h5>
+															
+															
+													<div class="form-group">
+													<label class="control-label col-sm-3" for="status">Academic
+													Year : <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
+
+
+													</select>
+                                       </div>
+										</div>			
 													
-
-														  <h4>Evaluation Process & Reforms</h4>
-														
+														 
 														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Internal Assessment is transparent 	 : <span
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Renewable energy sources available  : <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="internalAsses" name="internalAsses"
+																<input type="radio" id="mediacenter" name="mediacenter"
 																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-															<div class="col-sm-2"> Frequency of assessment:</div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control" id="assesFreq"
-																	name="assesFreq" placeholder=" Frequency of assessment"
-																	value="" required>
-
-															</div>
-														</div>
-														
-															
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Institute follows academic calendar :
-
-                                                                   <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="copoMapping" name="copoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-															
-															
-															
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Institute adheres to academic calendar :  
-
-                                                                   <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="copoMapping" name="copoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-														</div>
-														
-														
-														
-														<h4>PO,PSO,CO</h4>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-8" for="planning"
-																style="text-align: left;">Program Outcomes; Program Specifications; Course Outcomes 
-evaluated by Institute:
- <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
 															
 														</div>
 														
 														
 														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Mapping of CO-PO done
-
-                                                                   <span
+															<div class="form-group">
+															
+															<label class="control-label col-sm-3" for="recordingFacility"
+																style="text-align: left;">Total power requirement	: <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="copoMapping" name="copoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Mapping of CO-PSO done
-
-                                                                   <span
+															
+											<div class="col-sm-3">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName"  value="${page.pageName}"
+														required>
+												</div>
+															<label class="control-label col-sm-3" for="recordingFacility"
+																style="text-align: left;">Power generated by renewable energy sources: <span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="copsoMapping" name="copsoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
+															
+											<div class="col-sm-3">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName"  value="${page.pageName}"
+														required>
+												</div>
 														</div>
-														
-														
-															
-														
-														
-															
 														<div class="form-group">
-															<label class="control-label col-sm-6" for="planning"
-																style="text-align: left;">Teaching Plan / Laboratory Plan available :
-
-                                                                   <span
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Use of LED bulbs	 : <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="teachingPlan" name="teachingPlan"
+																<input type="radio" id="mediacenter" name="mediacenter"
 																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
 															
 														</div>
 														
-														
-																<h4> Human Values and Professional Ethics</h4>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for students
-
- <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
 															
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for staff
-
- <span
+															
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="recordingFacility"
+																style="text-align: left;">Power requirements of LED bulbs	: <span
+																class="text-danger">*</span>
+															</label>
+															
+											<div class="col-sm-3">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName"  value="${page.pageName}"
+														required>
+												</div>
+														</div>
+													
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Solid waste management facility available: <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
+																<input type="radio" id="mediacenter" name="mediacenter"
 																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																	id="mediacenter" name="mediacenter" value="0">No
+															</div>
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Liquid waste management available: <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="mediacenter" name="mediacenter"
+																	value="1" checked>Yes <input type="radio"
+																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
 															
 														</div>
@@ -270,61 +230,32 @@ evaluated by Institute:
 														
 														
 														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for governing body
-
-                                                                   <span
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> E-waste management facility: <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="copoMapping" name="copoMapping"
+																<input type="radio" id="mediacenter" name="mediacenter"
 																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for Administration
-
-                                                                   <span
+															
+															<label class="control-label col-sm-3" for="mediacenter"
+																style="text-align: left;"> Rain water harvesting and utilization: <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="copsoMapping" name="copsoMapping"
+																<input type="radio" id="mediacenter" name="mediacenter"
 																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
+															
+															
 														</div>
 														
 															
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Display of core values on websites and in the
-                                                      Institute for the stake holders 
-
-
-                                                                   <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="copoMapping" name="copoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-															
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Organization of national festivals
-
- <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-															
-															
-															
-														</div>
+														
+														
 														
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">

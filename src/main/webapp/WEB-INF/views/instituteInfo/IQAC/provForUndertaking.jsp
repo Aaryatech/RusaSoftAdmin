@@ -84,8 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
+								<a
 									href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
@@ -115,40 +114,55 @@
 
 												<div>
 
+	                                            <div class="col-xs-12">
+													
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="isReform"
+																style="text-align: left;"> Provision for undertaking field projects / internship :
+
+                                                         <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio"  onclick="showReforms(this.value)" id="istransparent" name="istransparent"
+																	value="1"   checked>Yes 
+																	<input type="radio"
+																	id="istransparent" onclick="showReforms(this.value)"  name="istransparent" value="0">No
+															</div>
+															
+															
+														</div>
+														
+														
+														
+														
+						<div class="form-group" id="ex1">
+															<label class="control-label col-sm-2" for="page_name">No. of Students undertaking FP /Internship 
+																:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="iqacName"
+																	name="iqacName"
+																	value="${page.pageName}" required>
+															</div>
+														</div>
+
+                                                        </div>
+                                                        
+                                                        
+                                                    
+
 
 													<div class="col-xs-12">
- 
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th > Academic Year</th>
-																		<th>Title of Distinctiveness</th>
-																		<th >Applicable from Academic Year</th>
-																		
-																		<th>Beneficiary Stake Holders</th>
-																	</tr>
-																
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														<!-- <div class="form-group">
+													
+															
+														 <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> -->
+														</div> 
 
 													</div>
 
@@ -192,31 +206,14 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Incubation Centre</h4>
+					<h4 class="modal-title">Mechanism of Examination related Grievances
+
+</h4>
 				</div>
 				<div class="modal-body">
-
-
-<div class="form-group">
-						<label class="control-label col-sm-3" for="academicYear1">Academic
-							Year</label> <select id="academicYear1" name="academicYear1"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-
-						</select>
-					</div>
-<div class="form-group">
-
-						<label class="control-label col-sm-3" for="title">Title of Distinctiveness
-						</label> <input type="text" class="form-control"
-							id="title" name="title"
-							placeholder="Title of Distinctiveness"
-							value="${page.pageName}" required>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="academicYear">Applicable from Academic
+				
+				<div class="form-group">
+						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
@@ -225,20 +222,31 @@
 
 						</select>
 					</div>
+				
 					
-					<div class="form-group">
+				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="befStake">Beneficiary Stake
+						<label class="control-label col-sm-3" for="Grievances">Grievances
 						</label> <input type="text" class="form-control"
-							id="befStake" name="befStake"
-							placeholder="Beneficiary Stake"
+							id="grievances" name="grievances"
+							placeholder="Grievances"
+							value="${page.pageName}" required>
+					</div>
+				
+			
+				
+				<div class="form-group">
+
+						<label class="control-label col-sm-3" for="remark">Remark
+						</label> <input type="text" class="form-control"
+							id="remark" name="remark"
+							placeholder="Remark"
 							value="${page.pageName}" required>
 					</div>
 
 				
 					
-					
-					
+			
 					
 					<!-- Link on Website for Activity Report -->
 
@@ -259,22 +267,65 @@
 
 
 	<script type="text/javascript">
-		function getData() {
+		
+		
+		function showReforms(temp) {
 			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var year1 = document.getElementById("academicYear1").value;
-			var year = document.getElementById("academicYear").value;
-			var befStake = document.getElementById("befStake").value;
-			
-			var title = document.getElementById("title").value;
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, year1,title,year, befStake])
-					.draw();
-			document.getElementById("index").value = i + 1;
+			//var remark = document.getElementById("isReform").value;
+			//alert(temp);
+		if(temp ==1){
+			document.getElementById("ex1").style ="visible"
+				
 		}
+		else{
+			
+			document.getElementById("ex1").style = "display:none"
+			
+		}
+		}
+				
+	
+	</script>
+	
+	<script type="text/javascript">
+	
+	 function showReforms2(a) {
+			//alert("hii");
+			//var remark = document.getElementById("isReform").value;
+			//alert(a);
+		if(a ==1){
+			document.getElementById("ex2").style ="visible"
+				
+		}
+		else{
+			
+			document.getElementById("ex2").style = "display:none"
+			
+		}
+		}
+				
+		
+	
+	</script>
+	
+	<script type="text/javascript">
+	 function showReforms3(b) {
+			//alert("hii");
+			//var remark = document.getElementById("isReform").value;
+			//alert(temp);
+		if(b ==1){
+			document.getElementById("ex3").style ="visible"
+				
+		}
+		else{
+			
+			document.getElementById("ex3").style = "display:none"
+			
+		}
+		}
+				
+		
+		
 	</script>
 
 

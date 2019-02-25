@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()" >
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -84,12 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal"
-														data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a>  --%>
-										<a
+								<a href="${pageContext.request.contextPath}/showInstituteList"><button
+										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -100,16 +96,17 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertCmsForm"
 										method="post" enctype="multipart/form-data"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
+													<i class="fa fa-home"></i> Register Form
 											</a></li>
-											
+
+
 										</ul>
 
 										<div class="tab-content">
@@ -118,83 +115,119 @@
 												<div>
 
 
-													<div class="col-xs-12">
 
-														<h5 class="title pull-left">
-															<strong>Academic Details</strong>
-														</h5>
-
-														<div class="col-xs-12"></div>
-														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
-															Qualifications : <span class="text-danger">*</span>
-														</label> -->
-														<div class="col-xs-12">
-
-
-
-
-															<table id="example1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th width="30%">Qualification</th>
-																		<th width="30%">Year of Passing</th>
-																		<th width="30%">Class</th>
-																	</tr>
-																</thead>
-
-
-
-															</table>
-
-
-
-
-														</div>
-
-														
+													
 														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
+															<label class="control-label col-sm-2" for="page_name">Date of Establishment of IQAC
+<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="date" class="form-control" id="page_name"
+																	name="page_name" placeholder="Institute Name"
+																	value="${page.pageName}">
 															</div>
 														</div>
 
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Name of alternate facility with IQAC :
+															<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order" placeholder="Name of alternate facility with IQAC"
+																	value="" required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Contact No of Alternate Faculty Associated  :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order" placeholder="Contact No"
+																	value="" required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Phone No.:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order" placeholder="Phone No."
+																	value="" required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Fax No.:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																	maxlength="10" class="form-control" id="page_order"
+																	name="page_order" placeholder="Fax No." required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">
+															Registered Email :<span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order"
+																	placeholder="abc@xyz.com"
+																	required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Alternate Email :
+																:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="email" class="form-control" id="page_order"
+																	name="page_order" placeholder="abc@xyz.com " required>
+															</div>
+														</div>
+
+
+
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
+													
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
-
-
-													<div class="clearfix"></div>
-
 												</div>
 
-											</div>
-										</div>
+	
+
+										
+</div>
+										
+</div>
+</div>
 									</form>
 								</div>
 
 							</div>
-						</div>
 
+						</div>
 					</section>
 				</div>
 
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
-		<!-- END CONTENT -->
-
-
 
 	</div>
-	<!-- END CONTAINER -->
-	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+	<!-- MAIN CONTENT AREA ENDS -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
-	
+	<!-- END CONTENT -->
+
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -211,7 +244,7 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-									<div class="form-group" id="ex1">
+									<div class="form-group">
 							<label class="control-label col-sm-3" for="page_name">Qualification</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
 								<option value="Diploma">Diploma</option>
@@ -229,12 +262,12 @@
 						</div>
 						
 						
-						<div class="form-group" id="abc">
+						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Other Qualification
+							<label class="control-label col-sm-3" for="page_name">Other Qualification
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualName" required
+								<input type="text" class="form-control" id="qualName"
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -245,7 +278,7 @@
 							<label class="control-label col-sm-1" for="page_name">Class
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="className" required
+								<input type="text" class="form-control" id="className"
 									name="className" placeholder="" value="${page.pageName}"
 									required>
 							</div>
@@ -267,97 +300,18 @@
 		</div>
 	</div>
 	
-	
-	
 
 
-	<script>
-	function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("qualType").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
 
-			document.getElementById("abc").style = "visible"
-			
-				//document.getElementById("ex1").style = "display:none"
-					// $("#ex1").prop("disabled", true);
-			
-				//$('#ex1').attr('disabled', true);
-		} 
-		else{
-			document.getElementById("abc").style = "display:none"
-		}
-	
-	}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-	
-	</script>
-	
-	<script type="text/javascript">
-	
-	
-	
-	
-	
-	function getData() {
-	//alert("hii");
-		var i=0;
-		var qualType=document.getElementById("qualType").value
-		var qualName=document.getElementById("qualName").value
-		//alert(qualName);
-		var className=document.getElementById("className").value
-		var year=document.getElementById("year").value
-		var temp;
-		if (qualType == 7) {
 
-			temp=qualName;
-			//alert(temp);
-		} 
-		else{
-			temp=qualType;
-		}
 
-		var dataTable = $('#example1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					temp,
-					year,
-					className
-						 ])
-		.draw();
-		
-		
-		
-	}
 
-	</script>
-	
-	
+	<!-- END CONTAINER -->
+	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+
 
 </body>
 </html>
-
-
-
-<!-- 
-														<h5 class="title pull-left">
-																<strong>Consultancy</strong>
-															</h5>
-															<div class="col-sm-1"></div>
-															<div class="col-sm-2">
-																Yes <input type="radio" name="consultancy"
-																	id="consultancy" checked value="0"> No<input
-																	type="radio" name="consultancy" id="consultancy"
-																	value="1">
-															</div> -->

@@ -234,7 +234,7 @@
 																</div>
 
 
-																<label class="control-label col-sm-1" for="smallheading">Year
+																<label class="control-label col-sm-2" for="smallheading">Year
 																	of Publication : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
