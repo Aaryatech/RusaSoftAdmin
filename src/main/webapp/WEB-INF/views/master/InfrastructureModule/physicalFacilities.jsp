@@ -74,8 +74,8 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="page_name">Physical
-												Facilities :<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="page_name">
+												Facilities for Differently Abled:<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="hodName"
@@ -152,16 +152,39 @@
 											<label class="control-label col-sm-2" for="page_name">Any
 												Other Similar Facility :<span class="text-danger">*</span>
 											</label>
-											<div class="col-sm-6">
+											<%-- <div class="col-sm-6">
 												<input type="text" class="form-control" id="hodName"
 													name="hodName" placeholder="Any Other Similar Facility"
 													value="${page.pageName}" required>
+											</div> --%>
+										
+									
+										
+										<div class="col-xs-8">
+															<table id="example1"
+																class="table table-striped dt-responsive display">
+																<thead>
+																	<tr>
+																		<th width="10%">Sr No</th>
+																			
+																		<th width="30%">Facility&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		<a href="#myModal"
+														data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a></th>
+																	</tr>
+																</thead>
+
+
+
+															</table>
+															</div>
+										
 											</div>
-											<!-- <div class="col-sm-2">
-												<button type="submit" class="btn btn-primary">Add</button>
-											</div>
- -->
-										</div>
+										
+										
+										
 
 										</div>
 
@@ -175,6 +198,75 @@
 		</section>
 		</section>
 	</div>
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Consultancy Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+								<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Facility
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="nature" placeholder="Facility"
+									name="nature" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	                    </div>
+	                    
+	                    	
+						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+				<!-- 	</form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+
+	
+	<script type="text/javascript">
+	function getData() {
+	//alert("hii");
+		var i = parseInt(document.getElementById("index").value);
+		var nature=document.getElementById("nature").value
+		
+		var dataTable = $('#example1')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					
+					nature
+					
+					
+						 ])
+		.draw();
+		
+		document.getElementById("index").value = i + 1;
+		
+		
+	}
+
+	</script>
+	
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

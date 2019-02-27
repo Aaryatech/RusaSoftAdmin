@@ -79,9 +79,10 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
+												<th width="10%">Academic Year</th>
 												<th width="15%">Name of Employer</th>
-												<th width="15%">Name of Program</th>
-												<th width="15%">No. of Students Placed</th>
+												<th width="10%">Name of Program</th>
+												<th width="10%">No. of Students Placed</th>
 												<th width="10%">Address of Employer</th>
 												<th width="10%">Contact Details</th>
 												<th width="15%">Package Offered</th>
@@ -167,7 +168,21 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-								
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+							
+								<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
+					
 									
 						
 						<div class="form-group">
@@ -254,6 +269,7 @@
 	function getData() {
 	//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value;
 		var empName=document.getElementById("empName").value
 		var progName=document.getElementById("progName").value
 		var stud=document.getElementById("stud").value
@@ -272,6 +288,7 @@
 		.add(
 				[
 					i+1,
+					academicYear,
 					empName,
 					progName,
 					stud,

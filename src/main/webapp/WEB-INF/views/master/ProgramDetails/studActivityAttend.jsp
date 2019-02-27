@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -81,11 +81,12 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
-												<th width="15%">Name of Activity</th>
-												<th width="15%">Date</th>
+												<th width="10%">Academic Year</th>
+												<th width="1%">Name of Activity</th>
+												<th width="10%">Date</th>
 												<th width="10%">Year</th>
 												<th width="10%">Branch</th>
-												<th width="10%">No. of Students</th>
+												<th width="10%">No. of Students Participated</th>
 												<th width="10%">Level of Activity</th>
 											</tr>
 
@@ -226,23 +227,42 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-								
-									<input type="hidden" id="index" name="index" value="0">
+								<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+							
+										<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
 						
 					
 									<div class="form-group">
 						<label class="control-label col-sm-6" for="page_name">Name of Activity</label> <select
-								id="cat" name="sem" class="form-control"  required>
+								id="cat" name="cat" onchange="showForm()" class="form-control"  required>
 								<option value="Sports">Sports</option>
 								<option value="Cultural">Cultural</option>
-								<option value="Other Competition">Other Competition</option>
-								
+								<option value="7">Other Competition</option>
 							
-							
-
-
 							</select>
 						</div>
+						
+						<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Other Competition
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherScheme"
+									name="otherScheme" value="${page.pageName}" placeholder="Other Competition"
+									required>
+							<!-- </div> -->
+	</div>
 	
 		<div class="form-group">
 						
@@ -256,15 +276,16 @@
 	</div>
 	
 	<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Year
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="year"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
+						<label class="control-label col-sm-6" for="academicYear">
+							Year</label> <select id="year" name="year"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
 							
 									
 						
@@ -274,7 +295,7 @@
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="branch"
-									name="subTaut" value="${page.pageName}"
+									name="subTaut" value="${page.pageName}" placeholder="Branch"
 									required>
 							<!-- </div> -->
 	</div>
@@ -283,12 +304,13 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">No. of Students
+							<label class="control-label col-sm-6" for="page_name">No. of Students Participated
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="stud"
-									name="subTaut" value="${page.pageName}"
+									name="subTaut" value="${page.pageName}"  placeholder="No. of Students Participated"
 									required>
+									<input type="hidden" id="index" name="index" value="0">
 							<!-- </div> -->
 	</div>
 						
@@ -318,7 +340,9 @@
 	function getData() {
 	//alert("hii");
 		var i = parseInt(document.getElementById("index").value);
-		var empName=document.getElementById("cat").value
+		var academicYear=document.getElementById("academicYear").value
+		var year=document.getElementById("year").value
+		var cat=document.getElementById("cat").value
 		var progName=document.getElementById("date").value
 		var address=document.getElementById("year").value
 		var contact=document.getElementById("branch").value
@@ -326,7 +350,17 @@
 		var stud=document.getElementById("stud").value
 		var package1=document.getElementById("level").value
 		
-	
+		var otherScheme=document.getElementById("otherScheme").value
+		//alert(stud);
+		var temp;
+		if (cat == 7) {
+
+			temp=otherScheme;
+			//alert(temp);
+		} 
+		else{
+			temp=cat;
+		}
 		
 		
 		//alert(stud);
@@ -338,9 +372,11 @@
 		.add(
 				[
 					i+1,
-					empName,
+					academicYear,
+					temp,
 					progName,
 					address,
+					year,
 					contact,
 					stud,
 					package1
@@ -348,10 +384,33 @@
 						 ])
 		.draw();
 		
-		
 		document.getElementById("index").value = i + 1;
+		
 	}
 
+	
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("cat").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->

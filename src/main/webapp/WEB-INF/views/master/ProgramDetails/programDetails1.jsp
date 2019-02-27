@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" "  onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -75,14 +75,17 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
+												<th >Year</th>
 												<th >Vision</th>
 												<th >Mission</th>
-												<th >Program Outcome (as per NBA Manual)</th>
-												<th>UG/PG</th>
 												
-													<th>Program Specific Outcomes(Define By the Program )</th>
-												<th >UG/PG &nbsp; &nbsp;<a href="#myModal"	data-toggle="modal"><button type="submit"
+												<th >Program Educational Objectives</th>
+												<th>UG/PG</th>
+												<th >Program Outcome (as per Accreditation Manual)</th>
+											
+													<th width="20%">Program Specific Outcomes(Define By the Program )&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal" data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
+												
 											</tr>
 
                                                </thead>
@@ -94,17 +97,14 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
-												
-												<th >Program Outcome (as per NBA Manual)</th>
+												<th >Year</th>
+												<th >Program Outcome (as per Accreditation Manual)</th>
 											
 												
 													<th >PSO(Define By the Program )</th>
 													<th >Mapping(Yes/No)</th>
 												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												
 												<a href="#myModal2"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 											</tr>
@@ -118,273 +118,35 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
-												<th >Program Type</th>
-												<th >Duration Months</th>
-												<th >Name of Program</th>
-												<!-- <th width="30%" style="text-align: center;" colspan="2">No.
-													of Students Admitted</th> -->
-												<th >Date/Year of Introduction</th>
-												<th >Approved by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal1"	data-toggle="modal"><button type="submit"
+												<th width="10%">Year</th>
+												<th width="10%" >Program Type</th>
+												<th  width="5%">Duration Months</th>
+												<th  width="10%">Name of Program</th>
+												 <th width="20%" style="text-align: center;" colspan="2">No.
+													of Students Admitted</th> 
+													
+												<th width="20%">Date/Year of Introduction</th>
+												<th width="20%" >Approved by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="#myModal1"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a></th>
 												
 											</tr>
-<!-- 
+
 											<tr>
 												<th width="5%"></th>
 												<th width="10%"></th>
 												<th width="10%"></th>
-												<th width="20%"></th>
-												<th width="15%">Sanctioned Intake</th>
-												<th width="15%">Admitted Student</th>
+												<th width="5%"></th>
 												<th width="10%"></th>
-												<th width="15%"></th>
-											</tr> -->
+												<th width="10%">Sanctioned Intake</th>
+												<th width="10%">Admitted Student</th>
+												<th width="20%"></th>
+												<th width="20%"></th>
+											</tr> 
 										</thead>
 </table>
 
-<!-- 
-										<tbody>
 
-											<tr>
-												<td>1</td>
-												<td>Certificate</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>UG</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-
-											<tr>
-												<td>3</td>
-												<td>PG</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-
-											<tr>
-												<td>4</td>
-												<td>Diploma</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-
-											<tr>
-												<td>5</td>
-												<td>Ph.D.</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-
-
-
-											<tr>
-												<td>6</td>
-												<td>Post Doc.</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-
-											<tr>
-												<td>7</td>
-												<td>Any Other</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">BOS/AC</option>
-															<option value="1">Industry</option>
-															<option value="2">AICTE</option>
-															<option value="3">NCTE</option>
-															<option value="4">MCI</option>
-															<option value="5">DCI</option>
-															<option value="6">PCI</option>
-															<option value="7">Any Other</option>
-
-
-														</select>
-													</div></td>
-
-											</tr>
-											<tr>
-												<td></td>
-												<td><button type="submit" class="btn btn-primary">Add</button></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td><button type="submit" class="btn btn-primary">Add</button></td>
-											</tr>
-										</tbody> -->
 									
 								</div>
 </div>
@@ -434,14 +196,27 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
+							<input type="hidden" class="form-control" id="index"
+							name="index"  value="0">
 							
+							
+							<div class="form-group">
+						<label class="control-label col-sm-3" for="finantialYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+	<option value="2015-2016">2015-2016</option>
+						</select>
+					</div>
 								
 						<div class="form-group">
 						
 							<label class="control-label col-sm-3" for="page_name">Vision
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="vision"
+								<input type="text" class="form-control" id="vision"  placeholder="Vision"
 									name="code" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -452,48 +227,24 @@
 							<label class="control-label col-sm-3" for="page_name">Mission
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="mission"
+								<input type="text" class="form-control" id="mission"  placeholder="Mission"
 									name="code" value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
-			
-						<div class="form-group">
+	
+	
+	<div class="form-group">
 						
-							<label class="control-label col-sm-10" for="page_name">Program Outcome (as per NBA Manual)
+							<label class="control-label col-sm-6" for="page_name">Program Educational Objective
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="po"
-									name="code" value="${page.pageName}"
+								<input type="text" class="form-control" id="objective" placeholder="Program Educational Objective"
+									name="objectives" value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
-						
-				
-									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">UG/PG</label> <select
-								id="ug" name="ug" class="form-control" onchange="showForm()" required>
-								<option value="UG">UG</option>
-								<option value="PG">PG</option>
-								
-							
-							</select>
-						</div>
-						
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-10" for="page_name">Program Specific Outcomes(Define By the Program )
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="pso"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-		
-									<div class="form-group">
+				<div class="form-group">
 						<label class="control-label col-sm-2" for="page_name">UG/PG</label> <select
 								id="pg" name="pg" class="form-control"  required>
 								<option value="UG">UG</option>
@@ -502,6 +253,32 @@
 							
 							</select>
 						</div>
+						<div class="form-group">
+						
+							<label class="control-label col-sm-10" for="page_name">Program Outcome (as per Accreditation Manual)
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="po" placeholder="Program Outcome (as per Accreditation Manual)"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+				
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-10" for="page_name">Program Specific Outcomes(Define By the Program )
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="pso" placeholder="Program Specific Outcomes(Define By the Program )"
+									name="subTaut" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+		
+								
 					
 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
@@ -512,102 +289,7 @@
 	</div>
 	
 	
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Program Details</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							
-							<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Program Type</label> <select
-								id="type" name="ug" class="form-control" required>
-								
-								<option value="Certificate">Certificate</option>
-								<option value="UG">UG</option>
-								<option value="PG">PG</option>
-								<option value="Diploma">Diploma</option>
-								<option value="Ph.D.">Ph.D.</option>
-								<option value="Post Doc.">Post Doc.</option>
-								<option value="-">Any Other</option>
-								
-							
-							</select>
-						</div>
-						
-								
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Duration(in months)
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="duration"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-								
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Name of Program
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="name"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-			
-						<div class="form-group">
-						
-							<label class="control-label col-sm-8" for="page_name">Date/Year of Introduction
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="date"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-				
-						
-						
-							<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Approved By</label> <select
-								id="approve" name="approve" class="form-control" onchange="showForm()" required>
-								
-								<option value="BOS/AC">BOS/AC</option>
-															<option value="Industry">Industry</option>
-															<option value="AICTE">AICTE</option>
-															<option value="NCTE">NCTE</option>
-															<option value="MCI">MCI</option>
-															<option value="DCI">DCI</option>
-															<option value="PCI">PCI</option>
-															<option value="-">Any Other</option>
-						
-								
-							
-							</select>
-						</div>
-						
-					
-					
-
-						<button type="submit" class="btn btn-primary" onclick="getData1()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
@@ -625,6 +307,19 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
+								<input type="hidden" class="form-control" id="index1"
+							name="index1"  value="0">
+								
+							<div class="form-group">
+						<label class="control-label col-sm-3" for="finantialYear">Academic
+							Year</label> <select id="academicYear1" name="academicYear1"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+	<option value="2015-2016">2015-2016</option>
+						</select>
+					</div>
 						
 									<div class="form-group">
 						<label class="control-label col-sm-6" for="page_name">Program Outcome (as per NBA)</label> <select
@@ -686,13 +381,272 @@
 		</div>
 	</div>
 	
+	
+	
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
+		class="modal fade" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title">Program Details</h4>
+				</div>
+				<div class="modal-body">
+					<%-- <form role="form"
+						action="${pageContext.request.contextPath}/showModuleForm"
+						method="get"> --%>
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+							
+							
+								<input type="hidden" class="form-control" id="count"
+							name="count"  value="0">
+								
+							<div class="form-group">
+						<label class="control-label col-sm-3" for="finantialYear">Academic
+							Year</label> <select id="academicYear2" name="academicYear2"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+	<option value="2015-2016">2015-2016</option>
+						</select>
+					</div>
+							<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Program Type</label> <select
+								id="type" name="ug" class="form-control"  onchange="showForm1()" required>
+								
+								<option value="Certificate">Certificate</option>
+								<option value="UG">UG</option>
+								<option value="PG">PG</option>
+								<option value="Diploma">Diploma</option>
+								<option value="Ph.D.">Ph.D.</option>
+								<option value="Post Doc.">Post Doc.</option>
+								<option value="7">Any Other</option>
+								
+							
+							</select>
+						</div>
+						
+								<div class="form-group" id="xyz">
+						
+							<label class="control-label col-sm-6" for="page_name">Other Type
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherType"
+									name="otherType" value="${page.pageName}" placeholder="Other Type"
+									required>
+							<!-- </div> -->
+	</div>
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Duration(in months)
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="duration" placeholder="Duration(in months)"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Name of Program
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="name" placeholder="Name of Program"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Sanctioned Intake
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="sancIntake" placeholder="Sanctioned Intake"
+									name="sancIntake" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+	
+	
+	<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Admitted Student
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="admitStud" placeholder="Admitted Student"
+									name="admitStud" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+			
+						<div class="form-group">
+						
+							<label class="control-label col-sm-8" for="page_name">Date/Year of Introduction
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="date" class="form-control" id="date" placeholder="Date/Year of Introduction"
+									name="code" value="${page.pageName}"
+									required>
+							<!-- </div> -->
+	</div>
+						
+				
+						
+						
+							<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Approved By</label> <select
+								id="approve" name="approve" class="form-control" onchange="showForm()" required>
+								
+								<option value="BOS/AC">BOS/AC</option>
+															<option value="Industry">Industry</option>
+															<option value="AICTE">AICTE</option>
+															<option value="NCTE">NCTE</option>
+															<option value="MCI">MCI</option>
+															<option value="DCI">DCI</option>
+															<option value="PCI">PCI</option>
+															<option value="7">Any Other</option>
+						
+								
+							
+							</select>
+						</div>
+						<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Other Approval
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherApproval"
+									name="otherApproval" value="${page.pageName}" placeholder="Other Approval"
+									required>
+							<!-- </div> -->
+	</div>
+					
+					
+
+						<button type="submit" class="btn btn-primary" onclick="getData1()">Submit</button>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script type="text/javascript">
+function getData1() {
+		
+		var i = parseInt(document.getElementById("count").value);
+		var year = document.getElementById("academicYear2").value;
+		var type=document.getElementById("type").value
+		var sancIntake=document.getElementById("sancIntake").value
+		var admitStud=document.getElementById("admitStud").value
+		//alert(vision);
+		
+		var duration=document.getElementById("duration").value
+		//alert(mission);
+		var name=document.getElementById("name").value
+		//alert(po);
+		
+		var date=document.getElementById("date").value
+		//alert(ug);
+		var approve=document.getElementById("approve").value
+		var otherApproval=document.getElementById("otherApproval").value
+		var otherType=document.getElementById("otherApproval").value
+		//alert(approve);
+		
+		var temp;
+		if (type == 7) {
+
+			temp=otherType;
+			//alert(temp);
+		} 
+		else{
+			temp=type;
+		}
+		
+		var temp1;
+		if (approve == 7) {
+
+			temp1=otherApproval;
+			//alert(temp);
+		} 
+		else{
+			temp1=approve;
+		}
 	
+		var dataTable = $('#example9')
+		.DataTable();
+		
+		dataTable.row
+		.add(
+				[
+					i+1,
+					year,
+					temp,
+					duration,
+					name,
+					sancIntake,
+					admitStud,
+					date,
+					temp1
+					
+						 ])
+		.draw();
+		
+		
+		document.getElementById("count").value = i + 1;
+	}
+
 	
+function showForm() {
+	//document.getElementById("abc").style = "display:none"
+		var qualType=document.getElementById("approve").value
+		alert("qualType::"+qualType);
+		
+		if (qualType == 7) {
+
+			document.getElementById("abc").style = "visible"
+			
+				
+		} 
+		else{
+			document.getElementById("abc").style = "display:none"
+		}
+	
+	}
+	
+function showForm1() {
+	//document.getElementById("abc").style = "display:none"
+		var qualType=document.getElementById("type").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 7) {
+
+			document.getElementById("xyz").style = "visible"
+			
+				
+		} 
+		else{
+			document.getElementById("xyz").style = "display:none"
+		}
+	
+	}
+function hideText() {
+	//alert("hii");
+	document.getElementById("abc").style = "display:none"
+		document.getElementById("xyz").style = "display:none"
+		
+	
+	}
 
 	function getData3() {
 		
-		var i=0;
+		var i = parseInt(document.getElementById("index1").value);
+		var year = document.getElementById("academicYear1").value;
 		var nba=document.getElementById("nba").value
 		//alert(vision);
 		
@@ -712,6 +666,7 @@
 		.add(
 				[
 					i+1,
+					year,
 					nba,
 					ps,
 					stu,
@@ -721,13 +676,14 @@
 						 ])
 		.draw();
 		
-		
+		document.getElementById("index1").value = i + 1;
 		
 	}
 
 	function getData() {
 	
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
+		var objective=document.getElementById("objective").value
 		var vision=document.getElementById("vision").value
 		//alert(vision);
 		
@@ -736,12 +692,12 @@
 		var po=document.getElementById("po").value
 		//alert(po);
 		
-		var ug=document.getElementById("ug").value
+		//var ug=document.getElementById("ug").value
 		//alert(ug);
 		var pso=document.getElementById("pso").value
 		//alert(pso);
 		
-		
+		var year = document.getElementById("academicYear").value;
 		var pg=document.getElementById("pg").value
 		//alert(pg);
 		//alert("hii");
@@ -752,59 +708,23 @@
 		.add(
 				[
 					i+1,
+					year,
 					vision,
 					mission,
+					objective,
+					pg,
 					po,
-					ug,
-					pso,
-					pg
+					pso
+					
 					
 						 ])
 		.draw();
 		
-		
-		
-	}
-	
-	
-	function getData1() {
-		
-		var i=0;
-		var type=document.getElementById("type").value
-		//alert(vision);
-		
-		var duration=document.getElementById("duration").value
-		//alert(mission);
-		var name=document.getElementById("name").value
-		//alert(po);
-		
-		var date=document.getElementById("date").value
-		//alert(ug);
-		var approve=document.getElementById("approve").value
-		//alert(approve);
-		
-		
-	
-		var dataTable = $('#example9')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					type,
-					duration,
-					name,
-					date,
-					approve
-					
-						 ])
-		.draw();
-		
-		
+		document.getElementById("index").value = i + 1;
 		
 	}
-
+	
+	
 	
 	
 	</script>
@@ -826,12 +746,3 @@
 </body>
 </html>
 
-<!-- <select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">State</option>
-															<option value="1">Other State</option>
-															<option value="2">NRI</option>
-															<option value="3">PIO</option>
-															<option value="4">Foreign</option>
-															<option value="5">PWD</option>
-														</select> -->

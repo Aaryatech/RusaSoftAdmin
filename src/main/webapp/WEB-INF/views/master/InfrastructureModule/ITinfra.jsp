@@ -392,7 +392,7 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">No. of Computers
+							<label class="control-label col-sm-6" for="page_name">No. of Computers with LAN
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="qualType"

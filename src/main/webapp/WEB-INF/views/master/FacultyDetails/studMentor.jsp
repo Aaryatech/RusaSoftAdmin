@@ -135,7 +135,7 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th width="45%">Year</th>
+																		<th width="45%">Academic Year</th>
 																		<th width="45%">No of Students</th>
 																	</tr>
 																</thead>
@@ -224,15 +224,19 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId">
+							
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
 						
 								
 						
 	<div class="form-group">
-							<label class="control-label col-sm-6" for="page_name">Year of Passing</label> <select
+							<label class="control-label col-sm-6" for="page_name">Academic Year</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
 								<option value="2018-2019">2018-2019</option>
 								<option value="2017-2018">2017-2018</option>
 								<option value="2016-2017">2016-2017</option>
+									<option value="2016-2017">2015-2016</option>
 								
 							</select>
 						</div>
@@ -258,7 +262,7 @@
 <script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 		var year=document.getElementById("qualType").value;
 		//alert("year"+year);
 		var noStud=document.getElementById("hodName").value;
@@ -275,6 +279,7 @@
 						 ])
 		.draw();
 		
+		document.getElementById("index").value = i + 1;
 		
 		
 	}

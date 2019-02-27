@@ -131,8 +131,29 @@
 																		name="dob" placeholder="Name of Project" value=""
 																		required>
 																</div>
+                                                            <label class="control-label col-sm-2" for="smallheading">Year
+																	of Project Sanction : <span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-3">
+																	<select
+								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
+								<option value="2018-2019">2018-2019</option>
+								<option value="2017-2018">2017-2018</option>
+								<option value="2016-2017">2016-2017</option>
+									<option value="2016-2017">2015-2016</option>
+								
+							</select>
+																</div>
 
 
+
+
+
+
+															</div>
+																<div class="form-group">
+																
+																
 																<label class="control-label col-sm-2" for="page_order">Sponsoring
 																	Authority :<span class="text-danger">*</span>
 																</label>
@@ -143,10 +164,7 @@
 																		name="issue" placeholder="Sponsoring Authority"
 																		value="" required>
 																</div>
-
-
-
-															</div>
+																</div>
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
@@ -243,15 +261,7 @@
 
 
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Year
-																	of Project Sanction : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Year of Project Sanction"
-																		value="" required>
-																</div>
-
+																
 
 																<label class="control-label col-sm-2" for="page_order">From
 																	Date :<span class="text-danger">*</span>

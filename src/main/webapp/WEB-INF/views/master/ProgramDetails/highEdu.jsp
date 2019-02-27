@@ -175,6 +175,23 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId">
+							
+							
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+							
+								<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
+					
 						<div class="form-group">
 							<label for="modalname1" class="form-label">Program Type</label> <select
 								id="qualType" name="salutation" class="form-control" required>
@@ -235,6 +252,7 @@
 	function getData() {
 	//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value;
 
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
@@ -247,6 +265,7 @@
 		.add(
 				[
 					i+1,
+					academicYear,
 					qualType,
 					qualName,
 					className

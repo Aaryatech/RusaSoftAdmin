@@ -133,16 +133,20 @@
 																	<thead>
 																		<tr>
 																			<th width="5%">Sr No</th>
-																			<th width="10%">Year</th>
+																			
+																			<th width="10%">Academic Year</th>
 																			<th width="10%">Semester</th>
-																			<th width="10%">Subject Code</th>
-																			<th width="15%">Subject Taught</th>
-																			<th width="20%">Subject Type
+																			<th width="10%">Subject Code Taught</th>
+																			<th width="10%">Subject Taught</th>
+																			<th width="15%">Subject Type
 																				</th>
+																				<th width="15%">Is CBCS
+																				</th>
+																				<th width="10%">Course Outcome</th>
 																			<th width="15%">No. of Students Appeared</th>
 																			<th width="10%">Passed</th>
 																			<th width="10%">% of Result</th>
-																			<th width="10%">Course Outcome</th>
+																			
 																			<th width="30%">Action</th>
 																		</tr>
 																	</thead>
@@ -215,14 +219,26 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
-							
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+						<div class="form-group">
+							<label class="control-label col-sm-6" for="page_name">Academic Year</label> <select
+								id="academicYear" name="qualType" class="form-control" onchange="showForm()" required>
+								<option value="2018-2019">2018-2019</option>
+								<option value="2017-2018">2017-2018</option>
+								<option value="2016-2017">2016-2017</option>
+									<option value="2016-2017">2015-2016</option>
+								
+							</select>
+						</div>
+						
 								
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Subject Code
+							<label class="control-label col-sm-6" for="page_name">Subject Code Taught
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="code"
+								<input type="text" class="form-control" id="code" placeholder="Subject Code Taught"
 									name="code" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -249,7 +265,7 @@
 							<label class="control-label col-sm-6" for="page_name">Subject Taught
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="subTaut"
+								<input type="text" class="form-control" id="subTaut" placeholder="Subject Taught"
 									name="subTaut" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -264,13 +280,25 @@
 								<option value="3">Other</option>
 								
 							</select>
+						</div>			
+						
+						
+						
+									<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Is CBCS</label> 
+						<div class="col-sm-2">
+																Yes <input type="radio" name="consultancy"
+																	id="consultancy" checked value="0"> No<input
+																	type="radio" name="consultancy" id="consultancy"
+																	value="1">
+															</div> 
 						</div>				
 					<div class="form-group">
 						
 							<label class="control-label col-sm-6" for="page_name">No. of Student Appeared
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="noStud"
+								<input type="text" class="form-control" id="noStud" placeholder="No. of Student Appeared"
 									name="noStud"  value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -280,7 +308,7 @@
 							<label class="control-label col-sm-6" for="page_name">Passed
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="pass"
+								<input type="text" class="form-control" id="pass" placeholder="Passed" onchange=" calResult()"
 									name="pass"  value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -292,7 +320,7 @@
 							<label class="control-label col-sm-6" for="page_name">% of Result
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="rslt"
+								<input type="text" class="form-control" id="rslt" placeholder="% of Result"
 									name="rslt"  value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -305,21 +333,13 @@
 							<label class="control-label col-sm-6" for="page_name">Course Outcome
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="course"
+								<input type="text" class="form-control" id="course" placeholder="Course Outcome"
 									name="course"value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
 		
-							<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Year of Passing
-							</label>
-							<div class="col-sm-4">
-								<input type="date" class="form-control"
-								id="year" name="year" value="" required>
-							</div>
-
-</div>
+						
 						
 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
@@ -332,11 +352,11 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
-		var year=document.getElementById("year").value
+		var i = parseInt(document.getElementById("index").value);
+	
 		var sem=document.getElementById("sem").value
 		var code=document.getElementById("code").value
-		
+		var academicYear=document.getElementById("academicYear").value
 		
 		var subTaut=document.getElementById("subTaut").value
 		var subType=document.getElementById("subType").value
@@ -346,7 +366,9 @@
 		var pass=document.getElementById("pass").value
 		var rslt=document.getElementById("rslt").value
 		var course=document.getElementById("course").value
+		var isCBCS=document.getElementById("consultancy").value
 		var t="-";
+		
 
 		var dataTable = $('#example1')
 		.DataTable();
@@ -355,24 +377,41 @@
 		.add(
 				[
 					i+1,
-					year,
+					academicYear,
+				
 					sem,
 					code,
 					subTaut,
 					subType,
+					isCBCS,
+					course,
 					noStud,
 					pass,
 					rslt,
-					course,
+					
 				    t
 						 ])
 		.draw();
 		
+		document.getElementById("index").value = i + 1;
+		
+	}
+	
+	function calResult(){
+		var noStud=parseFloat(document.getElementById("noStud").value);
+		
+		var pass=parseFloat(document.getElementById("pass").value);
+		
+		var x=(pass/noStud)*100;
+		document.getElementById("rslt").value=x;
 		
 		
 	}
 
 	</script>
+	
+	
+	
 	
 	
 </body>

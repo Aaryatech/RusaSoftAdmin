@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -87,7 +87,7 @@
 													<th width="5%">Sr No</th>
 													<th width="20%">Title</th>
 													<th width="10%">sqm</th>
-													<th width="20%">Location </th>
+													<th width="20%">Location/Capacity </th>
 												</tr>
 											</thead>
 
@@ -160,10 +160,12 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId">
+							<input type="hidden" id="index" name="index" value="0">
 						<div class="form-group">
 							<label for="modalname1" class="form-label">Title</label> <select
-								id="qualType" name="salutation" class="form-control" required>
-								<option value="Toilets Ladies/Gents">Toilets Ladies/Gents</option>
+								id="qualType" name="salutation" class="form-control"  onclick="showForm()" required>
+								<option value="Ladies Toilets">Ladies Toilets </option>
+								<option value="Gents Toilets">Gents Toilets</option>
 								<option value="Boys Common Room">Boys Common Room</option>
 								<option value="Girls Common Room">Girls Common Room</option>
 								<option value="Cafeteria">Cafeteria</option>
@@ -173,10 +175,8 @@
 								<option value="Guest House">Guest House</option>
 								<option value="Sports Club/Gym">Sports Club/Gym</option>
 								<option value="Auditorium/Amphitheatre">Auditorium/Amphitheatre</option>
-								<option value="Boys Hostel">Boys Hostel</option>
-								<option value="Girls Hostel">Girls Hostel</option>
-
-
+								<option value="7">Boys Hostel</option>
+								<option value="6">Girls Hostel</option>
 
 							</select>
 						</div>
@@ -197,11 +197,17 @@
 									required>
 							</div>
 
-
-
-
 						</div>
-
+<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Capacity
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="capacity" required
+									name="capacity" placeholder="Hostel Capacity" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
@@ -213,12 +219,32 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
-		var className=document.getElementById("className").value
+		var className=document.getElementById("className").value //loc
+		
+		
+		var capacity=document.getElementById("capacity").value
+		var temp;
+		var temp1;
+		if(qualType == 7) {
 
+			temp=capacity;
+			temp1="Boys Hostel";
+			
+			//alert(temp);
+		} else if(qualType==6)
+		
+		{
+			temp=capacity;
+			temp1="Girls Hostel";
+		}
+		else{
+			temp1=qualType;
+			temp=className;
+		}
 		var dataTable = $('#example1')
 		.DataTable();
 		
@@ -226,17 +252,41 @@
 		.add(
 				[
 					i+1,
-					qualType,
+					temp1,
 					qualName,
-					className
+					temp
 					
 					
 						 ])
 		.draw();
 		
-		
+		document.getElementById("index").value = i + 1;
 		
 	}
+	
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("qualType").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7 || qualType==6 ) { 
+				//alert("hii::"+qualType);
+				
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 
 	</script>
 	<!-- END CONTAINER -->

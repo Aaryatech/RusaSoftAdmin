@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -180,13 +180,7 @@
 																	<input type="text" class="form-control" id="dob"
 																		name="Grant" placeholder="Year" value="" required>
 																</div>
-																<label class="control-label col-sm-2" for="smallheading">Year
-																	of Awarded Ph.D: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-1">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Year" value="" required>
-																</div>
+															
 
 
 															</div>
@@ -205,7 +199,7 @@
 															<div class="form-group">
 
 
-
+<!-- 
 																<label class="control-label col-sm-2" for="smallheading">Date
 																	of Registration: <span class="text-danger">*</span>
 																</label>
@@ -214,8 +208,28 @@
 																		name="Grant" placeholder="Name of Ph.D Scholar"
 																		value="" required>
 																</div>
+ -->
+ 
+                                                       <label class="control-label col-sm-2" for="smallheading">Awarded
+																	: <span class="text-danger">*</span>
+																</label>
 
-																<label class="control-label col-sm-2" for="smallheading">Valid
+
+																<div class="col-sm-2">
+																	Yes <input type="radio" name="awarded" id="awarded"
+																		checked value="1" onclick="check(this.value)"> No<input type="radio"
+																		name="awarded" id="awarded" value="0" onclick="check(this.value)">
+																</div>
+																
+																
+																	<label class="control-label col-sm-2" id="abc" for="smallheading">Year
+																	of Awarded Ph.D: <span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-1">
+																	<input type="text" class="form-control" id="yearAwarded"
+																		name="yearAwarded" placeholder="Year" value="" required>
+																</div>
+																<!-- <label class="control-label col-sm-2" for="smallheading">Valid
 																	up : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
@@ -223,8 +237,8 @@
 																		name="validup" placeholder="Valid up" value=""
 																		required>
 																</div>
-
-
+ -->
+<!-- 
 																<label class="control-label col-sm-2" for="smallheading">Awarded
 																	: <span class="text-danger">*</span>
 																</label>
@@ -234,7 +248,7 @@
 																	Yes <input type="radio" name="awarded" id="awarded"
 																		checked value="0"> No<input type="radio"
 																		name="awarded" id="awarded" value="1">
-																</div>
+																</div> -->
 
 															</div>
 
@@ -271,7 +285,33 @@
 		</section>
 		<!-- END CONTENT -->
 
+<script type="text/javascript">
+function check(qualType) {
+	//document.getElementById("abc").style = "display:none"
+		//var qualType=document.getElementById("cat").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 1) {
 
+			document.getElementById("abc").style = "visible"
+				document.getElementById("yearAwarded").style = "visible"
+			
+				
+		} 
+		else if(qualType == 0){
+			document.getElementById("abc").style = "display:none"
+				document.getElementById("yearAwarded").style = "display:none"
+		}
+	
+	}
+function hideText() {
+	//alert("hii");
+	document.getElementById("abc").style = "visible"
+		document.getElementById("yearAwarded").style = "visible"
+		
+	
+	}
+</script>
 
 	</div>
 	<!-- END CONTAINER -->

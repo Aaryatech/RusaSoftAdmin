@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -167,11 +167,37 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="address"
-																	name="address" placeholder="Correspondence/Permanent"
+																	name="address" placeholder="Permanent Address"
 																	value="${page.pageName}" required>
 															</div>
 														</div>
+														
+														
+															<div class="form-group">
+																<label class="control-label col-sm-6" for="page_order">Is 
+																	Permanent and Correspondence Address Same :<span class="text-danger">*</span>
+																</label>
 
+
+																<div class="col-sm-3">
+																	Yes <input type="radio" name="cat" id="cat"
+																		checked value="1" onclick="check(this.value)"> No<input
+																		type="radio"  onclick="check(this.value)" name="cat" id="cat" value="0">
+																</div>
+</div>
+
+
+	<div class="form-group" id="abc">
+															<label class="control-label col-sm-2" for="page_name">Correspondence Address
+																:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="address"
+																	name="address" placeholder="Correspondence Address"
+																	value="${page.pageName}" required>
+															</div>
+														</div>
+														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Mobile
 																No. : <span class="text-danger">*</span>
@@ -263,7 +289,8 @@
 																	<option value="1">Associate Professor</option>
 																	<option value="2">Professor</option>
 																	<option value="3">Registrar</option>
-																	<option value="4">Any Other</option>
+																		<option value="4">Reader</option>
+																	<option value="5">Any Other</option>
 																</select>
 															</div>
 															<div class="col-sm-2">
@@ -355,7 +382,32 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
 
+
+function check(qualType) {
+	//document.getElementById("abc").style = "display:none"
+		//var qualType=document.getElementById("cat").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 0) {
+
+			document.getElementById("abc").style = "visible"
+			
+				
+		} 
+		else if(qualType == 1){
+			document.getElementById("abc").style = "display:none"
+		}
+	
+	}
+function hideText() {
+	//alert("hii");
+	document.getElementById("abc").style = "display:none"
+		
+	
+	}
+</script>
 
 </body>
 </html>

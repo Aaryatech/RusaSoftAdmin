@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -85,6 +85,7 @@
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
+													<th width="10%">Academic Year</th>
 													<th width="20%">Title</th>
 													<th width="10%">sqm</th>
 													<th width="20%">Location </th>
@@ -145,22 +146,51 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
+							
+							
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+							
+							
+							<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
 									<div class="form-group">
 							<label class="control-label col-sm-3" for="page_name">Facility</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
 								<option value="Classroom">Classroom</option>
-								<option value="Seminar Halls">Seminar Halls</option>
-								<option value="ICT Rooms">ICT Rooms</option>
-								<option value="Smartboard">Smartboard</option>
-							<option value="Computers">Computers</option>
-								<option value="Mooc Courses">Mooc Courses</option>
-									<option value="Virtual Lab">Virtual Lab</option>
-									<option value="Nptel">Nptel</option>
+								<option value="Tutorial Room">Tutorial Room</option>
+									<option value="Computers">Computers</option>
+								<option value="Laboratory">Laboratory</option>
+								<option value="Computer Centre">Computer Centre</option>
+						
+								<option value="Seminar Hall">Seminar Hall</option>
+									<option value="Laboratories">Laboratories</option>
+									<option value="Studio/Workshops">Studio/Workshops</option>
+									<option value="Language Lab">Language Lab</option>
+									<option value="7">Any Other</option>
 							
 							</select>
 						</div>
 						
+						<div class="form-group" id="abc">
 						
+							<label class="control-label col-sm-6" for="page_name">Other Facility
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherCourse" required
+									name="otherCourse" placeholder="Facility" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
 	
 	<div class="form-group">
 						
@@ -198,12 +228,22 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+			var i = parseInt(document.getElementById("index").value);
 
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
 		var className=document.getElementById("className").value
+		var academicYear = document.getElementById("academicYear").value;
+		var otherCourse=document.getElementById("otherCourse").value
+		var temp;
+		if (qualType == 7) {
 
+			temp=otherCourse;
+			//alert(temp);
+		} 
+		else{
+			temp=qualType;
+		}
 		var dataTable = $('#example1')
 		.DataTable();
 		
@@ -211,16 +251,41 @@
 		.add(
 				[
 					i+1,
-					qualType,
+					academicYear,
+					temp,
 					className,
 					qualName
 					
 						 ])
 		.draw();
 		
-		
+		document.getElementById("index").value = i + 1;
 		
 	}
+	
+	
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("qualType").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 
 	</script>
 	

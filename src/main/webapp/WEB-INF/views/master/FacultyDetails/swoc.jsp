@@ -532,6 +532,16 @@
 
 						</select>
 					</div>
+<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_order">Is
+							CO/PO Mapped :<span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-2">
+							Yes <input type="radio" name="stu" id="stu" checked value="yes">
+							No<input type="radio" name="stu" id="stu" value="1">
+						</div>
+					</div>
 
 
 					<div class="form-group">
@@ -546,17 +556,7 @@
 						</select>
 					</div>
 
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="page_order">Is
-							CO/PO Mapped :<span class="text-danger">*</span>
-						</label>
-						<div class="col-sm-6">
-							Yes <input type="radio" name="stu" id="stu" checked value="yes">
-							No<input type="radio" name="stu" id="stu" value="1">
-						</div>
-					</div>
-
+					
 
 
 

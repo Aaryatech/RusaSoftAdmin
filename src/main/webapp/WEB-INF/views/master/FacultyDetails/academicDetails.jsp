@@ -138,8 +138,9 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
+																		<th width="15%">Academic Year</th>
 																		<th width="30%">Qualification</th>
-																		<th width="30%">Year of Passing</th>
+																		<th width="15%">Year of Passing</th>
 																		<th width="30%">Class</th>
 																	</tr>
 																</thead>
@@ -211,15 +212,31 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
+							
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+							
+										<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
+						
 									<div class="form-group" id="ex1">
 							<label class="control-label col-sm-3" for="page_name">Qualification</label> <select
 								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
 								<option value="Diploma">Diploma</option>
 								<option value="Bachelors">Bachelors</option>
 								<option value="Masters">Masters</option>
-								<option value="Doctorates">Doctorates</option>
-							<option value="Post Doctorates">Post Doctorates</option>
-								<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
+								<option value="Doctorate">Doctorate</option>
+							<option value="Post Doctorate">Post Doctorate</option>
+								<option value="M.Phill">M.Phill</option>
 								
 								<option value="7">Any Other</option>
 
@@ -308,7 +325,8 @@
 	
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
+		var academicYear=document.getElementById("academicYear").value
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
 		//alert(qualName);
@@ -331,13 +349,14 @@
 		.add(
 				[
 					i+1,
+					academicYear,
 					temp,
 					year,
 					className
 						 ])
 		.draw();
 		
-		
+		document.getElementById("index").value = i + 1;
 		
 	}
 

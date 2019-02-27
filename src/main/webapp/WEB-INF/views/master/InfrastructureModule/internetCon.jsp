@@ -77,16 +77,16 @@
 
 
 										<h5 class="title pull-left">
-											<strong>Internet Connection Bandwidth</strong>
+											<strong>Internet Connection Facility</strong>
 										</h5>
 										<div class="col-xs-12"></div>
 
-										<div class="form-group">
+										<%-- <div class="form-group">
 
 
 
 											<label class="control-label col-sm-6" for="page_name">No.
-												of Computers with access to Internet :<span
+												of Computers with LAN :<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
@@ -95,7 +95,7 @@
 													required>
 											</div>
 
-										</div>
+										</div> --%>
 
 										<%-- <div class="form-group">
 

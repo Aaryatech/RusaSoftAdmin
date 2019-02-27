@@ -71,7 +71,7 @@
 								
 
 								<h5 class="title pull-left">
-									<strong>No. of Students Admitted Location wise</strong>
+									<strong>No. of Students Admitted Location/Region wise</strong>
 								</h5>
 
 								
@@ -165,7 +165,7 @@
 						<div class="form-group">
 						
 						<input type="hidden" id="index" name="index" value="0">
-							<label class="control-label col-sm-6" for="page_name">No. of Students
+							<label class="control-label col-sm-6" for="page_name">No. of Students Location/Region wise
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="stud"

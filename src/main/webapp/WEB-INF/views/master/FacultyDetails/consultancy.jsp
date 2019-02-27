@@ -125,6 +125,10 @@
 														</h5>
 
 														<div class="col-xs-12"></div>
+														
+													
+														
+														
 														 <label class="control-label col-sm-3" for="smallheading">
 														Consultancy <span class="text-danger">*</span>
 														</label> 
@@ -144,11 +148,12 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
+																			<th width="20%">Year</th>
 																		<th width="30%">Nature of Consultancy</th>
 																		<th width="30%">Sponsoring Industry</th>
 																		<th width="30%">Consultancy Amount</th>
 																		<th width="30%">Consultancy Period</th>
-																		<th width="30%">Project Completed</th>
+																		<th width="10%">Project Completed</th>
 																	</tr>
 																</thead>
 
@@ -218,15 +223,26 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-									
-						
+										
+							<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
+						<div class="form-group">
+							<label class="control-label col-sm-6" for="page_name">Academic Year</label> <select
+								id="academicYear" name="qualType" class="form-control" onchange="showForm()" required>
+								<option value="2018-2019">2018-2019</option>
+								<option value="2017-2018">2017-2018</option>
+								<option value="2016-2017">2016-2017</option>
+									<option value="2016-2017">2015-2016</option>
+								
+							</select>
+						</div>
 						
 						<div class="form-group">
 						
 							<label class="control-label col-sm-6" for="page_name">Nature of Consultancy
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="nature"
+								<input type="text" class="form-control" id="nature" placeholder="Nature of Consultancy"
 									name="nature" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -237,7 +253,7 @@
 							<label class="control-label col-sm-6" for="page_name">Sponsoring Agency/Industry
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="sponser"
+								<input type="text" class="form-control" id="sponser" placeholder="Sponsoring Agency/Industry"
 									name="sponser" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -248,7 +264,7 @@
 							<label class="control-label col-sm-6" for="page_name">Amount of Consultancy
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="amount"
+								<input type="text" class="form-control" id="amount"  placeholder="Amount of Consultancy"
 									name="amount" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -258,7 +274,7 @@
 							<label class="control-label col-sm-6" for="page_name">Consultancy Period
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="conPeriod"
+								<input type="text" class="form-control" id="conPeriod" placeholder="Consultancy Period"
 									name="conPeriod" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -269,9 +285,9 @@
                                                                 <div class="col-sm-1"></div>
 															<div class="col-sm-2">
 																Yes <input type="radio" name="consultancy"
-																	id="consultancy" checked value="Yes"> No<input
+																	id="consultancy" checked value="1"> No<input
 																	type="radio" name="consultancy" id="consultancy"
-																	value="No">
+																	value="0">
 															</div> 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 				<!-- 	</form> -->
@@ -287,14 +303,21 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 		var nature=document.getElementById("nature").value
 		var sponser=document.getElementById("sponser").value
 		//alert(qualName);
 		var amount=document.getElementById("amount").value
+		var academicYear=document.getElementById("academicYear").value
 		var conPeriod=document.getElementById("conPeriod").value
 		var consultancy=document.getElementById("consultancy").value
-		
+		var temp;
+		if(consultancy==1){
+			temp="Yes";
+		}
+		else{
+			temp="No";
+		}
 		var dataTable = $('#example1')
 		.DataTable();
 		
@@ -302,15 +325,17 @@
 		.add(
 				[
 					i+1,
+					academicYear,
 					nature,
 					sponser,
 					amount,
 					conPeriod,
-					consultancy
+					temp
 					
 						 ])
 		.draw();
 		
+		document.getElementById("index").value = i + 1;
 		
 		
 	}

@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -83,9 +83,10 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
-												<th width="15%">Name of Alumni</th>
+												<th width="10%">Academic Year.</th>
+												<th width="10%">Name of Alumni</th>
 												<th width="10%">Passing Year</th>
-												<th width="15%">Nature of Contribution</th>
+												<th width="10%">Nature of Contribution</th>
 												<th width="10%">Year of Contribution</th>
 												<th width="10%">Benefit To</th>
 											</tr>
@@ -171,15 +172,28 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-								<input type="hidden" id="index" name="index" value="0">
+								<input type="hidden" class="form-control" id="index"
+							name="index" value="0">
 							
+										<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
+						
 						<div class="form-group">
 						
 							<label class="control-label col-sm-6" for="page_name">Name of Alumini
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="name"
-									name="subTaut" value="${page.pageName}"
+									name="subTaut" value="${page.pageName}" placeholder="Name of Alumini"
 									required>
 							<!-- </div> -->
 	</div>		
@@ -187,15 +201,16 @@
 					
 								
 		<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Passing Year
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="date" class="form-control" id="year"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
+						<label class="control-label col-sm-6" for="academicYear">Passing
+							Year</label> <select id="passYear" name="passYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
 	
 	<div class="form-group">
 						<label class="control-label col-sm-6" for="page_name">Nature of Contribution</label> <select
@@ -232,14 +247,23 @@
 															<option value="Department">Department</option>
 															<option value="Institute">Institute</option>
 															<option value="Society">Society</option>
-															<option value="-">Any Other</option>
+															<option value="7">Any Other</option>
 								
 								
 							</select>
 						</div>
 						
 						
-		
+		<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Benefit To Other
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherScheme"
+									name="otherScheme" value="${page.pageName}" placeholder="Benefit To Other"
+									required>
+							<!-- </div> -->
+	</div>
 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
@@ -252,15 +276,25 @@
 	//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
 		var name=document.getElementById("name").value
-	
-		var year=document.getElementById("year").value
+		var academicYear=document.getElementById("academicYear").value
+		var year=document.getElementById("passYear").value
 		var nature=document.getElementById("nature").value
 		var year1=document.getElementById("year1").value
 		
 		
 		var package1=document.getElementById("level").value
 		
-	
+		var otherScheme=document.getElementById("otherScheme").value
+		//alert(stud);
+		var temp;
+		if (package1 == 7) {
+
+			temp=otherScheme;
+			//alert(temp);
+		} 
+		else{
+			temp=package1;
+		}
 		
 		
 		//alert(stud);
@@ -272,11 +306,12 @@
 		.add(
 				[
 					i+1,
+					academicYear,
 					name,
 					year,
 					nature,
 					year1,
-					package1
+					temp
 					
 						 ])
 		.draw();
@@ -284,6 +319,29 @@
 		
 		document.getElementById("index").value = i + 1;
 	}
+	
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("level").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 
 	</script>
 	<!-- END CONTAINER -->

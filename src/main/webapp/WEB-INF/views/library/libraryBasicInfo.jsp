@@ -135,11 +135,11 @@
 
 														<div id="divshow">
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="swName"
+																<label class="control-label col-sm-3" for="swName"
 																	style="text-align: left;">Name Of Software : <span
 																	class="text-danger">*</span>
 																</label>
-																<div class="col-sm-10">
+																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="swName"
 																		name="swName" placeholder="Name Of Software"
 																		value="${page.pageName}" required>
@@ -147,13 +147,25 @@
 															</div>
 
 															<div class="form-group">
-																<label class="control-label col-sm-2" for="version"
+																<label class="control-label col-sm-3" for="version"
 																	style="text-align: left;">Software Version :<span
 																	class="text-danger">*</span>
 																</label>
-																<div class="col-sm-10">
+																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="version"
 																		name="version" placeholder="Software Version"
+																		value="${page.pageName}" required>
+																</div>
+															</div>
+															
+															<div class="form-group">
+																<label class="control-label col-sm-3" for="version"
+																	style="text-align: left;">Total Number of Users of LMS :<span
+																	class="text-danger">*</span>
+																</label>
+																<div class="col-sm-9">
+																	<input type="text" class="form-control" id="version"
+																		name="version" placeholder="Total Number of Users of LMS"
 																		value="${page.pageName}" required>
 																</div>
 															</div>
@@ -164,7 +176,7 @@
 																	style="text-align: left;"> Date Of
 																	Purchase/Automation Lib. : <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-9">
 																	<input type="date" class="form-control" id="date"
 																		name="date"
 																		placeholder="Date Of Purchase/Automation Lib."
@@ -188,7 +200,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="bandwidth"
-																	style="text-align: left;">Bandwidth fir
+																	style="text-align: left;">Bandwidth for
 																	accessing e-resources : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
@@ -285,11 +297,11 @@
 																	checked>Yes <input type="radio" id="eBooks"
 																	name="eBooks" value="0">No
 															</div>
-															<div class="col-sm-2">Membership Details</div>
+															<div class="col-sm-2">No. of e-Books</div>
 															<div class="col-sm-3">
 
 																<input type="text" class="form-control" id="bandwidth"
-																	name="bandwidth" placeholder="Membership Details"
+																	name="bandwidth" placeholder="No. of e-Books"
 																	value="" required>
 
 															</div>
@@ -305,11 +317,11 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="database" name="database" value="0">No
 															</div>
-															<div class="col-sm-2">Membership Details</div>
+															<div class="col-sm-2">No. of Database</div>
 															<div class="col-sm-3">
 
 																<input type="text" class="form-control" id="bandwidth"
-																	name="bandwidth" placeholder="Membership Details"
+																	name="bandwidth" placeholder="No. of Database"
 																	value="" required>
 
 															</div>

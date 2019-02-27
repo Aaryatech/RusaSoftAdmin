@@ -122,7 +122,16 @@
 															</h5>
 															<div class="col-sm-12"></div>
 
-
+<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Patent File No.
+																	 : <span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-2">
+																	<input type="text" class="form-control" id="dob"
+																		name="Grant" value="" placeholder="Patent Number"
+																		required>
+																</div>
+															</div>
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Patent
@@ -172,16 +181,7 @@
 																</div>
 
 															</div>
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Patent File No.
-																	 : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Patent Number"
-																		required>
-																</div>
-															</div>
+															
 														
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">

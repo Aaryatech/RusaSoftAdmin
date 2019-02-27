@@ -80,15 +80,20 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="page_name">Location
-												of the Campus and area in </label>
+												of the Campus  </label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control" id="hodName"
 													name="hodName" placeholder=" " value="${page.pageName}"
 													required>
 											</div>
-											<label class="control-label col-sm-1" for="page_name">sq.mts.
+											<label class="control-label col-sm-3" for="page_name">Area of Campus in sq.mts.
 
 											</label>
+											<div class="col-sm-3">
+											<input type="text" class="form-control" id="hodName"
+													name="hodName" placeholder=" " value="${page.pageName}"
+													required>
+											</div>
 										</div>
 
 
@@ -98,6 +103,7 @@
 												<tr>
 													<th width="5%">Sr No</th>
 													<th width="20%">Facility</th>
+														<th width="20%">Yes/No</th>
 													<th width="10%">No.</th>
 													<th width="20%">Associated with</th>
 												</tr>
@@ -240,34 +246,43 @@
 							</select>
 						</div>
 						
+							<div class="form-group">
+							<label class="control-label col-sm-6" for="page_order">Is
+							 :<span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-2">
+							Yes <input type="radio" name="stu" id="stu" checked value="yes">
+							No<input type="radio" name="stu" id="stu" value="1">
+						</div>
+					</div>
+						
 						
 						<div class="form-group">
 						
 							<label class="control-label col-sm-6" for="page_name">No. of Facilities
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualName"
+								<input type="text" class="form-control" id="qualName" placeholder="No. of Facilities"
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
 	</div>
+
 	
 	<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Total Area
-							(in sqm)
+							<label class="control-label col-sm-6" for="page_name">Total Area(in sqm)
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="className"
-									name="qualName" placeholder="" value="${page.pageName}"
+								<input type="text" class="form-control" id="className" placeholder="Total Area(in sqm)"
+									name="qualName" placeholder="" value="${page.pageName}" 
 									>
 							<!-- </div> -->
-	</div>
-					
+</div>
 	
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 				<!-- 	</form> -->
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -285,7 +300,7 @@
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
 		var className=document.getElementById("className").value
-
+		var stu = document.getElementById("stu").value
 		var dataTable = $('#example1')
 		.DataTable();
 		
@@ -294,6 +309,7 @@
 				[
 					i+1,
 					qualType,
+					stu,
 					qualName,
 					className
 						 ])

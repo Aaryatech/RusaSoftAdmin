@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -79,10 +79,11 @@
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
-												<th width="15%">Name of Scheme</th>
-												<th width="15%">Level</th>
+												<th width="10%">Year</th>
+												<th width="10%">Name of Scheme</th>
+												<th width="10%">Level</th>
 												<th width="30%" >Type</th>
-												<th width="10%">No. of Students Benefited</th>
+												<th width="10%">No. of  Benefited Students</th>
 												<th width="10%">Year of Implementation</th>
 												<th width="15%">Name of Support Agency</th>
 											</tr>
@@ -329,13 +330,25 @@
 					<h4 class="modal-title">Support Scheme Details </h4>
 				</div>
 				<div class="modal-body">
-					<form role="form"
+				<%-- 	<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
+						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-								
+								<input type="hidden" class="form-control" id="index"
+							name="index" value="0" >
+							
+								<div class="form-group">
+						<label class="control-label col-sm-3" for="finantialYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+	<option value="2015-2016">2015-2016</option>
+						</select>
+					</div>
 						
 									<div class="form-group">
 							<label class="control-label col-sm-2" for="page_name">Scheme Name</label><select
@@ -346,7 +359,7 @@
 													etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
 													etc)</option>
 								<option value="Vocational Education Training">Vocational Education Training</option>
-								<option value="-">Any Other</option>
+								<option value="7">Any Other</option>
 								
 							
 							
@@ -354,16 +367,25 @@
 
 							</select>
 						</div>
+						<div class="form-group" id="abc">
 						
+							<label class="control-label col-sm-6" for="page_name">Other Scheme
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherScheme"
+									name="otherScheme" value="${page.pageName}" placeholder="Other Scheme"
+									required>
+							<!-- </div> -->
+	</div>
 						
 						
 									<div class="form-group">
 						<label class="control-label col-sm-2" for="page_name">Level</label> <select
 								id="level" name="sem" class="form-control" onchange="showForm()" required>
 								<option value="0">National</option>
-															<option value="1">International</option>
-															<option value="2">State</option>
-															<option value="3">Regional</option>
+															<option value="International">International</option>
+															<option value="State">State</option>
+															<option value="Regional">Regional</option>
 
 								
 
@@ -375,8 +397,8 @@
 						<label class="control-label col-sm-2" for="page_name">Type</label> <select
 								id="type" name="sem" class="form-control" onchange="showForm()" required>
 								
-															<option value="1">Govt.</option>
-															<option value="2">Non Govt.</option>
+															<option value="Govt">Govt.</option>
+															<option value="Non Govt.">Non Govt.</option>
 														
 
 								
@@ -386,21 +408,21 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">No. of Benefited Students
+							<label class="control-label col-sm-6" for="page_name">No. of Students Benefited 
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<input type="text" class="form-control" id="gen"
-									name="subTaut" value="${page.pageName}"
+									name="subTaut" value="${page.pageName}" placeholder="No. of Students Benefited"
 									required>
 							<!-- </div> -->
 	</div>
 							
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Name of Support Scheme 
+							<label class="control-label col-sm-6" for="page_name">Name of Support Agency 
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="stud"
+								<input type="text" class="form-control" id="stud" placeholder="Name of Support Agency"
 									name="subTaut" value="${page.pageName}"
 									required>
 									
@@ -408,15 +430,19 @@
 							<!-- </div> -->
 	</div>
 		
-		<div class="form-group">
-							<label class="control-label col-sm-6" for="page_name">Year of Implementation
-							</label>
-							<div class="col-sm-3">
-								<input type="date" class="form-control"
-								id="year" name="year" value="" required>
-							</div>
+		
+							<div class="form-group">
+						<label class="control-label col-sm-6" for="year">Year of Implementation
+						</label> <select id="year" name="year"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+	<option value="2015-2016">2015-2016</option>
+						</select>
+					</div>
 
-</div>
+
 
 						<button type="button" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
@@ -429,6 +455,7 @@
 	function getData() {
 	//alert("hii");
 		var i = parseInt(document.getElementById("index").value);
+		var year1=document.getElementById("academicYear").value
 		var cat=document.getElementById("cat").value
 		var level=document.getElementById("level").value
 		var type=document.getElementById("type").value
@@ -436,8 +463,17 @@
 		var stud=document.getElementById("stud").value
 		var year=document.getElementById("year").value
 		
+		var otherScheme=document.getElementById("otherScheme").value
 		//alert(stud);
-		
+		var temp;
+		if (cat == 7) {
+
+			temp=otherScheme;
+			//alert(temp);
+		} 
+		else{
+			temp=cat;
+		}
 		var dataTable = $('#example10')
 		.DataTable();
 		
@@ -445,7 +481,8 @@
 		.add(
 				[
 					i+1,
-					cat,
+					year1,
+					temp,
 					level,
 					type,
 					gen,
@@ -458,7 +495,28 @@
 		
 		document.getElementById("index").value = i + 1;
 	}
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("cat").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7) {
 
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 	</script>
 	
 	
