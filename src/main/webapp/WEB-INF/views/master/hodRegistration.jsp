@@ -135,21 +135,17 @@
 														
 														
 														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Department : <span class="text-danger">*</span>
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name"> Department
+																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="deptName" name="deptName"
-																	class="form-control" required>
-																	<option value="0">Computer Science</option>
-																	<option value="1">Information Technology</option>
-																	<option value="2">Electronics & Telecommunication</option>
-																	<option value="3">Mechanical</option>
-																	<option value="4">Any Other</option>
-																</select>
+																<input type="text" class="form-control" id="deptName"
+																	name="deptName" placeholder="Department"
+																	value="${page.pageName}" required>
 															</div>
 														</div>
+
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">HOD Name
@@ -163,21 +159,24 @@
 														</div>
 
 														
+														
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
+															<label class="control-label col-sm-2" for="status">Highest
 																Qualification : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="qualification" name="qualification"
-																	class="form-control" required>
-																	<option value="0">Bachelor of Engineering</option>
-																	<option value="1">Master of Engineering</option>
+																<select id="qualification" name="qualification" class="form-control"
+																	required>
+																	<option value="0">UG</option>
+																	<option value="1">PG</option>
+																	<option value="2">M.phill</option>
 																	<option value="2">Ph.D.</option>
-																	<option value="4">Any Other</option>
+																	<option value="2">Post Docterate</option>
+																	
+																	<option value="3">Any Other Course</option>
 																</select>
 															</div>
 														</div>
-														
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Contact

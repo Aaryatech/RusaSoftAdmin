@@ -123,7 +123,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Institute Name"
+																	name="page_name" placeholder="Librarian Name"
 																	value="${page.pageName}">
 															</div>
 														</div>

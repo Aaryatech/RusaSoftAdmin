@@ -170,7 +170,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Mobile No" required>
+																	name="page_order" placeholder="Landline No" required>
 															</div>
 														</div>
 
@@ -194,7 +194,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Mobile No" required>
+																	name="page_order" placeholder="Landline No" required>
 															</div>
 														</div>
 
@@ -212,13 +212,13 @@
 
 											<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-															Principle Name :<span
+															Principal Name :<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
 																	name="page_order"
-																	placeholder="Name of Principle"
+																	placeholder="Name of Principal"
 																	required>
 															</div>
 														</div>
@@ -230,7 +230,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Mobile No" required>
+																	name="page_order" placeholder="Landline No" required>
 															</div>
 														</div>
 

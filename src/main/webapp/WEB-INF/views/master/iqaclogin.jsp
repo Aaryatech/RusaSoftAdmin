@@ -187,6 +187,28 @@
 																	placeholder="No. of current admitted student" required>
 															</div>
 														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">
+														State Treasury Code :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order"
+																	placeholder="State Treasury Code" required>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">
+																Rusa ID No. :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" id="page_order"
+																	name="page_order"
+																	placeholder="Rusa ID No." required>
+															</div>
+														</div>
 
 
 

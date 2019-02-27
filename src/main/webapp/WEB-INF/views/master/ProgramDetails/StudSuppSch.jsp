@@ -374,7 +374,7 @@
 									<div class="form-group">
 						<label class="control-label col-sm-2" for="page_name">Type</label> <select
 								id="type" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="0">National</option>
+								
 															<option value="1">Govt.</option>
 															<option value="2">Non Govt.</option>
 														
@@ -403,6 +403,8 @@
 								<input type="text" class="form-control" id="stud"
 									name="subTaut" value="${page.pageName}"
 									required>
+									
+										<input type="hidden" id="index" name="index" value="0">
 							<!-- </div> -->
 	</div>
 		
@@ -426,7 +428,7 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 		var cat=document.getElementById("cat").value
 		var level=document.getElementById("level").value
 		var type=document.getElementById("type").value
@@ -454,7 +456,7 @@
 		.draw();
 		
 		
-		
+		document.getElementById("index").value = i + 1;
 	}
 
 	</script>

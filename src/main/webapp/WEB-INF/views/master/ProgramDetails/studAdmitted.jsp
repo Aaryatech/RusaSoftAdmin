@@ -171,6 +171,8 @@
 								<input type="text" class="form-control" id="stud"
 									name="subTaut" value="${page.pageName}"
 									required>
+									
+										<input type="hidden" id="index" name="index" value="0">
 							<!-- </div> -->
 	</div>
 						
@@ -186,12 +188,14 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		//var i=0;
+		var i = parseInt(document.getElementById("index").value);
+			
+		//alert(i);
 		var cat=document.getElementById("cat").value
 		var gen=document.getElementById("gen").value
 		var stud=document.getElementById("stud").value
-		
-		//alert(stud);
+	
 		
 		var dataTable = $('#example10')
 		.DataTable();
@@ -207,7 +211,7 @@
 						 ])
 		.draw();
 		
-		
+		document.getElementById("index").value = i + 1;
 		
 	}
 

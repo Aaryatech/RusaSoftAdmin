@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -205,6 +205,7 @@
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
+							<option value="2016-2017">2015-2016</option>
 
 						</select>
 					</div>
@@ -212,7 +213,7 @@
 					
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="initiativeName">Name of Quality Initiative
-							</label> <select id="initiativeName" name="initiativeName"
+							</label> <select id="initiativeName" name="initiativeName"  onchange="showForm()"
 							class="form-control" required>
 							<option value="AQAR prepared or submitted">AQAR prepared or submitted</option>
 							<option value="Academic – Administrative Audit Conducted">Academic – Administrative Audit Conducted	</option>
@@ -225,12 +226,21 @@
 							<option value="ISO Certification obtained">ISO Certification obtained	</option>
 							
 							<option value="NBA Certification received">NBA Certification received</option>
-							<option value="Any other quality based certification ">Any other quality based certification </option>
+							<option value="7">Any other quality based certification </option>
 
 						</select>
 					</div>
 					
-					
+					<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Any other quality based certification
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherQual" required
+									name="otherQual" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
 					
 					<div class="form-group">
 
@@ -310,14 +320,49 @@
 			var fromDate = document.getElementById("fromDate").value;
 			var toDate = document.getElementById("toDate").value;
 			var participant = document.getElementById("participant").value;
+			var otherQual = document.getElementById("otherQual").value;
 			//alert("noStud"+noStud);
+			var temp;
+			if (initiativeName == 7) {
+
+				temp=otherQual;
+				//alert(temp);
+			} 
+			else{
+				temp=initiativeName;
+			}
+		
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, academicYear, initiativeName, conductionDate,fromDate,toDate,participant ])
+					[ i + 1, academicYear, temp, conductionDate,fromDate,toDate,participant ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}
+		
+
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+				var qualType=document.getElementById("initiativeName").value
+				//alert("qualType::"+qualType);
+				
+				if (qualType == 7) {
+
+					document.getElementById("abc").style = "visible"
+					
+						
+				} 
+				else{
+					document.getElementById("abc").style = "display:none"
+				}
+			
+			}
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+				
+			
+			}
 	</script>
 
 

@@ -111,7 +111,7 @@
 								
 									
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showCurriculum">Curriculum and Crosscutting Issues 
+							href="${pageContext.request.contextPath}/showCurriculum">Curriculum and Cross-cutting Issues 
 							
 								</a></li>
 								

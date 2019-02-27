@@ -289,6 +289,7 @@
 								<input type="text" class="form-control" id="stud"
 									name="subTaut" value="${page.pageName}"
 									required>
+									<input type="hidden" id="index" name="index" value="0">
 							<!-- </div> -->
 	</div>
 						
@@ -317,7 +318,7 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 		var empName=document.getElementById("cat").value
 		var progName=document.getElementById("date").value
 		var address=document.getElementById("year").value
@@ -348,7 +349,7 @@
 						 ])
 		.draw();
 		
-		
+		document.getElementById("index").value = i + 1;
 		
 	}
 

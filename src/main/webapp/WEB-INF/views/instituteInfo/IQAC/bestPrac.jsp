@@ -204,6 +204,8 @@
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+							
 
 						</select>
 					</div>
@@ -227,7 +229,7 @@
 							value="${page.pageName}" required>
 					</div>
 					
-					<div class="form-group">
+					<%-- <div class="form-group">
 
 						<label class="control-label col-sm-6" for="effectiveFrom">Effective From
 						</label> <input type="text" class="form-control"
@@ -236,9 +238,22 @@
 							value="${page.pageName}" required>
 					</div>
 					
+					 --%>
 					
 					
 					
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="effectiveFrom">Effective From
+							</label> <select id="effectiveFrom" name="effectiveFrom"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+							
+
+						</select>
+					</div>
 					
 					
 					<!-- Link on Website for Activity Report -->

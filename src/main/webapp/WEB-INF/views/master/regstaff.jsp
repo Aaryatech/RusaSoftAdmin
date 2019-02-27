@@ -174,7 +174,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-6" for="page_name">Total Student Strength as per Sanction Intake
-																(second year/third year/last year/including direct second year )<span class="text-danger">*</span>
+																(second year/third year/last year/including direct second year(if applicable) )<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="page_name"
@@ -217,7 +217,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Year
-																of highest Qualification Aquired :<span
+																of highest Qualification Acquired :<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -236,7 +236,9 @@
 																<select id="designation" name="designation"
 																	class="form-control" required>
 																	<option value="0">Professor</option>
-																	<option value="1">Professor Assis.</option>
+																	<option value="1">Assistant Professor </option>
+																	<option value="1">Associate Professor</option>
+																		<option value="1">Reader</option>
 
 
 																</select>
@@ -261,22 +263,22 @@
 
 
 															<div class="col-sm-10">
-																No <input type="radio" name="isReg" id="isReg"
-																	onchange="GSTBillNo(this.value)" checked value="0">
-																Yes<input type="radio" name="isReg" id="isReg"
-																	onchange="GSTBillNo(this.value)" value="1">
+																No <input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
+																	checked value="0">
+																Yes<input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
+																	value="1">
 															</div>
 
 
 														</div>
 
-														<div class="form-group">
+														<div class="form-group" id="rel_date1">
 															<label class="control-label col-sm-2" for="page_order">Relieving
 																Date :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="date" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																<input type="date" class="form-control" id="rel_date"
+																	name="rel_date" placeholder="Contact No" required>
 															</div>
 														</div>
 
@@ -364,6 +366,24 @@
 
 
 
+	<script type="text/javascript">
+	 function showReforms3(b) {
+			
+		if(b ==1){
+			document.getElementById("rel_date1").style = "display:none"
+				
+		}
+		else{
+			
+			
+				document.getElementById("rel_date1").style ="visible"
+			
+		}
+		}
+				
+		
+		
+	</script>
 
 
 

@@ -147,6 +147,7 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
+																		<th>Year</th>
 																		<th>Reform</th>
 																		<th>Remark</th>
 																		
@@ -220,6 +221,17 @@
 				<div class="modal-body">
 				
 				
+				<div class="form-group">
+						<label class="control-label col-sm-6" for="academicYear">Academic
+							Year</label> <select id="academicYear" name="academicYear"
+							class="form-control" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
+
+						</select>
+					</div>
 				
 					
 				<div class="form-group">
@@ -270,12 +282,13 @@
 			var i = parseInt(document.getElementById("index").value);
 			var reform = document.getElementById("reform").value;
 			var remark = document.getElementById("remark").value;
+			var academicYear = document.getElementById("academicYear").value;
 		
 		
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,reform,remark ])
+					[ i + 1,academicYear,reform,remark ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

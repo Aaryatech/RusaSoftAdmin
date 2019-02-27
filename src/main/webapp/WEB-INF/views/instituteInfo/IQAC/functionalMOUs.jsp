@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" "  onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -212,7 +212,7 @@
 					</div>
 				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="mouDuration">MoU Duration / Period
+						<label class="control-label col-sm-6" for="mouDuration">MoU Duration / Period
 						</label> <input type="text" class="form-control"
 							id="mouDuration" name="mouDuration"
 							placeholder="MoU Duration / Period"
@@ -220,8 +220,8 @@
 					</div>
 				
 				<div class="form-group">
-						<label class="control-label col-sm-3" for="functionalMOU">Functional MoU with Agency
-							</label> <select id="functionalMOU" name="functionalMOU"
+						<label class="control-label col-sm-6" for="functionalMOU">Functional MoU with Agency
+							</label> <select id="functionalMOU" name="functionalMOU"  onchange="showForm()" 
 							class="form-control" required>
 							<option value="IIT">IIT</option>
 							<option value="NIT">NIT</option>
@@ -229,18 +229,30 @@
 								<option value="University">University</option>
 									<option value="Industries">Industries</option>
 									<option value="Corporate Houses">Corporate Houses</option>
-									<option value="Any other Institute of National Importance">Any other Institute of National Importance</option>
+									<option value="7">Any other Institute of National Importance</option>
 
 						</select>
 					</div>
+					
+					<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Other Course
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherCourse" required
+									name="otherCourse" placeholder="" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
 				
 				<div class="form-group">
-						<label class="control-label col-sm-3" for="academicYear">Academic
+						<label class="control-label col-sm-6" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
@@ -250,10 +262,10 @@
 
 				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="beneficiaryMOU">Beneficiary of MOU
+						<label class="control-label col-sm-6" for="beneficiaryMOU">Beneficiary of MOU
 						</label> <input type="text" class="form-control"
 							id="beneficiaryMOU" name="beneficiaryMOU"
-							placeholder="Beneficiary of Collaboration / Linkage"
+							placeholder="Beneficiary of MOU"
 							value="${page.pageName}" required>
 					</div>
 				
@@ -261,7 +273,7 @@
 					
 <div class="form-group">
 
-						<label class="control-label col-sm-3" for="totalParticipants">No. of Participants / Beneficiary
+						<label class="control-label col-sm-6" for="totalParticipants">No. of Participants / Beneficiary
 						</label> <input type="text" class="form-control"
 							id="totalParticipants" name="totalParticipants"
 							placeholder="No. of Participants / Beneficiary"
@@ -297,16 +309,50 @@
 			var academicYear = document.getElementById("academicYear").value;
 			var functionalMOU = document.getElementById("functionalMOU").value;
 			var beneficiaryMOU = document.getElementById("beneficiaryMOU").value;
+			var otherCourse = document.getElementById("otherCourse").value;
 			
 			var totalParticipants = document.getElementById("totalParticipants").value;
+			var temp;
+			if (functionalMOU == 7) {
+
+				temp=otherCourse;
+				//alert(temp);
+			} 
+			else{
+				temp=functionalMOU;
+			}
 		
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,title,mouDuration,functionalMOU, academicYear, beneficiaryMOU,totalParticipants ])
+					[ i + 1,title,mouDuration,temp, academicYear, beneficiaryMOU,totalParticipants ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}
+		
+		
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+				var qualType=document.getElementById("functionalMOU").value
+				//alert("qualType::"+qualType);
+				
+				if (qualType == 7) {
+
+					document.getElementById("abc").style = "visible"
+					
+						
+				} 
+				else{
+					document.getElementById("abc").style = "display:none"
+				}
+			
+			}
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+				
+			
+			}
 	</script>
 
 

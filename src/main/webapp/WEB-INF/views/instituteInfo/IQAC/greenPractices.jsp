@@ -86,7 +86,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
+										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -117,7 +117,7 @@
 
 													<div class="col-xs-12">
 
-                                              <h5> Environmental Consciousness and Sustainability</h5>
+                                              <h5> Green Practices</h5>
 															
 															
 													<div class="form-group">
@@ -152,7 +152,7 @@
 																class="text-danger">*</span>
 															</label>
 															
-											<div class="col-sm-2">
+											<div class="col-sm-1">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName"  value="${page.pageName}"
 														required>
@@ -162,18 +162,18 @@
 																class="text-danger">*</span>
 															</label>
 															
-											<div class="col-sm-2">
+											<div class="col-sm-1">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName"  value="${page.pageName}"
 														required>
 												</div>
 												
-												<label class="control-label col-sm-1" for="recordingFacility"
-																style="text-align: left;">Student&Staff: <span
+												<label class="control-label col-sm-2" for="recordingFacility"
+																style="text-align: left;">Student & Staff: <span
 																class="text-danger">*</span>
 															</label>
 															
-											<div class="col-sm-2">
+											<div class="col-sm-1">
 													<input type="text" class="form-control" id="hodName"
 														name="hodName"  value="${page.pageName}"
 														required>
@@ -302,7 +302,7 @@
 
 											</div>
 
-										</div>
+									
 									</form>
 								</div>
 

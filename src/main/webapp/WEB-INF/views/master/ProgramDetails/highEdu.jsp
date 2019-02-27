@@ -215,6 +215,7 @@
 								<input type="text" class="form-control" id="className"
 									name="hodName" placeholder="No." value="${page.pageName}"
 									required>
+									<input type="hidden" id="index" name="index" value="0">
 							</div>
 
 
@@ -233,7 +234,7 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+			var i = parseInt(document.getElementById("index").value);
 
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
@@ -255,7 +256,7 @@
 		.draw();
 		
 		
-		
+		document.getElementById("index").value = i + 1;
 	}
 
 	</script>

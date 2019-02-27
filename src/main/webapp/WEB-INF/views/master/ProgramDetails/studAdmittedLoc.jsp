@@ -164,6 +164,7 @@
 						
 						<div class="form-group">
 						
+						<input type="hidden" id="index" name="index" value="0">
 							<label class="control-label col-sm-6" for="page_name">No. of Students
 							</label>
 							<!-- <div class="col-sm-3"> -->
@@ -185,7 +186,7 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 		var cat=document.getElementById("cat").value
 		var gen=document.getElementById("gen").value
 		var stud=document.getElementById("stud").value
@@ -207,7 +208,7 @@
 		.draw();
 		
 		
-		
+		document.getElementById("index").value = i + 1;
 	}
 
 	</script>

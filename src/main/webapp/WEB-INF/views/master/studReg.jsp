@@ -123,14 +123,53 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Institute Name"
+																	name="page_name" placeholder="Student Name"
 																	value="${page.pageName}">
 															</div>
 														</div>
 
 
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">
+													Year : <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="salutation" name="salutation"
+														class="form-control" required>
+														<option value="0">2018-2019</option>
+														<option value="1">2017-2018</option>
+														<option value="2">2016-2017</option>
+														<option value="3">2015-2016</option>
 
+
+													</select>
+                                       </div>
+										</div>		
 														
+														
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Branch
+																 :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																	maxlength="10" class="form-control" id="page_order"
+																	name="page_order" placeholder="Branch" required>
+															</div>
+														</div>
+														
+															
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">ID No.
+																 :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																	maxlength="10" class="form-control" id="page_order"
+																	name="page_order" placeholder="ID Number" required>
+															</div>
+														</div>
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
@@ -153,38 +192,7 @@
 															</div>
 														</div>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Qualification
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="Qualification" required>
-															</div>
-														</div>
-														
-														
-																
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Joining
-																Date :<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="date" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
-															</div>
-														</div>
-													
-													
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Relieving
-																Date :<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="date" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
-															</div>
-														</div>
+											
 
 													</div>
 

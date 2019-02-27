@@ -202,7 +202,7 @@
 				<div class="modal-body">
 				
 				<div class="form-group">
-						<label class="control-label col-sm-3" for="colName">Name of Collaboration / Linkage
+						<label class="control-label col-sm-6" for="colName">Name of Collaboration / Linkage
 							</label> <select id="colName" name="colName"
 							class="form-control" required>
 							<option value="Faculty Exchange">Faculty Exchange</option>
@@ -218,7 +218,7 @@
 					
 				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="agency">Collaboration Linkage with Agency
+						<label class="control-label col-sm-6" for="agency">Collaboration Linkage with Agency
 						</label> <input type="text" class="form-control"
 							id="agency" name="agency"
 							placeholder="Collaboration Linkage with Agency"
@@ -227,12 +227,13 @@
 				
 				
 				<div class="form-group">
-						<label class="control-label col-sm-3" for="academicYear">Academic
+						<label class="control-label col-sm-6" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
+								<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
@@ -240,7 +241,7 @@
 				
 				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="linkageNature">Nature of Linkage Collaboration
+						<label class="control-label col-sm-6" for="linkageNature">Nature of Linkage Collaboration
 						</label> <input type="text" class="form-control"
 							id="linkageNature" name="linkageNature"
 							placeholder="Nature of Linkage Collaboration"
@@ -249,7 +250,7 @@
 
 				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="beneficiary">Beneficiary of Collaboration / Linkage
+						<label class="control-label col-sm-6" for="beneficiary">Beneficiary of Collaboration / Linkage
 						</label> <input type="text" class="form-control"
 							id="beneficiary" name="beneficiary"
 							placeholder="Beneficiary of Collaboration / Linkage"
@@ -260,7 +261,7 @@
 					
 <div class="form-group">
 
-						<label class="control-label col-sm-3" for="totalParticipants">No. of Participants / Beneficiary
+						<label class="control-label col-sm-6" for="totalParticipants">No. of Participants / Beneficiary
 						</label> <input type="text" class="form-control"
 							id="totalParticipants" name="totalParticipants"
 							placeholder="No. of Participants / Beneficiary"

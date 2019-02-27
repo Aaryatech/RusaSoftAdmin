@@ -59,7 +59,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Vission & Mission");
 
 		} catch (Exception e) {
 
@@ -79,7 +79,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Institute Financial Support");
 
 		} catch (Exception e) {
 
@@ -99,7 +99,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Activities Organized");
 
 		} catch (Exception e) {
 
@@ -139,7 +139,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Evaluation Process & Reforms");
 
 		} catch (Exception e) {
 
@@ -161,7 +161,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Student Performance");
 
 		} catch (Exception e) {
 
@@ -183,7 +183,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Mechanism of Examination Related Grievance(Transparent) ");
 
 		} catch (Exception e) {
 
@@ -203,7 +203,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Mechanism of Examination Related Grievance(Time Bound) ");
 
 		} catch (Exception e) {
 
@@ -223,7 +223,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Mechanism of Examination Related Grievance(Efficient) ");
 
 		} catch (Exception e) {
 
@@ -244,7 +244,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Institute Offering Course");
 
 		} catch (Exception e) {
 
@@ -264,7 +264,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Curriculum & Cross-cutting Issues");
 
 		} catch (Exception e) {
 
@@ -285,7 +285,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Feedback");
 
 		} catch (Exception e) {
 
@@ -325,7 +325,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Collaboration & Linkages");
 
 		} catch (Exception e) {
 
@@ -344,7 +344,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Functional MOUs");
 
 		} catch (Exception e) {
 
@@ -365,7 +365,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Incubation Centre");
 
 		} catch (Exception e) {
 
@@ -386,7 +386,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Best Practices");
 
 		} catch (Exception e) {
 
@@ -406,7 +406,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Gender Equality Programme");
 
 		} catch (Exception e) {
 
@@ -425,7 +425,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", " Institutional Distnctiveness");
 
 		} catch (Exception e) {
 
@@ -444,7 +444,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Human Values & Professional Ethics");
 
 		} catch (Exception e) {
 
@@ -463,7 +463,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Internal Quality Initiatives");
 
 		} catch (Exception e) {
 
@@ -482,7 +482,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Initiative to Enagage & Contribute to Local Community");
 
 		} catch (Exception e) {
 
@@ -502,7 +502,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Intellectual Property Rights & Industries");
 
 		} catch (Exception e) {
 
@@ -523,7 +523,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Professional Development");
 
 		} catch (Exception e) {
 
@@ -543,7 +543,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Administrative Development");
 
 		} catch (Exception e) {
 
@@ -562,7 +562,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Gender Sensitivity Shown in Facilities");
 
 		} catch (Exception e) {
 
@@ -581,7 +581,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Environmental Consciousness and Sustainability");
 
 		} catch (Exception e) {
 
@@ -601,7 +601,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Green Practices");
 
 		} catch (Exception e) {
 
@@ -620,7 +620,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Specific Initiatives");
 
 		} catch (Exception e) {
 
@@ -640,7 +640,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Institute Profile Information");
+			model.addObject("title", "Provision for Undertaking Field Projects/Internship");
 
 		} catch (Exception e) {
 
