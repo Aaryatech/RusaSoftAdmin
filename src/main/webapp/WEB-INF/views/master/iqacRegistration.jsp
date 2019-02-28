@@ -249,9 +249,9 @@
 							<label class="control-label col-sm-3" for="page_name">IQAC I/C Name
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="iqacName1"
-									name="iqacName1" placeholder="" value="${page.pageName}" readonly
-									>
+								<label  id="iqacName1" for="page_name"> 
+							</label>
+								 
 							<!-- </div> -->
 	</div>
 					
@@ -327,8 +327,9 @@
 			var contactNo=document.getElementById("contactNo").value
 			var email=document.getElementById("email").value
 			
+			$('#iqacName1').html(iqacName);
 			
-			document.getElementById("iqacName1").value=iqacName;
+			/* document.getElementById("iqacName1").innerText=iqacName; */
 			
 			document.getElementById("designation1").value=designation;
 			document.getElementById("dateOfJoin1").value=dateOfJoin;
