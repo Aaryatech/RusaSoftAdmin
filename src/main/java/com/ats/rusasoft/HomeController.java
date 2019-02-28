@@ -99,5 +99,25 @@ public class HomeController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/showforgotPassForm", method = RequestMethod.GET)
+	public ModelAndView showforgotPassForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("forgotPassword");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 }

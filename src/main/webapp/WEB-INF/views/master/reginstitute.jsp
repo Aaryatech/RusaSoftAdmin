@@ -232,6 +232,8 @@
 																	maxlength="10" class="form-control" id="page_order"
 																	name="page_order" placeholder="Landline No" required>
 															</div>
+															<label class="control-label col-sm-7" for="page_order" style="color:red; ">Note: OTP will be sent on this mobile number for verification<span class="text-danger"></span>
+															</label>
 														</div>
 
 														<div class="form-group">
@@ -244,7 +246,8 @@
 															</div>
 														</div>
 											
-
+	<label class="control-label col-sm-6" for="page_order" style="color:red; ">Note: Verification mail will be sent on this Email id<span class="text-danger"></span>
+															</label>
 
 													</div>
 

@@ -52,7 +52,7 @@
 
 		<!-- SIDEBAR - START -->
 
-	<%-- 	<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include> --%>
+		<%-- <jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include> --%>
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
@@ -82,11 +82,14 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
+							<br/>
+							<p style="color:red; ">Notice : This form strictly need to be filled by Institutes coming under RUSA Maharashtra Only.
+You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showInstituteList"><button
+								<%-- <a href="${pageContext.request.contextPath}/showInstituteList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+									class="box_toggle fa fa-chevron-down"></a> --%>
 							</div>
 
 						</header>
@@ -122,8 +125,8 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Institute Name"
+																<input type="text" class="form-control" id="inst_name"
+																	name="inst_name" placeholder="Institute Name"
 																	value="${page.pageName}">
 															</div>
 														</div>
@@ -135,7 +138,7 @@
 																Address :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
+																<input type="text" class="form-control" id="inst_add"
 																	name="page_order" placeholder="Institute Address"
 																	value="" required>
 															</div>
@@ -144,9 +147,9 @@
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
 																Name :<span class="text-danger">*</span>
-															</label>
+												</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
+																<input type="text" class="form-control" id="trust"
 																	name="page_order" placeholder="Trust/Society Name"
 																	value="" required>
 															</div>
@@ -157,7 +160,7 @@
 																Address :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
+																<input type="text" class="form-control" id="trust_address"
 																	name="page_order" placeholder="Trust/Society Address"
 																	value="" required>
 															</div>
@@ -169,7 +172,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
+																	maxlength="10" class="form-control" id="contact_no"
 																	name="page_order" placeholder="Landline No" required>
 															</div>
 														</div>
@@ -180,7 +183,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
+																<input type="text" class="form-control" id="chairman"
 																	name="page_order"
 																	placeholder="Name of Chairman/President(Board of Governance)"
 																	required>
@@ -193,17 +196,17 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
+																	maxlength="10" class="form-control" id="contact_no1"
 																	name="page_order" placeholder="Landline No" required>
 															</div>
 														</div>
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email ID:
-																:<span class="text-danger">*</span>
+															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
+																<input type="email" class="form-control" id="email_id"
 																	name="page_order" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
@@ -216,7 +219,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
+																<input type="text" class="form-control" id="prici_name"
 																	name="page_order"
 																	placeholder="Name of Principal"
 																	required>
@@ -229,19 +232,26 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
+																	maxlength="10" class="form-control" id="princi_contact"
 																	name="page_order" placeholder="Landline No" required>
 															</div>
+															<label class="control-label col-sm-7" for="page_order" style="color:red; ">Note: OTP will be sent on this mobile number for verification<span class="text-danger">*</span>
+															</label>
 														</div>
-
+														
+														
+	
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email ID:
-																:<span class="text-danger">*</span>
+															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
+																<input type="email" class="form-control" id="princi_email"
 																	name="page_order" placeholder="abc@xyz.com" required>
 															</div>
+															
+															<label class="control-label col-sm-6" for="page_order" style="color:red; ">Note: Verification mail will be sent on this Email id<span class="text-danger"></span>
+															</label>
 														</div>
 											
 
@@ -253,8 +263,10 @@
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
-													
-														<button type="submit" class="btn btn-primary">Submit</button>
+													<a href="#myModal2"
+														data-toggle="modal"><button type="submit" onclick="getCOPO()"
+																class="btn btn-info">Submit</button></a>
+														<!-- <button type="submit" class="btn btn-primary"></button> -->
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
@@ -285,14 +297,14 @@
 
 	<!-- END CONTENT -->
 
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Academic Details</h4>
+					<h4 class="modal-title">Institute Details Confirmation</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
@@ -300,65 +312,147 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
-							
-									<div class="form-group">
-							<label class="control-label col-sm-3" for="page_name">Qualification</label> <select
-								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="Diploma">Diploma</option>
-								<option value="Bachelors">Bachelors</option>
-								<option value="Masters">Masters</option>
-								<option value="Doctorates">Doctorates</option>
-							<option value="Post Doctorates">Post Doctorates</option>
-								<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
+						
 								
-								<option value="7">Any Other</option>
-
-
-
-							</select>
-						</div>
-						
-						
+								
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Other Qualification
+							<label class="control-label col-sm-6" for="page_name">Institute Name:
 							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualName"
-									name="qualName" placeholder="" value="${page.pageName}"
-									>
-							<!-- </div> -->
-	</div>
+							<label  id="iqacName1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
 						
-						<div class="form-group">
+							<label class="control-label col-sm-6" for="page_name">Institute Address:
+							</label>
+							<label  id="instAdd" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
 						
-							<label class="control-label col-sm-1" for="page_name">Class
+							<label class="control-label col-sm-6" for="page_name">Trust/Society Name :
 							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="className"
-									name="className" placeholder="" value="${page.pageName}"
-									required>
-							</div>
-	</div>
-	<div class="form-group">
-							<label class="control-label col-sm-2" for="page_name">Year of Passing
+							<label  id="trustName" for="page_name"> 
 							</label>
-							<div class="col-sm-3">
-								<input type="date" class="form-control"
-								id="year" name="year" value="" required>
-							</div>
-
-</div>
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Trust/Society Address :
+							</label>
+							<label  id="trustAdd" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="trustCon" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Chairman/President Name:
+							</label>
+							<label  id="chairmanName" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="ChairCon" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Email ID::
+							</label>
+							<label  id="chairEmail" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Principal Name :
+							</label>
+							<label  id="princiName1" for="page_name"> 
+							</label>
+						</div>	
+			<!-- 	-->
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="princiCon1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Email ID: 
+							</label>
+							<label  id="princiEmail1" for="page_name"> 
+							</label>
+						</div>	
+				
+	
+					 <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button>
 				<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
-	</div>
+</div>
+<script type="text/javascript">
 	
+	function getCOPO() {
+		//alert("hii");
+			
+			var iqacName=document.getElementById("inst_name").value
+			
+			
+			 var inst_add=document.getElementById("inst_add").value
+				
+				var trust_address=document.getElementById("trust_address").value
+				var trust=document.getElementById("trust").value
+				//var trust_address=document.getElementById("trust_address").value
+				var contact_no=document.getElementById("contact_no").value
+				var chairman=document.getElementById("chairman").value
+				var contact_no1=document.getElementById("contact_no1").value
+				var email_id=document.getElementById("email_id").value
+				var prici_name=document.getElementById("prici_name").value
+				var princi_contact=document.getElementById("princi_contact").value
+				var princi_email=document.getElementById("princi_email").value
+			
+					
+			
+			$('#iqacName1').html(iqacName);
+			$('#instAdd').html(inst_add);
+			$('#trustName').html(trust);
+			$('#trustAdd').html(trust_address);
+			$('#trustCon').html(contact_no);
+			$('#chairmanName').html(chairman);
+			$('#ChairCon').html(contact_no1);
+			$('#chairEmail').html(email_id);
+			$('#princiName1').html(prici_name);
+			$('#princiCon1').html(princi_contact);
+			$('#princiEmail1').html(princi_email); 
+		
+			
+			
+		}
 
-
+	
+	
+	
+	</script>
 
 
 

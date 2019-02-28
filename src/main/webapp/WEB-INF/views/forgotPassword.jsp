@@ -74,12 +74,12 @@
             </c:choose>
             
                 <p>
-                    <label for="user_login">Username<br />
-                        <input type="text" name="username" id="username" class="input" value="" size="20" placeholder="Username" /></label>
+                    <label for="user_login">Username/Email ID<br />
+                        <input type="text" name="username" id="username" class="input" value="" size="20" placeholder="Valid Username/Email ID" /></label>
                 </p>
                 <p>
-                    <label for="user_pass">Password<br />
-                        <input type="password" name="password" id="password" class="input" value=""  placeholder="Password" size="20" /></label>
+                    <label for="user_pass">OTP<br />
+                        <input type="password" name="password" id="password" class="input" value=""  placeholder="Enter OTP Sent on Your Registered Number" size="20" /></label>
                 </p>
                <!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
@@ -88,20 +88,20 @@
 
 
                 <p class="submit">
-                    <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Sign In" />
+                    <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Submit" />
                     
                 </p>
             </form>
 
-            <p id="nav">
-                <a class="pull-left" href="showforgotPassForm" title="Password Lost and Found">Forgot password?</a>
+          <!--   <p id="nav">
+                <a class="pull-left" href="#" title="Password Lost and Found">Forgot password?</a>
                 <a class="pull-right" href="showInstituteRegistrationForm" title="Sign Up">Institute Registration</a>
             </p>
             <br />
             <br />
          
 <label class="pull-left" for="page_name"><b style="color:red; font-family:verdana;">Warning:</b><b style="font-family:verdana;" >Unauthorised access of this system is an offence</b>
-															</label>
+															</label> -->
 
         </div>
     </div>
