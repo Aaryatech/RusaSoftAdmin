@@ -423,10 +423,19 @@ function calExp(){
 	    (month<10 ? '0' : '') + month + '/' +
 	    (day<10 ? '0' : '') + day;
 	
-	//alert("date is"+output);
+	alert("date is"+output);
 	
 	var joinDate=document.getElementById("doj").value;
-	////alert("date of join"+joinDate);
+	alert("date of join"+joinDate);
+	
+	//date1: 24/09/2015 (24th Sept 2015)
+	//date2: 09/11/2015 (9th Nov 2015)
+	//the difference: 2.5 (months)
+	
+	
+	var difference = (date2.getDate() - date1.getDate()) / 30 +
+    date2.getMonth() - date1.getMonth() +
+    (12 * (date2.getFullYear() - date1.getFullYear()));
 	
 }
 

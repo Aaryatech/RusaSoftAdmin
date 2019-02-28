@@ -14,7 +14,7 @@
         -->
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <meta charset="utf-8" />
-        <title>Complete Admin : Login Page</title>
+        <title>RUSA : Login Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="" name="description" />
         <meta content="" name="author" />
@@ -60,7 +60,7 @@
 <div class="container-fluid">
     <div class="login-wrapper row">
         <div id="login" class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
-            <h1><a href="#" title="Login Page" tabindex="-1">Complete Admin</a></h1>
+            <h1><a href="#" title="Login Page" tabindex="-1">RUSA</a></h1>
 
             <form name="loginform" id="loginform" action="${pageContext.request.contextPath}/loginProcess" method="post">
             
@@ -75,11 +75,11 @@
             
                 <p>
                     <label for="user_login">Username<br />
-                        <input type="text" name="username" id="username" class="input" value="demo" size="20" /></label>
+                        <input type="text" name="username" id="username" class="input" value="" size="20" placeholder="Username" /></label>
                 </p>
                 <p>
                     <label for="user_pass">Password<br />
-                        <input type="password" name="password" id="password" class="input" value="demo" size="20" /></label>
+                        <input type="password" name="password" id="password" class="input" value=""  placeholder="Password" size="20" /></label>
                 </p>
                <!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
@@ -93,11 +93,15 @@
                 </p>
             </form>
 
-           <!--  <p id="nav">
+            <p id="nav">
                 <a class="pull-left" href="#" title="Password Lost and Found">Forgot password?</a>
-                <a class="pull-right" href="ui-register.html" title="Sign Up">Sign Up</a>
-            </p> -->
-
+                <a class="pull-right" href="showInstituteRegistrationForm" title="Sign Up">Institute Registration</a>
+            </p>
+            <br />
+            <br />
+         
+<label class="pull-left" for="page_name"><b style="color:blue;">Warning:</b><b>Unauthorised access of this system is an offence</b>
+															</label>
 
         </div>
     </div>

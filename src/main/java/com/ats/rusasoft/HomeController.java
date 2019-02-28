@@ -59,5 +59,45 @@ public class HomeController {
 		return model;
 
 	}
+	@RequestMapping(value = "/showLoginForm", method = RequestMethod.GET)
+	public ModelAndView showLoginForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("login");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
+	@RequestMapping(value = "/showInstituteRegistrationForm", method = RequestMethod.GET)
+	public ModelAndView showInstituteRegistrationForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("instituteRegistration");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 }

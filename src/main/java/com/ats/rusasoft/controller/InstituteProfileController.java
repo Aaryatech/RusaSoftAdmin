@@ -652,6 +652,25 @@ public class InstituteProfileController {
 
 	}
 	
+	@RequestMapping(value = "/showAMC", method = RequestMethod.GET)
+	public ModelAndView showAMC(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/amc");
+		try {
+
+			
+			model.addObject("title", "Annual Maintenance");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
 	
 
 
