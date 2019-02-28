@@ -53,6 +53,8 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
+							<a href="#myModal1"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a>
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 								<a class="box_toggle fa fa-chevron-down"></a>
@@ -69,52 +71,11 @@
 
 
 								<div class="col-xs-12">
-<div class="form-group">
 
-									<table class="table table-striped dt-responsive display" id="example8">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th >Year</th>
-												<th >Vision</th>
-												<th >Mission</th>
-												
-												<th >Program Educational Objectives</th>
-												<th>UG/PG</th>
-												<th >Program Outcome (as per Accreditation Manual)</th>
-											
-													<th width="20%">Program Specific Outcomes(Define By the Program )&nbsp;&nbsp;&nbsp;&nbsp;<a href="#myModal" data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a></th>
-												
-											</tr>
-
-                                               </thead>
-														</table>
-</div>
-									<div class="form-group">
-
-									<table class="table table-striped dt-responsive display" id="example10">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th >Year</th>
-												<th >Program Outcome (as per Accreditation Manual)</th>
-											
-												
-													<th >PSO(Define By the Program )</th>
-													<th >Mapping(Yes/No)</th>
-												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												
-												<a href="#myModal2"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a></th>
-											</tr>
-
-                                               </thead>
-														</table>
-														</div>
+														<h4>No. of Students Admitted:</h4>
 
 <div class="form-group">
-									<table class="table table-striped dt-responsive display" id="example9">
+									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
 												<th width="5%">Sr No</th>
@@ -127,23 +88,23 @@
 													
 												<th width="20%">Date/Year of Introduction</th>
 												<th width="20%" >Approved by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="#myModal1"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a></th>
+												</th>
 												
 											</tr>
-
+</thead>
+<tbody>
 											<tr>
-												<th width="5%"></th>
-												<th width="10%"></th>
-												<th width="10%"></th>
-												<th width="5%"></th>
-												<th width="10%"></th>
-												<th width="10%">Sanctioned Intake</th>
-												<th width="10%">Admitted Student</th>
-												<th width="20%"></th>
-												<th width="20%"></th>
+												<td width="5%"></td>
+												<td width="10%"></td>
+												<td width="10%"></td>
+												<td width="5%"></td>
+												<td width="10%"></td>
+												<td width="10%">Sanctioned Intake</td>
+												<td width="10%">Admitted Student</td>
+												<td width="20%"></td>
+												<td width="20%"></td>
 											</tr> 
-										</thead>
+										</tbody>
 </table>
 
 
@@ -578,7 +539,7 @@ function getData1() {
 			temp1=approve;
 		}
 	
-		var dataTable = $('#example9')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row
@@ -605,7 +566,7 @@ function getData1() {
 function showForm() {
 	//document.getElementById("abc").style = "display:none"
 		var qualType=document.getElementById("approve").value
-		alert("qualType::"+qualType);
+		//alert("qualType::"+qualType);
 		
 		if (qualType == 7) {
 
@@ -643,88 +604,6 @@ function hideText() {
 	
 	}
 
-	function getData3() {
-		
-		var i = parseInt(document.getElementById("index1").value);
-		var year = document.getElementById("academicYear1").value;
-		var nba=document.getElementById("nba").value
-		//alert(vision);
-		
-		var ps=document.getElementById("ps").value
-		//alert(mission);
-		var stu=document.getElementById("stu").value
-		//alert(po);
-		
-		var val=document.getElementById("val").value
-		
-		
-	
-		var dataTable = $('#example10')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					year,
-					nba,
-					ps,
-					stu,
-					val
-					
-					
-						 ])
-		.draw();
-		
-		document.getElementById("index1").value = i + 1;
-		
-	}
-
-	function getData() {
-	
-		var i = parseInt(document.getElementById("index").value);
-		var objective=document.getElementById("objective").value
-		var vision=document.getElementById("vision").value
-		//alert(vision);
-		
-		var mission=document.getElementById("mission").value
-		//alert(mission);
-		var po=document.getElementById("po").value
-		//alert(po);
-		
-		//var ug=document.getElementById("ug").value
-		//alert(ug);
-		var pso=document.getElementById("pso").value
-		//alert(pso);
-		
-		var year = document.getElementById("academicYear").value;
-		var pg=document.getElementById("pg").value
-		//alert(pg);
-		//alert("hii");
-		var dataTable = $('#example8')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					year,
-					vision,
-					mission,
-					objective,
-					pg,
-					po,
-					pso
-					
-					
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-	}
-	
-	
 	
 	
 	</script>

@@ -312,7 +312,7 @@
 																of Joining : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="doj"
+																<input type="date" class="form-control" id="doj" onchange="calExp()"
 																	name="doj" placeholder="Date of Joining" value=""
 																	required>
 															</div>
@@ -324,7 +324,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control" id="prevExp"
-																	name="prevExp" placeholder="Previous Experience"
+																	name="prevExp" placeholder="Previous Experience"  onchange="calExp()"
 																	value="" required>
 															</div>
 
@@ -334,13 +334,16 @@
 															
 														<div class="form-group">
 														
-														<label class="control-label col-sm-2" for="smallheading">Current
+														<label class="control-label col-sm-2" for="smallheading">Total 
 																Experience : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control" id="curExp"
+															<!-- 	<input type="text" class="form-control" id="curExp"
 																	name="curExp" placeholder="Current Experience" value=""
-																	required>
+																	required> -->
+																		<label class="control-label col-sm-2" for="smallheading">10 
+																
+															</label>
 															</div>
 														</div>
 													
@@ -407,6 +410,28 @@ function hideText() {
 		
 	
 	}
+	
+	
+	
+function calExp(){
+	var d = new Date();
+
+	var month = d.getMonth()+1;
+	var day = d.getDate();
+
+	var output = d.getFullYear() + '/' +
+	    (month<10 ? '0' : '') + month + '/' +
+	    (day<10 ? '0' : '') + day;
+	
+	//alert("date is"+output);
+	
+	var joinDate=document.getElementById("doj").value;
+	////alert("date of join"+joinDate);
+	
+}
+
+
+
 </script>
 
 </body>

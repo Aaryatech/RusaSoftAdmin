@@ -224,7 +224,7 @@
 															</div>
 														</div>
 
-
+<!-- 
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="usingremot"
 																style="text-align: left;"> e-Journals : <span
@@ -326,7 +326,7 @@
 
 															</div>
 														</div>
-														
+														 -->
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
 																	style="text-align: left;"> Avg. of Teachers Using Library resources per day : <span class="text-danger">*</span>

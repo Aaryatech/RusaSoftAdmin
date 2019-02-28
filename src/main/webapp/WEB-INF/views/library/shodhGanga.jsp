@@ -72,40 +72,22 @@
 									<div class="col-xs-12">
 
 
-
+<!-- 
 										<h5 class="title pull-left">
 											<strong>Facilities</strong>
-										</h5>
+										</h5> -->
 										<div class="col-xs-12"></div>
 
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="page_name">Location
-												of the Campus  </label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" id="hodName"
-													name="hodName" placeholder=" " value="${page.pageName}"
-													required>
-											</div>
-											<label class="control-label col-sm-3" for="page_name">Area of Campus in sq.mts.
-
-											</label>
-											<div class="col-sm-3">
-											<input type="text" class="form-control" id="hodName"
-													name="hodName" placeholder=" " value="${page.pageName}"
-													required>
-											</div>
-										</div>
-
-
+										
 
 										<table class="table table-striped dt-responsive display" id="example1">
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
-													<th width="20%">Facility</th>
+												
 														<th width="20%">Yes/No</th>
-													<th width="10%">No.</th>
-													<th width="20%">Associated with</th>
+													
+													<th width="30%">Membership Details</th>
 												</tr>
 											</thead>
 
@@ -222,7 +204,7 @@
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Facility Details</h4>
+					<h4 class="modal-title">e Shodh Ganga</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
@@ -231,54 +213,32 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
-									<div class="form-group">
-							<label class="control-label col-sm-3" for="page_name">Facility</label> <select
-								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="Classroom">Classroom</option>
-								<option value="Seminar Halls">Seminar Halls</option>
-								<option value="ICT Rooms">ICT Rooms</option>
-								<option value="Smartboard">Smartboard</option>
-							<option value="Computers">Computers</option>
-								<option value="Mooc Courses">Mooc Courses</option>
-									<option value="Virtual Lab">Virtual Lab</option>
-									<option value="Nptel">Nptel</option>
-							
-							</select>
-						</div>
-						
+								<input type="hidden" id="index" name="index" value="0">
+								
 							<div class="form-group">
-							<label class="control-label col-sm-6" for="page_order">Is
+							<label class="control-label col-sm-6" for="page_order">Is e Shodh Ganga
 							 :<span class="text-danger">*</span>
 						</label>
 						<div class="col-sm-2">
-							 <input type="radio" name="stu" id="stu" checked value="yes">Yes
-							<input type="radio" name="stu" id="stu1" value="no">No
+							 <input type="radio" name="stu" id="stu" checked value="1" onclick="showForm(this.value)">Yes
+							<input type="radio" name="stu" id="stu1" value="0" onclick="showForm(this.value)">No
 						</div>
 					</div>
 						
 						
-						<div class="form-group">
+						<div class="form-group" id="abc">
 						
-							<label class="control-label col-sm-6" for="page_name">No. of Facilities
+							<label class="control-label col-sm-6" for="page_name">Membership Details
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualName" placeholder="No. of Facilities"
+								<input type="text" class="form-control" id="mem" placeholder="Membership Details"
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
 	</div>
 
 	
-	<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Total Area(in sqm)
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="className" placeholder="Total Area(in sqm)"
-									name="qualName" placeholder="" value="${page.pageName}" 
-									>
-							<!-- </div> -->
-</div>
+	
 	
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 				<!-- 	</form> -->
@@ -287,7 +247,7 @@
 		</div>
 	</div>
 	
-	
+	</div>
 	
 
 
@@ -295,11 +255,10 @@
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
-		var i=0;
+		var i = parseInt(document.getElementById("index").value);
 
-		var qualType=document.getElementById("qualType").value
-		var qualName=document.getElementById("qualName").value
-		var className=document.getElementById("className").value
+		
+		var mem=document.getElementById("mem").value
 		
 		var rate_value;
 		if (document.getElementById('stu').checked) {
@@ -311,7 +270,23 @@
 			 rate_value = document.getElementById('stu1').value;
 			 //alert("::"+rate_value);
 		}
-	//	var stu = document.getElementById("stu").value
+		
+		//var stu = document.getElementById("stu").value
+		var temp;
+		var temp1;
+		
+		if(rate_value == 1){
+			//alert("in yes");
+			//alert(mem);
+			temp="Yes";
+			temp1=mem;
+		}
+		else{
+			//alert("in no");
+			//alert(stu);
+			temp="No";
+			temp1="-";
+		}
 		var dataTable = $('#example1')
 		.DataTable();
 		
@@ -319,16 +294,37 @@
 		.add(
 				[
 					i+1,
-					qualType,
-					rate_value,
-					qualName,
-					className
+					temp,
+					temp1
 						 ])
 		.draw();
 		
-		
-		
+		document.getElementById("index").value = i + 1;
+		document.getElementById("qualName").value='-';
 	}
+	
+	function showForm(qualType) {
+		//document.getElementById("abc").style = "display:none"
+			//var qualType=document.getElementById("functionalMOU").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 1) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 
 	</script>
 	

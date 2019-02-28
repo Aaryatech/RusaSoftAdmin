@@ -863,7 +863,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ResearchInnovation/linkage");
 
-			model.addObject("title", "Research & Innovation");
+			model.addObject("title", "Linkage");
 
 		} catch (Exception e) {
 
@@ -885,7 +885,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/ResearchInnovation/mous");
 
- 			model.addObject("title", "Research & Innovation");
+ 			model.addObject("title","MOUs");
 
  		} catch (Exception e) {
 
@@ -907,7 +907,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ResearchInnovation/extActivities");
 
-			model.addObject("title", "Research & Innovation");
+			model.addObject("title", "Extension Activities");
 
 		} catch (Exception e) {
 
@@ -929,7 +929,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/ResearchInnovation/genderIssue");
 
- 			model.addObject("title", "Research & Innovation");
+ 			model.addObject("title", "Gender Issue Detail");
 
  		} catch (Exception e) {
 
@@ -951,7 +951,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ResearchInnovation/comActivties");
 
-			model.addObject("title", "Research & Innovation");
+			model.addObject("title", "Community Activities");
 
 		} catch (Exception e) {
 
@@ -966,6 +966,52 @@ public class MasterController {
 	}
 
 	/////////////////Program Details///////////////////
+  
+  
+  @RequestMapping(value = "/showEucationalObjective", method = RequestMethod.GET)
+ 	public ModelAndView showEucationalObjective(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ProgramDetails/educationalObjective");
+
+ 			model.addObject("title", "Program Details");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  @RequestMapping(value = "/showpoPso", method = RequestMethod.GET)
+ 	public ModelAndView showpoPso(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ProgramDetails/poPSO");
+
+ 			model.addObject("title", "Program Details");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+   
+  
   
   @RequestMapping(value = "/showProgDetail1", method = RequestMethod.GET)
 	public ModelAndView showProgDetail1(HttpServletRequest request, HttpServletResponse response) {
@@ -998,7 +1044,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/ProgramDetails/studAdmitted");
 
- 			model.addObject("title", "Student Addmitted");
+ 			model.addObject("title", "Student Addmitted Categorywise");
 
  		} catch (Exception e) {
 
@@ -1020,7 +1066,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ProgramDetails/studAdmittedLoc");
 
-			model.addObject("title", "Student Addmitted");
+			model.addObject("title", "Student Addmitted Locationwise");
 
 		} catch (Exception e) {
 
@@ -1043,7 +1089,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ProgramDetails/StudSuppSch");
 
-			model.addObject("title", "Program Details");
+			model.addObject("title", "Student Support Scheme");
 
 		} catch (Exception e) {
 
@@ -1066,7 +1112,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/ProgramDetails/training");
 
- 			model.addObject("title", "Program Details");
+ 			model.addObject("title", "Training Details");
 
  		} catch (Exception e) {
 
@@ -1088,7 +1134,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ProgramDetails/highEdu");
 
-			model.addObject("title", "Program Details");
+			model.addObject("title", "Higher Education Details");
 
 		} catch (Exception e) {
 
@@ -1110,7 +1156,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/ProgramDetails/studActivity");
 
- 			model.addObject("title", "Program Details");
+ 			model.addObject("title", "Student Activity Organized");
 
  		} catch (Exception e) {
 
@@ -1132,7 +1178,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ProgramDetails/studActivityAttend");
 
-			model.addObject("title", "Program Details");
+			model.addObject("title", "Student Activity Attended");
 
 		} catch (Exception e) {
 
@@ -1154,7 +1200,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/ProgramDetails/alumini");
 
-			model.addObject("title", "Program Details");
+			model.addObject("title", "Alumini");
 
 		} catch (Exception e) {
 
@@ -1201,7 +1247,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/InfrastructureModule/institutional");
 
- 			model.addObject("title", "Infrastructure Detail");
+ 			model.addObject("title", "Instructional Detail");
 
  		} catch (Exception e) {
 
@@ -1223,7 +1269,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/InfrastructureModule/administrative");
 
-			model.addObject("title", "Infrastructure Detail");
+			model.addObject("title", "Adminstrative Detail");
 
 		} catch (Exception e) {
 
@@ -1244,7 +1290,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/InfrastructureModule/amenities");
 
-			model.addObject("title", "Infrastructure Detail");
+			model.addObject("title", "Ameneties Detail");
  
 		} catch (Exception e) {
 
@@ -1266,7 +1312,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/InfrastructureModule/ITinfra");
 
- 			model.addObject("title", "Infrastructure Detail");
+ 			model.addObject("title", "IT Infrastructure Detail");
   
  		} catch (Exception e) {
 
@@ -1288,7 +1334,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/InfrastructureModule/internetCon");
 
-			model.addObject("title", "Infrastructure Detail");
+			model.addObject("title", "Internet Connection Detail");
 
 		} catch (Exception e) {
 
@@ -1310,7 +1356,7 @@ public class MasterController {
 
  			model = new ModelAndView("master/InfrastructureModule/eContent");
 
- 			model.addObject("title", "Infrastructure Detail");
+ 			model.addObject("title", "e Content Detail");
 
  		} catch (Exception e) {
 
@@ -1333,7 +1379,7 @@ public class MasterController {
 
 			model = new ModelAndView("master/InfrastructureModule/physicalFacilities");
 
-			model.addObject("title", "Infrastructure Detail");
+			model.addObject("title", "Physical Facilities ");
 
 		} catch (Exception e) {
 

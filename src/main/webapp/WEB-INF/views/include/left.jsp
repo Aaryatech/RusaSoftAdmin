@@ -12,11 +12,11 @@
 				</div>
 				<div class="profile-details col-xs-8">
 					<h3>
-						<a href="ui-profile.html">Shane Taylor</a>
+						<a href="ui-profile.html">Institute Name</a>
 						<!-- Available statuses: online, idle, busy, away and offline -->
 						<span class="profile-status online"></span>
 					</h3>
-					<p class="profile-title">Web Developer</p>
+					<p class="profile-title">Address</p>
 				</div>
 			</div>
 			<!-- USER INFO - END -->
@@ -390,6 +390,17 @@
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/libraryBasicInfo">Basic Information</a></li>
+							
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showEJournals">e-Journals</a></li>
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showEShodhSindhu">e-Shodh Sindhu</a></li>
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showEShodhGanga">Shodh Ganga Membership</a></li>
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showEBooks">e-Books</a></li>
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showDatabase">Databases</a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/rareBookInformation">Rare Books Information</a></li>

@@ -22,7 +22,7 @@
                 <li class="profile">
                     <a href="#" data-toggle="dropdown" class="toggle">
                         <img src="${pageContext.request.contextPath}/resources/assets/images/avatar.png" alt="user-image" class="img-circle img-inline">
-                        <span>Shane Taylor <i class="fa fa-angle-down"></i></span>
+                        <span>User <i class="fa fa-angle-down"></i></span>
                     </a>
                     <ul class="dropdown-menu profile animated fadeIn">
                         
