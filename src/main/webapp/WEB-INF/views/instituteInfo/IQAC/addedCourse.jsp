@@ -159,7 +159,7 @@
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Training Details</h4>
+					<h4 class="modal-title">Course Details</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
@@ -187,22 +187,21 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Name of Employer
+							<label class="control-label col-sm-6" for="page_name">Title of Value added Course
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="empName"
-									name="subTaut" value="${page.pageName}"
+								<input type="text" class="form-control" id="courseTitle" placeholder="Title of Value added Course"
+									name="courseTitle" value="${page.pageName}" 
 									required>
 							<!-- </div> -->
 	</div>
 	
 	
 <div class="form-group">
-						<label class="control-label col-sm-6" for="academicYear">Program
-							Type</label> <select id="progType" name="progType"
+						<label class="control-label col-sm-6" for="academicYear">Conduction  for 
+						</label> <select id="conduction" name="conduction"
 							class="form-control" required>
-							<option value="CERTIFICATE">CERTIFICATE</option>
-							<option value="DIPLOMA">DIPLOMA</option>
+							
 							<option value="UG">UG</option>
 								<option value="PG">PG</option>
 
@@ -211,11 +210,11 @@
 	
 		<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Name of Program
+							<label class="control-label col-sm-6" for="page_name"> Duration
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="progName"
-									name="subTaut" value="${page.pageName}"
+								<input type="text" class="form-control" id="duration"  placeholder="Duration"
+									name="duration" value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
@@ -224,11 +223,11 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">No. of Students Placed
+							<label class="control-label col-sm-6" for="page_name">No of students participated
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="stud"
-									name="subTaut" value="${page.pageName}"
+								<input type="text" class="form-control" id="studParticipated" placeholder="No of students participated"
+									name="studParticipated" value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
@@ -237,39 +236,16 @@
 						
 						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Address of Employer
+							<label class="control-label col-sm-6" for="page_name"> Association with.
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="address"
-									name="subTaut" value="${page.pageName}"
+								<input type="text" class="form-control" id="association" placeholder="Association with"
+									name="association" value="${page.pageName}"
 									required>
 							<!-- </div> -->
 	</div>
 						
-						<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Contact Details
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="contact"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Package Offered
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="package"
-									name="subTaut" value="${page.pageName}"
-									required>
-										<input type="hidden" id="index" name="index" value="0">
-							<!-- </div> -->
-	</div>
-						
-		
 
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
@@ -283,14 +259,13 @@
 	//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
 			var academicYear = document.getElementById("academicYear").value;
-		var empName=document.getElementById("empName").value
-		var progName=document.getElementById("progName").value
-		var stud=document.getElementById("stud").value
-		var address=document.getElementById("address").value
-		var contact=document.getElementById("contact").value
-		var package1=document.getElementById("package").value
+		
+		var courseTitle=document.getElementById("courseTitle").value
+		var conduction=document.getElementById("conduction").value
+		var duration=document.getElementById("duration").value
+		var studParticipated=document.getElementById("studParticipated").value
 	
-		var progType=document.getElementById("progType").value
+		var association=document.getElementById("association").value
 		
 		//alert(stud);
 		
@@ -302,14 +277,12 @@
 				[
 					i+1,
 					academicYear,
-					empName,
-					progType,
-					progName,
-					stud,
-					address,
-					contact,
-					package1
-					
+					courseTitle,
+					conduction,
+					duration,
+					studParticipated,
+					association
+				
 						 ])
 		.draw();
 		

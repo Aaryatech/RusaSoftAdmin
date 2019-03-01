@@ -211,6 +211,11 @@
 			Annual Maintenance
 								</a></li>
 								
+									<li><a class=""
+							href="${pageContext.request.contextPath}/showCommitteeDetail">
+	Committee Details
+								</a></li>
+								
 								
 
 
@@ -461,6 +466,9 @@
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showComAct">Community Activities Form </a></li>
+
+                    <li><a class=""
+							href="${pageContext.request.contextPath}/showSubDetails1">Research Centre Detail</a></li>
 
 
 					</ul></li>

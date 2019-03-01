@@ -117,6 +117,7 @@
 
 
 													<div class="col-xs-12">
+														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">Institute
 																Name<span class="text-danger">*</span>
@@ -127,6 +128,17 @@
 																	value="${page.pageName}">
 															</div>
 														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">AISHE Code
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="page_name"
+																	name="page_name" placeholder="AISHE Code"
+																	value="${page.pageName}">
+															</div>
+														</div>
+														
 
 
 
@@ -141,6 +153,31 @@
 															</div>
 														</div>
 
+
+	<div class="form-group">
+															<label class="control-label col-sm-3" for="planning"
+																style="text-align: left;">2F/12B Registration (YES/No)  :
+
+                                                                   <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" id="copoMapping" name="copoMapping" onclick="showDiv(this.value)"
+																	value="1" checked>Yes <input type="radio" onclick="showDiv(this.value)"
+																	id="planning" name="planning" value="0">No
+															</div>
+															<div id="abc">
+															<label class="control-label col-sm-2" for="page_order">Date of Registration
+															:<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="date" class="form-control" id="page_order"
+																	name="page_order" placeholder="Trust/Society Name"
+																	value="" required>
+															</div>
+															</div>
+														</div>
+														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
 																Name :<span class="text-danger">*</span>
@@ -363,7 +400,20 @@
 
 
 
+<script type="text/javascript">
+function showDiv(value) {
 
+	
+
+	if (value == 1) {
+		//alert(value);
+		document.getElementById("abc").style.display = "block";
+	} else {
+		//alert(value);
+		document.getElementById("abc").style.display = "none";
+	}
+}
+</script>
 
 
 	<!-- END CONTAINER -->

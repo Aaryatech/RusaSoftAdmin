@@ -140,8 +140,11 @@
 																		<th width="10%">Sr No</th>
 																		<th width="15%">Academic Year</th>
 																		<th width="30%">Qualification</th>
-																		<th width="15%">Year of Passing</th>
 																		<th width="30%">Class</th>
+																			<th width="30%">University Name</th>
+																		<th width="15%">City</th>
+																			<th width="15%">Year of Passing</th>
+																		
 																	</tr>
 																</thead>
 
@@ -250,14 +253,14 @@
 						
 							<label class="control-label col-sm-6" for="page_name">Other Qualification
 							</label>
-							<!-- <div class="col-sm-3"> -->
+							<!-- <div class="col-sm-"> -->
 								<input type="text" class="form-control" id="qualName" required
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
 	</div>
 						
-						<div class="form-group">
+					<%-- 	<div class="form-group">
 						
 							<label class="control-label col-sm-1" for="page_name">Class
 							</label>
@@ -266,17 +269,51 @@
 									name="className" placeholder="" value="${page.pageName}"
 									required>
 							</div>
-	</div>
-	<div class="form-group">
-							<label class="control-label col-sm-2" for="page_name">Year of Passing
-							</label>
-							<div class="col-sm-3">
-								<input type="date" class="form-control"
-								id="year" name="year" value="" required>
-							</div>
+	</div> --%>
+	
+	
+										<div class="form-group">
+						<label class="control-label col-sm-6" for="passClass">Class
+							Year</label> <select id="passClass" name="passClass"
+							class="form-control" required>
+							<option value="First">First</option>
+							<option value="Second">Second</option>
+							<option value="Pass">Pass </option>
+								<option value="Class">Class</option>
 
-</div>
+						</select>
+					</div>
+					
+					<div class="form-group">
 
+						<label class="control-label col-sm-6" for="beneficiaryMOU">University
+						</label> <input type="text" class="form-control"
+							id="university" name="university"
+							placeholder="University"
+							value="${page.pageName}" required>
+					</div>
+				
+	
+					
+<div class="form-group">
+
+						<label class="control-label col-sm-6" for="totalParticipants">City
+						</label> <input type="text" class="form-control"
+							id="city" name="city"
+							placeholder="City"
+							value="${page.pageName}" required>
+					</div>
+
+<div class="form-group">
+
+						<label class="control-label col-sm-6" for="totalParticipants">Year of Passing
+						</label> <input type="date" class="form-control"
+							id="year" name="totalParticipants"
+							placeholder="Year of Passing"
+							value="${page.pageName}" required>
+					</div>
+
+				
 						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 				<!-- 	</form> -->
 				</div>
@@ -330,8 +367,10 @@
 		var qualType=document.getElementById("qualType").value
 		var qualName=document.getElementById("qualName").value
 		//alert(qualName);
-		var className=document.getElementById("className").value
+		var passClass=document.getElementById("passClass").value
 		var year=document.getElementById("year").value
+		var university=document.getElementById("university").value
+		var city=document.getElementById("city").value
 		var temp;
 		if (qualType == 7) {
 
@@ -351,8 +390,11 @@
 					i+1,
 					academicYear,
 					temp,
-					year,
-					className
+					passClass,
+					university,
+					city,
+					year
+					
 						 ])
 		.draw();
 		

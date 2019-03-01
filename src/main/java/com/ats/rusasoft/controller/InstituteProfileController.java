@@ -671,6 +671,44 @@ public class InstituteProfileController {
 
 	}
 	
+	@RequestMapping(value = "/showCommitteeDetail", method = RequestMethod.GET)
+	public ModelAndView showCommitteeDetail(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/committee");
+		try {
+
+			
+			model.addObject("title", "Committee Details");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showAddedCourses", method = RequestMethod.GET)
+	public ModelAndView showAddedCourses(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addedCourse");
+		try {
+
+			
+			model.addObject("title", "Course Details");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
 	
 
 

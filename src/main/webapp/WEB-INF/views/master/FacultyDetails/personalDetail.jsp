@@ -259,11 +259,11 @@
 														<div class="form-group">
 														
 														<label class="control-label col-sm-2" for="smallheading">PAN
-																No : <span class="text-danger">*</span>
+																No : <span class="text-danger"></span>
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control" id="panNo"
-																	name="panNo" placeholder="PAN No" value="" required>
+																	name="panNo" placeholder="PAN No" value="" >
 															</div>
 														<div class="col-sm-2">
 															</div>

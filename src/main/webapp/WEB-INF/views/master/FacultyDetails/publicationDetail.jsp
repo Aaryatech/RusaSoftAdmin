@@ -122,17 +122,38 @@
 															</h5>
 
 															<div class="col-xs-12"></div>
+															
+															
+															<div class="form-group">
+															
+																	<label class="control-label col-sm-2" for="smallheading">Title of Publication
+																	: <span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-6">
+																	<input type="text" class="form-control" id="dob"
+																		name="dob" placeholder="Title of Publication" value=""
+																		required>
+																</div>
+
+															
+															</div>
+															
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="page_order">Conference
 																	Attended :<span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-3">
+																<div class="col-sm-6">
 																	National <input type="radio" name="conat" id="conat"
 																		checked value="0"> International<input
 																		type="radio" name="conat" id="conat" value="1">
+																		State<input
+																		type="radio" name="conat" id="conat" value="2">
 																</div>
+																
+																
+																
 
 															</div>
 															<div class="form-group">
