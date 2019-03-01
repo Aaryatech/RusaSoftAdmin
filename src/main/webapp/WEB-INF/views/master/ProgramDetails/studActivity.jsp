@@ -248,6 +248,9 @@
 								id="cat" name="cat" onchange="showForm()" class="form-control"  required>
 								<option value="Sports">Sports</option>
 								<option value="Cultural">Cultural</option>
+								<option value="Curricular">Curricular</option>
+								<option value=" Co-curricular"> Co-curricular</option>
+								<option value="Extra Curricular ">Extra Curricular </option>
 								<option value="7">Other Competition</option>
 							
 							</select>

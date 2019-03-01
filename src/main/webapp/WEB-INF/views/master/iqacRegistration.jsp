@@ -89,8 +89,8 @@
 							<h2 class="title pull-left">IQAC Registration Form</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/iqacList"><button
-										type="button" class="btn btn-info">< Back</button></a --%><a
+								<a href="${pageContext.request.contextPath}/showIqacList"><button
+										type="button" class="btn btn-info">< Back</button></a><a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -171,7 +171,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Email ID
+															<label class="control-label col-sm-2" for="smallheading">Email ID(Official)
 																: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -185,8 +185,8 @@
 															
 															<a href="#myModal2"
 														data-toggle="modal"><button type="submit" onclick="getCOPO()"
-																class="btn btn-info">Confirm</button></a>
-																<button type="submit" class="btn btn-primary">Submit</button>
+																class="btn btn-info">Submit</button></a>
+															
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -241,12 +241,11 @@
 						method="get"> --%>
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
-						
 								
 								
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">IQAC I/C Name
+							<label class="control-label col-sm-3" for="page_name">IQAC I/C Name:
 							</label>
 							<!-- <div class="col-sm-3"> -->
 								<label  id="iqacName1" for="page_name"> 
@@ -260,22 +259,18 @@
 							<label class="control-label col-sm-3" for="page_name">Designation : 
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="designation1" readonly
-									name="designation1" placeholder="" value="${page.pageName}"
-									>
+								<label  id="designtion1" for="page_name"> 
+							</label>
 							<!-- </div> -->
 	</div>
 					
 					<div class="form-group">
 						
 							<label class="control-label col-sm-3" for="page_name">Date
-				              Of Joining : : 
+				              Of Joining : 
 							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="dateOfJoin1" readonly
-									name="dateOfJoin1" placeholder="" value="${page.pageName}"
-									>
-							<!-- </div> -->
+							<label  id="date1" for="page_name"> 
+							</label>
 	</div>
 	
 	
@@ -286,28 +281,22 @@
 							<label class="control-label col-sm-3" for="page_name">Contact 
 									No :
 							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="contactNo1" readonly
-									name="contactNo1" placeholder="" value="${page.pageName}"
-									>
-							<!-- </div> -->
+							<label  id="conNumber1" for="page_name"> 
+							</label>
 	</div>
 	
 	<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Email
+							<label class="control-label col-sm-3" for="page_name">Email ID(Official)
 									
 							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="email1" readonly
-									name="email1" placeholder="" value="${page.pageName}"
-									>
-							<!-- </div> -->
+							<label  id="emailId1" for="page_name"> 
+							</label>
 	</div>
 					</div>
 	
 	
-						<!-- <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button> -->
+			<button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button> 
 				<!-- 	</form> -->
 				</div>
 			</div>
@@ -326,22 +315,14 @@
 			var dateOfJoin=document.getElementById("dateOfJoin").value
 			var contactNo=document.getElementById("contactNo").value
 			var email=document.getElementById("email").value
-			
 			$('#iqacName1').html(iqacName);
-			
-			/* document.getElementById("iqacName1").innerText=iqacName; */
-			
-			document.getElementById("designation1").value=designation;
-			document.getElementById("dateOfJoin1").value=dateOfJoin;
-			document.getElementById("contactNo1").value=contactNo;
-			document.getElementById("email1").value=email;
-			
-			
+			$('#designtion1').html(designation);
+			$('#date1').html(dateOfJoin);
+			$('#conNumber1').html(contactNo);
+			$('#emailId1').html(email);
 			
 		}
 
-	
-	
 	
 	</script>
 

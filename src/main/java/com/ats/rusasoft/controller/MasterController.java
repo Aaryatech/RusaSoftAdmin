@@ -63,6 +63,28 @@ public class MasterController {
 
 	}
 
+	
+	@RequestMapping(value = "/showIqacList", method = RequestMethod.GET)
+	public ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/iqacList");
+
+			model.addObject("title", "IQAC List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showIqacAfterLogin at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
 	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
 
@@ -465,6 +487,31 @@ public class MasterController {
 		return model;
 
 	}
+  
+  
+  @RequestMapping(value = "/showSubDetails1", method = RequestMethod.GET)
+ 	public ModelAndView showSubDetails1(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/ResearchInnovation/subDetails1");
+
+ 			model.addObject("title", "Subject Details Form");
+ 			
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
   
   @RequestMapping(value = "/showAcademicDetails", method = RequestMethod.GET)
 	public ModelAndView showAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -1380,6 +1427,52 @@ public class MasterController {
 			model = new ModelAndView("master/InfrastructureModule/physicalFacilities");
 
 			model.addObject("title", "Physical Facilities ");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  
+  @RequestMapping(value = "/showAdjuntFaculty", method = RequestMethod.GET)
+	public ModelAndView showAdjuntFaculty(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/adjuntFaculty");
+
+			model.addObject("title", "Adjunt Faculty Detail");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+  
+  @RequestMapping(value = "/showFacultyInfo", method = RequestMethod.GET)
+	public ModelAndView showFacultyInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/facultyInfo");
+
+			model.addObject("title", " Faculty Detail");
 
 		} catch (Exception e) {
 

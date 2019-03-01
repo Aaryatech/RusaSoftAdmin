@@ -138,9 +138,18 @@
 												<td>8956231213</td>
 												<td>xyz@gmail.com</td>
 												<td> <a
-											href="${pageContext.request.contextPath}/showFacultyDetails"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Faculty Details"><span
-												class="glyphicon glyphicon-list"></span></a></td>
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
+												class="glyphicon glyphicon-list"></span></a>
+												<a
+											href="${pageContext.request.contextPath}/showRegAcc" title="Edit"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
+												class="glyphicon glyphicon-edit"></span></a>
+												
+												<a
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Block"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-trash"></span></a></td>
 											
 											
 											

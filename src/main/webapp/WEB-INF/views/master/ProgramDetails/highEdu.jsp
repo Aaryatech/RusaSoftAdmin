@@ -70,12 +70,12 @@
 
 
 								<h5 class="title pull-left">
-									<strong>Migration to Higher Education</strong>
+									<strong>Progression to Higher Education</strong>
 								</h5>
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display" id="example1">
+									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
@@ -258,7 +258,7 @@
 		var qualName=document.getElementById("qualName").value
 		var className=document.getElementById("className").value
 
-		var dataTable = $('#example1')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row

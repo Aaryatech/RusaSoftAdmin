@@ -202,7 +202,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email ID:
+															<label class="control-label col-sm-2" for="page_order">Email ID(Official):
 															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -242,7 +242,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														
 	
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email ID:
+															<label class="control-label col-sm-2" for="page_order">Email ID(Official):
 															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -373,7 +373,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 				
 				<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Email ID::
+							<label class="control-label col-sm-6" for="page_name">Email ID(Official):
 							</label>
 							<label  id="chairEmail" for="page_name"> 
 							</label>
@@ -397,7 +397,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 				
 				<div class="form-group">
 						
-							<label class="control-label col-sm-6" for="page_name">Email ID: 
+							<label class="control-label col-sm-6" for="page_name">Email ID(Official): 
 							</label>
 							<label  id="princiEmail1" for="page_name"> 
 							</label>

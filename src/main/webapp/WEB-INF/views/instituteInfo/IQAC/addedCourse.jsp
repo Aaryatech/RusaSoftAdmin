@@ -80,13 +80,12 @@
 											<tr>
 												<th width="5%">Sr.No.</th>
 												<th width="10%">Academic Year</th>
-												<th width="15%">Name of Employer</th>
-												<th width="10%">Program Type</th>
-												<th width="10%">Name of Program</th>
-												<th width="10%">No. of Students Placed</th>
-												<th width="10%">Address of Employer</th>
-												<th width="10%">Contact Details</th>
-												<th width="15%">Package Offered</th>
+												<th width="15%">Title of Value added Course</th>
+												<th width="10%">Conduction  for (UG/PG)</th>
+												<th width="10%"> Duration</th>
+												<th width="10%">No of students participated</th>
+												<th width="10%"> Association with.</th>
+												
 											</tr>
 
 

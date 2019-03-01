@@ -79,10 +79,10 @@
 											<tr>
 												<th width="5%">Sr No</th>
 												<th width="10%" >Year</th>
-												<th >Program Outcome (as per Accreditation Manual)</th>
+												<th >Program Outcomes (PO as per Accreditation Manual)</th>
 											
 												
-													<th >PSO(Define By the Program )</th>
+													<th >Program Specific Outcomes (PSOs  Define By the Program)</th>
 													<th >Mapping(Yes/No)</th>
 												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												
@@ -161,7 +161,7 @@
 					</div>
 						
 									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Program Outcome (as per NBA)</label> <select
+						<label class="control-label col-sm-6" for="page_name">Program Outcomes (PO as per Accreditation Manual)</label> <select
 								id="nba" name="ug" class="form-control" onchange="showForm()" required>
 								<option value="Good">Good</option>
 								<option value="Better">Better</option>
@@ -176,7 +176,7 @@
 						
 		
 									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">PSO(Define By Program)</label> <select
+						<label class="control-label col-sm-6" for="page_name">Program Specific Outcomes (PSOs  Define By the Program)</label> <select
 								id="ps" name="ps" class="form-control"  required>
 								<option value="Good">Good</option>
 								<option value="Better">Better</option>

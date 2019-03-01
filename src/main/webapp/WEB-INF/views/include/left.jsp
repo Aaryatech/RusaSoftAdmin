@@ -39,7 +39,15 @@
 							href="${pageContext.request.contextPath}/hodRegistration">HOD
 								Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/showRegisterStaff">Faculty
-								Registration</a> <a class=""
+								Registration</a>
+								
+								<a class=""
+							href="${pageContext.request.contextPath}/showFacultyInfo">Faculty
+								Information</a>
+								<a class=""
+							href="${pageContext.request.contextPath}/showAdjuntFaculty">Faculty
+								Details</a>
+								 <a class=""
 							href="${pageContext.request.contextPath}/showRegAcc">Account
 								Officer Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/showRegDean">Dean/R&D Registration</a> <a class=""
@@ -218,6 +226,12 @@
 						<%-- <li><a class=""
 							href="${pageContext.request.contextPath}/showProgramDetails">Program
 								</a></li> --%>
+								<li><a class=""
+							href="${pageContext.request.contextPath}/showEucationalObjective">Educational Objective
+								 Form </a></li>
+								 <li><a class=""
+							href="${pageContext.request.contextPath}/showpoPso">PO/PSO
+								 Form </a></li>
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showProgDetail1">Program Details
 								 Form </a></li>

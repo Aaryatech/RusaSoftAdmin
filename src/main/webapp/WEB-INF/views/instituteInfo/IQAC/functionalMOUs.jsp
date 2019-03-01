@@ -127,7 +127,7 @@
 																		<th width="10%">Sr No</th>
 																		<th>Title of MoU</th>
 																		<th>MoU Duration / Period</th>
-																		<th >Functional MoU with Institution</th>
+																		<th >Functional MoU with Agency</th>
 																		<th>Academic Year</th>
 																	     <th>Beneficiary of MoU</th>
 																		<th >No. of Participants / Beneficiary</th>
@@ -229,7 +229,7 @@
 								<option value="University">University</option>
 									<option value="Industries">Industries</option>
 									<option value="Corporate Houses">Corporate Houses</option>
-									<option value="7">Any other Institute of National Importance</option>
+									<option value="7">Any other Institute of International/National/State Importance</option>
 
 						</select>
 					</div>

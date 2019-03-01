@@ -173,11 +173,11 @@
 														
 														
 														
-														<h4>PO,PSO,CO</h4>
+														<h4>Program Outcomes (POs) , PRogram Specific Outcomes (PSOs), Course Outcomes (COs)</h4>
 														
 														<div class="form-group">
 															<label class="control-label col-sm-8" for="planning"
-																style="text-align: left;">Program Outcomes; Program Specifications; Course Outcomes 
+																style="text-align: left;">Program Outcomes (POs) , PRogram Specific Outcomes (PSOs), Course Outcomes (COs) 
 evaluated by Institute:
  <span
 																class="text-danger">*</span>
