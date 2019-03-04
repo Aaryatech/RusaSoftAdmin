@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">IQAC Registration</h1>
+						<!-- 	<h1 class="title">IQAC Registration</h1> -->
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -121,7 +121,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">IQAC I/C Name
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="iqacName"
@@ -132,26 +132,40 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Designation : <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="status">
+																Designation <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<select id="designation" name="designation"
-																	class="form-control" required>
+																	class="form-control"  onchange="showForm()" required>
 																	<option value="Assistant Professor">Assistant Professor</option>
 																	<option value="Associate Professor">Associate Professor</option>
 																	<option value="Professor">Professor</option>
 																	<option value="Registrar">Registrar</option>
-																	<option value="-">Any Other</option>
+																	<option value="7">Any Other</option>
 																</select>
 															</div>
 														</div>
+														
+														
+														<div class="form-group" id="abc">
+															<label class="control-label col-sm-2" for="smallheading">Other Designation
+														  <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="desn"
+																	name="desn" 
+																	
+																	placeholder="Other Designation" value="" required>
+															</div>
+														</div>
+														
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="heading1">Date
-																Of Joining : <span class="text-danger">*</span>
+																Of Joining  <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="dateOfJoin"
 																	name="dateOfJoin" placeholder="Date Of Joining"
 																	value="" required>
@@ -160,7 +174,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Contact
-																No. : <span class="text-danger">*</span>
+																No.  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="contactNo"
@@ -172,7 +186,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Email ID(Official)
-																: <span class="text-danger">*</span>
+																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email"
@@ -324,9 +338,35 @@
 		}
 
 	
+	
+	
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("designation").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 	</script>
 
 	<script type="text/javascript">
+	
+	
 		jQuery(document).ready(
 				function($) {
 

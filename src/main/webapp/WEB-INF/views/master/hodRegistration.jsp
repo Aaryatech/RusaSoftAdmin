@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">HOD Registration</h1>
+						<!-- 	<h1 class="title">HOD Registration</h1> -->
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -165,16 +165,27 @@
 																Qualification : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="qualification" name="qualification" class="form-control"
+																<select id="qualification" name="qualification"  onchange="showForm()" class="form-control"
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
 																	<option value="2">M.phill</option>
-																	<option value="2">Ph.D.</option>
-																	<option value="2">Post Docterate</option>
-																	
-																	<option value="3">Any Other Course</option>
+																	<option value="3">Ph.D.</option>
+																	<option value="4">Post Docterate</option>
+																	<option value="5">Any Other Course</option>
 																</select>
+															</div>
+														</div>
+														
+															<div class="form-group" id="abc">
+															<label class="control-label col-sm-2" for="smallheading">Other Course
+														  <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="desn"
+																	name="desn" 
+																	
+																	placeholder="Other Designation" value="" required>
 															</div>
 														</div>
 
@@ -242,6 +253,30 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
+	
+	
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("qualification").value
+		//alert("qualType::"+qualType);
+			
+			if (qualType == 5) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 		jQuery(document).ready(
 				function($) {
 

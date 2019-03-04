@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -134,7 +134,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -144,8 +144,8 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email ID(Official):
-																:<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="page_order">Email ID(Official)
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
@@ -155,7 +155,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Qualification
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
@@ -167,9 +167,9 @@
 																
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Joining
-																Date :<span class="text-danger">*</span>
+																Date <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="page_order"
 																	name="page_order" placeholder="Contact No" required>
 															</div>
@@ -178,9 +178,9 @@
 													
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Relieving
-																Date :<span class="text-danger">*</span>
+																Date <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="page_order"
 																	name="page_order" placeholder="Contact No" required>
 															</div>

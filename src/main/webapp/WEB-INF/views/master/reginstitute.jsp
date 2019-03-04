@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -144,7 +144,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Institute
-																Address :<span class="text-danger">*</span>
+																Address <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -156,7 +156,7 @@
 
 	<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">2F/12B Registration (YES/No)  :
+																style="text-align: left;">2F/12B Registration (YES/No)  
 
                                                                    <span
 																class="text-danger">*</span>
@@ -168,7 +168,7 @@
 															</div>
 															<div id="abc">
 															<label class="control-label col-sm-2" for="page_order">Date of Registration
-															:<span class="text-danger">*</span>
+															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="date" class="form-control" id="page_order"
@@ -180,7 +180,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Name :<span class="text-danger">*</span>
+																Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -191,7 +191,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Address :<span class="text-danger">*</span>
+																Address <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -202,7 +202,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -213,7 +213,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-																Chairman/President Name(Board of Governance) :<span
+																Chairman/President Name(Board of Governance) <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -226,7 +226,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -237,7 +237,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email ID(Official):
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
@@ -249,7 +249,7 @@
 
 											<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-															Principal Name :<span
+															Principal Name <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -262,7 +262,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -275,7 +275,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email ID(Official):
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
@@ -298,7 +298,6 @@
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
-
 
 
 

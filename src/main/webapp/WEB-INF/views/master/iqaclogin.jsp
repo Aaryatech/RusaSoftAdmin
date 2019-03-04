@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -153,7 +153,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">No.
-																of Full Time Nonteaching Including Office Staff:<span
+																of Full Time Nonteaching Including Office Staff<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -168,7 +168,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">No.
-																of Support Staff :<span class="text-danger">*</span>
+																of Support Staff <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
 																<input type="text" class="form-control" id="page_order"
@@ -179,7 +179,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">No.
-																of current admitted student :<span class="text-danger">*</span>
+																of current admitted student <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
 																<input type="text" class="form-control" id="page_order"
@@ -190,7 +190,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">
-														State Treasury Code :<span class="text-danger">*</span>
+														State Treasury Code <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
 																<input type="text" class="form-control" id="page_order"
@@ -201,7 +201,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order" style="text-align: left;">
-																Rusa ID No. :<span class="text-danger">*</span>
+																Rusa ID No. <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
 																<input type="text" class="form-control" id="page_order"

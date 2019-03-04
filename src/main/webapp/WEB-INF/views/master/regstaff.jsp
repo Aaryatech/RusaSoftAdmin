@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -199,10 +199,10 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Highest
-																Qualification : <span class="text-danger">*</span>
+																Qualification  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="deptId" name="deptId" class="form-control"
+																<select id="deptId" name="deptId"  onchange="showForm1()" class="form-control"
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
@@ -215,9 +215,24 @@
 															</div>
 														</div>
 
+
+	
+														<div class="form-group" id="pqr">
+															<label class="control-label col-sm-2" for="smallheading">Other Qualification
+														  <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="desn"
+																	name="desn" 
+																	
+																	placeholder="Other Qualification" value="" required>
+															</div>
+														</div>
+														
+														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Year
-																of highest Qualification Acquired :<span
+																of highest Qualification Acquired <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -230,7 +245,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Current
-																Designation : <span class="text-danger">*</span>
+																Designation  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<select id="designation" name="designation"
@@ -248,9 +263,9 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Joining
-																Date :<span class="text-danger">*</span>
+																Date <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="page_order"
 																	name="page_order" placeholder="Contact No" required>
 															</div>
@@ -258,7 +273,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Is
-																Working Today :<span class="text-danger">*</span>
+																Working Today<span class="text-danger">*</span>
 															</label>
 
 
@@ -274,9 +289,9 @@
 
 														<div class="form-group" id="rel_date1">
 															<label class="control-label col-sm-2" for="page_order">Relieving
-																Date :<span class="text-danger">*</span>
+																Date <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="rel_date"
 																	name="rel_date" placeholder="Contact No" required>
 															</div>
@@ -284,25 +299,36 @@
 
 															<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Teaching
-																to : <span class="text-danger">*</span>
+																to  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="teachTo" name="teachTo" class="form-control"
+																<select id="teachTo" name="teachTo" onchange="showForm()" class="form-control"
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
 																	<option value="2">UG & PG</option>
-																	<option value="3">Any Other Course</option>
+																	<option value="5">Any Other Course</option>
 
 
 																</select>
 															</div>
 														</div>
 															
+                                                    <div class="form-group" id="abc">
+															<label class="control-label col-sm-2" for="smallheading">Other Course
+														  <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="desn"
+																	name="desn" 
+																	
+																	placeholder="Other Designation" value="" required>
+															</div>
+														</div>
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -313,7 +339,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email ID(Official)
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="page_order"
@@ -381,7 +407,46 @@
 		}
 		}
 				
-		
+	 function showForm() {
+			//document.getElementById("abc").style = "display:none"
+				var qualType=document.getElementById("teachTo").value
+			//alert("qualType::"+qualType);
+				
+				if (qualType == 5) {
+
+					document.getElementById("abc").style = "visible"
+					
+						
+				} 
+				else{
+					document.getElementById("abc").style = "display:none"
+				}
+			
+			}
+	 
+	 function showForm1() {
+			//document.getElementById("abc").style = "display:none"
+				var qualType=document.getElementById("deptId").value
+			//alert("qualType::"+qualType);
+				
+				if (qualType == 3) {
+
+					document.getElementById("pqr").style = "visible"
+					
+						
+				} 
+				else{
+					document.getElementById("pqr").style = "display:none"
+				}
+			
+			}
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+				
+				document.getElementById("pqr").style = "display:none"
+
+			}
 		
 	</script>
 
