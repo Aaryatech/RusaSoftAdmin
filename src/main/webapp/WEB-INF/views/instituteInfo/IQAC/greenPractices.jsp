@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+					<%-- 		<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -122,7 +122,7 @@
 															
 													<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Academic
-													Year : <span class="text-danger">*</span>
+													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -143,12 +143,12 @@
 															<div class="form-group">
 															
 															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;">Use of Bicycle 	: <span
+																style="text-align: left;">Use of Bicycle 	 <span
 																class="text-danger">*</span>
 															</label>
 															
 															<label class="control-label col-sm-1" for="recordingFacility"
-																style="text-align: left;">Students: <span
+																style="text-align: left;">Students <span
 																class="text-danger">*</span>
 															</label>
 															
@@ -158,7 +158,7 @@
 														required>
 												</div>
 															<label class="control-label col-sm-1" for="recordingFacility"
-																style="text-align: left;">Staff: <span
+																style="text-align: left;">Staff <span
 																class="text-danger">*</span>
 															</label>
 															
@@ -169,7 +169,7 @@
 												</div>
 												
 												<label class="control-label col-sm-2" for="recordingFacility"
-																style="text-align: left;">Student & Staff: <span
+																style="text-align: left;">Student & Staff <span
 																class="text-danger">*</span>
 															</label>
 															
@@ -184,7 +184,7 @@
 														</div>
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Public Transport: <span
+																style="text-align: left;">Public Transport <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -193,7 +193,7 @@
 																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;"> Pedestrian friendly roads	: <span
+																style="text-align: left;"> Pedestrian friendly roads <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -208,7 +208,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Plastic free campus: <span
+																style="text-align: left;">Plastic free campus <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -218,7 +218,7 @@
 															</div>
 															
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Paperless office	:<span
+																style="text-align: left;">Paperless office	<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -233,7 +233,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Green landscaping with trees and plants	: <span
+																style="text-align: left;">Green landscaping with trees and plants	 <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -243,7 +243,7 @@
 															</div>
 															
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Percentage Provision for Green initiatives and waste management 	:<span
+																style="text-align: left;">Percentage Provision for Green initiatives and waste management 	<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -262,7 +262,7 @@
 															
 															
 															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;">% Expenditure on green initiatives and waste management: <span
+																style="text-align: left;">% Expenditure on green initiatives and waste management <span
 																class="text-danger">*</span>
 															</label>
 															
@@ -272,7 +272,7 @@
 														required>
 												</div>
 															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;">No. of initiatives to engage and contribute to local community: <span
+																style="text-align: left;">No. of initiatives to engage and contribute to local community <span
 																class="text-danger">*</span>
 															</label>
 															

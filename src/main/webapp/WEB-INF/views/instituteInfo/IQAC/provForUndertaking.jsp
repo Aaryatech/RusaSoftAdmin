@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -237,7 +237,7 @@
 														
 														
 						<div class="form-group" id="ex1">
-															<label class="control-label col-sm-6" for="page_name">No. of Students undertaking FP /Internship 
+															<label class="control-label col-sm-10" for="page_name">No. of Students undertaking FP /Internship 
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">

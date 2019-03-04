@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -118,9 +118,9 @@
 
 													<div class="col-xs-12">
  
-														<div class="col-xs-12">
+													<div class="form-group">
 
-															<table id="example-1"
+															<!-- <table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
@@ -143,7 +143,36 @@
 
 																</tbody>
 															</table>
-
+ -->
+ 
+ 	<table class="table table-striped dt-responsive display" id="example-1">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												<th width="5%">Academic Year</th>
+												<th  width="20%">Title of Maintenance</th>
+												<th  width="20%">Name of Company</th>
+												<th  width="20%">AMC Expenditure</th>
+												<th width="30%" style="text-align: center;" colspan="2">
+													Duration</th> 
+											
+												
+											</tr>
+</thead>
+<tbody>
+											<tr>
+												<td width="5%"></td>
+												<td width="5%"></td>
+												<td width="20%"></td>
+												<td width="20%"></td>
+												<td width="20%"></td>
+												<td width="15%">From Date</td>
+												<td width="15%">To Date</td>
+												
+												
+											</tr> 
+										</tbody>
+</table>
 														</div>
 														<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
@@ -294,7 +323,7 @@
 
 	<script type="text/javascript">
 		function getData() {
-			//alert("hii");
+			alert("hii");
 			var i = parseInt(document.getElementById("index").value);
 			var year = document.getElementById("academicYear").value;
 			var participant = document.getElementById("participant").value;

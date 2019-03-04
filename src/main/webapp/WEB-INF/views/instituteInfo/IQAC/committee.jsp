@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" "  onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -70,7 +70,7 @@
 
 
 								<h5 class="title pull-left">
-									<strong>Training Placement</strong>
+									<strong>Committee Details</strong>
 								</h5>
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
@@ -188,16 +188,28 @@
 	
 <div class="form-group">
 						<label class="control-label col-sm-6" for="academicYear">Name of Committee
-							</label> <select id="comName" name="comName"
+							</label> <select id="comName" name="comName"  onchange="showForm()"
 							class="form-control" required>
 							<option value="Antiragging">Antiragging</option>
 							<option value="Sexual Harassment Grievence and Redressal">Sexual Harassment Grievence and Redressal</option>
 							<option value="SC/ST Grievence and Redressal">SC/ST Grievence and Redressal</option>
 							<option value="Right to Information">Right to Information</option>
-							<option value=" Any other statutory committee"> Any other statutory committee</option>
+							<option value="7"> Any other statutory committee</option>
 
 						</select>
 					</div>
+					
+						
+					<div class="form-group" id="abc">
+						
+							<label class="control-label col-sm-6" for="page_name">Other Statutory committee
+							</label>
+							<!-- <div class="col-sm-3"> -->
+								<input type="text" class="form-control" id="otherCourse" required
+									name="otherCourse" placeholder="Other Statutory committee" value="${page.pageName}"
+									>
+							<!-- </div> -->
+	</div>
 		<div class="form-group">
 						
 							<label class="control-label col-sm-6" for="page_name"> Chair person of Committee
@@ -254,8 +266,17 @@
 		  
 		   var date=document.getElementById("date").value
 		   var contact=document.getElementById("contact").value
-		
-	
+			var otherCourse = document.getElementById("otherCourse").value;
+			
+		   var temp;
+			if (comName == 7) {
+
+				temp=otherCourse;
+				//alert(temp);
+			} 
+			else{
+				temp=comName;
+			}
 	
 		
 		//alert(stud);
@@ -268,7 +289,7 @@
 				[
 					i+1,
 					academicYear,
-					comName,
+					temp,
 					cpersonName,
 					contact,
 					date
@@ -280,7 +301,28 @@
 		document.getElementById("index").value = i + 1;
 		
 	}
+	function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("comName").value
+			//alert("qualType::"+qualType);
+			
+			if (qualType == 7) {
 
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		}
+	function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		}
 	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->

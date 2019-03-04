@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -116,11 +116,11 @@
 												<div>
 
 
-													<div class="col-xs-12">
+											
  
 														<div class="col-xs-12">
-
-															<table id="example-1"
+<div class="form-group">
+														<!-- 	<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
@@ -142,8 +142,38 @@
 
 																</tbody>
 															</table>
-
-														</div>
+ -->
+ 
+ 	
+															<table class="table table-striped dt-responsive display" id="example-1">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												<th width="20%">Academic Year</th>
+												<th  width="25%">Name of Quality Initiative</th>
+												<th width="5%"> Date of Conduction</th>
+												<th width="30%" style="text-align: center;" colspan="2">
+													Duration</th> 
+												<th width="15%">No. of Participants</th>
+												
+											</tr>
+</thead>
+<tbody>
+											<tr>
+												<td width="5%"></td>
+												<td width="20%"></td>
+												<td width="25%"></td>
+												<td width="5%"></td>
+												<td width="15%">From Date</td>
+												<td width="15%">To Date</td>
+												<td width="15%"></td>
+												
+											</tr> 
+										</tbody>
+</table>
+ 
+ 
+								</div>					
 														<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>

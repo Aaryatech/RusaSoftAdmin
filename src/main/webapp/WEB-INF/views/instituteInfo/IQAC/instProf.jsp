@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -121,7 +121,7 @@
 															<label class="control-label col-sm-2" for="page_name">Date of Establishment of IQAC
 <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-3">
 																<input type="date" class="form-control" id="page_name"
 																	name="page_name" placeholder="Institute Name"
 																	value="${page.pageName}">
@@ -131,7 +131,7 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Name of alternate facility with IQAC :
+															<label class="control-label col-sm-2" for="page_order">Name of alternate facility with IQAC 
 															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -142,7 +142,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact No of Alternate Faculty Associated  :<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="page_order">Contact No of Alternate Faculty Associated  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -152,7 +152,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Phone No.:<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="page_order">Phone No.<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="page_order"
@@ -162,7 +162,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Fax No.:<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="page_order">Fax No.<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -173,7 +173,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-															Registered Email :<span
+															Registered Email <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -185,7 +185,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Alternate Email :
+															<label class="control-label col-sm-2" for="page_order">Alternate Email 
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">

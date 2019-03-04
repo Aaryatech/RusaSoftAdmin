@@ -118,15 +118,16 @@
 
 													<div class="col-xs-12">
  
-														<div class="col-xs-12">
+													
+<div class="form-group">
 
-															<table id="example-1"
+															<!-- <table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
 																		<th >Academic Year</th>
-																		<th>Title of administrative training program organized for non-teaching staff</th>
+																		<th>Title of Professional Development Program for Teaching Staff</th>
 																		<th>From Date</th>
 																		<th >To Date</th>
 																		<th>No. of Participants</th>
@@ -140,15 +141,47 @@
 
 
 																</tbody>
-															</table>
-
-														</div>
-														<!-- <div class="form-group">
+															</table> -->
+															
+															
+															
+															<table class="table table-striped dt-responsive display" id="example-1">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												<th width="20%">Academic Year</th>
+											
+												<th  width="25%"> Title of administrative training program organized for non-teaching staff</th>
+											
+												 <th width="30%" style="text-align: center;" colspan="2">
+													Duration</th> 
+													
+												<th width="20%">No. of Participants</th>
+											
+												
+											</tr>
+</thead>
+<tbody>
+											<tr>
+												<td width="5%"></td>
+												<td width="20%"></td>
+												<td width="25%"></td>
+												<td width="15%">From Date</td>
+												<td width="15%">To Date</td>
+												<td width="20%"></td>
+												
+											</tr> 
+										</tbody>
+</table>
+															
+</div>
+													
+													 <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> -->
+														</div> 
 
 													</div>
 
@@ -206,7 +239,7 @@
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-							<option value="2016-2017">2015-2016</option>
+								<option value="2016-2017">2015-2016</option>
 
 						</select>
 					</div>
@@ -214,12 +247,12 @@
 					<div class="form-group">
 
 						<label class="control-label col-sm-6" for="title">
-Title of administrative training program organized for non-teaching staff
+ Title of administrative training program organized for non-teaching staff
 
 
 						</label> <input type="text" class="form-control"
 							id="title" name="title"
-							placeholder="Title of Professional Development Program for Teaching Staff"
+							placeholder=" Title of administrative training program organized for non-teaching staff"
 							value="${page.pageName}" required>
 					</div>
 					
@@ -305,3 +338,6 @@ Title of administrative training program organized for non-teaching staff
 
 </body>
 </html>
+
+
+<!-- Title of administrative training program organized for non-teaching staff -->
