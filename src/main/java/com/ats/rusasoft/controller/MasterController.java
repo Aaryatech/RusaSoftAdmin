@@ -1,18 +1,26 @@
 package com.ats.rusasoft.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.model.Institute;
 
 @Controller
 @Scope("session")
@@ -1485,6 +1493,91 @@ public class MasterController {
 		return model;
 
 	}
+  
+  //Insert Institute
+  
+  
+  
+  @RequestMapping(value = "/insertInstitute", method = RequestMethod.POST)
+ 	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+ 			model = new ModelAndView("master/facultyInfo");
+
+ 			model.addObject("title", " Faculty Detail");
+ 			
+ 			int exInt=0;
+ 			String exVar="";
+ 			Institute institute=new Institute();
+ 			
+ 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String curDateTime=dateFormat.format(cal.getTime());
+ 			String aisheCode=request.getParameter("aishe_code");
+ 			System.err.println("Aishe Code  " +aisheCode);
+ 			institute.setAisheCode(aisheCode);
+ 			
+ 			institute.setCheckerDatetime(curDateTime);
+ 			institute.setCheckerUserId(0);
+ 			
+ 			institute.setContactNo(request.getParameter("princ_contact"));
+ 			institute.setDelStatus(1);
+ 			institute.setEmail(request.getParameter("princ_email"));
+ 			
+ 			institute.setExInt1(exInt);
+ 			institute.setExInt2(exInt);
+ 			institute.setExVar1(exVar);
+ 			institute.setExVar2(exVar);
+ 			
+ 			institute.setInstituteAdd(request.getParameter("inst_add"));
+ 			int instId=0;//Integer.parseInt(request.getParameter("inst_id"));
+ 			institute.setInstituteId(instId);
+ 			institute.setInstituteName(request.getParameter("inst_name"));
+ 			
+ 			institute.setIsActive(1);
+ 			institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed hi/her pass. Initially its zero
+ 			//int isReg=Integer.parseInt(request.getParameter("is_registration"));
+ 			institute.setIsRegistration(1);
+ 			
+ 			institute.setLastUpdatedDatetime(curDateTime);
+ 			institute.setMakerEnterDatetime(curDateTime);
+ 			institute.setMakerUserId(0);//user id who is creating this record for ex principal is user who creates iqac and hod to student
+ 			
+ 			institute.setPresidentName(request.getParameter("pres_name"));
+ 			institute.setPrincipalName(request.getParameter("princ_name"));
+ 			institute.setRegDate(request.getParameter("reg_date"));
+ 			institute.setTrustAdd(request.getParameter("trusty_add"));
+ 			
+ 			institute.setTrustContactNo(request.getParameter("trusty_con_no"));
+ 			institute.setTrustName(request.getParameter("trusty_name"));
+ 			institute.setUserType(0);//for institute its 0
+ 			
+
+ 			institute.setPresidenContact(request.getParameter("pres_contact"));
+ 			institute.setPresidentEmail(request.getParameter("pres_email"));
+ 			
+ 			System.out.println(institute);
+ 			/*Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute, Institute.class);*/
+ 			
+ 			
+ 		} catch (Exception e) {
+
+ 			System.err.println(" Exception In saveInstitute at Master Contr " + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
 
 
   
