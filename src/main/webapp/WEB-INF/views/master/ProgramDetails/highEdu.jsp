@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -230,7 +230,7 @@
 							</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="className"
-									name="hodName" placeholder="No." value="${page.pageName}"
+									name="hodName" placeholder="No. of Student" value="${page.pageName}"
 									required>
 									<input type="hidden" id="index" name="index" value="0">
 							</div>

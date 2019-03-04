@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -124,10 +124,10 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="status">Select
-																	Attended Activity : <span class="text-danger">*</span>
+																	Attended Activity  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
-																	<select id="salutation" name="salutation"
+																	<select id="salutation"  onchange="showForm()"  name="salutation"
 																		class="form-control" required>
 																		<option value="0">STTP</option>
 																		<option value="1">Seminar</option>
@@ -135,27 +135,44 @@
 																		<option value="3">Conference</option>
 																		<option value="4">FDP</option>
 																		<option value="5">Refresher Course</option>
-																			<option value="5">Any Other</option>
+																			<option value="6">Any Other</option>
 
 																	</select>
 																</div>
+                                                  <div class="form-group" id="abc">
+															<label class="control-label col-sm-2" for="smallheading">Other Activity
+														  <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" id="desn"
+																	name="desn" 
+																	
+																	placeholder="Other Designation" value="" required>
+															</div>
+														</div>
+														
+																
+															</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Activity: <span class="text-danger">*</span>
+                                              <div class="form-group">
+                                              
+                                              <label class="control-label col-sm-2" for="smallheading">Name
+																	of Activity <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
 																		name="Grant" placeholder="Name of Activity" value=""
 																		required>
 																</div>
+                                              
+                                               </div>
 
-															</div>
 
 
 															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="status">Select
-																	Level: <span class="text-danger">*</span>
+																	Level <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<select id="salutation" name="salutation"
@@ -172,7 +189,7 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Activity: <span class="text-danger">*</span>
+																	of Activity <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
@@ -221,7 +238,30 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
+function showForm() {
+	//document.getElementById("abc").style = "display:none"
+		var qualType=document.getElementById("salutation").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 6) {
 
+			document.getElementById("abc").style = "visible"
+			
+				
+		} 
+		else{
+			document.getElementById("abc").style = "display:none"
+		}
+	
+	}
+function hideText() {
+	//alert("hii");
+	document.getElementById("abc").style = "display:none"
+		
+	
+	}
+</script>
 
 </body>
 </html>

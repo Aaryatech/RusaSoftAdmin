@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -77,7 +77,7 @@
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display" id="example10">
+									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
 												<th width="5%">Sr.No.</th>
@@ -248,6 +248,9 @@
 								id="cat" name="cat" onchange="showForm()" class="form-control"  required>
 								<option value="Sports">Sports</option>
 								<option value="Cultural">Cultural</option>
+								<option value="Curricular">Curricular</option>
+								<option value=" Co-curricular"> Co-curricular</option>
+								<option value="Extra Curricular ">Extra Curricular </option>
 								<option value="7">Other Competition</option>
 							
 							</select>
@@ -294,7 +297,7 @@
 							<label class="control-label col-sm-3" for="page_name">Branch
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="branch"
+								<input type="text" class="form-control" id="branchName"
 									name="subTaut" value="${page.pageName}" placeholder="Branch"
 									required>
 							<!-- </div> -->
@@ -342,13 +345,12 @@
 		var i = parseInt(document.getElementById("index").value);
 		var academicYear=document.getElementById("academicYear").value
 		var year=document.getElementById("year").value
-		var cat=document.getElementById("cat").value
-		var progName=document.getElementById("date").value
-		var address=document.getElementById("year").value
-		var contact=document.getElementById("branch").value
-		
+		var cat=document.getElementById("cat").value //act name
+		var date=document.getElementById("date").value
+		var branch=document.getElementById("branchName").value
+		//alert(branch);
 		var stud=document.getElementById("stud").value
-		var package1=document.getElementById("level").value
+		var level=document.getElementById("level").value
 		
 		var otherScheme=document.getElementById("otherScheme").value
 		//alert(stud);
@@ -365,7 +367,7 @@
 		
 		//alert(stud);
 		
-		var dataTable = $('#example10')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row
@@ -374,12 +376,11 @@
 					i+1,
 					academicYear,
 					temp,
-					progName,
-					address,
+					date,
 					year,
-					contact,
+					branch,
 					stud,
-					package1
+					level
 					
 						 ])
 		.draw();

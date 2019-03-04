@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -76,7 +76,7 @@
 
 								
 								<div class="col-xs-12">
-									<table class="table table-striped dt-responsive display" id="example10">
+									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
 												<th width="25%">Sr No</th>
@@ -124,7 +124,7 @@
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Student Details</h4>
+					<h4 class="modal-title">No. of Students Admitted Location/Region wise</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
@@ -136,7 +136,7 @@
 								
 						
 									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Location</label> <select
+						<label class="control-label col-sm-2" for="page_name">Location/Region</label> <select
 								id="cat" name="sem" class="form-control" onchange="showForm()" required>
 								<option value="State">State</option>
 															<option value="Other State">Other State</option>
@@ -193,7 +193,7 @@
 		
 		//alert(stud);
 		
-		var dataTable = $('#example10')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row

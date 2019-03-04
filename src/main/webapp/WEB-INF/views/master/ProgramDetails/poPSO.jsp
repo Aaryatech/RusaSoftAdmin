@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -80,11 +80,9 @@
 												<th width="5%">Sr No</th>
 												<th width="10%" >Year</th>
 												<th >Program Outcomes (PO as per Accreditation Manual)</th>
-											
-												
-													<th >Program Specific Outcomes (PSOs  Define By the Program)</th>
-													<th >Mapping(Yes/No)</th>
-												<th >Satisfying Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<th >Program Specific Outcomes (PSOs  Define By the Program)</th>
+												<th >Mapping(Yes/No)</th>
+												<th >Satisfying Value
 												
 												</th>
 											</tr>
@@ -202,8 +200,8 @@
 							 :<span class="text-danger">*</span>
 						</label>
 						<div class="col-sm-2">
-							 <input type="radio" name="stu" id="stu" checked value="yes">Yes
-							<input type="radio" name="stu" id="stu1" value="no">No
+							Yes <input type="radio" name="stu" id="stu" checked value="yes">
+							No<input type="radio" name="stu" id="stu1" value="no">
 						</div>
 					</div>
 						

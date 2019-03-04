@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -191,7 +191,7 @@
 							<label class="control-label col-sm-6" for="page_name">Name of Employer
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="empName"
+								<input type="text" class="form-control" id="empName" placeholder="Name of Employer"
 									name="subTaut" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -215,7 +215,7 @@
 							<label class="control-label col-sm-6" for="page_name">Name of Program
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="progName"
+								<input type="text" class="form-control" id="progName"  placeholder="Name of Program"
 									name="subTaut" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -228,7 +228,7 @@
 							<label class="control-label col-sm-6" for="page_name">No. of Students Placed
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="stud"
+								<input type="text" class="form-control" id="stud"  placeholder="No. of Students Placed"
 									name="subTaut" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -241,7 +241,7 @@
 							<label class="control-label col-sm-6" for="page_name">Address of Employer
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="address"
+								<input type="text" class="form-control" id="address"  placeholder="Address of Employer"
 									name="subTaut" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -252,7 +252,7 @@
 							<label class="control-label col-sm-6" for="page_name">Contact Details
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="contact"
+								<input type="text" class="form-control" id="contact"  placeholder="Contact Details"
 									name="subTaut" value="${page.pageName}"
 									required>
 							<!-- </div> -->
@@ -263,7 +263,7 @@
 							<label class="control-label col-sm-6" for="page_name">Package Offered
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="package"
+								<input type="text" class="form-control" id="package"  placeholder="Package Offered"
 									name="subTaut" value="${page.pageName}"
 									required>
 										<input type="hidden" id="index" name="index" value="0">

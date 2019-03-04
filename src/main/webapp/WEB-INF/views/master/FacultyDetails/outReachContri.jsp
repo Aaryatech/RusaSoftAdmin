@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -125,7 +125,7 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="status">Select
-																	Level: <span class="text-danger">*</span>
+																	Level <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<select id="salutation" name="salutation"
@@ -141,7 +141,7 @@
 																	</div>
 																	<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-5">
 																	<input type="text" class="form-control" id="dob"
@@ -155,7 +155,7 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="smallheading">University
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 
 																<div class="col-sm-4">
@@ -166,7 +166,7 @@
 
 
 																<label class="control-label col-sm-1" for="smallheading">From
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -174,7 +174,7 @@
 																</div>
 
 																<label class="control-label col-sm-1" for="smallheading">To
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -190,7 +190,7 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="smallheading">Examination
-																	Paper Setting : <span class="text-danger">*</span>
+																	Paper Setting  <span class="text-danger">*</span>
 																</label>
 
 
@@ -202,7 +202,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Answer
-																	Sheet Evaluation : <span class="text-danger">*</span>
+																	Sheet Evaluation <span class="text-danger">*</span>
 																</label>
 
 
@@ -214,7 +214,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Answer
-																	Sheet Moderation : <span class="text-danger">*</span>
+																	Sheet Moderation  <span class="text-danger">*</span>
 																</label>
 
 

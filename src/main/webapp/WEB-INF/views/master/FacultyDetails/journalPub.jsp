@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -123,7 +123,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="page_order">Journal
-																	Publication :<span class="text-danger">*</span>
+																	Publication <span class="text-danger">*</span>
 																</label>
 
 
@@ -135,7 +135,7 @@
 </div>
 <div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Journal : <span class="text-danger">*</span>
+																	of Journal  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -144,7 +144,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="page_order">Scopus/DIO/UGC Recognized
-																	:<span class="text-danger">*</span>
+																	<span class="text-danger">*</span>
 																</label>
 
 
@@ -156,7 +156,7 @@
 															</div>
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Year
-																	of Publication : <span class="text-danger">*</span>
+																	of Publication  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
@@ -165,7 +165,7 @@
 
 
 																<label class="control-label col-sm-2" for="page_order">Issue
-																	:<span class="text-danger">*</span>
+																	<span class="text-danger">*</span>
 																</label>
 
 
@@ -176,7 +176,7 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Volume
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -193,9 +193,9 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Page
-																	No : <span class="text-danger">*</span>
+																	No  <span class="text-danger">*</span>
 																</label> <label class="control-label col-sm-1"
-																	for="smallheading">From : <span
+																	for="smallheading">From  <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
@@ -205,7 +205,7 @@
 
 
 																<label class="control-label col-sm-1" for="page_order">To
-																	:<span class="text-danger">*</span>
+																	<span class="text-danger">*</span>
 																</label>
 
 

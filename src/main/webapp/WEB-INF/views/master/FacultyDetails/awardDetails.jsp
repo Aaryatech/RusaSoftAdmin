@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -123,7 +123,7 @@
 															
 																<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">
-																	Academic Year : <span class="text-danger">*</span>
+																	Academic Year  <span class="text-danger">*</span>
 																</label>
 																<select class="control-label col-sm-3"
 								id="academicYear" name="qualType" class="form-control" onchange="showForm()" required>
@@ -138,7 +138,7 @@
 															
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Award/Recognition : <span class="text-danger">*</span>
+																	of Award/Recognition  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -147,7 +147,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Awarding
-																	Agency/Authority : <span class="text-danger">*</span>
+																	Agency/Authority  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -160,7 +160,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Nature
-																	of Award/Recognition : <span class="text-danger">*</span>
+																	of Award/Recognition  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -169,7 +169,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Date
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
@@ -180,7 +180,7 @@
 																</div>
 																<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Validity
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	Duration <input type="radio" name="validity"
@@ -190,7 +190,7 @@
 																
 																
 																<label class="control-label col-sm-2" id="label1" for="smallheading">From
-																	 : <span class="text-danger"></span>
+																	  <span class="text-danger"></span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="label2"
@@ -199,7 +199,7 @@
 
 																
 																<label class="control-label col-sm-2" id="sp" for="smallheading">To
-																	 : <span class="text-danger" ></span>
+																	  <span class="text-danger" ></span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="label4"

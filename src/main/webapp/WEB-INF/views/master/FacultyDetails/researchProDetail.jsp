@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -124,7 +124,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Project : <span class="text-danger">*</span>
+																	of Project  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -132,7 +132,7 @@
 																		required>
 																</div>
                                                             <label class="control-label col-sm-2" for="smallheading">Year
-																	of Project Sanction : <span class="text-danger">*</span>
+																	of Project Sanction  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-3">
 																	<select
@@ -155,7 +155,7 @@
 																
 																
 																<label class="control-label col-sm-2" for="page_order">Sponsoring
-																	Authority :<span class="text-danger">*</span>
+																	Authority <span class="text-danger">*</span>
 																</label>
 
 
@@ -168,7 +168,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Principal Investigator : <span class="text-danger">*</span>
+																	of Principal Investigator  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -179,7 +179,7 @@
 
 
 																<label class="control-label col-sm-2" for="page_order">Department
-																	Name :<span class="text-danger">*</span>
+																	Name <span class="text-danger">*</span>
 																</label>
 
 
@@ -196,7 +196,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-Principal Investigator : <span
+																	of Co-Principal Investigator  <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
@@ -208,7 +208,7 @@
 
 
 																<label class="control-label col-sm-2" for="page_order">Department
-																	Name :<span class="text-danger">*</span>
+																	Name <span class="text-danger">*</span>
 																</label>
 
 
@@ -225,7 +225,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Grant
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -234,7 +234,7 @@
 
 
 																<label class="control-label col-sm-2" for="page_order">Total
-																	Amount :<span class="text-danger">*</span>
+																	Amount<span class="text-danger">*</span>
 																</label>
 
 
@@ -245,7 +245,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="page_order">
-																	Amount Received :<span class="text-danger">*</span>
+																	Amount Received <span class="text-danger">*</span>
 																</label>
 
 
@@ -264,7 +264,7 @@
 																
 
 																<label class="control-label col-sm-2" for="page_order">From
-																	Date :<span class="text-danger">*</span>
+																	Date <span class="text-danger">*</span>
 																</label>
 
 
@@ -274,7 +274,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="page_order">
-																	To Date :<span class="text-danger">*</span>
+																	To Date <span class="text-danger">*</span>
 																</label>
 
 

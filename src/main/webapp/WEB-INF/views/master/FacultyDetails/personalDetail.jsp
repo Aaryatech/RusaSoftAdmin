@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -128,7 +128,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Select
-																Salutation : <span class="text-danger">*</span>
+																Salutation  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-1">
 																<select id="salutation" name="salutation"
@@ -142,7 +142,7 @@
 															</div>
 
 															<label class="control-label col-sm-1" for="page_name">
-																Name:<span class="text-danger">*</span>
+																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control" id="firstName"
@@ -163,7 +163,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">Address
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="address"
@@ -175,7 +175,7 @@
 														
 															<div class="form-group">
 																<label class="control-label col-sm-6" for="page_order">Is 
-																	Permanent and Correspondence Address Same :<span class="text-danger">*</span>
+																	Permanent and Correspondence Address Same <span class="text-danger">*</span>
 																</label>
 
 
@@ -189,7 +189,7 @@
 
 	<div class="form-group" id="abc">
 															<label class="control-label col-sm-2" for="page_name">Correspondence Address
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="address"
@@ -200,7 +200,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Mobile
-																No. : <span class="text-danger">*</span>
+																No. <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control" id="contactNo"
@@ -212,7 +212,7 @@
 															</div>
 
 															<label class="control-label col-sm-2" for="smallheading">Phone No
-																: <span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 
 															<div class="col-sm-3">
@@ -228,7 +228,7 @@
 														<div class="form-group">
 														
 														
-															<label class="control-label col-sm-2" for="smallheading">Resident:
+															<label class="control-label col-sm-2" for="smallheading">Resident
 																 </label>
 														
 															<div class="col-sm-3">
@@ -240,7 +240,7 @@
 															<div class="col-sm-2">
 															</div>
 															
-															<label class="control-label col-sm-2" for="smallheading">Email ID:
+															<label class="control-label col-sm-2" for="smallheading">Email ID
 																: <span class="text-danger">*</span>
 															</label>
 
@@ -259,7 +259,7 @@
 														<div class="form-group">
 														
 														<label class="control-label col-sm-2" for="smallheading">PAN
-																No : <span class="text-danger"></span>
+																No <span class="text-danger"></span>
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control" id="panNo"
@@ -269,7 +269,7 @@
 															</div>
 														
 														<label class="control-label col-sm-2" for="smallheading">Aadhar
-																No: <span class="text-danger">*</span>
+																No<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="Text" class="form-control" id="adharNo"
@@ -280,7 +280,7 @@
 															
 															<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Select
-																Designation : <span class="text-danger">*</span>
+																Designation  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<select id="designation" name="designation"
@@ -297,7 +297,7 @@
 															</div>
 															
 															<label class="control-label col-sm-2" for="smallheading">Date
-																of Birth : <span class="text-danger">*</span>
+																of Birth  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="date" class="form-control" id="dob"
@@ -309,7 +309,7 @@
 
 														<div class="form-group">
 														<label class="control-label col-sm-2" for="smallheading">Date
-																of Joining : <span class="text-danger">*</span>
+																of Joining  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="date" class="form-control" id="doj" onchange="calExp()"
@@ -320,7 +320,7 @@
 															</div>
 
 															<label class="control-label col-sm-2" for="smallheading">Previous
-																Experience : <span class="text-danger">*</span>
+																Experience  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control" id="prevExp"
@@ -335,7 +335,7 @@
 														<div class="form-group">
 														
 														<label class="control-label col-sm-2" for="smallheading">Total 
-																Experience : <span class="text-danger">*</span>
+																Experience <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 															<!-- 	<input type="text" class="form-control" id="curExp"

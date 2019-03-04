@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -124,7 +124,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="status">Select
-																	: <span class="text-danger">*</span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<select id="salutation" name="salutation"
@@ -140,7 +140,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Activity: <span class="text-danger">*</span>
+																	of Activity <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
 																	<input type="text" class="form-control" id="dob"
@@ -153,7 +153,7 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="status">Select
-																	Level: <span class="text-danger">*</span>
+																	Level<span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<select id="salutation" name="salutation"
@@ -170,7 +170,7 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Activity: <span class="text-danger">*</span>
+																	of Activity <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
@@ -179,7 +179,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">No
-																	of Participants : <span class="text-danger">*</span>
+																	of Participants <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -192,7 +192,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Funded
-																	By : <span class="text-danger">*</span>
+																	By  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -203,7 +203,7 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Amount
-																	Sanctioned : <span class="text-danger">*</span>
+																	Sanctioned  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -212,7 +212,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Amount
-																	Utilized : <span class="text-danger">*</span>
+																	Utilized  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"

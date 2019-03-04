@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -124,7 +124,7 @@
 
 <div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Patent File No.
-																	 : <span class="text-danger">*</span>
+																	  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -135,7 +135,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Title : <span class="text-danger">*</span>
+																	Title  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
@@ -144,7 +144,7 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Filling Date : <span class="text-danger">*</span>
+																	Filling Date  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
@@ -156,7 +156,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-assistant/Guide : <span class="text-danger">*</span>
+																	of Co-assistant/Guide  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"
@@ -165,14 +165,14 @@
 																</div>
 
 																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Publication : <span class="text-danger">*</span>
+																	of Publication  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
 																		name="Grant" value="" required>
 																</div>
 																<label class="control-label col-sm-2" for="smallheading">Academic
-																	Year : <span class="text-danger">*</span>
+																	Year  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="text" class="form-control" id="dob"

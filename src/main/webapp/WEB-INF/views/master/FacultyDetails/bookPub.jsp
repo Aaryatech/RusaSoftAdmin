@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -121,9 +121,9 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Book
-																	Publication : <span class="text-danger">*</span>
+																	Publication <span class="text-danger">*</span>
 																</label> <label class="control-label col-sm-2"
-																	for="smallheading">Title of Book : <span
+																	for="smallheading">Title of Book  <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-4">
@@ -134,7 +134,7 @@
 
 
 																<label class="control-label col-sm-2" for="page_order">Edition
-																	:<span class="text-danger">*</span>
+																	<span class="text-danger">*</span>
 																</label>
 
 
@@ -224,7 +224,7 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="page_order">ISBN
-																	No :<span class="text-danger">*</span>
+																	No <span class="text-danger">*</span>
 																</label>
 
 
@@ -235,7 +235,7 @@
 
 
 																<label class="control-label col-sm-2" for="smallheading">Year
-																	of Publication : <span class="text-danger">*</span>
+																	of Publication  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="dob"
