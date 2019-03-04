@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -122,7 +122,7 @@
 														<div class="form-group">
 															<label class="control-label col-sm-5" for="status"
 																style="text-align: left;">Library is Automated
-																using Integrated Library Management System : <span
+																using Integrated Library Management System  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -136,7 +136,7 @@
 														<div id="divshow">
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="swName"
-																	style="text-align: left;">Name Of Software : <span
+																	style="text-align: left;">Name Of Software <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
@@ -148,7 +148,7 @@
 
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="version"
-																	style="text-align: left;">Software Version :<span
+																	style="text-align: left;">Software Version<span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
@@ -160,7 +160,7 @@
 															
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="version"
-																	style="text-align: left;">Total Number of Users of LMS :<span
+																	style="text-align: left;">Total Number of Users of LMS <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
@@ -174,7 +174,7 @@
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="date"
 																	style="text-align: left;"> Date Of
-																	Purchase/Automation Lib. : <span class="text-danger">*</span>
+																	Purchase/Automation Lib.  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="date" class="form-control" id="date"
@@ -188,7 +188,7 @@
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="noOfComp"
 																	style="text-align: left;">No. of Comp in LAN
-																	with LMS : <span class="text-danger">*</span>
+																	with LMS  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="noOfComp"
@@ -201,7 +201,7 @@
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="bandwidth"
 																	style="text-align: left;">Bandwidth for
-																	accessing e-resources : <span class="text-danger">*</span>
+																	accessing e-resources  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="bandwidth"
@@ -214,7 +214,7 @@
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="usingremot"
 																	style="text-align: left;"> e-Resources are
-																	remotely : <span class="text-danger">*</span>
+																	remotely  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="radio" id="usingremot" name="usingremot"
@@ -329,7 +329,7 @@
 														 -->
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
-																	style="text-align: left;"> Avg. of Teachers Using Library resources per day : <span class="text-danger">*</span>
+																	style="text-align: left;"> Avg. of Teachers Using Library resources per day  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="noOfComp"
@@ -341,7 +341,7 @@
 															
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
-																	style="text-align: left;"> Avg. of Student Using Library resources per day : <span class="text-danger">*</span>
+																	style="text-align: left;"> Avg. of Student Using Library resources per day  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="noOfComp"
@@ -357,7 +357,7 @@
 														 
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;"> Media Center Available : <span
+																style="text-align: left;"> Media Center Available  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -365,7 +365,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="mediacenter" name="mediacenter" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment</div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearMediacenter"
@@ -378,7 +378,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;"> Recording Facility Available: <span
+																style="text-align: left;"> Recording Facility Available <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -386,7 +386,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="recordingFacility" name="recordingFacility" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearRecordingFacility"
@@ -397,7 +397,7 @@
 														</div>
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="lectuteCap"
-																style="text-align: left;"> Lecture Capturing System : <span
+																style="text-align: left;"> Lecture Capturing System  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -405,7 +405,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="lectuteCap" name="lectuteCap" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearLectuteCap"
@@ -418,7 +418,7 @@
 															<label class="control-label col-sm-3" for="mediacenter"
 																style="text-align: left;"> Any other e-Content Development Facility 
 (Please Specify) 
- : <span
+  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -426,7 +426,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="eContentFacility" name="eContentFacility" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearEContentFacility"
@@ -441,7 +441,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Planning	 : <span
+																style="text-align: left;">Planning	  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -449,7 +449,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="planning" name="planning" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearPlanning"
@@ -462,7 +462,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;"> Administration : <span
+																style="text-align: left;"> Administration  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -470,7 +470,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="recordingFacility" name="recordingFacility" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearAdministration"
@@ -481,7 +481,7 @@
 														</div>
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="lectuteCap"
-																style="text-align: left;">Finance & Accounts : <span
+																style="text-align: left;">Finance & Accounts  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -489,7 +489,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="lectuteCap" name="lectuteCap" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearFinance"
@@ -501,7 +501,7 @@
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="studAddmission"
 																style="text-align: left;"> Student Admission & Support 
- : <span
+  <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -509,7 +509,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="studAddmission" name="studAddmission" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearStudAddmission"
@@ -531,7 +531,7 @@
 																	value="1" checked>Yes <input type="radio"
 																	id="eContentFacility" name="eContentFacility" value="0">No
 															</div>
-															<div class="col-sm-2">Year of Establishment :</div>
+															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
 																<input type="date" class="form-control" id="yearExaminations"

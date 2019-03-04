@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -75,7 +75,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
-												Facilities for Differently Abled:<span class="text-danger">*</span>
+												Facilities for Differently Abled<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="hodName"
@@ -87,7 +87,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">Provision
-												for lift :<span class="text-danger">*</span>
+												for lift <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
 												Yes <input type="radio" name="lift" id="lift" checked
@@ -95,7 +95,7 @@
 													id="lift" value="1">
 											</div>
 											<label class="control-label col-sm-2" for="page_name">Ramp/Rails
-												:<span class="text-danger">*</span>
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
 												Yes <input type="radio" name="ramp" id="ramp" checked
@@ -103,7 +103,7 @@
 													id="ramp" value="1">
 											</div>
 											<label class="control-label col-sm-2" for="page_name">Rest
-												rooms :<span class="text-danger">*</span>
+												rooms <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
 												Yes <input type="radio" name="restRooms" id="restRooms"
@@ -114,7 +114,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">Braille
-												Software Facilities :<span class="text-danger">*</span>
+												Software Facilities <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
 												Yes <input type="radio" name="brallie" id="brallie" checked
@@ -122,7 +122,7 @@
 													id="brallie" value="1">
 											</div>
 											<label class="control-label col-sm-3" for="page_name">Scribes
-												for Examination :<span class="text-danger">*</span>
+												for Examination <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
 												Yes <input type="radio" name="scribes" id="scribes" checked
@@ -136,7 +136,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-5" for="page_name">Special
-												Skill Development for differently abled Students :<span
+												Skill Development for differently abled Students <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-2">
@@ -150,7 +150,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">Any
-												Other Similar Facility :<span class="text-danger">*</span>
+												Other Similar Facility <span class="text-danger">*</span>
 											</label>
 											<%-- <div class="col-sm-6">
 												<input type="text" class="form-control" id="hodName"
@@ -161,7 +161,7 @@
 									
 										
 										<div class="col-xs-8">
-															<table id="example1"
+															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
@@ -246,7 +246,7 @@
 		var i = parseInt(document.getElementById("index").value);
 		var nature=document.getElementById("nature").value
 		
-		var dataTable = $('#example1')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row

@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -96,7 +96,7 @@
 
 										</div>
 
-										<table class="table table-striped dt-responsive display"id="example1">
+										<table class="table table-striped dt-responsive display"id="example-1">
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
@@ -216,7 +216,7 @@
 							<label class="control-label col-sm-2" for="page_name">Location
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
+								<input type="text" class="form-control" id="hodName" placeholder="Location"
 									name="hodName" placeholder="Location" value="${page.pageName}"
 									required>
 							</div>
@@ -274,7 +274,7 @@
 							<label class="control-label col-sm-1" for="page_name">No.
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
+								<input type="text" class="form-control" id="hodName" placeholder="No."
 									name="hodName" placeholder="No." value="${page.pageName}"
 									required>
 							</div>
@@ -282,7 +282,7 @@
 							<label class="control-label col-sm-2" for="page_name">Location
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="hodName"
+								<input type="text" class="form-control" id="hodName" placeholder="Location"
 									name="hodName" placeholder="Location" value="${page.pageName}"
 									required>
 							</div>
@@ -395,7 +395,7 @@
 							<label class="control-label col-sm-6" for="page_name">No. of Computers with LAN
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualType"
+								<input type="text" class="form-control" id="qualType" placeholder="No. of Computers with LAN"
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -407,7 +407,7 @@
 						
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="date" class="form-control" id="qualName"
+								<input type="date" class="form-control" id="qualName" 
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -419,7 +419,7 @@
 						
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="className"
+								<input type="text" class="form-control" id="className" placeholder="Amount"
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -432,7 +432,7 @@
 						
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="abc"
+								<input type="text" class="form-control" id="abc" placeholder="Total Student Utilizing Computer"
 									name="qualName" placeholder="" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -457,7 +457,7 @@
 		var className=document.getElementById("className").value
 		var abc=document.getElementById("abc").value
 
-		var dataTable = $('#example1')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row

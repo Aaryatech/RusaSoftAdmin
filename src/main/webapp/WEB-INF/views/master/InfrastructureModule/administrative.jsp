@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -82,13 +82,13 @@
 										<div class="col-xs-12"></div>
 
 
-										<table class="table table-striped dt-responsive display" id="example1">
+										<table class="table table-striped dt-responsive display" id="example-1">
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
 														<th width="20%">Academic Year</th>
 													<th width="20%">Title</th>
-													<th width="10%">sqm</th>
+													<th width="10%">Area(sqm)</th>
 													<th width="20%">Location </th>
 												</tr>
 											</thead>
@@ -201,7 +201,7 @@
 							<label class="control-label col-sm-6" for="page_name">Other Facility
 							</label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="otherCourse" required
+								<input type="text" class="form-control" id="otherCourse" placeholder="Other Facility" required
 									name="otherCourse" placeholder="Facility" value="${page.pageName}"
 									>
 							<!-- </div> -->
@@ -211,7 +211,7 @@
 							<label class="control-label col-sm-1" for="page_name">No.
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="qualName"
+								<input type="text" class="form-control" id="qualName" placeholder="No."
 									name="hodName" placeholder="No." value="${page.pageName}"
 									required>
 							</div>
@@ -219,7 +219,7 @@
 							<label class="control-label col-sm-2" for="page_name">Location
 							</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="className"
+								<input type="text" class="form-control" id="className" placeholder="Location"
 									name="hodName" placeholder="Location" value="${page.pageName}"
 									required>
 							</div>
@@ -256,7 +256,7 @@
 		else{
 			temp=qualType;
 		}
-		var dataTable = $('#example1')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row

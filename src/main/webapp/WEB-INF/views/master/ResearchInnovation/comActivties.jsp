@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -112,7 +112,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="status">Neighborhood
-													Community Activities : <span class="text-danger"></span>
+													Community Activities  <span class="text-danger"></span>
 												</label>
 												<div class="col-sm-2">
 													Yes <input type="radio" name="mPhill" id="mPhill" checked
@@ -122,7 +122,7 @@
 
 
 												<label class="control-label col-sm-2" for="page_name">Name
-													of Activity :<span class="text-danger">*</span>
+													of Activity <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="hodName"
@@ -136,7 +136,7 @@
 
 
 												<label class="control-label col-sm-2" for="page_name">No.
-													of Students :<span class="text-danger">*</span>
+													of Students <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-4">
 													<input type="text" class="form-control" id="hodName"
@@ -144,7 +144,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total
-													Students :<span class="text-danger">*</span>
+													Students <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -158,7 +158,7 @@
 
 
 												<label class="control-label col-sm-2" for="page_name">No.
-													of Faculty :<span class="text-danger">*</span>
+													of Faculty <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-4">
 													<input type="text" class="form-control" id="hodName"
@@ -166,7 +166,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total
-													Faculty :<span class="text-danger">*</span>
+													Faculty <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -177,7 +177,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="status">Association
-													With : <span class="text-danger">*</span>
+													With <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-3">
 													<select id="salutation" name="salutation"

@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -117,7 +117,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-3" for="page_name">Title
-													of Gender Equity Program:<span class="text-danger">*</span>
+													of Gender Equity Program<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="hodName"
@@ -130,7 +130,7 @@
 										
 											<div class="form-group">
 												<label class="control-label col-sm-3" for="page_name">No. of Participant
-												:<span class="text-danger">*</span>
+												<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="hodName"
@@ -142,12 +142,12 @@
 										
 										<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Duration
-																	: <span class="text-danger">*</span>
+																	<span class="text-danger">*</span>
 																</label>
 																
 																
 																<label class="control-label col-sm-1" id="label1" for="smallheading">From
-																	 : <span class="text-danger"></span>
+																	  <span class="text-danger"></span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="label2"
@@ -156,7 +156,7 @@
 
 																
 																<label class="control-label col-sm-2" id="sp" for="smallheading">To
-																	 : <span class="text-danger" ></span>
+																	  <span class="text-danger" ></span>
 																</label>
 																<div class="col-sm-2">
 																	<input type="date" class="form-control" id="label4"
@@ -173,7 +173,7 @@
 																</label>
 																
 												<label class="control-label col-sm-1" for="status">
-													Year : <span class="text-danger">*</span>
+													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -186,7 +186,7 @@
 
 													</select>
 													</div>
-													<label class="control-label col-sm-2" id="label1" for="smallheading">Number:
+													<label class="control-label col-sm-2" id="label1" for="smallheading">Number
 																	  <span class="text-danger"></span>
 																</label>
 																<div class="col-sm-2">
@@ -229,7 +229,7 @@
 													<div class="form-group">
 													
 													<label class="control-label col-sm-3" for="page_order">Gender Equity in Safety/Security
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													Yes <input type="radio" name="stu" id="stu" checked
@@ -242,7 +242,7 @@
 													<div class="form-group">
 													
 													<label class="control-label col-sm-3" for="page_order">Gender Equity in Counseling
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													Yes <input type="radio" name="stu" id="stu" checked
@@ -255,7 +255,7 @@
 													<div class="form-group">
 													
 													<label class="control-label col-sm-3" for="page_order">Gender Equity in Common Room
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													Yes <input type="radio" name="stu" id="stu" checked

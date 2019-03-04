@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -118,9 +118,9 @@
 
 													<div class="col-xs-12">
 													
-															<div class="col-xs-12">
+															 <div class="form-group">
 
-															<table id="example-1"
+															<!-- <table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
@@ -144,7 +144,39 @@
 
 
 																</tbody>
-															</table>
+															</table> -->
+															
+																<table class="table table-striped dt-responsive display" id="example-1">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												<th width="10%">Academic Year</th>
+												<th width="10%">Name of Activity</th>
+												
+												 <th width="20%" style="text-align: center;" colspan="2">Duration
+													</th> 
+													
+												<th width="15%">Total Participants</th>
+												<th  width="20%">Level of Activity/Competition</th>
+												<th width="20%">Type of Activity/Competition</th>
+												
+												
+											</tr>
+</thead>
+<tbody>
+											<tr>
+												<td width="5%"></td>
+												<td width="10%"></td>
+												<td width="10%"></td>
+												<td width="10%">From Date</td>
+												<td width="10%">To Date</td>
+												<td width="15%"></td>
+												<td width="20%"></td>
+												<td width="20%"></td>
+											</tr> 
+										</tbody>
+</table>
+															
 
 														</div>
 														 <div class="form-group">

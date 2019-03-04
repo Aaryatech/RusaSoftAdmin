@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -116,11 +116,11 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-1" for="status">NSS
-													: <span class="text-danger">*</span>
+													 <span class="text-danger">*</span>
 												</label> 
 												
 												<label class="control-label col-sm-1" for="status">
-													Year : <span class="text-danger">*</span>
+													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -135,7 +135,7 @@
 </div>
 
 												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
+													of Students Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -143,7 +143,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													 Students :<span class="text-danger">*</span>
+													 Students <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -161,7 +161,7 @@
 	                                  <div class="col-sm-1"></div>
 	                                  
 	                                  <label class="control-label col-sm-2" for="page_name">No
-													of Faculties Participated :<span class="text-danger">*</span>
+													of Faculties Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -169,7 +169,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													Faculties :<span class="text-danger">*</span>
+													Faculties <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -182,11 +182,11 @@
 
 <div class="form-group">
 												<label class="control-label col-sm-1" for="status">NCC
-													: <span class="text-danger">*</span>
+													 <span class="text-danger">*</span>
 												</label> 
 												
 												<label class="control-label col-sm-1" for="status">
-													Year : <span class="text-danger">*</span>
+													Year <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -201,7 +201,7 @@
 </div>
 
 												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
+													of Students Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -209,7 +209,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													 Students :<span class="text-danger">*</span>
+													 Students <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -227,7 +227,7 @@
 	                                  <div class="col-sm-1"></div>
 	                                  
 	                                  <label class="control-label col-sm-2" for="page_name">No
-													of Faculties Participated :<span class="text-danger">*</span>
+													of Faculties Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -235,7 +235,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													Faculties :<span class="text-danger">*</span>
+													Faculties <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -246,11 +246,11 @@
 
 <div class="form-group">
 												<label class="control-label col-sm-1" for="status">Swachh Bharat
-													: <span class="text-danger">*</span>
+													 <span class="text-danger">*</span>
 												</label> 
 												
 												<label class="control-label col-sm-1" for="status">
-													Year : <span class="text-danger">*</span>
+													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -265,7 +265,7 @@
 </div>
 
 												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
+													of Students Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -273,7 +273,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													 Students :<span class="text-danger">*</span>
+													 Students <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -291,7 +291,7 @@
 	                                  <div class="col-sm-1"></div>
 	                                  
 	                                  <label class="control-label col-sm-2" for="page_name">No
-													of Faculties Participated :<span class="text-danger">*</span>
+													of Faculties Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -299,7 +299,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													Faculties :<span class="text-danger">*</span>
+													Faculties <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -310,11 +310,11 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-1" for="status">Red Cross
-													: <span class="text-danger">*</span>
+													 <span class="text-danger">*</span>
 												</label> 
 												
 												<label class="control-label col-sm-1" for="status">
-													Year : <span class="text-danger">*</span>
+													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -329,7 +329,7 @@
 </div>
 
 												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
+													of Students Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -337,7 +337,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													 Students :<span class="text-danger">*</span>
+													 Students<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -355,7 +355,7 @@
 	                                  <div class="col-sm-1"></div>
 	                                  
 	                                  <label class="control-label col-sm-2" for="page_name">No
-													of Faculties Participated :<span class="text-danger">*</span>
+													of Faculties Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -363,7 +363,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													Faculties :<span class="text-danger">*</span>
+													Faculties <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -373,11 +373,11 @@
 	                                 </div>
 											<div class="form-group">
 												<label class="control-label col-sm-1" for="status">AIDs Awareness
-													: <span class="text-danger">*</span>
+													 <span class="text-danger">*</span>
 												</label> 
 												
 												<label class="control-label col-sm-1" for="status">
-													Year : <span class="text-danger">*</span>
+													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -392,7 +392,7 @@
 </div>
 
 												<label class="control-label col-sm-2" for="page_name">No
-													of Students Participated :<span class="text-danger">*</span>
+													of Students Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -400,7 +400,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													 Students :<span class="text-danger">*</span>
+													 Students<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -418,7 +418,7 @@
 	                                  <div class="col-sm-1"></div>
 	                                  
 	                                  <label class="control-label col-sm-2" for="page_name">No
-													of Faculties Participated :<span class="text-danger">*</span>
+													of Faculties Participated <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -426,7 +426,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-2" for="page_name">Total No.of
-													Faculties :<span class="text-danger">*</span>
+													Faculties <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
