@@ -244,6 +244,7 @@
 
 
 
+		
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
 																Principal Name :<span class="text-danger">*</span>
@@ -295,7 +296,9 @@
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
 
-														<button type="submit" class="btn btn-primary">Submit</button>
+													<a href="#myModal2"
+														data-toggle="modal"><button type="submit" onclick="getCOPO()"
+																class="btn btn-primary">Submit</button></a>
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
@@ -326,76 +329,146 @@
 
 	<!-- END CONTENT -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+		<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
 						type="button">×</button>
-					<h4 class="modal-title">Academic Details</h4>
+					<h4 class="modal-title">Institute Details Confirmation</h4>
 				</div>
 				<div class="modal-body">
 					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
 						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="page_name">Qualification</label>
-						<select id="qualType" name="qualType" class="form-control"
-							onchange="showForm()" required>
-							<option value="Diploma">Diploma</option>
-							<option value="Bachelors">Bachelors</option>
-							<option value="Masters">Masters</option>
-							<option value="Doctorates">Doctorates</option>
-							<option value="Post Doctorates">Post Doctorates</option>
-							<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
-
-							<option value="7">Any Other</option>
-
-
-
-						</select>
-					</div>
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Other
-							Qualification </label>
-						<!-- <div class="col-sm-3"> -->
-						<input type="text" class="form-control" id="qualName"
-							name="qualName" placeholder="" value="${page.pageName}">
-						<!-- </div> -->
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-1" for="page_name">Class
-						</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" id="className"
-								name="className" placeholder="" value="${page.pageName}"
-								required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Year
-							of Passing </label>
-						<div class="col-sm-3">
-							<input type="date" class="form-control" id="year" name="year"
-								value="" required>
-						</div>
-
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- 	</form> -->
+						<input type="hidden" class="form-control" id="pageId"
+							name="pageId" >
+						
+								
+								
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Institute Name:
+							</label>
+							<label  id="inst_Name1" for="page_name"> 
+							</label>
+						</div>	
+				
+			
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">AISHE Code:
+							</label>
+							<label  id="aishe_code1" for="page_name"> 
+							</label>
+						</div>	
+					
+		
+			
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Institute Address:
+							</label>
+							<label  id="inst_Add1" for="page_name"> 
+							</label>
+						</div>	
+						
+						<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Is Registered:
+							</label>
+							<label  id="is_reg1" for="page_name"> 
+							</label>
+						</div>	
+						
+							<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Registration Date:
+							</label>
+							<label  id="reg_date1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Trust/Society Name :
+							</label>
+							<label  id="trust_Name1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Trust/Society Address :
+							</label>
+							<label  id="trust_Add1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="trust_Con1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Chairman/President Name:
+							</label>
+							<label  id="chairman_Name1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="Chair_Con1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Email ID(Official):
+							</label>
+							<label  id="chair_Email1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Principal Name :
+							</label>
+							<label  id="princi_Name1" for="page_name"> 
+							</label>
+						</div>	
+			<!-- 	-->
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="princi_Con1" for="page_name"> 
+							</label>
+						</div>	
+				
+				<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Email ID(Official): 
+							</label>
+							<label  id="princi_Email1" for="page_name"> 
+							</label>
+						</div>	
+				
+	
+					 <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button>
+				<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
-	</div>
+</div>
 
  
 	<script type="text/javascript">
@@ -424,6 +497,61 @@ function setDate(value){
 	
 	
 }
+
+function getCOPO() {
+	//alert("hii");
+		
+
+		    var iqacName=document.getElementById("inst_name").value
+		    var aishe_code=document.getElementById("aishe_code").value
+			var inst_add=document.getElementById("inst_add").value
+			var is_registration=document.getElementById("is_registration").value
+			var reg_date=document.getElementById("reg_date").value
+			var trusty_name=document.getElementById("trusty_name").value
+			var trusty_add=document.getElementById("trusty_add").value
+			var trusty_con_no=document.getElementById("trusty_con_no").value
+			var pres_name=document.getElementById("pres_name").value
+			var pres_contact=document.getElementById("pres_contact").value
+			var pres_email=document.getElementById("pres_email").value
+			var princ_name=document.getElementById("princ_name").value
+			var princ_contact=document.getElementById("princ_contact").value
+			var princ_email=document.getElementById("princ_email").value
+			var temp;
+		    var temp1;
+		   
+		    if(is_registration==1){
+		    	 alert(reg_date);
+		    	temp="Yes";
+		    	$('#reg_date1').html(reg_date);
+		    	
+		    }else{
+		    	 alert("no...");
+		    	temp="No";
+		    	temp1="-";
+		    	$('#reg_date1').html(temp1);
+		    	
+		    }
+				
+			$('#inst_Name1').html(iqacName);
+			$('#aishe_code1').html(aishe_code);
+			$('#inst_Add1').html(inst_add);
+			$('#is_reg1').html(temp);
+			
+			$('#trust_Name1').html(trusty_name);
+			$('#trust_Add1').html(trusty_add);
+			$('#trust_Con1').html(trusty_con_no);
+			
+			$('#chairman_Name1').html(pres_name);
+			$('#Chair_Con1').html(pres_contact);
+			$('#chair_Email1').html(pres_email);
+			$('#princi_Name1').html(princ_name); 
+			$('#princi_Con1').html(princ_contact); 
+			$('#princi_Email1').html(princ_email); 
+	
+		
+		
+	}
+
 </script>
 
 
