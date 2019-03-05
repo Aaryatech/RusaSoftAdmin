@@ -64,7 +64,7 @@
 
 						</header>
 						<form action="${pageContext.request.contextPath}/deleteInstitutes/0"
-							method="get">
+							method="get" id="insListForm">
 							<div class="content-body">
 								<div class="row">
 									<c:if test="${sessionScope.successMsg!=null}">
@@ -112,27 +112,27 @@
 										</tfoot> -->
 
 											<tbody>
-												<c:forEach items="${instList}" var="getPagesModuleList"
+												<c:forEach items="${instList}" var="institute"
 													varStatus="count">
 													<tr>
 														<td><input type="checkbox" class="chk" name="instIds"
 															id="instIds${count.index+1}"
-															value="${getPagesModuleList.instituteId}" /></td>
+															value="${institute.instituteId}" /></td>
 														<td>${count.index+1}</td>
-														<td>${getPagesModuleList.instituteName}</td>
+														<td>${institute.instituteName}</td>
 
-														<td>${getPagesModuleList.principalName}</td>
-														<td>${getPagesModuleList.contactNo}</td>
+														<td>${institute.principalName}</td>
+														<td>${institute.contactNo}</td>
 
-														<td>${getPagesModuleList.email}</td>
+														<td>${institute.email}</td>
 
 
 														<td><a
-															href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.instituteId}"><span
+															href="#" onclick="showEditInstitute(${institute.instituteId})"><span
 																class="glyphicon glyphicon-edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a> |
 															<a
-															href="${pageContext.request.contextPath}/deleteInstitutes/${getPagesModuleList.instituteId}"
+															href="${pageContext.request.contextPath}/deleteInstitutes/${institute.instituteId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -148,11 +148,10 @@
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;">
+													<input type="hidden" id="edit_inst_id"   name="edit_inst_id" value="0">
 
 
 										</div>
-
-
 
 									</div>
 								</div>
@@ -202,6 +201,15 @@
 
 			}
 
+		}
+		function showEditInstitute(instId){
+			document.getElementById("edit_inst_id").value=instId;//create this 
+			var form=document.getElementById("insListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditInstitute");
+			form.submit();
+			
 		}
 	</script>
 </body>

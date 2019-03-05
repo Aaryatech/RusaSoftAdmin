@@ -40,6 +40,10 @@ public class MasterController {
 
 			model.addObject("title", "Register Institute");
 
+			Institute editInst = new Institute();
+
+			model.addObject("editInst", editInst);
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
@@ -1473,65 +1477,109 @@ public class MasterController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			model = new ModelAndView("master/facultyInfo");
-
-			model.addObject("title", " Faculty Detail");
-
 			int exInt = 0;
 			String exVar = "";
-			Institute institute = new Institute();
-
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-
-			String curDateTime = dateFormat.format(cal.getTime());
-			String aisheCode = request.getParameter("aishe_code");
-			System.err.println("Aishe Code  " + aisheCode);
-			institute.setAisheCode(aisheCode);
-
-			institute.setCheckerDatetime(curDateTime);
-			institute.setCheckerUserId(0);
-
-			institute.setContactNo(request.getParameter("princ_contact"));
-			institute.setDelStatus(1);
-			institute.setEmail(request.getParameter("princ_email"));
-
-			institute.setExInt1(exInt);
-			institute.setExInt2(exInt);
-			institute.setExVar1(exVar);
-			institute.setExVar2(exVar);
-
-			institute.setInstituteAdd(request.getParameter("inst_add"));
 			int instId = Integer.parseInt(request.getParameter("inst_id"));
-			institute.setInstituteId(instId);
-			institute.setInstituteName(request.getParameter("inst_name"));
+			if (instId == 0) {
+				Institute institute = new Institute();
 
-			institute.setIsActive(1);
-			institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed hi/her pass.
-											// Initially its zero
-			int isReg = Integer.parseInt(request.getParameter("is_registration"));
-			institute.setIsRegistration(isReg);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			institute.setLastUpdatedDatetime(curDateTime);
-			institute.setMakerEnterDatetime(curDateTime);
-			institute.setMakerUserId(0);// user id who is creating this record for ex principal is user who creates iqac
-										// and hod to student
+				String curDateTime = dateFormat.format(cal.getTime());
+				
+				String aisheCode = request.getParameter("aishe_code");
+				institute.setAisheCode(aisheCode);
 
-			institute.setPresidentName(request.getParameter("pres_name"));
-			institute.setPrincipalName(request.getParameter("princ_name"));
-			if (isReg == 1)
-				institute.setRegDate(request.getParameter("reg_date"));
-			institute.setTrustAdd(request.getParameter("trusty_add"));
+				institute.setCheckerDatetime(curDateTime);
+				institute.setCheckerUserId(0);
 
-			institute.setTrustContactNo(request.getParameter("trusty_con_no"));
-			institute.setTrustName(request.getParameter("trusty_name"));
-			institute.setUserType(0);// for institute its 0
+				institute.setContactNo(request.getParameter("princ_contact"));
+				institute.setDelStatus(1);
+				institute.setEmail(request.getParameter("princ_email"));
 
-			institute.setPresidenContact(request.getParameter("pres_contact"));
-			institute.setPresidentEmail(request.getParameter("pres_email"));
+				institute.setExInt1(exInt);
+				institute.setExInt2(exInt);
+				institute.setExVar1(exVar);
+				institute.setExVar2(exVar);
 
-			System.out.println(institute);
-			Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute, Institute.class);
+				institute.setInstituteAdd(request.getParameter("inst_add"));
+				institute.setInstituteId(instId);
+				institute.setInstituteName(request.getParameter("inst_name"));
+
+				institute.setIsActive(1);
+				institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her pass.
+												// Initially its zero
+				int isReg = Integer.parseInt(request.getParameter("is_registration"));
+				institute.setIsRegistration(isReg);
+
+				institute.setLastUpdatedDatetime(curDateTime);
+				institute.setMakerEnterDatetime(curDateTime);
+				institute.setMakerUserId(0);// user id who is creating this record for ex principal is user who creates
+											// iqac
+											// and hod to student
+
+				institute.setPresidentName(request.getParameter("pres_name"));
+				institute.setPrincipalName(request.getParameter("princ_name"));
+				if (isReg == 1)
+					institute.setRegDate(request.getParameter("reg_date"));
+				institute.setTrustAdd(request.getParameter("trusty_add"));
+
+				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
+				institute.setTrustName(request.getParameter("trusty_name"));
+				institute.setUserType(0);// for institute its 0
+
+				institute.setPresidenContact(request.getParameter("pres_contact"));
+				institute.setPresidentEmail(request.getParameter("pres_email"));
+
+				System.out.println(institute);
+
+				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
+						Institute.class);
+
+			} else {
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", instId);
+				// getInstitute
+				Institute institute = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
+				
+				String aisheCode = request.getParameter("aishe_code");
+				institute.setAisheCode(aisheCode);
+				
+				institute.setContactNo(request.getParameter("princ_contact"));
+				institute.setEmail(request.getParameter("princ_email"));
+				institute.setInstituteAdd(request.getParameter("inst_add"));
+				institute.setInstituteName(request.getParameter("inst_name"));
+
+				int isReg = Integer.parseInt(request.getParameter("is_registration"));
+				institute.setIsRegistration(isReg);
+
+				institute.setLastUpdatedDatetime(curDateTime);
+				
+				institute.setPresidentName(request.getParameter("pres_name"));
+				institute.setPrincipalName(request.getParameter("princ_name"));
+				if (isReg == 1)
+					institute.setRegDate(request.getParameter("reg_date"));
+				else
+					institute.setRegDate(null);
+				
+				institute.setTrustAdd(request.getParameter("trusty_add"));
+
+				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
+				institute.setTrustName(request.getParameter("trusty_name"));
+
+				institute.setPresidenContact(request.getParameter("pres_contact"));
+				institute.setPresidentEmail(request.getParameter("pres_email"));
+				
+				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
+						Institute.class);
+			}
 
 		} catch (Exception e) {
 
@@ -1553,7 +1601,7 @@ public class MasterController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			if (instId == 0) {
-				
+
 				System.err.println("Multiple records delete ");
 				String[] instIds = request.getParameterValues("instIds");
 				System.out.println("id are" + instIds);
@@ -1569,7 +1617,7 @@ public class MasterController {
 
 				map.add("instIdList", instIdList);
 			} else {
-				
+
 				System.err.println("Single Record delete ");
 				map.add("instIdList", instId);
 			}
@@ -1585,6 +1633,34 @@ public class MasterController {
 		}
 
 		return "redirect:/showInstituteList";
+
+	}
+
+	@RequestMapping(value = "/showEditInstitute", method = RequestMethod.POST)
+	public ModelAndView showEditInstitute(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
+
+		try {
+
+			model = new ModelAndView("master/reginstitute");
+
+			int instId = Integer.parseInt(request.getParameter("edit_inst_id"));
+
+			model.addObject("title", " Edit Institute Reginstration");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instituteId", instId);
+			// getInstitute
+			Institute editInst = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
+
+			model.addObject("editInst", editInst);
+			model.addObject("instituteId", instId);
+
+		} catch (Exception e) {
+			System.err.println("Exce in editInstitute/{instId}  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
 
 	}
 

@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body onload="showIsReg()"  class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstitute"
-										method="post"  
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -124,7 +123,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="inst_name"
-																	name="inst_name" placeholder="Institute Name">
+																	value="${editInst.instituteName}" name="inst_name"
+																	placeholder="Institute Name" required>
 															</div>
 														</div>
 														<div class="form-group">
@@ -133,7 +133,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="aishe_code"
-																	name="aishe_code" placeholder="AISHE Code">
+																	value="${editInst.aisheCode}" name="aishe_code"
+																	placeholder="AISHE Code" required>
 															</div>
 														</div>
 
@@ -146,8 +147,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="inst_add"
-																	name="inst_add" placeholder="Institute Address"
-																	required>
+																	value="${editInst.instituteAdd}" name="inst_add"
+																	placeholder="Institute Address" required>
 															</div>
 														</div>
 
@@ -158,17 +159,57 @@
 																(YES/No) : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="is_registration" name="is_registration"
-																	 value="1" checked onclick="setDate(this.value)">Yes
-																<input type="radio"
-																	id="is_registration" name="is_registration" value="0" onclick="setDate(this.value)">No
+																<c:choose>
+																	<c:when test="${editInst.instituteId==0}">
+
+																		<input type="radio" id="is_registration"
+																			name="is_registration" value="1" checked
+																			onclick="setDate(this.value)">Yes a
+																<input type="radio" id="is_registration"
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No b
+															
+															</c:when>
+																	<c:otherwise>
+
+																		<c:choose>
+																			<c:when test="${editInst.isRegistration==1}">
+																				<input type="radio" id="is_registration"
+																					name="is_registration" value="1" checked
+																					onclick="setDate(this.value)">Yes c
+																<input type="radio" id="is_registration"
+																					name="is_registration" value="0"
+																					onclick="setDate(this.value)">No d
+															
+																
+																</c:when>
+																			<c:otherwise>
+																				<input type="radio" id="is_registration"
+																					name="is_registration" value="1" 
+																					onclick="setDate(this.value)">Yes e
+																<input type="radio" id="is_registration" checked
+																					name="is_registration" value="0"
+																					onclick="setDate(this.value)">No f
+															
+																
+																</c:otherwise>
+
+																		</c:choose>
+
+																	</c:otherwise>
+
+
+																</c:choose>
+
 															</div>
 															<div id="abc">
 																<label class="control-label col-sm-2" for="page_order">Date
 																	of Registration :<span class="text-danger">*</span>
 																</label>
+																
+																
 																<div class="col-sm-3">
-																	<input type="date" class="form-control" id="reg_date"
+																	<input type="date" class="form-control" id="reg_date" value="${editInst.regDate}"
 																		name="reg_date" placeholder="Date of Registration"
 																		value="" required>
 																</div>
@@ -181,8 +222,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="trusty_name"
-																	name="trusty_name" placeholder="Trust/Society Name"
-																	value="" required>
+																	value="${editInst.trustName}" name="trusty_name"
+																	placeholder="Trust/Society Name" value="" required>
 															</div>
 														</div>
 
@@ -192,8 +233,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="trusty_add"
-																	name="trusty_add" placeholder="Trust/Society Address"
-																	value="" required>
+																	value="${editInst.trustAdd}" name="trusty_add"
+																	placeholder="Trust/Society Address" value="" required>
 															</div>
 														</div>
 
@@ -203,7 +244,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="trusty_con_no"
+																	value="${editInst.trustContactNo}" maxlength="10"
+																	class="form-control" id="trusty_con_no"
 																	name="trusty_con_no" placeholder="Landline No" required>
 															</div>
 														</div>
@@ -215,7 +257,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="pres_name"
-																	name="pres_name"
+																	value="${editInst.presidentName}" name="pres_name"
 																	placeholder="Name of Chairman/President(Board of Governance)"
 																	required>
 															</div>
@@ -227,7 +269,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="pres_contact"
+																	value="${editInst.presidenContact}" maxlength="10"
+																	class="form-control" id="pres_contact"
 																	name="pres_contact" placeholder="Landline No" required>
 															</div>
 														</div>
@@ -238,21 +281,22 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="pres_email"
-																	name="pres_email" placeholder="abc@xyz.com" required>
+																	value="${editInst.presidentEmail}" name="pres_email"
+																	placeholder="abc@xyz.com" required>
 															</div>
 														</div>
 
 
 
-		
+
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
 																Principal Name :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="princ_name"
-																	name="princ_name" placeholder="Name of Principal"
-																	required>
+																	value="${editInst.principalName}" name="princ_name"
+																	placeholder="Name of Principal" required>
 															</div>
 														</div>
 
@@ -263,7 +307,8 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="princ_contact"
-																	name="princ_contact" placeholder="Contact No" required>
+																	value="${editInst.contactNo}" name="princ_contact"
+																	placeholder="Contact No" required>
 															</div>
 															<label class="control-label col-sm-7" for="page_order"
 																style="color: red;">Note: OTP will be sent on
@@ -277,7 +322,8 @@
 																ID(Official): :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="princ_email"
+																<input type="email" class="form-control"
+																	id="princ_email" value="${editInst.email}"
 																	name="princ_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
@@ -288,7 +334,8 @@
 														</label>
 
 													</div>
-													<input type="text" id="inst_id"   name="inst_id" value="0">
+													<input type="hidden" id="inst_id" name="inst_id"
+														value="${editInst.instituteId}">
 
 												</div>
 
@@ -296,9 +343,11 @@
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
 
-													<a href="#myModal2"
+														<!-- <a href="#myModal2"
 														data-toggle="modal"><button type="submit" onclick="getCOPO()"
-																class="btn btn-primary">Submit</button></a>
+																class="btn btn-primary">Submit</button></a> -->
+
+														<input type="submit" class="btn btn-primary" />
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
@@ -329,7 +378,7 @@
 
 	<!-- END CONTENT -->
 
-		<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -342,135 +391,108 @@
 					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
 						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-						
-								
-								
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Institute Name:
-							</label>
-							<label  id="inst_Name1" for="page_name"> 
-							</label>
-						</div>	
-				
-			
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">AISHE Code:
-							</label>
-							<label  id="aishe_code1" for="page_name"> 
-							</label>
-						</div>	
-					
-		
-			
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Institute Address:
-							</label>
-							<label  id="inst_Add1" for="page_name"> 
-							</label>
-						</div>	
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Is Registered:
-							</label>
-							<label  id="is_reg1" for="page_name"> 
-							</label>
-						</div>	
-						
-							<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Registration Date:
-							</label>
-							<label  id="reg_date1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Trust/Society Name :
-							</label>
-							<label  id="trust_Name1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Trust/Society Address :
-							</label>
-							<label  id="trust_Add1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Contact No :
-							</label>
-							<label  id="trust_Con1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Chairman/President Name:
-							</label>
-							<label  id="chairman_Name1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Contact No :
-							</label>
-							<label  id="Chair_Con1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Email ID(Official):
-							</label>
-							<label  id="chair_Email1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Principal Name :
-							</label>
-							<label  id="princi_Name1" for="page_name"> 
-							</label>
-						</div>	
-			<!-- 	-->
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Contact No :
-							</label>
-							<label  id="princi_Con1" for="page_name"> 
-							</label>
-						</div>	
-				
-				<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Email ID(Official): 
-							</label>
-							<label  id="princi_Email1" for="page_name"> 
-							</label>
-						</div>	
-				
-	
-					 <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button>
-				<!-- 	</form> -->
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Institute
+							Name: </label> <label id="inst_Name1" for="page_name"> </label>
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">AISHE
+							Code: </label> <label id="aishe_code1" for="page_name"> </label>
+					</div>
+
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Institute
+							Address: </label> <label id="inst_Add1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Is
+							Registered: </label> <label id="is_reg1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Registration
+							Date: </label> <label id="reg_date1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Trust/Society
+							Name : </label> <label id="trust_Name1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Trust/Society
+							Address : </label> <label id="trust_Add1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Contact
+							No : </label> <label id="trust_Con1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Chairman/President
+							Name: </label> <label id="chairman_Name1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Contact
+							No : </label> <label id="Chair_Con1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Email
+							ID(Official): </label> <label id="chair_Email1" for="page_name">
+						</label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Principal
+							Name : </label> <label id="princi_Name1" for="page_name"> </label>
+					</div>
+					<!-- 	-->
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Contact
+							No : </label> <label id="princi_Con1" for="page_name"> </label>
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Email
+							ID(Official): </label> <label id="princi_Email1" for="page_name">
+						</label>
+					</div>
+
+
+					<button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button>
+					<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 
- 
+
 	<script type="text/javascript">
 function showDiv(value) {
 
@@ -484,20 +506,24 @@ function showDiv(value) {
 }
 
 function setDate(value){
+	//alert("Value " +value)
 	if(value==0){
 	//alert(value)
 	document.getElementById("reg_date").removeAttribute("required");
+	document.getElementById("abc").style.display = "none";
+
 	//alert(value)
 	}else{
 		//alert(value)
 		document.getElementById("reg_date").setAttribute("required","true");
+		document.getElementById("abc").style.display = "block";
+
 		//alert(value)
 
 	}
 	
-	
 }
-
+			
 function getCOPO() {
 	//alert("hii");
 		
@@ -550,6 +576,33 @@ function getCOPO() {
 	
 		
 		
+	}
+	function getOpt(){
+		//submit afrer showing details on modal dialogue
+		var form=document.getElementById("form_sample_2");
+		form.submit();
+		
+	}
+	
+	function showIsReg(){
+		
+		var x=${editInst.instituteId}
+	
+		if(x>0){
+			
+		var isReg=${editInst.isRegistration};
+		//alert("Is Reg " +isReg);
+		if(isReg==0){
+
+			document.getElementById("abc").style.display = "none";
+
+		}else{
+			document.getElementById("abc").style.display = "block";
+			
+		}
+			
+		}
+	
 	}
 
 </script>

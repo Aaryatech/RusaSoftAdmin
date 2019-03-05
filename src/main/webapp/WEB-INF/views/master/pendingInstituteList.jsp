@@ -63,6 +63,8 @@
 							</div>
 
 						</header>
+						<form action="${pageContext.request.contextPath}/approveInstitutes/0"
+							method="get" id="insListForm">
 						<div class="content-body">
 							<div class="row">
 								<c:if test="${sessionScope.successMsg!=null}">
@@ -86,7 +88,7 @@
 											<tr>
 												<th width="5%">Sr No</th>
 												<th>Institute Name</th>
-												
+
 												<th>Principal Name</th>
 												<th>Contact No</th>
 												<th>Email</th>
@@ -94,54 +96,37 @@
 											</tr>
 										</thead>
 
-										<tfoot>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th>Institute Name</th>
-												
-												<th>Principal Name</th>
-												<th>Contact No</th>
-												<th>Email</th>
-												<th width="10%">Action</th>
-											</tr>
-										</tfoot>
+
 
 										<tbody>
-											<%-- <c:forEach items="${getPagesModuleList}"
-												var="getPagesModuleList" varStatus="count"> --%>
+											<c:forEach items="${pendInstList}" var="institute"
+												varStatus="count">
 												<tr>
 													<td>${count.index+1}</td>
-													<td>abc</td>
+													<td>${institute.instituteName}</td>
 
-													<td>xyz</td>
-													<td>-</td>
-													<td>-</td>
-													<td><a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
+													<td>${institute.principalName}</td>
+													<td>${institute.contactNo}</td>
+
+													<td>${institute.email}</td>
+
+													<td><a href="#" onclick="approveInst(${institute.instituteId})"><span
 															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip" title="Edit Institute"></span></a> |
-															<a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
-															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip" title="Approve Institute"></span></a> |
-														<a
-														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.primaryKeyId}"
-														onClick="return confirm('Are you sure want to delete this record');"
-														rel="tooltip" data-color-class="danger"
-														data-animate=" animated fadeIn " data-toggle="tooltip"
-														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a></td>
+															data-animate=" animated fadeIn " rel="tooltip"
+															title="Approve Institute"></span></a></td>
 												</tr>
-											<%-- </c:forEach> --%>
+											</c:forEach>
 										</tbody>
 									</table>
 
+													<input type="hidden" id="apr_inst_id"   name="apr_inst_id" value="0">
 
 
 
 								</div>
 							</div>
 						</div>
+						</form>
 					</section>
 				</div>
 
@@ -175,6 +160,17 @@
 
 			});
 
+		}
+		
+		function approveInst(instId){
+
+			document.getElementById("apr_inst_id").value=instId;//create this 
+			var form=document.getElementById("insListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("approveInstitutes");
+			form.submit();
+			
 		}
 	</script>
 </body>
