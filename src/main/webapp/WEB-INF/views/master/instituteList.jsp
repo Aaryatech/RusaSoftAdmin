@@ -31,7 +31,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
-				<%-- <div class='col-xs-12'>
+				<div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -42,7 +42,7 @@
 
 
 					</div>
-				</div> --%>
+				</div>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -63,38 +63,43 @@
 							</div>
 
 						</header>
-						<div class="content-body">
-							<div class="row">
-								<c:if test="${sessionScope.successMsg!=null}">
-									<div class="col-lg-12">
-										<div class="alert alert-success alert-dismissible fade in">
-											<button type="button" class="close" data-dismiss="alert"
-												aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
-											<strong>Success : </strong> ${sessionScope.successMsg}
+						<form action="${pageContext.request.contextPath}/deleteInstitutes/0"
+							method="get">
+							<div class="content-body">
+								<div class="row">
+									<c:if test="${sessionScope.successMsg!=null}">
+										<div class="col-lg-12">
+											<div class="alert alert-success alert-dismissible fade in">
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<strong>Success : </strong> ${sessionScope.successMsg}
+											</div>
 										</div>
-									</div>
-								</c:if>
+									</c:if>
 
-								<div class="col-xs-12">
+									<div class="col-xs-12">
 
 
-									<table id="example-1"
-										class="table table-striped dt-responsive display">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th>Institute Name</th>
-												
-												<th>Principal Name</th>
-												<th>Contact No</th>
-												<th>Email</th>
-												<th width="10%">Action</th>
-											</tr>
-										</thead>
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
+													<th width="5%">Sr No</th>
+													<th>Institute Name</th>
 
-										<!-- <tfoot>
+													<th>Principal Name</th>
+													<th>Contact No</th>
+													<th>Email</th>
+													<th width="10%">Action</th>
+												</tr>
+											</thead>
+
+											<!-- <tfoot>
 											<tr>
 												<th width="5%">Sr No</th>
 												<th>Institute Name</th>
@@ -106,43 +111,53 @@
 											</tr>
 										</tfoot> -->
 
-										<tbody>
-											<c:forEach items="${instList}"
-												var="getPagesModuleList" varStatus="count">
-												<tr>
-													<td>${count.index+1}</td>
-													<td>${getPagesModuleList.instituteName}
-														</td>
+											<tbody>
+												<c:forEach items="${instList}" var="getPagesModuleList"
+													varStatus="count">
+													<tr>
+														<td><input type="checkbox" class="chk" name="instIds"
+															id="instIds${count.index+1}"
+															value="${getPagesModuleList.instituteId}" /></td>
+														<td>${count.index+1}</td>
+														<td>${getPagesModuleList.instituteName}</td>
 
-													<td>${getPagesModuleList.principalName}</td>
-													<td>${getPagesModuleList.contactNo}
-														</td>
+														<td>${getPagesModuleList.principalName}</td>
+														<td>${getPagesModuleList.contactNo}</td>
 
-													<td>${getPagesModuleList.email}</td>
-													
-													
-													<td><a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.instituteId}"><span
-															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip"></span></a> |
-														<a
-														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.instituteId}"
-														onClick="return confirm('Are you sure want to delete this record');"
-														rel="tooltip" data-color-class="danger"
-														data-animate=" animated fadeIn " data-toggle="tooltip"
-														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a></td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
+														<td>${getPagesModuleList.email}</td>
 
 
+														<td><a
+															href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.instituteId}"><span
+																class="glyphicon glyphicon-edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a> |
+															<a
+															href="${pageContext.request.contextPath}/deleteInstitutes/${getPagesModuleList.instituteId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+										<div class="col-lg-1">
+
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
 
 
+										</div>
+
+
+
+									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 					</section>
 				</div>
 
@@ -175,6 +190,17 @@
 			}, function(data) {
 
 			});
+
+		}
+
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('instIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
 
 		}
 	</script>

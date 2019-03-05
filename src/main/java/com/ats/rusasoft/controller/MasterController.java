@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.GetInstituteList;
+import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 
 @Controller
@@ -1460,54 +1461,10 @@ public class MasterController {
 
 	}
 
-	
-	@RequestMapping(value = "/showPendingInstitute", method = RequestMethod.GET)
- 	public ModelAndView showPendingInstitute(HttpServletRequest request, HttpServletResponse response) {
-
- 		ModelAndView model = null;
- 		try {
-
- 			model = new ModelAndView("master/pendingInstituteList");
-
- 			model.addObject("title", " Pending Institute");
-
- 		} catch (Exception e) {
-
- 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
- 			e.printStackTrace();
-
- 		}
-
- 		return model;
-
- 	}
-  
-  @RequestMapping(value = "/showApprovedInstitute", method = RequestMethod.GET)
-	public ModelAndView showApprovedInstitute(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/approvedInstituteList");
-
-			model.addObject("title", " Pending Institute");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 	// Insert Institute
 
 	@RequestMapping(value = "/insertInstitute", method = RequestMethod.POST)
-	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {
+	public String insertInstitute(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
@@ -1584,7 +1541,50 @@ public class MasterController {
 
 		}
 
-		return model;
+		return "redirect:/showInstituteList";
+
+	}
+
+	// deleteInstitutes
+	@RequestMapping(value = "/deleteInstitutes/{instId}", method = RequestMethod.GET)
+	public String deleteInstitutes(HttpServletRequest request, HttpServletResponse response, @PathVariable int instId) {
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (instId == 0) {
+				
+				System.err.println("Multiple records delete ");
+				String[] instIds = request.getParameterValues("instIds");
+				System.out.println("id are" + instIds);
+
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < instIds.length; i++) {
+					sb = sb.append(instIds[i] + ",");
+
+				}
+				String instIdList = sb.toString();
+				instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+				map.add("instIdList", instIdList);
+			} else {
+				
+				System.err.println("Single Record delete ");
+				map.add("instIdList", instId);
+			}
+
+			Info errMsg = rest.postForObject(Constants.url + "deleteInstitutes", map, Info.class);
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/showInstituteList";
 
 	}
 
