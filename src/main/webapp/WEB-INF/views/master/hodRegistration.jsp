@@ -58,36 +58,40 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<div class="col-xs-12">
+			<!-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
-							<!-- PAGE HEADING TAG - START -->
-						<!-- 	<h1 class="title">HOD Registration</h1> -->
-							<!-- PAGE HEADING TAG - END -->
+							PAGE HEADING TAG - START
+							<h1 class="title">HOD Registration</h1>
+							PAGE HEADING TAG - END
 						</div>
 
 
 					</div>
-				</div>
+				</div> -->
+				
+				
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
-				<div class="col-lg-12"></div>
-
+				 
 
 
 				<div class="col-lg-12">
 					<section class="box ">
 
 						<header class="panel_header">
-						<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name:abc</h4>
-							<h2 class="title pull-left">HOD Registration Form</h2>
-
+						
+							<h2 class="title pull-left">HOD Registration</h2>
+							<br/>
+							<h3 class="title pull-left">Institute Name:abc</h3>
+							
+                       
 							<div class="actions panel_actions pull-right">
+						
 								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -213,7 +217,9 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+																<button type="submit" class="btn btn-primary">Add</button>
+																	<a href="${pageContext.request.contextPath}/hodList"><button
+										                              type="button" class="btn btn-primary">Save & Next</button></a>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>

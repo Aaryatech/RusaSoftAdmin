@@ -58,18 +58,18 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<div class="col-xs-12">
+			<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- <h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -190,15 +190,14 @@
 
 												</div>
 
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<button type="submit" class="btn btn-primary">Submit</button>
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
-
-
+                                                           <div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
+																<button type="submit" class="btn btn-primary">Add</button>
+																	<a href="${pageContext.request.contextPath}/showAccList"><button
+										                              type="button" class="btn btn-primary">Save & Next</button></a>
+																<button type="reset" class="btn btn-default">Reset</button>
+															</div>
+														</div>
 
 
 												<div class="clearfix"></div>
