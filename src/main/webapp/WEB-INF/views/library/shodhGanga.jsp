@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -80,7 +80,7 @@
 
 										
 
-										<table class="table table-striped dt-responsive display" id="example1">
+										<table class="table table-striped dt-responsive display" id="example-1">
 											<thead>
 												<tr>
 													<th width="5%">Sr No</th>
@@ -287,7 +287,7 @@
 			temp="No";
 			temp1="-";
 		}
-		var dataTable = $('#example1')
+		var dataTable = $('#example-1')
 		.DataTable();
 		
 		dataTable.row

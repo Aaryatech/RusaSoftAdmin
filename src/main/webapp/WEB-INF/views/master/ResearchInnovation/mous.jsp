@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -116,7 +116,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="status">Type
-													of MoU : <span class="text-danger">*</span>
+													of MoU  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<select id="salutation" name="salutation"
@@ -131,7 +131,7 @@
 												</div>
 
 												<label class="control-label col-sm-3" for="page_name">Name
-													of Organization :<span class="text-danger">*</span>
+													of Organization <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-5">
 													<input type="text" class="form-control" id="hodName"
@@ -144,7 +144,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="status">Year
-													of MoU Signed : <span class="text-danger">*</span>
+													of MoU Signed  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control" id="hodName"
@@ -154,9 +154,9 @@
 
 
 												<label class="control-label col-sm-2" for="page_name">Duration
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label> <label class="control-label col-sm-1" for="page_name">From
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="date" class="form-control" id="hodName"
@@ -164,7 +164,7 @@
 														value="${page.pageName}" required>
 												</div>
 												<label class="control-label col-sm-1" for="page_name">To
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													<input type="date" class="form-control" id="hodName"
@@ -174,7 +174,7 @@
 											</div>
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="page_name">Activities
-													of MoU :<span class="text-danger">*</span>
+													of MoU <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control" id="hodName"
@@ -185,7 +185,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="page_order">
-													Beneficially :<span class="text-danger">*</span>
+													Beneficially <span class="text-danger">*</span>
 												</label> <label class="control-label col-sm-1" for="page_order">Students
 													:<span class="text-danger">*</span>
 												</label>
@@ -196,7 +196,7 @@
 												</div>
 
 												<label class="control-label col-sm-1" for="page_name">No.
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-1">
 													<input type="text" class="form-control" id="hodName"
@@ -205,7 +205,7 @@
 												</div>
 
 												<label class="control-label col-sm-1" for="page_order">Staff
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
 													Yes <input type="radio" name="staff" id="staff" checked
@@ -214,7 +214,7 @@
 												</div>
 
 												<label class="control-label col-sm-1" for="page_name">No.
-													:<span class="text-danger">*</span>
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-1">
 													<input type="text" class="form-control" id="hodName"

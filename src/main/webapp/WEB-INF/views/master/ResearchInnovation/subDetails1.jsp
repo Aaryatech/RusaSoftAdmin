@@ -115,38 +115,41 @@
 
 													<div class="col-xs-12">
 
-														<div class="col-xs-12">
+													<div class="form-group">
+									<table class="table table-striped dt-responsive display" id="example-1">
+										<thead>
+											<tr>
+												<th width="5%">Sr No</th>
+												<th width="10%">Year</th>
+												<th width="15%" >Name of Subject</th>
+												<th  width="15%">Name of Faculty</th>
+												<th width="15%"> No of affiliated Guides</th>
+												<th width="20%" >No of Students registered</th>
+												<th width="20%" style="text-align: center;" colspan="2">
+												Research Center Validity	</th> 
+													
+											
+												
+											</tr>
+</thead>
+<tbody>
+											<tr>
+												<td width="5%"></td>
+												<td width="10%"></td>
+												<td width="15%"></td>
+												<td width="15%"></td>
+												<td width="15%"></td>
+												<td width="20%"></td>
+												<td width="10%">From Date</td>
+												<td width="10%">To Date</td>
+												
+											</tr> 
+										</tbody>
+</table>
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
- 
-																	<tr>
-																		<th rowspan="2">Sr No</th>
-																		<th rowspan="2">Year</th>
-																		<th rowspan="2">Name of Subject</th>
-																		<th rowspan="2">Name of Faculty</th>
-																		<th rowspan="2">No of Affiliated Guides</th>
-																		<th rowspan="2">No of Students Registered</th>
-																		<th  colspan="2">No.
-																		of Students Admitted</th> 
-																	</tr>
-																	 
-																	<tr>
-																		 
-																		<th  >Sanctioned Intake</th>
-																		<th  >Admitted Student</th>
-																	</tr>
-																</thead>
-																<tbody>
 
-
-
-
-																</tbody>
-															</table>
-
-														</div>
+									
+								</div>
 														<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
@@ -285,7 +288,7 @@
 
 	<script type="text/javascript">
 		function subData() {
-
+           
 			var i = parseInt(document.getElementById("index").value);
 			var academicYear = document.getElementById("academicYear").value
 
@@ -295,14 +298,31 @@
 			var studNum = document.getElementById("studNum").value
 			var fromDate = document.getElementById("fromDate").value
 			var toDate = document.getElementById("toDate").value
-
+			
+			
+			//alert("academicYear"+academicYear);
+			//alert("subName"+subName);
+			/* alert("facultyName"+facultyName);
+			alert("affGuide"+affGuide);
+			alert("studNum"+studNum);
+			alert("fromDate"+fromDate);
+			alert("toDate"+toDate);
+ */
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, academicYear, subName, facultyName, affGuide,
-							studNum, fromDate, toDate ]).draw();
-
+					[ i + 1,
+						academicYear, 
+						subName,
+						facultyName,
+						affGuide,
+						studNum,
+						fromDate,
+						toDate ]).draw();
+			
+			 alert("hii");
 			document.getElementById("index").value = i + 1;
+			
 		}
 	</script>
 

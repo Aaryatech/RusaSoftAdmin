@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+						<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -119,7 +119,7 @@
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="status"
 																style="text-align: left;">Rare Books available
-																in Library : <span class="text-danger">*</span>
+																in Library  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<input type="radio" id="isUsingSoft" name="isUsingSoft"
