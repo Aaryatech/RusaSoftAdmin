@@ -256,31 +256,41 @@
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 								
-								
+									<!-- <div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Contact No :
+							</label>
+							<label  id="trustCon" for="page_name"> 
+							</label>
+						</div>	 -->
+						
+						
+						
+				
+				
 						<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">IQAC I/C Name:
+							<label class="control-label col-sm-6" for="page_name">IQAC I/C Name:
 							</label>
-							<!-- <div class="col-sm-3"> -->
+						
 								<label  id="iqacName1" for="page_name"> 
 							</label>
 								 
-							<!-- </div> -->
+							</div>
+					
+					<div class="form-group">
+						
+							<label class="control-label col-sm-6" for="page_name">Designation : 
+							</label>
+							
+							<label  id="designtion1" for="page_name"> 
+							</label>
+							
 	</div>
 					
 					<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Designation : 
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<label  id="designtion1" for="page_name"> 
-							</label>
-							<!-- </div> -->
-	</div>
-					
-					<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Date
+							<label class="control-label col-sm-6" for="page_name">Date
 				              Of Joining : 
 							</label>
 							<label  id="date1" for="page_name"> 
@@ -292,7 +302,7 @@
 	
 					<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Contact 
+							<label class="control-label col-sm-6" for="page_name">Contact 
 									No :
 							</label>
 							<label  id="conNumber1" for="page_name"> 
@@ -301,20 +311,21 @@
 	
 	<div class="form-group">
 						
-							<label class="control-label col-sm-3" for="page_name">Email ID(Official)
+							<label class="control-label col-sm-6" for="page_name">Email ID(Official)
 									
 							</label>
 							<label  id="emailId1" for="page_name"> 
 							</label>
 	</div>
-					</div>
+					
 	
 	
-			<button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button> 
+				 <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button>
 				<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
@@ -329,8 +340,20 @@
 			var dateOfJoin=document.getElementById("dateOfJoin").value
 			var contactNo=document.getElementById("contactNo").value
 			var email=document.getElementById("email").value
+			var desn=document.getElementById("desn").value
+			var temp;
+			if(designation ==  7){
+				
+				$('#designtion1').html(desn);
+				
+			}
+			else{
+				$('#designtion1').html(designation);
+			}
+			
+			
 			$('#iqacName1').html(iqacName);
-			$('#designtion1').html(designation);
+			
 			$('#date1').html(dateOfJoin);
 			$('#conNumber1').html(contactNo);
 			$('#emailId1').html(email);
