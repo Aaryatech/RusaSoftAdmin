@@ -159,9 +159,9 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="radio" id="is_registration" name="is_registration"
-																	 value="1" checked>Yes
+																	 value="1" checked onclick="setDate(this.value)">Yes
 																<input type="radio"
-																	id="is_registration" name="is_registration" value="0">No
+																	id="is_registration" name="is_registration" value="0" onclick="setDate(this.value)">No
 															</div>
 															<div id="abc">
 																<label class="control-label col-sm-2" for="page_order">Date
@@ -398,12 +398,8 @@
 	</div>
 
 
-
-
 	<script type="text/javascript">
 function showDiv(value) {
-
-	
 
 	if (value == 1) {
 		//alert(value);
@@ -412,6 +408,21 @@ function showDiv(value) {
 		//alert(value);
 		document.getElementById("abc").style.display = "none";
 	}
+}
+
+function setDate(value){
+	if(value==0){
+	//alert(value)
+	document.getElementById("reg_date").removeAttribute("required");
+	//alert(value)
+	}else{
+		//alert(value)
+		document.getElementById("reg_date").setAttribute("required","true");
+		//alert(value)
+
+	}
+	
+	
 }
 </script>
 

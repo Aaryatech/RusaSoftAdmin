@@ -94,7 +94,7 @@
 											</tr>
 										</thead>
 
-										<tfoot>
+										<!-- <tfoot>
 											<tr>
 												<th width="5%">Sr No</th>
 												<th>Institute Name</th>
@@ -104,23 +104,29 @@
 												<th>Email</th>
 												<th width="10%">Action</th>
 											</tr>
-										</tfoot>
+										</tfoot> -->
 
 										<tbody>
-											<c:forEach items="${getPagesModuleList}"
+											<c:forEach items="${instList}"
 												var="getPagesModuleList" varStatus="count">
 												<tr>
 													<td>${count.index+1}</td>
-													<td>${getPagesModuleList.pageName}
-														(${getPagesModuleList.secctionName})</td>
+													<td>${getPagesModuleList.instituteName}
+														</td>
 
-													<td>${getPagesModuleList.content}</td>
+													<td>${getPagesModuleList.principalName}</td>
+													<td>${getPagesModuleList.contactNo}
+														</td>
+
+													<td>${getPagesModuleList.email}</td>
+													
+													
 													<td><a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
+														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.instituteId}"><span
 															class="glyphicon glyphicon-edit"
 															data-animate=" animated fadeIn " rel="tooltip"></span></a> |
 														<a
-														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.primaryKeyId}"
+														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.instituteId}"
 														onClick="return confirm('Are you sure want to delete this record');"
 														rel="tooltip" data-color-class="danger"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
