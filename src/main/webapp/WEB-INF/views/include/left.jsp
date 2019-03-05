@@ -33,7 +33,15 @@
 					<ul class="sub-menu">
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showRegisterInstitute">
-								Institute Registration</a> <a class=""
+								Institute Registration</a> 
+								<a class=""
+							href="${pageContext.request.contextPath}/showPendingInstitute">
+								Pending Institute List</a> 
+								<a class=""
+							href="${pageContext.request.contextPath}/showApprovedInstitute">
+								Approved Institute List</a> 
+								
+								<a class=""
 							href="${pageContext.request.contextPath}/iqacRegistration">IQAC
 								Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/hodRegistration">HOD

@@ -1460,6 +1460,50 @@ public class MasterController {
 
 	}
 
+	
+	@RequestMapping(value = "/showPendingInstitute", method = RequestMethod.GET)
+ 	public ModelAndView showPendingInstitute(HttpServletRequest request, HttpServletResponse response) {
+
+ 		ModelAndView model = null;
+ 		try {
+
+ 			model = new ModelAndView("master/pendingInstituteList");
+
+ 			model.addObject("title", " Pending Institute");
+
+ 		} catch (Exception e) {
+
+ 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+ 			e.printStackTrace();
+
+ 		}
+
+ 		return model;
+
+ 	}
+  
+  @RequestMapping(value = "/showApprovedInstitute", method = RequestMethod.GET)
+	public ModelAndView showApprovedInstitute(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/approvedInstituteList");
+
+			model.addObject("title", " Pending Institute");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 	// Insert Institute
 
 	@RequestMapping(value = "/insertInstitute", method = RequestMethod.POST)
