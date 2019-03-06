@@ -64,7 +64,17 @@
 							href="${pageContext.request.contextPath}/showRegStud">Student
 								Registration</a> <a class=""
 							href="${pageContext.request.contextPath}/showIqacAfterLogin">Fill
-								Institute Information</a></li>
+								Institute Information</a>
+								
+								<a class=""
+							href="${pageContext.request.contextPath}/addFaculty">Department
+								Registration</a>
+								<a class=""
+							href="${pageContext.request.contextPath}/addPrincipal">Principal
+								Registration</a>
+								
+								</li>
+								
 
 					</ul></li>
 					

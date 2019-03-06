@@ -79,7 +79,7 @@
                 </p>
                 <p>
                     <label for="user_pass">Password<br />
-                        <input type="password" name="password" id="password" class="input" value=""  placeholder="Password" size="20" /></label>
+                        <input type="password" name="userpassword" id="userpassword" class="input" value=""  placeholder="Password" size="20" /></label>
                 </p>
                <!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>

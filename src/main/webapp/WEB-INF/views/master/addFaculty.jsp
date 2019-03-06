@@ -81,10 +81,10 @@
 					<section class="box ">
 
 						<header class="panel_header">
-							<h2 class="title pull-left">Add Department</h2>
+							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/hodList"><button
+								<a href="${pageContext.request.contextPath}/showDeptList"><button
 										type="button" class="btn btn-info"><< Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
