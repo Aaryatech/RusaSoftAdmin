@@ -46,7 +46,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -58,7 +58,7 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate);
 
 		return "welcome";
-	}
+	}*/
 
 	@RequestMapping(value = "/showCMSForm", method = RequestMethod.GET)
 	public ModelAndView showCMSForm(HttpServletRequest request, HttpServletResponse response) {
@@ -79,7 +79,7 @@ public class HomeController {
 		return model;
 
 	}
-	@RequestMapping(value = "/showLoginForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView showLoginForm(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -148,6 +148,13 @@ public class HomeController {
 		try {
 
 			model = new ModelAndView("welcome");
+			Date date = new Date();
+			//DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		//	String formattedDate = dateFormat.format(date);
+
+		//	model.addAttribute("serverTime", formattedDate);
+
 
 		} catch (Exception e) {
 
