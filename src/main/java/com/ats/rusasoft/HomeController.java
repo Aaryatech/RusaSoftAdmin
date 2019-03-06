@@ -253,19 +253,21 @@ public class HomeController {
 					System.out.println("Login Successful");
 					session.setAttribute("userName", name);
 					session.setAttribute("password", password);
-					session.setAttribute("isEnroll", userObj.getExInt1());
-					session.setAttribute("userId", userObj.getUserId());
+					/*session.setAttribute("isEnroll", userObj.getExInt1());
+					session.setAttribute("userId", userObj.getUserId());*/
+					
+					session.setAttribute("userObj", userObj);
 					
 					
 					
-					
+				/*	
 					session.setAttribute("subUserName", userObj.getGetData().getSubUserName());
 					session.setAttribute("subUserContactNum", userObj.getGetData().getUserConNumber());
 					session.setAttribute("subUserDesnId", userObj.getGetData().getUserDesnId());
 					session.setAttribute("subUserId", userObj.getGetData().getUserDetailId());
 					session.setAttribute("qualId", userObj.getGetData().getUserQualId());
 					session.setAttribute("instituteId", userObj.getGetData().getUserInstituteId());
-					session.setAttribute("qualId", userObj.getGetData().getDeptId());
+					session.setAttribute("qualId", userObj.getGetData().getDeptId());*/
 					
 					loginResponseMessage="Login Successful";
 					mav.addObject("loginResponseMessage",loginResponseMessage);
