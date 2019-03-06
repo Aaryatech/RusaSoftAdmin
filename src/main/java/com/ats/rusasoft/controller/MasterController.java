@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GetInstituteList;
+import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 
@@ -1487,7 +1492,7 @@ public class MasterController {
 				Calendar cal = Calendar.getInstance();
 
 				String curDateTime = dateFormat.format(cal.getTime());
-				
+
 				String aisheCode = request.getParameter("aishe_code");
 				institute.setAisheCode(aisheCode);
 
@@ -1522,7 +1527,7 @@ public class MasterController {
 				institute.setPresidentName(request.getParameter("pres_name"));
 				institute.setPrincipalName(request.getParameter("princ_name"));
 				if (isReg == 1)
-					institute.setRegDate(request.getParameter("reg_date"));
+					institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
 				institute.setTrustAdd(request.getParameter("trusty_add"));
 
 				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
@@ -1543,15 +1548,15 @@ public class MasterController {
 				Calendar cal = Calendar.getInstance();
 
 				String curDateTime = dateFormat.format(cal.getTime());
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", instId);
 				// getInstitute
 				Institute institute = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
-				
+
 				String aisheCode = request.getParameter("aishe_code");
 				institute.setAisheCode(aisheCode);
-				
+
 				institute.setContactNo(request.getParameter("princ_contact"));
 				institute.setEmail(request.getParameter("princ_email"));
 				institute.setInstituteAdd(request.getParameter("inst_add"));
@@ -1561,14 +1566,14 @@ public class MasterController {
 				institute.setIsRegistration(isReg);
 
 				institute.setLastUpdatedDatetime(curDateTime);
-				
+
 				institute.setPresidentName(request.getParameter("pres_name"));
 				institute.setPrincipalName(request.getParameter("princ_name"));
 				if (isReg == 1)
-					institute.setRegDate(request.getParameter("reg_date"));
+					institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
 				else
 					institute.setRegDate(null);
-				
+
 				institute.setTrustAdd(request.getParameter("trusty_add"));
 
 				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
@@ -1576,7 +1581,7 @@ public class MasterController {
 
 				institute.setPresidenContact(request.getParameter("pres_contact"));
 				institute.setPresidentEmail(request.getParameter("pres_email"));
-				
+
 				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 						Institute.class);
 			}
@@ -1651,7 +1656,7 @@ public class MasterController {
 			map.add("instituteId", instId);
 			// getInstitute
 			Institute editInst = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
-
+			editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
 			model.addObject("editInst", editInst);
 			model.addObject("instituteId", instId);
 
@@ -1663,5 +1668,228 @@ public class MasterController {
 		return model;
 
 	}
+
+	// Dept
+
+	// insertDept
+
+	@RequestMapping(value = "/insertDept", method = RequestMethod.POST)
+	public String insertDept(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in insert dept");
+		ModelAndView model = null;
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int deptId = Integer.parseInt(request.getParameter("dept_id"));
+			System.err.println("Dept id  " + deptId);
+			if (deptId == 0) {
+				Dept dept = new Dept();
+				String deptName = request.getParameter("dept_name");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+
+				dept.setAddDate(curDate);
+				dept.setDelStatus(1);
+				dept.setDeptId(deptId);
+				dept.setDeptName(deptName);
+				int exInt1 = 0;
+				dept.setExInt1(exInt1);
+				dept.setExInt2(exInt1);
+				String exVar1 = "NA";
+				dept.setExVar1(exVar1);
+				dept.setExVar2(exVar1);
+				dept.setInstituteId(1);// get from Session
+				dept.setIsActive(1);
+				dept.setMakerUserId(1);// get from Session
+				Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
+
+			} else {
+
+				map.add("deptId", deptId);
+				// getInstitute
+				Dept dept = rest.postForObject(Constants.url + "getDept", map, Dept.class);
+				String deptName = request.getParameter("dept_name");
+				dept.setDeptName(deptName);
+				dept.setMakerUserId(1);// get from Session
+				Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
+
+			}
+
+		} catch (Exception e) {
+			System.err.println("Exce in save dept  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return "redirect:/showDeptList";
+
+	}
+	// getAllDeptList
+
+	@RequestMapping(value = "/showEditDept", method = RequestMethod.POST)
+	public ModelAndView showEditDept(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
+
+		try {
+
+			model = new ModelAndView("master/addFaculty");
+
+			int deptId = Integer.parseInt(request.getParameter("edit_dept_id"));
+
+			model.addObject("title", " Edit Institute Reginstration");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("deptId", deptId);
+			// getInstitute
+			Dept editDept = rest.postForObject(Constants.url + "getDept", map, Dept.class);
+			model.addObject("dept", editDept);
+			model.addObject("deptId", deptId);
+
+		} catch (Exception e) {
+			System.err.println("Exce in showEditDept  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/deleteDepts/{deptId}", method = RequestMethod.GET)
+	public String deleteDepts(HttpServletRequest request, HttpServletResponse response, @PathVariable int deptId) {
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (deptId == 0) {
+
+				System.err.println("Multiple records delete ");
+				String[] instIds = request.getParameterValues("deptIds");
+				System.out.println("id are" + instIds);
+
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < instIds.length; i++) {
+					sb = sb.append(instIds[i] + ",");
+
+				}
+				String deptIdList = sb.toString();
+				deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+
+				map.add("deptIdList", deptIdList);
+			} else {
+
+				System.err.println("Single Record delete ");
+				map.add("deptIdList", deptId);
+			}
+
+			Info errMsg = rest.postForObject(Constants.url + "deleteDepts", map, Info.class);
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteDepts at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/showDeptList";
+
+	}
+
+	// insertHod
+	@RequestMapping(value = "/insertHod", method = RequestMethod.POST)
+	public String insertHod(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in insert insertHod");
+		ModelAndView model = null;
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int hodId = Integer.parseInt(request.getParameter("hod_id"));
+			System.err.println("hodId id  " + hodId);
+			if (hodId == 0) {
+				
+				Hod hod = new Hod();
+				
+				String deptName = request.getParameter("dept_name");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+				
+				hod.setContactNo(request.getParameter("hod_mob"));
+				hod.setDelStatus(1);
+				hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+				hod.setEditBy(1);
+				hod.setEmail(request.getParameter("hod_email"));
+				hod.setExInt1(1);
+				hod.setExInt2(2);
+				hod.setExVar1("NA");
+				hod.setExVar2("NA");
+				hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
+				hod.setHodId(hodId);
+				hod.setHodName(request.getParameter("hod_name"));
+				hod.setInstituteId(1);
+				hod.setIsActive(1);
+				hod.setIsEnrollSystem(0);
+				hod.setMakerDate(curDateTime);
+				hod.setMakerId(1);
+				hod.setUpdateDatetime(curDateTime);
+				
+
+				Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+
+			} else {
+
+				map.add("hodId", hodId);
+				// getInstitute
+				Hod hod = rest.postForObject(Constants.url + "getHod", map, Hod.class);
+				String deptName = request.getParameter("dept_name");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+				
+				hod.setContactNo(request.getParameter("hod_mob"));
+				hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+				hod.setEditBy(1);//session
+				hod.setEmail(request.getParameter("hod_email"));
+			
+				hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
+				hod.setHodName(request.getParameter("hod_name"));
+				hod.setInstituteId(1);//from sess
+				hod.setUpdateDatetime(curDateTime);
+
+				Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+
+			}
+
+		} catch (Exception e) {
+			System.err.println("Exce in save dept  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return "redirect:/showDeptList";
+
+	}
+	
+	
 
 }

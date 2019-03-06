@@ -81,65 +81,25 @@
                     </tr>
                 </thead>
 
-                <tfoot>
-                    <tr>
-                    		<th width="5%">Sr No</th>
-                        <th>HOD Name</th> 
-                        <th>Department</th> 
-                        <th>Contact No.</th> 
-                          <th>Email ID</th> 
-                        <th width="10%">Action</th>                   
-                          </tr>
-                </tfoot>
 
                 <tbody>
-                        <%-- <c:forEach items="${getPagesModuleList}" var="getPagesModuleList" varStatus="count">
-									<tr  >
+                        <c:forEach items="${hodList}" var="hod" varStatus="count">
+									<tr>
 										<td>${count.index+1}</td>
-										<td>${getPagesModuleList.pageName} (${getPagesModuleList.secctionName})</td>
-										 
-										<td>${getPagesModuleList.content}</td>  
+										<td>${hod.hodName}</td>
+										<td>${hod.deptId}</td>  
+											<td>${hod.contactNo}</td>
+										<td>${hod.email}</td>  
 										<td><a
-											href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
+											href="${pageContext.request.contextPath}/editCmsContent/${hod.hodId}"><span
 												class="glyphicon glyphicon-edit" data-animate=" animated fadeIn "
 												rel="tooltip" ></span></a> | <a
-											href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.primaryKeyId}"
+											href="${pageContext.request.contextPath}/deleteCmsContent/${hod.hodId}"
 											onClick="return confirm('Are you sure want to delete this record');" rel="tooltip" data-color-class = "danger" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Delete  record"><span
 												class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
-								</c:forEach>   --%>
-								<tr>
-											<td>1</td>
-											<td>ABC</td>
-											<td>Ph.D.</td>
-											
-												
-												<td>8956231213</td>
-												<td>xyz@gmail.com</td>
-												<td> <a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Faculty"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
-												class="glyphicon glyphicon-list"></span></a>
-												<a
-											href="${pageContext.request.contextPath}/showRegAcc" title="Edit"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
-												class="glyphicon glyphicon-edit"></span></a>
-												
-												<a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Block"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-trash"></span></a>
-												
-												
-												
-												
-												
-												</td>
-											
-											
-											
-											
-											</tr>
+								</c:forEach>  
+								
                 </tbody>
             </table>
 

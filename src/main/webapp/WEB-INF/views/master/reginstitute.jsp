@@ -58,7 +58,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<%-- <div class="col-xs-12">
+				<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -69,7 +69,7 @@
 
 
 					</div>
-				</div> --%>
+				</div>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -82,7 +82,7 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-							
+
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showInstituteList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
@@ -113,9 +113,6 @@
 
 												<div>
 
-
-							<p style="color:red; ">Notice : This form strictly need to be filled by Institutes coming under RUSA Maharashtra Only.
-You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 
 													<div class="col-xs-12">
@@ -212,7 +209,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 																
 																
 																<div class="col-sm-3">
-																	<input type="date" class="form-control" id="reg_date" value="${editInst.regDate}"
+																	<input type="text" class="form-control datepicker" id="reg_date" value="${editInst.regDate}"
 																		name="reg_date" placeholder="Date of Registration"
 																		value="" required>
 																</div>
@@ -613,6 +610,17 @@ function getCOPO() {
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+<script type="text/javascript">
+        $(function () {
+		 
+            $('.datepicker').datepicker({
+				autoclose: true,
+                format: "dd-mm-yyyy",
+				 
+
+			});
+        });
+    </script> 
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 

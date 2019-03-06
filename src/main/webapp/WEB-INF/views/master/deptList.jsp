@@ -57,6 +57,8 @@
                 </div>
                  
             </header> 
+            <form action="${pageContext.request.contextPath}/deleteInstitutes/0"
+							method="get" id="insListForm">
             <div class="content-body">    <div class="row">
             <c:if test="${sessionScope.successMsg!=null}">
             <div class="col-lg-12">
@@ -78,13 +80,13 @@
                     </tr>
                 </thead>
 
-                <tfoot>
+               <!--  <tfoot>
                     <tr>
                     		<th width="5%">Sr No</th>
                         <th>Department</th> 
                         <th width="20%">Action</th>            
                           </tr>
-                </tfoot>
+                </tfoot> -->
 
                 <tbody>
                         <%-- <c:forEach items="${getPagesModuleList}" var="getPagesModuleList" varStatus="count">
@@ -102,43 +104,41 @@
 												class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 								</c:forEach>   --%>
+								 <c:forEach items="${deptList}" var="dept" varStatus="count">
 								<tr>
-											<td>1</td>
-											<td>ABC</td>
+											<td>${count.index+1}</td>
+											<td>${dept.deptName}</td>
 											
-												<td> <a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Faculty"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
-												class="glyphicon glyphicon-list"></span></a>
-												<a
-											href="${pageContext.request.contextPath}/showRegAcc" title="Edit"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
-												class="glyphicon glyphicon-edit"></span></a>
-												
-												<a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Block"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-trash"></span></a>
-												
-												
-												
-												
-												
-												</td>
-											
+												<td><a
+															href="#" onclick="showEditDept(${dept.deptId})"><span
+																class="glyphicon glyphicon-edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a> |
+															<a
+															href="${pageContext.request.contextPath}/deleteDepts/${dept.deptId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
 											
 											
 											
 											</tr>
+											</c:forEach>
+											
+											
                 </tbody>
             </table>
 
 
 
+													<input type="hidden" id="edit_dept_id"   name="edit_dept_id" value="0">
 
         </div>
+        
     </div>
     </div>
+    </form>
         </section></div>
 
 
@@ -174,6 +174,18 @@ function clearSessionAttribute() {
 	
 	});
 
+}
+
+
+
+function showEditDept(deptId){
+	document.getElementById("edit_dept_id").value=deptId;//create this 
+	var form=document.getElementById("insListForm");
+    form.setAttribute("method", "post");
+
+	form.action=("showEditDept");
+	form.submit();
+	
 }
  </script>
 </body>

@@ -101,8 +101,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertHod"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -144,9 +144,14 @@
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="deptName"
-																	name="deptName" placeholder="Department"
-																	value="${page.pageName}" required>
+															<select id="hod_dept_id" name="hod_dept_id"  class="form-control"
+																	required>
+																	<c:forEach items="${deptList}" var="dept">
+																		<option value="${dept.deptId}">${dept.deptName}</option>
+																	
+																	</c:forEach>
+																	
+																</select>
 															</div>
 														</div>
 
@@ -156,9 +161,8 @@
 																:<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="hodName"
-																	name="hodName" placeholder="Name"
-																	value="${page.pageName}" required>
+																<input type="text" class="form-control" id="hod_name"
+																	name="hod_name" placeholder="HOD Name"  required>
 															</div>
 														</div>
 
@@ -169,14 +173,12 @@
 																Qualification : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="qualification" name="qualification"  onchange="showForm()" class="form-control"
-																	required>
-																	<option value="0">UG</option>
-																	<option value="1">PG</option>
-																	<option value="2">M.phill</option>
-																	<option value="3">Ph.D.</option>
-																	<option value="4">Post Docterate</option>
-																	<option value="5">Any Other Course</option>
+																<select id="hod_quolf" name="hod_quolf" class="form-control" required>
+																<c:forEach items="${quolfList}" var="quolf">
+																		<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+																	
+																	</c:forEach>
+																	
 																</select>
 															</div>
 														</div>
@@ -198,8 +200,8 @@
 																No. : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="contactNo"
-																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
+																<input type="text" class="form-control" id="hod_mob"
+																	name="hod_mob" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile Number" value="" required>
 															</div>
@@ -210,8 +212,8 @@
 																: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email"
-																	name="email" placeholder="abc@xyz.com" value="" required>
+																<input type="email" class="form-control" id="hod_email"
+																	name="hod_email" placeholder="abc@xyz.com" value="" required>
 															</div>
 														</div>
 
@@ -225,7 +227,8 @@
 														</div>
 
 													</div>
-
+<input type="hidden" id="hod_id" name="hod_id" value="0">
+												
 
 													<div class="clearfix"></div>
 
@@ -260,8 +263,7 @@
 
 	<script type="text/javascript">
 	
-	
-	function showForm() {
+	/* function showForm() {
 		//document.getElementById("abc").style = "display:none"
 			var qualType=document.getElementById("qualification").value
 		//alert("qualType::"+qualType);
@@ -276,148 +278,14 @@
 				document.getElementById("abc").style = "display:none"
 			}
 		
-		}
-	function hideText() {
+		} */
+	/* function hideText() {
 		//alert("hii");
 		document.getElementById("abc").style = "display:none"
 			
 		
-		}
-		jQuery(document).ready(
-				function($) {
-
-					// sub_menu
-					$('#sub_menu1').click(function(e) {
-						//ajax send this to php page
-						var def = 1;
-						if ($("#sub_menu").prop('checked') == true) {
-							$('#main_menu').prop('checked', true);
-
-						} else {
-
-						}
-					});
-
-					//Example 2
-
-					$(document).on('click', '#close-preview', function() {
-						$('.image-preview').popover('hide');
-						// Hover befor close the preview
-						$('.image-preview').hover(function() {
-							$('.image-preview').popover('show');
-						}, function() {
-							$('.image-preview').popover('hide');
-						});
-					});
-
-					$(function() {
-						// Create the close button
-						var closebtn = $('<button/>', {
-							type : "button",
-							text : 'x',
-							id : 'close-preview',
-							style : 'font-size: initial;',
-						});
-						closebtn.attr("class", "close pull-right");
-						// Set the popover default content
-						$('.image-preview').popover(
-								{
-									trigger : 'manual',
-									html : true,
-									title : "<strong>Preview</strong>"
-											+ $(closebtn)[0].outerHTML,
-									content : "There's no image",
-									placement : 'bottom'
-								});
-						// Clear event
-						$('.image-preview-clear').click(function() {
-							//$('.image-preview').attr("data-content","").popover('hide');
-							$('.image-preview-filename').val("");
-							$('.image-preview-clear').hide();
-							$('#header_image input:file').val("");
-							$(".image-preview-input-title").text("Browse");
-							$("#thumbkishore").attr("src", '');
-							$(".thumbkishorediv").hide();
-						});
-						// Create the preview image
-						$("#header_image").change(
-								function() {
-									var img = $('<img/>', {
-										id : 'dynamic',
-										width : 250,
-										height : 200,
-									});
-
-									var file = this.files[0];
-									var reader = new FileReader();
-									// Set preview image into the popover data-content
-									reader.onload = function(e) {
-
-										$(".image-preview-input-title").text(
-												"Change");
-										$(".image-preview-clear").show();
-										$(".image-preview-filename").val(
-												file.name);
-										img.attr('src', e.target.result);
-										//alert(e.target.result);
-										///alert($(img)[0].outerHTML);
-										//$(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-										//
-										//alert(e.target.result);
-										$("#thumbkishore").attr("src",
-												e.target.result);
-
-										$(".thumbkishorediv").show();
-									}
-									reader.readAsDataURL(file);
-								});
-
-						// Clear event
-						$('.image-preview-clear2').click(function() {
-							//$('.image-preview').attr("data-content","").popover('hide');
-							$('.image-preview-filename2').val("");
-							$('.image-preview-clear2').hide();
-							$('.image-preview-input2 input:file').val("");
-							$(".image-preview-input-title2").text("Browse");
-							$("#thumbkishor2e").attr("src", '');
-							$(".thumbkishore2div").hide();
-						});
-						// Create the preview image
-						$("#images").change(
-								function() {
-									var img = $('<img/>', {
-										id : 'dynamic',
-										width : 250,
-										height : 200,
-									});
-
-									var file = this.files[0];
-									var reader = new FileReader();
-									// Set preview image into the popover data-content
-									reader.onload = function(e) {
-
-										$(".image-preview-input-title2").text(
-												"Change");
-										$(".image-preview-clear2").show();
-										$(".image-preview-filename2").val(
-												file.name);
-										img.attr('src', e.target.result);
-										//alert(e.target.result);
-										///alert($(img)[0].outerHTML);
-										//$(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-										//
-										//alert(e.target.result);
-										$("#thumbkishore2").attr("src",
-												e.target.result);
-
-										$(".thumbkishore2div").show();
-									}
-									reader.readAsDataURL(file);
-								});
-
-					});
-
-				});
+		} */
+		
 	</script>
 
 </body>
