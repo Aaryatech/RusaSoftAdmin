@@ -98,8 +98,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/submitCreateRole"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -119,9 +119,9 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="deptName"
-																	name="deptName" placeholder="Enter Role Name"
-																	value="${page.pageName}" required>
+																<input type="text" class="form-control" id="roleName"
+																	name="roleName" placeholder="Enter Role Name"
+																	autocomplete="off" required>
 															</div>
 														</div>
 
@@ -148,19 +148,120 @@
 
 
 																<tbody>
-<%-- 	<tr>
-											<td>1</td>
-											<td>ABC</td>
-											<td>Ph.D.</td>
-											
-												
-												<td>8956231213</td>
-												<td>xyz@gmail.com</td>
-												<td> <a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Faculty"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
-												class="glyphicon glyphicon-list"></span></a></td>
-												</tr> --%>
+<c:set var="index" value="0" />
+												<c:forEach items="${allModuleList}" var="allModuleList"
+													varStatus="count">
+
+													<c:set var="flag" value="0" />
+
+													<c:forEach
+														items="${allModuleList.accessRightSubModuleList}"
+														var="allSubModuleList">
+														<c:choose>
+															<c:when test="${allSubModuleList.type==0}">
+																<c:set var="flag" value="1" />
+															</c:when>
+														</c:choose>
+													</c:forEach>
+
+
+													<c:choose>
+														<c:when test="${flag==1}">
+															<tr>
+																<!-- 	<td> &nbsp; </td>
+											</tr><tr>  -->
+																<c:set var="index" value="${index+1 }" />
+																<td><c:out value="${index}" /> <input
+																	type="checkbox" id="aa${allModuleList.moduleId}"
+																	class="select_all" value="${allModuleList.moduleId}"
+																	onClick="selectAll(this, ${allModuleList.moduleId})" /></td>
+
+																<td><b><c:out
+																			value="${allModuleList.moduleName}" /></b></td>
+
+															</tr>
+														</c:when>
+													</c:choose>
+													<c:forEach
+														items="${allModuleList.accessRightSubModuleList}"
+														var="allSubModuleList">
+														<c:choose>
+															<c:when test="${allSubModuleList.type==0}">
+																<tr>
+																	<td></td>
+
+																	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out
+																			value="${allSubModuleList.subModulName}" /></td>
+																	<c:choose>
+																		<c:when test="${allSubModuleList.view==1}">
+
+																			<td><input type="checkbox"
+																				class="check${allModuleList.moduleId}"
+																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																				value="view"></td>
+																		</c:when>
+																		<c:when test="${allSubModuleList.view==0}">
+
+																			<td></td>
+
+
+																		</c:when>
+																	</c:choose>
+
+																	<c:choose>
+																		<c:when test="${allSubModuleList.addApproveConfig==1}">
+
+																			<td><input type="checkbox"
+																				class="check${allModuleList.moduleId}"
+																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																				value="add"></td>
+																		</c:when>
+																		<c:when test="${allSubModuleList.addApproveConfig==0}">
+
+																			<td></td>
+
+
+																		</c:when>
+																	</c:choose>
+
+																	<c:choose>
+																		<c:when test="${allSubModuleList.editReject==1}">
+
+																			<td><input type="checkbox"
+																				class="check${allModuleList.moduleId}"
+																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																				value="edit"></td>
+																		</c:when>
+																		<c:when test="${allSubModuleList.editReject==0}">
+																			<td></td>
+																		</c:when>
+
+																	</c:choose>
+																	<c:choose>
+																		<c:when
+																			test="${allSubModuleList.deleteRejectApprove==1}">
+
+																			<td><input type="checkbox"
+																				class="check${allModuleList.moduleId}"
+																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																				value="delete"></td>
+																		</c:when>
+																		<c:when
+																			test="${allSubModuleList.deleteRejectApprove==0}">
+
+																			<td></td>
+
+
+																		</c:when>
+																	</c:choose>
+																</tr>
+															</c:when>
+														</c:choose>
+
+
+													</c:forEach>
+
+												</c:forEach>
 
 																</tbody>
 															</table>
