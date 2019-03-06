@@ -32,12 +32,14 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.UserLogin;
 import com.ats.rusasoft.model.GetUserDetail;
+import com.ats.rusasoft.model.Info;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	RestTemplate restTemplate = new RestTemplate();
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -137,21 +139,76 @@ public class HomeController {
 		return model;
 
 	}
-
 	
+	
+	@RequestMapping(value = "/showWelcomePage", method = RequestMethod.GET)
+	public ModelAndView showWelcomePage(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("welcome");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/changePassForm", method = RequestMethod.POST)
+	public String changePassForm(HttpServletRequest request, HttpServletResponse response) {
+
+		/*ModelAndView model = null;*/
+		try {
+			HttpSession session = request.getSession();
+			
+			int userId=(int) session.getAttribute("userId");
+			String password=request.getParameter("newPassword");
+			
+			/*String password="harsha";*/
+			System.out.println("parameters are:::"+userId+password);
+			MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+			map.add("password",password);
+			map.add("userId",userId);
+
+
+			//UserLogin userObj = restTemplate.postForObject(Constants.url+"changePass",map,UserLogin.class);
+			
+			Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
+			System.out.println(errMsg);
+
+		
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		 return "redirect:/showWelcomePage";
+
+	}
 
 	@RequestMapping("/loginProcess")
 	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse res) throws IOException {
-		RestTemplate restTemplate = new RestTemplate();
+		
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
 		System.out.println("Credential are::::"+name+password);
 
 		ModelAndView mav = new ModelAndView("login");
-
+		HttpSession session = request.getSession();
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
-		HttpSession session = request.getSession();
+		
 
 		try {
 			System.out.println("Login Process " + name);
@@ -176,8 +233,32 @@ public class HomeController {
 
 				
 				if (userObj!=null) {
+					
+					int a=userObj.getExInt1();
+					 if(a==1) {
+						 mav = new ModelAndView("welcome");
+					}
+					 else {
+						 mav = new ModelAndView("changePassword");
+					 }
+					
+					
 					System.out.println("Login Successful");
 					session.setAttribute("userName", name);
+					session.setAttribute("password", password);
+					session.setAttribute("isEnroll", userObj.getExInt1());
+					session.setAttribute("userId", userObj.getUserId());
+					
+					
+					
+					
+					session.setAttribute("subUserName", userObj.getGetData().getSubUserName());
+					session.setAttribute("subUserContactNum", userObj.getGetData().getUserConNumber());
+					session.setAttribute("subUserDesnId", userObj.getGetData().getUserDesnId());
+					session.setAttribute("subUserId", userObj.getGetData().getUserDetailId());
+					session.setAttribute("qualId", userObj.getGetData().getUserQualId());
+					session.setAttribute("instituteId", userObj.getGetData().getUserInstituteId());
+					session.setAttribute("qualId", userObj.getGetData().getDeptId());
 					
 					loginResponseMessage="Login Successful";
 					mav.addObject("loginResponseMessage",loginResponseMessage);
@@ -192,7 +273,8 @@ public class HomeController {
 					System.out.println("JSON Response Objet " + userDataResponse.toString());
 				
 				
-				} else {
+				} 
+else {
 
 					
 					mav = new ModelAndView("login");
@@ -212,5 +294,8 @@ public class HomeController {
 		return mav;
 
 	}
+	
+	
+	
 	
 }
