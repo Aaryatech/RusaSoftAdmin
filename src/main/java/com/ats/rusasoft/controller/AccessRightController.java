@@ -46,6 +46,13 @@ import com.google.gson.Gson;
 @Scope("session")
 public class AccessRightController {
 
+	
+	/*<dependency>
+	<groupId>com.google.code.gson</groupId>
+	<artifactId>gson</artifactId>
+	<version>2.3.1</version>
+</dependency>*/
+	
 	RestTemplate rest = new RestTemplate();
 	public AccessRightModuleList accessRightModuleList;
 	int isError = 0;
