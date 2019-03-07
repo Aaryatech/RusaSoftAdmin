@@ -31,6 +31,7 @@ import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.LoginResponse;
+import com.ats.rusasoft.model.Quolification;
 
 @Controller
 @Scope("session")
@@ -85,30 +86,27 @@ public class MasterController {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/showIqacList", method = RequestMethod.GET) public
-	 * ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse
-	 * response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("master/iqacList");
-	 * 
-	 * model.addObject("title", "IQAC List");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showIqacAfterLogin at Master Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 */
+	@RequestMapping(value = "/showIqacList", method = RequestMethod.GET)
+	public ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("master/iqacList");
+
+			model.addObject("title", "IQAC List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showIqacAfterLogin at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
 	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
@@ -1957,9 +1955,62 @@ public class MasterController {
 			System.err.println("Exce in save dept  " + e.getMessage());
 			e.printStackTrace();
 		}
-
-		return "redirect:/showDeptList";
+		
+		int isView=Integer.parseInt(request.getParameter("is_view"));
+		if(isView==1)
+		return "redirect:/hodList";
+		else
+			return "redirect:/hodRegistration";
 
 	}
+	//showEditHod
+	@RequestMapping(value = "/showEditHod", method = RequestMethod.POST)
+	public ModelAndView showEditHod(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
+
+		try {
+
+			model = new ModelAndView("master/hodRegistration");
+
+			int hodId = Integer.parseInt(request.getParameter("edit_hod_id"));
+
+			model.addObject("title", " Edit HOD");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("hodId", hodId);
+			// getInstitute
+			Hod editHod = rest.postForObject(Constants.url + "getHod", map, Hod.class);
+			model.addObject("hod", editHod);
+			model.addObject("hodId", hodId);
+			
+			
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map.add("instId", userObj.getGetData().getUserInstituteId());
+			Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+			List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+			System.err.println("deptList " + deptList.toString());
+
+			model.addObject("deptList", deptList);
+			
+			
+			map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("type", 1);
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
+			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("quolfList " + quolfList.toString());
+
+			model.addObject("quolfList", quolfList);
+
+		} catch (Exception e) {
+			System.err.println("Exce in showEditDept  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
 
 }
