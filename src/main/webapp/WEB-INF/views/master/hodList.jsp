@@ -57,7 +57,7 @@
                 </div>
                  
             </header> 
-            <form action="${pageContext.request.contextPath}/deleteInstitutes/0"
+            <form action="${pageContext.request.contextPath}/deleteHod/0"
 							method="get" id="insListForm">
             <div class="content-body">    <div class="row">
             <c:if test="${sessionScope.successMsg!=null}">
@@ -74,6 +74,9 @@
             <table id="example-1" class="table table-striped dt-responsive display">
                 <thead>
                     <tr>
+                    <th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
                    		<th width="5%">Sr No</th>
                         <th>HOD Name</th> 
                         <th>Department</th> 
@@ -87,6 +90,9 @@
                 <tbody>
                         <c:forEach items="${hodList}" var="hod" varStatus="count">
 									<tr>
+									<td><input type="checkbox" class="chk" name="hodIds"
+															id="hodIds${count.index+1}"
+															value="${hod.hodId}" /></td>
 										<td>${count.index+1}</td>
 										<td>${hod.hodName}</td>
 										<td>${hod.deptName}</td>  
@@ -104,6 +110,10 @@
 								
                 </tbody>
             </table>
+<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
 
 													<input type="hidden" id="edit_hod_id"   name="edit_hod_id" value="0">
 
@@ -146,6 +156,17 @@ function clearSessionAttribute() {
 		 
 	
 	});
+
+}
+
+function selectedInst(source) {
+
+	checkboxes = document.getElementsByName('hodIds');
+
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
+
+	}
 
 }
 

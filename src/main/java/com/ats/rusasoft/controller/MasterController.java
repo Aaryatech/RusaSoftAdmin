@@ -746,7 +746,7 @@ public class MasterController {
 
 	}*/
 
-	@RequestMapping(value = "/showLibList", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showLibList", method = RequestMethod.GET)
 	public ModelAndView showLibList(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -767,7 +767,7 @@ public class MasterController {
 		return model;
 
 	}
-
+*/
 	@RequestMapping(value = "/showRegStud", method = RequestMethod.GET)
 	public ModelAndView showRegStud(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1646,18 +1646,19 @@ public class MasterController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			if (instId == 0) {
 
-				System.err.println("Multiple records delete ");
+				System.err.println("Multiple records approve ");
 				String[] instIds = request.getParameterValues("instIds");
 				System.out.println("id are" + instIds);
 
 				StringBuilder sb = new StringBuilder();
-
 				for (int i = 0; i < instIds.length; i++) {
 					sb = sb.append(instIds[i] + ",");
 
 				}
 				String instIdList = sb.toString();
 				instIdList = instIdList.substring(0, instIdList.length() - 1);
+				
+				
 
 				map.add("instIdList", instIdList);
 				map.add("aprUserId", userObj.getUserId());
@@ -1700,7 +1701,7 @@ public class MasterController {
 			try {
 				editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
 			} catch (Exception e) {
-				// TODO: handle exception
+				System.err.println("Exce in show Edit Institute /showEditInstitute");
 			}
 			model.addObject("editInst", editInst);
 			model.addObject("instituteId", instId);
@@ -2004,7 +2005,7 @@ public class MasterController {
 				if (hodId == 0) {
 
 					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("instIds");
+					String[] instIds = request.getParameterValues("hodIds");
 					System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
@@ -2013,10 +2014,10 @@ public class MasterController {
 						sb = sb.append(instIds[i] + ",");
 
 					}
-					String instIdList = sb.toString();
-					instIdList = instIdList.substring(0, instIdList.length() - 1);
+					String hodIdList = sb.toString();
+					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
 
-					map.add("hodIdList", instIdList);
+					map.add("hodIdList", hodIdList);
 				} else {
 
 					System.err.println("Single Record delete ");

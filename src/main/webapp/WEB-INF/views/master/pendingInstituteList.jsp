@@ -86,6 +86,9 @@
 										class="table table-striped dt-responsive display">
 										<thead>
 											<tr>
+											<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 												<th width="5%">Sr No</th>
 												<th>Institute Name</th>
 
@@ -102,6 +105,9 @@
 											<c:forEach items="${pendInstList}" var="institute"
 												varStatus="count">
 												<tr>
+												<td><input type="checkbox" class="chk" name="instIds"
+															id="instIds${count.index+1}"
+															value="${institute.instituteId}" /></td>
 													<td>${count.index+1}</td>
 													<td>${institute.instituteName}</td>
 
@@ -118,6 +124,15 @@
 											</c:forEach>
 										</tbody>
 									</table>
+									<div class="col-lg-1">
+
+											<input type="submit" class="btn btn-primary" value="Approve"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+
+
+										</div>
 
 													<input type="hidden" id="apr_inst_id"   name="apr_inst_id" value="0">
 
@@ -161,7 +176,16 @@
 			});
 
 		}
-		
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('instIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
+
+		}
 		function approveInst(instId){
 
 			document.getElementById("apr_inst_id").value=instId;//create this 

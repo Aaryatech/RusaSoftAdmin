@@ -170,7 +170,7 @@
 																Name :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="hod_name"
+																<input type="text" class="form-control" id="hod_name" maxlength="100"
 																	value="${hod.hodName}" name="hod_name"
 																	placeholder="HOD Name" required>
 															</div>
@@ -221,9 +221,9 @@
 																No. : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="hod_mob" value="${hod.contactNo}"
-																	name="hod_mob" pattern="[7-9]{1}[0-9]{9}"
-																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
+																<input type="text" maxlength="10" class="form-control" id="hod_mob" value="${hod.contactNo}"
+																	name="hod_mob" pattern="^[1-9]{1}[0-9]{9}$"
+																	
 																	placeholder="Mobile Number" value="" required>
 															</div>
 														</div>
@@ -241,8 +241,8 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="button" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="button" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
@@ -293,13 +293,13 @@
 	
 	function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 
-		var form=document.getElementById("form_sample_2");
+		/* var form=document.getElementById("form_sample_2");
 	    form.setAttribute("method", "post");
 
 		form.action=("insertHod");
-		var x =confirm();
+		var x =confirm("Do you really want to submit the form?");
 		if(x==true)
-		form.submit();
+		form.submit(); */
 		
 	}
 	
