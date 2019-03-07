@@ -103,7 +103,7 @@
 														value="${QList.iqacName}" /></td>
 														
 											<td style="text-align: left"><c:out
-														value="${QList.desgntnId}" /></td>
+														value="${QList.designationName}" /></td>
 											
 											<td style="text-align: left"><c:out
 														value="${QList.joiningDate}" /></td>
@@ -117,14 +117,14 @@
 												
 												<td> <a
 											href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit IQAC"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
-												class="glyphicon glyphicon-list"></span></a>
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
+												class="glyphicon glyphicon-edit"></span></a>
 												<a
-											href="${pageContext.request.contextPath}/showRegAcc" title="Add Account Officer"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add Account Officer"><span
-												class="glyphicon glyphicon-list"></span></a>
+											href="${pageContext.request.contextPath}/deleteIqac/${QList.iqacId}" title="Delete IQAC"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Delete IQAC"><span
+												class="glyphicon glyphicon-trash"></span></a>
 												
-												<a
+												<%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-list"></span></a>
@@ -138,7 +138,7 @@
 												<a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-edit"></span></a>
+												class="glyphicon glyphicon-edit"></span></a> --%>
 												
 												
 												

@@ -20,8 +20,10 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.Info;
+import com.ats.rusasoft.model.IqacList;
 import com.ats.rusasoft.model.MIqac;
 import com.ats.rusasoft.model.Staff;
+import com.ats.rusasoft.model.StaffList;
 import com.ats.rusasoft.model.UserLogin;
 
 @Controller
@@ -68,8 +70,16 @@ public class IqacController {
 		int iqacId=0;	
 		int  designation = 0;
 		try {		
-			iqacId=0;
-			//iqacId= Integer.parseInt(request.getParameter("iqac_id"));
+			
+			iqacId= Integer.parseInt(request.getParameter("iqac_id"));	
+			
+		} catch (Exception e) {
+			iqacId=0;	
+			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+			e.printStackTrace();
+			
+	}
+			
 			System.out.println("Data:"+iqacId);
 			String iqacName = request.getParameter("iqacName2");
 			System.out.println("Data:"+iqacName);
@@ -80,7 +90,14 @@ public class IqacController {
 			
 			System.out.println("Data:"+iqacId+" "+iqacName+" "+dateOfJoin+" "+contact+" "+email);
 			
-			miqac.setIqacId(iqacId);
+			if(iqacId==0) {
+				miqac.setIqacId(0);
+			
+			}
+			else{
+				miqac.setIqacId(iqacId);
+			}
+			
 			miqac.setIqacName(iqacName);
 			miqac.setDesgntnId(designation);
 			miqac.setInstituteId(instituteId);
@@ -97,30 +114,8 @@ public class IqacController {
 			miqac.setLastUpdatedDatetime("2019-03-04");
  
 			MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac",miqac ,MIqac.class);
-			System.out.println("IQAC Resp:"+iqac);
 			
-			UserLogin user = new UserLogin();
-			String userName = getAlphaNumericString(7); 
-			String passWord = getAlphaNumericString(7);
-			
-			user.setRegPrimaryKey(iqac.getIqacId());
-			user.setUserName(userName);
-			user.setPass(passWord);
-			user.setRoleId(0);
-			user.setExInt1(0);
-			user.setUserType(2);
-			user.setExInt2(instituteId);
-			user.setExVar1("NA");
-			user.setExVar2("NA");
-			user.setIsBlock(0);
 		
-			UserLogin usr = rest.postForObject(Constants.url + "/insertNewUser",user ,UserLogin.class);
-		} catch (Exception e) {
-
-			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
-			e.printStackTrace();
-			//miqacId=0;
-	}
 	
 	
 		return "redirect:/iqacRegistration";
@@ -133,10 +128,18 @@ public class IqacController {
 
 		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			int userId =(int)session.getAttribute("userId");
+			int instituteId =(int)session.getAttribute("instituteId");
 
 			model = new ModelAndView("master/iqacList");
-			
-			List<MIqac> qacList = rest.getForObject(Constants.url+"/getAllIqac", List.class);
+			/*
+			 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			 * 
+			 * map.add("uid", userId); map.add("instituteId", instituteId);
+			 */
+						
+			List<IqacList> qacList = rest.getForObject(Constants.url+"/getAllIqac", List.class);
 			
 			System.out.println("IQACLIST"+qacList);
 			
@@ -200,16 +203,57 @@ public class IqacController {
 	
 	/********************************************Staff/Faculty**********************************************/
 
+	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
+	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			model = new ModelAndView("master/regstaff");
+			
+			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
+			model.addObject("desigList", designationList);
+			
+			
+
+			model.addObject("title", "Register Faculty");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showHodAfterLogin at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
 	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
-	public ModelAndView addFaculty(HttpServletRequest request, HttpServletResponse response) {
+	public String addFaculty(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("master/addFaculty");
+		
+		HttpSession session = request.getSession();
+		
+		int instituteId =(int)session.getAttribute("instituteId");
+		
 		model.addObject("title","Add Department");
+		
 		int facultyId = 0;
-		int instituteId = 0;
 		int deptId = 0;
 		try {
 			
+			facultyId = Integer.parseInt(request.getParameter("faculty_id"));
+			
+		} catch (Exception e) {
+				
+			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
+			e.printStackTrace();
+			facultyId = 0;
+
+		}
 			String facultyMmemberName = request.getParameter("faculty_member_name");
 			int highestQualification = Integer.parseInt(request.getParameter("highest_qualification"));
 			//String otherQualification = request.getParameter("other_qualification");
@@ -224,7 +268,11 @@ public class IqacController {
 			
 			Staff staff = new Staff();
 			
+			if(facultyId>0) {
 			staff.setFacultyId(facultyId);
+			}else {
+				staff.setFacultyId(0);
+			}
 			staff.setInstituteId(instituteId);
 			staff.setDeptId(deptId);
 			staff.setFacultyName(facultyMmemberName);
@@ -234,9 +282,9 @@ public class IqacController {
 			staff.setJoiningDate(joinDate);
 			staff.setIsWorking(isReg);
 			if(isReg == 0)
-			staff.setRealivingDate(DateConvertor.convertToYMD(relDate));
+			staff.setRealivingDate(relDate);//(DateConvertor.convertToYMD(relDate));
 		else {
-			staff.setRealivingDate(null);
+			staff.setRealivingDate("2019-01-01");
 		}
 			
 			staff.setTeachingTo(teachTo);
@@ -257,16 +305,10 @@ public class IqacController {
 			System.out.println("Staff:"+staff.toString());
 			
 			Staff stf = rest.postForObject(Constants.url+"/addNewStaff", staff, Staff.class);
+			
+	
 
-		} catch (Exception e) {
-
-			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
+		return "redirect:/showRegisterStaff";
 
 	}
 	
@@ -281,7 +323,7 @@ public class IqacController {
 			model.addObject("title", "Faculty List");
 			
 			
-			List<Staff> staffList = rest.getForObject(Constants.url+"/getListStaff", List.class);
+			List<StaffList> staffList = rest.getForObject(Constants.url+"/getListStaff", List.class);
 			System.out.println("Staff List:"+staffList);
 			
 			model.addObject("staffList", staffList);
@@ -299,35 +341,47 @@ public class IqacController {
 	}
 	
 	
+	@RequestMapping(value = "/editFaculity/{facultyId}", method = RequestMethod.GET)
+	public ModelAndView editFaculity(@PathVariable("facultyId") int facultyId) {
+		
+	System.out.println("Id:"+facultyId);
+
+		ModelAndView model = new ModelAndView("master/regstaff");
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("id", facultyId);
+		try {
+			
+			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
+			model.addObject("desigList", designationList);
+			
+			Staff staff = rest.postForObject(Constants.url+"/getStaffById", map, Staff.class);
+			System.out.println("staff"+staff);
+			
+			model.addObject("staff", staff);
+		
+		} catch (Exception e) {
+
+			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+	
+	}
 	
 	
+	@RequestMapping(value = "/deleteFaculity/{facultyId}", method = RequestMethod.GET)
+	public String deleteStaff(@PathVariable("facultyId") int facultyId) {
+		Info inf = new Info();
+		System.out.println("Id:"+facultyId);
+		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("id", facultyId);
+		Info miqc = rest.postForObject(Constants.url+"/deleteStaffById", map, Info.class);
+		
+		return "redirect:/showStaffList";
 	
-	
-	static String getAlphaNumericString(int n) 
-	{ 
-
-		// chose a Character random from this String 
-		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-									+ "0123456789"
-									+ "abcdefghijklmnopqrstuvxyz"; 
-
-		// create StringBuffer size of AlphaNumericString 
-		StringBuilder sb = new StringBuilder(n); 
-
-		for (int i = 0; i < n; i++) { 
-
-			// generate a random number between 
-			// 0 to AlphaNumericString variable length 
-			int index 
-				= (int)(AlphaNumericString.length() 
-						* Math.random()); 
-
-			// add Character one by one in end of sb 
-			sb.append(AlphaNumericString 
-						.charAt(index)); 
-		} 
-
-		return sb.toString(); 
 	}
 
 }

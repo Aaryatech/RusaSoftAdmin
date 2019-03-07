@@ -108,46 +108,40 @@
 										</tfoot>
 
 										<tbody>
-											<%-- <c:forEach items="${getPagesModuleList}"
-												var="getPagesModuleList" varStatus="count">
+											<c:forEach items="${staffList}" var="staffList" varStatus="count">
 												<tr>
-													<td>${count.index+1}</td>
-													<td>${getPagesModuleList.pageName}
-														(${getPagesModuleList.secctionName})</td>
-
-													<td>${getPagesModuleList.content}</td>
-													<td><a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
-															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip"></span></a> |
-														<a
-														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.primaryKeyId}"
-														onClick="return confirm('Are you sure want to delete this record');"
-														rel="tooltip" data-color-class="danger"
-														data-animate=" animated fadeIn " data-toggle="tooltip"
-														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a></td>
-												</tr>
-											</c:forEach> --%>
-											<tr>
-											<td>1</td>
-											<td>ABC</td>
-											<td>Ph.D.</td>
-												<td>Information Technology</td>
-												<td>1-08-2018</td>
-												<td>8956231213</td>
-												<td>xyz@gmail.com</td>
-												<td> <a
+											<td style="text-align: center">${count.index+1}</td>
+											
+											<td style="text-align: left"><c:out
+														value="${staffList.facultyName}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.qualificationName}" /></td>
+											
+											<td style="text-align: left"><c:out
+														value="${staffList.designationName}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.joiningDate}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.contactNo}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.email}" /></td>
+														
+											
+												<td><%--  <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
-												class="glyphicon glyphicon-list"></span></a>
+												class="glyphicon glyphicon-list"></span></a> --%>
 												<a
-											href="${pageContext.request.contextPath}/showRegAcc" title="Edit"
+											href="${pageContext.request.contextPath}/editFaculity/${staffList.facultyId}" title="Edit"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
 												class="glyphicon glyphicon-edit"></span></a>
 												
 												<a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Block"
+											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" title="Block"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-trash"></span></a></td>
 											
@@ -155,6 +149,7 @@
 											
 											
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 

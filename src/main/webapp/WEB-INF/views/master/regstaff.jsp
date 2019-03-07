@@ -190,7 +190,7 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="faculty_member_name"
 																	name="faculty_member_name" placeholder="Faculty Member Name"
-																	value="${page.pageName}">
+																	value="${staff.facultyName}">
 															</div>
 														</div>
 
@@ -203,11 +203,20 @@
 															<div class="col-sm-10">
 																<select id="highest_qualification" name="highest_qualification"  onchange="showForm1()" class="form-control"
 																	required>
-																	<option value="0">UG</option>
-																	<option value="1">PG</option>
-																	<option value="2">M.phill</option>
-																	<option value="2">Ph.D.</option>
-																	<option value="2">Post Docterate</option>
+																	<%-- <c:forEach items="${}" var="makeList"> 
+																	<c:choose>
+																			<c:when test="${makeList.designationId == miqc.desgntnId}">
+																				<option value="${makeList.designationId}" selected="selected">${makeList.designationName}</option>
+																			</c:when>
+																		<c:otherwise><option value="${makeList.designationId}">${makeList.designationName}</option></c:otherwise>
+																	</c:choose>
+																 </c:forEach> --%>
+																	
+																	<option value="1">UG</option>
+																	<option value="2">PG</option>
+																	<option value="4">M.phill</option>
+																	<option value="5">Ph.D.</option>
+																	<option value="6">Post Docterate</option>
 																	
 																	<option value="3">Any Other Course</option>
 																</select>
@@ -238,7 +247,7 @@
 																<input type="text" class="form-control" id="yr_highest_qualification_acqrd"
 																	name="yr_highest_qualification_acqrd"
 																	placeholder="Year of highest Qualification Required"
-																	value="" required>
+																	value="${staff.hightestQualificationYear}" required>
 															</div>
 														</div>
 
@@ -249,11 +258,14 @@
 															<div class="col-sm-10">
 																<select id="designation" name="designation"
 																	class="form-control" required>
-																	<option value="0">Professor</option>
-																	<option value="1">Assistant Professor </option>
-																	<option value="1">Associate Professor</option>
-																		<option value="1">Reader</option>
-
+																	<c:forEach items="${desigList}" var="makeList"> 
+																	<c:choose>
+																			<c:when test="${makeList.designationId == staff.currentDesignationId}">
+																				<option value="${makeList.designationId}" selected="selected">${makeList.designationName}</option>
+																			</c:when>
+																		<c:otherwise><option value="${makeList.designationId}">${makeList.designationName}</option></c:otherwise>
+																	</c:choose>
+																 </c:forEach>
 
 																</select>
 															</div>
@@ -266,7 +278,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="date" class="form-control" id="join_date"
-																	name="join_date" placeholder="Contact No" required>
+																	name="join_date" placeholder="Contact No" value="${staff.joiningDate}" required>
 															</div>
 														</div>
 
@@ -277,9 +289,9 @@
 
 
 															<div class="col-sm-10">
-																No <input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
+																Yes <input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
 																	checked value="0">
-																Yes<input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
+																No<input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
 																	value="1">
 															</div>
 
@@ -332,7 +344,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="contact_no"
-																	name="contact_no" placeholder="Mobile Number" required>
+																	name="contact_no" placeholder="Mobile Number" value="${staff.contactNo}" required>
 															</div>
 														</div>
 
@@ -342,7 +354,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email"
-																	name="email" placeholder="abc@xyz.com" required>
+																	name="email" placeholder="abc@xyz.com" value="${staff.email}" required>
 															</div>
 														</div>
 

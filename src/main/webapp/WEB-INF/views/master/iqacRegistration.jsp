@@ -189,7 +189,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="contactNo"
-																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
+																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"  maxlength="10" 
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile Number" value="${miqc.contactNo}" required>
 															</div>
