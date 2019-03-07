@@ -10,6 +10,7 @@
 <head>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+<c:url var="getSubmoduleList" value="/getSubmoduleList" />
 <!-- CORE CSS TEMPLATE - END -->
 </head>
 <!-- END HEAD -->
@@ -43,7 +44,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -99,8 +100,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitCreateRole"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -114,20 +114,20 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name"> Role Name
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="roleName"
-																	name="roleName" placeholder="Enter Role Name"
-																	autocomplete="off" required>
-															</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">
+															Role Name <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" id="roleName"
+																name="roleName" placeholder="Enter Role Name"
+																autocomplete="off" required>
 														</div>
+													</div>
 
 													<div class="col-xs-12">
-													
-															<div class="col-xs-12">
+
+														<div class="col-xs-12">
 
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
@@ -139,140 +139,196 @@
 																		<th>Add</th>
 																		<th>Edit</th>
 																		<th>Delete</th>
-																		
-																		
+
+
 																	</tr>
-																
+
 																</thead>
 
 
 
-																<tbody>
-<c:set var="index" value="0" />
-												<c:forEach items="${allModuleList}" var="allModuleList"
-													varStatus="count">
+																<%-- <tbody>
+																	<c:set var="index" value="0" />
+																	<c:forEach items="${allModuleList}" var="allModuleList"
+																		varStatus="count">
 
-													<c:set var="flag" value="0" />
+																		<c:set var="flag" value="0" />
 
-													<c:forEach
-														items="${allModuleList.accessRightSubModuleList}"
-														var="allSubModuleList">
-														<c:choose>
-															<c:when test="${allSubModuleList.type==0}">
-																<c:set var="flag" value="1" />
-															</c:when>
-														</c:choose>
-													</c:forEach>
+																		<c:forEach
+																			items="${allModuleList.accessRightSubModuleList}"
+																			var="allSubModuleList">
+																			<c:choose>
+																				<c:when test="${allSubModuleList.type==0}">
+																					<c:set var="flag" value="1" />
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
 
 
-													<c:choose>
-														<c:when test="${flag==1}">
-															<tr>
-																<!-- 	<td> &nbsp; </td>
+																		<c:choose>
+																			<c:when test="${flag==1}">
+																				<tr>
+																					<!-- 	<td> &nbsp; </td>
 											</tr><tr>  -->
-																<c:set var="index" value="${index+1 }" />
-																<td><c:out value="${index}" /> <input
-																	type="checkbox" id="aa${allModuleList.moduleId}"
-																	class="select_all" value="${allModuleList.moduleId}"
-																	onClick="selectAll(this, ${allModuleList.moduleId})" /></td>
+																					<c:set var="index" value="${index+1 }" />
+																					<td><c:out value="${index}" /> <input
+																						type="checkbox" id="aa${allModuleList.moduleId}"
+																						class="select_all"
+																						value="${allModuleList.moduleId}"
+																						onClick="selectAll(this, ${allModuleList.moduleId})" /></td>
 
-																<td><b><c:out
-																			value="${allModuleList.moduleName}" /></b></td>
+																					<td><b><c:out
+																								value="${allModuleList.moduleName}" /></b></td>
 
-															</tr>
-														</c:when>
-													</c:choose>
-													<c:forEach
-														items="${allModuleList.accessRightSubModuleList}"
-														var="allSubModuleList">
-														<c:choose>
-															<c:when test="${allSubModuleList.type==0}">
-																<tr>
-																	<td></td>
+																				</tr>
+																			</c:when>
+																		</c:choose>
+																		<c:forEach
+																			items="${allModuleList.accessRightSubModuleList}"
+																			var="allSubModuleList">
+																			<c:choose>
+																				<c:when test="${allSubModuleList.type==0}">
+																					<tr>
+																						<td></td>
 
-																	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out
-																			value="${allSubModuleList.subModulName}" /></td>
-																	<c:choose>
-																		<c:when test="${allSubModuleList.view==1}">
+																						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out
+																								value="${allSubModuleList.subModulName}" /></td>
+																						<c:choose>
+																							<c:when test="${allSubModuleList.view==1}">
 
-																			<td><input type="checkbox"
-																				class="check${allModuleList.moduleId}"
-																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
-																				value="view"></td>
-																		</c:when>
-																		<c:when test="${allSubModuleList.view==0}">
+																								<td><input type="checkbox"
+																									class="check${allModuleList.moduleId}"
+																									name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																									value="view"></td>
+																							</c:when>
+																							<c:when test="${allSubModuleList.view==0}">
 
-																			<td></td>
-
-
-																		</c:when>
-																	</c:choose>
-
-																	<c:choose>
-																		<c:when test="${allSubModuleList.addApproveConfig==1}">
-
-																			<td><input type="checkbox"
-																				class="check${allModuleList.moduleId}"
-																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
-																				value="add"></td>
-																		</c:when>
-																		<c:when test="${allSubModuleList.addApproveConfig==0}">
-
-																			<td></td>
+																								<td></td>
 
 
-																		</c:when>
-																	</c:choose>
+																							</c:when>
+																						</c:choose>
 
-																	<c:choose>
-																		<c:when test="${allSubModuleList.editReject==1}">
+																						<c:choose>
+																							<c:when
+																								test="${allSubModuleList.addApproveConfig==1}">
 
-																			<td><input type="checkbox"
-																				class="check${allModuleList.moduleId}"
-																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
-																				value="edit"></td>
-																		</c:when>
-																		<c:when test="${allSubModuleList.editReject==0}">
-																			<td></td>
-																		</c:when>
+																								<td><input type="checkbox"
+																									class="check${allModuleList.moduleId}"
+																									name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																									value="add"></td>
+																							</c:when>
+																							<c:when
+																								test="${allSubModuleList.addApproveConfig==0}">
 
-																	</c:choose>
-																	<c:choose>
-																		<c:when
-																			test="${allSubModuleList.deleteRejectApprove==1}">
-
-																			<td><input type="checkbox"
-																				class="check${allModuleList.moduleId}"
-																				name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
-																				value="delete"></td>
-																		</c:when>
-																		<c:when
-																			test="${allSubModuleList.deleteRejectApprove==0}">
-
-																			<td></td>
+																								<td></td>
 
 
-																		</c:when>
-																	</c:choose>
-																</tr>
-															</c:when>
-														</c:choose>
+																							</c:when>
+																						</c:choose>
+
+																						<c:choose>
+																							<c:when test="${allSubModuleList.editReject==1}">
+
+																								<td><input type="checkbox"
+																									class="check${allModuleList.moduleId}"
+																									name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																									value="edit"></td>
+																							</c:when>
+																							<c:when test="${allSubModuleList.editReject==0}">
+																								<td></td>
+																							</c:when>
+
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${allSubModuleList.deleteRejectApprove==1}">
+
+																								<td><input type="checkbox"
+																									class="check${allModuleList.moduleId}"
+																									name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+																									value="delete"></td>
+																							</c:when>
+																							<c:when
+																								test="${allSubModuleList.deleteRejectApprove==0}">
+
+																								<td></td>
 
 
-													</c:forEach>
+																							</c:when>
+																						</c:choose>
+																					</tr>
+																				</c:when>
+																			</c:choose>
 
-												</c:forEach>
+
+																		</c:forEach>
+
+																	</c:forEach>
+
+																</tbody> --%>
+
+																<tbody>
+
+																	<c:forEach items="${allModuleList}" var="allModuleList"
+																		varStatus="count">
+																		<tr>
+																			<td><b><c:out value="${count.index+1}" /> </b><input
+																				type="checkbox" id="header${allModuleList.moduleId}"
+																				name="header${allModuleList.moduleId}"
+																				class="select_all"
+																				onclick="checkSubmodule(${allModuleList.moduleId})"
+																				value="0"></td>
+																			<td colspan="5"><b><c:out
+																						value="${allModuleList.moduleName}" /></b></td>
+																		</tr>
+
+																		<c:forEach
+																			items="${allModuleList.accessRightSubModuleList}"
+																			var="allSubModuleList">
+																			<tr>
+																				<td></td>
+																				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out
+																						value="${allSubModuleList.subModulName}" /></td>
+																				<td><input type="checkbox"
+																					id="${allSubModuleList.subModuleId}view${allSubModuleList.moduleId}"
+																					class="check${allModuleList.moduleId}"
+																					name="${allSubModuleList.subModuleId}view${allSubModuleList.moduleId}"
+																					value="0"
+																					onclick="changeValue(1,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"></td>
+																				<td><input type="checkbox"
+																					id="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
+																					class="check${allModuleList.moduleId}"
+																					name="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
+																					value="0"
+																					onclick="changeValue(2,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"></td>
+																				<td><input type="checkbox"
+																					class="check${allModuleList.moduleId}"
+																					id="${allSubModuleList.subModuleId}edit${allSubModuleList.moduleId}"
+																					name="${allSubModuleList.subModuleId}edit${allSubModuleList.moduleId}"
+																					value="0"
+																					onclick="changeValue(3,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"></td>
+																				<td><input type="checkbox"
+																					class="check${allModuleList.moduleId}"
+																					id="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
+																					name="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
+																					value="0"
+																					onclick="changeValue(4,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"></td>
+																			</tr>
+																		</c:forEach>
+
+																	</c:forEach>
 
 																</tbody>
 															</table>
 
 														</div>
-														 <div class="form-group">
+														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> 
+														</div>
 
 													</div>
 
@@ -309,9 +365,100 @@
 
 
 
-	
-	
-		
+	<script>
+			function checkSubmodule(moduleId) {
+				
+				 
+				$.getJSON('${getSubmoduleList}', {
+					moduleId : moduleId,
+					ajax : 'true',
+
+				}, function(data) { 
+					 
+					
+					if(document.getElementById("header"+moduleId).checked == true){
+						
+						for(var i=0 ; i<data.length; i++){
+							 
+							document.getElementById(data[i]+"view"+moduleId).checked=true;
+							 document.getElementById(data[i]+"add"+moduleId).checked=true;
+							 document.getElementById(data[i]+"edit"+moduleId).checked=true;
+							 document.getElementById(data[i]+"delete"+moduleId).checked=true;
+							 document.getElementById(data[i]+"view"+moduleId).value=1;
+							 document.getElementById(data[i]+"add"+moduleId).value=1;
+							 document.getElementById(data[i]+"edit"+moduleId).value=1;
+							 document.getElementById(data[i]+"delete"+moduleId).value=1;
+						}
+						 
+					 }else{
+						 for(var i=0 ; i<data.length; i++){
+								
+								document.getElementById(data[i]+"view"+moduleId).checked=false;
+								 document.getElementById(data[i]+"add"+moduleId).checked=false;
+								 document.getElementById(data[i]+"edit"+moduleId).checked=false;
+								 document.getElementById(data[i]+"delete"+moduleId).checked=false;
+								 document.getElementById(data[i]+"view"+moduleId).value=0;
+								 document.getElementById(data[i]+"add"+moduleId).value=0;
+								 document.getElementById(data[i]+"edit"+moduleId).value=0;
+								 document.getElementById(data[i]+"delete"+moduleId).value=0;
+							}
+					 }
+				
+				});
+ 
+				 
+			}
+			
+			function changeValue(type,subModuleId,moduleId) {
+				 
+				 
+							 if(type==1){
+								 if(document.getElementById(subModuleId+"view"+moduleId).checked == true){
+									 
+									 document.getElementById(subModuleId+"view"+moduleId).value=1;
+									 
+								 }else{
+									 
+									 document.getElementById(subModuleId+"view"+moduleId).value=0;
+								 }
+								
+							 }else if(type==2){
+								 if(document.getElementById(subModuleId+"add"+moduleId).checked == true){
+									 
+								 	document.getElementById(subModuleId+"add"+moduleId).value=1;
+								 }else{
+									 document.getElementById(subModuleId+"add"+moduleId).value=0;
+								 }
+							 }else if(type==3){
+								 if(document.getElementById(subModuleId+"edit"+moduleId).checked == true){
+									 
+									 document.getElementById(subModuleId+"edit"+moduleId).value=1;
+									 
+								 }else{
+									 
+									 document.getElementById(subModuleId+"edit"+moduleId).value=0;
+									 
+								 }
+								 
+							 }else if(type==4){
+								 
+								 if(document.getElementById(subModuleId+"delete"+moduleId).checked == true){
+									 
+									 document.getElementById(subModuleId+"delete"+moduleId).value=1;
+									 
+								 }else{
+									 
+									 document.getElementById(subModuleId+"delete"+moduleId).value=0;
+									 
+								 }
+								 
+							 }
+							  
+			}
+			
+		</script>
+
+
 
 
 

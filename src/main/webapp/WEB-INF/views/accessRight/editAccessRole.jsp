@@ -114,7 +114,18 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-													 
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">
+															Role Name <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" id="roleName"
+																name="roleName" placeholder="Enter Role Name"
+																autocomplete="off" value="${editRole.roleName}" required>
+															<input type="text"  id="roleId"
+																name="roleId"  value="${editRole.roleId}"  >
+														</div>
+													</div>
 
 													<div class="col-xs-12">
 
@@ -125,27 +136,119 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th> Role</th>
-																		<th width="10%">Action</th>
+																		<th>Modules</th>
+																		<th>View</th>
+																		<th>Add</th>
+																		<th>Edit</th>
+																		<th>Delete</th>
+
+
 																	</tr>
 
 																</thead>
 
+
+
 																<tbody>
 
-																	<c:forEach items="${createdRoleList}"
-																		var="createdRoleList" varStatus="count">
+																	<c:forEach items="${allModuleList}" var="allModuleList"
+																		varStatus="count">
 																		<tr>
-																			<td><c:out value="${count.index+1}" /></td>
-																			<td><c:out value="${createdRoleList.roleName}" /></td>
-																			<td><a title="Edit" rel="tooltip"
-																				data-color-class="detail"
-																				data-animate=" animated fadeIn "
-																				href="${pageContext.request.contextPath}/editAccessRole/${createdRoleList.roleId}"
-																				data-toggle="tooltip" data-original-title="Edit"><span
-																					class="glyphicon glyphicon-edit"></span></a></td>
+																			<td><b><c:out value="${count.index+1}" /> </b><input
+																				type="checkbox" id="header${allModuleList.moduleId}"
+																				name="header${allModuleList.moduleId}"
+																				class="select_all"
+																				onclick="checkSubmodule(${allModuleList.moduleId})"
+																				value="0"></td>
+																			<td colspan="5"><b><c:out
+																						value="${allModuleList.moduleName}" /></b></td>
 																		</tr>
 
+																		<c:forEach
+																			items="${allModuleList.accessRightSubModuleList}"
+																			var="allSubModuleList">
+																			<tr>
+																				<td></td>
+																				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out
+																						value="${allSubModuleList.subModulName}" /></td>
+																				<td><c:choose>
+																						<c:when test="${allSubModuleList.view==1}">
+																							<input type="checkbox"
+																								id="${allSubModuleList.subModuleId}view${allSubModuleList.moduleId}"
+																								class="check${allModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}view${allSubModuleList.moduleId}"
+																								value="1"
+																								onclick="changeValue(1,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"
+																								checked>
+																						</c:when>
+																						<c:otherwise>
+																							<input type="checkbox"
+																								id="${allSubModuleList.subModuleId}view${allSubModuleList.moduleId}"
+																								class="check${allModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}view${allSubModuleList.moduleId}"
+																								value="0"
+																								onclick="changeValue(1,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})">
+																						</c:otherwise>
+																					</c:choose></td>
+																				<td><c:choose>
+																						<c:when test="${allSubModuleList.addApproveConfig==1}">
+																							<input type="checkbox"
+																								id="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
+																								class="check${allModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
+																								value="1"
+																								onclick="changeValue(2,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"
+																								checked>
+																						</c:when>
+																						<c:otherwise>
+																							<input type="checkbox"
+																								id="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
+																								class="check${allModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
+																								value="0"
+																								onclick="changeValue(2,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})">
+																						</c:otherwise>
+																					</c:choose></td>
+																				<td><c:choose>
+																						<c:when test="${allSubModuleList.editReject==1}">
+																							<input type="checkbox"
+																								class="check${allModuleList.moduleId}"
+																								id="${allSubModuleList.subModuleId}edit${allSubModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}edit${allSubModuleList.moduleId}"
+																								value="1"
+																								onclick="changeValue(3,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"
+																								checked>
+																						</c:when>
+																						<c:otherwise>
+																							<input type="checkbox"
+																								class="check${allModuleList.moduleId}"
+																								id="${allSubModuleList.subModuleId}edit${allSubModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}edit${allSubModuleList.moduleId}"
+																								value="0"
+																								onclick="changeValue(3,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})">
+																						</c:otherwise>
+																					</c:choose></td>
+																				<td><c:choose>
+																						<c:when test="${allSubModuleList.deleteRejectApprove==1}">
+																							<input type="checkbox"
+																								class="check${allModuleList.moduleId}"
+																								id="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
+																								value="1"
+																								onclick="changeValue(4,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"
+																								checked>
+																						</c:when>
+																						<c:otherwise>
+																							<input type="checkbox"
+																								class="check${allModuleList.moduleId}"
+																								id="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
+																								name="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
+																								value="0"
+																								onclick="changeValue(4,${allSubModuleList.subModuleId},${allSubModuleList.moduleId})">
+																						</c:otherwise>
+																					</c:choose></td>
+																			</tr>
+																		</c:forEach>
 
 																	</c:forEach>
 
@@ -153,12 +256,12 @@
 															</table>
 
 														</div>
-														<!-- <div class="form-group">
+														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> -->
+														</div>
 
 													</div>
 

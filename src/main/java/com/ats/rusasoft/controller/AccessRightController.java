@@ -1,6 +1,7 @@
 package com.ats.rusasoft.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +23,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.master.model.Info;
+import com.ats.rusasoft.model.LoginResponse;
+import com.ats.rusasoft.model.UserList;
 import com.ats.rusasoft.model.accessright.AccessRightModule;
 import com.ats.rusasoft.model.accessright.AccessRightModuleList;
 import com.ats.rusasoft.model.accessright.AccessRightSubModule;
@@ -36,6 +40,7 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.accessright.SubModuleJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 @Controller
 @Scope("session")
@@ -55,7 +60,7 @@ public class AccessRightController {
 		try {
 			accessRightModuleList = rest.getForObject(Constants.url + "getAllModuleAndSubModule",
 					AccessRightModuleList.class);
-			System.out.println("Access List " + accessRightModuleList.toString());
+			//System.out.println("Access List " + accessRightModuleList.toString());
 			model.addObject("allModuleList", accessRightModuleList.getAccessRightModuleList());
 			model.addObject("title", "Create Role");
 			isError = 0;
@@ -64,6 +69,33 @@ public class AccessRightController {
 			System.out.println(e.getMessage());
 		}
 		return model;
+	}
+	
+	@RequestMapping(value = "/getSubmoduleList", method = RequestMethod.GET)
+	public @ResponseBody List<Integer> getSubmoduleList(HttpServletRequest request, HttpServletResponse response) {
+ 
+		List<Integer> list = new ArrayList<>();
+		try {
+			 
+			int moduleId = Integer.parseInt(request.getParameter("moduleId"));
+			System.out.println(moduleId);
+			for(int i=0; i<accessRightModuleList.getAccessRightModuleList().size() ; i++) {
+				
+				if(accessRightModuleList.getAccessRightModuleList().get(i).getModuleId()==moduleId) {
+					
+					for(int j=0; j<accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().size() ; j++) {
+						
+						list.add(accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().get(j).getSubModuleId());
+					}
+					break;
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+		 
 	}
 
 	@RequestMapping(value = "/showRoleList", method = RequestMethod.GET)
@@ -106,7 +138,7 @@ public class AccessRightController {
 		}
 	}
 
-	@RequestMapping(value = "/submitCreateRole", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/submitCreateRole", method = RequestMethod.POST)
 	public String submitAssignRole(HttpServletRequest request, HttpServletResponse response) {
 
 		System.err.println("inside submit create role  ");
@@ -236,52 +268,249 @@ public class AccessRightController {
 			}
 		}
 		return "redirect:/showCreateRole";
-	}
+	}*/
+	
+	
+	@RequestMapping(value = "/submitCreateRole", method = RequestMethod.POST)
+	public String submitAssignRole(HttpServletRequest request, HttpServletResponse response) {
 
-
-	/*@RequestMapping(value = "/showAssignRole", method = RequestMethod.GET)
-	public ModelAndView showAssignRloe(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("accessRight/assignAccessRole1");
-		Constants.mainAct = 22;
-		Constants.subAct = 107;
+		 
+		List<AccessRightModule> accessRightModule = accessRightModuleList.getAccessRightModuleList();
+		 
+		List<ModuleJson> moduleJsonList = new ArrayList<>();
+		 
+		
 		try {
-			model.addObject("title", "Assign Role");
+			
+			for(int i=0; i<accessRightModule.size() ; i++) {
+				
+				ModuleJson moduleJson = new ModuleJson();
+				 int isPresent=0;
+				 
+				List<SubModuleJson> subModuleJsonList= new ArrayList<>();
+				
+				for(int j=0; j<accessRightModule.get(i).getAccessRightSubModuleList().size() ; j++) {
+					
+					SubModuleJson subModuleJson = new SubModuleJson();
+					
+					String view =  request.getParameter(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModuleId()+"view"+accessRightModule.get(i).getModuleId()) ;
+					
+					/*System.out.println("view " + view);*/
+					try {
+					if(view.equals("1")) {
+						isPresent=1;
+						 
+						subModuleJson.setView(String.valueOf(view));
+						subModuleJson.setSubModuleId(accessRightModule.get(i).getAccessRightSubModuleList().get(j).
+								getSubModuleId());
+						subModuleJson.setModuleId(accessRightModule.get(i).getModuleId());
+						subModuleJson.setSubModulName(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModulName());
+						subModuleJson.setSubModuleDesc(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModuleDesc());
+						subModuleJson.setSubModuleMapping(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModuleMapping());
+						
+						try {
+						int add = Integer.parseInt(request.getParameter(accessRightModule.get(i).getAccessRightSubModuleList().get(j).
+								getSubModuleId()+"add"+accessRightModule.get(i).getModuleId()));
+						subModuleJson.setAddApproveConfig(String.valueOf(add));
+						}catch(Exception e) {
+							subModuleJson.setAddApproveConfig(String.valueOf(0));
+						}
+						
+						try {
+						int edit =  Integer.parseInt(request.getParameter(accessRightModule.get(i).getAccessRightSubModuleList().get(j).
+								getSubModuleId()+"edit"+accessRightModule.get(i).getModuleId()));
+						subModuleJson.setEditReject(String.valueOf(edit));
+						}catch(Exception e) {
+							subModuleJson.setEditReject(String.valueOf(0));
+						}
+						
+						try {
+						int delete = Integer.parseInt(request.getParameter(accessRightModule.get(i).getAccessRightSubModuleList().get(j).
+								getSubModuleId()+"delete"+accessRightModule.get(i).getModuleId()));
+						subModuleJson.setDeleteRejectApprove(String.valueOf(delete));
+						}catch(Exception e) {
+							subModuleJson.setDeleteRejectApprove(String.valueOf(0));
+						}
+						   
+						subModuleJsonList.add(subModuleJson);
+						
+					}
+					}catch(Exception e) {
+						
+					}
+					
+				}
+				
+				if(isPresent==1) {
+					moduleJson.setModuleId(accessRightModule.get(i).getModuleId());
+					moduleJson.setModuleName(accessRightModule.get(i).getModuleName());
+					moduleJson.setModuleDesc(accessRightModule.get(i).getModuleDesc());
+					moduleJson.setSubModuleJsonList(subModuleJsonList);
+					moduleJsonList.add(moduleJson);
+				}
+				
+			}
+			
+			if (moduleJsonList != null && !moduleJsonList.isEmpty()) {
+				String roleName = request.getParameter("roleName");
+				AssignRoleDetailList assignRoleDetailList = new AssignRoleDetailList();
+				ObjectMapper mapper = new ObjectMapper();
+				try {
+					 
+					try {
+						int roleId = Integer.parseInt(request.getParameter("roleId"));
+						assignRoleDetailList.setRoleId(roleId);
+					}catch(Exception e) {
+						
+					}
+					 
+					String newsLetterJSON = mapper.writeValueAsString(moduleJsonList);
 
+					System.out.println("JSON  " + newsLetterJSON);
+					assignRoleDetailList.setRoleJson(newsLetterJSON);
+					 
+				} catch (JsonProcessingException e) {
+
+				 
+					e.printStackTrace();
+				}
+				 
+				assignRoleDetailList.setRoleName(roleName);
+				assignRoleDetailList.setDelStatus(0);
+				Info info = rest.postForObject(Constants.url + "saveAssignRole", assignRoleDetailList, Info.class);
+			}
+			
+			System.out.println("saveAssignRole "+moduleJsonList);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		 
+		return "redirect:/showCreateRole";
+	}
+	
+	@RequestMapping(value = "/editAccessRole/{roleId}", method = RequestMethod.GET)
+	public ModelAndView editAccessRole(@PathVariable("roleId") int roleId, HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("accessRight/editAccessRole");
+
+		//Constants.mainAct = 22;
+		//Constants.subAct = 106;
+		try {
 			accessRightModuleList = rest.getForObject(Constants.url + "getAllModuleAndSubModule",
 					AccessRightModuleList.class);
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("empType", 1);
-
+		
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("roleId", roleId);
 			
-			 * EmployeeList employeeList = rest.postForObject(Constants.url +
-			 * "/spProduction/getEmployeeList", map, EmployeeList.class);
-			 
-			List<User> userList = rest.getForObject(Constants.url + "getAllUser", List.class);
-			CreatedRoleList createdRoleList = rest.getForObject(Constants.url + "getAllAccessRole",
-					CreatedRoleList.class);
-			System.out.println("userList List " + userList.toString());
-			model.addObject("userList", userList);
-			model.addObject("createdRoleList", createdRoleList.getAssignRoleDetailList());
+			AssignRoleDetailList editRole = rest.postForObject(Constants.url + "getRoleByRoleId",map,
+					AssignRoleDetailList.class);
+			//System.out.println("Access List " + accessRightModuleList.toString());
+			model.addObject("allModuleList", accessRightModuleList.getAccessRightModuleList());
+			model.addObject("editRole", editRole);
+			ModuleJson[] moduleJson   = new Gson().fromJson(editRole.getRoleJson(), ModuleJson[].class);
+			List<ModuleJson> moduleJsonList = new ArrayList<ModuleJson>(Arrays.asList(moduleJson));
+			
+			System.out.println("List" + accessRightModuleList.getAccessRightModuleList());
+			
+			for(int i=0; i<accessRightModuleList.getAccessRightModuleList().size() ; i++) {
+				
+				for(int j=0; j<moduleJsonList.size() ; j++) {
+					
+					if(accessRightModuleList.getAccessRightModuleList().get(i).getModuleId()==moduleJsonList.get(j).getModuleId()) {
+						
+						System.out.println("match Module " + accessRightModuleList.getAccessRightModuleList().get(i).getModuleName());
+						
+						for(int k=0; k<accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().size() ; k++) {
+							
+							for(int m=0; m<moduleJsonList.get(j).getSubModuleJsonList().size() ; m++) {
+								
+								if(accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().get(k).getSubModuleId()
+										==moduleJsonList.get(j).getSubModuleJsonList().get(m).getSubModuleId()) {
+									
+									System.out.println("match sub Module " + accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().get(k).getSubModulName());
+									
+									accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().
+									get(k).setAddApproveConfig(Integer.parseInt(moduleJsonList.get(j).getSubModuleJsonList().get(m).getAddApproveConfig()));
+									accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().
+									get(k).setView(Integer.parseInt(moduleJsonList.get(j).getSubModuleJsonList().get(m).getView()));
+									accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().
+									get(k).setEditReject(Integer.parseInt(moduleJsonList.get(j).getSubModuleJsonList().get(m).getEditReject()));
+									accessRightModuleList.getAccessRightModuleList().get(i).getAccessRightSubModuleList().
+									get(k).setDeleteRejectApprove(Integer.parseInt(moduleJsonList.get(j).getSubModuleJsonList().get(m).getDeleteRejectApprove()));
+									 break;
+								}
+								
+							}
+							
+						}
+						
+						 break;
+					}
+					
+				}
+				
+			}
+			
+			System.out.println("List" + accessRightModuleList.getAccessRightModuleList());
+			model.addObject("title", "Edit Access Role");
+			model.addObject("moduleJsonList", moduleJsonList);
+			isError = 0;
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return model;
-	}*/
+	}
+
+	 @RequestMapping(value = "/showAssignRole", method = RequestMethod.GET)
+	public ModelAndView showAssignRloe(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("accessRight/assignAccessRole1");
+		 
+		try {
+			model.addObject("title", "Assign Role");
+
+			/*accessRightModuleList = rest.getForObject(Constants.url + "getAllModuleAndSubModule",
+					AccessRightModuleList.class);*/
+			
+			HttpSession session = request.getSession(); 
+			LoginResponse userDetail =  (LoginResponse) session.getAttribute("userObj");
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instituteId", userDetail.getGetData().getUserInstituteId());
+			
+			UserList[] user = rest.postForObject(Constants.url + "/getAllUserList", map, UserList[].class);
+			 List<UserList> userList = new ArrayList<>(Arrays.asList(user));
+			 
+			 
+			CreatedRoleList createdRoleList = rest.getForObject(Constants.url + "getAllAccessRole",
+					CreatedRoleList.class);
+			
+			System.out.println("userList List " + userList.toString());
+			model.addObject("userList", userList);
+			model.addObject("createdRoleList", createdRoleList.getAssignRoleDetailList());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+	} 
 
 	@RequestMapping(value = "/submitAssignedRole", method = RequestMethod.POST)
 	public String submitAssignedRole(HttpServletRequest request, HttpServletResponse response) {
 
-		int roleId = Integer.parseInt(request.getParameter("role"));
-		int empId = Integer.parseInt(request.getParameter("empId"));
+		int roleId = Integer.parseInt(request.getParameter("roleId"));
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		
 		try {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("id", empId);
+			map.add("id", userId);
 			map.add("roleId", roleId);
 
-			Info info = rest.postForObject(Constants.url + "updateEmpRole", map, Info.class);
+			Info info = rest.postForObject(Constants.url + "/updateRoleOfUser", map, Info.class);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -65,12 +65,12 @@
 
 
 	<!-- Left Panel -->
-	<jsp:include page="/WEB-INF/views/common/left.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include>
 	<!-- Left Panel -->
 
 
 	<!-- Header-->
-	<jsp:include page="/WEB-INF/views/common/right.jsp"></jsp:include>
+	<%-- <jsp:include page="/WEB-INF/views/common/right.jsp"></jsp:include> --%>
 	<!-- Header-->
 
 
@@ -754,7 +754,7 @@
 		</div>
 	</div>
 	<!-- Footer -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<!-- Footer -->
 
 
