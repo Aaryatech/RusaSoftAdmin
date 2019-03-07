@@ -122,8 +122,8 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name"
-																	name="librarian_name" placeholder="Librarian Name"
+																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
+																	name="librarian_name" placeholder="Librarian Name" required
 																	>
 															</div>
 														</div>
@@ -138,7 +138,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="lib_con_num"
+																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
 																	name="lib_con_num" placeholder="Mobile No" required>
 															</div>
 														</div>
@@ -148,7 +148,7 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="librarian_email"
+																<input type="email" class="form-control" id="librarian_email" 	value="${editInst.email}"
 																	name="librarian_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
@@ -159,12 +159,25 @@
 															</label>
 															<div class="col-sm-10">
 																<select id="lib_quolf" name="lib_quolf" class="form-control" required>
-																<c:forEach items="${quolfList}" var="quolf">
-																		<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+															
 																	
+																		<c:forEach items="${quolfList}" var="quolf">
+																		<c:choose>
+																			<c:when test="${quolf.qualificationId==editInst.qualificationId}">
+																			<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+																			<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
 																	</c:forEach>
-																	
 																</select>
+																
+																
 															</div>
 														</div>
 																
@@ -173,7 +186,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="lib_joiningDate"
+																<input type="date" class="form-control" id="lib_joiningDate" 	value="${editInst.joiningDate}"
 																	name="lib_joiningDate" placeholder=" " required>
 															</div>
 														</div>
@@ -184,7 +197,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date"
+																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
 																	name="relieving_date"  required>
 															</div>
 														</div>
@@ -193,13 +206,14 @@
 
 												</div>
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="0">
+                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
+                                             	<input type="hidden" id="is_view" name="is_view" value="0">
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Add</button>
-																	<a href="${pageContext.request.contextPath}/showLibList"><button
-										                              type="button" class="btn btn-primary">Save & Next</button></a>
+																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -227,10 +241,20 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
 
-
-
+</script>
 
 
 
