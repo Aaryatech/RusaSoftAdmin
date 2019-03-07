@@ -110,7 +110,7 @@
 
 													<td>${institute.email}</td>
 
-													<td><a href="#" onclick="approveInst(${institute.instituteId})"><span
+													<td><a href="${pageContext.request.contextPath}/approveInstitutes/${institute.instituteId}"><span
 															class="glyphicon glyphicon-edit"
 															data-animate=" animated fadeIn " rel="tooltip"
 															title="Approve Institute"></span></a></td>

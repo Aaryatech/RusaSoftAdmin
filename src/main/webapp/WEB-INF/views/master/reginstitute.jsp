@@ -58,7 +58,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<div class="col-xs-12">
+				<%-- <div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -69,7 +69,7 @@
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -158,16 +158,16 @@
 																style="text-align: left;">2F/12B Registration
 																(YES/No) : <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-2">
 																<c:choose>
 																	<c:when test="${editInst.instituteId==0}">
 
 																		<input type="radio" id="is_registration"
 																			name="is_registration" value="1" checked
-																			onclick="setDate(this.value)">Yes a
+																			onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration"
 																			name="is_registration" value="0"
-																			onclick="setDate(this.value)">No b
+																			onclick="setDate(this.value)">No
 															
 															</c:when>
 																	<c:otherwise>
@@ -176,20 +176,20 @@
 																			<c:when test="${editInst.isRegistration==1}">
 																				<input type="radio" id="is_registration"
 																					name="is_registration" value="1" checked
-																					onclick="setDate(this.value)">Yes c
+																					onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration"
 																					name="is_registration" value="0"
-																					onclick="setDate(this.value)">No d
+																					onclick="setDate(this.value)">No
 															
 																
 																</c:when>
 																			<c:otherwise>
 																				<input type="radio" id="is_registration"
 																					name="is_registration" value="1" 
-																					onclick="setDate(this.value)">Yes e
+																					onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration" checked
 																					name="is_registration" value="0"
-																					onclick="setDate(this.value)">No f
+																					onclick="setDate(this.value)">No
 															
 																
 																</c:otherwise>
@@ -203,7 +203,7 @@
 
 															</div>
 															<div id="abc">
-																<label class="control-label col-sm-2" for="page_order">Date
+																<label class="control-label col-sm-3" for="page_order">Date
 																	of Registration :<span class="text-danger">*</span>
 																</label>
 																
@@ -616,6 +616,8 @@ function getCOPO() {
             $('.datepicker').datepicker({
 				autoclose: true,
                 format: "dd-mm-yyyy",
+                changeYear:true,
+                changeMonth:true
 				 
 
 			});

@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
+import com.ats.rusasoft.model.LoginResponse;
 
 @Controller
 @Scope("session")
@@ -740,7 +742,7 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showRegLib", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showRegLib", method = RequestMethod.GET)
 	public ModelAndView showRegLib(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -760,7 +762,7 @@ public class MasterController {
 
 		return model;
 
-	}
+	}*/
 
 	@RequestMapping(value = "/showLibList", method = RequestMethod.GET)
 	public ModelAndView showLibList(HttpServletRequest request, HttpServletResponse response) {
@@ -1476,15 +1478,19 @@ public class MasterController {
 	public String insertInstitute(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		int instId = Integer.parseInt(request.getParameter("inst_id"));
+
 		try {
 
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			RestTemplate restTemplate = new RestTemplate();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			int exInt = 0;
 			String exVar = "";
-			int instId = Integer.parseInt(request.getParameter("inst_id"));
 			if (instId == 0) {
 				Institute institute = new Institute();
 
@@ -1520,9 +1526,10 @@ public class MasterController {
 
 				institute.setLastUpdatedDatetime(curDateTime);
 				institute.setMakerEnterDatetime(curDateTime);
-				institute.setMakerUserId(0);// user id who is creating this record for ex principal is user who creates
-											// iqac
-											// and hod to student
+				institute.setMakerUserId(userObj.getUserId());// user id who is creating this record for ex principal is
+																// user who creates
+				// iqac
+				// and hod to student
 
 				institute.setPresidentName(request.getParameter("pres_name"));
 				institute.setPrincipalName(request.getParameter("princ_name"));
@@ -1593,8 +1600,10 @@ public class MasterController {
 			e.printStackTrace();
 
 		}
-
-		return "redirect:/showInstituteList";
+		if (instId == 0)
+			return "redirect:/showPendingInstitute";
+		else
+			return "redirect:/showInstituteList";
 
 	}
 
@@ -1641,6 +1650,56 @@ public class MasterController {
 
 	}
 
+	// Approve Inst
+
+	@RequestMapping(value = "/approveInstitutes/{instId}", method = RequestMethod.GET)
+	public String approveInstitutes(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int instId) {
+
+		try {
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (instId == 0) {
+
+				System.err.println("Multiple records delete ");
+				String[] instIds = request.getParameterValues("instIds");
+				System.out.println("id are" + instIds);
+
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < instIds.length; i++) {
+					sb = sb.append(instIds[i] + ",");
+
+				}
+				String instIdList = sb.toString();
+				instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+				map.add("instIdList", instIdList);
+				map.add("aprUserId", userObj.getUserId());
+			} else {
+				map.add("aprUserId", userObj.getUserId());
+
+				System.err.println("Single Record delete ");
+				map.add("instIdList", instId);
+			}
+
+			Info errMsg = rest.postForObject(Constants.url + "approveInstitutes", map, Info.class);
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/showInstituteList";
+
+	}
+
 	@RequestMapping(value = "/showEditInstitute", method = RequestMethod.POST)
 	public ModelAndView showEditInstitute(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -1656,7 +1715,11 @@ public class MasterController {
 			map.add("instituteId", instId);
 			// getInstitute
 			Institute editInst = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
-			editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
+			try {
+				editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			model.addObject("editInst", editInst);
 			model.addObject("instituteId", instId);
 
@@ -1685,6 +1748,10 @@ public class MasterController {
 
 			int deptId = Integer.parseInt(request.getParameter("dept_id"));
 			System.err.println("Dept id  " + deptId);
+
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			if (deptId == 0) {
 				Dept dept = new Dept();
 				String deptName = request.getParameter("dept_name");
@@ -1707,9 +1774,9 @@ public class MasterController {
 				String exVar1 = "NA";
 				dept.setExVar1(exVar1);
 				dept.setExVar2(exVar1);
-				dept.setInstituteId(1);// get from Session
+				dept.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
 				dept.setIsActive(1);
-				dept.setMakerUserId(1);// get from Session
+				dept.setMakerUserId(userObj.getUserId());// get from Session
 				Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
 
 			} else {
@@ -1719,7 +1786,7 @@ public class MasterController {
 				Dept dept = rest.postForObject(Constants.url + "getDept", map, Dept.class);
 				String deptName = request.getParameter("dept_name");
 				dept.setDeptName(deptName);
-				dept.setMakerUserId(1);// get from Session
+				dept.setMakerUserId(userObj.getUserId());// get from Session
 				Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
 
 			}
@@ -1815,11 +1882,14 @@ public class MasterController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			int hodId = Integer.parseInt(request.getParameter("hod_id"));
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			System.err.println("hodId id  " + hodId);
 			if (hodId == 0) {
-				
+
 				Hod hod = new Hod();
-				
+
 				String deptName = request.getParameter("dept_name");
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
@@ -1829,11 +1899,11 @@ public class MasterController {
 				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 				String curDate = dateFormatStr.format(new Date());
-				
+
 				hod.setContactNo(request.getParameter("hod_mob"));
 				hod.setDelStatus(1);
 				hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
-				hod.setEditBy(1);
+				hod.setEditBy(0);
 				hod.setEmail(request.getParameter("hod_email"));
 				hod.setExInt1(1);
 				hod.setExInt2(2);
@@ -1842,13 +1912,12 @@ public class MasterController {
 				hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
 				hod.setHodId(hodId);
 				hod.setHodName(request.getParameter("hod_name"));
-				hod.setInstituteId(1);
+				hod.setInstituteId(userObj.getGetData().getUserInstituteId());
 				hod.setIsActive(1);
 				hod.setIsEnrollSystem(0);
 				hod.setMakerDate(curDateTime);
-				hod.setMakerId(1);
+				hod.setMakerId(userObj.getUserId());
 				hod.setUpdateDatetime(curDateTime);
-				
 
 				Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
 
@@ -1866,15 +1935,15 @@ public class MasterController {
 				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 				String curDate = dateFormatStr.format(new Date());
-				
+
 				hod.setContactNo(request.getParameter("hod_mob"));
 				hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
-				hod.setEditBy(1);//session
+				hod.setEditBy(userObj.getUserId());// session
 				hod.setEmail(request.getParameter("hod_email"));
-			
+
 				hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
 				hod.setHodName(request.getParameter("hod_name"));
-				hod.setInstituteId(1);//from sess
+				hod.setInstituteId(userObj.getGetData().getUserInstituteId());// from sess
 				hod.setUpdateDatetime(curDateTime);
 
 				Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
@@ -1889,7 +1958,5 @@ public class MasterController {
 		return "redirect:/showDeptList";
 
 	}
-	
-	
 
 }
