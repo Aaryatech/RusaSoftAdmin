@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
+										action="${pageContext.request.contextPath}/insertLibrarian"
 										method="post" enctype="multipart/form-data"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
@@ -122,9 +122,9 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Librarian Name"
-																	value="${page.pageName}">
+																<input type="text" class="form-control" id="librarian_name"
+																	name="librarian_name" placeholder="Librarian Name"
+																	>
 															</div>
 														</div>
 
@@ -138,8 +138,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Mobile No" required>
+																	maxlength="10" class="form-control" id="lib_con_num"
+																	name="lib_con_num" placeholder="Mobile No" required>
 															</div>
 														</div>
 
@@ -148,30 +148,33 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="abc@xyz.com" required>
+																<input type="email" class="form-control" id="librarian_email"
+																	name="librarian_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Qualification
-																<span class="text-danger">*</span>
+															<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Highest
+																Qualification : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="Qualification" required>
+																<select id="lib_quolf" name="lib_quolf" class="form-control" required>
+																<c:forEach items="${quolfList}" var="quolf">
+																		<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+																	
+																	</c:forEach>
+																	
+																</select>
 															</div>
 														</div>
-														
-														
 																
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Joining
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																<input type="date" class="form-control" id="lib_joiningDate"
+																	name="lib_joiningDate" placeholder=" " required>
 															</div>
 														</div>
 													
@@ -181,8 +184,8 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																<input type="date" class="form-control" id="relieving_date"
+																	name="relieving_date"  required>
 															</div>
 														</div>
 
