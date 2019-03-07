@@ -97,7 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" enctype="multipart/form-data"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -193,7 +193,7 @@
 
 												</div>
 
-
+                                             <input type="hidden" id="librarian_id" name="librarian_id" value="0">
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">

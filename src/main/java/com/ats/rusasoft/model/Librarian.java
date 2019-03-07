@@ -2,7 +2,8 @@ package com.ats.rusasoft.model;
 
 public class Librarian {
 	
-private int librarianId;
+	
+      private int librarianId;
 	
 	private int instituteId;
 	
