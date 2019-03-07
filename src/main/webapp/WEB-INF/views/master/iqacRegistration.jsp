@@ -101,8 +101,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/#"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -117,8 +117,7 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-
-
+																								
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">IQAC I/C Name
 																<span class="text-danger">*</span>
@@ -126,7 +125,7 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="iqacName"
 																	name="iqacName" placeholder="Name"
-																	value="${page.pageName}" required>
+																	value="${miqc.iqacName}" required>
 															</div>
 														</div>
 
@@ -138,11 +137,23 @@
 															<div class="col-sm-10">
 																<select id="designation" name="designation"
 																	class="form-control"  onchange="showForm()" required>
-																	<option value="Assistant Professor">Assistant Professor</option>
-																	<option value="Associate Professor">Associate Professor</option>
-																	<option value="Professor">Professor</option>
-																	<option value="Registrar">Registrar</option>
-																	<option value="7">Any Other</option>
+																
+																<c:forEach items="${desigList}" var="makeList"> 
+																	<c:choose>
+																			<c:when test="${makeList.designationId == miqc.desgntnId}">
+																				<option value="${makeList.designationId}" selected="selected">${makeList.designationName}</option>
+																			</c:when>
+																		<c:otherwise><option value="${makeList.designationId}">${makeList.designationName}</option></c:otherwise>
+																	</c:choose>
+																 </c:forEach>
+																
+																
+																
+																	<!-- <option value="1">Assistant Professor</option>
+																	<option value="2">Associate Professor</option>
+																	<option value="3">Professor</option>
+																	<option value="4">Registrar</option>
+																	<option value="7">Any Other</option> -->
 																</select>
 															</div>
 														</div>
@@ -168,7 +179,7 @@
 															<div class="col-sm-3">
 																<input type="date" class="form-control" id="dateOfJoin"
 																	name="dateOfJoin" placeholder="Date Of Joining"
-																	value="" required>
+																	value="${miqc.joiningDate}" required>
 															</div>
 														</div>
 
@@ -180,7 +191,7 @@
 																<input type="text" class="form-control" id="contactNo"
 																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Mobile Number" value="" required>
+																	placeholder="Mobile Number" value="${miqc.contactNo}" required>
 															</div>
 														</div>
 
@@ -190,14 +201,18 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email"
-																	name="email" placeholder="abc@xyz.com" value="" required>
+																	name="email" placeholder="abc@xyz.com" value="${miqc.email}" required>
 															</div>
 														</div>
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 															
-															<a href="#myModal2"
+															<!-- 
+															<button type="submit" 
+																class="btn btn-info" onclick="getCOPO()">Submit</button>
+															 -->
+															 <a href="#myModal2"
 														data-toggle="modal"><button type="submit" onclick="getCOPO()"
 																class="btn btn-info">Submit</button></a>
 															
@@ -250,9 +265,9 @@
 					<h4 class="modal-title">IQAC Detail Comfirmation</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+				<form role="form"
+						action="${pageContext.request.contextPath}/iqacNewRegistration"
+						method="post">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 								
@@ -264,7 +279,8 @@
 							</label>
 						</div>	 -->
 						
-						
+						<input type="hidden" class="form-control" id="iqac_id"
+								name="iqac_id" value="${miqc.iqacId}">
 						
 				
 				
@@ -273,9 +289,10 @@
 							<label class="control-label col-sm-6" for="page_name">IQAC I/C Name:
 							</label>
 						
-								<label  id="iqacName1" for="page_name"> 
+								<label  id="iqacName1" for="page_name">
+								
 							</label>
-								 
+								 <input type="hidden" id="iqacName2" name="iqacName2">
 							</div>
 					
 					<div class="form-group">
@@ -284,8 +301,9 @@
 							</label>
 							
 							<label  id="designtion1" for="page_name"> 
-							</label>
 							
+							</label>
+							<input type="hidden" id="designtion2" name="designtion2">
 	</div>
 					
 					<div class="form-group">
@@ -294,7 +312,9 @@
 				              Of Joining : 
 							</label>
 							<label  id="date1" for="page_name"> 
+							
 							</label>
+							<input type="hidden" id="date2" name="date2">
 	</div>
 	
 	
@@ -306,7 +326,9 @@
 									No :
 							</label>
 							<label  id="conNumber1" for="page_name"> 
+							
 							</label>
+							<input type="hidden" id="conNumber2" name="conNumber2">
 	</div>
 	
 	<div class="form-group">
@@ -315,13 +337,15 @@
 									
 							</label>
 							<label  id="emailId1" for="page_name"> 
+	
 							</label>
+							<input type="hidden" id="emailId2" name="emailId2">
 	</div>
 					
 	
 	
 				 <button type="submit" class="btn btn-primary" onclick="getOpt()">Confirm</button>
-				<!-- 	</form> -->
+				 	</form>
 				</div>
 			</div>
 		</div>
@@ -336,27 +360,25 @@
 			
 			var iqacName=document.getElementById("iqacName").value
 			var designation=document.getElementById("designation").value
-			
 			var dateOfJoin=document.getElementById("dateOfJoin").value
 			var contactNo=document.getElementById("contactNo").value
 			var email=document.getElementById("email").value
-			var desn=document.getElementById("desn").value
-			var temp;
-			if(designation ==  7){
-				
-				$('#designtion1').html(desn);
-				
-			}
-			else{
-				$('#designtion1').html(designation);
-			}
 			
+				
+			$('#designtion1').html(designation);
+			document.getElementById("designtion2").value=designation;
 			
 			$('#iqacName1').html(iqacName);
+			document.getElementById("iqacName2").value=iqacName;
 			
 			$('#date1').html(dateOfJoin);
+			document.getElementById("date2").value=dateOfJoin;
+			
 			$('#conNumber1').html(contactNo);
+			document.getElementById("conNumber2").value=contactNo;
+			
 			$('#emailId1').html(email);
+			document.getElementById("emailId2").value=email;
 			
 		}
 

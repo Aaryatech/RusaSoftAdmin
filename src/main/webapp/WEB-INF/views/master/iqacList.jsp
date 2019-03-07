@@ -95,17 +95,28 @@
                 </tfoot>
 
                 <tbody>
-                       <%--  <c:forEach items="${getPagesModuleList}" var="getPagesModuleList" varStatus="count"> --%>
+                      <c:forEach items="${QList}" var="QList" varStatus="count"> 
 									<tr>
-											<td>1</td>
-											<td>ABC</td>
-											<td>Ph.D.</td>
+											<td style="text-align: center">${count.index+1}</td>
 											
-												<td>1-08-2018</td>
-												<td>8956231213</td>
-												<td>xyz@gmail.com</td>
+											<td style="text-align: left"><c:out
+														value="${QList.iqacName}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${QList.desgntnId}" /></td>
+											
+											<td style="text-align: left"><c:out
+														value="${QList.joiningDate}" /></td>
+											
+											<td style="text-align: left"><c:out
+														value="${QList.contactNo}" /></td>
+														
+															
+												<td style="text-align: left"><c:out
+														value="${QList.email}" /></td>
+												
 												<td> <a
-											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add HOD"
+											href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit IQAC"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
 												class="glyphicon glyphicon-list"></span></a>
 												<a
@@ -137,7 +148,7 @@
 											
 											
 											</tr>
-								<%-- </c:forEach>   --%>
+								 </c:forEach>   
                 </tbody>
             </table>
 

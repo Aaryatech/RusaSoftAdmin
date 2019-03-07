@@ -85,27 +85,30 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showIqacList", method = RequestMethod.GET)
-	public ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/iqacList");
-
-			model.addObject("title", "IQAC List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showIqacAfterLogin at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	/*
+	 * @RequestMapping(value = "/showIqacList", method = RequestMethod.GET) public
+	 * ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("master/iqacList");
+	 * 
+	 * model.addObject("title", "IQAC List");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showIqacAfterLogin at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
 	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {

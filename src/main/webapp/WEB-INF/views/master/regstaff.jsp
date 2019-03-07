@@ -109,10 +109,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										action="${pageContext.request.contextPath}/addFaculty"
+										method="post" 
+										name="form_sample_2" id="form_sample_2">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -189,8 +188,8 @@
 																Member Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Faculty Member Name"
+																<input type="text" class="form-control" id="faculty_member_name"
+																	name="faculty_member_name" placeholder="Faculty Member Name"
 																	value="${page.pageName}">
 															</div>
 														</div>
@@ -202,7 +201,7 @@
 																Qualification  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="deptId" name="deptId"  onchange="showForm1()" class="form-control"
+																<select id="highest_qualification" name="highest_qualification"  onchange="showForm1()" class="form-control"
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
@@ -222,10 +221,10 @@
 														  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="desn"
-																	name="desn" 
+																<input type="text" class="form-control" id="other_qualification"
+																	name="other_qualification" 
 																	
-																	placeholder="Other Qualification" value="" required>
+																	placeholder="Other Qualification" value="">
 															</div>
 														</div>
 														
@@ -236,8 +235,8 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order"
+																<input type="text" class="form-control" id="yr_highest_qualification_acqrd"
+																	name="yr_highest_qualification_acqrd"
 																	placeholder="Year of highest Qualification Required"
 																	value="" required>
 															</div>
@@ -266,8 +265,8 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No" required>
+																<input type="date" class="form-control" id="join_date"
+																	name="join_date" placeholder="Contact No" required>
 															</div>
 														</div>
 
@@ -293,7 +292,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="date" class="form-control" id="rel_date"
-																	name="rel_date" placeholder="Contact No" required>
+																	name="rel_date">
 															</div>
 														</div>
 
@@ -302,7 +301,7 @@
 																to  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="teachTo" name="teachTo" onchange="showForm()" class="form-control"
+																<select id="teachTo" name="teachTo"  class="form-control"
 																	required>
 																	<option value="0">UG</option>
 																	<option value="1">PG</option>
@@ -319,10 +318,10 @@
 														  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="desn"
-																	name="desn" 
+																<input type="text" class="form-control" id="other_course"
+																	name="other_course" 
 																	
-																	placeholder="Other Designation" value="" required>
+																	placeholder="Other Designation" value="">
 															</div>
 														</div>
 
@@ -332,8 +331,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Mobile Number" required>
+																	maxlength="10" class="form-control" id="contact_no"
+																	name="contact_no" placeholder="Mobile Number" required>
 															</div>
 														</div>
 
@@ -342,16 +341,12 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="abc@xyz.com" required>
+																<input type="email" class="form-control" id="email"
+																	name="email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
 
 														
-
-
-
-
 													</div>
 
 												</div>
@@ -359,7 +354,7 @@
 
 												<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Add</button>
+																<input type="submit" class="btn btn-primary" value="Add">
 																	<a href="${pageContext.request.contextPath}/showStaffList"><button
 										                              type="button" class="btn btn-primary">Save & Next</button></a>
 																<button type="reset" class="btn btn-default">Reset</button>

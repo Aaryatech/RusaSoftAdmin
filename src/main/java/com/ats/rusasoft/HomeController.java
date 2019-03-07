@@ -232,6 +232,7 @@ public class HomeController {
 
 				LoginResponse userObj = restTemplate.postForObject(Constants.url+"login",map,LoginResponse.class);
 				
+				
 			
 				
 
@@ -258,6 +259,13 @@ public class HomeController {
 					
 					session.setAttribute("userObj", userObj);
 					
+					int instituteId=userObj.getGetData().getUserInstituteId();
+					System.err.println("Institue Id:"+instituteId);
+					session.setAttribute("instituteId", instituteId);
+					
+					int userId = userObj.getGetData().getUserDetailId();
+					System.err.println("User Id:"+userId);
+					session.setAttribute("userId", userId);
 					
 					
 				/*	
@@ -273,17 +281,19 @@ public class HomeController {
 					mav.addObject("loginResponseMessage",loginResponseMessage);
 					
 					
-				 map =new LinkedMultiValueMap<String, Object>();
+					map =new LinkedMultiValueMap<String, Object>();
 					int typeId=userObj.getUserType();
 					map.add("typeId", typeId);
 					
-					GetUserDetail  userDataResponse= restTemplate.postForObject(Constants.url+"getUserDetailByTypeId",map,GetUserDetail.class);
+					//GetUserDetail  userDataResponse= restTemplate.postForObject(Constants.url+"getUserDetailByTypeId",map,GetUserDetail.class);
 					
-					System.out.println("JSON Response Objet " + userDataResponse.toString());
+					
+					
+					//System.out.println("JSON Response Objet " + userDataResponse.toString());
 				
 				
 				} 
-else {
+				else {
 
 					
 					mav = new ModelAndView("login");
