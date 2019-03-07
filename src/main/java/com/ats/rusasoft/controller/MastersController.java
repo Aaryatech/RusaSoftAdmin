@@ -29,23 +29,6 @@ import com.ats.rusasoft.model.Quolification;
 @Scope("session")
 public class MastersController {
 
-	@RequestMapping(value = "/iqacRegistration", method = RequestMethod.GET)
-	public ModelAndView showRegisterInstitute(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("master/iqacRegistration");
-		try {
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/hodRegistration", method = RequestMethod.GET)
 	public ModelAndView hodRegistration(HttpServletRequest request, HttpServletResponse response) {
