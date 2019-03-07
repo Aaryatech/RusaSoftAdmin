@@ -1985,7 +1985,7 @@ public class MasterController {
 			model.addObject("quolfList", quolfList);
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditDept  " + e.getMessage());
+			System.err.println("Exce in showEditHod  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -1993,5 +1993,49 @@ public class MasterController {
 
 	}
 	
+	
+	// deleteInstitutes
+		@RequestMapping(value = "/deleteHod/{hodId}", method = RequestMethod.GET)
+		public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int hodId) {
+
+			try {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (hodId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("instIds");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String instIdList = sb.toString();
+					instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+					map.add("hodIdList", instIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("hodIdList", hodId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteHods", map, Info.class);
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteHod at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return "redirect:/hodList";
+
+		}
+
 
 }

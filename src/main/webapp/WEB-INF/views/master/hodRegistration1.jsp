@@ -242,7 +242,7 @@
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<input type="button" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="button" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="button" class="btn btn-primary" onclick="submit_f(0)" value="ave &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
@@ -297,7 +297,7 @@
 	    form.setAttribute("method", "post");
 
 		form.action=("insertHod");
-		var x =confirm();
+		var x =confirm("Do you really want to submit the form?");
 		if(x==true)
 		form.submit();
 		
