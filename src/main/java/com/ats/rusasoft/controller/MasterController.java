@@ -19,12 +19,15 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.model.AccOfficer;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.Hod;
@@ -37,6 +40,40 @@ import com.ats.rusasoft.model.Quolification;
 @Scope("session")
 public class MasterController {
 	RestTemplate rest = new RestTemplate();
+
+	@RequestMapping(value = "/checkUniqueField", method = RequestMethod.GET)
+	public @ResponseBody Info checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String inputValue = request.getParameter("inputValue");
+			int valueType = Integer.parseInt(request.getParameter("valueType"));
+			int primaryKey = Integer.parseInt(request.getParameter("primaryKey"));
+			int isEdit = Integer.parseInt(request.getParameter("isEdit"));
+			int tableId = Integer.parseInt(request.getParameter("tableId"));
+			
+			
+			map.add("inputValue", inputValue);
+			map.add("valueType",valueType);
+			map.add("tableId",tableId );
+			map.add("isEditCall",isEdit );
+			map.add("primaryKey", primaryKey);
+			
+			info = rest.postForObject(Constants.url + "checkUniqueField", map, Info.class);
+			System.err.println("Info Response  " +info.toString());
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return info;
+
+	}
 
 	@RequestMapping(value = "/showRegisterInstitute", method = RequestMethod.GET)
 	public ModelAndView showRegisterInstitute(HttpServletRequest request, HttpServletResponse response) {
@@ -86,51 +123,7 @@ public class MasterController {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/showIqacList", method = RequestMethod.GET) public
-	 * ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse
-	 * response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("master/iqacList");
-	 * 
-	 * model.addObject("title", "IQAC List");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showIqacAfterLogin at Master Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 */
-	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
-	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/regstaff");
-
-			model.addObject("title", "Register Faculty");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showHodAfterLogin at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	// instituteList
 
@@ -187,7 +180,6 @@ public class MasterController {
 
 	}
 
-	
 	@RequestMapping(value = "/showProgramDetails", method = RequestMethod.GET)
 	public ModelAndView showProgramDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -645,6 +637,11 @@ public class MasterController {
 			model = new ModelAndView("master/accReg");
 
 			model.addObject("title", "Account Officer Registration");
+			
+			AccOfficer accOff=new AccOfficer();
+			
+			model.addObject("accOff", accOff);
+			
 
 		} catch (Exception e) {
 
@@ -724,93 +721,7 @@ public class MasterController {
 
 	}
 
-	/*@RequestMapping(value = "/showRegLib", method = RequestMethod.GET)
-	public ModelAndView showRegLib(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/libReg");
-
-			model.addObject("title", "Librarian Registration");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}*/
-
-	/*@RequestMapping(value = "/showLibList", method = RequestMethod.GET)
-	public ModelAndView showLibList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/libList");
-
-			model.addObject("title", "Librarian List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-*/
-	@RequestMapping(value = "/showRegStud", method = RequestMethod.GET)
-	public ModelAndView showRegStud(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/studReg");
-
-			model.addObject("title", "Student Registration");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showStudList", method = RequestMethod.GET)
-	public ModelAndView showStudList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/studList");
-
-			model.addObject("title", "Student List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
 	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
@@ -1508,7 +1419,7 @@ public class MasterController {
 
 				institute.setLastUpdatedDatetime(curDateTime);
 				institute.setMakerEnterDatetime(curDateTime);
-				institute.setMakerUserId(userObj.getUserId());// user id who is creating this record for ex principal is
+				institute.setMakerUserId(0);// user id who is creating this record for ex principal is
 																// user who creates
 				// iqac
 				// and hod to student
@@ -1657,8 +1568,6 @@ public class MasterController {
 				}
 				String instIdList = sb.toString();
 				instIdList = instIdList.substring(0, instIdList.length() - 1);
-				
-				
 
 				map.add("instIdList", instIdList);
 				map.add("aprUserId", userObj.getUserId());
@@ -1937,15 +1846,16 @@ public class MasterController {
 			System.err.println("Exce in save dept  " + e.getMessage());
 			e.printStackTrace();
 		}
-		
-		int isView=Integer.parseInt(request.getParameter("is_view"));
-		if(isView==1)
-		return "redirect:/hodList";
+
+		int isView = Integer.parseInt(request.getParameter("is_view"));
+		if (isView == 1)
+			return "redirect:/hodList";
 		else
 			return "redirect:/hodRegistration";
 
 	}
-	//showEditHod
+
+	// showEditHod
 	@RequestMapping(value = "/showEditHod", method = RequestMethod.POST)
 	public ModelAndView showEditHod(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -1963,8 +1873,7 @@ public class MasterController {
 			Hod editHod = rest.postForObject(Constants.url + "getHod", map, Hod.class);
 			model.addObject("hod", editHod);
 			model.addObject("hodId", hodId);
-			
-			
+
 			HttpSession session = request.getSession();
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -1974,12 +1883,12 @@ public class MasterController {
 			System.err.println("deptList " + deptList.toString());
 
 			model.addObject("deptList", deptList);
-			
-			
+
 			map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("type", 1);
-			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+					Quolification[].class);
 			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 			System.err.println("quolfList " + quolfList.toString());
 
@@ -1993,50 +1902,48 @@ public class MasterController {
 		return model;
 
 	}
-	
-	
+
 	// deleteInstitutes
-		@RequestMapping(value = "/deleteHod/{hodId}", method = RequestMethod.GET)
-		public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int hodId) {
+	@RequestMapping(value = "/deleteHod/{hodId}", method = RequestMethod.GET)
+	public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int hodId) {
 
-			try {
+		try {
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (hodId == 0) {
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (hodId == 0) {
 
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("hodIds");
-					System.out.println("id are" + instIds);
+				System.err.println("Multiple records delete ");
+				String[] instIds = request.getParameterValues("hodIds");
+				System.out.println("id are" + instIds);
 
-					StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new StringBuilder();
 
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
+				for (int i = 0; i < instIds.length; i++) {
+					sb = sb.append(instIds[i] + ",");
 
-					}
-					String hodIdList = sb.toString();
-					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
-
-					map.add("hodIdList", hodIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("hodIdList", hodId);
 				}
+				String hodIdList = sb.toString();
+				hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteHods", map, Info.class);
+				map.add("hodIdList", hodIdList);
+			} else {
 
-			} catch (Exception e) {
-
-				System.err.println(" Exception In deleteHod at Master Contr " + e.getMessage());
-
-				e.printStackTrace();
-
+				System.err.println("Single Record delete ");
+				map.add("hodIdList", hodId);
 			}
 
-			return "redirect:/hodList";
+			Info errMsg = rest.postForObject(Constants.url + "deleteHods", map, Info.class);
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteHod at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
 
 		}
 
+		return "redirect:/hodList";
+
+	}
 
 }

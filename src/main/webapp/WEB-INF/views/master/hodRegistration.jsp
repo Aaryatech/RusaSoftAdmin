@@ -44,6 +44,8 @@
 
 <!-- BEGIN BODY -->
 <body class=" " onload="hideText()">
+<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -222,7 +224,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" maxlength="10" class="form-control" id="hod_mob" value="${hod.contactNo}"
-																	name="hod_mob" pattern="^[1-9]{1}[0-9]{9}$"
+																	name="hod_mob" pattern="^[1-9]{1}[0-9]{9}$" onchange="checkUnique(this.value,1)"
 																	
 																	placeholder="Mobile Number" value="" required>
 															</div>
@@ -233,7 +235,7 @@
 																ID(Official) : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="hod_email" 
+																<input type="email" class="form-control" id="hod_email"  onchange="checkUnique(this.value,2)"
 																	name="hod_email" placeholder="abc@xyz.com" value="${hod.email}"
 																	required>
 															</div>
@@ -290,6 +292,66 @@
 
 	<script type="text/javascript">
 	
+	function checkUnique(inputValue,valueType){
+    	//alert(inputValue);
+    	
+    	var primaryKey=${hod.hodId};
+    	//alert("Primary key"+primaryKey);
+    	var isEdit=0;
+    	if(primaryKey>0){
+    		isEdit=1;
+    	}
+    	//alert("Is Edit " +isEdit);
+    	
+    	var valid=false;
+    	if(valueType==1){
+    		//alert("Its Mob no");
+    		if(inputValue.length==10){
+    			valid=true;
+    			//alert("Len 10")
+    		}else{
+    			//alert("Not 10");
+    		}
+    	}
+    	else if(valueType==2){
+    		//alert("Its Email " );
+    		
+    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    		if(inputValue.match(mailformat))
+    		{
+    			valid=true;
+    			//alert("Valid Email Id");
+    		}
+    		else
+    		{
+    			valid=false;
+    			//alert("InValid Email Id");
+    		}
+    	}
+    	if(valid==true)
+    	$.getJSON('${checkUniqueField}', {
+    		
+    		inputValue : inputValue,
+    		valueType  : valueType,
+    		primaryKey : primaryKey,
+    		isEdit     : isEdit,
+    		tableId : 2,
+
+			ajax : 'true',
+
+		}, function(data) {
+			
+		//	alert("Data  " +JSON.stringify(data));
+			if(data.error==true){
+				if(valueType==2){
+				alert("This email id already exist in system please enter unique");
+				}
+				else{
+					alert("This contact no  already exist in system please enter unique");
+				}
+			}
+		});
+    }
 	
 	function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 

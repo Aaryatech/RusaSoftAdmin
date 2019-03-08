@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body onload="showIsReg()"  class=" ">
+<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -113,7 +114,8 @@
 
 												<div>
 
-
+<p style="color:red; ">Notice : This form strictly need to be filled by Institutes coming under RUSA Maharashtra Only.
+You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 													<div class="col-xs-12">
 
@@ -143,7 +145,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Institute
-																Address :<span class="text-danger">*</span>
+																Address<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="inst_add"
@@ -156,7 +158,7 @@
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
 																style="text-align: left;">2F/12B Registration
-																(YES/No) : <span class="text-danger">*</span>
+																(YES/No)<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<c:choose>
@@ -204,7 +206,7 @@
 															</div>
 															<div id="abc">
 																<label class="control-label col-sm-3" for="page_order">Date
-																	of Registration :<span class="text-danger">*</span>
+																	of Registration <span class="text-danger">*</span>
 																</label>
 																
 																
@@ -218,7 +220,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Name :<span class="text-danger">*</span>
+																Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="trusty_name"
@@ -229,7 +231,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Trust/Society
-																Address :<span class="text-danger">*</span>
+																Address <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="trusty_add"
@@ -240,7 +242,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -252,7 +254,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-																Chairman/President Name(Board of Governance) :<span
+																Chairman/President Name(Board of Governance) <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -265,7 +267,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
@@ -277,7 +279,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email
-																ID(Official): :<span class="text-danger">*</span>
+																ID(Official) <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="pres_email"
@@ -291,7 +293,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-																Principal Name :<span class="text-danger">*</span>
+																Principal Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="princ_name"
@@ -302,13 +304,13 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
-																No :<span class="text-danger">*</span>
+																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="princ_contact"
 																	value="${editInst.contactNo}" name="princ_contact"
-																	placeholder="Contact No" required>
+																	placeholder="Contact No"  onchange="checkUnique(this.value,1)" required>
 															</div>
 															<label class="control-label col-sm-7" for="page_order"
 																style="color: red;">Note: OTP will be sent on
@@ -319,11 +321,11 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Email
-																ID(Official): :<span class="text-danger">*</span>
+																ID(Official) <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control"
-																	id="princ_email" value="${editInst.email}"
+																	id="princ_email" value="${editInst.email}" onchange="checkUnique(this.value,2)"
 																	name="princ_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
@@ -378,7 +380,7 @@
 
 	<!-- END CONTENT -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+<%-- 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -388,9 +390,9 @@
 					<h4 class="modal-title">Institute Details Confirmation</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 					<input type="hidden" class="form-control" id="pageId" name="pageId">
 
 
@@ -490,7 +492,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 
 	<script type="text/javascript">
@@ -622,6 +624,67 @@ function getCOPO() {
 
 			});
         });
+        
+        function checkUnique(inputValue,valueType){
+        	//alert(inputValue);
+        	
+        	var primaryKey=${editInst.instituteId};
+        	//alert("Primary key"+primaryKey);
+        	var isEdit=0;
+        	if(primaryKey>0){
+        		isEdit=1;
+        	}
+        	//alert("Is Edit " +isEdit);
+        	
+        	var valid=false;
+        	if(valueType==1){
+        		//alert("Its Mob no");
+        		if(inputValue.length==10){
+        			valid=true;
+        			//alert("Len 10")
+        		}else{
+        			//alert("Not 10");
+        		}
+        	}
+        	else if(valueType==2){
+        		//alert("Its Email " );
+        		
+        		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        		if(inputValue.match(mailformat))
+        		{
+        			valid=true;
+        			//alert("Valid Email Id");
+        		}
+        		else
+        		{
+        			valid=false;
+        			//alert("InValid Email Id");
+        		}
+        	}
+        	if(valid==true)
+        	$.getJSON('${checkUniqueField}', {
+        		
+        		inputValue : inputValue,
+        		valueType  : valueType,
+        		primaryKey : primaryKey,
+        		isEdit     : isEdit,
+        		tableId : 1,
+
+				ajax : 'true',
+
+			}, function(data) {
+				
+			//	alert("Data  " +JSON.stringify(data));
+				if(data.error==true){
+					if(valueType==2){
+					alert("This email id already exist in system please enter unique");
+					}
+					else{
+						alert("This contact no  already exist in system please enter unique");
+					}
+				}
+			});
+        }
     </script> 
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
