@@ -25,13 +25,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.model.AcademicYear;
+import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GetInstituteList;
+import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.Student;
 
 @Controller
 @Scope("session")
@@ -170,6 +174,8 @@ public class LibraryController {
 
 	}
 	
+	//////////////////////////*****************Librarian*************//////////////////
+	
 	@RequestMapping(value = "/showRegLib", method = RequestMethod.GET)
 	public ModelAndView showRegLib(HttpServletRequest request, HttpServletResponse response) {
 
@@ -213,6 +219,9 @@ public class LibraryController {
 			HttpSession session = request.getSession();
 			
 			int inst_id =(int)session.getAttribute("instituteId");
+			int maker_id =(int)session.getAttribute("userId");
+			
+			
 			try {
 				Librarian lib=new Librarian();
 				RestTemplate restTemplate = new RestTemplate();
@@ -245,7 +254,7 @@ public class LibraryController {
 				lib.setQualificationId(lib_quolf);
 				lib.setRealivingDate(relieving_date);
 				lib.setJoiningDate(lib_joiningDate);
-				lib.setMakerUserId(1);
+				lib.setMakerUserId(maker_id);
 				
 				lib.setInstituteId(inst_id);
 				lib.setDelStatus(1);
@@ -289,7 +298,7 @@ public class LibraryController {
 				lib1.setQualificationId(lib_quolf);
 				lib1.setRealivingDate(relieving_date);
 				lib1.setJoiningDate(lib_joiningDate);
-				lib1.setMakerUserId(1);
+				lib1.setMakerUserId(maker_id);
 				
 				lib1.setInstituteId(inst_id);
 				
@@ -314,33 +323,6 @@ public class LibraryController {
 			}
 				
 				
-				/*
-				 * else {
-				 * 
-				 * //map.add("hodId", hodId); // getInstitute Hod hod =
-				 * rest.postForObject(Constants.url + "getHod", map, Hod.class); String deptName
-				 * = request.getParameter("dept_name"); DateFormat dateFormat = new
-				 * SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar cal =
-				 * Calendar.getInstance();
-				 * 
-				 * String curDateTime = dateFormat.format(cal.getTime());
-				 * 
-				 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-				 * 
-				 * String curDate = dateFormatStr.format(new Date());
-				 * 
-				 * hod.setContactNo(request.getParameter("hod_mob"));
-				 * hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
-				 * hod.setEditBy(1);//session hod.setEmail(request.getParameter("hod_email"));
-				 * 
-				 * hod.setHighestQualificationId(Integer.parseInt(request.getParameter(
-				 * "hod_quolf"))); hod.setHodName(request.getParameter("hod_name"));
-				 * hod.setInstituteId(1);//from sess hod.setUpdateDatetime(curDateTime);
-				 * 
-				 * Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
-				 * 
-				 * }
-				 */
 			} catch (Exception e) {
 				System.err.println("Exce in save lib  " + e.getMessage());
 				e.printStackTrace();
@@ -483,6 +465,309 @@ public class LibraryController {
 
 		}
 
-	
+	///////////////////////////////****Student************///////////////////
+		
+		@RequestMapping(value = "/showRegStud", method = RequestMethod.GET)
+		public ModelAndView showRegStud(HttpServletRequest request, HttpServletResponse response) {
 
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("master/studReg");
+
+				model.addObject("title", "Student Registration");
+
+				Student editStudent =new Student();
+				model.addObject("editStudent", editStudent);
+				
+				
+				RestTemplate restTemplate = new RestTemplate();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+				AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("acaYearList " + acaYearList.toString());
+
+				model.addObject("acaYearList", acaYearList);
+				
+				
+				 restTemplate = new RestTemplate();
+		        map = new LinkedMultiValueMap<String, Object>();
+				HttpSession session = request.getSession();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int instId=userObj.getGetData().getUserInstituteId();
+				map.add("instId",instId );
+				System.err.println("deptList in showRegStud" + instId);
+				
+				Dept[] instArray = restTemplate.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList in showRegStud" + deptList.toString());
+
+				model.addObject("deptList", deptList);
+				
+
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+
+		
+		
+		@RequestMapping(value = "/insertStudent", method = RequestMethod.POST)
+		public String insertStudent(HttpServletRequest request, HttpServletResponse response) {
+			System.err.println("in insert insertStudent");
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			
+			int inst_id =(int)session.getAttribute("instituteId");
+			int maker_id =(int)session.getAttribute("userId");
+			try {
+				Student lib=new Student();
+				RestTemplate restTemplate = new RestTemplate();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				int student_id = Integer.parseInt(request.getParameter("student_id"));
+				System.out.println("student_id"+"student_id");
+				
+				String student_name = request.getParameter("student_name");
+				String academic_year = request.getParameter("academic_year");
+
+				int stud_branch = Integer.parseInt(request.getParameter("stud_branch"));
+
+				String id_number = request.getParameter("id_number");
+
+				String stud_contact_no = request.getParameter("stud_contact_no");
+				String student_email = request.getParameter("student_email");
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+				
+			
+				if (student_id == 0) {
+					
+					System.out.println("inst id is"+inst_id);
+					
+			
+				lib.setStudentName(student_name);
+				lib.setAcadamicYear(academic_year);
+				lib.setDeptId(stud_branch);
+				lib.setContactNo(stud_contact_no);
+				lib.setEmail(student_email);
+				lib.setIdNo(id_number);
+				lib.setMakerUserId(maker_id);
+				
+				lib.setMakerEnterDatetime(curDateTime);
+				
+				
+				lib.setInstituteId(inst_id);
+				lib.setDelStatus(1);
+				lib.setExInt1(1);
+				lib.setExInt2(1);
+				lib.setExVar1("NA");
+				lib.setExVar2("NA");
+				
+			
+				Student editInst = rest.postForObject(Constants.url + "saveStudent", lib, Student.class);
+
+			} else {
+				
+				System.out.println("in edit");
+			
+				
+				map.add("studId", student_id); 
+				Student lib1 = rest.postForObject(Constants.url + "getStudentByStudentId", map, Student.class); 
+			
+				
+				lib1.setStudentName(student_name);
+				lib1.setAcadamicYear(academic_year);
+				lib1.setDeptId(stud_branch);
+				lib1.setContactNo(stud_contact_no);
+				lib1.setEmail(student_email);
+				lib1.setIdNo(id_number);
+				lib1.setMakerUserId(maker_id);
+				
+				lib1.setInstituteId(inst_id);
+				
+			
+			  Student editInst = rest.postForObject(Constants.url + "saveStudent", lib1, Student.class);
+
+				
+				
+			}
+				
+				
+			} catch (Exception e) {
+				System.err.println("Exce in save lib  " + e.getMessage());
+				e.printStackTrace();
+			}
+			
+			int isView=Integer.parseInt(request.getParameter("is_view"));
+			if(isView==1)
+				return "redirect:/showStudList";
+			else
+				return "redirect:/showRegStud";
+
+		
+
+		}
+		
+
+		
+		@RequestMapping(value = "/showStudList", method = RequestMethod.GET)
+		public ModelAndView showStudList(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("master/studList");
+
+				model.addObject("title", "Student List");
+				
+           HttpSession session = request.getSession();
+				
+				int inst_id =(int)session.getAttribute("instituteId");
+				System.out.println("Student list inst id::::"+inst_id);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", inst_id);
+                
+				GetStudentDetail[] instArray = rest.postForObject(Constants.url + "getAllStudentByInstituteId",map,
+						GetStudentDetail[].class);
+				List<GetStudentDetail> StudList = new ArrayList<>(Arrays.asList(instArray));
+				
+				System.out.println("Student list is"+StudList.toString());
+
+				model.addObject("StudList", StudList);
+				
+			} catch (Exception e) {
+
+				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+		
+		
+		@RequestMapping(value = "/showEditStudent", method = RequestMethod.POST)
+		public ModelAndView showEditStudent(HttpServletRequest request, HttpServletResponse response) {
+			ModelAndView model = null;
+
+			try {
+
+				model = new ModelAndView("master/studReg");
+
+				int student_id = Integer.parseInt(request.getParameter("edit_stud_id"));
+				System.out.println("Student id is"+student_id);
+
+				model.addObject("title", " Edit Student  Registration");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+			
+				map.add("studId", student_id); 
+				Student editStudent = rest.postForObject(Constants.url + "getStudentByStudentId", map, Student.class); 
+				System.out.println("librarian is"+editStudent.toString());
+			
+			
+				model.addObject("editStudent", editStudent);
+				model.addObject("student_id",student_id);
+				
+				RestTemplate restTemplate = new RestTemplate();
+			map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+				AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("acaYearList " + acaYearList.toString());
+
+				model.addObject("acaYearList", acaYearList);
+			
+				
+				
+				 restTemplate = new RestTemplate();
+		        map = new LinkedMultiValueMap<String, Object>();
+				HttpSession session = request.getSession();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = restTemplate.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+				
+
+			} catch (Exception e) {
+				System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			return model;
+
+		}
+		
+		
+
+		@RequestMapping(value = "/deleteStudents/{studId}", method = RequestMethod.GET)
+		public String deleteStudents(HttpServletRequest request, HttpServletResponse response, @PathVariable int studId) {
+
+			try {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (studId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] studIds = request.getParameterValues("studIds");
+					System.out.println("id are" + studIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < studIds.length; i++) {
+						sb = sb.append(studIds[i] + ",");
+
+					}
+					String studIdList = sb.toString();
+					studIdList = studIdList.substring(0, studIdList.length() - 1);
+
+					map.add("studIdList", studIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("studIdList", studId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteStudents", map, Info.class);
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return "redirect:/showStudList";
+
+		}
+
+
+		
 }
