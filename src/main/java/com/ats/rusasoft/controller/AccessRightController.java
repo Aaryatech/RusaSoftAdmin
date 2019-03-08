@@ -486,7 +486,7 @@ public class AccessRightController {
 			LoginResponse userDetail =  (LoginResponse) session.getAttribute("userObj");
 			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("instituteId", userDetail.getGetData().getUserInstituteId());
+			map.add("instituteId", userDetail.getExInt2());
 			
 			UserList[] user = rest.postForObject(Constants.url + "/getAllUserList", map, UserList[].class);
 			 List<UserList> userList = new ArrayList<>(Arrays.asList(user));

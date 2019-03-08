@@ -25,12 +25,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.UserLogin;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
 
@@ -263,51 +265,43 @@ public class HomeController {
 					System.err.println("Institue Id:"+instituteId);
 					session.setAttribute("instituteId", instituteId);
 					
-					int userId = userObj.getGetData().getUserDetailId();
+					int userId = userObj.getUserId();
 					System.err.println("User Id:"+userId);
 					session.setAttribute("userId", userId);
-					
-					
-				/*	
-					session.setAttribute("subUserName", userObj.getGetData().getSubUserName());
-					session.setAttribute("subUserContactNum", userObj.getGetData().getUserConNumber());
-					session.setAttribute("subUserDesnId", userObj.getGetData().getUserDesnId());
-					session.setAttribute("subUserId", userObj.getGetData().getUserDetailId());
-					session.setAttribute("qualId", userObj.getGetData().getUserQualId());
-					session.setAttribute("instituteId", userObj.getGetData().getUserInstituteId());
-					session.setAttribute("qualId", userObj.getGetData().getDeptId());*/
-					
-					loginResponseMessage="Login Successful";
-					mav.addObject("loginResponseMessage",loginResponseMessage);
-					
-					
+				 
+					 
 					map =new LinkedMultiValueMap<String, Object>();
 					int typeId=userObj.getUserType();
 					map.add("typeId", typeId);
 					
-					//GetUserDetail  userDataResponse= restTemplate.postForObject(Constants.url+"getUserDetailByTypeId",map,GetUserDetail.class);
+					 
+					 map =new LinkedMultiValueMap<String, Object>(); 
+					map.add("userId", userId);
+					System.out.println("Before web service");
+					try {
+					 ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
+					 };
+					ResponseEntity<List<ModuleJson>> responseEntity = restTemplate.exchange(Constants.url + "getRoleJson",
+							HttpMethod.POST, new HttpEntity<>(map), typeRef);
 					
+					 List<ModuleJson> newModuleList = responseEntity.getBody();
 					
-					
-					//System.out.println("JSON Response Objet " + userDataResponse.toString());
+					 //System.err.println("new Module List " +newModuleList.toString());
+					 
+						session.setAttribute("newModuleList", newModuleList);
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
 				
 				
 				} 
-				else {
-
-					
-					mav = new ModelAndView("login");
-					
-					loginResponseMessage="Invalid Login Credentials";
-					mav.addObject("loginResponseMessage",loginResponseMessage);
-					
-					System.out.println("Invalid login credentials");
-
-				}
+				 
 
 			}
 		} catch (Exception e) {
-			System.out.println("HomeController Login API Excep:  " + e.getMessage());
+			e.printStackTrace();
+			mav = new ModelAndView("login");
 		}
 
 		return mav;
@@ -315,6 +309,25 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value = "/setSubModId", method = RequestMethod.GET)
+	public @ResponseBody void setSubModId(HttpServletRequest request,
+		HttpServletResponse response) {
+		int subModId=Integer.parseInt(request.getParameter("subModId"));
+		int modId=Integer.parseInt(request.getParameter("modId"));
+		 System.out.println("subModId " + subModId);
+		System.out.println("modId " + modId); 
+		HttpSession session = request.getSession();
+		session.setAttribute("sessionModuleId", modId);
+		session.setAttribute("sessionSubModuleId",subModId);
+		 session.removeAttribute( "exportExcelList" );
+	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		System.out.println("User Logout");
+
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 }

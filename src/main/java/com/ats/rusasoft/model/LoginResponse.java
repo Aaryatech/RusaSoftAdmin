@@ -17,8 +17,8 @@ public class LoginResponse {
 		private int isBlock;
 		private int regPrimaryKey;
 		private int roleId;
-		private int exInt1;
-    
+		private int exInt1; //is enroll
+		private int exInt2; //instituteId
 		GetUserDetail getData;
 
 		public int getUserId() {
@@ -94,16 +94,19 @@ public class LoginResponse {
 			this.exInt1 = exInt1;
 		}
 
+		public int getExInt2() {
+			return exInt2;
+		}
+
+		public void setExInt2(int exInt2) {
+			this.exInt2 = exInt2;
+		}
+
 		@Override
 		public String toString() {
 			return "LoginResponse [userId=" + userId + ", userType=" + userType + ", userName=" + userName + ", pass="
 					+ pass + ", isBlock=" + isBlock + ", regPrimaryKey=" + regPrimaryKey + ", roleId=" + roleId
-					+ ", exInt1=" + exInt1 + ", getData=" + getData + ", getUserId()=" + getUserId()
-					+ ", getUserType()=" + getUserType() + ", getUserName()=" + getUserName() + ", getPass()="
-					+ getPass() + ", getIsBlock()=" + getIsBlock() + ", getRegPrimaryKey()=" + getRegPrimaryKey()
-					+ ", getRoleId()=" + getRoleId() + ", getGetData()=" + getGetData() + ", getExInt1()=" + getExInt1()
-					+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-					+ "]";
+					+ ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", getData=" + getData + "]";
 		}
 
 	
