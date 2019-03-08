@@ -31,18 +31,15 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
-				<%-- <div class='col-xs-12'>
-					<div class="page-title">
+				<!--   <div class='col-xs-12'>
+        <div class="page-title">
 
-						<div class="pull-left">
-							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
-							<!-- PAGE HEADING TAG - END -->
-						</div>
-
-
-					</div>
-				</div> --%>
+            <div class="pull-left">
+                PAGE HEADING TAG - START<h1 class="title">HOD List</h1>PAGE HEADING TAG - END                            </div>
+			 
+                                
+        </div>
+    </div> -->
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -51,110 +48,95 @@
 				<div class="col-lg-12">
 					<section class="box ">
 						<header class="panel_header">
-							<h2 class="title pull-left">${title}</h2>
+							<h2 class="title pull-left">Account Officer List</h2>
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showRegAcc"><button
-										type="button" class="btn btn-success">Register Account Officer</button></a>
-								<a class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-success">Account Officer
+										Registration</button></a> <a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
 							</div>
 
 						</header>
-						<div class="content-body">
-							<div class="row">
-								<c:if test="${sessionScope.successMsg!=null}">
-									<div class="col-lg-12">
-										<div class="alert alert-success alert-dismissible fade in">
-											<button type="button" class="close" data-dismiss="alert"
-												aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
-											<strong>Success : </strong> ${sessionScope.successMsg}
+						<form action="${pageContext.request.contextPath}/deleteHod/0"
+							method="get" id="insListForm">
+							<div class="content-body">
+								<div class="row">
+									<c:if test="${sessionScope.successMsg!=null}">
+										<div class="col-lg-12">
+											<div class="alert alert-success alert-dismissible fade in">
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<strong>Success : </strong> ${sessionScope.successMsg}
+											</div>
 										</div>
-									</div>
-								</c:if>
+									</c:if>
 
-								<div class="col-xs-12">
+									<div class="col-xs-12">
 
 
-									<table id="example-1"
-										class="table table-striped dt-responsive display">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th> Name</th>
-												<th>Qualification</th>
-											
-												<th>Joining Date</th>
-												<th>Contact No</th>
-												<th>Email</th>
-												<th width="10%">Action</th>
-											</tr>
-										</thead>
-
-										<tfoot>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th> Name</th>
-												<th>Qualification</th>
-											
-												<th>Joining Date</th>
-												<th>Contact No</th>
-												<th>Email</th>
-												<th width="10%">Action</th>
-											</tr>
-										</tfoot>
-
-										<tbody>
-											<%-- <c:forEach items="${getPagesModuleList}"
-												var="getPagesModuleList" varStatus="count">
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
 												<tr>
-													<td>${count.index+1}</td>
-													<td>${getPagesModuleList.pageName}
-														(${getPagesModuleList.secctionName})</td>
+													<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
+															<th>Sr No</th>
+													<th>Name</th>
+													<th>Qualification</th>
 
-													<td>${getPagesModuleList.content}</td>
-													<td><a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
-															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip"></span></a> |
-														<a
-														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.primaryKeyId}"
-														onClick="return confirm('Are you sure want to delete this record');"
-														rel="tooltip" data-color-class="danger"
-														data-animate=" animated fadeIn " data-toggle="tooltip"
-														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a></td>
+													<th>Joining Date</th>
+													<th>Contact No</th>
+													<th>Email</th>
+													<th width="10%">Action</th>
 												</tr>
-											</c:forEach> --%>
-											<%-- <tr>
-											<td>1</td>
-											<td>ABC</td>
-											<td>Ph.D.</td>
-												<td>Information Technology</td>
-												<td>1-08-2018</td>
-												<td>8956231213</td>
-												<td>xyz@gmail.com</td>
-												<td> <a
-											href="${pageContext.request.contextPath}/showFacultyDetails"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Faculty Details"><span
-												class="glyphicon glyphicon-list"></span></a></td>
-											
-											
-											
-											
-											</tr> --%>
-										</tbody>
-									</table>
+											</thead>
+
+
+											<tbody>
+												<c:forEach items="${accOffList}" var="hod" varStatus="count">
+													<tr>
+														<td><input type="checkbox" class="chk" name="hodIds"
+															id="hodIds${count.index+1}" value="${hod.officerId}" /></td>
+														<td>${count.index+1}</td>
+														<td>${hod.accOfficerName}</td>
+														<td>${hod.qualificationName}</td>
+															<td>${hod.joiningDate}</td>
+														<td>${hod.contactNo}</td>
+														<td>${hod.email}</td>
+														<td><a onclick="showEditHod(${hod.officerId})" href="#"><span
+																class="glyphicon glyphicon-edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>
+															| <a
+															href="${pageContext.request.contextPath}/deleteHod/${hod.officerId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+													</tr>
+												</c:forEach>
+
+											</tbody>
+										</table>
+										<input type="submit" class="btn btn-primary" value="Delete"
+											id="deleteId"
+											onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+											style="align-content: center; width: 113px; margin-left: 40px;">
+
+										<input type="hidden" id="edit_hod_id" name="edit_hod_id"
+											value="0">
 
 
 
-
+									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 					</section>
 				</div>
 
@@ -178,17 +160,44 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
-		function clearSessionAttribute() {
+function clearSessionAttribute() {
+	 
+	 
 
-			$.getJSON('${clearSessionAttribute}', {
+	$.getJSON('${clearSessionAttribute}', {
+  
+		ajax : 'true',
 
-				ajax : 'true',
+	}, function(data) { 
+		 
+	
+	});
 
-			}, function(data) {
+}
 
-			});
+function selectedInst(source) {
 
-		}
-	</script>
+	checkboxes = document.getElementsByName('hodIds');
+
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
+
+	}
+
+}
+
+
+function showEditHod(hodId){
+	document.getElementById("edit_hod_id").value=hodId;//create this 
+	var form=document.getElementById("insListForm");
+    form.setAttribute("method", "post");
+
+	form.action=("showEditHod");
+	form.submit();
+	
+}
+ </script>
+
+
 </body>
 </html>

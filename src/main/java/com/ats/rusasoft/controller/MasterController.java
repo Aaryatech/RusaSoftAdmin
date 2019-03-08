@@ -29,6 +29,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.AccOfficer;
 import com.ats.rusasoft.model.Dept;
+import com.ats.rusasoft.model.GetAccOfficer;
 import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
@@ -641,6 +642,15 @@ public class MasterController {
 			AccOfficer accOff=new AccOfficer();
 			
 			model.addObject("accOff", accOff);
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("type", 1);
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+					Quolification[].class);
+			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("quolfList " + quolfList.toString());
+
+			model.addObject("quolfList", quolfList);
 			
 
 		} catch (Exception e) {
@@ -662,6 +672,18 @@ public class MasterController {
 		try {
 
 			model = new ModelAndView("master/accList");
+			
+			HttpSession session = request.getSession();
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map.add("instId", userObj.getGetData().getUserInstituteId());
+			GetAccOfficer[] accOffArray = rest.postForObject(Constants.url + "getAccOffList", map, GetAccOfficer[].class);
+			List<GetAccOfficer> accOffList = new ArrayList<>(Arrays.asList(accOffArray));
+			System.err.println("accOffList " + accOffList.toString());
+
+			model.addObject("accOffList", accOffList);
+			
 
 			model.addObject("title", "Account Officer List");
 
@@ -1945,5 +1967,101 @@ public class MasterController {
 		return "redirect:/hodList";
 
 	}
+	// insertAccOff fdf
+		@RequestMapping(value = "/insertAccOff", method = RequestMethod.POST)
+		public String insertAccOff(HttpServletRequest request, HttpServletResponse response) {
+			System.err.println("in insert insertAccOff");
+			ModelAndView model = null;
+			try {
+
+				RestTemplate restTemplate = new RestTemplate();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				int officerId = Integer.parseInt(request.getParameter("acc_off_id"));
+				HttpSession session = request.getSession();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				System.err.println("officerId id  " + officerId);
+				if (officerId == 0) {
+
+					Hod hod = new Hod();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+					
+					AccOfficer acOff=new AccOfficer();
+					
+					acOff.setAccOfficerName(request.getParameter("acc_off_name"));
+					acOff.setContactNo(request.getParameter("acc_off_mob"));
+					acOff.setDelStatus(1);
+					acOff.setEmail(request.getParameter("acc_off_email"));
+					acOff.setExInt1(1);
+					acOff.setExVar1("Na");
+					acOff.setInstituteId(userObj.getGetData().getUserInstituteId());
+					acOff.setIsActive(1);
+					acOff.setJoiningDate(DateConvertor.convertToYMD(request.getParameter("acc_off_joinDate")));
+					acOff.setMakerEnterDatetime(curDateTime);
+					acOff.setMakerUserId(userObj.getUserId());
+					acOff.setOfficerId(officerId);
+					acOff.setQualificationId(Integer.parseInt(request.getParameter("acc_quolf")));
+					int isReg = Integer.parseInt(request.getParameter("is_registration"));
+
+					if(isReg==0) {
+					acOff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
+					
+					}else {
+						acOff.setRealivingDate(null);
+					}
+
+					AccOfficer editInst = rest.postForObject(Constants.url + "saveAccOfficer", acOff, AccOfficer.class);
+
+				} else {
+
+					map.add("officerId", officerId);
+					// getInstitute
+					Hod hod = rest.postForObject(Constants.url + "getAccOfficer", map, Hod.class);
+					String deptName = request.getParameter("dept_name");
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					hod.setContactNo(request.getParameter("hod_mob"));
+					hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+					hod.setEditBy(userObj.getUserId());// session
+					hod.setEmail(request.getParameter("hod_email"));
+
+					hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
+					hod.setHodName(request.getParameter("hod_name"));
+					hod.setInstituteId(userObj.getGetData().getUserInstituteId());// from sess
+					hod.setUpdateDatetime(curDateTime);
+
+					Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+
+				}
+
+			} catch (Exception e) {
+				System.err.println("Exce in save dept  " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				return "redirect:/hodList";
+			else
+				return "redirect:/hodRegistration";
+
+		}
 
 }

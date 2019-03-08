@@ -635,7 +635,6 @@ function getCOPO() {
         		isEdit=1;
         	}
         	//alert("Is Edit " +isEdit);
-        	
         	var valid=false;
         	if(valueType==1){
         		//alert("Its Mob no");
@@ -643,7 +642,7 @@ function getCOPO() {
         			valid=true;
         			//alert("Len 10")
         		}else{
-        			//alert("Not 10");
+        			valid=false;
         		}
         	}
         	else if(valueType==2){
@@ -677,10 +676,17 @@ function getCOPO() {
 			//	alert("Data  " +JSON.stringify(data));
 				if(data.error==true){
 					if(valueType==2){
+						document.getElementById("princ_email").value="";
+
 					alert("This email id already exist in system please enter unique");
+					
 					}
 					else{
+						document.getElementById("princ_contact").value="";
+
 						alert("This contact no  already exist in system please enter unique");
+						
+
 					}
 				}
 			});

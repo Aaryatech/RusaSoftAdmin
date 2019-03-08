@@ -15,7 +15,7 @@ public class AccOfficer {
 	private String joiningDate; 
 	private String realivingDate; 
 	private int makerUserId; 
-	private int makerEnterDatetime ;
+	private String makerEnterDatetime ;
  	
  	private int delStatus;
 	private int isActive;
@@ -77,10 +77,10 @@ public class AccOfficer {
 	public void setMakerUserId(int makerUserId) {
 		this.makerUserId = makerUserId;
 	}
-	public int getMakerEnterDatetime() {
+	public String getMakerEnterDatetime() {
 		return makerEnterDatetime;
 	}
-	public void setMakerEnterDatetime(int makerEnterDatetime) {
+	public void setMakerEnterDatetime(String makerEnterDatetime) {
 		this.makerEnterDatetime = makerEnterDatetime;
 	}
 	public int getDelStatus() {
