@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -96,8 +97,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertStudent"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -122,8 +123,9 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Student Name"
+																<input type="text" class="form-control" id="student_name"
+																value="${editStudent.studentName}"
+																	name="student_name" placeholder="Student Name"
 																	value="${page.pageName}">
 															</div>
 														</div>
@@ -134,40 +136,70 @@
 													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-2">
-													<select id="salutation" name="salutation"
-														class="form-control" required>
-														<option value="0">2018-2019</option>
-														<option value="1">2017-2018</option>
-														<option value="2">2016-2017</option>
-														<option value="3">2015-2016</option>
+													<select id="academic_year" name="academic_year" class="form-control" required>
+																<%-- <c:forEach items="${acaYearList}" var="acaYear">
+																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
+																	
+																	</c:forEach> --%>
+																	
+																		<c:forEach items="${acaYearList}" var="acaYearList">
+																		<c:choose>
+																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
+																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
 
 													</select>
                                        </div>
 										</div>		
+													
+													
+													
+													
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">
+													Department  <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-2">
+													<select id="stud_branch" name="stud_branch" class="form-control" required>
 														
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Branch
-																 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Branch" required>
-															</div>
-														</div>
-														
+																	
+																		<c:forEach items="${deptList}" var="dept">
+																		<c:choose>
+																			<c:when test="${dept.deptId==editStudent.deptId}">
+																			<option selected value="${dept.deptId}">${dept.deptName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+																			<option value="${dept.deptId}">${dept.deptName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+													</select>
+                                       </div>
+										</div>		
 															
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">ID No.
 																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="ID Number" required>
+																<input type="text" 
+																	maxlength="10" class="form-control" id="id_number"
+																	value="${editStudent.idNo}"
+																	name="id_number" placeholder="ID Number" required>
 															</div>
 														</div>
 
@@ -177,8 +209,9 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Mobile No" required>
+																	maxlength="10" class="form-control" id="stud_contact_no"
+																	value="${editStudent.contactNo}" onchange="checkUnique(this.value,1)"
+																	name="stud_contact_no" placeholder="Mobile No" required>
 															</div>
 														</div>
 
@@ -187,8 +220,9 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="abc@xyz.com" required>
+																<input type="email" class="form-control" id="student_email"
+																value="${editStudent.email}" onchange="checkUnique(this.value,2)"
+																	name="student_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
 
@@ -198,12 +232,14 @@
 
 												</div>
 
-
+                                              <input type="hidden" id="student_id" name="student_id" value="${editStudent.studentId}" >
+                                             	<input type="hidden" id="is_view" name="is_view" value="0">
+												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Add</button>
-																	<a href="${pageContext.request.contextPath}/showStudList"><button
-										                              type="button" class="btn btn-primary">Save & Next</button></a>
+																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -233,7 +269,90 @@
 	<!-- END CONTENT -->
 
 
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+function checkUnique(inputValue,valueType){
+	//alert("hii");
+	
+	var primaryKey=${editStudent.studentId};
+	//alert("Primary key"+primaryKey);
+	var isEdit=0;
+	if(primaryKey>0){
+		isEdit=1;
+	}
+	//alert("Is Edit " +isEdit);
+	
+	var valid=false;
+	if(valueType==1){
+		//alert("Its Mob no");
+		if(inputValue.length==10){
+			valid=true;
+			//alert("Len 10")
+		}else{
+			//alert("Not 10");
+		}
+	}
+	else if(valueType==2){
+		//alert("Its Email " );
+		
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(inputValue.match(mailformat))
+		{
+			valid=true;
+			//alert("Valid Email Id");
+		}
+		else
+		{
+			valid=false;
+			//alert("InValid Email Id");
+		}
+	}
+	if(valid==true)
+	$.getJSON('${checkUniqueField}', {
+		
+		inputValue : inputValue,
+		valueType  : valueType,
+		primaryKey : primaryKey,
+		isEdit     : isEdit,
+		tableId : 3,
+
+		ajax : 'true',
+
+	}, function(data) {
+		
+	//	alert("Data  " +JSON.stringify(data));
+		if(data.error==true){
+			if(valueType==2){
+			
+			
+			alert("This email id already exist in system please enter unique");
+			$('#student_email').val('');
+			//document.getElementById("stud_contact_no").value=" ";
+			
+			}
+			else{
+				
+				
+				alert("This contact no  already exist in system please enter unique");
+				$('#stud_contact_no').val('');
+				//document.getElementById("student_email").value=" ";
+			}
+		}
+	});
+}
+
+</script>
 
 
 

@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -139,7 +140,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	name="lib_con_num" placeholder="Mobile No" required>
+																	 name="lib_con_num" placeholder="Mobile No" onchange="checkUnique(this.value,1)" required>
 															</div>
 														</div>
 
@@ -149,7 +150,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="librarian_email" 	value="${editInst.email}"
-																	name="librarian_email" placeholder="abc@xyz.com" required>
+																	 name="librarian_email" placeholder="abc@xyz.com" onchange="checkUnique(this.value,2)" required>
 															</div>
 														</div>
 
@@ -253,6 +254,77 @@ function submit_f(view){
 		form.submit(); */
 		
 	}
+	
+function checkUnique(inputValue,valueType){
+	//alert(inputValue);
+	
+	var primaryKey=${editInst.librarianId};
+	//alert("Primary key"+primaryKey);
+	var isEdit=0;
+	if(primaryKey>0){
+		isEdit=1;
+	}
+	//alert("Is Edit " +isEdit);
+	
+	var valid=false;
+	if(valueType==1){
+		//alert("Its Mob no");
+		if(inputValue.length==10){
+			valid=true;
+			//alert("Len 10")
+		}else{
+			//alert("Not 10");
+		}
+	}
+	else if(valueType==2){
+		//alert("Its Email " );
+		
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(inputValue.match(mailformat))
+		{
+			valid=true;
+			//alert("Valid Email Id");
+		}
+		else
+		{
+			valid=false;
+			//alert("InValid Email Id");
+		}
+	}
+	if(valid==true)
+	$.getJSON('${checkUniqueField}', {
+		
+		inputValue : inputValue,
+		valueType  : valueType,
+		primaryKey : primaryKey,
+		isEdit     : isEdit,
+		tableId : 4,
+
+		ajax : 'true',
+
+	}, function(data) {
+		
+	//	alert("Data  " +JSON.stringify(data));
+		if(data.error==true){
+			if(valueType==2){
+			
+			
+			alert("This email id already exist in system please enter unique");
+			$('#librarian_email').val('');
+			//document.getElementById("stud_contact_no").value=" ";
+			
+			}
+			else{
+				
+				
+				alert("This contact no  already exist in system please enter unique");
+				$('#lib_con_num').val('');
+				//document.getElementById("student_email").value=" ";
+			}
+		}
+	});
+}
+
 
 </script>
 
