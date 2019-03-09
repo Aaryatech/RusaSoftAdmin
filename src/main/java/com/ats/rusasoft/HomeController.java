@@ -35,6 +35,7 @@ import com.ats.rusasoft.model.UserLogin;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
+import com.ats.rusasoft.model.Institute;
 
 /**
  * Handles requests for the application home page.
@@ -110,6 +111,9 @@ public class HomeController {
 
 			model = new ModelAndView("instituteRegistration");
 
+			Institute editInst = new Institute();
+
+			model.addObject("editInst", editInst);
 		} catch (Exception e) {
 
 			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
