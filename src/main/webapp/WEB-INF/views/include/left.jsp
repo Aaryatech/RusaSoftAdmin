@@ -23,14 +23,63 @@
 					<p class="profile-title">Address</p>
 				</div>
 			</div>
-			<!-- USER INFO - END -->
-			<%-- <ul class='wraplist'>
+			<!-- USER INFO - END --> 
+			<ul class='wraplist'>
 				<li class='menusection'>Main</li>
 				<li class="open"><a href="index.html"> <i
 						class="fa fa-dashboard"></i> <span class="title">Dashboard</span>
 				</a></li>
 
-				<li class=""><a href="javascript:;"> <i
+
+
+				<c:forEach items="${sessionScope.newModuleList}" var="allModuleList"
+					varStatus="count">
+
+					<c:choose>
+						<c:when
+							test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
+							<li class="open">
+						</c:when>
+						<c:otherwise>
+							<li class="">
+						</c:otherwise>
+					</c:choose>
+					<a href="javascript:;"> <i class="fa fa fa-columns"></i> <span
+						class="title">${allModuleList.moduleName}</span> <c:choose>
+							<c:when
+								test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
+								<span class="arrow open"></span>
+							</c:when>
+							<c:otherwise>
+								<span class="arrow "></span>
+							</c:otherwise>
+						</c:choose>
+
+					</a>
+					<ul class="sub-menu">
+						<c:forEach items="${allModuleList.subModuleJsonList}"
+							var="allSubModuleList">
+							<li><c:choose>
+									<c:when
+										test="${sessionScope.sessionSubModuleId==allSubModuleList.subModuleId}">
+										<a class="active"
+											href="${pageContext.request.contextPath}/${allSubModuleList.subModuleMapping}"
+											onclick="selectSubMod(${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"> ${allSubModuleList.subModulName}</a>
+									</c:when>
+									<c:otherwise>
+										<a class=""
+											href="${pageContext.request.contextPath}/${allSubModuleList.subModuleMapping}"
+											onclick="selectSubMod(${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"> ${allSubModuleList.subModulName}</a>
+									</c:otherwise>
+								</c:choose></li>
+						</c:forEach>
+
+					</ul>
+					</li>
+				</c:forEach>
+ 
+					
+					<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">User
 							Registration</span> <span class="arrow "></span>
 				</a>
@@ -91,9 +140,7 @@
 					<ul class="sub-menu">
 
 
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showProgramDetails">Program
-								</a></li>
+						 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showInstProf">Institute Profile </a></li>
 
@@ -250,9 +297,7 @@
 					<ul class="sub-menu">
 
 
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showProgramDetails">Program
-								</a></li>
+						 
 								<li><a class=""
 							href="${pageContext.request.contextPath}/showEucationalObjective">Educational Objective
 								 Form </a></li>
@@ -369,9 +414,7 @@
 							Module </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showInfrastructureForm">
-								Form </a></li>
+						 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showinfra">Infrastructure Facilities Form </a></li>
 						<li><a class=""
@@ -468,10 +511,7 @@
 						class="fa fa-columns"></i> <span class="title">Research And Innovation </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showResearchAndInnovationForm">Research
-								And Innovation Form </a></li>
-
+						 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showLinkage">Research And Innovation Linkage Form
 								 </a></li>
@@ -494,108 +534,6 @@
 
 
 					</ul></li>
-					
-					
-					
-				
-				<li><a href="#"> <i class="fa fa-lock"></i> <span
-						class="title">Logout</span>
-				</a></li>
-			</ul> --%>
-
-			<ul class='wraplist'>
-				<li class='menusection'>Main</li>
-				<li class="open"><a href="index.html"> <i
-						class="fa fa-dashboard"></i> <span class="title">Dashboard</span>
-				</a></li>
-
-
-
-				<c:forEach items="${sessionScope.newModuleList}" var="allModuleList"
-					varStatus="count">
-
-					<c:choose>
-						<c:when
-							test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
-							<li class="open">
-						</c:when>
-						<c:otherwise>
-							<li class="">
-						</c:otherwise>
-					</c:choose>
-					<a href="javascript:;"> <i class="fa fa fa-columns"></i> <span
-						class="title">${allModuleList.moduleName}</span> <c:choose>
-							<c:when
-								test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
-								<span class="arrow open"></span>
-							</c:when>
-							<c:otherwise>
-								<span class="arrow "></span>
-							</c:otherwise>
-						</c:choose>
-
-					</a>
-					<ul class="sub-menu">
-						<c:forEach items="${allModuleList.subModuleJsonList}"
-							var="allSubModuleList">
-							<li><c:choose>
-									<c:when
-										test="${sessionScope.sessionSubModuleId==allSubModuleList.subModuleId}">
-										<a class="active"
-											href="${pageContext.request.contextPath}/${allSubModuleList.subModuleMapping}"
-											onclick="selectSubMod(${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"> ${allSubModuleList.subModulName}</a>
-									</c:when>
-									<c:otherwise>
-										<a class=""
-											href="${pageContext.request.contextPath}/${allSubModuleList.subModuleMapping}"
-											onclick="selectSubMod(${allSubModuleList.subModuleId},${allSubModuleList.moduleId})"> ${allSubModuleList.subModulName}</a>
-									</c:otherwise>
-								</c:choose></li>
-						</c:forEach>
-
-					</ul>
-					</li>
-				</c:forEach>
-<%-- 
-				<li class=""><a href="javascript:;"> <i
-						class="fa fa-columns"></i> <span class="title">User
-							Registration</span> <span class="arrow "></span>
-				</a>
-					<ul class="sub-menu">
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showRegisterInstitute">
-								Institute Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showPendingInstitute">
-								Pending Institute List</a> <a class=""
-							href="${pageContext.request.contextPath}/showApprovedInstitute">
-								Approved Institute List</a> <a class=""
-							href="${pageContext.request.contextPath}/iqacRegistration">IQAC
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/hodRegistration">HOD
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showRegisterStaff">Faculty
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showFacultyInfo">Faculty
-								Information</a> <a class=""
-							href="${pageContext.request.contextPath}/showAdjuntFaculty">Faculty
-								Details</a> <a class=""
-							href="${pageContext.request.contextPath}/showRegAcc">Account
-								Officer Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showRegDean">Dean/R&D
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showRegLib">Librarian
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showRegStud">Student
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/showIqacAfterLogin">Fill
-								Institute Information</a> <a class=""
-							href="${pageContext.request.contextPath}/addFaculty">Department
-								Registration</a> <a class=""
-							href="${pageContext.request.contextPath}/addPrincipal">Principal
-								Registration</a></li>
-
-
-					</ul></li> --%>
 
 
 

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.master.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
@@ -57,6 +58,39 @@ public class AccessRightController {
 	public AccessRightModuleList accessRightModuleList;
 	int isError = 0;
 
+	@RequestMapping(value = "/callFunctionAccessControlle", method = RequestMethod.GET)
+	public String callFunctionAccessControlle(HttpServletRequest request, HttpServletResponse response) {
+ 
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			com.ats.rusasoft.model.Info info = AccessControll.checkAccess("showRegisterInstitute", "showInstituteList", "0", "1", "0", "0",newModuleList);
+			
+			System.out.println(info);
+			
+			if(info.isError()==true) {
+				return "redirect:/accessDenied";
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/showCreateRole";
+	}
+	
+	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
+	public ModelAndView accessDenied(HttpServletRequest request, HttpServletResponse response) {
+ 
+		ModelAndView model = new ModelAndView("accessDenied");
+		try {
+			 
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return model;
+	}
+	
 	@RequestMapping(value = "/showCreateRole", method = RequestMethod.GET)
 	public ModelAndView showAccessRight(HttpServletRequest request, HttpServletResponse response) {
 
