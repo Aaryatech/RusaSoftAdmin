@@ -664,6 +664,11 @@ public class MasterController {
 		return model;
 
 	}
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/showAccList", method = RequestMethod.GET)
 	public ModelAndView showAccList(HttpServletRequest request, HttpServletResponse response) {
@@ -2024,9 +2029,9 @@ public class MasterController {
 
 				} else {
 
-					map.add("officerId", officerId);
-					// getInstitute
-					Hod hod = rest.postForObject(Constants.url + "getAccOfficer", map, Hod.class);
+					map.add("accOffId", officerId);
+					AccOfficer acOff=rest.postForObject(Constants.url + "getAccOfficer", map,
+							AccOfficer.class);
 					String deptName = request.getParameter("dept_name");
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -2037,17 +2042,24 @@ public class MasterController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					hod.setContactNo(request.getParameter("hod_mob"));
-					hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
-					hod.setEditBy(userObj.getUserId());// session
-					hod.setEmail(request.getParameter("hod_email"));
 
-					hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
-					hod.setHodName(request.getParameter("hod_name"));
-					hod.setInstituteId(userObj.getGetData().getUserInstituteId());// from sess
-					hod.setUpdateDatetime(curDateTime);
+					acOff.setAccOfficerName(request.getParameter("acc_off_name"));
+					acOff.setContactNo(request.getParameter("acc_off_mob"));
+					acOff.setEmail(request.getParameter("acc_off_email"));
+					acOff.setInstituteId(userObj.getGetData().getUserInstituteId());
+					acOff.setJoiningDate(DateConvertor.convertToYMD(request.getParameter("acc_off_joinDate")));
+					acOff.setOfficerId(officerId);
+					acOff.setQualificationId(Integer.parseInt(request.getParameter("acc_quolf")));
+					int isReg = Integer.parseInt(request.getParameter("is_registration"));
 
-					Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+					if(isReg==0) {
+					acOff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
+					
+					}else {
+						acOff.setRealivingDate(null);
+					}
+
+					AccOfficer editInst = rest.postForObject(Constants.url + "saveAccOfficer", acOff, AccOfficer.class);
 
 				}
 
@@ -2058,10 +2070,104 @@ public class MasterController {
 
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
-				return "redirect:/hodList";
+				return "redirect:/showAccList";
 			else
-				return "redirect:/hodRegistration";
+				return "redirect:/showRegAcc";
 
 		}
+		
+		//showEditaccOff
+		@RequestMapping(value = "/showEditaccOff", method = RequestMethod.POST)
+		public ModelAndView showEditaccOff(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("master/accReg");
+
+				model.addObject("title", "Edit Account Officer");
+				int accOffId = Integer.parseInt(request.getParameter("edit_accOff_id"));
+
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("type", 1);
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+
+				model.addObject("quolfList", quolfList);
+				map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("accOffId", accOffId);
+				AccOfficer accOff=rest.postForObject(Constants.url + "getAccOfficer", map,
+						AccOfficer.class);
+				accOff.setJoiningDate(DateConvertor.convertToDMY(accOff.getJoiningDate()));
+				try {
+					accOff.setRealivingDate(DateConvertor.convertToDMY(accOff.getRealivingDate()));
+				}catch (Exception e) {
+					
+				}
+				
+				model.addObject("accOff", accOff);
+
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+		
+		//deleteaccOff
+		@RequestMapping(value = "/deleteaccOff/{accOffIds}", method = RequestMethod.GET)
+		public String deleteaccOff(HttpServletRequest request, HttpServletResponse response, @PathVariable int accOffIds) {
+
+			try {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (accOffIds == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] acOfIds = request.getParameterValues("accOffIds");
+					System.out.println(" acOfIds id are" + acOfIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < acOfIds.length; i++) {
+						sb = sb.append(acOfIds[i] + ",");
+
+					}
+					String accOffIdList = sb.toString();
+					accOffIdList = accOffIdList.substring(0, accOffIdList.length() - 1);
+
+					map.add("accOffIds", accOffIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("accOffIds", accOffIds);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteAccOfficers", map, Info.class);
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteaccOff at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return "redirect:/showAccList";
+
+		}
+		
+		
 
 }

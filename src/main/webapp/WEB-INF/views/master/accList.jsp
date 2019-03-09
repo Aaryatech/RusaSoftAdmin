@@ -59,7 +59,7 @@
 							</div>
 
 						</header>
-						<form action="${pageContext.request.contextPath}/deleteHod/0"
+						<form action="${pageContext.request.contextPath}/deleteaccOff/0"
 							method="get" id="insListForm">
 							<div class="content-body">
 								<div class="row">
@@ -98,21 +98,21 @@
 
 
 											<tbody>
-												<c:forEach items="${accOffList}" var="hod" varStatus="count">
+												<c:forEach items="${accOffList}" var="accOff" varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="hodIds"
-															id="hodIds${count.index+1}" value="${hod.officerId}" /></td>
+														<td><input type="checkbox" class="chk" name="accOffIds"
+															id="accOffIds${count.index+1}" value="${accOff.officerId}" /></td>
 														<td>${count.index+1}</td>
-														<td>${hod.accOfficerName}</td>
-														<td>${hod.qualificationName}</td>
-															<td>${hod.joiningDate}</td>
-														<td>${hod.contactNo}</td>
-														<td>${hod.email}</td>
-														<td><a onclick="showEditHod(${hod.officerId})" href="#"><span
+														<td>${accOff.accOfficerName}</td>
+														<td>${accOff.qualificationName}</td>
+															<td>${accOff.joiningDate}</td>
+														<td>${accOff.contactNo}</td>
+														<td>${accOff.email}</td>
+														<td><a onclick="showEditaccOff(${accOff.officerId})" href="#"><span
 																class="glyphicon glyphicon-edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>
 															| <a
-															href="${pageContext.request.contextPath}/deleteHod/${hod.officerId}"
+															href="${pageContext.request.contextPath}/deleteaccOff/${accOff.officerId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -128,7 +128,7 @@
 											onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 											style="align-content: center; width: 113px; margin-left: 40px;">
 
-										<input type="hidden" id="edit_hod_id" name="edit_hod_id"
+										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
 
 
@@ -177,7 +177,7 @@ function clearSessionAttribute() {
 
 function selectedInst(source) {
 
-	checkboxes = document.getElementsByName('hodIds');
+	checkboxes = document.getElementsByName('accOffIds');
 
 	for (var i = 0, n = checkboxes.length; i < n; i++) {
 		checkboxes[i].checked = source.checked;
@@ -187,12 +187,12 @@ function selectedInst(source) {
 }
 
 
-function showEditHod(hodId){
-	document.getElementById("edit_hod_id").value=hodId;//create this 
+function showEditaccOff(accOffId){
+	document.getElementById("edit_accOff_id").value=accOffId;//create this 
 	var form=document.getElementById("insListForm");
     form.setAttribute("method", "post");
 
-	form.action=("showEditHod");
+	form.action=("showEditaccOff");
 	form.submit();
 	
 }

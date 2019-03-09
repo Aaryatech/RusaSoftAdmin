@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="showIsReg()">
 <c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 
 	<!-- START TOPBAR -->
@@ -77,13 +77,12 @@
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
-
-
-
 				<div class="col-lg-12">
 					<section class="box ">
 
 						<header class="panel_header">
+							<h2 class="title pull-left">${title}</h2>
+
 										<div class="actions panel_actions pull-right">
 
 								<a href="${pageContext.request.contextPath}/showAccList"><button
@@ -197,10 +196,10 @@
 
 																		<input type="radio" id="is_registration"
 																			name="is_registration" value="1" checked
-																			onclick="setDate(this.value)">Yes a
+																			onclick="setDate(this.value)">Yes 
 																<input type="radio" id="is_registration"
 																			name="is_registration" value="0"
-																			onclick="setDate(this.value)">No b
+																			onclick="setDate(this.value)">No 
 															
 															</c:when>
 																	<c:otherwise>
@@ -209,20 +208,20 @@
 																			<c:when test="${empty accOff.realivingDate}">
 																				<input type="radio" id="is_registration"
 																					name="is_registration" value="1" checked
-																					onclick="setDate(this.value)">Yes  c
+																					onclick="setDate(this.value)">Yes  
 																<input type="radio" id="is_registration"
 																					name="is_registration" value="0"
-																					onclick="setDate(this.value)">No d
+																					onclick="setDate(this.value)">No 
 															
 																
 																</c:when>
 																			<c:otherwise>
 																				<input type="radio" id="is_registration"
 																					name="is_registration" value="1" 
-																					onclick="setDate(this.value)">Yes e
+																					onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration" checked
 																					name="is_registration" value="0"
-																					onclick="setDate(this.value)">No f
+																					onclick="setDate(this.value)">No
 															
 																
 																</c:otherwise>
@@ -244,7 +243,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="acc_off_relDate" value="${accOff.realivingDate}"
-																	name="acc_off_relDate" placeholder="Relieving Date" required>
+																	name="acc_off_relDate" placeholder="Relieving Date">
 															</div>
 															</div>
 															</div>
@@ -305,7 +304,6 @@
             format: "dd-mm-yyyy",
             changeYear:true,
             changeMonth:true
-			 
 
 		});
     });
@@ -415,8 +413,19 @@
 		}
 	}
 
+	
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		
+	}
+	
+	
+
+	</script>
+	<script type="text/javascript">
 	function setDate(value){
-		alert("Value " +value)
+		//alert("Value " +value)
 		if(value==1){
 		//alert(value)
 		document.getElementById("acc_off_relDate").removeAttribute("required");
@@ -434,9 +443,29 @@
 		
 	}
 	
-	function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		
+	</script>
+	<script type="text/javascript">
+	
+	function showIsReg(){
+		//alert("Hi");
+		var x=${accOff.officerId}
+	
+		if(x>0){
+			//alert("Hi 1")
+		var isRel=${accOff.realivingDate};
+		//alert("Is Reg " +isReg);
+		if(isRel==null){
+			//alert("Hi 2")
+			document.getElementById("abc").style.display = "none";
+
+		}else{
+			//alert("Hi es")
+			document.getElementById("abc").style.display = "block";
+			
+		}
+			
+		}
+	
 	}
 	</script>
 
