@@ -123,13 +123,13 @@
 
 
 														<td>
-														  <c:if test="${addAccess == 0}"> 
+													  <c:if test="${editAccess == 0}"> 
 														<a
 															href="#" onclick="showEditStudent(${stud.studentId})"><span
 																class="glyphicon glyphicon-edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																</c:if> |
-																  <c:if test="${addAccess == 0}"> 
+																  <c:if test="${deleteAccess == 0}"> 
 															<a
 															href="${pageContext.request.contextPath}/deleteStudents/${stud.studentId}"
 															onClick="return confirm('Are you sure want to delete this record');"

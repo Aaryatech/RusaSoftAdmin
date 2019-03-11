@@ -241,14 +241,8 @@ public class LibraryController {
 				}
 				
 			
-				
-			
-				
-				
-			
 				 
 			}
-			
 
 		} catch (Exception e) {
 
@@ -450,7 +444,7 @@ public class LibraryController {
 				
 		      try {
 					
-					Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
+					Info view = AccessControll.checkAccess("showEditLibrarian", "showLibList", "0", "0", "1", "0", newModuleList);
 					
 			if(view.isError()==true) {
 						
@@ -504,7 +498,7 @@ public class LibraryController {
 				
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 					
-	        	Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
+	        	Info view = AccessControll.checkAccess("deleteLibrarians/{libId}", "showLibList", "0", "0", "1", "0", newModuleList);
 	        	try {	
            if(view.isError()==true) {
         	   
@@ -562,13 +556,29 @@ public class LibraryController {
 		public ModelAndView showStudList(HttpServletRequest request, HttpServletResponse response) {
 
 			ModelAndView model = null;
+			
+			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			
 			try {
+				
+				Info view = AccessControll.checkAccess("showStudList", "showStudList", "1", "0", "0", "0", newModuleList);
+				
+				if(view.isError()==true) {
+					
+					model = new ModelAndView("accessDenied");
+									
+				}
+				else {
+					System.out.println(" showStudList Accessable ");
+
 
 				model = new ModelAndView("master/studList");
 
 				model.addObject("title", "Student List");
 				
-           HttpSession session = request.getSession();
+        
 				
 				int inst_id =(int)session.getAttribute("instituteId");
 				System.out.println("Student list inst id::::"+inst_id);
@@ -584,9 +594,31 @@ public class LibraryController {
 
 				model.addObject("StudList", StudList);
 				
+
+				Info add = AccessControll.checkAccess("showStudList", "showStudList", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showStudList", "showStudList", "0" ,"0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showStudList", "showStudList", "0" ,"0", "0", "1", newModuleList);
+				
+				if(add.isError()==false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+					
+				}
+				if(edit.isError()==false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if(delete.isError()==false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+					
+				}
+				
+				}
+				
 			} catch (Exception e) {
 
-				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+				System.err.println("exception In showStudList at Master Contr" + e.getMessage());
 
 				e.printStackTrace();
 
@@ -600,7 +632,21 @@ public class LibraryController {
 		public ModelAndView showRegStud(HttpServletRequest request, HttpServletResponse response) {
 
 			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			
 			try {
+				
+				Info view = AccessControll.checkAccess("showRegStud", "showStudList", "0", "1", "0", "0", newModuleList);
+				
+				if(view.isError()==true) {
+					
+					model = new ModelAndView("accessDenied");
+									
+				}
+				else {
+		
 
 				model = new ModelAndView("master/studReg");
 
@@ -622,7 +668,7 @@ public class LibraryController {
 				
 				 restTemplate = new RestTemplate();
 		        map = new LinkedMultiValueMap<String, Object>();
-				HttpSession session = request.getSession();
+			
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				int instId=userObj.getGetData().getUserInstituteId();
@@ -637,7 +683,8 @@ public class LibraryController {
 				
 
 
-			} catch (Exception e) {
+			}
+			}catch (Exception e) {
 
 				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
@@ -756,15 +803,25 @@ public class LibraryController {
 
 		}
 		
-
-		
-		
-		
 		@RequestMapping(value = "/showEditStudent", method = RequestMethod.POST)
 		public ModelAndView showEditStudent(HttpServletRequest request, HttpServletResponse response) {
 			ModelAndView model = null;
-
-			try {
+			
+			  HttpSession session = request.getSession();
+				
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+				
+		      try {
+					
+					Info view = AccessControll.checkAccess("showEditStudent", "showStudList", "0", "0", "1", "0", newModuleList);
+					
+			if(view.isError()==true) {
+						
+						model = new ModelAndView("accessDenied");
+										
+					}
+			else {
+			
 
 				model = new ModelAndView("master/studReg");
 
@@ -796,7 +853,7 @@ public class LibraryController {
 				
 				 restTemplate = new RestTemplate();
 		        map = new LinkedMultiValueMap<String, Object>();
-				HttpSession session = request.getSession();
+			
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
@@ -805,7 +862,7 @@ public class LibraryController {
 				System.err.println("deptList " + deptList.toString());
 
 				model.addObject("deptList", deptList);
-				
+			}	
 
 			} catch (Exception e) {
 				System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
@@ -821,8 +878,20 @@ public class LibraryController {
 		@RequestMapping(value = "/deleteStudents/{studId}", method = RequestMethod.GET)
 		public String deleteStudents(HttpServletRequest request, HttpServletResponse response, @PathVariable int studId) {
 
-			try {
-
+			 HttpSession session = request.getSession();
+			   String a=null;
+				
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+					
+	        	Info view = AccessControll.checkAccess("deleteStudents/{studId}", "showStudList", "0", "0", "1", "0", newModuleList);
+	        	try {	
+         if(view.isError()==true) {
+      	   
+      	      a="redirect:/accessDenied";
+	          
+              }
+			
+		else {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				if (studId == 0) {
 
@@ -847,8 +916,9 @@ public class LibraryController {
 				}
 
 				Info errMsg = rest.postForObject(Constants.url + "deleteStudents", map, Info.class);
-
-			} catch (Exception e) {
+				 a="redirect:/showStudList";
+			} 
+	        	}catch (Exception e) {
 
 				System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
 
@@ -856,20 +926,110 @@ public class LibraryController {
 
 			}
 
-			return "redirect:/showStudList";
+			return a;
 
 		}
 		
 		
 //////////////////////////**************************Institute Info*********************************/////////////
 		
+		@RequestMapping(value = "/showInstituteInfoList", method = RequestMethod.GET)
+		public ModelAndView showInstituteInfoList(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			
+
+			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			
+			try {
+				
+				Info view = AccessControll.checkAccess("showInstituteInfoList", "showInstituteInfoList", "1", "0", "0", "0", newModuleList);
+				
+				if(view.isError()==true) {
+					
+					model = new ModelAndView("accessDenied");
+									
+				}
+				else {
+					System.out.println(" showStudList Accessable ");
+
+		
+
+				model = new ModelAndView("master/instituteInfo");
+
+				model.addObject("title", "Institute List");
+				
+					
+					int inst_id =(int)session.getAttribute("instituteId");
+					System.out.println("Student list inst id::::"+inst_id);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("instituteId", inst_id);
+	                
+					GetInstituteInfo[] instArray = rest.postForObject(Constants.url + "getAllInstituteInfoByInstituteId",map,
+							GetInstituteInfo[].class);
+					List<GetInstituteInfo> instInfoList = new ArrayList<>(Arrays.asList(instArray));
+					System.err.println("acaYearList " + instInfoList.toString());
+
+					model.addObject("instInfoList", instInfoList);
+					
+					Info add = AccessControll.checkAccess("showInstituteInfoList", "showInstituteInfoList", "0", "1", "0", "0", newModuleList);
+					Info edit = AccessControll.checkAccess("showInstituteInfoList", "showInstituteInfoList", "0" ,"0", "1", "0", newModuleList);
+					Info delete = AccessControll.checkAccess("showInstituteInfoList", "showInstituteInfoList", "0" ,"0", "0", "1", newModuleList);
+					
+					if(add.isError()==false) {
+						System.out.println(" add   Accessable ");
+						model.addObject("addAccess", 0);
+						
+					}
+					if(edit.isError()==false) {
+						System.out.println(" edit   Accessable ");
+						model.addObject("editAccess", 0);
+					}
+					if(delete.isError()==false) {
+						System.out.println(" delete   Accessable ");
+						model.addObject("deleteAccess", 0);
+						
+					}
+				}
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showInstituteList at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+
+		
 		
 		@RequestMapping(value = "/showFillInstituteInfo", method = RequestMethod.GET)
 		public ModelAndView showIqacAfterLogin(HttpServletRequest request, HttpServletResponse response) {
 
-			ModelAndView model = null;
+		ModelAndView model = null;
+			
+	       HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			
 			try {
-
+				
+				Info view = AccessControll.checkAccess("showFillInstituteInfo", "showInstituteInfoList", "0", "1", "0", "0", newModuleList);
+				
+				if(view.isError()==true) {
+					
+					model = new ModelAndView("accessDenied");
+									
+				}
+				else {
+		
+		
 				model = new ModelAndView("master/iqaclogin");
 
 				model.addObject("title", "Fill Institute Information");
@@ -885,6 +1045,7 @@ public class LibraryController {
 
 				model.addObject("acaYearList", acaYearList);
 				//model.addObject("editInstInfo", editInst);
+				}
 
 			} catch (Exception e) {
 
@@ -904,8 +1065,22 @@ public class LibraryController {
 		public ModelAndView showEditInstInfo(HttpServletRequest request, HttpServletResponse response) {
 			ModelAndView model = null;
 
-			try {
-
+		       HttpSession session = request.getSession();
+				
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+				
+				try {
+					
+					Info view = AccessControll.checkAccess("showEditInstInfo", "showInstituteInfoList", "0", "1", "0", "0", newModuleList);
+					
+					if(view.isError()==true) {
+						
+						model = new ModelAndView("accessDenied");
+										
+					}
+					else {
+			
+		
 				model = new ModelAndView("master/iqaclogin");
 
 				int edit_inst_id = Integer.parseInt(request.getParameter("edit_inst_id"));
@@ -934,7 +1109,7 @@ public class LibraryController {
 			
 				
 				
-				
+					}
 
 			} catch (Exception e) {
 				System.err.println("Exce in showEditInstInfo/{instId}  " + e.getMessage());
@@ -948,45 +1123,7 @@ public class LibraryController {
 		
 		
 
-		@RequestMapping(value = "/showInstituteInfoList", method = RequestMethod.GET)
-		public ModelAndView showInstituteInfoList(HttpServletRequest request, HttpServletResponse response) {
-
-			ModelAndView model = null;
-			try {
-
-				model = new ModelAndView("master/instituteInfo");
-
-				model.addObject("title", "Institute List");
-				
-				
-				  HttpSession session = request.getSession();
-					
-					int inst_id =(int)session.getAttribute("instituteId");
-					System.out.println("Student list inst id::::"+inst_id);
-
-					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-					map.add("instituteId", inst_id);
-	                
-					GetInstituteInfo[] instArray = rest.postForObject(Constants.url + "getAllInstituteInfoByInstituteId",map,
-							GetInstituteInfo[].class);
-					List<GetInstituteInfo> instInfoList = new ArrayList<>(Arrays.asList(instArray));
-					System.err.println("acaYearList " + instInfoList.toString());
-
-					model.addObject("instInfoList", instInfoList);
-				
-
-			} catch (Exception e) {
-
-				System.err.println("exception In showInstituteList at Master Contr" + e.getMessage());
-
-				e.printStackTrace();
-
-			}
-
-			return model;
-
-		}
-
+	
 
 		@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
 		public String insertInstituteInfo(HttpServletRequest request, HttpServletResponse response) {
@@ -1108,8 +1245,21 @@ public class LibraryController {
 		
 		@RequestMapping(value = "/deleteInstituteInfo/{instId}", method = RequestMethod.GET)
 		public String deleteInstituteInfo(HttpServletRequest request, HttpServletResponse response, @PathVariable int instId) {
-
-			try {
+			 HttpSession session = request.getSession();
+			   String a=null;
+				
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+					
+	        	Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}", "showInstituteInfoList", "0", "0", "1", "0", newModuleList);
+	        	try {	
+            if(view.isError()==true) {
+    	   
+    	      a="redirect:/accessDenied";
+	          
+            }
+			
+	     	else {
+		
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				if (instId == 0) {
@@ -1133,8 +1283,9 @@ public class LibraryController {
 					System.err.println("Single Record delete ");
 					map.add("instIdList", instId);
 				}
-
+				  a="redirect:/showInstituteInfoList";
 				Info errMsg = rest.postForObject(Constants.url + "deleteInstituteInfo", map, Info.class);
+		}
 
 			} catch (Exception e) {
 
@@ -1144,7 +1295,7 @@ public class LibraryController {
 
 			}
 
-			return "redirect:/showInstituteInfoList";
+			return a;
 
 		}
 		
