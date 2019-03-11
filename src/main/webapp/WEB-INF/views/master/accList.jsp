@@ -43,16 +43,19 @@
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
- 
+
 
 				<div class="col-lg-12">
 					<section class="box ">
 						<header class="panel_header">
 							<h2 class="title pull-left">Account Officer List</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showRegAcc"><button
-										type="button" class="btn btn-success">Account Officer
-										Registration</button></a> <a class="box_toggle fa fa-chevron-down"></a>
+								<c:if test="${addAccess==0}">
+									<a href="${pageContext.request.contextPath}/showRegAcc"><button
+											type="button" class="btn btn-success">Account
+											Officer Registration</button></a>
+									<a class="box_toggle fa fa-chevron-down"></a>
+								</c:if>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -85,7 +88,7 @@
 													<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th>
-															<th>Sr No</th>
+													<th>Sr No</th>
 													<th>Name</th>
 													<th>Qualification</th>
 
@@ -98,36 +101,42 @@
 
 
 											<tbody>
-												<c:forEach items="${accOffList}" var="accOff" varStatus="count">
+												<c:forEach items="${accOffList}" var="accOff"
+													varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="accOffIds"
-															id="accOffIds${count.index+1}" value="${accOff.officerId}" /></td>
+														<td><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td>
 														<td>${count.index+1}</td>
 														<td>${accOff.accOfficerName}</td>
 														<td>${accOff.qualificationName}</td>
-															<td>${accOff.joiningDate}</td>
+														<td>${accOff.joiningDate}</td>
 														<td>${accOff.contactNo}</td>
 														<td>${accOff.email}</td>
-														<td><a onclick="showEditaccOff(${accOff.officerId})" href="#"><span
-																class="glyphicon glyphicon-edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a>
-															| <a
-															href="${pageContext.request.contextPath}/deleteaccOff/${accOff.officerId}"
-															onClick="return confirm('Are you sure want to delete this record');"
-															rel="tooltip" data-color-class="danger"
-															data-animate=" animated fadeIn " data-toggle="tooltip"
-															data-original-title="Delete  record"><span
-																class="glyphicon glyphicon-remove"></span></a></td>
+														<td><c:if test="${editAccess==0}">
+																<a onclick="showEditaccOff(${accOff.officerId})"
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+															</c:if>|<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteaccOff/${accOff.officerId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
 													</tr>
 												</c:forEach>
 
 											</tbody>
 										</table>
-										<input type="submit" class="btn btn-primary" value="Delete"
-											id="deleteId"
-											onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-											style="align-content: center; width: 113px; margin-left: 40px;">
-
+										<c:if test="${deleteAccess==0}">
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
 

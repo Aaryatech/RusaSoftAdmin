@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GetHod;
 import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.Hod;
+import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
@@ -75,7 +78,7 @@ public class MastersController {
 	@RequestMapping(value = "/hodList", method = RequestMethod.GET)
 	public ModelAndView hodList(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("master/hodList");
+		ModelAndView model = null;
 
 		try {
 
@@ -84,6 +87,14 @@ public class MastersController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			
 			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("hodList", "hodList", "1", "0", "0", "0",
+					newModuleList);
+			
+			
+			if (viewAccess.isError() == false) {
+				model = new ModelAndView("master/hodList");
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			map.add("instId", userObj.getGetData().getUserInstituteId());
@@ -92,6 +103,30 @@ public class MastersController {
 			System.err.println("hodList " + hodList.toString());
 
 			model.addObject("hodList", hodList);
+			
+			Info addAccess = AccessControll.checkAccess("hodList", "hodList", "0", "1", "0", "0",
+					newModuleList);
+			
+			Info editAccess = AccessControll.checkAccess("hodList", "hodList", "0", "0", "1", "0",
+					newModuleList);
+			
+			Info deleteAccess = AccessControll.checkAccess("hodList", "hodList", "0", "0", "0", "1",
+					newModuleList);
+			if(addAccess.isError()==false)
+			model.addObject("addAccess", 0);
+			
+			if(editAccess.isError()==false) 
+				
+				model.addObject("editAccess", 0);
+				
+							
+			if(deleteAccess.isError()==false)
+				model.addObject("deleteAccess", 0);
+			
+			}else {
+				model = new ModelAndView("accessDenied");
+				
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
@@ -136,14 +171,47 @@ public class MastersController {
 			RestTemplate restTemplate = new RestTemplate();
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			HttpSession session = request.getSession();
+			
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "1", "0", "0", "0",
+					newModuleList);
+			
+			
+
+			if (viewAccess.isError() == false) {
+				
+				
+				Info addAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "0", "1", "0", "0",
+						newModuleList);
+				
+				Info editAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "0", "0", "1", "0",
+						newModuleList);
+				
+				Info deleteAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "0", "0", "0", "1",
+						newModuleList);
+				
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			map.add("instId", userObj.getGetData().getUserInstituteId());
 			Dept[] instArray = restTemplate.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
 			List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
-			System.err.println("deptList " + deptList.toString());
-
 			model.addObject("deptList", deptList);
+
+			if(addAccess.isError()==false)
+				model.addObject("addAccess", 0);
+				
+				if(editAccess.isError()==false) 
+					model.addObject("editAccess", 0);
+							
+				if(deleteAccess.isError()==false)
+					model.addObject("deleteAccess", 0);
+			
+			}else {
+				model = new ModelAndView("accessDenied");
+			}
+				
 		} catch (Exception e) {
 
 			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
@@ -203,6 +271,21 @@ public class MastersController {
 			model = new ModelAndView("master/pendingInstituteList");
 
 			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session =request.getSession();
+			
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "1", "0", "0", "0",
+					newModuleList);
+			
+			
+
+			if (viewAccess.isError() == false) {
+				
+				
+				Info addAccess = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "1", "0", "0",
+						newModuleList);
+				
 
 			GetInstituteList[] instArray = restTemplate.getForObject(Constants.url + "getAllPendingInstitutes",
 					GetInstituteList[].class);
@@ -211,7 +294,17 @@ public class MastersController {
 			model.addObject("pendInstList", instList);
 
 			model.addObject("title", " Pending Institute");
+			
+			if(addAccess.isError()==false)
+				model.addObject("addAccess", 0);
+				
+			
+			
+			}
+			else {
 
+				model = new ModelAndView("accessDenied");
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());

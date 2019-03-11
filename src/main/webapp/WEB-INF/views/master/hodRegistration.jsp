@@ -344,9 +344,13 @@
 		//	alert("Data  " +JSON.stringify(data));
 			if(data.error==true){
 				if(valueType==2){
+					document.getElementById("hod_email").value="";
+
 				alert("This email id already exist in system please enter unique");
 				}
 				else{
+					document.getElementById("hod_mob").value="";
+
 					alert("This contact no  already exist in system please enter unique");
 				}
 			}

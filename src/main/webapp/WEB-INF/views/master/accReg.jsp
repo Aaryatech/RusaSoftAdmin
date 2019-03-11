@@ -251,8 +251,8 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
@@ -308,66 +308,7 @@
 		});
     });
     
-	function checkUnique(inputValue,valueType){
-    	//alert(inputValue);
-    	
-    	var primaryKey=${hod.hodId};
-    	//alert("Primary key"+primaryKey);
-    	var isEdit=0;
-    	if(primaryKey>0){
-    		isEdit=1;
-    	}
-    	//alert("Is Edit " +isEdit);
-    	
-    	var valid=false;
-    	if(valueType==1){
-    		//alert("Its Mob no");
-    		if(inputValue.length==10){
-    			valid=true;
-    			//alert("Len 10")
-    		}else{
-    			//alert("Not 10");
-    		}
-    	}
-    	else if(valueType==2){
-    		//alert("Its Email " );
-    		
-    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    		if(inputValue.match(mailformat))
-    		{
-    			valid=true;
-    			//alert("Valid Email Id");
-    		}
-    		else
-    		{
-    			valid=false;
-    			//alert("InValid Email Id");
-    		}
-    	}
-    	if(valid==true)
-    	$.getJSON('${checkUniqueField}', {
-    		
-    		inputValue : inputValue,
-    		valueType  : valueType,
-    		primaryKey : primaryKey,
-    		isEdit     : isEdit,
-    		tableId : 5,
-
-			ajax : 'true',
-
-		}, function(data) {
-			
-		//	alert("Data  " +JSON.stringify(data));
-			if(data.error==true){
-				if(valueType==2){
-				alert("This email id already exist in system please enter unique");
-				}
-				else{
-					alert("This contact no  already exist in system please enter unique");
-				}
-			}
-		});
-    }
+	
 	
 	
 	
@@ -467,6 +408,85 @@
 		}
 	
 	}
+	</script>
+	<script type="text/javascript">
+	
+	
+	function checkUnique(inputValue,valueType){
+    	//alert(inputValue);
+    				document.getElementById("sub1").disabled=false;
+					document.getElementById("sub2").disabled=false;
+    	
+    	var primaryKey=${accOff.officerId};
+    	//alert("Primary key"+primaryKey);
+    	var isEdit=0;
+    	if(primaryKey>0){
+    		isEdit=1;
+    	}
+    	//alert("Is Edit " +isEdit);
+    	
+    	var valid=false;
+    	if(valueType==1){
+    		//alert("Its Mob no");
+    		if(inputValue.length==10){
+    			valid=true;
+    			//alert("Len 10")
+    		}else{
+    			//alert("Not 10");
+    		}
+    	}
+    	else if(valueType==2){
+    		//alert("Its Email " );
+    		
+    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    		if(inputValue.match(mailformat))
+    		{
+    			valid=true;
+    			//alert("Valid Email Id");
+    		}
+    		else
+    		{
+    			valid=false;
+    			//alert("InValid Email Id");
+    		}
+    	}
+    	if(valid==true)
+    	$.getJSON('${checkUniqueField}', {
+    		
+    		inputValue : inputValue,
+    		valueType  : valueType,
+    		primaryKey : primaryKey,
+    		isEdit     : isEdit,
+    		tableId : 5,
+
+			ajax : 'true',
+
+		}, function(data) {
+			
+		//	alert("Data  " +JSON.stringify(data));
+			if(data.error==true){
+				if(valueType==2){
+					document.getElementById("acc_off_email").value="";
+
+				alert("This email id already exist in system please enter unique");
+				
+					document.getElementById("sub1").disabled=true;
+					document.getElementById("sub2").disabled=true;
+				
+				}
+				else{
+					document.getElementById("acc_off_mob").value="";
+
+					alert("This contact no  already exist in system please enter unique");
+					
+					document.getElementById("sub1").disabled=true;
+					document.getElementById("sub2").disabled=true;
+					
+				}
+			}
+		});
+    }
+	
 	</script>
 
 </body>

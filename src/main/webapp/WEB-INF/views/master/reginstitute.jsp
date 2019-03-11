@@ -213,7 +213,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 																<div class="col-sm-3">
 																	<input type="text" class="form-control datepicker" id="reg_date" value="${editInst.regDate}"
 																		name="reg_date" placeholder="Date of Registration"
-																		value="" required>
+																		required>
 																</div>
 															</div>
 														</div>
@@ -625,6 +625,12 @@ function getCOPO() {
 			});
         });
         
+        $(".btn btn-primary").click(function(){
+        	//alert("HHHH");
+        	 $(".btn btn-primary").disabled=true;
+
+        	}); 
+        
         function checkUnique(inputValue,valueType){
         	//alert(inputValue);
         	
@@ -691,6 +697,8 @@ function getCOPO() {
 				}
 			});
         }
+        
+      
     </script> 
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

@@ -596,11 +596,15 @@ function getCOPO() {
 		//alert("Is Reg " +isReg);
 		if(isReg==0){
 
+			document.getElementById("reg_date").removeAttribute("required");
+
 			document.getElementById("abc").style.display = "none";
+
 
 		}else{
 			document.getElementById("abc").style.display = "block";
-			
+			document.getElementById("reg_date").setAttribute("required","true");
+
 		}
 			
 		}
