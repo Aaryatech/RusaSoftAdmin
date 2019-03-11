@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -36,6 +37,7 @@ import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
@@ -81,14 +83,33 @@ public class MasterController {
 
 		ModelAndView model = null;
 		try {
+			
+			
+			HttpSession session=request.getSession();
+			
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 
-			model = new ModelAndView("master/reginstitute");
+			Info add = AccessControll.checkAccess("showRegisterInstitute", "showInstituteList", "1", "0", "0", "0", newModuleList);
 
-			model.addObject("title", "Register Institute");
 
-			Institute editInst = new Institute();
+			
+			if(add.isError()==false) {
+				model = new ModelAndView("master/reginstitute");
+				
+				model.addObject("title", "Register Institute");
 
-			model.addObject("editInst", editInst);
+				Institute editInst = new Institute();
+
+				model.addObject("editInst", editInst);
+				
+				model.addObject("access", add);
+
+
+			}else {
+				
+				model = new ModelAndView("accessDenied");
+			}
+
 
 		} catch (Exception e) {
 
@@ -1501,7 +1522,7 @@ public class MasterController {
 
 		}
 		if (instId == 0)
-			return "redirect:/showPendingInstitute";
+			return "redirect:/";
 		else
 			return "redirect:/showInstituteList";
 
