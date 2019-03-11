@@ -55,7 +55,9 @@
     <!-- END HEAD -->
 
     <!-- BEGIN BODY -->
-    <body class=" login_page">
+    <body class=" login_page" onload="hideText()">
+    
+    <c:url value="/checkValue" var="checkValue"></c:url>
 
 <div class="container-fluid">
     <div class="login-wrapper row">
@@ -74,10 +76,10 @@
             </c:choose>
             
                 <p>
-                    <label for="user_login">Username/Email ID<br />
-                        <input type="text" name="username" id="username" class="input" value="" size="20" placeholder="Valid Username/Email ID" /></label>
+                    <label for="user_login">Username<br />
+                        <input type="text" name="username" id="username" class="input" value="" size="20" placeholder="Valid Username/Email ID"  onchange="checkValue(this.value)"/></label>
                 </p>
-                <p>
+                <p id="abc">
                     <label for="user_pass">OTP<br />
                         <input type="password" name="password" id="password" class="input" value=""  placeholder="Enter OTP Sent on Your Registered Number" size="20" /></label>
                 </p>
@@ -157,6 +159,81 @@
     </div>
 </div>
 <!-- modal end -->
+
+
+<script>
+
+
+function showForm() {
+	//document.getElementById("abc").style = "display:none"
+		var qualType=document.getElementById("functionalMOU").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 7) {
+
+			document.getElementById("abc").style = "visible"
+			
+				
+		} 
+		else{
+			document.getElementById("abc").style = "display:none"
+		}
+	
+	}
+	
+	
+function hideText() {
+	//alert("hii");
+	document.getElementById("abc").style = "display:none"
+		
+	
+	}
+	
+	
+	
+function checkValue(inputValue){
+	
+	var valid=false;
+	
+		//alert("Its Mob no");
+		if(inputValue.length=!0){
+			valid=true;
+			//alert("Len 10")
+		}else{
+			//alert("Not 10");	
+
+	if(valid==true)
+	$.getJSON('${checkValue}', {
+		
+		inputValue : inputValue,
+		
+		ajax : 'true',
+
+	}, function(data) {
+		
+	//	alert("Data  " +JSON.stringify(data));
+		if(data.error==true){
+			if(valueType==2){
+			
+			
+			alert("This email id already exist in system please enter unique");
+			$('#student_email').val('');
+			//document.getElementById("stud_contact_no").value=" ";
+			
+			}
+			else{
+				
+				
+				alert("This contact no  already exist in system please enter unique");
+				$('#stud_contact_no').val('');
+				//document.getElementById("student_email").value=" ";
+			}
+		}
+	});
+}
+}
+
+</script>
 </body>
 </html>
 

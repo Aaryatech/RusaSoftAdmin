@@ -134,7 +134,7 @@
 											</tbody>
 									</table>
 
-	<div class="col-lg-1">
+	                              <div class="col-lg-1">
 
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"

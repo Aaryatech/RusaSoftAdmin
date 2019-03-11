@@ -27,11 +27,13 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
+import com.ats.rusasoft.model.GetInstituteInfo;
 import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
+import com.ats.rusasoft.model.InstituteInfo;
 import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
@@ -767,6 +769,297 @@ public class LibraryController {
 			return "redirect:/showStudList";
 
 		}
+		
+		
+//////////////////////////**************************Institute Info*********************************/////////////
+		
+		
+		@RequestMapping(value = "/showFillInstituteInfo", method = RequestMethod.GET)
+		public ModelAndView showIqacAfterLogin(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("master/iqaclogin");
+
+				model.addObject("title", "Fill Institute Information");
+				
+				InstituteInfo editInst=new InstituteInfo();
+				
+				RestTemplate restTemplate = new RestTemplate();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+				AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("acaYearList " + acaYearList.toString());
+
+				model.addObject("acaYearList", acaYearList);
+				//model.addObject("editInstInfo", editInst);
+
+			} catch (Exception e) {
+
+				System.err.println("exception In Institute at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+		
+		
+		
+		@RequestMapping(value = "/showEditInstInfo", method = RequestMethod.POST)
+		public ModelAndView showEditInstInfo(HttpServletRequest request, HttpServletResponse response) {
+			ModelAndView model = null;
+
+			try {
+
+				model = new ModelAndView("master/iqaclogin");
+
+				int edit_inst_id = Integer.parseInt(request.getParameter("edit_inst_id"));
+				System.out.println("Student id is"+edit_inst_id);
+
+				model.addObject("title", " Edit Institute Information  ");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+			
+				map.add("infoDetailId", edit_inst_id); 
+				InstituteInfo editInst = rest.postForObject(Constants.url + "getInstituteInfoByInfoDetailId", map, InstituteInfo.class); 
+				System.out.println("editInst is"+editInst.toString());
+			
+			
+				model.addObject("editInstInfo", editInst);
+				model.addObject("student_id",edit_inst_id);
+				
+				RestTemplate restTemplate = new RestTemplate();
+			    map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+				AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("acaYearList " + acaYearList.toString());
+
+				model.addObject("acaYearList", acaYearList);
+			
+				
+				
+				
+
+			} catch (Exception e) {
+				System.err.println("Exce in showEditInstInfo/{instId}  " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			return model;
+
+		}
+		
+		
+		
+
+		@RequestMapping(value = "/showInstituteInfoList", method = RequestMethod.GET)
+		public ModelAndView showInstituteInfoList(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("master/instituteInfo");
+
+				model.addObject("title", "Institute List");
+				
+				
+				  HttpSession session = request.getSession();
+					
+					int inst_id =(int)session.getAttribute("instituteId");
+					System.out.println("Student list inst id::::"+inst_id);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("instituteId", inst_id);
+	                
+					GetInstituteInfo[] instArray = rest.postForObject(Constants.url + "getAllInstituteInfoByInstituteId",map,
+							GetInstituteInfo[].class);
+					List<GetInstituteInfo> instInfoList = new ArrayList<>(Arrays.asList(instArray));
+					System.err.println("acaYearList " + instInfoList.toString());
+
+					model.addObject("instInfoList", instInfoList);
+				
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showInstituteList at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+
+
+		@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
+		public String insertInstituteInfo(HttpServletRequest request, HttpServletResponse response) {
+			System.err.println("in insert insertInstituteInfo");
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			
+			int inst_id =(int)session.getAttribute("instituteId");
+			int maker_id =(int)session.getAttribute("userId");
+			try {
+				
+				RestTemplate restTemplate = new RestTemplate();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				String inst_info_id = null ;
+				
+				try {
+					inst_info_id	= (request.getParameter("inst_info_id"));
+				}catch (Exception e) {
+					System.err.println("Exce in save innfo stitute I  " + e.getMessage());
+					e.printStackTrace();
+				}
+				
+				
+				int academic_year = Integer.parseInt(request.getParameter("academic_year"));
+				int no_fullTime_Faculty = Integer.parseInt(request.getParameter("no_fullTime_Faculty"));
+				int no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
+				int no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));
+				int no_currAdmitted_Student = Integer.parseInt(request.getParameter("no_currAdmitted_Student"));
+				String treasury_code = request.getParameter("treasury_code");
+				String rusa_idNo = request.getParameter("rusa_idNo");
+
+				
+				
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+				
+			
+				if (inst_info_id.isEmpty()==true) {
+					
+			   System.out.println("inst id is"+inst_id);
+			   InstituteInfo lib=new InstituteInfo();
+			   
+			   
+			
+				lib.setYearId(academic_year);
+				lib.setInstituteId(inst_id);
+				lib.setNoCurrentAdmitedStnt(no_currAdmitted_Student);
+				lib.setNoNonteachingIncludingOfficeStaff(no_nonTeaching_faculty);
+				lib.setNoOfFulltimeFaculty(no_fullTime_Faculty);
+				lib.setNoSupportStaff(no_suppStaff);
+				lib.setAddBy(maker_id);
+				lib.setEditBy(maker_id);
+				lib.setEditDatetime(curDateTime);
+				lib.setAddDatetime(curDateTime);
+				lib.setRusaIdNo(rusa_idNo);
+				lib.setTreasuryCode(treasury_code);
+				lib.setDelStatus(1);
+				lib.setExInt1(1);
+				lib.setExInt2(1);
+				lib.setExVar1("NA");
+				lib.setExVar2("NA");
+				
+			
+				InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib, InstituteInfo.class);
+
+			} else {
+				
+				System.out.println("in edit InstituteInfo");
+				
+				System.out.println("inst_info_id"+inst_info_id);
+				
+			
+				
+				map.add("infoDetailId", inst_info_id); 
+				InstituteInfo lib1 = rest.postForObject(Constants.url + "getInstituteInfoByInfoDetailId", map, InstituteInfo.class); 
+			
+				lib1.setYearId(academic_year);
+				lib1.setInstituteId(inst_id);
+				lib1.setNoCurrentAdmitedStnt(no_currAdmitted_Student);
+				lib1.setNoNonteachingIncludingOfficeStaff(no_nonTeaching_faculty);
+				lib1.setNoOfFulltimeFaculty(no_fullTime_Faculty);
+				lib1.setNoSupportStaff(no_suppStaff);
+				lib1.setAddBy(maker_id);
+				lib1.setEditBy(maker_id);
+				lib1.setEditDatetime(curDateTime);
+				lib1.setAddDatetime(curDateTime);
+				lib1.setRusaIdNo(rusa_idNo);
+				lib1.setTreasuryCode(treasury_code);
+				
+				InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib1, InstituteInfo.class);
+
+				
+			}
+				
+				
+			} catch (Exception e) {
+				System.err.println("Exce in save innfo stitute I  " + e.getMessage());
+				e.printStackTrace();
+			}
+			
+			int isView=Integer.parseInt(request.getParameter("is_view"));
+			if(isView==1)
+				return "redirect:/showStudList";
+			else
+				return "redirect:/showFillInstituteInfo";
+
+		
+
+		}
+		
+		
+		@RequestMapping(value = "/deleteInstituteInfo/{instId}", method = RequestMethod.GET)
+		public String deleteInstituteInfo(HttpServletRequest request, HttpServletResponse response, @PathVariable int instId) {
+
+			try {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (instId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("instIds");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String instIdList = sb.toString();
+					instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+					map.add("instIdList", instIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("instIdList", instId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteInstituteInfo", map, Info.class);
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteInstituteInfo at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return "redirect:/showInstituteInfoList";
+
+		}
+		
+		
+
 
 
 		

@@ -126,7 +126,7 @@
 																<input type="text" class="form-control" id="student_name"
 																value="${editStudent.studentName}"
 																	name="student_name" placeholder="Student Name"
-																	value="${page.pageName}">
+																	>
 															</div>
 														</div>
 
