@@ -159,27 +159,7 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showInstituteInfoList", method = RequestMethod.GET)
-	public ModelAndView showInstituteInfoList(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/instituteInfo");
-
-			model.addObject("title", "Institute List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showInstituteList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/showProgramDetails", method = RequestMethod.GET)
 	public ModelAndView showProgramDetails(HttpServletRequest request, HttpServletResponse response) {
