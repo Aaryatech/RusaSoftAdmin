@@ -285,6 +285,18 @@
 	Committee Details
 								</a></li>
 								
+									<li><a class=""
+							href="${pageContext.request.contextPath}/showVisionMission">Institute Vision Mission
+								 Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showInstituteSupport">Institute Support Form </a></li>
+
+						<li><a class=""
+							href="${pageContext.request.contextPath}/showActivityOrganized">Activity Organized 
+								Form </a></li>
+								
+								
 								
 
 
@@ -494,17 +506,7 @@
 						<li><a class=""
 							href="${pageContext.request.contextPath}/rareBookInformation">Rare Books Information</a></li>
 								
-								<li><a class=""
-							href="${pageContext.request.contextPath}/showVisionMission">Institute Vision Mission
-								 Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showInstituteSupport">Institute Support Form </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showActivityOrganized">Activity Organized 
-								Form </a></li>
-
+							
 					</ul></li>
 					
 						<li class=""><a href="javascript:;"> <i

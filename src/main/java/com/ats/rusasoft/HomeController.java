@@ -2,9 +2,11 @@ package com.ats.rusasoft;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -36,6 +38,8 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
+import com.ats.rusasoft.model.Librarian;
+import com.ats.rusasoft.model.LoginLog;
 
 /**
  * Handles requests for the application home page.
@@ -237,11 +241,6 @@ public class HomeController {
 
 
 				LoginResponse userObj = restTemplate.postForObject(Constants.url+"login",map,LoginResponse.class);
-				
-				
-			
-				
-
 				System.out.println("JSON Response Objet " + userObj.toString());
 				String loginResponseMessage="";
 
@@ -256,8 +255,46 @@ public class HomeController {
 						 mav = new ModelAndView("changePassword");
 					 }
 					
+						System.out.println("Login Successful");
+						
+						
+						
+					 
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+						
+						InetAddress addr = InetAddress.getByName(request.getRemoteAddr());
+				        String hostName = addr.getHostName(); 
+				        String userAgent = request.getHeader("User-Agent"); 
+						
+						LoginLog llog=new LoginLog();
+						
+						llog.setIpAddress(String.valueOf(addr));
+						llog.setUserAgent(userAgent);
+						llog.setUserId(userObj.getUserId());
+				
+						llog.setLoginDate(curDateTime);
+						
+						llog.setDelStatus(1);
+						llog.setExInt1(1);
+						llog.setExInt2(1);
+						llog.setExVar1("NA");
+						llog.setExVar2("NA");
+						
 					
-					System.out.println("Login Successful");
+						RestTemplate rest = new RestTemplate();
+						LoginLog editInst = rest.postForObject(Constants.url + "saveLoginLog", llog, LoginLog.class);		 
+					 
+					 
+					 
+				
 					session.setAttribute("userName", name);
 					session.setAttribute("password", password);
 					/*session.setAttribute("isEnroll", userObj.getExInt1());

@@ -216,7 +216,7 @@
 								<input type="hidden" id="index" name="index" value="0">
 								
 							<div class="form-group">
-							<label class="control-label col-sm-6" for="page_order">Is e Shodh Ganga
+							<label class="control-label col-sm-6" for="page_order">Are e Shodh Ganga Available
 							 :<span class="text-danger">*</span>
 						</label>
 						<div class="col-sm-2">

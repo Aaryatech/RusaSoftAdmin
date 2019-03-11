@@ -310,15 +310,32 @@ public class LibraryController {
 	// insertHod
 		@RequestMapping(value = "/insertLibrarian", method = RequestMethod.POST)
 		public String insertLibrarian(HttpServletRequest request, HttpServletResponse response) {
+			
+			 HttpSession session = request.getSession();
+			  String a=null;
+			  try {		
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+					
+	        	Info view = AccessControll.checkAccess("insertLibrarian", "showLibList", "0", "1", "0", "0", newModuleList);
+	      
+          if(view.isError()==true) 
+          
+          {
+      	   
+      	      a="redirect:/accessDenied";
+	          
+              }
+			
+		else {
 			System.err.println("in insert insertLibrarian");
 			ModelAndView model = null;
-			HttpSession session = request.getSession();
+		
 			
 			int inst_id =(int)session.getAttribute("instituteId");
 			int maker_id =(int)session.getAttribute("userId");
 			
 			
-			try {
+			
 				Librarian lib=new Librarian();
 				RestTemplate restTemplate = new RestTemplate();
 
@@ -379,7 +396,9 @@ public class LibraryController {
 
 					Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian", lib, Librarian.class);
 
-			} else {
+				}
+				else 
+				{
 				System.out.println("in edit");
 				System.out.println("in edit");
 				
@@ -418,18 +437,27 @@ public class LibraryController {
 				
 			}
 				
+
+				int isView=Integer.parseInt(request.getParameter("is_view"));
+				if(isView==1) 
+				a= "redirect:/showLibList";
 				
-			} catch (Exception e) {
+				else 
+				a="redirect:/showRegLib";
+				
+				
+		}
+	        	
+			  }
+	        	
+	        	
+			  
+			  catch (Exception e) {
 				System.err.println("Exce in save lib  " + e.getMessage());
 				e.printStackTrace();
 			}
 			
-			int isView=Integer.parseInt(request.getParameter("is_view"));
-			if(isView==1)
-				return "redirect:/showLibList";
-			else
-				return "redirect:/showRegLib";
-
+			return a;
 		
 
 		}
@@ -498,7 +526,7 @@ public class LibraryController {
 				
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 					
-	        	Info view = AccessControll.checkAccess("deleteLibrarians/{libId}", "showLibList", "0", "0", "1", "0", newModuleList);
+	        	Info view = AccessControll.checkAccess("deleteLibrarians/{libId}", "showLibList", "0", "0", "0", "1", newModuleList);
 	        	try {	
            if(view.isError()==true) {
         	   
@@ -700,13 +728,32 @@ public class LibraryController {
 		
 		@RequestMapping(value = "/insertStudent", method = RequestMethod.POST)
 		public String insertStudent(HttpServletRequest request, HttpServletResponse response) {
+			
+			
+
+			 HttpSession session = request.getSession();
+			  String a=null;
+			  try {		
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+					
+	        	Info view = AccessControll.checkAccess("insertStudent", "showStudList", "0", "1", "0", "0", newModuleList);
+	      
+         if(view.isError()==true) 
+         
+         {
+     	   
+     	      a="redirect:/accessDenied";
+	          
+             }
+			
+		else {
 			System.err.println("in insert insertStudent");
-			ModelAndView model = null;
-			HttpSession session = request.getSession();
+		
+		
 			
 			int inst_id =(int)session.getAttribute("instituteId");
 			int maker_id =(int)session.getAttribute("userId");
-			try {
+		
 				Student lib=new Student();
 				RestTemplate restTemplate = new RestTemplate();
 
@@ -786,6 +833,14 @@ public class LibraryController {
 				
 				
 			}
+				int isView=Integer.parseInt(request.getParameter("is_view"));
+				if(isView==1)
+					a= "redirect:/showStudList";
+				else
+					a= "redirect:/showRegStud";
+
+			}
+         
 				
 				
 			} catch (Exception e) {
@@ -793,12 +848,8 @@ public class LibraryController {
 				e.printStackTrace();
 			}
 			
-			int isView=Integer.parseInt(request.getParameter("is_view"));
-			if(isView==1)
-				return "redirect:/showStudList";
-			else
-				return "redirect:/showRegStud";
-
+			
+			return a;
 		
 
 		}
@@ -883,7 +934,7 @@ public class LibraryController {
 				
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 					
-	        	Info view = AccessControll.checkAccess("deleteStudents/{studId}", "showStudList", "0", "0", "1", "0", newModuleList);
+	        	Info view = AccessControll.checkAccess("deleteStudents/{studId}", "showStudList", "0", "0", "0", "1", newModuleList);
 	        	try {	
          if(view.isError()==true) {
       	   
@@ -1071,7 +1122,7 @@ public class LibraryController {
 				
 				try {
 					
-					Info view = AccessControll.checkAccess("showEditInstInfo", "showInstituteInfoList", "0", "1", "0", "0", newModuleList);
+					Info view = AccessControll.checkAccess("showEditInstInfo", "showInstituteInfoList", "0", "0", "1", "0", newModuleList);
 					
 					if(view.isError()==true) {
 						
@@ -1121,19 +1172,34 @@ public class LibraryController {
 		}
 		
 		
-		
-
-	
-
 		@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
 		public String insertInstituteInfo(HttpServletRequest request, HttpServletResponse response) {
 			System.err.println("in insert insertInstituteInfo");
 			ModelAndView model = null;
+			
+			
 			HttpSession session = request.getSession();
+			
+			
+			  String a=null;
+			  try {		
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+					
+	        	Info view = AccessControll.checkAccess("insertInstituteInfo", "showInstituteInfoList", "0", "1", "0", "0", newModuleList);
+	      
+        if(view.isError()==true) 
+        
+        {
+    	   
+    	      a="redirect:/accessDenied";
+	          
+            }
+			
+		else {
 			
 			int inst_id =(int)session.getAttribute("instituteId");
 			int maker_id =(int)session.getAttribute("userId");
-			try {
+			
 				
 				RestTemplate restTemplate = new RestTemplate();
 
@@ -1226,18 +1292,20 @@ public class LibraryController {
 				
 			}
 				
+
+				int isView=Integer.parseInt(request.getParameter("is_view"));
+				if(isView==1)
+					a="redirect:/showInstituteInfoList";
+				else
+					a="redirect:/showFillInstituteInfo";
+		}	
 				
 			} catch (Exception e) {
 				System.err.println("Exce in save innfo stitute I  " + e.getMessage());
 				e.printStackTrace();
 			}
 			
-			int isView=Integer.parseInt(request.getParameter("is_view"));
-			if(isView==1)
-				return "redirect:/showStudList";
-			else
-				return "redirect:/showFillInstituteInfo";
-
+        return a;
 		
 
 		}
@@ -1250,7 +1318,7 @@ public class LibraryController {
 				
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 					
-	        	Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}", "showInstituteInfoList", "0", "0", "1", "0", newModuleList);
+	        	Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}", "showInstituteInfoList", "0", "0", "0", "1", newModuleList);
 	        	try {	
             if(view.isError()==true) {
     	   

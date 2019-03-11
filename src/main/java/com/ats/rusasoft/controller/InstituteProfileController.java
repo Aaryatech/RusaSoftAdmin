@@ -59,7 +59,7 @@ public class InstituteProfileController {
 		try {
 
 			
-			model.addObject("title", "Vission & Mission");
+			model.addObject("title", "Vision & Mission");
 
 		} catch (Exception e) {
 

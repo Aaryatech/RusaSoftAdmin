@@ -185,7 +185,7 @@
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="page_order">
-													Beneficially <span class="text-danger">*</span>
+													Beneficiary <span class="text-danger">*</span>
 												</label> <label class="control-label col-sm-1" for="page_order">Students
 													:<span class="text-danger">*</span>
 												</label>

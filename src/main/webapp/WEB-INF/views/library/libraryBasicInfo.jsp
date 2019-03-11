@@ -214,7 +214,7 @@
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="usingremot"
 																	style="text-align: left;"> e-Resources are
-																	remotely  <span class="text-danger">*</span>
+																	remotely Accessible  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="radio" id="usingremot" name="usingremot"
@@ -329,7 +329,7 @@
 														 -->
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
-																	style="text-align: left;"> Avg. of Teachers Using Library resources per day  <span class="text-danger">*</span>
+																	style="text-align: left;"> Avg. No.  of Teachers Using Library resources per day  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="noOfComp"
@@ -341,7 +341,7 @@
 															
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
-																	style="text-align: left;"> Avg. of Student Using Library resources per day  <span class="text-danger">*</span>
+																	style="text-align: left;"> Avg. No. of Student Using Library resources per day  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="noOfComp"

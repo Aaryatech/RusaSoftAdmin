@@ -131,7 +131,7 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th>Vision                            </th>
+																		<th>Vision</th>
 																		
 																	</tr>
 																
@@ -158,7 +158,7 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th>Mission  </th>
+																		<th>Mission </th>
 																		
 																	</tr>
 																

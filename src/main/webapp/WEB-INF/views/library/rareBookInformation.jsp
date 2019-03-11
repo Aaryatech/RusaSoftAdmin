@@ -145,9 +145,9 @@
 																	<thead>
 																		<tr>
 																			<th width="10%">Sr No</th>
-																			<th>Name Of Rate Books</th>
+																			<th>Name Of Rare Books</th>
 																			<th>Publisher</th>
-																			<th>No. of Copies for Book</th>
+																			<th>No. of Copies of Book</th>
 																			<th>Cost of Rare Book</th>
 																			<th>Year of Publication</th>
 																		</tr>
@@ -204,13 +204,13 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Budget on Infrastructure Facility</h4>
+					<h4 class="modal-title">Library</h4>
 				</div>
 				<div class="modal-body">
  
 					<div class="form-group">
 
-						<label class="control-label col-sm-4" for="name"> Name Of Rate Books </label> <input type="text"
+						<label class="control-label col-sm-4" for="name"> Name Of Rare Book </label> <input type="text"
 							class="form-control" id="name" name="name"
 							placeholder="Name Of Rate Books" required>
 					</div>
@@ -224,7 +224,7 @@
 
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="noOfBook">No of Copies for Book </label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="noOfBook">No. of Copies of Book </label> <input type="text" class="form-control"
 							id="noOfBook" name="noOfBook"
 							placeholder="No of Copies for Book"
 							value="${page.pageName}" required>
