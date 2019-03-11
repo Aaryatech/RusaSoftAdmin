@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.AcademicYear;
@@ -38,6 +39,7 @@ import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.Student;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
@@ -178,11 +180,110 @@ public class LibraryController {
 	
 	//////////////////////////*****************Librarian*************//////////////////
 	
+	
+	
+	@RequestMapping(value = "/showLibList", method = RequestMethod.GET)
+	public ModelAndView showLibList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
+		try {
+			
+			Info view = AccessControll.checkAccess("showLibList", "showLibList", "1", "0", "0", "0", newModuleList);
+			
+			if(view.isError()==true) {
+				
+
+				
+				model = new ModelAndView("accessDenied");
+								
+			}
+			else {
+				System.out.println(" showLibList Accessable ");
+				
+				model = new ModelAndView("master/libList");
+
+				model.addObject("title", "Librarian List");
+				
+				int inst_id =(int)session.getAttribute("instituteId");
+				
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", inst_id);
+	            
+				Librarian[] instArray = rest.postForObject(Constants.url + "getAllLibrarianByInstituteId",map,
+						Librarian[].class);
+				List<Librarian> libtList = new ArrayList<>(Arrays.asList(instArray));
+				
+				System.out.println("lib list is"+libtList.toString());
+
+				model.addObject("libtList", libtList);
+			
+			
+				Info add = AccessControll.checkAccess("showLibList", "showLibList", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0" ,"0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0" ,"0", "0", "1", newModuleList);
+				
+				if(add.isError()==true) {
+					System.out.println(" add not  Accessable ");
+				}
+				if(edit.isError()==true) {
+					System.out.println(" edit not  Accessable ");
+				}
+				if(delete.isError()==true) {
+					System.out.println(" delete not  Accessable ");
+				}
+				
+				model.addObject("addAccess", add);
+				model.addObject("editAccess", edit);
+				model.addObject("deleteAccess", delete);
+				
+				
+				/*
+				 * <c:if test="${not addAccess.isError} "> <a
+				 * href="${pageContext.request.contextPath}/showRegLib"><button type="button"
+				 * class="btn btn-success">Register Librarian </button></a> <a
+				 * class="box_toggle fa fa-chevron-down"> </a> </c:if>
+				 */
+			}
+			
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
 	@RequestMapping(value = "/showRegLib", method = RequestMethod.GET)
 	public ModelAndView showRegLib(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		
+        HttpSession session = request.getSession();
+		
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
 		try {
+			
+			Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "1", "0", "0", newModuleList);
+			
+			if(view.isError()==true) {
+				
+				model = new ModelAndView("accessDenied");
+								
+			}
+			else {
+	
 
 			model = new ModelAndView("master/libReg");
 
@@ -198,6 +299,7 @@ public class LibraryController {
 
 			model.addObject("quolfList", quolfList);
 			model.addObject("editInst", editInst);
+		}
 
 		} catch (Exception e) {
 
@@ -344,8 +446,21 @@ public class LibraryController {
 		@RequestMapping(value = "/showEditLibrarian", method = RequestMethod.POST)
 		public ModelAndView showEditLibrarian(HttpServletRequest request, HttpServletResponse response) {
 			ModelAndView model = null;
-
-			try {
+			  HttpSession session = request.getSession();
+				
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+				
+		try {
+					
+					Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
+					
+			if(view.isError()==true) {
+						
+						model = new ModelAndView("accessDenied");
+										
+					}
+			else {
+			
 
 				model = new ModelAndView("master/libReg");
 
@@ -357,25 +472,20 @@ public class LibraryController {
 				map.add("libId", libId);
 			
 				Librarian editInst = rest.postForObject(Constants.url + "getLibrarianByLibId", map, Librarian.class); 
-				System.out.println("librarian is"+editInst.toString());
-			/*
-			 * try {
-			 * editInst.setJoiningDate(DateConvertor.convertToDMY(editInst.getJoiningDate())
-			 * ); editInst.setRealivingDate(DateConvertor.convertToDMY(editInst.
-			 * getRealivingDate())); } catch (Exception e) { // TODO: handle exception }
-			 */
+		
 				System.out.println("librarian is"+editInst.toString());
 				model.addObject("editInst", editInst);
 				model.addObject("libId", libId);
 				
 				RestTemplate restTemplate = new RestTemplate();
-			map = new LinkedMultiValueMap<String, Object>();
+			    map = new LinkedMultiValueMap<String, Object>();
 				map.add("type", 1);
 				Quolification[] quolArray = restTemplate.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
+					}
 
 			} catch (Exception e) {
 				System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
@@ -387,47 +497,21 @@ public class LibraryController {
 		}
 
 		
-		@RequestMapping(value = "/showLibList", method = RequestMethod.GET)
-		public ModelAndView showLibList(HttpServletRequest request, HttpServletResponse response) {
-
-			ModelAndView model = null;
-			try {
-
-				model = new ModelAndView("master/libList");
-
-				model.addObject("title", "Librarian List");
-				HttpSession session = request.getSession();
-				
-				int inst_id =(int)session.getAttribute("instituteId");
-				
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("instId", inst_id);
-                
-				Librarian[] instArray = rest.postForObject(Constants.url + "getAllLibrarianByInstituteId",map,
-						Librarian[].class);
-				List<Librarian> libtList = new ArrayList<>(Arrays.asList(instArray));
-				
-				System.out.println("lib list is"+libtList.toString());
-
-				model.addObject("libtList", libtList);
-
-
-			} catch (Exception e) {
-
-				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-				e.printStackTrace();
-
-			}
-
-			return model;
-
-		}
+		
 		
 		@RequestMapping(value = "/deleteLibrarians/{libId}", method = RequestMethod.GET)
 		public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int libId) {
-
+			 HttpSession session = request.getSession();
+				
+				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+					
+	        	Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
+				
+           if(view.isError()==true) {
+	             return "redirect:/accessDenied";
+                }
+			
+		else {
 			try {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -464,7 +548,10 @@ public class LibraryController {
 			}
 
 			return "redirect:/showLibList";
-
+		}
+		
+		
+		
 		}
 
 	///////////////////////////////****Student************///////////////////
