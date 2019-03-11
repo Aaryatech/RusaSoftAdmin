@@ -53,9 +53,13 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
+							
+							  <c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showRegStud"><button
 										type="button" class="btn btn-success">Register Student</button></a>
 								<a class="box_toggle fa fa-chevron-down"></a>
+								</c:if>
+								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -118,17 +122,22 @@
 														<td>${stud.email}</td>
 
 
-														<td><a
+														<td>
+														  <c:if test="${addAccess == 0}"> 
+														<a
 															href="#" onclick="showEditStudent(${stud.studentId})"><span
 																class="glyphicon glyphicon-edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a> |
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																</c:if> |
+																  <c:if test="${addAccess == 0}"> 
 															<a
 															href="${pageContext.request.contextPath}/deleteStudents/${stud.studentId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Delete  record"><span
-																class="glyphicon glyphicon-remove"></span></a></td>
+																class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
 													</tr>
 												</c:forEach>
 											</tbody>

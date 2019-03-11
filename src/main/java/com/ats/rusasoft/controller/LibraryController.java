@@ -196,9 +196,6 @@ public class LibraryController {
 			
 			if(view.isError()==true) {
 				
-
-				
-				
 				model = new ModelAndView("accessDenied");
 								
 			}
@@ -228,27 +225,28 @@ public class LibraryController {
 				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0" ,"0", "1", "0", newModuleList);
 				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0" ,"0", "0", "1", newModuleList);
 				
-				if(add.isError()==true) {
-					System.out.println(" add not  Accessable ");
+				if(add.isError()==false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+					
 				}
-				if(edit.isError()==true) {
-					System.out.println(" edit not  Accessable ");
+				if(edit.isError()==false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
 				}
-				if(delete.isError()==true) {
-					System.out.println(" delete not  Accessable ");
+				if(delete.isError()==false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+					
 				}
 				
-				model.addObject("addAccess", add);
-				model.addObject("editAccess", edit);
-				model.addObject("deleteAccess", delete);
+			
+				
+			
 				
 				
-				/*
-				 * <c:if test="${not addAccess.isError} "> <a
-				 * href="${pageContext.request.contextPath}/showRegLib"><button type="button"
-				 * class="btn btn-success">Register Librarian </button></a> <a
-				 * class="box_toggle fa fa-chevron-down"> </a> </c:if>
-				 */
+			
+				 
 			}
 			
 
@@ -313,7 +311,6 @@ public class LibraryController {
 		return model;
 
 	}
-	
 	
 	
 	// insertHod
@@ -451,7 +448,7 @@ public class LibraryController {
 				
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 				
-		try {
+		      try {
 					
 					Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
 					
@@ -503,17 +500,20 @@ public class LibraryController {
 		@RequestMapping(value = "/deleteLibrarians/{libId}", method = RequestMethod.GET)
 		public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int libId) {
 			 HttpSession session = request.getSession();
+			   String a=null;
 				
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 					
 	        	Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
-				
+	        	try {	
            if(view.isError()==true) {
-	             return "redirect:/accessDenied";
+        	   
+        	      a="redirect:/accessDenied";
+	          
                 }
 			
 		else {
-			try {
+			
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				if (libId == 0) {
@@ -540,22 +540,61 @@ public class LibraryController {
 
 				Info errMsg = rest.postForObject(Constants.url + "deleteLibrarians", map, Info.class);
 
+			
+
+			    a="redirect:/showLibList";
+		}
+		
+	        	} catch (Exception e) {
+
+					System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+					e.printStackTrace();
+
+				}
+		return a;
+		}
+
+	///////////////////////////////****Student************///////////////////
+		
+
+		@RequestMapping(value = "/showStudList", method = RequestMethod.GET)
+		public ModelAndView showStudList(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("master/studList");
+
+				model.addObject("title", "Student List");
+				
+           HttpSession session = request.getSession();
+				
+				int inst_id =(int)session.getAttribute("instituteId");
+				System.out.println("Student list inst id::::"+inst_id);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", inst_id);
+                
+				GetStudentDetail[] instArray = rest.postForObject(Constants.url + "getAllStudentByInstituteId",map,
+						GetStudentDetail[].class);
+				List<GetStudentDetail> StudList = new ArrayList<>(Arrays.asList(instArray));
+				
+				System.out.println("Student list is"+StudList.toString());
+
+				model.addObject("StudList", StudList);
+				
 			} catch (Exception e) {
 
-				System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 				e.printStackTrace();
 
 			}
 
-			return "redirect:/showLibList";
-		}
-		
-		
-		
-		}
+			return model;
 
-	///////////////////////////////****Student************///////////////////
+		}
 		
 		@RequestMapping(value = "/showRegStud", method = RequestMethod.GET)
 		public ModelAndView showRegStud(HttpServletRequest request, HttpServletResponse response) {
@@ -719,43 +758,6 @@ public class LibraryController {
 		
 
 		
-		@RequestMapping(value = "/showStudList", method = RequestMethod.GET)
-		public ModelAndView showStudList(HttpServletRequest request, HttpServletResponse response) {
-
-			ModelAndView model = null;
-			try {
-
-				model = new ModelAndView("master/studList");
-
-				model.addObject("title", "Student List");
-				
-           HttpSession session = request.getSession();
-				
-				int inst_id =(int)session.getAttribute("instituteId");
-				System.out.println("Student list inst id::::"+inst_id);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("instituteId", inst_id);
-                
-				GetStudentDetail[] instArray = rest.postForObject(Constants.url + "getAllStudentByInstituteId",map,
-						GetStudentDetail[].class);
-				List<GetStudentDetail> StudList = new ArrayList<>(Arrays.asList(instArray));
-				
-				System.out.println("Student list is"+StudList.toString());
-
-				model.addObject("StudList", StudList);
-				
-			} catch (Exception e) {
-
-				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-				e.printStackTrace();
-
-			}
-
-			return model;
-
-		}
 		
 		
 		@RequestMapping(value = "/showEditStudent", method = RequestMethod.POST)
