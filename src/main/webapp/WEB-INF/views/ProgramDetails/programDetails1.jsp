@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
+<body class=" " >
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -30,19 +30,19 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
-
+<%-- 
 				<div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-					<%-- 		<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -53,13 +53,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal1"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								<a class="box_toggle fa fa-chevron-down"></a>
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
+						<a href="${pageContext.request.contextPath}/showAddProgDetail"><button
+										type="button" class="btn btn-success">Add Program Detail</button></a>
+							
+						
 
 							</div>
 
@@ -72,39 +69,25 @@
 
 								<div class="col-xs-12">
 
-														<h4>No. of Students Admitted:</h4>
+													
 
 <div class="form-group">
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="5%">Sr No</th>
-												<th width="10%">Year</th>
-												<th width="10%" >Program Type</th>
-												<th  width="5%">Duration Months</th>
-												<th  width="10%">Name of Program</th>
-												 <th width="20%" style="text-align: center;" colspan="2">No.
-													of Students Admitted</th> 
-													
-												<th width="20%">Date/Year of Introduction</th>
-												<th width="20%" >Approved by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</th>
+												<th >Sr No</th>
+												<th >Year</th>
+												<th >Program Type(Name of Program)</th>
+												<th  >Duration Months</th>
+										<!-- 		<th  width="10%"></th> -->
+											    <th >Sanctioned Intake</th> 
+												<th >Date/Year of Introduction</th>
+												<th  >Approved by </th>
+												<th >Action </th>
 												
 											</tr>
 </thead>
-<tbody>
-											<tr>
-												<td width="5%"></td>
-												<td width="10%"></td>
-												<td width="10%"></td>
-												<td width="5%"></td>
-												<td width="10%"></td>
-												<td width="10%">Sanctioned Intake</td>
-												<td width="10%">Admitted Student</td>
-												<td width="20%"></td>
-												<td width="20%"></td>
-											</tr> 
-										</tbody>
+
 </table>
 
 
@@ -141,210 +124,9 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 	
-	
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">No. of Students Admitted</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							<input type="hidden" class="form-control" id="index"
-							name="index"  value="0">
-							
-							
-							<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-	<option value="2015-2016">2015-2016</option>
-						</select>
-					</div>
-								
-						<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Vision
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="vision"  placeholder="Vision"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-								
-						<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Mission
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="mission"  placeholder="Mission"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-	
-	
-	<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Program Educational Objective
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="objective" placeholder="Program Educational Objective"
-									name="objectives" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-				<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">UG/PG</label> <select
-								id="pg" name="pg" class="form-control"  required>
-								<option value="UG">UG</option>
-								<option value="PG">PG</option>
-								
-							
-							</select>
-						</div>
-						<div class="form-group">
-						
-							<label class="control-label col-sm-10" for="page_name">Program Outcome (as per Accreditation Manual)
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="po" placeholder="Program Outcome (as per Accreditation Manual)"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-				
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-10" for="page_name">Program Specific Outcomes(Define By the Program )
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="pso" placeholder="Program Specific Outcomes(Define By the Program )"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-		
-								
-					
 
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div>
 	
-	
-	
-	
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Program Details</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							
-								<input type="hidden" class="form-control" id="index1"
-							name="index1"  value="0">
-								
-							<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Academic
-							Year</label> <select id="academicYear1" name="academicYear1"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-	<option value="2015-2016">2015-2016</option>
-						</select>
-					</div>
-						
-									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Program Outcome (as per NBA)</label> <select
-								id="nba" name="ug" class="form-control" onchange="showForm()" required>
-								<option value="Good">Good</option>
-								<option value="Better">Better</option>
-								<option value="Best">Best</option>
-								
-							
-							</select>
-						</div>
-						
-						
-						
-						
-		
-									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">PSO(Define By Program)</label> <select
-								id="ps" name="ps" class="form-control"  required>
-								<option value="Good">Good</option>
-								<option value="Better">Better</option>
-								<option value="Best">Best</option>
-							
-							</select>
-						</div>
-						
-						
-						<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Satisfying
-							Value</label> <select id="val" name="val" class="form-control"
-							onchange="showForm()" required>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="-">-</option>
-
-						</select>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="page_order">Mapping(Yes/No)
-							 :<span class="text-danger">*</span>
-						</label>
-						<div class="col-sm-6">
-							Yes <input type="radio" name="stu" id="stu" checked value="yes">
-							No<input type="radio" name="stu" id="stu" value="1">
-						</div>
-					</div>
-					
-					
-					
-
-					
-
-						<button type="submit" class="btn btn-primary" onclick="getData3()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
+<%-- 	
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -355,9 +137,9 @@
 					<h4 class="modal-title">Program Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -496,7 +278,7 @@
 			</div>
 		</div>
 	</div>
-	
+	 --%>
 	<script type="text/javascript">
 function getData1() {
 		
@@ -504,7 +286,7 @@ function getData1() {
 		var year = document.getElementById("academicYear2").value;
 		var type=document.getElementById("type").value
 		var sancIntake=document.getElementById("sancIntake").value
-		var admitStud=document.getElementById("admitStud").value
+		//var admitStud=document.getElementById("admitStud").value
 		//alert(vision);
 		
 		var duration=document.getElementById("duration").value
@@ -528,7 +310,7 @@ function getData1() {
 		else{
 			temp=type;
 		}
-		
+		var x=temp.append()
 		var temp1;
 		if (approve == 7) {
 
@@ -547,11 +329,9 @@ function getData1() {
 				[
 					i+1,
 					year,
-					temp,
+					temp(name),
 					duration,
-					name,
 					sancIntake,
-					admitStud,
 					date,
 					temp1
 					

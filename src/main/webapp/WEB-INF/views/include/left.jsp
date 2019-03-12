@@ -287,10 +287,10 @@
 								
 									<li><a class=""
 							href="${pageContext.request.contextPath}/showVisionMission">Institute Vision Mission
-								 Form </a></li>
+								  </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showInstituteSupport">Institute Support Form </a></li>
+							href="${pageContext.request.contextPath}/showInstituteSupport">Institute Support  </a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showActivityOrganized">Activity Organized 
@@ -308,35 +308,35 @@
 				</a>
 					<ul class="sub-menu">
 
+							<li><a class=""
+							href="${pageContext.request.contextPath}/showProgDetail1">Add Program Details
+								  </a></li>
 
 						 
 								<li><a class=""
-							href="${pageContext.request.contextPath}/showEucationalObjective">Educational Objective
-								 Form </a></li>
+							href="${pageContext.request.contextPath}/showEucationalObjective">Program Educational Objective
+								  </a></li>
 								 <li><a class=""
-							href="${pageContext.request.contextPath}/showpoPso">PO/PSO
-								 Form </a></li>
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showProgDetail1">Program Details
-								 Form </a></li>
-
+							href="${pageContext.request.contextPath}/showpoPso">Program PO/PSO
+								  </a></li>
+						
 
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudAddmit">Student Adimitted Category Wise Form </a></li>
+							href="${pageContext.request.contextPath}/showStudAddmit">Student Admitted Categorywise  </a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showStudAddmitLoc">Student
-								Adimitted Location Wise Form </a></li>
+								Admitted Locationwise  </a></li>
 
 						<li><a class=""/jf
-							href="${pageContext.request.contextPath}/showStudSupp">Student Support Scheme Form </a></li>
+							href="${pageContext.request.contextPath}/showStudSupp">Student Support Scheme  </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showStudTran">Student Training Form </a></li>
+							href="${pageContext.request.contextPath}/showStudTran">Student Training  </a></li>
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showHighEdu">Higher Education Form </a></li>
+							href="${pageContext.request.contextPath}/showHighEdu">Progression to Higher Education  </a></li>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showStudAct">Student Activity (Organized) </a></li>
@@ -347,7 +347,7 @@
 								
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showAlumini">Alumini Association/Contribution Activity Form </a></li>
+							href="${pageContext.request.contextPath}/showAlumini">Alumini Association/Contribution Activity  </a></li>
  
 
 					</ul></li>
