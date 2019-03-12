@@ -757,50 +757,7 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showRegDean", method = RequestMethod.GET)
-	public ModelAndView showRegDean(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/deanReg");
-
-			model.addObject("title", "Dean  Registration");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showDeanList", method = RequestMethod.GET)
-	public ModelAndView showDeanList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/deanList");
-
-			model.addObject("title", "Dean R & D List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
 	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
 
