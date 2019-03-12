@@ -34,12 +34,12 @@
 				<div class='col-xs-12'>
 					<div class="page-title">
 
-						<div class="pull-left">
+						<%-- <div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
 							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
-
+ --%>
 
 					</div>
 				</div>
@@ -140,8 +140,8 @@
 														
 														<c:if test="${editAccess==0}">
 														<a href="#" onclick="showEditInstitute(${institute.instituteId})"><span
-																class="glyphicon glyphicon-edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a> |
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>
 														</c:if>
 														
 														
@@ -150,7 +150,7 @@
 														<a
 															href="${pageContext.request.contextPath}/deleteInstitutes/${institute.instituteId}"
 															onClick="return confirm('Are you sure want to delete this record');"
-															rel="tooltip" data-color-class="danger"
+															rel="tooltip" data-color-class="danger" title="Delete"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Delete  record"><span
 																class="glyphicon glyphicon-remove"></span></a>
@@ -163,11 +163,11 @@
 											</tbody>
 										</table>
 										<div class="col-lg-1">
-
+<c:if test="${deleteAccess==0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
+												style="align-content: center; width: 113px; margin-left: 40px;"></c:if>
 													<input type="hidden" id="edit_inst_id"   name="edit_inst_id" value="0">
 
 

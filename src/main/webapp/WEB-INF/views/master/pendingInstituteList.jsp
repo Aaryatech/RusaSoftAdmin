@@ -118,9 +118,9 @@
 
 													<td>
 														<c:if test="${addAccess==0}"><a href="${pageContext.request.contextPath}/approveInstitutes/${institute.instituteId}"><span
-															class="glyphicon glyphicon-edit"
+															class="glyphicon glyphicon-ok-circle"
 															data-animate=" animated fadeIn " rel="tooltip"
-															title="Approve Institute"></span></a></c:if></td>
+															title="Approve"></span></a></c:if></td>
 												</tr>
 											</c:forEach>
 										</tbody>

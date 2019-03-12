@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +36,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.UserLogin;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
@@ -93,6 +95,17 @@ public class HomeController {
 		try {
 
 			model = new ModelAndView("login");
+			
+			MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+
+			map =new LinkedMultiValueMap<String, Object>(); 
+			 map.add("type", 1);
+			
+			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("acaYearList " + acaYearList.toString());
+
+			model.addObject("acaYearList", acaYearList);
 
 		} catch (Exception e) {
 
@@ -219,6 +232,9 @@ public class HomeController {
 		
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
+		int loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
+		
+		
 		System.out.println("Credential are::::"+name+password);
 
 		ModelAndView mav = new ModelAndView("login");
@@ -330,14 +346,32 @@ public class HomeController {
 					 //System.err.println("new Module List " +newModuleList.toString());
 					 
 						session.setAttribute("newModuleList", newModuleList);
+						
+						//sachin
+
+						 map =new LinkedMultiValueMap<String, Object>(); 
+						 map.add("type", userObj.getUserType());
+						
+						AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+						List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+						System.err.println("acaYearList " + acaYearList.toString());
+
+						session.setAttribute("acaYearList", acaYearList);
+						
+						session.setAttribute("acYearId", loginAcYearId);
+						System.err.println("Session date year Id " +session.getAttribute("acYearId"));
+
+						//getAcademicYearByYearId
+						 map =new LinkedMultiValueMap<String, Object>(); 
+						 map.add("yearId", loginAcYearId);
+						AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
+						session.setAttribute("acYearValue", acYear.getAcademicYear());
+
 					}
 					catch (Exception e) {
 						e.printStackTrace();
 					}
-				
-				
 				} 
-				 
 
 			}
 		} catch (Exception e) {
@@ -370,5 +404,31 @@ public class HomeController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	//setAcaYearInSession
+	
+	@RequestMapping(value = "/setAcaYearInSession", method = RequestMethod.GET)
+	public @ResponseBody AcademicYear setAcaYearInSession(HttpServletRequest request,
+		HttpServletResponse response) {
+		
+		System.err.println("Hello ");
+		int yearId=Integer.parseInt(request.getParameter("yearId"));
+		String yearValue=request.getParameter("yearValue");
+		HttpSession session = request.getSession();
+		session.setAttribute("acYearId", yearId);
+		//session.setAttribute("sessionSubModuleId",subModId);
+		System.err.println("yearValue " +yearValue);
+		System.err.println("Session date year Id " +session.getAttribute("acYearId"));
+		MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+		map =new LinkedMultiValueMap<String, Object>(); 
+		 map.add("yearId", yearId);
+		AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
+		session.setAttribute("acYearValue", acYear.getAcademicYear());
+
+		
+		return acYear;
+		
+	}
+	
 	
 }

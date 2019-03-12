@@ -61,11 +61,11 @@
 				<div class="col-xs-12">
 					<div class="page-title">
 
-						<div class="pull-left">
-							<!-- PAGE HEADING TAG - START -->
+					<!-- 	<div class="pull-left">
+							PAGE HEADING TAG - START
 							<h1 class="title">Add Department</h1>
-							<!-- PAGE HEADING TAG - END -->
-						</div>
+							PAGE HEADING TAG - END
+						</div> -->
 
 
 					</div>
@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showDeptList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
+										type="button" class="btn btn-info"> Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
