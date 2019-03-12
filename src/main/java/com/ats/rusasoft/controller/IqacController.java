@@ -147,12 +147,12 @@ public class IqacController {
 	}
 			
 			System.out.println("Data:"+iqacId);
-			String iqacName = request.getParameter("iqacName2");
+			String iqacName = request.getParameter("iqacName");
 			System.out.println("Data:"+iqacName);
-			designation = Integer.parseInt(request.getParameter("designtion2"));
-			String dateOfJoin = request.getParameter("date2");
-			String contact = request.getParameter("conNumber2");
-			String email = request.getParameter("emailId2");
+			designation = Integer.parseInt(request.getParameter("designation"));
+			String dateOfJoin = request.getParameter("dateOfJoin");
+			String contact = request.getParameter("contactNo");
+			String email = request.getParameter("email");
 			
 			System.out.println("Data:"+iqacId+" "+iqacName+" "+dateOfJoin+" "+contact+" "+email);
 			MIqac miqac = new MIqac();
@@ -167,7 +167,7 @@ public class IqacController {
 			miqac.setIqacName(iqacName);
 			miqac.setDesgntnId(designation);
 			miqac.setInstituteId(instituteId);
-			miqac.setJoiningDate(dateOfJoin);
+			miqac.setJoiningDate(DateConvertor.convertToYMD(dateOfJoin));
 			miqac.setContactNo(contact);
 			miqac.setEmail(email);
 			miqac.setDelStatus(1);
@@ -380,6 +380,7 @@ public class IqacController {
 		
 		int facultyId = 0;
 		int deptId = 0;
+	
 		try {
 			
 			facultyId = Integer.parseInt(request.getParameter("faculty_id"));
@@ -398,7 +399,7 @@ public class IqacController {
 			int designation = Integer.parseInt(request.getParameter("designation"));
 			String joinDate = request.getParameter("join_date");
 			int isReg = Integer.parseInt(request.getParameter("is_registration"));
-			String relDate = request.getParameter("acc_off_relDate");
+			
 			int teachTo = Integer.parseInt(request.getParameter("teachTo"));
 			String contactNo = request.getParameter("contact_no");
 			String email = request.getParameter("email");
@@ -416,11 +417,12 @@ public class IqacController {
 			staff.setCurrentDesignationId(designation);
 			staff.setJoiningDate(DateConvertor.convertToYMD(joinDate));
 			staff.setIsWorking(isReg);
-			if(isReg == 0)
-			staff.setRealivingDate(relDate);
-		else {
-			staff.setRealivingDate("2019-01-01");
-		}
+			if (isReg == 0) {
+				staff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
+
+			} else {
+				staff.setRealivingDate(null);
+			}
 			
 			staff.setTeachingTo(teachTo);
 			staff.setContactNo(contactNo);
@@ -650,8 +652,8 @@ public class IqacController {
 		String email = request.getParameter("email");
 		int qualificaton = Integer.parseInt(request.getParameter("hod_quolf"));
 		String joinDate = request.getParameter("join_date");
-		String relDate = request.getParameter("rel_date");
-		
+		int isReg = Integer.parseInt(request.getParameter("is_registration"));
+
 		
 		Dean dean=new Dean();
 		
@@ -661,8 +663,14 @@ public class IqacController {
 		dean.setContactNo(contactNo);
 		dean.setEmail(email);
 		dean.setQualificationId(qualificaton);
-		dean.setJoiningDate(joinDate);
-		dean.setRealivingDate(relDate);
+		dean.setJoiningDate(DateConvertor.convertToYMD(joinDate));
+		
+		if (isReg == 0) {
+			dean.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
+
+		} else {
+			dean.setRealivingDate(null);
+		}
 		dean.setMakerUserId(0);
 		dean.setDelStatus(1);
 		

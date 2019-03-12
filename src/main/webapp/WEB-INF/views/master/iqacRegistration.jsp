@@ -100,9 +100,9 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal" action="#" method="post"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+									<form class="form-horizontal" action="${pageContext.request.contextPath}/iqacNewRegistration"
+									 method="post" name="form_sample_2" id="form_sample_2"
+									 onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -115,7 +115,8 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-																								
+														<input type="hidden"  id="iqac_id" name="iqac_id" value="${miqc.iqacId}">									
+														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">IQAC I/C Name
 																<span class="text-danger">*</span>
@@ -157,17 +158,15 @@
 														</div>
 														
 														
-														<div class="form-group" id="abc">
+														<!-- <div class="form-group" id="abc">
 															<label class="control-label col-sm-2" for="smallheading">Other Designation
 														  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="desn"
-																	name="desn" 
-																	
-																	placeholder="Other Designation" value="" required>
+																	name="desn" placeholder="Other Designation" value="" required>
 															</div>
-														</div>
+														</div> -->
 														
 
 														<div class="form-group">
@@ -175,7 +174,7 @@
 																Of Joining  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="dateOfJoin"
+																<input type="text" class="form-control datepicker" id="dateOfJoin"
 																	name="dateOfJoin" placeholder="Date Of Joining"
 																	value="${miqc.joiningDate}" required>
 															</div>
@@ -203,21 +202,18 @@
 															</div>
 														</div>
 
-														<div class="form-group">
+													<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-															
-															<!-- 
-															<button type="submit" 
-																class="btn btn-info" onclick="getCOPO()">Submit</button>
-															 -->
-															 <a href="#myModal2"
-														data-toggle="modal"><button type="submit" onclick="getCOPO()"
-																class="btn btn-info">Submit</button></a>
-															
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
 
+													</div>
+													<input type="hidden" id="acc_off_id" name="acc_off_id" value="${miqc.iqacId}">
+													<input type="hidden" id="is_view" name="is_view" value="0">
 												
 
 
@@ -226,34 +222,35 @@
 												</div>
 
 											</div>
-
+											</form>
 										</div>
-									</form>
+									
 								</div>
 
 							</div>
+							</section>
 						</div>
 
 					</section>
-
+				</section>
 				</div>
 
 	
 
 				<!-- MAIN CONTENT AREA ENDS -->
-			</section>
-		</section>
+		<!-- 	</section> -->
+	<!-- 	</section> -->
 		<!-- END CONTENT -->
 
 
 
-	</div>
+	<!-- </div> -->
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 	
 	
 	
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -346,10 +343,39 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
+	
+	
+	<script>
+	function showDiv(value) {
+
+		if (value == 0) {
+			//alert(value);
+			document.getElementById("abc").style.display = "block";
+		} else {
+			//alert(value);
+			document.getElementById("abc").style.display = "none";
+		}
+	}
+
+	
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		
+	}
+	
+	$("#dateOfJoin").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	</script>
 	<script type="text/javascript">
 
 	function checkUnique(inputValue,valueType){

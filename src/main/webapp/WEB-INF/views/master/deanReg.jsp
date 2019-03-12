@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="showIsReg()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -189,19 +189,66 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="join_date"
+																<input type="text" class="form-control datepicker" id="join_date"
 																	name="join_date" placeholder="Contact No" required value="${dean.joiningDate}">
+															</div>
+															<label class="control-label col-sm-3" for="planning"
+																style="text-align: left;">Is Currently Working<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-2">
+																<c:choose>
+																	<c:when test="${dean.deanId==0}">
+
+																		<input type="radio" id="is_registration"
+																			name="is_registration" value="1" checked
+																			onclick="setDate(this.value)">Yes 
+																<input type="radio" id="is_registration"
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No 
+															
+															</c:when>
+																	<c:otherwise>
+
+																		<c:choose>
+																			<c:when test="${empty dean.realivingDate}">
+																				<input type="radio" id="is_registration"
+																					name="is_registration" value="1" checked
+																					onclick="setDate(this.value)">Yes  
+																<input type="radio" id="is_registration"
+																					name="is_registration" value="0"
+																					onclick="setDate(this.value)">No 
+															
+																
+																</c:when>
+																			<c:otherwise>
+																				<input type="radio" id="is_registration"
+																					name="is_registration" value="1" 
+																					onclick="setDate(this.value)">Yes
+																<input type="radio" id="is_registration" checked
+																					name="is_registration" value="0"
+																					onclick="setDate(this.value)">No
+															
+																
+																</c:otherwise>
+
+																		</c:choose>
+
+																	</c:otherwise>
+
+
+																</c:choose>
+
 															</div>
 														</div>
 													
 													
-														<div class="form-group">
+														<div class="form-group" id="abc" style="display: none">
 															<label class="control-label col-sm-2" for="page_order">Relieving
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="rel_date"
-																	name="rel_date" placeholder="Contact No" required value="${dean.realivingDate}">
+																<input type="text" class="form-control datepicker" id="acc_off_relDate"
+																	name="acc_off_relDate" placeholder="Contact No" value="${dean.realivingDate}">
 															</div>
 														</div>
 
@@ -211,15 +258,23 @@
 
 
 											  <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
+											  <div class="col-sm-offset-2 col-sm-10">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<button type="reset" class="btn btn-default">Reset</button>
+															</div>
+															<%-- <div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Add</button>
 																	<a href="${pageContext.request.contextPath}/showDeanList"><button
 										                              type="button" class="btn btn-primary">Save & Next</button></a>
 																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+															</div> --%>
 														</div>
-
-
+													<input type="hidden" id="acc_off_id" name="acc_off_id" value="${dean.deanId}">
+													<input type="hidden" id="is_view" name="is_view" value="0">
+													
+													
 
 
 
@@ -250,8 +305,51 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
+	
 
+	function showDiv(value) {
 
+		if (value == 0) {
+			//alert(value);
+			document.getElementById("abc").style.display = "block";
+		} else {
+			//alert(value);
+			document.getElementById("abc").style.display = "none";
+		}
+	}
+
+	
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		
+	}
+	
+	
+
+	</script>
+<script type="text/javascript">
+	function setDate(value){
+		//alert("Value " +value)
+		if(value==1){
+		//alert(value)
+		document.getElementById("acc_off_relDate").removeAttribute("required");
+		document.getElementById("abc").style.display = "none";
+
+		//alert(value)
+		}else{
+			//alert(value)
+			document.getElementById("acc_off_relDate").setAttribute("required","true");
+			document.getElementById("abc").style.display = "block";
+
+			//alert(value)
+
+		}
+		
+	}
+	
+	</script>
 <script type="text/javascript">
 
 	function checkUnique(inputValue,valueType){
@@ -352,6 +450,30 @@
 		
 		} */
 		
+	</script>
+	<script type="text/javascript">
+	
+	function showIsReg(){
+		//alert("Hi");
+		var x=${dean.deanId}
+	
+		if(x>0){
+			//alert("Hi 1")
+		var isRel=${dean.realivingDate};
+		//alert("Is Reg " +isReg);
+		if(isRel==null){
+			//alert("Hi 2")
+			document.getElementById("abc").style.display = "none";
+
+		}else{
+			//alert("Hi es")
+			document.getElementById("abc").style.display = "block";
+			
+		}
+			
+		}
+	
+	}
 	</script>
 
 

@@ -110,7 +110,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addFaculty"
-										method="post" name="form_sample_2" id="form_sample_2" onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="form_sample_2" id="form_sample_2" 
+										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -282,14 +283,14 @@
 																<input type="text" class="form-control datepicker" id="join_date"
 																	name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
 															</div>
-														</div>
+														<!-- </div>
 
-														 <div class="form-group">
+														 <div class="form-group"> -->
 															<label class="control-label col-sm-2" for="page_order">Is
 																Working Today<span class="text-danger">*</span>
 															</label>
 
-
+															<div class="col-sm-2">
 															<c:choose>
 																	<c:when test="${staff.facultyId==0}">
 
@@ -331,16 +332,12 @@
 
 
 																</c:choose>
-
+																</div>
 
 														</div>
 														
  
  													
- 															<div class="form-group">
-																
-
-															</div>
 															<div class="form-group">
 															
 															<div id="abc" style="display: none">
@@ -419,15 +416,27 @@
 												</div>
 
 
-												<div class="form-group">
+												<%-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<input type="submit" class="btn btn-primary" value="Add">
 																	<a href="${pageContext.request.contextPath}/showStaffList"><button
 										                              type="button" class="btn btn-primary">Save & Next</button></a>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
+														</div> --%>
+														
+														<div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<button type="reset" class="btn btn-default">Reset</button>
+															</div>
 														</div>
-
+														
+														<input type="hidden" id="acc_off_id" name="acc_off_id" value="${staff.facultyId}">
+													<input type="hidden" id="is_view" name="is_view" value="0">
+												
 
 
 												<div class="clearfix"></div>
@@ -452,7 +461,41 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<script>
+	function showDiv(value) {
 
+		if (value == 0) {
+			//alert(value);
+			document.getElementById("abc").style.display = "block";
+		} else {
+			//alert(value);
+			document.getElementById("abc").style.display = "none";
+		}
+	}
+
+	
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		
+	}
+	
+	$("#join_date").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#acc_off_relDate").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	</script>
 <script type="text/javascript">
 
 	function checkUnique(inputValue,valueType){
@@ -556,25 +599,23 @@
 	</script>
 <script type="text/javascript">
 	function setDate(value){
-		//alert("Value " +value)
+		///alert("Value " +value)
 		if(value==1){
-		//alert(value)
-		document.getElementById("acc_off_relDate").setAttribute("required","true");
-		document.getElementById("abc").style.display = "block";
-
-		
-
-		//alert(value)
-		}else{
 			//alert(value)
-		document.getElementById("acc_off_relDate").removeAttribute("required");
-		document.getElementById("abc").style.display = "none";
-			//alert(value)
+			document.getElementById("acc_off_relDate").removeAttribute("required");
+			document.getElementById("abc").style.display = "none";
 
+			//alert(value)
+			}else{
+				//alert(value)
+				document.getElementById("acc_off_relDate").setAttribute("required","true");
+				document.getElementById("abc").style.display = "block";
+
+				//alert(value)
+
+			}
+			
 		}
-		
-	}
-	
 	</script>
 	<script type="text/javascript">
 	 function showReforms3(b) {
