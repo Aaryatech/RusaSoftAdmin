@@ -411,20 +411,16 @@ public class HomeController {
 	public @ResponseBody AcademicYear setAcaYearInSession(HttpServletRequest request,
 		HttpServletResponse response) {
 		
-		System.err.println("Hello ");
 		int yearId=Integer.parseInt(request.getParameter("yearId"));
 		String yearValue=request.getParameter("yearValue");
 		HttpSession session = request.getSession();
 		session.setAttribute("acYearId", yearId);
 		//session.setAttribute("sessionSubModuleId",subModId);
-		System.err.println("yearValue " +yearValue);
-		System.err.println("Session date year Id " +session.getAttribute("acYearId"));
 		MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
 		map =new LinkedMultiValueMap<String, Object>(); 
 		 map.add("yearId", yearId);
 		AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
 		session.setAttribute("acYearValue", acYear.getAcademicYear());
-
 		
 		return acYear;
 		

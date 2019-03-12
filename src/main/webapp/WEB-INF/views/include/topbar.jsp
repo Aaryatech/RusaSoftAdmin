@@ -11,15 +11,15 @@
 		<div class='pull-left'>
 			<ul class="info-menu right-links list-inline list-unstyled">
 				<li class="profile"><a href="#" data-toggle="dropdown"
-					class="toggle"> <span>Select Year ${sessionScope.acYearValue} <i
+					class="toggle"> <span>Academic Year <span id="topYear" >${sessionScope.acYearValue}</span> <i
 							class="fa fa-calendar"></i>
 					</span>
 				</a>
 					<ul class="dropdown-menu profile animated fadeIn">
  					
 						<c:forEach items="${sessionScope.acaYearList}" var="acYear">
-							<li><a href="#" id="${acYear.yearId}"
-								onclick="setAcaYearInSession(${acYear.yearId},${acYear.academicYear})"
+							<li><a href="#" id="${acYear.yearId}"  
+								onclick="setAcaYearInSession(${acYear.yearId},'${acYear.academicYear}')"
 								class="act-class">${acYear.academicYear}</a></li>
 						</c:forEach>
 					</ul></li>
@@ -27,19 +27,19 @@
 			 </ul>
 		</div>
 		
-		<div class='pull-left'>
+		<%-- <div class='pull-left'>
 			<ul class="info-menu right-links list-inline list-unstyled">
 				<li class="profile"><a href="#" data-toggle="dropdown"
-					class="toggle"> <span>Select Year ${sessionScope.acYearId} <i
+					class="toggle"> <span>Academic Year ${sessionScope.acYearId} <i
 							class="fa fa-calendar"></i>
 					</span>
 				</a>
 <!-- 					<ul class="dropdown-menu profile animated fadeIn">
  -->					<select id="acYear1" name="acYear1" class="form-control" onclick="setAcaYearInSession(${acYear.yearId},${acYear.academicYear})">
 						<c:forEach items="${sessionScope.acaYearList}" var="acYear">
-							<%-- <li><a href="#" id="${acYear.yearId}"
+							<li><a href="#" id="${acYear.yearId}"
 								onclick="setAcaYearInSession(${acYear.yearId},${acYear.academicYear})"
-								class="act-class">${acYear.academicYear}</a></li> --%>
+								class="act-class">${acYear.academicYear}</a></li>
 								<option value="${acYear.yearId}">${acYear.academicYear}</option>
 						
 						</c:forEach></select>
@@ -52,7 +52,7 @@
 
 
 			<!-- </ul> -->
-		</div>
+		</div> --%>
 		<!-- <div class='pull-left' id= "ac_year">
 			<ul class="info-menu right-links list-inline list-unstyled">
 				<li class="profile"><a href="#" data-toggle="dropdown"
@@ -95,11 +95,9 @@
 
 <script>
 function setAcaYearInSession(yearId,yearValue) {
+	//alert("yearValue " +yearValue);
+	$("#topYear").html(yearValue);
 	
-	//alert("Hi " +yearValue);
-	//document.getElementById("sel_year").innerHTML("xxxxxx");
-	//ac_year
-	//document.getElementById("sel_ac_year").innerHTML("yearValue");
 	$.getJSON('${setAcaYearInSession}', {
 		
 		yearId : yearId,
@@ -108,8 +106,10 @@ function setAcaYearInSession(yearId,yearValue) {
 		ajax : 'true',
 
 	}, function(data) {
-		alert("Data  " +JSON.stringify(data));
+		//alert("Data  " +JSON.stringify(data));
 		//data.academicYear
+		//$("#topYear").html(data.academicYear );
+		 
 	});
 	
 }
