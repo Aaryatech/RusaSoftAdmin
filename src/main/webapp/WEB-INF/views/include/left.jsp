@@ -309,7 +309,7 @@
 					<ul class="sub-menu">
 
 							<li><a class=""
-							href="${pageContext.request.contextPath}/showProgDetail1">Add Program Details
+							href="${pageContext.request.contextPath}/showProgDetail1"> Program Details List
 								  </a></li>
 
 						 

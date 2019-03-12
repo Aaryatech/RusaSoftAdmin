@@ -54,13 +54,9 @@
 							<h2 class="title pull-left">${title}</h2>
 						
 							<div class="actions panel_actions pull-right">
-									<a href="#myModal"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								<a class="box_toggle fa fa-chevron-down"></a>
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
+									<a href="${pageContext.request.contextPath}/showAddAlumini"><button type="submit"
+									class="btn btn-success">Add Alumini Detail</button></a>
+							
 
 							</div>
 
@@ -82,58 +78,19 @@
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="5%">Sr.No.</th>
-												<th width="10%">Academic Year.</th>
-												<th width="10%">Name of Alumni</th>
-												<th width="10%">Passing Year</th>
-												<th width="10%">Nature of Contribution</th>
-												<th width="10%">Year of Contribution</th>
-												<th width="10%">Benefit To</th>
+												<th>Sr.No.</th>
+										
+												<th>Name of Alumni</th>
+												<th>Passing Year</th>
+												<th>Nature of Contribution</th>
+												<th>Year of Contribution</th>
+												<th>Benefit To</th>
 											</tr>
 
 										</thead>
 
 
-<!-- 
-										<tbody>
 
-											<tr>
-												<td>1</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">Financial</option>
-															<option value="1">Non Financial</option>
-														</select>
-													</div></td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">Students</option>
-															<option value="1">Staff</option>
-															<option value="2">Faculty</option>
-															<option value="3">Department</option>
-															<option value="4">Institute</option>
-															<option value="5">Society</option>
-															<option value="6">Any Other</option>
-
-														</select>
-													</div></td>
-											</tr>
-
-
-										</tbody> -->
 									</table>
 								</div>
 

@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showProgDetail1"><button
+								<a href="${pageContext.request.contextPath}/showAlumini"><button
 										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
@@ -119,122 +119,95 @@
 													<div class="col-xs-12">
 														
 
-														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Program Type
-																 <span class="text-danger">*</span>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">
+												Name of Alumini <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="lib_quolf" name="lib_quolf" class="form-control" required>
-															
-																	
-																		<c:forEach items="${quolfList}" var="quolf">
-																		<c:choose>
-																			<c:when test="${quolf.qualificationId==editInst.qualificationId}">
-																			<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																			<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
+																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
+																	name="librarian_name" placeholder="" required
+																	>
+															</div>
+														</div>
+														
+																
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">
+											Passing	Year <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
+																	name="librarian_name" placeholder="" required
+																	>
+															</div>
+														</div>
+														
+														
+												<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Nature of Contribution
+															 <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="year" name="year" class="form-control"   required>
+						                            	<option value="Financial">Financial</option>
+														<option value="Non Financial">Non Financial</option>
 																</select>
 																
 																
 															</div>
 														</div>
+														
 														
 														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">
-															Duration(in months)<span class="text-danger">*</span>
+												Year of Contribution<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Duration(in months)" required
+																	name="librarian_name" placeholder="" required
 																	>
 															</div>
 														</div>
-
-
-
 														
-
+															
+														
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-															Name of Program <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Sanctioned Intake
-															<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control" id="lib_joiningDate" 	value="${editInst.joiningDate}"
-																	name="lib_joiningDate" placeholder=" Sanctioned Intake" required>
-															</div>
-														</div>
-													
-													
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Date/Year of Introduction
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
-																	name="relieving_date"  required>
-															</div>
-														</div>
-
-													</div>
-
-												</div>
-												
-												
-												
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Approved By
+															<label class="control-label col-sm-2" for="status">Benefit To
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-															
-																		
-								<option value="BOS/AC">BOS/AC</option>
-															<option value="Industry">Industry</option>
-															<option value="AICTE">AICTE</option>
-															<option value="NCTE">NCTE</option>
-															<option value="MCI">MCI</option>
-															<option value="DCI">DCI</option>
-															<option value="PCI">PCI</option>
+						                                      <option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Faculty">Faculty</option>
+															<option value="Department">Department</option>
+															<option value="Institute">Institute</option>
+															<option value="Society">Society</option>
 															<option value="7">Any Other</option>
-						
 																</select>
 																
 																
 															</div>
 														</div>
 														
+														
 															<div class="form-group" id="abc">
 															<label class="control-label col-sm-2" for="page_order">
-														Approved By <span class="text-danger">*</span>
+														Other <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" 
 																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="	Approved By " onchange="checkUnique(this.value,1)" required>
+																	 name="lib_con_num" placeholder="" onchange="checkUnique(this.value,1)" required>
 															</div>
 														</div>
+													
+													
+													</div>
+
+												</div>
+														
 
                                              <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">

@@ -30,19 +30,19 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
-
+<%-- 
 				<div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- <h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -53,129 +53,35 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-									<a href="#myModal"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<a class="box_toggle fa fa-chevron-down"></a>
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
-
+									<a href="${pageContext.request.contextPath}/showAddStudAct"><button type="submit"
+									class="btn btn-success">Add Activity Detail</button></a>
 							</div>
-
 						</header>
 						<div class="content-body">
 							<div class="row">
 
 
-					
 
-
-
-								<h5 class="title pull-left">
-									<strong>Students Activity(Organized)</strong>
-								</h5>
-								
+							
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="5%">Sr.No.</th>
-												<th width="10%">Academic Year</th>
-												<th width="1%">Name of Activity</th>
-												<th width="10%">Date</th>
-												<th width="10%">Year</th>
-												<th width="10%">Branch</th>
-												<th width="10%">No. of Students Participated</th>
-												<th width="10%">Level of Activity</th>
+												<th>Sr.No.</th>
+												<th>Name of Activity</th>
+												<th>Date</th>
+												<th>Year</th>
+												<th>Branch</th>
+												<th>No. of Students Participated</th>
+												<th>Level of Activity</th>
 											</tr>
 
 										</thead>
 
 
 
-										<!-- <tbody>
-
-											<tr>
-												<td>1</td>
-												<td>Sports</td>
-												<td><input type="date" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">National</option>
-															<option value="1">International</option>
-															<option value="2">State</option>
-															<option value="3">Regional</option>
-
-														</select>
-													</div></td>
-											</tr>
-
-											<tr>
-												<td>2</td>
-												<td>Cultural</td>
-												<td><input type="date" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">National</option>
-															<option value="1">International</option>
-															<option value="2">State</option>
-															<option value="3">Regional</option>
-
-														</select>
-													</div></td>
-											</tr>
-
-
-											<tr>
-												<td>3</td>
-												<td>Other Competition</td>
-												<td><input type="date" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												<td><div class="col-sm-12">
-														<select id="salutation" name="salutation"
-															class="form-control" required>
-															<option value="0">National</option>
-															<option value="1">International</option>
-															<option value="2">State</option>
-															<option value="3">Regional</option>
-
-														</select>
-													</div></td>
-											</tr>
-
-										</tbody> -->
 									</table>
 								</div>
 
@@ -211,7 +117,7 @@
 
 	</div>
 	
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -221,9 +127,9 @@
 					<h4 class="modal-title">Student Activity Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -338,7 +244,7 @@
 			</div>
 		</div>
 	</div>
-	
+	 --%>
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");

@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showProgDetail1"><button
+								<a href="${pageContext.request.contextPath}/showStudAddmit"><button
 										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
@@ -112,130 +112,128 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
+											
+	<div class="col-xs-12">
+									<table class="table table-striped dt-responsive display">
+										<thead>
+											<tr>
+												<th width="10%">Sr No</th>
+												<th width="30%">Category</th>
+												<th width="60%" style="text-align: center;" colspan="3">No.
+													of Students</th>
+											
+											</tr>
+											<tr>
+												<th width="10%"></th>
+												<th width="30%"></th>
+												<th width="20%">Male</th>
+												<th width="20%">Female</th>
+											<th width="20%">Transgender</th>
+											
+												
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>SC</td>
+
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+														<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+											
 
 
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>ST</td>
 
-													<div class="col-xs-12">
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+														<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+												
+
+
+											</tr>
+
+											<tr>
+												<td>3</td>
+												<td>OBC</td>
+
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+
+											</tr>
+
+											<tr>
+												<td>4</td>
+												<td>VJ</td>
+
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+												
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+
+											</tr>
+
+											<tr>
+												<td>5</td>
+												<td>NT-I,NT-II,NT-III</td>
+
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+
+											</tr>
+
+											<tr>
+												<td>1</td>
+												<td>General</td>
+
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+												
+												<td><input type="text" class="form-control" id="curExp"
+													name="curExp" value="" required></td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+								</div>
 														
 
-														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Program Type
-																 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="lib_quolf" name="lib_quolf" class="form-control" required>
-															
-																	
-																		<c:forEach items="${quolfList}" var="quolf">
-																		<c:choose>
-																			<c:when test="${quolf.qualificationId==editInst.qualificationId}">
-																			<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																			<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-															Duration(in months)<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Duration(in months)" required
-																	>
-															</div>
-														</div>
-
-
-
-														
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-															Name of Program <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Sanctioned Intake
-															<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control" id="lib_joiningDate" 	value="${editInst.joiningDate}"
-																	name="lib_joiningDate" placeholder=" Sanctioned Intake" required>
-															</div>
-														</div>
 													
-													
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Date/Year of Introduction
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
-																	name="relieving_date"  required>
-															</div>
-														</div>
-
-													</div>
-
-												</div>
-												
-												
-												
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Approved By
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-															
-																		
-								<option value="BOS/AC">BOS/AC</option>
-															<option value="Industry">Industry</option>
-															<option value="AICTE">AICTE</option>
-															<option value="NCTE">NCTE</option>
-															<option value="MCI">MCI</option>
-															<option value="DCI">DCI</option>
-															<option value="PCI">PCI</option>
-															<option value="7">Any Other</option>
-						
-																</select>
-																
-																
-															</div>
-														</div>
-														
-															<div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="page_order">
-														Approved By <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="	Approved By " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-
                                              <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
@@ -251,10 +249,10 @@
 
 												<div class="clearfix"></div>
 
-											</div>
+											
 
 										</div>
-
+		</div>
 									</form>
 								</div>
 

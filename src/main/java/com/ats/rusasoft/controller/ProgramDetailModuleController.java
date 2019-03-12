@@ -134,6 +134,30 @@ public class ProgramDetailModuleController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/showAddStudAdmitCatWise", method = RequestMethod.GET)
+	public ModelAndView showAddStudAddmitCatWise(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addStudCatwise");
+
+			model.addObject("title", "Add Student  Categorywise");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 
 	@RequestMapping(value = "/showStudAddmitLoc", method = RequestMethod.GET)
 	public ModelAndView showStudAddmitLoc(HttpServletRequest request, HttpServletResponse response) {
@@ -156,6 +180,30 @@ public class ProgramDetailModuleController {
 		return model;
 
 	}
+	
+
+	@RequestMapping(value = "/showAddStudAddmitLocWise", method = RequestMethod.GET)
+	public ModelAndView showAddStudAddmitLocWise(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addStudLocwise");
+
+			model.addObject("title", "Add Student Locationwise ");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 
 	@RequestMapping(value = "/showStudSupp", method = RequestMethod.GET)
 	public ModelAndView showProgDetail(HttpServletRequest request, HttpServletResponse response) {
@@ -178,6 +226,29 @@ public class ProgramDetailModuleController {
 		return model;
 
 	}
+	
+
+	@RequestMapping(value = "/showAddStudSupp", method = RequestMethod.GET)
+	public ModelAndView showAddStudSupp(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addStudSuppSch");
+
+			model.addObject("title", "Student Support Scheme");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 	@RequestMapping(value = "/showStudTran", method = RequestMethod.GET)
 	public ModelAndView showStudTran(HttpServletRequest request, HttpServletResponse response) {
@@ -186,6 +257,29 @@ public class ProgramDetailModuleController {
 		try {
 
 			model = new ModelAndView("ProgramDetails/training");
+
+			model.addObject("title", "Program Training Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
+	@RequestMapping(value = "/showAddStudTran", method = RequestMethod.GET)
+	public ModelAndView showAddStudTran(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addStudTraining");
 
 			model.addObject("title", "Program Training Details");
 
@@ -244,6 +338,30 @@ public class ProgramDetailModuleController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/showAddStudAct", method = RequestMethod.GET)
+	public ModelAndView showAddStudAct(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addStudActOrganized");
+
+			model.addObject("title", "Student Activity Organized");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
 
 	@RequestMapping(value = "/showStudActAtten", method = RequestMethod.GET)
 	public ModelAndView showStudActAtten(HttpServletRequest request, HttpServletResponse response) {
@@ -267,6 +385,30 @@ public class ProgramDetailModuleController {
 
 	}
 
+	
+	@RequestMapping(value = "/showAddStudActAtten", method = RequestMethod.GET)
+	public ModelAndView showAddStudActAtten(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addStudActAttend");
+
+			model.addObject("title", "Student Activity Attended");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
 	@RequestMapping(value = "/showAlumini", method = RequestMethod.GET)
 	public ModelAndView showAlumini(HttpServletRequest request, HttpServletResponse response) {
 
@@ -276,6 +418,29 @@ public class ProgramDetailModuleController {
 			model = new ModelAndView("ProgramDetails/alumini");
 
 			model.addObject("title", "Alumini");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showAddAlumini", method = RequestMethod.GET)
+	public ModelAndView showAddAlumini(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addAluminiDetails");
+
+			model.addObject("title", "Add Alumini");
 
 		} catch (Exception e) {
 

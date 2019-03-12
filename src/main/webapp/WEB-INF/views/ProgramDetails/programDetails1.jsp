@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " >
+<body class=" "  onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -56,10 +56,8 @@
 						<a href="${pageContext.request.contextPath}/showAddProgDetail"><button
 										type="button" class="btn btn-success">Add Program Detail</button></a>
 							
-						
 
 							</div>
-
 						</header>
 						<div class="content-body">
 							<div class="row">
@@ -87,15 +85,10 @@
 												
 											</tr>
 </thead>
-
 </table>
 
-
-									
 								</div>
 </div>
-								
-							
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>

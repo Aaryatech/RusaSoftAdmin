@@ -53,11 +53,11 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
+								<a href="${pageContext.request.contextPath}/showAddStudAdmitCatWise"><button
+										type="button" class="btn btn-success">Add Student Categorywise</button></a>
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								<a class="box_toggle fa fa-chevron-down"></a>
+								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -71,7 +71,7 @@
 								
 
 								<h5 class="title pull-left">
-									<strong>No. of Students Admitted Category wise</strong>
+									<strong> Students Admitted Category wise</strong>
 								</h5>
 
 								
@@ -79,11 +79,12 @@
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="25%">Sr No</th>
-												<th width="25%">Category</th>
-												<th width="25%">Gender</th>
-												<th width="25%" >No.
-													of Students</th>
+												<th >Sr No</th>
+												<th >Category</th>
+												<th >Male Students</th>
+												<th >Female Students</th>
+												<th >Transgender Students</th>
+												
 											</tr>
 											
 											
@@ -117,7 +118,7 @@
 
 
 
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -127,9 +128,9 @@
 					<h4 class="modal-title">Student Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -183,7 +184,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	
 	<script type="text/javascript">
 	function getData() {

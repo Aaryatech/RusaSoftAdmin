@@ -31,18 +31,18 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
-				<div class='col-xs-12'>
+				<%-- <div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -53,14 +53,9 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								<a class="box_toggle fa fa-chevron-down"></a>
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
-
+						<a href="${pageContext.request.contextPath}/showAddStudTran"><button
+										type="button" class="btn btn-success">Add Training Details</button></a> 
+							
 							</div>
 
 						</header>
@@ -78,48 +73,21 @@
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="5%">Sr.No.</th>
-												<th width="10%">Academic Year</th>
-												<th width="15%">Name of Employer</th>
-												<th width="10%">Program Type</th>
-												<th width="10%">Name of Program</th>
-												<th width="10%">No. of Students Placed</th>
-												<th width="10%">Address of Employer</th>
-												<th width="10%">Contact Details</th>
-												<th width="15%">Package Offered</th>
+												<th >Sr.No.</th>
+												<th>Name of Employer</th>
+												<th>Program Type</th>
+												<th>Name of Program</th>
+												<th>No. of Students Placed</th>
+												<th>Address of Employer</th>
+												<th>Contact Details</th>
+												<th>Package Offered</th>
 											</tr>
 
 
 										</thead>
 
 
-<!-- 
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
 
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-											</tr>
-
-
-
-										</tbody> -->
 									</table>
 								</div>
 
