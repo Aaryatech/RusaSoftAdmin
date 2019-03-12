@@ -1,5 +1,10 @@
 package com.ats.rusasoft.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +18,24 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.model.Dean;
+import com.ats.rusasoft.model.DeansList;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.IqacList;
 import com.ats.rusasoft.model.MIqac;
+import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.StaffList;
 import com.ats.rusasoft.model.UserLogin;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
@@ -32,15 +43,70 @@ public class IqacController {
 	
 	RestTemplate rest = new RestTemplate();
 	
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Calendar cal = Calendar.getInstance();
+	String curDateTime = dateFormat.format(cal.getTime());
+	
+	
+	
+	@RequestMapping(value = "/chkFields", method = RequestMethod.GET)
+	public @ResponseBody Info checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String inputValue = request.getParameter("inputValue");
+			int valueType = Integer.parseInt(request.getParameter("valueType"));
+			int primaryKey = Integer.parseInt(request.getParameter("primaryKey"));
+			int isEdit = Integer.parseInt(request.getParameter("isEdit"));
+			int tableId = Integer.parseInt(request.getParameter("tableId"));
+			
+			System.out.println("Values:"+inputValue+" "+valueType+" "+primaryKey+" "+isEdit+" "+tableId);
+			
+			map.add("inputValue", inputValue);
+			map.add("valueType",valueType);
+			map.add("tableId",tableId );
+			map.add("isEditCall",isEdit );
+			map.add("primaryKey", primaryKey);
+			
+			info = rest.postForObject(Constants.url + "chkUniqueValues", map, Info.class);
+			System.err.println("Info Response  " +info.toString());
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return info;
+
+	}
+	
+	
 	@RequestMapping(value = "/iqacRegistration", method = RequestMethod.GET)
 	public ModelAndView showRegisterInstitute(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("master/iqacRegistration");
-		try {
-			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
-			
-			model.addObject("desigList", designationList);
+		ModelAndView model = null;
 		
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		try {
+			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "1", "0", "0", newModuleList);
+			
+			if(view.isError()==true) {
+						
+						model = new ModelAndView("accessDenied");
+										
+			}else {
+			model = new ModelAndView("master/iqacRegistration");
+			MIqac miqac = new MIqac();
+			model.addObject("miqac", miqac);
+			
+			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);		
+			model.addObject("desigList", designationList);
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In iqacRegistration at Iqac Contr" + e.getMessage());
@@ -65,16 +131,16 @@ public class IqacController {
 		int instituteId =(int)session.getAttribute("instituteId");
 		int userId =(int)session.getAttribute("userId");
 		
-		MIqac miqac = new MIqac();
+	
 		
-		int iqacId=0;	
+		int iqacId = 0;	
 		int  designation = 0;
 		try {		
 			
 			iqacId= Integer.parseInt(request.getParameter("iqac_id"));	
 			
 		} catch (Exception e) {
-			iqacId=0;	
+			iqacId = 0;	
 			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
 			
@@ -89,7 +155,7 @@ public class IqacController {
 			String email = request.getParameter("emailId2");
 			
 			System.out.println("Data:"+iqacId+" "+iqacName+" "+dateOfJoin+" "+contact+" "+email);
-			
+			MIqac miqac = new MIqac();
 			if(iqacId==0) {
 				miqac.setIqacId(0);
 			
@@ -108,11 +174,11 @@ public class IqacController {
 			miqac.setIsActive(1);
 			miqac.setIsEnrollSystem(1);
 			miqac.setMakerUserId(1);
-			miqac.setMakerEnterDatetime("2019-03-04");
+			miqac.setMakerEnterDatetime(curDateTime);
 			miqac.setCheckerUserId(userId);
-			miqac.setCheckerDatetime("2019-03-04");
-			miqac.setLastUpdatedDatetime("2019-03-04");
- 
+			miqac.setCheckerDatetime(curDateTime);
+			miqac.setLastUpdatedDatetime(curDateTime);
+			miqac.setType(2);
 			MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac",miqac ,MIqac.class);
 			
 		
@@ -127,17 +193,24 @@ public class IqacController {
 	public ModelAndView showIqacList(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 		try {
-			HttpSession session = request.getSession();
+			Info view = AccessControll.checkAccess("showIqacList", "showIqacList", "1", "0", "0", "0", newModuleList);
+			
+			if(view.isError()==true) {
+				
+				model = new ModelAndView("accessDenied");
+								
+			}
+			else {
+			
 			int userId =(int)session.getAttribute("userId");
 			int instituteId =(int)session.getAttribute("instituteId");
 
 			model = new ModelAndView("master/iqacList");
-			/*
-			 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			 * 
-			 * map.add("uid", userId); map.add("instituteId", instituteId);
-			 */
+			
 						
 			List<IqacList> qacList = rest.getForObject(Constants.url+"/getAllIqac", List.class);
 			
@@ -145,7 +218,26 @@ public class IqacController {
 			
 			model.addObject("QList", qacList);
 			model.addObject("title", "IQAC List");
-
+			
+			Info add = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "1", "0", "0", newModuleList);
+			Info edit = AccessControll.checkAccess("showIqacList", "showIqacList", "0" ,"0", "1", "0", newModuleList);
+			Info delete = AccessControll.checkAccess("showIqacList", "showIqacList", "0" ,"0", "0", "1", newModuleList);
+			
+			if(add.isError()==false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+				
+			}
+			if(edit.isError()==false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if(delete.isError()==false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+				
+			}
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showIqacList at Iqac Contr" + e.getMessage());
@@ -161,15 +253,28 @@ public class IqacController {
 
 	
 	@RequestMapping(value = "/editIqac/{iqacId}", method = RequestMethod.GET)
-	public ModelAndView editIqac(@PathVariable("iqacId") int iqacId) {
+	public ModelAndView editIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request) {
 		
 	System.out.println("Id:"+iqacId);
 
-		ModelAndView model = new ModelAndView("master/iqacRegistration");
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		map.add("id", iqacId);
+		ModelAndView model = null;
+		 HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
 		try {
+			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "1", "0", newModuleList);
 			
+			if(view.isError()==true) {
+						
+						model = new ModelAndView("accessDenied");
+										
+					}
+			else {
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("id", iqacId);
+			
+			model = new ModelAndView("master/iqacRegistration");
 			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
 			model.addObject("desigList", designationList);
 			
@@ -177,7 +282,7 @@ public class IqacController {
 			System.out.println("miqc:"+miqc);
 			
 			model.addObject("miqc", miqc);
-		
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
@@ -189,16 +294,27 @@ public class IqacController {
 	}
 	
 	@RequestMapping(value = "/deleteIqac/{iqacId}", method = RequestMethod.GET)
-	public String deleteIqac(@PathVariable("iqacId") int iqacId) {
+	public String deleteIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request) {
+		String a=null;
+		 HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "0", "1", newModuleList);
+			if(view.isError()==true) {
+				
+				 a="redirect:/accessDenied";
+								
+			}
+			else {
 		Info inf = new Info();
 		System.out.println("Id:"+iqacId);
 		
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("id", iqacId);
 		Info miqc = rest.postForObject(Constants.url+"/deleteIqacById", map, Info.class);
-		
-		return "redirect:/showIqacList";
-	
+			a="redirect:/showIqacList";
+		}
+		return a;
+			
 	}
 	
 	/********************************************Staff/Faculty**********************************************/
@@ -207,16 +323,37 @@ public class IqacController {
 	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
-		try {
+		MultiValueMap< String, Object> map = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
+		try {Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "1", "0", "0", newModuleList);
+		String a = null;
+		if(view.isError()==true) {
+					
+			 a="redirect:/accessDenied";
+									
+				}
+		else {
 			model = new ModelAndView("master/regstaff");
+			
+			map = new LinkedMultiValueMap<>();
 			
 			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
 			model.addObject("desigList", designationList);
 			
+			map.add("type", 1);
 			
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
+			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("quolfList " + quolfList.toString());
+			model.addObject("quolfList", quolfList);
+			
+			Staff staff = new Staff();
+			model.addObject("staff", staff);
 
 			model.addObject("title", "Register Faculty");
-
+		}
 		} catch (Exception e) {
 
 			System.err.println("exception In showHodAfterLogin at Master Contr" + e.getMessage());
@@ -255,34 +392,32 @@ public class IqacController {
 
 		}
 			String facultyMmemberName = request.getParameter("faculty_member_name");
-			int highestQualification = Integer.parseInt(request.getParameter("highest_qualification"));
+			int highestQualification = Integer.parseInt(request.getParameter("hod_quolf"));
 			//String otherQualification = request.getParameter("other_qualification");
 			String yrofHighestQualification = request.getParameter("yr_highest_qualification_acqrd");
 			int designation = Integer.parseInt(request.getParameter("designation"));
 			String joinDate = request.getParameter("join_date");
-			int isReg = Integer.parseInt(request.getParameter("isReg"));
-			String relDate = request.getParameter("rel_date");
+			int isReg = Integer.parseInt(request.getParameter("is_registration"));
+			String relDate = request.getParameter("acc_off_relDate");
 			int teachTo = Integer.parseInt(request.getParameter("teachTo"));
 			String contactNo = request.getParameter("contact_no");
 			String email = request.getParameter("email");
 			
 			Staff staff = new Staff();
 			
-			if(facultyId>0) {
+			
 			staff.setFacultyId(facultyId);
-			}else {
-				staff.setFacultyId(0);
-			}
+			
 			staff.setInstituteId(instituteId);
 			staff.setDeptId(deptId);
 			staff.setFacultyName(facultyMmemberName);
 			staff.setHighestQualification(highestQualification);
 			staff.setHightestQualificationYear(yrofHighestQualification);
 			staff.setCurrentDesignationId(designation);
-			staff.setJoiningDate(joinDate);
+			staff.setJoiningDate(DateConvertor.convertToYMD(joinDate));
 			staff.setIsWorking(isReg);
 			if(isReg == 0)
-			staff.setRealivingDate(relDate);//(DateConvertor.convertToYMD(relDate));
+			staff.setRealivingDate(relDate);
 		else {
 			staff.setRealivingDate("2019-01-01");
 		}
@@ -298,7 +433,7 @@ public class IqacController {
 			staff.setLastUpdatedDatetime("2019-03-10");
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime("2019-03-10");
-			staff.setExtraint1(0);
+			staff.setExtraint1(4);
 			staff.setExtravarchar1("NA");
 			
 			
@@ -316,7 +451,19 @@ public class IqacController {
 	public ModelAndView showStaffList(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
 		try {
+			Info view = AccessControll.checkAccess("showStaffList", "showStaffList", "1", "0", "0", "0", newModuleList);
+			
+			if(view.isError()==true) {
+				
+				model = new ModelAndView("accessDenied");
+								
+			}
+			else {
 
 			model = new ModelAndView("master/staffList");
 
@@ -327,6 +474,25 @@ public class IqacController {
 			System.out.println("Staff List:"+staffList);
 			
 			model.addObject("staffList", staffList);
+			Info add = AccessControll.checkAccess("showStaffList", "showStaffList", "0", "1", "0", "0", newModuleList);
+			Info edit = AccessControll.checkAccess("showStaffList", "showStaffList", "0" ,"0", "1", "0", newModuleList);
+			Info delete = AccessControll.checkAccess("showStaffList", "showStaffList", "0" ,"0", "0", "1", newModuleList);
+			
+			if(add.isError()==false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+				
+			}
+			if(edit.isError()==false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if(delete.isError()==false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+				
+			}
+			}
 			
 		} catch (Exception e) {
 
@@ -342,14 +508,32 @@ public class IqacController {
 	
 	
 	@RequestMapping(value = "/editFaculity/{facultyId}", method = RequestMethod.GET)
-	public ModelAndView editFaculity(@PathVariable("facultyId") int facultyId) {
+	public ModelAndView editFaculity(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
 		
 	System.out.println("Id:"+facultyId);
 
-		ModelAndView model = new ModelAndView("master/regstaff");
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		map.add("id", facultyId);
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 		try {
+			Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "0", "1", "0", newModuleList);
+			
+			if(view.isError()==true) {
+						
+						model = new ModelAndView("accessDenied");
+										
+					}
+			else {
+			
+			model = new ModelAndView("master/regstaff");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("id", facultyId);
+			map.add("type", 1);
+			
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
+			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("quolfList " + quolfList.toString());
+			model.addObject("quolfList", quolfList);
 			
 			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
 			model.addObject("desigList", designationList);
@@ -358,7 +542,7 @@ public class IqacController {
 			System.out.println("staff"+staff);
 			
 			model.addObject("staff", staff);
-		
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
@@ -372,7 +556,18 @@ public class IqacController {
 	
 	
 	@RequestMapping(value = "/deleteFaculity/{facultyId}", method = RequestMethod.GET)
-	public String deleteStaff(@PathVariable("facultyId") int facultyId) {
+	public String deleteStaff(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "0", "0", "1", newModuleList);
+		String a = null;
+		if(view.isError()==true) {
+					
+			 a="redirect:/accessDenied";
+									
+				}
+		else {
+		
 		Info inf = new Info();
 		System.out.println("Id:"+facultyId);
 		
@@ -380,8 +575,248 @@ public class IqacController {
 		map.add("id", facultyId);
 		Info miqc = rest.postForObject(Constants.url+"/deleteStaffById", map, Info.class);
 		
-		return "redirect:/showStaffList";
+		 a="redirect:/showStaffList";
+		
+		}
+		return a;
 	
 	}
+	
+	/*****************************Dean / R&D Registration***********************************/
+	
+	@RequestMapping(value = "/showRegDean", method = RequestMethod.GET)
+	public ModelAndView showRegDean(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 		
+		
+		MultiValueMap<String, Object> map = null;
+				try {
+					Info view = AccessControll.checkAccess("showRegDean", "showDeanList", "0", "1", "0", "0", newModuleList);
+					
+					if(view.isError()==true) {
+								
+						model = new ModelAndView("accessDenied");
+												
+							}
+					else {
+			model = new ModelAndView("master/deanReg");
+			
+			map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("type", 1);
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
+			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("quolfList " + quolfList.toString());
+			Dean dean=new Dean();
+			model.addObject("dean", dean);
+
+			model.addObject("quolfList", quolfList);
+			model.addObject("title", "Dean  Registration");
+		}
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value="/insertNewDean", method=RequestMethod.POST)
+	public String addNewDean(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		
+		int deanId = 0;
+		try {
+			
+			deanId=Integer.parseInt(request.getParameter("dean_id"));
+		}catch(Exception e) {
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+			e.printStackTrace();
+			deanId=0;
+		}
+		
+		HttpSession session = request.getSession();
+		
+		int instituteId =(int)session.getAttribute("instituteId");
+		String deanName = request.getParameter("dean_name");
+		String contactNo = request.getParameter("contact_no");
+		String email = request.getParameter("email");
+		int qualificaton = Integer.parseInt(request.getParameter("hod_quolf"));
+		String joinDate = request.getParameter("join_date");
+		String relDate = request.getParameter("rel_date");
+		
+		
+		Dean dean=new Dean();
+		
+		dean.setDeanId(deanId);		
+		dean.setDeanName(deanName);
+		dean.setInstituteId(instituteId);
+		dean.setContactNo(contactNo);
+		dean.setEmail(email);
+		dean.setQualificationId(qualificaton);
+		dean.setJoiningDate(joinDate);
+		dean.setRealivingDate(relDate);
+		dean.setMakerUserId(0);
+		dean.setDelStatus(1);
+		
+		
+		
+		dean.setMakerEnterDatetime(curDateTime);
+		
+		dean.setExtraint1(6);
+		dean.setExtravarchar1("NA");
+		System.out.println("Dean Data:"+dean);
+		
+		Dean deanSave = rest.postForObject(Constants.url+"/saveNewDean", dean, Dean.class);
+		
+		
+		return "redirect:/showRegDean";
+		
+	}
+	
+	@RequestMapping(value = "/showDeanList", method = RequestMethod.GET)
+	public ModelAndView showDeanList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
+		try {
+			Info view = AccessControll.checkAccess("showDeanList", "showDeanList", "1", "0", "0", "0", newModuleList);
+			
+			if(view.isError()==true) {
+				
+				model = new ModelAndView("accessDenied");
+								
+			}
+			else {
+			model = new ModelAndView("master/deanList");
+
+			model.addObject("title", "Dean R & D List");
+			
+			DeansList[] deans = rest.getForObject(Constants.url+"/getListDean", DeansList[].class);
+			List<DeansList> deanList  = new ArrayList<>(Arrays.asList(deans));
+			System.out.println("Dean List:"+deanList);
+			
+			model.addObject("deanList", deanList);
+			
+			Info add = AccessControll.checkAccess("showDeanList", "showDeanList", "0", "1", "0", "0", newModuleList);
+			Info edit = AccessControll.checkAccess("showDeanList", "showDeanList", "0" ,"0", "1", "0", newModuleList);
+			Info delete = AccessControll.checkAccess("showDeanList", "showDeanList", "0" ,"0", "0", "1", newModuleList);
+			
+			if(add.isError()==false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+				
+			}
+			if(edit.isError()==false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if(delete.isError()==false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+				
+			}
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/editDean/{deanId}", method = RequestMethod.GET)
+	public ModelAndView editDean(@PathVariable("deanId") int deanId, HttpServletRequest request) {
+		
+	System.out.println("Id:"+deanId);
+
+		ModelAndView model =  null;
+		
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		
+			try {
+				Info view = AccessControll.checkAccess("showRegDean", "showDeanList", "0", "0", "1", "0", newModuleList);
+				
+				if(view.isError()==true) {
+							
+							model = new ModelAndView("accessDenied");
+											
+						}
+				else {
+					
+					model =  new ModelAndView("master/deanReg");
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			
+			map.add("type", 1);
+			
+			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
+			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("quolfList " + quolfList.toString());
+		
+			model.addObject("quolfList", quolfList);
+			
+			map.add("id", deanId);
+			Dean dean = rest.postForObject(Constants.url+"/getDeanById", map, Dean.class);
+			System.out.println("dean"+dean);
+			
+			model.addObject("dean", dean);
+			model.addObject("title","Edit Dean");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+	
+	}
+	
+
+	
+	
+	@RequestMapping(value = "/deleteDean/{deanId}", method = RequestMethod.GET)
+	public String deleteDean(@PathVariable("deanId") int deanId, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+		Info view = AccessControll.checkAccess("showRegDean", "showDeanList", "0", "0", "0", "1", newModuleList);
+		String a = null;
+		if(view.isError()==true) {
+					
+			 a="redirect:/accessDenied";
+									
+				}
+		else {
+		
+		Info inf = new Info();
+		System.out.println("Id:"+deanId);
+		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("id", deanId);
+		Info dean = rest.postForObject(Constants.url+"/deleteDeanById", map, Info.class);
+		a="redirect:/showDeanList";
+		}
+		return a;
+	
+	}
+	
+
+	
 
 }

@@ -53,8 +53,9 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
+								<c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showRegDean"><button
-										type="button" class="btn btn-success">Register Dean</button></a>
+										type="button" class="btn btn-success">Register Dean</button></a></c:if>
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -83,6 +84,9 @@
 										class="table table-striped dt-responsive display">
 										<thead>
 											<tr>
+											<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 												<th width="5%">Sr No</th>
 												<th> Name</th>
 												<th>Qualification</th>
@@ -94,41 +98,45 @@
 											</tr>
 										</thead>
 
-										<tfoot>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th> Name</th>
-												<th>Qualification</th>
-												
-												<th>Joining Date</th>
-												<th>Contact No</th>
-												<th>Email</th>
-												<th width="10%">Action</th>
-											</tr>
-										</tfoot>
-
+										
 										<tbody>
-											<%-- <c:forEach items="${getPagesModuleList}"
-												var="getPagesModuleList" varStatus="count">
+										<c:forEach items="${deanList}"
+												var="deanList" varStatus="count">
 												<tr>
-													<td>${count.index+1}</td>
-													<td>${getPagesModuleList.pageName}
-														(${getPagesModuleList.secctionName})</td>
-
-													<td>${getPagesModuleList.content}</td>
-													<td><a
-														href="${pageContext.request.contextPath}/editCmsContent/${getPagesModuleList.primaryKeyId}"><span
+												<td><input type="checkbox" class="chk" name="deanIds"
+															id="deanIds${count.index+1}" value="${deanList.deanId}" /></td>
+												<td style="text-align: center">${count.index+1}</td>
+											
+											<td style="text-align: left"><c:out
+														value="${deanList.deanName}" /></td>
+											
+											<td style="text-align: left"><c:out
+														value="${deanList.qualificationName}" /></td>
+										
+											<td style="text-align: left"><c:out
+														value="${deanList.joiningDate}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${deanList.contactNo}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${deanList.email}" /></td>													
+													
+													<td>
+													<c:if test="${editAccess == 0}"><a
+														href="${pageContext.request.contextPath}/editDean/${deanList.deanId}"><span
 															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip"></span></a> |
-														<a
-														href="${pageContext.request.contextPath}/deleteCmsContent/${getPagesModuleList.primaryKeyId}"
+															data-animate=" animated fadeIn " rel="tooltip"></span></a></c:if> |
+															
+														<c:if test="${deleteAccess == 0}"><a
+														href="${pageContext.request.contextPath}/deleteDean/${deanList.deanId}"
 														onClick="return confirm('Are you sure want to delete this record');"
 														rel="tooltip" data-color-class="danger"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
 														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a></td>
+															class="glyphicon glyphicon-remove"></span></a></c:if></td>
 												</tr>
-											</c:forEach> --%>
+											</c:forEach> 
 											
 										</tbody>
 									</table>
@@ -161,6 +169,39 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
+		function clearSessionAttribute() {
+
+			$.getJSON('${clearSessionAttribute}', {
+
+				ajax : 'true',
+
+			}, function(data) {
+
+			});
+
+		}
+
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('deanIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
+
+		}
+		function showEditLibrarian(instId){
+			document.getElementById("edit_lib_id").value=instId;//create this 
+			var form=document.getElementById("libListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditLibrarian");
+			form.submit();
+			
+		}
+	</script>
 	<script>
 		function clearSessionAttribute() {
 

@@ -20,7 +20,7 @@ public class MIqac {
 	private int checkerUserId;
 	private String checkerDatetime;
 	private String lastUpdatedDatetime;
-	
+	private int type;
 	
 	public int getIqacId() {
 		return iqacId;
@@ -112,14 +112,21 @@ public class MIqac {
 	public void setLastUpdatedDatetime(String lastUpdatedDatetime) {
 		this.lastUpdatedDatetime = lastUpdatedDatetime;
 	}
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
 		return "MIqac [iqacId=" + iqacId + ", iqacName=" + iqacName + ", desgntnId=" + desgntnId + ", instituteId="
-				+ instituteId + ", joiningDate=" + joiningDate + ", contactNo=" + contactNo + ", email="
-				+ email + ", delStatus=" + delStatus + ", isActive=" + isActive + ", isEnrollSystem="
-				+ isEnrollSystem + ", makerUserId=" + makerUserId + ", makerEnterDatetime=" + makerEnterDatetime
-				+ ", checkerUserId=" + checkerUserId + ", checkerDatetime=" + checkerDatetime + ", lastUpdatedDatetime="
-				+ lastUpdatedDatetime + "]";
+				+ instituteId + ", joiningDate=" + joiningDate + ", contactNo=" + contactNo + ", email=" + email
+				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", isEnrollSystem=" + isEnrollSystem
+				+ ", makerUserId=" + makerUserId + ", makerEnterDatetime=" + makerEnterDatetime + ", checkerUserId="
+				+ checkerUserId + ", checkerDatetime=" + checkerDatetime + ", lastUpdatedDatetime="
+				+ lastUpdatedDatetime + ", type=" + type + "]";
 	}
 	
 	

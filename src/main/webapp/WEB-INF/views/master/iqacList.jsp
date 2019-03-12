@@ -46,17 +46,18 @@
      
 <div class="col-lg-12">
     <section class="box "> 
-             <header class="panel_header">
+       
+         <header class="panel_header">
                 <h2 class="title pull-left">IQAC List</h2>
                 <div class="actions panel_actions pull-right">
-                 <a href="${pageContext.request.contextPath}/iqacRegistration"><button type="button" class="btn btn-success">IQAC Registration</button></a>
-                	<a class="box_toggle fa fa-chevron-down"></a>
-                   <!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
-                     
+                  <c:if test="${addAccess == 0}"> 
+               		  <a href="${pageContext.request.contextPath}/iqacRegistration"><button type="button" class="btn btn-success">IQAC Registration</button></a>
+                 </c:if>
+                	<a class="box_toggle fa fa-chevron-down"></a>               
                 </div>
-                 
-            </header> 
+              </header> 
+              
+              
             <div class="content-body">    <div class="row">
             <c:if test="${sessionScope.successMsg!=null}">
             <div class="col-lg-12">
@@ -72,6 +73,9 @@
             <table id="example-1" class="table table-striped dt-responsive display">
                 <thead>
                     <tr>
+                    <th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
                    		<th width="5%">Sr No</th>
                         <th>IQAC Name</th> 
                         <th>Designation</th> 
@@ -82,21 +86,11 @@
                     </tr>
                 </thead>
 
-                <tfoot>
-                   <tr>
-                   		<th width="5%">Sr No</th>
-                        <th>IQAC Name</th> 
-                        <th>Designation</th> 
-                         <th>Date of Joining</th> 
-                        <th>Contact No.</th> 
-                          <th>Email ID</th> 
-                        <th width="10%">Action</th> 
-                    </tr>
-                </tfoot>
-
                 <tbody>
                       <c:forEach items="${QList}" var="QList" varStatus="count"> 
 									<tr>
+									<td><input type="checkbox" class="chk" name="iqacIds"
+															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td>
 											<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out
@@ -115,14 +109,16 @@
 												<td style="text-align: left"><c:out
 														value="${QList.email}" /></td>
 												
-												<td> <a
+												<td>
+												   <c:if test="${editAccess == 0}">  <a
 											href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit IQAC"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a>
-												<a
+												class="glyphicon glyphicon-edit"></span></a> |</c:if> 
+												
+											 <c:if test="${deleteAccess == 0}"> 	<a
 											href="${pageContext.request.contextPath}/deleteIqac/${QList.iqacId}" title="Delete IQAC"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Delete IQAC"><span
-												class="glyphicon glyphicon-trash"></span></a>
+												class="glyphicon glyphicon-trash"></span></a></c:if>
 												
 												<%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
@@ -179,6 +175,39 @@
 <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+   <script>
+		function clearSessionAttribute() {
+
+			$.getJSON('${clearSessionAttribute}', {
+
+				ajax : 'true',
+
+			}, function(data) {
+
+			});
+
+		}
+
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('iqacIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
+
+		}
+		function showEditLibrarian(instId){
+			document.getElementById("edit_lib_id").value=instId;//create this 
+			var form=document.getElementById("libListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditLibrarian");
+			form.submit();
+			
+		}
+	</script>
    <script>
 function clearSessionAttribute() {
 	 

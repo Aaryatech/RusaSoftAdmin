@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="setDate(${1})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -110,8 +110,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addFaculty"
-										method="post" 
-										name="form_sample_2" id="form_sample_2">
+										method="post" name="form_sample_2" id="form_sample_2" onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -183,6 +182,9 @@
 														</div>
 													
 													 --%>
+													 <input type="hidden"  id="faculty_id" name="faculty_id" 
+																	value="${staff.facultyId}">
+													 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">Faculty
 																Member Name <span class="text-danger">*</span>
@@ -190,42 +192,42 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="faculty_member_name"
 																	name="faculty_member_name" placeholder="Faculty Member Name"
-																	value="${staff.facultyName}">
+																	value="${staff.facultyName}" required="required">
 															</div>
 														</div>
 
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Highest
-																Qualification  <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="status">Qualification : 
+															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="highest_qualification" name="highest_qualification"  onchange="showForm1()" class="form-control"
-																	required>
-																	<%-- <c:forEach items="${}" var="makeList"> 
-																	<c:choose>
-																			<c:when test="${makeList.designationId == miqc.desgntnId}">
-																				<option value="${makeList.designationId}" selected="selected">${makeList.designationName}</option>
+																<select id="hod_quolf" name="hod_quolf"
+																	class="form-control" required>
+																	<c:forEach items="${quolfList}" var="quolf">
+																		<c:choose>
+																			<c:when test="${hod.highestQualificationId==quolf.qualificationId}">
+																				<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
 																			</c:when>
-																		<c:otherwise><option value="${makeList.designationId}">${makeList.designationName}</option></c:otherwise>
-																	</c:choose>
-																 </c:forEach> --%>
-																	
-																	<option value="1">UG</option>
-																	<option value="2">PG</option>
-																	<option value="4">M.phill</option>
-																	<option value="5">Ph.D.</option>
-																	<option value="6">Post Docterate</option>
-																	
-																	<option value="3">Any Other Course</option>
+																			<c:otherwise>
+
+																				<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
 																</select>
 															</div>
 														</div>
 
 
 	
-														<div class="form-group" id="pqr">
+													<!-- 	<div class="form-group" id="pqr">
 															<label class="control-label col-sm-2" for="smallheading">Other Qualification
 														  <span class="text-danger">*</span>
 															</label>
@@ -235,7 +237,7 @@
 																	
 																	placeholder="Other Qualification" value="">
 															</div>
-														</div>
+														</div> -->
 														
 														
 														<div class="form-group">
@@ -277,28 +279,81 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="join_date"
-																	name="join_date" placeholder="Contact No" value="${staff.joiningDate}" required>
+																<input type="text" class="form-control datepicker" id="join_date"
+																	name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
 															</div>
 														</div>
 
-														<div class="form-group">
+														 <div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Is
 																Working Today<span class="text-danger">*</span>
 															</label>
 
 
-															<div class="col-sm-10">
-																Yes <input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
-																	checked value="0">
-																No<input type="radio" name="isReg" id="isReg"  onclick="showReforms3(this.value)"
-																	value="1">
-															</div>
+															<c:choose>
+																	<c:when test="${staff.facultyId==0}">
+
+																		<input type="radio" id="is_registration"
+																			name="is_registration" value="1" checked
+																			onclick="setDate(this.value)">Yes 
+																<input type="radio" id="is_registration"
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No 
+															
+															</c:when>
+																	<c:otherwise>
+
+																		<c:choose>
+																			<c:when test="${empty staff.realivingDate}">
+																				<input type="radio" id="is_registration"
+																					name="is_registration" value="1" checked
+																					onclick="setDate(this.value)">Yes  
+																<input type="radio" id="is_registration"
+																					name="is_registration" value="0"
+																					onclick="setDate(this.value)">No 
+															
+																
+																</c:when>
+																			<c:otherwise>
+																				<input type="radio" id="is_registration"
+																					name="is_registration" value="1" 
+																					onclick="setDate(this.value)">Yes
+																<input type="radio" id="is_registration" checked
+																					name="is_registration" value="0"
+																					onclick="setDate(this.value)">No
+															
+																
+																</c:otherwise>
+
+																		</c:choose>
+
+																	</c:otherwise>
+
+
+																</c:choose>
 
 
 														</div>
+														
+ 
+ 													
+ 															<div class="form-group">
+																
 
-														<div class="form-group" id="rel_date1">
+															</div>
+															<div class="form-group">
+															
+															<div id="abc" style="display: none">
+															<label class="control-label col-sm-2" for="page_order">Relieving
+																Date <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="text" class="form-control datepicker" id="acc_off_relDate" value="${staff.realivingDate}"
+																	name="acc_off_relDate" placeholder="Relieving Date">
+															</div>
+															</div>
+															</div>
+														<!-- <div class="form-group" id="rel_date1">
 															<label class="control-label col-sm-2" for="page_order">Relieving
 																Date <span class="text-danger">*</span>
 															</label>
@@ -306,7 +361,7 @@
 																<input type="date" class="form-control" id="rel_date"
 																	name="rel_date">
 															</div>
-														</div>
+														</div> -->
 
 															<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Teaching
@@ -325,7 +380,7 @@
 															</div>
 														</div>
 															
-                                                    <div class="form-group" id="abc">
+                                                    <!-- <div class="form-group" id="abc">
 															<label class="control-label col-sm-2" for="smallheading">Other Course
 														  <span class="text-danger">*</span>
 															</label>
@@ -335,14 +390,14 @@
 																	
 																	placeholder="Other Designation" value="">
 															</div>
-														</div>
+														</div> -->
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" onchange="checkUnique(this.value,1)"
 																	maxlength="10" class="form-control" id="contact_no"
 																	name="contact_no" placeholder="Mobile Number" value="${staff.contactNo}" required>
 															</div>
@@ -353,7 +408,7 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email"
+																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
 																	name="email" placeholder="abc@xyz.com" value="${staff.email}" required>
 															</div>
 														</div>
@@ -398,8 +453,129 @@
 
 	<!-- END CONTENT -->
 
+<script type="text/javascript">
 
+	function checkUnique(inputValue,valueType){
+		
+		//alert(inputValue+" "+valueType);
+    	
+    	var primaryKey=${staff.facultyId};
+    	//alert("Primary key"+primaryKey);
+    	var isEdit=0;
+    	if(primaryKey>0){
+    		isEdit=1;
+    	}
+    	//alert("Is Edit " +isEdit);
+    	
+    	var valid=false;
+    	if(valueType==1){
+    		//alert("Its Mob no");
+    		if(inputValue.length==10){
+    			valid=true;
+    			//alert("Len 10")
+    		}else{
+    			//alert("Not 10");
+    		}
+    	}
+    	else if(valueType==2){
+    		//alert("Its Email " );
+    		
+    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    		if(inputValue.match(mailformat))
+    		{
+    			valid=true;
+    			//alert("Valid Email Id");
+    		}
+    		else
+    		{
+    			valid=false;
+    			//alert("InValid Email Id");
+    		}
+    	}
+    	if(valid==true)
+    	$.getJSON('${chkFields}', {
+    		
+    		inputValue : inputValue,
+    		valueType  : valueType,
+    		primaryKey : primaryKey,
+    		isEdit     : isEdit,
+    		tableId : 2,
 
+			ajax : 'true',
+
+		}, function(data) {
+			
+		alert("Data  " +JSON.stringify(data));
+			if(data.error==true){
+				if(valueType==2){
+				alert("This email id already exist in system please enter unique");
+				}
+				else{
+					alert("This contact no  already exist in system please enter unique");
+				}
+			}
+		});
+    }
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
+
+		form.action=("insertHod");
+		var x =confirm("Do you really want to submit the form?");
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+	/* function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("qualification").value
+		//alert("qualType::"+qualType);
+			
+			if (qualType == 5) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		} */
+	/* function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		} */
+		
+	</script>
+<script type="text/javascript">
+	function setDate(value){
+		//alert("Value " +value)
+		if(value==1){
+		//alert(value)
+		document.getElementById("acc_off_relDate").setAttribute("required","true");
+		document.getElementById("abc").style.display = "block";
+
+		
+
+		//alert(value)
+		}else{
+			//alert(value)
+		document.getElementById("acc_off_relDate").removeAttribute("required");
+		document.getElementById("abc").style.display = "none";
+			//alert(value)
+
+		}
+		
+	}
+	
+	</script>
 	<script type="text/javascript">
 	 function showReforms3(b) {
 			
@@ -411,6 +587,7 @@
 			
 			
 				document.getElementById("rel_date1").style ="visible"
+					document.getElementById("rel_date").required = true;
 			
 		}
 		}

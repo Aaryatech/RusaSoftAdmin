@@ -100,9 +100,7 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/#"
-										method="post"
+									<form class="form-horizontal" action="#" method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -188,7 +186,7 @@
 																No.  <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="contactNo"
+																<input type="text" class="form-control" id="contactNo" onchange="checkUnique(this.value,1)"
 																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"  maxlength="10" 
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile Number" value="${miqc.contactNo}" required>
@@ -200,7 +198,7 @@
 																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email"
+																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
 																	name="email" placeholder="abc@xyz.com" value="${miqc.email}" required>
 															</div>
 														</div>
@@ -268,8 +266,7 @@
 				<form role="form"
 						action="${pageContext.request.contextPath}/iqacNewRegistration"
 						method="post">
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
+						
 								
 									<!-- <div class="form-group">
 						
@@ -279,7 +276,7 @@
 							</label>
 						</div>	 -->
 						
-						<input type="hidden" class="form-control" id="iqac_id"
+						<input type="hidden"  id="iqac_id"
 								name="iqac_id" value="${miqc.iqacId}">
 						
 				
@@ -352,6 +349,108 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+
+	function checkUnique(inputValue,valueType){
+		
+		//alert(inputValue+" "+valueType);
+    	
+    	var primaryKey=${miqc.iqacId};
+    	//alert("Primary key"+primaryKey);
+    	var isEdit=0;
+    	if(primaryKey>0){
+    		isEdit=1;
+    	}
+    	//alert("Is Edit " +isEdit);
+    	
+    	var valid=false;
+    	if(valueType==1){
+    		//alert("Its Mob no");
+    		if(inputValue.length==10){
+    			valid=true;
+    			//alert("Len 10")
+    		}else{
+    			//alert("Not 10");
+    		}
+    	}
+    	else if(valueType==2){
+    		//alert("Its Email " );
+    		
+    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    		if(inputValue.match(mailformat))
+    		{
+    			valid=true;
+    			//alert("Valid Email Id");
+    		}
+    		else
+    		{
+    			valid=false;
+    			//alert("InValid Email Id");
+    		}
+    	}
+    	if(valid==true)
+    	$.getJSON('${chkFields}', {
+    		
+    		inputValue : inputValue,
+    		valueType  : valueType,
+    		primaryKey : primaryKey,
+    		isEdit     : isEdit,
+    		tableId : 1,
+
+			ajax : 'true',
+
+		}, function(data) {
+			
+		alert("Data  " +JSON.stringify(data));
+			if(data.error==true){
+				if(valueType==2){
+				alert("This email id already exist in system please enter unique");
+				}
+				else{
+					alert("This contact no  already exist in system please enter unique");
+				}
+			}
+		});
+    }
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
+
+		form.action=("insertHod");
+		var x =confirm("Do you really want to submit the form?");
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+	/* function showForm() {
+		//document.getElementById("abc").style = "display:none"
+			var qualType=document.getElementById("qualification").value
+		//alert("qualType::"+qualType);
+			
+			if (qualType == 5) {
+
+				document.getElementById("abc").style = "visible"
+				
+					
+			} 
+			else{
+				document.getElementById("abc").style = "display:none"
+			}
+		
+		} */
+	/* function hideText() {
+		//alert("hii");
+		document.getElementById("abc").style = "display:none"
+			
+		
+		} */
+		
+	</script>
 	
 	<script type="text/javascript">
 	
