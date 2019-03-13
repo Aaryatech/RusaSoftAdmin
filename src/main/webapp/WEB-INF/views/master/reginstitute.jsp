@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body onload="showIsReg()"  class=" ">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body onload="showIsReg()" class=" ">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -96,44 +96,50 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertInstitute"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
 
 
-										</ul>
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register Form
+										</a></li>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
 
-												<div>
+									</ul>
 
-<p style="color:red; ">Notice : This form strictly need to be filled by Institutes coming under RUSA Maharashtra Only.
-You can access RUSA portal only after authorisation done by RUSA officials.</p>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
 
-													<div class="col-xs-12">
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertInstitute"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
+												
+												<input type="hidden" id="inst_id" name="inst_id"
+													value="${editInst.instituteId}">
+
+												<div class="row">
+													<div class="col-md-12">
+
+														<p class="desc text-danger fontsize11">Notice : This
+															form strictly need to be filled by Institutes coming
+															under RUSA Maharashtra Only. You can access RUSA portal
+															only after authorisation done by RUSA officials.</p>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Institute
+															<label class="control-label col-sm-3" for="page_name">Institute
 																Name<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="inst_name"
 																	value="${editInst.instituteName}" name="inst_name"
 																	placeholder="Institute Name" required>
 															</div>
 														</div>
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">AISHE
+															<label class="control-label col-sm-3" for="page_name">AISHE
 																Code <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="aishe_code"
 																	value="${editInst.aisheCode}" name="aishe_code"
 																	placeholder="AISHE Code" required>
@@ -144,10 +150,10 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Institute
+															<label class="control-label col-sm-3" for="page_order">Institute
 																Address<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="inst_add"
 																	value="${editInst.instituteAdd}" name="inst_add"
 																	placeholder="Institute Address" required>
@@ -156,11 +162,11 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">2F/12B Registration
-																(YES/No)<span class="text-danger">*</span>
+															<label class="control-label col-sm-3" for="planning">2F/12B
+																Registration <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-2">
+															<div class="col-sm-9">
+
 																<c:choose>
 																	<c:when test="${editInst.instituteId==0}">
 
@@ -187,7 +193,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 																</c:when>
 																			<c:otherwise>
 																				<input type="radio" id="is_registration"
-																					name="is_registration" value="1" 
+																					name="is_registration" value="1"
 																					onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration" checked
 																					name="is_registration" value="0"
@@ -204,25 +210,27 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 																</c:choose>
 
 															</div>
-															<div id="abc">
-																<label class="control-label col-sm-3" for="page_order">Date
-																	of Registration <span class="text-danger">*</span>
-																</label>
-																
-																
-																<div class="col-sm-3">
-																	<input type="text" class="form-control datepicker" id="reg_date" value="${editInst.regDate}"
-																		name="reg_date" placeholder="Date of Registration"
-																		required>
-																</div>
+
+														</div>
+														<div class="form-group" id="abc">
+															<label class="control-label col-sm-3" for="page_order">Date
+																of Registration <span class="text-danger">*</span>
+															</label>
+
+
+															<div class="col-sm-9">
+																<input type="text" class="form-control datepicker"
+																	id="reg_date" value="${editInst.regDate}"
+																	name="reg_date" placeholder="Date of Registration"
+																	required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Trust/Society
+															<label class="control-label col-sm-3" for="page_order">Trust/Society
 																Name <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="trusty_name"
 																	value="${editInst.trustName}" name="trusty_name"
 																	placeholder="Trust/Society Name" value="" required>
@@ -230,10 +238,10 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Trust/Society
+															<label class="control-label col-sm-3" for="page_order">Trust/Society
 																Address <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="trusty_add"
 																	value="${editInst.trustAdd}" name="trusty_add"
 																	placeholder="Trust/Society Address" value="" required>
@@ -241,23 +249,22 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact
+															<label class="control-label col-sm-3" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	value="${editInst.trustContactNo}" maxlength="10"
 																	class="form-control" id="trusty_con_no"
-																	name="trusty_con_no" placeholder="Landline No" required>
+																	name="trusty_con_no" placeholder="Contact No" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-																Chairman/President Name(Board of Governance) <span
-																class="text-danger">*</span>
+															<label class="control-label col-sm-3" for="page_order">
+																Chairman/President Name<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="pres_name"
 																	value="${editInst.presidentName}" name="pres_name"
 																	placeholder="Name of Chairman/President(Board of Governance)"
@@ -266,10 +273,10 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact
+															<label class="control-label col-sm-3" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	value="${editInst.presidenContact}" maxlength="10"
 																	class="form-control" id="pres_contact"
@@ -278,10 +285,10 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email
+															<label class="control-label col-sm-3" for="page_order">Email
 																ID(Official) <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="email" class="form-control" id="pres_email"
 																	value="${editInst.presidentEmail}" name="pres_email"
 																	placeholder="abc@xyz.com" required>
@@ -292,10 +299,10 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
+															<label class="control-label col-sm-3" for="page_order">
 																Principal Name <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" class="form-control" id="princ_name"
 																	value="${editInst.principalName}" name="princ_name"
 																	placeholder="Name of Principal" required>
@@ -303,84 +310,81 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact
+															<label class="control-label col-sm-3" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="princ_contact"
 																	value="${editInst.contactNo}" name="princ_contact"
-																	placeholder="Contact No"  onchange="checkUnique(this.value,1)" required>
+																	placeholder="Contact No"
+																	onchange="checkUnique(this.value,1)" required>
+																<p class="desc text-danger fontsize11">Note: OTP
+																	will be sent on this mobile number for verification</p>
 															</div>
-															<label class="control-label col-sm-7" for="page_order"
-																style="color: red;">Note: OTP will be sent on
-																this mobile number for verification<span
-																class="text-danger"></span>
-															</label>
+
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email
+															<label class="control-label col-sm-3" for="page_order">Email
 																ID(Official) <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-9">
 																<input type="email" class="form-control"
-																	id="princ_email" value="${editInst.email}" onchange="checkUnique(this.value,2)"
-																	name="princ_email" placeholder="abc@xyz.com" required>
+																	id="princ_email" value="${editInst.email}"
+																	onchange="checkUnique(this.value,2)" name="princ_email"
+																	placeholder="abc@xyz.com" required>
+																<p class="desc font-italic fontsize11">Note:
+																	Verification mail will be sent on this Email id</p>
 															</div>
 														</div>
 
-														<label class="control-label col-sm-6" for="page_order"
-															style="color: red;">Note: Verification mail will
-															be sent on this Email id<span class="text-danger"></span>
-														</label>
 
-													</div>
-													<input type="hidden" id="inst_id" name="inst_id"
-														value="${editInst.instituteId}">
+														<div class="form-group">
+															<div class="col-sm-offset-3 col-sm-9">
 
-												</div>
+																<input type="submit" id="sub_button"
+																	class="btn btn-primary" value="Submit" />
+																<button type="reset" class="btn btn-default">Reset</button>
+															</div>
+														</div>
 
 
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
 
-														<!-- <a href="#myModal2"
-														data-toggle="modal"><button type="submit" onclick="getCOPO()"
-																class="btn btn-primary">Submit</button></a> -->
-
-														<input type="submit" class="btn btn-primary" />
-														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
 
-
-
-
-												<div class="clearfix"></div>
-
-											</div>
-
+											</form>
 										</div>
 
-									</form>
+
+
+
+
+
+
+										<div class="clearfix"></div>
+
+									</div>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
+
 
 							</div>
 
 						</div>
 					</section>
 				</div>
-
 			</section>
 		</section>
-
 	</div>
+
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
 
-<%-- 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
+	<%-- 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -597,6 +601,7 @@ function getCOPO() {
 		if(isReg==0){
 
 			document.getElementById("abc").style.display = "none";
+			document.getElementById("reg_date").removeAttribute("required");
 
 		}else{
 			document.getElementById("abc").style.display = "block";
@@ -612,7 +617,7 @@ function getCOPO() {
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-<script type="text/javascript">
+	<script type="text/javascript">
         $(function () {
 		 
             $('.datepicker').datepicker({
@@ -625,11 +630,7 @@ function getCOPO() {
 			});
         });
         
-        $(".btn btn-primary").click(function(){
-        	//alert("HHHH");
-        	 $(".btn btn-primary").disabled=true;
-
-        	}); 
+       
         
         function checkUnique(inputValue,valueType){
         	//alert(inputValue);
@@ -699,7 +700,22 @@ function getCOPO() {
         }
         
       
-    </script> 
+    </script>
+
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub_button").disabled=true;
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 

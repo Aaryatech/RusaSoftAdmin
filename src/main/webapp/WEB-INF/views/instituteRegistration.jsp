@@ -99,7 +99,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstitute"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -144,7 +144,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Institute
+															<label class="control-label col-sm-2" for="page_order" style="text-align: left;">Institute
 																Address<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -158,7 +158,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
 																style="text-align: left;">2F/12B Registration
-																(YES/No)<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<c:choose>
@@ -349,7 +349,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 														data-toggle="modal"><button type="submit" onclick="getCOPO()"
 																class="btn btn-primary">Submit</button></a> -->
 
-														<input type="submit" class="btn btn-primary" />
+														<input type="submit" id="sub_button" class="btn btn-primary" />
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
@@ -425,7 +425,7 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 					</div>
 
 					<div class="form-group">
-
+sub_button
 						<label class="control-label col-sm-6" for="page_name">Registration
 							Date: </label> <label id="reg_date1" for="page_name"> </label>
 					</div>
@@ -496,6 +496,13 @@ You can access RUSA portal only after authorisation done by RUSA officials.</p>
 
 
 	<script type="text/javascript">
+	
+	
+	$( "form" ).submit(function() {
+		 alert("Hi");
+		});
+	
+	
 function showDiv(value) {
 
 	if (value == 1) {
@@ -695,7 +702,25 @@ function getCOPO() {
 				}
 			});
         }
+                
+       
+
     </script> 
+    <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub_button").disabled=true;
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
+    
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 

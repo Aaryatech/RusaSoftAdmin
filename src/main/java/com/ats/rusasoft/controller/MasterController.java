@@ -1149,7 +1149,11 @@ public class MasterController {
 
 				}
 
-				redirect = "redirect:/showDeptList";
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showDeptList";
+				else
+					redirect = "redirect:/addFaculty";
 			}
 
 		} catch (Exception e) {

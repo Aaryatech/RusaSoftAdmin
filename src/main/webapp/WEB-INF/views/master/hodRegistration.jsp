@@ -105,7 +105,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertHod"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -243,8 +243,8 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
@@ -394,6 +394,22 @@
 		} */
 		
 	</script>
+	 <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 </body>
 </html>

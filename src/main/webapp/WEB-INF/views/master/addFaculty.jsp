@@ -61,7 +61,7 @@
 				<div class="col-xs-12">
 					<div class="page-title">
 
-					<!-- 	<div class="pull-left">
+						<!-- 	<div class="pull-left">
 							PAGE HEADING TAG - START
 							<h1 class="title">Add Department</h1>
 							PAGE HEADING TAG - END
@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showDeptList"><button
-										type="button" class="btn btn-info"> Back</button></a> <a
+										type="button" class="btn btn-info">Back</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -97,9 +97,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertDept"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="form_sample_2" id="form_sample_2"
+										onsubmit="return checkBeforeSubmit()">
 
 
 
@@ -112,20 +111,28 @@
 													Name:<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-10">
-													<input type="text" class="form-control" id="dept_name" maxlength="80"
-														name="dept_name" placeholder="Deptartment Name" value="${dept.deptName}"
+													<input type="text" class="form-control" id="dept_name"
+														maxlength="80" name="dept_name"
+														placeholder="Deptartment Name" value="${dept.deptName}"
 														required>
 												</div>
-												
+
 												<input type="hidden" id="dept_id" name="dept_id"
-														value="${dept.deptId}">
-												
+													value="${dept.deptId}">
+
 											</div>
 
 											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-10">
-													<button type="submit" class="btn btn-primary">Submit</button>
+													<input type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)" value="Add"> <input
+														type="submit" id="sub2" class="btn btn-primary"
+														onclick="submit_f(0)"
+														value="Save &
+																		Next">
 													<button type="reset" class="btn btn-default">Reset</button>
+													<input type="hidden" id="is_view" name="is_view" value="0">
+													
 												</div>
 											</div>
 
@@ -155,6 +162,27 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+		function submit_f(view){
+			document.getElementById("is_view").value=view;//create this 
+			
+		}
+		
+		
+	</script>
 </body>
 </html>
