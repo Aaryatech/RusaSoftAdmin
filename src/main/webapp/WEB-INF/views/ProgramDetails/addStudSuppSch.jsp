@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
+										action="${pageContext.request.contextPath}/insertStudentSuppurtScheme"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
@@ -114,19 +114,26 @@
 
 												<div>
 
-
-
 													<div class="col-xs-12">
-														
-
-
-																		<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Scheme Name
+													
+													<p class="desc text-danger fontsize11">Notice : This
+															form strictly need to be filled by Institutes coming
+															under RUSA Maharashtra Only. You can access RUSA portal
+															only after authorisation done by RUSA officials.</p>
+													
+													<input type="hidden" name="stud_suprt_schm" value="${stud.sprtSchmId}">
+													
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Scheme Name 
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
+																<select id="approveValue" name="schemeName" class="form-control"  onchange="showExtraField()"  required>
+															<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
+																	<option value="${stud.schemeName}" selected>${stud.schemeName}</option>
 															
+															</c:when> 
+															<c:otherwise> --%>
 							<option value="Capability Enhancement">Capability Enhancement</option>
 								<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
 								<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
@@ -134,7 +141,9 @@
 													etc)</option>
 								<option value="Vocational Education Training">Vocational Education Training</option>
 								<option value="7">Any Other</option>
-								
+							
+								<%-- </c:otherwise>
+									</c:choose> --%>
 																</select>
 																
 																
@@ -143,32 +152,39 @@
 														
 														
 														
-															<div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="page_order">
+												<div class="form-group" id="abc">
+													<label class="control-label col-sm-2" for="page_order">
 														Another Scheme Name <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Another Scheme Name" onchange="checkUnique(this.value,1)" required>
-															</div>
+													</label>
+														<div class="col-sm-10">
+															<input type="text" 
+																 class="form-control" id="anotherScheme" value="${stud.schemeName}" 
+																	 name="anotherScheme" placeholder="Another Scheme" onchange="checkUnique(this.value,1)">
 														</div>
+											</div>
 														
 														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Level
+											<div class="form-group">
+														<label class="control-label col-sm-2" for="status">Level
 															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						<option value="International">International</option>
-															<option value="State">State</option>
-															<option value="Regional">Regional</option>
-								
-																</select>
+														</label>
+														<div class="col-sm-10">
+															<select id="approveValue" name="level"class="form-control"  onchange="showExtraField()"  required>
+																
+																<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
+																	<option value="${stud.level}" selected>${stud.level}</option>
+															
+															</c:when> 
+															<c:otherwise> --%>
+																<option value="International">International</option>
+																<option value="State">State</option>
+																<option value="Regional">Regional</option>
+																<%-- </c:otherwise>
+																</c:choose> --%>
+															</select>
 																
 																
-															</div>
+														</div>
 														</div>
 														
 													<div class="form-group">
@@ -176,17 +192,21 @@
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						
+																<select id="approveValue" name="type"class="form-control"  onchange="showExtraField()"  required>
+															<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
+															
+															<option value="${stud.type}" selected>${stud.type}</option>
+															
+															</c:when>  <c:otherwise>--%>
 															<option value="Govt">Govt.</option>
 															<option value="Non Govt.">Non Govt.</option>
-								
+															<%-- </c:otherwise>
+															</c:choose> --%>
 																</select>
 																
 																
 															</div>
 														</div>
-														
 														
 														
 														
@@ -195,9 +215,8 @@
 														No. of Students Benefited <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Duration(in months)" required
-																	>
+																<input type="text" class="form-control" id="studBenifit" 	value="${stud.noStudentBenifited}"
+																	name="studBenifit" placeholder="Students Benifited" required>
 															</div>
 														</div>
 
@@ -211,8 +230,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
+																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}"
+																	 name="supportAgency" placeholder="Support Agency" onchange="checkUnique(this.value,1)" required>
 															</div>
 														</div>
 																
@@ -224,20 +243,17 @@
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
-																	name="relieving_date"  required>
+																<input type="date" class="form-control" id=" yearofIntro" 	value="${stud.implementationYear}"
+																	name="yearofIntro"  required>
 															</div>
 														</div>
-
+														
 													</div>
 
 												</div>
 												
-												
-												
-															
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
+                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${stud.sprtSchmId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
 											  <div class="form-group">
@@ -257,6 +273,7 @@
 										</div>
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Field are mendatory.</p>
 								</div>
 
 							</div>
@@ -370,6 +387,7 @@ function showExtraField() {
 		if (qualType == 7) {
 
 			document.getElementById("abc").style = "visible"
+			document.getElementById("anotherScheme").setAttribute("required","true");
 			
 				
 		} 

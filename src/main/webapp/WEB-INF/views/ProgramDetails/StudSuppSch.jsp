@@ -64,28 +64,58 @@
 
 
 
-								<h5 class="title pull-left">
+								<!-- <h5 class="title pull-left">
 									<strong>Students Support Scheme</strong>
-								</h5>
+								</h5> -->
 							
 								<div class="col-xs-12">
 
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
+												<th>Select All</th>
 												<th>Sr.No.</th>
-										
-												<th>Name of Scheme</th>
+												<th>Scheme</th>
 												<th>Level</th>
 												<th>Type</th>
-												<th>No. of  Benefited Students</th>
-												<th>Year of Implementation</th>
-												<th>Name of Support Agency</th>
+												<th>Benefited Students</th>
+												<th>Implementation Year</th>
+												<th>Support Agency</th>
+												<th>Actions</th>
 											</tr>
 
 										</thead>
+										<tbody>
+												<c:forEach items="${studList}" var="stud" varStatus="count">
+													<tr>
+														<td><input type="checkbox" class="chk" name="stusentSchmIds"
+															id="hodIds${count.index+1}" value="${stud.sprtSchmId}" /></td>
+														<td>${count.index+1}</td>
+														<td>${stud.schemeName}</td>
+														<td>${stud.level}</td>
+														<td>${stud.type}</td>
+														<td>${stud.noStudentBenifited}</td>
+														<td>${stud.academicYear}</td>
+														<td>${stud.supportAgencyName}</td>
 
-</table>
+														<td><%-- <c:if test="${editAccess==0}"> --%>
+																<a href="${pageContext.request.contextPath}/editStudSchm/${stud.sprtSchmId}"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+															<%-- </c:if>  <c:if test="${deleteAccess==0}"> --%>
+																<a
+																	href="${pageContext.request.contextPath}/deleteStudSchm/${stud.sprtSchmId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															<%-- </c:if> --%></td>
+													</tr>
+												</c:forEach>
+
+											</tbody>
+								</table>
 								</div>
 
 

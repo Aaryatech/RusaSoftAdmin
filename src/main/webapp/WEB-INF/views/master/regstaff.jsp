@@ -124,10 +124,7 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
-
-
-
+												<div class="row">
 													<div class="col-xs-12">
 													
 													<%-- <div class="form-group">
@@ -183,6 +180,11 @@
 														</div>
 													
 													 --%>
+													 	<p class="desc text-danger fontsize11">Notice : This
+															form strictly need to be filled by Institutes coming
+															under RUSA Maharashtra Only. You can access RUSA portal
+															only after authorisation done by RUSA officials.</p>
+															
 													 <input type="hidden"  id="faculty_id" name="faculty_id" 
 																	value="${staff.facultyId}">
 													 
@@ -280,7 +282,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="join_date"
+																<input type="text" class="form-control datepicker" id="dateOfJoin"
 																	name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
 															</div>
 														<!-- </div>
@@ -345,7 +347,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="acc_off_relDate" value="${staff.realivingDate}"
+																<input type="text" class="form-control datepicker" id="relDate" value="${staff.realivingDate}"
 																	name="acc_off_relDate" placeholder="Relieving Date">
 															</div>
 															</div>
@@ -397,6 +399,8 @@
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" onchange="checkUnique(this.value,1)"
 																	maxlength="10" class="form-control" id="contact_no"
 																	name="contact_no" placeholder="Mobile Number" value="${staff.contactNo}" required>
+																<p class="desc text-danger fontsize11">Note: OTP
+																	will be sent on this mobile number for verification</p>
 															</div>
 														</div>
 
@@ -407,6 +411,8 @@
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
 																	name="email" placeholder="abc@xyz.com" value="${staff.email}" required>
+																<p class="desc font-italic fontsize11">Note:
+																		Verification mail will be sent on this Email id</p>
 															</div>
 														</div>
 
@@ -446,6 +452,8 @@
 										</div>
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -461,6 +469,33 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	
+	<script type="text/javascript">
+$("#dateOfJoin").on("keypress keyup blur",function (event) {
+    //this.value = this.value.replace(/[^0-9\.]/g,'');
+$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+
+$("#relDate").on("keypress keyup blur",function (event) {
+    //this.value = this.value.replace(/[^0-9\.]/g,'');
+$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+
+$("#contact_no").on("keypress keyup blur",function (event) {
+    //this.value = this.value.replace(/[^0-9\.]/g,'');
+$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+</script>
+	
 	<script>
 	function showDiv(value) {
 
@@ -480,21 +515,6 @@
 		
 	}
 	
-	$("#join_date").on("keypress keyup blur",function (event) {
-        //this.value = this.value.replace(/[^0-9\.]/g,'');
- $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-            event.preventDefault();
-        }
-    });
-	
-	$("#acc_off_relDate").on("keypress keyup blur",function (event) {
-        //this.value = this.value.replace(/[^0-9\.]/g,'');
- $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-            event.preventDefault();
-        }
-    });
 	</script>
 <script type="text/javascript">
 
@@ -602,13 +622,13 @@
 		///alert("Value " +value)
 		if(value==1){
 			//alert(value)
-			document.getElementById("acc_off_relDate").removeAttribute("required");
+			document.getElementById("relDate").removeAttribute("required");
 			document.getElementById("abc").style.display = "none";
 
 			//alert(value)
 			}else{
 				//alert(value)
-				document.getElementById("acc_off_relDate").setAttribute("required","true");
+				document.getElementById("relDate").setAttribute("required","true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)

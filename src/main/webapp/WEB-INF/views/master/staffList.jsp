@@ -139,7 +139,7 @@
 											<c:if test="${deleteAccess == 0}">	<a
 											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" title="Block"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-trash"></span></a></c:if>
+												class="glyphicon glyphicon-remove"></span></a></c:if>
 												</td>
 											
 											

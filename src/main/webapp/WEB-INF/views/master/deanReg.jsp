@@ -119,7 +119,12 @@
 																	value="${dean.deanId}">
 
 													<div class="col-xs-12">
+													<p class="desc text-danger fontsize11">Notice : This
+															form strictly need to be filled by Institutes coming
+															under RUSA Maharashtra Only. You can access RUSA portal
+															only after authorisation done by RUSA officials.</p>
 														<div class="form-group">
+														
 															<label class="control-label col-sm-2" for="page_name">
 																Name<span class="text-danger">*</span>
 															</label>
@@ -142,6 +147,8 @@
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" 
 																	maxlength="10" class="form-control" id="contact_no" onchange="checkUnique(this.value,1)"
 																	name="contact_no" placeholder="Mobile No" required value="${dean.contactNo}">
+																	<p class="desc text-danger fontsize11">Note: OTP
+																	will be sent on this mobile number for verification</p>
 															</div>
 														</div>
 
@@ -152,6 +159,8 @@
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
 																	name="email" placeholder="abc@xyz.com" required value="${dean.email}">
+																	<p class="desc font-italic fontsize11">Note:
+																		Verification mail will be sent on this Email id</p>
 															</div>
 														</div>
 
@@ -190,7 +199,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="join_date"
-																	name="join_date" placeholder="Contact No" required value="${dean.joiningDate}">
+																	name="join_date" placeholder="Joining Date" required value="${dean.joiningDate}">
 															</div>
 															<label class="control-label col-sm-3" for="planning"
 																style="text-align: left;">Is Currently Working<span class="text-danger">*</span>
@@ -248,7 +257,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="acc_off_relDate"
-																	name="acc_off_relDate" placeholder="Contact No" value="${dean.realivingDate}">
+																	name="acc_off_relDate" placeholder="Relieving Date" value="${dean.realivingDate}">
 															</div>
 														</div>
 
@@ -285,6 +294,8 @@
 										</div>
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -451,6 +462,25 @@
 		} */
 		
 	</script>
+	
+		<script>
+	$("#contactNo").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#dateOfJoin").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	</script>
+	
 	<script type="text/javascript">
 	
 	function showIsReg(){

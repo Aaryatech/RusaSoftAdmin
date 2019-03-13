@@ -80,10 +80,6 @@
 				<div class="col-lg-12">
 					<section class="box ">
 					
-					
-					
-				
-
 						<header class="panel_header">
 						<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name:abc</h4>
 							<h2 class="title pull-left">IQAC Registration Form</h2>
@@ -110,11 +106,18 @@
 											</a></li>
 
 										</ul>
+										
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
+												<div class="row">
+													<div class="col-md-12">
+
+														<p class="desc text-danger fontsize11">Notice : This
+															form strictly need to be filled by Institutes coming
+															under RUSA Maharashtra Only. You can access RUSA portal
+															only after authorisation done by RUSA officials.</p>
 														<input type="hidden"  id="iqac_id" name="iqac_id" value="${miqc.iqacId}">									
 														
 														<div class="form-group">
@@ -189,6 +192,8 @@
 																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"  maxlength="10" 
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile Number" value="${miqc.contactNo}" required>
+																		<p class="desc text-danger fontsize11">Note: OTP
+																	will be sent on this mobile number for verification</p>
 															</div>
 														</div>
 
@@ -199,7 +204,10 @@
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
 																	name="email" placeholder="abc@xyz.com" value="${miqc.email}" required>
+																	<p class="desc font-italic fontsize11">Note:
+																		Verification mail will be sent on this Email id</p>
 															</div>
+															
 														</div>
 
 													<div class="form-group">
@@ -215,10 +223,8 @@
 													<input type="hidden" id="acc_off_id" name="acc_off_id" value="${miqc.iqacId}">
 													<input type="hidden" id="is_view" name="is_view" value="0">
 												
-
-
-													
-
+														</div>					
+								
 												</div>
 
 											</div>
@@ -226,9 +232,12 @@
 										</div>
 									
 								</div>
-
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 							</div>
+							
 							</section>
+							
 						</div>
 
 					</section>
@@ -368,13 +377,8 @@
 		
 	}
 	
-	$("#dateOfJoin").on("keypress keyup blur",function (event) {
-        //this.value = this.value.replace(/[^0-9\.]/g,'');
- $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-            event.preventDefault();
-        }
-    });
+	
+	
 	</script>
 	<script type="text/javascript">
 
@@ -672,6 +676,24 @@
 					});
 
 				});
+	</script>
+	
+	<script>
+	$("#contactNo").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#dateOfJoin").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
 	</script>
 
 </body>
