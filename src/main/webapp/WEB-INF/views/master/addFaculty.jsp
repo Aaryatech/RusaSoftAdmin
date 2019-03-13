@@ -100,17 +100,13 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-
-
-
 										<div class="col-xs-12">
 
-
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="page_name">Department
-													Name:<span class="text-danger">*</span>
+												<label class="control-label col-sm-3" for="page_name">Department
+													Name<span class="text-danger">*</span>
 												</label>
-												<div class="col-sm-10">
+												<div class="col-sm-9">
 													<input type="text" class="form-control" id="dept_name"
 														maxlength="80" name="dept_name"
 														placeholder="Deptartment Name" value="${dept.deptName}"
@@ -123,7 +119,7 @@
 											</div>
 
 											<div class="form-group">
-												<div class="col-sm-offset-2 col-sm-10">
+												<div class="col-sm-offset-3 col-sm-9">
 													<input type="submit" id="sub1" class="btn btn-primary"
 														onclick="submit_f(1)" value="Add"> <input
 														type="submit" id="sub2" class="btn btn-primary"
@@ -181,7 +177,6 @@
 			document.getElementById("is_view").value=view;//create this 
 			
 		}
-		
 		
 	</script>
 </body>

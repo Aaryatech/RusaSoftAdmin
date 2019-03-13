@@ -99,7 +99,6 @@
 												</tr>
 											</thead>
 
-
 											<tbody>
 												<c:forEach items="${accOffList}" var="accOff"
 													varStatus="count">
@@ -116,7 +115,7 @@
 														<td><c:if test="${editAccess==0}">
 																<a onclick="showEditaccOff(${accOff.officerId})"
 																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															</c:if><c:if test="${deleteAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteaccOff/${accOff.officerId}"

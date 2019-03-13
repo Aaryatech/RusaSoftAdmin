@@ -121,11 +121,11 @@
 														<td>${count.index+1}</td>
 														<td>${dept.deptName}</td>
 
-														<td><c:if test="${editAccess==0}">
+														<td align="center"><c:if test="${editAccess==0}">
 																<a href="#" onclick="showEditDept(${dept.deptId})"><span
 																	class="glyphicon glyphicon-edit" title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a> |</c:if>
-															<c:if test="${deleteAccess==0}">
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+															<c:if test="${deleteAccess==0}">s
 																<a
 																	href="${pageContext.request.contextPath}/deleteDepts/${dept.deptId}"
 																	onClick="return confirm('Are you sure want to delete this record');"

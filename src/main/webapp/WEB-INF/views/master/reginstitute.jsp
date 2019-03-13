@@ -318,7 +318,7 @@
 																	maxlength="10" class="form-control" id="princ_contact"
 																	value="${editInst.contactNo}" name="princ_contact"
 																	placeholder="Contact No"
-																	onchange="checkUnique(this.value,1)" required>
+																	oninput="checkUnique(this.value,1)" required>
 																<p class="desc text-danger fontsize11">Note: OTP
 																	will be sent on this mobile number for verification</p>
 															</div>
@@ -330,9 +330,9 @@
 																ID(Official) <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control"
+																<input type="email" class="form-control" 
 																	id="princ_email" value="${editInst.email}"
-																	onchange="checkUnique(this.value,2)" name="princ_email"
+																	oninput="checkUnique(this.value,2)" name="princ_email"
 																	placeholder="abc@xyz.com" required>
 																<p class="desc font-italic fontsize11">Note:
 																	Verification mail will be sent on this Email id</p>
@@ -680,7 +680,7 @@ function getCOPO() {
 
 			}, function(data) {
 				
-			//	alert("Data  " +JSON.stringify(data));
+				//alert("Data  " +JSON.stringify(data));
 				if(data.error==true){
 					if(valueType==2){
 						document.getElementById("princ_email").value="";

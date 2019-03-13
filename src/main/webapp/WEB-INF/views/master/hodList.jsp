@@ -109,11 +109,11 @@
 														<td>${hod.contactNo}</td>
 														<td>${hod.email}</td>
 
-														<td><c:if test="${editAccess==0}">
+														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEditHod(${hod.hodId})" href="#"><span
 																	class="glyphicon glyphicon-edit" title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-															</c:if>  <c:if test="${deleteAccess==0}">
+															</c:if>&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${deleteAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteHod/${hod.hodId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
