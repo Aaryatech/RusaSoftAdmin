@@ -62,29 +62,40 @@
 						<div class="content-body">
 							<div class="row">
 
-
-
-
 								<div class="col-xs-12">
 
-													
-
+									
 <div class="form-group">
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
 												<th >Sr No</th>
-												<th >Year</th>
-												<th >Program Type(Name of Program)</th>
+												<th >Name of Program</th>
 												<th  >Duration Months</th>
-										<!-- 		<th  width="10%"></th> -->
 											    <th >Sanctioned Intake</th> 
 												<th >Date/Year of Introduction</th>
 												<th  >Approved by </th>
 												<th >Action </th>
+												</tr>
+</thead>
+
+<tbody>
+<tr>
+												<td>1</td>
+												<td>Cultural-xyz</td> <!-- format to display program name is program Type-Program Name -->
+												<td>2</td>
+											    <td>100</td>
+												<td>1-01-2019</td>
+												<td>BOS </td>
+												<td> <a
+											href="${pageContext.request.contextPath}/showProgDsh" title="Add Details"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-list"></span></a></td>
 												
 											</tr>
-</thead>
+
+</tbody>
+
 </table>
 
 								</div>

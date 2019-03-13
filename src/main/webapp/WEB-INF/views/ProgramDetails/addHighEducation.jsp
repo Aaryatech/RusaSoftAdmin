@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showStudAddmitLoc"><button
+								<a href="${pageContext.request.contextPath}/showHighEdu"><button
 										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
@@ -112,52 +112,55 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-											
-	<div class="col-xs-12">
-									<table class="table table-striped dt-responsive display">
-										<thead>
-											<tr>
-												<th width="10%">Sr No</th>
-												<th width="30%">Location</th>
-												<th width="60%" style="text-align: center;" colspan="3">No.
-													of Students</th>
-											
-											</tr>
-											<tr>
-												<th width="10%"></th>
-												<th width="30%"></th>
-												<th width="20%">Male</th>
-												<th width="20%">Female</th>
-											<th width="20%">Transgender</th>
-											
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>State</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-														<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-											
+												<div>
 
 
-											</tr>
-											
 
-										</tbody>
-									</table>
-
-								</div>
+														
+		
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Program Type 
+															 <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10"><!--  fetch it from m_prog_type -->
+																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
+						                                     
+																</select>
+																
+																
+															</div>
+														</div>
+														
+														
+														
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Proceeding To
+															 <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10"><!--  fetch it from m_prog_type but the program higher than above selected prog only -->
+																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
+						                                     
+																</select>
+																
+																
+															</div>
+														</div>
+														
+														
+															
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">
+												No. of Student <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
+																	name="librarian_name" placeholder="" required
+																	>
+															</div>
+														</div>
 														
 
-													
                                              <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
@@ -173,10 +176,11 @@
 
 												<div class="clearfix"></div>
 
-											
+											</div>
 
-										</div>
-		</div>
+										
+</div>
+</div>
 									</form>
 								</div>
 

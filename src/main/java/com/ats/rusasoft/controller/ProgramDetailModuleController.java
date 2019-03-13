@@ -316,6 +316,29 @@ public class ProgramDetailModuleController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/showAddHighEdu", method = RequestMethod.GET)
+	public ModelAndView showAddHighEdu(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addHighEducation");
+
+			model.addObject("title", "Progression to Higher Education ");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 	@RequestMapping(value = "/showStudAct", method = RequestMethod.GET)
 	public ModelAndView showStudAct(HttpServletRequest request, HttpServletResponse response) {
@@ -417,7 +440,7 @@ public class ProgramDetailModuleController {
 
 			model = new ModelAndView("ProgramDetails/alumini");
 
-			model.addObject("title", "Alumini");
+			model.addObject("title", "Alumini Association/Contribution");
 
 		} catch (Exception e) {
 
@@ -440,7 +463,54 @@ public class ProgramDetailModuleController {
 
 			model = new ModelAndView("ProgramDetails/addAluminiDetails");
 
-			model.addObject("title", "Add Alumini");
+			model.addObject("title", "Add Alumini Contribution Detail");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+
+	@RequestMapping(value = "/showProgDsh", method = RequestMethod.GET)
+	public ModelAndView showProgDsh(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/progDetailDash");
+
+			model.addObject("title", "Add Program Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/showAddPO", method = RequestMethod.GET)
+	public ModelAndView showAddPO(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addPO");
+
+			model.addObject("title", "Add Program OutComes");
 
 		} catch (Exception e) {
 

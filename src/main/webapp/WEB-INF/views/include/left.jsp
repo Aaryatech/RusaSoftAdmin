@@ -311,6 +311,11 @@
 							<li><a class=""
 							href="${pageContext.request.contextPath}/showProgDetail1"> Program Details List
 								  </a></li>
+								  
+								  
+							<li><a class=""
+							href="${pageContext.request.contextPath}/showProgDsh"> Add Program Details 
+								  </a></li>
 
 						 
 								<li><a class=""

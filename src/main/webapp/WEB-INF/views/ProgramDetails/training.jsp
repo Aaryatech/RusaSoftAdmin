@@ -64,9 +64,6 @@
 
 
 
-								<h5 class="title pull-left">
-									<strong>Training Placement</strong>
-								</h5>
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
@@ -120,7 +117,7 @@
 	
 	
 	
-
+<%-- 
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -131,9 +128,9 @@
 					<h4 class="modal-title">Training Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -245,7 +242,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	
 	<script type="text/javascript">
 	function getData() {

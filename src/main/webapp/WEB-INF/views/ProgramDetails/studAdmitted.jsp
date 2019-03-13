@@ -31,18 +31,18 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
-				<div class='col-xs-12'>
+			<%-- 	<div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -68,13 +68,6 @@
 							<div class="row">
 
 
-								
-
-								<h5 class="title pull-left">
-									<strong> Students Admitted Category wise</strong>
-								</h5>
-
-								
 								<div class="col-xs-12">
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>

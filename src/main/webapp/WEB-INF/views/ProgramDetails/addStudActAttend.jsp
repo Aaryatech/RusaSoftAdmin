@@ -165,17 +165,13 @@
 														</div>
 														
 														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Year
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Year
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						                            
-								
-																</select>
-																
-																
+																<input type="text" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
+																	name="relieving_date"  required>
 															</div>
 														</div>
 														

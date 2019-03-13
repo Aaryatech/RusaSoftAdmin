@@ -53,12 +53,9 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-									<a href="#myModal"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<a class="box_toggle fa fa-chevron-down"></a>
+									<a href="${pageContext.request.contextPath}/showAddHighEdu"><button
+										type="button" class="btn btn-success">Add Higher Education Detail</button></a> 
 								
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
 
 							</div>
 
@@ -78,60 +75,17 @@
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="5%">Sr.No.</th>
-												<th width="15%">Program Type</th>
-												<th width="15%">Proceeding To</th>
-												<th width="15%">No. of Students</th>
+												<th>Sr.No.</th>
+												<th>Program Type</th>
+												<th>Proceeding To</th>
+												<th>No. of Students</th>
 											</tr>
 
 
 										</thead>
 
 
-<!-- 
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>UG</td>
-												<td>PG</td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>PG</td>
-												<td>Ph.D.</td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>M.Phill</td>
-												<td>Ph.D.</td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-											</tr>
 
-											<tr>
-												<td>4</td>
-
-												<td>Ph.D.</td>
-												<td>Post Doct.</td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-											</tr>
-
-											<tr>
-												<td>5</td>
-												<td>Post Doct.</td>
-												<td>pls.Specify</td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-											</tr>
-
-
-
-										</tbody> -->
 									</table>
 								</div>
 
@@ -159,7 +113,7 @@
 	
 	
 	
-
+<%-- 
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -170,9 +124,9 @@
 					<h4 class="modal-title">Higher Education Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId">
 							
@@ -246,7 +200,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	
 	<script type="text/javascript">
 	function getData() {

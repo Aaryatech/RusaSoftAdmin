@@ -137,10 +137,7 @@
 															</label>
 															<div class="col-sm-10">
 																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-															 <option value="CERTIFICATE">CERTIFICATE</option>
-						                                   	<option value="DIPLOMA">DIPLOMA</option>
-							                                   <option value="UG">UG</option>
-								                           <option value="PG">PG</option>
+														
 									</select>
 																
 																

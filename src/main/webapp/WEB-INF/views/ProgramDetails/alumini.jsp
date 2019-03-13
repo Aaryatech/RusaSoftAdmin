@@ -31,18 +31,18 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
-				<div class='col-xs-12'>
+				<%-- <div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -64,14 +64,6 @@
 						<div class="content-body">
 							<div class="row">
 
-
-					
-
-
-
-								<h5 class="title pull-left">
-									<strong>Alumni Association/Contribution</strong>
-								</h5>
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
@@ -79,7 +71,6 @@
 										<thead>
 											<tr>
 												<th>Sr.No.</th>
-										
 												<th>Name of Alumni</th>
 												<th>Passing Year</th>
 												<th>Nature of Contribution</th>
@@ -112,7 +103,7 @@
 
 
 	</div>
-	
+<%-- 	
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -123,9 +114,9 @@
 					<h4 class="modal-title">Alumini Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -227,7 +218,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
