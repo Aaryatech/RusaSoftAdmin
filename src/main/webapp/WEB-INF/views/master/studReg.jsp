@@ -124,7 +124,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="student_name"
-																value="${editStudent.studentName}"
+																value="${editStudent.studentName}" required
 																	name="student_name" placeholder="Student Name"
 																	>
 															</div>

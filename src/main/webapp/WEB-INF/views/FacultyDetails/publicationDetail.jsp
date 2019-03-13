@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -163,15 +162,17 @@
 																<label class="control-label col-sm-2" for="smallheading">Date
 																	 <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="date" class="form-control" id="dob"
 																		name="dob" placeholder="DOB" value="" required>
 																</div>
+															</div>
 
+															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Venue
 																	 <span class="text-danger"></span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob" placeholder="Venue" value="" required>
 																</div>
@@ -188,16 +189,19 @@
 																<label class="control-label col-sm-2" for="smallheading">Funding
 																	From  <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob" placeholder="Funding from" value=""
 																		required>
 																</div>
+																	</div>
+
+															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="smallheading">Amount
 																	 <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob" placeholder="Amount" value="" required>
 																</div>

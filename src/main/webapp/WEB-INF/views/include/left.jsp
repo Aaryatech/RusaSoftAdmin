@@ -360,7 +360,7 @@
  
 
 				<li class=""><a href="javascript:;"> <i
-						class="fa fa-columns"></i> <span class="title">Faulty
+						class="fa fa-columns"></i> <span class="title">Faculty
 							Details</span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
