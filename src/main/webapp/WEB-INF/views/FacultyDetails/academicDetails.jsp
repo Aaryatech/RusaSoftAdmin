@@ -57,19 +57,19 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-
+<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -84,13 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal"
-														data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a>  --%>
-										<a
-									class="box_toggle fa fa-chevron-down"></a>
+							
+								<a href="${pageContext.request.contextPath}/showAddAcademicDetails"><button
+										type="button" class="btn btn-success">Add Academic Details</button></a> 
+									
 							</div>
 
 						</header>
@@ -120,9 +117,7 @@
 
 													<div class="col-xs-12">
 
-														<h5 class="title pull-left">
-															<strong>Academic Details</strong>
-														</h5>
+														
 
 														<div class="col-xs-12"></div>
 														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
@@ -137,13 +132,12 @@
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th width="15%">Academic Year</th>
-																		<th width="30%">Qualification</th>
-																		<th width="30%">Class</th>
-																			<th width="30%">University Name</th>
-																		<th width="15%">City</th>
-																			<th width="15%">Year of Passing</th>
+																		<th>Sr No</th>
+																		<th>Qualification</th>
+																		<th>Class</th>
+																			<th>University Name</th>
+																		<th>City</th>
+																			<th>Year of Passing</th>
 																		
 																	</tr>
 																</thead>
@@ -158,12 +152,7 @@
 														</div>
 
 														
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+														
 
 													</div>
 
@@ -197,7 +186,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
-	
+<%-- 	
 	
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
@@ -209,9 +198,9 @@
 					<h4 class="modal-title">Academic Details</h4>
 				</div>
 				<div class="modal-body">
-					<%-- <form role="form"
+					<form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
+						method="get">
 						<input type="hidden" class="form-control" id="pageId"
 							name="pageId" >
 							
@@ -260,7 +249,7 @@
 							<!-- </div> -->
 	</div>
 						
-					<%-- 	<div class="form-group">
+						<div class="form-group">
 						
 							<label class="control-label col-sm-1" for="page_name">Class
 							</label>
@@ -269,7 +258,7 @@
 									name="className" placeholder="" value="${page.pageName}"
 									required>
 							</div>
-	</div> --%>
+	</div>
 	
 	
 										<div class="form-group">
@@ -322,7 +311,7 @@
 	</div>
 	
 	
-	
+	 --%>
 
 
 	<script>

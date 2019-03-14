@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showJournalPubList"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -142,7 +141,8 @@
 																		name="dob" placeholder="Name of journal" value=""
 																		required>
 																</div>
-
+	</div>
+															<div class="form-group">
 																<label class="control-label col-sm-2" for="page_order">Scopus/DIO/UGC Recognized
 																	<span class="text-danger">*</span>
 																</label>
@@ -163,7 +163,8 @@
 																		name="dob" placeholder="Date" value="" required>
 																</div>
 
-
+	</div>
+															<div class="form-group">
 																<label class="control-label col-sm-2" for="page_order">Issue
 																	<span class="text-danger">*</span>
 																</label>
@@ -174,7 +175,8 @@
 																		name="issue" placeholder="Issue" value="" required>
 																</div>
 
-
+	</div>
+															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Volume
 																	 <span class="text-danger">*</span>
 																</label>

@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showMphillDetails"><button
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -119,7 +118,7 @@
 										
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">M.phill/Ph.D.Guide
-																:
+																
 															</label>
 
 
@@ -132,8 +131,9 @@
 
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Date
-																of Recognition : <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="smallheading">
+															
+															Date of Recognition <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<input type="date" class="form-control" id="dor"
@@ -142,8 +142,8 @@
 															</div>
 
 
-															<label class="control-label col-sm-2" for="smallheading">Valid
-																up to : <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="smallheading">Valid up to 
+																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<input type="date" class="form-control" id="dor"
@@ -156,7 +156,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">No.
-																of Students Guided :<span class="text-danger">*</span>
+																of Students Guided <span class="text-danger">*</span>
 																
 																
 															</label> <label class="control-label col-sm-1" for="page_name">PG
@@ -180,7 +180,7 @@
 
 
 															<label class="control-label col-sm-1" for="page_name">Ph.D.
-																:<span class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
 																<input type="text" class="form-control" id="phdNo"
@@ -194,7 +194,7 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order">Use
-																of ICT(Information Communication Technology) :<span
+																of ICT(Information Communication Technology) <span
 																class="text-danger">*</span>
 															</label>
 

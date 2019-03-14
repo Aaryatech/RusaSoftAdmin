@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a>  --%><a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showBookPubList"><button
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -119,18 +118,19 @@
 <div class="form-group">
 
 
-
-																<label class="control-label col-sm-2" for="smallheading">Book
-																	Publication <span class="text-danger">*</span>
-																</label> <label class="control-label col-sm-2"
+ <label class="control-label col-sm-2"
 																	for="smallheading">Title of Book  <span
 																	class="text-danger">*</span>
 																</label>
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob" placeholder="Title of Book" value=""
 																		required>
 																</div>
+
+															</div>
+
+															<div class="form-group">
 
 
 																<label class="control-label col-sm-2" for="page_order">Edition
@@ -138,7 +138,7 @@
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Edition" value="" required>
 																</div>
@@ -156,12 +156,16 @@
 																</label>
 
 
-																<div class="col-sm-3">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Name of Authors/Co-Authors "
 																		value="" required>
 																</div>
 
+
+															</div>
+
+															<div class="form-group">
 
 
 												<label class="control-label col-sm-2" for="page_order">Name
@@ -169,7 +173,7 @@
 																</label>
 
 
-																<div class="col-sm-3">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Name of Co-Authors "
 																		value="" required>
@@ -180,26 +184,30 @@
 																<div class="form-group">
 
 																<label class="control-label col-sm-2" for="page_order">Name
-																	of Co-Author 2<span class="text-danger">*</span>
+																	of Co-Author 2
 																</label>
 
 
-																<div class="col-sm-3">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Name of Co-Authors "
-																		value="" required>
+																		value="" >
 																</div>
 
 
+															</div>
+
+															<div class="form-group">
+
 													<label class="control-label col-sm-2" for="page_order">Name
-																	of Co-Author 3<span class="text-danger">*</span>
+																	of Co-Author 3
 																</label>
 
 
-																<div class="col-sm-3">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Name of Co-Authors "
-																		value="" required>
+																		value="" >
 																</div>
 													
 															</div>
@@ -228,16 +236,20 @@
 																</label>
 
 
-																<div class="col-sm-3">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="isbn"
 																		name="isbn" placeholder="ISBN No" value="" required>
 																</div>
+
+															</div>
+
+															<div class="form-group">
 
 
 																<label class="control-label col-sm-2" for="smallheading">Year
 																	of Publication  <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="date" class="form-control" id="dob"
 																		name="dob" placeholder="Title of Book" value=""
 																		required>

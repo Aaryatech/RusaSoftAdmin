@@ -382,50 +382,7 @@ public class MasterController {
 	}
 
 	
-	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
-	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/FacultyDetails/bookPub");
-
-			model.addObject("title", "Book Publication");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showJournalPub", method = RequestMethod.GET)
-	public ModelAndView showJournalPub(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/FacultyDetails/journalPub");
-
-			model.addObject("title", "Journal Publication");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	@RequestMapping(value = "/showOutReachContri", method = RequestMethod.GET)
 	public ModelAndView showOutReachContri(HttpServletRequest request, HttpServletResponse response) {
 

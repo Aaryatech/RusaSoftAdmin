@@ -57,19 +57,19 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-
+<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- <h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a>  --%><a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showPersonalDetails"><button
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -116,9 +115,6 @@
 
 													<div class="col-xs-12">
 
-														<h5 class="title pull-left">
-															<strong>Personal Details</strong>
-														</h5>
 
 														<div class="col-xs-12"></div>
 
@@ -202,7 +198,7 @@
 															<label class="control-label col-sm-2" for="smallheading">Mobile
 																No. <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="contactNo"
 																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -210,16 +206,18 @@
 															</div>
 															<div class="col-sm-2">
 															</div>
-
+														</div>
+														
+														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Phone No
 																<span class="text-danger">*</span>
 															</label>
 
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="mobileNo"
 																	name="mobileNo" 
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Landline No" value="" required>
+																	placeholder="Office Landline No" value="" required>
 															</div>
 
 
@@ -228,23 +226,26 @@
 														<div class="form-group">
 														
 														
-															<label class="control-label col-sm-2" for="smallheading">Resident
+															<label class="control-label col-sm-2" for="smallheading">Resident No.
 																 </label>
 														
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="residentNo"
 																	name="residentNo" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Resident No" value="" required>
+																	placeholder="Resident Phone No" value="" required>
 															</div>
 															<div class="col-sm-2">
 															</div>
+															</div>
+														
+														<div class="form-group">
 															
 															<label class="control-label col-sm-2" for="smallheading">Email ID
 																: <span class="text-danger">*</span>
 															</label>
 
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="mobileNo"
 																	name="mobileNo" 
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -258,20 +259,13 @@
 
 														<div class="form-group">
 														
-														<label class="control-label col-sm-2" for="smallheading">PAN
-																No <span class="text-danger"></span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control" id="panNo"
-																	name="panNo" placeholder="PAN No" value="" >
-															</div>
-														<div class="col-sm-2">
-															</div>
+														
+														
 														
 														<label class="control-label col-sm-2" for="smallheading">Aadhar
 																No<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="Text" class="form-control" id="adharNo"
 																	name="adharNo" placeholder="Aadhar No" value=""
 																	required>
@@ -282,8 +276,8 @@
 															<label class="control-label col-sm-2" for="status">Select
 																Designation  <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
-																<select id="designation" name="designation"
+															<div class="col-sm-6">
+																<select id="designation" name="designation" onchange="showForm()"
 																	class="form-control" required>
 																	<option value="0">Assistant Professor</option>
 																	<option value="1">Associate Professor</option>
@@ -295,11 +289,28 @@
 															</div>
 															<div class="col-sm-2">
 															</div>
+															</div>
 															
+															
+															<div class="form-group" id="xyz">
+															<label class="control-label col-sm-2" for="smallheading">Other Designation
+																  <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="prevExp"
+																	name="prevExp" placeholder="Other Designation" 
+																	value="" required>
+															</div>
+
+															
+																</div>
+															
+														
+														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Date
 																of Birth  <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="date" class="form-control" id="dob"
 																	name="dob" placeholder="DOB" value="" required>
 															</div>
@@ -311,18 +322,20 @@
 														<label class="control-label col-sm-2" for="smallheading">Date
 																of Joining  <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="date" class="form-control" id="doj" onchange="calExp()"
 																	name="doj" placeholder="Date of Joining" value=""
 																	required>
 															</div>
 <div class="col-sm-2">
 															</div>
-
+</div>
+														
+														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Previous
 																Experience  <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="prevExp"
 																	name="prevExp" placeholder="Previous Experience"  onchange="calExp()"
 																	value="" required>
@@ -337,7 +350,7 @@
 														<label class="control-label col-sm-2" for="smallheading">Total 
 																Experience <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 															<!-- 	<input type="text" class="form-control" id="curExp"
 																	name="curExp" placeholder="Current Experience" value=""
 																	required> -->
@@ -407,11 +420,27 @@ function check(qualType) {
 function hideText() {
 	//alert("hii");
 	document.getElementById("abc").style = "display:none"
+		document.getElementById("xyz").style = "display:none"
 		
 	
 	}
 	
+function showForm() {
+	//document.getElementById("abc").style = "display:none"
+		var qualType=document.getElementById("designation").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 5) {
+
+			document.getElementById("xyz").style = "visible"
+			
+				
+		} 
+		else if(qualType == 1){
+			document.getElementById("xyz").style = "display:none"
+		}
 	
+	}
 	
 function calExp(){
 	var d = new Date();

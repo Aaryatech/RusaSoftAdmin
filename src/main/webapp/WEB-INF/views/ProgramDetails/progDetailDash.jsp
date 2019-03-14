@@ -132,7 +132,7 @@
 								
 										<ul class="nav nav-tabs">
 										
-											<li><a href="#Vision" data-toggle="tab"> <i
+											<li class="active"><a href="#Vision" data-toggle="tab"> <i
 													class="fa fa-home"></i> Vision
 											</a></li>
 											<li><a href="#Mission" data-toggle="tab"> <i
