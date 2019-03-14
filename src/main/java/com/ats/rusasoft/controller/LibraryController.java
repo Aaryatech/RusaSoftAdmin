@@ -1369,7 +1369,76 @@ public class LibraryController {
 		
 		
 
+////////////////////*****************Neha************************///////////////
+		
+		
+		
 
+		@RequestMapping(value = "/showConsultancyDetails", method = RequestMethod.GET)
+		public ModelAndView showResearchProDetails(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("FacultyDetails/consultancy");
+
+				model.addObject("title", "Consultancy Details Form");
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+
+		@RequestMapping(value = "/showPatentDetails", method = RequestMethod.GET)
+		public ModelAndView showPatentDetails(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("FacultyDetails/patentDetails");
+
+				model.addObject("title", "Patent Details Form");
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+
+		@RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
+		public ModelAndView showAwardDetails(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			try {
+
+				model = new ModelAndView("FacultyDetails/awardDetails");
+
+				model.addObject("title", "Award Details Form");
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
 
 		
 }
