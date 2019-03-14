@@ -12,6 +12,7 @@ public class StudAdmLocwise {
 	private int maleStudent;
 	private int femaleStudent;
 	private int transStudent;
+	private int locTotStudent;
 
 	private int delStatus;
 	private int isActive;
@@ -120,13 +121,24 @@ public class StudAdmLocwise {
 		this.locationId = locationId;
 	}
 	
+	
+	
+	public int getLocTotStudent() {
+		return locTotStudent;
+	}
+	public void setLocTotStudent(int locTotStudent) {
+		this.locTotStudent = locTotStudent;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "StudAdmLocwise [studentLocId=" + studentLocId + ", instituteId=" + instituteId + ", programId="
 				+ programId + ", yearId=" + yearId + ", locationId=" + locationId + ", maleStudent=" + maleStudent
-				+ ", femaleStudent=" + femaleStudent + ", transStudent=" + transStudent + ", delStatus=" + delStatus
-				+ ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime
-				+ ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + "]";
+				+ ", femaleStudent=" + femaleStudent + ", transStudent=" + transStudent + ", locTotStudent="
+				+ locTotStudent + ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
+				+ ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1="
+				+ exVar1 + ", exVar2=" + exVar2 + "]";
 	}
 
 

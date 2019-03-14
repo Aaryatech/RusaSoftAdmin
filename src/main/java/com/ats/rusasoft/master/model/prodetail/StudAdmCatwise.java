@@ -13,6 +13,7 @@ public class StudAdmCatwise {
 	private int maleStudent;
 	private int femaleStudent;
 	private int transStudent;
+	private int catTotStudent;
 	
 	
 	private int delStatus;
@@ -120,13 +121,22 @@ public class StudAdmCatwise {
 		this.exVar2 = exVar2;
 	}
 	
+	
+	
+	public int getCatTotStudent() {
+		return catTotStudent;
+	}
+	public void setCatTotStudent(int catTotStudent) {
+		this.catTotStudent = catTotStudent;
+	}
 	@Override
 	public String toString() {
 		return "StudAdmCatwise [studentCatId=" + studentCatId + ", instituteId=" + instituteId + ", programId="
 				+ programId + ", yearId=" + yearId + ", castId=" + castId + ", maleStudent=" + maleStudent
-				+ ", femaleStudent=" + femaleStudent + ", transStudent=" + transStudent + ", delStatus=" + delStatus
-				+ ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime
-				+ ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + "]";
+				+ ", femaleStudent=" + femaleStudent + ", transStudent=" + transStudent + ", catTotStudent="
+				+ catTotStudent + ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
+				+ ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1="
+				+ exVar1 + ", exVar2=" + exVar2 + "]";
 	}
 
 }
