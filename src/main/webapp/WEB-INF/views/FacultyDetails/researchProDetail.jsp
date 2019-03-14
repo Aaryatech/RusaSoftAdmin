@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showResearchDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -117,49 +116,41 @@
 													<div class="col-xs-12">
 
 
-															<h5 class="title pull-left">
-																<strong>Research Project Details</strong>
-															</h5>
+															
 															<div class="col-sm-12"></div>
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Name
 																	of Project  <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob" placeholder="Name of Project" value=""
 																		required>
 																</div>
+																	</div>
+																	
+																	
+																<div class="form-group">
                                                             <label class="control-label col-sm-2" for="smallheading">Year
 																	of Project Sanction  <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-3">
-																	<select
-								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="2018-2019">2018-2019</option>
-								<option value="2017-2018">2017-2018</option>
-								<option value="2016-2017">2016-2017</option>
-									<option value="2016-2017">2015-2016</option>
-								
-							</select>
+																<div class="col-sm-6">
+																	<input type="text" class="form-control" id="dob"
+																		name="dob" placeholder="Name of Project" value=""
+																		required>
 																</div>
-
-
-
-
-
 
 															</div>
 																<div class="form-group">
 																
 																
-																<label class="control-label col-sm-2" for="page_order">Sponsoring
-																	Authority <span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="page_order">Sponsoring Authority
+																 <span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="issue" placeholder="Sponsoring Authority"
 																		value="" required>
@@ -170,20 +161,24 @@
 																<label class="control-label col-sm-2" for="smallheading">Name
 																	of Principal Investigator  <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob"
 																		placeholder="Name of Principal Investigator" value=""
 																		required>
 																</div>
 
+															</div>
+
+
+															<div class="form-group">
 
 																<label class="control-label col-sm-2" for="page_order">Department
 																	Name <span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="Department" placeholder="Department Name"
 																		value="" required>
@@ -199,20 +194,21 @@
 																	of Co-Principal Investigator  <span
 																	class="text-danger">*</span>
 																</label>
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="dob"
 																		placeholder="Name of Co-Principal Investigator"
 																		value="" required>
 																</div>
 
-
+	</div>
+																<div class="form-group">
 																<label class="control-label col-sm-2" for="page_order">Department
 																	Name <span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-4">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="Department" placeholder="Department Name"
 																		value="" required>
@@ -227,29 +223,34 @@
 																<label class="control-label col-sm-2" for="smallheading">Grant
 																	 <span class="text-danger">*</span>
 																</label>
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="dob"
 																		name="Grant" placeholder="Grant" value="" required>
 																</div>
+	</div>
+																<div class="form-group">
 
-
-																<label class="control-label col-sm-2" for="page_order">Total
-																	Amount<span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="page_order">Total Amount
+																	<span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="Total Amount" placeholder="Total Amount"
 																		value="" required>
 																</div>
+</div>
 
+
+															<div class="form-group">
+																
 																<label class="control-label col-sm-2" for="page_order">
 																	Amount Received <span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="issue"
 																		name="Amount Received" placeholder="Amount Received"
 																		value="" required>
@@ -268,17 +269,19 @@
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="date" class="form-control" id="issue"
 																		name="Total Amount" placeholder="" value="" required>
 																</div>
+																	</div>
+																<div class="form-group">
 
 																<label class="control-label col-sm-2" for="page_order">
 																	To Date <span class="text-danger">*</span>
 																</label>
 
 
-																<div class="col-sm-2">
+																<div class="col-sm-6">
 																	<input type="date" class="form-control" id="issue"
 																		name="Amount Received" placeholder="Total Amount"
 																		value="" required>

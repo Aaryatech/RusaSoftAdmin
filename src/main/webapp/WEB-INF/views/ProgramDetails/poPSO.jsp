@@ -53,8 +53,8 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal2"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
+						<!-- 	<a href="#myModal2"	data-toggle="modal"><button type="submit"
+																class="btn btn-info">Add</button></a> -->
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 								<a class="box_toggle fa fa-chevron-down"></a>
@@ -64,11 +64,31 @@
 							</div>
 
 						</header>
+						
+						
+						
+										<div class="col-xs-12">
+									&nbsp;&nbsp;&nbsp;					
+									<div class="row">
+									<label class="control-label col-sm-2" for="status"> Program Name:</label>
+										<label class="control-label col-sm-2" for="status"> </label>				
+									</div>
+										
+									<div class="row">
+									<label class="control-label col-sm-2" for="status"> Duration:</label>
+										<label class="control-label col-sm-2" for="status"> </label>				
+									</div>
+									<div class="row">
+									<label class="control-label col-sm-2" for="status"> Sanctioned Intake:</label>
+										<label class="control-label col-sm-2" for="status"> </label>				
+								
+									</div>
+									</div>					
+
+
+                       <br/><br/><br/>
 						<div class="content-body">
 							<div class="row">
-
-
-
 
 								<div class="col-xs-12">
 
@@ -77,17 +97,32 @@
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th width="5%">Sr No</th>
-												<th width="10%" >Year</th>
-												<th >Program Outcomes (PO as per Accreditation Manual)</th>
-												<th >Program Specific Outcomes (PSOs  Define By the Program)</th>
-												<th >Mapping(Yes/No)</th>
-												<th >Satisfying Value
+												<th>Sr No</th>
+											
+												<th>Program Outcomes (PO as per Accreditation Manual)</th>
 												
-												</th>
-											</tr>
+												<th>Is Mapped(Yes/No)</th>
+													<th>Satisfying Value</th>
+												<th>Action</th>
+																							</tr>
 
                                                </thead>
+                                               
+                                              <tbody>
+<tr>
+												<td>1</td>
+												<td>xyz</td> <!-- format to display program name is program Type-Program Name -->
+												<td>No</td>
+											  
+											<td>1</td>
+												<td> <a
+											href="${pageContext.request.contextPath}/showMapPOPSO" title="Add PSO"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-list"></span></a></td>
+												
+											</tr>
+
+</tbody>
 														</table>
 														</div>
 														

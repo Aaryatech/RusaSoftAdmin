@@ -187,7 +187,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="lib_joiningDate" 	value="${editInst.joiningDate}"
+																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${editInst.joiningDate}"
 																	name="lib_joiningDate" placeholder=" " required>
 															</div>
 														</div>

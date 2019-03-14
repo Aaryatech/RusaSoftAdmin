@@ -176,7 +176,7 @@
 															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control" id="lib_joiningDate" 	value="${editInst.joiningDate}"
+																<input type="text" class="form-control " id="lib_joiningDate" 	value="${editInst.joiningDate}"
 																	name="lib_joiningDate" placeholder=" Sanctioned Intake" required>
 															</div>
 														</div>
@@ -187,7 +187,7 @@
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
+																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${editInst.realivingDate}"
 																	name="relieving_date"  required>
 															</div>
 														</div>
@@ -200,7 +200,7 @@
 												
 															<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Approved By
-															 <span class="text-danger">*</span>
+																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>

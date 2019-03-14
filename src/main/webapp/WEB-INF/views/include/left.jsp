@@ -25,7 +25,7 @@
 			</div>
 			<!-- USER INFO - END --> 
 			<ul class='wraplist'>
-				<li class='menusection'>Main</li>
+				<li class='menusection'></li>
 				<li class="open"><a href="index.html"> <i
 						class="fa fa-dashboard"></i> <span class="title">Dashboard</span>
 				</a></li>
@@ -317,15 +317,15 @@
 							href="${pageContext.request.contextPath}/showProgDsh"> Add Program Details 
 								  </a></li>
 
-						 
-								<%-- <li><a class=""
+						 <%-- 
+								<li><a class=""
 							href="${pageContext.request.contextPath}/showEucationalObjective">Program Educational Objective
-								  </a></li>
+								  </a></li> --%>
 								 <li><a class=""
-							href="${pageContext.request.contextPath}/showpoPso">Program PO/PSO
+							href="${pageContext.request.contextPath}/showpoPso"> PO/PSO Mapping
 								  </a></li>
 						
- --%>
+
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showStudAddmit">Student Admitted Categorywise  </a></li>
@@ -334,7 +334,7 @@
 							href="${pageContext.request.contextPath}/showStudAddmitLoc">Student
 								Admitted Locationwise  </a></li>
 
-						<li><a class=""/jf
+						<li><a class=""
 							href="${pageContext.request.contextPath}/showStudSupp">Student Support Scheme  </a></li>
 
 						<li><a class=""

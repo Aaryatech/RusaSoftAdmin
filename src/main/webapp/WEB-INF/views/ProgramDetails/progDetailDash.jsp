@@ -138,19 +138,20 @@
 											<li><a href="#Mission" data-toggle="tab"> <i
 													class="fa fa-home"></i> Mission
 											</a></li>
+											<li><a href="#PEO" data-toggle="tab"> <i
+													class="fa fa-home"></i> Program Educational Objective
+											</a></li>
 											<li><a href="#PO" data-toggle="tab"> <i
 													class="fa fa-home"></i> Program Outcome
 											</a></li>
 											<li><a href="#PSO" data-toggle="tab"> <i
 													class="fa fa-home"></i> Program Specific Outcome
 											</a></li>
-											<li><a href="#PEO" data-toggle="tab"> <i
-													class="fa fa-home"></i> Program Educational Objective
-											</a></li>
-											<li><a href="#PO-PSO" data-toggle="tab"> <i
+											
+										<!-- 	<li><a href="#PO-PSO" data-toggle="tab"> <i
 													class="fa fa-home"></i>PO-PSO Mapping
 											</a></li>
-											
+											 -->
 											
 
 										</ul>

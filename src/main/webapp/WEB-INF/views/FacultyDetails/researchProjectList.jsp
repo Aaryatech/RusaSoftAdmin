@@ -85,8 +85,8 @@
 
 							<div class="actions panel_actions pull-right">
 							
-								<a href="${pageContext.request.contextPath}/showJournalPub"><button
-										type="button" class="btn btn-success">Add Journal Publication Details</button></a> 
+								<a href="${pageContext.request.contextPath}/showResearchDetails"><button
+										type="button" class="btn btn-success">Add Research Project Details</button></a> 
 									
 							</div>
 
@@ -133,11 +133,11 @@
 																<thead>
 																	<tr>
 																		<th>Sr No</th>
-																		<th>Publication Type</th>
-																		<th>Name of Journal</th>
-																		<th>Publication Year </th>
-																		<th>Issue</th>
-																		<th>Volume</th>
+																		<th>Name of Project</th>
+																		<th>Year of Project Sanction</th>
+																		<th>Sponsoring Authority</th>
+																		<th>Total Amount</th>
+																		<th>Amount Received</th>
 																		<th>Action</th>	
 																	</tr>
 																</thead>

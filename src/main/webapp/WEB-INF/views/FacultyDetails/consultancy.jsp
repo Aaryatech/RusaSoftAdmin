@@ -58,18 +58,18 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<div class="col-xs-12">
+				<%-- <div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -84,13 +84,13 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal"
+							<!-- <a href="#myModal"
 														data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a>  --%>
-										<a
-									class="box_toggle fa fa-chevron-down"></a>
+																class="btn btn-info">Add</button></a> -->
+								<a href="${pageContext.request.contextPath}/publicationList"><button
+										type="button" class="btn btn-info">Back</button></a> 
+										<!-- <a
+									class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
 
 						</header>
