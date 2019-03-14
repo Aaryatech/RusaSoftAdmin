@@ -588,7 +588,7 @@ public class ProgramDetailModuleController {
 	}
 
 	
-	@RequestMapping(value = "/showAlumini", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showAlumini", method = RequestMethod.GET)
 	public ModelAndView showAlumini(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -631,7 +631,7 @@ public class ProgramDetailModuleController {
 
 		return model;
 
-	}
+	}*/
 	
 	
 

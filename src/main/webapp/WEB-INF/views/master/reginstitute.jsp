@@ -625,12 +625,8 @@ function getCOPO() {
                 format: "dd-mm-yyyy",
                 changeYear:true,
                 changeMonth:true
-				 
-
 			});
         });
-        
-       
         
         function checkUnique(inputValue,valueType){
         	//alert(inputValue);

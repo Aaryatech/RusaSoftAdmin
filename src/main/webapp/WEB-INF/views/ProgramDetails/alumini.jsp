@@ -52,22 +52,27 @@
 					<section class="box ">
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-						
+
 							<div class="actions panel_actions pull-right">
-									<a href="${pageContext.request.contextPath}/showAddAlumini"><button type="submit"
-									class="btn btn-success">Add Alumini Detail</button></a>
-							
+								<a href="${pageContext.request.contextPath}/showAddAlumini"><button
+										type="submit" class="btn btn-success">Add Alumini
+										Detail</button></a>
+
 
 							</div>
 
 						</header>
+						<form
+							action="${pageContext.request.contextPath}/deleteAlum/0"
+							method="get" id="insListForm">
 						<div class="content-body">
 							<div class="row">
 
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display" id="example-1">
+									<table class="table table-striped dt-responsive display"
+										id="example-1">
 										<thead>
 											<tr>
 												<th>Sr.No.</th>
@@ -76,20 +81,55 @@
 												<th>Nature of Contribution</th>
 												<th>Year of Contribution</th>
 												<th>Benefit To</th>
+												<th>Action</th>
 											</tr>
 
 										</thead>
+										<tbody>
+											<c:forEach items="${alumList}" var="alum" varStatus="count">
+												<tr>
+													<td>${count.index+1}</td>
+													<td>${alum.alumniName}</td>
+													<td>${alum.passingYear}</td>
+													<c:if test="${alum.contributionType==1}">
+														<td>Financial</td>
+													</c:if>
+													<c:if test="${alum.contributionType==0}">
+														<td>Non Financial</td>
+													</c:if>
 
+													<td>${alum.contributionYear}</td>
+													<td>${alum.benefitTo}</td>
 
+													<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
+															<a href="#"
+																onclick="showEditAlum(${alum.alumniDetailId})"><span
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<%-- </c:if> --%>
+														<%-- <c:if test="${deleteAccess==0}"> --%>
+															<a
+																href="${pageContext.request.contextPath}/deleteAlum/${alum.alumniDetailId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger" title="Delete"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a>
+														<%-- </c:if> --%></td>
+
+												</tr>
+											</c:forEach>
+
+										</tbody>
 
 									</table>
 								</div>
-
-
-
+									<input type="hidden" id="edit_alum_id" name="edit_alum_id"
+											value="0">
+								
 
 							</div>
 						</div>
+						</form>
 					</section>
 				</div>
 
@@ -98,127 +138,8 @@
 		</section>
 		<!-- END CONTENT -->
 
-
-
-
-
-	</div>
-<%-- 	
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Alumini Details</h4>
-				</div>
-				<div class="modal-body">
-					<form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							
-								<input type="hidden" class="form-control" id="index"
-							name="index" value="0">
-							
-										<div class="form-group">
-						<label class="control-label col-sm-6" for="academicYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
-
-						</select>
-					</div>
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Name of Alumini
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="name"
-									name="subTaut" value="${page.pageName}" placeholder="Name of Alumini"
-									required>
-							<!-- </div> -->
-	</div>		
-						
-					
-								
-		<div class="form-group">
-						<label class="control-label col-sm-6" for="academicYear">Passing
-							Year</label> <select id="passYear" name="passYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
-
-						</select>
-					</div>
-	
-	<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Nature of Contribution</label> <select
-								id="nature" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="Financial">Financial</option>
-												<option value="Non Financial">Non Financial</option>
-								
-								
-							</select>
-						</div>
-			
-									
-						
-											
-		<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Year of Contribution
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="date" class="form-control" id="year1"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
 	</div>
 	
-						
-					
-									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Benefit To</label> <select
-								id="level" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="Students">Students</option>
-															<option value="Staff">Staff</option>
-															<option value="Faculty">Faculty</option>
-															<option value="Department">Department</option>
-															<option value="Institute">Institute</option>
-															<option value="Society">Society</option>
-															<option value="7">Any Other</option>
-								
-								
-							</select>
-						</div>
-						
-						
-		<div class="form-group" id="abc">
-						
-							<label class="control-label col-sm-6" for="page_name">Benefit To Other
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="otherScheme"
-									name="otherScheme" value="${page.pageName}" placeholder="Benefit To Other"
-									required>
-							<!-- </div> -->
-	</div>
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div> --%>
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
@@ -274,15 +195,11 @@
 			//alert("qualType::"+qualType);
 			
 			if (qualType == 7) {
-
 				document.getElementById("abc").style = "visible"
-				
-					
 			} 
 			else{
 				document.getElementById("abc").style = "display:none"
 			}
-		
 		}
 	function hideText() {
 		//alert("hii");
@@ -307,6 +224,16 @@
 
 			});
 
+		}
+		
+		function showEditAlum(almId){
+			document.getElementById("edit_alum_id").value=almId;//create this 
+			var form=document.getElementById("insListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditAlum");
+			form.submit();
+			
 		}
 	</script>
 </body>
