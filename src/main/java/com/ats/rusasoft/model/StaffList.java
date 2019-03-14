@@ -9,8 +9,15 @@ public class StaffList {
 	private int currentDesignationId ;
 	private String qualificationName;
 	private String designationName;
+	private String deptName;
 	
 	
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 	public String getDesignationName() {
 		return designationName;
 	}
@@ -63,6 +70,9 @@ public class StaffList {
 	public String toString() {
 		return "StaffList [facultyId=" + facultyId + ", facultyName=" + facultyName + ", joiningDate=" + joiningDate
 				+ ", contactNo=" + contactNo + ", email=" + email + ", currentDesignationId=" + currentDesignationId
-				+ ", qualificationName=" + qualificationName + ", designationName=" + designationName + "]";
+				+ ", qualificationName=" + qualificationName + ", designationName=" + designationName + ", deptName="
+				+ deptName + "]";
 	}
-	}
+
+	
+}

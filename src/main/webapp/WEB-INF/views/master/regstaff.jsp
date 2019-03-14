@@ -180,10 +180,7 @@
 														</div>
 													
 													 --%>
-													 	<p class="desc text-danger fontsize11">Notice : This
-															form strictly need to be filled by Institutes coming
-															under RUSA Maharashtra Only. You can access RUSA portal
-															only after authorisation done by RUSA officials.</p>
+													 	
 															
 													 <input type="hidden"  id="faculty_id" name="faculty_id" 
 																	value="${staff.facultyId}">
@@ -200,6 +197,33 @@
 														</div>
 
 
+															<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Department : 
+															<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="dept" name="dept"
+																	class="form-control" required>
+																	<c:forEach items="${deptList}" var="dList">
+																		<c:choose>
+																			<c:when test="${dList.deptId==staff.deptId}">
+																				<option selected value="${dList.deptId}">${dList.deptName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+
+																				<option value="${dList.deptId}">${dList.deptName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+																</select>
+															</div>
+														</div>
+				
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Qualification : 
@@ -433,7 +457,7 @@
 														
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>

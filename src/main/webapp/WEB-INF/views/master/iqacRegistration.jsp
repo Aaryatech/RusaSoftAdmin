@@ -114,10 +114,7 @@
 												<div class="row">
 													<div class="col-md-12">
 
-														<p class="desc text-danger fontsize11">Notice : This
-															form strictly need to be filled by Institutes coming
-															under RUSA Maharashtra Only. You can access RUSA portal
-															only after authorisation done by RUSA officials.</p>
+														
 														<input type="hidden"  id="iqac_id" name="iqac_id" value="${miqc.iqacId}">									
 														
 														<div class="form-group">
@@ -172,7 +169,17 @@
 														</div> -->
 														
 
-														<div class="form-group">
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Joining
+																Date <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="text" class="form-control datepicker" id="dateOfJoin" 
+																value="${miqc.joiningDate}"	name="dateOfJoin" placeholder="dd/mm/yyyy" required>
+															</div>
+														</div>
+
+														<%-- <div class="form-group">
 															<label class="control-label col-sm-2" for="heading1">Date
 																Of Joining  <span class="text-danger">*</span>
 															</label>
@@ -181,7 +188,7 @@
 																	name="dateOfJoin" placeholder="Date Of Joining"
 																	value="${miqc.joiningDate}" required>
 															</div>
-														</div>
+														</div> --%>
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Contact
@@ -212,7 +219,7 @@
 
 													<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
@@ -359,6 +366,17 @@
 	
 	
 	<script>
+	$(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+
+		});
+    });
+	
 	function showDiv(value) {
 
 		if (value == 0) {

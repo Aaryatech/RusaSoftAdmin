@@ -119,10 +119,7 @@
 																	value="${dean.deanId}">
 
 													<div class="col-xs-12">
-													<p class="desc text-danger fontsize11">Notice : This
-															form strictly need to be filled by Institutes coming
-															under RUSA Maharashtra Only. You can access RUSA portal
-															only after authorisation done by RUSA officials.</p>
+													
 														<div class="form-group">
 														
 															<label class="control-label col-sm-2" for="page_name">
@@ -268,7 +265,7 @@
 
 											  <div class="form-group">
 											  <div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
@@ -317,7 +314,16 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script type="text/javascript">
-	
+$(function () {
+	 
+    $('.datepicker').datepicker({
+		autoclose: true,
+        format: "dd-mm-yyyy",
+        changeYear:true,
+        changeMonth:true
+
+	});
+});
 
 	function showDiv(value) {
 
@@ -464,6 +470,7 @@
 	</script>
 	
 		<script>
+		
 	$("#contactNo").on("keypress keyup blur",function (event) {
         //this.value = this.value.replace(/[^0-9\.]/g,'');
  $(this).val($(this).val().replace(/[^0-9\.]/g,''));

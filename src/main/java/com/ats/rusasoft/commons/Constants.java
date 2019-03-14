@@ -20,6 +20,8 @@ public class Constants {
 	
 	public static final String GVN_IMAGE_URL =  "http://132.148.148.215:8080/uploadspune/GVN/";
 
+	
+	
 	public static  String FACTORYNAME = "";
 	public static  String FACTORYADDRESS = "";
 	// navigation view
@@ -41,10 +43,12 @@ public class Constants {
 	public static int GATE_ENTRY_IMAGE_TYPE=7;
 
 	
-	//public static final String ReportURL ="http://localhost:8080/adminpanel/";
-//	public static final String ReportURL ="http://132.148.148.215:8080/bakeryadmin/";//change
-	public static final String ReportURL ="http://192.168.1.25:8080/admin/";//change
-
+	//public static final String REPORT_SAVE = "/home/supertom/apache-tomcat-8.5.35/webapps/admin/Report.pdf";
+		public static final String REPORT_SAVE ="/home/maddy/ats-12/Report.pdf";
+		
+	//public static final String ReportURL ="http://192.168.1.25:8080/admin/";//change
+	public static final String ReportURL = "localhost:8080/billsoft/";
+	
 	public static final String SETTING_KEY = "PB";
 
 	public static final int DIS_BY_ACC = 7;
@@ -59,8 +63,7 @@ public class Constants {
 
 	public static final int DIS_BY_GATE = 3;
 
-	//public static final String REPORT_SAVE = "/home/supertom/apache-tomcat-8.5.35/webapps/admin/Report.pdf";
-	public static final String REPORT_SAVE = "/home/ats-11/Report33.pdf";
+	
 
 	public static final String SP_CAKE_FOLDER = "http://132.148.148.215:8080/uploadspune/SPCAKE/";
 
