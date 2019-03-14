@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -85,8 +85,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a> --%>
+								<a class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
 						</header>
@@ -105,7 +105,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -116,90 +116,92 @@
 
 													<div class="col-xs-12">
 
-			
+														<div class="col-sm-12"></div>
 
-															<h5 class="title pull-left">
-																<strong>Ph.D Guidance :</strong>
-															</h5>
-															<div class="col-sm-12"></div>
+														<div class="form-group">
 
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Ph.D.
-																	Guide : <span class="text-danger">*</span>
-																</label>
+															<label class="control-label col-sm-2" for="smallheading">Ph.D.
+																Guide : <span class="text-danger">*</span>
+															</label>
 
 
-																<div class="col-sm-4">
-																	Yes <input type="radio" name="phdGuide" id="phdGuide"
-																		checked value="0"> No<input type="radio"
-																		name="phdGuide" id="phdGuide" value="1">
-																</div>
-</div>
+															<div class="col-sm-4">
+																Yes <input type="radio" name="phdGuide" id="phdGuide"
+																	checked value="0"> No<input type="radio"
+																	name="phdGuide" id="phdGuide" value="1">
+															</div>
+														</div>
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Co-Guide
-																	: <span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-4">
-																	Yes <input type="radio" name="coGuide" id="coGuide"
-																		checked value="0"> No<input type="radio"
-																		name="coGuide" id="coGuide" value="1">
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-Guide: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Co_Guide" value=""
-																		required>
-																</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Co-Guide
+																: <span class="text-danger">*</span>
+															</label>
 
 
+															<div class="col-sm-4">
+																Yes <input type="radio" name="coGuide" id="coGuide"
+																	checked value="0"> No<input type="radio"
+																	name="coGuide" id="coGuide" value="1">
+															</div>
+														</div>
+
+														<div class="form-group">
+
+															<label class="control-label col-sm-2" for="smallheading">Name
+																of Co-Guide: <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="dob"
+																	name="Grant" placeholder="Name of Co_Guide" value=""
+																	required>
 															</div>
 
-															<div class="form-group">
+
+														</div>
+
+														<div class="form-group">
 
 
 
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Ph.D. Scholar: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Ph.D Scholar"
-																		value="" required>
-																</div>
-																<label class="control-label col-sm-2" for="smallheading">Year
-																	of Registration: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-1">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Year" value="" required>
-																</div>
-															
+															<label class="control-label col-sm-2" for="smallheading">Name
+																of Ph.D. Scholar: <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="dob"
+																	name="Grant" placeholder="Name of Ph.D Scholar"
+																	value="" required>
+															</div>
+														</div>
 
+														<div class="form-group">
 
+															<label class="control-label col-sm-2" for="smallheading">Year
+																of Registration: <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="dob"
+																	name="Grant" placeholder="Year" value="" required>
 															</div>
 
-															<div class="form-group">
 
-																<label class="control-label col-sm-2" for="smallheading">Topic/
-																	Area of Research : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-10">
-																	<textarea id="off_add" name="off_add"
-																		class="form-control" style="width: 100%;" required></textarea>
-																</div>
+
+														</div>
+
+														<div class="form-group">
+
+															<label class="control-label col-sm-2" for="smallheading">Topic/
+																Area of Research : <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<textarea id="off_add" name="off_add"
+																	class="form-control" style="width: 100%;" required></textarea>
 															</div>
+														</div>
 
-															<div class="form-group">
+														<div class="form-group">
 
 
-<!-- 
+															<!-- 
 																<label class="control-label col-sm-2" for="smallheading">Date
 																	of Registration: <span class="text-danger">*</span>
 																</label>
@@ -209,27 +211,32 @@
 																		value="" required>
 																</div>
  -->
- 
-                                                       <label class="control-label col-sm-2" for="smallheading">Awarded
-																	: <span class="text-danger">*</span>
-																</label>
+
+															<label class="control-label col-sm-2" for="smallheading">Awarded
+																: <span class="text-danger">*</span>
+															</label>
 
 
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="awarded" id="awarded"
-																		checked value="1" onclick="check(this.value)"> No<input type="radio"
-																		name="awarded" id="awarded" value="0" onclick="check(this.value)">
-																</div>
-																
-																
-																	<label class="control-label col-sm-2" id="abc" for="smallheading">Year
-																	of Awarded Ph.D: <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-1">
-																	<input type="text" class="form-control" id="yearAwarded"
-																		name="yearAwarded" placeholder="Year" value="" required>
-																</div>
-																<!-- <label class="control-label col-sm-2" for="smallheading">Valid
+															<div class="col-sm-2">
+																Yes <input type="radio" name="awarded" id="awarded"
+																	checked value="1" onclick="check(this.value)">
+																No<input type="radio" name="awarded" id="awarded"
+																	value="0" onclick="check(this.value)">
+															</div>
+														</div>
+
+														<div class="form-group">
+
+
+															<label class="control-label col-sm-2" id="abc"
+																for="smallheading">Year of Awarded Ph.D: <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="yearAwarded"
+																	name="yearAwarded" placeholder="Year" value="" required>
+															</div>
+															<!-- <label class="control-label col-sm-2" for="smallheading">Valid
 																	up : <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-2">
@@ -238,7 +245,7 @@
 																		required>
 																</div>
  -->
-<!-- 
+															<!-- 
 																<label class="control-label col-sm-2" for="smallheading">Awarded
 																	: <span class="text-danger">*</span>
 																</label>
@@ -250,9 +257,9 @@
 																		name="awarded" id="awarded" value="1">
 																</div> -->
 
-															</div>
+														</div>
 
-														
+
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
@@ -285,33 +292,30 @@
 		</section>
 		<!-- END CONTENT -->
 
-<script type="text/javascript">
-function check(qualType) {
-	//document.getElementById("abc").style = "display:none"
-		//var qualType=document.getElementById("cat").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 1) {
+		<script type="text/javascript">
+			function check(qualType) {
+				//document.getElementById("abc").style = "display:none"
+				//var qualType=document.getElementById("cat").value
+				//alert("qualType::"+qualType);
 
-			document.getElementById("abc").style = "visible"
+				if (qualType == 1) {
+
+					document.getElementById("abc").style = "visible"
+					document.getElementById("yearAwarded").style = "visible"
+
+				} else if (qualType == 0) {
+					document.getElementById("abc").style = "display:none"
+					document.getElementById("yearAwarded").style = "display:none"
+				}
+
+			}
+			function hideText() {
+				//alert("hii");
+				document.getElementById("abc").style = "visible"
 				document.getElementById("yearAwarded").style = "visible"
-			
-				
-		} 
-		else if(qualType == 0){
-			document.getElementById("abc").style = "display:none"
-				document.getElementById("yearAwarded").style = "display:none"
-		}
-	
-	}
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "visible"
-		document.getElementById("yearAwarded").style = "visible"
-		
-	
-	}
-</script>
+
+			}
+		</script>
 
 	</div>
 	<!-- END CONTAINER -->
