@@ -125,7 +125,7 @@
 																<a href="#" onclick="showEditDept(${dept.deptId})"><span
 																	class="glyphicon glyphicon-edit" title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-															<c:if test="${deleteAccess==0}">s
+															<c:if test="${deleteAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteDepts/${dept.deptId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
@@ -134,8 +134,6 @@
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
 															</c:if></td>
-
-
 
 													</tr>
 												</c:forEach>
