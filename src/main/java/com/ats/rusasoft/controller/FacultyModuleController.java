@@ -106,16 +106,17 @@ public class FacultyModuleController {
 		return model;
 
 	}
-
-	@RequestMapping(value = "/showConsultancyDetails", method = RequestMethod.GET)
-	public ModelAndView showResearchProDetails(HttpServletRequest request, HttpServletResponse response) {
+	
+	
+	@RequestMapping(value = "/showResearchDetailsList", method = RequestMethod.GET)
+	public ModelAndView showResearchDetailsList(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("FacultyDetails/consultancy");
+			model = new ModelAndView("FacultyDetails/researchProjectList");
 
-			model.addObject("title", "Consultancy Details Form");
+			model.addObject("title", "Research Details Form");
 
 		} catch (Exception e) {
 
@@ -129,49 +130,6 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/showPatentDetails", method = RequestMethod.GET)
-	public ModelAndView showPatentDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/patentDetails");
-
-			model.addObject("title", "Patent Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
-	public ModelAndView showAwardDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/awardDetails");
-
-			model.addObject("title", "Award Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
 	public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
