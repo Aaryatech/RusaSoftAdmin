@@ -115,7 +115,7 @@
 														value="${staffList.qualificationName}" /></td>
 											
 											<td style="text-align: left"><c:out
-														value="${staffList.designationName}" /></td>
+														value="${staffList.deptName}" /></td>
 														
 											<td style="text-align: left"><c:out
 														value="${staffList.joiningDate}" /></td>
@@ -149,6 +149,19 @@
 											</c:forEach>
 										</tbody>
 									</table>
+									<div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
+
+								<button type="button" class="btn btn-primary" onclick="exportToExcel();"  id="expExcel" 
+									style="align-content: center; width: 200px; margin-left: 80px; background-color: #272c33;">
+									Export To Excel</button>
+									
+									<button type="button" class="btn btn-primary"
+										onclick="genPdf()" id="PDFButton"
+										style="align-content: center; width: 100px; margin-left: 80px; background-color: #272c33;">
+										PDF</button>
+							</div>
+							</div>
 
 									<c:if test="${deleteAccess==0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
@@ -158,7 +171,10 @@
 										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
-
+											
+											
+						
+							
 
 								</div>
 							</div>
@@ -185,6 +201,21 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		function exportToExcel() {
+
+			window.open("${pageContext.request.contextPath}/exportToExcel");
+			document.getElementById("expExcel").disabled = true;
+		}
+	
+		function genPdf() {
+			//alert("hiii");
+			
+			window.open("${pageContext.request.contextPath}/showFacultyPdf");
+			document.getElementById("expExcel").disabled = true;
+
+		}
+	</script>
 	<script>
 		function clearSessionAttribute() {
 

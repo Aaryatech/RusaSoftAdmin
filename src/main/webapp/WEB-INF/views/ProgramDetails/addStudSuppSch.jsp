@@ -116,10 +116,7 @@
 
 													<div class="col-xs-12">
 													
-													<p class="desc text-danger fontsize11">Notice : This
-															form strictly need to be filled by Institutes coming
-															under RUSA Maharashtra Only. You can access RUSA portal
-															only after authorisation done by RUSA officials.</p>
+													
 													
 													<input type="hidden" name="stud_suprt_schm" value="${stud.sprtSchmId}">
 													
@@ -258,7 +255,7 @@
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>

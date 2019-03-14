@@ -73,9 +73,9 @@
             <table id="example-1" class="table table-striped dt-responsive display">
                 <thead>
                     <tr>
-                    <th class="check" style="text-align: center; width: 5%;"><input
+                    <!-- <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
                    		<th width="5%">Sr No</th>
                         <th>IQAC Name</th> 
                         <th>Designation</th> 
@@ -89,8 +89,8 @@
                 <tbody>
                       <c:forEach items="${QList}" var="QList" varStatus="count"> 
 									<tr>
-									<td><input type="checkbox" class="chk" name="iqacIds"
-															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td>
+									<%-- <td><input type="checkbox" class="chk" name="iqacIds"
+															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
 											<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out
@@ -109,7 +109,7 @@
 											<td style="text-align: left"><c:out
 														value="${QList.email}" /></td>
 												
-											<td>
+											<td align="center">
 											 <c:if test="${editAccess == 0}">  <a
 												href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit IQAC" 
 												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
@@ -153,12 +153,12 @@
 								 </c:forEach>   
                 </tbody>
             </table>
-		<c:if test="${deleteAccess==0}">
+	<%-- 	<c:if test="${deleteAccess==0}">
 			<input type="submit" class="btn btn-primary" value="Delete"
 					id="deleteId"
 					onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 					style="align-content: center; width: 113px; margin-left: 40px;">
-	 </c:if>
+	 </c:if> --%>
 			<input type="hidden" id="edit_accOff_id" name="edit_accOff_id" value="0">
 
 

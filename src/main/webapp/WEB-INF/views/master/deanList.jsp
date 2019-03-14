@@ -122,7 +122,7 @@
 											<td style="text-align: left"><c:out
 														value="${deanList.email}" /></td>													
 													
-													<td>
+													<td align="center">
 													<c:if test="${editAccess == 0}"><a
 														href="${pageContext.request.contextPath}/editDean/${deanList.deanId}"><span
 															class="glyphicon glyphicon-edit"

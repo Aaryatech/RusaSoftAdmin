@@ -73,7 +73,9 @@
 									<table class="table table-striped dt-responsive display" id="example-1">
 										<thead>
 											<tr>
-												<th>Select All</th>
+												<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 												<th>Sr.No.</th>
 												<th>Scheme</th>
 												<th>Level</th>
@@ -88,8 +90,8 @@
 										<tbody>
 												<c:forEach items="${studList}" var="stud" varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="stusentSchmIds"
-															id="hodIds${count.index+1}" value="${stud.sprtSchmId}" /></td>
+														<td><input type="checkbox" class="chk" name="studentSchmIds"
+															id="studentSchmIds${count.index+1}" value="${stud.sprtSchmId}" /></td>
 														<td>${count.index+1}</td>
 														<td>${stud.schemeName}</td>
 														<td>${stud.level}</td>
@@ -116,11 +118,11 @@
 
 											</tbody>
 								</table>
+								<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
 								</div>
-
-
-								
-
 
 							</div>
 						</div>
@@ -271,6 +273,45 @@
 		</div>
 	</div>  
 	 --%>
+	 <script>
+function clearSessionAttribute() {
+	 
+	 
+
+	$.getJSON('${clearSessionAttribute}', {
+  
+		ajax : 'true',
+
+	}, function(data) { 
+		 
+	
+	});
+
+}
+
+function selectedInst(source) {
+
+	checkboxes = document.getElementsByName('studentSchmIds');
+
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
+
+	}
+
+}
+
+/* 
+function showEditaccOff(accOffId){
+	document.getElementById("edit_accOff_id").value=accOffId;//create this 
+	var form=document.getElementById("insListForm");
+    form.setAttribute("method", "post");
+
+	form.action=("showEditaccOff");
+	form.submit();
+	
+} */
+ </script>
+	 
 	<script type="text/javascript">
 	
 	function showForm() {

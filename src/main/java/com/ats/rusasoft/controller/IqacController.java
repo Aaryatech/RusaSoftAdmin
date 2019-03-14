@@ -25,11 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.ExportToExcel;
 import com.ats.rusasoft.model.Dean;
 import com.ats.rusasoft.model.DeansList;
+import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.IqacList;
+import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.Staff;
@@ -339,6 +342,16 @@ public class IqacController {
 			
 			map = new LinkedMultiValueMap<>();
 			
+			//HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map.add("instId", userObj.getGetData().getUserInstituteId());
+			Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+			List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+			System.err.println("deptList " + deptList.toString());
+
+			model.addObject("deptList", deptList);
+			
 			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);
 			model.addObject("desigList", designationList);
 			
@@ -379,7 +392,7 @@ public class IqacController {
 		model.addObject("title","Add Department");
 		
 		int facultyId = 0;
-		int deptId = 0;
+		
 	
 		try {
 			
@@ -410,7 +423,7 @@ public class IqacController {
 			staff.setFacultyId(facultyId);
 			
 			staff.setInstituteId(instituteId);
-			staff.setDeptId(deptId);
+			staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
 			staff.setFacultyName(facultyMmemberName);
 			staff.setHighestQualification(highestQualification);
 			staff.setHightestQualificationYear(yrofHighestQualification);
@@ -470,12 +483,56 @@ public class IqacController {
 			model = new ModelAndView("master/staffList");
 
 			model.addObject("title", "Faculty List");
+			int facId = (int)session.getAttribute("instituteId");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("facId", facId);
 			
-			
-			List<StaffList> staffList = rest.getForObject(Constants.url+"/getListStaff", List.class);
+			StaffList[] staff = rest.postForObject(Constants.url+"/getListStaff",map,  StaffList[].class);
+			List<StaffList> staffList = new ArrayList<>(Arrays.asList(staff));
 			System.out.println("Staff List:"+staffList);
 			
 			model.addObject("staffList", staffList);
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr. No");
+			rowData.add("Faculty Name");
+			rowData.add("Qualification");
+			rowData.add("Department");
+			rowData.add("Joining Date");
+			rowData.add("Contact No");
+			rowData.add("Email");
+			
+
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+			int cnt = 1;
+			for (int i = 0; i < staffList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				cnt = cnt + i;
+				rowData.add("" + (i + 1));
+
+				rowData.add("" + staffList.get(i).getFacultyName());
+				rowData.add("" + staffList.get(i).getQualificationName());
+				rowData.add("" + staffList.get(i).getDeptName());
+				rowData.add("" + staffList.get(i).getJoiningDate());
+				rowData.add("" + staffList.get(i).getContactNo());
+				rowData.add("" + staffList.get(i).getEmail());
+				
+
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+
+			
+			session.setAttribute("exportExcelList", exportToExcelList);
+			session.setAttribute("excelName", "GetMatIssueHeader");
 			Info add = AccessControll.checkAccess("showStaffList", "showStaffList", "0", "1", "0", "0", newModuleList);
 			Info edit = AccessControll.checkAccess("showStaffList", "showStaffList", "0" ,"0", "1", "0", newModuleList);
 			Info delete = AccessControll.checkAccess("showStaffList", "showStaffList", "0" ,"0", "0", "1", newModuleList);
@@ -529,6 +586,15 @@ public class IqacController {
 			
 			model = new ModelAndView("master/regstaff");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			
+			
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map.add("instId", userObj.getGetData().getUserInstituteId());
+			Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+			List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+			System.err.println("deptList edt:" + deptList.toString());
+			model.addObject("deptList", deptList);
+			
 			map.add("id", facultyId);
 			map.add("type", 1);
 			
