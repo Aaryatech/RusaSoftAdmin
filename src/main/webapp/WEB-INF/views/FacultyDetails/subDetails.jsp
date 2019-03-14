@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,11 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
-								<%-- <a href="${pageContexts.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showAddSubDetails"><button
+										type="button" class="btn btn-success">Add</button></a>
+
 							</div>
 
 						</header>
@@ -107,79 +105,59 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
 												<div>
 
+													<h5 class="title pull-left">
+														<strong>Subject Details :</strong>
+													</h5>
+													<div class="col-sm-12"></div>
+													<table id="example-1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th>Sr No</th>
+																<th>Subject Code</th>
+																<th>Subject Type</th>
+																<th>Subject Name</th>
+																<th>Program</th>
+																<th>Semester</th>
+																<th>% of Result</th>
+																<th>Add CO</th>
+																<th>Action</th>
+															</tr>
+														</thead>
 
-													<div class="col-xs-12">
+														<tbody>
+															<tr>
+																<td>1</td>
+																<td>001</td>
+																<td>ABC</td>
+																<td>XYZ</td>
+																<td>PQR</td>
+																<td>Semester</td>
+																<td>100</td>
 
-		
-															<h5 class="title pull-left">
-																<strong>Subject Details :</strong>
-															</h5>
-															<div class="col-sm-12"></div>
+																<td><a
+																	href="${pageContext.request.contextPath}/showpoPsoFaculty"
+																	title="Add CO" rel="tooltip" data-color-class="detail"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Block"><span
+																		class="glyphicon glyphicon-list"></span></a></td>
 
+																<td></td>
+															</tr>
 
-														
-
-
-																<table id="example-1"
-																	class="table table-striped dt-responsive display">
-																	<thead>
-																		<tr>
-																			<th width="5%">Sr No</th>
-																			
-																			<th width="10%">Academic Year</th>
-																			<th width="10%">Semester</th>
-																			<th width="10%">Subject Code Taught</th>
-																			<th width="10%">Subject Taught</th>
-																			<th width="15%">Subject Type
-																				</th>
-																				<th width="15%">Is CBCS
-																				</th>
-																				<th width="10%">Course Outcome</th>
-																			<th width="15%">No. of Students Appeared</th>
-																			<th width="10%">Passed</th>
-																			<th width="10%">% of Result</th>
-																			
-																			<th width="30%">Action</th>
-																		</tr>
-																	</thead>
-
-
-
-																	<tbody>
-
-																		
-																	</tbody>
-																</table>
-
-															</div>
-
-															<hr>
-
-															
-														
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-								</div>
-
-
-													<div class="clearfix"></div>
+														</tbody>
+													</table>
 
 												</div>
 
-											
+											</div>
 										</div>
 									</form>
 								</div>
@@ -204,7 +182,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -217,202 +195,186 @@
 					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
 						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							<input type="hidden" class="form-control" id="index"
-							name="index" value="0">
-						<div class="form-group">
-							<label class="control-label col-sm-6" for="page_name">Academic Year</label> <select
-								id="academicYear" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="2018-2019">2018-2019</option>
-								<option value="2017-2018">2017-2018</option>
-								<option value="2016-2017">2016-2017</option>
-									<option value="2016-2017">2015-2016</option>
-								
-							</select>
-						</div>
-						
-								
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Subject Code Taught
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="code" placeholder="Subject Code Taught"
-									name="code" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-				
-									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Semester</label> <select
-								id="sem" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="0">I</option>
-								<option value="1">II</option>
-								<option value="3">III</option>
-								<option value="4">IV</option>
-							
-							
-
-
-							</select>
-						</div>
-						
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Subject Taught
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="subTaut" placeholder="Subject Taught"
-									name="subTaut" value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-						
-		
-									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Subject Type</label> <select
-								id="subType" name="subType" class="form-control" onchange="showForm()" required>
-								<option value="0">Regular</option>
-								<option value="1">Elective</option>
-								<option value="3">Other</option>
-								
-							</select>
-						</div>			
-						
-						
-						
-									<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Is CBCS</label> 
-						<div class="col-sm-2">
-																Yes <input type="radio" name="consultancy"
-																	id="consultancy" checked value="0"> No<input
-																	type="radio" name="consultancy" id="consultancy"
-																	value="1">
-															</div> 
-						</div>				
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+					<input type="hidden" class="form-control" id="index" name="index"
+						value="0">
 					<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">No. of Student Appeared
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="noStud" placeholder="No. of Student Appeared"
-									name="noStud"  value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-	<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Passed
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="pass" placeholder="Passed" onchange=" calResult()"
-									name="pass"  value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-	
-	
-	<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">% of Result
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="rslt" placeholder="% of Result"
-									name="rslt"  value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-	
-	
-						
-<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">Course Outcome
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="course" placeholder="Course Outcome"
-									name="course"value="${page.pageName}"
-									required>
-							<!-- </div> -->
-	</div>
-		
-						
-						
+						<label class="control-label col-sm-6" for="page_name">Academic
+							Year</label> <select id="academicYear" name="qualType"
+							class="form-control" onchange="showForm()" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+							<option value="2016-2017">2015-2016</option>
 
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+						</select>
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Subject
+							Code Taught </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="code"
+							placeholder="Subject Code Taught" name="code"
+							value="${page.pageName}" required>
+						<!-- </div> -->
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Semester</label>
+						<select id="sem" name="sem" class="form-control"
+							onchange="showForm()" required>
+							<option value="0">I</option>
+							<option value="1">II</option>
+							<option value="3">III</option>
+							<option value="4">IV</option>
+
+
+
+
+						</select>
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Subject
+							Taught </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="subTaut"
+							placeholder="Subject Taught" name="subTaut"
+							value="${page.pageName}" required>
+						<!-- </div> -->
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Subject
+							Type</label> <select id="subType" name="subType" class="form-control"
+							onchange="showForm()" required>
+							<option value="0">Regular</option>
+							<option value="1">Elective</option>
+							<option value="3">Other</option>
+
+						</select>
+					</div>
+
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Is
+							CBCS</label>
+						<div class="col-sm-2">
+							Yes <input type="radio" name="consultancy" id="consultancy"
+								checked value="0"> No<input type="radio"
+								name="consultancy" id="consultancy" value="1">
+						</div>
+					</div>
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">No.
+							of Student Appeared </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="noStud"
+							placeholder="No. of Student Appeared" name="noStud"
+							value="${page.pageName}" required>
+						<!-- </div> -->
+					</div>
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Passed
+						</label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="pass"
+							placeholder="Passed" onchange=" calResult()" name="pass"
+							value="${page.pageName}" required>
+						<!-- </div> -->
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">% of
+							Result </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="rslt"
+							placeholder="% of Result" name="rslt" value="${page.pageName}"
+							required>
+						<!-- </div> -->
+					</div>
+
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="page_name">Course
+							Outcome </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="course"
+							placeholder="Course Outcome" name="course"
+							value="${page.pageName}" required>
+						<!-- </div> -->
+					</div>
+
+
+
+
+					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-	
-		var sem=document.getElementById("sem").value
-		var code=document.getElementById("code").value
-		var academicYear=document.getElementById("academicYear").value
-		
-		var subTaut=document.getElementById("subTaut").value
-		var subType=document.getElementById("subType").value
-		
-		var noStud=document.getElementById("noStud").value
-	
-		var pass=document.getElementById("pass").value
-		var rslt=document.getElementById("rslt").value
-		var course=document.getElementById("course").value
-		var isCBCS=document.getElementById("consultancy").value
-		var t="-";
-		
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
 
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-				
-					sem,
-					code,
-					subTaut,
-					subType,
-					isCBCS,
-					course,
-					noStud,
-					pass,
-					rslt,
-					
-				    t
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-	}
-	
-	function calResult(){
-		var noStud=parseFloat(document.getElementById("noStud").value);
-		
-		var pass=parseFloat(document.getElementById("pass").value);
-		
-		var x=(pass/noStud)*100;
-		document.getElementById("rslt").value=x;
-		
-		
-	}
+			var sem = document.getElementById("sem").value
+			var code = document.getElementById("code").value
+			var academicYear = document.getElementById("academicYear").value
 
+			var subTaut = document.getElementById("subTaut").value
+			var subType = document.getElementById("subType").value
+
+			var noStud = document.getElementById("noStud").value
+
+			var pass = document.getElementById("pass").value
+			var rslt = document.getElementById("rslt").value
+			var course = document.getElementById("course").value
+			var isCBCS = document.getElementById("consultancy").value
+			var t = "-";
+
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add([ i + 1, academicYear,
+
+			sem, code, subTaut, subType, isCBCS, course, noStud, pass, rslt,
+
+			t ]).draw();
+
+			document.getElementById("index").value = i + 1;
+
+		}
+
+		function calResult() {
+			var noStud = parseFloat(document.getElementById("noStud").value);
+
+			var pass = parseFloat(document.getElementById("pass").value);
+
+			var x = (pass / noStud) * 100;
+			document.getElementById("rslt").value = x;
+
+		}
 	</script>
-	
-	
-	
-	
-	
+
+
+
+
+
 </body>
 </html>

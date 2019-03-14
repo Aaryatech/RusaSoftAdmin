@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -83,11 +83,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								<<%-- a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
-							</div>
+							<div class="actions panel_actions pull-right"><<%-- a
+								href="${pageContext.request.contextPath}/publicationList"><button
+								type="button" class="btn btn-info">Back</button></a> --%> <a
+								class="box_toggle fa fa-chevron-down"></a></div>
 
 						</header>
 
@@ -121,90 +120,115 @@
 										</ul>
 
 										<div class="tab-content">
-										<!-- 1 -->
+											<!-- 1 -->
 											<div class="tab-pane fade in active " id="strength">
 
-												<div>
 
 
 
-													<h5 class="title pull-left">
-														<strong> Strength:</strong>
-													</h5>
-													<div class="col-xs-12">
 
-														<table id="example1"
-															class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="30%">Strength&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																		<a href="#myModal" data-toggle="modal"><button
-																				type="submit" class="btn btn-info">Add</button></a>
-																	</th>
+												<div class="col-xs-12">
 
-																</tr>
-															</thead>
+													<div class="row">
 
+														<label class="col-sm-2 text-left" for="hh">
+															Strength </label>
+														<div class="col-sm-6">
+															<input type="text" maxlength="10" class="form-control"
+																id="hh" name="hh" placeholder="Strength" required>
+														</div>
 
+														<div class="col-sm-4">
 
-														</table>
-
+															<input type="button" class="btn btn-info" value="Add">
+														</div>
 													</div>
 
-													<div class="clearfix"></div>
+
+													<table id="example1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th width="10%">Sr No</th>
+																<th width="30%">Strength</th>
+
+															</tr>
+														</thead>
+
+
+
+													</table>
+
 												</div>
 
+												<div class="clearfix"></div>
+
+
 											</div>
-													<div class="tab-pane fade in " id="weak">
-
-												<div>
+											<div class="tab-pane fade in " id="weak">
 
 
 
-													<h5 class="title pull-left">
-														<strong> Weakness
-														:</strong>
-													</h5>
-													<div class="col-xs-12">
-
-														<table id="example7"
-															class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="30%">Weakness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																		<a href="#myModal1" data-toggle="modal"><button
-																				type="submit" class="btn btn-info">Add</button></a>
-																	</th>
-
-																</tr>
-															</thead>
 
 
 
-														</table>
+												<div class="col-xs-12">
 
+													<div class="row">
+
+														<label class="col-sm-2 text-left" for="weak">
+															Weakness </label>
+														<div class="col-sm-6">
+															<input type="text" maxlength="10" class="form-control"
+																id="weak" name="weak" placeholder="Weak" required>
+														</div>
+
+														<div class="col-sm-4">
+
+															<input type="button" class="btn btn-info" value="Add">
+														</div>
 													</div>
 
-													<div class="clearfix"></div>
+													<table id="example7"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th width="10%">Sr No</th>
+																<th width="30%">Weakness</th>
+
+															</tr>
+														</thead>
+
+
+
+													</table>
+
 												</div>
 
+												<div class="clearfix"></div>
 											</div>
 
-													
-											
 
 											<div class="tab-pane " id="oppt">
 
-												<div>
 
+												<div class="col-sm-12">
 
+													<div class="row">
 
-													<h5 class="title pull-left">
-														<strong> Opportunity:</strong>
-													</h5>
-													<div class="col-sm-12"></div>
+														<label class="col-sm-2 text-left" for="Opportunity">
+															Opportunity </label>
+														<div class="col-sm-6">
+															<input type="text" maxlength="10" class="form-control"
+																id="Opportunity" name="Opportunity"
+																placeholder="Opportunity" required>
+														</div>
+
+														<div class="col-sm-4">
+
+															<input type="button" class="btn btn-info" value="Add">
+														</div>
+													</div>
 
 
 													<div class="form-group">
@@ -213,10 +237,7 @@
 															<thead>
 																<tr>
 																	<th width="10%">Sr No</th>
-																	<th width="30%">Opportunity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																		<a href="#myModal2" data-toggle="modal"><button
-																				type="submit" class="btn btn-info">Add</button></a>
-																	</th>
+																	<th width="30%">Opportunity</th>
 
 																</tr>
 															</thead>
@@ -227,21 +248,25 @@
 													</div>
 
 
-
 												</div>
+												<div class="clearfix"></div>
 
 											</div>
 
 											<div class="tab-pane " id="challenge">
+												<div class="col-sm-12">
+													<label class="col-sm-2 text-left" for="hh">
+														Challenge </label>
+													<div class="col-sm-6">
+														<input type="text" maxlength="10" class="form-control"
+															id="Challenge" name="Challenge" placeholder="Challenge"
+															required>
+													</div>
 
-												<div>
+													<div class="col-sm-4">
 
-
-
-													<h5 class="title pull-left">
-														<strong> Challenges:</strong>
-													</h5>
-													<div class="col-sm-12"></div>
+														<input type="button" class="btn btn-info" value="Add">
+													</div>
 
 
 													<div class="form-group">
@@ -250,10 +275,7 @@
 															<thead>
 																<tr>
 																	<th width="10%">Sr No</th>
-																	<th width="30%">Challenges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																		<a href="#myModal3" data-toggle="modal"><button
-																				type="submit" class="btn btn-info">Add</button></a>
-																	</th>
+																	<th width="30%">Challenges</th>
 
 																</tr>
 															</thead>
@@ -264,23 +286,81 @@
 													</div>
 
 
-
 												</div>
 
+												<div class="clearfix"></div>
 											</div>
 
 
 
 											<div class="tab-pane " id="copo">
 
-												<div>
-
-													<h5 class="title pull-left">
-														<strong> CO-PO Mapping:</strong>
-													</h5>
-													<div class="col-sm-12"></div>
 
 
+
+												<div class="col-sm-12">
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">Satisfying
+															Value</label>
+														<div class="col-sm-4">
+															<select id="val" name="val" class="form-control"
+																onchange="showForm()" required>
+																<option value="1">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="-">-</option>
+
+															</select>
+														</div>
+													</div>
+
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">Course
+															Outcome</label>
+														<div class="col-sm-4">
+															<select id="co" name="co" class="form-control"
+																onchange="showForm()" required>
+																<option value="Good">Good</option>
+																<option value="Better">Better</option>
+																<option value="Best">Best</option>
+
+															</select>
+														</div>
+													</div>
+
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">Program
+															Outcome</label>
+														<div class="col-sm-4">
+															<select id="po" name="po" class="form-control"
+																onchange="showForm()" required>
+																<option value="Good">Good</option>
+																<option value="Better">Better</option>
+																<option value="Best">Best</option>
+
+															</select>
+														</div>
+													</div>
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="page_order">Is
+															CO/PO Mapped :<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															Yes <input type="radio" name="stu" id="stu" checked
+																value="yes"> No<input type="radio" name="stu"
+																id="stu" value="1">
+														</div>
+
+														<div class="col-sm-4">
+
+															<input type="button" class="btn btn-info" value="Add">
+														</div>
+
+													</div>
 													<div class="form-group">
 														<table id="example5"
 															class="table table-striped dt-responsive display">
@@ -290,11 +370,7 @@
 																	<th width="10%">Course Outcome</th>
 																	<th width="10%">Program Outcome</th>
 																	<th width="10%">Is CO/PO Mapped</th>
-																	<th width="30%">Satisfying
-																		Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-																		href="#myModalcopo" data-toggle="modal"><button
-																				type="submit" class="btn btn-info">Add</button></a>
-																	</th>
+																	<th width="30%">Satisfying Value</th>
 
 																</tr>
 															</thead>
@@ -303,19 +379,23 @@
 
 														</table>
 													</div>
+													<div class="clearfix"></div>
+												</div>
 
-													<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" class="btn btn-primary">Submit</button>
-															<button type="reset" class="btn btn-default">Reset</button>
-														</div>
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
+														<input type="submit" class="btn btn-primary"
+															onclick="submit_f(1)" value="Save"> <input
+															type="submit" class="btn btn-primary"
+															onclick="submit_f(0)"
+															value="Save &
+																		Next">
+														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
-
 												</div>
 
 											</div>
-
-
+											<div class="clearfix"></div>
 
 										</div>
 
@@ -505,56 +585,11 @@
 						method="get"> --%>
 					<input type="hidden" class="form-control" id="pageId" name="pageId">
 
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Course
-							Outcome</label> <select id="co" name="co" class="form-control"
-							onchange="showForm()" required>
-							<option value="Good">Good</option>
-							<option value="Better">Better</option>
-							<option value="Best">Best</option>
 
 
 
 
-						</select>
-					</div>
 
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Program
-							Outcome</label> <select id="po" name="po" class="form-control"
-							onchange="showForm()" required>
-							<option value="Good">Good</option>
-							<option value="Better">Better</option>
-							<option value="Best">Best</option>
-
-						</select>
-					</div>
-<div class="form-group">
-
-						<label class="control-label col-sm-6" for="page_order">Is
-							CO/PO Mapped :<span class="text-danger">*</span>
-						</label>
-						<div class="col-sm-2">
-							Yes <input type="radio" name="stu" id="stu" checked value="yes">
-							No<input type="radio" name="stu" id="stu" value="1">
-						</div>
-					</div>
-
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Satisfying
-							Value</label> <select id="val" name="val" class="form-control"
-							onchange="showForm()" required>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="-">-</option>
-
-						</select>
-					</div>
-
-					
 
 
 

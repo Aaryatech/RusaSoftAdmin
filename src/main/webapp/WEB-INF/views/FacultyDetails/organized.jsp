@@ -84,9 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showOrganizedList"><button
+										type="button" class="btn btn-info">Back</button></a>
+
 							</div>
 
 						</header>
@@ -105,139 +105,148 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Select
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="salutation" name="salutation"
+															class="form-control" required>
+															<option value="0">STTP</option>
+															<option value="1">Seminar</option>
+															<option value="2">Workshop</option>
+															<option value="3">Conference</option>
+															<option value="4">FDP</option>
+															<option value="5">Refresher Course</option>
 
-												<div>
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
 
+													<label class="control-label col-sm-2" for="smallheading">Name
+														of Activity <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="dob"
+															name="Grant" placeholder="Name of Activity" value=""
+															required>
+													</div>
 
-													<div class="col-xs-12">
+												</div>
 
-		<h5 class="title pull-left">
-																<strong>Organized</strong>
-															</h5>
-															<div class="col-sm-12"></div>
+												<div class="form-group">
 
-
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="status">Select
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<select id="salutation" name="salutation"
-																		class="form-control" required>
-																		<option value="0">STTP</option>
-																		<option value="1">Seminar</option>
-																		<option value="2">Workshop</option>
-																		<option value="3">Conference</option>
-																		<option value="4">FDP</option>
-																		<option value="5">Refresher Course</option>
-
-																	</select>
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Activity <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Activity" value=""
-																		required>
-																</div>
-
-															</div>
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="status">Select
-																	Level<span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<select id="salutation" name="salutation"
-																		class="form-control" required>
-																		<option value="0">International</option>
-																		<option value="1">National</option>
-																		<option value="2">State</option>
-																		<option value="3">Regional</option>
+													<label class="control-label col-sm-2" for="status">Select
+														Level<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="salutation" name="salutation"
+															class="form-control" required>
+															<option value="0">International</option>
+															<option value="1">National</option>
+															<option value="2">State</option>
+															<option value="3">Regional</option>
 
 
-																	</select>
-																</div>
+														</select>
+													</div>
+
+												</div>
+
+												<div class="form-group">
 
 
 
-																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Activity <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Awarding Agency" value=""
-																		required>
-																</div>
+													<label class="control-label col-sm-2" for="smallheading">Date
+														of Activity <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id="dob" name="Grant" placeholder="Awarding Agency"
+															value="" required>
+													</div>
+												</div>
 
-																<label class="control-label col-sm-2" for="smallheading">No
-																	of Participants <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="No of Participants" value=""
-																		required>
-																</div>
+												<div class="form-group">
 
-
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Funded
-																	By  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Funded By" value="" required>
-																</div>
+													<label class="control-label col-sm-2" for="smallheading">No
+														of Participants <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="dob"
+															name="Grant" placeholder="No of Participants" value=""
+															required>
+													</div>
+												</div>
 
 
 
-
-																<label class="control-label col-sm-2" for="smallheading">Amount
-																	Sanctioned  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Amount Sanctioned" value=""
-																		required>
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Amount
-																	Utilized  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Amount Utilized" value=""
-																		required>
-																</div>
-
-
-															</div>
-
-															
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">Funded
+														By <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="dob"
+															name="Grant" placeholder="Funded By" value="" required>
 													</div>
 
 
-													<div class="clearfix"></div>
 
 												</div>
+
+
+
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="smallheading">Amount
+														Sanctioned <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="dob"
+															name="Grant" placeholder="Amount Sanctioned" value=""
+															required>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="smallheading">Amount
+														Utilized <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="dob"
+															name="Grant" placeholder="Amount Utilized" value=""
+															required>
+													</div>
+
+
+												</div>
+
+
+
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
+														<input type="submit" class="btn btn-primary"
+															onclick="submit_f(1)" value="Save"> <input
+															type="submit" class="btn btn-primary"
+															onclick="submit_f(0)"
+															value="Save &
+																		Next">
+														<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+												</div>
+
+
+
+												<div class="clearfix"></div>
 
 											</div>
 										</div>
@@ -250,16 +259,22 @@
 					</section>
 				</div>
 
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
-		<!-- END CONTENT -->
-
-
-
 	</div>
+
+
+
+
+
+
+
+
 	<!-- END CONTAINER -->
+
+	<!-- MAIN CONTENT AREA ENDS -->
+
+	<!-- END CONTENT -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

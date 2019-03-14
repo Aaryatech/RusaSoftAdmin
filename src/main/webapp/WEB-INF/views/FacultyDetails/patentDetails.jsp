@@ -84,9 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showPatentDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a>
+
 							</div>
 
 						</header>
@@ -105,7 +106,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -114,84 +115,94 @@
 												<div>
 
 
-													<div class="col-xs-12">
 
 
-															<h5 class="title pull-left">
-																<strong>Patent Details</strong>
-															</h5>
-															<div class="col-sm-12"></div>
 
-<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Patent File No.
-																	  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Patent Number"
-																		required>
-																</div>
-															</div>
+													<h5 class="title pull-left">
+														<strong>Patent Details</strong>
+													</h5>
+													<div class="col-sm-12"></div>
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Title  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Patent Title" value=""
-																		required>
-																</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Patent
+															File No. <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" value="" placeholder="Patent Number"
+																required>
+														</div>
+													</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Patent
-																	Filling Date  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Sponsoring Agency/Industry"
-																		value="" required>
-																</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Patent
+															Title <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Patent Title" value=""
+																required>
+														</div>
+													</div>
 
-															</div>
+													<div class="form-group">
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Co-assistant/Guide  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Co-assistant/Guide"
-																		value="" required>
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Publication  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" value="" required>
-																</div>
-																<label class="control-label col-sm-2" for="smallheading">Academic
-																	Year  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" value="" placeholder="Academic Year"
-																		required>
-																</div>
-
-															</div>
-															
-														
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+														<label class="control-label col-sm-2" for="smallheading">Patent
+															Filling Date <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepicker"
+																id="dob" name="Grant" value="" required>
 														</div>
 
 													</div>
 
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Name
+															of Co-assistant/Guide <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Name of Co-assistant/Guide"
+																value="" required>
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Date
+															of Publication <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepicker"
+																id="dob" name="Grant" value="" required>
+														</div>
+
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Academic
+															Year <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" value="" placeholder="Academic Year"
+																required>
+														</div>
+
+													</div>
+
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary"
+																onclick="submit_f(1)" value="Save"> <input
+																type="submit" class="btn btn-primary"
+																onclick="submit_f(0)"
+																value="Save &
+																		Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
 
 													<div class="clearfix"></div>
 
@@ -222,6 +233,17 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+	<script type="text/javascript">
+		$(function() {
 
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
 </body>
 </html>

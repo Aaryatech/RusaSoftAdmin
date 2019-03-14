@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,9 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showAwardDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -105,7 +105,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -114,114 +114,111 @@
 												<div>
 
 
-													<div class="col-xs-12">
-
-<h5 class="title pull-left">
-																<strong>Award Recognition Details</strong>
-															</h5>
-															<div class="col-sm-12"></div>
-															
-																<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">
-																	Academic Year  <span class="text-danger">*</span>
-																</label>
-																<select class="control-label col-sm-3"
-								id="academicYear" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="2018-2019">2018-2019</option>
-								<option value="2017-2018">2017-2018</option>
-								<option value="2016-2017">2016-2017</option>
-									<option value="2016-2017">2015-2016</option>
-								
-							</select>
-																
-															</div>
-															
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Award/Recognition  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Award/Recognition"
-																		value="" required>
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Awarding
-																	Agency/Authority  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Awarding Agency" value=""
-																		required>
-																</div>
-
-															</div>
 
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Nature
-																	of Award/Recognition  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Nature of Award/Recognition"
-																		value="" required>
-																</div>
 
-																<label class="control-label col-sm-2" for="smallheading">Date
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Awarding Agency" value=""
-																		required>
-																</div>
-																
-																</div>
-																<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Validity
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	Duration <input type="radio" name="validity"
-																		id="validity" checked value="0"  onclick="check1()"> Lifetime<input
-																		 onclick="check()" type="radio" name="validity" id="validity" value="1">
-																</div>
-																
-																
-																<label class="control-label col-sm-2" id="label1" for="smallheading">From
-																	  <span class="text-danger"></span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="label2"
-																		name="Grant" value="" required>
-																</div>
 
-																
-																<label class="control-label col-sm-2" id="sp" for="smallheading">To
-																	  <span class="text-danger" ></span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="label4"
-																		name="Grant" value="" required>
-																</div>
-																
-															</div>
 
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Name
+															of Award/Recognition <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Name of Award/Recognition"
+																value="" required>
+														</div>
+													</div>
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Awarding
+															Agency/Authority <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Awarding Agency" value=""
+																required>
 														</div>
 
 													</div>
 
 
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Nature
+															of Award/Recognition <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Nature of Award/Recognition"
+																value="" required>
+														</div>
+													</div>
+
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Date
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepicker"
+																id="dob" name="Grant" placeholder="Awarding Agency"
+																value="" required>
+														</div>
+
+													</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Validity
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															Duration <input type="radio" name="validity"
+																id="validity" checked value="0" onclick="check1()">
+															Lifetime<input onclick="check()" type="radio"
+																name="validity" id="validity" value="1">
+														</div>
+													</div>
+													<div class="form-group">
+
+
+														<label class="control-label col-sm-2" id="label1"
+															for="smallheading">From <span class="text-danger"></span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepicker"
+																id="label2" name="Grant" value="" required>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" id="sp"
+															for="smallheading">To <span class="text-danger"></span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepicker"
+																id="label4" name="Grant" value="" required>
+														</div>
+
+													</div>
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary"
+																onclick="submit_f(1)" value="Save"> <input
+																type="submit" class="btn btn-primary"
+																onclick="submit_f(0)"
+																value="Save &
+																		Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
+
+
+
 													<div class="clearfix"></div>
 
 												</div>
-
 											</div>
 										</div>
 									</form>
@@ -247,33 +244,42 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script type="text/javascript">
-	function check() {
-	//alert("hii");
-		
-		document.getElementById("label1").style = "display:none"
+	<script type="text/javascript">
+		function check() {
+			//alert("hii");
+
+			document.getElementById("label1").style = "display:none"
 			document.getElementById("label2").style = "display:none"
-				document.getElementById("sp").style = "display:none"
-			
-					document.getElementById("label4").style = "display:none"
-					//	document.getElementById("hide_div").style = "visible"
+			document.getElementById("sp").style = "display:none"
 
-
-	}
-	function check1() {
-		//alert("hii");
-			
-			document.getElementById("label1").style ="visible"
-				document.getElementById("label2").style = "visible"
-					document.getElementById("sp").style = "visible"
-				
-						document.getElementById("label4").style ="visible"
-						//	document.getElementById("hide_div").style = "visible"
-
+			document.getElementById("label4").style = "display:none"
+			//	document.getElementById("hide_div").style = "visible"
 
 		}
+		function check1() {
+			//alert("hii");
 
+			document.getElementById("label1").style = "visible"
+			document.getElementById("label2").style = "visible"
+			document.getElementById("sp").style = "visible"
+
+			document.getElementById("label4").style = "visible"
+			//	document.getElementById("hide_div").style = "visible"
+
+		}
 	</script>
-	
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
+
 </body>
 </html>

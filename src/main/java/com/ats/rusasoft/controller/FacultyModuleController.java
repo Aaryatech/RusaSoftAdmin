@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 @Scope("session")
 public class FacultyModuleController {
-	
+
 	RestTemplate rest = new RestTemplate();
-	
 
 	@RequestMapping(value = "/showFacultyDetails", method = RequestMethod.GET)
 	public ModelAndView showFacultyDetails1(HttpServletRequest request, HttpServletResponse response) {
@@ -60,8 +60,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showAddPublicationDetailsList", method = RequestMethod.GET)
 	public ModelAndView showAddPublicationDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -106,8 +105,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showResearchDetailsList", method = RequestMethod.GET)
 	public ModelAndView showResearchDetailsList(HttpServletRequest request, HttpServletResponse response) {
 
@@ -129,7 +127,6 @@ public class FacultyModuleController {
 		return model;
 
 	}
-
 
 	@RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
 	public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -175,6 +172,28 @@ public class FacultyModuleController {
 
 	}
 
+	@RequestMapping(value = "/showOrganizedList", method = RequestMethod.GET)
+	public ModelAndView showOrganizedList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/organizedList");
+
+			model.addObject("title", "Organized Details List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showOrganizedList at faculty Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showSubDetails", method = RequestMethod.GET)
 	public ModelAndView showSubDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -188,6 +207,72 @@ public class FacultyModuleController {
 		} catch (Exception e) {
 
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddSubDetails", method = RequestMethod.GET)
+	public ModelAndView showAddSubDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/addSubDetail");
+
+			model.addObject("title", "Subject Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showpoPsoFaculty", method = RequestMethod.GET)
+	public ModelAndView showpoPsoFaculty(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/coPSOFaculty");
+
+			model.addObject("title", "Faculty CO PO");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showpoPsoFaculty at Faculty Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showPsoFaculty", method = RequestMethod.GET)
+	public ModelAndView showPsoFaculty(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/PSOFaculty");
+
+			model.addObject("title", "Faculty PSO");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showpoPsoFaculty at Faculty Contr" + e.getMessage());
 
 			e.printStackTrace();
 
@@ -240,8 +325,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.GET)
 	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -286,8 +370,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
 	public ModelAndView addPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -332,8 +415,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showAddMphillDetails", method = RequestMethod.GET)
 	public ModelAndView showAddMphillDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -378,7 +460,6 @@ public class FacultyModuleController {
 
 	}
 
-	
 	@RequestMapping(value = "/showSWOC", method = RequestMethod.GET)
 	public ModelAndView showSWOC(HttpServletRequest request, HttpServletResponse response) {
 
@@ -399,11 +480,8 @@ public class FacultyModuleController {
 
 		return model;
 
-	
+	}
 
-}
-	
-	
 	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
 	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
 
@@ -425,8 +503,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showBookPubList", method = RequestMethod.GET)
 	public ModelAndView showBookPubList(HttpServletRequest request, HttpServletResponse response) {
 
@@ -470,7 +547,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/showJournalPubList", method = RequestMethod.GET)
 	public ModelAndView showJournalPubList(HttpServletRequest request, HttpServletResponse response) {
 
@@ -493,5 +570,48 @@ public class FacultyModuleController {
 
 	}
 
+	@RequestMapping(value = "/showOutReachContri", method = RequestMethod.GET)
+	public ModelAndView showOutReachContri(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/outReachContri");
+
+			model.addObject("title", "Out Reach Contribution");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showOutReachContriList", method = RequestMethod.GET)
+	public ModelAndView showOutReachContriList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/outReachContriList");
+
+			model.addObject("title", "Out Reach Contribution List");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 }

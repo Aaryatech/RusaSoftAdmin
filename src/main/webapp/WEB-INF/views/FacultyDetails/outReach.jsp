@@ -84,9 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showOutReachDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -105,7 +105,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -114,99 +114,100 @@
 												<div>
 
 
-													<div class="col-xs-12">
-
-<h5 class="title pull-left">
-																<strong>Out Reach Activity</strong>
-															</h5>
-															<div class="col-sm-12"></div>
 
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="status">Select
-																	Attended Activity  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<select id="salutation"  onchange="showForm()"  name="salutation"
-																		class="form-control" required>
-																		<option value="0">STTP</option>
-																		<option value="1">Seminar</option>
-																		<option value="2">Workshop</option>
-																		<option value="3">Conference</option>
-																		<option value="4">FDP</option>
-																		<option value="5">Refresher Course</option>
-																			<option value="6">Any Other</option>
+													<h5 class="title pull-left">
+														<strong>Out Reach Activity</strong>
+													</h5>
+													<div class="col-sm-12"></div>
 
-																	</select>
-																</div>
-                                                  <div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="smallheading">Other Activity
-														  <span class="text-danger">*</span>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="status">Select
+															Attended Activity <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<select id="salutation" onchange="showForm()"
+																name="salutation" class="form-control" required>
+																<option value="0">STTP</option>
+																<option value="1">Seminar</option>
+																<option value="2">Workshop</option>
+																<option value="3">Conference</option>
+																<option value="4">FDP</option>
+																<option value="5">Refresher Course</option>
+																<option value="6">Any Other</option>
+
+															</select>
+														</div>
+														<div class="form-group" id="abc">
+															<label class="control-label col-sm-2" for="smallheading">Other
+																Activity <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-4">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="desn"
-																	name="desn" 
-																	
-																	placeholder="Other Designation" value="" required>
-															</div>
-														</div>
-														
-																
-															</div>
-
-                                              <div class="form-group">
-                                              
-                                              <label class="control-label col-sm-2" for="smallheading">Name
-																	of Activity <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name of Activity" value=""
-																		required>
-																</div>
-                                              
-                                               </div>
-
-
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="status">Select
-																	Level <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-4">
-																	<select id="salutation" name="salutation"
-																		class="form-control" required>
-																		<option value="0">International</option>
-																		<option value="1">National</option>
-																		<option value="2">State</option>
-																		<option value="3">Regional</option>
-
-
-																	</select>
-																</div>
-
-
-
-																<label class="control-label col-sm-2" for="smallheading">Date
-																	of Activity <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="dob"
-																		name="Grant" placeholder="Awarding Agency" value=""
-																		required>
-																</div>
-
-
-															</div>
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
+																	name="desn" placeholder="Other Designation" value=""
+																	required>
 															</div>
 														</div>
 
+
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Name
+															of Activity <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Name of Activity" value=""
+																required>
+														</div>
+
+													</div>
+
+
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="status">Select
+															Level <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<select id="salutation" name="salutation"
+																class="form-control" required>
+																<option value="0">International</option>
+																<option value="1">National</option>
+																<option value="2">State</option>
+																<option value="3">Regional</option>
+
+
+															</select>
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Date
+															of Activity <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-4">
+															<input type="text" class="form-control Datepicker"
+																id="dob" name="Grant" value="" required>
+														</div>
+
+
+													</div>
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary"
+																onclick="submit_f(1)" value="Save"> <input
+																type="submit" class="btn btn-primary"
+																onclick="submit_f(0)"
+																value="Save &
+																		Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
 													</div>
 
 
@@ -238,30 +239,39 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript">
-function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("salutation").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 6) {
+	<script type="text/javascript">
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("salutation").value
+			//alert("qualType::"+qualType);
 
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else{
-			document.getElementById("abc").style = "display:none"
+			if (qualType == 6) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
 		}
-	
-	}
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-		
-	
-	}
-</script>
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+
+		}
+	</script>
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
 
 </body>
 </html>

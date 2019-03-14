@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,9 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showOutReachContriList"><button
+										type="button" class="btn btn-info">Back</button></a>
+
 							</div>
 
 						</header>
@@ -105,7 +106,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -114,131 +115,142 @@
 												<div>
 
 
-													<div class="col-xs-12">
-
-		<h5 class="title pull-left">
-																<strong>Outreach Contribution</strong>
-															</h5>
-															<div class="col-sm-12"></div>
-	
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="status">Select
-																	Level <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<select id="salutation" name="salutation"
-																		class="form-control" required>
-																		<option value="0">BOS</option>
-																		<option value="1">Faculty</option>
-																		<option value="2">Academic Council</option>
-																				</select>
-																</div>
-
-
-																
-																	</div>
-																	<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-5">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="Name " value=""
-																		required>
-																</div>
-
-
-															</div>
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">University
-																	 <span class="text-danger">*</span>
-																</label>
-
-																<div class="col-sm-4">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="University" value=""
-																		required>
-																</div>
-
-
-																<label class="control-label col-sm-1" for="smallheading">From
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="Grant" placeholder="From" value="" required>
-																</div>
-
-																<label class="control-label col-sm-1" for="smallheading">To
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="to" placeholder="To" value="" required>
-																</div>
 
 
 
-															</div>
-
-														
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Examination
-																	Paper Setting  <span class="text-danger">*</span>
-																</label>
 
 
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="examSetting"
-																		id="examSetting" checked value="0"> No<input
-																		type="radio" name="examSetting" id="examSetting"
-																		value="1">
-																</div>
+													<div class="form-group">
 
-																<label class="control-label col-sm-2" for="smallheading">Answer
-																	Sheet Evaluation <span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="ansEvaluation"
-																		id="ansEvaluation" checked value="0"> No<input
-																		type="radio" name="ansEvaluation" id="ansEvaluation"
-																		value="1">
-																</div>
-
-																<label class="control-label col-sm-2" for="smallheading">Answer
-																	Sheet Moderation  <span class="text-danger">*</span>
-																</label>
+														<label class="control-label col-sm-2" for="status">Select
+															Level <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<select id="salutation" name="salutation"
+																class="form-control" required>
+																<option value="0">BOS</option>
+																<option value="1">Faculty</option>
+																<option value="2">Academic Council</option>
+															</select>
+														</div>
 
 
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="ansmod" id="ansmod"
-																		checked value="0"> No<input type="radio"
-																		name="ansmod" id="ansmod" value="1">
-																</div>
 
-															</div>
+													</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Name
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="Name " value="" required>
+														</div>
 
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">University
+															<span class="text-danger">*</span>
+														</label>
+
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="University" value="" required>
 														</div>
 
 													</div>
 
+													<div class="form-group">
 
-													<div class="clearfix"></div>
 
+														<label class="control-label col-sm-2" for="smallheading">From
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="dob"
+																name="Grant" placeholder="From" value="" required>
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">To
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="to" name="to"
+																placeholder="To" value="" required>
+														</div>
+
+
+
+													</div>
+
+
+
+
+													<div class="form-group">
+
+
+														<label class="control-label col-sm-2" for="smallheading">Examination
+															Paper Setting <span class="text-danger">*</span>
+														</label>
+
+
+														<div class="col-sm-2">
+															Yes <input type="radio" name="examSetting"
+																id="examSetting" checked value="0"> No<input
+																type="radio" name="examSetting" id="examSetting"
+																value="1">
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Answer
+															Sheet Evaluation <span class="text-danger">*</span>
+														</label>
+
+
+														<div class="col-sm-2">
+															Yes <input type="radio" name="ansEvaluation"
+																id="ansEvaluation" checked value="0"> No<input
+																type="radio" name="ansEvaluation" id="ansEvaluation"
+																value="1">
+														</div>
+													</div>
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">Answer
+															Sheet Moderation <span class="text-danger">*</span>
+														</label>
+
+
+														<div class="col-sm-2">
+															Yes <input type="radio" name="ansmod" id="ansmod" checked
+																value="0"> No<input type="radio" name="ansmod"
+																id="ansmod" value="1">
+														</div>
+
+													</div>
+
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary"
+																onclick="submit_f(1)" value="Save"> <input
+																type="submit" class="btn btn-primary"
+																onclick="submit_f(0)"
+																value="Save &
+																		Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
 												</div>
+
+												<div class="clearfix"></div>
 
 											</div>
 										</div>
