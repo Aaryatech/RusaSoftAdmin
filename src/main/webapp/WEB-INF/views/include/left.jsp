@@ -318,14 +318,14 @@
 								  </a></li>
 
 						 
-								<li><a class=""
+								<%-- <li><a class=""
 							href="${pageContext.request.contextPath}/showEucationalObjective">Program Educational Objective
 								  </a></li>
 								 <li><a class=""
 							href="${pageContext.request.contextPath}/showpoPso">Program PO/PSO
 								  </a></li>
 						
-
+ --%>
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showStudAddmit">Student Admitted Categorywise  </a></li>
