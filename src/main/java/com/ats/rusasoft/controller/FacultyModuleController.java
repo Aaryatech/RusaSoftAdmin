@@ -378,28 +378,7 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/showPhdGuide", method = RequestMethod.GET)
-	public ModelAndView showPhdGuide(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/phdGuidence");
-
-			model.addObject("title", "Ph.D. Guide Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	@RequestMapping(value = "/showSWOC", method = RequestMethod.GET)
 	public ModelAndView showSWOC(HttpServletRequest request, HttpServletResponse response) {
 
