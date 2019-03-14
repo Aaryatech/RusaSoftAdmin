@@ -53,7 +53,7 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-									<a href="${pageContext.request.contextPath}/showAddStudAct"><button type="submit"
+									<a href="${pageContext.request.contextPath}/showAddStudActAtten"><button type="submit"
 									class="btn btn-success">Add Activity Detail</button></a>
 							</div>
 						</header>
