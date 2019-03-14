@@ -36,6 +36,7 @@ public class StudentActivityController {
 
 	RestTemplate restTemplate = new RestTemplate();
 	
+	
 	@RequestMapping(value = "/showStudOrgnizedActivity", method = RequestMethod.GET)
 	public ModelAndView showStudOrgnizedActivity(HttpServletRequest request, HttpServletResponse response) {
 
