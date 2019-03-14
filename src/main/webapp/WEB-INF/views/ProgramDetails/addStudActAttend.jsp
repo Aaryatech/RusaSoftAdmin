@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAddStudActAtten"><button
+								<a href="${pageContext.request.contextPath}/showStudAttendActivity"><button
 										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 

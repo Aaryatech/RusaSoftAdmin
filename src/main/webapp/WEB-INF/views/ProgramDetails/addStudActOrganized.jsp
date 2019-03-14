@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body class=" " onload="hideText()">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +59,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -85,8 +85,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showStudAct"><button
-										type="button" class="btn btn-info">Back</button></a> 
+								<a
+									href="${pageContext.request.contextPath}/showStudOrgnizedActivity"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -96,14 +97,13 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/submitOrgnizedActivity"
+										method="post" name="submitAcitivity" id="submitAcitivity"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
+													<i class="fa fa-home"></i> Activity
 											</a></li>
 
 
@@ -114,137 +114,306 @@
 
 												<div>
 
-
-
+													<c:set value="0" var="chooseOther"></c:set>
+ 
 													<div class="col-xs-12">
-														
 
 
-																		<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Name of Activity
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-							<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-															
-						<option value="Sports">Sports</option>
-								<option value="Cultural">Cultural</option>
-								<option value="Curricular">Curricular</option>
-								<option value=" Co-curricular"> Co-curricular</option>
-								<option value="Extra Curricular ">Extra Curricular </option>
-								<option value="7">Other Competition</option>
-								
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-														
-															<div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="page_order">
-														Another Activity <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Another Scheme Name" onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-														
-														
+
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Date
-															 <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="activityName">Name
+																of Activity <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+
+																<c:choose>
+																	<c:when
+																		test="${editProgramActivity.studentActivityId>0}">
+
+																		<select id="activityName" name="activityName"
+																			class="form-control" onchange="showExtraField()"
+																			required>
+
+																			<c:choose>
+																				<c:when
+																					test="${editProgramActivity.activityName eq 'Sports'}">
+
+																					<option value="Sports" selected>Sports</option>
+																					<option value="Cultural">Cultural</option>
+																					<option value="Curricular">Curricular</option>
+																					<option value="Co-curricular">Co-curricular</option>
+																					<option value="Extra Curricular ">Extra
+																						Curricular</option>
+																					<option value="7">Other Competition</option>
+
+																				</c:when>
+																				<c:when
+																					test="${editProgramActivity.activityName eq 'Cultural'}">
+
+																					<option value="Sports">Sports</option>
+																					<option value="Cultural" selected>Cultural</option>
+																					<option value="Curricular">Curricular</option>
+																					<option value="Co-curricular">Co-curricular</option>
+																					<option value="Extra Curricular ">Extra
+																						Curricular</option>
+																					<option value="7">Other Competition</option>
+
+																				</c:when>
+																				<c:when
+																					test="${editProgramActivity.activityName eq 'Curricular'}">
+
+																					<option value="Sports">Sports</option>
+																					<option value="Cultural">Cultural</option>
+																					<option value="Curricular" selected>Curricular</option>
+																					<option value="Co-curricular">Co-curricular</option>
+																					<option value="Extra Curricular ">Extra
+																						Curricular</option>
+																					<option value="7">Other Competition</option>
+
+																				</c:when>
+																				<c:when
+																					test="${editProgramActivity.activityName eq 'Co-curricular'}">
+
+																					<option value="Sports">Sports</option>
+																					<option value="Cultural">Cultural</option>
+																					<option value="Curricular">Curricular</option>
+																					<option value="Co-curricular" selected>Co-curricular</option>
+																					<option value="Extra Curricular ">Extra
+																						Curricular</option>
+																					<option value="7">Other Competition</option>
+
+																				</c:when>
+																				<c:when
+																					test="${editProgramActivity.activityName eq 'Extra Curricular'}">
+
+																					<option value="Sports">Sports</option>
+																					<option value="Cultural">Cultural</option>
+																					<option value="Curricular">Curricular</option>
+																					<option value="Co-curricular">Co-curricular</option>
+																					<option value="Extra Curricular" selected>Extra
+																						Curricular</option>
+																					<option value="7">Other Competition</option>
+
+																				</c:when>
+																				<c:otherwise>
+
+																					<option value="Sports">Sports</option>
+																					<option value="Cultural">Cultural</option>
+																					<option value="Curricular">Curricular</option>
+																					<option value="Co-curricular">Co-curricular</option>
+																					<option value="Extra Curricular">Extra
+																						Curricular</option>
+																					<option value="7" selected>Other
+																						Competition</option>
+																					<c:set value="1" var="chooseOther"></c:set>
+																				</c:otherwise>
+																			</c:choose>
+
+
+
+																		</select>
+
+																	</c:when>
+																	<c:otherwise>
+																		<select id="activityName" name="activityName"
+																			class="form-control" onchange="showExtraField()"
+																			required>
+
+																			<option value="Sports">Sports</option>
+																			<option value="Cultural">Cultural</option>
+																			<option value="Curricular">Curricular</option>
+																			<option value="Co-curricular">Co-curricular</option>
+																			<option value="Extra Curricular ">Extra
+																				Curricular</option>
+																			<option value="7">Other Competition</option>
+																			<c:set value="0" var="chooseOther"></c:set>
+																		</select>
+
+																	</c:otherwise>
+																</c:choose>
+
+
+
+															</div>
+														</div>
+
+
+														<c:choose>
+															<c:when test="${chooseOther==1}">
+
+																<div class="form-group" id="abc">
+																	<label class="control-label col-sm-2"
+																		for="otherActivityName"> Another Activity <span
+																		class="text-danger">*</span>
+																	</label>
+																	<div class="col-sm-10">
+																		<input type="text" maxlength="50" class="form-control"
+																			id="otherActivityName"
+																			value="${editProgramActivity.activityName}"
+																			name="otherActivityName"
+																			placeholder="Another Scheme Name"
+																			onchange="checkUnique(this.value,1)">
+																	</div>
+																</div>
+
+															</c:when>
+															<c:otherwise>
+																<div class="form-group" id="abc">
+																	<label class="control-label col-sm-2"
+																		for="otherActivityName"> Another Activity <span
+																		class="text-danger">*</span>
+																	</label>
+																	<div class="col-sm-10">
+																		<input type="text" maxlength="50" class="form-control"
+																			id="otherActivityName"
+																			value="${editProgramActivity.activityName}"
+																			name="otherActivityName"
+																			placeholder="Another Scheme Name"
+																			onchange="checkUnique(this.value,1)">
+																	</div>
+																</div>
+															</c:otherwise>
+														</c:choose>
+
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="date">Date
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
-																	name="relieving_date"  required>
+																<input type="text" class="form-control datepicker"
+																	id="date" value="${editProgramActivity.date}"
+																	name="date" required>
 															</div>
 														</div>
-														
-														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Year
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
-																	name="relieving_date"  required>
-															</div>
-														</div>
-														
-														
+
+
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Branch
-															 <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="year">Year
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						                            
-								
+																<input type="text" class="form-control" id="year"
+																	value="${editProgramActivity.year}" name="year"
+																	required>
+															</div>
+														</div>
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="branch">Branch
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="branch"
+																	value="${editProgramActivity.branch}" name="branch"
+																	required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="noStudent">
+																No. of Students Participated <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="number" class="form-control" id="noStudent"
+																	value="${editProgramActivity.participatedStudent}"
+																	name="noStudent" placeholder="Duration(in months)"
+																	required>
+															</div>
+														</div>
+
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="level">Level
+																of Activity <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="level" name="level" class="form-control"
+																	onchange="showExtraField()" required>
+																	<c:choose>
+																		<c:when
+																			test="${editProgramActivity.level eq 'International'}">
+																			<option value="International" selected>International</option>
+																			<option value="National">National</option>
+																			<option value="Regional">Regional</option>
+																			<option value="State">State</option>
+																		</c:when>
+																		<c:when
+																			test="${editProgramActivity.level eq 'National'}">
+																			<option value="International">International</option>
+																			<option value="National" selected>National</option>
+																			<option value="Regional">Regional</option>
+																			<option value="State">State</option>
+																		</c:when>
+																		<c:when
+																			test="${editProgramActivity.level eq 'Regional'}">
+																			<option value="International">International</option>
+																			<option value="National">National</option>
+																			<option value="Regional" selected>Regional</option>
+																			<option value="State">State</option>
+																		</c:when>
+																		<c:when test="${editProgramActivity.level eq 'State'}">
+																			<option value="International">International</option>
+																			<option value="National">National</option>
+																			<option value="Regional">Regional</option>
+																			<option value="State" selected>State</option>
+																		</c:when>
+																		<c:otherwise>
+																			<option value="International">International</option>
+																			<option value="National">National</option>
+																			<option value="Regional">Regional</option>
+																			<option value="State">State</option>
+																		</c:otherwise>
+																	</c:choose>
+
+
+
 																</select>
-																
-																
+
+
 															</div>
 														</div>
-															
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-														No. of Students Participated <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Duration(in months)" required
-																	>
-															</div>
-														</div>
-														
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Level of Activity
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						                              <option value="International">International</option>
-								                       <option value="National">National</option>
-								                      <option value="Regional">Regional</option>
-							                               	<option value="State">State</option>
-								
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-														
-																
-														
-													
-													
+
+
+
+
+
+
+
 													</div>
 
 												</div>
-												
-												
-												
-															
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-											  <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+
+
+
+												<c:choose>
+													<c:when test="${editProgramActivity.studentActivityId!=0}">
+														<input type="hidden" id="activityId" name="activityId"
+															value="${editProgramActivity.studentActivityId}">
+													</c:when>
+													<c:otherwise>
+														<input type="hidden" id="activityId" name="activityId"
+															value="0">
+													</c:otherwise>
+												</c:choose>
+												<input type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" id="isOther" name="isOther"
+													value="${chooseOther}">
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
+														<input type="submit" class="btn btn-primary"
+															onclick="submit_f(1)" value="Add"> <input
+															type="submit" class="btn btn-primary"
+															onclick="submit_f(0)"
+															value="Save &
 																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+														<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+												</div>
 
 
 												<div class="clearfix"></div>
@@ -269,123 +438,66 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-<script type="text/javascript">
+	<script type="text/javascript">
 function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
-
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
+	//alert(view);
+		document.getElementById("is_view").value=view; 
 		
 	}
-	
-function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
-		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
-		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
-		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
-
-		ajax : 'true',
-
-	}, function(data) {
-		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
-			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
-			}
-		}
-	});
-}
-
-
-
+ 
 </script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 function showExtraField() {
 	//alert("hii");
 	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
+		var qualType=document.getElementById("activityName").value
 		//alert("qualType::"+qualType);
 		
 		if (qualType == 7) {
 
-			document.getElementById("abc").style = "visible"
-			
+			document.getElementById("abc").style = "visible";
+				document.getElementById("otherActivityName").required = true;	
 				
 		} 
 		else{
-			document.getElementById("abc").style = "display:none"
+			document.getElementById("abc").style = "display:none";
+			document.getElementById("otherActivityName").required = false;
 		}
 	
 	}
 	
 
 function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
+	 var isOther=document.getElementById("isOther").value;
+	
+	  if(isOther==1){
+		document.getElementById("abc").style = "visible";
+	}else{
+		document.getElementById("abc").style = "display:none"
+	}  
+	
 	
 	
 	}
 
 </script>
 
+	<script type="text/javascript">
+
+$(function () {				
+
+	$('.datepicker').datepicker({				
+					autoclose: true,
+	format: ""dd-mm-yyyy"",				
+	changeYear:true,				
+	changeMonth:true				
+					
+					
+				});	
+	});	 
+</script>
 
 
 

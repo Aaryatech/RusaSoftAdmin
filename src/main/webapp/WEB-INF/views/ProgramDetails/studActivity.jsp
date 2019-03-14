@@ -30,7 +30,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
-<%-- 
+				<%-- 
 				<div class='col-xs-12'>
 					<div class="page-title">
 
@@ -53,8 +53,14 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-									<a href="${pageContext.request.contextPath}/showAddStudAct"><button type="submit"
-									class="btn btn-success">Add Activity Detail</button></a>
+
+								<c:if test="${isAdd==1}">
+									<a
+										href="${pageContext.request.contextPath}/showAddStudentOrgnizedActivity"><button
+											type="submit" class="btn btn-success">Add Activity
+											Detail</button></a>
+								</c:if>
+
 							</div>
 						</header>
 						<div class="content-body">
@@ -62,11 +68,12 @@
 
 
 
-							
+
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display" id="example-1">
+									<table class="table table-striped dt-responsive display"
+										id="example-1">
 										<thead>
 											<tr>
 												<th>Sr.No.</th>
@@ -76,9 +83,41 @@
 												<th>Branch</th>
 												<th>No. of Students Participated</th>
 												<th>Level of Activity</th>
+												<th>Action</th>
 											</tr>
 
 										</thead>
+										<tbody>
+											<c:forEach items="${list}" var="list"
+												varStatus="count">
+												<tr>
+													 
+													<td>${count.index+1}</td>
+													<td>${list.activityName}</td>
+													<td>${list.date}</td>
+													<td>${list.yearName}</td>
+													<td>${list.branch}</td>
+													<td>${list.level}</td>
+													<td>${list.participatedStudent}</td>
+													
+													<td><c:if test="${isEdit==1}">
+															<a href="${pageContext.request.contextPath}/editStudentOrgnizedActivity/${list.studentActivityId}"><span
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+														<c:if test="${isDelete==1}">
+															<a
+																href="${pageContext.request.contextPath}/deleteStudentOrgnizedActivity/${list.studentActivityId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger" title="Delete"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a>
+														</c:if></td>
+												</tr>
+											</c:forEach>
+
+										</tbody>
 
 
 
@@ -88,15 +127,15 @@
 
 
 
-<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" class="btn btn-primary">Submit</button>
-															<button type="reset" class="btn btn-default">Reset</button>
-														</div>
-													</div>
+								<!-- <div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="reset" class="btn btn-default">Reset</button>
+									</div>
+								</div> -->
 
 
-								
+
 
 
 
@@ -116,7 +155,7 @@
 
 
 	</div>
-	
+
 	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -246,77 +285,61 @@
 	</div>
 	 --%>
 	<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-		var academicYear=document.getElementById("academicYear").value
-		var year=document.getElementById("year").value
-		var cat=document.getElementById("cat").value //act name
-		var date=document.getElementById("date").value
-		var branch=document.getElementById("branchName").value
-		//alert(branch);
-		var stud=document.getElementById("stud").value
-		var level=document.getElementById("level").value
-		
-		var otherScheme=document.getElementById("otherScheme").value
-		//alert(stud);
-		var temp;
-		if (cat == 7) {
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value
+			var year = document.getElementById("year").value
+			var cat = document.getElementById("cat").value //act name
+			var date = document.getElementById("date").value
+			var branch = document.getElementById("branchName").value
+			//alert(branch);
+			var stud = document.getElementById("stud").value
+			var level = document.getElementById("level").value
 
-			temp=otherScheme;
-			//alert(temp);
-		} 
-		else{
-			temp=cat;
+			var otherScheme = document.getElementById("otherScheme").value
+			//alert(stud);
+			var temp;
+			if (cat == 7) {
+
+				temp = otherScheme;
+				//alert(temp);
+			} else {
+				temp = cat;
+			}
+
+			//alert(stud);
+
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add(
+					[ i + 1, academicYear, temp, date, year, branch, stud,
+							level
+
+					]).draw();
+
+			document.getElementById("index").value = i + 1;
+
 		}
-		
-		
-		//alert(stud);
-		
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-					temp,
-					date,
-					year,
-					branch,
-					stud,
-					level
-					
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-	}
 
-	
-	function showForm() {
-		//document.getElementById("abc").style = "display:none"
-			var qualType=document.getElementById("cat").value
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("cat").value
 			//alert("qualType::"+qualType);
-			
+
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
-				
-					
-			} 
-			else{
+
+			} else {
 				document.getElementById("abc").style = "display:none"
 			}
-		
+
 		}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+
 		}
 	</script>
 	<!-- END CONTAINER -->
