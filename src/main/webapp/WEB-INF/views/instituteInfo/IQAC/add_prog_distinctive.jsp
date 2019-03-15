@@ -84,8 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showInternalQualityInitiative"><button
+								<a href="${pageContext.request.contextPath}/showProgDistinctive"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -113,107 +112,52 @@
 											<div class="tab-pane fade in active" id="home">
 
 
-
-
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="initiativeName">Name
-														of Quality Initiative<span class="text-danger">*</span>
+
+													<label class="control-label col-sm-3" for="title">Title
+														of Distinctiveness <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="initiativeName" name="initiativeName"
-															onchange="showForm()" class="form-control" required>
+														<input type="text" class="form-control" id="title"
+															name="title" placeholder="Title of Distinctiveness"
+															value="${page.pageName}" required>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="academicYear">Applicable
+														from Academic Year<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="academicYear" name="academicYear"
+															class="form-control" required>
+															<option value="2018-2019">2018-2019</option>
+															<option value="2017-2018">2017-2018</option>
+															<option value="2016-2017">2016-2017</option>
+															<option value="2015-2016">2015-2016</option>
 
-															<option value="AQAR prepared or submitted">AQAR
-																prepared or submitted</option>
-															<option value="Academic – Administrative Audit Conducted">Academic
-																– Administrative Audit Conducted</option>
-
-															<option value="AQAR prepared or submitted">AQAR
-																prepared or submitted</option>
-
-
-
-															<option value="Institute Participated in NIRF">Institute
-																Participated in NIRF</option>
-															<option value="ISO Certification obtained">ISO
-																Certification obtained</option>
-
-															<option value="NBA Certification received">NBA
-																Certification received</option>
-															<option value="7">Any other quality based
-																certification</option>
 
 														</select>
 													</div>
 												</div>
 
-												<div class="form-group" id="abc">
-
-													<label class="control-label col-sm-3" for="page_name">Any
-														other quality based certification <span
-														class="text-danger">*</span>
-													</label>
-													<div class="col-sm-3">
-														<input type="text" class="form-control" id="otherQual"
-															required name="otherQual"
-															placeholder="Any
-														other quality based certification"
-															value="${page.pageName}">
-													</div>
-												</div>
-
 												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="conductionDate">Date
-														of Conduction <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="befStake">Beneficiary
+														Stake Holders <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="conductionDate" name="conductionDate"
+														<input type="text" class="form-control" id="befStake"
+															name="befStake" placeholder="Beneficiary Stake Holders"
 															value="${page.pageName}" required>
 													</div>
 												</div>
 
-												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="fromDate">From
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="fromDate" name="fromDate" value="${page.pageName}"
-															required>
-
-													</div>
-												</div>
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="toDate">To
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="toDate" name="toDate" value="${page.pageName}"
-															required>
-													</div>
-												</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="participant">No.
-														of Participants<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
+													<div class="col-sm-offset-3 col-sm-10">
 														<input type="submit" class="btn btn-primary"
 															onclick="submit_f(1)" value="Save"> <input
 															type="submit" class="btn btn-primary"
@@ -228,7 +172,6 @@
 
 											<div class="clearfix"></div>
 										</div>
-
 									</form>
 								</div>
 

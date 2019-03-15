@@ -487,6 +487,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddIncubationCentreDetail", method = RequestMethod.GET)
+	public ModelAndView showAddIncubationCentreDetail(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_incubation");
+		try {
+
+			model.addObject("title", "Add Incubation Centre");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showBestPractice", method = RequestMethod.GET)
 	public ModelAndView showBestPractice(HttpServletRequest request, HttpServletResponse response) {
 
@@ -494,6 +512,24 @@ public class InstituteProfileController {
 		try {
 
 			model.addObject("title", "Best Practices");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddBestPractice", method = RequestMethod.GET)
+	public ModelAndView showAddBestPractice(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
+		try {
+
+			model.addObject("title", "Add Best Practices");
 
 		} catch (Exception e) {
 
@@ -559,6 +595,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddProgDistinctive", method = RequestMethod.GET)
+	public ModelAndView showAddProgDistinctive(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prog_distinctive");
+		try {
+
+			model.addObject("title", " Add Institutional Distnctiveness");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showHumanValues", method = RequestMethod.GET)
 	public ModelAndView showHumanValues(HttpServletRequest request, HttpServletResponse response) {
 
@@ -576,7 +630,7 @@ public class InstituteProfileController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/showAddHumanValues", method = RequestMethod.GET)
 	public ModelAndView showAddHumanValues(HttpServletRequest request, HttpServletResponse response) {
 

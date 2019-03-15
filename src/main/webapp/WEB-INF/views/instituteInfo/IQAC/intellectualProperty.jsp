@@ -117,38 +117,32 @@
 
 												<div>
 
-
-
-
 													<div class="col-xs-12">
 														<div class="form-group">
 
 															<table class="table table-striped dt-responsive display"
 																id="example-1">
 																<thead>
+
 																	<tr>
-																		<th width="5%">Sr No</th>
-
-																		<th width="25%">Title of IPR-Industry-Academic
+																		<th rowspan="2">Sr No</th>
+																		<th rowspan="2">Title of IPR-Industry-Academic
 																			Initiative Practice</th>
-
-																		<th width="30%" style="text-align: center;"
-																			colspan="2">Duration</th>
-																		<th width="25%">No. of Participants</th>
+																		<th style="text-align: center;" colspan="2">Duration</th>
+																		<th rowspan="2">No. of Participants</th>
 
 																	</tr>
+																	<tr>
+
+																		<th>From Date</th>
+																		<th>To Date</th>
+																		<th></th>
+
+																	</tr>
+
 																</thead>
 																<tbody>
-																	<tr>
-																		<td width="5%"></td>
 
-																		<td width="25%"></td>
-
-																		<td width="15%">From Date</td>
-																		<td width="15%">To Date</td>
-																		<td width="20%"></td>
-
-																	</tr>
 																</tbody>
 															</table>
 

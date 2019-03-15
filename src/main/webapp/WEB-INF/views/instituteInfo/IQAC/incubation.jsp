@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,11 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showAddIncubationCentreDetail"><button
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -117,55 +115,42 @@
 
 
 													<div class="col-xs-12">
- <div class="form-group">
-														
-<!-- 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
+														<div class="form-group">
+
+
+
+															<table class="table table-striped dt-responsive display"
+																id="example-1">
 																<thead>
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th >No. of Participants</th>
-																		<th>From Date</th>
-																		<th >To Date</th>
-																		<th>Link on Website for Activity Report</th>
+																		<th rowspan="2">Sr No</th>
+																		<th rowspan="2">Academic Year</th>
+																		<th rowspan="2">No. of Participants</th>
+																		<th style="text-align: center;" colspan="2">Duration</th>
+																		<th rowspan="2">Link on Website for Activity
+																			Report</th>
+
 																	</tr>
-																
+																	<tr>
+
+																		<th>From Date</th>
+																		<th>To Date</th>
+																		<th></th>
+
+																	</tr>
 																</thead>
-
-
-
 																<tbody>
+																	<!-- <tr>
+																		<td width="5%"></td>
+																		<td width="20%"></td>
+																		<td width="25%"></td>
+																		<td width="15%">From Date</td>
+																		<td width="15%">To Date</td>
+																		<td width="20%"></td>
 
-
+																	</tr> -->
 																</tbody>
-															</table> -->
-
-																<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th width="20%">Academic Year</th>
-												<th  width="25%">No. of Participants</th>
-												<th width="30%" style="text-align: center;" colspan="2">
-													Duration</th> 
-												<th width="20%">Link on Website for Activity Report</th>
-												
-											</tr>
-</thead>
-<tbody>
-											<tr>
-												<td width="5%"></td>
-												<td width="20%"></td>
-												<td width="25%"></td>
-												<td width="15%">From Date</td>
-												<td width="15%">To Date</td>
-												<td width="20%"></td>
-												
-											</tr> 
-										</tbody>
-</table>
+															</table>
 
 														</div>
 														<!-- <div class="form-group">
@@ -232,51 +217,41 @@
 
 						</select>
 					</div>
-					
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">No. of Participants
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="participant">No.
+							of Participants </label> <input type="text" class="form-control"
 							id="participant" name="participant"
-							placeholder="No. of Participants"
+							placeholder="No. of Participants" value="${page.pageName}"
+							required>
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="fromDate">From
+							Date </label> <input type="date" class="form-control" id="fromDate"
+							name="fromDate" value="${page.pageName}" required> <label
+							class="control-label col-sm-3" for="toDate">To Date </label> <input
+							type="date" class="form-control" id="toDate" name="toDate"
 							value="${page.pageName}" required>
 					</div>
 
-				
-						<div class="form-group">
+					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="fromDate">From Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="fromDate" name="fromDate"
-							
-							value="${page.pageName}" required>
-							
-							
-							<label class="control-label col-sm-3" for="toDate">To Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="toDate" name="toDate"
-							
-							value="${page.pageName}" required>
-					</div>
-					
-						<div class="form-group">
-
-						<label class="control-label col-sm-6" for="webLink">Link on Website for Activity Report
-						</label> <input type="text" class="form-control"
-							id="webLink" name="webLink"
+						<label class="control-label col-sm-6" for="webLink">Link
+							on Website for Activity Report </label> <input type="text"
+							class="form-control" id="webLink" name="webLink"
 							placeholder="Link on Website for Activity Report"
 							value="${page.pageName}" required>
 					</div>
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -308,7 +283,7 @@
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, year, participant, fromDate, toDate , webLink ])
+					[ i + 1, year, participant, fromDate, toDate, webLink ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

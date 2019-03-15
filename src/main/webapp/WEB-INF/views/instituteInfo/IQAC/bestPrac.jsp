@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,11 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showAddBestPractice"><button
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -117,7 +114,7 @@
 
 
 													<div class="col-xs-12">
- 
+
 														<div class="col-xs-12">
 
 															<table id="example-1"
@@ -125,14 +122,14 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th >Academic Year</th>
+																		<th>Academic Year</th>
 																		<th>Name of Best Practices</th>
-																		<th >Name of Best Beneficiaries</th>
+																		<th>Name of Best Beneficiaries</th>
 																		<th>Effective From</th>
-																	
-																	
+
+
 																	</tr>
-																
+
 																</thead>
 
 
@@ -204,31 +201,31 @@
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
-							
+							<option value="2015-2016">2015-2016</option>
+
 
 						</select>
 					</div>
-					
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">Name of Best Practices
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="participant">Name
+							of Best Practices </label> <input type="text" class="form-control"
 							id="bestPrac" name="bestPrac"
-							placeholder="Name of Best Practices"
-							value="${page.pageName}" required>
+							placeholder="Name of Best Practices" value="${page.pageName}"
+							required>
 					</div>
 
-				
-						<div class="form-group">
 
-						<label class="control-label col-sm-6" for="benificiary">Name of Best Beneficiaries
-						</label> <input type="text" class="form-control"
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="benificiary">Name
+							of Best Beneficiaries </label> <input type="text" class="form-control"
 							id="benificiary" name="benificiary"
-							placeholder="Name of Best Beneficiaries"
-							value="${page.pageName}" required>
+							placeholder="Name of Best Beneficiaries" value="${page.pageName}"
+							required>
 					</div>
-					
+
 					<%-- <div class="form-group">
 
 						<label class="control-label col-sm-6" for="effectiveFrom">Effective From
@@ -239,23 +236,23 @@
 					</div>
 					
 					 --%>
-					
-					
-					
+
+
+
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="effectiveFrom">Effective From
-							</label> <select id="effectiveFrom" name="effectiveFrom"
+						<label class="control-label col-sm-3" for="effectiveFrom">Effective
+							From </label> <select id="effectiveFrom" name="effectiveFrom"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
-							
+							<option value="2015-2016">2015-2016</option>
+
 
 						</select>
 					</div>
-					
-					
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -277,17 +274,17 @@
 	<script type="text/javascript">
 		function getData() {
 			//alert("hii");
-				var year = document.getElementById("academicYear").value;
+			var year = document.getElementById("academicYear").value;
 			var i = parseInt(document.getElementById("index").value);
 			var bestPrac = document.getElementById("bestPrac").value;
 			var benificiary = document.getElementById("benificiary").value;
 			var effectiveFrom = document.getElementById("effectiveFrom").value;
-			
+
 			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, year,bestPrac, benificiary, effectiveFrom ])
+					[ i + 1, year, bestPrac, benificiary, effectiveFrom ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

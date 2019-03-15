@@ -113,61 +113,31 @@
 
 												<div>
 
-
-
-
 													<div class="col-xs-12">
 														<div class="form-group">
-															<!-- 	<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th>Name of Quality Initiative</th>
-																		<th> Date of Conduction</th>
-																		<th>From Date</th>
-																		<th >To Date</th>
-																		<th >No. of Participants</th>
-																	</tr>
-																
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
- -->
-
-
 															<table class="table table-striped dt-responsive display"
 																id="example-1">
 																<thead>
-																	<tr>
-																		<th width="5%">Sr No</th>
 
-																		<th width="25%">Name of Quality Initiative</th>
-																		<th width="10%">Date of Conduction</th>
-																		<th width="30%" style="text-align: center;"
-																			colspan="2">Duration</th>
-																		<th width="15%">No. of Participants</th>
+																	<tr>
+																		<th rowspan="2">Sr No</th>
+																		<th rowspan="2">Name of Quality Initiative</th>
+																		<th style="text-align: center;" colspan="2">Date
+																			of Conduction</th>
+																		<th rowspan="2">No. of Participants</th>
 
 																	</tr>
+																	<tr>
+
+																		<th>From Date</th>
+																		<th>To Date</th>
+																		<th></th>
+
+																	</tr>
+
 																</thead>
 																<tbody>
-																	<tr>
-																		<td width="5%"></td>
 
-																		<td width="25%"></td>
-																		<td width="10%"></td>
-																		<td width="15%">From Date</td>
-																		<td width="15%">To Date</td>
-																		<td width="15%"></td>
-
-																	</tr>
 																</tbody>
 															</table>
 
