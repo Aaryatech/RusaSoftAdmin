@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a
-									href="${pageContext.request.contextPath}/showInternalQualityInitiative"><button
+									href="${pageContext.request.contextPath}/showIncubationCentreDetail"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -111,68 +111,22 @@
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
-
-
-
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="initiativeName">Name
-														of Quality Initiative<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="participant">No.
+														of Participants<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="initiativeName" name="initiativeName"
-															onchange="showForm()" class="form-control" required>
-
-															<option value="AQAR prepared or submitted">AQAR
-																prepared or submitted</option>
-															<option value="Academic – Administrative Audit Conducted">Academic
-																– Administrative Audit Conducted</option>
-
-															<option value="AQAR prepared or submitted">AQAR
-																prepared or submitted</option>
-
-
-
-															<option value="Institute Participated in NIRF">Institute
-																Participated in NIRF</option>
-															<option value="ISO Certification obtained">ISO
-																Certification obtained</option>
-
-															<option value="NBA Certification received">NBA
-																Certification received</option>
-															<option value="7">Any other quality based
-																certification</option>
-
-														</select>
-													</div>
-												</div>
-
-												<div class="form-group" id="abc">
-
-													<label class="control-label col-sm-3" for="page_name">Any
-														other quality based certification <span
-														class="text-danger">*</span>
-													</label>
-													<div class="col-sm-3">
-														<input type="text" class="form-control" id="otherQual"
-															required name="otherQual"
-															placeholder="Any
-														other quality based certification"
-															value="${page.pageName}">
-													</div>
-												</div>
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="conductionDate">Date
-														of Conduction <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="conductionDate" name="conductionDate"
+														<input type="text" class="form-control" id="participant"
+															name="participant" placeholder="No. of Participants"
 															value="${page.pageName}" required>
 													</div>
 												</div>
+
+
+
+
+
+
 
 												<div class="form-group">
 
@@ -201,19 +155,23 @@
 
 
 
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="participant">No.
-														of Participants<span class="text-danger">*</span>
+
+													<label class="control-label col-sm-3" for="webLink">Link
+														on Website for Activity Report <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
+														<input type="text" class="form-control" id="webLink"
+															name="webLink"
+															placeholder="Link on Website for Activity Report"
 															value="${page.pageName}" required>
 													</div>
 												</div>
 
+
 												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
+													<div class="col-sm-offset-3 col-sm-10">
 														<input type="submit" class="btn btn-primary"
 															onclick="submit_f(1)" value="Save"> <input
 															type="submit" class="btn btn-primary"
@@ -228,7 +186,6 @@
 
 											<div class="clearfix"></div>
 										</div>
-
 									</form>
 								</div>
 
