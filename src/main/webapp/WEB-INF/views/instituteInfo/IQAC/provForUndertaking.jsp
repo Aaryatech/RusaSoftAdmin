@@ -84,12 +84,13 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info" id="btn1">Add</button></a> 
+								<!-- <a href="#myModal1" data-toggle="modal"><button
+										type="submit" class="btn btn-info" id="btn1">Add</button></a> -->
 								<a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+									href="${pageContext.request.contextPath}/showAddUderTakingProv"><button
+										type="button" class="btn btn-success">Add</button></a>
+								<!-- <a
+									class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
 
 						</header>
@@ -114,54 +115,25 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
 
-	                                            <div class="col-xs-12">
-													<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th>Provision for Undertaking Field Projects / Internship</th>
-																		<th>No. of Students undertaking FP /Internship </th>
-																		
-																		
-																	</tr>
-																
-																</thead>
+												<table id="example-1"
+													class="table table-striped dt-responsive display">
+													<thead>
+														<tr>
+															<th width="10%">Sr No</th>
+															<th>Academic Year</th>
+															<th>Provision for Undertaking Field Projects /
+																Internship</th>
+															<th>No. of Students undertaking FP /Internship</th>
 
 
+														</tr>
 
-																<tbody>
+													</thead>
 
-
-																</tbody>
-															</table>
-													
-
-                                                        </div>
-                                                        
-                                                        
-                                                    
-
-
-													<div class="col-xs-12">
-													
-															
-														 <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> 
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
+													<tbody>
+													</tbody>
+												</table>
 
 											</div>
 										</div>
@@ -198,13 +170,11 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"> Provision for Undertaking
-
-</h4>
+					<h4 class="modal-title">Provision for Undertaking</h4>
 				</div>
 				<div class="modal-body">
-				
-				<div class="form-group">
+
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
@@ -215,44 +185,41 @@
 
 						</select>
 					</div>
-				
+
 					<div class="form-group">
-															<label class="control-label col-sm-6" for="isReform"
-																style="text-align: left;"> Provision for Undertaking Field Projects / Internship :
+						<label class="control-label col-sm-6" for="isReform"
+							style="text-align: left;"> Provision for Undertaking
+							Field Projects / Internship : <span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-3">
+							<input type="radio" onclick="showReforms(this.value)" id="isProv"
+								name="isProv" value="1" checked>Yes <input type="radio"
+								id="isProv" onclick="showReforms(this.value)" name="isProv"
+								value="0">No
+						</div>
 
-                                                         <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio"  onclick="showReforms(this.value)" id="isProv" name="isProv"
-																	value="1"   checked>Yes 
-																	<input type="radio"
-																	id="isProv" onclick="showReforms(this.value)"  name="isProv" value="0">No
-															</div>
-															
-															
-														</div>
-														
-														
-														
-														
-						<div class="form-group" id="ex1">
-															<label class="control-label col-sm-10" for="page_name">No. of Students undertaking FP /Internship 
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="noStud"
-																	name="noStud"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
 
-                                                   
-                                                  <input type="hidden" id="index" name="index" value="0" >      
-																	
-                                                        
-			
-					
+					</div>
+
+
+
+
+					<div class="form-group" id="ex1">
+						<label class="control-label col-sm-10" for="page_name">No.
+							of Students undertaking FP /Internship :<span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="noStud" name="noStud"
+								value="${page.pageName}" required>
+						</div>
+					</div>
+
+
+					<input type="hidden" id="index" name="index" value="0">
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -272,49 +239,41 @@
 
 
 	<script type="text/javascript">
-		
-	function getData() {
-		//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-		var academicYear = document.getElementById("academicYear").value;
-		var isProv = document.getElementById("isProv").value;
-		var temp;
-		if(isProv==1){
-			temp="Yes";
-		}
-		else{
-			temp="No";
-		}
-		var noStud = document.getElementById("noStud").value;
-	
-	
-		var dataTable = $('#example-1').DataTable();
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value;
+			var isProv = document.getElementById("isProv").value;
+			var temp;
+			if (isProv == 1) {
+				temp = "Yes";
+			} else {
+				temp = "No";
+			}
+			var noStud = document.getElementById("noStud").value;
 
-		dataTable.row.add(
-				[ i + 1,academicYear,temp,noStud ])
-				.draw();
-		document.getElementById("index").value = i + 1;
-	}
-	
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add([ i + 1, academicYear, temp, noStud ]).draw();
+			document.getElementById("index").value = i + 1;
+		}
+
 		function showReforms(temp) {
 			//alert("hii");
 			//var remark = document.getElementById("isReform").value;
 			//alert(temp);
-		if(temp ==1){
-			document.getElementById("ex1").style ="visible"
-				
+			if (temp == 1) {
+				document.getElementById("ex1").style = "visible"
+
+			} else {
+
+				document.getElementById("ex1").style = "display:none"
+
+			}
 		}
-		else{
-			
-			document.getElementById("ex1").style = "display:none"
-			
-		}
-		}
-				
-	
 	</script>
-	
-	
+
+
 
 </body>
 </html>

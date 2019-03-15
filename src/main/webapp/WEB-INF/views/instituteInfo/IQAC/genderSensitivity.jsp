@@ -84,10 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/publicationList"><button
+								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+									class="box_toggle fa fa-chevron-down"></a> --%>
 							</div>
 
 						</header>
@@ -114,142 +113,133 @@
 
 												<div>
 
-	                                            <div class="col-xs-12">
-													
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="isReform"
-																style="text-align: left;"> Safety/Security :
-
-                                                         <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio"  onclick="showReforms(this.value)" id="istransparent" name="istransparent"
-																	value="1"   checked>Yes 
-																	<input type="radio"
-																	id="istransparent" onclick="showReforms(this.value)"  name="istransparent" value="0">No
-															</div>
-															
-															
-														</div>
-														
-														
-														
-														
-						<div class="form-group" id="ex1">
-															<label class="control-label col-sm-2" for="page_name">Please Specify
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="iqacName"
-																	name="iqacName"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-
-                                                        </div>
-                                                        
-                                                        
-                                                           <div class="col-xs-12">
-													
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="isReform"
-																style="text-align: left;"> Counseling :
-
-                                                         <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio"  onclick="showReforms2(this.value)" id="istransparent" name="istransparent"
-																	value="1"   checked>Yes 
-																	<input type="radio"
-																	id="istransparent" onclick="showReforms2(this.value)"  name="istransparent" value="0">No
-															</div>
-															
-															
-														</div>
-														
-														
-														
-														
-						<div class="form-group" id="ex2">
-															<label class="control-label col-sm-2" for="page_name">Please Specify
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="iqacName"
-																	name="iqacName"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-
-                                                        </div>
-                                                        
-                                                        
-                                                           <div class="col-xs-12">
-													
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="isReform"
-																style="text-align: left;"> Common Room :
-
-                                                         <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio"  onclick="showReforms3(this.value)" id="istransparent" name="istransparent"
-																	value="1"   checked>Yes 
-																	<input type="radio"
-																	id="istransparent" onclick="showReforms3(this.value)"  name="istransparent" value="0">No
-															</div>
-															
-															
-														</div>
-														
-														
-														
-														
-						<div class="form-group" id="ex3">
-															<label class="control-label col-sm-2" for="page_name">Please Specify Location
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="iqacName"
-																	name="iqacName"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-
-                                                        </div>
-
-
-
 													<div class="col-xs-12">
-													
-															
-														 <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="isReform"
+																style="text-align: left;"> Safety/Security : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" onclick="showReforms(this.value)"
+																	id="isSecure" name="isSecure" value="1" checked>Yes
+																<input type="radio" id="isSecure"
+																	onclick="showReforms(this.value)" name="isSecure"
+																	value="0">No
 															</div>
-														</div> 
+														</div>
+
+														<div class="form-group" id="ex1">
+															<label class="control-label col-sm-2" for="page_name">Please
+																Specify :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="iqacName"
+																	name="iqacName" value="${page.pageName}" required>
+															</div>
+														</div>
 
 													</div>
 
 
-													<div class="clearfix"></div>
+													<div class="col-xs-12">
 
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="isReform"
+																style="text-align: left;"> Counseling : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" onclick="showReforms2(this.value)"
+																	id="counseling" name="counseling" value="1" checked>Yes
+																<input type="radio" id="counseling"
+																	onclick="showReforms2(this.value)" name="counseling"
+																	value="0">No
+															</div>
+
+
+														</div>
+
+
+
+
+														<div class="form-group" id="ex2">
+															<label class="control-label col-sm-2" for="page_name">Please
+																Specify :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="iqacName"
+																	name="iqacName" value="${page.pageName}" required>
+															</div>
+														</div>
+
+													</div>
+
+
+													<div class="col-xs-12">
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="isReform"
+																style="text-align: left;"> Common Room : <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="radio" onclick="showReforms3(this.value)"
+																	id="istransparent" name="istransparent" value="1"
+																	checked>Yes <input type="radio"
+																	id="istransparent" onclick="showReforms3(this.value)"
+																	name="istransparent" value="0">No
+															</div>
+
+
+														</div>
+
+
+
+
+														<div class="form-group" id="ex3">
+															<label class="control-label col-sm-2" for="page_name">Please
+																Specify Location :<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="iqacName"
+																	name="iqacName" value="${page.pageName}" required>
+															</div>
+														</div>
+
+													</div>
+
+
+
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary"
+																onclick="submit_f(1)" value="Save"> <input
+																type="submit" class="btn btn-primary"
+																onclick="submit_f(0)"
+																value="Save &
+																		Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
 												</div>
 
+
+												<div class="clearfix"></div>
+
 											</div>
+
 										</div>
 									</form>
 								</div>
 
 							</div>
+
 						</div>
+
 
 					</section>
 				</div>
@@ -278,13 +268,12 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Mechanism of Examination related Grievances
-
-</h4>
+					<h4 class="modal-title">Mechanism of Examination related
+						Grievances</h4>
 				</div>
 				<div class="modal-body">
-				
-				<div class="form-group">
+
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
@@ -294,32 +283,29 @@
 
 						</select>
 					</div>
-				
-					
-				<div class="form-group">
+
+
+					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="Grievances">Grievances
-						</label> <input type="text" class="form-control"
-							id="grievances" name="grievances"
-							placeholder="Grievances"
+						</label> <input type="text" class="form-control" id="grievances"
+							name="grievances" placeholder="Grievances"
 							value="${page.pageName}" required>
 					</div>
-				
-			
-				
-				<div class="form-group">
+
+
+
+					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="remark">Remark
-						</label> <input type="text" class="form-control"
-							id="remark" name="remark"
-							placeholder="Remark"
-							value="${page.pageName}" required>
+						</label> <input type="text" class="form-control" id="remark" name="remark"
+							placeholder="Remark" value="${page.pageName}" required>
 					</div>
 
-				
-					
-			
-					
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -339,65 +325,51 @@
 
 
 	<script type="text/javascript">
-		
-		
 		function showReforms(temp) {
 			//alert("hii");
 			//var remark = document.getElementById("isReform").value;
 			//alert(temp);
-		if(temp ==1){
-			document.getElementById("ex1").style ="visible"
-				
+			if (temp == 1) {
+				document.getElementById("ex1").style = "visible"
+
+			} else {
+
+				document.getElementById("ex1").style = "display:none"
+
+			}
 		}
-		else{
-			
-			document.getElementById("ex1").style = "display:none"
-			
-		}
-		}
-				
-	
 	</script>
-	
+
 	<script type="text/javascript">
-	
-	 function showReforms2(a) {
+		function showReforms2(a) {
 			//alert("hii");
 			//var remark = document.getElementById("isReform").value;
 			//alert(a);
-		if(a ==1){
-			document.getElementById("ex2").style ="visible"
-				
+			if (a == 1) {
+				document.getElementById("ex2").style = "visible"
+
+			} else {
+
+				document.getElementById("ex2").style = "display:none"
+
+			}
 		}
-		else{
-			
-			document.getElementById("ex2").style = "display:none"
-			
-		}
-		}
-				
-		
-	
 	</script>
-	
+
 	<script type="text/javascript">
-	 function showReforms3(b) {
+		function showReforms3(b) {
 			//alert("hii");
 			//var remark = document.getElementById("isReform").value;
 			//alert(temp);
-		if(b ==1){
-			document.getElementById("ex3").style ="visible"
-				
+			if (b == 1) {
+				document.getElementById("ex3").style = "visible"
+
+			} else {
+
+				document.getElementById("ex3").style = "display:none"
+
+			}
 		}
-		else{
-			
-			document.getElementById("ex3").style = "display:none"
-			
-		}
-		}
-				
-		
-		
 	</script>
 
 

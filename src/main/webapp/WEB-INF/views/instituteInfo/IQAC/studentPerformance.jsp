@@ -84,12 +84,12 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info" id="btn1">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><!-- <button
-										type="button" class="btn btn-info">Back</button> --></a>
-								<!-- <a
-									class="box_toggle fa fa-chevron-down"></a> -->
+								<a
+									href="${pageContext.request.contextPath}/showAddStudentPerformance"
+									data-toggle="modal"><button type="submit"
+										class="btn btn-success">Add</button></a>
+
+
 							</div>
 
 						</header>
@@ -114,50 +114,26 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
+
+												<table id="example-1"
+													class="table table-striped dt-responsive display">
+													<thead>
+														<tr>
+															<th width="10%">Sr No</th>
+															<th>Name of Program</th>
+															<th>Program Outcome</th>
 
 
-													<div class="col-xs-12">
+														</tr>
 
-														<div class="col-xs-12">
+													</thead>
+													<tbody>
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Name of Program</th>
-																		<th>Program Outcome</th>
-
-
-																	</tr>
-
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
+													</tbody>
+												</table>
 
 											</div>
+											<div class="clearfix"></div>
 										</div>
 									</form>
 								</div>

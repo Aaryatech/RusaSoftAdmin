@@ -84,11 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showAddInitiativeToEngage"><button
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -117,7 +115,7 @@
 
 
 													<div class="col-xs-12">
- 
+
 														<div class="col-xs-12">
 
 															<table id="example-1"
@@ -125,13 +123,13 @@
 																<thead>
 																	<tr>
 																		<th width="10%">Sr No</th>
-																		<th >Academic Year</th>
+																		<th>Academic Year</th>
 																		<th>Title of Programme</th>
 																		<th>From Date</th>
-																		<th >To Date</th>
+																		<th>To Date</th>
 																		<th>No. of Participants</th>
 																	</tr>
-																
+
 																</thead>
 
 
@@ -192,69 +190,59 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Initiative to Engage & Contribute To Local Community</h4>
+					<h4 class="modal-title">Initiative to Engage & Contribute To
+						Local Community</h4>
 				</div>
 				<div class="modal-body">
-				
-				
-				<div class="form-group">
+
+
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="finantialYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
+							<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
 
 					<div class="form-group">
 
-						<label class="control-label col-sm-6" for="title">Title of Programme
-						</label> <input type="text" class="form-control"
-							id="title" name="title"
-							placeholder="Title of Programme"
+						<label class="control-label col-sm-6" for="title">Title of
+							Programme </label> <input type="text" class="form-control" id="title"
+							name="title" placeholder="Title of Programme"
 							value="${page.pageName}" required>
 					</div>
-					
-					
-					
+
+
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">No. of Participants
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="participant">No.
+							of Participants </label> <input type="text" class="form-control"
 							id="participant" name="participant"
-							placeholder="No. of Participants"
+							placeholder="No. of Participants" value="${page.pageName}"
+							required>
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="fromDate">From
+							Date </label> <input type="date" class="form-control" id="fromDate"
+							name="fromDate" value="${page.pageName}" required> <label
+							class="control-label col-sm-3" for="toDate">To Date </label> <input
+							type="date" class="form-control" id="toDate" name="toDate"
 							value="${page.pageName}" required>
 					</div>
 
-				
-						<div class="form-group">
 
-						<label class="control-label col-sm-3" for="fromDate">From Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="fromDate" name="fromDate"
-							
-							value="${page.pageName}" required>
-							
-							
-							<label class="control-label col-sm-3" for="toDate">To Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="toDate" name="toDate"
-							
-							value="${page.pageName}" required>
-					</div>
-					
-						
-					
-					
-					
-					
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -276,18 +264,18 @@
 	<script type="text/javascript">
 		function getData() {
 			//alert("hii");
-				var year = document.getElementById("academicYear").value;
+			var year = document.getElementById("academicYear").value;
 			var i = parseInt(document.getElementById("index").value);
 			var title = document.getElementById("title").value;
 			var participant = document.getElementById("participant").value;
 			var fromDate = document.getElementById("fromDate").value;
 			var toDate = document.getElementById("toDate").value;
-		
+
 			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,year, title,  fromDate, toDate,participant  ])
+					[ i + 1, year, title, fromDate, toDate, participant ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

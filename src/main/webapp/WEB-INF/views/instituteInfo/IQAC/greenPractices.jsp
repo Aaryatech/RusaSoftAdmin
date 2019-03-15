@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-					<%-- 		<h1 class="title">${title}</h1> --%>
+							<%-- 		<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -82,7 +82,7 @@
 
 						<header class="panel_header">
 
-							<h2 class="title pull-left">${title}</h2>
+
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/hodList"><button
@@ -112,197 +112,166 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
+												<div class="form-group">
 
-
-													<div class="col-xs-12">
-
-                                              <h5> Green Practices</h5>
-															
-															
-													<div class="form-group">
-													<label class="control-label col-sm-3" for="status">Academic
-													Year  <span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-2">
-													<select id="salutation" name="salutation"
-														class="form-control" required>
-														<option value="0">2018-2019</option>
-														<option value="1">2017-2018</option>
-														<option value="2">2016-2017</option>
-														<option value="3">2015-2016</option>
-
-
-													</select>
-                                       </div>
-										</div>			
-													
-														
-														
-														
-															<div class="form-group">
-															
-															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;">Use of Bicycle 	 <span
-																class="text-danger">*</span>
-															</label>
-															
-															<label class="control-label col-sm-1" for="recordingFacility"
-																style="text-align: left;">Students <span
-																class="text-danger">*</span>
-															</label>
-															
-											<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName"  value="${page.pageName}"
-														required>
+													<label class="control-label col-sm-3"
+														for="recordingFacility">Use of Bicycle <span
+														class="text-danger">*</span>
+													</label>
+													<div class="col-sm-1">
+														<input type="text" class="form-control" id="hodName"
+															name="hodName" value="${page.pageName}" required>
+													</div>
 												</div>
-															<label class="control-label col-sm-1" for="recordingFacility"
-																style="text-align: left;">Staff <span
-																class="text-danger">*</span>
-															</label>
-															
-											<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName"  value="${page.pageName}"
-														required>
-												</div>
-												
-												<label class="control-label col-sm-2" for="recordingFacility"
-																style="text-align: left;">Student & Staff <span
-																class="text-danger">*</span>
-															</label>
-															
-											<div class="col-sm-1">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName"  value="${page.pageName}"
-														required>
-												</div>
-														</div>
-														
-														
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Public Transport <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;"> Pedestrian friendly roads <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															
-														</div>
-														
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Plastic free campus <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Paperless office	<span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															
-															
-														</div>
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Green landscaping with trees and plants	 <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;">Percentage Provision for Green initiatives and waste management 	<span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															
-															
-														</div>
-														
-															
-														
-															<div class="form-group">
-															
-															
-															
-															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;">% Expenditure on green initiatives and waste management <span
-																class="text-danger">*</span>
-															</label>
-															
-											<div class="col-sm-3">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName"  value="${page.pageName}"
-														required>
-												</div>
-															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;">No. of initiatives to engage and contribute to local community <span
-																class="text-danger">*</span>
-															</label>
-															
-											<div class="col-sm-3">
-													<input type="text" class="form-control" id="hodName"
-														name="hodName"  value="${page.pageName}"
-														required>
-												</div>
-												
-												
-														</div>
-														
-														
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+												<div class="form-group">
+													<label class="control-label col-sm-1"
+														for="recordingFacility" style="text-align: left;">Students
+														<span class="text-danger">*</span>
+													</label>
 
+													<div class="col-sm-1">
+														<input type="text" class="form-control" id="hodName"
+															name="hodName" value="${page.pageName}" required>
+													</div>
+													<label class="control-label col-sm-1"
+														for="recordingFacility" style="text-align: left;">Staff
+														<span class="text-danger">*</span>
+													</label>
+
+													<div class="col-sm-1">
+														<input type="text" class="form-control" id="hodName"
+															name="hodName" value="${page.pageName}" required>
 													</div>
 
+													<label class="control-label col-sm-2"
+														for="recordingFacility" style="text-align: left;">Student
+														& Staff <span class="text-danger">*</span>
+													</label>
 
-													<div class="clearfix"></div>
+													<div class="col-sm-1">
+														<input type="text" class="form-control" id="hodName"
+															name="hodName" value="${page.pageName}" required>
+													</div>
+												</div>
 
+
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-3" for="mediacenter"
+													style="text-align: left;">Public Transport <span
+													class="text-danger">*</span>
+												</label>
+												<div class="col-sm-3">
+													<input type="radio" id="mediacenter" name="mediacenter"
+														value="1" checked>Yes <input type="radio"
+														id="mediacenter" name="mediacenter" value="0">No
+												</div>
+												<label class="control-label col-sm-3" for="mediacenter"
+													style="text-align: left;"> Pedestrian friendly
+													roads <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-3">
+													<input type="radio" id="mediacenter" name="mediacenter"
+														value="1" checked>Yes <input type="radio"
+														id="mediacenter" name="mediacenter" value="0">No
 												</div>
 
 											</div>
 
-									
+
+
+											<div class="form-group">
+												<label class="control-label col-sm-3" for="mediacenter"
+													style="text-align: left;">Plastic free campus <span
+													class="text-danger">*</span>
+												</label>
+												<div class="col-sm-3">
+													<input type="radio" id="mediacenter" name="mediacenter"
+														value="1" checked>Yes <input type="radio"
+														id="mediacenter" name="mediacenter" value="0">No
+												</div>
+
+												<label class="control-label col-sm-3" for="mediacenter"
+													style="text-align: left;">Paperless office <span
+													class="text-danger">*</span>
+												</label>
+												<div class="col-sm-3">
+													<input type="radio" id="mediacenter" name="mediacenter"
+														value="1" checked>Yes <input type="radio"
+														id="mediacenter" name="mediacenter" value="0">No
+												</div>
+
+
+											</div>
+
+
+											<div class="form-group">
+												<label class="control-label col-sm-3" for="mediacenter"
+													style="text-align: left;">Green landscaping with
+													trees and plants <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-3">
+													<input type="radio" id="mediacenter" name="mediacenter"
+														value="1" checked>Yes <input type="radio"
+														id="mediacenter" name="mediacenter" value="0">No
+												</div>
+
+												<label class="control-label col-sm-3" for="mediacenter"
+													style="text-align: left;">Percentage Provision for
+													Green initiatives and waste management <span
+													class="text-danger">*</span>
+												</label>
+												<div class="col-sm-3">
+													<input type="radio" id="mediacenter" name="mediacenter"
+														value="1" checked>Yes <input type="radio"
+														id="mediacenter" name="mediacenter" value="0">No
+												</div>
+
+
+											</div>
+
+
+
+											<div class="form-group">
+
+
+
+												<label class="control-label col-sm-3"
+													for="recordingFacility" style="text-align: left;">%
+													Expenditure on green initiatives and waste management <span
+													class="text-danger">*</span>
+												</label>
+
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" value="${page.pageName}" required>
+												</div>
+												<label class="control-label col-sm-3"
+													for="recordingFacility" style="text-align: left;">No.
+													of initiatives to engage and contribute to local community
+													<span class="text-danger">*</span>
+												</label>
+
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="hodName"
+														name="hodName" value="${page.pageName}" required>
+												</div>
+
+
+											</div>
+
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+													<button type="submit" class="btn btn-primary">Submit</button>
+													<button type="reset" class="btn btn-default">Reset</button>
+												</div>
+											</div>
+
+										</div>
+
+
+										<div class="clearfix"></div>
 									</form>
 								</div>
 

@@ -505,6 +505,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddGenderEquity", method = RequestMethod.GET)
+	public ModelAndView showAddGenderEquity(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_gender_equity");
+		try {
+
+			model.addObject("title", "Gender Equality Programme");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showProgDistinctive", method = RequestMethod.GET)
 	public ModelAndView showProgDistinctive(HttpServletRequest request, HttpServletResponse response) {
 
@@ -559,6 +577,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddInternalQualityInitiative", method = RequestMethod.GET)
+	public ModelAndView showAddInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_internal_quality");
+		try {
+
+			model.addObject("title", "Add Internal Quality Initiatives");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showInitiativeToEngage", method = RequestMethod.GET)
 	public ModelAndView showInitiativeToEngage(HttpServletRequest request, HttpServletResponse response) {
 
@@ -566,6 +602,24 @@ public class InstituteProfileController {
 		try {
 
 			model.addObject("title", "Initiative to Enagage & Contribute to Local Community");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddInitiativeToEngage", method = RequestMethod.GET)
+	public ModelAndView showAddInitiativeToEngage(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_initiative");
+		try {
+
+			model.addObject("title", "Add Initiative to Enagage & Contribute to Local Community");
 
 		} catch (Exception e) {
 
@@ -595,6 +649,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddIntellectualProperty", method = RequestMethod.GET)
+	public ModelAndView showAddIntellectualProperty(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_intel_prop");
+		try {
+
+			model.addObject("title", "Intellectual Property Rights & Industries");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showProfDevelopment", method = RequestMethod.GET)
 	public ModelAndView showProfDevelopment(HttpServletRequest request, HttpServletResponse response) {
 
@@ -602,6 +674,25 @@ public class InstituteProfileController {
 		try {
 
 			model.addObject("title", "Professional Development");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddProfDevelopment", method = RequestMethod.GET)
+	public ModelAndView showAddProfDevelopment(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
+		try {
+
+			model.addObject("title", "Add Professional Development");
+			model.addObject("title1", "Governance, Leadership and Management");
 
 		} catch (Exception e) {
 
@@ -667,6 +758,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddEnvConciuosness", method = RequestMethod.GET)
+	public ModelAndView showAddEnvConciuosness(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/env_conciousness_list");
+		try {
+
+			model.addObject("title", "Environmental Consciousness and Sustainability List");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showGreenPractices", method = RequestMethod.GET)
 	public ModelAndView showGreenPractices(HttpServletRequest request, HttpServletResponse response) {
 
@@ -710,6 +819,25 @@ public class InstituteProfileController {
 		try {
 
 			model.addObject("title", "Provision for Undertaking Field Projects/Internship");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	//
+
+	@RequestMapping(value = "/showAddUderTakingProv", method = RequestMethod.GET)
+	public ModelAndView showAddUderTakingProv(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prov_under_taking");
+		try {
+
+			model.addObject("title", "Add Provision for Undertaking Field Projects/Internship");
 
 		} catch (Exception e) {
 

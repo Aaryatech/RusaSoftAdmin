@@ -60,12 +60,12 @@
 
 				<div class="col-xs-12">
 					<div class="page-title">
-
+						<%-- 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
-						</div>
+						</div> --%>
 
 
 					</div>
@@ -84,15 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showStudentPerformance"
+								<a href="${pageContext.request.contextPath}/showProfDevelopment"
 									data-toggle="modal"><button type="submit"
-										class="btn btn-info" id="btn1">Back</button></a>
-								<!-- <button
-										type="button" class="btn btn-info">Back</button> -->
-
-								<!-- <a
-									class="box_toggle fa fa-chevron-down"></a> -->
+										class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -109,7 +103,7 @@
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
+													<i class="fa fa-home"></i> ${title1}
 											</a></li>
 
 										</ul>
@@ -118,13 +112,25 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="reform">Name
-														of Program <span class="text-danger">*</span>
+													<label class="control-label col-sm-4" for="title">
+														Title of Professional Development Program for Teaching
+														Staff <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="programName"
-															name="programName" placeholder="Name of Program"
+														<input type="text" class="form-control" id="title"
+															name="title"
+															placeholder="Title of Professional Development Program for Teaching Staff"
+															value="${page.pageName}" required>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="participant">No.
+														of Participants <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="participant"
+															name="participant" placeholder="No. of Participants"
 															value="${page.pageName}" required>
 													</div>
 												</div>
@@ -132,18 +138,31 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="progOutcome">Program
-														Outcomes <span class="text-danger">*</span>
+													<label class="control-label col-sm-4" for="fromDate">From
+														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="progOutcome"
-															name="progOutcome" placeholder="Program Outcomes"
-															value="${page.pageName}" required>
+														<input type="text" class="form-control datepicker"
+															id="fromDate" name="fromDate" value="${page.pageName}"
+															required>
+													</div>
+												</div>
+												<div class="form-group">
+
+													<label class="control-label col-sm-4" for="toDate">To
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id="toDate" name="toDate" value="${page.pageName}"
+															required>
 													</div>
 
 
-												</div>
 
+
+
+												</div>
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
@@ -156,27 +175,26 @@
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
-												<div class="clearfix"></div>
-
-
-
-
 											</div>
+
+
+											<div class="clearfix"></div>
 										</div>
-									</form>
 								</div>
-
+								</form>
 							</div>
-						</div>
 
-					</section>
+						</div>
 				</div>
 
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
-		</section>
-		<!-- END CONTENT -->
+	</div>
+
+
+	<!-- MAIN CONTENT AREA ENDS -->
+	</section>
+	</section>
+	<!-- END CONTENT -->
 
 
 
@@ -196,41 +214,29 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Student Performance</h4>
+					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
 
 
 
 
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="reform">Name of
-							Program </label> <input type="text" class="form-control" id="programName"
-							name="programName" placeholder="Name of Program"
-							value="${page.pageName}" required>
-					</div>
-
 
 
 					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="progOutcome">Program
-							Outcomes </label> <input type="text" class="form-control"
-							id="progOutcome" name="progOutcome"
-							placeholder="Program Outcomes" value="${page.pageName}" required>
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" class="btn btn-primary"
+								onclick="submit_f(1)" value="Save"> <input type="submit"
+								class="btn btn-primary" onclick="submit_f(0)"
+								value="Save &
+																		Next">
+							<button type="reset" class="btn btn-default">Reset</button>
+						</div>
 					</div>
-
-
 
 
 
 					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
 
 
 				</div>
@@ -247,20 +253,40 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			var programName = document.getElementById("programName").value;
-			var progOutcome = document.getElementById("progOutcome").value;
+			var year = document.getElementById("academicYear").value;
+			var title = document.getElementById("title").value;
+			var participant = document.getElementById("participant").value;
+			var fromDate = document.getElementById("fromDate").value;
+			var toDate = document.getElementById("toDate").value;
 
+			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
 
-			dataTable.row.add([ i + 1, programName, progOutcome ]).draw();
+			dataTable.row.add(
+					[ i + 1, year, title, fromDate, toDate, participant ])
+					.draw();
 			document.getElementById("index").value = i + 1;
 		}
 	</script>
 
 
+	<script type="text/javascript">
+		$(function() {
 
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
 
 
 
 </body>
 </html>
+
+
+<!-- Title of administrative training program organized for non-teaching staff -->

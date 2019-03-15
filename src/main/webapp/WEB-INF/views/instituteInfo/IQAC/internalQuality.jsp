@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,11 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showAddInternalQualityInitiative"><button
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -116,11 +114,11 @@
 												<div>
 
 
-											
- 
-														<div class="col-xs-12">
-<div class="form-group">
-														<!-- 	<table id="example-1"
+
+
+													<div class="col-xs-12">
+														<div class="form-group">
+															<!-- 	<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
@@ -143,37 +141,38 @@
 																</tbody>
 															</table>
  -->
- 
- 	
-															<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th width="20%">Academic Year</th>
-												<th  width="25%">Name of Quality Initiative</th>
-												<th width="5%"> Date of Conduction</th>
-												<th width="30%" style="text-align: center;" colspan="2">
-													Duration</th> 
-												<th width="15%">No. of Participants</th>
-												
-											</tr>
-</thead>
-<tbody>
-											<tr>
-												<td width="5%"></td>
-												<td width="20%"></td>
-												<td width="25%"></td>
-												<td width="5%"></td>
-												<td width="15%">From Date</td>
-												<td width="15%">To Date</td>
-												<td width="15%"></td>
-												
-											</tr> 
-										</tbody>
-</table>
- 
- 
-								</div>					
+
+
+															<table class="table table-striped dt-responsive display"
+																id="example-1">
+																<thead>
+																	<tr>
+																		<th width="5%">Sr No</th>
+
+																		<th width="25%">Name of Quality Initiative</th>
+																		<th width="10%">Date of Conduction</th>
+																		<th width="30%" style="text-align: center;"
+																			colspan="2">Duration</th>
+																		<th width="15%">No. of Participants</th>
+
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td width="5%"></td>
+
+																		<td width="25%"></td>
+																		<td width="10%"></td>
+																		<td width="15%">From Date</td>
+																		<td width="15%">To Date</td>
+																		<td width="15%"></td>
+
+																	</tr>
+																</tbody>
+															</table>
+
+
+														</div>
 														<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
@@ -228,7 +227,7 @@
 				<div class="modal-body">
 
 
-<div class="form-group">
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="finantialYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
@@ -239,88 +238,82 @@
 
 						</select>
 					</div>
-					
-					
+
+
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="initiativeName">Name of Quality Initiative
-							</label> <select id="initiativeName" name="initiativeName"  onchange="showForm()"
-							class="form-control" required>
-							<option value="AQAR prepared or submitted">AQAR prepared or submitted</option>
-							<option value="Academic – Administrative Audit Conducted">Academic – Administrative Audit Conducted	</option>
-							
-							<option value="AQAR prepared or submitted">AQAR prepared or submitted</option>
-							
-							
-							
-							<option value="Institute Participated in NIRF">Institute Participated in NIRF</option>
-							<option value="ISO Certification obtained">ISO Certification obtained	</option>
-							
-							<option value="NBA Certification received">NBA Certification received</option>
-							<option value="7">Any other quality based certification </option>
+						<label class="control-label col-sm-3" for="initiativeName">Name
+							of Quality Initiative </label> <select id="initiativeName"
+							name="initiativeName" onchange="showForm()" class="form-control"
+							required>
+							<option value="AQAR prepared or submitted">AQAR prepared
+								or submitted</option>
+							<option value="Academic – Administrative Audit Conducted">Academic
+								– Administrative Audit Conducted</option>
+
+							<option value="AQAR prepared or submitted">AQAR prepared
+								or submitted</option>
+
+
+
+							<option value="Institute Participated in NIRF">Institute
+								Participated in NIRF</option>
+							<option value="ISO Certification obtained">ISO
+								Certification obtained</option>
+
+							<option value="NBA Certification received">NBA
+								Certification received</option>
+							<option value="7">Any other quality based certification
+							</option>
 
 						</select>
 					</div>
-					
+
 					<div class="form-group" id="abc">
-						
-							<label class="control-label col-sm-6" for="page_name">Any other quality based certification
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="otherQual" required
-									name="otherQual" placeholder="" value="${page.pageName}"
-									>
-							<!-- </div> -->
-	</div>
-					
+
+						<label class="control-label col-sm-6" for="page_name">Any
+							other quality based certification </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="otherQual" required
+							name="otherQual" placeholder="" value="${page.pageName}">
+						<!-- </div> -->
+					</div>
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="conductionDate">Date of Conduction
-					 </label> 
-							
-							<input type="date" class="form-control"
+						<label class="control-label col-sm-3" for="conductionDate">Date
+							of Conduction </label> <input type="date" class="form-control"
 							id="conductionDate" name="conductionDate"
-							
-							value="${page.pageName}" required>
-							</div>
-					
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="fromDate">From Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="fromDate" name="fromDate"
-							
-							value="${page.pageName}" required>
-							
-							
-							<label class="control-label col-sm-3" for="toDate">To Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="toDate" name="toDate"
-							
 							value="${page.pageName}" required>
 					</div>
-					
-						
-					
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">No. of Participants
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="fromDate">From
+							Date </label> <input type="date" class="form-control" id="fromDate"
+							name="fromDate" value="${page.pageName}" required> <label
+							class="control-label col-sm-3" for="toDate">To Date </label> <input
+							type="date" class="form-control" id="toDate" name="toDate"
+							value="${page.pageName}" required>
+					</div>
+
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="participant">No.
+							of Participants </label> <input type="text" class="form-control"
 							id="participant" name="participant"
-							placeholder="No. of Participants"
-							value="${page.pageName}" required>
+							placeholder="No. of Participants" value="${page.pageName}"
+							required>
 					</div>
 
-				
-						
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -343,7 +336,7 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			
+
 			var academicYear = document.getElementById("academicYear").value;
 			var initiativeName = document.getElementById("initiativeName").value;
 			var conductionDate = document.getElementById("conductionDate").value;
@@ -355,44 +348,39 @@
 			var temp;
 			if (initiativeName == 7) {
 
-				temp=otherQual;
+				temp = otherQual;
 				//alert(temp);
-			} 
-			else{
-				temp=initiativeName;
+			} else {
+				temp = initiativeName;
 			}
-		
+
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate,fromDate,toDate,participant ])
-					.draw();
+					[ i + 1, academicYear, temp, conductionDate, fromDate,
+							toDate, participant ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
-		
 
 		function showForm() {
 			//document.getElementById("abc").style = "display:none"
-				var qualType=document.getElementById("initiativeName").value
-				//alert("qualType::"+qualType);
-				
-				if (qualType == 7) {
+			var qualType = document.getElementById("initiativeName").value
+			//alert("qualType::"+qualType);
 
-					document.getElementById("abc").style = "visible"
-					
-						
-				} 
-				else{
-					document.getElementById("abc").style = "display:none"
-				}
-			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
 			}
+
+		}
 		function hideText() {
 			//alert("hii");
 			document.getElementById("abc").style = "display:none"
-				
-			
-			}
+
+		}
 	</script>
 
 

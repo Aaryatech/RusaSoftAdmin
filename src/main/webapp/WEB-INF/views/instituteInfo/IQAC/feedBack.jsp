@@ -55,7 +55,7 @@
 							<div class="actions panel_actions pull-right">
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								<a class="box_toggle fa fa-chevron-down"></a>
+								<!-- 	<a class="box_toggle fa fa-chevron-down"></a> -->
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -76,7 +76,7 @@
 												<th width="10%">Feedback</th>
 												<th width="10%">Y/N</th>
 												<th width="20%">Sem.wise/Yearwise</th>
-												
+
 											</tr>
 
 										</thead>
@@ -85,7 +85,7 @@
 
 										<tbody>
 
-										
+
 											<tr>
 												<td>1</td>
 												<td>Structured Feedback Collected</td>
@@ -95,25 +95,25 @@
 															class="form-control" required>
 															<option value="0">Yes</option>
 															<option value="1">No</option>
-															
+
 
 														</select>
 													</div></td>
-												
+
 												<td><div class="col-sm-12">
 														<select id="salutation" name="salutation"
 															class="form-control" required>
 															<option value="0">Semwise</option>
 															<option value="1">Yr.wise</option>
-															
+
 
 														</select>
 													</div></td>
 
 											</tr>
-											
-											
-											
+
+
+
 											<tr>
 												<td>2</td>
 												<td>Feedback form Students</td>
@@ -123,25 +123,25 @@
 															class="form-control" required>
 															<option value="0">Yes</option>
 															<option value="1">No</option>
-															
+
 
 														</select>
 													</div></td>
-												
+
 												<td><div class="col-sm-12">
 														<select id="salutation" name="salutation"
 															class="form-control" required>
 															<option value="0">Semwise</option>
 															<option value="1">Yr.wise</option>
-															
+
 
 														</select>
 													</div></td>
 
 											</tr>
-											
-											
-												
+
+
+
 											<tr>
 												<td>3</td>
 												<td>Feedback form Teachers</td>
@@ -151,24 +151,24 @@
 															class="form-control" required>
 															<option value="0">Yes</option>
 															<option value="1">No</option>
-															
+
 
 														</select>
 													</div></td>
-												
+
 												<td><div class="col-sm-12">
 														<select id="salutation" name="salutation"
 															class="form-control" required>
 															<option value="0">Semwise</option>
 															<option value="1">Yr.wise</option>
-															
+
 
 														</select>
 													</div></td>
 
 											</tr>
-											
-												
+
+
 											<tr>
 												<td>4</td>
 												<td>Feedback form Employees</td>
@@ -178,24 +178,24 @@
 															class="form-control" required>
 															<option value="0">Yes</option>
 															<option value="1">No</option>
-															
+
 
 														</select>
 													</div></td>
-												
+
 												<td><div class="col-sm-12">
 														<select id="salutation" name="salutation"
 															class="form-control" required>
 															<option value="0">Semwise</option>
 															<option value="1">Yr.wise</option>
-															
+
 
 														</select>
 													</div></td>
 
 											</tr>
-											
-											
+
+
 											<tr>
 												<td>5</td>
 												<td>Feedback form Aluminis</td>
@@ -205,23 +205,23 @@
 															class="form-control" required>
 															<option value="0">Yes</option>
 															<option value="1">No</option>
-															
+
 
 														</select>
 													</div></td>
-												
+
 												<td><div class="col-sm-12">
 														<select id="salutation" name="salutation"
 															class="form-control" required>
 															<option value="0">Semwise</option>
 															<option value="1">Yr.wise</option>
-															
+
 
 														</select>
 													</div></td>
 
 											</tr>
-											
+
 											<tr>
 												<td>5</td>
 												<td>Feedback form Parent</td>
@@ -231,35 +231,39 @@
 															class="form-control" required>
 															<option value="0">Yes</option>
 															<option value="1">No</option>
-															
+
 
 														</select>
 													</div></td>
-												
+
 												<td><div class="col-sm-12">
 														<select id="salutation" name="salutation"
 															class="form-control" required>
 															<option value="0">Semwise</option>
 															<option value="1">Yr.wise</option>
-															
+
 
 														</select>
 													</div></td>
 
 											</tr>
-											
-											
+
+
 										</tbody>
 									</table>
 								</div>
 
- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> 
-
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<input type="submit" class="btn btn-primary"
+											onclick="submit_f(1)" value="Save"> <input
+											type="submit" class="btn btn-primary" onclick="submit_f(0)"
+											value="Save &
+																		Next">
+										<button type="reset" class="btn btn-default">Reset</button>
+									</div>
+								</div>
+								<div class="clearfix"></div>
 
 
 							</div>

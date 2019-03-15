@@ -63,10 +63,9 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
-
 
 					</div>
 				</div>
@@ -75,8 +74,6 @@
 
 				<div class="col-lg-12"></div>
 
-
-
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -84,15 +81,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showStudentPerformance"
-									data-toggle="modal"><button type="submit"
-										class="btn btn-info" id="btn1">Back</button></a>
-								<!-- <button
-										type="button" class="btn btn-info">Back</button> -->
 
-								<!-- <a
-									class="box_toggle fa fa-chevron-down"></a> -->
+								<a href="${pageContext.request.contextPath}/showUderTakingProv"><button
+										type="button" class="btn btn-info">Back</button></a>
+
 							</div>
 
 						</header>
@@ -118,31 +110,33 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="reform">Name
-														of Program <span class="text-danger">*</span>
+													<label class="control-label col-sm-4" for="isReform"
+														style="text-align: left;"> Provision for
+														Undertaking Field Projects / Internship <span
+														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="programName"
-															name="programName" placeholder="Name of Program"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="progOutcome">Program
-														Outcomes <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="progOutcome"
-															name="progOutcome" placeholder="Program Outcomes"
-															value="${page.pageName}" required>
+														<input type="radio" onclick="showReforms(this.value)"
+															id="isProv" name="isProv" value="1" checked>Yes <input
+															type="radio" id="isProv"
+															onclick="showReforms(this.value)" name="isProv" value="0">No
 													</div>
 
 
 												</div>
+												<div class="form-group" id="ex1">
+													<label class="control-label col-sm-4" for="page_name">No.
+														of Students undertaking FP /Internship :<span
+														class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="noStud"
+															name="noStud" value="${page.pageName}" required>
+													</div>
+												</div>
+
+
+
 
 
 												<div class="form-group">
@@ -157,10 +151,6 @@
 													</div>
 												</div>
 												<div class="clearfix"></div>
-
-
-
-
 											</div>
 										</div>
 									</form>
@@ -196,31 +186,16 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Student Performance</h4>
+					<h4 class="modal-title">Provision for Undertaking</h4>
 				</div>
 				<div class="modal-body">
 
 
 
 
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="reform">Name of
-							Program </label> <input type="text" class="form-control" id="programName"
-							name="programName" placeholder="Name of Program"
-							value="${page.pageName}" required>
-					</div>
 
 
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="progOutcome">Program
-							Outcomes </label> <input type="text" class="form-control"
-							id="progOutcome" name="progOutcome"
-							placeholder="Program Outcomes" value="${page.pageName}" required>
-					</div>
-
+					<input type="hidden" id="index" name="index" value="0">
 
 
 
@@ -247,18 +222,36 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			var programName = document.getElementById("programName").value;
-			var progOutcome = document.getElementById("progOutcome").value;
+			var academicYear = document.getElementById("academicYear").value;
+			var isProv = document.getElementById("isProv").value;
+			var temp;
+			if (isProv == 1) {
+				temp = "Yes";
+			} else {
+				temp = "No";
+			}
+			var noStud = document.getElementById("noStud").value;
 
 			var dataTable = $('#example-1').DataTable();
 
-			dataTable.row.add([ i + 1, programName, progOutcome ]).draw();
+			dataTable.row.add([ i + 1, academicYear, temp, noStud ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
+
+		function showReforms(temp) {
+			//alert("hii");
+			//var remark = document.getElementById("isReform").value;
+			//alert(temp);
+			if (temp == 1) {
+				document.getElementById("ex1").style = "visible"
+
+			} else {
+
+				document.getElementById("ex1").style = "display:none"
+
+			}
+		}
 	</script>
-
-
-
 
 
 

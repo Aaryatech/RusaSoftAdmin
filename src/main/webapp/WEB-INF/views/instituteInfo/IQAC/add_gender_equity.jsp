@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -84,15 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showStudentPerformance"
-									data-toggle="modal"><button type="submit"
-										class="btn btn-info" id="btn1">Back</button></a>
-								<!-- <button
-										type="button" class="btn btn-info">Back</button> -->
+								<a href="${pageContext.request.contextPath}/showGenderEquity"><button
+										type="button" class="btn btn-info">Back</button></a>
 
-								<!-- <a
-									class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
 
 						</header>
@@ -117,14 +111,16 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
+
 												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="reform">Name
-														of Program <span class="text-danger">*</span>
+
+													<label class="control-label col-sm-3" for="title">Title
+														of Programme <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="programName"
-															name="programName" placeholder="Name of Program"
+														<input type="text" class="form-control" id="title"
+															name="title" placeholder="Title of Programme"
 															value="${page.pageName}" required>
 													</div>
 												</div>
@@ -132,18 +128,41 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="progOutcome">Program
-														Outcomes <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="fromDate">From
+														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="progOutcome"
-															name="progOutcome" placeholder="Program Outcomes"
-															value="${page.pageName}" required>
+														<input type="text" class="form-control datepicker"
+															id="fromDate" name="fromDate" value="${page.pageName}"
+															required>
+
 													</div>
-
-
 												</div>
 
+												<div class="form-group">
+
+													<label class="control-label col-sm-3" for="toDate">To
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id="toDate" name="toDate" value="${page.pageName}"
+															required>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="participant">No.
+														of Participants<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="participant"
+															name="participant" placeholder="No. of Participants"
+															value="${page.pageName}" required>
+													</div>
+												</div>
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
@@ -156,27 +175,26 @@
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
-												<div class="clearfix"></div>
-
-
-
-
 											</div>
+
+
+											<div class="clearfix"></div>
 										</div>
-									</form>
 								</div>
-
+								</form>
 							</div>
-						</div>
 
-					</section>
+						</div>
 				</div>
 
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
-		</section>
-		<!-- END CONTENT -->
+	</div>
+
+
+	<!-- MAIN CONTENT AREA ENDS -->
+	</section>
+	</section>
+	<!-- END CONTENT -->
 
 
 
@@ -196,30 +214,9 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Student Performance</h4>
+					<h4 class="modal-title">Internal Quality Initiative</h4>
 				</div>
 				<div class="modal-body">
-
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="reform">Name of
-							Program </label> <input type="text" class="form-control" id="programName"
-							name="programName" placeholder="Name of Program"
-							value="${page.pageName}" required>
-					</div>
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="progOutcome">Program
-							Outcomes </label> <input type="text" class="form-control"
-							id="progOutcome" name="progOutcome"
-							placeholder="Program Outcomes" value="${page.pageName}" required>
-					</div>
 
 
 
@@ -247,14 +244,65 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-			var programName = document.getElementById("programName").value;
-			var progOutcome = document.getElementById("progOutcome").value;
+
+			var academicYear = document.getElementById("academicYear").value;
+			var initiativeName = document.getElementById("initiativeName").value;
+			var conductionDate = document.getElementById("conductionDate").value;
+			var fromDate = document.getElementById("fromDate").value;
+			var toDate = document.getElementById("toDate").value;
+			var participant = document.getElementById("participant").value;
+			var otherQual = document.getElementById("otherQual").value;
+			//alert("noStud"+noStud);
+			var temp;
+			if (initiativeName == 7) {
+
+				temp = otherQual;
+				//alert(temp);
+			} else {
+				temp = initiativeName;
+			}
 
 			var dataTable = $('#example-1').DataTable();
 
-			dataTable.row.add([ i + 1, programName, progOutcome ]).draw();
+			dataTable.row.add(
+					[ i + 1, academicYear, temp, conductionDate, fromDate,
+							toDate, participant ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
+
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("initiativeName").value
+			//alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+
+		}
+	</script>
+
+
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
 	</script>
 
 
