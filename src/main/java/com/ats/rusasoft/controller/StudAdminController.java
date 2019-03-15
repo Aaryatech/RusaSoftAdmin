@@ -216,7 +216,7 @@ public class StudAdminController {
 						
 						studListCatwise.add(studAdmCat);
 
-					}
+				 	}
 					
 					System.err.println("studListCatwise " +studListCatwise.toString());
 
