@@ -461,7 +461,21 @@
 		}
 	</script>
 
-
+ <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+        document.getElementById("sub1").disabled=true;
+  	  document.getElementById("sub2").disabled=true;       
+  	  return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 	<!-- END CONTAINER -->

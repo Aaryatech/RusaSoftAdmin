@@ -533,5 +533,97 @@ public class AlumniTrainingController {
 		return redirect;
 
 	}
+	
+	//showEditT&P
+	
+	@RequestMapping(value = "/showEditTP", method = RequestMethod.POST)
+	public ModelAndView showEditTP(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			model = new ModelAndView("ProgramDetails/addStudTraining");
+
+			model.addObject("title", "Edit Program Training Details");
+
+			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+					ProgramType[].class);
+			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+			System.err.println("progTypeList " + progTypeList.toString());
+
+			model.addObject("progTypeList", progTypeList);
+
+			int placementId = Integer.parseInt(request.getParameter("edit_place_id"));
+
+			map.add("placementId", placementId);
+			TrainPlacement trainPlace = restTemplate.postForObject(Constants.url + "getTrainPlacement", map, TrainPlacement.class);
+
+			model.addObject("trainPlace", trainPlace);
+
+			model.addObject("editAccess", 0);
+			model.addObject("deleteAccess", 0);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showEditTP at AlumTrani Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	//deleteTranPlace
+	
+
+	@RequestMapping(value = "/deleteTranPlace/{placementId}", method = RequestMethod.GET)
+	public String deleteTranPlace(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int placementId) {
+
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (placementId == 0) {
+
+				System.err.println("Multiple records delete ");
+				String[] instIds = request.getParameterValues("placementId");
+				System.out.println("id are" + instIds);
+
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < instIds.length; i++) {
+					sb = sb.append(instIds[i] + ",");
+
+				}
+				String instIdList = sb.toString();
+				instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+				map.add("placementIds", instIdList);
+			} else {
+
+				System.err.println("Single Record delete ");
+				map.add("placementIds", placementId);
+			}
+
+			Info errMsg = restTemplate.postForObject(Constants.url + "deleteTrainPlacement", map, Info.class);
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteTranPlace at AlumTrain  Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/showStudTran";
+
+	}
+	
 
 }

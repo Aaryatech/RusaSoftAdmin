@@ -13,7 +13,6 @@
 <c:url var="clearSessionAttribute" value="/clearSessionAttribute" />
 </head>
 <!-- END HEAD -->
-
 <!-- BEGIN BODY -->
 <body class=" " onload="clearSessionAttribute()">
 	<!-- START TOPBAR -->
@@ -53,13 +52,18 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-						<a href="${pageContext.request.contextPath}/showAddStudTran"><button
-										type="button" class="btn btn-success">Add Training Details</button></a> 
-							
+								<a href="${pageContext.request.contextPath}/showAddStudTran"><button
+										type="button" class="btn btn-success">Add Training
+										Details</button></a>
+
 							</div>
 
 						</header>
+						<form
+							action="${pageContext.request.contextPath}/deleteTranPlace/0"
+							method="get" id="insListForm">
 						<div class="content-body">
+						
 							<div class="row">
 
 
@@ -67,40 +71,62 @@
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display" id="example-1">
+									<table class="table table-striped dt-responsive display"
+										id="example-1">
 										<thead>
 											<tr>
-												<th >Sr.No.</th>
-												<th>Name of Employer</th>
-												<th>Program Type</th>
-												<th>Name of Program</th>
-												<th>No. of Students Placed</th>
-												<th>Address of Employer</th>
+												<th>Sr.No.</th>
+												<th>Employer Name</th>
+												<th>Program Name</th>
+												<th>Students Placed</th>
+												<th>Employer Address</th>
 												<th>Contact Details</th>
 												<th>Package Offered</th>
+												<th>Action</th>
 											</tr>
 
-
 										</thead>
+										<tbody>
+											<c:forEach items="${trainPlaceList}" var="trainPlace"
+												varStatus="count">
+												<tr>
+													<td>${count.index+1}</td>
+													<td>${trainPlace.empyrName}</td>
+													<td>${trainPlace.progTypeName}-${trainPlace.programName}</td>
+													<td>${trainPlace.noStudentPlaced}</td>
+													<td>${trainPlace.empyrAdd}</td>
+													<td>${trainPlace.contactDetail}</td>
+													<td>${trainPlace.pakageOfferd}</td>
+
+													<td align="center">
+														<%-- <c:if test="${editAccess==0}"> --%> <a href="#"
+														onclick="showEditTP(${trainPlace.placementId})"><span
+															class="glyphicon glyphicon-edit" title="Edit"
+															data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<%-- </c:if> --%>
+														<%-- <c:if test="${deleteAccess==0}"> --%> <a
+														href="${pageContext.request.contextPath}/deleteTranPlace/${trainPlace.placementId}"
+														onClick="return confirm('Are you sure want to delete this record');"
+														rel="tooltip" data-color-class="danger" title="Delete"
+														data-animate=" animated fadeIn " data-toggle="tooltip"
+														data-original-title="Delete  record"><span
+															class="glyphicon glyphicon-remove"></span></a> <%-- </c:if> --%>
+													</td>
+
+												</tr>
+											</c:forEach>
+
+										</tbody>
 
 
 
 									</table>
 								</div>
 
-								
-	<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" class="btn btn-primary">Submit</button>
-															<button type="reset" class="btn btn-default">Reset</button>
-														</div>
-													</div>
-
-
-
-
 							</div>
 						</div>
+						<input type="hidden" id="edit_place_id" name="edit_place_id"
+											value="0">
+				</form>
 					</section>
 				</div>
 
@@ -109,15 +135,9 @@
 		</section>
 		<!-- END CONTENT -->
 
-
-
-
-
 	</div>
-	
-	
-	
-<%-- 
+
+	<%-- 
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -243,7 +263,7 @@
 			</div>
 		</div>
 	</div> --%>
-	
+
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
@@ -299,6 +319,16 @@
 
 			});
 
+		}
+		
+		function showEditTP(placeId){
+			document.getElementById("edit_place_id").value=placeId;//create this 
+			var form=document.getElementById("insListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditTP");
+			form.submit();
+			
 		}
 	</script>
 </body>

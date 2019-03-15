@@ -122,7 +122,7 @@
 															</label>
 															<div class="col-sm-9">
 																<input type="text" class="form-control"
-																	id="employer_name" value="${editInst.librarianName}"
+																	id="employer_name" value="${trainPlace.empyrName}"
 																	name="employer_name" placeholder="Full Name of Employer"
 																	required>
 															</div>
@@ -141,8 +141,8 @@
 																	
 																	<c:forEach items="${progTypeList}" var="progType">
 																		<c:choose>
-																			<c:when test="${accOff.programId==progType.programId}">
-																				<option selected value="${progType.programId}">${quolf.programName}</option>
+																			<c:when test="${trainPlace.programType==progType.programId}">
+																				<option selected value="${progType.programId}">${progType.programName}</option>
 
 																			</c:when>
 																			<c:otherwise>
@@ -166,7 +166,7 @@
 															</label>
 															<div class="col-sm-9">
 																<input type="text" class="form-control"
-																	id="prog_name" value="${editInst.contactNo}"
+																	id="prog_name" value="${trainPlace.programName}"
 																	name="prog_name" placeholder="Name of Program "
 																	 required>
 															</div>
@@ -180,7 +180,7 @@
 															</label>
 															<div class="col-sm-9">
 																<input type="text" maxlength="5" class="form-control"
-																	id="no_stud_placed" value="${editInst.contactNo}"
+																	id="no_stud_placed" value="${trainPlace.noStudentPlaced}"
 																	name="no_stud_placed" placeholder="Total Students Placed "
 																	required>
 															</div>
@@ -193,8 +193,8 @@
 																Address of Employer<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" maxlength="10" class="form-control"
-																	id="employer_address" value="${editInst.contactNo}"
+																<input type="text" class="form-control"
+																	id="employer_address" value="${trainPlace.empyrAdd}"
 																	name="employer_address" 
 																	 required>
 															</div>
@@ -208,7 +208,7 @@
 															</label>
 															<div class="col-sm-9">
 																<input type="text"  class="form-control"
-																	id="contact_detail" value="${editInst.contactNo}"
+																	id="contact_detail" value="${trainPlace.contactDetail}"
 																	name="contact_detail" placeholder="Employer Contact Information"
 																	 required>
 															</div>
@@ -221,7 +221,7 @@
 															</label>
 															<div class="col-sm-9">
 																<input type="text"  class="form-control"
-																	id="sup_agency_name" value="${editInst.contactNo}"
+																	id="sup_agency_name" value="${trainPlace.supportAgencyName}"
 																	name="sup_agency_name" placeholder="Enter Supprt Agency Name"
 																	 required>
 															</div>
@@ -235,7 +235,7 @@
 															</label>
 															<div class="col-sm-9">
 																<input type="text" maxlength="10" class="form-control"
-																	id="package_offered" value="${editInst.contactNo}"
+																	id="package_offered" value="${trainPlace.pakageOfferd}"
 																	name="package_offered" placeholder="Package Offered by Employer to Students  "
 																	required>
 															</div>
@@ -253,7 +253,7 @@
 															</div>
 														</div>
 														<input type="hidden" id="place_id" name="place_id"
-															value="${alumni.alumniDetailId}"> <input
+															value="${trainPlace.placementId}"> <input
 															type="hidden" id="is_view" name="is_view" value="0">
 
 													</div>
@@ -398,7 +398,22 @@
 		}
 	</script>
 
+ <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 
