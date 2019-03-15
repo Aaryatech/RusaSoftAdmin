@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body class=" " onload="hideText()">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +59,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -86,7 +86,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudAddmit"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -95,169 +95,113 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
+									<%-- <form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibrarian"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return confirm('Do you really want to submit the form?');"> --%>
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
-
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-											
-	<div class="col-xs-12">
-									<table class="table table-striped dt-responsive display">
-										<thead>
-											<tr>
-												<th width="10%">Sr No</th>
-												<th width="30%">Category</th>
-												<th width="60%" style="text-align: center;" colspan="3">No.
-													of Students</th>
-											
-											</tr>
-											<tr>
-												<th width="10%"></th>
-												<th width="30%"></th>
-												<th width="20%">Male</th>
-												<th width="20%">Female</th>
-											<th width="20%">Transgender</th>
-											
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>SC</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-														<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-											
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register Form
+										</a></li>
 
 
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>ST</td>
+									</ul>
 
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-														<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
 
 
-											</tr>
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertStudAdmCatwise"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
 
-											<tr>
-												<td>3</td>
-												<td>OBC</td>
+												<div class="row">
+													<div class="col-md-12">
+														<table class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="30%">Category</th>
+																	<th width="60%" style="text-align: center;" colspan="4">No.
+																		of Students</th>
 
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-											</tr>
-
-											<tr>
-												<td>4</td>
-												<td>VJ</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
+																</tr>
+																<tr>
+																	<th width="5%"></th>
+																	<th width="15%"></th>
+																	<th width="20%">Male</th>
+																	<th width="20%">Female</th>
+																	<th width="20%">Transgender</th>
+																	<th width="20%">Total</th>
 
 
-											</tr>
+																</tr>
+															</thead>
+															<tbody>
 
-											<tr>
-												<td>5</td>
-												<td>NT-I,NT-II,NT-III</td>
+																<c:forEach items="${castList}" var="cast"
+																	varStatus="count">
 
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
+																	<tr>
+																		<td>${count.index+1 }</td>
+																		<td>${cast.castName}</td>
+
+																		<td><input type="text" class="form-control"
+																			id="cast_m${cast.castId}" name="cast_m${cast.castId}"
+																			value="" required></td>
+																		<td><input type="text" class="form-control"
+																			id="cast_f${cast.castId}" name="cast_f${cast.castId}"
+																			value="" required></td>
+																		<td><input type="text" class="form-control"
+																			id="cast_t${cast.castId}" name="cast_t${cast.castId}"
+																			value="" required></td>
+																				<td><input type="text" class="form-control"
+																			id="cast_tot_stud${cast.castId}" name="cast_tot_stud${cast.castId}"
+																			value="" required></td>
+
+																	</tr>
+
+																</c:forEach>
+
+															</tbody>
+														</table>
+
+													</div>
 
 
-											</tr>
 
-											<tr>
-												<td>1</td>
-												<td>General</td>
+													<input type="hidden" id="librarian_id" name="librarian_id"
+														value="0"> <input
+														type="hidden" id="is_view" name="is_view" value="0">
 
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-												
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-
-											</tr>
-
-										</tbody>
-									</table>
-
-								</div>
-														
-
-													
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-											  <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary" id="sub1"
+																onclick="submit_f(1)" value="Add"> <input
+																type="submit" class="btn btn-primary" id="sub2"
+																onclick="submit_f(0)"
+																value="Save &
 																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
+													</div>
+
+													<div class="clearfix"></div>
 
 
-												<div class="clearfix"></div>
 
-											
-
+												</div>
+											</form>
 										</div>
-		</div>
-									</form>
+
+									</div>
+
 								</div>
 
 							</div>
-
 						</div>
 					</section>
 				</div>
@@ -269,124 +213,122 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-<script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+	<script type="text/javascript">
+		function checkUnique(inputValue, valueType) {
+			//alert(inputValue);
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
-		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
-		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
-		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
-
-		ajax : 'true',
-
-	}, function(data) {
-		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
+			var primaryKey = $
+			{
+				editInst.librarianId
 			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
+			;
+			//alert("Primary key"+primaryKey);
+			var isEdit = 0;
+			if (primaryKey > 0) {
+				isEdit = 1;
 			}
+			//alert("Is Edit " +isEdit);
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+				$
+						.getJSON(
+								'${checkUniqueField}',
+								{
+
+									inputValue : inputValue,
+									valueType : valueType,
+									primaryKey : primaryKey,
+									isEdit : isEdit,
+									tableId : 4,
+
+									ajax : 'true',
+
+								},
+								function(data) {
+
+									//	alert("Data  " +JSON.stringify(data));
+									if (data.error == true) {
+										if (valueType == 2) {
+
+											alert("This email id already exist in system please enter unique");
+											$('#librarian_email').val('');
+											//document.getElementById("stud_contact_no").value=" ";
+
+										} else {
+
+											alert("This contact no  already exist in system please enter unique");
+											$('#lib_con_num').val('');
+											//document.getElementById("student_email").value=" ";
+										}
+									}
+								});
 		}
-	});
-}
+	</script>
 
+	<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("approveValue").value
+			//alert("qualType::"+qualType);
 
+			if (qualType == 7) {
 
-</script>
+				document.getElementById("abc").style = "visible"
 
-<script type="text/javascript">
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
 
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+		}
 
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else{
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
+
 		}
-	
-	}
-	
+	</script>
 
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	
-	
-	}
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-</script>
-
-
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+		}
+	</script>
 
 
 	<!-- END CONTAINER -->

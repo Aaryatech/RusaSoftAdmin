@@ -113,7 +113,8 @@
 																	required>
 																	<c:forEach items="${progTypeList}" var="progType">
 																		<c:choose>
-																			<c:when test="${highEduDet.programType==progType.programId}">
+																			<c:when
+																				test="${highEduDet.programType==progType.programId}">
 																				<option selected value="${progType.programId}">${progType.programName}</option>
 																			</c:when>
 																			<c:otherwise>
@@ -132,8 +133,7 @@
 															<div class="col-sm-10">
 																<!--  fetch it from m_prog_type but the program higher than above selected prog only -->
 																<select id="proceed_prog_type" name="proceed_prog_type"
-																	class="form-control"
-																	required>
+																	class="form-control" required>
 																</select>
 															</div>
 														</div>
@@ -145,7 +145,9 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control"
 																	id="no_of_student" value="${highEduDet.noStudent}"
-																	name="no_of_student" placeholder="Number Of Students Opted for Higher Education" required>
+																	name="no_of_student"
+																	placeholder="Number Of Students Opted for Higher Education"
+																	required>
 															</div>
 														</div>
 
@@ -166,163 +168,155 @@
 														type="hidden" id="is_view" name="is_view" value="0">
 													<div class="clearfix"></div>
 												</div>
-												</form>
+											</form>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						</section>
+					</section>
 				</div>
-				
 			</section>
-			</section>
+		</section>
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
 	<script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-	}
-	
-/* function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
 		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
+
+		/* function checkUnique(inputValue,valueType){
+		 //alert(inputValue);
 		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
+		 var primaryKey=${editInst.librarianId};
+		 //alert("Primary key"+primaryKey);
+		 var isEdit=0;
+		 if(primaryKey>0){
+		 isEdit=1;
+		 }
+		 //alert("Is Edit " +isEdit);
 		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
-
-		ajax : 'true',
-
-	}, function(data) {
+		 var valid=false;
+		 if(valueType==1){
+		 //alert("Its Mob no");
+		 if(inputValue.length==10){
+		 valid=true;
+		 //alert("Len 10")
+		 }else{
+		 //alert("Not 10");
+		 }
+		 }
+		 else if(valueType==2){
+		 //alert("Its Email " );
 		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
-			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
-			}
-		}
-	});
-}
+		 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		 if(inputValue.match(mailformat))
+		 {
+		 valid=true;
+		 //alert("Valid Email Id");
+		 }
+		 else
+		 {
+		 valid=false;
+		 //alert("InValid Email Id");
+		 }
+		 }
+		 if(valid==true)
+		 $.getJSON('${checkUniqueField}', {
+		
+		 inputValue : inputValue,
+		 valueType  : valueType,
+		 primaryKey : primaryKey,
+		 isEdit     : isEdit,
+		 tableId : 4,
 
- */
+		 ajax : 'true',
 
-</script>
+		 }, function(data) {
+		
+		 //	alert("Data  " +JSON.stringify(data));
+		 if(data.error==true){
+		 if(valueType==2){
+		
+		
+		 alert("This email id already exist in system please enter unique");
+		 $('#librarian_email').val('');
+		 //document.getElementById("stud_contact_no").value=" ";
+		
+		 }
+		 else{
+		
+		
+		 alert("This contact no  already exist in system please enter unique");
+		 $('#lib_con_num').val('');
+		 //document.getElementById("student_email").value=" ";
+		 }
+		 }
+		 });
+		 }
+
+		 */
+	</script>
 
 	<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("approveValue").value
+			//alert("qualType::"+qualType);
 
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+			if (qualType == 7) {
 
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else{
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
 		}
-	
-	}
-	
 
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	}
-	
-function setProceedProgType(){
-	//alert("progId" +progId);
-	var progId= document.getElementById("prog_type").value;
-		$.getJSON('${getProgTypeByProgId}', {
-			progId : progId,
-			ajax : 'true',
-		},
-		function(data) {
-			var html;
-			var len = data.length;
-			for (var i = 0; i < len; i++) {
-				html += '<option value="' + data[i].programId + '">'
-						+ data[i].programName + '</option>';
+		function setProceedProgType() {
+			//alert("progId" +progId);
+			var progId = document.getElementById("prog_type").value;
+			$.getJSON('${getProgTypeByProgId}', {
+				progId : progId,
+				ajax : 'true',
+			}, function(data) {
+				var html;
+				var len = data.length;
+				for (var i = 0; i < len; i++) {
+					html += '<option value="' + data[i].programId + '">'
+							+ data[i].programName + '</option>';
+				}
+				html += '</option>';
+				$('#proceed_prog_type').html(html);
+				$("#proceed_prog_type").trigger("chosen:updated");
+			});
+		}
+	</script>
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
+
+					return wasSubmitted;
+				}
 			}
-			html += '</option>';
-			$('#proceed_prog_type').html(html);
-			$("#proceed_prog_type").trigger("chosen:updated");
-		});
-}
-
-</script>
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
-
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-</script>
+			return false;
+		}
+	</script>
 
 
 
