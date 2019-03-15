@@ -180,21 +180,21 @@
 
 											<div class="clearfix"></div>
 										</div>
+									</form>
 								</div>
-								</form>
+
 							</div>
 
 						</div>
+
+					</section>
 				</div>
 
+
+				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
-	</div>
-
-
-	<!-- MAIN CONTENT AREA ENDS -->
-	</section>
-	</section>
-	<!-- END CONTENT -->
+		</section>
+		<!-- END CONTENT -->
 
 
 

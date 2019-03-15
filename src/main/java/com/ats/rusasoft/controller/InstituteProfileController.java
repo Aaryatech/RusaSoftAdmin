@@ -319,6 +319,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddInstituteOfferingCourse", method = RequestMethod.GET)
+	public ModelAndView showAddInstituteOfferingCourse(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_institute_course");
+		try {
+
+			model.addObject("title", "Add Institute Offering Course");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showCurriculum", method = RequestMethod.GET)
 	public ModelAndView showCurriculum(HttpServletRequest request, HttpServletResponse response) {
 
@@ -545,6 +563,24 @@ public class InstituteProfileController {
 	public ModelAndView showHumanValues(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/humanValues");
+		try {
+
+			model.addObject("title", "Human Values & Professional Ethics");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showAddHumanValues", method = RequestMethod.GET)
+	public ModelAndView showAddHumanValues(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_human_values");
 		try {
 
 			model.addObject("title", "Human Values & Professional Ethics");

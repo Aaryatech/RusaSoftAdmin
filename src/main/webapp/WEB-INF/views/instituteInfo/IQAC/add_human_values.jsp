@@ -84,8 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showIntellectualProperty"><button
+								<a href="${pageContext.request.contextPath}/showHumanValues"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -114,19 +113,31 @@
 
 
 
-
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="initiativeName">
-														Title of IPR-Industry-Academic Initiative Practice<span
-														class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="finantialYear">Title
+														of Programme/Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="otherQual"
-															required name="otherQual"
-															placeholder="Title of IPR-Industry-Academic Initiative  "
-															value="${page.pageName}">
+														<select id="title" name="title" class="form-control"
+															required>
+
+															<option value="Truth">Truth</option>
+															<option value="Righteous Conduct">Righteous
+																Conduct</option>
+															<option value="Non violence">Non violence</option>
+															<option value="Peace">Peace</option>
+															<option value=">National values">National values</option>
+															<option value="National Integration ">National
+																Integration</option>
+															<option value="Communal harmony">Communal
+																harmony</option>
+															<option value="Fundamental Duties">Fundamental
+																Duties</option>
+
+														</select>
 													</div>
 												</div>
+
 
 
 
@@ -170,7 +181,7 @@
 												</div>
 
 												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
+													<div class="col-sm-offset-3 col-sm-10">
 														<input type="submit" class="btn btn-primary"
 															onclick="submit_f(1)" value="Save"> <input
 															type="submit" class="btn btn-primary"
@@ -184,8 +195,8 @@
 
 
 											<div class="clearfix"></div>
-
 										</div>
+
 									</form>
 								</div>
 

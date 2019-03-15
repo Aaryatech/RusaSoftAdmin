@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -85,9 +85,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+									href="${pageContext.request.contextPath}/showAddInstituteOfferingCourse"><button
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -114,33 +113,10 @@
 
 												<div>
 
-	<div class="col-xs-12">
-													
-
-														<div class="form-group">
-															<label class="control-label col-sm-8" for="isReform"
-																style="text-align: left;">Institute offers a course on humanities and professional ethics :
-
- <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio"  onclick="showReforms(this.value)" id="istransparent" name="istransparent"
-																	value="1"   checked>Yes 
-																	<input type="radio"
-																	id="istransparent" onclick="showReforms(this.value)"  name="istransparent" value="0">No
-															</div>
-															
-															<div class="col-sm-1">
-															<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info" id="btn1">Add</button></a> 
-										</div>
-															
-														</div>
-</div>
+													<div class="col-xs-12"></div>
 													<div class="col-xs-12">
-													
-															<div class="col-xs-12">
+
+														<div class="col-xs-12">
 
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
@@ -150,10 +126,10 @@
 																		<th>Academic Year</th>
 																		<th>Name of Course</th>
 																		<th>Level</th>
-																		
-																		
+
+
 																	</tr>
-																
+
 																</thead>
 
 
@@ -165,15 +141,7 @@
 															</table>
 
 														</div>
-														 <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> 
-
 													</div>
-
 
 													<div class="clearfix"></div>
 
@@ -214,51 +182,47 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Institute offers a course on humanities and professional ethics
-
-</h4>
+					<h4 class="modal-title">Institute offers a course on
+						humanities and professional ethics</h4>
 				</div>
 				<div class="modal-body">
-				
-				
-				<div class="form-group">
+
+
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
+							<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
-					
-				
-					
-				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="Grievances">Name of Course
-						</label> <input type="text" class="form-control"
-							id="courseName" name="courseName"
-							placeholder="Name of Course"
-							value="${page.pageName}" required>
-					</div>
-				
-			
-				
-				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="remark">Level
-						</label> <input type="text" class="form-control"
-							id="level" name="level"
-							placeholder="Level"
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="Grievances">Name
+							of Course </label> <input type="text" class="form-control"
+							id="courseName" name="courseName" placeholder="Name of Course"
 							value="${page.pageName}" required>
 					</div>
 
-				
-					
-			
-					
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="remark">Level </label>
+						<input type="text" class="form-control" id="level" name="level"
+							placeholder="Level" value="${page.pageName}" required>
+					</div>
+
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -284,39 +248,28 @@
 			var academicYear = document.getElementById("academicYear").value;
 			var courseName = document.getElementById("courseName").value;
 			var level = document.getElementById("level").value;
-		
-		
+
 			var dataTable = $('#example-1').DataTable();
 
-			dataTable.row.add(
-					[ i + 1,academicYear,courseName,level ])
+			dataTable.row.add([ i + 1, academicYear, courseName, level ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}
-		
-		
+
 		function showReforms(temp) {
 			//alert("hii");
 			//var remark = document.getElementById("isReform").value;
 			//alert(temp);
-		if(temp ==1){
-			document.getElementById("btn1").style ="visible"
+			if (temp == 1) {
+				document.getElementById("btn1").style = "visible"
 				document.getElementById("example-1").style = "visible"
-		}
-		else{
-			
-			document.getElementById("btn1").style = "display:none"
-				document.getElementById("example-1").style = "display:none"
-		}
-				
-		
-		
-			
-		}
-		
-	
+			} else {
 
-		
+				document.getElementById("btn1").style = "display:none"
+				document.getElementById("example-1").style = "display:none"
+			}
+
+		}
 	</script>
 
 
