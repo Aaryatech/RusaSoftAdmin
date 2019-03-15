@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body class=" " onload="hideText()">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +59,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -86,7 +86,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudTran"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -95,154 +95,179 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
 
 
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register Form
+										</a></li>
 
 
+									</ul>
 
-													<div class="col-xs-12">
-														
-											<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-													Name of Employer<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Name of Employer" required
-																	>
-															</div>
-														</div>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertTrainPlace"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
 
+												<div class="row">
+													<div class="col-md-12">
 
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Program Type
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-														
-									</select>
-																
-																
-															</div>
-														</div>
-													
-														
-
-
-														
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-												Name of Program  <span class="text-danger">*</span>
+															<label class="control-label col-sm-3" for="page_name">
+																Name of Employer<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	id="employer_name" value="${editInst.librarianName}"
+																	name="employer_name" placeholder="Full Name of Employer"
+																	required>
 															</div>
 														</div>
-																
-														
-														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-											No. of Students Placed<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-														
-														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-											Address of Employer  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-																
-																
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-										Contact Details  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-																
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-										Package Offered  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-														
-													
-													
 
-													</div>
 
-												</div>
-												
-												
-												
-															
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-											  <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="status">Program
+																Type<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<select id="prog_type" name="prog_type"
+																	class="form-control"
+																	required>
+																	
+																	<c:forEach items="${progTypeList}" var="progType">
+																		<c:choose>
+																			<c:when test="${accOff.programId==progType.programId}">
+																				<option selected value="${progType.programId}">${quolf.programName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+
+																				<option value="${progType.programId}">${progType.programName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+
+																</select>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="page_order">
+																Name of Program<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	id="prog_name" value="${editInst.contactNo}"
+																	name="prog_name" placeholder="Name of Program "
+																	 required>
+															</div>
+														</div>
+
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="page_order">
+																No. of Students Placed<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<input type="text" maxlength="5" class="form-control"
+																	id="no_stud_placed" value="${editInst.contactNo}"
+																	name="no_stud_placed" placeholder="Total Students Placed "
+																	required>
+															</div>
+														</div>
+
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="page_order">
+																Address of Employer<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<input type="text" maxlength="10" class="form-control"
+																	id="employer_address" value="${editInst.contactNo}"
+																	name="employer_address" 
+																	 required>
+															</div>
+														</div>
+
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="page_order">
+																Contact Details<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<input type="text"  class="form-control"
+																	id="contact_detail" value="${editInst.contactNo}"
+																	name="contact_detail" placeholder="Employer Contact Information"
+																	 required>
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="page_order">
+																Support Agency Name<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<input type="text"  class="form-control"
+																	id="sup_agency_name" value="${editInst.contactNo}"
+																	name="sup_agency_name" placeholder="Enter Supprt Agency Name"
+																	 required>
+															</div>
+														</div>
+														
+
+
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="page_order">
+																Package Offered<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-9">
+																<input type="text" maxlength="10" class="form-control"
+																	id="package_offered" value="${editInst.contactNo}"
+																	name="package_offered" placeholder="Package Offered by Employer to Students  "
+																	required>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<div class="col-sm-offset-3 col-sm-9">
+																<input type="submit" id="sub1" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Save"> <input
+																	type="submit" id="sub2" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
+														<input type="hidden" id="place_id" name="place_id"
+															value="${alumni.alumniDetailId}"> <input
+															type="hidden" id="is_view" name="is_view" value="0">
 
+													</div>
+
+												</div>
 
 												<div class="clearfix"></div>
-
-											</div>
+											</form>
 
 										</div>
 
-									</form>
+									</div>
+
+
 								</div>
 
 							</div>
@@ -258,122 +283,121 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-<script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+	<script type="text/javascript">
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+			/* var form=document.getElementById("form_sample_2");
+			form.setAttribute("method", "post");
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
-		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
-		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
-		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
+			form.action=("insertLibrarian");
+			var x =confirm();
+			if(x==true)
+			form.submit(); */
 
-		ajax : 'true',
+		}
 
-	}, function(data) {
-		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
+		function checkUnique(inputValue, valueType) {
+			//alert(inputValue);
+
+			var primaryKey = $
+			{
+				editInst.librarianId
 			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
+			;
+			//alert("Primary key"+primaryKey);
+			var isEdit = 0;
+			if (primaryKey > 0) {
+				isEdit = 1;
 			}
+			//alert("Is Edit " +isEdit);
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+				$
+						.getJSON(
+								'${checkUniqueField}',
+								{
+
+									inputValue : inputValue,
+									valueType : valueType,
+									primaryKey : primaryKey,
+									isEdit : isEdit,
+									tableId : 4,
+
+									ajax : 'true',
+
+								},
+								function(data) {
+
+									//	alert("Data  " +JSON.stringify(data));
+									if (data.error == true) {
+										if (valueType == 2) {
+
+											alert("This email id already exist in system please enter unique");
+											$('#librarian_email').val('');
+											//document.getElementById("stud_contact_no").value=" ";
+
+										} else {
+
+											alert("This contact no  already exist in system please enter unique");
+											$('#lib_con_num').val('');
+											//document.getElementById("student_email").value=" ";
+										}
+									}
+								});
 		}
-	});
-}
+	</script>
 
+	<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("approveValue").value
+			//alert("qualType::"+qualType);
 
+			if (qualType == 7) {
 
-</script>
+				document.getElementById("abc").style = "visible"
 
-<script type="text/javascript">
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
 
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+		}
 
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else{
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
+
 		}
-	
-	}
-	
+	</script>
+	<script type="text/javascript">
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
 
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	
-	
-	}
+		}
+	</script>
 
-</script>
 
 
 
