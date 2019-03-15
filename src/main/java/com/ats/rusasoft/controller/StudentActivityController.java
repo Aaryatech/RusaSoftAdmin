@@ -757,7 +757,7 @@ public class StudentActivityController {
 		return model;
 
 	}
-
+	
 	@RequestMapping(value = "/deleteProgram/{programId}", method = RequestMethod.GET)
 	public String deleteProgram(@PathVariable("programId") int programId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -792,6 +792,33 @@ public class StudentActivityController {
 		}
 
 		return returnString;
+
+	}
+	
+	@RequestMapping(value = "/addProgramDetail/{programId}", method = RequestMethod.GET)
+	public ModelAndView addProgramDetail(@PathVariable("programId") int programId,HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/progDetailDash"); 
+			model.addObject("title", "Add Program Details");
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("programId", programId); 
+			Program programDetail = restTemplate
+					.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
+			model.addObject("programDetail", programDetail);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
 
 	}
 
