@@ -86,8 +86,9 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a>
+								<!-- <a
+									class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
 
 						</header>
@@ -117,23 +118,21 @@
 
 													<div class="col-xs-12">
 
-														
-													
-
-														  <h4>Evaluation Process & Reforms</h4>
-														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Internal Assessment is transparent 	 : <span
-																class="text-danger">*</span>
+																style="text-align: left;">Internal Assessment is
+																transparent : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="internalAsses" name="internalAsses"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="internalAsses"
+																	name="internalAsses" value="1" checked>Yes <input
+																	type="radio" id="planning" name="planning" value="0">No
 															</div>
-															<div class="col-sm-2"> Frequency of assessment:</div>
-															<div class="col-sm-3">
+														</div>
+
+														<div class="form-group">
+															<div class="col-sm-3">Frequency of assessment:</div>
+															<div class="col-sm-6">
 
 																<input type="text" class="form-control" id="assesFreq"
 																	name="assesFreq" placeholder=" Frequency of assessment"
@@ -141,28 +140,24 @@
 
 															</div>
 														</div>
-														
-															
+
+
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Institute follows academic calendar :
-
-                                                                   <span
-																class="text-danger">*</span>
+																style="text-align: left;">Institute follows
+																academic calendar : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="radio" id="copoMapping" name="copoMapping"
 																	value="1" checked>Yes <input type="radio"
 																	id="planning" name="planning" value="0">No
 															</div>
-															
-															
-															
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Institute adheres to academic calendar :  
 
-                                                                   <span
-																class="text-danger">*</span>
+
+
+															<label class="control-label col-sm-3" for="planning"
+																style="text-align: left;">Institute adheres to
+																academic calendar : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="radio" id="copoMapping" name="copoMapping"
@@ -170,34 +165,33 @@
 																	id="planning" name="planning" value="0">No
 															</div>
 														</div>
-														
-														
-														
-														<h4>Program Outcomes (POs) , PRogram Specific Outcomes (PSOs), Course Outcomes (COs)</h4>
-														
+
+
+
+														<h4>Program Outcomes (POs) , PRogram Specific
+															Outcomes (PSOs), Course Outcomes (COs)</h4>
+
 														<div class="form-group">
 															<label class="control-label col-sm-8" for="planning"
-																style="text-align: left;">Program Outcomes (POs) , PRogram Specific Outcomes (PSOs), Course Outcomes (COs) 
-evaluated by Institute:
- <span
-																class="text-danger">*</span>
+																style="text-align: left;">Program Outcomes (POs)
+																, PRogram Specific Outcomes (PSOs), Course Outcomes
+																(COs) evaluated by Institute: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="poEval" name="poEval" value="1"
+																	checked>Yes <input type="radio" id="planning"
+																	name="planning" value="0">No
 															</div>
-															
+
 														</div>
-														
-														
-														
+
+
+
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
 																style="text-align: left;">Mapping of CO-PO done
 
-                                                                   <span
-																class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="radio" id="copoMapping" name="copoMapping"
@@ -207,74 +201,65 @@ evaluated by Institute:
 															<label class="control-label col-sm-3" for="planning"
 																style="text-align: left;">Mapping of CO-PSO done
 
-                                                                   <span
-																class="text-danger">*</span>
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="copsoMapping" name="copsoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="copsoMapping"
+																	name="copsoMapping" value="1" checked>Yes <input
+																	type="radio" id="planning" name="planning" value="0">No
 															</div>
 														</div>
-														
-														
-															
-														
-														
-															
+
+
+
+
+
+
 														<div class="form-group">
 															<label class="control-label col-sm-6" for="planning"
-																style="text-align: left;">Teaching Plan / Laboratory Plan available :
-
-                                                                   <span
-																class="text-danger">*</span>
+																style="text-align: left;">Teaching Plan /
+																Laboratory Plan available : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="teachingPlan" name="teachingPlan"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="teachingPlan"
+																	name="teachingPlan" value="1" checked>Yes <input
+																	type="radio" id="planning" name="planning" value="0">No
 															</div>
-															
+
 														</div>
-														
-														
-																<h4> Human Values and Professional Ethics</h4>
-														
+
+
+														<h4>Human Values and Professional Ethics</h4>
+
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for students
-
- <span
-																class="text-danger">*</span>
+																style="text-align: left;">Code of conduct for
+																students <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="poEval" name="poEval" value="1"
+																	checked>Yes <input type="radio" id="planning"
+																	name="planning" value="0">No
 															</div>
-															
+
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for staff
-
- <span
-																class="text-danger">*</span>
+																style="text-align: left;">Code of conduct for
+																staff <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="poEval" name="poEval" value="1"
+																	checked>Yes <input type="radio" id="planning"
+																	name="planning" value="0">No
 															</div>
-															
+
 														</div>
-														
-														
-														
+
+
+
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for governing body
-
-                                                                   <span
-																class="text-danger">*</span>
+																style="text-align: left;">Code of conduct for
+																governing body <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="radio" id="copoMapping" name="copoMapping"
@@ -282,26 +267,21 @@ evaluated by Institute:
 																	id="planning" name="planning" value="0">No
 															</div>
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Code of conduct for Administration
-
-                                                                   <span
-																class="text-danger">*</span>
+																style="text-align: left;">Code of conduct for
+																Administration <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="copsoMapping" name="copsoMapping"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="copsoMapping"
+																	name="copsoMapping" value="1" checked>Yes <input
+																	type="radio" id="planning" name="planning" value="0">No
 															</div>
 														</div>
-														
-															
+
+
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Display of core values on websites and in the
-                                                      Institute for the stake holders 
-
-
-                                                                   <span
+																style="text-align: left;">Display of core values
+																on websites and in the Institute for the stake holders <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
@@ -309,29 +289,37 @@ evaluated by Institute:
 																	value="1" checked>Yes <input type="radio"
 																	id="planning" name="planning" value="0">No
 															</div>
-															
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Organization of national festivals
 
- <span
-																class="text-danger">*</span>
+															<label class="control-label col-sm-3" for="planning"
+																style="text-align: left;">Organization of
+																national festivals <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="radio" id="poEval" name="poEval"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
+																<input type="radio" id="poEval" name="poEval" value="1"
+																	checked>Yes <input type="radio" id="planning"
+																	name="planning" value="0">No
 															</div>
-															
-															
-															
+
+
+
 														</div>
-														
+
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+																<input type="submit" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Save"> <input
+																	type="submit" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
+																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
+
+
+
+
+
 
 													</div>
 
@@ -515,6 +503,19 @@ evaluated by Institute:
 
 				});
 	</script>
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
+
 
 </body>
 </html>

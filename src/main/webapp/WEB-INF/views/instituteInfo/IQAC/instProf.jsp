@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -85,8 +85,9 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showInstituteList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a>
+								<!-- <a
+									class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
 
 						</header>
@@ -116,101 +117,112 @@
 
 
 
-													
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Date of Establishment of IQAC
-<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="date" class="form-control" id="page_name"
-																	name="page_name" placeholder="Institute Name"
-																	value="${page.pageName}">
-															</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">Date
+															of Establishment of IQAC <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepicker"
+																id="page_name" name="page_name"
+																placeholder="Date of Establishment of IQAC "
+																value="${page.pageName}">
 														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Name of alternate facility with IQAC 
-															<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order" placeholder="Name of alternate facility with IQAC"
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact No of Alternate Faculty Associated  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order" placeholder="Contact No"
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Phone No.<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order" placeholder="Phone No."
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Fax No.<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																	maxlength="10" class="form-control" id="page_order"
-																	name="page_order" placeholder="Fax No." required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-															Registered Email <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_order"
-																	name="page_order"
-																	placeholder="abc@xyz.com"
-																	required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Alternate Email 
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="email" class="form-control" id="page_order"
-																	name="page_order" placeholder="abc@xyz.com " required>
-															</div>
-														</div>
-
-
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-													
-														<button type="submit" class="btn btn-primary">Submit</button>
-														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
+
+
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_order">Name
+															of alternate facility with IQAC <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="page_order"
+																name="page_order"
+																placeholder="Name of alternate facility with IQAC"
+																value="" required>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_order">Contact
+															No of Alternate Faculty Associated <span
+															class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="page_order"
+																name="page_order" placeholder="Contact No" value=""
+																required>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_order">Phone
+															No.<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="page_order"
+																name="page_order" placeholder="Phone No." value=""
+																required>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_order">Fax
+															No.<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																maxlength="10" class="form-control" id="page_order"
+																name="page_order" placeholder="Fax No." required>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_order">
+															Registered Email <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="page_order"
+																name="page_order" placeholder="abc@xyz.com" required>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_order">Alternate
+															Email :<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="email" class="form-control" id="page_order"
+																name="page_order" placeholder="abc@xyz.com " required>
+														</div>
+													</div>
+
+
+
+
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-9">
+															<input type="submit" id="sub1" class="btn btn-primary"
+																onclick="submit_f(1)" value="Save"> <input
+																type="submit" id="sub2" class="btn btn-primary"
+																onclick="submit_f(0)"
+																value="Save &
+																		Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
+
+
+
 												</div>
+											</div>
 
-	
 
-										
-</div>
-										
-</div>
-</div>
+											<div class="clearfix"></div>
+
+
+										</div>
 									</form>
 								</div>
 
@@ -228,7 +240,7 @@
 
 	<!-- END CONTENT -->
 
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -241,66 +253,77 @@
 					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
 						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							
-									<div class="form-group">
-							<label class="control-label col-sm-3" for="page_name">Qualification</label> <select
-								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="Diploma">Diploma</option>
-								<option value="Bachelors">Bachelors</option>
-								<option value="Masters">Masters</option>
-								<option value="Doctorates">Doctorates</option>
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="page_name">Qualification</label>
+						<select id="qualType" name="qualType" class="form-control"
+							onchange="showForm()" required>
+							<option value="Diploma">Diploma</option>
+							<option value="Bachelors">Bachelors</option>
+							<option value="Masters">Masters</option>
+							<option value="Doctorates">Doctorates</option>
 							<option value="Post Doctorates">Post Doctorates</option>
-								<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
-								
-								<option value="7">Any Other</option>
+							<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
+
+							<option value="7">Any Other</option>
 
 
 
-							</select>
+						</select>
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="page_name">Other
+							Qualification </label>
+						<!-- <div class="col-sm-3"> -->
+						<input type="text" class="form-control" id="qualName"
+							name="qualName" placeholder="" value="${page.pageName}">
+						<!-- </div> -->
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-1" for="page_name">Class
+						</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="className"
+								name="className" placeholder="" value="${page.pageName}"
+								required>
 						</div>
-						
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Other Qualification
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualName"
-									name="qualName" placeholder="" value="${page.pageName}"
-									>
-							<!-- </div> -->
-	</div>
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-1" for="page_name">Class
-							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="className"
-									name="className" placeholder="" value="${page.pageName}"
-									required>
-							</div>
-	</div>
-	<div class="form-group">
-							<label class="control-label col-sm-2" for="page_name">Year of Passing
-							</label>
-							<div class="col-sm-3">
-								<input type="date" class="form-control"
-								id="year" name="year" value="" required>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="page_name">Year
+							of Passing </label>
+						<div class="col-sm-3">
+							<input type="date" class="form-control" id="year" name="year"
+								value="" required>
+						</div>
 
-</div>
+					</div>
 
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-				<!-- 	</form> -->
+					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<!-- 	</form> -->
 				</div>
 			</div>
 		</div>
 	</div>
-	
 
+
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
 
 
 

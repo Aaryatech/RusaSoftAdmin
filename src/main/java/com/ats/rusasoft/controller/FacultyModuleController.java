@@ -460,6 +460,28 @@ public class FacultyModuleController {
 
 	}
 
+	@RequestMapping(value = "/showAddStudMentor", method = RequestMethod.GET)
+	public ModelAndView showAddStudMentor(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/addStudMentor");
+
+			model.addObject("title", "Add Mentoring Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showSWOC", method = RequestMethod.GET)
 	public ModelAndView showSWOC(HttpServletRequest request, HttpServletResponse response) {
 

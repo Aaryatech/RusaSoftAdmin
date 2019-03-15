@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
+								<a href="${pageContext.request.contextPath}/showAddReforms"><button
+										type="button" class="btn btn-success">Add</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -112,81 +111,29 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
+												<table id="example-1"
+													class="table table-striped dt-responsive display">
+													<thead>
+														<tr>
+															<th width="10%">Sr No</th>
+															<th>Year</th>
+															<th>Reform</th>
+															<th>Remark</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+												</table>
 
-	<div class="col-xs-12">
-													
-
-														<div class="form-group">
-															<label class="control-label col-sm-6" for="isReform"
-																style="text-align: left;"> Reforms have been accepted in Continuous Internal Evaluation  :
-
- <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio"  onclick="showReforms(this.value)" id="isReform" name="isReform"
-																	value="1"   checked>Yes 
-																	<input type="radio"
-																	id="isReform" onclick="showReforms(this.value)"  name="isReform" value="0">No
-															</div>
-															
-															<div class="col-sm-1">
-															<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info" id="btn1">Add</button></a> 
-										</div>
-															
-														</div>
-</div>
-													<div class="col-xs-12">
-													
-															<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Year</th>
-																		<th>Reform</th>
-																		<th>Remark</th>
-																		
-																		
-																	</tr>
-																
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														 <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> 
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
+												<div class="clearfix"></div>
 											</div>
+
 										</div>
 									</form>
 								</div>
 
 							</div>
 						</div>
-
 					</section>
 				</div>
 
@@ -214,50 +161,44 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Reforms
-
-</h4>
+					<h4 class="modal-title">Reforms</h4>
 				</div>
 				<div class="modal-body">
-				
-				
-				<div class="form-group">
+
+
+					<div class="form-group">
 						<label class="control-label col-sm-6" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
+							<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
-				
-					
-				<div class="form-group">
+
+
+					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="reform">Reform
-						</label> <input type="text" class="form-control"
-							id="reform" name="reform"
-							placeholder="Reform"
-							value="${page.pageName}" required>
+						</label> <input type="text" class="form-control" id="reform" name="reform"
+							placeholder="Reform" value="${page.pageName}" required>
 					</div>
-				
-			
-				
-				<div class="form-group">
+
+
+
+					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="remark">Remark
-						</label> <input type="text" class="form-control"
-							id="remark" name="remark"
-							placeholder="Remark"
-							value="${page.pageName}" required>
+						</label> <input type="text" class="form-control" id="remark" name="remark"
+							placeholder="Remark" value="${page.pageName}" required>
 					</div>
 
-				
-					
-			
-					
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -283,39 +224,27 @@
 			var reform = document.getElementById("reform").value;
 			var remark = document.getElementById("remark").value;
 			var academicYear = document.getElementById("academicYear").value;
-		
-		
+
 			var dataTable = $('#example-1').DataTable();
 
-			dataTable.row.add(
-					[ i + 1,academicYear,reform,remark ])
-					.draw();
+			dataTable.row.add([ i + 1, academicYear, reform, remark ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
-		
-		
+
 		function showReforms(temp) {
 			//alert("hii");
 			//var remark = document.getElementById("isReform").value;
 			//alert(temp);
-		if(temp ==1){
-			document.getElementById("btn1").style ="visible"
+			if (temp == 1) {
+				document.getElementById("btn1").style = "visible"
 				document.getElementById("example-1").style = "visible"
-		}
-		else{
-			
-			document.getElementById("btn1").style = "display:none"
-				document.getElementById("example-1").style = "display:none"
-		}
-				
-		
-		
-			
-		}
-		
-	
+			} else {
 
-		
+				document.getElementById("btn1").style = "display:none"
+				document.getElementById("example-1").style = "display:none"
+			}
+
+		}
 	</script>
 
 

@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " >
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -84,12 +84,12 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<a href="#myModal1"
-														data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a>
+								<a href="${pageContext.request.contextPath}/showAddStudMentor"
+									data-toggle="modal"><button type="submit"
+										class="btn btn-info">Add</button></a>
 								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a> --%>
+								<!-- <a class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
 
 						</header>
@@ -108,77 +108,34 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
 
 
-													<div class="col-xs-12">
+												<label class="control-label col-sm-3" for="page_name">Mentoring
+													to the Students :<span class="text-danger">*</span>
+												</label>
 
-										
-														<label class="control-label col-sm-3" for="page_name">Mentoring
-															to the Students :<span class="text-danger">*</span>
-														</label>
-
-
-														<div class="col-xs-12">
-
-
-
-
-															<table id="example-2"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th width="45%">Academic Year</th>
-																		<th width="45%">No of Students</th>
-																	</tr>
-																</thead>
-
-
-
-																<!-- <tbody>
-
-																	<tr>
-																		<td>2</td>
-																		<td>2019-2020</td>
-
-																		<td><input type="text" class="form-control"
-																			id="curExp" name="curExp" value="" required></td>
-
-																	</tr>
-																	<tr>
-																		<td>3</td>
-																		<td>2020-2021</td>
-
-																		<td><input type="text" class="form-control"
-																			id="curExp" name="curExp" value="" required></td>
-
-																	</tr>
-
-
-																</tbody> -->
-															</table>
-														
-</div>
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
+												<div class="col-xs-12">
+													<table id="example-1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th>Sr No</th>
+																<th>Academic Year</th>
+																<th>No of Students</th>
+															</tr>
+														</thead>
+													</table>
 												</div>
+
+
+												<div class="clearfix"></div>
+
 
 											</div>
 										</div>
@@ -204,11 +161,8 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
-	
 
-	
+
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -222,74 +176,62 @@
 					<%-- <form role="form"
 						action="${pageContext.request.contextPath}/showModuleForm"
 						method="get"> --%>
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId">
-							
-							<input type="hidden" class="form-control" id="index"
-							name="index" value="0">
-						
-								
-						
-	<div class="form-group">
-							<label class="control-label col-sm-6" for="page_name">Academic Year</label> <select
-								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
-								<option value="2018-2019">2018-2019</option>
-								<option value="2017-2018">2017-2018</option>
-								<option value="2016-2017">2016-2017</option>
-									<option value="2016-2017">2015-2016</option>
-								
-							</select>
-						</div>
-						<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">No of Student
-							</label>
-						
-								<input type="text" class="form-control" id="hodName"
-									name="hodName" placeholder="No." value="${page.pageName}"
-									required>
-							</div>
-	
-						
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
 
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
+					<input type="hidden" class="form-control" id="index" name="index"
+						value="0">
+
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-6" for="page_name">Academic
+							Year</label> <select id="qualType" name="qualType" class="form-control"
+							onchange="showForm()" required>
+							<option value="2018-2019">2018-2019</option>
+							<option value="2017-2018">2017-2018</option>
+							<option value="2016-2017">2016-2017</option>
+							<option value="2016-2017">2015-2016</option>
+
+						</select>
+					</div>
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="page_name">No
+							of Student </label> <input type="text" class="form-control" id="hodName"
+							name="hodName" placeholder="No." value="${page.pageName}"
+							required>
+					</div>
+
+
+
+					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
 					<!-- </form> -->
 				</div>
 			</div>
 		</div>
 	</div>
 
-<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-		var year=document.getElementById("qualType").value;
-		//alert("year"+year);
-		var noStud=document.getElementById("hodName").value;
-		//alert("noStud"+noStud);
-		var dataTable = $('#example-2')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,	
-					year,
-					noStud
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-		
-	}
+	<script type="text/javascript">
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
+			var year = document.getElementById("qualType").value;
+			//alert("year"+year);
+			var noStud = document.getElementById("hodName").value;
+			//alert("noStud"+noStud);
+			var dataTable = $('#example-2').DataTable();
 
+			dataTable.row.add([ i + 1, year, noStud ]).draw();
+
+			document.getElementById("index").value = i + 1;
+
+		}
 	</script>
-	
-	
-	
-	
-	
+
+
+
+
+
 
 </body>
 </html>

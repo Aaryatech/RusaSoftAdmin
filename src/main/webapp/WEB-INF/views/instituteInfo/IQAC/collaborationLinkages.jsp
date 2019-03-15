@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -84,11 +84,13 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
+								<a
+									href="${pageContext.request.contextPath}/showAddCollaborationLinkages"><button
+										type="button" class="btn btn-info">Add</button></a>
+								<%-- <a
 									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a> <!-- <a
+									class="box_toggle fa fa-chevron-down"></a> --> --%>
 							</div>
 
 						</header>
@@ -117,8 +119,8 @@
 
 
 													<div class="col-xs-12">
-													
-															<div class="col-xs-12">
+
+														<div class="col-xs-12">
 
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
@@ -127,14 +129,14 @@
 																		<th width="10%">Sr No</th>
 																		<th>Name of Collaboration / Linkage</th>
 																		<th>Academic Year</th>
-																		
+
 																		<th>Nature of Linkage Collaboration</th>
-																		<th >Beneficiary of Collaboration / Linkage</th>
-																		<th >No. of Participants / Beneficiary</th>
-																		
-																		
+																		<th>Beneficiary of Collaboration / Linkage</th>
+																		<th>No. of Participants / Beneficiary</th>
+
+
 																	</tr>
-																
+
 																</thead>
 
 
@@ -146,12 +148,12 @@
 															</table>
 
 														</div>
-														 <div class="form-group">
+														<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
-														</div> 
+														</div> -->
 
 													</div>
 
@@ -195,86 +197,85 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Collaboration & Linkages
-
-</h4>
+					<h4 class="modal-title">Collaboration & Linkages</h4>
 				</div>
 				<div class="modal-body">
-				
-				<div class="form-group">
-						<label class="control-label col-sm-6" for="colName">Name of Collaboration / Linkage
-							</label> <select id="colName" name="colName"
+
+					<div class="form-group">
+						<label class="control-label col-sm-6" for="colName">Name
+							of Collaboration / Linkage </label> <select id="colName" name="colName"
 							class="form-control" required>
 							<option value="Faculty Exchange">Faculty Exchange</option>
 							<option value="Student Exchange">Student Exchange</option>
 							<option value="Internship">Internship</option>
-								<option value="Fieldtrip">Fieldtrip</option>
-									<option value="Research">Research</option>
-									<option value="On job paining">On job paining</option>
+							<option value="Fieldtrip">Fieldtrip</option>
+							<option value="Research">Research</option>
+							<option value="On job paining">On job paining</option>
 
 						</select>
 					</div>
-				
-					
-				<div class="form-group">
 
-						<label class="control-label col-sm-6" for="agency">Collaboration Linkage with Agency
-						</label> <input type="text" class="form-control"
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="agency">Collaboration
+							Linkage with Agency </label> <input type="text" class="form-control"
 							id="agency" name="agency"
 							placeholder="Collaboration Linkage with Agency"
 							value="${page.pageName}" required>
 					</div>
-				
-				
-				<div class="form-group">
+
+
+					<div class="form-group">
 						<label class="control-label col-sm-6" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
+							<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
-					
-				
-				<div class="form-group">
 
-						<label class="control-label col-sm-6" for="linkageNature">Nature of Linkage Collaboration
-						</label> <input type="text" class="form-control"
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="linkageNature">Nature
+							of Linkage Collaboration </label> <input type="text" class="form-control"
 							id="linkageNature" name="linkageNature"
 							placeholder="Nature of Linkage Collaboration"
 							value="${page.pageName}" required>
 					</div>
 
-				<div class="form-group">
+					<div class="form-group">
 
-						<label class="control-label col-sm-6" for="beneficiary">Beneficiary of Collaboration / Linkage
-						</label> <input type="text" class="form-control"
-							id="beneficiary" name="beneficiary"
+						<label class="control-label col-sm-6" for="beneficiary">Beneficiary
+							of Collaboration / Linkage </label> <input type="text"
+							class="form-control" id="beneficiary" name="beneficiary"
 							placeholder="Beneficiary of Collaboration / Linkage"
 							value="${page.pageName}" required>
 					</div>
-				
-	
-					
-<div class="form-group">
 
-						<label class="control-label col-sm-6" for="totalParticipants">No. of Participants / Beneficiary
-						</label> <input type="text" class="form-control"
-							id="totalParticipants" name="totalParticipants"
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-6" for="totalParticipants">No.
+							of Participants / Beneficiary </label> <input type="text"
+							class="form-control" id="totalParticipants"
+							name="totalParticipants"
 							placeholder="No. of Participants / Beneficiary"
 							value="${page.pageName}" required>
 					</div>
 
-				
 
-					
-				
-					
-			
-					
+
+
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -300,16 +301,17 @@
 			var colName = document.getElementById("colName").value;
 			var agency = document.getElementById("agency").value;
 			var academicYear = document.getElementById("academicYear").value;
-			
+
 			var linkageNature = document.getElementById("linkageNature").value;
 			var beneficiary = document.getElementById("beneficiary").value;
-			var totalParticipants = document.getElementById("totalParticipants").value;
-		
+			var totalParticipants = document
+					.getElementById("totalParticipants").value;
+
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,colName,agency, academicYear, linkageNature, beneficiary,totalParticipants ])
-					.draw();
+					[ i + 1, colName, agency, academicYear, linkageNature,
+							beneficiary, totalParticipants ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
 	</script>
