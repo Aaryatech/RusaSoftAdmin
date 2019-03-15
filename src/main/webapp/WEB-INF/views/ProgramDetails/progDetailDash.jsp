@@ -83,54 +83,39 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right"></div>
+							<div class="actions panel_actions pull-right">
+
+
+								<a href="${pageContext.request.contextPath}/showProgramList"><button
+										type="button" class="btn btn-success">Back</button></a>
+
+							</div>
 
 						</header>
-						<!-- 
-											<div class="col-xs-12">
-														
-																		<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select Program
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-						       	<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-				                         	</select>
-																
-																
-															</div>
-														</div>
-														
-											</div>
- -->
 
-						<div class="col-xs-12">
-							&nbsp;&nbsp;&nbsp;
-							<div class="row">
-								<label class="control-label col-sm-2" for="status">
-									Program Name:</label> <label class="control-label col-sm-2"
-									for="status"> </label>
-							</div>
-
-							<div class="row">
-								<label class="control-label col-sm-2" for="status">
-									Duration:</label> <label class="control-label col-sm-2" for="status">
-								</label>
-							</div>
-							<div class="row">
-								<label class="control-label col-sm-2" for="status">
-									Sanctioned Intake:</label> <label class="control-label col-sm-2"
-									for="status"> </label>
-
-							</div>
-						</div>
-
-
-						<br />
-						<br />
-						<br />
 						<div class="content-body">
 							<div class="row">
+								<div class="col-xs-12">
+
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="status">
+											Program Name:</label> <label class="control-label col-sm-10"
+											for="status"><strong> ${programDetail.nameOfProgram} </strong></label>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="status">
+											Duration:</label> <label class="control-label col-sm-10" for="status">
+											<strong>${programDetail.monthDuration}</strong></label>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="status">
+											Sanctioned Intake:</label> <label class="control-label col-sm-10"
+											for="status"><strong>${programDetail.sanctionalIntake}</strong></label>
+
+									</div>
+									<div class="form-group"></div>
+								</div>
 								<div class="col-md-12">
 
 									<ul class="nav nav-tabs">
@@ -168,9 +153,7 @@
 
 											<!-- 	<form action="" method="post">		 -->
 
-
-
-
+ 
 											<div class="row">
 
 
@@ -209,7 +192,7 @@
 
 												<div class="col-xs-12">
 
-													<table id="example7"
+													<table id="example-1"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
@@ -273,7 +256,7 @@
 
 												<div class="col-xs-12">
 
-													<table id="example7"
+													<table id="example-2"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
@@ -335,7 +318,7 @@
 
 												<div class="col-xs-12">
 
-													<table id="example7"
+													<table id="example-3"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
@@ -397,7 +380,7 @@
 
 												<div class="col-xs-12">
 
-													<table id="example7"
+													<table id="example-4"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
@@ -460,7 +443,7 @@
 
 												<div class="col-xs-12">
 
-													<table id="example7"
+													<table id="example-5"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
@@ -511,7 +494,7 @@
 
 												<div class="col-xs-12">
 
-													<table id="example7"
+													<table id="example-6"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
@@ -573,9 +556,24 @@
 
 
 	<script type="text/javascript">
-		function abc() {
-
-		}
+		$("#example-2").dataTable(
+				{
+					responsive : true,
+					aLengthMenu : [ [ 10, 25, 50, 100, -1 ],
+							[ 10, 25, 50, 100, "All" ] ]
+				});
+		$("#example-3").dataTable(
+				{
+					responsive : true,
+					aLengthMenu : [ [ 10, 25, 50, 100, -1 ],
+							[ 10, 25, 50, 100, "All" ] ]
+				});
+		$("#example-5").dataTable(
+				{
+					responsive : true,
+					aLengthMenu : [ [ 10, 25, 50, 100, -1 ],
+							[ 10, 25, 50, 100, "All" ] ]
+				});
 	</script>
 
 

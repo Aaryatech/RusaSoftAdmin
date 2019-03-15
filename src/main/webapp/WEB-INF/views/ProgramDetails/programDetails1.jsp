@@ -95,7 +95,7 @@
 													<td>${list.approvedBy}</td>
 
 													<td><c:if test="${isAdd==1}">
-															<a href="${pageContext.request.contextPath}/showProgDsh"
+															<a href="${pageContext.request.contextPath}/addProgramDetail/${list.programId}"
 																title="Add Details" rel="tooltip"
 																data-color-class="detail"
 																data-animate=" animated fadeIn " data-toggle="tooltip"
