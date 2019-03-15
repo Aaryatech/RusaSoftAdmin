@@ -36,7 +36,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -53,186 +53,79 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-									<a href="${pageContext.request.contextPath}/showAddHighEdu"><button
-										type="button" class="btn btn-success">Add Higher Education Detail</button></a> 
-								
+								<a href="${pageContext.request.contextPath}/showAddHighEdu"><button
+										type="button" class="btn btn-success">Add Higher
+										Education Detail</button></a>
+
 
 							</div>
 
 						</header>
-						<div class="content-body">
-							<div class="row">
+						<form
+							action="${pageContext.request.contextPath}/deleteEduDetail/0"
+							method="get" id="insListForm">
+							<div class="content-body">
+								<div class="row">
+									<h5 class="title pull-left">
+										<strong>Progression to Higher Education</strong>
+									</h5>
+									<div class="col-xs-12"></div>
+									<div class="col-xs-12">
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
+												<tr>
+													<th>Sr.No.</th>
+													<th>Program Type</th>
+													<th>Proceeding To</th>
+													<th>No. of Students</th>
+													<th>Action</th>
+												</tr>
 
-		
+											</thead>
 
+											<tbody>
+												<c:forEach items="${highEduList}" var="highEdu"
+													varStatus="count">
+													<tr>
+														<td>${count.index+1}</td>
+														<td>${highEdu.fromProgType}</td>
+														<td>${highEdu.toProgType}</td>
+														<td>${highEdu.noStudent}</td>
 
-								<h5 class="title pull-left">
-									<strong>Progression to Higher Education</strong>
-								</h5>
-								<div class="col-xs-12"></div>
-								<div class="col-xs-12">
+														<td align="center">
+															<%-- <c:if test="${editAccess==0}"> --%> <a href="#"
+															onclick="showEditEduDetail(${highEdu.educationDetailId})"><span
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<%-- </c:if> --%>
+															<%-- <c:if test="${deleteAccess==0}"> --%> <a
+															href="${pageContext.request.contextPath}/deleteEduDetail/${highEdu.educationDetailId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger" title="Delete"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a> <%-- </c:if> --%>
+														</td>
 
-									<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th>Sr.No.</th>
-												<th>Program Type</th>
-												<th>Proceeding To</th>
-												<th>No. of Students</th>
-											</tr>
+													</tr>
+												</c:forEach>
 
-
-										</thead>
-
-
-
-									</table>
+											</tbody>
+										</table>
+									</div>
+									<input type="hidden" id="edit_eduDet_id" name="edit_eduDet_id"
+										value="0">
 								</div>
 
-
-<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" class="btn btn-primary">Submit</button>
-															<button type="reset" class="btn btn-default">Reset</button>
-														</div>
-													</div>
-
-
-
 							</div>
-						</div>
+						</form>
 					</section>
 				</div>
-
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
 		<!-- END CONTENT -->
-
 	</div>
-	
-	
-	
-<%-- 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Higher Education Details</h4>
-				</div>
-				<div class="modal-body">
-					<form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId">
-							
-							
-							<input type="hidden" class="form-control" id="index"
-							name="index" value="0">
-							
-								<div class="form-group">
-						<label class="control-label col-sm-6" for="academicYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
-
-						</select>
-					</div>
-					
-						<div class="form-group">
-							<label for="modalname1" class="form-label">Program Type</label> <select
-								id="qualType" name="salutation" class="form-control" required>
-								<option value="UG">UG</option>
-								<option value="PG">PG</option>
-								<option value="M.Phill">M.Phill</option>
-								<option value="Ph.D.">Ph.D.</option>
-								<option value="Post Doct.">Post Doct.</option>
-								
-
-
-
-							</select>
-						</div>
-						
-						
-							<div class="form-group">
-							<label for="modalname1" class="form-label">Proceeding To </label> <select
-								id="qualName" name="salutation" class="form-control" required>
-								
-								<option value="PG">PG</option>
-									<option value="Ph.D.">Ph.D.</option>
-										<option value="Ph.D.">Ph.D.</option>
-								
-							
-								<option value="Post Doct.">Post Doct.</option>
-									<option value="-">Pls. Specify</option>
-								
-
-
-
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-3" for="page_name">No. of Student
-							</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="className"
-									name="hodName" placeholder="No. of Student" value="${page.pageName}"
-									required>
-									<input type="hidden" id="index" name="index" value="0">
-							</div>
-
-
-
-
-						</div>
-
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div> --%>
-	
-	<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var academicYear = document.getElementById("academicYear").value;
-
-		var qualType=document.getElementById("qualType").value
-		var qualName=document.getElementById("qualName").value
-		var className=document.getElementById("className").value
-
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-					qualType,
-					qualName,
-					className
-					
-					
-						 ])
-		.draw();
-		
-		
-		document.getElementById("index").value = i + 1;
-	}
-
-	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
@@ -247,7 +140,17 @@
 			}, function(data) {
 
 			});
+		}
+		
+		function showEditEduDetail(eduDId){
+			
+			document.getElementById("edit_eduDet_id").value=eduDId;//create this 
+			var form=document.getElementById("insListForm");
+		    form.setAttribute("method", "post");
 
+			form.action=("showEditEduDetail");
+			form.submit();
+			
 		}
 	</script>
 </body>

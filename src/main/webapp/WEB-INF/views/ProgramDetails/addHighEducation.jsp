@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body class=" " onload="setProceedProgType()">
+	<c:url value="/getProgTypeByProgId" var="getProgTypeByProgId"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +59,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -73,144 +73,120 @@
 				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
 				<div class="col-lg-12"></div>
-
-
-
 				<div class="col-lg-12">
 					<section class="box ">
-
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showHighEdu"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
-
 						</header>
-
-
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register Form
+										</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertHigherEduDetail"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
 
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-
-														
-		
+												<div class="row">
+													<div class="col-md-12">
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Program Type 
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10"><!--  fetch it from m_prog_type -->
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						                                     
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Proceeding To
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10"><!--  fetch it from m_prog_type but the program higher than above selected prog only -->
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-						                                     
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-															
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-												No. of Student <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="status">Program
+																Type<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="" required
-																	>
+																<!--  fetch it from m_prog_type -->
+																<select id="prog_type" name="prog_type"
+																	class="form-control" onchange="setProceedProgType()"
+																	required>
+																	<c:forEach items="${progTypeList}" var="progType">
+																		<c:choose>
+																			<c:when test="${highEduDet.programType==progType.programId}">
+																				<option selected value="${progType.programId}">${progType.programName}</option>
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${progType.programId}">${progType.programName}</option>
+																			</c:otherwise>
+																		</c:choose>
+																	</c:forEach>
+																</select>
 															</div>
 														</div>
-														
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-											  <div class="form-group">
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="status">Proceeding
+																To<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<!--  fetch it from m_prog_type but the program higher than above selected prog only -->
+																<select id="proceed_prog_type" name="proceed_prog_type"
+																	class="form-control"
+																	required>
+																</select>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">
+																No. of Student<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control"
+																	id="no_of_student" value="${highEduDet.noStudent}"
+																	name="no_of_student" placeholder="Number Of Students Opted for Higher Education" required>
+															</div>
+														</div>
+
+														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" id="sub1" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Save"> <input
+																	type="submit" id="sub2" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
-
-
-												<div class="clearfix"></div>
-
-											</div>
-
-										
-</div>
-</div>
-									</form>
+													</div>
+													<input type="hidden" id="high_edu_id" name="high_edu_id"
+														value="${highEduDet.educationDetailId}"> <input
+														type="hidden" id="is_view" name="is_view" value="0">
+													<div class="clearfix"></div>
+												</div>
+												</form>
+										</div>
+									</div>
 								</div>
-
 							</div>
-
 						</div>
-					</section>
+						</section>
 				</div>
-
+				
 			</section>
-		</section>
-
+			</section>
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-<script type="text/javascript">
+	<script type="text/javascript">
 function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
-
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
 	}
 	
-function checkUnique(inputValue,valueType){
+/* function checkUnique(inputValue,valueType){
 	//alert(inputValue);
 	
 	var primaryKey=${editInst.librarianId};
@@ -280,11 +256,11 @@ function checkUnique(inputValue,valueType){
 	});
 }
 
-
+ */
 
 </script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 function showExtraField() {
 	//alert("hii");
@@ -308,10 +284,44 @@ function showExtraField() {
 function hideText() {
 	//alert("hii");
 	document.getElementById("abc").style = "display:none"
-	
-	
 	}
+	
+function setProceedProgType(){
+	//alert("progId" +progId);
+	var progId= document.getElementById("prog_type").value;
+		$.getJSON('${getProgTypeByProgId}', {
+			progId : progId,
+			ajax : 'true',
+		},
+		function(data) {
+			var html;
+			var len = data.length;
+			for (var i = 0; i < len; i++) {
+				html += '<option value="' + data[i].programId + '">'
+						+ data[i].programName + '</option>';
+			}
+			html += '</option>';
+			$('#proceed_prog_type').html(html);
+			$("#proceed_prog_type").trigger("chosen:updated");
+		});
+}
 
+</script>
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
 </script>
 
 

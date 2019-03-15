@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +27,9 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
 import com.ats.rusasoft.master.model.prodetail.Cast;
 import com.ats.rusasoft.master.model.prodetail.GetAlumni;
+import com.ats.rusasoft.master.model.prodetail.GetHigherEduDetail;
 import com.ats.rusasoft.master.model.prodetail.GetTrainPlace;
+import com.ats.rusasoft.master.model.prodetail.HigherEducDetail;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.master.model.prodetail.TrainPlacement;
 import com.ats.rusasoft.model.Dept;
@@ -335,8 +338,7 @@ public class AlumniTrainingController {
 			model = new ModelAndView("ProgramDetails/training");
 
 			model.addObject("title", "Program Training Details");
-			
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -348,12 +350,12 @@ public class AlumniTrainingController {
 
 			map.add("yearId", session.getAttribute("acYearId"));
 
-			GetTrainPlace[] traArray = restTemplate.postForObject(Constants.url + "getGetTrainPlaceList", map, GetTrainPlace[].class);
+			GetTrainPlace[] traArray = restTemplate.postForObject(Constants.url + "getGetTrainPlaceList", map,
+					GetTrainPlace[].class);
 			List<GetTrainPlace> trainPlaceList = new ArrayList<>(Arrays.asList(traArray));
 			System.err.println("trainPlaceList " + trainPlaceList.toString());
 
 			model.addObject("trainPlaceList", trainPlaceList);
-
 
 		} catch (Exception e) {
 
@@ -533,9 +535,9 @@ public class AlumniTrainingController {
 		return redirect;
 
 	}
-	
-	//showEditT&P
-	
+
+	// showEditT&P
+
 	@RequestMapping(value = "/showEditTP", method = RequestMethod.POST)
 	public ModelAndView showEditTP(HttpServletRequest request, HttpServletResponse response) {
 
@@ -559,7 +561,8 @@ public class AlumniTrainingController {
 			int placementId = Integer.parseInt(request.getParameter("edit_place_id"));
 
 			map.add("placementId", placementId);
-			TrainPlacement trainPlace = restTemplate.postForObject(Constants.url + "getTrainPlacement", map, TrainPlacement.class);
+			TrainPlacement trainPlace = restTemplate.postForObject(Constants.url + "getTrainPlacement", map,
+					TrainPlacement.class);
 
 			model.addObject("trainPlace", trainPlace);
 
@@ -578,8 +581,7 @@ public class AlumniTrainingController {
 
 	}
 
-	//deleteTranPlace
-	
+	// deleteTranPlace
 
 	@RequestMapping(value = "/deleteTranPlace/{placementId}", method = RequestMethod.GET)
 	public String deleteTranPlace(HttpServletRequest request, HttpServletResponse response,
@@ -624,6 +626,297 @@ public class AlumniTrainingController {
 		return "redirect:/showStudTran";
 
 	}
+
+	@RequestMapping(value = "/showHighEdu", method = RequestMethod.GET)
+	public ModelAndView showHighEdu(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/highEdu");
+
+			model.addObject("title", "Progression to Higher Education ");
+			
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
+
+			// GetAlumni
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map.add("instId", userObj.getGetData().getUserInstituteId());
+
+			map.add("yearId", session.getAttribute("acYearId"));
+
+			GetHigherEduDetail[] eduArray = restTemplate.postForObject(Constants.url + "getHigherEduDetailList", map,
+					GetHigherEduDetail[].class);
+			List<GetHigherEduDetail> highEduList = new ArrayList<>(Arrays.asList(eduArray));
+			System.err.println("highEduList " + highEduList.toString());
+
+			model.addObject("highEduList", highEduList);
+			
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showHighEdu List Page  at Alumni Con Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddHighEdu", method = RequestMethod.GET)
+	public ModelAndView showAddHighEdu(HttpServletRequest request, HttpServletResponse response) {
+		RestTemplate restTemplate = new RestTemplate();
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/addHighEducation");
+
+			model.addObject("title", "Progression to Higher Education ");
+
+			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+					ProgramType[].class);
+			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+			System.err.println("progTypeList " + progTypeList.toString());
+
+			model.addObject("progTypeList", progTypeList);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	// getProgTypeByProgId
+
+	@RequestMapping(value = "/getProgTypeByProgId", method = RequestMethod.GET)
+	public @ResponseBody List<ProgramType> getProgTypeByProgId(HttpServletRequest request,
+			HttpServletResponse response) {
+		List<ProgramType> progTypeList = null;
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			int progTypeId = Integer.parseInt(request.getParameter("progId"));
+			map.add("progTypeId", progTypeId);
+
+			ProgramType[] progTypes = restTemplate.postForObject(Constants.url + "getHigherProgList", map,
+					ProgramType[].class);
+			progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+			System.err.println("progTypeList " + progTypeList.toString());
+
+		} catch (Exception e) {
+
+			System.err.println("exception In getProgTypeByProgId at Ajax " + e.getMessage());
+
+			e.printStackTrace();
+		}
+
+		return progTypeList;
+	}
+	
+	//insertHigherEduDetail
+	
+	@RequestMapping(value = "/insertHigherEduDetail", method = RequestMethod.POST)
+	public String insertHigherEduDetail(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in insert insertHigherEduDetail");
+		ModelAndView model = null;
+		String redirect = null;
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int eduDetailId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+			try {
+				eduDetailId = Integer.parseInt(request.getParameter("high_edu_id"));
+			} catch (Exception e) {
+				eduDetailId = 0;
+			}
+
+			System.err.println("eduDetailId id  " + eduDetailId);
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
+											// "0",
+			// newModuleList);
+			editAccess.setError(false);
+
+			if (editAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				if (eduDetailId == 0 || eduDetailId>0) {
+					
+					HigherEducDetail higherEdu = new HigherEducDetail();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					higherEdu.setEducationDetailId(eduDetailId);
+					
+					higherEdu.setNoStudent(Integer.parseInt(request.getParameter("no_of_student")));
+					higherEdu.setProceedingTo(Integer.parseInt(request.getParameter("proceed_prog_type")));
+					higherEdu.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
+
+					int exInt1 = 0;
+					String exVar1 = "NA";
+
+					higherEdu.setExInt1(exInt1);
+					higherEdu.setExInt2(exInt1);
+					higherEdu.setExVar1(exVar1);
+					higherEdu.setExVar2(exVar1);
+					
+					higherEdu.setIsActive(1);
+					higherEdu.setDelStatus(1);
+
+					higherEdu.setMakerUserId(userObj.getUserId());// get from Session
+					higherEdu.setMakerDatetime(curDateTime);
+					
+					int yearId = (int) session.getAttribute("acYearId");
+					
+					higherEdu.setYearId(yearId);
+					higherEdu.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
+
+					HigherEducDetail trainPlaceRes = restTemplate.postForObject(Constants.url + "saveHigherEducDetail",
+							higherEdu, HigherEducDetail.class);
+
+				} else {
+
+				
+				}
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				System.err.println("is View  " +isView);
+				if (isView == 1)
+					redirect = "redirect:/showHighEdu";
+				else
+					redirect = "redirect:/showAddHighEdu";
+			}
+
+		} catch (Exception e) {
+			System.err.println("Exce in save insertHigherEduDetail  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return redirect;
+
+	}
+	
+	//showEditEduDetail
+	
+	
+	//edit_eduDet_id
+	@RequestMapping(value = "/showEditEduDetail", method = RequestMethod.POST)
+	public ModelAndView showEditEduDetail(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			model = new ModelAndView("ProgramDetails/addHighEducation");
+
+			model.addObject("title", "Edit Progression to Higher Education ");
+
+			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+					ProgramType[].class);
+			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+			System.err.println("progTypeList " + progTypeList.toString());
+
+			model.addObject("progTypeList", progTypeList);
+
+			int eduDetailId = Integer.parseInt(request.getParameter("edit_eduDet_id"));
+
+			map.add("eduDetailId", eduDetailId);
+			HigherEducDetail highEduDet = restTemplate.postForObject(Constants.url + "getHigherEducDetail", map,
+					HigherEducDetail.class);
+
+			model.addObject("highEduDet", highEduDet);
+
+			model.addObject("editAccess", 0);
+			model.addObject("deleteAccess", 0);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showEditTP at AlumTrani Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
+	
+	
+	//deleteEduDetail
+	
+		@RequestMapping(value = "/deleteEduDetail/{educationDetailId}", method = RequestMethod.GET)
+		public String deleteEduDetail(HttpServletRequest request, HttpServletResponse response,
+				@PathVariable int educationDetailId) {
+			
+
+			try {
+				RestTemplate restTemplate = new RestTemplate();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (educationDetailId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("educationDetailId");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String instIdList = sb.toString();
+					instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+					map.add("educationDetailIds", instIdList);
+				} else {
+
+					System.err.println("Single Record delete  /deleteHigherEducDetail");
+					map.add("educationDetailIds", educationDetailId);
+				}
+
+				Info errMsg = restTemplate.postForObject(Constants.url + "deleteHigherEducDetail", map, Info.class);
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteEduDetail at AlumTrain  Contr " + e.getMessage());
+
+				e.printStackTrace();
+			}
+
+			return "redirect:/showHighEdu";
+
+		}
+		
 	
 
 }

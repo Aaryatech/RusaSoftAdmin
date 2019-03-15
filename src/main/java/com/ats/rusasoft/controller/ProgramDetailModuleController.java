@@ -451,7 +451,7 @@ public class ProgramDetailModuleController {
 
 	}*/
 
-	@RequestMapping(value = "/showHighEdu", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showHighEdu", method = RequestMethod.GET)
 	public ModelAndView showHighEdu(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -494,7 +494,7 @@ public class ProgramDetailModuleController {
 
 		return model;
 
-	}
+	}*/
 
 	@RequestMapping(value = "/showStudAct", method = RequestMethod.GET)
 	public ModelAndView showStudAct(HttpServletRequest request, HttpServletResponse response) {
