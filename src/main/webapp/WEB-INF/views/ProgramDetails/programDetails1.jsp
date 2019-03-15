@@ -15,7 +15,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -30,7 +30,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
-<%-- 
+				<%-- 
 				<div class='col-xs-12'>
 					<div class="page-title">
 
@@ -53,9 +53,13 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-						<a href="${pageContext.request.contextPath}/showAddProgDetail"><button
-										type="button" class="btn btn-success">Add Program Detail</button></a>
-							
+
+								<c:if test="${isAdd==1}">
+									<a href="${pageContext.request.contextPath}/showAddProgram"><button
+											type="button" class="btn btn-success">Add Program
+											Detail</button></a>
+								</c:if>
+
 
 							</div>
 						</header>
@@ -64,48 +68,67 @@
 
 								<div class="col-xs-12">
 
-									
-<div class="form-group">
-									<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th >Sr No</th>
-												<th >Name of Program</th>
-												<th  >Duration Months</th>
-											    <th >Sanctioned Intake</th> 
-												<th >Date/Year of Introduction</th>
-												<th  >Approved by </th>
-												<th >Action </th>
+
+									<div class="form-group">
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
+												<tr>
+													<th>Sr No</th>
+													<th>Name of Program</th>
+													<th>Duration Months</th>
+													<th>Sanctioned Intake</th>
+													<th>Date/Year of Introduction</th>
+													<th>Approved by</th>
+													<th>Action</th>
 												</tr>
-</thead>
+											</thead>
 
-<tbody>
-<tr>
-												<td>1</td>
-												<td>Cultural-xyz</td> <!-- format to display program name is program Type-Program Name -->
-												<td>2</td>
-											    <td>100</td>
-												<td>1-01-2019</td>
-												<td>BOS </td>
-												<td> <a
-											href="${pageContext.request.contextPath}/showProgDsh" title="Add Details"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-list"></span></a></td>
-												
-											</tr>
+											<c:forEach items="${list}" var="list" varStatus="count">
+												<tr>
 
-</tbody>
+													<td>${count.index+1}</td>
+													<td>${list.nameOfProgram}</td>
+													<td>${list.monthDuration}</td>
+													<td>${list.sanctionalIntake}</td>
+													<td>${list.dateOfIntroduction}</td>
+													<td>${list.approvedBy}</td>
 
-</table>
+													<td><c:if test="${isAdd==1}">
+															<a href="${pageContext.request.contextPath}/showProgDsh"
+																title="Add Details" rel="tooltip"
+																data-color-class="detail"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Block"><span
+																class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;
+														</c:if> <c:if test="${isEdit==1}">
+															<a
+																href="${pageContext.request.contextPath}/editProgram/${list.programId}"><span
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;
+															</c:if> <c:if test="${isDelete==1}">
+															<a
+																href="${pageContext.request.contextPath}/deleteProgram/${list.programId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger" title="Delete"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a>
 
+														</c:if></td>
+												</tr>
+											</c:forEach>
+
+										</table>
+
+									</div>
 								</div>
-</div>
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+								<!-- <div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="reset" class="btn btn-default">Reset</button>
+									</div>
+								</div> -->
 
 
 
@@ -127,10 +150,10 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-	
 
-	
-<%-- 	
+
+
+	<%-- 	
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -284,112 +307,91 @@
 	</div>
 	 --%>
 	<script type="text/javascript">
-function getData1() {
-		
-		var i = parseInt(document.getElementById("count").value);
-		var year = document.getElementById("academicYear2").value;
-		var type=document.getElementById("type").value
-		var sancIntake=document.getElementById("sancIntake").value
-		//var admitStud=document.getElementById("admitStud").value
-		//alert(vision);
-		
-		var duration=document.getElementById("duration").value
-		//alert(mission);
-		var name=document.getElementById("name").value
-		//alert(po);
-		
-		var date=document.getElementById("date").value
-		//alert(ug);
-		var approve=document.getElementById("approve").value
-		var otherApproval=document.getElementById("otherApproval").value
-		var otherType=document.getElementById("otherApproval").value
-		//alert(approve);
-		
-		var temp;
-		if (type == 7) {
+		function getData1() {
 
-			temp=otherType;
-			//alert(temp);
-		} 
-		else{
-			temp=type;
+			var i = parseInt(document.getElementById("count").value);
+			var year = document.getElementById("academicYear2").value;
+			var type = document.getElementById("type").value
+			var sancIntake = document.getElementById("sancIntake").value
+			//var admitStud=document.getElementById("admitStud").value
+			//alert(vision);
+
+			var duration = document.getElementById("duration").value
+			//alert(mission);
+			var name = document.getElementById("name").value
+			//alert(po);
+
+			var date = document.getElementById("date").value
+			//alert(ug);
+			var approve = document.getElementById("approve").value
+			var otherApproval = document.getElementById("otherApproval").value
+			var otherType = document.getElementById("otherApproval").value
+			//alert(approve);
+
+			var temp;
+			if (type == 7) {
+
+				temp = otherType;
+				//alert(temp);
+			} else {
+				temp = type;
+			}
+			var x = temp.append()
+			var temp1;
+			if (approve == 7) {
+
+				temp1 = otherApproval;
+				//alert(temp);
+			} else {
+				temp1 = approve;
+			}
+
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add(
+					[ i + 1, year, temp(name), duration, sancIntake, date,
+							temp1
+
+					]).draw();
+
+			document.getElementById("count").value = i + 1;
 		}
-		var x=temp.append()
-		var temp1;
-		if (approve == 7) {
 
-			temp1=otherApproval;
-			//alert(temp);
-		} 
-		else{
-			temp1=approve;
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("approve").value
+			//alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
 		}
-	
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					year,
-					temp(name),
-					duration,
-					sancIntake,
-					date,
-					temp1
-					
-						 ])
-		.draw();
-		
-		
-		document.getElementById("count").value = i + 1;
-	}
 
-	
-function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approve").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+		function showForm1() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("type").value
+			//alert("qualType::"+qualType);
 
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else{
+			if (qualType == 7) {
+
+				document.getElementById("xyz").style = "visible"
+
+			} else {
+				document.getElementById("xyz").style = "display:none"
+			}
+
+		}
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
-		}
-	
-	}
-	
-function showForm1() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("type").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
-
-			document.getElementById("xyz").style = "visible"
-			
-				
-		} 
-		else{
 			document.getElementById("xyz").style = "display:none"
-		}
-	
-	}
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-		document.getElementById("xyz").style = "display:none"
-		
-	
-	}
 
-	
-	
+		}
 	</script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

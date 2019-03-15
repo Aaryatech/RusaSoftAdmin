@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body class=" " onload="hideText()">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +59,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -85,8 +85,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showProgDetail1"><button
-										type="button" class="btn btn-info">Back</button></a> 
+								<a href="${pageContext.request.contextPath}/showProgramList"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -96,14 +96,13 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/submitAddProgram"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
+													<i class="fa fa-home"></i> Program
 											</a></li>
 
 
@@ -115,23 +114,22 @@
 												<div>
 
 													<div class="col-xs-12">
-														
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Program Type
-																 <span class="text-danger">*</span>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="programType">Program
+																Type <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="lib_quolf" name="lib_quolf" class="form-control" required>
-															
-																	
-																		<c:forEach items="${quolfList}" var="quolf">
+																<select id="programType" name="programType"
+																	class="form-control" required>
+																	<c:forEach items="${progTypeList}" var="progTypeList">
 																		<c:choose>
-																			<c:when test="${quolf.qualificationId==editInst.qualificationId}">
-																			<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
+																			<c:when
+																				test="${progTypeList.programId==editProgram.programType}">
+																				<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
 																			</c:when>
 																			<c:otherwise>
-																			<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+																				<option value="${progTypeList.programId}">${progTypeList.programName}</option>
 
 																			</c:otherwise>
 
@@ -139,113 +137,224 @@
 
 																	</c:forEach>
 																</select>
-																
-																
+
+
 															</div>
 														</div>
-														
-														
+
+
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-															Duration(in months)<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="monthDuration">
+																Duration(in months)<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Duration(in months)" required
-																	>
+																<input type="number" class="form-control"
+																	id="monthDuration" value="${editProgram.monthDuration}"
+																	name="monthDuration" placeholder="Duration(in months)"
+																	required>
 															</div>
 														</div>
 
-
-
-														
-
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-															Name of Program <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="nameOfProgram">
+																Name of Program <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Name of Program " onchange="checkUnique(this.value,1)" required>
+																<input type="text" class="form-control"
+																	id="nameOfProgram" value="${editProgram.nameOfProgram}"
+																	name="nameOfProgram" placeholder="Name of Program "
+																	required>
 															</div>
 														</div>
-																
+
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Sanctioned Intake
-															<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="intake">Sanctioned
+																Intake <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control " id="lib_joiningDate" 	value="${editInst.joiningDate}"
-																	name="lib_joiningDate" placeholder=" Sanctioned Intake" required>
+																<input type="text" class="form-control " id="intake"
+																	value="${editProgram.sanctionalIntake}" name="intake"
+																	placeholder=" Sanctioned Intake" required>
 															</div>
 														</div>
-													
-													
+
+
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Date/Year of Introduction
-															 <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="date">Date/Year
+																of Introduction <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${editInst.realivingDate}"
-																	name="relieving_date"  required>
+																<input type="text" class="form-control datepicker"
+																	id="date" value="${editProgram.dateOfIntroduction}"
+																	name="date" placeholder="Date/Year of Introduction"
+																	required>
 															</div>
 														</div>
-
-													</div>
-
-												</div>
-												
-												
-												
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Approved By
-																 <span class="text-danger">*</span>
+														<c:set var="findOther" value="0"></c:set>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="approvedBy">Approved
+																By <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="approveValue" name="approveValue"class="form-control"  onchange="showExtraField()"  required>
-															
-																		
-								<option value="BOS/AC">BOS/AC</option>
-															<option value="Industry">Industry</option>
-															<option value="AICTE">AICTE</option>
-															<option value="NCTE">NCTE</option>
-															<option value="MCI">MCI</option>
-															<option value="DCI">DCI</option>
-															<option value="PCI">PCI</option>
-															<option value="7">Any Other</option>
-						
+																<select id="approvedBy" name="approvedBy"
+																	class="form-control" onchange="showExtraField()"
+																	required>
+
+																	<c:choose>
+																		<c:when test="${editProgram.programId>0}">
+
+																			<c:choose>
+																				<c:when test="${editProgram.approvedBy eq 'BOS/AC'}">
+																					<option value="BOS/AC" selected>BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:when
+																					test="${editProgram.approvedBy eq 'Industry'}">
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry" selected>Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:when test="${editProgram.approvedBy eq 'AICTE'}">
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE" selected>AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:when test="${editProgram.approvedBy eq 'NCTE'}">
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE" selected>NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:when test="${editProgram.approvedBy eq 'MCI'}">
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI" selected>MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:when test="${editProgram.approvedBy eq 'DCI'}">
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI" selected>DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:when test="${editProgram.approvedBy eq 'PCI'}">
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI" selected>PCI</option>
+																					<option value="7">Any Other</option>
+																				</c:when>
+																				<c:otherwise>
+
+																					<option value="BOS/AC">BOS/AC</option>
+																					<option value="Industry">Industry</option>
+																					<option value="AICTE">AICTE</option>
+																					<option value="NCTE">NCTE</option>
+																					<option value="MCI">MCI</option>
+																					<option value="DCI">DCI</option>
+																					<option value="PCI">PCI</option>
+																					<option value="7" selected>Any Other</option>
+																					<c:set var="findOther" value="1"></c:set>
+
+																				</c:otherwise>
+
+																			</c:choose>
+																		</c:when>
+																		<c:otherwise>
+																			<option value="BOS/AC">BOS/AC</option>
+																			<option value="Industry">Industry</option>
+																			<option value="AICTE">AICTE</option>
+																			<option value="NCTE">NCTE</option>
+																			<option value="MCI">MCI</option>
+																			<option value="DCI">DCI</option>
+																			<option value="PCI">PCI</option>
+																			<option value="7">Any Other</option>
+																			 
+																		</c:otherwise>
+																	</c:choose>
 																</select>
-																
-																
-															</div>
-														</div>
-														
-															<div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="page_order">
-														Approved By <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="	Approved By " onchange="checkUnique(this.value,1)" required>
+
+
 															</div>
 														</div>
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-											  <div class="form-group">
+														<div class="form-group" id="abc">
+															<label class="control-label col-sm-2"
+																for="otherApprovedBy"> Approved By <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control"
+																	id="otherApprovedBy" value="${editInst.contactNo}"
+																	name="otherApprovedBy" placeholder="Approved By ">
+															</div>
+														</div>
+
+														<c:choose>
+															<c:when test="${editProgram.programId>0}">
+																<input type="hidden" id="programId" name="programId"
+																	value="${editProgram.programId}">
+															</c:when>
+															<c:otherwise>
+																<input type="hidden" id="programId" name="programId"
+																	value="0">
+															</c:otherwise>
+														</c:choose>
+
+														<input type="hidden" id="is_view" name="is_view" value="0">
+														
+														<input type="hidden" id="findOtherName" name="findOtherName" value="${findOther}">
+														
+														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Add"> <input
+																	type="submit" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
 
 
-												<div class="clearfix"></div>
+
+
+													</div>
+													<div class="clearfix"></div>
+												</div>
 
 											</div>
 
@@ -267,122 +376,40 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-<script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+	<script type="text/javascript">
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
 		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
-		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
-		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
+	</script>
 
-		ajax : 'true',
+	<script type="text/javascript">
+		function showExtraField() {
 
-	}, function(data) {
-		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
+			var qualType = document.getElementById("approvedBy").value
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
 			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
-			}
+
 		}
-	});
-}
 
-
-
-</script>
-
-<script type="text/javascript">
-
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
-
-			document.getElementById("abc").style = "visible"
+		function hideText() {
+			var findOtherName = document.getElementById("findOtherName").value;
 			
+			if(findOtherName==1){
+				document.getElementById("abc").style = "visible"
+			}else{
 				
-		} 
-		else{
-			document.getElementById("abc").style = "display:none"
+				document.getElementById("abc").style = "display:none"
+			}
+			
+
 		}
-	
-	}
-	
-
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	
-	
-	}
-
-</script>
+	</script>
 
 
 

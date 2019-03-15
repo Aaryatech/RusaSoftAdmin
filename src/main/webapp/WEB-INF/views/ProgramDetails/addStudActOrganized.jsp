@@ -391,11 +391,11 @@
 
 
 												<c:choose>
-													<c:when test="${editProgramActivity.studentActivityId!=0}">
+													<c:when test="${editProgramActivity.studentActivityId>0}">
 														<input type="hidden" id="activityId" name="activityId"
 															value="${editProgramActivity.studentActivityId}">
 													</c:when>
-													<c:otherwise>
+													<c:otherwise> 
 														<input type="hidden" id="activityId" name="activityId"
 															value="0">
 													</c:otherwise>
