@@ -24,6 +24,10 @@
 <c:url value="/deleteProgramPo" var="deleteProgramPo"></c:url>
 <c:url value="/editProgramPo" var="editProgramPo"></c:url>
 
+<c:url value="/saveProgramPso" var="saveProgramPso"></c:url>
+<c:url value="/deleteProgramPso" var="deleteProgramPso"></c:url>
+<c:url value="/editProgramPso" var="editProgramPso"></c:url>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 </head>
@@ -266,6 +270,48 @@
 
 												</div>
 
+												<!-- <div class="col-xs-12">
+													<div class="table-responsive">
+														<table class="table table-bordered">
+															<thead>
+																<tr>
+																	<th>#</th>
+																	<th>First Name</th>
+																	<th>Last Name</th>
+																	<th>Username</th>
+																	<th>Email</th>
+																	<th>Contact</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<th scope="row">1</th>
+																	<td>Mark</td>
+																	<td>Otto</td>
+																	<td>@mdo</td>
+																	<td>first.last@example.com</td>
+																	<td>+1-234-567-890</td>
+																</tr>
+																<tr>
+																	<th scope="row">2</th>
+																	<td>Jacob</td>
+																	<td>Thornton</td>
+																	<td>@fat</td>
+																	<td>first.last@example.com</td>
+																	<td>+1-234-567-890</td>
+																</tr>
+																<tr>
+																	<th scope="row">3</th>
+																	<td colspan="2">Larry the Bird</td>
+																	<td>@twitter</td>
+																	<td>first.last@example.com</td>
+																	<td>+1-234-567-890</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div> -->
+
 											</div>
 
 
@@ -315,6 +361,7 @@
 												</div>
 											</form>
 											<!-- 		</form>			 -->
+											<br>
 
 											<div align="center" id="loader2" style="display: none;">
 												<img
@@ -479,9 +526,9 @@
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
 												<div class="row">
-													<input type="hidden" id="poId" name="poId"
-														value="0"> <label class="col-sm-2 text-left"
-														for="poText"> PO<span class="text-danger">*</span>
+													<input type="hidden" id="poId" name="poId" value="0">
+													<label class="col-sm-2 text-left" for="poText"> PO<span
+														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="poText"
@@ -569,19 +616,18 @@
 
 											<!-- 	<form action="" method="post">		 -->
 											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/submitProgramOutcome"
-												method="post" name="submitProgramMission"
-												id="submitProgramMission"
+												action="${pageContext.request.contextPath}/#" method="post"
+												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
 												<div class="row">
 
-
-													<label class="col-sm-2 text-left" for="hh"> PSO<span
-														class="text-danger">*</span>
+													<input type="hidden" id="psoId" name="psoId" value="0">
+													<label class="col-sm-2 text-left" for="psoText">
+														PSO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
+														<input type="text" class="form-control" id="psoText"
+															name="psoText" placeholder="Program Specific Outcome"
 															required>
 													</div>
 												</div>
@@ -589,21 +635,29 @@
 												<br />
 												<div class="row">
 
-													<label class="col-sm-2 text-left" for="hh">
+													<label class="col-sm-2 text-left" for="psoRemark">
 														Remark(If Any) </label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
-															required>
+														<input type="text" class="form-control" id="psoRemark"
+															name="psoRemark"
+															placeholder="Program Specific Outcome Remark" required>
 													</div>
 
 													<div class="col-sm-4">
 
-														<input type="submit" class="btn btn-info" value="Add">
+														<input type="button" onclick="saveProgramPso()"
+															class="btn btn-info" value="Add">
 													</div>
 												</div>
 											</form>
 											<!-- 		</form>			 -->
+											<br>
+											<div align="center" id="loader5" style="display: none;">
+												<img
+													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+													style="width: 50px; height: 50px;">
+											</div>
+
 											<div class="row">
 
 												<div class="col-xs-12">
@@ -612,13 +666,35 @@
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
-																<th width="10%">Sr No</th>
+																<th width="60%">Sr No</th>
 																<th>PSO</th>
-																<th width="10%">Action</th>
+																<th>Remark</th>
+																<th width="60%">Action</th>
 
 															</tr>
 														</thead>
+														<tbody>
+															<c:forEach items="${programSpeceficOutcomeList}"
+																var="list" varStatus="count">
+																<tr>
 
+																	<td>${count.index+1}</td>
+																	<td>${list.psoText}</td>
+																	<td>${list.psoRemark}</td>
+																	<td><a href="#"
+																		onclick="editProgramPso(${list.psoId})"><span
+																			class="glyphicon glyphicon-edit" title="Edit"
+																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																		<a href="#" onclick="deleteProgramPso(${list.psoId})"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																			class="glyphicon glyphicon-remove"></span></a></td>
+																</tr>
+															</c:forEach>
+
+														</tbody>
 
 
 													</table>
@@ -738,7 +814,7 @@
 					$("#loader1").hide();
 					  
 					var dataTable = $('#example-1').DataTable();
-					
+					 
 					for(var i=0 ; i<data.programVissionList.length ;i++){
 						
 						 
@@ -1160,6 +1236,118 @@
 
 		}
   
+	</script>
+
+	<script type="text/javascript">
+		function saveProgramPso() {
+
+			var psoText = document.getElementById("psoText").value;
+			var psoRemark = document
+					.getElementById("psoRemark").value;
+			var programId = document.getElementById("programId").value;
+			var psoId = document.getElementById("psoId").value;
+			
+			if (psoText != "") {
+				$('#example-4 td').remove();
+				$("#loader5").show();
+				$.getJSON('${saveProgramPso}',
+
+				{
+					psoText : psoText,
+					psoRemark : psoRemark,
+					programId : programId,
+					psoId : psoId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader5").hide();
+					  
+					var dataTable = $('#example-4').DataTable();
+					
+					for(var i=0 ; i<data.programSpeceficOutcomeList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramPso('+data.programSpeceficOutcomeList[i].psoId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramPso('+data.programSpeceficOutcomeList[i].psoId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programSpeceficOutcomeList[i].psoText, data.programSpeceficOutcomeList[i].psoRemark, acButton ])
+								.draw();
+					}
+					 document.getElementById("psoId").value=0;
+					 document.getElementById("psoText").value="";
+					 document.getElementById("psoRemark").value="";
+				});
+
+			} else {
+				alert("Enter Specefic Program Outcome ");
+			}
+
+		}
+		
+		function deleteProgramPso(psoId) {
+
+			var programId = document.getElementById("programId").value;
+				$('#example-4 td').remove();
+				$("#loader5").show();
+				
+				$.getJSON('${deleteProgramPso}',
+
+				{
+					psoId : psoId, 
+					programId : programId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader5").hide();
+					  
+					var dataTable = $('#example-4').DataTable();
+					
+					for(var i=0 ; i<data.programSpeceficOutcomeList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramPso('+data.programSpeceficOutcomeList[i].psoId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramPso('+data.programSpeceficOutcomeList[i].psoId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programSpeceficOutcomeList[i].psoText, data.programSpeceficOutcomeList[i].psoRemark, acButton ])
+								.draw();
+					}
+					 
+				});
+
+			 
+
+		}
+		
+		function editProgramPso(psoId) {
+			$("#loader5").show();
+				$.getJSON('${editProgramPso}',
+
+				{
+					psoId : psoId, 
+					ajax : 'true'
+
+				}, function(data) {
+					$("#loader5").hide();
+					document.getElementById("psoId").value=data.psoId;
+					 document.getElementById("psoText").value=data.psoText;
+					 document.getElementById("psoRemark").value=data.psoRemark;
+					 
+				});
+
+			 
+
+		}
+ 
 	</script>
 
 	<script type="text/javascript">

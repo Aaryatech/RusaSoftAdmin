@@ -1382,4 +1382,136 @@ public class StudentActivityController {
 
 	}
 	
+	@RequestMapping(value = "/saveProgramPso", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse saveProgramPso(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			Date date = new Date();
+
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String psoText = request.getParameter("psoText");
+			String psoRemark = request.getParameter("psoRemark");
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int psoId = Integer.parseInt(request.getParameter("psoId"));
+			
+			ProgramSpeceficOutcome programSpeceficOutcome = new ProgramSpeceficOutcome();
+
+			programSpeceficOutcome.setPsoId(psoId);
+			programSpeceficOutcome.setDelStatus(1);
+			programSpeceficOutcome.setIsActive(1);
+			programSpeceficOutcome.setPsoRemark(psoRemark);
+			programSpeceficOutcome.setPsoText(psoText);
+			programSpeceficOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
+			programSpeceficOutcome.setMakerUserId(userObj.getUserId());
+			programSpeceficOutcome.setMakerdatetime(sf.format(date));
+			programSpeceficOutcome.setProgramId(programId);
+
+			ProgramSpeceficOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramSpeceficOutcome", programSpeceficOutcome,
+					ProgramSpeceficOutcome.class);
+
+			if (res == null) {
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
+			} else {
+				info.setError(false);
+				info.setMsg("saved");
+				programDetailSaveResponse.setInfo(info);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramSpeceficOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList", map,
+						ProgramSpeceficOutcome[].class);
+				List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/deleteProgramPso", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse deleteProgramPso(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			 
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int psoId = Integer.parseInt(request.getParameter("psoId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("psoId", psoId);
+				info  = restTemplate.postForObject(Constants.url + "/deleteProgramSpeceficOutcome", map,
+						Info.class);
+				programDetailSaveResponse.setInfo(info);
+				
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramSpeceficOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList", map,
+						ProgramSpeceficOutcome[].class);
+				List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
+			 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/editProgramPso", method = RequestMethod.GET)
+	public @ResponseBody ProgramSpeceficOutcome editProgramPso(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramSpeceficOutcome programSpeceficOutcome = new ProgramSpeceficOutcome();
+	 
+		try {
+
+			  
+			int psoId = Integer.parseInt(request.getParameter("psoId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("psoId", psoId);
+				programSpeceficOutcome  = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeByPsoId", map,
+						ProgramSpeceficOutcome.class);
+				 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			 
+
+		}
+
+		return programSpeceficOutcome;
+
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.ats.rusasoft.model;
 import java.util.List;
 
 import com.ats.rusasoft.master.ProgramMission;
+import com.ats.rusasoft.master.ProgramSpeceficOutcome;
 
 public class ProgramDetailSaveResponse {
 	
@@ -11,6 +12,7 @@ public class ProgramDetailSaveResponse {
 	List<ProgramMission> programMissionList;
 	List<ProgramEducationObjective>  programEducationObjectiveList;
 	List<ProgramOutcome> programOutcomeList;
+	List<ProgramSpeceficOutcome> programSpeceficOutcomeList;
 	
 	public Info getInfo() {
 		return info;
@@ -42,11 +44,18 @@ public class ProgramDetailSaveResponse {
 	public void setProgramOutcomeList(List<ProgramOutcome> programOutcomeList) {
 		this.programOutcomeList = programOutcomeList;
 	}
+	public List<ProgramSpeceficOutcome> getProgramSpeceficOutcomeList() {
+		return programSpeceficOutcomeList;
+	}
+	public void setProgramSpeceficOutcomeList(List<ProgramSpeceficOutcome> programSpeceficOutcomeList) {
+		this.programSpeceficOutcomeList = programSpeceficOutcomeList;
+	}
 	@Override
 	public String toString() {
 		return "ProgramDetailSaveResponse [info=" + info + ", programVissionList=" + programVissionList
 				+ ", programMissionList=" + programMissionList + ", programEducationObjectiveList="
-				+ programEducationObjectiveList + ", programOutcomeList=" + programOutcomeList + "]";
+				+ programEducationObjectiveList + ", programOutcomeList=" + programOutcomeList
+				+ ", programSpeceficOutcomeList=" + programSpeceficOutcomeList + "]";
 	}
 	 
 	
