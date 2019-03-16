@@ -85,9 +85,11 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<a
-									href="${pageContext.request.contextPath}/showConsultancyDetailYes"><button
-										type="button" class="btn btn-info">Add</button></a>
+								<c:if test="${isAdd==1}">
+									<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
+											type="button" class="btn btn-info">Add</button></a>
+								</c:if>
+
 
 							</div>
 
@@ -99,43 +101,79 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
+													<i class="fa fa-home"></i> Consultancy
 											</a></li>
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										<!-- 	<div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
-													<table id="example-1"
-														class="table table-striped dt-responsive display">
-														<thead>
-															<tr>
-																<th>Sr No</th>
-																<th>Year</th>
-																<th>Nature of Consultancy</th>
-																<th>Sponsoring Industry</th>
-																<th>Consultancy Amount</th>
-																<th>Consultancy Period</th>
-																<th>Project Completed</th>
-																<th>Action</th>
-															</tr>
-														</thead>
+										<div>
+											<table id="example-1"
+												class="table table-striped dt-responsive display">
+												<thead>
+													<tr>
+														<th>Sr No</th>
+														<th>Nature of Consultancy</th>
+														<th>Sponsoring Industry</th>
+														<th>Consultancy Amount</th>
+														<th>Consultancy Period</th>
+														<th>Project Completed</th>
+														<th>Action</th>
+													</tr>
+												</thead>
 
-													</table>
-												</div>
+												<tbody>
+													<c:forEach items="${list}" var="list" varStatus="count">
+														<tr>
 
-											</div>
+															<td>${count.index+1}</td>
+															<td>${list.consNature}</td>
+															<td>${list.consSponsor}</td>
+															<td>${list.consAmount}</td>
+															<td>${list.consPeriod}</td>
+															<td><c:set value="-" var="isCompleted"></c:set> <c:choose>
+																	<c:when test="${list.isConsCompleted==1}">
+																		<c:set value="Yes" var="isCompleted"></c:set>
+																	</c:when>
+																	<c:otherwise>
+																		<c:set value="No" var="isCompleted"></c:set>
+																	</c:otherwise>
+																</c:choose>${isCompleted}</td>
 
 
+															<td><c:if test="${isEdit==1}">
+																	<a
+																		href="${pageContext.request.contextPath}/editStudentAttendActivity/${list.consId}"><span
+																		class="glyphicon glyphicon-edit" title="Edit"
+																		data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if> <c:if test="${isDelete==1}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteConsultancy/${list.consId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
+														</tr>
+													</c:forEach>
+
+												</tbody>
+
+											</table>
 										</div>
+
+										<!-- </div>
+
+
+										</div> -->
 									</form>
 								</div>
 

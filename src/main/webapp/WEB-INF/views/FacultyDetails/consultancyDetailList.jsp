@@ -86,7 +86,7 @@
 							<div class="actions panel_actions pull-right">
 
 								<a
-									href="${pageContext.request.contextPath}/showConsultancyDetails"><button
+									href="${pageContext.request.contextPath}/showConsultancyList"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -98,14 +98,13 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/submitFacultyConsultancy"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
+													<i class="fa fa-home"></i> Consultancy
 											</a></li>
 
 										</ul>
@@ -113,16 +112,7 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-
-
-
-
-
-
-
-
-
-												<div class="form-group">
+												<!-- <div class="form-group">
 													<label class="control-label col-sm-2" for="smallheading">
 														Consultancy <span class="text-danger">*</span>
 													</label>
@@ -133,63 +123,63 @@
 															onclick="setConsultancy(this.value)" type="radio"
 															name="consultancy" id="consultancy" value="1">
 													</div>
-												</div>
+												</div> -->
 												<div id="abc">
 
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="page_name">Nature
+														<label class="control-label col-sm-2" for="nature">Nature
 															of Consultancy <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="nature"
 																placeholder="Nature of Consultancy" name="nature"
-																placeholder="" value="${page.pageName}">
+																placeholder="" value="${page.pageName}" required>
 
 														</div>
 													</div>
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="page_name">Sponsoring
+														<label class="control-label col-sm-2" for="sponser">Sponsoring
 															Agency/Industry <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="sponser"
 																placeholder="Sponsoring Agency/Industry" name="sponser"
-																placeholder="" value="${page.pageName}">
+																placeholder="" value="${page.pageName}" required>
 															<!-- </div> -->
 														</div>
 													</div>
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="page_name">Amount
+														<label class="control-label col-sm-2" for="amount">Amount
 															of Consultancy <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="amount"
 																placeholder="Amount of Consultancy" name="amount"
-																placeholder="" value="${page.pageName}">
+																placeholder="" value="${page.pageName}" required>
 															<!-- </div> -->
 														</div>
 													</div>
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="page_name">Consultancy
+														<label class="control-label col-sm-2" for="conPeriod">Consultancy
 															Period<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="conPeriod"
 																placeholder="Consultancy Period" name="conPeriod"
-																placeholder="" value="${page.pageName}">
+																placeholder="" value="${page.pageName}" required>
 														</div>
 
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">Project
+														<label class="control-label col-sm-2" for="projComp">Project
 															Completed<span class="text-danger">*</span>
 														</label>
 
@@ -200,7 +190,17 @@
 														</div>
 													</div>
 
-
+													<input type="hidden" id="is_view" name="is_view" value="0">
+													<c:choose>
+														<c:when test="${editProgramActivity.studentActivityId>0}">
+															<input type="hidden" id="consId" name="consId"
+																value="${editProgramActivity.studentActivityId}">
+														</c:when>
+														<c:otherwise>
+															<input type="hidden" id="consId" name="consId"
+																value="0">
+														</c:otherwise>
+													</c:choose>
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary"
@@ -279,7 +279,13 @@
 
 
 
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
 
+		}
+	</script>
 
 	<script type="text/javascript">
 		function getData() {
