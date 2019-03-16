@@ -987,4 +987,399 @@ public class StudentActivityController {
 
 	}
 	
+	@RequestMapping(value = "/saveProgramMission", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse saveProgramMission(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			Date date = new Date();
+
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String programMission = request.getParameter("programMission");
+			String programMissionRemark = request.getParameter("programMissionRemark");
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int programMissionId = Integer.parseInt(request.getParameter("programMissionId"));
+			
+			ProgramMission save = new ProgramMission();
+
+			save.setMissionId(programMissionId);
+			save.setDelStatus(1);
+			save.setIsActive(1);
+			save.setMissionRemark(programMissionRemark);
+			save.setMissionText(programMission);
+			save.setInstituteId(userObj.getGetData().getUserInstituteId());
+			save.setMakerUserId(userObj.getUserId());
+			save.setMakerdatetime(sf.format(date));
+			save.setProgramId(programId);
+
+			ProgramMission res = restTemplate.postForObject(Constants.url + "/saveProgramMission", save,
+					ProgramMission.class);
+
+			if (res == null) {
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
+			} else {
+				info.setError(false);
+				info.setMsg("saved");
+				programDetailSaveResponse.setInfo(info);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramMission[] arry = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
+						ProgramMission[].class);
+				List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramMissionList(list);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/deleteProgramMission", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse deleteProgramMission(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			 
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int missionId = Integer.parseInt(request.getParameter("missionId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("missionId", missionId);
+				info  = restTemplate.postForObject(Constants.url + "/deleteProgramMission", map,
+						Info.class);
+				programDetailSaveResponse.setInfo(info);
+				
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramMission[] arry = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
+						ProgramMission[].class);
+				List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramMissionList(list);
+			 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/editProgramMission", method = RequestMethod.GET)
+	public @ResponseBody ProgramMission editProgramMission(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramMission programMission = new ProgramMission();
+	 
+		try {
+
+			  
+			int missionId = Integer.parseInt(request.getParameter("missionId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("missionId", missionId);
+				programMission  = restTemplate.postForObject(Constants.url + "/getProgramMissionByMissionId", map,
+						ProgramMission.class);
+				 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			 
+
+		}
+
+		return programMission;
+
+	}
+	
+	@RequestMapping(value = "/saveProgramPeo", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse saveProgramPeo(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			Date date = new Date();
+
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String peoText = request.getParameter("peoText");
+			String peoRemark = request.getParameter("peoRemark");
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int programPeoId = Integer.parseInt(request.getParameter("programPeoId"));
+			
+			ProgramEducationObjective programEducationObjective = new ProgramEducationObjective();
+
+			programEducationObjective.setPeoId(programPeoId);
+			programEducationObjective.setDelStatus(1);
+			programEducationObjective.setIsActive(1);
+			programEducationObjective.setPeoRemark(peoRemark);
+			programEducationObjective.setPeoText(peoText);
+			programEducationObjective.setInstituteId(userObj.getGetData().getUserInstituteId());
+			programEducationObjective.setMakerUserId(userObj.getUserId());
+			programEducationObjective.setMakerdatetime(sf.format(date));
+			programEducationObjective.setProgramId(programId);
+
+			ProgramEducationObjective res = restTemplate.postForObject(Constants.url + "/saveProgramEducationObjective", programEducationObjective,
+					ProgramEducationObjective.class);
+
+			if (res == null) {
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
+			} else {
+				info.setError(false);
+				info.setMsg("saved");
+				programDetailSaveResponse.setInfo(info);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramEducationObjective[] arry = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveList", map,
+						ProgramEducationObjective[].class);
+				List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramEducationObjectiveList(list);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/deleteProgramPeo", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse deleteProgramPeo(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			 
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int peoId = Integer.parseInt(request.getParameter("peoId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("peoId", peoId);
+				info  = restTemplate.postForObject(Constants.url + "/deleteProgramEducationObjective", map,
+						Info.class);
+				programDetailSaveResponse.setInfo(info);
+				
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramEducationObjective[] arry = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveList", map,
+						ProgramEducationObjective[].class);
+				List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramEducationObjectiveList(list);
+			 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/editProgramPeo", method = RequestMethod.GET)
+	public @ResponseBody ProgramEducationObjective editProgramPeo(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramEducationObjective programEducationObjective = new ProgramEducationObjective();
+	 
+		try {
+
+			  
+			int peoId = Integer.parseInt(request.getParameter("peoId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("peoId", peoId);
+				programEducationObjective  = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveByPeoId", map,
+						ProgramEducationObjective.class);
+				 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			 
+
+		}
+
+		return programEducationObjective;
+
+	}
+	
+	@RequestMapping(value = "/saveProgramPo", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse saveProgramPo(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			Date date = new Date();
+
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String poText = request.getParameter("poText");
+			String poRemark = request.getParameter("poRemark");
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int poId = Integer.parseInt(request.getParameter("poId"));
+			ProgramOutcome programOutcome = new ProgramOutcome();
+
+			programOutcome.setPoId(poId);
+			programOutcome.setDelStatus(1);
+			programOutcome.setIsActive(1);
+			programOutcome.setPoRemark(poRemark);
+			programOutcome.setPoText(poText);
+			programOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
+			programOutcome.setMakerUserId(userObj.getUserId());
+			programOutcome.setMakerdatetime(sf.format(date));
+			programOutcome.setProgramId(programId);
+
+			ProgramOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramOutcome", programOutcome,
+					ProgramOutcome.class);
+
+			if (res == null) {
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
+			} else {
+				info.setError(false);
+				info.setMsg("saved");
+				programDetailSaveResponse.setInfo(info);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
+						ProgramOutcome[].class);
+				List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramOutcomeList(list);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/deleteProgramPo", method = RequestMethod.GET)
+	public @ResponseBody ProgramDetailSaveResponse deleteProgramPo(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
+		Info info = new Info();
+		try {
+
+			 
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			int poId = Integer.parseInt(request.getParameter("poId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("poId", poId);
+				info  = restTemplate.postForObject(Constants.url + "/deleteProgramOutcome", map,
+						Info.class);
+				programDetailSaveResponse.setInfo(info);
+				
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
+						ProgramOutcome[].class);
+				List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramOutcomeList(list);
+			 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+			programDetailSaveResponse.setInfo(info);
+
+		}
+
+		return programDetailSaveResponse;
+
+	}
+	
+	@RequestMapping(value = "/editProgramPo", method = RequestMethod.GET)
+	public @ResponseBody ProgramOutcome editProgramPo(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ProgramOutcome programOutcome = new ProgramOutcome();
+	 
+		try {
+
+			  
+			int poId = Integer.parseInt(request.getParameter("poId"));
+ 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
+				map.add("poId", poId);
+				programOutcome  = restTemplate.postForObject(Constants.url + "/getProgramOutcomeByPoId", map,
+						ProgramOutcome.class);
+				 
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			 
+
+		}
+
+		return programOutcome;
+
+	}
+	
 }

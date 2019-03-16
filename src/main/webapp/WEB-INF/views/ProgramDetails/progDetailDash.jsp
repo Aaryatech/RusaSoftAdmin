@@ -11,6 +11,19 @@
 <c:url value="/saveProgramVission" var="saveProgramVission"></c:url>
 <c:url value="/deleteProgramVission" var="deleteProgramVission"></c:url>
 <c:url value="/editProgramVission" var="editProgramVission"></c:url>
+
+<c:url value="/saveProgramMission" var="saveProgramMission"></c:url>
+<c:url value="/deleteProgramMission" var="deleteProgramMission"></c:url>
+<c:url value="/editProgramMission" var="editProgramMission"></c:url>
+
+<c:url value="/saveProgramPeo" var="saveProgramPeo"></c:url>
+<c:url value="/deleteProgramPeo" var="deleteProgramPeo"></c:url>
+<c:url value="/editProgramPeo" var="editProgramPeo"></c:url>
+
+<c:url value="/saveProgramPo" var="saveProgramPo"></c:url>
+<c:url value="/deleteProgramPo" var="deleteProgramPo"></c:url>
+<c:url value="/editProgramPo" var="editProgramPo"></c:url>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 </head>
@@ -165,8 +178,8 @@
 
 												<div class="row">
 
-													<input type="hidden" id="programVissionId" name="programVissionId"
-														value="0"> <label
+													<input type="hidden" id="programVissionId"
+														name="programVissionId" value="0"> <label
 														class="col-sm-2 text-left" for="programVission">
 														Vision<span class="text-danger">*</span>
 													</label>
@@ -266,41 +279,49 @@
 
 											<!-- 	<form action="" method="post">		 -->
 											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/submitProgramMission"
-												method="post" name="submitProgramMission"
-												id="submitProgramMission"
+												action="${pageContext.request.contextPath}/#" method="post"
+												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Mission?');">
 												<div class="row">
 
-
-													<label class="col-sm-2 text-left" for="hh"> Mission<span
-														class="text-danger">*</span>
+													<input type="hidden" id="programMissionId"
+														name="programMissionId" value="0"> <label
+														class="col-sm-2 text-left" for="programMission">
+														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
-															required>
+														<input type="text" class="form-control"
+															id="programMission" name="programMission"
+															placeholder="Program Mission " required>
 													</div>
 												</div>
 
 												<br />
 												<div class="row">
 
-													<label class="col-sm-2 text-left" for="hh">
-														Remark(If Any) </label>
+													<label class="col-sm-2 text-left"
+														for="programMissionRemark"> Remark(If Any) </label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
-															required>
+														<input type="text" class="form-control"
+															id="programMissionRemark" name="programMissionRemark"
+															placeholder="Program Mission Remark">
 													</div>
 
 													<div class="col-sm-4">
 
-														<input type="submit" class="btn btn-info" value="Add">
+														<input type="button" onclick="saveProgramMission()"
+															class="btn btn-info" value="Add">
 													</div>
 												</div>
 											</form>
 											<!-- 		</form>			 -->
+
+											<div align="center" id="loader2" style="display: none;">
+												<img
+													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+													style="width: 50px; height: 50px;">
+											</div>
+
 											<div class="row">
 
 												<div class="col-xs-12">
@@ -309,12 +330,37 @@
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
-																<th width="10%">Sr No</th>
+																<th width="60%">Sr No</th>
 																<th>Mission</th>
-																<th width="10%">Action</th>
+																<th>Remark</th>
+																<th width="60%">Action</th>
 
 															</tr>
 														</thead>
+
+														<tbody>
+															<c:forEach items="${programMissionList}" var="list"
+																varStatus="count">
+																<tr>
+
+																	<td>${count.index+1}</td>
+																	<td>${list.missionText}</td>
+																	<td>${list.missionRemark}</td>
+																	<td><a href="#"
+																		onclick="editProgramMission(${list.missionId})"><span
+																			class="glyphicon glyphicon-edit" title="Edit"
+																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																		<a href="#"
+																		onclick="deleteProgramMission(${list.missionId})"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																			class="glyphicon glyphicon-remove"></span></a></td>
+																</tr>
+															</c:forEach>
+
+														</tbody>
 
 
 
@@ -332,19 +378,18 @@
 
 											<!-- 	<form action="" method="post">		 -->
 											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/submitProgramObjective"
-												method="post" name="submitProgramMission"
-												id="submitProgramMission"
+												action="${pageContext.request.contextPath}/#" method="post"
+												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Objective?');">
 												<div class="row">
 
-
-													<label class="col-sm-2 text-left" for="hh"> PEO<span
-														class="text-danger">*</span>
+													<input type="hidden" id="programPeoId" name="programPeoId"
+														value="0"> <label class="col-sm-2 text-left"
+														for="peoText"> PEO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
+														<input type="text" class="form-control" id="peoText"
+															name="peoText" placeholder="Program Education Objective"
 															required>
 													</div>
 												</div>
@@ -352,21 +397,28 @@
 												<br />
 												<div class="row">
 
-													<label class="col-sm-2 text-left" for="hh">
+													<label class="col-sm-2 text-left" for="peoRemark">
 														Remark(If Any) </label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
-															required>
+														<input type="text" class="form-control" id="peoRemark"
+															name="peoRemark"
+															placeholder="Program Education Objective Remark">
 													</div>
 
 													<div class="col-sm-4">
 
-														<input type="submit" class="btn btn-info" value="Add">
+														<input type="button" onclick="saveProgramPeo()"
+															class="btn btn-info" value="Add">
 													</div>
 												</div>
 											</form>
+											<br>
 											<!-- 		</form>			 -->
+											<div align="center" id="loader3" style="display: none;">
+												<img
+													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+													style="width: 50px; height: 50px;">
+											</div>
 											<div class="row">
 
 												<div class="col-xs-12">
@@ -375,12 +427,36 @@
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
-																<th width="10%">Sr No</th>
+																<th width="60%">Sr No</th>
 																<th>PEO</th>
-																<th width="10%">Action</th>
+																<th>Remark</th>
+																<th width="60%">Action</th>
 
 															</tr>
 														</thead>
+
+														<tbody>
+															<c:forEach items="${programEducationObjectiveList}"
+																var="list" varStatus="count">
+																<tr>
+
+																	<td>${count.index+1}</td>
+																	<td>${list.peoText}</td>
+																	<td>${list.peoRemark}</td>
+																	<td><a href="#"
+																		onclick="editProgramPeo(${list.peoId})"><span
+																			class="glyphicon glyphicon-edit" title="Edit"
+																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																		<a href="#" onclick="deleteProgramPeo(${list.peoId})"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																			class="glyphicon glyphicon-remove"></span></a></td>
+																</tr>
+															</c:forEach>
+
+														</tbody>
 
 
 
@@ -399,41 +475,46 @@
 
 											<!-- 	<form action="" method="post">		 -->
 											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/submitProgramOutcome"
-												method="post" name="submitProgramMission"
-												id="submitProgramMission"
+												action="${pageContext.request.contextPath}/#" method="post"
+												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
 												<div class="row">
-
-
-													<label class="col-sm-2 text-left" for="hh"> PO<span
-														class="text-danger">*</span>
+													<input type="hidden" id="poId" name="poId"
+														value="0"> <label class="col-sm-2 text-left"
+														for="poText"> PO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
-															required>
+														<input type="text" class="form-control" id="poText"
+															name="poText" placeholder="Program Outcome Text" required>
 													</div>
 												</div>
 
 												<br />
 												<div class="row">
 
-													<label class="col-sm-2 text-left" for="hh">
+													<label class="col-sm-2 text-left" for="poRemark">
 														Remark(If Any) </label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="hh" name="hh" placeholder="Another Scheme Name"
-															required>
+														<input type="text" class="form-control" id="poRemark"
+															name="poRemark" placeholder="Program Outcome Remark">
 													</div>
 
 													<div class="col-sm-4">
 
-														<input type="submit" class="btn btn-info" value="Add">
+														<input type="button" onclick="saveProgramPo()"
+															class="btn btn-info" value="Add">
 													</div>
 												</div>
 												<!-- 		</form>			 -->
 											</form>
+											<br>
+
+											<div align="center" id="loader4" style="display: none;">
+												<img
+													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+													style="width: 50px; height: 50px;">
+											</div>
+
 											<div class="row">
 
 												<div class="col-xs-12">
@@ -442,15 +523,36 @@
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
-																<th width="10%">Sr No</th>
+																<th width="60%">Sr No</th>
 																<th>PO</th>
-																<th width="10%">Action</th>
+																<th>Remark</th>
+																<th width="60%">Action</th>
 
 															</tr>
 														</thead>
 
+														<tbody>
+															<c:forEach items="${programOutcomeList}" var="list"
+																varStatus="count">
+																<tr>
 
+																	<td>${count.index+1}</td>
+																	<td>${list.poText}</td>
+																	<td>${list.poRemark}</td>
+																	<td><a href="#"
+																		onclick="editProgramPo(${list.poId})"><span
+																			class="glyphicon glyphicon-edit" title="Edit"
+																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
+																		<a href="#" onclick="deleteProgramPo(${list.poId})"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																			class="glyphicon glyphicon-remove"></span></a></td>
+																</tr>
+															</c:forEach>
+
+														</tbody>
 													</table>
 
 												</div>
@@ -719,107 +821,346 @@
 			 
 
 		}
-		
-		/* function exportExcel() {
-
-			var catId = $("#ind_cat").val();
-			var typeId = $("#indent_type").val();
-			//alert(catId);
-			$
-					.getJSON(
-							'${exportExcelforIndent}',
-
-							{
-								catId : catId,
-								typeId : typeId,
-								ajax : 'true'
-
-							},
-							function(data) {
-								//alert(data);
-								if (data == "") {
-									alert("No records found !!");
-
-								}
-
-								$('#table1 td').remove();
-								$
-										.each(
-												data,
-												function(key, trans) {
-													//alert(itemList.indDetailId);
-
-													 
-
-														var tr = $('<tr></tr>');
-														tr
-																.append($(
-																		'<td class="col-sm-1" ></td>')
-																		.html(
-																				key + 1));
-														tr
-																.append($(
-																		'<td class="col-md-1" ></td>')
-																		.html(
-																				trans.itemCode));
-														tr
-																.append($(
-																		'<td class="col-md-4" ></td>')
-																		.html(
-																				trans.itemName));
-														tr
-																.append($(
-																		'<td class="col-md-1" ></td>')
-																		.html(
-																				trans.uom));
-														tr
-																.append($(
-																		'<td class="col-md-1" ></td>')
-																		.html(
-																				trans.curStock));
-
-														tr
-																.append($(
-																		'<td class="col-md-1" ></td>')
-																		.html(
-																				trans.qty));
-														tr
-																.append($(
-																		'<td class="col-md-1" ></td>')
-																		.html(
-																				trans.date));
-
-														tr
-																.append($(
-																		'<td class="col-md-1" style="text-align: center;"></td>')
-																		.html(
-																				"<a href='#' class='action_btn'onclick=deleteIndentItem("
-																						+ trans.itemId
-																						+ ","
-																						+ key
-																						+ ")><abbr title='Delete'><i class='fa fa-trash-o  fa-lg'></i></abbr></a>"));
-
-														$('#table1 tbody')
-																.append(tr);
-														$('#ind_cat')
-																.prop(
-																		'disabled',
-																		true)
-																.trigger(
-																		"chosen:updated");
-
-														document
-																.getElementById("catId").value = catId;
-														document
-																.getElementById("submitt").disabled = false;
-													 
-
-												})
-
-							});
-		} */
+		 
 	</script>
 
+	<script type="text/javascript">
+		function saveProgramMission() {
+
+			var programMission = document.getElementById("programMission").value;
+			var programMissionRemark = document
+					.getElementById("programMissionRemark").value;
+			var programId = document.getElementById("programId").value;
+			var programMissionId = document.getElementById("programMissionId").value;
+			
+			if (programMission != "") {
+				$('#example-2 td').remove();
+				$("#loader2").show();
+				$.getJSON('${saveProgramMission}',
+
+				{
+					programMission : programMission,
+					programMissionRemark : programMissionRemark,
+					programId : programId,
+					programMissionId : programMissionId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader2").hide();
+					  
+					var dataTable = $('#example-2').DataTable();
+					
+					for(var i=0 ; i<data.programMissionList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramMission('+data.programMissionList[i].missionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramMission('+data.programMissionList[i].missionId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programMissionList[i].missionText, data.programMissionList[i].missionRemark, acButton ])
+								.draw();
+					}
+					 document.getElementById("programMissionId").value=0;
+					 document.getElementById("programMissionRemark").value="";
+					 document.getElementById("programMission").value="";
+				});
+
+			} else {
+				alert("Enter Program Mission ");
+			}
+
+		}
+		
+		function deleteProgramMission(missionId) {
+
+			var programId = document.getElementById("programId").value;
+				$('#example-2 td').remove();
+				$("#loader2").show();
+				
+				$.getJSON('${deleteProgramMission}',
+
+				{
+					missionId : missionId, 
+					programId : programId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader2").hide();
+					  
+					var dataTable = $('#example-2').DataTable();
+					
+					for(var i=0 ; i<data.programMissionList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramMission('+data.programMissionList[i].missionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramMission('+data.programMissionList[i].missionId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programMissionList[i].missionText, data.programMissionList[i].missionRemark, acButton ])
+								.draw();
+					}
+					 
+				});
+
+			 
+
+		}
+		
+		function editProgramMission(missionId) {
+			$("#loader2").show();
+				$.getJSON('${editProgramMission}',
+
+				{
+					missionId : missionId, 
+					ajax : 'true'
+
+				}, function(data) {
+					$("#loader2").hide();
+					document.getElementById("programMissionId").value=data.missionId;
+					 document.getElementById("programMission").value=data.missionText;
+					 document.getElementById("programMissionRemark").value=data.missionRemark;
+					 
+				});
+
+			 
+
+		}
+		 
+		 
+	</script>
+
+	<script type="text/javascript">
+		function saveProgramPeo() {
+
+			var peoText = document.getElementById("peoText").value;
+			var peoRemark = document
+					.getElementById("peoRemark").value;
+			var programId = document.getElementById("programId").value;
+			var programPeoId = document.getElementById("programPeoId").value;
+			
+			if (peoText != "") {
+				$('#example-5 td').remove();
+				$("#loader3").show();
+				$.getJSON('${saveProgramPeo}',
+
+				{
+					peoText : peoText,
+					peoRemark : peoRemark,
+					programId : programId,
+					programPeoId : programPeoId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader3").hide();
+					  
+					var dataTable = $('#example-5').DataTable();
+					
+					for(var i=0 ; i<data.programEducationObjectiveList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramPeo('+data.programEducationObjectiveList[i].peoId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramPeo('+data.programEducationObjectiveList[i].peoId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programEducationObjectiveList[i].peoText, data.programEducationObjectiveList[i].peoRemark, acButton ])
+								.draw();
+					}
+					 document.getElementById("programPeoId").value=0;
+					 document.getElementById("peoText").value="";
+					 document.getElementById("peoRemark").value="";
+				});
+
+			} else {
+				alert("Enter Program Education Object ");
+			}
+
+		}
+		
+		function deleteProgramPeo(peoId) {
+
+			var programId = document.getElementById("programId").value;
+				$('#example-5 td').remove();
+				$("#loader3").show();
+				
+				$.getJSON('${deleteProgramPeo}',
+
+				{
+					peoId : peoId, 
+					programId : programId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader3").hide();
+					  
+					var dataTable = $('#example-5').DataTable();
+					
+					for(var i=0 ; i<data.programEducationObjectiveList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramPeo('+data.programEducationObjectiveList[i].peoId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramPeo('+data.programEducationObjectiveList[i].peoId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programEducationObjectiveList[i].peoText, data.programEducationObjectiveList[i].peoRemark, acButton ])
+								.draw();
+					}
+					 
+				});
+
+			 
+
+		}
+		
+		function editProgramPeo(peoId) {
+			$("#loader3").show();
+				$.getJSON('${editProgramPeo}',
+
+				{
+					peoId : peoId, 
+					ajax : 'true'
+
+				}, function(data) {
+					$("#loader3").hide();
+					document.getElementById("programPeoId").value=data.peoId;
+					 document.getElementById("peoText").value=data.peoText;
+					 document.getElementById("peoRemark").value=data.peoRemark;
+					 
+				});
+
+			 
+
+		}
+		
+  
+	</script>
+
+	<script type="text/javascript">
+		function saveProgramPo() {
+
+			var poText = document.getElementById("poText").value;
+			var poRemark = document
+					.getElementById("poRemark").value;
+			var programId = document.getElementById("programId").value;
+			var poId = document.getElementById("poId").value;
+			
+			if (poText != "") {
+				$('#example-3 td').remove();
+				$("#loader4").show();
+				$.getJSON('${saveProgramPo}',
+
+				{
+					poText : poText,
+					poRemark : poRemark,
+					programId : programId,
+					poId : poId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader4").hide();
+					  
+					var dataTable = $('#example-3').DataTable();
+					
+					for(var i=0 ; i<data.programOutcomeList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramPo('+data.programOutcomeList[i].poId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramPo('+data.programOutcomeList[i].poId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programOutcomeList[i].poText, data.programOutcomeList[i].poRemark, acButton ])
+								.draw();
+					}
+					 document.getElementById("poId").value=0;
+					 document.getElementById("poText").value="";
+					 document.getElementById("poRemark").value="";
+				});
+
+			} else {
+				alert("Enter Program Outcome ");
+			}
+
+		}
+ 
+		function deleteProgramPo(poId) {
+
+			var programId = document.getElementById("programId").value;
+				$('#example-3 td').remove();
+				$("#loader4").show();
+				
+				$.getJSON('${deleteProgramPo}',
+
+				{
+					poId : poId, 
+					programId : programId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader4").hide();
+					  
+					var dataTable = $('#example-3').DataTable();
+					
+					for(var i=0 ; i<data.programOutcomeList.length ;i++){
+						
+						 
+						var acButton = '<a href="#"><span onclick="editProgramPo('+data.programOutcomeList[i].poId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteProgramPo('+data.programOutcomeList[i].poId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						dataTable.row.add(
+								[ i + 1, data.programOutcomeList[i].poText, data.programOutcomeList[i].poRemark, acButton ])
+								.draw();
+					}
+					 
+				});
+
+			 
+
+		}
+		
+		function editProgramPo(poId) {
+			$("#loader4").show();
+				$.getJSON('${editProgramPo}',
+
+				{
+					poId : poId, 
+					ajax : 'true'
+
+				}, function(data) {
+					$("#loader4").hide();
+					document.getElementById("poId").value=data.poId;
+					 document.getElementById("poText").value=data.poText;
+					 document.getElementById("poRemark").value=data.poRemark;
+					 
+				});
+
+			 
+
+		}
+  
+	</script>
 
 	<script type="text/javascript">
 		$("#example-2").dataTable(
