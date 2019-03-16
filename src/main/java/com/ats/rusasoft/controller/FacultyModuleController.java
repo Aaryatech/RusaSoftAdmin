@@ -84,49 +84,7 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/showResearchDetails", method = RequestMethod.GET)
-	public ModelAndView showResearchDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/researchProDetail");
-
-			model.addObject("title", "Research Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showResearchDetailsList", method = RequestMethod.GET)
-	public ModelAndView showResearchDetailsList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/researchProjectList");
-
-			model.addObject("title", "Research Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
 	public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -548,49 +506,7 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/showJournalPub", method = RequestMethod.GET)
-	public ModelAndView showJournalPub(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/journalPub");
-
-			model.addObject("title", "Journal Publication");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showJournalPubList", method = RequestMethod.GET)
-	public ModelAndView showJournalPubList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/journalPubList");
-
-			model.addObject("title", "Journal Publication");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/showOutReachContri", method = RequestMethod.GET)
 	public ModelAndView showOutReachContri(HttpServletRequest request, HttpServletResponse response) {

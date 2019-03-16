@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()" >
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -57,7 +57,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-<%-- 
+				<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
@@ -84,10 +84,11 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							
+
 								<a href="${pageContext.request.contextPath}/showJournalPub"><button
-										type="button" class="btn btn-success">Add Journal Publication Details</button></a> 
-									
+										type="button" class="btn btn-success">Add Journal
+										Publication Details</button></a>
+
 							</div>
 
 						</header>
@@ -106,7 +107,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -117,42 +118,80 @@
 
 													<div class="col-xs-12">
 
-														
+
 
 														<div class="col-xs-12"></div>
 														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
 															Qualifications : <span class="text-danger">*</span>
 														</label> -->
 														<div class="col-xs-12">
-
-
-
-
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
 																		<th>Sr No</th>
-																		<th>Publication Type</th>
 																		<th>Name of Journal</th>
-																		<th>Publication Year </th>
+																		<th>Publication Year</th>
 																		<th>Issue</th>
 																		<th>Volume</th>
-																		<th>Action</th>	
+																		<th>Action</th>
 																	</tr>
 																</thead>
 
+																<tbody>
+																	<c:forEach items="${jouList}" var="journal"
+																		varStatus="count">
+																		<tr>
+
+																			<td style="text-align: center">${count.index+1}</td>
+
+																			<td style="text-align: left"><c:out
+																					value="${journal.journalName}" /></td>
 
 
+
+																			<td style="text-align: left"><c:out
+																					value="${journal.journalYear}" /></td>
+
+																			<td style="text-align: left"><c:out
+																					value="${journal.journalIssue}" /></td>
+
+																			<td style="text-align: left"><c:out
+																					value="${journal.journalVolume}" /></td>
+
+
+
+																			<td align="center"><c:if
+																					test="${editAccess == 0}">
+																					<a
+																						href="${pageContext.request.contextPath}/editJournal/${journal.journalId}"
+																						title="Edit IQAC" rel="tooltip"
+																						data-color-class="detail"
+																						data-animate=" animated fadeIn "
+																						data-toggle="tooltip"
+																						data-original-title="Edit Journal"><span
+																						class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																					test="${deleteAccess == 0}">
+																					<a
+																						href="${pageContext.request.contextPath}/deleteJournal/${journal.journalId}"
+																						onClick="return confirm('Are you sure want to delete this record');"
+																						rel="tooltip" data-color-class="danger"
+																						title="Delete" data-animate=" animated fadeIn "
+																						data-toggle="tooltip"
+																						data-original-title="Delete  record"><span
+																						class="glyphicon glyphicon-remove"></span></a>
+
+																				</c:if></td>
+
+
+
+
+																		</tr>
+																	</c:forEach>
+																</tbody>
 															</table>
 
-
-
-
 														</div>
-
-														
-														
 
 													</div>
 
@@ -185,8 +224,8 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-<%-- 	
+
+	<%-- 	
 	
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
@@ -315,85 +354,66 @@
 
 
 	<script>
-	function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("qualType").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("qualType").value
+			//alert("qualType::"+qualType);
 
-			document.getElementById("abc").style = "visible"
-			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
 				//document.getElementById("ex1").style = "display:none"
-					// $("#ex1").prop("disabled", true);
-			
+				// $("#ex1").prop("disabled", true);
+
 				//$('#ex1').attr('disabled', true);
-		} 
-		else{
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
+
 		}
-	
-	}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-	
 	</script>
-	
+
 	<script type="text/javascript">
-	
-	
-	
-	
-	
-	function getData() {
-	//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-		var academicYear=document.getElementById("academicYear").value
-		var qualType=document.getElementById("qualType").value
-		var qualName=document.getElementById("qualName").value
-		//alert(qualName);
-		var passClass=document.getElementById("passClass").value
-		var year=document.getElementById("year").value
-		var university=document.getElementById("university").value
-		var city=document.getElementById("city").value
-		var temp;
-		if (qualType == 7) {
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value
+			var qualType = document.getElementById("qualType").value
+			var qualName = document.getElementById("qualName").value
+			//alert(qualName);
+			var passClass = document.getElementById("passClass").value
+			var year = document.getElementById("year").value
+			var university = document.getElementById("university").value
+			var city = document.getElementById("city").value
+			var temp;
+			if (qualType == 7) {
 
-			temp=qualName;
-			//alert(temp);
-		} 
-		else{
-			temp=qualType;
+				temp = qualName;
+				//alert(temp);
+			} else {
+				temp = qualType;
+			}
+
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add(
+					[ i + 1, academicYear, temp, passClass, university, city,
+							year
+
+					]).draw();
+
+			document.getElementById("index").value = i + 1;
+
 		}
-
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-					temp,
-					passClass,
-					university,
-					city,
-					year
-					
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-	}
-
 	</script>
-	
-	
+
+
 
 </body>
 </html>

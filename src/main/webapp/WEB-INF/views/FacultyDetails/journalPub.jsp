@@ -95,141 +95,223 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertJournal"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-
-
 													<div class="col-xs-12">
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="jouStd">Journal
+																Publication <span class="text-danger">*</span>
+															</label>
+
+															<c:choose>
+																<c:when test="${editJournal.journalStandard==0}">
+																	<div class="col-md-2">
+
+																		<input type="radio" name="jouStd" id="jouStd"
+																			value="0" checked>National
+
+																	</div>
+
+																	<div class="col-md-2">
+																		<input type="radio" name="jouStd" value="1">
+																		International
+																	</div>
+																</c:when>
+																<c:when test="${editJournal.journalStandard==1}">
+																	<<div class="col-md-2">
+
+																		<input type="radio" name="jouStd" id="jouStd"
+																			value="0">National
+
+																	</div>
+
+																	<div class="col-md-2">
+																		<input type="radio" name="jouStd" value="1" checked>
+																		International
+																	</div>
+																</c:when>
+																<c:otherwise>
+																
+																<<div class="col-md-2">
+
+																		<input type="radio" name="jouStd" id="jouStd" checked
+																			value="0">National
+
+																	</div>
+
+																	<div class="col-md-2">
+																		<input type="radio" name="jouStd" value="1">
+																		International
+																	</div>
 
 
+																</c:otherwise>
+															</c:choose>
 
-
-
-
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="page_order">Journal
-																	Publication <span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-6">
-																	National <input type="radio" name="pub" id="pub"
-																		checked value="0"> International<input
-																		type="radio" name="pub" id="pub" value="1">
-																</div>
-</div>
-<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Name
-																	of Journal  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Name of journal" value=""
-																		required>
-																</div>
-	</div>
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="page_order">Scopus/DIO/UGC Recognized
-																	<span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="dio" id="dio" checked
-																		value="0"> No<input type="radio" name="dio"
-																		id="dio" value="1">
-																</div>
+															<!-- <div class="col-sm-6">
+																National <input type="radio" name="jouStd" id="jouStd"
+																	checked value="0"> International<input
+																	type="radio" name="jouStd" id="jouStd" value="1">
+															</div> -->
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="journalName">Name
+																of Journal <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="journalName"
+																	name="journalName" placeholder="Name of journal"
+																	value="${editJournal.journalName}" autocomplete="off"
+																	value="" required>
 															</div>
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Year
-																	of Publication  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="date" class="form-control" id="dob"
-																		name="dob" placeholder="Date" value="" required>
-																</div>
-
-	</div>
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="page_order">Issue
-																	<span class="text-danger">*</span>
-																</label>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="journalType">Scopus/DIO/UGC
+																Recognized <span class="text-danger">*</span>
+															</label>
 
 
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Issue" value="" required>
-																</div>
-
-	</div>
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Volume
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Volume" value="" required>
-																</div>
 
 
+															<c:choose>
+																<c:when test="${editJournal.journalType==0}">
+																	<div class="col-md-2">
+
+																		<input type="radio" name="journalType"
+																			id="journalType" value="0" checked>Yes
+
+																	</div>
+
+																	<div class="col-md-2">
+																		<input type="radio" name="journalType" value="1">
+																		No
+																	</div>
+																</c:when>
+																<c:when test="${editJournal.journalStandard==1}">
+																	<div class="col-md-2">
+
+																		<input type="radio" name="journalType"
+																			id="journalType" value="0">Yes
+																	</div>
+																	<div class="col-md-2">
+																		<input type="radio" name="journalType" value="1"
+																			checked> No
+																	</div>
+																</c:when>
+																<c:otherwise>
+																	<div class="col-md-2">
+																		<input type="radio" name="journalType" checked
+																			id="journalType" value="0">Yes
+																	</div>
+
+																	<div class="col-md-2">
+																		<input type="radio" name="journalType" value="1">
+																		No
+																	</div>
+
+																</c:otherwise>
+															</c:choose>
+
+
+
+															<!-- 	<div class="col-sm-2">
+																Yes <input type="radio" name="journalType"
+																	id="journalType" checked value="0"> No<input
+																	type="radio" name="journalType" id="journalType"
+																	value="1">
+															</div> -->
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="journalYear">Year
+																of Publication <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	id="journalYear" name="journalYear"
+																	value="${editJournal.journalYear}" autocomplete="off"
+																	placeholder="Year of Publication" value="" required>
+															</div>
+
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="issue">Issue
+																<span class="text-danger">*</span>
+															</label>
+
+
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="issue"
+																	value="${editJournal.journalIssue}" autocomplete="off"
+																	name="issue" placeholder="Issue" value="" required>
+															</div>
+
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="volume">Volume
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="volume"
+																	value="${editJournal.journalVolume}" autocomplete="off"
+																	name="volume" placeholder="Volume" value="" required>
 															</div>
 
 
-
-															<div class="form-group">
-
-
-
-																<label class="control-label col-sm-2" for="smallheading">Page
-																	No  <span class="text-danger">*</span>
-																</label> <label class="control-label col-sm-1"
-																	for="smallheading">From  <span
-																	class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="From" value="" required>
-																</div>
-
-
-																<label class="control-label col-sm-1" for="page_order">To
-																	<span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-2">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="To" value="" required>
-																</div>
-
-
-
-															</div>
-
-
-
+														</div>
 
 														<div class="form-group">
+															<label class="control-label col-sm-2" for="journalPgFrom">Page
+																No <span class="text-danger">*</span>
+															</label> <label class="control-label col-sm-1"
+																for="journalPgFrom">From <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-2">
+																<input type="text" class="form-control"
+																	id="journalPgFrom" name="journalPgFrom"
+																	onkeypress="return allowOnlyNumber(event)"
+																	value="${editJournal.journalPgFrom}" autocomplete="off"
+																	placeholder="From" value="" required>
+															</div>
+															<input type="hidden" value="${editJournal.journalId}"
+																name="journalId" id="journalId"> <label
+																class="control-label col-sm-1" for="page_order">To
+																<span class="text-danger">*</span>
+															</label>
+
+
+															<div class="col-sm-2">
+																<input type="text" class="form-control" id="to"
+																	autocomplete="off" name="journalPgTo"
+																	placeholder="journalPgTo"
+																	onkeypress="return allowOnlyNumber(event)"
+																	value="${editJournal.journalPgTo}" required>
+															</div>
+														</div>
+														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+																<input type="submit" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Save"> <input
+																	type="submit" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
+																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
-
 													</div>
 
 
@@ -262,6 +344,41 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
+	<script type="text/javascript">
+	function allowOnlyNumber(evt){
+		
+		var charCode = (evt.which) ? evt.which : event.keyCode
+	    if (charCode == 46){
+	        var inputValue = $("#floor").val();
+	        var count = (inputValue.match(/'.'/g) || []).length;
+	        
+	        if(count<1){
+	            if (inputValue.indexOf('.') < 1){
+	                return true;
+	            }
+	            return false;
+	        }else{
+	            return false;
+	        }
+	    }
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	        return false;
+	    }
+	    return true;
+	}
+	</script>
 
 </body>
 </html>
