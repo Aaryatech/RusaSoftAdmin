@@ -53,9 +53,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
+							<c:if test="${addAccess==0}">
 								<a href="${pageContext.request.contextPath}/showAddHighEdu"><button
 										type="button" class="btn btn-success">Add Higher
-										Education Detail</button></a>
+										Education Detail</button></a></c:if>
 
 
 							</div>
@@ -94,17 +95,17 @@
 														<td>${highEdu.noStudent}</td>
 
 														<td align="center">
-															<%-- <c:if test="${editAccess==0}"> --%> <a href="#"
+															 <c:if test="${editAccess==0}">  <a href="#"
 															onclick="showEditEduDetail(${highEdu.educationDetailId})"><span
 																class="glyphicon glyphicon-edit" title="Edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<%-- </c:if> --%>
-															<%-- <c:if test="${deleteAccess==0}"> --%> <a
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if> 
+															<c:if test="${deleteAccess==0}">  <a
 															href="${pageContext.request.contextPath}/deleteEduDetail/${highEdu.educationDetailId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger" title="Delete"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Delete  record"><span
-																class="glyphicon glyphicon-remove"></span></a> <%-- </c:if> --%>
+																class="glyphicon glyphicon-remove"></span></a>  </c:if> 
 														</td>
 
 													</tr>

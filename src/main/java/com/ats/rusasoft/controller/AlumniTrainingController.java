@@ -52,24 +52,57 @@ public class AlumniTrainingController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
-
-			// GetAlumni
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			map.add("instId", userObj.getGetData().getUserInstituteId());
 
-			map.add("yearId", session.getAttribute("acYearId"));
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			GetAlumni[] almArray = restTemplate.postForObject(Constants.url + "getAlumniList", map, GetAlumni[].class);
-			List<GetAlumni> alumList = new ArrayList<>(Arrays.asList(almArray));
-			System.err.println("alumList " + alumList.toString());
+			Info viewAccess = AccessControll.checkAccess("showAlumini", "showAlumini", "1", "0", "0", "0",
+					newModuleList);
+			
+			if (viewAccess.isError() == false) {
+				
+				Info addAccess = AccessControll.checkAccess("showAlumini", "showAlumini", "0", "1", "0",
+						"0", newModuleList);
 
-			model.addObject("alumList", alumList);
+				Info editAccess = AccessControll.checkAccess("showAlumini", "showAlumini", "0", "0", "1",
+						"0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showAlumini", "showAlumini", "0", "0", "0",
+						"1", newModuleList);
+				
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false) 
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+				
+				// GetAlumni
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map.add("yearId", session.getAttribute("acYearId"));
+
+				GetAlumni[] almArray = restTemplate.postForObject(Constants.url + "getAlumniList", map, GetAlumni[].class);
+				List<GetAlumni> alumList = new ArrayList<>(Arrays.asList(almArray));
+				System.err.println("alumList " + alumList.toString());
+
+				model.addObject("alumList", alumList);
+				
+			}
+			else {
+
+				model = new ModelAndView("accessDenied");
+			}
+			
 
 		} catch (Exception e) {
 
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+			System.err.println("exception In showAlumini at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
 
@@ -637,13 +670,39 @@ public class AlumniTrainingController {
 
 			model.addObject("title", "Progression to Higher Education ");
 			
-			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
 
 			// GetAlumni
 
 			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showHighEdu", "showHighEdu", "1", "0", "0", "0",
+					newModuleList);
+			
+			if (viewAccess.isError() == false) {
+				
+				Info addAccess = AccessControll.checkAccess("showHighEdu", "showHighEdu", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showHighEdu", "showHighEdu", "0", "0", "1",
+						"0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showHighEdu", "showHighEdu", "0", "0", "0",
+						"1", newModuleList);
+				
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false) 
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+				
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			map.add("instId", userObj.getGetData().getUserInstituteId());
 
@@ -655,7 +714,10 @@ public class AlumniTrainingController {
 			System.err.println("highEduList " + highEduList.toString());
 
 			model.addObject("highEduList", highEduList);
-			
+			}else {
+				
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 

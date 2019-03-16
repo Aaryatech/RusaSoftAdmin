@@ -53,11 +53,13 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAddStudAddmitLocWise"><button
-										type="button" class="btn btn-success">Add Student Locationwise</button></a>
+								<a
+									href="${pageContext.request.contextPath}/showAddStudAddmitLocWise"><button
+										type="button" class="btn btn-success">Add Student
+										Locationwise</button></a>
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								
+
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -67,40 +69,53 @@
 						<div class="content-body">
 							<div class="row">
 
-
-								
-
-							
-								
 								<div class="col-xs-12">
-									<table class="table table-striped dt-responsive display" id="example-1">
+									<table class="table table-striped dt-responsive display"
+										id="example-1">
 										<thead>
 											<tr>
-												<th >Sr No</th>
-												<th >Category</th>
-												<th >Male Students</th>
-												<th >Female Students</th>
-												<th >Transgender Students</th>
-												
+												<th>Sr No</th>
+												<th>Location Name</th>
+												<th>Male Students</th>
+												<th>Female Students</th>
+												<th>Transgender Students</th>
+												<!-- <th>Action</th> -->
 											</tr>
-											
-											
 										</thead>
-										
+										<tbody>
+											<c:forEach items="${locAdmList}" var="studAdm"
+												varStatus="count">
+												<tr>
+													<td>${count.index+1}</td>
+													<td>${studAdm.locationName}</td>
+													<td>${studAdm.maleStudent}</td>
+													<td>${studAdm.femaleStudent}</td>
+													<td>${studAdm.transStudent}</td>
+
+													<%-- <td align="center">
+														<c:if test="${editAccess==0}"> <a href="#"
+														onclick="showEditAlum(${studAdm.studentLocId})"><span
+															class="glyphicon glyphicon-edit" title="Edit"
+															data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+														<c:if test="${deleteAccess==0}"> <a
+														href="${pageContext.request.contextPath}/deleteAlum/${studAdm.studentLocId}"
+														onClick="return confirm('Are you sure want to delete this record');"
+														rel="tooltip" data-color-class="danger" title="Delete"
+														data-animate=" animated fadeIn " data-toggle="tooltip"
+														data-original-title="Delete  record"><span
+															class="glyphicon glyphicon-remove"></span></a> </c:if>
+													</td> --%>
+												</tr>
+											</c:forEach>
+										</tbody>
 									</table>
-
-								
-								
-	<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" class="btn btn-primary">Submit</button>
-															<button type="reset" class="btn btn-default">Reset</button>
-														</div>
-													</div>
-													</div>
-
-
-
+									<!-- <div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<button type="submit" class="btn btn-primary">Submit</button>
+											<button type="reset" class="btn btn-default">Reset</button>
+										</div>
+									</div> -->
+								</div>
 
 							</div>
 						</div>
@@ -110,94 +125,20 @@
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
-		</div>
-		<!-- END CONTENT -->
-
-
-
-<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Student Details</h4>
-				</div>
-				<div class="modal-body">
-					<form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get">
-						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							
-								
-						
-									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Category</label> <select
-								id="cat" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="SC">SC</option>
-								<option value="ST">ST</option>
-								<option value="OBC">OBC</option>
-								<option value="VJ">VJ</option>
-								<option value="NT">NT-I,NT-II,NT-III</option>
-								<option value="General">General</option>
-							
-							
-
-
-							</select>
-						</div>
-						
-						
-						
-									<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Gender</label> <select
-								id="gen" name="sem" class="form-control" onchange="showForm()" required>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
-								
-
-							</select>
-						</div>
-						
-						<div class="form-group">
-						
-							<label class="control-label col-sm-6" for="page_name">No. of Students
-							</label>
-							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="stud"
-									name="subTaut" value="${page.pageName}"
-									required>
-									
-										<input type="hidden" id="index" name="index" value="0">
-							<!-- </div> -->
 	</div>
-						
-		
+	<!-- END CONTENT -->
 
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div> --%>
-	
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");
 		//var i=0;
 		var i = parseInt(document.getElementById("index").value);
-			
 		//alert(i);
 		var cat=document.getElementById("cat").value
 		var gen=document.getElementById("gen").value
 		var stud=document.getElementById("stud").value
-	
-		
 		var dataTable = $('#example-1')
 		.DataTable();
-		
 		dataTable.row
 		.add(
 				[
@@ -205,33 +146,21 @@
 					cat,
 					gen,
 					stud,
-					
 						 ])
 		.draw();
-		
 		document.getElementById("index").value = i + 1;
-		
 	}
-
 	</script>
-	
-	
-
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
 		function clearSessionAttribute() {
-
 			$.getJSON('${clearSessionAttribute}', {
-
 				ajax : 'true',
-
 			}, function(data) {
 
 			});
-
 		}
 	</script>
 </body>

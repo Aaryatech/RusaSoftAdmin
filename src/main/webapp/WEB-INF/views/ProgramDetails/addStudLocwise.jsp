@@ -41,10 +41,9 @@
 }
 </style>
 
-
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body class=" " onload="calculateSum()">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +58,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -86,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudAddmitLoc"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -95,94 +94,126 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register Form
+										</a></li>
 
 
-										</ul>
+									</ul>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-											
-	<div class="col-xs-12">
-									<table class="table table-striped dt-responsive display">
-										<thead>
-											<tr>
-												<th width="10%">Sr No</th>
-												<th width="30%">Location</th>
-												<th width="60%" style="text-align: center;" colspan="3">No.
-													of Students</th>
-											
-											</tr>
-											<tr>
-												<th width="10%"></th>
-												<th width="30%"></th>
-												<th width="20%">Male</th>
-												<th width="20%">Female</th>
-											<th width="20%">Transgender</th>
-											
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>State</td>
-
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-												<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-														<td><input type="text" class="form-control" id="curExp"
-													name="curExp" value="" required></td>
-
-											
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
 
 
-											</tr>
-											
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertStudAdmLocwise"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
 
-										</tbody>
-									</table>
+												<div class="row">
+													<div class="col-md-12">
+														<table class="table table-striped dt-responsive display">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th width="30%">Location</th>
+																	<th width="60%"  style="text-align: center; ma" colspan="3">No.
+																		of Students</th>
 
-								</div>
-														
+																</tr>
+																<tr>
+																	<th width="10%"></th>
+																	<th width="30%"></th>
+																	<th width="20%">Male</th>
+																	<th width="20%">Female</th>
+																	<th width="20%">Transgender</th>
 
-													
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-											  <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+
+																</tr>
+															</thead>
+															<tbody>
+															<c:choose>
+															<c:when test="${isEdit==0}">
+															
+															
+																<c:forEach items="${locList}" var="loc"
+																	varStatus="count">
+
+																	<tr>
+																		<td>${count.index+1 }</td>
+																		<td>${loc.locationName}</td>
+																		<td><input type="text" 
+																			class="txt" id="loc_m${loc.locationId}" onkeyup="calculateSum()"
+																			name="loc_m${loc.locationId}" value="0" onkeypress="allowOnlyNumber1" required></td>
+																		<td><input type="text"  onkeyup="calculateSum()"
+																			class="txt" id="loc_f${loc.locationId}"
+																			name="loc_f${loc.locationId}" value="0" required></td>
+																		<td><input type="text" onkeyup="calculateSum()"
+																			class="txt" id="loc_t${loc.locationId}"
+																			name="loc_t${loc.locationId}" value="0" required></td>
+																	</tr>
+																</c:forEach>
+																
+																</c:when>
+																<c:otherwise>
+																
+																<c:forEach items="${locAdmList}" var="loc"
+																	varStatus="count">
+
+																	<tr>
+																		<td>${count.index+1 }</td>
+																		<td>${loc.locationName}</td>
+																		<td><input type="text" 
+																			class="txt" id="loc_m${loc.studentLocId}" onkeyup="calculateSum()"
+																			name="loc_m${loc.studentLocId}" value="${loc.maleStudent}" onkeypress="allowOnlyNumber1" required></td>
+																		<td><input type="text"  onkeyup="calculateSum()"
+																			class="txt" id="loc_f${loc.studentLocId}"
+																			name="loc_f${loc.studentLocId}" value="${loc.femaleStudent}" required></td>
+																		<td><input type="text" onkeyup="calculateSum()"
+																			class="txt" id="loc_t${loc.studentLocId}"
+																			name="loc_t${loc.studentLocId}" value="${loc.transStudent}" required></td>
+																	</tr>
+																</c:forEach>
+																
+																</c:otherwise>
+																</c:choose>
+
+															</tbody>
+														</table>
+
+													</div>
+
+													<input type="hidden" id="isEdit" name="isEdit"
+														value="${isEdit}"> <input type="hidden" id="is_view"
+														name="is_view" value="0">
+
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" class="btn btn-primary" id="sub1"
+																onclick="submit_f(1)" value="Add"> <input
+																type="submit" class="btn btn-primary" id="sub2"
+																onclick="submit_f(0)" value="Save And Next">
+															<button type="reset" class="btn btn-default">Reset</button>
+															<input
+																type="text" readonly placeholder="Total Student" id="total_stud"
+																>
 														</div>
+													</div>
 
+													<div class="clearfix"></div>
 
-												<div class="clearfix"></div>
-
-											
-
+												</div>
+											</form>
 										</div>
-		</div>
-									</form>
+
+									</div>
+
 								</div>
 
 							</div>
-
-						</div>
+							</div>
 					</section>
 				</div>
 
@@ -193,124 +224,153 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<script type="text/javascript">
+		function checkUnique(inputValue, valueType) {
+			//alert(inputValue);
+
+			var primaryKey = $
+			{
+				editInst.librarianId
+			}
+			;
+			//alert("Primary key"+primaryKey);
+			var isEdit = 0;
+			if (primaryKey > 0) {
+				isEdit = 1;
+			}
+			//alert("Is Edit " +isEdit);
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+				$
+						.getJSON(
+								'${checkUniqueField}',
+								{
+
+									inputValue : inputValue,
+									valueType : valueType,
+									primaryKey : primaryKey,
+									isEdit : isEdit,
+									tableId : 4,
+
+									ajax : 'true',
+
+								},
+								function(data) {
+
+									//	alert("Data  " +JSON.stringify(data));
+									if (data.error == true) {
+										if (valueType == 2) {
+
+											alert("This email id already exist in system please enter unique");
+											$('#librarian_email').val('');
+											//document.getElementById("stud_contact_no").value=" ";
+
+										} else {
+
+											alert("This contact no  already exist in system please enter unique");
+											$('#lib_con_num').val('');
+											//document.getElementById("student_email").value=" ";
+										}
+									}
+								});
+		}
+	</script>
+
+	<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("approveValue").value
+			//alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+
+		}
+	</script>
+
+
 <script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
-		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
-		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
-		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
-
-		ajax : 'true',
-
-	}, function(data) {
-		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
+					return wasSubmitted;
+				}
 			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
-			}
+			return false;
+		}
+		function submit_f(view) {
+			findTotal1();
+			document.getElementById("is_view").value = view;//create this 
+		}
+	</script>
+	
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".txt").each(function() {
+		$(this).keyup(function(){
+			calculateSum();
+		});
+	});
+});
+function calculateSum() {
+	var sum = 0;
+	$(".txt").each(function() {
+		if(!isNaN(this.value) && this.value.length!=0) {
+			sum += parseFloat(this.value);
 		}
 	});
+	document.getElementById("total_stud").value=sum;
 }
-
-
-
 </script>
-
 <script type="text/javascript">
-
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
-
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else{
-			document.getElementById("abc").style = "display:none"
-		}
-	
-	}
-	
-
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	
-	
-	}
-
-</script>
-
-
+	 function allowOnlyNumber1(evt){
+		 var valid=true;
+	  var charCode = (evt.which) ? evt.which : event.keyCode
+	  if (charCode > 31 && charCode==46 && (charCode < 48 || charCode > 57)){
+		  valid=false;
+	  }
+	  return valid;
+	} 
+	</script>
 
 
 	<!-- END CONTAINER -->

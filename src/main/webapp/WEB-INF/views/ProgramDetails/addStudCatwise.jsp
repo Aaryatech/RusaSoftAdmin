@@ -39,11 +39,16 @@
 .image-preview-input-title {
 	margin-left: 2px;
 }
+/* .txt {
+				background-color: #FEFFB0;
+				font-weight: bold;
+				text-align: right;
+			} */
 </style>
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="calculateSum()()">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -125,67 +130,82 @@
 																<tr>
 																	<th width="10%">Sr No</th>
 																	<th width="30%">Category</th>
-																	<th width="60%" style="text-align: center;" colspan="4">No.
+																	<th width="60%" style="text-align: center;" colspan="3">No.
 																		of Students</th>
 
 																</tr>
 																<tr>
-																	<th width="5%"></th>
-																	<th width="15%"></th>
+																	<th width="10%"></th>
+																	<th width="20%"></th>
 																	<th width="20%">Male</th>
 																	<th width="20%">Female</th>
 																	<th width="20%">Transgender</th>
-																	<th width="20%">Total</th>
 
 
 																</tr>
 															</thead>
 															<tbody>
-
+																<c:choose>
+															<c:when test="${isEdit==0}">
 																<c:forEach items="${castList}" var="cast"
 																	varStatus="count">
-
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="text" class="form-control"
-																			id="cast_m${cast.castId}" name="cast_m${cast.castId}"
-																			value="" required></td>
-																		<td><input type="text" class="form-control"
-																			id="cast_f${cast.castId}" name="cast_f${cast.castId}"
-																			value="" required></td>
-																		<td><input type="text" class="form-control"
-																			id="cast_t${cast.castId}" name="cast_t${cast.castId}"
-																			value="" required></td>
-																				<td><input type="text" class="form-control"
-																			id="cast_tot_stud${cast.castId}" name="cast_tot_stud${cast.castId}"
-																			value="" required></td>
-
+																		<td><input type="text" onkeyup="calculateSum()"
+																			class="txt" id="cast_m${cast.castId}"
+																			name="cast_m${cast.castId}" value="0" required></td>
+																		<td><input type="text"  onkeyup="calculateSum()"
+																			class="txt" id="cast_f${cast.castId}"
+																			name="cast_f${cast.castId}" value="0" required></td>
+																		<td><input type="text"  onkeyup="calculateSum()"
+																			class="txt" id="cast_t${cast.castId}"
+																			name="cast_t${cast.castId}" value="0" required></td>
 																	</tr>
-
 																</c:forEach>
+																</c:when>
+																<c:otherwise>
+																
+																<c:forEach items="${studAdmCastList}" var="cast"
+																	varStatus="count">
+																	<tr>
+																		<td>${count.index+1 }</td>
+																		<td>${cast.castName}</td>
 
+																		<td><input type="text" onkeyup="calculateSum()"
+																			class="txt" id="cast_m${cast.studentCatId}"
+																			name="cast_m${cast.studentCatId}" value="${cast.maleStudent}" required></td>
+																		<td><input type="text"  onkeyup="calculateSum()"
+																			class="txt" id="cast_f${cast.studentCatId}"
+																			name="cast_f${cast.studentCatId}" value="${cast.femaleStudent}" required></td>
+																		<td><input type="text"  onkeyup="calculateSum()"
+																			class="txt" id="cast_t${cast.studentCatId}"
+																			name="cast_t${cast.studentCatId}" value="${cast.transStudent}" required></td>
+																	</tr>
+																</c:forEach>
+																</c:otherwise>
+																</c:choose>
 															</tbody>
 														</table>
-
 													</div>
 
-
-
-													<input type="hidden" id="librarian_id" name="librarian_id"
-														value="0"> <input
-														type="hidden" id="is_view" name="is_view" value="0">
+													<input type="hidden" id="isEdit" name="isEdit"
+														value="${isEdit}"> <input type="hidden" id="is_view"
+														name="is_view" value="0">
 
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary" id="sub1"
 																onclick="submit_f(1)" value="Add"> <input
 																type="submit" class="btn btn-primary" id="sub2"
-																onclick="submit_f(0)"
-																value="Save &
-																		Next">
+																onclick="submit_f(0)" value="Save And Next">
+																
+																 
 															<button type="reset" class="btn btn-default">Reset</button>
+															<input
+																type="text" readonly placeholder="Total Student" id="total_stud"
+																>
 														</div>
 													</div>
 
@@ -326,9 +346,37 @@
 			return false;
 		}
 		function submit_f(view) {
+			
 			document.getElementById("is_view").value = view;//create this 
 		}
 	</script>
+
+	
+	<script type="text/javascript">
+
+$(document).ready(function(){
+
+	$(".txt").each(function() {
+		$(this).keyup(function(){
+			calculateSum();
+		});
+	});
+
+});
+
+function calculateSum() {
+	var sum = 0;
+	$(".txt").each(function() {
+
+		if(!isNaN(this.value) && this.value.length!=0) {
+			sum += parseFloat(this.value);
+		}
+
+	});
+	document.getElementById("total_stud").value=sum;
+}
+
+    </script>
 
 
 	<!-- END CONTAINER -->
