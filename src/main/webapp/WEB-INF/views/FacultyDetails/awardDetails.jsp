@@ -96,9 +96,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertAwardDetail"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -114,63 +113,60 @@
 												<div>
 
 
-
-
-
-
-
-
+													<input type="hidden" id="award_id" name="awardId"
+														value="${award.awardId}">
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Name
+														<label class="control-label col-sm-2" for="name">Name
 															of Award/Recognition <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Name of Award/Recognition"
-																value="" required>
+															<input type="text" class="form-control" id="name"
+																autocomplete="off" name="name"
+																placeholder="Name of Award/Recognition"
+																value="${award.awardName}" required>
 														</div>
 													</div>
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">Awarding
+														<label class="control-label col-sm-2" for="agency">Awarding
 															Agency/Authority <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Awarding Agency" value=""
-																required>
+															<input type="text" class="form-control" id="agency"
+																name="agency" placeholder="Awarding Agency"
+																value="${award.awardAuthority}" required>
 														</div>
 
 													</div>
 
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Nature
+														<label class="control-label col-sm-2" for="nature">Nature
 															of Award/Recognition <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Nature of Award/Recognition"
-																value="" required>
+															<input type="text" class="form-control" id="nature"
+																name="nature" placeholder="Nature of Award/Recognition"
+																value="${award.awardNature}" required>
 														</div>
 													</div>
 
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">Date
+														<label class="control-label col-sm-2" for="date">Date
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="dob" name="Grant" placeholder="Awarding Agency"
-																value="" required>
+																id="date" name="date" placeholder="Date"
+																value="${award.awardDate}" required>
 														</div>
 
 													</div>
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Validity
+														<label class="control-label col-sm-2" for="validity">Validity
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
@@ -180,27 +176,32 @@
 																name="validity" id="validity" value="1">
 														</div>
 													</div>
-													<div class="form-group">
+													<div id="abc">
+														<div class="form-group">
 
 
-														<label class="control-label col-sm-2" id="label1"
-															for="smallheading">From <span class="text-danger"></span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker"
-																id="label2" name="Grant" value="" required>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="control-label col-sm-2" id="sp"
-															for="smallheading">To <span class="text-danger"></span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker"
-																id="label4" name="Grant" value="" required>
+															<label class="control-label col-sm-2" id="fromDate"
+																for="validitydate">From <span
+																class="text-danger"></span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	placeholder="From Date" id="fromDate" name="fromDate"
+																	value="${award.awardValidityFrom}" required>
+															</div>
 														</div>
 
+														<div class="form-group">
+															<label class="control-label col-sm-2" id="toDate"
+																for="toDate">To <span class="text-danger"></span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	id="toDate" name="toDate" placeholder="To Date"
+																	value="${award.awardValidityTo}" required>
+															</div>
+
+														</div>
 													</div>
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
@@ -208,8 +209,7 @@
 																onclick="submit_f(1)" value="Save"> <input
 																type="submit" class="btn btn-primary"
 																onclick="submit_f(0)"
-																value="Save &
-																		Next">
+																value="Save & Next">
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
@@ -248,24 +248,22 @@
 		function check() {
 			//alert("hii");
 
-			document.getElementById("label1").style = "display:none"
-			document.getElementById("label2").style = "display:none"
-			document.getElementById("sp").style = "display:none"
+			/* document.getElementById("fromDate").style = "display:none"
+			document.getElementById("toDate").style = "display:none" */
+			document.getElementById("abc").style = "display:none"
 
-			document.getElementById("label4").style = "display:none"
+			/* 	document.getElementById("label4").style = "display:none" */
 			//	document.getElementById("hide_div").style = "visible"
-
 		}
 		function check1() {
 			//alert("hii");
 
-			document.getElementById("label1").style = "visible"
-			document.getElementById("label2").style = "visible"
-			document.getElementById("sp").style = "visible"
+			/* document.getElementById("fromDate").style = "visible"
+			document.getElementById("toDate").style = "visible" */
+			document.getElementById("abc").style = "visible"
 
-			document.getElementById("label4").style = "visible"
+			/* document.getElementById("label4").style = "visible" */
 			//	document.getElementById("hide_div").style = "visible"
-
 		}
 	</script>
 	<script type="text/javascript">

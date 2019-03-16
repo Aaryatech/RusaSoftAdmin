@@ -97,9 +97,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertPatentDetail"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -113,86 +112,75 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-
-
-
-
-
 													<h5 class="title pull-left">
 														<strong>Patent Details</strong>
 													</h5>
 													<div class="col-sm-12"></div>
 
+													<input type="hidden" id="patent_id" name="patentId"
+														value="${patent.patentId}">
+
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Patent
+														<label class="control-label col-sm-2" for="file_no">Patent
 															File No. <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" value="" placeholder="Patent Number"
+															<input type="text" class="form-control" id="patentNo"
+																name="patentNo" value="${patent.patentFileNo}" placeholder="Patent Number"
 																required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Patent
+														<label class="control-label col-sm-2" for="parent_title">Patent
 															Title <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Patent Title" value=""
+															<input type="text" class="form-control" id="parent_title"
+																name="parentTitle" placeholder="Patent Title" value="${patent.patentTitle}"
 																required>
 														</div>
 													</div>
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">Patent
+														<label class="control-label col-sm-2" for="filling_date">Patent
 															Filling Date <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="dob" name="Grant" value="" required>
+																id="filling_date" name="fillingDate"
+																placeholder="Patent Filling Date" value="${patent.patentFilingDate}" required>
 														</div>
 
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Name
-															of Co-assistant/Guide <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="guide_name">Name
+															of Co-assistant/Guide 
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Name of Co-assistant/Guide"
-																value="" required>
+															<input type="text" class="form-control" id="guide_name"
+																name="guideName"
+																placeholder="Name of Co-assistant/Guide" value="${patent.patentGuideName}"
+																>
 														</div>
 													</div>
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">Date
+														<label class="control-label col-sm-2" for="pub_date">Date
 															of Publication <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="dob" name="Grant" value="" required>
+																placeholder="Date of Publication" id="pub_date"
+																name="pubDate" value="${patent.patentPubDate}" required>
 														</div>
 
 													</div>
 
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Academic
-															Year <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" value="" placeholder="Academic Year"
-																required>
-														</div>
-
-													</div>
-
-													<div class="form-group">
+													    <div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary"
 																onclick="submit_f(1)" value="Save"> <input

@@ -134,8 +134,74 @@
 																		<th>Action</th>
 																	</tr>
 																</thead>
+																
 
-
+		<tbody>
+                 		     <c:forEach items="${facultyAwardList}" var="awardList" varStatus="count"> 
+									<tr>
+									<%-- <td><input type="checkbox" class="chk" name="iqacIds"
+															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
+											<td style="text-align: center">${count.index+1}</td>
+											
+											<td style="text-align: left"><c:out
+														value="${awardList.awardName}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${awardList.awardAuthority}" /></td>
+											
+											<td style="text-align: left"><c:out
+														value="${awardList.awardNature}" /></td>
+											
+											<td style="text-align: left"><c:out
+														value="${awardList.patentGuideName}" /></td>
+														
+															
+											<td style="text-align: left"><c:out
+														value="${awardList.awardDate}" /></td>
+												
+											<td align="center">
+											 <c:if test="${editAccess == 0}">  <a
+												href="${pageContext.request.contextPath}/editAward/${awardList.awardId}" title="Edit IQAC" 
+												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
+												class="glyphicon glyphicon-edit"></span></a> |</c:if> 
+												
+											 <c:if test="${deleteAccess == 0}"> 	
+												<a	href="${pageContext.request.contextPath}/deleteFacultyAward/${awardList.awardId}"
+													onClick="return confirm('Are you sure want to delete this record');"
+													rel="tooltip" data-color-class="danger" title="Delete"
+													data-animate=" animated fadeIn " data-toggle="tooltip"
+													data-original-title="Delete  record"><span
+													class="glyphicon glyphicon-remove"></span></a>
+												
+												</c:if>
+												
+											
+												<%-- <a
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-list"></span></a>
+												
+												<a
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Dean R&D"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-List"></span></a>
+											
+												
+												<a
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-edit"></span></a> --%>
+												
+												
+												
+												</td>
+											
+											
+											
+											
+											</tr>
+								 </c:forEach>   
+                </tbody>
 
 															</table>
 
