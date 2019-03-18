@@ -44,8 +44,6 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 public class FacultyController {
 	RestTemplate rest = new RestTemplate();
 
-	
-	
 	@RequestMapping(value = "/showJournalPub", method = RequestMethod.GET)
 	public ModelAndView showJournalPub(HttpServletRequest request, HttpServletResponse response) {
 
