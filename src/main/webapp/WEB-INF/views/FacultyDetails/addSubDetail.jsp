@@ -116,8 +116,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="subCode"
-															placeholder="Subject Code" name="subCode"
-															value="${editSubject.subCode}" required>
+															autocomplete="off" placeholder="Subject Code"
+															name="subCode" value="${editSubject.subCode}" required>
 													</div>
 												</div>
 
@@ -278,8 +278,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="subName"
-															placeholder="Subject Name" name="subName"
-															value="${editSubject.subName}" required>
+															autocomplete="off" placeholder="Subject Name"
+															name="subName" value="${editSubject.subName}" required>
 													</div>
 												</div>
 
@@ -411,8 +411,10 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="noStudApp"
-															placeholder="No. of Student Appeared" name="noStudApp"
-															value="${editSubject.subStuAppear}" required>
+															onkeypress="return allowOnlyNumber(event)"
+															autocomplete="off" placeholder="No. of Student Appeared"
+															name="noStudApp" value="${editSubject.subStuAppear}"
+															required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -422,7 +424,9 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="pass"
-															placeholder="Passed" onchange=" calResult()" name="pass"
+															onkeypress="return allowOnlyNumber(event)"
+															autocomplete="off" placeholder="Passed"
+															onchange=" calResult()" name="pass"
 															value="${editSubject.subStuPassed}" required>
 													</div>
 												</div>
@@ -437,7 +441,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="rslt"
-															placeholder="% of Result" name="rslt"
+															onkeypress="return allowOnlyNumber(event)" reaonly
+															autocomplete="off" placeholder="% of Result" name="rslt"
 															value="${editSubject.subPassPer}" required>
 													</div>
 												</div>
@@ -564,5 +569,30 @@
 
 		}
 	</script>
+
+	<script type="text/javascript">
+	function allowOnlyNumber(evt){
+		
+		var charCode = (evt.which) ? evt.which : event.keyCode
+	    if (charCode == 46){
+	        var inputValue = $("#floor").val();
+	        var count = (inputValue.match(/'.'/g) || []).length;
+	        
+	        if(count<1){
+	            if (inputValue.indexOf('.') < 1){
+	                return true;
+	            }
+	            return false;
+	        }else{
+	            return false;
+	        }
+	    }
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	        return false;
+	    }
+	    return true;
+	}
+	</script>
+
 </body>
 </html>

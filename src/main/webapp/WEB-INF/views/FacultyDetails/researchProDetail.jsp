@@ -233,8 +233,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="grant"
-																	onkeypress="return allowOnlyNumber(event)" name="grant"
-																	placeholder="Grant" autocomplete="off"
+																	name="grant" placeholder="Grant" autocomplete="off"
 																	value="${editProject.projGrant}" required>
 															</div>
 														</div>

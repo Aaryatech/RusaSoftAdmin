@@ -112,17 +112,14 @@
 											<div class="tab-pane fade in active" id="home">
 												<div>
 
-													<h5 class="title pull-left">
-														<strong>Subject Details :</strong>
-													</h5>
-													<div class="col-sm-12"></div>
+
+
 													<table id="example-1"
 														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
 																<th>Sr No</th>
 																<th>Subject Code</th>
-
 																<th>Subject Name</th>
 																<th>Program</th>
 																<th>Semester</th>
@@ -413,6 +410,29 @@
 			document.getElementById("rslt").value = x;
 
 		}
+	</script>
+	<script type="text/javascript">
+	function allowOnlyNumber(evt){
+		
+		var charCode = (evt.which) ? evt.which : event.keyCode
+	    if (charCode == 46){
+	        var inputValue = $("#floor").val();
+	        var count = (inputValue.match(/'.'/g) || []).length;
+	        
+	        if(count<1){
+	            if (inputValue.indexOf('.') < 1){
+	                return true;
+	            }
+	            return false;
+	        }else{
+	            return false;
+	        }
+	    }
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	        return false;
+	    }
+	    return true;
+	}
 	</script>
 
 
