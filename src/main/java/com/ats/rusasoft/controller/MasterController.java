@@ -28,6 +28,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.AccOfficer;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GetAccOfficer;
@@ -1650,5 +1651,150 @@ public class MasterController {
 
 	}
 
-	// Acc Officer */
+	Hod editHod;
+
+	@RequestMapping(value = "/changeHod/{hodId}", method = RequestMethod.GET)
+	public ModelAndView editIqac(@PathVariable("hodId") int hodId, HttpServletRequest request) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("hodRegistration", "hodList", "0", "0", "1", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("master/ChangeHod");
+				model.addObject("title", "Change HOD");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("hodId", hodId);
+				editHod = rest.postForObject(Constants.url + "/getHod", map, Hod.class);
+				System.out.println("hodId:" + hodId);
+
+				model.addObject("hod", editHod);
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("type", 1);
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+
+				model.addObject("quolfList", quolfList);
+
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In changeHod at master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/changeHodSubmit", method = RequestMethod.POST)
+	public String changeHodSubmit(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in insert changeHodSubmit");
+
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int hodId = Integer.parseInt(request.getParameter("hod_id"));
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			System.err.println("hodId id  " + hodId);
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			/*
+			 * Info addAccess = AccessControll.checkAccess("insertHod", "hodList", "0", "1",
+			 * "0", "0", newModuleList); if (addAccess.isError() == true) { redirect =
+			 * "redirect:/accessDenied"; } else {
+			 */
+
+			if (hodId > 0) {
+
+				Hod hod = new Hod();
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				hod.setContactNo(request.getParameter("hod_mob"));
+				hod.setDelStatus(1);
+				hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+				hod.setEditBy(0);
+				hod.setEmail(request.getParameter("hod_email"));
+				hod.setExInt1(1);
+				hod.setExInt2(2);
+				hod.setExVar1("NA");
+				hod.setExVar2("NA");
+				hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
+
+				hod.setHodName(request.getParameter("hod_name"));
+				hod.setInstituteId(userObj.getGetData().getUserInstituteId());
+				hod.setIsActive(1);
+				hod.setIsEnrollSystem(0);
+				hod.setMakerDate(curDateTime);
+				hod.setMakerId(userObj.getUserId());
+				hod.setUpdateDatetime(curDateTime);
+
+				Hod changeHod = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+
+				if (changeHod != null) {
+					System.out.println(changeHod.toString());
+					System.out.println("In Null" + hodId);
+					map = new LinkedMultiValueMap<String, Object>();
+					map.add("hodId", hodId);
+
+					Info info = rest.postForObject(Constants.url + "/updateHodStatus", map, Info.class);
+					System.out.println("info" + info.toString());
+
+					map = new LinkedMultiValueMap<String, Object>();
+					map.add("regPrimaryKey", hodId);
+					map.add("userType", 3);
+
+					info = rest.postForObject(Constants.url + "/blockPreviousHodRecord", map, Info.class);
+
+					System.out.println("block previous record" + info.toString());
+//
+				}
+
+			}
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/hodList";
+			else
+				redirect = "redirect:/hodRegistration";
+
+		} catch (Exception e) {
+			System.err.println("Exce in save dept  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return redirect;
+
+	}
+
 }

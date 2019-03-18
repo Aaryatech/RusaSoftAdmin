@@ -109,7 +109,14 @@
 														<td>${hod.contactNo}</td>
 														<td>${hod.email}</td>
 
-														<td align="center"><c:if test="${editAccess==0}">
+														<td align="center"><a
+															href="${pageContext.request.contextPath}/changeHod/${hod.hodId}"
+															title="Change HOD" rel="tooltip"
+															data-color-class="detail"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Block"><span
+																class="glyphicon glyphicon-list"></span></a> <c:if
+																test="${editAccess==0}">
 																<a onclick="showEditHod(${hod.hodId})" href="#"><span
 																	class="glyphicon glyphicon-edit" title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
