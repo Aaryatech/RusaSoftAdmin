@@ -136,7 +136,7 @@ public class StudAdminController {
 
 		return model;
 
-	}
+	} 
 
 	// List of Student Added Loc wise
 
