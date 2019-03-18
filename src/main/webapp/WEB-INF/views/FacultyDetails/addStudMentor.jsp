@@ -99,8 +99,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/addStudMentor"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -114,20 +114,21 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div class="form-group">
+												<!-- <div class="form-group">
 
 													<label class="control-label col-sm-3" for="page_name">Mentoring
 														to the Students <span class="text-danger">*</span>
 													</label>
-												</div>
+												</div> -->
+												<input type="hidden"  id="menId" name="menId"  value="${stud.menId}">
 												<div class="form-group">
 
 													<label class="control-label col-sm-2" for="page_name">No
 														of Student <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="hodName"
-															name="hodName" placeholder="No." value="${page.pageName}"
+														<input type="text" class="form-control" id="stud_no"
+															name="stud_no" placeholder="No." value="${stud.menStuCount}"
 															required>
 													</div>
 												</div>

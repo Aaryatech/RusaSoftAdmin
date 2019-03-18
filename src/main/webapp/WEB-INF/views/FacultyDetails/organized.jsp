@@ -90,16 +90,17 @@
 							</div>
 
 						</header>
-
+						
+											
 
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertFacultyActivity"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -107,6 +108,8 @@
 											</a></li>
 
 										</ul>
+										<input type="hidden"  id="activity_id"
+									name="activity_id" value="${activity.activityId}">
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
@@ -115,15 +118,18 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="salutation" name="salutation"
+														<select id="activity_type" name="activity_type"
 															class="form-control" required>
-															<option value="0">STTP</option>
-															<option value="1">Seminar</option>
-															<option value="2">Workshop</option>
-															<option value="3">Conference</option>
-															<option value="4">FDP</option>
-															<option value="5">Refresher Course</option>
-
+															
+															
+    														<option value="STTP">STTP</option>
+															<option value="Seminar">Seminar</option>
+															<option value="Workshop">Workshop</option>
+															<option value="Conference">Conference</option>
+															<option value="FDP">FDP</option>
+															<option value="Refresher Course">Refresher Course</option>
+															
+															
 														</select>
 													</div>
 												</div>
@@ -133,8 +139,8 @@
 														of Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="dob"
-															name="Grant" placeholder="Name of Activity" value=""
+														<input type="text" class="form-control" id="activity_name"
+															name="activity_name" placeholder="Name of Activity" value="${activity.activityName}"
 															required>
 													</div>
 
@@ -146,12 +152,12 @@
 														Level<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="salutation" name="salutation"
+														<select id="activity_level" name="activity_level"
 															class="form-control" required>
-															<option value="0">International</option>
-															<option value="1">National</option>
-															<option value="2">State</option>
-															<option value="3">Regional</option>
+															<option value="International">International</option>
+															<option value="National">National</option>
+															<option value="State">State</option>
+															<option value="Regional">Regional</option>
 
 
 														</select>
@@ -168,8 +174,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="dob" name="Grant" placeholder="Awarding Agency"
-															value="" required>
+															id="activity_date" name="activity_date" placeholder="Awarding Agency"
+															value="${activity.activityDate}" required>
 													</div>
 												</div>
 
@@ -179,8 +185,8 @@
 														of Participants <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="dob"
-															name="Grant" placeholder="No of Participants" value=""
+														<input type="text" class="form-control" id="activity_part"
+															name="activity_part" placeholder="No of Participants" value="${activity.activityParticipants}"
 															required>
 													</div>
 												</div>
@@ -192,8 +198,8 @@
 														By <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="dob"
-															name="Grant" placeholder="Funded By" value="" required>
+														<input type="text" class="form-control" id="activity_found"
+															name="activity_found" placeholder="Funded By" value="${activity.activityFundedBy}" required>
 													</div>
 
 
@@ -208,8 +214,8 @@
 														Sanctioned <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="dob"
-															name="Grant" placeholder="Amount Sanctioned" value=""
+														<input type="text" class="form-control" id="amt_sanc"
+															name="amt_sanc" placeholder="Amount Sanctioned" value="${activity.activityAmountSanctioned}"
 															required>
 													</div>
 												</div>
@@ -222,8 +228,8 @@
 														Utilized <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="dob"
-															name="Grant" placeholder="Amount Utilized" value=""
+														<input type="text" class="form-control" id="amt_utilise"
+															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}"
 															required>
 													</div>
 
@@ -234,13 +240,12 @@
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
+														<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
+																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
+																		type="button" class="btn btn-primary">S</button></a> --%>
+																<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
 
@@ -279,6 +284,33 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+    
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+
+		});
+    });
+    
+</script>
 </body>
 </html>

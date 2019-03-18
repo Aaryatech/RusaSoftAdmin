@@ -132,22 +132,64 @@
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
-																		<th>Sr No</th>
-																		<th>Conference Type</th>
-																		<th>Date</th>
-																			<th>Venue</th>
-																		<th>Funding From</th>
-																		<th>Amount</th>
-																			<th>Action</th>	
+																	<th class="check" style="text-align: center; width: 5%;"><input
+																		type="checkbox" name="selAll" id="selAll"
+																		onClick="selectedInst(this)" /> Select All</th>
+																	<th>Sr No</th>
+																	<th>Conference Title</th>
+																	<th>Conference Type</th>
+																	<th>Date</th>
+																	<th>Venue</th>
+																	<th>Funding From</th>
+																	<th>Amount</th>
+																	<th>Action</th>	
 																	</tr>
 																</thead>
 
+															<tbody>
+												<c:forEach items="${facConList}" var="facCon"
+													varStatus="count">
+													<tr>
+														<td><input type="checkbox" class="chk"
+															name="confIds" id="confIds${count.index+1}"
+															value="${facCon.confId}" /></td>
+														<td>${count.index+1}</td>
+														<td>${facCon.confName}</td>
+														<td>${facCon.confType}</td>
+														<td>${facCon.confDate}</td>
+														<td>${facCon.confVenue}</td>
+														<td>${facCon.confFundFrom}</td>
+														<td>${facCon.confFundAmt}</td>
+														<td><%-- <c:if test="${editAccess==0}"> --%>
+																<a 
+																	href="${pageContext.request.contextPath}/editFacultyConfrnc/${facCon.confId}"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
+																<a
+																	href="${pageContext.request.contextPath}/deleteFacultyConfrnc/${facCon.confId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger"  title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															<%-- </c:if> --%></td>
+													</tr>
+												</c:forEach>
 
+											</tbody>
+															
 
 															</table>
 
-
-
+															<%-- <c:if test="${deleteAccess==0}"> --%>
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+										<%-- </c:if>
+										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
+											value="0"> --%>
+															
 
 														</div>
 
@@ -346,7 +388,16 @@
 	<script type="text/javascript">
 	
 	
-	
+	function selectedInst(source) {
+
+		checkboxes = document.getElementsByName('confIds');
+
+		for (var i = 0, n = checkboxes.length; i < n; i++) {
+			checkboxes[i].checked = source.checked;
+
+		}
+
+	}
 	
 	
 	function getData() {

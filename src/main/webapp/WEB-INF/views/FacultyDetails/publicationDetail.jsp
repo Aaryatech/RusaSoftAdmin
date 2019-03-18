@@ -95,8 +95,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertFacultyConf"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -122,15 +122,17 @@
 
 															<div class="col-xs-12"></div>
 															
-															
+															<input type="hidden" class="form-control" id="conf_id"
+																		name="conf_id" value="${facConf.confId}">
+																		
 															<div class="form-group">
 															
 																	<label class="control-label col-sm-2" for="smallheading">Title of Publication
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Title of Publication" value=""
+																	<input type="text" class="form-control" id="conf_name"
+																		name="conf_name" placeholder="Title of Publication" value="${facConf.confName}"
 																		required>
 																</div>
 
@@ -144,17 +146,16 @@
 
 
 																<div class="col-sm-6">
-																	National <input type="radio" name="conat" id="conat"
-																		checked value="0"> International<input
-																		type="radio" name="conat" id="conat" value="1">
-																		State<input
-																		type="radio" name="conat" id="conat" value="2">
-																</div>
-																
-																
-																
-
+																	National <input type="radio" name="conf_type" id="conf_type"
+																		checked value="national">
+																		
+																	International<input	type="radio" name="conf_type" id="conf_type"
+																	 value="international">
+																	 
+																	State<input	type="radio" name="conf_type" id="conf_type" value="state">
+																</div>	
 															</div>
+															
 															<div class="form-group">
 															
 															
@@ -163,8 +164,8 @@
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="date" class="form-control" id="dob"
-																		name="dob" placeholder="DOB" value="" required>
+																	<input type="date" class="form-control" id="conf_date"
+																		name="conf_date" placeholder="DOB" value="${facConf.confDate}" required>
 																</div>
 															</div>
 
@@ -173,8 +174,8 @@
 																	 <span class="text-danger"></span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Venue" value="" required>
+																	<input type="text" class="form-control" id="conf_venue"
+																		name="conf_venue" placeholder="Venue" value="${facConf.confVenue}" required>
 																</div>
 															
 															
@@ -183,15 +184,12 @@
 
 															<div class="form-group">
 
-
-
-
 																<label class="control-label col-sm-2" for="smallheading">Funding
 																	From  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Funding from" value=""
+																	<input type="text" class="form-control" id="conf_fund"
+																		name="conf_fund" placeholder="Funding from" value="${facConf.confFundFrom}"
 																		required>
 																</div>
 																	</div>
@@ -202,8 +200,8 @@
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Amount" value="" required>
+																	<input type="text" class="form-control" id="conf_amt"
+																		name="conf_amt" placeholder="Amount" value="${facConf.confFundAmt}" required>
 																</div>
 
 															</div>

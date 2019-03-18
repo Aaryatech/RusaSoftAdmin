@@ -99,7 +99,7 @@
 										action="${pageContext.request.contextPath}/insertNewDean"
 										method="post"
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -313,6 +313,22 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 <script type="text/javascript">
 $(function () {
 	 
@@ -370,6 +386,9 @@ $(function () {
 <script type="text/javascript">
 
 	function checkUnique(inputValue,valueType){
+		document.getElementById("sub1").disabled=false;
+		document.getElementById("sub2").disabled=false;
+
 		
 		//alert(inputValue+" "+valueType);
     	

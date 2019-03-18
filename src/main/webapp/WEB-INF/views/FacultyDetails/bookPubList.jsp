@@ -132,22 +132,61 @@
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
+																		<th class="check" style="text-align: center; width: 5%;"><input
+																		type="checkbox" name="selAll" id="selAll"
+																		onClick="selectedInst(this)" /> Select All</th>
 																		<th>Sr No</th>
 																		<th>Title of Book</th>
 																		<th>Edition</th>
-																			<th>Name of Author 
-																	</th>
+																		<th>Name of Author</th>
 																		<th>Name of Publication/Publisher</th>
-																			<th>Action</th>	
+																		<th>Action</th>	
 																	</tr>
 																</thead>
+																
+																	<tbody>
+												<c:forEach items="${bookList}" var="bList"
+													varStatus="count">
+													<tr>
+														<td><input type="checkbox" class="chk"
+															name="bookIds" id="bookIds${count.index+1}"
+															value="${bList.bookId}" /></td>
+														<td>${count.index+1}</td>
+														<td>${bList.bookTitle}</td>
+														<td>${bList.bookEdition}</td>
+														<td>${bList.bookAuthor}</td>
+														<td>${bList.bookPublisher}</td>
+														
+														<td><%-- <c:if test="${editAccess==0}"> --%>
+																<a 
+																	href="${pageContext.request.contextPath}/editBookPublished/${bList.bookId}"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
+																<a
+																	href="${pageContext.request.contextPath}/deleteBookPublished/${bList.bookId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger"  title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															<%-- </c:if> --%></td>
+													</tr>
+												</c:forEach>
 
+											</tbody>
 
 
 															</table>
 
 
-
+																<%-- <c:if test="${deleteAccess==0}"> --%>
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+										<%-- </c:if>
+										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
+											value="0"> --%>
 
 														</div>
 
@@ -315,6 +354,17 @@
 
 
 	<script>
+	function selectedInst(source) {
+
+		checkboxes = document.getElementsByName('bookIds');
+
+		for (var i = 0, n = checkboxes.length; i < n; i++) {
+			checkboxes[i].checked = source.checked;
+
+		}
+
+	}
+	
 	function showForm() {
 	//document.getElementById("abc").style = "display:none"
 		var qualType=document.getElementById("qualType").value
