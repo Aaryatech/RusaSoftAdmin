@@ -16,7 +16,7 @@ public class FacultyModuleController {
 
 	RestTemplate rest = new RestTemplate();
 
-	@RequestMapping(value = "/showFacultyDetails", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showFacultyDetails", method = RequestMethod.GET)
 	public ModelAndView showFacultyDetails1(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -36,7 +36,7 @@ public class FacultyModuleController {
 
 		return model;
 
-	}
+	}*/
 
 	@RequestMapping(value = "/showPublicationDetails", method = RequestMethod.GET)
 	public ModelAndView showFacultyDetails2(HttpServletRequest request, HttpServletResponse response) {
@@ -287,7 +287,7 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
 	public ModelAndView addPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -308,7 +308,7 @@ public class FacultyModuleController {
 
 		return model;
 
-	}
+	}*/
 
 	@RequestMapping(value = "/showMphillDetails", method = RequestMethod.GET)
 	public ModelAndView showMphillDetails(HttpServletRequest request, HttpServletResponse response) {

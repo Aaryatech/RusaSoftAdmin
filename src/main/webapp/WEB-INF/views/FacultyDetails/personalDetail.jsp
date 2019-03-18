@@ -57,7 +57,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-<%-- 
+				<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showPersonalDetails"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -94,382 +94,347 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-											
-										</ul>
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register
+										</a></li>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+									</ul>
 
-												<div>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
 
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertFacPersonalDetail"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
+												<div class="col-md-12"></div>
 
-													<div class="col-xs-12">
-
-
-														<div class="col-xs-12"></div>
-
-
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Salutation  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-1">
-																<select id="salutation" name="salutation"
-																	class="form-control" required>
-																	<option value="0">Mr</option>
-																	<option value="1">Miss</option>
-																	<option value="2">Mrs</option>
-
-
-																</select>
-															</div>
-
-															<label class="control-label col-sm-1" for="page_name">
-																Name<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control" id="firstName"
-																	name="firstName" placeholder="First Name"
-																	value="${page.pageName}" required>
-															</div>
-															<div class="col-sm-2">
-																<input type="text" class="form-control" id="middleName"
-																	name="middleName" placeholder="Middle Name"
-																	value="${page.pageName}" required>
-															</div>
-															<div class="col-sm-3">
-																<input type="text" class="form-control" id="lastName"
-																	name="lastName" placeholder="Last Name"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Address
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="address"
-																	name="address" placeholder="Permanent Address"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-														
-														
-															<div class="form-group">
-																<label class="control-label col-sm-6" for="page_order">Is 
-																	Permanent and Correspondence Address Same <span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-3">
-																	Yes <input type="radio" name="cat" id="cat"
-																		checked value="1" onclick="check(this.value)"> No<input
-																		type="radio"  onclick="check(this.value)" name="cat" id="cat" value="0">
-																</div>
-</div>
-
-
-	<div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="page_name">Correspondence Address
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="address"
-																	name="address" placeholder="Correspondence Address"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Mobile
-																No. <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="contactNo"
-																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"
-																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Mobile No" value="" required>
-															</div>
-															<div class="col-sm-2">
-															</div>
-														</div>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Phone No
-																<span class="text-danger">*</span>
-															</label>
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="mobileNo"
-																	name="mobileNo" 
-																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Office Landline No" value="" required>
-															</div>
-
-
-														</div>
-
-														<div class="form-group">
-														
-														
-															<label class="control-label col-sm-2" for="smallheading">Resident No.
-																 </label>
-														
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="residentNo"
-																	name="residentNo" pattern="[7-9]{1}[0-9]{9}"
-																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Resident Phone No" value="" required>
-															</div>
-															<div class="col-sm-2">
-															</div>
-															</div>
-														
-														<div class="form-group">
-															
-															<label class="control-label col-sm-2" for="smallheading">Email ID
-																: <span class="text-danger">*</span>
-															</label>
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="mobileNo"
-																	name="mobileNo" 
-																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="abc@xyz.com" value="" required>
-															</div>
-
-
-															
-															
-														</div>
-
-														<div class="form-group">
-														
-														
-														
-														
-														<label class="control-label col-sm-2" for="smallheading">Aadhar
-																No<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="Text" class="form-control" id="adharNo"
-																	name="adharNo" placeholder="Aadhar No" value=""
-																	required>
-															</div>
-															</div>
-															
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Designation  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<select id="designation" name="designation" onchange="showForm()"
-																	class="form-control" required>
-																	<option value="0">Assistant Professor</option>
-																	<option value="1">Associate Professor</option>
-																	<option value="2">Professor</option>
-																	<option value="3">Registrar</option>
-																		<option value="4">Reader</option>
-																	<option value="5">Any Other</option>
-																</select>
-															</div>
-															<div class="col-sm-2">
-															</div>
-															</div>
-															
-															
-															<div class="form-group" id="xyz">
-															<label class="control-label col-sm-2" for="smallheading">Other Designation
-																  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="prevExp"
-																	name="prevExp" placeholder="Other Designation" 
-																	value="" required>
-															</div>
-
-															
-																</div>
-															
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Date
-																of Birth  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="date" class="form-control" id="dob"
-																	name="dob" placeholder="DOB" value="" required>
-															</div>
-
-															
-														</div>
-
-														<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Date
-																of Joining  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="date" class="form-control" id="doj" onchange="calExp()"
-																	name="doj" placeholder="Date of Joining" value=""
-																	required>
-															</div>
-<div class="col-sm-2">
-															</div>
-</div>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Previous
-																Experience  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="prevExp"
-																	name="prevExp" placeholder="Previous Experience"  onchange="calExp()"
-																	value="" required>
-															</div>
-
-															
-																</div>
-															
-															
-														<div class="form-group">
-														
-														<label class="control-label col-sm-2" for="smallheading">Total 
-																Experience <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-															<!-- 	<input type="text" class="form-control" id="curExp"
-																	name="curExp" placeholder="Current Experience" value=""
-																	required> -->
-																		<label class="control-label col-sm-2" for="smallheading">10 
-																
-															</label>
-															</div>
-														</div>
-													
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="fac_name">
+														Name<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="fac_name"
+															name="fac_name" placeholder="Last Name Middle First Name"
+															value="${staff.facultyName}" required>
 													</div>
-
-
-													<div class="clearfix"></div>
-
 												</div>
 
-											</div>
-										</div>
-									</form>
-								</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="fac_address">Address
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="fac_address"
+															name="fac_address" placeholder="Permanent Address"
+															required>
+													</div>
+												</div>
 
+												<div class="form-group">
+													<div class="col-sm-2"></div>
+													<label class="control-label col-sm-6" for="is_add_same">Is
+														Permanent and Correspondence Address Same <span
+														class="text-danger">*</span>
+													</label>
+
+													<div class="col-sm-3">
+														Yes <input type="radio" name="is_add_same"
+															id="is_add_same" checked value="1"
+															onclick="check(this.value)"> No<input
+															type="radio" onclick="check(this.value)"
+															name="is_add_same" id="is_add_same" value="0">
+													</div>
+												</div>
+
+												<div class="form-group" id="abc">
+													<label class="control-label col-sm-3" for="fac_address2">Correspondence
+														Address <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="fac_address2"
+															name="fac_address2" placeholder="Correspondence Address">
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="fac_mob">Mobile
+														No<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="fac_mob"
+															name="fac_mob"pattern="^[1-9]{1}[0-9]{9}$"
+																	maxlength="10"
+															title="Phone number with 7-9 and remaing 9 digit with 0-9"
+															placeholder="Mobile No" value="${staff.contactNo}"
+															required>
+													</div>
+													<div class="col-sm-2"></div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_phone">Phone
+														No<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="f_phone"
+															name="f_phone"
+															
+															placeholder="Office Landline No" value="" required>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_resident">Resident
+														No</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="f_resident"
+															name="f_resident" 
+															title="Phone number with 7-9 and remaing 9 digit with 0-9"
+															placeholder="Resident Phone No" value="" required>
+													</div>
+													<div class="col-sm-2"></div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_email">Email
+														ID<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="f_email"
+															name="f_email"
+															
+															placeholder="abc@xyz.com" value="${staff.email}" required>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_aadhar">Aadhar
+														No<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="Text" class="form-control" id="f_aadhar"
+															name="f_aadhar" placeholder="Aadhar No" value="" required>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_designation">Select
+														Designation <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="f_designation" name="f_designation"
+															onchange="showForm()" class="form-control" required>
+															<c:forEach items="${desigList}" var="des">
+																<c:choose>
+																	<c:when
+																		test="${staff.currentDesignationId==des.designationId}">
+																		<option selected value="${des.designationId}">${des.designationName}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${des.designationId}">${des.designationName}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+														</select>
+													</div>
+													<div class="col-sm-2"></div>
+												</div>
+												<div class="form-group" id="xyz">
+													<label class="control-label col-sm-2" for="smallheading">Other
+														Designation<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="prevExp"
+															name="prevExp" placeholder="Other Designation" value=""
+															required>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_dob">Date
+														of Birth<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id="f_dob" name="f_dob" placeholder="DOB" value=""
+															required>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_doj">Date
+														of Joining <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id="f_doj" name="f_doj"
+															
+															placeholder="Date of Joining" value="${staff.joiningDate}" required>
+													</div>
+													<div class="col-sm-2"></div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_prevExp">Previous
+														Experience <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="f_prevExp"
+															name="f_prevExp" placeholder="Previous Experience"
+															onchange="calExp()" value="" required>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="f_gender">Gender<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														Female<input type="radio" name="f_gender"
+															id="f_gender" checked value="1"
+															>&nbsp;&nbsp;&nbsp; Male<input
+															type="radio" 
+															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+															
+															Transgender<input
+															type="radio"
+															name="f_gender" id="f_gender" value="2">
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="smallheading">Total
+														Experience <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<!-- 	<input type="text" class="form-control" id="curExp"
+																	name="curExp" placeholder="Current Experience" value=""
+																	required> -->
+														<label class="control-label col-sm-2" for="smallheading">10
+														</label>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
+														<input type="submit" id="sub1" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Save"> <input
+																	type="submit" id="sub2" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
+																		Next">
+																<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+													<input type="hidden" id="staff_id" name="staff_id"
+														value="${staff.facultyId}"> <input
+														type="hidden" id="is_view" name="is_view" value="0">
+												</div>
+											</form>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
 							</div>
 						</div>
-
 					</section>
 				</div>
-
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
-		<!-- END CONTENT -->
-
-
-
 	</div>
+
+	<!-- MAIN CONTENT AREA ENDS -->
+	<!-- END CONTENT -->
+
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript">
+	<script type="text/javascript">
+		function check(qualType) {
+			//document.getElementById("abc").style = "display:none"
+			//var qualType=document.getElementById("cat").value
+			//alert("qualType::"+qualType);
 
+			if (qualType == 0) {
 
-function check(qualType) {
-	//document.getElementById("abc").style = "display:none"
-		//var qualType=document.getElementById("cat").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 0) {
+				document.getElementById("abc").style = "visible"
 
-			document.getElementById("abc").style = "visible"
-			
-				
-		} 
-		else if(qualType == 1){
+			} else if (qualType == 1) {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
-		}
-	
-	}
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-		document.getElementById("xyz").style = "display:none"
-		
-	
-	}
-	
-function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("designation").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 5) {
-
-			document.getElementById("xyz").style = "visible"
-			
-				
-		} 
-		else if(qualType == 1){
 			document.getElementById("xyz").style = "display:none"
+
 		}
+
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("designation").value
+			//alert("qualType::"+qualType);
+
+			if (qualType == 5) {
+
+				document.getElementById("xyz").style = "visible"
+
+			} else if (qualType == 1) {
+				document.getElementById("xyz").style = "display:none"
+			}
+
+		}
+
+		function calExp() {
+			var d = new Date();
+
+			var month = d.getMonth() + 1;
+			var day = d.getDate();
+
+			var output = d.getFullYear() + '/' + (month < 10 ? '0' : '')
+					+ month + '/' + (day < 10 ? '0' : '') + day;
+
+			alert("date is" + output);
+
+			var joinDate = document.getElementById("doj").value;
+			alert("date of join" + joinDate);
+
+			//date1: 24/09/2015 (24th Sept 2015)
+			//date2: 09/11/2015 (9th Nov 2015)
+			//the difference: 2.5 (months)
+
+			var difference = (date2.getDate() - date1.getDate()) / 30
+					+ date2.getMonth() - date1.getMonth()
+					+ (12 * (date2.getFullYear() - date1.getFullYear()));
+
+		}
+	</script>
 	
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+        document.getElementById("sub1").disabled=true;
+  	  document.getElementById("sub2").disabled=true;       
+  	  return wasSubmitted;
+    	  }
+      }
+      return false;
+    }   
+    
+    function submit_f(view) {
+		document.getElementById("is_view").value = view;//create this 
+
 	}
-	
-function calExp(){
-	var d = new Date();
-
-	var month = d.getMonth()+1;
-	var day = d.getDate();
-
-	var output = d.getFullYear() + '/' +
-	    (month<10 ? '0' : '') + month + '/' +
-	    (day<10 ? '0' : '') + day;
-	
-	alert("date is"+output);
-	
-	var joinDate=document.getElementById("doj").value;
-	alert("date of join"+joinDate);
-	
-	//date1: 24/09/2015 (24th Sept 2015)
-	//date2: 09/11/2015 (9th Nov 2015)
-	//the difference: 2.5 (months)
-	
-	
-	var difference = (date2.getDate() - date1.getDate()) / 30 +
-    date2.getMonth() - date1.getMonth() +
-    (12 * (date2.getFullYear() - date1.getFullYear()));
-	
-}
-
-
-
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+		});
+    });
+    
 </script>
 
 </body>
