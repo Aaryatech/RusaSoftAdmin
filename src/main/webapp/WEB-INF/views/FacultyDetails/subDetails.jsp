@@ -122,7 +122,7 @@
 															<tr>
 																<th>Sr No</th>
 																<th>Subject Code</th>
-																<th>Subject Type</th>
+
 																<th>Subject Name</th>
 																<th>Program</th>
 																<th>Semester</th>
@@ -133,26 +133,69 @@
 														</thead>
 
 														<tbody>
-															<tr>
-																<td>1</td>
-																<td>001</td>
-																<td>ABC</td>
-																<td>XYZ</td>
-																<td>PQR</td>
-																<td>Semester</td>
-																<td>100</td>
+															<c:forEach items="${subList}" var="subject"
+																varStatus="count">
+																<tr>
 
-																<td><a
-																	href="${pageContext.request.contextPath}/showpoPsoFaculty"
-																	title="Add CO" rel="tooltip" data-color-class="detail"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Block"><span
-																		class="glyphicon glyphicon-list"></span></a></td>
+																	<td style="text-align: center">${count.index+1}</td>
 
-																<td></td>
-															</tr>
+																	<td style="text-align: left"><c:out
+																			value="${subject.subCode}" /></td>
 
+
+
+
+
+																	<td style="text-align: left"><c:out
+																			value="${subject.subName}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${subject.nameOfProgram}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${subject.subSem}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${subject.subPassPer}" /></td>
+
+
+
+																	<td><a
+																		href="${pageContext.request.contextPath}/showpoPsoFaculty"
+																		title="Add CO" rel="tooltip" data-color-class="detail"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Block"><span
+																			class="glyphicon glyphicon-list"></span></a></td>
+																	<td align="center"><c:if test="${editAccess == 0}">
+																			<a
+																				href="${pageContext.request.contextPath}/editSubject/${subject.subId}"
+																				title="Edit Subject" rel="tooltip"
+																				data-color-class="detail"
+																				data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Edit Subject"><span
+																				class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																			test="${deleteAccess == 0}">
+																			<a
+																				href="${pageContext.request.contextPath}/deleteSubject/${subject.subId}"
+																				onClick="return confirm('Are you sure want to delete this record');"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a>
+
+																		</c:if></td>
+
+
+
+
+
+																</tr>
+															</c:forEach>
 														</tbody>
+
+
 													</table>
 
 												</div>

@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showSubDetails"><button
+								<a href="${pageContext.request.contextPath}/showSubDetailsList"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -96,9 +96,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertSubject"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -113,12 +112,12 @@
 												<div class="form-group">
 
 													<label class="control-label col-sm-2" for="subCode">Subject
-														Code Taught <span class="text-danger">*</span>
+														Code <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="subCode"
-															placeholder="Subject Code Taught" name="subCode"
-															value="${page.pageName}" required>
+															placeholder="Subject Code" name="subCode"
+															value="${editSubject.subCode}" required>
 													</div>
 												</div>
 
@@ -126,12 +125,146 @@
 													<label class="control-label col-sm-2" for="Semester">Semester<span
 														class="text-danger">*</span></label>
 													<div class="col-sm-6">
-														<select id="sem" name="sem" class="form-control"
-															onchange="showForm()" required>
-															<option value="0">I</option>
-															<option value="1">II</option>
-															<option value="3">III</option>
-															<option value="4">IV</option>
+														<select id="sem" name="sem" class="form-control" required>
+
+
+															<c:choose>
+																<c:when test="${editSubject.subSem==1}">
+																	<option value="1" Selected>I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+
+																<c:when test="${editSubject.subSem==2}">
+																	<option value="1">I</option>
+																	<option value="2" Selected>II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==3}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3" Selected>III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==4}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4" Selected>IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==5}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5" Selected>V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==6}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6" Selected>VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==7}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7" Selected>VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==8}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8" Selected>VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==9}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9" Selected>IX</option>
+																	<option value="10">X</option>
+																</c:when>
+																<c:when test="${editSubject.subSem==10}">
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10" Selected>X</option>
+																</c:when>
+
+																<c:otherwise>
+																	<option value="1">I</option>
+																	<option value="2">II</option>
+																	<option value="3">III</option>
+																	<option value="4">IV</option>
+																	<option value="5">V</option>
+																	<option value="6">VI</option>
+																	<option value="7">VII</option>
+																	<option value="8">VIII</option>
+																	<option value="9">IX</option>
+																	<option value="10">X</option>
+																</c:otherwise>
+															</c:choose>
+
 
 														</select>
 													</div>
@@ -140,13 +273,13 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="page_name">Subject
-														Taught <span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="subName">Subject
+														Name <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="subTaut"
-															placeholder="Subject Taught" name="subTaut"
-															value="${page.pageName}" required>
+														<input type="text" class="form-control" id="subName"
+															placeholder="Subject Name" name="subName"
+															value="${editSubject.subName}" required>
 													</div>
 												</div>
 
@@ -156,11 +289,58 @@
 														Type<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
+
+
 														<select id="subType" name="subType" class="form-control"
 															onchange="showForm()" required>
-															<option value="0">Regular</option>
-															<option value="1">Elective</option>
-															<option value="3">Other</option>
+															<c:choose>
+																<c:when test="${editSubject.subType==0}">
+
+																	<option value="0" Selected>Regular</option>
+																	<option value="1">Elective</option>
+																	<option value="2">Other</option>
+																</c:when>
+
+																<c:when test="${editSubject.subType==1}">
+																	<option value="0">Regular</option>
+																	<option value="1" Selected>Elective</option>
+																	<option value="2">Other</option>
+																</c:when>
+																<c:otherwise>
+
+																	<option value="0">Regular</option>
+																	<option value="1">Elective</option>
+																	<option value="2">Other</option>
+																</c:otherwise>
+															</c:choose>
+
+														</select>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_name">Select
+														Program <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="programId" name="programId"
+															class="form-control" required>
+															<c:forEach items="${proList}" var="program">
+
+
+																<c:choose>
+																	<c:when test="${editSubject.progId==program.programId}">
+																		<option value="${program.programId}" selected>${program.nameOfProgram}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${program.programId}">${program.nameOfProgram}</option>
+																	</c:otherwise>
+																</c:choose>
+
+
+
+															</c:forEach>
 
 														</select>
 													</div>
@@ -168,25 +348,71 @@
 
 
 
+
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="isCbsc">Is
+													<label class="control-label col-sm-2" for="isCbse">Is
 														CBSE<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-2">
-														Yes <input type="radio" name="isCbsc" id="isCbsc" checked
-															value="0"> No<input type="radio" name="isCbsc"
-															id="isCbsc" value="1">
-													</div>
+
+
+													<c:choose>
+														<c:when test="${editSubject.subIsCbse==0}">
+															<div class="col-md-2">
+
+																<input type="radio" name="isCbse" id="isCbse" value="0"
+																	checked>Yes
+
+															</div>
+
+															<div class="col-md-2">
+																<input type="radio" name="isCbse" value="1"> No
+															</div>
+														</c:when>
+														<c:when test="${editSubject.subIsCbse==1}">
+															<div class="col-md-2">
+
+																<input type="radio" name="isCbse" id="isCbse" value="0">Yes
+
+															</div>
+
+															<div class="col-md-2">
+																<input type="radio" name="isCbse" value="1" checked>
+																No
+															</div>
+														</c:when>
+														<c:otherwise>
+
+															<div class="col-md-2">
+
+																<input type="radio" name="isCbse" id="isCbse" checked
+																	value="0">Yes
+
+															</div>
+
+															<div class="col-md-2">
+																<input type="radio" name="isCbse" value="1"> No
+															</div>
+
+
+														</c:otherwise>
+													</c:choose>
+
+
+													<!-- <div class="col-sm-2">
+														Yes <input type="radio" name="isCbse" id="isCbse" checked
+															value="0"> No<input type="radio" name="isCbse"
+															id="isCbse" value="1">
+													</div> -->
 												</div>
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="noStud">No.
+													<label class="control-label col-sm-2" for="noStudApp">No.
 														of Student Appeared <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="noStud"
-															placeholder="No. of Student Appeared" name="noStud"
-															value="${page.pageName}" required>
+														<input type="text" class="form-control" id="noStudApp"
+															placeholder="No. of Student Appeared" name="noStudApp"
+															value="${editSubject.subStuAppear}" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -197,10 +423,12 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="pass"
 															placeholder="Passed" onchange=" calResult()" name="pass"
-															value="${page.pageName}" required>
+															value="${editSubject.subStuPassed}" required>
 													</div>
 												</div>
-
+												<input type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" value="${editSubject.subId}"
+													name="subId" id="subId">
 
 												<div class="form-group">
 
@@ -210,21 +438,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="rslt"
 															placeholder="% of Result" name="rslt"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-2" for="course">Course
-														Outcome <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="course"
-															placeholder="Course Outcome" name="course"
-															value="${page.pageName}" required>
+															value="${editSubject.subPassPer}" required>
 													</div>
 												</div>
 
@@ -333,19 +547,22 @@
 		}
 
 		function calResult() {
-			var noStud = parseFloat(document.getElementById("noStud").value);
+			var noStudApp = parseFloat(document.getElementById("noStudApp").value);
 
 			var pass = parseFloat(document.getElementById("pass").value);
 
-			var x = (pass / noStud) * 100;
-			document.getElementById("rslt").value = x;
+			var x = (pass / noStudApp) * 100;
+			document.getElementById("rslt").value = x.toFixed(2);
 
 		}
 	</script>
 
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
 
-
-
-
+		}
+	</script>
 </body>
 </html>

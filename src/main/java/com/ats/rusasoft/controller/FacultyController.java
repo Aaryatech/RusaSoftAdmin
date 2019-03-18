@@ -3,6 +3,8 @@ package com.ats.rusasoft.controller;
 import java.text.DateFormat;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -24,8 +26,11 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.faculty.model.GetJournal;
+import com.ats.rusasoft.faculty.model.GetSubject;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.faculty.model.ResearchProject;
+import com.ats.rusasoft.faculty.model.Subject;
+import com.ats.rusasoft.master.model.Program;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
@@ -81,8 +86,8 @@ public class FacultyController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
-					"1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "1", "0", "0",
+					newModuleList);
 
 			System.out.println(view);
 
@@ -567,24 +572,63 @@ public class FacultyController {
 
 	}
 
-	@RequestMapping(value = "/showSubDetails", method = RequestMethod.GET)
-	public ModelAndView showSubDetails(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/showSubDetailsList", method = RequestMethod.GET)
+	public ModelAndView showSubDetailsList(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
+			Info view = AccessControll.checkAccess("showSubDetailsList", "showSubDetailsList", "1", "0", "0", "0",
+					newModuleList);
 
-			model = new ModelAndView("FacultyDetails/subDetails");
+			if (view.isError() == true) {
 
-			model.addObject("title", "Subject Details Form");
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("FacultyDetails/subDetails");
+
+				model.addObject("title", "Subject Details Form");
+
+				List<GetSubject> subList = rest.getForObject(Constants.url + "/getAllSubjectList", List.class);
+
+				System.out.println("subList" + subList);
+
+				model.addObject("subList", subList);
+
+				Info add = AccessControll.checkAccess("showSubDetailsList", "showSubDetailsList", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showSubDetailsList", "showSubDetailsList", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showSubDetailsList", "showSubDetailsList", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+			}
 
 		} catch (Exception e) {
 
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+			System.err.println("exception In showSubDetailsList at Faculty Contr" + e.getMessage());
 
 			e.printStackTrace();
 
 		}
-
 		return model;
 
 	}
@@ -595,19 +639,193 @@ public class FacultyController {
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("FacultyDetails/addSubDetail");
+			HttpSession session = request.getSession();
 
-			model.addObject("title", "Subject Details Form");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info add = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "1", "0", "0", "0",
+					newModuleList);
+
+			if (add.isError() == false) {
+
+				Program[] program = rest.getForObject(Constants.url + "/getAllProgramList", Program[].class);
+				List<Program> proList = new ArrayList<Program>(Arrays.asList(program));
+
+				model = new ModelAndView("FacultyDetails/addSubDetail");
+
+				model.addObject("title", "Subject Details Form");
+				model.addObject("proList", proList);
+
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+			System.err.println("exception In showAddSubDetails at faculty Contr" + e.getMessage());
 
 			e.printStackTrace();
 
 		}
 
 		return model;
+
+	}
+
+	@RequestMapping(value = "/insertSubject", method = RequestMethod.POST)
+	public String insertSubject(HttpServletRequest request, HttpServletResponse response) {
+		String returnString = new String();
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "1", "0", "0",
+					newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				System.err.println("Inside insertJournal method");
+
+				int subId = 0;
+				try {
+					subId = Integer.parseInt(request.getParameter("subId"));
+				} catch (Exception e) {
+					subId = 0;
+				}
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date now = new Date();
+				String curDate = dateFormat.format(new Date());
+				String dateTime = dateFormat.format(now);
+
+				String subCode = request.getParameter("subCode");
+				String sem = request.getParameter("sem");
+				String subName = request.getParameter("subName");
+				String subType = request.getParameter("subType");
+
+				int is_view = Integer.parseInt(request.getParameter("is_view"));
+				int programId = Integer.parseInt(request.getParameter("programId"));
+				int isCbse = Integer.parseInt(request.getParameter("isCbse"));
+				int noStudApp = Integer.parseInt(request.getParameter("noStudApp"));
+				int pass = Integer.parseInt(request.getParameter("pass"));
+				float rslt = Float.parseFloat(request.getParameter("rslt"));
+
+				// pass
+
+				Subject sub = new Subject();
+				sub.setDelStatus(1);
+				sub.setExInt1(1);
+				sub.setExInt2(1);
+				sub.setExVar1("NA");
+				sub.setExVar2("NA");
+				sub.setFacultyId(userObj.getGetData().getUserDetailId());
+				int yearId = (int) session.getAttribute("acYearId");
+				sub.setYearId(yearId);
+				sub.setIsActive(1);
+				sub.setSubId(subId);
+				sub.setMakerEnterDatetime(dateTime);
+				sub.setMakerUserId(userObj.getUserId());
+				sub.setProgId(programId);
+				sub.setSubCode(subCode);
+				sub.setSubIsCbse(isCbse);
+				sub.setSubName(subName);
+				sub.setSubPassPer(rslt);
+				sub.setSubSem(sem);
+				sub.setSubStuAppear(noStudApp);
+				sub.setSubStuPassed(pass);
+				sub.setSubType(subType);
+
+				Subject subInsertRes = rest.postForObject(Constants.url + "saveSubject", sub, Subject.class);
+
+				System.err.println("subInsertRes " + subInsertRes.toString());
+
+				if (is_view == 1) {
+					returnString = "redirect:/showSubDetailsList";
+				} else {
+					returnString = "redirect:/showAddSubDetails";
+				}
+			} else {
+
+				returnString = "redirect:/accessDenied";
+
+			}
+		}
+
+		catch (Exception e) {
+			System.err.println("EXCE in vendInsertRes " + e.getMessage());
+			e.printStackTrace();
+
+		}
+		return returnString;
+
+	}
+
+	@RequestMapping(value = "/editSubject/{subId}", method = RequestMethod.GET)
+	public ModelAndView editSubject(@PathVariable("subId") int subId, HttpServletRequest request) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				Program[] program = rest.getForObject(Constants.url + "/getAllProgramList", Program[].class);
+				List<Program> proList = new ArrayList<Program>(Arrays.asList(program));
+
+				model = new ModelAndView("FacultyDetails/addSubDetail");
+
+				model.addObject("title", "Edit Subject Details Form");
+				model.addObject("proList", proList);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("subId", subId);
+
+				Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
+				System.out.println("subId:" + subId);
+
+				model.addObject("editSubject", editSubject);
+
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editSubject at faculty Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/deleteSubject/{subId}", method = RequestMethod.GET)
+	public String deleteSubject(@PathVariable("subId") int subId, HttpServletRequest request) {
+		String value = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "0", "0", "1",
+				newModuleList);
+		if (view.isError() == true) {
+
+			value = "redirect:/accessDenied";
+
+		} else {
+			Info inf = new Info();
+			System.out.println("Id:" + subId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("subIdList", subId);
+			Info miqc = rest.postForObject(Constants.url + "/deleteSubjects", map, Info.class);
+			value = "redirect:/showSubDetailsList";
+		}
+		return value;
 
 	}
 

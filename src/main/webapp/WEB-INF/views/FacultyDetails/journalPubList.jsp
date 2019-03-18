@@ -165,7 +165,7 @@
 																					test="${editAccess == 0}">
 																					<a
 																						href="${pageContext.request.contextPath}/editJournal/${journal.journalId}"
-																						title="Edit IQAC" rel="tooltip"
+																						title="Edit Journal" rel="tooltip"
 																						data-color-class="detail"
 																						data-animate=" animated fadeIn "
 																						data-toggle="tooltip"
