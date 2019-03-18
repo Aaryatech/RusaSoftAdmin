@@ -153,13 +153,13 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="text" onkeyup="calculateSum()"
+																		<td><input type="number" onkeyup="calculateSum()"
 																			class="txt" id="cast_m${cast.castId}"
 																			name="cast_m${cast.castId}" value="0" required></td>
-																		<td><input type="text"  onkeyup="calculateSum()"
+																		<td><input type="number"  onkeyup="calculateSum()"
 																			class="txt" id="cast_f${cast.castId}"
 																			name="cast_f${cast.castId}" value="0" required></td>
-																		<td><input type="text"  onkeyup="calculateSum()"
+																		<td><input type="number"  onkeyup="calculateSum()"
 																			class="txt" id="cast_t${cast.castId}"
 																			name="cast_t${cast.castId}" value="0" required></td>
 																	</tr>
@@ -173,13 +173,13 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="text" onkeyup="calculateSum()"
+																		<td><input type="number" onkeyup="calculateSum()"
 																			class="txt" id="cast_m${cast.studentCatId}"
 																			name="cast_m${cast.studentCatId}" value="${cast.maleStudent}" required></td>
-																		<td><input type="text"  onkeyup="calculateSum()"
+																		<td><input type="number"  onkeyup="calculateSum()"
 																			class="txt" id="cast_f${cast.studentCatId}"
 																			name="cast_f${cast.studentCatId}" value="${cast.femaleStudent}" required></td>
-																		<td><input type="text"  onkeyup="calculateSum()"
+																		<td><input type="number"  onkeyup="calculateSum()"
 																			class="txt" id="cast_t${cast.studentCatId}"
 																			name="cast_t${cast.studentCatId}" value="${cast.transStudent}" required></td>
 																	</tr>

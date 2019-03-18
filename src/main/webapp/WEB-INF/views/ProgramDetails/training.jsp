@@ -52,23 +52,19 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
+							<c:if test="${addAccess==0}">
 								<a href="${pageContext.request.contextPath}/showAddStudTran"><button
 										type="button" class="btn btn-success">Add Training
-										Details</button></a>
-
+										Details</button></a></c:if>
 							</div>
-
 						</header>
 						<form
 							action="${pageContext.request.contextPath}/deleteTranPlace/0"
 							method="get" id="insListForm">
 						<div class="content-body">
-						
 							<div class="row">
-
 								<div class="col-xs-12"></div>
 								<div class="col-xs-12">
-
 									<table class="table table-striped dt-responsive display"
 										id="example-1">
 										<thead>
@@ -82,7 +78,6 @@
 												<th>Package Offered</th>
 												<th>Action</th>
 											</tr>
-
 										</thead>
 										<tbody>
 											<c:forEach items="${trainPlaceList}" var="trainPlace"
@@ -97,29 +92,23 @@
 													<td>${trainPlace.pakageOfferd}</td>
 
 													<td align="center">
-														<%-- <c:if test="${editAccess==0}"> --%> <a href="#"
+														<c:if test="${editAccess==0}">  <a href="#"
 														onclick="showEditTP(${trainPlace.placementId})"><span
 															class="glyphicon glyphicon-edit" title="Edit"
-															data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<%-- </c:if> --%>
-														<%-- <c:if test="${deleteAccess==0}"> --%> <a
+															data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp; </c:if>
+														<c:if test="${deleteAccess==0}">  <a
 														href="${pageContext.request.contextPath}/deleteTranPlace/${trainPlace.placementId}"
 														onClick="return confirm('Are you sure want to delete this record');"
 														rel="tooltip" data-color-class="danger" title="Delete"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
 														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a> <%-- </c:if> --%>
+															class="glyphicon glyphicon-remove"></span></a> </c:if>
 													</td>
-
 												</tr>
 											</c:forEach>
-
 										</tbody>
-
-
-
 									</table>
 								</div>
-
 							</div>
 						</div>
 						<input type="hidden" id="edit_place_id" name="edit_place_id"
@@ -132,9 +121,7 @@
 			</section>
 		</section>
 		<!-- END CONTENT -->
-
 	</div>
-
 	<%-- 
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">

@@ -330,10 +330,6 @@
 
 	<!-- END CONTENT -->
 	<script type="text/javascript">
-		function submit_f(view) {
-			document.getElementById("is_view").value = view;//create this 
-
-		}
 
 		/* function checkUnique(inputValue,valueType){
 		 //alert(inputValue);
@@ -474,7 +470,12 @@
     	  }
       }
       return false;
-    }    
+    }   
+    
+    function submit_f(view) {
+		document.getElementById("is_view").value = view;//create this 
+
+	}
 </script>
 
 

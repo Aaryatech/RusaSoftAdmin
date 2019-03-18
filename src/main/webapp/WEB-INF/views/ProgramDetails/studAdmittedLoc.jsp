@@ -53,10 +53,11 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
+							<c:if test="${addAccess==0}">
 								<a
 									href="${pageContext.request.contextPath}/showAddStudAddmitLocWise"><button
 										type="button" class="btn btn-success">Add Student
-										Locationwise</button></a>
+										Locationwise</button></a></c:if>
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 

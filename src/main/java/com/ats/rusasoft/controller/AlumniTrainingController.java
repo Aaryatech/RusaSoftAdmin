@@ -121,6 +121,8 @@ public class AlumniTrainingController {
 			model = new ModelAndView("ProgramDetails/addAluminiDetails");
 
 			model.addObject("title", "Add Alumini Contribution Detail");
+			AlumniDetail alumni=new AlumniDetail();
+			model.addObject("alumni",alumni);
 
 		} catch (Exception e) {
 
@@ -367,8 +369,35 @@ public class AlumniTrainingController {
 
 		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			model = new ModelAndView("ProgramDetails/training");
+			Info viewAccess = AccessControll.checkAccess("showStudTran", "showStudTran", "1", "0", "0", "0",
+					newModuleList);
+			
+			if (viewAccess.isError() == false) {
+				model = new ModelAndView("ProgramDetails/training");
+
+				Info addAccess = AccessControll.checkAccess("showStudTran", "showStudTran", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showStudTran", "showStudTran", "0", "0", "1",
+						"0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showStudTran", "showStudTran", "0", "0", "0",
+						"1", newModuleList);
+				
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false) 
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
 
 			model.addObject("title", "Program Training Details");
 
@@ -377,7 +406,6 @@ public class AlumniTrainingController {
 
 			// GetAlumni
 
-			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			map.add("instId", userObj.getGetData().getUserInstituteId());
 
@@ -389,6 +417,11 @@ public class AlumniTrainingController {
 			System.err.println("trainPlaceList " + trainPlaceList.toString());
 
 			model.addObject("trainPlaceList", trainPlaceList);
+			}else {
+				
+				model = new ModelAndView("accessDenied");
+
+			}
 
 		} catch (Exception e) {
 
@@ -422,11 +455,8 @@ public class AlumniTrainingController {
 			model.addObject("progTypeList", progTypeList);
 
 		} catch (Exception e) {
-
 			System.err.println("exception In showAddStudTran at AlumTrain Contr" + e.getMessage());
-
 			e.printStackTrace();
-
 		}
 
 		return model;
