@@ -131,7 +131,7 @@
 																	</div>
 																</c:when>
 																<c:when test="${editJournal.journalStandard==1}">
-																	<<div class="col-md-2">
+																	<div class="col-md-2">
 
 																		<input type="radio" name="jouStd" id="jouStd"
 																			value="0">National
@@ -144,8 +144,8 @@
 																	</div>
 																</c:when>
 																<c:otherwise>
-																
-																<<div class="col-md-2">
+
+																	<div class="col-md-2">
 
 																		<input type="radio" name="jouStd" id="jouStd" checked
 																			value="0">National
@@ -271,6 +271,8 @@
 
 
 														</div>
+														<input type="hidden" id="is_view" name="is_view" value="0">
+
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="journalPgFrom">Page
@@ -356,6 +358,15 @@
 			});
 		});
 	</script>
+
+	<script type="text/javascript">
+function submit_f(view){
+	//alert(view);
+		document.getElementById("is_view").value=view; 
+		
+	}
+ 
+</script>
 	<script type="text/javascript">
 	function allowOnlyNumber(evt){
 		

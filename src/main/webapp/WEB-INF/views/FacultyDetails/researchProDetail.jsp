@@ -145,6 +145,7 @@
 															</div>
 
 														</div>
+														<input type="hidden" id="is_view" name="is_view" value="0">
 														<div class="form-group">
 
 
@@ -388,5 +389,14 @@
 	    return true;
 	}
 	</script>
+
+	<script type="text/javascript">
+function submit_f(view){
+	//alert(view);
+		document.getElementById("is_view").value=view; 
+		
+	}
+ 
+</script>
 </body>
 </html>
