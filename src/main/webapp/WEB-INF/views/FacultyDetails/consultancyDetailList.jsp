@@ -85,8 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<a
-									href="${pageContext.request.contextPath}/showConsultancyList"><button
+								<a href="${pageContext.request.contextPath}/showConsultancyList"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -135,7 +134,8 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="nature"
 																placeholder="Nature of Consultancy" name="nature"
-																placeholder="" value="${page.pageName}" required>
+																placeholder="" value="${editConsultancy.consNature}"
+																required>
 
 														</div>
 													</div>
@@ -148,7 +148,8 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="sponser"
 																placeholder="Sponsoring Agency/Industry" name="sponser"
-																placeholder="" value="${page.pageName}" required>
+																placeholder="" value="${editConsultancy.consSponsor}"
+																required>
 															<!-- </div> -->
 														</div>
 													</div>
@@ -161,7 +162,8 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="amount"
 																placeholder="Amount of Consultancy" name="amount"
-																placeholder="" value="${page.pageName}" required>
+																placeholder="" value="${editConsultancy.consAmount}"
+																required>
 															<!-- </div> -->
 														</div>
 													</div>
@@ -173,7 +175,8 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="conPeriod"
 																placeholder="Consultancy Period" name="conPeriod"
-																placeholder="" value="${page.pageName}" required>
+																placeholder="" value="${editConsultancy.consPeriod}"
+																required>
 														</div>
 
 													</div>
@@ -184,21 +187,31 @@
 														</label>
 
 														<div class="col-sm-2">
+
+															<c:choose>
+																<c:when test="${editConsultancy.isConsCompleted==0}">
 															Yes <input type="radio" name="projComp" id="projComp"
-																checked value="1"> No<input type="radio"
-																name="projComp" id="projComp" value="0">
+																		 value="1"> No<input type="radio"
+																		name="projComp" id="projComp" value="0" checked>
+																</c:when>
+																<c:otherwise>
+															Yes <input type="radio" name="projComp" id="projComp"
+																		checked value="1"> No<input type="radio"
+																		name="projComp" id="projComp" value="0">
+																</c:otherwise>
+															</c:choose>
+
 														</div>
 													</div>
 
 													<input type="hidden" id="is_view" name="is_view" value="0">
 													<c:choose>
-														<c:when test="${editProgramActivity.studentActivityId>0}">
+														<c:when test="${editConsultancy.consId>0}">
 															<input type="hidden" id="consId" name="consId"
-																value="${editProgramActivity.studentActivityId}">
+																value="${editConsultancy.consId}">
 														</c:when>
 														<c:otherwise>
-															<input type="hidden" id="consId" name="consId"
-																value="0">
+															<input type="hidden" id="consId" name="consId" value="0">
 														</c:otherwise>
 													</c:choose>
 													<div class="form-group">
