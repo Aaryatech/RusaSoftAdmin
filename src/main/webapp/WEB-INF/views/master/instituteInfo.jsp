@@ -80,9 +80,9 @@
             <table id="example-1" class="table table-striped dt-responsive display">
                 <thead>
                     <tr>
-                    <th class="check" style="text-align: center; width: 5%;"><input
+                  <!--   <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
                    		<th width="5%">Sr No</th>
                         <th>Academic Year</th> 
                         <th>Faculty</th> 
@@ -98,9 +98,9 @@
 												<c:forEach items="${instInfoList}" var="inst"
 													varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="infoDetailIds"
+													<%-- 	<td><input type="checkbox" class="chk" name="infoDetailIds"
 															id="infoDetailIds${count.index+1}"
-															value="${inst.infoDetailId}" /></td>
+															value="${inst.infoDetailId}" /></td> --%>
 														<td>${count.index+1}</td>
 														<td>${inst.academicYear}</td>
 														<td>${inst.noOfFulltimeFaculty}</td>

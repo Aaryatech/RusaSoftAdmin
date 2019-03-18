@@ -122,7 +122,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_name"
-																style="text-align: left;">Year <span
+															>Year <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -155,7 +155,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_name"
-																style="text-align: left;">No. of Full Time
+																>No. of Full Time
 																Faculty in Institute <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -172,7 +172,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
-																style="text-align: left;">No. of Full Time
+														>No. of Full Time
 																Nonteaching Including Office Staff<span
 																class="text-danger">*</span>
 															</label>
@@ -190,7 +190,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
-																style="text-align: left;">No. of Support Staff <span
+															>No. of Support Staff <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -204,7 +204,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
-																style="text-align: left;">No. of current
+																>No. of current
 																admitted student <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -218,7 +218,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
-																style="text-align: left;"> State Treasury Code <span
+														> State Treasury Code <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -231,7 +231,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
-																style="text-align: left;"> Rusa ID No. <span
+															> RUSA ID No. <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -269,7 +269,7 @@
 													<div class="col-sm-offset-2 col-sm-10">
 														<input type="submit" onClick="this.disabled=true;"
 															id="submitButton" class="btn btn-primary"
-															onclick="submit_f(1)" value="Add"> <input
+															onclick="submit_f(1)" value="Save"> <input
 															type="submit" class="btn btn-primary"
 															onclick="submit_f(0)"
 															value="Save &

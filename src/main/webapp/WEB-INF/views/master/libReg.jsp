@@ -198,7 +198,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id="relieving_date" 	value="${editInst.realivingDate}"
+																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${editInst.realivingDate}"
 																	name="relieving_date"  required>
 															</div>
 														</div>
@@ -212,9 +212,9 @@
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
+																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<!-- <input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next"> -->
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>

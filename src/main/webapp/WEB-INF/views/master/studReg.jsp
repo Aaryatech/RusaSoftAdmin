@@ -237,7 +237,7 @@
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>

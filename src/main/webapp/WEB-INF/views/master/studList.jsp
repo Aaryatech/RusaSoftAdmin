@@ -197,7 +197,7 @@
 
 		function selectedInst(source) {
 
-			checkboxes = document.getElementsByName('instIds');
+			checkboxes = document.getElementsByName('studIds');
 
 			for (var i = 0, n = checkboxes.length; i < n; i++) {
 				checkboxes[i].checked = source.checked;
