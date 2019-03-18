@@ -1311,114 +1311,125 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/showPatentDetails", method = RequestMethod.GET)
-	public ModelAndView showPatentDetails(HttpServletRequest request, HttpServletResponse response) {
+	/*
+	 * @RequestMapping(value = "/showPatentDetails", method = RequestMethod.GET)
+	 * public ModelAndView showPatentDetails(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/patentDetails");
+	 * 
+	 * model.addObject("title", "Patent Details Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showFacultyDetails at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
-		ModelAndView model = null;
-		try {
+	/*
+	 * @RequestMapping(value = "/showPatentDetailsList", method = RequestMethod.GET)
+	 * public ModelAndView showPatentDetailsList(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/patentDetailList");
+	 * 
+	 * model.addObject("title", "Patent Details List");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showPatentDetailsList at Library Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
-			model = new ModelAndView("FacultyDetails/patentDetails");
-
-			model.addObject("title", "Patent Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showPatentDetailsList", method = RequestMethod.GET)
-	public ModelAndView showPatentDetailsList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/patentDetailList");
-
-			model.addObject("title", "Patent Details List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showPatentDetailsList at Library Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
-	public ModelAndView showAwardDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/awardDetails");
-
-			model.addObject("title", "Award Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showAwardDetails at Library Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAwardDetailsList", method = RequestMethod.GET)
-	public ModelAndView showAwardDetailsList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/awardDetailsList");
-
-			model.addObject("title", "Award Details List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showAwardDetailsList at Library Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showOutReachDetailsList", method = RequestMethod.GET)
-	public ModelAndView showOutReachDetailsList(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/outReachList");
-
-			model.addObject("title", "Out Reach Activity List");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showOutReachDetailsList at Library Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-}
+	/*
+	 * @RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
+	 * public ModelAndView showAwardDetails(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/awardDetails");
+	 * 
+	 * model.addObject("title", "Award Details Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showAwardDetails at Library Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 * 
+	 * @RequestMapping(value = "/showAwardDetailsList", method = RequestMethod.GET)
+	 * public ModelAndView showAwardDetailsList(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/awardDetailsList");
+	 * 
+	 * model.addObject("title", "Award Details List");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showAwardDetailsList at Library Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 * 
+	 * @RequestMapping(value = "/showOutReachDetailsList", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * showOutReachDetailsList(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/outReachList");
+	 * 
+	 * model.addObject("title", "Out Reach Activity List");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showOutReachDetailsList at Library Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 * 
+	 */}
