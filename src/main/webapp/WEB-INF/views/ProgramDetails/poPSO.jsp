@@ -66,30 +66,30 @@
 						</header>
 						
 						
-						
-										<div class="col-xs-12">
-									&nbsp;&nbsp;&nbsp;					
-									<div class="row">
-									<label class="control-label col-sm-2" for="status"> Program Name:</label>
-										<label class="control-label col-sm-2" for="status"> </label>				
-									</div>
-										
-									<div class="row">
-									<label class="control-label col-sm-2" for="status"> Duration:</label>
-										<label class="control-label col-sm-2" for="status"> </label>				
-									</div>
-									<div class="row">
-									<label class="control-label col-sm-2" for="status"> Sanctioned Intake:</label>
-										<label class="control-label col-sm-2" for="status"> </label>				
 								
-									</div>
-									</div>					
 
 
-                       <br/><br/><br/>
+                     
 						<div class="content-body">
 							<div class="row">
 
+										<div class="col-xs-12">
+												
+									<div class="form-group">
+									<label class="control-label col-sm-2" for="status"> Program Name:</label>
+										<label class="control-label col-sm-10" for="status"><strong>${progDetail.nameOfProgram} </strong></label>				
+									</div>
+										
+									<div class="form-group">
+									<label class="control-label col-sm-2" for="status"> Duration:</label>
+										<label class="control-label col-sm-10" for="status"><strong> ${progDetail.monthDuration}</strong></label>				
+									</div>
+									<div class="form-group">
+									<label class="control-label col-sm-2" for="status"> Sanctioned Intake:</label>
+										<label class="control-label col-sm-10" for="status"><strong>${progDetail.sanctionalIntake}</strong> </label>				
+								
+									</div>
+									</div>			
 								<div class="col-xs-12">
 
 									<div class="form-group">
@@ -108,7 +108,46 @@
 
                                                </thead>
                                                
-                                              <tbody>
+                                               
+                                               
+                                               <c:forEach items="${poList}" var="poList"
+													varStatus="count">
+													<tr>
+										
+														<td>${count.index+1}</td>
+														<td>${poList.poText}</td>
+														<td>${poList.psoMapping}</td>
+														<td>${poList.psoMapSatisfyingValue}</td>
+													<td> 
+												     	<a href="${pageContext.request.contextPath}/showMapPOPSO/${poList.poId}" title="Add PSO"
+											            rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												         class="glyphicon glyphicon-list"></span></a>
+											       </td>
+
+<%-- 
+														<td  align="center">
+													    <c:if test="${editAccess == 0}"> 
+							                       	  	<a
+															href="#" onclick="showEditLibrarian(${institute.librarianId})"><span
+																class="glyphicon glyphicon-edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>
+			                	                       </c:if>&nbsp;&nbsp;&nbsp;&nbsp;
+														
+												  <c:if test="${deleteAccess == 0}"> 
+															<a
+															href="${pageContext.request.contextPath}/showMapPOPSO/${institute.librarianId}" title="Add PSO"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a>
+																</c:if>
+																
+														</td> --%>
+													</tr>
+												</c:forEach>
+                                               
+                                          <%--     <tbody>
 <tr>
 												<td>1</td>
 												<td>xyz</td> <!-- format to display program name is program Type-Program Name -->
@@ -122,7 +161,7 @@
 												
 											</tr>
 
-</tbody>
+</tbody> --%>
 														</table>
 														</div>
 														
@@ -131,14 +170,14 @@
 							
 </div>
 								
-							
+							<!-- 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
-
+ -->
 
 
 

@@ -213,8 +213,7 @@ public class LibraryController {
 
 				Info add = AccessControll.checkAccess("showLibList", "showLibList", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "1", "0", newModuleList);
-				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "0", "1",
-						newModuleList);
+				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "0", "1",newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -878,6 +877,7 @@ public class LibraryController {
 					}
 					String studIdList = sb.toString();
 					studIdList = studIdList.substring(0, studIdList.length() - 1);
+					System.out.println("stud id list"+studIdList);
 
 					map.add("studIdList", studIdList);
 				} else {

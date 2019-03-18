@@ -2,6 +2,8 @@ package com.ats.rusasoft.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,8 +21,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.model.GetProgram;
+import com.ats.rusasoft.model.GetStudentDetail;
+import com.ats.rusasoft.model.Info;
+import com.ats.rusasoft.model.ProgramOutcome;
+import com.ats.rusasoft.model.ProgramSpeceficOutcome;
 import com.ats.rusasoft.model.StudentSupprtScheme;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 
 @Controller
@@ -79,8 +88,6 @@ public class ProgramDetailModuleController {
 
 	
 	
-	
-	
 	@RequestMapping(value = "/showEucationalObjective", method = RequestMethod.GET)
 	public ModelAndView showEucationalObjective(HttpServletRequest request, HttpServletResponse response) {
 
@@ -107,11 +114,53 @@ public class ProgramDetailModuleController {
 	public ModelAndView showpoPso(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		
+		HttpSession session = request.getSession();
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
 		try {
+			Info view = AccessControll.checkAccess("showpoPso", "showpoPso", "1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 
 			model = new ModelAndView("ProgramDetails/poPSO");
 
 			model.addObject("title", "Program PO PSO");
+			/*
+			 * HttpSession session = request.getSession(); int instituteId
+			 * =(int)session.getAttribute("instituteId");
+			 */
+            map = new LinkedMultiValueMap<>();
+			
+			map.add("programId", 2);
+			GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
+			System.out.println("Program:"+progDetail);
+			model.addObject("progDetail", progDetail);
+		
+			//model.addObject("title", "Edit Student Support Scheme");
+			//model.addObject("studId", studSchm.getSprtSchmId());
+			
+			 map = new LinkedMultiValueMap<>();
+				
+			map.add("programId", 2);
+				
+
+				ProgramOutcome[] instArray = rest.postForObject(Constants.url + "getProgramOutcomeListByProgramId", map,
+						ProgramOutcome[].class);
+				List<ProgramOutcome> poList = new ArrayList<>(Arrays.asList(instArray));
+
+				System.out.println("po list is" + poList.toString());
+			
+			
+				model.addObject("poList", poList);
+			
+			}
+			
 
 		} catch (Exception e) {
 
@@ -124,6 +173,126 @@ public class ProgramDetailModuleController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/showMapPOPSO/{poId}", method = RequestMethod.GET)
+	public ModelAndView showMapPOPSO(HttpServletRequest request, HttpServletResponse response,@PathVariable("poId") int poId) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/mapPSO");
+
+			model.addObject("title", "Map PO PSO");
+			
+			 map = new LinkedMultiValueMap<>();
+				
+				map.add("programId", 2);
+				GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
+				System.out.println("Program:"+progDetail);
+				model.addObject("progDetail", progDetail);
+				
+				map.add("poId", poId);
+				ProgramOutcome poDetail = rest.postForObject(Constants.url+"/getProgramOutcomeByPOId", map, ProgramOutcome.class);
+				System.out.println("Program:"+poDetail);
+				model.addObject("poDetail", poDetail);
+				model.addObject("poId1", poDetail.getPoId());
+				System.out.println("po id iss"+poDetail.getPoId());
+				
+				
+				
+				
+				
+				map.add("programId", 2);
+				
+				ProgramSpeceficOutcome[] instArray = rest.postForObject(Constants.url + "getProgramSpecificOutcomeList", map,
+						ProgramSpeceficOutcome[].class);
+				List<ProgramSpeceficOutcome> psoList = new ArrayList<>(Arrays.asList(instArray));
+				
+			
+				model.addObject("psoDetail", psoList);
+				
+				
+				String psoIds=poDetail.getPsoMapId();
+				System.out.println("psoIdsarray before ::::"+psoIds);
+				//String[] psoIdsarray = psoIds.split(",",4);
+				
+				// String[] values = psoIds.split(",");
+				 
+				 List<String> items = Arrays.asList(psoIds.split(","));
+				System.out.println("psoIdsarray is after ::::"+items);
+				
+				model.addObject("items",items);
+				
+				
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/popsomapped", method = RequestMethod.GET)
+	public String popsomapped(HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+		String a = null;
+
+		String poId1 = request.getParameter("poId1");
+		System.out.println("po id "+poId1);
+
+		String satValue = request.getParameter("satValue");
+	
+		try {
+			
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+
+					System.err.println("Multiple records delete ");
+					String[] psoId = request.getParameterValues("psoIds");
+					System.out.println("id are" + psoId);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < psoId.length; i++) {
+						sb = sb.append(psoId[i] + ",");
+
+					}
+					String psoIdList = sb.toString();
+					psoIdList = psoIdList.substring(0, psoIdList.length() - 1);
+					System.out.println("pso id list"+psoIdList);
+				
+					map.add("psoIdList", psoIdList);
+					map.add("poId", poId1);
+					map.add("satValue", satValue);
+					
+					
+			
+
+				Info errMsg = rest.postForObject(Constants.url + "updatePoMapping", map, Info.class);
+				a = "redirect:/showpoPso";
+		
+	}
+		catch (Exception e) {
+
+			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return a;
+
+	}
+
+	
+
 
 	/*
 	 * @RequestMapping(value = "/showStudAddmit", method = RequestMethod.GET) public
@@ -224,28 +393,6 @@ public class ProgramDetailModuleController {
 	 * }
 	 */
 	
-	@RequestMapping(value = "/showMapPOPSO", method = RequestMethod.GET)
-	public ModelAndView showMapPOPSO(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("ProgramDetails/mapPSO");
-
-			model.addObject("title", "Map PO PSO");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
 
 	/************************************************Student Support Scheme***************************************************/
 	@RequestMapping(value = "/showAddStudSupp", method = RequestMethod.GET)
