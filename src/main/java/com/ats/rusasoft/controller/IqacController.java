@@ -445,6 +445,10 @@ public class IqacController {
 
 				MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac", miqac, MIqac.class);
 
+			}else {
+				
+				MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac", miqac, MIqac.class);
+				
 			}
 
 		} catch (Exception e) {
