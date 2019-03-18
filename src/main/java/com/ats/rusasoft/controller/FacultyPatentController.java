@@ -2,6 +2,8 @@ package com.ats.rusasoft.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.FacultyAward;
 import com.ats.rusasoft.model.FacultyPatent;
 import com.ats.rusasoft.model.Info;
+import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
@@ -44,7 +47,8 @@ public class FacultyPatentController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("showIqacList", "showIqacList", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "1", "0", "0", "0", newModuleList);
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == true) {
 
@@ -52,20 +56,22 @@ public class FacultyPatentController {
 
 			} else {
 
-				List<FacultyPatent> facultyPatentList = rest.getForObject(Constants.url + "/getAllFacultyPatent",
-						List.class);
-				System.out.println("faculty Patent List :" + facultyPatentList);
-
 				model = new ModelAndView("FacultyDetails/patentDetailList");
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				List<FacultyPatent> facultyPatentList = rest.postForObject(Constants.url + "/getPatentListByFacultyId",map,
+						List.class);
+				System.out.println("faculty Patent List :" + facultyPatentList);				
 
 				model.addObject("title", "Patent Details List");
 
 				model.addObject("facultyPatentList", facultyPatentList);
-				Info add = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "1", "0", "0",
+				Info add = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "1", "0", "0",
 						newModuleList);
-				Info edit = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "0", "1", "0",
+				Info edit = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "0", "1", "0",
 						newModuleList);
-				Info delete = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "0", "0", "1",
+				Info delete = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "0", "0", "1",
 						newModuleList);
 
 				if (add.isError() == false) {
@@ -102,7 +108,7 @@ public class FacultyPatentController {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "1", "0", "0",
+			Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "1", "0", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -128,12 +134,20 @@ public class FacultyPatentController {
 	@RequestMapping(value = "/insertPatentDetail", method = RequestMethod.POST)
 	public String insertPatentDetail(HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession();
+		String returnString = new String();
+		try {
+		HttpSession session = request.getSession();	
+	
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetails", "0",  "1", "0", "0", newModuleList);
+		
 
-		int userId = (int) session.getAttribute("userId");
-		int acYearId = (int) session.getAttribute("acYearId");
-
-		int patentId = 0;
+		if (view.isError() == false) {
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");			
+			int userId = (int) session.getAttribute("userId");
+			int acYearId = (int) session.getAttribute("acYearId");
+			int patentId = 0;
+		
 		try {
 
 			patentId = Integer.parseInt(request.getParameter("patentId"));
@@ -152,6 +166,7 @@ public class FacultyPatentController {
 		String fillingDate = request.getParameter("fillingDate");
 		String guideName = request.getParameter("guideName");
 		String pubDate = request.getParameter("pubDate");
+		int is_view = Integer.parseInt(request.getParameter("is_view"));
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
@@ -160,12 +175,12 @@ public class FacultyPatentController {
 		DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 		String curDate = dateFormatStr.format(new Date());
-
+		
 		FacultyPatent faculty = new FacultyPatent();
 		if (patentId == 0) {
 
 		faculty.setPatentId(patentId);
-		faculty.setFacultyId(userId);
+		faculty.setFacultyId(userObj.getGetData().getUserDetailId());
 		faculty.setPatentTitle(parentTitle);
 		faculty.setDelStatus(1);
 		faculty.setIsActive(1);
@@ -183,7 +198,7 @@ public class FacultyPatentController {
 		else
 		{
 			//faculty.setPatentId(patentId);
-			faculty.setFacultyId(userId);
+			faculty.setFacultyId(userObj.getGetData().getUserDetailId());
 			faculty.setPatentTitle(parentTitle);
 			faculty.setDelStatus(1);
 			faculty.setIsActive(1);
@@ -199,9 +214,23 @@ public class FacultyPatentController {
 
 		}
 
-	
-		return "redirect:/showPatentDetails";
+		if (is_view == 1) {
+			returnString = "redirect:/showPatentDetailsList";
+		} else {
+			returnString = "redirect:/showPatentDetails";
+		}
+	} else {
 
+		returnString = "redirect:/accessDenied";
+
+	}
+	}catch (Exception e) 
+		{
+	System.err.println("EXCE in vendInsertRes " + e.getMessage());
+	e.printStackTrace();
+
+		}
+		return returnString;
 	}
 	
 	@RequestMapping(value = "/editPatent/{patentId}", method = RequestMethod.GET)
@@ -214,7 +243,7 @@ public class FacultyPatentController {
 			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 		
 		try {
-			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "1", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "0", "1", "0", newModuleList);
 			
 			if(view.isError()==true) {
 						
@@ -226,7 +255,6 @@ public class FacultyPatentController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("patentId", patentId);
 			
-			model = new ModelAndView("master/iqacRegistration");
 			List<FacultyPatent> facultyPatentList = rest.getForObject(Constants.url + "/getAllFacultyPatent",List.class);
 			System.out.println("faculty Patent List :" + facultyPatentList);
 
@@ -254,7 +282,7 @@ public class FacultyPatentController {
 	  {		  
 		  String a=null; HttpSession session = request.getSession(); 
 		  List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-		  Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "0","1", newModuleList); 
+		  Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "0", "0","1", newModuleList); 
 		  
 		  if(view.isError()==true)
 		  {	  
@@ -267,7 +295,7 @@ public class FacultyPatentController {
 	  
 			  MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			  map.add("patentId", patentId); 
-			  Info miqc = rest.postForObject(Constants.url+"/deleteIqacById", map, Info.class);
+			  Info miqc = rest.postForObject(Constants.url+"/deletePetentFaculty", map, Info.class);
 			  a="redirect:/showPatentDetailsList"; 
 		  } 
 		  
@@ -306,10 +334,11 @@ public class FacultyPatentController {
 	  
 	 
 	  HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("showIqacList", "showIqacList", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "1", "0", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -317,20 +346,26 @@ public class FacultyPatentController {
 
 			} else {
 
-				List<FacultyAward> facultyAwardList = rest.getForObject(Constants.url + "/getAllFacultyAward",
-						List.class);
-				System.out.println("faculty Patent List :" + facultyAwardList);
 
 				 model = new ModelAndView("FacultyDetails/awardDetailsList");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				List<FacultyAward> facultyAwardList = rest.postForObject(Constants.url + "/getAwardListByFacultyId",map,
+						List.class);
+			/*	List<FacultyAward> facultyAward = new ArrayList<FacultyAward>(Arrays.asList(facultyAwardList));
+*/
+				System.out.println("faculty Patent List :" + facultyAwardList);
+
 
 				model.addObject("title", "Award Details List");
 
 				model.addObject("facultyAwardList", facultyAwardList);
-				Info add = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "1", "0", "0",
+			
+				Info add = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "1", "0", "0",
 						newModuleList);
-				Info edit = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "0", "1", "0",
+				Info edit = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "0", "1", "0",
 						newModuleList);
-				Info delete = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "0", "0", "1",
+				Info delete = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "0", "0", "1",
 						newModuleList);
 
 				if (add.isError() == false) {
@@ -363,8 +398,17 @@ public class FacultyPatentController {
 	  @RequestMapping(value = "/insertAwardDetail", method = RequestMethod.POST)
 		public String insertAwardDetail(HttpServletRequest request, HttpServletResponse response) {
 
-			HttpSession session = request.getSession();
-
+		  String returnString = new String();
+			try {
+				HttpSession session = request.getSession();
+							
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
+						"1", "0", "0", newModuleList);
+			
+				if (view.isError() == false)
+				{
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int userId = (int) session.getAttribute("userId");
 			int acYearId = (int) session.getAttribute("acYearId");
 
@@ -387,6 +431,7 @@ public class FacultyPatentController {
 			String nature = request.getParameter("nature");
 			String date = request.getParameter("date");
 			int validity = Integer.parseInt(request.getParameter("validity"));
+			int is_view = Integer.parseInt(request.getParameter("is_view"));
 
 			String fromDate = request.getParameter("fromDate");
 
@@ -405,7 +450,7 @@ public class FacultyPatentController {
 			if (awardId == 0) {
 
 			faculty.setAwardId(awardId);
-			faculty.setFacultyId(userId);
+			faculty.setFacultyId(userObj.getGetData().getUserDetailId());
 			faculty.setAwardName(name);
 			faculty.setDelStatus(1);
 			faculty.setIsActive(1);
@@ -434,7 +479,7 @@ public class FacultyPatentController {
 			else
 			{
 				faculty.setAwardId(awardId);
-				faculty.setFacultyId(userId);
+				faculty.setFacultyId(userObj.getGetData().getUserDetailId());
 				faculty.setAwardName(name);
 				faculty.setDelStatus(1);
 				faculty.setIsActive(1);
@@ -456,8 +501,25 @@ public class FacultyPatentController {
 
 			}
 
-		
-			return "redirect:/showAwardDetails";
+			if (is_view == 1) {
+				returnString = "redirect:/showAwardDetailsList";
+			} else {
+				returnString = "redirect:/showAwardDetails";
+			}
+		} else {
+
+			returnString = "redirect:/accessDenied";
+
+		}
+			
+	}
+
+	catch (Exception e) {
+		System.err.println("EXCE in vendInsertRes " + e.getMessage());
+		e.printStackTrace();
+
+	}
+			return returnString;
 
 		}
 		
@@ -471,7 +533,7 @@ public class FacultyPatentController {
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 			
 			try {
-				Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "1", "0", newModuleList);
+				Info view = AccessControll.checkAccess("showAwardDetails", "showAwardDetailsList", "0", "0", "1", "0", newModuleList);
 				
 				if(view.isError()==true) {
 							
@@ -482,18 +544,20 @@ public class FacultyPatentController {
 				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("awardId", awardId);
-				
-				model = new ModelAndView("master/iqacRegistration");
-				List<FacultyPatent> facultyPatentList = rest.getForObject(Constants.url + "/getAllFacultyAward",List.class);
+			
+				List<FacultyAward> facultyPatentList = rest.getForObject(Constants.url + "/getAllFacultyAward",List.class);
 				System.out.println("faculty Patent List :" + facultyPatentList);
 
 				model = new ModelAndView("FacultyDetails/awardDetails");
 
 				
-				FacultyPatent award = rest.postForObject(Constants.url+"/getFacultyAwardById", map, FacultyPatent.class);
+				FacultyAward award = rest.postForObject(Constants.url+"/getFacultyAwardById", map, FacultyAward.class);
 				System.out.println("award"+award);
 				
+				
+				
 				model.addObject("award", award);
+				
 				}
 			} catch (Exception e) {
 
@@ -511,7 +575,7 @@ public class FacultyPatentController {
 		  {		  
 			  String a=null; HttpSession session = request.getSession(); 
 			  List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-			  Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "0","1", newModuleList); 
+			  Info view = AccessControll.checkAccess("showAwardDetails", "showAwardDetailsList", "0", "0", "0","1", newModuleList); 
 			  
 			  if(view.isError()==true)
 			  {	  
@@ -524,7 +588,7 @@ public class FacultyPatentController {
 		  
 				  MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				  map.add("awardId", awardId); 
-				  Info miqc = rest.postForObject(Constants.url+"/deleteIqacById", map, Info.class);
+				  Info miqc = rest.postForObject(Constants.url+"/deleteAwardFaculty", map, Info.class);
 				  a="redirect:/showAwardDetailsList"; 
 			  } 
 			  

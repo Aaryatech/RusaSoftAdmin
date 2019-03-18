@@ -125,7 +125,7 @@
 															File No. <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="patentNo"
+															<input type="text" class="form-control" id="patentNo" autocomplete="off"
 																name="patentNo" value="${patent.patentFileNo}" placeholder="Patent Number"
 																required>
 														</div>
@@ -136,7 +136,7 @@
 															Title <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="parent_title"
+															<input type="text" class="form-control" id="parent_title" autocomplete="off"
 																name="parentTitle" placeholder="Patent Title" value="${patent.patentTitle}"
 																required>
 														</div>
@@ -148,7 +148,7 @@
 															Filling Date <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker"
+															<input type="text" class="form-control datepicker" autocomplete="off"
 																id="filling_date" name="fillingDate"
 																placeholder="Patent Filling Date" value="${patent.patentFilingDate}" required>
 														</div>
@@ -160,20 +160,20 @@
 															of Co-assistant/Guide 
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="guide_name"
+															<input type="text" class="form-control" id="guide_name" autocomplete="off"
 																name="guideName"
 																placeholder="Name of Co-assistant/Guide" value="${patent.patentGuideName}"
 																>
 														</div>
 													</div>
-
+													<input type="hidden" id="is_view" name="is_view" value="0">
 													<div class="form-group">
 
 														<label class="control-label col-sm-2" for="pub_date">Date
 															of Publication <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker"
+															<input type="text" class="form-control datepicker" autocomplete="off"
 																placeholder="Date of Publication" id="pub_date"
 																name="pubDate" value="${patent.patentPubDate}" required>
 														</div>
@@ -233,5 +233,13 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+function submit_f(view){
+	//alert(view);
+		document.getElementById("is_view").value=view; 
+		
+	}
+ 
+</script>
 </body>
 </html>
