@@ -152,7 +152,7 @@
 
 																			</c:when>
 																			<c:otherwise>
-																				<option value="${dept.deptId}">${dept.deptName}</option>
+																				<option value="${dept.deptId}" disabled>${dept.deptName}</option>
 
 																			</c:otherwise>
 
