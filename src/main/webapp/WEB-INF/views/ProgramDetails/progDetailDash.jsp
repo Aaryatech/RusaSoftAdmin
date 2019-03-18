@@ -226,7 +226,7 @@
 
 											<div class="row">
 
-												<div class="col-xs-12">
+												<%-- <div class="col-xs-12">
 
 													<table id="example-1"
 														class="table table-striped dt-responsive display">
@@ -268,49 +268,48 @@
 
 													</table>
 
-												</div>
+												</div> --%>
 
-												<!-- <div class="col-xs-12">
+												<div class="col-xs-12">
 													<div class="table-responsive">
-														<table class="table table-bordered">
+														<table class="table table-bordered" id="table1">
 															<thead>
+
 																<tr>
-																	<th>#</th>
-																	<th>First Name</th>
-																	<th>Last Name</th>
-																	<th>Username</th>
-																	<th>Email</th>
-																	<th>Contact</th>
+																	<th width="10%">Sr No</th>
+																	<th>Vision</th>
+																	<th>Remark</th>
+																	<th width="10%">Action</th>
+
 																</tr>
+
 															</thead>
 															<tbody>
-																<tr>
-																	<th scope="row">1</th>
-																	<td>Mark</td>
-																	<td>Otto</td>
-																	<td>@mdo</td>
-																	<td>first.last@example.com</td>
-																	<td>+1-234-567-890</td>
-																</tr>
-																<tr>
-																	<th scope="row">2</th>
-																	<td>Jacob</td>
-																	<td>Thornton</td>
-																	<td>@fat</td>
-																	<td>first.last@example.com</td>
-																	<td>+1-234-567-890</td>
-																</tr>
-																<tr>
-																	<th scope="row">3</th>
-																	<td colspan="2">Larry the Bird</td>
-																	<td>@twitter</td>
-																	<td>first.last@example.com</td>
-																	<td>+1-234-567-890</td>
-																</tr>
+																<c:forEach items="${programVisionList}" var="list"
+																	varStatus="count">
+																	<tr>
+
+																		<td>${count.index+1}</td>
+																		<td>${list.visionText}</td>
+																		<td>${list.visionRemark}</td>
+																		<td><a href="#"
+																			onclick="editProgramVission(${list.visionId})"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																			<a href="#"
+																			onclick="deleteProgramVission(${list.visionId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a></td>
+																	</tr>
+																</c:forEach>
 															</tbody>
 														</table>
 													</div>
-												</div> -->
+												</div>
 
 											</div>
 
@@ -371,7 +370,7 @@
 
 											<div class="row">
 
-												<div class="col-xs-12">
+												<%-- <div class="col-xs-12">
 
 													<table id="example-2"
 														class="table table-striped dt-responsive display">
@@ -413,6 +412,47 @@
 
 													</table>
 
+												</div> --%>
+
+												<div class="col-xs-12">
+													<div class="table-responsive">
+														<table class="table table-bordered" id="table2">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th>Mission</th>
+																	<th>Remark</th>
+																	<th width="10%">Action</th>
+
+																</tr>
+															</thead>
+
+															<tbody>
+																<c:forEach items="${programMissionList}" var="list"
+																	varStatus="count">
+																	<tr>
+
+																		<td>${count.index+1}</td>
+																		<td>${list.missionText}</td>
+																		<td>${list.missionRemark}</td>
+																		<td><a href="#"
+																			onclick="editProgramMission(${list.missionId})"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																			<a href="#"
+																			onclick="deleteProgramMission(${list.missionId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a></td>
+																	</tr>
+																</c:forEach>
+
+															</tbody>
+														</table>
+													</div>
 												</div>
 
 											</div>
@@ -468,7 +508,7 @@
 											</div>
 											<div class="row">
 
-												<div class="col-xs-12">
+												<%-- <div class="col-xs-12">
 
 													<table id="example-5"
 														class="table table-striped dt-responsive display">
@@ -509,6 +549,46 @@
 
 													</table>
 
+												</div> --%>
+
+												<div class="col-xs-12">
+													<div class="table-responsive">
+														<table class="table table-bordered" id="table3">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th>PEO</th>
+																	<th>Remark</th>
+																	<th width="10%">Action</th>
+
+																</tr>
+															</thead>
+
+															<tbody>
+																<c:forEach items="${programEducationObjectiveList}"
+																	var="list" varStatus="count">
+																	<tr>
+
+																		<td>${count.index+1}</td>
+																		<td>${list.peoText}</td>
+																		<td>${list.peoRemark}</td>
+																		<td><a href="#"
+																			onclick="editProgramPeo(${list.peoId})"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																			<a href="#" onclick="deleteProgramPeo(${list.peoId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a></td>
+																	</tr>
+																</c:forEach>
+
+															</tbody>
+														</table>
+													</div>
 												</div>
 
 											</div>
@@ -564,7 +644,7 @@
 
 											<div class="row">
 
-												<div class="col-xs-12">
+												<%-- <div class="col-xs-12">
 
 													<table id="example-3"
 														class="table table-striped dt-responsive display">
@@ -602,6 +682,46 @@
 														</tbody>
 													</table>
 
+												</div> --%>
+
+												<div class="col-xs-12">
+													<div class="table-responsive">
+														<table class="table table-bordered" id="table4">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th>PO</th>
+																	<th>Remark</th>
+																	<th width="10%">Action</th>
+
+																</tr>
+															</thead>
+
+															<tbody>
+																<c:forEach items="${programOutcomeList}" var="list"
+																	varStatus="count">
+																	<tr>
+
+																		<td>${count.index+1}</td>
+																		<td>${list.poText}</td>
+																		<td>${list.poRemark}</td>
+																		<td><a href="#"
+																			onclick="editProgramPo(${list.poId})"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																			<a href="#" onclick="deleteProgramPo(${list.poId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a></td>
+																	</tr>
+																</c:forEach>
+
+															</tbody>
+														</table>
+													</div>
 												</div>
 
 											</div>
@@ -660,7 +780,7 @@
 
 											<div class="row">
 
-												<div class="col-xs-12">
+												<%-- <div class="col-xs-12">
 
 													<table id="example-4"
 														class="table table-striped dt-responsive display">
@@ -699,6 +819,44 @@
 
 													</table>
 
+												</div> --%>
+
+												<div class="col-xs-12">
+													<div class="table-responsive">
+														<table class="table table-bordered" id="table5">
+															<thead>
+															<tr>
+																<th width="10%">Sr No</th>
+																<th>PSO</th>
+																<th>Remark</th>
+																<th width="10%">Action</th>
+
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach items="${programSpeceficOutcomeList}"
+																var="list" varStatus="count">
+																<tr>
+
+																	<td>${count.index+1}</td>
+																	<td>${list.psoText}</td>
+																	<td>${list.psoRemark}</td>
+																	<td><a href="#"
+																		onclick="editProgramPso(${list.psoId})"><span
+																			class="glyphicon glyphicon-edit" title="Edit"
+																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																		<a href="#" onclick="deleteProgramPso(${list.psoId})"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																			class="glyphicon glyphicon-remove"></span></a></td>
+																</tr>
+															</c:forEach>
+
+														</tbody>
+														</table>
+													</div>
 												</div>
 
 											</div>
@@ -798,7 +956,8 @@
 			var programVissionId = document.getElementById("programVissionId").value;
 			
 			if (programVission != "") {
-				$('#example-1 td').remove();
+				//$('#example-1 td').remove(); 
+				$('#table1 td').remove();
 				$("#loader1").show();
 				$.getJSON('${saveProgramVission}',
 
@@ -813,20 +972,27 @@
 				 
 					$("#loader1").hide();
 					  
-					var dataTable = $('#example-1').DataTable();
+					//var dataTable = $('#example-1').DataTable();
 					 
 					for(var i=0 ; i<data.programVissionList.length ;i++){
 						
 						 
-						var acButton = '<a href="#"><span onclick="editProgramVission('+data.programVissionList[i].visionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						 var acButton = '<a href="#"><span onclick="editProgramVission('+data.programVissionList[i].visionId+')" class="glyphicon glyphicon-edit" title="Edit" '
 						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
 						+' <a href="#" onclick="deleteProgramVission('+data.programVissionList[i].visionId+')"'+
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/*  dataTable.row.add(
 								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
-								.draw();
+								.draw(); */  
+						
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programVissionList[i].visionText));
+					  	tr.append($('<td  ></td>').html(data.programVissionList[i].visionRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table1 tbody').append(tr); 
 					}
 					 document.getElementById("programVissionId").value=0;
 					 document.getElementById("programVissionRemark").value="";
@@ -842,7 +1008,9 @@
 		function deleteProgramVission(visionId) {
 
 			var programId = document.getElementById("programId").value;
-				$('#example-1 td').remove();
+			
+				
+				//$('#example-1 td').remove();
 				$("#loader1").show();
 				
 				$.getJSON('${deleteProgramVission}',
@@ -855,8 +1023,9 @@
 				}, function(data) {
 				 
 					$("#loader1").hide();
-					  
-					var dataTable = $('#example-1').DataTable();
+					$('#table1 td').remove();
+					
+					//var dataTable = $('#example-1').DataTable();
 					
 					for(var i=0 ; i<data.programVissionList.length ;i++){
 						
@@ -867,9 +1036,16 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
-								.draw();
+								.draw(); */
+						
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programVissionList[i].visionText));
+					  	tr.append($('<td  ></td>').html(data.programVissionList[i].visionRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table1 tbody').append(tr); 
 					}
 					 
 				});
@@ -910,7 +1086,7 @@
 			var programMissionId = document.getElementById("programMissionId").value;
 			
 			if (programMission != "") {
-				$('#example-2 td').remove();
+				//$('#example-2 td').remove();
 				$("#loader2").show();
 				$.getJSON('${saveProgramMission}',
 
@@ -924,8 +1100,9 @@
 				}, function(data) {
 				 
 					$("#loader2").hide();
-					  
-					var dataTable = $('#example-2').DataTable();
+					$('#table2 td').remove();
+					
+					//var dataTable = $('#example-2').DataTable();
 					
 					for(var i=0 ; i<data.programMissionList.length ;i++){
 						
@@ -936,9 +1113,16 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programMissionList[i].missionText, data.programMissionList[i].missionRemark, acButton ])
-								.draw();
+								.draw(); */
+								
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programMissionList[i].missionText));
+					  	tr.append($('<td  ></td>').html(data.programMissionList[i].missionRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table2 tbody').append(tr); 
 					}
 					 document.getElementById("programMissionId").value=0;
 					 document.getElementById("programMissionRemark").value="";
@@ -954,7 +1138,7 @@
 		function deleteProgramMission(missionId) {
 
 			var programId = document.getElementById("programId").value;
-				$('#example-2 td').remove();
+				/* $('#example-2 td').remove(); */
 				$("#loader2").show();
 				
 				$.getJSON('${deleteProgramMission}',
@@ -967,8 +1151,8 @@
 				}, function(data) {
 				 
 					$("#loader2").hide();
-					  
-					var dataTable = $('#example-2').DataTable();
+					$('#table2 td').remove();
+					//var dataTable = $('#example-2').DataTable();
 					
 					for(var i=0 ; i<data.programMissionList.length ;i++){
 						
@@ -979,9 +1163,15 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programMissionList[i].missionText, data.programMissionList[i].missionRemark, acButton ])
-								.draw();
+								.draw(); */
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programMissionList[i].missionText));
+					  	tr.append($('<td  ></td>').html(data.programMissionList[i].missionRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table2 tbody').append(tr); 
 					}
 					 
 				});
@@ -1023,7 +1213,7 @@
 			var programPeoId = document.getElementById("programPeoId").value;
 			
 			if (peoText != "") {
-				$('#example-5 td').remove();
+				//$('#example-5 td').remove();
 				$("#loader3").show();
 				$.getJSON('${saveProgramPeo}',
 
@@ -1037,8 +1227,8 @@
 				}, function(data) {
 				 
 					$("#loader3").hide();
-					  
-					var dataTable = $('#example-5').DataTable();
+					$('#table3 td').remove();
+					//var dataTable = $('#example-5').DataTable();
 					
 					for(var i=0 ; i<data.programEducationObjectiveList.length ;i++){
 						
@@ -1049,9 +1239,16 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programEducationObjectiveList[i].peoText, data.programEducationObjectiveList[i].peoRemark, acButton ])
-								.draw();
+								.draw(); */
+								
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programEducationObjectiveList[i].peoText));
+					  	tr.append($('<td  ></td>').html(data.programEducationObjectiveList[i].peoRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table3 tbody').append(tr); 
 					}
 					 document.getElementById("programPeoId").value=0;
 					 document.getElementById("peoText").value="";
@@ -1067,7 +1264,7 @@
 		function deleteProgramPeo(peoId) {
 
 			var programId = document.getElementById("programId").value;
-				$('#example-5 td').remove();
+				/* $('#example-5 td').remove(); */
 				$("#loader3").show();
 				
 				$.getJSON('${deleteProgramPeo}',
@@ -1080,8 +1277,9 @@
 				}, function(data) {
 				 
 					$("#loader3").hide();
-					  
-					var dataTable = $('#example-5').DataTable();
+					$('#table3 td').remove();
+					
+					//var dataTable = $('#example-5').DataTable();
 					
 					for(var i=0 ; i<data.programEducationObjectiveList.length ;i++){
 						
@@ -1092,9 +1290,16 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programEducationObjectiveList[i].peoText, data.programEducationObjectiveList[i].peoRemark, acButton ])
-								.draw();
+								.draw(); */
+						
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programEducationObjectiveList[i].peoText));
+					  	tr.append($('<td  ></td>').html(data.programEducationObjectiveList[i].peoRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table3 tbody').append(tr); 
 					}
 					 
 				});
@@ -1136,7 +1341,7 @@
 			var poId = document.getElementById("poId").value;
 			
 			if (poText != "") {
-				$('#example-3 td').remove();
+				//$('#example-3 td').remove();
 				$("#loader4").show();
 				$.getJSON('${saveProgramPo}',
 
@@ -1150,8 +1355,9 @@
 				}, function(data) {
 				 
 					$("#loader4").hide();
-					  
-					var dataTable = $('#example-3').DataTable();
+					$('#table4 td').remove();
+					
+					//var dataTable = $('#example-3').DataTable();
 					
 					for(var i=0 ; i<data.programOutcomeList.length ;i++){
 						
@@ -1162,9 +1368,16 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programOutcomeList[i].poText, data.programOutcomeList[i].poRemark, acButton ])
-								.draw();
+								.draw(); */
+								
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programOutcomeList[i].poText));
+					  	tr.append($('<td  ></td>').html(data.programOutcomeList[i].poRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table4 tbody').append(tr); 
 					}
 					 document.getElementById("poId").value=0;
 					 document.getElementById("poText").value="";
@@ -1180,7 +1393,7 @@
 		function deleteProgramPo(poId) {
 
 			var programId = document.getElementById("programId").value;
-				$('#example-3 td').remove();
+				//$('#example-3 td').remove();
 				$("#loader4").show();
 				
 				$.getJSON('${deleteProgramPo}',
@@ -1193,8 +1406,9 @@
 				}, function(data) {
 				 
 					$("#loader4").hide();
-					  
-					var dataTable = $('#example-3').DataTable();
+					$('#table4 td').remove();
+					
+					//var dataTable = $('#example-3').DataTable();
 					
 					for(var i=0 ; i<data.programOutcomeList.length ;i++){
 						
@@ -1205,9 +1419,15 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programOutcomeList[i].poText, data.programOutcomeList[i].poRemark, acButton ])
-								.draw();
+								.draw(); */
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programOutcomeList[i].poText));
+					  	tr.append($('<td  ></td>').html(data.programOutcomeList[i].poRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table4 tbody').append(tr); 
 					}
 					 
 				});
@@ -1248,7 +1468,7 @@
 			var psoId = document.getElementById("psoId").value;
 			
 			if (psoText != "") {
-				$('#example-4 td').remove();
+				/* $('#example-4 td').remove(); */
 				$("#loader5").show();
 				$.getJSON('${saveProgramPso}',
 
@@ -1262,8 +1482,8 @@
 				}, function(data) {
 				 
 					$("#loader5").hide();
-					  
-					var dataTable = $('#example-4').DataTable();
+					$('#table5 td').remove();
+					//var dataTable = $('#example-4').DataTable();
 					
 					for(var i=0 ; i<data.programSpeceficOutcomeList.length ;i++){
 						
@@ -1274,9 +1494,15 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programSpeceficOutcomeList[i].psoText, data.programSpeceficOutcomeList[i].psoRemark, acButton ])
-								.draw();
+								.draw(); */
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programSpeceficOutcomeList[i].psoText));
+					  	tr.append($('<td  ></td>').html(data.programSpeceficOutcomeList[i].psoRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table5 tbody').append(tr); 
 					}
 					 document.getElementById("psoId").value=0;
 					 document.getElementById("psoText").value="";
@@ -1292,8 +1518,9 @@
 		function deleteProgramPso(psoId) {
 
 			var programId = document.getElementById("programId").value;
-				$('#example-4 td').remove();
+				//$('#example-4 td').remove();
 				$("#loader5").show();
+				
 				
 				$.getJSON('${deleteProgramPso}',
 
@@ -1305,8 +1532,8 @@
 				}, function(data) {
 				 
 					$("#loader5").hide();
-					  
-					var dataTable = $('#example-4').DataTable();
+					$('#table5 td').remove();
+					//var dataTable = $('#example-4').DataTable();
 					
 					for(var i=0 ; i<data.programSpeceficOutcomeList.length ;i++){
 						
@@ -1317,9 +1544,15 @@
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
-						dataTable.row.add(
+						/* dataTable.row.add(
 								[ i + 1, data.programSpeceficOutcomeList[i].psoText, data.programSpeceficOutcomeList[i].psoRemark, acButton ])
-								.draw();
+								.draw(); */
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.programSpeceficOutcomeList[i].psoText));
+					  	tr.append($('<td  ></td>').html(data.programSpeceficOutcomeList[i].psoRemark));
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table5 tbody').append(tr); 
 					}
 					 
 				});
