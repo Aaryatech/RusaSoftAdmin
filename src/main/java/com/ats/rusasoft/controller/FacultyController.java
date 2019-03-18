@@ -76,74 +76,94 @@ public class FacultyController {
 
 	@RequestMapping(value = "/insertJournal", method = RequestMethod.POST)
 	public String insertJournal(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = new String();
 		try {
+
 			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
+					"1", "0", "0", newModuleList);
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			System.out.println(view);
 
-			System.err.println("Inside insertJournal method");
+			if (view.isError() == false) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			int journalId = 0;
-			try {
-				journalId = Integer.parseInt(request.getParameter("journalId"));
-			} catch (Exception e) {
-				journalId = 0;
+				System.err.println("Inside insertJournal method");
+
+				int journalId = 0;
+				try {
+					journalId = Integer.parseInt(request.getParameter("journalId"));
+				} catch (Exception e) {
+					journalId = 0;
+				}
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date now = new Date();
+				String curDate = dateFormat.format(new Date());
+				String dateTime = dateFormat.format(now);
+
+				String journalName = request.getParameter("journalName");
+				String issue = request.getParameter("issue");
+				String journalVolume = request.getParameter("volume");
+				String journalPgFrom = request.getParameter("journalPgFrom");
+				String journalPgTo = request.getParameter("journalPgTo");
+				String journalYear = request.getParameter("journalYear");
+				String journalType = request.getParameter("journalType");
+
+				System.out.println(journalName);
+				System.out.println(issue);
+				System.out.println(journalVolume);
+				System.out.println(journalPgFrom);
+				System.out.println(journalPgTo);
+				System.out.println(journalYear);
+				System.out.println(journalType);
+				int is_view = Integer.parseInt(request.getParameter("is_view"));
+				int jouStd = Integer.parseInt(request.getParameter("jouStd"));
+
+				Journal journal = new Journal();
+				journal.setDelStatus(1);
+				journal.setExInt1(1);
+				journal.setExInt2(1);
+				journal.setExVar1("NA");
+				journal.setExVar2("NA");
+				journal.setFacultyId(userObj.getGetData().getUserDetailId());
+				int yearId = (int) session.getAttribute("acYearId");
+				journal.setYearId(yearId);
+				journal.setIsActive(1);
+				journal.setJournalId(journalId);
+				journal.setJournalIssue(issue);
+				journal.setJournalName(journalName);
+				journal.setJournalPgFrom(journalPgFrom);
+				journal.setJournalPgTo(journalPgTo);
+				journal.setJournalVolume(journalVolume);
+				journal.setJournalYear(DateConvertor.convertToYMD(journalYear));
+				journal.setMakerUserId(userObj.getUserId());
+				journal.setJournalStandard(jouStd);
+				journal.setJournalType(journalType);
+				journal.setMakerEnterDatetime(dateTime);
+
+				Journal journalInsertRes = rest.postForObject(Constants.url + "saveJournal", journal, Journal.class);
+
+				System.err.println("journalInsertRes " + journalInsertRes.toString());
+
+				if (is_view == 1) {
+					returnString = "redirect:/showJournalPubList";
+				} else {
+					returnString = "redirect:/showJournalPub";
+				}
+			} else {
+
+				returnString = "redirect:/accessDenied";
+
 			}
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date now = new Date();
-			String curDate = dateFormat.format(new Date());
-			String dateTime = dateFormat.format(now);
+		}
 
-			String journalName = request.getParameter("journalName");
-			String issue = request.getParameter("issue");
-			String journalVolume = request.getParameter("volume");
-			String journalPgFrom = request.getParameter("journalPgFrom");
-			String journalPgTo = request.getParameter("journalPgTo");
-			String journalYear = request.getParameter("journalYear");
-			String journalType = request.getParameter("journalType");
-
-			System.out.println(journalName);
-			System.out.println(issue);
-			System.out.println(journalVolume);
-			System.out.println(journalPgFrom);
-			System.out.println(journalPgTo);
-			System.out.println(journalYear);
-			System.out.println(journalType);
-			int jouStd = Integer.parseInt(request.getParameter("jouStd"));
-
-			Journal journal = new Journal();
-			journal.setDelStatus(1);
-			journal.setExInt1(1);
-			journal.setExInt2(1);
-			journal.setExVar1("NA");
-			journal.setExVar2("NA");
-			journal.setFacultyId(userObj.getUserId());
-			int yearId = (int) session.getAttribute("acYearId");
-			journal.setYearId(yearId);
-			journal.setIsActive(1);
-			journal.setJournalId(journalId);
-			journal.setJournalIssue(issue);
-			journal.setJournalName(journalName);
-			journal.setJournalPgFrom(journalPgFrom);
-			journal.setJournalPgTo(journalPgTo);
-			journal.setJournalVolume(journalVolume);
-			journal.setJournalYear(DateConvertor.convertToYMD(journalYear));
-			journal.setMakerUserId(userObj.getUserId());
-			journal.setJournalStandard(jouStd);
-			journal.setJournalType(journalType);
-			journal.setMakerEnterDatetime(dateTime);
-
-			Journal journalInsertRes = rest.postForObject(Constants.url + "saveJournal", journal, Journal.class);
-
-			System.err.println("journalInsertRes " + journalInsertRes.toString());
-
-		} catch (Exception e) {
+		catch (Exception e) {
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 
 		}
-		return "redirect:/showJournalPub";
+		return returnString;
 
 	}
 
@@ -169,7 +189,7 @@ public class FacultyController {
 				model.addObject("title", "Journal Publication List");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("facultyId", userObj.getUserId());
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
 
 				List<GetJournal> jouList = rest.postForObject(Constants.url + "/getJournalListByFacultyId", map,
 						List.class);
@@ -313,79 +333,108 @@ public class FacultyController {
 
 	@RequestMapping(value = "/insertResearchProject", method = RequestMethod.POST)
 	public String insertResearchProject(HttpServletRequest request, HttpServletResponse response) {
+		String returnString = new String();
 
 		try {
+
 			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "0", "1", "0", "0",
+					newModuleList);
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			System.out.println(view);
 
-			System.err.println("Inside insertResearchProject method");
+			if (view.isError() == false) {
 
-			int projId = 0;
-			try {
-				projId = Integer.parseInt(request.getParameter("projId"));
-			} catch (Exception e) {
-				projId = 0;
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				System.err.println("Inside insertResearchProject method");
+
+				int projId = 0;
+				try {
+					projId = Integer.parseInt(request.getParameter("projId"));
+				} catch (Exception e) {
+					projId = 0;
+				}
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date now = new Date();
+				// String curDate = dateFormat.format(new Date());
+				String dateTime = dateFormat.format(now);
+
+				String deptName = request.getParameter("deptName");
+				String PIName = request.getParameter("PIName");
+				String spoAuth = request.getParameter("spoAuth");
+				String yearOfPS = request.getParameter("yearOfPS");
+				String projName = request.getParameter("projName");
+				String coPrincipalName = request.getParameter("coPrincipal");
+				String deptCoName = request.getParameter("deptCoName");
+				String fromDate = request.getParameter("fromDate");
+				String toDate = request.getParameter("toDate");
+
+				int grant = Integer.parseInt(request.getParameter("grant"));
+
+				float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
+				float amtRec = Float.parseFloat(request.getParameter("amtRec"));
+				int is_view = Integer.parseInt(request.getParameter("is_view"));
+				ResearchProject project = new ResearchProject();
+				project.setDelStatus(1);
+				project.setExInt1(1);
+				project.setExInt2(1);
+				project.setExVar1("NA");
+				project.setExVar2("NA");
+				project.setFacultyId(userObj.getGetData().getUserDetailId());
+				int yearId = (int) session.getAttribute("acYearId");
+				project.setYearId(yearId);
+				project.setIsActive(1);
+				project.setMakerEnterDatetime(dateTime);
+				project.setMakerUserId(userObj.getUserId());
+
+				project.setProjFrdt(DateConvertor.convertToYMD(fromDate));
+				project.setProjGrant(grant);
+				project.setProjId(projId);
+
+				project.setProjInvDept(deptName);
+				project.setProjInvDept2(deptCoName);
+				project.setProjTodt(DateConvertor.convertToYMD(toDate));
+				project.setProjYear(DateConvertor.convertToYMD(yearOfPS));
+				project.setProjInvName2(coPrincipalName);
+				project.setProjSponsor(spoAuth);
+				project.setProjTotalAmt(totalAmt);
+				project.setProjAmtRec(amtRec);
+				project.setProjName(projName);
+				project.setProjInvName(PIName);
+
+				ResearchProject researchInsertRes = rest.postForObject(Constants.url + "saveReaserchProject", project,
+						ResearchProject.class);
+
+				System.err.println("researchInsertRes " + researchInsertRes.toString());
+
+				if (is_view == 1) {
+					returnString = "redirect:/showResearchDetailsList";
+				} else {
+					returnString = "redirect:/showResearchDetails";
+				}
+			} else {
+
+				returnString = "redirect:/accessDenied";
+
 			}
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date now = new Date();
-			// String curDate = dateFormat.format(new Date());
-			String dateTime = dateFormat.format(now);
+		}
 
-			String deptName = request.getParameter("deptName");
-			String PIName = request.getParameter("PIName");
-			String spoAuth = request.getParameter("spoAuth");
-			String yearOfPS = request.getParameter("yearOfPS");
-			String projName = request.getParameter("projName");
-			String coPrincipalName = request.getParameter("coPrincipal");
-			String deptCoName = request.getParameter("deptCoName");
-			String fromDate = request.getParameter("fromDate");
-			String toDate = request.getParameter("toDate");
+		catch (
 
-			int grant = Integer.parseInt(request.getParameter("grant"));
-
-			float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
-			float amtRec = Float.parseFloat(request.getParameter("amtRec"));
-
-			ResearchProject project = new ResearchProject();
-			project.setDelStatus(1);
-			project.setExInt1(1);
-			project.setExInt2(1);
-			project.setExVar1("NA");
-			project.setExVar2("NA");
-			project.setFacultyId(userObj.getUserId());
-			int yearId = (int) session.getAttribute("acYearId");
-			project.setYearId(yearId);
-			project.setIsActive(1);
-			project.setMakerEnterDatetime(dateTime);
-			project.setMakerUserId(userObj.getUserId());
-
-			project.setProjFrdt(DateConvertor.convertToYMD(fromDate));
-			project.setProjGrant(grant);
-			project.setProjId(projId);
-
-			project.setProjInvDept(deptName);
-			project.setProjInvDept2(deptCoName);
-			project.setProjTodt(DateConvertor.convertToYMD(toDate));
-			project.setProjYear(DateConvertor.convertToYMD(yearOfPS));
-			project.setProjInvName2(coPrincipalName);
-			project.setProjSponsor(spoAuth);
-			project.setProjTotalAmt(totalAmt);
-			project.setProjAmtRec(amtRec);
-			project.setProjName(projName);
-			project.setProjInvName(PIName);
-
-			ResearchProject researchInsertRes = rest.postForObject(Constants.url + "saveReaserchProject", project,
-					ResearchProject.class);
-
-			System.err.println("researchInsertRes " + researchInsertRes.toString());
-
-		} catch (Exception e) {
+		Exception e) {
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 
 		}
-		return "redirect:/showResearchDetails";
+		return returnString;
+		/*
+		 * } catch (Exception e) { System.err.println("EXCE in vendInsertRes " +
+		 * e.getMessage()); e.printStackTrace();
+		 * 
+		 * } return "redirect:/showResearchDetails";
+		 */
 
 	}
 
@@ -411,7 +460,7 @@ public class FacultyController {
 				model.addObject("title", "Research Details Form List");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("facultyId", userObj.getUserId());
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
 
 				List<GetResearchProject> jouList = rest.postForObject(Constants.url + "/getProjectListByFacultyId", map,
 						List.class);
@@ -515,6 +564,50 @@ public class FacultyController {
 			value = "redirect:/showResearchDetailsList";
 		}
 		return value;
+
+	}
+
+	@RequestMapping(value = "/showSubDetails", method = RequestMethod.GET)
+	public ModelAndView showSubDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/subDetails");
+
+			model.addObject("title", "Subject Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddSubDetails", method = RequestMethod.GET)
+	public ModelAndView showAddSubDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/addSubDetail");
+
+			model.addObject("title", "Subject Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
 
 	}
 

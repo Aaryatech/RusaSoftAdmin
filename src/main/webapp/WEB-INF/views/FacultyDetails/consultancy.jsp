@@ -150,7 +150,7 @@
 
 															<td><c:if test="${isEdit==1}">
 																	<a
-																		href="${pageContext.request.contextPath}/editStudentAttendActivity/${list.consId}"><span
+																		href="${pageContext.request.contextPath}/editConsultancy/${list.consId}"><span
 																		class="glyphicon glyphicon-edit" title="Edit"
 																		data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															</c:if> <c:if test="${isDelete==1}">

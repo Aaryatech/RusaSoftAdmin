@@ -145,6 +145,7 @@
 															</div>
 
 														</div>
+														<input type="hidden" id="is_view" name="is_view" value="0">
 														<div class="form-group">
 
 
@@ -197,7 +198,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Name
-																of Co-Principal Investigator <span class="text-danger">*</span>
+																of Co-Principal Investigator <span class="text-danger"></span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="coPrincipal"
@@ -210,7 +211,7 @@
 														</div>
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Department
-																Name <span class="text-danger">*</span>
+																Name <span class="text-danger"></span>
 															</label>
 
 
@@ -388,5 +389,14 @@
 	    return true;
 	}
 	</script>
+
+	<script type="text/javascript">
+function submit_f(view){
+	//alert(view);
+		document.getElementById("is_view").value=view; 
+		
+	}
+ 
+</script>
 </body>
 </html>

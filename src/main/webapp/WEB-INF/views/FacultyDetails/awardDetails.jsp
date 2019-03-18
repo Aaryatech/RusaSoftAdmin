@@ -112,11 +112,11 @@
 
 												<div>
 
-
+<%-- 
 													<input type="hidden" id="award_id" name="awardId"
-														value="${award.awardId}">
+														value="${award.awardId}"> --%>
 
-													<div class="form-group">
+														<div class="form-group">
 														<label class="control-label col-sm-2" for="name">Name
 															of Award/Recognition <span class="text-danger">*</span>
 														</label>
@@ -127,14 +127,14 @@
 																value="${award.awardName}" required>
 														</div>
 													</div>
-													<div class="form-group">
+												<div class="form-group">
 
 														<label class="control-label col-sm-2" for="agency">Awarding
 															Agency/Authority <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="agency"
-																name="agency" placeholder="Awarding Agency"
+																name="agency" placeholder="Awarding Agency" autocomplete="off"
 																value="${award.awardAuthority}" required>
 														</div>
 
@@ -146,7 +146,7 @@
 															of Award/Recognition <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="nature"
+															<input type="text" class="form-control" id="nature" autocomplete="off"
 																name="nature" placeholder="Nature of Award/Recognition"
 																value="${award.awardNature}" required>
 														</div>
@@ -160,7 +160,7 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="date" name="date" placeholder="Date"
+																id="date" name="date" placeholder="Date" autocomplete="off"
 																value="${award.awardDate}" required>
 														</div>
 
@@ -170,12 +170,13 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															Duration <input type="radio" name="validity"
+															Duration <input type="radio" name="validity" 
 																id="validity" checked value="0" onclick="check1()">
 															Lifetime<input onclick="check()" type="radio"
 																name="validity" id="validity" value="1">
 														</div>
 													</div>
+													<input type="hidden" id="is_view" name="is_view" value="0">
 													<div id="abc">
 														<div class="form-group">
 
@@ -185,7 +186,7 @@
 																class="text-danger"></span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker"
+																<input type="text" class="form-control datepicker" autocomplete="off"
 																	placeholder="From Date" id="fromDate" name="fromDate"
 																	value="${award.awardValidityFrom}" required>
 															</div>
@@ -196,7 +197,7 @@
 																for="toDate">To <span class="text-danger"></span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker"
+																<input type="text" class="form-control datepicker" autocomplete="off"
 																	id="toDate" name="toDate" placeholder="To Date"
 																	value="${award.awardValidityTo}" required>
 															</div>
@@ -266,6 +267,14 @@
 			//	document.getElementById("hide_div").style = "visible"
 		}
 	</script>
+	<script type="text/javascript">
+function submit_f(view){
+	//alert(view);
+		document.getElementById("is_view").value=view; 
+		
+	}
+ 
+</script>
 	<script type="text/javascript">
 		$(function() {
 

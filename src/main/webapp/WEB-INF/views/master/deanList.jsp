@@ -84,9 +84,9 @@
 										class="table table-striped dt-responsive display">
 										<thead>
 											<tr>
-											<th class="check" style="text-align: center; width: 5%;"><input
+										<!-- 	<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
 												<th width="5%">Sr No</th>
 												<th> Name</th>
 												<th>Qualification</th>
@@ -103,8 +103,8 @@
 										<c:forEach items="${deanList}"
 												var="deanList" varStatus="count">
 												<tr>
-												<td><input type="checkbox" class="chk" name="deanIds"
-															id="deanIds${count.index+1}" value="${deanList.deanId}" /></td>
+												<%-- <td><input type="checkbox" class="chk" name="deanIds"
+															id="deanIds${count.index+1}" value="${deanList.deanId}" /></td> --%>
 												<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out

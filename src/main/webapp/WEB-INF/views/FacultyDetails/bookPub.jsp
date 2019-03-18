@@ -95,10 +95,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertFacultyBook"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -114,17 +114,17 @@
 
 
 													<div class="col-xs-12">
+														<input type="hidden"  id="book_id" name="book_id"  value="${book.bookId}">
+														<div class="form-group">
 
-<div class="form-group">
 
-
- <label class="control-label col-sm-2"
+ 																<label class="control-label col-sm-2"
 																	for="smallheading">Title of Book  <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="dob"
-																		name="dob" placeholder="Title of Book" value=""
+																	<input type="text" class="form-control" id="book_title"
+																		name="book_title" placeholder="Title of Book" value="${book.bookTitle }"
 																		required>
 																</div>
 
@@ -139,8 +139,8 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Edition" value="" required>
+																	<input type="text" class="form-control" id="book_edition"
+																		name="book_edition" placeholder="Edition" value="${book.bookEdition }" required>
 																</div>
 
 
@@ -157,9 +157,9 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Name of Authors/Co-Authors "
-																		value="" required>
+																	<input type="text" class="form-control" id="author"
+																		name="author" placeholder="Name of Authors/Co-Authors "
+																		value="${book.bookAuthor }" required>
 																</div>
 
 
@@ -174,9 +174,9 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Name of Co-Authors "
-																		value="" required>
+																	<input type="text" class="form-control" id="co_author1"
+																		name="co_author1" placeholder="Name of Co-Authors "
+																		value="${book.bookCoauther1}">
 																</div>
 															</div>
 															
@@ -189,9 +189,9 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Name of Co-Authors "
-																		value="" >
+																	<input type="text" class="form-control" id="co_author2"
+																		name="co_author2" placeholder="Name of Co-Authors "
+																		value="${book.bookCoauther2}">
 																</div>
 
 
@@ -205,9 +205,9 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Name of Co-Authors "
-																		value="" >
+																	<input type="text" class="form-control" id="co_author3"
+																		name="co_author3" placeholder="Name of Co-Authors "
+																		value="${book.bookCoauther3}">
 																</div>
 													
 															</div>
@@ -221,9 +221,9 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="issue"
-																		name="issue" placeholder="Name of Publication/Publisher  "
-																		value="" required>
+																	<input type="text" class="form-control" id="publisher"
+																		name="publisher" placeholder="Name of Publication/Publisher  "
+																		value="${book.bookPublisher}" required>
 																</div>
 
 															</div>
@@ -238,7 +238,7 @@
 
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="isbn"
-																		name="isbn" placeholder="ISBN No" value="" required>
+																		name="isbn" placeholder="ISBN No" value="${book.bookIsbn }" required>
 																</div>
 
 															</div>
@@ -250,8 +250,8 @@
 																	of Publication  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="date" class="form-control" id="dob"
-																		name="dob" placeholder="Title of Book" value=""
+																	<input type="text" class="form-control datepicker" id="year_publication"
+																		name="year_publication" placeholder="Title of Book" value="${book.bookPubYear }"
 																		required>
 																</div>
 
@@ -261,7 +261,11 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
+																		type="button" class="btn btn-primary">S</button></a> --%>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -298,6 +302,34 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+ <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+    
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+
+		});
+    });
+    
+</script>
 
 </body>
 </html>

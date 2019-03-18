@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<a href="${pageContext.request.contextPath}/showPatentDetails"><button
+								<a href="${pageContext.request.contextPath}/showAwardDetails"><button
 										type="button" class="btn btn-success">Add</button></a>
 
 							</div>
@@ -152,12 +152,10 @@
 											<td style="text-align: left"><c:out
 														value="${awardList.awardNature}" /></td>
 											
-											<td style="text-align: left"><c:out
-														value="${awardList.patentGuideName}" /></td>
-														
+										
 															
 											<td style="text-align: left"><c:out
-														value="${awardList.awardDate}" /></td>
+														value="${date}" /></td>
 												
 											<td align="center">
 											 <c:if test="${editAccess == 0}">  <a

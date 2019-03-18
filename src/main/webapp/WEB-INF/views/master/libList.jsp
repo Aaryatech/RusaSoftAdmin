@@ -88,7 +88,7 @@
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
-													<!-- <th class="check" style="text-align: center; width: 5%;"><input
+												<!-- 	<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th> -->
 													<th width="5%">Sr No</th>
@@ -108,8 +108,10 @@
 												<c:forEach items="${libtList}" var="institute"
 													varStatus="count">
 													<tr>
-											
-														<td>	value="${institute.librarianId}" /></td>
+										<%-- 	<td>input type="checkbox" class="chk" name="studIds"
+															id="studIds${count.index+1}"
+															value="${institute.librarianId}" /></td> --%>
+														
 														<td>${count.index+1}</td>
 														<td>${institute.librarianName}</td>
 														<td>${institute.contactNo}</td>

@@ -111,7 +111,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addFaculty"
 										method="post" name="form_sample_2" id="form_sample_2" 
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -457,7 +457,7 @@
 														
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
@@ -494,7 +494,37 @@
 
 	<!-- END CONTENT -->
 	
+	
 	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
+	
+	<script type="text/javascript">
+	
+	$(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+
+		});
+    });
+	
 $("#dateOfJoin").on("keypress keyup blur",function (event) {
     //this.value = this.value.replace(/[^0-9\.]/g,'');
 $(this).val($(this).val().replace(/[^0-9\.]/g,''));
@@ -543,6 +573,9 @@ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
 <script type="text/javascript">
 
 	function checkUnique(inputValue,valueType){
+		document.getElementById("sub1").disabled=false;
+		document.getElementById("sub2").disabled=false;
+
 		
 		//alert(inputValue+" "+valueType);
     	

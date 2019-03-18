@@ -238,5 +238,46 @@ public class FacultyConsultancyController {
 		return returnString;
 
 	}
+	
+	@RequestMapping(value = "/editConsultancy/{consId}", method = RequestMethod.GET)
+	public ModelAndView editConsultancy(@PathVariable("consId") int consId,HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "0", "1", "0",
+					newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+
+				model = new ModelAndView("FacultyDetails/consultancyDetailList");
+				model.addObject("title", "Edit Consultancy Details Form");
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("consId", consId);
+				FacultyConsultancy resp = restTemplate.postForObject(Constants.url + "getConsultancyByConsId", map, FacultyConsultancy.class);
+				
+				model.addObject("editConsultancy", resp);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 }

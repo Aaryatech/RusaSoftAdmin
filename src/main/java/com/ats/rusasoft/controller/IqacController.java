@@ -170,7 +170,7 @@ public class IqacController {
 			miqac.setIqacName(iqacName);
 			miqac.setDesgntnId(designation);
 			miqac.setInstituteId(instituteId);
-			miqac.setJoiningDate(DateConvertor.convertToYMD(dateOfJoin));
+			miqac.setJoiningDate(dateOfJoin);
 			miqac.setContactNo(contact);
 			miqac.setEmail(email);
 			miqac.setDelStatus(1);
