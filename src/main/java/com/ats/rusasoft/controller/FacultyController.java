@@ -567,4 +567,48 @@ public class FacultyController {
 
 	}
 
+	@RequestMapping(value = "/showSubDetails", method = RequestMethod.GET)
+	public ModelAndView showSubDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/subDetails");
+
+			model.addObject("title", "Subject Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddSubDetails", method = RequestMethod.GET)
+	public ModelAndView showAddSubDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/addSubDetail");
+
+			model.addObject("title", "Subject Details Form");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 }
