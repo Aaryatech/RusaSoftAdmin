@@ -240,7 +240,7 @@
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="date" class="form-control" id=" yearofIntro" 	value="${stud.implementationYear}"
+																<input type="text" class="form-control datepicker" id=" yearofIntro"  placeholder="dd-MM-YYYY" 	value="${stud.implementationYear}"
 																	name="yearofIntro"  required>
 															</div>
 														</div>

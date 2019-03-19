@@ -84,10 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-
+ <c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showOutReachDetails"><button
 										type="button" class="btn btn-success">Add</button></a>
-
+</c:if>
 							</div>
 
 						</header>
@@ -98,7 +98,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -137,29 +137,26 @@
 												<c:forEach items="${facultyOutreachList}" var="outList"
 													varStatus="count">
 													<tr>
-											<td>input type="checkbox" class="chk" name="studIds"
-															id="studIds${count.index+1}"
-															value="${institute.librarianId}" /></td>
-														
+											
 														<td>${count.index+1}</td>
-														<td>${institute.librarianName}</td>
-														<td>${institute.contactNo}</td>
-														<td>${institute.email}</td>
-															<td>${institute.joiningDate}</td>
-															<td>${institute.realivingDate}</td>
+														<td>${outList.typeName}</td>
+														<td>${outList.outreachName}</td>
+														<td>${outList.outreachLevel}</td>
+													   <td>${outList.outreachDate}</td>
+														
 
 
 														<td  align="center">
 													    <c:if test="${editAccess == 0}"> 
 							                       	  	<a
-															href="#" onclick="showEditLibrarian(${institute.librarianId})"><span
+															href="#" onclick="showEditLibrarian(${outList.outreachId})"><span
 																class="glyphicon glyphicon-edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>
 			                	                       </c:if>&nbsp;&nbsp;&nbsp;&nbsp;
 														
 												  <c:if test="${deleteAccess == 0}"> 
 															<a
-															href="${pageContext.request.contextPath}/deleteLibrarians/${institute.librarianId}"
+															href="${pageContext.request.contextPath}/deleteFacOutReach/${outList.outreachId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -173,6 +170,7 @@
 											</tbody>
 
 															</table>
+	<input type="hidden" id="e_outreach_id"   name="e_outreach_id" value="0">
 
 														</div>
 
@@ -214,33 +212,19 @@
 
 
 	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var nature = document.getElementById("nature").value
-			var sponser = document.getElementById("sponser").value
-			//alert(qualName);
-			var amount = document.getElementById("amount").value
-			var academicYear = document.getElementById("academicYear").value
-			var conPeriod = document.getElementById("conPeriod").value
-			var consultancy = document.getElementById("consultancy").value
-			var temp;
-			if (consultancy == 1) {
-				temp = "Yes";
-			} else {
-				temp = "No";
-			}
-			var dataTable = $('#example-1').DataTable();
+	function showEditLibrarian(outId){
+	
+		document.getElementById("e_outreach_id").value=outId;//create this 
+		
+		var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");	
+	   
 
-			dataTable.row.add(
-					[ i + 1, academicYear, nature, sponser, amount, conPeriod,
-							temp
-
-					]).draw();
-
-			document.getElementById("index").value = i + 1;
-
-		}
+		//form.action=("showEditFacOutReach");
+		form.action=("showEditFacOutReach");
+		form.submit();
+		
+	}
 	</script>
 
 

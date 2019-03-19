@@ -35,6 +35,7 @@ import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
 import com.ats.rusasoft.model.OutreachType;
+import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
@@ -695,7 +696,7 @@ public class FacultyPatentController {
 
 				model.addObject("title", "Out Reach Activity ");
 				
-				
+				FacultyOutreach editInst = new FacultyOutreach();
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				
 				
@@ -705,6 +706,7 @@ public class FacultyPatentController {
 				System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());				
 
 				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
+				model.addObject("editInst", editInst);
 				
 				
 
@@ -853,6 +855,104 @@ public class FacultyPatentController {
 			}
 
 			return a;
+
+		}
+	  
+	  @RequestMapping(value = "/deleteFacOutReach/{outId}", method = RequestMethod.GET)
+		public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int outId) {
+			HttpSession session = request.getSession();
+			String a = null;
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("deleteFacOutReach/{outId}", "showOutReachDetailsList", "0", "0", "0", "1",
+					newModuleList);
+			try {
+				if (view.isError() == true) {
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				
+						System.err.println("Single Record delete ");
+						map.add("outreachId", outId);
+					
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteOutreachFaculty", map, Info.class);
+
+					a = "redirect:/showOutReachDetailsList";
+				}
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+			return a;
+		}
+	  
+	  
+	  @RequestMapping(value = "/showEditFacOutReach", method = RequestMethod.POST)
+		public ModelAndView showEditFacOutReach(HttpServletRequest request, HttpServletResponse response) {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			try {
+
+				Info view = AccessControll.checkAccess("showEditFacOutReach", "showOutReachDetailsList", "0", "0", "1", "0",
+						newModuleList);
+
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+
+					model = new ModelAndView("FacultyDetails/outReach");
+					int inst_id = (int) session.getAttribute("instituteId");
+					System.err.println("inst_id id is" + inst_id);
+					int edit_outreach_id = Integer.parseInt(request.getParameter("e_outreach_id"));
+					System.err.println("edit_outreach_id id is" + edit_outreach_id);
+
+					model.addObject("title", " Edit Faculty Outreach");
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("outreachId", edit_outreach_id);
+
+					FacultyOutreach editInst = rest.postForObject(Constants.url + "getFacultyOutReach", map, FacultyOutreach.class);
+
+					System.err.println("FacultyOutreach is" + editInst.toString());
+				
+					model.addObject("editInst", editInst);
+					model.addObject("edit_outreach_id", 1);
+
+					RestTemplate restTemplate = new RestTemplate();
+					map = new LinkedMultiValueMap<String, Object>();
+
+					map.add("instituteId",inst_id);
+					List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList",map,
+							List.class);
+					
+					
+					model.addObject("date", DateConvertor.convertToDMY(	editInst.getOutreachDate()));
+					System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());				
+
+					model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
+				}
+
+			} catch (Exception e) {
+				System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			return model;
 
 		}
 	  

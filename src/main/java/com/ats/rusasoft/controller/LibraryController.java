@@ -210,7 +210,8 @@ public class LibraryController {
 				System.out.println("lib list is" + libtList.toString());
 
 				model.addObject("libtList", libtList);
-
+				
+			
 				Info add = AccessControll.checkAccess("showLibList", "showLibList", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "1", "0", newModuleList);
 				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "0", "1",newModuleList);
@@ -463,6 +464,9 @@ public class LibraryController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
+				
+				model.addObject("jdate", DateConvertor.convertToDMY(editInst.getJoiningDate()));
+				model.addObject("ldate", DateConvertor.convertToDMY(editInst.getRealivingDate()));
 			}
 
 		} catch (Exception e) {

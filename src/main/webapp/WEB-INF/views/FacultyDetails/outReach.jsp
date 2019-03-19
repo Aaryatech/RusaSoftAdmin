@@ -136,10 +136,19 @@
 															
 																	
 																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
-																	
+																		<c:choose>
+																			<c:when test="${outtype.typeId==editInst.outreachType}">
+																			<option  selected value="${outtype.typeId}">${outtype.typeName}</option>
+
+
+																			</c:when>
+																			<c:otherwise>
 																			<option value="${outtype.typeId}">${outtype.typeName}</option>
 
-																			
+
+																			</c:otherwise>
+
+																		</c:choose>
 
 																	</c:forEach>
 																</select>
@@ -166,7 +175,7 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="act_name"
-																name="act_name" placeholder="Name of Activity" value=""
+																name="act_name" placeholder="Name of Activity" value="${editInst.outreachName}"
 																required>
 														</div>
 
@@ -203,10 +212,57 @@
 														<div class="col-sm-6">
 															<select id="act_level" name="act_level"
 																class="form-control" required>
+																<!-- <option value="International">International</option>
+																<option value="National">National</option>
+																<option value="State">State</option>
+																<option value="Regional">Regional</option> -->
+																
+																<c:choose>
+																			<c:when test="${'International'==editInst.outreachLevel}">
+																			
+																<option  selected value="International">International</option>
+																<option value="National">National</option>
+																<option value="State">State</option>
+																<option value="Regional">Regional</option>
+
+																			</c:when>
+																			<c:when test="${'National'==editInst.outreachLevel}">
+																			
+																<option   value="International">International</option>
+																<option selected value="National">National</option>
+																<option value="State">State</option>
+																<option value="Regional">Regional</option>
+
+																			</c:when>
+																			
+																			<c:when test="${'State'==editInst.outreachLevel}">
+																			
+																<option   value="International">International</option>
+																<option  value="National">National</option>
+																<option selected value="State">State</option>
+																<option value="Regional">Regional</option>
+
+																			</c:when>
+																			
+																			<c:when test="${'Regional'==editInst.outreachLevel}">
+																			
+																<option   value="International">International</option>
+																<option  value="National">National</option>
+																<option value="State">State</option>
+																<option  selected value="Regional">Regional</option>
+
+																			</c:when>
+																			
+																	<c:otherwise>
 																<option value="International">International</option>
 																<option value="National">National</option>
 																<option value="State">State</option>
 																<option value="Regional">Regional</option>
+
+
+																			</c:otherwise>
+
+																		</c:choose>
 
 
 															</select>
@@ -218,13 +274,13 @@
 																Date of Activity <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="act_date" 	value="${editInst.joiningDate}"
+																<input type="text" class="form-control datepicker" id="act_date" 	value="${date}"
 																	name="act_date" placeholder="dd/MM/YYYY " required>
 															</div>
 														</div>
 														
 														
-														          <input type="hidden" id="librarian_id" name="outreach_id" value="0">
+											 <input type="hidden" id="outreach_id"  name="outreach_id"   value="${editInst.outreachId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
 												

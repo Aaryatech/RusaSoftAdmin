@@ -187,7 +187,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${editInst.joiningDate}"
+																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${jdate}"
 																	name="lib_joiningDate" placeholder=" " required>
 															</div>
 														</div>
@@ -198,7 +198,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${editInst.realivingDate}"
+																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${ldate}"
 																	name="relieving_date"  required>
 															</div>
 														</div>
