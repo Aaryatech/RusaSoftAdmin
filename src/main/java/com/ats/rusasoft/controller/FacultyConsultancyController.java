@@ -71,7 +71,7 @@ public class FacultyConsultancyController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("yearId", acYearId);
-				map.add("facultyId", userObj.getUserId());
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				FacultyConsultancy[] arry = restTemplate.postForObject(
 						Constants.url + "getFacultyConsultancyListByFacultyId", map, FacultyConsultancy[].class);
 				List<FacultyConsultancy> list = new ArrayList<FacultyConsultancy>(Arrays.asList(arry));
@@ -167,7 +167,7 @@ public class FacultyConsultancyController {
 				facultyConsultancy.setConsAmount(amount);
 				facultyConsultancy.setConsPeriod(conPeriod);
 				facultyConsultancy.setIsConsCompleted(projComp);
-				facultyConsultancy.setFacultyId(userObj.getUserId());
+				facultyConsultancy.setFacultyId(userObj.getGetData().getUserDetailId());
 				facultyConsultancy.setMakerUserId(userObj.getUserId());
 				facultyConsultancy.setMakerdatetime(sf.format(date));
 				facultyConsultancy.setDelStatus(1);
