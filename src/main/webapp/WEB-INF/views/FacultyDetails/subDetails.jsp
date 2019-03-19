@@ -158,7 +158,7 @@
 
 
 																	<td><a
-																		href="${pageContext.request.contextPath}/showpoPsoFaculty"
+																		href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
 																		title="Add CO" rel="tooltip" data-color-class="detail"
 																		data-animate=" animated fadeIn " data-toggle="tooltip"
 																		data-original-title="Block"><span

@@ -37,6 +37,8 @@ import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.IqacList;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
+import com.ats.rusasoft.model.ProgramOutcome;
+import com.ats.rusasoft.model.SubjectCo;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
@@ -590,10 +592,12 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/subDetails");
-
 				model.addObject("title", "Subject Details Form");
-
-				List<GetSubject> subList = rest.getForObject(Constants.url + "/getAllSubjectList", List.class);
+				int yearId = (int) session.getAttribute("acYearId");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yearId);
+				List<GetSubject> subList = rest.postForObject(Constants.url + "/getAllSubjectList", map, List.class);
 
 				System.out.println("subList" + subList);
 
@@ -826,6 +830,176 @@ public class FacultyController {
 			value = "redirect:/showSubDetailsList";
 		}
 		return value;
+
+	}
+
+	@RequestMapping(value = "/showAddCo/{subId}", method = RequestMethod.GET)
+	public ModelAndView showpoPsoFaculty(@PathVariable("subId") int subId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			model = new ModelAndView("FacultyDetails/coPSOFaculty");
+			model.addObject("title", "Faculty CO PO");
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("programId", 2);
+			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
+			model.addObject("programDetail", programDetail);
+			model.addObject("subId", subId);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("subId", subId);
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+
+			SubjectCo[] arry = rest.postForObject(Constants.url + "/getSubjectCoListBySubId", map, SubjectCo[].class);
+			List<SubjectCo> subjectCoList = new ArrayList<>(Arrays.asList(arry));
+
+			model.addObject("programDetail", programDetail);
+			model.addObject("subId", subId);
+			model.addObject("subjectCoList", subjectCoList);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "submitSubjectCo", method = RequestMethod.POST)
+	public String submitSubjectCo(HttpServletRequest request, HttpServletResponse response) {
+
+		int subId = Integer.parseInt(request.getParameter("subId"));
+		try {
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String coName = request.getParameter("coName");
+			int coId = Integer.parseInt(request.getParameter("coId"));
+
+			SubjectCo subjectCo = new SubjectCo();
+			subjectCo.setCoId(coId);
+			subjectCo.setDelStatus(1);
+			subjectCo.setIsActive(1);
+			subjectCo.setMakerEnterDatetime(sf.format(date));
+			subjectCo.setSubId(subId);
+			subjectCo.setFacultyId(userObj.getGetData().getUserDetailId());
+			subjectCo.setMakerUserId(userObj.getUserId());
+			subjectCo.setCoName(coName);
+
+			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/showAddCo/" + subId;
+
+	}
+
+	@RequestMapping(value = "/deleteSubjectCo/{coId}/{subId}", method = RequestMethod.GET)
+	public String deleteSubjectCo(@PathVariable("coId") int coId, @PathVariable("subId") int subId,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("coId", coId);
+			Info info = rest.postForObject(Constants.url + "/deleteSubjectsCo", map, Info.class);
+			System.out.println(info);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/showAddCo/" + subId;
+
+	}
+
+	@RequestMapping(value = "/editSubjectCo/{coId}/{subId}", method = RequestMethod.GET)
+	public ModelAndView editSubjectCo(@PathVariable("coId") int coId, @PathVariable("subId") int subId,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			model = new ModelAndView("FacultyDetails/coPSOFaculty");
+			model.addObject("title", "Faculty CO PO");
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("programId", 2);
+			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
+			model.addObject("programDetail", programDetail);
+			model.addObject("subId", subId);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("subId", subId);
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+
+			SubjectCo[] arry = rest.postForObject(Constants.url + "/getSubjectCoListBySubId", map, SubjectCo[].class);
+			List<SubjectCo> subjectCoList = new ArrayList<>(Arrays.asList(arry));
+
+			map = new LinkedMultiValueMap<>();
+			map.add("coId", coId); 
+			SubjectCo editSubjectCo = rest.postForObject(Constants.url + "/getSubjectCoBySubId", map, SubjectCo.class);
+			 
+
+			model.addObject("programDetail", programDetail);
+			model.addObject("subId", subId);
+			model.addObject("subjectCoList", subjectCoList);
+			model.addObject("editSubjectCo", editSubjectCo);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/mapPoCo", method = RequestMethod.GET)
+	public ModelAndView showPsoFaculty(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("FacultyDetails/PSOFaculty");
+		try {
+ 
+			model.addObject("title", "Faculty PSO");
+			int coId = Integer.parseInt(request.getParameter("coId"));
+			int subId = Integer.parseInt(request.getParameter("subId"));
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			
+
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramOutcome[] programOutcomList = rest.postForObject(Constants.url + "/getProgramOutcomeListByProgramId", map, ProgramOutcome[].class);
+			model.addObject("programOutcomList", programOutcomList); 
+			
+		} catch (Exception e) {
+
+			System.err.println("exception In showpoPsoFaculty at Faculty Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
 
 	}
 

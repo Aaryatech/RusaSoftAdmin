@@ -66,80 +66,149 @@
 						</header>
 
 
-
-						<div class="col-xs-12">
-							&nbsp;&nbsp;&nbsp;
-							<div class="row">
-								<label class="control-label col-sm-2" for="status">
-									Program Name:</label> <label class="control-label col-sm-2"
-									for="status"> </label>
-							</div>
-
-							<div class="row">
-								<label class="control-label col-sm-2" for="status">
-									Duration:</label> <label class="control-label col-sm-2" for="status">
-								</label>
-							</div>
-							<div class="row">
-								<label class="control-label col-sm-2" for="status">
-									Sanctioned Intake:</label> <label class="control-label col-sm-2"
-									for="status"> </label>
-
-							</div>
-						</div>
-
-
-						<br /> <br /> <br />
 						<div class="content-body">
 							<div class="row">
+								<form class="form-horizontal"
+									action="${pageContext.request.contextPath}/submitSubjectCo"
+									method="post" name="submitProgramMission"
+									id="submitProgramMission"
+									onsubmit="return confirm('Do you really want to add CO?');">
+									<div class="col-xs-12">
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="status">
+												Program Name:</label>
+											<div class="col-sm-6" for="status">
+												<strong> ${programDetail.nameOfProgram} </strong>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="status">
+												Duration:</label>
+											<div class="col-sm-6" for="status">
+												<strong>${programDetail.monthDuration}</strong>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="status">
+												Sanctioned Intake:</label>
+											<div class="col-sm-6" for="status">
+												<strong>${programDetail.sanctionalIntake}</strong>
+											</div>
+
+
+										</div>
+										<div class="form-group"></div>
+									</div>
+									<div class="col-xs-12">
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="coName">CO
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id=coName
+													name="coName" placeholder="CO NAME"
+													value="${editSubjectCo.coName}" value="" required>
+											</div>
+											<div class="col-sm-4">
+
+												<input type="submit" class="btn btn-info" value="Add">
+												<input type="hidden" id="subId" name="subId"
+													value="${subId}">
+												<c:choose>
+													<c:when test="${editSubjectCo.coId>0}">
+														<input type="hidden" id="coId" name="coId"
+															value="${editSubjectCo.coId}">
+													</c:when>
+													<c:otherwise>
+													<input type="hidden" id="coId" name="coId"
+															value="0">
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+
+										<div class="form-group"></div>
+									</div>
+								</form>
 
 								<div class="col-xs-12">
-
-									<div class="form-group">
-
-										<table class="table table-striped dt-responsive display"
-											id="example-1">
+									<div class="table-responsive">
+										<table class="table table-bordered" id="table1">
 											<thead>
 												<tr>
-													<th>Sr No</th>
+													<th width="10%">Sr No</th>
 
-													<th>Program Outcomes (PO as per Accreditation Manual)</th>
+													<th>CO</th>
 
-													<th>Is Mapped(Yes/No)</th>
-													<th>Satisfying Value</th>
-													<th>Action</th>
+													<!-- <th>Is Mapped(Yes/No)</th> -->
+													<!-- <th>Satisfying Value</th> -->
+													<th width="10%">PO Mapping</th>
+													<th width="10%">PSO Mapping</th>
+													<th width="10%">Action</th>
 												</tr>
 
 											</thead>
 
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>xyz</td>
-													<!-- format to display program name is program Type-Program Name -->
-													<td>No</td>
 
-													<td>1</td>
-													<td><a
-														href="${pageContext.request.contextPath}/showPsoFaculty"
-														title="Add PSO" rel="tooltip" data-color-class="detail"
-														data-animate=" animated fadeIn " data-toggle="tooltip"
-														data-original-title="Block"><span
-															class="glyphicon glyphicon-list"></span></a></td>
+												<c:forEach items="${subjectCoList}" var="subjectCoList">
+													<tr>
 
-												</tr>
+														<td>${count.index+1}</td>
 
+														<td><c:out value="${subjectCoList.coName}" /></td>
+
+
+														<%-- 
+
+
+														<td><c:out value="${subjectCoList.coPoMap}" /></td>
+
+														<td ><c:out
+																value="${subjectCoList.coPsoMap}" /></td>
+  --%>
+														<td><a
+															href="${pageContext.request.contextPath}/mapPoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
+															title="Add PSO" rel="tooltip" data-color-class="detail"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Block"><span
+																class="glyphicon glyphicon-list"></span></a></td>
+
+														<td><a
+															href="${pageContext.request.contextPath}/showPsoFaculty"
+															title="Add PSO" rel="tooltip" data-color-class="detail"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Block"><span
+																class="glyphicon glyphicon-list"></span></a></td>
+														<td><a
+															href="${pageContext.request.contextPath}/editSubjectCo/${subjectCoList.coId}/${subId}"><span
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;
+
+															<a
+															href="${pageContext.request.contextPath}/deleteSubjectCo/${subjectCoList.coId}/${subId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger" title="Delete"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+
+
+
+
+
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>
-
-
-
-
 								</div>
 
 
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<input type="submit" class="btn btn-primary"
 											onclick="submit_f(1)" value="Save"> <input
@@ -148,7 +217,7 @@
 																		Next">
 										<button type="reset" class="btn btn-default">Reset</button>
 									</div>
-								</div>
+								</div> -->
 
 
 
