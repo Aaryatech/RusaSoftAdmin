@@ -410,8 +410,8 @@
 														of Student Appeared <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="noStudApp"
-															onkeypress="return allowOnlyNumber(event)"
+														<input type="number" class="form-control" id="noStudApp"
+															min="0" onkeypress="return allowOnlyNumber(event)"
 															autocomplete="off" placeholder="No. of Student Appeared"
 															name="noStudApp" value="${editSubject.subStuAppear}"
 															required>
@@ -423,8 +423,8 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="pass"
-															onkeypress="return allowOnlyNumber(event)"
+														<input type="number" class="form-control" id="pass"
+															min="0" onkeypress="return allowOnlyNumber(event)"
 															autocomplete="off" placeholder="Passed"
 															onchange=" calResult()" name="pass"
 															value="${editSubject.subStuPassed}" required>
@@ -441,7 +441,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="rslt"
-															onkeypress="return allowOnlyNumber(event)" reaonly
+															onkeypress="return allowOnlyNumber(event)" readonly
 															autocomplete="off" placeholder="% of Result" name="rslt"
 															value="${editSubject.subPassPer}" required>
 													</div>
