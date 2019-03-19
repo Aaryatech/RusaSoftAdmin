@@ -524,8 +524,7 @@
 
 		function deleteSwoc(swocId) {
 			alert("hii");
-
-			//$('#example-1 td').remove();
+			$('#table1 td').remove();
 			$("#loader1").show();
 
 			$
@@ -534,7 +533,6 @@
 
 							{
 								swocId : swocId,
-
 								ajax : 'true'
 
 							},
