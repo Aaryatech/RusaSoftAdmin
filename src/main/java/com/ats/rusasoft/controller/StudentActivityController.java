@@ -43,6 +43,7 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 @Scope("session")
 public class StudentActivityController {
 
+	
 	RestTemplate restTemplate = new RestTemplate();
 
 	@RequestMapping(value = "/showStudOrgnizedActivity", method = RequestMethod.GET)
