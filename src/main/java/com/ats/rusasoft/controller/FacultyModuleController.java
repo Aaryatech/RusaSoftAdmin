@@ -86,27 +86,7 @@ public class FacultyModuleController {
 
 	
 
-	@RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
-	public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/outReach");
-
-			model.addObject("title", "Out Reach Activity Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/showOrganized", method = RequestMethod.GET)
 	public ModelAndView showOrganized(HttpServletRequest request, HttpServletResponse response) {

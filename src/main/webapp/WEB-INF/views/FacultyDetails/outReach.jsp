@@ -113,12 +113,6 @@
 
 												<div>
 
-
-
-
-													<h5 class="title pull-left">
-														<strong>Out Reach Activity</strong>
-													</h5>
 													<div class="col-sm-12"></div>
 
 
@@ -129,16 +123,17 @@
 														<div class="col-sm-6">
 															<select id="salutation" onchange="showForm()"
 																name="salutation" class="form-control" required>
-																<option value="0">STTP</option>
-																<option value="1">Seminar</option>
-																<option value="2">Workshop</option>
-																<option value="3">Conference</option>
-																<option value="4">FDP</option>
-																<option value="5">Refresher Course</option>
+																<option value="STTP">STTP</option>
+																<option value="Seminar">Seminar</option>
+																<option value="Workshop">Workshop</option>
+																<option value="Conference">Conference</option>
+																<option value="FDP">FDP</option>
+																<option value="Refresher Course">Refresher Course</option>
 																<option value="6">Any Other</option>
 
 															</select>
 														</div>
+															</div>
 														<div class="form-group" id="abc">
 															<label class="control-label col-sm-2" for="smallheading">Other
 																Activity <span class="text-danger">*</span>
@@ -168,6 +163,27 @@
 
 
 
+											<div class="form-group">
+
+														<label class="control-label col-sm-2" for="status">Activity Type
+															 <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<select id="" name="activity_type" class="form-control" required>
+															
+																	
+																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
+																	
+																			<option value="${outtype.typeId}">${outtype.typeName}</option>
+
+																			
+
+																	</c:forEach>
+																</select>
+														</div>
+													</div>
+
+
 													<div class="form-group">
 
 														<label class="control-label col-sm-2" for="status">Select
@@ -176,28 +192,31 @@
 														<div class="col-sm-6">
 															<select id="salutation" name="salutation"
 																class="form-control" required>
-																<option value="0">International</option>
-																<option value="1">National</option>
-																<option value="2">State</option>
-																<option value="3">Regional</option>
+																<option value="International">International</option>
+																<option value="National">National</option>
+																<option value="State">State</option>
+																<option value="Regional">Regional</option>
 
 
 															</select>
 														</div>
 													</div>
 
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="smallheading">Date
-															of Activity <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control Datepicker"
-																id="dob" name="Grant" value="" required>
+												<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">
+																Date of Activity <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-3">
+																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${editInst.joiningDate}"
+																	name="lib_joiningDate" placeholder="dd/MM/YYYY " required>
+															</div>
 														</div>
-
-
-													</div>
+														
+														
+														          <input type="hidden" id="librarian_id" name="outreach_id" value="${editInst.librarianId}">
+                                             	<input type="hidden" id="is_view" name="is_view" value="0">
+												
+												
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary"
@@ -216,7 +235,7 @@
 												</div>
 
 											</div>
-										</div>
+									
 									</form>
 								</div>
 

@@ -126,15 +126,17 @@
 																	<tr>
 																		<th>Sr No</th>
 
-																		<th>Patent No.</th>
-																		<th>Patent Title</th>
-																		<th>Patent Filling Date</th>
+																		<th>Outreach Name</th>
+																		<th>Outreach Level</th>
+																		<th>Outreach Date</th>
 																		<th>Name of Guide</th>
 																		<th>Date of Publication</th>
 																		<th>Action</th>
 																	</tr>
 																</thead>
+												<tbody>
 
+													</tbody>
 
 
 															</table>

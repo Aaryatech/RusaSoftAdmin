@@ -27,10 +27,12 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.FacultyAward;
+import com.ats.rusasoft.model.FacultyOutreach;
 import com.ats.rusasoft.model.FacultyPatent;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
+import com.ats.rusasoft.model.OutreachType;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
@@ -595,30 +597,122 @@ public class FacultyPatentController {
 			  return a;
 		  
 		  }
+		  
+		  
 	  
 	  @RequestMapping(value = "/showOutReachDetailsList", method =
 	  RequestMethod.GET) public ModelAndView
 	  showOutReachDetailsList(HttpServletRequest request, HttpServletResponse
-	  response) {
+	  response) 
+	  {
 	  
-	  ModelAndView model = null; try {
+	  ModelAndView model = null;
+	
 	  
-	  model = new ModelAndView("FacultyDetails/outReachList");
-	  
-	  model.addObject("title", "Out Reach Activity List");
-	  
-	  } catch (Exception e) {
-	  
-	  System.err.println("exception In showOutReachDetailsList at Library Contr" +
-	  e.getMessage());
-	  
-	  e.printStackTrace();
-	  
-	  }
-	  
-	  return model;
-	  
-	  }
 	 
+		HttpSession session = request.getSession();
 
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		try {
+			Info view = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "1", "0", "0", "0", newModuleList);
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} 
+			else {
+
+				
+				 model = new ModelAndView("FacultyDetails/outReachList");
+				  
+				  model.addObject("title", "Out Reach Activity List");
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				List<FacultyOutreach> facultyOutreachList = rest.postForObject(Constants.url + "/getOutReachListByFacultyId",map,
+						List.class);
+				System.out.println("faculty Patent List :" + facultyOutreachList.toString());				
+
+			
+
+				model.addObject("facultyOutreachList", facultyOutreachList);
+				
+				Info add = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+				
+			}
+				
+		
+		
+		} 
+		catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+	  }
+	  
+	  
+	  @RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
+		public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			int inst_id = (int) session.getAttribute("instituteId");
+			try {
+
+				model = new ModelAndView("FacultyDetails/outReach");
+
+				model.addObject("title", "Out Reach Activity ");
+				
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				
+				
+				map.add("instituteId",inst_id);
+				List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList",map,
+						List.class);
+				System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());				
+
+				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
+				
+				
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+	  
 }

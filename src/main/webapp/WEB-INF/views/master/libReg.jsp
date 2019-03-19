@@ -207,7 +207,7 @@
 
 												</div>
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
+                                             <input type="hidden" id="librarian_id" name="outreach_id" value="${editInst.librarianId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
 											  <div class="form-group">
