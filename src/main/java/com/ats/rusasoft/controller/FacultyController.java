@@ -19,6 +19,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +30,7 @@ import com.ats.rusasoft.faculty.model.GetJournal;
 import com.ats.rusasoft.faculty.model.GetSubject;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.faculty.model.ResearchProject;
+import com.ats.rusasoft.faculty.model.SWOC;
 import com.ats.rusasoft.faculty.model.Subject;
 import com.ats.rusasoft.master.model.Program;
 import com.ats.rusasoft.model.Designation;
@@ -954,9 +956,8 @@ public class FacultyController {
 			List<SubjectCo> subjectCoList = new ArrayList<>(Arrays.asList(arry));
 
 			map = new LinkedMultiValueMap<>();
-			map.add("coId", coId); 
+			map.add("coId", coId);
 			SubjectCo editSubjectCo = rest.postForObject(Constants.url + "/getSubjectCoBySubId", map, SubjectCo.class);
-			 
 
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);
@@ -972,25 +973,24 @@ public class FacultyController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/mapPoCo", method = RequestMethod.GET)
 	public ModelAndView showPsoFaculty(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("FacultyDetails/PSOFaculty");
 		try {
- 
+
 			model.addObject("title", "Faculty PSO");
 			int coId = Integer.parseInt(request.getParameter("coId"));
 			int subId = Integer.parseInt(request.getParameter("subId"));
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			
-
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("programId", programId);
-			ProgramOutcome[] programOutcomList = rest.postForObject(Constants.url + "/getProgramOutcomeListByProgramId", map, ProgramOutcome[].class);
-			model.addObject("programOutcomList", programOutcomList); 
-			
+			ProgramOutcome[] programOutcomList = rest.postForObject(Constants.url + "/getProgramOutcomeListByProgramId",
+					map, ProgramOutcome[].class);
+			model.addObject("programOutcomList", programOutcomList);
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showpoPsoFaculty at Faculty Contr" + e.getMessage());
@@ -1000,6 +1000,184 @@ public class FacultyController {
 		}
 
 		return model;
+
+	}
+
+	@RequestMapping(value = "/showSWOC", method = RequestMethod.GET)
+	public ModelAndView showSWOC(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			model = new ModelAndView("FacultyDetails/swoc");
+
+			model.addObject("title", "SWOC Details Form");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+			map.add("swocType", 1);
+			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+			List<SWOC> swocList = new ArrayList<>(Arrays.asList(arry));
+			model.addObject("strengthList", swocList);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+			map.add("swocType", 2);
+			arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+			List<SWOC> weakNessList = new ArrayList<>(Arrays.asList(arry));
+			model.addObject("weakNessList", weakNessList);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+			map.add("swocType", 3);
+			arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+			List<SWOC> oppList = new ArrayList<>(Arrays.asList(arry));
+			model.addObject("oppList", oppList);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+			map.add("swocType", 4);
+			arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+			List<SWOC> challengelist = new ArrayList<>(Arrays.asList(arry));
+			model.addObject("challengelist", challengelist);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/saveSWOC", method = RequestMethod.GET)
+	public @ResponseBody List<SWOC> saveSWOC(HttpServletRequest request, HttpServletResponse response) {
+		List<SWOC> swocList = new ArrayList<>();
+		SWOC swoc = new SWOC();
+		Info info = new Info();
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			Date date = new Date();
+
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String swocText = request.getParameter("swocText");
+			int swocType = Integer.parseInt(request.getParameter("swocType"));
+			int swocId = Integer.parseInt(request.getParameter("swocId"));
+
+			swoc.setDelStatus(1);
+			swoc.setExInt1(1);
+			swoc.setExInt2(1);
+			swoc.setExVar2("NA");
+			swoc.setExVar1("NA");
+			swoc.setFacultyId(userObj.getGetData().getUserDetailId());
+			swoc.setIsActive(1);
+			swoc.setMakerEnterDatetime(sf.format(date));
+			swoc.setMakerUserId(userObj.getUserId());
+			swoc.setSwocText(swocText);
+			swoc.setSwocType(swocType);
+			int yearId = (int) session.getAttribute("acYearId");
+			swoc.setYearId(yearId);
+			swoc.setSwocId(swocId);
+
+			SWOC res = rest.postForObject(Constants.url + "/saveSWOC", swoc, SWOC.class);
+			System.out.println(res.toString());
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+			map.add("swocType", swocType);
+			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
+			swocList.addAll(list);
+			System.out.println("swocList" + swocList.toString());
+
+		} catch (
+
+		Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+
+		}
+
+		return swocList;
+
+	}
+
+	@RequestMapping(value = "/editSwoc", method = RequestMethod.GET)
+	public @ResponseBody SWOC editSwoc(HttpServletRequest request, HttpServletResponse response) {
+
+		SWOC swoc = new SWOC();
+
+		try {
+
+			int swocId = Integer.parseInt(request.getParameter("swocId"));
+			System.out.println("swocId" + swocId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("swocId", swocId);
+			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map, SWOC.class);
+
+			System.out.println("swocId" + swoc.toString());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return swoc;
+
+	}
+
+	@RequestMapping(value = "/deleteSwoc", method = RequestMethod.GET)
+	public @ResponseBody List<SWOC> deleteSwoc(HttpServletRequest request, HttpServletResponse response) {
+
+		List<SWOC> swocList = new ArrayList<>();
+		Info info = new Info();
+		SWOC swoc = new SWOC();
+		try {
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			int swocId = Integer.parseInt(request.getParameter("swocId"));
+			MultiValueMap<String, Object> map2 = new LinkedMultiValueMap<>();
+			map2.add("swocId", swocId);
+			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map2, SWOC.class);
+
+			System.out.println("swoc" + swoc.toString());
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("swocIdList", swocId);
+			info = rest.postForObject(Constants.url + "/deleteSwoc", map, Info.class);
+			System.out.println(swocId);
+			System.out.println(info.toString());
+
+			map = new LinkedMultiValueMap<>();
+			map.add("facultyId", userObj.getGetData().getUserDetailId());
+			map.add("swocType", swoc.getSwocType());
+			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
+			swocList.addAll(list);
+			System.out.println("swocList" + swocList.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("error while saving");
+
+		}
+
+		return swocList;
 
 	}
 

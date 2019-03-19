@@ -16,27 +16,30 @@ public class FacultyModuleController {
 
 	RestTemplate rest = new RestTemplate();
 
-	/*@RequestMapping(value = "/showFacultyDetails", method = RequestMethod.GET)
-	public ModelAndView showFacultyDetails1(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/facultyDetails");
-
-			model.addObject("title", "Faculty Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}*/
+	/*
+	 * @RequestMapping(value = "/showFacultyDetails", method = RequestMethod.GET)
+	 * public ModelAndView showFacultyDetails1(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("master/facultyDetails");
+	 * 
+	 * model.addObject("title", "Faculty Details Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showFacultyDetails at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/showPublicationDetails", method = RequestMethod.GET)
 	public ModelAndView showFacultyDetails2(HttpServletRequest request, HttpServletResponse response) {
@@ -84,10 +87,6 @@ public class FacultyModuleController {
 
 	}
 
-	
-
-	
-
 	@RequestMapping(value = "/showOrganized", method = RequestMethod.GET)
 	public ModelAndView showOrganized(HttpServletRequest request, HttpServletResponse response) {
 
@@ -131,8 +130,6 @@ public class FacultyModuleController {
 		return model;
 
 	}
-
-	
 
 	@RequestMapping(value = "/showpoPsoFaculty", method = RequestMethod.GET)
 	public ModelAndView showpoPsoFaculty(HttpServletRequest request, HttpServletResponse response) {
@@ -267,28 +264,31 @@ public class FacultyModuleController {
 
 	}
 
-	/*@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
-	public ModelAndView addPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			System.out.println("hii...");
-			model = new ModelAndView("FacultyDetails/personalDetail");
-
-			model.addObject("title", "Personal Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}*/
+	/*
+	 * @RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
+	 * public ModelAndView addPersonalDetails(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * System.out.println("hii..."); model = new
+	 * ModelAndView("FacultyDetails/personalDetail");
+	 * 
+	 * model.addObject("title", "Personal Details Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showFacultyDetails at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/showMphillDetails", method = RequestMethod.GET)
 	public ModelAndView showMphillDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -378,28 +378,6 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/showSWOC", method = RequestMethod.GET)
-	public ModelAndView showSWOC(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/swoc");
-
-			model.addObject("title", "SWOC Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
 	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
 	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
 
@@ -443,8 +421,6 @@ public class FacultyModuleController {
 		return model;
 
 	}
-
-	
 
 	@RequestMapping(value = "/showOutReachContri", method = RequestMethod.GET)
 	public ModelAndView showOutReachContri(HttpServletRequest request, HttpServletResponse response) {

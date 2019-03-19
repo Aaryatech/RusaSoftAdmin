@@ -226,49 +226,6 @@
 
 											<div class="row">
 
-												<%-- <div class="col-xs-12">
-
-													<table id="example-1"
-														class="table table-striped dt-responsive display">
-														<thead>
-															<tr>
-																<th width="10%">Sr No</th>
-																<th>Vision</th>
-																<th>Remark</th>
-																<th width="10%">Action</th>
-
-															</tr>
-														</thead>
-
-														<tbody>
-															<c:forEach items="${programVisionList}" var="list"
-																varStatus="count">
-																<tr>
-
-																	<td>${count.index+1}</td>
-																	<td>${list.visionText}</td>
-																	<td>${list.visionRemark}</td>
-																	<td><a href="#"
-																		onclick="editProgramVission(${list.visionId})"><span
-																			class="glyphicon glyphicon-edit" title="Edit"
-																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																		<a href="#"
-																		onclick="deleteProgramVission(${list.visionId})"
-																		rel="tooltip" data-color-class="danger" title="Delete"
-																		data-animate=" animated fadeIn " data-toggle="tooltip"
-																		data-original-title="Delete  record"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
-																</tr>
-															</c:forEach>
-
-														</tbody>
-
-
-
-													</table>
-
-												</div> --%>
 
 												<div class="col-xs-12">
 													<div class="table-responsive">
@@ -825,36 +782,37 @@
 													<div class="table-responsive">
 														<table class="table table-bordered" id="table5">
 															<thead>
-															<tr>
-																<th width="10%">Sr No</th>
-																<th>PSO</th>
-																<th>Remark</th>
-																<th width="10%">Action</th>
-
-															</tr>
-														</thead>
-														<tbody>
-															<c:forEach items="${programSpeceficOutcomeList}"
-																var="list" varStatus="count">
 																<tr>
+																	<th width="10%">Sr No</th>
+																	<th>PSO</th>
+																	<th>Remark</th>
+																	<th width="10%">Action</th>
 
-																	<td>${count.index+1}</td>
-																	<td>${list.psoText}</td>
-																	<td>${list.psoRemark}</td>
-																	<td><a href="#"
-																		onclick="editProgramPso(${list.psoId})"><span
-																			class="glyphicon glyphicon-edit" title="Edit"
-																			data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																		<a href="#" onclick="deleteProgramPso(${list.psoId})"
-																		rel="tooltip" data-color-class="danger" title="Delete"
-																		data-animate=" animated fadeIn " data-toggle="tooltip"
-																		data-original-title="Delete  record"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
 																</tr>
-															</c:forEach>
+															</thead>
+															<tbody>
+																<c:forEach items="${programSpeceficOutcomeList}"
+																	var="list" varStatus="count">
+																	<tr>
 
-														</tbody>
+																		<td>${count.index+1}</td>
+																		<td>${list.psoText}</td>
+																		<td>${list.psoRemark}</td>
+																		<td><a href="#"
+																			onclick="editProgramPso(${list.psoId})"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																			<a href="#" onclick="deleteProgramPso(${list.psoId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a></td>
+																	</tr>
+																</c:forEach>
+
+															</tbody>
 														</table>
 													</div>
 												</div>

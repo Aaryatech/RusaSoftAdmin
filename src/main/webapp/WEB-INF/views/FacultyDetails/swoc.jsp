@@ -9,6 +9,10 @@
 <html class=" ">
 <head>
 
+<c:url value="/saveSWOC" var="saveSWOC"></c:url>
+<c:url value="/deleteSwoc" var="deleteSwoc"></c:url>
+<c:url value="/editSwoc" var="editSwoc"></c:url>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 </head>
@@ -113,290 +117,291 @@
 											<li><a href="#challenge" data-toggle="tab"> <i
 													class="fa fa-home"></i> Challenges
 											</a></li>
-											<li><a href="#copo" data-toggle="tab"> <i
-													class="fa fa-home"></i> CO-PO Mapping
-											</a></li>
+
 
 										</ul>
+										<input type="hidden" value="0" name="swocId" id="swocId">
 
 										<div class="tab-content">
 											<!-- 1 -->
 											<div class="tab-pane fade in active " id="strength">
 
+												<div class="row">
 
 
 
+													<label class="col-sm-2 text-left" for="hh">
+														Strength <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" maxlength="200" class="form-control"
+															id="swocText" name="swocText" placeholder="Strength"
+															required>
+													</div>
 
-												<div class="col-xs-12">
+													<div class="col-sm-4">
 
-													<div class="row">
+														<input type="button" class="btn btn-info" value="Add"
+															onclick="saveSWOCList(1)">
+													</div>
+												</div>
 
-														<label class="col-sm-2 text-left" for="hh">
-															Strength </label>
-														<div class="col-sm-6">
-															<input type="text" maxlength="10" class="form-control"
-																id="hh" name="hh" placeholder="Strength" required>
-														</div>
+												<div align="center" id="loader1" style="display: none;">
+													<img
+														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+														style="width: 50px; height: 50px;">
+												</div>
 
-														<div class="col-sm-4">
+												<div class="row">
 
-															<input type="button" class="btn btn-info" value="Add">
+
+													<div class="col-xs-12">
+														<div class="table-responsive">
+															<table class="table table-bordered" id="table1">
+																<thead>
+
+																	<tr>
+																		<th width="10%">Sr No</th>
+																		<th>Stength</th>
+
+																		<th width="10%">Action</th>
+
+																	</tr>
+
+																</thead>
+																<tbody>
+																	<c:forEach items="${strengthList}" var="list"
+																		varStatus="count">
+																		<tr>
+
+																			<td>${count.index+1}</td>
+																			<td>${list.swocText}</td>
+
+																			<td><a href="#"
+																				onclick="editSwoc(${list.swocId})"><span
+																					class="glyphicon glyphicon-edit" title="Edit"
+																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																				<a href="#" onclick="deleteSwoc(${list.swocId})"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
 														</div>
 													</div>
 
-
-													<table id="example1"
-														class="table table-striped dt-responsive display">
-														<thead>
-															<tr>
-																<th width="10%">Sr No</th>
-																<th width="30%">Strength</th>
-
-															</tr>
-														</thead>
-
-
-
-													</table>
-
 												</div>
 
-												<div class="clearfix"></div>
 
 
 											</div>
 											<div class="tab-pane fade in " id="weak">
 
-
-
-
-
-
-												<div class="col-xs-12">
-
-													<div class="row">
-
-														<label class="col-sm-2 text-left" for="weak">
-															Weakness </label>
-														<div class="col-sm-6">
-															<input type="text" maxlength="10" class="form-control"
-																id="weak" name="weak" placeholder="Weak" required>
-														</div>
-
-														<div class="col-sm-4">
-
-															<input type="button" class="btn btn-info" value="Add">
-														</div>
+												<div class="row">
+													<label class="col-sm-2 text-left" for="weak">
+														Weakness<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" maxlength="10" class="form-control"
+															id="swocTextWeak" name="swocTextWeak"
+															placeholder="Weakness" required>
 													</div>
+													<div class="col-sm-4">
 
-													<table id="example7"
-														class="table table-striped dt-responsive display">
-														<thead>
-															<tr>
-																<th width="10%">Sr No</th>
-																<th width="30%">Weakness</th>
-
-															</tr>
-														</thead>
-
-
-
-													</table>
-
+														<input type="button" class="btn btn-info" value="Add"
+															onclick="saveSWOCList(2)">
+													</div>
+												</div>
+												<div align="center" id="loader1" style="display: none;">
+													<img
+														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+														style="width: 50px; height: 50px;">
 												</div>
 
-												<div class="clearfix"></div>
+												<div class="row">
+
+
+													<div class="col-xs-12">
+														<div class="table-responsive">
+															<table class="table table-bordered" id="table1">
+																<thead>
+
+																	<tr>
+																		<th width="10%">Sr No</th>
+																		<th>Weakness</th>
+																		<th width="10%">Action</th>
+
+																	</tr>
+
+																</thead>
+																<tbody>
+																	<c:forEach items="${weakNessList}" var="list"
+																		varStatus="count">
+																		<tr>
+
+																			<td>${count.index+1}</td>
+																			<td>${list.swocText}</td>
+
+																			<td><a href="#"
+																				onclick="editSwoc(${list.swocId})"><span
+																					class="glyphicon glyphicon-edit" title="Edit"
+																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																				<a href="#" onclick="deleteSwoc(${list.swocId})"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
 											</div>
 
 
 											<div class="tab-pane " id="oppt">
 
 
-												<div class="col-sm-12">
-
-													<div class="row">
-
-														<label class="col-sm-2 text-left" for="Opportunity">
-															Opportunity </label>
-														<div class="col-sm-6">
-															<input type="text" maxlength="10" class="form-control"
-																id="Opportunity" name="Opportunity"
-																placeholder="Opportunity" required>
-														</div>
-
-														<div class="col-sm-4">
-
-															<input type="button" class="btn btn-info" value="Add">
-														</div>
-													</div>
 
 
-													<div class="form-group">
-														<table id="example3"
-															class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="30%">Opportunity</th>
-
-																</tr>
-															</thead>
-
-
-
-														</table>
-													</div>
-
-
-												</div>
-												<div class="clearfix"></div>
-
-											</div>
-
-											<div class="tab-pane " id="challenge">
-												<div class="col-sm-12">
-													<label class="col-sm-2 text-left" for="hh">
-														Challenge </label>
+												<div class="row">
+													<label class="col-sm-2 text-left" for="Opportunity">
+														Opportunity <span class="text-danger">*</span>
+													</label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
-															id="Challenge" name="Challenge" placeholder="Challenge"
-															required>
+														<input type="text" maxlength="200" class="form-control"
+															id="swocTextOpp" name="swocTextOpp"
+															placeholder="Opportunity" required>
 													</div>
 
 													<div class="col-sm-4">
 
-														<input type="button" class="btn btn-info" value="Add">
+														<input type="button" class="btn btn-info" value="Add"
+															onclick="saveSWOCList(3)">
 													</div>
-
-
-													<div class="form-group">
-														<table id="example4"
-															class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="30%">Challenges</th>
-
-																</tr>
-															</thead>
-
-
-
-														</table>
-													</div>
-
-
 												</div>
 
-												<div class="clearfix"></div>
-											</div>
+
+												<div class="row">
 
 
+													<div class="col-xs-12">
+														<div class="table-responsive">
+															<table class="table table-bordered" id="table1">
+																<thead>
 
-											<div class="tab-pane " id="copo">
+																	<tr>
+																		<th width="10%">Sr No</th>
+																		<th>Opportunity</th>
+																		<th width="10%">Action</th>
 
+																	</tr>
 
+																</thead>
+																<tbody>
+																	<c:forEach items="${oppList}" var="list"
+																		varStatus="count">
+																		<tr>
 
+																			<td>${count.index+1}</td>
+																			<td>${list.swocText}</td>
 
-												<div class="col-sm-12">
+																			<td><a href="#"
+																				onclick="editSwoc(${list.swocId})"><span
+																					class="glyphicon glyphicon-edit" title="Edit"
+																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">Satisfying
-															Value</label>
-														<div class="col-sm-4">
-															<select id="val" name="val" class="form-control"
-																onchange="showForm()" required>
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="-">-</option>
-
-															</select>
+																				<a href="#" onclick="deleteSwoc(${list.swocId})"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
 														</div>
-													</div>
-
-
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">Course
-															Outcome</label>
-														<div class="col-sm-4">
-															<select id="co" name="co" class="form-control"
-																onchange="showForm()" required>
-																<option value="Good">Good</option>
-																<option value="Better">Better</option>
-																<option value="Best">Best</option>
-
-															</select>
-														</div>
-													</div>
-
-
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">Program
-															Outcome</label>
-														<div class="col-sm-4">
-															<select id="po" name="po" class="form-control"
-																onchange="showForm()" required>
-																<option value="Good">Good</option>
-																<option value="Better">Better</option>
-																<option value="Best">Best</option>
-
-															</select>
-														</div>
-													</div>
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="page_order">Is
-															CO/PO Mapped :<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															Yes <input type="radio" name="stu" id="stu" checked
-																value="yes"> No<input type="radio" name="stu"
-																id="stu" value="1">
-														</div>
-
-														<div class="col-sm-4">
-
-															<input type="button" class="btn btn-info" value="Add">
-														</div>
-
-													</div>
-													<div class="form-group">
-														<table id="example5"
-															class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="10%">Course Outcome</th>
-																	<th width="10%">Program Outcome</th>
-																	<th width="10%">Is CO/PO Mapped</th>
-																	<th width="30%">Satisfying Value</th>
-
-																</tr>
-															</thead>
-
-
-
-														</table>
-													</div>
-													<div class="clearfix"></div>
-												</div>
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
-																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
 
 											</div>
-											<div class="clearfix"></div>
 
+											<div class="tab-pane " id="challenge">
+
+												<!-- 	<input type="hidden" id="swocType" name="swocType" value="4"> -->
+												<label class="col-sm-2 text-left" for="hh">
+													Challenge <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" maxlength="200" class="form-control"
+														id="swocTextCha" name="swocTextCha"
+														placeholder="Challenge" required>
+												</div>
+
+												<div class="col-sm-4">
+
+													<input type="button" class="btn btn-info" value="Add"
+														onclick="saveSWOCList(4)">
+												</div>
+
+
+
+												<div class="row">
+
+
+													<div class="col-xs-12">
+														<div class="table-responsive">
+															<table class="table table-bordered" id="table1">
+																<thead>
+
+																	<tr>
+																		<th width="10%">Sr No</th>
+																		<th>Challenges</th>
+
+																		<th width="10%">Action</th>
+
+																	</tr>
+
+																</thead>
+																<tbody>
+																	<c:forEach items="${challengelist}" var="list"
+																		varStatus="count">
+																		<tr>
+
+																			<td>${count.index+1}</td>
+																			<td>${list.swocText}</td>
+
+																			<td><a href="#"
+																				onclick="editSwoc(${list.swocId})"><span
+																					class="glyphicon glyphicon-edit" title="Edit"
+																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																				<a href="#" onclick="deleteSwoc(${list.swocId})"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+
+
+											</div>
 										</div>
 
 
@@ -425,249 +430,194 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Strength</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Strength
-						</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="abc" name="abc"
-								placeholder="" value="${page.pageName}" required>
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getinfo()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Weakness</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Weakness
-						</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="xyz" name="xyz"
-								placeholder="" value="${page.pageName}" required>
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getWeak()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal2"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Opportunity</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Opportunity
-						</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="opt" name="opt"
-								placeholder="" value="${page.pageName}" required>
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getOpt()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal3"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Challenges</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Challenges
-						</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="chl" name="chl"
-								placeholder="" value="${page.pageName}" required>
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getData3()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModalcopo"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">COPO Mapping</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-
-
-
-
-
-
-
-
-
-					<button type="submit" class="btn btn-primary" onclick="getCOPO()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 	<script type="text/javascript">
-		function getinfo() {
-			//alert("hii");
-			var i = 0;
-			var abc = document.getElementById("abc").value
+		function saveSWOCList(swocType) {
+			alert(swocType);
+			
+			if(swocType==1)
+				{
+				var swocText = document.getElementById("swocText").value;
+				}
+			else if(swocType==2)
+				{
+				var swocText = document.getElementById("swocTextWeak").value;
+				}
+			
+			else if(swocType==3)
+			{
+			var swocText = document.getElementById("swocTextOpp").value;
+			}
+			else if(swocType==4)
+			{
+			var swocText = document.getElementById("swocTextCha").value;
+			}
 
-			var dataTable = $('#example1').DataTable();
+		//	var swocType = document.getElementById("swocType").value;
+			//var swocText = document.getElementById("swocText").value;
+			var swocId = document.getElementById("swocId").value;
+			
+			alert(swocType);
+			
+			alert(swocType);
 
-			dataTable.row.add([ i + 1, abc
+			if (swocText != "") {
+				//$('#example-1 td').remove(); 
+				$('#table1 td').remove();
+				$("#loader1").show();
+				$
+						.getJSON(
+								'${saveSWOC}',
 
-			]).draw();
+								{
+									swocType : swocType,
+									swocText : swocText,
+									swocId : swocId,
+
+									ajax : 'true'
+
+								},
+								function(data) {
+
+									$("#loader1").hide();
+
+									//var dataTable = $('#example-1').DataTable();
+
+									for (var i = 0; i < data.length; i++) {
+
+										var acButton = '<a href="#"><span onclick="editSwoc('
+												+ data[i].swocId
+												+ ')" class="glyphicon glyphicon-edit" title="Edit" '
+												+ 'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+												+ ' <a href="#" onclick="deleteSwoc('
+												+ data[i].swocId
+												+ ')"'
+												+ ' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+												+ 'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+
+										/*  dataTable.row.add(
+												[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
+												.draw(); */
+
+										var tr = $('<tr></tr>');
+										tr.append($('<td ></td>').html(i + 1));
+
+										tr.append($('<td ></td>').html(
+												data[i].swocText));
+
+										tr.append($('<td  ></td>').html(
+												acButton));
+										$('#table1 tbody').append(tr);
+									}
+									document.getElementById("swocId").value = 0;
+									document.getElementById("swocText").value = "";
+									document.getElementById("swocTextWeak").value = "";
+									document.getElementById("swocTextOpp").value = "";
+									document.getElementById("swocTextCha").value = "";
+
+								});
+
+			} else {
+				alert("Enter Text ");
+			}
 
 		}
-		function getWeak() {
+
+		function deleteSwoc(swocId) {
 			alert("hii");
-			var i = 0;
-			var xyz = document.getElementById("xyz").value
-			alert(xyz);
 
-			var dataTable = $('#example7').DataTable();
+			//$('#example-1 td').remove();
+			$("#loader1").show();
 
-			dataTable.row.add([ i + 1, xyz
+			$
+					.getJSON(
+							'${deleteSwoc}',
 
-			]).draw();
+							{
+								swocId : swocId,
+
+								ajax : 'true'
+
+							},
+
+							function(data) {
+
+								$("#loader1").hide();
+
+								//var dataTable = $('#example-1').DataTable();
+
+								for (var i = 0; i < data.length; i++) {
+
+									var acButton = '<a href="#"><span onclick="editSwoc('
+											+ data[i].swocId
+											+ ')" class="glyphicon glyphicon-edit" title="Edit" '
+											+ 'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+											+ ' <a href="#" onclick="deleteProgramVission('
+											+ data[i].swocId
+											+ ')"'
+											+ ' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+											+ 'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+
+									/*  dataTable.row.add(
+											[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
+											.draw(); */
+
+									var tr = $('<tr></tr>');
+									tr.append($('<td ></td>').html(i + 1));
+
+									tr.append($('<td ></td>').html(
+											data[i].swocText));
+
+									tr.append($('<td  ></td>').html(acButton));
+									$('#table1 tbody').append(tr);
+								}
+								document.getElementById("swocId").value = 0;
+								document.getElementById("swocText").value = "";
+
+							});
 
 		}
-		function getOpt() {
-			//alert("hii");
-			var i = 0;
-			var oppt = document.getElementById("opt").value
-			//alert(oppt);
 
-			var dataTable = $('#example3').DataTable();
+		function editSwoc(swocId) {
+			$("#loader1").show();
+			alert("hii");
+			alert(swocId);
+			$.getJSON('${editSwoc}',
 
-			dataTable.row.add([ i + 1, oppt
+			{
+				swocId : swocId,
+				ajax : 'true'
 
-			]).draw();
+			}, function(data) {
+				alert(data);
+				$("#loader1").hide();
+				
+				if(data.swocType=1)
+				{
+					document.getElementById("swocId").value = data.swocId;
+				document.getElementById("swocText").value = data.swocText;
+				}
+				else if(data.swocType=2)
+				{document.getElementById("swocId").value = data.swocId;
+					document.getElementById("swocTextWeak").value = data.swocText;
+					}
+				else if(data.swocType=3)
+				{document.getElementById("swocId").value = data.swocId;
+					document.getElementById("swocTextOpp").value = data.swocText;
+					}
+				else if(data.swocType=4)
+				{document.getElementById("swocId").value = data.swocId;
+					document.getElementById("swocTextCha").value = data.swocText;
+					}
 
-		}
-		function getData3() {
-			//alert("hii");
-			var i = 0;
-			var chl = document.getElementById("chl").value
-
-			var dataTable = $('#example4').DataTable();
-
-			dataTable.row.add([ i + 1, chl
-
-			]).draw();
-
-		}
-		function getCOPO() {
-			//alert("hii");
-			var i = 0;
-			var co = document.getElementById("co").value
-			var po = document.getElementById("po").value
-			//alert(qualName);
-			var stu = document.getElementById("stu").value
-			var val = document.getElementById("val").value
-
-			var dataTable = $('#example5').DataTable();
-
-			dataTable.row.add([ i + 1, co, po, stu, val ]).draw();
+			});
 
 		}
 	</script>
+
+
+
+
+
 
 
 </body>

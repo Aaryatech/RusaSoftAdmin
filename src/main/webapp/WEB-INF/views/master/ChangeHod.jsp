@@ -171,8 +171,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="hod_name"
-																	value="${hod.hodName}" name="hod_name"
-																	placeholder="HOD Name" required>
+																	autocomplete="off" value="${hod.hodName}"
+																	name="hod_name" placeholder="HOD Name" required>
 															</div>
 														</div>
 
@@ -224,7 +224,7 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="hod_mob"
 																	value="${hod.contactNo}" name="hod_mob"
-																	pattern="[7-9]{1}[0-9]{9}"
+																	autocomplete="off" pattern="[7-9]{1}[0-9]{9}"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile Number" value="" required>
 															</div>
@@ -236,8 +236,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="hod_email"
-																	name="hod_email" placeholder="abc@xyz.com"
-																	value="${hod.email}" required>
+																	autocomplete="off" name="hod_email"
+																	placeholder="abc@xyz.com" value="${hod.email}" required>
 															</div>
 														</div>
 
