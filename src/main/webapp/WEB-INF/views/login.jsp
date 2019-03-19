@@ -112,18 +112,18 @@
 					</c:choose>
 
 					<p>
-						<label for="user_login">Username<br /> <input type="text"
+						<label for="user_login">Username*<br /> <input type="text"
 							name="username" id="username" class="input" value="" size="20"
 							placeholder="Username" /></label>
 					</p>
 					<p>
-						<label for="user_pass">Password<br /> <input
+						<label for="user_pass">Password*<br /> <input
 							type="password" name="userpassword" id="userpassword"
 							class="input" value="" placeholder="Password" size="20" /></label>
 					</p>
 
 					<p>
-						<label for="user_pass">Academeic Year<br /></label> <select
+						<label for="user_pass">Academic Year<br /></label> <select
 							id="ac_year_login" name="ac_year_login" class="form-control">
 							<c:forEach items="${acaYearList}" var="acYear">
 								<option value="${acYear.yearId}">${acYear.academicYear}</option>

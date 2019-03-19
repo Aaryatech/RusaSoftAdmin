@@ -248,6 +248,7 @@ public class ProgramDetailModuleController {
 		System.out.println("po id "+poId1);
 
 		String satValue = request.getParameter("satValue");
+		System.out.println("po satValue "+satValue);
 	
 		try {
 			

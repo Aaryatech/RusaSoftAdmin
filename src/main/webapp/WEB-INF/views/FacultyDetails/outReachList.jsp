@@ -124,11 +124,11 @@
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
-																		<th>Sr No</th>
-																		<th>Outreach Type</th>
-																		<th>Outreach Name</th>
-																		<th>Outreach Level</th>
-																		<th>Outreach Date</th>
+																		<th style="text-align: center; ">Sr No</th>
+																		<th style="text-align: center; ">Outreach Type</th>
+																		<th style="text-align: center; ">Outreach Name</th>
+																		<th style="text-align: center; ">Outreach Level</th>
+																		<th style="text-align: center; ">Outreach Date</th>
 																		
 																		<th>Action</th>
 																	</tr>
@@ -138,11 +138,11 @@
 													varStatus="count">
 													<tr>
 											
-														<td>${count.index+1}</td>
-														<td>${outList.typeName}</td>
-														<td>${outList.outreachName}</td>
-														<td>${outList.outreachLevel}</td>
-													   <td>${outList.outreachDate}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
+														<td style="text-align: center; ">${outList.typeName}</td>
+														<td style="text-align: center; ">${outList.outreachName}</td>
+														<td style="text-align: center; ">${outList.outreachLevel}</td>
+													   <td style="text-align: center; ">${outList.outreachDate}</td>
 														
 
 

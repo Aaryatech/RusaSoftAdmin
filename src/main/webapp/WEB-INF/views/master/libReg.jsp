@@ -100,7 +100,7 @@
 										action="${pageContext.request.contextPath}/insertLibrarian"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -191,15 +191,32 @@
 																	name="lib_joiningDate" placeholder=" " required>
 															</div>
 														</div>
+														
+															<div class="form-group">
+																<label class="control-label col-sm-2" for="page_order">Conference
+																	Attended <span class="text-danger">*</span>
+																</label>
+
+
+																<div class="col-sm-6">
+																	Yes <input type="radio" name="conf_type" id="conf_type"
+																		checked value="1" onclick="setDate(this.value)">
+																		
+																	No<input	type="radio" name="conf_type" id="conf_type"
+																	 value="0" onclick="setDate(this.value)">
+																	 
+																
+																</div>	
+															</div>
 													
 													
-														<div class="form-group">
+														<div class="form-group" id="abc" style="display: none">
 															<label class="control-label col-sm-2" for="page_order">Relieving
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${ldate}"
-																	name="relieving_date"  required>
+																	name="relieving_date"  >
 															</div>
 														</div>
 
@@ -207,12 +224,12 @@
 
 												</div>
 
-                                             <input type="hidden" id="librarian_id" name="outreach_id" value="${editInst.librarianId}">
+                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${editInst.librarianId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" class="btn btn-primary" id="sub1" onclick="submit_f(1)" value="Save">
 																<!-- <input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next"> -->
 																<button type="reset" class="btn btn-default">Reset</button>
@@ -242,7 +259,81 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<script type="text/javascript">
+	function setDate(value){
+		///alert("Value " +value)
+		if(value==1){
+			//alert(value)
+			
+			document.getElementById("abc").style.display = "none";
+
+			//alert(value)
+			}else{
+				//alert(value)
+				
+				document.getElementById("abc").style.display = "block";
+
+				//alert(value)
+
+			}
+			
+		}
+	</script>
+	
+	 <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+    	
+    	var date1=document.getElementById("lib_joiningDate").valuse;
+    	var date2=document.getElementById("relieving_date").value;
+    	alert(date1);
+    	/* date1 = new Date(date1);
+    	date2 = new Date(date2); */
+    	if(date1 > date2){
+    		alert("invalid");
+    		
+    		document.getElementById("relieving_date").value="";
+    	}
+    	else{
+    	
+    	
+      if(!wasSubmitted  ) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	
+
+        return wasSubmitted;
+    	  }
+    	  
+    	  
+      }
+    	}
+      
+      
+      return false;
+    }    
+</script>
+	
 <script type="text/javascript">
+
+function chkDate(){
+	
+	var date1=document.getElementById("lib_joiningDate").value;
+	var date2=document.getElementById("relieving_date").value;
+	
+	date1 = new Date(date1);
+	date2 = new Date(date2);
+	if(date1 > date2){
+		alert("invalid");
+		
+		document.getElementById("relieving_date").value="";
+	}
+	
+}
+
+
 function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 
 		/* var form=document.getElementById("form_sample_2");

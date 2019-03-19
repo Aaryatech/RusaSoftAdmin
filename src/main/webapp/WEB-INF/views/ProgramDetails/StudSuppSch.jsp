@@ -76,29 +76,29 @@
 												<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th>
-												<th>Sr.No.</th>
-												<th>Scheme</th>
-												<th>Level</th>
-												<th>Type</th>
-												<th>Benefited Students</th>
-												<th>Implementation Year</th>
-												<th>Support Agency</th>
-												<th>Actions</th>
+												<th  style="text-align: center; ">Sr.No.</th>
+												<th style="text-align: center; ">Scheme</th>
+												<th style="text-align: center; "> Level</th>
+												<th style="text-align: center; ">Type</th>
+												<th style="text-align: center; ">Benefited Students</th>
+												<th style="text-align: center; ">Implementation Year</th>
+												<th style="text-align: center; ">Support Agency</th>
+												<th style="text-align: center; ">Actions</th>
 											</tr>
 
 										</thead>
 										<tbody>
 												<c:forEach items="${studList}" var="stud" varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="studentSchmIds"
+														<td style="text-align: center; "><input type="checkbox" class="chk" name="studentSchmIds"
 															id="studentSchmIds${count.index+1}" value="${stud.sprtSchmId}" /></td>
-														<td>${count.index+1}</td>
-														<td>${stud.schemeName}</td>
-														<td>${stud.level}</td>
-														<td>${stud.type}</td>
-														<td>${stud.noStudentBenifited}</td>
-														<td>${stud.academicYear}</td>
-														<td>${stud.supportAgencyName}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
+														<td style="text-align: center; ">${stud.schemeName}</td>
+														<td style="text-align: center; ">${stud.level}</td>
+														<td style="text-align: center; ">${stud.type}</td>
+														<td style="text-align: center; ">${stud.noStudentBenifited}</td>
+														<td style="text-align: center; ">${stud.academicYear}</td>
+														<td style="text-align: center; ">${stud.supportAgencyName}</td>
 
 														<td><%-- <c:if test="${editAccess==0}"> --%>
 																<a href="${pageContext.request.contextPath}/editStudSchm/${stud.sprtSchmId}"><span

@@ -346,8 +346,8 @@ public class LibraryController {
 					lib.setContactNo(lib_con_num);
 					lib.setEmail(librarian_email);
 					lib.setQualificationId(lib_quolf);
-					lib.setRealivingDate(relieving_date);
-					lib.setJoiningDate(lib_joiningDate);
+					lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
+					lib.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
 					lib.setMakerUserId(maker_id);
 
 					lib.setInstituteId(inst_id);
@@ -381,8 +381,8 @@ public class LibraryController {
 					lib1.setContactNo(lib_con_num);
 					lib1.setEmail(librarian_email);
 					lib1.setQualificationId(lib_quolf);
-					lib1.setRealivingDate(relieving_date);
-					lib1.setJoiningDate(lib_joiningDate);
+					lib1.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
+					lib1.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
 					lib1.setMakerUserId(maker_id);
 
 					lib1.setInstituteId(inst_id);

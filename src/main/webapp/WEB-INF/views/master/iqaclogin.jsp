@@ -98,7 +98,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteInfo"
-										method="post" onsubmit="disableButton()" name="form_sample_2"
+										method="post" onsubmit="return checkBeforeSubmit()" name="form_sample_2"
 										id="form_sample_2">
 
 										<ul class="nav nav-tabs">
@@ -159,7 +159,7 @@
 																Faculty in Institute <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control"
+																<input type="number" min="0" class="form-control"
 																	id="no_fullTime_Faculty"
 																	value="${editInstInfo.noOfFulltimeFaculty}"
 																	name="no_fullTime_Faculty"
@@ -177,7 +177,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control"
+																<input type="number" min="0" class="form-control"
 																	id="no_nonTeaching_faculty"
 																	value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
 																	name="no_nonTeaching_faculty"
@@ -194,7 +194,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control"
+																<input type="number" min="0" class="form-control"
 																	id="no_suppStaff"
 																	value="${editInstInfo.noSupportStaff}"
 																	name="no_suppStaff" placeholder="No. of Support Staff"
@@ -208,7 +208,7 @@
 																admitted student <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control"
+																<input type="number" min="0" class="form-control"
 																	id="no_currAdmitted_Student"
 																	value="${editInstInfo.noCurrentAdmitedStnt}"
 																	name="no_currAdmitted_Student"
@@ -222,7 +222,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control"
+																<input type="number" min="0" class="form-control"
 																	id="treasury_code" value="${editInstInfo.treasuryCode}"
 																	name="treasury_code" placeholder="State Treasury Code"
 																	required>
@@ -267,10 +267,11 @@
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" onClick="this.disabled=true;"
-															id="submitButton" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
+														<input type="submit" 
+															id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)" value="Save"> 
+															<input
+															type="submit" id="sub2"  class="btn btn-primary"
 															onclick="submit_f(0)"
 															value="Save &
 																		Next">
@@ -341,13 +342,30 @@
 			confirm('Do you really want to submit the form?');
 			document.getElementById("submitButton").disabled = true;
 		}
+		
+		
 
 		/* 
 		onsubmit="return confirm('Do you really want to submit the form?');" */
 	</script>
 
 
+ <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 

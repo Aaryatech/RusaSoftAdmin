@@ -184,12 +184,12 @@
 										<div class="col-sm-6">
 
 											<select id="satValue" name="satValue" class="form-control"
-												required>
+												>
 
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
-												<option value="-">-</option>
+												<option value="4">-</option>
 
 											</select>
 

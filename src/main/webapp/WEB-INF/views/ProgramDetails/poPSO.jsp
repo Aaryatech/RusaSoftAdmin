@@ -116,8 +116,28 @@
 										
 														<td>${count.index+1}</td>
 														<td>${poList.poText}</td>
-														<td>${poList.psoMapping}</td>
-														<td>${poList.psoMapSatisfyingValue}</td>
+														
+													<c:choose>
+   														 <c:when test="${poList.psoMapping=='1'}">
+  															 <td>Yes</td>
+   															 </c:when>    
+   														 <c:otherwise>
+    													   <td>No</td>
+   																	 </c:otherwise>
+														</c:choose>
+														
+														<c:choose>
+   														 <c:when test="${poList.psoMapping=='4'}">
+  															 <td>-</td>
+   															 </c:when>    
+   														 <c:otherwise>
+    													 <td>${poList.psoMapSatisfyingValue}</td>
+   																	 </c:otherwise>
+														</c:choose>
+														 
+														
+													
+														
 													<td> 
 												     	<a href="${pageContext.request.contextPath}/showMapPOPSO/${poList.poId}" title="Add PSO"
 											            rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
