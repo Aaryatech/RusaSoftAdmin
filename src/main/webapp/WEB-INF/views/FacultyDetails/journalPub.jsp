@@ -264,8 +264,10 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="volume"
-																	value="${editJournal.journalVolume}" autocomplete="off"
+																<input type="number" class="form-control" id="volume"
+																	min="0" value="${editJournal.journalVolume}"
+																	autocomplete="off"
+																	onkeypress="return allowOnlyNumber(event)"
 																	name="volume" placeholder="Volume" value="" required>
 															</div>
 
@@ -282,11 +284,12 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-2">
-																<input type="text" class="form-control"
+																<input type="number" class="form-control"
 																	id="journalPgFrom" name="journalPgFrom"
+																	onchange="checkJournalForm()" min="0"
 																	onkeypress="return allowOnlyNumber(event)"
 																	value="${editJournal.journalPgFrom}" autocomplete="off"
-																	placeholder="From" value="" required>
+																	placeholder="Page No From" required>
 															</div>
 															<input type="hidden" value="${editJournal.journalId}"
 																name="journalId" id="journalId"> <label
@@ -296,9 +299,10 @@
 
 
 															<div class="col-sm-2">
-																<input type="text" class="form-control" id="to"
-																	autocomplete="off" name="journalPgTo"
-																	placeholder="journalPgTo"
+																<input type="number" class="form-control"
+																	id="journalPgTo" autocomplete="off" name="journalPgTo"
+																	min="0" onchange="checkJournalForm()"
+																	placeholder="Page No To"
 																	onkeypress="return allowOnlyNumber(event)"
 																	value="${editJournal.journalPgTo}" required>
 															</div>
@@ -390,6 +394,56 @@ function submit_f(view){
 	    return true;
 	}
 	</script>
+	<!-- 	<script type="text/javascript">
+		function checkJournalForm() {
+			 
+			alert("hii");
+		 
+				var journalPgFrom = document.getElementById("journalPgFrom").value;
+				var journalPgTo = document.getElementById("journalPgTo").value;
+				
+				alert(journalPgFrom);
+				alert(journalPgTo);
+				if(parseFloat(journalPgFrom) < parseFloat(journalPgTo))
+					{
+					alert("Please Enter Right Page No ");
+					document.getElementById("journalPgFrom").value = "";
+					document.getElementById("journalPgTo").value = "";
+					}
+			 
+ 
+		}
+		</script> -->
+
+	<script>
+		function checkJournalForm() {
+
+			var journalPgFrom = document.getElementById("journalPgFrom").value;
+			var journalPgTo = document.getElementById("journalPgTo").value;
+		 
+			var len= journalPgTo.length;
+			  
+			
+			var valid = true;
+			
+			if(len!=0){
+			if (  parseFloat(journalPgFrom) > parseFloat(journalPgTo)  ) {
+
+				valid = false;
+			} 
+
+			if (valid == false) {
+				
+				alert("Enter Journal From   less than Journal To ");
+				//document.getElementById("pmin_stock").value="";
+				document.getElementById("journalPgTo").value="";
+			}
+		}
+
+		}
+	</script>
+
+
 
 </body>
 </html>

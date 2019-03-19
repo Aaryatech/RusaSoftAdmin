@@ -245,8 +245,8 @@
 
 
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="totalAmt"
-																	name="totalAmt" placeholder="Total Amount"
+																<input type="number" class="form-control" id="totalAmt"
+																	name="totalAmt" placeholder="Total Amount" min="0"
 																	onkeypress="return allowOnlyNumber(event)"
 																	autocomplete="off" value="${editProject.projTotalAmt}"
 																	required>
@@ -262,8 +262,8 @@
 
 
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="amtRec"
-																	onkeypress="return allowOnlyNumber(event)"
+																<input type="number" class="form-control" id="amtRec"
+																	min="0" onkeypress="return allowOnlyNumber(event)"
 																	name="amtRec" placeholder="Amount Received"
 																	autocomplete="off" value="${editProject.projAmtRec}"
 																	required>
@@ -301,9 +301,9 @@
 
 															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker"
-																	id="toDate" name="toDate" placeholder="To Date"
-																	autocomplete="off" value="${editProject.projTodt}"
-																	required>
+																	onchange="checkDate()" id="toDate" name="toDate"
+																	placeholder="To Date" autocomplete="off"
+																	value="${editProject.projTodt}" required>
 															</div>
 
 
@@ -397,5 +397,23 @@ function submit_f(view){
 	}
  
 </script>
+	<script>
+		function checkDate() {
+ 
+			var fromDate = document.getElementById("fromDate").value;
+			var toDate = document.getElementById("toDate").value;
+		  if(toDate!=null)
+			  {
+			if (  fromDate > toDate  ) {
+				alert("From Date Should be Small");
+				document.getElementById("toDate").value="";
+ 
+			} }
+
+			 
+
+		}
+	</script>
+
 </body>
 </html>

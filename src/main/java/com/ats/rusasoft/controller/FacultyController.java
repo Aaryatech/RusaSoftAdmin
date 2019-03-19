@@ -261,7 +261,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/journalPub");
-				model.addObject("title", "Journal Publication");
+				model.addObject("title", "Edit Journal Publication");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("journalId", journalId);
 
@@ -381,11 +381,15 @@ public class FacultyController {
 				String fromDate = request.getParameter("fromDate");
 				String toDate = request.getParameter("toDate");
 
-				int grant = Integer.parseInt(request.getParameter("grant"));
+				String grant = request.getParameter("grant");
+
+				// int grant = Integer.parseInt(request.getParameter("grant"));
 
 				float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
 				float amtRec = Float.parseFloat(request.getParameter("amtRec"));
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
+
+				System.out.println("----------" + is_view);
 				ResearchProject project = new ResearchProject();
 				project.setDelStatus(1);
 				project.setExInt1(1);
@@ -439,12 +443,6 @@ public class FacultyController {
 
 		}
 		return returnString;
-		/*
-		 * } catch (Exception e) { System.err.println("EXCE in vendInsertRes " +
-		 * e.getMessage()); e.printStackTrace();
-		 * 
-		 * } return "redirect:/showResearchDetails";
-		 */
 
 	}
 
@@ -467,7 +465,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/researchProjectList");
 
-				model.addObject("title", "Research Details Form List");
+				model.addObject("title", "Research Details List");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -532,7 +530,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/researchProDetail");
-				model.addObject("title", "Research Details Form");
+				model.addObject("title", "Edit Research Details Form");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("projectId", projId);
 
@@ -1142,37 +1140,47 @@ public class FacultyController {
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			model = new ModelAndView("FacultyDetails/swoc");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			model.addObject("title", "SWOC Details Form");
+			Info add = AccessControll.checkAccess("showSWOC", "showSWOC", "1", "0", "0", "0", newModuleList);
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("facultyId", userObj.getGetData().getUserDetailId());
-			map.add("swocType", 1);
-			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
-			List<SWOC> swocList = new ArrayList<>(Arrays.asList(arry));
-			model.addObject("strengthList", swocList);
+			if (add.isError() == false) {
 
-			map = new LinkedMultiValueMap<>();
-			map.add("facultyId", userObj.getGetData().getUserDetailId());
-			map.add("swocType", 2);
-			arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
-			List<SWOC> weakNessList = new ArrayList<>(Arrays.asList(arry));
-			model.addObject("weakNessList", weakNessList);
+				model = new ModelAndView("FacultyDetails/swoc");
 
-			map = new LinkedMultiValueMap<>();
-			map.add("facultyId", userObj.getGetData().getUserDetailId());
-			map.add("swocType", 3);
-			arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
-			List<SWOC> oppList = new ArrayList<>(Arrays.asList(arry));
-			model.addObject("oppList", oppList);
+				model.addObject("title", "SWOC Details Form");
 
-			map = new LinkedMultiValueMap<>();
-			map.add("facultyId", userObj.getGetData().getUserDetailId());
-			map.add("swocType", 4);
-			arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
-			List<SWOC> challengelist = new ArrayList<>(Arrays.asList(arry));
-			model.addObject("challengelist", challengelist);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", 1);
+				SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> swocList = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("strengthList", swocList);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", 2);
+				arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> weakNessList = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("weakNessList", weakNessList);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", 3);
+				arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> oppList = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("oppList", oppList);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", 4);
+				arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> challengelist = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("challengelist", challengelist);
+
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 
