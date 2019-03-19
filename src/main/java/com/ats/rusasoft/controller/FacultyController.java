@@ -40,6 +40,7 @@ import com.ats.rusasoft.model.IqacList;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
 import com.ats.rusasoft.model.ProgramOutcome;
+import com.ats.rusasoft.model.ProgramSpeceficOutcome;
 import com.ats.rusasoft.model.SubjectCo;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
@@ -973,24 +974,42 @@ public class FacultyController {
 		return model;
 
 	}
-
+  
+	SubjectCo subjectCo = new SubjectCo();
+	
 	@RequestMapping(value = "/mapPoCo", method = RequestMethod.GET)
 	public ModelAndView showPsoFaculty(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("FacultyDetails/PSOFaculty");
 		try {
-
-			model.addObject("title", "Faculty PSO");
+ 
+			model.addObject("title", "CO PO Mapping");
 			int coId = Integer.parseInt(request.getParameter("coId"));
 			int subId = Integer.parseInt(request.getParameter("subId"));
 			int programId = Integer.parseInt(request.getParameter("programId"));
+			
+
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("programId", programId);
-			ProgramOutcome[] programOutcomList = rest.postForObject(Constants.url + "/getProgramOutcomeListByProgramId",
-					map, ProgramOutcome[].class);
-			model.addObject("programOutcomList", programOutcomList);
-
+			ProgramOutcome[] programOutcomList = rest.postForObject(Constants.url + "/getProgramOutcomeListByProgramId", map, ProgramOutcome[].class);
+			model.addObject("programOutcomList", programOutcomList); 
+			
+			map = new LinkedMultiValueMap<>();
+			map.add("coId", coId); 
+			subjectCo = rest.postForObject(Constants.url + "/getSubjectCoBySubId", map, SubjectCo.class);
+			
+			map.add("programId", programId);
+			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
+			model.addObject("programDetail", programDetail);
+			 
+			model.addObject("coId", coId); 
+			model.addObject("subId", subId); 
+			model.addObject("programId", programId); 
+			
+			String[] poarry = subjectCo.getCoPoMap().split(",");
+			model.addObject("poarry", poarry);
+			model.addObject("subjectCo", subjectCo);
 		} catch (Exception e) {
 
 			System.err.println("exception In showpoPsoFaculty at Faculty Contr" + e.getMessage());
@@ -1000,6 +1019,123 @@ public class FacultyController {
 		}
 
 		return model;
+
+	}
+	
+	@RequestMapping(value = "submitPoCoMapping", method = RequestMethod.POST)
+	public String submitPoCoMapping(HttpServletRequest request, HttpServletResponse response) {
+
+		int coId = Integer.parseInt(request.getParameter("coId"));
+		int subId = Integer.parseInt(request.getParameter("subId"));
+		int programId = Integer.parseInt(request.getParameter("programId"));
+		
+		try {
+			 
+			String[] ids = request.getParameterValues("poIds"); 
+			String satisfyingValue =  request.getParameter("satisfyingValue") ;
+			
+			String poIds = new String();
+			
+			
+			for(int i=0 ;i<ids.length ; i++) {
+				System.out.println(ids[i]);
+				poIds=poIds+","+ids[i];
+			}
+			
+			subjectCo.setCoPoMap(poIds.substring(1, poIds.length()));
+			subjectCo.setCoPoSatisfyingValue(satisfyingValue);
+			System.out.println("subjectCo " + subjectCo);
+			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		
+		return "redirect:/mapPoCo?coId="+coId+"&subId="+subId+"&programId="+programId;
+
+	}
+	
+	@RequestMapping(value = "/mapPsoCo", method = RequestMethod.GET)
+	public ModelAndView mapPsoCo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("FacultyDetails/PSOFacultyMapping");
+		try {
+ 
+			model.addObject("title", "CO PSO Mapping");
+			int coId = Integer.parseInt(request.getParameter("coId"));
+			int subId = Integer.parseInt(request.getParameter("subId"));
+			int programId = Integer.parseInt(request.getParameter("programId"));
+			
+
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramSpeceficOutcome[] programSpeceficOutcomeList = rest.postForObject(Constants.url + "/getProgramSpecificOutcomeList", map, ProgramSpeceficOutcome[].class);
+			model.addObject("programSpeceficOutcomeList", programSpeceficOutcomeList); 
+			
+			map = new LinkedMultiValueMap<>();
+			map.add("coId", coId); 
+			subjectCo = rest.postForObject(Constants.url + "/getSubjectCoBySubId", map, SubjectCo.class);
+			
+			map.add("programId", programId);
+			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
+			model.addObject("programDetail", programDetail);
+			 
+			model.addObject("coId", coId); 
+			model.addObject("subId", subId); 
+			model.addObject("programId", programId); 
+			
+			String[] psoarry = subjectCo.getCoPsoMap().split(",");
+			model.addObject("psoarry", psoarry);
+			model.addObject("subjectCo", subjectCo);
+		} catch (Exception e) {
+
+			System.err.println("exception In showpoPsoFaculty at Faculty Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "submitPsoCoMapping", method = RequestMethod.POST)
+	public String submitPsoCoMapping(HttpServletRequest request, HttpServletResponse response) {
+
+		int coId = Integer.parseInt(request.getParameter("coId"));
+		int subId = Integer.parseInt(request.getParameter("subId"));
+		int programId = Integer.parseInt(request.getParameter("programId"));
+		
+		try {
+			 
+			String[] ids = request.getParameterValues("psoIds"); 
+			String satisfyingValue =  request.getParameter("satisfyingValue") ;
+			
+			String poIds = new String();
+			
+			
+			for(int i=0 ;i<ids.length ; i++) {
+				System.out.println(ids[i]);
+				poIds=poIds+","+ids[i];
+			}
+			
+			subjectCo.setCoPsoMap(poIds.substring(1, poIds.length()));
+			subjectCo.setCoPsoSatisfyingValue(satisfyingValue);
+			System.out.println("subjectCo " + subjectCo);
+			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		
+		return "redirect:/mapPsoCo?coId="+coId+"&subId="+subId+"&programId="+programId;
 
 	}
 
@@ -1180,5 +1316,8 @@ public class FacultyController {
 		return swocList;
 
 	}
+	
+
+	
 
 }

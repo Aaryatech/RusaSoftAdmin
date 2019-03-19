@@ -56,7 +56,7 @@
 								<!-- <a href="#myModal2"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a> -->
 								  <a href="${pageContext.request.contextPath}/showAddCo/${subId}"><button
-										type="button" class="btn btn-success">Back</button></a>  
+										type="button" class="btn btn-success">Back</button></a> 
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -103,7 +103,7 @@
 
 
 								<form class="form-horizontal"
-									action="${pageContext.request.contextPath}/submitPoCoMapping"
+									action="${pageContext.request.contextPath}/submitPsoCoMapping"
 									method="post" name="submitProgramMission"
 									id="submitProgramMission"
 									onsubmit="return confirm('Do you really want to Submit?');">
@@ -132,28 +132,28 @@
 
 												</tr> -->
 
-													<c:forEach items="${programOutcomList}" var="list"
+													<c:forEach items="${programSpeceficOutcomeList}" var="list"
 														varStatus="count">
 														<tr>
 															<c:set var="find" value="0"></c:set>
-															<td>${count.index+1}<c:forEach items="${poarry}"
+															<td>${count.index+1}<c:forEach items="${psoarry}"
 																	var="poarry">
-																	<c:if test="${list.poId==poarry}">
+																	<c:if test="${list.psoId==poarry}">
 																		<c:set var="find" value="1"></c:set>
 																	</c:if>
 																</c:forEach> <c:choose>
 																	<c:when test="${find==1}">
-																		<input type="checkbox" class="chk" name="poIds"
-																			value="${list.poId}" checked>
+																		<input type="checkbox" class="chk" name="psoIds"
+																			value="${list.psoId}" checked>
 																	</c:when>
 																	<c:otherwise>
-																		<input type="checkbox" class="chk" name="poIds"
-																			value="${list.poId}">
+																		<input type="checkbox" class="chk" name="psoIds"
+																			value="${list.psoId}">
 																	</c:otherwise>
 																</c:choose>
 
 															</td>
-															<td>${list.poText}</td>
+															<td>${list.psoText}</td>
 
 														</tr>
 													</c:forEach>
@@ -175,25 +175,25 @@
 												class="form-control" required>
 
 												   <c:choose>
-													<c:when test="${subjectCo.coPoSatisfyingValue == 0}">
+													<c:when test="${subjectCo.coPsoSatisfyingValue == 0}">
 														<option value="0" selected>1</option>
 														<option value="1">2</option>
 														<option value="2">3</option>
 														<option value="3">-</option>
 													</c:when>
-													<c:when test="${subjectCo.coPoSatisfyingValue == 1}">
+													<c:when test="${subjectCo.coPsoSatisfyingValue == 1}">
 														<option value="0">1</option>
 														<option value="1" selected>2</option>
 														<option value="2">3</option>
 														<option value="3">-</option>
 													</c:when>
-													<c:when test="${subjectCo.coPoSatisfyingValue == 2}">
+													<c:when test="${subjectCo.coPsoSatisfyingValue == 2}">
 														<option value="0">1</option>
 														<option value="1">2</option>
 														<option value="2" selected>3</option>
 														<option value="3">-</option>
 													</c:when>
-													<c:when test="${subjectCo.coPoSatisfyingValue == 4}">
+													<c:when test="${subjectCo.coPsoSatisfyingValue == 4}">
 														<option value="0">1</option>
 														<option value="1">2</option>
 														<option value="2">3</option>
@@ -203,8 +203,7 @@
 														<option value="0">1</option>
 														<option value="1">2</option>
 														<option value="2">3</option>
-														<option value="3">-</option>
-
+														<option value="3">-</option> 
 													</c:otherwise>
 												</c:choose>  
 											</select>

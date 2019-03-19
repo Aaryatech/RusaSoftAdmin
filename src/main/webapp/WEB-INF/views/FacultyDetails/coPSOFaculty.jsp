@@ -55,8 +55,8 @@
 							<div class="actions panel_actions pull-right">
 								<!-- 	<a href="#myModal2"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a> -->
-								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
-										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
+								 <a href="${pageContext.request.contextPath}/showSubDetailsList"><button
+										type="button" class="btn btn-success">Back</button></a>  
 								<a class="box_toggle fa fa-chevron-down"></a>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -178,7 +178,7 @@
 																class="glyphicon glyphicon-list"></span></a></td>
 
 														<td><a
-															href="${pageContext.request.contextPath}/showPsoFaculty"
+															href="${pageContext.request.contextPath}/mapPsoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
 															title="Add PSO" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
