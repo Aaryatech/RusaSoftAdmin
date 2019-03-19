@@ -148,10 +148,10 @@
 																Duration(in months)<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="number" class="form-control"
+																<input type="text" class="form-control"
 																	id="monthDuration" value="${editProgram.monthDuration}"
 																	name="monthDuration" placeholder="Duration(in months)"
-																	required>
+																	pattern="\d*" required>
 															</div>
 														</div>
 
@@ -174,7 +174,7 @@
 															<div class="col-sm-3">
 																<input type="text" class="form-control " id="intake"
 																	value="${editProgram.sanctionalIntake}" name="intake"
-																	placeholder=" Sanctioned Intake" required>
+																	placeholder=" Sanctioned Intake" required pattern="\d*" >
 															</div>
 														</div>
 
@@ -312,12 +312,12 @@
 
 														<div class="form-group" id="abc">
 															<label class="control-label col-sm-2"
-																for="otherApprovedBy"> Approved By <span
+																for="otherApprovedBy"> Any Other <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control"
-																	id="otherApprovedBy" value="${editInst.contactNo}"
+																	id="otherApprovedBy" value="${editProgram.approvedBy}"
 																	name="otherApprovedBy" placeholder="Approved By ">
 															</div>
 														</div>
@@ -385,14 +385,16 @@
 
 	<script type="text/javascript">
 		function showExtraField() {
-
+			
 			var qualType = document.getElementById("approvedBy").value
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
+					document.getElementById("otherApprovedBy").required=true;
 
 			} else {
 				document.getElementById("abc").style = "display:none"
+					document.getElementById("otherApprovedBy").required=false;
 			}
 
 		}
@@ -402,9 +404,11 @@
 			
 			if(findOtherName==1){
 				document.getElementById("abc").style = "visible"
+					document.getElementById("otherApprovedBy").required=true;
 			}else{
 				
 				document.getElementById("abc").style = "display:none"
+					document.getElementById("otherApprovedBy").required=false;
 			}
 			
 

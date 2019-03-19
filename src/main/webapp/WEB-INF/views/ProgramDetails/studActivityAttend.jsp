@@ -91,9 +91,9 @@
 													<td>${list.activityName}</td>
 													<td>${list.date}</td>
 													<td>${list.yearName}</td>
-													<td>${list.branch}</td>
-													<td>${list.level}</td>
+													<td>${list.branch}</td> 
 													<td>${list.participatedStudent}</td>
+													<td>${list.level}</td>
 
 													<td><c:if test="${isEdit==1}">
 															<a

@@ -164,6 +164,9 @@
 																placeholder="Amount of Consultancy" name="amount"
 																placeholder="" value="${editConsultancy.consAmount}"
 																required>
+																
+															  <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy">  
+																
 															<!-- </div> -->
 														</div>
 													</div>
@@ -299,7 +302,17 @@
 
 		}
 	</script>
+ <script type="text/javascript">
+        $(function () {
+		 
+            $('.datepickeryear').datepicker({
+				autoclose: true,
+				 minViewMode: 2,
+		         format: 'yyyy'
 
+			});
+        });
+    </script> 
 	<script type="text/javascript">
 		function getData() {
 			//alert("hii");

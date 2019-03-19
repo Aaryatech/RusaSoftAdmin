@@ -191,7 +191,8 @@ public class StudentActivityController {
 				programActivity.setMakerUserId(userObj.getUserId());
 				programActivity.setYearId(acYearId);
 				programActivity.setIsActive(1);
-
+				programActivity.setType(0);
+				System.out.println(programActivity);
 				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
 						programActivity, ProgramActivity.class);
 				if (is_view == 1) {
@@ -310,7 +311,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/studActivityAttend");
-				model.addObject("title", "Student Activity Attended");
+				model.addObject("title", "Student Activity List (Attended)");
 
 				Info add = AccessControll.checkAccess("showStudAttendActivity", "showStudAttendActivity", "0", "1", "0",
 						"0", newModuleList);
@@ -484,8 +485,8 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				int acYearId = (Integer) session.getAttribute("acYearId");
-				model = new ModelAndView("ProgramDetails/addStudActOrganized");
-				model.addObject("title", "Edit Student Activity Organized");
+				model = new ModelAndView("ProgramDetails/addStudActAttend");
+				model.addObject("title", "Edit Student Activity Attended");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("activityId", activityId);
 				map.add("yearId", acYearId);

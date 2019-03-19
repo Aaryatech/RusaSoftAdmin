@@ -283,7 +283,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker"
-																	id="date" value="${editProgramActivity.date}"
+																	id="date" value="${editProgramActivity.date}" placeholder="Date"
 																	name="date" required>
 															</div>
 														</div>
@@ -295,7 +295,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="year"
-																	value="${editProgramActivity.year}" name="year"
+																	value="${editProgramActivity.year}" name="year" placeholder="Year"
 																	required>
 															</div>
 														</div>
@@ -307,7 +307,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="branch"
-																	value="${editProgramActivity.branch}" name="branch"
+																	value="${editProgramActivity.branch}" name="branch" placeholder="Branch"
 																	required>
 															</div>
 														</div>
@@ -317,10 +317,10 @@
 																No. of Students Participated <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="number" class="form-control" id="noStudent"
+																<input type="text" class="form-control" id="noStudent"
 																	value="${editProgramActivity.participatedStudent}"
-																	name="noStudent" placeholder="Duration(in months)"
-																	required>
+																	name="noStudent" placeholder="No. of Students Participated"
+																	pattern="\d*" required>
 															</div>
 														</div>
 
@@ -484,7 +484,7 @@ function hideText() {
 
 </script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 
 $(function () {				
 
@@ -497,7 +497,7 @@ $(function () {
 					
 				});	
 	});	 
-</script>
+</script> -->
 
 
 

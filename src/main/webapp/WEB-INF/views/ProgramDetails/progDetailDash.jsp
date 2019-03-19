@@ -917,6 +917,9 @@
 				//$('#example-1 td').remove(); 
 				$('#table1 td').remove();
 				$("#loader1").show();
+				document.getElementById("programVissionId").value=0;
+				 document.getElementById("programVissionRemark").value="";
+				 document.getElementById("programVission").value="";
 				$.getJSON('${saveProgramVission}',
 
 				{
@@ -952,9 +955,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
-					 document.getElementById("programVissionId").value=0;
-					 document.getElementById("programVissionRemark").value="";
-					 document.getElementById("programVission").value="";
+					 
 				});
 
 			} else {
@@ -1046,6 +1047,9 @@
 			if (programMission != "") {
 				//$('#example-2 td').remove();
 				$("#loader2").show();
+				document.getElementById("programMissionId").value=0;
+				 document.getElementById("programMissionRemark").value="";
+				 document.getElementById("programMission").value="";
 				$.getJSON('${saveProgramMission}',
 
 				{
@@ -1082,9 +1086,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table2 tbody').append(tr); 
 					}
-					 document.getElementById("programMissionId").value=0;
-					 document.getElementById("programMissionRemark").value="";
-					 document.getElementById("programMission").value="";
+					 
 				});
 
 			} else {
@@ -1173,6 +1175,9 @@
 			if (peoText != "") {
 				//$('#example-5 td').remove();
 				$("#loader3").show();
+				 document.getElementById("programPeoId").value=0;
+				 document.getElementById("peoText").value="";
+				 document.getElementById("peoRemark").value="";
 				$.getJSON('${saveProgramPeo}',
 
 				{
@@ -1208,9 +1213,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table3 tbody').append(tr); 
 					}
-					 document.getElementById("programPeoId").value=0;
-					 document.getElementById("peoText").value="";
-					 document.getElementById("peoRemark").value="";
+					
 				});
 
 			} else {
@@ -1301,6 +1304,9 @@
 			if (poText != "") {
 				//$('#example-3 td').remove();
 				$("#loader4").show();
+				document.getElementById("poId").value=0;
+				 document.getElementById("poText").value="";
+				 document.getElementById("poRemark").value="";
 				$.getJSON('${saveProgramPo}',
 
 				{
@@ -1337,9 +1343,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table4 tbody').append(tr); 
 					}
-					 document.getElementById("poId").value=0;
-					 document.getElementById("poText").value="";
-					 document.getElementById("poRemark").value="";
+					 
 				});
 
 			} else {
@@ -1428,6 +1432,9 @@
 			if (psoText != "") {
 				/* $('#example-4 td').remove(); */
 				$("#loader5").show();
+				document.getElementById("psoId").value=0;
+				 document.getElementById("psoText").value="";
+				 document.getElementById("psoRemark").value="";
 				$.getJSON('${saveProgramPso}',
 
 				{
@@ -1462,9 +1469,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table5 tbody').append(tr); 
 					}
-					 document.getElementById("psoId").value=0;
-					 document.getElementById("psoText").value="";
-					 document.getElementById("psoRemark").value="";
+					 
 				});
 
 			} else {
