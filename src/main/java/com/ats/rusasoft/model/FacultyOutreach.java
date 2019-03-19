@@ -1,5 +1,7 @@
 package com.ats.rusasoft.model;
 
+
+
 public class FacultyOutreach {
 	
 	private int outreachId;
@@ -31,6 +33,18 @@ public class FacultyOutreach {
 	private String exVar1;
 	
 	private String exVar2;
+	
+	
+	private int instituteId;
+	
+
+	public int getInstituteId() {
+		return instituteId;
+	}
+
+	public void setInstituteId(int instituteId) {
+		this.instituteId = instituteId;
+	}
 
 	public int getOutreachId() {
 		return outreachId;
@@ -158,8 +172,10 @@ public class FacultyOutreach {
 				+ ", outreachType=" + outreachType + ", outreachName=" + outreachName + ", outreachLevel="
 				+ outreachLevel + ", outreachDate=" + outreachDate + ", makerUserId=" + makerUserId
 				+ ", makerEnterDatetime=" + makerEnterDatetime + ", delStatus=" + delStatus + ", isActive=" + isActive
-				+ ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + "]";
+				+ ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2
+				+ ", instituteId=" + instituteId + "]";
 	}
+
 	
 	
 

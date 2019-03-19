@@ -25,11 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.GetFacultyOutreach;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.FacultyAward;
 import com.ats.rusasoft.model.FacultyOutreach;
 import com.ats.rusasoft.model.FacultyPatent;
 import com.ats.rusasoft.model.Info;
+import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
 import com.ats.rusasoft.model.OutreachType;
@@ -40,6 +42,7 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 public class FacultyPatentController {
 
 	RestTemplate rest = new RestTemplate();
+	private String makerEnterDatetime;
 
 	@RequestMapping(value = "/showPatentDetailsList", method = RequestMethod.GET)
 	public ModelAndView showPatentDetailsList(HttpServletRequest request, HttpServletResponse response) {
@@ -631,9 +634,10 @@ public class FacultyPatentController {
 				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				List<FacultyOutreach> facultyOutreachList = rest.postForObject(Constants.url + "/getOutReachListByFacultyId",map,
+				map.add("instituteId", session.getAttribute("instituteId"));
+				List<GetFacultyOutreach> facultyOutreachList = rest.postForObject(Constants.url + "/getOutReachListByFacultyId",map,
 						List.class);
-				System.out.println("faculty Patent List :" + facultyOutreachList.toString());				
+				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());				
 
 			
 
@@ -683,6 +687,7 @@ public class FacultyPatentController {
 
 			ModelAndView model = null;
 			HttpSession session = request.getSession();
+			
 			int inst_id = (int) session.getAttribute("instituteId");
 			try {
 
@@ -712,6 +717,142 @@ public class FacultyPatentController {
 			}
 
 			return model;
+
+		}
+	  
+	  
+	  @RequestMapping(value = "/insertOutReachActivity", method = RequestMethod.POST)
+		public String insertOutReachActivity(HttpServletRequest request, HttpServletResponse response) {
+
+		  HttpSession session = request.getSession();
+			String a = null;
+			try {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				Info view = AccessControll.checkAccess("insertOutReachActivity", "showOutReachDetailsList", "0", "1", "0", "0", newModuleList);
+
+				if (view.isError() == true)
+
+				{
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+					System.err.println("in insert insertLibrarian");
+					ModelAndView model = null;
+
+					int inst_id = (int) session.getAttribute("instituteId");
+					int maker_id = (int) session.getAttribute("userId");
+					int year_id = (int) session.getAttribute("acYearId");
+					
+					
+
+					FacultyOutreach lib = new FacultyOutreach();
+					RestTemplate restTemplate = new RestTemplate();
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+					int outreach_id = Integer.parseInt(request.getParameter("outreach_id"));
+					System.out.println("librarian_id" + "librarian_id");
+
+					String act_name = request.getParameter("act_name");
+
+					String activity_type = request.getParameter("activity_type");
+
+      				int faculty_id=userObj.getGetData().getUserDetailId();
+					String act_level = request.getParameter("act_level");
+					String act_date = request.getParameter("act_date");
+				
+
+					System.err.println("outreach_id id  " + outreach_id);
+					if (outreach_id == 0) {
+
+						System.out.println("inst id is" + inst_id);
+
+						lib.setFacultyId(faculty_id);
+						lib.setIsActive(1);
+						lib.setOutreachDate(DateConvertor.convertToYMD(act_date));
+						lib.setOutreachName(act_name); 
+						lib.setOutreachType(activity_type);
+						lib.setOutreachLevel(act_level);
+						lib.setYearId(year_id);
+						
+					
+						lib.setMakerUserId(maker_id);
+
+						lib.setInstituteId(inst_id);
+						lib.setDelStatus(1);
+						lib.setExInt1(1);
+						lib.setExInt2(1);
+						lib.setExVar1("NA");
+						lib.setExVar2("NA");
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						lib.setMakerEnterDatetime(curDateTime);
+
+						FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib, FacultyOutreach.class);
+
+					} else {
+						System.out.println("in edit");
+					
+						map.add("outreachId", outreach_id); // getInstitute Hod hod =
+						FacultyOutreach lib1 = rest.postForObject(Constants.url + "getFacultyOutReach", map, FacultyOutreach.class);
+						lib1.setFacultyId(faculty_id);
+						lib1.setIsActive(1);
+					
+						lib1.setOutreachDate(DateConvertor.convertToYMD(act_date));
+						lib1.setOutreachName(act_name); 
+						lib1.setOutreachType(activity_type);
+						lib1.setOutreachLevel(act_level);
+						lib1.setYearId(year_id);
+						
+					
+						lib1.setMakerUserId(maker_id);
+
+						lib1.setInstituteId(inst_id);
+						
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						lib1.setMakerEnterDatetime(curDateTime);
+						FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib1, FacultyOutreach.class);
+					}
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						a = "redirect:/showOutReachDetailsList";
+
+					else
+						a = "redirect:/showOutReachDetails";
+
+				}
+
+			}
+
+			catch (Exception e) {
+				System.err.println("Exce in save lib  " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			return a;
 
 		}
 	  

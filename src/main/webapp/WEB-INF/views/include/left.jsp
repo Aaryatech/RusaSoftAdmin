@@ -402,7 +402,7 @@
 
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showOutReachDetails">Out Reach Activity </a></li>
+							href="${pageContext.request.contextPath}/showOutReachDetailsList">Out Reach Activity </a></li>
 
 
 						<li><a class=""

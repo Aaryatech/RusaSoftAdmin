@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -96,8 +96,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertOutReachActivity"
+										method="post" s
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -121,8 +121,8 @@
 															Attended Activity <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<select id="salutation" onchange="showForm()"
-																name="salutation" class="form-control" required>
+															<!-- <select id="act_attended" onchange="showForm()"
+																name="act_attended" class="form-control" required>
 																<option value="STTP">STTP</option>
 																<option value="Seminar">Seminar</option>
 																<option value="Workshop">Workshop</option>
@@ -131,20 +131,31 @@
 																<option value="Refresher Course">Refresher Course</option>
 																<option value="6">Any Other</option>
 
-															</select>
+															</select> -->
+															<select id="activity_type" name="activity_type" class="form-control" required>
+															
+																	
+																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
+																	
+																			<option value="${outtype.typeId}">${outtype.typeName}</option>
+
+																			
+
+																	</c:forEach>
+																</select>
 														</div>
 															</div>
-														<div class="form-group" id="abc">
+													<!-- 	<div class="form-group" id="abc" style = "display:none">
 															<label class="control-label col-sm-2" for="smallheading">Other
 																Activity <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="desn"
-																	name="desn" placeholder="Other Designation" value=""
+																<input type="text" class="form-control" id="other_act"
+																	name="other_act" placeholder="Other Designation" value=""
 																	required>
 															</div>
 														</div>
-
+ -->
 
 													</div>
 
@@ -154,22 +165,22 @@
 															of Activity <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Name of Activity" value=""
+															<input type="text" class="form-control" id="act_name"
+																name="act_name" placeholder="Name of Activity" value=""
 																required>
 														</div>
 
 													</div>
 
 
-
+<%-- 
 											<div class="form-group">
 
 														<label class="control-label col-sm-2" for="status">Activity Type
 															 <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<select id="" name="activity_type" class="form-control" required>
+															<select id="activity_type" name="activity_type" class="form-control" required>
 															
 																	
 																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
@@ -182,7 +193,7 @@
 																</select>
 														</div>
 													</div>
-
+ --%>
 
 													<div class="form-group">
 
@@ -190,7 +201,7 @@
 															Level <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<select id="salutation" name="salutation"
+															<select id="act_level" name="act_level"
 																class="form-control" required>
 																<option value="International">International</option>
 																<option value="National">National</option>
@@ -207,13 +218,13 @@
 																Date of Activity <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${editInst.joiningDate}"
-																	name="lib_joiningDate" placeholder="dd/MM/YYYY " required>
+																<input type="text" class="form-control datepicker" id="act_date" 	value="${editInst.joiningDate}"
+																	name="act_date" placeholder="dd/MM/YYYY " required>
 															</div>
 														</div>
 														
 														
-														          <input type="hidden" id="librarian_id" name="outreach_id" value="${editInst.librarianId}">
+														          <input type="hidden" id="librarian_id" name="outreach_id" value="0">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
 												
@@ -273,11 +284,24 @@
 			}
 
 		}
-		function hideText() {
+		/* function hideText() {
 			//alert("hii");
 			document.getElementById("abc").style = "display:none"
 
+		} */
+		
+		function submit_f(view){
+			document.getElementById("is_view").value=view;//create this 
+			/* var form=document.getElementById("form_sample_2");
+		    form.setAttribute("method", "post");
+
+			form.action=("insertLibrarian");
+			var x =confirm();
+			if(x==true)
+			form.submit(); */
+			
 		}
+		
 	</script>
 	<script type="text/javascript">
 		$(function() {

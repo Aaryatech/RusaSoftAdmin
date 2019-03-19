@@ -125,19 +125,52 @@
 																<thead>
 																	<tr>
 																		<th>Sr No</th>
-
+																		<th>Outreach Type</th>
 																		<th>Outreach Name</th>
 																		<th>Outreach Level</th>
 																		<th>Outreach Date</th>
-																		<th>Name of Guide</th>
-																		<th>Date of Publication</th>
+																		
 																		<th>Action</th>
 																	</tr>
 																</thead>
 												<tbody>
+												<c:forEach items="${facultyOutreachList}" var="outList"
+													varStatus="count">
+													<tr>
+											<td>input type="checkbox" class="chk" name="studIds"
+															id="studIds${count.index+1}"
+															value="${institute.librarianId}" /></td>
+														
+														<td>${count.index+1}</td>
+														<td>${institute.librarianName}</td>
+														<td>${institute.contactNo}</td>
+														<td>${institute.email}</td>
+															<td>${institute.joiningDate}</td>
+															<td>${institute.realivingDate}</td>
 
-													</tbody>
 
+														<td  align="center">
+													    <c:if test="${editAccess == 0}"> 
+							                       	  	<a
+															href="#" onclick="showEditLibrarian(${institute.librarianId})"><span
+																class="glyphicon glyphicon-edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>
+			                	                       </c:if>&nbsp;&nbsp;&nbsp;&nbsp;
+														
+												  <c:if test="${deleteAccess == 0}"> 
+															<a
+															href="${pageContext.request.contextPath}/deleteLibrarians/${institute.librarianId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a>
+																</c:if>
+																
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
 
 															</table>
 
