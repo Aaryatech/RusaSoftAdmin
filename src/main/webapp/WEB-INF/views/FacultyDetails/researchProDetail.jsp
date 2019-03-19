@@ -137,11 +137,17 @@
 																of Project Sanction <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker"
+
+																<input type="text" class="form-control datepickeryear"
+																	required data-min-view-mode="years" data-start-view="2"
+																	value="${editProject.projYear}" autocomplete="off"
+																	placeholder="Year of Project Sanction" name="yearOfPS"
+																	id="journalYear" data-format="yyyy">
+																<%-- <input type="text" class="form-control datepicker"
 																	id="yearOfPS" autocomplete="off"
 																	value="${editProject.projYear}" name="yearOfPS"
-																	placeholder="Year of Project Sanction" value=""
-																	required>
+																 value=""
+																	required> --%>
 															</div>
 
 														</div>
@@ -204,8 +210,7 @@
 																<input type="text" class="form-control" id="coPrincipal"
 																	name="coPrincipal"
 																	placeholder="Name of Co-Principal Investigator"
-																	autocomplete="off" value="${editProject.projInvName2}"
-																	required>
+																	autocomplete="off" value="${editProject.projInvName2}">
 															</div>
 
 														</div>
@@ -218,8 +223,7 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="deptCoName"
 																	name="deptCoName" placeholder="Department Name"
-																	autocomplete="off" value="${editProject.projInvDept2}"
-																	required>
+																	autocomplete="off" value="${editProject.projInvDept2}">
 															</div>
 
 
@@ -414,6 +418,17 @@ function submit_f(view){
 
 		}
 	</script>
+	<script type="text/javascript">
+        $(function () {
+		 
+            $('.datepickeryear').datepicker({
+				autoclose: true,
+				minViewMode: 2,
+		         format: 'yyyy'
+
+			});
+        });
+    </script>
 
 </body>
 </html>

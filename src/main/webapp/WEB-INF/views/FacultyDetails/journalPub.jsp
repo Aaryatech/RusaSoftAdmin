@@ -239,10 +239,16 @@
 																of Publication <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker"
+																<input type="text" class="form-control datepickeryear"
+																	required data-min-view-mode="years" data-start-view="2"
+																	value="${editJournal.journalYear}" autocomplete="off"
+																	placeholder="Year of Publication" name="journalYear"
+																	id="journalYear" data-format="yyyy">
+																<%-- <input
+																	type="text" class="form-control datepicker"
 																	id="journalYear" name="journalYear"
 																	value="${editJournal.journalYear}" autocomplete="off"
-																	placeholder="Year of Publication" value="" required>
+																	placeholder="Year of Publication" value="" required> --%>
 															</div>
 
 														</div>
@@ -442,6 +448,18 @@ function submit_f(view){
 
 		}
 	</script>
+
+	<script type="text/javascript">
+        $(function () {
+		 
+            $('.datepickeryear').datepicker({
+				autoclose: true,
+				minViewMode: 2,
+		         format: 'yyyy'
+
+			});
+        });
+    </script>
 
 
 

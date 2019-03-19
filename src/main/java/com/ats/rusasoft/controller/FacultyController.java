@@ -146,7 +146,7 @@ public class FacultyController {
 				journal.setJournalPgFrom(journalPgFrom);
 				journal.setJournalPgTo(journalPgTo);
 				journal.setJournalVolume(journalVolume);
-				journal.setJournalYear(DateConvertor.convertToYMD(journalYear));
+				journal.setJournalYear(journalYear);
 				journal.setMakerUserId(userObj.getUserId());
 				journal.setJournalStandard(jouStd);
 				journal.setJournalType(journalType);
@@ -410,7 +410,7 @@ public class FacultyController {
 				project.setProjInvDept(deptName);
 				project.setProjInvDept2(deptCoName);
 				project.setProjTodt(DateConvertor.convertToYMD(toDate));
-				project.setProjYear(DateConvertor.convertToYMD(yearOfPS));
+				project.setProjYear(yearOfPS);
 				project.setProjInvName2(coPrincipalName);
 				project.setProjSponsor(spoAuth);
 				project.setProjTotalAmt(totalAmt);
@@ -593,7 +593,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/subDetails");
-				model.addObject("title", "Subject Details Form");
+				model.addObject("title", "Subject Details List");
 				int yearId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -692,7 +692,7 @@ public class FacultyController {
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				System.err.println("Inside insertJournal method");
+				System.err.println("Inside insertSubject method");
 
 				int subId = 0;
 				try {
