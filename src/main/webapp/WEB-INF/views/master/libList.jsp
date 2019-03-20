@@ -119,7 +119,6 @@
 															<td style="text-align: center; ">${institute.joiningDate}</td>
 															<td style="text-align: center; ">${institute.realivingDate}</td>
 
-
 														<td  align="center">
 													    <c:if test="${editAccess == 0}"> 
 							                       	  	<a
