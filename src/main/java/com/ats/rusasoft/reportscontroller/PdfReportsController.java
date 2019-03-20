@@ -188,7 +188,7 @@ public class PdfReportsController {
 				table.addCell(cell);
 
 				
-				cell = new PdfPCell(new Phrase("" + work.getFacultyName(), headFont));
+				cell = new PdfPCell(new Phrase("" + work.getFacultyFirstName(), headFont));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setPaddingRight(2);

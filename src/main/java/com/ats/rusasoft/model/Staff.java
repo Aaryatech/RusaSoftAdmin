@@ -5,7 +5,9 @@ public class Staff {
 	private int facultyId;
 	private int instituteId;
 	private int deptId;
-	private String facultyName;
+	private String facultyFirstName;
+	private String facultyMiddelName;
+	private String facultyLastName;
 	private int highestQualification;
 	private int teachingTo;
 	private String hightestQualificationYear;
@@ -43,11 +45,23 @@ public class Staff {
 	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
-	public String getFacultyName() {
-		return facultyName;
+	public String getFacultyFirstName() {
+		return facultyFirstName;
 	}
-	public void setFacultyName(String facultyName) {
-		this.facultyName = facultyName;
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
+	}
+	public String getFacultyMiddelName() {
+		return facultyMiddelName;
+	}
+	public void setFacultyMiddelName(String facultyMiddelName) {
+		this.facultyMiddelName = facultyMiddelName;
+	}
+	public String getFacultyLastName() {
+		return facultyLastName;
+	}
+	public void setFacultyLastName(String facultyLastName) {
+		this.facultyLastName = facultyLastName;
 	}
 	public int getHighestQualification() {
 		return highestQualification;
@@ -166,21 +180,16 @@ public class Staff {
 	@Override
 	public String toString() {
 		return "Staff [facultyId=" + facultyId + ", instituteId=" + instituteId + ", deptId=" + deptId
-				+ ", facultyName=" + facultyName + ", highestQualification=" + highestQualification + ", teachingTo="
-				+ teachingTo + ", hightestQualificationYear=" + hightestQualificationYear + ", currentDesignationId="
-				+ currentDesignationId + ", joiningDate=" + joiningDate + ", isWorking=" + isWorking
-				+ ", realivingDate=" + realivingDate + ", contactNo=" + contactNo + ", email=" + email + ", delStatus="
-				+ delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerEnterDatetime="
-				+ makerEnterDatetime + ", editUserId=" + editUserId + ", lastUpdatedDatetime=" + lastUpdatedDatetime
-				+ ", checkerUserId=" + checkerUserId + ", checkerDatetime=" + checkerDatetime + ", extraint1="
-				+ extraint1 + ", extravarchar1=" + extravarchar1 + "]";
-	}	
+				+ ", facultyFirstName=" + facultyFirstName + ", facultyMiddelName=" + facultyMiddelName
+				+ ", facultyLastName=" + facultyLastName + ", highestQualification=" + highestQualification
+				+ ", teachingTo=" + teachingTo + ", hightestQualificationYear=" + hightestQualificationYear
+				+ ", currentDesignationId=" + currentDesignationId + ", joiningDate=" + joiningDate + ", isWorking="
+				+ isWorking + ", realivingDate=" + realivingDate + ", contactNo=" + contactNo + ", email=" + email
+				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
+				+ ", makerEnterDatetime=" + makerEnterDatetime + ", editUserId=" + editUserId + ", lastUpdatedDatetime="
+				+ lastUpdatedDatetime + ", checkerUserId=" + checkerUserId + ", checkerDatetime=" + checkerDatetime
+				+ ", extraint1=" + extraint1 + ", extravarchar1=" + extravarchar1 + "]";
+	}
 	
-	
-	
-	
-	
-	
-
 		
 }

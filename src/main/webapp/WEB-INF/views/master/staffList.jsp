@@ -57,7 +57,7 @@
 								<a href="${pageContext.request.contextPath}/showRegisterStaff"><button
 										type="button" class="btn btn-success">Register Staff</button></a>
 										</c:if>
-								<a class="box_toggle fa fa-chevron-down"></a>
+								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -110,7 +110,7 @@
 											<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out
-														value="${staffList.facultyName}" /></td>
+														value="${staffList.facultyFirstName}" /></td>
 														
 											<td style="text-align: left"><c:out
 														value="${staffList.qualificationName}" /></td>
@@ -118,13 +118,13 @@
 											<td style="text-align: left"><c:out
 														value="${staffList.deptName}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: center;"><c:out
 														value="${staffList.joiningDate}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${staffList.realivingDate}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${staffList.contactNo}" /></td>
 														
 											<td style="text-align: left"><c:out

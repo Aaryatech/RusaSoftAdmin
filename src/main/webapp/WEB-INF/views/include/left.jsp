@@ -380,10 +380,10 @@
 
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showPublicationDetails">Publication/Presentation
+							href="${pageContext.request.contextPath}/showAddPublicationDetailsList">Publication/Presentation
 								Details </a></li>
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showBookPub">Book Publication Details </a></li>
+							href="${pageContext.request.contextPath}/showBookPubList">Book Publication Details </a></li>
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showJournalPub">Journal Publication Details </a></li>
 
@@ -402,7 +402,7 @@
 
 
 						<li><a class=""
-							href="${pageContext.request.contextPath}/showOutReachDetailsList">Out Reach Activity </a></li>
+							href="${pageContext.request.contextPath}/showOutReachDetails">Out Reach Activity </a></li>
 
 
 						<li><a class=""

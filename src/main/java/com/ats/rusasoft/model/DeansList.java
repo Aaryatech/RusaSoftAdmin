@@ -1,7 +1,5 @@
 package com.ats.rusasoft.model;
 
-import java.util.Date;
-
 
 public class DeansList {
 
@@ -10,10 +8,9 @@ public class DeansList {
 	private String contactNo;
 	private String email;
 	private String joiningDate;
+	private String realivingDate;
 	private String qualificationName;
-	
-	
-	
+
 	public int getDeanId() {
 		return deanId;
 	}
@@ -50,13 +47,17 @@ public class DeansList {
 	public void setJoiningDate(String joiningDate) {
 		this.joiningDate = joiningDate;
 	}
+	public String getRealivingDate() {
+		return realivingDate;
+	}
+	public void setRealivingDate(String realivingDate) {
+		this.realivingDate = realivingDate;
+	}
 	@Override
 	public String toString() {
 		return "DeansList [deanId=" + deanId + ", deanName=" + deanName + ", contactNo=" + contactNo + ", email="
-				+ email + ", joiningDate=" + joiningDate + ", qualificationName=" + qualificationName + "]";
+				+ email + ", joiningDate=" + joiningDate + ", realivingDate=" + realivingDate + ", qualificationName="
+				+ qualificationName + "]";
 	}
-	
-	
-	
-	
+		
 }

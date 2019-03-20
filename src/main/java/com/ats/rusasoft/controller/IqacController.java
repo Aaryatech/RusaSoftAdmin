@@ -109,6 +109,7 @@ public class IqacController {
 				List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
 						List.class);
 				model.addObject("desigList", designationList);
+				model.addObject("title", "IQAC Registration");
 			}
 		} catch (Exception e) {
 
@@ -177,7 +178,7 @@ public class IqacController {
 		miqac.setType(2);
 		MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac", miqac, MIqac.class);
 
-		return "redirect:/iqacRegistration";
+		return "redirect:/showIqacList";
 
 	}
 
@@ -570,7 +571,9 @@ public class IqacController {
 
 		staff.setInstituteId(instituteId);
 		staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
-		staff.setFacultyName(facultyMmemberName);
+		staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
+		staff.setFacultyMiddelName("NA");
+		staff.setFacultyLastName("NA");
 		staff.setHighestQualification(highestQualification);
 		staff.setHightestQualificationYear(yrofHighestQualification);
 		staff.setCurrentDesignationId(designation);
@@ -601,7 +604,7 @@ public class IqacController {
 
 		Staff stf = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 
-		return "redirect:/showRegisterStaff";
+		return "redirect:/showStaffList";
 
 	}
 
@@ -655,9 +658,12 @@ public class IqacController {
 					expoExcel = new ExportToExcel();
 					rowData = new ArrayList<String>();
 					cnt = cnt + i;
+					
+				
+					
 					rowData.add("" + (i + 1));
 
-					rowData.add("" + staffList.get(i).getFacultyName());
+					rowData.add("" + staffList.get(i).getFacultyFirstName());
 					rowData.add("" + staffList.get(i).getQualificationName());
 					rowData.add("" + staffList.get(i).getDeptName());
 					rowData.add("" + staffList.get(i).getJoiningDate());
@@ -867,10 +873,10 @@ public class IqacController {
 		dean.setContactNo(contactNo);
 		dean.setEmail(email);
 		dean.setQualificationId(qualificaton);
-		dean.setJoiningDate(DateConvertor.convertToYMD(joinDate));
+		dean.setJoiningDate(joinDate);
 
-		if (isReg == 0) {
-			dean.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
+		if (isReg == 1) {
+			dean.setRealivingDate(request.getParameter("acc_off_relDate"));
 
 		} else {
 			dean.setRealivingDate(null);
@@ -886,7 +892,7 @@ public class IqacController {
 
 		Dean deanSave = rest.postForObject(Constants.url + "/saveNewDean", dean, Dean.class);
 
-		return "redirect:/showRegDean";
+		return "redirect:/showDeanList";
 
 	}
 

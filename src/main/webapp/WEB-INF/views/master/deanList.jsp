@@ -90,8 +90,8 @@
 												<th width="5%">Sr No</th>
 												<th> Name</th>
 												<th>Qualification</th>
-											
 												<th>Joining Date</th>
+												<th>Realiving Date</th>
 												<th>Contact No</th>
 												<th>Email</th>
 												<th width="10%">Action</th>
@@ -113,10 +113,13 @@
 											<td style="text-align: left"><c:out
 														value="${deanList.qualificationName}" /></td>
 										
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${deanList.joiningDate}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
+														value="${deanList.realivingDate}" /></td>
+														
+											<td style="text-align: center"><c:out
 														value="${deanList.contactNo}" /></td>
 														
 											<td style="text-align: left"><c:out

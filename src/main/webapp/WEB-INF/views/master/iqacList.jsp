@@ -99,10 +99,10 @@
 											<td style="text-align: left"><c:out
 														value="${QList.designationName}" /></td>
 											
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${QList.joiningDate}" /></td>
 											
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${QList.contactNo}" /></td>
 														
 															

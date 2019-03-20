@@ -81,7 +81,7 @@
 					<section class="box ">
 
 						<header class="panel_header">
-							<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name:abc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<!-- <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Institute Name:abc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -93,13 +93,12 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							Department Name:xyz</h4>
+							Department Name:xyz</h4> -->
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStaffList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -187,14 +186,36 @@
 													 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">Faculty
-																Member Name <span class="text-danger">*</span>
+														Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="faculty_member_name"
-																	name="faculty_member_name" placeholder="Faculty Member Name"
-																	value="${staff.facultyName}" required="required">
+																<input type="text" class="form-control" id="faculty_first_name" pattern="^(?!\s*$).+"
+																	name="faculty_first_name" placeholder="First Name			Middle Name			 Last Name" 
+																	value="${staff.facultyFirstName}" required="required">
 															</div>
 														</div>
+														
+														<%-- <div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">Faculty
+																Middle Name <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="faculty_mid_name" pattern="^(?!\s*$).+"
+																	name="faculty_mid_name" placeholder="" 
+																	value="${staff.facultyMiddelName}" required="required">
+															</div>
+														</div> --%>
+														<%-- 
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">Faculty
+																Last Name <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" class="form-control" id="faculty_last_name" pattern="^(?!\s*$).+"
+																	name="faculty_last_name" placeholder="" 
+																	value="${staff.facultyLastName}" required="required">
+															</div>
+														</div> --%>
 
 
 															<div class="form-group">
@@ -274,8 +295,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="yr_highest_qualification_acqrd"
-																	name="yr_highest_qualification_acqrd"
-																	placeholder="Year of highest Qualification Required"
+																	name="yr_highest_qualification_acqrd"  pattern="^(?!\s*$).+"
+																	placeholder="Year of highest Qualification Required" onkeypress='return restrictAlphabets(event)'
 																	value="${staff.hightestQualificationYear}" required>
 															</div>
 														</div>
@@ -307,7 +328,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="dateOfJoin" onkeypress='return restrictAlphabets(event)'
-																	name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
+																	pattern="^(?!\s*$).+" name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
 															</div>
 														<!-- </div>
 
@@ -371,7 +392,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="relDate" value="${staff.realivingDate}"
+																<input type="text" class="form-control datepicker" id="relDate" value="${staff.realivingDate}" pattern="^(?!\s*$).+"
 																	onkeypress='return restrictAlphabets(event)' name="acc_off_relDate" placeholder="Relieving Date">
 															</div>
 															</div>
@@ -420,7 +441,7 @@
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" onchange="checkUnique(this.value,1)"
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" onchange="checkUnique(this.value,1)" pattern="^(?!\s*$).+"
 																	maxlength="10" class="form-control" id="contact_no" onkeypress='return restrictAlphabets(event)'
 																	name="contact_no" placeholder="Mobile Number" value="${staff.contactNo}" required>
 																<p class="desc text-danger fontsize11">Note: OTP
@@ -434,7 +455,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
-																	name="email" placeholder="abc@xyz.com" value="${staff.email}" 
+																	name="email" placeholder="abc@xyz.com" value="${staff.email}"  pattern="^(?!\s*$).+"
 																 required>
 																<p class="desc font-italic fontsize11">Note:
 																		Verification mail will be sent on this Email id</p>

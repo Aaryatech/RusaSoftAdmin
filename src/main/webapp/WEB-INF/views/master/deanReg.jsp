@@ -85,8 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showDeanList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -126,8 +125,8 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="dean_name"
-																	name="dean_name" placeholder="Dean R&D Name"
+																<input type="text" class="form-control" id="dean_name" required
+																	name="dean_name" placeholder="Dean R&D Name" pattern="^(?!\s*$).+"
 																	value="${dean.deanName}">
 															</div>
 														</div>
@@ -143,7 +142,7 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" 
 																	maxlength="10" class="form-control" id="contact_no" onchange="checkUnique(this.value,1)"
-																	name="contact_no" placeholder="Mobile No" required value="${dean.contactNo}"
+																	name="contact_no" placeholder="Mobile No" required value="${dean.contactNo}" pattern="^(?!\s*$).+"
 																	onkeypress='return restrictAlphabets(event)'> 
 																	<p class="desc text-danger fontsize11">Note: OTP
 																	will be sent on this mobile number for verification</p>
@@ -155,7 +154,7 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
+																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)" pattern="^(?!\s*$).+"
 																	name="email" placeholder="abc@xyz.com" required value="${dean.email}">
 																	<p class="desc font-italic fontsize11">Note:
 																		Verification mail will be sent on this Email id</p>
@@ -163,7 +162,7 @@
 														</div>
 
 													<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Qualification : 
+															<label class="control-label col-sm-2" for="status">Qualification 
 															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
@@ -196,7 +195,8 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="join_date" 	onkeypress='return restrictAlphabets(event)'
+																<input type="text" class="form-control datepicker" id="join_date" pattern="^(?!\s*$).+"
+																	onkeypress='return restrictAlphabets(event)'
 																	name="join_date" placeholder="Joining Date" required value="${dean.joiningDate}">
 															</div>
 															<label class="control-label col-sm-3" for="planning"
@@ -207,10 +207,10 @@
 																	<c:when test="${dean.deanId==0}">
 
 																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1" checked
+																			name="is_registration" value="1" 
 																			onclick="setDate(this.value)">Yes 
-																<input type="radio" id="is_registration"
-																			name="is_registration" value="0"
+																<input type="radio" id="is_registration" checked
+																			name="is_registration" value="0" 
 																			onclick="setDate(this.value)">No 
 															
 															</c:when>
@@ -219,9 +219,9 @@
 																		<c:choose>
 																			<c:when test="${empty dean.realivingDate}">
 																				<input type="radio" id="is_registration"
-																					name="is_registration" value="1" checked
+																					name="is_registration" value="1" 
 																					onclick="setDate(this.value)">Yes  
-																<input type="radio" id="is_registration"
+																<input type="radio" id="is_registration" checked
 																					name="is_registration" value="0"
 																					onclick="setDate(this.value)">No 
 															
@@ -255,6 +255,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="acc_off_relDate" onkeypress='return restrictAlphabets(event)'
+																	pattern="^(?!\s*$).+" onkeypress='return restrictAlphabets(event)'
 																	name="acc_off_relDate" placeholder="Relieving Date" value="${dean.realivingDate}">
 															</div>
 														</div>
@@ -383,17 +384,17 @@ $(function () {
 		//alert("Value " +value)
 		if(value==1){
 		//alert(value)
-		document.getElementById("acc_off_relDate").removeAttribute("required");
-		document.getElementById("abc").style.display = "none";
+		document.getElementById("acc_off_relDate").setAttribute("required","true");
+		document.getElementById("abc").style.display = "block";
+
 
 		//alert(value)
 		}else{
 			//alert(value)
-			document.getElementById("acc_off_relDate").setAttribute("required","true");
-			document.getElementById("abc").style.display = "block";
-
+			
 			//alert(value)
-
+			document.getElementById("acc_off_relDate").removeAttribute("required");
+			document.getElementById("abc").style.display = "none";
 		}
 		
 	}
