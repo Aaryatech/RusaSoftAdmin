@@ -14,6 +14,9 @@ public class ProgramDetailSaveResponse {
 	List<ProgramOutcome> programOutcomeList;
 	List<ProgramSpeceficOutcome> programSpeceficOutcomeList;
 	
+	List<InstitueVision> institueVisionList;
+	List<InstitueMission> institueMissionList;
+	
 	public Info getInfo() {
 		return info;
 	}
@@ -50,12 +53,25 @@ public class ProgramDetailSaveResponse {
 	public void setProgramSpeceficOutcomeList(List<ProgramSpeceficOutcome> programSpeceficOutcomeList) {
 		this.programSpeceficOutcomeList = programSpeceficOutcomeList;
 	}
+	public List<InstitueVision> getInstitueVisionList() {
+		return institueVisionList;
+	}
+	public void setInstitueVisionList(List<InstitueVision> institueVisionList) {
+		this.institueVisionList = institueVisionList;
+	}
+	public List<InstitueMission> getInstitueMissionList() {
+		return institueMissionList;
+	}
+	public void setInstitueMissionList(List<InstitueMission> institueMissionList) {
+		this.institueMissionList = institueMissionList;
+	}
 	@Override
 	public String toString() {
 		return "ProgramDetailSaveResponse [info=" + info + ", programVissionList=" + programVissionList
 				+ ", programMissionList=" + programMissionList + ", programEducationObjectiveList="
 				+ programEducationObjectiveList + ", programOutcomeList=" + programOutcomeList
-				+ ", programSpeceficOutcomeList=" + programSpeceficOutcomeList + "]";
+				+ ", programSpeceficOutcomeList=" + programSpeceficOutcomeList + ", institueVisionList="
+				+ institueVisionList + ", institueMissionList=" + institueMissionList + "]";
 	}
 	 
 	

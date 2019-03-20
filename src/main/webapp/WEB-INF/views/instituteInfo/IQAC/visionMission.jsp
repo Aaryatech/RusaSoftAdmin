@@ -8,13 +8,13 @@
 <!DOCTYPE html>
 <html class=" ">
 <head>
-<c:url value="/saveProgramVission" var="saveProgramVission"></c:url>
-<c:url value="/deleteProgramVission" var="deleteProgramVission"></c:url>
-<c:url value="/editProgramVission" var="editProgramVission"></c:url>
+<c:url value="/saveInstituteVission" var="saveInstituteVission"></c:url>
+<c:url value="/deleteInstituteVission" var="deleteInstituteVission"></c:url>
+<c:url value="/editInstituteVission" var="editInstituteVission"></c:url>
 
-<c:url value="/saveProgramMission" var="saveProgramMission"></c:url>
-<c:url value="/deleteProgramMission" var="deleteProgramMission"></c:url>
-<c:url value="/editProgramMission" var="editProgramMission"></c:url>
+<c:url value="/saveInstituteMission" var="saveInstituteMission"></c:url>
+<c:url value="/deleteInstituteMission" var="deleteInstituteMission"></c:url>
+<c:url value="/editInstituteMission" var="editInstituteMission"></c:url>
 
 <c:url value="/saveProgramPeo" var="saveProgramPeo"></c:url>
 <c:url value="/deleteProgramPeo" var="deleteProgramPeo"></c:url>
@@ -136,7 +136,7 @@
 
 											<!-- 	<form action="" method="post">		 -->
 											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/#" method="post"
+												action="#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Institute Vission?');">
 
@@ -150,12 +150,20 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="inst_vision_text" name="inst_vision_text"
-															placeholder="Institute Vission" required>
+															placeholder="Institute Vision" autocomplete="off" required>
+													</div>
+
+													<div class="col-sm-4">
+														<input type="hidden" class="form-control"
+															name="instVisionId" id="instVisionId" value="0"><input
+															type="button" class="btn btn-info"
+															onclick="saveInstituteVission()" value="Add"
+															id="saveVision">
 													</div>
 												</div>
 
 												<br />
-												<div class="row" style="display: none;">
+												<!-- <div class="row" style="display: none;">
 													<label class="col-sm-2 text-left"
 														for="programVissionRemark"> Remark(If Any) </label>
 													<div class="col-sm-6">
@@ -163,14 +171,9 @@
 															id="inst_vision_remark" name="inst_vision_remark"
 															value="-" placeholder="Institute Vission Remark">
 													</div>
+ 
+												</div> -->
 
-													<div class="col-sm-4">
-
-														<input type="button" class="btn btn-info"
-															onclick="saveProgramVission()" value="Add">
-													</div>
-												</div>
-												<br>
 
 
 											</form>
@@ -201,20 +204,19 @@
 
 															</thead>
 															<tbody>
-																<c:forEach items="${programVisionList}" var="list"
+																<c:forEach items="${institueVisionList}" var="list"
 																	varStatus="count">
 																	<tr>
 
 																		<td>${count.index+1}</td>
-																		<td>${list.visionText}</td>
-																		<td>${list.visionRemark}</td>
+																		<td>${list.instVisionText}</td>
 																		<td><a href="#"
-																			onclick="editProgramVission(${list.visionId})"><span
+																			onclick="editInstituteVission(${list.instVisionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 																			<a href="#"
-																			onclick="deleteProgramVission(${list.visionId})"
+																			onclick="deleteInstituteVission(${list.instVisionId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
@@ -247,13 +249,20 @@
 
 													<input type="hidden" id="inst_mission_id"
 														name="inst_mission_id" value="0"> <label
-														class="col-sm-2 text-left" for="programMission">
+														class="col-sm-2 text-left" for="inst_mission_text">
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="inst_mission_text" name="inst_mission_text"
-															placeholder="Institute Mission " required>
+															placeholder="Institute Mission " required autocomplete="off"> <input
+															type="hidden"   id="instMissionId"
+															name="instMissionId" value="0">
+													</div>
+													<div class="col-sm-4">
+
+														<input type="button" onclick="saveInstituteMission()"
+															class="btn btn-info" value="Add" id="saveMission">
 													</div>
 												</div>
 
@@ -267,11 +276,6 @@
 															value="-" placeholder="Program Mission Remark">
 													</div>
 
-													<div class="col-sm-4">
-
-														<input type="button" onclick="saveProgramMission()"
-															class="btn btn-info" value="Add">
-													</div>
 												</div>
 											</form>
 											<!-- 		</form>			 -->
@@ -300,20 +304,19 @@
 															</thead>
 
 															<tbody>
-																<c:forEach items="${programMissionList}" var="list"
+																<c:forEach items="${institueMissionList}" var="list"
 																	varStatus="count">
 																	<tr>
 
 																		<td>${count.index+1}</td>
-																		<td>${list.missionText}</td>
-																		<td>${list.missionRemark}</td>
+																		<td>${list.instMissionText}</td>
 																		<td><a href="#"
-																			onclick="editProgramMission(${list.missionId})"><span
+																			onclick="editInstituteMission(${list.instMissionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 																			<a href="#"
-																			onclick="deleteProgramMission(${list.missionId})"
+																			onclick="deleteInstituteMission(${list.instMissionId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
@@ -372,24 +375,244 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
-		$("#example-2").dataTable(
+		function saveInstituteVission() {
+
+			var instVisionText = document.getElementById("inst_vision_text").value; 
+			var instituteVissionId = document.getElementById("instVisionId").value;
+			
+			if (instVisionText.trim().length>0) {
+				//$('#example-1 td').remove(); 
+				document.getElementById("saveVision").disabled=true;
+				
+				$("#loader1").show(); 
+				$.getJSON('${saveInstituteVission}',
+
 				{
-					responsive : true,
-					aLengthMenu : [ [ 10, 25, 50, 100, -1 ],
-							[ 10, 25, 50, 100, "All" ] ]
+					instVisionText : instVisionText, 
+					instituteVissionId : instituteVissionId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$('#table1 td').remove();
+					$("#loader1").hide();
+					document.getElementById("saveVision").disabled=false;
+					//var dataTable = $('#example-1').DataTable();
+					 
+					for(var i=0 ; i<data.institueVisionList.length ;i++){
+						
+						 
+						 var acButton = '<a href="#"><span onclick="editInstituteVission('+data.institueVisionList[i].instVisionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteInstituteVission('+data.institueVisionList[i].instVisionId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						/*  dataTable.row.add(
+								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
+								.draw(); */  
+						
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.institueVisionList[i].instVisionText)); 
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table1 tbody').append(tr); 
+					}
+					
+					document.getElementById("instVisionId").value=0; 
+					 document.getElementById("inst_vision_text").value="";
+					 
 				});
-		$("#example-3").dataTable(
+
+			} else {
+				alert("Enter Institute Vission ");
+				 document.getElementById("inst_vision_text").value="";
+			}
+
+		}
+		
+		function deleteInstituteVission(instVisionId) {
+ 
+				//$('#example-1 td').remove();
+				$("#loader1").show();
+				
+				$.getJSON('${deleteInstituteVission}',
+
 				{
-					responsive : true,
-					aLengthMenu : [ [ 10, 25, 50, 100, -1 ],
-							[ 10, 25, 50, 100, "All" ] ]
+					instVisionId : instVisionId,  
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$("#loader1").hide();
+					$('#table1 td').remove();
+					
+					//var dataTable = $('#example-1').DataTable();
+					
+					for(var i=0 ; i<data.institueVisionList.length ;i++){
+						 
+						 var acButton = '<a href="#"><span onclick="editInstituteVission('+data.institueVisionList[i].instVisionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteInstituteVission('+data.institueVisionList[i].instVisionId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						/*  dataTable.row.add(
+								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
+								.draw(); */  
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.institueVisionList[i].instVisionText)); 
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table1 tbody').append(tr); 
+					}
+					 
 				});
-		$("#example-5").dataTable(
+
+			 
+
+		}
+		
+		function editInstituteVission(instVisionId) {
+			$("#loader1").show();
+				$.getJSON('${editInstituteVission}',
+
 				{
-					responsive : true,
-					aLengthMenu : [ [ 10, 25, 50, 100, -1 ],
-							[ 10, 25, 50, 100, "All" ] ]
+					instVisionId : instVisionId, 
+					ajax : 'true'
+
+				}, function(data) {
+					$("#loader1").hide();
+					document.getElementById("instVisionId").value=data.instVisionId;
+					 document.getElementById("inst_vision_text").value=data.instVisionText; 
+					 
 				});
+
+			 
+
+		}
+		 
+	</script>
+
+	<script type="text/javascript">
+		function saveInstituteMission() {
+
+			var instMissionText = document.getElementById("inst_mission_text").value; 
+			var instMissionId = document.getElementById("instMissionId").value;
+			
+			if (instMissionText.trim().length>0) {
+				//$('#example-1 td').remove(); 
+				document.getElementById("saveMission").disabled=true;
+				
+				$("#loader2").show(); 
+				$.getJSON('${saveInstituteMission}',
+
+				{
+					instMissionText : instMissionText, 
+					instMissionId : instMissionId,
+					ajax : 'true'
+
+				}, function(data) {
+				 
+					$('#table2 td').remove();
+					$("#loader2").hide();
+					document.getElementById("saveMission").disabled=false;
+					//var dataTable = $('#example-1').DataTable();
+					 
+					for(var i=0 ; i<data.institueMissionList.length ;i++){
+						
+						 
+						 var acButton = '<a href="#"><span onclick="editInstituteMission('+data.institueMissionList[i].instMissionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+						+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+' <a href="#" onclick="deleteInstituteMission('+data.institueMissionList[i].instMissionId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
+						/*  dataTable.row.add(
+								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
+								.draw(); */  
+						
+						var tr = $('<tr></tr>');
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td ></td>').html(data.institueMissionList[i].instMissionText)); 
+					  	tr.append($('<td  ></td>').html(acButton)); 
+						$('#table2 tbody').append(tr); 
+					}
+					
+					document.getElementById("instMissionId").value=0; 
+					 document.getElementById("inst_mission_text").value="";
+					 
+				});
+
+			} else {
+				alert("Enter Institute Mission ");
+			}
+
+		}
+		
+		function deleteInstituteMission(instMissionId) {
+			 
+			//$('#example-1 td').remove();
+			$("#loader2").show();
+			
+			$.getJSON('${deleteInstituteMission}',
+
+			{
+				instMissionId : instMissionId,  
+				ajax : 'true'
+
+			}, function(data) {
+			 
+				$("#loader2").hide();
+				$('#table2 td').remove();
+				
+				//var dataTable = $('#example-1').DataTable();
+				
+				for(var i=0 ; i<data.institueMissionList.length ;i++){
+					
+					 
+					 var acButton = '<a href="#"><span onclick="editInstituteMission('+data.institueMissionList[i].instMissionId+')" class="glyphicon glyphicon-edit" title="Edit" '
+					+'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
+					+' <a href="#" onclick="deleteInstituteMission('+data.institueMissionList[i].instMissionId+')"'+
+					' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+					+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+					 
+					/*  dataTable.row.add(
+							[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
+							.draw(); */  
+					
+					var tr = $('<tr></tr>');
+					tr.append($('<td ></td>').html(i + 1));
+				  	tr.append($('<td ></td>').html(data.institueMissionList[i].instMissionText)); 
+				  	tr.append($('<td  ></td>').html(acButton)); 
+					$('#table2 tbody').append(tr); 
+				}
+				 
+			});
+
+		 
+
+	}
+		
+		function editInstituteMission(instMissionId) {
+			$("#loader2").show();
+				$.getJSON('${editInstituteMission}',
+
+				{
+					instMissionId : instMissionId, 
+					ajax : 'true'
+
+				}, function(data) {
+					$("#loader2").hide();
+					document.getElementById("instMissionId").value=data.instMissionId;
+					 document.getElementById("inst_mission_text").value=data.instMissionText; 
+					 
+				});
+
+			 
+
+		}
+		 
 	</script>
 
 	<script type="text/javascript">
