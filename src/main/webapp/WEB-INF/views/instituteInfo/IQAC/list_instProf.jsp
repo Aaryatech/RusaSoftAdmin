@@ -100,7 +100,6 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 
-
 										<div class="form-group">
 
 
@@ -110,23 +109,21 @@
 												<thead>
 													<tr>
 														<th>Sr No</th>
-														<th>Date of Establishment</th>
+														<th>IQAC Establishment Date</th>
 														<th>Name of Alternate Faculty</th>
-														<th>Phone No of Alternate Faculty</th>
+														<th>Mobile No of Alternate Faculty</th>
 														<th>FAX No of Alternate Faculty</th>
 														<th>Email of Alternate Faculty</th>
+														<th>Action</th>
 
 													</tr>
 
 												</thead>
 
 											</table>
-
-
-
-
 										</div>
 									</form>
+
 								</div>
 
 							</div>
