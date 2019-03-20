@@ -114,10 +114,6 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
-
-
-
-
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_name">
 															Establishment of IQAC Date <span class="text-danger">*</span>
@@ -140,7 +136,7 @@
 															<input type="text" class="form-control" id="page_order"
 																name="page_order"
 																placeholder="Name of alternate Faculty with IQAC"
-																value="" required>
+																onchange="return trim(this)" value="" required>
 														</div>
 													</div>
 
@@ -327,7 +323,24 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 
 

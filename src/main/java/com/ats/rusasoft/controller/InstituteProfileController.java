@@ -52,7 +52,7 @@ public class InstituteProfileController {
 	@RequestMapping(value = "/showAddInstProf", method = RequestMethod.GET)
 	public ModelAndView showAddInstProf(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_instProf");
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/list_instProf");
 		try {
 
 			model.addObject("title", "Institute Profile Information");
