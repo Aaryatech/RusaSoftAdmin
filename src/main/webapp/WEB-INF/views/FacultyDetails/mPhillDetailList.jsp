@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()" >
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -57,7 +57,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-<%-- 
+				<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
@@ -84,10 +84,13 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							
-								<a href="${pageContext.request.contextPath}/showAddMphillDetails"><button
-										type="button" class="btn btn-success">Add Mphill Details</button></a> 
-									
+								<c:if test="${addAccess==0}">
+									<a
+										href="${pageContext.request.contextPath}/showAddMphillDetails"><button
+											type="button" class="btn btn-success">Add Mphill
+											Details</button></a>
+								</c:if>
+
 							</div>
 
 						</header>
@@ -106,7 +109,7 @@
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -117,7 +120,7 @@
 
 													<div class="col-xs-12">
 
-														
+
 
 														<div class="col-xs-12"></div>
 														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
@@ -135,11 +138,66 @@
 																		<th>Sr No</th>
 																		<th>Date of Recognition</th>
 																		<th>No. of Students</th>
-																			<th>Valid up to </th>
+																		<th>Valid up to</th>
 																		<th>Use of ICT</th>
-																			<th>Action</th>	
+
 																	</tr>
 																</thead>
+
+																<tbody>
+																	<c:forEach items="${facPhdGuideList}" var="staffList"
+																		varStatus="count">
+																		<tr>
+																			<%-- <td><input type="checkbox" class="chk" name="staffIds"
+															id="staffIds${count.index+1}" value="${staffList.facultyId}" /></td> --%>
+																			<td style="text-align: center">${count.index+1}</td>
+
+																			<td style="text-align: left"><c:out
+																					value="${staffList.phdRecognitionDt}" /></td>
+
+																			<td style="text-align: center;"><c:out
+																					value="${staffList.noOfStud}" /></td>
+
+																			<td style="text-align: left"><c:out
+																					value="${staffList.phdValidDt}" /></td>
+
+																			<c:if test="${staffList.isIctUsed==1}">
+																				<td style="text-align: center;"><c:out
+																						value="YES" /></td>
+
+																			</c:if>
+																			<c:if test="${staffList.isIctUsed==0}">
+																				<td style="text-align: center;"><c:out
+																						value="NO" /></td>
+
+																			</c:if>
+
+																			<td align="center"><c:if
+																					test="${editAccess == 0}">
+																					<a
+																						href="${pageContext.request.contextPath}/showEditFacAcademic/${staffList.facultyId}"
+																						title="Edit" rel="tooltip"
+																						data-color-class="detail"
+																						data-animate=" animated fadeIn "
+																						data-toggle="tooltip" data-original-title="Edit"><span
+																						class="glyphicon glyphicon-edit"></span></a>
+																				</c:if> <%-- 			<td> <a
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
+												class="glyphicon glyphicon-list"></span></a>
+											<c:if test="${editAccess == 0}">	<a
+											href="${pageContext.request.contextPath}/editFaculity/${staffList.facultyId}" title="Edit"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
+												class="glyphicon glyphicon-edit"></span></a></c:if> | 
+												
+											<c:if test="${deleteAccess == 0}">	<a
+											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" title="Block"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-remove"></span></a></c:if>
+												</td> --%>
+																		</tr>
+																	</c:forEach>
+																</tbody>
 
 
 
@@ -148,10 +206,12 @@
 
 
 
+
+
 														</div>
 
-														
-														
+
+
 
 													</div>
 
@@ -184,8 +244,8 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-<%-- 	
+
+	<%-- 	
 	
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
@@ -314,85 +374,66 @@
 
 
 	<script>
-	function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("qualType").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("qualType").value
+			//alert("qualType::"+qualType);
 
-			document.getElementById("abc").style = "visible"
-			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
 				//document.getElementById("ex1").style = "display:none"
-					// $("#ex1").prop("disabled", true);
-			
+				// $("#ex1").prop("disabled", true);
+
 				//$('#ex1').attr('disabled', true);
-		} 
-		else{
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
+
 		}
-	
-	}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-	
 	</script>
-	
+
 	<script type="text/javascript">
-	
-	
-	
-	
-	
-	function getData() {
-	//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-		var academicYear=document.getElementById("academicYear").value
-		var qualType=document.getElementById("qualType").value
-		var qualName=document.getElementById("qualName").value
-		//alert(qualName);
-		var passClass=document.getElementById("passClass").value
-		var year=document.getElementById("year").value
-		var university=document.getElementById("university").value
-		var city=document.getElementById("city").value
-		var temp;
-		if (qualType == 7) {
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value
+			var qualType = document.getElementById("qualType").value
+			var qualName = document.getElementById("qualName").value
+			//alert(qualName);
+			var passClass = document.getElementById("passClass").value
+			var year = document.getElementById("year").value
+			var university = document.getElementById("university").value
+			var city = document.getElementById("city").value
+			var temp;
+			if (qualType == 7) {
 
-			temp=qualName;
-			//alert(temp);
-		} 
-		else{
-			temp=qualType;
+				temp = qualName;
+				//alert(temp);
+			} else {
+				temp = qualType;
+			}
+
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add(
+					[ i + 1, academicYear, temp, passClass, university, city,
+							year
+
+					]).draw();
+
+			document.getElementById("index").value = i + 1;
+
 		}
-
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-					temp,
-					passClass,
-					university,
-					city,
-					year
-					
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-	}
-
 	</script>
-	
-	
+
+
 
 </body>
 </html>

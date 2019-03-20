@@ -118,7 +118,7 @@
 													<div class="col-sm-9">
 														<input type="text" class="form-control" id="fac_name"
 															name="fac_name" placeholder="Last Name Middle First Name"
-															value="${staff.facultyName}" required>
+															value="${staff.facultyFirstName}" required>
 													</div>
 												</div>
 

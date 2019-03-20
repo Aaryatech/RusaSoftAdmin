@@ -115,15 +115,28 @@
 													<div class="col-xs-12"></div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="fQualificationId">
-															Qualification<span class="text-danger">*</span>
+														<label class="control-label col-sm-2"
+															for="fQualificationId"> Qualification<span
+															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<select id="fQualificationId" name="fQualificationId"
 																class="form-control" required>
 																<c:forEach items="${quolfList}" var="quolf">
-																<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-																
+																	<c:choose>
+																		<c:when
+																			test="${quolf.qualificationId==editFacAcad.fQualificationId}">
+																			<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																		</c:when>
+																		<c:otherwise>
+																			<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																		</c:otherwise>
+
+
+																	</c:choose>
+
 																</c:forEach>
 
 															</select>
@@ -137,28 +150,55 @@
 															Class <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<select id="fClass" name="fClass"
-																class="form-control" required>
-																<option value="Distinction">Distinction</option>
+															<select id="fClass" name="fClass" class="form-control"
+																required>
+																
+																<c:choose>
+																<c:when test="${editFacAcad.fClass eq 'Distinction'}">
+																<option selected value="Distinction">Distinction</option>
 																<option value="First">First</option>
 																<option value="Second">Second</option>
 																<option value="Pass">Pass </option>
+																</c:when>
+																<c:when test="${editFacAcad.fClass eq 'First'}">
+																<option  value="Distinction">Distinction</option>
+																<option selected value="First">First</option>
+																<option value="Second">Second</option>
+																<option value="Pass">Pass </option>
+																</c:when>
+																<c:when test="${editFacAcad.fClass eq 'Second'}">
+																<option  value="Distinction">Distinction</option>
+																<option  value="First">First</option>
+																<option  selected value="Second">Second</option>
+																<option value="Pass">Pass </option>
+																</c:when>
+																<c:when test="${editFacAcad.fClass eq 'Pass'}">
+																<option  value="Distinction">Distinction</option>
+																<option  value="First">First</option>
+																<option   value="Second">Second</option>
+																<option  selected value="Pass">Pass </option>
+																</c:when>
+																<c:otherwise>
+																<option value="Distinction">Distinction</option>
+																<option value="First">First</option>
+																<option value="Second">Second</option>
+																<option value="Pass">Pass</option>
+																</c:otherwise>
+																
+																</c:choose>
 															</select>
 														</div>
 														<div class="col-sm-2"></div>
 													</div>
-
-
-
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="fUniversity">University
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="fUniversity"
-																name="fUniversity" placeholder="Previous Experience"
-																 value="" required>
+															<input type="text" onchange="trim(this)" class="form-control" id="fUniversity" 
+																name="fUniversity" placeholder="Enter University Name"
+																value="${editFacAcad.fUniversity}" required>
 														</div>
 
 
@@ -185,26 +225,29 @@
 															of Passing <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy" id="fPassingYear"
-																name="fPassingYear" placeholder="Previous Experience"
-																onchange="calExp()" value="" required>
+															<input type="text" class="form-control datepickeryear"
+																data-min-view-mode="years" data-start-view="2"
+																data-format="yyyy" id="fPassingYear" name="fPassingYear"
+																placeholder="Select Passing Year"  autocomplete="off"
+																value="${editFacAcad.fPassingYear}" required>
 														</div>
 
 													</div>
 
 													<div class="form-group">
-														
+
 														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" id="sub1" class="btn btn-primary" value="Save" onclick="submit_f(0)">
-															<input type="submit" id="sub2" class="btn btn-primary" value="Save And Next" onclick="submit_f(1)">
+															<input type="submit" id="sub1" class="btn btn-primary"
+																value="Save" onclick="submit_f(1)"> <input
+																type="submit" id="sub2" class="btn btn-primary"
+																value="Save And Next" onclick="submit_f(0)">
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
-														
+
 														<input type="hidden" id="fac_aca_id" name="fac_aca_id"
-															value="${facPhdDetail.fAcaId}"> <input
+															value="${editFacAcad.fAcaId}"> <input
 															type="hidden" id="is_view" name="is_view" value="0">
-															<input
-															type="hidden" id="fac_id" name="fac_id" value="12">
+														<input type="hidden" id="fac_id" name="fac_id" value="${editFacAcad.facultyId}">
 													</div>
 
 												</div>
@@ -318,6 +361,8 @@ function calExp(){
     	  if(x==true){
         wasSubmitted = true;
         document.getElementById("sub1").disabled=true;
+        document.getElementById("sub2").disabled=true;
+
   	  return wasSubmitted;
     	  }
       }
@@ -327,6 +372,13 @@ function calExp(){
     function submit_f(view) {
 		document.getElementById("is_view").value = view;//create this 
 
+	}
+    
+    function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
 	}
     $(function () {
 		 
@@ -347,9 +399,9 @@ function calExp(){
 
 		});
     });
-</script> 
-    
 </script>
+
+	
 
 </body>
 </html>
