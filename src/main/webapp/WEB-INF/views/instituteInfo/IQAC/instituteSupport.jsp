@@ -84,11 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showAddInstituteSupport"><button
+										type="button" class="btn btn-success">ADD</button></a>
 							</div>
 
 						</header>
@@ -113,63 +111,41 @@
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-												<div>
 
 
-													<div class="col-xs-12">
-													
-													
-													<div class="form-group">
+												<!-- <div class="form-group">
 
-																<label class="control-label col-sm-10" for="smallheading">Institute Support Financially by Awarding 
-																Scholarship/Freeships like Schemes <b>other than Government Schemes  </b> 	: <span class="text-danger">*</span>
-																</label>
-
-
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="isSchemes"
-																		id="isSchemes" checked value="0"> No<input
-																		type="radio" name="isSchemes" id="isSchemes"
-																		value="1">
-																</div>
- </div>
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Name of Scheme</th>
-																		<th>Academic Year</th>
-																		<th >No. of Students Benefited</th>
-																		<th >Scheme/Support offered By</th>
-																	</tr>
-																
-																</thead>
+													<label class="control-label col-sm-10" for="smallheading">Institute
+														Support Financially by Awarding Scholarship/Freeships like
+														Schemes <b>other than Government Schemes </b> : <span
+														class="text-danger">*</span>
+													</label>
 
 
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														 <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> 
-
+													<div class="col-sm-2">
+														Yes <input type="radio" name="isSchemes" id="isSchemes"
+															checked value="0"> No<input type="radio"
+															name="isSchemes" id="isSchemes" value="1">
 													</div>
+												</div> -->
 
+												<table id="example-1"
+													class="table table-striped dt-responsive display">
+													<thead>
+														<tr>
+															<th width="10%">Sr No</th>
+															<th>Name of Scheme</th>
+															<th>No. of Students Benefited</th>
+															<th>Scheme/Support offered By</th>
+														</tr>
 
-													<div class="clearfix"></div>
+													</thead>
 
-												</div>
+													<tbody>
+
+													</tbody>
+												</table>
+
 
 											</div>
 										</div>
@@ -209,20 +185,19 @@
 					<h4 class="modal-title">Institute Support Details</h4>
 				</div>
 				<div class="modal-body">
-				
-				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="studBenifited">Name of Schemes
-						</label> <input type="text" class="form-control"
-							id="schemeName" name="schemeName"
-							placeholder="Name of Schemes"
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="studBenifited">Name
+							of Schemes </label> <input type="text" class="form-control"
+							id="schemeName" name="schemeName" placeholder="Name of Schemes"
 							value="${page.pageName}" required>
 					</div>
 
-				
 
 
-<div class="form-group">
+
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
@@ -232,29 +207,29 @@
 
 						</select>
 					</div>
-					
-					
-						
+
+
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="studBenifited">No. of Students Benefited
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="studBenifited">No.
+							of Students Benefited </label> <input type="text" class="form-control"
 							id="studBenifited" name="studBenifited"
-							placeholder="No. of Students Benefited"
-							value="${page.pageName}" required>
+							placeholder="No. of Students Benefited" value="${page.pageName}"
+							required>
 					</div>
-	
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="schemeSupportBy">Scheme/Support offered By
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="schemeSupportBy">Scheme/Support
+							offered By </label> <input type="text" class="form-control"
 							id="schemeSupportBy" name="schemeSupportBy"
-							placeholder="Scheme/Support offered By"
-							value="${page.pageName}" required>
+							placeholder="Scheme/Support offered By" value="${page.pageName}"
+							required>
 					</div>
-					
-				
-					
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -279,16 +254,16 @@
 			var i = parseInt(document.getElementById("index").value);
 			var schemeName = document.getElementById("schemeName").value;
 			var academicYear = document.getElementById("academicYear").value;
-			
+
 			var studBenifited = document.getElementById("studBenifited").value;
-			
+
 			var schemeSupportBy = document.getElementById("schemeSupportBy").value;
 			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,schemeName, academicYear, studBenifited, schemeSupportBy ])
-					.draw();
+					[ i + 1, schemeName, academicYear, studBenifited,
+							schemeSupportBy ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
 	</script>

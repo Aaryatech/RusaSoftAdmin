@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -85,9 +85,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<a
-									href="${pageContext.request.contextPath}/showIncubationCentreDetail"><button
+									href="${pageContext.request.contextPath}/showActivityOrganized"><button
 										type="button" class="btn btn-info">Back</button></a>
-
 							</div>
 
 						</header>
@@ -111,20 +110,25 @@
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
+
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="participant">No.
-														of Participants<span class="text-danger">*</span>
+
+													<label class="control-label col-sm-2" for="activityName">Name
+														of Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
+														<input type="text" class="form-control" id="activityName"
+															name="activityName" placeholder="Name of Activity"
 															value="${page.pageName}" required>
 													</div>
 												</div>
- 
+
+
+
 												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="fromDate">From
+													<label class="control-label col-sm-2" for="fromDate">From
 														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
@@ -137,7 +141,7 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="toDate">To
+													<label class="control-label col-sm-2" for="toDate">To
 														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
@@ -150,22 +154,42 @@
 
 
 
-												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="webLink">Link
-														on Website for Activity Report <span class="text-danger">*</span>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="activityLevel">Level
+														of Activity Yea<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="webLink"
-															name="webLink"
-															placeholder="Link on Website for Activity Report"
-															value="${page.pageName}" required>
+														<select id="activityLevel" name="activityLevel"
+															class="form-control" required>
+															<option value="State">State</option>
+															<option value="National">National</option>
+															<option value="International">International</option>
+
+														</select>
 													</div>
 												</div>
 
 
 												<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-10">
+													<label class="control-label col-sm-2" for="activityType">Type
+														of Activity Year<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="activityType" name="activityType"
+															class="form-control" required>
+															<option value="Sports">Sports</option>
+															<option value="Cultural">Cultural</option>
+
+
+														</select>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
 														<input type="submit" class="btn btn-primary"
 															onclick="submit_f(1)" value="Save"> <input
 															type="submit" class="btn btn-primary"
@@ -175,10 +199,14 @@
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
+
+
+
+												<div class="clearfix"></div>
+
+
+
 											</div>
-
-
-											<div class="clearfix"></div>
 										</div>
 									</form>
 								</div>
@@ -213,10 +241,10 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
+					<h4 class="modal-title">Sports / Cultural Activity /
+						Competition organized at Institute</h4>
 				</div>
 				<div class="modal-body">
-
 
 
 
@@ -243,50 +271,23 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-
+			var activityName = document.getElementById("activityName").value;
 			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
+
+			var totalParticipants = document
+					.getElementById("totalParticipants").value;
+			var activityLevel = document.getElementById("activityLevel").value;
 			var fromDate = document.getElementById("fromDate").value;
 			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
+			var activityType = document.getElementById("activityType").value;
 			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
+					[ i + 1, activityName, academicYear, fromDate, toDate,
+							totalParticipants, activityLevel, activityType ])
+					.draw();
 			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
 		}
 	</script>
 
@@ -303,6 +304,8 @@
 			});
 		});
 	</script>
+
+
 
 
 

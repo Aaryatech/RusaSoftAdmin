@@ -84,11 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a
+									href="${pageContext.request.contextPath}/showAddActivityOrganized"><button
+										type="submit" class="btn btn-success">Add</button> </a>
 							</div>
 
 						</header>
@@ -112,88 +110,85 @@
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
-													
-															 <div class="form-group">
-
-															<!-- <table id="example-1"
-																class="table table-striped dt-responsive display">
+												<div class="form-group">
+													<!-- 	<table class="table table-striped dt-responsive display"
+																id="example-1">
 																<thead>
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		
-																		<th>Academic Year</th>
-																		<th>Name of Activity</th>
-																		<th>From Date</th>
-																		<th >To Date</th>
-																		<th >Total Participants</th>
-																		<th >Level of Activity/Competition</th>
-																	<th >Type of Activity/Competition</th>
-																		
+																		<th width="5%">Sr No</th>
+																		<th width="10%">Academic Year</th>
+																		<th width="10%">Name of Activity</th>
+
+																		<th width="20%" style="text-align: center;"
+																			colspan="2">Duration</th>
+
+																		<th width="15%">Total Participants</th>
+																		<th width="20%">Level of Activity/Competition</th>
+																		<th width="20%">Type of Activity/Competition</th>
+
+
 																	</tr>
-																
 																</thead>
-
-
-
 																<tbody>
-
-
+																	<tr>
+																		<td width="5%"></td>
+																		<td width="10%"></td>
+																		<td width="10%"></td>
+																		<td width="10%">From Date</td>
+																		<td width="10%">To Date</td>
+																		<td width="15%"></td>
+																		<td width="20%"></td>
+																		<td width="20%"></td>
+																	</tr>
 																</tbody>
-															</table> -->
-															
-																<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th width="10%">Academic Year</th>
-												<th width="10%">Name of Activity</th>
-												
-												 <th width="20%" style="text-align: center;" colspan="2">Duration
-													</th> 
-													
-												<th width="15%">Total Participants</th>
-												<th  width="20%">Level of Activity/Competition</th>
-												<th width="20%">Type of Activity/Competition</th>
-												
-												
-											</tr>
-</thead>
-<tbody>
-											<tr>
-												<td width="5%"></td>
-												<td width="10%"></td>
-												<td width="10%"></td>
-												<td width="10%">From Date</td>
-												<td width="10%">To Date</td>
-												<td width="15%"></td>
-												<td width="20%"></td>
-												<td width="20%"></td>
-											</tr> 
-										</tbody>
-</table>
-															
-
-														</div>
-														 <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> 
-
-													</div>
+															</table>
+ -->
 
 
-													<div class="clearfix"></div>
+
+
+
+
+													<table class="table table-striped dt-responsive display"
+														id="example-1">
+														<thead>
+															<tr>
+																<th rowspan="2">Sr No</th>
+																<th rowspan="2">Name of Activity</th>
+																<th style="text-align: center;" colspan="2">Duration</th>
+																<th rowspan="2">Total Participants</th>
+
+																<th rowspan="2">Level of Activity/Competition</th>
+																<th rowspan="2">Type of Activity/Competition</th>
+
+															</tr>
+															<tr>
+
+																<th>From Date</th>
+																<th>To Date</th>
+																<th></th>
+
+															</tr>
+														</thead>
+														<tbody>
+															<!-- <tr>
+																		<td width="5%"></td>
+																		<td width="20%"></td>
+																		<td width="25%"></td>
+																		<td width="15%">From Date</td>
+																		<td width="15%">To Date</td>
+																		<td width="20%"></td>
+
+																	</tr> -->
+														</tbody>
+													</table>
 
 												</div>
 
+
 											</div>
+
+
 										</div>
 									</form>
 								</div>
@@ -228,70 +223,58 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Sports / Cultural Activity / Competition organized at Institute
-
-</h4>
+					<h4 class="modal-title">Sports / Cultural Activity /
+						Competition organized at Institute</h4>
 				</div>
 				<div class="modal-body">
-				
-				<div class="form-group">
+
+					<div class="form-group">
 						<label class="control-label col-sm-3" for="academicYear">Academic
 							Year</label> <select id="academicYear" name="academicYear"
 							class="form-control" required>
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
-								<option value="2015-2016">2015-2016</option>
+							<option value="2015-2016">2015-2016</option>
 
 						</select>
 					</div>
-					
-				
-				<div class="form-group">
 
-						<label class="control-label col-sm-3" for="activityName">Name of Activity
-						</label> <input type="text" class="form-control"
-							id="activityName" name="activityName"
-							placeholder="Name of Activity"
-							value="${page.pageName}" required>
-					</div>
 
-				
-	
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="fromDate">From Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="fromDate" name="fromDate"
-							
-							value="${page.pageName}" required>
-							
-							
-							<label class="control-label col-sm-3" for="toDate">To Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="toDate" name="toDate"
-							
+						<label class="control-label col-sm-3" for="activityName">Name
+							of Activity </label> <input type="text" class="form-control"
+							id="activityName" name="activityName"
+							placeholder="Name of Activity" value="${page.pageName}" required>
+					</div>
+
+
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="fromDate">From
+							Date </label> <input type="date" class="form-control" id="fromDate"
+							name="fromDate" value="${page.pageName}" required> <label
+							class="control-label col-sm-3" for="toDate">To Date </label> <input
+							type="date" class="form-control" id="toDate" name="toDate"
 							value="${page.pageName}" required>
 					</div>
-<div class="form-group">
+					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="totalParticipants">Total Participants
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="totalParticipants">Total
+							Participants </label> <input type="text" class="form-control"
 							id="totalParticipants" name="totalParticipants"
-							placeholder="Total Participants"
-							value="${page.pageName}" required>
+							placeholder="Total Participants" value="${page.pageName}"
+							required>
 					</div>
 
-				
 
-					
-				<div class="form-group">
-						<label class="control-label col-sm-3" for="activityLevel">Level of Activity
-							Year</label> <select id="activityLevel" name="activityLevel"
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="activityLevel">Level
+							of Activity Year</label> <select id="activityLevel" name="activityLevel"
 							class="form-control" required>
 							<option value="State">State</option>
 							<option value="National">National</option>
@@ -299,19 +282,19 @@
 
 						</select>
 					</div>
-					
-							
-				<div class="form-group">
-						<label class="control-label col-sm-3" for="activityType">Type of Activity
-							Year</label> <select id="activityType" name="activityType"
+
+
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="activityType">Type
+							of Activity Year</label> <select id="activityType" name="activityType"
 							class="form-control" required>
 							<option value="Sports">Sports</option>
 							<option value="Cultural">Cultural</option>
-							
+
 
 						</select>
 					</div>
-					
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -336,8 +319,9 @@
 			var i = parseInt(document.getElementById("index").value);
 			var activityName = document.getElementById("activityName").value;
 			var academicYear = document.getElementById("academicYear").value;
-			
-			var totalParticipants = document.getElementById("totalParticipants").value;
+
+			var totalParticipants = document
+					.getElementById("totalParticipants").value;
 			var activityLevel = document.getElementById("activityLevel").value;
 			var fromDate = document.getElementById("fromDate").value;
 			var toDate = document.getElementById("toDate").value;
@@ -346,7 +330,8 @@
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1,activityName, academicYear, fromDate, toDate,totalParticipants ,activityLevel,activityType])
+					[ i + 1, activityName, academicYear, fromDate, toDate,
+							totalParticipants, activityLevel, activityType ])
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}

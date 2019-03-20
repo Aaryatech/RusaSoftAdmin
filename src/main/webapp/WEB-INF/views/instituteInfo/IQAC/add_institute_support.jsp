@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -85,9 +85,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<a
-									href="${pageContext.request.contextPath}/showIncubationCentreDetail"><button
+									href="${pageContext.request.contextPath}/showInstituteSupport"><button
 										type="button" class="btn btn-info">Back</button></a>
-
 							</div>
 
 						</header>
@@ -111,74 +110,97 @@
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-												<div class="form-group">
-													<label class="control-label col-sm-3" for="participant">No.
-														of Participants<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
-															value="${page.pageName}" required>
-													</div>
-												</div>
- 
-												<div class="form-group">
 
-													<label class="control-label col-sm-3" for="fromDate">From
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="fromDate" name="fromDate" value="${page.pageName}"
-															required>
-
-													</div>
-												</div>
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="toDate">To
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="toDate" name="toDate" value="${page.pageName}"
-															required>
-													</div>
-												</div>
+												<div>
 
 
+													<div class="col-xs-12">
 
 
-												<div class="form-group">
+														<div class="form-group">
 
-													<label class="control-label col-sm-3" for="webLink">Link
-														on Website for Activity Report <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="webLink"
-															name="webLink"
-															placeholder="Link on Website for Activity Report"
-															value="${page.pageName}" required>
-													</div>
-												</div>
+															<label class="control-label col-sm-8" for="smallheading">Institute
+																Support Financially by Awarding Scholarship/Freeships
+																like Schemes <b>other than Government Schemes </b> : <span
+																class="text-danger">*</span>
+															</label>
 
 
-												<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
+															<div class="col-sm-2">
+																Yes <input type="radio" name="isSchemes" id="isSchemes"
+																	onclick="setGovernmentValue(this.value)" checked
+																	value="0"> No<input type="radio"
+																	name="isSchemes" id="isSchemes" value="1"
+																	onclick="setGovernmentValue(this.value)">
+															</div>
+														</div>
+
+														<div id="abc">
+
+															<div class="form-group">
+
+																<label class="control-label col-sm-3"
+																	for="studBenifited">Name of Schemes <span
+																	class="text-danger">*</span>
+																</label>
+																<div class="col-sm-6">
+																	<input type="text" class="form-control" id="schemeName"
+																		name="schemeName" placeholder="Name of Schemes"
+																		value="${page.pageName}" required>
+																</div>
+															</div>
+
+
+
+
+															<div class="form-group">
+
+																<label class="control-label col-sm-3"
+																	for="studBenifited">No. of Students Benefited <span
+																	class="text-danger">*</span>
+																</label>
+																<div class="col-sm-6">
+																	<input type="text" class="form-control"
+																		id="studBenifited" name="studBenifited"
+																		placeholder="No. of Students Benefited"
+																		value="${page.pageName}" required>
+																</div>
+															</div>
+
+															<div class="form-group">
+
+																<label class="control-label col-sm-3"
+																	for="schemeSupportBy">Scheme/Support offered By
+																	<span class="text-danger">*</span>
+																</label>
+																<div class="col-sm-6">
+																	<input type="text" class="form-control"
+																		id="schemeSupportBy" name="schemeSupportBy"
+																		placeholder="Scheme/Support offered By"
+																		value="${page.pageName}" required>
+																</div>
+															</div>
+
+
+															<div class="form-group">
+																<div class="col-sm-offset-3 col-sm-10">
+																	<input type="submit" class="btn btn-primary"
+																		onclick="submit_f(1)" value="Save"> <input
+																		type="submit" class="btn btn-primary"
+																		onclick="submit_f(0)"
+																		value="Save &
 																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
+																	<button type="reset" class="btn btn-default">Reset</button>
+																</div>
+															</div>
+														</div>
 													</div>
+
+
+													<div class="clearfix"></div>
 												</div>
+
 											</div>
-
-
-											<div class="clearfix"></div>
 										</div>
 									</form>
 								</div>
@@ -213,11 +235,9 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
+					<h4 class="modal-title">Institute Support Details</h4>
 				</div>
 				<div class="modal-body">
-
-
 
 
 
@@ -243,66 +263,39 @@
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
-
+			var schemeName = document.getElementById("schemeName").value;
 			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
+
+			var studBenifited = document.getElementById("studBenifited").value;
+
+			var schemeSupportBy = document.getElementById("schemeSupportBy").value;
 			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
+					[ i + 1, schemeName, academicYear, studBenifited,
+							schemeSupportBy ]).draw();
 			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
 		}
 	</script>
 
 
 	<script type="text/javascript">
-		$(function() {
+		function setGovernmentValue(value) {
 
-			$('.datepicker').datepicker({
-				autoclose : true,
-				format : "dd-mm-yyyy",
-				changeYear : true,
-				changeMonth : true
+			if (value == 1) {
 
-			});
-		});
+				document.getElementById("abc").style.display = "none";
+
+			} else {
+
+				document.getElementById("abc").style.display = "block";
+
+			}
+
+		}
 	</script>
+
 
 
 

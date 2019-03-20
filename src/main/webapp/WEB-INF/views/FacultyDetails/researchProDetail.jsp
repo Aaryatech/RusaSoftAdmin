@@ -406,13 +406,12 @@ function submit_f(view){
  
 			var fromDate = document.getElementById("fromDate").value;
 			var toDate = document.getElementById("toDate").value;
-		  if(toDate!=null)
-			  {
+	 
 			if (  fromDate > toDate  ) {
 				alert("From Date Should be Small");
 				document.getElementById("toDate").value="";
  
-			} }
+			} 
 
 			 
 

@@ -84,6 +84,24 @@ public class InstituteProfileController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/showAddInstituteSupport", method = RequestMethod.GET)
+	public ModelAndView showAddInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_institute_support");
+		try {
+
+			model.addObject("title", "Institute Financial Support");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 	@RequestMapping(value = "/showActivityOrganized", method = RequestMethod.GET)
 	public ModelAndView showActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
@@ -92,6 +110,24 @@ public class InstituteProfileController {
 		try {
 
 			model.addObject("title", "Activities Organized");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddActivityOrganized", method = RequestMethod.GET)
+	public ModelAndView showAddActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
+		try {
+
+			model.addObject("title", "Add Activities Organized");
 
 		} catch (Exception e) {
 
