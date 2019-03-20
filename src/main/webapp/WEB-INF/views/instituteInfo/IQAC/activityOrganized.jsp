@@ -124,15 +124,10 @@
 															<th rowspan="2">Total Participants</th>
 															<th rowspan="2">Action</th>
 
-
-
 														</tr>
 														<tr>
-
 															<th>From Date</th>
 															<th>To Date</th>
-															<th></th>
-
 														</tr>
 													</thead>
 													<tbody>

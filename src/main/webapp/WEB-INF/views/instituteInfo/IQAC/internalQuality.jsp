@@ -101,64 +101,48 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-													<div class="col-xs-12">
-														<div class="form-group">
-															<table class="table table-striped dt-responsive display"
-																id="example-1">
-																<thead>
-
-																	<tr>
-																		<th rowspan="2">Sr No</th>
-																		<th rowspan="2">Name of Quality Initiative</th>
-																		<th style="text-align: center;" colspan="2">Date
-																			of Conduction</th>
-																		<th rowspan="2">No. of Participants</th>
-
-																	</tr>
-																	<tr>
-
-																		<th>From Date</th>
-																		<th>To Date</th>
-																		<th></th>
-
-																	</tr>
-
-																</thead>
-																<tbody>
-
-																</tbody>
-															</table>
 
 
-														</div>
-														<!-- <div class="form-group">
+										<div class="form-group">
+											<table class="table table-striped dt-responsive display"
+												id="example-1">
+												<thead>
+
+													<tr>
+														<th rowspan="2">Sr No</th>
+														<th rowspan="2">Name of Quality Initiative</th>
+														<th style="text-align: center;" colspan="2">Date of
+															Conduction</th>
+														<th rowspan="2">No. of Participants</th>
+														<th rowspan="2">Action</th>
+
+													</tr>
+													<tr>
+
+														<th>From Date</th>
+														<th>To Date</th>
+														 
+
+													</tr>
+
+												</thead>
+												<tbody>
+
+												</tbody>
+											</table>
+
+
+										</div>
+										<!-- <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Submit</button>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div> -->
 
-													</div>
 
+										<div class="clearfix"></div>
 
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
-										</div>
 									</form>
 								</div>
 

@@ -102,67 +102,66 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
+										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> ${title}
 											</a></li>
 
-										</ul>
+										</ul> --%>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-3" for="initiativeName">Name
-														of Quality Initiative<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<select id="initiativeName" name="initiativeName"
-															onchange="showForm()" class="form-control" required>
-
-															<option value="AQAR prepared or submitted">AQAR
-																prepared or submitted</option>
-															<option value="Academic – Administrative Audit Conducted">Academic
-																– Administrative Audit Conducted</option>
-
-															<option value="AQAR prepared or submitted">AQAR
-																prepared or submitted</option>
+										<!-- <div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
 
 
-															<option value="Institute Participated in NIRF">Institute
-																Participated in NIRF</option>
-															<option value="ISO Certification obtained">ISO
-																Certification obtained</option>
 
-															<option value="NBA Certification received">NBA
-																Certification received</option>
-															<option value="7">Any other quality based
-																certification</option>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="initiativeName">Name
+												of Quality Initiative<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="initiativeName" name="initiativeName"
+													onchange="showForm()" class="form-control" required>
 
-														</select>
-													</div>
-												</div>
+													<option value="AQAR prepared or submitted">AQAR
+														prepared or submitted</option>
+													<option value="Academic – Administrative Audit Conducted">Academic
+														– Administrative Audit Conducted</option>
 
-												<div class="form-group" id="abc">
+													<option value="AQAR prepared or submitted">AQAR
+														prepared or submitted</option>
 
-													<label class="control-label col-sm-3" for="page_name">Any
-														other quality based certification <span
-														class="text-danger">*</span>
-													</label>
-													<div class="col-sm-3">
-														<input type="text" class="form-control" id="otherQual"
-															required name="otherQual"
-															placeholder="Any
+
+
+													<option value="Institute Participated in NIRF">Institute
+														Participated in NIRF</option>
+													<option value="ISO Certification obtained">ISO
+														Certification obtained</option>
+
+													<option value="NBA Certification received">NBA
+														Certification received</option>
+													<option value="7">Any other quality based
+														certification</option>
+
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group" id="abc">
+
+											<label class="control-label col-sm-2" for="page_name">Any
+												other quality based certification <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="otherQual"
+													required name="otherQual"
+													placeholder="Any
 														other quality based certification"
-															value="${page.pageName}">
-													</div>
-												</div>
+													value="${page.pageName}">
+											</div>
+										</div>
 
-												<div class="form-group">
+										<%-- 	<div class="form-group">
 
 													<label class="control-label col-sm-3" for="conductionDate">Date
 														of Conduction <span class="text-danger">*</span>
@@ -172,58 +171,56 @@
 															id="conductionDate" name="conductionDate"
 															value="${page.pageName}" required>
 													</div>
-												</div>
+												</div> --%>
 
-												<div class="form-group">
+										<div class="form-group">
 
-													<label class="control-label col-sm-3" for="fromDate">From
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="fromDate" name="fromDate" value="${page.pageName}"
-															required>
+											<label class="control-label col-sm-2" for="fromDate">From
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													id="fromDate" name="fromDate" value="${page.pageName}"
+													required>
 
-													</div>
-												</div>
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="toDate">To
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="toDate" name="toDate" value="${page.pageName}"
-															required>
-													</div>
-												</div>
-
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-3" for="participant">No.
-														of Participants<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
-																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
 											</div>
+										</div>
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="toDate">To
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													id="toDate" name="toDate" value="${page.pageName}" required>
+											</div>
+										</div>
+
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="participant">No.
+												of Participants<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="participant"
+													name="participant" placeholder="No. of Participants"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save &
+																		Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+											<!-- 	</div>
+											</div> -->
 
 
 											<div class="clearfix"></div>
