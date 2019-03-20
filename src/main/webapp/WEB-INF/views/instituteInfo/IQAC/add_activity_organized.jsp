@@ -157,7 +157,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="activityLevel">Level
-														of Activity Yea<span class="text-danger">*</span>
+														of Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<select id="activityLevel" name="activityLevel"
@@ -185,6 +185,24 @@
 														</select>
 													</div>
 												</div>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2"
+														for="inst_activity_participation">No. of
+														Participants <span class="text-danger">*</span>
+													</label>
+
+													<div class="col-sm-6">
+														<input type="text" class="form-control"
+															id="inst_activity_participation"
+															name="inst_activity_participation"
+															placeholder="Name of Activity" value="${page.pageName}"
+															required>
+
+													</div>
+												</div>
+
 
 
 

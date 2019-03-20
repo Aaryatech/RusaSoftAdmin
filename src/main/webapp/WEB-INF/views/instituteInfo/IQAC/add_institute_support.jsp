@@ -144,10 +144,11 @@
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="schemeName"
-																		autocomplete="off" onchange="return trim(this)"
-																		name="schemeName" placeholder="Name of Schemes"
-																		value="${page.pageName}" required>
+																	<input type="text" class="form-control"
+																		id="inst_scheme_name" autocomplete="off"
+																		onchange="return trim(this)" name="inst_scheme_name"
+																		placeholder="Name of Schemes" value="${page.pageName}"
+																		required>
 																</div>
 															</div>
 
@@ -157,13 +158,13 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-3"
-																	for="studBenifited">No. of Students Benefited <span
-																	class="text-danger">*</span>
+																	for="inst_students_benefited">No. of Students
+																	Benefited <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control"
-																		autocomplete="off" id="studBenifited"
-																		name="studBenifited"
+																		autocomplete="off" id="inst_students_benefited"
+																		name="inst_students_benefited"
 																		placeholder="No. of Students Benefited"
 																		value="${page.pageName}" required>
 																</div>
@@ -172,13 +173,13 @@
 															<div class="form-group">
 
 																<label class="control-label col-sm-3"
-																	for="schemeSupportBy">Scheme/Support offered By
-																	<span class="text-danger">*</span>
+																	for="inst_schme_offeredby">Scheme/Support
+																	offered By <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control"
-																		autocomplete="off" id="schemeSupportBy"
-																		name="schemeSupportBy"
+																		autocomplete="off" id="inst_schme_offeredby"
+																		name="inst_schme_offeredby"
 																		placeholder="Scheme/Support offered By"
 																		value="${page.pageName}" required>
 																</div>
