@@ -311,7 +311,7 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="branch"
 																	value="${editProgramActivity.branch}" name="branch"
-																	placeholder="Branch" required pattern="^(?!\s*$).+">
+																	placeholder="Branch" required pattern="^(?!\s*$).+" onchange="return trim(this)">
 															</div>
 														</div>
 
@@ -380,13 +380,7 @@
 
 															</div>
 														</div>
-
-
-
-
-
-
-
+ 
 													</div>
 
 												</div>
@@ -486,6 +480,14 @@
 				document.getElementById("abc").style = "display:none"
 			}
 
+		}
+		
+		function trim(el) {
+		    el.value = el.value.
+		    replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		    replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		    replace(/\n +/, "\n"); // Removes spaces after newlines
+		    return;
 		}
 	</script>
 	<script type="text/javascript">
