@@ -120,7 +120,8 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="page_name" name="page_name"
+																id="iqac_est_date" name="iqac_est_date"
+																autocomplete="off"
 																placeholder="Date of Establishment of IQAC "
 																value="${page.pageName}">
 														</div>
@@ -133,32 +134,36 @@
 															of Alternate Faculty with IQAC <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="page_order"
-																name="page_order"
+															<input type="text" class="form-control"
+																id="iqac_alt_name" name="iqac_alt_name"
+																autocomplete="off"
 																placeholder="Name of alternate Faculty with IQAC"
 																onchange="return trim(this)" value="" required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">Contact
-															No <span class="text-danger">*</span>
+														<label class="control-label col-sm-2"
+															for="iqac_alt_mobile">Contact No <span
+															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="page_order"
-																name="page_order"
+															<input type="text" class="form-control"
+																id="iqac_alt_mobile" name="iqac_alt_mobile"
+																autocomplete="off"
 																placeholder="Contact No of Alternate Faculty Associated"
 																value="" required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">Phone
+														<label class="control-label col-sm-2" for="iqac_alt_phone">Phone
 															No.<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="page_order"
-																name="page_order"
+															<input type="text" class="form-control"
+																id="iqac_alt_phone" name="iqac_alt_phone"
+																autocomplete="off"
 																placeholder="Phone No.of Alternate Faculty Associated"
 																value="" required>
 														</div>
@@ -171,29 +176,33 @@
 														<div class="col-sm-6">
 															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																maxlength="10" class="form-control" id="page_order"
-																name="page_order"
+																name="page_order" autocomplete="off"
 																placeholder="Fax No.of Alternate Faculty Associated"
 																required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">
+														<label class="control-label col-sm-2" for="iqac_alt_fax">
 															Registered Email <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="page_order"
-																name="page_order" placeholder="abc@xyz.com" required>
+															<input type="text" class="form-control" id="iqac_alt_fax"
+																autocomplete="off" name="iqac_alt_fax"
+																placeholder="abc@xyz.com" required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">Alternate
-															Email :<span class="text-danger">*</span>
+														<label class="control-label col-sm-2"
+															for="iqac_alt_email1">Alternate Email :<span
+															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control" id="page_order"
-																name="page_order" placeholder="abc@xyz.com " required>
+															<input type="email" class="form-control"
+																id="iqac_alt_email1" autocomplete="off"
+																name="iqac_alt_email1" placeholder="abc@xyz.com "
+																required>
 														</div>
 													</div>
 

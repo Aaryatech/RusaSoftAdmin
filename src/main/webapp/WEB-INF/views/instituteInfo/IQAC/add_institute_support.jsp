@@ -145,9 +145,9 @@
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="schemeName"
-																		onchange="return trim(this)" name="schemeName"
-																		placeholder="Name of Schemes" value="${page.pageName}"
-																		required>
+																		autocomplete="off" onchange="return trim(this)"
+																		name="schemeName" placeholder="Name of Schemes"
+																		value="${page.pageName}" required>
 																</div>
 															</div>
 
@@ -162,7 +162,8 @@
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control"
-																		id="studBenifited" name="studBenifited"
+																		autocomplete="off" id="studBenifited"
+																		name="studBenifited"
 																		placeholder="No. of Students Benefited"
 																		value="${page.pageName}" required>
 																</div>
@@ -176,7 +177,8 @@
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control"
-																		id="schemeSupportBy" name="schemeSupportBy"
+																		autocomplete="off" id="schemeSupportBy"
+																		name="schemeSupportBy"
 																		placeholder="Scheme/Support offered By"
 																		value="${page.pageName}" required>
 																</div>
