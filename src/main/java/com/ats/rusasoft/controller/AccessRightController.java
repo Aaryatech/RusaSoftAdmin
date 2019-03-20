@@ -91,6 +91,19 @@ public class AccessRightController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/sampleForm", method = RequestMethod.GET)
+	public ModelAndView sampleForm(HttpServletRequest request, HttpServletResponse response) {
+ 
+		ModelAndView model = new ModelAndView("sampleForm");
+		try {
+			 
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return model;
+	}
+	
 	@RequestMapping(value = "/showCreateRole", method = RequestMethod.GET)
 	public ModelAndView showAccessRight(HttpServletRequest request, HttpServletResponse response) {
 
