@@ -93,6 +93,7 @@
 												<th>Qualification</th>
 												<th>Department</th>
 												<th>Joining Date</th>
+												<th>Relieving Date</th>
 												<th>Contact No</th>
 												<th>Email</th>
 												<th width="10%">Action</th>
@@ -121,6 +122,9 @@
 														value="${staffList.joiningDate}" /></td>
 														
 											<td style="text-align: left"><c:out
+														value="${staffList.realivingDate}" /></td>
+														
+											<td style="text-align: left"><c:out
 														value="${staffList.contactNo}" /></td>
 														
 											<td style="text-align: left"><c:out
@@ -137,7 +141,8 @@
 												class="glyphicon glyphicon-edit"></span></a></c:if> | 
 												
 											<c:if test="${deleteAccess == 0}">	<a
-											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" title="Block"
+											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" 
+											onClick="return confirm('Are you sure want to delete this record');" title="Block"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-remove"></span></a></c:if>
 												</td>

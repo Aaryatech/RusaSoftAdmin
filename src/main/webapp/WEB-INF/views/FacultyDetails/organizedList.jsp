@@ -150,7 +150,7 @@
 															name="activityIds" id="activityIds${count.index+1}"
 															value="${facAct.activityId}" /></td>
 														<td>${count.index+1}</td>
-														<td>${facAct.activityType}</td>
+														<td>${facAct.typeName}</td>
 														<td>${facAct.activityName}</td>
 														<td>${facAct.activityLevel}</td>
 														<td>${facAct.activityDate}</td>

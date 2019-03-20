@@ -306,7 +306,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="dateOfJoin"
+																<input type="text" class="form-control datepicker" id="dateOfJoin" onkeypress='return restrictAlphabets(event)'
 																	name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
 															</div>
 														<!-- </div>
@@ -372,7 +372,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="relDate" value="${staff.realivingDate}"
-																	name="acc_off_relDate" placeholder="Relieving Date">
+																	onkeypress='return restrictAlphabets(event)' name="acc_off_relDate" placeholder="Relieving Date">
 															</div>
 															</div>
 															</div>
@@ -421,7 +421,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" onchange="checkUnique(this.value,1)"
-																	maxlength="10" class="form-control" id="contact_no"
+																	maxlength="10" class="form-control" id="contact_no" onkeypress='return restrictAlphabets(event)'
 																	name="contact_no" placeholder="Mobile Number" value="${staff.contactNo}" required>
 																<p class="desc text-danger fontsize11">Note: OTP
 																	will be sent on this mobile number for verification</p>
@@ -434,7 +434,8 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)"
-																	name="email" placeholder="abc@xyz.com" value="${staff.email}" required>
+																	name="email" placeholder="abc@xyz.com" value="${staff.email}" 
+																 required>
 																<p class="desc font-italic fontsize11">Note:
 																		Verification mail will be sent on this Email id</p>
 															</div>
@@ -457,7 +458,7 @@
 														
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
@@ -494,6 +495,20 @@
 
 	<!-- END CONTENT -->
 	
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 	
 	<script type="text/javascript">
   var wasSubmitted = false;    
@@ -511,7 +526,8 @@
       return false;
     }    
 </script>
-	
+
+
 	<script type="text/javascript">
 	
 	$(function () {
@@ -524,30 +540,6 @@
 
 		});
     });
-	
-$("#dateOfJoin").on("keypress keyup blur",function (event) {
-    //this.value = this.value.replace(/[^0-9\.]/g,'');
-$(this).val($(this).val().replace(/[^0-9\.]/g,''));
-    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-        event.preventDefault();
-    }
-});
-
-$("#relDate").on("keypress keyup blur",function (event) {
-    //this.value = this.value.replace(/[^0-9\.]/g,'');
-$(this).val($(this).val().replace(/[^0-9\.]/g,''));
-    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-        event.preventDefault();
-    }
-});
-
-$("#contact_no").on("keypress keyup blur",function (event) {
-    //this.value = this.value.replace(/[^0-9\.]/g,'');
-$(this).val($(this).val().replace(/[^0-9\.]/g,''));
-    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-        event.preventDefault();
-    }
-});
 </script>
 	
 	<script>

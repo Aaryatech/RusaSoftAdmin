@@ -202,7 +202,7 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-3 col-sm-9">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
@@ -219,10 +219,12 @@
 
 											</div>
 											</form>
+											
 											</div>
 
 										</div>
-									
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -557,6 +559,24 @@
       return false;
     }    
 </script>
+
+<script>
+	$("#contactNo").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#dateOfJoin").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	</script>
 
 </body>
 </html>

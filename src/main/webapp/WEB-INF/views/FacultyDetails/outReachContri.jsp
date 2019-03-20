@@ -97,10 +97,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertOutReachContri"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -114,10 +114,7 @@
 
 												<div>
 
-
-
-
-
+									<input type="hidden" value="${facContri.conId}" id="fac_contriId" name="fac_contriId">
 
 
 													<div class="form-group">
@@ -126,11 +123,11 @@
 															Level <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<select id="salutation" name="salutation"
+															<select id="level" name="level"
 																class="form-control" required>
-																<option value="0">BOS</option>
-																<option value="1">Faculty</option>
-																<option value="2">Academic Council</option>
+																<option value="BOS">BOS</option>
+																<option value="Faculty">Faculty</option>
+																<option value="Academic Council">Academic Council</option>
 															</select>
 														</div>
 
@@ -142,8 +139,8 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="Name " value="" required>
+															<input type="text" class="form-control" id="con_name"
+																name="con_name" placeholder="Name " value="${facContri.conName}" required>
 														</div>
 
 
@@ -156,8 +153,8 @@
 														</label>
 
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="University" value="" required>
+															<input type="text" class="form-control" id="university"
+																name="university" placeholder="University" value="${facContri.conUniversity}" required>
 														</div>
 
 													</div>
@@ -169,8 +166,8 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="dob"
-																name="Grant" placeholder="From" value="" required>
+															<input type="text" class="form-control datepicker" id="from_date"
+																name="from_date" placeholder="From" value="${facContri.conFrom}" required>
 														</div>
 													</div>
 
@@ -180,16 +177,11 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="to" name="to"
-																placeholder="To" value="" required>
+															<input type="text" class="form-control datepicker" id="to_date" name="to_date"
+																placeholder="To" value="${facContri.conTo}" required>
 														</div>
 
-
-
 													</div>
-
-
-
 
 													<div class="form-group">
 
@@ -197,13 +189,11 @@
 														<label class="control-label col-sm-2" for="smallheading">Examination
 															Paper Setting <span class="text-danger">*</span>
 														</label>
-
-
 														<div class="col-sm-2">
 															Yes <input type="radio" name="examSetting"
-																id="examSetting" checked value="0"> No<input
-																type="radio" name="examSetting" id="examSetting"
-																value="1">
+																id="examSetting" checked value="1">
+															No<input type="radio" name="examSetting"
+															 id="examSetting" value="0">
 														</div>
 													</div>
 
@@ -212,13 +202,10 @@
 														<label class="control-label col-sm-2" for="smallheading">Answer
 															Sheet Evaluation <span class="text-danger">*</span>
 														</label>
-
-
 														<div class="col-sm-2">
-															Yes <input type="radio" name="ansEvaluation"
-																id="ansEvaluation" checked value="0"> No<input
-																type="radio" name="ansEvaluation" id="ansEvaluation"
-																value="1">
+														
+															Yes <input type="radio" name="ansEvaluation" id="ansEvaluation" checked value="1"> 
+															No<input type="radio" name="ansEvaluation" id="ansEvaluation" value="0">
 														</div>
 													</div>
 
@@ -227,25 +214,22 @@
 														<label class="control-label col-sm-2" for="smallheading">Answer
 															Sheet Moderation <span class="text-danger">*</span>
 														</label>
-
-
 														<div class="col-sm-2">
-															Yes <input type="radio" name="ansmod" id="ansmod" checked
-																value="0"> No<input type="radio" name="ansmod"
-																id="ansmod" value="1">
+															Yes <input type="radio" name="ansmod" id="ansmod" checked value="1">
+															
+															No<input type="radio" name="ansmod"	id="ansmod" value="0">
 														</div>
 
 													</div>
 
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" class="btn btn-primary"
-																onclick="submit_f(1)" value="Save"> <input
-																type="submit" class="btn btn-primary"
-																onclick="submit_f(0)"
-																value="Save &
+															<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-															<button type="reset" class="btn btn-default">Reset</button>
+																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
+																		type="button" class="btn btn-primary">S</button></a> --%>
+																<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
 												</div>
@@ -255,6 +239,8 @@
 											</div>
 										</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -276,7 +262,34 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+    
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+
+		});
+    });
+    
+</script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@ public class StaffList {
 	private int facultyId;
 	private String facultyName;
 	private String joiningDate;
+	private String realivingDate;
 	private String contactNo;
 	private String email;
 	private int currentDesignationId ;
@@ -48,6 +49,13 @@ public class StaffList {
 	public void setJoiningDate(String joiningDate) {
 		this.joiningDate = joiningDate;
 	}
+	
+	public String getRealivingDate() {
+		return realivingDate;
+	}
+	public void setRealivingDate(String realivingDate) {
+		this.realivingDate = realivingDate;
+	}
 	public String getContactNo() {
 		return contactNo;
 	}
@@ -69,10 +77,9 @@ public class StaffList {
 	@Override
 	public String toString() {
 		return "StaffList [facultyId=" + facultyId + ", facultyName=" + facultyName + ", joiningDate=" + joiningDate
-				+ ", contactNo=" + contactNo + ", email=" + email + ", currentDesignationId=" + currentDesignationId
-				+ ", qualificationName=" + qualificationName + ", designationName=" + designationName + ", deptName="
-				+ deptName + "]";
+				+ ", realivingDate=" + realivingDate + ", contactNo=" + contactNo + ", email=" + email
+				+ ", currentDesignationId=" + currentDesignationId + ", qualificationName=" + qualificationName
+				+ ", designationName=" + designationName + ", deptName=" + deptName + "]";
 	}
-
-	
+		
 }

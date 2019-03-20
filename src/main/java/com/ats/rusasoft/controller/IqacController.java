@@ -461,9 +461,7 @@ public class IqacController {
 
 	}
 
-	/********************************************
-	 * Staff/Faculty
-	 **********************************************/
+	/**********************************************Staff/Faculty**********************************************/
 
 	@RequestMapping(value = "/showRegisterStaff", method = RequestMethod.GET)
 	public ModelAndView showRegisterStaff(HttpServletRequest request, HttpServletResponse response) {
@@ -529,6 +527,11 @@ public class IqacController {
 	public String addFaculty(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("master/addFaculty");
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String curDateTime = dateFormat.format(cal.getTime());
+		
 
 		HttpSession session = request.getSession();
 
@@ -571,10 +574,10 @@ public class IqacController {
 		staff.setHighestQualification(highestQualification);
 		staff.setHightestQualificationYear(yrofHighestQualification);
 		staff.setCurrentDesignationId(designation);
-		staff.setJoiningDate(DateConvertor.convertToYMD(joinDate));
+		staff.setJoiningDate(joinDate);
 		staff.setIsWorking(isReg);
 		if (isReg == 0) {
-			staff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
+			staff.setRealivingDate((request.getParameter("acc_off_relDate")));
 
 		} else {
 			staff.setRealivingDate(null);
@@ -586,11 +589,11 @@ public class IqacController {
 		staff.setDelStatus(1);
 		staff.setIsActive(1);
 		staff.setMakerUserId(0);
-		staff.setMakerEnterDatetime("2019-03-10");
+		staff.setMakerEnterDatetime(curDateTime);
 		staff.setEditUserId(0);
-		staff.setLastUpdatedDatetime("2019-03-10");
+		staff.setLastUpdatedDatetime(curDateTime);
 		staff.setCheckerUserId(0);
-		staff.setCheckerDatetime("2019-03-10");
+		staff.setCheckerDatetime(curDateTime);
 		staff.setExtraint1(4);
 		staff.setExtravarchar1("NA");
 

@@ -96,10 +96,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertPhdGuide"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -117,7 +117,7 @@
 													<div class="col-xs-12">
 
 														<div class="col-sm-12"></div>
-
+														<input type="hidden" id="phdGiudeId" name="phdGiudeId" value="${phd.phdId}">
 														<div class="form-group">
 
 															<label class="control-label col-sm-2" for="smallheading">Ph.D.
@@ -127,8 +127,8 @@
 
 															<div class="col-sm-4">
 																Yes <input type="radio" name="phdGuide" id="phdGuide"
-																	checked value="0"> No<input type="radio"
-																	name="phdGuide" id="phdGuide" value="1">
+																	checked value="1"> No<input type="radio"
+																	name="phdGuide" id="phdGuide" value="0">
 															</div>
 														</div>
 
@@ -140,20 +140,21 @@
 
 															<div class="col-sm-4">
 																Yes <input type="radio" name="coGuide" id="coGuide"
-																	checked value="0"> No<input type="radio"
-																	name="coGuide" id="coGuide" value="1">
+																	checked value="1" onclick="checkCoGuide(this.value)">
+																	
+																 No<input type="radio" onclick="checkCoGuide(this.value)"
+																	name="coGuide" id="coGuide" value="0">
 															</div>
 														</div>
 
-														<div class="form-group">
+														<div class="form-group" id="cogid">
 
-															<label class="control-label col-sm-2" for="smallheading">Name
+															<label class="control-label col-sm-2"   for="smallheading">Name
 																of Co-Guide: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="dob"
-																	name="Grant" placeholder="Name of Co_Guide" value=""
-																	required>
+																<input type="text" class="form-control" id="co_guide_name"
+																	name="co_guide_name" placeholder="Name of Co_Guide" value="${phd.coGuideName}">
 															</div>
 
 
@@ -167,9 +168,9 @@
 																of Ph.D. Scholar: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="dob"
-																	name="Grant" placeholder="Name of Ph.D Scholar"
-																	value="" required>
+																<input type="text" class="form-control" id="phd_scholar"
+																	name="phd_scholar" placeholder="Name of Ph.D Scholar"
+																	value="${phd.phdScholarName}" required>
 															</div>
 														</div>
 
@@ -179,8 +180,8 @@
 																of Registration: <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="dob"
-																	name="Grant" placeholder="Year" value="" required>
+																<input type="text" class="form-control datepicker" id="phd_year_reg"
+																	name="phd_year_reg" placeholder="dd/mm/yyyy" value="${phd.phdRegYear}" required>
 															</div>
 
 
@@ -193,8 +194,8 @@
 																Area of Research : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<textarea id="off_add" name="off_add"
-																	class="form-control" style="width: 100%;" required></textarea>
+																<textarea id="phd_topic" name="phd_topic"
+																	class="form-control" style="width: 100%;" required>${phd.phdTopic}</textarea>
 															</div>
 														</div>
 
@@ -225,16 +226,15 @@
 															</div>
 														</div>
 
-														<div class="form-group">
+														<div class="form-group" id="abc">
 
-
-															<label class="control-label col-sm-2" id="abc"
+															<label class="control-label col-sm-2" 
 																for="smallheading">Year of Awarded Ph.D: <span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="yearAwarded"
-																	name="yearAwarded" placeholder="Year" value="" required>
+																<input type="text" class="form-control datepicker" id="phd_year_awarded"
+																	name="phd_year_awarded" placeholder="dd/mm/yyyy" value="${phd.phdAwardedYear}" >
 															</div>
 															<!-- <label class="control-label col-sm-2" for="smallheading">Valid
 																	up : <span class="text-danger">*</span>
@@ -263,7 +263,11 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+															<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
+																		type="button" class="btn btn-primary">S</button></a> --%>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -278,6 +282,8 @@
 											</div>
 										</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -292,6 +298,34 @@
 		</section>
 		<!-- END CONTENT -->
 
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+    
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+
+		});
+    });
+    
+</script>
 		<script type="text/javascript">
 			function check(qualType) {
 				//document.getElementById("abc").style = "display:none"
@@ -299,20 +333,49 @@
 				//alert("qualType::"+qualType);
 
 				if (qualType == 1) {
-
+					
 					document.getElementById("abc").style = "visible"
-					document.getElementById("yearAwarded").style = "visible"
+					document.getElementById("phd_year_awarded").style = "visible"
+					document.getElementById("phd_year_awarded").setAttribute("required","true");
+
+					
 
 				} else if (qualType == 0) {
 					document.getElementById("abc").style = "display:none"
-					document.getElementById("yearAwarded").style = "display:none"
+					document.getElementById("phd_year_awarded").style = "display:none"
+					document.getElementById("phd_year_awarded").removeAttribute("required");
 				}
 
 			}
+			
+			function checkCoGuide(guide) {
+				//document.getElementById("abc").style = "display:none"
+				//var qualType=document.getElementById("cat").value
+				//alert("qualType::"+qualType);
+
+				if (guide == 1) {
+
+					document.getElementById("cogid").style = "visible"
+					document.getElementById("co_guide_name").style = "visible"
+					document.getElementById("co_guide_name").setAttribute("required","true");
+
+				} else if (guide == 0) {
+					document.getElementById("cogid").style = "display:none"
+					document.getElementById("co_guide_name").style = "display:none"
+					document.getElementById("co_guide_name").removeAttribute("required");
+				}
+
+			}
+			
 			function hideText() {
 				//alert("hii");
 				document.getElementById("abc").style = "visible"
-				document.getElementById("yearAwarded").style = "visible"
+				document.getElementById("phd_year_awarded").style = "visible"
+				document.getElementById("phd_year_awarded").setAttribute("required","true");
+				
+				document.getElementById("cogid").style = "visible"
+				document.getElementById("co_guide_name").style = "visible"
+				document.getElementById("co_guide_name").setAttribute("required","true");
 
 			}
 		</script>

@@ -121,15 +121,11 @@
 														<select id="activity_type" name="activity_type"
 															class="form-control" required>
 															
-															
-    														<option value="STTP">STTP</option>
-															<option value="Seminar">Seminar</option>
-															<option value="Workshop">Workshop</option>
-															<option value="Conference">Conference</option>
-															<option value="FDP">FDP</option>
-															<option value="Refresher Course">Refresher Course</option>
-															
-															
+															<c:forEach items="${facultyOutreachTypeList}" var="outtype">
+																	
+																			<option value="${outtype.typeId}">${outtype.typeName}</option>
+
+																	</c:forEach>
 														</select>
 													</div>
 												</div>
@@ -256,6 +252,8 @@
 											</div>
 										</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -312,5 +310,39 @@
     });
     
 </script>
+
+<script>
+	$("#activity_date").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#activity_part").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#amt_sanc").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	
+	$("#amt_utilise").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+ $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+	</script>
 </body>
 </html>

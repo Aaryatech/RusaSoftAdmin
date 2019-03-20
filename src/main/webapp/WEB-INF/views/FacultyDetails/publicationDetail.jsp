@@ -98,7 +98,7 @@
 										action="${pageContext.request.contextPath}/insertFacultyConf"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -116,9 +116,9 @@
 													<div class="col-xs-12">
 
 
-															<h5 class="title pull-left">
+															<!-- <h5 class="title pull-left">
 																<strong>Publication/Presentation Details</strong>
-															</h5>
+															</h5> -->
 
 															<div class="col-xs-12"></div>
 															
@@ -164,8 +164,8 @@
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="date" class="form-control" id="conf_date"
-																		name="conf_date" placeholder="DOB" value="${facConf.confDate}" required>
+																	<input type="text" class="form-control datepicker" id="conf_date" onkeypress='return restrictAlphabets(event)'
+																		name="conf_date" placeholder="dd/mm/yyyy" value="${facConf.confDate}" required>
 																</div>
 															</div>
 
@@ -188,7 +188,7 @@
 																	From  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_fund"
+																	<input type="text" class="form-control" id="conf_fund" 
 																		name="conf_fund" placeholder="Funding from" value="${facConf.confFundFrom}"
 																		required>
 																</div>
@@ -200,7 +200,7 @@
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_amt"
+																	<input type="text" class="form-control" id="conf_amt" onkeypress='return restrictAlphabets(event)'
 																		name="conf_amt" placeholder="Amount" value="${facConf.confFundAmt}" required>
 																</div>
 
@@ -212,7 +212,11 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
+																		type="button" class="btn btn-primary">S</button></a> --%>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -227,6 +231,9 @@
 											</div>
 										</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
+									
 								</div>
 
 							</div>
@@ -248,7 +255,48 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+    
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
 
+		});
+    });
+    
+</script>
+
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 </body>
 </html>

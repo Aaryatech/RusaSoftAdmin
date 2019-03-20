@@ -143,7 +143,8 @@
 															<div class="col-sm-10">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" 
 																	maxlength="10" class="form-control" id="contact_no" onchange="checkUnique(this.value,1)"
-																	name="contact_no" placeholder="Mobile No" required value="${dean.contactNo}">
+																	name="contact_no" placeholder="Mobile No" required value="${dean.contactNo}"
+																	onkeypress='return restrictAlphabets(event)'> 
 																	<p class="desc text-danger fontsize11">Note: OTP
 																	will be sent on this mobile number for verification</p>
 															</div>
@@ -195,7 +196,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="join_date"
+																<input type="text" class="form-control datepicker" id="join_date" 	onkeypress='return restrictAlphabets(event)'
 																	name="join_date" placeholder="Joining Date" required value="${dean.joiningDate}">
 															</div>
 															<label class="control-label col-sm-3" for="planning"
@@ -253,7 +254,7 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="acc_off_relDate"
+																<input type="text" class="form-control datepicker" id="acc_off_relDate" onkeypress='return restrictAlphabets(event)'
 																	name="acc_off_relDate" placeholder="Relieving Date" value="${dean.realivingDate}">
 															</div>
 														</div>
@@ -313,6 +314,21 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 	<script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){
