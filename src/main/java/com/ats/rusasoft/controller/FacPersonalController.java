@@ -16,18 +16,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.faculty.model.FacultyAcademic;
 import com.ats.rusasoft.faculty.model.FacultyPersonalDetail;
 import com.ats.rusasoft.faculty.model.FacultyPhdDetails;
+import com.ats.rusasoft.faculty.model.GetFacAcademic;
 import com.ats.rusasoft.faculty.model.GetFacPerDetail;
-import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
+import com.ats.rusasoft.faculty.model.GetFacPhdGuideDetail;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.Info;
@@ -71,21 +74,55 @@ public class FacPersonalController {
 		try {
 
 			System.out.println("hii...");
-			model = new ModelAndView("FacultyDetails/personalDetailList");
-
-			model.addObject("title", "Personal Details Form");
 			HttpSession session = request.getSession();
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			map.add("instId", userObj.getGetData().getUserInstituteId());
+			Info viewAccess = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "1", "0", "0",
+					"0", newModuleList);
 
-			GetFacPerDetail[] facPerDetArr = rest.postForObject(Constants.url + "getFacPerDetailList", map,
-					GetFacPerDetail[].class);
-			List<GetFacPerDetail> facPerDetList = new ArrayList<>(Arrays.asList(facPerDetArr));
+			if (viewAccess.isError() == false) {
+				model = new ModelAndView("FacultyDetails/personalDetailList");
 
-			model.addObject("facPerDetList", facPerDetList);
+				Info addAccess = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "0",
+						"1", "0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "0",
+						"0", "1", newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false) {
+					System.err.println("Edit acce ==0");
+					model.addObject("editAccess", 0);
+
+				}
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+				model.addObject("title", "Personal Details Form");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				GetFacPerDetail[] facPerDetArr = rest.postForObject(Constants.url + "getFacPerDetailList", map,
+						GetFacPerDetail[].class);
+				List<GetFacPerDetail> facPerDetList = new ArrayList<>(Arrays.asList(facPerDetArr));
+
+				model.addObject("facPerDetList", facPerDetList);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
@@ -249,20 +286,57 @@ public class FacPersonalController {
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("FacultyDetails/mPhillDetailList");
+			HttpSession session = request.getSession();
 
-			model.addObject("title", "M.phill/Ph.D.  Details Form");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "1", "0", "0", "0",
+					newModuleList);
+
+			if (viewAccess.isError() == false) {
+
+				model = new ModelAndView("FacultyDetails/mPhillDetailList");
+
+				model.addObject("title", "M.phill/Ph.D.  Details Form");
+
+				Info addAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "0", "0", "1",
+						"0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "0", "0", "0",
+						"1", newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+				if (editAccess.isError() == false) 
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				GetFacPhdGuideDetail[] facPhdGuideArray = rest.postForObject(Constants.url + "getFacPhdGuideDetailList",
+						map, GetFacPhdGuideDetail[].class);
+				List<GetFacPhdGuideDetail> facPhdGuideList = new ArrayList<>(Arrays.asList(facPhdGuideArray));
+				System.err.println("facPhdGuideList " + facPhdGuideList.toString());
+
+				model.addObject("facPhdGuideList", facPhdGuideList);
+
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
+			System.err.println("exception In facPhdGuideList at Master Contr" + e.getMessage());
 			e.printStackTrace();
-
 		}
-
 		return model;
-
 	}
 
 	@RequestMapping(value = "/showAddMphillDetails", method = RequestMethod.GET)
@@ -278,7 +352,7 @@ public class FacPersonalController {
 
 			HttpSession session = request.getSession();
 
-			model.addObject("title", "Personal Details Form");
+			// model.addObject("title", "Personal Details Form");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -395,14 +469,14 @@ public class FacPersonalController {
 	@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.GET)
 	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = null;http://localhost:8895/rusasoft/showAddAcademicDetails
+		ModelAndView model = null;
+		http: // localhost:8895/rusasoft/showAddAcademicDetails
 		try {
 
 			model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
 			model.addObject("title", "Academic Details Form");
-			
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("type", 1);
 			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
@@ -411,7 +485,6 @@ public class FacPersonalController {
 			System.err.println("quolfList " + quolfList.toString());
 
 			model.addObject("quolfList", quolfList);
-
 
 		} catch (Exception e) {
 
@@ -431,10 +504,61 @@ public class FacPersonalController {
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("FacultyDetails/academicDetails");
+			// model = new ModelAndView("FacultyDetails/academicDetails");
 
-			model.addObject("title", "Academic Details ");
-			
+			// model.addObject("title", "Academic Details ");
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showAcademicDetails", "showAcademicDetails", "1", "0", "0",
+					"0", newModuleList);
+
+			if (viewAccess.isError() == false) {
+
+				model = new ModelAndView("FacultyDetails/academicDetails");
+
+				model.addObject("title", "Academic Details ");
+
+				Info addAccess = AccessControll.checkAccess("showAcademicDetails", "showAcademicDetails", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showAcademicDetails", "showAcademicDetails", "0", "0",
+						"1", "0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showAcademicDetails", "showAcademicDetails", "0", "0",
+						"0", "1", newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false) {
+					System.err.println("Edit acce ==0");
+					model.addObject("editAccess", 0);
+
+				}
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				GetFacAcademic[] facAcaArr = rest.postForObject(Constants.url + "getFacAcademicList", map,
+						GetFacAcademic[].class);
+				List<GetFacAcademic> facAcadList = new ArrayList<>(Arrays.asList(facAcaArr));
+				System.err.println("facAcadList " + facAcadList.toString());
+
+				model.addObject("facAcadList", facAcadList);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+
+			}
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
@@ -492,10 +616,10 @@ public class FacPersonalController {
 				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 				String curDate = dateFormatStr.format(new Date());
-				
+
 				int exInt = 0;
 				String exVar = "Na";
-				
+
 				facAcademic.setDelStatus(1);
 
 				facAcademic.setExInt1(exInt);
@@ -532,6 +656,63 @@ public class FacPersonalController {
 		}
 
 		return redirect;// "redirect:/showDeptList";
+
+	}
+
+	// editFacAcademic
+
+	@RequestMapping(value = "/showEditFacAcademic/{fAcaId}", method = RequestMethod.GET)
+	public ModelAndView showEditInstitute(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int fAcaId) {
+		ModelAndView model = null;
+
+		try {
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info editAccess = AccessControll.checkAccess("showEditFacAcademic", "showAcademicDetails", "0", "0", "1",
+					"0", newModuleList);
+			editAccess.setError(false); // remove this.
+			if (editAccess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+
+				// model = new ModelAndView("FacultyDetails/academicDetails");
+				model = new ModelAndView("FacultyDetails/addAcademicDetails");
+
+				model.addObject("title", "Edit Academic Details");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("fAcaId", fAcaId);
+				// getInstitute
+				FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademic", map,
+						FacultyAcademic.class);
+				try {
+					// editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
+				} catch (Exception e) {
+					System.err.println("Exce in show Edit showEditFacAcademic /showEditFacAcademic");
+				}
+				model.addObject("editFacAcad", editFacAcad);
+				model.addObject("fAcaId", fAcaId);
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+
+				model.addObject("quolfList", quolfList);
+
+			}
+		} catch (Exception e) {
+			System.err.println("Exce in editInstitute/{instId}  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
 
 	}
 

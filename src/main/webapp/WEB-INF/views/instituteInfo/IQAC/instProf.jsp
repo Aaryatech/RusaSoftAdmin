@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAddInstProf"><button
+								<a href="${pageContext.request.contextPath}/showInstituteList"><button
 										type="button" class="btn btn-info">Back</button></a>
 								<!-- <a
 									class="box_toggle fa fa-chevron-down"></a> -->
@@ -97,10 +97,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertIqacBasicInfo"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+											onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -114,16 +114,19 @@
 											<div class="tab-pane fade in active" id="home">
 
 												<div>
+
+
+
+
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">
-															Establishment of IQAC Date <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="page_name">Date
+															of Establishment of IQAC <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="iqac_est_date" name="iqac_est_date"
-																autocomplete="off"
+																id="estb_date" name="estb_date" placeholder="dd-MM-YYYY"
 																placeholder="Date of Establishment of IQAC "
-																value="${page.pageName}">
+																value="${date}">
 														</div>
 													</div>
 
@@ -131,41 +134,36 @@
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">Name
-															of Alternate Faculty with IQAC <span class="text-danger">*</span>
+															of alternate faculty with IQAC <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control"
-																id="iqac_alt_name" name="iqac_alt_name"
-																autocomplete="off"
-																placeholder="Name of alternate Faculty with IQAC"
-																onchange="return trim(this)" value="" required>
+															<input type="text" class="form-control" id="alt_faculty_name"
+																name="alt_faculty_name"
+																placeholder="Name of alternate facility with IQAC" pattern="^(?!\s*$).+"
+																value="${instRes.iqacAltName}" required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2"
-															for="iqac_alt_mobile">Contact No <span
+														<label class="control-label col-sm-2" for="page_order">Contact
+															No of Alternate Faculty Associated <span
 															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control"
-																id="iqac_alt_mobile" name="iqac_alt_mobile"
-																autocomplete="off"
-																placeholder="Contact No of Alternate Faculty Associated"
-																value="" required>
+															<input type="text" class="form-control" id="alt_fac_contact" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+																name="alt_fac_contact" placeholder="Contact No"value="${instRes.iqacAltMobile}" 
+																required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="iqac_alt_phone">Phone
+														<label class="control-label col-sm-2" for="page_order">Phone
 															No.<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control"
-																id="iqac_alt_phone" name="iqac_alt_phone"
-																autocomplete="off"
-																placeholder="Phone No.of Alternate Faculty Associated"
-																value="" required>
+															<input type="text" class="form-control" id="phone_no" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+																name="phone_no" placeholder="Phone No." value="${instRes.iqacAltPhone}" 
+																required>
 														</div>
 													</div>
 
@@ -174,49 +172,51 @@
 															No.<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																maxlength="10" class="form-control" id="page_order"
-																name="page_order" autocomplete="off"
-																placeholder="Fax No.of Alternate Faculty Associated"
-																required>
+															<input type="text" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+																maxlength="10" class="form-control" id="fax_no" value="${instRes.iqacAltFax}" 
+																name="fax_no" placeholder="Fax No." required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="iqac_alt_fax">
+														<label class="control-label col-sm-2" for="page_order">
 															Registered Email <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="iqac_alt_fax"
-																autocomplete="off" name="iqac_alt_fax"
-																placeholder="abc@xyz.com" required>
+															<input type="email" class="form-control" id="registered_email" value="${instRes.iqacAltEmail1}" 
+																name="registered_email" placeholder="abc@xyz.com" required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2"
-															for="iqac_alt_email1">Alternate Email :<span
-															class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="page_order">Alternate
+															Email :<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control"
-																id="iqac_alt_email1" autocomplete="off"
-																name="iqac_alt_email1" placeholder="abc@xyz.com "
-																required>
+															<input type="email" class="form-control" id="alt_email" value="${instRes.iqacAltEmail2}" 
+																name="alt_email" placeholder="abc@xyz.com " required>
 														</div>
 													</div>
 
+                                              
 
+	<c:choose>
+													<c:when test="${instRes.iqacInfoId!=0}">
+														<input type="hidden" id="iqac_info_id" name="iqac_info_id"
+															value="${instRes.iqacInfoId}">
+													</c:when>
+													<c:otherwise>
+														<input type="hidden" id="iqac_info_id" name="iqac_info_id" value="0" >
+													</c:otherwise>
+
+												</c:choose>
 
 
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-9">
 															<input type="submit" id="sub1" class="btn btn-primary"
-																onclick="submit_f(1)" value="Save"> <input
-																type="submit" id="sub2" class="btn btn-primary"
-																onclick="submit_f(0)"
-																value="Save &
-																		Next">
+																 value="Save & Next"> 
+																
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
@@ -248,77 +248,7 @@
 
 	<!-- END CONTENT -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Academic Details</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="page_name">Qualification</label>
-						<select id="qualType" name="qualType" class="form-control"
-							onchange="showForm()" required>
-							<option value="Diploma">Diploma</option>
-							<option value="Bachelors">Bachelors</option>
-							<option value="Masters">Masters</option>
-							<option value="Doctorates">Doctorates</option>
-							<option value="Post Doctorates">Post Doctorates</option>
-							<option value="M.Phill/Ph.D. Guide">M.Phill/Ph.D. Guide</option>
-
-							<option value="7">Any Other</option>
-
-
-
-						</select>
-					</div>
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="page_name">Other
-							Qualification </label>
-						<!-- <div class="col-sm-3"> -->
-						<input type="text" class="form-control" id="qualName"
-							name="qualName" placeholder="" value="${page.pageName}">
-						<!-- </div> -->
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-1" for="page_name">Class
-						</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" id="className"
-								name="className" placeholder="" value="${page.pageName}"
-								required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="page_name">Year
-							of Passing </label>
-						<div class="col-sm-3">
-							<input type="date" class="form-control" id="year" name="year"
-								value="" required>
-						</div>
-
-					</div>
-
-					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
+	
 
 	<script type="text/javascript">
 		$(function() {
@@ -332,25 +262,36 @@
 			});
 		});
 	</script>
-	<script type="text/javascript">
-		$(function() {
-			$('#submitForm').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
 
-						return true;
-					});
-		});
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
-		function trim(el) {
-			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-			replace(/\n +/, "\n"); // Removes spaces after newlines
-			return;
-		}
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+var wasSubmitted = false;    
+function checkBeforeSubmit(){
+  if(!wasSubmitted) {
+	  var x=confirm("Do you really want to submit the form?");
+	  if(x==true){
+    wasSubmitted = true;
+	  document.getElementById("sub1").disabled=true;
+	//  document.getElementById("sub2").disabled=true;
+
+    return wasSubmitted;
+	  }
+  }
+  return false;
+}    
 	</script>
-
 
 
 

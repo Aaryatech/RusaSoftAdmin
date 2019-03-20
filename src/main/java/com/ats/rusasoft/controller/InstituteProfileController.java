@@ -31,24 +31,7 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showInstProf", method = RequestMethod.GET)
-	public ModelAndView showInstProf(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instProf");
-		try {
-
-			model.addObject("title", "Institute Profile Information");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	@RequestMapping(value = "/showAddInstProf", method = RequestMethod.GET)
 	public ModelAndView showAddInstProf(HttpServletRequest request, HttpServletResponse response) {
 
