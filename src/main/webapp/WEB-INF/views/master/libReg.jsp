@@ -138,8 +138,8 @@
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" 
-																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+																	 class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
 																	 name="lib_con_num" placeholder="Mobile No" onchange="checkUnique(this.value,1)" required>
 															</div>
 														</div>
@@ -289,6 +289,9 @@
     	//alert(date1);
     	/* date1 = new Date(date1);
     	date2 = new Date(date2); */
+    	
+    	alert(date1);
+    	alert(date2);
     	if(date1 > date2){
     		alert("invalid");
     		
@@ -325,6 +328,8 @@ function chkDate(){
 	
 	date1 = new Date(date1);
 	date2 = new Date(date2);
+	
+	
 	if(date1 > date2){
 		alert("invalid");
 		
