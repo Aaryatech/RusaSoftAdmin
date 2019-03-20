@@ -49,6 +49,24 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddInstProf", method = RequestMethod.GET)
+	public ModelAndView showAddInstProf(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_instProf");
+		try {
+
+			model.addObject("title", "Institute Profile Information");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
 	public ModelAndView showVisionMission(HttpServletRequest request, HttpServletResponse response) {
 
@@ -84,7 +102,7 @@ public class InstituteProfileController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/showAddInstituteSupport", method = RequestMethod.GET)
 	public ModelAndView showAddInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
 

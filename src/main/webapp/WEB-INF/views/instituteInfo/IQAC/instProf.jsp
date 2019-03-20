@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showInstituteList"><button
+								<a href="${pageContext.request.contextPath}/showAddInstProf"><button
 										type="button" class="btn btn-info">Back</button></a>
 								<!-- <a
 									class="box_toggle fa fa-chevron-down"></a> -->
@@ -119,8 +119,8 @@
 
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">Date
-															of Establishment of IQAC <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="page_name">
+															Establishment of IQAC Date <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
@@ -134,25 +134,25 @@
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">Name
-															of alternate facility with IQAC <span class="text-danger">*</span>
+															of Alternate Faculty with IQAC <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="page_order"
 																name="page_order"
-																placeholder="Name of alternate facility with IQAC"
+																placeholder="Name of alternate Faculty with IQAC"
 																value="" required>
 														</div>
 													</div>
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">Contact
-															No of Alternate Faculty Associated <span
-															class="text-danger">*</span>
+															No <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="page_order"
-																name="page_order" placeholder="Contact No" value=""
-																required>
+																name="page_order"
+																placeholder="Contact No of Alternate Faculty Associated"
+																value="" required>
 														</div>
 													</div>
 
@@ -162,8 +162,9 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="page_order"
-																name="page_order" placeholder="Phone No." value=""
-																required>
+																name="page_order"
+																placeholder="Phone No.of Alternate Faculty Associated"
+																value="" required>
 														</div>
 													</div>
 
@@ -174,7 +175,9 @@
 														<div class="col-sm-6">
 															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																maxlength="10" class="form-control" id="page_order"
-																name="page_order" placeholder="Fax No." required>
+																name="page_order"
+																placeholder="Fax No.of Alternate Faculty Associated"
+																required>
 														</div>
 													</div>
 
