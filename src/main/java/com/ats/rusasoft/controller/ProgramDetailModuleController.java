@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.GetProgram;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Info;
@@ -130,7 +131,7 @@ public class ProgramDetailModuleController {
 
 			model = new ModelAndView("ProgramDetails/poPSO");
 
-			model.addObject("title", "Program PO PSO");
+			model.addObject("title", " PO/PSO Mapping List");
 			/*
 			 * HttpSession session = request.getSession(); int instituteId
 			 * =(int)session.getAttribute("instituteId");
@@ -183,7 +184,7 @@ public class ProgramDetailModuleController {
 
 			model = new ModelAndView("ProgramDetails/mapPSO");
 
-			model.addObject("title", "Map PO PSO");
+			model.addObject("title", "PO/PSO Mapping List");
 			
 			 map = new LinkedMultiValueMap<>();
 				
@@ -214,7 +215,7 @@ public class ProgramDetailModuleController {
 				
 				
 				String psoIds=poDetail.getPsoMapId();
-				System.out.println("psoIdsarray before ::::"+psoIds);
+				System.out.println("poDetail detail::::"+poDetail.toString());
 				//String[] psoIdsarray = psoIds.split(",",4);
 				
 				// String[] values = psoIds.split(",");
@@ -449,7 +450,7 @@ public class ProgramDetailModuleController {
 			stud.setType(request.getParameter("type"));
 			stud.setNoStudentBenifited(Integer.parseInt(request.getParameter("studBenifit")));
 			stud.setSupportAgencyName(request.getParameter("supportAgency"));
-			stud.setImplementationYear(request.getParameter("yearofIntro"));
+			stud.setImplementationYear(DateConvertor.convertToYMD(request.getParameter("yearofIntro")));
 			stud.setDelStatus(1);
 			stud.setIsActive(1);
 			stud.setAddDate(curDateTime);
@@ -463,10 +464,22 @@ public class ProgramDetailModuleController {
 			StudentSupprtScheme studScheme = rest.postForObject(Constants.url+"/saveStudentSupprtScheme", stud, StudentSupprtScheme.class);
 			
 		}catch(Exception e) {
-			
+			System.err.println("Exce in save lib  " + e.getMessage());
+			e.printStackTrace();
 		}
 		
-		return "redirect:/showAddStudSupp";
+		
+		
+		String a=null;
+		int isView = Integer.parseInt(request.getParameter("is_view"));
+		if (isView == 1)
+			a = "redirect:/showStudSupp";
+
+		else
+			a = "redirect:/showAddStudSupp";
+		
+		
+		return a;
 		
 	}
 
@@ -477,7 +490,7 @@ public class ProgramDetailModuleController {
 		try {
 
 			List<StudentSupprtScheme> studSchmList = rest.getForObject(Constants.url+"/getAllStudentSchemes", List.class);
-			System.out.println("Student List:"+studSchmList);
+			System.out.println("Student sch List:"+studSchmList.toString());
 			
 			model = new ModelAndView("ProgramDetails/StudSuppSch");
 
@@ -510,8 +523,11 @@ public class ProgramDetailModuleController {
 			StudentSupprtScheme studSchm = rest.postForObject(Constants.url+"/getStudentSchemesById", map, StudentSupprtScheme.class);
 			System.out.println("Student:"+studSchm);
 			
+			
+	
+			
 			model = new ModelAndView("ProgramDetails/addStudSuppSch");
-
+			model.addObject("ydate",DateConvertor.convertToDMY(studSchm.getImplementationYear()));
 			model.addObject("title", "Edit Student Support Scheme");
 			model.addObject("studId", studSchm.getSprtSchmId());
 			model.addObject("stud", studSchm);
@@ -529,28 +545,94 @@ public class ProgramDetailModuleController {
 	}
 	
 	
+	/*
+	 * @RequestMapping(value = "/deleteStudSchm/{stdSchmId}", method =
+	 * RequestMethod.GET) public String deleteStudSchm(HttpServletRequest request,
+	 * HttpServletResponse response,
+	 * 
+	 * @PathVariable("stdSchmId") int stdSchmId) {
+	 * 
+	 * 
+	 * try {System.out.println("id:"+stdSchmId);
+	 * 
+	 * map = new LinkedMultiValueMap<>();
+	 * 
+	 * map.add("id", stdSchmId); StudentSupprtScheme studSchm =
+	 * rest.postForObject(Constants.url+"/deleteStudentSchemesById", map,
+	 * StudentSupprtScheme.class); System.out.println("Student:"+studSchm);
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showStaffList at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return "redirect:/showStudSupp";
+	 * 
+	 * }
+	 */
+	
+	
 	@RequestMapping(value = "/deleteStudSchm/{stdSchmId}", method = RequestMethod.GET)
-	public String deleteStudSchm(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable("stdSchmId") int stdSchmId) {
+	public String deleteStudSchm(HttpServletRequest request, HttpServletResponse response, @PathVariable int stdSchmId) {
 
+		HttpSession session = request.getSession();
+		String a = null;
+		/*
+		 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+		 * session.getAttribute("newModuleList");
+		 * 
+		 * Info view = AccessControll.checkAccess("deleteStudSchm/{stdSchmId}",
+		 * "showStudSupp", "0", "0", "0", "1", newModuleList); try {
+		 */
+			/*if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}*/
+
+			/*else {*/
 		
-		try {System.out.println("id:"+stdSchmId);
-			
-			map = new LinkedMultiValueMap<>();
-			
-			map.add("id", stdSchmId);
-			StudentSupprtScheme studSchm = rest.postForObject(Constants.url+"/deleteStudentSchemesById", map, StudentSupprtScheme.class);
-			System.out.println("Student:"+studSchm);
+		try {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (stdSchmId == 0) {
 
+					System.err.println("Multiple records delete ");
+					String[] studentSchmIds = request.getParameterValues("studentSchmIds");
+					System.out.println("id are" + studentSchmIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < studentSchmIds.length; i++) {
+						sb = sb.append(studentSchmIds[i] + ",");
+
+					}
+					String studIdList = sb.toString();
+					studIdList = studIdList.substring(0, studIdList.length() - 1);
+					System.out.println("stud id list"+studIdList);
+
+					map.add("id", studIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("id", stdSchmId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteStudentSchemesRecordById", map, Info.class);
+				a ="redirect:/showStudSupp";
+			/* } */
 		} catch (Exception e) {
 
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
 
 			e.printStackTrace();
 
 		}
 
-		return "redirect:/showStudSupp";
+		return a;
 
 	}
 

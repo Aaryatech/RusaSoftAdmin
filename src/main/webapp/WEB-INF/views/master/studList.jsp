@@ -92,14 +92,14 @@
 											<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th>
-												<th width="5%">Sr No</th>
-												<th> Name</th>
-												<th>Department</th>
-											     <th>Id Number</th>
-										        <th>Academic Year</th>
-												<th>Contact No</th>
-												<th>Email</th>
-												<th width="10%">Action</th>
+												<th style="text-align: center; width:10%">Sr No</th>
+												<th style="text-align: center; "> Name</th>
+												<th style="text-align: center; ">Department</th>
+											     <th style="text-align: center; ">Id Number</th>
+										        <th style="text-align: center; ">Academic Year</th>
+												<th style="text-align: center; ">Contact No</th>
+												<th style="text-align: center; ">Email</th>
+												<th style="text-align: center; width:10%">Action</th>
 											</tr>
 										</thead>
 
@@ -116,20 +116,20 @@
 														<td>${count.index+1}</td>
 														<td>${stud.studentName}</td>
 														<td>${stud.deptName}</td>
-														<td>${stud.idNo}</td>
-														<td>${stud.academicYear}</td>
-														<td>${stud.contactNo}</td>
+														<td style="text-align: center; ">${stud.idNo}</td>
+														<td style="text-align: center; ">${stud.academicYear}</td>
+														<td style="text-align: center; ">${stud.contactNo}</td>
 														<td>${stud.email}</td>
 
 
-														<td>
+														<td style="text-align: center; ">
 													  <c:if test="${editAccess == 0}"> 
 														<a
 															href="#" onclick="showEditStudent(${stud.studentId})"><span
 																class="glyphicon glyphicon-edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																</c:if> |
-																  <c:if test="${deleteAccess == 0}"> 
+																  <c:if test="${deleteAccess == 0}"> &nbsp;&nbsp;&nbsp;&nbsp;
 															<a
 															href="${pageContext.request.contextPath}/deleteStudents/${stud.studentId}"
 															onClick="return confirm('Are you sure want to delete this record');"

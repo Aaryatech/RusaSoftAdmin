@@ -123,7 +123,7 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" 	value="${editInst.librarianName}"
+																<input type="text" class="form-control" id="librarian_name" pattern="^(?!\s*$).+"	value="${editInst.librarianName}"
 																	name="librarian_name" placeholder="Librarian Name" required
 																	>
 															</div>
@@ -138,7 +138,7 @@
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" 
 																	maxlength="10" class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
 																	 name="lib_con_num" placeholder="Mobile No" onchange="checkUnique(this.value,1)" required>
 															</div>
@@ -149,7 +149,7 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="librarian_email" 	value="${editInst.email}"
+																<input type="email" class="form-control" id="librarian_email" pattern="^(?!\s*$).+"	value="${editInst.email}"
 																	 name="librarian_email" placeholder="abc@xyz.com" onchange="checkUnique(this.value,2)" required>
 															</div>
 														</div>
@@ -286,7 +286,7 @@
     	
     	var date1=document.getElementById("lib_joiningDate").valuse;
     	var date2=document.getElementById("relieving_date").value;
-    	alert(date1);
+    	//alert(date1);
     	/* date1 = new Date(date1);
     	date2 = new Date(date2); */
     	if(date1 > date2){

@@ -59,6 +59,8 @@
 							</div>
 
 						</header>
+						<form action="${pageContext.request.contextPath}/deleteStudSchm/0"
+							method="get" id="libListForm">
 						<div class="content-body">
 							<div class="row">
 
@@ -93,12 +95,12 @@
 														<td style="text-align: center; "><input type="checkbox" class="chk" name="studentSchmIds"
 															id="studentSchmIds${count.index+1}" value="${stud.sprtSchmId}" /></td>
 														<td style="text-align: center; ">${count.index+1}</td>
-														<td style="text-align: center; ">${stud.schemeName}</td>
+														<td>${stud.schemeName}</td>
 														<td style="text-align: center; ">${stud.level}</td>
 														<td style="text-align: center; ">${stud.type}</td>
 														<td style="text-align: center; ">${stud.noStudentBenifited}</td>
 														<td style="text-align: center; ">${stud.academicYear}</td>
-														<td style="text-align: center; ">${stud.supportAgencyName}</td>
+														<td>${stud.supportAgencyName}</td>
 
 														<td><%-- <c:if test="${editAccess==0}"> --%>
 																<a href="${pageContext.request.contextPath}/editStudSchm/${stud.sprtSchmId}"><span
@@ -126,6 +128,7 @@
 
 							</div>
 						</div>
+						</form>
 					</section>
 				</div>
 

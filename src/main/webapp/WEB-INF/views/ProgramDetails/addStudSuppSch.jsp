@@ -99,7 +99,7 @@
 										action="${pageContext.request.contextPath}/insertStudentSuppurtScheme"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+									onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -155,7 +155,7 @@
 													</label>
 														<div class="col-sm-10">
 															<input type="text" 
-																 class="form-control" id="anotherScheme" value="${stud.schemeName}" 
+																 class="form-control" id="anotherScheme" value="${stud.schemeName}" pattern="^(?!\s*$).+"
 																	 name="anotherScheme" placeholder="Another Scheme" onchange="checkUnique(this.value,1)">
 														</div>
 											</div>
@@ -212,7 +212,7 @@
 														No. of Students Benefited <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="studBenifit" 	value="${stud.noStudentBenifited}"
+																<input type="number" min="0" class="form-control" id="studBenifit" 	value="${stud.noStudentBenifited}"
 																	name="studBenifit" placeholder="Students Benifited" required>
 															</div>
 														</div>
@@ -227,7 +227,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" 
-																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}"
+																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}" pattern="^(?!\s*$).+"
 																	 name="supportAgency" placeholder="Support Agency" onchange="checkUnique(this.value,1)" required>
 															</div>
 														</div>
@@ -240,7 +240,7 @@
 															 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id=" yearofIntro"  placeholder="dd-MM-YYYY" 	value="${stud.implementationYear}"
+																<input type="text" class="form-control datepicker" id=" yearofIntro"  placeholder="dd-MM-YYYY" 	value="${ydate}"
 																	name="yearofIntro"  required>
 															</div>
 														</div>
@@ -253,15 +253,15 @@
                                              <input type="hidden" id="librarian_id" name="librarian_id" value="${stud.sprtSchmId}">
                                              	<input type="hidden" id="is_view" name="is_view" value="0">
 												
-											  <div class="form-group">
+										
+															<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" class="btn btn-primary" id="sub1" onclick="submit_f(1)" value="Save">
+																<input type="submit" class="btn btn-primary" id="sub2" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
-
 
 												<div class="clearfix"></div>
 
@@ -270,7 +270,7 @@
 										</div>
 
 									</form>
-									<p class="desc text-danger fontsize11">Notice : * Field are mendatory.</p>
+									<p class="desc text-danger fontsize11">Notice : * Field are  Mandatory.</p>
 								</div>
 
 							</div>
@@ -287,7 +287,26 @@
 
 	<!-- END CONTENT -->
 <script type="text/javascript">
+
+
+var wasSubmitted = false;    
+  function checkBeforeSubmit(){
+    if(!wasSubmitted) {
+  	  var x=confirm("Do you really want to submit the form?");
+  	  if(x==true){
+      wasSubmitted = true;
+  	  document.getElementById("sub1").disabled=true;
+  	  document.getElementById("sub2").disabled=true;
+
+      return wasSubmitted;
+  	  }
+    }
+    return false;
+  }    
+
 function submit_f(view){
+	
+	alert("id is"+view);
 		document.getElementById("is_view").value=view;//create this 
 		/* var form=document.getElementById("form_sample_2");
 	    form.setAttribute("method", "post");
@@ -299,6 +318,43 @@ function submit_f(view){
 		
 	}
 	
+
+
+
+</script>
+
+<script type="text/javascript">
+
+function showExtraField() {
+	//alert("hii");
+	//document.getElementById("abc").style = "display:none"
+		var qualType=document.getElementById("approveValue").value
+		//alert("qualType::"+qualType);
+		
+		if (qualType == 7) {
+
+			document.getElementById("abc").style = "visible"
+			document.getElementById("anotherScheme").setAttribute("required","true");
+			
+				
+		} 
+		else{
+			document.getElementById("abc").style = "display:none"
+		}
+	
+	}
+	
+
+function hideText() {
+	//alert("hii");
+	document.getElementById("abc").style = "display:none"
+	
+	
+	}
+
+</script>
+<script type="text/javascript">
+
 function checkUnique(inputValue,valueType){
 	//alert(inputValue);
 	
@@ -369,38 +425,6 @@ function checkUnique(inputValue,valueType){
 	});
 }
 
-
-
-</script>
-
-<script type="text/javascript">
-
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
-
-			document.getElementById("abc").style = "visible"
-			document.getElementById("anotherScheme").setAttribute("required","true");
-			
-				
-		} 
-		else{
-			document.getElementById("abc").style = "display:none"
-		}
-	
-	}
-	
-
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	
-	
-	}
 
 </script>
 

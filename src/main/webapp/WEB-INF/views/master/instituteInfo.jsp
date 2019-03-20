@@ -101,20 +101,20 @@
 													<%-- 	<td><input type="checkbox" class="chk" name="infoDetailIds"
 															id="infoDetailIds${count.index+1}"
 															value="${inst.infoDetailId}" /></td> --%>
-														<td>${count.index+1}</td>
-														<td>${inst.academicYear}</td>
-														<td>${inst.noOfFulltimeFaculty}</td>
-														<td>${inst.noNonteachingIncludingOfficeStaff}</td>
-														<td>${inst.noSupportStaff}</td>
-														<td>${inst.noCurrentAdmitedStnt}</td>
-														<td>
+														<td  style="text-align: center; ">${count.index+1}</td>
+														<td  style="text-align: center; ">${inst.academicYear}</td>
+														<td   style="text-align: center; ">${inst.noOfFulltimeFaculty}</td>
+														<td  style="text-align: center; ">${inst.noNonteachingIncludingOfficeStaff}</td>
+														<td  style="text-align: center; ">${inst.noSupportStaff}</td>
+														<td  style="text-align: center; ">${inst.noCurrentAdmitedStnt}</td>
+														<td style="text-align: center; ">
 															  <c:if test="${editAccess == 0}"> 
 														<a
 															href="#" onclick="showEditInstitute(${inst.infoDetailId})"><span
 																class="glyphicon glyphicon-edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a> </c:if>|
+																data-animate=" animated fadeIn " rel="tooltip"></span></a> </c:if>
 														  <c:if test="${deleteAccess == 0}"> 
-															<a
+														&nbsp;&nbsp;&nbsp;&nbsp;	<a
 															href="${pageContext.request.contextPath}/deleteInstituteInfo/${inst.infoDetailId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger"

@@ -91,14 +91,14 @@
 												<!-- 	<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th> -->
-													<th width="5%">Sr No</th>
-													<th>Librarian Name</th>
-													<th>Contact No</th>
-													<th>Email</th>
+													<th style="text-align: center; width:5%">Sr No</th>
+													<th style="text-align: center; ">Librarian Name</th>
+													<th style="text-align: center; ">Contact No</th>
+													<th style="text-align: center; ">Email</th>
 													
-														<th>Date of Joining</th>
-														<th>Date of Relieving</th>
-													<th width="10%">Action</th>
+														<th style="text-align: center; ">Date of Joining</th>
+														<th style="text-align: center; ">Date of Relieving</th>
+													<th style="text-align: center; width:10%">Action</th>
 												</tr>
 											</thead>
 
@@ -114,10 +114,10 @@
 														
 														<td>${count.index+1}</td>
 														<td>${institute.librarianName}</td>
-														<td>${institute.contactNo}</td>
-														<td>${institute.email}</td>
-															<td>${institute.joiningDate}</td>
-															<td>${institute.realivingDate}</td>
+														<td style="text-align: center; ">${institute.contactNo}</td>
+														<td >${institute.email}</td>
+															<td style="text-align: center; ">${institute.joiningDate}</td>
+															<td style="text-align: center; ">${institute.realivingDate}</td>
 
 
 														<td  align="center">

@@ -66,7 +66,7 @@
 						</header>
 
 						<form action="${pageContext.request.contextPath}/popsomapped"
-							method="get" id="libListForm">
+							method="get" id="libListForm" 	onsubmit="return checkBeforeSubmit()">
 							<div class="content-body">
 
 
@@ -162,7 +162,7 @@
 
 
 
-															<td style="text-align: center;">${pso.psoText}</td>
+															<td >${pso.psoText}</td>
 
 
 
@@ -186,10 +186,53 @@
 											<select id="satValue" name="satValue" class="form-control"
 												>
 
-												<option value="1">1</option>
+											<!-- 	<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
 												<option value="4">-</option>
+												
+												 -->
+													<c:choose>
+													<c:when test="${poDetail.psoMapSatisfyingValue=='1'}">
+																			
+													<option selected value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">-</option>
+
+													</c:when>
+														<c:when test="${poDetail.psoMapSatisfyingValue=='2'}">
+																			
+													<option  value="1">1</option>
+												<option selected value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">-</option>
+
+													</c:when>
+														<c:when test="${poDetail.psoMapSatisfyingValue =='3'}">
+																			
+													<option  value="1">1</option>
+												<option  value="2">2</option>
+												<option selected  value="3">3</option>
+												<option value="4">-</option>
+
+													</c:when>
+														<c:when test="${poDetail.psoMapSatisfyingValue=='4'}">
+																			
+													<option  value="1">1</option>
+												<option  value="2">2</option>
+												<option value="3">3</option>
+												<option selected value="4">-</option>
+
+													</c:when>
+																<c:otherwise>
+																<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">-</option>
+																</c:otherwise>				
+																			
+																	</c:choose>
 
 											</select>
 
@@ -207,7 +250,13 @@
 
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-											<button type="submit" class="btn btn-primary">Submit</button>
+											<button type="submit" id="sub1" class="btn btn-primary"
+											onClick="var checkedVals = $('.chk:checkbox:checked').map(function() 
+													{ return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals=='')
+													{alert('No Rows Selected');return false;	}
+											else{   return confirm('Are you sure want to Map the  record');}"
+											
+											>Submit</button>
 											<button type="reset" class="btn btn-default">Reset</button>
 										</div>
 									</div>
@@ -234,10 +283,22 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
+ <script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  //document.getElementById("sub2").disabled=true;
 
-
-
-
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 

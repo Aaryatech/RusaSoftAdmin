@@ -100,7 +100,7 @@
 										action="${pageContext.request.contextPath}/insertStudent"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -123,7 +123,7 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="student_name"
+																<input type="text" class="form-control" id="student_name" pattern="^(?!\s*$).+"
 																value="${editStudent.studentName}" required
 																	name="student_name" placeholder="Student Name"
 																	>
@@ -198,7 +198,7 @@
 															<div class="col-sm-10">
 																<input type="text" 
 																	maxlength="10" class="form-control" id="id_number"
-																	value="${editStudent.idNo}"
+																	value="${editStudent.idNo}"  pattern="^(?!\s*$).+"
 																	name="id_number" placeholder="ID Number" required>
 															</div>
 														</div>
@@ -221,7 +221,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="email" class="form-control" id="student_email"
-																value="${editStudent.email}" onchange="checkUnique(this.value,2)"
+																value="${editStudent.email}" onchange="checkUnique(this.value,2)" pattern="^(?!\s*$).+"
 																	name="student_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
@@ -237,8 +237,8 @@
 												
 											  <div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
@@ -282,6 +282,27 @@ function submit_f(view){
 		
 	}
 	
+	
+var wasSubmitted = false;    
+function checkBeforeSubmit(){
+  if(!wasSubmitted) {
+	  var x=confirm("Do you really want to submit the form?");
+	  if(x==true){
+    wasSubmitted = true;
+	  document.getElementById("sub1").disabled=true;
+	  document.getElementById("sub2").disabled=true;
+
+    return wasSubmitted;
+	  }
+  }
+  return false;
+}    
+	</script>
+	
+	
+	
+	
+	<script>
 function checkUnique(inputValue,valueType){
 	//alert("hii");
 	

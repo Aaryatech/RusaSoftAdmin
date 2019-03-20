@@ -119,24 +119,25 @@
 														
 													<c:choose>
    														 <c:when test="${poList.psoMapping=='1'}">
-  															 <td>Yes</td>
+  															 <td style="text-align: center; ">Yes</td>
    															 </c:when>    
    														 <c:otherwise>
-    													   <td>No</td>
+    													   <td style="text-align: center; ">No</td>
    																	 </c:otherwise>
 														</c:choose>
 														
 														<c:choose>
-   														 <c:when test="${poList.psoMapping=='4'}">
-  															 <td>-</td>
+   														 <c:when test="${poList.psoMapSatisfyingValue=='4'}">
+  															 <td style="text-align: center; ">-</td>
    															 </c:when>    
    														 <c:otherwise>
-    													 <td>${poList.psoMapSatisfyingValue}</td>
+    													 	 <td style="text-align: center; ">${poList.psoMapSatisfyingValue}</td>
    																	 </c:otherwise>
 														</c:choose>
-														 
 														
-													
+														
+														
+												
 														
 													<td> 
 												     	<a href="${pageContext.request.contextPath}/showMapPOPSO/${poList.poId}" title="Add PSO"

@@ -237,7 +237,7 @@
 															<div class="col-sm-8">
 																<input type="text" class="form-control" id="rusa_idNo"
 																	value="${editInstInfo.rusaIdNo}" name="rusa_idNo"
-																	placeholder="Rusa ID No." required>
+																	placeholder="Rusa ID No." pattern="^(?!\s*$).+" required>
 															</div>
 														</div>
 
@@ -253,7 +253,7 @@
 															value="${editInstInfo.infoDetailId}">
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" id="inst_info_id" name="inst_info_id"
+														<input type="hidden" id="inst_info_id"  name="inst_info_id"
 															value="0">
 													</c:otherwise>
 
