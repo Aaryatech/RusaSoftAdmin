@@ -244,7 +244,7 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-3 col-sm-9">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button

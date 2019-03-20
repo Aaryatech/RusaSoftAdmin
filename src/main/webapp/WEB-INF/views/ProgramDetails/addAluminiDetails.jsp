@@ -131,10 +131,11 @@
 																Passing Year <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	placeholder="Enter Year of Passing" id="year_of_pass"
-																	value="${alumni.passingYear}" name="year_of_pass"
-																	required>
+																<input type="text" class="form-control datepickeryear"
+																	data-min-view-mode="years" data-start-view="2"
+																	data-format="yyyy" placeholder="Enter Year of Passing"
+																	id="year_of_pass" value="${alumni.passingYear}"
+																	name="year_of_pass" required>
 															</div>
 														</div>
 
@@ -175,7 +176,9 @@
 																Year of Contribution<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control"
+																<input type="text" class="form-control datepickeryear"
+																	data-min-view-mode="years" data-start-view="2"
+																	data-format="yyyy"
 																	placeholder="Enter Year of Contribution"
 																	id="contr_year" value="${alumni.contributionYear}"
 																	name="contr_year" required>
@@ -192,32 +195,94 @@
 																<select id="benif_to" name="benif_to"
 																	class="form-control" onchange="showExtraField()"
 																	required>
-																	<c:set var="ben" value="${alumni.benefitTo}"></c:set>
 
+																	<c:choose>
+																		<c:when test="${alumni.benefitTo eq 'Students'}">
 
-																	<%
-																		String beanType = (String) pageContext.getAttribute("ben");
-																		if (beanType.equalsIgnoreCase("Students")) {
-																	%>
-																	<option selected value="Students">Students</option>
-																	<option value="Staff">Staff</option>
-																	<option value="Faculty">Faculty</option>
-																	<option value="Department">Department</option>
-																	<option value="Institute">Institute</option>
-																	<option value="Society">Society</option>
-																	<option value="7">Any Other</option>
-																	<%
-																		}
+																			<option selected value="Students">Students</option>
+																			<option value="Staff">Staff</option>
+																			<option value="Faculty">Faculty</option>
+																			<option value="Department">Department</option>
+																			<option value="Institute">Institute</option>
+																			<option value="Society">Society</option>
+																			<option value="7">Any Other</option>
 
-																		else if (beanType.equalsIgnoreCase("Staff")) {
-																	%>
-																	<option value="Students">Students</option>
+																		</c:when>
+																		<c:when test="${alumni.benefitTo eq 'Staff'}">
+																		<option value="Students">Students</option>
 																	<option selected value="Staff">Staff</option>
 																	<option value="Faculty">Faculty</option>
 																	<option value="Department">Department</option>
 																	<option value="Institute">Institute</option>
 																	<option value="Society">Society</option>
 																	<option value="7">Any Other</option>
+																		</c:when>
+																		
+																		<c:when test="${alumni.benefitTo eq 'Faculty'}">
+																		<option value="Students">Students</option>
+																	<option  value="Staff">Staff</option>
+																	<option selected value="Faculty">Faculty</option>
+																	<option value="Department">Department</option>
+																	<option value="Institute">Institute</option>
+																	<option value="Society">Society</option>
+																	<option value="7">Any Other</option>
+																		</c:when>
+																		
+																		<c:when test="${alumni.benefitTo eq 'Department'}">
+																		<option value="Students">Students</option>
+																	<option  value="Staff">Staff</option>
+																	<option  value="Faculty">Faculty</option>
+																	<option selected value="Department">Department</option>
+																	<option value="Institute">Institute</option>
+																	<option value="Society">Society</option>
+																	<option value="7">Any Other</option>
+																		</c:when>
+																		
+																		<c:when test="${alumni.benefitTo eq 'Institute'}">
+																		<option value="Students">Students</option>
+																	<option  value="Staff">Staff</option>
+																	<option  value="Faculty">Faculty</option>
+																	<option  value="Department">Department</option>
+																	<option  selected value="Institute">Institute</option>
+																	<option value="Society">Society</option>
+																	<option value="7">Any Other</option>
+																		</c:when>
+																		
+																		<c:when test="${alumni.benefitTo eq 'Society'}">
+																		<option value="Students">Students</option>
+																	<option  value="Staff">Staff</option>
+																	<option  value="Faculty">Faculty</option>
+																	<option  value="Department">Department</option>
+																	<option   value="Institute">Institute</option>
+																	<option selected value="Society">Society</option>
+																	<option value="7">Any Other</option>
+																	</c:when>
+																	<c:otherwise>
+																	<option value="Students">Students</option>
+																	<option  value="Staff">Staff</option>
+																	<option  value="Faculty">Faculty</option>
+																	<option  value="Department">Department</option>
+																	<option   value="Institute">Institute</option>
+																	<option  value="Society">Society</option>
+																	<option selected value="7">Any Other</option>
+																	
+																	</c:otherwise>
+																		
+																	</c:choose>
+																	<%-- <c:set var="ben" value="${alumni.benefitTo}"></c:set>
+
+
+																	<%
+																		String beanType = (String) pageContext.getAttribute("ben");
+																		if (beanType.equalsIgnoreCase("Students")) {
+																	%>
+
+																	<%
+																		}
+
+																		else if (beanType.equalsIgnoreCase("Staff")) {
+																	%>
+																	
 																	<%
 																		}else  if (beanType.equalsIgnoreCase("Faculty")) {
 																			
@@ -258,19 +323,19 @@
 																	<option value="Institute">Institute</option>
 																	<option selected value="Society">Society</option>
 																	<option value="7">Any Other</option>
-																	
-																			<%} else  {   %>
-																			
-																				<option value="Students">Students</option>
-																			<option value="Staff">Staff</option>
-																			<option value="Faculty">Faculty</option>
-																			<option value="Department">Department</option>
-																			<option value="Institute">Institute</option>
-																			<option value="Society">Society</option>
-																			<option selected value="7">Any Other</option>
-																			
-																			<%}%>
-																		
+
+																	<%} else  {   %>
+
+																	<option value="Students">Students</option>
+																	<option value="Staff">Staff</option>
+																	<option value="Faculty">Faculty</option>
+																	<option value="Department">Department</option>
+																	<option value="Institute">Institute</option>
+																	<option value="Society">Society</option>
+																	<option selected value="7">Any Other</option>
+
+																	<%}%> --%>
+
 																</select>
 
 															</div>
@@ -413,9 +478,12 @@
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
+					document.getElementById("other_benif").setAttribute("required","true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
+					document.getElementById("other_benif").removeAttribute("required");
+
 			}
 
 		}
@@ -457,7 +525,7 @@
 		}
 	</script>
 
- <script type="text/javascript">
+	<script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){
       if(!wasSubmitted) {
@@ -476,7 +544,21 @@
 		document.getElementById("is_view").value = view;//create this 
 
 	}
+    
+    $(function(){
+		 
+        $('.datepickeryear').datepicker({
+			autoclose: true,
+			minViewMode: 2,
+	         format: 'yyyy'
+
+		});
+    });
 </script>
+	<script type="text/javascript">
+       
+    </script>
+
 
 
 	<!-- END CONTAINER -->

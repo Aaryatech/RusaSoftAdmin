@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " >
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -58,7 +58,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showMphillDetails"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -94,163 +94,159 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-											
-										</ul>
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register
+										</a></li>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertFacPhdDetail"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
+												<div class="col-md-12"></div>
 
-												<div>
+												<div class="col-xs-12">
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="isPhdGuide">M.phill/Ph.D.Guide
+														</label>
+														<div class="col-sm-2">
 
+															<c:choose>
+																<c:when test="${facPhdDetail.isPhdGuide==0}">
+															Yes <input type="radio" name="isPhdGuide" id="isPhdGuide"
+																		value="1"> No<input type="radio" checked
+																		name="isPhdGuide" id="isPhdGuide" value="0">
+																</c:when>
 
-													<div class="col-xs-12">
+																<c:otherwise>
+															Yes <input type="radio" checked name="isPhdGuide"
+																		id="isPhdGuide" value="1"> No<input
+																		type="radio" name="isPhdGuide" id="isPhdGuide"
+																		value="0">
+																</c:otherwise>
 
-										
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">M.phill/Ph.D.Guide
-																
-															</label>
-
-
-															<div class="col-sm-2">
-																Yes <input type="radio" name="mPhill" id="mPhill"
-																	checked value="0"> No<input type="radio"
-																	name="mPhill" id="mPhill" value="1">
-															</div>
-                                                           </div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">
-															
-															Date of Recognition <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="date" class="form-control" id="dor"
-																	name="dor" placeholder="Date of Recognition" value=""
-																	required>
-															</div>
-
-
-															<label class="control-label col-sm-2" for="smallheading">Valid up to 
-																 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="date" class="form-control" id="dor"
-																	name="dor" placeholder="Valid up to" value="" required>
-															</div>
-
+															</c:choose>
 
 														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">No.
-																of Students Guided <span class="text-danger">*</span>
-																
-																
-															</label> <label class="control-label col-sm-1" for="page_name">PG
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="text" class="form-control"
-																	id="qualification" name="qualification"
-																	placeholder="PG" value="${page.pageName}" required>
-															</div>
-
-															<label class="control-label col-sm-2" for="page_name">M.Phill
-																:<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="text" class="form-control"
-																	id="qualification" name="qualification"
-																	placeholder="M.Phill" value="${page.pageName}" required>
-															</div>
-
-
-
-															<label class="control-label col-sm-1" for="page_name">Ph.D.
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="text" class="form-control" id="phdNo"
-																	name="phdNo" placeholder="Ph.D"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-														
-														
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order">Use
-																of ICT(Information Communication Technology) <span
-																class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-2">
-																Yes <input type="radio" name="isReg" id="isReg" checked
-																	value="0"> No<input type="radio" name="isReg"
-																	id="isReg" value="1">
-															</div>
-														</div>
-
-
-														
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-
 													</div>
 
 
-													<div class="clearfix"></div>
+													<div class="form-group">
+														<label class="control-label col-sm-3"
+															for="phdRecognitionDt"> Date of Recognition <span
+															class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control datepicker"
+																id="phdRecognitionDt" name="phdRecognitionDt"
+																placeholder="Date of Recognition" value="${facPhdDetail.phdRecognitionDt}" required>
+														</div>
+													</div>
 
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="phdValidDt">Valid
+															up to <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control datepicker" id="phdValidDt"
+																name="phdValidDt" placeholder="Valid up to" value="${facPhdDetail.phdValidDt}"
+																required>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="ii">No.
+															of Students Guided <span class="text-danger">*</span>
+
+														</label> <label class="control-label col-sm-1" for="phdStuPg">PG
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" id="phdStuPg"
+																name="phdStuPg" placeholder="PG"
+																value="${facPhdDetail.phdStuPg}" required>
+														</div>
+
+														<label class="control-label col-sm-1" for="phdStuMphill">M.Phil
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" id="phdStuMphill"
+																name="phdStuMphill" placeholder="M.Phill"
+																value="${facPhdDetail.phdStuMphill}" required>
+														</div>
+														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D.
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" id="phdStuPhd"
+																name="phdStuPhd" placeholder="Ph.D"
+																value="${facPhdDetail.phdStuPhd}" required>
+														</div>
+													</div>
+
+
+
+
+													<div class="form-group">
+
+														<label class="control-label col-sm-6" for="isIctUsed">Use
+															of ICT(Information Communication Technology) <span
+															class="text-danger">*</span>
+														</label>
+
+
+														<div class="col-sm-2">
+															<c:choose>
+																<c:when test="${facPhdDetail.isIctUsed==1}">
+															Yes <input type="radio" name="isIctUsed" id="isIctUsed"
+																		checked value="1"> No<input type="radio"
+																		name="isIctUsed" id="isIctUsed" value="0">
+																</c:when>
+																<c:otherwise>
+																Yes <input type="radio" name="isIctUsed" id="isIctUsed"
+																		value="1"> No<input type="radio"
+																		name="isIctUsed" id="isIctUsed" checked value="0">
+
+																</c:otherwise>
+															</c:choose>
+
+														</div>
+													</div>
+
+													<div class="form-group">
+														<div class="col-sm-offset-3 col-sm-10">
+															<button type="submit" id="sub1" class="btn btn-primary">Submit</button>
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+														<input type="hidden" id="staff_id" name="staff_id"
+														value="${facPhdDetail.facultyId}"> <input
+														type="hidden" id="is_view" name="is_view" value="0">
+													</div>
 												</div>
-
-											</div>
+												<div class="clearfix"></div>
+											</form>
 										</div>
-									</form>
-								</div>
 
+									</div>
+								</div>
 							</div>
 						</div>
-
 					</section>
 				</div>
-
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
-		<!-- END CONTENT -->
-
-
-
 	</div>
+	<!-- MAIN CONTENT AREA ENDS -->
+	<!-- END CONTENT -->
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
-	
-<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
+
+	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -264,39 +260,40 @@
 						action="${pageContext.request.contextPath}/showModuleForm"
 						method="get">
 						<input type="hidden" class="form-control" id="pageId"
-							name="pageId" >
-							
-									<div class="form-group">
-							<label for="modalname1" class="form-label">Qualification</label> <select
-								id="qualType" name="qualType" class="form-control" onchange="showForm()" required>
+							name="pageId">
+
+						<div class="form-group">
+							<label for="modalname1" class="form-label">Qualification</label>
+							<select id="qualType" name="qualType" class="form-control"
+								onchange="showForm()" required>
 								<option value="0">Diploma</option>
 								<option value="1">Bachelors</option>
 								<option value="3">Masters</option>
 								<option value="4">Doctorates</option>
-							<option value="5">Post Doctorates</option>
+								<option value="5">Post Doctorates</option>
 								<option value="6">M.Phill/Ph.D. Guide</option>
-								
+
 								<option value="7">Any Other</option>
 
 
 
 							</select>
 						</div>
-						
-						
+
+
 						<div class="form-group">
-						
-							<label class="control-label col-sm-3" for="page_name">Other Qualification
-							</label>
+
+							<label class="control-label col-sm-3" for="page_name">Other
+								Qualification </label>
 							<!-- <div class="col-sm-3"> -->
-								<input type="text" class="form-control" id="qualName"
-									name="qualName" placeholder="No." value="${page.pageName}"
-									required>
+							<input type="text" class="form-control" id="qualName"
+								name="qualName" placeholder="No." value="${page.pageName}"
+								required>
 							<!-- </div> -->
-	</div>
-						
+						</div>
+
 						<div class="form-group">
-						
+
 							<label class="control-label col-sm-1" for="page_name">Class
 							</label>
 							<div class="col-sm-3">
@@ -304,53 +301,81 @@
 									name="hodName" placeholder="No." value="${page.pageName}"
 									required>
 							</div>
-	</div>
-	<div class="form-group">
-							<label class="control-label col-sm-2" for="page_name">Year of Passing
-							</label>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="page_name">Year
+								of Passing </label>
 							<div class="col-sm-3">
-								<input type="date" class="form-control"
-								id="curExp" name="curExp" value="" required>
+								<input type="date" class="form-control" id="curExp"
+									name="curExp" value="" required>
 							</div>
 
-</div>
+						</div>
 
 
-					
 
 
-						<button type="submit" class="btn btn-primary">Submit</button>
+
+						<button type="submit" id="sub1" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+ --%>
 
 
 	<script>
-	function showForm() {
-	document.getElementById("abc").style = "display:none"
-		var index=document.getElementById("qualType").value
-		
+		function showForm() {
+			document.getElementById("abc").style = "display:none"
+			var index = document.getElementById("qualType").value
 
-		if (index == 6) {
+			if (index == 6) {
 
-			document.getElementById("abc").style = "visible"
+				document.getElementById("abc").style = "visible"
 
-		} 
-	
-	}
-	function showForm1() {
-		document.getElementById("abc").style = "display:none"
-			
-		
+			}
+
 		}
-	
+		function showForm1() {
+			document.getElementById("abc").style = "display:none"
+
+		}
 	</script>
 	
 	
-	
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+        document.getElementById("sub1").disabled=true;
+  	  return wasSubmitted;
+    	  }
+      }
+      return false;
+    }   
+    
+    function submit_f(view) {
+		document.getElementById("is_view").value = view;//create this 
+
+	}
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+		});
+    });
+    
+</script>
+
+
+
 
 </body>
 </html>

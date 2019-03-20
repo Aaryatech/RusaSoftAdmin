@@ -153,13 +153,13 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="number" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" onkeyup="calculateSum()"
 																			class="txt" id="cast_m${cast.castId}"
-																			name="cast_m${cast.castId}" value="0" required></td>
-																		<td><input type="number"  onkeyup="calculateSum()"
+																			name="cast_m${cast.castId}" value="0"  required></td>
+																		<td><input type="number" min="0" onkeyup="calculateSum()"
 																			class="txt" id="cast_f${cast.castId}"
 																			name="cast_f${cast.castId}" value="0" required></td>
-																		<td><input type="number"  onkeyup="calculateSum()"
+																		<td><input type="number" min="0"  onkeyup="calculateSum()"
 																			class="txt" id="cast_t${cast.castId}"
 																			name="cast_t${cast.castId}" value="0" required></td>
 																	</tr>
@@ -173,13 +173,13 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="number" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" onkeyup="calculateSum()"
 																			class="txt" id="cast_m${cast.studentCatId}"
 																			name="cast_m${cast.studentCatId}" value="${cast.maleStudent}" required></td>
-																		<td><input type="number"  onkeyup="calculateSum()"
+																		<td><input type="number" min="0"  onkeyup="calculateSum()"
 																			class="txt" id="cast_f${cast.studentCatId}"
 																			name="cast_f${cast.studentCatId}" value="${cast.femaleStudent}" required></td>
-																		<td><input type="number"  onkeyup="calculateSum()"
+																		<td><input type="number" min="0"  onkeyup="calculateSum()"
 																			class="txt" id="cast_t${cast.studentCatId}"
 																			name="cast_t${cast.studentCatId}" value="${cast.transStudent}" required></td>
 																	</tr>
@@ -197,9 +197,9 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary" id="sub1"
-																onclick="submit_f(1)" value="Add"> <input
+																onclick="submit_f(0)" value="Add"> <input
 																type="submit" class="btn btn-primary" id="sub2"
-																onclick="submit_f(0)" value="Save And Next">
+																onclick="submit_f(1)" value="Save And Next">
 																
 																 
 															<button type="reset" class="btn btn-default">Reset</button>

@@ -112,7 +112,7 @@
 													<td>${institute.instituteName}</td>
 
 													<td>${institute.principalName}</td>
-													<td>${institute.contactNo}</td>
+													<td align="center">${institute.contactNo}</td>
 
 													<td>${institute.email}</td>
 
