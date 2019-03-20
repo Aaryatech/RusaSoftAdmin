@@ -105,8 +105,8 @@
 							<div class="actions panel_actions pull-right">
 
 
-								<a href="${pageContext.request.contextPath}/showProgramList"><button
-										type="button" class="btn btn-success">Back</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/showProgramList"><button
+										type="button" class="btn btn-success">Back</button></a> --%>
 
 							</div>
 
@@ -114,31 +114,7 @@
 
 						<div class="content-body">
 							<div class="row">
-								<div class="col-xs-12">
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="status">
-											Program Name:</label> <label class="control-label col-sm-10"
-											for="status"><strong>
-												${programDetail.nameOfProgram} </strong></label>
-									</div>
-
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="status">
-											Duration:</label> <label class="control-label col-sm-10" for="status">
-											<strong>${programDetail.monthDuration}</strong>
-										</label>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="status">
-											Sanctioned Intake:</label> <label class="control-label col-sm-10"
-											for="status"><strong>${programDetail.sanctionalIntake}</strong></label>
-										<input type="hidden" id="programId" name="programId"
-											value="${programDetail.programId}">
-
-									</div>
-									<div class="form-group"></div>
-								</div>
 								<div class="col-md-12">
 
 									<ul class="nav nav-tabs">
@@ -162,31 +138,30 @@
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
-												onsubmit="return confirm('Do you really want to add Program Vission?');">
+												onsubmit="return confirm('Do you really want to add Institute Vission?');">
 
 												<div class="row">
 
-													<input type="hidden" id="programVissionId"
-														name="programVissionId" value="0"> <label
-														class="col-sm-2 text-left" for="programVission">
+													<input type="hidden" id="inst_vision_id"
+														name="inst_vision_id" value="0"> <label
+														class="col-sm-2 text-left" for="inst_vision_text">
 														Vision<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
-															id="programVission" name="programVission"
-															placeholder="Program Vission" required>
+															id="inst_vision_text" name="inst_vision_text"
+															placeholder="Institute Vission" required>
 													</div>
 												</div>
 
 												<br />
-												<div class="row">
-
+												<div class="row" style="display: none;">
 													<label class="col-sm-2 text-left"
 														for="programVissionRemark"> Remark(If Any) </label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
-															id="programVissionRemark" name="programVissionRemark"
-															placeholder="Program Vission Remark">
+															id="inst_vision_remark" name="inst_vision_remark"
+															value="-" placeholder="Institute Vission Remark">
 													</div>
 
 													<div class="col-sm-4">
@@ -219,7 +194,7 @@
 																<tr>
 																	<th width="10%">Sr No</th>
 																	<th>Vision</th>
-																	<th>Remark</th>
+
 																	<th width="10%">Action</th>
 
 																</tr>
@@ -270,27 +245,26 @@
 												onsubmit="return confirm('Do you really want to add Program Mission?');">
 												<div class="row">
 
-													<input type="hidden" id="programMissionId"
-														name="programMissionId" value="0"> <label
+													<input type="hidden" id="inst_mission_id"
+														name="inst_mission_id" value="0"> <label
 														class="col-sm-2 text-left" for="programMission">
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
-															id="programMission" name="programMission"
-															placeholder="Program Mission " required>
+															id="inst_mission_text" name="inst_mission_text"
+															placeholder="Institute Mission " required>
 													</div>
 												</div>
 
 												<br />
-												<div class="row">
-
+												<div class="row" style="display: none;">
 													<label class="col-sm-2 text-left"
 														for="programMissionRemark"> Remark(If Any) </label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="programMissionRemark" name="programMissionRemark"
-															placeholder="Program Mission Remark">
+															value="-" placeholder="Program Mission Remark">
 													</div>
 
 													<div class="col-sm-4">
@@ -319,7 +293,7 @@
 																<tr>
 																	<th width="10%">Sr No</th>
 																	<th>Mission</th>
-																	<th>Remark</th>
+
 																	<th width="10%">Action</th>
 
 																</tr>
@@ -418,6 +392,35 @@
 				});
 	</script>
 
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
+
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+		
+		function hideText() {
+			var isOther = document.getElementById("isOther").value;
+
+			if (isOther == 1) {
+				document.getElementById("abc").style = "visible";
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+	</script>
 
 
 
