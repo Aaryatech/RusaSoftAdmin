@@ -138,28 +138,24 @@ public class PdfReportsController {
 
 			hcell = new PdfPCell(new Phrase("Department", headFont1));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			hcell.setBackgroundColor(BaseColor.PINK);
-
-			
+			hcell.setBackgroundColor(BaseColor.PINK);			
 			table.addCell(hcell);
 			
 			table.addCell(hcell);
 			hcell = new PdfPCell(new Phrase("Joining Date", headFont1));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			hcell.setBackgroundColor(BaseColor.PINK);
-
 			table.addCell(hcell);
+			
 			hcell = new PdfPCell(new Phrase("Contact No", headFont1));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			hcell.setBackgroundColor(BaseColor.PINK);
-
 			table.addCell(hcell);
+			
 			hcell = new PdfPCell(new Phrase("Email", headFont1));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			hcell.setBackgroundColor(BaseColor.PINK);
-
 			table.addCell(hcell);
-			
 			
 			int index = 0;
 			for (StaffList work : staffList) {
