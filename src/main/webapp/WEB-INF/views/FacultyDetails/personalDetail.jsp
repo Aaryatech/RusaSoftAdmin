@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="check(${facPerDetail.isAddSame})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -129,7 +129,7 @@
 													<div class="col-sm-9">
 														<input type="text" class="form-control" id="fac_address"
 															name="fac_address" placeholder="Permanent Address"
-															required>
+															required value="${facPerDetail.fAddress}">
 													</div>
 												</div>
 
@@ -141,20 +141,36 @@
 													</label>
 
 													<div class="col-sm-3">
-														Yes <input type="radio" name="is_add_same"
+													<c:choose>
+													<c:when test="${facPerDetail.isAddSame==1}">
+													Yes <input type="radio" name="is_add_same"
 															id="is_add_same" checked value="1"
 															onclick="check(this.value)"> No<input
 															type="radio" onclick="check(this.value)"
 															name="is_add_same" id="is_add_same" value="0">
+													
+													</c:when>
+													<c:otherwise>
+													
+													Yes <input type="radio" name="is_add_same"
+															id="is_add_same"  value="1"
+															onclick="check(this.value)"> No<input
+															type="radio" onclick="check(this.value)" checked
+															name="is_add_same" id="is_add_same" value="0">
+													
+													</c:otherwise>
+													
+													</c:choose>
+														
 													</div>
 												</div>
 
-												<div class="form-group" id="abc">
+												<div class="form-group" id="abc" style="display:none">
 													<label class="control-label col-sm-3" for="fac_address2">Correspondence
 														Address <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="fac_address2"
+														<input type="text" class="form-control" id="fac_address2" value="${facPerDetail.fAddress2}"
 															name="fac_address2" placeholder="Correspondence Address">
 													</div>
 												</div>
@@ -181,7 +197,7 @@
 														<input type="text" class="form-control" id="f_phone"
 															name="f_phone"
 															
-															placeholder="Office Landline No" value="" required>
+															placeholder="Office Landline No" value="${facPerDetail.fPhone}" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -189,9 +205,9 @@
 														No</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="f_resident"
-															name="f_resident" 
+															name="f_resident"  
 															title="Phone number with 7-9 and remaing 9 digit with 0-9"
-															placeholder="Resident Phone No" value="" required>
+															placeholder="Resident Phone No"value="${facPerDetail.fResident}" required>
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
@@ -212,7 +228,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="Text" class="form-control" id="f_aadhar"
-															name="f_aadhar" placeholder="Aadhar No" value="" required>
+															name="f_aadhar" placeholder="Aadhar No" value="${facPerDetail.fAadhar}" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -221,7 +237,7 @@
 													</label>
 													<div class="col-sm-6">
 														<select id="f_designation" name="f_designation"
-															onchange="showForm()" class="form-control" required>
+															 class="form-control" required>
 															<c:forEach items="${desigList}" var="des">
 																<c:choose>
 																	<c:when
@@ -237,24 +253,24 @@
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
-												<div class="form-group" id="xyz">
+												<!-- <div class="form-group" id="xyz">
 													<label class="control-label col-sm-2" for="smallheading">Other
 														Designation<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="prevExp"
 															name="prevExp" placeholder="Other Designation" value=""
-															required>
+															>
 													</div>
 												</div>
-
+ -->
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="f_dob">Date
 														of Birth<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="f_dob" name="f_dob" placeholder="DOB" value=""
+															id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"  value="${facPerDetail.fDob}"
 															required>
 													</div>
 												</div>
@@ -278,7 +294,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="f_prevExp"
 															name="f_prevExp" placeholder="Previous Experience"
-															onchange="calExp()" value="" required>
+															onchange="calExp()" value="${facPerDetail.fPastExp}" required>
 													</div>
 												</div>
 												
@@ -286,30 +302,56 @@
 													<label class="control-label col-sm-3" for="f_gender">Gender<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														Female<input type="radio" name="f_gender"
-															id="f_gender" checked value="1"
+													<c:choose>
+													<c:when test="${facPerDetail.fGender==0}">
+													Female<input type="radio" name="f_gender"
+															id="f_gender"  value="1"
 															>&nbsp;&nbsp;&nbsp; Male<input
-															type="radio" 
+															type="radio" checked
 															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
-															
 															Transgender<input
 															type="radio"
 															name="f_gender" id="f_gender" value="2">
+													</c:when>
+													
+													<c:when test="${facPerDetail.fGender==1}">
+													Female<input type="radio" name="f_gender"
+															id="f_gender" checked value="1"
+															>&nbsp;&nbsp;&nbsp; Male<input
+															type="radio"  
+															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+															Transgender<input
+															type="radio"
+															name="f_gender" id="f_gender" value="2">
+													</c:when>
+													<c:otherwise>
+													Female<input type="radio" name="f_gender"
+															id="f_gender"  value="1"
+															>&nbsp;&nbsp;&nbsp; Male<input
+															type="radio" 
+															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+															Transgender<input
+															type="radio" checked
+															name="f_gender" id="f_gender" value="2">
+													</c:otherwise>
+													
+													</c:choose>
+														
 													</div>
 												</div>
-												
+												<!-- 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="smallheading">Total
 														Experience <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<!-- 	<input type="text" class="form-control" id="curExp"
+															<input type="text" class="form-control" id="curExp"
 																	name="curExp" placeholder="Current Experience" value=""
-																	required> -->
+																	required>
 														<label class="control-label col-sm-2" for="smallheading">10
 														</label>
 													</div>
-												</div>
+												</div> -->
 												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
 														<input type="submit" id="sub1" class="btn btn-primary"
@@ -346,24 +388,26 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		function check(qualType) {
-			//document.getElementById("abc").style = "display:none"
-			//var qualType=document.getElementById("cat").value
-			//alert("qualType::"+qualType);
 
 			if (qualType == 0) {
-
 				document.getElementById("abc").style = "visible"
+					
+					document.getElementById("fac_address2").setAttribute("required","true");
 
 			} else if (qualType == 1) {
 				document.getElementById("abc").style = "display:none"
+					document.getElementById("fac_address2").removeAttribute("required");
+
 			}
 
 		}
 		function hideText() {
 			//alert("hii");
 			document.getElementById("abc").style = "display:none"
-			document.getElementById("xyz").style = "display:none"
-
+			document.getElementById("xyz").style = "display:none";
+			var x=${facPerDetail.isAddSame};
+			//alert("x" +x);
+				//check(x);
 		}
 
 		function showForm() {
@@ -382,8 +426,18 @@
 		}
 
 		function calExp() {
+			
+			
+			  const monthDifference =  moment(new Date('2019/05/30')).diff(new Date('2019/03/30'), 'months', true);
+alert("monthDifference " +monthDifference)
 			var d = new Date();
+			
+			var a = '2019/03/30';
+			var b = '2019/05/30';
 
+			// Months between years.
+	//		var months = (b.getFullYear() - a.getFullYear()) * 12;
+//alert(//Mo ths " +months);
 			var month = d.getMonth() + 1;
 			var day = d.getDate();
 
@@ -392,7 +446,7 @@
 
 			alert("date is" + output);
 
-			var joinDate = document.getElementById("doj").value;
+			var joinDate = document.getElementById("f_doj").value;
 			alert("date of join" + joinDate);
 
 			//date1: 24/09/2015 (24th Sept 2015)
@@ -402,6 +456,7 @@
 			var difference = (date2.getDate() - date1.getDate()) / 30
 					+ date2.getMonth() - date1.getMonth()
 					+ (12 * (date2.getFullYear() - date1.getFullYear()));
+			alert("difference " +difference);
 
 		}
 	</script>
@@ -436,6 +491,7 @@
     });
     
 </script>
+
 
 </body>
 </html>

@@ -77,8 +77,8 @@
 				<div class="col-lg-12">
 					<section class="box ">
 						<header class="panel_header">
-							<h2 class="title pull-left">${title}</h2>
-
+<%-- 							<h2 class="title pull-left">${title}</h2>
+ --%>
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showHighEdu"><button
 										type="button" class="btn btn-info">Back</button></a>
@@ -143,7 +143,7 @@
 																No. of Student<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control"
+																<input type="number"  min="0" class="form-control"
 																	id="no_of_student" value="${highEduDet.noStudent}"
 																	name="no_of_student"
 																	placeholder="Number Of Students Opted for Higher Education"
@@ -291,14 +291,24 @@
 			}, function(data) {
 				var html;
 				var len = data.length;
+				var x=${highEduDet.proceedingTo};
 				for (var i = 0; i < len; i++) {
+					if(data[i].programId==x){
+						html += '<option selected value="' + data[i].programId + '">'
+						+ data[i].programName + '</option>';
+						
+					}else{
 					html += '<option value="' + data[i].programId + '">'
 							+ data[i].programName + '</option>';
+					}
 				}
 				html += '</option>';
 				$('#proceed_prog_type').html(html);
 				$("#proceed_prog_type").trigger("chosen:updated");
 			});
+			
+			
+			
 		}
 	</script>
 	<script type="text/javascript">

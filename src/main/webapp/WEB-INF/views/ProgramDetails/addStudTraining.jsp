@@ -179,7 +179,7 @@
 																No. of Students Placed<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" maxlength="5" class="form-control"
+																<input type="number" maxlength="5" min="0" class="form-control"
 																	id="no_stud_placed" value="${trainPlace.noStudentPlaced}"
 																	name="no_stud_placed" placeholder="Total Students Placed "
 																	required>

@@ -12,6 +12,7 @@ public class FacultyPersonalDetail {
 	private String fAadhar;
 	private String fDob;
 	private float fPastExp;
+	private int fGender;
 	
 	private int makerPersUserId;
 	private String makerPersDatetime;
@@ -83,12 +84,18 @@ public class FacultyPersonalDetail {
 		this.makerPersDatetime = makerPersDatetime;
 	}
 
+	public int getfGender() {
+		return fGender;
+	}
+	public void setfGender(int fGender) {
+		this.fGender = fGender;
+	}
 	@Override
 	public String toString() {
 		return "FacultyPersonalDetail [facultyId=" + facultyId + ", fAddress=" + fAddress + ", isAddSame=" + isAddSame
 				+ ", fAddress2=" + fAddress2 + ", fPhone=" + fPhone + ", fResident=" + fResident + ", fAadhar="
-				+ fAadhar + ", fDob=" + fDob + ", fPastExp=" + fPastExp + ", makerPersUserId=" + makerPersUserId
-				+ ", makerPersDatetime=" + makerPersDatetime + "]";
+				+ fAadhar + ", fDob=" + fDob + ", fPastExp=" + fPastExp + ", fGender=" + fGender + ", makerPersUserId="
+				+ makerPersUserId + ", makerPersDatetime=" + makerPersDatetime + "]";
 	}
 	
 }

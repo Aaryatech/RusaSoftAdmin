@@ -554,7 +554,7 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/showAcademicDetails", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showAcademicDetails", method = RequestMethod.GET)
 	public ModelAndView showAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -575,8 +575,8 @@ public class FacultyModuleController {
 		return model;
 
 	}
-
-	@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.GET)
+*/
+	/*@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.GET)
 	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -596,9 +596,9 @@ public class FacultyModuleController {
 
 		return model;
 
-	}
+	}*/
 
-	@RequestMapping(value = "/showPersonalDetails", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showPersonalDetails", method = RequestMethod.GET)
 	public ModelAndView showPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -619,7 +619,7 @@ public class FacultyModuleController {
 
 		return model;
 
-	}
+	}*/
 
 	/*
 	 * @RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)

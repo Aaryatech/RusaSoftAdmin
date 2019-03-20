@@ -76,19 +76,55 @@
 												<th>Email ID</th>
 												<th>Designation</th>
 												<th>Total Experience</th>
-												
 											</tr>
-
-										</thead>
-
-
+											
+											<tbody>
+											<c:forEach items="${facPerDetList}" var="staffList" varStatus="count">
+												<tr>
+												<%-- <td><input type="checkbox" class="chk" name="staffIds"
+															id="staffIds${count.index+1}" value="${staffList.facultyId}" /></td> --%>
+											<td style="text-align: center">${count.index+1}</td>
+											
+											<td style="text-align: left"><c:out
+														value="${staffList.facultyName}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.contactNo}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.email}" /></td>
+														
+														<td style="text-align: left"><c:out
+														value="${staffList.designationName}" /></td>
+														
+											<td style="text-align: left"><c:out
+														value="${staffList.currentExperience+staffList.fPastExp}" /></td>
+														
+											
+									<%-- 			<td> <a
+											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
+												class="glyphicon glyphicon-list"></span></a>
+											<c:if test="${editAccess == 0}">	<a
+											href="${pageContext.request.contextPath}/editFaculity/${staffList.facultyId}" title="Edit"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
+												class="glyphicon glyphicon-edit"></span></a></c:if> | 
+												
+											<c:if test="${deleteAccess == 0}">	<a
+											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" title="Block"
+											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
+												class="glyphicon glyphicon-remove"></span></a></c:if>
+												</td> --%>
+											
+											
+											
+											
+											</tr>
+											</c:forEach>
+										</tbody>
 
 									</table>
 								</div>
-
-								
-	
-
 
 							</div>
 						</div>

@@ -57,7 +57,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-<%-- 
+				<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showAcademicDetails"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -94,155 +94,149 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-											
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
 
 
-													<div class="col-xs-12">
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#home" data-toggle="tab">
+												<i class="fa fa-home"></i> Register
+										</a></li>
 
-														
+									</ul>
 
-														<div class="col-xs-12"></div>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="home">
 
+											<form class="form-horizontal"
+												action="${pageContext.request.contextPath}/insertFacAcademic"
+												method="post" name="form_sample_2" id="form_sample_2"
+												onsubmit="return checkBeforeSubmit()">
+												<div class="col-md-12"></div>
+												<div class="col-xs-12">
+													<div class="col-xs-12"></div>
 
-
-
-
-													
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Qualification  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<select id="designation" name="designation" 
-																	class="form-control" required>
-																	
-																</select>
-															</div>
-															<div class="col-sm-2">
-															</div>
-															</div>
-															
-															
-															<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Class  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<select id="designation" name="designation" 
-																	class="form-control" required>
-																	<option value="Distinction">Distinction</option>
-																	<option value="First">First</option>
-							                                           <option value="Second">Second</option>
-						                                           	<option value="Pass">Pass </option>
-																</select>
-															</div>
-															<div class="col-sm-2">
-															</div>
-															</div>
-															
-															
-													
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">University
-																  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="prevExp"
-																	name="prevExp" placeholder="Previous Experience"  onchange="calExp()"
-																	value="" required>
-															</div>
-
-															
-																</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="fQualificationId">
+															Qualification<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<select id="fQualificationId" name="fQualificationId"
+																class="form-control" required>
+																<c:forEach items="${quolfList}" var="quolf">
+																<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 																
-																
-																<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">City
-																  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="prevExp"
-																	name="prevExp" placeholder="Previous Experience"  onchange="calExp()"
-																	value="" required>
-															</div>
+																</c:forEach>
 
-															
-																</div>
-															
-															
-																
-																<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Year of Passing
-																  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="prevExp"
-																	name="prevExp" placeholder="Previous Experience"  onchange="calExp()"
-																	value="" required>
-															</div>
-
-															
-																</div>
-															
-															
-														
-													
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+															</select>
 														</div>
 
 													</div>
 
 
-													<div class="clearfix"></div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="fClass">
+															Class <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<select id="fClass" name="fClass"
+																class="form-control" required>
+																<option value="Distinction">Distinction</option>
+																<option value="First">First</option>
+																<option value="Second">Second</option>
+																<option value="Pass">Pass </option>
+															</select>
+														</div>
+														<div class="col-sm-2"></div>
+													</div>
+
+
+
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="fUniversity">University
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="fUniversity"
+																name="fUniversity" placeholder="Previous Experience"
+																 value="" required>
+														</div>
+
+
+													</div>
+
+
+													<!-- <div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">City
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="prevExp"
+																name="prevExp" placeholder="Previous Experience"
+																onchange="calExp()" value="" required>
+														</div>
+
+
+													</div>
+ -->
+
+
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="fPassingYear">Year
+															of Passing <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy" id="fPassingYear"
+																name="fPassingYear" placeholder="Previous Experience"
+																onchange="calExp()" value="" required>
+														</div>
+
+													</div>
+
+													<div class="form-group">
+														
+														<div class="col-sm-offset-2 col-sm-10">
+															<input type="submit" id="sub1" class="btn btn-primary" value="Save" onclick="submit_f(0)">
+															<input type="submit" id="sub2" class="btn btn-primary" value="Save And Next" onclick="submit_f(1)">
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+														
+														<input type="hidden" id="fac_aca_id" name="fac_aca_id"
+															value="${facPhdDetail.fAcaId}"> <input
+															type="hidden" id="is_view" name="is_view" value="0">
+															<input
+															type="hidden" id="fac_id" name="fac_id" value="12">
+													</div>
 
 												</div>
 
-											</div>
+
+												<div class="clearfix"></div>
+											</form>
 										</div>
-									</form>
+
+									</div>
 								</div>
-
 							</div>
-						</div>
 
+						</div>
 					</section>
 				</div>
 
-
-				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
-		<!-- END CONTENT -->
-
-
-
 	</div>
+
+
+	<!-- MAIN CONTENT AREA ENDS -->
+	<!-- END CONTENT -->
+
+
+
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript">
+	<script type="text/javascript">
 
 
 function check(qualType) {
@@ -314,6 +308,47 @@ function calExp(){
 
 
 
+</script>
+
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+        document.getElementById("sub1").disabled=true;
+  	  return wasSubmitted;
+    	  }
+      }
+      return false;
+    }   
+    
+    function submit_f(view) {
+		document.getElementById("is_view").value = view;//create this 
+
+	}
+    $(function () {
+		 
+        $('.datepicker').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true
+		});
+    });
+    
+    $(function () {
+	 
+        $('.datepickeryear').datepicker({
+			autoclose: true,
+			minViewMode: 2,
+	         format: 'yyyy'
+
+		});
+    });
+</script> 
+    
 </script>
 
 </body>
