@@ -117,7 +117,7 @@
 													<div class="col-xs-12">
 
 
-														<div class="form-group">
+														<!-- <div class="form-group">
 
 															<label class="control-label col-sm-8" for="smallheading">Institute
 																Support Financially by Awarding Scholarship/Freeships
@@ -133,7 +133,7 @@
 																	name="isSchemes" id="isSchemes" value="1"
 																	onclick="setGovernmentValue(this.value)">
 															</div>
-														</div>
+														</div> -->
 
 														<div id="abc">
 
@@ -145,8 +145,9 @@
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="schemeName"
-																		name="schemeName" placeholder="Name of Schemes"
-																		value="${page.pageName}" required>
+																		onchange="return trim(this)" name="schemeName"
+																		placeholder="Name of Schemes" value="${page.pageName}"
+																		required>
 																</div>
 															</div>
 
@@ -297,7 +298,24 @@
 	</script>
 
 
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 
 
