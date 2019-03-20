@@ -101,19 +101,12 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
 
 
 
-												<!-- <div class="form-group">
+
+
+										<!-- <div class="form-group">
 
 													<label class="control-label col-sm-10" for="smallheading">Institute
 														Support Financially by Awarding Scholarship/Freeships like
@@ -129,26 +122,25 @@
 													</div>
 												</div> -->
 
-												<table id="example-1"
-													class="table table-striped dt-responsive display">
-													<thead>
-														<tr>
-															<th width="10%">Sr No</th>
-															<th>Name of Scheme</th>
-															<th>No. of Students Benefited</th>
-															<th>Scheme/Support offered By</th>
-														</tr>
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th width="10%">Sr No</th>
+													<th>Name of Scheme</th>
+													<th>No. of Students Benefited</th>
+													<th>Scheme/Support offered By</th>
+												</tr>
 
-													</thead>
+											</thead>
 
-													<tbody>
+											<tbody>
 
-													</tbody>
-												</table>
+											</tbody>
+										</table>
 
 
-											</div>
-										</div>
+
 									</form>
 								</div>
 

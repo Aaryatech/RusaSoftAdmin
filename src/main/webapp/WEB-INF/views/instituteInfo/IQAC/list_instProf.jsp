@@ -96,49 +96,35 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
 
-												<div>
-
-
-													<div class="col-xs-12">
-														<div class="form-group">
+										<div class="form-group">
 
 
 
-															<table class="table table-striped dt-responsive display"
-																id="example-1">
-																<thead>
-																	<tr>
-																		<th>Sr No</th>
-																		<th>Date of Establishment</th>
-																		<th>Name of Alternate Faculty</th>
-																		<th>Phone No of Alternate Faculty</th>
-																		<th>FAX No of Alternate Faculty</th>
-																		<th>Email of Alternate Faculty</th>
+											<table class="table table-striped dt-responsive display"
+												id="example-1">
+												<thead>
+													<tr>
+														<th>Sr No</th>
+														<th>Date of Establishment</th>
+														<th>Name of Alternate Faculty</th>
+														<th>Phone No of Alternate Faculty</th>
+														<th>FAX No of Alternate Faculty</th>
+														<th>Email of Alternate Faculty</th>
 
-																	</tr>
+													</tr>
 
-																</thead>
+												</thead>
 
-															</table>
-
-														</div>
-
-													</div>
+											</table>
 
 
-													<div class="clearfix"></div>
 
-												</div>
 
-											</div>
 										</div>
 									</form>
 								</div>
