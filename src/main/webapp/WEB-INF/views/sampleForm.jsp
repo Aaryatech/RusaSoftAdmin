@@ -296,9 +296,9 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control datepickeryear" id="year"
-																	value="${editProgramActivity.year}" name="year"
-																	placeholder="Year" required>
+																<input type="text" class="form-control datepickeryear"
+																	id="year" value="${editProgramActivity.year}"
+																	name="year" placeholder="Year" required>
 																<!-- <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy"> -->
 															</div>
 														</div>
@@ -311,7 +311,8 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="branch"
 																	value="${editProgramActivity.branch}" name="branch"
-																	placeholder="Branch" required pattern="^(?!\s*$).+" onchange="return trim(this)">
+																	placeholder="Branch" required pattern="^(?!\s*$).+"
+																	onchange="return trim(this)">
 															</div>
 														</div>
 
@@ -380,7 +381,7 @@
 
 															</div>
 														</div>
- 
+
 													</div>
 
 												</div>
@@ -404,12 +405,11 @@
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
 														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Add">
-														  <input
+															onclick="submit_f(1)" value="Add"> <input
 															type="submit" class="btn btn-primary"
 															onclick="submit_f(0)"
 															value="Save &
-																		Next">  
+																		Next">
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
@@ -481,13 +481,12 @@
 			}
 
 		}
-		
+
 		function trim(el) {
-		    el.value = el.value.
-		    replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		    replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		    replace(/\n +/, "\n"); // Removes spaces after newlines
-		    return;
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
 		}
 	</script>
 	<script type="text/javascript">
@@ -500,6 +499,13 @@
 						return true;
 					});
 		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 	</script>
 	<script type="text/javascript">
 		$(function() {

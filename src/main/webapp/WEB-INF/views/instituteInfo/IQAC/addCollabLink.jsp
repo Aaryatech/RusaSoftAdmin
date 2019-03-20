@@ -101,8 +101,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -141,28 +140,14 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="agency"
-															name="agency"
+															name="agency" autocomplete="off"
+															onchange="return trim(this)"
 															placeholder="Collaboration Linkage with Agency"
 															value="${page.pageName}" required>
 													</div>
 												</div>
 
 
-												<!-- <div class="form-group">
-													<label class="control-label col-sm-2" for="academicYear">Academic
-														Year<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<select id="academicYear" name="academicYear"
-															class="form-control" required>
-															<option value="2018-2019">2018-2019</option>
-															<option value="2017-2018">2017-2018</option>
-															<option value="2016-2017">2016-2017</option>
-															<option value="2015-2016">2015-2016</option>
-
-														</select>
-													</div>
-												</div> -->
 
 
 												<div class="form-group">
@@ -172,7 +157,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="linkageNature"
-															name="linkageNature"
+															name="linkageNature" autocomplete="off"
+															onchange="return trim(this)"
 															placeholder="Nature of Linkage Collaboration"
 															value="${page.pageName}" required>
 													</div>
@@ -185,7 +171,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="beneficiary"
-															name="beneficiary"
+															name="beneficiary" autocomplete="off"
+															onchange="return trim(this)"
 															placeholder="Beneficiary of Collaboration / Linkage"
 															value="${page.pageName}" required>
 													</div>
@@ -200,7 +187,7 @@
 														Beneficiary<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control" autocomplete="off"
 															id="totalParticipants" name="totalParticipants"
 															placeholder="No. of Participants / Beneficiary"
 															value="${page.pageName}" required>
@@ -308,7 +295,24 @@
 
 
 
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 
 </body>

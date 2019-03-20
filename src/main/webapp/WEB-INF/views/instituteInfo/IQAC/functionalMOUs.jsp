@@ -108,60 +108,41 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
-
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Title of MoU</th>
-																		<th>MoU Duration / Period</th>
-																		<th>Functional MoU with Agency</th>
-																		<th>Academic Year</th>
-																		<th>Beneficiary of MoU</th>
-																		<th>No. of Participants / Beneficiary</th>
-
-
-																	</tr>
-
-																</thead>
 
 
 
-																<tbody>
+
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+
+												<tr>
+													<th rowspan="2">Sr No</th>
+													<th rowspan="2">Title of MoU</th>
+													<th style="text-align: center;" colspan="2">Duration</th>
+													<th rowspan="2">Functional MoU with Agency</th>
+													<th rowspan="2">Beneficiary of MoU</th>
+													<th rowspan="2">No. of Participants / Beneficiary</th>
+
+												</tr>
+												<tr>
+													<th>From Date</th>
+													<th>To Date</th>
+													<th></th>
+
+												</tr>
+
+											</thead>
 
 
-																</tbody>
-															</table>
 
-														</div>
+											<tbody>
 
 
-													</div>
+											</tbody>
+										</table>
 
 
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
-										</div>
 									</form>
 								</div>
 

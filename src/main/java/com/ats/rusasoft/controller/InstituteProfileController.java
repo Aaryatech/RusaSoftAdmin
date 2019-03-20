@@ -73,7 +73,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/visionMission");
 		try {
 
-			model.addObject("title", "Vision & Mission");
+			model.addObject("title", "Institute Vision And Mission");
 
 		} catch (Exception e) {
 
@@ -456,7 +456,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/collaborationLinkages");
 		try {
 
-			model.addObject("title", "Collaboration & Linkages");
+			model.addObject("title", "Collaboration And Linkages List");
 
 		} catch (Exception e) {
 
@@ -474,7 +474,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
 		try {
 
-			model.addObject("title", "Add Collaboration & Linkages");
+			model.addObject("title", "Add Collaboration And Linkages");
 
 		} catch (Exception e) {
 

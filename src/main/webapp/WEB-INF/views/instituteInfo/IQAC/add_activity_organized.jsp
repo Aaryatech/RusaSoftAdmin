@@ -120,7 +120,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="activityName"
 															name="activityName" placeholder="Name of Activity"
-															value="${page.pageName}" required>
+															autocomplete="off" value="${page.pageName}" required>
 													</div>
 												</div>
 
@@ -133,8 +133,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="fromDate" name="fromDate" value="${page.pageName}"
-															required>
+															autocomplete="off" id="fromDate" name="fromDate"
+															value="${page.pageName}" required>
 
 													</div>
 												</div>
@@ -146,8 +146,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="toDate" name="toDate" value="${page.pageName}"
-															required>
+															autocomplete="off" id="toDate" name="toDate"
+															value="${page.pageName}" required>
 													</div>
 												</div>
 
@@ -195,7 +195,7 @@
 
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
-															id="inst_activity_participation"
+															id="inst_activity_participation" autocomplete="off"
 															name="inst_activity_participation"
 															placeholder="Name of Activity" value="${page.pageName}"
 															required>

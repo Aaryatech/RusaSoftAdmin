@@ -126,19 +126,9 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="title"
-															name="title" placeholder="Title of MoU"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-												<div class="form-group">
-
-													<label class="control-label col-sm-2" for="mouDuration">MoU
-														Duration / Period<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="mouDuration"
-															name="mouDuration" placeholder="MoU Duration / Period"
-															value="${page.pageName}" required>
+															autocomplete="off" name="title"
+															placeholder="Title of MoU" value="${page.pageName}"
+															required>
 													</div>
 												</div>
 
@@ -170,26 +160,36 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="otherCourse"
-															required name="otherCourse" placeholder=""
-															value="${page.pageName}">
+															autocomplete="off" required name="otherCourse"
+															placeholder="" value="${page.pageName}">
 													</div>
 												</div>
 
-												<!-- <div class="form-group">
-													<label class="control-label col-sm-2" for="academicYear">Academic
-														Year<span class="text-danger">*</span>
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="fromDate">From
+														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="academicYear" name="academicYear"
-															class="form-control" required>
-															<option value="2018-2019">2018-2019</option>
-															<option value="2017-2018">2017-2018</option>
-															<option value="2016-2017">2016-2017</option>
-															<option value="2015-2016">2015-2016</option>
+														<input type="text" class="form-control datepicker"
+															autocomplete="off" id="fromDate" name="fromDate"
+															value="${page.pageName}" required>
 
-														</select>
 													</div>
-												</div> -->
+												</div>
+
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="toDate">To
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															autocomplete="off" id="toDate" name="toDate"
+															value="${page.pageName}" required>
+													</div>
+												</div>
+
 
 
 
@@ -197,12 +197,12 @@
 												<div class="form-group">
 
 													<label class="control-label col-sm-2" for="beneficiaryMOU">Beneficiary
-														of MOU<span class="text-danger">*</span>
+														of MoU<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="beneficiaryMOU" name="beneficiaryMOU"
-															placeholder="Beneficiary of MOU" value="${page.pageName}"
+															placeholder="Beneficiary of MoU" value="${page.pageName}"
 															required>
 													</div>
 												</div>
