@@ -101,7 +101,7 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
+										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> ${title}
 											</a></li>
@@ -109,123 +109,116 @@
 										</ul>
 
 										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+											<div class="tab-pane fade in active" id="home"> --%>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="activityType">Type
+												of Activity <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="activityType" name="activityType"
+													class="form-control" required>
+													<option value="Sports">Sports</option>
+													<option value="Cultural">Cultural</option>
 
 
-												<div class="form-group">
+												</select>
+											</div>
+										</div>
 
-													<label class="control-label col-sm-2" for="activityName">Name
-														of Activity <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="activityName"
-															name="activityName" placeholder="Name of Activity"
-															autocomplete="off" value="${page.pageName}" required>
-													</div>
-												</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="activityLevel">Level
+												of Activity <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="activityLevel" name="activityLevel"
+													class="form-control" required>
+													<option value="State">State</option>
+													<option value="National">National</option>
+													<option value="International">International</option>
 
+												</select>
+											</div>
+										</div>
 
+										<div class="form-group">
 
-												<div class="form-group">
-
-													<label class="control-label col-sm-2" for="fromDate">From
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															autocomplete="off" id="fromDate" name="fromDate"
-															value="${page.pageName}" required>
-
-													</div>
-												</div>
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-2" for="toDate">To
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															autocomplete="off" id="toDate" name="toDate"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-
-
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="activityLevel">Level
-														of Activity <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<select id="activityLevel" name="activityLevel"
-															class="form-control" required>
-															<option value="State">State</option>
-															<option value="National">National</option>
-															<option value="International">International</option>
-
-														</select>
-													</div>
-												</div>
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="activityType">Type
-														of Activity Year<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<select id="activityType" name="activityType"
-															class="form-control" required>
-															<option value="Sports">Sports</option>
-															<option value="Cultural">Cultural</option>
-
-
-														</select>
-													</div>
-												</div>
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-2"
-														for="inst_activity_participation">No. of
-														Participants <span class="text-danger">*</span>
-													</label>
-
-													<div class="col-sm-6">
-														<input type="text" class="form-control"
-															id="inst_activity_participation" autocomplete="off"
-															name="inst_activity_participation"
-															placeholder="Name of Activity" value="${page.pageName}"
-															required>
-
-													</div>
-												</div>
+											<label class="control-label col-sm-2" for="activityName">Name
+												of Activity <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="activityName"
+													name="activityName" placeholder="Name of Activity"
+													autocomplete="off" value="${page.pageName}" required>
+											</div>
+										</div>
 
 
 
+										<div class="form-group">
 
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
-																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
-
-
-
-												<div class="clearfix"></div>
-
-
+											<label class="control-label col-sm-2" for="fromDate">From
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="fromDate" name="fromDate"
+													value="${page.pageName}" required>
 
 											</div>
 										</div>
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="toDate">To
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="toDate" name="toDate"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2"
+												for="inst_activity_participation">No. of
+												Participants <span class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control"
+													id="inst_activity_participation" autocomplete="off"
+													name="inst_activity_participation"
+													placeholder="No.of Participants" value="${page.pageName}"
+													required>
+
+											</div>
+										</div>
+
+
+
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save &
+																		Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+										</div>
+
+
+
+										<div class="clearfix"></div>
+
+
+
+
 									</form>
 								</div>
 

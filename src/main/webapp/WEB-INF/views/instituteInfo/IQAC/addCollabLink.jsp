@@ -120,7 +120,7 @@
 													</label>
 													<div class="col-sm-6">
 														<select id="colName" name="colName" class="form-control"
-															required>
+															required><option value="-1">Select</option>
 															<option value="Faculty Exchange">Faculty
 																Exchange</option>
 															<option value="Student Exchange">Student
@@ -170,11 +170,13 @@
 														of Collaboration / Linkage<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="beneficiary"
-															name="beneficiary" autocomplete="off"
-															onchange="return trim(this)"
-															placeholder="Beneficiary of Collaboration / Linkage"
-															value="${page.pageName}" required>
+														<select id="beneficiary" name="beneficiary"
+															class="form-control" required>
+															<option value="-1">Select</option>
+															<option value="1">Students</option>
+															<option value="2">Staff</option>
+															<option value="3">Students And Staff</option>
+														</select>
 													</div>
 												</div>
 

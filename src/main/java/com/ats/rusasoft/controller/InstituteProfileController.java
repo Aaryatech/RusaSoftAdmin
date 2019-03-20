@@ -67,7 +67,7 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
 	public ModelAndView showVisionMission(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/visionMission");
@@ -83,7 +83,7 @@ public class InstituteProfileController {
 
 		return model;
 
-	}
+	}*/
 
 	@RequestMapping(value = "/showInstituteSupport", method = RequestMethod.GET)
 	public ModelAndView showInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
@@ -91,7 +91,9 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
 		try {
 
-			model.addObject("title", "Institute Financial Support");
+			model.addObject("title", "Institute Schemes List");
+			model.addObject("title1",
+					"Institute Support Financially by Awarding Scholarship/Freeships like schemes other than Government Schemes ");
 
 		} catch (Exception e) {
 
@@ -109,7 +111,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_institute_support");
 		try {
 
-			model.addObject("title", "Institute Financial Support");
+			model.addObject("title", "Add Institute Schemes");
 
 		} catch (Exception e) {
 
@@ -817,7 +819,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/profDevelpment");
 		try {
 
-			model.addObject("title", "Professional Development");
+			model.addObject("title", "Training Teaching List");
 
 		} catch (Exception e) {
 
@@ -835,8 +837,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
 		try {
 
-			model.addObject("title", "Add Professional Development");
-			model.addObject("title1", "Governance, Leadership and Management");
+			model.addObject("title", "Add Training Teaching ");
 
 		} catch (Exception e) {
 
@@ -854,7 +855,25 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/administrativeDevlop");
 		try {
 
-			model.addObject("title", "Administrative Development");
+			model.addObject("title", "Training Non-Teaching List");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddAdminDevelopment", method = RequestMethod.GET)
+	public ModelAndView showAddAdminDevelopment(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_administrativeDevlop");
+		try {
+
+			model.addObject("title", " Add Training Non-Teaching");
 
 		} catch (Exception e) {
 

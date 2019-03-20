@@ -101,94 +101,46 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
 
-										</ul>
+										<div class="col-xs-12">
+											<h5 class="title pull-left">
+												Sports/Cultural Activity/Competition <Strong>Orgnaized</Strong>
+												at Institute
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-												<div class="form-group">
-													<!-- 	<table class="table table-striped dt-responsive display"
-																id="example-1">
-																<thead>
-																	<tr>
-																		<th width="5%">Sr No</th>
-																		<th width="10%">Academic Year</th>
-																		<th width="10%">Name of Activity</th>
+											</h5>
+											<div class="col-xs-12"></div>
+											<div class="form-group">
 
-																		<th width="20%" style="text-align: center;"
-																			colspan="2">Duration</th>
+												<table class="table table-striped dt-responsive display"
+													id="example-1">
+													<thead>
+														<tr>
+															<th rowspan="2">Sr No</th>
 
-																		<th width="15%">Total Participants</th>
-																		<th width="20%">Level of Activity/Competition</th>
-																		<th width="20%">Type of Activity/Competition</th>
-
-
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td width="5%"></td>
-																		<td width="10%"></td>
-																		<td width="10%"></td>
-																		<td width="10%">From Date</td>
-																		<td width="10%">To Date</td>
-																		<td width="15%"></td>
-																		<td width="20%"></td>
-																		<td width="20%"></td>
-																	</tr>
-																</tbody>
-															</table>
- -->
+															<th rowspan="2">Type of Activity</th>
+															<th rowspan="2">Level of Activity</th>
+															<th rowspan="2">Name of Activity</th>
+															<th style="text-align: center;" colspan="2">Duration</th>
+															<th rowspan="2">Total Participants</th>
+															<th rowspan="2">Action</th>
 
 
 
+														</tr>
+														<tr>
 
+															<th>From Date</th>
+															<th>To Date</th>
+															<th></th>
 
+														</tr>
+													</thead>
+													<tbody>
 
-													<table class="table table-striped dt-responsive display"
-														id="example-1">
-														<thead>
-															<tr>
-																<th rowspan="2">Sr No</th>
-																<th rowspan="2">Name of Activity</th>
-																<th style="text-align: center;" colspan="2">Duration</th>
-																<th rowspan="2">Total Participants</th>
-
-																<th rowspan="2">Level of Activity/Competition</th>
-																<th rowspan="2">Type of Activity/Competition</th>
-
-															</tr>
-															<tr>
-
-																<th>From Date</th>
-																<th>To Date</th>
-																<th></th>
-
-															</tr>
-														</thead>
-														<tbody>
-															<!-- <tr>
-																		<td width="5%"></td>
-																		<td width="20%"></td>
-																		<td width="25%"></td>
-																		<td width="15%">From Date</td>
-																		<td width="15%">To Date</td>
-																		<td width="20%"></td>
-
-																	</tr> -->
-														</tbody>
-													</table>
-
-												</div>
-
+													</tbody>
+												</table>
 
 											</div>
-
-
 										</div>
 									</form>
 								</div>

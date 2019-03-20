@@ -101,100 +101,94 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
+										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title1}
+													<i class="fa fa-home"></i> ${title}
 											</a></li>
 
 										</ul>
+ --%>
+										<!-- <div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="title">
-														Title of Professional Development Program for Teaching
-														Staff <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="title"
-															name="title"
-															placeholder="Title of Professional Development Program for Teaching Staff"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="participant">No.
-														of Participants <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-4" for="fromDate">From
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="fromDate" name="fromDate" value="${page.pageName}"
-															required>
-													</div>
-												</div>
-												<div class="form-group">
-
-													<label class="control-label col-sm-4" for="toDate">To
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="toDate" name="toDate" value="${page.pageName}"
-															required>
-													</div>
-
-
-
-
-
-												</div>
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
-																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="title">
+												Title<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="title"
+													name="title" autocomplete="off"
+													placeholder="Title of Professional Development Program for Teaching Staff"
+													value="${page.pageName}" required>
 											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="participant">No.
+												of Participants <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="participant"
+													autocomplete="off" name="participant"
+													placeholder="No. of Participants" value="${page.pageName}"
+													required>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="fromDate">From
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="fromDate" name="fromDate"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="toDate">To
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="toDate" name="toDate"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save &
+																		Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+											<!-- 	</div>
+											</div> -->
 
 
 											<div class="clearfix"></div>
 										</div>
-								</div>
-								</form>
-							</div>
 
+									</form>
+								</div>
+
+							</div>
 						</div>
+
+					</section>
 				</div>
 
+
+				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
-	</div>
-
-
-	<!-- MAIN CONTENT AREA ENDS -->
-	</section>
-	</section>
-	<!-- END CONTENT -->
+		</section>
+		<!-- END CONTENT -->
 
 
 
@@ -282,7 +276,24 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 
 </body>

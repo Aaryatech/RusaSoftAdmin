@@ -86,7 +86,7 @@
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/showAddCollaborationLinkages"><button
-										type="button" class="btn btn-info">Add</button></a>
+										type="button" class="btn btn-success">Add</button></a>
 								<%-- <a
 									href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <!-- <a
@@ -112,11 +112,12 @@
 											<thead>
 												<tr>
 													<th width="10%">Sr No</th>
-													<th>Name of Collaboration / Linkage</th>
-												<!-- 	<th>Academic Year</th> -->
-													<th>Nature of Linkage Collaboration</th>
-													<th>Beneficiary of Collaboration / Linkage</th>
-													<th>No. of Participants / Beneficiary</th>
+													<th>Name</th>
+													<!-- 	<th>Academic Year</th> -->
+													<th>Nature</th>
+													<th>Agency</th>
+													<th>Participants</th>
+													<th>Action</th>
 
 												</tr>
 											</thead>

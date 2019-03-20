@@ -106,49 +106,39 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div class="form-group">
-
-													<table class="table table-striped dt-responsive display"
-														id="example-1">
-														<thead>
-															<tr>
-																<th width="5%">Sr No</th>
-																<th width="25%">Title of Professional Development
-																	Program for Teaching Staff</th>
-
-																<th width="30%" style="text-align: center;" colspan="2">Duration</th>
-
-																<th width="20%">No. of Participants</th>
 
 
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td width="5%"></td>
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
 
-																<td width="25%"></td>
-																<td width="15%">From Date</td>
-																<td width="15%">To Date</td>
-																<td width="20%"></td>
 
-															</tr>
-														</tbody>
-													</table>
 
-												</div>
-											</div>
-										</div>
+												<tr>
+													<th rowspan="2">Sr No</th>
+													<th rowspan="2">Title of Professional Development
+														Program for Teaching Staff</th>
+													<th style="text-align: center;" colspan="2">Duration</th>
+													<th rowspan="2">Total Participants</th>
+
+
+
+												</tr>
+												<tr>
+
+													<th>From Date</th>
+													<th>To Date</th>
+													<th></th>
+
+												</tr>
+
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+
+
 									</form>
 								</div>
 

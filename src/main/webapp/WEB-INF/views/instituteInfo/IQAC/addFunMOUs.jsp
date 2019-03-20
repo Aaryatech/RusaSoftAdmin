@@ -139,6 +139,7 @@
 													<div class="col-sm-6">
 														<select id="functionalMOU" name="functionalMOU"
 															onchange="showForm()" class="form-control" required>
+															<option value="-1">Select</option>
 															<option value="IIT">IIT</option>
 															<option value="NIT">NIT</option>
 															<option value="IIIT">IIIT</option>
@@ -200,12 +201,46 @@
 														of MoU<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
-															id="beneficiaryMOU" name="beneficiaryMOU"
-															placeholder="Beneficiary of MoU" value="${page.pageName}"
-															required>
+
+														<select id="beneficiaryMOU" name="beneficiaryMOU"
+															class="form-control" required>
+															<option value="-1">Select</option>
+															<option value="1">Students</option>
+															<option value="2">Staff</option>
+															<option value="3">Students And Staff</option>
+
+														</select>
+
 													</div>
 												</div>
+
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="beneficiaryMOU">No.
+														of Beneficiary Participants<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control"
+															id="beneficiaryMOU" name="beneficiaryMOU"
+															placeholder="No. of Beneficiary Participants "
+															value="${page.pageName}" required>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="instituteOfMoU">Institute
+														of MoU <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control"
+															id="instituteOfMoU" autocomplete="off"
+															name="instituteOfMoU" placeholder="Institute of MoU"
+															value="${page.pageName}" required>
+													</div>
+												</div>
+
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
@@ -364,7 +399,24 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 	<script type="text/javascript">
 		function getData() {

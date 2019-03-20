@@ -86,7 +86,7 @@
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/showAddInstituteSupport"><button
-										type="button" class="btn btn-success">ADD</button></a>
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -121,26 +121,34 @@
 															name="isSchemes" id="isSchemes" value="1">
 													</div>
 												</div> -->
+										<div class="col-xs-12">
+											<h5 class="title pull-left">
+												Institute Support Financially by Awarding
+												Scholarship/Freeships like schemes <Strong>other
+													than Government Schemes</Strong>
+											</h5>
+											<div class="col-xs-12"></div>
 
-										<table id="example-1"
-											class="table table-striped dt-responsive display">
-											<thead>
-												<tr>
-													<th width="10%">Sr No</th>
-													<th>Name of Scheme</th>
-													<th>No. of Students Benefited</th>
-													<th>Scheme/Support offered By</th>
-												</tr>
+											<table id="example-1"
+												class="table table-striped dt-responsive display">
+												<thead>
+													<tr>
+														<th width="10%">Sr No</th>
+														<th>Name of Scheme</th>
+														<th>No. of Students Benefited</th>
+														<th>Scheme/Support offered By</th>
+														<th>Action</th>
+													</tr>
 
-											</thead>
+												</thead>
 
-											<tbody>
+												<tbody>
 
-											</tbody>
-										</table>
+												</tbody>
+											</table>
 
 
-
+										</div>
 									</form>
 								</div>
 

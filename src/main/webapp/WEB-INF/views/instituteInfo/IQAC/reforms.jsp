@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -82,7 +82,6 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showAddReforms"><button
 										type="button" class="btn btn-success">Add</button></a> <a

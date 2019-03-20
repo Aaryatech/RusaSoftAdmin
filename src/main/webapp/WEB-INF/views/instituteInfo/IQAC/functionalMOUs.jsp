@@ -120,9 +120,9 @@
 													<th rowspan="2">Sr No</th>
 													<th rowspan="2">Title of MoU</th>
 													<th style="text-align: center;" colspan="2">Duration</th>
-													<th rowspan="2">Functional MoU with Agency</th>
-													<th rowspan="2">Beneficiary of MoU</th>
-													<th rowspan="2">No. of Participants / Beneficiary</th>
+													<th rowspan="2">Institute of MoU</th>
+
+													<th rowspan="2">No. of Participants</th>
 
 												</tr>
 												<tr>
