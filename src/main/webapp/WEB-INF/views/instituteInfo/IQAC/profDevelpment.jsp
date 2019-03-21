@@ -108,35 +108,39 @@
 
 
 
-										<table class="table table-striped dt-responsive display"
-											id="example-1">
-											<thead>
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
+
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
+												<thead>
 
 
 
-												<tr>
-													<th rowspan="2">Sr No</th>
-													<th rowspan="2">Title of Professional Development
-														Program for Teaching Staff</th>
-													<th style="text-align: center;" colspan="2">Duration</th>
-													<th rowspan="2">Total Participants</th>
-													 <th rowspan="2">Action </th>
+													<tr>
+														<th rowspan="2">Sr No</th>
+														<th rowspan="2">Title of Professional Development
+															Program for Teaching Staff</th>
+														<th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">Total Participants</th>
+														<th rowspan="2">Action</th>
 
-												</tr>
-												<tr>
+													</tr>
+													<tr>
 
-													<th>From Date</th>
-													<th>To Date</th>
-													  
+														<th>From Date</th>
+														<th>To Date</th>
 
 
-												</tr>
 
-											</thead>
-											<tbody>
+													</tr>
 
-											</tbody>
-										</table>
+												</thead>
+												<tbody>
+
+												</tbody>
+											</table>
+										</div>
 
 
 									</form>

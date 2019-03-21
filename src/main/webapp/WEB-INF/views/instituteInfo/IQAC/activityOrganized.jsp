@@ -109,10 +109,11 @@
 
 											</h5>
 											<div class="col-xs-12"></div>
-											<div class="form-group">
+											<div id="example-4_wrapper"
+												class="dataTables_wrapper form-inline">
 
-												<table class="table table-striped dt-responsive display"
-													id="example-1">
+												<table id="example-4" class="display dataTable" role="grid"
+													aria-describedby="example-4_info" style="width: 100%;">
 													<thead>
 														<tr>
 															<th rowspan="2">Sr No</th>

@@ -88,11 +88,7 @@
 									href="${pageContext.request.contextPath}/showAddFunctionalMOUs"
 									data-toggle="modal"><button type="submit"
 										class="btn btn-success">Add</button></a>
-								<%-- <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%>
-								<!-- <a
-									class="box_toggle fa fa-chevron-down"></a> -->
+
 							</div>
 
 
@@ -110,39 +106,40 @@
 
 
 
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
+
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
+												<thead>
+
+													<tr>
+														<th rowspan="2">Sr No</th>
+														<th rowspan="2">Title of MoU</th>
+														<th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">Institute of MoU</th>
+
+														<th rowspan="2">No. of Participants</th>
+														<th rowspan="2">Action</th>
+
+													</tr>
+													<tr>
+														<th>From Date</th>
+														<th>To Date</th>
 
 
-										<table id="example-1"
-											class="table table-striped dt-responsive display">
-											<thead>
+													</tr>
 
-												<tr>
-													<th rowspan="2">Sr No</th>
-													<th rowspan="2">Title of MoU</th>
-													<th style="text-align: center;" colspan="2">Duration</th>
-													<th rowspan="2">Institute of MoU</th>
-
-													<th rowspan="2">No. of Participants</th>
-
-												</tr>
-												<tr>
-													<th>From Date</th>
-													<th>To Date</th>
-													<th></th>
-
-												</tr>
-
-											</thead>
+												</thead>
 
 
 
-											<tbody>
+												<tbody>
 
 
-											</tbody>
-										</table>
-
-
+												</tbody>
+											</table>
+										</div>
 									</form>
 								</div>
 

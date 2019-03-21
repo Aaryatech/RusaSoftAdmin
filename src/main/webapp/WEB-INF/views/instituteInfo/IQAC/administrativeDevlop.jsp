@@ -101,23 +101,12 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<%-- <ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
 
-										</ul> --%>
-
-
-
-
-
-										<div class="form-group">
-
-											<table class="table table-striped dt-responsive display"
-												id="example-1">
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
 												<thead>
-
 
 													<tr>
 														<th rowspan="2">Sr No</th>
@@ -125,14 +114,14 @@
 															Program organized for non-teaching Staff</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Total Participants</th>
-														<th rowspan="2">Action </th>
+														<th rowspan="2">Action</th>
 
 													</tr>
 													<tr>
 
 														<th>From Date</th>
 														<th>To Date</th>
-														 
+
 
 													</tr>
 												</thead>
