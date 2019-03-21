@@ -100,31 +100,35 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 
-										<table class="table table-striped dt-responsive display"
-											id="example-1">
-											<thead>
-												<tr>
-													<th width="5%">Sr No</th>
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
 
-													<th width="25%">Title of Programme/Activity Year</th>
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
+												<thead>
 
-													<th width="30%" style="text-align: center;" colspan="2">Duration</th>
-													<th width="20%">No. of Participants</th>
+													<tr>
+														<th rowspan="2">Sr No</th>
+														<th rowspan="2">Title of Program/Activity</th>
+														<th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">No. of Participants</th>
+														<th rowspan="2">Action</th>
 
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td width="5%"></td>
-													<td width="20%"></td>
-													<td width="25%"></td>
-													<td width="15%">From Date</td>
-													<td width="15%">To Date</td>
-													<td width="20%"></td>
+													</tr>
+													<tr>
 
-												</tr>
-											</tbody>
-										</table>
+														<th>From Date</th>
+														<th>To Date</th>
+
+
+													</tr>
+
+												</thead>
+												<tbody>
+
+												</tbody>
+											</table>
+										</div>
 
 
 									</form>

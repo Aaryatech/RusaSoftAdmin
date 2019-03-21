@@ -1015,4 +1015,40 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showResearchCenter", method = RequestMethod.GET)
+	public ModelAndView showResearchCenter(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/list_research_center");
+		try {
+
+			model.addObject("title", "Research Center");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddResearchCenter", method = RequestMethod.GET)
+	public ModelAndView showAddResearchCenter(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_research_center");
+		try {
+
+			model.addObject("title", "Add Research Center");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 }

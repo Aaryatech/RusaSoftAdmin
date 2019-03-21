@@ -101,28 +101,58 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="finantialYear">Title
-												of Program/Activity <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="rc_subject_name">Subject
+												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="title" name="title" class="form-control"
+												<input type="text" class="form-control" id="rc_subject_name"
+													autocomplete="off" name="rc_subject_name"
+													placeholder="Subject Name" value="${page.pageName}"
 													required>
-
-													<option value="Truth">Truth</option>
-													<option value="Righteous Conduct">Righteous
-														Conduct</option>
-													<option value="Non violence">Non violence</option>
-													<option value="Peace">Peace</option>
-													<option value=">National values">National values</option>
-													<option value="National Integration ">National
-														Integration</option>
-													<option value="Communal harmony">Communal harmony</option>
-													<option value="Fundamental Duties">Fundamental
-														Duties</option>
-
-												</select>
 											</div>
 										</div>
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="rc_faculty_name">Faculty
+												Name <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="rc_faculty_name"
+													autocomplete="off" name="rc_faculty_name"
+													placeholder="Faculty Name" value="${page.pageName}"
+													required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="rc_guide_count">No.
+												of Guides<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control"
+													id="rc_guide_count"
+													onkeypress="return allowOnlyNumber(event)" min="0"
+													name="rc_guide_count" placeholder="No. of Guides"
+													autocomplete="off" value="${page.pageName}" required>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="participant">No.
+												of Students<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control"
+													id="rc_student_count"
+													onkeypress="return allowOnlyNumber(event)" min="0"
+													name="rc_student_count" placeholder="No. of Students"
+													autocomplete="off" value="${page.pageName}" required>
+											</div>
+										</div>
+
 
 										<div class="form-group">
 
@@ -131,8 +161,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
+													id="fromDate" name="fromDate" value="${page.pageName}"
+													autocomplete="off" required>
 
 											</div>
 										</div>
@@ -149,21 +179,9 @@
 											</div>
 										</div>
 
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No.
-												of Participants<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="number" class="form-control" id="participant"
-													autocomplete="off"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													name="participant" placeholder="No. of Participants"
-													value="${page.pageName}" required>
-											</div>
-										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
+
+
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
@@ -202,37 +220,6 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	<script type="text/javascript">
@@ -349,12 +336,6 @@
 	    return true;
 	}
 	</script>
-
-
-
-
-
-
 
 </body>
 </html>
