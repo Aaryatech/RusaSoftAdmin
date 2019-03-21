@@ -86,8 +86,7 @@
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
-										type="button" class="btn btn-success">Add</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
 
 						</header>
@@ -98,66 +97,27 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th width="10%">Sr No</th>
+													<th>Title of Distinctiveness</th>
+													<th>Applicable from</th>
+													<th>Beneficiary Stake Holders</th>
+													<th>Action</th>
+												</tr>
 
-										</ul>
+											</thead>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+											<tbody>
 
-												<div>
+											</tbody>
+										</table>
 
-
-													<div class="col-xs-12">
-
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th>Title of Distinctiveness</th>
-																		<th>Applicable from Academic Year</th>
-
-																		<th>Beneficiary Stake Holders</th>
-																	</tr>
-
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
-										</div>
 									</form>
 								</div>
 
