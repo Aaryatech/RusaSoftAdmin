@@ -98,9 +98,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertIqacBasicInfo"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-											onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2"
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -119,8 +118,8 @@
 
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_name">Date
-															of Establishment of IQAC <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="page_name">
+															IQAC Establishment Date <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
@@ -133,48 +132,54 @@
 
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">Name
-															of alternate faculty with IQAC <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="page_order">
+															Alternate Faculty Name <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="alt_faculty_name"
-																name="alt_faculty_name"
-																placeholder="Name of alternate facility with IQAC" pattern="^(?!\s*$).+"
-																value="${instRes.iqacAltName}" required>
+															<input type="text" class="form-control"
+																id="alt_faculty_name" name="alt_faculty_name"
+																placeholder="Name of alternate Faculty with IQAC"
+																pattern="^(?!\s*$).+" value="${instRes.iqacAltName}"
+																required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">Contact
-															No of Alternate Faculty Associated <span
-															class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="page_order">Mobile
+															No <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="alt_fac_contact" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
-																name="alt_fac_contact" placeholder="Contact No"value="${instRes.iqacAltMobile}" 
-																required>
+															<input type="text" class="form-control"
+																id="alt_fac_contact" pattern="^[1-9]{1}[0-9]{9}$"
+																maxlength="10" name="alt_fac_contact"
+																placeholder="Mobile No of Alternate Faculty Associated"
+																value="${instRes.iqacAltMobile}" required>
 														</div>
 													</div>
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">Phone
-															No.<span class="text-danger">*</span>
+															No<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="phone_no" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
-																name="phone_no" placeholder="Phone No." value="${instRes.iqacAltPhone}" 
-																required>
+															<input type="text" class="form-control" id="phone_no"
+																pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+																name="phone_no"
+																placeholder="Phone No of Alternate Faculty"
+																value="${instRes.iqacAltPhone}" required>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="page_order">Fax
+														<label class="control-label col-sm-2" for="page_order">FAX
 															No.<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
-																maxlength="10" class="form-control" id="fax_no" value="${instRes.iqacAltFax}" 
-																name="fax_no" placeholder="Fax No." required>
+															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																maxlength="10" maxlength="10" class="form-control"
+																id="fax_no" value="${instRes.iqacAltFax}" name="fax_no"
+																placeholder="FAX No of Alternate Faculty Associated"
+																required>
 														</div>
 													</div>
 
@@ -183,40 +188,44 @@
 															Registered Email <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control" id="registered_email" value="${instRes.iqacAltEmail1}" 
-																name="registered_email" placeholder="abc@xyz.com" required>
+															<input type="email" class="form-control"
+																id="registered_email" value="${instRes.iqacAltEmail1}"
+																name="registered_email" placeholder="abc@xyz.com"
+																required>
 														</div>
 													</div>
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">Alternate
-															Email :<span class="text-danger">*</span>
+															Email <span class="text-danger"></span>
 														</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control" id="alt_email" value="${instRes.iqacAltEmail2}" 
-																name="alt_email" placeholder="abc@xyz.com " required>
+															<input type="email" class="form-control" id="alt_email"
+																value="${instRes.iqacAltEmail2}" name="alt_email"
+																placeholder="abc@xyz.com " required>
 														</div>
 													</div>
 
-                                              
 
-	<c:choose>
-													<c:when test="${instRes.iqacInfoId!=0}">
-														<input type="hidden" id="iqac_info_id" name="iqac_info_id"
-															value="${instRes.iqacInfoId}">
-													</c:when>
-													<c:otherwise>
-														<input type="hidden" id="iqac_info_id" name="iqac_info_id" value="0" >
-													</c:otherwise>
 
-												</c:choose>
+													<c:choose>
+														<c:when test="${instRes.iqacInfoId!=0}">
+															<input type="hidden" id="iqac_info_id"
+																name="iqac_info_id" value="${instRes.iqacInfoId}">
+														</c:when>
+														<c:otherwise>
+															<input type="hidden" id="iqac_info_id"
+																name="iqac_info_id" value="0">
+														</c:otherwise>
+
+													</c:choose>
 
 
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-9">
 															<input type="submit" id="sub1" class="btn btn-primary"
-																 value="Save & Next"> 
-																
+																value="Save & Next">
+
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
@@ -248,7 +257,7 @@
 
 	<!-- END CONTENT -->
 
-	
+
 
 	<script type="text/javascript">
 		$(function() {
@@ -263,34 +272,33 @@
 		});
 	</script>
 
-<script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+	<script type="text/javascript">
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+			/* var form=document.getElementById("form_sample_2");
+			form.setAttribute("method", "post");
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-	
-var wasSubmitted = false;    
-function checkBeforeSubmit(){
-  if(!wasSubmitted) {
-	  var x=confirm("Do you really want to submit the form?");
-	  if(x==true){
-    wasSubmitted = true;
-	  document.getElementById("sub1").disabled=true;
-	//  document.getElementById("sub2").disabled=true;
+			form.action=("insertLibrarian");
+			var x =confirm();
+			if(x==true)
+			form.submit(); */
 
-    return wasSubmitted;
-	  }
-  }
-  return false;
-}    
+		}
+
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					//  document.getElementById("sub2").disabled=true;
+
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
 	</script>
 
 
