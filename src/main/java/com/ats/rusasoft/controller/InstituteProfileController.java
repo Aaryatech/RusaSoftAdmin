@@ -437,6 +437,24 @@ public class InstituteProfileController {
 	 * }
 	 */
 
+	@RequestMapping(value = "/showMasterCollaborationLinkages", method = RequestMethod.GET)
+	public ModelAndView showMasterCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_linkage_master");
+		try {
+
+			model.addObject("title", "Collaboration And Linkages Master");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showCollaborationLinkages", method = RequestMethod.GET)
 	public ModelAndView showCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
 
