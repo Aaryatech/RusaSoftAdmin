@@ -507,6 +507,14 @@
 			return;
 		}
 	</script>
+
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+	</script>
 	<script type="text/javascript">
 		$(function() {
 

@@ -707,24 +707,6 @@ public class InstituteProfileController {
 		return model;
 
 	}
-	
-	@RequestMapping(value = "/showListQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showListQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/list_quality_initiative");
-		try {
-
-			model.addObject("title", "Add Quality Initiative");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/showInternalQualityInitiative", method = RequestMethod.GET)
 	public ModelAndView showInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {

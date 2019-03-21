@@ -84,9 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
+								<%-- <a
 									href="${pageContext.request.contextPath}/showIntellectualProperty"><button
-										type="button" class="btn btn-info">Back</button></a>
+										type="button" class="btn btn-info">Back</button></a> --%>
 
 							</div>
 
@@ -119,6 +119,7 @@
 											</div>
 										</div>
 
+
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
 												<input type="submit" class="btn btn-primary"
@@ -131,7 +132,32 @@
 
 										</div>
 									</form>
+
+									<div class="form-group">
+
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
+
+												<tr>
+													<th>Sr No</th>
+													<th>Quality Initiative Name</th>
+
+													<th>Action</th>
+
+												</tr>
+
+
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+
+
+									</div>
 								</div>
+
 
 							</div>
 						</div>
