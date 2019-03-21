@@ -72,11 +72,7 @@
 				</div>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
 				<div class="col-lg-12"></div>
-
-
-
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -96,8 +92,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertTeachTraing"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -112,25 +108,25 @@
 											<div class="tab-pane fade in active" id="home"> -->
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="title">
+											<label class="control-label col-sm-2" for="dev_Prog_title">
 												Title<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="title"
-													name="title" autocomplete="off"
+												<input type="text" class="form-control" id="dev_Prog_title"
+													name="dev_Prog_title" autocomplete="off" onchange="trim(this)"
 													placeholder="Title of Professional Development Program for Teaching Staff"
 													value="${page.pageName}" required>
 											</div>
 										</div>
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No.
+											<label class="control-label col-sm-2" for="no_of_participant">No.
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="participant"
-													autocomplete="off" name="participant"
-													placeholder="No. of Participants" value="${page.pageName}"
+												<input type="number" min="0" class="form-control" id="no_of_participant"
+													autocomplete="off" name="no_of_participant"
+													placeholder="Enter No. of Participants" value="${page.pageName}"
 													required>
 											</div>
 										</div>
@@ -142,7 +138,7 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" placeholder="Select From Date"
 													autocomplete="off" id="fromDate" name="fromDate"
 													value="${page.pageName}" required>
 											</div>
@@ -153,8 +149,8 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
+												<input type="text"  class="form-control datepicker"
+													autocomplete="off" id="toDate" name="toDate" placeholder="Select To Date"
 													value="${page.pageName}" required>
 											</div>
 										</div>
@@ -167,14 +163,11 @@
 													value="Save &
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
+												<input type="hidden" name="is_view" id="is_view" value="0">
 											</div>
-											<!-- 	</div>
-											</div> -->
-
 
 											<div class="clearfix"></div>
 										</div>
-
 									</form>
 								</div>
 
@@ -190,79 +183,11 @@
 		</section>
 		<!-- END CONTENT -->
 
-
-
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title"></h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<input type="submit" class="btn btn-primary"
-								onclick="submit_f(1)" value="Save"> <input type="submit"
-								class="btn btn-primary" onclick="submit_f(0)"
-								value="Save &
-																		Next">
-							<button type="reset" class="btn btn-default">Reset</button>
-						</div>
-					</div>
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var year = document.getElementById("academicYear").value;
-			var title = document.getElementById("title").value;
-			var participant = document.getElementById("participant").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, year, title, fromDate, toDate, participant ])
-					.draw();
-			document.getElementById("index").value = i + 1;
-		}
-	</script>
-
 
 	<script type="text/javascript">
 		$(function() {
@@ -292,6 +217,10 @@
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
+		}
+		
+		function submit_f(view){
+			document.getElementById("is_view").value=view;
 		}
 	</script>
 

@@ -141,7 +141,15 @@ public class FacPersonalController {
 		ModelAndView model = null;
 		try {
 
-			int facultyId = 12;
+			
+			int facultyId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+			try {
+				facultyId = Integer.parseInt(request.getParameter("staff_id"));
+			} catch (Exception e) {
+				facultyId = 12;//0;
+			}
+			
+			//int facultyId = 12;
 
 			HttpSession session = request.getSession();
 
@@ -158,7 +166,7 @@ public class FacPersonalController {
 			System.err.println("deptList edt:" + deptList.toString());
 			model.addObject("deptList", deptList);
 
-			map.add("id", facultyId);
+			//map.add("id", facultyId);
 			map.add("type", 1);
 
 			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,

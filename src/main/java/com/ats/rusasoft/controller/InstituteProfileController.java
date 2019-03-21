@@ -816,78 +816,7 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showProfDevelopment", method = RequestMethod.GET)
-	public ModelAndView showProfDevelopment(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/profDevelpment");
-		try {
-
-			model.addObject("title", "Training Teaching List");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddProfDevelopment", method = RequestMethod.GET)
-	public ModelAndView showAddProfDevelopment(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
-		try {
-
-			model.addObject("title", "Add Training Teaching ");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAdminDevelopment", method = RequestMethod.GET)
-	public ModelAndView showAdminDevelopment(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/administrativeDevlop");
-		try {
-
-			model.addObject("title", "Training Non-Teaching List");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddAdminDevelopment", method = RequestMethod.GET)
-	public ModelAndView showAddAdminDevelopment(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_administrativeDevlop");
-		try {
-
-			model.addObject("title", " Add Training Non-Teaching");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	@RequestMapping(value = "/showGenderSensitivity", method = RequestMethod.GET)
 	public ModelAndView showGenderSensitivity(HttpServletRequest request, HttpServletResponse response) {
 
