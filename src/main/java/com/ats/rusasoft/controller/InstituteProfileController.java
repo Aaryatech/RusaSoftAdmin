@@ -31,7 +31,6 @@ public class InstituteProfileController {
 
 	}
 
-	
 	@RequestMapping(value = "/showAddInstProf", method = RequestMethod.GET)
 	public ModelAndView showAddInstProf(HttpServletRequest request, HttpServletResponse response) {
 
@@ -50,23 +49,26 @@ public class InstituteProfileController {
 
 	}
 
-	/*@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
-	public ModelAndView showVisionMission(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/visionMission");
-		try {
-
-			model.addObject("title", "Institute Vision And Mission");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}*/
+	/*
+	 * @RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
+	 * public ModelAndView showVisionMission(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = new ModelAndView("instituteInfo/IQAC/visionMission");
+	 * try {
+	 * 
+	 * model.addObject("title", "Institute Vision And Mission");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/showInstituteSupport", method = RequestMethod.GET)
 	public ModelAndView showInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
@@ -688,6 +690,42 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showAddQualityInitiative", method = RequestMethod.GET)
+	public ModelAndView showAddQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_quality_initiative");
+		try {
+
+			model.addObject("title", "Add Quality Initiative");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/showListQualityInitiative", method = RequestMethod.GET)
+	public ModelAndView showListQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/list_quality_initiative");
+		try {
+
+			model.addObject("title", "Add Quality Initiative");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showInternalQualityInitiative", method = RequestMethod.GET)
 	public ModelAndView showInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
 
@@ -766,7 +804,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/intellectualProperty");
 		try {
 
-			model.addObject("title", "Intellectual Property Rights & Industries");
+			model.addObject("title", "Intellectual Property Rights And Industries");
 
 		} catch (Exception e) {
 
@@ -784,7 +822,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_intel_prop");
 		try {
 
-			model.addObject("title", "Intellectual Property Rights & Industries");
+			model.addObject("title", "Intellectual Property Rights And Industries");
 
 		} catch (Exception e) {
 

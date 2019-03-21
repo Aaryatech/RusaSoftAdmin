@@ -122,7 +122,7 @@
 											<div class="col-sm-6">
 												<select id="initiativeName" name="initiativeName"
 													onchange="showForm()" class="form-control" required>
-
+													<!-- <option value=" ">Select</option>
 													<option value="AQAR prepared or submitted">AQAR
 														prepared or submitted</option>
 													<option value="Academic – Administrative Audit Conducted">Academic
@@ -141,7 +141,7 @@
 													<option value="NBA Certification received">NBA
 														Certification received</option>
 													<option value="7">Any other quality based
-														certification</option>
+														certification</option> -->
 
 												</select>
 											</div>
@@ -155,23 +155,12 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control" id="otherQual"
 													required name="otherQual"
-													placeholder="Any
-														other quality based certification"
+													placeholder="Any other quality based certification"
 													value="${page.pageName}">
 											</div>
 										</div>
 
-										<%-- 	<div class="form-group">
 
-													<label class="control-label col-sm-3" for="conductionDate">Date
-														of Conduction <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="conductionDate" name="conductionDate"
-															value="${page.pageName}" required>
-													</div>
-												</div> --%>
 
 										<div class="form-group">
 
@@ -180,8 +169,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													id="fromDate" name="fromDate" value="${page.pageName}"
-													required>
+													autocomplete="off" id="fromDate" name="fromDate"
+													value="${page.pageName}" required>
 
 											</div>
 										</div>
@@ -193,7 +182,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													id="toDate" name="toDate" value="${page.pageName}" required>
+													autocomplete="off" id="toDate" name="toDate"
+													value="${page.pageName}" required>
 											</div>
 										</div>
 
@@ -205,8 +195,9 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="participant"
-													name="participant" placeholder="No. of Participants"
-													value="${page.pageName}" required>
+													autocomplete="off" name="participant"
+													placeholder="No. of Participants" value="${page.pageName}"
+													required>
 											</div>
 										</div>
 
@@ -349,7 +340,24 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
+						return true;
+					});
+		});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 
 

@@ -101,72 +101,21 @@
 										method="post" enctype="multipart/form-data"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-										<%-- 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
 
-										</ul>
- --%>
-										<!-- 	<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
- -->
 
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="initiativeName">
-												Title of IPR-Industry-Academic Initiative Practice<span
-												class="text-danger">*</span>
+											<label class="control-label col-sm-3"
+												for="quality_initiative_name"> Quality Initiative
+												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="ipr_title"
-													required name="ipr_title" autocomplete="off"
-													placeholder="Title of IPR-Industry-Academic Initiative  "
+												<input type="text" class="form-control"
+													id="quality_initiative_name" required
+													name="quality_initiative_name" autocomplete="off"
+													placeholder="Quality Initiative Name"
 													value="${page.pageName}">
-											</div>
-										</div>
-
-
-
-
-										<div class="form-group">
-
-											<label class="control-label col-sm-3" for="fromDate">From
-												Date <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
-
-											</div>
-										</div>
-
-										<div class="form-group">
-
-											<label class="control-label col-sm-3" for="toDate">To
-												Date <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
-													value="${page.pageName}" required>
-											</div>
-										</div>
-
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="participant">No.
-												of Participants<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="participant"
-													autocomplete="off" name="participant"
-													placeholder="No. of Participants" value="${page.pageName}"
-													required>
 											</div>
 										</div>
 
