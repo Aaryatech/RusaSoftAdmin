@@ -624,7 +624,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
 		try {
 
-			model.addObject("title", " Institutional Distnctiveness");
+			model.addObject("title", "Institutional Distnctiveness");
 
 		} catch (Exception e) {
 
