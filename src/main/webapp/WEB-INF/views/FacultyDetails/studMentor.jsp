@@ -116,9 +116,7 @@
 
 
 
-												<label class="control-label col-sm-3" for="page_name">Mentoring
-													to the Students :<span class="text-danger">*</span>
-												</label>
+												
 
 												<div class="col-xs-12">
 													<table id="example-1"
@@ -187,6 +185,7 @@
 											</div>
 										</div>
 									</form>
+									
 								</div>
 
 							</div>

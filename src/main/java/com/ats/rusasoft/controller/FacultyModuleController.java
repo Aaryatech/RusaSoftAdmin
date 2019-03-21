@@ -155,7 +155,7 @@ public class FacultyModuleController {
 		facConf.setConfDate(request.getParameter("conf_date"));
 		facConf.setConfVenue(request.getParameter("conf_venue"));
 		facConf.setConfFundFrom(request.getParameter("conf_fund"));
-		facConf.setConfFundAmt(Integer.parseInt(request.getParameter("conf_amt")));
+		facConf.setConfFundAmt(Float.parseFloat(request.getParameter("conf_amt")));
 		facConf.setDelStatus(1);
 		facConf.setIsActive(1);
 		facConf.setMakerUserId(0);
@@ -168,7 +168,7 @@ public class FacultyModuleController {
 		
 		FacultyConference insFconf = rest.postForObject(Constants.url+"/insertNewFacConference", facConf, FacultyConference.class);
 		
-		return "redirect:/showPublicationDetails";
+		return "redirect:/showAddPublicationDetailsList";
 		
 	}
 	
@@ -182,7 +182,6 @@ public class FacultyModuleController {
 		
 		FacultyConference fConference = rest.postForObject(Constants.url+"/getFacConfByFacId", map, FacultyConference.class);
 		model.addObject("facConf", fConference);
-		
 		
 		return model;
 		
@@ -729,8 +728,6 @@ public class FacultyModuleController {
 		return model;
 
 	}
-
-	
 	
 	@RequestMapping(value = "/showAddStudMentor", method = RequestMethod.GET)
 	public ModelAndView showAddStudMentor(HttpServletRequest request, HttpServletResponse response) {
@@ -806,7 +803,7 @@ public class FacultyModuleController {
 			StudentMentoring saveStud = rest.postForObject(Constants.url+"/insertStudentMentoringDetails", stud, StudentMentoring.class);
 	
 
-		return "redirect:/showAddStudMentor";
+		return "redirect:/showStudMentor";
 
 	}
 	
@@ -846,7 +843,7 @@ public class FacultyModuleController {
 		model.addObject("title", "Edit Monitoring Details");
 		
 		model.addObject("stud", studMontr);
-		return "redirect:/showAddStudMentor";
+		return "redirect:/showStudMentor";
 		
 	}
 	
@@ -979,9 +976,8 @@ public class FacultyModuleController {
 		facBook.setExVar1("NA");
 		
 		FacultyBook facpubbook = rest.postForObject(Constants.url+"/savefacultyPubBook", facBook, FacultyBook.class);
-		
-		
-		return "redirect:/showBookPub";
+	
+		return "redirect:/showBookPubList";
 		
 	}
 	

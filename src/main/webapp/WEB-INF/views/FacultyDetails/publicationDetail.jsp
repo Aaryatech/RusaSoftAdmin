@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
+							<%-- <h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -131,7 +131,7 @@
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_name"
+																	<input type="text" class="form-control" id="conf_name" pattern="^(?!\s*$).+"
 																		name="conf_name" placeholder="Title of Publication" value="${facConf.confName}"
 																		required>
 																</div>
@@ -147,12 +147,12 @@
 
 																<div class="col-sm-6">
 																	National <input type="radio" name="conf_type" id="conf_type"
-																		checked value="national">
+																		checked value="national">&nbsp;&nbsp;&nbsp; 
 																		
-																	International<input	type="radio" name="conf_type" id="conf_type"
-																	 value="international">
+																	International <input	type="radio" name="conf_type" id="conf_type"
+																	 value="international">&nbsp;&nbsp;&nbsp;
 																	 
-																	State<input	type="radio" name="conf_type" id="conf_type" value="state">
+																	State <input	type="radio" name="conf_type" id="conf_type" value="state">
 																</div>	
 															</div>
 															
@@ -165,16 +165,16 @@
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control datepicker" id="conf_date" onkeypress='return restrictAlphabets(event)'
-																		name="conf_date" placeholder="dd/mm/yyyy" value="${facConf.confDate}" required>
+																		name="conf_date" placeholder="dd/mm/yyyy" value="${facConf.confDate}" pattern="^(?!\s*$).+" required>
 																</div>
 															</div>
 
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="smallheading">Venue
-																	 <span class="text-danger"></span>
+																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_venue"
+																	<input type="text" class="form-control" id="conf_venue" pattern="^(?!\s*$).+"
 																		name="conf_venue" placeholder="Venue" value="${facConf.confVenue}" required>
 																</div>
 															
@@ -188,7 +188,7 @@
 																	From  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_fund" 
+																	<input type="text" class="form-control" id="conf_fund" pattern="^(?!\s*$).+"
 																		name="conf_fund" placeholder="Funding from" value="${facConf.confFundFrom}"
 																		required>
 																</div>
@@ -200,8 +200,8 @@
 																	 <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_amt" onkeypress='return restrictAlphabets(event)'
-																		name="conf_amt" placeholder="Amount" value="${facConf.confFundAmt}" required>
+																	<input type="text" min="1" class="form-control" id="conf_amt" onkeypress='return restrictAlphabets(event)'
+																		name="conf_amt" placeholder="Amount" value="${facConf.confFundAmt}" pattern="^(?!\s*$).+" required>
 																</div>
 
 															</div>
@@ -212,7 +212,7 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
@@ -232,7 +232,7 @@
 										</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 									
 								</div>
 

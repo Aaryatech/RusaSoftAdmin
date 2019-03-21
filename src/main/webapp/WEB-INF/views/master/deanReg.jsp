@@ -207,10 +207,10 @@
 																	<c:when test="${dean.deanId==0}">
 
 																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1" 
+																			name="is_registration" value="1" checked
 																			onclick="setDate(this.value)">Yes 
-																<input type="radio" id="is_registration" checked
-																			name="is_registration" value="0" 
+																<input type="radio" id="is_registration"
+																			name="is_registration" value="0"
 																			onclick="setDate(this.value)">No 
 															
 															</c:when>
@@ -219,9 +219,9 @@
 																		<c:choose>
 																			<c:when test="${empty dean.realivingDate}">
 																				<input type="radio" id="is_registration"
-																					name="is_registration" value="1" 
+																					name="is_registration" value="1" checked
 																					onclick="setDate(this.value)">Yes  
-																<input type="radio" id="is_registration" checked
+																<input type="radio" id="is_registration"
 																					name="is_registration" value="0"
 																					onclick="setDate(this.value)">No 
 															
@@ -294,7 +294,7 @@
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -384,17 +384,17 @@ $(function () {
 		//alert("Value " +value)
 		if(value==1){
 		//alert(value)
-		document.getElementById("acc_off_relDate").setAttribute("required","true");
-		document.getElementById("abc").style.display = "block";
-
+		document.getElementById("acc_off_relDate").removeAttribute("required");
+		document.getElementById("abc").style.display = "none";
 
 		//alert(value)
 		}else{
 			//alert(value)
-			
+			document.getElementById("acc_off_relDate").setAttribute("required","true");
+			document.getElementById("abc").style.display = "block";
+
 			//alert(value)
-			document.getElementById("acc_off_relDate").removeAttribute("required");
-			document.getElementById("abc").style.display = "none";
+
 		}
 		
 	}

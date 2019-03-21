@@ -100,13 +100,13 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addStudMentor"
-										method="post" 
+										method="post"
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
+													<!-- <i class="fa fa-home"></i> Register -->
 											</a></li>
 
 										</ul>
@@ -127,9 +127,9 @@
 														of Student <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="stud_no"
+														<input type="number" min="1" class="form-control" id="stud_no" pattern="^(?!\s*$).+"
 															name="stud_no" placeholder="No." value="${stud.menStuCount}"
-															required>
+															onkeypress='return restrictAlphabets(event)' required>
 													</div>
 												</div>
 
@@ -137,13 +137,10 @@
 
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
+														<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
+																<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
 												<div class="clearfix"></div>
@@ -151,6 +148,8 @@
 											</div>
 										</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mendatory.</p>
 								</div>
 
 							</div>
@@ -220,6 +219,7 @@
 	</div>
 
 	<script type="text/javascript">
+	
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -235,8 +235,44 @@
 
 		}
 	</script>
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
-
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+    
+    function submit_f(view){
+    	
+    	document.getElementById("is_view").value=view;//create this 
+    	
+		
+	}
+	
+</script>
 
 
 

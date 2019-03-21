@@ -123,7 +123,7 @@
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="book_title"
+																	<input type="text" class="form-control" id="book_title" pattern="^(?!\s*$).+"
 																		name="book_title" placeholder="Title of Book" value="${book.bookTitle }"
 																		required>
 																</div>
@@ -139,7 +139,7 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="book_edition"
+																	<input type="text" class="form-control" id="book_edition" pattern="^(?!\s*$).+"
 																		name="book_edition" placeholder="Edition" value="${book.bookEdition }" required>
 																</div>
 
@@ -157,7 +157,7 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="author"
+																	<input type="text" class="form-control" id="author" pattern="^(?!\s*$).+"
 																		name="author" placeholder="Name of Authors/Co-Authors "
 																		value="${book.bookAuthor }" required>
 																</div>
@@ -174,9 +174,9 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="co_author1"
+																	<input type="text" class="form-control" id="co_author1" pattern="^(?!\s*$).+"
 																		name="co_author1" placeholder="Name of Co-Authors "
-																		value="${book.bookCoauther1}">
+																		value="${book.bookCoauther1}" required>
 																</div>
 															</div>
 															
@@ -221,7 +221,7 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="publisher"
+																	<input type="text" class="form-control" id="publisher" pattern="^(?!\s*$).+"
 																		name="publisher" placeholder="Name of Publication/Publisher  "
 																		value="${book.bookPublisher}" required>
 																</div>
@@ -237,7 +237,7 @@
 
 
 																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="isbn"
+																	<input type="text" class="form-control" id="isbn" pattern="^(?!\s*$).+"
 																		name="isbn" placeholder="ISBN No" value="${book.bookIsbn }" required>
 																</div>
 
@@ -250,8 +250,8 @@
 																	of Publication  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-6">
-																	<input type="text" class="form-control datepicker" id="year_publication"
-																		name="year_publication" placeholder="Title of Book" value="${book.bookPubYear }"
+																	<input type="text" class="form-control datepicker" id="year_publication" pattern="^(?!\s*$).+"
+																		name="year_publication" placeholder="dd/mm/yyyy" value="${book.bookPubYear }"
 																		required>
 																</div>
 
@@ -261,7 +261,7 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Add">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
@@ -281,7 +281,7 @@
 										</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 									
 								</div>
 

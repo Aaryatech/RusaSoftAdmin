@@ -875,7 +875,7 @@ public class IqacController {
 		dean.setQualificationId(qualificaton);
 		dean.setJoiningDate(joinDate);
 
-		if (isReg == 1) {
+		if (isReg == 0) {
 			dean.setRealivingDate(request.getParameter("acc_off_relDate"));
 
 		} else {

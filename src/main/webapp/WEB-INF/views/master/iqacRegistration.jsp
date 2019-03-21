@@ -215,7 +215,7 @@
 											</div>
 											</form>
 											<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 										</div>
 	
 									
