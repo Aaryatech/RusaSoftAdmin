@@ -3,8 +3,6 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -41,9 +39,9 @@
 }
 </style>
 
-
 <!-- BEGIN BODY -->
 <body class=" " onload="hideText()">
+<c:url value="/getQualityInitiativeById" var="getQualityInitiativeById"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -97,13 +95,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertQualityInitiative"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-
-
-
 
 										<div class="form-group">
 											<label class="control-label col-sm-3"
@@ -112,13 +106,12 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
-													id="quality_initiative_name" required
+													onchange="trim(this)" id="quality_initiative_name" required
 													name="quality_initiative_name" autocomplete="off"
-													placeholder="Quality Initiative Name"
+													placeholder="Enter Quality Initiative Name"
 													value="${page.pageName}">
 											</div>
 										</div>
-
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
@@ -129,49 +122,86 @@
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
-
 										</div>
+										<input type="hidden" id="qual_inti_id" name="qual_inti_id"
+											value="0"> <input type="hidden" id="is_view"
+											name="is_view" value="0">
 									</form>
 
 									<div class="form-group">
+									<form action="${pageContext.request.contextPath}/deleteQualiInit/0"
+							method="get" id="insListForm">
 
 										<table class="table table-striped dt-responsive display"
 											id="example-1">
 											<thead>
 
 												<tr>
+													<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 													<th>Sr No</th>
 													<th>Quality Initiative Name</th>
-
 													<th>Action</th>
 
 												</tr>
 
-
 											</thead>
 											<tbody>
+												<c:forEach items="${qualInintList}" var="quality"
+													varStatus="count">
+													<tr>
+														<td align="center"><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${quality.qualityInitiativeId}" /></td>
+														<td>${count.index+1}</td>
+														<td>${quality.qualityInitiativeName}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a
+																	onclick="showEdit(${quality.qualityInitiativeId})"
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	title="Edit" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+															<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteQualiInit/${quality.qualityInitiativeId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+
+
+													</tr>
+
+												</c:forEach>
+
 
 											</tbody>
 										</table>
 
-
+										<c:if test="${deleteAccess==0}">
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+										</c:if>
+										</form>
 									</div>
+									
 								</div>
-
-
 							</div>
 						</div>
 
 					</section>
 				</div>
 
-
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
 		<!-- END CONTENT -->
-
-
 
 	</div>
 	<!-- END CONTAINER -->
@@ -179,43 +209,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-
-
-
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -265,7 +259,7 @@
 
 		}
 	</script>
-
+ -->
 
 	<script type="text/javascript">
 		$(function() {
@@ -282,7 +276,7 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$('#submitForm').submit(
+			$('#form_sample_2').submit(
 					function() {
 						$("input[type='submit']", this).val("Please Wait...")
 								.attr('disabled', 'disabled');
@@ -296,6 +290,39 @@
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
+		}
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;
+		}
+		
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('accOffIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
+
+		}
+		
+		function showEdit(qualityInitiativeId){
+			document.getElementById("qual_inti_id").value=qualityInitiativeId;//create this 
+			/* var form=document.getElementById("insListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditaccOff");
+			form.submit(); */
+			
+			$.getJSON('${getQualityInitiativeById}', {
+				qualityInitiativeId : qualityInitiativeId,
+				ajax : 'true',
+
+			}, function(data) { 
+				 alert("Data " +JSON.stringify(data));
+				 document.getElementById("quality_initiative_name").value=data.qualityInitiativeName;
+				 
+			});
 		}
 	</script>
 

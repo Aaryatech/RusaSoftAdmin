@@ -708,59 +708,7 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showAddQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showAddQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_quality_initiative");
-		try {
-
-			model.addObject("title", "Add Quality Initiative");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showInternalQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/internalQuality");
-		try {
-
-			model.addObject("title", "Internal Quality Initiatives");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddInternalQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showAddInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_internal_quality");
-		try {
-
-			model.addObject("title", "Add Internal Quality Initiatives");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/showInitiativeToEngage", method = RequestMethod.GET)
 	public ModelAndView showInitiativeToEngage(HttpServletRequest request, HttpServletResponse response) {
