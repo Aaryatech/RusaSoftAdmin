@@ -98,88 +98,74 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-												<div class="form-group">
-													<label class="control-label col-sm-3" for="participant">No.
-														of Participants<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="participant"
-															name="participant" placeholder="No. of Participants"
-															value="${page.pageName}" required>
-													</div>
-												</div>
- 
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="fromDate">From
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="fromDate" name="fromDate" value="${page.pageName}"
-															required>
-
-													</div>
-												</div>
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="toDate">To
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control datepicker"
-															id="toDate" name="toDate" value="${page.pageName}"
-															required>
-													</div>
-												</div>
-
-
-
-
-												<div class="form-group">
-
-													<label class="control-label col-sm-3" for="webLink">Link
-														on Website for Activity Report <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="webLink"
-															name="webLink"
-															placeholder="Link on Website for Activity Report"
-															value="${page.pageName}" required>
-													</div>
-												</div>
-
-
-												<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
-																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="participant">No.
+												of Participants<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control" id="participant"
+													autocomplete="off" name="participant" min="0"
+													onkeypress="return allowOnlyNumber(event)"
+													placeholder="No. of Participants" value="${page.pageName}"
+													required>
 											</div>
-
-
-											<div class="clearfix"></div>
 										</div>
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="fromDate">From
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="fromDate" name="fromDate"
+													value="${page.pageName}" required>
+
+											</div>
+										</div>
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="toDate">To
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="toDate" name="toDate"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+
+
+
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="webLink">Link
+												on Website for Activity Report <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="webLink"
+													name="webLink" autocomplete="off"
+													placeholder="Link on Website for Activity Report"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+
+										<input type="hidden" id="is_view" name="is_view" value="0">
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save & Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+										</div>
+
 									</form>
 								</div>
 
@@ -240,56 +226,31 @@
 
 
 	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
+		$(function() {
+			$('#submitForm').submit(
+					function() {
+						$("input[type='submit']", this).val("Please Wait...")
+								.attr('disabled', 'disabled');
 
-			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
-			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
+						return true;
+					});
+		});
 
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
 		}
 	</script>
 
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+	</script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -304,7 +265,29 @@
 		});
 	</script>
 
-
+	<script type="text/javascript">
+	function allowOnlyNumber(evt){
+		
+		var charCode = (evt.which) ? evt.which : event.keyCode
+	    if (charCode == 46){
+	        var inputValue = $("#floor").val();
+	        var count = (inputValue.match(/'.'/g) || []).length;
+	        
+	        if(count<1){
+	            if (inputValue.indexOf('.') < 1){
+	                return true;
+	            }
+	            return false;
+	        }else{
+	            return false;
+	        }
+	    }
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	        return false;
+	    }
+	    return true;
+	}
+	</script>
 
 
 

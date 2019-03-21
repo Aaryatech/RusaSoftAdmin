@@ -816,7 +816,6 @@ public class InstituteProfileController {
 
 	}
 
-	
 	@RequestMapping(value = "/showGenderSensitivity", method = RequestMethod.GET)
 	public ModelAndView showGenderSensitivity(HttpServletRequest request, HttpServletResponse response) {
 
@@ -948,6 +947,24 @@ public class InstituteProfileController {
 	public ModelAndView showAMC(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/amc");
+		try {
+
+			model.addObject("title", "Annual Maintenance");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddAMC", method = RequestMethod.GET)
+	public ModelAndView showAddAMC(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_amc");
 		try {
 
 			model.addObject("title", "Annual Maintenance");

@@ -100,63 +100,22 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
-
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th>Name of Best Practices</th>
-																		<th>Name of Best Beneficiaries</th>
-																		<th>Effective From</th>
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th width="10%">Sr No</th>
+													<th>Name of Best Practices</th>
+													<th>Name of Best Beneficiaries</th>
+													<th>Effective From</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
 
 
-																	</tr>
-
-																</thead>
-
-
-
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
-										</div>
 									</form>
 								</div>
 
@@ -183,112 +142,6 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Best Practice for Institute</h4>
-				</div>
-				<div class="modal-body">
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2015-2016">2015-2016</option>
-
-
-						</select>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="participant">Name
-							of Best Practices </label> <input type="text" class="form-control"
-							id="bestPrac" name="bestPrac"
-							placeholder="Name of Best Practices" value="${page.pageName}"
-							required>
-					</div>
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="benificiary">Name
-							of Best Beneficiaries </label> <input type="text" class="form-control"
-							id="benificiary" name="benificiary"
-							placeholder="Name of Best Beneficiaries" value="${page.pageName}"
-							required>
-					</div>
-
-					<%-- <div class="form-group">
-
-						<label class="control-label col-sm-6" for="effectiveFrom">Effective From
-						</label> <input type="text" class="form-control"
-							id="effectiveFrom" name="effectiveFrom"
-							placeholder="Effective From"
-							value="${page.pageName}" required>
-					</div>
-					
-					 --%>
-
-
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="effectiveFrom">Effective
-							From </label> <select id="effectiveFrom" name="effectiveFrom"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2015-2016">2015-2016</option>
-
-
-						</select>
-					</div>
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var year = document.getElementById("academicYear").value;
-			var i = parseInt(document.getElementById("index").value);
-			var bestPrac = document.getElementById("bestPrac").value;
-			var benificiary = document.getElementById("benificiary").value;
-			var effectiveFrom = document.getElementById("effectiveFrom").value;
-
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, year, bestPrac, benificiary, effectiveFrom ])
-					.draw();
-			document.getElementById("index").value = i + 1;
-		}
-	</script>
 
 
 

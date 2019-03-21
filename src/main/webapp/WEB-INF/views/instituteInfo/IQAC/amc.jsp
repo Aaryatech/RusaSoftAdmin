@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -82,15 +82,10 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showAddAMC"><button
+										type="button" class="btn btn-success">Add</button></a>
 							</div>
-
 						</header>
 
 
@@ -99,112 +94,45 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
 
 
-													<div class="col-xs-12">
- 
-													<div class="form-group">
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
 
-															<!-- <table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th >Title of Maintenance</th>
-																		<th >Name of Company</th>
-																		<th>AMC Expenditure</th>
-																		<th>From Date</th>
-																		<th >To Date</th>
-																		
-																	</tr>
-																
-																</thead>
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
+												<thead>
+													<tr>
+														<th rowspan="2">Sr No</th>
 
+														<th rowspan="2">Title of Maintenance</th>
+														<th rowspan="2">Name of Company</th>
+														<th rowspan="2">AMC Expenditure</th>
+														<th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">Action</th>
+													</tr>
+													<tr>
 
+														<th>From Date</th>
+														<th>To Date</th>
 
-																<tbody>
+													</tr>
+												</thead>
+												<tbody>
 
+												</tbody>
+											</table>
 
-																</tbody>
-															</table>
- -->
- 
- 	<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th width="5%">Sr No</th>
-												<th width="5%">Academic Year</th>
-												<th  width="20%">Title of Maintenance</th>
-												<th  width="20%">Name of Company</th>
-												<th  width="20%">AMC Expenditure</th>
-												<th width="30%" style="text-align: center;" colspan="2">
-													Duration</th> 
-											
-												
-											</tr>
-</thead>
-<tbody>
-											<tr>
-												<td width="5%"></td>
-												<td width="5%"></td>
-												<td width="20%"></td>
-												<td width="20%"></td>
-												<td width="20%"></td>
-												<td width="15%">From Date</td>
-												<td width="15%">To Date</td>
-												
-												
-											</tr> 
-										</tbody>
-</table>
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-													</div>
-
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-													
-														<button type="submit" class="btn btn-primary">Submit</button>
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
 										</div>
+
+
 									</form>
 								</div>
-
 							</div>
 						</div>
-
 					</section>
 				</div>
 
@@ -247,62 +175,50 @@
 
 						</select>
 					</div>
-					
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">Title of Maintenance
-						</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="participant">Title
+							of Maintenance </label> <input type="text" class="form-control"
 							id="participant" name="participant"
-							placeholder="Title of Maintenance"
-							value="${page.pageName}" required>
+							placeholder="Title of Maintenance" value="${page.pageName}"
+							required>
 					</div>
-					
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">Name of Company
-						</label> <input type="text" class="form-control"
-							id="company" name="participant"
-							placeholder="Name of Company"
+						<label class="control-label col-sm-3" for="participant">Name
+							of Company </label> <input type="text" class="form-control" id="company"
+							name="participant" placeholder="Name of Company"
 							value="${page.pageName}" required>
 					</div>
-					
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="participant">AMC Expenditure
-						</label> <input type="text" class="form-control"
-							id="expenditure" name="participant"
-							placeholder="AMC Expenditure"
+						<label class="control-label col-sm-3" for="participant">AMC
+							Expenditure </label> <input type="text" class="form-control"
+							id="expenditure" name="participant" placeholder="AMC Expenditure"
 							value="${page.pageName}" required>
 					</div>
 
-				
-						<div class="form-group">
 
-						<label class="control-label col-sm-3" for="fromDate">From Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="fromDate" name="fromDate"
-							
-							value="${page.pageName}" required>
-							
-							
-							<label class="control-label col-sm-3" for="toDate">To Date
-					 </label> 
-							
-							<input type="date" class="form-control"
-							id="toDate" name="toDate"
-							
+					<div class="form-group">
+
+						<label class="control-label col-sm-3" for="fromDate">From
+							Date </label> <input type="date" class="form-control" id="fromDate"
+							name="fromDate" value="${page.pageName}" required> <label
+							class="control-label col-sm-3" for="toDate">To Date </label> <input
+							type="date" class="form-control" id="toDate" name="toDate"
 							value="${page.pageName}" required>
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
+
 					<!-- Link on Website for Activity Report -->
 
 					<div class="form-group" style="text-align: center;">
@@ -335,8 +251,8 @@
 			var dataTable = $('#example-1').DataTable();
 
 			dataTable.row.add(
-					[ i + 1, year, participant,company, expenditure,fromDate, toDate ])
-					.draw();
+					[ i + 1, year, participant, company, expenditure, fromDate,
+							toDate ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
 	</script>

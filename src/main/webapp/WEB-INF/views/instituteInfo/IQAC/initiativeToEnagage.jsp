@@ -101,62 +101,27 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
 
 
-													<div class="col-xs-12">
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th width="10%">Sr No</th>
+													<th>Title of Program</th>
+													<th>From Date</th>
+													<th>To Date</th>
+													<th>No. of Participants</th>
+													<th>Action</th>
+												</tr>
 
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Academic Year</th>
-																		<th>Title of Programme</th>
-																		<th>From Date</th>
-																		<th>To Date</th>
-																		<th>No. of Participants</th>
-																	</tr>
-
-																</thead>
+											</thead>
+											<tbody>
 
 
+											</tbody>
+										</table>
 
-																<tbody>
-
-
-																</tbody>
-															</table>
-
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
-										</div>
 									</form>
 								</div>
 

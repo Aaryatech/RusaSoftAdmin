@@ -101,74 +101,38 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
-														<div class="form-group">
 
 
 
-															<table class="table table-striped dt-responsive display"
-																id="example-1">
-																<thead>
-																	<tr>
-																		<th rowspan="2">Sr No</th>
-																		<th rowspan="2">Academic Year</th>
-																		<th rowspan="2">No. of Participants</th>
-																		<th style="text-align: center;" colspan="2">Duration</th>
-																		<th rowspan="2">Link on Website for Activity
-																			Report</th>
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
 
-																	</tr>
-																	<tr>
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
+												<thead>
+													<tr>
+														<th rowspan="2">Sr No</th>
 
-																		<th>From Date</th>
-																		<th>To Date</th>
-																		<th></th>
+														<th rowspan="2">No. of Participants</th>
+														<th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">Link on Website for Activity Report</th>
+														<th rowspan="2">Action</th>
+													</tr>
+													<tr>
 
-																	</tr>
-																</thead>
-																<tbody>
-																	<!-- <tr>
-																		<td width="5%"></td>
-																		<td width="20%"></td>
-																		<td width="25%"></td>
-																		<td width="15%">From Date</td>
-																		<td width="15%">To Date</td>
-																		<td width="20%"></td>
-
-																	</tr> -->
-																</tbody>
-															</table>
-
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-													</div>
+														<th>From Date</th>
+														<th>To Date</th>
 
 
-													<div class="clearfix"></div>
+													</tr>
+												</thead>
+												<tbody>
 
-												</div>
+												</tbody>
+											</table>
 
-											</div>
 										</div>
+
 									</form>
 								</div>
 

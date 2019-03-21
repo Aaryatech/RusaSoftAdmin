@@ -329,6 +329,19 @@
 															</div>
 														</div>
 
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="participant">No.
+																of Participants<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="number" class="form-control"
+																	id="participant" autocomplete="off" name="participant"
+																	onkeypress="return allowOnlyNumber(event)" min="0"
+																	placeholder="No. of Participants"
+																	value="${page.pageName}" required>
+															</div>
+														</div>
+
 
 
 														<div class="form-group">
@@ -525,6 +538,30 @@
 
 			});
 		});
+	</script>
+
+	<script type="text/javascript">
+	function allowOnlyNumber(evt){
+		
+		var charCode = (evt.which) ? evt.which : event.keyCode
+	    if (charCode == 46){
+	        var inputValue = $("#floor").val();
+	        var count = (inputValue.match(/'.'/g) || []).length;
+	        
+	        if(count<1){
+	            if (inputValue.indexOf('.') < 1){
+	                return true;
+	            }
+	            return false;
+	        }else{
+	            return false;
+	        }
+	    }
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	        return false;
+	    }
+	    return true;
+	}
 	</script>
 
 
