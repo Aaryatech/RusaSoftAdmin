@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showHumanValues"><button
+								<a href="${pageContext.request.contextPath}/showResearchCenter"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>

@@ -87,7 +87,7 @@
 								<!-- <a href="#myModal1" data-toggle="modal"><button
 										type="submit" class="btn btn-info">Add</button></a> -->
 								<a
-									href="${pageContext.request.contextPath}/showAddIntellectualProperty"><button
+									href="${pageContext.request.contextPath}/showAddResearchCenter"><button
 										type="button" class="btn btn-success">Add</button></a>
 								<!-- <a
 									class="box_toggle fa fa-chevron-down"></a> -->
