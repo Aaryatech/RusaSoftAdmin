@@ -135,7 +135,7 @@ public class FacPersonalController {
 
 	}
 
-	@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.POST)
 	public ModelAndView addPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -144,7 +144,7 @@ public class FacPersonalController {
 			
 			int facultyId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
 			try {
-				facultyId = Integer.parseInt(request.getParameter("staff_id"));
+				facultyId = Integer.parseInt(request.getParameter("edit_Fac_id"));
 			} catch (Exception e) {
 				facultyId = 12;//0;
 			}
@@ -178,10 +178,11 @@ public class FacPersonalController {
 
 			List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations", List.class);
 			model.addObject("desigList", designationList);
-
+			 map = new LinkedMultiValueMap<>();
+			map.add("id", facultyId);
 			Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 			System.out.println("staff" + staff);
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		/*	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar startCalendar = new GregorianCalendar();
 			startCalendar.setTime(df.parse(staff.getJoiningDate()));
 			Calendar endCalendar = new GregorianCalendar();
@@ -191,14 +192,18 @@ public class FacPersonalController {
 			int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
 
 			System.err.println("diffMonth " + diffMonth);
-			System.err.println("diffYear " + diffYear);
+			System.err.println("diffYear " + diffYear);*/
 
 			model.addObject("staff", staff);
 			map = new LinkedMultiValueMap<>();
 			map.add("facultyId", facultyId);
 			FacultyPersonalDetail facPerDetail = rest.postForObject(Constants.url + "/getFacultyPersonalDetail", map,
 					FacultyPersonalDetail.class);
+			try {
 			facPerDetail.setfDob(DateConvertor.convertToDMY(facPerDetail.getfDob()));
+			}catch (Exception e) {
+				
+			}
 			model.addObject("facPerDetail", facPerDetail);
 		} catch (Exception e) {
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
@@ -347,7 +352,7 @@ public class FacPersonalController {
 		return model;
 	}
 
-	@RequestMapping(value = "/showAddMphillDetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/showAddMphillDetails", method = RequestMethod.POST)
 	public ModelAndView showAddMphillDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -356,7 +361,13 @@ public class FacPersonalController {
 			model = new ModelAndView("FacultyDetails/mPhillDetail");
 			model.addObject("title", "M.phill/Ph.D.  Details Form");
 
-			int facultyId = 12;
+			int facultyId =0;
+			try {
+			facultyId=Integer.parseInt(request.getParameter("edit_Fac_id"));
+			}catch (Exception e) {
+				facultyId = 12;
+			}
+			 
 
 			HttpSession session = request.getSession();
 

@@ -93,8 +93,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertTeachTraing"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<%-- <ul class="nav nav-tabs">
@@ -112,10 +111,11 @@
 												Title<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="dev_Prog_title"
-													name="dev_Prog_title" autocomplete="off" onchange="trim(this)"
+												<input type="text" maxlength="200" class="form-control" id="dev_Prog_title"
+													name="dev_Prog_title" autocomplete="off"
+													onchange="trim(this)"
 													placeholder="Title of Professional Development Program for Teaching Staff"
-													value="${page.pageName}" required>
+													value="${trainning.trainingTitle}" required>
 											</div>
 										</div>
 
@@ -124,23 +124,22 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="0" class="form-control" id="no_of_participant"
-													autocomplete="off" name="no_of_participant"
-													placeholder="Enter No. of Participants" value="${page.pageName}"
-													required>
+												<input type="number" maxlength="5" min="0" class="form-control"
+													id="no_of_participant" autocomplete="off"
+													name="no_of_participant"
+													placeholder="Enter No. of Participants"
+													value="${trainning.trainingPcount}" required>
 											</div>
 										</div>
-
-
 										<div class="form-group">
-
 											<label class="control-label col-sm-2" for="fromDate">From
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" placeholder="Select From Date"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
+												<input type="text" class="form-control datepicker"
+													placeholder="Select From Date" autocomplete="off"
+													id="fromDate" name="fromDate" value="${trainning.trainingFromdt}"
+													required>
 											</div>
 										</div>
 										<div class="form-group">
@@ -149,9 +148,10 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text"  class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate" placeholder="Select To Date"
-													value="${page.pageName}" required>
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="toDate" name="toDate"
+													placeholder="Select To Date" value="${trainning.trainingTodt}"
+													required>
 											</div>
 										</div>
 
@@ -160,10 +160,15 @@
 												<input type="submit" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save"> <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" name="is_view" id="is_view" value="0">
+												<input type="hidden" id="trainnig_type" name="trainnig_type"
+													value="${trainnig_type}"> 
+													<input type="hidden"
+													id="training_id" name="training_id"
+													value="${trainning.trainingId}">
+
 											</div>
 
 											<div class="clearfix"></div>
@@ -201,9 +206,43 @@
 			});
 		});
 	</script>
+	
+	 <!--  <script>
+  $( function() {
+    var dateFormat = "dd-mm-yyyy",
+      from = $( "#fromDate" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#toDate" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+  </script> -->
 	<script type="text/javascript">
 		$(function() {
-			$('#submitForm').submit(
+			$('#form_sample_2').submit(
 					function() {
 						$("input[type='submit']", this).val("Please Wait...")
 								.attr('disabled', 'disabled');
@@ -218,13 +257,14 @@
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
 		}
-		
-		function submit_f(view){
-			document.getElementById("is_view").value=view;
+
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;
 		}
 	</script>
 
-
+ <!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 </body>
 </html>
 

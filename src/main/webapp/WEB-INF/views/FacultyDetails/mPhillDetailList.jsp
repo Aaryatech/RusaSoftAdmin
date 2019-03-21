@@ -85,10 +85,10 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
-									<a
+									<%-- <a
 										href="${pageContext.request.contextPath}/showAddMphillDetails"><button
 											type="button" class="btn btn-success">Add Mphill
-											Details</button></a>
+											Details</button></a> --%>
 								</c:if>
 
 							</div>
@@ -101,7 +101,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -140,6 +140,7 @@
 																		<th>No. of Students</th>
 																		<th>Valid up to</th>
 																		<th>Use of ICT</th>
+																		<th>Action</th>
 
 																	</tr>
 																</thead>
@@ -175,7 +176,7 @@
 																			<td align="center"><c:if
 																					test="${editAccess == 0}">
 																					<a
-																						href="${pageContext.request.contextPath}/showEditFacAcademic/${staffList.facultyId}"
+																						href="#" onclick="showEdit(${staffList.facultyId})"
 																						title="Edit" rel="tooltip"
 																						data-color-class="detail"
 																						data-animate=" animated fadeIn "
@@ -222,6 +223,7 @@
 
 											</div>
 										</div>
+										<input type="hidden" name="edit_Fac_id" id="edit_Fac_id" value="0">
 									</form>
 								</div>
 
@@ -399,7 +401,7 @@
 		}
 	</script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -431,6 +433,20 @@
 			document.getElementById("index").value = i + 1;
 
 		}
+	</script> -->
+	<script type="text/javascript">
+	
+	function showEdit(facId){
+		
+		document.getElementById("edit_Fac_id").value=facId;//create this 
+		var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
+
+		form.action=("showAddMphillDetails");
+		form.submit();
+		
+	}
+	
 	</script>
 
 
@@ -440,14 +456,3 @@
 
 
 
-<!-- 
-														<h5 class="title pull-left">
-																<strong>Consultancy</strong>
-															</h5>
-															<div class="col-sm-1"></div>
-															<div class="col-sm-2">
-																Yes <input type="radio" name="consultancy"
-																	id="consultancy" checked value="0"> No<input
-																	type="radio" name="consultancy" id="consultancy"
-																	value="1">
-															</div> -->

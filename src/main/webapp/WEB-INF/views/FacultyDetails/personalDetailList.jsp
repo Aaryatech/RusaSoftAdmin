@@ -53,15 +53,20 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<c:if test="${addAccess == 0}">
+							<%-- <c:if test="${addAccess == 0}">
 						<a href="${pageContext.request.contextPath}/addPersonalDetails"><button
-										type="button" class="btn btn-success">Add Faculty Personal Details</button></a></c:if> 
+										type="button" class="btn btn-success">Add Faculty Personal Details</button></a></c:if>  --%>
 							
 							</div>
 
 						</header>
 						<div class="content-body">
 							<div class="row">
+							<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										method="post" 
+										name="form_sample_2" id="form_sample_2"
+										onsubmit="return confirm('Do you really want to submit the form?');">
 
 
 
@@ -77,6 +82,7 @@
 												<th>Email ID</th>
 												<th>Designation</th>
 												<th>Total Experience</th>
+												<th>Action</th>
 											</tr>
 											
 											<tbody>
@@ -106,10 +112,14 @@
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
 												class="glyphicon glyphicon-list"></span></a> --%>
-											<c:if test="${editAccess == 0}">	<a
-											href="${pageContext.request.contextPath}/editFaculity/${staffList.facultyId}" title="Edit"
-											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
-												class="glyphicon glyphicon-edit"></span></a></c:if> 
+											<c:if test="${editAccess == 0}">
+											<a
+																						href="#" onclick="showEdit(${staffList.facultyId})"
+																						title="Edit" rel="tooltip"
+																						data-color-class="detail"
+																						data-animate=" animated fadeIn "
+																						data-toggle="tooltip" data-original-title="Edit"><span
+																						class="glyphicon glyphicon-edit"></span></a></c:if> 
 												
 											<%-- <c:if test="${deleteAccess == 0}">	<a
 											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" title="Block"
@@ -126,8 +136,11 @@
 
 									</table>
 								</div>
-
+																		<input type="hidden" name="edit_Fac_id" id="edit_Fac_id" value="0">
+								
+</form>
 							</div>
+							
 						</div>
 					</section>
 				</div>
@@ -328,6 +341,21 @@
 			});
 
 		}
+	</script>
+	
+	<script type="text/javascript">
+	
+	function showEdit(facId){
+		alert("facId" +facId);
+		document.getElementById("edit_Fac_id").value=facId;//create this 
+		var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
+
+		form.action=("addPersonalDetails");
+		form.submit();
+		
+	}
+	
 	</script>
 </body>
 </html>

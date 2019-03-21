@@ -359,7 +359,7 @@
 																	type="submit" id="sub2" class="btn btn-primary"
 																	onclick="submit_f(0)"
 																	value="Save &
-																		Next">
+																		Next" style="display: none;">
 																<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 													<input type="hidden" id="staff_id" name="staff_id"
