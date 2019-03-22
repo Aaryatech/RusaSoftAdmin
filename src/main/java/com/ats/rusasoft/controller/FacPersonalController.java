@@ -491,7 +491,7 @@ public class FacPersonalController {
 		http: // localhost:8895/rusasoft/showAddAcademicDetails
 		try {
 
-			model = new ModelAndView("FacultyDetails/addAcademicDetails");
+	 		model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
 			model.addObject("title", "Academic Details Form");
 			
