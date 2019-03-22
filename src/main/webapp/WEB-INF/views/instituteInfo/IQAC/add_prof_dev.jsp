@@ -124,7 +124,7 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" maxlength="5" min="0" class="form-control"
+												<input type="number" maxlength="5" min="1" class="form-control"
 													id="no_of_participant" autocomplete="off"
 													name="no_of_participant"
 													placeholder="Enter No. of Participants"

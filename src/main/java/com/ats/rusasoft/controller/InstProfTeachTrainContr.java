@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
@@ -90,7 +91,6 @@ public class InstProfTeachTrainContr {
 				model.addObject("instTrainList", instTrainList);
 				model.addObject("trainnig_type", 1);
 
-
 			} else {
 				model = new ModelAndView("accessDenied");
 			}
@@ -135,7 +135,7 @@ public class InstProfTeachTrainContr {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			int trainigType = Integer.parseInt(request.getParameter("trainnig_type"));
-			System.err.println("tra type received " +trainigType);
+			System.err.println("tra type received " + trainigType);
 			HttpSession session = request.getSession();
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -180,16 +180,16 @@ public class InstProfTeachTrainContr {
 
 				instTrain.setYearId(yearId);
 				instTrain.setInstituteId(userObj.getGetData().getUserInstituteId());
-				
-				if(instTrain.getTrainingPcount()==0) {
-					instTrain.setDelStatus(0);
-				}else {
+
+				/*
+				 * if(instTrain.getTrainingPcount()==0) { instTrain.setDelStatus(0); }else {
+				 * 
+				 * }
+				 */
 				instTrain.setDelStatus(1);
-				}
-				
 				instTrain.setIsActive(1);
-				instTrain.setExInt1(1);
-				instTrain.setExInt2(2);
+				instTrain.setExInt1(0);
+				instTrain.setExInt2(0);
 				instTrain.setExVar1("NA");
 				instTrain.setExVar2("NA");
 
@@ -276,7 +276,6 @@ public class InstProfTeachTrainContr {
 				model.addObject("instTrainList", instTrainList);
 				model.addObject("trainnig_type", 2);
 
-
 			} else {
 				model = new ModelAndView("accessDenied");
 			}
@@ -310,46 +309,113 @@ public class InstProfTeachTrainContr {
 		return model;
 
 	}
-	
-	//showEditInstTraining
-	
+
+	// showEditInstTraining
+
 	@RequestMapping(value = "/showEditInstTraining", method = RequestMethod.POST)
 	public ModelAndView showEditInstTraining(HttpServletRequest request, HttpServletResponse response) {
 		// hfg
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
-		
+
 		try {
 
-			int trainnig_type=Integer.parseInt(request.getParameter("trainnig_type"));
-			int trainingId=Integer.parseInt(request.getParameter("training_id"));
-			
-			if(trainnig_type==2) {
-			model.addObject("title", "Edit Training Non-Teaching");
-			}else {
+			int trainnig_type = Integer.parseInt(request.getParameter("trainnig_type"));
+			int trainingId = Integer.parseInt(request.getParameter("training_id"));
+
+			if (trainnig_type == 2) {
+				model.addObject("title", "Edit Training Non-Teaching");
+			} else {
 				model.addObject("title", "Edit Training Teaching");
 			}
 			model.addObject("trainnig_type", trainnig_type);
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("trainingId", trainingId);
 
 			GetInstTrainTeachDetail getTrainiForEdit = rest.postForObject(Constants.url + "getInstTrainTeachDetailById",
 					map, GetInstTrainTeachDetail.class);
-			
+
 			model.addObject("trainning", getTrainiForEdit);
-			
 
 		} catch (Exception e) {
-			System.err.println("Exce in showing /showEditInstTraining " +e.getMessage());
+			System.err.println("Exce in showing /showEditInstTraining " + e.getMessage());
 			e.printStackTrace();
 		}
 
 		return model;
 
 	}
-	
-	
+
+	@RequestMapping(value = "/deleteInstTraining/{trainingId}/{trainingType}", method = RequestMethod.GET)
+	public String deleteInstTraining(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int trainingId,@PathVariable int trainingType) {
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+
+			String viewMapping = null;
+			if (trainingType == 1) {
+				viewMapping = "showProfDevelopment";
+
+			} else {
+
+				viewMapping = "showAdminDevelopment";
+			}
+			Info deleteAccess = AccessControll.checkAccess("deleteQualiInit/{hodId}", viewMapping, "0", "0", "0", "1",
+					newModuleList);
+
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (trainingId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("accOffIds");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String quaInitList = sb.toString();
+					quaInitList = quaInitList.substring(0, quaInitList.length() - 1);
+
+					map.add("trainingIdList", quaInitList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("trainingIdList", trainingId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteInstTraining", map, Info.class);
+
+				if (trainingType == 1) {
+					redirect = "redirect:/showProfDevelopment";
+				} else {
+					redirect = "redirect:/showAdminDevelopment";
+				}
+				// redirect = "redirect:/showAddQualityInitiative";
+			}
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteQualiInit at InstProfTeachTrainCont Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect;
+
+	}
 
 }

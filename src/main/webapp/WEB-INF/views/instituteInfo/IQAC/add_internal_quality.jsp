@@ -97,9 +97,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertInstQuaInitiative"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<%-- <ul class="nav nav-tabs">
@@ -107,74 +106,64 @@
 													<i class="fa fa-home"></i> ${title}
 											</a></li>
 
-										</ul> --%>
-
+										</ul>
+ --%>
 										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-
-
-
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="initiativeName">Name
-												of Quality Initiative<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="qualityInitId">
+												Quality Initiative<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="initiativeName" name="initiativeName"
-													onchange="showForm()" class="form-control" required>
-													<!-- <option value=" ">Select</option>
-													<option value="AQAR prepared or submitted">AQAR
-														prepared or submitted</option>
-													<option value="Academic – Administrative Audit Conducted">Academic
-														– Administrative Audit Conducted</option>
+												<select id="qualityInitId" name="qualityInitId"
+													class="form-control" title="Select Quality Initiative ">
+													<c:forEach items="${qualInintList}" var="quInit">
+														<c:choose>
+															<c:when
+																test="${quInit.qualityInitiativeId==quality.qualityInitiativeId}">
+																<option selected value="${quInit.qualificationId}">${quInit.qualityInitiativeName}</option>
 
-													<option value="AQAR prepared or submitted">AQAR
-														prepared or submitted</option>
+															</c:when>
+															<c:otherwise>
 
+																<option value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
 
+															</c:otherwise>
 
-													<option value="Institute Participated in NIRF">Institute
-														Participated in NIRF</option>
-													<option value="ISO Certification obtained">ISO
-														Certification obtained</option>
+														</c:choose>
 
-													<option value="NBA Certification received">NBA
-														Certification received</option>
-													<option value="7">Any other quality based
-														certification</option> -->
+													</c:forEach>
+
 
 												</select>
+
 											</div>
 										</div>
-
-										<div class="form-group" id="abc">
-
-											<label class="control-label col-sm-2" for="page_name">Any
-												other quality based certification <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" id="otherQual"
-													required name="otherQual"
-													placeholder="Any other quality based certification"
-													value="${page.pageName}">
-											</div>
-										</div>
-
-
 
 										<div class="form-group">
-
+											<label class="control-label col-sm-2" for="no_of_participant">No.
+												of Participants <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" maxlength="5"  min="1" max="99999"
+													class="form-control" id="no_of_participant"
+													autocomplete="off" name="no_of_participant"
+													placeholder="Enter  No. of Participants"
+													value="${trainning.trainingPcount}" required>
+											</div>
+										</div>
+										<div class="form-group">
 											<label class="control-label col-sm-2" for="fromDate">From
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
-
+													placeholder="Select From Date" autocomplete="off"
+													id="fromDate" name="fromDate"
+													value="${trainning.trainingFromdt}" required>
 											</div>
 										</div>
-
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="toDate">To
@@ -183,42 +172,27 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													value="${page.pageName}" required>
+													placeholder="Select To Date"
+													value="${trainning.trainingTodt}" required>
 											</div>
 										</div>
-
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No.
-												of Participants<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="number" class="form-control" id="participant"
-													autocomplete="off" name="participant"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													placeholder="No. of Participants" value="${page.pageName}"
-													required>
-											</div>
-										</div>
-										<input type="hidden" id="is_view" name="is_view" value="0">
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save"> <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
-											</div>
-											<!-- 	</div>
-											</div> -->
+												<input type="hidden" name="is_view" id="is_view" value="0">
 
+												<input type="hidden" id="qualityId" name="qualityId"
+													value="${trainning.qualityId}">
+
+											</div>
 
 											<div class="clearfix"></div>
 										</div>
-
 									</form>
 								</div>
 
@@ -245,7 +219,7 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
+	<!-- 	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
 		role="dialog" aria-hidden="true">
 		<div class="modal-dialog" style="width: 65%">
 			<div class="modal-content">
@@ -260,7 +234,7 @@
 
 
 
-					<!-- Link on Website for Activity Report -->
+					Link on Website for Activity Report
 
 					<div class="form-group" style="text-align: center;">
 
@@ -328,7 +302,7 @@
 
 		}
 	</script>
-
+ -->
 
 	<script type="text/javascript">
 		$(function() {
@@ -344,7 +318,7 @@
 	</script>
 	<script type="text/javascript">
 		$(function() {
-			$('#submitForm').submit(
+			$('#form_sample_2').submit(
 					function() {
 						$("input[type='submit']", this).val("Please Wait...")
 								.attr('disabled', 'disabled');
@@ -365,6 +339,9 @@
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
+		}
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;
 		}
 	</script>
 

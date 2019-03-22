@@ -26,10 +26,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.ats.rusasoft.model.instprofile.InstituteQuality;
+import com.ats.rusasoft.model.instprofile.InstituteTraining;
 import com.ats.rusasoft.model.instprofile.QualityInitiative;
 
 @Controller
@@ -188,14 +191,108 @@ public class QualityInitiativeController {
 		return qualInt;
 
 	}
+	
+	// deleteQualiInit
+
+		@RequestMapping(value = "/deleteQualiInit/{qualityInitiativeId}", method = RequestMethod.GET)
+		public String deleteQualiInit(HttpServletRequest request, HttpServletResponse response,
+				@PathVariable int qualityInitiativeId) {
+			String redirect = null;
+			try {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				HttpSession session = request.getSession();
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info deleteAccess = AccessControll.checkAccess("deleteQualiInit/{hodId}", "showAddQualityInitiative", "0",
+						"0", "0", "1", newModuleList);
+				if (deleteAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					if (qualityInitiativeId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("accOffIds");
+						System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String quaInitList = sb.toString();
+						quaInitList = quaInitList.substring(0, quaInitList.length() - 1);
+
+						map.add("qualityInitiativeIdList", quaInitList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("qualityInitiativeIdList", qualityInitiativeId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteQualiInitiatives", map, Info.class);
+
+					redirect = "redirect:/showAddQualityInitiative";
+				}
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteQualiInit at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+
+			return redirect;
+
+		}
+
+		////////////////
 
 	@RequestMapping(value = "/showInternalQualityInitiative", method = RequestMethod.GET)
 	public ModelAndView showInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/internalQuality");
+		ModelAndView model =null;// new ModelAndView("instituteInfo/IQAC/internalQuality");
 		try {
+			
+			HttpSession session = request.getSession();
 
-			model.addObject("title", "Internal Quality Initiatives");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showInternalQualityInitiative", "showInternalQualityInitiative", "1",
+					"0", "0", "0", newModuleList);
+
+			if (viewAccess.isError() == false) {
+
+				model = new ModelAndView("instituteInfo/IQAC/internalQuality");			
+				model.addObject("title", "Internal Quality Initiatives");
+
+				Info addAccess = AccessControll.checkAccess("showInternalQualityInitiative", "showInternalQualityInitiative", "0",
+						"1", "0", "0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showInternalQualityInitiative", "showInternalQualityInitiative",
+						"0", "0", "1", "0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showInternalQualityInitiative", "showInternalQualityInitiative",
+						"0", "0", "0", "1", newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false) 
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+				
+			}else {
+				
+				model = new ModelAndView("accessDenied");
+				
+			}
 
 		} catch (Exception e) {
 
@@ -214,6 +311,12 @@ public class QualityInitiativeController {
 		try {
 
 			model.addObject("title", "Add Internal Quality Initiatives");
+			
+			QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",
+					QualityInitiative[].class);
+			List<QualityInitiative> qualInintList = new ArrayList<>(Arrays.asList(instArray));
+
+			model.addObject("qualInintList", qualInintList);
 
 		} catch (Exception e) {
 
@@ -224,62 +327,89 @@ public class QualityInitiativeController {
 		return model;
 
 	}
-
-	// deleteQualiInit
-
-	@RequestMapping(value = "/deleteQualiInit/{qualityInitiativeId}", method = RequestMethod.GET)
-	public String deleteQualiInit(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int qualityInitiativeId) {
+	//insertInstQuaInitiative 
+	//dds
+	//insert institute Quality ini..Sac
+	@RequestMapping(value = "/insertInstQuaInitiative", method = RequestMethod.POST)
+	public String insertInstQuaInitiative(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in insert insertTeachTraing");
+		ModelAndView model = null;
 		String redirect = null;
 		try {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
 
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		
 			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("deleteQualiInit/{hodId}", "showAddQualityInitiative", "0",
-					"0", "0", "1", newModuleList);
-			if (deleteAccess.isError() == true) {
+			Info addAccess = AccessControll.checkAccess("insertInstQuaInitiative", "showInternalQualityInitiative", "0", "1", "0", "0",
+					newModuleList);
+			if (addAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
-				if (qualityInitiativeId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("accOffIds");
-					System.out.println("id are" + instIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String quaInitList = sb.toString();
-					quaInitList = quaInitList.substring(0, quaInitList.length() - 1);
-
-					map.add("qualityInitiativeIdList", quaInitList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("qualityInitiativeIdList", qualityInitiativeId);
+				int qualityId = 0;
+				try {
+					qualityId = Integer.parseInt(request.getParameter("qualityId"));
+				} catch (Exception e) {
+					qualityId = 0;
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteQualiInitiatives", map, Info.class);
+				InstituteQuality instQuality = new InstituteQuality();
 
-				redirect = "redirect:/showAddQualityInitiative";
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+
+				instQuality.setQualityFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
+				instQuality.setQualityTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
+				instQuality.setQualityPcount(Integer.parseInt(request.getParameter("no_of_participant")));
+
+				instQuality.setQualityId(qualityId);
+				instQuality.setQualityInitiativeId(Integer.parseInt(request.getParameter("qualityInitId")));
+
+				int yearId = (int) session.getAttribute("acYearId");
+
+				instQuality.setYearId(yearId);
+				instQuality.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+				instQuality.setDelStatus(1);
+				instQuality.setIsActive(1);
+				instQuality.setExInt1(1);
+				instQuality.setExInt2(1);
+				instQuality.setExVar1("NA");
+				instQuality.setExVar2("NA");
+
+				instQuality.setMakerDatetime(curDateTime);
+				instQuality.setMakerUserId(userObj.getUserId());
+
+				InstituteQuality insertQualRes= rest.postForObject(Constants.url + "saveInstituteQuality", instQuality,
+						InstituteQuality.class);
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showInternalQualityInitiative";
+					else
+						redirect = "redirect:/showAddInternalQualityInitiative";
+
 			}
 		} catch (Exception e) {
-
-			System.err.println(" Exception In deleteQualiInit at Master Contr " + e.getMessage());
-
+			System.err.println("Exce in save insertInstQuaInitiative  " + e.getMessage());
 			e.printStackTrace();
-
 		}
 
 		return redirect;
 
 	}
 
+	
 }
