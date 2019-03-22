@@ -94,7 +94,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/deleteInstTraining/0/${training_type}"
 										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
@@ -122,18 +122,18 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${accOff.officerId}" /></td> --%>
-														<td>${count.index+1}</td>
-														<td>${instTrain.trainingTitle}</td>
-														<td>${instTrain.trainingFromdt}</td>
-														<td>${instTrain.trainingTodt}</td>
-														<td>${instTrain.trainingPcount}</td>
-														<td><c:if test="${editAccess==0}">
+														<td align="center">${count.index+1}</td>
+														<td align="left">${instTrain.trainingTitle}</td>
+														<td align="center">${instTrain.trainingFromdt}</td>
+														<td align="center">${instTrain.trainingTodt}</td>
+														<td align="right">${instTrain.trainingPcount}</td>
+														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEditInstTrain(${instTrain.trainingId})"
 																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															</c:if><c:if test="${deleteAccess==0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteaccOff/${instTrain.trainingId}"
+																	href="${pageContext.request.contextPath}/deleteInstTraining/${instTrain.trainingId}/${instTrain.trainingType}"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger"  title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"

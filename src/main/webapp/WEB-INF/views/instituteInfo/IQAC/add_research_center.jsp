@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertResearchCenter"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -108,8 +108,8 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_subject_name"
 													autocomplete="off" name="rc_subject_name"
-													placeholder="Subject Name" value="${page.pageName}"
-													required>
+													placeholder="Subject Name"
+													value="${editValue.rcSubjectName}" required>
 											</div>
 										</div>
 
@@ -121,8 +121,8 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_faculty_name"
 													autocomplete="off" name="rc_faculty_name"
-													placeholder="Faculty Name" value="${page.pageName}"
-													required>
+													placeholder="Faculty Name"
+													value="${editValue.rcFacultyName}" required>
 											</div>
 										</div>
 
@@ -135,7 +135,8 @@
 													id="rc_guide_count"
 													onkeypress="return allowOnlyNumber(event)" min="0"
 													name="rc_guide_count" placeholder="No. of Guides"
-													autocomplete="off" value="${page.pageName}" required>
+													autocomplete="off" value="${editValue.rcGuideCount}"
+													required>
 											</div>
 										</div>
 
@@ -149,7 +150,8 @@
 													id="rc_student_count"
 													onkeypress="return allowOnlyNumber(event)" min="0"
 													name="rc_student_count" placeholder="No. of Students"
-													autocomplete="off" value="${page.pageName}" required>
+													autocomplete="off" value="${editValue.rcStudentCount}"
+													required>
 											</div>
 										</div>
 
@@ -161,8 +163,9 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													id="fromDate" name="fromDate" value="${page.pageName}"
-													autocomplete="off" required>
+													id="fromDate" name="fromDate"
+													value="${editValue.rcValidityFromdt}" autocomplete="off"
+													required>
 
 											</div>
 										</div>
@@ -175,11 +178,13 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													value="${page.pageName}" required>
+													value="${editValue.rcValidityTodt}" required>
 											</div>
 										</div>
 
-										<input type="hidden" id="is_view" name="is_view" value="0">
+										<input type="hidden" id="rcId" name="rcId"
+											value="${editValue.rcId}"> <input type="hidden"
+											id="is_view" name="is_view" value="0">
 
 
 										<div class="form-group">

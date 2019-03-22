@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertDist"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -107,19 +107,20 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="title"
-													autocomplete="off" name="title"
+													maxlength="200" autocomplete="off" name="title"
+													pattern="^(?!\s*$).+" onchange="return trim(this)"
 													placeholder="Title of Distinctiveness"
-													value="${page.pageName}" required>
+													value="${editDist.distName}" required>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="academicYear">Applicable
-												from Academic Year<span class="text-danger">*</span>
+												From <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" id="date"
-													name="date" autocomplete="off" value="${page.pageName}"
-													required>
+													name="date" autocomplete="off"
+													value="${editDist.distApplicableFrom}" required>
 											</div>
 										</div>
 
@@ -130,11 +131,15 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="befStake"
-													name="befStake" placeholder="Beneficiary Stake Holders"
-													autocomplete="off" value="${page.pageName}" required>
+													pattern="^(?!\s*$).+" onchange="return trim(this)"
+													maxlength="200" name="befStake"
+													placeholder="Beneficiary Stake Holders" autocomplete="off"
+													value="${editDist.distBeneficiary}" required>
 											</div>
 										</div>
-										<input type="hidden" id="is_view" name="is_view" value="0">
+										<input type="hidden" id="distId" name="distId"
+											value="${editDist.distId}"> <input type="hidden"
+											id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"

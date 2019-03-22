@@ -105,7 +105,7 @@
 												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="text" class="form-control" maxlength="200"
 													onchange="trim(this)" id="quality_initiative_name" required
 													name="quality_initiative_name" autocomplete="off"
 													placeholder="Enter Quality Initiative Name"
@@ -116,11 +116,11 @@
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
+													onclick="submit_f(1)" value="Save"> <!-- <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+																		Next"> -->
+												<button type="reset" onclick="resetId()" class="btn btn-default">Reset</button>
 											</div>
 										</div>
 										<input type="hidden" id="qual_inti_id" name="qual_inti_id"
@@ -154,7 +154,7 @@
 														<td align="center"><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${quality.qualityInitiativeId}" /></td>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${quality.qualityInitiativeName}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a
@@ -319,11 +319,16 @@
 				ajax : 'true',
 
 			}, function(data) { 
-				 alert("Data " +JSON.stringify(data));
+				 //alert("Data " +JSON.stringify(data));
 				 document.getElementById("quality_initiative_name").value=data.qualityInitiativeName;
 				 
 			});
 		}
+		
+		function resetId(){
+		 document.getElementById("qual_inti_id").value=0;
+		}
+		
 	</script>
 
 

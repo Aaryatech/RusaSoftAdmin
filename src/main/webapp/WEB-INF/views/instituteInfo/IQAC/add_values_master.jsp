@@ -84,8 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showHumanValues"><button
-										type="button" class="btn btn-info">Back</button></a>
+								<%-- <a
+									href="${pageContext.request.contextPath}/showIntellectualProperty"><button
+										type="button" class="btn btn-info">Back</button></a> --%>
 
 							</div>
 
@@ -96,89 +97,85 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertHumanValues"
+										action="${pageContext.request.contextPath}/insertValueMaster"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="finantialYear">Title
-												of Program/Activity <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<select id="title" name="title" class="form-control"
-													required><option value=" ">Select</option>
-													<option value="Truth">Truth</option>
-													<option value="Righteous Conduct">Righteous
-														Conduct</option>
-													<option value="Non violence">Non violence</option>
-													<option value="Peace">Peace</option>
-													<option value=">National values">National values</option>
-													<option value="National Integration ">National
-														Integration</option>
-													<option value="Communal harmony">Communal harmony</option>
-													<option value="Fundamental Duties">Fundamental
-														Duties</option>
 
-												</select>
-											</div>
-										</div>
 
 										<div class="form-group">
-
-											<label class="control-label col-sm-2" for="fromDate">From
-												Date <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="valText">Value
+												Text <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${editValue.activityFromdt}" required>
-
-											</div>
-										</div>
-
-										<div class="form-group">
-
-											<label class="control-label col-sm-2" for="toDate">To
-												Date <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
-													value="${editValue.activityTodt}" required>
+												<input type="text" class="form-control" id="valText"
+													required name="valText" autocomplete="off"
+													placeholder="Value Text" value="${editValue.valText}">
 											</div>
 										</div>
 
 
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No.
-												of Participants<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="number" class="form-control" id="participant"
-													autocomplete="off"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													name="participant" placeholder="No. of Participants"
-													value="${editValue.activityPcount}" required>
-											</div>
-										</div>
-										<input type="hidden" id="valueId" name="valueId"
-											value="${editValue.valueId}"> <input type="hidden"
-											id="is_view" name="is_view" value="0">
+										<input type="hidden" id="is_view" name="is_view" value="0">
+										<input type="hidden" id="valMastId" name="valMastId"
+											value="${editValue.valMastId}">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save"> <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
+
 										</div>
-
-
 									</form>
+
+									<div class="form-group">
+
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
+
+												<tr>
+													<th width="10%">Sr No</th>
+													<th>Values</th>
+													<th width="10%">Action</th>
+
+												</tr>
+
+
+											</thead>
+											<tbody>
+												<c:forEach items="${distlist}" var="value" varStatus="count">
+													<tr>
+
+														<td style="text-align: center">${count.index+1}</td>
+
+														<td style="text-align: left"><c:out
+																value="${value.valText}" /></td>
+
+														<td align="center"><a
+															href="${pageContext.request.contextPath}/editValuesMaster/${value.valMastId}"
+															title="Edit" rel="tooltip" data-color-class="detail"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Edit"><span
+																class="glyphicon glyphicon-edit"></span></a> | <a
+															href="${pageContext.request.contextPath}/deleteValuesMaster/${value.valMastId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger" title="Delete"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+
+
+									</div>
 								</div>
+
 
 							</div>
 						</div>
@@ -319,7 +316,6 @@
 			return;
 		}
 	</script>
-
 	<script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
@@ -327,33 +323,6 @@
 
 		}
 	</script>
-	<script type="text/javascript">
-	function allowOnlyNumber(evt){
-		
-		var charCode = (evt.which) ? evt.which : event.keyCode
-	    if (charCode == 46){
-	        var inputValue = $("#floor").val();
-	        var count = (inputValue.match(/'.'/g) || []).length;
-	        
-	        if(count<1){
-	            if (inputValue.indexOf('.') < 1){
-	                return true;
-	            }
-	            return false;
-	        }else{
-	            return false;
-	        }
-	    }
-	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
-	        return false;
-	    }
-	    return true;
-	}
-	</script>
-
-
-
-
 
 
 

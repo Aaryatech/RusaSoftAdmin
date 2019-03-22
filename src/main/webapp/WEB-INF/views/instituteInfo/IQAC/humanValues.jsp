@@ -124,9 +124,56 @@
 													</tr>
 
 												</thead>
-												<tbody>
 
+												<tbody>
+													<c:forEach items="${valuelist}" var="value"
+														varStatus="count">
+														<tr>
+
+															<td style="text-align: center">${count.index+1}</td>
+
+															<td style="text-align: left"><c:out
+																	value="${value.activityName}" /></td>
+
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.activityFromdt}" /></td>
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.activityTodt}" /></td>
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.activityPcount}" /></td>
+
+															<td align="center"><c:if test="${editAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/editValue/${value.valueId}"
+																		title="Edit" rel="tooltip" data-color-class="detail"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Edit"><span
+																		class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																	test="${deleteAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteHumanValues/${value.valueId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+
+																</c:if></td>
+
+
+
+
+														</tr>
+													</c:forEach>
 												</tbody>
+
+
 											</table>
 										</div>
 

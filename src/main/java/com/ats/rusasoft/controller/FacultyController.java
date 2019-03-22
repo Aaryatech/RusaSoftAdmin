@@ -198,9 +198,10 @@ public class FacultyController {
 				model = new ModelAndView("FacultyDetails/journalPubList");
 
 				model.addObject("title", "Journal Publication List");
-
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
 
 				List<GetJournal> jouList = rest.postForObject(Constants.url + "/getJournalListByFacultyId", map,
 						List.class);
@@ -467,9 +468,10 @@ public class FacultyController {
 				model = new ModelAndView("FacultyDetails/researchProjectList");
 
 				model.addObject("title", "Research Details List");
-
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
 
 				List<GetResearchProject> jouList = rest.postForObject(Constants.url + "/getProjectListByFacultyId", map,
 						List.class);
@@ -1318,85 +1320,6 @@ public class FacultyController {
 		}
 
 		return swocList;
-
-	}
-
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "/insertLinkageMaster", method = RequestMethod.POST)
-	public String insertLinkageMaster(HttpServletRequest request, HttpServletResponse response) {
-		String returnString = new String();
-		try {
-
-			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages",
-					"0", "1", "0", "0", newModuleList);
-
-			System.out.println(view);
-
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
-				System.err.println("Inside insertJournal method");
-
-				int linknameId = 0;
-				try {
-					linknameId = Integer.parseInt(request.getParameter("linknameId"));
-				} catch (Exception e) {
-					linknameId = 0;
-				}
-				int inst_id = (int) session.getAttribute("instituteId");
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date now = new Date();
-				String curDate = dateFormat.format(new Date());
-				String dateTime = dateFormat.format(now);
-
-				String linknameText = request.getParameter("linkname_text");
-				String linknameRemarks = request.getParameter("linkname_remarks");
-
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-
-				LinkageMaster linkMaster = new LinkageMaster();
-				linkMaster.setDelStatus(1);
-
-				linkMaster.setInstituteId(inst_id);
-
-				linkMaster.setIsActive(1);
-				linkMaster.setLinknameId(linknameId);
-
-				linkMaster.setLinknameRemarks(linknameRemarks);
-				linkMaster.setLinknameText(linknameText);
-				linkMaster.setMakerDatetime(dateTime);
-				linkMaster.setMakerUserId(userObj.getUserId());
-
-				LinkageMaster linkMasterInsertRes = rest.postForObject(Constants.url + "saveLinkageMaster", linkMaster,
-						LinkageMaster.class);
-
-				System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
-
-				if (is_view == 1) {
-					returnString = "redirect:/showMasterCollaborationLinkages";
-				} else {
-					returnString = "redirect:/showMasterCollaborationLinkages";
-				}
-			} else {
-
-				returnString = "redirect:/accessDenied";
-
-			}
-		}
-
-		catch (Exception e) {
-			System.err.println("EXCE in linkMasterInsertRes " + e.getMessage());
-			e.printStackTrace();
-
-		}
-		return returnString;
 
 	}
 
