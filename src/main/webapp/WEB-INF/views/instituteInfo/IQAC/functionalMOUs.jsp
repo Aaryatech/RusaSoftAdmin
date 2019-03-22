@@ -53,46 +53,50 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							
-							<%--   <c:if test="${addAccess == 0}">  --%>
-								<a href="${pageContext.request.contextPath}/showAddFunctionalMOUs"><button
-										type="button" class="btn btn-success">Add</button></a>
-								<a class="box_toggle fa fa-chevron-down"></a>
-							<%-- 	</c:if> --%>
-								
+
+								<%--   <c:if test="${addAccess == 0}">  --%>
+								<a
+									href="${pageContext.request.contextPath}/showAddFunctionalMOUs"><button
+										type="button" class="btn btn-success">Add</button></a> <a
+									class="box_toggle fa fa-chevron-down"></a>
+								<%-- 	</c:if> --%>
+
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
 							</div>
 
 						</header>
-							<form action="${pageContext.request.contextPath}/deleteMous/0"
+						<form action="${pageContext.request.contextPath}/deleteMous/0"
 							method="get" id="libListForm">
-						<div class="content-body">
-							<div class="row">
-								<c:if test="${sessionScope.successMsg!=null}">
-									<div class="col-lg-12">
-										<div class="alert alert-success alert-dismissible fade in">
-											<button type="button" class="close" data-dismiss="alert"
-												aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
-											<strong>Success : </strong> ${sessionScope.successMsg}
+							<div class="content-body">
+								<div class="row">
+									<c:if test="${sessionScope.successMsg!=null}">
+										<div class="col-lg-12">
+											<div class="alert alert-success alert-dismissible fade in">
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<strong>Success : </strong> ${sessionScope.successMsg}
+											</div>
 										</div>
-									</div>
-								</c:if>
+									</c:if>
 
-								<div class="col-xs-12">
+									<div class="col-xs-12">
 
 
-									<table id="example-1"
-										class="table table-striped dt-responsive display">
-										<thead>
+										<div id="example-4_wrapper"
+											class="dataTables_wrapper form-inline">
+
+											<table id="example-4" class="display dataTable" role="grid"
+												aria-describedby="example-4_info" style="width: 100%;">
+												<thead>
 
 													<tr>
-														<th class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														<th class="check" style="text-align: center; width: 5%;"
+															rowspan="2"><input type="checkbox" name="selAll"
+															id="selAll" onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Title of MoU</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
@@ -110,63 +114,61 @@
 													</tr>
 
 												</thead>
-	
-
-									
-										
-											<tbody>
-												<c:forEach items="${mouList}" var="mouList"
-													varStatus="count">
-													<tr>
-														<td><input type="checkbox" class="chk" name="mouIds"
-															id="mouIds${count.index+1}"
-															value="${mouList.mouId}" /></td>
-														<td>${count.index+1}</td>
-														<td>${mouList.mouTitle}</td>
-														<td>${mouList.mouFromdt}</td>
-														<td>${mouList.mouTodt}</td>
-														<td >${mouList.mouInstitute}</td>
-														<td style="text-align: center; ">${mouList.mouBeneficiaryNos}</td>
-														
 
 
-														<td style="text-align: center; ">
-													<%--   <c:if test="${editAccess == 0}">  --%>
-														<a
-															href="#" onclick="showEditMou(${mouList.mouId})"><span
-																class="glyphicon glyphicon-edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a>
-																<%-- </c:if> | --%>
-																<%--   <c:if test="${deleteAccess == 0}"> --%> &nbsp;&nbsp;&nbsp;&nbsp;
-															<a
-															href="${pageContext.request.contextPath}/deleteMous/${mouList.mouId}"
-															onClick="return confirm('Are you sure want to delete this record');"
-															rel="tooltip" data-color-class="danger"
-															data-animate=" animated fadeIn " data-toggle="tooltip"
-															data-original-title="Delete  record"><span
-																class="glyphicon glyphicon-remove"></span></a>
-															<%-- 	</c:if> --%></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-									</table>
 
-	                              <div class="col-lg-1">
+
+												<tbody>
+													<c:forEach items="${mouList}" var="mouList"
+														varStatus="count">
+														<tr>
+															<td><input type="checkbox" class="chk" name="mouIds"
+																id="mouIds${count.index+1}" value="${mouList.mouId}" /></td>
+															<td>${count.index+1}</td>
+															<td>${mouList.mouTitle}</td>
+															<td>${mouList.mouFromdt}</td>
+															<td>${mouList.mouTodt}</td>
+															<td>${mouList.mouInstitute}</td>
+															<td style="text-align: center;">${mouList.mouBeneficiaryNos}</td>
+
+
+
+															<td style="text-align: center;">
+																<%--   <c:if test="${editAccess == 0}">  --%> <a
+																href="#" onclick="showEditMou(${mouList.mouId})"><span
+																	class="glyphicon glyphicon-edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																<%-- </c:if> | --%> <%--   <c:if test="${deleteAccess == 0}"> --%>
+																&nbsp;&nbsp;&nbsp;&nbsp; <a
+																href="${pageContext.request.contextPath}/deleteMous/${mouList.mouId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a> <%-- 	</c:if> --%>
+															</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+										<div class="col-lg-1">
 
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;">
-													<input type="hidden" id="edit_mou_id"   name="edit_mou_id" value="0">
+											<input type="hidden" id="edit_mou_id" name="edit_mou_id"
+												value="0">
 
 
 										</div>
 
 
+									</div>
 								</div>
 							</div>
-						</div>
-							</form>
+						</form>
 					</section>
 				</div>
 
@@ -189,7 +191,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script>
 		function clearSessionAttribute() {
 
@@ -238,3 +240,43 @@
 	</script>
 </body>
 </html>
+
+
+
+<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("MOU_agency").value
+			//alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+					document.getElementById("otherCourse").setAttribute("required","true");
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+					document.getElementById("other_benif").removeAttribute("required");
+
+			}
+
+		}
+
+	</script>
+	<script type="text/javascript">
+	function hideText() {
+		//alert("hii");
+		var qualType = document.getElementById("MOU_agency").value
+		// alert("x " +qualType);
+			if(qualType == 7){
+				//alert("In If " +x);
+				document.getElementById("abc").style = "visible";
+			}else{ 
+		document.getElementById("abc").style = "display:none"
+			}
+		
+	}
+	</script>
+
+

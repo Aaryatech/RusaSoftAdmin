@@ -96,9 +96,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertInstituteBestPract"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 
 
@@ -112,7 +112,7 @@
 												<input type="text" class="form-control" id="bestPrac"
 													autocomplete="off" name="bestPrac"
 													placeholder="Name of Best Practices"
-													value="${page.pageName}" required>
+													value="${editInst.practicesName}" required>
 											</div>
 										</div>
 
@@ -126,7 +126,7 @@
 												<input type="text" class="form-control" id="benificiary"
 													autocomplete="off" name="benificiary"
 													placeholder="Name of Best Beneficiaries"
-													value="${page.pageName}" required>
+													value="${editInst.practicesBeneficiary}" required>
 											</div>
 										</div>
 
@@ -141,24 +141,26 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="practices_effective_from"
-													name="practices_effective_from" value="${page.pageName}"
+													autocomplete="off" id="practices_effective_from" placeholder="dd-MM-YYYY"
+													name="practices_effective_from" value="${date}"
 													required>
 											</div>
 										</div>
 
-
-										<input type="hidden" id="is_view" name="is_view" value="0">
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
-											</div>
-										</div>
+										 <input type="hidden" id="prac_id" name="prac_id" value="${editInst.practicesId}">
+                                      	<input type="hidden" id="is_view" name="is_view" value="0">
+                                             	
+                                             	
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
+														<input type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)" id="sub2" value="Save"> <input
+															type="submit" class="btn btn-primary"
+															onclick="submit_f(0)"
+															value="Save & Next">
+														<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+												</div>
 
 									</form>
 
@@ -185,7 +187,36 @@
 
 
 
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+var wasSubmitted = false;    
+function checkBeforeSubmit(){
+  if(!wasSubmitted) {
+	  var x=confirm("Do you really want to submit the form?");
+	  if(x==true){
+    wasSubmitted = true;
+	  document.getElementById("sub1").disabled=true;
+	  document.getElementById("sub2").disabled=true;
+
+    return wasSubmitted;
+	  }
+  }
+  return false;
+}    
+	</script>
+	
 
 
 

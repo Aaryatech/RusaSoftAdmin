@@ -1,6 +1,7 @@
 package com.ats.rusasoft.model;
 
 public class LinkageMaster {
+	
 	private int linknameId;
 
 	private int instituteId;

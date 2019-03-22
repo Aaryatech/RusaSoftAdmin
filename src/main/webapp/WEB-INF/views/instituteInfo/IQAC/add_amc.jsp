@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAmc"><button
+								<a href="${pageContext.request.contextPath}/showAMC"><button
 										type="button" class="btn btn-info">Back</button></a>
 
 							</div>
@@ -96,9 +96,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertInstituteAMC"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<div class="form-group">
 
@@ -108,7 +108,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_title"
 													autocomplete="off" name="amc_title"
-													placeholder="Title of Maintenance" value="${page.pageName}"
+													placeholder="Title of Maintenance" value="${editInst.amcTitle}"
 													required>
 											</div>
 										</div>
@@ -122,7 +122,7 @@
 													onkeypress="return allowOnlyNumber(event)"
 													id="amc_expenditure" min="0" name="amc_expenditure"
 													placeholder="AMC Expenditure" autocomplete="off"
-													value="${page.pageName}" required>
+													value="${editInst.amcExpenditure}" required>
 											</div>
 										</div>
 
@@ -135,7 +135,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_company"
 													name="amc_company" placeholder="Name of Company"
-													autocomplete="off" value="${page.pageName}" required>
+													autocomplete="off" value="${editInst.amcCompany}" required>
 											</div>
 										</div>
 
@@ -147,21 +147,23 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_remark"
 													name="amc_remark" placeholder="AMC Remark"
-													autocomplete="off" value="${page.pageName}" required>
+													autocomplete="off" value="${editInst.amcRemarks}" required>
 											</div>
 										</div>
 
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save & Next">
-												<button type="reset" class="btn btn-default">Reset</button>
-											</div>
-										</div>
+											<input type="hidden" id="amc_id" name="amc_id" value="${editInst.amcId}">
+											
+											
+											  <div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<button type="reset" class="btn btn-default">Reset</button>
+															</div>
+														</div>
 
 									</form>
 
@@ -185,7 +187,39 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+var wasSubmitted = false;    
+function checkBeforeSubmit(){
+  if(!wasSubmitted) {
+	  var x=confirm("Do you really want to submit the form?");
+	  if(x==true){
+    wasSubmitted = true;
+	  document.getElementById("sub1").disabled=true;
+	  document.getElementById("sub2").disabled=true;
+
+    return wasSubmitted;
+	  }
+  }
+  return false;
+}    
+	</script>
+	
+	
+	
+	
 
 
 	<script type="text/javascript">

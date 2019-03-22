@@ -4,46 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
+<c:url var="clearSessionAttribute" value="/clearSessionAttribute" />
 </head>
 <!-- END HEAD -->
 
-<style>
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;
-}
-
-.image-preview-input input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-}
-
-.image-preview-input-title {
-	margin-left: 2px;
-}
-</style>
-
-
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="clearSessionAttribute()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -55,86 +27,143 @@
 		<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include>
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
+		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
-			<section class="wrapper main-wrapper row" style="">
+			<section class="wrapper main-wrapper row" style=''>
 
-				<div class="col-xs-12">
+				<%-- <div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
 
 
 
 				<div class="col-lg-12">
 					<section class="box ">
-
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAddAMC"><button
-										type="button" class="btn btn-success">Add</button></a>
+
+								<%--   <c:if test="${addAccess == 0}">  --%>
+								<a
+									href="${pageContext.request.contextPath}/showAddAMC"><button
+										type="button" class="btn btn-success">Add</button></a> 
+								<%-- 	</c:if> --%>
+
+								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                    <a class="box_close fa fa-times"></a> -->
+
 							</div>
+
 						</header>
+						<form action="${pageContext.request.contextPath}/deleteAMCS/0"
+							method="get" id="libListForm">
+							<div class="content-body">
+								<div class="row">
+									<c:if test="${sessionScope.successMsg!=null}">
+										<div class="col-lg-12">
+											<div class="alert alert-success alert-dismissible fade in">
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<strong>Success : </strong> ${sessionScope.successMsg}
+											</div>
+										</div>
+									</c:if>
+
+									<div class="col-xs-12">
 
 
-						<div class="content-body">
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										
 
-
-
-										<div id="example-4_wrapper"
-											class="dataTables_wrapper form-inline">
-
-											<table id="example-4" class="display dataTable" role="grid"
+											<table id="example-1" class="display dataTable" role="grid"
 												aria-describedby="example-4_info" style="width: 100%;">
 												<thead>
-													<tr>
-														<th rowspan="2">Sr No</th>
 
-														<th rowspan="2">Title of Maintenance</th>
-														<th rowspan="2">Name of Company</th>
-														<th rowspan="2">AMC Expenditure</th>
-														<th style="text-align: center;" colspan="2">Duration</th>
-														<th rowspan="2">Action</th>
-													</tr>
 													<tr>
-
-														<th>From Date</th>
-														<th>To Date</th>
+														<th class="check" style="text-align: center; width: 5%;"
+															><input type="checkbox" name="selAll"
+															id="selAll" onClick="selectedInst(this)" /> Select All</th>
+														<th >Sr No</th>
+														<th >Title of Maintenance</th>
+														<th >Name of Company</th>
+														<th >AMC Expenditure</th>
+														<th>Action</th>
 
 													</tr>
+												
+
 												</thead>
-												<tbody>
 
+
+
+
+												<tbody>
+													<c:forEach items="${amcList}" var="amcList"
+														varStatus="count">
+														<tr>
+															<td><input type="checkbox" class="chk" name="amcIds"
+																id="amcIds${count.index+1}" value="${amcList.amcId}" /></td>
+															<td>${count.index+1}</td>
+															<td>${amcList.amcTitle}</td>
+															<td>${amcList.amcCompany}</td>
+															<td>${amcList.amcExpenditure}</td>
+													
+
+
+															<td style="text-align: center;">
+																<%--   <c:if test="${editAccess == 0}">  --%> <a
+																href="#" onclick="showEditAmc(${amcList.amcId})"><span
+																	class="glyphicon glyphicon-edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																<%-- </c:if> | --%> <%--   <c:if test="${deleteAccess == 0}"> --%>
+																&nbsp;&nbsp;&nbsp;&nbsp; <a
+																href="${pageContext.request.contextPath}/deleteAMCS/${amcList.amcId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a> <%-- 	</c:if> --%>
+															</td>
+														</tr>
+													</c:forEach>
 												</tbody>
 											</table>
+									
+										<div class="col-lg-1">
+
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+											<input type="hidden" id="edit_amc_id" name="edit_amc_id"
+												value="0">
+
 
 										</div>
 
 
-									</form>
+									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 					</section>
 				</div>
+
+
+
+
 
 
 				<!-- MAIN CONTENT AREA ENDS -->
@@ -144,123 +173,99 @@
 
 
 
+
+
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+	<script>
+		function clearSessionAttribute() {
 
+			$.getJSON('${clearSessionAttribute}', {
 
+				ajax : 'true',
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Annual Maintenance</h4>
-				</div>
-				<div class="modal-body">
+			}, function(data) {
 
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2015-2016">2015-2016</option>
+			});
 
-						</select>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="participant">Title
-							of Maintenance </label> <input type="text" class="form-control"
-							id="participant" name="participant"
-							placeholder="Title of Maintenance" value="${page.pageName}"
-							required>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="participant">Name
-							of Company </label> <input type="text" class="form-control" id="company"
-							name="participant" placeholder="Name of Company"
-							value="${page.pageName}" required>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="participant">AMC
-							Expenditure </label> <input type="text" class="form-control"
-							id="expenditure" name="participant" placeholder="AMC Expenditure"
-							value="${page.pageName}" required>
-					</div>
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="fromDate">From
-							Date </label> <input type="date" class="form-control" id="fromDate"
-							name="fromDate" value="${page.pageName}" required> <label
-							class="control-label col-sm-3" for="toDate">To Date </label> <input
-							type="date" class="form-control" id="toDate" name="toDate"
-							value="${page.pageName}" required>
-					</div>
-
-
-
-
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var year = document.getElementById("academicYear").value;
-			var participant = document.getElementById("participant").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var company = document.getElementById("company").value;
-			var expenditure = document.getElementById("expenditure").value;
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, year, participant, company, expenditure, fromDate,
-							toDate ]).draw();
-			document.getElementById("index").value = i + 1;
 		}
+
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('amcIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
+
+		}
+		function showEditAmc(studId){
+			document.getElementById("edit_amc_id").value=studId;//create this 
+			var form=document.getElementById("libListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditAmc");
+			form.submit();
+			
+		}
+	</script>
+	<script>
+		function clearSessionAttribute() {
+
+			$.getJSON('${clearSessionAttribute}', {
+
+				ajax : 'true',
+
+			}, function(data) {
+
+			});
+
+		}
+	</script>
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("MOU_agency").value
+			//alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+					document.getElementById("otherCourse").setAttribute("required","true");
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+					document.getElementById("other_benif").removeAttribute("required");
+
+			}
+
+		}
+
+	</script>
+	<script type="text/javascript">
+	function hideText() {
+		//alert("hii");
+		var qualType = document.getElementById("MOU_agency").value
+		// alert("x " +qualType);
+			if(qualType == 7){
+				//alert("In If " +x);
+				document.getElementById("abc").style = "visible";
+			}else{ 
+		document.getElementById("abc").style = "display:none"
+			}
+		
+	}
 	</script>
 
 
-
-
-
-
-</body>
-</html>

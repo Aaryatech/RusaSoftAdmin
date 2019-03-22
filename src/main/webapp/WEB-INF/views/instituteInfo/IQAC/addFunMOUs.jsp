@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -137,9 +137,80 @@
 														MoU with Agency <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="functionalMOU" name="functionalMOU"
+														<select id="MOU_agency" name="MOU_agency"
 															onchange="showForm()" class="form-control" required>
-															<option value="-1">Select</option>
+															
+															
+													<c:choose>
+															<c:when test="${'IIT'== editInst.mouAgency}">
+															<option selected value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'NIT'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option selected value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'IIIT'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option selected value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'University'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option selected value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'Industries'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option selected value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'Corporate Houses'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option  value="Industries">Industries</option>
+															<option selected value="Corporate Houses">Corporate Houses
+																</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															
+															<c:otherwise>
+														
 															<option value="IIT">IIT</option>
 															<option value="NIT">NIT</option>
 															<option value="IIIT">IIIT</option>
@@ -147,12 +218,15 @@
 															<option value="Industries">Industries</option>
 															<option value="Corporate Houses">Corporate
 																Houses</option>
-															<option value="7">Any other Institute of
+															<option selected value="7">Any other Institute of
 																International/National/State Importance</option>
-
+																</c:otherwise>
+												</c:choose>
 														</select>
+													
 													</div>
 												</div>
+
 
 												<div class="form-group" id="abc" style = "display:none">
 
@@ -162,9 +236,11 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="otherCourse"
 															autocomplete="off"  name="otherCourse"
-															placeholder="" value="${page.pageName}">
+															placeholder="" value="${editInst.mouAgency}">
 													</div>
 												</div>
+
+
 
 												<div class="form-group">
 
@@ -211,23 +287,23 @@
 
 
 
-	<c:choose>
-															<c:when test="${'Students'==editInst.mouAgency}">
+																<c:choose>
+															<c:when test="${'Students'== editInst.mouBeneficiary}">
 															<option value="-1">Select</option>		
 															<option selected value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option>
 																			</c:when>
-																			<c:when test="${'Staff'==editInst.mouAgency}">
+																			<c:when test="${'Staff'==editInst.mouBeneficiary}">
 																	<option value="-1">Select</option>			        
 															<option value="Students">Students</option>
 															<option selected value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option>
 																			</c:when>
 																			
-																			<c:when test="${'Students And Staff'==editInst.mouAgency}">
-																	<option value="-1">Select</option>			
-																<option value="Students">Students</option>
+															<c:when test="${'Students And Staff'==editInst.mouBeneficiary}">
+															<option value="-1">Select</option>			
+															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option selected value="Staff">Students And Staff</option>
 
@@ -235,7 +311,7 @@
 																			
 																			
 																	<c:otherwise>
-																		<option value="-1">Select</option>
+																		<option selected value="-1">Select</option>
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option>
@@ -349,7 +425,7 @@
 		}
 	</script>
 
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		
 		function showForm() {
 			//document.getElementById("abc").style = "display:none"
@@ -366,6 +442,42 @@
 
 		}
 	
+	</script> -->
+	
+	<script type="text/javascript">
+		function showForm() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("MOU_agency").value
+			alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+					document.getElementById("otherCourse").setAttribute("required","true");
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+					document.getElementById("otherCourse").removeAttribute("required");
+
+			}
+
+		}
+
+	</script>
+	<script type="text/javascript">
+	function hideText() {
+		//alert("hii");
+		var qualType = document.getElementById("MOU_agency").value
+		 //alert("x " +qualType);
+			if(qualType == 7){
+				//alert("In If " +x);
+				document.getElementById("abc").style = "visible";
+			}else{ 
+		document.getElementById("abc").style = "display:none"
+			}
+		
+	}
 	</script>
 
 
