@@ -154,7 +154,7 @@
 														<td align="center"><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${quality.qualityInitiativeId}" /></td>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${quality.qualityInitiativeName}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a

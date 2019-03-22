@@ -84,9 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+								<c:if test="${addAccess==0}">
 								<a
 									href="${pageContext.request.contextPath}/showAddInternalQualityInitiative"><button
-										type="button" class="btn btn-success">Add</button></a>
+										type="button" class="btn btn-success">Add</button></a></c:if>
 							</div>
 
 						</header>
@@ -96,8 +97,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/deleteInstiQuality/0"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -128,20 +129,44 @@
 
 												</thead>
 												<tbody>
+												
+												<c:forEach items="${instQualList}" var="insQuality"
+													varStatus="count">
+													<tr>
+														<%-- <td><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td> --%>
+														<td align="center">${count.index+1}</td>
+														<td>${insQuality.qualityInitiativeName}</td>
+														<td align="center">${insQuality.qualityFromdt}</td>
+														<td align="center">${insQuality.qualityTodt}</td>
+														<td align="right">${insQuality.qualityPcount}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a onclick="showEdit(${insQuality.qualityId})"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if><c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteInstiQuality/${insQuality.qualityId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger"  title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
 
 												</tbody>
 											</table>
 
 
 										</div>
-										<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-
+										<input type="hidden"
+													id="qualityId" name="qualityId"
+													value="0">
+										
+	
 										<div class="clearfix"></div>
 
 									</form>
@@ -170,7 +195,7 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
+	<%-- <div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
 		role="dialog" aria-hidden="true">
 		<div class="modal-dialog" style="width: 65%">
 			<div class="modal-content">
@@ -337,6 +362,21 @@
 
 		}
 	</script>
+ --%>
+<script type="text/javascript">
+
+function showEdit(qualityId){
+	document.getElementById("qualityId").value=qualityId;
+	
+	var form=document.getElementById("form_sample_2");
+    form.setAttribute("method", "post");
+
+	form.action=("showEditInstQuality");
+	form.submit();
+}
+
+</script>
+
 
 
 

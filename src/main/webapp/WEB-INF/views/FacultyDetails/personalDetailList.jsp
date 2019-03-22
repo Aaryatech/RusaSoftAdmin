@@ -95,7 +95,7 @@
 											<td style="text-align: left"><c:out
 														value="${staffList.facultyName}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${staffList.contactNo}" /></td>
 														
 											<td style="text-align: left"><c:out
@@ -104,11 +104,11 @@
 														<td style="text-align: left"><c:out
 														value="${staffList.designationName}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: right"><c:out
 														value="${staffList.currentExperience+staffList.fPastExp}" /></td>
 														
 											
-												<td> <%-- <a
+												<td align="center"> <%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
 												class="glyphicon glyphicon-list"></span></a> --%>

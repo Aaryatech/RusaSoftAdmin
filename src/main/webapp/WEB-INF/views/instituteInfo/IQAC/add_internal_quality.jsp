@@ -121,21 +121,14 @@
 													<c:forEach items="${qualInintList}" var="quInit">
 														<c:choose>
 															<c:when
-																test="${quInit.qualityInitiativeId==quality.qualityInitiativeId}">
-																<option selected value="${quInit.qualificationId}">${quInit.qualityInitiativeName}</option>
-
+																test="${quInit.qualityInitiativeId==editQuality.qualityInitiativeId}">
+																<option selected value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
 															</c:when>
 															<c:otherwise>
-
 																<option value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
-
 															</c:otherwise>
-
 														</c:choose>
-
 													</c:forEach>
-
-
 												</select>
 
 											</div>
@@ -150,7 +143,7 @@
 													class="form-control" id="no_of_participant"
 													autocomplete="off" name="no_of_participant"
 													placeholder="Enter  No. of Participants"
-													value="${trainning.trainingPcount}" required>
+													value="${editQuality.qualityPcount}" required>
 											</div>
 										</div>
 										<div class="form-group">
@@ -161,7 +154,7 @@
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
 													id="fromDate" name="fromDate"
-													value="${trainning.trainingFromdt}" required>
+													value="${editQuality.qualityFromdt}" required>
 											</div>
 										</div>
 										<div class="form-group">
@@ -173,7 +166,7 @@
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
 													placeholder="Select To Date"
-													value="${trainning.trainingTodt}" required>
+													value="${editQuality.qualityTodt}" required>
 											</div>
 										</div>
 
@@ -187,7 +180,7 @@
 												<input type="hidden" name="is_view" id="is_view" value="0">
 
 												<input type="hidden" id="qualityId" name="qualityId"
-													value="${trainning.qualityId}">
+													value="${editQuality.qualityId}">
 
 											</div>
 

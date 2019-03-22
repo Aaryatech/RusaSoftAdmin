@@ -122,12 +122,12 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${accOff.officerId}" /></td> --%>
-														<td>${count.index+1}</td>
-														<td>${instTrain.trainingTitle}</td>
-														<td>${instTrain.trainingFromdt}</td>
-														<td>${instTrain.trainingTodt}</td>
-														<td>${instTrain.trainingPcount}</td>
-														<td><c:if test="${editAccess==0}">
+														<td align="center">${count.index+1}</td>
+														<td align="left">${instTrain.trainingTitle}</td>
+														<td align="center">${instTrain.trainingFromdt}</td>
+														<td align="center">${instTrain.trainingTodt}</td>
+														<td align="right">${instTrain.trainingPcount}</td>
+														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEditInstTrain(${instTrain.trainingId})"
 																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;

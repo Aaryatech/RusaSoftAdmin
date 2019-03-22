@@ -116,7 +116,7 @@
 														Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="fac_name"
+														<input type="text" readonly class="form-control" id="fac_name"
 															name="fac_name" placeholder="Last Name Middle First Name"
 															value="${staff.facultyFirstName}" required>
 													</div>
@@ -127,14 +127,14 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="fac_address"
+														<input type="text" onchange="trim(this)" class="form-control" id="fac_address"
 															name="fac_address" placeholder="Permanent Address"
 															required value="${facPerDetail.fAddress}">
 													</div>
 												</div>
 
 												<div class="form-group">
-													<div class="col-sm-2"></div>
+													<div class="col-sm-1"></div>
 													<label class="control-label col-sm-6" for="is_add_same">Is
 														Permanent and Correspondence Address Same <span
 														class="text-danger">*</span>
@@ -170,7 +170,7 @@
 														Address <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="fac_address2" value="${facPerDetail.fAddress2}"
+														<input type="text" onchange="trim(this)" class="form-control" id="fac_address2" value="${facPerDetail.fAddress2}"
 															name="fac_address2" placeholder="Correspondence Address">
 													</div>
 												</div>
@@ -180,7 +180,7 @@
 														No<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="fac_mob"
+														<input type="text" readonly class="form-control"  id="fac_mob"
 															name="fac_mob"pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10"
 															title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -191,23 +191,23 @@
 												</div>
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="f_phone">Phone
-														No<span class="text-danger">*</span>
+														No<span class="text-danger"></span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="f_phone"
+														<input type="text" class="form-control" id="f_phone" onchange="trim(this)"
 															name="f_phone"
 															
-															placeholder="Office Landline No" value="${facPerDetail.fPhone}" required>
+															placeholder="Office Landline No" value="${facPerDetail.fPhone}">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="f_resident">Resident
 														No</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="f_resident"
+														<input type="text" class="form-control" id="f_resident" onchange="trim(this)"
 															name="f_resident"  
 															title="Phone number with 7-9 and remaing 9 digit with 0-9"
-															placeholder="Resident Phone No"value="${facPerDetail.fResident}" required>
+															placeholder="Resident Phone No"value="${facPerDetail.fResident}">
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
@@ -216,7 +216,7 @@
 														ID<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="f_email"
+														<input type="text" readonly class="form-control" id="f_email"
 															name="f_email"
 															
 															placeholder="abc@xyz.com" value="${staff.email}" required>
@@ -227,17 +227,17 @@
 														No<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="Text" class="form-control" id="f_aadhar"
+														<input type="Text" pattern="^\d{4}\s\d{4}\s\d{4}$" class="form-control" id="f_aadhar"
 															name="f_aadhar" placeholder="Aadhar No" value="${facPerDetail.fAadhar}" required>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="f_designation">Select
+													<label class="control-label col-sm-3" for="f_designation">
 														Designation <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<select id="f_designation" name="f_designation"
-															 class="form-control" required>
+															 class="form-control" disabled required>
 															<c:forEach items="${desigList}" var="des">
 																<c:choose>
 																	<c:when
@@ -253,17 +253,7 @@
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
-												<!-- <div class="form-group" id="xyz">
-													<label class="control-label col-sm-2" for="smallheading">Other
-														Designation<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="prevExp"
-															name="prevExp" placeholder="Other Designation" value=""
-															>
-													</div>
-												</div>
- -->
+												
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="f_dob">Date
 														of Birth<span class="text-danger">*</span>
@@ -283,7 +273,7 @@
 														<input type="text" class="form-control datepicker"
 															id="f_doj" name="f_doj"
 															
-															placeholder="Date of Joining" value="${staff.joiningDate}" required>
+															placeholder="Date of Joining" value="${staff.joiningDate}" readonly disabled required>
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
@@ -292,7 +282,7 @@
 														Experience <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="f_prevExp"
+														<input type="number"  min="0" max="c" class="form-control" id="f_prevExp"
 															name="f_prevExp" placeholder="Previous Experience"
 															onchange="calExp()" value="${facPerDetail.fPastExp}" required>
 													</div>
@@ -304,32 +294,33 @@
 													<div class="col-sm-9">
 													<c:choose>
 													<c:when test="${facPerDetail.fGender==0}">
-													Female<input type="radio" name="f_gender"
-															id="f_gender"  value="1"
-															>&nbsp;&nbsp;&nbsp; Male<input
+													Male<input
 															type="radio" checked
 															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+													Female<input type="radio" name="f_gender"
+															id="f_gender"  value="1"
+															>&nbsp;&nbsp;&nbsp; 
 															Transgender<input
 															type="radio"
 															name="f_gender" id="f_gender" value="2">
 													</c:when>
 													
 													<c:when test="${facPerDetail.fGender==1}">
-													Female<input type="radio" name="f_gender"
-															id="f_gender" checked value="1"
-															>&nbsp;&nbsp;&nbsp; Male<input
+													Male<input
 															type="radio"  
-															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;Female<input type="radio" name="f_gender"
+															id="f_gender" checked value="1"
+															>&nbsp;&nbsp;&nbsp; 
 															Transgender<input
 															type="radio"
 															name="f_gender" id="f_gender" value="2">
 													</c:when>
-													<c:otherwise>
-													Female<input type="radio" name="f_gender"
-															id="f_gender"  value="1"
-															>&nbsp;&nbsp;&nbsp; Male<input
+													<c:otherwise>Male<input
 															type="radio" 
 															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+													Female<input type="radio" name="f_gender"
+															id="f_gender"  value="1"
+															>&nbsp;&nbsp;&nbsp; 
 															Transgender<input
 															type="radio" checked
 															name="f_gender" id="f_gender" value="2">
@@ -489,7 +480,12 @@ alert("monthDifference " +monthDifference)
             changeMonth:true
 		});
     });
-    
+    function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
 </script>
 
 
