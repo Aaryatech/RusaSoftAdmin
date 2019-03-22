@@ -15,7 +15,7 @@ public class LinkageMaster {
 
 	private int makerUserId;
 
-	private String makerEnterDatetime;
+	private String makerDatetime;
 
 	public int getLinknameId() {
 		return linknameId;
@@ -73,19 +73,19 @@ public class LinkageMaster {
 		this.makerUserId = makerUserId;
 	}
 
-	public String getMakerEnterDatetime() {
-		return makerEnterDatetime;
+	public String getMakerDatetime() {
+		return makerDatetime;
 	}
 
-	public void setMakerEnterDatetime(String makerEnterDatetime) {
-		this.makerEnterDatetime = makerEnterDatetime;
+	public void setMakerDatetime(String makerDatetime) {
+		this.makerDatetime = makerDatetime;
 	}
 
 	@Override
 	public String toString() {
 		return "LinkageMaster [linknameId=" + linknameId + ", instituteId=" + instituteId + ", linknameText="
 				+ linknameText + ", linknameRemarks=" + linknameRemarks + ", delStatus=" + delStatus + ", isActive="
-				+ isActive + ", makerUserId=" + makerUserId + ", makerEnterDatetime=" + makerEnterDatetime + "]";
+				+ isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + "]";
 	}
 
 }

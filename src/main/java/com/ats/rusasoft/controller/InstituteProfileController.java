@@ -1,13 +1,26 @@
 package com.ats.rusasoft.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.ats.rusasoft.commons.AccessControll;
+import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.model.Info;
+import com.ats.rusasoft.model.LinkageMaster;
+import com.ats.rusasoft.model.LoginResponse;
+import com.itextpdf.text.List;
 
 @Controller
 @Scope("session")
@@ -708,8 +721,6 @@ public class InstituteProfileController {
 
 	}
 
-	
-
 	@RequestMapping(value = "/showInitiativeToEngage", method = RequestMethod.GET)
 	public ModelAndView showInitiativeToEngage(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1017,4 +1028,7 @@ public class InstituteProfileController {
 
 	}
 
+	RestTemplate rest = new RestTemplate();
+
+	
 }
