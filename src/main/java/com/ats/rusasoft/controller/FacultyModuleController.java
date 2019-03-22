@@ -136,7 +136,7 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
-		
+		int userId = (int) session.getAttribute("userId");
 		int confId = 0;
 		try {
 			confId = Integer.parseInt(request.getParameter("conf_id"));
@@ -158,7 +158,7 @@ public class FacultyModuleController {
 		facConf.setConfFundAmt(Float.parseFloat(request.getParameter("conf_amt")));
 		facConf.setDelStatus(1);
 		facConf.setIsActive(1);
-		facConf.setMakerUserId(0);
+		facConf.setMakerUserId(userId);
 		facConf.setMakerEnterDatetime(curDateTime);
 		facConf.setExInt1(0);
 		facConf.setExVar1("Na");
@@ -362,14 +362,12 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
+		int userId = (int) session.getAttribute("userId");
 		int activityId = 0;
 		try {
 			activityId = Integer.parseInt(request.getParameter("activity_id"));
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-			activityId = 0;
-		}
+		
 		if(activityId==0) {
 			facAct.setActivityId(0);
 		}else {
@@ -382,25 +380,28 @@ public class FacultyModuleController {
 		facAct.setActivityName(request.getParameter("activity_name"));
 		facAct.setActivityLevel(request.getParameter("activity_level"));
 		facAct.setActivityDate(request.getParameter("activity_date"));
-		facAct.setActivityParticipants(Integer.parseInt(request.getParameter("activity_part")));
+		facAct.setActivityParticipants(request.getParameter("activity_part"));
 		facAct.setActivityFundedBy(request.getParameter("activity_found"));
-		facAct.setActivityAmountSanctioned(Integer.parseInt(request.getParameter("amt_sanc")));
-		facAct.setActivityAmountUtilised(Integer.parseInt(request.getParameter("amt_utilise")));
+		facAct.setActivityAmountSanctioned(request.getParameter("amt_sanc"));
+		facAct.setActivityAmountUtilised(request.getParameter("amt_utilise"));
 		facAct.setDelStatus(1);
 		facAct.setIsActive(1);
-		facAct.setMakerUserId(0);
+		facAct.setMakerUserId(userId);
 		facAct.setMakerEnterDatetime(curDateTime);
 		facAct.setExInt1(0);
 		facAct.setExVar1("NA");
 		
 		FacultyActivity facacc = rest.postForObject(Constants.url+"/insertFacultyActivity", facAct, FacultyActivity.class);
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
 		return "redirect:/showOrganized";
 		
 	}
 	
-	@RequestMapping(value = "/editFacultyActivity/{activityId}", method = RequestMethod.GET)
-	public ModelAndView editFacultyAct(@PathVariable("activityId") int activityId,HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/editFacultyActivity/{facActivityId}", method = RequestMethod.GET)
+	public ModelAndView editFacultyAct(@PathVariable("facActivityId") int facActivityId,HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		int inst_id = (int) session.getAttribute("instituteId");
 		
@@ -415,7 +416,7 @@ public class FacultyModuleController {
 		List<OutreachType> facultyOutreachTypeList = new ArrayList<>(Arrays.asList(facultyOutreachArr));
 		model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 		
-		map.add("activityId", activityId);
+		map.add("facActivityId", facActivityId);
 		FacultyActivity fActivity= rest.postForObject(Constants.url+"/getFacActivityByActvId", map, FacultyActivity.class);
 		model.addObject("activity", fActivity);
 		
@@ -763,6 +764,7 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
+		int userId = (int) session.getAttribute("userId");
 		int menId = 0;
 		int studNo=0;
 		String count = request.getParameter("stud_no");
@@ -793,7 +795,7 @@ public class FacultyModuleController {
 			stud.setYearId(yId);
 			stud.setDelStatus(1);
 			stud.setIsActive(1);
-			stud.setMakerUserId(0);
+			stud.setMakerUserId(userId);
 			stud.setMakerEnterDatetime(curDateTime);
 			stud.setExInt1(0);
 			stud.setExVar1("NA");
@@ -944,6 +946,7 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
+		int userId = (int) session.getAttribute("userId");
 		int bookId=0;
 		try {
 			
@@ -970,7 +973,7 @@ public class FacultyModuleController {
 		facBook.setBookPubYear(request.getParameter("year_publication"));
 		facBook.setDelStatus(1);
 		facBook.setIsActive(1);
-		facBook.setMakerUserId(0);
+		facBook.setMakerUserId(userId);
 		facBook.setMakerEnterDatetime(curDateTime);
 		facBook.setExInt1(0);
 		facBook.setExVar1("NA");
@@ -1112,7 +1115,7 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
-		
+		int userId = (int) session.getAttribute("userId");
 		int contriId = 0;
 		
 		try {
@@ -1140,7 +1143,7 @@ public class FacultyModuleController {
 		facCon.setConAsModeration(Integer.parseInt(request.getParameter("ansmod")));
 		facCon.setDelStatus(1);
 		facCon.setIsActive(1);
-		facCon.setMakerUserId(0);
+		facCon.setMakerUserId(userId);
 		facCon.setMakerEnterDatetime(curDateTime);
 		facCon.setExtraInt1(0);
 		facCon.setExtraVar1("NA");
@@ -1294,6 +1297,7 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
+		int userId = (int) session.getAttribute("userId");
 		
 		FacultyPhdGuide phd = new FacultyPhdGuide();
 		
@@ -1336,7 +1340,7 @@ public class FacultyModuleController {
 			
 			phd.setDelStatus(1);
 			phd.setIsActive(1);
-			phd.setMakerUserId(0);
+			phd.setMakerUserId(userId);
 			phd.setMakerEnterDatetime(curDateTime);
 			phd.setExInt1(0);
 			phd.setExVar1("NA");
@@ -1352,7 +1356,7 @@ public class FacultyModuleController {
 
 		}
 
-		return "redirect:/showPhdGuide";
+		return "redirect:/showPhdGuideList";
 
 	}
 	

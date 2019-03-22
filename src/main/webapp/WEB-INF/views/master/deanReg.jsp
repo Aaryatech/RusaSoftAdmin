@@ -279,7 +279,7 @@
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div> --%>
 														</div>
-													<input type="hidden" id="acc_off_id" name="acc_off_id" value="${dean.deanId}">
+												
 													<input type="hidden" id="is_view" name="is_view" value="0">
 													
 													

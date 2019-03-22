@@ -1,13 +1,26 @@
 package com.ats.rusasoft.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.ats.rusasoft.commons.AccessControll;
+import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.model.Info;
+import com.ats.rusasoft.model.LinkageMaster;
+import com.ats.rusasoft.model.LoginResponse;
+import com.itextpdf.text.List;
 
 @Controller
 @Scope("session")
@@ -437,6 +450,24 @@ public class InstituteProfileController {
 	 * }
 	 */
 
+	@RequestMapping(value = "/showMasterCollaborationLinkages", method = RequestMethod.GET)
+	public ModelAndView showMasterCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_linkage_master");
+		try {
+
+			model.addObject("title", "Collaboration And Linkages Master");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
 	@RequestMapping(value = "/showCollaborationLinkages", method = RequestMethod.GET)
 	public ModelAndView showCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
 
@@ -588,7 +619,7 @@ public class InstituteProfileController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
 		try {
 
-			model.addObject("title", " Institutional Distnctiveness");
+			model.addObject("title", "Institutional Distnctiveness");
 
 		} catch (Exception e) {
 
@@ -643,60 +674,6 @@ public class InstituteProfileController {
 		try {
 
 			model.addObject("title", "Human Values & Professional Ethics");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showAddQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_quality_initiative");
-		try {
-
-			model.addObject("title", "Add Quality Initiative");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showInternalQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/internalQuality");
-		try {
-
-			model.addObject("title", "Internal Quality Initiatives");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddInternalQualityInitiative", method = RequestMethod.GET)
-	public ModelAndView showAddInternalQualityInitiative(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_internal_quality");
-		try {
-
-			model.addObject("title", "Add Internal Quality Initiatives");
 
 		} catch (Exception e) {
 
@@ -979,4 +956,43 @@ public class InstituteProfileController {
 
 	}
 
+	@RequestMapping(value = "/showResearchCenter", method = RequestMethod.GET)
+	public ModelAndView showResearchCenter(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/list_research_center");
+		try {
+
+			model.addObject("title", "Research Center");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAddResearchCenter", method = RequestMethod.GET)
+	public ModelAndView showAddResearchCenter(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_research_center");
+		try {
+
+			model.addObject("title", "Add Research Center");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	RestTemplate rest = new RestTemplate();
+
+	
 }

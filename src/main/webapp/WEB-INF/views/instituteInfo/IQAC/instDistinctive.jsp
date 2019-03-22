@@ -110,11 +110,8 @@
 													<th>Beneficiary Stake Holders</th>
 													<th>Action</th>
 												</tr>
-
 											</thead>
-
 											<tbody>
-
 											</tbody>
 										</table>
 

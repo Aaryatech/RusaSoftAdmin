@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body onload="checkCoGuide(${phd.isPhdGuide})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -126,9 +126,21 @@
 
 
 															<div class="col-sm-4">
+															<c:choose>
+																	<c:when test="${phd.isPhdGuide == 1}">
+															
 																Yes <input type="radio" name="phdGuide" id="phdGuide"
 																	checked value="1"> No<input type="radio"
 																	name="phdGuide" id="phdGuide" value="0">
+																	</c:when>
+																	<c:when test="${phd.isPhdGuide == 0}">
+															
+																Yes <input type="radio" name="phdGuide" id="phdGuide"
+																	 value="1"> No<input type="radio" checked
+																	name="phdGuide" id="phdGuide" value="0">
+																	</c:when>
+																	
+																	</c:choose>
 															</div>
 														</div>
 
@@ -139,15 +151,30 @@
 
 
 															<div class="col-sm-4">
+															<c:choose>
+																	<c:when test="${phd.isCoGuide == 1}">
+															
 																Yes <input type="radio" name="coGuide" id="coGuide"
 																	checked value="1" onclick="checkCoGuide(this.value)">
 																	
 																 No<input type="radio" onclick="checkCoGuide(this.value)"
 																	name="coGuide" id="coGuide" value="0">
+															</c:when>
+															<c:when test="${phd.isPhdGuide == 0}">
+															
+																Yes <input type="radio" name="coGuide" id="coGuide"
+																	checked value="1" onclick="checkCoGuide(this.value)">
+																	
+																 No<input type="radio" onclick="checkCoGuide(this.value)"
+																	name="coGuide" id="coGuide" value="0" checked>
+															</c:when>
+															
+															</c:choose>
+															
 															</div>
 														</div>
 
-														<div class="form-group" id="cogid">
+														<div class="form-group" id="cogid" style="display: none;">
 
 															<label class="control-label col-sm-2"   for="smallheading">Name
 																of Co-Guide: <span class="text-danger">*</span>
@@ -219,14 +246,29 @@
 
 
 															<div class="col-sm-2">
+															<c:choose>
+																	<c:when test="${phd.isPhdAwarded == 1}">
 																Yes <input type="radio" name="awarded" id="awarded"
 																	checked value="1" onclick="check(this.value)">
 																No<input type="radio" name="awarded" id="awarded"
 																	value="0" onclick="check(this.value)">
+															</c:when>
+															
+															<c:when test="${phd.isPhdAwarded == 0}">
+																Yes <input type="radio" name="awarded" id="awarded"
+																	 value="1" onclick="check(this.value)">
+																No<input type="radio" name="awarded" id="awarded"
+																	value="0" onclick="check(this.value)" checked>
+															</c:when>
+															
+															
+															</c:choose>
+															
+															
 															</div>
 														</div>
 
-														<div class="form-group" id="abc">
+														<div class="form-group" id="abc" style="display: none;">
 
 															<label class="control-label col-sm-2" 
 																for="smallheading">Year of Awarded Ph.D: <span
@@ -369,6 +411,7 @@
 			
 			function hideText() {
 				//alert("hii");
+				
 				document.getElementById("abc").style = "visible"
 				document.getElementById("phd_year_awarded").style = "visible"
 				document.getElementById("phd_year_awarded").setAttribute("required","true");

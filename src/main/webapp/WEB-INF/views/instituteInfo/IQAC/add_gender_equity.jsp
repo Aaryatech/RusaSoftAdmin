@@ -144,8 +144,9 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="participant"
+												<input type="number" class="form-control" id="participant"
 													autocomplete="off" name="participant"
+													onkeypress="return allowOnlyNumber(event)" min="0"
 													placeholder="No. of Participants" value="${page.pageName}"
 													required>
 											</div>
