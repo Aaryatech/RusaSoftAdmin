@@ -55,10 +55,10 @@ public class InstituteDistController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info add = AccessControll.checkAccess("showProgDistinctive", "showProgDistinctive", "1", "0", "0", "0",
+			Info view = AccessControll.checkAccess("showProgDistinctive", "showProgDistinctive", "1", "0", "0", "0",
 					newModuleList);
 
-			if (add.isError() == false) {
+			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
 
@@ -75,6 +75,9 @@ public class InstituteDistController {
 				List<GetDisctinctveness> distlist = new ArrayList<>(Arrays.asList(distArray));
 
 				model.addObject("distlist", distlist);
+
+				Info add = AccessControll.checkAccess("showProgDistinctive", "showProgDistinctive", "0", "1", "0", "0",
+						newModuleList);
 
 				Info edit = AccessControll.checkAccess("showProgDistinctive", "showProgDistinctive", "0", "0", "1", "0",
 						newModuleList);
@@ -294,10 +297,10 @@ public class InstituteDistController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info add = AccessControll.checkAccess("showHumanValues", "showHumanValues", "1", "0", "0", "0",
+			Info view = AccessControll.checkAccess("showHumanValues", "showHumanValues", "1", "0", "0", "0",
 					newModuleList);
 
-			if (add.isError() == false) {
+			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/humanValues");
 				model.addObject("title", "Human Values & Professional Ethics");
@@ -314,6 +317,9 @@ public class InstituteDistController {
 				List<GetHumanValues> valuelist = new ArrayList<>(Arrays.asList(valueArray));
 
 				model.addObject("valuelist", valuelist);
+
+				Info add = AccessControll.checkAccess("showHumanValues", "showHumanValues", "0", "1", "0", "0",
+						newModuleList);
 
 				Info edit = AccessControll.checkAccess("showHumanValues", "showHumanValues", "0", "0", "1", "0",
 						newModuleList);
@@ -534,10 +540,10 @@ public class InstituteDistController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info add = AccessControll.checkAccess("showResearchCenter", "showResearchCenter", "1", "0", "0", "0",
+			Info view = AccessControll.checkAccess("showResearchCenter", "showResearchCenter", "1", "0", "0", "0",
 					newModuleList);
 
-			if (add.isError() == false) {
+			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/list_research_center");
 				model.addObject("title", "Research Center");
@@ -554,7 +560,8 @@ public class InstituteDistController {
 				List<GetResearchCenter> centerlist = new ArrayList<>(Arrays.asList(researchArray));
 
 				model.addObject("centerlist", centerlist);
-
+				Info add = AccessControll.checkAccess("showResearchCenter", "showResearchCenter", "0", "1", "0", "0",
+						newModuleList);
 				Info edit = AccessControll.checkAccess("showResearchCenter", "showResearchCenter", "0", "0", "1", "0",
 						newModuleList);
 				Info delete = AccessControll.checkAccess("showResearchCenter", "showResearchCenter", "0", "0", "0", "1",
