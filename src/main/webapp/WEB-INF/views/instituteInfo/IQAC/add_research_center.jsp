@@ -126,6 +126,7 @@
 													placeholder="Faculty Name"
 													value="${editValue.rcFacultyName}" required>
 											</div>
+
 										</div>
 
 										<div class="form-group">
