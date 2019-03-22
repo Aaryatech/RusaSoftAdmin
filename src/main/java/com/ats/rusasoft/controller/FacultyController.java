@@ -1321,6 +1321,12 @@ public class FacultyController {
 
 	}
 
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/insertLinkageMaster", method = RequestMethod.POST)
 	public String insertLinkageMaster(HttpServletRequest request, HttpServletResponse response) {
 		String returnString = new String();

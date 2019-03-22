@@ -97,11 +97,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
+										action="${pageContext.request.contextPath}/insertLinkageMaster"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-
 
 
 
@@ -128,7 +126,7 @@
 											</div>
 										</div>
 
-										<input type="hidden" id="is_view" name="is_view" value="0">
+										<input type="text" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
@@ -307,7 +305,13 @@
 			return;
 		}
 	</script>
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
 
+		}
+	</script>
 
 
 
