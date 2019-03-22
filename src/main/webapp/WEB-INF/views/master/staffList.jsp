@@ -79,6 +79,11 @@
 								</c:if>
 
 								<div class="col-xs-12">
+								<form class="form-horizontal"
+										action=""
+										method="post"
+										name="form_sample_2" id="form_sample_2"
+										>
 
 
 									<table id="example-1"
@@ -138,7 +143,16 @@
 											<c:if test="${editAccess == 0}">	<a
 											href="${pageContext.request.contextPath}/editFaculity/${staffList.facultyId}" title="Edit"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
-												class="glyphicon glyphicon-edit"></span></a></c:if> | 
+												class="glyphicon glyphicon-edit"></span></a>
+												<a onclick="showAddDetail(${staffList.facultyId},1)"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																	<a onclick="showAddDetail(${staffList.facultyId},2)"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																	<a onclick="showAddDetail(${staffList.facultyId},3)"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a></c:if> | 
 												
 											<c:if test="${deleteAccess == 0}">	<a
 											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" 
@@ -177,11 +191,12 @@
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
 											
-											
-						
-							
+											<input type="hidden" id="add_fac_detail_id" name="add_fac_detail_id"
+											value="0">
+							</form>
 
 								</div>
+								
 							</div>
 						</div>
 					</section>
@@ -253,6 +268,26 @@
 			form.submit();
 			
 		}
+		
+		function showAddDetail(staffId,formType){
+			document.getElementById("add_fac_detail_id").value=staffId;//create this 
+			var form=document.getElementById("form_sample_2");
+		    form.setAttribute("method", "post");
+		    //1 means add Personal Detail;
+		    if(formType==1){
+				form.action=("addPersonalDetails");
+		    }else  if(formType==2){
+		    	//2 means add Mphil Phd Details
+				form.action=("showAddMphillDetails");
+		    }else  if(formType==3){
+		    	//3 means add Academic Details
+				form.action=("showAddAcademicDetails");
+		    }
+
+			form.submit();
+			
+		}
+		
 	</script>
 	
 	<script>

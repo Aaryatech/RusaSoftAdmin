@@ -140,11 +140,10 @@ public class FacPersonalController {
 
 		ModelAndView model = null;
 		try {
-
 			
 			int facultyId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
 			try {
-				facultyId = Integer.parseInt(request.getParameter("edit_Fac_id"));
+				facultyId = Integer.parseInt(request.getParameter("add_fac_detail_id"));
 			} catch (Exception e) {
 				facultyId = 12;//0;
 			}
@@ -363,7 +362,7 @@ public class FacPersonalController {
 
 			int facultyId =0;
 			try {
-			facultyId=Integer.parseInt(request.getParameter("edit_Fac_id"));
+			facultyId=Integer.parseInt(request.getParameter("add_fac_detail_id"));
 			}catch (Exception e) {
 				facultyId = 12;
 			}
@@ -485,7 +484,7 @@ public class FacPersonalController {
 
 	// Fac Academic
 
-	@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.POST)
 	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -495,15 +494,30 @@ public class FacPersonalController {
 			model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
 			model.addObject("title", "Academic Details Form");
+			
+			int facultyId =0;
+			try {
+			facultyId=Integer.parseInt(request.getParameter("add_fac_detail_id"));
+			}catch (Exception e) {
+				facultyId = 12;
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("type", 1);
 			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 					Quolification[].class);
 			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
-			System.err.println("quolfList " + quolfList.toString());
-
+			
 			model.addObject("quolfList", quolfList);
+
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("facultyId", facultyId);
+			// getFacAcademicByFacId
+			
+			FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademicByFacId", map,
+					FacultyAcademic.class); 
+
+			model.addObject("editFacAcad", editFacAcad);
 
 		} catch (Exception e) {
 
