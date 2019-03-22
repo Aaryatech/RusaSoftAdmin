@@ -110,7 +110,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="linkname_text"
 													required name="linkname_text" autocomplete="off"
-													placeholder="Linkage Name" value="${page.pageName}">
+													placeholder="Linkage Name" value="${editInst.linknameText}">
 											</div>
 										</div>
 
@@ -122,31 +122,37 @@
 												<input type="text" class="form-control"
 													id="linkname_remarks" required name="linkname_remarks"
 													autocomplete="off" placeholder="Linkage Remarks"
-													value="${page.pageName}">
+													value="${editInst.linknameRemarks}">
 											</div>
 										</div>
 
-										<input type="text" id="is_view" name="is_view" value="0">
+										<input type="hidden" id="linkage_id" name="linkage_id" value="${editInst.linknameId}" >
+										
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													onclick="submit_f(1)" value="Save"> 
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 
 										</div>
 									</form>
+									
+									
+									
+									
 
 									<div class="form-group">
-
+						<form action="${pageContext.request.contextPath}/deleteLinkages/0"
+							method="get" id="libListForm">
 										<table class="table table-striped dt-responsive display"
 											id="example-1">
 											<thead>
 
 												<tr>
+												<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 													<th>Sr No</th>
 													<th>Linkage Name</th>
 													<th>Linkage Remarks</th>
@@ -156,11 +162,46 @@
 
 
 											</thead>
+											
+								
 											<tbody>
+											<c:forEach items="${colList}" var="colList"
+														varStatus="count">
+														<tr>
+															<td><input type="checkbox" class="chk" name="linknameIds"
+																id="linknameIds${count.index+1}" value="${colList.linknameId}" /></td>
+															<td>${count.index+1}</td>
+															<td>${colList.linknameText}</td>
+															<td>${colList.linknameRemarks}</td>
+															
 
+
+															<td style="text-align: center;">
+																<%--   <c:if test="${editAccess == 0}">  --%> <a
+																href="#" onclick="showEditLinkage(${colList.linknameId})"><span
+																	class="glyphicon glyphicon-edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																<%-- </c:if> | --%> <%--   <c:if test="${deleteAccess == 0}"> --%>
+																&nbsp;&nbsp;&nbsp;&nbsp; <a
+																href="${pageContext.request.contextPath}/deleteLinkages/${colList.linknameId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a> <%-- 	</c:if> --%>
+															</td>
+														</tr>
+													</c:forEach>
 											</tbody>
 										</table>
 
+										<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+											<input type="text" id="edit_linkage_id" name="edit_linkage_id"
+												value="0">
+</form>
 
 									</div>
 								</div>
@@ -189,90 +230,28 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
-				</div>
-				<div class="modal-body">
+<script type="text/javascript">
+		function selectedInst(source) {
 
+			checkboxes = document.getElementsByName('linknameIds');
 
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-
-			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
-			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
 			}
 
 		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
+		function showEditLinkage(studId){
+			alert("edit_linkage_id"+studId);
+			document.getElementById("edit_linkage_id").value=studId;//create this 
+			var form=document.getElementById("libListForm");
+		    form.setAttribute("method", "post");
 
+			form.action=("showEditLinkage");
+			form.submit();
+			
 		}
-	</script>
-
+		</script>
 
 	<script type="text/javascript">
 		$(function() {

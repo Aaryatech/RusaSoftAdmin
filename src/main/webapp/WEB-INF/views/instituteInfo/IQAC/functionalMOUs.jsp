@@ -4,46 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
+<c:url var="clearSessionAttribute" value="/clearSessionAttribute" />
 </head>
 <!-- END HEAD -->
 
-<style>
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;
-}
-
-.image-preview-input input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-}
-
-.image-preview-input-title {
-	margin-left: 2px;
-}
-</style>
-
-
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="clearSessionAttribute()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -55,55 +27,63 @@
 		<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include>
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
+		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
-			<section class="wrapper main-wrapper row" style="">
+			<section class="wrapper main-wrapper row" style=''>
 
-				<div class="col-xs-12">
+				<%-- <div class='col-xs-12'>
 					<div class="page-title">
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
+							<h1 class="title">${title}</h1>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
 
 					</div>
-				</div>
+				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
 
 
 
 				<div class="col-lg-12">
 					<section class="box ">
-
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-
 							<div class="actions panel_actions pull-right">
+
+								<%--   <c:if test="${addAccess == 0}">  --%>
 								<a
-									href="${pageContext.request.contextPath}/showAddFunctionalMOUs"
-									data-toggle="modal"><button type="submit"
-										class="btn btn-success">Add</button></a>
+									href="${pageContext.request.contextPath}/showAddFunctionalMOUs"><button
+										type="button" class="btn btn-success">Add</button></a> <a
+									class="box_toggle fa fa-chevron-down"></a>
+								<%-- 	</c:if> --%>
+
+								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                    <a class="box_close fa fa-times"></a> -->
 
 							</div>
 
-
 						</header>
+						<form action="${pageContext.request.contextPath}/deleteMous/0"
+							method="get" id="libListForm">
+							<div class="content-body">
+								<div class="row">
+									<c:if test="${sessionScope.successMsg!=null}">
+										<div class="col-lg-12">
+											<div class="alert alert-success alert-dismissible fade in">
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<strong>Success : </strong> ${sessionScope.successMsg}
+											</div>
+										</div>
+									</c:if>
 
-
-						<div class="content-body">
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-
+									<div class="col-xs-12">
 
 
 										<div id="example-4_wrapper"
@@ -114,6 +94,9 @@
 												<thead>
 
 													<tr>
+														<th class="check" style="text-align: center; width: 5%;"
+															rowspan="2"><input type="checkbox" name="selAll"
+															id="selAll" onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Title of MoU</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
@@ -134,20 +117,64 @@
 
 
 
+
 												<tbody>
+													<c:forEach items="${mouList}" var="mouList"
+														varStatus="count">
+														<tr>
+															<td><input type="checkbox" class="chk" name="mouIds"
+																id="mouIds${count.index+1}" value="${mouList.mouId}" /></td>
+															<td>${count.index+1}</td>
+															<td>${mouList.mouTitle}</td>
+															<td>${mouList.mouFromdt}</td>
+															<td>${mouList.mouTodt}</td>
+															<td>${mouList.mouInstitute}</td>
+															<td style="text-align: center;">${mouList.mouBeneficiaryNos}</td>
 
 
+
+															<td style="text-align: center;">
+																<%--   <c:if test="${editAccess == 0}">  --%> <a
+																href="#" onclick="showEditMou(${mouList.mouId})"><span
+																	class="glyphicon glyphicon-edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																<%-- </c:if> | --%> <%--   <c:if test="${deleteAccess == 0}"> --%>
+																&nbsp;&nbsp;&nbsp;&nbsp; <a
+																href="${pageContext.request.contextPath}/deleteMous/${mouList.mouId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a> <%-- 	</c:if> --%>
+															</td>
+														</tr>
+													</c:forEach>
 												</tbody>
 											</table>
 										</div>
-									</form>
+										<div class="col-lg-1">
+
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+											<input type="hidden" id="edit_mou_id" name="edit_mou_id"
+												value="0">
+
+
+										</div>
+
+
+									</div>
 								</div>
-
 							</div>
-						</div>
-
+						</form>
 					</section>
 				</div>
+
+
+
+
 
 
 				<!-- MAIN CONTENT AREA ENDS -->
@@ -157,180 +184,99 @@
 
 
 
+
+
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+	<script>
+		function clearSessionAttribute() {
 
+			$.getJSON('${clearSessionAttribute}', {
 
+				ajax : 'true',
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Functional MoUs</h4>
-				</div>
-				<div class="modal-body">
+			}, function(data) {
 
+			});
 
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="title">Title of
-							MoU </label> <input type="text" class="form-control" id="title"
-							name="title" placeholder="Title of MoU" value="${page.pageName}"
-							required>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="mouDuration">MoU
-							Duration / Period </label> <input type="text" class="form-control"
-							id="mouDuration" name="mouDuration"
-							placeholder="MoU Duration / Period" value="${page.pageName}"
-							required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="functionalMOU">Functional
-							MoU with Agency </label> <select id="functionalMOU" name="functionalMOU"
-							onchange="showForm()" class="form-control" required>
-							<option value="IIT">IIT</option>
-							<option value="NIT">NIT</option>
-							<option value="IIIT">IIIT</option>
-							<option value="University">University</option>
-							<option value="Industries">Industries</option>
-							<option value="Corporate Houses">Corporate Houses</option>
-							<option value="7">Any other Institute of
-								International/National/State Importance</option>
-
-						</select>
-					</div>
-
-					<div class="form-group" id="abc">
-
-						<label class="control-label col-sm-6" for="page_name">Other
-							Course </label>
-						<!-- <div class="col-sm-3"> -->
-						<input type="text" class="form-control" id="otherCourse" required
-							name="otherCourse" placeholder="" value="${page.pageName}">
-						<!-- </div> -->
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="academicYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2015-2016">2015-2016</option>
-
-						</select>
-					</div>
-
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="beneficiaryMOU">Beneficiary
-							of MOU </label> <input type="text" class="form-control"
-							id="beneficiaryMOU" name="beneficiaryMOU"
-							placeholder="Beneficiary of MOU" value="${page.pageName}"
-							required>
-					</div>
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="totalParticipants">No.
-							of Participants / Beneficiary </label> <input type="text"
-							class="form-control" id="totalParticipants"
-							name="totalParticipants"
-							placeholder="No. of Participants / Beneficiary"
-							value="${page.pageName}" required>
-					</div>
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var title = document.getElementById("title").value;
-			var mouDuration = document.getElementById("mouDuration").value;
-			var academicYear = document.getElementById("academicYear").value;
-			var functionalMOU = document.getElementById("functionalMOU").value;
-			var beneficiaryMOU = document.getElementById("beneficiaryMOU").value;
-			var otherCourse = document.getElementById("otherCourse").value;
-
-			var totalParticipants = document
-					.getElementById("totalParticipants").value;
-			var temp;
-			if (functionalMOU == 7) {
-
-				temp = otherCourse;
-				//alert(temp);
-			} else {
-				temp = functionalMOU;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, title, mouDuration, temp, academicYear,
-							beneficiaryMOU, totalParticipants ]).draw();
-			document.getElementById("index").value = i + 1;
 		}
 
-		function showForm() {
+		function selectedInst(source) {
+
+			checkboxes = document.getElementsByName('mouIds');
+
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
+
+		}
+		function showEditMou(studId){
+			document.getElementById("edit_mou_id").value=studId;//create this 
+			var form=document.getElementById("libListForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditMou");
+			form.submit();
+			
+		}
+	</script>
+	<script>
+		function clearSessionAttribute() {
+
+			$.getJSON('${clearSessionAttribute}', {
+
+				ajax : 'true',
+
+			}, function(data) {
+
+			});
+
+		}
+	</script>
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
 			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("functionalMOU").value
+			var qualType = document.getElementById("MOU_agency").value
 			//alert("qualType::"+qualType);
 
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
+					document.getElementById("otherCourse").setAttribute("required","true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
+					document.getElementById("other_benif").removeAttribute("required");
+
 			}
 
 		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
 
-		}
+	</script>
+	<script type="text/javascript">
+	function hideText() {
+		//alert("hii");
+		var qualType = document.getElementById("MOU_agency").value
+		// alert("x " +qualType);
+			if(qualType == 7){
+				//alert("In If " +x);
+				document.getElementById("abc").style = "visible";
+			}else{ 
+		document.getElementById("abc").style = "display:none"
+			}
+		
+	}
 	</script>
 
 
-
-
-
-
-</body>
-</html>
