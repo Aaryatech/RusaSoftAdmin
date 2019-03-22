@@ -375,6 +375,11 @@ public class InstituteDistController {
 
 				model.addObject("title", "Human Values & Professional Ethics");
 
+				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
+				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
+
+				model.addObject("distlist", distlist);
+
 			} else {
 				model = new ModelAndView("accessDenied");
 			}
@@ -497,6 +502,11 @@ public class InstituteDistController {
 				System.out.println("valueId:" + valueId);
 
 				model.addObject("editValue", editValue);
+
+				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
+				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
+
+				model.addObject("distlist", distlist);
 
 			}
 		} catch (Exception e) {
