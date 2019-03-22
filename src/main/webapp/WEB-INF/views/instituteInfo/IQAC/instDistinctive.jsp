@@ -112,6 +112,48 @@
 												</tr>
 											</thead>
 											<tbody>
+												<c:forEach items="${distlist}" var="dist" varStatus="count">
+													<tr>
+
+														<td style="text-align: center">${count.index+1}</td>
+
+														<td style="text-align: left"><c:out
+																value="${dist.distName}" /></td>
+
+
+
+														<td style="text-align: left"><c:out
+																value="${dist.distBeneficiary}" /></td>
+
+
+														<td style="text-align: left"><c:out
+																value="${dist.distApplicableFrom}" /></td>
+
+
+
+														<td align="center"><c:if test="${editAccess == 0}">
+																<a
+																	href="${pageContext.request.contextPath}/editDist/${dist.distId}"
+																	title="Edit" rel="tooltip" data-color-class="detail"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Edit"><span
+																	class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																test="${deleteAccess == 0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteDist/${dist.distId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+
+															</c:if></td>
+
+
+
+
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 
