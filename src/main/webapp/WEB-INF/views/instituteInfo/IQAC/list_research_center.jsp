@@ -116,10 +116,11 @@
 
 													<tr>
 														<th rowspan="2">Sr No</th>
-														<th rowspan="2">Title of IPR-Industry-Academic
-															Initiative Practice</th>
+														<th rowspan="2">Subject Name</th>
+														<th rowspan="2">Faculty Name</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
-														<th rowspan="2">No. of Participants</th>
+														<th rowspan="2">No. of Guides</th>
+														<th rowspan="2">No. of Students</th>
 														<th rowspan="2">Action</th>
 
 													</tr>
@@ -133,7 +134,59 @@
 
 												</thead>
 												<tbody>
+													<c:forEach items="${centerlist}" var="value"
+														varStatus="count">
+														<tr>
 
+															<td style="text-align: center">${count.index+1}</td>
+
+															<td style="text-align: left"><c:out
+																	value="${value.rcSubjectName}" /></td>
+
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.rcFacultyName}" /></td>
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.rcValidityFromdt}" /></td>
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.rcValidityTodt}" /></td>
+
+
+
+															<td style="text-align: left"><c:out
+																	value="${value.rcGuideCount}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${value.rcStudentCount}" /></td>
+
+															<td align="center"><c:if test="${editAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/editResearchCenter/${value.rcId}"
+																		title="Edit" rel="tooltip" data-color-class="detail"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Edit"><span
+																		class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																	test="${deleteAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteResearchCenter/${value.rcId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+
+																</c:if></td>
+
+
+
+
+														</tr>
+													</c:forEach>
 												</tbody>
 											</table>
 

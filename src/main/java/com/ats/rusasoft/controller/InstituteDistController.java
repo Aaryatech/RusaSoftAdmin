@@ -35,6 +35,7 @@ import com.ats.rusasoft.model.instprofile.GetHumanValues;
 import com.ats.rusasoft.model.instprofile.GetResearchCenter;
 import com.ats.rusasoft.model.instprofile.HumanValues;
 import com.ats.rusasoft.model.instprofile.ResearchCenter;
+import com.ats.rusasoft.model.instprofile.ValuesMaster;
 
 @Controller
 @Scope("session")
@@ -763,6 +764,167 @@ public class InstituteDistController {
 			map.add("rcIdList", rcId);
 			Info info = rest.postForObject(Constants.url + "/deleteResearchCenter", map, Info.class);
 			value = "redirect:/showResearchCenter";
+		}
+		return value;
+
+	}
+
+	@RequestMapping(value = "/showValuesMaster", method = RequestMethod.GET)
+	public ModelAndView showValuesMaster(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info add = AccessControll.checkAccess("showValuesMaster", "showValuesMaster", "1", "0", "0", "0",
+					newModuleList);
+
+			if (add.isError() == false) {
+
+				model = new ModelAndView("instituteInfo/IQAC/add_values_master");
+
+				model.addObject("title", "Add  Values");
+
+				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
+				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
+
+				model.addObject("distlist", distlist);
+
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showValuesMaster at Institute Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/insertValueMaster", method = RequestMethod.POST)
+	public String insertValueMaster(HttpServletRequest request, HttpServletResponse response) {
+		String returnString = new String();
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showValuesMaster", "showValuesMaster", "0", "1", "0", "0",
+					newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+
+				System.err.println("Inside insertValueMaster method");
+
+				int valMastId = 0;
+				try {
+					valMastId = Integer.parseInt(request.getParameter("valMastId"));
+				} catch (Exception e) {
+					valMastId = 0;
+				}
+				int userId = (int) session.getAttribute("userId");
+
+				String valText = request.getParameter("valText");
+				ValuesMaster value = new ValuesMaster();
+				value.setDelStatus(1);
+				value.setIsActive(1);
+				value.setMakerDatetime(dateTime);
+				value.setMakerUserId(userId);
+				value.setValText(valText);
+				value.setValMastId(valMastId);
+
+				ValuesMaster valueInsertRes = rest.postForObject(Constants.url + "saveValuesMaster", value,
+						ValuesMaster.class);
+
+				System.err.println("valueInsertRes " + valueInsertRes.toString());
+				returnString = "redirect:/showValuesMaster";
+
+			} else {
+
+				returnString = "redirect:/accessDenied";
+
+			}
+		}
+
+		catch (Exception e) {
+			System.err.println("EXCE in valueInsertRes " + e.getMessage());
+			e.printStackTrace();
+
+		}
+		return returnString;
+
+	}
+
+	@RequestMapping(value = "/editValuesMaster/{valMastId}", method = RequestMethod.GET)
+	public ModelAndView editValuesMaster(@PathVariable("valMastId") int valMastId, HttpServletRequest request) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("showValuesMaster", "showValuesMaster", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("instituteInfo/IQAC/add_values_master");
+
+				model.addObject("title", "Add  Values");
+
+				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
+				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
+
+				model.addObject("distlist", distlist);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("valMstId", valMastId);
+
+				ValuesMaster editValue = rest.postForObject(Constants.url + "/getValuesMasterByValId", map,
+						ValuesMaster.class);
+				System.out.println("valMastId:" + valMastId);
+
+				model.addObject("editValue", editValue);
+
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editResearchCenter at InstrituteDist Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/deleteValuesMaster/{valMastId}", method = RequestMethod.GET)
+	public String deleteValuesMaster(@PathVariable("valMastId") int valMastId, HttpServletRequest request) {
+		String value = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showValuesMaster", "showValuesMaster", "0", "0", "0", "1",
+				newModuleList);
+		if (view.isError() == true) {
+
+			value = "redirect:/accessDenied";
+
+		} else {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("valIdList", valMastId);
+			Info info = rest.postForObject(Constants.url + "/deleteValuesMaster", map, Info.class);
+			value = "redirect:/showValuesMaster";
 		}
 		return value;
 
