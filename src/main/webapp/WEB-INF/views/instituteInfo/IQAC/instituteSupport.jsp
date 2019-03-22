@@ -133,6 +133,9 @@
 												class="table table-striped dt-responsive display">
 												<thead>
 													<tr>
+													<!-- <th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th> -->
 														<th width="10%">Sr No</th>
 														<th>Name of Scheme</th>
 														<th>No. of Students Benefited</th>
@@ -142,9 +145,37 @@
 
 												</thead>
 
+												
 												<tbody>
+												<c:forEach items="${schemeList}" var="schmList"
+													varStatus="count">
+													<tr>
+														<%-- <td><input type="checkbox" class="chk"
+															name="schmIds" id="schmIds${count.index+1}"
+															value="${bList.instSchemeId}" /></td> --%>
+														<td>${count.index+1}</td>
+														<td>${schmList.instSchemeName}</td>
+														<td>${schmList.instStudentsBenefited}</td>
+														<td>${schmList.instSchmeOfferedby}</td>
+														
+														<td><%-- <c:if test="${editAccess==0}"> --%>
+																<a 
+																	href="${pageContext.request.contextPath}/editInstituteScheme/${schmList.instSchemeId}"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
+																<a
+																	href="${pageContext.request.contextPath}/deleteInstituteScheme/${schmList.instSchemeId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger"  title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															<%-- </c:if> --%></td>
+													</tr>
+												</c:forEach>
 
-												</tbody>
+											</tbody>
+
 											</table>
 
 
@@ -249,6 +280,19 @@
 
 
 	<script type="text/javascript">
+	
+	function selectedInst(source) {
+
+		checkboxes = document.getElementsByName('schmIds');
+
+		for (var i = 0, n = checkboxes.length; i < n; i++) {
+			checkboxes[i].checked = source.checked;
+
+		}
+
+	}
+	
+	
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);

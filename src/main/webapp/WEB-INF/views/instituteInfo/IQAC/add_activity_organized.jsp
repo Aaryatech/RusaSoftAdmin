@@ -96,10 +96,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										action="${pageContext.request.contextPath}/insertInstituteActivity"
+										method="post" onsubmit="return checkBeforeSubmit()"
+										name="form_sample_2" id="form_sample_2">
 
 										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -112,15 +111,31 @@
 											<div class="tab-pane fade in active" id="home"> --%>
 
 										<div class="form-group">
+										<input type="hidden"  id="activityId" name="activityId" 
+												 value="${instAct.instActivityId}">
+												 
 											<label class="control-label col-sm-2" for="activityType">Type
 												of Activity <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
+											
 												<select id="activityType" name="activityType"
 													class="form-control" required>
+												<c:choose>
+													<c:when test="${instAct.instActivityType eq 'Sports'}">
+													<option selected value="Sports">Sports</option>
+													<option value="Cultural">Cultural</option>
+													</c:when>
+													<c:when test="${instAct.instActivityType eq 'Cultural'}">
+													<option  value="Sports">Sports</option>
+													<option selected value="Cultural">Cultural</option>
+													</c:when>
+													<c:otherwise>
 													<option value="Sports">Sports</option>
 													<option value="Cultural">Cultural</option>
-
+													</c:otherwise>
+													
+												</c:choose>	
 
 												</select>
 											</div>
@@ -133,10 +148,33 @@
 											<div class="col-sm-6">
 												<select id="activityLevel" name="activityLevel"
 													class="form-control" required>
+													
+											<c:choose>
+													<c:when test="${instAct.instActivityLevel eq 'State'}">
+													<option selected value="State">State</option>
+													<option value="National">National</option>
+													<option value="International">International</option>
+												</c:when>
+												
+												<c:when test="${instAct.instActivityLevel eq 'National'}">
+													<option value="State">State</option>
+													<option selected value="National">National</option>
+													<option value="International">International</option>
+												</c:when>
+												
+												<c:when test="${instAct.instActivityLevel eq 'International'}">
+													<option value="State">State</option>
+													<option value="National">National</option>
+													<option selected value="International">International</option>
+												</c:when>
+												
+												<c:otherwise>
 													<option value="State">State</option>
 													<option value="National">National</option>
 													<option value="International">International</option>
-
+												</c:otherwise>
+												
+											</c:choose>
 												</select>
 											</div>
 										</div>
@@ -148,8 +186,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="activityName"
-													name="activityName" placeholder="Name of Activity"
-													autocomplete="off" value="${page.pageName}" required>
+													name="activityName" placeholder="Name of Activity" pattern="^(?!\s*$).+"
+													autocomplete="off" value="${instAct.instActivityName}" required>
 											</div>
 										</div>
 
@@ -161,9 +199,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
+												<input type="text" class="form-control datepicker" pattern="^(?!\s*$).+"
+													autocomplete="off" id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
+													value="${instAct.instActivityFromdt}" required>
 
 											</div>
 										</div>
@@ -174,9 +212,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
-													value="${page.pageName}" required>
+												<input type="text" class="form-control datepicker" pattern="^(?!\s*$).+"
+													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
+													value="${instAct.instActivityTodt}" required>
 											</div>
 										</div>
 
@@ -190,9 +228,9 @@
 
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
-													id="inst_activity_participation" autocomplete="off"
-													name="inst_activity_participation"
-													placeholder="No.of Participants" value="${page.pageName}"
+													id="inst_activity_participation" autocomplete="off" pattern="^(?!\s*$).+"
+													name="inst_activity_participation" onkeypress='return restrictAlphabets(event)'
+													placeholder="No.of Participants" value="${instAct.instActivityParticipation}"
 													required>
 
 											</div>
@@ -203,12 +241,10 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
+												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+																<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
 
@@ -317,7 +353,37 @@
 	</script>
 
 
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 

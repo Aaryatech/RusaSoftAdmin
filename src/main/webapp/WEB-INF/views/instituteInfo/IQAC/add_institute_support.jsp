@@ -96,8 +96,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertInstituteSupport"
+										method="post" onsubmit="return checkBeforeSubmit()"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -136,17 +136,18 @@
 														</div> -->
 
 										<div id="abc">
-
+												<input type="hidden" id="inst_scheme_id"  name="inst_scheme_id"
+														placeholder="" value="${instSpprt.instSchemeId}">
 											<div class="form-group">
 
 												<label class="control-label col-sm-3" for="studBenifited">Name
 													of Schemes <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control" pattern="^(?!\s*$).+"
 														id="inst_scheme_name" autocomplete="off"
 														onchange="return trim(this)" name="inst_scheme_name"
-														placeholder="Name of Schemes" value="${page.pageName}"
+														placeholder="" value="${instSpprt.instSchemeName}"
 														required>
 												</div>
 											</div>
@@ -162,10 +163,10 @@
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
-														id="inst_students_benefited"
-														name="inst_students_benefited"
-														placeholder="No. of Students Benefited"
-														value="${page.pageName}" required>
+														id="inst_students_benefited" pattern="^(?!\s*$).+"
+														name="inst_students_benefited" onkeypress='return restrictAlphabets(event)'
+														placeholder=""
+														value="${instSpprt.instStudentsBenefited}" required>
 												</div>
 											</div>
 
@@ -178,21 +179,18 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="inst_schme_offeredby" name="inst_schme_offeredby"
-														placeholder="Scheme/Support offered By"
-														value="${page.pageName}" required>
+														placeholder="" pattern="^(?!\s*$).+"
+														value="${instSpprt.instSchmeOfferedby}" required>
 												</div>
 											</div>
 
 
 											<div class="form-group">
 												<div class="col-sm-offset-3 col-sm-10">
-													<input type="submit" class="btn btn-primary"
-														onclick="submit_f(1)" value="Save"> <input
-														type="submit" class="btn btn-primary"
-														onclick="submit_f(0)"
-														value="Save &
+														<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-													<button type="reset" class="btn btn-default">Reset</button>
+																<button type="reset" class="btn btn-default">Reset</button>
 												</div>
 											</div>
 										</div>
@@ -316,9 +314,37 @@
 			return;
 		}
 	</script>
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
-
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 </body>
 </html>
