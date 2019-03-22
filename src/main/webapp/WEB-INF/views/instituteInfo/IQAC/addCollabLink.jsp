@@ -100,9 +100,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertColLinkages"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -119,18 +119,27 @@
 														of Collaboration / Linkage<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="colName" name="colName" class="form-control"
-															required><option value="-1">Select</option>
-															<option value="Faculty Exchange">Faculty
-																Exchange</option>
-															<option value="Student Exchange">Student
-																Exchange</option>
-															<option value="Internship">Internship</option>
-															<option value="Fieldtrip">Fieldtrip</option>
-															<option value="Research">Research</option>
-															<option value="On job paining">On job paining</option>
+														
+														
+														
+														<select id="colName" name="colName" class="form-control" required>
+															
+																		<c:forEach items="${colList}" var="colList">
+																		<c:choose>
+																			<c:when test="${colList.linknameId==editInst.linknameId}">
+																			<option selected value="${colList.linknameId}">${colList.linknameText}</option>
 
-														</select>
+																			</c:when>
+																			<c:otherwise>
+																			<option  value="${colList.linknameId}">${colList.linknameText}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+																</select>
+																
 													</div>
 												</div>
 												<div class="form-group">
@@ -139,11 +148,11 @@
 														Linkage with Agency<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="agency"
-															name="agency" autocomplete="off"
+														<input type="text" class="form-control" id="col_agency"
+															name="col_agency" autocomplete="off"
 															onchange="return trim(this)"
 															placeholder="Collaboration Linkage with Agency"
-															value="${page.pageName}" required>
+															value="${editInst.linkAgency}" required>
 													</div>
 												</div>
 
@@ -160,27 +169,67 @@
 															name="linkageNature" autocomplete="off"
 															onchange="return trim(this)"
 															placeholder="Nature of Linkage Collaboration"
-															value="${page.pageName}" required>
+															value="${editInst.linkNature}" required>
 													</div>
 												</div>
+
+												
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="beneficiary">Beneficiary
-														of Collaboration / Linkage<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="beneficiaryMOU">Beneficiary
+														of MoU<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="beneficiary" name="beneficiary"
+
+														<select id="beneficiaryMOU" name="beneficiaryMOU"
 															class="form-control" required>
-															<option value="-1">Select</option>
-															<option value="1">Students</option>
-															<option value="2">Staff</option>
-															<option value="3">Students And Staff</option>
+															<!-- <option value="-1">Select</option>
+															<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option> -->
+
+
+
+																<c:choose>
+															<c:when test="${'Students'== editInst.linkBeneficiary}">
+}">
+															<option value="-1">Select</option>		
+															<option selected value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option>
+																			</c:when>
+																			<c:when test="${'Staff'==editInst.linkBeneficiary}">
+																	<option value="-1">Select</option>			        
+															<option value="Students">Students</option>
+															<option selected value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option>
+																			</c:when>
+																			
+															<c:when test="${'Students And Staff'==editInst.linkBeneficiary}">
+}">
+															<option value="-1">Select</option>			
+															<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option selected value="Staff">Students And Staff</option>
+
+																			</c:when>
+																			
+																			
+																	<c:otherwise>
+																		<option selected value="-1">Select</option>
+															<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
 														</select>
+
 													</div>
 												</div>
-
-
 
 												<div class="form-group">
 
@@ -189,18 +238,22 @@
 														Beneficiary<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" autocomplete="off"
+														<input type="number" min="0" class="form-control" autocomplete="off"
 															id="totalParticipants" name="totalParticipants"
 															placeholder="No. of Participants / Beneficiary"
-															value="${page.pageName}" required>
+															value="${editInst.linkBeneficiaryNos}" required>
 													</div>
 												</div>
 
+
+
+      										 <input type="hidden" id="link_id" name="link_id" value="${editInst.linkId}">
+                                             	<input type="hidden" id="is_view" name="is_view" value="0">
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
+														<input type="submit"  id="sub1" class="btn btn-primary"
 															onclick="submit_f(1)" value="Save"> <input
-															type="submit" class="btn btn-primary"
+															type="submit" id="sub2" class="btn btn-primary"
 															onclick="submit_f(0)"
 															value="Save &
 																		Next">
@@ -236,64 +289,8 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Collaboration & Linkages</h4>
-				</div>
-				<div class="modal-body">
 
-
-
-
-
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var colName = document.getElementById("colName").value;
-			var agency = document.getElementById("agency").value;
-			var academicYear = document.getElementById("academicYear").value;
-
-			var linkageNature = document.getElementById("linkageNature").value;
-			var beneficiary = document.getElementById("beneficiary").value;
-			var totalParticipants = document
-					.getElementById("totalParticipants").value;
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, colName, agency, academicYear, linkageNature,
-							beneficiary, totalParticipants ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-	</script>
+	
 
 
 
@@ -315,7 +312,35 @@
 			return;
 		}
 	</script>
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+var wasSubmitted = false;    
+function checkBeforeSubmit(){
+  if(!wasSubmitted) {
+	  var x=confirm("Do you really want to submit the form?");
+	  if(x==true){
+    wasSubmitted = true;
+	  document.getElementById("sub1").disabled=true;
+	  document.getElementById("sub2").disabled=true;
+
+    return wasSubmitted;
+	  }
+  }
+  return false;
+}    
+	</script>
 
 </body>
 </html>

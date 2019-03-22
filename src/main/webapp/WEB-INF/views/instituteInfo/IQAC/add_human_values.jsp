@@ -107,17 +107,18 @@
 											<div class="col-sm-6">
 												<select id="title" name="title" class="form-control"
 													required><option value=" ">Select</option>
-													<option value="Truth">Truth</option>
-													<option value="Righteous Conduct">Righteous
-														Conduct</option>
-													<option value="Non violence">Non violence</option>
-													<option value="Peace">Peace</option>
-													<option value=">National values">National values</option>
-													<option value="National Integration ">National
-														Integration</option>
-													<option value="Communal harmony">Communal harmony</option>
-													<option value="Fundamental Duties">Fundamental
-														Duties</option>
+													<c:forEach items="${distlist}" var="dist">
+
+														<c:choose>
+															<c:when test="${editValue.activityName==dist.valMastId}">
+																<option value="${dist.valMastId}" selected>${dist.valText}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${dist.valMastId}">${dist.valText}</option>
+															</c:otherwise>
+														</c:choose>
+
+													</c:forEach>
 
 												</select>
 											</div>

@@ -108,7 +108,8 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_subject_name"
 													autocomplete="off" name="rc_subject_name"
-													placeholder="Subject Name"
+													placeholder="Subject Name" pattern="^(?!\s*$).+"
+													onchange="return trim(this)"
 													value="${editValue.rcSubjectName}" required>
 											</div>
 										</div>
@@ -121,9 +122,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_faculty_name"
 													autocomplete="off" name="rc_faculty_name"
+													pattern="^(?!\s*$).+" onchange="return trim(this)"
 													placeholder="Faculty Name"
 													value="${editValue.rcFacultyName}" required>
 											</div>
+
 										</div>
 
 										<div class="form-group">

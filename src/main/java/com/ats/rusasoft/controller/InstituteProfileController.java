@@ -504,43 +504,7 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showFunctionalMOUs", method = RequestMethod.GET)
-	public ModelAndView showFunctionalMOUs(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
-		try {
-
-			model.addObject("title", "Functional MoUs");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-	//
-
-	@RequestMapping(value = "/showAddFunctionalMOUs", method = RequestMethod.GET)
-	public ModelAndView showAddFunctionalMOUs(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
-		try {
-
-			model.addObject("title", "Add Functional MoUs");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	@RequestMapping(value = "/showIncubationCentreDetail", method = RequestMethod.GET)
 	public ModelAndView showIncubationCentre(HttpServletRequest request, HttpServletResponse response) {
 

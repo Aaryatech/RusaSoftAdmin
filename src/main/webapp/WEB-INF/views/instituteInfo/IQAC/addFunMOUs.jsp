@@ -102,10 +102,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertFunctionalMOU"
+										method="post"
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+											onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -127,7 +127,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="title"
 															autocomplete="off" name="title"
-															placeholder="Title of MoU" value="${page.pageName}"
+															placeholder="Title of MoU" value="${editInst.mouTitle}"
 															required>
 													</div>
 												</div>
@@ -137,9 +137,80 @@
 														MoU with Agency <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<select id="functionalMOU" name="functionalMOU"
+														<select id="MOU_agency" name="MOU_agency"
 															onchange="showForm()" class="form-control" required>
-															<option value="-1">Select</option>
+															
+															
+													<c:choose>
+															<c:when test="${'IIT'== editInst.mouAgency}">
+															<option selected value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'NIT'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option selected value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'IIIT'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option selected value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'University'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option selected value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'Industries'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option selected value="Industries">Industries</option>
+															<option value="Corporate Houses">Corporate
+																Houses</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															<c:when test="${'Corporate Houses'== editInst.mouAgency}">
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option  value="Industries">Industries</option>
+															<option selected value="Corporate Houses">Corporate Houses
+																</option>
+															<option  value="7">Any other Institute of
+																International/National/State Importance</option>
+															</c:when>
+															
+															<c:otherwise>
+														
 															<option value="IIT">IIT</option>
 															<option value="NIT">NIT</option>
 															<option value="IIIT">IIIT</option>
@@ -147,24 +218,29 @@
 															<option value="Industries">Industries</option>
 															<option value="Corporate Houses">Corporate
 																Houses</option>
-															<option value="7">Any other Institute of
+															<option selected value="7">Any other Institute of
 																International/National/State Importance</option>
-
+																</c:otherwise>
+												</c:choose>
 														</select>
+													
 													</div>
 												</div>
 
-												<div class="form-group" id="abc">
+
+												<div class="form-group" id="abc" style = "display:none">
 
 													<label class="control-label col-sm-2" for="page_name">Other
 														Course <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="otherCourse"
-															autocomplete="off" required name="otherCourse"
-															placeholder="" value="${page.pageName}">
+															autocomplete="off"  name="otherCourse"
+															placeholder="" value="${editInst.mouAgency}">
 													</div>
 												</div>
+
+
 
 												<div class="form-group">
 
@@ -174,7 +250,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
 															autocomplete="off" id="fromDate" name="fromDate"
-															value="${page.pageName}" required>
+															value="${fdate}" required>
 
 													</div>
 												</div>
@@ -187,7 +263,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
 															autocomplete="off" id="toDate" name="toDate"
-															value="${page.pageName}" required>
+															value="${tdate}" required>
 													</div>
 												</div>
 
@@ -204,10 +280,45 @@
 
 														<select id="beneficiaryMOU" name="beneficiaryMOU"
 															class="form-control" required>
-															<option value="-1">Select</option>
-															<option value="1">Students</option>
-															<option value="2">Staff</option>
-															<option value="3">Students And Staff</option>
+															<!-- <option value="-1">Select</option>
+															<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option> -->
+
+
+
+																<c:choose>
+															<c:when test="${'Students'== editInst.mouBeneficiary}">
+															<option value="-1">Select</option>		
+															<option selected value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option>
+																			</c:when>
+																			<c:when test="${'Staff'==editInst.mouBeneficiary}">
+																	<option value="-1">Select</option>			        
+															<option value="Students">Students</option>
+															<option selected value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option>
+																			</c:when>
+																			
+															<c:when test="${'Students And Staff'==editInst.mouBeneficiary}">
+															<option value="-1">Select</option>			
+															<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option selected value="Staff">Students And Staff</option>
+
+																			</c:when>
+																			
+																			
+																	<c:otherwise>
+																		<option selected value="-1">Select</option>
+															<option value="Students">Students</option>
+															<option value="Staff">Staff</option>
+															<option value="Students And Staff">Students And Staff</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
 
 														</select>
 
@@ -220,10 +331,10 @@
 														of Beneficiary Participants<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
-															id="beneficiaryMOU" name="beneficiaryMOU"
+														<input type="number" min="0" class="form-control"
+															id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 															placeholder="No. of Beneficiary Participants "
-															value="${page.pageName}" required>
+															value="${editInst.mouBeneficiaryNos}" required>
 													</div>
 												</div>
 
@@ -237,15 +348,19 @@
 														<input type="text" class="form-control"
 															id="instituteOfMoU" autocomplete="off"
 															name="instituteOfMoU" placeholder="Institute of MoU"
-															value="${page.pageName}" required>
+															value="${editInst.mouInstitute}" required>
 													</div>
 												</div>
+												
 
-
+      										 <input type="hidden" id="mou_id" name="mou_id"value="${editInst.mouId}">
+                                             	<input type="hidden" id="is_view" name="is_view" value="0">
+                                             	
+                                             	
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Save"> <input
+														<input type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)"  id="sub2" value="Save"> <input
 															type="submit" class="btn btn-primary"
 															onclick="submit_f(0)"
 															value="Save &
@@ -291,114 +406,6 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Functional MoUs</h4>
-				</div>
-				<div class="modal-body">
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="title">Title of
-							MoU </label> <input type="text" class="form-control" id="title"
-							name="title" placeholder="Title of MoU" value="${page.pageName}"
-							required>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="mouDuration">MoU
-							Duration / Period </label> <input type="text" class="form-control"
-							id="mouDuration" name="mouDuration"
-							placeholder="MoU Duration / Period" value="${page.pageName}"
-							required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="functionalMOU">Functional
-							MoU with Agency </label> <select id="functionalMOU" name="functionalMOU"
-							onchange="showForm()" class="form-control" required>
-							<option value="IIT">IIT</option>
-							<option value="NIT">NIT</option>
-							<option value="IIIT">IIIT</option>
-							<option value="University">University</option>
-							<option value="Industries">Industries</option>
-							<option value="Corporate Houses">Corporate Houses</option>
-							<option value="7">Any other Institute of
-								International/National/State Importance</option>
-
-						</select>
-					</div>
-
-					<div class="form-group" id="abc">
-
-						<label class="control-label col-sm-6" for="page_name">Other
-							Course </label>
-						<!-- <div class="col-sm-3"> -->
-						<input type="text" class="form-control" id="otherCourse" required
-							name="otherCourse" placeholder="" value="${page.pageName}">
-						<!-- </div> -->
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="academicYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2015-2016">2015-2016</option>
-
-						</select>
-					</div>
-
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="beneficiaryMOU">Beneficiary
-							of MOU </label> <input type="text" class="form-control"
-							id="beneficiaryMOU" name="beneficiaryMOU"
-							placeholder="Beneficiary of MOU" value="${page.pageName}"
-							required>
-					</div>
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="totalParticipants">No.
-							of Participants / Beneficiary </label> <input type="text"
-							class="form-control" id="totalParticipants"
-							name="totalParticipants"
-							placeholder="No. of Participants / Beneficiary"
-							value="${page.pageName}" required>
-					</div>
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
 	<script type="text/javascript">
 		$(function() {
 			$('#submitForm').submit(
@@ -418,36 +425,8 @@
 		}
 	</script>
 
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var title = document.getElementById("title").value;
-			var mouDuration = document.getElementById("mouDuration").value;
-			var academicYear = document.getElementById("academicYear").value;
-			var functionalMOU = document.getElementById("functionalMOU").value;
-			var beneficiaryMOU = document.getElementById("beneficiaryMOU").value;
-			var otherCourse = document.getElementById("otherCourse").value;
-
-			var totalParticipants = document
-					.getElementById("totalParticipants").value;
-			var temp;
-			if (functionalMOU == 7) {
-
-				temp = otherCourse;
-				//alert(temp);
-			} else {
-				temp = functionalMOU;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, title, mouDuration, temp, academicYear,
-							beneficiaryMOU, totalParticipants ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
+<!-- 	<script type="text/javascript">
+		
 		function showForm() {
 			//document.getElementById("abc").style = "display:none"
 			var qualType = document.getElementById("functionalMOU").value
@@ -462,16 +441,78 @@
 			}
 
 		}
-		function hideText() {
+	
+	</script> -->
+	
+	<script type="text/javascript">
+		function showForm() {
 			//alert("hii");
-			document.getElementById("abc").style = "display:none"
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("MOU_agency").value
+			alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+					document.getElementById("otherCourse").setAttribute("required","true");
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+					document.getElementById("otherCourse").removeAttribute("required");
+
+			}
 
 		}
+
+	</script>
+	<script type="text/javascript">
+	function hideText() {
+		//alert("hii");
+		var qualType = document.getElementById("MOU_agency").value
+		 //alert("x " +qualType);
+			if(qualType == 7){
+				//alert("In If " +x);
+				document.getElementById("abc").style = "visible";
+			}else{ 
+		document.getElementById("abc").style = "display:none"
+			}
+		
+	}
 	</script>
 
 
+<script type="text/javascript">
+function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
 
+		form.action=("insertLibrarian");
+		var x =confirm();
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
+	
+var wasSubmitted = false;    
+function checkBeforeSubmit(){
+  if(!wasSubmitted) {
+	  var x=confirm("Do you really want to submit the form?");
+	  if(x==true){
+    wasSubmitted = true;
+	  document.getElementById("sub1").disabled=true;
+	  document.getElementById("sub2").disabled=true;
 
+    return wasSubmitted;
+	  }
+  }
+  return false;
+}    
+	</script>
+	
+	
+												
 
 
 </body>
