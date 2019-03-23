@@ -119,7 +119,7 @@
 															<td>${count.index+1}</td>
 															<td>${pracList.practicesName}</td>
 															<td>${pracList.practicesBeneficiary}</td>
-															<td>${pracList.practicesEffectiveFrom}</td>
+															<td style="text-align:center;">${pracList.practicesEffectiveFrom}</td>
 														
 															<td style="text-align: center;">
 																  <c:if test="${editAccess == 0}">  <a

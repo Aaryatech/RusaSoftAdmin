@@ -196,7 +196,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/libList");
 
-				model.addObject("title", "Librarian List");
+				model.addObject("title", "Librarian Registration List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 
@@ -266,7 +266,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/libReg");
 
-				model.addObject("title", "Librarian Registration");
+				model.addObject("title", "Add Librarian Registration");
 				Librarian editInst = new Librarian();
 
 				RestTemplate restTemplate = new RestTemplate();
@@ -567,7 +567,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/studList");
 
-				model.addObject("title", "Student List");
+				model.addObject("title", "Special Student Registration List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				System.out.println("Student list inst id::::" + inst_id);
@@ -639,7 +639,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/studReg");
 
-				model.addObject("title", "Student Registration");
+				model.addObject("title", "Add Special Student Registration");
 
 				Student editStudent = new Student();
 				model.addObject("editStudent", editStudent);
@@ -816,7 +816,7 @@ public class LibraryController {
 				int student_id = Integer.parseInt(request.getParameter("edit_stud_id"));
 				System.out.println("Student id is" + student_id);
 
-				model.addObject("title", " Edit Student  Registration");
+				model.addObject("title", " Edit Special Student Registration");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				map.add("studId", student_id);
@@ -939,7 +939,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/instituteInfo");
 
-				model.addObject("title", "Institute List");
+				model.addObject("title", "Institute Information List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				System.out.println("Student list inst id::::" + inst_id);
@@ -1011,7 +1011,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/iqaclogin");
 
-				model.addObject("title", "Fill Institute Information");
+				model.addObject("title", "Add Institute Information");
 
 				InstituteInfo editInst = new InstituteInfo();
 

@@ -131,7 +131,7 @@ public class ProgramDetailModuleController {
 
 			model = new ModelAndView("ProgramDetails/poPSO");
 
-			model.addObject("title", " PO/PSO Mapping List");
+			model.addObject("title", " PO-PSO Mapping List");
 			/*
 			 * HttpSession session = request.getSession(); int instituteId
 			 * =(int)session.getAttribute("instituteId");
@@ -184,7 +184,7 @@ public class ProgramDetailModuleController {
 
 			model = new ModelAndView("ProgramDetails/mapPSO");
 
-			model.addObject("title", "PO/PSO Mapping List");
+			model.addObject("title", "PO-PSO Mapping List");
 			
 			 map = new LinkedMultiValueMap<>();
 				
@@ -407,7 +407,7 @@ public class ProgramDetailModuleController {
 
 			StudentSupprtScheme stud = new StudentSupprtScheme();
 			model.addObject("stud", stud);
-			model.addObject("title", "Student Support Scheme");
+			model.addObject("title", "Add Student Support Scheme");
 
 		} catch (Exception e) {
 
@@ -494,7 +494,7 @@ public class ProgramDetailModuleController {
 			
 			model = new ModelAndView("ProgramDetails/StudSuppSch");
 
-			model.addObject("title", "Student Support Scheme");
+			model.addObject("title", "Student Support Scheme List");
 			
 			model.addObject("studList", studSchmList);
 

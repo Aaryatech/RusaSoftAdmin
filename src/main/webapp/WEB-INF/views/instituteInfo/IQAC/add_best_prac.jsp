@@ -141,7 +141,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="practices_effective_from" placeholder="dd-MM-YYYY"
+													autocomplete="off" id="practices_effective_from" placeholder="dd-mm-yyyy"
 													name="practices_effective_from" value="${date}"
 													required>
 											</div>
