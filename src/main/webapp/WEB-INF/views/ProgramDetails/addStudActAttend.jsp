@@ -99,18 +99,18 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitAttendedActivity"
 										method="post" name="submitAcitivity" id="submitAcitivity"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit();">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Activity
 											</a></li>
 
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										<!-- <div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
 												<div>
 
@@ -252,7 +252,7 @@
 																			value="${editProgramActivity.activityName}"
 																			name="otherActivityName"
 																			placeholder="Another Scheme Name"
-																			onchange="checkUnique(this.value,1)">
+																			  onchange="return trim(this)" required>
 																	</div>
 																</div>
 
@@ -269,7 +269,7 @@
 																			value="${editProgramActivity.activityName}"
 																			name="otherActivityName"
 																			placeholder="Another Scheme Name"
-																			onchange="checkUnique(this.value,1)">
+																			  onchange="return trim(this)">
 																	</div>
 																</div>
 															</c:otherwise>
@@ -284,7 +284,7 @@
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker"
 																	id="date" value="${editProgramActivity.date}" placeholder="Date"
-																	name="date" required>
+																	name="date" required autocomplete="off">
 															</div>
 														</div>
 
@@ -294,9 +294,9 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="year"
+																<input type="text" class="form-control datepickeryear" id="year"
 																	value="${editProgramActivity.year}" name="year" placeholder="Year"
-																	required>
+																	required autocomplete="off">
 															</div>
 														</div>
 
@@ -306,9 +306,9 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="branch"
+																<input type="text" maxlength="30" class="form-control" id="branch"
 																	value="${editProgramActivity.branch}" name="branch" placeholder="Branch"
-																	required>
+																	required onchange="return trim(this)">
 															</div>
 														</div>
 
@@ -320,7 +320,7 @@
 																<input type="text" class="form-control" id="noStudent"
 																	value="${editProgramActivity.participatedStudent}"
 																	name="noStudent" placeholder="No. of Students Participated"
-																	pattern="\d*" required>
+																	pattern="\d*" required maxlength="6">
 															</div>
 														</div>
 
@@ -406,11 +406,11 @@
 												<div class="form-group">
 													<div class="col-sm-offset-2 col-sm-10">
 														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Add"> <input
+															onclick="submit_f(1)" value="Add" id="svebtn"> <input
 															type="submit" class="btn btn-primary"
 															onclick="submit_f(0)"
 															value="Save &
-																		Next">
+																		Next" id="svebtnnext">
 														<button type="reset" class="btn btn-default">Reset</button>
 													</div>
 												</div>
@@ -418,9 +418,9 @@
 
 												<div class="clearfix"></div>
 
-											</div>
+											<!-- </div>
 
-										</div>
+										</div> -->
 
 									</form>
 								</div>
@@ -438,6 +438,11 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="./javascript.js"></script>
+	<script
+		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false">
 	<script type="text/javascript">
 function submit_f(view){
 	//alert(view);
@@ -484,21 +489,39 @@ function hideText() {
 
 </script>
 
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
+		$(function() {
 
-$(function () {				
+			$('.datepickeryear').datepicker({
+				autoclose : true,
+				minViewMode : 2,
+				format : 'yyyy'
 
-	$('.datepicker').datepicker({				
-					autoclose: true,
-	format: ""dd-mm-yyyy"",				
-	changeYear:true,				
-	changeMonth:true				
-					
-					
-				});	
-	});	 
-</script> -->
-
+			});
+		});
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+          var x=confirm("Do you really want to submit the form?");
+          if(x==true){
+        wasSubmitted = true;
+          document.getElementById("svebtn").disabled=true;
+          document.getElementById("svebtnnext").disabled=true;
+        return wasSubmitted;
+          }
+      }
+      return false;
+    } 
+    
+</script>
 
 
 	<!-- END CONTAINER -->
