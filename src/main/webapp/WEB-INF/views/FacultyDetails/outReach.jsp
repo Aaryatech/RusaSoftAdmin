@@ -117,8 +117,8 @@
 
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="status">Select
-															Attended Activity <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="status">
+														Outreach Type <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<!-- <select id="act_attended" onchange="showForm()"
@@ -170,8 +170,8 @@
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">Name
-															of Activity <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="smallheading">Outreach Name
+															<!-- Name of Activity  --><span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="act_name"
@@ -206,8 +206,8 @@
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="status">Select
-															Level <span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="status">Outreach Level
+															 <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<select id="act_level" name="act_level"
@@ -271,11 +271,11 @@
 
 												<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">
-																Date of Activity <span class="text-danger">*</span>
+																Outreach Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="act_date" 	value="${date}"
-																	name="act_date" placeholder="dd/MM/YYYY " required>
+																<input type="text" class="form-control datepicker" id="act_date" value="${date}"
+																	name="act_date" placeholder="dd/MM/yyyy " required>
 															</div>
 														</div>
 														
@@ -304,6 +304,7 @@
 											</div>
 									
 									</form>
+										<p class="desc text-danger fontsize11">Notice : * Field are  Mandatory.</p>
 								</div>
 
 							</div>

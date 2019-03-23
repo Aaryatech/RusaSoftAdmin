@@ -636,12 +636,31 @@ public class FacultyPatentController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("instituteId", session.getAttribute("instituteId"));
-				List<GetFacultyOutreach> facultyOutreachList = rest.postForObject(Constants.url + "/getOutReachListByFacultyId",map,
-						List.class);
-				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());				
-
+				
+				
+				
+				/*
+				 * Quolification[] quolArray = restTemplate.postForObject(Constants.url +
+				 * "getQuolificationList", map, Quolification[].class); List<Quolification>
+				 * quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				 * 
+				 */
+				
+				GetFacultyOutreach[] facultyOutreachListArray = rest.postForObject(Constants.url + "getOutReachListByFacultyId",map,
+						GetFacultyOutreach[].class);
+				
+				List<GetFacultyOutreach> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
+				
+				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());	
+				
+				  for(int i=0;i<facultyOutreachList.size();i++) {
+				  facultyOutreachList.get(i).setOutreachDate(DateConvertor.convertToDMY(facultyOutreachList.get(i).getOutreachDate()));
 			
+				  
+				  }
+				 
 
+				
 				model.addObject("facultyOutreachList", facultyOutreachList);
 				
 				Info add = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "1", "0", "0",

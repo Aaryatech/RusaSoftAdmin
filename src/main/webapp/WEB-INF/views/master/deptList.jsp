@@ -52,9 +52,9 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
 									<a href="${pageContext.request.contextPath}/addFaculty"><button
-											type="button" class="btn btn-success">Department
-											Registration</button></a>
-									<a class="box_toggle fa fa-chevron-down"></a>
+											type="button" class="btn btn-success">
+											Add</button></a>
+									
 								</c:if>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->

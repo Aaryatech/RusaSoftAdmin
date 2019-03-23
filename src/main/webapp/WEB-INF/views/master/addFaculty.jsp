@@ -85,9 +85,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showDeptList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
-							</div>
+										type="button" class="btn btn-info">Back</button></a>
+										</div>
 
 						</header>
 
@@ -135,6 +134,8 @@
 										</div>
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

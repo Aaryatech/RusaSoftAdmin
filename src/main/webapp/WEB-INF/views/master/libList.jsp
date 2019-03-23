@@ -55,7 +55,7 @@
 							<div class="actions panel_actions pull-right">
 								  <c:if test="${addAccess == 0}"> 
 								  <a href="${pageContext.request.contextPath}/showRegLib">
-								  <button type="button" class="btn btn-success">Register Librarian 
+								  <button type="button" class="btn btn-success">Add
 								  </button></a> 
 			                	  </c:if>
 								
@@ -123,7 +123,7 @@
 													    <c:if test="${editAccess == 0}"> 
 							                       	  	<a
 															href="#" onclick="showEditLibrarian(${institute.librarianId})"><span
-																class="glyphicon glyphicon-edit"
+																class="glyphicon glyphicon-edit" title="Edit" data-original-title="Edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>
 			                	                       </c:if>&nbsp;&nbsp;&nbsp;&nbsp;
 														
@@ -131,7 +131,7 @@
 															<a
 															href="${pageContext.request.contextPath}/deleteLibrarians/${institute.librarianId}"
 															onClick="return confirm('Are you sure want to delete this record');"
-															rel="tooltip" data-color-class="danger"
+															rel="tooltip" data-color-class="danger"  title="Delete" data-original-title="Delete"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Delete  record"><span
 																class="glyphicon glyphicon-remove"></span></a>

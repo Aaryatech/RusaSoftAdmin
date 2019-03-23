@@ -229,7 +229,7 @@ public class HomeController {
 
 	@RequestMapping("/loginProcess")
 	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse res) throws IOException {
-		
+		ModelAndView mav = new ModelAndView("login");
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
 		int loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
@@ -237,7 +237,7 @@ public class HomeController {
 		
 		System.out.println("Credential are::::"+name+password);
 
-		ModelAndView mav = new ModelAndView("login");
+	
 		HttpSession session = request.getSession();
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
@@ -249,6 +249,10 @@ public class HomeController {
 			if (name.equalsIgnoreCase("") || password.equalsIgnoreCase("") || name == null || password == null) {
 
 				mav = new ModelAndView("login");
+				mav.addObject("msg","Enter  Login Credentials");
+				
+				
+				
 			} else {
 				MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
 				map.add("username",name);
@@ -376,7 +380,11 @@ public class HomeController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			
+	
 			mav = new ModelAndView("login");
+			mav.addObject("msg","Enter Valid  Login Credentials");
 			MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
 
 			map =new LinkedMultiValueMap<String, Object>(); 

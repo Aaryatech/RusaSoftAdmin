@@ -112,12 +112,12 @@
 					</c:choose>
 
 					<p>
-						<label for="user_login">Username*<br /> <input type="text"
+						<label for="user_login">Username <span class="text-danger">*</span><br /><input type="text"
 							name="username" id="username" class="input" value="" size="20"
 							placeholder="Username" /></label>
 					</p>
 					<p>
-						<label for="user_pass">Password*<br /> <input
+						<label for="user_pass">Password <span class="text-danger">*</span><br /> <input
 							type="password" name="userpassword" id="userpassword"
 							class="input" value="" placeholder="Password" size="20" /></label>
 					</p>
@@ -152,8 +152,8 @@
 						title="Sign Up">Institute Registration</a>
 				</p>
 				<br /> <br /> <label class="pull-left" for="page_name"><b
-					style="color: red; font-family: verdana;">Warning:</b><b
-					style="font-family: verdana;">Unauthorised access of this
+					style="color: red; font-family: verdana; font-size: 14px;">Warning:</b><b
+					style="font-family: verdana;font-size: 12px;">Unauthorised access of this
 						system is an offence</b> </label>
 
 			</div>

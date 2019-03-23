@@ -83,80 +83,48 @@ public class InstituteProfileController {
 	 * }
 	 */
 
-	@RequestMapping(value = "/showInstituteSupport", method = RequestMethod.GET)
-	public ModelAndView showInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
-		try {
-
-			model.addObject("title", "Institute Schemes List");
-			model.addObject("title1",
-					"Institute Support Financially by Awarding Scholarship/Freeships like schemes other than Government Schemes ");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddInstituteSupport", method = RequestMethod.GET)
-	public ModelAndView showAddInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_institute_support");
-		try {
-
-			model.addObject("title", "Add Institute Schemes");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showActivityOrganized", method = RequestMethod.GET)
-	public ModelAndView showActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/activityOrganized");
-		try {
-
-			model.addObject("title", "Activities Organized");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddActivityOrganized", method = RequestMethod.GET)
-	public ModelAndView showAddActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
-		try {
-
-			model.addObject("title", "Add Activities Organized");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
+	
+	/*
+	 * @RequestMapping(value = "/showActivityOrganized", method = RequestMethod.GET)
+	 * public ModelAndView showActivityOrganized(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = new
+	 * ModelAndView("instituteInfo/IQAC/activityOrganized"); try {
+	 * 
+	 * model.addObject("title", "Activities Organized");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 * 
+	 * @RequestMapping(value = "/showAddActivityOrganized", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * showAddActivityOrganized(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = new
+	 * ModelAndView("instituteInfo/IQAC/add_activity_organized"); try {
+	 * 
+	 * model.addObject("title", "Add Activities Organized");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 	@RequestMapping(value = "/showEContentFacilities", method = RequestMethod.GET)
 	public ModelAndView showEContentFacilities(HttpServletRequest request, HttpServletResponse response) {
 
@@ -450,60 +418,7 @@ public class InstituteProfileController {
 	 * }
 	 */
 
-	@RequestMapping(value = "/showMasterCollaborationLinkages", method = RequestMethod.GET)
-	public ModelAndView showMasterCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_linkage_master");
-		try {
-
-			model.addObject("title", "Collaboration And Linkages Master");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showCollaborationLinkages", method = RequestMethod.GET)
-	public ModelAndView showCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/collaborationLinkages");
-		try {
-
-			model.addObject("title", "Collaboration And Linkages List");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddCollaborationLinkages", method = RequestMethod.GET)
-	public ModelAndView showAddCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
-		try {
-
-			model.addObject("title", "Add Collaboration And Linkages");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
+	
 	
 	@RequestMapping(value = "/showIncubationCentreDetail", method = RequestMethod.GET)
 	public ModelAndView showIncubationCentre(HttpServletRequest request, HttpServletResponse response) {
@@ -541,41 +456,7 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showBestPractice", method = RequestMethod.GET)
-	public ModelAndView showBestPractice(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/bestPrac");
-		try {
-
-			model.addObject("title", "Best Practices");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddBestPractice", method = RequestMethod.GET)
-	public ModelAndView showAddBestPractice(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
-		try {
-
-			model.addObject("title", "Add Best Practices");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/showGenderEquity", method = RequestMethod.GET)
 	public ModelAndView showGenderEquity(HttpServletRequest request, HttpServletResponse response) {
@@ -613,77 +494,10 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showProgDistinctive", method = RequestMethod.GET)
-	public ModelAndView showProgDistinctive(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
-		try {
+	
 
-			model.addObject("title", "Institutional Distnctiveness");
 
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddProgDistinctive", method = RequestMethod.GET)
-	public ModelAndView showAddProgDistinctive(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prog_distinctive");
-		try {
-
-			model.addObject("title", " Add Institutional Distnctiveness");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showHumanValues", method = RequestMethod.GET)
-	public ModelAndView showHumanValues(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/humanValues");
-		try {
-
-			model.addObject("title", "Human Values & Professional Ethics");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddHumanValues", method = RequestMethod.GET)
-	public ModelAndView showAddHumanValues(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_human_values");
-		try {
-
-			model.addObject("title", "Human Values & Professional Ethics");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/showInitiativeToEngage", method = RequestMethod.GET)
 	public ModelAndView showInitiativeToEngage(HttpServletRequest request, HttpServletResponse response) {
@@ -884,41 +698,8 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showAMC", method = RequestMethod.GET)
-	public ModelAndView showAMC(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/amc");
-		try {
-
-			model.addObject("title", "Annual Maintenance");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddAMC", method = RequestMethod.GET)
-	public ModelAndView showAddAMC(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_amc");
-		try {
-
-			model.addObject("title", "Annual Maintenance");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
+	
 
 	@RequestMapping(value = "/showCommitteeDetail", method = RequestMethod.GET)
 	public ModelAndView showCommitteeDetail(HttpServletRequest request, HttpServletResponse response) {
@@ -956,43 +737,5 @@ public class InstituteProfileController {
 
 	}
 
-	@RequestMapping(value = "/showResearchCenter", method = RequestMethod.GET)
-	public ModelAndView showResearchCenter(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/list_research_center");
-		try {
-
-			model.addObject("title", "Research Center");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	@RequestMapping(value = "/showAddResearchCenter", method = RequestMethod.GET)
-	public ModelAndView showAddResearchCenter(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_research_center");
-		try {
-
-			model.addObject("title", "Add Research Center");
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	RestTemplate rest = new RestTemplate();
-
-	
 }
+
