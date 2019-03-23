@@ -67,7 +67,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/journalPub");
 
-				model.addObject("title", "Journal Publication");
+				model.addObject("title", "Add Journal Publication Details");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -197,7 +197,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/journalPubList");
 
-				model.addObject("title", "Journal Publication List");
+				model.addObject("title", "Journal Publication Details List");
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -263,7 +263,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/journalPub");
-				model.addObject("title", "Edit Journal Publication");
+				model.addObject("title", "Edit Journal Publication Details");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("journalId", journalId);
 
@@ -318,14 +318,14 @@ public class FacultyController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info add = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "1", "0", "0", "0",
+			Info add = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "1", "0", "0", "0",
 					newModuleList);
 
 			if (add.isError() == false) {
 
 				model = new ModelAndView("FacultyDetails/researchProDetail");
 
-				model.addObject("title", "Research Details Form");
+				model.addObject("title", "Add Research Details Form");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -661,7 +661,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/addSubDetail");
 
-				model.addObject("title", "Subject Details Form");
+				model.addObject("title", "Add Subject Details");
 				model.addObject("proList", proList);
 
 			} else {
@@ -792,7 +792,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/addSubDetail");
 
-				model.addObject("title", "Edit Subject Details Form");
+				model.addObject("title", "Edit Subject Details");
 				model.addObject("proList", proList);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("subId", subId);
@@ -889,15 +889,15 @@ public class FacultyController {
 			String coName = request.getParameter("coName");
 			int coId = Integer.parseInt(request.getParameter("coId"));
 
-			if(coId!=0) { 
-				
+			if (coId != 0) {
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("coName", coName);
 				map.add("coId", coId);
 				Info info = rest.postForObject(Constants.url + "/updateSubjeCoName", map, Info.class);
-				
-			}else {
-				
+
+			} else {
+
 				SubjectCo subjectCo = new SubjectCo();
 				subjectCo.setCoId(coId);
 				subjectCo.setDelStatus(1);
@@ -907,7 +907,7 @@ public class FacultyController {
 				subjectCo.setFacultyId(userObj.getGetData().getUserDetailId());
 				subjectCo.setMakerUserId(userObj.getUserId());
 				subjectCo.setCoName(coName);
-	
+
 				SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
 			}
 
@@ -1042,7 +1042,7 @@ public class FacultyController {
 		try {
 
 			String poIds = new String();
-			
+
 			try {
 				String[] ids = request.getParameterValues("poIds");
 				for (int i = 0; i < ids.length; i++) {
@@ -1050,14 +1050,14 @@ public class FacultyController {
 					poIds = poIds + "," + ids[i];
 				}
 				subjectCo.setCoPoMap(poIds.substring(1, poIds.length()));
-				
-			}catch(Exception e) {
-				
+
+			} catch (Exception e) {
+
 				subjectCo.setCoPoMap("");
 			}
-			
+
 			String satisfyingValue = request.getParameter("satisfyingValue");
- 
+
 			subjectCo.setCoPoSatisfyingValue(satisfyingValue);
 			System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
@@ -1126,25 +1126,24 @@ public class FacultyController {
 		try {
 
 			String poIds = new String();
-			
+
 			try {
 				String[] ids = request.getParameterValues("psoIds");
-				
+
 				for (int i = 0; i < ids.length; i++) {
 					System.out.println(ids[i]);
 					poIds = poIds + "," + ids[i];
 				}
 
 				subjectCo.setCoPsoMap(poIds.substring(1, poIds.length()));
-				
-			}catch(Exception e) {
-				
+
+			} catch (Exception e) {
+
 				subjectCo.setCoPsoMap("");
 			}
-			
+
 			String satisfyingValue = request.getParameter("satisfyingValue");
 
-			 
 			subjectCo.setCoPsoSatisfyingValue(satisfyingValue);
 			System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);

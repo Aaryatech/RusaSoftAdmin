@@ -62,7 +62,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
 
-				model.addObject("title", "Institutional Distnctiveness");
+				model.addObject("title", "Institutional Distnctiveness List");
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
 
@@ -245,7 +245,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_prog_distinctive");
 
-				model.addObject("title", " Add Institutional Distnctiveness");
+				model.addObject("title", " Edit Institutional Distnctiveness");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("distId", distId);
 
@@ -303,7 +303,7 @@ public class InstituteDistController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/humanValues");
-				model.addObject("title", "Human Values & Professional Ethics");
+				model.addObject("title", "Human Values-Professional Ethics Initiatives List");
 
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
@@ -373,7 +373,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_human_values");
 
-				model.addObject("title", "Human Values & Professional Ethics");
+				model.addObject("title", "Add Human Values-Professional Ethics Initiatives");
 
 				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
 				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
@@ -492,7 +492,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_human_values");
 
-				model.addObject("title", "Edit Human Values & Professional Ethics");
+				model.addObject("title", "Edit Human Values-Professional Ethics Initiatives");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("valueId", valueId);
@@ -556,7 +556,7 @@ public class InstituteDistController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/list_research_center");
-				model.addObject("title", "Research Center");
+				model.addObject("title", "Research Center Details");
 
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
@@ -624,7 +624,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_research_center");
 
-				model.addObject("title", "Add Research Center");
+				model.addObject("title", "Add Research Center Details");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -742,7 +742,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_research_center");
 
-				model.addObject("title", "Add Research Center");
+				model.addObject("title", "Edit Research Center Details");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("rcId", rcId);

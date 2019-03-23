@@ -444,23 +444,22 @@
 			
 			if(swocType==1)
 				{
-				$('#table1 td').remove();
+			 
 				var swocText = document.getElementById("swocText").value;
 				}
 			else if(swocType==2)
 				{
-				$('#table2 td').remove();
+			 
 				var swocText = document.getElementById("swocTextWeak").value;
 				}
 			
 			else if(swocType==3)
 			{
-				$('#table3 td').remove();
+				 
 			var swocText = document.getElementById("swocTextOpp").value;
 			}
 			else if(swocType==4)
-			{
-				$('#table4 td').remove();
+			{ 
 			var swocText = document.getElementById("swocTextCha").value;
 			}
 
@@ -489,6 +488,28 @@
 
 								},
 								function(data) {
+									
+									if(swocType==1)
+									{
+									$('#table1 td').remove();
+									 
+									}
+								else if(swocType==2)
+									{
+									$('#table2 td').remove();
+									 
+									}
+								
+								else if(swocType==3)
+								{
+									$('#table3 td').remove();
+								 
+								}
+								else if(swocType==4)
+								{
+									$('#table4 td').remove();
+								 
+								}
 
 									$("#loader1").hide();
 
