@@ -56,7 +56,7 @@
 								<!-- <a href="#myModal2"	data-toggle="modal"><button type="submit"
 																class="btn btn-info">Add</button></a> -->
 								  <a href="${pageContext.request.contextPath}/showAddCo/${subId}"><button
-										type="button" class="btn btn-success">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a> 
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -113,8 +113,8 @@
 												<thead>
 
 													<tr>
-														<th>Sr No <input type="checkbox" id="checkAll"
-															onClick="toggle(this)" /></th>
+														<th>Sr No <!-- <input type="checkbox" id="checkAll"
+															onClick="toggle(this)" /> --><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /></th>
 														<th>Program Outcomes (PO as per Accreditation Manual)</th>
 													</tr>
 
@@ -354,10 +354,23 @@
 
 
 	<script>
-		$("#checkAll").click(function() {
-			alert("sdf")
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
+	function checkAll(ele) {
+	     var checkboxes = document.getElementsByTagName('input');
+	     if (ele.checked) {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = true;
+	             }
+	         }
+	     } else {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             console.log(i)
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = false;
+	             }
+	         }
+	     }
+	 }
 	</script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

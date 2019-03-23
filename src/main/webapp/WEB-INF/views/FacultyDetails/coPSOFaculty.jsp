@@ -53,14 +53,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<!-- 	<a href="#myModal2"	data-toggle="modal"><button type="submit"
-																class="btn btn-info">Add</button></a> -->
+								 
 								 <a href="${pageContext.request.contextPath}/showSubDetailsList"><button
-										type="button" class="btn btn-success">Back</button></a>  
-								<a class="box_toggle fa fa-chevron-down"></a>
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
-
+										type="button" class="btn btn-info">Back</button></a>  
+								<a class="box_toggle fa fa-chevron-down"></a> 
 							</div>
 
 						</header>
@@ -145,16 +141,16 @@
 
 													<!-- <th>Is Mapped(Yes/No)</th> -->
 													<!-- <th>Satisfying Value</th> -->
-													<th width="10%">PO Mapping</th>
-													<th width="10%">PSO Mapping</th>
-													<th width="10%">Action</th>
+													<th width="10%" style="text-align: center;">PO Mapping</th>
+													<th width="10%" style="text-align: center;">PSO Mapping</th>
+													<th width="10%" style="text-align: center;">Action</th>
 												</tr>
 
 											</thead>
 
 											<tbody>
 
-												<c:forEach items="${subjectCoList}" var="subjectCoList">
+												<c:forEach items="${subjectCoList}" var="subjectCoList" varStatus="count">
 													<tr>
 
 														<td>${count.index+1}</td>
@@ -170,20 +166,20 @@
 														<td ><c:out
 																value="${subjectCoList.coPsoMap}" /></td>
   --%>
-														<td><a
+														<td style="text-align: center;"><a
 															href="${pageContext.request.contextPath}/mapPoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
 															title="Map PO" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a></td>
 
-														<td><a
+														<td style="text-align: center;"><a
 															href="${pageContext.request.contextPath}/mapPsoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
 															title="Map PSO" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a></td>
-														<td><a
+														<td style="text-align: center;"><a
 															href="${pageContext.request.contextPath}/editSubjectCo/${subjectCoList.coId}/${subId}"><span
 																class="glyphicon glyphicon-edit" title="Edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;
