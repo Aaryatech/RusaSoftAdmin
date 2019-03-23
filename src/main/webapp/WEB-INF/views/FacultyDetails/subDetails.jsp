@@ -101,104 +101,88 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-												<div>
 
 
 
-													<table id="example-1"
-														class="table table-striped dt-responsive display">
-														<thead>
-															<tr>
-																<th>Sr No</th>
-																<th>Subject Code</th>
-																<th>Subject Name</th>
-																<th>Program</th>
-																<th>Semester</th>
-																<th>% of Result</th>
-																<th>Add CO</th>
-																<th>Action</th>
-															</tr>
-														</thead>
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th>Sr No</th>
+													<th>Subject Code</th>
+													<th>Subject Name</th>
+													<th>Program</th>
+													<th>Semester</th>
+													<th>% of Result</th>
+													<th>Add CO</th>
+													<th>Action</th>
+												</tr>
+											</thead>
 
-														<tbody>
-															<c:forEach items="${subList}" var="subject"
-																varStatus="count">
-																<tr>
+											<tbody>
+												<c:forEach items="${subList}" var="subject"
+													varStatus="count">
+													<tr>
 
-																	<td style="text-align: center">${count.index+1}</td>
+														<td style="text-align: center">${count.index+1}</td>
 
-																	<td style="text-align: left"><c:out
-																			value="${subject.subCode}" /></td>
+														<td style="text-align: left"><c:out
+																value="${subject.subCode}" /></td>
 
 
 
 
 
-																	<td style="text-align: left"><c:out
-																			value="${subject.subName}" /></td>
+														<td style="text-align: left"><c:out
+																value="${subject.subName}" /></td>
 
-																	<td style="text-align: left"><c:out
-																			value="${subject.nameOfProgram}" /></td>
+														<td style="text-align: left"><c:out
+																value="${subject.nameOfProgram}" /></td>
 
-																	<td style="text-align: left"><c:out
-																			value="${subject.subSem}" /></td>
+														<td style="text-align: center"><c:out
+																value="${subject.subSem}" /></td>
 
-																	<td style="text-align: left"><c:out
-																			value="${subject.subPassPer}" /></td>
+														<td style="text-align: right"><c:out
+																value="${subject.subPassPer}" /></td>
 
 
 
-																	<td><a
-																		href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
-																		title="Add CO" rel="tooltip" data-color-class="detail"
-																		data-animate=" animated fadeIn " data-toggle="tooltip"
-																		data-original-title="Block"><span
-																			class="glyphicon glyphicon-list"></span></a></td>
-																	<td align="center"><c:if test="${editAccess == 0}">
-																			<a
-																				href="${pageContext.request.contextPath}/editSubject/${subject.subId}"
-																				title="Edit Subject" rel="tooltip"
-																				data-color-class="detail"
-																				data-animate=" animated fadeIn "
-																				data-toggle="tooltip"
-																				data-original-title="Edit Subject"><span
-																				class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
-																			test="${deleteAccess == 0}">
-																			<a
-																				href="${pageContext.request.contextPath}/deleteSubject/${subject.subId}"
-																				onClick="return confirm('Are you sure want to delete this record');"
-																				rel="tooltip" data-color-class="danger"
-																				title="Delete" data-animate=" animated fadeIn "
-																				data-toggle="tooltip"
-																				data-original-title="Delete  record"><span
-																				class="glyphicon glyphicon-remove"></span></a>
+														<td align="center"><a
+															href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
+															title="Add CO" rel="tooltip" data-color-class="detail"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Block"><span
+																class="glyphicon glyphicon-list"></span></a></td>
+														<td align="center"><c:if test="${editAccess == 0}">
+																<a
+																	href="${pageContext.request.contextPath}/editSubject/${subject.subId}"
+																	title="Edit" rel="tooltip" data-color-class="detail"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Edit  "><span
+																	class="glyphicon glyphicon-edit"></span></a>
+															</c:if> <c:if test="${deleteAccess == 0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteSubject/${subject.subId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
 
-																		</c:if></td>
+															</c:if></td>
 
 
 
 
 
-																</tr>
-															</c:forEach>
-														</tbody>
+													</tr>
+												</c:forEach>
+											</tbody>
 
 
-													</table>
+										</table>
 
-												</div>
 
-											</div>
-										</div>
 									</form>
 								</div>
 

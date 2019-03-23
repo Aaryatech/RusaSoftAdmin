@@ -164,10 +164,10 @@
 																<thead>
 
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Stength</th>
+																		<th style="text-align: center" width="10%">Sr No</th>
+																		<th style="text-align: center">Strength</th>
 
-																		<th width="10%">Action</th>
+																		<th style="text-align: center" width="10%">Action</th>
 
 																	</tr>
 
@@ -180,7 +180,9 @@
 																			<td>${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
-																			<td><a href="#"
+
+
+																			<td align="center"><a href="#"
 																				onclick="editSwoc(${list.swocId})"><span
 																					class="glyphicon glyphicon-edit" title="Edit"
 																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -208,7 +210,7 @@
 
 												<div class="row">
 													<label class="col-sm-2 text-left" for="weak">
-														Weakness<span class="text-danger">*</span>
+														Weakness <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" maxlength="10" class="form-control"
@@ -236,9 +238,9 @@
 																<thead>
 
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Weakness</th>
-																		<th width="10%">Action</th>
+																		<th style="text-align: center" width="10%">Sr No</th>
+																		<th style="text-align: center">Weakness</th>
+																		<th style="text-align: center" width="10%">Action</th>
 
 																	</tr>
 
@@ -251,7 +253,7 @@
 																			<td>${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
-																			<td><a href="#"
+																			<td align="center"><a href="#"
 																				onclick="editSwoc(${list.swocId})"><span
 																					class="glyphicon glyphicon-edit" title="Edit"
 																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -305,9 +307,9 @@
 																<thead>
 
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Opportunity</th>
-																		<th width="10%">Action</th>
+																		<th style="text-align: center" width="10%">Sr No</th>
+																		<th style="text-align: center">Opportunity</th>
+																		<th style="text-align: center" width="10%">Action</th>
 
 																	</tr>
 
@@ -320,7 +322,7 @@
 																			<td>${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
-																			<td><a href="#"
+																			<td align="center"><a href="#"
 																				onclick="editSwoc(${list.swocId})"><span
 																					class="glyphicon glyphicon-edit" title="Edit"
 																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -371,10 +373,9 @@
 																<thead>
 
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Challenges</th>
-
-																		<th width="10%">Action</th>
+																		<th style="text-align: center" width="10%">Sr No</th>
+																		<th style="text-align: center">Challenges</th>
+																		<th style="text-align: center" width="10%">Action</th>
 
 																	</tr>
 
@@ -387,7 +388,7 @@
 																			<td>${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
-																			<td><a href="#"
+																			<td align="center"><a href="#"
 																				onclick="editSwoc(${list.swocId})"><span
 																					class="glyphicon glyphicon-edit" title="Edit"
 																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -572,8 +573,26 @@
 
 		function deleteSwoc(swocId,swocType) {
 		//	alert("hii");
+		if(swocType==1)
+			{
 			$('#table1 td').remove();
 			$("#loader1").show();
+			}
+		else if(swocType==2)
+			{
+			$('#table2 td').remove();
+			$("#loader1").show();
+			}
+		else if(swocType==3)
+		{
+		$('#table3 td').remove();
+		$("#loader1").show();
+		}
+		else if(swocType==4)
+		{
+		$('#table4 td').remove();
+		$("#loader1").show();
+		}
 
 			$
 					.getJSON(
@@ -598,15 +617,49 @@
 											+ data[i].swocId
 											+ ')" class="glyphicon glyphicon-edit" title="Edit" '
 											+ 'data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;'
-											+ ' <a href="#" onclick="deleteProgramVission('
-											+ data[i].swocId
-											+ ')"'
+											+ ' <a href="#" onclick="deleteSwoc('+ data[i].swocId+ ' ,'+ data[i].swocType+')"'
 											+ ' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 											+ 'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 
-									/*  dataTable.row.add(
-											[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
-											.draw(); */
+									 
+
+											if(data[i].swocType==1)
+											{
+
+								var tr = $('<tr></tr>');
+								tr.append($('<td ></td>').html(i + 1));
+
+								tr.append($('<td ></td>').html(
+										data[i].swocText));
+
+								tr.append($('<td  ></td>').html(
+										acButton));
+								$('#table1 tbody').append(tr);
+											}else if(data[i].swocType==2){
+
+												var tr = $('<tr></tr>');
+												tr.append($('<td ></td>').html(i + 1));
+
+												tr.append($('<td ></td>').html(
+														data[i].swocText));
+
+												tr.append($('<td  ></td>').html(
+														acButton));
+												$('#table2 tbody').append(tr);
+															}
+											else if(data[i].swocType==3){
+
+												var tr = $('<tr></tr>');
+												tr.append($('<td ></td>').html(i + 1));
+
+												tr.append($('<td ></td>').html(
+														data[i].swocText));
+
+												tr.append($('<td  ></td>').html(
+														acButton));
+												$('#table3 tbody').append(tr);
+															}
+											else if(data[i].swocType==4){
 
 									var tr = $('<tr></tr>');
 									tr.append($('<td ></td>').html(i + 1));
@@ -614,8 +667,10 @@
 									tr.append($('<td ></td>').html(
 											data[i].swocText));
 
-									tr.append($('<td  ></td>').html(acButton));
-									$('#table1 tbody').append(tr);
+									tr.append($('<td  ></td>').html(
+											acButton));
+									$('#table4 tbody').append(tr);
+												}
 								}
 								document.getElementById("swocId").value = 0;
 								document.getElementById("swocText").value = "";
@@ -626,8 +681,8 @@
 
 		function editSwoc(swocId) {
 			$("#loader1").show();
-			alert("hii");
-			alert(swocId);
+			//alert("hii");
+			//alert(swocId);
 			$.getJSON('${editSwoc}',
 
 			{
@@ -635,35 +690,37 @@
 				ajax : 'true'
 
 			}, function(data) {
-				alert(data);
+				//alert(data);
 				$("#loader1").hide();
 				
-				if(data.swocType=1)
+				
+				if(data.swocType==1)
 				{
-					document.getElementById("swocId").value = data.swocId;
+				 
 				document.getElementById("swocText").value = data.swocText;
 				}
-				else if(data.swocType=2)
-				{document.getElementById("swocId").value = data.swocId;
+				else if(data.swocType==2)
+				{ 
+				 
 					document.getElementById("swocTextWeak").value = data.swocText;
 					}
-				else if(data.swocType=3)
-				{document.getElementById("swocId").value = data.swocId;
+				else if(data.swocType==3)
+				{ 
+					 
 					document.getElementById("swocTextOpp").value = data.swocText;
 					}
-				else if(data.swocType=4)
-				{document.getElementById("swocId").value = data.swocId;
+				else if(data.swocType==4)
+				{ 
+				 
 					document.getElementById("swocTextCha").value = data.swocText;
 					}
+				
+				document.getElementById("swocId").value = data.swocId;
 
 			});
 
 		}
 	</script>
-
-
-
-
 
 
 
