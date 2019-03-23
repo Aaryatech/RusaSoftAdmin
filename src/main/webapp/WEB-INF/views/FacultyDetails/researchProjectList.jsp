@@ -86,8 +86,7 @@
 							<div class="actions panel_actions pull-right">
 
 								<a href="${pageContext.request.contextPath}/showResearchDetails"><button
-										type="button" class="btn btn-success">Add Research
-										Project Details</button></a>
+										type="button" class="btn btn-success">Add</button></a>
 
 							</div>
 
@@ -103,121 +102,89 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
 
 
 
-														<div class="col-xs-12"></div>
-														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
+
+
+										<!-- <label class="control-label col-sm-3" for="smallheading">Educational
 															Qualifications : <span class="text-danger">*</span>
 														</label> -->
-														<div class="col-xs-12">
+										<div class="col-xs-12">
 
 
 
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th>Sr No</th>
-																		<th>Name of Project</th>
-																		<th>Year of Project Sanction</th>
-																		<th>Sponsoring Authority</th>
-																		<th>Total Amount</th>
-																		<th>Amount Received</th>
-																		<th>Action</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<c:forEach items="${jouList}" var="journal"
-																		varStatus="count">
-																		<tr>
+											<table id="example-1"
+												class="table table-striped dt-responsive display">
+												<thead>
+													<tr>
+														<th>Sr No</th>
+														<th>Name of Project</th>
+														<th>Year of Project Sanction</th>
+														<th>Sponsoring Authority</th>
+														<th>Total Amount</th>
+														<th>Amount Received</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${jouList}" var="journal"
+														varStatus="count">
+														<tr>
 
-																			<td style="text-align: center">${count.index+1}</td>
+															<td style="text-align: center">${count.index+1}</td>
 
-																			<td style="text-align: left"><c:out
-																					value="${journal.projName}" /></td>
-
-
-
-																			<td style="text-align: left"><c:out
-																					value="${journal.projYear}" /></td>
-
-																			<td style="text-align: left"><c:out
-																					value="${journal.projSponsor}" /></td>
-
-																			<td style="text-align: left"><c:out
-																					value="${journal.projTotalAmt}" /></td>
-
-																			<td style="text-align: left"><c:out
-																					value="${journal.projAmtRec}" /></td>
+															<td style="text-align: left"><c:out
+																	value="${journal.projName}" /></td>
 
 
 
-																			<td align="center"><c:if
-																					test="${editAccess == 0}">
-																					<a
-																						href="${pageContext.request.contextPath}/editProject/${journal.projId}"
-																						title="Edit Project" rel="tooltip"
-																						data-color-class="detail"
-																						data-animate=" animated fadeIn "
-																						data-toggle="tooltip"
-																						data-original-title="Edit Journal"><span
-																						class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
-																					test="${deleteAccess == 0}">
-																					<a
-																						href="${pageContext.request.contextPath}/deleteProject/${journal.projId}"
-																						onClick="return confirm('Are you sure want to delete this record');"
-																						rel="tooltip" data-color-class="danger"
-																						title="Delete" data-animate=" animated fadeIn "
-																						data-toggle="tooltip"
-																						data-original-title="Delete  record"><span
-																						class="glyphicon glyphicon-remove"></span></a>
+															<td style="text-align: left"><c:out
+																	value="${journal.projYear}" /></td>
 
-																				</c:if></td>
+															<td style="text-align: left"><c:out
+																	value="${journal.projSponsor}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${journal.projTotalAmt}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${journal.projAmtRec}" /></td>
+
+
+
+															<td align="center"><c:if test="${editAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/editProject/${journal.projId}"
+																		title="Edit Project" rel="tooltip"
+																		data-color-class="detail"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Edit Journal"><span
+																		class="glyphicon glyphicon-edit"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+																<c:if test="${deleteAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteProject/${journal.projId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+
+																</c:if></td>
 
 
 
 
-																		</tr>
-																	</c:forEach>
-																</tbody>
+														</tr>
+													</c:forEach>
+												</tbody>
 
+											</table>
 
-
-															</table>
-
-
-
-
-														</div>
-
-
-
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
 										</div>
+
+
 									</form>
 								</div>
 

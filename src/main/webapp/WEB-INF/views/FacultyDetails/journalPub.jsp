@@ -99,241 +99,224 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-													<div class="col-xs-12">
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="jouStd">Journal
-																Publication <span class="text-danger">*</span>
-															</label>
-
-															<c:choose>
-																<c:when test="${editJournal.journalStandard==0}">
-																	<div class="col-md-2">
-
-																		<input type="radio" name="jouStd" id="jouStd"
-																			value="0" checked>National
-
-																	</div>
-
-																	<div class="col-md-2">
-																		<input type="radio" name="jouStd" value="1">
-																		International
-																	</div>
-																</c:when>
-																<c:when test="${editJournal.journalStandard==1}">
-																	<div class="col-md-2">
-
-																		<input type="radio" name="jouStd" id="jouStd"
-																			value="0">National
-
-																	</div>
-
-																	<div class="col-md-2">
-																		<input type="radio" name="jouStd" value="1" checked>
-																		International
-																	</div>
-																</c:when>
-																<c:otherwise>
-
-																	<div class="col-md-2">
-
-																		<input type="radio" name="jouStd" id="jouStd" checked
-																			value="0">National
-
-																	</div>
-
-																	<div class="col-md-2">
-																		<input type="radio" name="jouStd" value="1">
-																		International
-																	</div>
 
 
-																</c:otherwise>
-															</c:choose>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="jouStd">Journal
+												Publication <span class="text-danger">*</span>
+											</label>
 
-															<!-- <div class="col-sm-6">
+											<c:choose>
+												<c:when test="${editJournal.journalStandard==0}">
+													<div class="col-md-2">
+
+														<input type="radio" name="jouStd" id="jouStd" value="0"
+															checked>National
+
+													</div>
+
+													<div class="col-md-2">
+														<input type="radio" name="jouStd" value="1">
+														International
+													</div>
+												</c:when>
+												<c:when test="${editJournal.journalStandard==1}">
+													<div class="col-md-2">
+
+														<input type="radio" name="jouStd" id="jouStd" value="0">National
+
+													</div>
+
+													<div class="col-md-2">
+														<input type="radio" name="jouStd" value="1" checked>
+														International
+													</div>
+												</c:when>
+												<c:otherwise>
+
+													<div class="col-md-2">
+
+														<input type="radio" name="jouStd" id="jouStd" checked
+															value="0">National
+
+													</div>
+
+													<div class="col-md-2">
+														<input type="radio" name="jouStd" value="1">
+														International
+													</div>
+
+
+												</c:otherwise>
+											</c:choose>
+
+											<!-- <div class="col-sm-6">
 																National <input type="radio" name="jouStd" id="jouStd"
 																	checked value="0"> International<input
 																	type="radio" name="jouStd" id="jouStd" value="1">
 															</div> -->
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="journalName">Name
-																of Journal <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="journalName"
-																	name="journalName" placeholder="Name of journal"
-																	value="${editJournal.journalName}" autocomplete="off"
-																	value="" required>
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="journalType">Scopus/DIO/UGC
-																Recognized <span class="text-danger">*</span>
-															</label>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="journalName">Name
+												of Journal <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="journalName"
+													name="journalName" placeholder="Name of journal"
+													value="${editJournal.journalName}" autocomplete="off"
+													value="" required>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="journalType">Scopus/DIO/UGC
+												Recognized <span class="text-danger">*</span>
+											</label>
 
 
 
 
-															<c:choose>
-																<c:when test="${editJournal.journalType==0}">
-																	<div class="col-md-2">
+											<c:choose>
+												<c:when test="${editJournal.journalType==0}">
+													<div class="col-md-2">
 
-																		<input type="radio" name="journalType"
-																			id="journalType" value="0" checked>Yes
+														<input type="radio" name="journalType" id="journalType"
+															value="0" checked>Yes
 
-																	</div>
+													</div>
 
-																	<div class="col-md-2">
-																		<input type="radio" name="journalType" value="1">
-																		No
-																	</div>
-																</c:when>
-																<c:when test="${editJournal.journalStandard==1}">
-																	<div class="col-md-2">
+													<div class="col-md-2">
+														<input type="radio" name="journalType" value="1">
+														No
+													</div>
+												</c:when>
+												<c:when test="${editJournal.journalStandard==1}">
+													<div class="col-md-2">
 
-																		<input type="radio" name="journalType"
-																			id="journalType" value="0">Yes
-																	</div>
-																	<div class="col-md-2">
-																		<input type="radio" name="journalType" value="1"
-																			checked> No
-																	</div>
-																</c:when>
-																<c:otherwise>
-																	<div class="col-md-2">
-																		<input type="radio" name="journalType" checked
-																			id="journalType" value="0">Yes
-																	</div>
+														<input type="radio" name="journalType" id="journalType"
+															value="0">Yes
+													</div>
+													<div class="col-md-2">
+														<input type="radio" name="journalType" value="1" checked>
+														No
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="col-md-2">
+														<input type="radio" name="journalType" checked
+															id="journalType" value="0">Yes
+													</div>
 
-																	<div class="col-md-2">
-																		<input type="radio" name="journalType" value="1">
-																		No
-																	</div>
+													<div class="col-md-2">
+														<input type="radio" name="journalType" value="1">
+														No
+													</div>
 
-																</c:otherwise>
-															</c:choose>
+												</c:otherwise>
+											</c:choose>
 
 
 
-															<!-- 	<div class="col-sm-2">
+											<!-- 	<div class="col-sm-2">
 																Yes <input type="radio" name="journalType"
 																	id="journalType" checked value="0"> No<input
 																	type="radio" name="journalType" id="journalType"
 																	value="1">
 															</div> -->
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="journalYear">Year
-																of Publication <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control datepickeryear"
-																	required data-min-view-mode="years" data-start-view="2"
-																	value="${editJournal.journalYear}" autocomplete="off"
-																	placeholder="Year of Publication" name="journalYear"
-																	id="journalYear" data-format="yyyy">
-																<%-- <input
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="journalYear">Year
+												of Publication <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepickeryear"
+													required data-min-view-mode="years" data-start-view="2"
+													value="${editJournal.journalYear}" autocomplete="off"
+													placeholder="Year of Publication" name="journalYear"
+													id="journalYear" data-format="yyyy">
+												<%-- <input
 																	type="text" class="form-control datepicker"
 																	id="journalYear" name="journalYear"
 																	value="${editJournal.journalYear}" autocomplete="off"
 																	placeholder="Year of Publication" value="" required> --%>
-															</div>
+											</div>
 
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="issue">Issue
-																<span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="issue"
-																	value="${editJournal.journalIssue}" autocomplete="off"
-																	name="issue" placeholder="Issue" value="" required>
-															</div>
-
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="volume">Volume
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="number" class="form-control" id="volume"
-																	min="0" value="${editJournal.journalVolume}"
-																	autocomplete="off"
-																	onkeypress="return allowOnlyNumber(event)"
-																	name="volume" placeholder="Volume" value="" required>
-															</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="issue">Issue
+												<span class="text-danger">*</span>
+											</label>
 
 
-														</div>
-														<input type="hidden" id="is_view" name="is_view" value="0">
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="issue"
+													value="${editJournal.journalIssue}" autocomplete="off"
+													name="issue" placeholder="Issue" value="" required>
+											</div>
+
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="volume">Volume
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control" id="volume"
+													min="0" value="${editJournal.journalVolume}"
+													autocomplete="off"
+													onkeypress="return allowOnlyNumber(event)" name="volume"
+													placeholder="Volume" value="" required>
+											</div>
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="journalPgFrom">Page
-																No <span class="text-danger">*</span>
-															</label> <label class="control-label col-sm-1"
-																for="journalPgFrom">From <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="number" class="form-control"
-																	id="journalPgFrom" name="journalPgFrom"
-																	onchange="checkJournalForm()" min="0"
-																	onkeypress="return allowOnlyNumber(event)"
-																	value="${editJournal.journalPgFrom}" autocomplete="off"
-																	placeholder="Page No From" required>
-															</div>
-															<input type="hidden" value="${editJournal.journalId}"
-																name="journalId" id="journalId"> <label
-																class="control-label col-sm-1" for="page_order">To
-																<span class="text-danger">*</span>
-															</label>
+										</div>
+										<input type="hidden" id="is_view" name="is_view" value="0">
 
 
-															<div class="col-sm-2">
-																<input type="number" class="form-control"
-																	id="journalPgTo" autocomplete="off" name="journalPgTo"
-																	min="0" onchange="checkJournalForm()"
-																	placeholder="Page No To"
-																	onkeypress="return allowOnlyNumber(event)"
-																	value="${editJournal.journalPgTo}" required>
-															</div>
-														</div>
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Save"> <input
-																	type="submit" class="btn btn-primary"
-																	onclick="submit_f(0)"
-																	value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-													</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="journalPgFrom">Page
+												No <span class="text-danger">*</span>
+											</label> <label class="control-label col-sm-1" for="journalPgFrom">From
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-2">
+												<input type="number" class="form-control" id="journalPgFrom"
+													name="journalPgFrom" onchange="checkJournalForm()" min="0"
+													onkeypress="return allowOnlyNumber(event)"
+													value="${editJournal.journalPgFrom}" autocomplete="off"
+													placeholder="Page No From" required>
+											</div>
+											<input type="hidden" value="${editJournal.journalId}"
+												name="journalId" id="journalId"> <label
+												class="control-label col-sm-1" for="page_order">To <span
+												class="text-danger">*</span>
+											</label>
 
 
-													<div class="clearfix"></div>
-
-												</div>
-
+											<div class="col-sm-2">
+												<input type="number" class="form-control" id="journalPgTo"
+													autocomplete="off" name="journalPgTo" min="0"
+													onchange="checkJournalForm()" placeholder="Page No To"
+													onkeypress="return allowOnlyNumber(event)"
+													value="${editJournal.journalPgTo}" required>
 											</div>
 										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save &
+																		Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+										</div>
+
+
+
+										<div class="clearfix"></div>
+
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

@@ -100,241 +100,215 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
 
 
-													<div class="col-xs-12">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Name
+												of Project <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="projName"
+													name="projName" autocomplete="off"
+													value="${editProject.projName}"
+													placeholder="Name of Project" required>
+											</div>
+										</div>
 
 
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Year
+												of Project Sanction <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
 
-														<div class="col-sm-12"></div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Name
-																of Project <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="projName"
-																	name="projName" autocomplete="off"
-																	value="${editProject.projName}"
-																	placeholder="Name of Project" required>
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Year
-																of Project Sanction <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-
-																<input type="text" class="form-control datepickeryear"
-																	required data-min-view-mode="years" data-start-view="2"
-																	value="${editProject.projYear}" autocomplete="off"
-																	placeholder="Year of Project Sanction" name="yearOfPS"
-																	id="journalYear" data-format="yyyy">
-																<%-- <input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepickeryear"
+													required data-min-view-mode="years" data-start-view="2"
+													value="${editProject.projYear}" autocomplete="off"
+													placeholder="Year of Project Sanction" name="yearOfPS"
+													id="journalYear" data-format="yyyy">
+												<%-- <input type="text" class="form-control datepicker"
 																	id="yearOfPS" autocomplete="off"
 																	value="${editProject.projYear}" name="yearOfPS"
 																 value=""
 																	required> --%>
-															</div>
+											</div>
 
-														</div>
-														<input type="hidden" id="is_view" name="is_view" value="0">
-														<div class="form-group">
-
-
-															<label class="control-label col-sm-2" for="page_order">Sponsoring
-																Authority <span class="text-danger">*</span>
-															</label>
+										</div>
+										<input type="hidden" id="is_view" name="is_view" value="0">
+										<div class="form-group">
 
 
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="spoAuth"
-																	name="spoAuth" placeholder="Sponsoring Authority"
-																	autocomplete="off" value="${editProject.projSponsor}"
-																	value="" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Name
-																of Principal Investigator <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="PIName"
-																	name="PIName"
-																	placeholder="Name of Principal Investigator"
-																	autocomplete="off" value="${editProject.projInvName}"
-																	required>
-															</div>
-
-														</div>
+											<label class="control-label col-sm-2" for="page_order">Sponsoring
+												Authority <span class="text-danger">*</span>
+											</label>
 
 
-														<div class="form-group">
-
-															<label class="control-label col-sm-2" for="page_order">Department
-																Name <span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="deptName"
-																	name="deptName" placeholder="Department Name"
-																	autocomplete="off" value="${editProject.projInvDept}"
-																	required>
-															</div>
-
-
-
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Name
-																of Co-Principal Investigator <span class="text-danger"></span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="coPrincipal"
-																	name="coPrincipal"
-																	placeholder="Name of Co-Principal Investigator"
-																	autocomplete="off" value="${editProject.projInvName2}">
-															</div>
-
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Department
-																Name <span class="text-danger"></span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="deptCoName"
-																	name="deptCoName" placeholder="Department Name"
-																	autocomplete="off" value="${editProject.projInvDept2}">
-															</div>
-
-
-
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Grant
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="grant"
-																	name="grant" placeholder="Grant" autocomplete="off"
-																	value="${editProject.projGrant}" required>
-															</div>
-														</div>
-														<div class="form-group">
-
-															<label class="control-label col-sm-2" for="page_order">Total
-																Amount <span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="number" class="form-control" id="totalAmt"
-																	name="totalAmt" placeholder="Total Amount" min="0"
-																	onkeypress="return allowOnlyNumber(event)"
-																	autocomplete="off" value="${editProject.projTotalAmt}"
-																	required>
-															</div>
-														</div>
-
-
-														<div class="form-group">
-
-															<label class="control-label col-sm-2" for="page_order">
-																Amount Received <span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="number" class="form-control" id="amtRec"
-																	min="0" onkeypress="return allowOnlyNumber(event)"
-																	name="amtRec" placeholder="Amount Received"
-																	autocomplete="off" value="${editProject.projAmtRec}"
-																	required>
-															</div>
-
-
-
-														</div>
-
-														<input type="hidden" value="${editProject.projId}"
-															name="projId" id="projId">
-
-
-														<div class="form-group">
-
-
-															<label class="control-label col-sm-2" for="page_order">From
-																Date <span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker"
-																	id="fromDate" name="fromDate" placeholder="From Date"
-																	autocomplete="off" value="${editProject.projFrdt}"
-																	required>
-															</div>
-														</div>
-														<div class="form-group">
-
-															<label class="control-label col-sm-2" for="page_order">
-																To Date <span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker"
-																	onchange="checkDate()" id="toDate" name="toDate"
-																	placeholder="To Date" autocomplete="off"
-																	value="${editProject.projTodt}" required>
-															</div>
-
-
-
-														</div>
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Save"> <input
-																	type="submit" class="btn btn-primary"
-																	onclick="submit_f(0)"
-																	value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="spoAuth"
+													name="spoAuth" placeholder="Sponsoring Authority"
+													autocomplete="off" value="${editProject.projSponsor}"
+													value="" required>
 											</div>
 										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Name
+												of Principal Investigator <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="PIName"
+													name="PIName" placeholder="Name of Principal Investigator"
+													autocomplete="off" value="${editProject.projInvName}"
+													required>
+											</div>
+
+										</div>
+
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="page_order">Department
+												Name <span class="text-danger">*</span>
+											</label>
+
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="deptName"
+													name="deptName" placeholder="Department Name"
+													autocomplete="off" value="${editProject.projInvDept}"
+													required>
+											</div>
+
+
+
+										</div>
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Name
+												of Co-Principal Investigator <span class="text-danger"></span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="coPrincipal"
+													name="coPrincipal"
+													placeholder="Name of Co-Principal Investigator"
+													autocomplete="off" value="${editProject.projInvName2}">
+											</div>
+
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">Department
+												Name <span class="text-danger"></span>
+											</label>
+
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="deptCoName"
+													name="deptCoName" placeholder="Department Name"
+													autocomplete="off" value="${editProject.projInvDept2}">
+											</div>
+
+
+
+										</div>
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Grant
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="grant"
+													name="grant" placeholder="Grant" autocomplete="off"
+													value="${editProject.projGrant}" required>
+											</div>
+										</div>
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="page_order">Total
+												Amount <span class="text-danger">*</span>
+											</label>
+
+
+											<div class="col-sm-6">
+												<input type="number" class="form-control" id="totalAmt"
+													name="totalAmt" placeholder="Total Amount" min="0"
+													onkeypress="return allowOnlyNumber(event)"
+													autocomplete="off" value="${editProject.projTotalAmt}"
+													required>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="page_order">
+												Amount Received <span class="text-danger">*</span>
+											</label>
+
+
+											<div class="col-sm-6">
+												<input type="number" class="form-control" id="amtRec"
+													min="0" onkeypress="return allowOnlyNumber(event)"
+													name="amtRec" placeholder="Amount Received"
+													autocomplete="off" value="${editProject.projAmtRec}"
+													required>
+											</div>
+
+
+
+										</div>
+
+										<input type="hidden" value="${editProject.projId}"
+											name="projId" id="projId">
+
+
+										<div class="form-group">
+
+
+											<label class="control-label col-sm-2" for="page_order">From
+												Date <span class="text-danger">*</span>
+											</label>
+
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													id="fromDate" name="fromDate" placeholder="From Date"
+													autocomplete="off" value="${editProject.projFrdt}" required>
+											</div>
+										</div>
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="page_order">
+												To Date <span class="text-danger">*</span>
+											</label>
+
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													onchange="checkDate()" id="toDate" name="toDate"
+													placeholder="To Date" autocomplete="off"
+													value="${editProject.projTodt}" required>
+											</div>
+
+
+
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save &
+																		Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+										</div>
+
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

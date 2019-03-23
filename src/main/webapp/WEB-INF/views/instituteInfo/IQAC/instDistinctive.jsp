@@ -137,8 +137,8 @@
 																	title="Edit" rel="tooltip" data-color-class="detail"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Edit"><span
-																	class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
-																test="${deleteAccess == 0}">
+																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if> <c:if test="${deleteAccess == 0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteDist/${dist.distId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
