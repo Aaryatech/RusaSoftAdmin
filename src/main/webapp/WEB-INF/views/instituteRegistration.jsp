@@ -128,7 +128,7 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="inst_name"
+																<input type="text" maxlength="100" onchange="trim(this)" class="form-control" id="inst_name"
 																	value="${editInst.instituteName}" name="inst_name"
 																	placeholder="Complete Name of Institute" required>
 															</div>
@@ -138,7 +138,7 @@
 																Code <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="aishe_code"
+																<input type="text" maxlength="50" onchange="trim(this)" class="form-control" id="aishe_code"
 																	value="${editInst.aisheCode}" name="aishe_code"
 																	placeholder="All India Survey On Higher Education code" required>
 															</div>
@@ -152,7 +152,7 @@
 																Address<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="inst_add"
+																<input type="text" onchange="trim(this)" maxlength="200" class="form-control" id="inst_add"
 																	value="${editInst.instituteAdd}" name="inst_add"
 																	placeholder="Complete Institute Address" required>
 															</div>
@@ -229,7 +229,7 @@
 																Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="trusty_name"
+																<input type="text" onchange="trim(this)" class="form-control" id="trusty_name"
 																	value="${editInst.trustName}" name="trusty_name"
 																	placeholder="Trust/Society Name" value="" required>
 															</div>
@@ -240,7 +240,7 @@
 																Address <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="trusty_add"
+																<input type="text"  onchange="trim(this)" class="form-control" id="trusty_add"
 																	value="${editInst.trustAdd}" name="trusty_add"
 																	placeholder="Trust/Society Address" value="" required>
 															</div>
@@ -263,7 +263,7 @@
 																Chairman/President Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="pres_name"
+																<input type="text" onchange="trim(this)" class="form-control" id="pres_name"
 																	value="${editInst.presidentName}" name="pres_name"
 																	placeholder="Name of Chairman/President(Board of Governance)"
 																	required>
@@ -287,7 +287,7 @@
 																ID <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control" id="pres_email"
+																<input type="email" onchange="trim(this)" class="form-control" id="pres_email"
 																	value="${editInst.presidentEmail}" name="pres_email"
 																	placeholder="abc@xyz.com Chairman/President Email Id" required>
 															</div>
@@ -301,7 +301,7 @@
 																Principal Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="princ_name"
+																<input type="text" onchange="trim(this)" class="form-control" id="princ_name"
 																	value="${editInst.principalName}" name="princ_name"
 																	placeholder="Name of Principal" required>
 															</div>
@@ -328,7 +328,7 @@
 																ID <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control" 
+																<input type="email" onchange="trim(this)" class="form-control" 
 																	id="princ_email" value="${editInst.email}"
 																	oninput="checkUnique(this.value,2)" name="princ_email"
 																	placeholder=" Principal Email Id (Official)" required>
@@ -354,15 +354,7 @@
 
 											</form>
 										</div>
-
-
-
-
-
-
-
 										<div class="clearfix"></div>
-
 									</div>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mendatory.</p>
@@ -708,7 +700,13 @@ function getCOPO() {
     	  }
       }
       return false;
-    }    
+    } 
+    function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
 </script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

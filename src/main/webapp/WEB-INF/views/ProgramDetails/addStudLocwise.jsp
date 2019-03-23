@@ -95,17 +95,17 @@
 							<div class="row">
 								<div class="col-md-12">
 
-									<ul class="nav nav-tabs">
+									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register Form
 										</a></li>
 
 
-									</ul>
+									</ul> -->
 
-									<div class="tab-content">
+									<!-- <div class="tab-content">
 										<div class="tab-pane fade in active" id="home">
-
+ -->
 
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertStudAdmLocwise"
@@ -144,13 +144,13 @@
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${loc.locationName}</td>
-																		<td><input type="number"  min="0"
+																		<td><input type="number"  min="0" max="99999"
 																			class="txt" id="loc_m${loc.locationId}" onkeyup="calculateSum()"
 																			name="loc_m${loc.locationId}" value="0" required></td>
-																		<td><input type="number"  min="0" onkeyup="calculateSum()"
+																		<td><input type="number"  min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="loc_f${loc.locationId}"
 																			name="loc_f${loc.locationId}" value="0" required></td>
-																		<td><input type="number" min="0" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="loc_t${loc.locationId}"
 																			name="loc_t${loc.locationId}" value="0" required></td>
 																	</tr>
@@ -165,13 +165,13 @@
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${loc.locationName}</td>
-																		<td><input type="number" min="0" 
+																		<td><input type="number" min="0"  max="99999"
 																			class="txt" id="loc_m${loc.studentLocId}" onkeyup="calculateSum()"
 																			name="loc_m${loc.studentLocId}" value="${loc.maleStudent}" onkeypress="allowOnlyNumber1" required></td>
-																		<td><input type="number" min="0"  onkeyup="calculateSum()"
+																		<td><input type="number" min="0"  max="99999" onkeyup="calculateSum()"
 																			class="txt" id="loc_f${loc.studentLocId}"
 																			name="loc_f${loc.studentLocId}" value="${loc.femaleStudent}" required></td>
-																		<td><input type="number" min="0" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="loc_t${loc.studentLocId}"
 																			name="loc_t${loc.studentLocId}" value="${loc.transStudent}" required></td>
 																	</tr>
@@ -192,7 +192,7 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary" id="sub1"
-																onclick="submit_f(1)" value="Add"> <input
+																onclick="submit_f(1)" value="Save"> <input
 																type="submit" class="btn btn-primary" id="sub2"
 																onclick="submit_f(0)" value="Save And Next">
 															<button type="reset" class="btn btn-default">Reset</button>
@@ -206,10 +206,10 @@
 
 												</div>
 											</form>
-										</div>
+										<!-- </div>
 
 									</div>
-
+ -->
 								</div>
 
 							</div>

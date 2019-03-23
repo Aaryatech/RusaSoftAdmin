@@ -166,6 +166,9 @@
 													<input type="hidden" id="high_edu_id" name="high_edu_id"
 														value="${highEduDet.educationDetailId}"> <input
 														type="hidden" id="is_view" name="is_view" value="0">
+														<input type="hidden" id="proceed" name="proceed"
+														value="${highEduDet.proceedingTo}">
+														
 													<div class="clearfix"></div>
 												</div>
 											</form>
@@ -284,6 +287,8 @@
 
 		function setProceedProgType() {
 			//alert("progId" +progId);
+			 var x=document.getElementById("proceed").value;
+			
 			var progId = document.getElementById("prog_type").value;
 			$.getJSON('${getProgTypeByProgId}', {
 				progId : progId,
@@ -291,7 +296,7 @@
 			}, function(data) {
 				var html;
 				var len = data.length;
-				var x=${highEduDet.proceedingTo};
+				
 				for (var i = 0; i < len; i++) {
 					if(data[i].programId==x){
 						html += '<option selected value="' + data[i].programId + '">'

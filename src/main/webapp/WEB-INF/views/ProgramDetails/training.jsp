@@ -83,13 +83,13 @@
 											<c:forEach items="${trainPlaceList}" var="trainPlace"
 												varStatus="count">
 												<tr>
-													<td>${count.index+1}</td>
-													<td>${trainPlace.empyrName}</td>
-													<td>${trainPlace.progTypeName}-${trainPlace.programName}</td>
-													<td>${trainPlace.noStudentPlaced}</td>
-													<td>${trainPlace.empyrAdd}</td>
-													<td>${trainPlace.contactDetail}</td>
-													<td>${trainPlace.pakageOfferd}</td>
+													<td align="center">${count.index+1}</td>
+													<td align="left">${trainPlace.empyrName}</td>
+													<td align="left">${trainPlace.progTypeName}-${trainPlace.programName}</td>
+													<td align="right">${trainPlace.noStudentPlaced}</td>
+													<td align="left">${trainPlace.empyrAdd}</td>
+													<td align="left">${trainPlace.contactDetail}</td>
+													<td align="right">${trainPlace.pakageOfferd}</td>
 
 													<td align="center">
 														<c:if test="${editAccess==0}">  <a href="#"

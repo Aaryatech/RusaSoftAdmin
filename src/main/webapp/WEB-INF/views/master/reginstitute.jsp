@@ -130,7 +130,7 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="inst_name"
+																<input type="text" onchange="trim(this)" class="form-control" id="inst_name"
 																	value="${editInst.instituteName}" name="inst_name"
 																	placeholder="Institute Name" required>
 															</div>
@@ -140,7 +140,7 @@
 																Code <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="aishe_code"
+																<input type="text" onchange="trim(this)" class="form-control" id="aishe_code"
 																	value="${editInst.aisheCode}" name="aishe_code"
 																	placeholder="AISHE Code" required>
 															</div>
@@ -154,7 +154,7 @@
 																Address<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="inst_add"
+																<input type="text" onchange="trim(this)" class="form-control" id="inst_add"
 																	value="${editInst.instituteAdd}" name="inst_add"
 																	placeholder="Institute Address" required>
 															</div>
@@ -231,18 +231,18 @@
 																Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="trusty_name"
+																<input type="text"  onchange="trim(this)" class="form-control" id="trusty_name"
 																	value="${editInst.trustName}" name="trusty_name"
 																	placeholder="Trust/Society Name" value="" required>
 															</div>
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">Trust/Society
+															<label class="control-label col-sm-3"  for="page_order">Trust/Society
 																Address <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="trusty_add"
+																<input type="text" onchange="trim(this)" class="form-control" id="trusty_add"
 																	value="${editInst.trustAdd}" name="trusty_add"
 																	placeholder="Trust/Society Address" value="" required>
 															</div>
@@ -265,7 +265,7 @@
 																Chairman/President Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="pres_name"
+																<input type="text" onchange="trim(this)" class="form-control" id="pres_name"
 																	value="${editInst.presidentName}" name="pres_name"
 																	placeholder="Name of Chairman/President(Board of Governance)"
 																	required>
@@ -289,7 +289,7 @@
 																ID(Official) <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control" id="pres_email"
+																<input type="email" onchange="trim(this)" class="form-control" id="pres_email"
 																	value="${editInst.presidentEmail}" name="pres_email"
 																	placeholder="abc@xyz.com" required>
 															</div>
@@ -303,7 +303,7 @@
 																Principal Name <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="princ_name"
+																<input type="text" onchange="trim(this)" class="form-control" id="princ_name"
 																	value="${editInst.principalName}" name="princ_name"
 																	placeholder="Name of Principal" required>
 															</div>
@@ -330,7 +330,8 @@
 																ID(Official) <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control" 
+																<input type="email"
+																 class="form-control" 
 																	id="princ_email" value="${editInst.email}"
 																	oninput="checkUnique(this.value,2)" name="princ_email"
 																	placeholder="abc@xyz.com" required>
@@ -344,7 +345,7 @@
 															<div class="col-sm-offset-3 col-sm-9">
 
 																<input type="submit" id="sub_button"
-																	class="btn btn-primary" value="Submit" />
+																	class="btn btn-primary" value="Save">
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
@@ -711,6 +712,13 @@ function getCOPO() {
       }
       return false;
     }    
+    
+    function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
 </script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

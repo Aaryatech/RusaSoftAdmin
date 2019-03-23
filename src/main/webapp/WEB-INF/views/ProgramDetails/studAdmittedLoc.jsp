@@ -87,11 +87,11 @@
 											<c:forEach items="${locAdmList}" var="studAdm"
 												varStatus="count">
 												<tr>
-													<td>${count.index+1}</td>
-													<td>${studAdm.locationName}</td>
-													<td>${studAdm.maleStudent}</td>
-													<td>${studAdm.femaleStudent}</td>
-													<td>${studAdm.transStudent}</td>
+													<td align="center">${count.index+1}</td>
+													<td align="left">${studAdm.locationName}</td>
+													<td align="right">${studAdm.maleStudent}</td>
+													<td align="right">${studAdm.femaleStudent}</td>
+													<td align="right">${studAdm.transStudent}</td>
 
 													<%-- <td align="center">
 														<c:if test="${editAccess==0}"> <a href="#"

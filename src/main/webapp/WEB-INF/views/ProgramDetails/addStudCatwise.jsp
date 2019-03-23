@@ -100,13 +100,9 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<%-- <form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');"> --%>
+									
 
-									<ul class="nav nav-tabs">
+									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register Form
 										</a></li>
@@ -115,7 +111,7 @@
 									</ul>
 
 									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
+										<div class="tab-pane fade in active" id="home"> -->
 
 
 											<form class="form-horizontal"
@@ -136,7 +132,7 @@
 																</tr>
 																<tr>
 																	<th width="10%"></th>
-																	<th width="20%"></th>
+																	<th width="30%"></th>
 																	<th width="20%">Male</th>
 																	<th width="20%">Female</th>
 																	<th width="20%">Transgender</th>
@@ -153,13 +149,13 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="number" min="0" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="cast_m${cast.castId}"
-																			name="cast_m${cast.castId}" value="0"  required></td>
-																		<td><input type="number" min="0" onkeyup="calculateSum()"
+																			name="cast_m${cast.castId}" value="0"   required></td>
+																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="cast_f${cast.castId}"
 																			name="cast_f${cast.castId}" value="0" required></td>
-																		<td><input type="number" min="0"  onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999"  onkeyup="calculateSum()"
 																			class="txt" id="cast_t${cast.castId}"
 																			name="cast_t${cast.castId}" value="0" required></td>
 																	</tr>
@@ -173,15 +169,17 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="number" min="0" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="cast_m${cast.studentCatId}"
 																			name="cast_m${cast.studentCatId}" value="${cast.maleStudent}" required></td>
-																		<td><input type="number" min="0"  onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999"  onkeyup="calculateSum()"
 																			class="txt" id="cast_f${cast.studentCatId}"
-																			name="cast_f${cast.studentCatId}" value="${cast.femaleStudent}" required></td>
-																		<td><input type="number" min="0"  onkeyup="calculateSum()"
+																			name="cast_f${cast.studentCatId}"  value="${cast.femaleStudent}" required></td>
+																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
 																			class="txt" id="cast_t${cast.studentCatId}"
 																			name="cast_t${cast.studentCatId}" value="${cast.transStudent}" required></td>
+																			
+																			
 																	</tr>
 																</c:forEach>
 																</c:otherwise>
@@ -197,14 +195,17 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary" id="sub1"
-																onclick="submit_f(0)" value="Add"> <input
+																onclick="submit_f(0)" value="Save"> <input
 																type="submit" class="btn btn-primary" id="sub2"
 																onclick="submit_f(1)" value="Save And Next">
 																
 																 
 															<button type="reset" class="btn btn-default">Reset</button>
+															
+															<label class="control-label" for="fPassingYear"><b>Total Students</b><span class="text-danger"></span>
+														</label>
 															<input
-																type="text" readonly placeholder="Total Student" id="total_stud"
+																type="text"   style="color:black; border-radius: 15px; align-items: center;" readonly placeholder="Total Student" id="total_stud"
 																>
 														</div>
 													</div>
@@ -215,10 +216,10 @@
 
 												</div>
 											</form>
-										</div>
+										<!-- </div>
 
 									</div>
-
+ -->
 								</div>
 
 							</div>

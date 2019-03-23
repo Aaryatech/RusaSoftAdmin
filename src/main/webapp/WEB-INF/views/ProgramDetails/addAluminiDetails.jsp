@@ -135,7 +135,7 @@
 																	data-min-view-mode="years" data-start-view="2"
 																	data-format="yyyy" placeholder="Enter Year of Passing"
 																	id="year_of_pass" value="${alumni.passingYear}"
-																	name="year_of_pass" required>
+																	name="year_of_pass" autocomplete="off" required>
 															</div>
 														</div>
 
@@ -176,7 +176,7 @@
 																Year of Contribution<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control datepickeryear"
+																<input type="text"  autocomplete="off" class="form-control datepickeryear"
 																	data-min-view-mode="years" data-start-view="2"
 																	data-format="yyyy"
 																	placeholder="Enter Year of Contribution"
@@ -269,72 +269,7 @@
 																	</c:otherwise>
 																		
 																	</c:choose>
-																	<%-- <c:set var="ben" value="${alumni.benefitTo}"></c:set>
-
-
-																	<%
-																		String beanType = (String) pageContext.getAttribute("ben");
-																		if (beanType.equalsIgnoreCase("Students")) {
-																	%>
-
-																	<%
-																		}
-
-																		else if (beanType.equalsIgnoreCase("Staff")) {
-																	%>
 																	
-																	<%
-																		}else  if (beanType.equalsIgnoreCase("Faculty")) {
-																			
-																		
-																	%>
-																	<option value="Students">Students</option>
-																	<option value="Staff">Staff</option>
-																	<option selected value="Faculty">Faculty</option>
-																	<option value="Department">Department</option>
-																	<option value="Institute">Institute</option>
-																	<option value="Society">Society</option>
-																	<option value="7">Any Other</option>
-																	<%}else  if (beanType.equalsIgnoreCase("Department")) {  %>
-
-																	<option value="Students">Students</option>
-																	<option value="Staff">Staff</option>
-																	<option value="Faculty">Faculty</option>
-																	<option selected value="Department">Department</option>
-																	<option value="Institute">Institute</option>
-																	<option value="Society">Society</option>
-																	<option value="7">Any Other</option>
-																	<%} else if (beanType.equalsIgnoreCase("Institute")) {  
-																	%>
-																	<option value="Students">Students</option>
-																	<option value="Staff">Staff</option>
-																	<option value="Faculty">Faculty</option>
-																	<option value="Department">Department</option>
-																	<option selected value="Institute">Institute</option>
-																	<option value="Society">Society</option>
-																	<option value="7">Any Other</option>
-
-																	<%} else if (beanType.equalsIgnoreCase("Society")) {   %>
-
-																	<option value="Students">Students</option>
-																	<option value="Staff">Staff</option>
-																	<option value="Faculty">Faculty</option>
-																	<option value="Department">Department</option>
-																	<option value="Institute">Institute</option>
-																	<option selected value="Society">Society</option>
-																	<option value="7">Any Other</option>
-
-																	<%} else  {   %>
-
-																	<option value="Students">Students</option>
-																	<option value="Staff">Staff</option>
-																	<option value="Faculty">Faculty</option>
-																	<option value="Department">Department</option>
-																	<option value="Institute">Institute</option>
-																	<option value="Society">Society</option>
-																	<option selected value="7">Any Other</option>
-
-																	<%}%> --%>
 
 																</select>
 
@@ -390,6 +325,7 @@
 			</section>
 		</section>
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<!-- MAIN CONTENT AREA ENDS -->
 
@@ -554,17 +490,32 @@
 
 		});
     });
+    
+   
 </script>
-	<script type="text/javascript">
-       
-    </script>
+<!-- 	<script type="text/javascript">
+	 $(function(){
+		 
+	        $('.datepickeryear').datepicker({
+				autoclose: true,
+				minViewMode: 2,
+		         format: 'yyyy'
 
+			});
+	    });
+    </script> -->
 
+<!-- <script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="./javascript.js"></script>
+	<script
+		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false">
+		
+	</script> -->
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 
