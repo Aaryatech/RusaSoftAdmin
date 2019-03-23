@@ -43,7 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="showIsReg()">
+<body class=" " onload="showIsReg()"  >
+<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -101,9 +102,9 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Dean Register Form
-											</a></li>
+											</a></li> -->
 
 
 										</ul>
@@ -113,9 +114,8 @@
 
 												<div>
 
-												<input type="hidden" class="form-control" id="dean_id"
-																	name="dean_id" placeholder="Dean R&D Name"
-																	value="${dean.deanId}">
+												<input type="hidden" class="form-control" id="dean_id" name="dean_id" 
+														value="${dean.deanId}">
 
 													<div class="col-xs-12">
 													
@@ -207,10 +207,10 @@
 																	<c:when test="${dean.deanId==0}">
 
 																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1" checked
+																			name="is_registration" value="1" 
 																			onclick="setDate(this.value)">Yes 
 																<input type="radio" id="is_registration"
-																			name="is_registration" value="0"
+																			name="is_registration" value="0" checked
 																			onclick="setDate(this.value)">No 
 															
 															</c:when>
@@ -455,13 +455,17 @@ $(function () {
 
 		}, function(data) {
 			
-		alert("Data  " +JSON.stringify(data));
+		//alert("Data  " +JSON.stringify(data));
 			if(data.error==true){
 				if(valueType==2){
+					document.getElementById("email").value="";
 				alert("This email id already exist in system please enter unique");
+				
 				}
 				else{
+					document.getElementById("contact_no").value="";
 					alert("This contact no  already exist in system please enter unique");
+					
 				}
 			}
 		});
@@ -524,7 +528,7 @@ $(function () {
     });
 	</script>
 	
-	<script type="text/javascript">
+	 <script type="text/javascript">
 	
 	function showIsReg(){
 		//alert("Hi");

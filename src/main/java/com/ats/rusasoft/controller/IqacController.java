@@ -547,83 +547,76 @@ public class IqacController {
 	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
 	public String addFaculty(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("master/addFaculty");
+	try {
+				ModelAndView model = new ModelAndView("master/addFaculty");
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+				
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
+				HttpSession session = request.getSession();
 		
-
-		HttpSession session = request.getSession();
-
-		int instituteId = (int) session.getAttribute("instituteId");
-		int userId = (int) session.getAttribute("userId");
-		//model.addObject("title", "Add Department");
-
-		int facultyId = 0;
-
-		try {
-
-			facultyId = Integer.parseInt(request.getParameter("faculty_id"));
-
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				//model.addObject("title", "Add Department");
+				
+				int highestQualification = Integer.parseInt(request.getParameter("hod_quolf"));
+				
+				String yrofHighestQualification = request.getParameter("yr_highest_qualification_acqrd");
+				int designation = Integer.parseInt(request.getParameter("designation"));
+				String joinDate = request.getParameter("join_date");
+				int isReg = Integer.parseInt(request.getParameter("is_registration"));
+		
+				int teachTo = Integer.parseInt(request.getParameter("teachTo"));
+				String contactNo = request.getParameter("contact_no");
+				String email = request.getParameter("email");
+		
+				Staff staff = new Staff();
+		
+				staff.setFacultyId(Integer.parseInt(request.getParameter("faculty_id")));
+		
+				staff.setInstituteId(instituteId);
+				staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
+				staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
+				staff.setFacultyMiddelName("NA");
+				staff.setFacultyLastName("NA");
+				staff.setHighestQualification(highestQualification);
+				staff.setHightestQualificationYear(yrofHighestQualification);
+				staff.setCurrentDesignationId(designation);
+				staff.setJoiningDate(joinDate);
+				staff.setIsWorking(isReg);
+				if (isReg == 0) {
+					staff.setRealivingDate((request.getParameter("acc_off_relDate")));
+		
+				} else {
+					staff.setRealivingDate(null);
+				}
+		
+				staff.setTeachingTo(teachTo);
+				staff.setContactNo(contactNo);
+				staff.setEmail(email);
+				staff.setDelStatus(1);
+				staff.setIsActive(1);
+				staff.setMakerUserId(userId);
+				staff.setMakerEnterDatetime(curDateTime);
+				staff.setEditUserId(0);
+				staff.setLastUpdatedDatetime(curDateTime);
+				staff.setCheckerUserId(0);
+				staff.setCheckerDatetime(curDateTime);
+				staff.setExtraint1(4);
+				staff.setExtravarchar1("NA");
+		
+				System.out.println("Staff:" + staff.toString());
+		
+				Staff stf = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 		} catch (Exception e) {
 
 			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
 			e.printStackTrace();
-			facultyId = 0;
+			
 
 		}
-		String facultyMmemberName = request.getParameter("faculty_member_name");
-		int highestQualification = Integer.parseInt(request.getParameter("hod_quolf"));
-		// String otherQualification = request.getParameter("other_qualification");
-		String yrofHighestQualification = request.getParameter("yr_highest_qualification_acqrd");
-		int designation = Integer.parseInt(request.getParameter("designation"));
-		String joinDate = request.getParameter("join_date");
-		int isReg = Integer.parseInt(request.getParameter("is_registration"));
-
-		int teachTo = Integer.parseInt(request.getParameter("teachTo"));
-		String contactNo = request.getParameter("contact_no");
-		String email = request.getParameter("email");
-
-		Staff staff = new Staff();
-
-		staff.setFacultyId(facultyId);
-
-		staff.setInstituteId(instituteId);
-		staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
-		staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
-		staff.setFacultyMiddelName("NA");
-		staff.setFacultyLastName("NA");
-		staff.setHighestQualification(highestQualification);
-		staff.setHightestQualificationYear(yrofHighestQualification);
-		staff.setCurrentDesignationId(designation);
-		staff.setJoiningDate(joinDate);
-		staff.setIsWorking(isReg);
-		if (isReg == 0) {
-			staff.setRealivingDate((request.getParameter("acc_off_relDate")));
-
-		} else {
-			staff.setRealivingDate(null);
-		}
-
-		staff.setTeachingTo(teachTo);
-		staff.setContactNo(contactNo);
-		staff.setEmail(email);
-		staff.setDelStatus(1);
-		staff.setIsActive(1);
-		staff.setMakerUserId(userId);
-		staff.setMakerEnterDatetime(curDateTime);
-		staff.setEditUserId(0);
-		staff.setLastUpdatedDatetime(curDateTime);
-		staff.setCheckerUserId(0);
-		staff.setCheckerDatetime(curDateTime);
-		staff.setExtraint1(4);
-		staff.setExtravarchar1("NA");
-
-		System.out.println("Staff:" + staff.toString());
-
-		Staff stf = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
-
 		return "redirect:/showStaffList";
 
 	}
@@ -884,53 +877,51 @@ public class IqacController {
 	@RequestMapping(value = "/insertNewDean", method = RequestMethod.POST)
 	public String addNewDean(HttpServletRequest request, HttpServletResponse response) {
 
-		int deanId = 0;
+		
 		try {
 
-			deanId = Integer.parseInt(request.getParameter("dean_id"));
+			HttpSession session = request.getSession();
+	
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			String deanName = request.getParameter("dean_name");
+			String contactNo = request.getParameter("contact_no");
+			String email = request.getParameter("email");
+			int qualificaton = Integer.parseInt(request.getParameter("hod_quolf"));
+			String joinDate = request.getParameter("join_date");
+			int isReg = Integer.parseInt(request.getParameter("is_registration"));
+	
+			Dean dean = new Dean();
+	
+			dean.setDeanId(Integer.parseInt(request.getParameter("dean_id")));
+			dean.setDeanName(deanName);
+			dean.setInstituteId(instituteId);
+			dean.setContactNo(contactNo);
+			dean.setEmail(email);
+			dean.setQualificationId(qualificaton);
+			dean.setJoiningDate(joinDate);
+	
+			if (isReg == 0) {
+				dean.setRealivingDate(request.getParameter("acc_off_relDate"));
+	
+			} else {
+				dean.setRealivingDate(null);
+			}
+			dean.setMakerUserId(userId);
+			dean.setDelStatus(1);
+	
+			dean.setMakerEnterDatetime(curDateTime);
+	
+			dean.setExtraint1(6);
+			dean.setExtravarchar1("NA");
+			
+	
+			Dean deanSave = rest.postForObject(Constants.url + "/saveNewDean", dean, Dean.class);
 		} catch (Exception e) {
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 			e.printStackTrace();
-			deanId = 0;
+			
 		}
-
-		HttpSession session = request.getSession();
-
-		int instituteId = (int) session.getAttribute("instituteId");
-		String deanName = request.getParameter("dean_name");
-		String contactNo = request.getParameter("contact_no");
-		String email = request.getParameter("email");
-		int qualificaton = Integer.parseInt(request.getParameter("hod_quolf"));
-		String joinDate = request.getParameter("join_date");
-		int isReg = Integer.parseInt(request.getParameter("is_registration"));
-
-		Dean dean = new Dean();
-
-		dean.setDeanId(deanId);
-		dean.setDeanName(deanName);
-		dean.setInstituteId(instituteId);
-		dean.setContactNo(contactNo);
-		dean.setEmail(email);
-		dean.setQualificationId(qualificaton);
-		dean.setJoiningDate(joinDate);
-
-		if (isReg == 0) {
-			dean.setRealivingDate(request.getParameter("acc_off_relDate"));
-
-		} else {
-			dean.setRealivingDate(null);
-		}
-		dean.setMakerUserId(0);
-		dean.setDelStatus(1);
-
-		dean.setMakerEnterDatetime(curDateTime);
-
-		dean.setExtraint1(6);
-		dean.setExtravarchar1("NA");
-		System.out.println("Dean Data:" + dean);
-
-		Dean deanSave = rest.postForObject(Constants.url + "/saveNewDean", dean, Dean.class);
-
 		return "redirect:/showDeanList";
 
 	}
@@ -1045,11 +1036,12 @@ public class IqacController {
 
 	@RequestMapping(value = "/deleteDean/{deanId}", method = RequestMethod.GET)
 	public String deleteDean(@PathVariable("deanId") int deanId, HttpServletRequest request) {
-
+		String a = null;
+		try {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showRegDean", "showDeanList", "0", "0", "0", "1", newModuleList);
-		String a = null;
+		
 		if (view.isError() == true) {
 
 			a = "redirect:/accessDenied";
@@ -1063,6 +1055,10 @@ public class IqacController {
 			map.add("id", deanId);
 			Info dean = rest.postForObject(Constants.url + "/deleteDeanById", map, Info.class);
 			a = "redirect:/showDeanList";
+		}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		return a;
 

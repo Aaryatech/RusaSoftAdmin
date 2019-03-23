@@ -44,7 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -102,10 +102,10 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+										<!-- 	<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i>IQAC Register Form
 											</a></li>
-
+ -->
 
 										</ul>
 
@@ -421,12 +421,15 @@
 
 		}, function(data) {
 			
-		alert("Data  " +JSON.stringify(data));
+		//alert("Data  " +JSON.stringify(data));
 			if(data.error==true){
 				if(valueType==2){
+					document.getElementById("email").value="";
 				alert("This email id already exist in system please enter unique");
 				}
 				else{
+					document.getElementById("contactNo").value="";
+					
 					alert("This contact no  already exist in system please enter unique");
 				}
 			}

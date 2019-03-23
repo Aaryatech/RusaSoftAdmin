@@ -55,8 +55,8 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showRegDean"><button
-										type="button" class="btn btn-success">Register Dean</button></a></c:if>
-								<a class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-success">Add</button></a></c:if>
+							<!-- 	<a class="box_toggle fa fa-chevron-down"></a> -->
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
@@ -128,13 +128,13 @@
 													<td align="center">
 													<c:if test="${editAccess == 0}"><a
 														href="${pageContext.request.contextPath}/editDean/${deanList.deanId}"><span
-															class="glyphicon glyphicon-edit"
-															data-animate=" animated fadeIn " rel="tooltip"></span></a></c:if> |
+															class="glyphicon glyphicon-edit" title="Edit"
+															data-animate=" animated fadeIn " rel="tooltip"></span></a></c:if> &nbsp;&nbsp;&nbsp;&nbsp;
 															
 														<c:if test="${deleteAccess == 0}"><a
 														href="${pageContext.request.contextPath}/deleteDean/${deanList.deanId}"
 														onClick="return confirm('Are you sure want to delete this record');"
-														rel="tooltip" data-color-class="danger"
+														rel="tooltip" data-color-class="danger" title="Delete"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
 														data-original-title="Delete  record"><span
 															class="glyphicon glyphicon-remove"></span></a></c:if></td>
@@ -143,7 +143,7 @@
 											
 										</tbody>
 									</table>
-									<c:if test="${deleteAccess==0}">
+									<%-- <c:if test="${deleteAccess==0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
@@ -151,7 +151,7 @@
 										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
-
+ --%>
 
 
 								</div>

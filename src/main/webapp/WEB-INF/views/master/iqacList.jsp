@@ -53,7 +53,7 @@
                   <c:if test="${addAccess == 0}"> 
                		  <a href="${pageContext.request.contextPath}/iqacRegistration"><button type="button" class="btn btn-success">Add</button></a>
                  </c:if>
-                	<a class="box_toggle fa fa-chevron-down"></a>               
+                	<!-- <a class="box_toggle fa fa-chevron-down"></a>   -->             
                 </div>
               </header> 
               

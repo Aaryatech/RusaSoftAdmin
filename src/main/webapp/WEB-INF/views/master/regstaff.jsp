@@ -43,7 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="setDate(0)">
+<body class=" " onload="showIsReg()">
+<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -571,12 +572,14 @@
 
 		}, function(data) {
 			
-		alert("Data  " +JSON.stringify(data));
+		//alert("Data  " +JSON.stringify(data));
 			if(data.error==true){
 				if(valueType==2){
+					document.getElementById("email").value="";
 				alert("This email id already exist in system please enter unique");
 				}
 				else{
+					document.getElementById("contact_no").value="";
 					alert("This contact no  already exist in system please enter unique");
 				}
 			}
@@ -699,7 +702,30 @@
 		
 	</script>
 
+<script type="text/javascript">
+	
+	function showIsReg(){
+		//alert("Hi");
+		var x=${staff.facultyId}
+	
+		if(x>0){
+			//alert("Hi 1")
+		var isRel=${staff.realivingDate};
+		//alert("Is Reg " +isReg);
+		if(isRel==null){
+			//alert("Hi 2")
+			document.getElementById("abc").style.display = "none";
 
+		}else{
+			//alert("Hi es")
+			document.getElementById("abc").style.display = "block";
+			
+		}
+			
+		}
+	
+	}
+	</script>
 
 
 
