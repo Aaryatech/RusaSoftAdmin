@@ -104,16 +104,16 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
+										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> ${title}
 											</a></li>
 
-										</ul>
+										</ul> --%>
 
-										<div class="tab-content">
+										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
+ -->
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="colName">Name
 														of Collaboration / Linkage<span class="text-danger">*</span>
@@ -194,13 +194,13 @@
 																<c:choose>
 															<c:when test="${'Students'== editInst.linkBeneficiary}">
 }">
-															<option value="-1">Select</option>		
+														
 															<option selected value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option>
 																			</c:when>
 																			<c:when test="${'Staff'==editInst.linkBeneficiary}">
-																	<option value="-1">Select</option>			        
+																	        
 															<option value="Students">Students</option>
 															<option selected value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option>
@@ -208,7 +208,7 @@
 																			
 															<c:when test="${'Students And Staff'==editInst.linkBeneficiary}">
 }">
-															<option value="-1">Select</option>			
+																	
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option selected value="Staff">Students And Staff</option>
@@ -217,7 +217,7 @@
 																			
 																			
 																	<c:otherwise>
-																		<option selected value="-1">Select</option>
+																		
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option>
@@ -261,9 +261,12 @@
 													</div>
 												</div>
 												<div class="clearfix"></div>
-											</div>
-										</div>
+											<!-- </div>
+										</div> -->
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
+									
 								</div>
 
 							</div>
@@ -285,12 +288,6 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
-
-	
 
 
 

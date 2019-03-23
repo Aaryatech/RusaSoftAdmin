@@ -56,8 +56,8 @@
 							
 							  <c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showRegStud"><button
-										type="button" class="btn btn-success">Register Student</button></a>
-								<a class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-success">Add</button></a>
+							
 								</c:if>
 								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -113,7 +113,7 @@
 														<td><input type="checkbox" class="chk" name="studIds"
 															id="studIds${count.index+1}"
 															value="${stud.studentId}" /></td>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; width:5%">${count.index+1}</td>
 														<td>${stud.studentName}</td>
 														<td>${stud.deptName}</td>
 														<td style="text-align: center; ">${stud.idNo}</td>

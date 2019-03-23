@@ -91,8 +91,8 @@
 												<th style="text-align: center; width:10%">Sr No</th>
 												<th style="text-align: center; "> Date of Estabilishment</th>
 												<th style="text-align: center; ">Name</th>
-											     <th style="text-align: center; ">Fax No.</th>
-												<th style="text-align: center; ">Contact No</th>
+											    <th style="text-align: center; ">Fax No.</th>
+												<th style="text-align: center; ">Mobile No.</th>
 												<th style="text-align: center; ">Email</th>
 												<th style="text-align: center; width:10%">Action</th>
 											</tr>
@@ -104,7 +104,7 @@
 									
 													<tr>
 															<c:if test="${instProfRes!=null}">
-														<td>1</td>
+														<td style="text-align: center; ">1</td>
 														<td style="text-align: center; ">${date}</td>
 														<td>${instProfRes.iqacAltName}</td>
 														<td style="text-align: center; ">${instProfRes.iqacAltFax}</td>
@@ -136,11 +136,11 @@
 									</table>
 					
 	                              <div class="col-lg-1">
-  <c:if test="${deleteAccess == 0}">
+<%--   <c:if test="${deleteAccess == 0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"></c:if>
+												style="align-content: center; width: 113px; margin-left: 40px;"></c:if> --%>
 													<input type="hidden" id="edit_stud_id"   name="edit_stud_id" value="0">
 
 

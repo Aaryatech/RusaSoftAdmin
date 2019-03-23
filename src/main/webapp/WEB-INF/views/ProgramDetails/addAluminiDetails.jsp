@@ -433,6 +433,8 @@
 			if(qualType == 7){
 				//alert("In If " +x);
 				document.getElementById("abc").style = "visible";
+				document.getElementById("other_benif").setAttribute("required","true");
+
 			}else{ 
 		document.getElementById("abc").style = "display:none"
 			}

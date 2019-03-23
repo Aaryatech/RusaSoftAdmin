@@ -139,7 +139,8 @@
 
 										</div>
 									</form>
-									
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 									</c:if>
 									
 									
@@ -206,6 +207,8 @@
 												value="0">
 </form>
 
+									
+
 									</div>
 								</div>
 
@@ -245,7 +248,7 @@
 
 		}
 		function showEditLinkage(studId){
-			alert("edit_linkage_id"+studId);
+			//alert("edit_linkage_id"+studId);
 			document.getElementById("edit_linkage_id").value=studId;//create this 
 			var form=document.getElementById("libListForm");
 		    form.setAttribute("method", "post");

@@ -107,17 +107,17 @@
 										name="form_sample_2" id="form_sample_2"
 											onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
+									<%-- 	<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> ${title}
 											</a></li>
 
 										</ul>
-
-										<div class="tab-content">
+ --%>
+										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
 
-
+ -->
 
 												<div class="form-group">
 
@@ -231,7 +231,7 @@
 												<div class="form-group" id="abc" style = "display:none">
 
 													<label class="control-label col-sm-2" for="page_name">Other
-														Course <span class="text-danger">*</span>
+														Course
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="otherCourse"
@@ -377,10 +377,12 @@
 
 
 
-
+<!-- 
 											</div>
-										</div>
+										</div> -->
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 							</div>
@@ -449,7 +451,7 @@
 			//alert("hii");
 			//document.getElementById("abc").style = "display:none"
 			var qualType = document.getElementById("MOU_agency").value
-			alert("qualType::"+qualType);
+			//alert("qualType::"+qualType);
 
 			if (qualType == 7) {
 
@@ -473,8 +475,9 @@
 			if(qualType == 7){
 				//alert("In If " +x);
 				document.getElementById("abc").style = "visible";
+				document.getElementById("otherCourse").setAttribute("required","true");
 			}else{ 
-		document.getElementById("abc").style = "display:none"
+		document.getElementById("abc").style = "display:none"                         
 			}
 		
 	}
@@ -493,8 +496,8 @@ function submit_f(view){
 		form.submit(); */
 		
 	}
-	
-	
+</script>
+	<script type="text/javascript">
 var wasSubmitted = false;    
 function checkBeforeSubmit(){
   if(!wasSubmitted) {

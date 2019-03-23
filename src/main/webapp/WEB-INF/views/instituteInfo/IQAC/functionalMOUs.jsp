@@ -57,8 +57,7 @@
 								  <c:if test="${addAccess == 0}"> 
 								<a
 									href="${pageContext.request.contextPath}/showAddFunctionalMOUs"><button
-										type="button" class="btn btn-success">Add</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-success">Add</button></a> 
 									</c:if>
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -97,7 +96,7 @@
 														<th class="check" style="text-align: center; width: 5%;"
 															rowspan="2"><input type="checkbox" name="selAll"
 															id="selAll" onClick="selectedInst(this)" /> Select All</th>
-														<th rowspan="2">Sr No</th>
+														<th  rowspan="2">Sr No</th>
 														<th rowspan="2">Title of MoU</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Institute of MoU</th>
@@ -124,10 +123,10 @@
 														<tr>
 															<td><input type="checkbox" class="chk" name="mouIds"
 																id="mouIds${count.index+1}" value="${mouList.mouId}" /></td>
-															<td>${count.index+1}</td>
+															<td  style="text-align: center;">${count.index+1}</td>
 															<td>${mouList.mouTitle}</td>
-															<td>${mouList.mouFromdt}</td>
-															<td>${mouList.mouTodt}</td>
+															<td  style="text-align: center;">${mouList.mouFromdt}</td>
+															<td  style="text-align: center;">${mouList.mouTodt}</td>
 															<td>${mouList.mouInstitute}</td>
 															<td style="text-align: center;">${mouList.mouBeneficiaryNos}</td>
 

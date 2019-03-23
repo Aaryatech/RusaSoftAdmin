@@ -86,8 +86,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -102,17 +101,17 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register Form
 											</a></li>
 
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
+										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
+ -->
 												<div>
 
 
@@ -122,7 +121,7 @@
 															<label class="control-label col-sm-2" for="page_name">
 																Name<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<input type="text" class="form-control" id="student_name" pattern="^(?!\s*$).+"
 																value="${editStudent.studentName}" required
 																	name="student_name" placeholder="Student Name"
@@ -135,7 +134,7 @@
 													<label class="control-label col-sm-2" for="status">
 													Year  <span class="text-danger">*</span>
 												</label>
-												<div class="col-sm-2">
+												<div class="col-sm-6">
 													<select id="academic_year" name="academic_year" class="form-control" required>
 																<%-- <c:forEach items="${acaYearList}" var="acaYear">
 																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
@@ -168,7 +167,7 @@
 													<label class="control-label col-sm-2" for="status">
 													Department  <span class="text-danger">*</span>
 												</label>
-												<div class="col-sm-2">
+												<div class="col-sm-6">
 													<select id="stud_branch" name="stud_branch" class="form-control" required>
 														
 																	
@@ -195,7 +194,7 @@
 															<label class="control-label col-sm-2" for="page_order">ID No.
 																 <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<input type="text" 
 																	maxlength="10" class="form-control" id="id_number"
 																	value="${editStudent.idNo}"  pattern="^(?!\s*$).+"
@@ -207,7 +206,7 @@
 															<label class="control-label col-sm-2" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="stud_contact_no"
 																	value="${editStudent.contactNo}" onchange="checkUnique(this.value,1)"
@@ -219,9 +218,9 @@
 															<label class="control-label col-sm-2" for="page_order">Email ID(Official)
 																<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<input type="email" class="form-control" id="student_email"
-																value="${editStudent.email}" onchange="checkUnique(this.value,2)" pattern="^(?!\s*$).+"
+																value="${editStudent.email}" onchange="checkUnique(this.value,2)"pattern="[\w-]+@([\w-]+\.)+[\w-]+"
 																	name="student_email" placeholder="abc@xyz.com" required>
 															</div>
 														</div>
@@ -246,12 +245,14 @@
 
 
 												<div class="clearfix"></div>
-
+<!-- 
 											</div>
 
-										</div>
+										</div> -->
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 							</div>

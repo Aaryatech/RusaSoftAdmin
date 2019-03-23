@@ -329,6 +329,8 @@ public class LibraryController {
 
 				String librarian_name = request.getParameter("librarian_name");
 				String lib_con_num = request.getParameter("lib_con_num");
+				
+				int conf_type = Integer.parseInt(request.getParameter("conf_type"));
 
 				String librarian_email = request.getParameter("librarian_email");
 
@@ -346,7 +348,14 @@ public class LibraryController {
 					lib.setContactNo(lib_con_num);
 					lib.setEmail(librarian_email);
 					lib.setQualificationId(lib_quolf);
+					if(conf_type==1) {
 					lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
+					}
+					else{
+						lib.setRealivingDate(null);
+						
+						
+					}
 					lib.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
 					lib.setMakerUserId(maker_id);
 

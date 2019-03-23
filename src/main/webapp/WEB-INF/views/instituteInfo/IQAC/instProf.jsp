@@ -101,17 +101,17 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register Form
 											</a></li>
 
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
+										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
+ -->
 												<div>
 
 
@@ -124,7 +124,7 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
 																id="estb_date" name="estb_date" placeholder="dd-MM-YYYY"
-																placeholder="Date of Establishment of IQAC "
+																placeholder="Date of Establishment of IQAC " required
 																value="${date}">
 														</div>
 													</div>
@@ -172,14 +172,14 @@
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">FAX
-															No.<span class="text-danger">*</span>
+															No.<span class="text-danger"></span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																maxlength="10" maxlength="10" class="form-control"
 																id="fax_no" value="${instRes.iqacAltFax}" name="fax_no"
 																placeholder="FAX No of Alternate Faculty Associated"
-																required>
+																>
 														</div>
 													</div>
 
@@ -189,8 +189,9 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="email" class="form-control"
-																id="registered_email" value="${instRes.iqacAltEmail1}"
-																name="registered_email" placeholder="abc@xyz.com"
+																id="registered_email" 
+																 value="${instRes.iqacAltEmail1}"
+																name="registered_email" placeholder="abc@xyz.com" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
 																required>
 														</div>
 													</div>
@@ -200,9 +201,9 @@
 															Email <span class="text-danger"></span>
 														</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control" id="alt_email"
+															<input type="email" class="form-control" id="alt_email" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
 																value="${instRes.iqacAltEmail2}" name="alt_email"
-																placeholder="abc@xyz.com " required>
+																placeholder="abc@xyz.com " >
 														</div>
 													</div>
 
@@ -224,16 +225,16 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-9">
 															<input type="submit" id="sub1" class="btn btn-primary"
-																value="Save & Next">
+																value="Save">
 
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
 
 
-
+<!-- 
 												</div>
-											</div>
+											</div> -->
 
 
 											<div class="clearfix"></div>
@@ -241,6 +242,9 @@
 
 										</div>
 									</form>
+									
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 							</div>

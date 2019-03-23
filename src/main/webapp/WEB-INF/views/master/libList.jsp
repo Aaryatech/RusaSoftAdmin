@@ -112,7 +112,7 @@
 															id="studIds${count.index+1}"
 															value="${institute.librarianId}" /></td> --%>
 														
-														<td>${count.index+1}</td>
+														<td style="text-align: center; width:5%">${count.index+1}</td>
 														<td>${institute.librarianName}</td>
 														<td style="text-align: center; ">${institute.contactNo}</td>
 														<td >${institute.email}</td>

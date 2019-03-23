@@ -54,7 +54,7 @@
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 							<a href="${pageContext.request.contextPath}/showAddStudSupp"><button
-										type="button" class="btn btn-success">Add Scheme</button></a>
+										type="button" class="btn btn-success">Add </button></a>
 								
 							</div>
 
@@ -82,7 +82,7 @@
 												<th style="text-align: center; ">Scheme</th>
 												<th style="text-align: center; "> Level</th>
 												<th style="text-align: center; ">Type</th>
-												<th style="text-align: center; ">Benefited Students</th>
+												<th>Benefited Students</th>
 												<th style="text-align: center; ">Implementation Year</th>
 												<th style="text-align: center; ">Support Agency</th>
 												<th style="text-align: center; ">Actions</th>

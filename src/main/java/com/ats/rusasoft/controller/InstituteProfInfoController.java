@@ -380,6 +380,12 @@ public class InstituteProfInfoController {
 			List<InstituteFunctionalMOU> mouList = new ArrayList<>(Arrays.asList(instArray));
 
 			System.out.println("InstituteFunctionalMOU list is" + mouList.toString());
+			
+			 for(int i=0;i<mouList.size();i++) 
+			 {
+				 mouList.get(i).setMouFromdt(DateConvertor.convertToDMY(mouList.get(i).getMouFromdt()));
+				 mouList.get(i).setMouTodt(DateConvertor.convertToDMY(mouList.get(i).getMouTodt()));
+			 }
 
 			model.addObject("mouList", mouList);
 			
@@ -1322,7 +1328,7 @@ public class InstituteProfInfoController {
 			 map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", inst_id);
 
-			
+				model.addObject("addAccess", 0);
 			  LinkageMaster[] instArray = rest.postForObject(Constants.url +
 			  "getAllInstLinkageNamesByInstituteId", map, LinkageMaster[].class);
 			  List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
@@ -1805,6 +1811,12 @@ public class InstituteProfInfoController {
 		  
 		  System.out.println("pracList list is" + pracList.toString());
 		  model.addObject("pracList", pracList);
+		  for(int i=0;i<pracList.size();i++) 
+			 {
+			  pracList.get(i).setPracticesEffectiveFrom(DateConvertor.convertToDMY(pracList.get(i).getPracticesEffectiveFrom()));
+				
+			 }
+
 		  
 			
 			
@@ -1850,7 +1862,7 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showAddBestPractice", "showBestPractices", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showAddBestPractice", "showBestPractice", "0", "1", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 

@@ -57,7 +57,7 @@
 																class="btn btn-info">Add</button></a> -->
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
-								<a class="box_toggle fa fa-chevron-down"></a>
+							
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 

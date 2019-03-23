@@ -100,7 +100,7 @@
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
 									onsubmit="return checkBeforeSubmit()">
-
+<!-- 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register Form
@@ -108,10 +108,10 @@
 
 
 										</ul>
-
-										<div class="tab-content">
+ -->
+										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
+ -->
 												<div>
 
 													<div class="col-xs-12">
@@ -124,7 +124,7 @@
 															<label class="control-label col-sm-2" for="status">Scheme Name 
 															 <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<select id="approveValue" name="schemeName" class="form-control"  onchange="showExtraField()"  required>
 															<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
 																	<option value="${stud.schemeName}" selected>${stud.schemeName}</option>
@@ -153,7 +153,7 @@
 													<label class="control-label col-sm-2" for="page_order">
 														Another Scheme Name <span class="text-danger">*</span>
 													</label>
-														<div class="col-sm-10">
+														<div class="col-sm-6">
 															<input type="text" 
 																 class="form-control" id="anotherScheme" value="${stud.schemeName}" pattern="^(?!\s*$).+"
 																	 name="anotherScheme" placeholder="Another Scheme" onchange="checkUnique(this.value,1)">
@@ -165,7 +165,7 @@
 														<label class="control-label col-sm-2" for="status">Level
 															 <span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-10">
+														<div class="col-sm-6">
 															<select id="approveValue" name="level"class="form-control"  onchange="showExtraField()"  required>
 																
 																<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
@@ -188,7 +188,7 @@
 															<label class="control-label col-sm-2" for="status">Type
 															 <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<select id="approveValue" name="type"class="form-control"  onchange="showExtraField()"  required>
 															<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
 															
@@ -211,7 +211,7 @@
 															<label class="control-label col-sm-2" for="page_name">
 														No. of Students Benefited <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<input type="number" min="0" class="form-control" id="studBenifit" 	value="${stud.noStudentBenifited}"
 																	name="studBenifit" placeholder="Students Benifited" required>
 															</div>
@@ -225,7 +225,7 @@
 															<label class="control-label col-sm-2" for="page_order">
 														Name of Support Agency  <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<input type="text" 
 																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}" pattern="^(?!\s*$).+"
 																	 name="supportAgency" placeholder="Support Agency" onchange="checkUnique(this.value,1)" required>
@@ -239,7 +239,7 @@
 															<label class="control-label col-sm-2" for="page_order">Date/Year of Introduction
 															 <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-3">
+															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker" id=" yearofIntro"  placeholder="dd-MM-YYYY" 	value="${ydate}"
 																	name="yearofIntro"  required>
 															</div>
@@ -264,11 +264,11 @@
 														</div>
 
 												<div class="clearfix"></div>
-
+<!-- 
 											</div>
 
 										</div>
-
+ -->
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Field are  Mandatory.</p>
 								</div>

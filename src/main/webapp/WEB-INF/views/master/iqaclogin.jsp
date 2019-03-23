@@ -86,8 +86,7 @@
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/showInstituteInfoList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -100,7 +99,7 @@
 										action="${pageContext.request.contextPath}/insertInstituteInfo"
 										method="post" onsubmit="return checkBeforeSubmit()" name="form_sample_2"
 										id="form_sample_2">
-
+<!-- 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Information
@@ -108,9 +107,9 @@
 
 
 										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+ -->
+									<!-- 	<div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
 												<div>
 
@@ -282,12 +281,14 @@
 
 
 												<div class="clearfix"></div>
-
+<!-- 
 											</div>
 
-										</div>
+										</div> -->
 
 									</form>
+									   <p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 							</div>

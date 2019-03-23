@@ -57,8 +57,7 @@
 								  <c:if test="${addAccess == 0}"> 
 								<a
 									href="${pageContext.request.contextPath}/showAddCollaborationLinkages"><button
-										type="button" class="btn btn-success">Add</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-success">Add</button></a> 
 									</c:if>
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -99,7 +98,7 @@
 															id="selAll" onClick="selectedInst(this)" /> Select All</th>
 														
 												<tr>
-													<th width="10%">Sr No</th>
+													<th style="text-align: center; width:10%">Sr No</th>
 													<th>Name</th>
 													
 													<th>Nature</th>
@@ -121,7 +120,7 @@
 														<tr>
 															<td><input type="checkbox" class="chk" name="linkIds"
 																id="linkIds${count.index+1}" value="${linkageList.linkId}" /></td>
-															<td>${count.index+1}</td>
+															<td style="text-align: center; width:10%">${count.index+1}</td>
 															<td>${linkageList.linknameText}</td>
 															<td>${linkageList.linkNature}</td>
 															<td>${linkageList.linkAgency}</td>

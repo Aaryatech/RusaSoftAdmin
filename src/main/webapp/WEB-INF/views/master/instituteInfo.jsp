@@ -51,7 +51,7 @@
                 <div class="actions panel_actions pull-right"> 
                  <c:if test="${addAccess == 0}"> 
                  <a href="${pageContext.request.contextPath}/showFillInstituteInfo">
-                 <button type="button" class="btn btn-success">Add Institution Information</button></a>
+                 <button type="button" class="btn btn-success">Add </button></a>
              </c:if>
                    <!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -83,7 +83,7 @@
                   <!--   <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th> -->
-                   		<th width="5%">Sr No</th>
+                   		<th  style="text-align: center; width:10%">Sr No</th>
                         <th>Academic Year</th> 
                         <th>Faculty</th> 
                         <th>Nonteaching Including Office Staff</th> 
@@ -101,12 +101,12 @@
 													<%-- 	<td><input type="checkbox" class="chk" name="infoDetailIds"
 															id="infoDetailIds${count.index+1}"
 															value="${inst.infoDetailId}" /></td> --%>
-														<td  style="text-align: center; ">${count.index+1}</td>
-														<td  style="text-align: center; ">${inst.academicYear}</td>
-														<td   style="text-align: center; ">${inst.noOfFulltimeFaculty}</td>
-														<td  style="text-align: center; ">${inst.noNonteachingIncludingOfficeStaff}</td>
-														<td  style="text-align: center; ">${inst.noSupportStaff}</td>
-														<td  style="text-align: center; ">${inst.noCurrentAdmitedStnt}</td>
+														<td  style="text-align: center; width:10%">${count.index+1}</td>
+														<td>${inst.academicYear}</td>
+														<td>${inst.noOfFulltimeFaculty}</td>
+														<td>${inst.noNonteachingIncludingOfficeStaff}</td>
+														<td>${inst.noSupportStaff}</td>
+														<td>${inst.noCurrentAdmitedStnt}</td>
 														<td style="text-align: center; ">
 															  <c:if test="${editAccess == 0}"> 
 														<a
@@ -144,7 +144,12 @@
         </div>
     </div>
     </div>
+   
     </form>
+    
+  
+    
+    
         </section></div>
 
 
