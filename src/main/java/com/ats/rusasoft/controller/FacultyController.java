@@ -889,17 +889,27 @@ public class FacultyController {
 			String coName = request.getParameter("coName");
 			int coId = Integer.parseInt(request.getParameter("coId"));
 
-			SubjectCo subjectCo = new SubjectCo();
-			subjectCo.setCoId(coId);
-			subjectCo.setDelStatus(1);
-			subjectCo.setIsActive(1);
-			subjectCo.setMakerEnterDatetime(sf.format(date));
-			subjectCo.setSubId(subId);
-			subjectCo.setFacultyId(userObj.getGetData().getUserDetailId());
-			subjectCo.setMakerUserId(userObj.getUserId());
-			subjectCo.setCoName(coName);
-
-			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+			if(coId!=0) { 
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("coName", coName);
+				map.add("coId", coId);
+				Info info = rest.postForObject(Constants.url + "/updateSubjeCoName", map, Info.class);
+				
+			}else {
+				
+				SubjectCo subjectCo = new SubjectCo();
+				subjectCo.setCoId(coId);
+				subjectCo.setDelStatus(1);
+				subjectCo.setIsActive(1);
+				subjectCo.setMakerEnterDatetime(sf.format(date));
+				subjectCo.setSubId(subId);
+				subjectCo.setFacultyId(userObj.getGetData().getUserDetailId());
+				subjectCo.setMakerUserId(userObj.getUserId());
+				subjectCo.setCoName(coName);
+	
+				SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+			}
 
 		} catch (Exception e) {
 
