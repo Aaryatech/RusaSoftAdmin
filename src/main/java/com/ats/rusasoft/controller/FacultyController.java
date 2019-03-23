@@ -1031,17 +1031,23 @@ public class FacultyController {
 
 		try {
 
-			String[] ids = request.getParameterValues("poIds");
-			String satisfyingValue = request.getParameter("satisfyingValue");
-
 			String poIds = new String();
-
-			for (int i = 0; i < ids.length; i++) {
-				System.out.println(ids[i]);
-				poIds = poIds + "," + ids[i];
+			
+			try {
+				String[] ids = request.getParameterValues("poIds");
+				for (int i = 0; i < ids.length; i++) {
+					System.out.println(ids[i]);
+					poIds = poIds + "," + ids[i];
+				}
+				subjectCo.setCoPoMap(poIds.substring(1, poIds.length()));
+				
+			}catch(Exception e) {
+				
+				subjectCo.setCoPoMap("");
 			}
-
-			subjectCo.setCoPoMap(poIds.substring(1, poIds.length()));
+			
+			String satisfyingValue = request.getParameter("satisfyingValue");
+ 
 			subjectCo.setCoPoSatisfyingValue(satisfyingValue);
 			System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
@@ -1109,17 +1115,26 @@ public class FacultyController {
 
 		try {
 
-			String[] ids = request.getParameterValues("psoIds");
+			String poIds = new String();
+			
+			try {
+				String[] ids = request.getParameterValues("psoIds");
+				
+				for (int i = 0; i < ids.length; i++) {
+					System.out.println(ids[i]);
+					poIds = poIds + "," + ids[i];
+				}
+
+				subjectCo.setCoPsoMap(poIds.substring(1, poIds.length()));
+				
+			}catch(Exception e) {
+				
+				subjectCo.setCoPsoMap("");
+			}
+			
 			String satisfyingValue = request.getParameter("satisfyingValue");
 
-			String poIds = new String();
-
-			for (int i = 0; i < ids.length; i++) {
-				System.out.println(ids[i]);
-				poIds = poIds + "," + ids[i];
-			}
-
-			subjectCo.setCoPsoMap(poIds.substring(1, poIds.length()));
+			 
 			subjectCo.setCoPsoSatisfyingValue(satisfyingValue);
 			System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);

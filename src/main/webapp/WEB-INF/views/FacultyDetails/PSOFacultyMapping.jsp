@@ -115,7 +115,7 @@
 													<tr>
 														<th>Sr No <!-- <input type="checkbox" id="checkAll"
 															onClick="toggle(this)" /> --><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /></th>
-														<th>Program Outcomes (PO as per Accreditation Manual)</th>
+														<th>Program Specific Outcomes (PsO as per Accreditation Manual)</th>
 													</tr>
 
 												</thead>
