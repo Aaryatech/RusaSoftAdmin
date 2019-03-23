@@ -98,8 +98,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteSupport"
 										method="post" onsubmit="return checkBeforeSubmit()"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										name="form_sample_2" id="form_sample_2" >
 
 										<%-- 	<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -134,7 +133,35 @@
 																	onclick="setGovernmentValue(this.value)">
 															</div>
 														</div> -->
+										<div class="form-group">
+													<label class="control-label col-sm-3" for="status">
+													Year  <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<select id="academic_year" name="academic_year" class="form-control" required>
+																<%-- <c:forEach items="${acaYearList}" var="acaYear">
+																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
+																	
+																	</c:forEach> --%>
+																	
+																		<c:forEach items="${acaYearList}" var="acaYearList">
+																		<c:choose>
+																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
+																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+													</select>
+                                       </div>
+										</div>	
 										<div id="abc">
 												<input type="hidden" id="inst_scheme_id"  name="inst_scheme_id"
 														placeholder="" value="${instSpprt.instSchemeId}">
@@ -202,6 +229,8 @@
 											</div> -->
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

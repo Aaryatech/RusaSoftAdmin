@@ -121,19 +121,51 @@
 															<th rowspan="2">Type of Activity</th>
 															<th rowspan="2">Level of Activity</th>
 															<th rowspan="2">Name of Activity</th>
-															<th style="text-align: center;" colspan="2">Duration</th>
+															<th>From Date</th>
+															<th>To Date</th>
+															<!-- <th style="text-align: center;" colspan="2">Duration</th> -->
 															<th rowspan="2">Total Participants</th>
 															<th rowspan="2">Action</th>
 
 														</tr>
-														<tr>
+														<!-- <tr>
 															<th>From Date</th>
 															<th>To Date</th>
-														</tr>
+														</tr> -->
 													</thead>
 													<tbody>
+												<c:forEach items="${instActList}" var="activList"
+													varStatus="count">
+													<tr>
+														<%-- <td><input type="checkbox" class="chk"
+															name="bookIds" id="bookIds${count.index+1}"
+															value="${bList.bookId}" /></td> --%>
+														<td>${count.index+1}</td>
+														<td>${activList.instActivityType}</td>
+														<td>${activList.instActivityLevel}</td>
+														<td>${activList.instActivityName}</td>
+														<td>${activList.instActivityFromdt}</td>
+														<td>${activList.instActivityTodt}</td>
+														<td>${activList.instActivityParticipation}</td>
+														
+														<td><%-- <c:if test="${editAccess==0}"> --%>
+																<a 
+																	href="${pageContext.request.contextPath}/editActivity/${activList.instActivityId}">
+																	<span class="glyphicon glyphicon-edit"  title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
+																<a
+																	href="${pageContext.request.contextPath}/deleteActivity/${activList.instActivityId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger"  title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															<%-- </c:if> --%></td>
+													</tr>
+												</c:forEach>
 
-													</tbody>
+											</tbody>
 												</table>
 
 											</div>

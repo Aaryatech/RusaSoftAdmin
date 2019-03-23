@@ -299,6 +299,30 @@
 																	placeholder="Year of highest Qualification Required" onkeypress='return restrictAlphabets(event)'
 																	value="${staff.hightestQualificationYear}" required>
 															</div>
+															<!-- <div class="col-sm-2">
+													<select id="yr_highest_qualification_acqrd" name="yr_highest_qualification_acqrd" class="form-control" required>
+																<%-- <c:forEach items="${acaYearList}" var="acaYear">
+																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
+																	
+																	</c:forEach> --%>
+																	
+																		<c:forEach items="${acaYearList}" var="acaYearList">
+																		<c:choose>
+																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
+																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+													</select>
+                                       </div> -->
 														</div>
 
 														<div class="form-group">

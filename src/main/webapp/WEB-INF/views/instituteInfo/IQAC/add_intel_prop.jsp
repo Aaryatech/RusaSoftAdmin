@@ -97,8 +97,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertPropIntelRight"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 										<%-- 
@@ -112,8 +112,10 @@
 										<!-- 	<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
  -->
-
-
+					
+							
+									<input type="hidden" id="intel_id"  name="intel_id"
+														placeholder="" value="${intelProp.conId}">
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="initiativeName">
@@ -122,9 +124,9 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="ipr_title"
-													required name="ipr_title" autocomplete="off"
+													required name="ipr_title" autocomplete="off" pattern="^(?!\s*$).+"
 													placeholder="Title of IPR-Industry-Academic Initiative  "
-													value="${page.pageName}">
+													value="${intelProp.conName}">
 											</div>
 										</div>
 
@@ -138,8 +140,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
+													autocomplete="off" id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
+													value="${intelProp.conFromdt}" pattern="^(?!\s*$).+" required>
 
 											</div>
 										</div>
@@ -150,9 +152,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
-													value="${page.pageName}" required>
+												<input type="text" class="form-control datepicker" pattern="^(?!\s*$).+"
+													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
+													value="${intelProp.conTodt}" required>
 											</div>
 										</div>
 
@@ -163,27 +165,27 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" id="participant"
-													autocomplete="off" name="participant"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													placeholder="No. of Participants" value="${page.pageName}"
+												<input type="text" class="form-control" id="participant"
+													autocomplete="off" name="participant" pattern="^(?!\s*$).+"
+													onkeypress="return allowOnlyNumber(event)"  onkeypress='return restrictAlphabets(event)'
+													placeholder="No. of Participants" value="${intelProp.conPcount}"
 													required>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
+												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+																<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -357,7 +359,37 @@
 	}
 	</script>
 
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 </body>
 </html>

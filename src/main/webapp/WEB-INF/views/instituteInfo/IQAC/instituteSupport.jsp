@@ -178,7 +178,19 @@
 
 											</table>
 
+											<div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
 
+								<button type="button" class="btn btn-primary" onclick="exportToExcel();"  id="expExcel" 
+									style="align-content: center; width: 200px; margin-left: 80px; background-color: #03A9F4;">
+									Export To Excel</button>
+									
+									<button type="button" class="btn btn-primary"
+										onclick="genPdf()" id="PDFButton"
+										style="align-content: center; width: 100px; margin-left: 80px; background-color: #03A9F4;">
+										PDF</button>
+							</div>
+							</div>
 										</div>
 									</form>
 								</div>
@@ -312,7 +324,21 @@
 		}
 	</script>
 
+<script type="text/javascript">
+		function exportToExcel() {
 
+			window.open("${pageContext.request.contextPath}/exportToExcel");
+			document.getElementById("expExcel").disabled = true;
+		}
+	
+		function genPdf() {
+			//alert("hiii");
+			
+			window.open("${pageContext.request.contextPath}/instituteSchemePdf");
+			document.getElementById("expExcel").disabled = true;
+
+		}
+	</script>
 
 
 

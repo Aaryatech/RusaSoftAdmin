@@ -96,18 +96,20 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertGenderEqualityPrgData"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
+										<input type="hidden"  id="gender_eqlity _id" name="gender_eqlity _id" 
+												 value="${gndrEqual.gprogId}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="title">Title
 												of Program <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="title"
-													autocomplete="off" name="title"
-													placeholder="Title of Program" value="${page.pageName}"
+													autocomplete="off" name="title" pattern="^(?!\s*$).+"
+													placeholder="Title of Program" value="${gndrEqual.gprogName}"
 													required>
 											</div>
 										</div>
@@ -118,9 +120,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${page.pageName}" required>
+												<input type="text" class="form-control datepicker" onkeypress='return restrictAlphabets(event)'
+												pattern="^(?!\s*$).+" autocomplete="off" id="fromDate" name="fromDate"
+													value="${gndrEqual.gprogFromdt}" required>
 
 											</div>
 										</div>
@@ -131,9 +133,10 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" 
+												onkeypress='return restrictAlphabets(event)' pattern="^(?!\s*$).+"
 													autocomplete="off" id="toDate" name="toDate"
-													value="${page.pageName}" required>
+													value="${gndrEqual.gprogTodt}" required>
 											</div>
 										</div>
 
@@ -144,27 +147,27 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" id="participant"
-													autocomplete="off" name="participant"
+												<input type="text" class="form-control" id="participant"
+													autocomplete="off" name="participant" 
+													onkeypress='return restrictAlphabets(event)' pattern="^(?!\s*$).+"
 													onkeypress="return allowOnlyNumber(event)" min="0"
-													placeholder="No. of Participants" value="${page.pageName}"
+													placeholder="No. of Participants" value="${gndrEqual.gprogPcount}"
 													required>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
+												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
-												<input type="hidden" id="is_view" name="is_view" value="0">
+																<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -339,7 +342,37 @@
 	}
 	</script>
 
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 </body>
 </html>
