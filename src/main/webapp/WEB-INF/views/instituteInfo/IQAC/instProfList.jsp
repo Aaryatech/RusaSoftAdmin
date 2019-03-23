@@ -54,11 +54,11 @@
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 							
-							 <%--  <c:if test="${addAccess == 0}">  --%>
+							 <c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showInstProf"><button
 										type="button" class="btn btn-success">Add</button></a>
 							
-							<%-- 	</c:if> --%>
+								</c:if> 
 								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -105,7 +105,7 @@
 													<tr>
 															<c:if test="${instProfRes!=null}">
 														<td>1</td>
-														<td>${date}</td>
+														<td style="text-align: center; ">${date}</td>
 														<td>${instProfRes.iqacAltName}</td>
 														<td style="text-align: center; ">${instProfRes.iqacAltFax}</td>
 														
@@ -114,14 +114,14 @@
 
 
 														<td style="text-align: center; ">
-													<%--   <c:if test="${editAccess == 0}">  --%>
+													  <c:if test="${editAccess == 0}"> 
 														<a
 															href="${pageContext.request.contextPath}/showInstProf"><span
-																class="glyphicon glyphicon-edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a>
-															<%-- 	</c:if> | --%>
-															<%-- 	  <c:if test="${deleteAccess == 0}"> --%> &nbsp;&nbsp;&nbsp;&nbsp;
-															<%-- <a
+																class="glyphicon glyphicon-edit" title="Edit"  title="Edit" data-original-title="Edit"
+																data-animate=" animated fadeIn " ></span></a>
+																</c:if> &nbsp;&nbsp;&nbsp;&nbsp;
+																  <%-- <c:if test="${deleteAccess == 0}"> &nbsp;&nbsp;&nbsp;&nbsp;
+															<a
 															href="${pageContext.request.contextPath}/deleteInstProf/${instProfRes.iqacInfoId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger"
@@ -136,11 +136,11 @@
 									</table>
 					
 	                              <div class="col-lg-1">
-
+  <c:if test="${deleteAccess == 0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
+												style="align-content: center; width: 113px; margin-left: 40px;"></c:if>
 													<input type="hidden" id="edit_stud_id"   name="edit_stud_id" value="0">
 
 

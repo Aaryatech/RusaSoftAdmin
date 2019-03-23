@@ -96,6 +96,8 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
+								
+								  <c:if test="${addAccess == 0}"> 
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLinkageMaster"
 										method="post" name="form_sample_2" id="form_sample_2"
@@ -138,7 +140,7 @@
 										</div>
 									</form>
 									
-									
+									</c:if>
 									
 									
 
@@ -177,29 +179,30 @@
 
 
 															<td style="text-align: center;">
-																<%--   <c:if test="${editAccess == 0}">  --%> <a
+																  <c:if test="${editAccess == 0}">  <a
 																href="#" onclick="showEditLinkage(${colList.linknameId})"><span
-																	class="glyphicon glyphicon-edit"
+																	class="glyphicon glyphicon-edit"  title="Edit" data-original-title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-																<%-- </c:if> | --%> <%--   <c:if test="${deleteAccess == 0}"> --%>
+																</c:if>    <c:if test="${deleteAccess == 0}">
 																&nbsp;&nbsp;&nbsp;&nbsp; <a
 																href="${pageContext.request.contextPath}/deleteLinkages/${colList.linknameId}"
 																onClick="return confirm('Are you sure want to delete this record');"
-																rel="tooltip" data-color-class="danger"
+																rel="tooltip" data-color-class="danger" title="Delete" data-original-title="Delete"
 																data-animate=" animated fadeIn " data-toggle="tooltip"
 																data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a> <%-- 	</c:if> --%>
+																	class="glyphicon glyphicon-remove"></span></a> 
+																		</c:if>
 															</td>
 														</tr>
 													</c:forEach>
 											</tbody>
 										</table>
-
+  								<c:if test="${deleteAccess == 0}">
 										<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
-											<input type="text" id="edit_linkage_id" name="edit_linkage_id"
+												style="align-content: center; width: 113px; margin-left: 40px;"></c:if>
+											<input type="hidden" id="edit_linkage_id" name="edit_linkage_id"
 												value="0">
 </form>
 
