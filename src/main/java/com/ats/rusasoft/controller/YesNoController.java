@@ -41,11 +41,14 @@ public class YesNoController {
 	List<YesNoMaster> yesNoMasterList = new ArrayList<>();
 	List<YesNoMaster> yesNoMasterListPage2 = new ArrayList<>();
 	List<YesNoMaster> yesNoMasterListPage3 = new ArrayList<>();
-	
+	List<YesNoMaster> yesNoMasterListPage4 = new ArrayList<>();
+	List<YesNoMaster> yesNoMasterListPage5 = new ArrayList<>();
 	
 	List<InstituteYesNo> instituteYesNoList = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage2 = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage3 = new ArrayList<>();
+	List<InstituteYesNo> instituteYesNoListPage4 = new ArrayList<>();
+	List<InstituteYesNo> instituteYesNoListPage5 = new ArrayList<>();
 	
 	List<InstituteYesNo> instituteYesNoTab1List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab2List = new ArrayList<>();
@@ -65,7 +68,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Select Yes No");
+			model.addObject("title", "eFacilities Details");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE1");
@@ -230,7 +233,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Fill Information");
+			model.addObject("title", "Examination Related Grivence");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -556,7 +559,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Select Yes No");
+			model.addObject("title", "Stakeholder's Feedback Details");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE2");
@@ -722,7 +725,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Select Yes No");
+			model.addObject("title", "Gender Sensitivity Display");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE3");
@@ -877,6 +880,336 @@ public class YesNoController {
 
 	}
 	
+	@RequestMapping(value = "/selectYestNoPageFourth", method = RequestMethod.GET)
+	public ModelAndView selectYestNoPageFourth(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("yesno/YesNoValues4");
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+
+			model.addObject("title", "Environmental Consciousness Display");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("pageCode", "PAGE4");
+			YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
+					YesNoMaster[].class);
+			yesNoMasterListPage4 = new ArrayList<>(Arrays.asList(yesNoMaster));
+
+			SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
+					SectionList[].class);
+			List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("pageCode", "PAGE4");
+			InstituteYesNo[] instituteYesNo = restTemplate
+					.postForObject(Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
+			instituteYesNoListPage4 = new ArrayList<>(Arrays.asList(instituteYesNo));
+
+			/*
+			 * System.out.println("yesNoMasterList " + yesNoMasterList);
+			 * System.out.println("sectionList " + sectionList);
+			 * System.out.println("instituteYesNoList " + instituteYesNoList);
+			 */
+
+			model.addObject("yesNoMasterList", yesNoMasterListPage4);
+			model.addObject("sectionList", sectionList);
+			model.addObject("instituteYesNoList", instituteYesNoListPage4);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/submitYesNoPageFourth", method = RequestMethod.POST)
+	public String submitYesNoPageFourth(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			int count = Integer.parseInt(request.getParameter("srindex"));
+
+			List<InstituteYesNo> save = new ArrayList<>();
+
+			for (int i = 0; i < yesNoMasterListPage4.size(); i++) {
+
+				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterListPage4.get(i).getYesnoId()));
+				int find = 0;
+
+				for (int j = 0; j < instituteYesNoListPage4.size(); j++) {
+
+					if (instituteYesNoListPage4.get(j).getYesnoId() == yesNoMasterListPage4.get(i).getYesnoId()) {
+						find = 1;
+
+						if (value == 1) {
+							instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
+							instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
+							instituteYesNoListPage4.get(j).setInstYesnoResponse(
+									request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId()));
+						} else {
+
+							instituteYesNoListPage4.get(j).setDelStatus(0);
+						}
+
+					}
+				}
+
+				if (find == 0 && value == 1) {
+
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode(yesNoMasterListPage4.get(i).getYesnoPagecode());
+					instituteYesNo.setSectionCode(yesNoMasterListPage4.get(i).getYesnoSeccode());
+					instituteYesNo.setInstYesnoResponse(
+							request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId()));
+					instituteYesNo.setYearId(acYearId);
+					instituteYesNo.setYesnoId(yesNoMasterListPage4.get(i).getYesnoId());
+					instituteYesNoListPage4.add(instituteYesNo);
+				}
+
+			}
+
+			for (int j = 0; j < instituteYesNoListPage4.size(); j++) {
+
+				if (instituteYesNoListPage4.get(j).getYesnoId() == 0) {
+					int value = Integer.parseInt(
+							request.getParameter("dynamicprevyesno" + instituteYesNoListPage4.get(j).getInstYesnoId()));
+
+					if (value == 1) {
+						instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
+						instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
+						instituteYesNoListPage4.get(j).setInstYesnoResponse(request
+								.getParameter("dynamicprevyesnovalue" + instituteYesNoListPage4.get(j).getInstYesnoId()));
+					} else {
+
+						instituteYesNoListPage4.get(j).setDelStatus(0);
+					}
+				}
+
+			}
+
+			if (count != 0) {
+				for (int j = 1; j <= count; j++) {
+
+					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
+
+					if (value == 1) {
+						InstituteYesNo instituteYesNo = new InstituteYesNo();
+						instituteYesNo.setDelStatus(1);
+						instituteYesNo.setIsActive(1);
+						instituteYesNo.setMakerUserId(userObj.getUserId());
+						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+						instituteYesNo.setMakerDatetime(sf.format(date));
+						instituteYesNo.setYesnoPagecode("PAGE3");
+						instituteYesNo.setSectionCode("other");
+						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
+						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
+						instituteYesNo.setYearId(acYearId);
+						instituteYesNoListPage4.add(instituteYesNo);
+					}
+				}
+
+			}
+			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+					instituteYesNoListPage4, InstituteYesNo[].class);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/selectYestNoPageFourth";
+
+	}
+	
+	@RequestMapping(value = "/selectYestNoPageFifth", method = RequestMethod.GET)
+	public ModelAndView selectYestNoPageFifth(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("yesno/YesNoValues5");
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+
+			model.addObject("title", "Human Values - Professional Ethics Display");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("pageCode", "PAGE5");
+			YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
+					YesNoMaster[].class);
+			yesNoMasterListPage5 = new ArrayList<>(Arrays.asList(yesNoMaster));
+
+			SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
+					SectionList[].class);
+			List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("pageCode", "PAGE5");
+			InstituteYesNo[] instituteYesNo = restTemplate
+					.postForObject(Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
+			instituteYesNoListPage5 = new ArrayList<>(Arrays.asList(instituteYesNo));
+
+			/*
+			 * System.out.println("yesNoMasterList " + yesNoMasterList);
+			 * System.out.println("sectionList " + sectionList);
+			 * System.out.println("instituteYesNoList " + instituteYesNoList);
+			 */
+
+			model.addObject("yesNoMasterList", yesNoMasterListPage5);
+			model.addObject("sectionList", sectionList);
+			model.addObject("instituteYesNoList", instituteYesNoListPage5);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/submitYesNoPageFifth", method = RequestMethod.POST)
+	public String submitYesNoPageFifth(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			int count = Integer.parseInt(request.getParameter("srindex"));
+
+			List<InstituteYesNo> save = new ArrayList<>();
+
+			for (int i = 0; i < yesNoMasterListPage5.size(); i++) {
+
+				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterListPage5.get(i).getYesnoId()));
+				int find = 0;
+
+				for (int j = 0; j < instituteYesNoListPage5.size(); j++) {
+
+					if (instituteYesNoListPage5.get(j).getYesnoId() == yesNoMasterListPage5.get(i).getYesnoId()) {
+						find = 1;
+
+						if (value == 1) {
+							instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
+							instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
+							instituteYesNoListPage5.get(j).setInstYesnoResponse(
+									request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId()));
+						} else {
+
+							instituteYesNoListPage5.get(j).setDelStatus(0);
+						}
+
+					}
+				}
+
+				if (find == 0 && value == 1) {
+
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode(yesNoMasterListPage5.get(i).getYesnoPagecode());
+					instituteYesNo.setSectionCode(yesNoMasterListPage5.get(i).getYesnoSeccode());
+					instituteYesNo.setInstYesnoResponse(
+							request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId()));
+					instituteYesNo.setYearId(acYearId);
+					instituteYesNo.setYesnoId(yesNoMasterListPage5.get(i).getYesnoId());
+					instituteYesNoListPage5.add(instituteYesNo);
+				}
+
+			}
+
+			for (int j = 0; j < instituteYesNoListPage5.size(); j++) {
+
+				if (instituteYesNoListPage5.get(j).getYesnoId() == 0) {
+					int value = Integer.parseInt(
+							request.getParameter("dynamicprevyesno" + instituteYesNoListPage5.get(j).getInstYesnoId()));
+
+					if (value == 1) {
+						instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
+						instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
+						instituteYesNoListPage5.get(j).setInstYesnoResponse(request
+								.getParameter("dynamicprevyesnovalue" + instituteYesNoListPage5.get(j).getInstYesnoId()));
+					} else {
+
+						instituteYesNoListPage5.get(j).setDelStatus(0);
+					}
+				}
+
+			}
+
+			if (count != 0) {
+				for (int j = 1; j <= count; j++) {
+
+					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
+
+					if (value == 1) {
+						InstituteYesNo instituteYesNo = new InstituteYesNo();
+						instituteYesNo.setDelStatus(1);
+						instituteYesNo.setIsActive(1);
+						instituteYesNo.setMakerUserId(userObj.getUserId());
+						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+						instituteYesNo.setMakerDatetime(sf.format(date));
+						instituteYesNo.setYesnoPagecode("PAGE3");
+						instituteYesNo.setSectionCode("other");
+						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
+						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
+						instituteYesNo.setYearId(acYearId);
+						instituteYesNoListPage5.add(instituteYesNo);
+					}
+				}
+
+			}
+			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+					instituteYesNoListPage5, InstituteYesNo[].class);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return "redirect:/selectYestNoPageFifth";
+
+	}
+	
 	@RequestMapping(value = "/fixedYesNoSecond", method = RequestMethod.GET)
 	public ModelAndView fixedYesNoSecond(HttpServletRequest request, HttpServletResponse response) {
 
@@ -887,7 +1220,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Fill Information");
+			model.addObject("title", "Curriculam and Cross Cutting Issues");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 

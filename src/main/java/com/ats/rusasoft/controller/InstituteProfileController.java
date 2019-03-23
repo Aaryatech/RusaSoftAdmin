@@ -1,4 +1,4 @@
-package com.ats.rusasoft.controller;
+/*package com.ats.rusasoft.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -62,7 +62,7 @@ public class InstituteProfileController {
 
 	}
 
-	/*
+	
 	 * @RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
 	 * public ModelAndView showVisionMission(HttpServletRequest request,
 	 * HttpServletResponse response) {
@@ -81,11 +81,11 @@ public class InstituteProfileController {
 	 * return model;
 	 * 
 	 * }
-	 */
+	 
 
 	
 	
-	/*
+	
 	 * @RequestMapping(value = "/showActivityOrganized", method = RequestMethod.GET)
 	 * public ModelAndView showActivityOrganized(HttpServletRequest request,
 	 * HttpServletResponse response) {
@@ -124,7 +124,7 @@ public class InstituteProfileController {
 	 * return model;
 	 * 
 	 * }
-	 */
+	 
 	@RequestMapping(value = "/showEContentFacilities", method = RequestMethod.GET)
 	public ModelAndView showEContentFacilities(HttpServletRequest request, HttpServletResponse response) {
 
@@ -395,7 +395,7 @@ public class InstituteProfileController {
 
 	}
 
-	/*
+	
 	 * @RequestMapping(value = "/showEGovernanceFacilities", method =
 	 * RequestMethod.GET) public ModelAndView
 	 * showEGovernanceFacilities(HttpServletRequest request, HttpServletResponse
@@ -416,7 +416,7 @@ public class InstituteProfileController {
 	 * return model;
 	 * 
 	 * }
-	 */
+	 
 
 	
 	
@@ -739,3 +739,4 @@ public class InstituteProfileController {
 
 }
 
+*/

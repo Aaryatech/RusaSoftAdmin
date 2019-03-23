@@ -261,14 +261,14 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary"
-																onclick="submit_f(1)" value="Save"> <input
+																onclick="submit_f(1)" value="Save" id="savebtn"> <input
 																type="submit" class="btn btn-primary"
-																onclick="submit_f(0)" value="Save & Next">
+																onclick="submit_f(0)" value="Save & Next" id="savenextbtn">
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
 
-
+ 
 
 													<div class="clearfix"></div>
 
@@ -341,7 +341,8 @@
           var x=confirm("Do you really want to submit the form?");
           if(x==true){
         wasSubmitted = true;
-          document.getElementById("sub_button").disabled=true;
+          document.getElementById("savebtn").disabled=true;
+          document.getElementById("savenextbtn").disabled=true;
         return wasSubmitted;
           }
       }
