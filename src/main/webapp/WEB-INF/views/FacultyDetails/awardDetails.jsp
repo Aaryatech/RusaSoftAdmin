@@ -98,25 +98,25 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertAwardDetail"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit();">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										<!-- <div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
 												<div>
 
-<%-- 
-													<input type="hidden" id="award_id" name="awardId"
-														value="${award.awardId}"> --%>
 
-														<div class="form-group">
+													<input type="hidden" id="award_id" name="awardId"
+														value="${award.awardId}">
+
+													<div class="form-group">
 														<label class="control-label col-sm-2" for="name">Name
 															of Award/Recognition <span class="text-danger">*</span>
 														</label>
@@ -124,18 +124,19 @@
 															<input type="text" class="form-control" id="name"
 																autocomplete="off" name="name"
 																placeholder="Name of Award/Recognition"
-																value="${award.awardName}" required>
+																value="${award.awardName}" required onchange="trim(this)">
 														</div>
 													</div>
-												<div class="form-group">
+													<div class="form-group">
 
 														<label class="control-label col-sm-2" for="agency">Awarding
 															Agency/Authority <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="agency"
-																name="agency" placeholder="Awarding Agency" autocomplete="off"
-																value="${award.awardAuthority}" required>
+																name="agency" placeholder="Awarding Agency"
+																autocomplete="off" value="${award.awardAuthority}"
+																required onchange="trim(this)">
 														</div>
 
 													</div>
@@ -146,9 +147,10 @@
 															of Award/Recognition <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="nature" autocomplete="off"
-																name="nature" placeholder="Nature of Award/Recognition"
-																value="${award.awardNature}" required>
+															<input type="text" class="form-control" id="nature"
+																autocomplete="off" name="nature"
+																placeholder="Nature of Award/Recognition"
+																value="${award.awardNature}" required onchange="trim(this)">
 														</div>
 													</div>
 
@@ -160,8 +162,8 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="date" name="date" placeholder="Date" autocomplete="off"
-																value="${award.awardDate}" required>
+																id="date" name="date" placeholder="Date"
+																autocomplete="off" value="${award.awardDate}" required>
 														</div>
 
 													</div>
@@ -170,47 +172,98 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															Duration <input type="radio" name="validity" 
-																id="validity" checked value="0" onclick="check1()">
+															<c:choose>
+																<c:when test="${award.awardValidity==1}">
+														Duration <input type="radio" name="validity" id="validity"
+																		value="0" onclick="check1()">
 															Lifetime<input onclick="check()" type="radio"
-																name="validity" id="validity" value="1">
+																		name="validity" id="validity" value="1" checked>
+																</c:when>
+																<c:otherwise>
+														Duration <input type="radio" name="validity" id="validity"
+																		checked value="0" onclick="check1()">
+															Lifetime<input onclick="check()" type="radio"
+																		name="validity" id="validity" value="1">
+																</c:otherwise>
+															</c:choose>
+
+
 														</div>
 													</div>
 													<input type="hidden" id="is_view" name="is_view" value="0">
-													<div id="abc">
-														<div class="form-group">
+
+													<c:choose>
+														<c:when test="${award.awardValidity==1}">
+															<div id="abc" style="display: none;">
+																<div class="form-group">
 
 
-															<label class="control-label col-sm-2" id="fromDate"
-																for="validitydate">From <span
-																class="text-danger"></span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker" autocomplete="off"
-																	placeholder="From Date" id="fromDate" name="fromDate"
-																	value="${award.awardValidityFrom}" required>
+																	<label class="control-label col-sm-2"  
+																		for="fromDate">From <span
+																		class="text-danger"></span>
+																	</label>
+																	<div class="col-sm-6">
+																		<input type="text" class="form-control datepicker"
+																			autocomplete="off" placeholder="From Date"
+																			id="fromDate" name="fromDate"
+																			value="${award.awardValidityFrom}"  >
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="control-label col-sm-2" 
+																		for="toDate">To <span class="text-danger"></span>
+																	</label>
+																	<div class="col-sm-6">
+																		<input type="text" class="form-control datepicker"
+																			autocomplete="off" id="toDate" name="toDate"
+																			placeholder="To Date"
+																			value="${award.awardValidityTo}"  >
+																	</div>
+
+																</div>
 															</div>
-														</div>
+														</c:when>
+														<c:otherwise>
+															<div id="abc">
+																<div class="form-group">
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" id="toDate"
-																for="toDate">To <span class="text-danger"></span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker" autocomplete="off"
-																	id="toDate" name="toDate" placeholder="To Date"
-																	value="${award.awardValidityTo}" required>
+
+																	<label class="control-label col-sm-2" 
+																		for="fromDate">From <span
+																		class="text-danger"></span>
+																	</label>
+																	<div class="col-sm-6">
+																		<input type="text" class="form-control datepicker"
+																			autocomplete="off" placeholder="From Date"
+																			id="fromDate" name="fromDate"
+																			value="${award.awardValidityFrom}" required>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="control-label col-sm-2"
+																		for="toDate">To <span class="text-danger"></span>
+																	</label>
+																	<div class="col-sm-6">
+																		<input type="text" class="form-control datepicker"
+																			autocomplete="off" id="toDate" name="toDate"
+																			placeholder="To Date"
+																			value="${award.awardValidityTo}" required>
+																	</div>
+
+																</div>
 															</div>
 
-														</div>
-													</div>
+														</c:otherwise>
+													</c:choose>
+
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary"
 																onclick="submit_f(1)" value="Save"> <input
 																type="submit" class="btn btn-primary"
-																onclick="submit_f(0)"
-																value="Save & Next">
+																onclick="submit_f(0)" value="Save & Next">
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
@@ -220,8 +273,8 @@
 													<div class="clearfix"></div>
 
 												</div>
-											</div>
-										</div>
+											<!-- </div>
+										</div> -->
 									</form>
 								</div>
 
@@ -247,34 +300,28 @@
 
 	<script type="text/javascript">
 		function check() {
-			//alert("hii");
 
-			/* document.getElementById("fromDate").style = "display:none"
-			document.getElementById("toDate").style = "display:none" */
-			document.getElementById("abc").style = "display:none"
+			document.getElementById("abc").style = "display:none";
 
-			/* 	document.getElementById("label4").style = "display:none" */
-			//	document.getElementById("hide_div").style = "visible"
+			document.getElementById("fromDate").required = false;
+			document.getElementById("toDate").required = false;
 		}
 		function check1() {
 			//alert("hii");
 
-			/* document.getElementById("fromDate").style = "visible"
-			document.getElementById("toDate").style = "visible" */
-			document.getElementById("abc").style = "visible"
+			document.getElementById("abc").style = "visible";
+			document.getElementById("fromDate").required = true;
+			document.getElementById("toDate").required = true;
 
-			/* document.getElementById("label4").style = "visible" */
-			//	document.getElementById("hide_div").style = "visible"
 		}
 	</script>
 	<script type="text/javascript">
-function submit_f(view){
-	//alert(view);
-		document.getElementById("is_view").value=view; 
-		
-	}
- 
-</script>
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+	</script>
 	<script type="text/javascript">
 		$(function() {
 
@@ -287,6 +334,25 @@ function submit_f(view){
 			});
 		});
 	</script>
-
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+          var x=confirm("Do you really want to submit the form?");
+          if(x==true){
+        wasSubmitted = true;
+          document.getElementById("sub_button").disabled=true;
+        return wasSubmitted;
+          }
+      }
+      return false;
+    } 
+    function trim(el) {
+        el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+        replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+        replace(/\n +/, "\n"); // Removes spaces after newlines
+        return;
+    }
+</script>
 </body>
 </html>

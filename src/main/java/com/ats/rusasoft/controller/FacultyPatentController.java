@@ -66,8 +66,19 @@ public class FacultyPatentController {
 				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				List<FacultyPatent> facultyPatentList = rest.postForObject(Constants.url + "/getPatentListByFacultyId",map,
-						List.class);
+				FacultyPatent[] arry = rest.postForObject(Constants.url + "/getPatentListByFacultyId",map,
+						FacultyPatent[].class);
+				
+				List<FacultyPatent> facultyPatentList = new ArrayList<>(Arrays.asList(arry));
+				
+				for(int i=0 ; i<facultyPatentList.size() ; i++) {
+					
+					facultyPatentList.get(i).setPatentFilingDate(DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentFilingDate()));
+					facultyPatentList.get(i).setPatentPubDate(DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentPubDate()));
+					
+				}
+				
+				
 				System.out.println("faculty Patent List :" + facultyPatentList);				
 
 				model.addObject("title", "Patent Details List");
@@ -145,7 +156,7 @@ public class FacultyPatentController {
 		HttpSession session = request.getSession();	
 	
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetails", "0",  "1", "0", "0", newModuleList);
+		Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0",  "1", "0", "0", newModuleList);
 		
 
 		if (view.isError() == false) {
@@ -183,7 +194,7 @@ public class FacultyPatentController {
 		String curDate = dateFormatStr.format(new Date());
 		
 		FacultyPatent faculty = new FacultyPatent();
-		if (patentId == 0) {
+		/*if (patentId == 0) {*/
 
 		faculty.setPatentId(patentId);
 		faculty.setFacultyId(userObj.getGetData().getUserDetailId());
@@ -200,7 +211,7 @@ public class FacultyPatentController {
 		
 		FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty, FacultyPatent.class);
 
-		}
+		/*}
 		else
 		{
 			//faculty.setPatentId(patentId);
@@ -218,7 +229,7 @@ public class FacultyPatentController {
 			
 			FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty, FacultyPatent.class);
 
-		}
+		}*/
 
 		if (is_view == 1) {
 			returnString = "redirect:/showPatentDetailsList";
@@ -259,17 +270,13 @@ public class FacultyPatentController {
 			else {
 			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("patentId", patentId);
-			
-			List<FacultyPatent> facultyPatentList = rest.getForObject(Constants.url + "/getAllFacultyPatent",List.class);
-			System.out.println("faculty Patent List :" + facultyPatentList);
-
-			model = new ModelAndView("FacultyDetails/patentDetails");
-
-			
+			map.add("patentId", patentId); 
+			model = new ModelAndView("FacultyDetails/patentDetails"); 
+			model.addObject("title", "Edit Patent Details Form");
 			FacultyPatent patent = rest.postForObject(Constants.url+"/getFacultyPatent", map, FacultyPatent.class);
-			System.out.println("patent"+patent);
-			
+			//System.out.println("patent"+patent);
+			patent.setPatentFilingDate(DateConvertor.convertToDMY(patent.getPatentFilingDate()));
+			patent.setPatentPubDate(DateConvertor.convertToDMY(patent.getPatentPubDate()));
 			model.addObject("patent", patent);
 			}
 		} catch (Exception e) {
@@ -288,7 +295,7 @@ public class FacultyPatentController {
 	  {		  
 		  String a=null; HttpSession session = request.getSession(); 
 		  List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-		  Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "0", "0","1", newModuleList); 
+		  Info view = AccessControll.checkAccess("deleteFacultyPatent", "showPatentDetailsList", "0", "0", "0","1", newModuleList); 
 		  
 		  if(view.isError()==true)
 		  {	  
@@ -356,10 +363,17 @@ public class FacultyPatentController {
 				 model = new ModelAndView("FacultyDetails/awardDetailsList");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				List<FacultyAward> facultyAwardList = rest.postForObject(Constants.url + "/getAwardListByFacultyId",map,
-						List.class);
-			/*	List<FacultyAward> facultyAward = new ArrayList<FacultyAward>(Arrays.asList(facultyAwardList));
-*/
+				FacultyAward[]  arr = rest.postForObject(Constants.url + "/getAwardListByFacultyId",map,
+						FacultyAward[].class);
+			 	List<FacultyAward> facultyAwardList = new ArrayList<FacultyAward>(Arrays.asList(arr));
+ 
+			 	
+			 	for(int i=0 ; i<facultyAwardList.size() ; i++) {
+			 		
+			 		facultyAwardList.get(i).setAwardDate(DateConvertor.convertToDMY(facultyAwardList.get(i).getAwardDate()));
+			 		facultyAwardList.get(i).setAwardValidityFrom(facultyAwardList.get(i).getAwardValidityFrom());
+			 		facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).getAwardValidityTo());
+			 	}
 				System.out.println("faculty Patent List :" + facultyAwardList);
 
 
@@ -441,7 +455,7 @@ public class FacultyPatentController {
 
 			String fromDate = request.getParameter("fromDate");
 
-			String fromTo = request.getParameter("fromTo");
+			String fromTo = request.getParameter("toDate");
 
 
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -465,16 +479,12 @@ public class FacultyPatentController {
 			faculty.setAwardDate(DateConvertor.convertToYMD(date));
 			faculty.setAwardNature(nature);
 			faculty.setAwardValidity(validity);
-			if(validity==1)
+			if(validity==0)
 			{
 				faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
 				faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
 			}	
-			else
-			{
-				faculty.setAwardValidityFrom(curDate);
-				faculty.setAwardValidityTo(curDate);
-			}
+			 
 		
 			faculty.setMakerUserId(userId);
 			faculty.setMakerEnterDatetime(curDateTime);
@@ -497,9 +507,9 @@ public class FacultyPatentController {
 				if(validity==0)
 				{
 					faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
-					faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromTo));
-				}		
-			
+					faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
+				}	
+				 	 
 				faculty.setMakerUserId(userId);
 				faculty.setMakerEnterDatetime(curDateTime);
 				
@@ -523,7 +533,7 @@ public class FacultyPatentController {
 	catch (Exception e) {
 		System.err.println("EXCE in vendInsertRes " + e.getMessage());
 		e.printStackTrace();
-
+		returnString = "redirect:/showAwardDetailsList";
 	}
 			return returnString;
 
@@ -539,7 +549,7 @@ public class FacultyPatentController {
 				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
 			
 			try {
-				Info view = AccessControll.checkAccess("showAwardDetails", "showAwardDetailsList", "0", "0", "1", "0", newModuleList);
+				Info view = AccessControll.checkAccess("editAward", "showAwardDetailsList", "0", "0", "1", "0", newModuleList);
 				
 				if(view.isError()==true) {
 							
@@ -550,18 +560,19 @@ public class FacultyPatentController {
 				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("awardId", awardId);
-			
-				List<FacultyAward> facultyPatentList = rest.getForObject(Constants.url + "/getAllFacultyAward",List.class);
-				System.out.println("faculty Patent List :" + facultyPatentList);
-
+			 
 				model = new ModelAndView("FacultyDetails/awardDetails");
-
+				model.addObject("title", "Edit Award Details Form");
 				
 				FacultyAward award = rest.postForObject(Constants.url+"/getFacultyAwardById", map, FacultyAward.class);
-				System.out.println("award"+award);
+				//System.out.println("award"+award);
 				
-				
-				
+				award.setAwardDate(DateConvertor.convertToDMY(award.getAwardDate()));
+				if(award.getAwardValidity()==0)
+				{
+				award.setAwardValidityFrom(DateConvertor.convertToDMY(award.getAwardValidityFrom()));
+				award.setAwardValidityTo(DateConvertor.convertToDMY(award.getAwardValidityTo()));
+				}
 				model.addObject("award", award);
 				
 				}

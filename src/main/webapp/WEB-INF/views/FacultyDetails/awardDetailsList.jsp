@@ -102,15 +102,15 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
 
-										</ul>
-
+										</ul> -->
+<!-- 
 										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+											<div class="tab-pane fade in active" id="home"> -->
 
 												<div>
 
@@ -134,47 +134,51 @@
 																		<th>Action</th>
 																	</tr>
 																</thead>
-																
 
-		<tbody>
-                 		     <c:forEach items="${facultyAwardList}" var="awardList" varStatus="count"> 
-									<tr>
-									<%-- <td><input type="checkbox" class="chk" name="iqacIds"
+
+																<tbody>
+																	<c:forEach items="${facultyAwardList}" var="awardList"
+																		varStatus="count">
+																		<tr>
+																			<%-- <td><input type="checkbox" class="chk" name="iqacIds"
 															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
-											<td style="text-align: center">${count.index+1}</td>
-											
-											<td style="text-align: left"><c:out
-														value="${awardList.awardName}" /></td>
-														
-											<td style="text-align: left"><c:out
-														value="${awardList.awardAuthority}" /></td>
-											
-											<td style="text-align: left"><c:out
-														value="${awardList.awardNature}" /></td>
-											
-										
-															
-											<td style="text-align: left"><c:out
-														value="${date}" /></td>
-												
-											<td align="center">
-											 <c:if test="${editAccess == 0}">  <a
-												href="${pageContext.request.contextPath}/editAward/${awardList.awardId}" title="Edit IQAC" 
-												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> |</c:if> 
-												
-											 <c:if test="${deleteAccess == 0}"> 	
-												<a	href="${pageContext.request.contextPath}/deleteFacultyAward/${awardList.awardId}"
-													onClick="return confirm('Are you sure want to delete this record');"
-													rel="tooltip" data-color-class="danger" title="Delete"
-													data-animate=" animated fadeIn " data-toggle="tooltip"
-													data-original-title="Delete  record"><span
-													class="glyphicon glyphicon-remove"></span></a>
-												
-												</c:if>
-												
-											
-												<%-- <a
+																			<td style="text-align: center">${count.index+1}</td>
+
+																			<td style="text-align: left"><c:out
+																					value="${awardList.awardName}" /></td>
+
+																			<td style="text-align: left"><c:out
+																					value="${awardList.awardAuthority}" /></td>
+
+																			<td style="text-align: left"><c:out
+																					value="${awardList.awardNature}" /></td>
+
+
+
+																			<td style="text-align: left"><c:out
+																					value="${awardList.awardDate}" /></td>
+
+																			<td align="center"><c:if
+																					test="${editAccess == 0}">
+																					<a
+																						href="${pageContext.request.contextPath}/editAward/${awardList.awardId}"
+																						title="Edit Award Detail" rel="tooltip"
+																						data-color-class="detail"
+																						data-animate=" animated fadeIn "
+																						data-toggle="tooltip"
+																						data-original-title="Edit IQAC"><span
+																						class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																					test="${deleteAccess == 0}">
+																					<a
+																						href="${pageContext.request.contextPath}/deleteFacultyAward/${awardList.awardId}"
+																						onClick="return confirm('Are you sure want to delete this record');"
+																						rel="tooltip" data-color-class="danger"
+																						title="Delete" data-animate=" animated fadeIn "
+																						data-toggle="tooltip"
+																						data-original-title="Delete  record"><span
+																						class="glyphicon glyphicon-remove"></span></a>
+
+																				</c:if> <%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-list"></span></a>
@@ -188,18 +192,14 @@
 												<a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-edit"></span></a> --%>
-												
-												
-												
-												</td>
-											
-											
-											
-											
-											</tr>
-								 </c:forEach>   
-                </tbody>
+												class="glyphicon glyphicon-edit"></span></a> --%></td>
+
+
+
+
+																		</tr>
+																	</c:forEach>
+																</tbody>
 
 															</table>
 
@@ -212,8 +212,8 @@
 
 												</div>
 
-											</div>
-										</div>
+											<!-- </div>
+										</div> -->
 									</form>
 								</div>
 

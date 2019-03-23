@@ -99,17 +99,17 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPatentDetail"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit();">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										<!-- <div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
 												<div>
 													<h5 class="title pull-left">
@@ -121,12 +121,12 @@
 														value="${patent.patentId}">
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="file_no">Patent
+														<label class="control-label col-sm-2" for="patentNo">Patent
 															File No. <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="patentNo" autocomplete="off"
-																name="patentNo" value="${patent.patentFileNo}" placeholder="Patent Number"
+																name="patentNo" value="${patent.patentFileNo}" placeholder="Patent Number" onchange="trim(this)"
 																required>
 														</div>
 													</div>
@@ -137,7 +137,7 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="parent_title" autocomplete="off"
-																name="parentTitle" placeholder="Patent Title" value="${patent.patentTitle}"
+																name="parentTitle" placeholder="Patent Title" value="${patent.patentTitle}" onchange="trim(this)"
 																required>
 														</div>
 													</div>
@@ -163,7 +163,7 @@
 															<input type="text" class="form-control" id="guide_name" autocomplete="off"
 																name="guideName"
 																placeholder="Name of Co-assistant/Guide" value="${patent.patentGuideName}"
-																>
+																onchange="trim(this)" >
 														</div>
 													</div>
 													<input type="hidden" id="is_view" name="is_view" value="0">
@@ -183,11 +183,11 @@
 													    <div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" class="btn btn-primary"
-																onclick="submit_f(1)" value="Save"> <input
+																onclick="submit_f(1)" value="Save" id="svebtn"> <input
 																type="submit" class="btn btn-primary"
 																onclick="submit_f(0)"
 																value="Save &
-																		Next">
+																		Next" id="svebtnnext">  
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div>
@@ -196,8 +196,8 @@
 
 												</div>
 
-											</div>
-										</div>
+											<!-- </div>
+										</div> -->
 									</form>
 								</div>
 
@@ -240,6 +240,28 @@ function submit_f(view){
 		
 	}
  
+</script>
+
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+          var x=confirm("Do you really want to submit the form?");
+          if(x==true){
+        wasSubmitted = true;
+          document.getElementById("svebtn").disabled=true;
+          document.getElementById("svebtnnext").disabled=true;
+        return wasSubmitted;
+          }
+      }
+      return false;
+    } 
+    function trim(el) {
+        el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+        replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+        replace(/\n +/, "\n"); // Removes spaces after newlines
+        return;
+    }
 </script>
 </body>
 </html>
