@@ -101,8 +101,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
@@ -136,6 +135,7 @@
 																<thead>
 																	<tr>
 																		<th>Sr No</th>
+																		<th>Faculty Name</th>
 																		<th>Date of Recognition</th>
 																		<th>No. of Students</th>
 																		<th>Valid up to</th>
@@ -153,6 +153,8 @@
 															id="staffIds${count.index+1}" value="${staffList.facultyId}" /></td> --%>
 																			<td style="text-align: center">${count.index+1}</td>
 
+																			<td style="text-align: left"><c:out
+																					value="${staffList.facultyFirstName}" /></td>
 																			<td style="text-align: left"><c:out
 																					value="${staffList.phdRecognitionDt}" /></td>
 
@@ -175,8 +177,8 @@
 
 																			<td align="center"><c:if
 																					test="${editAccess == 0}">
-																					<a
-																						href="#" onclick="showEdit(${staffList.facultyId})"
+																					<a href="#"
+																						onclick="showEdit(${staffList.facultyId})"
 																						title="Edit" rel="tooltip"
 																						data-color-class="detail"
 																						data-animate=" animated fadeIn "
@@ -223,7 +225,7 @@
 
 											</div>
 										</div>
-										<input type="hidden" name="edit_Fac_id" id="edit_Fac_id" value="0">
+										<input type="hidden" name="add_fac_detail_id" id="add_fac_detail_id" value="0">
 									</form>
 								</div>
 
@@ -438,7 +440,7 @@
 	
 	function showEdit(facId){
 		
-		document.getElementById("edit_Fac_id").value=facId;//create this 
+		document.getElementById("add_fac_detail_id").value=facId;//create this 
 		var form=document.getElementById("form_sample_2");
 	    form.setAttribute("method", "post");
 

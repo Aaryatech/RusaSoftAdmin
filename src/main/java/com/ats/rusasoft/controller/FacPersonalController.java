@@ -467,10 +467,10 @@ public class FacPersonalController {
 				}
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
+				//if (isView == 1)
 					redirect = "redirect:/showMphillDetails";
-				else
-					redirect = "redirect:/showAddMphillDetails";
+				//else
+					//redirect = "redirect:/showAddMphillDetails";
 			}
 
 		} catch (Exception e) {
@@ -516,8 +516,10 @@ public class FacPersonalController {
 			
 			FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademicByFacId", map,
 					FacultyAcademic.class); 
+			System.err.println("editFacAcad " +editFacAcad.toString());
 
 			model.addObject("editFacAcad", editFacAcad);
+			model.addObject("facultyId", facultyId);
 
 		} catch (Exception e) {
 
@@ -629,10 +631,10 @@ public class FacPersonalController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
-			editAccess.setError(false);
+			Info editAccess =  AccessControll.checkAccess("insertFacAcademic", "showAcademicDetails", "1", "0", "0",
+											"0",
+			 newModuleList);
+			//editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -676,11 +678,11 @@ public class FacPersonalController {
 				FacultyAcademic facAcadeRes = restTemplate.postForObject(Constants.url + "saveFacultyAcademic",
 						facAcademic, FacultyAcademic.class);
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
+				//int isView = Integer.parseInt(request.getParameter("is_view"));
+				//if (isView == 1)
 					redirect = "redirect:/showAcademicDetails";
-				else
-					redirect = "redirect:/showAddAcademicDetails";
+				//else
+					// = "redirect:/showAddAcademicDetails";
 			}
 
 		} catch (Exception e) {
@@ -706,7 +708,7 @@ public class FacPersonalController {
 
 			Info editAccess = AccessControll.checkAccess("showEditFacAcademic", "showAcademicDetails", "0", "0", "1",
 					"0", newModuleList);
-			editAccess.setError(false); // remove this.
+			//editAccess.setError(false); // remove this.
 			if (editAccess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
@@ -738,6 +740,8 @@ public class FacPersonalController {
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 
 				model.addObject("quolfList", quolfList);
+				
+				model.addObject("facultyId", editFacAcad.getFacultyId());
 
 			}
 		} catch (Exception e) {

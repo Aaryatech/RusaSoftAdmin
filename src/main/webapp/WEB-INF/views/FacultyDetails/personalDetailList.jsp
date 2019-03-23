@@ -136,7 +136,7 @@
 
 									</table>
 								</div>
-																		<input type="hidden" name="edit_Fac_id" id="edit_Fac_id" value="0">
+																		<input type="hidden" name="add_fac_detail_id" id="add_fac_detail_id" value="0">
 								
 </form>
 							</div>
@@ -346,8 +346,8 @@
 	<script type="text/javascript">
 	
 	function showEdit(facId){
-		alert("facId" +facId);
-		document.getElementById("edit_Fac_id").value=facId;//create this 
+		//alert("facId" +facId);
+		document.getElementById("add_fac_detail_id").value=facId;//create this 
 		var form=document.getElementById("form_sample_2");
 	    form.setAttribute("method", "post");
 

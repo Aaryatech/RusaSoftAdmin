@@ -143,7 +143,7 @@
 														<div class="col-sm-2">
 															<input type="text" class="form-control datepicker"
 																id="phdRecognitionDt" name="phdRecognitionDt"
-																placeholder="Date of Recognition" value="${facPhdDetail.phdRecognitionDt}" required>
+																placeholder="Select Date of Recognition" value="${facPhdDetail.phdRecognitionDt}" required>
 														</div>
 													</div>
 
@@ -153,7 +153,7 @@
 														</label>
 														<div class="col-sm-2">
 															<input type="text" class="form-control datepicker" id="phdValidDt"
-																name="phdValidDt" placeholder="Valid up to" value="${facPhdDetail.phdValidDt}"
+																name="phdValidDt" placeholder="Valid up to Date" value="${facPhdDetail.phdValidDt}"
 																required>
 														</div>
 													</div>
@@ -165,7 +165,7 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
-															<input type="text" class="form-control" id="phdStuPg"
+															<input type="number" max="500" min="0" class="form-control" id="phdStuPg"
 																name="phdStuPg" placeholder="PG"
 																value="${facPhdDetail.phdStuPg}" required>
 														</div>
@@ -174,7 +174,7 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
-															<input type="text" class="form-control" id="phdStuMphill"
+															<input type="number" max="500" min="0" class="form-control" id="phdStuMphill"
 																name="phdStuMphill" placeholder="M.Phill"
 																value="${facPhdDetail.phdStuMphill}" required>
 														</div>
@@ -182,18 +182,16 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
-															<input type="text" class="form-control" id="phdStuPhd"
+															<input type="number" max="500" min="0" class="form-control" id="phdStuPhd"
 																name="phdStuPhd" placeholder="Ph.D"
 																value="${facPhdDetail.phdStuPhd}" required>
 														</div>
 													</div>
 
 
-
-
 													<div class="form-group">
 
-														<label class="control-label col-sm-6" for="isIctUsed">Use
+														<label class="control-label col-sm-5" for="isIctUsed">Use
 															of ICT(Information Communication Technology) <span
 															class="text-danger">*</span>
 														</label>
@@ -219,7 +217,7 @@
 
 													<div class="form-group">
 														<div class="col-sm-offset-3 col-sm-10">
-															<button type="submit" id="sub1" class="btn btn-primary">Submit</button>
+															<button type="submit" id="sub1" class="btn btn-primary">Save</button>
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 														<input type="hidden" id="staff_id" name="staff_id"

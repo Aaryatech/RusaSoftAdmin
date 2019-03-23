@@ -145,13 +145,13 @@
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit"><span
 												class="glyphicon glyphicon-edit"></span></a>
 												<a onclick="showAddDetail(${staffList.facultyId},1)"
-																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="Personal Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																	<a onclick="showAddDetail(${staffList.facultyId},2)"
-																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="M Phil Phd Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																	<a onclick="showAddDetail(${staffList.facultyId},3)"
-																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
+																	href="#"><span class="glyphicon glyphicon-edit"  title="Academic Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a></c:if> | 
 												
 											<c:if test="${deleteAccess == 0}">	<a
@@ -169,7 +169,7 @@
 										</tbody>
 									</table>
 									<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
+														<!-- 	<div class="col-sm-offset-2 col-sm-10">
 
 								<button type="button" class="btn btn-primary" onclick="exportToExcel();"  id="expExcel" 
 									style="align-content: center; width: 200px; margin-left: 80px; background-color: #272c33;">
@@ -179,7 +179,7 @@
 										onclick="genPdf()" id="PDFButton"
 										style="align-content: center; width: 100px; margin-left: 80px; background-color: #272c33;">
 										PDF</button>
-							</div>
+							</div> -->
 							</div>
 
 									<c:if test="${deleteAccess==0}">

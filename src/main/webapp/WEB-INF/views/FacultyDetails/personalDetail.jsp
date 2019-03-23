@@ -127,7 +127,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)" class="form-control" id="fac_address"
+														<input type="text" onchange="trim(this)" maxlength="200" class="form-control" id="fac_address"
 															name="fac_address" placeholder="Permanent Address"
 															required value="${facPerDetail.fAddress}">
 													</div>
@@ -170,7 +170,7 @@
 														Address <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)" class="form-control" id="fac_address2" value="${facPerDetail.fAddress2}"
+														<input type="text" onchange="trim(this)"  maxlength="200" class="form-control" id="fac_address2" value="${facPerDetail.fAddress2}"
 															name="fac_address2" placeholder="Correspondence Address">
 													</div>
 												</div>
@@ -195,7 +195,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="f_phone" onchange="trim(this)"
-															name="f_phone"
+															name="f_phone" maxlength="15"
 															
 															placeholder="Office Landline No" value="${facPerDetail.fPhone}">
 													</div>
@@ -205,7 +205,7 @@
 														No</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="f_resident" onchange="trim(this)"
-															name="f_resident"  
+															name="f_resident" maxlength="15"   
 															title="Phone number with 7-9 and remaing 9 digit with 0-9"
 															placeholder="Resident Phone No"value="${facPerDetail.fResident}">
 													</div>
@@ -216,7 +216,7 @@
 														ID<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" readonly class="form-control" id="f_email"
+														<input type="email" readonly class="form-control" id="f_email"
 															name="f_email"
 															
 															placeholder="abc@xyz.com" value="${staff.email}" required>
@@ -228,7 +228,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="Text" pattern="^\d{4}\s\d{4}\s\d{4}$" class="form-control" id="f_aadhar"
-															name="f_aadhar" placeholder="Aadhar No" value="${facPerDetail.fAadhar}" required>
+															name="f_aadhar" placeholder="1111 2222 3333" value="${facPerDetail.fAadhar}" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -477,7 +477,8 @@ alert("monthDifference " +monthDifference)
 			autoclose: true,
             format: "dd-mm-yyyy",
             changeYear:true,
-            changeMonth:true
+            changeMonth:true,
+           
 		});
     });
     function trim(el) {

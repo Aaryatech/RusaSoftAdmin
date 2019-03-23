@@ -196,7 +196,7 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" onchange="trim(this)" class="form-control" id="fUniversity" 
+															<input type="text" maxlength="200" onchange="trim(this)" class="form-control" id="fUniversity" 
 																name="fUniversity" placeholder="Enter University Name"
 																value="${editFacAcad.fUniversity}" required>
 														</div>
@@ -238,16 +238,16 @@
 
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" id="sub1" class="btn btn-primary"
-																value="Save" onclick="submit_f(1)"> <input
+																value="Save" onclick="submit_f(1)"> <!-- <input
 																type="submit" id="sub2" class="btn btn-primary"
-																value="Save And Next" onclick="submit_f(0)">
+																value="Save And Next" onclick="submit_f(0)"> -->
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 
 														<input type="hidden" id="fac_aca_id" name="fac_aca_id"
 															value="${editFacAcad.fAcaId}"> <input
 															type="hidden" id="is_view" name="is_view" value="0">
-														<input type="hidden" id="fac_id" name="fac_id" value="${editFacAcad.facultyId}">
+														<input type="hidden" id="fac_id" name="fac_id" value="${facultyId}">
 													</div>
 
 												</div>
@@ -361,7 +361,7 @@ function calExp(){
     	  if(x==true){
         wasSubmitted = true;
         document.getElementById("sub1").disabled=true;
-        document.getElementById("sub2").disabled=true;
+       // document.getElementById("sub2").disabled=true;
 
   	  return wasSubmitted;
     	  }
