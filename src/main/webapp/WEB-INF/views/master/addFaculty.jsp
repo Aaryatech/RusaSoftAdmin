@@ -109,7 +109,7 @@
 													<input type="text" class="form-control" id="dept_name"
 														maxlength="80" onchange="trim(this)" name="dept_name"
 														placeholder="Deptartment Name" value="${dept.deptName}"
-														required>
+			 											required>
 												</div>
 
 												<input type="hidden" id="dept_id" name="dept_id"
