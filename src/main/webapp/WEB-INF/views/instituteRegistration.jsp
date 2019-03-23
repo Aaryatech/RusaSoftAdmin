@@ -15,30 +15,16 @@
 <!-- END HEAD -->
 
 <style>
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;
-}
-
-.image-preview-input input[type=file] {
+ 
+    #main-content section {
+   
 	position: absolute;
-	top: 0;
+	top:0;
+	bottom: 0;
+	left: 0;
 	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-}
-
-.image-preview-input-title {
-	margin-left: 2px;
-}
+  	
+	margin: auto; }
 </style>
 
 
@@ -69,23 +55,21 @@
 
 					</div>
 				</div> --%>
-				<div class="clearfix"></div>
+				 
 				<!-- MAIN CONTENT AREA STARTS -->
 
-				<div class="col-lg-12"></div>
-
+				 
 
 
 				<div class="col-lg-12">
 					<section class="box ">
 
 						<header class="panel_header">
-							<h2 class="title pull-left">${title}</h2>
+							<h2  align="center">INSTITUTE REGISTRATION</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a href="${pageContext.request.contextPath}/showInstituteList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a> --%>
+								<a href="${pageContext.request.contextPath}/"><button
+										type="button" class="btn btn-info">Back</button></a> 
 							</div>
 
 						</header>
@@ -96,7 +80,7 @@
 								<div class="col-md-12">
 
 
-									<ul class="nav nav-tabs">
+								<!-- 	<ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register Form
 										</a></li>
@@ -106,7 +90,7 @@
 
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="home">
-
+ -->
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertInstitute"
 												method="post" name="form_sample_2" id="form_sample_2"
@@ -117,6 +101,7 @@
 
 												<div class="row">
 													<div class="col-md-12">
+													<div class="col-sm-2"></div>
 
 														<p class="desc text-danger fontsize11">Notice : This
 															form strictly need to be filled by Institutes coming
@@ -127,7 +112,7 @@
 															<label class="control-label col-sm-3" for="page_name">Institute
 																Name<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" maxlength="100" onchange="trim(this)" class="form-control" id="inst_name"
 																	value="${editInst.instituteName}" name="inst_name"
 																	placeholder="Complete Name of Institute" required>
@@ -137,7 +122,7 @@
 															<label class="control-label col-sm-3" for="page_name">AISHE
 																Code <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" maxlength="50" onchange="trim(this)" class="form-control" id="aishe_code"
 																	value="${editInst.aisheCode}" name="aishe_code"
 																	placeholder="All India Survey On Higher Education code" required>
@@ -151,7 +136,7 @@
 															<label class="control-label col-sm-3" for="page_order">Institute
 																Address<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" onchange="trim(this)" maxlength="200" class="form-control" id="inst_add"
 																	value="${editInst.instituteAdd}" name="inst_add"
 																	placeholder="Complete Institute Address" required>
@@ -163,7 +148,7 @@
 															<label class="control-label col-sm-3" for="planning">2F/12B
 																Registration <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 
 																<c:choose>
 																	<c:when test="${editInst.instituteId==0}">
@@ -216,7 +201,7 @@
 															</label>
 
 
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" class="form-control datepicker"
 																	id="reg_date" value="${editInst.regDate}"
 																	name="reg_date" placeholder="Date of Registration"
@@ -228,7 +213,7 @@
 															<label class="control-label col-sm-3" for="page_order">Trust/Society
 																Name <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" onchange="trim(this)" class="form-control" id="trusty_name"
 																	value="${editInst.trustName}" name="trusty_name"
 																	placeholder="Trust/Society Name" value="" required>
@@ -239,7 +224,7 @@
 															<label class="control-label col-sm-3" for="page_order">Trust/Society
 																Address <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text"  onchange="trim(this)" class="form-control" id="trusty_add"
 																	value="${editInst.trustAdd}" name="trusty_add"
 																	placeholder="Trust/Society Address" value="" required>
@@ -250,7 +235,7 @@
 															<label class="control-label col-sm-3" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	value="${editInst.trustContactNo}" maxlength="10"
 																	class="form-control" id="trusty_con_no"
@@ -262,7 +247,7 @@
 															<label class="control-label col-sm-3" for="page_order">
 																Chairman/President Name<span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" onchange="trim(this)" class="form-control" id="pres_name"
 																	value="${editInst.presidentName}" name="pres_name"
 																	placeholder="Name of Chairman/President(Board of Governance)"
@@ -274,7 +259,7 @@
 															<label class="control-label col-sm-3" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	value="${editInst.presidenContact}" maxlength="10"
 																	class="form-control" id="pres_contact"
@@ -286,7 +271,7 @@
 															<label class="control-label col-sm-3" for="page_order">Email
 																ID <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="email" onchange="trim(this)" class="form-control" id="pres_email"
 																	value="${editInst.presidentEmail}" name="pres_email"
 																	placeholder="abc@xyz.com Chairman/President Email Id" required>
@@ -300,7 +285,7 @@
 															<label class="control-label col-sm-3" for="page_order">
 																Principal Name <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" onchange="trim(this)" class="form-control" id="princ_name"
 																	value="${editInst.principalName}" name="princ_name"
 																	placeholder="Name of Principal" required>
@@ -311,7 +296,7 @@
 															<label class="control-label col-sm-3" for="page_order">Contact
 																No <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10" class="form-control" id="princ_contact"
 																	value="${editInst.contactNo}" name="princ_contact"
@@ -327,7 +312,7 @@
 															<label class="control-label col-sm-3" for="page_order">Email
 																ID <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-9">
+															<div class="col-sm-7">
 																<input type="email" onchange="trim(this)" class="form-control" 
 																	id="princ_email" value="${editInst.email}"
 																	oninput="checkUnique(this.value,2)" name="princ_email"
@@ -339,7 +324,7 @@
 
 
 														<div class="form-group">
-															<div class="col-sm-offset-3 col-sm-9">
+															<div class="col-sm-offset-3 col-sm-7">
 
 																<input type="submit" id="sub_button"
 																	class="btn btn-primary" value="Submit" />
@@ -356,19 +341,22 @@
 										</div>
 										<div class="clearfix"></div>
 									</div>
+									<div class="col-sm-3"></div>
+									
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mendatory.</p>
 								</div>
+								</section>
+								
 
 
 							</div>
+							</section>
 
-						</div>
 					</section>
 				</div>
-			</section>
-		</section>
-	</div>
+				
+		
 
 	<!-- MAIN CONTENT AREA ENDS -->
 
