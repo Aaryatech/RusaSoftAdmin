@@ -51,7 +51,7 @@
                 <h2 class="title pull-left">IQAC List</h2>
                 <div class="actions panel_actions pull-right">
                   <c:if test="${addAccess == 0}"> 
-               		  <a href="${pageContext.request.contextPath}/iqacRegistration"><button type="button" class="btn btn-success">IQAC Registration</button></a>
+               		  <a href="${pageContext.request.contextPath}/iqacRegistration"><button type="button" class="btn btn-success">Add</button></a>
                  </c:if>
                 	<a class="box_toggle fa fa-chevron-down"></a>               
                 </div>
@@ -111,9 +111,10 @@
 												
 											<td align="center">
 											 <c:if test="${editAccess == 0}">  <a
-												href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit IQAC" 
+												href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit" 
 												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> |</c:if> 
+												class="glyphicon glyphicon-edit"></span></a> </c:if> &nbsp;&nbsp;
+												&nbsp;&nbsp;
 												
 											 <c:if test="${deleteAccess == 0}"> 	
 												<a	href="${pageContext.request.contextPath}/deleteIqac/${QList.iqacId}"

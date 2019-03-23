@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="setDate(${1})">
+<body class=" " onload="setDate(0)">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -113,9 +113,9 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register Faculty
-											</a></li>
+											</a></li> -->
 
 
 										</ul>
@@ -126,61 +126,6 @@
 												<div class="row">
 													<div class="col-xs-12">
 													
-													<%-- <div class="form-group">
-													<label class="control-label col-sm-2" for="status">
-													Year : <span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-2">
-													<select id="salutation" name="salutation"
-														class="form-control" required>
-														<option value="0">2018-2019</option>
-														<option value="1">2017-2018</option>
-														<option value="2">2016-2017</option>
-														<option value="3">2015-2016</option>
-
-
-													</select>
-                                       </div>
-										</div>			
-													
-													<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">No. of Faculty
-																Required <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="No. of Faculty Required "
-																
-																	value="${page.pageName}">
-															</div>
-														</div>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">No. of Faculty
-																Available<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="No. of Faculty Available"
-																
-																	value="${page.pageName}">
-															</div>
-														</div>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-6" for="page_name">Total Student Strength as per Sanction Intake
-																(second year/third year/last year/including direct second year(if applicable) )<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="page_name"
-																	name="page_name" placeholder="Student Strength"
-																	value="${page.pageName}">
-															</div>
-														</div>
-													
-													 --%>
-													 	
-															
 													 <input type="hidden"  id="faculty_id" name="faculty_id" 
 																	value="${staff.facultyId}">
 													 
@@ -191,32 +136,10 @@
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="faculty_first_name" pattern="^(?!\s*$).+"
 																	name="faculty_first_name" placeholder="First Name			Middle Name			 Last Name" 
-																	value="${staff.facultyFirstName}" required="required">
+																	value="${staff.facultyFirstName}" required="required" autocomplete="off">
 															</div>
 														</div>
 														
-														<%-- <div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Faculty
-																Middle Name <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="faculty_mid_name" pattern="^(?!\s*$).+"
-																	name="faculty_mid_name" placeholder="" 
-																	value="${staff.facultyMiddelName}" required="required">
-															</div>
-														</div> --%>
-														<%-- 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">Faculty
-																Last Name <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="faculty_last_name" pattern="^(?!\s*$).+"
-																	name="faculty_last_name" placeholder="" 
-																	value="${staff.facultyLastName}" required="required">
-															</div>
-														</div> --%>
-
 
 															<div class="form-group">
 															<label class="control-label col-sm-2" for="status">Department : 
@@ -255,7 +178,7 @@
 																	class="form-control" required>
 																	<c:forEach items="${quolfList}" var="quolf">
 																		<c:choose>
-																			<c:when test="${hod.highestQualificationId==quolf.qualificationId}">
+																			<c:when test="${staff.highestQualification==quolf.qualificationId}">
 																				<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
 																			</c:when>
@@ -272,43 +195,19 @@
 																</select>
 															</div>
 														</div>
-
-
-	
-													<!-- 	<div class="form-group" id="pqr">
-															<label class="control-label col-sm-2" for="smallheading">Other Qualification
-														  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="other_qualification"
-																	name="other_qualification" 
-																	
-																	placeholder="Other Qualification" value="">
-															</div>
-														</div> -->
-														
 														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">Year
 																of highest Qualification Acquired <span
 																class="text-danger">*</span>
 															</label>
+															
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="yr_highest_qualification_acqrd"
-																	name="yr_highest_qualification_acqrd"  pattern="^(?!\s*$).+"
-																	placeholder="Year of highest Qualification Required" onkeypress='return restrictAlphabets(event)'
-																	value="${staff.hightestQualificationYear}" required>
-															</div>
-															<!-- <div class="col-sm-2">
-													<select id="yr_highest_qualification_acqrd" name="yr_highest_qualification_acqrd" class="form-control" required>
-																<%-- <c:forEach items="${acaYearList}" var="acaYear">
-																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
-																	
-																	</c:forEach> --%>
-																	
-																		<c:forEach items="${acaYearList}" var="acaYearList">
+														<select id="yr_highest_qualification_acqrd" name="yr_highest_qualification_acqrd" class="form-control" required>
+																																	
+															<c:forEach items="${acaYearList}" var="acaYearList">
 																		<c:choose>
-																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
+																			<c:when test="${acaYearList.yearId==staff.hightestQualificationYear}">
 																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
 																			</c:when>
@@ -322,7 +221,7 @@
 																	</c:forEach>
 
 													</select>
-                                       </div> -->
+                                      				 </div>
 														</div>
 
 														<div class="form-group">
@@ -352,11 +251,10 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="dateOfJoin" onkeypress='return restrictAlphabets(event)'
-																	pattern="^(?!\s*$).+" name="join_date" placeholder="Joining Date" value="${staff.joiningDate}" required>
+																	pattern="^(?!\s*$).+" name="join_date"  autocomplete="off"
+																	 placeholder="dd/mm/yyyy" value="${staff.joiningDate}" required>
 															</div>
-														<!-- </div>
-
-														 <div class="form-group"> -->
+														
 															<label class="control-label col-sm-2" for="page_order">Is
 																Working Today<span class="text-danger">*</span>
 															</label>
@@ -366,10 +264,10 @@
 																	<c:when test="${staff.facultyId==0}">
 
 																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1" checked
+																			name="is_registration" value="1" 
 																			onclick="setDate(this.value)">Yes 
 																<input type="radio" id="is_registration"
-																			name="is_registration" value="0"
+																			name="is_registration" value="0" checked
 																			onclick="setDate(this.value)">No 
 															
 															</c:when>
@@ -417,7 +315,8 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="relDate" value="${staff.realivingDate}" pattern="^(?!\s*$).+"
-																	onkeypress='return restrictAlphabets(event)' name="acc_off_relDate" placeholder="Relieving Date">
+																	onkeypress='return restrictAlphabets(event)' name="acc_off_relDate"
+																	autocomplete="off" placeholder="dd/mm/yyyy">
 															</div>
 															</div>
 															</div>
@@ -438,12 +337,22 @@
 															<div class="col-sm-10">
 																<select id="teachTo" name="teachTo"  class="form-control"
 																	required>
-																	<option value="0">UG</option>
-																	<option value="1">PG</option>
-																	<option value="2">UG & PG</option>
-																	<option value="5">Any Other Course</option>
+																	<c:forEach items="${teachingList}" var="teach">
+																		<c:choose>
+																			<c:when test="${staff.teachingTo==teach.qualificationId}">
+																				<option selected value="${teach.qualificationId}">${teach.qualificationName}</option>
 
+																			</c:when>
+																			<c:otherwise>
 
+																				<option value="${teach.qualificationId}">${teach.qualificationName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+																	
 																</select>
 															</div>
 														</div>

@@ -123,7 +123,7 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="iqacName" 	
+																<input type="text" class="form-control" id="iqacName" autocomplete="off"	
 																value="${miqc.iqacName}" name="iqacName" pattern="^(?!\s*$).+"
 																 placeholder="Internal Quality Assurance Cell (IQAC)" required>
 															</div>
@@ -162,7 +162,8 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="dateOfJoin" onkeypress='return restrictAlphabets(event)'
-																 	value="${miqc.joiningDate}" name="dateOfJoin" placeholder="dd/mm/yyyy" pattern="^(?!\s*$).+" required>
+																 	value="${miqc.joiningDate}" name="dateOfJoin"  autocomplete="off"
+																 	 placeholder="dd/mm/yyyy" pattern="^(?!\s*$).+" required>
 															</div>
 														</div>
 														
@@ -172,7 +173,8 @@
 																</label>
 																<div class="col-sm-10">
 																<input type="text" class="form-control" id="contactNo" onchange="checkUnique(this.value,1)" pattern="^(?!\s*$).+"
-																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"  maxlength="10" onkeypress='return restrictAlphabets(event)'
+																	name="contactNo" pattern="[7-9]{1}[0-9]{9}"  maxlength="10"
+																	 onkeypress='return restrictAlphabets(event)' autocomplete="off"
 																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
 																	placeholder="Mobile Number" value="${miqc.contactNo}" required>
 																		<p class="desc text-danger fontsize11">Note: OTP
@@ -186,7 +188,8 @@
 																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)" pattern="^(?!\s*$).+"
+																<input type="email" class="form-control" id="email" autocomplete="off"
+																 onchange="checkUnique(this.value,2)" pattern="^(?!\s*$).+"
 																	name="email" placeholder="abc@xyz.com" value="${miqc.email}" required>
 																	<p class="desc font-italic fontsize11">Note:
 																		Verification mail will be sent on this Email id</p>

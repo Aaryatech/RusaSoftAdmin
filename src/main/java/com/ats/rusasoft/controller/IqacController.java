@@ -26,6 +26,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.commons.ExportToExcel;
+import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dean;
 import com.ats.rusasoft.model.DeansList;
 import com.ats.rusasoft.model.Dept;
@@ -104,11 +105,12 @@ public class IqacController {
 			} else {
 				model = new ModelAndView("master/iqacRegistration");
 				MIqac miqac = new MIqac();
-				model.addObject("miqac", miqac);
+				model.addObject("miqc", miqac);
 
-				List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
-						List.class);
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
+				
 				model.addObject("title", "IQAC Registration");
 			}
 		} catch (Exception e) {
@@ -126,23 +128,16 @@ public class IqacController {
 	@RequestMapping(value = "/iqacNewRegistration", method = RequestMethod.POST)
 	public String newRegisterInstitute(HttpServletRequest request, HttpServletResponse response) {
 
+		try {
 		HttpSession session = request.getSession();
 
 		int instituteId = (int) session.getAttribute("instituteId");
 		int userId = (int) session.getAttribute("userId");
 
-		int iqacId = 0;
+		
 		int designation = 0;
-		try {
-
-			iqacId = Integer.parseInt(request.getParameter("iqac_id"));
-
-		} catch (Exception e) {
-			iqacId = 0;
-			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
-			e.printStackTrace();
-
-		}
+		
+		int iqacId = Integer.parseInt(request.getParameter("iqac_id"));
 
 		System.out.println("Data:" + iqacId);
 		String iqacName = request.getParameter("iqacName");
@@ -170,14 +165,19 @@ public class IqacController {
 		miqac.setDelStatus(1);
 		miqac.setIsActive(1);
 		miqac.setIsEnrollSystem(1);
-		miqac.setMakerUserId(1);
+		miqac.setMakerUserId(userId);
 		miqac.setMakerEnterDatetime(curDateTime);
-		miqac.setCheckerUserId(userId);
+		miqac.setCheckerUserId(0);
 		miqac.setCheckerDatetime(curDateTime);
 		miqac.setLastUpdatedDatetime(curDateTime);
 		miqac.setType(2);
 		MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac", miqac, MIqac.class);
+		} catch (Exception e) {
+			
+			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+			e.printStackTrace();
 
+		}
 		return "redirect:/showIqacList";
 
 	}
@@ -267,14 +267,15 @@ public class IqacController {
 				map.add("id", iqacId);
 
 				model = new ModelAndView("master/iqacRegistration");
-				List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
-						List.class);
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
 				MIqac miqc = rest.postForObject(Constants.url + "/getIqacById", map, MIqac.class);
 				System.out.println("miqc:" + miqc);
 
 				model.addObject("miqc", miqc);
+				model.addObject("title", "Edit IQAC Registration");
 			}
 		} catch (Exception e) {
 
@@ -288,23 +289,30 @@ public class IqacController {
 
 	@RequestMapping(value = "/deleteIqac/{iqacId}", method = RequestMethod.GET)
 	public String deleteIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request) {
+		
 		String a = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "0", "1", newModuleList);
-		if (view.isError() == true) {
-
-			a = "redirect:/accessDenied";
+		try {
+		
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "0", "1", newModuleList);
+			if (view.isError() == true) {
+	
+				a = "redirect:/accessDenied";
 
 		} else {
-			Info inf = new Info();
-			System.out.println("Id:" + iqacId);
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", iqacId);
-			Info miqc = rest.postForObject(Constants.url + "/deleteIqacById", map, Info.class);
-			a = "redirect:/showIqacList";
+				Info inf = new Info();
+				System.out.println("Id:" + iqacId);
+	
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", iqacId);
+				Info miqc = rest.postForObject(Constants.url + "/deleteIqacById", map, Info.class);
+				a = "redirect:/showIqacList";
 		}
+	}catch(Exception e) {
+		e.printStackTrace();
+				
+	}
 		return a;
 
 	}
@@ -325,8 +333,10 @@ public class IqacController {
 			MIqac miqac = new MIqac();
 			model.addObject("miqac", miqac);
 			
-			List<Designation> designationList = rest.getForObject(Constants.url+"/getAllDesignations", List.class);		
+			Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+			List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 			model.addObject("desigList", designationList);
+		
 			int instituteId =(int)session.getAttribute("instituteId");
 			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -361,7 +371,8 @@ public class IqacController {
 			MIqac miqac = new MIqac();
 			model.addObject("miqac", miqac);
 
-			List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations", List.class);
+			Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+			List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 			model.addObject("desigList", designationList);
 
 		} catch (Exception e) {
@@ -424,9 +435,9 @@ public class IqacController {
 			miqac.setDelStatus(1);
 			miqac.setIsActive(1);
 			miqac.setIsEnrollSystem(1);
-			miqac.setMakerUserId(1);
+			miqac.setMakerUserId(userId);
 			miqac.setMakerEnterDatetime(curDateTime);
-			miqac.setCheckerUserId(userId);
+			miqac.setCheckerUserId(0);
 			miqac.setCheckerDatetime(curDateTime);
 			miqac.setLastUpdatedDatetime(curDateTime);
 			miqac.setType(2);
@@ -471,11 +482,11 @@ public class IqacController {
 		MultiValueMap<String, Object> map = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
+		String a = null;
 		try {
 			Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "1", "0", "0",
 					newModuleList);
-			String a = null;
+		
 			if (view.isError() == true) {
 
 				a = "redirect:/accessDenied";
@@ -495,18 +506,27 @@ public class IqacController {
 
 				model.addObject("deptList", deptList);
 
-				List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
-						List.class);
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
-
+				
 				map.add("type", 1);
 
-				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+				Quolification[] quolArray = rest.postForObject(Constants.url + "/getQuolificationList", map,
 						Quolification[].class);
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				System.err.println("quolfList " + quolfList.toString());
 				model.addObject("quolfList", quolfList);
 
+				
+				map.add("type0", 0);
+				Quolification[] teachTo = rest.postForObject(Constants.url + "/getQuolificationListToTeach", map,
+						Quolification[].class);
+				List<Quolification> teachingList = new ArrayList<>(Arrays.asList(teachTo));
+				System.err.println("teachList " + teachingList);
+				model.addObject("teachingList", teachingList);
+				
+				
 				Staff staff = new Staff();
 				model.addObject("staff", staff);
 
@@ -537,8 +557,8 @@ public class IqacController {
 		HttpSession session = request.getSession();
 
 		int instituteId = (int) session.getAttribute("instituteId");
-
-		model.addObject("title", "Add Department");
+		int userId = (int) session.getAttribute("userId");
+		//model.addObject("title", "Add Department");
 
 		int facultyId = 0;
 
@@ -591,7 +611,7 @@ public class IqacController {
 		staff.setEmail(email);
 		staff.setDelStatus(1);
 		staff.setIsActive(1);
-		staff.setMakerUserId(0);
+		staff.setMakerUserId(userId);
 		staff.setMakerEnterDatetime(curDateTime);
 		staff.setEditUserId(0);
 		staff.setLastUpdatedDatetime(curDateTime);
@@ -749,13 +769,26 @@ public class IqacController {
 				System.err.println("quolfList " + quolfList.toString());
 				model.addObject("quolfList", quolfList);
 
-				List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
-						List.class);
+				map.add("type0", 0);
+				Quolification[] teachTo = rest.postForObject(Constants.url + "/getQuolificationListToTeach", map,
+						Quolification[].class);
+				List<Quolification> teachingList = new ArrayList<>(Arrays.asList(teachTo));
+				System.err.println("teachList " + teachingList);
+				model.addObject("teachingList", teachingList);
+				
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
-
+				
+				AcademicYear[] acadYrArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId",
+						map, AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(acadYrArray));
+				model.addObject("acaYearList", acaYearList);
+				
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				System.out.println("staff" + staff);
-
+				
+				model.addObject("title", "Edit Faculty");
 				model.addObject("staff", staff);
 			}
 		} catch (Exception e) {
@@ -771,10 +804,13 @@ public class IqacController {
 
 	@RequestMapping(value = "/deleteFaculity/{facultyId}", method = RequestMethod.GET)
 	public String deleteStaff(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
+		
+		String a = null;
+		try {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "0", "0", "1", newModuleList);
-		String a = null;
+		
 		if (view.isError() == true) {
 
 			a = "redirect:/accessDenied";
@@ -790,6 +826,9 @@ public class IqacController {
 
 			a = "redirect:/showStaffList";
 
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return a;
 

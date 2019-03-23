@@ -55,7 +55,7 @@
 							<div class="actions panel_actions pull-right">
 								   <c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showRegisterStaff"><button
-										type="button" class="btn btn-success">Register Staff</button></a>
+										type="button" class="btn btn-success">Add</button></a>
 										</c:if>
 								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -90,9 +90,9 @@
 										class="table table-striped dt-responsive display">
 										<thead>
 											<tr>
-											<th class="check" style="text-align: center; width: 5%;"><input
+											<!-- <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
 												<th width="5%">Sr No</th>
 												<th>Faculty Name</th>
 												<th>Qualification</th>
@@ -110,8 +110,8 @@
 										<tbody>
 											<c:forEach items="${staffList}" var="staffList" varStatus="count">
 												<tr>
-												<td><input type="checkbox" class="chk" name="staffIds"
-															id="staffIds${count.index+1}" value="${staffList.facultyId}" /></td>
+												<%-- <td><input type="checkbox" class="chk" name="staffIds"
+															id="staffIds${count.index+1}" value="${staffList.facultyId}" /></td> --%>
 											<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out
@@ -156,7 +156,7 @@
 												
 											<c:if test="${deleteAccess == 0}">	<a
 											href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}" 
-											onClick="return confirm('Are you sure want to delete this record');" title="Block"
+											onClick="return confirm('Are you sure want to delete this record');" title="Delete"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-remove"></span></a></c:if>
 												</td>
@@ -182,7 +182,7 @@
 							</div> -->
 							</div>
 
-									<c:if test="${deleteAccess==0}">
+									<%-- <c:if test="${deleteAccess==0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
@@ -192,7 +192,7 @@
 											value="0">
 											
 											<input type="hidden" id="add_fac_detail_id" name="add_fac_detail_id"
-											value="0">
+											value="0"> --%>
 							</form>
 
 								</div>
