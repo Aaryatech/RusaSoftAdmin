@@ -105,10 +105,10 @@
 											<c:forEach items="${pendInstList}" var="institute"
 												varStatus="count">
 												<tr>
-												<td><input type="checkbox" class="chk" name="instIds"
+												<td align="center"><input type="checkbox" class="chk" name="instIds"
 															id="instIds${count.index+1}"
 															value="${institute.instituteId}" /></td>
-													<td>${count.index+1}</td>
+													<td align="center">${count.index+1}</td>
 													<td>${institute.instituteName}</td>
 
 													<td>${institute.principalName}</td>
@@ -116,7 +116,7 @@
 
 													<td>${institute.email}</td>
 
-													<td>
+													<td align="center">
 														<c:if test="${addAccess==0}"><a href="${pageContext.request.contextPath}/approveInstitutes/${institute.instituteId}"><span
 															class="glyphicon glyphicon-ok-circle"
 															data-animate=" animated fadeIn " rel="tooltip"

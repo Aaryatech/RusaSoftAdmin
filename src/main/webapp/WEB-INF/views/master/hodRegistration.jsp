@@ -104,7 +104,7 @@
 								<div class="col-md-12">
 									
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register HOD
 											</a></li>
@@ -112,7 +112,7 @@
 										</ul>
 
 										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+											<div class="tab-pane fade in active" id="home"> -->
 <form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertHod"
 										method="post" name="form_sample_2" id="form_sample_2"
@@ -232,7 +232,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-3 for="smallheading">Email
+															<label class="control-label col-sm-3" for="hod_email">Email
 																ID(Official) : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
@@ -273,24 +273,27 @@
 										</div>
 									
 								</div>
+								</section>
 
 							</div>
+							</section>
+							</section>
 						</div>
 						
-
+<!-- 
 					</section>
 
 				</div>
-
+ -->
 
 				<!-- MAIN CONTENT AREA ENDS -->
-			</section>
-		</section>
+		<!-- 	</section>
+		</section> -->
 		<!-- END CONTENT -->
 
 
 
-	</div>
+	<!-- </div> -->
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

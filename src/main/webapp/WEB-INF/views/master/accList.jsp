@@ -52,8 +52,7 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
 									<a href="${pageContext.request.contextPath}/showRegAcc"><button
-											type="button" class="btn btn-success">Account
-											Officer Registration</button></a>
+											type="button" class="btn btn-success">Add</button></a>
 									<a class="box_toggle fa fa-chevron-down"></a>
 								</c:if>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -103,16 +102,16 @@
 												<c:forEach items="${accOffList}" var="accOff"
 													varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk"
+														<td align="center"><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${accOff.officerId}" /></td>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${accOff.accOfficerName}</td>
 														<td>${accOff.qualificationName}</td>
-														<td>${accOff.joiningDate}</td>
-														<td>${accOff.contactNo}</td>
+														<td align="center">${accOff.joiningDate}</td>
+														<td align="center">${accOff.contactNo}</td>
 														<td>${accOff.email}</td>
-														<td><c:if test="${editAccess==0}">
+														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEditaccOff(${accOff.officerId})"
 																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
