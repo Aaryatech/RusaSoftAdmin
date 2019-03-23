@@ -193,7 +193,7 @@
 														<option value="2" selected>3</option>
 														<option value="3">-</option>
 													</c:when>
-													<c:when test="${subjectCo.coPsoSatisfyingValue == 4}">
+													<c:when test="${subjectCo.coPsoSatisfyingValue == 3}">
 														<option value="0">1</option>
 														<option value="1">2</option>
 														<option value="2">3</option>

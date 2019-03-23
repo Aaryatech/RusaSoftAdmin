@@ -377,6 +377,14 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mav = new ModelAndView("login");
+			MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+
+			map =new LinkedMultiValueMap<String, Object>(); 
+			 map.add("type", 1);
+			
+			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			mav.addObject("acaYearList", acaYearList);
 		}
 
 		return mav;
@@ -389,8 +397,8 @@ public class HomeController {
 		HttpServletResponse response) {
 		int subModId=Integer.parseInt(request.getParameter("subModId"));
 		int modId=Integer.parseInt(request.getParameter("modId"));
-		 System.out.println("subModId " + subModId);
-		System.out.println("modId " + modId); 
+		 /*System.out.println("subModId " + subModId);
+		System.out.println("modId " + modId); */
 		HttpSession session = request.getSession();
 		session.setAttribute("sessionModuleId", modId);
 		session.setAttribute("sessionSubModuleId",subModId);

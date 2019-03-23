@@ -172,14 +172,14 @@
   --%>
 														<td><a
 															href="${pageContext.request.contextPath}/mapPoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
-															title="Add PSO" rel="tooltip" data-color-class="detail"
+															title="Map PO" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a></td>
 
 														<td><a
 															href="${pageContext.request.contextPath}/mapPsoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
-															title="Add PSO" rel="tooltip" data-color-class="detail"
+															title="Map PSO" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a></td>

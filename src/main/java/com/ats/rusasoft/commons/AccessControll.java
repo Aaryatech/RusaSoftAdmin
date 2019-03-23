@@ -18,7 +18,7 @@ public class AccessControll {
 
 		try {
 
-			System.out.println("in function newModuleList " + newModuleList);
+			//System.out.println("in function newModuleList " + newModuleList);
 
 			int viewMappingFound = 0;
 
