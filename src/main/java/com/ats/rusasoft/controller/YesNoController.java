@@ -51,6 +51,10 @@ public class YesNoController {
 	List<InstituteYesNo> instituteYesNoTab2List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab3List = new ArrayList<>();
 	
+	List<InstituteYesNo> instituteYesNoTab4List = new ArrayList<>();
+	List<InstituteYesNo> instituteYesNoTab5List = new ArrayList<>();
+	List<InstituteYesNo> instituteYesNoTab6List = new ArrayList<>();
+	
 	@RequestMapping(value = "/selectYestNo", method = RequestMethod.GET)
 	public ModelAndView showAddStudAddmitLocWise(HttpServletRequest request, HttpServletResponse response) {
 
@@ -870,6 +874,331 @@ public class YesNoController {
 		}
 
 		return "redirect:/selectYestNoPageThird";
+
+	}
+	
+	@RequestMapping(value = "/fixedYesNoSecond", method = RequestMethod.GET)
+	public ModelAndView fixedYesNoSecond(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("yesno/fixedYesNoSecond");
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+
+			model.addObject("title", "Fill Information");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab4");
+			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(instituteYesNo));
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab5");
+			InstituteYesNo[] instituteYesN = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab5List = new ArrayList<>(Arrays.asList(instituteYesN));
+			
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab6");
+			InstituteYesNo[] arr = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab6List = new ArrayList<>(Arrays.asList(arr));
+
+			model.addObject("instituteYesNoTab1List", instituteYesNoTab4List);
+			model.addObject("instituteYesNoTab2List", instituteYesNoTab5List);
+			model.addObject("instituteYesNoTab3List", instituteYesNoTab6List);
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/addGender", method = RequestMethod.GET)
+	public @ResponseBody List<InstituteYesNo> addGender(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String transperentspeficytext = request.getParameter("transperentspeficytext");
+
+			InstituteYesNo instituteYesNo = new InstituteYesNo();
+			instituteYesNo.setDelStatus(1);
+			instituteYesNo.setIsActive(1);
+			instituteYesNo.setMakerUserId(userObj.getUserId());
+			instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+			instituteYesNo.setMakerDatetime(sf.format(date));
+			instituteYesNo.setYesnoPagecode("tab4");
+			instituteYesNo.setSectionCode("tab4");
+			instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+			instituteYesNo.setYesnoDynamicTitle("Gender");
+			instituteYesNo.setYearId(acYearId);
+
+			System.out.println(instituteYesNo);
+			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+					InstituteYesNo.class);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab4");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return instituteYesNoTab4List;
+
+	}
+	
+	@RequestMapping(value = "/deleteGender", method = RequestMethod.GET)
+	public @ResponseBody List<InstituteYesNo> deleteGender(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("id", instYesnoId);
+
+			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab4");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return instituteYesNoTab4List;
+
+	}
+	
+	@RequestMapping(value = "/addEnvironmant", method = RequestMethod.GET)
+	public @ResponseBody List<InstituteYesNo> addEnvironmant(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String transperentspeficytext = request.getParameter("transperentspeficytext");
+
+			InstituteYesNo instituteYesNo = new InstituteYesNo();
+			instituteYesNo.setDelStatus(1);
+			instituteYesNo.setIsActive(1);
+			instituteYesNo.setMakerUserId(userObj.getUserId());
+			instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+			instituteYesNo.setMakerDatetime(sf.format(date));
+			instituteYesNo.setYesnoPagecode("tab5");
+			instituteYesNo.setSectionCode("tab5");
+			instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+			instituteYesNo.setYesnoDynamicTitle("Environment");
+			instituteYesNo.setYearId(acYearId);
+
+			System.out.println(instituteYesNo);
+			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+					InstituteYesNo.class);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab5");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return instituteYesNoTab5List;
+
+	}
+	
+	@RequestMapping(value = "/deleteEnvironmant", method = RequestMethod.GET)
+	public @ResponseBody List<InstituteYesNo> deleteEnvironmant(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("id", instYesnoId);
+
+			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab5");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return instituteYesNoTab5List;
+
+	}
+	
+	@RequestMapping(value = "/addHumanValues", method = RequestMethod.GET)
+	public @ResponseBody List<InstituteYesNo> addHumanValues(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			String transperentspeficytext = request.getParameter("transperentspeficytext");
+
+			InstituteYesNo instituteYesNo = new InstituteYesNo();
+			instituteYesNo.setDelStatus(1);
+			instituteYesNo.setIsActive(1);
+			instituteYesNo.setMakerUserId(userObj.getUserId());
+			instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+			instituteYesNo.setMakerDatetime(sf.format(date));
+			instituteYesNo.setYesnoPagecode("tab6");
+			instituteYesNo.setSectionCode("tab6");
+			instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+			instituteYesNo.setYesnoDynamicTitle("HumanValues");
+			instituteYesNo.setYearId(acYearId);
+
+			System.out.println(instituteYesNo);
+			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+					InstituteYesNo.class);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab6");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return instituteYesNoTab6List;
+
+	}
+	
+	@RequestMapping(value = "/deleteHumanValues", method = RequestMethod.GET)
+	public @ResponseBody List<InstituteYesNo> deleteHumanValues(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int acYearId = (Integer) session.getAttribute("acYearId");
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("id", instYesnoId);
+
+			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab6");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return instituteYesNoTab6List;
 
 	}
 	 

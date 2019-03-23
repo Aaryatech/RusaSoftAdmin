@@ -250,7 +250,14 @@ public class HomeController {
 
 				mav = new ModelAndView("login");
 				mav.addObject("msg","Enter  Login Credentials");
+				MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+
+				map =new LinkedMultiValueMap<String, Object>(); 
+				 map.add("type", 1);
 				
+				AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				mav.addObject("acaYearList", acaYearList);
 				
 				
 			} else {

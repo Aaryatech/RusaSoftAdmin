@@ -86,11 +86,11 @@
 				</a>
 					<ul class="dropdown-menu profile animated fadeIn">
 
-						<li><a href="#profile"> <i class="fa fa-user"></i>
+						<!-- <li><a href="#profile"> <i class="fa fa-user"></i>
 								Profile
-						</a></li>
+						</a></li> -->
 
-						<li class="last"><a href="ui-login.html"> <i
+						<li class="last"><a href="${pageContext.request.contextPath}/logout"> <i
 								class="fa fa-lock"></i> Logout
 						</a></li>
 					</ul></li>

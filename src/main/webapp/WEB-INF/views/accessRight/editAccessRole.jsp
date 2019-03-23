@@ -122,7 +122,7 @@
 															<input type="text" class="form-control" id="roleName"
 																name="roleName" placeholder="Enter Role Name"
 																autocomplete="off" value="${editRole.roleName}" required>
-															<input type="text"  id="roleId"
+															<input type="hidden"  id="roleId"
 																name="roleId"  value="${editRole.roleId}"  >
 														</div>
 													</div>

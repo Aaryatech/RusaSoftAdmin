@@ -26,9 +26,9 @@
 			<!-- USER INFO - END -->
 			<ul class='wraplist'>
 				<li class='menusection'></li>
-				<li class="open"><a href="index.html"> <i
+				<!-- <li class="open"><a href="index.html"> <i
 						class="fa fa-dashboard"></i> <span class="title">Dashboard</span>
-				</a></li>
+				</a></li> -->
 
 
 
@@ -81,7 +81,7 @@
 				</c:forEach>
 
 
-				<li class=""><a href="javascript:;"> <i
+				<%-- <li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">User
 							Registration</span> <span class="arrow "></span>
 				</a>
@@ -128,27 +128,12 @@
 							Profile Module </span> <span class="arrow "></span>
 				</a>
 					<ul class="sub-menu">
-
-
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showInstProf">Institute Profile </a></li> --%>
-
-
-
-
+ 
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showEContentFacilities">Common
 								Details Form </a></li>
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showCollaborationLinkages">Collaboration
-								& Linkages Form </a></li> --%>
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showFunctionalMOUs">Functional
-								MOUs </a></li> --%>
+ 
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showReforms">Evaluation
@@ -195,22 +180,7 @@
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showProfDevelopment">Governance,
 								Leadership and Management (Administrative Process ) </a></li>
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showInternalQualityInitiative">Internal
-								Quality Initiatives </a></li> --%>
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showIntellectualProperty">Intellectual
-								Property Rights & Industries </a></li> --%>
-
-						<%-- 	<li><a class=""
-							href="${pageContext.request.contextPath}/showGenderEquity">
-								Gender Equality Programme </a></li> --%>
-
-						<%-- 	<li><a class=""
-							href="${pageContext.request.contextPath}/showInitiativeToEngage">
-								Initiative to Engage and Contribute to Local Community </a></li> --%>
+ 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showGenderSensitivity">
 								Gender Sensitivity Facility </a></li>
@@ -229,47 +199,16 @@
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showInstituteOfferingCourse">
 								Institute Offers a Course on Humanities </a></li>
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showHumanValues">
-								Activities Conducted </a></li>
- --%>
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showBestPractice">
-								Best Practices of the Institute </a></li>
- --%>
+ 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showProgDistinctive">
 								Institutional Distinctiveness </a></li>
-
-						<%-- 	<li><a class=""
-							href="${pageContext.request.contextPath}/showIncubationCentreDetail">
-								Incubation Centre </a></li> --%>
-
-						<%-- 	<li><a class=""
-							href="${pageContext.request.contextPath}/showAMC"> Annual
-								Maintenance </a></li> --%>
+ 
 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showCommitteeDetail">
 								Committee Details </a></li>
-
-						<%-- 	<li><a class=""
-							href="${pageContext.request.contextPath}/showVisionMission">Institute
-								Vision Mission </a></li> --%>
-
-						<%-- <li><a class=""
-							href="${pageContext.request.contextPath}/showInstituteSupport">Institute
-								Support </a></li>
-
-						<li><a class=""
-							href="${pageContext.request.contextPath}/showActivityOrganized">Activity
-								Organized Form </a></li>
- --%>
-
-
-
-
+  
 					</ul></li>
 
 
@@ -287,11 +226,7 @@
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showProgDsh"> Add
 								Program Details </a></li>
-
-						<%-- 
-								<li><a class=""
-							href="${pageContext.request.contextPath}/showEucationalObjective">Program Educational Objective
-								  </a></li> --%>
+ 
 						<li><a class=""
 							href="${pageContext.request.contextPath}/showpoPso"> PO/PSO
 								Mapping </a></li>
@@ -541,7 +476,7 @@
 								Centre Detail</a></li>
 
 
-					</ul></li>
+					</ul></li> --%>
 
 
 
