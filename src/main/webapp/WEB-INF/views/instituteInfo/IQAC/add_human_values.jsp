@@ -106,7 +106,7 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="title" name="title" class="form-control"
-													required><option value=" ">Select</option>
+													required>
 													<c:forEach items="${distlist}" var="dist">
 
 														<c:choose>

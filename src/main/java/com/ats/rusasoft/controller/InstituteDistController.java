@@ -318,6 +318,11 @@ public class InstituteDistController {
 
 				model.addObject("valuelist", valuelist);
 
+				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
+				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
+
+				model.addObject("distlist", distlist);
+
 				Info add = AccessControll.checkAccess("showHumanValues", "showHumanValues", "0", "1", "0", "0",
 						newModuleList);
 

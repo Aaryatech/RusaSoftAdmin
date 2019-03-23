@@ -113,13 +113,10 @@
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">No. of Participants</th>
 														<th rowspan="2">Action</th>
-
 													</tr>
 													<tr>
-
 														<th>From Date</th>
 														<th>To Date</th>
-
 
 													</tr>
 
@@ -131,19 +128,21 @@
 														<tr>
 
 															<td style="text-align: center">${count.index+1}</td>
+															<c:forEach items="${distlist}" var="dist">
 
-															<td style="text-align: left"><c:out
-																	value="${value.activityName}" /></td>
+																<c:choose>
+																	<c:when test="${value.activityName==dist.valMastId}">
+																		<td style="text-align: left"><c:out
+																				value="${dist.valText}" /></td>
+																	</c:when>
+																</c:choose>
 
-
+															</c:forEach>
 
 															<td style="text-align: left"><c:out
 																	value="${value.activityFromdt}" /></td>
-
-
 															<td style="text-align: left"><c:out
 																	value="${value.activityTodt}" /></td>
-
 
 															<td style="text-align: left"><c:out
 																	value="${value.activityPcount}" /></td>

@@ -1328,7 +1328,7 @@ public class InstituteProfInfoController {
 			 map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", inst_id);
 
-				model.addObject("addAccess", 0);
+				
 			  LinkageMaster[] instArray = rest.postForObject(Constants.url +
 			  "getAllInstLinkageNamesByInstituteId", map, LinkageMaster[].class);
 			  List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
@@ -1351,7 +1351,26 @@ public class InstituteProfInfoController {
 
 				model.addObject("editInst", editInst);
 			
-			  
+
+				Info add = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "0", "0", "1",newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+
 				
 			
 			 } 

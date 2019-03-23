@@ -127,7 +127,7 @@
 
 										</div>
 									</form>
-									showAddProgDistinctive
+
 
 									<div class="form-group">
 
@@ -158,7 +158,8 @@
 															title="Edit" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Edit"><span
-																class="glyphicon glyphicon-edit"></span></a> <a
+																class="glyphicon glyphicon-edit"></span></a>
+															&nbsp;&nbsp;&nbsp;&nbsp;<a
 															href="${pageContext.request.contextPath}/deleteValuesMaster/${value.valMastId}"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger" title="Delete"
