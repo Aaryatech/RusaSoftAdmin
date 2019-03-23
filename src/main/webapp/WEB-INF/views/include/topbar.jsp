@@ -120,6 +120,8 @@ function setAcaYearInSession(yearId,yearValue) {
 		//alert("Data  " +JSON.stringify(data));
 		//data.academicYear
 		//$("#topYear").html(data.academicYear );
+		
+		location.reload(true);
 		 
 	});
 	

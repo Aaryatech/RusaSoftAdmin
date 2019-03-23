@@ -450,7 +450,8 @@ table, th, td {
 			  	tr.append($('<td   ></td>').html(div)); 
 				$('#table1 tbody').append(tr); 
 				
-				 document.getElementById("srindex").value= srindex;
+				 document.getElementById("srindex").value= srindex; 
+				 $('#myModal').modal('hide');
 			}
 			
 
