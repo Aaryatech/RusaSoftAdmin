@@ -84,8 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
-										type="button" class="btn btn-info">Back</button></a> 
+								<a
+									href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -96,15 +97,14 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFacultyConf"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
 											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li> -->
-											
+
 										</ul>
 
 										<div class="tab-content">
@@ -116,139 +116,158 @@
 													<div class="col-xs-12">
 
 
-															<!-- <h5 class="title pull-left">
+														<!-- <h5 class="title pull-left">
 																<strong>Publication/Presentation Details</strong>
 															</h5> -->
 
-															<div class="col-xs-12"></div>
-															
-															<input type="hidden" class="form-control" id="conf_id"
-																		name="conf_id" value="${facConf.confId}">
-																		
-															<div class="form-group">
-															
-																	<label class="control-label col-sm-2" for="smallheading">Title of Publication
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_name" pattern="^(?!\s*$).+"
-																		name="conf_name" placeholder="Title of Publication" value="${facConf.confName}"
-																		required>
-																</div>
+														<div class="col-xs-12"></div>
 
-															
+														<input type="hidden" class="form-control" id="conf_id"
+															name="conf_id" value="${facConf.confId}">
+
+														<div class="form-group">
+
+															<label class="control-label col-sm-2" for="smallheading">Title
+																of Publication <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="conf_name"
+																	pattern="^(?!\s*$).+" name="conf_name"
+																	placeholder="Title of Publication"
+																	value="${facConf.confName}" required>
 															</div>
-															
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="page_order">Conference
-																	Attended <span class="text-danger">*</span>
-																</label>
 
 
-																<div class="col-sm-6">
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_order">Conference
+																Attended <span class="text-danger">*</span>
+															</label>
+
+
+															<div class="col-sm-6">
 																<c:choose>
-																<c:when test="${facConf.confType eq 'national'}">
+																	<c:when test="${facConf.confType eq 'national'}">
 																
-																	National <input type="radio" name="conf_type" id="conf_type"
-																		checked value="national">&nbsp;&nbsp;&nbsp; 
+																	National <input type="radio" name="conf_type"
+																			id="conf_type" checked value="national">&nbsp;&nbsp;&nbsp; 
 																		
-																	International <input	type="radio" name="conf_type" id="conf_type"
-																	 value="international">&nbsp;&nbsp;&nbsp;
+																	International <input type="radio" name="conf_type"
+																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
 																	 
-																	State <input	type="radio" name="conf_type" id="conf_type" value="state">
-																</c:when>
-																<c:when test="${facConf.confType eq 'international'}">
+																	State <input type="radio" name="conf_type"
+																			id="conf_type" value="state">
+																	</c:when>
+																	<c:when test="${facConf.confType eq 'international'}">
 																
-																	National <input type="radio" name="conf_type" id="conf_type"
-																		 value="national">&nbsp;&nbsp;&nbsp; 
+																	National <input type="radio" name="conf_type"
+																			id="conf_type" value="national">&nbsp;&nbsp;&nbsp; 
 																		
-																	International <input	type="radio" name="conf_type" id="conf_type"
-																	checked value="international">&nbsp;&nbsp;&nbsp;
+																	International <input type="radio" name="conf_type"
+																			id="conf_type" checked value="international">&nbsp;&nbsp;&nbsp;
 																	 
-																	State <inputtype="radio" name="conf_type" id="conf_type" value="state">
-																</c:when>
-																<c:when test="${facConf.confType eq 'international'}">
+																	State <inputtype ="radio" name="conf_type"
+																			id="conf_type" value="state">
+																	</c:when>
+																	<c:when test="${facConf.confType eq 'international'}">
 																
-																	National <input type="radio" name="conf_type" id="conf_type"
-																		 value="national">&nbsp;&nbsp;&nbsp; 
+																	National <input type="radio" name="conf_type"
+																			id="conf_type" value="national">&nbsp;&nbsp;&nbsp; 
 																		
-																	International <input	type="radio" name="conf_type" id="conf_type"
-																	 value="international">&nbsp;&nbsp;&nbsp;
+																	International <input type="radio" name="conf_type"
+																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
 																	 
-																	State <input	type="radio" name="conf_type" id="conf_type" value="state">
-																</c:when>
-																
-																<c:otherwise>
-																	National <input type="radio" name="conf_type" id="conf_type"
-																		checked value="national">&nbsp;&nbsp;&nbsp; 
+																	State <input type="radio" name="conf_type"
+																			id="conf_type" value="state">
+																	</c:when>
+
+																	<c:otherwise>
+																	National <input type="radio" name="conf_type"
+																			id="conf_type" checked value="national">&nbsp;&nbsp;&nbsp; 
 																		
-																	International <input type="radio" name="conf_type" id="conf_type"
-																	 value="international">&nbsp;&nbsp;&nbsp;
+																	International <input type="radio" name="conf_type"
+																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
 																	 
-																	State <input type="radio" name="conf_type" id="conf_type" checked value="state">
-																</c:otherwise>
+																	State <input type="radio" name="conf_type"
+																			id="conf_type" checked value="state">
+																	</c:otherwise>
 																</c:choose>
-																</div>	
 															</div>
-															
-															<div class="form-group">
-															
-															
-															
-																<label class="control-label col-sm-2" for="smallheading">Date
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control datepicker" id="conf_date" onkeypress='return restrictAlphabets(event)'
-																		name="conf_date" placeholder="dd/mm/yyyy" value="${facConf.confDate}" pattern="^(?!\s*$).+" required>
-																</div>
+														</div>
+
+														<div class="form-group">
+
+
+
+															<label class="control-label col-sm-2" for="smallheading">Date
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	id="conf_date"
+																	onkeypress='return restrictAlphabets(event)'
+																	name="conf_date" placeholder="dd/mm/yyyy"
+																	value="${facConf.confDate}" pattern="^(?!\s*$).+"
+																	required>
 															</div>
+														</div>
 
-															<div class="form-group">
-																<label class="control-label col-sm-2" for="smallheading">Venue
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_venue" pattern="^(?!\s*$).+"
-																		name="conf_venue" placeholder="Venue" value="${facConf.confVenue}" required>
-																</div>
-															
-															
-															
-															</div>
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Funding
-																	From  <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control" id="conf_fund" pattern="^(?!\s*$).+"
-																		name="conf_fund" placeholder="Funding from" value="${facConf.confFundFrom}"
-																		required>
-																</div>
-																	</div>
-
-															<div class="form-group">
-
-																<label class="control-label col-sm-2" for="smallheading">Amount
-																	 <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-6">
-																	<input type="text" min="1" class="form-control" id="conf_amt" onkeypress='return restrictAlphabets(event)'
-																		name="conf_amt" placeholder="Amount" value="${facConf.confFundAmt}" pattern="^(?!\s*$).+" required>
-																</div>
-
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Venue
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="conf_venue"
+																	pattern="^(?!\s*$).+" name="conf_venue"
+																	placeholder="Venue" value="${facConf.confVenue}"
+																	required>
 															</div>
 
 
 
+														</div>
+
+														<div class="form-group">
+
+															<label class="control-label col-sm-2" for="smallheading">Funding
+																From <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="conf_fund"
+																	pattern="^(?!\s*$).+" name="conf_fund"
+																	placeholder="Funding from"
+																	value="${facConf.confFundFrom}" required>
+															</div>
+														</div>
+
+														<div class="form-group">
+
+															<label class="control-label col-sm-2" for="smallheading">Amount
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="number" min="0" class="form-control"
+																	id="conf_amt"
+																	onkeypress='return restrictAlphabets(event)'
+																	name="conf_amt" placeholder="Amount"
+																	value="${facConf.confFundAmt}" pattern="^(?!\s*$).+"
+																	required>
+															</div>
+
+														</div>
+
+
+														<input type="hidden" id="is_view" name="is_view" value="0">
 
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																<input type="submit" id="sub1" class="btn btn-primary"
+																	onclick="submit_f(1)" value="Save"> <input
+																	type="submit" id="sub2" class="btn btn-primary"
+																	onclick="submit_f(0)"
+																	value="Save &
 																		Next">
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
@@ -268,7 +287,7 @@
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
-									
+
 								</div>
 
 							</div>
@@ -290,48 +309,56 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-    
-    $(function () {
-		 
-        $('.datepicker').datepicker({
-			autoclose: true,
-            format: "dd-mm-yyyy",
-            changeYear:true,
-            changeMonth:true
-
-		});
-    });
-    
-</script>
-
-<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
+					return wasSubmitted;
+				}
 			}
-		</script>
+			return false;
+		}
+
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+	</script>
+
+
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 </body>
 </html>
