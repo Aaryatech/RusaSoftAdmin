@@ -50,7 +50,7 @@ public class IqacController {
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 	String curDateTime = dateFormat.format(cal.getTime());
-
+	String redirect=null;
 	@RequestMapping(value = "/chkFields", method = RequestMethod.GET)
 	public @ResponseBody Info checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
 
@@ -172,13 +172,19 @@ public class IqacController {
 		miqac.setLastUpdatedDatetime(curDateTime);
 		miqac.setType(2);
 		MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac", miqac, MIqac.class);
+		
+		int isView = Integer.parseInt(request.getParameter("is_view"));
+		if (isView == 1)
+			redirect = "redirect:/showIqacList";
+		else
+			redirect = "redirect:/iqacRegistration";
 		} catch (Exception e) {
 			
 			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
 
 		}
-		return "redirect:/showIqacList";
+		return redirect;
 
 	}
 
@@ -617,14 +623,20 @@ public class IqacController {
 				System.out.println("Staff:" + staff.toString());
 		
 				Staff stf = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
-		} catch (Exception e) {
+		
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showStaffList";
+				else
+					redirect = "redirect:/showRegisterStaff";
+	} catch (Exception e) {
 
 			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
 			e.printStackTrace();
 			
 
 		}
-		return "redirect:/showStaffList";
+		return redirect;
 
 	}
 
@@ -924,12 +936,17 @@ public class IqacController {
 			
 	
 			Dean deanSave = rest.postForObject(Constants.url + "/saveNewDean", dean, Dean.class);
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/showDeanList";
+			else
+				redirect = "redirect:/showRegDean";
 		} catch (Exception e) {
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 			e.printStackTrace();
 			
 		}
-		return "redirect:/showDeanList";
+		return redirect;
 
 	}
 

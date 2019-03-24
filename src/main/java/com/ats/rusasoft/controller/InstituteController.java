@@ -41,6 +41,7 @@ import com.ats.rusasoft.model.InstituteActivity;
 import com.ats.rusasoft.model.InstituteSupport;
 import com.ats.rusasoft.model.IntelPrpoRight;
 import com.ats.rusasoft.model.StaffList;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -65,15 +66,24 @@ import com.itextpdf.text.pdf.PdfWriter;
 		@RequestMapping(value = "/showInstituteSupport", method = RequestMethod.GET)
 		public ModelAndView showInstituteSupport(HttpServletRequest request, HttpServletResponse response) {
 	
-			ModelAndView model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
 			try {
+				/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 				
-			
+				Info view = AccessControll.checkAccess("/showInstituteSupport", "/showInstituteSupport", "1", "0", "0", "0", newModuleList);
+
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {*/
+				model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
 				model.addObject("title", "Institute Schemes List");
 				model.addObject("title1", "Institute Support Financially by Awarding Scholarship/Freeships like schemes other than Government Schemes ");
 	
 
-				  HttpSession session = request.getSession();
+				  
 
 					int instituteId = (int) session.getAttribute("instituteId");
 					int userId = (int) session.getAttribute("userId");
@@ -124,7 +134,25 @@ import com.itextpdf.text.pdf.PdfWriter;
 					
 					session.setAttribute("exportExcelList", exportToExcelList);
 					session.setAttribute("excelName", "GetMatIssueHeader");
-				
+
+			/*
+			 * Info add = AccessControll.checkAccess("/showInstituteSupport",
+			 * "/showInstituteSupport", "0", "1", "0", "0", newModuleList); Info edit =
+			 * AccessControll.checkAccess("/showInstituteSupport", "/showInstituteSupport",
+			 * "0", "0", "1", "0", newModuleList); Info delete =
+			 * AccessControll.checkAccess("/showInstituteSupport", "/showInstituteSupport",
+			 * "0", "0", "0", "1", newModuleList);
+			 * 
+			 * if (add.isError() == false) { System.out.println(" add   Accessable ");
+			 * model.addObject("addAccess", 0);
+			 * 
+			 * } if (edit.isError() == false) { System.out.println(" edit   Accessable ");
+			 * model.addObject("editAccess", 0); } if (delete.isError() == false) {
+			 * System.out.println(" delete   Accessable "); model.addObject("deleteAccess",
+			 * 0);
+			 * 
+			 * } }
+			 */
 			} catch (Exception e) {
 	
 				e.printStackTrace();

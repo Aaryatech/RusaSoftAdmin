@@ -206,6 +206,7 @@
 													onclick="submit_f(0)" value="Save &
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
+												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 										</div>
 

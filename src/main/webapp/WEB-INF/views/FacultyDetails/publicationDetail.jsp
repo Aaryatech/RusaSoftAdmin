@@ -167,10 +167,10 @@
 																	International <input type="radio" name="conf_type"
 																			id="conf_type" checked value="international">&nbsp;&nbsp;&nbsp;
 																	 
-																	State <inputtype ="radio" name="conf_type"
+																	State <input type="radio" name="conf_type"
 																			id="conf_type" value="state">
 																	</c:when>
-																	<c:when test="${facConf.confType eq 'international'}">
+																	<c:when test="${facConf.confType eq 'state'}">
 																
 																	National <input type="radio" name="conf_type"
 																			id="conf_type" value="national">&nbsp;&nbsp;&nbsp; 
@@ -179,7 +179,7 @@
 																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input type="radio" name="conf_type"
-																			id="conf_type" value="state">
+																			id="conf_type" checked value="state">
 																	</c:when>
 
 																	<c:otherwise>
@@ -190,7 +190,7 @@
 																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input type="radio" name="conf_type"
-																			id="conf_type" checked value="state">
+																			id="conf_type" value="state">
 																	</c:otherwise>
 																</c:choose>
 															</div>
@@ -272,6 +272,7 @@
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
 																<button type="reset" class="btn btn-default">Reset</button>
+															<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>
 
@@ -309,6 +310,15 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+</script>
+	
 	<script type="text/javascript">
 		var wasSubmitted = false;
 		function checkBeforeSubmit() {

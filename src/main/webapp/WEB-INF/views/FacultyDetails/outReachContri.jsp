@@ -102,15 +102,6 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<!-- <li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li> -->
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
 
 												<div>
 
@@ -300,14 +291,13 @@
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
 																<button type="reset" class="btn btn-default">Reset</button>
+															<input type="hidden" id="is_view" name="is_view" value="0">
 														</div>
 													</div>
 												</div>
 
 												<div class="clearfix"></div>
 
-											</div>
-										</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
@@ -332,6 +322,15 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+</script>
+
 <script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){

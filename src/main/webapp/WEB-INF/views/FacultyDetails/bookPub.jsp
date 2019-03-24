@@ -259,6 +259,7 @@
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
 																<button type="reset" class="btn btn-default">Reset</button>
+																	<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>
 
@@ -323,6 +324,14 @@
 		});
     });
     
+</script>
+
+<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
 </script>
 
 </body>
