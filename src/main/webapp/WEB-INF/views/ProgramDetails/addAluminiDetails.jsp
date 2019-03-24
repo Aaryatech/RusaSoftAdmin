@@ -96,224 +96,215 @@
 							<div class="row">
 								<div class="col-md-12">
 
-									<ul class="nav nav-tabs">
-										<li class="active"><a href="#home" data-toggle="tab">
-												<i class="fa fa-home"></i> Register Form
-										</a></li>
-
-
-									</ul>
-
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
-											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/insertAlumni"
-												method="post" name="form_sample_2" id="form_sample_2"
-												onsubmit="return checkBeforeSubmit()">
-
-												<div class="row">
-													<div class="col-md-12">
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_name">
-																Name of Alumni<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	placeholder="Full Name of Alumni" id="alum_name"
-																	value="${alumni.alumniName}" name="alum_name" required>
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_name">
-																Passing Year <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control datepickeryear"
-																	data-min-view-mode="years" data-start-view="2"
-																	data-format="yyyy" placeholder="Enter Year of Passing"
-																	id="year_of_pass" value="${alumni.passingYear}"
-																	name="year_of_pass" autocomplete="off" required>
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="status">Nature
-																of Contribution <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<select id="contr_type" name="contr_type"
-																	class="form-control" required>
-
-																	<c:choose>
-																		<c:when test="${alumni.contributionType==1}">
-																			<option selected value="1">Financial</option>
-																			<option value="0">Non Financial</option>
-																		</c:when>
-																		<c:when test="${alumni.contributionType==0}">
-																			<option value="1">Financial</option>
-																			<option selected value="0">Non Financial</option>
-																		</c:when>
-																		<c:otherwise>
-																			<option value="1">Financial</option>
-																			<option value="0">Non Financial</option>
-																		</c:otherwise>
-																	</c:choose>
-
-																</select>
-
-
-															</div>
-														</div>
 
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_name">
-																Year of Contribution<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text"  autocomplete="off" class="form-control datepickeryear"
-																	data-min-view-mode="years" data-start-view="2"
-																	data-format="yyyy"
-																	placeholder="Enter Year of Contribution"
-																	id="contr_year" value="${alumni.contributionYear}"
-																	name="contr_year" required>
-															</div>
-														</div>
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/insertAlumni"
+										method="post" name="form_sample_2" id="form_sample_2"
+										onsubmit="return checkBeforeSubmit()">
+
+										<div class="row">
+											<div class="col-md-12">
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">
+														Name of Alumni<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															placeholder="Full Name of Alumni" id="alum_name"
+															value="${alumni.alumniName}" name="alum_name" required>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">
+														Passing Year <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control datepickeryear"
+															data-min-view-mode="years" data-start-view="2"
+															data-format="yyyy" placeholder="Enter Year of Passing"
+															id="year_of_pass" value="${alumni.passingYear}"
+															name="year_of_pass" autocomplete="off" required>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="status">Nature
+														of Contribution <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<select id="contr_type" name="contr_type"
+															class="form-control" required>
+
+															<c:choose>
+																<c:when test="${alumni.contributionType==1}">
+																	<option selected value="1">Financial</option>
+																	<option value="0">Non Financial</option>
+																</c:when>
+																<c:when test="${alumni.contributionType==0}">
+																	<option value="1">Financial</option>
+																	<option selected value="0">Non Financial</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="1">Financial</option>
+																	<option value="0">Non Financial</option>
+																</c:otherwise>
+															</c:choose>
+
+														</select>
+
+
+													</div>
+												</div>
 
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="status">Benefit
-																To <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<select id="benif_to" name="benif_to"
-																	class="form-control" onchange="showExtraField()"
-																	required>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">
+														Year of Contribution<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" autocomplete="off"
+															class="form-control datepickeryear"
+															data-min-view-mode="years" data-start-view="2"
+															data-format="yyyy"
+															placeholder="Enter Year of Contribution" id="contr_year"
+															value="${alumni.contributionYear}" name="contr_year"
+															required>
+													</div>
+												</div>
 
-																	<c:choose>
-																		<c:when test="${alumni.benefitTo eq 'Students'}">
 
-																			<option selected value="Students">Students</option>
-																			<option value="Staff">Staff</option>
-																			<option value="Faculty">Faculty</option>
-																			<option value="Department">Department</option>
-																			<option value="Institute">Institute</option>
-																			<option value="Society">Society</option>
-																			<option value="7">Any Other</option>
 
-																		</c:when>
-																		<c:when test="${alumni.benefitTo eq 'Staff'}">
-																		<option value="Students">Students</option>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="status">Benefit
+														To <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<select id="benif_to" name="benif_to" class="form-control"
+															onchange="showExtraField()" required>
+
+															<c:choose>
+																<c:when test="${alumni.benefitTo eq 'Students'}">
+
+																	<option selected value="Students">Students</option>
+																	<option value="Staff">Staff</option>
+																	<option value="Faculty">Faculty</option>
+																	<option value="Department">Department</option>
+																	<option value="Institute">Institute</option>
+																	<option value="Society">Society</option>
+																	<option value="7">Any Other</option>
+
+																</c:when>
+																<c:when test="${alumni.benefitTo eq 'Staff'}">
+																	<option value="Students">Students</option>
 																	<option selected value="Staff">Staff</option>
 																	<option value="Faculty">Faculty</option>
 																	<option value="Department">Department</option>
 																	<option value="Institute">Institute</option>
 																	<option value="Society">Society</option>
 																	<option value="7">Any Other</option>
-																		</c:when>
-																		
-																		<c:when test="${alumni.benefitTo eq 'Faculty'}">
-																		<option value="Students">Students</option>
-																	<option  value="Staff">Staff</option>
+																</c:when>
+
+																<c:when test="${alumni.benefitTo eq 'Faculty'}">
+																	<option value="Students">Students</option>
+																	<option value="Staff">Staff</option>
 																	<option selected value="Faculty">Faculty</option>
 																	<option value="Department">Department</option>
 																	<option value="Institute">Institute</option>
 																	<option value="Society">Society</option>
 																	<option value="7">Any Other</option>
-																		</c:when>
-																		
-																		<c:when test="${alumni.benefitTo eq 'Department'}">
-																		<option value="Students">Students</option>
-																	<option  value="Staff">Staff</option>
-																	<option  value="Faculty">Faculty</option>
+																</c:when>
+
+																<c:when test="${alumni.benefitTo eq 'Department'}">
+																	<option value="Students">Students</option>
+																	<option value="Staff">Staff</option>
+																	<option value="Faculty">Faculty</option>
 																	<option selected value="Department">Department</option>
 																	<option value="Institute">Institute</option>
 																	<option value="Society">Society</option>
 																	<option value="7">Any Other</option>
-																		</c:when>
-																		
-																		<c:when test="${alumni.benefitTo eq 'Institute'}">
-																		<option value="Students">Students</option>
-																	<option  value="Staff">Staff</option>
-																	<option  value="Faculty">Faculty</option>
-																	<option  value="Department">Department</option>
-																	<option  selected value="Institute">Institute</option>
+																</c:when>
+
+																<c:when test="${alumni.benefitTo eq 'Institute'}">
+																	<option value="Students">Students</option>
+																	<option value="Staff">Staff</option>
+																	<option value="Faculty">Faculty</option>
+																	<option value="Department">Department</option>
+																	<option selected value="Institute">Institute</option>
 																	<option value="Society">Society</option>
 																	<option value="7">Any Other</option>
-																		</c:when>
-																		
-																		<c:when test="${alumni.benefitTo eq 'Society'}">
-																		<option value="Students">Students</option>
-																	<option  value="Staff">Staff</option>
-																	<option  value="Faculty">Faculty</option>
-																	<option  value="Department">Department</option>
-																	<option   value="Institute">Institute</option>
+																</c:when>
+
+																<c:when test="${alumni.benefitTo eq 'Society'}">
+																	<option value="Students">Students</option>
+																	<option value="Staff">Staff</option>
+																	<option value="Faculty">Faculty</option>
+																	<option value="Department">Department</option>
+																	<option value="Institute">Institute</option>
 																	<option selected value="Society">Society</option>
 																	<option value="7">Any Other</option>
-																	</c:when>
-																	<c:otherwise>
+																</c:when>
+																<c:otherwise>
 																	<option value="Students">Students</option>
-																	<option  value="Staff">Staff</option>
-																	<option  value="Faculty">Faculty</option>
-																	<option  value="Department">Department</option>
-																	<option   value="Institute">Institute</option>
-																	<option  value="Society">Society</option>
+																	<option value="Staff">Staff</option>
+																	<option value="Faculty">Faculty</option>
+																	<option value="Department">Department</option>
+																	<option value="Institute">Institute</option>
+																	<option value="Society">Society</option>
 																	<option selected value="7">Any Other</option>
-																	
-																	</c:otherwise>
-																		
-																	</c:choose>
-																	
 
-																</select>
+																</c:otherwise>
 
-															</div>
-														</div>
-
-														<div class="form-group" id="abc" style="display: none;">
-															<label class="control-label col-sm-3" for="page_order">
-																Other<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="other_benif"
-																	value="${alumni.benefitTo}" name="other_benif"
-																	placeholder="Other Beneficiary">
-															</div>
-														</div>
+															</c:choose>
 
 
-														<div class="form-group">
-															<div class="col-sm-offset-3 col-sm-9">
-																<input type="submit" id="sub1" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Save"> <input
-																	type="submit" id="sub2" class="btn btn-primary"
-																	onclick="submit_f(0)"
-																	value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+														</select>
 
 													</div>
-													<input type="hidden" id="alumni_id" name="alumni_id"
-														value="${alumni.alumniDetailId}"> <input
-														type="hidden" id="is_view" name="is_view" value="0">
-
 												</div>
-											</form>
+
+												<div class="form-group" id="abc" style="display: none;">
+													<label class="control-label col-sm-3" for="page_order">
+														Other<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="other_benif"
+															value="${alumni.benefitTo}" name="other_benif"
+															placeholder="Other Beneficiary">
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
+														<input type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)" value="Save"> <input
+															type="submit" id="sub2" class="btn btn-primary"
+															onclick="submit_f(0)"
+															value="Save &
+																		Next">
+														<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+												</div>
+
+											</div>
+											<input type="hidden" id="alumni_id" name="alumni_id"
+												value="${alumni.alumniDetailId}"> <input
+												type="hidden" id="is_view" name="is_view" value="0">
 
 										</div>
+									</form>
 
-										<div class="clearfix"></div>
-									</div>
 
 								</div>
+								<p class="desc text-danger fontsize11">Notice : * Fields are
+									mandatory.</p>
 
 							</div>
 
@@ -331,7 +322,6 @@
 
 	<!-- END CONTENT -->
 	<script type="text/javascript">
-
 		/* function checkUnique(inputValue,valueType){
 		 //alert(inputValue);
 		
@@ -414,32 +404,34 @@
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
-					document.getElementById("other_benif").setAttribute("required","true");
+				document.getElementById("other_benif").setAttribute("required",
+						"true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
-					document.getElementById("other_benif").removeAttribute("required");
+				document.getElementById("other_benif").removeAttribute(
+						"required");
 
 			}
 
 		}
-
 	</script>
 	<script type="text/javascript">
-	function hideText() {
-		//alert("hii");
-		var qualType = document.getElementById("benif_to").value
-		// alert("x " +qualType);
-			if(qualType == 7){
+		function hideText() {
+			//alert("hii");
+			var qualType = document.getElementById("benif_to").value
+			// alert("x " +qualType);
+			if (qualType == 7) {
 				//alert("In If " +x);
 				document.getElementById("abc").style = "visible";
-				document.getElementById("other_benif").setAttribute("required","true");
+				document.getElementById("other_benif").setAttribute("required",
+						"true");
 
-			}else{ 
-		document.getElementById("abc").style = "display:none"
+			} else {
+				document.getElementById("abc").style = "display:none"
 			}
-		
-	}
+
+		}
 	</script>
 	<script type="text/javascript">
 		function setDate(value) {
@@ -464,38 +456,36 @@
 	</script>
 
 	<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-        document.getElementById("sub1").disabled=true;
-  	  document.getElementById("sub2").disabled=true;       
-  	  return wasSubmitted;
-    	  }
-      }
-      return false;
-    }   
-    
-    function submit_f(view) {
-		document.getElementById("is_view").value = view;//create this 
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
 
-	}
-    
-    $(function(){
-		 
-        $('.datepickeryear').datepicker({
-			autoclose: true,
-			minViewMode: 2,
-	         format: 'yyyy'
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
 
+		}
+
+		$(function() {
+
+			$('.datepickeryear').datepicker({
+				autoclose : true,
+				minViewMode : 2,
+				format : 'yyyy'
+
+			});
 		});
-    });
-    
-   
-</script>
-<!-- 	<script type="text/javascript">
+	</script>
+	<!-- 	<script type="text/javascript">
 	 $(function(){
 		 
 	        $('.datepickeryear').datepicker({
@@ -507,7 +497,7 @@
 	    });
     </script> -->
 
-<!-- <script
+	<!-- <script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="./javascript.js"></script>
 	<script

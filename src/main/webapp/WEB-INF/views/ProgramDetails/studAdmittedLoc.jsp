@@ -53,11 +53,11 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<c:if test="${addAccess==0}">
-								<a
-									href="${pageContext.request.contextPath}/showAddStudAddmitLocWise"><button
-										type="button" class="btn btn-success">Add Student
-										Locationwise</button></a></c:if>
+								<c:if test="${addAccess==0}">
+									<a
+										href="${pageContext.request.contextPath}/showAddStudAddmitLocWise"><button
+											type="button" class="btn btn-success">Add</button></a>
+								</c:if>
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>
 
@@ -130,27 +130,18 @@
 	<!-- END CONTENT -->
 
 	<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-		//var i=0;
-		var i = parseInt(document.getElementById("index").value);
-		//alert(i);
-		var cat=document.getElementById("cat").value
-		var gen=document.getElementById("gen").value
-		var stud=document.getElementById("stud").value
-		var dataTable = $('#example-1')
-		.DataTable();
-		dataTable.row
-		.add(
-				[
-					i+1,
-					cat,
-					gen,
-					stud,
-						 ])
-		.draw();
-		document.getElementById("index").value = i + 1;
-	}
+		function getData() {
+			//alert("hii");
+			//var i=0;
+			var i = parseInt(document.getElementById("index").value);
+			//alert(i);
+			var cat = document.getElementById("cat").value
+			var gen = document.getElementById("gen").value
+			var stud = document.getElementById("stud").value
+			var dataTable = $('#example-1').DataTable();
+			dataTable.row.add([ i + 1, cat, gen, stud, ]).draw();
+			document.getElementById("index").value = i + 1;
+		}
 	</script>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->

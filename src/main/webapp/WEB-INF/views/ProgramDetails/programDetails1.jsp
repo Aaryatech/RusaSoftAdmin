@@ -56,8 +56,7 @@
 
 								<c:if test="${isAdd==1}">
 									<a href="${pageContext.request.contextPath}/showAddProgram"><button
-											type="button" class="btn btn-success">Add Program
-											Detail</button></a>
+											type="button" class="btn btn-success">Add</button></a>
 								</c:if>
 
 
@@ -95,7 +94,8 @@
 													<td>${list.approvedBy}</td>
 
 													<td><c:if test="${isAdd==1}">
-															<a href="${pageContext.request.contextPath}/addProgramDetail/${list.programId}"
+															<a
+																href="${pageContext.request.contextPath}/addProgramDetail/${list.programId}"
 																title="Add Details" rel="tooltip"
 																data-color-class="detail"
 																data-animate=" animated fadeIn " data-toggle="tooltip"

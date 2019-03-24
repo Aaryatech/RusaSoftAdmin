@@ -57,8 +57,7 @@
 								<c:if test="${isAdd==1}">
 									<a
 										href="${pageContext.request.contextPath}/showAddStudentOrgnizedActivity"><button
-											type="submit" class="btn btn-success">Add Activity
-											Detail</button></a>
+											type="submit" class="btn btn-success">Add</button></a>
 								</c:if>
 
 							</div>
@@ -88,24 +87,23 @@
 
 										</thead>
 										<tbody>
-											<c:forEach items="${list}" var="list"
-												varStatus="count">
+											<c:forEach items="${list}" var="list" varStatus="count">
 												<tr>
-													 
+
 													<td>${count.index+1}</td>
 													<td>${list.activityName}</td>
 													<td>${list.date}</td>
 													<td>${list.yearName}</td>
-													<td>${list.branch}</td> 
+													<td>${list.branch}</td>
 													<td>${list.participatedStudent}</td>
 													<td>${list.level}</td>
-													
+
 													<td><c:if test="${isEdit==1}">
-															<a href="${pageContext.request.contextPath}/editStudentOrgnizedActivity/${list.studentActivityId}"><span
+															<a
+																href="${pageContext.request.contextPath}/editStudentOrgnizedActivity/${list.studentActivityId}"><span
 																class="glyphicon glyphicon-edit" title="Edit"
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if>
-														<c:if test="${isDelete==1}">
+															</c:if> <c:if test="${isDelete==1}">
 															<a
 																href="${pageContext.request.contextPath}/deleteStudentOrgnizedActivity/${list.studentActivityId}"
 																onClick="return confirm('Are you sure want to delete this record');"

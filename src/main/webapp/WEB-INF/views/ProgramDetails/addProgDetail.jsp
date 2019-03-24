@@ -100,267 +100,240 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Program
-											</a></li>
 
 
-										</ul>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-													<div class="col-xs-12">
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="programType">Program
-																Type <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="programType" name="programType"
-																	class="form-control" required>
-																	<c:forEach items="${progTypeList}" var="progTypeList">
-																		<c:choose>
-																			<c:when
-																				test="${progTypeList.programId==editProgram.programType}">
-																				<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${progTypeList.programId}">${progTypeList.programName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-																</select>
-
-
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="monthDuration">
-																Duration(in months)<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control"
-																	id="monthDuration" value="${editProgram.monthDuration}"
-																	name="monthDuration" placeholder="Duration(in months)"
-																	pattern="\d*" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="nameOfProgram">
-																Name of Program <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control"
-																	id="nameOfProgram" value="${editProgram.nameOfProgram}"
-																	name="nameOfProgram" placeholder="Name of Program "
-																	required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="intake">Sanctioned
-																Intake <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control " id="intake"
-																	value="${editProgram.sanctionalIntake}" name="intake"
-																	placeholder=" Sanctioned Intake" required pattern="\d*" >
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="date">Date/Year
-																of Introduction <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker"
-																	id="date" value="${editProgram.dateOfIntroduction}"
-																	name="date" placeholder="Date/Year of Introduction"
-																	required>
-															</div>
-														</div>
-														<c:set var="findOther" value="0"></c:set>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="approvedBy">Approved
-																By <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="approvedBy" name="approvedBy"
-																	class="form-control" onchange="showExtraField()"
-																	required>
-
-																	<c:choose>
-																		<c:when test="${editProgram.programId>0}">
-
-																			<c:choose>
-																				<c:when test="${editProgram.approvedBy eq 'BOS/AC'}">
-																					<option value="BOS/AC" selected>BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:when
-																					test="${editProgram.approvedBy eq 'Industry'}">
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry" selected>Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:when test="${editProgram.approvedBy eq 'AICTE'}">
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE" selected>AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:when test="${editProgram.approvedBy eq 'NCTE'}">
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE" selected>NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:when test="${editProgram.approvedBy eq 'MCI'}">
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI" selected>MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:when test="${editProgram.approvedBy eq 'DCI'}">
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI" selected>DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:when test="${editProgram.approvedBy eq 'PCI'}">
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI" selected>PCI</option>
-																					<option value="7">Any Other</option>
-																				</c:when>
-																				<c:otherwise>
-
-																					<option value="BOS/AC">BOS/AC</option>
-																					<option value="Industry">Industry</option>
-																					<option value="AICTE">AICTE</option>
-																					<option value="NCTE">NCTE</option>
-																					<option value="MCI">MCI</option>
-																					<option value="DCI">DCI</option>
-																					<option value="PCI">PCI</option>
-																					<option value="7" selected>Any Other</option>
-																					<c:set var="findOther" value="1"></c:set>
-
-																				</c:otherwise>
-
-																			</c:choose>
-																		</c:when>
-																		<c:otherwise>
-																			<option value="BOS/AC">BOS/AC</option>
-																			<option value="Industry">Industry</option>
-																			<option value="AICTE">AICTE</option>
-																			<option value="NCTE">NCTE</option>
-																			<option value="MCI">MCI</option>
-																			<option value="DCI">DCI</option>
-																			<option value="PCI">PCI</option>
-																			<option value="7">Any Other</option>
-																			 
-																		</c:otherwise>
-																	</c:choose>
-																</select>
-
-
-															</div>
-														</div>
-
-														<div class="form-group" id="abc">
-															<label class="control-label col-sm-2"
-																for="otherApprovedBy"> Any Other <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control"
-																	id="otherApprovedBy" value="${editProgram.approvedBy}"
-																	name="otherApprovedBy" placeholder="Approved By ">
-															</div>
-														</div>
-
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="programType">Program
+												Type <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="programType" name="programType"
+													class="form-control" required>
+													<c:forEach items="${progTypeList}" var="progTypeList">
 														<c:choose>
-															<c:when test="${editProgram.programId>0}">
-																<input type="hidden" id="programId" name="programId"
-																	value="${editProgram.programId}">
+															<c:when
+																test="${progTypeList.programId==editProgram.programType}">
+																<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
 															</c:when>
 															<c:otherwise>
-																<input type="hidden" id="programId" name="programId"
-																	value="0">
+																<option value="${progTypeList.programId}">${progTypeList.programName}</option>
+
 															</c:otherwise>
+
 														</c:choose>
 
-														<input type="hidden" id="is_view" name="is_view" value="0">
-														
-														<input type="hidden" id="findOtherName" name="findOtherName" value="${findOther}">
-														
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Add"> <input
-																	type="submit" class="btn btn-primary"
-																	onclick="submit_f(0)"
-																	value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+													</c:forEach>
+												</select>
 
-
-
-
-													</div>
-													<div class="clearfix"></div>
-												</div>
 
 											</div>
+										</div>
 
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="monthDuration">
+												Duration(in months)<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="monthDuration"
+													value="${editProgram.monthDuration}" name="monthDuration"
+													placeholder="Duration(in months)" pattern="\d*" required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="nameOfProgram">
+												Name of Program <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="nameOfProgram"
+													value="${editProgram.nameOfProgram}" name="nameOfProgram"
+													placeholder="Name of Program " required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="intake">Sanctioned
+												Intake <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control " id="intake"
+													value="${editProgram.sanctionalIntake}" name="intake"
+													placeholder=" Sanctioned Intake" required pattern="\d*">
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="date">Date/Year
+												of Introduction <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control datepicker" id="date"
+													value="${editProgram.dateOfIntroduction}" name="date"
+													placeholder="Date/Year of Introduction" required>
+											</div>
+										</div>
+										<c:set var="findOther" value="0"></c:set>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="approvedBy">Approved
+												By <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="approvedBy" name="approvedBy"
+													class="form-control" onchange="showExtraField()" required>
+
+													<c:choose>
+														<c:when test="${editProgram.programId>0}">
+
+															<c:choose>
+																<c:when test="${editProgram.approvedBy eq 'BOS/AC'}">
+																	<option value="BOS/AC" selected>BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:when test="${editProgram.approvedBy eq 'Industry'}">
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry" selected>Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:when test="${editProgram.approvedBy eq 'AICTE'}">
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE" selected>AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:when test="${editProgram.approvedBy eq 'NCTE'}">
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE" selected>NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:when test="${editProgram.approvedBy eq 'MCI'}">
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI" selected>MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:when test="${editProgram.approvedBy eq 'DCI'}">
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI" selected>DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:when test="${editProgram.approvedBy eq 'PCI'}">
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI" selected>PCI</option>
+																	<option value="7">Any Other</option>
+																</c:when>
+																<c:otherwise>
+
+																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="Industry">Industry</option>
+																	<option value="AICTE">AICTE</option>
+																	<option value="NCTE">NCTE</option>
+																	<option value="MCI">MCI</option>
+																	<option value="DCI">DCI</option>
+																	<option value="PCI">PCI</option>
+																	<option value="7" selected>Any Other</option>
+																	<c:set var="findOther" value="1"></c:set>
+
+																</c:otherwise>
+
+															</c:choose>
+														</c:when>
+														<c:otherwise>
+															<option value="BOS/AC">BOS/AC</option>
+															<option value="Industry">Industry</option>
+															<option value="AICTE">AICTE</option>
+															<option value="NCTE">NCTE</option>
+															<option value="MCI">MCI</option>
+															<option value="DCI">DCI</option>
+															<option value="PCI">PCI</option>
+															<option value="7">Any Other</option>
+
+														</c:otherwise>
+													</c:choose>
+												</select>
+
+
+											</div>
+										</div>
+
+										<div class="form-group" id="abc">
+											<label class="control-label col-sm-2" for="otherApprovedBy">
+												Any Other <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="otherApprovedBy"
+													value="${editProgram.approvedBy}" name="otherApprovedBy"
+													placeholder="Approved By ">
+											</div>
+										</div>
+
+										<c:choose>
+											<c:when test="${editProgram.programId>0}">
+												<input type="hidden" id="programId" name="programId"
+													value="${editProgram.programId}">
+											</c:when>
+											<c:otherwise>
+												<input type="hidden" id="programId" name="programId"
+													value="0">
+											</c:otherwise>
+										</c:choose>
+
+										<input type="hidden" id="is_view" name="is_view" value="0">
+
+										<input type="hidden" id="findOtherName" name="findOtherName"
+											value="${findOther}">
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(1)" value="Add"> <input
+													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													value="Save &
+																		Next">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
 										</div>
 
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -385,32 +358,31 @@
 
 	<script type="text/javascript">
 		function showExtraField() {
-			
+
 			var qualType = document.getElementById("approvedBy").value
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
-					document.getElementById("otherApprovedBy").required=true;
+				document.getElementById("otherApprovedBy").required = true;
 
 			} else {
 				document.getElementById("abc").style = "display:none"
-					document.getElementById("otherApprovedBy").required=false;
+				document.getElementById("otherApprovedBy").required = false;
 			}
 
 		}
 
 		function hideText() {
 			var findOtherName = document.getElementById("findOtherName").value;
-			
-			if(findOtherName==1){
+
+			if (findOtherName == 1) {
 				document.getElementById("abc").style = "visible"
-					document.getElementById("otherApprovedBy").required=true;
-			}else{
-				
+				document.getElementById("otherApprovedBy").required = true;
+			} else {
+
 				document.getElementById("abc").style = "display:none"
-					document.getElementById("otherApprovedBy").required=false;
+				document.getElementById("otherApprovedBy").required = false;
 			}
-			
 
 		}
 	</script>

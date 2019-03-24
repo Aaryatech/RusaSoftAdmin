@@ -28,7 +28,7 @@
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
 		<!-- START CONTENT -->
-		  <section id="main-content" class=" ">
+		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
 				<%-- <div class='col-xs-12'>
@@ -53,88 +53,91 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<a href="${pageContext.request.contextPath}/showAddStudSupp"><button
-										type="button" class="btn btn-success">Add </button></a>
-								
+								<a href="${pageContext.request.contextPath}/showAddStudSupp"><button
+										type="button" class="btn btn-success">Add</button></a>
+
 							</div>
 
 						</header>
 						<form action="${pageContext.request.contextPath}/deleteStudSchm/0"
 							method="get" id="libListForm">
-						<div class="content-body">
-							<div class="row">
+							<div class="content-body">
+								<div class="row">
 
 
 
-								<!-- <h5 class="title pull-left">
+									<!-- <h5 class="title pull-left">
 									<strong>Students Support Scheme</strong>
 								</h5> -->
-							
-								<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display" id="example-1">
-										<thead>
-											<tr>
-												<th class="check" style="text-align: center; width: 5%;"><input
+									<div class="col-xs-12">
+
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
+												<tr>
+													<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th>
-												<th  style="text-align: center; ">Sr.No.</th>
-												<th style="text-align: center; ">Scheme</th>
-												<th style="text-align: center; "> Level</th>
-												<th style="text-align: center; ">Type</th>
-												<th>Benefited Students</th>
-												<th style="text-align: center; ">Implementation Year</th>
-												<th style="text-align: center; ">Support Agency</th>
-												<th style="text-align: center; ">Actions</th>
-											</tr>
+													<th style="text-align: center;">Sr.No.</th>
+													<th style="text-align: center;">Scheme</th>
+													<th style="text-align: center;">Level</th>
+													<th style="text-align: center;">Type</th>
+													<th>Benefited Students</th>
+													<th style="text-align: center;">Implementation Year</th>
+													<th style="text-align: center;">Support Agency</th>
+													<th style="text-align: center;">Actions</th>
+												</tr>
 
-										</thead>
-										<tbody>
+											</thead>
+											<tbody>
 												<c:forEach items="${studList}" var="stud" varStatus="count">
 													<tr>
-														<td style="text-align: center; "><input type="checkbox" class="chk" name="studentSchmIds"
-															id="studentSchmIds${count.index+1}" value="${stud.sprtSchmId}" /></td>
-														<td style="text-align: center; ">${count.index+1}</td>
+														<td style="text-align: center;"><input
+															type="checkbox" class="chk" name="studentSchmIds"
+															id="studentSchmIds${count.index+1}"
+															value="${stud.sprtSchmId}" /></td>
+														<td style="text-align: center;">${count.index+1}</td>
 														<td>${stud.schemeName}</td>
-														<td style="text-align: center; ">${stud.level}</td>
-														<td style="text-align: center; ">${stud.type}</td>
-														<td style="text-align: center; ">${stud.noStudentBenifited}</td>
-														<td style="text-align: center; ">${stud.academicYear}</td>
+														<td style="text-align: center;">${stud.level}</td>
+														<td style="text-align: center;">${stud.type}</td>
+														<td style="text-align: center;">${stud.noStudentBenifited}</td>
+														<td style="text-align: center;">${stud.academicYear}</td>
 														<td>${stud.supportAgencyName}</td>
 
-														<td><%-- <c:if test="${editAccess==0}"> --%>
-																<a href="${pageContext.request.contextPath}/editStudSchm/${stud.sprtSchmId}"><span
-																	class="glyphicon glyphicon-edit" title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-															<%-- </c:if>  <c:if test="${deleteAccess==0}"> --%>
-																<a
-																	href="${pageContext.request.contextPath}/deleteStudSchm/${stud.sprtSchmId}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger" title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-															<%-- </c:if> --%></td>
+														<td>
+															<%-- <c:if test="${editAccess==0}"> --%> <a
+															href="${pageContext.request.contextPath}/editStudSchm/${stud.sprtSchmId}"><span
+																class="glyphicon glyphicon-edit" title="Edit"
+																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<%-- </c:if>  <c:if test="${deleteAccess==0}"> --%> <a
+															href="${pageContext.request.contextPath}/deleteStudSchm/${stud.sprtSchmId}"
+															onClick="return confirm('Are you sure want to delete this record');"
+															rel="tooltip" data-color-class="danger" title="Delete"
+															data-animate=" animated fadeIn " data-toggle="tooltip"
+															data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a> <%-- </c:if> --%>
+														</td>
 													</tr>
 												</c:forEach>
 
 											</tbody>
-								</table>
-								<input type="submit" class="btn btn-primary" value="Delete"
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
-								</div>
+										</table>
+										<input type="submit" class="btn btn-primary" value="Delete"
+											id="deleteId"
+											onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+											style="align-content: center; width: 113px; margin-left: 40px;">
+									</div>
 
+								</div>
 							</div>
-						</div>
 						</form>
 					</section>
 				</div>
 
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
-		</section>  
+		</section>
 		<!-- END CONTENT -->
 
 
@@ -144,8 +147,8 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-	
-<%-- 	
+
+	<%-- 	
   <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
 		<div class="modal-dialog">
@@ -276,78 +279,71 @@
 		</div>
 	</div>  
 	 --%>
-	 <script>
-function clearSessionAttribute() {
-	 
-	 
+	<script>
+		function clearSessionAttribute() {
 
-	$.getJSON('${clearSessionAttribute}', {
-  
-		ajax : 'true',
+			$.getJSON('${clearSessionAttribute}', {
 
-	}, function(data) { 
-		 
-	
-	});
+				ajax : 'true',
 
-}
+			}, function(data) {
 
-function selectedInst(source) {
+			});
 
-	checkboxes = document.getElementsByName('studentSchmIds');
+		}
 
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
+		function selectedInst(source) {
 
-	}
+			checkboxes = document.getElementsByName('studentSchmIds');
 
-}
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
-/* 
-function showEditaccOff(accOffId){
-	document.getElementById("edit_accOff_id").value=accOffId;//create this 
-	var form=document.getElementById("insListForm");
-    form.setAttribute("method", "post");
+			}
 
-	form.action=("showEditaccOff");
-	form.submit();
-	
-} */
- </script>
-	 
+		}
+
+		/* 
+		 function showEditaccOff(accOffId){
+		 document.getElementById("edit_accOff_id").value=accOffId;//create this 
+		 var form=document.getElementById("insListForm");
+		 form.setAttribute("method", "post");
+
+		 form.action=("showEditaccOff");
+		 form.submit();
+		
+		 } */
+	</script>
+
 	<script type="text/javascript">
-	
-	function showForm() {
-		//document.getElementById("abc").style = "display:none"
-			var qualType=document.getElementById("cat").value
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("cat").value
 			//alert("qualType::"+qualType);
-			
+
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
-				
-					
-			} 
-			else{
+
+			} else {
 				document.getElementById("abc").style = "display:none"
 			}
-		
+
 		}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
+		function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+
 		}
 	</script>
-	
-	
+
+
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- 
-	 
+
+
 </body>
 </html>

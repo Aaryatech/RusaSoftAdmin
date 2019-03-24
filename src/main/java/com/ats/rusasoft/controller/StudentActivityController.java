@@ -43,7 +43,6 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 @Scope("session")
 public class StudentActivityController {
 
-	
 	RestTemplate restTemplate = new RestTemplate();
 
 	@RequestMapping(value = "/showStudOrgnizedActivity", method = RequestMethod.GET)
@@ -818,7 +817,7 @@ public class StudentActivityController {
 			Program programDetail = restTemplate.postForObject(Constants.url + "/getProgramByProgramId", map,
 					Program.class);
 			model.addObject("programDetail", programDetail);
-			
+
 			ProgramVision[] programVision = restTemplate.postForObject(Constants.url + "/getProgramVisionList", map,
 					ProgramVision[].class);
 			List<ProgramVision> programVisionList = new ArrayList<>(Arrays.asList(programVision));
@@ -826,25 +825,26 @@ public class StudentActivityController {
 			ProgramMission[] ProgramMission = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
 					ProgramMission[].class);
 			List<ProgramMission> programMissionList = new ArrayList<>(Arrays.asList(ProgramMission));
-			
-			ProgramEducationObjective[] programEducationObjective = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveList", map,
-					ProgramEducationObjective[].class);
-			List<ProgramEducationObjective> programEducationObjectiveList = new ArrayList<>(Arrays.asList(programEducationObjective));
-			
+
+			ProgramEducationObjective[] programEducationObjective = restTemplate.postForObject(
+					Constants.url + "/getProgramEducationObjectiveList", map, ProgramEducationObjective[].class);
+			List<ProgramEducationObjective> programEducationObjectiveList = new ArrayList<>(
+					Arrays.asList(programEducationObjective));
+
 			ProgramOutcome[] programOutcome = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
 					ProgramOutcome[].class);
-			List<ProgramOutcome> programOutcomeList = new ArrayList<>(Arrays.asList(programOutcome)); 
-			
-			ProgramSpeceficOutcome[] programSpeceficOutcome = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList", map,
-					ProgramSpeceficOutcome[].class);
-			List<ProgramSpeceficOutcome> programSpeceficOutcomeList = new ArrayList<>(Arrays.asList(programSpeceficOutcome));
-			
+			List<ProgramOutcome> programOutcomeList = new ArrayList<>(Arrays.asList(programOutcome));
+
+			ProgramSpeceficOutcome[] programSpeceficOutcome = restTemplate.postForObject(
+					Constants.url + "/getProgramSpeceficOutcomeList", map, ProgramSpeceficOutcome[].class);
+			List<ProgramSpeceficOutcome> programSpeceficOutcomeList = new ArrayList<>(
+					Arrays.asList(programSpeceficOutcome));
+
 			model.addObject("programVisionList", programVisionList);
 			model.addObject("programMissionList", programMissionList);
 			model.addObject("programEducationObjectiveList", programEducationObjectiveList);
 			model.addObject("programOutcomeList", programOutcomeList);
 			model.addObject("programSpeceficOutcomeList", programSpeceficOutcomeList);
-			
 
 		} catch (Exception e) {
 
@@ -920,7 +920,7 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteProgramVission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteProgramVission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -929,24 +929,20 @@ public class StudentActivityController {
 		Info info = new Info();
 		try {
 
-			 
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int visionId = Integer.parseInt(request.getParameter("visionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("visionId", visionId);
-				info  = restTemplate.postForObject(Constants.url + "/deleteProgramVision", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				
-				map = new LinkedMultiValueMap<>();
-				map.add("programId", programId);
-				ProgramVision[] arry = restTemplate.postForObject(Constants.url + "/getProgramVisionList", map,
-						ProgramVision[].class);
-				List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setProgramVissionList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("visionId", visionId);
+			info = restTemplate.postForObject(Constants.url + "/deleteProgramVision", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramVision[] arry = restTemplate.postForObject(Constants.url + "/getProgramVisionList", map,
+					ProgramVision[].class);
+			List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setProgramVissionList(list);
 
 		} catch (Exception e) {
 
@@ -960,35 +956,31 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editProgramVission", method = RequestMethod.GET)
-	public @ResponseBody ProgramVision editProgramVission(HttpServletRequest request,
-			HttpServletResponse response) {
+	public @ResponseBody ProgramVision editProgramVission(HttpServletRequest request, HttpServletResponse response) {
 
 		ProgramVision programVision = new ProgramVision();
-	 
+
 		try {
 
-			  
 			int visionId = Integer.parseInt(request.getParameter("visionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("visionId", visionId);
-				programVision  = restTemplate.postForObject(Constants.url + "/getProgramVisionByVisionId", map,
-						ProgramVision.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("visionId", visionId);
+			programVision = restTemplate.postForObject(Constants.url + "/getProgramVisionByVisionId", map,
+					ProgramVision.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 
 		return programVision;
 
 	}
-	
+
 	@RequestMapping(value = "/saveProgramMission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse saveProgramMission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1007,7 +999,7 @@ public class StudentActivityController {
 			String programMissionRemark = request.getParameter("programMissionRemark");
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int programMissionId = Integer.parseInt(request.getParameter("programMissionId"));
-			
+
 			ProgramMission save = new ProgramMission();
 
 			save.setMissionId(programMissionId);
@@ -1052,7 +1044,7 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteProgramMission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteProgramMission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1061,24 +1053,20 @@ public class StudentActivityController {
 		Info info = new Info();
 		try {
 
-			 
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int missionId = Integer.parseInt(request.getParameter("missionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("missionId", missionId);
-				info  = restTemplate.postForObject(Constants.url + "/deleteProgramMission", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				
-				map = new LinkedMultiValueMap<>();
-				map.add("programId", programId);
-				ProgramMission[] arry = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
-						ProgramMission[].class);
-				List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setProgramMissionList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("missionId", missionId);
+			info = restTemplate.postForObject(Constants.url + "/deleteProgramMission", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramMission[] arry = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
+					ProgramMission[].class);
+			List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setProgramMissionList(list);
 
 		} catch (Exception e) {
 
@@ -1092,35 +1080,31 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editProgramMission", method = RequestMethod.GET)
-	public @ResponseBody ProgramMission editProgramMission(HttpServletRequest request,
-			HttpServletResponse response) {
+	public @ResponseBody ProgramMission editProgramMission(HttpServletRequest request, HttpServletResponse response) {
 
 		ProgramMission programMission = new ProgramMission();
-	 
+
 		try {
 
-			  
 			int missionId = Integer.parseInt(request.getParameter("missionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("missionId", missionId);
-				programMission  = restTemplate.postForObject(Constants.url + "/getProgramMissionByMissionId", map,
-						ProgramMission.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("missionId", missionId);
+			programMission = restTemplate.postForObject(Constants.url + "/getProgramMissionByMissionId", map,
+					ProgramMission.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 
 		return programMission;
 
 	}
-	
+
 	@RequestMapping(value = "/saveProgramPeo", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse saveProgramPeo(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1139,7 +1123,7 @@ public class StudentActivityController {
 			String peoRemark = request.getParameter("peoRemark");
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int programPeoId = Integer.parseInt(request.getParameter("programPeoId"));
-			
+
 			ProgramEducationObjective programEducationObjective = new ProgramEducationObjective();
 
 			programEducationObjective.setPeoId(programPeoId);
@@ -1152,8 +1136,8 @@ public class StudentActivityController {
 			programEducationObjective.setMakerdatetime(sf.format(date));
 			programEducationObjective.setProgramId(programId);
 
-			ProgramEducationObjective res = restTemplate.postForObject(Constants.url + "/saveProgramEducationObjective", programEducationObjective,
-					ProgramEducationObjective.class);
+			ProgramEducationObjective res = restTemplate.postForObject(Constants.url + "/saveProgramEducationObjective",
+					programEducationObjective, ProgramEducationObjective.class);
 
 			if (res == null) {
 				info.setError(true);
@@ -1166,8 +1150,8 @@ public class StudentActivityController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("programId", programId);
-				ProgramEducationObjective[] arry = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveList", map,
-						ProgramEducationObjective[].class);
+				ProgramEducationObjective[] arry = restTemplate.postForObject(
+						Constants.url + "/getProgramEducationObjectiveList", map, ProgramEducationObjective[].class);
 				List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramEducationObjectiveList(list);
 			}
@@ -1184,7 +1168,7 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteProgramPeo", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteProgramPeo(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1193,24 +1177,20 @@ public class StudentActivityController {
 		Info info = new Info();
 		try {
 
-			 
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int peoId = Integer.parseInt(request.getParameter("peoId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("peoId", peoId);
-				info  = restTemplate.postForObject(Constants.url + "/deleteProgramEducationObjective", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				
-				map = new LinkedMultiValueMap<>();
-				map.add("programId", programId);
-				ProgramEducationObjective[] arry = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveList", map,
-						ProgramEducationObjective[].class);
-				List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setProgramEducationObjectiveList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("peoId", peoId);
+			info = restTemplate.postForObject(Constants.url + "/deleteProgramEducationObjective", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramEducationObjective[] arry = restTemplate.postForObject(
+					Constants.url + "/getProgramEducationObjectiveList", map, ProgramEducationObjective[].class);
+			List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setProgramEducationObjectiveList(list);
 
 		} catch (Exception e) {
 
@@ -1224,35 +1204,32 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editProgramPeo", method = RequestMethod.GET)
 	public @ResponseBody ProgramEducationObjective editProgramPeo(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		ProgramEducationObjective programEducationObjective = new ProgramEducationObjective();
-	 
+
 		try {
 
-			  
 			int peoId = Integer.parseInt(request.getParameter("peoId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("peoId", peoId);
-				programEducationObjective  = restTemplate.postForObject(Constants.url + "/getProgramEducationObjectiveByPeoId", map,
-						ProgramEducationObjective.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("peoId", peoId);
+			programEducationObjective = restTemplate.postForObject(
+					Constants.url + "/getProgramEducationObjectiveByPeoId", map, ProgramEducationObjective.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 
 		return programEducationObjective;
 
 	}
-	
+
 	@RequestMapping(value = "/saveProgramPo", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse saveProgramPo(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1315,7 +1292,7 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteProgramPo", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteProgramPo(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1324,24 +1301,20 @@ public class StudentActivityController {
 		Info info = new Info();
 		try {
 
-			 
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int poId = Integer.parseInt(request.getParameter("poId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("poId", poId);
-				info  = restTemplate.postForObject(Constants.url + "/deleteProgramOutcome", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				
-				map = new LinkedMultiValueMap<>();
-				map.add("programId", programId);
-				ProgramOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
-						ProgramOutcome[].class);
-				List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setProgramOutcomeList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("poId", poId);
+			info = restTemplate.postForObject(Constants.url + "/deleteProgramOutcome", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
+					ProgramOutcome[].class);
+			List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setProgramOutcomeList(list);
 
 		} catch (Exception e) {
 
@@ -1355,35 +1328,31 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editProgramPo", method = RequestMethod.GET)
-	public @ResponseBody ProgramOutcome editProgramPo(HttpServletRequest request,
-			HttpServletResponse response) {
+	public @ResponseBody ProgramOutcome editProgramPo(HttpServletRequest request, HttpServletResponse response) {
 
 		ProgramOutcome programOutcome = new ProgramOutcome();
-	 
+
 		try {
 
-			  
 			int poId = Integer.parseInt(request.getParameter("poId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("poId", poId);
-				programOutcome  = restTemplate.postForObject(Constants.url + "/getProgramOutcomeByPoId", map,
-						ProgramOutcome.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("poId", poId);
+			programOutcome = restTemplate.postForObject(Constants.url + "/getProgramOutcomeByPoId", map,
+					ProgramOutcome.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 
 		return programOutcome;
 
 	}
-	
+
 	@RequestMapping(value = "/saveProgramPso", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse saveProgramPso(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1402,7 +1371,7 @@ public class StudentActivityController {
 			String psoRemark = request.getParameter("psoRemark");
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int psoId = Integer.parseInt(request.getParameter("psoId"));
-			
+
 			ProgramSpeceficOutcome programSpeceficOutcome = new ProgramSpeceficOutcome();
 
 			programSpeceficOutcome.setPsoId(psoId);
@@ -1415,8 +1384,8 @@ public class StudentActivityController {
 			programSpeceficOutcome.setMakerdatetime(sf.format(date));
 			programSpeceficOutcome.setProgramId(programId);
 
-			ProgramSpeceficOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramSpeceficOutcome", programSpeceficOutcome,
-					ProgramSpeceficOutcome.class);
+			ProgramSpeceficOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramSpeceficOutcome",
+					programSpeceficOutcome, ProgramSpeceficOutcome.class);
 
 			if (res == null) {
 				info.setError(true);
@@ -1429,8 +1398,8 @@ public class StudentActivityController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("programId", programId);
-				ProgramSpeceficOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList", map,
-						ProgramSpeceficOutcome[].class);
+				ProgramSpeceficOutcome[] arry = restTemplate.postForObject(
+						Constants.url + "/getProgramSpeceficOutcomeList", map, ProgramSpeceficOutcome[].class);
 				List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
 			}
@@ -1447,7 +1416,7 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteProgramPso", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteProgramPso(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1456,24 +1425,20 @@ public class StudentActivityController {
 		Info info = new Info();
 		try {
 
-			 
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			int psoId = Integer.parseInt(request.getParameter("psoId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("psoId", psoId);
-				info  = restTemplate.postForObject(Constants.url + "/deleteProgramSpeceficOutcome", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				
-				map = new LinkedMultiValueMap<>();
-				map.add("programId", programId);
-				ProgramSpeceficOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList", map,
-						ProgramSpeceficOutcome[].class);
-				List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("psoId", psoId);
+			info = restTemplate.postForObject(Constants.url + "/deleteProgramSpeceficOutcome", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("programId", programId);
+			ProgramSpeceficOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList",
+					map, ProgramSpeceficOutcome[].class);
+			List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
 
 		} catch (Exception e) {
 
@@ -1487,33 +1452,30 @@ public class StudentActivityController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editProgramPso", method = RequestMethod.GET)
 	public @ResponseBody ProgramSpeceficOutcome editProgramPso(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		ProgramSpeceficOutcome programSpeceficOutcome = new ProgramSpeceficOutcome();
-	 
+
 		try {
 
-			  
 			int psoId = Integer.parseInt(request.getParameter("psoId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("psoId", psoId);
-				programSpeceficOutcome  = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeByPsoId", map,
-						ProgramSpeceficOutcome.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("psoId", psoId);
+			programSpeceficOutcome = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeByPsoId",
+					map, ProgramSpeceficOutcome.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 
 		return programSpeceficOutcome;
 
 	}
-	
+
 }

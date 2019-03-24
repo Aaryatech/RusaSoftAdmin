@@ -97,175 +97,167 @@
 								<div class="col-md-12">
 
 
-									<ul class="nav nav-tabs">
-										<li class="active"><a href="#home" data-toggle="tab">
-												<i class="fa fa-home"></i> Register Form
-										</a></li>
 
 
-									</ul>
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/insertTrainPlace"
+										method="post" name="form_sample_2" id="form_sample_2"
+										onsubmit="return checkBeforeSubmit()">
 
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
-											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/insertTrainPlace"
-												method="post" name="form_sample_2" id="form_sample_2"
-												onsubmit="return checkBeforeSubmit()">
-
-												<div class="row">
-													<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-12">
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_name">
-																Name of Employer<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	id="employer_name" value="${trainPlace.empyrName}"
-																	name="employer_name" placeholder="Full Name of Employer"
-																	required>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="status">Program
-																Type<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<select id="prog_type" name="prog_type"
-																	class="form-control"
-																	required>
-																	
-																	<c:forEach items="${progTypeList}" var="progType">
-																		<c:choose>
-																			<c:when test="${trainPlace.programType==progType.programId}">
-																				<option selected value="${progType.programId}">${progType.programName}</option>
-
-																			</c:when>
-																			<c:otherwise>
-
-																				<option value="${progType.programId}">${progType.programName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-
-
-																</select>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">
-																Name of Program<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	id="prog_name" value="${trainPlace.programName}"
-																	name="prog_name" placeholder="Name of Program "
-																	 required>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">
-																No. of Students Placed<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="number" maxlength="5" min="0" class="form-control"
-																	id="no_stud_placed" value="${trainPlace.noStudentPlaced}"
-																	name="no_stud_placed" placeholder="Total Students Placed "
-																	required>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">
-																Address of Employer<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control"
-																	id="employer_address" value="${trainPlace.empyrAdd}"
-																	name="employer_address" 
-																	 required>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">
-																Contact Details<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text"  class="form-control"
-																	id="contact_detail" value="${trainPlace.contactDetail}"
-																	name="contact_detail" placeholder="Employer Contact Information"
-																	 required>
-															</div>
-														</div>
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">
-																Support Agency Name<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text"  class="form-control"
-																	id="sup_agency_name" value="${trainPlace.supportAgencyName}"
-																	name="sup_agency_name" placeholder="Enter Supprt Agency Name"
-																	 required>
-															</div>
-														</div>
-														
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_order">
-																Package Offered<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" maxlength="10" class="form-control"
-																	id="package_offered" value="${trainPlace.pakageOfferd}"
-																	name="package_offered" placeholder="Package Offered by Employer to Students  "
-																	required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<div class="col-sm-offset-3 col-sm-9">
-																<input type="submit" id="sub1" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Save"> <input
-																	type="submit" id="sub2" class="btn btn-primary"
-																	onclick="submit_f(0)"
-																	value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-														<input type="hidden" id="place_id" name="place_id"
-															value="${trainPlace.placementId}"> <input
-															type="hidden" id="is_view" name="is_view" value="0">
-
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">
+														Name of Employer<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="employer_name"
+															value="${trainPlace.empyrName}" name="employer_name"
+															placeholder="Full Name of Employer" required>
 													</div>
-
 												</div>
 
-												<div class="clearfix"></div>
-											</form>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="status">Program
+														Type<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<select id="prog_type" name="prog_type"
+															class="form-control" required>
+
+															<c:forEach items="${progTypeList}" var="progType">
+																<c:choose>
+																	<c:when
+																		test="${trainPlace.programType==progType.programId}">
+																		<option selected value="${progType.programId}">${progType.programName}</option>
+
+																	</c:when>
+																	<c:otherwise>
+
+																		<option value="${progType.programId}">${progType.programName}</option>
+
+																	</c:otherwise>
+
+																</c:choose>
+
+															</c:forEach>
+
+
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														Name of Program<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="prog_name"
+															value="${trainPlace.programName}" name="prog_name"
+															placeholder="Name of Program " required>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														No. of Students Placed<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="number" maxlength="5" min="0"
+															class="form-control" id="no_stud_placed"
+															value="${trainPlace.noStudentPlaced}"
+															name="no_stud_placed"
+															placeholder="Total Students Placed " required>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														Address of Employer<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="employer_address" value="${trainPlace.empyrAdd}"
+															name="employer_address" required>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														Contact Details<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="contact_detail" value="${trainPlace.contactDetail}"
+															name="contact_detail"
+															placeholder="Employer Contact Information" required>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														Support Agency Name<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="sup_agency_name"
+															value="${trainPlace.supportAgencyName}"
+															name="sup_agency_name"
+															placeholder="Enter Supprt Agency Name" required>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														Package Offered<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" maxlength="10" class="form-control"
+															id="package_offered" value="${trainPlace.pakageOfferd}"
+															name="package_offered"
+															placeholder="Package Offered by Employer to Students  "
+															required>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
+														<input type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)" value="Save"> <input
+															type="submit" id="sub2" class="btn btn-primary"
+															onclick="submit_f(0)"
+															value="Save &
+																		Next">
+														<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+												</div>
+												<input type="hidden" id="place_id" name="place_id"
+													value="${trainPlace.placementId}"> <input
+													type="hidden" id="is_view" name="is_view" value="0">
+
+											</div>
 
 										</div>
 
-									</div>
+										<div class="clearfix"></div>
+									</form>
+
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
+
 
 
 								</div>
@@ -398,22 +390,22 @@
 		}
 	</script>
 
- <script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-</script>
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+	</script>
 
 
 

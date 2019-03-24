@@ -54,82 +54,81 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<c:if test="${addAccess==0}">
-								<a href="${pageContext.request.contextPath}/showAddAlumini"><button
-										type="submit" class="btn btn-success">Add Alumini
-										Detail</button></a></c:if>
+								<c:if test="${addAccess==0}">
+									<a href="${pageContext.request.contextPath}/showAddAlumini"><button
+											type="submit" class="btn btn-success">Add</button></a>
+								</c:if>
 
 
 							</div>
 
 						</header>
-						<form
-							action="${pageContext.request.contextPath}/deleteAlum/0"
+						<form action="${pageContext.request.contextPath}/deleteAlum/0"
 							method="get" id="insListForm">
-						<div class="content-body">
-							<div class="row">
+							<div class="content-body">
+								<div class="row">
 
-								<div class="col-xs-12"></div>
-								<div class="col-xs-12">
+									<div class="col-xs-12"></div>
+									<div class="col-xs-12">
 
-									<table class="table table-striped dt-responsive display"
-										id="example-1">
-										<thead>
-											<tr>
-												<th>Sr.No.</th>
-												<th>Name of Alumni</th>
-												<th>Passing Year</th>
-												<th>Nature of Contribution</th>
-												<th>Year of Contribution</th>
-												<th>Benefit To</th>
-												<th>Action</th>
-											</tr>
-
-										</thead>
-										<tbody>
-											<c:forEach items="${alumList}" var="alum" varStatus="count">
+										<table class="table table-striped dt-responsive display"
+											id="example-1">
+											<thead>
 												<tr>
-													<td>${count.index+1}</td>
-													<td>${alum.alumniName}</td>
-													<td>${alum.passingYear}</td>
-													<c:if test="${alum.contributionType==1}">
-														<td>Financial</td>
-													</c:if>
-													<c:if test="${alum.contributionType==0}">
-														<td>Non Financial</td>
-													</c:if>
-
-													<td>${alum.contributionYear}</td>
-													<td>${alum.benefitTo}</td>
-
-													<td align="center"><c:if test="${editAccess==0}">
-															<a href="#"
-																onclick="showEditAlum(${alum.alumniDetailId})"><span
-																class="glyphicon glyphicon-edit" title="Edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp; </c:if> 
-														<c:if test="${deleteAccess==0}">
-															<a
-																href="${pageContext.request.contextPath}/deleteAlum/${alum.alumniDetailId}"
-																onClick="return confirm('Are you sure want to delete this record');"
-																rel="tooltip" data-color-class="danger" title="Delete"
-																data-animate=" animated fadeIn " data-toggle="tooltip"
-																data-original-title="Delete  record"><span
-																class="glyphicon glyphicon-remove"></span></a>
-														</c:if> </td>
-
+													<th>Sr.No.</th>
+													<th>Name of Alumni</th>
+													<th>Passing Year</th>
+													<th>Nature of Contribution</th>
+													<th>Year of Contribution</th>
+													<th>Benefit To</th>
+													<th>Action</th>
 												</tr>
-											</c:forEach>
 
-										</tbody>
+											</thead>
+											<tbody>
+												<c:forEach items="${alumList}" var="alum" varStatus="count">
+													<tr>
+														<td>${count.index+1}</td>
+														<td>${alum.alumniName}</td>
+														<td>${alum.passingYear}</td>
+														<c:if test="${alum.contributionType==1}">
+															<td>Financial</td>
+														</c:if>
+														<c:if test="${alum.contributionType==0}">
+															<td>Non Financial</td>
+														</c:if>
 
-									</table>
-								</div>
+														<td>${alum.contributionYear}</td>
+														<td>${alum.benefitTo}</td>
+
+														<td align="center"><c:if test="${editAccess==0}">
+																<a href="#"
+																	onclick="showEditAlum(${alum.alumniDetailId})"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp; </c:if>
+															<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteAlum/${alum.alumniDetailId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+
+													</tr>
+												</c:forEach>
+
+											</tbody>
+
+										</table>
+									</div>
 									<input type="hidden" id="edit_alum_id" name="edit_alum_id"
-											value="0">
-								
+										value="0">
 
+
+								</div>
 							</div>
-						</div>
 						</form>
 					</section>
 				</div>
@@ -140,7 +139,7 @@
 		<!-- END CONTENT -->
 
 	</div>
-	
+
 	<script type="text/javascript">
 	function getData() {
 	//alert("hii");

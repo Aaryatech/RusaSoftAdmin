@@ -55,8 +55,7 @@
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/showAddStudentAttendActivity"><button
-										type="submit" class="btn btn-success">Add Activity
-										Detail</button></a>
+										type="submit" class="btn btn-success">Add</button></a>
 							</div>
 						</header>
 						<div class="content-body">
@@ -91,7 +90,7 @@
 													<td>${list.activityName}</td>
 													<td>${list.date}</td>
 													<td>${list.yearName}</td>
-													<td>${list.branch}</td> 
+													<td>${list.branch}</td>
 													<td>${list.participatedStudent}</td>
 													<td>${list.level}</td>
 
