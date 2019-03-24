@@ -120,7 +120,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)"
-															class="form-control" id="inst_name"
+															class="form-control" id="inst_name" maxlength="100"
 															value="${editInst.instituteName}" name="inst_name"
 															placeholder="Institute Name" required>
 													</div>
@@ -130,7 +130,7 @@
 														Code <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="15"
 															class="form-control" id="aishe_code"
 															value="${editInst.aisheCode}" name="aishe_code"
 															placeholder="AISHE Code" required>
@@ -145,7 +145,7 @@
 														Address<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="inst_add"
 															value="${editInst.instituteAdd}" name="inst_add"
 															placeholder="Institute Address" required>
@@ -211,7 +211,7 @@
 
 
 													<div class="col-sm-9">
-														<input type="text" class="form-control datepicker"
+														<input type="text" class="form-control datepicker" autocomplete="off"
 															id="reg_date" value="${editInst.regDate}" name="reg_date"
 															placeholder="Date of Registration" required>
 													</div>
@@ -222,7 +222,7 @@
 														Name <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="trusty_name"
 															value="${editInst.trustName}" name="trusty_name"
 															placeholder="Trust/Society Name" value="" required>
@@ -234,7 +234,7 @@
 														Address <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="trusty_add"
 															value="${editInst.trustAdd}" name="trusty_add"
 															placeholder="Trust/Society Address" value="" required>
@@ -258,7 +258,7 @@
 														Chairman/President Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="pres_name"
 															value="${editInst.presidentName}" name="pres_name"
 															placeholder="Name of Chairman/President(Board of Governance)"
@@ -271,7 +271,7 @@
 														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" value="${editInst.presidenContact}"
+														<input type="text" value="${editInst.presidenContact}" onchange="trim(this)"
 															maxlength="15" class="form-control" id="pres_contact"
 															name="pres_contact" placeholder="Chairman Contact No"
 															required>
@@ -283,7 +283,7 @@
 														ID(Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="email" onchange="trim(this)"
+														<input type="email" maxlength="50" onchange="trim(this)" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
 															class="form-control" id="pres_email"
 															value="${editInst.presidentEmail}" name="pres_email"
 															placeholder="abc@xyz.com" required>
@@ -298,7 +298,7 @@
 														Principal Name <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="princ_name"
 															value="${editInst.principalName}" name="princ_name"
 															placeholder="Name of Principal" required>
@@ -326,8 +326,8 @@
 														ID(Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="email" class="form-control" id="princ_email"
-															value="${editInst.email}"
+														<input type="email" maxlength="50" class="form-control" id="princ_email"
+															value="${editInst.email}" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
 															oninput="checkUnique(this.value,2)" name="princ_email"
 															placeholder="abc@xyz.com" required>
 														<p class="desc font-italic fontsize11">Note:

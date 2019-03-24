@@ -204,7 +204,7 @@
 
 
 													<div class="col-sm-7">
-														<input type="text" class="form-control datepicker"
+														<input type="text" class="form-control datepicker" autocomplete="off"
 															id="reg_date" value="${editInst.regDate}" name="reg_date"
 															placeholder="Date of Registration" required>
 													</div>
@@ -215,10 +215,10 @@
 														Name <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="trusty_name"
 															value="${editInst.trustName}" name="trusty_name"
-															placeholder="Trust/Society Name" value="" required>
+															placeholder="Trust/Society Name"  required>
 													</div>
 												</div>
 
@@ -227,7 +227,7 @@
 														Address <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="trusty_add"
 															value="${editInst.trustAdd}" name="trusty_add"
 															placeholder="Trust/Society Address" value="" required>
@@ -239,7 +239,7 @@
 														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" value="${editInst.trustContactNo}"
+														<input type="text" value="${editInst.trustContactNo}" onchange="trim(this)"
 															maxlength="15" class="form-control" id="trusty_con_no"
 															name="trusty_con_no"
 															placeholder="Trust/Society Official Contact No" required>
@@ -251,7 +251,7 @@
 														Chairman/President Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)"
+														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="pres_name"
 															value="${editInst.presidentName}" name="pres_name"
 															placeholder="Name of Chairman/President(Board of Governance)"
@@ -291,8 +291,8 @@
 													<label class="control-label col-sm-3" for="page_order">
 														Principal Name <span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)"
+													<div class="col-sm-7"> 
+														<input type="text" maxlength="100" onchange="trim(this)"
 															class="form-control" id="princ_name"
 															value="${editInst.principalName}" name="princ_name"
 															placeholder="Name of Principal" required>
@@ -320,7 +320,7 @@
 														ID <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="email" onchange="trim(this)"
+														<input type="email" onchange="trim(this)" 
 															class="form-control" id="princ_email"
 															value="${editInst.email}"
 															oninput="checkUnique(this.value,2)" name="princ_email"

@@ -173,7 +173,7 @@
 																Name :<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="text" class="form-control" id="hod_name" maxlength="100"
+																<input type="text" class="form-control" id="hod_name" onchange="trim(this)" maxlength="100"
 																	value="${hod.hodName}" name="hod_name"
 																	placeholder="HOD Name" required>
 															</div>
@@ -227,7 +227,7 @@
 																<input type="text" maxlength="10" class="form-control" id="hod_mob" value="${hod.contactNo}"
 																	name="hod_mob" pattern="^[1-9]{1}[0-9]{9}$" oninput="checkUnique(this.value,1)"
 																	
-																	placeholder="Mobile Number" value="" required>
+																	placeholder="Mobile Number"  required>
 															</div>
 														</div>
 
@@ -236,7 +236,7 @@
 																ID(Official) : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email" class="form-control" id="hod_email"  oninput="checkUnique(this.value,2)"
+																<input type="email"  maxlength="50" class="form-control" id="hod_email"  oninput="checkUnique(this.value,2)"
 																	name="hod_email" placeholder="abc@xyz.com" value="${hod.email}"
 																	required>
 															</div>
@@ -418,6 +418,13 @@
       }
       return false;
     }    
+    
+    function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
 </script>
 
 </body>

@@ -101,13 +101,13 @@
 											<tbody>
 												<c:forEach items="${hodList}" var="hod" varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="hodIds"
+														<td align="center"><input type="checkbox" class="chk" name="hodIds"
 															id="hodIds${count.index+1}" value="${hod.hodId}" /></td>
-														<td>${count.index+1}</td>
-														<td>${hod.hodName}</td>
-														<td>${hod.deptName}</td>
-														<td>${hod.contactNo}</td>
-														<td>${hod.email}</td>
+														<td align="center">${count.index+1}</td>
+														<td align="left">${hod.hodName}</td>
+														<td align="left">${hod.deptName}</td>
+														<td align="center">${hod.contactNo}</td>
+														<td align="left">${hod.email}</td>
 
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/changeHod/${hod.hodId}"
