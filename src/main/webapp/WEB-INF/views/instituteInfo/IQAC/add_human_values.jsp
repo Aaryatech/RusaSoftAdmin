@@ -101,8 +101,8 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="finantialYear">Title
-												of Program/Activity <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="finantialYear">Initiative
+												 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<select id="title" name="title" class="form-control"
