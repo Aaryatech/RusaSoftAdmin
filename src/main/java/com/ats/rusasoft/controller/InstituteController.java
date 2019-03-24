@@ -487,7 +487,7 @@ public class InstituteController {
 			List<InstituteActivity> activityList = new ArrayList<>(Arrays.asList(instActArr));
 			model.addObject("instActList", activityList);
 
-			model.addObject("title", "Activities Organized");
+			model.addObject("title", "Institute Organized Activities List");
 
 		} catch (Exception e) {
 
@@ -506,7 +506,7 @@ public class InstituteController {
 		try {
 			InstituteActivity instAct = new InstituteActivity();
 			model.addObject("instAct", instAct);
-			model.addObject("title", "Add Activities Organized");
+			model.addObject("title", "Add Institute Organized Activities");
 
 		} catch (Exception e) {
 
@@ -585,7 +585,7 @@ public class InstituteController {
 					InstituteActivity.class);
 			model.addObject("instAct", activity);
 
-			model.addObject("title", "Edit Activities Organized");
+			model.addObject("title", "Edit Institute Organized Activities");
 
 		} catch (Exception e) {
 
