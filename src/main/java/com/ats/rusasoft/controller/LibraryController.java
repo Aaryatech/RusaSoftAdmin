@@ -30,6 +30,7 @@ import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GetInstituteInfo;
 import com.ats.rusasoft.model.GetInstituteList;
+import com.ats.rusasoft.model.GetLib;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
@@ -203,18 +204,26 @@ public class LibraryController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", inst_id);
 
-				Librarian[] instArray = rest.postForObject(Constants.url + "getAllLibrarianByInstituteId", map,
-						Librarian[].class);
-				List<Librarian> libtList = new ArrayList<>(Arrays.asList(instArray));
+				GetLib[] instArray = rest.postForObject(Constants.url + "getAllLibByInstituteId", map, GetLib[].class);
+				List<GetLib> libtList = new ArrayList<>(Arrays.asList(instArray));
 
 				System.out.println("lib list is" + libtList.toString());
 
 				model.addObject("libtList", libtList);
-				
-			
+				/*try {
+					for (int i = 0; i < libtList.size(); i++) {
+						libtList.get(i).setJoiningDate(DateConvertor.convertToDMY(libtList.get(i).getJoiningDate()));
+						libtList.get(i)
+								.setRealivingDate(DateConvertor.convertToDMY(libtList.get(i).getRealivingDate()));
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+*/
 				Info add = AccessControll.checkAccess("showLibList", "showLibList", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "1", "0", newModuleList);
-				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "0", "1",newModuleList);
+				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "0", "1",
+						newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -329,7 +338,7 @@ public class LibraryController {
 
 				String librarian_name = request.getParameter("librarian_name");
 				String lib_con_num = request.getParameter("lib_con_num");
-				
+
 				int conf_type = Integer.parseInt(request.getParameter("conf_type"));
 
 				String librarian_email = request.getParameter("librarian_email");
@@ -348,13 +357,11 @@ public class LibraryController {
 					lib.setContactNo(lib_con_num);
 					lib.setEmail(librarian_email);
 					lib.setQualificationId(lib_quolf);
-					if(conf_type==1) {
-					lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
-					}
-					else{
+					if (conf_type == 1) {
+						lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
+					} else {
 						lib.setRealivingDate(null);
-						
-						
+
 					}
 					lib.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
 					lib.setMakerUserId(maker_id);
@@ -473,7 +480,7 @@ public class LibraryController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
-				
+
 				model.addObject("jdate", DateConvertor.convertToDMY(editInst.getJoiningDate()));
 				model.addObject("ldate", DateConvertor.convertToDMY(editInst.getRealivingDate()));
 			}
@@ -890,7 +897,7 @@ public class LibraryController {
 					}
 					String studIdList = sb.toString();
 					studIdList = studIdList.substring(0, studIdList.length() - 1);
-					System.out.println("stud id list"+studIdList);
+					System.out.println("stud id list" + studIdList);
 
 					map.add("studIdList", studIdList);
 				} else {
