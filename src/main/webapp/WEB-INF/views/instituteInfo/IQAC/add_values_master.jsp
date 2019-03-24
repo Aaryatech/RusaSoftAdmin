@@ -104,13 +104,13 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="valText">Value
-												Text <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="valText">Activity
+												Name Text <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="valText"
 													required name="valText" autocomplete="off"
-													placeholder="Value Text" value="${editValue.valText}">
+													placeholder="Activity Name" value="${editValue.valText}">
 											</div>
 										</div>
 
@@ -174,6 +174,8 @@
 
 
 									</div>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 

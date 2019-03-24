@@ -112,13 +112,13 @@
 					</c:choose>
 
 					<p>
-						<label for="user_login">Username <span class="text-danger">*</span><br /><input type="text"
-							name="username" id="username" class="input" value="" size="20"
-							placeholder="Username" /></label>
+						<label for="user_login">Username <span class="text-danger">*</span><br />
+							<input type="text" name="username" id="username" class="input"
+							value="" size="20" placeholder="Username" /></label>
 					</p>
 					<p>
-						<label for="user_pass">Password <span class="text-danger">*</span><br /> <input
-							type="password" name="userpassword" id="userpassword"
+						<label for="user_pass">Password <span class="text-danger">*</span><br />
+							<input type="password" name="userpassword" id="userpassword"
 							class="input" value="" placeholder="Password" size="20" /></label>
 					</p>
 
@@ -147,14 +147,14 @@
 
 				<p id="nav">
 					<!-- <a class="pull-left" href="showforgotPassForm"
-						title="Password Lost and Found">Forgot password?</a> --> <a
-						class="pull-left" href="showInstituteRegistrationForm"
+						title="Password Lost and Found">Forgot password?</a> -->
+					<a class="pull-left" href="showInstituteRegistrationForm"
 						title="Sign Up">Institute Registration</a>
 				</p>
 				<br /> <br /> <label class="pull-left" for="page_name"><b
 					style="color: red; font-family: verdana; font-size: 14px;">Warning:</b><b
-					style="font-family: verdana;font-size: 12px;">Unauthorised access of this
-						system is an offence</b> </label>
+					style="font-family: verdana; font-size: 11px;">Unauthorised
+						Access of this System is an Offence</b> </label>
 
 			</div>
 		</div>
@@ -186,7 +186,11 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/plugins/viewport/viewportchecker.js"
 		type="text/javascript"></script>
-	<script>window.jQuery||document.write('<script src="../assets/js/jquery-1.11.2.min.js"><\/script>');</script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/jquery-1.11.2.min.js"><\/script>');
+	</script>
 	<!-- CORE JS FRAMEWORK - END -->
 
 

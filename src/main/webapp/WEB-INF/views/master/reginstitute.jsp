@@ -98,9 +98,6 @@
 
 
 
-
-
-
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstitute"
 										method="post" name="form_sample_2" id="form_sample_2"
@@ -245,14 +242,14 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">Contact
-														No <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">Official
+														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-															value="${editInst.trustContactNo}" maxlength="10"
-															class="form-control" id="trusty_con_no"
-															name="trusty_con_no" placeholder="Contact No" required>
+														<input type="text" value="${editInst.trustContactNo}"
+															maxlength="15" class="form-control" id="trusty_con_no"
+															name="trusty_con_no" placeholder="Official Contact No"
+															required>
 													</div>
 												</div>
 
@@ -270,14 +267,14 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">Contact
-														No <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">Chairman
+														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-															value="${editInst.presidenContact}" maxlength="10"
-															class="form-control" id="pres_contact"
-															name="pres_contact" placeholder="Landline No" required>
+														<input type="text" value="${editInst.presidenContact}"
+															maxlength="15" class="form-control" id="pres_contact"
+															name="pres_contact" placeholder="Chairman Contact No"
+															required>
 													</div>
 												</div>
 
@@ -309,14 +306,14 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">Contact
+													<label class="control-label col-sm-3" for="page_order">Mobile
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 															maxlength="10" class="form-control" id="princ_contact"
 															value="${editInst.contactNo}" name="princ_contact"
-															placeholder="Contact No"
+															placeholder="Mobile No"
 															oninput="checkUnique(this.value,1)" required>
 														<p class="desc text-danger fontsize11">Note: OTP will
 															be sent on this mobile number for verification</p>
@@ -688,13 +685,13 @@
 											document
 													.getElementById("princ_email").value = "";
 
-											alert("This email id already exist in system please enter unique");
+											alert("This Email Id is Already Exist in Database. Please Login with Your Credential.");
 
 										} else {
 											document
 													.getElementById("princ_contact").value = "";
 
-											alert("This contact no  already exist in system please enter unique");
+											alert("This Mobile No is Already Exist in Database. Please Login with Your Credential.");
 
 										}
 									}

@@ -96,120 +96,130 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-								
-								  <c:if test="${addAccess == 0}"> 
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLinkageMaster"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+
+									<c:if test="${addAccess == 0}">
+										<form class="form-horizontal"
+											action="${pageContext.request.contextPath}/insertLinkageMaster"
+											method="post" name="form_sample_2" id="form_sample_2"
+											onsubmit="return confirm('Do you really want to submit the form?');">
 
 
 
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="linkname_text">Linkage
-												Name <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="linkname_text"
-													required name="linkname_text" autocomplete="off"
-													placeholder="Linkage Name" value="${editInst.linknameText}">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="linkname_remarks">
-												Linkage Remarks <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													id="linkname_remarks" required name="linkname_remarks"
-													autocomplete="off" placeholder="Linkage Remarks"
-													value="${editInst.linknameRemarks}">
-											</div>
-										</div>
-
-										<input type="hidden" id="linkage_id" name="linkage_id" value="${editInst.linknameId}" >
-										
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> 
-												<button type="reset" class="btn btn-default">Reset</button>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="linkname_text">Linkage
+													Name <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="linkname_text"
+														required name="linkname_text" autocomplete="off"
+														placeholder="Linkage Name"
+														value="${editInst.linknameText}">
+												</div>
 											</div>
 
-										</div>
-									</form>
-									<p class="desc text-danger fontsize11">Notice : * Fields
-										are Mandatory.</p>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="linkname_remarks">
+													Linkage Remarks <span class="text-danger"></span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														id="linkname_remarks" name="linkname_remarks"
+														autocomplete="off" placeholder="Linkage Remarks"
+														value="${editInst.linknameRemarks}">
+												</div>
+											</div>
+
+											<input type="hidden" id="linkage_id" name="linkage_id"
+												value="${editInst.linknameId}">
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+													<input type="submit" class="btn btn-primary"
+														onclick="submit_f(1)" value="Save">
+													<button type="reset" class="btn btn-default">Reset</button>
+												</div>
+
+											</div>
+										</form>
+
 									</c:if>
-									
-									
+
+
 
 									<div class="form-group">
-						<form action="${pageContext.request.contextPath}/deleteLinkages/0"
-							method="get" id="libListForm">
-										<table class="table table-striped dt-responsive display"
-											id="example-1">
-											<thead>
+										<form
+											action="${pageContext.request.contextPath}/deleteLinkages/0"
+											method="get" id="libListForm">
+											<table class="table table-striped dt-responsive display"
+												id="example-1">
+												<thead>
 
-												<tr>
-												<th class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
-													<th>Sr No</th>
-													<th>Linkage Name</th>
-													<th>Linkage Remarks</th>
-													<th>Action</th>
+													<tr>
+														<th class="check" style="text-align: center; width: 5%;"><input
+															type="checkbox" name="selAll" id="selAll"
+															onClick="selectedInst(this)" /> Select All</th>
+														<th>Sr No</th>
+														<th>Linkage Name</th>
+														<th>Linkage Remarks</th>
+														<th>Action</th>
 
-												</tr>
+													</tr>
 
 
-											</thead>
-											
-								
-											<tbody>
-											<c:forEach items="${colList}" var="colList"
+												</thead>
+
+
+												<tbody>
+													<c:forEach items="${colList}" var="colList"
 														varStatus="count">
 														<tr>
-															<td><input type="checkbox" class="chk" name="linknameIds"
-																id="linknameIds${count.index+1}" value="${colList.linknameId}" /></td>
+															<td><input type="checkbox" class="chk"
+																name="linknameIds" id="linknameIds${count.index+1}"
+																value="${colList.linknameId}" /></td>
 															<td>${count.index+1}</td>
 															<td>${colList.linknameText}</td>
 															<td>${colList.linknameRemarks}</td>
-															
 
 
-															<td style="text-align: center;">
-																  <c:if test="${editAccess == 0}">  <a
-																href="#" onclick="showEditLinkage(${colList.linknameId})"><span
-																	class="glyphicon glyphicon-edit"  title="Edit" data-original-title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-																</c:if>    <c:if test="${deleteAccess == 0}">
+
+															<td style="text-align: center;"><c:if
+																	test="${editAccess == 0}">
+																	<a href="#"
+																		onclick="showEditLinkage(${colList.linknameId})"><span
+																		class="glyphicon glyphicon-edit" title="Edit"
+																		data-original-title="Edit"
+																		data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																</c:if> <c:if test="${deleteAccess == 0}">
 																&nbsp;&nbsp;&nbsp;&nbsp; <a
-																href="${pageContext.request.contextPath}/deleteLinkages/${colList.linknameId}"
-																onClick="return confirm('Are you sure want to delete this record');"
-																rel="tooltip" data-color-class="danger" title="Delete" data-original-title="Delete"
-																data-animate=" animated fadeIn " data-toggle="tooltip"
-																data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a> 
-																		</c:if>
-															</td>
+																		href="${pageContext.request.contextPath}/deleteLinkages/${colList.linknameId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-original-title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
 														</tr>
 													</c:forEach>
-											</tbody>
-										</table>
-  								<c:if test="${deleteAccess == 0}">
-										<input type="submit" class="btn btn-primary" value="Delete"
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"></c:if>
-											<input type="hidden" id="edit_linkage_id" name="edit_linkage_id"
-												value="0">
-</form>
+												</tbody>
+											</table>
+											<c:if test="${deleteAccess == 0}">
+												<input type="submit" class="btn btn-primary" value="Delete"
+													id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+											</c:if>
+											<input type="hidden" id="edit_linkage_id"
+												name="edit_linkage_id" value="0">
+										</form>
 
-									
+
+
+
 
 									</div>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 
@@ -236,7 +246,7 @@
 
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		function selectedInst(source) {
 
 			checkboxes = document.getElementsByName('linknameIds');

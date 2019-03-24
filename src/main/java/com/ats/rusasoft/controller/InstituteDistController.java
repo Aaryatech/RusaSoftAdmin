@@ -807,7 +807,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_values_master");
 
-				model.addObject("title", "Add  Values");
+				model.addObject("title", "Add Human Values and Professional Ethics Activity Names");
 
 				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
 				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
