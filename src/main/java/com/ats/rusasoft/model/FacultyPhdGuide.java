@@ -12,7 +12,7 @@ public class FacultyPhdGuide {
 	private String phdRegYear;
 	private String phdTopic;
 	private int isPhdAwarded;
-	private String	phdAwardedYear;
+	private int	phdAwardedYear;
 	private int delStatus;
 	private int	isActive;
 	private int makerUserId;
@@ -80,10 +80,10 @@ public class FacultyPhdGuide {
 	public void setIsPhdAwarded(int isPhdAwarded) {
 		this.isPhdAwarded = isPhdAwarded;
 	}
-	public String getPhdAwardedYear() {
+	public int getPhdAwardedYear() {
 		return phdAwardedYear;
 	}
-	public void setPhdAwardedYear(String phdAwardedYear) {
+	public void setPhdAwardedYear(int phdAwardedYear) {
 		this.phdAwardedYear = phdAwardedYear;
 	}
 	public int getDelStatus() {

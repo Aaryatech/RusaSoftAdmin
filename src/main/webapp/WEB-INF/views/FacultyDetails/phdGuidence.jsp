@@ -275,33 +275,33 @@
 														<div class="form-group" id="abc" style="display: none;">
 
 															<label class="control-label col-sm-2" 
-																for="smallheading">Year of Awarded Ph.D: <span
+																for="smallheading">Year of Awarded Ph.D<span
 																class="text-danger">*</span>
 															</label>
-															<div class="col-sm-6">
+															<%-- <div class="col-sm-6">
 																<input type="text" class="form-control datepicker" id="phd_year_awarded" onkeypress='return restrictAlphabets(event)'
 																	name="phd_year_awarded" placeholder="dd/mm/yyyy" value="${phd.phdAwardedYear}" autocomplete="off">
-															</div>
-															<!-- <label class="control-label col-sm-2" for="smallheading">Valid
-																	up : <span class="text-danger">*</span>
-																</label>
-																<div class="col-sm-2">
-																	<input type="date" class="form-control" id="validup"
-																		name="validup" placeholder="Valid up" value=""
-																		required>
-																</div>
- -->
-															<!-- 
-																<label class="control-label col-sm-2" for="smallheading">Awarded
-																	: <span class="text-danger">*</span>
-																</label>
+															</div> --%>
+															<div class="col-sm-10">
+														<select id="phd_year_awarded" name="phd_year_awarded" class="form-control" required>
+																																	
+															<c:forEach items="${acaYearList}" var="acaYearList">
+																		<c:choose>
+																			<c:when test="${acaYearList.yearId==staff.hightestQualificationYear}">
+																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
-																<div class="col-sm-2">
-																	Yes <input type="radio" name="awarded" id="awarded"
-																		checked value="0"> No<input type="radio"
-																		name="awarded" id="awarded" value="1">
-																</div> -->
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+													</select>
+                                      				 </div>
 
 														</div>
 

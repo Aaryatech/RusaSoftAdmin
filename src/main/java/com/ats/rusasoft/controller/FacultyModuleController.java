@@ -1362,7 +1362,7 @@ public class FacultyModuleController {
 			
 			phd.setPhdId(Integer.parseInt(request.getParameter("phdGiudeId")));
 			phd.setCoGuideName(request.getParameter("co_guide_name"));
-			phd.setPhdAwardedYear(request.getParameter("phd_year_awarded"));
+			phd.setPhdAwardedYear(Integer.parseInt(request.getParameter("phd_year_awarded")));
 			phd.setFacultyId(facId.getRegPrimaryKey());
 			phd.setYearId(yId);
 			phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
