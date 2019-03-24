@@ -53,7 +53,8 @@ public class FacultyPatentController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "1", "0", "0", "0",
+					newModuleList);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == true) {
@@ -63,33 +64,34 @@ public class FacultyPatentController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/patentDetailList");
-				
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				FacultyPatent[] arry = rest.postForObject(Constants.url + "/getPatentListByFacultyId",map,
+				FacultyPatent[] arry = rest.postForObject(Constants.url + "/getPatentListByFacultyId", map,
 						FacultyPatent[].class);
-				
-				List<FacultyPatent> facultyPatentList = new ArrayList<>(Arrays.asList(arry));
-				
-				for(int i=0 ; i<facultyPatentList.size() ; i++) {
-					
-					facultyPatentList.get(i).setPatentFilingDate(DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentFilingDate()));
-					facultyPatentList.get(i).setPatentPubDate(DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentPubDate()));
-					
-				}
-				
-				
-				System.out.println("faculty Patent List :" + facultyPatentList);				
 
-				model.addObject("title", "Patent Details List");
+				List<FacultyPatent> facultyPatentList = new ArrayList<>(Arrays.asList(arry));
+
+				for (int i = 0; i < facultyPatentList.size(); i++) {
+
+					facultyPatentList.get(i).setPatentFilingDate(
+							DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentFilingDate()));
+					facultyPatentList.get(i)
+							.setPatentPubDate(DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentPubDate()));
+
+				}
+
+				System.out.println("faculty Patent List :" + facultyPatentList);
+
+				model.addObject("title", "Faculty's Patent Work Details List");
 
 				model.addObject("facultyPatentList", facultyPatentList);
-				Info add = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "0", "1", "0",
-						newModuleList);
-				Info delete = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "0", "0", "1",
-						newModuleList);
+				Info add = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "1", "0",
+						"0", newModuleList);
+				Info edit = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "0", "1",
+						"0", newModuleList);
+				Info delete = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "0",
+						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -135,7 +137,7 @@ public class FacultyPatentController {
 			} else {
 				model = new ModelAndView("FacultyDetails/patentDetails");
 
-				model.addObject("title", "Patent Details Form");
+				model.addObject("title", "Add Faculty's Patent Work Details");
 			}
 		} catch (Exception e) {
 
@@ -153,131 +155,129 @@ public class FacultyPatentController {
 
 		String returnString = new String();
 		try {
-		HttpSession session = request.getSession();	
-	
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0",  "1", "0", "0", newModuleList);
-		
+			HttpSession session = request.getSession();
 
-		if (view.isError() == false) {
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");			
-			int userId = (int) session.getAttribute("userId");
-			int acYearId = (int) session.getAttribute("acYearId");
-			int patentId = 0;
-		
-		try {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "1", "0", "0",
+					newModuleList);
 
-			patentId = Integer.parseInt(request.getParameter("patentId"));
+			if (view.isError() == false) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int userId = (int) session.getAttribute("userId");
+				int acYearId = (int) session.getAttribute("acYearId");
+				int patentId = 0;
 
+				try {
+
+					patentId = Integer.parseInt(request.getParameter("patentId"));
+
+				} catch (Exception e) {
+					patentId = 0;
+					System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+					e.printStackTrace();
+
+				}
+
+				System.out.println("patentId:" + patentId);
+				String patentNo = request.getParameter("patentNo");
+				System.out.println("patentNo:" + patentNo);
+				String parentTitle = request.getParameter("parentTitle");
+				String fillingDate = request.getParameter("fillingDate");
+				String guideName = request.getParameter("guideName");
+				String pubDate = request.getParameter("pubDate");
+				int is_view = Integer.parseInt(request.getParameter("is_view"));
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+
+				String curDateTime = dateFormat.format(cal.getTime());
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				String curDate = dateFormatStr.format(new Date());
+
+				FacultyPatent faculty = new FacultyPatent();
+				/* if (patentId == 0) { */
+
+				faculty.setPatentId(patentId);
+				faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+				faculty.setPatentTitle(parentTitle);
+				faculty.setDelStatus(1);
+				faculty.setIsActive(1);
+				faculty.setYearId(acYearId);
+				faculty.setPatentFileNo(patentNo);
+				faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
+				faculty.setPatentGuideName(guideName);
+				faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
+				faculty.setMakerUserId(userId);
+				faculty.setMakerEnterDatetime(curDateTime);
+
+				FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty,
+						FacultyPatent.class);
+
+				/*
+				 * } else { //faculty.setPatentId(patentId);
+				 * faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+				 * faculty.setPatentTitle(parentTitle); faculty.setDelStatus(1);
+				 * faculty.setIsActive(1); faculty.setYearId(acYearId);
+				 * faculty.setPatentFileNo(patentNo);
+				 * faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
+				 * faculty.setPatentGuideName(guideName);
+				 * faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
+				 * faculty.setMakerUserId(userId); faculty.setMakerEnterDatetime(curDateTime);
+				 * 
+				 * FacultyPatent patent = rest.postForObject(Constants.url +
+				 * "/saveFacultyPatent", faculty, FacultyPatent.class);
+				 * 
+				 * }
+				 */
+
+				if (is_view == 1) {
+					returnString = "redirect:/showPatentDetailsList";
+				} else {
+					returnString = "redirect:/showPatentDetails";
+				}
+			} else {
+
+				returnString = "redirect:/accessDenied";
+
+			}
 		} catch (Exception e) {
-			patentId = 0;
-			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
-
-		}
-
-		System.out.println("patentId:" + patentId);
-		String patentNo = request.getParameter("patentNo");
-		System.out.println("patentNo:" + patentNo);
-		String parentTitle = request.getParameter("parentTitle");
-		String fillingDate = request.getParameter("fillingDate");
-		String guideName = request.getParameter("guideName");
-		String pubDate = request.getParameter("pubDate");
-		int is_view = Integer.parseInt(request.getParameter("is_view"));
-
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-
-		String curDateTime = dateFormat.format(cal.getTime());
-		DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-		String curDate = dateFormatStr.format(new Date());
-		
-		FacultyPatent faculty = new FacultyPatent();
-		/*if (patentId == 0) {*/
-
-		faculty.setPatentId(patentId);
-		faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-		faculty.setPatentTitle(parentTitle);
-		faculty.setDelStatus(1);
-		faculty.setIsActive(1);
-		faculty.setYearId(acYearId);
-		faculty.setPatentFileNo(patentNo);
-		faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
-		faculty.setPatentGuideName(guideName);
-		faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
-		faculty.setMakerUserId(userId);
-		faculty.setMakerEnterDatetime(curDateTime);
-		
-		FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty, FacultyPatent.class);
-
-		/*}
-		else
-		{
-			//faculty.setPatentId(patentId);
-			faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-			faculty.setPatentTitle(parentTitle);
-			faculty.setDelStatus(1);
-			faculty.setIsActive(1);
-			faculty.setYearId(acYearId);
-			faculty.setPatentFileNo(patentNo);
-			faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
-			faculty.setPatentGuideName(guideName);
-			faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
-			faculty.setMakerUserId(userId);
-			faculty.setMakerEnterDatetime(curDateTime);
-			
-			FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty, FacultyPatent.class);
-
-		}*/
-
-		if (is_view == 1) {
-			returnString = "redirect:/showPatentDetailsList";
-		} else {
-			returnString = "redirect:/showPatentDetails";
-		}
-	} else {
-
-		returnString = "redirect:/accessDenied";
-
-	}
-	}catch (Exception e) 
-		{
-	System.err.println("EXCE in vendInsertRes " + e.getMessage());
-	e.printStackTrace();
 
 		}
 		return returnString;
 	}
-	
+
 	@RequestMapping(value = "/editPatent/{patentId}", method = RequestMethod.GET)
 	public ModelAndView editPatent(@PathVariable("patentId") int patentId, HttpServletRequest request) {
-		
-	System.out.println("Id:"+patentId);
+
+		System.out.println("Id:" + patentId);
 
 		ModelAndView model = null;
-		 HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-		
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
 		try {
-			Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "0", "1", "0", newModuleList);
-			
-			if(view.isError()==true) {
-						
-						model = new ModelAndView("accessDenied");
-										
-					}
-			else {
-			
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("patentId", patentId); 
-			model = new ModelAndView("FacultyDetails/patentDetails"); 
-			model.addObject("title", "Edit Patent Details Form");
-			FacultyPatent patent = rest.postForObject(Constants.url+"/getFacultyPatent", map, FacultyPatent.class);
-			//System.out.println("patent"+patent);
-			patent.setPatentFilingDate(DateConvertor.convertToDMY(patent.getPatentFilingDate()));
-			patent.setPatentPubDate(DateConvertor.convertToDMY(patent.getPatentPubDate()));
-			model.addObject("patent", patent);
+			Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("patentId", patentId);
+				model = new ModelAndView("FacultyDetails/patentDetails");
+				model.addObject("title", "Edit Faculty's Patent Work Details");
+				FacultyPatent patent = rest.postForObject(Constants.url + "/getFacultyPatent", map,
+						FacultyPatent.class);
+				// System.out.println("patent"+patent);
+				patent.setPatentFilingDate(DateConvertor.convertToDMY(patent.getPatentFilingDate()));
+				patent.setPatentPubDate(DateConvertor.convertToDMY(patent.getPatentPubDate()));
+				model.addObject("patent", patent);
 			}
 		} catch (Exception e) {
 
@@ -288,70 +288,65 @@ public class FacultyPatentController {
 		}
 		return model;
 	}
-	
-	
-	  @RequestMapping(value = "/deleteFacultyPatent/{patentId}", method = RequestMethod.GET)
-	  public String deleteFacultyPatent(@PathVariable("patentId") int patentId, HttpServletRequest request)
-	  {		  
-		  String a=null; HttpSession session = request.getSession(); 
-		  List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-		  Info view = AccessControll.checkAccess("deleteFacultyPatent", "showPatentDetailsList", "0", "0", "0","1", newModuleList); 
-		  
-		  if(view.isError()==true)
-		  {	  
-			  	a="redirect:/accessDenied";			  	
-	      }
-		  else 
-		  { 
-			  Info inf = new Info(); 
-			  System.out.println("patentId:"+patentId);
-	  
-			  MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			  map.add("patentId", patentId); 
-			  Info miqc = rest.postForObject(Constants.url+"/deletePetentFaculty", map, Info.class);
-			  a="redirect:/showPatentDetailsList"; 
-		  } 
-		  
-		  return a;
-	  
-	  }
-	  
-	  @RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
-	  public ModelAndView showAwardDetails(HttpServletRequest request,
-	  HttpServletResponse response) {
-	  
-	  ModelAndView model = null; try {
-	  
-	  model = new ModelAndView("FacultyDetails/awardDetails");
-	  
-	  model.addObject("title", "Award Details Form");
-	  
-	  } catch (Exception e) {
-	  
-	  System.err.println("exception In showAwardDetails at Library Contr" +
-	  e.getMessage());
-	  
-	  e.printStackTrace();
-	  
-	  }
-	  
-	  return model;
-	  
-	  }
-	  
-	  @RequestMapping(value = "/showAwardDetailsList", method = RequestMethod.GET)
-	  public ModelAndView showAwardDetailsList(HttpServletRequest request,
-	  HttpServletResponse response) {
-	  
-	  ModelAndView model = null; 
-	  
-	 
-	  HttpSession session = request.getSession();
+
+	@RequestMapping(value = "/deleteFacultyPatent/{patentId}", method = RequestMethod.GET)
+	public String deleteFacultyPatent(@PathVariable("patentId") int patentId, HttpServletRequest request) {
+		String a = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("deleteFacultyPatent", "showPatentDetailsList", "0", "0", "0", "1",
+				newModuleList);
+
+		if (view.isError() == true) {
+			a = "redirect:/accessDenied";
+		} else {
+			Info inf = new Info();
+			System.out.println("patentId:" + patentId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("patentId", patentId);
+			Info miqc = rest.postForObject(Constants.url + "/deletePetentFaculty", map, Info.class);
+			a = "redirect:/showPatentDetailsList";
+		}
+
+		return a;
+
+	}
+
+	@RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
+	public ModelAndView showAwardDetails(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("FacultyDetails/awardDetails");
+
+			model.addObject("title", "Add Faculty Received Award - Recognition Details");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showAwardDetails at Library Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showAwardDetailsList", method = RequestMethod.GET)
+	public ModelAndView showAwardDetailsList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+
+		HttpSession session = request.getSession();
 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "1", "0", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
@@ -359,34 +354,32 @@ public class FacultyPatentController {
 
 			} else {
 
-
-				 model = new ModelAndView("FacultyDetails/awardDetailsList");
+				model = new ModelAndView("FacultyDetails/awardDetailsList");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				FacultyAward[]  arr = rest.postForObject(Constants.url + "/getAwardListByFacultyId",map,
+				FacultyAward[] arr = rest.postForObject(Constants.url + "/getAwardListByFacultyId", map,
 						FacultyAward[].class);
-			 	List<FacultyAward> facultyAwardList = new ArrayList<FacultyAward>(Arrays.asList(arr));
- 
-			 	
-			 	for(int i=0 ; i<facultyAwardList.size() ; i++) {
-			 		
-			 		facultyAwardList.get(i).setAwardDate(DateConvertor.convertToDMY(facultyAwardList.get(i).getAwardDate()));
-			 		facultyAwardList.get(i).setAwardValidityFrom(facultyAwardList.get(i).getAwardValidityFrom());
-			 		facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).getAwardValidityTo());
-			 	}
+				List<FacultyAward> facultyAwardList = new ArrayList<FacultyAward>(Arrays.asList(arr));
+
+				for (int i = 0; i < facultyAwardList.size(); i++) {
+
+					facultyAwardList.get(i)
+							.setAwardDate(DateConvertor.convertToDMY(facultyAwardList.get(i).getAwardDate()));
+					facultyAwardList.get(i).setAwardValidityFrom(facultyAwardList.get(i).getAwardValidityFrom());
+					facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).getAwardValidityTo());
+				}
 				System.out.println("faculty Patent List :" + facultyAwardList);
 
-
-				model.addObject("title", "Award Details List");
+				model.addObject("title", "Faculty Received Award - Recognition Details List");
 
 				model.addObject("facultyAwardList", facultyAwardList);
-			
-				Info add = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "0", "1", "0",
-						newModuleList);
-				Info delete = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "0", "0", "1",
-						newModuleList);
+
+				Info add = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "1", "0",
+						"0", newModuleList);
+				Info edit = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "0", "1",
+						"0", newModuleList);
+				Info delete = AccessControll.checkAccess("showAwardDetailsList", "showAwardDetailsList", "0", "0", "0",
+						"1", newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -412,274 +405,254 @@ public class FacultyPatentController {
 		}
 
 		return model;
-	  
-	  }
-	  
-	  @RequestMapping(value = "/insertAwardDetail", method = RequestMethod.POST)
-		public String insertAwardDetail(HttpServletRequest request, HttpServletResponse response) {
 
-		  String returnString = new String();
-			try {
-				HttpSession session = request.getSession();
-							
-				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
-						"1", "0", "0", newModuleList);
-			
-				if (view.isError() == false)
-				{
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int userId = (int) session.getAttribute("userId");
-			int acYearId = (int) session.getAttribute("acYearId");
+	}
 
-			int awardId = 0;
-			try {
+	@RequestMapping(value = "/insertAwardDetail", method = RequestMethod.POST)
+	public String insertAwardDetail(HttpServletRequest request, HttpServletResponse response) {
 
-				awardId = Integer.parseInt(request.getParameter("awardId"));
+		String returnString = new String();
+		try {
+			HttpSession session = request.getSession();
 
-			} catch (Exception e) {
-				awardId = 0;
-				System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
-				e.printStackTrace();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
+					"1", "0", "0", newModuleList);
 
-			}
+			if (view.isError() == false) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int userId = (int) session.getAttribute("userId");
+				int acYearId = (int) session.getAttribute("acYearId");
 
-			System.out.println("awardId:" + awardId);
-		
-			String name = request.getParameter("name");
-			String agency = request.getParameter("agency");
-			String nature = request.getParameter("nature");
-			String date = request.getParameter("date");
-			int validity = Integer.parseInt(request.getParameter("validity"));
-			int is_view = Integer.parseInt(request.getParameter("is_view"));
+				int awardId = 0;
+				try {
 
-			String fromDate = request.getParameter("fromDate");
+					awardId = Integer.parseInt(request.getParameter("awardId"));
 
-			String fromTo = request.getParameter("toDate");
+				} catch (Exception e) {
+					awardId = 0;
+					System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+					e.printStackTrace();
 
+				}
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
+				System.out.println("awardId:" + awardId);
 
-			String curDateTime = dateFormat.format(cal.getTime());
-			DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+				String name = request.getParameter("name");
+				String agency = request.getParameter("agency");
+				String nature = request.getParameter("nature");
+				String date = request.getParameter("date");
+				int validity = Integer.parseInt(request.getParameter("validity"));
+				int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-			String curDate = dateFormatStr.format(new Date());
+				String fromDate = request.getParameter("fromDate");
 
-			FacultyAward faculty = new FacultyAward();
-			if (awardId == 0) {
+				String fromTo = request.getParameter("toDate");
 
-			faculty.setAwardId(awardId);
-			faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-			faculty.setAwardName(name);
-			faculty.setDelStatus(1);
-			faculty.setIsActive(1);
-			faculty.setYearId(acYearId);
-			faculty.setAwardAuthority(agency);
-			faculty.setAwardDate(DateConvertor.convertToYMD(date));
-			faculty.setAwardNature(nature);
-			faculty.setAwardValidity(validity);
-			if(validity==0)
-			{
-				faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
-				faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
-			}	
-			 
-		
-			faculty.setMakerUserId(userId);
-			faculty.setMakerEnterDatetime(curDateTime);
-			
-			FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty, FacultyAward.class);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			}
-			else
-			{
-				faculty.setAwardId(awardId);
-				faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-				faculty.setAwardName(name);
-				faculty.setDelStatus(1);
-				faculty.setIsActive(1);
-				faculty.setYearId(acYearId);
-				faculty.setAwardAuthority(agency);
-				faculty.setAwardDate(DateConvertor.convertToYMD(date));
-				faculty.setAwardNature(nature);
-				faculty.setAwardValidity(validity);
-				if(validity==0)
-				{
-					faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
-					faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
-				}	
-				 	 
-				faculty.setMakerUserId(userId);
-				faculty.setMakerEnterDatetime(curDateTime);
-				
-				FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty, FacultyAward.class);
+				String curDateTime = dateFormat.format(cal.getTime());
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
-			}
+				String curDate = dateFormatStr.format(new Date());
 
-			if (is_view == 1) {
-				returnString = "redirect:/showAwardDetailsList";
+				FacultyAward faculty = new FacultyAward();
+				if (awardId == 0) {
+
+					faculty.setAwardId(awardId);
+					faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+					faculty.setAwardName(name);
+					faculty.setDelStatus(1);
+					faculty.setIsActive(1);
+					faculty.setYearId(acYearId);
+					faculty.setAwardAuthority(agency);
+					faculty.setAwardDate(DateConvertor.convertToYMD(date));
+					faculty.setAwardNature(nature);
+					faculty.setAwardValidity(validity);
+					if (validity == 0) {
+						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
+						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
+					}
+
+					faculty.setMakerUserId(userId);
+					faculty.setMakerEnterDatetime(curDateTime);
+
+					FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty,
+							FacultyAward.class);
+
+				} else {
+					faculty.setAwardId(awardId);
+					faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+					faculty.setAwardName(name);
+					faculty.setDelStatus(1);
+					faculty.setIsActive(1);
+					faculty.setYearId(acYearId);
+					faculty.setAwardAuthority(agency);
+					faculty.setAwardDate(DateConvertor.convertToYMD(date));
+					faculty.setAwardNature(nature);
+					faculty.setAwardValidity(validity);
+					if (validity == 0) {
+						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
+						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
+					}
+
+					faculty.setMakerUserId(userId);
+					faculty.setMakerEnterDatetime(curDateTime);
+
+					FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty,
+							FacultyAward.class);
+
+				}
+
+				if (is_view == 1) {
+					returnString = "redirect:/showAwardDetailsList";
+				} else {
+					returnString = "redirect:/showAwardDetails";
+				}
 			} else {
-				returnString = "redirect:/showAwardDetails";
+
+				returnString = "redirect:/accessDenied";
+
 			}
-		} else {
-
-			returnString = "redirect:/accessDenied";
 
 		}
-			
-	}
 
-	catch (Exception e) {
-		System.err.println("EXCE in vendInsertRes " + e.getMessage());
-		e.printStackTrace();
-		returnString = "redirect:/showAwardDetailsList";
-	}
-			return returnString;
-
+		catch (Exception e) {
+			System.err.println("EXCE in vendInsertRes " + e.getMessage());
+			e.printStackTrace();
+			returnString = "redirect:/showAwardDetailsList";
 		}
-		
-		@RequestMapping(value = "/editAward/{awardId}", method = RequestMethod.GET)
-		public ModelAndView editAward(@PathVariable("awardId") int awardId, HttpServletRequest request) {
-			
-		System.out.println("Id:"+awardId);
+		return returnString;
 
-			ModelAndView model = null;
-			 HttpSession session = request.getSession();
-				List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-			
-			try {
-				Info view = AccessControll.checkAccess("editAward", "showAwardDetailsList", "0", "0", "1", "0", newModuleList);
-				
-				if(view.isError()==true) {
-							
-							model = new ModelAndView("accessDenied");
-											
-						}
-				else {
-				
+	}
+
+	@RequestMapping(value = "/editAward/{awardId}", method = RequestMethod.GET)
+	public ModelAndView editAward(@PathVariable("awardId") int awardId, HttpServletRequest request) {
+
+		System.out.println("Id:" + awardId);
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("editAward", "showAwardDetailsList", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("awardId", awardId);
-			 
+
 				model = new ModelAndView("FacultyDetails/awardDetails");
-				model.addObject("title", "Edit Award Details Form");
-				
-				FacultyAward award = rest.postForObject(Constants.url+"/getFacultyAwardById", map, FacultyAward.class);
-				//System.out.println("award"+award);
-				
+				model.addObject("title", "Edit Faculty Received Award - Recognition Details");
+
+				FacultyAward award = rest.postForObject(Constants.url + "/getFacultyAwardById", map,
+						FacultyAward.class);
+				// System.out.println("award"+award);
+
 				award.setAwardDate(DateConvertor.convertToDMY(award.getAwardDate()));
-				if(award.getAwardValidity()==0)
-				{
-				award.setAwardValidityFrom(DateConvertor.convertToDMY(award.getAwardValidityFrom()));
-				award.setAwardValidityTo(DateConvertor.convertToDMY(award.getAwardValidityTo()));
+				if (award.getAwardValidity() == 0) {
+					award.setAwardValidityFrom(DateConvertor.convertToDMY(award.getAwardValidityFrom()));
+					award.setAwardValidityTo(DateConvertor.convertToDMY(award.getAwardValidityTo()));
 				}
 				model.addObject("award", award);
-				
-				}
-			} catch (Exception e) {
-
-				System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
-
-				e.printStackTrace();
 
 			}
-			return model;
+		} catch (Exception e) {
+
+			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
+
+			e.printStackTrace();
+
 		}
-		
-		
-		  @RequestMapping(value = "/deleteFacultyAward/{awardId}", method = RequestMethod.GET)
-		  public String deleteFacultyAward(@PathVariable("awardId") int awardId, HttpServletRequest request)
-		  {		  
-			  String a=null; HttpSession session = request.getSession(); 
-			  List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
-			  Info view = AccessControll.checkAccess("showAwardDetails", "showAwardDetailsList", "0", "0", "0","1", newModuleList); 
-			  
-			  if(view.isError()==true)
-			  {	  
-				  	a="redirect:/accessDenied";			  	
-		      }
-			  else 
-			  { 
-				  Info inf = new Info(); 
-				  System.out.println("awardId:"+awardId);
-		  
-				  MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				  map.add("awardId", awardId); 
-				  Info miqc = rest.postForObject(Constants.url+"/deleteAwardFaculty", map, Info.class);
-				  a="redirect:/showAwardDetailsList"; 
-			  } 
-			  
-			  return a;
-		  
-		  }
-		  
-		  
-	  
-	  @RequestMapping(value = "/showOutReachDetailsList", method =
-	  RequestMethod.GET) public ModelAndView
-	  showOutReachDetailsList(HttpServletRequest request, HttpServletResponse
-	  response) 
-	  {
-	  
-	  ModelAndView model = null;
-	
-	  
-	 
+		return model;
+	}
+
+	@RequestMapping(value = "/deleteFacultyAward/{awardId}", method = RequestMethod.GET)
+	public String deleteFacultyAward(@PathVariable("awardId") int awardId, HttpServletRequest request) {
+		String a = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showAwardDetails", "showAwardDetailsList", "0", "0", "0", "1",
+				newModuleList);
+
+		if (view.isError() == true) {
+			a = "redirect:/accessDenied";
+		} else {
+			Info inf = new Info();
+			System.out.println("awardId:" + awardId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("awardId", awardId);
+			Info miqc = rest.postForObject(Constants.url + "/deleteAwardFaculty", map, Info.class);
+			a = "redirect:/showAwardDetailsList";
+		}
+
+		return a;
+
+	}
+
+	@RequestMapping(value = "/showOutReachDetailsList", method = RequestMethod.GET)
+	public ModelAndView showOutReachDetailsList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+
 		HttpSession session = request.getSession();
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "1", "0", "0",
+					"0", newModuleList);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
-			} 
-			else {
+			} else {
 
-				
-				 model = new ModelAndView("FacultyDetails/outReachList");
-				  
-				  model.addObject("title", "Out Reach Activity List");
-				
+				model = new ModelAndView("FacultyDetails/outReachList");
+
+				model.addObject("title", "Faculty Attended - Out Reach Activity List");
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("instituteId", session.getAttribute("instituteId"));
-				
-				
-				
+
 				/*
 				 * Quolification[] quolArray = restTemplate.postForObject(Constants.url +
 				 * "getQuolificationList", map, Quolification[].class); List<Quolification>
 				 * quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				 * 
 				 */
-				
-				GetFacultyOutreach[] facultyOutreachListArray = rest.postForObject(Constants.url + "getOutReachListByFacultyId",map,
-						GetFacultyOutreach[].class);
-				
-				List<GetFacultyOutreach> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
-				
-				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());	
-				
-				  for(int i=0;i<facultyOutreachList.size();i++) {
-				  facultyOutreachList.get(i).setOutreachDate(DateConvertor.convertToDMY(facultyOutreachList.get(i).getOutreachDate()));
-			
-				  
-				  }
-				 
 
-				
+				GetFacultyOutreach[] facultyOutreachListArray = rest
+						.postForObject(Constants.url + "getOutReachListByFacultyId", map, GetFacultyOutreach[].class);
+
+				List<GetFacultyOutreach> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
+
+				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());
+
+				for (int i = 0; i < facultyOutreachList.size(); i++) {
+					facultyOutreachList.get(i)
+							.setOutreachDate(DateConvertor.convertToDMY(facultyOutreachList.get(i).getOutreachDate()));
+
+				}
+
 				model.addObject("facultyOutreachList", facultyOutreachList);
-				
-				Info add = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "0", "1", "0",
-						newModuleList);
-				Info delete = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "0", "0", "1",
-						newModuleList);
+
+				Info add = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "1",
+						"0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "0",
+						"1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showOutReachDetailsList", "showOutReachDetailsList", "0", "0",
+						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -695,13 +668,10 @@ public class FacultyPatentController {
 					model.addObject("deleteAccess", 0);
 
 				}
-				
+
 			}
-				
-		
-		
-		} 
-		catch (Exception e) {
+
+		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
@@ -710,280 +680,271 @@ public class FacultyPatentController {
 		}
 
 		return model;
-	  }
-	  
-	  
-	  @RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
-		public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
+	}
 
-			ModelAndView model = null;
-			HttpSession session = request.getSession();
-			
-			int inst_id = (int) session.getAttribute("instituteId");
-			try {
+	@RequestMapping(value = "/showOutReachDetails", method = RequestMethod.GET)
+	public ModelAndView showOutReachDetails(HttpServletRequest request, HttpServletResponse response) {
 
-				model = new ModelAndView("FacultyDetails/outReach");
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
 
-				model.addObject("title", "Add Out Reach Activity");
-				
-				FacultyOutreach editInst = new FacultyOutreach();
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				
-				
-				map.add("instituteId",inst_id);
-				List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList",map,
-						List.class);
-				System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());				
+		int inst_id = (int) session.getAttribute("instituteId");
+		try {
 
-				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
-				model.addObject("editInst", editInst);
-				
-				
+			model = new ModelAndView("FacultyDetails/outReach");
 
-			} catch (Exception e) {
+			model.addObject("title", "Add Faculty Attended - Out Reach Activity");
 
-				System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+			FacultyOutreach editInst = new FacultyOutreach();
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				e.printStackTrace();
+			map.add("instituteId", inst_id);
+			List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList", map,
+					List.class);
+			System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
 
-			}
+			model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
+			model.addObject("editInst", editInst);
 
-			return model;
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
 
 		}
-	  
-	  
-	  @RequestMapping(value = "/insertOutReachActivity", method = RequestMethod.POST)
-		public String insertOutReachActivity(HttpServletRequest request, HttpServletResponse response) {
 
-		  HttpSession session = request.getSession();
-			String a = null;
-			try {
-				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		return model;
 
-				Info view = AccessControll.checkAccess("insertOutReachActivity", "showOutReachDetailsList", "0", "1", "0", "0", newModuleList);
+	}
 
-				if (view.isError() == true)
+	@RequestMapping(value = "/insertOutReachActivity", method = RequestMethod.POST)
+	public String insertOutReachActivity(HttpServletRequest request, HttpServletResponse response) {
 
-				{
-
-					a = "redirect:/accessDenied";
-
-				}
-
-				else {
-					System.err.println("in insert insertLibrarian");
-					ModelAndView model = null;
-
-					int inst_id = (int) session.getAttribute("instituteId");
-					int maker_id = (int) session.getAttribute("userId");
-					int year_id = (int) session.getAttribute("acYearId");
-					
-					
-
-					FacultyOutreach lib = new FacultyOutreach();
-					RestTemplate restTemplate = new RestTemplate();
-
-					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-					int outreach_id = Integer.parseInt(request.getParameter("outreach_id"));
-					System.out.println("librarian_id" + "librarian_id");
-
-					String act_name = request.getParameter("act_name");
-
-					String activity_type = request.getParameter("activity_type");
-
-      				int faculty_id=userObj.getGetData().getUserDetailId();
-					String act_level = request.getParameter("act_level");
-					String act_date = request.getParameter("act_date");
-				
-
-					System.err.println("outreach_id id  " + outreach_id);
-					if (outreach_id == 0) {
-
-						System.out.println("inst id is" + inst_id);
-
-						lib.setFacultyId(faculty_id);
-						lib.setIsActive(1);
-						lib.setOutreachDate(DateConvertor.convertToYMD(act_date));
-						lib.setOutreachName(act_name); 
-						lib.setOutreachType(activity_type);
-						lib.setOutreachLevel(act_level);
-						lib.setYearId(year_id);
-						
-					
-						lib.setMakerUserId(maker_id);
-
-						lib.setInstituteId(inst_id);
-						lib.setDelStatus(1);
-						lib.setExInt1(1);
-						lib.setExInt2(1);
-						lib.setExVar1("NA");
-						lib.setExVar2("NA");
-
-						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						Calendar cal = Calendar.getInstance();
-
-						String curDateTime = dateFormat.format(cal.getTime());
-
-						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-						String curDate = dateFormatStr.format(new Date());
-
-						lib.setMakerEnterDatetime(curDateTime);
-
-						FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib, FacultyOutreach.class);
-
-					} else {
-						System.out.println("in edit");
-					
-						map.add("outreachId", outreach_id); // getInstitute Hod hod =
-						FacultyOutreach lib1 = rest.postForObject(Constants.url + "getFacultyOutReach", map, FacultyOutreach.class);
-						lib1.setFacultyId(faculty_id);
-						lib1.setIsActive(1);
-					
-						lib1.setOutreachDate(DateConvertor.convertToYMD(act_date));
-						lib1.setOutreachName(act_name); 
-						lib1.setOutreachType(activity_type);
-						lib1.setOutreachLevel(act_level);
-						lib1.setYearId(year_id);
-						
-					
-						lib1.setMakerUserId(maker_id);
-
-						lib1.setInstituteId(inst_id);
-						
-
-						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						Calendar cal = Calendar.getInstance();
-
-						String curDateTime = dateFormat.format(cal.getTime());
-
-						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-						String curDate = dateFormatStr.format(new Date());
-
-						lib1.setMakerEnterDatetime(curDateTime);
-						FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib1, FacultyOutreach.class);
-					}
-
-					int isView = Integer.parseInt(request.getParameter("is_view"));
-					if (isView == 1)
-						a = "redirect:/showOutReachDetailsList";
-
-					else
-						a = "redirect:/showOutReachDetails";
-
-				}
-
-			}
-
-			catch (Exception e) {
-				System.err.println("Exce in save lib  " + e.getMessage());
-				e.printStackTrace();
-			}
-
-			return a;
-
-		}
-	  
-	  @RequestMapping(value = "/deleteFacOutReach/{outId}", method = RequestMethod.GET)
-		public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int outId) {
-			HttpSession session = request.getSession();
-			String a = null;
-
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			Info view = AccessControll.checkAccess("deleteFacOutReach/{outId}", "showOutReachDetailsList", "0", "0", "0", "1",
-					newModuleList);
-			try {
-				if (view.isError() == true) {
+			Info view = AccessControll.checkAccess("insertOutReachActivity", "showOutReachDetailsList", "0", "1", "0",
+					"0", newModuleList);
 
-					a = "redirect:/accessDenied";
+			if (view.isError() == true)
 
-				}
+			{
 
-				else {
-
-					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				
-						System.err.println("Single Record delete ");
-						map.add("outreachId", outId);
-					
-
-					Info errMsg = rest.postForObject(Constants.url + "deleteOutreachFaculty", map, Info.class);
-
-					a = "redirect:/showOutReachDetailsList";
-				}
-
-			} catch (Exception e) {
-
-				System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
-
-				e.printStackTrace();
+				a = "redirect:/accessDenied";
 
 			}
-			return a;
-		}
-	  
-	  
-	  @RequestMapping(value = "/showEditFacOutReach", method = RequestMethod.POST)
-		public ModelAndView showEditFacOutReach(HttpServletRequest request, HttpServletResponse response) {
-			ModelAndView model = null;
-			HttpSession session = request.getSession();
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			else {
+				System.err.println("in insert insertLibrarian");
+				ModelAndView model = null;
 
-			try {
+				int inst_id = (int) session.getAttribute("instituteId");
+				int maker_id = (int) session.getAttribute("userId");
+				int year_id = (int) session.getAttribute("acYearId");
 
-				Info view = AccessControll.checkAccess("showEditFacOutReach", "showOutReachDetailsList", "0", "0", "1", "0",
-						newModuleList);
+				FacultyOutreach lib = new FacultyOutreach();
+				RestTemplate restTemplate = new RestTemplate();
 
-				if (view.isError() == true) {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-					model = new ModelAndView("accessDenied");
+				int outreach_id = Integer.parseInt(request.getParameter("outreach_id"));
+				System.out.println("librarian_id" + "librarian_id");
+
+				String act_name = request.getParameter("act_name");
+
+				String activity_type = request.getParameter("activity_type");
+
+				int faculty_id = userObj.getGetData().getUserDetailId();
+				String act_level = request.getParameter("act_level");
+				String act_date = request.getParameter("act_date");
+
+				System.err.println("outreach_id id  " + outreach_id);
+				if (outreach_id == 0) {
+
+					System.out.println("inst id is" + inst_id);
+
+					lib.setFacultyId(faculty_id);
+					lib.setIsActive(1);
+					lib.setOutreachDate(DateConvertor.convertToYMD(act_date));
+					lib.setOutreachName(act_name);
+					lib.setOutreachType(activity_type);
+					lib.setOutreachLevel(act_level);
+					lib.setYearId(year_id);
+
+					lib.setMakerUserId(maker_id);
+
+					lib.setInstituteId(inst_id);
+					lib.setDelStatus(1);
+					lib.setExInt1(1);
+					lib.setExInt2(1);
+					lib.setExVar1("NA");
+					lib.setExVar2("NA");
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					lib.setMakerEnterDatetime(curDateTime);
+
+					FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib,
+							FacultyOutreach.class);
 
 				} else {
+					System.out.println("in edit");
 
-					model = new ModelAndView("FacultyDetails/outReach");
-					int inst_id = (int) session.getAttribute("instituteId");
-					System.err.println("inst_id id is" + inst_id);
-					int edit_outreach_id = Integer.parseInt(request.getParameter("e_outreach_id"));
-					System.err.println("edit_outreach_id id is" + edit_outreach_id);
+					map.add("outreachId", outreach_id); // getInstitute Hod hod =
+					FacultyOutreach lib1 = rest.postForObject(Constants.url + "getFacultyOutReach", map,
+							FacultyOutreach.class);
+					lib1.setFacultyId(faculty_id);
+					lib1.setIsActive(1);
 
-					model.addObject("title", " Edit Faculty Out Reach");
-					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-					map.add("outreachId", edit_outreach_id);
+					lib1.setOutreachDate(DateConvertor.convertToYMD(act_date));
+					lib1.setOutreachName(act_name);
+					lib1.setOutreachType(activity_type);
+					lib1.setOutreachLevel(act_level);
+					lib1.setYearId(year_id);
 
-					FacultyOutreach editInst = rest.postForObject(Constants.url + "getFacultyOutReach", map, FacultyOutreach.class);
+					lib1.setMakerUserId(maker_id);
 
-					System.err.println("FacultyOutreach is" + editInst.toString());
-				
-					model.addObject("editInst", editInst);
-					model.addObject("edit_outreach_id", 1);
+					lib1.setInstituteId(inst_id);
 
-					RestTemplate restTemplate = new RestTemplate();
-					map = new LinkedMultiValueMap<String, Object>();
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
 
-					map.add("instituteId",inst_id);
-					List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList",map,
-							List.class);
-					
-					
-					model.addObject("date", DateConvertor.convertToDMY(	editInst.getOutreachDate()));
-					System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());				
+					String curDateTime = dateFormat.format(cal.getTime());
 
-					model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					lib1.setMakerEnterDatetime(curDateTime);
+					FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib1,
+							FacultyOutreach.class);
 				}
 
-			} catch (Exception e) {
-				System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
-				e.printStackTrace();
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					a = "redirect:/showOutReachDetailsList";
+
+				else
+					a = "redirect:/showOutReachDetails";
+
 			}
 
-			return model;
+		}
+
+		catch (Exception e) {
+			System.err.println("Exce in save lib  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+
+	@RequestMapping(value = "/deleteFacOutReach/{outId}", method = RequestMethod.GET)
+	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int outId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteFacOutReach/{outId}", "showOutReachDetailsList", "0", "0", "0",
+				"1", newModuleList);
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				System.err.println("Single Record delete ");
+				map.add("outreachId", outId);
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteOutreachFaculty", map, Info.class);
+
+				a = "redirect:/showOutReachDetailsList";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
 
 		}
-	  
+		return a;
+	}
+
+	@RequestMapping(value = "/showEditFacOutReach", method = RequestMethod.POST)
+	public ModelAndView showEditFacOutReach(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+
+			Info view = AccessControll.checkAccess("showEditFacOutReach", "showOutReachDetailsList", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("FacultyDetails/outReach");
+				int inst_id = (int) session.getAttribute("instituteId");
+				System.err.println("inst_id id is" + inst_id);
+				int edit_outreach_id = Integer.parseInt(request.getParameter("e_outreach_id"));
+				System.err.println("edit_outreach_id id is" + edit_outreach_id);
+
+				model.addObject("title", "Edit Faculty Attended - Out Reach Activity");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("outreachId", edit_outreach_id);
+
+				FacultyOutreach editInst = rest.postForObject(Constants.url + "getFacultyOutReach", map,
+						FacultyOutreach.class);
+
+				System.err.println("FacultyOutreach is" + editInst.toString());
+
+				model.addObject("editInst", editInst);
+				model.addObject("edit_outreach_id", 1);
+
+				RestTemplate restTemplate = new RestTemplate();
+				map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("instituteId", inst_id);
+				List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList",
+						map, List.class);
+
+				model.addObject("date", DateConvertor.convertToDMY(editInst.getOutreachDate()));
+				System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
+
+				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
+			}
+
+		} catch (Exception e) {
+			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+
 }

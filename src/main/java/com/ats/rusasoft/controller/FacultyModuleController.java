@@ -376,7 +376,7 @@ public class FacultyModuleController {
 			List<OrganizedList> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
 			model.addObject("facActList", facActList);
 
-			model.addObject("title", "Organized Details List");
+			model.addObject("title", "Faculty Organized - Out Reach Activity List");
 
 		} catch (Exception e) {
 
@@ -1228,7 +1228,7 @@ public class FacultyModuleController {
 
 			model = new ModelAndView("FacultyDetails/outReachContri");
 
-			model.addObject("title", "Out Reach Contribution");
+			model.addObject("title", "Add Faculty's Contribution in Out Reach Activity");
 			model.addObject("facContri", facCon);
 
 		} catch (Exception e) {
@@ -1311,7 +1311,7 @@ public class FacultyModuleController {
 			List<FacultyContribution> faccList = new ArrayList<>(Arrays.asList(faccArr));
 
 			model.addObject("ContriList", faccList);
-			model.addObject("title", "Out Reach Contribution List");
+			model.addObject("title", "Faculty's Contribution in Out Reach Activity List");
 
 		} catch (Exception e) {
 

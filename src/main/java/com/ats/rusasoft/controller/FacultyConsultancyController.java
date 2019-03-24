@@ -49,7 +49,7 @@ public class FacultyConsultancyController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("FacultyDetails/consultancy");
-				model.addObject("title", "Consultancy List");
+				model.addObject("title", "Faculty Consultancy Work Details List");
 
 				Info add = AccessControll.checkAccess("showConsultancyList", "showConsultancyList", "0", "1", "0", "0",
 						newModuleList);
@@ -108,7 +108,7 @@ public class FacultyConsultancyController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("FacultyDetails/consultancyDetailList");
-				model.addObject("title", "Consultancy Details Form");
+				model.addObject("title", "Add Faculty Consultancy Work Details");
 
 			} else {
 
@@ -238,9 +238,10 @@ public class FacultyConsultancyController {
 		return returnString;
 
 	}
-	
+
 	@RequestMapping(value = "/editConsultancy/{consId}", method = RequestMethod.GET)
-	public ModelAndView editConsultancy(@PathVariable("consId") int consId,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView editConsultancy(@PathVariable("consId") int consId, HttpServletRequest request,
+			HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
@@ -255,12 +256,13 @@ public class FacultyConsultancyController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("FacultyDetails/consultancyDetailList");
-				model.addObject("title", "Edit Consultancy Details Form");
-				
+				model.addObject("title", "Edit Faculty Consultancy Work Details");
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("consId", consId);
-				FacultyConsultancy resp = restTemplate.postForObject(Constants.url + "getConsultancyByConsId", map, FacultyConsultancy.class);
-				
+				FacultyConsultancy resp = restTemplate.postForObject(Constants.url + "getConsultancyByConsId", map,
+						FacultyConsultancy.class);
+
 				model.addObject("editConsultancy", resp);
 
 			} else {
