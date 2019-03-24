@@ -91,7 +91,7 @@
 												<th> Name</th>
 												<th>Qualification</th>
 												<th>Joining Date</th>
-												<th>Realiving Date</th>
+												<th>Relieving Date</th>
 												<th>Contact No</th>
 												<th>Email</th>
 												<th width="10%">Action</th>

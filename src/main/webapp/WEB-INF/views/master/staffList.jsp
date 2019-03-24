@@ -92,10 +92,10 @@
 														onClick="selectedInst(this)" /> Select All</th> -->
 													<th width="5%">Sr No</th>
 													<th>Faculty Name</th>
-													<th>Qualification</th>
+													<!-- <th>Qualification</th> -->
 													<th>Department</th>
 													<th>Joining Date</th>
-													<th>Relieving Date</th>
+													<!-- <th>Relieving Date</th> -->
 													<th>Contact No</th>
 													<th>Email</th>
 													<th width="10%">Action</th>
@@ -113,10 +113,10 @@
 														<td style="text-align: center">${count.index+1}</td>
 
 														<td style="text-align: left"><c:out
-																value="${staffList.facultyFirstName}" /></td>
+																value="${staffList.facultyFirstName} (${staffList.qualificationName})" /></td>
 
-														<td style="text-align: left"><c:out
-																value="${staffList.qualificationName}" /></td>
+														<%-- <td style="text-align: left"><c:out
+																value="${staffList.qualificationName}" /></td> --%>
 
 														<td style="text-align: left"><c:out
 																value="${staffList.deptName}" /></td>
@@ -124,8 +124,8 @@
 														<td style="text-align: center;"><c:out
 																value="${staffList.joiningDate}" /></td>
 
-														<td style="text-align: center"><c:out
-																value="${staffList.realivingDate}" /></td>
+														<%-- <td style="text-align: center"><c:out
+																value="${staffList.realivingDate}" /></td> --%>
 
 														<td style="text-align: center"><c:out
 																value="${staffList.contactNo}" /></td>
@@ -160,7 +160,7 @@
 																	href="#"><span class="glyphicon glyphicon-book"
 																	title="Academic Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-															</c:if> | <c:if test="${deleteAccess == 0}">
+															</c:if>  <c:if test="${deleteAccess == 0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}"
 																	onClick="return confirm('Are you sure want to delete this record');"

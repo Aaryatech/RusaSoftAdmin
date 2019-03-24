@@ -116,21 +116,21 @@
 
 													<tr>
 														<th rowspan="2">Sr No</th>
-														<th rowspan="2">Title of IPR-Industry-Academic Initiative Practice</th>
-														<th rowspan="2">From Date</th>
-														<th rowspan="2">To Date</th>
-														<!-- <th style="text-align: center;" colspan="2">Duration</th> -->
-														<th rowspan="2">No. of Participants</th>
+														<th rowspan="2">Initiative Title</th>
+														<!-- <th rowspan="2">From Date</th>
+														<th rowspan="2">To Date</th> -->
+														 <th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">Participants</th>
 														<th rowspan="2">Action</th>
 
 													</tr>
-													<!-- <tr>
+													 <tr>
 
 														<th>From Date</th>
 														<th>To Date</th>
 													 
 
-													</tr> -->
+													</tr>
 
 												</thead>
 													
@@ -145,7 +145,7 @@
 														<td>${rightsList.conName}</td>
 														<td>${rightsList.conFromdt}</td>
 														<td>${rightsList.conTodt}</td>
-														<td>${rightsList.conPcount}</td>
+														<td align="right">${rightsList.conPcount}</td>
 														
 														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
