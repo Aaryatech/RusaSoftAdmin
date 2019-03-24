@@ -153,15 +153,15 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="schmIds" id="schmIds${count.index+1}"
 															value="${bList.instSchemeId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${schmList.instSchemeName}</td>
 														<td>${schmList.instStudentsBenefited}</td>
 														<td>${schmList.instSchmeOfferedby}</td>
 														
-														<td><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
 																	href="${pageContext.request.contextPath}/editInstituteScheme/${schmList.instSchemeId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
 																<a
 																	href="${pageContext.request.contextPath}/deleteInstituteScheme/${schmList.instSchemeId}"

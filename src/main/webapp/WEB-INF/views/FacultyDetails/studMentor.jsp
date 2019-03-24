@@ -105,19 +105,6 @@
 										method="post" enctype="multipart/form-data"
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-
-										<ul class="nav nav-tabs">
-											<!-- <li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li> -->
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-
-
 												
 
 												<div class="col-xs-12">
@@ -185,8 +172,6 @@
 												<div class="clearfix"></div>
 
 
-											</div>
-										</div>
 									</form>
 									
 								</div>

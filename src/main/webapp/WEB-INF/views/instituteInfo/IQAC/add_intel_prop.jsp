@@ -179,6 +179,7 @@
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
+																<input type="hidden" id="is_view" name="is_view" value="0">	
 											</div>
 
 										</div>
@@ -245,6 +246,19 @@
 
 
 	<script type="text/javascript">
+	
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
+
+		form.action=("insertHod");
+		var x =confirm("Do you really want to submit the form?");
+		if(x==true)
+		form.submit(); */
+		
+	}
+	
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);

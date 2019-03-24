@@ -104,16 +104,6 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<!--  <li class="active"><a href="#home" data-toggle="tab"> 
-													<i class="fa fa-home"></i> Register
-											</a></li> -->
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
 												<!-- <div class="form-group">
 
 													<label class="control-label col-sm-3" for="page_name">Mentoring
@@ -128,7 +118,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="1" max="99999"  class="form-control" id="stud_no" pattern="^(?!\s*$).+"
-															name="stud_no" placeholder="No." value="${stud.menStuCount}"
+															name="stud_no" placeholder="No." value="${stud.menStuCount}" onkeypress='return restrictAlphabets(event)'
 															 required>
 													</div>
 												</div>
@@ -145,8 +135,6 @@
 												</div>
 												<div class="clearfix"></div>
 
-											</div>
-										</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mendatory.</p>
@@ -274,7 +262,20 @@
 	
 </script>
 
-
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
 
 </body>

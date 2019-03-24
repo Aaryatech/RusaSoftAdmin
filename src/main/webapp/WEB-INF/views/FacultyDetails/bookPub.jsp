@@ -100,15 +100,7 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<!-- <li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li> -->
-											
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										
 
 												<div>
 
@@ -277,8 +269,7 @@
 
 												</div>
 
-											</div>
-										</div>
+											
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.PhdGuidList;
 import com.ats.rusasoft.model.FacultyActivity;
 import com.ats.rusasoft.model.FacultyBook;
 import com.ats.rusasoft.model.FacultyConference;
@@ -158,7 +159,7 @@ public class FacultyModuleController {
 		facConf.setConfDate(request.getParameter("conf_date"));
 		facConf.setConfVenue(request.getParameter("conf_venue"));
 		facConf.setConfFundFrom(request.getParameter("conf_fund"));
-		facConf.setConfFundAmt(Float.parseFloat(request.getParameter("conf_amt")));
+		facConf.setConfFundAmt(request.getParameter("conf_amt"));
 		facConf.setDelStatus(1);
 		facConf.setIsActive(1);
 		facConf.setMakerUserId(userId);
@@ -1324,8 +1325,8 @@ public class FacultyModuleController {
 
 			model = new ModelAndView("FacultyDetails/phdGuideList");
 
-			FacultyPhdGuide[] phdArr = rest.postForObject(Constants.url+"/getAllPhdGuid", map, FacultyPhdGuide[].class);
-			List<FacultyPhdGuide> phdList = new ArrayList<>(Arrays.asList(phdArr));
+			PhdGuidList[] phdArr = rest.postForObject(Constants.url+"/getAllPhdGuid", map, PhdGuidList[].class);
+			List<PhdGuidList> phdList = new ArrayList<>(Arrays.asList(phdArr));
 			System.out.println("List:"+phdList);
 			model.addObject("phdList", phdList);
 			model.addObject("title", "Ph.D. Guidance List");

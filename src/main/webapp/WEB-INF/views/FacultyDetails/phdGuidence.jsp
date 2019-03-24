@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body onload="checkCoGuide(${phd.isCoGuide})">
+<body onload="check(${phd.isPhdAwarded})" onload="checkCoGuide(${phd.isCoGuide})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -101,22 +101,11 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<!-- <li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register
-											</a></li>
- -->
-										</ul>
+										<div>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+											<div class="col-xs-12">
 
-												<div>
-
-
-													<div class="col-xs-12">
-
-														<div class="col-sm-12"></div>
+														
 														<input type="hidden" id="phdGiudeId" name="phdGiudeId" value="${phd.phdId}">
 														<div class="form-group">
 
@@ -210,12 +199,31 @@
 															<label class="control-label col-sm-2" for="smallheading">Year
 																of Registration <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-6">
+															<%-- <div class="col-sm-6">
 																<input type="text" class="form-control datepicker" id="phd_year_reg" autocomplete="off"
 																	name="phd_year_reg" placeholder="dd/mm/yyyy" value="${phd.phdRegYear}" required>
-															</div>
+															</div> --%>
 
+													<div class="col-sm-6">
+														<select id="phd_year_reg" name="phd_year_reg" class="form-control" required>
+																																	
+															<c:forEach items="${acaYearList}" var="acaYearList">
+																		<c:choose>
+																			<c:when test="${acaYearList.yearId==phd.phdRegYear}">
+																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+													</select>
+                                      				 </div>
 
 														</div>
 
@@ -264,7 +272,12 @@
 																No<input type="radio" name="awarded" id="awarded"
 																	value="0" onclick="check(this.value)" checked>
 															</c:when>
-															
+															<c:otherwise>
+															Yes <input type="radio" name="awarded" id="awarded"
+																	 value="1" onclick="check(this.value)">
+																No<input type="radio" name="awarded" id="awarded"
+																	value="0" onclick="check(this.value)" checked>
+															</c:otherwise>
 															
 															</c:choose>
 															
@@ -282,12 +295,12 @@
 																<input type="text" class="form-control datepicker" id="phd_year_awarded" onkeypress='return restrictAlphabets(event)'
 																	name="phd_year_awarded" placeholder="dd/mm/yyyy" value="${phd.phdAwardedYear}" autocomplete="off">
 															</div> --%>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 														<select id="phd_year_awarded" name="phd_year_awarded" class="form-control" required>
 																																	
 															<c:forEach items="${acaYearList}" var="acaYearList">
 																		<c:choose>
-																			<c:when test="${acaYearList.yearId==staff.hightestQualificationYear}">
+																			<c:when test="${acaYearList.yearId==phd.phdAwardedYear}">
 																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
 																			</c:when>
@@ -325,8 +338,7 @@
 
 												</div>
 
-											</div>
-										</div>
+											
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>

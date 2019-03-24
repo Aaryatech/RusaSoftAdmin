@@ -133,16 +133,16 @@
 																	onclick="setGovernmentValue(this.value)">
 															</div>
 														</div> -->
-										<div class="form-group">
+										<%-- <div class="form-group">
 													<label class="control-label col-sm-3" for="status">
 													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<select id="academic_year" name="academic_year" class="form-control" required>
-																<%-- <c:forEach items="${acaYearList}" var="acaYear">
+																<c:forEach items="${acaYearList}" var="acaYear">
 																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
 																	
-																	</c:forEach> --%>
+																	</c:forEach>
 																	
 																		<c:forEach items="${acaYearList}" var="acaYearList">
 																		<c:choose>
@@ -161,7 +161,7 @@
 
 													</select>
                                        </div>
-										</div>	
+										</div> --%>	
 										<div id="abc">
 												<input type="hidden" id="inst_scheme_id"  name="inst_scheme_id"
 														placeholder="" value="${instSpprt.instSchemeId}">
@@ -191,7 +191,7 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="inst_students_benefited" pattern="^(?!\s*$).+"
-														name="inst_students_benefited" onkeypress='return restrictAlphabets(event)'
+														name="inst_students_benefited" onkeypress="return allowOnlyNumber(event)" 
 														placeholder=""
 														value="${instSpprt.instStudentsBenefited}" required>
 												</div>
@@ -218,6 +218,7 @@
 																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
+																<input type="hidden" id="is_view" name="is_view" value="0">
 												</div>
 											</div>
 										</div>
@@ -288,6 +289,17 @@
 
 
 	<script type="text/javascript">
+	function submit_f(view){
+		document.getElementById("is_view").value=view;//create this 
+		/* var form=document.getElementById("form_sample_2");
+	    form.setAttribute("method", "post");
+
+		form.action=("insertHod");
+		var x =confirm("Do you really want to submit the form?");
+		if(x==true)
+		form.submit(); */
+		
+	}
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -307,7 +319,29 @@
 		}
 	</script>
 
-
+<script type="text/javascript">
+	function allowOnlyNumber(evt){
+		
+		var charCode = (evt.which) ? evt.which : event.keyCode
+	    if (charCode == 46){
+	        var inputValue = $("#floor").val();
+	        var count = (inputValue.match(/'.'/g) || []).length;
+	        
+	        if(count<1){
+	            if (inputValue.indexOf('.') < 1){
+	                return true;
+	            }
+	            return false;
+	        }else{
+	            return false;
+	        }
+	    }
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	        return false;
+	    }
+	    return true;
+	}
+	</script>
 	<script type="text/javascript">
 		function setGovernmentValue(value) {
 

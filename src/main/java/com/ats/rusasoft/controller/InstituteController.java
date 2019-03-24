@@ -59,7 +59,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 	public class InstituteController {
 		
 		RestTemplate rest = new RestTemplate();
-		
+		String redirect=null; 
 		/*********************************************Institute Support**********************************************/
 	
 		@RequestMapping(value = "/showInstituteSupport", method = RequestMethod.GET)
@@ -180,15 +180,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 				Calendar cal = Calendar.getInstance();
 				String curDateTime = dateFormat.format(cal.getTime());
 				
-			  
-		 
-		 
 			
 			  InstituteSupport instSpprt = new InstituteSupport();
 			 
 			  instSpprt.setInstSchemeId(Integer.parseInt(request.getParameter("inst_scheme_id")));
 			  instSpprt.setInstituteId(instituteId);
-			  instSpprt.setYearId(Integer.parseInt(request.getParameter("academic_year")));
+			  instSpprt.setYearId(yId);
 			  instSpprt.setInstSchemeName(request.getParameter("inst_scheme_name"));
 			  instSpprt.setInstStudentsBenefited(request.getParameter("inst_students_benefited"));
 			  instSpprt.setInstSchmeOfferedby(request.getParameter("inst_schme_offeredby"));
@@ -202,14 +199,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 			  instSpprt.setExVar2("NA");
 			 			  
 			  InstituteSupport saveInstSupprt = rest.postForObject(Constants.url+"/addInstSupprt", instSpprt, InstituteSupport.class);
-		  
+
+			  int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showInstituteSupport";
+				else
+					redirect = "redirect:/showAddInstituteSupport";
 		  } catch (Exception e) {
 		  
 		  e.printStackTrace();
 		  
 		  }
-		  
-		  return "redirect:/showInstituteSupport";
+		  return redirect;
 		  
 		 }
 		  
@@ -540,13 +541,20 @@ import com.itextpdf.text.pdf.PdfWriter;
 				  		instAct.setExVar2("NA");
 				  		System.out.println(instAct.toString());
 				  		InstituteActivity saveinstActvt = rest.postForObject(Constants.url+"/addNewInstituteActity", instAct, InstituteActivity.class);
-				  } catch (Exception e) {
+				 
+				  		int isView = Integer.parseInt(request.getParameter("is_view"));
+						if (isView == 1)
+							redirect = "redirect:/showAddActivityOrganized";
+						else
+							redirect = "redirect:/showActivityOrganized";
+			 
+			 } catch (Exception e) {
 			  
 
 					e.printStackTrace();
 
 				}
-			  return "redirect:/showActivityOrganized";
+			  return redirect;
 		}
 			  
 			  
@@ -681,12 +689,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 				  intelProp.setExVar1("NA");
 				  
 				  IntelPrpoRight saveIntelPropRght = rest.postForObject(Constants.url+"/andNewIntelPropRight", intelProp, IntelPrpoRight.class);
-				  
+				  int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showIntellectualProperty";
+					else
+						redirect = "redirect:/showAddIntellectualProperty";
 			  }catch(Exception e) {
 				  e.printStackTrace();
 			  }
 			  
-				return "redirect:/showIntellectualProperty";
+				return redirect;
 			  
 		  }
 		  
@@ -822,10 +834,15 @@ import com.itextpdf.text.pdf.PdfWriter;
 					
 						GenderEqalityPrg gProgEq = rest.postForObject(Constants.url+"/addGendrEqtyPrg", gendrEqualityt, GenderEqalityPrg.class);
 						
+						 int isView = Integer.parseInt(request.getParameter("is_view"));
+							if (isView == 1)
+								redirect = "redirect:/showGenderEquity";
+							else
+								redirect = "redirect:/showAddGenderEquity";
 				}catch(Exception E) {
 					
 				}
-				return "redirect:/showGenderEquity";
+				return redirect;
 			
 			}
 			
