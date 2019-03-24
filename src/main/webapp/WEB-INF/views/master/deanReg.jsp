@@ -116,7 +116,7 @@
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="dean_name"
 															required name="dean_name" placeholder="Dean R&D Name"
-															pattern="^(?!\s*$).+" value="${dean.deanName}">
+															autocomplete="off" pattern="^(?!\s*$).+" value="${dean.deanName}">
 													</div>
 												</div>
 
@@ -132,7 +132,7 @@
 														<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
 															maxlength="10" class="form-control" id="contact_no"
 															onchange="checkUnique(this.value,1)" name="contact_no"
-															placeholder="Mobile No" required
+															placeholder="Mobile No" required autocomplete="off"
 															value="${dean.contactNo}" pattern="^(?!\s*$).+"
 															onkeypress='return restrictAlphabets(event)'>
 														<p class="desc text-danger fontsize11">Note: OTP will
@@ -147,7 +147,7 @@
 													<div class="col-sm-10">
 														<input type="email" class="form-control" id="email"
 															onchange="checkUnique(this.value,2)"
-															pattern="^(?!\s*$).+" name="email"
+															pattern="^(?!\s*$).+" name="email" autocomplete="off"
 															placeholder="abc@xyz.com" required value="${dean.email}">
 														<p class="desc font-italic fontsize11">Note:
 															Verification mail will be sent on this Email id</p>

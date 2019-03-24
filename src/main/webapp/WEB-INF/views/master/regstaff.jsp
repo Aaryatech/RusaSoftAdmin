@@ -383,7 +383,7 @@
 													maxlength="10" class="form-control" id="contact_no"
 													onkeypress='return restrictAlphabets(event)'
 													name="contact_no" placeholder="Mobile Number"
-													value="${staff.contactNo}" required>
+													value="${staff.contactNo}" autocomplete="off" required>
 												<p class="desc text-danger fontsize11">Note: OTP will be
 													sent on this mobile number for verification</p>
 											</div>
@@ -397,7 +397,7 @@
 												<input type="email" class="form-control" id="email"
 													onchange="checkUnique(this.value,2)" name="email"
 													placeholder="abc@xyz.com" value="${staff.email}"
-													pattern="^(?!\s*$).+" required>
+													pattern="^(?!\s*$).+" autocomplete="off" required>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>
 											</div>
@@ -526,10 +526,7 @@
 
 			//alert(inputValue+" "+valueType);
 
-			var primaryKey = $
-			{
-				staff.facultyId
-			}
+			var primaryKey = ${staff.facultyId};
 			;
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;

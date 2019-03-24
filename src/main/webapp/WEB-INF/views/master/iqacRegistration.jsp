@@ -362,7 +362,7 @@
 
 			//alert(inputValue+" "+valueType);
 
-			var primaryKey = ${miqc.iqacId}	;
+			var primaryKey = ${miqc.iqacId};
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {
