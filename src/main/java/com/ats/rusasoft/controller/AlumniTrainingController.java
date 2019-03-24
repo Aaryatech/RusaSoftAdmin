@@ -48,7 +48,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/alumini");
 
-			model.addObject("title", "Alumini Association/Contribution");
+			model.addObject("title", "Alumni Contribution Activities Details");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -90,7 +90,7 @@ public class AlumniTrainingController {
 				GetAlumni[] almArray = restTemplate.postForObject(Constants.url + "getAlumniList", map,
 						GetAlumni[].class);
 				List<GetAlumni> alumList = new ArrayList<>(Arrays.asList(almArray));
-				//System.err.println("alumList " + alumList.toString());
+				// System.err.println("alumList " + alumList.toString());
 
 				model.addObject("alumList", alumList);
 
@@ -117,22 +117,20 @@ public class AlumniTrainingController {
 		ModelAndView model = null;
 		try {
 
-			
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			
+
 			Info addAccess = AccessControll.checkAccess("showAlumini", "showAlumini", "0", "1", "0", "0",
 					newModuleList);
-			if(addAccess.isError()==false) {
-			
-			model = new ModelAndView("ProgramDetails/addAluminiDetails");
+			if (addAccess.isError() == false) {
 
-			model.addObject("title", "Add Alumini Contribution Detail");
-			AlumniDetail alumni = new AlumniDetail();
-			model.addObject("alumni", alumni);
-			}
-			else {
+				model = new ModelAndView("ProgramDetails/addAluminiDetails");
+
+				model.addObject("title", "Add Alumni Contribution Activities Details");
+				AlumniDetail alumni = new AlumniDetail();
+				model.addObject("alumni", alumni);
+			} else {
 
 				model = new ModelAndView("accessDenied");
 			}
@@ -165,7 +163,7 @@ public class AlumniTrainingController {
 			int alumniId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
 			try {
 				alumniId = Integer.parseInt(request.getParameter("alumni_id"));
-				
+
 			} catch (Exception e) {
 				alumniId = 0;
 			}
@@ -173,25 +171,20 @@ public class AlumniTrainingController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess=null;
-			if(alumniId==0) {
-				
-				editAccess =  AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "1", 
-						 "0", "0",
-						 newModuleList);
-			}else {
-				
-				editAccess =  AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "0", 
-						 "1", "0",
-						 newModuleList);
+			Info editAccess = null;
+			if (alumniId == 0) {
+
+				editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "1", "0", "0",
+						newModuleList);
+			} else {
+
+				editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "0", "1", "0",
+						newModuleList);
 			}
 
 			System.err.println("alumniId id  " + alumniId);
 
-
-
-			
-			//editAccess.setError(false);
+			// editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -318,7 +311,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/addAluminiDetails");
 
-			model.addObject("title", "Edit Alumini Contribution Detail");
+			model.addObject("title", "Edit Alumni Contribution Activities Details");
 
 			int alumniId = Integer.parseInt(request.getParameter("edit_alum_id"));
 
@@ -424,7 +417,7 @@ public class AlumniTrainingController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Program Training Details");
+				model.addObject("title", "Student Placement Details List");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
@@ -470,12 +463,12 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/addStudTraining");
 
-			model.addObject("title", "Program Training Details");
+			model.addObject("title", "Add Student Placement Details");
 
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
 			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			//System.err.println("progTypeList " + progTypeList.toString());
+			// System.err.println("progTypeList " + progTypeList.toString());
 
 			model.addObject("progTypeList", progTypeList);
 
@@ -514,10 +507,9 @@ public class AlumniTrainingController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											 "0",
-			 newModuleList);
-			///editAccess.setError(false);
+			Info editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0", "0",
+					newModuleList);
+			/// editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -637,7 +629,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/addStudTraining");
 
-			model.addObject("title", "Edit Program Training Details");
+			model.addObject("title", "Edit Student Placement Details");
 
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
@@ -723,7 +715,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/highEdu");
 
-			model.addObject("title", "Upward Migration Details");
+			model.addObject("title", "Upward Migration Details List");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -766,7 +758,7 @@ public class AlumniTrainingController {
 				GetHigherEduDetail[] eduArray = restTemplate.postForObject(Constants.url + "getHigherEduDetailList",
 						map, GetHigherEduDetail[].class);
 				List<GetHigherEduDetail> highEduList = new ArrayList<>(Arrays.asList(eduArray));
-				//System.err.println("highEduList " + highEduList.toString());
+				// System.err.println("highEduList " + highEduList.toString());
 
 				model.addObject("highEduList", highEduList);
 			} else {
@@ -795,12 +787,12 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/addHighEducation");
 
-			model.addObject("title", "Upward Migration Details ");
+			model.addObject("title", "Add Upward Migration Details ");
 
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
 			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			//System.err.println("progTypeList " + progTypeList.toString());
+			// System.err.println("progTypeList " + progTypeList.toString());
 
 			model.addObject("progTypeList", progTypeList);
 
@@ -832,7 +824,7 @@ public class AlumniTrainingController {
 			ProgramType[] progTypes = restTemplate.postForObject(Constants.url + "getHigherProgList", map,
 					ProgramType[].class);
 			progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			//System.err.println("progTypeList " + progTypeList.toString());
+			// System.err.println("progTypeList " + progTypeList.toString());
 
 		} catch (Exception e) {
 
@@ -864,16 +856,15 @@ public class AlumniTrainingController {
 				eduDetailId = 0;
 			}
 
-			//System.err.println("eduDetailId id  " + eduDetailId);
+			// System.err.println("eduDetailId id " + eduDetailId);
 
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info(); AccessControll.checkAccess("insertAlumni", "showHighEdu", "1", "0", "0",
-											 "0",
-			newModuleList);
-			//editAccess.setError(false);
+			Info editAccess = new Info();
+			AccessControll.checkAccess("insertAlumni", "showHighEdu", "1", "0", "0", "0", newModuleList);
+			// editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -951,12 +942,12 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/addHighEducation");
 
-			model.addObject("title", "Edit Progression to Higher Education ");
+			model.addObject("title", "Edit Upward Migration Details");
 
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
 			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			//System.err.println("progTypeList " + progTypeList.toString());
+			// System.err.println("progTypeList " + progTypeList.toString());
 
 			model.addObject("progTypeList", progTypeList);
 
@@ -995,9 +986,9 @@ public class AlumniTrainingController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			if (educationDetailId == 0) {
 
-				//System.err.println("Multiple records delete ");
+				// System.err.println("Multiple records delete ");
 				String[] instIds = request.getParameterValues("educationDetailId");
-				//System.out.println("id are" + instIds);
+				// System.out.println("id are" + instIds);
 
 				StringBuilder sb = new StringBuilder();
 

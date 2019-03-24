@@ -50,43 +50,38 @@ public class InstituteProfInfoController {
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 	String curDateTime = dateFormat.format(cal.getTime());
-	
-	
-	
-	
+
 	@RequestMapping(value = "/showInstProf", method = RequestMethod.GET)
 	public ModelAndView showInstProf(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
-		 model = new ModelAndView("instituteInfo/IQAC/instProf");
+		model = new ModelAndView("instituteInfo/IQAC/instProf");
 		HttpSession session = request.getSession();
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
 
-			Info view = AccessControll.checkAccess("showInstProf", "showInstProfList", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showInstProf", "showInstProfList", "0", "1", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
 			} else {
-		
-		
-			model.addObject("title", "Add Assistant IQAC Details");
-			int inst_id = (int) session.getAttribute("instituteId");
-			
-			
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("instituteId", inst_id); // getInstitute Hod hod =
-			IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map, IqacBasicInfo.class);
-			model.addObject("instRes", instRes);
-			model.addObject("date",DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
-			System.out.println(instRes.toString());
-			
 
-		
+				model.addObject("title", "Add Assistant IQAC Details");
+				int inst_id = (int) session.getAttribute("instituteId");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", inst_id); // getInstitute Hod hod =
+				IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map,
+						IqacBasicInfo.class);
+				model.addObject("instRes", instRes);
+				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
+				System.out.println(instRes.toString());
+
 			}
 
 		} catch (Exception e) {
@@ -98,8 +93,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/insertIqacBasicInfo", method = RequestMethod.POST)
 	public String insertIqacBasicInfo(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertIqacBasicInfo");
@@ -108,7 +102,8 @@ public class InstituteProfInfoController {
 		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("insertIqacBasicInfo", "showInstProfList", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("insertIqacBasicInfo", "showInstProfList", "0", "1", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true)
 
@@ -118,8 +113,8 @@ public class InstituteProfInfoController {
 
 			}
 
-		else {
-	
+			else {
+
 				System.err.println("in insert insertIqacBasicInfo");
 				ModelAndView model = null;
 
@@ -131,7 +126,7 @@ public class InstituteProfInfoController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				String iqac_info_id = request.getParameter("iqac_info_id");
-				
+
 				System.out.println("iqac_info_id" + "iqac_info_id");
 
 				String alt_faculty_name = request.getParameter("alt_faculty_name");
@@ -143,11 +138,9 @@ public class InstituteProfInfoController {
 
 				String fax_no = request.getParameter("fax_no");
 
-				
 				String estb_date = request.getParameter("estb_date");
 
-			
-				if (iqac_info_id.isEmpty()==true) {
+				if (iqac_info_id.isEmpty() == true) {
 
 					System.out.println("inst id is" + inst_id);
 
@@ -159,13 +152,12 @@ public class InstituteProfInfoController {
 					lib.setIqacAltName(alt_faculty_name);
 					lib.setIqacAltPhone(phone_no);
 					lib.setIsActive(1);
-					
-					
+
 					lib.setMakerUserId(maker_id);
 
 					lib.setInstituteId(inst_id);
 					lib.setDelStatus(1);
-					
+
 					lib.setExInt1(1);
 					lib.setExInt2(1);
 					lib.setExVar1("NA");
@@ -182,14 +174,16 @@ public class InstituteProfInfoController {
 
 					lib.setMakerEnterDatetime(curDateTime);
 
-					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", lib, IqacBasicInfo.class);
+					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", lib,
+							IqacBasicInfo.class);
 
 				} else {
 					System.out.println("in edit");
-					
+
 					System.out.println("iqac_info_id" + iqac_info_id);
 					map.add("iqacInfoId", iqac_info_id); // getInstitute Hod hod =
-					IqacBasicInfo lib1 = rest.postForObject(Constants.url + "getIqacInfoByIqacInfoId", map, IqacBasicInfo.class);
+					IqacBasicInfo lib1 = rest.postForObject(Constants.url + "getIqacInfoByIqacInfoId", map,
+							IqacBasicInfo.class);
 					lib1.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
 					lib1.setIqacAltEmail1(registered_email);
 					lib1.setIqacAltEmail2(alt_email);
@@ -197,9 +191,7 @@ public class InstituteProfInfoController {
 					lib1.setIqacAltMobile(alt_fac_contact);
 					lib1.setIqacAltName(alt_faculty_name);
 					lib1.setIqacAltPhone(phone_no);
-				
-					
-					
+
 					lib.setMakerUserId(maker_id);
 
 					lib.setInstituteId(inst_id);
@@ -215,17 +207,15 @@ public class InstituteProfInfoController {
 
 					lib1.setMakerEnterDatetime(curDateTime);
 
-					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", lib1, IqacBasicInfo.class);
+					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", lib1,
+							IqacBasicInfo.class);
 
-				
-				
+				}
+				a = "redirect:/showInstProfList";
+
 			}
-				a="redirect:/showInstProfList";
 
-		}
-		
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Exce in save lib  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -233,8 +223,6 @@ public class InstituteProfInfoController {
 		return a;
 
 	}
-	
-	
 
 	@RequestMapping(value = "/showInstProfList", method = RequestMethod.GET)
 	public ModelAndView showInstProfList(HttpServletRequest request, HttpServletResponse response) {
@@ -246,7 +234,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showInstProfList", "showInstProfList", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showInstProfList", "showInstProfList", "1", "0", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
@@ -255,7 +244,7 @@ public class InstituteProfInfoController {
 			} else {
 				System.out.println(" showLibList Accessable ");
 
-				 model = new ModelAndView("instituteInfo/IQAC/instProfList");
+				model = new ModelAndView("instituteInfo/IQAC/instProfList");
 
 				model.addObject("title", "Assistant IQAC Details List");
 
@@ -263,15 +252,18 @@ public class InstituteProfInfoController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", inst_id); // getInstitute Hod hod =
-				IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map, IqacBasicInfo.class);
+				IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map,
+						IqacBasicInfo.class);
 				model.addObject("instProfRes", instRes);
-				model.addObject("date",DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
+				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
 				System.out.println(instRes.toString());
-				
 
-				Info add = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "1", "0", "0", newModuleList);
-				Info edit = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "0", "1", "0", newModuleList);
-				Info delete = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "0", "0", "1",newModuleList);
+				Info add = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "0", "0", "1",
+						newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -288,9 +280,7 @@ public class InstituteProfInfoController {
 
 				}
 
-
-			
-			 } 
+			}
 
 		} catch (Exception e) {
 
@@ -303,34 +293,36 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/deleteInstProf/{iqacInfoId}", method = RequestMethod.GET)
-	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int iqacInfoId) {
+	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int iqacInfoId) {
 		HttpSession session = request.getSession();
 		String a = null;
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteInstProf/{iqacInfoId}", "showInstProfList", "0", "0", "0", "1", newModuleList);
-			
+		Info view = AccessControll.checkAccess("deleteInstProf/{iqacInfoId}", "showInstProfList", "0", "0", "0", "1",
+				newModuleList);
+
 		try {
-			/*if (view.isError() == true) {
-
-				a = "redirect:/accessDenied";
-
-			}
-
-			else {*/
+			/*
+			 * if (view.isError() == true) {
+			 * 
+			 * a = "redirect:/accessDenied";
+			 * 
+			 * }
+			 * 
+			 * else {
+			 */
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-					System.err.println("Single Record delete ");
-					map.add("iqacInfoId", iqacInfoId);
-				
+			System.err.println("Single Record delete ");
+			map.add("iqacInfoId", iqacInfoId);
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteInstProf", map, Info.class);
+			Info errMsg = rest.postForObject(Constants.url + "deleteInstProf", map, Info.class);
 
-				a = "redirect:/showInstProfList";
+			a = "redirect:/showInstProfList";
 			/* } */
 
 		} catch (Exception e) {
@@ -344,8 +336,7 @@ public class InstituteProfInfoController {
 	}
 
 //////////////////////////////************************functional MOUS**********************/////////
-	
-	
+
 	@RequestMapping(value = "/showFunctionalMOUs", method = RequestMethod.GET)
 	public ModelAndView showFunctionalMOUs(HttpServletRequest request, HttpServletResponse response) {
 
@@ -356,58 +347,58 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "1", "0", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				 model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
-			model.addObject("title", "Functional MoU Details");
-		
+				model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
+				model.addObject("title", "Functional MoU Details");
 
-			int acYearId = (int) session.getAttribute("acYearId");
-			int inst_id = (int) session.getAttribute("instituteId");
-			
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("instId", inst_id);
-			map.add("yearId", acYearId);
+				int acYearId = (int) session.getAttribute("acYearId");
+				int inst_id = (int) session.getAttribute("instituteId");
 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", inst_id);
+				map.add("yearId", acYearId);
 
-			InstituteFunctionalMOU[] instArray = rest.postForObject(Constants.url + "getAllMouByInstituteId", map,
-					InstituteFunctionalMOU[].class);
-			List<InstituteFunctionalMOU> mouList = new ArrayList<>(Arrays.asList(instArray));
+				InstituteFunctionalMOU[] instArray = rest.postForObject(Constants.url + "getAllMouByInstituteId", map,
+						InstituteFunctionalMOU[].class);
+				List<InstituteFunctionalMOU> mouList = new ArrayList<>(Arrays.asList(instArray));
 
-			System.out.println("InstituteFunctionalMOU list is" + mouList.toString());
-			
-			 for(int i=0;i<mouList.size();i++) 
-			 {
-				 mouList.get(i).setMouFromdt(DateConvertor.convertToDMY(mouList.get(i).getMouFromdt()));
-				 mouList.get(i).setMouTodt(DateConvertor.convertToDMY(mouList.get(i).getMouTodt()));
-			 }
+				System.out.println("InstituteFunctionalMOU list is" + mouList.toString());
 
-			model.addObject("mouList", mouList);
-			
+				for (int i = 0; i < mouList.size(); i++) {
+					mouList.get(i).setMouFromdt(DateConvertor.convertToDMY(mouList.get(i).getMouFromdt()));
+					mouList.get(i).setMouTodt(DateConvertor.convertToDMY(mouList.get(i).getMouTodt()));
+				}
 
-			Info add = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "0", "1", "0", "0", newModuleList);
-			Info edit = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "0", "0", "1", "0", newModuleList);
-			Info delete = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "0", "0", "0", "1",newModuleList);
+				model.addObject("mouList", mouList);
 
-			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
-				model.addObject("addAccess", 0);
+				Info add = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showFunctionalMOUs", "showFunctionalMOUs", "0", "0", "0", "1",
+						newModuleList);
 
-			}
-			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
-				model.addObject("editAccess", 0);
-			}
-			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
-				model.addObject("deleteAccess", 0);
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
 
-			}
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
 
 			}
 		} catch (Exception e) {
@@ -419,8 +410,6 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
 
 	@RequestMapping(value = "/showAddFunctionalMOUs", method = RequestMethod.GET)
 	public ModelAndView showAddFunctionalMOUs(HttpServletRequest request, HttpServletResponse response) {
@@ -433,7 +422,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showAddFunctionalMOUs", "showFunctionalMOUs", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showAddFunctionalMOUs", "showFunctionalMOUs", "0", "1", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
@@ -441,13 +431,13 @@ public class InstituteProfInfoController {
 
 			} else {
 
-			model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
-			model.addObject("title", "Add Functional MoU Details");
-			InstituteFunctionalMOU editInst=new InstituteFunctionalMOU();
-			
-			model.addObject("editInst", editInst);
+				model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
+				model.addObject("title", "Add Functional MoU Details");
+				InstituteFunctionalMOU editInst = new InstituteFunctionalMOU();
+
+				model.addObject("editInst", editInst);
 			}
-			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -457,8 +447,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/insertFunctionalMOU", method = RequestMethod.POST)
 	public String insertFunctionalMOU(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertIqacBasicInfo");
@@ -467,7 +456,8 @@ public class InstituteProfInfoController {
 		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("insertFunctionalMOU", "showFunctionalMOUs", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("insertFunctionalMOU", "showFunctionalMOUs", "0", "1", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true)
 
@@ -478,56 +468,47 @@ public class InstituteProfInfoController {
 			}
 
 			else {
-	
+
 				System.err.println("in insert insertFunctionalMOU");
 				ModelAndView model = null;
-				
+
 				int inst_id = (int) session.getAttribute("instituteId");
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
-
 
 				InstituteFunctionalMOU lib = new InstituteFunctionalMOU();
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				int mou_id = Integer.parseInt(request.getParameter("mou_id"));
-				
+
 				System.out.println("mou_id" + mou_id);
 
-			
-			/* String functionalMOU=null; */
+				/* String functionalMOU=null; */
 				/*
-				if((Integer.parseInt(request.getParameter(functionalMOU))) == 7) {
-					functionalMOU = request.getParameter("otherCourse");
+				 * if((Integer.parseInt(request.getParameter(functionalMOU))) == 7) {
+				 * functionalMOU = request.getParameter("otherCourse"); } else {
+				 */
+
+				/* } */
+				String MOU_agency = request.getParameter("MOU_agency");
+				String c = null;
+				if (MOU_agency.equals("7")) {
+					c = request.getParameter("otherCourse");
+				} else {
+					c = request.getParameter("MOU_agency");
 				}
-				else {*/
-			
-			/* } */
-				String	MOU_agency = request.getParameter("MOU_agency");
-				String c=null;
-				if(MOU_agency.equals("7")) {
-					c=request.getParameter("otherCourse");
-				}
-				else {
-					c=request.getParameter("MOU_agency");
-				}
-				
-				
+
 				String title = request.getParameter("title");
 				String fromDate = request.getParameter("fromDate");
 				String toDate = request.getParameter("toDate");
 
 				String beneficiaryMOU = request.getParameter("beneficiaryMOU");
 
-				
 				String beneficiaryMOUNo = request.getParameter("beneficiaryMOUNo");
 				String instituteOfMoU = request.getParameter("instituteOfMoU");
-				
-				
 
-			
-				if (mou_id==0) {
+				if (mou_id == 0) {
 
 					System.out.println("inst id is" + inst_id);
 
@@ -539,15 +520,14 @@ public class InstituteProfInfoController {
 					lib.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					lib.setMouInstitute(instituteOfMoU);
 					lib.setMouAgency(c);
-					
+
 					lib.setIsActive(1);
-					
-					
+
 					lib.setMakerUserId(maker_id);
 
 					lib.setInstituteId(inst_id);
 					lib.setDelStatus(1);
-					
+
 					lib.setExInt1(1);
 					lib.setExInt2(1);
 					lib.setExVar1("NA");
@@ -564,16 +544,18 @@ public class InstituteProfInfoController {
 
 					lib.setMakerDatetime(curDateTime);
 
-					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib, InstituteFunctionalMOU.class);
+					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib,
+							InstituteFunctionalMOU.class);
 
 				} else {
-				
-				  System.out.println("in edit");
-				  
-				  System.out.println("mou_id" + mou_id); 
-				  map.add("mouId",mou_id);
-				   // getInstitute Hod hod = 
-				  InstituteFunctionalMOU lib1 =  rest.postForObject(Constants.url + "getMOUByMouId", map, InstituteFunctionalMOU.class);
+
+					System.out.println("in edit");
+
+					System.out.println("mou_id" + mou_id);
+					map.add("mouId", mou_id);
+					// getInstitute Hod hod =
+					InstituteFunctionalMOU lib1 = rest.postForObject(Constants.url + "getMOUByMouId", map,
+							InstituteFunctionalMOU.class);
 
 					lib1.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
 					lib1.setMouTodt(((DateConvertor.convertToYMD(toDate))));
@@ -583,30 +565,26 @@ public class InstituteProfInfoController {
 					lib.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					lib1.setMouInstitute(instituteOfMoU);
 					lib1.setMouAgency(c);
-				  
-				  lib1.setMakerUserId(maker_id);
-				  
-				  lib1.setInstituteId(inst_id);
-				  
-				  DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
-				  cal = Calendar.getInstance();
-				  
-				  String curDateTime = dateFormat.format(cal.getTime());
-				  
-				  DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-				  
-				  String curDate = dateFormatStr.format(new Date());
-				  
-				  lib1.setMakerDatetime(curDateTime);
-				  
-				  InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib1, InstituteFunctionalMOU.class);
-			
-				  
-				  
-				 
-			}
-				
-				
+
+					lib1.setMakerUserId(maker_id);
+
+					lib1.setInstituteId(inst_id);
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					lib1.setMakerDatetime(curDateTime);
+
+					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib1,
+							InstituteFunctionalMOU.class);
+
+				}
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
@@ -614,8 +592,8 @@ public class InstituteProfInfoController {
 
 				else
 					a = "redirect:/showAddFunctionalMOUs";
-		
-		}
+
+			}
 		}
 
 		catch (Exception e) {
@@ -626,7 +604,6 @@ public class InstituteProfInfoController {
 		return a;
 
 	}
-	
 
 	@RequestMapping(value = "/showEditMou", method = RequestMethod.POST)
 	public ModelAndView showEditMou(HttpServletRequest request, HttpServletResponse response) {
@@ -646,7 +623,7 @@ public class InstituteProfInfoController {
 
 			} else {
 
-			 model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
+				model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
 
 				int edit_mou_id = Integer.parseInt(request.getParameter("edit_mou_id"));
 				System.out.println("edit_mou_id id is" + edit_mou_id);
@@ -655,14 +632,15 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("mouId", edit_mou_id);
 
-				 InstituteFunctionalMOU editInst =  rest.postForObject(Constants.url + "getMOUByMouId", map, InstituteFunctionalMOU.class);
+				InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "getMOUByMouId", map,
+						InstituteFunctionalMOU.class);
 				System.out.println("InstituteFunctionalMOU is" + editInst.toString());
 				model.addObject("editInst", editInst);
-			
+
 				model.addObject("fdate", DateConvertor.convertToDMY(editInst.getMouFromdt()));
 				model.addObject("tdate", DateConvertor.convertToDMY(editInst.getMouTodt()));
-			
-			 } 
+
+			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
@@ -672,10 +650,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/deleteMous/{mouId}", method = RequestMethod.GET)
 	public String deleteMous(HttpServletRequest request, HttpServletResponse response, @PathVariable int mouId) {
 		HttpSession session = request.getSession();
@@ -683,10 +658,9 @@ public class InstituteProfInfoController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		
-		  Info view = AccessControll.checkAccess("deleteMous/{mouId}", "showFunctionalMOUs",
-		  "0", "0", "0", "1", newModuleList);
-		 
+		Info view = AccessControll.checkAccess("deleteMous/{mouId}", "showFunctionalMOUs", "0", "0", "0", "1",
+				newModuleList);
+
 		try {
 			if (view.isError() == true) {
 
@@ -722,9 +696,9 @@ public class InstituteProfInfoController {
 				Info errMsg = rest.postForObject(Constants.url + "deleteMous", map, Info.class);
 
 				a = "redirect:/showFunctionalMOUs";
-			
-			  }
-			 
+
+			}
+
 		} catch (Exception e) {
 
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
@@ -734,12 +708,11 @@ public class InstituteProfInfoController {
 		}
 		return a;
 	}
-	
-	//  ******************************linkage*******************************//
-	
+
+	// ******************************linkage*******************************//
+
 	@RequestMapping(value = "/showCollaborationLinkages", method = RequestMethod.GET)
 	public ModelAndView showCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
-
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -748,7 +721,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "1", "0",
+					"0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -756,26 +730,27 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/collaborationLinkages");
-			model.addObject("title", "Collaboration - Linkages Details List");
-			
-			
+				model.addObject("title", "Collaboration - Linkages Details List");
+
 				int inst_id = (int) session.getAttribute("instituteId");
 				int acYearId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", inst_id);
 				map.add("yearId", acYearId);
 
-			
-				GetInstituteLinkage[] instArray = rest.postForObject(Constants.url +
-			  "getAllInstLinkageByInstituteId", map, GetInstituteLinkage[].class);
-			  List<GetInstituteLinkage> linkageList = new ArrayList<>(Arrays.asList(instArray));
-			  
-			  System.out.println("colList list is" + linkageList.toString());
-			  model.addObject("linkageList", linkageList);
-			  
-				Info add = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0", "1", "0", "0", newModuleList);
-				Info edit = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0", "0", "1", "0", newModuleList);
-				Info delete = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0", "0", "0", "1",newModuleList);
+				GetInstituteLinkage[] instArray = rest.postForObject(Constants.url + "getAllInstLinkageByInstituteId",
+						map, GetInstituteLinkage[].class);
+				List<GetInstituteLinkage> linkageList = new ArrayList<>(Arrays.asList(instArray));
+
+				System.out.println("colList list is" + linkageList.toString());
+				model.addObject("linkageList", linkageList);
+
+				Info add = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0",
+						"1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0",
+						"0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0",
+						"0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -792,7 +767,7 @@ public class InstituteProfInfoController {
 
 				}
 
-			}	
+			}
 
 		} catch (Exception e) {
 
@@ -814,7 +789,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showAddCollaborationLinkages", "showCollaborationLinkages", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showAddCollaborationLinkages", "showCollaborationLinkages", "0",
+					"1", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -822,27 +798,25 @@ public class InstituteProfInfoController {
 
 			} else {
 
-			model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
-			model.addObject("title", "Add Collaboration - Linkages Details");
-			 InstituteLinkage editInst=new  InstituteLinkage();
-			 
-			 model.addObject("editInst", editInst);
-			
-			 
+				model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
+				model.addObject("title", "Add Collaboration - Linkages Details");
+				InstituteLinkage editInst = new InstituteLinkage();
+
+				model.addObject("editInst", editInst);
+
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", inst_id);
 
-			
-			  LinkageMaster[] instArray = rest.postForObject(Constants.url +
-			  "getAllInstLinkageNamesByInstituteId", map, LinkageMaster[].class);
-			  List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
-			  
-			  System.out.println("colList list is" + coltList.toString());
-			  model.addObject("colList", coltList);
+				LinkageMaster[] instArray = rest.postForObject(Constants.url + "getAllInstLinkageNamesByInstituteId",
+						map, LinkageMaster[].class);
+				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
+
+				System.out.println("colList list is" + coltList.toString());
+				model.addObject("colList", coltList);
 			}
-			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -852,8 +826,6 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-
-	
 
 	@RequestMapping(value = "/showEditColLinkage", method = RequestMethod.POST)
 	public ModelAndView showEditColLinkage(HttpServletRequest request, HttpServletResponse response) {
@@ -864,8 +836,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showEditColLinkage", "showCollaborationLinkages", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showEditColLinkage", "showCollaborationLinkages", "0", "0", "1",
+					"0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -873,7 +845,7 @@ public class InstituteProfInfoController {
 
 			} else {
 
-			 model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
+				model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
 
 				int edit_link_id = Integer.parseInt(request.getParameter("edit_link_id"));
 				System.out.println("edit_mou_id id is" + edit_link_id);
@@ -882,26 +854,24 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("linkId", edit_link_id);
 
-				 InstituteLinkage editInst =  rest.postForObject(Constants.url + "getInstLinkageByLinkId", map, InstituteLinkage.class);
+				InstituteLinkage editInst = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
+						InstituteLinkage.class);
 				System.out.println("InstituteFunctionalMOU is" + editInst.toString());
 				model.addObject("editInst", editInst);
-				
-				
-					int inst_id = (int) session.getAttribute("instituteId");
 
-					 map = new LinkedMultiValueMap<String, Object>();
-					map.add("instId", inst_id);
+				int inst_id = (int) session.getAttribute("instituteId");
 
-				
-				  LinkageMaster[] instArray = rest.postForObject(Constants.url +
-				  "getAllInstLinkageNamesByInstituteId", map, LinkageMaster[].class);
-				  List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
-				  
-				  System.out.println("colList list is" + coltList.toString());
-				  model.addObject("colList", coltList);
-			
-			
-			 } 
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", inst_id);
+
+				LinkageMaster[] instArray = rest.postForObject(Constants.url + "getAllInstLinkageNamesByInstituteId",
+						map, LinkageMaster[].class);
+				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
+
+				System.out.println("colList list is" + coltList.toString());
+				model.addObject("colList", coltList);
+
+			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
@@ -911,8 +881,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/insertColLinkages", method = RequestMethod.POST)
 	public String insertColLinkages(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertColLinkages");
@@ -921,7 +890,8 @@ public class InstituteProfInfoController {
 		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("insertColLinkages", "showCollaborationLinkages", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("insertColLinkages", "showCollaborationLinkages", "0", "1", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true)
 
@@ -932,40 +902,31 @@ public class InstituteProfInfoController {
 			}
 
 			else {
-	
+
 				System.err.println("in insert insertColLinkages");
 				ModelAndView model = null;
-				
+
 				int inst_id = (int) session.getAttribute("instituteId");
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
-
 
 				InstituteLinkage lib = new InstituteLinkage();
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				int link_id = Integer.parseInt(request.getParameter("link_id"));
-				
+
 				System.out.println("link_id" + link_id);
 
-			
-			
-				String	colName = request.getParameter("colName");
-		
-				
-				
+				String colName = request.getParameter("colName");
+
 				String col_agency = request.getParameter("col_agency");
 				String linkageNature = request.getParameter("linkageNature");
 				String beneficiaryMOU = request.getParameter("beneficiaryMOU");
 
-			
-
-				
 				String totalParticipants = request.getParameter("totalParticipants");
-			
-			
-				if (link_id==0) {
+
+				if (link_id == 0) {
 
 					System.out.println("inst id is" + inst_id);
 
@@ -974,11 +935,11 @@ public class InstituteProfInfoController {
 					lib.setLinkBeneficiary(beneficiaryMOU);
 					lib.setLinknameId(Integer.parseInt(colName));
 					lib.setLinkNature(linkageNature);
-					
+
 					lib.setMakerUserId(maker_id);
 					lib.setInstituteId(inst_id);
 					lib.setYearId(acYearId);
-					
+
 					lib.setDelStatus(1);
 					lib.setIsActive(1);
 					lib.setExInt1(1);
@@ -997,50 +958,47 @@ public class InstituteProfInfoController {
 
 					lib.setMakerDatetime(curDateTime);
 
-					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", lib, InstituteLinkage.class);
+					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", lib,
+							InstituteLinkage.class);
 
 				} else {
-				
-				  System.out.println("in edit InstituteLinkage");
-				  
-				  System.out.println("link_id" + link_id); 
-				  map.add("linkId",link_id);
-				  
-				  InstituteLinkage lib1 =  rest.postForObject(Constants.url + "getInstLinkageByLinkId", map, InstituteLinkage.class);
 
+					System.out.println("in edit InstituteLinkage");
+
+					System.out.println("link_id" + link_id);
+					map.add("linkId", link_id);
+
+					InstituteLinkage lib1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
+							InstituteLinkage.class);
 
 					lib1.setLinkAgency(col_agency);
 					lib1.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
 					lib1.setLinkBeneficiary(beneficiaryMOU);
 					lib1.setLinknameId(Integer.parseInt(colName));
 					lib1.setLinkNature(linkageNature);
-					
+
 					lib1.setYearId(acYearId);
-					
-				  lib1.setMakerUserId(maker_id);
-				  
-				  lib1.setInstituteId(inst_id);
-				  
-				  DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
-				  cal = Calendar.getInstance();
-				  
-				  String curDateTime = dateFormat.format(cal.getTime());
-				  
-				  DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-				  
-				  String curDate = dateFormatStr.format(new Date());
-				  
-				  lib1.setMakerDatetime(curDateTime);
-				  
-			InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", lib1, InstituteLinkage.class);
-			
-				  
-				  
-				 
-			}
-				a="redirect:/showCollaborationLinkages";
-				
-				
+
+					lib1.setMakerUserId(maker_id);
+
+					lib1.setInstituteId(inst_id);
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					lib1.setMakerDatetime(curDateTime);
+
+					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", lib1,
+							InstituteLinkage.class);
+
+				}
+				a = "redirect:/showCollaborationLinkages";
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
@@ -1049,7 +1007,7 @@ public class InstituteProfInfoController {
 				else
 					a = "redirect:/showAddCollaborationLinkages";
 
-		}
+			}
 		}
 
 		catch (Exception e) {
@@ -1062,16 +1020,16 @@ public class InstituteProfInfoController {
 	}
 
 	@RequestMapping(value = "/deleteInstLinkages/{linkId}", method = RequestMethod.GET)
-	public String deleteinstLinkages(HttpServletRequest request, HttpServletResponse response, @PathVariable int linkId) {
+	public String deleteinstLinkages(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int linkId) {
 		HttpSession session = request.getSession();
 		String a = null;
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		
-		  Info view = AccessControll.checkAccess("deleteiInstLinkages/{linkId}", "showCollaborationLinkages",
-		  "0", "0", "0", "1", newModuleList);
-		 
+		Info view = AccessControll.checkAccess("deleteiInstLinkages/{linkId}", "showCollaborationLinkages", "0", "0",
+				"0", "1", newModuleList);
+
 		try {
 			if (view.isError() == true) {
 
@@ -1107,9 +1065,9 @@ public class InstituteProfInfoController {
 				Info errMsg = rest.postForObject(Constants.url + "deleteInstLinkages", map, Info.class);
 
 				a = "redirect:/showCollaborationLinkages";
-			
-			  }
-			 
+
+			}
+
 		} catch (Exception e) {
 
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
@@ -1120,11 +1078,8 @@ public class InstituteProfInfoController {
 		return a;
 	}
 
-	
 ////////////////////////////////////***********************Linkage Master************************/////////////
-	
-	
-	
+
 	@RequestMapping(value = "/showMasterCollaborationLinkages", method = RequestMethod.GET)
 	public ModelAndView showMasterCollaborationLinkages(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1135,58 +1090,55 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages",
+					"1", "0", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
-			} 
-			else {
+			} else {
 				model = new ModelAndView("instituteInfo/IQAC/add_linkage_master");
-		
-			
-			model.addObject("title", "Add Linkage Master");
-			
-			
-			int inst_id = (int) session.getAttribute("instituteId");
 
-			MultiValueMap<String, Object>  map = new LinkedMultiValueMap<String, Object>();
-			map.add("instId", inst_id);
+				model.addObject("title", "Collaboration - Linkage Type Name");
 
-		
-		  LinkageMaster[] instArray = rest.postForObject(Constants.url +
-		  "getAllInstLinkageNamesByInstituteId", map, LinkageMaster[].class);
-		  List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
-		  
-		  System.out.println("colList list is" + coltList.toString());
-		  model.addObject("colList", coltList);
-		  
-		  
-		  LinkageMaster editInst =new LinkageMaster();
-		  model.addObject("editInst", editInst);
-		  
+				int inst_id = (int) session.getAttribute("instituteId");
 
-			Info add = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "1", "0", "0", newModuleList);
-			Info edit = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "0", "1", "0", newModuleList);
-			Info delete = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "0", "0", "1",newModuleList);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", inst_id);
 
-			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
-				model.addObject("addAccess", 0);
+				LinkageMaster[] instArray = rest.postForObject(Constants.url + "getAllInstLinkageNamesByInstituteId",
+						map, LinkageMaster[].class);
+				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
 
-			}
-			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
-				model.addObject("editAccess", 0);
-			}
-			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
-				model.addObject("deleteAccess", 0);
+				System.out.println("colList list is" + coltList.toString());
+				model.addObject("colList", coltList);
 
-			}
+				LinkageMaster editInst = new LinkageMaster();
+				model.addObject("editInst", editInst);
 
-	
+				Info add = AccessControll.checkAccess("showMasterCollaborationLinkages",
+						"showMasterCollaborationLinkages", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showMasterCollaborationLinkages",
+						"showMasterCollaborationLinkages", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showMasterCollaborationLinkages",
+						"showMasterCollaborationLinkages", "0", "0", "0", "1", newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+
 			}
 		} catch (Exception e) {
 
@@ -1198,9 +1150,6 @@ public class InstituteProfInfoController {
 
 	}
 
-	
-	
-
 	@RequestMapping(value = "/insertLinkageMaster", method = RequestMethod.POST)
 	public String insertLinkageMaster(HttpServletRequest request, HttpServletResponse response) {
 		String returnString = new String();
@@ -1208,8 +1157,8 @@ public class InstituteProfInfoController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("insertLinkageMaster", "showMasterCollaborationLinkages",
-					"0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("insertLinkageMaster", "showMasterCollaborationLinkages", "0", "1",
+					"0", "0", newModuleList);
 
 			System.out.println(view);
 
@@ -1236,55 +1185,51 @@ public class InstituteProfInfoController {
 				int linkage_id = Integer.parseInt(request.getParameter("linkage_id"));
 
 				LinkageMaster linkMaster = new LinkageMaster();
-				
-				if(linkage_id==0) {
-				
-				linkMaster.setDelStatus(1);
 
-				linkMaster.setInstituteId(inst_id);
+				if (linkage_id == 0) {
 
-				linkMaster.setIsActive(1);
-				linkMaster.setLinknameId(linknameId);
+					linkMaster.setDelStatus(1);
 
-				linkMaster.setLinknameRemarks(linknameRemarks);
-				linkMaster.setLinknameText(linknameText);
-				linkMaster.setMakerDatetime(dateTime);
-				linkMaster.setMakerUserId(userObj.getUserId());
+					linkMaster.setInstituteId(inst_id);
 
-				LinkageMaster linkMasterInsertRes = rest.postForObject(Constants.url + "saveLinkageMaster", linkMaster,
-						LinkageMaster.class);
+					linkMaster.setIsActive(1);
+					linkMaster.setLinknameId(linknameId);
 
-				System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
+					linkMaster.setLinknameRemarks(linknameRemarks);
+					linkMaster.setLinknameText(linknameText);
+					linkMaster.setMakerDatetime(dateTime);
+					linkMaster.setMakerUserId(userObj.getUserId());
 
-				}else {
-					
-					  System.out.println("in edit InstituteLinkage");
-					  
-					  System.out.println("linkage_id" + linkage_id); 
-						MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-					  map.add("linknameId",linkage_id);
-					  
-					  LinkageMaster linkMaster1 =  rest.postForObject(Constants.url + "getInstLinkageMasterByLinkageId", map, LinkageMaster.class);
+					LinkageMaster linkMasterInsertRes = rest.postForObject(Constants.url + "saveLinkageMaster",
+							linkMaster, LinkageMaster.class);
 
+					System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
 
-						linkMaster1.setLinknameRemarks(linknameRemarks);
-						linkMaster1.setLinknameText(linknameText);
-						linkMaster1.setMakerDatetime(dateTime);
-						linkMaster1.setMakerUserId(userObj.getUserId());
-						
-						linkMaster1.setMakerDatetime(dateTime);
-						linkMaster1.setMakerUserId(userObj.getUserId());
-					
-					  
-						LinkageMaster linkMasterInsertRes = rest.postForObject(Constants.url + "saveLinkageMaster", linkMaster1,
-								LinkageMaster.class);
-					  
-					 
+				} else {
+
+					System.out.println("in edit InstituteLinkage");
+
+					System.out.println("linkage_id" + linkage_id);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("linknameId", linkage_id);
+
+					LinkageMaster linkMaster1 = rest.postForObject(Constants.url + "getInstLinkageMasterByLinkageId",
+							map, LinkageMaster.class);
+
+					linkMaster1.setLinknameRemarks(linknameRemarks);
+					linkMaster1.setLinknameText(linknameText);
+					linkMaster1.setMakerDatetime(dateTime);
+					linkMaster1.setMakerUserId(userObj.getUserId());
+
+					linkMaster1.setMakerDatetime(dateTime);
+					linkMaster1.setMakerUserId(userObj.getUserId());
+
+					LinkageMaster linkMasterInsertRes = rest.postForObject(Constants.url + "saveLinkageMaster",
+							linkMaster1, LinkageMaster.class);
+
 				}
-					returnString = "redirect:/showMasterCollaborationLinkages";
-				
-					
-				
+				returnString = "redirect:/showMasterCollaborationLinkages";
+
 			} else {
 
 				returnString = "redirect:/accessDenied";
@@ -1300,8 +1245,7 @@ public class InstituteProfInfoController {
 		return returnString;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showEditLinkage", method = RequestMethod.POST)
 	public ModelAndView showEditLinkage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -1311,8 +1255,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showEditLinkage", "showMasterCollaborationLinkages", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showEditLinkage", "showMasterCollaborationLinkages", "0", "0", "1",
+					"0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1320,41 +1264,41 @@ public class InstituteProfInfoController {
 
 			} else {
 
-			 model = new ModelAndView("instituteInfo/IQAC/add_linkage_master");
+				model = new ModelAndView("instituteInfo/IQAC/add_linkage_master");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				int inst_id = (int) session.getAttribute("instituteId");
 
-			 map = new LinkedMultiValueMap<String, Object>();
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", inst_id);
 
-				
-			  LinkageMaster[] instArray = rest.postForObject(Constants.url +
-			  "getAllInstLinkageNamesByInstituteId", map, LinkageMaster[].class);
-			  List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
-			  
-			  System.out.println("colList list is" + coltList.toString());
-			  model.addObject("colList", coltList);
-			  
-			  ////////////////
-				
-				
+				LinkageMaster[] instArray = rest.postForObject(Constants.url + "getAllInstLinkageNamesByInstituteId",
+						map, LinkageMaster[].class);
+				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
+
+				System.out.println("colList list is" + coltList.toString());
+				model.addObject("colList", coltList);
+
+				////////////////
+
 				int edit_linkage_id = Integer.parseInt(request.getParameter("edit_linkage_id"));
 				System.out.println("edit_link_id id is" + edit_linkage_id);
 
 				model.addObject("title", " Edit Linkage Masters  ");
-			
-				  map.add("linknameId",edit_linkage_id);
-				  
-				  LinkageMaster editInst =  rest.postForObject(Constants.url + "getInstLinkageMasterByLinkageId", map, LinkageMaster.class);
 
+				map.add("linknameId", edit_linkage_id);
+
+				LinkageMaster editInst = rest.postForObject(Constants.url + "getInstLinkageMasterByLinkageId", map,
+						LinkageMaster.class);
 
 				model.addObject("editInst", editInst);
-			
 
-				Info add = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "1", "0", "0", newModuleList);
-				Info edit = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "0", "1", "0", newModuleList);
-				Info delete = AccessControll.checkAccess("showMasterCollaborationLinkages", "showMasterCollaborationLinkages", "0", "0", "0", "1",newModuleList);
+				Info add = AccessControll.checkAccess("showMasterCollaborationLinkages",
+						"showMasterCollaborationLinkages", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showMasterCollaborationLinkages",
+						"showMasterCollaborationLinkages", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showMasterCollaborationLinkages",
+						"showMasterCollaborationLinkages", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -1371,9 +1315,7 @@ public class InstituteProfInfoController {
 
 				}
 
-				
-			
-			 } 
+			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
@@ -1383,7 +1325,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteLinkages/{linkId}", method = RequestMethod.GET)
 	public String deleteLinkages(HttpServletRequest request, HttpServletResponse response, @PathVariable int linkId) {
 		HttpSession session = request.getSession();
@@ -1391,10 +1333,9 @@ public class InstituteProfInfoController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		
-		  Info view = AccessControll.checkAccess("deleteLinkages/{linkId}", "showMasterCollaborationLinkages",
-		  "0", "0", "0", "1", newModuleList);
-		 
+		Info view = AccessControll.checkAccess("deleteLinkages/{linkId}", "showMasterCollaborationLinkages", "0", "0",
+				"0", "1", newModuleList);
+
 		try {
 			if (view.isError() == true) {
 
@@ -1430,9 +1371,9 @@ public class InstituteProfInfoController {
 				Info errMsg = rest.postForObject(Constants.url + "deleteLinkName", map, Info.class);
 
 				a = "redirect:/showMasterCollaborationLinkages";
-			
-			  }
-			 
+
+			}
+
 		} catch (Exception e) {
 
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
@@ -1443,7 +1384,7 @@ public class InstituteProfInfoController {
 		return a;
 	}
 
-	//**************************************AMC***************************//////////////////
+	// **************************************AMC***************************//////////////////
 	@RequestMapping(value = "/showAMC", method = RequestMethod.GET)
 	public ModelAndView showAMC(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -1459,51 +1400,46 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("accessDenied");
 
-			} 
-			else {
-					model = new ModelAndView("instituteInfo/IQAC/amc");
-		
-		
-			model.addObject("title", "AMC Details List");
-			
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/amc");
 
-			int inst_id = (int) session.getAttribute("instituteId");
-			int acYearId = (int) session.getAttribute("acYearId");
-			
+				model.addObject("title", "AMC Details List");
 
-		 map = new LinkedMultiValueMap<String, Object>();
-			map.add("instId", inst_id);
-			map.add("yearId", acYearId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-		
-			InstituteAMC[] instArray = rest.postForObject(Constants.url +
-		  "getAllInstAMCByInstituteId", map, InstituteAMC[].class);
-		  List<InstituteAMC> amcList = new ArrayList<>(Arrays.asList(instArray));
-		  
-		  System.out.println("amcList list is" + amcList.toString());
-		  model.addObject("amcList", amcList);
-		  
+				int inst_id = (int) session.getAttribute("instituteId");
+				int acYearId = (int) session.getAttribute("acYearId");
 
-			Info add = AccessControll.checkAccess("showAMC", "showAMC", "0", "1", "0", "0", newModuleList);
-			Info edit = AccessControll.checkAccess("showAMC", "showAMC", "0", "0", "1", "0", newModuleList);
-			Info delete = AccessControll.checkAccess("showAMC", "showAMC", "0", "0", "0", "1",newModuleList);
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", inst_id);
+				map.add("yearId", acYearId);
 
-			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
-				model.addObject("addAccess", 0);
+				InstituteAMC[] instArray = rest.postForObject(Constants.url + "getAllInstAMCByInstituteId", map,
+						InstituteAMC[].class);
+				List<InstituteAMC> amcList = new ArrayList<>(Arrays.asList(instArray));
 
+				System.out.println("amcList list is" + amcList.toString());
+				model.addObject("amcList", amcList);
+
+				Info add = AccessControll.checkAccess("showAMC", "showAMC", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showAMC", "showAMC", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showAMC", "showAMC", "0", "0", "0", "1", newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
 			}
-			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
-				model.addObject("editAccess", 0);
-			}
-			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
-				model.addObject("deleteAccess", 0);
-
-			}
-			} 
 
 		} catch (Exception e) {
 
@@ -1531,19 +1467,16 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("accessDenied");
 
-			} 
-			else {
-				
-			
-		    model = new ModelAndView("instituteInfo/IQAC/add_amc");
-		
+			} else {
 
-			model.addObject("title", "Add AMC Details");
-			
-			 InstituteAMC editInst = new InstituteAMC();
-			 model.addObject("editInst", editInst);
-			 
-		}
+				model = new ModelAndView("instituteInfo/IQAC/add_amc");
+
+				model.addObject("title", "Add AMC Details");
+
+				InstituteAMC editInst = new InstituteAMC();
+				model.addObject("editInst", editInst);
+
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -1553,7 +1486,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/showEditAmc", method = RequestMethod.POST)
 	public ModelAndView showEditAmc(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -1563,8 +1496,7 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showEditAmc", "showAMC", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showEditAmc", "showAMC", "0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1572,24 +1504,22 @@ public class InstituteProfInfoController {
 
 			} else {
 
-		 model = new ModelAndView("instituteInfo/IQAC/add_amc");
+				model = new ModelAndView("instituteInfo/IQAC/add_amc");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-				
 				int edit_amc_id = Integer.parseInt(request.getParameter("edit_amc_id"));
 				System.out.println("edit_amc_id id is" + edit_amc_id);
 
 				model.addObject("title", " Edit AMC Details");
-			
-			    map.add("amcId",edit_amc_id);
-				  
-			    InstituteAMC editInst =  rest.postForObject(Constants.url + "getInstAMCByAmcId", map, InstituteAMC.class);
+
+				map.add("amcId", edit_amc_id);
+
+				InstituteAMC editInst = rest.postForObject(Constants.url + "getInstAMCByAmcId", map,
+						InstituteAMC.class);
 
 				model.addObject("editInst", editInst);
-			
-			  
-			
-			 } 
+
+			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
@@ -1599,7 +1529,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteAMCS/{amcId}", method = RequestMethod.GET)
 	public String deleteAMCS(HttpServletRequest request, HttpServletResponse response, @PathVariable int amcId) {
 		HttpSession session = request.getSession();
@@ -1607,10 +1537,8 @@ public class InstituteProfInfoController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		
-		  Info view = AccessControll.checkAccess("deleteAMCS/{amcId}", "showAMC",
-		  "0", "0", "0", "1", newModuleList);
-		 
+		Info view = AccessControll.checkAccess("deleteAMCS/{amcId}", "showAMC", "0", "0", "0", "1", newModuleList);
+
 		try {
 			if (view.isError() == true) {
 
@@ -1646,9 +1574,9 @@ public class InstituteProfInfoController {
 				Info errMsg = rest.postForObject(Constants.url + "deleteInstAmcs", map, Info.class);
 
 				a = "redirect:/showAMC";
-			
-			  }
-			 
+
+			}
+
 		} catch (Exception e) {
 
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
@@ -1659,7 +1587,6 @@ public class InstituteProfInfoController {
 		return a;
 	}
 
-
 	@RequestMapping(value = "/insertInstituteAMC", method = RequestMethod.POST)
 	public String insertInstituteAMC(HttpServletRequest request, HttpServletResponse response) {
 		String returnString = new String();
@@ -1667,8 +1594,7 @@ public class InstituteProfInfoController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("insertInstituteAMC", "showAMC",
-					"0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("insertInstituteAMC", "showAMC", "0", "1", "0", "0", newModuleList);
 
 			System.out.println(view);
 
@@ -1677,36 +1603,30 @@ public class InstituteProfInfoController {
 
 				System.err.println("Inside insertJournal method");
 
-			
 				int inst_id = (int) session.getAttribute("instituteId");
-				
+
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
-				
-				
 
 				String amcRemarks = request.getParameter("amc_remark");
 				int amcExpenditure = Integer.parseInt(request.getParameter("amc_expenditure"));
 				String amcCompany = request.getParameter("amc_company");
 				String amcTitle = request.getParameter("amc_title");
 				int amc_id = Integer.parseInt(request.getParameter("amc_id"));
-				
 
 				InstituteAMC lib = new InstituteAMC();
-				
-				if(amc_id==0) {
-				
+
+				if (amc_id == 0) {
 
 					lib.setAmcCompany(amcCompany);
 					lib.setAmcExpenditure(amcExpenditure);
 					lib.setAmcRemarks(amcRemarks);
 					lib.setAmcTitle(amcTitle);
-				
-					
+
 					lib.setMakerUserId(maker_id);
 					lib.setInstituteId(inst_id);
 					lib.setYearId(acYearId);
-					
+
 					lib.setDelStatus(1);
 					lib.setIsActive(1);
 					lib.setExInt1(1);
@@ -1724,50 +1644,44 @@ public class InstituteProfInfoController {
 					String curDate = dateFormatStr.format(new Date());
 
 					lib.setMakerDatetime(curDateTime);
-				
 
-				InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", lib,
-						InstituteAMC.class);
+					InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", lib,
+							InstituteAMC.class);
 
-				System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
+					System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
 
-				}else {
-					
-					  System.out.println("in edit InstituteLinkage");
-					  
-					  System.out.println("amc_id" + amc_id); 
-						MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-					  map.add("amcId",amc_id);
-					  
-					  InstituteAMC lib1 =  rest.postForObject(Constants.url + "getInstAMCByAmcId", map, InstituteAMC.class);
+				} else {
 
+					System.out.println("in edit InstituteLinkage");
 
-						lib1.setAmcCompany(amcCompany);
-						lib1.setAmcExpenditure(amcExpenditure);
-						lib1.setAmcRemarks(amcRemarks);
-						lib1.setAmcTitle(amcTitle);
-					
-						
-						lib1.setMakerUserId(maker_id);
-						lib1.setInstituteId(inst_id);
-						lib1.setYearId(acYearId);
-						
-					  
-						InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", lib1,
-								InstituteAMC.class);
-					  
-					 
+					System.out.println("amc_id" + amc_id);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("amcId", amc_id);
+
+					InstituteAMC lib1 = rest.postForObject(Constants.url + "getInstAMCByAmcId", map,
+							InstituteAMC.class);
+
+					lib1.setAmcCompany(amcCompany);
+					lib1.setAmcExpenditure(amcExpenditure);
+					lib1.setAmcRemarks(amcRemarks);
+					lib1.setAmcTitle(amcTitle);
+
+					lib1.setMakerUserId(maker_id);
+					lib1.setInstituteId(inst_id);
+					lib1.setYearId(acYearId);
+
+					InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", lib1,
+							InstituteAMC.class);
+
 				}
-			
+
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
 					returnString = "redirect:/showAMC";
 
 				else
 					returnString = "redirect:/showAddAMC";
-				
-					
-				
+
 			} else {
 
 				returnString = "redirect:/accessDenied";
@@ -1783,13 +1697,11 @@ public class InstituteProfInfoController {
 		return returnString;
 
 	}
-	
-	//********************************BestPractice***********************************************
-	
+
+	// ********************************BestPractice***********************************************
+
 	@RequestMapping(value = "/showBestPractice", method = RequestMethod.GET)
 	public ModelAndView showBestPractice(HttpServletRequest request, HttpServletResponse response) {
-
-		
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -1798,65 +1710,60 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showBestPractice", "showBestPractice", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showBestPractice", "showBestPractice", "1", "0", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
-			} 
-			else {
-					model = new ModelAndView("instituteInfo/IQAC/bestPrac");
-	
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/bestPrac");
 
-			model.addObject("title", "Best Practices Details");
-			
-			
-		
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				model.addObject("title", "Best Practices Details");
 
-			int inst_id = (int) session.getAttribute("instituteId");
-			int acYearId = (int) session.getAttribute("acYearId");
-			
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			map = new LinkedMultiValueMap<String, Object>();
-			map.add("instId", inst_id);
-			map.add("yearId", acYearId);
+				int inst_id = (int) session.getAttribute("instituteId");
+				int acYearId = (int) session.getAttribute("acYearId");
 
-		
-			InstituteBestPractices[] instArray = rest.postForObject(Constants.url +
-		  "getAllInstBestPracticesByInstituteId", map, InstituteBestPractices[].class);
-		  List<InstituteBestPractices> pracList = new ArrayList<>(Arrays.asList(instArray));
-		  
-		  System.out.println("pracList list is" + pracList.toString());
-		  model.addObject("pracList", pracList);
-		  for(int i=0;i<pracList.size();i++) 
-			 {
-			  pracList.get(i).setPracticesEffectiveFrom(DateConvertor.convertToDMY(pracList.get(i).getPracticesEffectiveFrom()));
-				
-			 }
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", inst_id);
+				map.add("yearId", acYearId);
 
-		  
-			
-			
-			Info add = AccessControll.checkAccess("showBestPractice", "showBestPractice", "0", "1", "0", "0", newModuleList);
-			Info edit = AccessControll.checkAccess("showBestPractice", "showBestPractice", "0", "0", "1", "0", newModuleList);
-			Info delete = AccessControll.checkAccess("showBestPractice", "showBestPractice", "0", "0", "0", "1",newModuleList);
+				InstituteBestPractices[] instArray = rest.postForObject(
+						Constants.url + "getAllInstBestPracticesByInstituteId", map, InstituteBestPractices[].class);
+				List<InstituteBestPractices> pracList = new ArrayList<>(Arrays.asList(instArray));
 
-			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
-				model.addObject("addAccess", 0);
+				System.out.println("pracList list is" + pracList.toString());
+				model.addObject("pracList", pracList);
+				for (int i = 0; i < pracList.size(); i++) {
+					pracList.get(i).setPracticesEffectiveFrom(
+							DateConvertor.convertToDMY(pracList.get(i).getPracticesEffectiveFrom()));
 
-			}
-			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
-				model.addObject("editAccess", 0);
-			}
-			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
-				model.addObject("deleteAccess", 0);
+				}
 
-			}
+				Info add = AccessControll.checkAccess("showBestPractice", "showBestPractice", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showBestPractice", "showBestPractice", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showBestPractice", "showBestPractice", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
 			}
 
 		} catch (Exception e) {
@@ -1872,7 +1779,6 @@ public class InstituteProfInfoController {
 	@RequestMapping(value = "/showAddBestPractice", method = RequestMethod.GET)
 	public ModelAndView showAddBestPractice(HttpServletRequest request, HttpServletResponse response) {
 
-
 		ModelAndView model = null;
 
 		HttpSession session = request.getSession();
@@ -1881,7 +1787,8 @@ public class InstituteProfInfoController {
 
 		try {
 
-			Info view = AccessControll.checkAccess("showAddBestPractice", "showBestPractice", "0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showAddBestPractice", "showBestPractice", "0", "1", "0", "0",
+					newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1889,11 +1796,10 @@ public class InstituteProfInfoController {
 
 			} else {
 
-		 model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
-	
+				model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
 
-			model.addObject("title", "Add Best Practices Details");
-			  InstituteBestPractices editInst =  new InstituteBestPractices();
+				model.addObject("title", "Add Best Practices Details");
+				InstituteBestPractices editInst = new InstituteBestPractices();
 				model.addObject("editInst", editInst);
 			}
 
@@ -1906,8 +1812,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/insertInstituteBestPract", method = RequestMethod.POST)
 	public String insertInstituteBestPract(HttpServletRequest request, HttpServletResponse response) {
 		String returnString = new String();
@@ -1915,8 +1820,8 @@ public class InstituteProfInfoController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("insertInstituteBestPract", "showBestPractice",
-					"0", "1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("insertInstituteBestPract", "showBestPractice", "0", "1", "0", "0",
+					newModuleList);
 
 			System.out.println(view);
 
@@ -1925,34 +1830,29 @@ public class InstituteProfInfoController {
 
 				System.err.println("Inside insertJournal method");
 
-			
 				int inst_id = (int) session.getAttribute("instituteId");
-				
+
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
-				
-				
 
 				String practices_beneficiary = request.getParameter("benificiary");
-			
+
 				String practices_effective_from = request.getParameter("practices_effective_from");
 				String practices_name = request.getParameter("bestPrac");
 				int prac_id = Integer.parseInt(request.getParameter("prac_id"));
-				
 
 				InstituteBestPractices lib = new InstituteBestPractices();
-				
-				if(prac_id==0) {
-				
+
+				if (prac_id == 0) {
 
 					lib.setPracticesBeneficiary(practices_beneficiary);
 					lib.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
 					lib.setPracticesName(practices_name);
-					
+
 					lib.setMakerUserId(maker_id);
 					lib.setInstituteId(inst_id);
 					lib.setYearId(acYearId);
-					
+
 					lib.setDelStatus(1);
 					lib.setIsActive(1);
 					lib.setExInt1(1);
@@ -1970,48 +1870,43 @@ public class InstituteProfInfoController {
 					String curDate = dateFormatStr.format(new Date());
 
 					lib.setMakerDatetime(curDateTime);
-				
 
-					InstituteBestPractices linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteBestPractices", lib,
+					InstituteBestPractices linkMasterInsertRes = rest.postForObject(
+							Constants.url + "saveInstituteBestPractices", lib, InstituteBestPractices.class);
+
+					System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
+
+				} else {
+
+					System.out.println("in edit InstituteLinkage");
+
+					System.out.println("prac_id" + prac_id);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("practicesId", prac_id);
+
+					InstituteBestPractices lib1 = rest.postForObject(Constants.url + "getInstBestPracByPracId", map,
 							InstituteBestPractices.class);
 
-				System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
+					lib1.setPracticesBeneficiary(practices_beneficiary);
+					lib1.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
+					lib1.setPracticesName(practices_name);
 
-				}else {
-					
-					  System.out.println("in edit InstituteLinkage");
-					  
-					  System.out.println("prac_id" + prac_id); 
-						MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-						 map.add("practicesId",prac_id);
-						  
-						  InstituteBestPractices lib1 =  rest.postForObject(Constants.url + "getInstBestPracByPracId", map, InstituteBestPractices.class);
+					lib1.setMakerUserId(maker_id);
+					lib1.setInstituteId(inst_id);
+					lib1.setYearId(acYearId);
 
-						lib1.setPracticesBeneficiary(practices_beneficiary);
-						lib1.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
-						lib1.setPracticesName(practices_name);
-						
-						
-						lib1.setMakerUserId(maker_id);
-						lib1.setInstituteId(inst_id);
-						lib1.setYearId(acYearId);
-						
-					  
-						InstituteBestPractices linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteBestPractices", lib1,
-								InstituteBestPractices.class);
-					  
-					 
+					InstituteBestPractices linkMasterInsertRes = rest.postForObject(
+							Constants.url + "saveInstituteBestPractices", lib1, InstituteBestPractices.class);
+
 				}
-			
+
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
 					returnString = "redirect:/showBestPractice";
 
 				else
 					returnString = "redirect:/showAddBestPractice";
-				
-					
-				
+
 			} else {
 
 				returnString = "redirect:/accessDenied";
@@ -2028,9 +1923,6 @@ public class InstituteProfInfoController {
 
 	}
 
-	
-	
-	
 	@RequestMapping(value = "/showEditBestPrac", method = RequestMethod.POST)
 	public ModelAndView showEditBestPrac(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -2049,27 +1941,25 @@ public class InstituteProfInfoController {
 
 			} else {
 
-			
-			 model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
+				model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-				
 				int edit_prac_id = Integer.parseInt(request.getParameter("edit_prac_id"));
 				System.out.println("edit_prac_id id is" + edit_prac_id);
 
 				model.addObject("title", " Edit Best Practices Details");
-			
-			    map.add("practicesId",edit_prac_id);
-				  
-				  InstituteBestPractices editInst =  rest.postForObject(Constants.url + "getInstBestPracByPracId", map, InstituteBestPractices.class);
+
+				map.add("practicesId", edit_prac_id);
+
+				InstituteBestPractices editInst = rest.postForObject(Constants.url + "getInstBestPracByPracId", map,
+						InstituteBestPractices.class);
 
 				model.addObject("editInst", editInst);
-				
-				model.addObject("date",DateConvertor.convertToDMY(editInst.getPracticesEffectiveFrom()));
-			
-			 } 
-			
-			 
+
+				model.addObject("date", DateConvertor.convertToDMY(editInst.getPracticesEffectiveFrom()));
+
+			}
+
 		} catch (Exception e) {
 			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
@@ -2078,7 +1968,7 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteBestPrac/{pracId}", method = RequestMethod.GET)
 	public String deleteBestPrac(HttpServletRequest request, HttpServletResponse response, @PathVariable int pracId) {
 		HttpSession session = request.getSession();
@@ -2086,10 +1976,9 @@ public class InstituteProfInfoController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		
-		  Info view = AccessControll.checkAccess("deleteBestPrac/{pracId}", "showBestPractice",
-		  "0", "0", "0", "1", newModuleList);
-		 
+		Info view = AccessControll.checkAccess("deleteBestPrac/{pracId}", "showBestPractice", "0", "0", "0", "1",
+				newModuleList);
+
 		try {
 			if (view.isError() == true) {
 
@@ -2125,9 +2014,9 @@ public class InstituteProfInfoController {
 				Info errMsg = rest.postForObject(Constants.url + "deleteInstBestPractices", map, Info.class);
 
 				a = "redirect:/showBestPractice";
-			
-			  }
-			 
+
+			}
+
 		} catch (Exception e) {
 
 			System.err.println(" Exception In deleteInstBestPractices at Master Contr " + e.getMessage());
@@ -2137,9 +2026,5 @@ public class InstituteProfInfoController {
 		}
 		return a;
 	}
-
-	
-	
-	
 
 }

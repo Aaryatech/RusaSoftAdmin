@@ -42,88 +42,88 @@ public class StudAdminController {
 
 		ModelAndView model = null;
 		try {
-			
+
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			
-			Info addAccess = AccessControll.checkAccess("showAddStudAdmitCatWise", "showStudAddmit", "0", "1", "0",
-					"0", newModuleList);
-			if(addAccess.isError()==true) {
+
+			Info addAccess = AccessControll.checkAccess("showAddStudAdmitCatWise", "showStudAddmit", "0", "1", "0", "0",
+					newModuleList);
+			if (addAccess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 
-			}else {
-
-			model = new ModelAndView("ProgramDetails/addStudCatwise");
-
-			model.addObject("title", "Add Student  Categorywise");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			RestTemplate restTemplate = new RestTemplate();
-
-			Cast[] catsArray = restTemplate.getForObject(Constants.url + "getAllCastCategory", Cast[].class);
-			List<Cast> castList = new ArrayList<>(Arrays.asList(catsArray));
-			System.err.println("castList " + castList.toString());
-
-			model.addObject("castList", castList);
-
-			map = new LinkedMultiValueMap<String, Object>();
-
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			map.add("instId", userObj.getGetData().getUserInstituteId());
-
-			int yearId = (int) session.getAttribute("acYearId");
-			map.add("yearId", yearId);
-
-			GetStudAdmCatwise[] castArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseList", map,
-					GetStudAdmCatwise[].class);
-			List<GetStudAdmCatwise> studAdmCastList = new ArrayList<>(Arrays.asList(castArray));
-			System.err.println("studAdmCastList " + studAdmCastList.toString());
-
-			if (studAdmCastList.size() > 0) {
-
-				model.addObject("isEdit", 1);
 			} else {
 
-				model.addObject("isEdit", 0);
-			}
-			//
+				model = new ModelAndView("ProgramDetails/addStudCatwise");
 
-			List<NameIdBean> newCastIds = new ArrayList<NameIdBean>();
+				model.addObject("title", "Add Student  Categorywise");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				RestTemplate restTemplate = new RestTemplate();
 
-			for (int i = 0; i < castList.size(); i++) {
+				Cast[] catsArray = restTemplate.getForObject(Constants.url + "getAllCastCategory", Cast[].class);
+				List<Cast> castList = new ArrayList<>(Arrays.asList(catsArray));
+				System.err.println("castList " + castList.toString());
 
-				int isNew = 1;
+				model.addObject("castList", castList);
 
-				for (int j = 0; j < studAdmCastList.size(); j++) {
+				map = new LinkedMultiValueMap<String, Object>();
 
-					if (castList.get(i).getCastId() == studAdmCastList.get(j).getCastId()) {
-						isNew = 0;
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				int yearId = (int) session.getAttribute("acYearId");
+				map.add("yearId", yearId);
+
+				GetStudAdmCatwise[] castArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseList", map,
+						GetStudAdmCatwise[].class);
+				List<GetStudAdmCatwise> studAdmCastList = new ArrayList<>(Arrays.asList(castArray));
+				System.err.println("studAdmCastList " + studAdmCastList.toString());
+
+				if (studAdmCastList.size() > 0) {
+
+					model.addObject("isEdit", 1);
+				} else {
+
+					model.addObject("isEdit", 0);
+				}
+				//
+
+				List<NameIdBean> newCastIds = new ArrayList<NameIdBean>();
+
+				for (int i = 0; i < castList.size(); i++) {
+
+					int isNew = 1;
+
+					for (int j = 0; j < studAdmCastList.size(); j++) {
+
+						if (castList.get(i).getCastId() == studAdmCastList.get(j).getCastId()) {
+							isNew = 0;
+						}
+					}
+
+					if (isNew == 1) {
+
+						NameIdBean bean = new NameIdBean();
+
+						bean.setId(castList.get(i).getCastId());
+						bean.setName(castList.get(i).getCastName());
+						newCastIds.add(bean);
+
 					}
 				}
 
-				if (isNew == 1) {
+				for (int i = 0; i < newCastIds.size(); i++) {
 
-					NameIdBean bean = new NameIdBean();
+					GetStudAdmCatwise newCastObj = new GetStudAdmCatwise();
 
-					bean.setId(castList.get(i).getCastId());
-					bean.setName(castList.get(i).getCastName());
-					newCastIds.add(bean);
+					newCastObj.setCastId(newCastIds.get(i).getId());
+					newCastObj.setCastName(newCastIds.get(i).getName());
 
+					studAdmCastList.add(newCastObj);
 				}
-			}
 
-			for (int i = 0; i < newCastIds.size(); i++) {
-
-				GetStudAdmCatwise newCastObj = new GetStudAdmCatwise();
-
-				newCastObj.setCastId(newCastIds.get(i).getId());
-				newCastObj.setCastName(newCastIds.get(i).getName());
-
-				studAdmCastList.add(newCastObj);
-			}
-
-			//
-			model.addObject("studAdmCastList", studAdmCastList);
+				//
+				model.addObject("studAdmCastList", studAdmCastList);
 
 			}
 		} catch (Exception e) {
@@ -136,7 +136,7 @@ public class StudAdminController {
 
 		return model;
 
-	} 
+	}
 
 	// List of Student Added Loc wise
 
@@ -158,7 +158,7 @@ public class StudAdminController {
 
 				Info addAccess = AccessControll.checkAccess("showStudAddmitLoc", "showStudAddmitLoc", "0", "1", "0",
 						"0", newModuleList);
-				System.err.println("loc stud add acess " +addAccess.toString());
+				System.err.println("loc stud add acess " + addAccess.toString());
 
 				Info editAccess = AccessControll.checkAccess("showStudAddmitLoc", "showStudAddmitLoc", "0", "0", "1",
 						"0", newModuleList);
@@ -176,7 +176,7 @@ public class StudAdminController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Student Addmitted Locationwise");
+				model.addObject("title", "Student Addmitted Territory wise");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
@@ -225,7 +225,7 @@ public class StudAdminController {
 
 				Info addAccess = AccessControll.checkAccess("showStudAddmit", "showStudAddmit", "0", "1", "0", "0",
 						newModuleList);
-				System.err.println("Add Access " +addAccess.toString());
+				System.err.println("Add Access " + addAccess.toString());
 
 				Info editAccess = AccessControll.checkAccess("showStudAddmit", "showStudAddmit", "0", "0", "1", "0",
 						newModuleList);
@@ -285,15 +285,15 @@ public class StudAdminController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info addAccess = AccessControll.checkAccess("showAddStudAddmitLocWise", "showStudAddmitLoc", "0", "1", "0", "0",
-					newModuleList);
+			Info addAccess = AccessControll.checkAccess("showAddStudAddmitLocWise", "showStudAddmitLoc", "0", "1", "0",
+					"0", newModuleList);
 			if (addAccess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
 
 				model = new ModelAndView("ProgramDetails/addStudLocwise");
 
-				model.addObject("title", "Add Student Locationwise ");
+				model.addObject("title", "Add Student Territory wise  ");
 
 				RestTemplate restTemplate = new RestTemplate();
 				Location[] locArray = restTemplate.getForObject(Constants.url + "getAllLocation", Location[].class);
