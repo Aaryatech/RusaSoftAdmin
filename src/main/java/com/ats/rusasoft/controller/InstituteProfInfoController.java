@@ -356,7 +356,7 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
-				model.addObject("title", "Functional MoU Details");
+				model.addObject("title", "Institute's Functional MoU List");
 
 				int acYearId = (int) session.getAttribute("acYearId");
 				int inst_id = (int) session.getAttribute("instituteId");
@@ -432,7 +432,7 @@ public class InstituteProfInfoController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
-				model.addObject("title", "Add Functional MoU Details");
+				model.addObject("title", "Add Institute's Functional MoU");
 				InstituteFunctionalMOU editInst = new InstituteFunctionalMOU();
 
 				model.addObject("editInst", editInst);
@@ -628,7 +628,7 @@ public class InstituteProfInfoController {
 				int edit_mou_id = Integer.parseInt(request.getParameter("edit_mou_id"));
 				System.out.println("edit_mou_id id is" + edit_mou_id);
 
-				model.addObject("title", " Edit Functional MoU Details ");
+				model.addObject("title", " Edit Institute's Functional MoU0");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("mouId", edit_mou_id);
 
@@ -730,7 +730,7 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/collaborationLinkages");
-				model.addObject("title", "Collaboration - Linkages Details List");
+				model.addObject("title", "Institute's Collaboration and Linkages List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int acYearId = (int) session.getAttribute("acYearId");
@@ -799,7 +799,7 @@ public class InstituteProfInfoController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
-				model.addObject("title", "Add Collaboration - Linkages Details");
+				model.addObject("title", "Add Institute's Collaboration and Linkages");
 				InstituteLinkage editInst = new InstituteLinkage();
 
 				model.addObject("editInst", editInst);
@@ -850,7 +850,7 @@ public class InstituteProfInfoController {
 				int edit_link_id = Integer.parseInt(request.getParameter("edit_link_id"));
 				System.out.println("edit_mou_id id is" + edit_link_id);
 
-				model.addObject("title", " Edit Collaboration - Linkages Details ");
+				model.addObject("title", " Edit Institute's Collaboration and Linkages ");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("linkId", edit_link_id);
 

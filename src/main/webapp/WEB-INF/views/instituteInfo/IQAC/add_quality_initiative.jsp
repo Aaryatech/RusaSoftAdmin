@@ -41,7 +41,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" " onload="hideText()">
-<c:url value="/getQualityInitiativeById" var="getQualityInitiativeById"></c:url>
+	<c:url value="/getQualityInitiativeById" var="getQualityInitiativeById"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -109,90 +109,93 @@
 													onchange="trim(this)" id="quality_initiative_name" required
 													name="quality_initiative_name" autocomplete="off"
 													placeholder="Enter Quality Initiative Name">
-													
+
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <!-- <input
+													onclick="submit_f(1)" value="Save">
+												<!-- <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
 																		Next"> -->
-												<button type="reset" onclick="resetId()" class="btn btn-default">Reset</button>
+												<button type="reset" onclick="resetId()"
+													class="btn btn-default">Reset</button>
 											</div>
 										</div>
 										<input type="hidden" id="qual_inti_id" name="qual_inti_id"
 											value="0"> <input type="hidden" id="is_view"
 											name="is_view" value="0">
 									</form>
-										<p class="desc text-danger fontsize11">Notice : * Fields
-										are mandatory.</p>
+
 
 									<div class="form-group">
-									<form action="${pageContext.request.contextPath}/deleteQualiInit/0"
-							method="get" id="insListForm">
+										<form
+											action="${pageContext.request.contextPath}/deleteQualiInit/0"
+											method="get" id="insListForm">
 
-										<table class="table table-striped dt-responsive display"
-											id="example-1">
-											<thead>
+											<table class="table table-striped dt-responsive display"
+												id="example-1">
+												<thead>
 
-												<tr>
-													<th class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
-													<th>Sr No</th>
-													<th>Quality Initiative Name</th>
-													<th>Action</th>
-
-												</tr>
-
-											</thead>
-											<tbody>
-												<c:forEach items="${qualInintList}" var="quality"
-													varStatus="count">
 													<tr>
-														<td align="center"><input type="checkbox" class="chk"
-															name="accOffIds" id="accOffIds${count.index+1}"
-															value="${quality.qualityInitiativeId}" /></td>
-														<td align="center">${count.index+1}</td>
-														<td>${quality.qualityInitiativeName}</td>
-														<td align="center"><c:if test="${editAccess==0}">
-																<a
-																	onclick="showEdit(${quality.qualityInitiativeId})"
-																	href="#"><span class="glyphicon glyphicon-edit"
-																	title="Edit" data-animate=" animated fadeIn "
-																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if>
-															<c:if test="${deleteAccess==0}">
-																<a
-																	href="${pageContext.request.contextPath}/deleteQualiInit/${quality.qualityInitiativeId}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger" title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-															</c:if></td>
-
+														<th class="check" style="text-align: center; width: 5%;"><input
+															type="checkbox" name="selAll" id="selAll"
+															onClick="selectedInst(this)" /> Select All</th>
+														<th>Sr No</th>
+														<th>Quality Initiative Name</th>
+														<th>Action</th>
 
 													</tr>
 
-												</c:forEach>
+												</thead>
+												<tbody>
+													<c:forEach items="${qualInintList}" var="quality"
+														varStatus="count">
+														<tr>
+															<td align="center"><input type="checkbox"
+																class="chk" name="accOffIds"
+																id="accOffIds${count.index+1}"
+																value="${quality.qualityInitiativeId}" /></td>
+															<td align="center">${count.index+1}</td>
+															<td>${quality.qualityInitiativeName}</td>
+															<td align="center"><c:if test="${editAccess==0}">
+																	<a onclick="showEdit(${quality.qualityInitiativeId})"
+																		href="#"><span class="glyphicon glyphicon-edit"
+																		title="Edit" data-animate=" animated fadeIn "
+																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if> <c:if test="${deleteAccess==0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteQualiInit/${quality.qualityInitiativeId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
 
 
-											</tbody>
-										</table>
+														</tr>
 
-										<c:if test="${deleteAccess==0}">
-											<input type="submit" class="btn btn-primary" value="Delete"
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
-										</c:if>
+													</c:forEach>
+
+
+												</tbody>
+											</table>
+
+											<c:if test="${deleteAccess==0}">
+												<input type="submit" class="btn btn-primary" value="Delete"
+													id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+											</c:if>
 										</form>
 									</div>
-									
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
+
 								</div>
 							</div>
 						</div>
@@ -317,7 +320,7 @@
 		}
 		
 	</script>
-	
+
 	<script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){
