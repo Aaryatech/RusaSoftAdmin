@@ -118,7 +118,7 @@
 								</c:forEach>   --%>
 												<c:forEach items="${deptList}" var="dept" varStatus="count">
 													<tr>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${dept.deptName}</td>
 
 														<td align="center"><c:if test="${editAccess==0}">

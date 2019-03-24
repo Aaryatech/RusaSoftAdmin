@@ -113,7 +113,7 @@
 											</label>
 											<div class="col-sm-9">
 												<input type="text" class="form-control" id="acc_off_name"
-													maxlength="100" value="${accOff.accOfficerName}"
+													maxlength="100" value="${accOff.accOfficerName}" onchange="trim(this)"
 													name="acc_off_name" placeholder="Account Officer Name"
 													required>
 											</div>
@@ -124,7 +124,7 @@
 												No.<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-9">
-												<input type="text" maxlength="10" class="form-control"
+												<input type="text" maxlength="10"  onchange="trim(this)" class="form-control"
 													id="acc_off_mob" value="${accOff.contactNo}"
 													name="acc_off_mob" pattern="^[1-9]{1}[0-9]{9}$"
 													oninput="checkUnique(this.value,1)"
@@ -137,7 +137,7 @@
 												ID(Official)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-9">
-												<input type="email" class="form-control" id="acc_off_email"
+												<input type="email" class="form-control"  onchange="trim(this)" id="acc_off_email"
 													oninput="checkUnique(this.value,2)" name="acc_off_email"
 													placeholder="abc@xyz.com" value="${accOff.email}" required>
 											</div>
@@ -491,6 +491,13 @@
 				}
 			}
 			return false;
+		}
+		
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
 		}
 	</script>
 

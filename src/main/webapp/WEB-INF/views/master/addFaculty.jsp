@@ -106,7 +106,7 @@
 													Name<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-9">
-													<input type="text" class="form-control" id="dept_name"
+													<input type="text"  class="form-control" id="dept_name"
 														maxlength="80" onchange="trim(this)" name="dept_name"
 														placeholder="Deptartment Name" value="${dept.deptName}"
 			 											required>
@@ -177,6 +177,13 @@
 		function submit_f(view){
 			document.getElementById("is_view").value=view;//create this 
 			
+		}
+		
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
 		}
 		
 	</script>
