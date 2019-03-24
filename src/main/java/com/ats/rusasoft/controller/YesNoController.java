@@ -43,21 +43,21 @@ public class YesNoController {
 	List<YesNoMaster> yesNoMasterListPage3 = new ArrayList<>();
 	List<YesNoMaster> yesNoMasterListPage4 = new ArrayList<>();
 	List<YesNoMaster> yesNoMasterListPage5 = new ArrayList<>();
-	
+
 	List<InstituteYesNo> instituteYesNoList = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage2 = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage3 = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage4 = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage5 = new ArrayList<>();
-	
+
 	List<InstituteYesNo> instituteYesNoTab1List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab2List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab3List = new ArrayList<>();
-	
+
 	List<InstituteYesNo> instituteYesNoTab4List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab5List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab6List = new ArrayList<>();
-	
+
 	@RequestMapping(value = "/selectYestNo", method = RequestMethod.GET)
 	public ModelAndView showAddStudAddmitLocWise(HttpServletRequest request, HttpServletResponse response) {
 
@@ -68,7 +68,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "eFacilities Details");
+			model.addObject("title", "E - FACILITIES DETAILS");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE1");
@@ -233,7 +233,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Examination Related Grivence");
+			model.addObject("title", "Examination Related Grievances");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -252,7 +252,7 @@ public class YesNoController {
 			InstituteYesNo[] instituteYesN = restTemplate.postForObject(
 					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
 			instituteYesNoTab2List = new ArrayList<>(Arrays.asList(instituteYesN));
-			
+
 			map = new LinkedMultiValueMap<>();
 			map.add("instituteId", userObj.getGetData().getUserInstituteId());
 			map.add("yearId", acYearId);
@@ -418,7 +418,7 @@ public class YesNoController {
 		return instituteYesNoTab2List;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteTimebound", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> deleteTimebound(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -457,7 +457,7 @@ public class YesNoController {
 		return instituteYesNoTab2List;
 
 	}
-	
+
 	@RequestMapping(value = "/addEfficient", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> addEfficient(HttpServletRequest request, HttpServletResponse response) {
 
@@ -547,8 +547,7 @@ public class YesNoController {
 		return instituteYesNoTab3List;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/selectYestNoPageSecond", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageSecond(HttpServletRequest request, HttpServletResponse response) {
 
@@ -600,7 +599,7 @@ public class YesNoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/submitYesNoPageSecond", method = RequestMethod.POST)
 	public String submitYesNoPageSecond(HttpServletRequest request, HttpServletResponse response) {
 
@@ -667,8 +666,8 @@ public class YesNoController {
 					if (value == 1) {
 						instituteYesNoListPage2.get(j).setMakerUserId(userObj.getUserId());
 						instituteYesNoListPage2.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage2.get(j).setInstYesnoResponse(request
-								.getParameter("dynamicprevyesnovalue" + instituteYesNoListPage2.get(j).getInstYesnoId()));
+						instituteYesNoListPage2.get(j).setInstYesnoResponse(request.getParameter(
+								"dynamicprevyesnovalue" + instituteYesNoListPage2.get(j).getInstYesnoId()));
 					} else {
 
 						instituteYesNoListPage2.get(j).setDelStatus(0);
@@ -713,8 +712,7 @@ public class YesNoController {
 		return "redirect:/selectYestNoPageSecond";
 
 	}
-	
-	
+
 	@RequestMapping(value = "/selectYestNoPageThird", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageThird(HttpServletRequest request, HttpServletResponse response) {
 
@@ -766,7 +764,7 @@ public class YesNoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/submitYesNoPageThird", method = RequestMethod.POST)
 	public String submitYesNoPageThird(HttpServletRequest request, HttpServletResponse response) {
 
@@ -833,8 +831,8 @@ public class YesNoController {
 					if (value == 1) {
 						instituteYesNoListPage3.get(j).setMakerUserId(userObj.getUserId());
 						instituteYesNoListPage3.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage3.get(j).setInstYesnoResponse(request
-								.getParameter("dynamicprevyesnovalue" + instituteYesNoListPage3.get(j).getInstYesnoId()));
+						instituteYesNoListPage3.get(j).setInstYesnoResponse(request.getParameter(
+								"dynamicprevyesnovalue" + instituteYesNoListPage3.get(j).getInstYesnoId()));
 					} else {
 
 						instituteYesNoListPage3.get(j).setDelStatus(0);
@@ -879,7 +877,7 @@ public class YesNoController {
 		return "redirect:/selectYestNoPageThird";
 
 	}
-	
+
 	@RequestMapping(value = "/selectYestNoPageFourth", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageFourth(HttpServletRequest request, HttpServletResponse response) {
 
@@ -931,7 +929,7 @@ public class YesNoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/submitYesNoPageFourth", method = RequestMethod.POST)
 	public String submitYesNoPageFourth(HttpServletRequest request, HttpServletResponse response) {
 
@@ -998,8 +996,8 @@ public class YesNoController {
 					if (value == 1) {
 						instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
 						instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage4.get(j).setInstYesnoResponse(request
-								.getParameter("dynamicprevyesnovalue" + instituteYesNoListPage4.get(j).getInstYesnoId()));
+						instituteYesNoListPage4.get(j).setInstYesnoResponse(request.getParameter(
+								"dynamicprevyesnovalue" + instituteYesNoListPage4.get(j).getInstYesnoId()));
 					} else {
 
 						instituteYesNoListPage4.get(j).setDelStatus(0);
@@ -1044,7 +1042,7 @@ public class YesNoController {
 		return "redirect:/selectYestNoPageFourth";
 
 	}
-	
+
 	@RequestMapping(value = "/selectYestNoPageFifth", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageFifth(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1096,7 +1094,7 @@ public class YesNoController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/submitYesNoPageFifth", method = RequestMethod.POST)
 	public String submitYesNoPageFifth(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1163,8 +1161,8 @@ public class YesNoController {
 					if (value == 1) {
 						instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
 						instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage5.get(j).setInstYesnoResponse(request
-								.getParameter("dynamicprevyesnovalue" + instituteYesNoListPage5.get(j).getInstYesnoId()));
+						instituteYesNoListPage5.get(j).setInstYesnoResponse(request.getParameter(
+								"dynamicprevyesnovalue" + instituteYesNoListPage5.get(j).getInstYesnoId()));
 					} else {
 
 						instituteYesNoListPage5.get(j).setDelStatus(0);
@@ -1209,7 +1207,7 @@ public class YesNoController {
 		return "redirect:/selectYestNoPageFifth";
 
 	}
-	
+
 	@RequestMapping(value = "/fixedYesNoSecond", method = RequestMethod.GET)
 	public ModelAndView fixedYesNoSecond(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1239,7 +1237,7 @@ public class YesNoController {
 			InstituteYesNo[] instituteYesN = restTemplate.postForObject(
 					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
 			instituteYesNoTab5List = new ArrayList<>(Arrays.asList(instituteYesN));
-			
+
 			map = new LinkedMultiValueMap<>();
 			map.add("instituteId", userObj.getGetData().getUserInstituteId());
 			map.add("yearId", acYearId);
@@ -1263,8 +1261,7 @@ public class YesNoController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/addGender", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> addGender(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1315,10 +1312,9 @@ public class YesNoController {
 		return instituteYesNoTab4List;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteGender", method = RequestMethod.GET)
-	public @ResponseBody List<InstituteYesNo> deleteGender(HttpServletRequest request,
-			HttpServletResponse response) {
+	public @ResponseBody List<InstituteYesNo> deleteGender(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 
@@ -1354,7 +1350,7 @@ public class YesNoController {
 		return instituteYesNoTab4List;
 
 	}
-	
+
 	@RequestMapping(value = "/addEnvironmant", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> addEnvironmant(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1405,7 +1401,7 @@ public class YesNoController {
 		return instituteYesNoTab5List;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteEnvironmant", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> deleteEnvironmant(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1444,7 +1440,7 @@ public class YesNoController {
 		return instituteYesNoTab5List;
 
 	}
-	
+
 	@RequestMapping(value = "/addHumanValues", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> addHumanValues(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1495,7 +1491,7 @@ public class YesNoController {
 		return instituteYesNoTab6List;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteHumanValues", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> deleteHumanValues(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1534,5 +1530,5 @@ public class YesNoController {
 		return instituteYesNoTab6List;
 
 	}
-	 
+
 }
