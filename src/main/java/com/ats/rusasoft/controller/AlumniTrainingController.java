@@ -475,7 +475,7 @@ public class AlumniTrainingController {
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
 			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			System.err.println("progTypeList " + progTypeList.toString());
+			//System.err.println("progTypeList " + progTypeList.toString());
 
 			model.addObject("progTypeList", progTypeList);
 
@@ -514,10 +514,10 @@ public class AlumniTrainingController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
-			editAccess.setError(false);
+			Info editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
+											 "0",
+			 newModuleList);
+			///editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -766,7 +766,7 @@ public class AlumniTrainingController {
 				GetHigherEduDetail[] eduArray = restTemplate.postForObject(Constants.url + "getHigherEduDetailList",
 						map, GetHigherEduDetail[].class);
 				List<GetHigherEduDetail> highEduList = new ArrayList<>(Arrays.asList(eduArray));
-				System.err.println("highEduList " + highEduList.toString());
+				//System.err.println("highEduList " + highEduList.toString());
 
 				model.addObject("highEduList", highEduList);
 			} else {
@@ -800,7 +800,7 @@ public class AlumniTrainingController {
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
 			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			System.err.println("progTypeList " + progTypeList.toString());
+			//System.err.println("progTypeList " + progTypeList.toString());
 
 			model.addObject("progTypeList", progTypeList);
 
@@ -832,7 +832,7 @@ public class AlumniTrainingController {
 			ProgramType[] progTypes = restTemplate.postForObject(Constants.url + "getHigherProgList", map,
 					ProgramType[].class);
 			progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			System.err.println("progTypeList " + progTypeList.toString());
+			//System.err.println("progTypeList " + progTypeList.toString());
 
 		} catch (Exception e) {
 
@@ -864,16 +864,16 @@ public class AlumniTrainingController {
 				eduDetailId = 0;
 			}
 
-			System.err.println("eduDetailId id  " + eduDetailId);
+			//System.err.println("eduDetailId id  " + eduDetailId);
 
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
-			editAccess.setError(false);
+			Info editAccess = new Info(); AccessControll.checkAccess("insertAlumni", "showHighEdu", "1", "0", "0",
+											 "0",
+			newModuleList);
+			//editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -956,7 +956,7 @@ public class AlumniTrainingController {
 			ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 					ProgramType[].class);
 			List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-			System.err.println("progTypeList " + progTypeList.toString());
+			//System.err.println("progTypeList " + progTypeList.toString());
 
 			model.addObject("progTypeList", progTypeList);
 
@@ -995,9 +995,9 @@ public class AlumniTrainingController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			if (educationDetailId == 0) {
 
-				System.err.println("Multiple records delete ");
+				//System.err.println("Multiple records delete ");
 				String[] instIds = request.getParameterValues("educationDetailId");
-				System.out.println("id are" + instIds);
+				//System.out.println("id are" + instIds);
 
 				StringBuilder sb = new StringBuilder();
 

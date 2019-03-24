@@ -171,7 +171,7 @@
 																value="${facPhdDetail.phdStuPg}" required>
 														</div>
 
-														<label class="control-label col-sm-1" for="phdStuMphill">M.Phil
+														<label style="white-space: nowrap;" class="control-label col-sm-1" for="phdStuMphill">M.Phill
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
@@ -179,7 +179,7 @@
 																name="phdStuMphill" placeholder="M.Phill"
 																value="${facPhdDetail.phdStuMphill}" required>
 														</div>
-														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D.
+														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
@@ -192,8 +192,8 @@
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-5" for="isIctUsed">Use
-															of ICT(Information Communication Technology) <span
+														<label class="control-label col-sm-3" for="isIctUsed">Use
+															of ICT<br><span style="font-size:10px">(Information Communication Technology)</span> <span
 															class="text-danger">*</span>
 														</label>
 

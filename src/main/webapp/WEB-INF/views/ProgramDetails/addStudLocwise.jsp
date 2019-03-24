@@ -225,7 +225,7 @@
 
 	<!-- END CONTENT -->
 	<script type="text/javascript">
-		function checkUnique(inputValue, valueType) {
+		/* function checkUnique(inputValue, valueType) {
 			//alert(inputValue);
 
 			var primaryKey = $
@@ -294,7 +294,7 @@
 										}
 									}
 								});
-		}
+		} */
 	</script>
 
 	<script type="text/javascript">
@@ -338,7 +338,7 @@
 			return false;
 		}
 		function submit_f(view) {
-			findTotal1();
+			//findTotal1();
 			document.getElementById("is_view").value = view;//create this 
 		}
 	</script>
