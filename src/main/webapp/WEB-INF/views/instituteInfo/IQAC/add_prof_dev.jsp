@@ -80,9 +80,16 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+							<c:if test="${trainnig_type==1}">
 								<a href="${pageContext.request.contextPath}/showProfDevelopment"
 									data-toggle="modal"><button type="submit"
-										class="btn btn-info">Back</button></a>
+										class="btn btn-info">Back</button></a></c:if>
+										<c:if test="${trainnig_type==2}">
+								<a href="${pageContext.request.contextPath}/showAdminDevelopment"
+									data-toggle="modal"><button type="submit"
+										class="btn btn-info">Back</button></a></c:if>
+										
+										
 							</div>
 
 						</header>
@@ -94,7 +101,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertTeachTraing"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -124,7 +131,7 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" maxlength="5" min="1" class="form-control"
+												<input type="number" maxlength="5" min="1" max="99999" class="form-control"
 													id="no_of_participant" autocomplete="off"
 													name="no_of_participant"
 													placeholder="Enter No. of Participants"
@@ -157,9 +164,9 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
+												<input type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" name="is_view" id="is_view" value="0">
@@ -241,7 +248,7 @@
   } );
   </script> -->
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 			$('#form_sample_2').submit(
 					function() {
 						$("input[type='submit']", this).val("Please Wait...")
@@ -249,7 +256,7 @@
 
 						return true;
 					});
-		});
+		}); */
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -262,6 +269,23 @@
 			document.getElementById("is_view").value = view;
 		}
 	</script>
+	
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
  <!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->

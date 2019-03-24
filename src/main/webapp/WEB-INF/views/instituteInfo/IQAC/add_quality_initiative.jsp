@@ -97,7 +97,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertQualityInitiative"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<div class="form-group">
 											<label class="control-label col-sm-3"
@@ -108,14 +108,14 @@
 												<input type="text" class="form-control" maxlength="200"
 													onchange="trim(this)" id="quality_initiative_name" required
 													name="quality_initiative_name" autocomplete="off"
-													placeholder="Enter Quality Initiative Name"
-													value="${page.pageName}">
+													placeholder="Enter Quality Initiative Name">
+													
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
-												<input type="submit" class="btn btn-primary"
+												<input type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save"> <!-- <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
@@ -275,15 +275,6 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
-			$('#form_sample_2').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
-
-						return true;
-					});
-		});
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -308,18 +299,12 @@
 		
 		function showEdit(qualityInitiativeId){
 			document.getElementById("qual_inti_id").value=qualityInitiativeId;//create this 
-			/* var form=document.getElementById("insListForm");
-		    form.setAttribute("method", "post");
-
-			form.action=("showEditaccOff");
-			form.submit(); */
 			
 			$.getJSON('${getQualityInitiativeById}', {
 				qualityInitiativeId : qualityInitiativeId,
 				ajax : 'true',
 
 			}, function(data) { 
-				 //alert("Data " +JSON.stringify(data));
 				 document.getElementById("quality_initiative_name").value=data.qualityInitiativeName;
 				 
 			});
@@ -330,8 +315,22 @@
 		}
 		
 	</script>
+	
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
 
-
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 </body>

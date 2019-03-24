@@ -56,7 +56,9 @@ public class InstProfTeachTrainContr {
 			if (viewAccess.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/profDevelpment");
-				model.addObject("title", "Training Teaching List");
+				//model.addObject("title", "Training Teaching List");
+				
+				model.addObject("title", "Teachers Training Details List");
 
 				Info addAccess = AccessControll.checkAccess("showProfDevelopment", "showProfDevelopment", "0", "1", "0",
 						"0", newModuleList);
@@ -109,10 +111,26 @@ public class InstProfTeachTrainContr {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
 		try {
 
-			model.addObject("title", "Add Training Teaching ");
+			
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+			Info addAccess = AccessControll.checkAccess("showProfDevelopment", "showProfDevelopment", "0", "1", "0",
+					"0", newModuleList);
+			
+			if (addAccess.isError() == false) {
+
+			model.addObject("title", "Add Teachers Training Details ");
 
 			model.addObject("trainnig_type", 1);
+			}
 
+			 else {
+					model = new ModelAndView("accessDenied");
+				}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -241,7 +259,9 @@ public class InstProfTeachTrainContr {
 				model = new ModelAndView("instituteInfo/IQAC/profDevelpment");
 
 				// model = new ModelAndView("instituteInfo/IQAC/administrativeDevlop");
-				model.addObject("title", "Training Non-Teaching List");
+				//model.addObject("title", "Training Non-Teaching List");
+				
+				model.addObject("title", "Admin Staff Training Details List");
 
 				Info addAccess = AccessControll.checkAccess("showAdminDevelopment", "showAdminDevelopment", "0", "1",
 						"0", "0", newModuleList);
@@ -294,13 +314,29 @@ public class InstProfTeachTrainContr {
 	public ModelAndView showAddAdminDevelopment(HttpServletRequest request, HttpServletResponse response) {
 		// hfg
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
+		ModelAndView model =null;// new ModelAndView("instituteInfo/IQAC/add_prof_dev");
 		// ModelAndView model = new
 		// ModelAndView("instituteInfo/IQAC/add_administrativeDevlop");
 		try {
+			
+			HttpSession session = request.getSession();
 
-			model.addObject("title", " Add Training Non-Teaching");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+			Info addAccess = AccessControll.checkAccess("showAdminDevelopment", "showAdminDevelopment", "0", "1", "0",
+					"0", newModuleList);
+			
+			if (addAccess.isError() == false) {
+				model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
+			model.addObject("title", " Add Admin Staff Training Details");
 			model.addObject("trainnig_type", 2);
+			
+			}else {
+				
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -324,9 +360,9 @@ public class InstProfTeachTrainContr {
 			int trainingId = Integer.parseInt(request.getParameter("training_id"));
 
 			if (trainnig_type == 2) {
-				model.addObject("title", "Edit Training Non-Teaching");
+				model.addObject("title", "Edit Admin Staff Training Details");
 			} else {
-				model.addObject("title", "Edit Training Teaching");
+				model.addObject("title", "Edit Teachers Training Details");
 			}
 			model.addObject("trainnig_type", trainnig_type);
 

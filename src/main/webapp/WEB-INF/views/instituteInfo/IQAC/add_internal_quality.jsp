@@ -99,7 +99,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstQuaInitiative"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -173,8 +173,8 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
+													onclick="submit_f(1)" id="sub1" value="Save"> <input
+													type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" name="is_view" id="is_view" value="0">
@@ -310,15 +310,6 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$(function() {
-			$('#form_sample_2').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
-
-						return true;
-					});
-		});
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -328,11 +319,6 @@
 		}
 	</script>
 	<script type="text/javascript">
-		function submit_f(view) {
-			//alert(view);
-			document.getElementById("is_view").value = view;
-
-		}
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;
 		}
@@ -361,6 +347,24 @@
 	    return true;
 	}
 	</script>
+	
+	
+	<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 

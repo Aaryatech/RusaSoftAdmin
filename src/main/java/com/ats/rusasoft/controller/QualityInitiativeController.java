@@ -61,7 +61,7 @@ public class QualityInitiativeController {
 			if (viewAccess.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_quality_initiative");
-				model.addObject("title", "Add Quality Initiative");
+				model.addObject("title", "Quality Initiatives");
 
 				Info addAccess = AccessControll.checkAccess("showAddQualityInitiative", "showAddQualityInitiative", "0",
 						"1", "0", "0", newModuleList);
@@ -124,7 +124,7 @@ public class QualityInitiativeController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = AccessControll.checkAccess("insertDept", "showDeptList", "1", "0", "0", "0",
+			Info editAccess = AccessControll.checkAccess("insertQualityInitiative", "showAddQualityInitiative", "1", "0", "0", "0",
 					newModuleList);
 
 			if (editAccess.isError() == true) {
@@ -271,7 +271,7 @@ public class QualityInitiativeController {
 			if (viewAccess.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/internalQuality");
-				model.addObject("title", "Internal Quality Initiatives");
+				model.addObject("title", "Institute Quality Initiatives List");
 
 				Info addAccess = AccessControll.checkAccess("showInternalQualityInitiative",
 						"showInternalQualityInitiative", "0", "1", "0", "0", newModuleList);
@@ -327,7 +327,7 @@ public class QualityInitiativeController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_internal_quality");
 		try {
 
-			model.addObject("title", "Add Internal Quality Initiatives");
+			model.addObject("title", "Add Institute Quality Initiatives");
 
 			QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",
 					QualityInitiative[].class);
@@ -450,7 +450,7 @@ public class QualityInitiativeController {
 			if (editAccess.isError() == false) {
 				
 				model = new ModelAndView("instituteInfo/IQAC/add_internal_quality");
-				model.addObject("title", "Edit Internal Quality Initiatives");
+				model.addObject("title", "Edit Institute Quality Initiatives");
 				
 				int qualityId = Integer.parseInt(request.getParameter("qualityId"));
 
@@ -496,7 +496,7 @@ public class QualityInitiativeController {
 
 				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				Info deleteAccess = AccessControll.checkAccess("deleteQualiInit/{hodId}", "showAddQualityInitiative", "0",
+				Info deleteAccess = AccessControll.checkAccess("deleteInstiQuality/{qualityId}", "showInternalQualityInitiative", "0",
 						"0", "0", "1", newModuleList);
 				if (deleteAccess.isError() == true) {
 					redirect = "redirect:/accessDenied";
