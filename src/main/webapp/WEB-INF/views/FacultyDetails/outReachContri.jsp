@@ -103,9 +103,9 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
-											</a></li>
+											</a></li> -->
 
 										</ul>
 
@@ -125,9 +125,35 @@
 														<div class="col-sm-6">
 															<select id="level" name="level"
 																class="form-control" required>
-																<option value="BOS">BOS</option>
-																<option value="Faculty">Faculty</option>
-																<option value="Academic Council">Academic Council</option>
+																<c:choose>
+																	<c:when test="${facContri.conLevel eq 'BOS'}">
+																		<option selected value="BOS">BOS</option>
+																		<option value="Faculty">Faculty</option>
+																		<option value="Academic Council">Academic Council</option>
+																	
+																	</c:when>
+																	
+																	<c:when test="${facContri.conLevel eq 'Faculty'}">
+																		<option value="BOS">BOS</option>
+																		<option selected value="Faculty">Faculty</option>
+																		<option value="Academic Council">Academic Council</option>
+																	
+																	</c:when>
+																	<c:when test="${facContri.conLevel eq 'Academic Council'}">
+																		<option value="BOS">BOS</option>
+																		<option value="Faculty">Faculty</option>
+																		<option selected value="Academic Council">Academic Council</option>
+																	
+																	</c:when>
+																	
+																	<c:otherwise>
+																		<option value="BOS">BOS</option>
+																		<option value="Faculty">Faculty</option>
+																		<option value="Academic Council">Academic Council</option>
+																	</c:otherwise>
+																
+																</c:choose>
+																
 															</select>
 														</div>
 
@@ -139,7 +165,7 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="con_name"
+															<input type="text" class="form-control" id="con_name" autocomplete="off"
 																name="con_name" placeholder="Name " value="${facContri.conName}" required>
 														</div>
 
@@ -153,7 +179,7 @@
 														</label>
 
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="university"
+															<input type="text" class="form-control" id="university" autocomplete="off"
 																name="university" placeholder="University" value="${facContri.conUniversity}" required>
 														</div>
 
@@ -162,23 +188,23 @@
 													<div class="form-group">
 
 
-														<label class="control-label col-sm-2" for="smallheading">From
+														<label class="control-label col-sm-2" for="smallheading">From Date
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" id="from_date"
-																name="from_date" placeholder="From" value="${facContri.conFrom}" required>
+															<input type="text" class="form-control datepicker" id="from_date" onkeypress='return restrictAlphabets(event)'
+																name="from_date" placeholder="From" value="${facContri.conFrom}" autocomplete="off" required>
 														</div>
 													</div>
 
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">To
+														<label class="control-label col-sm-2" for="smallheading">To Date
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" id="to_date" name="to_date"
-																placeholder="To" value="${facContri.conTo}" required>
+															<input type="text" class="form-control datepicker" id="to_date" name="to_date" autocomplete="off"
+																placeholder="To" value="${facContri.conTo}" onkeypress='return restrictAlphabets(event)' required>
 														</div>
 
 													</div>
@@ -190,10 +216,26 @@
 															Paper Setting <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
+														<c:choose>
+															<c:when test="${facContri.conExamSetting==1}">
 															Yes <input type="radio" name="examSetting"
 																id="examSetting" checked value="1">
 															No<input type="radio" name="examSetting"
 															 id="examSetting" value="0">
+															 </c:when>
+															
+															 <c:when test="${facContri.conExamSetting==0}">
+															Yes <input type="radio" name="examSetting"
+																id="examSetting"  value="1">
+															No<input type="radio" name="examSetting"
+															 id="examSetting"  checked value="0">
+															 </c:when>
+															 <c:otherwise>
+															 Yes <input type="radio" name="examSetting"
+																id="examSetting" checked value="1">
+															No<input type="radio" name="examSetting" id="examSetting" value="0">
+															 </c:otherwise>
+															 </c:choose>
 														</div>
 													</div>
 
@@ -203,9 +245,22 @@
 															Sheet Evaluation <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
+														<c:choose>
+															<c:when test="${facContri.conAsEvaluation==1}">
+																Yes <input type="radio" name="ansEvaluation" id="ansEvaluation" checked value="1"> 
+																No<input type="radio" name="ansEvaluation" id="ansEvaluation" value="0">
+															</c:when>
+															
+															<c:when test="${facContri.conAsEvaluation==0}">
+																Yes <input type="radio" name="ansEvaluation" id="ansEvaluation"  value="1"> 
+																No<input type="radio" name="ansEvaluation" id="ansEvaluation" checked value="0">
+															</c:when>
+															<c:otherwise>
+																Yes <input type="radio" name="ansEvaluation" id="ansEvaluation" checked value="1"> 
+																No<input type="radio" name="ansEvaluation" id="ansEvaluation" value="0">
+															</c:otherwise>
+														</c:choose>
 														
-															Yes <input type="radio" name="ansEvaluation" id="ansEvaluation" checked value="1"> 
-															No<input type="radio" name="ansEvaluation" id="ansEvaluation" value="0">
 														</div>
 													</div>
 
@@ -215,9 +270,24 @@
 															Sheet Moderation <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
+														<c:choose>
+															<c:when test="${facContri.conAsModeration==1}">
 															Yes <input type="radio" name="ansmod" id="ansmod" checked value="1">
 															
 															No<input type="radio" name="ansmod"	id="ansmod" value="0">
+														</c:when>
+														<c:when test="${facContri.conAsModeration==0}">
+															Yes <input type="radio" name="ansmod" id="ansmod"  value="1">
+															
+															No<input type="radio" name="ansmod"	id="ansmod" checked value="0">
+														</c:when>
+														<c:otherwise>
+														Yes <input type="radio" name="ansmod" id="ansmod" checked value="1">
+														No<input type="radio" name="ansmod"	id="ansmod" value="0">
+														</c:otherwise>
+														
+														</c:choose>
+														
 														</div>
 
 													</div>
@@ -240,7 +310,7 @@
 										</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -290,6 +360,19 @@
     });
     
 </script>
-
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 </body>
 </html>

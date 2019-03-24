@@ -105,9 +105,9 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<!-- <i class="fa fa-home"></i> Register -->
-											</a></li>
+											<!--  <li class="active"><a href="#home" data-toggle="tab"> 
+													<i class="fa fa-home"></i> Register
+											</a></li> -->
 
 										</ul>
 
@@ -127,9 +127,9 @@
 														of Student <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="1" class="form-control" id="stud_no" pattern="^(?!\s*$).+"
+														<input type="number" min="1" max="99999"  class="form-control" id="stud_no" pattern="^(?!\s*$).+"
 															name="stud_no" placeholder="No." value="${stud.menStuCount}"
-															onkeypress='return restrictAlphabets(event)' required>
+															 required>
 													</div>
 												</div>
 

@@ -101,9 +101,9 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
-											</a></li>
+											</a></li> -->
 											
 										</ul>
 

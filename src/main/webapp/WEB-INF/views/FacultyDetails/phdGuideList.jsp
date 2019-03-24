@@ -103,9 +103,9 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
-											</a></li>
+											</a></li> -->
 
 										</ul>
 
@@ -124,9 +124,9 @@
 																class="table table-striped dt-responsive display">
 																<thead>
 																	<tr>
-																	<th class="check" style="text-align: center; width: 5%;"><input
+																	<!-- <th class="check" style="text-align: center; width: 5%;"><input
 																		type="checkbox" name="selAll" id="selAll"
-																		onClick="selectedInst(this)" /> Select All</th>
+																		onClick="selectedInst(this)" /> Select All</th> -->
 																		<th>Sr No</th>
 																		<th>Name of Co-Guide</th>
 																		<th>Name of Ph.D-scholar</th>
@@ -142,19 +142,19 @@
 												<c:forEach items="${phdList}" var="phdList"
 													varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk"
+														<%-- <td><input type="checkbox" class="chk"
 															name="phdIds" id=""phdIds"${count.index+1}"
-															value="${phdList.phdId}" /></td>
+															value="${phdList.phdId}" /></td> --%>
 														<td>${count.index+1}</td>
 														<td>${phdList.coGuideName}</td>
 														<td>${phdList.phdScholarName}</td>
-														<td>${phdList.phdRegYear}</td>
+														<td align="center">${phdList.phdRegYear}</td>
 														<td>${phdList.phdTopic}</td>
 														
-														<td><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
 																	href="${pageContext.request.contextPath}/editPhdGuide/${phdList.phdId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
 																<a
 																	href="${pageContext.request.contextPath}/deletePhdGuide/${phdList.phdId}"
@@ -172,10 +172,10 @@
 															</table>
 															
 																<%-- <c:if test="${deleteAccess==0}"> --%>
-											<input type="submit" class="btn btn-primary" value="Delete"
+											<!-- <input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
+												style="align-content: center; width: 113px; margin-left: 40px;"> -->
 										<%-- </c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0"> --%>

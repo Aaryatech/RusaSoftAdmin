@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body onload="checkCoGuide(${phd.isPhdGuide})">
+<body onload="checkCoGuide(${phd.isCoGuide})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -102,10 +102,10 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
-
+ -->
 										</ul>
 
 										<div class="tab-content">
@@ -121,7 +121,7 @@
 														<div class="form-group">
 
 															<label class="control-label col-sm-2" for="smallheading">Ph.D.
-																Guide : <span class="text-danger">*</span>
+																Guide <span class="text-danger">*</span>
 															</label>
 
 
@@ -146,7 +146,7 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Co-Guide
-																: <span class="text-danger">*</span>
+																 <span class="text-danger">*</span>
 															</label>
 
 
@@ -168,7 +168,11 @@
 																 No<input type="radio" onclick="checkCoGuide(this.value)"
 																	name="coGuide" id="coGuide" value="0" checked>
 															</c:when>
-															
+															<c:otherwise>Yes <input type="radio" name="coGuide" id="coGuide"
+																	checked value="1" onclick="checkCoGuide(this.value)">
+																	
+																 No<input type="radio" onclick="checkCoGuide(this.value)"
+																	name="coGuide" id="coGuide" value="0" checked></c:otherwise>
 															</c:choose>
 															
 															</div>
@@ -177,10 +181,10 @@
 														<div class="form-group" id="cogid" style="display: none;">
 
 															<label class="control-label col-sm-2"   for="smallheading">Name
-																of Co-Guide: <span class="text-danger">*</span>
+																of Co-Guide <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="co_guide_name"
+																<input type="text" class="form-control " id="co_guide_name" autocomplete="off"
 																	name="co_guide_name" placeholder="Name of Co_Guide" value="${phd.coGuideName}">
 															</div>
 
@@ -192,22 +196,22 @@
 
 
 															<label class="control-label col-sm-2" for="smallheading">Name
-																of Ph.D. Scholar: <span class="text-danger">*</span>
+																of Ph.D. Scholar <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="phd_scholar"
 																	name="phd_scholar" placeholder="Name of Ph.D Scholar"
-																	value="${phd.phdScholarName}" required>
+																	value="${phd.phdScholarName}" autocomplete="off" required>
 															</div>
 														</div>
 
 														<div class="form-group">
 
 															<label class="control-label col-sm-2" for="smallheading">Year
-																of Registration: <span class="text-danger">*</span>
+																of Registration <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker" id="phd_year_reg"
+																<input type="text" class="form-control datepicker" id="phd_year_reg" autocomplete="off"
 																	name="phd_year_reg" placeholder="dd/mm/yyyy" value="${phd.phdRegYear}" required>
 															</div>
 
@@ -218,9 +222,9 @@
 														<div class="form-group">
 
 															<label class="control-label col-sm-2" for="smallheading">Topic/
-																Area of Research : <span class="text-danger">*</span>
+																Area of Research <span class="text-danger">*</span>
 															</label>
-															<div class="col-sm-10">
+															<div class="col-sm-6">
 																<textarea id="phd_topic" name="phd_topic"
 																	class="form-control" style="width: 100%;" required>${phd.phdTopic}</textarea>
 															</div>
@@ -241,7 +245,7 @@
  -->
 
 															<label class="control-label col-sm-2" for="smallheading">Awarded
-																: <span class="text-danger">*</span>
+																 <span class="text-danger">*</span>
 															</label>
 
 
@@ -275,8 +279,8 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker" id="phd_year_awarded"
-																	name="phd_year_awarded" placeholder="dd/mm/yyyy" value="${phd.phdAwardedYear}" >
+																<input type="text" class="form-control datepicker" id="phd_year_awarded" onkeypress='return restrictAlphabets(event)'
+																	name="phd_year_awarded" placeholder="dd/mm/yyyy" value="${phd.phdAwardedYear}" autocomplete="off">
 															</div>
 															<!-- <label class="control-label col-sm-2" for="smallheading">Valid
 																	up : <span class="text-danger">*</span>
@@ -325,7 +329,7 @@
 										</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -368,6 +372,20 @@
     });
     
 </script>
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 		<script type="text/javascript">
 			function check(qualType) {
 				//document.getElementById("abc").style = "display:none"

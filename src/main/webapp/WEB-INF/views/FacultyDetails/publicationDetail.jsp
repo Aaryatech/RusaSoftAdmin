@@ -101,9 +101,9 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
-											</a></li>
+											</a></li> -->
 											
 										</ul>
 
@@ -146,6 +146,9 @@
 
 
 																<div class="col-sm-6">
+																<c:choose>
+																<c:when test="${facConf.confType eq 'national'}">
+																
 																	National <input type="radio" name="conf_type" id="conf_type"
 																		checked value="national">&nbsp;&nbsp;&nbsp; 
 																		
@@ -153,6 +156,38 @@
 																	 value="international">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input	type="radio" name="conf_type" id="conf_type" value="state">
+																</c:when>
+																<c:when test="${facConf.confType eq 'international'}">
+																
+																	National <input type="radio" name="conf_type" id="conf_type"
+																		 value="national">&nbsp;&nbsp;&nbsp; 
+																		
+																	International <input	type="radio" name="conf_type" id="conf_type"
+																	checked value="international">&nbsp;&nbsp;&nbsp;
+																	 
+																	State <inputtype="radio" name="conf_type" id="conf_type" value="state">
+																</c:when>
+																<c:when test="${facConf.confType eq 'international'}">
+																
+																	National <input type="radio" name="conf_type" id="conf_type"
+																		 value="national">&nbsp;&nbsp;&nbsp; 
+																		
+																	International <input	type="radio" name="conf_type" id="conf_type"
+																	 value="international">&nbsp;&nbsp;&nbsp;
+																	 
+																	State <input	type="radio" name="conf_type" id="conf_type" value="state">
+																</c:when>
+																
+																<c:otherwise>
+																	National <input type="radio" name="conf_type" id="conf_type"
+																		checked value="national">&nbsp;&nbsp;&nbsp; 
+																		
+																	International <input type="radio" name="conf_type" id="conf_type"
+																	 value="international">&nbsp;&nbsp;&nbsp;
+																	 
+																	State <input type="radio" name="conf_type" id="conf_type" checked value="state">
+																</c:otherwise>
+																</c:choose>
 																</div>	
 															</div>
 															

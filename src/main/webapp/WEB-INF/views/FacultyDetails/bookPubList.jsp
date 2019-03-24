@@ -86,7 +86,7 @@
 							<div class="actions panel_actions pull-right">
 							
 								<a href="${pageContext.request.contextPath}/showBookPub"><button
-										type="button" class="btn btn-success">Add Book Publication Details</button></a> 
+										type="button" class="btn btn-success">Add </button></a> 
 									
 							</div>
 
@@ -103,9 +103,9 @@
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
 										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
+											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
-											</a></li>
+											</a></li> -->
 											
 										</ul>
 
@@ -131,8 +131,8 @@
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
-																	<!-- <tr>
-																		<th class="check" style="text-align: center; width: 5%;"><input
+																	 <tr>
+																		<!-- <th class="check" style="text-align: center; width: 5%;"><input
 																		type="checkbox" name="selAll" id="selAll"
 																		onClick="selectedInst(this)" /> Select All</th> -->
 																		<th>Sr No</th>
@@ -157,10 +157,10 @@
 														<td>${bList.bookAuthor}</td>
 														<td>${bList.bookPublisher}</td>
 														
-														<td><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
 																	href="${pageContext.request.contextPath}/editBookPublished/${bList.bookId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
 																<a
 																	href="${pageContext.request.contextPath}/deleteBookPublished/${bList.bookId}"
