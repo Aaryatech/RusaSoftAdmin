@@ -82,7 +82,7 @@ public class FacultyModuleController {
 			FacultyConference facConf = new FacultyConference();
 			model = new ModelAndView("FacultyDetails/publicationDetail");
 
-			model.addObject("title", "Publication Details");
+			model.addObject("title", "Add Faculty's Published Content Details");
 			model.addObject("facConf", facConf);
 			model.addObject("formindex", 2);
 
@@ -115,7 +115,7 @@ public class FacultyModuleController {
 			System.out.println("FacConfLIst:" + facConfList);
 
 			model.addObject("facConList", facConfList);
-			model.addObject("title", "Publication Details List");
+			model.addObject("title", "Faculty's Published Content Details");
 			model.addObject("formindex", 2);
 
 		} catch (Exception e) {
@@ -221,7 +221,7 @@ public class FacultyModuleController {
 		FacultyConference fConference = rest.postForObject(Constants.url + "/getFacConfByFacId", map,
 				FacultyConference.class);
 		model.addObject("facConf", fConference);
-		model.addObject("title", "Edit Publication Details");
+		model.addObject("title", "Edit Faculty's Published Content Details");
 
 		return model;
 
@@ -773,7 +773,7 @@ public class FacultyModuleController {
 				System.err.println("Studmont List:" + mentorList);
 				model.addObject("studL", mentorList);
 
-				model.addObject("title", "Mentoring Details Form");
+				model.addObject("title", "Faculty Worked for Students Mentoring");
 
 				Info add = AccessControll.checkAccess("showStudMentor", "showStudMentor", "0", "1", "0", "0",
 						newModuleList);
@@ -832,7 +832,7 @@ public class FacultyModuleController {
 				StudentMentoring stud = new StudentMentoring();
 				model = new ModelAndView("FacultyDetails/addStudMentor");
 
-				model.addObject("title", "Add Mentoring Details Form");
+				model.addObject("title", "Add Faculty Worked for Students Mentoring");
 				model.addObject("stud", stud);
 			}
 		} catch (Exception e) {
@@ -939,7 +939,7 @@ public class FacultyModuleController {
 						StudentMentoring.class);
 				System.out.println("Data:" + studMontr);
 
-				model.addObject("title", "Edit Monitoring Details");
+				model.addObject("title", "Edit Faculty Worked for Students Mentoring");
 
 				model.addObject("stud", studMontr);
 			}
@@ -1031,7 +1031,7 @@ public class FacultyModuleController {
 			model = new ModelAndView("FacultyDetails/bookPub");
 
 			model.addObject("book", facBook);
-			model.addObject("title", "Book Publication");
+			model.addObject("title", "Add Faculty's Published Journal Details");
 
 		} catch (Exception e) {
 
@@ -1065,7 +1065,7 @@ public class FacultyModuleController {
 			System.out.println("BookList:" + bookList);
 			model.addObject("bookList", bookList);
 
-			model.addObject("title", "Book Publication");
+			model.addObject("title", "Faculty's Published Journal Details");
 
 		} catch (Exception e) {
 
@@ -1137,7 +1137,7 @@ public class FacultyModuleController {
 			FacultyBook pubBook = rest.postForObject(Constants.url + "/getPubBookById", map, FacultyBook.class);
 			model.addObject("book", pubBook);
 
-			model.addObject("title", "Edit Book Publication");
+			model.addObject("title", "Edit Faculty's Published Journal Details");
 
 		} catch (Exception e) {
 

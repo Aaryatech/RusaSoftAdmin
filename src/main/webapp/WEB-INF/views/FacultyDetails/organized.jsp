@@ -276,7 +276,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
 															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}"
-															autocomplete="off" required>
+															autocomplete="off" required onchange="chkSncAmt()">
 													</div>
 
 
@@ -337,6 +337,20 @@
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
+		}
+		
+		function chkSncAmt(){
+			
+			var sancAmt = document.getElementById("amt_sanc").value; 
+			var utlAmt = document.getElementById("amt_utilise").value; 
+			
+			
+			if(utlAmt>sancAmt){
+				document.getElementById("amt_utilise").value = "";
+				alert("Utilized amount is more than Sanctioned amount!");
+				return false;
+				
+			}
 		}
 </script>	
 	

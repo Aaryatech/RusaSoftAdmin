@@ -639,7 +639,7 @@ public class InstituteController {
 			List<IntelPrpoRight> intelRightsList = new ArrayList<>(Arrays.asList(intelPropArr));
 			model.addObject("intelRightsList", intelRightsList);
 
-			model.addObject("title", "Intellactual Property Rights and Innovative Practices (Industry - Academic)List");
+			model.addObject("title", "Intellactual Property Rights and Innovative Practices (Industry - Academic)");
 
 		} catch (Exception e) {
 
@@ -787,7 +787,7 @@ public class InstituteController {
 			List<GenderEqalityPrg> gndrEqltyList = new ArrayList<>(Arrays.asList(gndrEqltyArr));
 			model.addObject("gndrList", gndrEqltyList);
 
-			model.addObject("title", "Gender Equality Programme");
+			model.addObject("title", "Gender Equality Initiatives");
 
 		} catch (Exception e) {
 
@@ -806,7 +806,7 @@ public class InstituteController {
 		try {
 			GenderEqalityPrg gendrEqualityt = new GenderEqalityPrg();
 
-			model.addObject("title", "Gender Equality Programme");
+			model.addObject("title", "Add Gender Equality Initiatives");
 			model.addObject("gndrEqual", gendrEqualityt);
 
 		} catch (Exception e) {
@@ -882,7 +882,7 @@ public class InstituteController {
 					GenderEqalityPrg.class);
 			model.addObject("gndrEqual", gndrEqlity);
 
-			model.addObject("title", "Edit Gender Equality Programme");
+			model.addObject("title", "Edit Gender Equality Initiatives");
 
 		} catch (Exception e) {
 
