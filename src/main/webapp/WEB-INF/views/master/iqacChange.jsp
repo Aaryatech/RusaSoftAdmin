@@ -109,15 +109,15 @@
 								<div class="col-md-12">
 
 
-									<ul class="nav nav-tabs">
+									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register IQAC
 										</a></li>
 
-									</ul>
+									</ul> -->
 
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
+									<!-- <div class="tab-content">
+										<div class="tab-pane fade in active" id="home"> -->
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/submitChangeIqacorEditIqac"
 												method="post" name="form_sample_2" id="form_sample_2"
@@ -249,9 +249,9 @@
 
 												</div>
 											</form>
-										</div>
+										<!-- </div>
 
-									</div>
+									</div> -->
 
 								</div>
 

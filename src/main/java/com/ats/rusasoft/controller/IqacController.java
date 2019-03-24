@@ -450,12 +450,18 @@ public class IqacController {
 				map.add("userType", 2);
 				Info info = rest.postForObject(Constants.url + "/blockPreviousIqacRecord", map, Info.class);
 
-				map = new LinkedMultiValueMap<>();
-				map.add("instituteId", instituteId);
-				MIqac miqc1 = rest.postForObject(Constants.url + "/getIqacbyInstituteId", map, MIqac.class);
-				miqc1.setIsActive(0);
-				MIqac res = rest.postForObject(Constants.url + "/insertNewIqac", miqc1, MIqac.class);
-
+				try {
+					
+					map = new LinkedMultiValueMap<>();
+					map.add("instituteId", instituteId);
+					MIqac miqc1 = rest.postForObject(Constants.url + "/getIqacbyInstituteId", map, MIqac.class);
+					miqc1.setIsActive(0);
+					MIqac res = rest.postForObject(Constants.url + "/insertNewIqac", miqc1, MIqac.class);
+					
+				}catch(Exception e) {
+					
+				}
+				 
 				MIqac iqac = rest.postForObject(Constants.url + "/insertNewIqac", miqac, MIqac.class);
 
 			}else {
