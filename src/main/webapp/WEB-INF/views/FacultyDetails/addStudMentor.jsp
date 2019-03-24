@@ -100,44 +100,48 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addStudMentor"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-												<!-- <div class="form-group">
+										<!-- <div class="form-group">
 
 													<label class="control-label col-sm-3" for="page_name">Mentoring
 														to the Students <span class="text-danger">*</span>
 													</label>
 												</div> -->
-												<input type="hidden"  id="menId" name="menId"  value="${stud.menId}">
-												<div class="form-group">
+										<input type="hidden" id="menId" name="menId"
+											value="${stud.menId}">
+										<div class="form-group">
 
-													<label class="control-label col-sm-2" for="page_name">No
-														of Student <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="number" min="1" max="99999"  class="form-control" id="stud_no" pattern="^(?!\s*$).+"
-															name="stud_no" placeholder="No." value="${stud.menStuCount}" onkeypress='return restrictAlphabets(event)'
-															 required>
-													</div>
-												</div>
+											<label class="control-label col-sm-2" for="page_name">No
+												of Student <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" min="1" max="99999"
+													class="form-control" id="stud_no" pattern="^(?!\s*$).+"
+													name="stud_no" placeholder="No."
+													value="${stud.menStuCount}"
+													onkeypress='return restrictAlphabets(event)' required>
+											</div>
+										</div>
 
+										<input type="hidden" id="is_view" name="is_view" value="0">
 
-
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" id="sub2" class="btn btn-primary"
+													onclick="submit_f(0)" value="Save &
 																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
-												<div class="clearfix"></div>
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+										</div>
+										<div class="clearfix"></div>
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mendatory.</p>
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -207,7 +211,6 @@
 	</div>
 
 	<script type="text/javascript">
-	
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -223,60 +226,64 @@
 
 		}
 	</script>
-<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
+
+					return wasSubmitted;
+				}
 			}
-		</script>
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
+			return false;
+		}
 
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-    
-    function submit_f(view){
-    	
-    	document.getElementById("is_view").value=view;//create this 
-    	
-		
-	}
-	
-</script>
+		function submit_f(view) {
 
-<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-		</script>
+			document.getElementById("is_view").value = view;//create this 
 
+		}
+	</script>
+
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+	<script type="text/javascript">
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+	</script>
 
 </body>
 </html>

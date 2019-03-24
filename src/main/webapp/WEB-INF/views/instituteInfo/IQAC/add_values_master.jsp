@@ -105,7 +105,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="valText">Activity
-												Name Text <span class="text-danger">*</span>
+												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="valText"

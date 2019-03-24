@@ -71,13 +71,15 @@ public class FacultyModuleController {
 	 * }
 	 */
 
-/*********************************************Publication Detail*************************************************/
+	/*********************************************
+	 * Publication Detail
+	 *************************************************/
 	@RequestMapping(value = "/showPublicationDetails", method = RequestMethod.GET)
 	public ModelAndView showFacultyDetails2(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
-			FacultyConference facConf = new FacultyConference(); 
+			FacultyConference facConf = new FacultyConference();
 			model = new ModelAndView("FacultyDetails/publicationDetail");
 
 			model.addObject("title", "Publication Details");
@@ -95,7 +97,6 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
 
 	@RequestMapping(value = "/showAddPublicationDetailsList", method = RequestMethod.GET)
 	public ModelAndView showAddPublicationDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -108,10 +109,11 @@ public class FacultyModuleController {
 			map.add("facId", facId.getRegPrimaryKey());
 			model = new ModelAndView("FacultyDetails/pubDetailList");
 
-			FacultyConference[] facCon = rest.postForObject(Constants.url+"/getfacultyConferenceByFacId", map, FacultyConference[].class);
+			FacultyConference[] facCon = rest.postForObject(Constants.url + "/getfacultyConferenceByFacId", map,
+					FacultyConference[].class);
 			List<FacultyConference> facConfList = new ArrayList<>(Arrays.asList(facCon));
-			System.out.println("FacConfLIst:"+facConfList);
-			
+			System.out.println("FacConfLIst:" + facConfList);
+
 			model.addObject("facConList", facConfList);
 			model.addObject("title", "Publication Details List");
 			model.addObject("formindex", 2);
@@ -127,16 +129,16 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertFacultyConf", method = RequestMethod.POST)
 	public String insertFacultyConf(HttpServletRequest request, HttpServletResponse response) {
-	
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String curDateTime = dateFormat.format(cal.getTime());
-		
-		FacultyConference facConf = new FacultyConference(); 
-		
+
+		FacultyConference facConf = new FacultyConference();
+
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
@@ -144,12 +146,12 @@ public class FacultyModuleController {
 		int confId = 0;
 		try {
 			confId = Integer.parseInt(request.getParameter("conf_id"));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(confId==0) {
-		facConf.setConfId(0);
-		}else {
+		if (confId == 0) {
+			facConf.setConfId(0);
+		} else {
 			facConf.setConfId(confId);
 		}
 		facConf.setFacultyId(facId.getRegPrimaryKey());
@@ -167,45 +169,46 @@ public class FacultyModuleController {
 		facConf.setExInt1(0);
 		facConf.setExVar1("Na");
 
-		System.out.println("Fac Conf:"+facConf.toString());
-		
-		
-		FacultyConference insFconf = rest.postForObject(Constants.url+"/insertNewFacConference", facConf, FacultyConference.class);
-		
+		System.out.println("Fac Conf:" + facConf.toString());
+
+		FacultyConference insFconf = rest.postForObject(Constants.url + "/insertNewFacConference", facConf,
+				FacultyConference.class);
+
 		return "redirect:/showAddPublicationDetailsList";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/editFacultyConfrnc/{facId}", method = RequestMethod.GET)
-	public ModelAndView editFacultyConf(@PathVariable("facId") int facId,HttpServletRequest request, HttpServletResponse response) {
-		
+	public ModelAndView editFacultyConf(@PathVariable("facId") int facId, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		ModelAndView model = new ModelAndView("FacultyDetails/publicationDetail");
-		
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("facId", facId);
-		
-		FacultyConference fConference = rest.postForObject(Constants.url+"/getFacConfByFacId", map, FacultyConference.class);
+
+		FacultyConference fConference = rest.postForObject(Constants.url + "/getFacConfByFacId", map,
+				FacultyConference.class);
 		model.addObject("facConf", fConference);
 		model.addObject("title", "Edit Publication Details");
-		
+
 		return model;
-		
+
 	}
-	
 
 	@RequestMapping(value = "/deleteFacultyConfrnc/{facId}", method = RequestMethod.GET)
-	public String deleteFacultyConf(@PathVariable("facId") int facId,HttpServletRequest request,
+	public String deleteFacultyConf(@PathVariable("facId") int facId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("facId", facId);
-		
-		FacultyConference deletfConference = rest.postForObject(Constants.url+"/deleteFacultyConfrncById", map, FacultyConference.class);
-		
+
+		FacultyConference deletfConference = rest.postForObject(Constants.url + "/deleteFacultyConfrncById", map,
+				FacultyConference.class);
+
 		return "redirect:/showAddPublicationDetailsList";
-		
+
 	}
-		
 
 	/*
 	 * @RequestMapping(value = "/showResearchDetails", method = RequestMethod.GET)
@@ -283,8 +286,10 @@ public class FacultyModuleController {
 	 * }
 	 */
 
-	/**************************************Faculty Activity*****************************************/
-	
+	/**************************************
+	 * Faculty Activity
+	 *****************************************/
+
 	@RequestMapping(value = "/showOrganized", method = RequestMethod.GET)
 	public ModelAndView showOrganized(HttpServletRequest request, HttpServletResponse response) {
 
@@ -294,15 +299,15 @@ public class FacultyModuleController {
 		try {
 			FacultyActivity facAct = new FacultyActivity();
 			model = new ModelAndView("FacultyDetails/organized");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("instituteId",inst_id);
-			
-			OutreachType[] facultyOutreachArr= rest.postForObject(Constants.url + "/getOutReachTypeList",map,
+			map.add("instituteId", inst_id);
+
+			OutreachType[] facultyOutreachArr = rest.postForObject(Constants.url + "/getOutReachTypeList", map,
 					OutreachType[].class);
 			List<OutreachType> facultyOutreachTypeList = new ArrayList<>(Arrays.asList(facultyOutreachArr));
 			model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
-			
+
 			model.addObject("activity", facAct);
 			model.addObject("title", "Organized Details Form");
 
@@ -328,17 +333,18 @@ public class FacultyModuleController {
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int inst_id = (int) session.getAttribute("instituteId");
-			
+
 			model = new ModelAndView("FacultyDetails/organizedList");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-						
+
 			map.add("yrId", yId);
 			map.add("facId", facId.getRegPrimaryKey());
-			OrganizedList[] faccAcArr = rest.postForObject(Constants.url+"/getAllActivityById", map, OrganizedList[].class);
+			OrganizedList[] faccAcArr = rest.postForObject(Constants.url + "/getAllActivityById", map,
+					OrganizedList[].class);
 			List<OrganizedList> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
 			model.addObject("facActList", facActList);
-			
+
 			model.addObject("title", "Organized Details List");
 
 		} catch (Exception e) {
@@ -352,89 +358,90 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertFacultyActivity", method = RequestMethod.POST)
 	public String insertFacultyActivity(HttpServletRequest request, HttpServletResponse response) {
-	
-		
+
 		try {
-			
+
 			FacultyActivity facAct = new FacultyActivity();
-			
+
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
-			
+
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
-			
-		facAct.setActivityId(Integer.parseInt(request.getParameter("activity_id")));
-		facAct.setFacultyId(facId.getRegPrimaryKey());
-		facAct.setYearId(yId);
-		facAct.setActivityType(request.getParameter("activity_type"));
-		facAct.setActivityName(request.getParameter("activity_name"));
-		facAct.setActivityLevel(request.getParameter("activity_level"));
-		facAct.setActivityDate(request.getParameter("activity_date"));
-		facAct.setActivityParticipants(request.getParameter("activity_part"));
-		facAct.setActivityFundedBy(request.getParameter("activity_found"));
-		facAct.setActivityAmountSanctioned(request.getParameter("amt_sanc"));
-		facAct.setActivityAmountUtilised(request.getParameter("amt_utilise"));
-		facAct.setDelStatus(1);
-		facAct.setIsActive(1);
-		facAct.setMakerUserId(userId);
-		facAct.setMakerEnterDatetime(curDateTime);
-		facAct.setExInt1(0);
-		facAct.setExVar1("NA");
-		
-		FacultyActivity facacc = rest.postForObject(Constants.url+"/insertFacultyActivity", facAct, FacultyActivity.class);
-		}catch(Exception e) {
+
+			facAct.setActivityId(Integer.parseInt(request.getParameter("activity_id")));
+			facAct.setFacultyId(facId.getRegPrimaryKey());
+			facAct.setYearId(yId);
+			facAct.setActivityType(request.getParameter("activity_type"));
+			facAct.setActivityName(request.getParameter("activity_name"));
+			facAct.setActivityLevel(request.getParameter("activity_level"));
+			facAct.setActivityDate(request.getParameter("activity_date"));
+			facAct.setActivityParticipants(request.getParameter("activity_part"));
+			facAct.setActivityFundedBy(request.getParameter("activity_found"));
+			facAct.setActivityAmountSanctioned(request.getParameter("amt_sanc"));
+			facAct.setActivityAmountUtilised(request.getParameter("amt_utilise"));
+			facAct.setDelStatus(1);
+			facAct.setIsActive(1);
+			facAct.setMakerUserId(userId);
+			facAct.setMakerEnterDatetime(curDateTime);
+			facAct.setExInt1(0);
+			facAct.setExVar1("NA");
+
+			FacultyActivity facacc = rest.postForObject(Constants.url + "/insertFacultyActivity", facAct,
+					FacultyActivity.class);
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		return "redirect:/showOrganizedList";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/editFacultyActivity/{facActivityId}", method = RequestMethod.GET)
-	public ModelAndView editFacultyAct(@PathVariable("facActivityId") int facActivityId,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView editFacultyAct(@PathVariable("facActivityId") int facActivityId, HttpServletRequest request,
+			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		int inst_id = (int) session.getAttribute("instituteId");
-		
+
 		ModelAndView model = new ModelAndView("FacultyDetails/organized");
-		
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		
-		map.add("instituteId",inst_id);
-		
-		OutreachType[] facultyOutreachArr= rest.postForObject(Constants.url + "/getOutReachTypeList",map,
+
+		map.add("instituteId", inst_id);
+
+		OutreachType[] facultyOutreachArr = rest.postForObject(Constants.url + "/getOutReachTypeList", map,
 				OutreachType[].class);
 		List<OutreachType> facultyOutreachTypeList = new ArrayList<>(Arrays.asList(facultyOutreachArr));
 		model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
-		
+
 		map.add("facActivityId", facActivityId);
-		FacultyActivity fActivity= rest.postForObject(Constants.url+"/getFacActivityByActvId", map, FacultyActivity.class);
+		FacultyActivity fActivity = rest.postForObject(Constants.url + "/getFacActivityByActvId", map,
+				FacultyActivity.class);
 		model.addObject("activity", fActivity);
-		
-		
+
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/deleteFacultyActivity/{activityId}", method = RequestMethod.GET)
-	public String deleteActivity(@PathVariable("activityId") int activityId,HttpServletRequest request,
+	public String deleteActivity(@PathVariable("activityId") int activityId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("activityId", activityId);
-		
-		FacultyActivity deletActivity = rest.postForObject(Constants.url+"/deleteActivityById", map, FacultyActivity.class);
-		
+
+		FacultyActivity deletActivity = rest.postForObject(Constants.url + "/deleteActivityById", map,
+				FacultyActivity.class);
+
 		return "redirect:/showOrganizedList";
-		
+
 	}
-	
 
 	/*
 	 * @RequestMapping(value = "/showSubDetails", method = RequestMethod.GET) public
@@ -551,72 +558,81 @@ public class FacultyModuleController {
 
 	}
 
-	/*@RequestMapping(value = "/showAcademicDetails", method = RequestMethod.GET)
-	public ModelAndView showAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
+	/*
+	 * @RequestMapping(value = "/showAcademicDetails", method = RequestMethod.GET)
+	 * public ModelAndView showAcademicDetails(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/academicDetails");
+	 * 
+	 * model.addObject("title", "Academic Details ");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showFacultyDetails at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
+	/*
+	 * @RequestMapping(value = "/showAddAcademicDetails", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * showAddAcademicDetails(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("FacultyDetails/addAcademicDetails");
+	 * 
+	 * model.addObject("title", "Academic Details Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showFacultyDetails at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/academicDetails");
-
-			model.addObject("title", "Academic Details ");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-*/
-	/*@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.GET)
-	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("FacultyDetails/addAcademicDetails");
-
-			model.addObject("title", "Academic Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}*/
-
-	/*@RequestMapping(value = "/showPersonalDetails", method = RequestMethod.GET)
-	public ModelAndView showPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			System.out.println("hii...");
-			model = new ModelAndView("FacultyDetails/personalDetailList");
-
-			model.addObject("title", "Personal Details Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}*/
+	/*
+	 * @RequestMapping(value = "/showPersonalDetails", method = RequestMethod.GET)
+	 * public ModelAndView showPersonalDetails(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * System.out.println("hii..."); model = new
+	 * ModelAndView("FacultyDetails/personalDetailList");
+	 * 
+	 * model.addObject("title", "Personal Details Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showFacultyDetails at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
 	/*
 	 * @RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
@@ -691,40 +707,45 @@ public class FacultyModuleController {
 	 * 
 	 * }
 	 */
-	
-/********************************Student Mentor Details****************************************/
+
+	/********************************
+	 * Student Mentor Details
+	 ****************************************/
 	@RequestMapping(value = "/showStudMentor", method = RequestMethod.GET)
 	public ModelAndView showStudMentor(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
 			HttpSession session = request.getSession();
-			/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showStudMentor", "showStudMentor", "1", "0", "0", "0", newModuleList);
+			/*
+			 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+			 * session.getAttribute("newModuleList"); Info view =
+			 * AccessControll.checkAccess("showStudMentor", "showStudMentor", "1", "0", "0",
+			 * "0", newModuleList);
+			 * 
+			 * if (view.isError() == true) {
+			 * 
+			 * model = new ModelAndView("accessDenied");
+			 * 
+			 * } else {
+			 */
 
-			if (view.isError() == true) {
-
-				model = new ModelAndView("accessDenied");
-
-			} else {*/
-
-			
 			model = new ModelAndView("FacultyDetails/studMentor");
 
-			
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			
+
 			map.add("facId", facId.getRegPrimaryKey());
-			
-			StudMentorList[] studL = rest.postForObject(Constants.url+"/getStudentMentoringDetailsList", map, StudMentorList[].class);
-			List<StudMentorList> mentorList = new ArrayList<>(Arrays.asList(studL)); 
-			System.err.println("Studmont List:"+mentorList);
+
+			StudMentorList[] studL = rest.postForObject(Constants.url + "/getStudentMentoringDetailsList", map,
+					StudMentorList[].class);
+			List<StudMentorList> mentorList = new ArrayList<>(Arrays.asList(studL));
+			System.err.println("Studmont List:" + mentorList);
 			model.addObject("studL", mentorList);
-			
+
 			model.addObject("title", "Mentoring Details Form");
-			
+
 			/*
 			 * Info add = AccessControll.checkAccess("showIqacList", "showIqacList",
 			 * "0","1", "0", "0", newModuleList); Info edit =
@@ -757,29 +778,29 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/showAddStudMentor", method = RequestMethod.GET)
 	public ModelAndView showAddStudMentor(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
-			/*HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			
-				Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "1", "0", "0",
-						newModuleList);
 
-				if (view.isError() == true) {
+			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "1", "0", "0",
+					newModuleList);
 
-					model = new ModelAndView("accessDenied");
+			if (view.isError() == true) {
 
-				} else {*/
-					StudentMentoring stud = new StudentMentoring();
-					model = new ModelAndView("FacultyDetails/addStudMentor");
-				
-					model.addObject("title", "Add Mentoring Details Form");
-					model.addObject("stud", stud);
-				//}
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				StudentMentoring stud = new StudentMentoring();
+				model = new ModelAndView("FacultyDetails/addStudMentor");
+
+				model.addObject("title", "Add Mentoring Details Form");
+				model.addObject("stud", stud);
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
@@ -791,130 +812,152 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addStudMentor", method = RequestMethod.POST)
 	public String addStudMentor(HttpServletRequest request, HttpServletResponse response) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String curDateTime = dateFormat.format(cal.getTime());
-		
+		String returnString = new String();
 		StudentMentoring stud = new StudentMentoring();
-		
+
 		HttpSession session = request.getSession();
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
 		int userId = (int) session.getAttribute("userId");
-		
-		
 		try {
-			
-			
-			stud.setMenId( Integer.parseInt(request.getParameter("menId")));	
-			stud.setFacultyId(facId.getGetData().getUserDetailId());
-			stud.setMenStuCount( Integer.parseInt(request.getParameter("stud_no")));
-			stud.setYearId(yId);
-			stud.setDelStatus(1);
-			stud.setIsActive(1);
-			stud.setMakerUserId(facId.getGetData().getUserInstituteId());
-			stud.setMakerEnterDatetime(curDateTime);
-			stud.setExInt1(0);
-			stud.setExVar1("NA");
-			
-			System.out.println("Mentor:"+stud.toString());
-			StudentMentoring saveStud = rest.postForObject(Constants.url+"/insertStudentMentoringDetails", stud, StudentMentoring.class);
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddProgDistinctive", "showProgDistinctive", "0", "1", "0", "0",
+					newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+
+				int is_view = Integer.parseInt(request.getParameter("is_view"));
+				stud.setMenId(Integer.parseInt(request.getParameter("menId")));
+				stud.setFacultyId(facId.getGetData().getUserDetailId());
+				stud.setMenStuCount(Integer.parseInt(request.getParameter("stud_no")));
+				stud.setYearId(yId);
+				stud.setDelStatus(1);
+				stud.setIsActive(1);
+				stud.setMakerUserId(facId.getGetData().getUserInstituteId());
+				stud.setMakerEnterDatetime(curDateTime);
+				stud.setExInt1(0);
+				stud.setExVar1("NA");
+
+				System.out.println("Mentor:" + stud.toString());
+				StudentMentoring saveStud = rest.postForObject(Constants.url + "/insertStudentMentoringDetails", stud,
+						StudentMentoring.class);
+				System.out.println(saveStud.toString());
+
+				if (is_view == 1) {
+					returnString = "redirect:/showStudMentor";
+				} else {
+					returnString = "redirect:/showAddStudMentor";
+				}
+			}
+
+			else {
+
+				returnString = "redirect:/accessDenied";
+
+			}
 		} catch (Exception e) {
-			
-		
-		System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
 
-		e.printStackTrace();
+			System.err.println("exception In showAddStudMentor at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return returnString;
 
 	}
-	
-		return "redirect:/showStudMentor";
 
-	}
-	
 	@RequestMapping(value = "/editFacultyMentor/{menId}", method = RequestMethod.GET)
-	public ModelAndView editFacultyMentor(@PathVariable("menId") int menId,HttpServletRequest request,
+	public ModelAndView editFacultyMentor(@PathVariable("menId") int menId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
+
 		ModelAndView model = null;
 		try {
-		HttpSession session = request.getSession();
-		/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			HttpSession session = request.getSession();
 
-		Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "1", "0",
-				newModuleList);
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		if (view.isError() == true) {
+			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "1", "0",
+					newModuleList);
 
-			model = new ModelAndView("accessDenied");
+			if (view.isError() == true) {
 
-		} else {*/
+				model = new ModelAndView("accessDenied");
 
-		model =  new ModelAndView("FacultyDetails/addStudMentor");
-		
-		System.out.println("MID:"+menId);
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		
-		map.add("mId", menId);
-		
-		StudentMentoring studMontr = rest.postForObject(Constants.url+"/editFacultyMentoringDetailsById", map, StudentMentoring.class); 
-		System.out.println("Data:"+studMontr);
-		
-		model.addObject("title", "Edit Monitoring Details");
-		
-		model.addObject("stud", studMontr);
-		//}
-		}catch(Exception e) {
+			} else {
+
+				model = new ModelAndView("FacultyDetails/addStudMentor");
+
+				System.out.println("MID:" + menId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("mId", menId);
+
+				StudentMentoring studMontr = rest.postForObject(Constants.url + "/editFacultyMentoringDetailsById", map,
+						StudentMentoring.class);
+				System.out.println("Data:" + studMontr);
+
+				model.addObject("title", "Edit Monitoring Details");
+
+				model.addObject("stud", studMontr);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/deleteFacultyMentor/{menId}", method = RequestMethod.GET)
-	public String deleteFacultyMentor(@PathVariable("menId") int menId,HttpServletRequest request,
+	public String deleteFacultyMentor(@PathVariable("menId") int menId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		ModelAndView model=null;
-	
+
+		ModelAndView model = null;
+
 		String a = null;
-		
+
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "0", "1",
+					newModuleList);
 			if (view.isError() == true) {
-	
+
 				a = "redirect:/accessDenied";
-	
-				} else {
-			model =  new ModelAndView("FacultyDetails/addStudMentor");
-			//int countid = Integer.parseInt(request.getParameter("menId"));
-			System.out.println("MID:"+menId);
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			
-			map.add("mId", menId);
-			
-			StudentMentoring studMontr = rest.postForObject(Constants.url+"/deleteFacultyMentoringDetailsById", map, StudentMentoring.class); 
-			System.out.println("Data:"+studMontr);
-			
-			model.addObject("title", "Edit Monitoring Details");
-			
-			model.addObject("stud", studMontr);
+
+			} else {
+				model = new ModelAndView("FacultyDetails/addStudMentor");
+				// int countid = Integer.parseInt(request.getParameter("menId"));
+				System.out.println("MID:" + menId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("mId", menId);
+
+				StudentMentoring studMontr = rest.postForObject(Constants.url + "/deleteFacultyMentoringDetailsById",
+						map, StudentMentoring.class);
+				System.out.println("Data:" + studMontr);
+
+				model.addObject("title", "Edit Monitoring Details");
+
+				model.addObject("stud", studMontr);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
-		}catch(Exception e) {
-		e.printStackTrace();
-		
-	}
 		return "redirect:/showStudMentor";
-		
+
 	}
-	
-	
+
 	/*
 	 * @RequestMapping(value = "/showSWOC", method = RequestMethod.GET) public
 	 * ModelAndView showSWOC(HttpServletRequest request, HttpServletResponse
@@ -939,8 +982,10 @@ public class FacultyModuleController {
 	 * 
 	 * }
 	 */
-	
-	/***********************************Book Publication************************************/
+
+	/***********************************
+	 * Book Publication
+	 ************************************/
 
 	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
 	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
@@ -948,7 +993,7 @@ public class FacultyModuleController {
 		ModelAndView model = null;
 		try {
 			FacultyBook facBook = new FacultyBook();
-			
+
 			model = new ModelAndView("FacultyDetails/bookPub");
 
 			model.addObject("book", facBook);
@@ -976,15 +1021,16 @@ public class FacultyModuleController {
 
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			
+
 			map.add("facId", facId.getRegPrimaryKey());
-			FacultyBook[] booArr = rest.postForObject(Constants.url+"/getAllPublishedBooks", map, FacultyBook[].class);
+			FacultyBook[] booArr = rest.postForObject(Constants.url + "/getAllPublishedBooks", map,
+					FacultyBook[].class);
 			List<FacultyBook> bookList = new ArrayList<>(Arrays.asList(booArr));
-			System.out.println("BookList:"+bookList);
+			System.out.println("BookList:" + bookList);
 			model.addObject("bookList", bookList);
-			
+
 			model.addObject("title", "Book Publication");
 
 		} catch (Exception e) {
@@ -998,24 +1044,24 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertFacultyBook", method = RequestMethod.POST)
 	public String insertFacultyBook(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		try {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
-			
+
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
-			
+
 			FacultyBook facBook = new FacultyBook();
-			
+
 			facBook.setBookId(Integer.parseInt(request.getParameter("book_id")));
-			
+
 			facBook.setFacultyId(facId.getRegPrimaryKey());
 			facBook.setYearId(yId);
 			facBook.setBookTitle(request.getParameter("book_title"));
@@ -1033,29 +1079,30 @@ public class FacultyModuleController {
 			facBook.setMakerEnterDatetime(curDateTime);
 			facBook.setExInt1(0);
 			facBook.setExVar1("NA");
-		
-			FacultyBook facpubbook = rest.postForObject(Constants.url+"/savefacultyPubBook", facBook, FacultyBook.class);
-		}catch(Exception e) {
+
+			FacultyBook facpubbook = rest.postForObject(Constants.url + "/savefacultyPubBook", facBook,
+					FacultyBook.class);
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		return "redirect:/showBookPubList";
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/editBookPublished/{bookId}", method = RequestMethod.GET)
-	public ModelAndView editBookPublishedBook(@PathVariable("bookId") int bookId ,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView editBookPublishedBook(@PathVariable("bookId") int bookId, HttpServletRequest request,
+			HttpServletResponse response) {
 		ModelAndView model = null;
 		try {
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("bookId", bookId);
 			model = new ModelAndView("FacultyDetails/bookPub");
-			
-			FacultyBook pubBook = rest.postForObject(Constants.url+"/getPubBookById", map, FacultyBook.class);
+
+			FacultyBook pubBook = rest.postForObject(Constants.url + "/getPubBookById", map, FacultyBook.class);
 			model.addObject("book", pubBook);
-			
+
 			model.addObject("title", "Edit Book Publication");
 
 		} catch (Exception e) {
@@ -1065,25 +1112,23 @@ public class FacultyModuleController {
 			e.printStackTrace();
 
 		}
-		
-		
+
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/deleteBookPublished/{bookId}", method = RequestMethod.GET)
-	public String deleteBookPublished(@PathVariable("bookId") int bookId,HttpServletRequest request,
+	public String deleteBookPublished(@PathVariable("bookId") int bookId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
-				
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		
+
 		map.add("bookId", bookId);
 
-		FacultyBook pubBook = rest.postForObject(Constants.url+"/deletePubBookById", map, FacultyBook.class);
-		
+		FacultyBook pubBook = rest.postForObject(Constants.url + "/deletePubBookById", map, FacultyBook.class);
+
 		return "redirect:/showBookPubList";
-		
+
 	}
 
 	/*
@@ -1135,15 +1180,17 @@ public class FacultyModuleController {
 	 * 
 	 * }
 	 */
-	
-	/*********************************************Faculty Contribution***********************************************/
+
+	/*********************************************
+	 * Faculty Contribution
+	 ***********************************************/
 
 	@RequestMapping(value = "/showOutReachContri", method = RequestMethod.GET)
 	public ModelAndView showOutReachContri(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
-			FacultyContribution facCon = new  FacultyContribution();
+			FacultyContribution facCon = new FacultyContribution();
 
 			model = new ModelAndView("FacultyDetails/outReachContri");
 
@@ -1161,28 +1208,25 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertOutReachContri", method = RequestMethod.POST)
 	public String insertOutReachContri(HttpServletRequest request, HttpServletResponse response) {
-		
-		
-		
+
 		try {
-			
-			
-			FacultyContribution facCon = new  FacultyContribution();
-			
+
+			FacultyContribution facCon = new FacultyContribution();
+
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
-			
+
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
-	
+
 			facCon.setConId(Integer.parseInt(request.getParameter("fac_contriId")));
-			
+
 			facCon.setFacultyId(facId.getRegPrimaryKey());
 			facCon.setYearId(yId);
 			facCon.setConLevel(request.getParameter("level"));
@@ -1199,19 +1243,17 @@ public class FacultyModuleController {
 			facCon.setMakerEnterDatetime(curDateTime);
 			facCon.setExtraInt1(0);
 			facCon.setExtraVar1("NA");
-			
-			FacultyContribution facContr = rest.postForObject(Constants.url+"/saveOutReachContri", facCon, FacultyContribution.class);
-			
-		}catch(Exception e) {
+
+			FacultyContribution facContr = rest.postForObject(Constants.url + "/saveOutReachContri", facCon,
+					FacultyContribution.class);
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			 
+
 		}
 		return "redirect:/showOutReachContriList";
-		
-	}
 
-	
-	
+	}
 
 	@RequestMapping(value = "/showOutReachContriList", method = RequestMethod.GET)
 	public ModelAndView showOutReachContriList(HttpServletRequest request, HttpServletResponse response) {
@@ -1222,17 +1264,16 @@ public class FacultyModuleController {
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
-			
-			
 
 			model = new ModelAndView("FacultyDetails/outReachContriList");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			
+
 			map.add("facId", facId.getRegPrimaryKey());
-			map.add("yrId",yId);
-			
-			FacultyContribution[] faccArr = rest.postForObject(Constants.url+"/getAllOutReachContri", map, FacultyContribution[].class);
+			map.add("yrId", yId);
+
+			FacultyContribution[] faccArr = rest.postForObject(Constants.url + "/getAllOutReachContri", map,
+					FacultyContribution[].class);
 			List<FacultyContribution> faccList = new ArrayList<>(Arrays.asList(faccArr));
 
 			model.addObject("ContriList", faccList);
@@ -1249,43 +1290,47 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/editContribtn/{conId}", method = RequestMethod.GET)
-	public ModelAndView editContribtn(@PathVariable("conId") int conId, HttpServletRequest request, HttpServletResponse response) {
-	System.out.println("ID:"+conId);
-	ModelAndView model = null;
-	try {
-		model = new ModelAndView("FacultyDetails/outReachContri");
-		
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		map.add("conId",conId);
-		
-		FacultyContribution fcondata =  rest.postForObject(Constants.url+"/getOutReachContriById", map, FacultyContribution.class);
-		model.addObject("facContri", fcondata);
-		model.addObject("title", "Edit Out Reach Contribution");
-	}catch(Exception e) {
-		e.printStackTrace(); 
-	}
-		return model;
-		
-	}
-	
-	@RequestMapping(value = "/deleteContribtn/{conId}", method = RequestMethod.GET)
-	public String deleteContribtn(@PathVariable("conId") int conId,HttpServletRequest request,
+	public ModelAndView editContribtn(@PathVariable("conId") int conId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
-				
+		System.out.println("ID:" + conId);
+		ModelAndView model = null;
+		try {
+			model = new ModelAndView("FacultyDetails/outReachContri");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("conId", conId);
+
+			FacultyContribution fcondata = rest.postForObject(Constants.url + "/getOutReachContriById", map,
+					FacultyContribution.class);
+			model.addObject("facContri", fcondata);
+			model.addObject("title", "Edit Out Reach Contribution");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+
+	}
+
+	@RequestMapping(value = "/deleteContribtn/{conId}", method = RequestMethod.GET)
+	public String deleteContribtn(@PathVariable("conId") int conId, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		
+
 		map.add("conId", conId);
 
-		FacultyContribution delFcon =  rest.postForObject(Constants.url+"/deleteReachContriById", map, FacultyContribution.class);
-		
+		FacultyContribution delFcon = rest.postForObject(Constants.url + "/deleteReachContriById", map,
+				FacultyContribution.class);
+
 		return "redirect:/showOutReachContriList";
-		
+
 	}
-	
-	/*****************************************Phd Guide************************************************/
+
+	/*****************************************
+	 * Phd Guide
+	 ************************************************/
 	@RequestMapping(value = "/showPhdGuide", method = RequestMethod.GET)
 	public ModelAndView showPhdGuide(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1317,17 +1362,17 @@ public class FacultyModuleController {
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			
+
 			map.add("facId", facId.getRegPrimaryKey());
-			map.add("yrId",yId);
+			map.add("yrId", yId);
 
 			model = new ModelAndView("FacultyDetails/phdGuideList");
 
-			PhdGuidList[] phdArr = rest.postForObject(Constants.url+"/getAllPhdGuid", map, PhdGuidList[].class);
+			PhdGuidList[] phdArr = rest.postForObject(Constants.url + "/getAllPhdGuid", map, PhdGuidList[].class);
 			List<PhdGuidList> phdList = new ArrayList<>(Arrays.asList(phdArr));
-			System.out.println("List:"+phdList);
+			System.out.println("List:" + phdList);
 			model.addObject("phdList", phdList);
 			model.addObject("title", "Ph.D. Guidance List");
 
@@ -1342,25 +1387,23 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertPhdGuide", method = RequestMethod.POST)
 	public String insertPhdGuide(HttpServletRequest request, HttpServletResponse response) {
 
-		
 		try {
-			
 
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
-			
+
 			HttpSession session = request.getSession();
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
-			
+
 			FacultyPhdGuide phd = new FacultyPhdGuide();
-			
+
 			phd.setPhdId(Integer.parseInt(request.getParameter("phdGiudeId")));
 			phd.setCoGuideName(request.getParameter("co_guide_name"));
 			phd.setPhdAwardedYear(Integer.parseInt(request.getParameter("phd_year_awarded")));
@@ -1368,12 +1411,12 @@ public class FacultyModuleController {
 			phd.setYearId(yId);
 			phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
 			phd.setIsCoGuide(Integer.parseInt(request.getParameter("coGuide")));
-			
+
 			phd.setPhdScholarName(request.getParameter("phd_scholar"));
-			phd.setPhdRegYear(request.getParameter("phd_year_reg")); 
+			phd.setPhdRegYear(request.getParameter("phd_year_reg"));
 			phd.setPhdTopic(request.getParameter("phd_topic"));
 			phd.setIsPhdAwarded(Integer.parseInt(request.getParameter("awarded")));
-			
+
 			phd.setDelStatus(1);
 			phd.setIsActive(1);
 			phd.setMakerUserId(userId);
@@ -1381,9 +1424,9 @@ public class FacultyModuleController {
 			phd.setExInt1(0);
 			phd.setExVar1("NA");
 			System.out.println(phd.toString());
-			 		
-			FacultyPhdGuide savePhd = rest.postForObject(Constants.url+"/insertPhdGuide", phd, FacultyPhdGuide.class);
-		
+
+			FacultyPhdGuide savePhd = rest.postForObject(Constants.url + "/insertPhdGuide", phd, FacultyPhdGuide.class);
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showPhdGuide at Master Contr" + e.getMessage());
@@ -1395,40 +1438,41 @@ public class FacultyModuleController {
 		return "redirect:/showPhdGuideList";
 
 	}
-	
+
 	@RequestMapping(value = "/editPhdGuide/{phdId}", method = RequestMethod.GET)
-	public ModelAndView editPhdGuide(@PathVariable("phdId") int phdId, HttpServletRequest request, HttpServletResponse response) {
-	System.out.println("ID:"+phdId);
-	ModelAndView model = null;
-	try {
-		model = new ModelAndView("FacultyDetails/phdGuidence");
-		
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		map.add("phdId",phdId);
-		
-		FacultyPhdGuide phdData =  rest.postForObject(Constants.url+"/getPhdGuideById", map, FacultyPhdGuide.class);
-		model.addObject("phd", phdData);
-		model.addObject("title", "Edit Ph.D. Guideline");
-	}catch(Exception e) {
-		e.printStackTrace(); 
-	}
-		return model;
-		
-	}
-	
-	@RequestMapping(value = "/deletePhdGuide/{phdId}", method = RequestMethod.GET)
-	public String deletePhdGuide(@PathVariable("phdId") int phdId,HttpServletRequest request,
+	public ModelAndView editPhdGuide(@PathVariable("phdId") int phdId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
-				
+		System.out.println("ID:" + phdId);
+		ModelAndView model = null;
+		try {
+			model = new ModelAndView("FacultyDetails/phdGuidence");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("phdId", phdId);
+
+			FacultyPhdGuide phdData = rest.postForObject(Constants.url + "/getPhdGuideById", map,
+					FacultyPhdGuide.class);
+			model.addObject("phd", phdData);
+			model.addObject("title", "Edit Ph.D. Guideline");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+
+	}
+
+	@RequestMapping(value = "/deletePhdGuide/{phdId}", method = RequestMethod.GET)
+	public String deletePhdGuide(@PathVariable("phdId") int phdId, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		
+
 		map.add("phdId", phdId);
 
-		FacultyPhdGuide delPhd =  rest.postForObject(Constants.url+"/deletePhdGuideById", map, FacultyPhdGuide.class);
-		
+		FacultyPhdGuide delPhd = rest.postForObject(Constants.url + "/deletePhdGuideById", map, FacultyPhdGuide.class);
+
 		return "redirect:/showPhdGuideList";
-		
+
 	}
 
 }
