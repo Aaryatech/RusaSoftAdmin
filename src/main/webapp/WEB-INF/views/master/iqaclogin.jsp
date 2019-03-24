@@ -155,7 +155,7 @@
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_name"
 																>No. of Full Time
-																Faculty in Institute <span class="text-danger">*</span>
+																Faculty<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
 																<input type="number" min="0" class="form-control"
@@ -172,7 +172,7 @@
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
 														>No. of Full Time
-																Nonteaching Including Office Staff<span
+																Nonteaching Faculty<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">

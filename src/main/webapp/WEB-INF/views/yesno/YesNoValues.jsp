@@ -321,7 +321,7 @@ table, th, td {
 										</div> -->
 										<br>
 										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
+											<div class="col-sm-offset-6 col-sm-6">
 												<input type="submit" class="btn btn-primary" value="Submit">
 												<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
 											</div>
