@@ -112,7 +112,7 @@
 														Name of Alumni<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control" onchange="trim(this)"
 															placeholder="Full Name of Alumni" id="alum_name"
 															value="${alumni.alumniName}" name="alum_name" required>
 													</div>
@@ -274,7 +274,7 @@
 														Other<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="other_benif"
+														<input type="text" onchange="trim(this)" class="form-control" id="other_benif"
 															value="${alumni.benefitTo}" name="other_benif"
 															placeholder="Other Beneficiary">
 													</div>
@@ -484,6 +484,19 @@
 
 			});
 		});
+		
+		
+	</script>
+	
+	<script type="text/javascript">
+	
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
 	</script>
 	<!-- 	<script type="text/javascript">
 	 $(function(){

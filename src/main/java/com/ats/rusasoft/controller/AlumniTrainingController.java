@@ -90,7 +90,7 @@ public class AlumniTrainingController {
 				GetAlumni[] almArray = restTemplate.postForObject(Constants.url + "getAlumniList", map,
 						GetAlumni[].class);
 				List<GetAlumni> alumList = new ArrayList<>(Arrays.asList(almArray));
-				System.err.println("alumList " + alumList.toString());
+				//System.err.println("alumList " + alumList.toString());
 
 				model.addObject("alumList", alumList);
 
@@ -117,11 +117,25 @@ public class AlumniTrainingController {
 		ModelAndView model = null;
 		try {
 
+			
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+			Info addAccess = AccessControll.checkAccess("showAlumini", "showAlumini", "0", "1", "0", "0",
+					newModuleList);
+			if(addAccess.isError()==false) {
+			
 			model = new ModelAndView("ProgramDetails/addAluminiDetails");
 
 			model.addObject("title", "Add Alumini Contribution Detail");
 			AlumniDetail alumni = new AlumniDetail();
 			model.addObject("alumni", alumni);
+			}
+			else {
+
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 
@@ -151,20 +165,33 @@ public class AlumniTrainingController {
 			int alumniId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
 			try {
 				alumniId = Integer.parseInt(request.getParameter("alumni_id"));
+				
 			} catch (Exception e) {
 				alumniId = 0;
 			}
-
-			System.err.println("alumniId id  " + alumniId);
-
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
-			editAccess.setError(false);
+			Info editAccess=null;
+			if(alumniId==0) {
+				
+				editAccess =  AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "1", 
+						 "0", "0",
+						 newModuleList);
+			}else {
+				
+				editAccess =  AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "0", 
+						 "1", "0",
+						 newModuleList);
+			}
+
+			System.err.println("alumniId id  " + alumniId);
+
+
+
+			
+			//editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";

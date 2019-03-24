@@ -95,7 +95,7 @@
 							<div class="row">
 								<div class="col-md-12">
 
-									<ul class="nav nav-tabs">
+									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register
 										</a></li>
@@ -104,7 +104,7 @@
 
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="home">
-
+ -->
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertFacPersonalDetail"
 												method="post" name="form_sample_2" id="form_sample_2"
@@ -282,9 +282,9 @@
 														Experience <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number"  min="0" max="c" class="form-control" id="f_prevExp"
-															name="f_prevExp" placeholder="Previous Experience"
-															onchange="calExp()" value="${facPerDetail.fPastExp}" required>
+														<input type="number"  min="0"  class="form-control" id="f_prevExp"
+															name="f_prevExp" placeholder="Previous Experience In Months"
+															 value="${facPerDetail.fPastExp}" required>
 													</div>
 												</div>
 												
@@ -358,17 +358,18 @@
 														type="hidden" id="is_view" name="is_view" value="0">
 												</div>
 											</form>
+											<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 										</div>
-										<div class="clearfix"></div>
-									</div>
+										
 								</div>
 							</div>
+							</section>
 						</div>
+						</section>
 					</section>
 				</div>
-			</section>
-		</section>
-	</div>
+			
 
 	<!-- MAIN CONTENT AREA ENDS -->
 	<!-- END CONTENT -->
@@ -420,7 +421,7 @@
 			
 			
 			  const monthDifference =  moment(new Date('2019/05/30')).diff(new Date('2019/03/30'), 'months', true);
-alert("monthDifference " +monthDifference)
+//alert("monthDifference " +monthDifference)
 			var d = new Date();
 			
 			var a = '2019/03/30';
@@ -435,10 +436,10 @@ alert("monthDifference " +monthDifference)
 			var output = d.getFullYear() + '/' + (month < 10 ? '0' : '')
 					+ month + '/' + (day < 10 ? '0' : '') + day;
 
-			alert("date is" + output);
+			//alert("date is" + output);
 
 			var joinDate = document.getElementById("f_doj").value;
-			alert("date of join" + joinDate);
+			//alert("date of join" + joinDate);
 
 			//date1: 24/09/2015 (24th Sept 2015)
 			//date2: 09/11/2015 (9th Nov 2015)
@@ -447,7 +448,7 @@ alert("monthDifference " +monthDifference)
 			var difference = (date2.getDate() - date1.getDate()) / 30
 					+ date2.getMonth() - date1.getMonth()
 					+ (12 * (date2.getFullYear() - date1.getFullYear()));
-			alert("difference " +difference);
+			//alert("difference " +difference);
 
 		}
 	</script>

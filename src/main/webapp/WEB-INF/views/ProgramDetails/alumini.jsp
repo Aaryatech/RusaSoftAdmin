@@ -88,18 +88,18 @@
 											<tbody>
 												<c:forEach items="${alumList}" var="alum" varStatus="count">
 													<tr>
-														<td>${count.index+1}</td>
-														<td>${alum.alumniName}</td>
-														<td>${alum.passingYear}</td>
+														<td align="center">${count.index+1}</td>
+														<td align="left">${alum.alumniName}</td>
+														<td align="center">${alum.passingYear}</td>
 														<c:if test="${alum.contributionType==1}">
-															<td>Financial</td>
+															<td align="left">Financial</td>
 														</c:if>
 														<c:if test="${alum.contributionType==0}">
-															<td>Non Financial</td>
+															<td align="left">Non Financial</td>
 														</c:if>
 
-														<td>${alum.contributionYear}</td>
-														<td>${alum.benefitTo}</td>
+														<td align="center">${alum.contributionYear}</td>
+														<td align="left">${alum.benefitTo}</td>
 
 														<td align="center"><c:if test="${editAccess==0}">
 																<a href="#"
@@ -235,6 +235,10 @@
 			form.submit();
 			
 		}
+		
+
+		
 	</script>
+	
 </body>
 </html>

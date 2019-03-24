@@ -187,6 +187,8 @@
 											<div class="clearfix"></div>
 										</div>
 									</form>
+										<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

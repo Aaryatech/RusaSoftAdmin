@@ -95,14 +95,14 @@
 							<div class="row">
 								<div class="col-md-12">
 
-									<ul class="nav nav-tabs">
+									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register
 										</a></li>
 
 									</ul>
 									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
+										<div class="tab-pane fade in active" id="home"> -->
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertFacPhdDetail"
 												method="post" name="form_sample_2" id="form_sample_2"
@@ -111,8 +111,9 @@
 
 												<div class="col-xs-12">
 													<div class="form-group">
-														<label class="control-label col-sm-3" for="isPhdGuide">M.phill/Ph.D.Guide
-														</label>
+														<label class="control-label col-sm-3" for="isPhdGuide">M.phill/Ph.D.Guide<span
+															class="text-danger">*</span>
+														</label> 
 														<div class="col-sm-2">
 
 															<c:choose>
@@ -227,10 +228,12 @@
 												</div>
 												<div class="clearfix"></div>
 											</form>
+											<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 										</div>
 
-									</div>
-								</div>
+									<!-- </div>
+								</div> -->
 							</div>
 						</div>
 					</section>

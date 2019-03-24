@@ -96,7 +96,7 @@
 								<div class="col-md-12">
 
 
-									<ul class="nav nav-tabs">
+									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
 												<i class="fa fa-home"></i> Register
 										</a></li>
@@ -104,7 +104,7 @@
 									</ul>
 
 									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
+										<div class="tab-pane fade in active" id="home"> -->
 
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertFacAcademic"
@@ -205,20 +205,6 @@
 													</div>
 
 
-													<!-- <div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">City
-															<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="prevExp"
-																name="prevExp" placeholder="Previous Experience"
-																onchange="calExp()" value="" required>
-														</div>
-
-
-													</div>
- -->
-
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="fPassingYear">Year
@@ -254,10 +240,11 @@
 
 
 												<div class="clearfix"></div>
+												
 											</form>
-										</div>
-
-									</div>
+											<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
+										
 								</div>
 							</div>
 

@@ -104,16 +104,16 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
 											</a></li>
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
+									<!-- 	<div class="tab-content">
 											<div class="tab-pane fade in active" id="home">
-
+ -->
 												<div>
 
 
@@ -155,13 +155,13 @@
 
 																			<td style="text-align: left"><c:out
 																					value="${staffList.facultyFirstName}" /></td>
-																			<td style="text-align: left"><c:out
+																			<td style="text-align: center;"><c:out
 																					value="${staffList.phdRecognitionDt}" /></td>
 
-																			<td style="text-align: center;"><c:out
+																			<td style="text-align: right;"><c:out
 																					value="${staffList.noOfStud}" /></td>
 
-																			<td style="text-align: left"><c:out
+																			<td style="text-align: center"><c:out
 																					value="${staffList.phdValidDt}" /></td>
 
 																			<c:if test="${staffList.isIctUsed==1}">
@@ -223,9 +223,11 @@
 
 												</div>
 
-											</div>
-										</div>
+											<!-- </div>
+										</div> -->
 										<input type="hidden" name="add_fac_detail_id" id="add_fac_detail_id" value="0">
+										<input type="hidden" name="title" id="title" value="Edit M.Phill/Ph.D. Details">
+										
 									</form>
 								</div>
 

@@ -106,7 +106,7 @@ public class FacPersonalController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Personal Details Form");
+				model.addObject("title", "Personal Details List");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -142,8 +142,10 @@ public class FacPersonalController {
 		try {
 			
 			int facultyId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+			String title=null;
 			try {
 				facultyId = Integer.parseInt(request.getParameter("add_fac_detail_id"));
+				title=request.getParameter("title");
 			} catch (Exception e) {
 				facultyId = 12;//0;
 			}
@@ -154,7 +156,7 @@ public class FacPersonalController {
 
 			model = new ModelAndView("FacultyDetails/personalDetail");
 
-			model.addObject("title", "Personal Details Form");
+			model.addObject("title", title);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -309,7 +311,7 @@ public class FacPersonalController {
 
 				model = new ModelAndView("FacultyDetails/mPhillDetailList");
 
-				model.addObject("title", "M.phill/Ph.D.  Details Form");
+				model.addObject("title", "M.Phill/Ph.D. Details List");
 
 				Info addAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "0", "1", "0",
 						"0", newModuleList);
@@ -356,9 +358,9 @@ public class FacPersonalController {
 
 		ModelAndView model = null;
 		try {
-
+			String title=request.getParameter("title");
 			model = new ModelAndView("FacultyDetails/mPhillDetail");
-			model.addObject("title", "M.phill/Ph.D.  Details Form");
+			model.addObject("title", title);
 
 			int facultyId =0;
 			try {
@@ -493,13 +495,13 @@ public class FacPersonalController {
 
 	 		model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
-			model.addObject("title", "Academic Details Form");
+			model.addObject("title", "Add Academic Details");
 			
 			int facultyId =0;
 			try {
 			facultyId=Integer.parseInt(request.getParameter("add_fac_detail_id"));
 			}catch (Exception e) {
-				facultyId = 12;
+				facultyId = 0;
 			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -542,6 +544,8 @@ public class FacPersonalController {
 			// model = new ModelAndView("FacultyDetails/academicDetails");
 
 			// model.addObject("title", "Academic Details ");
+			
+			
 
 			HttpSession session = request.getSession();
 
@@ -554,7 +558,7 @@ public class FacPersonalController {
 
 				model = new ModelAndView("FacultyDetails/academicDetails");
 
-				model.addObject("title", "Academic Details ");
+				model.addObject("title", "Academic Details List");
 
 				Info addAccess = AccessControll.checkAccess("showAcademicDetails", "showAcademicDetails", "0", "1", "0",
 						"0", newModuleList);

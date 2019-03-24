@@ -169,6 +169,7 @@
 													type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
+												
 												<input type="hidden" name="is_view" id="is_view" value="0">
 												<input type="hidden" id="trainnig_type" name="trainnig_type"
 													value="${trainnig_type}"> 
@@ -181,6 +182,8 @@
 											<div class="clearfix"></div>
 										</div>
 									</form>
+										<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

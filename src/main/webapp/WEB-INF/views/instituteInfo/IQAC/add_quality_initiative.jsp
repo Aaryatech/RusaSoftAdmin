@@ -127,6 +127,8 @@
 											value="0"> <input type="hidden" id="is_view"
 											name="is_view" value="0">
 									</form>
+										<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 
 									<div class="form-group">
 									<form action="${pageContext.request.contextPath}/deleteQualiInit/0"
