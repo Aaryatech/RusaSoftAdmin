@@ -67,7 +67,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/journalPub");
 
-				model.addObject("title", "Add Journal Publication Details");
+				model.addObject("title", "Add Faculty's Published Journal Details");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -197,7 +197,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/journalPubList");
 
-				model.addObject("title", "Journal Publication Details List");
+				model.addObject("title", "Faculty's Published Journal Details List");
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -263,7 +263,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/journalPub");
-				model.addObject("title", "Edit Journal Publication Details");
+				model.addObject("title", "Edit Faculty's Published Journal Details");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("journalId", journalId);
 
@@ -325,7 +325,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/researchProDetail");
 
-				model.addObject("title", "Add Research Details Form");
+				model.addObject("title", "Add Faculty's Research Project Details");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -467,7 +467,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/researchProjectList");
 
-				model.addObject("title", "Research Details List");
+				model.addObject("title", "Faculty's Research Project Details List");
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -533,7 +533,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/researchProDetail");
-				model.addObject("title", "Edit Research Details Form");
+				model.addObject("title", "Edit Faculty's Research Project Details");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("projectId", projId);
 
@@ -596,7 +596,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/subDetails");
-				model.addObject("title", "Subject Details List");
+				model.addObject("title", "Faculty's Teaching Subject Details List");
 				int yearId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -661,7 +661,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/addSubDetail");
 
-				model.addObject("title", "Add Subject Details");
+				model.addObject("title", "Add Faculty's Teaching Subject Details");
 				model.addObject("proList", proList);
 
 			} else {
@@ -792,7 +792,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/addSubDetail");
 
-				model.addObject("title", "Edit Subject Details");
+				model.addObject("title", "Edit Faculty's Teaching Subject Details");
 				model.addObject("proList", proList);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("subId", subId);
@@ -1175,7 +1175,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/swoc");
 
-				model.addObject("title", "SWOC Details Form");
+				model.addObject("title", "Faculty's SWOC Analysis");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
