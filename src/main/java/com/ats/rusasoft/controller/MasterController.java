@@ -1118,7 +1118,7 @@ public class MasterController {
 
 				int deptId = Integer.parseInt(request.getParameter("edit_dept_id"));
 
-				model.addObject("title", " Edit Institute Reginstration");
+				model.addObject("title", "Edit Department");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("deptId", deptId);
 				// getInstitute

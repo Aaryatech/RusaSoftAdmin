@@ -106,7 +106,7 @@ public class FacPersonalController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Personal Details List");
+				model.addObject("title", "Faculty Personal Details List");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -311,7 +311,7 @@ public class FacPersonalController {
 
 				model = new ModelAndView("FacultyDetails/mPhillDetailList");
 
-				model.addObject("title", "M.Phill/Ph.D. Details List");
+				model.addObject("title", "Faculty's M Phil / Ph.D Details List");
 
 				Info addAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "0", "1", "0",
 						"0", newModuleList);

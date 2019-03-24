@@ -147,15 +147,17 @@
 																	data-original-title="Edit"><span
 																	class="glyphicon glyphicon-edit"></span></a>
 																<a onclick="showAddDetail(${staffList.facultyId},1)"
-																	href="#"><span class="glyphicon glyphicon-edit"
+																	href="#"><span class="glyphicon glyphicon-user"
+"
 																	title="Personal Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																<a onclick="showAddDetail(${staffList.facultyId},2)"
-																	href="#"><span class="glyphicon glyphicon-edit"
+																	href="#"><span class="glyphicon glyphicon-star"
+"
 																	title="M Phil Phd Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																<a onclick="showAddDetail(${staffList.facultyId},3)"
-																	href="#"><span class="glyphicon glyphicon-edit"
+																	href="#"><span class="glyphicon glyphicon-book"
 																	title="Academic Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 															</c:if> | <c:if test="${deleteAccess == 0}">
@@ -291,15 +293,15 @@
 		    if(formType==1){
 				form.action=("addPersonalDetails");
 				
-				document.getElementById("title").value="Add Personal Details"
+				document.getElementById("title").value="Add Faculty Personal Details"
 		    }else  if(formType==2){
 		    	//2 means add Mphil Phd Details
 				form.action=("showAddMphillDetails");
-				document.getElementById("title").value="Add M.Phill/Ph.D. Details"
+				document.getElementById("title").value="Add Faculty's M Phil / Ph.D Details"
 		    }else  if(formType==3){
 		    	//3 means add Academic Details
 				form.action=("showAddAcademicDetails");
-				document.getElementById("title").value="Add Academic Details"
+				document.getElementById("title").value="Add Faculty Academic Details"
 		    }
 
 			form.submit();

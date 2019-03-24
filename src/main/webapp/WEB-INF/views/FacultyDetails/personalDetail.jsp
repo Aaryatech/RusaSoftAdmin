@@ -115,7 +115,7 @@
 													<label class="control-label col-sm-3" for="fac_name">
 														Name<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-9">
+													<div class="col-sm-6">
 														<input type="text" readonly class="form-control" id="fac_name"
 															name="fac_name" placeholder="Last Name Middle First Name"
 															value="${staff.facultyFirstName}" required>
@@ -126,7 +126,7 @@
 													<label class="control-label col-sm-3" for="fac_address">Address
 														<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-9">
+													<div class="col-sm-6">
 														<input type="text" onchange="trim(this)" maxlength="200" class="form-control" id="fac_address"
 															name="fac_address" placeholder="Permanent Address"
 															required value="${facPerDetail.fAddress}">
