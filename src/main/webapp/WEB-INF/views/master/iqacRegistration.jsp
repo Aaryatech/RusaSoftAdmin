@@ -356,16 +356,13 @@
 	</script>
 	<script type="text/javascript">
 		function checkUnique(inputValue, valueType) {
+			
 			document.getElementById("sub1").disabled = false;
 			document.getElementById("sub2").disabled = false;
 
-			//alert(inputValue+" "+valueType);
+			alert(inputValue+" "+valueType);
 
-			var primaryKey = $
-			{
-				miqc.iqacId
-			}
-			;
+			var primaryKey = ${miqc.iqacId}	;
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {
