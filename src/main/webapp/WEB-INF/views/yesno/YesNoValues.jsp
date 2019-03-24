@@ -299,7 +299,7 @@ table, th, td {
 																				name="dynamicprevyesnovalue${instituteYesNoList.instYesnoId}"
 																				placeholder="Enter value"
 																				value="${instituteYesNoList.instYesnoResponse}">
-																		</div>
+														 				</div>
 																	</div></td>
 															</tr>
 
