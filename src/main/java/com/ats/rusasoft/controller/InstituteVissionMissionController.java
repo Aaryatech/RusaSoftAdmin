@@ -39,7 +39,7 @@ public class InstituteVissionMissionController {
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/visionMission");
 		try {
 
-			model.addObject("title", "Vision & Mission");
+			model.addObject("title", "Institute Vision & Mission");
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
