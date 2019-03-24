@@ -72,18 +72,20 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<c:if test="${addAccess==0}">
-							<c:if test="${trainnig_type==1}">
-								<a
-									href="${pageContext.request.contextPath}/showAddProfDevelopment"
-									data-toggle="modal"><button type="submit"
-										class="btn btn-success">Add</button></a></c:if>
-										<c:if test="${trainnig_type==2}">
-								<a
-									href="${pageContext.request.contextPath}/showAddAdminDevelopment"
-									data-toggle="modal"><button type="submit"
-										class="btn btn-success">Add</button></a></c:if>
-										</c:if>
+								<c:if test="${addAccess==0}">
+									<c:if test="${trainnig_type==1}">
+										<a
+											href="${pageContext.request.contextPath}/showAddProfDevelopment"
+											data-toggle="modal"><button type="submit"
+												class="btn btn-success">Add</button></a>
+									</c:if>
+									<c:if test="${trainnig_type==2}">
+										<a
+											href="${pageContext.request.contextPath}/showAddAdminDevelopment"
+											data-toggle="modal"><button type="submit"
+												class="btn btn-success">Add</button></a>
+									</c:if>
+								</c:if>
 								<%-- <a
 									href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
@@ -95,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/deleteInstTraining/0/${training_type}"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 										<div id="example-4_wrapper"
 											class="dataTables_wrapper form-inline">
@@ -105,8 +106,7 @@
 												<thead>
 													<tr>
 														<th rowspan="2">Sr No</th>
-														<th rowspan="2">Title of Professional Development
-															Program for Teaching Staff</th>
+														<th rowspan="2">Title of Program</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Total Participants</th>
 														<th rowspan="2">Action</th>
@@ -116,40 +116,40 @@
 														<th>To Date</th>
 												</thead>
 												<tbody>
-												<c:forEach items="${instTrainList}" var="instTrain"
-													varStatus="count">
-													<tr>
-														<%-- <td><input type="checkbox" class="chk"
+													<c:forEach items="${instTrainList}" var="instTrain"
+														varStatus="count">
+														<tr>
+															<%-- <td><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${accOff.officerId}" /></td> --%>
-														<td align="center">${count.index+1}</td>
-														<td align="left">${instTrain.trainingTitle}</td>
-														<td align="center">${instTrain.trainingFromdt}</td>
-														<td align="center">${instTrain.trainingTodt}</td>
-														<td align="right">${instTrain.trainingPcount}</td>
-														<td align="center"><c:if test="${editAccess==0}">
-																<a onclick="showEditInstTrain(${instTrain.trainingId})"
-																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if><c:if test="${deleteAccess==0}">
-																<a
-																	href="${pageContext.request.contextPath}/deleteInstTraining/${instTrain.trainingId}/${instTrain.trainingType}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-															</c:if></td>
-													</tr>
-												</c:forEach>
+															<td align="center">${count.index+1}</td>
+															<td align="left">${instTrain.trainingTitle}</td>
+															<td align="center">${instTrain.trainingFromdt}</td>
+															<td align="center">${instTrain.trainingTodt}</td>
+															<td align="right">${instTrain.trainingPcount}</td>
+															<td align="center"><c:if test="${editAccess==0}">
+																	<a onclick="showEditInstTrain(${instTrain.trainingId})"
+																		href="#"><span class="glyphicon glyphicon-edit"
+																		title="Edit" data-animate=" animated fadeIn "
+																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+																<c:if test="${deleteAccess==0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteInstTraining/${instTrain.trainingId}/${instTrain.trainingType}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
+														</tr>
+													</c:forEach>
 												</tbody>
 											</table>
 										</div>
 										<input type="hidden" id="trainnig_type" name="trainnig_type"
-													value="${trainnig_type}"> 
-													<input type="hidden"
-													id="training_id" name="training_id"
-													value="0">
+											value="${trainnig_type}"> <input type="hidden"
+											id="training_id" name="training_id" value="0">
 									</form>
 								</div>
 							</div>
@@ -269,7 +269,7 @@
 		}
 	</script> -->
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 function showEditInstTrain(trainId){
 	document.getElementById("training_id").value=trainId;
