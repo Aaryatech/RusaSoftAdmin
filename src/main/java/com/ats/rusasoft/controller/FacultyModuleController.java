@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.FacultyActivity;
@@ -35,6 +37,7 @@ import com.ats.rusasoft.model.OrganizedList;
 import com.ats.rusasoft.model.OutreachType;
 import com.ats.rusasoft.model.StudMentorList;
 import com.ats.rusasoft.model.StudentMentoring;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
@@ -76,7 +79,7 @@ public class FacultyModuleController {
 			FacultyConference facConf = new FacultyConference(); 
 			model = new ModelAndView("FacultyDetails/publicationDetail");
 
-			model.addObject("title", "Publication Details Form");
+			model.addObject("title", "Publication Details");
 			model.addObject("facConf", facConf);
 			model.addObject("formindex", 2);
 
@@ -109,7 +112,7 @@ public class FacultyModuleController {
 			System.out.println("FacConfLIst:"+facConfList);
 			
 			model.addObject("facConList", facConfList);
-			model.addObject("title", "Publication Details Form");
+			model.addObject("title", "Publication Details List");
 			model.addObject("formindex", 2);
 
 		} catch (Exception e) {
@@ -182,6 +185,7 @@ public class FacultyModuleController {
 		
 		FacultyConference fConference = rest.postForObject(Constants.url+"/getFacConfByFacId", map, FacultyConference.class);
 		model.addObject("facConf", fConference);
+		model.addObject("title", "Edit Publication Details");
 		
 		return model;
 		
@@ -351,29 +355,21 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/insertFacultyActivity", method = RequestMethod.POST)
 	public String insertFacultyActivity(HttpServletRequest request, HttpServletResponse response) {
 	
-		FacultyActivity facAct = new FacultyActivity();
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
-		
-		FacultyConference facConf = new FacultyConference(); 
-		
-		HttpSession session = request.getSession();
-		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-		int yId = (int) session.getAttribute("acYearId");
-		int userId = (int) session.getAttribute("userId");
-		int activityId = 0;
 		try {
-			activityId = Integer.parseInt(request.getParameter("activity_id"));
 			
-		
-		if(activityId==0) {
-			facAct.setActivityId(0);
-		}else {
-		facAct.setActivityId(activityId);
-		}
-		
+			FacultyActivity facAct = new FacultyActivity();
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
+			
+			HttpSession session = request.getSession();
+			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			int yId = (int) session.getAttribute("acYearId");
+			int userId = (int) session.getAttribute("userId");
+			
+		facAct.setActivityId(Integer.parseInt(request.getParameter("activity_id")));
 		facAct.setFacultyId(facId.getRegPrimaryKey());
 		facAct.setYearId(yId);
 		facAct.setActivityType(request.getParameter("activity_type"));
@@ -396,7 +392,7 @@ public class FacultyModuleController {
 			e.printStackTrace();
 			
 		}
-		return "redirect:/showOrganized";
+		return "redirect:/showOrganizedList";
 		
 	}
 	
@@ -701,10 +697,20 @@ public class FacultyModuleController {
 
 		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showStudMentor", "showStudMentor", "1", "0", "0", "0", newModuleList);
 
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {*/
+
+			
 			model = new ModelAndView("FacultyDetails/studMentor");
 
-			HttpSession session = request.getSession();
+			
 			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -717,6 +723,27 @@ public class FacultyModuleController {
 			model.addObject("studL", mentorList);
 			
 			model.addObject("title", "Mentoring Details Form");
+			
+			/*
+			 * Info add = AccessControll.checkAccess("showIqacList", "showIqacList",
+			 * "0","1", "0", "0", newModuleList); Info edit =
+			 * AccessControll.checkAccess("showIqacList", "showIqacList", "0", "0", "1",
+			 * "0", newModuleList); Info delete =
+			 * AccessControll.checkAccess("showIqacList","showIqacList", "0", "0", "0", "1",
+			 * newModuleList);
+			 * 
+			 * if (add.isError() == false) { System.out.println(" add   Accessable ");
+			 * model.addObject("addAccess", 0);
+			 * 
+			 * } if (edit.isError() == false) { System.out.println(" edit   Accessable ");
+			 * model.addObject("editAccess", 0); } if (delete.isError() == false) {
+			 * System.out.println(" delete   Accessable "); model.addObject("deleteAccess",
+			 * 0);
+			 * 
+			 * }
+			 * 
+			 * }
+			 */
 
 		} catch (Exception e) {
 
@@ -735,12 +762,23 @@ public class FacultyModuleController {
 
 		ModelAndView model = null;
 		try {
-			StudentMentoring stud = new StudentMentoring();
-			model = new ModelAndView("FacultyDetails/addStudMentor");
-		
-			model.addObject("title", "Add Mentoring Details Form");
-			model.addObject("stud", stud);
+			/*HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+				Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "1", "0", "0",
+						newModuleList);
 
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {*/
+					StudentMentoring stud = new StudentMentoring();
+					model = new ModelAndView("FacultyDetails/addStudMentor");
+				
+					model.addObject("title", "Add Mentoring Details Form");
+					model.addObject("stud", stud);
+				//}
 		} catch (Exception e) {
 
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
@@ -765,46 +803,33 @@ public class FacultyModuleController {
 		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 		int yId = (int) session.getAttribute("acYearId");
 		int userId = (int) session.getAttribute("userId");
-		int menId = 0;
-		int studNo=0;
-		String count = request.getParameter("stud_no");
-		System.out.println("count:"+count);
+		
+		
 		try {
-			studNo = Integer.parseInt(count);
-			System.out.println("count:"+studNo);
-			 menId = Integer.parseInt(request.getParameter("menId"));
 			
-			} catch (Exception e) {
-				menId = 0;
 			
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-			
-			if(menId==0) {
-				stud.setMenId(0);
-			}else {
-				stud.setMenId(menId);
-			}
-							
-			
-			stud.setFacultyId(facId.getRegPrimaryKey());
-			stud.setMenStuCount(studNo);
+			stud.setMenId( Integer.parseInt(request.getParameter("menId")));	
+			stud.setFacultyId(facId.getGetData().getUserDetailId());
+			stud.setMenStuCount( Integer.parseInt(request.getParameter("stud_no")));
 			stud.setYearId(yId);
 			stud.setDelStatus(1);
 			stud.setIsActive(1);
-			stud.setMakerUserId(userId);
+			stud.setMakerUserId(facId.getGetData().getUserInstituteId());
 			stud.setMakerEnterDatetime(curDateTime);
 			stud.setExInt1(0);
 			stud.setExVar1("NA");
 			
 			System.out.println("Mentor:"+stud.toString());
-			
 			StudentMentoring saveStud = rest.postForObject(Constants.url+"/insertStudentMentoringDetails", stud, StudentMentoring.class);
-	
+		} catch (Exception e) {
+			
+		
+		System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
 
+		e.printStackTrace();
+
+	}
+	
 		return "redirect:/showStudMentor";
 
 	}
@@ -812,8 +837,23 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/editFacultyMentor/{menId}", method = RequestMethod.GET)
 	public ModelAndView editFacultyMentor(@PathVariable("menId") int menId,HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView model =  new ModelAndView("FacultyDetails/addStudMentor");
-		//int countid = Integer.parseInt(request.getParameter("menId"));
+		
+		ModelAndView model = null;
+		try {
+		HttpSession session = request.getSession();
+		/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "1", "0",
+				newModuleList);
+
+		if (view.isError() == true) {
+
+			model = new ModelAndView("accessDenied");
+
+		} else {*/
+
+		model =  new ModelAndView("FacultyDetails/addStudMentor");
+		
 		System.out.println("MID:"+menId);
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		
@@ -825,6 +865,11 @@ public class FacultyModuleController {
 		model.addObject("title", "Edit Monitoring Details");
 		
 		model.addObject("stud", studMontr);
+		//}
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
 		return model;
 		
 	}
@@ -832,19 +877,38 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/deleteFacultyMentor/{menId}", method = RequestMethod.GET)
 	public String deleteFacultyMentor(@PathVariable("menId") int menId,HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView model =  new ModelAndView("FacultyDetails/addStudMentor");
-		//int countid = Integer.parseInt(request.getParameter("menId"));
-		System.out.println("MID:"+menId);
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		
-		map.add("mId", menId);
+		ModelAndView model=null;
+	
+		String a = null;
 		
-		StudentMentoring studMontr = rest.postForObject(Constants.url+"/deleteFacultyMentoringDetailsById", map, StudentMentoring.class); 
-		System.out.println("Data:"+studMontr);
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "0", "1", newModuleList);
+			if (view.isError() == true) {
+	
+				a = "redirect:/accessDenied";
+	
+				} else {
+			model =  new ModelAndView("FacultyDetails/addStudMentor");
+			//int countid = Integer.parseInt(request.getParameter("menId"));
+			System.out.println("MID:"+menId);
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			
+			map.add("mId", menId);
+			
+			StudentMentoring studMontr = rest.postForObject(Constants.url+"/deleteFacultyMentoringDetailsById", map, StudentMentoring.class); 
+			System.out.println("Data:"+studMontr);
+			
+			model.addObject("title", "Edit Monitoring Details");
+			
+			model.addObject("stud", studMontr);
+		}
+		}catch(Exception e) {
+		e.printStackTrace();
 		
-		model.addObject("title", "Edit Monitoring Details");
-		
-		model.addObject("stud", studMontr);
+	}
 		return "redirect:/showStudMentor";
 		
 	}
@@ -937,49 +1001,43 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/insertFacultyBook", method = RequestMethod.POST)
 	public String insertFacultyBook(HttpServletRequest request, HttpServletResponse response) {
 		
-		FacultyBook facBook = new FacultyBook();
-		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
-		
-		HttpSession session = request.getSession();
-		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-		int yId = (int) session.getAttribute("acYearId");
-		int userId = (int) session.getAttribute("userId");
-		int bookId=0;
 		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
 			
-			bookId = Integer.parseInt(request.getParameter("book_id"));
+			HttpSession session = request.getSession();
+			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			int yId = (int) session.getAttribute("acYearId");
+			int userId = (int) session.getAttribute("userId");
+			
+			FacultyBook facBook = new FacultyBook();
+			
+			facBook.setBookId(Integer.parseInt(request.getParameter("book_id")));
+			
+			facBook.setFacultyId(facId.getRegPrimaryKey());
+			facBook.setYearId(yId);
+			facBook.setBookTitle(request.getParameter("book_title"));
+			facBook.setBookEdition(request.getParameter("book_edition"));
+			facBook.setBookAuthor(request.getParameter("author"));
+			facBook.setBookCoauther1(request.getParameter("co_author1"));
+			facBook.setBookCoauther2(request.getParameter("co_author2"));
+			facBook.setBookCoauther3(request.getParameter("co_author3"));
+			facBook.setBookPublisher(request.getParameter("publisher"));
+			facBook.setBookIsbn(request.getParameter("isbn"));
+			facBook.setBookPubYear(request.getParameter("year_publication"));
+			facBook.setDelStatus(1);
+			facBook.setIsActive(1);
+			facBook.setMakerUserId(userId);
+			facBook.setMakerEnterDatetime(curDateTime);
+			facBook.setExInt1(0);
+			facBook.setExVar1("NA");
+		
+			FacultyBook facpubbook = rest.postForObject(Constants.url+"/savefacultyPubBook", facBook, FacultyBook.class);
 		}catch(Exception e) {
 			e.printStackTrace();
-			bookId=0;
+			
 		}
-		if(bookId==0) {
-			facBook.setBookId(0);
-		}else {
-			facBook.setBookId(bookId);
-		}
-		facBook.setFacultyId(facId.getRegPrimaryKey());
-		facBook.setYearId(yId);
-		facBook.setBookTitle(request.getParameter("book_title"));
-		facBook.setBookEdition(request.getParameter("book_edition"));
-		facBook.setBookAuthor(request.getParameter("author"));
-		facBook.setBookCoauther1(request.getParameter("co_author1"));
-		facBook.setBookCoauther2(request.getParameter("co_author2"));
-		facBook.setBookCoauther3(request.getParameter("co_author3"));
-		facBook.setBookPublisher(request.getParameter("publisher"));
-		facBook.setBookIsbn(request.getParameter("isbn"));
-		facBook.setBookPubYear(request.getParameter("year_publication"));
-		facBook.setDelStatus(1);
-		facBook.setIsActive(1);
-		facBook.setMakerUserId(userId);
-		facBook.setMakerEnterDatetime(curDateTime);
-		facBook.setExInt1(0);
-		facBook.setExVar1("NA");
-		
-		FacultyBook facpubbook = rest.postForObject(Constants.url+"/savefacultyPubBook", facBook, FacultyBook.class);
-	
 		return "redirect:/showBookPubList";
 		
 	}
@@ -1106,51 +1164,48 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/insertOutReachContri", method = RequestMethod.POST)
 	public String insertOutReachContri(HttpServletRequest request, HttpServletResponse response) {
 		
-		FacultyContribution facCon = new  FacultyContribution();
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
-		
-		HttpSession session = request.getSession();
-		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-		int yId = (int) session.getAttribute("acYearId");
-		int userId = (int) session.getAttribute("userId");
-		int contriId = 0;
 		
 		try {
 			
-			contriId = Integer.parseInt(request.getParameter("fac_contriId"));
+			
+			FacultyContribution facCon = new  FacultyContribution();
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
+			
+			HttpSession session = request.getSession();
+			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			int yId = (int) session.getAttribute("acYearId");
+			int userId = (int) session.getAttribute("userId");
+	
+			facCon.setConId(Integer.parseInt(request.getParameter("fac_contriId")));
+			
+			facCon.setFacultyId(facId.getRegPrimaryKey());
+			facCon.setYearId(yId);
+			facCon.setConLevel(request.getParameter("level"));
+			facCon.setConName(request.getParameter("con_name"));
+			facCon.setConUniversity(request.getParameter("university"));
+			facCon.setConFrom(request.getParameter("from_date"));
+			facCon.setConTo(request.getParameter("to_date"));
+			facCon.setConExamSetting(Integer.parseInt(request.getParameter("examSetting")));
+			facCon.setConAsEvaluation(Integer.parseInt(request.getParameter("ansEvaluation")));
+			facCon.setConAsModeration(Integer.parseInt(request.getParameter("ansmod")));
+			facCon.setDelStatus(1);
+			facCon.setIsActive(1);
+			facCon.setMakerUserId(userId);
+			facCon.setMakerEnterDatetime(curDateTime);
+			facCon.setExtraInt1(0);
+			facCon.setExtraVar1("NA");
+			
+			FacultyContribution facContr = rest.postForObject(Constants.url+"/saveOutReachContri", facCon, FacultyContribution.class);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
-			 contriId = 0;
+			 
 		}
-		
-		if(contriId == 0) {
-			facCon.setConId(0);
-		}else {
-			facCon.setConId(contriId);
-		}
-		facCon.setFacultyId(facId.getRegPrimaryKey());
-		facCon.setYearId(yId);
-		facCon.setConLevel(request.getParameter("level"));
-		facCon.setConName(request.getParameter("con_name"));
-		facCon.setConUniversity(request.getParameter("university"));
-		facCon.setConFrom(request.getParameter("from_date"));
-		facCon.setConTo(request.getParameter("to_date"));
-		facCon.setConExamSetting(Integer.parseInt(request.getParameter("examSetting")));
-		facCon.setConAsEvaluation(Integer.parseInt(request.getParameter("ansEvaluation")));
-		facCon.setConAsModeration(Integer.parseInt(request.getParameter("ansmod")));
-		facCon.setDelStatus(1);
-		facCon.setIsActive(1);
-		facCon.setMakerUserId(userId);
-		facCon.setMakerEnterDatetime(curDateTime);
-		facCon.setExtraInt1(0);
-		facCon.setExtraVar1("NA");
-		
-		FacultyContribution facContr = rest.postForObject(Constants.url+"/saveOutReachContri", facCon, FacultyContribution.class);
-		
-		return "redirect:/showOutReachContri";
+		return "redirect:/showOutReachContriList";
 		
 	}
 
@@ -1238,7 +1293,7 @@ public class FacultyModuleController {
 			FacultyPhdGuide phd = new FacultyPhdGuide();
 			model = new ModelAndView("FacultyDetails/phdGuidence");
 
-			model.addObject("title", "Ph.D. Guidance");
+			model.addObject("title", "Ph.D. Guideline");
 			model.addObject("phd", phd);
 
 		} catch (Exception e) {
@@ -1290,44 +1345,24 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/insertPhdGuide", method = RequestMethod.POST)
 	public String insertPhdGuide(HttpServletRequest request, HttpServletResponse response) {
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
 		
-		HttpSession session = request.getSession();
-		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-		int yId = (int) session.getAttribute("acYearId");
-		int userId = (int) session.getAttribute("userId");
-		
-		FacultyPhdGuide phd = new FacultyPhdGuide();
-		
-		int phdId = 0;
-		String coGuid = "";
-		String phdYrAwarded = "";
 		try {
-			phdId = Integer.parseInt(request.getParameter("phdGiudeId"));
-			coGuid = request.getParameter("co_guide_name");
-			phdYrAwarded = request.getParameter("phd_year_awarded");
 			
-			if(phdId==0) {
-				phd.setPhdId(0);
-			}else {
-				phd.setPhdId(phdId);
-			}
+
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
 			
+			HttpSession session = request.getSession();
+			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			int yId = (int) session.getAttribute("acYearId");
+			int userId = (int) session.getAttribute("userId");
 			
-			if(coGuid == "" || coGuid == null) {
-				phd.setCoGuideName("NA");
-			}else {
-				phd.setCoGuideName(coGuid);
-			}
+			FacultyPhdGuide phd = new FacultyPhdGuide();
 			
-			if(phdYrAwarded == "" || phdYrAwarded == null) {
-				phd.setPhdAwardedYear("0000-00-00");
-			}else {
-				phd.setPhdAwardedYear(phdYrAwarded);
-			}
-			
+			phd.setPhdId(Integer.parseInt(request.getParameter("phdGiudeId")));
+			phd.setCoGuideName(request.getParameter("co_guide_name"));
+			phd.setPhdAwardedYear(request.getParameter("phd_year_awarded"));
 			phd.setFacultyId(facId.getRegPrimaryKey());
 			phd.setYearId(yId);
 			phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
@@ -1372,7 +1407,7 @@ public class FacultyModuleController {
 		
 		FacultyPhdGuide phdData =  rest.postForObject(Constants.url+"/getPhdGuideById", map, FacultyPhdGuide.class);
 		model.addObject("phd", phdData);
-		model.addObject("title", "Edit Phd Guide");
+		model.addObject("title", "Edit Ph.D. Guideline");
 	}catch(Exception e) {
 		e.printStackTrace(); 
 	}
