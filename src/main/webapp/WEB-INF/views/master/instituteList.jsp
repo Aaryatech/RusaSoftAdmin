@@ -53,26 +53,26 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-							<c:choose>
-							<c:when test="${addAccess==0}">
-							<a
-									href="${pageContext.request.contextPath}/showRegisterInstitute"><button
-										type="button" class="btn btn-success">Register
-										Institute</button></a> <a class="box_toggle fa fa-chevron-down"></a>
-							</c:when>
-							<c:otherwise>
-							
-							</c:otherwise>
-							
-							</c:choose>
-								
+								<c:choose>
+									<c:when test="${addAccess==0}">
+										<a
+											href="${pageContext.request.contextPath}/showRegisterInstitute"><button
+												type="button" class="btn btn-success">Add</button></a>
+									</c:when>
+									<c:otherwise>
+
+									</c:otherwise>
+
+								</c:choose>
+
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
 
 							</div>
 
 						</header>
-						<form action="${pageContext.request.contextPath}/deleteInstitutes/0"
+						<form
+							action="${pageContext.request.contextPath}/deleteInstitutes/0"
 							method="get" id="insListForm">
 							<div class="content-body">
 								<div class="row">
@@ -136,33 +136,26 @@
 														<td>${institute.email}</td>
 
 
-														<td align="center">
-														
-														<c:if test="${editAccess==0}">
-														<a href="#" onclick="showEditInstitute(${institute.instituteId})"><span
-																class="glyphicon glyphicon-edit" title="Edit"
-																data-animate=" animated fadeIn " rel="tooltip"></span></a>
-														</c:if>&nbsp;&nbsp;&nbsp;&nbsp;
-														
-													
-														<c:if test="${deleteAccess==0}">
-														<a
-															href="${pageContext.request.contextPath}/deleteInstitutes/${institute.instituteId}"
-															onClick="return confirm('Are you sure want to delete this record');"
-															rel="tooltip" data-color-class="danger" title="Delete"
-															data-animate=" animated fadeIn " data-toggle="tooltip"
-															data-original-title="Delete  record"><span
-																class="glyphicon glyphicon-remove"></span></a>
-														</c:if>
-														
-													
-															</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a href="#"
+																	onclick="showEditInstitute(${institute.instituteId})"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+															</c:if>&nbsp;&nbsp;&nbsp;&nbsp; <c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteInstitutes/${institute.instituteId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
 													</tr>
 												</c:forEach>
 											</tbody>
-											
+
 										</table>
-									<%-- 	<div class="col-lg-1">
+										<%-- 	<div class="col-lg-1">
 <c:if test="${deleteAccess==0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
@@ -172,7 +165,8 @@
 
 
 										</div> --%>
-										<input type="hidden" id="edit_inst_id"   name="edit_inst_id" value="0">
+										<input type="hidden" id="edit_inst_id" name="edit_inst_id"
+											value="0">
 
 									</div>
 								</div>

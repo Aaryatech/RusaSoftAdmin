@@ -53,7 +53,7 @@
 								<c:if test="${addAccess==0}">
 									<a href="${pageContext.request.contextPath}/showRegAcc"><button
 											type="button" class="btn btn-success">Add</button></a>
-									<a class="box_toggle fa fa-chevron-down"></a>
+
 								</c:if>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -113,13 +113,15 @@
 														<td>${accOff.email}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEditaccOff(${accOff.officerId})"
-																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if><c:if test="${deleteAccess==0}">
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	title="Edit" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+															<c:if test="${deleteAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteaccOff/${accOff.officerId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
+																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>

@@ -95,7 +95,7 @@
 									<c:otherwise>
 										<a href="${pageContext.request.contextPath}/editIqac"><button
 												type="button" class="btn btn-info">Back</button></a>
-										<a class="box_toggle fa fa-chevron-down"></a>
+
 									</c:otherwise>
 								</c:choose>
 
@@ -118,138 +118,138 @@
 
 									<!-- <div class="tab-content">
 										<div class="tab-pane fade in active" id="home"> -->
-											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/submitChangeIqacorEditIqac"
-												method="post" name="form_sample_2" id="form_sample_2"
-												onsubmit="return checkBeforeSubmit()">
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/submitChangeIqacorEditIqac"
+										method="post" name="form_sample_2" id="form_sample_2"
+										onsubmit="return checkBeforeSubmit()">
 
-												<div class="row">
-													<div class="col-md-12">
-														<c:choose>
-															<c:when test="${editIqac==1}"> 
-															</c:when>
-															<c:otherwise>
-																<p style="color: red;">Notice : Previous IQAC will Be Block </p>
-																<br>
-															</c:otherwise>
-														</c:choose>
-														
-														<!-- <div class="col-xs-12"> -->
-														<input type="hidden" id="iqac_id" name="iqac_id"
-															value="${miqc.iqacId}">
+										<div class="row">
+											<div class="col-md-12">
+												<c:choose>
+													<c:when test="${editIqac==1}">
+													</c:when>
+													<c:otherwise>
+														<p style="color: red;">Notice : Previous IQAC will Be
+															Block</p>
+														<br>
+													</c:otherwise>
+												</c:choose>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">IQAC
-																I/C Name <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="iqacName"
-																	name="iqacName" placeholder="Name"
-																	value="${miqc.iqacName}" required>
-															</div>
-														</div>
+												<!-- <div class="col-xs-12"> -->
+												<input type="hidden" id="iqac_id" name="iqac_id"
+													value="${miqc.iqacId}">
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">
-																Designation <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="designation" name="designation"
-																	class="form-control" onchange="showForm()" required>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_name">IQAC
+														I/C Name <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="iqacName"
+															name="iqacName" placeholder="Name"
+															value="${miqc.iqacName}" required>
+													</div>
+												</div>
 
-																	<c:forEach items="${desigList}" var="makeList">
-																		<c:choose>
-																			<c:when
-																				test="${makeList.designationId == miqc.desgntnId}">
-																				<option value="${makeList.designationId}"
-																					selected="selected">${makeList.designationName}</option>
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${makeList.designationId}">${makeList.designationName}</option>
-																			</c:otherwise>
-																		</c:choose>
-																	</c:forEach>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">
+														Designation <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="designation" name="designation"
+															class="form-control" onchange="showForm()" required>
+
+															<c:forEach items="${desigList}" var="makeList">
+																<c:choose>
+																	<c:when
+																		test="${makeList.designationId == miqc.desgntnId}">
+																		<option value="${makeList.designationId}"
+																			selected="selected">${makeList.designationName}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${makeList.designationId}">${makeList.designationName}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
 
 
 
-																	<!-- <option value="1">Assistant Professor</option>
+															<!-- <option value="1">Assistant Professor</option>
 																	<option value="2">Associate Professor</option>
 																	<option value="3">Professor</option>
 																	<option value="4">Registrar</option>
 																	<option value="7">Any Other</option> -->
-																</select>
-															</div>
-														</div>
+														</select>
+													</div>
+												</div>
 
 
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Joining
-																Date <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker"
-																	id="dateOfJoin" value="${miqc.joiningDate}"
-																	name="dateOfJoin" placeholder="Joining Date" required>
-															</div>
-														</div>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Joining
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-3">
+														<input type="text" class="form-control datepicker"
+															id="dateOfJoin" value="${miqc.joiningDate}"
+															name="dateOfJoin" placeholder="Joining Date" required>
+													</div>
+												</div>
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Contact
-																No. <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="contactNo"
-																	onchange="checkUnique(this.value,1)" name="contactNo"
-																	pattern="[7-9]{1}[0-9]{9}" maxlength="10"
-																	title="Phone number with 7-9 and remaing 9 digit with 0-9"
-																	placeholder="Mobile Number" value="${miqc.contactNo}"
-																	required>
-																<p class="desc text-danger fontsize11">Note: OTP
-																	will be sent on this mobile number for verification</p>
-															</div>
-														</div>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">Contact
+														No. <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="contactNo"
+															onchange="checkUnique(this.value,1)" name="contactNo"
+															pattern="[7-9]{1}[0-9]{9}" maxlength="10"
+															title="Phone number with 7-9 and remaing 9 digit with 0-9"
+															placeholder="Mobile Number" value="${miqc.contactNo}"
+															required>
+														<p class="desc text-danger fontsize11">Note: OTP will
+															be sent on this mobile number for verification</p>
+													</div>
+												</div>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Email
-																ID(Official) <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email"
-																	onchange="checkUnique(this.value,2)" name="email"
-																	placeholder="abc@xyz.com" value="${miqc.email}"
-																	required>
-																<p class="desc font-italic fontsize11">Note:
-																	Verification mail will be sent on this Email id</p>
-															</div>
-
-														</div>
-
-
-														<div class="form-group">
-															<div class="col-sm-offset-3 col-sm-9">
-																<input type="submit" id="sub1" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Add">
-																<!-- <input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next"> -->
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
-
-														<!-- </div> -->
-														<input type="hidden" id="acc_off_id" name="acc_off_id"
-															value="${accOff.officerId}"> <input type="hidden"
-															id="is_view" name="is_view" value="0">
-
-														<div class="clearfix"></div>
-
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">Email
+														ID(Official) <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="email" class="form-control" id="email"
+															onchange="checkUnique(this.value,2)" name="email"
+															placeholder="abc@xyz.com" value="${miqc.email}" required>
+														<p class="desc font-italic fontsize11">Note:
+															Verification mail will be sent on this Email id</p>
 													</div>
 
 												</div>
-											</form>
-										<!-- </div>
+
+
+												<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
+														<input type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)" value="Add">
+														<!-- <input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next"> -->
+														<button type="reset" class="btn btn-default">Reset</button>
+													</div>
+												</div>
+
+												<!-- </div> -->
+												<input type="hidden" id="acc_off_id" name="acc_off_id"
+													value="${accOff.officerId}"> <input type="hidden"
+													id="is_view" name="is_view" value="0">
+
+												<div class="clearfix"></div>
+
+											</div>
+
+										</div>
+									</form>
+									<!-- </div>
 
 									</div> -->
 

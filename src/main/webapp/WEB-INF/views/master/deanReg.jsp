@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="showIsReg()"  >
-<c:url value="/chkFields" var="chkFields"></c:url>
+<body class=" " onload="showIsReg()">
+	<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -64,7 +64,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -97,200 +97,201 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertNewDean"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<!-- <li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Dean Register Form
-											</a></li> -->
 
+										<div>
 
-										</ul>
+											<input type="hidden" class="form-control" id="dean_id"
+												name="dean_id" value="${dean.deanId}">
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+											<div class="col-xs-12">
 
-												<div>
+												<div class="form-group">
 
-												<input type="hidden" class="form-control" id="dean_id" name="dean_id" 
-														value="${dean.deanId}">
-
-													<div class="col-xs-12">
-													
-														<div class="form-group">
-														
-															<label class="control-label col-sm-2" for="page_name">
-																Name<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="dean_name" required
-																	name="dean_name" placeholder="Dean R&D Name" pattern="^(?!\s*$).+"
-																	value="${dean.deanName}">
-															</div>
-														</div>
+													<label class="control-label col-sm-2" for="page_name">
+														Name<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="dean_name"
+															required name="dean_name" placeholder="Dean R&D Name"
+															pattern="^(?!\s*$).+" value="${dean.deanName}">
+													</div>
+												</div>
 
 
 
-														
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Contact
-																No <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" 
-																	maxlength="10" class="form-control" id="contact_no" onchange="checkUnique(this.value,1)"
-																	name="contact_no" placeholder="Mobile No" required value="${dean.contactNo}" pattern="^(?!\s*$).+"
-																	onkeypress='return restrictAlphabets(event)'> 
-																	<p class="desc text-danger fontsize11">Note: OTP
-																	will be sent on this mobile number for verification</p>
-															</div>
-														</div>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email ID(Official)
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="email" class="form-control" id="email" onchange="checkUnique(this.value,2)" pattern="^(?!\s*$).+"
-																	name="email" placeholder="abc@xyz.com" required value="${dean.email}">
-																	<p class="desc font-italic fontsize11">Note:
-																		Verification mail will be sent on this Email id</p>
-															</div>
-														</div>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Contact
+														No <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+															maxlength="10" class="form-control" id="contact_no"
+															onchange="checkUnique(this.value,1)" name="contact_no"
+															placeholder="Mobile No" required
+															value="${dean.contactNo}" pattern="^(?!\s*$).+"
+															onkeypress='return restrictAlphabets(event)'>
+														<p class="desc text-danger fontsize11">Note: OTP will
+															be sent on this mobile number for verification</p>
+													</div>
+												</div>
 
-													<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Qualification 
-															<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="hod_quolf" name="hod_quolf"
-																	class="form-control" required>
-																	<c:forEach items="${quolfList}" var="quolf">
-																		<c:choose>
-																			<c:when test="${dean.qualificationId==quolf.qualificationId}">
-																				<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Email
+														ID(Official) <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="email" class="form-control" id="email"
+															onchange="checkUnique(this.value,2)"
+															pattern="^(?!\s*$).+" name="email"
+															placeholder="abc@xyz.com" required value="${dean.email}">
+														<p class="desc font-italic fontsize11">Note:
+															Verification mail will be sent on this Email id</p>
+													</div>
+												</div>
 
-																			</c:when>
-																			<c:otherwise>
-
-																				<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-
-																</select>
-															</div>
-														</div>
-
-														
-																
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Joining
-																Date <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="join_date" pattern="^(?!\s*$).+"
-																	onkeypress='return restrictAlphabets(event)'
-																	name="join_date" placeholder="Joining Date" required value="${dean.joiningDate}">
-															</div>
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Is Currently Working<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Qualification
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="hod_quolf" name="hod_quolf"
+															class="form-control" required>
+															<c:forEach items="${quolfList}" var="quolf">
 																<c:choose>
-																	<c:when test="${dean.deanId==0}">
+																	<c:when
+																		test="${dean.qualificationId==quolf.qualificationId}">
+																		<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
-																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1" 
-																			onclick="setDate(this.value)">Yes 
-																<input type="radio" id="is_registration"
-																			name="is_registration" value="0" checked
-																			onclick="setDate(this.value)">No 
-															
-															</c:when>
+																	</c:when>
 																	<c:otherwise>
 
-																		<c:choose>
-																			<c:when test="${empty dean.realivingDate}">
-																				<input type="radio" id="is_registration"
-																					name="is_registration" value="1" checked
-																					onclick="setDate(this.value)">Yes  
+																		<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																	</c:otherwise>
+
+																</c:choose>
+
+															</c:forEach>
+
+														</select>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Joining
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-3">
+														<input type="text" class="form-control datepicker"
+															id="join_date" pattern="^(?!\s*$).+"
+															onkeypress='return restrictAlphabets(event)'
+															name="join_date" placeholder="Joining Date" required
+															value="${dean.joiningDate}">
+													</div>
+													<label class="control-label col-sm-3" for="planning"
+														style="text-align: left;">Is Currently Working<span
+														class="text-danger">*</span>
+													</label>
+													<div class="col-sm-2">
+														<c:choose>
+															<c:when test="${dean.deanId==0}">
+
 																<input type="radio" id="is_registration"
-																					name="is_registration" value="0"
-																					onclick="setDate(this.value)">No 
+																	name="is_registration" value="1"
+																	onclick="setDate(this.value)">Yes 
+																<input type="radio" id="is_registration"
+																	name="is_registration" value="0" checked
+																	onclick="setDate(this.value)">No 
+															
+															</c:when>
+															<c:otherwise>
+
+																<c:choose>
+																	<c:when test="${empty dean.realivingDate}">
+																		<input type="radio" id="is_registration"
+																			name="is_registration" value="1" checked
+																			onclick="setDate(this.value)">Yes  
+																<input type="radio" id="is_registration"
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No 
 															
 																
 																</c:when>
-																			<c:otherwise>
-																				<input type="radio" id="is_registration"
-																					name="is_registration" value="1" 
-																					onclick="setDate(this.value)">Yes
+																	<c:otherwise>
+																		<input type="radio" id="is_registration"
+																			name="is_registration" value="1"
+																			onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration" checked
-																					name="is_registration" value="0"
-																					onclick="setDate(this.value)">No
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No
 															
 																
 																</c:otherwise>
 
-																		</c:choose>
-
-																	</c:otherwise>
-
-
 																</c:choose>
 
-															</div>
-														</div>
-													
-													
-														<div class="form-group" id="abc" style="display: none">
-															<label class="control-label col-sm-2" for="page_order">Relieving
-																Date <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="acc_off_relDate" onkeypress='return restrictAlphabets(event)'
-																	pattern="^(?!\s*$).+" onkeypress='return restrictAlphabets(event)'
-																	name="acc_off_relDate" placeholder="Relieving Date" value="${dean.realivingDate}">
-															</div>
-														</div>
+															</c:otherwise>
+
+
+														</c:choose>
 
 													</div>
-
 												</div>
 
 
-											  <div class="form-group">
-											  <div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+												<div class="form-group" id="abc" style="display: none">
+													<label class="control-label col-sm-2" for="page_order">Relieving
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-3">
+														<input type="text" class="form-control datepicker"
+															id="acc_off_relDate"
+															onkeypress='return restrictAlphabets(event)'
+															pattern="^(?!\s*$).+"
+															onkeypress='return restrictAlphabets(event)'
+															name="acc_off_relDate" placeholder="Relieving Date"
+															value="${dean.realivingDate}">
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" id="sub2" class="btn btn-primary"
+													onclick="submit_f(0)"
+													value="Save &
 																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-															<%-- <div class="col-sm-offset-2 col-sm-10">
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+											<%-- <div class="col-sm-offset-2 col-sm-10">
 																<button type="submit" class="btn btn-primary">Add</button>
 																	<a href="${pageContext.request.contextPath}/showDeanList"><button
 										                              type="button" class="btn btn-primary">Save & Next</button></a>
 																<button type="reset" class="btn btn-default">Reset</button>
 															</div> --%>
-														</div>
-												
-													<input type="hidden" id="is_view" name="is_view" value="0">
-													
-													
-
-
-
-												<div class="clearfix"></div>
-
-											</div>
-
 										</div>
+
+										<input type="hidden" id="is_view" name="is_view" value="0">
+
+
+
+
+
+										<div class="clearfix"></div>
+
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
@@ -315,7 +316,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,
@@ -346,7 +347,7 @@
       return false;
     }    
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function () {
 	 
     $('.datepicker').datepicker({
@@ -379,7 +380,7 @@ $(function () {
 	
 
 	</script>
-<script type="text/javascript">
+	<script type="text/javascript">
 	function setDate(value){
 		//alert("Value " +value)
 		if(value==1){
@@ -400,7 +401,7 @@ $(function () {
 	}
 	
 	</script>
-<script type="text/javascript">
+	<script type="text/javascript">
 
 	function checkUnique(inputValue,valueType){
 		document.getElementById("sub1").disabled=false;
@@ -508,8 +509,8 @@ $(function () {
 		} */
 		
 	</script>
-	
-		<script>
+
+	<script>
 		
 	$("#contactNo").on("keypress keyup blur",function (event) {
         //this.value = this.value.replace(/[^0-9\.]/g,'');
@@ -527,8 +528,8 @@ $(function () {
         }
     });
 	</script>
-	
-	 <script type="text/javascript">
+
+	<script type="text/javascript">
 	
 	function showIsReg(){
 		//alert("Hi");
