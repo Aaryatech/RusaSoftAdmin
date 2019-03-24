@@ -131,8 +131,8 @@
 															value="${bList.instSchemeId}" /></td> --%>
 														<td>${count.index+1}</td>
 														<td>${gndrList.gprogName}</td>
-														<td>${gndrList.gprogFromdt}</td>
-														<td>${gndrList.gprogTodt}</td>
+														<td align="center">${gndrList.gprogFromdt}</td>
+														<td align="center">${gndrList.gprogTodt}</td>
 														<td>${gndrList.gprogPcount}</td>
 														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
