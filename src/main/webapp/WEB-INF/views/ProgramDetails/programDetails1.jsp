@@ -101,6 +101,13 @@
 																data-animate=" animated fadeIn " data-toggle="tooltip"
 																data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;
+														</c:if> <c:if test="${isAdd==1}">
+															<a href="${pageContext.request.contextPath}/showpoPso"
+																title="PO/PSO Mapping" rel="tooltip"
+																data-color-class="detail"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Block"><span
+																class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;
 														</c:if> <c:if test="${isEdit==1}">
 															<a
 																href="${pageContext.request.contextPath}/editProgram/${list.programId}"><span
