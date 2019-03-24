@@ -360,7 +360,7 @@
 			document.getElementById("sub1").disabled = false;
 			document.getElementById("sub2").disabled = false;
 
-			alert(inputValue+" "+valueType);
+			//alert(inputValue+" "+valueType);
 
 			var primaryKey = ${miqc.iqacId}	;
 			//alert("Primary key"+primaryKey);
