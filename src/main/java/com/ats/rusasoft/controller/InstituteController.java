@@ -1,6 +1,6 @@
-	package com.ats.rusasoft.controller;
+package com.ats.rusasoft.controller;
 	
-	import java.io.BufferedInputStream;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -874,5 +874,22 @@ import com.itextpdf.text.pdf.PdfWriter;
 			  return model;
 			  
 			 }
+			
+			  @RequestMapping(value = "/deleteGenderEquality/{gndrDataId}", method = RequestMethod.GET)
+			  public String deleteGenderEquality(@PathVariable("gndrDataId") int gndrDataId, HttpServletRequest request, HttpServletResponse response) {
+				   
+			 try {
+				   MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("gndrDataId", gndrDataId);
+					
+					GenderEqalityPrg  delGnder = rest.postForObject(Constants.url+"/deleteGenderEqualityById", map, GenderEqalityPrg.class);
+				 
+				   }catch(Exception e) {
+					   e.printStackTrace();
+				   }
+					
+					return "redirect:/showGenderEquity";
+		}
+			
 			
 }

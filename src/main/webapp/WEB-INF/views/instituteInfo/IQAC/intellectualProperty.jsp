@@ -141,16 +141,16 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="schmIds" id="schmIds${count.index+1}"
 															value="${bList.instSchemeId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${rightsList.conName}</td>
 														<td>${rightsList.conFromdt}</td>
 														<td>${rightsList.conTodt}</td>
 														<td>${rightsList.conPcount}</td>
 														
-														<td><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
 																	href="${pageContext.request.contextPath}/editIntelPropRight/${rightsList.conId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
 																<a
 																	href="${pageContext.request.contextPath}/deleteIntelPropRight/${rightsList.conId}"

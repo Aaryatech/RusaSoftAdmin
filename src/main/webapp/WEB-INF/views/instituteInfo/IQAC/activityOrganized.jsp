@@ -140,7 +140,7 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="bookIds" id="bookIds${count.index+1}"
 															value="${bList.bookId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td align="center">${count.index+1}</td>
 														<td>${activList.instActivityType}</td>
 														<td>${activList.instActivityLevel}</td>
 														<td>${activList.instActivityName}</td>
@@ -148,11 +148,11 @@
 														<td>${activList.instActivityTodt}</td>
 														<td>${activList.instActivityParticipation}</td>
 														
-														<td><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
 																<a 
 																	href="${pageContext.request.contextPath}/editActivity/${activList.instActivityId}">
 																	<span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
 																<a
 																	href="${pageContext.request.contextPath}/deleteActivity/${activList.instActivityId}"
