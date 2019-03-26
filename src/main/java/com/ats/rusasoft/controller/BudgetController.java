@@ -56,10 +56,28 @@ public class BudgetController {
 	@RequestMapping(value = "/budgetOnLibrary", method = RequestMethod.GET)
 	public ModelAndView budgetOnLibrary(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("budgetForm/budgetOnLibrary");
+		ModelAndView model = new ModelAndView("budgetForm/budget_library_list");
 		try {
 
-			model.addObject("title", "Budget on Library Facility");
+			model.addObject("title", Names.budget_library_list);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/budgetAddOnLibrary", method = RequestMethod.GET)
+	public ModelAndView budgetAddOnLibrary(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("budgetForm/budget_library_add");
+		try {
+
+			model.addObject("title", Names.budget_library_add);
 
 		} catch (Exception e) {
 

@@ -84,8 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/budgetInfrastructureFacility"><button
+								<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button
 										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
@@ -99,6 +98,7 @@
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
+
 
 										<div class="form-group">
 
@@ -118,7 +118,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
-												for="infra_budget_title">Budget Title <span
+												for="infra_budget_title">Budget Library Title <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
@@ -152,6 +152,7 @@
 													value="${page.pageName}" required>
 											</div>
 										</div>
+
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -196,10 +197,6 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
 
 	<script type="text/javascript">
 		$(function() {
@@ -262,6 +259,11 @@
 	    return true;
 	}
 	</script>
+
+
+
+
+
 
 
 
