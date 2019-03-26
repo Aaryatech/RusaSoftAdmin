@@ -147,21 +147,21 @@
 											<td style="text-align: left"><c:out
 														value="${petentList.patentTitle}" /></td>
 											
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${petentList.patentFilingDate}" /></td>
 											
 											<td style="text-align: left"><c:out
 														value="${petentList.patentGuideName}" /></td>
 														
 															
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${petentList.patentPubDate}" /></td>
 												
 											<td align="center">
 											 <c:if test="${editAccess == 0}">  <a
-												href="${pageContext.request.contextPath}/editPatent/${petentList.patentId}" title="Edit Patent Detail" 
+												href="${pageContext.request.contextPath}/editPatent/${petentList.patentId}" title="Edit" 
 												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> |</c:if> 
+												class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp; &nbsp; &nbsp;</c:if> 
 												
 											 <c:if test="${deleteAccess == 0}"> 	
 												<a	href="${pageContext.request.contextPath}/deleteFacultyPatent/${petentList.patentId}"

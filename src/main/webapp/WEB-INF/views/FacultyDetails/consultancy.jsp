@@ -87,7 +87,7 @@
 
 								<c:if test="${isAdd==1}">
 									<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
-											type="button" class="btn btn-info">Add</button></a>
+											type="button" class="btn btn-success">Add</button></a>
 								</c:if>
 
 

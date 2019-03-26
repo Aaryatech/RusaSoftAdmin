@@ -138,7 +138,7 @@
 
 
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: center"><c:out
 																	value="${journal.journalYear}" /></td>
 
 															<td style="text-align: left"><c:out

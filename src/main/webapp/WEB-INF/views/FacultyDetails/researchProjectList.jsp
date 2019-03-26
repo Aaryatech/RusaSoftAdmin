@@ -140,7 +140,7 @@
 
 
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: center"><c:out
 																	value="${journal.projYear}" /></td>
 
 															<td style="text-align: left"><c:out

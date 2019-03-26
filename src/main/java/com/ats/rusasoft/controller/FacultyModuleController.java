@@ -905,8 +905,12 @@ public class FacultyModuleController {
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				int acYearId = (int) session.getAttribute("acYearId");
 
 				map.add("facId", facId.getRegPrimaryKey());
+				map.add("yearId", acYearId);
+				
+				System.err.println(" yearId   Accessable "+acYearId);
 
 				StudMentorList[] studL = rest.postForObject(Constants.url + "/getStudentMentoringDetailsList", map,
 						StudMentorList[].class);

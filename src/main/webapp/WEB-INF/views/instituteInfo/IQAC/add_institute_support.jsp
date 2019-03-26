@@ -189,7 +189,7 @@
 													Benefited <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" autocomplete="off"
+													<input type="number" min="0" class="form-control" autocomplete="off"
 														id="inst_students_benefited" pattern="^(?!\s*$).+"
 														name="inst_students_benefited" onkeypress="return allowOnlyNumber(event)" 
 														placeholder=""

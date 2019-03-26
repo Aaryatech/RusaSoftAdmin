@@ -155,19 +155,19 @@
 
 
 
-																			<td style="text-align: left"><c:out
+																			<td style="text-align: center"><c:out
 																					value="${awardList.awardDate}" /></td>
 
 																			<td align="center"><c:if
 																					test="${editAccess == 0}">
 																					<a
 																						href="${pageContext.request.contextPath}/editAward/${awardList.awardId}"
-																						title="Edit Award Detail" rel="tooltip"
+																						title="Edit" rel="tooltip"
 																						data-color-class="detail"
 																						data-animate=" animated fadeIn "
 																						data-toggle="tooltip"
-																						data-original-title="Edit IQAC"><span
-																						class="glyphicon glyphicon-edit"></span></a> |</c:if> <c:if
+																						data-original-title="Edit"><span
+																						class="glyphicon glyphicon-edit"></span></a> </c:if> &nbsp; &nbsp; &nbsp; &nbsp;<c:if
 																					test="${deleteAccess == 0}">
 																					<a
 																						href="${pageContext.request.contextPath}/deleteFacultyAward/${awardList.awardId}"
