@@ -85,9 +85,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showLibraryBasicInfo"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -97,27 +96,18 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertCmsForm"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertLibInfo"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+											onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
+									
 												<div>
 
 
 													<div class="col-xs-12">
 
-
+													<input type="text" value="${libInfo.libInfoId}" name="libInfoId">
 
 														<div class="form-group">
 															<label class="control-label col-sm-5" for="status"
@@ -126,6 +116,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
+															
 																<input type="radio" id="isUsingSoft" name="isUsingSoft"
 																	onclick="showDiv(1)" value="1" checked>Yes <input
 																	type="radio" id="isUsingSoft" name="isUsingSoft"
@@ -142,7 +133,7 @@
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="swName"
 																		name="swName" placeholder="Name Of Software"
-																		value="${page.pageName}" required>
+																		value="${page.pageName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -154,7 +145,7 @@
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="version"
 																		name="version" placeholder="Software Version"
-																		value="${page.pageName}" required>
+																		value="${page.pageName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 															
@@ -164,9 +155,10 @@
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="text" class="form-control" id="version"
-																		name="version" placeholder="Total Number of Users of LMS"
-																		value="${page.pageName}" required>
+																	<input type="text" class="form-control" id="userLms"
+																		name="userLms" placeholder="Total Number of Users of LMS" 
+																		onkeypress='return restrictAlphabets(event)'
+																		value="${page.pageName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -177,8 +169,9 @@
 																	Purchase/Automation Lib.  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="date" class="form-control" id="date"
-																		name="date"
+																	<input type="text" class="form-control datepicker" id="purchaseDate"
+																		name="purchaseDate" onkeypress='return restrictAlphabets(event)'
+																		pattern="^(?!\s*$).+" autocomplete="off" 
 																		placeholder="Date Of Purchase/Automation Lib."
 																		value="${page.pageName}" required>
 																</div>
@@ -192,9 +185,9 @@
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="noOfComp"
-																		name="noOfComp"
+																		name="noOfComp" onkeypress='return restrictAlphabets(event)'
 																		placeholder="No. of Comp in LAN with LMS" value=""
-																		required>
+																		pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -207,7 +200,7 @@
 																	<input type="text" class="form-control" id="bandwidth"
 																		name="bandwidth"
 																		placeholder="Bandwidth fir accessing e-resources"
-																		value="" required>
+																		value="" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -332,10 +325,9 @@
 																	style="text-align: left;"> Avg. No.  of Teachers Using Library resources per day  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
-																	<input type="text" class="form-control" id="noOfComp"
-																		name="noOfComp"
-																		placeholder="Avg. of Teachers Using Library resources per day" value=""
-																		required>
+																	<input type="text" class="form-control" id="avgTeacher"
+																		name="avgTeacher" placeholder="Avg. of Teachers Using Library resources per day" value=""
+																		pattern="^(?!\s*$).+" autocomplete="off" onkeypress='return restrictAlphabets(event)' required>
 																</div>
 															</div>
 															
@@ -344,15 +336,15 @@
 																	style="text-align: left;"> Avg. No. of Student Using Library resources per day  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
-																	<input type="text" class="form-control" id="noOfComp"
-																		name="noOfComp"
+																	<input type="text" class="form-control" id="avgStud"
+																		name="avgStud"
 																		placeholder="Avg. of Student Using Library resources per day" value=""
-																		required>
+																		pattern="^(?!\s*$).+" autocomplete="off" onkeypress='return restrictAlphabets(event)' required>
 																</div>
 															</div>
 
 
-                                              <h4>e-Content Facilities</h4>
+                                             <!--  <h4>e-Content Facilities</h4>
 															
 														 
 														<div class="form-group">
@@ -368,13 +360,14 @@
 															<div class="col-sm-2">Year of Establishment</div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearMediacenter"
+																<input type="text" class="form-control datepicker" id="yearMediacenter"
 																	name="yearMediacenter" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off"
+																	  onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
 														</div>
-														
+														 -->
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="recordingFacility"
@@ -384,14 +377,15 @@
 															<div class="col-sm-3">
 																<input type="radio" id="recordingFacility" name="recordingFacility"
 																	value="1" checked>Yes <input type="radio"
-																	id="recordingFacility" name="recordingFacility" value="0">No
+																	id="recordingFacility" name="recordingFacility" value="0" pattern="^(?!\s*$).+" autocomplete="off"  required>No
 															</div>
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearRecordingFacility"
+																<input type="text" class="form-control datepicker" id="yearRecordingFacility"
 																	name="yearRecordingFacility" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off"
+																	onkeypress='return restrictAlphabets(event)'  required>
 
 															</div>
 														</div>
@@ -408,9 +402,10 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearLectuteCap"
+																<input type="text" class="form-control datepicker" id="yearLectuteCap"
 																	name="yearLectuteCap" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off"
+																	onkeypress='return restrictAlphabets(event)'  required>
 
 															</div>
 														</div>
@@ -429,9 +424,10 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearEContentFacility"
+																<input type="text" class="form-control datepicker" id="yearEContentFacility"
 																	name="yearEContentFacility" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
+																	onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
 														</div>
@@ -452,9 +448,10 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearPlanning"
+																<input type="text" class="form-control datepicker" id="yearPlanning"
 																	name="yearPlanning" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
+																	onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
 														</div>
@@ -473,9 +470,10 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearAdministration"
-																	name="yearAdministration" placeholder="Membership Details"
-																	value="" required>
+																<input type="text" class="form-control datepicker" id="yearAdministration"
+																	name="yearAdministration" placeholder="Membership Details" 
+																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
+																	onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
 														</div>
@@ -492,9 +490,10 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearFinance"
+																<input type="text" class="form-control datepicker" id="yearFinance"
 																	name="yearFinance" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
+																	onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
 														</div>
@@ -512,19 +511,19 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearStudAddmission"
+																<input type="text" class="form-control datepicker" id="yearStudAddmission"
 																	name="yearStudAddmission" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off"  
+																	onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
 														</div>
 
 
-<div class="form-group">
+														<div class="form-group">
 															<label class="control-label col-sm-3" for="examinations"
 																style="text-align: left;"> Examinations  
- : <span
-																class="text-danger">*</span>
+ 																 <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
 																<input type="radio" id="examinations" name="examinations"
@@ -534,9 +533,10 @@
 															<div class="col-sm-2">Year of Establishment </div>
 															<div class="col-sm-3">
 
-																<input type="date" class="form-control" id="yearExaminations"
+																<input type="text" class="form-control datepicker" id="yearExaminations"
 																	name="yearExaminations" placeholder="Membership Details"
-																	value="" required>
+																	value="" pattern="^(?!\s*$).+" autocomplete="off"
+																	onkeypress='return restrictAlphabets(event)'  required>
 
 															</div>
 														</div>
@@ -545,8 +545,11 @@
 												
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
 																<button type="reset" class="btn btn-default">Reset</button>
+																<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>
 
@@ -557,10 +560,9 @@
 
 												</div>
 
-											</div>
-
-										</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -583,6 +585,56 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+		
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
+
+		}
+	</script>
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
+
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
+
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
+	
 	<script type="text/javascript">
 		function showDiv(value) {
 

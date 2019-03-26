@@ -111,7 +111,7 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="iqacName"
 													autocomplete="off" value="${miqc.iqacName}" name="iqacName"
-													pattern="^(?!\s*$).+"
+													onchange="trim(this)"
 													placeholder="Internal Quality Assurance Cell (IQAC)"
 													required>
 											</div>
@@ -158,7 +158,7 @@
 													onkeypress='return restrictAlphabets(event)'
 													value="${miqc.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd/mm/yyyy"
-													pattern="^(?!\s*$).+" required>
+													onchange="trim(this)" required>
 											</div>
 										</div>
 
@@ -168,8 +168,8 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													onchange="checkUnique(this.value,1)" pattern="^(?!\s*$).+"
-													name="contactNo" pattern="[7-9]{1}[0-9]{9}" maxlength="10"
+													onchange="checkUnique(this.value,1)"onchange="trim(this)"
+													name="contactNo" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -188,7 +188,7 @@
 											<div class="col-sm-10">
 												<input type="email" class="form-control" id="email"
 													autocomplete="off" onchange="checkUnique(this.value,2)"
-													pattern="^(?!\s*$).+" name="email"
+													onchange="trim(this)" name="email"
 													placeholder="abc@xyz.com" value="${miqc.email}" required>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>
@@ -283,6 +283,13 @@
 				
 			
 			} */
+			
+			function trim(el) {
+				el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+				replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+				replace(/\n +/, "\n"); // Removes spaces after newlines
+				return;
+			}
 	</script>
 
 	<script type="text/javascript">
