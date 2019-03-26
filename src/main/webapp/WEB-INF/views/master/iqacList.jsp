@@ -113,8 +113,8 @@
 											 <c:if test="${editAccess == 0}">  <a
 												href="${pageContext.request.contextPath}/editIqac/${QList.iqacId}" title="Edit" 
 												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> </c:if> &nbsp;&nbsp;
-												&nbsp;&nbsp;
+												class="glyphicon glyphicon-edit"></span></a> </c:if> 
+												&nbsp;&nbsp;&nbsp;&nbsp;
 												
 											 <c:if test="${deleteAccess == 0}"> 	
 												<a	href="${pageContext.request.contextPath}/deleteIqac/${QList.iqacId}"
@@ -125,7 +125,11 @@
 													class="glyphicon glyphicon-remove"></span></a>
 												
 												</c:if>
-												
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												 <a
+												href="${pageContext.request.contextPath}/editIqac" title="Edit" 
+												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
+												class="glyphicon glyphicon-edit"></span></a>
 											
 												<%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
@@ -141,7 +145,7 @@
 												<a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-edit"></span></a> --%>
+								editIqac				class="glyphicon glyphicon-edit"></span></a> --%>
 												
 												
 												
