@@ -72,19 +72,17 @@ public class InstituteController {
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		try {
-			/*
-			 * List<ModuleJson> newModuleList = (List<ModuleJson>)
-			 * session.getAttribute("newModuleList");
-			 * 
-			 * Info view = AccessControll.checkAccess("/showInstituteSupport",
-			 * "/showInstituteSupport", "1", "0", "0", "0", newModuleList);
-			 * 
-			 * if (view.isError() == true) {
-			 * 
-			 * model = new ModelAndView("accessDenied");
-			 * 
-			 * } else {
-			 */
+			
+			  List<ModuleJson> newModuleList = (List<ModuleJson>)session.getAttribute("newModuleList");
+			  
+			  Info view = AccessControll.checkAccess("showInstituteSupport", "showInstituteSupport", "1", "0", "0", "0", newModuleList);
+			 
+			  if (view.isError() == true) {
+			  
+			  model = new ModelAndView("accessDenied");
+			  
+			  } else {
+			 
 			model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
 			model.addObject("title", "Institute Schemes List");
 			model.addObject("title1",
@@ -136,24 +134,25 @@ public class InstituteController {
 			session.setAttribute("exportExcelList", exportToExcelList);
 			session.setAttribute("excelName", "GetMatIssueHeader");
 
-			/*
-			 * Info add = AccessControll.checkAccess("/showInstituteSupport",
-			 * "/showInstituteSupport", "0", "1", "0", "0", newModuleList); Info edit =
-			 * AccessControll.checkAccess("/showInstituteSupport", "/showInstituteSupport",
-			 * "0", "0", "1", "0", newModuleList); Info delete =
-			 * AccessControll.checkAccess("/showInstituteSupport", "/showInstituteSupport",
-			 * "0", "0", "0", "1", newModuleList);
-			 * 
-			 * if (add.isError() == false) { System.out.println(" add   Accessable ");
-			 * model.addObject("addAccess", 0);
-			 * 
-			 * } if (edit.isError() == false) { System.out.println(" edit   Accessable ");
-			 * model.addObject("editAccess", 0); } if (delete.isError() == false) {
-			 * System.out.println(" delete   Accessable "); model.addObject("deleteAccess",
-			 * 0);
-			 * 
-			 * } }
-			 */
+			
+			  Info add = AccessControll.checkAccess("showInstituteSupport", "showInstituteSupport", "0", "1", "0", "0", newModuleList); 
+			  Info edit =  AccessControll.checkAccess("showInstituteSupport", "showInstituteSupport","0", "0", "1", "0", newModuleList); 
+			  Info delete = AccessControll.checkAccess("showInstituteSupport", "showInstituteSupport", "0", "0", "0", "1", newModuleList);
+			  
+			  if (add.isError() == false) { 
+				  System.out.println(" add   Accessable ");	
+				  model.addObject("addAccess", 0);
+			  
+			 } if (edit.isError() == false) {
+				 System.out.println(" edit   Accessable ");
+				 model.addObject("editAccess", 0); }
+			 if (delete.isError() == false) {
+				 System.out.println(" delete   Accessable ");
+				 model.addObject("deleteAccess", 0);
+			 
+			 } 
+			}
+			 
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -169,7 +168,17 @@ public class InstituteController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_institute_support");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+				Info view = AccessControll.checkAccess("/showAddInstituteSupport", "showInstituteSupport", "0", "1", "0", "0",
+						newModuleList);
 
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
 			InstituteSupport instSpprt = new InstituteSupport();
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("type", 1);
@@ -183,7 +192,7 @@ public class InstituteController {
 
 			model.addObject("instSpprt", instSpprt);
 			model.addObject("title", "Add Institute Schemes");
-
+				}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -245,9 +254,20 @@ public class InstituteController {
 	public ModelAndView editInstituteScheme(@PathVariable("schmId") int schmId, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_institute_support");
+		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+				Info view = AccessControll.checkAccess("/showAddInstituteSupport", "showInstituteSupport", "0", "0", "1", "0",
+						newModuleList);
 
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					model = new ModelAndView("instituteInfo/IQAC/add_institute_support");
 			InstituteSupport instSpprt = new InstituteSupport();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -258,8 +278,10 @@ public class InstituteController {
 					InstituteSupport.class);
 			model.addObject("instSpprt", suprtSchm);
 
+			
 			model.addObject("title", "Edit Institute Schemes");
-
+			
+				}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -471,10 +493,18 @@ public class InstituteController {
 	@RequestMapping(value = "/showActivityOrganized", method = RequestMethod.GET)
 	public ModelAndView showActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/activityOrganized");
+		ModelAndView model = null;
 		try {
 			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showActivityOrganized", "showActivityOrganized", "1", "0", "0", "0", newModuleList);
 
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			int instituteId = (int) session.getAttribute("instituteId");
 			int yId = (int) session.getAttribute("acYearId");
 
@@ -485,10 +515,32 @@ public class InstituteController {
 			InstituteActivity[] instActArr = rest.postForObject(Constants.url + "/getAllInstituteActities", map,
 					InstituteActivity[].class);
 			List<InstituteActivity> activityList = new ArrayList<>(Arrays.asList(instActArr));
+			model = new ModelAndView("instituteInfo/IQAC/activityOrganized");
 			model.addObject("instActList", activityList);
 
 			model.addObject("title", "Institute Organized Activities List");
+			Info add = AccessControll.checkAccess("showActivityOrganized", "showActivityOrganized", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showActivityOrganized", "showActivityOrganized", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showActivityOrganized", "showActivityOrganized", "0", "0", "0", "1",
+					newModuleList);
 
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+		}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -502,12 +554,24 @@ public class InstituteController {
 	@RequestMapping(value = "/showAddActivityOrganized", method = RequestMethod.GET)
 	public ModelAndView showAddActivityOrganized(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
+		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddActivityOrganized", "showActivityOrganized", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+			model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
 			InstituteActivity instAct = new InstituteActivity();
 			model.addObject("instAct", instAct);
+			
 			model.addObject("title", "Add Institute Organized Activities");
-
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -572,9 +636,18 @@ public class InstituteController {
 	public ModelAndView editActivity(@PathVariable("instActvId") int instActvId, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
+		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddActivityOrganized", "showActivityOrganized", "0", "0", "1", "0",
+					newModuleList);
 
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			InstituteActivity instAct = new InstituteActivity();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -584,9 +657,10 @@ public class InstituteController {
 			InstituteActivity activity = rest.postForObject(Constants.url + "/getInstActivityById", map,
 					InstituteActivity.class);
 			model.addObject("instAct", activity);
-
+			
+			model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
 			model.addObject("title", "Edit Institute Organized Activities");
-
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -600,14 +674,24 @@ public class InstituteController {
 	@RequestMapping(value = "/deleteActivity/{instActvId}", method = RequestMethod.GET)
 	public String deleteActivity(@PathVariable("instActvId") int instActvId, HttpServletRequest request,
 			HttpServletResponse response) {
-
+		ModelAndView model = null;
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddActivityOrganized", "showActivityOrganized", "0", "0", "0", "1",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("instActvId", instActvId);
 
 			InstituteActivity delActiv = rest.postForObject(Constants.url + "/deleteActivId", map,
 					InstituteActivity.class);
-
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -622,11 +706,20 @@ public class InstituteController {
 	@RequestMapping(value = "/showIntellectualProperty", method = RequestMethod.GET)
 	public ModelAndView showIntellectualProperty(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("instituteInfo/IQAC/intellectualProperty");
+		ModelAndView model = null;
 		try {
-
 			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showIntellectualProperty", "showIntellectualProperty", "1", "0", "0", "0", newModuleList);
 
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+			
+			model = new ModelAndView("instituteInfo/IQAC/intellectualProperty");
 			int instituteId = (int) session.getAttribute("instituteId");
 			int yId = (int) session.getAttribute("acYearId");
 
@@ -638,9 +731,31 @@ public class InstituteController {
 					IntelPrpoRight[].class);
 			List<IntelPrpoRight> intelRightsList = new ArrayList<>(Arrays.asList(intelPropArr));
 			model.addObject("intelRightsList", intelRightsList);
-
+			
 			model.addObject("title", "Intellactual Property Rights and Innovative Practices (Industry - Academic)");
+			
+			Info add = AccessControll.checkAccess("showIntellectualProperty", "showIntellectualProperty", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showIntellectualProperty", "showIntellectualProperty", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showIntellectualProperty", "showIntellectualProperty", "0", "0", "0", "1",
+					newModuleList);
 
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+		}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -656,11 +771,21 @@ public class InstituteController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_intel_prop");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddIntellectualProperty", "showIntellectualProperty", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			IntelPrpoRight intelProp = new IntelPrpoRight();
 			model.addObject("intelProp", intelProp);
 
 			model.addObject("title", "Add Intellactual Property Rights and Innovative Practices (Industry - Academic)");
-
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -723,7 +848,16 @@ public class InstituteController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_intel_prop");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddIntellectualProperty", "showIntellectualProperty", "0", "0", "1", "0",
+					newModuleList);
 
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			IntelPrpoRight intelProp = new IntelPrpoRight();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -736,7 +870,7 @@ public class InstituteController {
 
 			model.addObject("title",
 					"Edit Intellactual Property Rights and Innovative Practices (Industry - Academic)");
-
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -752,11 +886,22 @@ public class InstituteController {
 			HttpServletResponse response) {
 
 		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAddIntellectualProperty", "showIntellectualProperty", "0", "0", "0", "1",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("conId", conId);
 
 			IntelPrpoRight delRght = rest.postForObject(Constants.url + "/deleteRightById", map, IntelPrpoRight.class);
-
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

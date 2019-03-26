@@ -84,10 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-
+							 <c:if test="${addAccess == 0}">  
 								<a href="${pageContext.request.contextPath}/showOutReachContri"><button
 										type="button" class="btn btn-success">Add</button></a>
-
+								</c:if>
 							</div>
 
 						</header>
@@ -140,10 +140,10 @@
 														<td>${contribtn.conUniversity}</td>
 														<td>${contribtn.conFrom}</td>
 														<td>${contribtn.conTo}</td>
-														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><c:if test="${editAccess==0}"> 
 																<a href="${pageContext.request.contextPath}/editContribtn/${contribtn.conId}"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-														<%-- 	</c:if><c:if test="${deleteAccess==0}"> --%>
+													 	</c:if><c:if test="${deleteAccess==0}"> 
 																<a
 																	href="${pageContext.request.contextPath}/deleteContribtn/${contribtn.conId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
@@ -151,7 +151,7 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
-															<%-- </c:if> --%></td>
+														</c:if> </td>
 													</tr>
 												</c:forEach>
 

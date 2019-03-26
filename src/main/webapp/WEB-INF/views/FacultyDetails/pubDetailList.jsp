@@ -84,10 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							
+							 <c:if test="${addAccess == 0}">  
 								<a href="${pageContext.request.contextPath}/showPublicationDetails"><button
 										type="button" class="btn btn-success">Add</button></a> 
-									
+									</c:if>
 							</div>
 
 						</header>
@@ -160,11 +160,11 @@
 														<td>${facCon.confVenue}</td>
 														<td>${facCon.confFundFrom}</td>
 														<td>${facCon.confFundAmt}</td>
-														<td><%-- <c:if test="${editAccess==0}"> --%>
+														<td><c:if test="${editAccess==0}"> 
 																<a 
 																	href="${pageContext.request.contextPath}/editFacultyConfrnc/${facCon.confId}"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
+															 </c:if><c:if test="${deleteAccess==0}"> 
 																<a
 																	href="${pageContext.request.contextPath}/deleteFacultyConfrnc/${facCon.confId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
@@ -172,7 +172,7 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
-															<%-- </c:if> --%></td>
+														 </c:if></td>
 													</tr>
 												</c:forEach>
 

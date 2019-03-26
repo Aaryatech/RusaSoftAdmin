@@ -84,11 +84,11 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- <c:if test="${addAccess == 0}">  --%>
+						 <c:if test="${addAccess == 0}">  
 								<a href="${pageContext.request.contextPath}/showAddStudMentor"
 									data-toggle="modal"><button type="submit"
 										class="btn btn-info">Add</button></a>
-										<%-- </c:if> --%>
+									 </c:if> 
 								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 								<!-- <a class="box_toggle fa fa-chevron-down"></a> -->
@@ -138,19 +138,19 @@
 																							
 													
 													<td align="center">
-													<%-- <c:if test="${editAccess == 0}"> --%> <a
+													 <c:if test="${editAccess == 0}"> <a
 														href="${pageContext.request.contextPath}/editFacultyMentor/${studL.menId}"><span
 															class="glyphicon glyphicon-edit"
 															data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															<%-- </c:if>  --%>
+														 </c:if>  
 															
-														<%-- <c:if test="${deleteAccess == 0}"> --%><a
+												 <c:if test="${deleteAccess == 0}"> <a
 														href="${pageContext.request.contextPath}/deleteFacultyMentor/${studL.menId}"
 														onClick="return confirm('Are you sure want to delete this record');"
 														rel="tooltip" data-color-class="danger"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
 														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a><%--  </c:if>  --%></td>
+															class="glyphicon glyphicon-remove"></span></a></c:if></td>
 												</tr>
 											</c:forEach> 
 											

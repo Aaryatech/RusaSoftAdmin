@@ -86,9 +86,11 @@
 							<div class="actions panel_actions pull-right">
 								<!-- <a href="#myModal1" data-toggle="modal"><button
 										type="submit" class="btn btn-info">Add</button></a> -->
+								<c:if test="${addAccess == 0}">
 								<a
 									href="${pageContext.request.contextPath}/showAddIntellectualProperty"><button
 										type="button" class="btn btn-success">Add</button></a>
+										</c:if>
 								<!-- <a
 									class="box_toggle fa fa-chevron-down"></a> -->
 							</div>
@@ -147,11 +149,11 @@
 														<td>${rightsList.conTodt}</td>
 														<td align="right">${rightsList.conPcount}</td>
 														
-														<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
+														<td align="center"><c:if test="${editAccess==0}"> 
 																<a 
 																	href="${pageContext.request.contextPath}/editIntelPropRight/${rightsList.conId}"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															<%-- </c:if><c:if test="${deleteAccess==0}"> --%>
+													 </c:if><c:if test="${deleteAccess==0}"> 
 																<a
 																	href="${pageContext.request.contextPath}/deleteIntelPropRight/${rightsList.conId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
@@ -159,7 +161,7 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
-															<%-- </c:if> --%></td>
+															</c:if></td>
 													</tr>
 												</c:forEach>
 
