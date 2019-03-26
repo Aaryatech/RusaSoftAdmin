@@ -63,7 +63,7 @@
 
 						<div class="pull-left">
 							<!-- PAGE HEADING TAG - START -->
-						<%-- 	<h1 class="title">${title}</h1> --%>
+							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
 
@@ -86,8 +86,8 @@
 							<div class="actions panel_actions pull-right">
 								<a href="#myModal1" data-toggle="modal"><button
 										type="submit" class="btn btn-info">Add</button></a> <a
-									href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
+									href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
+										type="button" class="btn btn-info">Add</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
@@ -103,61 +103,30 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
- 
-														<div class="col-xs-12">
-
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Financial Year</th> 
-																		<th>Expenditures on purchase of Books</th>
-																		<th>Expenditures on purchase of Journals</th>
-																		<th>Expenditures on e-Journals</th>
-																		<th>Expenditures on e-Resources</th>
-																	</tr>
-																</thead>
 
 
 
-																<tbody>
+										<table id="example-1"
+											class="table table-striped dt-responsive display">
+											<thead>
+												<tr>
+													<th width="10%">Sr No</th>
+													<th>Financial Year</th>
+													<th>Expenditures on purchase of Books</th>
+													<th>Expenditures on purchase of Journals</th>
+													<th>Expenditures on e-Journals</th>
+													<th>Expenditures on e-Resources</th>
+												</tr>
+											</thead>
 
 
-																</tbody>
-															</table>
 
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
-													</div>
+											<tbody>
 
 
-													<div class="clearfix"></div>
+											</tbody>
+										</table>
 
-												</div>
-
-											</div>
-										</div>
 									</form>
 								</div>
 
@@ -205,10 +174,11 @@
 
 						</select>
 					</div>
-					 
+
 					<div class="form-group">
 
-						<label class="control-label col-sm-3" for="purchaseBooks">Expenditures on purchase of Books</label> <input type="text" class="form-control"
+						<label class="control-label col-sm-3" for="purchaseBooks">Expenditures
+							on purchase of Books</label> <input type="text" class="form-control"
 							id="purchaseBooks" name="purchaseBooks"
 							placeholder="Expenditures on purchase of Books"
 							value="${page.pageName}" required>
@@ -221,15 +191,15 @@
 							placeholder="Expenditures on purchase of Journals"
 							value="${page.pageName}" required>
 					</div>
-					
+
 					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="purchaseEJrnls">Expenditures on e-Journals</label> <input type="text" class="form-control"
 							id="purchaseEJrnls" name="purchaseEJrnls"
-							placeholder="Expenditures on e-Journals"
-							value="${page.pageName}" required>
+							placeholder="Expenditures on e-Journals" value="${page.pageName}"
+							required>
 					</div>
-					
+
 					<div class="form-group">
 
 						<label class="control-label col-sm-3" for="purchaseEResources">Expenditures on e-Resources</label> <input type="text" class="form-control"
@@ -256,20 +226,21 @@
 
 	<script type="text/javascript">
 		function getData() {
-			 
+
 			var i = parseInt(document.getElementById("index").value);
 			var year = document.getElementById("finantialYear").value;
-			   
+
 			var purchaseBooks = document.getElementById("purchaseBooks").value;
 			var purchaseJrnls = document.getElementById("purchaseJrnls").value;
 			var purchaseEJrnls = document.getElementById("purchaseEJrnls").value;
-			var purchaseEResources = document.getElementById("purchaseEResources").value;
+			var purchaseEResources = document
+					.getElementById("purchaseEResources").value;
 			//alert("noStud"+noStud);
 			var dataTable = $('#example-1').DataTable();
-		 
+
 			dataTable.row.add(
-					[ i + 1, year, purchaseBooks, purchaseJrnls,purchaseEJrnls,purchaseEResources ])
-					.draw();
+					[ i + 1, year, purchaseBooks, purchaseJrnls,
+							purchaseEJrnls, purchaseEResources ]).draw();
 			document.getElementById("index").value = i + 1;
 		}
 	</script>

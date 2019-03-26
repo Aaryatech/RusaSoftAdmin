@@ -16,4 +16,7 @@ public class Names {
 
 	public static String waste_management_budget_list = "Budget on Green Initiatives & Waste Management List";
 	public static String waste_management_budget_add = "Add Budget on Green Initiatives & Waste Management";
+
+	public static String library_book_budget_add = "Add Budget on Library Book";
+	public static String library_book_budget_list = "Budget on Library Book List";
 }

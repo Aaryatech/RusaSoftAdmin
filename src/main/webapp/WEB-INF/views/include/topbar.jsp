@@ -8,7 +8,7 @@
 <div class='page-topbar '>
 	<div class='logo-area'></div>
 	<div class='quick-area'>
-	
+	 
 	<div class="pull-left">
             <ul class="info-menu left-links list-inline list-unstyled">
                 <li class="sidebar-toggle-wrap"><a href="#" data-toggle="sidebar" class="sidebar_toggle"> <i class="fa fa-bars"></i>
@@ -20,7 +20,7 @@
 		<div class='pull-left'>
 			<ul class="info-menu right-links list-inline list-unstyled">
 				<li class="profile"><a href="#" data-toggle="dropdown"
-					class="toggle"> <span>Academic Year <span id="topYear" >${sessionScope.acYearValue}</span> <i
+					class="toggle"> <span>Academic Year <span id="topYear" ></span> <i
 							class="fa fa-calendar"></i>
 					</span>
 				</a>
@@ -80,7 +80,7 @@
 				<li class="profile"><a href="#" data-toggle="dropdown"
 					class="toggle"> <img
 						src="${pageContext.request.contextPath}/resources/assets/images/avatar.png"
-						alt="user-image" class="img-circle img-inline"> <span>User
+						alt="user-image" class="img-circle img-inline"> <span>${sessionScope.userObj.getData.subUserName}
 							<i class="fa fa-angle-down"></i>
 					</span>
 				</a>

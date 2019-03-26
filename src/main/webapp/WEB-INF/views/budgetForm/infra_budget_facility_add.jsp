@@ -109,9 +109,16 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" required>
+												
 													<c:forEach items="${finYearList}" var="finYear">
+														<c:choose>
+														<c:when test="${finYear.finYearId==budget.finYearId}">
+													<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+														</c:when>
+														<c:otherwise>
 														<option value="${finYear.finYearId}">${finYear.finYear}</option>
-
+														</c:otherwise>
+													</c:choose>
 													</c:forEach>
 
 												</select>
@@ -125,33 +132,33 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onchange="trim(this)"
-													id="infra_budget_title" name="infra_budget_title"
+													id="infra_budget_title" name="infra_budget_title" value="${budget.infraBudgetTitle}"
 													placeholder="Title of Infrastructure Budget" required>
 											</div>
 										</div>
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget
-												Allocated Amount <span class="text-danger">*</span>
+												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text"  min="0" min="0" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)" class="form-control"
 													id="budget_allocated"  name="budget_allocated"
 													placeholder="Budget Allocated Amount in Rupees"
-													value="${page.pageName}" required>
+													value="${budget.budgetAllocated}" required>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized Amount<span class="text-danger">*</span>
+												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="budget_utilized" onchange="trim(this)"
 													name="budget_utilized" min="0" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)"
 													placeholder="Budget Utilized Amount in Rupees"
-													value="${page.pageName}" required>
+													value="${budget.budgetUtilized}" required>
 											</div>
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
@@ -164,7 +171,7 @@
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" id="is_view" name="is_view" value="0">
-												<input type="hidden" id="infraBudgetId" name="infraBudgetId" value="0">
+												<input type="hidden" id="infraBudgetId" name="infraBudgetId" value="${budget.infraBudgetId}">
 												
 											</div>
 										</div>

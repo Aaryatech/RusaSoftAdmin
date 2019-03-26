@@ -15,37 +15,20 @@
 <!-- END HEAD -->
 
 <style>
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;
-}
-
-.image-preview-input input[type=file] {
+#main-content section {
 	position: absolute;
 	top: 0;
+	bottom: 0;
+	left: 0;
 	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-}
-
-.image-preview-input-title {
-	margin-left: 2px;
+	margin: auto;
 }
 </style>
-
 
 <!-- BEGIN BODY -->
 <body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
-	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include> --%>
 	<!-- END TOPBAR -->
 	<!-- START CONTAINER -->
 	<div class="page-container row-fluid container-fluid">
@@ -101,15 +84,15 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to Change the Password?');">
 
-										<ul class="nav nav-tabs">
+										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Change Password
 											</a></li>
 
-										</ul>
+										</ul> -->
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+										<!-- <div class="tab-content">
+											<div class="tab-pane fade in active" id="home"> -->
 
 												<div>
 												<div class="col-xs-12">
@@ -118,8 +101,8 @@
 															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="newPassword"
-																	name="newPassword" placeholder="Enter New Password"
+																<input type="password" class="form-control" id="newPassword"
+																	name="newPassword" placeholder="Enter New Password" onkeyup="trim(this)"
 																	 required>
 															</div>
 														</div>
@@ -141,9 +124,9 @@
 
 												</div>
 
-											</div>
+											<!-- </div>
 
-										</div>
+										</div> -->
 									</form>
 								</div>
 
@@ -168,166 +151,13 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-	<script type="text/javascript">
-	
-	
-	function showForm() {
-		//document.getElementById("abc").style = "display:none"
-			var qualType=document.getElementById("qualification").value
-		//alert("qualType::"+qualType);
-			
-			if (qualType == 5) {
-
-				document.getElementById("abc").style = "visible"
-				
-					
-			} 
-			else{
-				document.getElementById("abc").style = "display:none"
-			}
-		
+	 <script type="text/javascript"> 
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
 		}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-		jQuery(document).ready(
-				function($) {
-
-					// sub_menu
-					$('#sub_menu1').click(function(e) {
-						//ajax send this to php page
-						var def = 1;
-						if ($("#sub_menu").prop('checked') == true) {
-							$('#main_menu').prop('checked', true);
-
-						} else {
-
-						}
-					});
-
-					//Example 2
-
-					$(document).on('click', '#close-preview', function() {
-						$('.image-preview').popover('hide');
-						// Hover befor close the preview
-						$('.image-preview').hover(function() {
-							$('.image-preview').popover('show');
-						}, function() {
-							$('.image-preview').popover('hide');
-						});
-					});
-
-					$(function() {
-						// Create the close button
-						var closebtn = $('<button/>', {
-							type : "button",
-							text : 'x',
-							id : 'close-preview',
-							style : 'font-size: initial;',
-						});
-						closebtn.attr("class", "close pull-right");
-						// Set the popover default content
-						$('.image-preview').popover(
-								{
-									trigger : 'manual',
-									html : true,
-									title : "<strong>Preview</strong>"
-											+ $(closebtn)[0].outerHTML,
-									content : "There's no image",
-									placement : 'bottom'
-								});
-						// Clear event
-						$('.image-preview-clear').click(function() {
-							//$('.image-preview').attr("data-content","").popover('hide');
-							$('.image-preview-filename').val("");
-							$('.image-preview-clear').hide();
-							$('#header_image input:file').val("");
-							$(".image-preview-input-title").text("Browse");
-							$("#thumbkishore").attr("src", '');
-							$(".thumbkishorediv").hide();
-						});
-						// Create the preview image
-						$("#header_image").change(
-								function() {
-									var img = $('<img/>', {
-										id : 'dynamic',
-										width : 250,
-										height : 200,
-									});
-
-									var file = this.files[0];
-									var reader = new FileReader();
-									// Set preview image into the popover data-content
-									reader.onload = function(e) {
-
-										$(".image-preview-input-title").text(
-												"Change");
-										$(".image-preview-clear").show();
-										$(".image-preview-filename").val(
-												file.name);
-										img.attr('src', e.target.result);
-										//alert(e.target.result);
-										///alert($(img)[0].outerHTML);
-										//$(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-										//
-										//alert(e.target.result);
-										$("#thumbkishore").attr("src",
-												e.target.result);
-
-										$(".thumbkishorediv").show();
-									}
-									reader.readAsDataURL(file);
-								});
-
-						// Clear event
-						$('.image-preview-clear2').click(function() {
-							//$('.image-preview').attr("data-content","").popover('hide');
-							$('.image-preview-filename2').val("");
-							$('.image-preview-clear2').hide();
-							$('.image-preview-input2 input:file').val("");
-							$(".image-preview-input-title2").text("Browse");
-							$("#thumbkishor2e").attr("src", '');
-							$(".thumbkishore2div").hide();
-						});
-						// Create the preview image
-						$("#images").change(
-								function() {
-									var img = $('<img/>', {
-										id : 'dynamic',
-										width : 250,
-										height : 200,
-									});
-
-									var file = this.files[0];
-									var reader = new FileReader();
-									// Set preview image into the popover data-content
-									reader.onload = function(e) {
-
-										$(".image-preview-input-title2").text(
-												"Change");
-										$(".image-preview-clear2").show();
-										$(".image-preview-filename2").val(
-												file.name);
-										img.attr('src', e.target.result);
-										//alert(e.target.result);
-										///alert($(img)[0].outerHTML);
-										//$(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-										//
-										//alert(e.target.result);
-										$("#thumbkishore2").attr("src",
-												e.target.result);
-
-										$(".thumbkishore2div").show();
-									}
-									reader.readAsDataURL(file);
-								});
-
-					});
-
-				});
 	</script>
 
 </body>
