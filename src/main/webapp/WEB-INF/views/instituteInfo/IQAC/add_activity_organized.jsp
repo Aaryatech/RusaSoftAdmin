@@ -227,7 +227,7 @@
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="number" min="0" class="form-control"
 													id="inst_activity_participation" autocomplete="off" pattern="^(?!\s*$).+"
 													name="inst_activity_participation" onkeypress='return restrictAlphabets(event)'
 													placeholder="No.of Participants" value="${instAct.instActivityParticipation}"
