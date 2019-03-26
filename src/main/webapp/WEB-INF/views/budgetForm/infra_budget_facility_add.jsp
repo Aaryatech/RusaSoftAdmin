@@ -118,8 +118,8 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
-												for="infra_budget_title">Title of Library Facility
-												Excluding Salary<span class="text-danger">*</span>
+												for="infra_budget_title">Budget Title <span
+												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
@@ -130,12 +130,12 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget
-												Allocated Amount in Rs. <span class="text-danger">*</span>
+												Allocated Amount <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
 													id="budget_allocated" name="budget_allocated"
-													placeholder="Budget Allocated Amount in Rs"
+													placeholder="Budget Allocated Amount in Rupees"
 													value="${page.pageName}" required>
 											</div>
 										</div>
@@ -143,12 +143,12 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized Amount in Rs.<span class="text-danger">*</span>
+												Utilized Amount<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="budget_utilized"
 													name="budget_utilized"
-													placeholder="Budget Utilized Amount in Rs."
+													placeholder="Budget Utilized Amount in Rupees"
 													value="${page.pageName}" required>
 											</div>
 										</div>
