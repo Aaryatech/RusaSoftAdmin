@@ -92,10 +92,28 @@ public class BudgetController {
 	@RequestMapping(value = "/budgetPhysicalFacility", method = RequestMethod.GET)
 	public ModelAndView budgetPhysicalFacility(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("budgetForm/budgetPhysicalFacility");
+		ModelAndView model = new ModelAndView("budgetForm/budget_phy_facility_list");
 		try {
 
-			model.addObject("title", "Budget on Physical Facilities");
+			model.addObject("title", Names.budget_physical_list);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/budgetAddPhysicalFacility", method = RequestMethod.GET)
+	public ModelAndView budgetAddPhysicalFacility(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("budgetForm/budget_phy_facility_add");
+		try {
+
+			model.addObject("title", Names.budget_physical_add);
 
 		} catch (Exception e) {
 

@@ -8,4 +8,7 @@ public class Names {
 	public static String budget_library_add = "Add Budget on Library Facility";
 	public static String budget_library_list = "Budget on Library Facility List";
 
+	public static String budget_physical_list = "Budget on Library Physical Facility List";
+	public static String budget_physical_add = "Add Budget on Library Physical Facility";
+
 }
