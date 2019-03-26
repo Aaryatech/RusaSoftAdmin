@@ -84,9 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/budgetAddInfrastructureFacility"><button
-										type="button" class="btn btn-success">Add</button></a>
+							<c:if test="${addAccess==0}">
+								<a href="${pageContext.request.contextPath}/budgetAddInfrastructureFacility"><button
+										type="button" class="btn btn-success">Add</button></a></c:if>
 							</div>
 
 						</header>
@@ -96,10 +96,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/deleteInfraBudget/0"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-
 
 										<table id="example-1"
 											class="table table-striped dt-responsive display">
@@ -108,10 +107,43 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="40%">Title</th>
-													<th>Budget Allocated Amount</th>
-													<th>Budget Utilized Amount</th>
+													<th>Allocated Amount</th>
+													<th>Utilized Amount</th>
+													<th>Action</th>
 												</tr>
 											</thead>
+											<tbody>
+											
+											<c:forEach items="${budgetList}" var="budget"
+													varStatus="count">
+													<tr>
+														<%-- <td align="center"><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td> --%>
+														<td align="center">${count.index+1}</td>
+														<td>${budget.finYear}</td>
+														<td>${budget.infraBudgetTitle}</td>
+														<td align="center">${budget.budgetAllocated}</td>
+														<td align="center">${budget.budgetUtilized}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a onclick="showEdit(${budget.infraBudgetId})"
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	title="Edit" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+															<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteInfraBudget/${budget.infraBudgetId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
+											
+											</tbody>
 
 
 
@@ -120,6 +152,8 @@
 
 											</tbody>
 										</table>
+									<input type="hidden" id="infraBudgetId" name="infraBudgetId" value="0">
+										
 									</form>
 								</div>
 
@@ -143,93 +177,17 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-
-
-
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Budget on Infrastructure Facility</h4>
-				</div>
-				<div class="modal-body">
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Financial
-							Year</label> <select id="finantialYear" name="finantialYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-
-						</select>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-4 for="facilityTitle">Title
-							of Library Facility Excluding Salary</label> <input type="text"
-							class="form-control" id="facilityTitle" name="facilityTitle"
-							placeholder="Title of Library Facility" required>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="allocatedAmt">Budget
-							Allocated Amount in Rs. </label> <input type="text" class="form-control"
-							id="allocatedAmt" name="allocatedAmt"
-							placeholder="Budget Allocated Amount in Rs"
-							value="${page.pageName}" required>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="utilizedAmt">Budget
-							Utilized Amount in Rs. </label> <input type="text" class="form-control"
-							id="utilizedAmt" name="utilizedAmt"
-							placeholder="Budget Utilized Amount in Rs."
-							value="${page.pageName}" required>
-					</div>
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var year = document.getElementById("finantialYear").value;
-			var facilityTitle = document.getElementById("facilityTitle").value;
-			var allocatedAmt = document.getElementById("allocatedAmt").value;
-			var utilizedAmt = document.getElementById("utilizedAmt").value;
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
+		function showEdit(infraBudgetId){
+			document.getElementById("infraBudgetId").value=infraBudgetId;//create this 
+			var form=document.getElementById("form_sample_2");
+		    form.setAttribute("method", "post");
 
-			dataTable.row.add(
-					[ i + 1, year, facilityTitle, allocatedAmt, utilizedAmt ])
-					.draw();
-			document.getElementById("index").value = i + 1;
+			form.action=("showEditInfraBudget");
+			form.submit();
+			
 		}
 	</script>
-
-
-
-
-
 
 </body>
 </html>

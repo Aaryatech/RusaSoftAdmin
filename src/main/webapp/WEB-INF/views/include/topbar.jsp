@@ -8,7 +8,7 @@
 <div class='page-topbar '>
 	<div class='logo-area'></div>
 	<div class='quick-area'>
-	
+	 
 	<div class="pull-left">
             <ul class="info-menu left-links list-inline list-unstyled">
                 <li class="sidebar-toggle-wrap"><a href="#" data-toggle="sidebar" class="sidebar_toggle"> <i class="fa fa-bars"></i>

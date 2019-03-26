@@ -81,7 +81,7 @@
 				</c:forEach>
 
 
-				<%-- <li class=""><a href="javascript:;"> <i
+				<li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">User
 							Registration</span> <span class="arrow "></span>
 				</a>
@@ -476,7 +476,7 @@
 								Centre Detail</a></li>
 
 
-					</ul></li> --%>
+					</ul></li>
 
 
 

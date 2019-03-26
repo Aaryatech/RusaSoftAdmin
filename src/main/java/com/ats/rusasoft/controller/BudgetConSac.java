@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
@@ -30,6 +31,7 @@ import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.budget.FinancialYear;
+import com.ats.rusasoft.model.budget.GetInfraStructureBudget;
 import com.ats.rusasoft.model.budget.InfraStructureBudget;
 
 @Controller
@@ -51,6 +53,7 @@ public class BudgetConSac {
 			Info viewAccess = AccessControll.checkAccess("budgetInfrastructureFacility", "budgetInfrastructureFacility",
 					"1", "0", "0", "0", newModuleList);
 
+			//viewAccess.setError(false);
 			if (viewAccess.isError() == false) {
 				model = new ModelAndView("budgetForm/infra_budget_facility_list");
 
@@ -59,12 +62,14 @@ public class BudgetConSac {
 				Info addAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "1", "0", "0", newModuleList);
 
+				//addAccess.setError(false);
+
 				Info editAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "0", "1", "0", newModuleList);
-
+				//editAccess.setError(false);
 				Info deleteAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "0", "0", "1", newModuleList);
-
+				//deleteAccess.setError(false);
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
 					model.addObject("addAccess", 0);
@@ -74,6 +79,19 @@ public class BudgetConSac {
 
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
+
+				map = new LinkedMultiValueMap<>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				map.add("acYearId", (int) session.getAttribute("acYearId"));
+				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
+
+				GetInfraStructureBudget[] resArray = rest.postForObject(
+						Constants.url + "/getInfraStructureBudgetListByAcYearId", map, GetInfraStructureBudget[].class);
+				List<GetInfraStructureBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("budgetList", budgetList);
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -96,14 +114,41 @@ public class BudgetConSac {
 		ModelAndView model = new ModelAndView("budgetForm/infra_budget_facility_add");
 		try {
 
-			model.addObject("title", Names.infra_budget_add);
+			HttpSession session = request.getSession();
 
-			FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
-					FinancialYear[].class);
-			List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			model.addObject("finYearList", finYearList);
+			Info aceess = null;
 
+			aceess = AccessControll.checkAccess("budgetAddInfrastructureFacility", "budgetInfrastructureFacility", "0", "1", "0",
+					"0", newModuleList);
+			//aceess.setError(false);// comment this
+
+			if (aceess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+
+				model.addObject("title", Names.infra_budget_add);
+
+				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
+						FinancialYear[].class);
+				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("finYearList", finYearList);
+
+				FinancialYear curFinYear = rest.getForObject(Constants.url + "/getCurrentFinancialYear",
+						FinancialYear.class);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("curFinYear", curFinYear.getFinYearId());
+
+				InfraStructureBudget budget = rest.postForObject(Constants.url + "/getInfraStructureBudgetByFinYearId",
+						map, InfraStructureBudget.class);
+
+				model.addObject("budget", budget);
+
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -143,42 +188,43 @@ public class BudgetConSac {
 			Info aceess = null;
 
 			if (infraBudgetId == 0) {
-				
-				aceess = AccessControll.checkAccess("insertInfraBudget", "budgetAddInfrastructureFacility", "0",
-						"1", "0", "0", newModuleList);
+
+				aceess = AccessControll.checkAccess("insertInfraBudget", "budgetInfrastructureFacility", "0", "1",
+						"0", "0", newModuleList);
 			} else {
-				
-				aceess = AccessControll.checkAccess("insertInfraBudget", "budgetAddInfrastructureFacility", "0",
-						"0", "1", "0", newModuleList);
+
+				aceess = AccessControll.checkAccess("insertInfraBudget", "budgetInfrastructureFacility", "0", "0",
+						"1", "0", newModuleList);
 
 			}
-			//aceess.setError(false);
+			//aceess.setError(false);// comment this
 
 			if (aceess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
 				InfraStructureBudget infraBudget = new InfraStructureBudget();
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
-
 				String curDateTime = dateFormat.format(cal.getTime());
 
 				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
-				String curDate = dateFormatStr.format(new Date());
-				
 				infraBudget.setAcYearId((int) session.getAttribute("acYearId"));
 				infraBudget.setAddBy(userObj.getUserId());
+				infraBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
+
 				infraBudget.setAddDatetime(curDateTime);
+
+				infraBudget.setInfraBudgetId(infraBudgetId);
+
 				infraBudget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
 				infraBudget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
 				infraBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				infraBudget.setInfraBudgetId(infraBudgetId);
-				infraBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
-				
-				
+				infraBudget.setInfraBudgetTitle(request.getParameter("infra_budget_title"));
+
 				int exInt1 = 0;
 				infraBudget.setExInt1(exInt1);
 				infraBudget.setExInt2(exInt1);
@@ -189,15 +235,14 @@ public class BudgetConSac {
 				infraBudget.setIsActive(1);
 				infraBudget.setDelStatus(1);
 
-
-				FacultyPersonalDetail facPerDetail = restTemplate.postForObject(
-						Constants.url + "saveFacultyPersonalDetail", infraBudget, FacultyPersonalDetail.class);
+				InfraStructureBudget infraBudgetRes = restTemplate.postForObject(
+						Constants.url + "saveInfraStructureBudget", infraBudget, InfraStructureBudget.class);
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
-					redirect = "redirect:/showPersonalDetails";
+					redirect = "redirect:/budgetInfrastructureFacility";
 				else
-					redirect = "redirect:/addPersonalDetails";
+					redirect = "redirect:/budgetAddInfrastructureFacility";
 			}
 
 		} catch (Exception e) {
@@ -208,6 +253,119 @@ public class BudgetConSac {
 		return redirect;// "redirect:/showDeptList";
 
 	}
+
+	// showEditInfraBudget
+	
+	
+	@RequestMapping(value = "/showEditInfraBudget", method = RequestMethod.POST)
+	public ModelAndView showEditInfraBudget(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("budgetForm/infra_budget_facility_add");
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info aceess = null;
+
+			aceess = AccessControll.checkAccess("budgetAddInfrastructureFacility", "budgetInfrastructureFacility", "0", "0", "1",
+					"0", newModuleList);
+			//aceess.setError(false);// comment this
+
+			if (aceess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+				model = new ModelAndView("budgetForm/infra_budget_facility_add");
+				model.addObject("title", Names.infra_budget_edit);
+				
+				int infraBudgetId = Integer.parseInt(request.getParameter("infraBudgetId"));
+
+				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
+						FinancialYear[].class);
+				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("finYearList", finYearList);
+
+				FinancialYear curFinYear = rest.getForObject(Constants.url + "/getCurrentFinancialYear",
+						FinancialYear.class);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("infraBudgetId", infraBudgetId);
+
+				InfraStructureBudget budget = rest.postForObject(Constants.url + "/getInfraStructureBudgetByInfraBudgetId",
+						map, InfraStructureBudget.class);
+
+				model.addObject("budget", budget);
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	//deleteInfraBudget
+	@RequestMapping(value = "/deleteInfraBudget/{infraBudgetId}", method = RequestMethod.GET)
+	public String deleteDepts(HttpServletRequest request, HttpServletResponse response, @PathVariable int infraBudgetId) {
+
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("showEditDept", "showDeptList", "0", "0", "0", "1",
+					newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (infraBudgetId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("infraBudgetIds");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String infraBudgetIdList = sb.toString();
+					infraBudgetIdList = infraBudgetIdList.substring(0, infraBudgetIdList.length() - 1);
+
+					map.add("infraBudgetIdList", infraBudgetIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("infraBudgetIdList", infraBudgetId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteInfraBudget", map, Info.class);
+				redirect = "redirect:/budgetInfrastructureFacility";
+			}
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteDepts at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect; // "redirect:/showDeptList";
+
+	}
+	
+	
 
 	@RequestMapping(value = "/budgetOnLibrary", method = RequestMethod.GET)
 	public ModelAndView budgetOnLibrary(HttpServletRequest request, HttpServletResponse response) {
