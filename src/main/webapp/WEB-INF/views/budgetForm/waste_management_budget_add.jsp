@@ -84,7 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button
+								<a
+									href="${pageContext.request.contextPath}/budgetOnGreenInitiativesAndWasteMngmnt"><button
 										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
@@ -115,40 +116,29 @@
 												</select>
 											</div>
 										</div>
+
 										<div class="form-group">
 
-											<label class="control-label col-sm-2"
-												for="infra_budget_title">Budget Library Title <span
-												class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													id="infra_budget_title" name="infra_budget_title"
-													placeholder="Title of Library Facility" required>
-											</div>
-										</div>
-										<div class="form-group">
-
-											<label class="control-label col-sm-2" for="allocatedAmt">Budget
-												Allocated Amount <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="allocatedAmt">Total
+												Budget Allocated Amount <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
 													id="budget_allocated" name="budget_allocated"
-													placeholder="Budget Allocated Amount in Rupees"
+													placeholder="Total Budget Allocated Amount in Rupees"
 													value="${page.pageName}" required>
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized Amount<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="utilizedAmt">Total
+												Budget Utilized Amount<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="budget_utilized"
 													name="budget_utilized"
-													placeholder="Budget Utilized Amount in Rupees"
+													placeholder="Total Budget Utilized Amount in Rupees"
 													value="${page.pageName}" required>
 											</div>
 										</div>
@@ -213,7 +203,7 @@
 		}
 		return false;
 	}
-
+	
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -264,12 +254,6 @@
 	    return true;
 	}
 	</script>
-
-
-
-
-
-
 
 
 

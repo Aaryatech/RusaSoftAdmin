@@ -15,7 +15,6 @@ import com.ats.rusasoft.commons.Names;
 @Scope("session")
 public class BudgetController {
 
-	
 	@RequestMapping(value = "/budgetPhysicalFacility", method = RequestMethod.GET)
 	public ModelAndView budgetPhysicalFacility(HttpServletRequest request, HttpServletResponse response) {
 
@@ -92,10 +91,31 @@ public class BudgetController {
 	public ModelAndView budgetOnGreenInitiativesAndWasteMngmnt(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("budgetForm/budgetWasteManagement");
+		ModelAndView model = new ModelAndView("budgetForm/waste_management _budget_list");
 		try {
 
-			model.addObject("title", "Budget on Green Initiatives & Waste Management");
+			model.addObject("title", Names.waste_management_budget_list);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	// waste_management _budget_add
+
+	@RequestMapping(value = "/budgetAddOnGreenInitiativesAndWasteMngmnt", method = RequestMethod.GET)
+	public ModelAndView budgetAddOnGreenInitiativesAndWasteMngmnt(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("budgetForm/waste_management_budget_add");
+		try {
+
+			model.addObject("title", Names.waste_management_budget_add);
 
 		} catch (Exception e) {
 

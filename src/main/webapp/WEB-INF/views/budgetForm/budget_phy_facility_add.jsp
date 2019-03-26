@@ -98,7 +98,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 
 										<div class="form-group">
@@ -200,15 +200,20 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
-		$(function() {
-			$('#submitForm').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
+	var wasSubmitted = false;
+	function checkBeforeSubmit() {
+		if (!wasSubmitted) {
+			var x = confirm("Do you really want to submit the form?");
+			if (x == true) {
+				wasSubmitted = true;
+				document.getElementById("sub1").disabled = true;
+				document.getElementById("sub2").disabled = true;
 
-						return true;
-					});
-		});
+				return wasSubmitted;
+			}
+		}
+		return false;
+	}
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
