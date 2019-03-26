@@ -407,7 +407,7 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Add" id="svebtn"> <input
+													onclick="submit_f(1)" value="Save" id="svebtn"> <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
 																		Next" id="svebtnnext">
@@ -444,7 +444,7 @@
 		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="./javascript.js"></script>
 	<script
-		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false">
+		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
 		<script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);

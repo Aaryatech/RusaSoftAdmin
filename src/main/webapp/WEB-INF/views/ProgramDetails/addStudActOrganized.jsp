@@ -407,10 +407,9 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Add"> <input
+													onclick="submit_f(1)" value="Save"> <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
@@ -444,16 +443,19 @@
 		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="./javascript.js"></script>
 	<script
-		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false">
-		<script type="text/javascript">
-		function submit_f(view) {
-			//alert(view);
-			document.getElementById("is_view").value = view;
-
-		}
-	</script>
+		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
+	
+	
+	
 
 	<script type="text/javascript">
+	
+	function submit_f(view) {
+	//	alert(view);
+		document.getElementById("is_view").value = view;
+
+	}
+	
 		function showExtraField() {
 			//alert("hii");
 			//document.getElementById("abc").style = "display:none"

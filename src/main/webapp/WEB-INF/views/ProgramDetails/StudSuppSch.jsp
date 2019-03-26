@@ -76,9 +76,9 @@
 											id="example-1">
 											<thead>
 												<tr>
-													<th class="check" style="text-align: center; width: 5%;"><input
+													<!-- <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
 													<th style="text-align: center;">Sr.No.</th>
 													<th style="text-align: center;">Scheme</th>
 													<th style="text-align: center;">Level</th>
@@ -93,10 +93,10 @@
 											<tbody>
 												<c:forEach items="${studList}" var="stud" varStatus="count">
 													<tr>
-														<td style="text-align: center;"><input
+														<%-- <td style="text-align: center;"><input
 															type="checkbox" class="chk" name="studentSchmIds"
 															id="studentSchmIds${count.index+1}"
-															value="${stud.sprtSchmId}" /></td>
+															value="${stud.sprtSchmId}" /></td> --%>
 														<td style="text-align: center;">${count.index+1}</td>
 														<td>${stud.schemeName}</td>
 														<td style="text-align: center;">${stud.level}</td>
@@ -123,10 +123,10 @@
 
 											</tbody>
 										</table>
-										<input type="submit" class="btn btn-primary" value="Delete"
+										<!-- <input type="submit" class="btn btn-primary" value="Delete"
 											id="deleteId"
 											onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-											style="align-content: center; width: 113px; margin-left: 40px;">
+											style="align-content: center; width: 113px; margin-left: 40px;"> -->
 									</div>
 
 								</div>

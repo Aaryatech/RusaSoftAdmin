@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" "  onload="hideText()">
+<body   onload="hideText()">
 <c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -126,11 +126,70 @@
 															</label>
 															<div class="col-sm-6">
 																<select id="approveValue" name="schemeName" class="form-control"  onchange="showExtraField()"  required>
-															<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
-																	<option value="${stud.schemeName}" selected>${stud.schemeName}</option>
-															
+												 		<option value="Capability Enhancement">Capability Enhancement</option>
+								<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+								<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+													etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+													etc)</option>
+								<option value="Vocational Education Training">Vocational Education Training</option>
+								<option value="7">Any Other</option>
+												 		
+												 			<%-- <c:choose>
+												 			<c:when test="${stud.schemeName eq 'Capability Enhancement'}">
+																<option selected value="Capability Enhancement">Capability Enhancement</option>
+																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)</option>
+																<option value="Vocational Education Training">Vocational Education Training</option>
+																<option value="7">Any Other</option>
 															</c:when> 
-															<c:otherwise> --%>
+															
+															<c:when test="${stud.schemeName eq 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)'}">
+																<option value="Capability Enhancement">Capability Enhancement</option>
+																<option selected value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)</option>
+																<option value="Vocational Education Training">Vocational Education Training</option>
+																<option value="7">Any Other</option>
+															</c:when> 
+															
+															<c:when test="${stud.schemeName eq 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)'}">
+																<option value="Capability Enhancement">Capability Enhancement</option>
+																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+																<option selected value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)</option>
+																<option value="Vocational Education Training">Vocational Education Training</option>
+																<option value="7">Any Other</option>
+															</c:when> 
+															
+															<c:when test="${stud.schemeName eq 'Vocational Education Training'}">
+																<option value="Capability Enhancement">Capability Enhancement</option>
+																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)</option>
+																<option selected value="Vocational Education Training">Vocational Education Training</option>
+																<option value="7">Any Other</option>
+															</c:when> 
+															
+														 <c:when test="${stud.schemeName eq '7'}">
+																<option value="Capability Enhancement">Capability Enhancement</option>
+																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+																							etc)</option>
+																<option value="Vocational Education Training">Vocational Education Training</option>
+																<option selected value="7">Any Other</option>
+															</c:when> 
+															 
+															
+															
+															
+															<c:otherwise> 
 							<option value="Capability Enhancement">Capability Enhancement</option>
 								<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
 								<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
@@ -139,8 +198,8 @@
 								<option value="Vocational Education Training">Vocational Education Training</option>
 								<option value="7">Any Other</option>
 							
-								<%-- </c:otherwise>
-									</c:choose> --%>
+								 </c:otherwise>
+									</c:choose>  --%>
 																</select>
 																
 																
@@ -154,7 +213,7 @@
 														Another Scheme Name <span class="text-danger">*</span>
 													</label>
 														<div class="col-sm-6">
-															<input type="text" 
+															<input type="text"  autocomplete="off" 
 																 class="form-control" id="anotherScheme" value="${stud.schemeName}" pattern="^(?!\s*$).+"
 																	 name="anotherScheme" placeholder="Another Scheme" onchange="checkUnique(this.value,1)">
 														</div>
@@ -168,17 +227,32 @@
 														<div class="col-sm-6">
 															<select id="approveValue" name="level"class="form-control"  onchange="showExtraField()"  required>
 																
-																<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
-																	<option value="${stud.level}" selected>${stud.level}</option>
-															
+																 <c:choose>
+															 <c:when test="${stud.level eq 'International'}">
+																<option selected value="International">International</option>
+																<option value="State">State</option>
+																<option value="Regional">Regional</option>
 															</c:when> 
-															<c:otherwise> --%>
+															
+															<c:when test="${stud.level eq 'State'}">
+																<option value="International">International</option>
+																<option selected value="State">State</option>
+																<option value="Regional">Regional</option>
+															</c:when> 
+															
+															<c:when test="${stud.level eq 'Regional'}">
+																<option value="International">International</option>
+																<option value="State">State</option>
+																<option selected value="Regional">Regional</option>
+															</c:when> 
+																
+															<c:otherwise> 
 																<option value="International">International</option>
 																<option value="State">State</option>
 																<option value="Regional">Regional</option>
-																<%-- </c:otherwise>
-																</c:choose> --%>
-															</select>
+															 </c:otherwise>
+																</c:choose> 	
+																</select>
 																
 																
 														</div>
@@ -190,15 +264,23 @@
 															</label>
 															<div class="col-sm-6">
 																<select id="approveValue" name="type"class="form-control"  onchange="showExtraField()"  required>
-															<%-- <c:choose><c:when test="${stud.sprtSchmId==studId}">
+														 <c:choose>
+															 <c:when test="${stud.type eq 'Govt.'}">
+																<option selected value="Govt">Govt.</option>
+																<option value="Non Govt.">Non Govt.</option>
 															
-															<option value="${stud.type}" selected>${stud.type}</option>
+															</c:when>
+															<c:when test="${stud.type eq 'Non Govt.'}">
+																<option value="Govt">Govt.</option>
+																<option selected value="Non Govt.">Non Govt.</option>
 															
-															</c:when>  <c:otherwise>--%>
-															<option value="Govt">Govt.</option>
-															<option value="Non Govt.">Non Govt.</option>
-															<%-- </c:otherwise>
-															</c:choose> --%>
+															</c:when>
+															  <c:otherwise>
+																<option value="Govt">Govt.</option>
+																<option value="Non Govt.">Non Govt.</option>
+															 </c:otherwise>
+															 	
+															</c:choose> 
 																</select>
 																
 																
@@ -213,7 +295,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="number" min="0" class="form-control" id="studBenifit" 	value="${stud.noStudentBenifited}"
-																	name="studBenifit" placeholder="Students Benifited" required>
+																	name="studBenifit" placeholder="Students Benifited" autocomplete="off"  required>
 															</div>
 														</div>
 
@@ -227,7 +309,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" 
-																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}" pattern="^(?!\s*$).+"
+																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}" pattern="^(?!\s*$).+" autocomplete="off" 
 																	 name="supportAgency" placeholder="Support Agency" onchange="checkUnique(this.value,1)" required>
 															</div>
 														</div>
@@ -241,7 +323,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker" id=" yearofIntro"  placeholder="dd-MM-YYYY" 	value="${ydate}"
-																	name="yearofIntro"  required>
+																	autocomplete="off"  name="yearofIntro"  required>
 															</div>
 														</div>
 														
@@ -306,7 +388,7 @@ var wasSubmitted = false;
 
 function submit_f(view){
 	
-	alert("id is"+view);
+	//alert("id is"+view);
 		document.getElementById("is_view").value=view;//create this 
 		/* var form=document.getElementById("form_sample_2");
 	    form.setAttribute("method", "post");
@@ -328,7 +410,7 @@ function submit_f(view){
 function showExtraField() {
 	//alert("hii");
 	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("approveValue").value
+		var qualType = document.getElementById("approveValue").value;
 		//alert("qualType::"+qualType);
 		
 		if (qualType == 7) {
