@@ -29,6 +29,7 @@ import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.budget.FinancialYear;
 import com.ats.rusasoft.model.budget.GetInfraStructureBudget;
+import com.ats.rusasoft.model.budget.GetLibraryBudget;
 import com.ats.rusasoft.model.budget.InfraStructureBudget;
 import com.ats.rusasoft.model.budget.LibraryBudget;
 
@@ -411,9 +412,9 @@ public class BudgetConSac {
 				map.add("acYearId", (int) session.getAttribute("acYearId"));
 				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
 
-				GetInfraStructureBudget[] resArray = rest.postForObject(
-						Constants.url + "/getLibraryBudgetListByAcYearId", map, GetInfraStructureBudget[].class);
-				List<GetInfraStructureBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
+				GetLibraryBudget[] resArray = rest.postForObject(
+						Constants.url + "/getLibraryBudgetListByAcYearId", map, GetLibraryBudget[].class);
+				List<GetLibraryBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
 
 				model.addObject("budgetList", budgetList);
 
@@ -436,7 +437,6 @@ public class BudgetConSac {
 		ModelAndView model = null; // new ModelAndView("budgetForm/budget_library_add");
 		try {
 
-			model.addObject("title", Names.budget_library_add);
 
 			HttpSession session = request.getSession();
 
@@ -451,6 +451,8 @@ public class BudgetConSac {
 			if (aceess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
+				
+				model= new ModelAndView("budgetForm/budget_library_add");
 
 				model.addObject("title", Names.budget_library_add);
 
@@ -581,6 +583,64 @@ public class BudgetConSac {
 	
 	
 	// showEditLibBudget
+	
+	@RequestMapping(value = "/showEditLibBudget", method = RequestMethod.POST)
+	public ModelAndView showEditLibBudget(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model =null;// new ModelAndView("budgetForm/infra_budget_facility_add");
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info aceess = null;
+
+			aceess = AccessControll.checkAccess("budgetAddInfrastructureFacility", "budgetOnLibrary", "0",
+					"0", "1", "0", newModuleList);
+			// aceess.setError(false);// comment this
+
+			if (aceess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+				model= new ModelAndView("budgetForm/budget_library_add");
+
+
+				model.addObject("title", Names.lib_budget_edit);
+
+				int libBudgetId = Integer.parseInt(request.getParameter("libBudgetId"));
+
+				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
+						FinancialYear[].class);
+				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("finYearList", finYearList);
+
+				FinancialYear curFinYear = rest.getForObject(Constants.url + "/getCurrentFinancialYear",
+						FinancialYear.class);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("libBudgetId", libBudgetId);
+
+				LibraryBudget budget = rest.postForObject(
+						Constants.url + "/getLibBudgetByLibBudgetId", map, LibraryBudget.class);
+
+				model.addObject("budget", budget);
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	
 	// deleteLibBudget
 
 }

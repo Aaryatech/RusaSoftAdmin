@@ -108,9 +108,9 @@
 												<tr>
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
-													<th width="40%">Title of Library Facility</th>
-													<th>Budget Allocated Amount</th>
-													<th>Budget Utilized Amount</th>
+													<th width="40%">Title</th>
+													<th>Budget Allocated</th>
+													<th>Budget Utilized</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -122,10 +122,10 @@
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${accOff.officerId}" /></td> --%>
 														<td align="center">${count.index+1}</td>
-														<td>${budget.finYear}</td>
+														<td align="center">${budget.finYear}</td>
 														<td>${budget.libBudgetTitle}</td>
-														<td align="center">${budget.budgetAllocated}</td>
-														<td align="center">${budget.budgetUtilized}</td>
+														<td align="right">${budget.budgetAllocated}</td>
+														<td align="right">${budget.budgetUtilized}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEdit(${budget.libBudgetId})"
 																	href="#"><span class="glyphicon glyphicon-edit"

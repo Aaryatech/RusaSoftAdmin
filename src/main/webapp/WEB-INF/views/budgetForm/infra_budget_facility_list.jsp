@@ -121,10 +121,10 @@
 															name="accOffIds" id="accOffIds${count.index+1}"
 															value="${accOff.officerId}" /></td> --%>
 														<td align="center">${count.index+1}</td>
-														<td>${budget.finYear}</td>
+														<td align="center">${budget.finYear}</td>
 														<td>${budget.infraBudgetTitle}</td>
-														<td align="center">${budget.budgetAllocated}</td>
-														<td align="center">${budget.budgetUtilized}</td>
+														<td align="right">${budget.budgetAllocated}</td>
+														<td align="right">${budget.budgetUtilized}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEdit(${budget.infraBudgetId})"
 																	href="#"><span class="glyphicon glyphicon-edit"
