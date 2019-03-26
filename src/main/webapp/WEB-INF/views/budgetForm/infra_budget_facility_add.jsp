@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -96,9 +97,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertInfraBudget"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
 										<div class="form-group">
 
@@ -108,9 +109,10 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" required>
-													<option value="2018-2019">2018-2019</option>
-													<option value="2017-2018">2017-2018</option>
-													<option value="2016-2017">2016-2017</option>
+													<c:forEach items="${finYearList}" var="finYear">
+														<option value="${finYear.finYearId}">${finYear.finYear}</option>
+
+													</c:forEach>
 
 												</select>
 											</div>
@@ -122,9 +124,9 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="text" class="form-control" onchange="trim(this)"
 													id="infra_budget_title" name="infra_budget_title"
-													placeholder="Title of Library Facility" required>
+													placeholder="Title of Infrastructure Budget" required>
 											</div>
 										</div>
 										<div class="form-group">
@@ -133,8 +135,8 @@
 												Allocated Amount <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													id="budget_allocated" name="budget_allocated"
+												<input type="text"  min="0" min="0" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)" class="form-control"
+													id="budget_allocated"  name="budget_allocated"
 													placeholder="Budget Allocated Amount in Rupees"
 													value="${page.pageName}" required>
 											</div>
@@ -146,8 +148,8 @@
 												Utilized Amount<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="budget_utilized"
-													name="budget_utilized"
+												<input type="text" class="form-control" id="budget_utilized" onchange="trim(this)"
+													name="budget_utilized" min="0" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)"
 													placeholder="Budget Utilized Amount in Rupees"
 													value="${page.pageName}" required>
 											</div>
@@ -162,6 +164,8 @@
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" id="infraBudgetId" name="infraBudgetId" value="0">
+												
 											</div>
 										</div>
 
@@ -202,15 +206,6 @@
 
 
 	<script type="text/javascript">
-		$(function() {
-			$('#submitForm').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
-
-						return true;
-					});
-		});
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -219,6 +214,22 @@
 			return;
 		}
 	</script>
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
+
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+		</script>
 
 	<script type="text/javascript">
 		function submit_f(view) {
@@ -256,7 +267,7 @@
 	            return false;
 	        }
 	    }
-	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	    if (charCode != 46 && charCode==17 && charCode > 31 && (charCode < 48 || charCode > 57)){
 	        return false;
 	    }
 	    return true;
