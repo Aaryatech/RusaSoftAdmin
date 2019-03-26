@@ -213,17 +213,18 @@ public class HomeController {
 			Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
 			System.out.println(errMsg);
 
-		
+			session.invalidate();
 
 		} catch (Exception e) {
 
 			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
 
 			e.printStackTrace();
-
+			HttpSession session = request.getSession();
+			session.invalidate();
 		}
 
-		 return "redirect:/showWelcomePage";
+		 return "redirect:/";
 
 	}
 
@@ -318,23 +319,16 @@ public class HomeController {
 					
 						RestTemplate rest = new RestTemplate();
 						LoginLog editInst = rest.postForObject(Constants.url + "saveLoginLog", llog, LoginLog.class);		 
-					 
-					 
-					 
-				
+					  
 					session.setAttribute("userName", name);
-					session.setAttribute("password", password);
-					/*session.setAttribute("isEnroll", userObj.getExInt1());
-					session.setAttribute("userId", userObj.getUserId());*/
+					session.setAttribute("password", password); 
 					
 					session.setAttribute("userObj", userObj);
 					
-					int instituteId=userObj.getGetData().getUserInstituteId();
-					System.err.println("Institue Id:"+instituteId);
+					int instituteId=userObj.getGetData().getUserInstituteId(); 
 					session.setAttribute("instituteId", instituteId);
 					
-					int userId = userObj.getUserId();
-					System.err.println("User Id:"+userId);
+					int userId = userObj.getUserId(); 
 					session.setAttribute("userId", userId);
 				 
 					 
@@ -352,14 +346,8 @@ public class HomeController {
 					ResponseEntity<List<ModuleJson>> responseEntity = restTemplate.exchange(Constants.url + "getRoleJson",
 							HttpMethod.POST, new HttpEntity<>(map), typeRef);
 					
-					 List<ModuleJson> newModuleList = responseEntity.getBody();
-					
-					 //System.err.println("new Module List " +newModuleList.toString());
-					 
-						session.setAttribute("newModuleList", newModuleList);
-						
-						//sachin
-
+					 List<ModuleJson> newModuleList = responseEntity.getBody(); 
+						session.setAttribute("newModuleList", newModuleList); 
 						 map =new LinkedMultiValueMap<String, Object>(); 
 						 map.add("type", userObj.getUserType());
 						
@@ -377,7 +365,12 @@ public class HomeController {
 						 map.add("yearId", loginAcYearId);
 						AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
 						session.setAttribute("acYearValue", acYear.getAcademicYear());
-
+						
+					 map = new LinkedMultiValueMap<String, Object>();
+						map.add("instituteId", userObj.getGetData().getUserInstituteId());
+						// getInstitute
+						Institute instituteInfo = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
+						session.setAttribute("instituteInfo", instituteInfo);
 					}
 					catch (Exception e) {
 						e.printStackTrace();

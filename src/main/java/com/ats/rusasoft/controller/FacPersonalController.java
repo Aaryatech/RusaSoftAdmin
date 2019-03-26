@@ -446,7 +446,7 @@ public class FacPersonalController {
 
 				facPhdDetail.setIsPhdGuide(Integer.parseInt(request.getParameter("isPhdGuide")));
 
-				if (facPhdDetail.getIsPhdGuide() == 1) {
+				//if (facPhdDetail.getIsPhdGuide() == 1) {
 
 					facPhdDetail.setFacultyId(staffId);
 
@@ -466,7 +466,7 @@ public class FacPersonalController {
 					FacultyPhdDetails facPerDetail = restTemplate.postForObject(Constants.url + "saveFacultyPhdDetails",
 							facPhdDetail, FacultyPhdDetails.class);
 
-				}
+				//}
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				//if (isView == 1)

@@ -37,6 +37,7 @@ import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.InstituteInfo;
 import com.ats.rusasoft.model.Librarian;
+import com.ats.rusasoft.model.LibraryInfo;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.Student;
@@ -44,18 +45,36 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
+
 public class LibraryController {
 
 	RestTemplate rest = new RestTemplate();
-
+	
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Calendar cal = Calendar.getInstance();
+	String curDateTime = dateFormat.format(cal.getTime());
+	
+	String redirect= null;
 	@RequestMapping(value = "/libraryBasicInfo", method = RequestMethod.GET)
 	public ModelAndView showStudMentor(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("libraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
+					newModuleList);
 
-			model.addObject("title", "Library Basic Information");
+			if (view.isError() == true) {
+				
+				model = new ModelAndView("accessDenied");
 
+			} else {
+			
+				LibraryInfo libInfo = new LibraryInfo();
+				model.addObject("libInfo", libInfo);
+				model.addObject("title", "Library Basic Information");
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -65,6 +84,56 @@ public class LibraryController {
 		return model;
 
 	}
+	@RequestMapping(value = "/insertLibInfo", method = RequestMethod.POST)
+	public String  insertLibBasicInfo(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			
+			LibraryInfo libInfo = new LibraryInfo();
+			
+			libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
+			libInfo.setInstituteId(instituteId);
+			libInfo.setIsLibAutomated(Integer.parseInt(request.getParameter("isUsingSoft")));
+			libInfo.setSoftName(request.getParameter("swName"));
+			libInfo.setSoftVersion(request.getParameter("version"));
+			libInfo.setUsersOfLms(Integer.parseInt(request.getParameter("userLms")));
+			libInfo.setDateOfPurchaseAutomation(request.getParameter("purchaseDate"));
+			libInfo.setNoCompLan(Integer.parseInt(request.getParameter("noOfComp")));
+			libInfo.setBandwidthForAccessingEresources(request.getParameter("bandwidth"));
+			libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
+			libInfo.setAvgTeacher(Float.parseFloat(request.getParameter("avgTeacher")));
+			libInfo.setAvgStudent(Float.parseFloat(request.getParameter("avgStud")));
+			/*
+			 * libInfo.setAddBy(); libInfo.setAddDatetime(curDateTime); libInfo.setEditBy();
+			 * libInfo.setEditDatetime(curDateTime); libInfo.setIsPlanning(isPlanning);
+			 * libInfo.setDateOfPlanningEstablishment(dateOfPlanningEstablishment);
+			 * libInfo.setIsAdministration(isAdministration);
+			 * libInfo.setDateOfAdministrationEstablishment(
+			 * dateOfAdministrationEstablishment); libInfo.setIsFinanceAcc(isFinanceAcc);
+			 * libInfo.setDateOfFinanceEstablishment(dateOfFinanceEstablishment);
+			 * libInfo.setIsStudentAdmition(isStudentAdmition);
+			 * libInfo.setDateOfStudentEstablishment(dateOfStudentEstablishment);
+			 * libInfo.setIsExamination(isExamination);
+			 * libInfo.setDateOfExaminationEstablishment(dateOfExaminationEstablishment);
+			 */
+			libInfo.setDelStatus(1);
+			libInfo.setExInt1(0);
+			libInfo.setExVar1("NA");
+			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return redirect;
+
+	}
+	
 
 	@RequestMapping(value = "/rareBookInformation", method = RequestMethod.GET)
 	public ModelAndView rareBookInformation(HttpServletRequest request, HttpServletResponse response) {

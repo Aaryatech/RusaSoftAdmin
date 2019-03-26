@@ -16,11 +16,11 @@
 				</div>
 				<div class="profile-details col-xs-8">
 					<h3>
-						<a href="ui-profile.html">Institute Name</a>
+						<a href="#">${sessionScope.instituteInfo.instituteName}</a>
 						<!-- Available statuses: online, idle, busy, away and offline -->
 						<span class="profile-status online"></span>
 					</h3>
-					<p class="profile-title">Address</p>
+					<!-- <p class="profile-title">Address</p> -->
 				</div>
 			</div>
 			<!-- USER INFO - END -->

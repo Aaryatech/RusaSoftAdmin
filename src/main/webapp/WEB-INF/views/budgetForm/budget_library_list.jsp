@@ -84,6 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+							
 								<a href="${pageContext.request.contextPath}/budgetAddOnLibrary"><button
 										type="button" class="btn btn-success">Add</button></a>
 
@@ -110,11 +111,43 @@
 													<th width="40%">Title of Library Facility</th>
 													<th>Budget Allocated Amount</th>
 													<th>Budget Utilized Amount</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
+											<c:forEach items="${budgetList}" var="budget"
+													varStatus="count">
+													<tr>
+														<%-- <td align="center"><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td> --%>
+														<td align="center">${count.index+1}</td>
+														<td>${budget.finYear}</td>
+														<td>${budget.libBudgetTitle}</td>
+														<td align="center">${budget.budgetAllocated}</td>
+														<td align="center">${budget.budgetUtilized}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a onclick="showEdit(${budget.libBudgetId})"
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	title="Edit" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+															<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteLibBudget/${budget.libBudgetId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
+											
 											</tbody>
 										</table>
+										<input type="hidden" id="libBudgetId" name="libBudgetId" value="0">
+										
 
 									</form>
 								</div>
@@ -219,6 +252,21 @@
 					[ i + 1, year, facilityTitle, allocatedAmt, utilizedAmt ])
 					.draw();
 			document.getElementById("index").value = i + 1;
+		}
+		
+		
+	</script>
+
+
+	<script type="text/javascript">
+		function showEdit(libBudgetId){
+			document.getElementById("libBudgetId").value=libBudgetId;//create this 
+			var form=document.getElementById("form_sample_2");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditLibBudget");
+			form.submit();
+			
 		}
 	</script>
 

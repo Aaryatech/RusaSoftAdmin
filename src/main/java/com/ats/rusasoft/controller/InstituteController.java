@@ -918,8 +918,17 @@ public class InstituteController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/genderEquity");
 		try {
-
+			
 			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showGenderEquity", "showGenderEquity", "1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
 
 			int instituteId = (int) session.getAttribute("instituteId");
 			int yId = (int) session.getAttribute("acYearId");
@@ -934,7 +943,28 @@ public class InstituteController {
 			model.addObject("gndrList", gndrEqltyList);
 
 			model.addObject("title", "Gender Equality Initiatives");
+			Info add = AccessControll.checkAccess("showGenderEquity", "showGenderEquity", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showGenderEquity", "showGenderEquity", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showGenderEquity", "showGenderEquity", "0", "0", "0", "1",
+					newModuleList);
 
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+		}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -950,11 +980,22 @@ public class InstituteController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_gender_equity");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("showAddGenderEquity", "showGenderEquity", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			GenderEqalityPrg gendrEqualityt = new GenderEqalityPrg();
 
 			model.addObject("title", "Add Gender Equality Initiatives");
 			model.addObject("gndrEqual", gendrEqualityt);
-
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -1017,6 +1058,18 @@ public class InstituteController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_gender_equity");
 		try {
+			
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("showAddGenderEquity", "showGenderEquity", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 
 			GenderEqalityPrg gendrEqualityt = new GenderEqalityPrg();
 
@@ -1029,7 +1082,7 @@ public class InstituteController {
 			model.addObject("gndrEqual", gndrEqlity);
 
 			model.addObject("title", "Edit Gender Equality Initiatives");
-
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -1045,12 +1098,24 @@ public class InstituteController {
 			HttpServletResponse response) {
 
 		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("showAddGenderEquity", "showGenderEquity", "0", "0", "0", "1",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("gndrDataId", gndrDataId);
 
 			GenderEqalityPrg delGnder = rest.postForObject(Constants.url + "/deleteGenderEqualityById", map,
 					GenderEqalityPrg.class);
-
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
