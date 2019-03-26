@@ -112,12 +112,20 @@ public class AccessRightController {
 		//Constants.mainAct = 22;
 		//Constants.subAct = 106;
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			com.ats.rusasoft.model.Info info = AccessControll.checkAccess("showRoleList", "showRoleList", "1", "0", "0", "0",newModuleList);
+			
+			if(info.isError()==false) {
 			accessRightModuleList = rest.getForObject(Constants.url + "getAllModuleAndSubModule",
 					AccessRightModuleList.class);
 			//System.out.println("Access List " + accessRightModuleList.toString());
 			model.addObject("allModuleList", accessRightModuleList.getAccessRightModuleList());
 			model.addObject("title", "Create Role");
 			isError = 0;
+			}else {
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -159,11 +167,19 @@ public class AccessRightController {
 
 		try {
 
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList =(List<ModuleJson>)session.getAttribute("newModuleList"); 
+			com.ats.rusasoft.model.Info info = AccessControll.checkAccess("showRoleList", "showRoleList", "1", "0", "0", "0",newModuleList);
+			
+			if(info.isError()==false) {
 			CreatedRoleList createdRoleList = rest.getForObject(Constants.url + "getAllAccessRole",
 					CreatedRoleList.class);
 			System.out.println("Access List " + createdRoleList.toString());
 			model.addObject("createdRoleList", createdRoleList.getAssignRoleDetailList());
 			model.addObject("title", "Roles List");
+			}else {
+				model = new ModelAndView("accessDenied");
+			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

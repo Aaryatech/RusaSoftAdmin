@@ -16,11 +16,11 @@
 				</div>
 				<div class="profile-details col-xs-8">
 					<h3>
-						<a href="ui-profile.html">Institute Name</a>
+						<a href="#">${sessionScope.instituteInfo.instituteName}</a>
 						<!-- Available statuses: online, idle, busy, away and offline -->
 						<span class="profile-status online"></span>
 					</h3>
-					<p class="profile-title">Address</p>
+					<!-- <p class="profile-title">Address</p> -->
 				</div>
 			</div>
 			<!-- USER INFO - END -->
@@ -81,7 +81,7 @@
 				</c:forEach>
 
 
-				<li class=""><a href="javascript:;"> <i
+				<%-- <li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">User
 							Registration</span> <span class="arrow "></span>
 				</a>
@@ -476,7 +476,7 @@
 								Centre Detail</a></li>
 
 
-					</ul></li>
+					</ul></li> --%>
 
 
 
