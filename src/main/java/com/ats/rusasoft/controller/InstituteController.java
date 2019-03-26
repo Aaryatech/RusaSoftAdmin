@@ -620,9 +620,10 @@ public class InstituteController {
 
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
-				redirect = "redirect:/showAddActivityOrganized";
-			else
 				redirect = "redirect:/showActivityOrganized";
+			else
+				redirect = "redirect:/showAddActivityOrganized";
+
 
 		} catch (Exception e) {
 

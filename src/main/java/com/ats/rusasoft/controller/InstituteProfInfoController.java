@@ -562,7 +562,7 @@ public class InstituteProfInfoController {
 					lib1.setMouBeneficiary(beneficiaryMOU);
 					lib1.setMouTitle(title);
 					lib1.setYearId(acYearId);
-					lib.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
+					lib1.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					lib1.setMouInstitute(instituteOfMoU);
 					lib1.setMouAgency(c);
 
