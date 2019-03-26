@@ -160,13 +160,13 @@
 															of Consultancy <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="amount"
+															<input type="number" min="0" class="form-control" id="amount"
 																placeholder="Amount of Consultancy" name="amount"
 																placeholder="" value="${editConsultancy.consAmount}"
 																required>
 																
-															  <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy">  
-																
+<!-- 															  <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy">  
+ -->																
 															<!-- </div> -->
 														</div>
 													</div>
@@ -176,7 +176,7 @@
 															Period<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="conPeriod"
+															<input type="number" min="0" class="form-control" id="conPeriod"
 																placeholder="Consultancy Period" name="conPeriod"
 																placeholder="" value="${editConsultancy.consPeriod}"
 																required>

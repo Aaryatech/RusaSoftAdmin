@@ -138,8 +138,8 @@
 														<td>${contribtn.conLevel}</td>
 														<td>${contribtn.conName}</td>
 														<td>${contribtn.conUniversity}</td>
-														<td>${contribtn.conFrom}</td>
-														<td>${contribtn.conTo}</td>
+														<td  style="text-align: center">${contribtn.conFrom}</td>
+														<td  style="text-align: center">${contribtn.conTo}</td>
 														<td align="center"><c:if test="${editAccess==0}"> 
 																<a href="${pageContext.request.contextPath}/editContribtn/${contribtn.conId}"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;

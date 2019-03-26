@@ -260,7 +260,7 @@
 														Sanctioned <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="amt_sanc"  onkeypress='return restrictAlphabets(event)'
+														<input type="number" min="0"  class="form-control" id="amt_sanc"  onkeypress='return restrictAlphabets(event)'
 															name="amt_sanc" placeholder="Amount Sanctioned" value="${activity.activityAmountSanctioned}"
 															autocomplete="off" required>
 													</div>
@@ -274,7 +274,7 @@
 														Utilized <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
+														<input type="number" min="0" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
 															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}"
 															autocomplete="off" required onchange="chkSncAmt()">
 													</div>
