@@ -279,7 +279,7 @@
 														<input type="email" onchange="trim(this)"
 															class="form-control" id="pres_email"
 															value="${editInst.presidentEmail}" name="pres_email"
-															placeholder="abc@xyz.com Chairman/President Email Id"
+															placeholder="Chairman/President Email Id"
 															required>
 													</div>
 												</div>

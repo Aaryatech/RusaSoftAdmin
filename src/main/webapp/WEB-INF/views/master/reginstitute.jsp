@@ -584,18 +584,12 @@
 
 		function showIsReg() {
 
-			var x = $
-			{
-				editInst.instituteId
-			}
+			var x = ${editInst.instituteId}
 
 			if (x > 0) {
 
-				var isReg = $
-				{
-					editInst.isRegistration
-				}
-				;
+				var isReg = ${editInst.isRegistration};
+				
 				//alert("Is Reg " +isReg);
 				if (isReg == 0) {
 

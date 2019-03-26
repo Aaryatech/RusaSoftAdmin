@@ -490,14 +490,15 @@ public class FacPersonalController {
 	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
-		http: // localhost:8895/rusasoft/showAddAcademicDetails
+		//http: // localhost:8895/rusasoft/showAddAcademicDetails
+			int facultyId =0;
 		try {
 
 	 		model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
 			model.addObject("title", "Add Academic Details");
 			
-			int facultyId =0;
+			
 			try {
 			facultyId=Integer.parseInt(request.getParameter("add_fac_detail_id"));
 			}catch (Exception e) {
@@ -524,10 +525,14 @@ public class FacPersonalController {
 			model.addObject("facultyId", facultyId);
 
 		} catch (Exception e) {
+			//model.addObject("editFacAcad", editFacAcad);
+			model.addObject("facultyId", facultyId);
 
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
+			
+			
 
 		}
 
