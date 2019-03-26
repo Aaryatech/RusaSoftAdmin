@@ -84,8 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/budgetOnGreenInitiativesAndWasteMngmnt"><button
+								<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button
 										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
@@ -116,29 +115,59 @@
 												</select>
 											</div>
 										</div>
-
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="allocatedAmt">Total
-												Budget Allocated Amount <span class="text-danger">*</span>
+											<label class="control-label col-sm-2"
+												for="infra_budget_title">Expenditures on purchase of
+												Books <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
-													id="budget_allocated" name="budget_allocated"
-													placeholder="Total Budget Allocated Amount in Rupees"
+													id=expenditure_on_book_purchase
+													name="expenditure_on_book_purchase"
+													placeholder="Expenditures on purchase of Books" required>
+											</div>
+										</div>
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="allocatedAmt">
+												Expenditures on purchase of Journals <span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control"
+													id="expenditure_on_journals_purchase"
+													name="expenditure_on_journals_purchase"
+													placeholder="Expenditures on purchase of Journals"
 													value="${page.pageName}" required>
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="utilizedAmt">Total
-												Budget Utilized Amount<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="utilizedAmt">
+												Expenditures on e-Journals<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="budget_utilized"
-													name="budget_utilized"
-													placeholder="Total Budget Utilized Amount in Rupees"
+												<input type="text" class="form-control"
+													id="expenditure_on_ejournals_purchase"
+													name="expenditure_on_ejournals_purchase"
+													placeholder="Expenditures on e-Journals"
+													value="${page.pageName}" required>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="utilizedAmt">
+												Expenditures on e-Resources<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control"
+													id="expenditure_on_eresources_purchase"
+													name="expenditure_on_eresources_purchase"
+													placeholder="Expenditures on e-Resources"
 													value="${page.pageName}" required>
 											</div>
 										</div>
@@ -159,6 +188,9 @@
 
 
 										<div class="clearfix"></div>
+
+
+
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
@@ -200,7 +232,7 @@
 		}
 		return false;
 	}
-	
+
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -251,8 +283,6 @@
 	    return true;
 	}
 	</script>
-
-
 
 </body>
 </html>
