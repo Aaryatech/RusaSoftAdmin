@@ -86,14 +86,14 @@
 											<c:forEach items="${list}" var="list" varStatus="count">
 												<tr>
 
-													<td>${count.index+1}</td>
+													<td style="text-align: center; ">${count.index+1}</td>
 													<td>${list.nameOfProgram}</td>
-													<td>${list.monthDuration}</td>
-													<td>${list.sanctionalIntake}</td>
-													<td>${list.dateOfIntroduction}</td>
+													<td style="text-align: right; ">${list.monthDuration}</td>
+													<td style="text-align: right; ">${list.sanctionalIntake}</td>
+													<td style="text-align: center; ">${list.dateOfIntroduction}</td>
 													<td>${list.approvedBy}</td>
 
-													<td><c:if test="${isAdd==1}">
+													<td style="text-align: center; "><c:if test="${isAdd==1}">
 															<a
 																href="${pageContext.request.contextPath}/addProgramDetail/${list.programId}"
 																title="Add Details" rel="tooltip"

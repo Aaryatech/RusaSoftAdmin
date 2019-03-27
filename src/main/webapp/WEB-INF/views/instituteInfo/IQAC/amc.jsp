@@ -113,12 +113,12 @@
 													<c:forEach items="${amcList}" var="amcList"
 														varStatus="count">
 														<tr>
-															<td><input type="checkbox" class="chk" name="amcIds"
+															<td style="text-align: center; "><input type="checkbox" class="chk" name="amcIds"
 																id="amcIds${count.index+1}" value="${amcList.amcId}" /></td>
-															<td>${count.index+1}</td>
+															<td style="text-align: center; ">${count.index+1}</td>
 															<td>${amcList.amcTitle}</td>
 															<td>${amcList.amcCompany}</td>
-															<td>${amcList.amcExpenditure}</td>
+															<td style="text-align: right; ">${amcList.amcExpenditure}</td>
 													
 
 

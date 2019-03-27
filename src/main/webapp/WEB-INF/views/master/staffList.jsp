@@ -134,7 +134,7 @@
 																value="${staffList.email}" /></td>
 
 
-														<td>
+														<td style="text-align: center; ">
 															<%--  <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span

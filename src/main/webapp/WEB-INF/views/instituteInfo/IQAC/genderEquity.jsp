@@ -131,11 +131,11 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="schmIds" id="schmIds${count.index+1}"
 															value="${bList.instSchemeId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${gndrList.gprogName}</td>
 														<td align="center">${gndrList.gprogFromdt}</td>
 														<td align="center">${gndrList.gprogTodt}</td>
-														<td>${gndrList.gprogPcount}</td>
+														<td style="text-align: right; ">${gndrList.gprogPcount}</td>
 														<td align="center"> <c:if test="${editAccess==0}"> 
 																<a 
 																	href="${pageContext.request.contextPath}/editGenderEquality/${gndrList.gprogId}"><span class="glyphicon glyphicon-edit"  title="Edit"

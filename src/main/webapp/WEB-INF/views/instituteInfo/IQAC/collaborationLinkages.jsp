@@ -118,13 +118,13 @@
 													<c:forEach items="${linkageList}" var="linkageList"
 														varStatus="count">
 														<tr>
-															<td><input type="checkbox" class="chk" name="linkIds"
+															<td style="text-align: center; "><input type="checkbox" class="chk" name="linkIds"
 																id="linkIds${count.index+1}" value="${linkageList.linkId}" /></td>
 															<td style="text-align: center; width:10%">${count.index+1}</td>
 															<td>${linkageList.linknameText}</td>
 															<td>${linkageList.linkNature}</td>
 															<td>${linkageList.linkAgency}</td>
-															<td>${linkageList.linkBeneficiaryNos}</td>
+															<td style="text-align: right; ">${linkageList.linkBeneficiaryNos}</td>
 														
 
 

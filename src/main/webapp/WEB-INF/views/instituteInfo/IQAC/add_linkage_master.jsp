@@ -158,7 +158,7 @@
 														<th class="check" style="text-align: center; width: 5%;"><input
 															type="checkbox" name="selAll" id="selAll"
 															onClick="selectedInst(this)" /> Select All</th>
-														<th>Sr No</th>
+														<th >Sr No</th>
 														<th>Linkage Name</th>
 														<th>Linkage Remarks</th>
 														<th>Action</th>
@@ -173,10 +173,10 @@
 													<c:forEach items="${colList}" var="colList"
 														varStatus="count">
 														<tr>
-															<td><input type="checkbox" class="chk"
+															<td style="text-align: center; "><input type="checkbox" class="chk"
 																name="linknameIds" id="linknameIds${count.index+1}"
 																value="${colList.linknameId}" /></td>
-															<td>${count.index+1}</td>
+															<td style="text-align: center; ">${count.index+1}</td>
 															<td>${colList.linknameText}</td>
 															<td>${colList.linknameRemarks}</td>
 

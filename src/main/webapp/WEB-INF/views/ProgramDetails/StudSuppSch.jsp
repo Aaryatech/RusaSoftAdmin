@@ -99,9 +99,9 @@
 															value="${stud.sprtSchmId}" /></td> --%>
 														<td style="text-align: center;">${count.index+1}</td>
 														<td>${stud.schemeName}</td>
-														<td style="text-align: center;">${stud.level}</td>
-														<td style="text-align: center;">${stud.type}</td>
-														<td style="text-align: center;">${stud.noStudentBenifited}</td>
+														<td style="text-align: left;">${stud.level}</td>
+														<td style="text-align: left;">${stud.type}</td>
+														<td style="text-align: right;">${stud.noStudentBenifited}</td>
 														<td style="text-align: center;">${stud.academicYear}</td>
 														<td>${stud.supportAgencyName}</td>
 

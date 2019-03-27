@@ -90,15 +90,15 @@
 											<c:forEach items="${list}" var="list" varStatus="count">
 												<tr>
 
-													<td>${count.index+1}</td>
+													<td style="text-align: center; ">${count.index+1}</td>
 													<td>${list.activityName}</td>
-													<td>${list.date}</td>
-													<td>${list.yearName}</td>
+													<td style="text-align: center; ">${list.date}</td>
+													<td style="text-align: center; ">${list.yearName}</td>
 													<td>${list.branch}</td>
-													<td>${list.participatedStudent}</td>
+													<td style="text-align: center; ">${list.participatedStudent}</td>
 													<td>${list.level}</td>
 
-													<td><c:if test="${isEdit==1}">
+													<td style="text-align: center; "><c:if test="${isEdit==1}">
 															<a
 																href="${pageContext.request.contextPath}/editStudentOrgnizedActivity/${list.studentActivityId}"><span
 																class="glyphicon glyphicon-edit" title="Edit"

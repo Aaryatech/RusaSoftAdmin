@@ -114,7 +114,7 @@
 													varStatus="count">
 													<tr>
 										
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${poList.poText}</td>
 														
 													<c:choose>

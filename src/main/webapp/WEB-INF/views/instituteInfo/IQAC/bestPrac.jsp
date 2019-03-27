@@ -114,9 +114,9 @@
 													<c:forEach items="${pracList}" var="pracList"
 														varStatus="count">
 														<tr>
-															<td><input type="checkbox" class="chk" name="pracIds"
+															<td style="text-align: center; "><input type="checkbox" class="chk" name="pracIds"
 																id="pracIds${count.index+1}" value="${pracList.practicesId}" /></td>
-															<td>${count.index+1}</td>
+															<td style="text-align: center; ">${count.index+1}</td>
 															<td>${pracList.practicesName}</td>
 															<td>${pracList.practicesBeneficiary}</td>
 															<td style="text-align:center;">${pracList.practicesEffectiveFrom}</td>

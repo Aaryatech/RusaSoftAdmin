@@ -148,7 +148,7 @@
 														<td>${activList.instActivityName}</td>
 														<td  align="center">${activList.instActivityFromdt}</td>
 														<td  align="center">${activList.instActivityTodt}</td>
-														<td>${activList.instActivityParticipation}</td>
+														<td style="text-align: right; ">${activList.instActivityParticipation}</td>
 														
 														<td align="center"> <c:if test="${editAccess==0}"> 
 																<a 

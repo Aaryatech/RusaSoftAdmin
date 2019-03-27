@@ -121,7 +121,7 @@
 																value="${dist.distName}" /></td>
 
 
-														<td style="text-align: center"><c:out
+														<td style="text-align: right"><c:out
 																value="${dist.distApplicableFrom}" /></td>
 																
 														<td style="text-align: left"><c:out

@@ -157,7 +157,7 @@
 															value="${bList.instSchemeId}" /></td> --%>
 														<td align="center">${count.index+1}</td>
 														<td>${schmList.instSchemeName}</td>
-														<td>${schmList.instStudentsBenefited}</td>
+														<td style="text-align: right; ">${schmList.instStudentsBenefited}</td>
 														<td>${schmList.instSchmeOfferedby}</td>
 														
 														<td align="center"><c:if test="${editAccess==0}"> 

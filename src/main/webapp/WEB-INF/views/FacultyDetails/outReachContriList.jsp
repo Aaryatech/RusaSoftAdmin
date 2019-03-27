@@ -134,7 +134,7 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="facContIds" id="facContIds${count.index+1}"
 															value="${contribtn.conId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${contribtn.conLevel}</td>
 														<td>${contribtn.conName}</td>
 														<td>${contribtn.conUniversity}</td>

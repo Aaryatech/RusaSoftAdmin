@@ -136,9 +136,9 @@
 																	<c:forEach items="${createdRoleList}"
 																		var="createdRoleList" varStatus="count">
 																		<tr>
-																			<td><c:out value="${count.index+1}" /></td>
+																			<td style="text-align: center; "><c:out value="${count.index+1}" /></td>
 																			<td><c:out value="${createdRoleList.roleName}" /></td>
-																			<td><a title="Edit" rel="tooltip"
+																			<td style="text-align: center; "><a title="Edit" rel="tooltip"
 																				data-color-class="detail"
 																				data-animate=" animated fadeIn "
 																				href="${pageContext.request.contextPath}/editAccessRole/${createdRoleList.roleId}"

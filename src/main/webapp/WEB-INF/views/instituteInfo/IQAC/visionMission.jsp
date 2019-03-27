@@ -208,9 +208,9 @@
 																	varStatus="count">
 																	<tr>
 
-																		<td>${count.index+1}</td>
+																		<td style="text-align: center; ">${count.index+1}</td>
 																		<td>${list.instVisionText}</td>
-																		<td><a href="#"
+																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteVission(${list.instVisionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -308,9 +308,9 @@
 																	varStatus="count">
 																	<tr>
 
-																		<td>${count.index+1}</td>
+																		<td style="text-align: center; ">${count.index+1}</td>
 																		<td>${list.instMissionText}</td>
-																		<td><a href="#"
+																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteMission(${list.instMissionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;

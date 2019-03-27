@@ -142,7 +142,7 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="bookIds" id="bookIds${count.index+1}"
 															value="${bList.bookId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${bList.bookTitle}</td>
 														<td>${bList.bookEdition}</td>
 														<td>${bList.bookAuthor}</td>

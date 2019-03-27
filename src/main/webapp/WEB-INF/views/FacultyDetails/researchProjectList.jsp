@@ -146,10 +146,10 @@
 															<td style="text-align: left"><c:out
 																	value="${journal.projSponsor}" /></td>
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: right"><c:out
 																	value="${journal.projTotalAmt}" /></td>
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: right"><c:out
 																	value="${journal.projAmtRec}" /></td>
 
 

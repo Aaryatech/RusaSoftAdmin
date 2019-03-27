@@ -121,7 +121,7 @@
 													<c:forEach items="${mouList}" var="mouList"
 														varStatus="count">
 														<tr>
-															<td><input type="checkbox" class="chk" name="mouIds"
+															<td style="text-align: center; "><input type="checkbox" class="chk" name="mouIds"
 																id="mouIds${count.index+1}" value="${mouList.mouId}" /></td>
 															<td  style="text-align: center;">${count.index+1}</td>
 															<td>${mouList.mouTitle}</td>

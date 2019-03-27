@@ -141,16 +141,16 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="activityIds" id="activityIds${count.index+1}"
 															value="${facAct.activityId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${facAct.typeName}</td>
 														<td>${facAct.activityName}</td>
 														<td>${facAct.activityLevel}</td>
-														<td>${facAct.activityDate}</td>
-														<td>${facAct.activityParticipants}</td>
+														<td style="text-align: center; ">${facAct.activityDate}</td>
+														<td style="text-align: right; ">${facAct.activityParticipants}</td>
 														<td>${facAct.activityFundedBy}</td>
-														<td>${facAct.activityAmountSanctioned}</td>
-														<td>${facAct.activityAmountUtilised}</td>
-														<td> <c:if test="${editAccess==0}"> 
+														<td style="text-align: right; ">${facAct.activityAmountSanctioned}</td>
+														<td style="text-align: right; ">${facAct.activityAmountUtilised}</td>
+														<td style="text-align: center; "> <c:if test="${editAccess==0}"> 
 																<a 
 																	href="${pageContext.request.contextPath}/editFacultyActivity/${facAct.activityId}"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;

@@ -126,7 +126,7 @@
 											<tbody>
 												<c:forEach items="${StudList}" var="stud" varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="studIds"
+														<td style="text-align: center; "><input type="checkbox" class="chk" name="studIds"
 															id="studIds${count.index+1}" value="${stud.studentId}" /></td>
 														<td style="text-align: center; width: 5%">${count.index+1}</td>
 														<td>${stud.studentName}</td>
@@ -144,7 +144,7 @@
 																	data-original-title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 															</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <c:if
-																test="${deleteAccess == 0}"> &nbsp;&nbsp;&nbsp;&nbsp;
+																test="${deleteAccess == 0}"> 
 															<a
 																	href="${pageContext.request.contextPath}/deleteStudents/${stud.studentId}"
 																	onClick="return confirm('Are you sure want to delete this record');"

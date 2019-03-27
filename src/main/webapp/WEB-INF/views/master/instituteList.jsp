@@ -127,7 +127,7 @@
 														<%-- <td><input type="checkbox" class="chk" name="instIds"
 															id="instIds${count.index+1}"
 															value="${institute.instituteId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${institute.instituteName}</td>
 
 														<td>${institute.principalName}</td>

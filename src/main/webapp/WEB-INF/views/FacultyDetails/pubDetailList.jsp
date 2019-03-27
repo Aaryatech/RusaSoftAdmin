@@ -153,14 +153,14 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="confIds" id="confIds${count.index+1}"
 															value="${facCon.confId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${facCon.confName}</td>
 														<td>${facCon.confType}</td>
-														<td>${facCon.confDate}</td>
+														<td style="text-align: center; ">${facCon.confDate}</td>
 														<td>${facCon.confVenue}</td>
 														<td>${facCon.confFundFrom}</td>
-														<td>${facCon.confFundAmt}</td>
-														<td><c:if test="${editAccess==0}"> 
+														<td style="text-align: right; ">${facCon.confFundAmt}</td>
+														<td style="text-align: center; "><c:if test="${editAccess==0}"> 
 																<a 
 																	href="${pageContext.request.contextPath}/editFacultyConfrnc/${facCon.confId}"><span class="glyphicon glyphicon-edit"  title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;

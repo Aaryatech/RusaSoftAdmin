@@ -137,7 +137,7 @@
 														<%-- <td><input type="checkbox" class="chk"
 															name="phdIds" id=""phdIds"${count.index+1}"
 															value="${phdList.phdId}" /></td> --%>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${phdList.coGuideName}</td>
 														<td>${phdList.phdScholarName}</td>
 														<td align="center">${phdList.phdRegYear}</td>

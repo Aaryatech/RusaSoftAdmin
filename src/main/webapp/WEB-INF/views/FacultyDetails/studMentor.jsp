@@ -129,10 +129,10 @@
 															id="menIds${count.index+1}" value="${studL.menId}" /></td> --%>
 												<td style="text-align: center">${count.index+1}</td>
 											
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${studL.academicYear}" /></td>
 											
-											<td style="text-align: left"><c:out
+											<td style="text-align: right"><c:out
 														value="${studL.menStuCount}" /></td>
 										
 																							

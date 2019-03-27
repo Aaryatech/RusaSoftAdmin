@@ -103,10 +103,10 @@
 															value="${inst.infoDetailId}" /></td> --%>
 															<td style="text-align: center">${count.index+1}</td>
 														<td  style="text-align: center;" >${inst.academicYear}</td>
-														<td>${inst.noOfFulltimeFaculty}</td>
-														<td>${inst.noNonteachingIncludingOfficeStaff}</td>
-														<td>${inst.noSupportStaff}</td>
-														<td>${inst.noCurrentAdmitedStnt}</td>
+														<td style="text-align: right; ">${inst.noOfFulltimeFaculty}</td>
+														<td style="text-align: right; ">${inst.noNonteachingIncludingOfficeStaff}</td>
+														<td style="text-align: right; ">${inst.noSupportStaff}</td>
+														<td style="text-align: right; ">${inst.noCurrentAdmitedStnt}</td>
 														<td style="text-align: center; ">
 															  <c:if test="${editAccess == 0}"> 
 														<a

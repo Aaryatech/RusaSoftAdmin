@@ -158,10 +158,10 @@
 
 
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: right"><c:out
 																	value="${value.rcGuideCount}" /></td>
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: right"><c:out
 																	value="${value.rcStudentCount}" /></td>
 
 															<td align="center"><c:if test="${editAccess == 0}">

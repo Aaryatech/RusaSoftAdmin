@@ -177,7 +177,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td>${count.index+1}</td>
+																			<td style="text-align: center; ">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 
@@ -250,7 +250,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td>${count.index+1}</td>
+																			<td style="text-align: center; ">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 																			<td align="center"><a href="#"
@@ -319,7 +319,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td>${count.index+1}</td>
+																			<td style="text-align: center; ">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 																			<td align="center"><a href="#"
@@ -385,7 +385,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td>${count.index+1}</td>
+																			<td style="text-align: center; ">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 																			<td align="center"><a href="#"

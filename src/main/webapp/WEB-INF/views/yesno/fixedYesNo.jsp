@@ -369,9 +369,9 @@
 																	varStatus="count">
 																	<tr>
 
-																		<td>${count.index+1}</td>
+																		<td align="center">${count.index+1}</td>
 																		<td>${list.instYesnoResponse}</td>
-																		<td><a href="#"
+																		<td align="center"><a href="#"
 																			onclick="deleteTimebound(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "

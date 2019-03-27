@@ -67,9 +67,7 @@
 							method="get" id="insListForm">
 							<div class="content-body">
 								<div class="row">
-									<h5 class="title pull-left">
-										<strong>Progression to Higher Education</strong>
-									</h5>
+									
 									<div class="col-xs-12"></div>
 									<div class="col-xs-12">
 										<table class="table table-striped dt-responsive display"
@@ -89,10 +87,10 @@
 												<c:forEach items="${highEduList}" var="highEdu"
 													varStatus="count">
 													<tr>
-														<td>${count.index+1}</td>
+														<td style="text-align: center; "> ${count.index+1}</td>
 														<td>${highEdu.fromProgType}</td>
 														<td>${highEdu.toProgType}</td>
-														<td>${highEdu.noStudent}</td>
+														<td style="text-align: right; ">${highEdu.noStudent}</td>
 
 														<td align="center"><c:if test="${editAccess==0}">
 																<a href="#"

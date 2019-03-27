@@ -153,7 +153,7 @@
 												<c:forEach items="${subjectCoList}" var="subjectCoList" varStatus="count">
 													<tr>
 
-														<td>${count.index+1}</td>
+														<td style="text-align: center; ">${count.index+1}</td>
 
 														<td><c:out value="${subjectCoList.coName}" /></td>
 
