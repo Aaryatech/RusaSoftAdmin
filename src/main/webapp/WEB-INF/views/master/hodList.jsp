@@ -11,6 +11,23 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 <c:url var="clearSessionAttribute" value="/clearSessionAttribute" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn1 {
+	background-color: #ffffff; /* Blue background */
+	border: none; /* Remove borders */
+	color: white; /* White text */
+	padding: 12px 16px; /* Some padding */
+	font-size: 16px; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+	background-color: blue;
+}
+</style>
 </head>
 <!-- END HEAD -->
 
@@ -136,10 +153,36 @@
 										</table>
 										<c:if test="${deleteAccess==0}">
 
-											<input type="submit" class="btn btn-primary" value="Delete"
+											<!-- <input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
+												style="align-content: center; width: 113px; margin-left: 40px;"> -->
+												
+												
+										<div class="form-group">
+
+											<div class="col-sm-5">
+											<div class="col-sm-1">
+
+												<button type="submit" title="Delete Multiple Records" class="btn1"
+													id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: left;">
+													<i class="fa fa-trash"
+														style="font-size: 25px; background-color: black"></i>
+												</button></div>
+												<div class="col-sm-4">
+													<h5 style="text-align: left;">Delete Records</h5>
+												</div>
+											</div>
+
+
+											
+
+										</div>
+												
+												
+												
 										</c:if>
 
 										<input type="hidden" id="edit_hod_id" name="edit_hod_id"

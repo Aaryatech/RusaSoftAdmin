@@ -204,10 +204,10 @@
 															<c:when test="${dean.deanId==0}">
 
 																<input type="radio" id="is_registration"
-																	name="is_registration" value="1"
+																	name="is_registration" value="1" checked
 																	onclick="setDate(this.value)">Yes 
 																<input type="radio" id="is_registration"
-																	name="is_registration" value="0" checked
+																	name="is_registration" value="0" 
 																	onclick="setDate(this.value)">No 
 															
 															</c:when>

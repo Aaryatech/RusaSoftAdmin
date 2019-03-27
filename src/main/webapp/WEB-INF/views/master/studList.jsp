@@ -25,7 +25,7 @@
 
 /* Darker background on mouse-over */
 .btn:hover {
-	background-color: #ffffff;
+	background-color: blue;
 }
 </style>
 </head>
@@ -162,7 +162,7 @@
 
 										<div class="form-group">
 
-											<div class="col-sm-4">
+											<div class="col-sm-5">
 											<div class="col-sm-1">
 
 												<button type="submit" title="Delete Multiple Records" class="btn1"
@@ -172,9 +172,9 @@
 													<i class="fa fa-trash"
 														style="font-size: 25px; background-color: black"></i>
 												</button></div>
-												<!-- <div class="col-sm-3">
-													<h5 style="text-align: left;">Delete</h5>
-												</div> -->
+												<div class="col-sm-4">
+													<h5 style="text-align: left;">Delete Records</h5>
+												</div>
 											</div>
 
 

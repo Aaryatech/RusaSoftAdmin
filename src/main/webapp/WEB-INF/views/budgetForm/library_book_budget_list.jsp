@@ -84,11 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-info">Add</button></a> <a
+								<!-- <a href="#myModal1" data-toggle="modal"><button
+										type="submit" class="btn btn-success">Add</button></a> --> <a
 									href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
-										type="button" class="btn btn-info">Add</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+										type="button" class="btn btn-info">Add</button></a> 
 							</div>
 
 						</header>
@@ -111,11 +110,11 @@
 											<thead>
 												<tr>
 													<th width="10%">Sr No</th>
-													<th>Financial Year</th>
-													<th>Expenditures on purchase of Books</th>
-													<th>Expenditures on purchase of Journals</th>
-													<th>Expenditures on e-Journals</th>
-													<th>Expenditures on e-Resources</th>
+<!-- 													<th>Financial Year</th>
+ -->													<th style="text-align: right; ">Expenditures on purchase of Books</th>
+													<th style="text-align: right; ">Expenditures on purchase of Journals</th>
+													<th style="text-align: right; ">Expenditures on e-Journals</th>
+													<th style="text-align: center; ">Expenditures on e-Resources</th>
 												</tr>
 											</thead>
 
@@ -151,7 +150,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
-
+<%-- 
 
 	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
 		role="dialog" aria-hidden="true">
@@ -221,7 +220,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 
 	<script type="text/javascript">
