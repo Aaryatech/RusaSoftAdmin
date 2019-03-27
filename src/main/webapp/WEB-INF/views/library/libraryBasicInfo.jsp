@@ -107,9 +107,9 @@
 
 													<div class="col-xs-12">
 
-													<input type="text" value="${libInfo.libInfoId}" name="libInfoId">
+													<input type="hidden" value="${libInfo.libInfoId}" name="libInfoId">
 
-														<div class="form-group">
+														<!-- <div class="form-group">
 															<label class="control-label col-sm-5" for="status"
 																style="text-align: left;">Library is Automated
 																using Integrated Library Management System  <span
@@ -122,7 +122,7 @@
 																	type="radio" id="isUsingSoft" name="isUsingSoft"
 																	onclick="showDiv(0)" value="0">No
 															</div>
-														</div>
+														</div> -->
 
 														<div id="divshow">
 															<div class="form-group">
@@ -132,8 +132,8 @@
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="swName"
-																		name="swName" placeholder="Name Of Software"
-																		value="${page.pageName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		name="swName" placeholder=""
+																		value="${libInfo.softName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -144,8 +144,8 @@
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="version"
-																		name="version" placeholder="Software Version"
-																		value="${page.pageName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		name="version" placeholder=""
+																		value="${libInfo.softVersion}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 															
@@ -155,10 +155,10 @@
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="text" class="form-control" id="userLms"
-																		name="userLms" placeholder="Total Number of Users of LMS" 
-																		onkeypress='return restrictAlphabets(event)'
-																		value="${page.pageName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																	<input type="number" class="form-control" id="userLms"
+																		name="userLms" placeholder="" 
+																		onkeypress='return restrictAlphabets(event)' min="1" max="999999"
+																		value="${libInfo.usersOfLms}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -172,8 +172,8 @@
 																	<input type="text" class="form-control datepicker" id="purchaseDate"
 																		name="purchaseDate" onkeypress='return restrictAlphabets(event)'
 																		pattern="^(?!\s*$).+" autocomplete="off" 
-																		placeholder="Date Of Purchase/Automation Lib."
-																		value="${page.pageName}" required>
+																		placeholder="dd/mm/yyyy"
+																		value="${libInfo.dateOfPurchaseAutomation}" required>
 																</div>
 															</div>
 
@@ -184,9 +184,9 @@
 																	with LMS  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="text" class="form-control" id="noOfComp"
+																	<input type="number" min="1" max="99999" class="form-control" id="noOfComp"
 																		name="noOfComp" onkeypress='return restrictAlphabets(event)'
-																		placeholder="No. of Comp in LAN with LMS" value=""
+																		placeholder="" value="${libInfo.noCompLan}"
 																		pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
@@ -199,8 +199,8 @@
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="bandwidth"
 																		name="bandwidth"
-																		placeholder="Bandwidth fir accessing e-resources"
-																		value="" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		placeholder=""
+																		value="${libInfo.bandwidthForAccessingEresources}" pattern="^(?!\s*$).+" autocomplete="off"  required>
 																</div>
 															</div>
 
@@ -210,9 +210,20 @@
 																	remotely Accessible  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="radio" id="usingremot" name="usingremot"
+																
+																<c:choose>
+																<c:when test="${libInfo.isEresourceRemotly == 1}">
+																<input type="radio" id="usingremot" name="usingremot"
 																		value="1" checked>Yes <input type="radio"
 																		id="usingremot" name="usingremot" value="0">No
+																</c:when>
+																
+																	<c:when test="${libInfo.isEresourceRemotly == 0}">
+																<input type="radio" id="usingremot" name="usingremot"
+																		value="1" >Yes <input type="radio"
+																		id="usingremot" name="usingremot" checked value="0">No
+																</c:when>
+																		</c:choose>
 																</div>
 															</div>
 														</div>
@@ -326,7 +337,7 @@
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="avgTeacher"
-																		name="avgTeacher" placeholder="Avg. of Teachers Using Library resources per day" value=""
+																		name="avgTeacher" placeholder="" value="${libInfo.avgTeacher}"
 																		pattern="^(?!\s*$).+" autocomplete="off" onkeypress='return restrictAlphabets(event)' required>
 																</div>
 															</div>
@@ -338,7 +349,7 @@
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="avgStud"
 																		name="avgStud"
-																		placeholder="Avg. of Student Using Library resources per day" value=""
+																		placeholder="" value="${libInfo.avgTeacher}"
 																		pattern="^(?!\s*$).+" autocomplete="off" onkeypress='return restrictAlphabets(event)' required>
 																</div>
 															</div>
@@ -369,7 +380,7 @@
 														</div>
 														 -->
 														
-														<div class="form-group">
+														<!-- <div class="form-group">
 															<label class="control-label col-sm-3" for="recordingFacility"
 																style="text-align: left;"> Recording Facility Available <span
 																class="text-danger">*</span>
@@ -430,10 +441,10 @@
 																	onkeypress='return restrictAlphabets(event)' required>
 
 															</div>
-														</div>
+														</div> -->
 
 														
-														  <h4>e-Governance Facilities</h4>
+														<!--   <h4>e-Governance Facilities</h4>
 														
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="planning"
@@ -539,7 +550,7 @@
 																	onkeypress='return restrictAlphabets(event)'  required>
 
 															</div>
-														</div>
+														</div> -->
 
 
 												
@@ -636,7 +647,7 @@
 </script>
 	
 	<script type="text/javascript">
-		function showDiv(value) {
+		/* function showDiv(value) {
 
 			var div = document.getElementById("divshow");
 
@@ -645,7 +656,7 @@
 			} else {
 				div.style.display = "none";
 			}
-		}
+		} */
 	</script>
 	<script type="text/javascript">
 		jQuery(document).ready(

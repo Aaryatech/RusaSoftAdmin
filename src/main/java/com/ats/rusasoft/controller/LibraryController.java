@@ -54,14 +54,88 @@ public class LibraryController {
 	Calendar cal = Calendar.getInstance();
 	String curDateTime = dateFormat.format(cal.getTime());
 	
+	DateFormat datfmt = new SimpleDateFormat("yyyy-MM-dd");
+	String simpleDate = datfmt.format(cal.getTime());
+	
 	String redirect= null;
+	
+	MultiValueMap<String , Object> map = null;
+	
+	@RequestMapping(value = "/showLibraryBasicInfo", method = RequestMethod.GET)
+	public ModelAndView showLibraryBasicInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("library/libBasicInfoList");
+		try {
+			HttpSession session = request.getSession();
+			
+			/*
+			 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+			 * session.getAttribute("newModuleList"); Info view =
+			 * AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo",
+			 * "1", "0", "0", "0", newModuleList);
+			 * 
+			 * if (view.isError() == true) {
+			 * 
+			 * model = new ModelAndView("accessDenied");
+			 * 
+			 * } else {
+			 */
+			
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+
+			model.addObject("title", "Library Basic Information");
+			
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", instituteId);
+			
+			
+			LibraryInfo[] libInfoArr =  rest.postForObject(Constants.url+"/libBasicInfoList", map, LibraryInfo[].class);
+			List<LibraryInfo> libInfoList = new ArrayList<>(Arrays.asList(libInfoArr));
+			
+			model.addObject("libInfoList", libInfoList);
+			/*Info add = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "0", "1",
+					newModuleList);
+
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+		}*/
+			
+	
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+		
 	@RequestMapping(value = "/libraryBasicInfo", method = RequestMethod.GET)
 	public ModelAndView showStudMentor(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("libraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
 					newModuleList);
 
@@ -69,12 +143,12 @@ public class LibraryController {
 				
 				model = new ModelAndView("accessDenied");
 
-			} else {
+			} else {*/
 			
 				LibraryInfo libInfo = new LibraryInfo();
 				model.addObject("libInfo", libInfo);
-				model.addObject("title", "Library Basic Information");
-			}
+				model.addObject("title", "Add Library Basic Information");
+			//}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -96,7 +170,7 @@ public class LibraryController {
 			
 			libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
 			libInfo.setInstituteId(instituteId);
-			libInfo.setIsLibAutomated(Integer.parseInt(request.getParameter("isUsingSoft")));
+			libInfo.setIsLibAutomated(0);//Integer.parseInt(request.getParameter("isUsingSoft"))
 			libInfo.setSoftName(request.getParameter("swName"));
 			libInfo.setSoftVersion(request.getParameter("version"));
 			libInfo.setUsersOfLms(Integer.parseInt(request.getParameter("userLms")));
@@ -106,24 +180,32 @@ public class LibraryController {
 			libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
 			libInfo.setAvgTeacher(Float.parseFloat(request.getParameter("avgTeacher")));
 			libInfo.setAvgStudent(Float.parseFloat(request.getParameter("avgStud")));
-			/*
-			 * libInfo.setAddBy(); libInfo.setAddDatetime(curDateTime); libInfo.setEditBy();
-			 * libInfo.setEditDatetime(curDateTime); libInfo.setIsPlanning(isPlanning);
-			 * libInfo.setDateOfPlanningEstablishment(dateOfPlanningEstablishment);
-			 * libInfo.setIsAdministration(isAdministration);
-			 * libInfo.setDateOfAdministrationEstablishment(
-			 * dateOfAdministrationEstablishment); libInfo.setIsFinanceAcc(isFinanceAcc);
-			 * libInfo.setDateOfFinanceEstablishment(dateOfFinanceEstablishment);
-			 * libInfo.setIsStudentAdmition(isStudentAdmition);
-			 * libInfo.setDateOfStudentEstablishment(dateOfStudentEstablishment);
-			 * libInfo.setIsExamination(isExamination);
-			 * libInfo.setDateOfExaminationEstablishment(dateOfExaminationEstablishment);
-			 */
+			
+			 libInfo.setAddBy(userId); 
+			 libInfo.setAddDatetime(curDateTime);
+			 libInfo.setEditBy(userId);
+			 libInfo.setEditDatetime(curDateTime); 
+			 libInfo.setIsPlanning(0);
+			 libInfo.setDateOfPlanningEstablishment(simpleDate);
+			 libInfo.setIsAdministration(0);
+			 libInfo.setDateOfAdministrationEstablishment(simpleDate); 
+			 libInfo.setIsFinanceAcc(0);
+			 libInfo.setDateOfFinanceEstablishment(simpleDate);
+			 libInfo.setIsStudentAdmition(0);
+			 libInfo.setDateOfStudentEstablishment(simpleDate);
+			 libInfo.setIsExamination(0);
+			 libInfo.setDateOfExaminationEstablishment(simpleDate);
+			 
 			libInfo.setDelStatus(1);
 			libInfo.setExInt1(0);
 			libInfo.setExVar1("NA");
 			
-			
+			LibraryInfo saveLib = rest.postForObject(Constants.url+"/insertlibBasicInfo", libInfo, LibraryInfo.class);
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/showLibraryBasicInfo";
+			else
+				redirect = "redirect:/libraryBasicInfo";
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -134,6 +216,45 @@ public class LibraryController {
 
 	}
 	
+	@RequestMapping(value = "/editLibInfo/{libInfoId}", method = RequestMethod.GET)
+	public ModelAndView editLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
+		try {
+		map = new LinkedMultiValueMap<>();
+		map.add("libInfoId", libInfoId);
+		
+		LibraryInfo libInfo = rest.postForObject(Constants.url+"/editlibBasicInfoById", map, LibraryInfo.class);
+		model.addObject("libInfo", libInfo);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/deleteLibInfo/{libInfoId}", method = RequestMethod.GET)
+	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
+		try {
+			map = new LinkedMultiValueMap<>();
+			map.add("libInfoId", libInfoId);
+			
+			LibraryInfo libInfo = rest.postForObject(Constants.url+"/deletelibBasicInfoById", map, LibraryInfo.class);
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return "redirect:/showLibraryBasicInfo";
+
+	}
+
 
 	@RequestMapping(value = "/rareBookInformation", method = RequestMethod.GET)
 	public ModelAndView rareBookInformation(HttpServletRequest request, HttpServletResponse response) {
