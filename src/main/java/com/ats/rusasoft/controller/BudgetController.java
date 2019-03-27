@@ -53,14 +53,14 @@ public class BudgetController {
 
 				model.addObject("title", Names.library_book_budget_list);
 
-				Info addAccess = AccessControll.checkAccess("budgetPhysicalFacility", "budgetPhysicalFacility", "0",
-						"1", "0", "0", newModuleList);
+				Info addAccess = AccessControll.checkAccess("budgetOnLibraryBooks", "budgetOnLibraryBooks", "0", "1",
+						"0", "0", newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("budgetPhysicalFacility", "budgetPhysicalFacility", "0",
-						"0", "1", "0", newModuleList);
+				Info editAccess = AccessControll.checkAccess("budgetOnLibraryBooks", "budgetOnLibraryBooks", "0", "0",
+						"1", "0", newModuleList);
 
-				Info deleteAccess = AccessControll.checkAccess("budgetPhysicalFacility", "budgetPhysicalFacility", "0",
-						"0", "0", "1", newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("budgetOnLibraryBooks", "budgetOnLibraryBooks", "0", "0",
+						"0", "1", newModuleList);
 
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
