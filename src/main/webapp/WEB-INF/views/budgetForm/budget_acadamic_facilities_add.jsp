@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertAcademicBudget"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
@@ -109,9 +109,17 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" required>
-													<option value="2018-2019">2018-2019</option>
-													<option value="2017-2018">2017-2018</option>
-													<option value="2016-2017">2016-2017</option>
+
+													<c:forEach items="${finYearList}" var="finYear">
+														<c:choose>
+															<c:when test="${finYear.finYearId==editBudget.finYearId}">
+																<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
 
 												</select>
 											</div>
@@ -119,13 +127,14 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
-												for="infra_budget_title">Budget Library Title <span
+												for="infra_budget_title">Budget Academic Title <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="text" class="form-control" autocomplete="off"
 													id="infra_budget_title" name="infra_budget_title"
-													placeholder="Title of Library Facility" required>
+													value="${editBudget.academicBudgetTitle}"
+													placeholder="Title of Academic Facility Budget" required>
 											</div>
 										</div>
 										<div class="form-group">
@@ -134,10 +143,12 @@
 												Allocated Amount <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="number" class="form-control"
 													id="budget_allocated" name="budget_allocated"
+													autocomplete="off" min="0"
+													onkeypress="return allowOnlyNumber(event)"
 													placeholder="Budget Allocated Amount in Rupees"
-													value="${page.pageName}" required>
+													value="${editBudget.budgetUtilized}" required>
 											</div>
 										</div>
 
@@ -147,14 +158,18 @@
 												Utilized Amount<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="budget_utilized"
-													name="budget_utilized"
+												<input type="number" class="form-control"
+													id="budget_utilized" name="budget_utilized"
+													autocomplete="off" min="0"
+													onkeypress="return allowOnlyNumber(event)"
 													placeholder="Budget Utilized Amount in Rupees"
-													value="${page.pageName}" required>
+													value="${editBudget.budgetAllocated}" required>
 											</div>
 										</div>
-
-										<input type="hidden" id="is_view" name="is_view" value="0">
+										<input type="hidden" id="academicBudgetId"
+											name="academicBudgetId"
+											value="${editBudget.academicBudgetId}"> <input
+											type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary"

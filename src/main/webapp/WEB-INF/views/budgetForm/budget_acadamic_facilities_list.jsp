@@ -113,12 +113,43 @@
 													<th width="40%">Title of Academic Support Activity</th>
 													<th>Budget Allocated Amount</th>
 													<th>Budget Utilized Amount</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 
 
 
+
+
 											<tbody>
+												<c:forEach items="${budgetList}" var="budget"
+													varStatus="count">
+													<tr>
+														<%-- <td align="center"><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td> --%>
+														<td align="center">${count.index+1}</td>
+														<td align="center">${budget.finYear}</td>
+														<td>${budget.academicBudgetTitle}</td>
+														<td align="right">${budget.budgetAllocated}</td>
+														<td align="right">${budget.budgetUtilized}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/editAcademicBudget/${budget.academicBudgetId}"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if> <c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteAcademicBudget/${budget.academicBudgetId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
+
 
 
 											</tbody>

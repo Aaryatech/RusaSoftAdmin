@@ -127,14 +127,14 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
-												for="infra_budget_title">Budget Library Title <span
+												for="infra_budget_title">Budget Physical Title <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" autocomplete="off"
 													id="infra_budget_title" name="infra_budget_title"
 													value="${editBudget.physicalFacilityBudgetTitle}"
-													placeholder="Title of Library Facility" required>
+													placeholder="Title of Physical Facility" required>
 											</div>
 										</div>
 										<div class="form-group">
