@@ -107,11 +107,38 @@
 													<th width="40%">Title of Physical Facilities</th>
 													<th>Budget Allocated Amount</th>
 													<th>Budget Utilized Amount</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 
 											<tbody>
-
+												<c:forEach items="${budgetList}" var="budget"
+													varStatus="count">
+													<tr>
+														<%-- <td align="center"><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td> --%>
+														<td align="center">${count.index+1}</td>
+														<td align="center">${budget.finYear}</td>
+														<td>${budget.physicalFacilityBudgetTitle}</td>
+														<td align="right">${budget.budgetAllocated}</td>
+														<td align="right">${budget.budgetUtilized}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/editPhysicalBudget/${budget.physicalFacilityBudgetId}"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if> <c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deletePhyBudget/${budget.physicalFacilityBudgetId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 
@@ -201,26 +228,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var year = document.getElementById("finantialYear").value;
-			var facilityTitle = document.getElementById("facilityTitle").value;
-			var allocatedAmt = document.getElementById("allocatedAmt").value;
-			var utilizedAmt = document.getElementById("utilizedAmt").value;
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, year, facilityTitle, allocatedAmt, utilizedAmt ])
-					.draw();
-			document.getElementById("index").value = i + 1;
-		}
-	</script>
-
 
 
 

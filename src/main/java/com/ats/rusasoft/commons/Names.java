@@ -12,6 +12,7 @@ public class Names {
 
 	public static String budget_physical_list = "Budget on Library Physical Facility List";
 	public static String budget_physical_add = "Add Budget on Library Physical Facility";
+	public static String budget_physical_edit = "Edit Budget on Library Physical Facility";
 
 	public static String budget_academic_facilities_list = "Budget on Acadamic Support Facilities List";
 	public static String budget_academic_facilities_add = "Add Budget on Acadamic Support Facilities";
