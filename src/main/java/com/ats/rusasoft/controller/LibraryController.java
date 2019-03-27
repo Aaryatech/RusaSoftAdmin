@@ -40,8 +40,10 @@ import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LibraryInfo;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.RareBook;
 import com.ats.rusasoft.model.Student;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 @Controller
 @Scope("session")
@@ -260,10 +262,27 @@ public class LibraryController {
 	public ModelAndView rareBookInformation(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/rareBookInformation");
+		String a = null;
 		try {
+			/*HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookList", "0", "1", "0", "0", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {*/
+			RareBook rareBook = new RareBook();
 
 			model.addObject("title", "Rare Book Information");
-
+			model.addObject("rareBook",rareBook);
+		//	}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -274,6 +293,140 @@ public class LibraryController {
 
 	}
 
+	@RequestMapping(value = "/showRareBookInfo", method = RequestMethod.GET)
+	public ModelAndView showRareBookInformation(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView model =  null;
+	try {
+			model = new ModelAndView("library/showRareBookInfo");
+			HttpSession session = request.getSession();
+
+		/*	List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "1", "0", "0", "0", newModuleList);
+		
+				if (view.isError() == true) {
+		
+					model = new ModelAndView("accessDenied");
+		
+				} else {*/
+
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			map = new LinkedMultiValueMap<>();
+			
+			map.add("instituteId", instituteId);
+					
+			RareBook[]  rrbook = rest.postForObject(Constants.url+"/showRareBooksInfo", map, RareBook[].class);
+			List<RareBook> rareBokList = new ArrayList<>(Arrays.asList(rrbook));
+			
+			model.addObject("rareBokList",rareBokList);
+			model.addObject("title","Rare Book List");
+			/*
+			 * Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo",
+			 * "0", "1", "0", "0", newModuleList); Info edit =
+			 * AccessControll.checkAccess("showRareBookInfo", "showLibList", "0", "0", "1",
+			 * "0", newModuleList); Info delete =
+			 * AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0",
+			 * "0", "1", newModuleList);
+			 * 
+			 * if (add.isError() == false) { System.out.println(" add   Accessable ");
+			 * model.addObject("addAccess", 0);
+			 * 
+			 * } if (edit.isError() == false) { System.out.println(" edit   Accessable ");
+			 * model.addObject("editAccess", 0); } if (delete.isError() == false) {
+			 * System.out.println(" delete   Accessable "); model.addObject("deleteAccess",
+			 * 0);
+			 * 
+			 * }
+			 * 
+			 * }
+			 */
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/insertRareBookInfo", method = RequestMethod.POST)
+	public String saveRareBookInformation(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			HttpSession session = request.getSession();
+			int insId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+
+			RareBook rareBook = new RareBook();
+			
+			rareBook.setRareBookInfoId(Integer.parseInt(request.getParameter("bookId")));
+			rareBook.setInstituteId(insId);
+			rareBook.setYearId(0);  //extra
+			rareBook.setUserId(userId);
+			rareBook.setRareBookname(request.getParameter("bookName"));
+			rareBook.setPublisher(request.getParameter("publisher"));
+			rareBook.setBookCopies(Integer.parseInt(request.getParameter("noOfBook")));
+			rareBook.setCostOfBook(Integer.parseInt(request.getParameter("costOfBook")));
+			rareBook.setPublicationYear(request.getParameter("year"));
+			rareBook.setDelStatus(1);
+			rareBook.setExInt1(0);
+			rareBook.setExVar1("NA");
+			
+			RareBook saveBook = rest.postForObject(Constants.url+"/saveRareBook", rareBook, RareBook.class);
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if(isView==1) {
+				redirect="redirect:/showRareBookInfo";
+			}else {
+				redirect="redirect:/rareBookInformation";
+			}
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return redirect;
+		
+	}
+
+	
+	@RequestMapping(value = "/editRareBookInfo/{bookId}", method = RequestMethod.GET)
+	public ModelAndView editRareBookInfo(@PathVariable("bookId") int bookId,  HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = new ModelAndView("library/rareBookInformation");
+		try {
+			map = new LinkedMultiValueMap<>();
+			map.add("bookId", bookId);
+			
+			RareBook editBook = rest.postForObject(Constants.url+"/getRareBookById", map, RareBook.class);
+			model.addObject("rareBook", editBook);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/deleteRareBookInfo/{bookId}", method = RequestMethod.GET)
+	public String deleteRareBookInfo(@PathVariable("bookId") int bookId,  HttpServletRequest request, HttpServletResponse response) {
+	
+		try {
+			map = new LinkedMultiValueMap<>();
+			map.add("bookId", bookId);
+			
+			RareBook editBook = rest.postForObject(Constants.url+"/deleteRareBookById", map, RareBook.class);
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return "redirect:/showRareBookInfo";
+		
+	}
+	
 	@RequestMapping(value = "/showEShodhSindhu", method = RequestMethod.GET)
 	public ModelAndView showEShodhSindhu(HttpServletRequest request, HttpServletResponse response) {
 

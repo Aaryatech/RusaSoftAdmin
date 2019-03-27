@@ -84,9 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> <a
-									class="box_toggle fa fa-chevron-down"></a>
+								<a href="${pageContext.request.contextPath}/showRareBookInfo"><button
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -96,88 +95,98 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
+										action="${pageContext.request.contextPath}/insertRareBookInfo"
+										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										onsubmit="return checkBeforeSubmit()">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
+										
+					<input type="hidden"
+							id="bookId" name="bookId"
+								 value="${rareBook.rareBookInfoId}">					
+					<div class="form-group">
+													
+						<label class="control-label col-sm-3" for="bookName"
+						style="text-align: left;"> Name Of Rare Book<span
+						class="text-danger">*</span> </label> 
+						<div class="col-sm-9">
+								<input type="text"
+								class="form-control" id="bookName" name="bookName" pattern="^(?!\s*$).+"
+								placeholder="" value="${rareBook.rareBookname}" required>
+						</div>
+					</div>
+					<div class="form-group">
 
-										</ul>
+							<label class="control-label col-sm-3" for="publisher"
+						style="text-align: left;">Publisher<span
+						class="text-danger">*</span> </label> 
+						<div class="col-sm-9">
+								 <input type="text" class="form-control"
+								id="publisher" name="publisher"
+								placeholder="Publisher" pattern="^(?!\s*$).+"
+								value="${rareBook.publisher}" required>
+						</div>
+					</div>
 
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
+					<div class="form-group">
 
-												<div>
+							<label class="control-label col-sm-3" for="noOfBook"
+						style="text-align: left;">No. of Copies of Book <span
+						class="text-danger">*</span> </label>
+						<div class="col-sm-9">
+								 <input type="number" min="1" max="99999" class="form-control"
+									id="noOfBook" name="noOfBook" pattern="^(?!\s*$).+"
+									placeholder="No of Copies for Book"
+									value="${rareBook.bookCopies}" required>
+						</div>
+					</div>
+					
+					<div class="form-group">
 
-
-													<div class="col-xs-12">
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="status"
-																style="text-align: left;">Rare Books available
-																in Library  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-2">
-																<input type="radio" id="isUsingSoft" name="isUsingSoft"
-																	onclick="showDiv(1)" value="1" checked>Yes <input
-																	type="radio" id="isUsingSoft" name="isUsingSoft"
-																	onclick="showDiv(0)" value="0">No
-															</div>
-														</div>
-
-														<div id="divshow">
-
-															<div class="col-xs-12">
-																<div class="form-group" style="text-align: right;">
-																	<a href="#myModal1" data-toggle="modal"><button
-																			type="submit" class="btn btn-info">Add</button></a>
-																</div>
-
-
-
-
-																<table id="example-1"
-																	class="table table-striped dt-responsive display">
-																	<thead>
-																		<tr>
-																			<th width="10%">Sr No</th>
-																			<th>Name Of Rare Books</th>
-																			<th>Publisher</th>
-																			<th>No. of Copies of Book</th>
-																			<th>Cost of Rare Book</th>
-																			<th>Year of Publication</th>
-																		</tr>
-																	</thead>
- 
-																	<tbody>
-
-
-																	</tbody>
-																</table>
-
-															</div>
-														</div>
-														<!-- <div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Submit</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div> -->
-
+						<label class="control-label col-sm-3" for="costOfBook"
+						style="text-align: left;">Cost Of Rare Book<span
+						class="text-danger">*</span> </label>
+						<div class="col-sm-9">
+							 <input type="number" min="1" max="99999" class="form-control"
+								id="costOfBook" name="costOfBook" 
+								placeholder="Cost Of Rare Book" pattern="^(?!\s*$).+"
+								value="${rareBook.costOfBook}" required>
+						</div>		
+					</div>
+					
+					  <div class="form-group"> 
+						<label class="control-label col-sm-3" for="year"
+						style="text-align: left;"> Year of Publication <span
+						class="text-danger">*</span> </label>
+						<%-- <div class="col-sm-9">
+								 <input type="text" class="form-control"
+									id="year" name="year"
+									placeholder="Year of Publication"
+									value="${rareBook.publicationYear}" required>
+						</div> --%>
+						<div class="col-sm-9">
+														<input type="text" class="form-control datepickeryear"
+															data-min-view-mode="years" data-start-view="2"
+															data-format="yyyy" placeholder="Year Of Published"
+															id="year" value="${rareBook.publicationYear}"
+															name="year" autocomplete="off"
+															onkeypress='return restrictAlphabets(event)' required>
 													</div>
-
-
-													<div class="clearfix"></div>
-
-												</div>
-
-											</div>
-										</div>
+						
+					</div>
+					
+														<div class="form-group">
+															<div class="col-sm-offset-2 col-sm-10">
+																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next">
+																<button type="reset" class="btn btn-default">Reset</button>
+																<input type="hidden" id="is_view" name="is_view" value="0">
+															</div>
+														</div>
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>
@@ -206,51 +215,7 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Library</h4>
 				</div>
-				<div class="modal-body">
- 
-					<div class="form-group">
-
-						<label class="control-label col-sm-4" for="name"> Name Of Rare Book </label> <input type="text"
-							class="form-control" id="name" name="name"
-							placeholder="Name Of Rate Books" required>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="publisher">Publisher</label> <input type="text" class="form-control"
-							id="publisher" name="publisher"
-							placeholder="Publisher"
-							value="${page.pageName}" required>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="noOfBook">No. of Copies of Book </label> <input type="text" class="form-control"
-							id="noOfBook" name="noOfBook"
-							placeholder="No of Copies for Book"
-							value="${page.pageName}" required>
-					</div>
-					
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="costOfBook">Cost Of Rare Book </label> <input type="text" class="form-control"
-							id="costOfBook" name="costOfBook"
-							placeholder="Cost Of Rare Book"
-							value="${page.pageName}" required>
-					</div>
-					
-					  <div class="form-group"> 
-						<label class="control-label col-sm-3" for="year"> Year of Publication </label> <input type="text" class="form-control"
-							id="year" name="year"
-							placeholder="Year of Publication"
-							value="${page.pageName}" required>
-					</div>
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 					<input type="hidden" id="index" name="index" value="0">
@@ -325,9 +290,33 @@
 			</div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
 	<script type="text/javascript">
+	$(function() {
+
+		$('.datepickeryear').datepicker({
+			autoclose : true,
+			minViewMode : 2,
+			format : 'yyyy'
+
+		});
+	});
+	
+	
 		function getData() {
 			//alert("hii");name  publisher  noOfBook costOfBook year
 			var i = parseInt(document.getElementById("index").value);
@@ -343,6 +332,12 @@
 					[ i + 1, year, name, publisher, noOfBook,costOfBook ])
 					.draw();
 			document.getElementById("index").value = i + 1;
+		}
+		
+
+		function submit_f(view){
+			document.getElementById("is_view").value=view;//create this 
+			
 		}
 	</script>
 
