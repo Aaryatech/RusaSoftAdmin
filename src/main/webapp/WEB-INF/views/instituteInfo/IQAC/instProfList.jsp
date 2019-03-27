@@ -116,7 +116,7 @@
 														<td style="text-align: center; ">
 													  <c:if test="${editAccess == 0}"> 
 														<a
-															href="${pageContext.request.contextPath}/showInstProf"><span
+															href="${pageContext.request.contextPath}/showEditInstProf"><span
 																class="glyphicon glyphicon-edit" title="Edit"  title="Edit" data-original-title="Edit"
 																data-animate=" animated fadeIn " ></span></a>
 																</c:if> &nbsp;&nbsp;&nbsp;&nbsp;

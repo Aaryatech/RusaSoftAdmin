@@ -93,6 +93,48 @@ public class InstituteProfInfoController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/showEditInstProf", method = RequestMethod.GET)
+	public ModelAndView showEditInstProf(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+
+			Info view = AccessControll.checkAccess("showEditInstProf", "showInstProfList", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/instProf");
+				model.addObject("title", "Edit Assistant IQAC Details");
+				int inst_id = (int) session.getAttribute("instituteId");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", inst_id); // getInstitute Hod hod =
+				IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map,
+						IqacBasicInfo.class);
+				model.addObject("instRes", instRes);
+				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
+				System.out.println(instRes.toString());
+
+			}
+
+		} catch (Exception e) {
+			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+
 
 	@RequestMapping(value = "/insertIqacBasicInfo", method = RequestMethod.POST)
 	public String insertIqacBasicInfo(HttpServletRequest request, HttpServletResponse response) {

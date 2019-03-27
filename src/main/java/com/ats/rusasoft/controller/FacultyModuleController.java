@@ -563,10 +563,11 @@ public class FacultyModuleController {
 
 		} else { 
 		int inst_id = (int) session.getAttribute("instituteId");
-
+		
 		model = new ModelAndView("FacultyDetails/organized");
+		model.addObject("title", "Edit Organized Outreach Activity Details");	
 
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();     
 
 		map.add("instituteId", inst_id);
 
