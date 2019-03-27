@@ -101,8 +101,8 @@
 													<%-- 	<td><input type="checkbox" class="chk" name="infoDetailIds"
 															id="infoDetailIds${count.index+1}"
 															value="${inst.infoDetailId}" /></td> --%>
-														<td  style="text-align: center; width:10%">${count.index+1}</td>
-														<td>${inst.academicYear}</td>
+															<td style="text-align: center">${count.index+1}</td>
+														<td  style="text-align: center;" >${inst.academicYear}</td>
 														<td>${inst.noOfFulltimeFaculty}</td>
 														<td>${inst.noNonteachingIncludingOfficeStaff}</td>
 														<td>${inst.noSupportStaff}</td>

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.master.model.prodetail.StudentSchemeList;
 import com.ats.rusasoft.model.GetProgram;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Info;
@@ -31,6 +32,7 @@ import com.ats.rusasoft.model.ProgramOutcome;
 import com.ats.rusasoft.model.ProgramSpeceficOutcome;
 import com.ats.rusasoft.model.StudentSupprtScheme;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.ats.rusasoft.model.instprofile.InstituteFunctionalMOU;
 
 
 @Controller
@@ -489,14 +491,31 @@ public class ProgramDetailModuleController {
 		ModelAndView model = null;
 		try {
 
-			List<StudentSupprtScheme> studSchmList = rest.getForObject(Constants.url+"/getAllStudentSchemes", List.class);
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+
+			HttpSession session = request.getSession();
+			int instituteId =(int)session.getAttribute("instituteId");
+			int yearId = (int)session.getAttribute("acYearId");
+			
+			map.add("yearId",yearId);
+			map.add("instId",instituteId);
+		
+		//List<StudentSupprtScheme> studSchmList = rest.postForObject(Constants.url+"/getAllStudentSchemes", map,List.class);
+		//System.out.println("Student sch List:"+studSchmList.get(0).getImplementationYear());
+			StudentSchemeList[] instArray = rest.postForObject(Constants.url + "getAllStudentSchemes", map,
+					StudentSchemeList[].class);
+			List<StudentSchemeList> studSchmList = new ArrayList<>(Arrays.asList(instArray));
 			System.out.println("Student sch List:"+studSchmList.toString());
+			
 			
 			model = new ModelAndView("ProgramDetails/StudSuppSch");
 
 			model.addObject("title", "Student Support Scheme List");
 			
 			model.addObject("studList", studSchmList);
+			
+			
 
 		} catch (Exception e) {
 

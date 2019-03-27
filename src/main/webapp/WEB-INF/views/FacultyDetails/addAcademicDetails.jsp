@@ -234,6 +234,8 @@
 															value="${editFacAcad.fAcaId}"> <input
 															type="hidden" id="is_view" name="is_view" value="0">
 														<input type="hidden" id="fac_id" name="fac_id" value="${facultyId}">
+															<input type="hidden" id="temp2"
+											name="temp2" value="${temp2}"> 
 													</div>
 
 												</div>

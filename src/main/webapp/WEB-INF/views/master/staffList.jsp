@@ -204,10 +204,18 @@
 											--%>
 
 										<input type="hidden" id="add_fac_detail_id"
-											name="add_fac_detail_id" value="0"> <input
+											name="add_fac_detail_id" value="0"> 
+											<input
 											type="hidden" name="title" id="title"
 											value="">
-
+											
+											
+												<input type="hidden" id="temp"
+											name="temp" value=""> 
+											<input type="hidden" id="temp1"
+											name="temp1" value=""> 
+											<input type="hidden" id="temp2"
+											name="temp2" value=""> 
 									</form>
 
 								</div>
@@ -287,6 +295,7 @@
 		function showAddDetail(staffId,formType){
 			//alert("Hi " +staffId);
 			document.getElementById("add_fac_detail_id").value=staffId;//create this 
+			
 			var form=document.getElementById("form_sample_2");
 		    form.setAttribute("method", "post");
 		    //1 means add Personal Detail;
@@ -294,14 +303,19 @@
 				form.action=("addPersonalDetails");
 				
 				document.getElementById("title").value="Add Faculty Personal Details"
+					document.getElementById("temp").value="1"
+				
 		    }else  if(formType==2){
 		    	//2 means add Mphil Phd Details
 				form.action=("showAddMphillDetails");
 				document.getElementById("title").value="Add Faculty's M Phil / Ph.D Details"
+					document.getElementById("temp1").value="2"
 		    }else  if(formType==3){
 		    	//3 means add Academic Details
 				form.action=("showAddAcademicDetails");
 				document.getElementById("title").value="Add Faculty Academic Details"
+					document.getElementById("temp2").value="1"
+						
 		    }
 
 			form.submit();

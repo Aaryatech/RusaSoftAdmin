@@ -224,6 +224,8 @@
 														<input type="hidden" id="staff_id" name="staff_id"
 														value="${facPhdDetail.facultyId}"> <input
 														type="hidden" id="is_view" name="is_view" value="0">
+														<input type="hidden" id="temp1"
+											name="temp1" value="${temp1}"> 
 													</div>
 												</div>
 												<div class="clearfix"></div>

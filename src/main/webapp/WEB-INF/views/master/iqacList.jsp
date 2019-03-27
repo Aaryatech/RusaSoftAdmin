@@ -127,9 +127,9 @@
 												</c:if>
 												&nbsp;&nbsp;&nbsp;&nbsp;
 												 <a
-												href="${pageContext.request.contextPath}/editIqac" title="Edit" 
+												href="${pageContext.request.contextPath}/editIqac" title="Change IQAC" 
 												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a>
+												class="glyphicon glyphicon-list"></span></a>
 											
 												<%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"

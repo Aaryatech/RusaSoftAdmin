@@ -143,9 +143,20 @@ public class FacPersonalController {
 			
 			int facultyId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
 			String title=null;
+			int temp = 0;
+			try {
+			 temp =Integer.parseInt(request.getParameter("temp"));
+			}
+			catch (Exception e){
+				temp=0;
+			}
+			
 			try {
 				facultyId = Integer.parseInt(request.getParameter("add_fac_detail_id"));
 				title=request.getParameter("title");
+			
+				 
+				
 			} catch (Exception e) {
 				facultyId = 12;//0;
 			}
@@ -194,7 +205,15 @@ public class FacPersonalController {
 
 			System.err.println("diffMonth " + diffMonth);
 			System.err.println("diffYear " + diffYear);*/
-
+			 
+			 if(temp==1) {
+			 model.addObject("temp", temp); 
+			 }
+			 else {
+				 model.addObject("temp", 0); 
+			 }
+			
+			
 			model.addObject("staff", staff);
 			map = new LinkedMultiValueMap<>();
 			map.add("facultyId", facultyId);
@@ -251,7 +270,7 @@ public class FacPersonalController {
 			} else {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				FacultyPersonalDetail facPersDetail = new FacultyPersonalDetail();
-
+int temp=Integer.parseInt(request.getParameter("temp"));
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
 
@@ -278,11 +297,11 @@ public class FacPersonalController {
 				FacultyPersonalDetail facPerDetail = restTemplate.postForObject(
 						Constants.url + "saveFacultyPersonalDetail", facPersDetail, FacultyPersonalDetail.class);
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showPersonalDetails";
+				//int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (temp == 1)
+					redirect = "redirect:/showStaffList";
 				else
-					redirect = "redirect:/addPersonalDetails";
+					redirect = "redirect:/showPersonalDetails";
 			}
 
 		} catch (Exception e) {
@@ -359,6 +378,7 @@ public class FacPersonalController {
 		ModelAndView model = null;
 		try {
 			String title=request.getParameter("title");
+			int temp1=0;
 			model = new ModelAndView("FacultyDetails/mPhillDetail");
 			model.addObject("title", title);
 
@@ -368,6 +388,20 @@ public class FacPersonalController {
 			}catch (Exception e) {
 				facultyId = 12;
 			}
+			 try {
+			
+			temp1=Integer.parseInt(request.getParameter("temp1"));
+			 }catch (Exception e) {
+				 temp1 = 0;
+				}
+			 if(temp1==1) {
+				 model.addObject("temp1", temp1); 
+				 }
+				 else {
+					 model.addObject("temp1", 0); 
+				 }
+				
+				
 			 
 
 			HttpSession session = request.getSession();
@@ -405,6 +439,7 @@ public class FacPersonalController {
 		System.err.println("in insert insertFacPhdDetail");
 		ModelAndView model = null;
 		String redirect = null;
+		int temp1 = Integer.parseInt(request.getParameter("staff_id"));
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
@@ -417,6 +452,8 @@ public class FacPersonalController {
 			} catch (Exception e) {
 				staffId = 0;
 			}
+			
+			
 
 			System.err.println("staffId id  " + staffId);
 
@@ -468,9 +505,14 @@ public class FacPersonalController {
 
 				//}
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
+				//int isView = Integer.parseInt(request.getParameter("is_view"));
+					
+					if (temp1 == 1)
+						redirect = "redirect:/showStaffList";
+					else
+						redirect = "redirect:/showMphillDetails";
 				//if (isView == 1)
-					redirect = "redirect:/showMphillDetails";
+					//redirect = "redirect:/showMphillDetails";
 				//else
 					//redirect = "redirect:/showAddMphillDetails";
 			}
@@ -488,7 +530,7 @@ public class FacPersonalController {
 
 	@RequestMapping(value = "/showAddAcademicDetails", method = RequestMethod.POST)
 	public ModelAndView showAddAcademicDetails(HttpServletRequest request, HttpServletResponse response) {
-
+		int temp2=0;
 		ModelAndView model = null;
 		//http: // localhost:8895/rusasoft/showAddAcademicDetails
 			int facultyId =0;
@@ -504,6 +546,20 @@ public class FacPersonalController {
 			}catch (Exception e) {
 				facultyId = 0;
 			}
+			try {
+			 temp2=Integer.parseInt(request.getParameter("temp2"));
+		 }catch (Exception e) {
+			 temp2 = 0;
+			}
+
+			 if(temp2==1) {
+				 model.addObject("temp2", temp2); 
+				 }
+				 else {
+					 model.addObject("temp2", 0); 
+				 }
+				
+				
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("type", 1);
@@ -686,10 +742,14 @@ public class FacPersonalController {
 
 				FacultyAcademic facAcadeRes = restTemplate.postForObject(Constants.url + "saveFacultyAcademic",
 						facAcademic, FacultyAcademic.class);
-
-				//int isView = Integer.parseInt(request.getParameter("is_view"));
-				//if (isView == 1)
+				int temp2 = Integer.parseInt(request.getParameter("temp2"));
+				if (temp2 == 1)
+					redirect = "redirect:/showStaffList";
+				else
 					redirect = "redirect:/showAcademicDetails";
+				//
+				//if (isView == 1)
+				//	redirect = "redirect:/showAcademicDetails";
 				//else
 					// = "redirect:/showAddAcademicDetails";
 			}

@@ -226,9 +226,9 @@
 																</c:when>
 																	<c:otherwise>
 																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1"
+																			name="is_registration" value="1" checked
 																			onclick="setDate(this.value)">Yes
-																<input type="radio" id="is_registration" checked
+																<input type="radio" id="is_registration" 
 																			name="is_registration" value="0"
 																			onclick="setDate(this.value)">No
 															
@@ -533,8 +533,11 @@ $(function () {
 	
 	function showIsReg(){
 		//alert("Hi");
-		var x=${dean.deanId}
-	
+		//var x=${dean.deanId}
+		
+		var qualType=document.getElementById("is_registration").value
+		
+	/* 
 		if(x>0){
 			//alert("Hi 1")
 		var isRel=${dean.realivingDate};
@@ -547,9 +550,19 @@ $(function () {
 			//alert("Hi es")
 			document.getElementById("abc").style.display = "block";
 			
+		} */
+		
+		if (qualType == 0) {
+
+			document.getElementById("abc").style = "visible"
+			
+				
+		} 
+		else{
+			document.getElementById("abc").style = "display:none"
 		}
 			
-		}
+	
 	
 	}
 	</script>

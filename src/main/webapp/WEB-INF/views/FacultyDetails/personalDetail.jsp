@@ -356,6 +356,9 @@
 													<input type="hidden" id="staff_id" name="staff_id"
 														value="${staff.facultyId}"> <input
 														type="hidden" id="is_view" name="is_view" value="0">
+														
+														<input type="hidden" id="temp"
+											name="temp" value="${temp}"> 
 												</div>
 											</form>
 											<p class="desc text-danger fontsize11">Notice : * Fields

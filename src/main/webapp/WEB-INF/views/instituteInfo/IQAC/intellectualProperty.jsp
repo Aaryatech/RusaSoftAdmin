@@ -145,8 +145,8 @@
 															value="${bList.instSchemeId}" /></td> --%>
 														<td align="center">${count.index+1}</td>
 														<td>${rightsList.conName}</td>
-														<td>${rightsList.conFromdt}</td>
-														<td>${rightsList.conTodt}</td>
+														<td align="center">${rightsList.conFromdt}</td>
+														<td align="center">${rightsList.conTodt}</td>
 														<td align="right">${rightsList.conPcount}</td>
 														
 														<td align="center"><c:if test="${editAccess==0}"> 

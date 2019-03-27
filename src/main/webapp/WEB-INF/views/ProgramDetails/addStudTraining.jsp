@@ -225,7 +225,7 @@
 														Package Offered<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" maxlength="10" class="form-control"
+														<input type="number" min="0" maxlength="10" class="form-control"
 															id="package_offered" value="${trainPlace.pakageOfferd}"
 															name="package_offered"
 															placeholder="Package Offered by Employer to Students  "

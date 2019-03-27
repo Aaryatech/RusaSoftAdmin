@@ -141,7 +141,7 @@
 
 															<td style="text-align: left"><c:out
 																	value="${value.activityFromdt}" /></td>
-															<td style="text-align: left"><c:out
+															<td style="text-align: center"><c:out
 																	value="${value.activityTodt}" /></td>
 
 															<td style="text-align: left"><c:out

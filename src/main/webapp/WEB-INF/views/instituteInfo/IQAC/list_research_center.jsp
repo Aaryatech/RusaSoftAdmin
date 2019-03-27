@@ -149,11 +149,11 @@
 																	value="${value.rcFacultyName}" /></td>
 
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: center"><c:out
 																	value="${value.rcValidityFromdt}" /></td>
 
 
-															<td style="text-align: left"><c:out
+															<td style="text-align: center"><c:out
 																	value="${value.rcValidityTodt}" /></td>
 
 

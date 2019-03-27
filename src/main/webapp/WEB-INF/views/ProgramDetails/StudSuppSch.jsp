@@ -84,7 +84,7 @@
 													<th style="text-align: center;">Level</th>
 													<th style="text-align: center;">Type</th>
 													<th>Benefited Students</th>
-													<th style="text-align: center;">Implementation Year</th>
+													<th style="text-align: center;">Implementation Date/Year</th>
 													<th style="text-align: center;">Support Agency</th>
 													<th style="text-align: center;">Actions</th>
 												</tr>
