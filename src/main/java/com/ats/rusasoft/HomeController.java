@@ -231,15 +231,29 @@ public class HomeController {
 	@RequestMapping("/loginProcess")
 	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse res) throws IOException {
 		ModelAndView mav = new ModelAndView("login");
+		HttpSession session = request.getSession();
+
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
-		int loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
+		int acYearId=0;
+		try {
+		 acYearId=	(int) session.getAttribute("acYearId");
+		}catch (Exception e) {
+			acYearId=0;
+		}
+		int loginAcYearId=0;
+		if(acYearId==0) {
+			System.err.println(" IN if Firt time acYearId ==0");
+		 loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
+		}else {
+			System.err.println("In Else its reload call  ");
+			loginAcYearId=acYearId;
+		}
 		
 		
 		System.out.println("Credential are::::"+name+password);
 
 	
-		HttpSession session = request.getSession();
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 		
@@ -428,17 +442,24 @@ public class HomeController {
 		HttpServletResponse response) {
 		
 		int yearId=Integer.parseInt(request.getParameter("yearId"));
+		System.err.println("year Id " +yearId);
 		String yearValue=request.getParameter("yearValue");
 		HttpSession session = request.getSession();
-		session.setAttribute("acYearId", yearId);
 		//session.setAttribute("sessionSubModuleId",subModId);
 		MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
 		map =new LinkedMultiValueMap<String, Object>(); 
 		 map.add("yearId", yearId);
-		AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
-		session.setAttribute("acYearValue", acYear.getAcademicYear());
+		 System.err.println("Map  " +map.toString());
+		AcademicYear acYear=new AcademicYear();
 		
-		return acYear;
+		acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
+		System.err.println("acYear  " +acYear.toString());
+
+		session.setAttribute("acYearValue", acYear.getAcademicYear());
+		session.setAttribute("acYearId", yearId);
+
+		return
+				acYear;
 		
 	}
 	

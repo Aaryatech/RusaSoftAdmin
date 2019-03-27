@@ -87,45 +87,7 @@ public class BudgetController {
 
 	}
 
-	@RequestMapping(value = "/budgetOnGreenInitiativesAndWasteMngmnt", method = RequestMethod.GET)
-	public ModelAndView budgetOnGreenInitiativesAndWasteMngmnt(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("budgetForm/waste_management _budget_list");
-		try {
-
-			model.addObject("title", Names.waste_management_budget_list);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
-
-	// waste_management _budget_add
-
-	@RequestMapping(value = "/budgetAddOnGreenInitiativesAndWasteMngmnt", method = RequestMethod.GET)
-	public ModelAndView budgetAddOnGreenInitiativesAndWasteMngmnt(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("budgetForm/waste_management_budget_add");
-		try {
-
-			model.addObject("title", Names.waste_management_budget_add);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	
 
 	@RequestMapping(value = "/budgetOnLibraryBooks", method = RequestMethod.GET)
 	public ModelAndView budgetOnLibraryBooks(HttpServletRequest request, HttpServletResponse response) {

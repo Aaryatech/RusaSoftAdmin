@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/deleteWasteMngtBudget/0"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
@@ -107,15 +107,49 @@
 												<tr>
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
-													<th>Total Budget Allocated</th>
-													<th>Total Budget Utilized</th>
+													<th>Budget Allocated</th>
+													<th>Budget Utilized</th>
 												</tr>
 											</thead>
 
 											<tbody>
+											
+											<c:forEach items="${budgetList}" var="budget"
+													varStatus="count">
+													<tr>
+														<%-- <td align="center"><input type="checkbox" class="chk"
+															name="accOffIds" id="accOffIds${count.index+1}"
+															value="${accOff.officerId}" /></td> --%>
+														<td align="center">${count.index+1}</td>
+														<td align="center">${budget.finYear}</td>
+														
+														<td align="right">${budget.budgetAllocated}</td>
+														<td align="right">${budget.budgetUtilized}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a onclick="showEdit(${budget.wasteMngtBudgetId})"
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	title="Edit" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+															<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteWasteMngtBudget/${budget.wasteMngtBudgetId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
+											
 
 											</tbody>
 										</table>
+										
+										
+							<input type="hidden" id="wasteMngtBudgetId" name="wasteMngtBudgetId" value="0">
+										
 
 									</form>
 								</div>
@@ -213,6 +247,18 @@
 			dataTable.row.add([ i + 1, year, allocatedAmt, utilizedAmt ])
 					.draw();
 			document.getElementById("index").value = i + 1;
+		}
+	</script>
+
+
+<script type="text/javascript">
+		function showEdit(wasteMngtBudgetId){
+			document.getElementById("wasteMngtBudgetId").value=wasteMngtBudgetId;//create this 
+			var form=document.getElementById("form_sample_2");
+		    form.setAttribute("method", "post");
+			form.action=("showEditWasteMngtBudget");
+			form.submit();
+			
 		}
 	</script>
 

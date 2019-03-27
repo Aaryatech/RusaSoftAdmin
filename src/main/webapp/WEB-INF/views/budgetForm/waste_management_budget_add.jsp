@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
+										action="${pageContext.request.contextPath}/insertWasteMngtBudget"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
@@ -109,9 +109,16 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" required>
-													<option value="2018-2019">2018-2019</option>
-													<option value="2017-2018">2017-2018</option>
-													<option value="2016-2017">2016-2017</option>
+													<c:forEach items="${finYearList}" var="finYear">
+														<c:choose>
+															<c:when test="${finYear.finYearId==budget.finYearId}">
+																<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
 
 												</select>
 											</div>
@@ -119,27 +126,31 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="allocatedAmt">Total
-												Budget Allocated Amount <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="allocatedAmt">
+												Budget Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="text" maxlength="9" class="form-control"
+													onkeypress="return allowOnlyNumber(this)" 
 													id="budget_allocated" name="budget_allocated"
 													placeholder="Total Budget Allocated Amount in Rupees"
-													value="${page.pageName}" required>
+													value="${budget.budgetAllocated}" autocomplete="off"
+													required>
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="utilizedAmt">Total
-												Budget Utilized Amount<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="utilizedAmt">
+												Budget Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="budget_utilized"
-													name="budget_utilized"
+												<input type="text" class="form-control" maxlength="9"
+													id="budget_utilized" name="budget_utilized"
+													onkeypress="return allowOnlyNumber(this)"
 													placeholder="Total Budget Utilized Amount in Rupees"
-													value="${page.pageName}" required>
+													value="${budget.budgetUtilized}" autocomplete="off"
+													required>
 											</div>
 										</div>
 
@@ -153,13 +164,13 @@
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" id="wasteMngtBudgetId"
+													name="wasteMngtBudgetId"
+													value="${budget.wasteMngtBudgetId}">
+
 											</div>
 										</div>
-
-
-
 										<div class="clearfix"></div>
-
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
@@ -250,6 +261,19 @@
 	    }
 	    return true;
 	}
+	
+	</script>
+
+	<script type="text/javascript">
+	 function onlyNumeric(evt){
+		 alert(evt);
+		 var valid=true;
+	  var charCode = (evt.which) ? evt.which : event.keyCode
+	  if (charCode > 31 && charCode==46 && (charCode < 48 || charCode > 57)){
+		  valid=false;
+	  }
+	  return valid;
+	} 
 	</script>
 
 

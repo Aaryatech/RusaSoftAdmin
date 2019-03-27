@@ -20,7 +20,7 @@
 		<div class='pull-left'>
 			<ul class="info-menu right-links list-inline list-unstyled">
 				<li class="profile"><a href="#" data-toggle="dropdown"
-					class="toggle"> <span>Academic Year <span id="topYear" ></span> <i
+					class="toggle"> <span>Academic Year <span id="topYear">${sessionScope.acYearValue}</span> <i
 							class="fa fa-calendar"></i>
 					</span>
 				</a>
@@ -108,7 +108,7 @@
 function setAcaYearInSession(yearId,yearValue) {
 	//alert("yearValue " +yearValue);
 	$("#topYear").html(yearValue);
-	
+	//alert("Year Id  " +yearId);
 	$.getJSON('${setAcaYearInSession}', {
 		
 		yearId : yearId,
@@ -122,6 +122,8 @@ function setAcaYearInSession(yearId,yearValue) {
 		//$("#topYear").html(data.academicYear );
 		
 		location.reload(true);
+		//$("#topYear").html(data.academicYear );
+		$("#topYear").html(yearValue);
 		 
 	});
 	

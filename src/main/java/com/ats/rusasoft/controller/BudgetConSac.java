@@ -30,8 +30,10 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.budget.FinancialYear;
 import com.ats.rusasoft.model.budget.GetInfraStructureBudget;
 import com.ats.rusasoft.model.budget.GetLibraryBudget;
+import com.ats.rusasoft.model.budget.GetWasteMngtBudget;
 import com.ats.rusasoft.model.budget.InfraStructureBudget;
 import com.ats.rusasoft.model.budget.LibraryBudget;
+import com.ats.rusasoft.model.budget.WasteMngtBudget;
 
 @Controller
 @Scope("session")
@@ -52,7 +54,6 @@ public class BudgetConSac {
 			Info viewAccess = AccessControll.checkAccess("budgetInfrastructureFacility", "budgetInfrastructureFacility",
 					"1", "0", "0", "0", newModuleList);
 
-			// viewAccess.setError(false);
 			if (viewAccess.isError() == false) {
 				model = new ModelAndView("budgetForm/infra_budget_facility_list");
 
@@ -61,14 +62,11 @@ public class BudgetConSac {
 				Info addAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "1", "0", "0", newModuleList);
 
-				// addAccess.setError(false);
 
 				Info editAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "0", "1", "0", newModuleList);
-				// editAccess.setError(false);
 				Info deleteAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "0", "0", "1", newModuleList);
-				// deleteAccess.setError(false);
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
 					model.addObject("addAccess", 0);
@@ -322,7 +320,7 @@ public class BudgetConSac {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("showEditDept", "showDeptList", "0", "0", "0", "1",
+			Info deleteAccess = AccessControll.checkAccess("deleteInfraBudget", "budgetInfrastructureFacility", "0", "0", "0", "1",
 					newModuleList);
 			if (deleteAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -642,5 +640,393 @@ public class BudgetConSac {
 	
 	
 	// deleteLibBudget
+	//deleteLibBudget/
+	
+	
+	@RequestMapping(value = "/deleteLibBudget/{libBudgetId}", method = RequestMethod.GET)
+	public String deleteLibBudget(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int libBudgetId) {
+
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("deleteLibBudget", "budgetOnLibrary", "0", "0", "0", "1",
+					newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (libBudgetId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("infraBudgetIds");
+					//System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String libBudgetIdList = sb.toString();
+					libBudgetIdList = libBudgetIdList.substring(0, libBudgetIdList.length() - 1);
+
+					map.add("libBudgetIdList", libBudgetIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("libBudgetIdList", libBudgetId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteLibBudget", map, Info.class);
+				redirect = "redirect:/budgetOnLibrary";
+			}
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteLibBudget at BudgeConSac Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect; // "redirect:/showDeptList";
+
+	}
+	
+	//Wase Mngt And Green Initiatives Budget
+	
+	
+	@RequestMapping(value = "/budgetOnGreenInitiativesAndWasteMngmnt", method = RequestMethod.GET)
+	public ModelAndView budgetOnGreenInitiativesAndWasteMngmnt(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model =null;// new ModelAndView("budgetForm/waste_management _budget_list");
+		try {
+			
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("budgetOnGreenInitiativesAndWasteMngmnt", "budgetOnGreenInitiativesAndWasteMngmnt",
+					"1", "0", "0", "0", newModuleList);
+
+			if (viewAccess.isError() == false) {
+				model =  new ModelAndView("budgetForm/waste_management _budget_list");
+
+				model.addObject("title", Names.waste_management_budget_list);
+
+				Info addAccess = AccessControll.checkAccess("budgetOnGreenInitiativesAndWasteMngmnt",
+						"budgetOnGreenInitiativesAndWasteMngmnt", "0", "1", "0", "0", newModuleList);
+
+
+				Info editAccess = AccessControll.checkAccess("budgetOnGreenInitiativesAndWasteMngmnt",
+						"budgetOnGreenInitiativesAndWasteMngmnt", "0", "0", "1", "0", newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("budgetOnGreenInitiativesAndWasteMngmnt",
+						"budgetOnGreenInitiativesAndWasteMngmnt", "0", "0", "0", "1", newModuleList);
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false)
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+				map = new LinkedMultiValueMap<>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				map.add("acYearId", (int) session.getAttribute("acYearId"));
+				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
+
+				GetWasteMngtBudget[] resArray = rest.postForObject(
+						Constants.url + "/getWasteMngtBudgetListByAcYearId", map, GetWasteMngtBudget[].class);
+				List<GetWasteMngtBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
+				
+
+				model.addObject("budgetList", budgetList);
+
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	// waste_management _budget_add
+
+	@RequestMapping(value = "/budgetAddOnGreenInitiativesAndWasteMngmnt", method = RequestMethod.GET)
+	public ModelAndView budgetAddOnGreenInitiativesAndWasteMngmnt(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model =null;// new ModelAndView("budgetForm/waste_management_budget_add");
+		try {
+			
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info aceess = null;
+
+			aceess = AccessControll.checkAccess("budgetAddOnGreenInitiativesAndWasteMngmnt", "budgetOnGreenInitiativesAndWasteMngmnt", "0", "1", "0", "0",
+					newModuleList);
+			// aceess.setError(false);// comment this
+
+			if (aceess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+				
+				model=  new ModelAndView("budgetForm/waste_management_budget_add");
+				model.addObject("title", Names.waste_management_budget_add);
+
+				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
+						FinancialYear[].class);
+				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("finYearList", finYearList);
+
+				FinancialYear curFinYear = rest.getForObject(Constants.url + "/getCurrentFinancialYear",
+						FinancialYear.class);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("curFinYear", curFinYear.getFinYearId());
+
+				WasteMngtBudget budget = rest.postForObject(Constants.url + "/getWasteMngtBudgetByFinYearId", map,
+						WasteMngtBudget.class);
+
+				model.addObject("budget", budget);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	//insertWasteMngtBudget
+	
+	
+	@RequestMapping(value = "/insertWasteMngtBudget", method = RequestMethod.POST)
+	public String insertWasteMngtBudget(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in insert insertWasteMngtBudget");
+		ModelAndView model = null;
+		String redirect = null;
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+
+			map = new LinkedMultiValueMap<String, Object>();
+
+			int wasteMngtBudgetId = 0;
+			try {
+				wasteMngtBudgetId = Integer.parseInt(request.getParameter("wasteMngtBudgetId"));
+			} catch (Exception e) {
+				wasteMngtBudgetId = 0;
+			}
+
+			System.err.println("wasteMngtBudgetId   " + wasteMngtBudgetId);
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info aceess = null;
+
+			if (wasteMngtBudgetId == 0) {
+
+				aceess = AccessControll.checkAccess("insertWasteMngtBudget", "budgetOnGreenInitiativesAndWasteMngmnt", "0", "1", "0",
+						"0", newModuleList);
+			} else {
+
+				aceess = AccessControll.checkAccess("insertWasteMngtBudget", "budgetOnGreenInitiativesAndWasteMngmnt", "0", "0", "1",
+						"0", newModuleList);
+
+			}
+
+			if (aceess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				WasteMngtBudget wasteAndGreenMngtBudget = new WasteMngtBudget();
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+				wasteAndGreenMngtBudget.setAcYearId((int) session.getAttribute("acYearId"));
+				wasteAndGreenMngtBudget.setAddBy(userObj.getUserId());
+				wasteAndGreenMngtBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+				wasteAndGreenMngtBudget.setAddDatetime(curDateTime);
+
+				wasteAndGreenMngtBudget.setWasteMngtBudgetId(wasteMngtBudgetId);
+
+				wasteAndGreenMngtBudget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
+				wasteAndGreenMngtBudget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
+				wasteAndGreenMngtBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
+				wasteAndGreenMngtBudget.setWasteMngtBudgetTitle("");
+
+				int exInt1 = 0;
+				wasteAndGreenMngtBudget.setExInt1(exInt1);
+				wasteAndGreenMngtBudget.setExInt2(exInt1);
+				String exVar1 = "NA";
+				wasteAndGreenMngtBudget.setExVar1(exVar1);
+				wasteAndGreenMngtBudget.setExVar2(exVar1);
+
+				wasteAndGreenMngtBudget.setIsActive(1);
+				wasteAndGreenMngtBudget.setDelStatus(1);
+
+				WasteMngtBudget wasteMngtBudgetRes = restTemplate.postForObject(
+						Constants.url + "saveWasteMngtBudget", wasteAndGreenMngtBudget, WasteMngtBudget.class);
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/budgetOnGreenInitiativesAndWasteMngmnt";
+				else
+					redirect = "redirect:/budgetAddOnGreenInitiativesAndWasteMngmnt";
+			}
+
+		} catch (Exception e) {
+			System.err.println("Exce in save insertWasteMngtBudget  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return redirect;// "redirect:/showDeptList";
+
+	}
+
+	
+//showEditWasteMngtBudget
+	
+	@RequestMapping(value = "/showEditWasteMngtBudget", method = RequestMethod.POST)
+	public ModelAndView showEditWasteMngtBudget(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model =null;// new ModelAndView("budgetForm/infra_budget_facility_add");
+		try {
+
+			HttpSession session = request.getSession();
+ 
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info aceess = null;
+
+			aceess = AccessControll.checkAccess("showEditWasteMngtBudget", "budgetOnGreenInitiativesAndWasteMngmnt", "0",
+					"0", "1", "0", newModuleList);
+			// aceess.setError(false);// comment this
+
+			if (aceess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+				model=  new ModelAndView("budgetForm/waste_management_budget_add");
+				model.addObject("title", Names.waste_management_budget_edit);
+
+
+				int wasteMngtBudgetId = Integer.parseInt(request.getParameter("wasteMngtBudgetId"));
+
+				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
+						FinancialYear[].class);
+				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("finYearList", finYearList);
+
+				FinancialYear curFinYear = rest.getForObject(Constants.url + "/getCurrentFinancialYear",
+						FinancialYear.class);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("wasteMngtBudgetId", wasteMngtBudgetId);
+
+				WasteMngtBudget budget = rest.postForObject(
+						Constants.url + "/getWasteMngtBudgetBywasteMngtBudgetId", map, WasteMngtBudget.class);
+
+				model.addObject("budget", budget);
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteWasteMngtBudget/{wasteMngtBudgetId}", method = RequestMethod.GET)
+	public String deleteWasteMngtBudget(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int wasteMngtBudgetId) {
+
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("deleteWasteMngtBudget", "budgetOnGreenInitiativesAndWasteMngmnt", "0", "0", "0", "1",
+					newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (wasteMngtBudgetId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("infraBudgetIds");
+					//System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String wasteMngtBudgetIdList = sb.toString();
+					wasteMngtBudgetIdList = wasteMngtBudgetIdList.substring(0, wasteMngtBudgetIdList.length() - 1);
+
+					map.add("wasteMngtBudgetIdList", wasteMngtBudgetIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("wasteMngtBudgetIdList", wasteMngtBudgetId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteWasteMngtBudget", map, Info.class);
+				redirect = "redirect:/budgetOnGreenInitiativesAndWasteMngmnt";
+			}
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteWasteMngtBudget at BudgeConSac Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect; // "redirect:/showDeptList";
+
+	}
+	
 
 }
