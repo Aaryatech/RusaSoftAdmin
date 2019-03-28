@@ -42,8 +42,7 @@ import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.RareBook;
 import com.ats.rusasoft.model.Student;
-import com.ats.rusasoft.model.accessright.ModuleJson;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
+import com.ats.rusasoft.model.accessright.ModuleJson; 
 
 @Controller
 @Scope("session")
