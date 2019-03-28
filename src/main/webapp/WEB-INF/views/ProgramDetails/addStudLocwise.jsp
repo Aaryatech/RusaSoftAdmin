@@ -167,7 +167,7 @@
 																		<td>${loc.locationName}</td>
 																		<td><input type="number" min="0"  max="99999"
 																			class="txt" id="loc_m${loc.studentLocId}" onkeyup="calculateSum()"
-																			name="loc_m${loc.studentLocId}" value="${loc.maleStudent}" onkeypress="allowOnlyNumber1" required></td>
+																			name="loc_m${loc.studentLocId}" value="${loc.maleStudent}" onkeypress="return allowOnlyNumber1(event)" required></td>
 																		<td><input type="number" min="0"  max="99999" onkeyup="calculateSum()"
 																			class="txt" id="loc_f${loc.studentLocId}"
 																			name="loc_f${loc.studentLocId}" value="${loc.femaleStudent}" required></td>
@@ -360,6 +360,7 @@ function calculateSum() {
 	});
 	document.getElementById("total_stud").value=sum;
 }
+
 </script>
 <script type="text/javascript">
 	 function allowOnlyNumber1(evt){

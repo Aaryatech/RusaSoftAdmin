@@ -90,7 +90,7 @@
 										<div class="tab-pane fade in active" id="home">
  -->
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertInstitute"
+										action="${pageContext.request.contextPath}/insertInstituteDemo"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return checkBeforeSubmit()">
 
@@ -622,11 +622,8 @@
 		function checkUnique(inputValue, valueType) {
 			//alert(inputValue);
 
-			var primaryKey = $
-			{
-				editInst.instituteId
-			}
-			;
+			var primaryKey = ${editInst.instituteId};
+		
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {

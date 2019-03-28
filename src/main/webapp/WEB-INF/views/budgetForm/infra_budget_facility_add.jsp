@@ -131,7 +131,7 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onchange="trim(this)"
+												<input type="text" class="form-control" onchange="trim(this)" maxlength="100"
 													id="infra_budget_title" name="infra_budget_title" value="${budget.infraBudgetTitle}"
 													placeholder="Title of Infrastructure Budget" required>
 											</div>
@@ -142,7 +142,7 @@
 												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text"  min="0" min="0" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)" class="form-control"
+												<input type="number"  min="0" max="100000000" autocomplete="off" maxlength="9" autocomplete="off"  onkeypress="return allowOnlyNumber(this)" class="form-control"
 													id="budget_allocated"  name="budget_allocated"
 													placeholder="Budget Allocated Amount in Rupees"
 													value="${budget.budgetAllocated}" required>
@@ -155,8 +155,8 @@
 												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="budget_utilized" onchange="trim(this)"
-													name="budget_utilized" min="0" autocomplete="off" maxlength="10" onkeypress="return allowOnlyNumber(this)"
+												<input type="number" class="form-control" id="budget_utilized" onchange="trim(this)"
+													name="budget_utilized" min="0" max="100000000" autocomplete="off" maxlength="9" onkeypress="return allowOnlyNumber(this)"
 													placeholder="Budget Utilized Amount in Rupees"
 													value="${budget.budgetUtilized}" required>
 											</div>
@@ -256,7 +256,8 @@
 			});
 		});
 	</script>
-
+	
+	
 	<script type="text/javascript">
 	function allowOnlyNumber(evt){
 		
@@ -266,7 +267,7 @@
 	        var count = (inputValue.match(/'.'/g) || []).length;
 	        
 	        if(count<1){
-	            if (inputValue.indexOf('.') < 1){
+	            if (inputValue.indexOf('.') > 0){
 	                return true;
 	            }
 	            return false;
@@ -274,11 +275,15 @@
 	            return false;
 	        }
 	    }
-	    if (charCode != 46 && charCode==17 && charCode > 31 && (charCode < 48 || charCode > 57)){
+	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
 	        return false;
 	    }
 	    return true;
 	}
+	
+	 $('.form-control').bind("cut paste",function(e) {
+         e.preventDefault();
+     });
 	</script>
 
 

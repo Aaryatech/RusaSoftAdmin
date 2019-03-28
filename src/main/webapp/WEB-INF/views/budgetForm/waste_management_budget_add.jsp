@@ -130,7 +130,7 @@
 												Budget Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="9" class="form-control"
+												<input type="number"  min="0" max="100000000" maxlength="9" class="form-control"
 													onkeypress="return allowOnlyNumber(this)" 
 													id="budget_allocated" name="budget_allocated"
 													placeholder="Total Budget Allocated Amount in Rupees"
@@ -145,7 +145,7 @@
 												Budget Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" maxlength="9"
+												<input type="number"  min="0" max="100000000"  class="form-control" maxlength="9"
 													id="budget_utilized" name="budget_utilized"
 													onkeypress="return allowOnlyNumber(this)"
 													placeholder="Total Budget Utilized Amount in Rupees"
@@ -248,7 +248,7 @@
 	        var count = (inputValue.match(/'.'/g) || []).length;
 	        
 	        if(count<1){
-	            if (inputValue.indexOf('.') < 1){
+	        	 if (inputValue.indexOf('.')>0){
 	                return true;
 	            }
 	            return false;
@@ -274,6 +274,11 @@
 	  }
 	  return valid;
 	} 
+	 
+	 $('.form-control').bind("cut paste",function(e) {
+         e.preventDefault();
+     });
+	
 	</script>
 
 

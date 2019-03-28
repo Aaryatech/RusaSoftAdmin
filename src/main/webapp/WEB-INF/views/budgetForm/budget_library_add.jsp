@@ -131,7 +131,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onchange="trim(this)"
-													id="lib_budget_title" name="lib_budget_title"
+													id="lib_budget_title" name="lib_budget_title" maxlength="100"
 													placeholder="Title of Library Facility" value="${budget.libBudgetTitle}" required>
 											</div>
 										</div>
@@ -141,8 +141,8 @@
 												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text"  onkeypress="return allowOnlyNumber(this)" onchange="trim(this)" class="form-control"
-													id="budget_allocated" name="budget_allocated"
+												<input type="number" min="0" max="100000000"  onkeypress="return allowOnlyNumber(this)" onchange="trim(this)" class="form-control"
+													id="budget_allocated" name="budget_allocated" maxlength="9"
 													placeholder="Budget Allocated Amount in Rupees"
 													value="${budget.budgetAllocated}" required>
 											</div>
@@ -154,7 +154,7 @@
 												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="budget_utilized"
+												<input type="number" min="0"  max="100000000" class="form-control" id="budget_utilized" maxlength="9"
 													name="budget_utilized" onchange="trim(this)"  onkeypress="return allowOnlyNumber(this)"
 													placeholder="Budget Utilized Amount in Rupees"
 													value="${budget.budgetUtilized}" required>
@@ -268,6 +268,9 @@
 	    }
 	    return true;
 	}
+	 $('.form-control').bind("paste",function(e) {
+         e.preventDefault();
+     });
 	</script>
 
 
