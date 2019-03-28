@@ -117,10 +117,24 @@
 													<td>${institute.email}</td>
 
 													<td align="center">
+													
+													
+													<%--  <c:if test="${editAccess == 0}">  --%>
+														<a href="${pageContext.request.contextPath}/viewInstitutes/${institute.instituteId}"><span
+															class="glyphicon glyphicon-book"
+															data-animate=" animated fadeIn " rel="tooltip"
+															title="Institute Details"></span></a><%-- </c:if>  --%>&nbsp;&nbsp;&nbsp;&nbsp;
+													
 														<c:if test="${addAccess==0}"><a href="${pageContext.request.contextPath}/approveInstitutes/${institute.instituteId}"><span
 															class="glyphicon glyphicon-ok-circle"
 															data-animate=" animated fadeIn " rel="tooltip"
-															title="Approve"></span></a></c:if></td>
+															title="Approve"></span></a></c:if> &nbsp;&nbsp;&nbsp;&nbsp;
+													
+														<%-- <c:if test="${deleteAccess==0}"> --%><a href="${pageContext.request.contextPath}/deleteInst/${institute.instituteId}"><span
+															class="glyphicon glyphicon-remove"
+															data-animate=" animated fadeIn " rel="tooltip"
+															title="Delete"></span></a><%-- </c:if> --%>
+															</td>
 												</tr>
 											</c:forEach>
 										</tbody>

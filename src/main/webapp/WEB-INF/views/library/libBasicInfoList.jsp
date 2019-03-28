@@ -50,9 +50,9 @@
          <header class="panel_header">
                 <h2 class="title pull-left">Library Basic Info List</h2>
                 <div class="actions panel_actions pull-right">
-                  <%-- <c:if test="${addAccess == 0}">  --%>
+                 <c:if test="${addAccess == 0}"> 
                		  <a href="${pageContext.request.contextPath}/libraryBasicInfo"><button type="button" class="btn btn-success">Add</button></a>
-                 <%-- </c:if> --%>
+          		 </c:if> -
                 	<!-- <a class="box_toggle fa fa-chevron-down"></a>   -->             
                 </div>
               </header> 
@@ -122,13 +122,13 @@
 														value="${libList.avgStudent}" /></td>
 												
 											<td align="center">
-											<%--  <c:if test="${editAccess == 0}">  --%> <a
+											  <c:if test="${editAccess == 0}">  <a
 												href="${pageContext.request.contextPath}/editLibInfo/${libList.libInfoId}" title="Edit" 
 												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> <%-- </c:if>  --%>
+												class="glyphicon glyphicon-edit"></span></a> </c:if> 
 												&nbsp;&nbsp;&nbsp;&nbsp;
 												
-											<%--  <c:if test="${deleteAccess == 0}"> 	 --%>
+											  <c:if test="${deleteAccess == 0}"> 
 												<a	href="${pageContext.request.contextPath}/deleteLibInfo/${libList.libInfoId}"
 													onClick="return confirm('Are you sure want to delete this record');"
 													rel="tooltip" data-color-class="danger" title="Delete"
@@ -136,7 +136,7 @@
 													data-original-title="Delete  record"><span
 													class="glyphicon glyphicon-remove"></span></a>
 												
-												<%-- </c:if> --%>
+												 </c:if> 
 												&nbsp;&nbsp;&nbsp;&nbsp;
 																	
 												<%-- <a

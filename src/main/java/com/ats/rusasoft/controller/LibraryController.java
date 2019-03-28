@@ -69,18 +69,16 @@ public class LibraryController {
 		try {
 			HttpSession session = request.getSession();
 			
-			/*
-			 * List<ModuleJson> newModuleList = (List<ModuleJson>)
-			 * session.getAttribute("newModuleList"); Info view =
-			 * AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo",
-			 * "1", "0", "0", "0", newModuleList);
-			 * 
-			 * if (view.isError() == true) {
-			 * 
-			 * model = new ModelAndView("accessDenied");
-			 * 
-			 * } else {
-			 */
+			
+			  List<ModuleJson> newModuleList = (List<ModuleJson>)
+			  session.getAttribute("newModuleList"); Info view = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "1", "0", "0", "0", newModuleList);
+			  
+			  if (view.isError() == true) {
+			  
+			  model = new ModelAndView("accessDenied");
+			  
+			  } else {
+			 
 			
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
@@ -95,7 +93,7 @@ public class LibraryController {
 			List<LibraryInfo> libInfoList = new ArrayList<>(Arrays.asList(libInfoArr));
 			
 			model.addObject("libInfoList", libInfoList);
-			/*Info add = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
+			Info add = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
 					newModuleList);
 			Info edit = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "1", "0",
 					newModuleList);
@@ -116,7 +114,7 @@ public class LibraryController {
 				model.addObject("deleteAccess", 0);
 
 			}
-		}*/
+		}
 			
 	
 		} catch (Exception e) {
@@ -136,7 +134,7 @@ public class LibraryController {
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
-			/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("libraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
 					newModuleList);
 
@@ -144,12 +142,12 @@ public class LibraryController {
 				
 				model = new ModelAndView("accessDenied");
 
-			} else {*/
+			} else {
 			
 				LibraryInfo libInfo = new LibraryInfo();
 				model.addObject("libInfo", libInfo);
 				model.addObject("title", "Add Library Basic Information");
-			//}
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -222,12 +220,23 @@ public class LibraryController {
 		
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("libraryBasicInfo", "showLibraryBasicInfo", "0", "0", "1", "0",
+						newModuleList);
+
+				if (view.isError() == true) {
+					
+					model = new ModelAndView("accessDenied");
+
+				} else {
 		map = new LinkedMultiValueMap<>();
 		map.add("libInfoId", libInfoId);
 		
 		LibraryInfo libInfo = rest.postForObject(Constants.url+"/editlibBasicInfoById", map, LibraryInfo.class);
 		model.addObject("libInfo", libInfo);
-		} catch (Exception e) {
+		}
+	} catch (Exception e) {
 
 			e.printStackTrace();
 
@@ -242,11 +251,21 @@ public class LibraryController {
 		
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("libraryBasicInfo", "showLibraryBasicInfo", "0", "0", "0", "1",
+						newModuleList);
+
+				if (view.isError() == true) {
+					
+					model = new ModelAndView("accessDenied");
+
+				} else {
 			map = new LinkedMultiValueMap<>();
 			map.add("libInfoId", libInfoId);
 			
 			LibraryInfo libInfo = rest.postForObject(Constants.url+"/deletelibBasicInfoById", map, LibraryInfo.class);
-			
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -263,7 +282,7 @@ public class LibraryController {
 		ModelAndView model = new ModelAndView("library/rareBookInformation");
 		String a = null;
 		try {
-			/*HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookList", "0", "1", "0", "0", newModuleList);
@@ -276,12 +295,12 @@ public class LibraryController {
 
 			}
 
-			else {*/
+			else {
 			RareBook rareBook = new RareBook();
 
 			model.addObject("title", "Rare Book Information");
 			model.addObject("rareBook",rareBook);
-		//	}
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -300,14 +319,14 @@ public class LibraryController {
 			model = new ModelAndView("library/showRareBookInfo");
 			HttpSession session = request.getSession();
 
-		/*	List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 				Info view = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "1", "0", "0", "0", newModuleList);
 		
 				if (view.isError() == true) {
 		
 					model = new ModelAndView("accessDenied");
 		
-				} else {*/
+				} else {
 
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
@@ -320,26 +339,27 @@ public class LibraryController {
 			
 			model.addObject("rareBokList",rareBokList);
 			model.addObject("title","Rare Book List");
-			/*
-			 * Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo",
-			 * "0", "1", "0", "0", newModuleList); Info edit =
-			 * AccessControll.checkAccess("showRareBookInfo", "showLibList", "0", "0", "1",
-			 * "0", newModuleList); Info delete =
-			 * AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0",
-			 * "0", "1", newModuleList);
-			 * 
-			 * if (add.isError() == false) { System.out.println(" add   Accessable ");
-			 * model.addObject("addAccess", 0);
-			 * 
-			 * } if (edit.isError() == false) { System.out.println(" edit   Accessable ");
-			 * model.addObject("editAccess", 0); } if (delete.isError() == false) {
-			 * System.out.println(" delete   Accessable "); model.addObject("deleteAccess",
-			 * 0);
-			 * 
-			 * }
-			 * 
-			 * }
-			 */
+
+			  Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo","0", "1", "0", "0", newModuleList); Info edit =
+			  AccessControll.checkAccess("showRareBookInfo", "showLibList", "0", "0", "1", "0", newModuleList); Info delete =
+			  AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "0", "1", newModuleList);
+			  
+			  if (add.isError() == false) { System.out.println(" add   Accessable ");
+			  model.addObject("addAccess", 0);
+			  
+			  } if (edit.isError() == false)
+			  { 
+				  System.out.println(" edit   Accessable ");
+				  model.addObject("editAccess", 0);
+			  } 
+			  if (delete.isError() == false) {
+			  System.out.println(" delete   Accessable ");
+			  model.addObject("deleteAccess", 0);
+			  
+			  }
+			  
+		}
+			 
 		
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -394,11 +414,27 @@ public class LibraryController {
 	public ModelAndView editRareBookInfo(@PathVariable("bookId") int bookId,  HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("library/rareBookInformation");
 		try {
+			String a = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookList", "0", "0", "1", "0", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
 			map = new LinkedMultiValueMap<>();
 			map.add("bookId", bookId);
 			
 			RareBook editBook = rest.postForObject(Constants.url+"/getRareBookById", map, RareBook.class);
 			model.addObject("rareBook", editBook);
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -412,11 +448,26 @@ public class LibraryController {
 	public String deleteRareBookInfo(@PathVariable("bookId") int bookId,  HttpServletRequest request, HttpServletResponse response) {
 	
 		try {
+			String a = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookList", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
 			map = new LinkedMultiValueMap<>();
 			map.add("bookId", bookId);
 			
 			RareBook editBook = rest.postForObject(Constants.url+"/deleteRareBookById", map, RareBook.class);
-			
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();

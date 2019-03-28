@@ -1796,5 +1796,99 @@ public class MasterController {
 		return redirect;
 
 	}
+	
+	
+	/*****************************************************************************************************/
+	@RequestMapping(value = "/viewInstitutes/{instId}", method = RequestMethod.GET)
+	public ModelAndView viewInstitutes(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int instId) {
+		ModelAndView model = new ModelAndView();
+		MultiValueMap<String, Object> map = null;
+		String a = null;
+		try {
+			HttpSession session = request.getSession();
+			/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {*/
+			
+			model = new ModelAndView("showInstitute");
+			//int instituteId = Integer.parseInt(request.getParameter("instId"));
+			System.out.println("id are" + instId);
+			
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("instId", instId);
+						
+			Institute showInst = rest.postForObject(Constants.url + "/showInstituteData", map,
+					Institute.class);
+			
+			model.addObject("showInst", showInst);
+		/*	Info add = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showIqacList", "showPendingInstitute", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "0", "0", "1",
+					newModuleList);
+
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+		}*/
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/deleteInst/{instId}", method = RequestMethod.GET)
+	public String deleteInstitutes(@PathVariable("instId") int instId, HttpServletRequest request) {
+		
+		String a = null;
+		try {
+		HttpSession session = request.getSession();
+		/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showRegisterStaff", "showPendingInstitute", "0", "0", "0", "1", newModuleList);
+		
+		if (view.isError() == true) {
+
+			a = "redirect:/accessDenied";
+
+		} else {*/
+
+			Info inf = new Info();
+			System.out.println("Id:" + instId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("instId", instId);
+			Info inst = rest.postForObject(Constants.url + "/deleteInstituteById", map, Info.class);
+
+			a = "redirect:/showPendingInstitute";
+
+			//}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return a;
+
+	}
+	
 
 }
