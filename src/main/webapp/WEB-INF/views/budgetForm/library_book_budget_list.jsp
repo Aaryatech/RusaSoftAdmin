@@ -13,7 +13,23 @@
 <!-- CORE CSS TEMPLATE - END -->
 </head>
 <!-- END HEAD -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn1 {
+	background-color: #ffffff; /* Blue background */
+	border: none; /* Remove borders */
+	color: white; /* White text */
+	padding: 12px 16px; /* Some padding */
+	font-size: 16px; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
 
+/* Darker background on mouse-over */
+.btn:hover {
+	background-color: blue;
+}
+</style>
 <style>
 .image-preview-input {
 	position: relative;
@@ -39,6 +55,9 @@
 .image-preview-input-title {
 	margin-left: 2px;
 }
+
+
+
 </style>
 
 
@@ -87,21 +106,17 @@
 								<!-- <a href="#myModal1" data-toggle="modal"><button
 										type="submit" class="btn btn-success">Add</button></a> --> <a
 									href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
-										type="button" class="btn btn-info">Add</button></a> 
+										type="button" class="btn btn-success">Add</button></a> 
 							</div>
 
 						</header>
 
-
+				<form action="${pageContext.request.contextPath}/deleteLibBookBudget/0"
+							method="get" id="libListForm">
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-
+									
 
 
 
@@ -109,28 +124,84 @@
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
+												<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 													<th width="10%">Sr No</th>
-<!-- 													<th>Financial Year</th>
- -->													<th style="text-align: right; ">Expenditures on purchase of Books</th>
-													<th style="text-align: right; ">Expenditures on purchase of Journals</th>
-													<th style="text-align: right; ">Expenditures on e-Journals</th>
-													<th style="text-align: center; ">Expenditures on e-Resources</th>
+<!-- 													
+ -->												<th style="text-align: right;">Expenditures on purchase of Books</th>
+													<th style="text-align: right;">Expenditures on purchase of Journals</th>
+													<th style="text-align: right;">Expenditures on e-Journals</th>
+													<th style="text-align: right;">Expenditures on e-Resources</th>
+											<th style="text-align: center; ">Action</th>
+													
 												</tr>
 											</thead>
 
 
-
-											<tbody>
-
-
+<tbody>
+											<c:forEach items="${budgetList}" var="budget"
+													varStatus="count">
+													<tr>
+														<td align="center"><input type="checkbox" class="chk"
+															name="bookIds" id="bookIds${count.index+1}"
+															value="${accOff.officerId}" /></td>
+														<td align="center">${count.index+1}</td>
+														<td align="center">${budget.expenditureOnBookPurchase}</td>
+														<td>${budget.expenditureOnJournalsPurchase}</td>
+														<td align="right">${budget.expenditureOnEjournalsPurchase}</td>
+														<td align="right">${budget.expenditureOnEresourcesPurchase}</td>
+														<td align="center"><c:if test="${editAccess==0}">
+																<a onclick="showEditBookBudget(${budget.libraryBookBudgetId})"
+																	href="#"><span class="glyphicon glyphicon-edit"
+																	title="Edit" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if>
+															<c:if test="${deleteAccess==0}">
+																<a
+																	href="${pageContext.request.contextPath}/deleteLibBookBudget/${budget.libraryBookBudgetId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
+											
 											</tbody>
 										</table>
+										
+										
+										<div class="form-group">
 
-									</form>
+											<div class="col-sm-5">
+											<div class="col-sm-1">
+
+												<button type="submit" title="Delete Multiple Records" class="btn1"
+													id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: left;">
+													<i class="fa fa-trash"
+														style="font-size: 25px; background-color: black"></i>
+												</button></div>
+												<div class="col-sm-4">
+													<h5 style="text-align: left;">Delete Records</h5>
+												</div>
+											</div>
+
+
+											<input type="hidden" id="libBookId" name="libBookId" value="0">
+										
+
+										</div>
+									
+								
 								</div>
 
 							</div>
 						</div>
+							</form>
 
 					</section>
 				</div>
@@ -150,77 +221,30 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
-<%-- 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Budget on Infrastructure Facility</h4>
-				</div>
-				<div class="modal-body">
+<script type="text/javascript">
+		function showEditBookBudget(libBudgetId){
+			///alert(libBudgetId);
+			document.getElementById("libBookId").value=libBudgetId;//create this 
+			var form=document.getElementById("libListForm");
+		    form.setAttribute("method", "post");
 
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Financial
-							Year</label> <select id="finantialYear" name="finantialYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
+			form.action=("showEditLibBookBudget");
+			form.submit();
+			
+		}
+		
+		function selectedInst(source) {
 
-						</select>
-					</div>
+			checkboxes = document.getElementsByName('bookIds');
 
-					<div class="form-group">
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
-						<label class="control-label col-sm-3" for="purchaseBooks">Expenditures
-							on purchase of Books</label> <input type="text" class="form-control"
-							id="purchaseBooks" name="purchaseBooks"
-							placeholder="Expenditures on purchase of Books"
-							value="${page.pageName}" required>
-					</div>
+			}
 
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="purchaseJrnls">Expenditures on purchase of Journals</label> <input type="text" class="form-control"
-							id="purchaseJrnls" name="purchaseJrnls"
-							placeholder="Expenditures on purchase of Journals"
-							value="${page.pageName}" required>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="purchaseEJrnls">Expenditures on e-Journals</label> <input type="text" class="form-control"
-							id="purchaseEJrnls" name="purchaseEJrnls"
-							placeholder="Expenditures on e-Journals" value="${page.pageName}"
-							required>
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="purchaseEResources">Expenditures on e-Resources</label> <input type="text" class="form-control"
-							id="purchaseEResources" name="purchaseEResources"
-							placeholder="Expenditures on e-Resources"
-							value="${page.pageName}" required>
-					</div>
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div> --%>
+		}
+	</script>
 
 
 	<script type="text/javascript">

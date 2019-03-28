@@ -108,13 +108,23 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" required>
-													<option value="2018-2019">2018-2019</option>
-													<option value="2017-2018">2017-2018</option>
-													<option value="2016-2017">2016-2017</option>
+													<c:forEach items="${finYearList}" var="finYear">
+														<c:choose>
+														<c:when test="${finYear.finYearId==budget.finYearId}">
+													<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+														</c:when>
+														<c:otherwise>
+														<option value="${finYear.finYearId}">${finYear.finYear}</option>
+														</c:otherwise>
+													</c:choose>
+													</c:forEach>
+													
 
 												</select>
 											</div>
 										</div>
+										
+										
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
@@ -124,7 +134,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
 													id=expenditure_on_book_purchase
-													name="expenditure_on_book_purchase"
+													name="expenditure_on_book_purchase" value="${budget.expenditureOnBookPurchase}"
 													placeholder="Expenditures on purchase of Books" required>
 											</div>
 										</div>
@@ -139,7 +149,7 @@
 													id="expenditure_on_journals_purchase"
 													name="expenditure_on_journals_purchase"
 													placeholder="Expenditures on purchase of Journals"
-													value="${page.pageName}" required>
+													value="${budget.expenditureOnJournalsPurchase}" required>
 											</div>
 										</div>
 
@@ -153,7 +163,7 @@
 													id="expenditure_on_ejournals_purchase"
 													name="expenditure_on_ejournals_purchase"
 													placeholder="Expenditures on e-Journals"
-													value="${page.pageName}" required>
+													value="${budget.expenditureOnEjournalsPurchase}" required>
 											</div>
 										</div>
 
@@ -168,7 +178,7 @@
 													id="expenditure_on_eresources_purchase"
 													name="expenditure_on_eresources_purchase"
 													placeholder="Expenditures on e-Resources"
-													value="${page.pageName}" required>
+													value="${budget.expenditureOnEresourcesPurchase}" required>
 											</div>
 										</div>
 
@@ -182,6 +192,7 @@
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" id="budget_id" name="budget_id" value="${budget.libraryBookBudgetId}">
 											</div>
 										</div>
 
