@@ -289,7 +289,7 @@ public class RegController {
 		
 		try {
 			String otpk=request.getParameter("otpk");
-
+ 
 			RestTemplate restTemplate = new RestTemplate();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
