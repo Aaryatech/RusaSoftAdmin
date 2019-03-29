@@ -139,6 +139,7 @@ public class FacPersonalController {
 	public ModelAndView addPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		Info access=null;
 		try {
 			
 			int facultyId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
@@ -151,6 +152,24 @@ public class FacPersonalController {
 				temp=0;
 			}
 			
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+			if(temp==1) {
+
+			access = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "1", "0",
+					"0", newModuleList);
+			}else {
+				
+				access = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "0", "1",
+						"0", newModuleList);
+				
+			}
+			System.err.println("showPersonalDetails " +access.toString());
+			if(access.isError()==true) {
+				model = new ModelAndView("accessDenied");
+			}
+			else {
 			try {
 				facultyId = Integer.parseInt(request.getParameter("add_fac_detail_id"));
 				title=request.getParameter("title");
@@ -158,12 +177,11 @@ public class FacPersonalController {
 				 
 				
 			} catch (Exception e) {
-				facultyId = 12;//0;
+				facultyId = 0;//0;
 			}
 			
 			//int facultyId = 12;
 
-			HttpSession session = request.getSession();
 
 			model = new ModelAndView("FacultyDetails/personalDetail");
 
@@ -225,6 +243,7 @@ public class FacPersonalController {
 				
 			}
 			model.addObject("facPerDetail", facPerDetail);
+			}
 		} catch (Exception e) {
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
 			e.printStackTrace();
@@ -260,9 +279,9 @@ public class FacPersonalController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
+			Info editAccess = new Info(); AccessControll.checkAccess("insertFacPersonalDetail", "showPersonalDetails", "0", "1", "0",
+											 "0",
+			newModuleList);
 			editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
@@ -386,7 +405,7 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 			try {
 			facultyId=Integer.parseInt(request.getParameter("add_fac_detail_id"));
 			}catch (Exception e) {
-				facultyId = 12;
+				facultyId = 0;
 			}
 			 try {
 			
@@ -461,9 +480,9 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
+			Info editAccess =  AccessControll.checkAccess("insertFacPhdDetail", "showMphillDetails", "0", "1", "0",
+											 "0",
+			 newModuleList);
 			editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
@@ -696,7 +715,7 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess =  AccessControll.checkAccess("insertFacAcademic", "showAcademicDetails", "1", "0", "0",
+			Info editAccess =  AccessControll.checkAccess("insertFacAcademic", "showAcademicDetails", "0", "1", "0",
 											"0",
 			 newModuleList);
 			//editAccess.setError(false);

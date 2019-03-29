@@ -161,9 +161,9 @@ public class BudgetConSac {
 				}
 			}
 
-			// System.err.println("budget"+budget.toString());
-
 		} catch (Exception e) {
+			System.err.println("Exe in getBudgetDataByFinYearId @BudgeConSac  " +e.getMessage());
+			
 			e.printStackTrace();
 
 		}
