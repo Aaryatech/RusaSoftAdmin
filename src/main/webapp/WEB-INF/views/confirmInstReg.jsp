@@ -23,6 +23,55 @@
 	right: 0;
 	margin: auto;
 }
+
+table.blueTable {
+	border: 1px solid #1C6EA4;
+	background-color: #EEEEEE;
+	width: 80%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	
+	/* margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 25%;
+	margin-bottom: 25%; */
+	
+}
+
+table.blueTable td, table.blueTable th {
+	border: 1px solid #AAAAAA;
+	padding: 3px 2px;
+	
+}
+
+table.blueTable tbody td {
+	font-size: 13px;
+	text-align: left;
+	word-wrap:break-word;
+}
+
+table.blueTable tr:nth-child(even) {
+	background: #D0E4F5;
+}
+
+table.blueTable thead {
+	background: #1C6EA4;
+	background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+	background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+	background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+	border-bottom: 2px solid #444444;
+}
+
+table.blueTable thead th {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	border-left: 2px solid #D0E4F5;
+}
+
+table.blueTable thead th:first-child {
+	border-left: none;
+}
 </style>
 
 
@@ -377,24 +426,26 @@
 		<div class="modal-header">
 			<button aria-hidden="true" data-dismiss="modal" class="close"
 				type="button">×</button>
-			<h4 class="modal-title">Institute Details Confirmation</h4>
+			<h4 class="modal-title" align="center">Institute Details
+				Confirmation</h4>
 		</div>
-		<div class="modal-body">
-			<form role="form"
-				action="${pageContext.request.contextPath}/showOtpPage"
-				method="POST">
-				<input type="hidden" class="form-control" id="pageId" name="pageId">
-				<input type="hidden" value="${editInst.contactNo}" id="otp_no"
-					name="otp_no">
+			<div class="col-md-12" align="center">
+				<form role="form"
+					action="${pageContext.request.contextPath}/showOtpPage"
+					method="POST">
+					<input type="hidden" class="form-control" id="pageId" name="pageId">
+					<input type="hidden" readonly="readonly" value="${editInst.contactNo}" id="otp_no" name="otp_no">
+					<input type="hidden"  value="0" id="is_back" name="is_back">
+					
 
-				<div class="col-sm-12">
+					<%-- 				<div class="col-sm-12">
 					<div class="row">
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Institute
-								Name:${editInst.instituteName} </label> <%-- <label class="control-label-left col-sm-9" id="inst_Name1"
-								for="page_name"> ${editInst.instituteName} </label> --%>
+								Name:${editInst.instituteName} </label> <label class="control-label-left col-sm-9" id="inst_Name1"
+								for="page_name"> ${editInst.instituteName} </label>
 							 
 						</div>
 
@@ -402,8 +453,8 @@
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">AISHE
-								Code:${editInst.aisheCode} </label> <%-- <label class="control-label-left col-sm-9" id="aishe_code1"
-								for="page_name">${editInst.aisheCode}</label> --%>
+								Code:${editInst.aisheCode} </label> <label class="control-label-left col-sm-9" id="aishe_code1"
+								for="page_name">${editInst.aisheCode}</label>
 						</div>
 
 
@@ -411,8 +462,8 @@
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Institute
-								Address:${editInst.instituteAdd} </label><%--  <label class="control-label col-sm-12" id="inst_Add1"
-								for="page_name"> ${editInst.instituteAdd} </label> --%>
+								Address:${editInst.instituteAdd} </label> <label class="control-label col-sm-12" id="inst_Add1"
+								for="page_name"> ${editInst.instituteAdd} </label>
 						</div>
 
 						<div class="form-group">
@@ -420,89 +471,138 @@
 							<label class="control-label col-sm-12" for="page_name">Is
 								Registered:<c:if
 									test="${editInst.isRegistration==1}">Yes</c:if> <c:if
-									test="${editInst.isRegistration==0}">No</c:if>  </label> <%-- <label class="control-label col-sm-6" id="is_reg1"
+									test="${editInst.isRegistration==0}">No</c:if>  </label> <label class="control-label col-sm-6" id="is_reg1"
 								for="page_name"><c:if
 									test="${editInst.isRegistration==1}">Yes</c:if> <c:if
-									test="${editInst.isRegistration==0}">No</c:if> </label> --%>
+									test="${editInst.isRegistration==0}">No</c:if> </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Registration
-								Date:${editInst.regDate} </label> <%-- <label class="control-label col-sm-6" id="reg_date1"
-								for="page_name">${editInst.regDate}</label> --%>
+								Date:${editInst.regDate} </label> <label class="control-label col-sm-6" id="reg_date1"
+								for="page_name">${editInst.regDate}</label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Trust/Society
-								Name :${editInst.trustName} </label> <%-- <label class="control-label col-sm-6" id="trust_Name1"
-								for="page_name"> ${editInst.trustName} </label> --%>
+								Name :${editInst.trustName} </label> <label class="control-label col-sm-6" id="trust_Name1"
+								for="page_name"> ${editInst.trustName} </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Trust/Society
-								Address :${editInst.trustAdd} </label><%--  <label class="control-label col-sm-6" id="trust_Add1"
-								for="page_name">${editInst.trustAdd} </label> --%>
+								Address :${editInst.trustAdd} </label> <label class="control-label col-sm-6" id="trust_Add1"
+								for="page_name">${editInst.trustAdd} </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Contact
-								No :${editInst.trustContactNo} </label> <%-- <label class="control-label col-sm-6" id="trust_Con1"
-								for="page_name"> ${editInst.trustContactNo} </label> --%>
+								No :${editInst.trustContactNo} </label> <label class="control-label col-sm-6" id="trust_Con1"
+								for="page_name"> ${editInst.trustContactNo} </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Chairman/President
-								Name:${editInst.presidentName}</label> <%-- <label class="control-label col-sm-6" id="chairman_Name1"
-								for="page_name">${editInst.presidentName} </label> --%>
+								Name:${editInst.presidentName}</label> <label class="control-label col-sm-6" id="chairman_Name1"
+								for="page_name">${editInst.presidentName} </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Contact
-								No :${editInst.presidenContact}  </label> <%--<label class="control-label col-sm-6" id="Chair_Con1"
-								for="page_name"> ${editInst.presidenContact} </label> --%>
+								No :${editInst.presidenContact}  </label> <label class="control-label col-sm-6" id="Chair_Con1"
+								for="page_name"> ${editInst.presidenContact} </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Email
-								ID(Official):${editInst.presidentEmail} </label> <%-- <label class="control-label col-sm-6"
+								ID(Official):${editInst.presidentEmail} </label> <label class="control-label col-sm-6"
 								id="chair_Email1" for="page_name">${editInst.presidentEmail}
-							</label> --%>
+							</label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Principal
-								Name :${editInst.principalName} </label> <%-- <label class="control-label col-sm-6" id="princi_Name1"
-								for="page_name">${editInst.principalName} </label> --%>
+								Name :${editInst.principalName} </label> <label class="control-label col-sm-6" id="princi_Name1"
+								for="page_name">${editInst.principalName} </label>
 						</div>
 						<!-- 	-->
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Contact
-								No : ${editInst.contactNo} </label> <%-- <label class="control-label col-sm-6" id="princi_Con1"
-								for="page_name">${editInst.contactNo} </label> --%>
+								No : ${editInst.contactNo} </label> <label class="control-label col-sm-6" id="princi_Con1"
+								for="page_name">${editInst.contactNo} </label>
 						</div>
 
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Email
-								ID(Official):${editInst.email} </label> <%-- <label class="control-label col-sm-6"
-								id="princi_Email1" for="page_name">${editInst.email} </label> --%>
+								ID(Official):${editInst.email} </label> <label class="control-label col-sm-6"
+								id="princi_Email1" for="page_name">${editInst.email} </label>
 						</div>
 						
 					</div>
 					
-				</div>
-				<button  type="submit" class="btn btn-primary">Confirm</button>
-			</form>
-		</div>
+				</div> --%>
+	<br></br>
+					<table class="blueTable" >
+
+						<tfoot>
+							<tr>
+
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td>Institute Name: ${editInst.instituteName}</td>
+								<td>AISHE Code: ${editInst.aisheCode}</td>
+							</tr>
+							<tr>
+								<td>Institute Address:${editInst.instituteAdd}</td>
+								<td>Is Registered For 2F/12B:<c:if
+										test="${editInst.isRegistration==1}">Yes</c:if> <c:if
+										test="${editInst.isRegistration==0}">No</c:if>
+								</td>
+							</tr>
+							<tr>
+								<td>Registration Date: ${editInst.regDate}</td>
+								<td>Trust/Society Name:${editInst.trustName}</td>
+							</tr>
+							<tr>
+								<td>Trust/Society Address:${editInst.trustAdd}</td>
+								<td>Contact No:${editInst.trustContactNo}</td>
+							</tr>
+							<tr>
+								<td>Chairman/President Name:${editInst.presidentName}</td>
+								<td>Contact No:${editInst.presidenContact}</td>
+							</tr>
+							<tr>
+								<td>Email ID:${editInst.presidentEmail}</td>
+								<td>Principal Name:${editInst.principalName}</td>
+							</tr>
+							<tr>
+								<td>Contact No:${editInst.contactNo}</td>
+								<td>Email ID:${editInst.email}</td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br>
+					<div align="center">
+						<button type="submit" class="btn btn-primary">Confirm</button>
+						<button type="submit" onclick="setIsBack()" class="btn btn-primary">Back</button>
+						
+					</div>
+				</form>
+			</div>
+		
 	</div>
 
 
@@ -603,12 +703,20 @@
 
 		function showIsReg() {
 
-			var x = ${editInst.instituteId};
+			var x = $
+			{
+				editInst.instituteId
+			}
+			;
 
 			if (x > 0) {
 
-				var isReg = ${editInst.isRegistration};
-			
+				var isReg = $
+				{
+					editInst.isRegistration
+				}
+				;
+
 				//alert("Is Reg " +isReg);
 				if (isReg == 0) {
 
@@ -623,6 +731,10 @@
 
 			}
 
+		}
+		function setIsBack(){
+			document.getElementById("is_back").value="1";
+			
 		}
 	</script>
 

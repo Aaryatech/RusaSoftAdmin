@@ -39,6 +39,7 @@ public class RegController {
 	@RequestMapping(value = "/insertInstituteDemo", method = RequestMethod.POST)
 	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {
 
+		System.err.println("instHashMap  size  " +instHashMap.size());
 		ModelAndView model = new ModelAndView("confirmInstReg");
 		int instId = Integer.parseInt(request.getParameter("inst_id"));
 		String redirect = null;
@@ -137,14 +138,21 @@ public class RegController {
 		ModelAndView model = new ModelAndView("ask_otp");
 		try {
 
+			
+			int isBack=Integer.parseInt(request.getParameter("is_back"));
+			String otpNo=request.getParameter("otp_no");
+
+			if(isBack==0) {
+				System.err.println("in If.  Its Confirm Button Pressed" );
+
+				model = new ModelAndView("ask_otp");
 			RestTemplate restTemplate = new RestTemplate();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			String otpNo=request.getParameter("otp_no");
 			String otp=getNumericOtp(6);
 			String otpKey=getIntegerKey(4);
 			
-			String msg=" Otp for  Insitute Registration is " +otp;
+			String msg=" OTP for  Insitute Registration is " +otp+ ". Do not share OTP with anyone. RUSA Maharashtra";
 		 
 					map.add("senderID", "RUSAMH");
 					map.add("user", "spdrusamah@gmail.com:Cyber@mva");
@@ -160,7 +168,21 @@ public class RegController {
 			model.addObject("otpk", otpKey);
 			model.addObject("otpNo", otpNo);
 			
-			System.out.println(res);
+			//System.out.println(res);
+			}else {
+				System.err.println("in Else  its Back button Pressed " );
+				
+				model = new ModelAndView("instituteRegistration");
+				Institute editInst=instHashMap.get(otpNo);
+				try {
+				editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
+				}catch (Exception e) {
+					
+				}
+				
+				model.addObject("editInst", editInst);
+				
+			}
 		}catch (Exception e) {
 			
 			System.err.println("Exce in showing otp page " +e.getMessage());

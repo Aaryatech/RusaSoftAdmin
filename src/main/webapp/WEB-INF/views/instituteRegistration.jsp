@@ -538,7 +538,7 @@
 			var temp1;
 
 			if (is_registration == 1) {
-				alert(reg_date);
+				//alert(reg_date);
 				temp = "Yes";
 				$('#reg_date1').html(reg_date);
 
@@ -576,27 +576,25 @@
 
 		function showIsReg() {
 
-			var x = $
-			{
-				editInst.instituteId
-			}
+			var x = ${editInst.instituteId};
 
 			if (x > 0) {
-
-				var isReg = $
-				{
-					editInst.isRegistration
-				}
-				;
+            var da=${editInst.regDate};
+				var isReg = ${editInst.isRegistration};
+				
 				//alert("Is Reg " +isReg);
 				if (isReg == 0) {
 
 					document.getElementById("abc").style.display = "none";
 					document.getElementById("reg_date").removeAttribute(
 							"required");
+					document.getElementById("reg_date").value=da;
+
 
 				} else {
 					document.getElementById("abc").style.display = "block";
+					reg_date
+					document.getElementById("reg_date").value=da;
 
 				}
 
@@ -709,8 +707,6 @@
 	</script>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
 
 </body>
 </html>

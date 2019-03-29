@@ -111,7 +111,7 @@
 									aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
-								<strong>${msg}</strong>
+								<strong id="Hi">${msg}</strong>
 							</div>
 						</c:when>
 					</c:choose>
@@ -134,7 +134,7 @@
  -->
 
 
-					<p class="submit">
+					<p class="submit" style="text-align: center;">
 
 						<input type="hidden" id="otpk" name="otpk" value="${otpk}">
 						<input type="hidden" id="otpNo" name="otpNo" value="${otpNo}">
@@ -318,6 +318,7 @@
 
 								//alert("Data  " +JSON.stringify(data));
 								document.getElementById("otpNo").value=bean.name;
+								
 							
 						});
 
