@@ -133,7 +133,7 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_name"
 																	pattern="^(?!\s*$).+" name="conf_name"
-																	placeholder="Title of Publication"
+																	placeholder="Title of Publication" autocomplete="off"
 																	value="${facConf.confName}" required>
 															</div>
 
@@ -205,7 +205,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker"
-																	id="conf_date"
+																	id="conf_date" autocomplete="off"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_date" placeholder="dd/mm/yyyy"
 																	value="${facConf.confDate}" pattern="^(?!\s*$).+"
@@ -219,7 +219,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_venue"
-																	pattern="^(?!\s*$).+" name="conf_venue"
+																	pattern="^(?!\s*$).+" name="conf_venue" autocomplete="off"
 																	placeholder="Venue" value="${facConf.confVenue}"
 																	required>
 															</div>
@@ -236,7 +236,7 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_fund"
 																	pattern="^(?!\s*$).+" name="conf_fund"
-																	placeholder="Funding from"
+																	placeholder="Funding from" autocomplete="off"
 																	value="${facConf.confFundFrom}" required>
 															</div>
 														</div>
@@ -248,7 +248,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="number" min="0" class="form-control"
-																	id="conf_amt"
+																	id="conf_amt" autocomplete="off"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_amt" placeholder="Amount"
 																	value="${facConf.confFundAmt}" pattern="^(?!\s*$).+"

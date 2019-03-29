@@ -243,7 +243,7 @@ public class StudAdminController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Student Addmitted Categorywise");
+				model.addObject("title", "Student Admitted Category Wise");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();

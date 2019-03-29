@@ -1827,28 +1827,14 @@ public class MasterController {
 					Institute.class);
 			
 			model.addObject("showInst", showInst);
-		/*	Info add = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "1", "0", "0",
-					newModuleList);
-			Info edit = AccessControll.checkAccess("showIqacList", "showPendingInstitute", "0", "0", "1", "0",
-					newModuleList);
-			Info delete = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "0", "0", "1",
-					newModuleList);
-
-			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
-				model.addObject("addAccess", 0);
-
-			}
-			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
-				model.addObject("editAccess", 0);
-			}
-			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
-				model.addObject("deleteAccess", 0);
-
-			}
-		}*/
+			/*
+			 * Info delete = AccessControll.checkAccess("showPendingInstitute",
+			 * "showPendingInstitute", "0", "0", "0", "1", newModuleList);
+			 * 
+			 * 
+			 * 
+			 * }
+			 */
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -1864,14 +1850,14 @@ public class MasterController {
 		String a = null;
 		try {
 		HttpSession session = request.getSession();
-		/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showRegisterStaff", "showPendingInstitute", "0", "0", "0", "1", newModuleList);
+	List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "0", "0", "1", newModuleList);
 		
 		if (view.isError() == true) {
 
 			a = "redirect:/accessDenied";
 
-		} else {*/
+		} else {
 
 			Info inf = new Info();
 			System.out.println("Id:" + instId);
@@ -1882,7 +1868,7 @@ public class MasterController {
 
 			a = "redirect:/showPendingInstitute";
 
-			//}
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

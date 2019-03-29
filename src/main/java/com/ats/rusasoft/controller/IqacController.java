@@ -130,11 +130,14 @@ public class IqacController {
 	public String newRegisterInstitute(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+			
 		HttpSession session = request.getSession();
-
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 		int instituteId = (int) session.getAttribute("instituteId");
+		
 		int userId = (int) session.getAttribute("userId");
 
+		//System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+" "+instituteId+" "+userObj.getGetData().getUserInstituteId());
 		
 		int designation = 0;
 		
@@ -148,7 +151,7 @@ public class IqacController {
 		String contact = request.getParameter("contactNo");
 		String email = request.getParameter("email");
 
-		System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " " + contact + " " + email);
+		//System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " " + contact + " " + email);
 		MIqac miqac = new MIqac();
 		if (iqacId == 0) {
 			miqac.setIqacId(0);
@@ -212,7 +215,7 @@ public class IqacController {
 
 				List<IqacList> qacList = rest.getForObject(Constants.url + "/getAllIqac", List.class);
 
-				System.out.println("IQACLIST" + qacList);
+				//System.out.println("IQACLIST" + qacList);
 
 				model.addObject("QList", qacList);
 				model.addObject("title", "IQAC List");
@@ -225,16 +228,16 @@ public class IqacController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -254,7 +257,7 @@ public class IqacController {
 	@RequestMapping(value = "/editIqac/{iqacId}", method = RequestMethod.GET)
 	public ModelAndView editIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request) {
 
-		System.out.println("Id:" + iqacId);
+		//System.out.println("Id:" + iqacId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -280,7 +283,7 @@ public class IqacController {
 				model.addObject("desigList", designationList);
 
 				MIqac miqc = rest.postForObject(Constants.url + "/getIqacById", map, MIqac.class);
-				System.out.println("miqc:" + miqc);
+				//System.out.println("miqc:" + miqc);
 
 				model.addObject("miqc", miqc);
 				model.addObject("title", "Edit IQAC Registration");
@@ -310,7 +313,7 @@ public class IqacController {
 
 		} else {
 				Info inf = new Info();
-				System.out.println("Id:" + iqacId);
+				//System.out.println("Id:" + iqacId);
 	
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", iqacId);
@@ -417,9 +420,8 @@ public class IqacController {
 
 			}
 
-			System.out.println("Data:" + iqacId);
+			
 			String iqacName = request.getParameter("iqacName");
-			System.out.println("Data:" + iqacName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");

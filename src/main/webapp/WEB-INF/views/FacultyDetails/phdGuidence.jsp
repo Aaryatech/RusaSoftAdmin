@@ -199,9 +199,12 @@
 															<label class="control-label col-sm-2" for="smallheading">Year
 																of Registration <span class="text-danger">*</span>
 															</label>
-															<%-- <div class="col-sm-6">
-																<input type="text" class="form-control datepicker" id="phd_year_reg" autocomplete="off"
-																	name="phd_year_reg" placeholder="dd/mm/yyyy" value="${phd.phdRegYear}" required>
+															<%-- <input type="text" class="form-control datepickeryear"
+																	required data-min-view-mode="years" data-start-view="2"
+																	value="${phd.phdRegYear}" autocomplete="off"
+																	placeholder="Year of Project Sanction" name="phd_year_reg"
+																	id="phd_year_reg" data-format="yyyy">
+																
 															</div> --%>
 
 													<div class="col-sm-6">

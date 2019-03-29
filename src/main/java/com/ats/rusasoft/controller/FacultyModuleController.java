@@ -27,6 +27,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.faculty.model.PhdGuidList;
+import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.FacultyActivity;
 import com.ats.rusasoft.model.FacultyBook;
 import com.ats.rusasoft.model.FacultyConference;
@@ -194,7 +195,7 @@ public class FacultyModuleController {
 
 				FacultyConference facConf = new FacultyConference();
 
-				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+				
 				int yId = (int) session.getAttribute("acYearId");
 				int userId = (int) session.getAttribute("userId");
 				int confId = 0;
@@ -208,7 +209,7 @@ public class FacultyModuleController {
 				} else {
 					facConf.setConfId(confId);
 				}
-				facConf.setFacultyId(facId.getRegPrimaryKey());
+				facConf.setFacultyId(userObj.getGetData().getUserDetailId());
 				facConf.setYearId(yId);
 				facConf.setConfName(request.getParameter("conf_name"));
 				facConf.setConfType(request.getParameter("conf_type"));
@@ -509,18 +510,18 @@ public class FacultyModuleController {
 		try {
 
 			FacultyActivity facAct = new FacultyActivity();
-
+			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
 
 			HttpSession session = request.getSession();
-			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
 
 			facAct.setActivityId(Integer.parseInt(request.getParameter("activity_id")));
-			facAct.setFacultyId(facId.getRegPrimaryKey());
+			facAct.setFacultyId(userObj.getGetData().getUserDetailId());
 			facAct.setYearId(yId);
 			facAct.setActivityType(request.getParameter("activity_type"));
 			facAct.setActivityName(request.getParameter("activity_name"));
@@ -1277,7 +1278,7 @@ public class FacultyModuleController {
 			String curDateTime = dateFormat.format(cal.getTime());
 
 			HttpSession session = request.getSession();
-			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
 
@@ -1285,7 +1286,7 @@ public class FacultyModuleController {
 
 			facBook.setBookId(Integer.parseInt(request.getParameter("book_id")));
 
-			facBook.setFacultyId(facId.getRegPrimaryKey());
+			facBook.setFacultyId(userObj.getGetData().getUserDetailId());
 			facBook.setYearId(yId);
 			facBook.setBookTitle(request.getParameter("book_title"));
 			facBook.setBookEdition(request.getParameter("book_edition"));
@@ -1481,13 +1482,13 @@ public class FacultyModuleController {
 			String curDateTime = dateFormat.format(cal.getTime());
 
 			HttpSession session = request.getSession();
-			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
 
 			facCon.setConId(Integer.parseInt(request.getParameter("fac_contriId")));
 
-			facCon.setFacultyId(facId.getRegPrimaryKey());
+			facCon.setFacultyId(userObj.getGetData().getUserDetailId());
 			facCon.setYearId(yId);
 			facCon.setConLevel(request.getParameter("level"));
 			facCon.setConName(request.getParameter("con_name"));
@@ -1649,12 +1650,18 @@ public class FacultyModuleController {
 	public ModelAndView showPhdGuide(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		MultiValueMap<String, Object> map=null;
 		try {
+			
+			System.out.println("Hello");
+			
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("showPhdGuide", "showPhdGuideList", "0", "1", "0", "0",
 					newModuleList);
 
+			
+			
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
@@ -1663,6 +1670,14 @@ public class FacultyModuleController {
 			FacultyPhdGuide phd = new FacultyPhdGuide();
 			model = new ModelAndView("FacultyDetails/phdGuidence");
 
+			map =new LinkedMultiValueMap<String, Object>(); 
+			 map.add("type", 1);
+			
+			AcademicYear[] quolArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("acaYearList " + acaYearList.toString());
+
+			model.addObject("acaYearList", acaYearList);
 			model.addObject("title", "Ph.D. Guideline");
 			model.addObject("phd", phd);
 			}
@@ -1751,7 +1766,7 @@ public class FacultyModuleController {
 			String curDateTime = dateFormat.format(cal.getTime());
 
 			HttpSession session = request.getSession();
-			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int yId = (int) session.getAttribute("acYearId");
 			int userId = (int) session.getAttribute("userId");
 
@@ -1760,7 +1775,7 @@ public class FacultyModuleController {
 			phd.setPhdId(Integer.parseInt(request.getParameter("phdGiudeId")));
 			phd.setCoGuideName(request.getParameter("co_guide_name"));
 			phd.setPhdAwardedYear(Integer.parseInt(request.getParameter("phd_year_awarded")));
-			phd.setFacultyId(facId.getRegPrimaryKey());
+			phd.setFacultyId(userObj.getGetData().getUserDetailId());
 			phd.setYearId(yId);
 			phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
 			phd.setIsCoGuide(Integer.parseInt(request.getParameter("coGuide")));
@@ -1812,8 +1827,18 @@ public class FacultyModuleController {
 			model = new ModelAndView("FacultyDetails/phdGuidence");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("phdId", phdId);
+			
 
+			
+			 map.add("type", 1);
+			
+			AcademicYear[] quolArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			System.err.println("acaYearList " + acaYearList.toString());
+
+			model.addObject("acaYearList", acaYearList);
+			
+			map.add("phdId", phdId);
 			FacultyPhdGuide phdData = rest.postForObject(Constants.url + "/getPhdGuideById", map,
 					FacultyPhdGuide.class);
 			model.addObject("phd", phdData);

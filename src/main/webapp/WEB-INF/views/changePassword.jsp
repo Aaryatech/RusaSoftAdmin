@@ -28,20 +28,20 @@
 <!-- BEGIN BODY -->
 <body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
-<%-- 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include> --%>
+	<%-- 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include> --%>
 	<!-- END TOPBAR -->
 	<!-- START CONTAINER -->
 	<div class="page-container row-fluid container-fluid">
 
 		<!-- SIDEBAR - START -->
-<%-- 
+		<%-- 
 		<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include> --%>
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<!-- 	<div class="col-xs-12">
+				<!-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -53,25 +53,25 @@
 
 					</div>
 				</div> -->
-				
-				
+
+
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
-				 
+
 
 
 				<div class="col-lg-12">
 					<section class="box ">
 
 						<header class="panel_header">
-						
+
 							<h2 class="title pull-left">Change Password</h2>
-							<br/>
-						
-							
-                       
-							
+							<br />
+
+
+
+
 						</header>
 
 
@@ -80,8 +80,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/changePassForm"
-										method="post"
-										name="form_sample_2" id="form_sample_2"
+										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to Change the Password?');">
 
 										<!-- <ul class="nav nav-tabs">
@@ -94,37 +93,58 @@
 										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
-												<div class="col-xs-12">
-												<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name"> New Password
-															<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="password" class="form-control" id="newPassword"
-																	name="newPassword" placeholder="Enter New Password" onkeyup="trim(this)"
-																	 required>
-															</div>
+										<div>
+											<div class="col-xs-12">
+												<div style="text: align center;">
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">
+															New Password <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-10">
+															<input type="password" class="form-control"
+																id="newPassword" name="newPassword"
+																placeholder="Enter New Password" onkeyup="trim(this)"
+																required>
 														</div>
+													</div>
 
-
-													
-
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary">Change</button>
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">
+															Confirm Password <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-10">
+															<input type="password" class="form-control"
+																id="conPassword" name="conPassword"
+																placeholder="Enter Confirm Password"
+																onkeyup="trim(this)" required>
 														</div>
-
 													</div>
 
 
-													<div class="clearfix"></div>
+													<div class="form-group">
+														<div class="col-sm-2">
+															<input type="checkbox" onclick="viewPassword()">Show
+															Password
+														</div>
+													</div>
+
+													<div class="form-group">
+														<div class="col-sm-2">
+															<button type="submit" onclick="validatePassword()"
+																class="btn btn-primary">Change</button>
+															<button type="reset" class="btn btn-default">Reset</button>
+														</div>
+													</div>
 
 												</div>
+											</div>
 
-											<!-- </div>
+
+											<div class="clearfix"></div>
+
+										</div>
+
+										<!-- </div>
 
 										</div> -->
 									</form>
@@ -151,7 +171,33 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-	 <script type="text/javascript"> 
+	<script type="text/javascript">
+		function validatePassword() {
+			var pass = document.getElementById("newPassword").value;
+			var conpass = document.getElementById("conPassword").value;
+			// alert(pass+" "+conpass);
+
+			if (pass != conpass) {
+
+				document.getElementById("conPassword").value = "";
+				alert("Confirm password not matched!");
+				return false;
+			}
+		}
+
+		function viewPassword() {
+			var pass1 = document.getElementById("newPassword");
+			var pass2 = document.getElementById("conPassword");
+
+			if (pass1.type == "password" && pass2.type == "password") {
+				pass1.type = "text";
+				pass2.type = "text";
+			} else {
+				pass1.type = "password";
+				pass2.type = "password";
+			}
+		}
+
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

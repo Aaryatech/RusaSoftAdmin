@@ -282,25 +282,35 @@ public class MastersController {
 
 			if (viewAccess.isError() == false) {
 				
-				
+								
 				Info addAccess = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "1", "0", "0",
 						newModuleList);
 				
 
-			GetInstituteList[] instArray = restTemplate.getForObject(Constants.url + "getAllPendingInstitutes",
-					GetInstituteList[].class);
-			List<GetInstituteList> instList = new ArrayList<>(Arrays.asList(instArray));
+				Info delete = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "0", "0", "1",
+						newModuleList);
 
-			model.addObject("pendInstList", instList);
-
-			model.addObject("title", " Pending Institute");
-			
-			if(addAccess.isError()==false)
-				model.addObject("addAccess", 0);
+				GetInstituteList[] instArray = restTemplate.getForObject(Constants.url + "getAllPendingInstitutes",
+						GetInstituteList[].class);
+				List<GetInstituteList> instList = new ArrayList<>(Arrays.asList(instArray));
+	
+				model.addObject("pendInstList", instList);
+	
+				model.addObject("title", " Pending Institute");
 				
 			
+				if(addAccess.isError()==false) {
+					model.addObject("addAccess", 0);
+					
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+	
+				}
 			
 			}
+			
 			else {
 
 				model = new ModelAndView("accessDenied");

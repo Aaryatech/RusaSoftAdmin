@@ -128,7 +128,7 @@
 
 																		<th>Patent No.</th>
 																		<th>Patent Title</th>
-																		<th>Patent Filling Date</th>
+																		<th>Patent Filing Date</th>
 																		<th>Name of Guide</th>
 																		<th>Date of Publication</th>
 																		<th>Action</th>

@@ -533,7 +533,7 @@ $(function () {
 	
 	function showIsReg(){
 		//alert("Hi");
-		var x=${dean.deanId}
+		var x=${dean.deanId};
 	
 		if(x>0){
 			//alert("Hi 1")

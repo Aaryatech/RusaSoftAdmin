@@ -145,12 +145,12 @@
 													<div class="form-group">
 
 														<label class="control-label col-sm-2" for="filling_date">Patent
-															Filling Date <span class="text-danger">*</span>
+															Filing Date <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker" autocomplete="off"
 																id="filling_date" name="fillingDate"
-																placeholder="Patent Filling Date" value="${patent.patentFilingDate}" required>
+																placeholder="Patent Filing Date" value="${patent.patentFilingDate}" required>
 														</div>
 
 													</div>

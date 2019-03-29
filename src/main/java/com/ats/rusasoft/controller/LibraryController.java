@@ -280,26 +280,24 @@ public class LibraryController {
 	public ModelAndView rareBookInformation(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/rareBookInformation");
-		String a = null;
+		
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookList", "0", "1", "0", "0", newModuleList);
 
-			if (view.isError() == true)
+			if (view.isError() == true) {
+				
+				model = new ModelAndView("accessDenied");
 
-			{
-
-				a = "redirect:/accessDenied";
-
-			}
+			} 
 
 			else {
-			RareBook rareBook = new RareBook();
+				RareBook rareBook = new RareBook();
 
-			model.addObject("title", "Rare Book Information");
-			model.addObject("rareBook",rareBook);
+				model.addObject("title", "Rare Book Information");
+				model.addObject("rareBook",rareBook);
 			}
 		} catch (Exception e) {
 
@@ -340,12 +338,13 @@ public class LibraryController {
 			model.addObject("rareBokList",rareBokList);
 			model.addObject("title","Rare Book List");
 
-			  Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo","0", "1", "0", "0", newModuleList); Info edit =
-			  AccessControll.checkAccess("showRareBookInfo", "showLibList", "0", "0", "1", "0", newModuleList); Info delete =
-			  AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "0", "1", newModuleList);
+			  Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo","0", "1", "0", "0", newModuleList);
+			  Info edit = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "1", "0", newModuleList);
+			  Info delete = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "0", "1", newModuleList);
 			  
-			  if (add.isError() == false) { System.out.println(" add   Accessable ");
-			  model.addObject("addAccess", 0);
+			  if (add.isError() == false) { 
+				  System.out.println(" add   Accessable ");
+				  model.addObject("addAccess", 0);
 			  
 			  } if (edit.isError() == false)
 			  { 
@@ -424,7 +423,7 @@ public class LibraryController {
 
 			{
 
-				a = "redirect:/accessDenied";
+				 model = new ModelAndView("accessDenied");
 
 			}
 
