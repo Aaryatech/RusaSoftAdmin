@@ -39,6 +39,23 @@
 .image-preview-input-title {
 	margin-left: 2px;
 }
+
+fieldset.scheduler-border {
+	border: 1px groove #ddd !important;
+	padding: 0 1.4em 1.4em 1.4em !important;
+	margin: 0 0 1.5em 0 !important;
+	-webkit-box-shadow: 0px 0px 0px 0px #000;
+	box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+	font-size: 1.2em !important;
+	font-weight: bold !important;
+	text-align: left !important;
+	width: auto;
+	padding: 0 10px;
+	border-bottom: none;
+}
 </style>
 
 
@@ -73,7 +90,8 @@
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
-				<div class="col-lg-12"></div>
+
+
 
 
 
@@ -93,6 +111,18 @@
 
 						<div class="content-body">
 							<div class="row">
+								<!-- <div class="col-md-12">
+									<fieldset class="scheduler-border">
+										<legend class="scheduler-border">Start Time</legend>
+										<div style="text-align: center">
+											<label class="radio-inline"><input type="radio"
+												name="optradio" checked>Option 1</label> <label
+												class="radio-inline"><input type="radio"
+												name="optradio">Option 2</label> <label class="radio-inline"><input
+												type="radio" name="optradio">Option 3</label>
+										</div>
+									</fieldset>
+								</div> -->
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPublicationDetail"

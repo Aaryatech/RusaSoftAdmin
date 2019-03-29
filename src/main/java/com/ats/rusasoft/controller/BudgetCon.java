@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +36,10 @@ import com.ats.rusasoft.model.budget.GetAcademicBudget;
 import com.ats.rusasoft.model.budget.GetInfraStructureBudget;
 import com.ats.rusasoft.model.budget.GetPhysicalFacilityBudget;
 import com.ats.rusasoft.model.budget.InfraStructureBudget;
+import com.ats.rusasoft.model.budget.LibraryBookBudget;
+import com.ats.rusasoft.model.budget.LibraryBudget;
 import com.ats.rusasoft.model.budget.PhysicalFacilityBudget;
+import com.ats.rusasoft.model.budget.WasteMngtBudget;
 
 @Controller
 @Scope("session")
@@ -115,6 +119,7 @@ public class BudgetCon {
 		try {
 
 			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -142,6 +147,7 @@ public class BudgetCon {
 				map = new LinkedMultiValueMap<>();
 
 				map.add("curFinYear", curFinYear.getFinYearId());
+				map.add("instituteId", (int) userObj.getGetData().getUserInstituteId());
 
 				PhysicalFacilityBudget budget = rest.postForObject(
 						Constants.url + "/getphysicalFacilityBudgetByFinYearId", map, PhysicalFacilityBudget.class);
@@ -412,13 +418,14 @@ public class BudgetCon {
 				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
 
 				model.addObject("finYearList", finYearList);
-
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				FinancialYear curFinYear = rest.getForObject(Constants.url + "/getCurrentFinancialYear",
 						FinancialYear.class);
 
 				map = new LinkedMultiValueMap<>();
 
 				map.add("curFinYear", curFinYear.getFinYearId());
+				map.add("instituteId", (int) userObj.getGetData().getUserInstituteId());
 
 				AcademicBudget budget = rest.postForObject(Constants.url + "/getAcademicBudgetByFinYearId", map,
 						AcademicBudget.class);
@@ -593,6 +600,73 @@ public class BudgetCon {
 			value = "redirect:/budgetOnAcadamicSupportFacilities";
 		}
 		return value;
+
+	}
+
+	@RequestMapping(value = "/getBudgetByFinYearId", method = RequestMethod.GET)
+	public @ResponseBody Object getBudgetByFinYearId(HttpServletRequest request, HttpServletResponse response) {
+
+		Object budget = null;
+		Integer res = 1;
+		map = new LinkedMultiValueMap<>();
+
+		try {
+
+			int tableId = Integer.parseInt(request.getParameter("tableId"));
+
+			int finYearId = Integer.parseInt(request.getParameter("finYearId"));
+			if (tableId == 1) {
+				// Physical Facility Budget
+				HttpSession session = request.getSession();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				map.add("instituteId", (int) userObj.getGetData().getUserInstituteId());
+				map.add("curFinYear", finYearId);
+
+				budget = rest.postForObject(Constants.url + "/getphysicalFacilityBudgetByFinYearId", map,
+						PhysicalFacilityBudget.class);
+				if (budget == null) {
+					res = 0;
+					return res;
+				}
+			} else if (tableId == 2) {
+				// Library Facility Budget
+
+				HttpSession session = request.getSession();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				map.add("instituteId", (int) userObj.getGetData().getUserInstituteId());
+				map.add("curFinYear", finYearId);
+
+				budget = rest.postForObject(Constants.url + "/getAcademicBudgetByFinYearId", map, AcademicBudget.class);
+				if (budget == null) {
+					res = 0;
+					return res;
+				}
+			} else if (tableId == 3) {
+				// Waste And Green Mngt Budget
+
+				HttpSession session = request.getSession();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
+				map.add("curFinYear", finYearId);
+
+				budget = rest.postForObject(Constants.url + "/getLibBoookBudgetByFinYearId", map,
+						LibraryBookBudget.class);
+				if (budget == null) {
+					res = 0;
+					return res;
+				}
+			}
+
+			// System.err.println("budget"+budget.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return budget;
 
 	}
 

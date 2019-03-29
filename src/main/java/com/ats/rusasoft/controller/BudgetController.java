@@ -86,12 +86,12 @@ public class BudgetController {
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				
 				map.add("acYearId", (int) session.getAttribute("acYearId"));
 				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
 
-				GetLibraryBookBudget[] resArray = rest.postForObject(	Constants.url + "/getLibraryBookBudgetListByAcYearId", map, GetLibraryBookBudget[].class);
-					
+				GetLibraryBookBudget[] resArray = rest.postForObject(
+						Constants.url + "/getLibraryBookBudgetListByAcYearId", map, GetLibraryBookBudget[].class);
+
 				List<GetLibraryBookBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
 
 				model.addObject("budgetList", budgetList);
@@ -128,6 +128,7 @@ public class BudgetController {
 			if (aceess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 				model.addObject("title", Names.library_book_budget_add);
 
@@ -143,13 +144,12 @@ public class BudgetController {
 				map = new LinkedMultiValueMap<>();
 
 				map.add("curFinYear", curFinYear.getFinYearId());
-				System.err.println("curr year "+curFinYear);
-				LibraryBookBudget budget = rest.postForObject(
-						Constants.url + "/getLibBoookBudgetByFinYearId", map, LibraryBookBudget.class);
+				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
+				System.err.println("curr year " + curFinYear);
+				LibraryBookBudget budget = rest.postForObject(Constants.url + "/getLibBoookBudgetByFinYearId", map,
+						LibraryBookBudget.class);
 
 				model.addObject("budget", budget);
-				
-			//	System.err.println("curr budget "+budget.toString());
 
 			}
 		} catch (Exception e) {
@@ -161,31 +161,27 @@ public class BudgetController {
 		return model;
 
 	}
-	
-	
-	
 
 	@RequestMapping(value = "/showEditLibBookBudget", method = RequestMethod.POST)
 	public ModelAndView showEditLibBudget(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model =null;// new ModelAndView("budgetForm/infra_budget_facility_add");
+		ModelAndView model = null;// new ModelAndView("budgetForm/infra_budget_facility_add");
 		try {
 
 			HttpSession session = request.getSession();
- 
+
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info aceess = null;
 
-			aceess = AccessControll.checkAccess("showEditLibBookBudget", "budgetOnLibraryBooks", "0",
-					"0", "1", "0", newModuleList);
+			aceess = AccessControll.checkAccess("showEditLibBookBudget", "budgetOnLibraryBooks", "0", "0", "1", "0",
+					newModuleList);
 			// aceess.setError(false);// comment this
 
 			if (aceess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
-				model= new ModelAndView("budgetForm/library_book_budget_add");
-
+				model = new ModelAndView("budgetForm/library_book_budget_add");
 
 				model.addObject("title", Names.lib_budget_edit);
 
@@ -204,11 +200,10 @@ public class BudgetController {
 
 				map.add("libraryBookBudgetId", libBookBudgetId);
 
-				LibraryBookBudget budget = rest.postForObject(
-						Constants.url + "/getLibBookBudgetByLibBookBudgetId", map, LibraryBookBudget.class);
+				LibraryBookBudget budget = rest.postForObject(Constants.url + "/getLibBookBudgetByLibBookBudgetId", map,
+						LibraryBookBudget.class);
 
 				model.addObject("budget", budget);
-			
 
 			}
 		} catch (Exception e) {
@@ -220,8 +215,7 @@ public class BudgetController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/deleteLibBookBudget/{libBookBudgetId}", method = RequestMethod.GET)
 	public String deleteDepts(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int libBookBudgetId) {
@@ -235,8 +229,8 @@ public class BudgetController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("deleteLibBookBudget", "budgetOnLibraryBooks", "0", "0", "0", "1",
-					newModuleList);
+			Info deleteAccess = AccessControll.checkAccess("deleteLibBookBudget", "budgetOnLibraryBooks", "0", "0", "0",
+					"1", newModuleList);
 			if (deleteAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
@@ -276,7 +270,7 @@ public class BudgetController {
 		return redirect; // "redirect:/showDeptList";
 
 	}
-	
+
 	@RequestMapping(value = "/insertLibBookBudget", method = RequestMethod.POST)
 	public String insertLibBookBudget(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertPhyFacilityBudget");
@@ -307,34 +301,38 @@ public class BudgetController {
 
 			if (budget_id == 0) {
 
-				aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "1", "0",
-						"0", newModuleList);
+				aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "1", "0", "0",
+						newModuleList);
 			} else {
 
-				aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "0", "1",
-						"0", newModuleList);
+				aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "0", "1", "0",
+						newModuleList);
 
 			}
 
 			if (aceess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
-				
-				int expenditure_on_book_purchase =Integer.parseInt(request.getParameter("expenditure_on_book_purchase"));
+
+				int expenditure_on_book_purchase = Integer
+						.parseInt(request.getParameter("expenditure_on_book_purchase"));
 
 				int fin_year_id = Integer.parseInt(request.getParameter("fin_year_id"));
 
-				int expenditure_on_journals_purchase =  Integer.parseInt(request.getParameter("expenditure_on_journals_purchase"));
+				int expenditure_on_journals_purchase = Integer
+						.parseInt(request.getParameter("expenditure_on_journals_purchase"));
 
-				//int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
+				// int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
 
-				int expenditure_on_eresources_purchase =  Integer.parseInt(request.getParameter("expenditure_on_eresources_purchase"));
-				int expenditure_on_ejournals_purchase =  Integer.parseInt(request.getParameter("expenditure_on_ejournals_purchase"));
+				int expenditure_on_eresources_purchase = Integer
+						.parseInt(request.getParameter("expenditure_on_eresources_purchase"));
+				int expenditure_on_ejournals_purchase = Integer
+						.parseInt(request.getParameter("expenditure_on_ejournals_purchase"));
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
-				
+
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 				LibraryBookBudget lib = new LibraryBookBudget();
@@ -342,12 +340,12 @@ public class BudgetController {
 				lib.setExpenditureOnEjournalsPurchase(expenditure_on_ejournals_purchase);
 				lib.setExpenditureOnEresourcesPurchase(expenditure_on_eresources_purchase);
 				lib.setExpenditureOnJournalsPurchase(expenditure_on_journals_purchase);
-				
+
 				lib.setLibraryBookBudgetId(budget_id);
 				lib.setAddBy(maker_id);
 				lib.setFinYearId(fin_year_id);
 				lib.setAcYearId(acYearId);
-			
+
 				lib.setInstituteId(inst_id);
 				lib.setDelStatus(1);
 				lib.setIsActive(1);
@@ -367,7 +365,8 @@ public class BudgetController {
 
 				lib.setAddDatetime(curDateTime);
 
-				LibraryBookBudget editInst = rest.postForObject(Constants.url + "saveLibBookBudget", lib, LibraryBookBudget.class);
+				LibraryBookBudget editInst = rest.postForObject(Constants.url + "saveLibBookBudget", lib,
+						LibraryBookBudget.class);
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
@@ -384,6 +383,5 @@ public class BudgetController {
 		return redirect;// "redirect:/showDeptList";
 
 	}
-
 
 }

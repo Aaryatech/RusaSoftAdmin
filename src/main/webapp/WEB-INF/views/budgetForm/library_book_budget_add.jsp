@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+	<c:url value="/getBudgetByFinYearId" var="getBudgetByFinYearId"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -107,24 +108,25 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
-													class="form-control" required>
+													class="form-control" onchange="setBudget(this.value)"
+													required>
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
-														<c:when test="${finYear.finYearId==budget.finYearId}">
-													<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
-														</c:when>
-														<c:otherwise>
-														<option value="${finYear.finYearId}">${finYear.finYear}</option>
-														</c:otherwise>
-													</c:choose>
+															<c:when test="${finYear.finYearId==budget.finYearId}">
+																<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:otherwise>
+														</c:choose>
 													</c:forEach>
-													
+
 
 												</select>
 											</div>
 										</div>
-										
-										
+
+
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
@@ -132,9 +134,11 @@
 												Books <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													id=expenditure_on_book_purchase
-													name="expenditure_on_book_purchase" value="${budget.expenditureOnBookPurchase}"
+												<input type="number" class="form-control" min="0"
+													id=expenditure_on_book_purchase autocomplete="off"
+													name="expenditure_on_book_purchase"
+													value="${budget.expenditureOnBookPurchase}"
+													onkeypress="return allowOnlyNumber(event)"
 													placeholder="Expenditures on purchase of Books" required>
 											</div>
 										</div>
@@ -145,9 +149,10 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													id="expenditure_on_journals_purchase"
+												<input type="number" class="form-control" min="0"
+													id="expenditure_on_journals_purchase" autocomplete="off"
 													name="expenditure_on_journals_purchase"
+													onkeypress="return allowOnlyNumber(event)"
 													placeholder="Expenditures on purchase of Journals"
 													value="${budget.expenditureOnJournalsPurchase}" required>
 											</div>
@@ -159,10 +164,11 @@
 												Expenditures on e-Journals<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													id="expenditure_on_ejournals_purchase"
+												<input type="number" class="form-control" min="0"
+													id="expenditure_on_ejournals_purchase" autocomplete="off"
 													name="expenditure_on_ejournals_purchase"
 													placeholder="Expenditures on e-Journals"
+													onkeypress="return allowOnlyNumber(event)"
 													value="${budget.expenditureOnEjournalsPurchase}" required>
 											</div>
 										</div>
@@ -174,9 +180,11 @@
 												Expenditures on e-Resources<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="number" class="form-control" min="0"
 													id="expenditure_on_eresources_purchase"
 													name="expenditure_on_eresources_purchase"
+													autocomplete="off"
+													onkeypress="return allowOnlyNumber(event)"
 													placeholder="Expenditures on e-Resources"
 													value="${budget.expenditureOnEresourcesPurchase}" required>
 											</div>
@@ -192,7 +200,8 @@
 																		Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 												<input type="hidden" id="is_view" name="is_view" value="0">
-												<input type="hidden" id="budget_id" name="budget_id" value="${budget.libraryBookBudgetId}">
+												<input type="hidden" id="budget_id" name="budget_id"
+													value="${budget.libraryBookBudgetId}">
 											</div>
 										</div>
 
@@ -232,23 +241,25 @@
 	var wasSubmitted = false;
 	function checkBeforeSubmit() {
 		if (!wasSubmitted) {
-			var x = confirm("Do you really want to submit the form?");
-			if (x == true) {
-				wasSubmitted = true;
-				document.getElementById("sub1").disabled = true;
-				document.getElementById("sub2").disabled = true;
-
-				return wasSubmitted;
+			var x = confirm("
+													Do you really want to submit the form?");
+			if (x==
+													true) {
+				wasSubmitted=true;
+													document.getElementById("sub1").disabled=true;
+													document.getElementById("sub2").disabled=true; return
+													wasSubmitted;
 			}
 		}
 		return false;
 	}
 
-		function trim(el) {
-			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-			replace(/\n +/, "\n"); // Removes spaces after newlines
-			return;
+		function
+													trim(el) {
+			el.value=el.value.replace(/(^\s*)|(\s*$)/gi,
+													""). // removes leading and trailing spaces
+													replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with
+													one space replace(/\n +/, "\n"); // Removes spaces afternewlinesreturn;
 		}
 	</script>
 
@@ -295,5 +306,45 @@
 	}
 	</script>
 
+	<script type="text/javascript">
+ function setBudget(finYearId){
+			// alert(finYearId);
+			 $.getJSON(
+						'${getBudgetByFinYearId}',
+						{
+
+							finYearId: finYearId,
+							tableId : 3,
+							ajax : 'true',
+
+						},
+						function(data) {
+							//alert("Data " +JSON.stringify(data));
+							
+							if(data==0){
+								
+								//alert("zero ");
+								document.getElementById("expenditure_on_book_purchase").value=""
+									document.getElementById("expenditure_on_journals_purchase").value=""
+								document.getElementById("expenditure_on_ejournals_purchase").value=""
+								document.getElementById("expenditure_on_eresources_purchase").value=""
+								document.getElementById("budget_id").value="0"
+								
+							}else{
+								
+								 //  alert("Data Exists ");
+								
+								    document.getElementById("expenditure_on_book_purchase").value=data.expenditureOnBookPurchase;
+								    document.getElementById("expenditure_on_journals_purchase").value=data.expenditureOnJournalsPurchase;
+									document.getElementById("expenditure_on_ejournals_purchase").value=data.expenditureOnEjournalsPurchase;
+									document.getElementById("expenditure_on_eresources_purchase").value=data.expenditureOnEresourcesPurchase;
+									document.getElementById("budget_id").value=data.libBudgetId;
+								
+							}
+							
+						});
+			 
+		 }
+	</script>
 </body>
 </html>
