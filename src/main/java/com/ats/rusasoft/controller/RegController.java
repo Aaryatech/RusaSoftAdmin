@@ -109,64 +109,17 @@ public class RegController {
 				//Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 					//	Institute.class);
 				
-				
-				
 				instHashMap.put(institute.getContactNo(), institute);
 				model.addObject("editInst", institute);
 				
 			} else {
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				map = new LinkedMultiValueMap<String, Object>();
-				map.add("instituteId", instId);
-				// getInstitute
-				Institute institute = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
-
-				String aisheCode = request.getParameter("aishe_code");
-				institute.setAisheCode(aisheCode);
-
-				institute.setContactNo(request.getParameter("princ_contact"));
-				institute.setEmail(request.getParameter("princ_email"));
-				institute.setInstituteAdd(request.getParameter("inst_add"));
-				institute.setInstituteName(request.getParameter("inst_name"));
-
-				int isReg = Integer.parseInt(request.getParameter("is_registration"));
-				institute.setIsRegistration(isReg);
-
-				institute.setLastUpdatedDatetime(curDateTime);
-
-				institute.setPresidentName(request.getParameter("pres_name"));
-				institute.setPrincipalName(request.getParameter("princ_name"));
-				if (isReg == 1)
-					institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
-				else
-					institute.setRegDate(null);
-
-				institute.setTrustAdd(request.getParameter("trusty_add"));
-
-				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
-				institute.setTrustName(request.getParameter("trusty_name"));
-
-				institute.setPresidenContact(request.getParameter("pres_contact"));
-				institute.setPresidentEmail(request.getParameter("pres_email"));
-
-				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
-						Institute.class);
+				
 			}
-			redirect = "redirect/showInstituteList";
-
-			if (instId == 0)
-				redirect = "redirect:/";
-			else
-				redirect = "redirect:/showInstituteList";
-			// }
+			
 		} catch (Exception e) {
 
-			System.err.println(" Exception In saveInstitute at Master Contr " + e.getMessage());
+			System.err.println(" Exception In insertInstituteDemo at Reg Contr " + e.getMessage());
 
 			e.printStackTrace();
 
@@ -182,7 +135,6 @@ public class RegController {
 	public ModelAndView showOtpPage(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("ask_otp");
-		//String otpNo = request.getParameter("otp_no");
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();

@@ -390,11 +390,10 @@
 				<div class="col-sm-12">
 					<div class="row">
 
-
 						<div class="form-group">
 
 							<label class="control-label col-sm-12" for="page_name">Institute
-								Name: ${editInst.instituteName} </label> <%-- <label class="control-label-left col-sm-9" id="inst_Name1"
+								Name:${editInst.instituteName} </label> <%-- <label class="control-label-left col-sm-9" id="inst_Name1"
 								for="page_name"> ${editInst.instituteName} </label> --%>
 							 
 						</div>
@@ -497,10 +496,11 @@
 								ID(Official):${editInst.email} </label> <%-- <label class="control-label col-sm-6"
 								id="princi_Email1" for="page_name">${editInst.email} </label> --%>
 						</div>
-
+						
 					</div>
+					
 				</div>
-				<button type="submit" class="btn btn-primary" onclick="getOtp()">Confirm</button>
+				<button  type="submit" class="btn btn-primary">Confirm</button>
 			</form>
 		</div>
 	</div>
