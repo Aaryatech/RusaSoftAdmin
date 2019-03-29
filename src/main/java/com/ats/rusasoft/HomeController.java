@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +42,7 @@ import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.Librarian;
+import com.ats.rusasoft.model.LibraryInfo;
 import com.ats.rusasoft.model.LoginLog;
 
 /**
@@ -143,25 +145,6 @@ public class HomeController {
 
 	}
 	
-	@RequestMapping(value = "/showforgotPassForm", method = RequestMethod.GET)
-	public ModelAndView showforgotPassForm(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("forgotPassword");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
 	
 	
 	@RequestMapping(value = "/showWelcomePage", method = RequestMethod.GET)
@@ -463,5 +446,169 @@ public class HomeController {
 		
 	}
 	
+	
+	
+	//Forgegt pass
+	
+	@RequestMapping(value = "/showforgotPassForm", method = RequestMethod.GET)
+	public ModelAndView showforgotPassForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("forgotPassword");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	RestTemplate rest = new RestTemplate();
+
+
+	@RequestMapping(value = "/forgotPas", method = RequestMethod.POST)
+	public ModelAndView checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
+		String c=null;
+		System.err.println("Hiii  checkValue  " );
+		Info info = new Info();
+		ModelAndView model = null;
+		
+
+
+		try {
+			//model = new ModelAndView("forgotPassword");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String inputValue = request.getParameter("username");
+			System.err.println("Info inputValue  " + inputValue);
+			
+			map.add("inputValue", inputValue);
+		
+			info = rest.postForObject(Constants.url + "checkUserName", map, Info.class);
+			System.err.println("Info Response  " + info.toString());
+			
+			
+			if(info.isError()==true){
+				model = new ModelAndView("forgotPassword");
+				 //c="redirect:/showforgotPassForm";
+				model.addObject("msg","Invalid User Name");
+				
+			}
+			else {
+				model = new ModelAndView("verifyOTP");
+				//  c= "redirect:/showVerifyOTP";
+				//model.addObject("msg","invalid");
+			}
+			
+			
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+
+	@RequestMapping(value = "/showVerifyOTP", method = RequestMethod.GET)
+	public ModelAndView showVerifyOTP(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("verifyOTP");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/OTPVerification", method = RequestMethod.POST)
+	public ModelAndView OTPVerification(HttpServletRequest request, HttpServletResponse response) {
+
+		System.err.println("Hiii  checkValue  " );
+		Info info = new Info();
+		ModelAndView model = null;
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String otp = request.getParameter("otp");
+			
+			map.add("otp", otp);
+		
+			info = rest.postForObject(Constants.url + "VerifyOTP", map, Info.class);
+			System.err.println("Info Response  " + info.toString());
+			
+			
+
+			if(info.isError()==true){
+				model = new ModelAndView("verifyOTP");
+				 //c="redirect:/showforgotPassForm";
+				model.addObject("msg","Incorrect OTP");
+				
+			}
+			else {
+				model = new ModelAndView("login");
+				//  c= "redirect:/showVerifyOTP";
+			model.addObject("msg","Password Sent on Your Phone Number");
+			}
+			
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+	/*
+	 * @RequestMapping(value = "/OTPVerification", method = RequestMethod.GET)
+	 * public @ResponseBody Info OTPVerification(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * System.err.println("Hiii  checkValue  " ); Info info = new Info();
+	 * 
+	 * try {
+	 * 
+	 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
+	 * Object>();
+	 * 
+	 * String otp = request.getParameter("otp");
+	 * 
+	 * map.add("otp", otp);
+	 * 
+	 * info = rest.postForObject(Constants.url + "VerifyOTP", map, Info.class);
+	 * System.err.println("Info Response  " + info.toString());
+	 * 
+	 * } catch (Exception e) { System.err.println("Exce in checkUniqueField  " +
+	 * e.getMessage()); e.printStackTrace(); }
+	 * 
+	 * return info;
+	 * 
+	 * }
+	 */
 	
 }
