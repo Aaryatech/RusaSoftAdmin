@@ -44,6 +44,8 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+<c:url value="/getBudgetDataByFinYearId"  var="getBudgetDataByFinYearId"></c:url>
+
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -107,7 +109,7 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
-													class="form-control" required>
+													class="form-control" onchange="setBudget(this.value)" required>
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
 														<c:when test="${finYear.finYearId==budget.finYearId}">
@@ -271,6 +273,43 @@
 	 $('.form-control').bind("paste",function(e) {
          e.preventDefault();
      });
+	 
+	 function setBudget(finYearId){
+			// alert(finYearId);
+			 $.getJSON(
+						'${getBudgetDataByFinYearId}',
+						{
+
+							finYearId: finYearId,
+							tableId : 2,
+							ajax : 'true',
+
+						},
+						function(data) {
+							//alert("Data " +JSON.stringify(data));
+							
+							if(data==0){
+								
+								//alert("zero ");
+								document.getElementById("lib_budget_title").value=""
+								document.getElementById("budget_allocated").value=""
+								document.getElementById("budget_utilized").value=""
+								document.getElementById("libBudgetId").value="0"
+								
+							}else{
+								
+								 //  alert("Data Exists ");
+								
+								    document.getElementById("lib_budget_title").value=data.libBudgetTitle;
+									document.getElementById("budget_allocated").value=data.budgetAllocated;
+									document.getElementById("budget_utilized").value=data.budgetUtilized;
+									document.getElementById("libBudgetId").value=data.libBudgetId;
+								
+							}
+							
+						});
+			 
+		 }
 	</script>
 
 

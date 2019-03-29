@@ -39,7 +39,6 @@ public class RegController {
 	@RequestMapping(value = "/insertInstituteDemo", method = RequestMethod.POST)
 	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {
 
-		System.err.println("instHashMap  size  " +instHashMap.size());
 		ModelAndView model = new ModelAndView("confirmInstReg");
 		int instId = Integer.parseInt(request.getParameter("inst_id"));
 		String redirect = null;
@@ -112,7 +111,8 @@ public class RegController {
 				
 				instHashMap.put(institute.getContactNo(), institute);
 				model.addObject("editInst", institute);
-				
+				System.err.println("instHashMap  size  " +instHashMap.size());
+
 			} else {
 
 				
