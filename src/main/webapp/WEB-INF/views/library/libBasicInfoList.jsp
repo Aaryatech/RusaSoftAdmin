@@ -85,7 +85,7 @@
                         <th>BandWidth for Access EResource</th> 
                         <th>Avg Teacher</th> 
                         <th>Avg Student</th> 
-                        <th width="20%">Action</th> 
+                        <th >Action</th> 
                     </tr>
                 </thead>
 
@@ -99,26 +99,26 @@
 											<td style="text-align: left"><c:out
 														value="${libList.softName}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${libList.softVersion}" /></td>
 											
-											<td style="text-align: center"><c:out
+											<td style="text-align: right"><c:out
 														value="${libList.usersOfLms}" /></td>
 											
 											<td style="text-align: center"><c:out
 														value="${libList.dateOfPurchaseAutomation}" /></td>
 														
 															
-											<td style="text-align: left"><c:out
+											<td style="text-align: right"><c:out
 														value="${libList.noCompLan}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: right"><c:out
 														value="${libList.bandwidthForAccessingEresources}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: right"><c:out
 														value="${libList.avgTeacher}" /></td>
 														
-											<td style="text-align: left"><c:out
+											<td style="text-align: right"><c:out
 														value="${libList.avgStudent}" /></td>
 												
 											<td align="center">

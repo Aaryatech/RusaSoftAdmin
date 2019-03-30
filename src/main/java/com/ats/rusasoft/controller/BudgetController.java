@@ -237,19 +237,20 @@ public class BudgetController {
 				if (libBookBudgetId == 0) {
 
 					System.err.println("Multiple records delete ");
-					String[] bookIds = request.getParameterValues("bookIds");
-					System.out.println("id are" + bookIds);
+					String[] budgetBookIds = request.getParameterValues("budgetBookIds");
+					System.out.println("id are" + budgetBookIds);
 
 					StringBuilder sb = new StringBuilder();
 
-					for (int i = 0; i < bookIds.length; i++) {
-						sb = sb.append(bookIds[i] + ",");
+					for (int i = 0; i < budgetBookIds.length; i++) {
+						sb = sb.append(budgetBookIds[i] + ",");
 
 					}
 					String bookIdList = sb.toString();
 					bookIdList = bookIdList.substring(0, bookIdList.length() - 1);
-
+					System.out.println("budget id list" + bookIdList);
 					map.add("libBookBudgetIdList", bookIdList);
+				
 				} else {
 
 					System.err.println("Single Record delete ");
@@ -257,6 +258,7 @@ public class BudgetController {
 				}
 
 				Info errMsg = rest.postForObject(Constants.url + "deleteLibBookBudget", map, Info.class);
+				
 				redirect = "redirect:/budgetOnLibraryBooks";
 			}
 		} catch (Exception e) {

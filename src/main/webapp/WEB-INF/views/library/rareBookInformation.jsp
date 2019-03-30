@@ -101,7 +101,7 @@
 										onsubmit="return checkBeforeSubmit()">
 
 										
-					<input type="text"
+					<input type="hidden"
 							id="bookId" name="bookId"
 								 value="${rareBook.rareBookInfoId}">					
 					<div class="form-group">

@@ -1287,6 +1287,7 @@ public class LibraryController {
 						sb = sb.append(studIds[i] + ",");
 
 					}
+				
 					String studIdList = sb.toString();
 					studIdList = studIdList.substring(0, studIdList.length() - 1);
 					System.out.println("stud id list" + studIdList);

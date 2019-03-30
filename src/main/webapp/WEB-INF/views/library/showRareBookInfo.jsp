@@ -100,14 +100,14 @@
 											<td style="text-align: left"><c:out
 														value="${bookList.publisher}" /></td>
 											
-											<td style="text-align: center"><c:out
+											<td style="text-align: right"><c:out
 														value="${bookList.bookCopies}" /></td>
 											
-											<td style="text-align: center"><c:out
+											<td style="text-align: right"><c:out
 														value="${bookList.costOfBook}" /></td>
 														
 															
-											<td style="text-align: left"><c:out
+											<td style="text-align: center"><c:out
 														value="${bookList.publicationYear}" /></td>
 														
 											
