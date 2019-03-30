@@ -150,7 +150,7 @@
 							 <input type="number" min="1" max="99999" class="form-control"
 								id="costOfBook" name="costOfBook"  autocomplete="off"
 								placeholder="Cost Of Rare Book" pattern="^(?!\s*$).+"
-								value="${rareBook.costOfBook}" required>
+								value="${rareBook.costOfBook}" required>ddddddd
 						</div>		
 					</div>
 					

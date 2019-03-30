@@ -422,7 +422,6 @@ public class LibraryController {
 				if (view.isError() == true) {
 					
 					model = new ModelAndView("accessDenied");
-
 				} 
 
 			else {
