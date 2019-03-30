@@ -1,18 +1,7 @@
-
-
-
-
-
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -341,8 +330,8 @@
 		
 		function chkSncAmt(){
 			
-			var sancAmt = document.getElementById("amt_sanc").value; 
-			var utlAmt = document.getElementById("amt_utilise").value; 
+			var sancAmt = parseFloat(document.getElementById("amt_sanc").value); 
+			var utlAmt = parseFloat(document.getElementById("amt_utilise").value); 
 			
 			
 			if(utlAmt>sancAmt){

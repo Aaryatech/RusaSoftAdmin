@@ -450,9 +450,7 @@ public class FacultyModuleController {
 	 * }
 	 */
 
-	/**************************************
-	 * Faculty Activity
-	 *****************************************/
+	/************************************** Faculty Activity *****************************************/
 
 	@RequestMapping(value = "/showOrganized", method = RequestMethod.GET)
 	public ModelAndView showOrganized(HttpServletRequest request, HttpServletResponse response) {
@@ -673,6 +671,64 @@ public class FacultyModuleController {
 		}
 		return "redirect:/showOrganizedList";
 
+	}
+	
+	@RequestMapping(value = "/delOrganizedDetails/{activityId}", method = RequestMethod.GET)
+	public String delOrganizedDetails(HttpServletRequest request, HttpServletResponse response, @PathVariable int activityId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delOrganizedDetails/{activityId}", "showOrganizedList", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (activityId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] activityIds = request.getParameterValues("activityId");
+					System.out.println("id are" + "linknameIds");
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < activityIds.length; i++) {
+						sb = sb.append(activityIds[i] + ",");
+
+					}
+					String activityIdList = sb.toString();
+					activityIdList = activityIdList.substring(0, activityIdList.length() - 1);
+
+					map.add("activityIdList", activityIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("activityIdList", activityId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteOrgActivity", map, Info.class);
+
+				a = "redirect:/showOrganizedList";
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
 	}
 
 	/*
@@ -1255,9 +1311,7 @@ public class FacultyModuleController {
 	}
 	
 	
-	/***********************************
-	 * Book Publication
-	 ************************************/
+	/************************************ Book Publication************************************/
 
 	@RequestMapping(value = "/showBookPub", method = RequestMethod.GET)
 	public ModelAndView showBookPub(HttpServletRequest request, HttpServletResponse response) {
@@ -1446,33 +1500,91 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/deleteBookPublished/{bookId}", method = RequestMethod.GET)
 	public String deleteBookPublished(@PathVariable("bookId") int bookId, HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView model = null;
-	
-	try {
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			ModelAndView model = null;
 		
-		Info view = AccessControll.checkAccess("showBookPub", "showIqacList", "0", "0", "0", "1",
-				newModuleList);
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+			Info view = AccessControll.checkAccess("showBookPub", "showIqacList", "0", "0", "0", "1",
+					newModuleList);
+	
+		if (view.isError() == true) {
+	
+			model = new ModelAndView("accessDenied");
+	
+		} else {
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+	
+			map.add("bookId", bookId);
+	
+			FacultyBook pubBook = rest.postForObject(Constants.url + "/deletePubBookById", map, FacultyBook.class);
+			}
+		}catch(Exception e) {
+		e.printStackTrace();
+		}
+			return "redirect:/showBookPubList";
 
-	if (view.isError() == true) {
-
-		model = new ModelAndView("accessDenied");
-
-	} else {
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-		map.add("bookId", bookId);
-
-		FacultyBook pubBook = rest.postForObject(Constants.url + "/deletePubBookById", map, FacultyBook.class);
 	}
-}catch(Exception e) {
-	e.printStackTrace();
-}
-		return "redirect:/showBookPubList";
 
+	
+	@RequestMapping(value = "/deleteFacultyJournal/{bookId}", method = RequestMethod.GET)
+	public String deleteLinkages(HttpServletRequest request, HttpServletResponse response, @PathVariable int bookId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteFacultyJournal/{bookId}", "showBookPubList", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (bookId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] bookIds = request.getParameterValues("bookId");
+					System.out.println("id are" + "bookIds");
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < bookIds.length; i++) {
+						sb = sb.append(bookIds[i] + ",");
+
+					}
+					String bookIdsList = sb.toString();
+					bookIdsList = bookIdsList.substring(0, bookIdsList.length() - 1);
+
+					map.add("bookIdsList", bookIdsList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("bookIdsList", bookId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "delFacultyPubJournals", map, Info.class);
+
+				a = "redirect:/showBookPubList";
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
 	}
-
 	/*
 	 * @RequestMapping(value = "/showJournalPub", method = RequestMethod.GET) public
 	 * ModelAndView showJournalPub(HttpServletRequest request, HttpServletResponse
@@ -1732,7 +1844,65 @@ public class FacultyModuleController {
 		}
 				return "redirect:/showOutReachContriList";
 		
+	}
+	
+	
+	@RequestMapping(value = "/deleteOutReahContri/{facContId}", method = RequestMethod.GET)
+	public String deleteOutReahContri(HttpServletRequest request, HttpServletResponse response, @PathVariable int facContId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteOutReahContri/{facContId}", "showOutReachContriList", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
 			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (facContId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] facContIds = request.getParameterValues("facContId");
+					
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < facContIds.length; i++) {
+						sb = sb.append(facContIds[i] + ",");
+
+					}
+					String facContIdsList = sb.toString();
+					facContIdsList = facContIdsList.substring(0, facContIdsList.length() - 1);
+
+					map.add("facContIdsList", facContIdsList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("facContIdsList", facContId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteOutReachContiList", map, Info.class);
+
+				a = "redirect:/showOutReachContriList";
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteOutReachContiList at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
 
 	/*****************************************
 	 * Phd Guide

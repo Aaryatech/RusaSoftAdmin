@@ -97,10 +97,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										action="${pageContext.request.contextPath}/deleteFacultyJournal/0"
+										method="get"
+										name="form_sample_2" id="form_sample_2">
 
 										
 												<div>
@@ -116,16 +115,13 @@
 														</label> -->
 														<div class="col-xs-12">
 
-
-
-
 															<table id="example-1"
 																class="table table-striped dt-responsive display">
 																<thead>
 																	 <tr>
-																		<!-- <th class="check" style="text-align: center; width: 5%;"><input
+																		 <th class="check" style="text-align: center; width: 5%;"><input
 																		type="checkbox" name="selAll" id="selAll"
-																		onClick="selectedInst(this)" /> Select All</th> -->
+																		onClick="selectedInst(this)" /> Select All</th> 
 																		<th>Sr No</th>
 																		<th>Title of Book</th>
 																		<th>Edition</th>
@@ -139,9 +135,9 @@
 												<c:forEach items="${bookList}" var="bList"
 													varStatus="count">
 													<tr>
-														<%-- <td><input type="checkbox" class="chk"
-															name="bookIds" id="bookIds${count.index+1}"
-															value="${bList.bookId}" /></td> --%>
+														 <td><input type="checkbox" class="chk"
+															name="bookId" id="bookIds${count.index+1}"
+															value="${bList.bookId}" /></td> 
 														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${bList.bookTitle}</td>
 														<td>${bList.bookEdition}</td>
@@ -170,14 +166,14 @@
 															</table>
 
 
-											<%-- 					<c:if test="${deleteAccess==0}">
-											<input type="submit" class="btn btn-primary" value="Delete"
+											 <c:if test="${deleteAccess==0}">
+												<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;">
-										</c:if>
+											</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
-											value="0"> --%>
+											value="0"> 
 
 														</div>
 
@@ -346,7 +342,7 @@
 	<script>
 	function selectedInst(source) {
 
-		checkboxes = document.getElementsByName('bookIds');
+		checkboxes = document.getElementsByName('bookId');
 
 		for (var i = 0, n = checkboxes.length; i < n; i++) {
 			checkboxes[i].checked = source.checked;
