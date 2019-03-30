@@ -15,21 +15,7 @@
 <!-- END HEAD -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.btn1 {
-	background-color: #ffffff; /* Blue background */
-	border: none; /* Remove borders */
-	color: white; /* White text */
-	padding: 12px 16px; /* Some padding */
-	font-size: 16px; /* Set a font size */
-	cursor: pointer; /* Mouse pointer on hover */
-}
 
-/* Darker background on mouse-over */
-.btn:hover {
-	background-color: blue;
-}
-</style>
 <style>
 .image-preview-input {
 	position: relative;
@@ -103,10 +89,12 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<!-- <a href="#myModal1" data-toggle="modal"><button
-										type="submit" class="btn btn-success">Add</button></a> --> <a
-									href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
-										type="button" class="btn btn-success">Add</button></a> 
+								
+										<c:if test="${addAccess==0}">
+									<a href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
+											type="button" class="btn btn-success">Add</button></a>
+
+								</c:if>
 							</div>
 
 						</header>
@@ -124,7 +112,7 @@
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
-												<th class="check" style="text-align: center; width: 5%;"><input
+													<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th>
 													<th width="10%">Sr No</th>
@@ -143,14 +131,16 @@
 											<c:forEach items="${budgetList}" var="budget"
 													varStatus="count">
 													<tr>
-														<td align="center"><input type="checkbox" class="chk"
+													
+													<td align="center"><input type="checkbox" class="chk"
 															name="bookIds" id="bookIds${count.index+1}"
 															value="${accOff.officerId}" /></td>
+														
 														<td align="center">${count.index+1}</td>
-														<td align="center">${budget.expenditureOnBookPurchase}</td>
-														<td>${budget.expenditureOnJournalsPurchase}</td>
-														<td align="right">${budget.expenditureOnEjournalsPurchase}</td>
-														<td align="right">${budget.expenditureOnEresourcesPurchase}</td>
+														<td style="text-align: right;">${budget.expenditureOnBookPurchase}</td>
+														<td style="text-align: right;">${budget.expenditureOnJournalsPurchase}</td>
+														<td style="text-align: right;">${budget.expenditureOnEjournalsPurchase}</td>
+														<td style="text-align: right;">${budget.expenditureOnEresourcesPurchase}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEditBookBudget(${budget.libraryBookBudgetId})"
 																	href="#"><span class="glyphicon glyphicon-edit"
@@ -175,7 +165,17 @@
 										
 										<div class="form-group">
 
-											<div class="col-sm-5">
+
+										<c:if test="${deleteAccess==0}">
+											<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+										</c:if>
+										
+										
+										
+											<!-- <div class="col-sm-5">
 											<div class="col-sm-1">
 
 												<button type="submit" title="Delete Multiple Records" class="btn1"
@@ -188,7 +188,7 @@
 												<div class="col-sm-4">
 													<h5 style="text-align: left;">Delete Records</h5>
 												</div>
-											</div>
+											</div> -->
 
 
 											<input type="hidden" id="libBookId" name="libBookId" value="0">
@@ -244,6 +244,7 @@
 			}
 
 		}
+
 	</script>
 
 

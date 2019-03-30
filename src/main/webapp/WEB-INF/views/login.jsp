@@ -146,9 +146,9 @@
 				</form>
 
 				<p id="nav">
-					<!-- <a class="pull-left" href="showforgotPassForm"
-						title="Password Lost and Found">Forgot password?</a> -->
-					<a class="pull-left" href="showInstituteRegistrationForm"
+					<a class="pull-left" href="showforgotPassForm"
+						title="Password Lost and Found">Forgot password?</a>
+					<a class="pull-right" href="showInstituteRegistrationForm"
 						title="Sign Up">Institute Registration</a>
 				</p>
 				<br /> <br /> <label class="pull-left" for="page_name"><b

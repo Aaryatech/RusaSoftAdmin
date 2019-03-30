@@ -506,7 +506,58 @@ public class HomeController {
 			else {
 				model = new ModelAndView("verifyOTP");
 				//  c= "redirect:/showVerifyOTP";
-				//model.addObject("msg","invalid");
+				model.addObject("username",info.getMsg());
+			}
+			
+			
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+
+	
+	
+
+	@RequestMapping(value = "/reGenOtp1", method = RequestMethod.GET)
+	public ModelAndView reGenOtp1(HttpServletRequest request, HttpServletResponse response) {
+		String c=null;
+		System.err.println("Hiii  checkValue  " );
+		Info info = new Info();
+		ModelAndView model = null;
+		
+
+
+		try {
+			//model = new ModelAndView("forgotPassword");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String inputValue = request.getParameter("username");
+			System.err.println("Username for regeneration  " + inputValue);
+			
+			map.add("inputValue", inputValue);
+		
+			info = rest.postForObject(Constants.url + "checkUserName", map, Info.class);
+			System.err.println("Info Response  " + info.toString());
+			
+			
+			if(info.isError()==true){
+				model = new ModelAndView("forgotPassword");
+				 //c="redirect:/showforgotPassForm";
+				model.addObject("msg","Invalid User Name");
+				
+			}
+			else {
+				model = new ModelAndView("verifyOTP");
+				//  c= "redirect:/showVerifyOTP";
+				model.addObject("username",info.getMsg());
+				model.addObject("msg","OTP Resent Plz check");
 			}
 			
 			
@@ -571,7 +622,14 @@ public class HomeController {
 			else {
 				model = new ModelAndView("login");
 				//  c= "redirect:/showVerifyOTP";
+			
+
+				map =new LinkedMultiValueMap<String, Object>(); 
+				 map.add("type", 1);
 			model.addObject("msg","Password Sent on Your Phone Number");
+			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			model.addObject("acaYearList", acaYearList);
 			}
 			
 
