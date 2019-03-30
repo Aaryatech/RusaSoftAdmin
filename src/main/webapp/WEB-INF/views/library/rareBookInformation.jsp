@@ -110,7 +110,7 @@
 						style="text-align: left;"> Name Of Rare Book<span
 						class="text-danger">*</span> </label> 
 						<div class="col-sm-9">
-								<input type="text"
+								<input type="text" autocomplete="off"
 								class="form-control" id="bookName" name="bookName" pattern="^(?!\s*$).+"
 								placeholder="" value="${rareBook.rareBookname}" required>
 						</div>
@@ -122,7 +122,7 @@
 						class="text-danger">*</span> </label> 
 						<div class="col-sm-9">
 								 <input type="text" class="form-control"
-								id="publisher" name="publisher"
+								id="publisher" name="publisher" autocomplete="off"
 								placeholder="Publisher" pattern="^(?!\s*$).+"
 								value="${rareBook.publisher}" required>
 						</div>
@@ -136,7 +136,7 @@
 						<div class="col-sm-9">
 								 <input type="number" min="1" max="99999" class="form-control"
 									id="noOfBook" name="noOfBook" pattern="^(?!\s*$).+"
-									placeholder="No of Copies for Book"
+									placeholder="No of Copies for Book" autocomplete="off"
 									value="${rareBook.bookCopies}" required>
 						</div>
 					</div>
@@ -148,7 +148,7 @@
 						class="text-danger">*</span> </label>
 						<div class="col-sm-9">
 							 <input type="number" min="1" max="99999" class="form-control"
-								id="costOfBook" name="costOfBook" 
+								id="costOfBook" name="costOfBook"  autocomplete="off"
 								placeholder="Cost Of Rare Book" pattern="^(?!\s*$).+"
 								value="${rareBook.costOfBook}" required>
 						</div>		
@@ -354,7 +354,22 @@
 			}
 		}
 	</script>
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+    	  var x=confirm("Do you really want to submit the form?");
+    	  if(x==true){
+        wasSubmitted = true;
+    	  document.getElementById("sub1").disabled=true;
+    	  document.getElementById("sub2").disabled=true;
 
+        return wasSubmitted;
+    	  }
+      }
+      return false;
+    }    
+</script>
 
 
 </body>
