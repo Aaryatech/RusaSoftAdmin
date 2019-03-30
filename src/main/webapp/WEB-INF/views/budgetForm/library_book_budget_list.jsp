@@ -132,9 +132,9 @@
 													varStatus="count">
 													<tr>
 													
-													<td align="center"><input type="checkbox" class="chk"
+													<td style="text-align: center; "><input type="checkbox" class="chk"
 															name="bookIds" id="bookIds${count.index+1}"
-															value="${accOff.officerId}" /></td>
+															value="${budget.libraryBookBudgetId}" /></td>
 														
 														<td align="center">${count.index+1}</td>
 														<td style="text-align: right;">${budget.expenditureOnBookPurchase}</td>
