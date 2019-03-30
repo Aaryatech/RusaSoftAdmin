@@ -43,7 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body onload="check(${phd.isPhdAwarded})" onload="checkCoGuide(${phd.isCoGuide})">
+<!-- onload="check(${phd.isPhdAwarded})" onload="checkCoGuide(${phd.isCoGuide})" -->
+<body onload="showIsReg()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -140,28 +141,39 @@
 
 
 															<div class="col-sm-4">
+															
 															<c:choose>
-																	<c:when test="${phd.isCoGuide == 1}">
-															
-																Yes <input type="radio" name="coGuide" id="coGuide"
-																	checked value="1" onclick="checkCoGuide(this.value)">
+																<c:when test="${phd.phdId == 0}">
+																
+																	Yes <input type="radio" name="coGuide" id="coGuide"
+																	 value="1" onclick="checkCoGuide(this.value)">
 																	
-																 No<input type="radio" onclick="checkCoGuide(this.value)"
-																	name="coGuide" id="coGuide" value="0">
-															</c:when>
-															<c:when test="${phd.isPhdGuide == 0}">
-															
-																Yes <input type="radio" name="coGuide" id="coGuide"
-																	checked value="1" onclick="checkCoGuide(this.value)">
+																	 No<input type="radio" onclick="checkCoGuide(this.value)"
+																	 checked name="coGuide" id="coGuide" value="0">
+																
+																</c:when>
+																<c:otherwise>
+																	<c:choose>
+																		<c:when test="${empty phd.isCoGuide}">
+																			Yes <input type="radio" name="coGuide" id="coGuide"
+																				 value="1" onclick="checkCoGuide(this.value)">
 																	
-																 No<input type="radio" onclick="checkCoGuide(this.value)"
-																	name="coGuide" id="coGuide" value="0" checked>
-															</c:when>
-															<c:otherwise>Yes <input type="radio" name="coGuide" id="coGuide"
-																	checked value="1" onclick="checkCoGuide(this.value)">
+																			No<input type="radio" onclick="checkCoGuide(this.value)"
+																			checked name="coGuide" id="coGuide" value="0">																																			
+																		</c:when>			
+																		
+																		<c:otherwise>
+																			Yes <input type="radio" name="coGuide" id="coGuide"
+																			 checked value="1" onclick="checkCoGuide(this.value)">
 																	
-																 No<input type="radio" onclick="checkCoGuide(this.value)"
-																	name="coGuide" id="coGuide" value="0" checked></c:otherwise>
+																			No<input type="radio" onclick="checkCoGuide(this.value)"
+																			  name="coGuide" id="coGuide" value="0">																		
+																		</c:otherwise>															
+																	
+																	</c:choose>
+																
+																</c:otherwise>
+																
 															</c:choose>
 															
 															</div>
@@ -261,7 +273,45 @@
 
 
 															<div class="col-sm-2">
+														
 															<c:choose>
+																
+																	<c:when test="${phd.phdId == 0}">
+																
+																	Yes <input type="radio" name="awarded" id="awarded"
+																	 value="1" onclick="check(this.value)">
+																	
+																	No<input type="radio" name="awarded" id="awarded"
+																	checked value="0" onclick="check(this.value)">
+																
+																</c:when>
+																
+																<c:otherwise>
+																<c:choose>
+																	<c:when test="${empty phd.isPhdAwarded}">
+																		Yes <input type="radio" name="awarded" id="awarded"
+																	 value="1" onclick="check(this.value)">
+																	
+																	No<input type="radio" name="awarded" id="awarded"
+																	checked value="0" onclick="check(this.value)">
+																	
+																	</c:when>
+																	
+																	<c:otherwise>
+																		Yes <input type="radio" name="awarded" id="awarded"
+																	 	checked value="1" onclick="check(this.value)">
+																	
+																		No<input type="radio" name="awarded" id="awarded"
+																		 value="0" onclick="check(this.value)">
+																	</c:otherwise>
+																</c:choose>
+																</c:otherwise>
+																
+															
+															</c:choose>
+														
+														
+															<%-- <c:choose>
 																	<c:when test="${phd.isPhdAwarded == 1}">
 																Yes <input type="radio" name="awarded" id="awarded"
 																	checked value="1" onclick="check(this.value)">
@@ -282,7 +332,7 @@
 																	value="0" onclick="check(this.value)" checked>
 															</c:otherwise>
 															
-															</c:choose>
+															</c:choose> --%>
 															
 															
 															</div>
@@ -411,9 +461,7 @@
 		</script>
 		<script type="text/javascript">
 			function check(qualType) {
-				//document.getElementById("abc").style = "display:none"
-				//var qualType=document.getElementById("cat").value
-				//alert("qualType::"+qualType);
+				
 
 				if (qualType == 1) {
 					
@@ -432,9 +480,7 @@
 			}
 			
 			function checkCoGuide(guide) {
-				//document.getElementById("abc").style = "display:none"
-				//var qualType=document.getElementById("cat").value
-				//alert("qualType::"+qualType);
+				
 
 				if (guide == 1) {
 
@@ -450,7 +496,7 @@
 
 			}
 			
-			function hideText() {
+			/* function hideText() {
 				//alert("hii");
 				
 				document.getElementById("abc").style = "visible"
@@ -461,7 +507,55 @@
 				document.getElementById("co_guide_name").style = "visible"
 				document.getElementById("co_guide_name").setAttribute("required","true");
 
+			} */
+			
+			
+			function showIsReg(){
+				
+				var x = ${phd.phdId};
+				//var a = ${phd.isCoGuide};
+				//alert("Hi"+a);
+				if(x>0){
+					var isRel = ${phd.isCoGuide};
+					//alert("Hi"+isRel);
+					if(isRel == 0){
+						document.getElementById("cogid").style.display = "none";
+					}else{
+						document.getElementById("cogid").style.display = "block";
+					}
+				}
+				
+				var isTaxInc = $("input[name=coGuide]:checked").val();
+				
+				if(isTaxInc == 1){
+					document.getElementById("cogid").style.display = "block";
+				} else{
+					document.getElementById("cogid").style.display = "none";
+				}
+				
+				//*************************************************************//
+				/* var val = ${phd.isPhdAwarded}
+				
+				if(x>0 && val > 0){
+					
+					var isAwrd = ${phd.isPhdAwarded};
+					if(isAwrd == 0){
+						document.getElementById("abc").style.display = "none";
+					}else{
+						document.getElementById("abc").style.display = "block";
+					}
+					
+				}
+				
+				var isTest = $("input[name=awarded]:checked").val();
+				
+				if(isTaxInc == 1){
+					document.getElementById("abc").style.display = "block";
+				} else{
+					document.getElementById("abc").style.display = "none";
+				} */
 			}
+			
 		</script>
 
 	</div>

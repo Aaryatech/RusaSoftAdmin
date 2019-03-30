@@ -849,9 +849,64 @@ public class IqacController {
 
 	}
 
-	/*****************************
-	 * Dean / R&D Registration
-	 ***********************************/
+	@RequestMapping(value = "/delSlectedStaff/{staffId}", method = RequestMethod.GET)
+	public String deletSelectedStaff(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int staffId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedStaff/{staffId}", "showStaffList", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {	
+
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (staffId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] staffIds = request.getParameterValues("staffIds");
+					System.out.println("id are" + staffIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < staffIds.length; i++) {
+						sb = sb.append(staffIds[i] + ",");
+
+					}
+					String staffIdList = sb.toString();
+					staffIdList = staffIdList.substring(0, staffIdList.length() - 1);
+
+					map.add("staffIdList", staffIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("staffIdList", staffId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
+
+				a = "redirect:/showStaffList";
+
+			
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+		
+	}
+	
+	/****************************************Dean / R&D Registration **********************************************/
 
 	@RequestMapping(value = "/showRegDean", method = RequestMethod.GET)
 	public ModelAndView showRegDean(HttpServletRequest request, HttpServletResponse response) {
