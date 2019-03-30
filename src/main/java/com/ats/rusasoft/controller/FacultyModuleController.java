@@ -2140,5 +2140,63 @@ public class FacultyModuleController {
 		return "redirect:/showPhdGuideList";
 
 	}
+	
+	
+	@RequestMapping(value = "/deletePhdGuidenceDetail/{phdId}", method = RequestMethod.GET)
+	public String deletePhdGuidenceDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable int phdId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deletePhdGuidenceDetail/{phdId}", "showPhdGuideList", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (phdId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] phdIds = request.getParameterValues("phdId");
+					
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < phdIds.length; i++) {
+						sb = sb.append(phdIds[i] + ",");
+
+					}
+					String phdIdsList = sb.toString();
+					phdIdsList = phdIdsList.substring(0, phdIdsList.length() - 1);
+
+					map.add("phdIdsList", phdIdsList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("phdIdsList", phdId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deletePhdGuidList", map, Info.class);
+
+				a = "redirect:/showPhdGuideList";
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteOutReachContiList at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
 
 }
