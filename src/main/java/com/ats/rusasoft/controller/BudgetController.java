@@ -216,63 +216,68 @@ public class BudgetController {
 
 	}
 
-	@RequestMapping(value = "/deleteLibBookBudget/{libBookBudgetId}", method = RequestMethod.GET)
-	public String deleteDepts(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int libBookBudgetId) {
+	
 
-		String redirect = null;
+	@RequestMapping(value = "/deleteLibBookBudget/{bookBudgetId}", method = RequestMethod.GET)
+	public String deleteStudents(HttpServletRequest request, HttpServletResponse response, @PathVariable int bookBudgetId) {
+
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteLibBookBudget/{libBookBudgetId}", "budgetOnLibraryBooks", "0", "0", "0", "1",
+				newModuleList);
 		try {
+			if (view.isError() == true) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				a = "redirect:/accessDenied";
 
-			HttpSession session = request.getSession();
+			}
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-			Info deleteAccess = AccessControll.checkAccess("deleteLibBookBudget", "budgetOnLibraryBooks", "0", "0", "0",
-					"1", newModuleList);
-			if (deleteAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (libBookBudgetId == 0) {
+			else {
+				
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (bookBudgetId == 0) {
 
 					System.err.println("Multiple records delete ");
-					String[] budgetBookIds = request.getParameterValues("budgetBookIds");
-					System.out.println("id are" + budgetBookIds);
+					String[] bookIds = request.getParameterValues("bookIds");
+					System.out.println("id are" + bookIds);
 
 					StringBuilder sb = new StringBuilder();
 
-					for (int i = 0; i < budgetBookIds.length; i++) {
-						sb = sb.append(budgetBookIds[i] + ",");
+					for (int i = 0; i < bookIds.length; i++) {
+						sb = sb.append(bookIds[i] + ",");
 
 					}
+				
 					String bookIdList = sb.toString();
 					bookIdList = bookIdList.substring(0, bookIdList.length() - 1);
-					System.out.println("budget id list" + bookIdList);
+					System.out.println("stud id list" + bookIdList);
+
 					map.add("libBookBudgetIdList", bookIdList);
-				
 				} else {
 
-					System.err.println("Single Record delete ");
-					map.add("libBookBudgetIdList", libBookBudgetId);
+					System.err.println("Single Record delete id  "+bookBudgetId);
+					map.add("libBookBudgetIdList", bookBudgetId);
 				}
 
 				Info errMsg = rest.postForObject(Constants.url + "deleteLibBookBudget", map, Info.class);
-				
-				redirect = "redirect:/budgetOnLibraryBooks";
+				a = "redirect:/budgetOnLibraryBooks";
+			
 			}
 		} catch (Exception e) {
 
-			System.err.println(" Exception In deleteDepts at Master Contr " + e.getMessage());
+			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
 
 			e.printStackTrace();
 
 		}
 
-		return redirect; // "redirect:/showDeptList";
+		return a;
 
 	}
-
 	@RequestMapping(value = "/insertLibBookBudget", method = RequestMethod.POST)
 	public String insertLibBookBudget(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertPhyFacilityBudget");
