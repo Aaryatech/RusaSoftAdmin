@@ -260,7 +260,7 @@ public class FacultyModuleController {
 		HttpSession session = request.getSession();
 		
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showPublicationDetails", "showAddPublicationDetailsList", "0", "0", "1", "0",
+		Info view = AccessControll.checkAccess("editFacultyConfrnc/{facId}", "showAddPublicationDetailsList", "0", "0", "1", "0",
 				newModuleList);
 
 		if (view.isError() == true) {
@@ -292,7 +292,7 @@ public class FacultyModuleController {
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showPublicationDetails", "showAddPublicationDetailsList", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteFacultyConfrnc/{facId}", "showAddPublicationDetailsList", "0", "0", "0", "1",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -611,7 +611,7 @@ public class FacultyModuleController {
 	try {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showOrganized", "showOrganizedList", "0", "0", "1", "0",
+		Info view = AccessControll.checkAccess("editFacultyActivity/{facActivityId}", "showOrganizedList", "0", "0", "1", "0",
 				newModuleList);
 
 		if (view.isError() == true) {
@@ -652,7 +652,7 @@ public class FacultyModuleController {
 		try {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showOrganized", "showOrganizedList", "0", "0", "0", "1",
+		Info view = AccessControll.checkAccess("deleteFacultyActivity/{activityId}", "showOrganizedList", "0", "0", "0", "1",
 				newModuleList);
 
 		if (view.isError() == true) {
@@ -1178,7 +1178,7 @@ public class FacultyModuleController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "1", "0",
+			Info view = AccessControll.checkAccess("editFacultyMentor/{menId}", "showStudMentor", "0", "0", "1", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -1221,7 +1221,7 @@ public class FacultyModuleController {
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteFacultyMentor/{menId}", "showStudMentor", "0", "0", "0", "1",
 					newModuleList);
 			if (view.isError() == true) {
 
@@ -1468,7 +1468,7 @@ public class FacultyModuleController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			
-			Info view = AccessControll.checkAccess("showBookPub", "showIqacList", "0", "0", "1", "0",
+			Info view = AccessControll.checkAccess("editBookPublished/{bookId}", "showIqacList", "0", "0", "1", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -1506,7 +1506,7 @@ public class FacultyModuleController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			
-			Info view = AccessControll.checkAccess("showBookPub", "showIqacList", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteBookPublished/{bookId}", "showIqacList", "0", "0", "0", "1",
 					newModuleList);
 	
 		if (view.isError() == true) {
@@ -1792,7 +1792,7 @@ public class FacultyModuleController {
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showOutReachContri", "showOutReachContriList", "0", "0", "1", "0",
+			Info view = AccessControll.checkAccess("editContribtn/{conId}", "showOutReachContriList", "0", "0", "1", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -1824,7 +1824,7 @@ public class FacultyModuleController {
 			ModelAndView model = null;
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showOutReachContri", "showOutReachContriList", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteContribtn/{conId}", "showOutReachContriList", "0", "0", "0", "1",
 					newModuleList);
 		
 			if (view.isError() == true) {
@@ -2077,7 +2077,7 @@ public class FacultyModuleController {
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showPhdGuide", "showPhdGuideList", "0", "0", "1", "0",
+			Info view = AccessControll.checkAccess("editPhdGuide/{phdId}", "showPhdGuideList", "0", "0", "1", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -2120,7 +2120,7 @@ public class FacultyModuleController {
 		
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showPhdGuide", "showPhdGuideList", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deletePhdGuide/{phdId}", "showPhdGuideList", "0", "0", "0", "1",
 					newModuleList);
 
 			if (view.isError() == true) {

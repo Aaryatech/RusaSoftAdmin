@@ -392,7 +392,6 @@ $(function () {
 			document.getElementById("abc").style.display = "block";
 
 			//alert(value)
-
 		}
 		
 	}
