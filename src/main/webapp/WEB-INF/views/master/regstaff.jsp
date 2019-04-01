@@ -265,10 +265,10 @@
 													<c:when test="${staff.facultyId==0}">
 
 														<input type="radio" id="is_registration"
-															name="is_registration" value="1"
+															name="is_registration" value="1" checked
 															onclick="setDate(this.value)">Yes 
 																<input type="radio" id="is_registration"
-															name="is_registration" value="0" checked
+															name="is_registration" value="0" 
 															onclick="setDate(this.value)">No 
 															
 															</c:when>
@@ -698,18 +698,11 @@
 	<script type="text/javascript">
 		function showIsReg() {
 			//alert("Hi");
-			var x = $
-			{
-				staff.facultyId
-			}
+			var x = ${staff.facultyId};
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = $
-				{
-					staff.realivingDate
-				}
-				;
+				var isRel = ${staff.realivingDate};
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
 					//alert("Hi 2")
@@ -722,6 +715,18 @@
 				}
 
 			}
+			
+			var isTaxInc = $("input[name=is_registration]:checked").val()
+			 
+			 if(isTaxInc==1){
+					//alert("Hi 2")
+					document.getElementById("abc").style.display = "none";
+
+				}else{
+					//alert("Hi es")
+					document.getElementById("abc").style.display = "block";
+					
+				}
 
 		}
 	</script>
