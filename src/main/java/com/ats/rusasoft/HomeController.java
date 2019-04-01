@@ -273,7 +273,8 @@ public class HomeController {
 				if (userObj!=null) {
 					
 					int a=userObj.getExInt1();
-					 if(a==1) {
+					System.out.println("is enroll is "+a);
+					 if(a==0) {
 						 mav = new ModelAndView("welcome");
 					}
 					 else {
