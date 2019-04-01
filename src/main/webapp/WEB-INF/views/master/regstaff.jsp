@@ -527,7 +527,7 @@
 			//alert(inputValue+" "+valueType);
 
 			var primaryKey = ${staff.facultyId};
-			;
+			
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {

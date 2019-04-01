@@ -166,7 +166,7 @@
 												style="align-content: center; width: 113px; margin-left: 40px;">
 										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
-											value="0"> --%>
+											value="0">
 
 														</div>
 

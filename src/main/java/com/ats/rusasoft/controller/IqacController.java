@@ -265,7 +265,7 @@ public class IqacController {
 
 		try {
 			
-			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "1", "0",
+			Info view = AccessControll.checkAccess("editIqac/{iqacId}", "showIqacList", "0", "0", "1", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -306,7 +306,7 @@ public class IqacController {
 		
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("iqacRegistration", "showIqacList", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("deleteIqac/{iqacId}", "showIqacList", "0", "0", "0", "1", newModuleList);
 			if (view.isError() == true) {
 	
 				a = "redirect:/accessDenied";
@@ -756,7 +756,7 @@ public class IqacController {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
-			Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "0", "1", "0",
+			Info view = AccessControll.checkAccess("editFaculity/{facultyId}", "showStaffList", "0", "0", "1", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -824,7 +824,7 @@ public class IqacController {
 		try {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showRegisterStaff", "showStaffList", "0", "0", "0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("deleteFaculity/{facultyId}", "showStaffList", "0", "0", "0", "1", newModuleList);
 		
 		if (view.isError() == true) {
 
@@ -1078,7 +1078,7 @@ public class IqacController {
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
-			Info view = AccessControll.checkAccess("showRegDean", "showDeanList", "0", "0", "1", "0", newModuleList);
+			Info view = AccessControll.checkAccess("editDean/{deanId}", "showDeanList", "0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1122,7 +1122,7 @@ public class IqacController {
 		try {
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showRegDean", "showDeanList", "0", "0", "0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("deleteDean/{deanId}", "showDeanList", "0", "0", "0", "1", newModuleList);
 		
 		if (view.isError() == true) {
 

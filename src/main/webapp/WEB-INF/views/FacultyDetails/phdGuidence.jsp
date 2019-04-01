@@ -141,8 +141,12 @@
 
 
 															<div class="col-sm-4">
-															
-															<c:choose>
+															Yes <input type="radio" name="coGuide" id="coGuide" ${phd.isCoGuide == 1 ? 'checked' : ''}
+																	 value="1" onclick="checkCoGuide(this.value)">
+																	
+																	 No<input type="radio" onclick="checkCoGuide(this.value)" ${phd.isCoGuide == 0 ? 'checked' : ''}
+																	  name="coGuide" id="coGuide" value="0">
+															<%-- <c:choose>
 																<c:when test="${phd.phdId == 0}">
 																
 																	Yes <input type="radio" name="coGuide" id="coGuide"
@@ -174,7 +178,7 @@
 																
 																</c:otherwise>
 																
-															</c:choose>
+															</c:choose> --%>
 															
 															</div>
 														</div>
@@ -274,7 +278,12 @@
 
 															<div class="col-sm-2">
 														
-															<c:choose>
+															Yes <input type="radio" name="awarded" id="awarded" ${phd.isPhdAwarded == 1 ? 'checked' : '' }
+																	 value="1" onclick="check(this.value)">
+																	
+															No<input type="radio" name="awarded" id="awarded" ${phd.isPhdAwarded == 0 ? 'checked' : '' }
+																	 value="0" onclick="check(this.value)">
+															<%-- <c:choose>
 																
 																	<c:when test="${phd.phdId == 0}">
 																
@@ -308,7 +317,7 @@
 																</c:otherwise>
 																
 															
-															</c:choose>
+															</c:choose> --%>
 														
 														
 															<%-- <c:choose>
@@ -518,25 +527,24 @@
 				if(x>0){
 					var isRel = ${phd.isCoGuide};
 					//alert("Hi"+isRel);
-					if(isRel == 0){
+					if(isRel == null){
 						document.getElementById("cogid").style.display = "none";
 					}else{
 						document.getElementById("cogid").style.display = "block";
 					}
 				}
-				
+				 
 				var isTaxInc = $("input[name=coGuide]:checked").val();
 				
 				if(isTaxInc == 1){
 					document.getElementById("cogid").style.display = "block";
 				} else{
 					document.getElementById("cogid").style.display = "none";
-				}
-				
+				} 
 				//*************************************************************//
-				/* var val = ${phd.isPhdAwarded}
-				
-				if(x>0 && val > 0){
+				 var val = ${phd.isPhdAwarded}
+				// alert("Hi"+val);
+				if(val > 0 || x > 0){
 					
 					var isAwrd = ${phd.isPhdAwarded};
 					if(isAwrd == 0){
@@ -549,11 +557,11 @@
 				
 				var isTest = $("input[name=awarded]:checked").val();
 				
-				if(isTaxInc == 1){
+				if(isTest == 1){
 					document.getElementById("abc").style.display = "block";
 				} else{
 					document.getElementById("abc").style.display = "none";
-				} */
+				} 
 			}
 			
 		</script>

@@ -187,7 +187,7 @@
 													</label>
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
-															id="join_date" pattern="^(?!\s*$).+"
+															id="join_date" pattern="^(?!\s*$).+" autocomplete="off"
 															onkeypress='return restrictAlphabets(event)'
 															name="join_date" placeholder="Joining Date" required
 															value="${dean.joiningDate}">
@@ -251,7 +251,7 @@
 														<input type="text" class="form-control datepicker"
 															id="acc_off_relDate"
 															onkeypress='return restrictAlphabets(event)'
-															pattern="^(?!\s*$).+"
+															pattern="^(?!\s*$).+" autocomplete="off"
 															onkeypress='return restrictAlphabets(event)'
 															name="acc_off_relDate" placeholder="Relieving Date"
 															value="${dean.realivingDate}">
