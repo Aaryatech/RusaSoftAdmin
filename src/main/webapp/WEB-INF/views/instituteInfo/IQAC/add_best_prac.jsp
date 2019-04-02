@@ -98,35 +98,39 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteBestPract"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										>
 
 
 
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="participant">Name
-												of Best Practices<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="participant">Name of Best Practices
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="bestPrac"
 													autocomplete="off" name="bestPrac"
 													placeholder="Name of Best Practices"
-													value="${editInst.practicesName}" required>
+													value="${editInst.practicesName}" >
+	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Name of Best Practices</span>	
+
 											</div>
 										</div>
 
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="benificiary">Name
-												of Best Beneficiaries<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="benificiary">Name of Best Beneficiaries
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="benificiary"
 													autocomplete="off" name="benificiary"
 													placeholder="Name of Best Beneficiaries"
-													value="${editInst.practicesBeneficiary}" required>
+													value="${editInst.practicesBeneficiary}" >
+			<span class="error_form text-danger" id="error_bef" style="display:none;" >Please Enter Name of Best Beneficiaries</span>	
+		
 											</div>
 										</div>
 
@@ -143,7 +147,10 @@
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="practices_effective_from" placeholder="dd-mm-yyyy"
 													name="practices_effective_from" value="${date}"
-													required>
+													>
+													
+<span class="error_form text-danger" id="error_eff" style="display:none;" >Please Select Effective From</span>	
+
 											</div>
 										</div>
 
@@ -187,7 +194,73 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script>
+           
+         
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 if(!$("#bestPrac").val()){
+        					 
+             				isError=true;
+             				
+             				
+             				$("#bestPrac").addClass("has-error")
+             				$("#error_name").show()
+             					//return false;
+             				} else {
+             					$("#error_name").hide()
+             				}
+            			 
+            			 if(!$("#benificiary").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#benificiary").addClass("has-error")
+              				$("#error_bef").show()
+              					//return false;
+              				} else {
+              					$("#error_bef").hide()
+              				}
+            			 
+            			 if(!$("#practices_effective_from").val()){
+        					 
+               				isError=true;
+               				
+               				
+               				$("#practices_effective_from").addClass("has-error")
+               				$("#error_eff").show()
+               					//return false;
+               				} else {
+               					$("#error_eff").hide()
+               				}
+             			 
+             			 
 
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 <script type="text/javascript">
 function submit_f(view){

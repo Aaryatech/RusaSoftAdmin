@@ -735,6 +735,7 @@ public class LibraryController {
 				int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
 
 				String lib_joiningDate = request.getParameter("lib_joiningDate");
+				System.out.println("lib_joiningDate:"+lib_joiningDate);
 				String relieving_date = request.getParameter("relieving_date");
 
 				System.err.println("librarian id  " + librarianId);

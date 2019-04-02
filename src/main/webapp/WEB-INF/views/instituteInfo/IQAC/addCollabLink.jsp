@@ -102,7 +102,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertColLinkages"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										>
 
 										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -122,8 +122,8 @@
 														
 														
 														
-														<select id="colName" name="colName" class="form-control" required>
-															
+														<select id="colName" name="colName" class="form-control" >
+																		<option value="-1">Select</option>
 																		<c:forEach items="${colList}" var="colList">
 																		<c:choose>
 																			<c:when test="${colList.linknameId==editInst.linknameId}">
@@ -139,20 +139,22 @@
 
 																	</c:forEach>
 																</select>
+							<span class="error_form text-danger" id="error_name" style="display:none;" >Please Select Collaboration / Linkage Name</span>
 																
 													</div>
 												</div>
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="agency">Collaboration
-														Linkage with Agency<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="agency">Collaboration Linkage with Agency
+													<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="col_agency"
 															name="col_agency" autocomplete="off"
 															onchange="return trim(this)"
 															placeholder="Collaboration Linkage with Agency"
-															value="${editInst.linkAgency}" required>
+															value="${editInst.linkAgency}" >
+											<span class="error_form text-danger" id="error_agency" style="display:none;" >Please enter Collaboration Linkage with Agency</span>
 													</div>
 												</div>
 
@@ -169,7 +171,8 @@
 															name="linkageNature" autocomplete="off"
 															onchange="return trim(this)"
 															placeholder="Nature of Linkage Collaboration"
-															value="${editInst.linkNature}" required>
+															value="${editInst.linkNature}" >
+			<span class="error_form text-danger" id="error_nature" style="display:none;" >Please enter Nature of  Linkage Collaboration</span>
 													</div>
 												</div>
 
@@ -177,18 +180,18 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="beneficiaryMOU">Beneficiary
-														of MoU<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="beneficiaryMOU">Beneficiary  of MoU
+														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 
 														<select id="beneficiaryMOU" name="beneficiaryMOU"
-															class="form-control" required>
+															class="form-control" >
 															<!-- <option value="-1">Select</option>
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option> -->
-
+<option value="-1">Select</option>
 
 
 																<c:choose>
@@ -227,7 +230,7 @@
 																		</c:choose>
 
 														</select>
-
+<span class="error_form text-danger" id="error_benf" style="display:none;" >Please select Beneficiary  of MoU</span>
 													</div>
 												</div>
 
@@ -241,7 +244,8 @@
 														<input type="number" min="0" class="form-control" autocomplete="off"
 															id="totalParticipants" name="totalParticipants"
 															placeholder="No. of Participants / Beneficiary"
-															value="${editInst.linkBeneficiaryNos}" required>
+															value="${editInst.linkBeneficiaryNos}" >
+		<span class="error_form text-danger" id="error_part" style="display:none;" >Please enter No. of Participants </span>
 													</div>
 												</div>
 
@@ -288,7 +292,115 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+           
+             function numbersOnlyNotZero(id_number) {
 
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 if(!$("#col_agency").val()){
+        					 
+             				isError=true;
+             				
+             				
+             				$("#col_agency").addClass("has-error")
+             				$("#error_agency").show()
+             					//return false;
+             				} else {
+             					$("#error_agency").hide()
+             				}
+            			 
+            			 if(!$("#linkageNature").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#linkageNature").addClass("has-error")
+              				$("#error_nature").show()
+              					//return false;
+              				} else {
+              					$("#error_nature").hide()
+              				}
+            			 
+            			 
+            				
+            				if($("#colName").val()== -1 ){
+            		            
+                				isError=true;
+                				
+                				$("#error_name").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_name").hide()
+                				}
+            				
+            				
+
+            				if($("#beneficiaryMOU").val()== -1 ){
+            		            
+                				isError=true;
+                				
+                				$("#error_benf").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_benf").hide()
+                				}
+            				
+
+            				if(!$("#totalParticipants").val() || !numbersOnlyNotZero($("#totalParticipants").val())){
+            
+            				isError=true;
+            				
+            				$("#error_part").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_part").hide()
+            				}
+            				
+            				
+            				
+            				
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 
 	<script type="text/javascript">

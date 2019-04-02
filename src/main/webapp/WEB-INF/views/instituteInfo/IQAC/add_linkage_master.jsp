@@ -101,19 +101,22 @@
 										<form class="form-horizontal"
 											action="${pageContext.request.contextPath}/insertLinkageMaster"
 											method="post" name="form_sample_2" id="form_sample_2"
-											onsubmit="return confirm('Do you really want to submit the form?');">
+										>
 
 
 
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="linkname_text">Linkage
-													Name <span class="text-danger">*</span>
+												<label class="control-label col-sm-2" for="linkname_text">Linkage Name 
+													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="linkname_text"
-														required name="linkname_text" autocomplete="off"
+														 name="linkname_text" autocomplete="off"
 														placeholder="Linkage Name"
 														value="${editInst.linknameText}">
+														
+	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Linkage Name </span>	
+														
 												</div>
 											</div>
 
@@ -135,7 +138,7 @@
 											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-10">
 													<input type="submit" class="btn btn-primary"
-														onclick="submit_f(1)" value="Save">
+														onclick="submit_f(1)" value="Save" id="sub1">
 													<button type="reset" class="btn btn-default">Reset</button>
 												</div>
 
@@ -244,6 +247,48 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
+<script>
+           
+         
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 if(!$("#linkname_text").val()){
+        					 
+             				isError=true;
+             				
+             				
+             				$("#linkname_text").addClass("has-error")
+             				$("#error_name").show()
+             					//return false;
+             				} else {
+             					$("#error_name").hide()
+             				}
+            			 
+            			
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 
 	<script type="text/javascript">

@@ -103,9 +103,9 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFunctionalMOU"
-										method="post"
+										method="post" novalidate="novalidate"
 										name="form_sample_2" id="form_sample_2"
-											onsubmit="return checkBeforeSubmit()">
+										>
 
 									<%-- 	<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -121,25 +121,27 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="title">Title
-														of MoU <span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="title">Title of MoU 
+														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="title"
 															autocomplete="off" name="title"
 															placeholder="Title of MoU" value="${editInst.mouTitle}"
-															required>
+															>
+															
+					<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Title of MoU </span>
 													</div>
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="functionalMOU">Functional
-														MoU with Agency <span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="functionalMOU">Functional MoU with Agency
+													 <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<select id="MOU_agency" name="MOU_agency"
-															onchange="showForm()" class="form-control" required>
-															
+															onchange="showForm()" class="form-control" >
+															<option value="-1">Select</option>	
 															
 													<c:choose>
 															<c:when test="${'IIT'== editInst.mouAgency}">
@@ -223,7 +225,7 @@
 																</c:otherwise>
 												</c:choose>
 														</select>
-													
+		<span class="error_form text-danger" id="error_mou" style="display:none;" >Please Select Functional MoU with Agency</span>						
 													</div>
 												</div>
 
@@ -237,7 +239,9 @@
 														<input type="text" class="form-control" id="otherCourse"
 															autocomplete="off"  name="otherCourse"
 															placeholder="" value="${editInst.mouAgency}">
+					<span class="error_form text-danger" id="error_other" style="display:none;" >Please Enter Other Course</span>	
 													</div>
+								
 												</div>
 
 
@@ -250,7 +254,8 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
 															autocomplete="off" id="fromDate" name="fromDate"
-															value="${fdate}" required>
+															value="${fdate}" >
+					<span class="error_form text-danger" id="error_fdate" style="display:none;" >Please Enter From Date</span>	
 
 													</div>
 												</div>
@@ -263,7 +268,9 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
 															autocomplete="off" id="toDate" name="toDate"
-															value="${tdate}" required>
+															value="${tdate}" >
+		<span class="error_form text-danger" id="error_tdate" style="display:none;" >Please Enter To Date</span>	
+		
 													</div>
 												</div>
 
@@ -273,19 +280,19 @@
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="beneficiaryMOU">Beneficiary
-														of MoU<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="beneficiaryMOU">Beneficiary 	of MoU
+													<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 
 														<select id="beneficiaryMOU" name="beneficiaryMOU"
-															class="form-control" required>
+															class="form-control" >
 															<!-- <option value="-1">Select</option>
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option> -->
 
-
+															<option value="-1">Select</option>
 
 																<c:choose>
 															<c:when test="${'Students'== editInst.mouBeneficiary}">
@@ -321,34 +328,39 @@
 																		</c:choose>
 
 														</select>
+		<span class="error_form text-danger" id="error_benfmou" style="display:none;" >Please Select Beneficiary of MoU</span>						
 
 													</div>
 												</div>
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="beneficiaryMOU">No.
-														of Beneficiary Participants<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="beneficiaryMOU">No. of Beneficiary Participants
+														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="0" class="form-control"
 															id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 															placeholder="No. of Beneficiary Participants "
-															value="${editInst.mouBeneficiaryNos}" required>
+															value="${editInst.mouBeneficiaryNos}" >
+		<span class="error_form text-danger" id="error_part" style="display:none;" >Please Enter No. of Beneficiary Participants</span>						
+
 													</div>
 												</div>
 
 
 												<div class="form-group">
 
-													<label class="control-label col-sm-2" for="instituteOfMoU">Institute
+													<label class="control-label col-sm-2" for="instituteOfMoU">Institute of MoU
 														of MoU <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="instituteOfMoU" autocomplete="off"
 															name="instituteOfMoU" placeholder="Institute of MoU"
-															value="${editInst.mouInstitute}" required>
+															value="${editInst.mouInstitute}" >
+				<span class="error_form text-danger" id="error_inst" style="display:none;" >Please Institute of MoU</span>						
+		
 													</div>
 												</div>
 												
@@ -372,8 +384,6 @@
 
 
 												<div class="clearfix"></div>
-
-
 
 
 
@@ -405,7 +415,157 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script>
+           
+             function numbersOnlyNotZero(id_number) {
 
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 if(!$("#title").val()){
+        					 
+             				isError=true;
+             				
+             				
+             				$("#title").addClass("has-error")
+             				$("#error_name").show()
+             					//return false;
+             				} else {
+             					$("#error_name").hide()
+             				}
+            			 
+            			 if($("#MOU_agency").val()== -1 ){
+         		            
+             				isError=true;
+             				
+             				$("#error_mou").show()
+             					//return fregister_useralse;
+             				} else {
+             					$("#error_mou").hide()
+             				}
+         				
+            			 
+            			 
+            			 
+            			 if($("#MOU_agency").val()== 7 ){
+            			 if(!$("#otherCourse").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#otherCourse").addClass("has-error")
+              				$("#error_other").show()
+              					//return false;
+              				} else {
+              					$("#error_other").hide()
+              				}
+            			 
+            			 }
+
+            			 if(!$("#fromDate").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#fromDate").addClass("has-error")
+              				$("#error_fdate").show()
+              					//return false;
+              				} else {
+              					$("#error_fdate").hide()
+              				}
+            			 
+            			 if(!$("#toDate").val()){
+        					 
+               				isError=true;
+               				
+               				
+               				$("#toDate").addClass("has-error")
+               				$("#error_tdate").show()
+               					//return false;
+               				} else {
+               					$("#error_tdate").hide()
+               				}
+            			 
+            			 
+
+            				if($("#beneficiaryMOU").val()== -1 ){
+            		            
+                				isError=true;
+                				
+                				$("#error_benf").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_benfmou").hide()
+                				}
+            				
+            				
+            				
+            				
+
+            				if(!$("#beneficiaryMOUNo").val() || !numbersOnlyNotZero($("#beneficiaryMOUNo").val())){
+            
+            				isError=true;
+            				
+            				$("#error_part").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_part").hide()
+            				}
+            				
+            				
+            				if(!$("#instituteOfMoU").val()){
+           					 
+                  				isError=true;
+                  				
+                  				
+                  				$("#instituteOfMoU").addClass("has-error")
+                  				$("#error_inst").show()
+                  					//return false;
+                  				} else {
+                  					$("#error_inst").hide()
+                  				}
+
+            				
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 
 	<script type="text/javascript">
@@ -456,11 +616,11 @@
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
-					document.getElementById("otherCourse").setAttribute("required","true");
+				//	document.getElementById("otherCourse").setAttribute("required","true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
-					document.getElementById("otherCourse").removeAttribute("required");
+				//	document.getElementById("otherCourse").removeAttribute("required");
 
 			}
 

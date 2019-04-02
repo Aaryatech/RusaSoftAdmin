@@ -98,22 +98,12 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertIqacBasicInfo"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2"  novalidate="novalidate"
+										>
 
-										<!-- <ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
+										
 
-
-										</ul> -->
-
-										<!-- <div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
- -->
 												<div>
-
 
 
 
@@ -124,8 +114,10 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
 																id="estb_date" name="estb_date" placeholder="dd-MM-YYYY"
-																placeholder="Date of Establishment of IQAC " required
+																placeholder="Date of Establishment of IQAC " 
 																value="${date}">
+												 <span class="error_form text-danger" id="error_eDate" style="display:none;" >Please Select Establishment Date  </span>
+																
 														</div>
 													</div>
 
@@ -139,8 +131,9 @@
 															<input type="text" class="form-control"
 																id="alt_faculty_name" name="alt_faculty_name"
 																placeholder="Name of alternate Faculty with IQAC"
-																pattern="^(?!\s*$).+" value="${instRes.iqacAltName}"
-																required>
+																 value="${instRes.iqacAltName}"
+																>
+															 <span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Name  </span>
 														</div>
 													</div>
 
@@ -150,10 +143,12 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control"
-																id="alt_fac_contact" pattern="^[1-9]{1}[0-9]{9}$"
+																id="alt_fac_contact" 
 																maxlength="10" name="alt_fac_contact"
 																placeholder="Mobile No of Alternate Faculty Associated"
-																value="${instRes.iqacAltMobile}" required>
+																value="${instRes.iqacAltMobile}" >
+																
+													 <span class="error_form text-danger" id="error_contact" style="display:none;" >Please Enter Mobile Number  </span>
 														</div>
 													</div>
 
@@ -163,10 +158,11 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="phone_no"
-																pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+															 maxlength="10"
 																name="phone_no"
 																placeholder="Phone No of Alternate Faculty"
-																value="${instRes.iqacAltPhone}" required>
+																value="${instRes.iqacAltPhone}" >
+											 <span class="error_form text-danger" id="error_contact1" style="display:none;" >Please Enter Phone Number   </span>
 														</div>
 													</div>
 
@@ -175,11 +171,12 @@
 															No.<span class="text-danger"></span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-																maxlength="10" maxlength="10" class="form-control"
+															<input type="text"
+																 maxlength="10" class="form-control"
 																id="fax_no" value="${instRes.iqacAltFax}" name="fax_no"
 																placeholder="FAX No of Alternate Faculty Associated"
 																>
+									 <span class="error_form text-danger" id="error_fax_no" style="display:none;" >Please Enter Fax Number Properly </span>
 														</div>
 													</div>
 
@@ -191,8 +188,10 @@
 															<input type="email" class="form-control"
 																id="registered_email" 
 																 value="${instRes.iqacAltEmail1}"
-																name="registered_email" placeholder="abc@xyz.com" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
-																required>
+																name="registered_email" placeholder="abc@xyz.com" 
+																>
+										 <span class="error_form text-danger" id="error_rEmail" style="display:none;" >Please Enter Email  </span>		
+					
 														</div>
 													</div>
 
@@ -201,9 +200,11 @@
 															Email <span class="text-danger"></span>
 														</label>
 														<div class="col-sm-6">
-															<input type="email" class="form-control" id="alt_email" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
+															<input type="email" class="form-control" id="alt_email" 
 																value="${instRes.iqacAltEmail2}" name="alt_email"
 																placeholder="abc@xyz.com " >
+																
+								 <span class="error_form text-danger" id="error_aEmail" style="display:none;" >Please Enter Email Id Properly </span>
 														</div>
 													</div>
 
@@ -258,9 +259,206 @@
 
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<!-- END CONTENT -->
+<script>
+            //
+            function validateEmail(registered_email) {
+          //  alert("hii....validateEmail");
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(registered_email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+            function validateEmail(alt_email) {
+                //  alert("hii....validateEmail");
+                  	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                  
+                  	if (eml.test($.trim(alt_email)) == false) {
+                  
+                  
+                  	return false;
+                  
+                  	}
+                  
+                  	return true;
+                  
+                  }
+             function validateMobile(phone_no) {
+            	 // alert("hii....validateMobile");
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(phone_no)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }
+             
+             function validateMobile(alt_fac_contact) {
+            	 // alert("hii....validateMobile");
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(alt_fac_contact)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }
+function numbersOnlyNotZero(fax_no) {
 
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(fax_no)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+            
+            	$(document).ready(function($){
+            //	alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#alt_faculty_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid Name.</li>';
+            				
+            				$("#alt_faculty_name").addClass("has-error")
+            				$("#error_name").show()
+            					//return false;
+            				} else {
+            					$("#error_name").hide()
+            				}
+            				
+            				if(!$("#estb_date").val()){
+           					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid Name.</li>';
+                				
+                				$("#estb_date").addClass("has-error")
+                				$("#error_eDate").show()
+                					//return false;
+                				} else {
+                					$("#error_eDate").hide()
+                				}
+                				
+            				
+            				 
+            				if(!$("#alt_fac_contact").val() || !validateMobile($("#alt_fac_contact").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert = 'Please enter a valid mobile number.';
+            				$("#error_contact").html(errMsg_alert);
+            				$("#error_contact").show();
+            				//alert();
+            					//return false;
+            				} else {
+            				
+            					$("#error_contact").hide()
+            				}
+            				
+            				
+            				 
+            				if( !validateMobile($("#phone_no").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert = 'Please enter a valid mobile number.';
+            				$("#error_contact1").html(errMsg_alert);
+            				$("#error_contact1").show();
+            				//alert();
+            					//return false;
+            				} else {
+            				
+            					$("#error_contact1").hide()
+            				}
+            				
+            				
+            				if(!$("#registered_email").val() || !validateEmail($("#registered_email").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_rEmail").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_rEmail").hide()
+            				}
+            				
+            				
+
+            				if( !validateEmail($("#alt_email").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_aEmail").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_aEmail").hide()
+            				}
+            				
+            				if(!$("#fax_no").val() || !numbersOnlyNotZero($("#fax_no").val())){
+            		            
+                				isError=true;
+                				errMsg += '<li>Please enter a valid email address.</li>';
+                				errMsg_alert += 'Please enter a valid email address. \n';
+                				$("#error_fax_no").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_fax_no").hide()
+                				}
+                				
+            				
+            				
+
+            				if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						
+								}
+							}
+            
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 
 	<script type="text/javascript">
@@ -289,7 +487,7 @@
 
 		}
 
-		var wasSubmitted = false;
+	/* 	var wasSubmitted = false;
 		function checkBeforeSubmit() {
 			if (!wasSubmitted) {
 				var x = confirm("Do you really want to submit the form?");
@@ -302,7 +500,7 @@
 				}
 			}
 			return false;
-		}
+		} */
 	</script>
 
 
@@ -310,7 +508,6 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 

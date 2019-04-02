@@ -97,7 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteInfo"
-										method="post" onsubmit="return checkBeforeSubmit()" name="form_sample_2"
+										method="post"  name="form_sample_2" novalidate="novalidate"
 										id="form_sample_2">
 <!-- 
 										<ul class="nav nav-tabs">
@@ -131,7 +131,7 @@
 																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
 																	
 																	</c:forEach> --%>
-
+<option value="-1">Select</option>
 																	<c:forEach items="${acaYearList}" var="acaYearList">
 																		<c:choose>
 																			<c:when
@@ -149,13 +149,14 @@
 																	</c:forEach>
 
 																</select>
+<span class="error_form text-danger" id="error_year" style="display:none;" >Please enter Student Name</span>
 															</div>
 														</div>
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_name"
-																>No. of Full Time
-																Faculty<span class="text-danger">*</span>
+																>No. of Full Time Faculty
+																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
 																<input type="number" min="0" class="form-control"
@@ -163,7 +164,9 @@
 																	value="${editInstInfo.noOfFulltimeFaculty}"
 																	name="no_fullTime_Faculty"
 																	placeholder="No. of Full Time Faculty in Institute"
-																	required>
+																	>
+																	
+										<span class="error_form text-danger" id="error_full" style="display:none;" >Please enter No. of Full Time Faculty</span>
 															</div>
 														</div>
 
@@ -171,8 +174,8 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
-														>No. of Full Time
-																Nonteaching Faculty<span
+														>No. of Full Time 	Nonteaching Faculty
+															<span
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
@@ -181,7 +184,8 @@
 																	value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
 																	name="no_nonTeaching_faculty"
 																	placeholder="No. of Full Time Nonteaching Including Office Staff"
-																	required>
+																	>
+						<span class="error_form text-danger" id="error_non" style="display:none;" >Please enter No. of Full Time 	Nonteaching Faculty</span>
 															</div>
 														</div>
 
@@ -197,7 +201,8 @@
 																	id="no_suppStaff"
 																	value="${editInstInfo.noSupportStaff}"
 																	name="no_suppStaff" placeholder="No. of Support Staff"
-																	required>
+																	>
+							<span class="error_form text-danger" id="error_supp" style="display:none;" >Please enter No. of Support Staff</span>
 															</div>
 														</div>
 
@@ -211,7 +216,9 @@
 																	id="no_currAdmitted_Student"
 																	value="${editInstInfo.noCurrentAdmitedStnt}"
 																	name="no_currAdmitted_Student"
-																	placeholder="No. of current admitted student" required>
+																	placeholder="No. of current admitted student" >
+																	
+												<span class="error_form text-danger" id="error_curr" style="display:none;" >Please enter admitted student</span>
 															</div>
 														</div>
 
@@ -224,7 +231,9 @@
 																<input type="number" min="0" class="form-control"
 																	id="treasury_code" value="${editInstInfo.treasuryCode}"
 																	name="treasury_code" placeholder="State Treasury Code"
-																	required>
+																	>
+																	
+							<span class="error_form text-danger" id="error_code" style="display:none;" >Please enter State Treasury Code</span>
 															</div>
 														</div>
 
@@ -236,7 +245,8 @@
 															<div class="col-sm-8">
 																<input type="text" class="form-control" id="rusa_idNo"
 																	value="${editInstInfo.rusaIdNo}" name="rusa_idNo"
-																	placeholder="Rusa ID No." pattern="^(?!\s*$).+" required>
+																	placeholder="Rusa ID No." >
+							<span class="error_form text-danger" id="error_rusa" style="display:none;" >Please enter Rusa ID</span>
 															</div>
 														</div>
 
@@ -302,8 +312,125 @@
 
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<!-- END CONTENT -->
+	<script>
+           
+             function numbersOnlyNotZero(id_number) {
+
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            				
+            				if($("#academic_year").val()== -1 ){
+            		            
+                				isError=true;
+                				
+                				$("#error_year").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_year").hide()
+                				}
+            				
+
+            				if(!$("#no_fullTime_Faculty").val() || !numbersOnlyNotZero($("#no_fullTime_Faculty").val())){
+            
+            				isError=true;
+            				
+            				$("#error_full").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_full").hide()
+            				}
+            				
+            				if(!$("#no_nonTeaching_faculty").val() || !numbersOnlyNotZero($("#no_nonTeaching_faculty").val())){
+            		            
+                				isError=true;
+                				
+                				$("#error_non").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_non").hide()
+                				}
+            				if(!$("#no_suppStaff").val() || !numbersOnlyNotZero($("#no_suppStaff").val())){
+            		            
+                				isError=true;
+                				
+                				$("#error_supp").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_supp").hide()
+                				}
+            				if(!$("#no_currAdmitted_Student").val() || !numbersOnlyNotZero($("#no_currAdmitted_Student").val())){
+            		            
+                				isError=true;
+                				
+                				$("#error_curr").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_curr").hide()
+                				}
+            				if(!$("#treasury_code").val() || !numbersOnlyNotZero($("#treasury_code").val())){
+            		            
+                				isError=true;
+                				
+                				$("#error_code").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_code").hide()
+                				}
+            				
+							if(!$("#rusa_idNo").val() || !numbersOnlyNotZero($("#rusa_idNo").val())){
+            		            
+                				isError=true;
+                				
+                				$("#error_rusa").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_rusa").hide()
+                				}
+            				
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 	<script>
 		function clearSessionAttribute() {
@@ -373,7 +500,6 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 

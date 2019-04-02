@@ -95,11 +95,11 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
+								<!-- 		<div class="alert alert-danger" id="regerror"></div> -->
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibrarian"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post"  novalidate="novalidate"
+										name="form_sample_2" id="form_sample_2">
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -122,9 +122,10 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" id="librarian_name" pattern="^(?!\s*$).+"	value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Librarian Name" required
+																<input type="text" class="form-control" id="librarian_name" value="${editInst.librarianName}"
+																	name="librarian_name" placeholder="Librarian Name" 
 																	>
+												 <span class="error_form text-danger" id="error_name" style="display:none;" >Please enter Librarian Name</span>
 															</div>
 														</div>
 
@@ -137,9 +138,12 @@
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+													<input type="text"  
 																	 class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Mobile No" onchange="checkUnique(this.value,1)" required>
+																	 name="lib_con_num" placeholder="Mobile No" onchange="checkUnique(this.value,1)" >
+											 <span class="error_form text-danger" id="error_contact" style="display:none;" >
+											 Please Enter Contact Number</span>
+																	 
 															</div>
 														</div>
 
@@ -148,8 +152,10 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<input type="email" class="form-control" id="librarian_email" pattern="[\w-]+@([\w-]+\.)+[\w-]+"	value="${editInst.email}"
-																	 name="librarian_email" placeholder="abc@xyz.com" onchange="checkUnique(this.value,2)" required>
+																<input type="email" class="form-control" id="librarian_email" value="${editInst.email}"
+																	 name="librarian_email" placeholder="abc@xyz.com" onchange="checkUnique(this.value,2)" >
+													 <span class="error_form text-danger" id="error_email" style="display:none;" >Please Enter Email ID</span>
+																	 
 															</div>
 														</div>
 
@@ -158,7 +164,8 @@
 																Qualification : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-																<select id="lib_quolf" name="lib_quolf" class="form-control" required>
+																<select id="lib_quolf" name="lib_quolf" class="form-control" >
+														<option value="-1">Select</option>
 															
 																	
 																		<c:forEach items="${quolfList}" var="quolf">
@@ -177,7 +184,7 @@
 																	</c:forEach>
 																</select>
 																
-																
+																<span class="error_form text-danger" id="error_quol" style="display:none;" >Please Select Qualification</span>
 															</div>
 														</div>
 																
@@ -187,7 +194,8 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${jdate}"
-																	name="lib_joiningDate" placeholder=" " required>
+																	name="lib_joiningDate" placeholder=" " >
+																		<span class="error_form text-danger" id="error_jDate" style="display:none;" >Please Select Qualification</span>
 															</div>
 														</div>
 														
@@ -216,6 +224,7 @@
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${ldate}"
 																	name="relieving_date"  >
+																	
 															</div>
 														</div>
 
@@ -260,6 +269,140 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
+            //
+            function validateEmail(librarian_email) {
+          //  alert("hii....validateEmail");
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(librarian_email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(lib_con_num) {
+            	 // alert("hii....validateMobile");
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(lib_con_num)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }
+             
+            
+            	$(document).ready(function($){
+            //	alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#librarian_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid Name.</li>';
+            				
+            				$("#librarian_name").addClass("has-error")
+            				$("#error_name").show()
+            					//return false;
+            				} else {
+            					$("#error_name").hide()
+            				}
+            				 
+            				if(!$("#lib_con_num").val() || !validateMobile($("#lib_con_num").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert = 'Please enter a valid mobile number.';
+            				$("#error_contact").html(errMsg_alert);
+            				$("#error_contact").show();
+            				//alert();
+            					//return false;
+            				} else {
+            					
+            					$("#error_contact").hide()
+            				}
+            				
+            				
+            				if(!$("#librarian_email").val() || !validateEmail($("#librarian_email").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_email").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_email").hide()
+            				}
+            				
+            				
+            				if($("#lib_quolf").val()== -1 ){
+            		            
+                				isError=true;
+                				errMsg += '<li>Please Select Qualification</li>';
+                				errMsg_alert += 'Please Select Qualification \n';
+                				$("#error_quol").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_quol").hide()
+                				}
+            				
+            				
+            				if(!$("#lib_joiningDate").val()){
+            		            
+                				isError=true;
+                				errMsg += '<li>Please Select Date</li>';
+                				errMsg_alert += 'Please Select Date \n';
+                				$("#error_jDate").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_jDate").hide()
+                				}
+                
+            				
+
+           				 if(($("input[name=conf_type]:checked").val())!=1){
+           					 isError=true;
+                				errMsg += '<li>Please enter a valid Name.</li>';
+                				
+                				$("#relieving_date").addClass("has-error")
+                				$("#error_rDate").show()
+                					//return false;
+                				} else {
+                					$("#error_rDate").hide()
+                				}
+            
+       if (!isError) {
+			var x = confirm("Do you really want to submit the form?");
+			if (x == true) {
+				return  true;
+				 document.getElementById("sub1").disabled=true;
+				  document.getElementById("sub2").disabled=true;
+			}
+		}
+
+            						  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 	<script type="text/javascript">
 	
 
@@ -405,7 +548,7 @@ function checkUnique(inputValue,valueType){
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
 
 
 

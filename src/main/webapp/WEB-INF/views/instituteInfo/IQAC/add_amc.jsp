@@ -98,7 +98,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteAMC"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										>
 
 										<div class="form-group">
 
@@ -109,7 +109,9 @@
 												<input type="text" class="form-control" id="amc_title"
 													autocomplete="off" name="amc_title"
 													placeholder="Title of Maintenance" value="${editInst.amcTitle}"
-													required>
+													>
+	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Title </span>	
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -122,7 +124,9 @@
 													onkeypress="return allowOnlyNumber(event)"
 													id="amc_expenditure" min="0" name="amc_expenditure"
 													placeholder="AMC Expenditure" autocomplete="off"
-													value="${editInst.amcExpenditure}" required>
+													value="${editInst.amcExpenditure}" >
+	<span class="error_form text-danger" id="error_exp" style="display:none;" >Please Enter AMC Expenditure  </span>	
+
 											</div>
 										</div>
 
@@ -135,7 +139,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_company"
 													name="amc_company" placeholder="Name of Company"
-													autocomplete="off" value="${editInst.amcCompany}" required>
+													autocomplete="off" value="${editInst.amcCompany}" >
+	<span class="error_form text-danger" id="error_comp" style="display:none;" >Please Enter Company Name </span>	
+
 											</div>
 										</div>
 
@@ -147,7 +153,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_remark"
 													name="amc_remark" placeholder="AMC Remark"
-													autocomplete="off" value="${editInst.amcRemarks}" required>
+													autocomplete="off" value="${editInst.amcRemarks}" >
+	<span class="error_form text-danger" id="error_amc" style="display:none;" >Please Enter Remark </span>	
+
 											</div>
 										</div>
 
@@ -189,6 +197,105 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+	<script>
+           
+             function numbersOnlyNotZero(id_number) {
+
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 if(!$("#amc_title").val()){
+        					 
+             				isError=true;
+             				
+             				
+             				$("#amc_title").addClass("has-error")
+             				$("#error_name").show()
+             					//return false;
+             				} else {
+             					$("#error_name").hide()
+             				}
+            			 
+            			 
+            			 if(!$("#amc_expenditure").val() || !numbersOnlyNotZero($("#amc_expenditure").val())){
+            		            
+             				isError=true;
+             				
+             				$("#error_exp").show()
+             					//return fregister_useralse;
+             				} else {
+             					$("#error_exp").hide()
+             				}
+             				
+             			
+            			 if(!$("#amc_company").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#amc_company").addClass("has-error")
+              				$("#error_comp").show()
+              					//return false;
+              				} else {
+              					$("#error_comp").hide()
+              				}
+            			 
+            			 
+
+            			 if(!$("#amc_remark").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#amc_remark").addClass("has-error")
+              				$("#error_amc").show()
+              					//return false;
+              				} else {
+              					$("#error_amc").hide()
+              				}
+            			 
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 <script type="text/javascript">
 function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 

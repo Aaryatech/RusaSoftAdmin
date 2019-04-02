@@ -97,9 +97,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertStudent"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" novalidate="novalidate"
+										name="form_sample_2" id="form_sample_2">
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -122,10 +121,12 @@
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="student_name" pattern="^(?!\s*$).+"
-																value="${editStudent.studentName}" required
+																<input type="text" class="form-control" id="student_name" 
+																value="${editStudent.studentName}" 
 																	name="student_name" placeholder="Student Name"
 																	>
+											 <span class="error_form text-danger" id="error_name" style="display:none;" >Please enter Student Name</span>
+																	
 															</div>
 														</div>
 
@@ -135,12 +136,12 @@
 													Year  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<select id="academic_year" name="academic_year" class="form-control" required>
+													<select id="academic_year" name="academic_year" class="form-control" >
 																<%-- <c:forEach items="${acaYearList}" var="acaYear">
 																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
 																	
 																	</c:forEach> --%>
-																	
+																		<option value="-1">Select</option>
 																		<c:forEach items="${acaYearList}" var="acaYearList">
 																		<c:choose>
 																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
@@ -157,6 +158,7 @@
 																	</c:forEach>
 
 													</select>
+													 <span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Academic Year</span>
                                        </div>
 										</div>		
 													
@@ -168,9 +170,9 @@
 													Department  <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<select id="stud_branch" name="stud_branch" class="form-control" required>
+													<select id="stud_branch" name="stud_branch" class="form-control" >
 														
-																	
+																		<option value="-1">Select</option>
 																		<c:forEach items="${deptList}" var="dept">
 																		<c:choose>
 																			<c:when test="${dept.deptId==editStudent.deptId}">
@@ -187,6 +189,7 @@
 																	</c:forEach>
 
 													</select>
+							 <span class="error_form text-danger" id="error_dept" style="display:none;" >Please Select Department</span>
                                        </div>
 										</div>		
 															
@@ -197,8 +200,9 @@
 															<div class="col-sm-6">
 																<input type="text" 
 																	maxlength="10" class="form-control" id="id_number"
-																	value="${editStudent.idNo}"  pattern="^(?!\s*$).+"
-																	name="id_number" placeholder="ID Number" required>
+																	value="${editStudent.idNo}"  
+																	name="id_number" placeholder="ID Number" >
+													<span class="error_form text-danger" id="error_Id" style="display:none;" >Please Enter ID Properly</span>
 															</div>
 														</div>
 
@@ -207,10 +211,12 @@
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+																<input type="text" 
 																	maxlength="10" class="form-control" id="stud_contact_no"
 																	value="${editStudent.contactNo}" onchange="checkUnique(this.value,1)"
-																	name="stud_contact_no" placeholder="Mobile No" required>
+																	name="stud_contact_no" placeholder="Mobile No" >
+																	
+														 <span class="error_form text-danger" id="error_contact" style="display:none;" >Enter Contact Number</span>
 															</div>
 														</div>
 
@@ -220,8 +226,9 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="email" class="form-control" id="student_email"
-																value="${editStudent.email}" onchange="checkUnique(this.value,2)"pattern="[\w-]+@([\w-]+\.)+[\w-]+"
-																	name="student_email" placeholder="abc@xyz.com" required>
+																value="${editStudent.email}" onchange="checkUnique(this.value,2)"
+																	name="student_email" placeholder="abc@xyz.com" >
+									<span class="error_form text-danger" id="error_email" style="display:none;" >Enter Proper Email Id </span>
 															</div>
 														</div>
 
@@ -266,9 +273,159 @@
 
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
-
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<!-- END CONTENT -->
+<script>
+            //
+            function validateEmail(student_email) {
+          //  alert("hii....validateEmail");
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(student_email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(stud_contact_no) {
+            	 // alert("hii....validateMobile");
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(stud_contact_no)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }
+             
+             function numbersOnlyNotZero(id_number) {
 
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+            //	alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#student_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid Name.</li>';
+            				
+            				$("#student_name").addClass("has-error")
+            				$("#error_name").show()
+            					//return false;
+            				} else {
+            					$("#error_name").hide()
+            				}
+            				 
+            				if(!$("#stud_contact_no").val() || !validateMobile($("#stud_contact_no").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert = 'Please enter a valid mobile number.';
+            				$("#error_contact").html(errMsg_alert);
+            				$("#error_contact").show();
+            				//alert();
+            					//return false;
+            				} else {
+            				
+            					$("#error_contact").hide()
+            				}
+            				
+            				
+            				if(!$("#student_email").val() || !validateEmail($("#student_email").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_email").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_email").hide()
+            				}
+            				
+            				
+            				if($("#academic_year").val()== -1 ){
+            		            
+                				isError=true;
+                				errMsg += '<li>Please Select Academic Year</li>';
+                				errMsg_alert += 'Please Select Academic Year \n';
+                				$("#error_year").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_year").hide()
+                				}
+            				
+
+            				if(!$("#id_number").val() || !numbersOnlyNotZero($("#id_number").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_Id").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_Id").hide()
+            				}
+            				
+
+							if($("#stud_branch").val()== -1 ){
+            		            
+                				isError=true;
+                				errMsg += '<li>Please Select Branch </li>';
+                				errMsg_alert += 'Please Select Branch \n';
+                				$("#error_dept").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_dept").hide()
+                				}
+            				
+            				
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 <script type="text/javascript">
 function submit_f(view){
@@ -283,7 +440,7 @@ function submit_f(view){
 		
 	}
 	
-	
+/* 	
 var wasSubmitted = false;    
 function checkBeforeSubmit(){
   if(!wasSubmitted) {
@@ -297,7 +454,7 @@ function checkBeforeSubmit(){
 	  }
   }
   return false;
-}    
+}     */
 	</script>
 	
 	
@@ -383,7 +540,7 @@ function checkUnique(inputValue,valueType){
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
 
 
 
