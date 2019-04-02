@@ -96,8 +96,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertJournal"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
 
 
 
@@ -150,11 +149,6 @@
 												</c:otherwise>
 											</c:choose>
 
-											<!-- <div class="col-sm-6">
-																National <input type="radio" name="jouStd" id="jouStd"
-																	checked value="0"> International<input
-																	type="radio" name="jouStd" id="jouStd" value="1">
-															</div> -->
 										</div>
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="journalName">Name
@@ -163,8 +157,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="journalName"
 													name="journalName" placeholder="Name of journal"
-													value="${editJournal.journalName}" autocomplete="off"
-													value="" required>
+													value="${editJournal.journalName}" autocomplete="off">
+												<span class="error_form text-danger" id="error_jName"
+													style="display: none;">Please enter Journal Name</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -214,14 +209,6 @@
 												</c:otherwise>
 											</c:choose>
 
-
-
-											<!-- 	<div class="col-sm-2">
-																Yes <input type="radio" name="journalType"
-																	id="journalType" checked value="0"> No<input
-																	type="radio" name="journalType" id="journalType"
-																	value="1">
-															</div> -->
 										</div>
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="journalYear">Year
@@ -229,15 +216,11 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepickeryear"
-													required data-min-view-mode="years" data-start-view="2"
+													data-min-view-mode="years" data-start-view="2"
 													value="${editJournal.journalYear}" autocomplete="off"
 													placeholder="Year of Publication" name="journalYear"
 													id="journalYear" data-format="yyyy">
-												<%-- <input
-																	type="text" class="form-control datepicker"
-																	id="journalYear" name="journalYear"
-																	value="${editJournal.journalYear}" autocomplete="off"
-																	placeholder="Year of Publication" value="" required> --%>
+
 											</div>
 
 										</div>
@@ -250,7 +233,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="issue"
 													value="${editJournal.journalIssue}" autocomplete="off"
-													name="issue" placeholder="Issue" value="" required>
+													name="issue" placeholder="Issue"> <span
+													class="error_form text-danger" id="error_issue"
+													style="display: none;">Please enter Journal Issue</span>
 											</div>
 
 										</div>
@@ -261,9 +246,9 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="volume"
 													min="0" value="${editJournal.journalVolume}"
-													autocomplete="off"
-													onkeypress="return allowOnlyNumber(event)" name="volume"
-													placeholder="Volume" value="" required>
+													autocomplete="off" name="volume" placeholder="Volume">
+												<span class="error_form text-danger" id="error_volume"
+													style="display: none;">Please enter Journal Volume</span>
 											</div>
 
 
@@ -279,10 +264,12 @@
 											</label>
 											<div class="col-sm-2">
 												<input type="number" class="form-control" id="journalPgFrom"
-													name="journalPgFrom" onchange="checkJournalForm()" min="0"
-													onkeypress="return allowOnlyNumber(event)"
+													name="journalPgFrom" min="0"
 													value="${editJournal.journalPgFrom}" autocomplete="off"
-													placeholder="Page No From" required>
+													placeholder="Page No From"> <span
+													class="error_form text-danger" id="error_journalPgFrom"
+													style="display: none;">Please enter Journal Page
+													From</span>
 											</div>
 											<input type="hidden" value="${editJournal.journalId}"
 												name="journalId" id="journalId"> <label
@@ -294,18 +281,18 @@
 											<div class="col-sm-2">
 												<input type="number" class="form-control" id="journalPgTo"
 													autocomplete="off" name="journalPgTo" min="0"
-													onchange="checkJournalForm()" placeholder="Page No To"
-													onkeypress="return allowOnlyNumber(event)"
-													value="${editJournal.journalPgTo}" required>
+													placeholder="Page No To" value="${editJournal.journalPgTo}">
+												<span class="error_form text-danger" id="error_journalPgTo"
+													style="display: none;">Please enter Journal Page To</span>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													onclick="submit_f(1)" value="Save" id="sub_button">
+												<input type="submit" class="btn btn-primary"
+													id="sub_button_next" onclick="submit_f(0)"
+													value="Save & Next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
@@ -316,7 +303,7 @@
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mandatory.</p>
+										are Mandatory.</p>
 								</div>
 
 							</div>
@@ -351,6 +338,18 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+        $(function () {
+		 
+            $('.datepickeryear').datepicker({
+				autoclose: true,
+				minViewMode: 2,
+		         format: 'yyyy'
+
+			});
+        });
+    </script>
+
 
 	<script type="text/javascript">
 function submit_f(view){
@@ -382,27 +381,22 @@ function submit_f(view){
 	    }
 	    return true;
 	}
+	 function numbersOnlyNotZero(value) {
+
+	        
+	        var mob = /^[1-9][0-9]+$/;
+
+
+	        if (mob.test($.trim(value)) == false) {
+
+	            //alert("Please enter a valid email address .");
+	            return false;
+
+	        }
+	        return true;
+	    }
 	</script>
-	<!-- 	<script type="text/javascript">
-		function checkJournalForm() {
-			 
-			alert("hii");
-		 
-				var journalPgFrom = document.getElementById("journalPgFrom").value;
-				var journalPgTo = document.getElementById("journalPgTo").value;
-				
-				alert(journalPgFrom);
-				alert(journalPgTo);
-				if(parseFloat(journalPgFrom) < parseFloat(journalPgTo))
-					{
-					alert("Please Enter Right Page No ");
-					document.getElementById("journalPgFrom").value = "";
-					document.getElementById("journalPgTo").value = "";
-					}
-			 
- 
-		}
-		</script> -->
+
 
 	<script>
 		function checkJournalForm() {
@@ -432,17 +426,95 @@ function submit_f(view){
 		}
 	</script>
 
-	<script type="text/javascript">
-        $(function () {
-		 
-            $('.datepickeryear').datepicker({
-				autoclose: true,
-				minViewMode: 2,
-		         format: 'yyyy'
-
-			});
-        });
-    </script>
+	<script>
+	   
+            	$(document).ready(function($){
+            	 
+            		$("#formidhere").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#journalName").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#journalName").addClass("has-error")
+            				$("#error_jName").show()
+            					 
+            				} else {
+            					$("#error_jName").hide()
+            				}
+            				
+            				
+            				if(!$("#issue").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#issue").addClass("has-error")
+            				$("#error_issue").show()
+            					 
+            				} else {
+            					$("#error_issue").hide()
+            				}
+            				
+            				if(!$("#volume").val() || !numbersOnlyNotZero($("#volume").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Volume.</li>';
+            				
+            				$("#volume").addClass("has-error")
+            				$("#error_volume").show()
+            					 
+            				} else {
+            					$("#error_volume").hide()
+            				}
+            				
+            				
+            				if(!$("#journalPgFrom").val() || !numbersOnlyNotZero($("#journalPgFrom").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Journal Page From .</li>';
+            				
+            				$("#journalPgFrom").addClass("has-error")
+            				$("#error_journalPgFrom").show()
+            					 
+            				} else {
+            					$("#error_journalPgFrom").hide()
+            				}
+            				
+            				
+            				
+            				if(!$("#journalPgTo").val() || !numbersOnlyNotZero($("#journalPgTo").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Journal Page To.</li>';
+            				
+            				$("#journalPgTo").addClass("has-error")
+            				$("#error_journalPgTo").show()
+            					 
+            				} else {
+            					$("#error_journalPgTo").hide()
+            				}
+             
+            				if(!isError) {
+            					
+            					var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									document.getElementById("sub_button").disabled = true;
+									document.getElementById("sub_button_next").disabled = true;
+									return  true;
+								
+								}
+            					 		  
+            					   } 
+            					   return false;
+            				} );
+            	});
+		  
+        </script>
 
 
 

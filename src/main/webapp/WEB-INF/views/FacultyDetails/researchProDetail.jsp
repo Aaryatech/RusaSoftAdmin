@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertResearchProject"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
 
 
 
@@ -110,7 +109,9 @@
 												<input type="text" class="form-control" id="projName"
 													name="projName" autocomplete="off"
 													value="${editProject.projName}"
-													placeholder="Name of Project" required>
+													placeholder="Name of Project"> <span
+													class="error_form text-danger" id="error_projName"
+													style="display: none;">Please enter Name of Project</span>
 											</div>
 										</div>
 
@@ -122,15 +123,13 @@
 											<div class="col-sm-6">
 
 												<input type="text" class="form-control datepickeryear"
-													required data-min-view-mode="years" data-start-view="2"
+													data-min-view-mode="years" data-start-view="2"
 													value="${editProject.projYear}" autocomplete="off"
 													placeholder="Year of Project Sanction" name="yearOfPS"
-													id="journalYear" data-format="yyyy">
-												<%-- <input type="text" class="form-control datepicker"
-																	id="yearOfPS" autocomplete="off"
-																	value="${editProject.projYear}" name="yearOfPS"
-																 value=""
-																	required> --%>
+													id="yearOfPS" data-format="yyyy"> <span
+													class="error_form text-danger" id="error_yearOfPS"
+													style="display: none;">Please enter Year of Project
+													Sanction</span>
 											</div>
 
 										</div>
@@ -146,8 +145,10 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="spoAuth"
 													name="spoAuth" placeholder="Sponsoring Authority"
-													autocomplete="off" value="${editProject.projSponsor}"
-													value="" required>
+													autocomplete="off" value="${editProject.projSponsor}">
+												<span class="error_form text-danger" id="error_spoAuth"
+													style="display: none;">Please enter Sponsoring
+													Authority</span>
 											</div>
 										</div>
 
@@ -158,8 +159,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="PIName"
 													name="PIName" placeholder="Name of Principal Investigator"
-													autocomplete="off" value="${editProject.projInvName}"
-													required>
+													autocomplete="off" value="${editProject.projInvName}"><span
+													class="error_form text-danger" id="error_PIName"
+													style="display: none;">Please enter Name of
+													Principal Investigator Authority</span>
+
 											</div>
 
 										</div>
@@ -175,8 +179,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="deptName"
 													name="deptName" placeholder="Department Name"
-													autocomplete="off" value="${editProject.projInvDept}"
-													required>
+													autocomplete="off" value="${editProject.projInvDept}">
+												<span class="error_form text-danger" id="error_deptName"
+													style="display: none;">Please enter Name of
+													Department</span>
+
 											</div>
 
 
@@ -193,6 +200,8 @@
 													name="coPrincipal"
 													placeholder="Name of Co-Principal Investigator"
 													autocomplete="off" value="${editProject.projInvName2}">
+
+
 											</div>
 
 										</div>
@@ -220,7 +229,10 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="grant"
 													name="grant" placeholder="Grant" autocomplete="off"
-													value="${editProject.projGrant}" required>
+													value="${editProject.projGrant}"> <span
+													class="error_form text-danger" id="error_grant"
+													style="display: none;">Please enter Grant</span>
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -233,9 +245,9 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="totalAmt"
 													name="totalAmt" placeholder="Total Amount" min="0"
-													onkeypress="return allowOnlyNumber(event)"
-													autocomplete="off" value="${editProject.projTotalAmt}"
-													required>
+													autocomplete="off" value="${editProject.projTotalAmt}">
+												<span class="error_form text-danger" id="error_totalAmt"
+													style="display: none;">Please enter total Amount </span>
 											</div>
 										</div>
 
@@ -249,10 +261,10 @@
 
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="amtRec"
-													min="0" onkeypress="return allowOnlyNumber(event)"
-													name="amtRec" placeholder="Amount Received"
-													autocomplete="off" value="${editProject.projAmtRec}"
-													required>
+													min="0" name="amtRec" placeholder="Amount Received"
+													autocomplete="off" value="${editProject.projAmtRec}">
+												<span class="error_form text-danger" id="error_amtRec"
+													style="display: none;">Please enter Amount Received</span>
 											</div>
 
 
@@ -274,7 +286,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													id="fromDate" name="fromDate" placeholder="From Date"
-													autocomplete="off" value="${editProject.projFrdt}" required>
+													autocomplete="off" value="${editProject.projFrdt}">
+												<span class="error_form text-danger" id="error_fromDate"
+													style="display: none;">Please enter from date </span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -288,7 +302,9 @@
 												<input type="text" class="form-control datepicker"
 													onchange="checkDate()" id="toDate" name="toDate"
 													placeholder="To Date" autocomplete="off"
-													value="${editProject.projTodt}" required>
+													value="${editProject.projTodt}"> <span
+													class="error_form text-danger" id="error_toDate"
+													style="display: none;">Please enter to Date </span>
 											</div>
 
 
@@ -297,11 +313,10 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
+												<input type="submit" class="btn btn-primary" id="sub_button"
 													onclick="submit_f(1)" value="Save"> <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													value="Save & Next" id="sub_button_next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
@@ -373,9 +388,23 @@ function submit_f(view){
 		document.getElementById("is_view").value=view; 
 		
 	}
+	function numbersOnlyNotZero(value) {
+
+        
+        var mob = /^[1-9][0-9]+$/;
+
+
+        if (mob.test($.trim(value)) == false) {
+
+            //alert("Please enter a valid email address .");
+            return false;
+
+        }
+        return true;
+    }
  
 </script>
-	<script>
+	<!-- <script>
 		function checkDate() {
  
 			var fromDate = document.getElementById("fromDate").value;
@@ -390,7 +419,7 @@ function submit_f(view){
 			 
 
 		}
-	</script>
+	</script> -->
 	<script type="text/javascript">
         $(function () {
 		 
@@ -402,6 +431,172 @@ function submit_f(view){
 			});
         });
     </script>
+
+
+
+	<script>
+	   
+            	$(document).ready(function($){
+            	 
+            		$("#formidhere").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#projName").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Project Name.</li>';
+            				
+            				$("#projName").addClass("has-error")
+            				$("#error_projName").show()
+            					 
+            				} else {
+            					$("#error_projName").hide()
+            				}
+            				
+            				
+            				if(!$("#yearOfPS").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Year of Transction.</li>';
+            				
+            				$("#yearOfPS").addClass("has-error")
+            				$("#error_yearOfPS").show()
+            					 
+            				} else {
+            					$("#error_yearOfPS").hide()
+            				}
+            				
+            				
+            				if(!$("#spoAuth").val()){
+           					 
+                				isError=true;
+                				errMsg += '<li>Please enter Sponsoring Authority.</li>';
+                				
+                				$("#spoAuth").addClass("has-error")
+                				$("#error_spoAuth").show()
+                					 
+                				} else {
+                					$("#error_spoAuth").hide()
+                				}
+            				
+            				
+            				if(!$("#PIName").val()){
+              					 
+                				isError=true;
+                				errMsg += '<li>Please enter Principal Investigator.</li>';
+                				
+                				$("#PIName").addClass("has-error")
+                				$("#error_PIName").show()
+                					 
+                				} else {
+                					$("#error_PIName").hide()
+                				}
+            				
+            				
+            				
+            				
+            				
+            				if(!$("#deptName").val()){
+              					 
+                				isError=true;
+                				errMsg += '<li>Please enter Department.</li>';
+                				
+                				$("#deptName").addClass("has-error")
+                				$("#error_deptName").show()
+                					 
+                				} else {
+                					$("#error_deptName").hide()
+                				}
+            				
+            				
+            				
+            				if(!$("#grant").val()){
+              					 
+                				isError=true;
+                				errMsg += '<li>Please enter Grant</li>';
+                				
+                				$("#grant").addClass("has-error")
+                				$("#error_grant").show()
+                					 
+                				} else {
+                					$("#error_grant").hide()
+                				}
+            				
+            				//error_spoAuth
+            				
+            				if(!$("#totalAmt").val() || !numbersOnlyNotZero($("#totalAmt").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Total Amount</li>';
+            				
+            				$("#totalAmt").addClass("has-error")
+            				$("#error_totalAmt").show()
+            					 
+            				} else {
+            					$("#error_totalAmt").hide()
+            				}
+            				
+            				
+            				if(!$("#amtRec").val() || !numbersOnlyNotZero($("#amtRec").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Amount Received.</li>';
+            				
+            				$("#amtRec").addClass("has-error")
+            				$("#error_amtRec").show()
+            					 
+            				} else {
+            					$("#error_amtRec").hide()
+            				}
+            				
+            				//error_fromDate
+            				
+            				
+            				
+            				if(!$("#fromDate").val()){
+           					 
+                				isError=true;
+                				errMsg += '<li>Please enter FromDate.</li>';
+                				
+                				$("#fromDate").addClass("has-error")
+                				$("#error_fromDate").show()
+                					 
+                				} else {
+                					$("#error_fromDate").hide()
+                				}
+                				
+            				
+            				if(!$("#toDate").val()){
+              					 
+                				isError=true;
+                				errMsg += '<li>Please enter to Date.</li>';
+                				
+                				$("#toDate").addClass("has-error")
+                				$("#error_toDate").show()
+                					 
+                				} else {
+                					$("#error_toDate").hide()
+                				}
+                				
+            			 
+            				if(!isError) {
+            					
+            					var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									document.getElementById("sub_button").disabled = true;
+									document.getElementById("sub_button_next").disabled = true;
+									return  true;
+								
+								}
+            					 		  
+            					   } 
+            					   return false;
+            				} );
+            	});
+		  
+        </script>
 
 </body>
 </html>

@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertSubject"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
 
 
 
@@ -111,7 +110,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="subCode"
 													autocomplete="off" placeholder="Subject Code"
-													name="subCode" value="${editSubject.subCode}" required>
+													name="subCode" value="${editSubject.subCode}"> <span
+													class="error_form text-danger" id="error_subCode"
+													style="display: none;">Please enter Subject Code</span>
 											</div>
 										</div>
 
@@ -273,7 +274,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="subName"
 													autocomplete="off" placeholder="Subject Name"
-													name="subName" value="${editSubject.subName}" required>
+													name="subName" value="${editSubject.subName}"> <span
+													class="error_form text-danger" id="error_subName"
+													style="display: none;">Please enter Subject Name</span>
 											</div>
 										</div>
 
@@ -398,10 +401,12 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="noStudApp"
-													min="0" onkeypress="return allowOnlyNumber(event)"
-													onchange="calResult()" autocomplete="off"
+													min="0" onchange="calResult()" autocomplete="off"
 													placeholder="No. of Student Appeared" name="noStudApp"
-													value="${editSubject.subStuAppear}" required>
+													value="${editSubject.subStuAppear}"> <span
+													class="error_form text-danger" id="error_noStudApp"
+													style="display: none;">Please enter No of Students
+													Appeared</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -411,10 +416,12 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="pass" min="0"
-													onkeypress="return allowOnlyNumber(event)"
 													autocomplete="off" placeholder="Passed"
 													onchange="calResult()" name="pass"
-													value="${editSubject.subStuPassed}" required>
+													value="${editSubject.subStuPassed}"> <span
+													class="error_form text-danger" id="error_pass"
+													style="display: none;">Please enter No of Students
+													Passed</span>
 											</div>
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
@@ -427,20 +434,22 @@
 												of Result <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="rslt"
-													onkeypress="return allowOnlyNumber(event)" readonly
+												<input type="text" class="form-control" id="rslt" readonly
 													autocomplete="off" placeholder="% of Result" name="rslt"
-													value="${editSubject.subPassPer}" required>
+													value="${editSubject.subPassPer}"> <span
+													class="error_form text-danger" id="error_rslt"
+													style="display: none;"> </span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													onclick="submit_f(1)" value="Save" id="sub_button">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(0)" value="Save &
+																		Next"
+													id="sub_button_next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
@@ -472,77 +481,23 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Subject Details</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-					<input type="hidden" class="form-control" id="index" name="index"
-						value="0">
 
-					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-
-			var sem = document.getElementById("sem").value
-			var code = document.getElementById("code").value
-			var academicYear = document.getElementById("academicYear").value
-
-			var subTaut = document.getElementById("subTaut").value
-			var subType = document.getElementById("subType").value
-
-			var noStud = document.getElementById("noStud").value
-
-			var pass = document.getElementById("pass").value
-			var rslt = document.getElementById("rslt").value
-			var course = document.getElementById("course").value
-			var isCBCS = document.getElementById("consultancy").value
-			var t = "-";
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add([ i + 1, academicYear,
-
-			sem, code, subTaut, subType, isCBCS, course, noStud, pass, rslt,
-
-			t ]).draw();
-
-			document.getElementById("index").value = i + 1;
-
-		}
+		 
 
 		function calResult() {
 			var noStudApp = parseFloat(document.getElementById("noStudApp").value);
 			var pass = parseFloat(document.getElementById("pass").value);
 			var x = (pass / noStudApp) * 100;
-			if(!isNaN(pass)){
-				if(noStudApp>=pass)
-					{
-				document.getElementById("rslt").value = x.toFixed(2);
-					}
-				else
-					{
+			if (!isNaN(pass)) {
+				if (noStudApp >= pass) {
+					document.getElementById("rslt").value = x.toFixed(2);
+				} else {
 					alert("No of Passed Students should be less than appeared student ");
 					document.getElementById("rslt").value = " ";
 					document.getElementById("pass").value = " ";
-					}
+				}
 			}
 
 		}
@@ -555,6 +510,36 @@
 
 		}
 	</script>
+
+
+
+	<script>
+		function checkJournalForm() {
+
+			var journalPgFrom = document.getElementById("journalPgFrom").value;
+			var journalPgTo = document.getElementById("journalPgTo").value;
+
+			var len = journalPgTo.length;
+
+			var valid = true;
+
+			if (len != 0) {
+				if (parseFloat(journalPgFrom) > parseFloat(journalPgTo)) {
+
+					valid = false;
+				}
+
+				if (valid == false) {
+
+					alert("Enter Journal From   less than Journal To ");
+					//document.getElementById("pmin_stock").value="";
+					document.getElementById("journalPgTo").value = "";
+				}
+			}
+
+		}
+	</script>
+
 
 	<script type="text/javascript">
 	function allowOnlyNumber(evt){
@@ -578,35 +563,103 @@
 	    }
 	    return true;
 	}
+	 function numbersOnlyNotZero(value) {
+
+	        
+	        var mob = /^[1-9][0-9]+$/;
+
+
+	        if (mob.test($.trim(value)) == false) {
+
+	            //alert("Please enter a valid email address .");
+	            return false;
+
+	        }
+	        return true;
+	    }
 	</script>
+
+
 
 	<script>
-		function checkJournalForm() {
+	   
+            	$(document).ready(function($){
+            	 
+            		$("#formidhere").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#subCode").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter Subject Code.</li>';
+            				
+            				$("#subCode").addClass("has-error")
+            				$("#error_subCode").show()
+            					 
+            				} else {
+            					$("#error_subCode").hide()
+            				}
+            				
+            				
+            				if(!$("#subName").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a Subject name.</li>';
+            				
+            				$("#subName").addClass("has-error")
+            				$("#error_subName").show()
+            					 
+            				} else {
+            					$("#error_subName").hide()
+            				}
+            				
+            				if(!$("#noStudApp").val() || !numbersOnlyNotZero($("#noStudApp").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter No. of Students Passed.</li>';
+            				
+            				$("#noStudApp").addClass("has-error")
+            				$("#error_noStudApp").show()
+            					 
+            				} else {
+            					$("#error_noStudApp").hide()
+            				}
+            				
+            				
+            				if(!$("#pass").val() || !numbersOnlyNotZero($("#pass").val())){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter No. of Students Passed.</li>';
+            				
+            				$("#pass").addClass("has-error")
+            				$("#error_pass").show()
+            					 
+            				} else {
+            					$("#error_pass").hide()
+            				}
+            				
+            				
+            				
+            			 
+            				if(!isError) {
+            					
+            					var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									document.getElementById("sub_button").disabled = true;
+									document.getElementById("sub_button_next").disabled = true;
+									return  true;
+								
+								}
+            					 		  
+            					   } 
+            					   return false;
+            				} );
+            	});
+		  
+        </script>
 
-			var journalPgFrom = document.getElementById("journalPgFrom").value;
-			var journalPgTo = document.getElementById("journalPgTo").value;
-		 
-			var len= journalPgTo.length;
-			  
-			
-			var valid = true;
-			
-			if(len!=0){
-			if (  parseFloat(journalPgFrom) > parseFloat(journalPgTo)  ) {
-
-				valid = false;
-			} 
-
-			if (valid == false) {
-				
-				alert("Enter Journal From   less than Journal To ");
-				//document.getElementById("pmin_stock").value="";
-				document.getElementById("journalPgTo").value="";
-			}
-		}
-
-		}
-	</script>
 
 </body>
 </html>
