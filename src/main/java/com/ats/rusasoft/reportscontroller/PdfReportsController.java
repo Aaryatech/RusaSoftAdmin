@@ -39,6 +39,7 @@ import org.zefer.pd4ml.PD4PageMark;*/
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.StaffList;
+import com.ats.rusasoft.util.ItextPageEvent;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -122,12 +123,28 @@ public class PdfReportsController {
 
 			e.printStackTrace();
 		}
+		
+		String header = "Faculty List";
+
+		String title = "                 ";
+
+		DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
+		String repDate = DF2.format(new Date());
+
+
+		ItextPageEvent event = new ItextPageEvent(header, title, repDate);
+
+		writer.setPageEvent(event);
+
+		
+		
 
 		PdfPTable table = new PdfPTable(7);
 		try {
 			System.out.println("Inside PDF Table try");
 			table.setWidthPercentage(100);
 			table.setWidths(new float[] { 2.4f, 3.4f, 3.2f, 3.2f, 3.2f, 3.2f, 4.2f});
+			
 			Font headFont = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
 			Font headFont1 = new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
 			headFont1.setColor(BaseColor.WHITE);
@@ -176,6 +193,7 @@ public class PdfReportsController {
 			table.addCell(hcell);
 			
 			int index = 0;
+		
 			for (StaffList work : staffList) {
 				index++;
 				PdfPCell cell;
@@ -234,6 +252,7 @@ public class PdfReportsController {
 		
 
 			}
+		
 			document.open();
 			Paragraph name = new Paragraph("RUSA Faculty\n", f);
 			name.setAlignment(Element.ALIGN_CENTER);
