@@ -97,7 +97,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertDept"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+									>
 
 										<div class="col-xs-12">
 
@@ -108,8 +108,9 @@
 												<div class="col-sm-9">
 													<input type="text"  class="form-control" id="dept_name"
 														maxlength="80" onchange="trim(this)" name="dept_name"
-														placeholder="Deptartment Name" value="${dept.deptName}"
-			 											required>
+														placeholder="Deptartment Name" value="${dept.deptName}">
+			 											<span class="error_form text-danger" id="dept_name_field"
+															style="display: none;">Please enter department name</span>
 												</div>
 
 												<input type="hidden" id="dept_id" name="dept_id"
@@ -158,6 +159,55 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#dept_name").val()) {
+													isError = true;
+
+													$("#dept_name").addClass(
+															"has-error")
+													$("#dept_name_field")
+															.show()
+												} else {
+													$("#dept_name_field")
+															.hide()
+												}
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 
 	<script type="text/javascript">
 		var wasSubmitted = false;

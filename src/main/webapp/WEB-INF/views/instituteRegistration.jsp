@@ -746,8 +746,8 @@
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
-														return  true;
 														document.getElementById("sub_button").disabled = true;
+														return  true;
 													}
 												}
 												return false;

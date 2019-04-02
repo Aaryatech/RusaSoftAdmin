@@ -115,39 +115,17 @@
 											<div class="tab-pane fade in active" id="home"> -->
 <form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertHod"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2">
 													<div class="row">
 													<div class="col-md-12">
 
-
-												
-
-														<!-- <div class="form-group">
-															<label class="control-label col-sm-2" for="status">Select
-																Department : <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="deptId" name="deptId" class="form-control"
-																	required>
-																	<option value="0">Information Technology</option>
-																	<option value="1">Computer</option>
-
-
-																</select>
-															</div>
-														</div> -->
-
-
-
-
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="page_name">
-																Department :<span class="text-danger">*</span>
+																Department<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
 																<select id="hod_dept_id" name="hod_dept_id"
-																	class="form-control" required>
+																	class="form-control">
 																	<c:forEach items="${deptList}" var="dept">
 																		<c:choose>
 																			<c:when test="${hod.deptId==dept.deptId}">
@@ -164,18 +142,26 @@
 																	</c:forEach>
 
 																</select>
+																<span
+															class="error_form text-danger" id="hod_dept_id_field"
+															style="display: none;">Please select department
+															name</span>
 															</div>
 														</div>
 
 
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="page_name">HOD
-																Name :<span class="text-danger">*</span>
+																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
 																<input type="text" class="form-control" id="hod_name" onchange="trim(this)" maxlength="100"
 																	value="${hod.hodName}" name="hod_name"
-																	placeholder="HOD Name" required>
+																	placeholder="Head of Department Name">
+																	<span
+															class="error_form text-danger" id="hod_name_field"
+															style="display: none;">Please enter hod
+															name</span>
 															</div>
 														</div>
 
@@ -183,11 +169,11 @@
 
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="status">Highest
-																Qualification : <span class="text-danger">*</span>
+																Qualification<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
 																<select id="hod_quolf" name="hod_quolf"
-																	class="form-control" required>
+																	class="form-control">
 																	<c:forEach items="${quolfList}" var="quolf">
 																		<c:choose>
 																			<c:when test="${hod.highestQualificationId==quolf.qualificationId}">
@@ -205,29 +191,26 @@
 																	</c:forEach>
 
 																</select>
+																<span
+															class="error_form text-danger" id="hod_quolf_field"
+															style="display: none;">Please select
+															highest qualification</span>
 															</div>
 														</div>
 
-														<!-- <div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="smallheading">Other
-																Course <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="desn"
-																	name="desn" placeholder="Other Designation" value=""
-																	>
-															</div>
-														</div> -->
+														
 
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="smallheading">Contact
-																No. : <span class="text-danger">*</span>
+																No.<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
 																<input type="text" maxlength="10" class="form-control" id="hod_mob" value="${hod.contactNo}"
-																	name="hod_mob" pattern="^[1-9]{1}[0-9]{9}$" oninput="checkUnique(this.value,1)"
-																	
-																	placeholder="Mobile Number"  required>
+																	name="hod_mob"  oninput="checkUnique(this.value,1)"
+																	placeholder="Mobile Number">
+																	<span
+															class="error_form text-danger" id="hod_mob_field"
+															style="display: none;">Please enter hod mobile no</span>
 															</div>
 														</div>
 
@@ -236,9 +219,12 @@
 																ID(Official) : <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-9">
-																<input type="email"  maxlength="50" class="form-control" id="hod_email"  oninput="checkUnique(this.value,2)"
+																<input type="text"  maxlength="50" class="form-control" id="hod_email"  oninput="checkUnique(this.value,2)"
 																	name="hod_email" placeholder="abc@xyz.com" value="${hod.email}"
-																	required>
+																	>
+																	<span
+															class="error_form text-danger" id="hod_email_field"
+															style="display: none;">Please enter hod email id</span>
 															</div>
 														</div>
 
@@ -298,7 +284,108 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
 
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#hod_dept_id").val()) {
+													isError = true;
+
+													$("#hod_dept_id").addClass(
+															"has-error")
+													$("#hod_dept_id_field")
+															.show()
+												} else {
+													$("#hod_dept_id_field")
+															.hide()
+												}
+
+												if (!$("#hod_name").val()) {
+													isError = true;
+
+													$("#hod_name").addClass(
+															"has-error")
+													$("#hod_name_field")
+															.show()
+												} else {
+													$("#hod_name_field")
+															.hide()
+												}
+
+												if (!$("#hod_quolf").val()) {
+													isError = true;
+
+													$("#hod_quolf").addClass(
+															"has-error")
+													$("#hod_quolf_field").show()
+												} else {
+													$("#hod_quolf_field").hide()
+												}
+
+												if (!$("#hod_mob").val()
+														|| !validateMobile($(
+																"#hod_mob")
+																.val())) {
+													isError = true;
+													$("#hod_mob")
+															.addClass(
+																	"has-error")
+													$("#hod_mob_field")
+															.show()
+												} else {
+													$("#hod_mob_field")
+															.hide()
+												}
+
+												if (!$("#hod_email").val()
+														|| !validateEmail($(
+																"#hod_email")
+																.val())) {
+													isError = true;
+													$("#hod_email").addClass(
+															"has-error")
+													$("#hod_email_field")
+															.show()
+												} else {
+													$("#hod_email_field")
+															.hide()
+												}
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
+	
 	<script type="text/javascript">
 	
 	function checkUnique(inputValue,valueType){

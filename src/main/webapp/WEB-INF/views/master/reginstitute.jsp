@@ -101,7 +101,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstitute"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										>
 
 										<input type="hidden" id="inst_id" name="inst_id"
 											value="${editInst.instituteId}">
@@ -122,7 +122,11 @@
 														<input type="text" onchange="trim(this)"
 															class="form-control" id="inst_name" maxlength="100"
 															value="${editInst.instituteName}" name="inst_name"
-															placeholder="Institute Name" required>
+															placeholder="Institute Name" >
+															<span
+															class="error_form text-danger" id="inst_name_field"
+															style="display: none;">Please enter institute
+															name</span>
 													</div>
 												</div>
 												<div class="form-group">
@@ -133,7 +137,9 @@
 														<input type="text" onchange="trim(this)" maxlength="15"
 															class="form-control" id="aishe_code"
 															value="${editInst.aisheCode}" name="aishe_code"
-															placeholder="AISHE Code" required>
+															placeholder="AISHE Code">
+															<span class="error_form text-danger" id="aishe_code_field"
+															style="display: none;">Please enter AISHE code</span>
 													</div>
 												</div>
 
@@ -148,7 +154,11 @@
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="inst_add"
 															value="${editInst.instituteAdd}" name="inst_add"
-															placeholder="Institute Address" required>
+															placeholder="Institute Address">
+															<span
+															class="error_form text-danger" id="inst_add_field"
+															style="display: none;">Please enter institute
+															address</span>
 													</div>
 												</div>
 
@@ -200,6 +210,9 @@
 
 
 														</c:choose>
+														<span class="error_form text-danger"
+															id="is_registration_field" style="display: none;">Please
+															select yes/no</span>
 
 													</div>
 
@@ -213,7 +226,11 @@
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepicker" autocomplete="off"
 															id="reg_date" value="${editInst.regDate}" name="reg_date"
-															placeholder="Date of Registration" required>
+															placeholder="Date of Registration">
+															 <span
+															class="error_form text-danger" id="reg_date_field"
+															style="display: none;">Please select date of
+															registration</span>
 													</div>
 												</div>
 
@@ -225,7 +242,12 @@
 														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="trusty_name"
 															value="${editInst.trustName}" name="trusty_name"
-															placeholder="Trust/Society Name" value="" required>
+															placeholder="Trust/Society Name">
+															<span
+															class="error_form text-danger" id="trusty_name_field"
+															style="display: none;">Please enter trust/society
+															name</span>
+															
 													</div>
 												</div>
 
@@ -237,7 +259,11 @@
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="trusty_add"
 															value="${editInst.trustAdd}" name="trusty_add"
-															placeholder="Trust/Society Address" value="" required>
+															placeholder="Trust/Society Address">
+															<span
+															class="error_form text-danger" id="trusty_add_field"
+															style="display: none;">Please enter trust/society
+															address</span>
 													</div>
 												</div>
 
@@ -249,7 +275,9 @@
 														<input type="text" value="${editInst.trustContactNo}"
 															maxlength="15" class="form-control" id="trusty_con_no"
 															name="trusty_con_no" placeholder="Official Contact No"
-															required>
+															><span class="error_form text-danger"
+															id="trusty_con_no_field" style="display: none;">Please
+															enter trust/society official contact no</span>
 													</div>
 												</div>
 
@@ -262,7 +290,10 @@
 															class="form-control" id="pres_name"
 															value="${editInst.presidentName}" name="pres_name"
 															placeholder="Name of Chairman/President(Board of Governance)"
-															required>
+															>
+															<span class="error_form text-danger" id="pres_name_field"
+															style="display: none;">Please enter
+															chairman/president (board of governance) name</span>
 													</div>
 												</div>
 
@@ -274,7 +305,11 @@
 														<input type="text" value="${editInst.presidenContact}" onchange="trim(this)"
 															maxlength="15" class="form-control" id="pres_contact"
 															name="pres_contact" placeholder="Chairman Contact No"
-															required>
+															>
+															<span
+															class="error_form text-danger" id="pres_contact_field"
+															style="display: none;">Please enter
+															chairman/president contact no</span>
 													</div>
 												</div>
 
@@ -283,10 +318,13 @@
 														ID(Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="email" maxlength="50" onchange="trim(this)" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
+														<input type="email" maxlength="50" onchange="trim(this)" 
 															class="form-control" id="pres_email"
 															value="${editInst.presidentEmail}" name="pres_email"
-															placeholder="abc@xyz.com" required>
+															placeholder="abc@xyz.com" >
+															<span class="error_form text-danger" id="pres_email_field"
+															style="display: none;">Please enter
+															chairman/president email id</span>
 													</div>
 												</div>
 
@@ -301,7 +339,11 @@
 														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="princ_name"
 															value="${editInst.principalName}" name="princ_name"
-															placeholder="Name of Principal" required>
+															placeholder="Name of Principal">
+															<span
+															class="error_form text-danger" id="princ_name_field"
+															style="display: none;">Please enter principal
+															name</span>
 													</div>
 												</div>
 
@@ -310,11 +352,15 @@
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
+														<input type="text" 
 															maxlength="10" class="form-control" id="princ_contact"
 															value="${editInst.contactNo}" name="princ_contact"
 															placeholder="Mobile No"
-															oninput="checkUnique(this.value,1)" required>
+															oninput="checkUnique(this.value,1)">
+															<span
+															class="error_form text-danger" id="princ_contact_field"
+															style="display: none;">Please enter principal
+															mobile no</span>
 														<p class="desc text-danger fontsize11">Note: OTP will
 															be sent on this mobile number for verification</p>
 													</div>
@@ -327,9 +373,13 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="email" maxlength="50" class="form-control" id="princ_email"
-															value="${editInst.email}" pattern="[\w-]+@([\w-]+\.)+[\w-]+"
+															value="${editInst.email}"
 															oninput="checkUnique(this.value,2)" name="princ_email"
-															placeholder="abc@xyz.com" required>
+															placeholder="abc@xyz.com" >
+															<span
+															class="error_form text-danger" id="princ_email_field"
+															style="display: none;">Please enter principal
+															email id</span>
 														<p class="desc font-italic fontsize11">Note:
 															Verification mail will be sent on this Email id</p>
 													</div>
@@ -491,6 +541,7 @@
 			</div>
 		</div>
 	</div> --%>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 	<script type="text/javascript">
@@ -509,14 +560,14 @@
 			//alert("Value " +value)
 			if (value == 0) {
 				//alert(value)
-				document.getElementById("reg_date").removeAttribute("required");
+				//document.getElementById("reg_date").removeAttribute("required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				document.getElementById("reg_date").setAttribute("required",
-						"true");
+				//document.getElementById("reg_date").setAttribute("required",
+						//"true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -714,10 +765,222 @@
 			return;
 		}
 	</script>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
 
+												if (!$("#inst_name").val()) {
+													isError = true;
 
+													$("#inst_name").addClass(
+															"has-error")
+													$("#inst_name_field")
+															.show()
+												} else {
+													$("#inst_name_field")
+															.hide()
+												}
+
+												if (!$("#aishe_code").val()) {
+													isError = true;
+
+													$("#aishe_code").addClass(
+															"has-error")
+													$("#aishe_code_field")
+															.show()
+												} else {
+													$("#aishe_code_field")
+															.hide()
+												}
+
+												if (!$("#inst_add").val()) {
+													isError = true;
+
+													$("#inst_add").addClass(
+															"has-error")
+													$("#inst_add_field").show()
+												} else {
+													$("#inst_add_field").hide()
+												}
+
+												if (!$("#is_registration")
+														.val()) {
+													isError = true;
+
+													$("#is_registration")
+															.addClass(
+																	"has-error")
+													$("#is_registration_field")
+															.show()
+												} else {
+													$("#is_registration_field")
+															.hide()
+												}
+
+												var x = $("#is_registration")
+														.val();
+												if (x == 1)
+													if (!$("#reg_date").val()) {
+														isError = true;
+
+														$("#reg_date")
+																.addClass(
+																		"has-error")
+														$("#reg_date_field")
+																.show()
+													} else {
+														$("#reg_date_field")
+																.hide()
+													}
+
+												if (!$("#trusty_name").val()) {
+													isError = true;
+
+													$("#trusty_name").addClass(
+															"has-error")
+													$("#trusty_name_field")
+															.show()
+												} else {
+													$("#trusty_name_field")
+															.hide()
+												}
+
+												if (!$("#trusty_add").val()) {
+													isError = true;
+
+													$("#trusty_add").addClass(
+															"has-error")
+													$("#trusty_add_field")
+															.show()
+												} else {
+													$("#trusty_add_field")
+															.hide()
+												}
+
+												if (!$("#trusty_con_no").val()) {
+													isError = true;
+
+													$("#trusty_con_no")
+															.addClass(
+																	"has-error")
+													$("#trusty_con_no_field")
+															.show()
+												} else {
+													$("#trusty_con_no_field")
+															.hide()
+												}
+
+												if (!$("#pres_name").val()) {
+													isError = true;
+													$("#pres_name").addClass(
+															"has-error")
+													$("#pres_name_field")
+															.show()
+												} else {
+													$("#pres_name_field")
+															.hide()
+												}
+
+												if (!$("#pres_contact").val()) {
+													isError = true;
+													$("#pres_contact")
+															.addClass(
+																	"has-error")
+													$("#pres_contact_field")
+															.show()
+												} else {
+													$("#pres_contact_field")
+															.hide()
+												}
+
+												if (!$("#pres_email").val()
+														|| !validateEmail($(
+																"#pres_email")
+																.val())) {
+													isError = true;
+													$("#pres_email").addClass(
+															"has-error")
+													$("#pres_email_field")
+															.show()
+												} else {
+													$("#pres_email_field")
+															.hide()
+												}
+												
+												if (!$("#princ_name").val()) {
+													isError = true;
+													$("#princ_name").addClass(
+															"has-error")
+													$("#princ_name_field")
+															.show()
+												} else {
+													$("#princ_name_field")
+															.hide()
+												}
+
+												if (!$("#princ_contact").val()
+														|| !validateMobile($(
+																"#princ_contact")
+																.val())) {
+													isError = true;
+													$("#princ_contact")
+															.addClass(
+																	"has-error")
+													$("#princ_contact_field")
+															.show()
+												} else {
+													$("#princ_contact_field")
+															.hide()
+												}
+
+												if (!$("#princ_email").val()
+														|| !validateEmail($(
+																"#princ_email")
+																.val())) {
+													isError = true;
+													$("#princ_email").addClass(
+															"has-error")
+													$("#princ_email_field")
+															.show()
+												} else {
+													$("#princ_email_field")
+															.hide()
+												}
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub_button").disabled = true;
+
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 
 </body>
 </html>

@@ -95,17 +95,9 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-
-
-
-
-
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertAccOff"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
-
-
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="page_name">Name
@@ -115,7 +107,10 @@
 												<input type="text" class="form-control" id="acc_off_name"
 													maxlength="100" value="${accOff.accOfficerName}" onchange="trim(this)"
 													name="acc_off_name" placeholder="Account Officer Name"
-													required>
+													>
+													<span
+															class="error_form text-danger" id="acc_off_name_field"
+															style="display: none;">Please enter account officer name</span>
 											</div>
 										</div>
 
@@ -126,20 +121,25 @@
 											<div class="col-sm-9">
 												<input type="text" maxlength="10"  onchange="trim(this)" class="form-control"
 													id="acc_off_mob" value="${accOff.contactNo}"
-													name="acc_off_mob" pattern="^[1-9]{1}[0-9]{9}$"
+													name="acc_off_mob"
 													oninput="checkUnique(this.value,1)"
-													placeholder="Mobile Number" value="" required>
+													placeholder="Account Officer Mobile Number">
+													<span
+															class="error_form text-danger" id="acc_off_mob_field"
+															style="display: none;">Please enter account officer mobile no.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="smallheading">Email
-												ID(Official)<span class="text-danger">*</span>
+												ID <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-9">
-												<input type="email" class="form-control"  onchange="trim(this)" id="acc_off_email"
+												<input type="text" class="form-control"  onchange="trim(this)" id="acc_off_email"
 													oninput="checkUnique(this.value,2)" name="acc_off_email"
-													placeholder="abc@xyz.com" value="${accOff.email}" required>
+													placeholder="Official Email Id of Account Officer" value="${accOff.email}">
+													<span class="error_form text-danger" id="acc_off_email_field"
+															style="display: none;">Please enter account officer email id</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -167,6 +167,8 @@
 													</c:forEach>
 
 												</select>
+												<span class="error_form text-danger" id="acc_quolf_field"
+															style="display: none;">Please select account officer qualification</span>
 											</div>
 										</div>
 
@@ -177,11 +179,10 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
 													id="acc_off_joinDate" value="${accOff.joiningDate}"
-													name="acc_off_joinDate" placeholder="Joining Date" required>
+													name="acc_off_joinDate" placeholder="Joining Date">
+													<span class="error_form text-danger" id="acc_off_joinDate_field"
+															style="display: none;">Please select joining date</span>
 											</div>
-											<!-- </div>
-															
-																		<div class="form-group"> -->
 											<label class="control-label col-sm-3" for="planning"
 												style="text-align: left;">Is Currently Working<span
 												class="text-danger">*</span>
@@ -228,6 +229,8 @@
 
 
 												</c:choose>
+													<span class="error_form text-danger" id="is_registration_field"
+															style="display: none;">Please select account officer work status</span>
 
 											</div>
 										</div>
@@ -241,6 +244,9 @@
 													<input type="text" class="form-control datepicker"
 														id="acc_off_relDate" value="${accOff.realivingDate}"
 														name="acc_off_relDate" placeholder="Relieving Date">
+														<span class="error_form text-danger" id="acc_off_relDate_field"
+															style="display: none;">Please select relieving date</span>
+														
 												</div>
 											</div>
 										</div>
@@ -290,6 +296,136 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#acc_off_name").val()) {
+													isError = true;
+
+													$("#acc_off_name").addClass(
+															"has-error")
+													$("#acc_off_name_field")
+															.show()
+												} else {
+													$("#acc_off_name_field")
+															.hide()
+												}
+
+												if (!$("#acc_quolf").val()) {
+													isError = true;
+
+													$("#acc_quolf").addClass(
+															"has-error")
+													$("#acc_quolf_field")
+															.show()
+												} else {
+													$("#acc_quolf_field")
+															.hide()
+												}
+
+												if (!$("#acc_off_joinDate").val()) {
+													isError = true;
+
+													$("#acc_off_joinDate").addClass(
+															"has-error")
+													$("#acc_off_joinDate_field").show()
+												} else {
+													$("#acc_off_joinDate_field").hide()
+												}
+
+
+												if (!$("#acc_off_mob").val()
+														|| !validateMobile($(
+																"#acc_off_mob")
+																.val())) {
+													isError = true;
+													$("#acc_off_mob")
+															.addClass(
+																	"has-error")
+													$("#acc_off_mob_field")
+															.show()
+												} else {
+													$("#acc_off_mob_field")
+															.hide()
+												}
+
+												if (!$("#acc_off_email").val()
+														|| !validateEmail($(
+																"#acc_off_email")
+																.val())) {
+													isError = true;
+													$("#acc_off_email").addClass(
+															"has-error")
+													$("#acc_off_email_field")
+															.show()
+												} else {
+													$("#acc_off_email_field")
+															.hide()
+												}
+												
+												if (!$("#is_registration").val())
+																{
+													isError = true;
+													$("#is_registration").addClass(
+															"has-error")
+													$("#is_registration_field")
+															.show()
+												} else {
+													$("#is_registration_field")
+															.hide()
+												}
+												
+					var radioValue = $("input[name='is_registration']:checked"). val();
+					//alert(radioValue);
+					if(radioValue==0){
+						if (!$("#acc_off_relDate").val()) {
+							isError = true;
+
+							$("#acc_off_relDate").addClass(
+									"has-error")
+							$("#acc_off_relDate_field").show()
+						} else {
+							$("#acc_off_relDate_field").hide()
+						}
+					}
+
+												 
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -303,29 +439,7 @@
 			});
 		});
 
-		/* function showForm() {
-			//document.getElementById("abc").style = "display:none"
-				var qualType=document.getElementById("qualification").value
-			//alert("qualType::"+qualType);
-				
-				if (qualType == 5) {
-
-					document.getElementById("abc").style = "visible"
-					
-						
-				} 
-				else{
-					document.getElementById("abc").style = "display:none"
-				}
-			
-			} */
-		/* function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-				
-			
-			} */
-	</script>
+			</script>
 
 	<script type="text/javascript">
 		function showDiv(value) {
@@ -346,41 +460,22 @@
 	</script>
 	<script type="text/javascript">
 		function setDate(value) {
-			//alert("Value " +value)
 			if (value == 1) {
-				//alert(value)
-				document.getElementById("acc_off_relDate").removeAttribute(
-						"required");
 				document.getElementById("abc").style.display = "none";
-
-				//alert(value)
 			} else {
-				//alert(value)
-				document.getElementById("acc_off_relDate").setAttribute(
-						"required", "true");
 				document.getElementById("abc").style.display = "block";
-
-				//alert(value)
-
 			}
-
 		}
 	</script>
 	<script type="text/javascript">
 		function showIsReg() {
 			//alert("Hi");
-			var x = $
-			{
-				accOff.officerId
-			}
+			var x = ${accOff.officerId};
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = $
-				{
-					accOff.realivingDate
-				}
-				;
+				var isRel = ${accOff.realivingDate};
+				
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
 					//alert("Hi 2")
@@ -402,10 +497,7 @@
 			document.getElementById("sub1").disabled = false;
 			document.getElementById("sub2").disabled = false;
 
-			var primaryKey = $
-			{
-				accOff.officerId
-			}
+			var primaryKey = ${accOff.officerId};
 			;
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
