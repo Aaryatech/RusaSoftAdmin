@@ -37,10 +37,11 @@
 <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END --> 
 
 
+  
+  <script src="${pageContext.request.contextPath}/resources/assets/plugins/tagsinput/js/bootstrap-tagsinput.min.js" type="text/javascript"></script> 
+  <script src="${pageContext.request.contextPath}/resources/assets/plugins/select2/select2.min.js" type="text/javascript"></script> 
 
-  <script src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.js"></script>
-
-
+ 
 <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END --> 
 <script src="${pageContext.request.contextPath}/resources/assets/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
 
@@ -59,7 +60,7 @@
  <script type="text/javascript">
         $(function () {
 		 
-            $('.datepicker').datepicker({
+            $('.datepicker1111').datepicker({
 				autoclose: true,
                 format: "dd-mm-yyyy",
 				 

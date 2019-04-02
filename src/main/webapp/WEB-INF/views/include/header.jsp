@@ -39,9 +39,8 @@
 <link href="${pageContext.request.contextPath}/resources/assets/plugins/jquery-ui/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="${pageContext.request.contextPath}/resources/assets/plugins/select2/select2.css" rel="stylesheet" type="text/css" media="screen"/>
 
-
-               <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - START --> 
-        <link href="${pageContext.request.contextPath}/resources/assets/plugins/jquery-ui/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" media="screen"/>
+        
+        
 <link href="${pageContext.request.contextPath}/resources/assets/plugins/datepicker/css/datepicker.css" rel="stylesheet" type="text/css" media="screen"/>
 
 	 <link href="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.css" rel="stylesheet" />

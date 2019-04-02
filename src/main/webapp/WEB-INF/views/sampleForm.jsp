@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class="" >
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -96,345 +96,289 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/submitAttendedActivity"
-										method="post" name="submitForm" id="submitForm"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Activity
-											</a></li>
-
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-													<c:set value="0" var="chooseOther"></c:set>
-
-													<div class="col-xs-12">
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="activityName">Name
-																of Activity <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-
-																<c:choose>
-																	<c:when
-																		test="${editProgramActivity.studentActivityId>0}">
-
-																		<select id="activityName" name="activityName"
-																			class="form-control" onchange="showExtraField()"
-																			required>
-
-																			<c:choose>
-																				<c:when
-																					test="${editProgramActivity.activityName eq 'Sports'}">
-
-																					<option value="Sports" selected>Sports</option>
-																					<option value="Cultural">Cultural</option>
-																					<option value="Curricular">Curricular</option>
-																					<option value="Co-curricular">Co-curricular</option>
-																					<option value="Extra Curricular ">Extra
-																						Curricular</option>
-																					<option value="7">Other Competition</option>
-
-																				</c:when>
-																				<c:when
-																					test="${editProgramActivity.activityName eq 'Cultural'}">
-
-																					<option value="Sports">Sports</option>
-																					<option value="Cultural" selected>Cultural</option>
-																					<option value="Curricular">Curricular</option>
-																					<option value="Co-curricular">Co-curricular</option>
-																					<option value="Extra Curricular ">Extra
-																						Curricular</option>
-																					<option value="7">Other Competition</option>
-
-																				</c:when>
-																				<c:when
-																					test="${editProgramActivity.activityName eq 'Curricular'}">
-
-																					<option value="Sports">Sports</option>
-																					<option value="Cultural">Cultural</option>
-																					<option value="Curricular" selected>Curricular</option>
-																					<option value="Co-curricular">Co-curricular</option>
-																					<option value="Extra Curricular ">Extra
-																						Curricular</option>
-																					<option value="7">Other Competition</option>
-
-																				</c:when>
-																				<c:when
-																					test="${editProgramActivity.activityName eq 'Co-curricular'}">
-
-																					<option value="Sports">Sports</option>
-																					<option value="Cultural">Cultural</option>
-																					<option value="Curricular">Curricular</option>
-																					<option value="Co-curricular" selected>Co-curricular</option>
-																					<option value="Extra Curricular ">Extra
-																						Curricular</option>
-																					<option value="7">Other Competition</option>
-
-																				</c:when>
-																				<c:when
-																					test="${editProgramActivity.activityName eq 'Extra Curricular'}">
-
-																					<option value="Sports">Sports</option>
-																					<option value="Cultural">Cultural</option>
-																					<option value="Curricular">Curricular</option>
-																					<option value="Co-curricular">Co-curricular</option>
-																					<option value="Extra Curricular" selected>Extra
-																						Curricular</option>
-																					<option value="7">Other Competition</option>
-
-																				</c:when>
-																				<c:otherwise>
-
-																					<option value="Sports">Sports</option>
-																					<option value="Cultural">Cultural</option>
-																					<option value="Curricular">Curricular</option>
-																					<option value="Co-curricular">Co-curricular</option>
-																					<option value="Extra Curricular">Extra
-																						Curricular</option>
-																					<option value="7" selected>Other
-																						Competition</option>
-																					<c:set value="1" var="chooseOther"></c:set>
-																				</c:otherwise>
-																			</c:choose>
-
-
-
-																		</select>
-
-																	</c:when>
-																	<c:otherwise>
-																		<select id="activityName" name="activityName"
-																			class="form-control" onchange="showExtraField()"
-																			required>
-
-																			<option value="Sports">Sports</option>
-																			<option value="Cultural">Cultural</option>
-																			<option value="Curricular">Curricular</option>
-																			<option value="Co-curricular">Co-curricular</option>
-																			<option value="Extra Curricular ">Extra
-																				Curricular</option>
-																			<option value="7">Other Competition</option>
-																			<c:set value="0" var="chooseOther"></c:set>
-																		</select>
-
-																	</c:otherwise>
-																</c:choose>
-
-
-
-															</div>
-														</div>
-
-
-														<c:choose>
-															<c:when test="${chooseOther==1}">
-
-																<div class="form-group" id="abc">
-																	<label class="control-label col-sm-2"
-																		for="otherActivityName"> Another Activity <span
-																		class="text-danger">*</span>
-																	</label>
-																	<div class="col-sm-10">
-																		<input type="text" maxlength="50" class="form-control"
-																			id="otherActivityName"
-																			value="${editProgramActivity.activityName}"
-																			name="otherActivityName"
-																			placeholder="Another Scheme Name"
-																			onchange="checkUnique(this.value,1)"
-																			title="not Empty Space" pattern="^(?!\s*$).+">
-																	</div>
-																</div>
-
-															</c:when>
-															<c:otherwise>
-																<div class="form-group" id="abc">
-																	<label class="control-label col-sm-2"
-																		for="otherActivityName"> Another Activity <span
-																		class="text-danger">*</span>
-																	</label>
-																	<div class="col-sm-10">
-																		<input type="text" maxlength="50" class="form-control"
-																			id="otherActivityName"
-																			value="${editProgramActivity.activityName}"
-																			name="otherActivityName"
-																			placeholder="Another Scheme Name"
-																			onchange="checkUnique(this.value,1)"
-																			title="not Empty Space" pattern="^(?!\s*$).+">
-																	</div>
-																</div>
-															</c:otherwise>
-														</c:choose>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="date">Date
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker"
-																	id="date" value="${editProgramActivity.date}"
-																	placeholder="Date" name="date" required>
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="year">Year
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control datepickeryear"
-																	id="year" value="${editProgramActivity.year}"
-																	name="year" placeholder="Year" required>
-																<!-- <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy"> -->
-															</div>
-														</div>
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="branch">Branch
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="branch"
-																	value="${editProgramActivity.branch}" name="branch"
-																	placeholder="Branch" required pattern="^(?!\s*$).+"
-																	onchange="return trim(this)">
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="noStudent">
-																No. of Students Participated <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="noStudent"
-																	value="${editProgramActivity.participatedStudent}"
-																	name="noStudent"
-																	placeholder="No. of Students Participated"
-																	title="Only Integer No." pattern="\d*" required>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="participant">No.
-																of Participants<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="number" class="form-control"
-																	id="participant" autocomplete="off" name="participant"
-																	onkeypress="return allowOnlyNumber(event)" min="0"
-																	placeholder="No. of Participants"
-																	value="${page.pageName}" required>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="level">Level
-																of Activity <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="level" name="level" class="form-control"
-																	onchange="showExtraField()" required>
-																	<c:choose>
-																		<c:when
-																			test="${editProgramActivity.level eq 'International'}">
-																			<option value="International" selected>International</option>
-																			<option value="National">National</option>
-																			<option value="Regional">Regional</option>
-																			<option value="State">State</option>
-																		</c:when>
-																		<c:when
-																			test="${editProgramActivity.level eq 'National'}">
-																			<option value="International">International</option>
-																			<option value="National" selected>National</option>
-																			<option value="Regional">Regional</option>
-																			<option value="State">State</option>
-																		</c:when>
-																		<c:when
-																			test="${editProgramActivity.level eq 'Regional'}">
-																			<option value="International">International</option>
-																			<option value="National">National</option>
-																			<option value="Regional" selected>Regional</option>
-																			<option value="State">State</option>
-																		</c:when>
-																		<c:when test="${editProgramActivity.level eq 'State'}">
-																			<option value="International">International</option>
-																			<option value="National">National</option>
-																			<option value="Regional">Regional</option>
-																			<option value="State" selected>State</option>
-																		</c:when>
-																		<c:otherwise>
-																			<option value="International">International</option>
-																			<option value="National">National</option>
-																			<option value="Regional">Regional</option>
-																			<option value="State">State</option>
-																		</c:otherwise>
-																	</c:choose>
-
-
-
-																</select>
-
-
-															</div>
-														</div>
-
-													</div>
-
-												</div>
-
-
-
-
-												<c:choose>
-													<c:when test="${editProgramActivity.studentActivityId>0}">
-														<input type="hidden" id="activityId" name="activityId"
-															value="${editProgramActivity.studentActivityId}">
-													</c:when>
-													<c:otherwise>
-														<input type="hidden" id="activityId" name="activityId"
-															value="0">
-													</c:otherwise>
-												</c:choose>
-												<input type="hidden" id="is_view" name="is_view" value="0">
-												<input type="hidden" id="isOther" name="isOther"
-													value="${chooseOther}">
-												<div class="form-group">
-													<div class="col-sm-offset-2 col-sm-10">
-														<input type="submit" class="btn btn-primary"
-															onclick="submit_f(1)" value="Add"> <input
-															type="submit" class="btn btn-primary"
-															onclick="submit_f(0)"
-															value="Save &
-																		Next">
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
-												</div>
-
-
-												<div class="clearfix"></div>
-
-											</div>
-
-										</div>
-
-									</form>
+									<!-- 	<div class="alert alert-danger" id="regerror"></div> -->
+									 <form class="form-horizontal" action="#" method="post"
+                                            enctype="multipart/form-data" novalidate="novalidate" id="formidhere" >
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                    for="config_smtp_host">Textfields *:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control has-error" name="formfield1" id="formfield1">
+                                                     <span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter mobile</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                    for="mobile">Mobile * :</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="mobile" id="mobile">
+                                                     <span class="error_form text-danger" id="error_mobile" style="display:none;" >Please enter mobile</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                    for="email">email:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="email" id="email">
+                                                      <span class="error_form text-danger" id="error_email" style="display:none;" >Please enter email</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="config_mail_protocol">
+                                                    Simple
+                                                    Select:
+                                                    <!--<span    data-original-title="Only choose 'Mail' unless your host has disabled the php mail function." rel="tooltip" data-color-class = "primary" data-animate=" animated fadeIn" data-toggle="tooltip"   data-placement="top">Help</span>-->
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <select name="config_mail_protocol" id="config_mail_protocol"
+                                                        class="form-control">
+                                                        <option value="mail" selected="">Mail</option>
+                                                        <option value="smtp">SMTP</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="config_smtp_username">Simple
+                                                    Group
+                                                    Select:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" id="config_smtp_username">
+                                                        <option></option>
+                                                        <optgroup label="North America">
+                                                            <option>Alabama</option>
+                                                            <option>Alaska</option>
+                                                            <option>Arizona</option>
+                                                            <option>Arkansas</option>
+                                                            <option>California</option>
+
+                                                        </optgroup>
+                                                        <optgroup label="Europe">
+                                                            <option>Albania</option>
+                                                            <option>Andorra</option>
+                                                            <option>Armenia</option>
+                                                            <option>Austria</option>first_name
+                                                            <option>Azerbaijan</option>
+                                                            <option>Belarus</option>
+                                                            <option>Belgium</option>
+                                                            <option>Bosnia & Herzegovina</option>
+                                                            <option>Bulgaria</option>
+                                                        </optgroup>
+                                                        <optgroup label="Asia">
+                                                            <option>Afghanistan</option>
+                                                            <option>Bahrain</option>
+                                                            <option>Bangladesh</option>
+                                                            <option>Bhutan</option>
+                                                            <option>Brunei</option>
+                                                            <option>Cambodia</option>
+                                                            <option>China</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="aaaaa">Search
+                                                    with
+                                                    Select:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="" id="countryid-1">
+                                                        <option></option>
+                                                        <optgroup label="North America">
+                                                            <option>Alabama</option>
+                                                           register_user <option>Alaska</option>
+                                                            <option>Arizona</option>
+                                                            <option>Arkansas</option>
+                                                            <option>California</option>
+
+                                                        </optgroup>
+                                                        <optgroup label="Europe">
+                                                            <option>Albania</option>
+                                                            <option>Andorra</option>
+                                                            <option>Armenia</option>
+                                                            <option>Austria</option>
+                                                            <option>Azerbaijan</option>
+                                                            <option>Belarus</option>
+                                                            <option>Belgium</option>
+                                                            <option>Bosnia & Herzegovina</option>
+                                                            <option>Bulgaria</option>
+                                                        </optgroup>
+                                                        <optgroup label="Asia">
+                                                            <option>Afghanistan</option>
+                                                            <option>Bahrain</option>
+                                                            <option>Bangladesh</option>
+                                                            <option>Bhutan</option>
+                                                            <option>Brunei</option>
+                                                            <option>Cambodia</option>
+                                                            <option>China</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                    for="bbbbb">Multiple select:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="" id="countryid-2" multiple>
+                                                        <option></option>
+                                                        <optgroup label="United States">
+                                                            <option>Alabama</option>
+                                                            <option>Alaska</option>
+                                                            <option>Arizona</option>
+                                                            <option>Arkansas</option>
+                                                            <option selected>California</option>
+                                                            <option>Colorado</option>
+                                                            <option>Connecticut</option>
+                                                            <option>Delaware</option>
+                                                            <option selected>Florida</option>
+                                                            <option>Georgia</option>
+                                                            <option>Hawaii</option>
+                                                            <option>Idaho</option>
+                                                            <option>Illinois</option>
+                                                            <option>Indiana</option>
+                                                            <option>Iowa</option>
+                                                            <option>Kansas</option>
+                                                            <option>Kentucky[C]</option>
+                                                            <option>Louisiana</option>
+                                                            <option>Maine</option>
+                                                            <option>Maryland</option>
+                                                            <option>Massachusetts[D]</option>
+                                                            <option>Michigan</option>
+                                                            <option>Minnesota</option>
+                                                            <option>Mississippi</option>
+                                                            <option>Missouri</option>
+                                                            <option>Montana</option>
+                                                            <option>Nebraska</option>
+                                                            <option>Nevada</option>
+                                                            <option>New Hampshire</option>
+                                                            <option>New Jersey</option>
+                                                            <option>New Mexico</option>
+                                                            <option>New York</option>
+                                                            <option>North Carolina</option>
+                                                            <option>North Dakota</option>
+                                                            <option>Ohio</option>
+                                                            <option>Oklahoma</option>
+                                                            <option>Oregon</option>
+                                                            <option>Pennsylvania[E]</option>
+                                                            <option>Rhode Island[F]</option>
+                                                            <option>South Carolina</option>
+                                                            <option>South Dakota</option>
+                                                            <option>Tennessee</option>
+                                                            <option>Texas</option>
+                                                            <option>Utah</option>
+                                                            <option>Vermont</option>
+                                                            <option>Virginia[G]</option>
+                                                            <option selected>Washington</option>
+                                                            <option>West Virginia</option>
+                                                            <option>Wisconsin</option>
+                                                            <option>Wyoming</option>
+                                                        </optgroup>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                    for="config_alert_emails">Tags:(&lt;input&gt;)
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="tagsinput-1"
+                                                        data-role="tagsinput"
+                                                        value="Sample tag, Another great tag, Awesome!" />
+
+                                                    <small>Comma sperated</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                    for="config_alert_emails">Tags:(&lt;select&gt;)
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <select multiple data-role="tagsinput">
+                                                        <option value="Amsterdam">Amsterdam</option>
+                                                        <option value="Washington">Washington</option>
+                                                        <option value="Sydney">Sydney</option>
+                                                        <option value="Beijing">Beijing</option>
+                                                        <option value="Cairo">Cairo</option>
+                                                        <option value="Paris">Paris</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="config_alert_emails">Date
+
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control datepicker"
+                                                        data-format="dd-mm-yyyy">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="config_alert_emails">Only
+                                                    year
+
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control datepicker"
+                                                        data-min-view-mode="years" data-start-view="2"
+                                                        data-format="yyyy">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="config_alert_emails">Only
+                                                    month & year
+
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control datepicker"
+                                                        data-min-view-mode="months" data-start-view="2"
+                                                        data-format="mm-yyyy">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2">Start with month</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control datepicker"
+                                                        data-start-view="1">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2">Start with year</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control datepicker"
+                                                        data-start-view="2">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2">From Date</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" id="fromDate" class="form-control datepicker1"
+                                                         >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2">To Date</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" id="toDate" class="form-control datepicker1"
+                                                         >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
 								</div>
 
 							</div>
@@ -450,119 +394,7 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-	<script type="text/javascript" src="./javascript.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false">
-		
-	</script>
-	<script type="text/javascript">
-		function submit_f(view) {
-			//alert(view);
-			document.getElementById("is_view").value = view;
-
-		}
-	</script>
-
-	<script type="text/javascript">
-		function showExtraField() {
-			//alert("hii");
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("activityName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible";
-				document.getElementById("otherActivityName").required = true;
-
-			} else {
-				document.getElementById("abc").style = "display:none";
-				document.getElementById("otherActivityName").required = false;
-			}
-
-		}
-
-		function hideText() {
-			var isOther = document.getElementById("isOther").value;
-
-			if (isOther == 1) {
-				document.getElementById("abc").style = "visible";
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-
-		function trim(el) {
-			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-			replace(/\n +/, "\n"); // Removes spaces after newlines
-			return;
-		}
-	</script>
-	<script type="text/javascript">
-		$(function() {
-			$('#submitForm').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
-
-						return true;
-					});
-		});
-
-		function trim(el) {
-			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-			replace(/\n +/, "\n"); // Removes spaces after newlines
-			return;
-		}
-	</script>
-
-	<script type="text/javascript">
-		function submit_f(view) {
-			//alert(view);
-			document.getElementById("is_view").value = view;
-
-		}
-	</script>
-	<script type="text/javascript">
-		$(function() {
-
-			$('.datepickeryear').datepicker({
-				autoclose : true,
-				minViewMode : 2,
-				format : 'yyyy'
-
-			});
-		});
-	</script>
-
-	<script type="text/javascript">
-	function allowOnlyNumber(evt){
-		
-		var charCode = (evt.which) ? evt.which : event.keyCode
-	    if (charCode == 46){
-	        var inputValue = $("#floor").val();
-	        var count = (inputValue.match(/'.'/g) || []).length;
-	        
-	        if(count<1){
-	            if (inputValue.indexOf('.') < 1){
-	                return true;
-	            }
-	            return false;
-	        }else{
-	            return false;
-	        }
-	    }
-	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
-	        return false;
-	    }
-	    return true;
-	}
-	</script>
+	 
 
 
 	<!-- END CONTAINER -->
@@ -570,7 +402,168 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script>
+
+  $( function() {
+	  
+	  $("#countryid-1").select2({
+          placeholder: 'Select your country...',
+          allowClear: true
+      }).on('select2-open', function() {
+          // Adding Custom Scrollbar
+          $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+      });
 
 
+      $("#countryid-2").select2({
+          placeholder: 'Choose your favorite US Countries',
+          allowClear: true
+      }).on('select2-open', function() {
+          // Adding Custom Scrollbar
+          $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+      });
+
+      
+    var dateFormat = "dd-mm-yyyy",
+      from = $( "#fromDate" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+         
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#toDate" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );regerror
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+  </script>
+  
+  
+ <script>
+            //
+            function validateEmail(email) {
+            
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(mobile) {
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(mobile)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }
+            	$(document).ready(function($){
+            	
+            		$("#formidhere").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#formfield1").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#formfield1").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+            				 
+            				if(!$("#mobile").val() || !validateMobile($("#mobile").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert = 'Please enter a valid mobile number.';
+            				$("#error_mobile").html(errMsg_alert);
+            				$("#error_mobile").show();
+            				//alert();
+            					//return false;
+            				} else {
+            					$("#error_mobile").html("Please enter mobile")
+            					$("#error_mobile").hide()
+            				}
+            				if(!$("#email").val() || !validateEmail($("#email").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_email").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_email").hide()
+            				}
+            
+            		 
+            
+            
+            			  /* if ($('#termcondition').is(':checked')) {
+            				} else {
+            				isError=true;
+            					errMsg += '<li>You must agree to our Term & Conditions.</li>';
+            					errMsg_alert = 'You must agree to our Term & Conditions. \n';
+            					alert(errMsg_alert);
+            					return false;
+            				}
+             */
+            
+            
+            				if(!isError) {
+            					//dataString = $("#regform").serialize();
+            					// alert(weregister_userb_site_url);
+            						$("#regerror").html("");
+            					    $("#regerror").hide();
+            
+            								 //ajax send this to php page
+            						$("#formidhere").submit();
+            								//end ajax send this to php page
+            					   } else {
+            					   $("#regerror").html(errMsg);
+            					    $("#regerror").show();
+            					   }
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 </body>
 </html>
