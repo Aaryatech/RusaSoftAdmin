@@ -107,8 +107,7 @@
  -->
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertFacPersonalDetail"
-												method="post" name="form_sample_2" id="form_sample_2"
-												onsubmit="return checkBeforeSubmit()">
+												method="post" name="form_sample_2" id="form_sample_2">
 												<div class="col-md-12"></div>
 
 												<div class="form-group">
@@ -129,7 +128,9 @@
 													<div class="col-sm-6">
 														<input type="text" onchange="trim(this)" maxlength="200" class="form-control" id="fac_address"
 															name="fac_address" placeholder="Permanent Address"
-															required value="${facPerDetail.fAddress}">
+															value="${facPerDetail.fAddress}">
+															<span class="error_form text-danger" id="fac_address_field"
+															style="display: none;">Please enter permanent address</span>
 													</div>
 												</div>
 
@@ -161,6 +162,8 @@
 													</c:otherwise>
 													
 													</c:choose>
+													<span class="error_form text-danger" id="is_add_same_field"
+															style="display: none;">Please select permanent/correspondence address same or not</span>
 														
 													</div>
 												</div>
@@ -172,6 +175,8 @@
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)"  maxlength="200" class="form-control" id="fac_address2" value="${facPerDetail.fAddress2}"
 															name="fac_address2" placeholder="Correspondence Address">
+															<span class="error_form text-danger" id="fac_address2_field"
+															style="display: none;">Please enter correspondence address</span>
 													</div>
 												</div>
 
@@ -181,11 +186,11 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" readonly class="form-control"  id="fac_mob"
-															name="fac_mob"pattern="^[1-9]{1}[0-9]{9}$"
+															name="fac_mob" pattern="^[1-9]{1}[0-9]{9}$"
 																	maxlength="10"
 															title="Phone number with 7-9 and remaing 9 digit with 0-9"
 															placeholder="Mobile No" value="${staff.contactNo}"
-															required>
+															>
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
@@ -198,6 +203,7 @@
 															name="f_phone" maxlength="15"
 															
 															placeholder="Office Landline No" value="${facPerDetail.fPhone}">
+																
 													</div>
 												</div>
 												<div class="form-group">
@@ -216,10 +222,10 @@
 														ID<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="email" readonly class="form-control" id="f_email"
+														<input type="text" readonly class="form-control" id="f_email"
 															name="f_email"
 															
-															placeholder="abc@xyz.com" value="${staff.email}" required>
+															placeholder="abc@xyz.com" value="${staff.email}">
 													</div>
 												</div>
 												<div class="form-group">
@@ -227,8 +233,10 @@
 														No<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="Text" pattern="^\d{4}\s\d{4}\s\d{4}$" class="form-control" id="f_aadhar"
-															name="f_aadhar" placeholder="1111 2222 3333" value="${facPerDetail.fAadhar}" required>
+														<input type="text"  maxlength="12" class="form-control" id="f_aadhar"
+															name="f_aadhar" placeholder="Consecutive 12 digit Aadhar No" value="${facPerDetail.fAadhar}">
+															<span class="error_form text-danger" id="f_aadhar_field"
+															style="display: none;">Please enter aadhaar no</span>
 													</div>
 												</div>
 												<div class="form-group">
@@ -260,8 +268,10 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"  value="${facPerDetail.fDob}"
-															required>
+															id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"  value="${facPerDetail.fDob}">
+															<span class="error_form text-danger" id="f_dob_field"
+															style="display: none;">Please select date of birth</span>
+															
 													</div>
 												</div>
 
@@ -273,7 +283,7 @@
 														<input type="text" class="form-control datepicker"
 															id="f_doj" name="f_doj"
 															
-															placeholder="Date of Joining" value="${staff.joiningDate}" readonly disabled required>
+															placeholder="Date of Joining" value="${staff.joiningDate}" readonly disabled>
 													</div>
 													<div class="col-sm-2"></div>
 												</div>
@@ -284,7 +294,10 @@
 													<div class="col-sm-6">
 														<input type="number"  min="0"  class="form-control" id="f_prevExp"
 															name="f_prevExp" placeholder="Previous Experience In Months"
-															 value="${facPerDetail.fPastExp}" required>
+															 value="${facPerDetail.fPastExp}">
+															 <span class="error_form text-danger" id="f_prevExp_field"
+															style="display: none;">Please enter previous experience</span>
+															 
 													</div>
 												</div>
 												
@@ -327,6 +340,8 @@
 													</c:otherwise>
 													
 													</c:choose>
+													 <span class="error_form text-danger" id="f_gender_field"
+															style="display: none;">Please select gender</span>
 														
 													</div>
 												</div>
@@ -381,17 +396,143 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+		<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateAadhaar(mobile) {
+			var mob = /^[0-9]{12}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#fac_address").val()) {
+													isError = true;
+
+													$("#fac_address").addClass(
+															"has-error")
+													$("#fac_address_field")
+															.show()
+												} else {
+													$("#fac_address_field")
+															.hide()
+												}
+												
+												
+												
+												var radioValue = $("input[name='is_add_same']:checked"). val();
+												//alert(radioValue);
+												if(radioValue==0){
+													if (!$("#fac_address2").val()) {
+														isError = true;
+
+														$("#fac_address2").addClass(
+																"has-error")
+														$("#fac_address2_field").show()
+													} else {
+														$("#fac_address2_field").hide()
+													}
+												}
+												
+												
+
+													
+													if (!$("#f_aadhar").val()
+															|| !validateAadhaar($(
+																	"#f_aadhar")
+																	.val())) {
+													isError = true;
+
+													$("#f_aadhar").addClass(
+															"has-error")
+													$("#f_aadhar_field")
+															.show()
+												} else {
+													$("#f_aadhar_field")
+															.hide()
+												}
+
+												if (!$("#f_dob").val()) {
+													isError = true;
+
+													$("#f_dob").addClass(
+															"has-error")
+													$("#f_dob_field").show()
+												} else {
+													$("#f_dob_field").hide()
+												}
+
+
+												if (!$("#f_prevExp").val()&&$("#f_prevExp").val()>=0){
+													isError = true;
+													$("#f_prevExp")
+															.addClass(
+																	"has-error")
+													$("#f_prevExp_field")
+															.show()
+												} else {
+													$("#f_prevExp_field")
+															.hide()
+												}
+
+												
+												
+												if (!$("#f_gender").val()) {
+													isError = true;
+
+													$("#f_gender").addClass(
+															"has-error")
+													$("#f_gender_field").show()
+												} else {
+													$("#f_gender_field").hide()
+												}
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 	<script type="text/javascript">
 		function check(qualType) {
 
 			if (qualType == 0) {
 				document.getElementById("abc").style = "visible"
 					
-					document.getElementById("fac_address2").setAttribute("required","true");
+					//document.getElementById("fac_address2").setAttribute("required","true");
 
 			} else if (qualType == 1) {
 				document.getElementById("abc").style = "display:none"
-					document.getElementById("fac_address2").removeAttribute("required");
+				//	document.getElementById("fac_address2").removeAttribute("required");
 
 			}
 

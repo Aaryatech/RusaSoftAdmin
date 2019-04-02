@@ -131,6 +131,8 @@
 																</c:otherwise>
 
 															</c:choose>
+															<span class="error_form text-danger" id="isPhdGuide_field"
+															style="display: none;">Please enter account officer name</span>
 
 														</div>
 													</div>
@@ -144,7 +146,10 @@
 														<div class="col-sm-2">
 															<input type="text" class="form-control datepicker"
 																id="phdRecognitionDt" name="phdRecognitionDt"
-																placeholder="Select Date of Recognition" value="${facPhdDetail.phdRecognitionDt}" required>
+																placeholder="Select Date of Recognition" value="${facPhdDetail.phdRecognitionDt}">
+																
+																<span class="error_form text-danger" id="phdRecognitionDt_field"
+															style="display: none;">Please select date of recognition</span>
 														</div>
 													</div>
 
@@ -154,8 +159,10 @@
 														</label>
 														<div class="col-sm-2">
 															<input type="text" class="form-control datepicker" id="phdValidDt"
-																name="phdValidDt" placeholder="Valid up to Date" value="${facPhdDetail.phdValidDt}"
-																required>
+																name="phdValidDt" placeholder="Valid up to Date" value="${facPhdDetail.phdValidDt}">
+																<span class="error_form text-danger" id="phdValidDt_field"
+															style="display: none;">Please select date of validity</span>
+																
 														</div>
 													</div>
 													<div class="form-group">
@@ -168,7 +175,9 @@
 														<div class="col-sm-2">
 															<input type="number" max="500" min="0" class="form-control" id="phdStuPg"
 																name="phdStuPg" placeholder="PG"
-																value="${facPhdDetail.phdStuPg}" required>
+																value="${facPhdDetail.phdStuPg}" >
+																<span class="error_form text-danger" id="phdStuPg_field"
+															style="display: none;">Please enter number of PG students guided</span>
 														</div>
 
 														<label style="white-space: nowrap;" class="control-label col-sm-1" for="phdStuMphill">M.Phill
@@ -177,7 +186,9 @@
 														<div class="col-sm-2">
 															<input type="number" max="500" min="0" class="form-control" id="phdStuMphill"
 																name="phdStuMphill" placeholder="M.Phill"
-																value="${facPhdDetail.phdStuMphill}" required>
+																value="${facPhdDetail.phdStuMphill}">
+																<span class="error_form text-danger" id="phdStuMphill_field"
+															style="display: none;">Please enter number of M.Phill students guided</span>
 														</div>
 														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D
 															<span class="text-danger">*</span>
@@ -185,7 +196,9 @@
 														<div class="col-sm-2">
 															<input type="number" max="500" min="0" class="form-control" id="phdStuPhd"
 																name="phdStuPhd" placeholder="Ph.D"
-																value="${facPhdDetail.phdStuPhd}" required>
+																value="${facPhdDetail.phdStuPhd}">
+																<span class="error_form text-danger" id="phdStuPhd_field"
+															style="display: none;">Please enter number of phd students guided</span>
 														</div>
 													</div>
 
@@ -212,6 +225,8 @@
 
 																</c:otherwise>
 															</c:choose>
+															<span class="error_form text-danger" id="isIctUsed_field"
+															style="display: none;">Please select use of ICT</span>
 
 														</div>
 													</div>
@@ -248,6 +263,136 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#acc_off_name").val()) {
+													isError = true;
+
+													$("#acc_off_name").addClass(
+															"has-error")
+													$("#acc_off_name_field")
+															.show()
+												} else {
+													$("#acc_off_name_field")
+															.hide()
+												}
+
+												if (!$("#acc_quolf").val()) {
+													isError = true;
+
+													$("#acc_quolf").addClass(
+															"has-error")
+													$("#acc_quolf_field")
+															.show()
+												} else {
+													$("#acc_quolf_field")
+															.hide()
+												}
+
+												if (!$("#acc_off_joinDate").val()) {
+													isError = true;
+
+													$("#acc_off_joinDate").addClass(
+															"has-error")
+													$("#acc_off_joinDate_field").show()
+												} else {
+													$("#acc_off_joinDate_field").hide()
+												}
+
+
+												if (!$("#acc_off_mob").val()
+														|| !validateMobile($(
+																"#acc_off_mob")
+																.val())) {
+													isError = true;
+													$("#acc_off_mob")
+															.addClass(
+																	"has-error")
+													$("#acc_off_mob_field")
+															.show()
+												} else {
+													$("#acc_off_mob_field")
+															.hide()
+												}
+
+												if (!$("#acc_off_email").val()
+														|| !validateEmail($(
+																"#acc_off_email")
+																.val())) {
+													isError = true;
+													$("#acc_off_email").addClass(
+															"has-error")
+													$("#acc_off_email_field")
+															.show()
+												} else {
+													$("#acc_off_email_field")
+															.hide()
+												}
+												
+												if (!$("#is_registration").val())
+																{
+													isError = true;
+													$("#is_registration").addClass(
+															"has-error")
+													$("#is_registration_field")
+															.show()
+												} else {
+													$("#is_registration_field")
+															.hide()
+												}
+												
+					var radioValue = $("input[name='is_registration']:checked"). val();
+					//alert(radioValue);
+					if(radioValue==0){
+						if (!$("#acc_off_relDate").val()) {
+							isError = true;
+
+							$("#acc_off_relDate").addClass(
+									"has-error")
+							$("#acc_off_relDate_field").show()
+						} else {
+							$("#acc_off_relDate_field").hide()
+						}
+					}
+
+												 
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 
 	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
