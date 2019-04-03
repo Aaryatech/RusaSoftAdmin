@@ -149,7 +149,7 @@
 																	</c:forEach>
 
 																</select>
-<span class="error_form text-danger" id="error_year" style="display:none;" >Please enter Student Name</span>
+<span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Year</span>
 															</div>
 														</div>
 
