@@ -97,8 +97,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertRareBookInfo"
 										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										name="form_sample_2" id="form_sample_2">
 
 										
 					<input type="hidden"
@@ -107,12 +106,13 @@
 					<div class="form-group">
 													
 						<label class="control-label col-sm-3" for="bookName"
-						style="text-align: left;"> Name Of Rare Book<span
+						style="text-align: left;"> Title Of Rare Book<span
 						class="text-danger">*</span> </label> 
 						<div class="col-sm-9">
 								<input type="text" autocomplete="off"
-								class="form-control" id="bookName" name="bookName" pattern="^(?!\s*$).+"
-								placeholder="" value="${rareBook.rareBookname}" required>
+								class="form-control" id="bookName" name="bookName" onchange="trim(this)"
+								placeholder="Title of Book" value="${rareBook.rareBookname}">
+								<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of rare book.</span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -120,24 +120,26 @@
 							<label class="control-label col-sm-3" for="publisher"
 						style="text-align: left;">Publisher<span
 						class="text-danger">*</span> </label> 
-						<div class="col-sm-9">
+						<div class="col-sm-9"> 
 								 <input type="text" class="form-control"
 								id="publisher" name="publisher" autocomplete="off"
-								placeholder="Publisher" pattern="^(?!\s*$).+"
-								value="${rareBook.publisher}" required>
+								placeholder="Publisher" onchange="trim(this)"
+								value="${rareBook.publisher}">
+								<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name of Publisher.</span>
 						</div>
 					</div>
 
 					<div class="form-group">
 
 							<label class="control-label col-sm-3" for="noOfBook"
-						style="text-align: left;">No. of Copies of Book <span
+						style="text-align: left;">No. of Copies <span
 						class="text-danger">*</span> </label>
 						<div class="col-sm-9">
-								 <input type="number" min="1" max="99999" class="form-control"
-									id="noOfBook" name="noOfBook" pattern="^(?!\s*$).+"
+								 <input type="text" class="form-control" onkeypress='return restrictAlphabets(event)'
+									id="noOfBook" name="noOfBook"onchange="trim(this)"
 									placeholder="No of Copies for Book" autocomplete="off"
-									value="${rareBook.bookCopies}" required>
+									value="${rareBook.bookCopies}"> 
+									<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of copies and value must be greater than 0.</span>
 						</div>
 					</div>
 					
@@ -146,11 +148,12 @@
 						<label class="control-label col-sm-3" for="costOfBook"
 						style="text-align: left;">Cost Of Rare Book<span
 						class="text-danger">*</span> </label>
-						<div class="col-sm-9">
-							 <input type="number" min="1" max="99999" class="form-control"
+						<div class="col-sm-9"> 
+							 <input type="text" class="form-control" onkeypress='return restrictAlphabets(event)'
 								id="costOfBook" name="costOfBook"  autocomplete="off"
-								placeholder="Cost Of Rare Book" pattern="^(?!\s*$).+"
-								value="${rareBook.costOfBook}" required>ddddddd
+								placeholder="Cost Of Rare Book" onchange="trim(this)"
+								value="${rareBook.costOfBook}">
+								<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter cost of rare book and value must be greater than 0.</span>
 						</div>		
 					</div>
 					
@@ -165,13 +168,14 @@
 									value="${rareBook.publicationYear}" required>
 						</div> --%>
 						<div class="col-sm-9">
-														<input type="text" class="form-control datepickeryear"
-															data-min-view-mode="years" data-start-view="2"
-															data-format="yyyy" placeholder="Year Of Published"
-															id="year" value="${rareBook.publicationYear}"
-															name="year" autocomplete="off"
-															onkeypress='return restrictAlphabets(event)' required>
-													</div>
+							<input type="text" class="form-control datepickeryear"
+								data-min-view-mode="years" data-start-view="2"
+								data-format="yyyy" placeholder="Year Of Published"
+								id="year" value="${rareBook.publicationYear}"
+								name="year" autocomplete="off"
+								onkeypress='return restrictAlphabets(event)' onchange="trim(this)">
+								<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter year of publication.</span>					
+						</div>
 						
 					</div>
 					
@@ -253,10 +257,10 @@
 					</div>
 					<div class="form-group">
 
-						<label class="control-label col-sm-4 for="facilityTitle">Title
+						<label class="control-label col-sm-4" for="facilityTitle">Title
 							of Academic Support Activity</label> <input type="text"
 							class="form-control" id="facilityTitle" name="facilityTitle"
-							placeholder="Title of Academic Support Activity" required>
+							placeholder="Title of Academic Support Activity" onchange="trim(this)">
 					</div>
 					<div class="form-group">
 
@@ -264,7 +268,7 @@
 							Allocated Amount in Rs. </label> <input type="text" class="form-control"
 							id="allocatedAmt" name="allocatedAmt"
 							placeholder="Budget Allocated Amount in Rs"
-							value="${page.pageName}" required>
+							value="${page.pageName}" onchange="trim(this)">
 					</div>
 
 					<div class="form-group">
@@ -273,7 +277,7 @@
 							Utilized Amount in Rs. </label> <input type="text" class="form-control"
 							id="utilizedAmt" name="utilizedAmt"
 							placeholder="Budget Utilized Amount in Rs."
-							value="${page.pageName}" required>
+							value="${page.pageName}" onchange="trim(this)">
 					</div>
 
 					<div class="form-group" style="text-align: center;">
@@ -290,6 +294,113 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		//	alert("hi");
+            			var isError=false;
+            			 var errMsg="";
+            			
+            			
+     						if (!$("#bookName").val()) {
+     							isError = true;
+
+     							$("#bookName").addClass(
+     									"has-error")
+     							$("#error_formfield1").show()
+     						} else {
+     							$("#error_formfield1").hide()
+     						}
+     					
+     						   
+     						if(!$("#publisher").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#publisher").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}  
+        				
+            				//alert($("#userLms").val());
+           				if($("#noOfBook").val()==0){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#noOfBook").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				}
+           				
+           				if($("#costOfBook").val()==0){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#costOfBook").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				}
+           				
+           				if(!$("#year").val()){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#year").addClass("has-error")
+            				$("#error_formfield5").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield5").hide()
+            				}
+           				
+           				/* if(!$("#").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				} */
+           			
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
+	
 <script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,

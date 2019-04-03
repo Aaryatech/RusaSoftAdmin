@@ -94,8 +94,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFacultyActivity"
 										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										name="form_sample_2" id="form_sample_2">
 
 										
 												<div>
@@ -143,7 +142,8 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="activity_name" autocomplete="off"
 															name="activity_name" placeholder="Name of Activity" value="${activity.activityName}"
-															required>
+															onchange="trim(this)">
+															<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter activity name</span>
 													</div>
 
 												</div>
@@ -213,7 +213,8 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker" id="activity_date" onkeypress='return restrictAlphabets(event)'
 																 	value="${activity.activityDate}" name="activity_date"  autocomplete="off"
-																 	 placeholder="dd/mm/yyyy" pattern="^(?!\s*$).+" required>
+																 	 placeholder="dd/mm/yyyy" onchange="trim(this)">
+																 <span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter date of activity</span>
 															</div>
 														</div>
 
@@ -225,7 +226,8 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="activity_part"  onkeypress='return restrictAlphabets(event)'
 															name="activity_part" placeholder="No of Participants" value="${activity.activityParticipants}"
-														autocomplete="off"	required>
+														autocomplete="off"	onchange="trim(this)">
+														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of participants</span>
 													</div>
 												</div>
 
@@ -237,7 +239,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="activity_found" autocomplete="off"
-															name="activity_found" placeholder="Funded By" value="${activity.activityFundedBy}" required>
+															name="activity_found" placeholder="Funded By" value="${activity.activityFundedBy}" onchange="trim(this)">
+														<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter funded by</span>
 													</div>
 
 
@@ -251,7 +254,8 @@
 													<div class="col-sm-6">
 														<input type="number" min="0"  class="form-control" id="amt_sanc"  onkeypress='return restrictAlphabets(event)'
 															name="amt_sanc" placeholder="Amount Sanctioned" value="${activity.activityAmountSanctioned}"
-															autocomplete="off" required>
+															autocomplete="off" onchange="trim(this)">
+															<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount sanctioned</span>
 													</div>
 												</div>
 
@@ -264,16 +268,13 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="0" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
-															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}"
-															autocomplete="off" required onchange="chkSncAmt()">
+															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}" onchange="trim(this)"
+															autocomplete="off">
+															<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter utilized amount and utilized amount must be less than sanctioned amount</span>
 													</div>
 
 
 												</div>
-
-
-
-
 
 
 														<div class="form-group">
@@ -321,25 +322,157 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+              function validateEmail(email) {
+            
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(mobile) {
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(mobile)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }  
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+           				if(!$("#activity_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#activity_name").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+           				if(!$("#activity_date").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#activity_date").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}
+            				
+            				
+           				if(!$("#activity_part").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#activity_part").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				}
+           				
+           				if(!$("#activity_found").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#activity_found").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				}
+           				
+           				if(!$("#amt_sanc").val()){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#amt_sanc").addClass("has-error")
+            				$("#error_formfield5").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield5").hide()
+            				}
+           				
+           				var utamt= parseFloat($("#amt_utilise").val());
+           				var snamt= parseFloat($("#amt_sanc").val());
+           				
+           				 
+
+           				if(!$("#amt_utilise").val() || utamt > snamt ){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#amt_utilise").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				}
+           				
+           				/* if(parseFloat($("#amt_utilise").val()) > parseFloat($("#amt_sanc").val())){
+        					 
+            				isError=true;
+            				errMsg += '<li>Utilized amount is greater than sanctioned amount</li>';
+            				
+            				$("#amt_utilise").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				} */
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
 <script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
-		}
-		
-		function chkSncAmt(){
-			
-			var sancAmt = parseFloat(document.getElementById("amt_sanc").value); 
-			var utlAmt = parseFloat(document.getElementById("amt_utilise").value); 
-			
-			
-			if(utlAmt>sancAmt){
-				document.getElementById("amt_utilise").value = "";
-				alert("Utilized amount is more than Sanctioned amount!");
-				return false;
-				
-			}
 		}
 </script>	
 	

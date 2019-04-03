@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -98,8 +95,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibInfo"
 										method="post" 
-										name="form_sample_2" id="form_sample_2"
-											onsubmit="return checkBeforeSubmit()">
+										name="form_sample_2" id="form_sample_2">
 
 									
 												<div>
@@ -127,13 +123,14 @@
 														<div id="divshow">
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="swName"
-																	style="text-align: left;">Name Of Software <span
+																	style="text-align: left;">Name of Software<span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="swName"
 																		name="swName" placeholder=""
-																		value="${libInfo.softName}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		value="${libInfo.softName}" onchange="trim(this)" autocomplete="off">
+																		<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of software.</span>
 																</div>
 															</div>
 
@@ -145,7 +142,8 @@
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="version"
 																		name="version" placeholder=""
-																		value="${libInfo.softVersion}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		value="${libInfo.softVersion}" onchange="trim(this)" autocomplete="off">
+																		<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter software version.</span>
 																</div>
 															</div>
 															
@@ -155,25 +153,28 @@
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="number" class="form-control" id="userLms"
+																	<input type="text" class="form-control" id="userLms"
 																		name="userLms" placeholder="" 
-																		onkeypress='return restrictAlphabets(event)' min="1" max="999999"
-																		value="${libInfo.usersOfLms}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		onkeypress='return restrictAlphabets(event)'
+																		value="${libInfo.usersOfLms}" onchange="trim(this)" autocomplete="off">
+															<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter total number of users of LMS and value must be greater than 0.</span>
 																</div>
 															</div>
 
 
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="date"
-																	style="text-align: left;"> Date Of
+																	style="text-align: left;"> Date of
 																	Purchase/Automation Lib.  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control datepicker" id="purchaseDate"
 																		name="purchaseDate" onkeypress='return restrictAlphabets(event)'
-																		pattern="^(?!\s*$).+" autocomplete="off" 
+																		onchange="trim(this)" autocomplete="off" 
 																		placeholder="dd/mm/yyyy"
-																		value="${libInfo.dateOfPurchaseAutomation}" required>
+																		value="${libInfo.dateOfPurchaseAutomation}">
+																		<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter date of
+																	purchase/automation Lib. </span>
 																</div>
 															</div>
 
@@ -184,23 +185,25 @@
 																	with LMS  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
-																	<input type="number" min="1" max="99999" class="form-control" id="noOfComp"
+																	<input type="text" class="form-control" id="noOfComp"
 																		name="noOfComp" onkeypress='return restrictAlphabets(event)'
 																		placeholder="" value="${libInfo.noCompLan}"
-																		pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		onchange="trim(this)" autocomplete="off">
+																		<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of Comp in LAN and value must be greater than 0. </span>
 																</div>
 															</div>
 
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="bandwidth"
 																	style="text-align: left;">Bandwidth for
-																	accessing e-resources  <span class="text-danger">*</span>
+																	Accessing E-Resources  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="bandwidth"
-																		name="bandwidth"
-																		placeholder=""
-																		value="${libInfo.bandwidthForAccessingEresources}" pattern="^(?!\s*$).+" autocomplete="off"  required>
+																		name="bandwidth" placeholder=""	value="${libInfo.bandwidthForAccessingEresources}" 
+																		onchange="trim(this)" autocomplete="off">
+																		<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter bandwidth for
+																	accessing e-resources.</span>
 																</div>
 															</div>
 
@@ -333,24 +336,26 @@
 														 -->
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
-																	style="text-align: left;"> Avg. No.  of Teachers Using Library resources per day  <span class="text-danger">*</span>
+																	style="text-align: left;">Avg. No.of Teachers Using Library resources per day<span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="avgTeacher"
 																		name="avgTeacher" placeholder="" value="${libInfo.avgTeacher}"
-																		pattern="^(?!\s*$).+" autocomplete="off" onkeypress='return restrictAlphabets(event)' required>
+																		onchange="trim(this)" autocomplete="off" onkeypress='return restrictAlphabets(event)'>
+																		<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter Avg. No.of teachers using library resources per day.</span>
 																</div>
 															</div>
 															
 														<div class="form-group">
 																<label class="control-label col-sm-4" for="noOfComp"
-																	style="text-align: left;"> Avg. No. of Student Using Library resources per day  <span class="text-danger">*</span>
+																	style="text-align: left;"> Avg. No. of Student Using Library resources per day<span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="avgStud"
 																		name="avgStud"
 																		placeholder="" value="${libInfo.avgTeacher}"
-																		pattern="^(?!\s*$).+" autocomplete="off" onkeypress='return restrictAlphabets(event)' required>
+																		onchange="trim(this)" autocomplete="off" onkeypress='return restrictAlphabets(event)'>
+																<span class="error_form text-danger" id="error_formfield8" style="display:none;" >Please enter Avg. No. of student using library resources per day.</span>
 																</div>
 															</div>
 
@@ -596,6 +601,137 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		//	alert("hi");
+            			var isError=false;
+            			 var errMsg="";
+            				
+            			
+     						if (!$("#swName").val()) {
+     							isError = true;
+
+     							$("#swName").addClass(
+     									"has-error")
+     							$("#error_formfield1").show()
+     						} else {
+     							$("#error_formfield1").hide()
+     						}
+     					
+            			
+     						if(!$("#version").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#version").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}  
+        				
+            				//alert($("#userLms").val());
+           				if($("#userLms").val()==0){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#userLms").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				}
+           				
+           				if(!$("#purchaseDate").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#purchaseDate").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				}
+           				
+           				if($("#noOfComp").val()==0){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#noOfComp").addClass("has-error")
+            				$("#error_formfield5").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield5").hide()
+            				}
+           				
+           				if(!$("#bandwidth").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#noOfComp").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				}
+           				
+           				if($("#avgTeacher").val()==0){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#avgTeacher").addClass("has-error")
+            				$("#error_formfield7").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield7").hide()
+            				}
+           				
+           				if($("#avgStud").val()==0){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#noOfComp").addClass("has-error")
+            				$("#error_formfield8").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield8").hide()
+            				}
+           				
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
+	
 	<script type="text/javascript">
 		$(function() {
 

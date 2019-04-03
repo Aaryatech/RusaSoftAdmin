@@ -99,8 +99,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertOutReachContri"
 										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										name="form_sample_2" id="form_sample_2">
 
 
 												<div>
@@ -156,8 +155,9 @@
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="con_name" autocomplete="off"
-																name="con_name" placeholder="Name " value="${facContri.conName}" required>
+															<input type="text" class="form-control" id="con_name" autocomplete="off" onchange="trim(this)"
+															name="con_name" placeholder="Name " value="${facContri.conName}">
+														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name</span>
 														</div>
 
 
@@ -170,8 +170,9 @@
 														</label>
 
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="university" autocomplete="off"
-																name="university" placeholder="University" value="${facContri.conUniversity}" required>
+															<input type="text" class="form-control" id="university" autocomplete="off"  onchange="trim(this)"
+																name="university" placeholder="University" value="${facContri.conUniversity}">
+																<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter university</span>
 														</div>
 
 													</div>
@@ -184,18 +185,21 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker" id="from_date" onkeypress='return restrictAlphabets(event)'
-																name="from_date" placeholder="From" value="${facContri.conFrom}" autocomplete="off" required>
+																 onchange="trim(this)" name="from_date" placeholder="From" value="${facContri.conFrom}" autocomplete="off">
+														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter from date</span>
 														</div>
 													</div>
 
-													<div class="form-group">
+													<div class="form-group"> 
 
 														<label class="control-label col-sm-2" for="smallheading">To Date
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker" id="to_date" name="to_date" autocomplete="off"
-																placeholder="To" value="${facContri.conTo}" onkeypress='return restrictAlphabets(event)' required>
+																placeholder="To" value="${facContri.conTo}" onchange="dateValidator()"  onchange="trim(this)"
+																onkeypress='return restrictAlphabets(event)'>
+															<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter to date</span>
 														</div>
 
 													</div>
@@ -320,10 +324,106 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+           				if(!$("#con_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#con_name").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+           				if(!$("#university").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}  
+            				
+            				
+           				if(!$("#from_date").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				}
+           				
+           				if(!$("#to_date").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				}
+           				
+           				
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</script>
+<script>
+function dateValidator(){
+	var fromDate = document.getElementById("from_date").value;
+	var toDate = document.getElementById("to_date").value;
+	//var valid = true;
+	//alert(view);
+	if (fromDate > toDate) {
+		document.getElementById("to_date").value="";
+		alert("from date greater than todate ");
+		
+	}
+}
+
+</script>	
+	
 	
 <script type="text/javascript">
+		
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;

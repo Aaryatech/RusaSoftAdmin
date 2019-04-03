@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFacultyConf"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<ul class="nav nav-tabs">
 											<!-- <li class="active"><a href="#home" data-toggle="tab">
@@ -132,9 +131,10 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_name"
-																	pattern="^(?!\s*$).+" name="conf_name"
+																	onchange="trim(this)" name="conf_name"
 																	placeholder="Title of Publication" autocomplete="off"
-																	value="${facConf.confName}" required>
+																	value="${facConf.confName}" >
+																	<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter publication title</span>
 															</div>
 
 
@@ -208,8 +208,8 @@
 																	id="conf_date" autocomplete="off"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_date" placeholder="dd/mm/yyyy"
-																	value="${facConf.confDate}" pattern="^(?!\s*$).+"
-																	required>
+																	value="${facConf.confDate}" onchange="trim(this)">
+																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter valid date</span>
 															</div>
 														</div>
 
@@ -219,9 +219,9 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_venue"
-																	pattern="^(?!\s*$).+" name="conf_venue" autocomplete="off"
-																	placeholder="Venue" value="${facConf.confVenue}"
-																	required>
+																	onchange="trim(this)" name="conf_venue" autocomplete="off"
+																	placeholder="Venue" value="${facConf.confVenue}">
+																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter venu</span>
 															</div>
 
 
@@ -235,9 +235,10 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_fund"
-																	pattern="^(?!\s*$).+" name="conf_fund"
+																	onchange="trim(this)" name="conf_fund"
 																	placeholder="Funding from" autocomplete="off"
-																	value="${facConf.confFundFrom}" required>
+																	value="${facConf.confFundFrom}">
+																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter funding from</span>
 															</div>
 														</div>
 
@@ -251,8 +252,8 @@
 																	id="conf_amt" autocomplete="off"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_amt" placeholder="Amount"
-																	value="${facConf.confFundAmt}" pattern="^(?!\s*$).+"
-																	required>
+																	value="${facConf.confFundAmt}" onchange="trim(this)">
+																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount</span>
 															</div>
 
 														</div>
@@ -310,6 +311,123 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+              function validateEmail(email) {
+            
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(mobile) {
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(mobile)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }  
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+           				if(!$("#conf_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_name").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+           				if(!$("#conf_date").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}
+            				
+            				
+           				if(!$("#conf_venue").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				}
+           				
+           				if(!$("#conf_fund").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				}
+           				
+           				if(!$("#conf_fund").val()){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_fund").addClass("has-error")
+            				$("#error_formfield5").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield5").hide()
+            				}
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
 	
 	<script type="text/javascript">
 		function submit_f(view) {

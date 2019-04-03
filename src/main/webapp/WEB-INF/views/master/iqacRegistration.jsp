@@ -95,10 +95,11 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
+									<form class="form-horizontal" 
 										action="${pageContext.request.contextPath}/iqacNewRegistration"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="formidhere" id="formidhere">
+										
+										
 
 
 
@@ -109,11 +110,10 @@
 												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="iqacName"
-													autocomplete="off" value="${miqc.iqacName}" name="iqacName"
-													onchange="trim(this)"
-													placeholder="Internal Quality Assurance Cell (IQAC)"
-													required>
+												<input type="text" class="form-control" id="iqacName" onchange="trim(this)"
+													autocomplete="off" value="${miqc.iqacName}" name="iqacName"													
+													placeholder="Internal Quality Assurance Cell (IQAC)">
+												<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter IQAC name</span>
 											</div>
 										</div>
 
@@ -127,7 +127,7 @@
 											</label>
 											<div class="col-sm-10">
 												<select id="designation" name="designation"
-													class="form-control" onchange="showForm()" required>
+													class="form-control" onchange="showForm()">
 
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
@@ -143,6 +143,7 @@
 													</c:forEach>
 
 												</select>
+												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please select designation</span>
 											</div>
 										</div>
 
@@ -154,11 +155,11 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="dateOfJoin"
+													id="dateOfJoin" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${miqc.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd/mm/yyyy"
-													onchange="trim(this)" required>
+													autocomplete="off" placeholder="dd/mm/yyyy">
+													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please select joining date</span>
 											</div>
 										</div>
 
@@ -168,15 +169,18 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													onchange="checkUnique(this.value,1)"onchange="trim(this)"
-													name="contactNo" pattern="^[1-9]{1}[0-9]{9}$" maxlength="10"
+													onchange="checkUnique(this.value,1)" onchange="trim(this)"
+													name="contactNo" 
 													onkeypress='return restrictAlphabets(event)'
-													autocomplete="off"
+													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
-													placeholder="Mobile Number" value="${miqc.contactNo}"
-													required>
+													placeholder="Mobile Number" value="${miqc.contactNo}">
+													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter
+													 contact no</span>
+											
 												<p class="desc text-danger fontsize11">Note: OTP will be
 													sent on this mobile number for verification</p>
+													
 											</div>
 										</div>
 
@@ -189,9 +193,11 @@
 												<input type="email" class="form-control" id="email"
 													autocomplete="off" onchange="checkUnique(this.value,2)"
 													onchange="trim(this)" name="email"
-													placeholder="abc@xyz.com" value="${miqc.email}" required>
+													placeholder="abc@xyz.com" value="${miqc.email}">
+												<span class="error_form text-danger" id="error_formfield5" style="display: none;">Please enter  email id</span>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>
+											
 											</div>
 
 										</div>
@@ -233,7 +239,145 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script>
+            
+             function validateEmail(email) {
+            
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(mobile) {
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(mobile)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             } 
+            	$(document).ready(function($){
+            		
+            		$("#formidhere").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+           
+            				if(!$("#iqacName").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#iqacName").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+            				
+            				if(!$("#designation").val()){
+           					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#designation").addClass("has-error")
+                				$("#error_formfield2").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield2").hide()
+                				}
+            				
+            				if(!$("#dateOfJoin").val()){
+              					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#dateOfJoin").addClass("has-error")
+                				$("#error_formfield3").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield3").hide()
+                				}
+            				
+            				/* if(!$("#contactNo").val()){
+             					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#contactNo").addClass("has-error")
+                				$("#error_formfield4").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield3").hide()
+                				}
+            			   */
+            				if(!$("#contactNo").val() || !validateMobile($("#contactNo").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert = 'Please enter a valid mobile number.';
+            				$("#error_formfield4").html(errMsg_alert);
+            				$("#error_formfield4").show();
+            				//alert();
+            					//return false;
+            				} else {
+            					$("#error_formfield4").html("Please enter mobile")
+            					$("#error_formfield4").hide()
+            				} 
+            				 if(!$("#email").val() || !validateEmail($("#email").val())){
+            
+            				isError=true;
+            				errMsg += '<li>Please enter a valid email address.</li>';
+            				errMsg_alert += 'Please enter a valid email address. \n';
+            				$("#error_formfield5").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_formfield5").hide()
+            				} 
+            
+            		 
+            
+            
+            			  /* if ($('#termcondition').is(':checked')) {
+            				} else {
+            				isError=true;
+            					errMsg += '<li>You must agree to our Term & Conditions.</li>';
+            					errMsg_alert = 'You must agree to our Term & Conditions. \n';
+            					alert(errMsg_alert);
+            					return false;
+            				}
+             */
+            
+            
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			} );
+            });
+
+</script>
 
 	<script type="text/javascript">
 		/*code: 48-57 Numbers
@@ -248,6 +392,13 @@
 			else
 				return false;
 		}
+	
+		 function trim(el) {
+				el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+				replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+				replace(/\n +/, "\n"); // Removes spaces after newlines
+				return;
+			}
 	</script>
 
 	<script type="text/javascript">
@@ -565,7 +716,7 @@
 
 
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
 
 
 

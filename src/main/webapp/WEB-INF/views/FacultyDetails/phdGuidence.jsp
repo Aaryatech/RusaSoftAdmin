@@ -99,8 +99,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPhdGuide"
 										method="post"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										name="form_sample_2" id="form_sample_2">
 
 										<div>
 
@@ -146,39 +145,7 @@
 																	
 																	 No<input type="radio" onclick="checkCoGuide(this.value)" ${phd.isCoGuide == 0 ? 'checked' : ''}
 																	  name="coGuide" id="coGuide" value="0">
-															<%-- <c:choose>
-																<c:when test="${phd.phdId == 0}">
-																
-																	Yes <input type="radio" name="coGuide" id="coGuide"
-																	 value="1" onclick="checkCoGuide(this.value)">
-																	
-																	 No<input type="radio" onclick="checkCoGuide(this.value)"
-																	 checked name="coGuide" id="coGuide" value="0">
-																
-																</c:when>
-																<c:otherwise>
-																	<c:choose>
-																		<c:when test="${empty phd.isCoGuide}">
-																			Yes <input type="radio" name="coGuide" id="coGuide"
-																				 value="1" onclick="checkCoGuide(this.value)">
-																	
-																			No<input type="radio" onclick="checkCoGuide(this.value)"
-																			checked name="coGuide" id="coGuide" value="0">																																			
-																		</c:when>			
-																		
-																		<c:otherwise>
-																			Yes <input type="radio" name="coGuide" id="coGuide"
-																			 checked value="1" onclick="checkCoGuide(this.value)">
-																	
-																			No<input type="radio" onclick="checkCoGuide(this.value)"
-																			  name="coGuide" id="coGuide" value="0">																		
-																		</c:otherwise>															
-																	
-																	</c:choose>
-																
-																</c:otherwise>
-																
-															</c:choose> --%>
+															
 															
 															</div>
 														</div>
@@ -189,8 +156,9 @@
 																of Co-Guide <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control " id="co_guide_name" autocomplete="off"
+																<input type="text" class="form-control " id="co_guide_name" autocomplete="off"  onchange="trim(this)"	 
 																	name="co_guide_name" placeholder="Name of Co_Guide" value="${phd.coGuideName}">
+																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of co-guide</span>
 															</div>
 
 
@@ -204,9 +172,10 @@
 																of Ph.D. Scholar <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="phd_scholar"
+																<input type="text" class="form-control" id="phd_scholar" onchange="trim(this)"
 																	name="phd_scholar" placeholder="Name of Ph.D Scholar"
-																	value="${phd.phdScholarName}" autocomplete="off" required>
+																	value="${phd.phdScholarName}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name of Ph.D. scholar</span>
 															</div>
 														</div>
 
@@ -224,7 +193,7 @@
 															</div> --%>
 
 													<div class="col-sm-6">
-														<select id="phd_year_reg" name="phd_year_reg" class="form-control" required>
+														<select id="phd_year_reg" name="phd_year_reg" class="form-control">
 																																	
 															<c:forEach items="${acaYearList}" var="acaYearList">
 																		<c:choose>
@@ -252,8 +221,10 @@
 																Area of Research <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<textarea id="phd_topic" name="phd_topic"
-																	class="form-control" style="width: 100%;" required>${phd.phdTopic}</textarea>
+																<textarea id="phd_topic" name="phd_topic" onchange="trim(this)"
+																	class="form-control" style="width: 100%;">${phd.phdTopic}</textarea>
+																<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter topic/
+																area of research </span>
 															</div>
 														</div>
 
@@ -350,7 +321,7 @@
 														<div class="form-group" id="abc" style="display: none;">
 
 															<label class="control-label col-sm-2" 
-																for="smallheading">Year of Awarded Ph.D<span
+																for="smallheading">Year of Awarded Ph.D.<span
 																class="text-danger">*</span>
 															</label>
 															<%-- <div class="col-sm-6">
@@ -418,6 +389,84 @@
 			</section>
 		</section>
 		<!-- END CONTENT -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+            			
+            			 var radioValue = $("input[name='coGuide']:checked"). val();
+     					//alert(radioValue);
+     					if(radioValue==1){
+     						if (!$("#co_guide_name").val()) {
+     							isError = true;
+
+     							$("#co_guide_name").addClass(
+     									"has-error")
+     							$("#error_formfield1").show()
+     						} else {
+     							$("#error_formfield1").hide()
+     						}
+     					}
+            			
+     					/* if ( $("#is_registration1").is(":checked")) {
+        					$("#error_acc_off_relDate").hide()
+        				} */
+           				if(!$("#phd_scholar").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#conf_date").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}  
+            				
+            				
+           				if(!$("#phd_topic").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#phd_topic").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				}
+           				
+           				
+           				
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
 <script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
@@ -495,12 +544,12 @@
 
 					document.getElementById("cogid").style = "visible"
 					document.getElementById("co_guide_name").style = "visible"
-					document.getElementById("co_guide_name").setAttribute("required","true");
+					//document.getElementById("co_guide_name").setAttribute("required","true");
 
 				} else if (guide == 0) {
 					document.getElementById("cogid").style = "display:none"
 					document.getElementById("co_guide_name").style = "display:none"
-					document.getElementById("co_guide_name").removeAttribute("required");
+					//document.getElementById("co_guide_name").removeAttribute("required");
 				}
 
 			}
@@ -570,7 +619,7 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
 
 
 </body>
