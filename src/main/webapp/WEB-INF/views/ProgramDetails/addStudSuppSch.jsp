@@ -43,8 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body   onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+<body onload="hideText()">
+	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -59,7 +59,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-			<%-- 	<div class="col-xs-12">
+				<%-- 	<div class="col-xs-12">
 					<div class="page-title">
 
 						<div class="pull-left">
@@ -86,7 +86,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudSupp"><button
-										type="button" class="btn btn-info">Back</button></a> 
+										type="button" class="btn btn-info">Back</button></a>
 							</div>
 
 						</header>
@@ -97,262 +97,215 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertStudentSuppurtScheme"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-									onsubmit="return checkBeforeSubmit()">
-<!-- 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register Form
-											</a></li>
+										method="post" name="form_sample_2" id="form_sample_2">
+
+										<div>
+
+											<div class="col-xs-12">
 
 
-										</ul>
- -->
-										<!-- <div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
- -->
-												<div>
 
-													<div class="col-xs-12">
-													
-													
-													
-													<input type="hidden" name="stud_suprt_schm" value="${stud.sprtSchmId}">
-													
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Scheme Name 
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<select id="approveValue" name="schemeName" class="form-control"  onchange="showExtraField()"  required>
-												 		<option value="Capability Enhancement">Capability Enhancement</option>
-								<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-								<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-													etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-													etc)</option>
-								<option value="Vocational Education Training">Vocational Education Training</option>
-								<option value="7">Any Other</option>
-												 		
-												 			<%-- <c:choose>
-												 			<c:when test="${stud.schemeName eq 'Capability Enhancement'}">
-																<option selected value="Capability Enhancement">Capability Enhancement</option>
-																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)</option>
-																<option value="Vocational Education Training">Vocational Education Training</option>
-																<option value="7">Any Other</option>
-															</c:when> 
-															
-															<c:when test="${stud.schemeName eq 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)'}">
-																<option value="Capability Enhancement">Capability Enhancement</option>
-																<option selected value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)</option>
-																<option value="Vocational Education Training">Vocational Education Training</option>
-																<option value="7">Any Other</option>
-															</c:when> 
-															
-															<c:when test="${stud.schemeName eq 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)'}">
-																<option value="Capability Enhancement">Capability Enhancement</option>
-																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-																<option selected value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)</option>
-																<option value="Vocational Education Training">Vocational Education Training</option>
-																<option value="7">Any Other</option>
-															</c:when> 
-															
-															<c:when test="${stud.schemeName eq 'Vocational Education Training'}">
-																<option value="Capability Enhancement">Capability Enhancement</option>
-																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)</option>
-																<option selected value="Vocational Education Training">Vocational Education Training</option>
-																<option value="7">Any Other</option>
-															</c:when> 
-															
-														 <c:when test="${stud.schemeName eq '7'}">
-																<option value="Capability Enhancement">Capability Enhancement</option>
-																<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-																<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-																							etc)</option>
-																<option value="Vocational Education Training">Vocational Education Training</option>
-																<option selected value="7">Any Other</option>
-															</c:when> 
-															 
-															
-															
-															
-															<c:otherwise> 
-							<option value="Capability Enhancement">Capability Enhancement</option>
-								<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-								<option value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-													etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-													etc)</option>
-								<option value="Vocational Education Training">Vocational Education Training</option>
-								<option value="7">Any Other</option>
-							
-								 </c:otherwise>
-									</c:choose>  --%>
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-														
+												<input type="hidden" name="stud_suprt_schm"
+													value="${stud.sprtSchmId}">
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Scheme
+														Name <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="schemeName" name="schemeName"
+															class="form-control" onchange="showExtraField()">
+															<option value="-1">Select</option>
+															<option value="Capability Enhancement">Capability
+																Enhancement</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive
+																Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option
+																value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
+													etc)">Higher
+																Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training">Vocational
+																Education Training</option>
+															<option value="7">Any Other</option>
+
+
+														</select> <span class="error_form text-danger" id="error_scheme"
+															style="display: none;">Please Select Scheme</span>
+
+
+													</div>
+												</div>
+
+
+
 												<div class="form-group" id="abc">
 													<label class="control-label col-sm-2" for="page_order">
 														Another Scheme Name <span class="text-danger">*</span>
 													</label>
-														<div class="col-sm-6">
-															<input type="text"  autocomplete="off" 
-																 class="form-control" id="anotherScheme" value="${stud.schemeName}" pattern="^(?!\s*$).+"
-																	 name="anotherScheme" placeholder="Another Scheme" onchange="checkUnique(this.value,1)">
-														</div>
-											</div>
-														
-														
-											<div class="form-group">
-														<label class="control-label col-sm-2" for="status">Level
-															 <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<select id="approveValue" name="level"class="form-control"  onchange="showExtraField()"  required>
-																
-																 <c:choose>
-															 <c:when test="${stud.level eq 'International'}">
-																<option selected value="International">International</option>
-																<option value="State">State</option>
-																<option value="Regional">Regional</option>
-															</c:when> 
-															
-															<c:when test="${stud.level eq 'State'}">
-																<option value="International">International</option>
-																<option selected value="State">State</option>
-																<option value="Regional">Regional</option>
-															</c:when> 
-															
-															<c:when test="${stud.level eq 'Regional'}">
-																<option value="International">International</option>
-																<option value="State">State</option>
-																<option selected value="Regional">Regional</option>
-															</c:when> 
-																
-															<c:otherwise> 
-																<option value="International">International</option>
-																<option value="State">State</option>
-																<option value="Regional">Regional</option>
-															 </c:otherwise>
-																</c:choose> 	
-																</select>
-																
-																
-														</div>
-														</div>
-														
-													<div class="form-group">
-															<label class="control-label col-sm-2" for="status">Type
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<select id="approveValue" name="type"class="form-control"  onchange="showExtraField()"  required>
-														 <c:choose>
-															 <c:when test="${stud.type eq 'Govt.'}">
-																<option selected value="Govt">Govt.</option>
-																<option value="Non Govt.">Non Govt.</option>
-															
-															</c:when>
-															<c:when test="${stud.type eq 'Non Govt.'}">
-																<option value="Govt">Govt.</option>
-																<option selected value="Non Govt.">Non Govt.</option>
-															
-															</c:when>
-															  <c:otherwise>
-																<option value="Govt">Govt.</option>
-																<option value="Non Govt.">Non Govt.</option>
-															 </c:otherwise>
-															 	
-															</c:choose> 
-																</select>
-																
-																
-															</div>
-														</div>
-														
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-														No. of Students Benefited <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="number" min="0" class="form-control" id="studBenifit" 	value="${stud.noStudentBenifited}"
-																	name="studBenifit" placeholder="Students Benifited" autocomplete="off"  required>
-															</div>
-														</div>
-
-
-
-														
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-														Name of Support Agency  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" 
-																	 class="form-control" id="supportAgency" 	value="${stud.supportAgencyName}" pattern="^(?!\s*$).+" autocomplete="off" 
-																	 name="supportAgency" placeholder="Support Agency" onchange="checkUnique(this.value,1)" required>
-															</div>
-														</div>
-																
-														
-													
-													
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Date/Year of Introduction
-															 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker" id=" yearofIntro"  placeholder="dd-MM-YYYY" 	value="${ydate}"
-																	autocomplete="off"  name="yearofIntro"  required>
-															</div>
-														</div>
-														
+													<div class="col-sm-6">
+														<input type="text" autocomplete="off" class="form-control"
+															id="anotherScheme" value="${stud.schemeName}"
+															name="anotherScheme" placeholder="Another Scheme"
+															onchange="checkUnique(this.value,1)"> <span
+															class="error_form text-danger" id="error_oth"
+															style="display: none;">Please Enter Other Scheme</span>
 													</div>
-
 												</div>
-												
 
-                                             <input type="hidden" id="librarian_id" name="librarian_id" value="${stud.sprtSchmId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-										
-															<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" class="btn btn-primary" id="sub1" onclick="submit_f(1)" value="Save">
-																<input type="submit" class="btn btn-primary" id="sub2" onclick="submit_f(0)" value="Save &
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Level
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="approveValue1" name="level"
+															class="form-control">
+															<option value="-1">Select</option>
+															<c:choose>
+																<c:when test="${stud.level eq 'International'}">
+																	<option selected value="International">International</option>
+																	<option value="State">State</option>
+																	<option value="Regional">Regional</option>
+																</c:when>
+
+																<c:when test="${stud.level eq 'State'}">
+																	<option value="International">International</option>
+																	<option selected value="State">State</option>
+																	<option value="Regional">Regional</option>
+																</c:when>
+
+																<c:when test="${stud.level eq 'Regional'}">
+																	<option value="International">International</option>
+																	<option value="State">State</option>
+																	<option selected value="Regional">Regional</option>
+																</c:when>
+
+																<c:otherwise>
+																	<option value="International">International</option>
+																	<option value="State">State</option>
+																	<option value="Regional">Regional</option>
+																</c:otherwise>
+															</c:choose>
+														</select> <span class="error_form text-danger" id="error_level"
+															style="display: none;">Please Select Level</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Type
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="approveValue" name="type" class="form-control">
+															<option value="-1">Select</option>
+															<c:choose>
+																<c:when test="${stud.type eq 'Govt.'}">
+																	<option selected value="Govt">Govt.</option>
+																	<option value="Non Govt.">Non Govt.</option>
+
+																</c:when>
+																<c:when test="${stud.type eq 'Non Govt.'}">
+																	<option value="Govt">Govt.</option>
+																	<option selected value="Non Govt.">Non Govt.</option>
+
+																</c:when>
+																<c:otherwise>
+																	<option value="Govt">Govt.</option>
+																	<option value="Non Govt.">Non Govt.</option>
+																</c:otherwise>
+
+															</c:choose>
+														</select> <span class="error_form text-danger" id="error_type"
+															style="display: none;">Please Select Type</span>
+
+
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_name">
+														No. of Students Benefited <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="number" min="0" class="form-control"
+															id="studBenifit" value="${stud.noStudentBenifited}"
+															name="studBenifit" placeholder="Students Benifited"
+															autocomplete="off"> <span
+															class="error_form text-danger" id="error_part"
+															style="display: none;">Please Enter No. of
+															Students Benefited</span>
+													</div>
+												</div>
+
+
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">
+														Name of Support Agency <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="supportAgency"
+															value="${stud.supportAgencyName}" autocomplete="off"
+															name="supportAgency" placeholder="Support Agency"
+															onchange="checkUnique(this.value,1)"> <span
+															class="error_form text-danger" id="error_agency"
+															style="display: none;">Please Enter Name of
+															Support Agency </span>
+
+													</div>
+												</div>
+
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Date/Year
+														of Introduction <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id=" yearofIntroduction" placeholder="dd-MM-YYYY"
+															value="${ydate}" autocomplete="off" name="yearofIntro">
+														<span class="error_form text-danger" id="error_dateIntroduction"
+															style="display: none;">Please Enter The Date
+															Properly</span>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+
+
+										<input type="hidden" id="librarian_id" name="librarian_id"
+											value="${stud.sprtSchmId}"> <input type="hidden"
+											id="is_view" name="is_view" value="0">
+
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<input type="submit" class="btn btn-primary" id="sub1"
+													onclick="submit_f(1)" value="Save"> <input
+													type="submit" class="btn btn-primary" id="sub2"
+													onclick="submit_f(0)" value="Save &
 																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-															</div>
-														</div>
+												<button type="reset" class="btn btn-default">Reset</button>
+											</div>
+										</div>
 
-												<div class="clearfix"></div>
-<!-- 
+										<div class="clearfix"></div>
+										<!-- 
 											</div>
 
 										</div>
  -->
 									</form>
-									<p class="desc text-danger fontsize11">Notice : * Field are  Mandatory.</p>
+									<p class="desc text-danger fontsize11">Notice : * Field are
+										Mandatory.</p>
 								</div>
 
 							</div>
@@ -366,149 +319,278 @@
 
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<!-- END CONTENT -->
-<script type="text/javascript">
 
 
-var wasSubmitted = false;    
-  function checkBeforeSubmit(){
-    if(!wasSubmitted) {
-  	  var x=confirm("Do you really want to submit the form?");
-  	  if(x==true){
-      wasSubmitted = true;
-  	  document.getElementById("sub1").disabled=true;
-  	  document.getElementById("sub2").disabled=true;
+	<script>
+		function numbersOnlyNotZero(id_number) {
 
-      return wasSubmitted;
-  	  }
-    }
-    return false;
-  }    
+			var mob = /^[1-9][0-9]+$/;
 
-function submit_f(view){
-	
-	//alert("id is"+view);
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+			if (mob.test($.trim(id_number)) == false) {
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
+				//alert("Please enter a valid email address .");
+				return false;
 
+			}
+			return true;
+		}
 
+		$(document)
+				.ready(
+						function($) {
+							//  alert("hii....");
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
 
-</script>
+												
+												if (!$("#yearofIntroduction").val()) {
 
-<script type="text/javascript">
+													isError = true;
 
-function showExtraField() {
-	//alert("hii");
-	//document.getElementById("abc").style = "display:none"
-		var qualType = document.getElementById("approveValue").value;
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+													$("#yearofIntroduction").addClass(
+															"has-error")
+													$("#error_dateIntroduction")
+															.show()
+												
+												} else {
+													$("#error_dateIntroduction")
+															.hide()
+												}
 
-			document.getElementById("abc").style = "visible"
-			document.getElementById("anotherScheme").setAttribute("required","true");
-			
-				
-		} 
-		else{
+												if ($("#schemeName").val() == -1) {
+
+													isError = true;
+
+													$("#error_scheme").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_scheme").hide()
+												}
+
+												if ($("#approveValue").val() == -1) {
+
+													isError = true;
+
+													$("#error_type").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_type").hide()
+												}
+
+												if ($("#approveValue1").val() == -1) {
+
+													isError = true;
+
+													$("#error_level").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_level").hide()
+												}
+
+												if ($("#schemeName").val() == 7) {
+													if (!$("#anotherScheme")
+															.val()) {
+
+														isError = true;
+
+														$("#anotherScheme")
+																.addClass(
+																		"has-error")
+														$("#error_oth").show()
+														//return false;
+													} else {
+														$("#error_oth").hide()
+													}
+
+												}
+
+												if (!$("#studBenifit").val()
+														|| !numbersOnlyNotZero($(
+																"#studBenifit")
+																.val())) {
+
+													isError = true;
+
+													$("#error_part").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_part").hide()
+												}
+
+												if (!$("#supportAgency").val()) {
+
+													isError = true;
+
+													$("#supportAgency")
+															.addClass(
+																	"has-error")
+													$("#error_agency").show()
+													//return false;
+												} else {
+													$("#error_agency").hide()
+												}
+
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														return true;
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+													}
+												}
+
+												return false;
+											});
+						});
+		//
+	</script>
+
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
+
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+
+		function submit_f(view) {
+
+			//alert("id is"+view);
+			document.getElementById("is_view").value = view;//create this 
+			/* var form=document.getElementById("form_sample_2");
+			form.setAttribute("method", "post");
+
+			form.action=("insertLibrarian");
+			var x =confirm();
+			if(x==true)
+			form.submit(); */
+
+		}
+	</script>
+
+	<script type="text/javascript">
+		function showExtraField() {
+			//alert("hii");
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("schemeName").value;
+			//alert("qualType::"+qualType);
+
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+				//document.getElementById("anotherScheme").setAttribute("required","true");
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
+
 		}
-	
-	}
-	
+	</script>
+	<script type="text/javascript">
+		function checkUnique(inputValue, valueType) {
+			//alert(inputValue);
 
-function hideText() {
-	//alert("hii");
-	document.getElementById("abc").style = "display:none"
-	
-	
-	}
-
-</script>
-<script type="text/javascript">
-
-function checkUnique(inputValue,valueType){
-	//alert(inputValue);
-	
-	var primaryKey=${editInst.librarianId};
-	//alert("Primary key"+primaryKey);
-	var isEdit=0;
-	if(primaryKey>0){
-		isEdit=1;
-	}
-	//alert("Is Edit " +isEdit);
-	
-	var valid=false;
-	if(valueType==1){
-		//alert("Its Mob no");
-		if(inputValue.length==10){
-			valid=true;
-			//alert("Len 10")
-		}else{
-			//alert("Not 10");
-		}
-	}
-	else if(valueType==2){
-		//alert("Its Email " );
-		
-		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(inputValue.match(mailformat))
-		{
-			valid=true;
-			//alert("Valid Email Id");
-		}
-		else
-		{
-			valid=false;
-			//alert("InValid Email Id");
-		}
-	}
-	if(valid==true)
-	$.getJSON('${checkUniqueField}', {
-		
-		inputValue : inputValue,
-		valueType  : valueType,
-		primaryKey : primaryKey,
-		isEdit     : isEdit,
-		tableId : 4,
-
-		ajax : 'true',
-
-	}, function(data) {
-		
-	//	alert("Data  " +JSON.stringify(data));
-		if(data.error==true){
-			if(valueType==2){
-			
-			
-			alert("This email id already exist in system please enter unique");
-			$('#librarian_email').val('');
-			//document.getElementById("stud_contact_no").value=" ";
-			
+			var primaryKey = $
+			{
+				editInst.librarianId
 			}
-			else{
-				
-				
-				alert("This contact no  already exist in system please enter unique");
-				$('#lib_con_num').val('');
-				//document.getElementById("student_email").value=" ";
+			;
+			//alert("Primary key"+primaryKey);
+			var isEdit = 0;
+			if (primaryKey > 0) {
+				isEdit = 1;
 			}
+			//alert("Is Edit " +isEdit);
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+				$
+						.getJSON(
+								'${checkUniqueField}',
+								{
+
+									inputValue : inputValue,
+									valueType : valueType,
+									primaryKey : primaryKey,
+									isEdit : isEdit,
+									tableId : 4,
+
+									ajax : 'true',
+
+								},
+								function(data) {
+
+									//	alert("Data  " +JSON.stringify(data));
+									if (data.error == true) {
+										if (valueType == 2) {
+
+											alert("This email id already exist in system please enter unique");
+											$('#librarian_email').val('');
+											//document.getElementById("stud_contact_no").value=" ";
+
+										} else {
+
+											alert("This contact no  already exist in system please enter unique");
+											$('#lib_con_num').val('');
+											//document.getElementById("student_email").value=" ";
+										}
+									}
+								});
 		}
-	});
-}
-
-
-</script>
+	</script>
 
 
 
@@ -516,7 +598,6 @@ function checkUnique(inputValue,valueType){
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 

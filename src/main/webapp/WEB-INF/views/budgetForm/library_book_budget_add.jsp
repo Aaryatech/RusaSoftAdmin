@@ -98,7 +98,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibBookBudget"
 										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+									>
 
 
 										<div class="form-group">
@@ -109,7 +109,8 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" onchange="setBudget(this.value)"
-													required>
+													>
+													<option value="-1">Select</option>
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
 															<c:when test="${finYear.finYearId==budget.finYearId}">
@@ -120,9 +121,9 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
-
-
 												</select>
+					<span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Year</span>
+												
 											</div>
 										</div>
 
@@ -130,16 +131,18 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
-												for="infra_budget_title">Expenditures on purchase of
-												Books <span class="text-danger">*</span>
+												for="infra_budget_title">Expenditures on purchase of Books
+												 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" min="0"
-													id=expenditure_on_book_purchase autocomplete="off"
+													id="expenditure_on_book_purchase" autocomplete="off"
 													name="expenditure_on_book_purchase"
 													value="${budget.expenditureOnBookPurchase}"
-													onkeypress="return allowOnlyNumber(event)"
-													placeholder="Expenditures on purchase of Books" required>
+												
+													placeholder="Expenditures on purchase of Books" >
+		<span class="error_form text-danger" id="error_pbook" style="display:none;" >Please Enter Expenditures on purchase of Books</span>
+							
 											</div>
 										</div>
 										<div class="form-group">
@@ -152,9 +155,10 @@
 												<input type="number" class="form-control" min="0"
 													id="expenditure_on_journals_purchase" autocomplete="off"
 													name="expenditure_on_journals_purchase"
-													onkeypress="return allowOnlyNumber(event)"
+													
 													placeholder="Expenditures on purchase of Journals"
-													value="${budget.expenditureOnJournalsPurchase}" required>
+													value="${budget.expenditureOnJournalsPurchase}" >
+	<span class="error_form text-danger" id="error_pjournal" style="display:none;" >Please Enter Expenditures on purchase of Journals</span>
 											</div>
 										</div>
 
@@ -168,8 +172,10 @@
 													id="expenditure_on_ejournals_purchase" autocomplete="off"
 													name="expenditure_on_ejournals_purchase"
 													placeholder="Expenditures on e-Journals"
-													onkeypress="return allowOnlyNumber(event)"
-													value="${budget.expenditureOnEjournalsPurchase}" required>
+												
+													value="${budget.expenditureOnEjournalsPurchase}" >
+	<span class="error_form text-danger" id="error_ejournal" style="display:none;" >Please Enter Expenditures on e-Journals</span>
+
 											</div>
 										</div>
 
@@ -184,9 +190,10 @@
 													id="expenditure_on_eresources_purchase"
 													name="expenditure_on_eresources_purchase"
 													autocomplete="off"
-													onkeypress="return allowOnlyNumber(event)"
 													placeholder="Expenditures on e-Resources"
-													value="${budget.expenditureOnEresourcesPurchase}" required>
+													value="${budget.expenditureOnEresourcesPurchase}" >
+<span class="error_form text-danger" id="error_eresources" style="display:none;" >Please Enter Expenditures on e-Resources</span>
+
 											</div>
 										</div>
 
@@ -236,6 +243,101 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+	<script>
+           
+             function numbersOnlyNotZero(id_number) {
+
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            				
+            				if($("#fin_year_id").val()== -1 ){
+            		            
+                				
+                				$("#error_year").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_year").hide()
+                				}
+            				
+
+            				if(!$("#expenditure_on_book_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_book_purchase").val())){
+            
+             				
+            				$("#error_pbook").show()
+            					//return fregister_useralse;
+            				} else {
+            					$("#error_pbook").hide()
+            				}
+            				
+            				if(!$("#expenditure_on_journals_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_journals_purchase").val())){
+            		            
+                 				
+                				$("#error_pjournal").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_pjournal").hide()
+                				}
+            				if(!$("#expenditure_on_ejournals_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_ejournals_purchase").val())){
+            		            
+                 				
+                				$("#error_ejournal").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_ejournal").hide()
+                				}
+            				if(!$("#expenditure_on_eresources_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_eresources_purchase").val())){
+            		            
+                				isError=true;
+                				
+                				$("#error_eresources").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_eresources").hide()
+                				}
+            				
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 
 	<script type="text/javascript">
 	var wasSubmitted = false;

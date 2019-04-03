@@ -198,6 +198,10 @@
 																		<span class="error_form text-danger" id="error_jDate" style="display:none;" >Please Select Qualification</span>
 															</div>
 														</div>
+											
+											
+											
+											
 														
 															<div class="form-group">
 																<label class="control-label col-sm-2" for="page_order">Is Working
@@ -224,6 +228,7 @@
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${ldate}"
 																	name="relieving_date"  >
+													<span class="error_form text-danger" id="error_rDate" style="display:none;" >Please Select Relieving Date</span>
 																	
 															</div>
 														</div>
@@ -456,6 +461,18 @@ function checkBeforeSubmit(){
 		}
 		
 	}
+ 
+ 
+ $(function() {
+
+		$('.datepicker').datepicker({
+			autoclose : true,
+			format : "dd-mm-yyyy",
+			changeYear : true,
+			changeMonth : true
+
+		});
+	});
 
 function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 

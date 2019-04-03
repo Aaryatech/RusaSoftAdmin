@@ -94,7 +94,8 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFacultyActivity"
 										method="post" 
-										name="form_sample_2" id="form_sample_2">
+										name="form_sample_2" id="form_sample_2"	>
+									
 
 										
 												<div>
@@ -118,8 +119,8 @@
 													</label>
 													<div class="col-sm-6">
 														<select id="activity_type" name="activity_type"
-															class="form-control" required>
-															
+															class="form-control" >
+															<option value="-1">Select</option>		
 															<c:forEach items="${facultyOutreachTypeList}" var="outtype">
 																	<c:choose>
 																	<c:when test="${outtype.typeId == activity.activityType}">
@@ -131,6 +132,8 @@
 																	</c:choose>
 																	</c:forEach>
 														</select>
+		<span class="error_form text-danger" id="error_type" style="display:none;" >Please Select Outreach Type  </span>
+	
 													</div>
 												</div>
 															
@@ -140,10 +143,10 @@
 														of Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="activity_name" autocomplete="off"
+														<input type="text" class="form-control" id="activity_name" autocomplete="off" onchange="trim(this)"
 															name="activity_name" placeholder="Name of Activity" value="${activity.activityName}"
-															onchange="trim(this)">
-															<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter activity name</span>
+															>
+	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Outreach Name  </span>
 													</div>
 
 												</div>
@@ -156,7 +159,8 @@
 													</label>
 													<div class="col-sm-6">
 														<select id="activity_level" name="activity_level"
-															class="form-control" required>
+															class="form-control" >
+															<option value="-1">Select</option>	
 															<c:choose>
 															<c:when test="${activity.activityLevel eq 'International' }">
 																<option selected  value="International">International</option>
@@ -202,6 +206,8 @@
 															
 
 														</select>
+<span class="error_form text-danger" id="error_level" style="display:none;" >Please Select Outreach Level  </span>
+
 													</div>
 
 												</div>
@@ -211,10 +217,10 @@
 																Activity <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control datepicker" id="activity_date" onkeypress='return restrictAlphabets(event)'
+																<input type="text" class="form-control datepicker" id="activity_date" onchange="trim(this)"
 																 	value="${activity.activityDate}" name="activity_date"  autocomplete="off"
-																 	 placeholder="dd/mm/yyyy" onchange="trim(this)">
-																 <span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter date of activity</span>
+																 	 placeholder="dd/mm/yyyy"  >
+						<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date  </span>
 															</div>
 														</div>
 
@@ -224,10 +230,11 @@
 														of Participants <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="activity_part"  onkeypress='return restrictAlphabets(event)'
+														<input type="text"  class="form-control" id="activity_part"  onchange="trim(this)"
 															name="activity_part" placeholder="No of Participants" value="${activity.activityParticipants}"
-														autocomplete="off"	onchange="trim(this)">
-														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of participants</span>
+														autocomplete="off"	>
+						<span class="error_form text-danger" id="error_part" style="display:none;" >Please Select Enter No of Participants </span>
+
 													</div>
 												</div>
 
@@ -238,9 +245,10 @@
 														By <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="activity_found" autocomplete="off"
-															name="activity_found" placeholder="Funded By" value="${activity.activityFundedBy}" onchange="trim(this)">
-														<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter funded by</span>
+														<input type="text" class="form-control" id="activity_found" autocomplete="off" onchange="trim(this)"
+															name="activity_found" placeholder="Funded By" value="${activity.activityFundedBy}" >
+		<span class="error_form text-danger" id="error_funded" style="display:none;" >Please Select Enter Funded By </span>
+					
 													</div>
 
 
@@ -252,10 +260,11 @@
 														Sanctioned <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0"  class="form-control" id="amt_sanc"  onkeypress='return restrictAlphabets(event)'
+														<input type="text"  class="form-control" id="amt_sanc"   onchange="trim(this)"
 															name="amt_sanc" placeholder="Amount Sanctioned" value="${activity.activityAmountSanctioned}"
-															autocomplete="off" onchange="trim(this)">
-															<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount sanctioned</span>
+															autocomplete="off" >
+			<span class="error_form text-danger" id="error_amt" style="display:none;" >Please Select Enter Amount Sanctioned </span>
+	
 													</div>
 												</div>
 
@@ -267,14 +276,19 @@
 														Utilized <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
-															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}" onchange="trim(this)"
-															autocomplete="off">
-															<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter utilized amount and utilized amount must be less than sanctioned amount</span>
+														<input type="text" class="form-control" id="amt_utilise"  onchange="chkSncAmt()"
+															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}"
+															autocomplete="off"  >
+				<span class="error_form text-danger" id="error_utilized" style="display:none;" >Please Enter Amount Utilized </span>
+	
 													</div>
 
 
 												</div>
+
+
+
+
 
 
 														<div class="form-group">
@@ -330,167 +344,176 @@
 		replace(/\n +/, "\n"); // Removes spaces after newlines
 		return;
 	}
-	
-              function validateEmail(email) {
-            
-            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-            
-            	if (eml.test($.trim(email)) == false) {
-            
-            
-            	return false;
-            
-            	}
-            
-            	return true;
-            
-            }
-             function validateMobile(mobile) {
-            		var mob = /^[1-9]{1}[0-9]{9}$/;
-            
-            
-            		if (mob.test($.trim(mobile)) == false) {
-            
-            		//alert("Please enter a valid email address .");
-            		return false;
-            
-            		}
-            		return true;
-            
-             }  
-            	$(document).ready(function($){
-            		
-            		$("#form_sample_2").submit(function(e) {
-            		
-            			var isError=false;
-            			 var errMsg="";
-            				
-           				if(!$("#activity_name").val()){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#activity_name").addClass("has-error")
-            				$("#error_formfield1").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield1").hide()
-            				}
-           				if(!$("#activity_date").val()){
-        					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#activity_date").addClass("has-error")
-            				$("#error_formfield2").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield2").hide()
-            				}
-            				
-            				
-           				if(!$("#activity_part").val()){
-       					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#activity_part").addClass("has-error")
-            				$("#error_formfield3").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield3").hide()
-            				}
-           				
-           				if(!$("#activity_found").val()){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#activity_found").addClass("has-error")
-            				$("#error_formfield4").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield4").hide()
-            				}
-           				
-           				if(!$("#amt_sanc").val()){
-         					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#amt_sanc").addClass("has-error")
-            				$("#error_formfield5").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield5").hide()
-            				}
-           				
-           				var utamt= parseFloat($("#amt_utilise").val());
-           				var snamt= parseFloat($("#amt_sanc").val());
-           				
-           				 
+           
+             function numbersOnlyNotZero(id_number) {
 
-           				if(!$("#amt_utilise").val() || utamt > snamt ){
-         					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+                  
+                 if (mob.test($.trim(id_number)) == false) {
+
+                	// alert("asdf")
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            			 
+            			 
+            			 if($("#activity_type").val()== -1 ){
+          		            
+              				isError=true;
+              				
+              				$("#error_type").show()
+              					//return fregister_useralse;
+              				} else {
+              					$("#error_type").hide()
+              				}
+          				
+          				
             				
-            				$("#amt_utilise").addClass("has-error")
-            				$("#error_formfield6").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield6").hide()
-            				}
-           				
-           				/* if(parseFloat($("#amt_utilise").val()) > parseFloat($("#amt_sanc").val())){
+            			 if(!$("#activity_name").val()){
         					 
-            				isError=true;
-            				errMsg += '<li>Utilized amount is greater than sanctioned amount</li>';
-            				
-            				$("#amt_utilise").addClass("has-error")
-            				$("#error_formfield6").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield6").hide()
-            				} */
-			            	 if (!isError) {
-			            		 
+             				isError=true;
+             				
+             				
+             				$("#activity_name").addClass("has-error")
+             				$("#error_name").show()
+             					//return false;
+             				} else {
+             					$("#error_name").hide()
+             				}
+            			 
+            			 if($("#activity_level").val()== -1 ){
+         		            
+             				isError=true;
+             				
+             				$("#error_level").show()
+             					//return fregister_useralse;
+             				} else {
+             					$("#error_level").hide()
+             				}
+
+            			
+            			 if(!$("#activity_date").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#activity_date").addClass("has-error")
+              				$("#error_date").show()
+              					//return false;
+              				} else {
+              					$("#error_date").hide()
+              				}
+            			 
+            			 var prt = parseInt($("#activity_part").val());
+            			 
+            			// alert(numbersOnlyNotZero(prt));
+
+         				if(!$("#activity_part").val() || !numbersOnlyNotZero($("#activity_part").val())){
+         
+         					isError=true;
+         				$("#error_part").show()
+         					
+         				} else {
+         					$("#error_part").hide()
+         				}
+
+            			 if(!$("#activity_found").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#activity_found").addClass("has-error")
+              				$("#error_funded").show()
+              					//return false;
+              				} else {
+              					$("#error_funded").hide()
+              				}
+            			 
+            			 
+            			 
+            			 //alert("amt :"+$("#activity_part").val());
+            			 
+            			// alert("amt :"+$("#amt_sanc").val());
+          				if(!$("#amt_sanc").val() || !numbersOnlyNotZero($("#amt_sanc").val())){
+          			      
+          					isError=true;
+           				
+          				$("#error_amt").show()
+          					//return fregister_useralse;
+          				} else {
+          					$("#error_amt").hide()
+          				}
+          				
+          		
+          		
+          				if(!$("#amt_utilise").val() || !numbersOnlyNotZero($("#amt_utilise").val())){
+          		          
+          					isError=true;
+              				$("#error_utilized").show()
+              					//return fregister_useralse;
+              				} else {
+              					$("#error_utilized").hide()
+              				}
+          			
+
+							if (!isError) {
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
-									
-									document.getElementById("sub1").disabled = true;
-									document.getElementById("sub2").disabled = true;
 									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
 								}
 							}
+            
+            			  
+            						 
             					   return false;
-            			});
-        });
-
-</script>
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 <script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
 		}
+		
+		function chkSncAmt(){
+			
+			var sancAmt = parseFloat(document.getElementById("amt_sanc").value); 
+			var utlAmt = parseFloat(document.getElementById("amt_utilise").value); 
+			
+			
+			if(utlAmt>sancAmt){
+				document.getElementById("amt_utilise").value = "";
+				alert("Utilized amount is more than Sanctioned amount!");
+				return false;
+				
+			}
+		}
 </script>	
 	
 <script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
-
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
+ 
     
     $(function () {
 		 

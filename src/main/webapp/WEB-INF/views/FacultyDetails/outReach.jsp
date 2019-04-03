@@ -99,7 +99,7 @@
 										action="${pageContext.request.contextPath}/insertOutReachActivity"
 										method="post" 
 										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+									>
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -132,9 +132,9 @@
 																<option value="6">Any Other</option>
 
 															</select> -->
-															<select id="activity_type" name="activity_type" class="form-control" required>
+															<select id="activity_type" name="activity_type" class="form-control" >
 															
-																	
+																	<option value="-1">Select</option>	
 																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
 																		<c:choose>
 																			<c:when test="${outtype.typeId==editInst.outreachType}">
@@ -152,19 +152,11 @@
 
 																	</c:forEach>
 																</select>
+	<span class="error_form text-danger" id="error_type" style="display:none;" >Please Select Outreach Type  </span>
 														</div>
 															</div>
-													<!-- 	<div class="form-group" id="abc" style = "display:none">
-															<label class="control-label col-sm-2" for="smallheading">Other
-																Activity <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="other_act"
-																	name="other_act" placeholder="Other Designation" value=""
-																	required>
-															</div>
-														</div>
- -->
+													
+ 
 
 													</div>
 
@@ -176,33 +168,13 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="act_name"
 																name="act_name" placeholder="Name of Activity" value="${editInst.outreachName}"
-																required>
+																>
+	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Outreach Name  </span>
 														</div>
 
 													</div>
 
 
-<%-- 
-											<div class="form-group">
-
-														<label class="control-label col-sm-2" for="status">Activity Type
-															 <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<select id="activity_type" name="activity_type" class="form-control" required>
-															
-																	
-																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
-																	
-																			<option value="${outtype.typeId}">${outtype.typeName}</option>
-
-																			
-
-																	</c:forEach>
-																</select>
-														</div>
-													</div>
- --%>
 
 													<div class="form-group">
 
@@ -216,7 +188,7 @@
 																<option value="National">National</option>
 																<option value="State">State</option>
 																<option value="Regional">Regional</option> -->
-																
+																<option value="-1">Select</option>	
 																<c:choose>
 																			<c:when test="${'International'==editInst.outreachLevel}">
 																			
@@ -266,6 +238,8 @@
 
 
 															</select>
+															
+<span class="error_form text-danger" id="error_level" style="display:none;" >Please Select Outreach Level  </span>
 														</div>
 													</div>
 
@@ -275,7 +249,8 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="act_date" value="${date}"
-																	name="act_date" placeholder="dd/MM/yyyy " required>
+																	name="act_date" placeholder="dd/MM/yyyy " >
+	<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date  </span>
 															</div>
 														</div>
 														
@@ -326,6 +301,106 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+           
+             function numbersOnlyNotZero(id_number) {
+
+                 
+                 var mob = /^[1-9][0-9]+$/;
+
+
+                 if (mob.test($.trim(id_number)) == false) {
+
+                     //alert("Please enter a valid email address .");
+                     return false;
+
+                 }
+                 return true;
+             }
+
+
+
+             
+            
+            	$(document).ready(function($){
+          //  alert("hii....");
+            		$("#form_sample_2").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 if(!$("#act_name").val()){
+        					 
+             				isError=true;
+             				
+             				
+             				$("#act_name").addClass("has-error")
+             				$("#error_name").show()
+             					//return false;
+             				} else {
+             					$("#error_name").hide()
+             				}
+            			 
+            			 if($("#activity_type").val()== -1 ){
+         		            
+             				isError=true;
+             				
+             				$("#error_type").show()
+             					//return fregister_useralse;
+             				} else {
+             					$("#error_type").hide()
+             				}
+
+         				if($("#act_level").val()== -1 ){
+         		            
+             				isError=true;
+             				
+             				$("#error_level").show()
+             					//return fregister_useralse;
+             				} else {
+             					$("#error_level").hide()
+             				}
+         				
+         				
+            			 
+            			 
+            			
+            			 if(!$("#act_date").val()){
+        					 
+              				isError=true;
+              				
+              				
+              				$("#act_date").addClass("has-error")
+              				$("#error_date").show()
+              					//return false;
+              				} else {
+              					$("#error_date").hide()
+              				}
+            			 
+            			
+            				
+
+            				
+
+							if (!isError) {
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									return  true;
+									 document.getElementById("sub1").disabled=true;
+           						  document.getElementById("sub2").disabled=true;
+								}
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 	<script type="text/javascript">
 		function showForm() {
 			//document.getElementById("abc").style = "display:none"
