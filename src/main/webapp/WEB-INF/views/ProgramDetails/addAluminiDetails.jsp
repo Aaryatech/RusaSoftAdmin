@@ -101,8 +101,7 @@
 
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertAlumni"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<div class="row">
 											<div class="col-md-12">
@@ -114,7 +113,9 @@
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
 															placeholder="Full Name of Alumni" id="alum_name"
-															value="${alumni.alumniName}" name="alum_name" required>
+															value="${alumni.alumniName}" name="alum_name">
+															<span class="error_form text-danger" id="alum_name_field"
+															style="display: none;">Please enter name of alumni</span>
 													</div>
 												</div>
 
@@ -128,7 +129,9 @@
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy" placeholder="Enter Year of Passing"
 															id="year_of_pass" value="${alumni.passingYear}"
-															name="year_of_pass" autocomplete="off" required>
+															name="year_of_pass" autocomplete="off">
+															<span class="error_form text-danger" id="year_of_pass_field"
+															style="display: none;">Please select year of passing</span>
 													</div>
 												</div>
 
@@ -139,7 +142,7 @@
 													</label>
 													<div class="col-sm-9">
 														<select id="contr_type" name="contr_type"
-															class="form-control" required>
+															class="form-control">
 
 															<c:choose>
 																<c:when test="${alumni.contributionType==1}">
@@ -157,6 +160,8 @@
 															</c:choose>
 
 														</select>
+														<span class="error_form text-danger" id="contr_type_field"
+															style="display: none;">Please select nature of contribution</span>
 
 
 													</div>
@@ -175,7 +180,8 @@
 															data-format="yyyy"
 															placeholder="Enter Year of Contribution" id="contr_year"
 															value="${alumni.contributionYear}" name="contr_year"
-															required>
+															><span class="error_form text-danger" id="contr_year_field"
+															style="display: none;">Please select year of contribution</span>
 													</div>
 												</div>
 
@@ -187,7 +193,7 @@
 													</label>
 													<div class="col-sm-9">
 														<select id="benif_to" name="benif_to" class="form-control"
-															onchange="showExtraField()" required>
+															onchange="showExtraField()">
 
 															<c:choose>
 																<c:when test="${alumni.benefitTo eq 'Students'}">
@@ -265,6 +271,8 @@
 
 
 														</select>
+														<span class="error_form text-danger" id="benif_to_field"
+															style="display: none;">Please select beneficiary</span>
 
 													</div>
 												</div>
@@ -277,6 +285,8 @@
 														<input type="text" onchange="trim(this)" class="form-control" id="other_benif"
 															value="${alumni.benefitTo}" name="other_benif"
 															placeholder="Other Beneficiary">
+															<span class="error_form text-danger" id="other_benif_field"
+															style="display: none;">Please enter name of other beneficiary</span>
 													</div>
 												</div>
 
@@ -316,11 +326,124 @@
 			</section>
 		</section>
 	</div>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+		<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#alum_name").val()) {
+													isError = true;
+
+													$("#alum_name").addClass(
+															"has-error")
+													$("#alum_name_field")
+															.show()
+												} else {
+													$("#alum_name_field")
+															.hide()
+												}
+
+												if (!$("#year_of_pass").val()) {
+													isError = true;
+
+													$("#year_of_pass").addClass(
+															"has-error")
+													$("#year_of_pass_field")
+															.show()
+												} else {
+													$("#year_of_pass_field")
+															.hide()
+												}
+
+												if (!$("#contr_type").val()) {
+													isError = true;
+
+													$("#contr_type").addClass(
+															"has-error")
+													$("#contr_type_field").show()
+												} else {
+													$("#contr_type_field").hide()
+												}
+
+
+												if (!$("#contr_year").val()) {
+													isError = true;
+
+													$("#contr_year").addClass(
+															"has-error")
+													$("#contr_year_field").show()
+												} else {
+													$("#contr_year_field").hide()
+												}
+
+												if (!$("#benif_to").val()) {
+													isError = true;
+
+													$("#benif_to").addClass(
+															"has-error")
+													$("#benif_to_field").show()
+												} else {
+													$("#benif_to_field").hide()
+												}
+
+
+												
+												
+					var radioValue = $("#benif_to").val()
+					//alert(radioValue);
+					if(radioValue==7){
+						if (!$("#other_benif").val()) {
+							isError = true;
+
+							$("#other_benif").addClass(
+									"has-error")
+							$("#other_benif_field").show()
+						} else {
+							$("#other_benif_field").hide()
+						}
+					}
+
+												 
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 	<script type="text/javascript">
 		/* function checkUnique(inputValue,valueType){
 		 //alert(inputValue);
@@ -404,13 +527,13 @@
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
-				document.getElementById("other_benif").setAttribute("required",
-						"true");
+				//document.getElementById("other_benif").setAttribute("required",
+						//"true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
-				document.getElementById("other_benif").removeAttribute(
-						"required");
+				//document.getElementById("other_benif").removeAttribute(
+						//"required");
 
 			}
 
@@ -424,8 +547,8 @@
 			if (qualType == 7) {
 				//alert("In If " +x);
 				document.getElementById("abc").style = "visible";
-				document.getElementById("other_benif").setAttribute("required",
-						"true");
+				//document.getElementById("other_benif").setAttribute("required",
+						//"true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
@@ -438,14 +561,14 @@
 			//alert("Value " +value)
 			if (value == 0) {
 				//alert(value)
-				document.getElementById("reg_date").removeAttribute("required");
+				//document.getElementById("reg_date").removeAttribute("required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				document.getElementById("reg_date").setAttribute("required",
-						"true");
+				//document.getElementById("reg_date").setAttribute("required",
+						//"true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)

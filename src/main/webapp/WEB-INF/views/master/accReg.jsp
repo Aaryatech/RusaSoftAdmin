@@ -108,8 +108,7 @@
 													maxlength="100" value="${accOff.accOfficerName}" onchange="trim(this)"
 													name="acc_off_name" placeholder="Account Officer Name"
 													>
-													<span
-															class="error_form text-danger" id="acc_off_name_field"
+													<span class="error_form text-danger" id="acc_off_name_field"
 															style="display: none;">Please enter account officer name</span>
 											</div>
 										</div>
@@ -550,7 +549,7 @@
 											document
 													.getElementById("acc_off_email").value = "";
 
-											alert("This email id already exist in system please enter unique");
+											alert("This email id already exist in database. Please login with your credentials");
 
 											document.getElementById("sub1").disabled = true;
 											document.getElementById("sub2").disabled = true;
@@ -559,7 +558,8 @@
 											document
 													.getElementById("acc_off_mob").value = "";
 
-											alert("This contact no  already exist in system please enter unique");
+											alert("This contact no  already exist database. Please login with your credentials");
+
 
 											document.getElementById("sub1").disabled = true;
 											document.getElementById("sub2").disabled = true;

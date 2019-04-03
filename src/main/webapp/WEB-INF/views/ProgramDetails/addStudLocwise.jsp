@@ -109,8 +109,7 @@
 
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertStudAdmLocwise"
-												method="post" name="form_sample_2" id="form_sample_2"
-												onsubmit="return checkBeforeSubmit()">
+												method="post" name="form_sample_2" id="form_sample_2">
 
 												<div class="row">
 													<div class="col-md-12">
@@ -199,6 +198,9 @@
 															<input
 																type="text" readonly placeholder="Total Student" id="total_stud"
 																>
+																<span
+															class="error_form text-danger" id="total_stud_count_field"
+															style="display: none;">All fields can not be 0</span>
 														</div>
 													</div>
 
@@ -224,6 +226,62 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+												var x=$("#total_stud").val();
+												if ($("#total_stud").val() <= 0) {
+													isError = true;
+
+													$("#total_stud").addClass(
+															"has-error")
+													$("#total_stud_count_field")
+															.show()
+												} else {
+													$("#total_stud_count_field")
+															.hide()
+												}
+
+												
+												 
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 	<script type="text/javascript">
 		/* function checkUnique(inputValue, valueType) {
 			//alert(inputValue);
@@ -377,7 +435,6 @@ function calculateSum() {
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 

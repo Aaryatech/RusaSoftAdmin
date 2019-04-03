@@ -92,9 +92,8 @@
 
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertHigherEduDetail"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
-
+										method="post" name="form_sample_2" id="form_sample_2">
+									
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
@@ -104,8 +103,8 @@
 													<div class="col-sm-10">
 														<!--  fetch it from m_prog_type -->
 														<select id="prog_type" name="prog_type"
-															class="form-control" onchange="setProceedProgType()"
-															required>
+															class="form-control" onchange="setProceedProgType()">
+															
 															<c:forEach items="${progTypeList}" var="progType">
 																<c:choose>
 																	<c:when
@@ -118,6 +117,8 @@
 																</c:choose>
 															</c:forEach>
 														</select>
+														<span class="error_form text-danger" id="prog_type_field"
+															style="display: none;">Please select program type</span>
 													</div>
 												</div>
 
@@ -128,8 +129,10 @@
 													<div class="col-sm-10">
 														<!--  fetch it from m_prog_type but the program higher than above selected prog only -->
 														<select id="proceed_prog_type" name="proceed_prog_type"
-															class="form-control" required>
+															class="form-control">
 														</select>
+														<span class="error_form text-danger" id="proceed_prog_type_field"
+															style="display: none;">Please select proceed to program type</span>
 													</div>
 												</div>
 
@@ -138,11 +141,12 @@
 														No. of Student<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="number" min="0" class="form-control"
+														<input type="number" min="0" max="999999999" class="form-control"
 															id="no_of_student" value="${highEduDet.noStudent}"
 															name="no_of_student"
-															placeholder="Number Of Students Opted for Higher Education"
-															required>
+															placeholder="Number Of Students Opted for Higher Education">
+															<span class="error_form text-danger" id="no_of_student_field"
+															style="display: none;">Please enter number of students migrated</span>
 													</div>
 												</div>
 
@@ -179,8 +183,87 @@
 		</section>
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
-
+	
 	<!-- END CONTENT -->
+			<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+	        var mob = /^[1-9][0-9]+$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#prog_type").val()) {
+													isError = true;
+
+													$("#prog_type").addClass(
+															"has-error")
+													$("#prog_type_field")
+															.show()
+												} else {
+													$("#prog_type_field")
+															.hide()
+												}
+
+												if (!$("#proceed_prog_type").val()) {
+													isError = true;
+
+													$("#proceed_prog_type").addClass(
+															"has-error")
+													$("#proceed_prog_type_field")
+															.show()
+												} else {
+													$("#proceed_prog_type_field")
+															.hide()
+												}
+
+												if (!$("#no_of_student").val()
+														|| !validateNo($(
+																"#no_of_student")
+																.val())) {
+													isError = true;
+													$("#no_of_student")
+															.addClass(
+																	"has-error")
+													$("#no_of_student_field")
+															.show()
+												} else {
+													$("#no_of_student_field")
+															.hide()
+												}
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
+	
 	<script type="text/javascript">
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
@@ -340,7 +423,6 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
 

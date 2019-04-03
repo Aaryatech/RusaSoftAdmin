@@ -108,8 +108,8 @@
 
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertFacAcademic"
-												method="post" name="form_sample_2" id="form_sample_2"
-												onsubmit="return checkBeforeSubmit()">
+												method="post" name="form_sample_2" id="form_sample_2">
+												
 												<div class="col-md-12"></div>
 												<div class="col-xs-12">
 													<div class="col-xs-12"></div>
@@ -121,7 +121,7 @@
 														</label>
 														<div class="col-sm-6">
 															<select id="fQualificationId" name="fQualificationId"
-																class="form-control" required>
+																class="form-control">
 																<c:forEach items="${quolfList}" var="quolf">
 																	<c:choose>
 																		<c:when
@@ -140,6 +140,9 @@
 																</c:forEach>
 
 															</select>
+															<span class="error_form text-danger" id="fQualificationId_field"
+															style="display: none;">Please select qualification</span>
+															
 														</div>
 
 													</div>
@@ -150,8 +153,7 @@
 															Class <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<select id="fClass" name="fClass" class="form-control"
-																required>
+															<select id="fClass" name="fClass" class="form-control">
 																
 																<c:choose>
 																<c:when test="${editFacAcad.fClass eq 'Distinction'}">
@@ -187,6 +189,9 @@
 																
 																</c:choose>
 															</select>
+															<span class="error_form text-danger" id="fClass_field"
+															style="display: none;">Please select class achieved</span>
+															
 														</div>
 														<div class="col-sm-2"></div>
 													</div>
@@ -198,7 +203,10 @@
 														<div class="col-sm-6">
 															<input type="text" maxlength="200" onchange="trim(this)" class="form-control" id="fUniversity" 
 																name="fUniversity" placeholder="Enter University Name"
-																value="${editFacAcad.fUniversity}" required>
+																value="${editFacAcad.fUniversity}">
+																<span class="error_form text-danger" id="fUniversity_field"
+															style="display: none;">Please enter university name</span>
+																
 														</div>
 
 
@@ -208,14 +216,17 @@
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="fPassingYear">Year
-															of Passing <span class="text-danger">*</span>
+															of Passing<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepickeryear"
-																data-min-view-mode="years" data-start-view="2"
+																data-min-view-mode="years" data-start-view="2" 
 																data-format="yyyy" id="fPassingYear" name="fPassingYear"
 																placeholder="Select Passing Year"  autocomplete="off"
-																value="${editFacAcad.fPassingYear}" required>
+																value="${editFacAcad.fPassingYear}">
+																<span class="error_form text-danger" id="fPassingYear_field"
+															style="display: none;">Please select year of passing</span>
+																
 														</div>
 
 													</div>
@@ -268,6 +279,92 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+							//alert("Hi")
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												 if (!$("#fQualificationId").val()) {
+													isError = true;
+
+													$("#fQualificationId").addClass(
+															"has-error")
+													$("#fQualificationId_field")
+															.show()
+												} else {
+													$("#fQualificationId_field")
+															.hide()
+												}
+
+												if (!$("#fClass").val()) {
+													isError = true;
+
+													$("#fClass").addClass(
+															"has-error")
+													$("#fClass_field")
+															.show()
+												} else {
+													$("#fClass_field")
+															.hide()
+												}
+
+												if (!$("#fUniversity").val()) {
+													isError = true;
+
+													$("#fUniversity").addClass(
+															"has-error")
+													$("#fUniversity_field")
+															.show()
+												} else {
+													$("#fUniversity_field")
+															.hide()
+												}
+
+												if (!$("#fPassingYear").val()) {
+													isError = true;
+
+													$("#fPassingYear").addClass(
+															"has-error")
+													$("#fPassingYear_field")
+															.show()
+												} else {
+													$("#fPassingYear_field")
+															.hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
+	
 	<script type="text/javascript">
 
 

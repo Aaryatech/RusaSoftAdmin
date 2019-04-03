@@ -91,31 +91,27 @@
 
 						</header>
 
-
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 
-
-
-
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertTrainPlace"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
-
+										method="post" name="form_sample_2" id="form_sample_2">
+										
 										<div class="row">
 											<div class="col-md-12">
-
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">
 														Name of Employer<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="employer_name"
+														<input type="text" class="form-control" onchange="trim(this)" id="employer_name"
 															value="${trainPlace.empyrName}" name="employer_name"
-															placeholder="Full Name of Employer" required>
+															placeholder="Full Name of Employer" maxlength="100">
+															<span class="error_form text-danger" id="employer_name_field"
+															style="display: none;">Please enter employer name</span>
 													</div>
 												</div>
 
@@ -127,27 +123,22 @@
 													</label>
 													<div class="col-sm-9">
 														<select id="prog_type" name="prog_type"
-															class="form-control" required>
+															class="form-control">
 
 															<c:forEach items="${progTypeList}" var="progType">
 																<c:choose>
 																	<c:when
 																		test="${trainPlace.programType==progType.programId}">
 																		<option selected value="${progType.programId}">${progType.programName}</option>
-
 																	</c:when>
 																	<c:otherwise>
-
 																		<option value="${progType.programId}">${progType.programName}</option>
-
 																	</c:otherwise>
-
 																</c:choose>
-
 															</c:forEach>
-
-
 														</select>
+														<span class="error_form text-danger" id="prog_type_field"
+															style="display: none;">Please select program type</span>
 													</div>
 												</div>
 
@@ -157,23 +148,27 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" id="prog_name"
-															value="${trainPlace.programName}" name="prog_name"
-															placeholder="Name of Program " required>
+															value="${trainPlace.programName}" onchange="trim(this)" name="prog_name"
+															placeholder="Name of Program" maxlength="100">
+															<span class="error_form text-danger" id="prog_name_field"
+															style="display: none;">Please enter program name</span>
 													</div>
 												</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">
+													<label class="control-label col-sm-3" for="no_stud_placed">
 														No. of Students Placed<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="number" maxlength="5" min="0"
+														<input type="number" min="1"
 															class="form-control" id="no_stud_placed"
 															value="${trainPlace.noStudentPlaced}"
-															name="no_stud_placed"
-															placeholder="Total Students Placed " required>
+															name="no_stud_placed" onchange="trim(this)"
+															placeholder="Total Students Placed ">
+															<span class="error_form text-danger" id="no_stud_placed_field"
+															style="display: none;">Please enter no of students placed</span>
 													</div>
 												</div>
 
@@ -184,9 +179,11 @@
 														Address of Employer<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="employer_address" value="${trainPlace.empyrAdd}"
-															name="employer_address" required>
+														<input type="text" class="form-control" onchange="trim(this)"
+															id="employer_address" maxlength="200" value="${trainPlace.empyrAdd}"
+															name="employer_address" placeholder="Address of Employer">
+															<span class="error_form text-danger" id="employer_address_field"
+															style="display: none;">Please enter address of employer</span>
 													</div>
 												</div>
 
@@ -199,8 +196,10 @@
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
 															id="contact_detail" value="${trainPlace.contactDetail}"
-															name="contact_detail"
-															placeholder="Employer Contact Information" required>
+															name="contact_detail" onchange="trim(this)" maxlength="50"
+															placeholder="Employer Contact Information">
+															<span class="error_form text-danger" id="contact_detail_field"
+															style="display: none;">Please enter employer contact detail</span>
 													</div>
 												</div>
 
@@ -211,10 +210,12 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
-															id="sup_agency_name"
+															id="sup_agency_name" onchange="trim(this)"
 															value="${trainPlace.supportAgencyName}"
-															name="sup_agency_name"
-															placeholder="Enter Supprt Agency Name" required>
+															name="sup_agency_name" maxlength="100"
+															placeholder="Enter Support Agency Name">
+															<span class="error_form text-danger" id="sup_agency_name_field"
+															style="display: none;">Please enter support agency name</span>
 													</div>
 												</div>
 
@@ -225,11 +226,12 @@
 														Package Offered<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="number" min="0" maxlength="10" class="form-control"
+														<input type="text" onchange="trim(this)" min="0" maxlength="50" class="form-control"
 															id="package_offered" value="${trainPlace.pakageOfferd}"
 															name="package_offered"
-															placeholder="Package Offered by Employer to Students  "
-															required>
+															placeholder="Package Offered by Employer to Students"
+															><span class="error_form text-danger" id="package_offered_field"
+															style="display: none;">Please enter package amount offered to students</span>
 													</div>
 												</div>
 
@@ -275,6 +277,144 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#employer_name").val()) {
+													isError = true;
+
+													$("#employer_name").addClass(
+															"has-error")
+													$("#employer_name_field")
+															.show()
+												} else {
+													$("#employer_name_field")
+															.hide()
+												}
+
+												if (!$("#prog_type").val()) {
+													isError = true;
+
+													$("#prog_type").addClass(
+															"has-error")
+													$("#prog_type_field")
+															.show()
+												} else {
+													$("#prog_type_field")
+															.hide()
+												}
+
+												if (!$("#prog_name").val()) {
+													isError = true;
+
+													$("#prog_name").addClass(
+															"has-error")
+													$("#prog_name_field").show()
+												} else {
+													$("#prog_name_field").hide()
+												}
+
+
+												if (!$("#no_stud_placed").val()
+														|| !validateNo($(
+																"#no_stud_placed")
+																.val())) {
+													isError = true;
+													$("#no_stud_placed")
+															.addClass(
+																	"has-error")
+													$("#no_stud_placed_field")
+															.show()
+												} else {
+													$("#no_stud_placed_field")
+															.hide()
+												}
+
+												if (!$("#employer_address").val()) {
+													isError = true;
+													$("#employer_address").addClass(
+															"has-error")
+													$("#employer_address_field")
+															.show()
+												} else {
+													$("#employer_address_field")
+															.hide()
+												}
+												
+												if (!$("#contact_detail").val())
+																{
+													isError = true;
+													$("#contact_detail").addClass(
+															"has-error")
+													$("#contact_detail_field")
+															.show()
+												} else {
+													$("#contact_detail_field")
+															.hide()
+												}
+												
+												if (!$("#sup_agency_name").val())
+												{
+									isError = true;
+									$("#sup_agency_name").addClass(
+											"has-error")
+									$("#sup_agency_name_field")
+											.show()
+								} else {
+									$("#sup_agency_name_field")
+											.hide()
+								}
+												if (!$("#package_offered").val())
+												{
+									isError = true;
+									$("#package_offered").addClass(
+											"has-error")
+									$("#package_offered_field")
+											.show()
+								} else {
+									$("#package_offered_field")
+											.hide()
+								}
+												
+												 
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 	<script type="text/javascript">
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
@@ -405,6 +545,13 @@
 			}
 			return false;
 		}
+		
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 	</script>
 
 
@@ -412,9 +559,7 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
+	
 
 </body>
 </html>
