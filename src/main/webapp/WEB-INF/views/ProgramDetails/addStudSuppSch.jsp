@@ -146,7 +146,7 @@
 														<input type="text" autocomplete="off" class="form-control"
 															id="anotherScheme" value="${stud.schemeName}"
 															name="anotherScheme" placeholder="Another Scheme"
-															onchange="checkUnique(this.value,1)"> <span
+															onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_oth"
 															style="display: none;">Please Enter Other Scheme</span>
 													</div>
@@ -229,7 +229,7 @@
 														No. of Students Benefited <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0" class="form-control"
+														<input type="text"  class="form-control"
 															id="studBenifit" value="${stud.noStudentBenifited}"
 															name="studBenifit" placeholder="Students Benifited"
 															autocomplete="off"> <span
@@ -248,10 +248,10 @@
 														Name of Support Agency <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="supportAgency"
+														<input type="text" class="form-control" id="supportAgency" onchange="trim(this)"
 															value="${stud.supportAgencyName}" autocomplete="off"
 															name="supportAgency" placeholder="Support Agency"
-															onchange="checkUnique(this.value,1)"> <span
+															> <span
 															class="error_form text-danger" id="error_agency"
 															style="display: none;">Please Enter Name of
 															Support Agency </span>
@@ -268,11 +268,10 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id=" yearofIntroduction" placeholder="dd-MM-YYYY"
-															value="${ydate}" autocomplete="off" name="yearofIntro">
-														<span class="error_form text-danger" id="error_dateIntroduction"
-															style="display: none;">Please Enter The Date
-															Properly</span>
+															id="yearofIntro" placeholder="dd-MM-YYYY"
+															 autocomplete="off" value="${yDate}" name="yearofIntro">
+															<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date  </span>
+
 													</div>
 												</div>
 
@@ -317,7 +316,7 @@
 			</section>
 		</section>
 
-	</div>
+	</div>                            
 	<!-- MAIN CONTENT AREA ENDS -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
@@ -325,6 +324,13 @@
 
 
 	<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}  
+	
 		function numbersOnlyNotZero(id_number) {
 
 			var mob = /^[1-9][0-9]+$/;
@@ -348,20 +354,18 @@
 												var isError = false;
 												var errMsg = "";
 
-												
-												if (!$("#yearofIntroduction").val()) {
-
-													isError = true;
-
-													$("#yearofIntroduction").addClass(
-															"has-error")
-													$("#error_dateIntroduction")
-															.show()
-												
-												} else {
-													$("#error_dateIntroduction")
-															.hide()
-												}
+if (!$("#yearofIntro").val()){
+						        					 alert("Hi")
+						              				isError=true;
+						              				
+						              				
+						              				$("#yearofIntro").addClass("has-error")
+						              				$("#error_date").show()
+						              					//return false;
+						              				} else {
+						              					$("#error_date").hide()
+						              				}
+											
 
 												if ($("#schemeName").val() == -1) {
 

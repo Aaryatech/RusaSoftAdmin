@@ -166,7 +166,7 @@
 															<!-- Name of Activity  --><span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="act_name"
+															<input type="text" class="form-control" id="act_name" onchange="trim(this)"
 																name="act_name" placeholder="Name of Activity" value="${editInst.outreachName}"
 																>
 	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Outreach Name  </span>
@@ -303,6 +303,15 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
 	<script>
+	
+	
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}  
+	
            
              function numbersOnlyNotZero(id_number) {
 

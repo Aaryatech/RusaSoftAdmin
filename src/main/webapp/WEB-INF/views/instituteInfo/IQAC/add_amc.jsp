@@ -107,7 +107,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_title"
-													autocomplete="off" name="amc_title"
+													autocomplete="off" name="amc_title" onchange="trim(this)"
 													placeholder="Title of Maintenance" value="${editInst.amcTitle}"
 													>
 	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Title </span>	
@@ -120,9 +120,9 @@
 												Expenditure<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control"
+												<input type="text" class="form-control"
 													onkeypress="return allowOnlyNumber(event)"
-													id="amc_expenditure" min="0" name="amc_expenditure"
+													id="amc_expenditure" name="amc_expenditure"
 													placeholder="AMC Expenditure" autocomplete="off"
 													value="${editInst.amcExpenditure}" >
 	<span class="error_form text-danger" id="error_exp" style="display:none;" >Please Enter AMC Expenditure  </span>	
@@ -138,7 +138,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_company"
-													name="amc_company" placeholder="Name of Company"
+													name="amc_company" placeholder="Name of Company"onchange="trim(this)" 
 													autocomplete="off" value="${editInst.amcCompany}" >
 	<span class="error_form text-danger" id="error_comp" style="display:none;" >Please Enter Company Name </span>	
 
@@ -152,7 +152,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_remark"
-													name="amc_remark" placeholder="AMC Remark"
+													name="amc_remark" placeholder="AMC Remark" onchange="trim(this)"
 													autocomplete="off" value="${editInst.amcRemarks}" >
 	<span class="error_form text-danger" id="error_amc" style="display:none;" >Please Enter Remark </span>	
 
@@ -323,6 +323,13 @@ function checkBeforeSubmit(){
 	  }
   }
   return false;
+  
+  function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
 }    
 	</script>
 	

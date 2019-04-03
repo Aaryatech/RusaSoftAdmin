@@ -126,7 +126,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="title"
-															autocomplete="off" name="title"
+															autocomplete="off" name="title" onchange="trim(this)"
 															placeholder="Title of MoU" value="${editInst.mouTitle}"
 															>
 															
@@ -237,7 +237,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="otherCourse"
-															autocomplete="off"  name="otherCourse"
+															autocomplete="off"  name="otherCourse" onchange="trim(this)"
 															placeholder="" value="${editInst.mouAgency}">
 					<span class="error_form text-danger" id="error_other" style="display:none;" >Please Enter Other Course</span>	
 													</div>
@@ -356,7 +356,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
-															id="instituteOfMoU" autocomplete="off"
+															id="instituteOfMoU" autocomplete="off" onchange="trim(this)"
 															name="instituteOfMoU" placeholder="Institute of MoU"
 															value="${editInst.mouInstitute}" >
 				<span class="error_form text-danger" id="error_inst" style="display:none;" >Please Institute of MoU</span>						

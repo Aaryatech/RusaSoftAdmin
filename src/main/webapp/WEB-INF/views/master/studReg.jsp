@@ -122,8 +122,8 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="student_name" 
-																value="${editStudent.studentName}" 
-																	name="student_name" placeholder="Student Name"
+																value="${editStudent.studentName}"  
+																	name="student_name" placeholder="Student Name" onchange="trim(this)"
 																	>
 											 <span class="error_form text-danger" id="error_name" style="display:none;" >Please enter Student Name</span>
 																	
@@ -199,7 +199,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" 
-																	maxlength="10" class="form-control" id="id_number"
+																	maxlength="10" class="form-control" id="id_number" 
 																	value="${editStudent.idNo}"  
 																	name="id_number" placeholder="ID Number" >
 													<span class="error_form text-danger" id="error_Id" style="display:none;" >Please Enter ID Properly</span>
@@ -276,7 +276,13 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<!-- END CONTENT -->
 <script>
-            //
+
+function trim(el) {
+	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	replace(/\n +/, "\n"); // Removes spaces after newlines
+	return;
+}     //
             function validateEmail(student_email) {
           //  alert("hii....validateEmail");
             	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;

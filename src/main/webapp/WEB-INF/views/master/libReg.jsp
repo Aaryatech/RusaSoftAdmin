@@ -123,7 +123,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="librarian_name" value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Librarian Name" 
+																	name="librarian_name" placeholder="Librarian Name"   onchange="trim(this)"
 																	>
 												 <span class="error_form text-danger" id="error_name" style="display:none;" >Please enter Librarian Name</span>
 															</div>
@@ -276,6 +276,15 @@
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
+	
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+	
             //
             function validateEmail(librarian_email) {
           //  alert("hii....validateEmail");
@@ -488,7 +497,7 @@ function submit_f(view){
 	
 function checkUnique(inputValue,valueType){
 	//alert(inputValue);
-	
+	trim(el);
 	var primaryKey=${editInst.librarianId};
 	//alert("Primary key"+primaryKey);
 	var isEdit=0;

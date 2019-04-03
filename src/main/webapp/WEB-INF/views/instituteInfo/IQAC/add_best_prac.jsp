@@ -110,7 +110,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="bestPrac"
-													autocomplete="off" name="bestPrac"
+													autocomplete="off" name="bestPrac" onchange="trim(this)"
 													placeholder="Name of Best Practices"
 													value="${editInst.practicesName}" >
 	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Name of Best Practices</span>	
@@ -126,7 +126,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="benificiary"
-													autocomplete="off" name="benificiary"
+													autocomplete="off" name="benificiary" onchange="trim(this)"
 													placeholder="Name of Best Beneficiaries"
 													value="${editInst.practicesBeneficiary}" >
 			<span class="error_form text-danger" id="error_bef" style="display:none;" >Please Enter Name of Best Beneficiaries</span>	

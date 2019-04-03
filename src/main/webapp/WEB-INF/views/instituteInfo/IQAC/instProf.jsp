@@ -129,7 +129,7 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control"
-																id="alt_faculty_name" name="alt_faculty_name"
+																id="alt_faculty_name" name="alt_faculty_name" onchange="trim(this)"
 																placeholder="Name of alternate Faculty with IQAC"
 																 value="${instRes.iqacAltName}"
 																>
@@ -263,6 +263,13 @@
 
 	<!-- END CONTENT -->
 <script>
+
+function trim(el) {
+	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	replace(/\n +/, "\n"); // Removes spaces after newlines
+	return;
+}  
             //
             function validateEmail(registered_email) {
           //  alert("hii....validateEmail");

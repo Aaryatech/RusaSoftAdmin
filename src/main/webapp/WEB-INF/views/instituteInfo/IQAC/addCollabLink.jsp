@@ -151,7 +151,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="col_agency"
 															name="col_agency" autocomplete="off"
-															onchange="return trim(this)"
+															onchange="return trim(this)" 
 															placeholder="Collaboration Linkage with Agency"
 															value="${editInst.linkAgency}" >
 											<span class="error_form text-danger" id="error_agency" style="display:none;" >Please enter Collaboration Linkage with Agency</span>
@@ -293,7 +293,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script>
-           
+ 
              function numbersOnlyNotZero(id_number) {
 
                  

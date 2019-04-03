@@ -135,7 +135,7 @@
 												 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" min="0"
+												<input type="text" class="form-control" 
 													id="expenditure_on_book_purchase" autocomplete="off"
 													name="expenditure_on_book_purchase"
 													value="${budget.expenditureOnBookPurchase}"
@@ -152,7 +152,7 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" min="0"
+												<input type="text" class="form-control" 
 													id="expenditure_on_journals_purchase" autocomplete="off"
 													name="expenditure_on_journals_purchase"
 													
@@ -168,7 +168,7 @@
 												Expenditures on e-Journals<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" min="0"
+												<input type="text" class="form-control" 
 													id="expenditure_on_ejournals_purchase" autocomplete="off"
 													name="expenditure_on_ejournals_purchase"
 													placeholder="Expenditures on e-Journals"
@@ -186,7 +186,7 @@
 												Expenditures on e-Resources<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" min="0"
+												<input type="text" class="form-control" 
 													id="expenditure_on_eresources_purchase"
 													name="expenditure_on_eresources_purchase"
 													autocomplete="off"
@@ -246,7 +246,12 @@
 	
 	
 	<script>
-           
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}   
              function numbersOnlyNotZero(id_number) {
 
                  

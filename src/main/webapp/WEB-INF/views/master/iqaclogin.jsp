@@ -159,7 +159,7 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="number" min="0" class="form-control"
+																<input type="text" class="form-control"
 																	id="no_fullTime_Faculty"
 																	value="${editInstInfo.noOfFulltimeFaculty}"
 																	name="no_fullTime_Faculty"
@@ -179,7 +179,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="number" min="0" class="form-control"
+																<input type="text"  class="form-control"
 																	id="no_nonTeaching_faculty"
 																	value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
 																	name="no_nonTeaching_faculty"
@@ -197,7 +197,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="number" min="0" class="form-control"
+																<input type="text"  class="form-control"
 																	id="no_suppStaff"
 																	value="${editInstInfo.noSupportStaff}"
 																	name="no_suppStaff" placeholder="No. of Support Staff"
@@ -212,7 +212,7 @@
 																admitted student <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="number" min="0" class="form-control"
+																<input type="text"  class="form-control"
 																	id="no_currAdmitted_Student"
 																	value="${editInstInfo.noCurrentAdmitedStnt}"
 																	name="no_currAdmitted_Student"
@@ -228,7 +228,7 @@
 																class="text-danger">*</span>
 															</label>
 															<div class="col-sm-8">
-																<input type="number" min="0" class="form-control"
+																<input type="text" class="form-control"
 																	id="treasury_code" value="${editInstInfo.treasuryCode}"
 																	name="treasury_code" placeholder="State Treasury Code"
 																	>

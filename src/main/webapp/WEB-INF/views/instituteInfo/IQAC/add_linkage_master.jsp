@@ -112,7 +112,7 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="linkname_text"
 														 name="linkname_text" autocomplete="off"
-														placeholder="Linkage Name"
+														placeholder="Linkage Name" onchange="trim(this)"
 														value="${editInst.linknameText}">
 														
 	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Linkage Name </span>	
@@ -125,7 +125,7 @@
 													Linkage Remarks <span class="text-danger"></span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control" onchange="trim(this)"
 														id="linkname_remarks" name="linkname_remarks"
 														autocomplete="off" placeholder="Linkage Remarks"
 														value="${editInst.linknameRemarks}">
@@ -250,7 +250,13 @@
 <script>
            
          
-            
+
+function trim(el) {
+	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	replace(/\n +/, "\n"); // Removes spaces after newlines
+	return;
+} 
             	$(document).ready(function($){
           //  alert("hii....");
             		$("#form_sample_2").submit(function(e) {
