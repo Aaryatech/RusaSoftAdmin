@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertDist"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
 
 										<div class="form-group">
 
@@ -108,9 +107,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="title"
 													maxlength="200" autocomplete="off" name="title"
-													pattern="^(?!\s*$).+" onchange="return trim(this)"
+													onchange="return trim(this)"
 													placeholder="Title of Distinctiveness"
-													value="${editDist.distName}" required>
+													value="${editDist.distName}"> <span
+													class="error_form text-danger" id="error_title"
+													style="display: none;">Please enter Title</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -120,7 +121,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" id="date"
 													name="date" autocomplete="off"
-													value="${editDist.distApplicableFrom}" required>
+													value="${editDist.distApplicableFrom}"> <span
+													class="error_form text-danger" id="error_date"
+													style="display: none;">Please enter Date</span>
 											</div>
 										</div>
 
@@ -134,7 +137,10 @@
 													pattern="^(?!\s*$).+" onchange="return trim(this)"
 													maxlength="200" name="befStake"
 													placeholder="Beneficiary Stake Holders" autocomplete="off"
-													value="${editDist.distBeneficiary}" required>
+													value="${editDist.distBeneficiary}"> <span
+													class="error_form text-danger" id="error_befStake"
+													style="display: none;">Please enter Beneficiary
+													Stake Holders</span>
 											</div>
 										</div>
 										<input type="hidden" id="distId" name="distId"
@@ -143,11 +149,13 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save & Next">
+													onclick="submit_f(1)" value="Save" id="sub_button">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(0)" value="Save & Next"
+													id="sub_button_next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
+
 
 											<div class="clearfix"></div>
 										</div>
@@ -243,6 +251,104 @@
 	    return true;
 	}
 	</script>
+	<script>
+		function numbersOnlyNotZero(value) {
+
+			var mob = /^[1-9][0-9]+$/;
+
+			if (mob.test($.trim(value)) == false) {
+
+				//alert("Please enter a valid email address .");
+				return false;
+
+			}
+			return true;
+		}
+	</script>
+
+
+
+	<script>
+		$(document)
+				.ready(
+						function($) {
+
+							$("#formidhere")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+												
+												if (!$("#title").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter Title.</li>';
+
+													$("#title").addClass(
+															"has-error")
+													$("#error_title").show()
+
+												} else {
+													$("#error_title").hide()
+												}
+
+												
+												
+												
+												if (!$("#date").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter Date </li>';
+
+													$("#date").addClass(
+															"has-error")
+													$("#error_date").show()
+
+												} else {
+													$("#error_date").hide()
+												}
+												
+												
+												
+											 
+												
+												
+												if (!$("#befStake").val()  ) {
+
+													isError = true;
+													errMsg += '<li>Please enter No. of guides</li>';
+
+													$("#befStake").addClass(
+															"has-error")
+													$("#error_befStake")
+															.show()
+
+												} else {
+													$("#error_befStake")
+															.hide()
+												}
+  
+											  
+												
+
+												if (!isError) {
+
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document
+																.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub_button_next").disabled = true;
+														return true;
+
+													}
+
+												}
+												return false;
+											});
+						});
+	</script>
+
 
 
 

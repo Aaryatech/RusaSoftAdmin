@@ -97,16 +97,15 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertHumanValues"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="finantialYear">Initiative
-												 <span class="text-danger">*</span>
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="title" name="title" class="form-control"
-													required>
+												<select id="title" name="title" class="form-control">
 													<c:forEach items="${distlist}" var="dist">
 
 														<c:choose>
@@ -120,7 +119,8 @@
 
 													</c:forEach>
 
-												</select>
+												</select> <span class="error_form text-danger" id="error_title"
+													style="display: none;">Please enter Title</span>
 											</div>
 										</div>
 
@@ -132,7 +132,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="fromDate" name="fromDate"
-													value="${editValue.activityFromdt}" required>
+													value="${editValue.activityFromdt}"> <span
+													class="error_form text-danger" id="error_fromDate"
+													style="display: none;">Please enter From date</span>
 
 											</div>
 										</div>
@@ -145,7 +147,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													value="${editValue.activityTodt}" required>
+													value="${editValue.activityTodt}"> <span
+													class="error_form text-danger" id="error_toDate"
+													style="display: none;">Please enter to date</span>
 											</div>
 										</div>
 
@@ -157,10 +161,12 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
-													autocomplete="off"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													name="participant" placeholder="No. of Participants"
-													value="${editValue.activityPcount}" required>
+													autocomplete="off" min="0" name="participant"
+													placeholder="No. of Participants"
+													value="${editValue.activityPcount}"> <span
+													class="error_form text-danger" id="error_participant"
+													style="display: none;">Please enter No of
+													Participants</span>
 											</div>
 										</div>
 										<input type="hidden" id="valueId" name="valueId"
@@ -169,10 +175,10 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													onclick="submit_f(1)" value="Save" id="sub_button">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(0)" value="Save & Next"
+													id="sub_button_next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
@@ -206,89 +212,6 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-
-			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
-			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
-		}
-	</script>
 
 
 	<script type="text/javascript">
@@ -355,6 +278,109 @@
 	</script>
 
 
+	<script>
+		function numbersOnlyNotZero(value) {
+
+			var mob = /^[1-9][0-9]+$/;
+
+			if (mob.test($.trim(value)) == false) {
+
+				//alert("Please enter a valid email address .");
+				return false;
+
+			}
+			return true;
+		}
+	</script>
+
+
+
+	<script>
+		$(document)
+				.ready(
+						function($) {
+
+							$("#formidhere")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#title").val()) {
+
+													isError = true;
+													errMsg += '<li>Please Select Initiative.</li>';
+
+													$("#title").addClass(
+															"has-error")
+													$("#error_title").show()
+
+												} else {
+													$("#error_title").hide()
+												}
+
+												if (!$("#fromDate").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a Subject name.</li>';
+
+													$("#fromDate").addClass(
+															"has-error")
+													$("#error_fromDate").show()
+
+												} else {
+													$("#error_fromDate").hide()
+												}
+												
+												if (!$("#toDate").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a Subject name.</li>';
+
+													$("#toDate").addClass(
+															"has-error")
+													$("#error_toDate").show()
+
+												} else {
+													$("#error_toDate").hide()
+												}
+
+												if (!$("#participant").val()
+														|| !numbersOnlyNotZero($(
+																"#participant")
+																.val())) {
+
+													isError = true;
+													errMsg += '<li>Please enter No. of Students Passed.</li>';
+
+													$("#participant").addClass(
+															"has-error")
+													$("#error_participant")
+															.show()
+
+												} else {
+													$("#error_participant")
+															.hide()
+												}
+ 
+
+												if (!isError) {
+
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document
+																.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub_button_next").disabled = true;
+														return true;
+
+													}
+
+												}
+												return false;
+											});
+						});
+	</script>
 
 
 

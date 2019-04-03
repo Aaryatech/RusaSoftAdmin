@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertResearchCenter"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
 
 										<div class="form-group">
 
@@ -108,9 +107,10 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_subject_name"
 													autocomplete="off" name="rc_subject_name"
-													placeholder="Subject Name" pattern="^(?!\s*$).+"
-													onchange="return trim(this)"
-													value="${editValue.rcSubjectName}" required>
+													placeholder="Subject Name" onchange="return trim(this)"
+													value="${editValue.rcSubjectName}"> <span
+													class="error_form text-danger" id="error_rc_subject_name"
+													style="display: none;">Please enter Subject Name</span>
 											</div>
 										</div>
 
@@ -122,9 +122,10 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_faculty_name"
 													autocomplete="off" name="rc_faculty_name"
-													pattern="^(?!\s*$).+" onchange="return trim(this)"
-													placeholder="Faculty Name"
-													value="${editValue.rcFacultyName}" required>
+													onchange="return trim(this)" placeholder="Faculty Name"
+													value="${editValue.rcFacultyName}"> <span
+													class="error_form text-danger" id="error_rc_faculty_name"
+													style="display: none;">Please enter Faculty Name</span>
 											</div>
 
 										</div>
@@ -135,11 +136,11 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
-													id="rc_guide_count"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													name="rc_guide_count" placeholder="No. of Guides"
-													autocomplete="off" value="${editValue.rcGuideCount}"
-													required>
+													id="rc_guide_count" min="0" name="rc_guide_count"
+													placeholder="No. of Guides" autocomplete="off"
+													value="${editValue.rcGuideCount}"> <span
+													class="error_form text-danger" id="error_rc_guide_count"
+													style="display: none;">Please enter No. of Guides</span>
 											</div>
 										</div>
 
@@ -150,11 +151,11 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
-													id="rc_student_count"
-													onkeypress="return allowOnlyNumber(event)" min="0"
-													name="rc_student_count" placeholder="No. of Students"
-													autocomplete="off" value="${editValue.rcStudentCount}"
-													required>
+													id="rc_student_count" min="0" name="rc_student_count"
+													placeholder="No. of Students" autocomplete="off"
+													value="${editValue.rcStudentCount}"> <span
+													class="error_form text-danger" id="error_rc_student_count"
+													style="display: none;">Please enter No. of Students</span>
 											</div>
 										</div>
 
@@ -167,8 +168,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													id="fromDate" name="fromDate"
-													value="${editValue.rcValidityFromdt}" autocomplete="off"
-													required>
+													value="${editValue.rcValidityFromdt}" autocomplete="off">
+												<span class="error_form text-danger" id="error_fromDate"
+													style="display: none;">Please enter From date</span>
 
 											</div>
 										</div>
@@ -181,7 +183,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													value="${editValue.rcValidityTodt}" required>
+													value="${editValue.rcValidityTodt}"> <span
+													class="error_form text-danger" id="error_toDate"
+													style="display: none;">Please enter to date</span>
 											</div>
 										</div>
 
@@ -189,19 +193,16 @@
 											value="${editValue.rcId}"> <input type="hidden"
 											id="is_view" name="is_view" value="0">
 
-
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next">
+													onclick="submit_f(1)" value="Save" id="sub_button">
+												<input type="submit" class="btn btn-primary"
+													onclick="submit_f(0)" value="Save & Next"
+													id="sub_button_next">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
-
-
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
@@ -231,59 +232,6 @@
 
 
 
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-
-			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
-			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
-		}
-	</script>
-
-
 	<script type="text/javascript">
 		$(function() {
 
@@ -298,15 +246,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
-			$('#submitForm').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
-
-						return true;
-					});
-		});
+		 
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -346,6 +286,152 @@
 	    return true;
 	}
 	</script>
+
+	<script>
+		function numbersOnlyNotZero(value) {
+
+			var mob = /^[1-9][0-9]+$/;
+
+			if (mob.test($.trim(value)) == false) {
+
+				//alert("Please enter a valid email address .");
+				return false;
+
+			}
+			return true;
+		}
+	</script>
+
+
+
+	<script>
+		$(document)
+				.ready(
+						function($) {
+
+							$("#formidhere")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+												
+												if (!$("#rc_subject_name").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter Subject Name.</li>';
+
+													$("#rc_subject_name").addClass(
+															"has-error")
+													$("#error_rc_subject_name").show()
+
+												} else {
+													$("#error_rc_subject_name").hide()
+												}
+
+												
+												
+												
+												if (!$("#rc_faculty_name").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter faculty Name </li>';
+
+													$("#rc_faculty_name").addClass(
+															"has-error")
+													$("#error_rc_faculty_name").show()
+
+												} else {
+													$("#error_rc_faculty_name").hide()
+												}
+												
+												
+												
+												
+												if (!$("#rc_guide_count").val()
+														|| !numbersOnlyNotZero($(
+																"#rc_guide_count")
+																.val())) {
+
+													isError = true;
+													errMsg += '<li>Please enter No. of guides</li>';
+
+													$("#rc_guide_count").addClass(
+															"has-error")
+													$("#error_rc_guide_count")
+															.show()
+
+												} else {
+													$("#error_rc_guide_count")
+															.hide()
+												}
+												
+												
+												if (!$("#rc_student_count").val()
+														|| !numbersOnlyNotZero($(
+																"#rc_student_count")
+																.val())) {
+
+													isError = true;
+													errMsg += '<li>Please enter No. of guides</li>';
+
+													$("#rc_student_count").addClass(
+															"has-error")
+													$("#error_rc_student_count")
+															.show()
+
+												} else {
+													$("#error_rc_student_count")
+															.hide()
+												}
+  
+											 
+												if (!$("#fromDate").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a Subject name.</li>';
+
+													$("#fromDate").addClass(
+															"has-error")
+													$("#error_fromDate").show()
+
+												} else {
+													$("#error_fromDate").hide()
+												}
+												
+												if (!$("#toDate").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a Subject name.</li>';
+
+													$("#toDate").addClass(
+															"has-error")
+													$("#error_toDate").show()
+
+												} else {
+													$("#error_toDate").hide()
+												}
+
+												
+
+												if (!isError) {
+
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document
+																.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub_button_next").disabled = true;
+														return true;
+
+													}
+
+												}
+												return false;
+											});
+						});
+	</script>
+
+
 
 </body>
 </html>

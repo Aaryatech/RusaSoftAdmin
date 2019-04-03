@@ -322,29 +322,7 @@ legend.scheduler-border {
 			</div>
 		</div>
 	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var year = document.getElementById("academicYear").value;
-			var i = parseInt(document.getElementById("index").value);
-			var title = document.getElementById("title").value;
-			var participant = document.getElementById("participant").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-
-			//alert("noStud"+noStud);
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, year, title, fromDate, toDate, participant ])
-					.draw();
-			document.getElementById("index").value = i + 1;
-		}
-	</script>
-
-
+	
 
 
 
