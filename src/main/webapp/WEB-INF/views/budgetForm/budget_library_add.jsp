@@ -98,9 +98,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibBudget"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
-
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<div class="form-group">
 
@@ -109,7 +107,7 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
-													class="form-control" onchange="setBudget(this.value)" required>
+													class="form-control" onchange="setBudget(this.value)">
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
 														<c:when test="${finYear.finYearId==budget.finYearId}">
@@ -123,6 +121,8 @@
 													
 
 												</select>
+												<span class="error_form text-danger" id="fin_year_id_field"
+															style="display: none;">Please select financial year</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -134,7 +134,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onchange="trim(this)"
 													id="lib_budget_title" name="lib_budget_title" maxlength="100"
-													placeholder="Title of Library Facility" value="${budget.libBudgetTitle}" required>
+													placeholder="Title of Library Facility" value="${budget.libBudgetTitle}">
+													<span class="error_form text-danger" id="budget_allocated_field"
+															style="display: none;">Please enter budget title</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -146,7 +148,11 @@
 												<input type="number" min="0" max="100000000"  onkeypress="return allowOnlyNumber(this)" onchange="trim(this)" class="form-control"
 													id="budget_allocated" name="budget_allocated" maxlength="9"
 													placeholder="Budget Allocated Amount in Rupees"
-													value="${budget.budgetAllocated}" required>
+													value="${budget.budgetAllocated}">
+													
+													<span class="error_form text-danger" id="lib_budget_title_field"
+															style="display: none;">Please enter allocated budget amount</span>
+													
 											</div>
 										</div>
 
@@ -159,7 +165,11 @@
 												<input type="number" min="0"  max="100000000" class="form-control" id="budget_utilized" maxlength="9"
 													name="budget_utilized" onchange="trim(this)"  onkeypress="return allowOnlyNumber(this)"
 													placeholder="Budget Utilized Amount in Rupees"
-													value="${budget.budgetUtilized}" required>
+													value="${budget.budgetUtilized}">
+													<span class="error_form text-danger" id="budget_utilized_field"
+															style="display: none;">Please enter utilized budget amount</span>
+															<span class="error_form text-danger" id="budget_utilized_field2"
+															style="display: none;">Please enter budget utilized  amount less than allocated amount</span>
 											</div>
 										</div>
 
@@ -204,6 +214,123 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+		<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		
+		function validateZeroNo(mobile) {
+			var mob = /^[0-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#fin_year_id").val()) {
+													isError = true;
+
+													$("#fin_year_id").addClass(
+															"has-error")
+													$("#fin_year_id_field")
+															.show()
+												} else {
+													$("#fin_year_id_field")
+															.hide()
+												}
+												
+												
+												if (!$("#lib_budget_title").val()) {
+													isError = true;
+
+													$("#lib_budget_title").addClass(
+															"has-error")
+													$("#lib_budget_title_field").show()
+												} else {
+													$("#lib_budget_title_field").hide()
+												}
+												
+
+
+												if (!$("#budget_allocated").val()
+														|| !validateNo($(
+																"#budget_allocated")
+																.val())) {
+													isError = true;
+													$("#budget_allocated")
+															.addClass(
+																	"has-error")
+		 											$("#budget_allocated_field")
+															.show()
+												} else {
+													$("#budget_allocated_field")
+															.hide()
+												}
+
+												
+												if (!$("#budget_utilized").val()
+														|| !validateZeroNo($(
+																"#budget_utilized")
+																.val())) {
+													
+													isError = true;
+													$("#budget_utilized")
+															.addClass(
+																	"has-error")
+		 											$("#budget_utilized_field")
+															.show()
+												} else {
+													$("#budget_utilized_field")
+															.hide()
+												}
+												if($("#budget_utilized").val()>$("#budget_allocated").val()){
+													isError = true;
+													$("#budget_utilized")
+													.addClass(
+															"has-error")
+ 											$("#budget_utilized_field2")
+													.show()
+												}else{
+													$("#budget_utilized_field2")
+													.hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
+	
 
 	<script type="text/javascript">
 	var wasSubmitted = false;
