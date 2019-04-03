@@ -61,11 +61,7 @@
 				<div class="col-xs-12">
 					<div class="page-title">
 
-						<div class="pull-left">
-							<!-- PAGE HEADING TAG - START -->
-							<%-- 	<h1 class="title">${title}</h1> --%>
-							<!-- PAGE HEADING TAG - END -->
-						</div>
+						<div class="pull-left"></div>
 
 
 					</div>
@@ -83,12 +79,7 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								<%-- <a
-									href="${pageContext.request.contextPath}/showIntellectualProperty"><button
-										type="button" class="btn btn-info">Back</button></a> --%>
-
-							</div>
+							<div class="actions panel_actions pull-right"></div>
 
 						</header>
 
@@ -98,8 +89,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertValueMaster"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="formidhere" id="formidhere">
 
 
 
@@ -109,8 +99,11 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="valText"
-													required name="valText" autocomplete="off"
-													placeholder="Activity Name" value="${editValue.valText}">
+													name="valText" autocomplete="off"
+													onchange="return trim(this)" placeholder="Activity Name"
+													value="${editValue.valText}"> <span
+													class="error_form text-danger" id="error_valText"
+													style="display: none;">Please enter Activity</span>
 											</div>
 										</div>
 
@@ -120,8 +113,8 @@
 											value="${editValue.valMastId}">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save">
+												<input type="submit" class="btn btn-primary" id="sub_button"
+													value="Save">
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 
@@ -202,91 +195,6 @@
 
 
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-
-			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
-			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
-		}
-	</script>
-
-
 	<script type="text/javascript">
 		$(function() {
 
@@ -301,16 +209,6 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
-			$('#submitForm').submit(
-					function() {
-						$("input[type='submit']", this).val("Please Wait...")
-								.attr('disabled', 'disabled');
-
-						return true;
-					});
-		});
-
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -325,6 +223,43 @@
 
 		}
 	</script>
+
+
+	<script>
+		$(document).ready(function($) {
+
+			$("#formidhere").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
+
+				if (!$("#valText").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter Title.</li>';
+
+					$("#valText").addClass("has-error")
+					$("#error_valText").show()
+
+				} else {
+					$("#error_valText").hide()
+				}
+
+				if (!isError) {
+
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						document.getElementById("sub_button").disabled = true;
+
+						return true;
+
+					}
+
+				}
+				return false;
+			});
+		});
+	</script>
+
 
 
 

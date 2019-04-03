@@ -134,11 +134,10 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="befStake"
-													pattern="^(?!\s*$).+" onchange="return trim(this)"
-													maxlength="200" name="befStake"
-													placeholder="Beneficiary Stake Holders" autocomplete="off"
-													value="${editDist.distBeneficiary}"> <span
-													class="error_form text-danger" id="error_befStake"
+													onchange="return trim(this)" maxlength="200"
+													name="befStake" placeholder="Beneficiary Stake Holders"
+													autocomplete="off" value="${editDist.distBeneficiary}">
+												<span class="error_form text-danger" id="error_befStake"
 													style="display: none;">Please enter Beneficiary
 													Stake Holders</span>
 											</div>

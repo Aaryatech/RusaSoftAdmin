@@ -105,7 +105,8 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="title" name="title" class="form-control">
+												<select id="title12" name="title" class="form-control">
+													<option value="-1">Select</option>
 													<c:forEach items="${distlist}" var="dist">
 
 														<c:choose>
@@ -119,8 +120,8 @@
 
 													</c:forEach>
 
-												</select> <span class="error_form text-danger" id="error_title"
-													style="display: none;">Please enter Title</span>
+												</select> <span class="error_form text-danger" id="error_year"
+													style="display: none;">Please Select </span>
 											</div>
 										</div>
 
@@ -305,19 +306,18 @@
 											function(e) {
 												var isError = false;
 												var errMsg = "";
-
-												if (!$("#title").val()) {
+												
+										 	if ($("#title12").val() == -1) {
 
 													isError = true;
-													errMsg += '<li>Please Select Initiative.</li>';
-
-													$("#title").addClass(
-															"has-error")
-													$("#error_title").show()
-
+													  
+													$("#error_year").show()
 												} else {
-													$("#error_title").hide()
-												}
+													$("#error_year").hide()
+												} 
+												
+
+											 
 
 												if (!$("#fromDate").val()) {
 

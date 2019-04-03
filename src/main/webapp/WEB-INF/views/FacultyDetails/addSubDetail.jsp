@@ -120,8 +120,8 @@
 											<label class="control-label col-sm-2" for="Semester">Semester<span
 												class="text-danger">*</span></label>
 											<div class="col-sm-6">
-												<select id="sem" name="sem" class="form-control" required>
-
+												<select id="sem" name="sem" class="form-control">
+													<option value="-1">Select</option>
 
 													<c:choose>
 														<c:when test="${editSubject.subSem==1}">
@@ -261,7 +261,8 @@
 													</c:choose>
 
 
-												</select>
+												</select> <span class="error_form text-danger" id="error_sem"
+													style="display: none;">Please Select </span>
 											</div>
 										</div>
 
@@ -289,7 +290,8 @@
 
 
 												<select id="subType" name="subType" class="form-control"
-													onchange="showForm()" required>
+													onchange="showForm()">
+													<option value="-1">Select</option>
 													<c:choose>
 														<c:when test="${editSubject.subType==0}">
 
@@ -311,7 +313,8 @@
 														</c:otherwise>
 													</c:choose>
 
-												</select>
+												</select> <span class="error_form text-danger" id="error_subType"
+													style="display: none;">Please Select </span>
 											</div>
 										</div>
 
@@ -321,8 +324,8 @@
 												Program <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="programId" name="programId" class="form-control"
-													required>
+												<select id="programId" name="programId" class="form-control">
+													<option value="-1">Select</option>
 													<c:forEach items="${proList}" var="program">
 														<c:choose>
 															<c:when test="${editSubject.progId==program.programId}">
@@ -333,7 +336,8 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
-												</select>
+												</select> <span class="error_form text-danger" id="error_programId"
+													style="display: none;">Please Select </span>
 											</div>
 										</div>
 
@@ -588,6 +592,40 @@
             		$("#formidhere").submit(function(e) {
             			 var isError=false;
             			 var errMsg="";
+            			 
+            			 if ($("#programId").val() == -1) {
+
+								isError = true;
+								  
+								$("#error_programId").show()
+							} else {
+								$("#error_programId").hide()
+							} 
+							
+            			 
+            			 
+            			 
+            			 if ($("#subType").val() == -1) {
+
+								isError = true;
+								  
+								$("#error_subType").show()
+							} else {
+								$("#error_subType").hide()
+							} 
+							
+            			 
+            			 
+            			 
+            			 if ($("#sem").val() == -1) {
+
+								isError = true;
+								  
+								$("#error_sem").show()
+							} else {
+								$("#error_sem").hide()
+							} 
+							
             				
            
             				if(!$("#subCode").val()){
