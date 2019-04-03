@@ -100,9 +100,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertTeachTraing"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
-
+										method="post" name="form_sample_2" id="form_sample_2">
+										
 										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> ${title}
@@ -121,8 +120,10 @@
 												<input type="text" maxlength="200" class="form-control" id="dev_Prog_title"
 													name="dev_Prog_title" autocomplete="off"
 													onchange="trim(this)"
-													placeholder="Title of Professional Development Program for Teaching Staff"
-													value="${trainning.trainingTitle}" required>
+													placeholder="Title of Training Program"
+													value="${trainning.trainingTitle}">
+													<span class="error_form text-danger" id="dev_Prog_title_field"
+															style="display: none;">Please enter training program title</span>
 											</div>
 										</div>
 
@@ -131,11 +132,13 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" maxlength="5" min="1" max="99999" class="form-control"
+												<input type="text" maxlength="9" class="form-control"
 													id="no_of_participant" autocomplete="off"
 													name="no_of_participant"
 													placeholder="Enter No. of Participants"
-													value="${trainning.trainingPcount}" required>
+													value="${trainning.trainingPcount}">
+													<span class="error_form text-danger" id="no_of_participant_field"
+															style="display: none;">Please enter no of participants</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -146,7 +149,9 @@
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
 													id="fromDate" name="fromDate" value="${trainning.trainingFromdt}"
-													required>
+													>
+													<span class="error_form text-danger" id="fromDate_field"
+															style="display: none;">Please select from date</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -158,7 +163,8 @@
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
 													placeholder="Select To Date" value="${trainning.trainingTodt}"
-													required>
+													><span class="error_form text-danger" id="toDate_field"
+													 style="display: none;">Please select to date</span>
 											</div>
 										</div>
 
@@ -203,6 +209,96 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+		<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#dev_Prog_title").val()) {
+													isError = true;
+
+													$("#dev_Prog_title").addClass(
+															"has-error")
+													$("#dev_Prog_title_field")
+															.show()
+												} else {
+													$("#dev_Prog_title_field")
+															.hide()
+												}
+
+												
+												if (!$("#fromDate").val()) {
+													isError = true;
+
+													$("#fromDate").addClass(
+															"has-error")
+													$("#fromDate_field").show()
+												} else {
+													$("#fromDate_field").hide()
+												}
+												
+												if (!$("#toDate").val()) {
+													isError = true;
+
+													$("#toDate").addClass(
+															"has-error")
+													$("#toDate_field").show()
+												} else {
+													$("#toDate_field").hide()
+												}
+
+
+												if (!$("#no_of_participant").val()
+														|| !validateNo($(
+																"#no_of_participant")
+																.val())) {
+													isError = true;
+													$("#no_of_participant")
+															.addClass(
+																	"has-error")
+													$("#no_of_participant_field")
+															.show()
+												} else {
+													$("#no_of_participant_field")
+															.hide()
+												}
+
+												
+												 
+												
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 
 	<script type="text/javascript">
 		$(function() {

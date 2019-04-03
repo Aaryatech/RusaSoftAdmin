@@ -96,8 +96,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertQualityInitiative"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2">
+										
 
 										<div class="form-group">
 											<label class="control-label col-sm-3"
@@ -106,9 +106,11 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="200"
-													onchange="trim(this)" id="quality_initiative_name" required
+													onchange="trim(this)" id="quality_initiative_name"
 													name="quality_initiative_name" autocomplete="off"
 													placeholder="Enter Quality Initiative Name">
+													<span class="error_form text-danger" id="quality_initiative_name_field"
+															style="display: none;">Please enter quality initiative name</span>
 
 											</div>
 										</div>
@@ -213,6 +215,57 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#quality_initiative_name").val()) {
+													isError = true;
+
+													$("#quality_initiative_name").addClass(
+															"has-error")
+													$("#quality_initiative_name_field")
+															.show()
+												} else {
+													$("#quality_initiative_name_field")
+															.hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
+	
 
 	<!-- <script type="text/javascript">
 		function getData() {

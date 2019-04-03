@@ -98,18 +98,9 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstQuaInitiative"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
-
-										<%-- <ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
- --%>
-										<!-- <div class="tab-content">
-											<div class="tab-pane fade in active" id="home"> -->
+										method="post" name="form_sample_2" id="form_sample_2">
+>
+										
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="qualityInitId">
@@ -117,7 +108,7 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="qualityInitId" name="qualityInitId"
-													class="form-control" title="Select Quality Initiative ">
+													class="form-control" title="Select Quality Initiative">
 													<c:forEach items="${qualInintList}" var="quInit">
 														<c:choose>
 															<c:when
@@ -130,6 +121,9 @@
 														</c:choose>
 													</c:forEach>
 												</select>
+												<span class="error_form text-danger" id="qualityInitId_field"
+															style="display: none;">Please select quality initiative name</span>
+												
 
 											</div>
 										</div>
@@ -139,11 +133,14 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" maxlength="5"  min="1" max="99999"
+												<input type="text" maxlength="9"
 													class="form-control" id="no_of_participant"
 													autocomplete="off" name="no_of_participant"
 													placeholder="Enter  No. of Participants"
-													value="${editQuality.qualityPcount}" required>
+													value="${editQuality.qualityPcount}">
+													<span class="error_form text-danger" id="no_of_participant_field"
+															style="display: none;">Please enter no of participants</span>
+													
 											</div>
 										</div>
 										<div class="form-group">
@@ -153,8 +150,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
-													id="fromDate" name="fromDate"
-													value="${editQuality.qualityFromdt}" required>
+													id="fromDate" name="fromDate" readonly="readonly"
+													value="${editQuality.qualityFromdt}">
+													<span class="error_form text-danger" id="fromDate_field"
+															style="display: none;">Please select from date</span>
+													
 											</div>
 										</div>
 										<div class="form-group">
@@ -165,8 +165,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													placeholder="Select To Date"
-													value="${editQuality.qualityTodt}" required>
+													placeholder="Select To Date" readonly="readonly"
+													value="${editQuality.qualityTodt}">
+													<span class="error_form text-danger" id="toDate_field"
+															style="display: none;">Please select to date</span>
+													
 											</div>
 										</div>
 
@@ -211,7 +214,93 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+	<script>
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
 
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#qualityInitId").val()) {
+													isError = true;
+
+													$("#qualityInitId").addClass(
+															"has-error")
+													$("#qualityInitId_field")
+															.show()
+												} else {
+													$("#qualityInitId_field")
+															.hide()
+												}
+												
+												
+												if (!$("#fromDate").val()) {
+													isError = true;
+
+													$("#fromDate").addClass(
+															"has-error")
+													$("#fromDate_field").show()
+												} else {
+													$("#fromDate_field").hide()
+												}
+												
+												if (!$("#toDate").val()) {
+													isError = true;
+
+													$("#toDate").addClass(
+															"has-error")
+													$("#toDate_field").show()
+												} else {
+													$("#toDate_field").hide()
+												}
+
+
+												if (!$("#no_of_participant").val()
+														|| !validateNo($(
+																"#no_of_participant")
+																.val())) {
+													isError = true;
+													$("#no_of_participant")
+															.addClass(
+																	"has-error")
+													$("#no_of_participant_field")
+															.show()
+												} else {
+													$("#no_of_participant_field")
+															.hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+
+														return  true;
+													}	
+												}
+												return false;
+											});
+						});
+	</script>
 
 
 	<!-- 	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
