@@ -281,7 +281,7 @@
 													$("#no_of_participant")
 															.addClass(
 																	"has-error")
-													$("#no_of_participant_field")
+		 											$("#no_of_participant_field")
 															.show()
 												} else {
 													$("#no_of_participant_field")
