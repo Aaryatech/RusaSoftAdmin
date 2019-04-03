@@ -733,7 +733,7 @@ public class InstituteController {
 			List<IntelPrpoRight> intelRightsList = new ArrayList<>(Arrays.asList(intelPropArr));
 			model.addObject("intelRightsList", intelRightsList);
 			
-			model.addObject("title", "Intellactual Property Rights and Innovative Practices (Industry - Academic)");
+			model.addObject("title", "Intellectual Property Rights and Innovative Practices (Industry - Academic)");
 			
 			Info add = AccessControll.checkAccess("showIntellectualProperty", "showIntellectualProperty", "0", "1", "0", "0",
 					newModuleList);
@@ -785,7 +785,7 @@ public class InstituteController {
 			IntelPrpoRight intelProp = new IntelPrpoRight();
 			model.addObject("intelProp", intelProp);
 
-			model.addObject("title", "Add Intellactual Property Rights and Innovative Practices (Industry - Academic)");
+			model.addObject("title", "Add Intellectual Property Rights and Innovative Practices (Industry - Academic)");
 			}
 		} catch (Exception e) {
 
@@ -870,7 +870,7 @@ public class InstituteController {
 			model.addObject("intelProp", right);
 
 			model.addObject("title",
-					"Edit Intellactual Property Rights and Innovative Practices (Industry - Academic)");
+					"Edit Intellectual Property Rights and Innovative Practices (Industry - Academic)");
 			}
 		} catch (Exception e) {
 
