@@ -222,7 +222,7 @@ public class InstituteController {
 			instSpprt.setInstituteId(instituteId);
 			instSpprt.setYearId(yId);
 			instSpprt.setInstSchemeName(request.getParameter("inst_scheme_name"));
-			instSpprt.setInstStudentsBenefited(request.getParameter("inst_students_benefited"));
+			instSpprt.setInstStudentsBenefited(Integer.parseInt(request.getParameter("inst_students_benefited")));
 			instSpprt.setInstSchmeOfferedby(request.getParameter("inst_schme_offeredby"));
 			instSpprt.setDelStatus(1);
 			instSpprt.setIsActive(1);
@@ -605,7 +605,7 @@ public class InstituteController {
 			instAct.setInstActivityName(request.getParameter("activityName"));
 			instAct.setInstActivityFromdt(request.getParameter("fromDate"));
 			instAct.setInstActivityTodt(request.getParameter("toDate"));
-			instAct.setInstActivityParticipation(request.getParameter("inst_activity_participation"));
+			instAct.setInstActivityParticipation(Integer.parseInt(request.getParameter("inst_activity_participation")));
 			instAct.setDelStatus(1);
 			instAct.setIsActive(1);
 			instAct.setMakerUserId(userId);
@@ -637,7 +637,7 @@ public class InstituteController {
 	public ModelAndView editActivity(@PathVariable("instActvId") int instActvId, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = null;
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -659,7 +659,7 @@ public class InstituteController {
 					InstituteActivity.class);
 			model.addObject("instAct", activity);
 			
-			model = new ModelAndView("instituteInfo/IQAC/add_activity_organized");
+			
 			model.addObject("title", "Edit Institute Organized Activities");
 			}
 		} catch (Exception e) {
@@ -820,7 +820,7 @@ public class InstituteController {
 			intelProp.setConName(request.getParameter("ipr_title"));
 			intelProp.setConFromdt(request.getParameter("fromDate"));
 			intelProp.setConTodt(request.getParameter("toDate"));
-			intelProp.setConPcount(request.getParameter("participant"));
+			intelProp.setConPcount(Integer.parseInt(request.getParameter("participant")));
 			intelProp.setDelStatus(1);
 			intelProp.setIsActive(1);
 			intelProp.setMakerUserId(userId);
@@ -1029,7 +1029,7 @@ public class InstituteController {
 			gendrEqualityt.setGprogName(request.getParameter("title"));
 			gendrEqualityt.setGprogFromdt(request.getParameter("fromDate"));
 			gendrEqualityt.setGprogTodt(request.getParameter("toDate"));
-			gendrEqualityt.setGprogPcount(request.getParameter("participant"));
+			gendrEqualityt.setGprogPcount(Integer.parseInt(request.getParameter("participant")));
 			gendrEqualityt.setDelStatus(1);
 			gendrEqualityt.setIsActive(1);
 			gendrEqualityt.setMakerUserId(userId);

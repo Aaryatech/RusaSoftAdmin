@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteActivity"
-										method="post" onsubmit="return checkBeforeSubmit()"
-										name="form_sample_2" id="form_sample_2">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<%-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -186,8 +185,9 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="activityName"
-													name="activityName" placeholder="Name of Activity" pattern="^(?!\s*$).+"
-													autocomplete="off" value="${instAct.instActivityName}" required>
+													name="activityName" placeholder="Name of Activity" onchange="trim(this)"
+													autocomplete="off" value="${instAct.instActivityName}">
+													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of activity.</span>
 											</div>
 										</div>
 
@@ -199,10 +199,10 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" pattern="^(?!\s*$).+"
+												<input type="text" class="form-control datepicker" onchange="trim(this)" placeholder="From Date"
 													autocomplete="off" id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
-													value="${instAct.instActivityFromdt}" required>
-
+													value="${instAct.instActivityFromdt}">
+												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter from date.</span>
 											</div>
 										</div>
 
@@ -212,9 +212,11 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" pattern="^(?!\s*$).+"
+												<input type="text" class="form-control datepicker" onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
-													value="${instAct.instActivityTodt}" required>
+													value="${instAct.instActivityTodt}">
+													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter to date.</span>
+													<span class="error_form text-danger" id="error_formfield0" style="display:none;" >to date must be greater than from date.</span>
 											</div>
 										</div>
 
@@ -227,12 +229,11 @@
 											</label>
 
 											<div class="col-sm-6">
-												<input type="number" min="0" class="form-control"
-													id="inst_activity_participation" autocomplete="off" pattern="^(?!\s*$).+"
+												<input type="text" class="form-control"
+													id="inst_activity_participation" autocomplete="off" onchange="trim(this)"
 													name="inst_activity_participation" onkeypress='return restrictAlphabets(event)'
-													placeholder="No.of Participants" value="${instAct.instActivityParticipation}"
-													required>
-
+													placeholder="No.of Participants" value="${instAct.instActivityParticipation}">
+												<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of participants and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -279,11 +280,6 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
 	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
 		role="dialog" aria-hidden="true">
 		<div class="modal-dialog" style="width: 65%">
@@ -315,7 +311,112 @@
 			</div>
 		</div>
 	</div>
+	
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		//	alert("hi");
+            			var isError=false;
+            			 var errMsg="";
+            			
+            			
+            			 if(!$("#activityName").val()){
+        					 
+             				isError=true;
+             				errMsg += '<li>Please enter a valid name.</li>';
+             				
+             				$("#activityName").addClass("has-error")
+             				$("#error_formfield1").show()
+             					//return false;
+             				} else {
+             					$("#error_formfield1").hide()
+             				} 
+           				
+           				if(!$("#fromDate").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#fromDate").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				} 
+           				
+           				if(!$("#toDate").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#toDate").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				} 
+           				if($("#inst_activity_participation").val()==0){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#fromDate").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				} 
+           				
+           			 	if($("#fromDate").val() > $("#toDate").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#toDate").addClass("has-error")
+            				$("#error_formfield0").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield0").hide()
+            				} 
+           				
+           				/* if(!$("#").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				} */
+           			
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
 
+</script>
 
 	<script type="text/javascript">
 		function getData() {

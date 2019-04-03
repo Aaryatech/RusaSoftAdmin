@@ -116,7 +116,7 @@
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="book_title" onchange="trim(this)" autocomplete="off"
 																		name="book_title" placeholder="Title of Book" value="${book.bookTitle }">
-																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of book</span>
+																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of book.</span>
 																</div>
 
 															</div>
@@ -132,7 +132,7 @@
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="book_edition" onchange="trim(this)" autocomplete="off"
 																		name="book_edition" placeholder="Edition" value="${book.bookEdition }">
-																		<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter edition of book</span>
+																		<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter edition of book.</span>
 																</div>
 
 
@@ -152,7 +152,7 @@
 																	<input type="text" class="form-control" id="author" onchange="trim(this)" autocomplete="off"
 																		name="author" placeholder="Name of Authors/Co-Authors "
 																		value="${book.bookAuthor }">
-																		<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter name of author</span>
+																		<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter name of author.</span>
 																</div>
 
 
@@ -218,7 +218,7 @@
 																	<input type="text" class="form-control" id="publisher" onchange="trim(this)" autocomplete="off"
 																	 name="publisher" placeholder="Name of Publication/Publisher "
 																		value="${book.bookPublisher}">
-																		<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter name of publication/publisher </span>
+																		<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter name of publication/publisher. </span>
 																</div>
 
 															</div>
@@ -235,7 +235,7 @@
 																	<input type="text" class="form-control" id="isbn" onchange="trim(this)" autocomplete="off"
 																	 name="isbn" placeholder="ISBN No" value="${book.bookIsbn }">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter ISBN
-																	No </span>
+																	No. </span>
 																</div>
 
 															</div>
@@ -250,7 +250,7 @@
 																	<input type="text" class="form-control datepicker" id="year_publication" onchange="trim(this)" autocomplete="off" 
 																	 name="year_publication" placeholder="dd/mm/yyyy" value="${book.bookPubYear }">
 																<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter year
-																	of publication </span>
+																	of publication. </span>
 																</div>
 
 

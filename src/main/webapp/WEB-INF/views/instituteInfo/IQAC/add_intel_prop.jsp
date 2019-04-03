@@ -99,21 +99,8 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPropIntelRight"
 										method="post" 
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
-										<%-- 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul>
- --%>
-										<!-- 	<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
- -->
-					
-							
+										name="form_sample_2" id="form_sample_2">
+										
 									<input type="hidden" id="intel_id"  name="intel_id"
 														placeholder="" value="${intelProp.conId}">
 
@@ -124,9 +111,10 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="ipr_title"
-													required name="ipr_title" autocomplete="off" pattern="^(?!\s*$).+"
+													 name="ipr_title" autocomplete="off" onchange="trim(this)"
 													placeholder="Title of IPR-Industry-Academic Initiative  "
 													value="${intelProp.conName}">
+													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of IPR-Industry-Academic Initiative Practice.</span>
 											</div>
 										</div>
 
@@ -139,10 +127,10 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" placeholder="From Date"
 													autocomplete="off" id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
-													value="${intelProp.conFromdt}" pattern="^(?!\s*$).+" required>
-
+													value="${intelProp.conFromdt}" onchange="trim(this)">
+												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter from date.</span>
 											</div>
 										</div>
 
@@ -152,9 +140,11 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" pattern="^(?!\s*$).+"
+												<input type="text" class="form-control datepicker" onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
-													value="${intelProp.conTodt}" required>
+													value="${intelProp.conTodt}">
+													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter to date.</span>
+													<span class="error_form text-danger" id="error_formfield0" style="display:none;" >to date must be greater than from date.</span>
 											</div>
 										</div>
 
@@ -165,21 +155,21 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="0" class="form-control" id="participant"
-													autocomplete="off" name="participant" pattern="^(?!\s*$).+"
+												<input type="text" class="form-control" id="participant" maxlength="5"
+													autocomplete="off" name="participant" onchange="trim(this)"
 													onkeypress="return allowOnlyNumber(event)"  onkeypress='return restrictAlphabets(event)'
-													placeholder="No. of Participants" value="${intelProp.conPcount}"
-													required>
+													placeholder="No. of Participants" value="${intelProp.conPcount}">
+													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of participants and value must be greater than 0.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+												<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-																<input type="hidden" id="is_view" name="is_view" value="0">	
+												<button type="reset" class="btn btn-default">Reset</button>
+												<input type="hidden" id="is_view" name="is_view" value="0">	
 											</div>
 
 										</div>
@@ -206,11 +196,6 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
 
 	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
 		role="dialog" aria-hidden="true">
@@ -243,7 +228,111 @@
 			</div>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		//	alert("hi");
+            			var isError=false;
+            			 var errMsg="";
+            			
+            			
+            			 if(!$("#ipr_title").val()){
+        					 
+             				isError=true;
+             				errMsg += '<li>Please enter a valid name.</li>';
+             				
+             				$("#ipr_title").addClass("has-error")
+             				$("#error_formfield1").show()
+             					//return false;
+             				} else {
+             					$("#error_formfield1").hide()
+             				} 
+           				
+           				if(!$("#fromDate").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#fromDate").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				} 
+           				
+           				if(!$("#toDate").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#toDate").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				} 
+           				if($("#participant").val()==0  || !$("#participant").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#participant").addClass("has-error")
+            				$("#error_formfield4").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield4").hide()
+            				} 
+           				
+           			 	if($("#fromDate").val() > $("#toDate").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#toDate").addClass("has-error")
+            				$("#error_formfield0").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield0").hide()
+            				} 
+           				
+           				/* if(!$("#").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				} */
+           			
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
 
+</script>
 
 	<script type="text/javascript">
 	

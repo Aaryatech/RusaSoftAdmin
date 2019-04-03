@@ -134,7 +134,7 @@
 																	onchange="trim(this)" name="conf_name"
 																	placeholder="Title of Publication" autocomplete="off"
 																	value="${facConf.confName}" >
-																	<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter publication title</span>
+																	<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter publication title.</span>
 															</div>
 
 
@@ -209,7 +209,7 @@
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_date" placeholder="dd/mm/yyyy"
 																	value="${facConf.confDate}" onchange="trim(this)">
-																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter valid date</span>
+																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter valid date.</span>
 															</div>
 														</div>
 
@@ -221,7 +221,7 @@
 																<input type="text" class="form-control" id="conf_venue"
 																	onchange="trim(this)" name="conf_venue" autocomplete="off"
 																	placeholder="Venue" value="${facConf.confVenue}">
-																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter venu</span>
+																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter venue.</span>
 															</div>
 
 
@@ -238,7 +238,7 @@
 																	onchange="trim(this)" name="conf_fund"
 																	placeholder="Funding from" autocomplete="off"
 																	value="${facConf.confFundFrom}">
-																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter funding from</span>
+																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter funding from.</span>
 															</div>
 														</div>
 
@@ -253,7 +253,7 @@
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_amt" placeholder="Amount"
 																	value="${facConf.confFundAmt}" onchange="trim(this)">
-																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount</span>
+																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount.</span>
 															</div>
 
 														</div>

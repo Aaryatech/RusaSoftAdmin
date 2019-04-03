@@ -97,71 +97,10 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteSupport"
-										method="post" onsubmit="return checkBeforeSubmit()"
+										method="post" 
 										name="form_sample_2" id="form_sample_2" >
 
-										<%-- 	<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> ${title}
-											</a></li>
-
-										</ul> --%>
-
-										<!-- <div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<div>
-
-
-													<div class="col-xs-12">
- -->
-
-										<!-- <div class="form-group">
-
-															<label class="control-label col-sm-8" for="smallheading">Institute
-																Support Financially by Awarding Scholarship/Freeships
-																like Schemes <b>other than Government Schemes </b> : <span
-																class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-2">
-																Yes <input type="radio" name="isSchemes" id="isSchemes"
-																	onclick="setGovernmentValue(this.value)" checked
-																	value="0"> No<input type="radio"
-																	name="isSchemes" id="isSchemes" value="1"
-																	onclick="setGovernmentValue(this.value)">
-															</div>
-														</div> -->
-										<%-- <div class="form-group">
-													<label class="control-label col-sm-3" for="status">
-													Year  <span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-6">
-													<select id="academic_year" name="academic_year" class="form-control" required>
-																<c:forEach items="${acaYearList}" var="acaYear">
-																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
-																	
-																	</c:forEach>
-																	
-																		<c:forEach items="${acaYearList}" var="acaYearList">
-																		<c:choose>
-																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
-																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-
-													</select>
-                                       </div>
-										</div> --%>	
+										
 										<div id="abc">
 												<input type="hidden" id="inst_scheme_id"  name="inst_scheme_id"
 														placeholder="" value="${instSpprt.instSchemeId}">
@@ -171,11 +110,12 @@
 													of Schemes <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" pattern="^(?!\s*$).+"
+													<input type="text" class="form-control" onchange="trim(this)"
 														id="inst_scheme_name" autocomplete="off"
 														onchange="return trim(this)" name="inst_scheme_name"
-														placeholder="" value="${instSpprt.instSchemeName}"
-														required>
+														placeholder="Name of Schemes" value="${instSpprt.instSchemeName}">
+														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name
+													of schemes.</span>	
 												</div>
 											</div>
 
@@ -189,11 +129,13 @@
 													Benefited <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="number" min="0" class="form-control" autocomplete="off"
-														id="inst_students_benefited" pattern="^(?!\s*$).+"
+													<input type="text" class="form-control" autocomplete="off"
+														id="inst_students_benefited" onchange="trim(this)"
 														name="inst_students_benefited" onkeypress="return allowOnlyNumber(event)" 
-														placeholder=""
-														value="${instSpprt.instStudentsBenefited}" required>
+														placeholder="No. of Students Benefited" maxlength="7"														
+														value="${instSpprt.instStudentsBenefited}">
+														<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No. of students
+													benefited.</span>	
 												</div>
 											</div>
 
@@ -206,8 +148,10 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="inst_schme_offeredby" name="inst_schme_offeredby"
-														placeholder="" pattern="^(?!\s*$).+"
-														value="${instSpprt.instSchmeOfferedby}" required>
+														placeholder="Scheme/Support offered	By" onchange="trim(this)"
+														value="${instSpprt.instSchmeOfferedby}" >
+														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter scheme/support offered
+													by.</span>	
 												</div>
 											</div>
 
@@ -252,7 +196,7 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
 
 
 
@@ -286,7 +230,88 @@
 			</div>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		//	alert("hi");
+            			var isError=false;
+            			 var errMsg="";
+            			
+            			
+            			 if(!$("#inst_scheme_name").val()){
+        					 
+             				isError=true;
+             				errMsg += '<li>Please enter a valid name.</li>';
+             				
+             				$("#inst_scheme_name").addClass("has-error")
+             				$("#error_formfield1").show()
+             					//return false;
+             				} else {
+             					$("#error_formfield1").hide()
+             				} 
+           				
+           				if($("#inst_students_benefited").val()==0){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#inst_students_benefited").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				} 
+           				
+           				if(!$("#inst_schme_offeredby").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#inst_schme_offeredby").addClass("has-error")
+            				$("#error_formfield3").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield3").hide()
+            				} 
+           				
+           				/* if(!$("#").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#").addClass("has-error")
+            				$("#error_formfield6").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield6").hide()
+            				} */
+           			
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
 
+</script>
 
 	<script type="text/javascript">
 	function submit_f(view){

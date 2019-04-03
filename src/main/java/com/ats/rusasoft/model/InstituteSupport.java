@@ -6,7 +6,7 @@ public class InstituteSupport {
 	private int instituteId;
 	private int yearId;
 	private String instSchemeName;
-	private String instStudentsBenefited;
+	private int instStudentsBenefited;
 	private String instSchmeOfferedby;
 	private int delStatus;
 	private int isActive;
@@ -40,10 +40,10 @@ public class InstituteSupport {
 	public void setInstSchemeName(String instSchemeName) {
 		this.instSchemeName = instSchemeName;
 	}
-	public String getInstStudentsBenefited() {
+	public int getInstStudentsBenefited() {
 		return instStudentsBenefited;
 	}
-	public void setInstStudentsBenefited(String instStudentsBenefited) {
+	public void setInstStudentsBenefited(int instStudentsBenefited) {
 		this.instStudentsBenefited = instStudentsBenefited;
 	}
 	public String getInstSchmeOfferedby() {

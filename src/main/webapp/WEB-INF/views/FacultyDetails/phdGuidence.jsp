@@ -158,7 +158,7 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control " id="co_guide_name" autocomplete="off"  onchange="trim(this)"	 
 																	name="co_guide_name" placeholder="Name of Co_Guide" value="${phd.coGuideName}">
-																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of co-guide</span>
+																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of co-guide.</span>
 															</div>
 
 
@@ -175,7 +175,7 @@
 																<input type="text" class="form-control" id="phd_scholar" onchange="trim(this)"
 																	name="phd_scholar" placeholder="Name of Ph.D Scholar"
 																	value="${phd.phdScholarName}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name of Ph.D. scholar</span>
+																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name of Ph.D. scholar.</span>
 															</div>
 														</div>
 
@@ -224,7 +224,7 @@
 																<textarea id="phd_topic" name="phd_topic" onchange="trim(this)"
 																	class="form-control" style="width: 100%;">${phd.phdTopic}</textarea>
 																<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter topic/
-																area of research </span>
+																area of research.</span>
 															</div>
 														</div>
 

@@ -100,8 +100,8 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addStudMentor"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="formidhere" id="formidhere">
+										<!-- onsubmit="return checkBeforeSubmit()" -->
 
 										<!-- <div class="form-group">
 
@@ -117,11 +117,12 @@
 												of Student <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="1" max="99999"
-													class="form-control" id="stud_no" pattern="^(?!\s*$).+"
-													name="stud_no" placeholder="No."
-													value="${stud.menStuCount}"
-													onkeypress='return restrictAlphabets(event)' required>
+												<input type="text" 
+													class="form-control numbersOnly" id="stud_no" 
+													name="stud_no" placeholder="No." maxlength="5"
+													value="${stud.menStuCount}">
+											<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter No. of student and value must be greater than 0.</span>
+											
 											</div>
 										</div>
 
@@ -209,6 +210,9 @@
 			</div>
 		</div>
 	</div>
+	
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
 
 	<script type="text/javascript">
 		function getData() {
@@ -276,6 +280,93 @@
 			else
 				return false;
 		}
+	
+		function onlyno(e) {
+			 alert(e)
+			var numbers = /^[1-9]+$/;
+		      if(e.test($.trim(numbers)) == false)
+		      {
+		      
+		      return false;
+		      } 
+			
+				return true;
+		}
+	
+		$(document).ready(function($){
+        	
+    		$("#formidhere").submit(function(e) {
+    			 var isError=false;
+    			 var errMsg="";
+    				
+    				if($("#stud_no").val()==0 || !$("#stud_no").val()){
+    					 
+    					isError=true;
+    					 
+    					errMsg += '<li>Please enter value greater than 0  and less than 99999</li>';
+    				$("#stud_no").addClass("has-error")
+    				$("#error_formfield1").show()
+    					//return false;
+    				} else {
+    					$("#error_formfield1").hide()
+    				}
+    				
+    				  
+    				 
+    				/* if(!$("#mobile").val() || !validateMobile($("#mobile").val())){
+    
+    				isError=true;
+    				errMsg += '<li>Please enter a valid email address.</li>';
+    				errMsg_alert = 'Please enter a valid mobile number.';
+    				$("#error_mobile").html(errMsg_alert);
+    				$("#error_mobile").show();
+    				//alert();
+    					//return false;
+    				} else {
+    					$("#error_mobile").html("Please enter mobile")
+    					$("#error_mobile").hide()
+    				}
+    				if(!$("#email").val() || !validateEmail($("#email").val())){
+    
+    				isError=true;
+    				errMsg += '<li>Please enter a valid email address.</li>';
+    				errMsg_alert += 'Please enter a valid email address. \n';
+    				$("#error_email").show()
+    					//return fregister_useralse;
+    				} else {
+    					$("#error_email").hide()
+    				} */
+    
+    		 
+    
+    
+    			  /*  if ($('#termcondition').is(':checked')) {
+    				} else {
+    				isError=true;
+    					errMsg += '<li>You must agree to our Term & Conditions.</li>';
+    					errMsg_alert = 'You must agree to our Term & Conditions. \n';
+    					alert(errMsg_alert);
+    					return false;
+    				} */
+     
+    
+    
+    				if(!isError) {
+    					//dataString = $("#regform").serialize();
+    					// alert(weregister_userb_site_url);
+    						/* $("#regerror").html("");
+    					    $("#regerror").hide();
+     */
+    								 //ajax send this to php page
+    						//$("#formidhere").submit();
+    								//end ajax send this to php page
+    					   } else {
+    					   $("#regerror").html(errMsg);
+    					    $("#regerror").show();
+    					   }
+    					   return false;
+    				} );
+    	});
 	</script>
 	<script type="text/javascript">
 		function submit_f(view) {

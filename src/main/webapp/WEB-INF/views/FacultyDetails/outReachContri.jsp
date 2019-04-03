@@ -157,7 +157,7 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="con_name" autocomplete="off" onchange="trim(this)"
 															name="con_name" placeholder="Name " value="${facContri.conName}">
-														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name</span>
+														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name.</span>
 														</div>
 
 
@@ -172,7 +172,7 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="university" autocomplete="off"  onchange="trim(this)"
 																name="university" placeholder="University" value="${facContri.conUniversity}">
-																<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter university</span>
+																<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter university.</span>
 														</div>
 
 													</div>
@@ -186,7 +186,7 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker" id="from_date" onkeypress='return restrictAlphabets(event)'
 																 onchange="trim(this)" name="from_date" placeholder="From" value="${facContri.conFrom}" autocomplete="off">
-														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter from date</span>
+														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter from date.</span>
 														</div>
 													</div>
 
@@ -199,7 +199,7 @@
 															<input type="text" class="form-control datepicker" id="to_date" name="to_date" autocomplete="off"
 																placeholder="To" value="${facContri.conTo}" onchange="dateValidator()"  onchange="trim(this)"
 																onkeypress='return restrictAlphabets(event)'>
-															<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter to date</span>
+															<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter to date.</span>
 														</div>
 
 													</div>

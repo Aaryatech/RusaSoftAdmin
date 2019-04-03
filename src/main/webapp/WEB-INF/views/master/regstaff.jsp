@@ -110,8 +110,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addFaculty"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit()">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 
 
@@ -124,11 +123,12 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control"
-													id="faculty_first_name" pattern="^(?!\s*$).+"
+													id="faculty_first_name" onchange="trim(this)"
 													name="faculty_first_name"
 													placeholder="First Name			Middle Name			 Last Name"
-													value="${staff.facultyFirstName}" required="required"
+													value="${staff.facultyFirstName}" 
 													autocomplete="off">
+													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter faculty name.</span>
 											</div>
 										</div>
 
@@ -138,7 +138,7 @@
 												: <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<select id="dept" name="dept" class="form-control" required>
+												<select id="dept" name="dept" class="form-control" >
 													<c:forEach items="${deptList}" var="dList">
 														<c:choose>
 															<c:when test="${dList.deptId==staff.deptId}">
@@ -165,8 +165,7 @@
 												: <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<select id="hod_quolf" name="hod_quolf" class="form-control"
-													required>
+												<select id="hod_quolf" name="hod_quolf" class="form-control">
 													<c:forEach items="${quolfList}" var="quolf">
 														<c:choose>
 															<c:when
@@ -195,8 +194,7 @@
 
 											<div class="col-sm-10">
 												<select id="yr_highest_qualification_acqrd"
-													name="yr_highest_qualification_acqrd" class="form-control"
-													required>
+													name="yr_highest_qualification_acqrd" class="form-control">
 
 													<c:forEach items="${acaYearList}" var="acaYearList">
 														<c:choose>
@@ -224,7 +222,7 @@
 											</label>
 											<div class="col-sm-10">
 												<select id="designation" name="designation"
-													class="form-control" required>
+													class="form-control">
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
 															<c:when
@@ -251,9 +249,9 @@
 												<input type="text" class="form-control datepicker"
 													id="dateOfJoin"
 													onkeypress='return restrictAlphabets(event)'
-													pattern="^(?!\s*$).+" name="join_date" autocomplete="off"
-													placeholder="dd/mm/yyyy" value="${staff.joiningDate}"
-													required>
+													onchange="trim(this)" name="join_date" autocomplete="off"
+													placeholder="dd/mm/yyyy" value="${staff.joiningDate}">
+													<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter joining date.</span>
 											</div>
 
 											<label class="control-label col-sm-2" for="page_order">Is
@@ -264,10 +262,10 @@
 												<c:choose>
 													<c:when test="${staff.facultyId==0}">
 
-														<input type="radio" id="is_registration"
+														<input type="radio" id="is_registration1"
 															name="is_registration" value="1" checked
 															onclick="setDate(this.value)">Yes 
-																<input type="radio" id="is_registration"
+																<input type="radio" id="is_registration2"
 															name="is_registration" value="0" 
 															onclick="setDate(this.value)">No 
 															
@@ -317,30 +315,22 @@
 												<div class="col-sm-3">
 													<input type="text" class="form-control datepicker"
 														id="relDate" value="${staff.realivingDate}"
-														pattern="^(?!\s*$).+"
+														 onchange="trim(this)"
 														onkeypress='return restrictAlphabets(event)'
 														name="acc_off_relDate" autocomplete="off"
 														placeholder="dd/mm/yyyy">
+														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter relieving date.</span>
 												</div>
 											</div>
 										</div>
-										<!-- <div class="form-group" id="rel_date1">
-															<label class="control-label col-sm-2" for="page_order">Relieving
-																Date <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="date" class="form-control" id="rel_date"
-																	name="rel_date">
-															</div>
-														</div> -->
+										
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Teaching
 												to <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<select id="teachTo" name="teachTo" class="form-control"
-													required>
+												<select id="teachTo" name="teachTo" class="form-control">
 													<c:forEach items="${teachingList}" var="teach">
 														<c:choose>
 															<c:when test="${staff.teachingTo==teach.qualificationId}">
@@ -361,29 +351,17 @@
 											</div>
 										</div>
 
-										<!-- <div class="form-group" id="abc">
-															<label class="control-label col-sm-2" for="smallheading">Other Course
-														  <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<input type="text" class="form-control" id="other_course"
-																	name="other_course" 
-																	
-																	placeholder="Other Designation" value="">
-															</div>
-														</div> -->
-
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact
 												No <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" pattern="^[1-9]{1}[0-9]{9}$"
-													onchange="checkUnique(this.value,1)" pattern="^(?!\s*$).+"
+												<input type="text" onchange="checkUnique(this.value,1)"  onchange="trim(this)"
 													maxlength="10" class="form-control" id="contact_no"
 													onkeypress='return restrictAlphabets(event)'
 													name="contact_no" placeholder="Mobile Number"
-													value="${staff.contactNo}" autocomplete="off" required>
+													value="${staff.contactNo}" autocomplete="off">
+													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter valid contact No.</span>
 												<p class="desc text-danger fontsize11">Note: OTP will be
 													sent on this mobile number for verification</p>
 											</div>
@@ -397,7 +375,8 @@
 												<input type="email" class="form-control" id="email"
 													onchange="checkUnique(this.value,2)" name="email"
 													placeholder="abc@xyz.com" value="${staff.email}"
-													pattern="^(?!\s*$).+" autocomplete="off" required>
+													 onchange="trim(this)" autocomplete="off">
+													 <span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter valid email.</span>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>
 											</div>
@@ -431,11 +410,7 @@
 											value="${staff.facultyId}"> <input type="hidden"
 											id="is_view" name="is_view" value="0">
 
-
-
 										<div class="clearfix"></div>
-
-
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
@@ -455,6 +430,135 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+              function validateEmail(email) {
+            
+            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            
+            	if (eml.test($.trim(email)) == false) {
+            
+            
+            	return false;
+            
+            	}
+            
+            	return true;
+            
+            }
+             function validateMobile(mobile) {
+            		var mob = /^[1-9]{1}[0-9]{9}$/;
+            
+            
+            		if (mob.test($.trim(mobile)) == false) {
+            
+            		//alert("Please enter a valid email address .");
+            		return false;
+            
+            		}
+            		return true;
+            
+             }  
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+           				if(!$("#faculty_first_name").val()){
+            					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#faculty_first_name").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+            				
+            				            				
+            				if(!$("#dateOfJoin").val()){
+             					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#dateOfJoin").addClass("has-error")
+                				$("#error_formfield2").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield2").hide()
+                				}
+            				 
+            				var radioValue = $("input[name='is_registration']:checked"). val();
+            				//alert(radioValue);
+            				if ( radioValue==0) {
+            					
+            					if(!$("#relDate").val()){
+            					isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#relDate").addClass("has-error1")
+                				$("#error_formfield3").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield3").hide()
+                				}
+            		          }
+            				/* if ( $("#radioValue").is(":checked")) {
+            					$("#error_formfield3").hide()
+            				} */
+            				
+								if(!$("#contact_no").val() || !validateMobile($("#contact_no").val())){
+            		            
+                				isError=true;
+                				errMsg += '<li>Please enter a valid email address.</li>';
+                				errMsg_alert = 'Please enter a valid mobile number.';
+                				$("#error_formfield4").html(errMsg_alert);
+                				$("#error_formfield4").show();
+                				//alert();
+                					//return false;
+                				} else {
+                					$("#error_formfield4").html("Please enter mobile")
+                					$("#error_formfield4").hide()
+                				} 
+
+								if(!$("#email").val() || !validateEmail($("#email").val())){
+	            		            
+	                				isError=true;
+	                				errMsg += '<li>Please enter a valid email address.</li>';
+	                				errMsg_alert += 'Please enter a valid email address. \n';
+	                				$("#error_formfield5").show()
+	                					//return fregister_useralse;
+	                				} else {
+	                					$("#error_formfield5").hide()
+	                				} 
+            				
+            				
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
 
 	<script type="text/javascript">
 		/*code: 48-57 Numbers
@@ -489,17 +593,17 @@
 	</script>
 
 
-	<script type="text/javascript">
-		$(function() {
+<script type="text/javascript">
+	$(function () {
+		 
+	    $('.datepicker').datepicker({
+			autoclose: true,
+	        format: "dd-mm-yyyy",
+	        changeYear:true,
+	        changeMonth:true
 
-			$('.datepicker').datepicker({
-				autoclose : true,
-				format : "dd-mm-yyyy",
-				changeYear : true,
-				changeMonth : true
-
-			});
 		});
+	});
 	</script>
 
 	<script>
@@ -627,14 +731,13 @@
 			///alert("Value " +value)
 			if (value == 1) {
 				//alert(value)
-				document.getElementById("relDate").removeAttribute("required");
+				//document.getElementById("relDate").removeAttribute("required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				document.getElementById("relDate").setAttribute("required",
-						"true");
+				//document.getElementById("relDate").setAttribute("required","true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -652,7 +755,7 @@
 			} else {
 
 				document.getElementById("rel_date1").style = "visible"
-				document.getElementById("rel_date").required = true;
+				//document.getElementById("rel_date").required = true;
 
 			}
 		}
@@ -730,15 +833,6 @@
 
 		}
 	</script>
-
-
-
-	<!-- END CONTAINER -->
-	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
 
 </body>
 </html>
