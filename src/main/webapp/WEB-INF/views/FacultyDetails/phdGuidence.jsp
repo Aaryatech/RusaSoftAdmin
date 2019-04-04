@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -67,17 +64,10 @@
 							<%-- 	<h1 class="title">${title}</h1> --%>
 							<!-- PAGE HEADING TAG - END -->
 						</div>
-
-
 					</div>
 				</div>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
-
-
-
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -90,8 +80,6 @@
 							</div> --%>
 
 						</header>
-
-
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
@@ -253,66 +241,6 @@
 																	
 															No<input type="radio" name="awarded" id="awarded" ${phd.isPhdAwarded == 0 ? 'checked' : '' }
 																	 value="0" onclick="check(this.value)">
-															<%-- <c:choose>
-																
-																	<c:when test="${phd.phdId == 0}">
-																
-																	Yes <input type="radio" name="awarded" id="awarded"
-																	 value="1" onclick="check(this.value)">
-																	
-																	No<input type="radio" name="awarded" id="awarded"
-																	checked value="0" onclick="check(this.value)">
-																
-																</c:when>
-																
-																<c:otherwise>
-																<c:choose>
-																	<c:when test="${empty phd.isPhdAwarded}">
-																		Yes <input type="radio" name="awarded" id="awarded"
-																	 value="1" onclick="check(this.value)">
-																	
-																	No<input type="radio" name="awarded" id="awarded"
-																	checked value="0" onclick="check(this.value)">
-																	
-																	</c:when>
-																	
-																	<c:otherwise>
-																		Yes <input type="radio" name="awarded" id="awarded"
-																	 	checked value="1" onclick="check(this.value)">
-																	
-																		No<input type="radio" name="awarded" id="awarded"
-																		 value="0" onclick="check(this.value)">
-																	</c:otherwise>
-																</c:choose>
-																</c:otherwise>
-																
-															
-															</c:choose> --%>
-														
-														
-															<%-- <c:choose>
-																	<c:when test="${phd.isPhdAwarded == 1}">
-																Yes <input type="radio" name="awarded" id="awarded"
-																	checked value="1" onclick="check(this.value)">
-																No<input type="radio" name="awarded" id="awarded"
-																	value="0" onclick="check(this.value)">
-															</c:when>
-															
-															<c:when test="${phd.isPhdAwarded == 0}">
-																Yes <input type="radio" name="awarded" id="awarded"
-																	 value="1" onclick="check(this.value)">
-																No<input type="radio" name="awarded" id="awarded"
-																	value="0" onclick="check(this.value)" checked>
-															</c:when>
-															<c:otherwise>
-															Yes <input type="radio" name="awarded" id="awarded"
-																	 value="1" onclick="check(this.value)">
-																No<input type="radio" name="awarded" id="awarded"
-																	value="0" onclick="check(this.value)" checked>
-															</c:otherwise>
-															
-															</c:choose> --%>
-															
 															
 															</div>
 														</div>
@@ -354,9 +282,11 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+															<button type="submit" id="sub_button" class="btn btn-primary" 
+																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+															
 																<a href="${pageContext.request.contextPath}/showPhdGuideList"><button
-																   id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
+																   id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 															<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>
@@ -453,7 +383,7 @@
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									
-									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub_button").disabled = true;
 									document.getElementById("sub2").disabled = true;
 									return  true;
 								}
