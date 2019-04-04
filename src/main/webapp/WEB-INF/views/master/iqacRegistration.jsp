@@ -59,25 +59,10 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<%-- 	<div class="col-xs-12">
-					<div class="page-title">
 
-						<div class="pull-left">
-							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
-							<!-- PAGE HEADING TAG - END -->
-						</div>
-
-
-					</div>
-				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
-
-
-
+				
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -98,11 +83,7 @@
 									<form class="form-horizontal" 
 										action="${pageContext.request.contextPath}/iqacNewRegistration"
 										method="post" name="formidhere" id="formidhere">
-										
-										
-
-
-
+									
 										<input type="hidden" id="iqac_id" name="iqac_id"
 											value="${miqc.iqacId}">
 										<div class="form-group">
@@ -116,10 +97,6 @@
 												<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter IQAC name</span>
 											</div>
 										</div>
-
-
-
-
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Designation
@@ -146,8 +123,6 @@
 												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please select designation</span>
 											</div>
 										</div>
-
-
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Joining
@@ -202,14 +177,13 @@
 
 										</div>
 
-
-
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save">
+												<button type="submit" id="sub_button" class="btn btn-primary" 
+													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+											
 												<a href="${pageContext.request.contextPath}/showIqacList"><button
-													id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
+													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 												<!-- <button type="reset" class="btn btn-default">Reset</button> -->
 												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
@@ -347,26 +321,12 @@
             					$("#error_formfield5").hide()
             				} 
             
-            		 
-            
-            
-            			  /* if ($('#termcondition').is(':checked')) {
-            				} else {
-            				isError=true;
-            					errMsg += '<li>You must agree to our Term & Conditions.</li>';
-            					errMsg_alert = 'You must agree to our Term & Conditions. \n';
-            					alert(errMsg_alert);
-            					return false;
-            				}
-             */
-            
-            
 			            	 if (!isError) {
 			            		 
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									
-									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub_button").disabled = true;
 									document.getElementById("sub2").disabled = true;
 									return  true;
 								}

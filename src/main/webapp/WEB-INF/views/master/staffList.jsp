@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -55,7 +53,7 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
 									<a href="${pageContext.request.contextPath}/showRegisterStaff"><button
-											type="button" class="btn btn-success">Add</button></a>
+											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 								</c:if>
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -193,31 +191,12 @@
 										</div>
 
 										 <c:if test="${deleteAccess==0}">
-											<input type="submit" class="btn btn-primary" value="Delete"
+											<button class="btn btn-primary" 
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"></c:if>
+												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
 											<input type="hidden" id="edit_link_id" name="edit_link_id"
 												value="0">
-
-										
-										
-											
-											
-
-										<input type="hidden" id="add_fac_detail_id"
-											name="add_fac_detail_id" value="0"> 
-											<input
-											type="hidden" name="title" id="title"
-											value="">
-											
-											
-												<input type="hidden" id="temp"
-											name="temp" value=""> 
-											<input type="hidden" id="temp1"
-											name="temp1" value=""> 
-											<input type="hidden" id="temp2"
-											name="temp2" value=""> 
 									</form>
 
 								</div>
@@ -227,19 +206,10 @@
 					</section>
 				</div>
 
-
-
-
-
-
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
 		<!-- END CONTENT -->
-
-
-
-
 
 	</div>
 	<!-- END CONTAINER -->

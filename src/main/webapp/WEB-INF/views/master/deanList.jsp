@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -30,23 +28,8 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
-
-				<%-- <div class='col-xs-12'>
-					<div class="page-title">
-
-						<div class="pull-left">
-							<!-- PAGE HEADING TAG - START -->
-							<h1 class="title">${title}</h1>
-							<!-- PAGE HEADING TAG - END -->
-						</div>
-
-
-					</div>
-				</div> --%>
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
-
 
 				<div class="col-lg-12">
 					<section class="box ">
@@ -55,11 +38,7 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}"> 
 								<a href="${pageContext.request.contextPath}/showRegDean"><button
-										type="button" class="btn btn-success">Add</button></a></c:if>
-							<!-- 	<a class="box_toggle fa fa-chevron-down"></a> -->
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
-
+										type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a></c:if>
 							</div>
 
 						</header>

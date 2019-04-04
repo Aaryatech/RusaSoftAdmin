@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -82,33 +79,15 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-
-						<%-- 	<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showStudMentor"
-									data-toggle="modal"><button type="submit"
-										class="btn btn-info">Back</button></a>
-							
-							</div> --%>
-
 						</header>
-
-
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addStudMentor"
 										method="post" name="formidhere" id="formidhere">
-										<!-- onsubmit="return checkBeforeSubmit()" -->
-
-										<!-- <div class="form-group">
-
-													<label class="control-label col-sm-3" for="page_name">Mentoring
-														to the Students <span class="text-danger">*</span>
-													</label>
-												</div> -->
-										<input type="hidden" id="menId" name="menId"
-											value="${stud.menId}">
+									
+									<input type="hidden" id="menId" name="menId" value="${stud.menId}">
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="page_name">No
@@ -128,11 +107,11 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save">
+												<button type="submit" id="sub_button" class="btn btn-primary" 
+													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 											
 											<a href="${pageContext.request.contextPath}/showStudMentor"><button
-													id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
+													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 											</div>
 										</div>
 										<div class="clearfix"></div>
@@ -266,7 +245,7 @@
 							var x = confirm("Do you really want to submit the form?");
 							if (x == true) {
 								
-								document.getElementById("sub1").disabled = true;
+								document.getElementById("sub_button").disabled = true;
 								document.getElementById("sub2").disabled = true;
 								return  true;
 							}
