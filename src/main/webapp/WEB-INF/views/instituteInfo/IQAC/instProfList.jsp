@@ -55,10 +55,12 @@
 							<div class="actions panel_actions pull-right">
 							
 						
-								<a href="${pageContext.request.contextPath}/showInstProf"><button
-										type="button" class="btn btn-success">Add</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/showInstProf"><button
+										type="button" class="btn btn-success">Add</button></a> --%>
 							
-							
+					 <a title="Add"
+											href="${pageContext.request.contextPath}/showInstProf"><button
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>		
 								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->

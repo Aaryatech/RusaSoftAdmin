@@ -54,9 +54,11 @@
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 								  <c:if test="${addAccess == 0}"> 
-								  <a href="${pageContext.request.contextPath}/showRegLib">
-								  <button type="button" class="btn btn-success">Add
-								  </button></a> 
+								
+								  
+								  <a title="Add"
+											href="${pageContext.request.contextPath}/showRegLib"><button
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 			                	  </c:if>
 								
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>

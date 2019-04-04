@@ -135,14 +135,15 @@
 											<input type="hidden" id="linkage_id" name="linkage_id"
 												value="${editInst.linknameId}">
 
-											<div class="form-group">
-												<div class="col-sm-offset-2 col-sm-10">
-													<input type="submit" class="btn btn-primary"
-														onclick="submit_f(1)" value="Save" id="sub1">
-													<button type="reset" class="btn btn-default">Reset</button>
-												</div>
+										<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
 
-											</div>
+
+<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														
+						</div>
+												</div>
 										</form>
 
 									</c:if>
