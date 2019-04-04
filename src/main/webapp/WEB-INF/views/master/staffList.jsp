@@ -80,7 +80,14 @@
 									<form class="form-horizontal" action="${pageContext.request.contextPath}/delSlectedStaff/0" method="get"
 										name="form_sample_2" id="form_sample_2">
 
-
+	    <input type="hidden" id="add_fac_detail_id" name="add_fac_detail_id" value="0">
+		<input type="hidden" id="temp" name="temp" value="0">
+		<input type="hidden" id="temp1" name="temp1" value="0">
+		<input type="hidden" id="temp2" name="temp2" value="0">
+		<input type="hidden" id="title" name="title" value="0">
+						
+						
+				
 										<table id="example-1"
 											class="table table-striped dt-responsive display">
 											<thead>
@@ -292,7 +299,7 @@
 		    }else  if(formType==2){
 		    	//2 means add Mphil Phd Details
 				form.action=("showAddMphillDetails");
-				document.getElementById("title").value="Add Faculty's M Phil / Ph.D Details"
+				document.getElementById("title").value="Add Faculty M.Phil./Ph.D. Details"
 					document.getElementById("temp1").value="2"
 		    }else  if(formType==3){
 		    	//3 means add Academic Details

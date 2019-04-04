@@ -229,9 +229,15 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-3 col-sm-9">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+															
+															
+															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														<a href="${pageContext.request.contextPath}/hodList"><button type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+
+
+															<%-- 	<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
 																<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" id="sub2" class="btn btn-info">Cancel</button></a>
+										type="button" id="sub2" class="btn btn-info">Cancel</button></a> --%>
 																<!-- <input type="submit" style="display: none"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
 																		Next"> -->
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button

@@ -252,11 +252,16 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-9">
-													<button type="submit" id="sub1" class="btn btn-primary"
+											
+											<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														<a href="${pageContext.request.contextPath}/showAccList"><button type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+
+											
+												<%-- 	<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Save</button>
 												
 <a href="${pageContext.request.contextPath}/showAccList"><button
-										type="button" id="sub2" class="btn btn-info">Cancel</button></a>											</div>
+										type="button" id="sub2" class="btn btn-info">Cancel</button></a> --%>											</div>
 										</div>
 									
 										<input type="hidden" id="acc_off_id" name="acc_off_id"

@@ -349,7 +349,7 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 
 				model = new ModelAndView("FacultyDetails/mPhillDetailList");
 
-				model.addObject("title", "Faculty's M Phil / Ph.D Details List");
+				model.addObject("title", "Faculty M.Phil./Ph.D. Details List");
 
 				Info addAccess = AccessControll.checkAccess("showMphillDetails", "showMphillDetails", "0", "1", "0",
 						"0", newModuleList);
@@ -557,7 +557,7 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 
 	 		model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
-			model.addObject("title", "Add Academic Details");
+			model.addObject("title", "Add Faculty Academic Details");
 			
 			
 			try {
@@ -638,7 +638,7 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 
 				model = new ModelAndView("FacultyDetails/academicDetails");
 
-				model.addObject("title", "Academic Details List");
+				model.addObject("title", " Faculty Academic Details List");
 
 				Info addAccess = AccessControll.checkAccess("showAcademicDetails", "showAcademicDetails", "0", "1", "0",
 						"0", newModuleList);
@@ -672,6 +672,9 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 				System.err.println("facAcadList " + facAcadList.toString());
 
 				model.addObject("facAcadList", facAcadList);
+				
+				 model.addObject("temp2", 0); 
+
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -784,9 +787,9 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 
 	// editFacAcademic
 
-	@RequestMapping(value = "/showEditFacAcademic/{fAcaId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/showEditFacAcademic/{fAcaId}/{temp2}", method = RequestMethod.GET)
 	public ModelAndView showEditInstitute(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int fAcaId) {
+			@PathVariable int fAcaId,@PathVariable int temp2) {
 		ModelAndView model = null;
 
 		try {
@@ -804,7 +807,7 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 				// model = new ModelAndView("FacultyDetails/academicDetails");
 				model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
-				model.addObject("title", "Edit Academic Details");
+				model.addObject("title", "Edit Faculty Academic Details");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("fAcaId", fAcaId);
@@ -818,7 +821,8 @@ int temp=Integer.parseInt(request.getParameter("temp"));
 				}
 				model.addObject("editFacAcad", editFacAcad);
 				model.addObject("fAcaId", fAcaId);
-
+				model.addObject("temp2", temp2);
+				
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("type", 1);
 

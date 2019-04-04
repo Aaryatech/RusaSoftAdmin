@@ -226,7 +226,7 @@
 											<!-- </div>
 										</div> -->
 										<input type="hidden" name="add_fac_detail_id" id="add_fac_detail_id" value="0">
-										<input type="hidden" name="title" id="title" value="Edit Faculty's M Phil / Ph.D Details">
+										<input type="hidden" name="title" id="title" value="Edit Faculty M.Phil./Ph.D. Details">
 										
 									</form>
 								</div>

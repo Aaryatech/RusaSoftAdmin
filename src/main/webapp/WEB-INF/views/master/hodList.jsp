@@ -69,8 +69,7 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
 									<a href="${pageContext.request.contextPath}/hodRegistration"><button
-											type="button" class="btn btn-success">Add
-										</button></a>
+											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 								</c:if>
 							
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -164,16 +163,20 @@
 											<div class="col-sm-5">
 											<div class="col-sm-1">
 
-												<button type="submit" title="Delete Multiple Records" class="btn1"
+
+
+															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+
+												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
 													id="deleteId"
 													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 													style="align-content: left;">
 													<i class="fa fa-trash"
 														style="font-size: 25px; background-color: black"></i>
-												</button></div>
-												<div class="col-sm-4">
+												</button> --></div>
+												<!-- <div class="col-sm-4">
 													<h5 style="text-align: left;">Delete Records</h5>
-												</div>
+												</div> -->
 											</div>
 
 

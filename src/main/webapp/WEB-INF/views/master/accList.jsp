@@ -51,9 +51,8 @@
 							<h2 class="title pull-left">Account Officer List</h2>
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
-									<a href="${pageContext.request.contextPath}/showRegAcc"><button
-											type="button" class="btn btn-success">Add</button></a>
-
+												<a href="${pageContext.request.contextPath}/showRegAcc"><button
+											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 								</c:if>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -132,10 +131,8 @@
 											</tbody>
 										</table>
 										<c:if test="${deleteAccess==0}">
-											<input type="submit" class="btn btn-primary" value="Delete"
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
+									<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+
 										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">

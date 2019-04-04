@@ -234,11 +234,8 @@
 													<div class="form-group">
 
 														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" id="sub1" class="btn btn-primary"
-																value="Save" onclick="submit_f(1)"> <!-- <input
-																type="submit" id="sub2" class="btn btn-primary"
-																value="Save And Next" onclick="submit_f(0)"> -->
-															<button type="reset" class="btn btn-default">Reset</button>
+															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														<a href="${pageContext.request.contextPath}/showAcademicDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 														</div>
 
 														<input type="hidden" id="fac_aca_id" name="fac_aca_id"
@@ -357,6 +354,8 @@
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
 														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+
 														return  true;
 													}	
 												}

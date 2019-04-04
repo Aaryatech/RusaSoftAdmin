@@ -111,7 +111,7 @@
 
 												<div class="col-xs-12">
 													<div class="form-group">
-														<label class="control-label col-sm-3" for="isPhdGuide">M.phill/Ph.D.Guide<span
+														<label class="control-label col-sm-3" for="isPhdGuide">M.Phil./Ph.D. Guide<span
 															class="text-danger">*</span>
 														</label> 
 														<div class="col-sm-6">
@@ -140,7 +140,7 @@
 
 													<div class="form-group">
 														<label class="control-label col-sm-3"
-															for="phdRecognitionDt"> Date of Recognition <span
+															for="phdRecognitionDt">Date of Recognition<span
 															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
@@ -180,17 +180,17 @@
 															style="display: none;">Enter no of PG students</span>
 														</div>
 
-														<label style="white-space: nowrap;" class="control-label col-sm-1" for="phdStuMphill">M.Phill
+														<label style="white-space: nowrap;" class="control-label col-sm-1" for="phdStuMphill">M.Phil.
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
 															<input type="number" max="99999" min="0" class="form-control" id="phdStuMphill"
-																name="phdStuMphill" placeholder="M.Phill"
+																name="phdStuMphill" placeholder="M.Phil."
 																value="${facPhdDetail.phdStuMphill}">
 																<span class="error_form text-danger" id="phdStuMphill_field"
-															style="display: none;">Enter no of M.Phill students</span>
+															style="display: none;">Enter no of M.Phil. students</span>
 														</div>
-														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D
+														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D.
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
@@ -233,8 +233,8 @@
 
 													<div class="form-group">
 														<div class="col-sm-offset-3 col-sm-10">
-															<button type="submit" id="sub1" class="btn btn-primary">Save</button>
-															<button type="reset" class="btn btn-default">Reset</button>
+															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														<a href="${pageContext.request.contextPath}/showMphillDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 														</div>
 														<input type="hidden" id="staff_id" name="staff_id"
 														value="${facPhdDetail.facultyId}"> <input
@@ -385,6 +385,8 @@
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
 														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
+
 														return  true;
 													}	
 												}

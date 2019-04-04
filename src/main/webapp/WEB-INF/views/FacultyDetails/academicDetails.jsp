@@ -170,7 +170,7 @@
 																			<td align="center"><c:if
 																					test="${editAccess == 0}">
 																					<a
-																						href="${pageContext.request.contextPath}/showEditFacAcademic/${staffList.fAcaId}"
+																						href="${pageContext.request.contextPath}/showEditFacAcademic/${staffList.fAcaId}/${temp2}"
 																						title="Edit" rel="tooltip"
 																						data-color-class="detail"
 																						data-animate=" animated fadeIn "
