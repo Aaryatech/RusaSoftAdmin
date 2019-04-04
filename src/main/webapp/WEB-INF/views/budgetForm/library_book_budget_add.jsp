@@ -85,8 +85,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
-										type="button" class="btn btn-info">Back</button></a>
+							<%-- 	<a href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
+										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
 						</header>
@@ -196,21 +196,19 @@
 
 											</div>
 										</div>
+												<input type="hidden" id="budget_id" name="budget_id">
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" id="sub2" class="btn btn-primary"
-													onclick="submit_f(0)" value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
-												<input type="hidden" id="is_view" name="is_view" value="0">
-												<input type="hidden" id="budget_id" name="budget_id"
-													value="${budget.libraryBookBudgetId}">
-											</div>
-										</div>
+											<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
+
+
+<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														
+<a href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
+										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+												</div>
 
 
 
