@@ -82,8 +82,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showDeanList"><button
-										type="button" class="btn btn-info">Back</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/showDeanList"><button
+										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
 						</header>
@@ -268,12 +268,9 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" id="sub2" class="btn btn-primary"
-													onclick="submit_f(0)"
-													value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+													onclick="submit_f(1)" value="Save"> 
+												<a href="${pageContext.request.contextPath}/showDeanList"><button
+														type="button" class="btn btn-primary">Cancel</button></a>
 											</div>
 										
 										</div>

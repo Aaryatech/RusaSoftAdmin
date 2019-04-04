@@ -98,10 +98,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertPublicationDetail"
-										method="post" enctype="multipart/form-data"
-										name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										action="${pageContext.request.contextPath}/delOrgActivities/0"
+										method="get"
+										name="form_sample_2" id="form_sample_2">
 
 
 										<div class="col-xs-12">
@@ -118,8 +117,10 @@
 													aria-describedby="example-4_info" style="width: 100%;">
 													<thead>
 														<tr>
+														<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 															<th rowspan="2">Sr No</th>
-
 															<th rowspan="2">Type of Activity</th>
 															<th rowspan="2">Level of Activity</th>
 															<th rowspan="2">Name of Activity</th>
@@ -139,9 +140,9 @@
 												<c:forEach items="${instActList}" var="activList"
 													varStatus="count">
 													<tr>
-														<%-- <td><input type="checkbox" class="chk"
-															name="bookIds" id="bookIds${count.index+1}"
-															value="${bList.bookId}" /></td> --%>
+													 <td><input type="checkbox" class="chk"
+															name="activityId" id="activityId${count.index+1}"
+															value="${activList.instActivityId}" /></td> 
 														<td align="center">${count.index+1}</td>
 														<td>${activList.instActivityType}</td>
 														<td>${activList.instActivityLevel}</td>
@@ -169,6 +170,15 @@
 
 											</tbody>
 												</table>
+												<c:if test="${deleteAccess==0}">
+												<input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;">
+											</c:if>
+											<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
+											value="0"> 
+												
 
 											</div>
 										</div>
@@ -193,109 +203,19 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script type="text/javascript">
+function selectedInst(source) {
 
+	checkboxes = document.getElementsByName('activityId');
 
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
 
+	}
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Sports / Cultural Activity /
-						Competition organized at Institute</h4>
-				</div>
-				<div class="modal-body">
+}
 
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="academicYear">Academic
-							Year</label> <select id="academicYear" name="academicYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2015-2016">2015-2016</option>
-
-						</select>
-					</div>
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="activityName">Name
-							of Activity </label> <input type="text" class="form-control"
-							id="activityName" name="activityName"
-							placeholder="Name of Activity" value="${page.pageName}" required>
-					</div>
-
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="fromDate">From
-							Date </label> <input type="date" class="form-control" id="fromDate"
-							name="fromDate" value="${page.pageName}" required> <label
-							class="control-label col-sm-3" for="toDate">To Date </label> <input
-							type="date" class="form-control" id="toDate" name="toDate"
-							value="${page.pageName}" required>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="totalParticipants">Total
-							Participants </label> <input type="text" class="form-control"
-							id="totalParticipants" name="totalParticipants"
-							placeholder="Total Participants" value="${page.pageName}"
-							required>
-					</div>
-
-
-
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="activityLevel">Level
-							of Activity Year</label> <select id="activityLevel" name="activityLevel"
-							class="form-control" required>
-							<option value="State">State</option>
-							<option value="National">National</option>
-							<option value="International">International</option>
-
-						</select>
-					</div>
-
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="activityType">Type
-							of Activity Year</label> <select id="activityType" name="activityType"
-							class="form-control" required>
-							<option value="Sports">Sports</option>
-							<option value="Cultural">Cultural</option>
-
-
-						</select>
-					</div>
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -317,7 +237,7 @@
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}
-	</script>
+</script>
 
 
 

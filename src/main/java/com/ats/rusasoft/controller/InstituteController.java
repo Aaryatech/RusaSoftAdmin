@@ -259,7 +259,7 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			
-				Info view = AccessControll.checkAccess("/showAddInstituteSupport", "showInstituteSupport", "0", "0", "1", "0",
+				Info view = AccessControll.checkAccess("/editInstituteScheme/{schmId}", "showInstituteSupport", "0", "0", "1", "0",
 						newModuleList);
 
 				if (view.isError() == true) {
@@ -309,6 +309,66 @@ public class InstituteController {
 		}
 
 		return "redirect:/showInstituteSupport";
+	}
+	
+	@RequestMapping(value = "/delInstSupport/{instSchId}", method = RequestMethod.GET)
+	public String deleteinstLinkages(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int instSchId) {
+		
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delInstSupport/{instId}", "showInstituteSupport", "0", "0",
+				"0", "1", newModuleList);
+
+		
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (instSchId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("instSchId");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String instIdList = sb.toString();
+					instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+					map.add("instIdList", instIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("instIdList", instSchId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deletinstSupport", map, Info.class);
+
+				a = "redirect:/showInstituteSupport";
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
 	}
 
 	@RequestMapping(value = "/instituteSchemePdf", method = RequestMethod.GET)
@@ -485,7 +545,7 @@ public class InstituteController {
 		}
 
 	}
-
+	
 	/******************************************
 	 * Institute Activity
 	 ******************************************/
@@ -700,6 +760,67 @@ public class InstituteController {
 		return "redirect:/showActivityOrganized";
 	}
 
+	
+	@RequestMapping(value = "/delOrgActivities/{activityId}", method = RequestMethod.GET)
+	public String delOrgActivities(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int activityId) {
+		
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delOrgActivities/{instSchId}", "showActivityOrganized", "0", "0",
+				"0", "1", newModuleList);
+
+		
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (activityId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] activityIds = request.getParameterValues("activityId");
+					System.out.println("id are" + activityIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < activityIds.length; i++) {
+						sb = sb.append(activityIds[i] + ",");
+
+					}
+					String activityIdList = sb.toString();
+					activityIdList = activityIdList.substring(0, activityIdList.length() - 1);
+
+					map.add("activityIdList", activityIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("activityIdList", activityId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteOrgActivities", map, Info.class);
+
+				a = "redirect:/showActivityOrganized";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
+
+	
 	/********************************
 	 * Intelectual Prproperty Right
 	 ****************************************/

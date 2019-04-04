@@ -176,18 +176,10 @@
 											value="0"> 
 
 														</div>
-
-														
-														
-
 													</div>
-
-
 													<div class="clearfix"></div>
 
 												</div>
-
-											
 									</form>
 								</div>
 
