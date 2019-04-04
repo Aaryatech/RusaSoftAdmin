@@ -395,7 +395,7 @@
 												<input type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save">
 												<a href="${pageContext.request.contextPath}/showStaffList"><button
-										type="button" class="btn btn-primary">Cancel</button></a>
+												id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
 											</div>
 										</div>
 

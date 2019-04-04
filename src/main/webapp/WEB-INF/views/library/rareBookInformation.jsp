@@ -83,10 +83,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showRareBookInfo"><button
 										type="button" class="btn btn-info">Back</button></a>
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -96,13 +96,10 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertRareBookInfo"
-										method="post" 
-										name="form_sample_2" id="form_sample_2">
-
-										
-					<input type="hidden"
-							id="bookId" name="bookId"
-								 value="${rareBook.rareBookInfoId}">					
+										method="post" name="form_sample_2" id="form_sample_2">
+	
+					<input type="hidden" id="bookId" name="bookId" value="${rareBook.rareBookInfoId}">	
+									
 					<div class="form-group">
 													
 						<label class="control-label col-sm-3" for="bookName"
@@ -136,7 +133,7 @@
 						class="text-danger">*</span> </label>
 						<div class="col-sm-9">
 								 <input type="text" class="form-control" onkeypress='return restrictAlphabets(event)'
-									id="noOfBook" name="noOfBook"onchange="trim(this)"
+									id="noOfBook" name="noOfBook"onchange="trim(this)" maxlength="7"
 									placeholder="No of Copies for Book" autocomplete="off"
 									value="${rareBook.bookCopies}"> 
 									<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of copies and value must be greater than 0.</span>
@@ -150,7 +147,7 @@
 						class="text-danger">*</span> </label>
 						<div class="col-sm-9"> 
 							 <input type="text" class="form-control" onkeypress='return restrictAlphabets(event)'
-								id="costOfBook" name="costOfBook"  autocomplete="off"
+								id="costOfBook" name="costOfBook"  autocomplete="off" maxlength="7"
 								placeholder="Cost Of Rare Book" onchange="trim(this)"
 								value="${rareBook.costOfBook}">
 								<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter cost of rare book and value must be greater than 0.</span>
@@ -182,9 +179,8 @@
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
+															<a href="${pageContext.request.contextPath}/showRareBookInfo"><button
+																id="sub2" type="button" class="btn btn-primary">Back</button></a>
 																<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>

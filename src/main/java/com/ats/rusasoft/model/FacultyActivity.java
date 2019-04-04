@@ -11,8 +11,8 @@ public class FacultyActivity {
 	private String	activityDate;
 	private String	activityParticipants;
 	private String	activityFundedBy;
-	private String	activityAmountSanctioned	;
-	private String	activityAmountUtilised;
+	private int	activityAmountSanctioned	;
+	private int	activityAmountUtilised;
 	private int	delStatus;
 	private int	isActive;
 	private int	makerUserId;
@@ -74,16 +74,16 @@ public class FacultyActivity {
 	public void setActivityFundedBy(String activityFundedBy) {
 		this.activityFundedBy = activityFundedBy;
 	}
-	public String getActivityAmountSanctioned() {
+	public int getActivityAmountSanctioned() {
 		return activityAmountSanctioned;
 	}
-	public void setActivityAmountSanctioned(String activityAmountSanctioned) {
+	public void setActivityAmountSanctioned(int activityAmountSanctioned) {
 		this.activityAmountSanctioned = activityAmountSanctioned;
 	}
-	public String getActivityAmountUtilised() {
+	public int getActivityAmountUtilised() {
 		return activityAmountUtilised;
 	}
-	public void setActivityAmountUtilised(String activityAmountUtilised) {
+	public void setActivityAmountUtilised(int activityAmountUtilised) {
 		this.activityAmountUtilised = activityAmountUtilised;
 	}
 	public int getDelStatus() {

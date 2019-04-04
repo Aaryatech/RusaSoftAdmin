@@ -83,11 +83,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showGenderEquity"><button
 										type="button" class="btn btn-info">Back</button></a>
-
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -120,7 +119,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" onkeypress='return restrictAlphabets(event)'
-												onchange="trim(this)" autocomplete="off" id="fromDate" name="fromDate"
+												onchange="trim(this)" autocomplete="off" id="fromDate" name="fromDate" placeholder="From Date"
 													value="${gndrEqual.gprogFromdt}">
 													<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter from date.</span>
 
@@ -135,7 +134,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" 
 												onkeypress='return restrictAlphabets(event)' onchange="trim(this)"
-													autocomplete="off" id="toDate" name="toDate"
+													autocomplete="off" id="toDate" name="toDate" placeholder="To Date"
 													value="${gndrEqual.gprogTodt}">
 													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter to date.</span>
 													<span class="error_form text-danger" id="error_formfield0" style="display:none;" >to date must be greater than from date.</span>
@@ -150,7 +149,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text"  class="form-control" id="participant"
-													autocomplete="off" name="participant" maxlength="5"
+													autocomplete="off" name="participant" maxlength="7"
 													onkeypress='return restrictAlphabets(event)' onchange="trim(this)"
 													placeholder="No. of Participants" value="${gndrEqual.gprogPcount}">
 													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of participants and value must be greater than 0.</span>
@@ -160,10 +159,9 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-																<input type="hidden" id="is_view" name="is_view" value="0">
+												<a href="${pageContext.request.contextPath}/showGenderEquity"><button
+													id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
+												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 										</div>
 

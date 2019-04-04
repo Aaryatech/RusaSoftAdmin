@@ -80,10 +80,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showOrganizedList"><button
 										type="button" class="btn btn-info">Back</button></a> 
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -226,7 +226,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="activity_part"  onkeypress='return restrictAlphabets(event)'
 															name="activity_part" placeholder="No of Participants" value="${activity.activityParticipants}"
-														autocomplete="off"	onchange="trim(this)">
+														autocomplete="off"	onchange="trim(this)" maxlength="7">
 														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of participants.</span>
 													</div>
 												</div>
@@ -252,7 +252,7 @@
 														Sanctioned <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0"  class="form-control" id="amt_sanc"  onkeypress='return restrictAlphabets(event)'
+														<input type="text" maxlength="7"  class="form-control" id="amt_sanc"  onkeypress='return restrictAlphabets(event)'
 															name="amt_sanc" placeholder="Amount Sanctioned" value="${activity.activityAmountSanctioned}"
 															autocomplete="off" onchange="trim(this)">
 															<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount sanctioned.</span>
@@ -267,7 +267,7 @@
 														Utilized <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
+														<input type="text" maxlength="7" class="form-control" id="amt_utilise"  onkeypress='return restrictAlphabets(event)'
 															name="amt_utilise" placeholder="Amount Utilized" value="${activity.activityAmountUtilised}" onchange="trim(this)"
 															autocomplete="off">
 															<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter utilized amount and utilized amount must be less than sanctioned amount.</span>
@@ -280,11 +280,9 @@
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
-																		type="button" class="btn btn-primary">S</button></a> --%>
-																<button type="reset" class="btn btn-default">Reset</button>
+														
+																<a href="${pageContext.request.contextPath}/showOrganizedList"><button 
+																	id="sub2" type="button" class="btn btn-primary">Cancel</button></a> 
 															<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>
@@ -413,7 +411,7 @@
             					$("#error_formfield4").hide()
             				}
            				
-           				if(!$("#amt_sanc").val()){
+           				if($("#amt_sanc").val()==0 || !$("#amt_sanc").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -430,7 +428,7 @@
            				
            				 
 
-           				if(!$("#amt_utilise").val() || utamt > snamt ){
+           				if($("#amt_utilise").val()==0 || !$("#amt_utilise").val() || utamt > snamt ){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -442,17 +440,7 @@
             					$("#error_formfield6").hide()
             				}
            				
-           				/* if(parseFloat($("#amt_utilise").val()) > parseFloat($("#amt_sanc").val())){
-        					 
-            				isError=true;
-            				errMsg += '<li>Utilized amount is greater than sanctioned amount</li>';
-            				
-            				$("#amt_utilise").addClass("has-error")
-            				$("#error_formfield6").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield6").hide()
-            				} */
+           			
 			            	 if (!isError) {
 			            		 
 								var x = confirm("Do you really want to submit the form?");

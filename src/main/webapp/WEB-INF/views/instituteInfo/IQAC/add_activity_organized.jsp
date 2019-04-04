@@ -3,8 +3,6 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -83,11 +81,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showActivityOrganized"><button
+							<%-- <div class="actions panel_actions pull-right">
+								<a href="${pageContext.request.contextPath}/showActivityOrganized"><button
 										type="button" class="btn btn-info">Back</button></a>
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -229,7 +226,7 @@
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
+												<input type="text" class="form-control" maxlength="7"
 													id="inst_activity_participation" autocomplete="off" onchange="trim(this)"
 													name="inst_activity_participation" onkeypress='return restrictAlphabets(event)'
 													placeholder="No.of Participants" value="${instAct.instActivityParticipation}">
@@ -243,19 +240,13 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
-																<input type="hidden" id="is_view" name="is_view" value="0">
+												<a href="${pageContext.request.contextPath}/showActivityOrganized"><button
+													id="sub2" type="button" class="btn btn-primary">Back</button></a>
+												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 										</div>
 
-
-
 										<div class="clearfix"></div>
-
-
-
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
@@ -280,37 +271,6 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Sports / Cultural Activity /
-						Competition organized at Institute</h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-					<!-- Link on Website for Activity Report -->
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
 	
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script>

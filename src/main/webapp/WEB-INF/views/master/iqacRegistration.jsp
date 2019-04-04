@@ -209,7 +209,7 @@
 												<input type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save">
 												<a href="${pageContext.request.contextPath}/showIqacList"><button
-													type="button" class="btn btn-primary">Cancel</button></a>
+													id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
 												<!-- <button type="reset" class="btn btn-default">Reset</button> -->
 												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>

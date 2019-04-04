@@ -83,14 +83,12 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+						<%-- 	<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudMentor"
 									data-toggle="modal"><button type="submit"
 										class="btn btn-info">Back</button></a>
-								<%-- <a href="${pageContext.request.contextPath}/publicationList"><button
-										type="button" class="btn btn-info">Back</button></a> --%>
-								<!-- <a class="box_toggle fa fa-chevron-down"></a> -->
-							</div>
+							
+							</div> --%>
 
 						</header>
 
@@ -131,11 +129,10 @@
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" id="sub2" class="btn btn-primary"
-													onclick="submit_f(0)" value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+													onclick="submit_f(1)" value="Save">
+											
+											<a href="${pageContext.request.contextPath}/showStudMentor"><button
+													id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
 											</div>
 										</div>
 										<div class="clearfix"></div>
@@ -160,61 +157,13 @@
 
 
 	</div>
-	<!-- END CONTAINER -->
-	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+<!-- END CONTAINER -->
+<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal1"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Mentoring to Student</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-					<input type="hidden" class="form-control" id="pageId" name="pageId">
-
-					<input type="hidden" class="form-control" id="index" name="index"
-						value="0">
-
-
-
-					<div class="form-group">
-						<label class="control-label col-sm-6" for="page_name">Academic
-							Year</label> <select id="qualType" name="qualType" class="form-control"
-							onchange="showForm()" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-							<option value="2016-2017">2015-2016</option>
-
-						</select>
-					</div>
-
-
-
-
-					<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					<!-- </form> -->
-				</div>
-			</div>
-		</div>
-	</div>
 	
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
 
-	<script type="text/javascript">
+<script type="text/javascript">
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
@@ -311,59 +260,17 @@
     					$("#error_formfield1").hide()
     				}
     				
-    				  
-    				 
-    				/* if(!$("#mobile").val() || !validateMobile($("#mobile").val())){
-    
-    				isError=true;
-    				errMsg += '<li>Please enter a valid email address.</li>';
-    				errMsg_alert = 'Please enter a valid mobile number.';
-    				$("#error_mobile").html(errMsg_alert);
-    				$("#error_mobile").show();
-    				//alert();
-    					//return false;
-    				} else {
-    					$("#error_mobile").html("Please enter mobile")
-    					$("#error_mobile").hide()
-    				}
-    				if(!$("#email").val() || !validateEmail($("#email").val())){
-    
-    				isError=true;
-    				errMsg += '<li>Please enter a valid email address.</li>';
-    				errMsg_alert += 'Please enter a valid email address. \n';
-    				$("#error_email").show()
-    					//return fregister_useralse;
-    				} else {
-    					$("#error_email").hide()
-    				} */
-    
-    		 
-    
-    
-    			  /*  if ($('#termcondition').is(':checked')) {
-    				} else {
-    				isError=true;
-    					errMsg += '<li>You must agree to our Term & Conditions.</li>';
-    					errMsg_alert = 'You must agree to our Term & Conditions. \n';
-    					alert(errMsg_alert);
-    					return false;
-    				} */
-     
-    
-    
-    				if(!isError) {
-    					//dataString = $("#regform").serialize();
-    					// alert(weregister_userb_site_url);
-    						/* $("#regerror").html("");
-    					    $("#regerror").hide();
-     */
-    								 //ajax send this to php page
-    						//$("#formidhere").submit();
-    								//end ajax send this to php page
-    					   } else {
-    					   $("#regerror").html(errMsg);
-    					    $("#regerror").show();
-    					   }
+    	
+    				 if (!isError) {
+	            		 
+							var x = confirm("Do you really want to submit the form?");
+							if (x == true) {
+								
+								document.getElementById("sub1").disabled = true;
+								document.getElementById("sub2").disabled = true;
+								return  true;
+							}
+						}
     					   return false;
     				} );
     	});

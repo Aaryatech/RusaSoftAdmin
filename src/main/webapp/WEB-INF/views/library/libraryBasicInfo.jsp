@@ -81,45 +81,24 @@
 
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showLibraryBasicInfo"><button
 										type="button" class="btn btn-info">Back</button></a>
-							</div>
+							</div> --%>
 
 						</header>
-
-
+						
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertLibInfo"
-										method="post" 
+										action="${pageContext.request.contextPath}/insertLibInfo" method="post" 
 										name="form_sample_2" id="form_sample_2">
-
-									
-												<div>
-
-
-													<div class="col-xs-12">
+											<div>
+												<div class="col-xs-12">
 
 													<input type="hidden" value="${libInfo.libInfoId}" name="libInfoId">
-
-														<!-- <div class="form-group">
-															<label class="control-label col-sm-5" for="status"
-																style="text-align: left;">Library is Automated
-																using Integrated Library Management System  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-															
-																<input type="radio" id="isUsingSoft" name="isUsingSoft"
-																	onclick="showDiv(1)" value="1" checked>Yes <input
-																	type="radio" id="isUsingSoft" name="isUsingSoft"
-																	onclick="showDiv(0)" value="0">No
-															</div>
-														</div> -->
-
+													
 														<div id="divshow">
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="swName"
@@ -128,7 +107,7 @@
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="swName"
-																		name="swName" placeholder=""
+																		name="swName" placeholder="Name of Software"
 																		value="${libInfo.softName}" onchange="trim(this)" autocomplete="off">
 																		<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of software.</span>
 																</div>
@@ -141,7 +120,7 @@
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="version"
-																		name="version" placeholder=""
+																		name="version" placeholder="Software Version"
 																		value="${libInfo.softVersion}" onchange="trim(this)" autocomplete="off">
 																		<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter software version.</span>
 																</div>
@@ -149,12 +128,12 @@
 															
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="version"
-																	style="text-align: left;">Total Number of Users of LMS <span
+																	style="text-align: left;">Total Number of LMS Users <span
 																	class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="userLms"
-																		name="userLms" placeholder="" 
+																		name="userLms" placeholder="" maxlength="7"
 																		onkeypress='return restrictAlphabets(event)'
 																		value="${libInfo.usersOfLms}" onchange="trim(this)" autocomplete="off">
 															<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter total number of users of LMS and value must be greater than 0.</span>
@@ -187,7 +166,7 @@
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="noOfComp"
 																		name="noOfComp" onkeypress='return restrictAlphabets(event)'
-																		placeholder="" value="${libInfo.noCompLan}"
+																		placeholder="" value="${libInfo.noCompLan}"  maxlength="7"
 																		onchange="trim(this)" autocomplete="off">
 																		<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of Comp in LAN and value must be greater than 0. </span>
 																</div>
@@ -200,7 +179,7 @@
 																</label>
 																<div class="col-sm-9">
 																	<input type="text" class="form-control" id="bandwidth"
-																		name="bandwidth" placeholder=""	value="${libInfo.bandwidthForAccessingEresources}" 
+																		name="bandwidth" placeholder="Bandwidth for Accessing E-Resources"	value="${libInfo.bandwidthForAccessingEresources}" 
 																		onchange="trim(this)" autocomplete="off">
 																		<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter bandwidth for
 																	accessing e-resources.</span>
@@ -339,7 +318,7 @@
 																	style="text-align: left;">Avg. No.of Teachers Using Library resources per day<span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-8">
-																	<input type="text" class="form-control" id="avgTeacher"
+																	<input type="text" class="form-control" id="avgTeacher" maxlength="4"
 																		name="avgTeacher" placeholder="" value="${libInfo.avgTeacher}"
 																		onchange="trim(this)" autocomplete="off" onkeypress='return restrictAlphabets(event)'>
 																		<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter Avg. No.of teachers using library resources per day.</span>
@@ -353,7 +332,7 @@
 																<div class="col-sm-8">
 																	<input type="text" class="form-control" id="avgStud"
 																		name="avgStud"
-																		placeholder="" value="${libInfo.avgTeacher}"
+																		placeholder="" value="${libInfo.avgTeacher}" maxlength="4"
 																		onchange="trim(this)" autocomplete="off" onkeypress='return restrictAlphabets(event)'>
 																<span class="error_form text-danger" id="error_formfield8" style="display:none;" >Please enter Avg. No. of student using library resources per day.</span>
 																</div>
@@ -562,9 +541,8 @@
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<button type="reset" class="btn btn-default">Reset</button>
+																<a href="${pageContext.request.contextPath}/showLibraryBasicInfo"><button
+																	id="sub2" type="button" class="btn btn-primary">Back</button></a>
 																<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>

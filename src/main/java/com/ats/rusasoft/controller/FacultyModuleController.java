@@ -214,7 +214,7 @@ public class FacultyModuleController {
 				facConf.setConfDate(request.getParameter("conf_date"));
 				facConf.setConfVenue(request.getParameter("conf_venue"));
 				facConf.setConfFundFrom(request.getParameter("conf_fund"));
-				facConf.setConfFundAmt(request.getParameter("conf_amt"));
+				facConf.setConfFundAmt(Integer.parseInt(request.getParameter("conf_amt")));
 				facConf.setDelStatus(1);
 				facConf.setIsActive(1);
 				facConf.setMakerUserId(userId);
@@ -585,8 +585,8 @@ public class FacultyModuleController {
 			facAct.setActivityDate(request.getParameter("activity_date"));
 			facAct.setActivityParticipants(request.getParameter("activity_part"));
 			facAct.setActivityFundedBy(request.getParameter("activity_found"));
-			facAct.setActivityAmountSanctioned(request.getParameter("amt_sanc"));
-			facAct.setActivityAmountUtilised(request.getParameter("amt_utilise"));
+			facAct.setActivityAmountSanctioned(Integer.parseInt(request.getParameter("amt_sanc")));
+			facAct.setActivityAmountUtilised(Integer.parseInt(request.getParameter("amt_utilise")));
 			facAct.setDelStatus(1);
 			facAct.setIsActive(1);
 			facAct.setMakerUserId(userId);

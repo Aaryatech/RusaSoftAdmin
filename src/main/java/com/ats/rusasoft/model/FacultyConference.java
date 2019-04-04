@@ -10,7 +10,7 @@ public class FacultyConference {
 	private String confDate;
 	private String confVenue;
 	private String 	confFundFrom;
-	private String confFundAmt;
+	private int confFundAmt;
 	private int delStatus;
 	private int isActive;
 	private int makerUserId;
@@ -66,10 +66,10 @@ public class FacultyConference {
 	public void setConfFundFrom(String confFundFrom) {
 		this.confFundFrom = confFundFrom;
 	}
-	public String getConfFundAmt() {
+	public int getConfFundAmt() {
 		return confFundAmt;
 	}
-	public void setConfFundAmt(String confFundAmt) {
+	public void setConfFundAmt(int confFundAmt) {
 		this.confFundAmt = confFundAmt;
 	}
 	public int getDelStatus() {

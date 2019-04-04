@@ -83,11 +83,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
+							<%-- <div class="actions panel_actions pull-right">
+								<a href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
 										type="button" class="btn btn-info">Back</button></a>
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -248,12 +247,12 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="number" min="0" class="form-control"
+																<input type="text" min="0" class="form-control"
 																	id="conf_amt" autocomplete="off"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_amt" placeholder="Amount"
 																	value="${facConf.confFundAmt}" onchange="trim(this)">
-																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount.</span>
+																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount and value must be greater than 0.</span>
 															</div>
 
 														</div>
@@ -265,15 +264,9 @@
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 																<input type="submit" id="sub1" class="btn btn-primary"
-																	onclick="submit_f(1)" value="Save"> <input
-																	type="submit" id="sub2" class="btn btn-primary"
-																	onclick="submit_f(0)"
-																	value="Save &
-																		Next">
-																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
-																		type="button" class="btn btn-primary">S</button></a> --%>
-																<button type="reset" class="btn btn-default">Reset</button>
-															<input type="hidden" id="is_view" name="is_view" value="0">
+																	onclick="submit_f(1)" value="Save"> 
+																<a href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
+																id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
 															</div>
 														</div>
 
@@ -401,7 +394,7 @@
             					$("#error_formfield4").hide()
             				}
            				
-           				if(!$("#conf_fund").val()){
+           				if($("#conf_amt").val()==0 || !$("#conf_amt").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';

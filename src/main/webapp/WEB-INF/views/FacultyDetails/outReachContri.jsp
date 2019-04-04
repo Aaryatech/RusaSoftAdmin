@@ -83,12 +83,11 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								<a
-									href="${pageContext.request.contextPath}/showOutReachContriList"><button
+							<%-- <div class="actions panel_actions pull-right">
+								<a href="${pageContext.request.contextPath}/showOutReachContriList"><button
 										type="button" class="btn btn-info">Back</button></a>
 
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -197,7 +196,7 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker" id="to_date" name="to_date" autocomplete="off"
-																placeholder="To" value="${facContri.conTo}" onchange="dateValidator()"  onchange="trim(this)"
+																placeholder="To" value="${facContri.conTo}"  onchange="trim(this)"
 																onkeypress='return restrictAlphabets(event)'>
 															<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter to date.</span>
 														</div>
@@ -290,11 +289,9 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
-																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
-																		type="button" class="btn btn-primary">S</button></a> --%>
-																<button type="reset" class="btn btn-default">Reset</button>
+															<a href="${pageContext.request.contextPath}/showOutReachContriList"><button
+																id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
+
 															<input type="hidden" id="is_view" name="is_view" value="0">
 														</div>
 													</div>

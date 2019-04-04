@@ -270,19 +270,14 @@
 												<input type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)" value="Save"> 
 												<a href="${pageContext.request.contextPath}/showDeanList"><button
-														type="button" class="btn btn-primary">Cancel</button></a>
+													id="sub2"	type="button" class="btn btn-primary">Cancel</button></a>
 											</div>
 										
 										</div>
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
 
-
-
-
-
 										<div class="clearfix"></div>
-
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields

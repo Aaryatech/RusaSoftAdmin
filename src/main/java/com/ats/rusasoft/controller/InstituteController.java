@@ -821,9 +821,7 @@ public class InstituteController {
 	}
 
 	
-	/********************************
-	 * Intelectual Prproperty Right
-	 ****************************************/
+	/********************************* Intelectual Prproperty Right*************************************/
 
 	@RequestMapping(value = "/showIntellectualProperty", method = RequestMethod.GET)
 	public ModelAndView showIntellectualProperty(HttpServletRequest request, HttpServletResponse response) {
@@ -1030,10 +1028,67 @@ public class InstituteController {
 
 		return "redirect:/showIntellectualProperty";
 	}
+	
+	@RequestMapping(value = "/delSelintelProp/{intel_rightId}", method = RequestMethod.GET)
+	public String delSelintelProp(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int intel_rightId) {
+		
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-	/************************************
-	 * Gender Equality Programe
-	 ******************************************/
+		Info view = AccessControll.checkAccess("delSelintelProp/{rightId}", "showIntellectualProperty", "0", "0",
+				"0", "1", newModuleList);
+
+		
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (intel_rightId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] rightIds = request.getParameterValues("intel_rightId");
+					System.out.println("id are" + rightIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < rightIds.length; i++) {
+						sb = sb.append(rightIds[i] + ",");
+
+					}
+					String rightIdList = sb.toString();
+					rightIdList = rightIdList.substring(0, rightIdList.length() - 1);
+
+					map.add("rightIdList", rightIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("rightIdList", intel_rightId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteIntelRights", map, Info.class);
+
+				a = "redirect:/showIntellectualProperty";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
+
+	/*********************************** Gender Equality Programe*************************************/
 	@RequestMapping(value = "/showGenderEquity", method = RequestMethod.GET)
 	public ModelAndView showGenderEquity(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1223,7 +1278,7 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("showAddGenderEquity", "showGenderEquity", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteGenderEquality/{gndrDataId}", "showGenderEquity", "0", "0", "0", "1",
 					newModuleList);
 
 			if (view.isError() == true) {
@@ -1242,6 +1297,65 @@ public class InstituteController {
 		}
 
 		return "redirect:/showGenderEquity";
+	}
+	
+	@RequestMapping(value = "/delSelGenderEqty/{gndreqtyId}", method = RequestMethod.GET)
+	public String delSelGenderEqty(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int gndreqtyId) {
+		
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSelGenderEqty/{gndreqtyId}", "showGenderEquity", "0", "0",
+				"0", "1", newModuleList);
+
+		
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (gndreqtyId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] gndreqtyIds = request.getParameterValues("gndreqtyId");
+					System.out.println("id are" + gndreqtyIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < gndreqtyIds.length; i++) {
+						sb = sb.append(gndreqtyIds[i] + ",");
+
+					}
+					String gndreqtyIdList = sb.toString();
+					gndreqtyIdList = gndreqtyIdList.substring(0, gndreqtyIdList.length() - 1);
+
+					map.add("gndreqtyIdList", gndreqtyIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("gndreqtyIdList", gndreqtyId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteGenderEquity", map, Info.class);
+
+				a = "redirect:/showGenderEquity";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
 	}
 
 }
