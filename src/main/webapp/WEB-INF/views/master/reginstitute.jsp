@@ -388,13 +388,13 @@
 												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
 
-														<button type="submit" id="sub_button"
-															><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+
+<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														
 <a href="${pageContext.request.contextPath}/showInstituteList"><button
-										type="button" class="btn btn-info">Cancel</button></a>													</div>
+										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
-
-
 
 											</div>
 										</div>
@@ -402,21 +402,12 @@
 									</form>
 								</div>
 
-
-
-
-
-
-
 								<div class="clearfix"></div>
 
 							</div>
 							<p class="desc text-danger fontsize11">Notice : * Fields are
 								mandatory.</p>
 						</div>
-
-
-
 					</section>
 				</div>
 			</section>

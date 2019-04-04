@@ -85,8 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<a href="${pageContext.request.contextPath}/showAccList"><button
-										type="button" class="btn btn-info">Back</button></a>
+								
 							</div>
 
 						</header>
@@ -253,22 +252,18 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-9">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" id="sub2" class="btn btn-primary"
-													onclick="submit_f(0)"
-													value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
-											</div>
+													<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Save</button>
+												
+<a href="${pageContext.request.contextPath}/showAccList"><button
+										type="button" id="sub2" class="btn btn-info">Cancel</button></a>											</div>
 										</div>
-
+									
 										<input type="hidden" id="acc_off_id" name="acc_off_id"
 											value="${accOff.officerId}"> <input type="hidden"
 											id="is_view" name="is_view" value="0">
 
 										<div class="clearfix"></div>
-
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields

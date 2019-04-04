@@ -328,8 +328,12 @@ public class HomeController {
 					
 					int userId = userObj.getUserId(); 
 					session.setAttribute("userId", userId);
+					
+					session.setAttribute("addIcon", "fa fa-plus-square-o");
+					session.setAttribute("saveIcon", "fa fa-floppy-o");
+					session.setAttribute("cancelIcon", "fa fa-backward");
+					session.setAttribute("deleteIcon", "fa fa-times");
 				 
-					 
 					map =new LinkedMultiValueMap<String, Object>();
 					int typeId=userObj.getUserType();
 					map.add("typeId", typeId);

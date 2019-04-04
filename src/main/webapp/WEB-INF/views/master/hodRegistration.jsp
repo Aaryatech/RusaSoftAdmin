@@ -92,8 +92,7 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info">Back</button></a>
+								
 							</div>
 
 						</header>
@@ -231,11 +230,12 @@
 														<div class="form-group">
 															<div class="col-sm-offset-3 col-sm-9">
 																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<input type="submit"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next">
+																<a href="${pageContext.request.contextPath}/hodList"><button
+										type="button" id="sub2" class="btn btn-info">Cancel</button></a>
+																<!-- <input type="submit" style="display: none"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
+																		Next"> -->
 																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
 																		type="button" class="btn btn-primary">S</button></a> --%>
-																<button type="reset" class="btn btn-default">Reset</button>
 															</div>
 														</div>
 

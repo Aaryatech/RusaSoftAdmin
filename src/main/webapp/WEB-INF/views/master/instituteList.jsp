@@ -57,7 +57,7 @@
 									<c:when test="${addAccess==0}">
 										<a title="Add"
 											href="${pageContext.request.contextPath}/showRegisterInstitute"><button
-												type="button" class="btn btn-success"> <i class="fa fa-plus-square-o" aria-hidden="true"> Add</i> </button></a>
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 									</c:when>
 									<c:otherwise>
 
