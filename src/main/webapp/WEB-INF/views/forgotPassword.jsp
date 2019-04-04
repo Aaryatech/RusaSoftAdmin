@@ -93,8 +93,9 @@
 		<div class="login-wrapper row">
 			<div id="login"
 				class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
-				<h1>
-					<a href="#" title="Login Page" tabindex="-1">RUSA</a>
+				<h1 class="login_head">					
+					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
+					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Forgot Password
 				</h1>
 
 				<form name="loginform" id="loginform"
@@ -114,7 +115,7 @@
 					</c:choose>
 
 					<p>
-						<label for="user_login">Username<br /> <input type="text"
+						<label for="user_login"><!-- Username<br /> --> <input type="text"
 							name="username" id="username" size="20"
 							placeholder="Valid Username/Email ID" /></label>
 					</p>

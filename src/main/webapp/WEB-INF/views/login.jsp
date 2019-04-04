@@ -89,10 +89,10 @@
 
 	<div class="container-fluid">
 		<div class="login-wrapper row">
-			<div id="login"
-				class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
-				<h1>
-					<a href="#" title="Login Page" tabindex="-1">RUSA</a>
+			<div id="login" class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
+				<h1 class="login_head">
+					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
+					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Account Login 
 				</h1>
 
 				<form name="loginform" id="loginform"
@@ -112,19 +112,20 @@
 					</c:choose>
 
 					<p>
-						<label for="user_login">Username <span class="text-danger">*</span><br />
-							<input type="text" name="username" id="username" class="input"
-							value="" size="20" placeholder="Username" /></label>
+						<label for="user_login">  <!-- Username <span class="text-danger">*</span><br />-->
+							<input type="text" name="username" id="username" class="login-one"
+							value="" size="20" placeholder="Username" /></label> <!-- class="input" -->
 					</p>
 					<p>
-						<label for="user_pass">Password <span class="text-danger">*</span><br />
+						<label for="user_pass">  <!-- Password <span class="text-danger">*</span><br />-->
 							<input type="password" name="userpassword" id="userpassword"
 							class="input" value="" placeholder="Password" size="20" /></label>
 					</p>
 
 					<p>
-						<label for="user_pass">Academic Year<br /></label> <select
+						<!-- <label for="user_pass">Academic Year<br /></label> --> <select
 							id="ac_year_login" name="ac_year_login" class="form-control">
+							<option>Select Academin Year</option>
 							<c:forEach items="${acaYearList}" var="acYear">
 								<option value="${acYear.yearId}">${acYear.academicYear}</option>
 
@@ -146,14 +147,14 @@
 				</form>
 
 				<p id="nav">
-					<a class="pull-left" href="showforgotPassForm"
+					<a class="pull-left login_forgot" href="showforgotPassForm"
 						title="Password Lost and Found">Forgot password?</a>
-					<a class="pull-right" href="showInstituteRegistrationForm"
+					<a class="pull-right login_forgot" href="showInstituteRegistrationForm"
 						title="Sign Up">Institute Registration</a>
 				</p>
-				<br /> <br /> <label class="pull-left" for="page_name"><b
-					style="color: red; font-family: verdana; font-size: 14px;">Warning:</b><b
-					style="font-family: verdana; font-size: 11px;">Unauthorised
+				<br /> <br /> <label class="pull-left" for="page_name" style=" text-align: center;"><b
+					style="color: red; font-family:'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600; text-transform: capitalize;">Warning :- </b> <b
+					style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 400; color: #333;  text-transform: capitalize;">Unauthorised
 						Access of this System is an Offence</b> </label>
 
 			</div>

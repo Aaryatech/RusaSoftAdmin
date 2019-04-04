@@ -57,17 +57,17 @@
 				<!-- MAIN CONTENT AREA STARTS -->
 
 
-
+				
 
 				<div class="col-lg-12">
 					<section class="box ">
 
-						<header class="panel_header">
-							<h2 align="center">INSTITUTE REGISTRATION</h2>
+						<header class="panel_header extra_head">
+							<h2 class="login_head"><i class="fa fa-key" aria-hidden="true"></i> INSTITUTE REGISTRATION </h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/"><button
-										type="button" class="btn btn-info">Back</button></a>
+								<a href="${pageContext.request.contextPath}/">
+								<button type="button" class="btn btn-info"><i class="fa fa-chevron-left back_icn" aria-hidden="true"></i> Back</button></a>
 							</div>
 
 						</header>

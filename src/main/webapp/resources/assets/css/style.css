@@ -490,7 +490,10 @@ a:hover, a:focus {
     -ms-box-shadow: 0 0 20px 0 rgba(33,33,33,.2);
     margin-top: -1px;
     padding-top: 0px;
+    
+    position: absolute;
 }
+.dropdown-menu>li>a{padding: 10px 20px;}
 /*---- top arrow - start ----- */
 
 .page-topbar .dropdown-menu {
@@ -669,9 +672,11 @@ a:hover, a:focus {
     display: block;
     border-bottom: 1px solid #eeeeee;
 }
-.page-topbar li .dropdown-menu.profile li.last a, .page-topbar li .dropdown-menu.profile li a:hover {
-    background: #eeeeee;
+/*.page-topbar li .dropdown-menu.profile li.last a,*/ .page-topbar li .dropdown-menu.profile li a:hover {
+   background: #eeeeee;
 }
+.page-topbar li .dropdown-menu.profile li.last a{background: #FFF;}
+.page-topbar li .dropdown-menu.profile li.last a:hover{background: #eeeeee;}
 
 @media (max-width: 450px) {
 .profile .toggle span{display: none;}
@@ -822,7 +827,11 @@ a:hover, a:focus {
     list-style-type: none;
     font-size: 14px;
     width: 100%;
+    position: relative;
 }
+#main-menu-wrapper li ul.sub-menu li {position: relative;}
+#main-menu-wrapper li ul.sub-menu li a::after{content: ""; display: block; position: absolute; top: 0; bottom: 0; left: 10px; width: 0; border-left: 1px dashed rgba(156,161,169,0.5);}
+#main-menu-wrapper li ul.sub-menu li a::before{content: ""; display: block; position: absolute; width: 9px; left: 11px; top: 20px; border-top: 1px dashed rgba(156,161,169,0.5);}
 #main-menu-wrapper li a {
     display: block;
     line-height: 42px;
@@ -834,7 +843,7 @@ a:hover, a:focus {
     padding-left: 5px;
     clear: both;
     border-left: 4px solid transparent;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 #main-menu-wrapper li .sub-menu a {
     line-height: 36px;
@@ -843,8 +852,8 @@ a:hover, a:focus {
 #main-menu-wrapper li .sub-menu a {
     color: rgba(174, 178, 183, 1.0);
     margin-bottom: 1px;
-    padding-left: 55px;
-    border-left: 4px solid transparent;
+    /*padding-left: 55px;*/ padding:10px 0 10px 25px; line-height:20px; 
+    border-left: 4px solid transparent; 
 }
 #main-menu-wrapper li.open .sub-menu a.active, #main-menu-wrapper li.open .sub-menu a:hover, #main-menu-wrapper li .sub-menu a:hover {
     background-color: rgba(33, 33, 33, 0.1);
@@ -1135,6 +1144,8 @@ section header .title {
     font-weight: 400;
     text-transform: uppercase;
     display: inline-block;
+    
+     border-bottom: 1px dashed #ccc; padding-bottom: 12px; margin-bottom: 20px; width: 100%;
 }
 section .content-body {
     padding: 5px 30px 30px 30px;
@@ -1567,7 +1578,7 @@ input[type=checkbox], input[type=color], input[type=date], input[type=datetime-l
     color: #ffffff;
 }
 .btn.btn-info {
-    background: #03A9F4;
+    background:#3F51B5 /*#03A9F4*/;
     color: #ffffff;
 }
 .btn.btn-accent {
@@ -1597,7 +1608,7 @@ input[type=checkbox], input[type=color], input[type=date], input[type=datetime-l
 /*size*/
 
 .btn {
-    padding: 7px 18px;
+    padding: 8px 20px /*7px 18px*/;
 }
 .btn.btn-lg, .btn-lg, .btn-group-lg>.btn {
     padding: 10px 21px;
@@ -3805,7 +3816,8 @@ table.dataTable tfoot th, table.dataTable tfoot td {
     border-top: 1px solid #bbbbbb;
 }
 table.dataTable.no-footer {
-    border-bottom: 1px solid #bbbbbb;
+	border-bottom:2px solid #eeeeee; border-top:2px solid #eeeeee; border-left:2px solid #eeeeee;
+    /*border-bottom: 1px solid #bbbbbb;*/
 }
 .dataTables_wrapper .dataTables_info {
     clear: none;
@@ -4394,8 +4406,9 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     display: block;
 }
 .loginpage form {
-    margin-top: 30px;
-    margin-bottom: 15px;
+	margin:10px 0;
+    /*margin-top: 30px;
+    margin-bottom: 15px;*/
     margin-left: 0;
     font-weight: 400;
     -webkit-box-shadow: none;
@@ -4435,12 +4448,14 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     font-weight: 500;
 }
 .loginpage form .input, .loginpage input[type=text] {
-    font-size: 19px;
+    font-size:16px; width:100%; padding:10px 0; margin:0px; border:1px solid #e1e1e1; border-radius: 3px;  box-shadow: none; outline: none; text-indent: 10px;
+    
+    /*font-size: 19px;
     width: 100%;
     padding: 9px;
     line-height: 25px;
     margin: 5px 0 15px 0;
-    border: 1px solid transparent !important;
+    border: 1px solid transparent !important;*/
 }
 .loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text] {
     color: #E91E63
@@ -4450,16 +4465,16 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     background: #fbfbfb;
 }
 .loginpage #nav a, .loginpage a {
-    color: rgba(255, 255, 255, 1)
-    /*#ffffff*/
-    
-    ;
+	font-size:16px; color:#333;
+	
+    /*color: rgba(255, 255, 255, 1);
     font-size: 15px;
-    color: #dddddd;
+    color: #dddddd;*/
 }
 .loginpage #nav a:hover, .loginpage a:hover, .loginpage #nav a:active, .loginpage a:active {
-    color: rgba(255, 255, 255, 1)
-    /*#ffffff*/
+	color:#3F51B5;
+	
+    /*color: rgba(255, 255, 255, 1)*/
     
     ;
 }
@@ -4501,12 +4516,10 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
 }
 body.login_page {
     background-color: #3F51B5;
-    background-image: url('../images/login-bg.png');
+    /*background-image: url('../images/login-bg.png');*/
     background-attachment: fixed;
-    /*height: 100%;*/
-    /*max-height: 100%;*/
+    
     min-height: 100%;
-    /*overflow: hidden;*/
     width: 100%;
 }
  body.lockscreen {
@@ -8150,7 +8163,8 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
 }
 
 table.table.dataTable{
-    margin-top: 0px !important;
+	margin-top:10px !important;
+    /*margin-top: 0px !important;*/
 }
 
 div.DTFC_LeftBodyWrapper table.dataTable{
@@ -8195,3 +8209,47 @@ table.dataTable tfoot th select, table.dataTable tfoot td select{
 table.dataTable.display tbody tr:first-child td {
     border-top: 1px solid #eeeeee;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*DESIGNER NEW CSS START HERE*/
+.pull-left{position:relative;}
+#login{background: #FFF; padding: 20px; border-radius: 5px;}
+#ac_year_login.form-control{background:#FFF; height: 51px; border-radius: 3px; font-size: 16px; border-bottom: 1px solid #e1e1e1; padding: 10px 0; text-indent: 10px;}
+#ac_year_login.form-control option{height: 40px; line-height: 40px;}
+.login_head{color: #3F51B5; font-weight: 500; text-align: center; font-size: 30px; border:none; border-bottom: 1px dashed #CCC; padding-bottom: 20px; margin:0 auto 20px auto;}
+.login_head i{font-size: 26px; color: #333; margin: 0 5px 0 0;}
+
+#loginform p{margin: 0 0 15px 0;}
+.login_forgot{font-size: 16px; color: #333;}
+.box header.extra_head{padding: 30px 20px 0 20px;}
+table.table td a {color: #424242;}
+.back_icn{font-size:12px; margin:0 5px 0 0;}
+.two_btn{display: inline-block; width: 49%;}
+
+/*menu icons
+Developer Access : <i class="fa fa-cog" aria-hidden="true"></i>
+RUSA Master : <i class="fa fa-user" aria-hidden="true"></i>
+Library : <i class="fa fa-address-book-o" aria-hidden="true"></i>
+Budget : <i class="fa fa-inr" aria-hidden="true"></i>
+RUSA Transaction : <i class="fa fa-exchange" aria-hidden="true"></i>
+Institute Master : <i class="fa fa-university" aria-hidden="true"></i>
+User Registration : <i class="fa fa-key" aria-hidden="true"></i>
+Institute Profile Module : <i class="fa fa-user" aria-hidden="true"></i>
+Program Detail Module : <i class="fa fa-tasks" aria-hidden="true"></i>
+Faculty Details : <i class="fa fa-user-circle" aria-hidden="true"></i>
+Back Button Icon : <i class="fa fa-chevron-left" aria-hidden="true"></i>
+Add Button Icons : <i class="fa fa-plus" aria-hidden="true"></i>
+Save Button Icon : <i class="fa fa-chevron-down" aria-hidden="true"></i>
+Reset Button Icon : <i class="fa fa-refresh" aria-hidden="true"></i>
+Approve Button Icon : <i class="fa fa-check-square-o" aria-hidden="true"></i>
+
+*/

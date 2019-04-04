@@ -96,8 +96,9 @@
 		<div class="login-wrapper row">
 			<div id="login"
 				class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
-				<h1>
-					<a href="#" title="Login Page" tabindex="-1">RUSA</a>
+				<h1 class="login_head">
+					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
+					<i class="fa fa-mobile" aria-hidden="true"></i> Ask Otp
 				</h1>
 
 				<form name="loginform" id="loginform"
@@ -117,13 +118,13 @@
 					</c:choose>
 
 					<p id="abc">
-						<label for="user_login">Username<br /> <input type="text"
+						<label for="user_login"><!-- Username<br /> --> <input type="text"
 							name="username" id="username" class="input" value="" size="20"
 							placeholder="Valid Username/Email ID"
 							onchange="checkValue(this.value)" /></label>
 					</p>
 					<p>
-						<label for="user_pass">OTP<br /> <input type="number"
+						<label for="user_pass"> <!-- OTP<br /> --> <input type="number"
 							name="entered_otp" min="0" max="999999" id="entered_otp"
 							onchange="trim(this)" class="input" value=""
 							placeholder="Enter OTP Sent on Your Number" /></label>
@@ -139,10 +140,8 @@
 						<input type="hidden" id="otpk" name="otpk" value="${otpk}">
 						<input type="hidden" id="otpNo" name="otpNo" value="${otpNo}">
 
-						<input type="submit" name="wp-submit" id="wp-submit"
-							class="btn btn-accent btn-block" value="Submit" /> <input
-							type="button" class="btn btn-accent btn-block"
-							onclick="reGenOtp()" value="Re Generate OTP" />
+						<span class="two_btn"><input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Submit" /> </span>
+						<span class="two_btn"><input type="button" class="btn btn-accent btn-block" onclick="reGenOtp()" value="Re Generate OTP" /></span>
 
 
 					</p>
