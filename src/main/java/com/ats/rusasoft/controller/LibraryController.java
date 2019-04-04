@@ -1337,7 +1337,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/instituteInfo");
 
-				model.addObject("title", "Institute Information List");
+				model.addObject("title", "Institute Details List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				System.out.println("Student list inst id::::" + inst_id);
@@ -1409,7 +1409,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/iqaclogin");
 
-				model.addObject("title", "Add Institute Information");
+				model.addObject("title", "Add Institute Details");
 
 				InstituteInfo editInst = new InstituteInfo();
 
