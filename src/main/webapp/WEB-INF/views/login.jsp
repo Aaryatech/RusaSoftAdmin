@@ -95,9 +95,9 @@
 					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Account Login 
 				</h1>
 
-				<form name="loginform" id="loginform"
+				<form name="loginform" 
 					action="${pageContext.request.contextPath}/loginProcess"
-					method="post">
+					method="post" id="loginform">
 
 					<c:choose>
 						<c:when test="${msg!=null}">
@@ -114,24 +114,30 @@
 					<p>
 						<label for="user_login">  <!-- Username <span class="text-danger">*</span><br />-->
 							<input type="text" name="username" id="username" class="login-one"
-							value="" size="20" placeholder="Username" /></label> <!-- class="input" -->
+							value="" size="20" placeholder="Username" /></label> 
+<!-- 	 <span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Username</span>
+ -->							
+							<!-- class="input" -->
 					</p>
 					<p>
 						<label for="user_pass">  <!-- Password <span class="text-danger">*</span><br />-->
 							<input type="password" name="userpassword" id="userpassword"
 							class="input" value="" placeholder="Password" size="20" /></label>
+<!-- 			 <span class="error_form text-danger" id="error_pass" style="display:none;" >Please Enter Password</span>
+ -->							
 					</p>
 
 					<p>
-						<!-- <label for="user_pass">Academic Year<br /></label> --> <select
+						<select
 							id="ac_year_login" name="ac_year_login" class="form-control">
-							<option>Select Academin Year</option>
+							<option value="-1">Select Academic Year</option>
 							<c:forEach items="${acaYearList}" var="acYear">
 								<option value="${acYear.yearId}">${acYear.academicYear}</option>
 
 							</c:forEach>
 
 						</select>
+						 <span class="error_form text-danger" id="error_aca_year" style="display:none;" >Please Select Academic Year</span>
 					</p>
 					<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
@@ -169,6 +175,8 @@
 
 
 	<!-- CORE JS FRAMEWORK - START -->
+	
+	
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.11.2.min.js"
 		type="text/javascript"></script>
@@ -228,6 +236,48 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	<script>
+
+
+            	$(document).ready(function($){
+            	//alert("hii....");
+            		$("#loginform").submit(function(e) {
+            			 var isError=false;
+            			 var errMsg="";
+            				
+            			 
+            			 
+            				//alert($("#ac_year_login").val());
+            				if($("#ac_year_login").val()== -1 ){
+            		            
+                				isError=true;
+                				
+                				$("#error_aca_year").show()
+                					//return fregister_useralse;
+                				} else {
+                					$("#error_aca_year").hide()
+                				}
+            				
+
+            				
+							if (!isError) {
+										return  true;
+
+							}
+            
+            			  
+            						 
+            					   return false;
+            				} );
+            	});
+			//
+			
+			    
+          
+        </script>
 	<!-- modal end -->
 </body>
 </html>
