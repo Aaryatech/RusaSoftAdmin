@@ -58,6 +58,9 @@ public class MastersController {
 			Quolification[] quolArray = restTemplate.postForObject(Constants.url + "getQuolificationList", map, Quolification[].class);
 			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 			System.err.println("quolfList " + quolfList.toString());
+			
+			model.addObject("title", "HOD Registration");
+
 
 			model.addObject("quolfList", quolfList);
 			Hod hod=new Hod();
@@ -95,12 +98,13 @@ public class MastersController {
 			
 			if (viewAccess.isError() == false) {
 				model = new ModelAndView("master/hodList");
+				model.addObject("title", "HOD Registration List");
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			map.add("instId", userObj.getGetData().getUserInstituteId());
 			GetHod[] hodArray = restTemplate.postForObject(Constants.url + "getHodListByInstId", map, GetHod[].class);
 			List<GetHod> hodList = new ArrayList<>(Arrays.asList(hodArray));
-			System.err.println("hodList " + hodList.toString());
+			//System.err.println("hodList " + hodList.toString());
 
 			model.addObject("hodList", hodList);
 			
@@ -296,7 +300,7 @@ public class MastersController {
 	
 				model.addObject("pendInstList", instList);
 	
-				model.addObject("title", " Pending Institute");
+				model.addObject("title", "Institute Verification Pending List");
 				
 			
 				if(addAccess.isError()==false) {

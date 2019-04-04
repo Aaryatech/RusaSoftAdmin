@@ -169,7 +169,7 @@
 													<span class="error_form text-danger" id="budget_utilized_field"
 															style="display: none;">Please enter utilized budget amount</span>
 															<span class="error_form text-danger" id="budget_utilized_field2"
-															style="display: none;">Please enter budget utilized  amount less than allocated amount</span>
+															style="display: none;">Please enter budget utilized  amount less than or equal to allocated amount</span>
 											</div>
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
@@ -310,7 +310,8 @@
 													$("#budget_utilized_field")
 															.hide()
 												}
-												if($("#budget_utilized").val()>$("#budget_allocated").val()){
+												if(parseInt($("#budget_utilized").val())>parseInt($("#budget_allocated").val())){
+													isError = true;
 													$("#budget_utilized")
 													.addClass(
 															"has-error")

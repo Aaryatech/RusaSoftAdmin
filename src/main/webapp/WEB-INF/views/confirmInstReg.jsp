@@ -597,7 +597,7 @@ table.blueTable thead th:first-child {
 					<br>
 					<div align="center">
 						<button type="submit" class="btn btn-primary">Confirm</button>
-						<button type="submit" onclick="setIsBack()" class="btn btn-primary">Back</button>
+						<button type="submit" onclick="setIsBack()" class="btn btn-primary">Cancel</button>
 						
 					</div>
 				</form>

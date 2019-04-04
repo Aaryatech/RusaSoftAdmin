@@ -98,7 +98,7 @@
 				class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
 				<h1 class="login_head">
 					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
-					<i class="fa fa-mobile" aria-hidden="true"></i> Ask Otp
+					<i class="fa fa-mobile" aria-hidden="true"></i>Verify OTP
 				</h1>
 
 				<form name="loginform" id="loginform"
@@ -127,7 +127,7 @@
 						<label for="user_pass"> <!-- OTP<br /> --> <input type="number"
 							name="entered_otp" min="0" max="999999" id="entered_otp"
 							onchange="trim(this)" class="input" value=""
-							placeholder="Enter OTP Sent on Your Number" /></label>
+							placeholder="Enter OTP Sent on Your Mobile No" /></label>
 					</p>
 					<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>

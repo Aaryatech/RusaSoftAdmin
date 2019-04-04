@@ -85,7 +85,7 @@
 
 						<header class="panel_header">
 
-							<h2 class="title pull-left">HOD Registration</h2>
+							<h2 class="title pull-left">${title}</h2>
 							<br />
 <!-- 							<h3 class="title pull-left">Institute Name:abc</h3>
  -->

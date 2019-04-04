@@ -55,9 +55,9 @@
 							<div class="actions panel_actions pull-right">
 								<c:choose>
 									<c:when test="${addAccess==0}">
-										<a
+										<a title="Add"
 											href="${pageContext.request.contextPath}/showRegisterInstitute"><button
-												type="button" class="btn btn-success">Add</button></a>
+												type="button" class="btn btn-success"> <i class="fa fa-plus-square-o" aria-hidden="true"> Add</i> </button></a>
 									</c:when>
 									<c:otherwise>
 

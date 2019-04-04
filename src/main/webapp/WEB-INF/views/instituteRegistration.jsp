@@ -65,11 +65,7 @@
 						<header class="panel_header extra_head">
 							<h2 class="login_head"><i class="fa fa-key" aria-hidden="true"></i> INSTITUTE REGISTRATION </h2>
 
-							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/">
-								<button type="button" class="btn btn-info"><i class="fa fa-chevron-left back_icn" aria-hidden="true"></i> Back</button></a>
-							</div>
-
+							
 						</header>
 
 
@@ -384,8 +380,10 @@
 													<div class="col-sm-offset-3 col-sm-7">
 
 														<input type="submit" id="sub_button"
-															class="btn btn-primary" value="Submit" />
-														<button type="reset" class="btn btn-default">Reset</button>
+															class="btn btn-primary" value="Save" />
+								<a href="${pageContext.request.contextPath}/">
+								<button type="button" class="btn btn-info">Cancel</button></a>
+							
 													</div>
 												</div>
 
@@ -529,7 +527,7 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script>
-		//
+		
 		function validateEmail(email) {
 
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -615,7 +613,7 @@
 
 												var x = $("#is_registration")
 														.val();
-												if (x == 1)
+												if (parseInt(x) == 1)
 													if (!$("#reg_date").val()) {
 														isError = true;
 
@@ -797,87 +795,29 @@
 
 		}
 
-		/* function getCOPO() {
-			//alert("hii");
-
-			var iqacName = document.getElementById("inst_name").value
-			var aishe_code = document.getElementById("aishe_code").value
-			var inst_add = document.getElementById("inst_add").value
-			var is_registration = document.getElementById("is_registration").value
-			var reg_date = document.getElementById("reg_date").value
-			var trusty_name = document.getElementById("trusty_name").value
-			var trusty_add = document.getElementById("trusty_add").value
-			var trusty_con_no = document.getElementById("trusty_con_no").value
-			var pres_name = document.getElementById("pres_name").value
-			var pres_contact = document.getElementById("pres_contact").value
-			var pres_email = document.getElementById("pres_email").value
-			var princ_name = document.getElementById("princ_name").value
-			var princ_contact = document.getElementById("princ_contact").value
-			var princ_email = document.getElementById("princ_email").value
-			var temp;
-			var temp1;
-
-			if (is_registration == 1) {
-				//alert(reg_date);
-				temp = "Yes";
-				$('#reg_date1').html(reg_date);
-
-			} else {
-				alert("no...");
-				temp = "No";
-				temp1 = "-";
-				$('#reg_date1').html(temp1);
-
-			}
-
-			$('#inst_Name1').html(iqacName);
-			$('#aishe_code1').html(aishe_code);
-			$('#inst_Add1').html(inst_add);
-			$('#is_reg1').html(temp);
-
-			$('#trust_Name1').html(trusty_name);
-			$('#trust_Add1').html(trusty_add);
-			$('#trust_Con1').html(trusty_con_no);
-
-			$('#chairman_Name1').html(pres_name);
-			$('#Chair_Con1').html(pres_contact);
-			$('#chair_Email1').html(pres_email);
-			$('#princi_Name1').html(princ_name);
-			$('#princi_Con1').html(princ_contact);
-			$('#princi_Email1').html(princ_email);
-
-		}
-		function getOpt() {
-			//submit afrer showing details on modal dialogue
-			var form = document.getElementById("form_sample_2");
-			form.submit();
-
-		}
-		 */
 	</script>
 	<script>
 		function showIsReg() {
 
 			var x = ${editInst.instituteId};
 
-			if (x > 0) {
+			if (parseInt(x) > 0) {
 				var da = ${editInst.regDate};
 				
 				var isReg = ${editInst.isRegistration};
 				
-
 				//alert("Is Reg " +isReg);
 				if (isReg == 0) {
 
 					document.getElementById("abc").style.display = "none";
-					document.getElementById("reg_date").removeAttribute(
-							"required");
-					document.getElementById("reg_date").value = da;
+					//document.getElementById("reg_date").removeAttribute(
+							//"required");
+				//document.getElementById("reg_date").value = da;
 
 				} else {
 					document.getElementById("abc").style.display = "block";
 					reg_date
-					document.getElementById("reg_date").value = da;
+					//document.getElementById("reg_date").value = da;
 
 				}
 
@@ -901,14 +841,7 @@
 		});
 
 		function checkUnique(inputValue, valueType) {
-			//alert(inputValue);
-
-			var primaryKey = $
-			{
-				editInst.instituteId
-			}
-			;
-
+			var primaryKey = ${editInst.instituteId};
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {

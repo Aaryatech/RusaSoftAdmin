@@ -94,7 +94,7 @@ public class MasterController {
 			if (add.isError() == false) {
 				model = new ModelAndView("master/reginstitute");
 
-				model.addObject("title", "Register Institute");
+				model.addObject("title", "Institute Registration");
 
 				Institute editInst = new Institute();
 
@@ -171,7 +171,7 @@ public class MasterController {
 
 				model = new ModelAndView("master/instituteList");
 
-				model.addObject("title", "Institute List");
+				model.addObject("title", "Verified Institute List");
 
 				Institute editInst = new Institute();
 
@@ -345,7 +345,7 @@ public class MasterController {
 
 				model.addObject("accOffList", accOffList);
 
-				model.addObject("title", "Account Officer List");
+				model.addObject("title", "Account Officer Registration List");
 
 				Info addAccess = AccessControll.checkAccess("showAccList", "showAccList", "0", "1", "0", "0",
 						newModuleList);
@@ -1319,7 +1319,7 @@ public class MasterController {
 
 				int hodId = Integer.parseInt(request.getParameter("edit_hod_id"));
 
-				model.addObject("title", " Edit HOD");
+				model.addObject("title", " Edit HOD Registration");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("hodId", hodId);
 				// getInstitute
@@ -1554,7 +1554,7 @@ public class MasterController {
 
 				model = new ModelAndView("master/accReg");
 
-				model.addObject("title", "Edit Account Officer");
+				model.addObject("title", "Edit Account Officer Registration");
 				int accOffId = Integer.parseInt(request.getParameter("edit_accOff_id"));
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();

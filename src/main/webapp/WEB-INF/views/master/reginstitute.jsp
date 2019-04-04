@@ -85,8 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showInstituteList"><button
-										type="button" class="btn btn-info">Back</button></a>
+								
 							</div>
 
 						</header>
@@ -389,10 +388,10 @@
 												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
 
-														<input type="submit" id="sub_button"
-															class="btn btn-primary" value="Save">
-														<button type="reset" class="btn btn-default">Reset</button>
-													</div>
+														<button type="submit" id="sub_button"
+															><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+<a href="${pageContext.request.contextPath}/showInstituteList"><button
+										type="button" class="btn btn-info">Cancel</button></a>													</div>
 												</div>
 
 
@@ -675,11 +674,8 @@
 		function checkUnique(inputValue, valueType) {
 			//alert(inputValue);
 
-			var primaryKey = $
-			{
-				editInst.instituteId
-			}
-			;
+			var primaryKey = ${editInst.instituteId};
+			
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {
