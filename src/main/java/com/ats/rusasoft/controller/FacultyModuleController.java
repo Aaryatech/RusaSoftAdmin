@@ -480,7 +480,7 @@ public class FacultyModuleController {
 			model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 
 			model.addObject("activity", facAct);
-			model.addObject("title", "Organized Details Form");
+			model.addObject("title", "Add Faculty Organized - Out Reach Activity");
 			}
 			
 		} catch (Exception e) {
@@ -622,7 +622,7 @@ public class FacultyModuleController {
 		int inst_id = (int) session.getAttribute("instituteId");
 		
 		model = new ModelAndView("FacultyDetails/organized");
-		model.addObject("title", "Edit Organized Outreach Activity Details");	
+		model.addObject("title", "Edit Faculty Organized - Out Reach Activity");	
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();     
 
@@ -1808,7 +1808,7 @@ public class FacultyModuleController {
 			FacultyContribution fcondata = rest.postForObject(Constants.url + "/getOutReachContriById", map,
 					FacultyContribution.class);
 			model.addObject("facContri", fcondata);
-			model.addObject("title", "Edit Out Reach Contribution");
+			model.addObject("title", "Edit Faculty's Contribution in Out Reach Activity");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1939,7 +1939,7 @@ public class FacultyModuleController {
 			System.err.println("acaYearList " + acaYearList.toString());
 
 			model.addObject("acaYearList", acaYearList);
-			model.addObject("title", "Ph.D. Guideline");
+			model.addObject("title", "Add Ph.D. Guideline");
 			model.addObject("phd", phd);
 			}
 		} catch (Exception e) {

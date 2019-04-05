@@ -68,12 +68,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
-
-
-
+				
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -182,13 +177,13 @@
 																		name="bandwidth" placeholder="Bandwidth for Accessing E-Resources"	value="${libInfo.bandwidthForAccessingEresources}" 
 																		onchange="trim(this)" autocomplete="off">
 																		<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter bandwidth for
-																	accessing e-resources.</span>
+																	accessing E-resources.</span>
 																</div>
 															</div>
 
 															<div class="form-group">
 																<label class="control-label col-sm-3" for="usingremot"
-																	style="text-align: left;"> e-Resources are
+																	style="text-align: left;"> E-Resources are
 																	remotely Accessible  <span class="text-danger">*</span>
 																</label>
 																<div class="col-sm-9">
@@ -540,9 +535,11 @@
 												
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+																<button type="submit" id="sub_button" class="btn btn-primary" 
+																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+																
 																<a href="${pageContext.request.contextPath}/showLibraryBasicInfo"><button
-																	id="sub2" type="button" class="btn btn-primary">Back</button></a>
+																	id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 																<input type="hidden" id="is_view" name="is_view" value="0">
 															</div>
 														</div>
@@ -699,7 +696,7 @@
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									
-									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub_button").disabled = true;
 									document.getElementById("sub2").disabled = true;
 									return  true;
 								}

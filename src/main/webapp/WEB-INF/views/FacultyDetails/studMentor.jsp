@@ -106,7 +106,7 @@
 																onClick="selectedInst(this)" /> Select All</th> 
 																<th>Sr No</th>
 																<th>Academic Year</th>
-																<th>No of Students</th>
+																<th>No. of Students</th>
 																<th width="10%">Action</th>
 															</tr>
 														</thead>

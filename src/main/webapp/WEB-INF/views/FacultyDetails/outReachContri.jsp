@@ -289,7 +289,7 @@
 																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 															
 															<a href="${pageContext.request.contextPath}/showOutReachContriList"><button
-																id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;CancelCancel</button></a>
+																id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 
 															<input type="hidden" id="is_view" name="is_view" value="0">
 														</div>

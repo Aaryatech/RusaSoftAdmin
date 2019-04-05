@@ -161,9 +161,11 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
+												<button type="submit" id="sub_button" class="btn btn-primary" 
+														onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+																	
 												<a href="${pageContext.request.contextPath}/showIntellectualProperty"><button
-													id="sub2" type="button" class="btn btn-primary">Cancel</button></a>
+													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 
 												<input type="hidden" id="is_view" name="is_view" value="0">	
 											</div>
@@ -288,7 +290,7 @@
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									
-									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub_button").disabled = true;
 									document.getElementById("sub2").disabled = true;
 									return  true;
 								}

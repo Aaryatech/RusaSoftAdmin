@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -71,12 +68,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
-
-
-
+				
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -89,7 +81,8 @@
 								<c:if test="${addAccess == 0}">
 								<a
 									href="${pageContext.request.contextPath}/showAddIntellectualProperty"><button
-										type="button" class="btn btn-success">Add</button></a>
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 										</c:if>
 								
 							</div>
@@ -130,9 +123,7 @@
 
 														<th>From Date</th>
 														<th>To Date</th>
-													 
-
-													</tr>
+													 </tr>
 
 												</thead>
 													
@@ -169,10 +160,10 @@
 
 											</table>
 											<c:if test="${deleteAccess==0}">
-												<input type="submit" class="btn btn-primary" value="Delete"
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												<button class="btn btn-primary"
+												id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;">
+												<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button> 
 											</c:if>
 											<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0"> 

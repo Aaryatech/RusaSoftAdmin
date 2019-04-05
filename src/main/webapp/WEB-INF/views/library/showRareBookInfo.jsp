@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
- 
 <!DOCTYPE html>
 <html class=" ">
     <head>
@@ -51,14 +49,16 @@
                 <h2 class="title pull-left">${title}</h2>
                 <div class="actions panel_actions pull-right">
                    <c:if test="${addAccess == 0}">  
-               		  <a href="${pageContext.request.contextPath}/rareBookInformation"><button type="button" class="btn btn-success">Add</button></a>
+               		  <a href="${pageContext.request.contextPath}/rareBookInformation"><button type="button" class="btn btn-success">
+               		  	<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
                   </c:if> 
-                	<!-- <a class="box_toggle fa fa-chevron-down"></a>   -->             
+                	
                 </div>
               </header> 
               
               
-            <div class="content-body">    <div class="row">
+           <div class="content-body">    
+            <div class="row">
             <c:if test="${sessionScope.successMsg!=null}">
             <div class="col-lg-12">
     		          <div class="alert alert-success alert-dismissible fade in">
@@ -79,7 +79,7 @@
                    		<th width="5%">Sr No</th>
                         <th>Book Name</th> 
                         <th>Publisher</th> 
-                        <th>No Of Copies</th> 
+                        <th>No. Of Copies</th> 
                         <th>Price</th> 
                         <th>Publishing Year</th> 
                         
@@ -158,9 +158,8 @@
                 </tbody>
             </table>
 	<%-- 	<c:if test="${deleteAccess==0}">
-			<input type="submit" class="btn btn-primary" value="Delete"
-					id="deleteId"
-					onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+			<button class="btn btn-primary"
+				id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 					style="align-content: center; width: 113px; margin-left: 40px;">
 	 </c:if> --%>
 			<input type="hidden" id="edit_accOff_id" name="edit_accOff_id" value="0">

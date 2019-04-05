@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -71,12 +68,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<!-- MAIN CONTENT AREA STARTS -->
-
-				<div class="col-lg-12"></div>
-
-
-
+				
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -176,14 +168,18 @@
 						
 					</div>
 					
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-															<a href="${pageContext.request.contextPath}/showRareBookInfo"><button
-																id="sub2" type="button" class="btn btn-primary">Back</button></a>
-																<input type="hidden" id="is_view" name="is_view" value="0">
-															</div>
-														</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" id="sub_button" class="btn btn-primary" 
+										onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+							
+									<a href="${pageContext.request.contextPath}/showRareBookInfo"><button
+										id="sub2" type="button" class="btn btn-primary">
+											<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+									
+									<input type="hidden" id="is_view" name="is_view" value="0">
+							</div>
+						</div>
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
@@ -223,74 +219,11 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+	
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
-	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Budget on Infrastructure Facility</h4>
-				</div>
-				<div class="modal-body">
-
-					<div class="form-group">
-						<label class="control-label col-sm-3" for="finantialYear">Financial
-							Year</label> <select id="finantialYear" name="finantialYear"
-							class="form-control" required>
-							<option value="2018-2019">2018-2019</option>
-							<option value="2017-2018">2017-2018</option>
-							<option value="2016-2017">2016-2017</option>
-
-						</select>
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-4" for="facilityTitle">Title
-							of Academic Support Activity</label> <input type="text"
-							class="form-control" id="facilityTitle" name="facilityTitle"
-							placeholder="Title of Academic Support Activity" onchange="trim(this)">
-					</div>
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="allocatedAmt">Budget
-							Allocated Amount in Rs. </label> <input type="text" class="form-control"
-							id="allocatedAmt" name="allocatedAmt"
-							placeholder="Budget Allocated Amount in Rs"
-							value="${page.pageName}" onchange="trim(this)">
-					</div>
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-3" for="utilizedAmt">Budget
-							Utilized Amount in Rs. </label> <input type="text" class="form-control"
-							id="utilizedAmt" name="utilizedAmt"
-							placeholder="Budget Utilized Amount in Rs."
-							value="${page.pageName}" onchange="trim(this)">
-					</div>
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -386,7 +319,7 @@
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									
-									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub_button").disabled = true;
 									document.getElementById("sub2").disabled = true;
 									return  true;
 								}
