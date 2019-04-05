@@ -169,14 +169,11 @@
 										
 										<div class="form-group">
 
-
-										<c:if test="${deleteAccess==0}">
-											<input type="submit" class="btn btn-primary" value="Delete"
+<c:if test="${deleteAccess==0}">
+											<button class="btn btn-primary" 
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
-										</c:if>
-										
+												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
 										
 										
 											<!-- <div class="col-sm-5">

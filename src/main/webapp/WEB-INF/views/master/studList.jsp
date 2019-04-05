@@ -169,16 +169,12 @@
 											<div class="col-sm-5">
 											<div class="col-sm-1">
 
-												<button type="submit" title="Delete Multiple Records" class="btn1"
-													id="deleteId"
-													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-													style="align-content: left;">
-													<i class="fa fa-trash"
-														style="font-size: 25px; background-color: black"></i>
-												</button></div>
-												<div class="col-sm-4">
-													<h5 style="text-align: left;">Delete Records</h5>
-												</div>
+												<c:if test="${deleteAccess==0}">
+											<button class="btn btn-primary" 
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
+												
 											</div>
 
 
