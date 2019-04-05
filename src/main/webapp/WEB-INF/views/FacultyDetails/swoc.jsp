@@ -147,7 +147,7 @@
 														
 															
 															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+													onclick="saveSWOCList(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 
@@ -223,7 +223,7 @@
 
 													
 															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(2)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+													onclick="saveSWOCList(2)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 												<div align="center" id="loader1" style="display: none;">
@@ -297,7 +297,7 @@
 
 													
 															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(3)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+													onclick="saveSWOCList(3)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 
@@ -364,7 +364,7 @@
 
 													
 															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(4)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+													onclick="saveSWOCList(4)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 											
 
