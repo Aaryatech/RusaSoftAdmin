@@ -84,12 +84,12 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-
+<%-- 
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/budgetInfrastructureFacility"><button
 										type="button" class="btn btn-info">Back</button></a>
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -134,7 +134,7 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onchange="trim(this)" maxlength="100"
+												<input type="text" class="form-control" onchange="trim(this)" maxlength="100" autocomplete="off"
 													id="infra_budget_title" name="infra_budget_title" value="${budget.infraBudgetTitle}"
 													placeholder="Title of Infrastructure Budget">
 													<span class="error_form text-danger" id="infra_budget_title_field"
@@ -175,12 +175,9 @@
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
-													type="submit" id="sub2" class="btn btn-primary"
-													onclick="submit_f(0)" value="Save &
-																		Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+											<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+											<a href="${pageContext.request.contextPath}/budgetInfrastructureFacility"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+												
 												<input type="hidden" id="is_view" name="is_view" value="0">
 												<input type="hidden" id="infraBudgetId" name="infraBudgetId" value="${budget.infraBudgetId}">
 												

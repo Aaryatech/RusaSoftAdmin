@@ -132,9 +132,9 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onchange="trim(this)"
+												<input type="text" class="form-control" onchange="trim(this)" autocomplete="off"
 													id="lib_budget_title" name="lib_budget_title" maxlength="100"
-													placeholder="Title of Library Facility" value="${budget.libBudgetTitle}">
+													placeholder="Title of Budget" value="${budget.libBudgetTitle}">
 													<span class="error_form text-danger" id="lib_budget_title_field"
 															style="display: none;">Please enter budget title</span>
 											</div>
@@ -181,10 +181,10 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
+<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button
+<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button id="sub2"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 

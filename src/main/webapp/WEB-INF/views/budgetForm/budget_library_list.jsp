@@ -86,7 +86,7 @@
 							<div class="actions panel_actions pull-right">
 							
 								<a href="${pageContext.request.contextPath}/budgetAddOnLibrary"><button
-										type="button" class="btn btn-success">Add</button></a>
+										type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 
 							</div>
 
@@ -98,14 +98,16 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/deleteLibBudget/0"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="get" name="form_sample_2" id="form_sample_2">
 
 
 										<table id="example-1"
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
+												<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="40%">Title</th>
@@ -118,9 +120,9 @@
 											<c:forEach items="${budgetList}" var="budget"
 													varStatus="count">
 													<tr>
-														<%-- <td align="center"><input type="checkbox" class="chk"
-															name="accOffIds" id="accOffIds${count.index+1}"
-															value="${accOff.officerId}" /></td> --%>
+														<td align="center"><input type="checkbox" class="chk"
+															name="libBudgetId" id="libBudgetIds${count.index+1}"
+															value="${budget.libBudgetId}" /></td> 
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
 														<td>${budget.libBudgetTitle}</td>
@@ -146,6 +148,43 @@
 											
 											</tbody>
 										</table>
+										<c:if test="${deleteAccess==0}">
+
+											<!-- <input type="submit" class="btn btn-primary" value="Delete"
+												id="deleteId"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+												style="align-content: center; width: 113px; margin-left: 40px;"> -->
+												
+												
+										<div class="form-group">
+
+											<div class="col-sm-5">
+											<div class="col-sm-1">
+
+
+
+															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+
+												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
+													id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: left;">
+													<i class="fa fa-trash"
+														style="font-size: 25px; background-color: black"></i>
+												</button> --></div>
+												<!-- <div class="col-sm-4">
+													<h5 style="text-align: left;">Delete Records</h5>
+												</div> -->
+											</div>
+
+
+											
+
+										</div>
+												
+												
+												
+										</c:if>
 										<input type="hidden" id="libBudgetId" name="libBudgetId" value="0">
 										
 
@@ -271,7 +310,18 @@
 	</script>
 
 
+<script>
+function selectedInst(source) {
 
+	checkboxes = document.getElementsByName('libBudgetId');
+
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
+
+	}
+
+}
+</script>
 
 
 

@@ -2,10 +2,10 @@ package com.ats.rusasoft.commons;
 
 public class Names {
 
-	public static final String infra_budget_edit = "Edit Budget of Infrastructure Facility";
-	public static final String lib_budget_edit = "Edit  Budget on Library Facility";
-	public static String infra_budget_add = "Add Budget of Infrastructure Facility";
-	public static String infra_budget_list = "Budget of Infrastructure Facility List";
+	public static final String infra_budget_edit = "Edit Budget on Infrastructure Facility";
+	public static final String lib_budget_edit = "Edit Budget on Library Facility";
+	public static String infra_budget_add = "Add Budget on Infrastructure Facility";
+	public static String infra_budget_list = "Budget on Infrastructure Facility List";
 
 	public static String budget_library_add = "Add Budget on Library Facility";
 	public static String budget_library_list = "Budget on Library Facility List";
