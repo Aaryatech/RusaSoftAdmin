@@ -84,8 +84,8 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showHumanValues"><button
-										type="button" class="btn btn-info">Back</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/showHumanValues"><button
+										type="button" class="btn btn-info">Back</button></a> --%>
 
 							</div>
 
@@ -174,16 +174,16 @@
 											value="${editValue.valueId}"> <input type="hidden"
 											id="is_view" name="is_view" value="0">
 										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save" id="sub_button">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(0)" value="Save & Next"
-													id="sub_button_next">
-												<button type="reset" class="btn btn-default">Reset</button>
-											</div>
-										</div>
+													<div class="col-sm-offset-3 col-sm-9">
 
+
+<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														
+<a href="${pageContext.request.contextPath}/showHumanValues"><button
+										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+												</div>
+										
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields

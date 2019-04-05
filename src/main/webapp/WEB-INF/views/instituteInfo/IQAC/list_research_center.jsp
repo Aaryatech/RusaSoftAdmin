@@ -86,11 +86,16 @@
 							<div class="actions panel_actions pull-right">
 								<!-- <a href="#myModal1" data-toggle="modal"><button
 										type="submit" class="btn btn-info">Add</button></a> -->
-								<a
+								<%-- <a
 									href="${pageContext.request.contextPath}/showAddResearchCenter"><button
-										type="button" class="btn btn-success">Add</button></a>
-								<!-- <a
-									class="box_toggle fa fa-chevron-down"></a> -->
+										type="button" class="btn btn-success">Add</button></a> --%>
+			  
+								  <a title="Add"
+											href="${pageContext.request.contextPath}/showAddResearchCenter"><button
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+										
+										
+								
 							</div>
 
 						</header>

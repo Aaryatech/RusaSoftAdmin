@@ -144,8 +144,10 @@
 
 													<div class="col-sm-4">
 
-														<input type="button" class="btn btn-info" value="Add"
-															onclick="saveSWOCList(1)">
+														
+															
+															<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveSWOCList(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 
@@ -155,7 +157,7 @@
 														style="width: 50px; height: 50px;">
 												</div>
 
-												<div class="row">
+												<div class="row">s
 
 
 													<div class="col-xs-12">
@@ -219,8 +221,9 @@
 													</div>
 													<div class="col-sm-4">
 
-														<input type="button" class="btn btn-info" value="Add"
-															onclick="saveSWOCList(2)">
+													
+															<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveSWOCList(2)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 												<div align="center" id="loader1" style="display: none;">
@@ -292,8 +295,9 @@
 
 													<div class="col-sm-4">
 
-														<input type="button" class="btn btn-info" value="Add"
-															onclick="saveSWOCList(3)">
+													
+															<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveSWOCList(3)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 
@@ -358,9 +362,11 @@
 
 												<div class="col-sm-4">
 
-													<input type="button" class="btn btn-info" value="Add"
-														onclick="saveSWOCList(4)">
-												</div>
+													
+															<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveSWOCList(4)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+													</div>
+											
 
 
 

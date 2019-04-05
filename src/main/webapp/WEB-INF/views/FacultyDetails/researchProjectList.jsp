@@ -85,9 +85,13 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<a href="${pageContext.request.contextPath}/showResearchDetails"><button
+							<%-- 	<a href="${pageContext.request.contextPath}/showResearchDetails"><button
 										type="button" class="btn btn-success">Add</button></a>
-
+ --%>
+ 
+ 	  <a title="Add"
+											href="${pageContext.request.contextPath}/showResearchDetails"><button
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 							</div>
 
 						</header>

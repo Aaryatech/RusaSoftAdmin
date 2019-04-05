@@ -102,8 +102,11 @@ legend.scheduler-border {
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a href="${pageContext.request.contextPath}/showAddHumanValues"><button
-										type="button" class="btn btn-success">Add</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/showAddHumanValues"><button
+										type="button" class="btn btn-success">Add</button></a> --%>
+			  <a title="Add"
+											href="${pageContext.request.contextPath}/showAddHumanValues"><button
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 							</div>
 
 						</header>
