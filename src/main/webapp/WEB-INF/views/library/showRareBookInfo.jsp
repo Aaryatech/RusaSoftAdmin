@@ -194,7 +194,7 @@
    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
    <script>
 
-	function selectedInst(source) {
+   function selectedInst(source) {
 
 		checkboxes = document.getElementsByName('rareBookId');
 
@@ -202,6 +202,8 @@
 			checkboxes[i].checked = source.checked;
 
 		}
+
+	}
    </script>
    
    <script>
