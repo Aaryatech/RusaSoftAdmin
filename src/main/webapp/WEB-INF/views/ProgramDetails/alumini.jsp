@@ -55,8 +55,13 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
-									<a href="${pageContext.request.contextPath}/showAddAlumini"><button
-											type="submit" class="btn btn-success">Add</button></a>
+								<%-- 	<a href="${pageContext.request.contextPath}/showAddAlumini"><button
+											type="submit" class="btn btn-success">Add</button></a> --%>
+											
+											
+	  <a title="Add"
+											href="${pageContext.request.contextPath}/showAddAlumini"><button
+												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 								</c:if>
 
 

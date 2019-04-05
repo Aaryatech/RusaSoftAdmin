@@ -206,9 +206,8 @@
 													</div>
 
 													<div class="col-sm-4">
-
-														<input type="button" class="btn btn-info"
-															onclick="saveProgramVission()" value="Add">
+		<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveProgramVission()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 												<br>
@@ -311,8 +310,9 @@
 
 													<div class="col-sm-4">
 
-														<input type="button" onclick="saveProgramMission()"
-															class="btn btn-info" value="Add">
+														
+				<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveProgramMission()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 											</form>
@@ -451,8 +451,10 @@
 
 													<div class="col-sm-4">
 
-														<input type="button" onclick="saveProgramPeo()"
-															class="btn btn-info" value="Add">
+													
+															
+															<button type="submit" id="sub_button" class="btn btn-primary"
+													 onclick="saveProgramPeo()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 											</form>
@@ -585,8 +587,9 @@
 
 													<div class="col-sm-4">
 
-														<input type="button" onclick="saveProgramPo()"
-															class="btn btn-info" value="Add">
+														
+																<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveProgramPo()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
 												<!-- 		</form>			 -->
@@ -722,9 +725,12 @@
 
 													<div class="col-sm-4">
 
-														<input type="button" onclick="saveProgramPso()"
-															class="btn btn-info" value="Add">
+														
+															
+																<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="saveProgramPso()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
+												
 												</div>
 											</form>
 											<!-- 		</form>			 -->
