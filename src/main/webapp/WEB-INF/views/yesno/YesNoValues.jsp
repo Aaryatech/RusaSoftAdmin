@@ -71,6 +71,8 @@ table, th, td {
 								<c:if test="${isAdd==1}">
 									<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
 											type="button" class="btn btn-info">Add</button></a>
+											
+											
 								</c:if>
 
 
@@ -268,7 +270,7 @@ table, th, td {
 														<td><strong>Others</strong></td>
 														<td></td>
 														<td><a data-toggle="modal" href="#myModal">
-																<button type="button" class="btn btn-info">Add</button>
+																<button type="button" class="btn btn-info"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>Add</button>
 														</a></td>
 														<td></td>
 													</tr>
@@ -322,7 +324,10 @@ table, th, td {
 										<br>
 										<div class="form-group">
 											<div class="col-sm-offset-6 col-sm-6">
-												<input type="submit" class="btn btn-primary" value="Submit">
+												<!-- <input type="submit" class="btn btn-primary" value="Submit"> -->
+												
+												<button type="submit" id="sub_button" class="btn btn-primary"
+													><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 												<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
 											</div>
 										</div>

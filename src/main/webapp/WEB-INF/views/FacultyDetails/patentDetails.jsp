@@ -84,9 +84,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<a
+								<%-- <a
 									href="${pageContext.request.contextPath}/showPatentDetailsList"><button
-										type="button" class="btn btn-info">Back</button></a>
+										type="button" class="btn btn-info">Back</button></a> --%>
 
 							</div>
 
@@ -180,17 +180,16 @@
 
 													</div>
 
-													    <div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" class="btn btn-primary"
-																onclick="submit_f(1)" value="Save" id="svebtn"> <input
-																type="submit" class="btn btn-primary"
-																onclick="submit_f(0)"
-																value="Save &
-																		Next" id="svebtnnext">  
-															<button type="reset" class="btn btn-default">Reset</button>
-														</div>
-													</div>
+													    	<div class="form-group">
+													<div class="col-sm-offset-3 col-sm-9">
+
+
+<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														
+<a href="${pageContext.request.contextPath}/showPatentDetailsList"><button
+										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+												</div>
 
 													<div class="clearfix"></div>
 
