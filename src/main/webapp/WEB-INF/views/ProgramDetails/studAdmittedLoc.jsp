@@ -56,7 +56,7 @@
 								<c:if test="${addAccess==0}">
 									<a
 										href="${pageContext.request.contextPath}/showAddStudAddmitLocWise"><button
-											type="button" class="btn btn-success">Add</button></a>
+											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 								</c:if>
 								<%-- <a href="${pageContext.request.contextPath}/sectionTreeList"><button
 										type="button" class="btn btn-success">Add CMS Content</button></a> --%>

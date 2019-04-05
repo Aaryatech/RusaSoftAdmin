@@ -83,10 +83,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showStudAddmitLoc"><button
 										type="button" class="btn btn-info">Back</button></a>
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -190,11 +190,8 @@
 
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
-															<input type="submit" class="btn btn-primary" id="sub1"
-																onclick="submit_f(1)" value="Save"> <input
-																type="submit" class="btn btn-primary" id="sub2"
-																onclick="submit_f(0)" value="Save And Next">
-															<button type="reset" class="btn btn-default">Reset</button>
+															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														<a href="${pageContext.request.contextPath}/showStudAddmitLoc"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 															<input
 																type="text" readonly placeholder="Total Student" id="total_stud"
 																>

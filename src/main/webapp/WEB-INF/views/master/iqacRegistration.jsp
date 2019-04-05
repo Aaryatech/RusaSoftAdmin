@@ -91,8 +91,8 @@
 												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="iqacName" onchange="trim(this)"
-													autocomplete="off" value="${miqc.iqacName}" name="iqacName"													
+												<input type="text" class="form-control" id="iqacName" onchange="trim(this)"	autocomplete="off" 
+												value="${miqc.iqacName}" name="iqacName"													
 													placeholder="Internal Quality Assurance Cell (IQAC)">
 												<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter IQAC name</span>
 											</div>
@@ -179,7 +179,7 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button" class="btn btn-primary" 
+												<button type="submit" id="sub1" class="btn btn-primary" 
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 											
 												<a href="${pageContext.request.contextPath}/showIqacList"><button
@@ -214,7 +214,13 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 <script>
-            
+function trim(el) {
+	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	replace(/\n +/, "\n"); // Removes spaces after newlines
+	return;
+}
+
              function validateEmail(email) {
             
             	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -326,7 +332,7 @@
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									
-									document.getElementById("sub_button").disabled = true;
+									document.getElementById("sub1").disabled = true;
 									document.getElementById("sub2").disabled = true;
 									return  true;
 								}
@@ -351,12 +357,7 @@
 				return false;
 		}
 	
-		 function trim(el) {
-				el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-				replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-				replace(/\n +/, "\n"); // Removes spaces after newlines
-				return;
-			}
+		 
 	</script>
 
 	<script type="text/javascript">

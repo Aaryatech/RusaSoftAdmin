@@ -220,7 +220,7 @@
 															<div class="col-sm-9">
 																<input type="text"  maxlength="50" class="form-control" id="hod_email"  oninput="checkUnique(this.value,2)"
 																	name="hod_email" placeholder="abc@xyz.com" value="${hod.email}"
-																	>
+																	onchange="trim(this)">
 																	<span
 															class="error_form text-danger" id="hod_email_field"
 															style="display: none;">Please enter hod email id</span>
