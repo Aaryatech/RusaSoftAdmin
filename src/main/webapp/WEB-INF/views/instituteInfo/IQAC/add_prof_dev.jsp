@@ -79,18 +79,18 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 							<c:if test="${trainnig_type==1}">
 								<a href="${pageContext.request.contextPath}/showProfDevelopment"
 									data-toggle="modal"><button type="submit"
-										class="btn btn-info">Back</button></a></c:if>
+										class="btn btn-info"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a></c:if>
 										<c:if test="${trainnig_type==2}">
 								<a href="${pageContext.request.contextPath}/showAdminDevelopment"
 									data-toggle="modal"><button type="submit"
-										class="btn btn-info">Back</button></a></c:if>
+										class="btn btn-info"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a></c:if>
 										
 										
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -134,7 +134,7 @@
 											<div class="col-sm-6">
 												<input type="text" maxlength="9" class="form-control"
 													id="no_of_participant" autocomplete="off"
-													name="no_of_participant"
+													name="no_of_participant" onkeypress='return restrictAlphabets(event)'
 													placeholder="Enter No. of Participants"
 													value="${trainning.trainingPcount}">
 													<span class="error_form text-danger" id="no_of_participant_field"
@@ -147,7 +147,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													placeholder="Select From Date" autocomplete="off"
+													placeholder="Select From Date" autocomplete="off" onkeypress='return restrictAlphabets(event)'
 													id="fromDate" name="fromDate" value="${trainning.trainingFromdt}"
 													>
 													<span class="error_form text-danger" id="fromDate_field"
@@ -161,7 +161,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
+													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
 													placeholder="Select To Date" value="${trainning.trainingTodt}"
 													><span class="error_form text-danger" id="toDate_field"
 													 style="display: none;">Please select to date</span>
@@ -170,11 +170,20 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save"> <input
+												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+													
+											
+														<c:if test="${trainnig_type==1}">
+															<a href="${pageContext.request.contextPath}/showProfDevelopment"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a></c:if>
+														<c:if test="${trainnig_type==2}">
+															<a href="${pageContext.request.contextPath}/showAdminDevelopment"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a></c:if>
+																	
+										
+											
+													<!--  <input
 													type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save & Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+													value="Save & Next"> -->
+												
 												
 												<input type="hidden" name="is_view" id="is_view" value="0">
 												<input type="hidden" id="trainnig_type" name="trainnig_type"
@@ -385,7 +394,20 @@
       return false;
     }    
 </script>
-
+<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
  <!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 </body>

@@ -68,14 +68,15 @@
             </c:if>
             
         <div class="col-xs-12">
-
-
+				<form class="form-horizontal" action="${pageContext.request.contextPath}/delSlectedRareBook/0" method="get"
+						name="form_sample_2" id="form_sample_2">
+		
             <table id="example-1" class="table table-striped dt-responsive display">
                 <thead>
                     <tr>
-                    <!-- <th class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th> -->
+                     <th class="check" style="text-align: center; width: 5%;"><input
+							type="checkbox" name="selAll" id="selAll"
+								onClick="selectedInst(this)" /> Select All</th>
                    		<th width="5%">Sr No</th>
                         <th>Book Name</th> 
                         <th>Publisher</th> 
@@ -90,8 +91,8 @@
                 <tbody>
                       <c:forEach items="${rareBokList}" var="bookList" varStatus="count"> 
 									<tr>
-									<%-- <td><input type="checkbox" class="chk" name="iqacIds"
-															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
+									 <td><input type="checkbox" class="chk" name="rareBookId"
+											id="rareBookIds${count.index+1}" value="${bookList.rareBookInfoId}" /></td> 
 											<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out
@@ -155,21 +156,22 @@
 											
 											</tr>
 								 </c:forEach>   
-                </tbody>
-            </table>
-	<%-- 	<c:if test="${deleteAccess==0}">
-			<button class="btn btn-primary"
-				id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-					style="align-content: center; width: 113px; margin-left: 40px;">
-	 </c:if> --%>
-			<input type="hidden" id="edit_accOff_id" name="edit_accOff_id" value="0">
+              			  </tbody>
+           			 </table>
+					<c:if test="${deleteAccess==0}">
+							<button class="btn btn-primary"
+							id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+							style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+				 	</c:if> 
+					<input type="hidden" id="edit_accOff_id" name="edit_accOff_id" value="0">
 
 
-
-        </div>
-    </div>
-    </div>
-        </section></div>
+				</form>
+       		 </div>
+  		  </div>
+    	</div>
+       </section>
+      </div>
 
 
 
@@ -191,6 +193,18 @@
 
    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
    <script>
+
+	function selectedInst(source) {
+
+		checkboxes = document.getElementsByName('rareBookId');
+
+		for (var i = 0, n = checkboxes.length; i < n; i++) {
+			checkboxes[i].checked = source.checked;
+
+		}
+   </script>
+   
+   <script>
 		function clearSessionAttribute() {
 
 			$.getJSON('${clearSessionAttribute}', {
@@ -203,14 +217,6 @@
 
 		}
 
-		function selectedInst(source) {
-
-			checkboxes = document.getElementsByName('iqacIds');
-
-			for (var i = 0, n = checkboxes.length; i < n; i++) {
-				checkboxes[i].checked = source.checked;
-
-			}
 
 		}
 		function showEditLibrarian(instId){

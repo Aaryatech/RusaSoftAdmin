@@ -412,7 +412,7 @@ public class InstProfTeachTrainContr {
 				if (trainingId == 0) {
 
 					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("accOffIds");
+					String[] instIds = request.getParameterValues("trainingId");
 					System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();

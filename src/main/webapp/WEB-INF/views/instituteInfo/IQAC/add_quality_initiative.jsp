@@ -117,13 +117,12 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
-												<input type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)" value="Save">
+												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 												<!-- <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
 																		Next"> -->
-												<button type="reset" onclick="resetId()"
+												<button type="reset" onclick="resetId()" id="sub2"
 													class="btn btn-default">Reset</button>
 											</div>
 										</div>
@@ -188,10 +187,9 @@
 											</table>
 
 											<c:if test="${deleteAccess==0}">
-												<input type="submit" class="btn btn-primary" value="Delete"
-													id="deleteId"
-													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-													style="align-content: center; width: 113px; margin-left: 40px;">
+												<button type="submit" class="btn btn-primary" value="Delete"
+													id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
 											</c:if>
 										</form>
 									</div>
@@ -258,6 +256,7 @@
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
 														document.getElementById("sub1").disabled = true;
+														document.getElementById("sub2").disabled = true;
 														return  true;
 													}	
 												}

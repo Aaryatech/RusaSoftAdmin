@@ -504,7 +504,7 @@ public class QualityInitiativeController {
 				if (qualityId == 0) {
 
 					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("accOffIds");
+					String[] instIds = request.getParameterValues("qualityId");
 
 					StringBuilder sb = new StringBuilder();
 

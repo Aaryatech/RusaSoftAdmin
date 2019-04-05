@@ -83,12 +83,12 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
+							<%-- <div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/showInternalQualityInitiative"><button
-										type="button" class="btn btn-info">Back</button></a>
+										type="button" class="btn btn-info"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -99,7 +99,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstQuaInitiative"
 										method="post" name="form_sample_2" id="form_sample_2">
->
+
 										
 
 										<div class="form-group">
@@ -133,7 +133,7 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="9"
+												<input type="text" maxlength="9" onkeypress='return restrictAlphabets(event)'
 													class="form-control" id="no_of_participant"
 													autocomplete="off" name="no_of_participant"
 													placeholder="Enter  No. of Participants"
@@ -175,11 +175,10 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<input type="submit" class="btn btn-primary"
-													onclick="submit_f(1)" id="sub1" value="Save"> <input
-													type="submit" id="sub2" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save & Next">
-												<button type="reset" class="btn btn-default">Reset</button>
+												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+												<a href="${pageContext.request.contextPath}/showInternalQualityInitiative"><button id="sub2"
+										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+												
 												<input type="hidden" name="is_view" id="is_view" value="0">
 
 												<input type="hidden" id="qualityId" name="qualityId"
@@ -456,7 +455,20 @@
       return false;
     }    
 </script>
-
+<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 
 </body>

@@ -83,7 +83,7 @@ public class LibraryController {
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
 
-			model.addObject("title", "Library Basic Information");
+			model.addObject("title", "Library Basic Information List");
 			
 			map = new LinkedMultiValueMap<>();
 			map.add("instituteId", instituteId);
@@ -235,6 +235,8 @@ public class LibraryController {
 		
 		LibraryInfo libInfo = rest.postForObject(Constants.url+"/editlibBasicInfoById", map, LibraryInfo.class);
 		model.addObject("libInfo", libInfo);
+		
+		model.addObject("title", "Edit Library Basic Information");
 		}
 	} catch (Exception e) {
 
@@ -273,6 +275,64 @@ public class LibraryController {
 		}
 		return "redirect:/showLibraryBasicInfo";
 
+	}
+	
+
+	@RequestMapping(value = "/delSlectedLibInfo/{libId}", method = RequestMethod.GET)
+	public String deletSelectedStaff(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int libId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedLibInfo/{libId}", "showLibraryBasicInfo", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {	
+
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (libId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] libIds = request.getParameterValues("libId");
+					System.out.println("id are" + libIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < libIds.length; i++) {
+						sb = sb.append(libIds[i] + ",");
+
+					}
+					String libIdList = sb.toString();
+					libIdList = libIdList.substring(0, libIdList.length() - 1);
+
+					map.add("libIdList", libIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("libIdList", libId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelLib", map, Info.class);
+
+				a = "redirect:/showLibraryBasicInfo";
+
+			
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+		
 	}
 
 
@@ -470,6 +530,63 @@ public class LibraryController {
 
 		}
 		return "redirect:/showRareBookInfo";
+		
+	}
+	
+	@RequestMapping(value = "/delSlectedRareBook/{rareBookId}", method = RequestMethod.GET)
+	public String delSlectedRareBook(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int rareBookId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedRareBook/{rareBookId}", "showRareBookInfo", "0", "0",
+				"0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {	
+
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (rareBookId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] rareBookIds = request.getParameterValues("rareBookId");
+					System.out.println("id are" + rareBookIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < rareBookIds.length; i++) {
+						sb = sb.append(rareBookIds[i] + ",");
+
+					}
+					String rareBookIdList = sb.toString();
+					rareBookIdList = rareBookIdList.substring(0, rareBookIdList.length() - 1);
+
+					map.add("rareBookIdList", rareBookIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("rareBookIdList", rareBookId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelRareBooks", map, Info.class);
+
+				a = "redirect:/showRareBookInfo";
+
+			
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return a;
 		
 	}
 	

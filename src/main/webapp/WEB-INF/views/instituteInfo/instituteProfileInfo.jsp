@@ -86,7 +86,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info"><< Back</button></a> <a
+										type="button" class="btn btn-info"> Cancel</button></a> <a
 									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
