@@ -89,7 +89,7 @@
 									<c:when test="${editIqac==1}">
 										<a href="${pageContext.request.contextPath}/changeIqac"><button
 												type="button" class="btn btn-info">Change IQAC</button></a>
-										<a class="box_toggle fa fa-chevron-down"></a>
+										
 
 									</c:when>
 									<c:otherwise>

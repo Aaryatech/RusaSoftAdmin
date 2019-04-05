@@ -90,8 +90,8 @@
 						
 							<div class="actions panel_actions pull-right">
 
-								<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" class="btn btn-info">Back</button></a>
+								<%-- <a href="${pageContext.request.contextPath}/hodList"><button
+										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
 						</header>
