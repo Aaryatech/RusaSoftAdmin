@@ -780,7 +780,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/highEdu");
 
-			model.addObject("title", "Upward Migration Details List");
+			model.addObject("title", "Progression to Higher Education Details List");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -860,7 +860,7 @@ public class AlumniTrainingController {
 			if (access.isError() == false) {
 				model = new ModelAndView("ProgramDetails/addHighEducation");
 
-				model.addObject("title", "Add Upward Migration Details ");
+				model.addObject("title", "Add Progression to Higher Education Details ");
 
 				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 						ProgramType[].class);
@@ -1034,7 +1034,7 @@ public class AlumniTrainingController {
 
 				model = new ModelAndView("ProgramDetails/addHighEducation");
 
-				model.addObject("title", "Edit Upward Migration Details");
+				model.addObject("title", "Edit Progression to Higher Education Details");
 
 				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 						ProgramType[].class);
