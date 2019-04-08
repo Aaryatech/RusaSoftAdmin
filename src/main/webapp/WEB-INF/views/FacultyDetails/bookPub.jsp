@@ -234,7 +234,24 @@
 
 															</div>
 
-															<div class="form-group">
+															
+																  <div class="form-group"> 
+																	<label class="control-label col-sm-2" for="year"
+																	style="text-align: left;"> Year of Publication <span
+																	class="text-danger">*</span> </label>
+																		<div class="col-sm-6">
+																		<input type="text" class="form-control datepickeryear"
+																			data-min-view-mode="years" data-start-view="2"
+																			data-format="yyyy" placeholder="Year Of Published"
+																			id="year_publication" value="${book.bookPubYear }"
+																			name="year_publication" autocomplete="off" maxlength="4"
+																			onkeypress='return restrictAlphabets(event)' onchange="trim(this)">
+																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter year of publication.</span>					
+																	</div>
+																	
+																</div>
+				
+															<%-- <div class="form-group">
 
 
 																<label class="control-label col-sm-2" for="smallheading">Year
@@ -249,7 +266,7 @@
 
 
 															</div>
-														
+ --%>														
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
@@ -295,6 +312,20 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 <script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -450,6 +481,16 @@
 		});
     });
     
+    
+    $(function() {
+
+		$('.datepickeryear').datepicker({
+			autoclose : true,
+			minViewMode : 2,
+			format : 'yyyy'
+
+		});
+	});
 </script>
 
 <script type="text/javascript">
