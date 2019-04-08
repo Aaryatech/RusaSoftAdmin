@@ -84,7 +84,7 @@ public class InstituteController {
 			  } else {
 			 
 			model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
-			model.addObject("title", "Institute Schemes List");
+			model.addObject("title", "Institute Scheme List");
 			model.addObject("title1",
 					"Institute Support Financially by Awarding Scholarship/Freeships like schemes other than Government Schemes ");
 
@@ -191,7 +191,7 @@ public class InstituteController {
 			model.addObject("acaYearList", acaYearList);
 
 			model.addObject("instSpprt", instSpprt);
-			model.addObject("title", "Add Institute Schemes");
+			model.addObject("title", "Add Institute Scheme");
 				}
 		} catch (Exception e) {
 
@@ -279,7 +279,7 @@ public class InstituteController {
 			model.addObject("instSpprt", suprtSchm);
 
 			
-			model.addObject("title", "Edit Institute Schemes");
+			model.addObject("title", "Edit Institute Scheme");
 			
 				}
 		} catch (Exception e) {

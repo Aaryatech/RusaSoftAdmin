@@ -1218,7 +1218,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Curriculam and Cross Cutting Issues");
+			model.addObject("title", "Curriculum and Cross Cutting Issues");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 

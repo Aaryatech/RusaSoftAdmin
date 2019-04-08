@@ -62,7 +62,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
 
-				model.addObject("title", "Institutional Distnctiveness List");
+				model.addObject("title", "Institutional Distinctiveness List");
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
 
@@ -132,7 +132,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_prog_distinctive");
 
-				model.addObject("title", " Add Institutional Distnctiveness");
+				model.addObject("title", " Add Institutional Distinctiveness");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -245,7 +245,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_prog_distinctive");
 
-				model.addObject("title", " Edit Institutional Distnctiveness");
+				model.addObject("title", " Edit Institutional Distinctiveness");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("distId", distId);
 

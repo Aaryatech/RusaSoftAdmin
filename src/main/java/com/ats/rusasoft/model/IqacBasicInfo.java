@@ -28,7 +28,7 @@ public class IqacBasicInfo {
 	
 	private int exInt2;
 	
-	private String exVar1;
+	private String exVar1; //Designation
 	
 	private String exVar2;
 	

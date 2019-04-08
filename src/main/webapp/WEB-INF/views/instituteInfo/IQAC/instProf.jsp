@@ -98,14 +98,9 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertIqacBasicInfo"
-										method="post" name="form_sample_2" id="form_sample_2"  novalidate="novalidate"
-										>
-
-										
+										method="post" name="form_sample_2" id="form_sample_2"  novalidate="novalidate">
 
 												<div>
-
-
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_name">
@@ -136,6 +131,33 @@
 															 <span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Name  </span>
 														</div>
 													</div>
+													
+											
+											<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">Designation
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="designation" name="designation"
+													class="form-control" onchange="showForm()">
+
+													<c:forEach items="${desigList}" var="makeList">
+														<c:choose>
+															<c:when
+																test="${makeList.designationId == instRes.exVar1}"> <!-- instRes.exVar1 == makeList.designationId -->
+																<option value="${makeList.designationId}"
+																	selected="selected">${makeList.designationName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${makeList.designationId}">${makeList.designationName}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+
+												</select>
+												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please select designation</span>
+											</div>
+										</div>
 
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_order">Mobile

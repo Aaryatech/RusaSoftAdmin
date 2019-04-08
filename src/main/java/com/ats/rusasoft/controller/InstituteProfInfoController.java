@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.IqacBasicInfo;
@@ -70,8 +71,7 @@ public class InstituteProfInfoController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-
-				model.addObject("title", "Add Assistant IQAC Details");
+				model.addObject("title", "Add Alternate IQAC Details");
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -79,6 +79,11 @@ public class InstituteProfInfoController {
 				IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map,
 						IqacBasicInfo.class);
 				model.addObject("instRes", instRes);
+				
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
 				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
 				System.out.println(instRes.toString());
 
@@ -113,7 +118,7 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/instProf");
-				model.addObject("title", "Edit Assistant IQAC Details");
+				model.addObject("title", "Edit Alternate IQAC Details");
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -121,6 +126,11 @@ public class InstituteProfInfoController {
 				IqacBasicInfo instRes = rest.postForObject(Constants.url + "getIqacInfoByInstId", map,
 						IqacBasicInfo.class);
 				model.addObject("instRes", instRes);
+				
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
 				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
 				System.out.println(instRes.toString());
 
@@ -202,7 +212,7 @@ public class InstituteProfInfoController {
 
 					lib.setExInt1(1);
 					lib.setExInt2(1);
-					lib.setExVar1("NA");
+					lib.setExVar1(request.getParameter("designation"));	//designation
 					lib.setExVar2("NA");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -233,7 +243,7 @@ public class InstituteProfInfoController {
 					lib1.setIqacAltMobile(alt_fac_contact);
 					lib1.setIqacAltName(alt_faculty_name);
 					lib1.setIqacAltPhone(phone_no);
-
+					lib1.setExVar1(request.getParameter("designation"));	//designation
 					lib.setMakerUserId(maker_id);
 
 					lib.setInstituteId(inst_id);
@@ -288,7 +298,7 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("instituteInfo/IQAC/instProfList");
 
-				model.addObject("title", "Assistant IQAC Details List");
+				model.addObject("title", "Alternate IQAC Details List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 
