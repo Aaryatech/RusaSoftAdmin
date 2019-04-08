@@ -113,8 +113,10 @@
 													name="subCode" value="${editSubject.subCode}"> <span
 													class="error_form text-danger" id="error_subCode"
 													style="display: none;">Please enter Subject Code</span>
-											</div>
-										</div>
+											
+											<p class="desc font-italic fontsize11">Note:
+															Please Enter Correct Subject Code</p>
+										</div></div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="Semester">Semester<span
@@ -278,6 +280,8 @@
 													name="subName" value="${editSubject.subName}"> <span
 													class="error_form text-danger" id="error_subName"
 													style="display: none;">Please enter Subject Name</span>
+													<p class="desc font-italic fontsize11">Note:
+															Please Enter Correct Subject Name</p>
 											</div>
 										</div>
 
