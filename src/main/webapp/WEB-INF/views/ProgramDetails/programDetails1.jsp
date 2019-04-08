@@ -100,7 +100,7 @@
 													<td style="text-align: center; "><c:if test="${isAdd==1}">
 															<a
 																href="${pageContext.request.contextPath}/addProgramDetail/${list.programId}"
-																title="Add Details" rel="tooltip"
+																title="Add Program Details" rel="tooltip"
 																data-color-class="detail"
 																data-animate=" animated fadeIn " data-toggle="tooltip"
 																data-original-title="Block"><span

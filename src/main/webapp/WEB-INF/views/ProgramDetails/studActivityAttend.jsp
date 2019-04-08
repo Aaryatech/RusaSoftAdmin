@@ -81,7 +81,7 @@
 												<th>Date</th>
 												<th>Year</th>
 												<th>Branch</th>
-												<th>No. of Students Participated</th>
+												<th>No. of Students Attended</th>
 												<th>Level of Activity</th>
 												<th>Action</th>
 											</tr>

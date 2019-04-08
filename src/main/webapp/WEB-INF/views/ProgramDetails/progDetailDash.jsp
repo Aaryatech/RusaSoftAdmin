@@ -178,7 +178,7 @@
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
-												onsubmit="return confirm('Do you really want to add Program Vission?');">
+												onsubmit="return confirm('Do you really want to add Program Vision?');">
 
 												<div class="row">
 
@@ -190,7 +190,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="programVission" name="programVission"
-															placeholder="Program Vission" required>
+															placeholder="Program Vision" required>
 													</div>
 												</div>
 
@@ -202,7 +202,7 @@
 													<div class="col-sm-6">
 														<input type="text" class="form-control"
 															id="programVissionRemark" name="programVissionRemark"
-															placeholder="Program Vission Remark">
+															placeholder="Program Vision Remark">
 													</div>
 
 													<div class="col-sm-4">
