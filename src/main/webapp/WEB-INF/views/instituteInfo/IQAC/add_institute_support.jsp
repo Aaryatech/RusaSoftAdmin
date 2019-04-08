@@ -144,7 +144,7 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="inst_schme_offeredby" name="inst_schme_offeredby"
-														placeholder="Scheme/Support offered By" onchange="trim(this)"
+														placeholder="Scheme/Support offered	By" onchange="trim(this)"
 														value="${instSpprt.instSchmeOfferedby}" >
 														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter scheme/support offered
 													by.</span>	

@@ -178,8 +178,24 @@
 												</select>
 											</div>
 										</div>
+										
+					 <div class="form-group"> 
+						<label class="control-label col-sm-2" for="year"
+						style="text-align: left;"> Year of highest Qualification Acquired<span
+						class="text-danger">*</span> </label>
+						
+						<div class="col-sm-10">
+							<input type="text" class="form-control datepickeryear"	data-min-view-mode="years" data-start-view="2"
+								data-format="yyyy" placeholder="Year of highest Qualification Acquired"
+								id="yr_highest_qualification_acqrd" value="${staff.hightestQualificationYear}"
+								name="yr_highest_qualification_acqrd" autocomplete="off"
+								onkeypress='return restrictAlphabets(event)' onchange="trim(this)">
+								<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter year of highest qualification.</span>					
+						</div>
+						
+					</div>
 
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Year
 												of highest Qualification Acquired <span class="text-danger">*</span>
 											</label>
@@ -206,7 +222,8 @@
 
 												</select>
 											</div>
-										</div>
+										</div> --%>
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Current
@@ -518,7 +535,18 @@
 	                					$("#error_formfield5").hide()
 	                				} 
             				
-            				
+								
+								if(!$("#yr_highest_qualification_acqrd").val()){
+	             					 
+	                				isError=true;
+	                				errMsg += '<li>Please enter a valid name.</li>';
+	                				
+	                				$("#yr_highest_qualification_acqrd").addClass("has-error")
+	                				$("#error_formfield0").show()
+	                					//return false;
+	                				} else {
+	                					$("#error_formfield0").hide()
+	                				}
             				
 			            	 if (!isError) {
 			            		 
@@ -577,6 +605,16 @@
 	        format: "dd-mm-yyyy",
 	        changeYear:true,
 	        changeMonth:true
+
+		});
+	});
+	
+	$(function() {
+
+		$('.datepickeryear').datepicker({
+			autoclose : true,
+			minViewMode : 2,
+			format : 'yyyy'
 
 		});
 	});
@@ -808,6 +846,7 @@
 				}
 
 		}
+		
 	</script>
 
 </body>

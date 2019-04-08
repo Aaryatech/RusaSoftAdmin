@@ -120,36 +120,7 @@
 															</div>
 														</div>
 
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Co-Guide
-																 <span class="text-danger">*</span>
-															</label>
-
-
-															<div class="col-sm-4">
-															Yes <input type="radio" name="coGuide" id="coGuide" ${phd.isCoGuide == 1 ? 'checked' : ''}
-																	 value="1" onclick="checkCoGuide(this.value)">
-																	
-																	 No<input type="radio" onclick="checkCoGuide(this.value)" ${phd.isCoGuide == 0 ? 'checked' : ''}
-																	  name="coGuide" id="coGuide" value="0">
-															
-															
-															</div>
-														</div>
-
-														<div class="form-group" id="cogid" style="display: none;">
-
-															<label class="control-label col-sm-2"   for="smallheading">Name
-																of Co-Guide <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control " id="co_guide_name" autocomplete="off"  onchange="trim(this)"	 
-																	name="co_guide_name" placeholder="Name of Co_Guide" value="${phd.coGuideName}">
-																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of co-guide.</span>
-															</div>
-
-
-														</div>
+														
 
 														<div class="form-group">
 
@@ -278,7 +249,36 @@
 
 														</div>
 
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Co-Guide
+																 <span class="text-danger">*</span>
+															</label>
 
+
+															<div class="col-sm-4">
+															Yes <input type="radio" name="coGuide" id="coGuide" ${phd.isCoGuide == 1 ? 'checked' : ''}
+																	 value="1" onclick="checkCoGuide(this.value)">
+																	
+																	 No<input type="radio" onclick="checkCoGuide(this.value)" ${phd.isCoGuide == 0 ? 'checked' : ''}
+																	  name="coGuide" id="coGuide" value="0">
+															
+															
+															</div>
+														</div>
+
+														<div class="form-group" id="cogid" style="display: none;">
+
+															<label class="control-label col-sm-2"   for="smallheading">Name
+																of Co-Guide <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control " id="co_guide_name" autocomplete="off"  onchange="trim(this)"	 
+																	name="co_guide_name" placeholder="Name of Co_Guide" value="${phd.coGuideName}">
+																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of co-guide.</span>
+															</div>
+
+
+														</div>
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">

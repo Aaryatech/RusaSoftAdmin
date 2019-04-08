@@ -434,12 +434,12 @@ public class LibraryController {
 			HttpSession session = request.getSession();
 			int insId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
-
+			int acadYear = (int)session.getAttribute("acYearId");
 			RareBook rareBook = new RareBook();
 			
 			rareBook.setRareBookInfoId(Integer.parseInt(request.getParameter("bookId")));
 			rareBook.setInstituteId(insId);
-			rareBook.setYearId(0);  //extra
+			rareBook.setYearId(acadYear);  //Academic Year
 			rareBook.setUserId(userId);
 			rareBook.setRareBookname(request.getParameter("bookName"));
 			rareBook.setPublisher(request.getParameter("publisher"));
