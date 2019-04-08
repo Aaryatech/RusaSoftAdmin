@@ -160,6 +160,84 @@
 															address</span>
 													</div>
 												</div>
+												
+													<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order"> Village
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" onchange="trim(this)" maxlength="200"
+															class="form-control" id="village"
+															value="${editInst.village}" name="village"
+															placeholder="Village">
+															<span
+															class="error_form text-danger" id="inst_vilg_field"
+															style="display: none;">Please enter village</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order"> Taluka
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" onchange="trim(this)" maxlength="200"
+															class="form-control" id="taluka"
+															value="${editInst.taluka}" name="taluka"
+															placeholder="Taluka">
+															<span
+															class="error_form text-danger" id="inst_taluka_field"
+															style="display: none;">Please enter taluka</span>
+													</div>
+												</div>
+												
+												
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order"> District
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" onchange="trim(this)" maxlength="200"
+															class="form-control" id="district"
+															value="${editInst.district}" name="district"
+															placeholder="District">
+															<span
+															class="error_form text-danger" id="inst_dist_field"
+															style="display: none;">Please enter district</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order"> State
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" onchange="trim(this)" maxlength="200"
+															class="form-control" id="state"
+															value="${editInst.state}" name="state"
+															placeholder="State">
+															<span
+															class="error_form text-danger" id="inst_stat_field"
+															style="display: none;">Please enter state</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order"> Pin Code
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" onchange="trim(this)" maxlength="6"
+															class="form-control" id="pin" onkeypress='return restrictAlphabets(event)'
+															value="${editInst.pincode}" name="pin"
+															placeholder="Pin Code of 6 digit">
+															<span
+															class="error_form text-danger" id="inst_pin_field"
+															style="display: none;">Please enter pin
+															code</span>
+													</div>
+												</div>
 
 
 												<div class="form-group">
@@ -808,6 +886,61 @@
 												} else {
 													$("#inst_add_field").hide()
 												}
+												
+												
+												if (!$("#village").val()) {
+													isError = true;
+
+													$("#village").addClass(
+															"has-error")
+													$("#inst_vilg_field").show()
+												} else {
+													$("#inst_vilg_field").hide()
+												}
+												
+											
+												if (!$("#taluka").val()) {
+													isError = true;
+
+													$("#taluka").addClass(
+															"has-error")
+													$("#inst_taluka_field").show()
+												} else {
+													$("#inst_taluka_field").hide()
+												}
+												
+												
+												if (!$("#district").val()) {
+													isError = true;
+
+													$("#district").addClass(
+															"has-error")
+													$("#inst_dist_field").show()
+												} else {
+													$("#inst_dist_field").hide()
+												}
+												
+												
+												if (!$("#state").val()) {
+													isError = true;
+
+													$("#state").addClass(
+															"has-error")
+													$("#inst_stat_field").show()
+												} else {
+													$("#inst_stat_field").hide()
+												}
+												
+												
+												if (!$("#pin").val()) {
+													isError = true;
+
+													$("#pin").addClass(
+															"has-error")
+													$("#inst_pin_field").show()
+												} else {
+													$("#inst_pin_field").hide()
+												}
 
 												if (!$("#is_registration")
 														.val()) {
@@ -965,6 +1098,19 @@
 											});
 						});
 	</script>
-
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 </body>
 </html>

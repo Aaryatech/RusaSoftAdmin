@@ -770,6 +770,13 @@ public class MasterController {
 				institute.setExVar2(exVar);
 
 				institute.setInstituteAdd(request.getParameter("inst_add"));
+				
+				institute.setVillage(request.getParameter("village"));
+				institute.setTaluka(request.getParameter("taluka"));
+				institute.setDistrict(request.getParameter("district"));
+				institute.setState(request.getParameter("state"));
+				institute.setPincode(request.getParameter("pin"));
+				
 				institute.setInstituteId(instId);
 				institute.setInstituteName(request.getParameter("inst_name"));
 
@@ -823,6 +830,13 @@ public class MasterController {
 				institute.setContactNo(request.getParameter("princ_contact"));
 				institute.setEmail(request.getParameter("princ_email"));
 				institute.setInstituteAdd(request.getParameter("inst_add"));
+				
+				institute.setVillage(request.getParameter("village"));
+				institute.setTaluka(request.getParameter("taluka"));
+				institute.setDistrict(request.getParameter("district"));
+				institute.setState(request.getParameter("state"));
+				institute.setPincode(request.getParameter("pin"));
+				
 				institute.setInstituteName(request.getParameter("inst_name"));
 
 				int isReg = Integer.parseInt(request.getParameter("is_registration"));
