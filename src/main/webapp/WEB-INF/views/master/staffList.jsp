@@ -53,7 +53,9 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
 									<a href="${pageContext.request.contextPath}/showRegisterStaff"><button
-											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
 								</c:if>
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -77,24 +79,26 @@
 								</c:if>
 
 								<div class="col-xs-12">
-									<form class="form-horizontal" action="${pageContext.request.contextPath}/delSlectedStaff/0" method="get"
-										name="form_sample_2" id="form_sample_2">
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/delSlectedStaff/0"
+										method="get" name="form_sample_2" id="form_sample_2">
 
-	    <input type="hidden" id="add_fac_detail_id" name="add_fac_detail_id" value="0">
-		<input type="hidden" id="temp" name="temp" value="0">
-		<input type="hidden" id="temp1" name="temp1" value="0">
-		<input type="hidden" id="temp2" name="temp2" value="0">
-		<input type="hidden" id="title" name="title" value="0">
-						
-						
-				
+										<input type="hidden" id="add_fac_detail_id"
+											name="add_fac_detail_id" value="0"> <input
+											type="hidden" id="temp" name="temp" value="0"> <input
+											type="hidden" id="temp1" name="temp1" value="0"> <input
+											type="hidden" id="temp2" name="temp2" value="0"> <input
+											type="hidden" id="title" name="title" value="0">
+
+
+
 										<table id="example-1"
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
-												 <th class="check" style="text-align: center; width: 5%;"><input
+													<th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th> 
+														onClick="selectedInst(this)" /> Select All</th>
 													<th width="5%">Sr No</th>
 													<th>Faculty Name</th>
 													<!-- <th>Qualification</th> -->
@@ -113,8 +117,9 @@
 												<c:forEach items="${staffList}" var="staffList"
 													varStatus="count">
 													<tr>
-														 <td><input type="checkbox" class="chk" name="staffIds"
-															id="staffIds${count.index+1}" value="${staffList.facultyId}" /></td> 
+														<td><input type="checkbox" class="chk"
+															name="staffIds" id="staffIds${count.index+1}"
+															value="${staffList.facultyId}" /></td>
 														<td style="text-align: center">${count.index+1}</td>
 
 														<td style="text-align: left"><c:out
@@ -139,7 +144,7 @@
 																value="${staffList.email}" /></td>
 
 
-														<td style="text-align: center; ">
+														<td style="text-align: center;">
 															<%--  <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Student"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Add HOD"><span
@@ -153,19 +158,27 @@
 																	class="glyphicon glyphicon-edit"></span></a>
 																<a onclick="showAddDetail(${staffList.facultyId},1)"
 																	href="#"><span class="glyphicon glyphicon-user"
-
 																	title="Personal Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																<a onclick="showAddDetail(${staffList.facultyId},2)"
 																	href="#"><span class="glyphicon glyphicon-star"
-
 																	title="M Phil Phd Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																<a onclick="showAddDetail(${staffList.facultyId},3)"
 																	href="#"><span class="glyphicon glyphicon-book"
 																	title="Academic Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-															</c:if>  <c:if test="${deleteAccess == 0}">
+
+
+
+
+
+																<a
+																	href="${pageContext.request.contextPath}/showFacultyAllDetails/${staffList.facultyId}"
+																	href="#"><span class="glyphicon glyphicon-book"
+																	title="View" data-animate=" animated fadeIn "
+																	rel="tooltip"></span></a>
+															</c:if> <c:if test="${deleteAccess == 0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteFaculity/${staffList.facultyId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
@@ -197,13 +210,15 @@
 							</div> -->
 										</div>
 
-										 <c:if test="${deleteAccess==0}">
-											<button class="btn btn-primary" 
-												id="deleteId"
+										<c:if test="${deleteAccess==0}">
+											<button class="btn btn-primary" id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
-											<input type="hidden" id="edit_link_id" name="edit_link_id"
-												value="0">
+												style="align-content: center; width: 113px; margin-left: 40px;">
+												<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+											</button>
+										</c:if>
+										<input type="hidden" id="edit_link_id" name="edit_link_id"
+											value="0">
 									</form>
 
 								</div>
@@ -312,6 +327,9 @@
 			form.submit();
 			
 		}
+		
+		
+		 
 		
 	</script>
 
