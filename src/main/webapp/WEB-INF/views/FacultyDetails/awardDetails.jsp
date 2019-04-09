@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="checkCoGuide(${award.exInt1})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertAwardDetail"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit();">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -124,7 +123,8 @@
 															<input type="text" class="form-control" id="name"
 																autocomplete="off" name="name"
 																placeholder="Name of Award/Recognition"
-																value="${award.awardName}" required onchange="trim(this)">
+																value="${award.awardName}"  onchange="trim(this)">
+																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of award/recognition.</span>
 														</div>
 													</div>
 													<div class="form-group">
@@ -135,8 +135,8 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="agency"
 																name="agency" placeholder="Awarding Agency"
-																autocomplete="off" value="${award.awardAuthority}"
-																required onchange="trim(this)">
+																autocomplete="off" value="${award.awardAuthority}" onchange="trim(this)">
+														<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter award agency.</span>
 														</div>
 
 													</div>
@@ -150,9 +150,40 @@
 															<input type="text" class="form-control" id="nature"
 																autocomplete="off" name="nature"
 																placeholder="Nature of Award/Recognition"
-																value="${award.awardNature}" required onchange="trim(this)">
+																value="${award.awardNature}" onchange="trim(this)">
+																<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter nature of award/recognition.</span>
 														</div>
 													</div>
+													
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Award - Recognition
+																 <span class="text-danger">*</span>
+															</label>
+
+
+															<div class="col-sm-4">
+															Yes <input type="radio" name="award_recog" id="award_recog"  ${award.exInt1 == 1 ? 'checked' : ''} 
+																	 value="1" onclick="checkCoGuide(this.value)">
+																	
+																	 No<input type="radio" onclick="checkCoGuide(this.value)" ${award.exInt1 == 0 ? 'checked' : ''} 
+																	  name="award_recog" id="award_recog" value="0">
+															
+															</div>
+														</div>
+
+														<div class="form-group" id="instv_form" style="display: none;">
+
+															<label class="control-label col-sm-2"   for="smallheading">Name
+																of Incentive <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control " id="incentive" autocomplete="off"  onchange="trim(this)"	 
+																	name="incentive" placeholder="Name of Incentive" value="${award.exVar1}">
+																<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter name of incentive.</span>
+															</div>
+
+
+														</div>
 
 
 													<div class="form-group">
@@ -162,8 +193,9 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker"
-																id="date" name="date" placeholder="Date"
-																autocomplete="off" value="${award.awardDate}" required>
+																id="date" name="date" placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
+																autocomplete="off" value="${award.awardDate}">
+																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter date.</span>
 														</div>
 
 													</div>
@@ -204,9 +236,10 @@
 																	</label>
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
-																			autocomplete="off" placeholder="From Date"
-																			id="fromDate" name="fromDate"
-																			value="${award.awardValidityFrom}"  >
+																			autocomplete="off" placeholder="dd/mm/yyyy"
+																			id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
+																			value="${award.awardValidityFrom}">
+																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter from date.</span>
 																	</div>
 																</div>
 
@@ -217,8 +250,9 @@
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
 																			autocomplete="off" id="toDate" name="toDate"
-																			placeholder="To Date"
-																			value="${award.awardValidityTo}"  >
+																			placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
+																			value="${award.awardValidityTo}">
+																			<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter to date.</span>
 																	</div>
 
 																</div>
@@ -235,9 +269,10 @@
 																	</label>
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
-																			autocomplete="off" placeholder="From Date"
-																			id="fromDate" name="fromDate"
-																			value="${award.awardValidityFrom}" required>
+																			autocomplete="off" placeholder="dd/mm/yyyy"
+																			id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
+																			value="${award.awardValidityFrom}">
+																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter from date.</span>
 																	</div>
 																</div>
 
@@ -248,8 +283,9 @@
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
 																			autocomplete="off" id="toDate" name="toDate"
-																			placeholder="To Date"
-																			value="${award.awardValidityTo}" required>
+																			placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
+																			value="${award.awardValidityTo}">
+																			<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter to date.</span>
 																	</div>
 
 																</div>
@@ -261,10 +297,10 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
+<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showAwardDetailsList"><button
+<a href="${pageContext.request.contextPath}/showAwardDetailsList"><button id="sub2"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -297,8 +333,129 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
+	 function trim(el) {
+	        el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	        replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	        replace(/\n +/, "\n"); // Removes spaces after newlines
+	        return;
+	    }
+	
+            
+            	$(document).ready(function($){
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+            			
+            			 if(!$("#name").val()){
+        					             				
+             				$("#name").addClass("has-error")
+             				$("#error_formfield1").show()
+             					//return false;
+             				} else {
+             					$("#error_formfield1").hide()
+             				}
+            			 if(!$("#agency").val()){
+	             				
+              				$("#agency").addClass("has-error")
+              				$("#error_formfield2").show()
+              					//return false;
+              				} else {
+              					$("#error_formfield2").hide()
+              				}
+            			 
+            			 if(!$("#nature").val()){
+	             				
+              				$("#nature").addClass("has-error")
+              				$("#error_formfield3").show()
+              					//return false;
+              				} else {
+              					$("#error_formfield3").hide()
+              				}
+            			 
+            			 var radioValue = $("input[name='award_recog']:checked"). val();
+      					//alert(radioValue);
+      					if(radioValue==1){
+      						if (!$("#incentive").val()) {
+      							isError = true;
+
+      							$("#incentive").addClass(
+      									"has-error")
+      							$("#error_formfield4").show()
+      						} else {
+      							$("#error_formfield4").hide()
+      						}
+      					}
+            			 
+            			 if(!$("#date").val()){
+	             				
+              				$("#date").addClass("has-error")
+              				$("#error_formfield5").show()
+              					//return false;
+              				} else {
+              					$("#error_formfield5").hide()
+              				}
+            			 
+            			 var radioFrom = $("input[name='validity']:checked"). val();
+       					//alert(radioValue);
+       					if(radioFrom==0){
+       						if (!$("#fromDate").val()) {
+       							isError = true;
+
+       							$("#fromDate").addClass(
+       									"has-error")
+       							$("#error_formfield6").show()
+       						} else {
+       							$("#error_formfield6").hide()
+       						}
+       						
+       						if (!$("#toDate").val()) {
+       							isError = true;
+
+       							$("#toDate").addClass(
+       									"has-error")
+       							$("#error_formfield7").show()
+       						} else {
+       							$("#error_formfield7").hide()
+       						}
+       					
+       					}
+            			 
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
 
 	<script type="text/javascript">
+
+	function checkCoGuide(award_recog) {
+		
+		if (award_recog == 1) {
+//alert("Hi");
+			document.getElementById("instv_form").style = "visible"
+			
+		} else if (award_recog == 0) {
+			document.getElementById("instv_form").style = "display:none"
+			
+		}
+
+	}
+	
+	
 		function check() {
 
 			document.getElementById("abc").style = "display:none";
@@ -333,27 +490,20 @@
 
 			});
 		});
+		
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e){
+			var x=e.which||e.keycode;
+			if((x>=48 && x<=57) || x==8 ||
+				(x>=35 && x<=40)|| x==46)
+				return true;
+			else
+				return false;
+		}
 	</script>
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-          var x=confirm("Do you really want to submit the form?");
-          if(x==true){
-        wasSubmitted = true;
-          document.getElementById("savebtn").disabled=true;
-          document.getElementById("savenextbtn").disabled=true;
-        return wasSubmitted;
-          }
-      }
-      return false;
-    } 
-    function trim(el) {
-        el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-        replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-        replace(/\n +/, "\n"); // Removes spaces after newlines
-        return;
-    }
-</script>
+
 </body>
 </html>

@@ -123,9 +123,6 @@
 														
 
 														<div class="form-group">
-
-
-
 															<label class="control-label col-sm-2" for="smallheading">Name
 																of Ph.D. Scholar <span class="text-danger">*</span>
 															</label>
@@ -134,6 +131,18 @@
 																	name="phd_scholar" placeholder="Name of Ph.D Scholar"
 																	value="${phd.phdScholarName}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name of Ph.D. scholar.</span>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Department Of
+																Scholar <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="phd_scholar_depart" onchange="trim(this)"
+																	name="phd_scholar_depart" placeholder="Department of Scholar"
+																	value="${phd.exVar1}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter department of scholar.</span>
 															</div>
 														</div>
 
@@ -175,8 +184,8 @@
 
 														<div class="form-group">
 
-															<label class="control-label col-sm-2" for="smallheading">Topic/
-																Area of Research <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="smallheading">Topic 
+																of Thesis <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<textarea id="phd_topic" name="phd_topic" onchange="trim(this)"
@@ -375,7 +384,17 @@
             					$("#error_formfield3").hide()
             				}
            				
-           				
+           				if(!$("#phd_scholar_depart").val()){
+          					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#phd_scholar_depart").addClass("has-error")
+            				$("#error_formfield0").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield0").hide()
+            				}
            				
             				
 			            	 if (!isError) {

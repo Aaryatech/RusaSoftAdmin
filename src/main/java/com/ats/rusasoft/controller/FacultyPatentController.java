@@ -320,9 +320,12 @@ public class FacultyPatentController {
 		try {
 
 			model = new ModelAndView("FacultyDetails/awardDetails");
-
+			
+			FacultyAward award = new FacultyAward();
+			model.addObject("award", award);
+			
 			model.addObject("title", "Add Faculty Received Award - Recognition Details");
-
+			
 		} catch (Exception e) {
 
 			System.err.println("exception In showAwardDetails at Library Contr" + e.getMessage());
@@ -444,6 +447,7 @@ public class FacultyPatentController {
 				String date = request.getParameter("date");
 				int validity = Integer.parseInt(request.getParameter("validity"));
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
+				int awrdRecog = Integer.parseInt(request.getParameter("award_recog"));
 
 				String fromDate = request.getParameter("fromDate");
 
@@ -467,6 +471,10 @@ public class FacultyPatentController {
 					faculty.setIsActive(1);
 					faculty.setYearId(acYearId);
 					faculty.setAwardAuthority(agency);
+					faculty.setExInt1(awrdRecog);
+					if(awrdRecog == 1) {
+						faculty.setExVar1(request.getParameter("incentive"));
+					}
 					faculty.setAwardDate(DateConvertor.convertToYMD(date));
 					faculty.setAwardNature(nature);
 					faculty.setAwardValidity(validity);
@@ -474,7 +482,7 @@ public class FacultyPatentController {
 						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
 						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
 					}
-
+					
 					faculty.setMakerUserId(userId);
 					faculty.setMakerEnterDatetime(curDateTime);
 
@@ -489,6 +497,10 @@ public class FacultyPatentController {
 					faculty.setIsActive(1);
 					faculty.setYearId(acYearId);
 					faculty.setAwardAuthority(agency);
+					faculty.setExInt1(awrdRecog);
+					if(awrdRecog == 1) {
+						faculty.setExVar1(request.getParameter("incentive"));
+					}
 					faculty.setAwardDate(DateConvertor.convertToYMD(date));
 					faculty.setAwardNature(nature);
 					faculty.setAwardValidity(validity);
@@ -496,7 +508,6 @@ public class FacultyPatentController {
 						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
 						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
 					}
-
 					faculty.setMakerUserId(userId);
 					faculty.setMakerEnterDatetime(curDateTime);
 

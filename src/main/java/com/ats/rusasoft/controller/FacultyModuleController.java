@@ -2051,7 +2051,7 @@ public class FacultyModuleController {
 			phd.setMakerUserId(userId);
 			phd.setMakerEnterDatetime(curDateTime);
 			phd.setExInt1(0);
-			phd.setExVar1("NA");
+			phd.setExVar1(request.getParameter("phd_scholar_depart"));
 			System.out.println(phd.toString());
 
 			FacultyPhdGuide savePhd = rest.postForObject(Constants.url + "/insertPhdGuide", phd, FacultyPhdGuide.class);
