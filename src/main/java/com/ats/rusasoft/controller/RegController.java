@@ -103,6 +103,13 @@ public class RegController {
 
 				institute.setPresidenContact(request.getParameter("pres_contact"));
 				institute.setPresidentEmail(request.getParameter("pres_email"));
+				
+				
+				institute.setVillage(request.getParameter("village"));
+				institute.setTaluka(request.getParameter("taluka"));
+				institute.setDistrict(request.getParameter("district"));
+				institute.setState(request.getParameter("state"));
+				institute.setPincode(request.getParameter("pin"));
 
 				System.out.println(institute);
 

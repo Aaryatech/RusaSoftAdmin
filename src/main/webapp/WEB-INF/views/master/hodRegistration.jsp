@@ -124,7 +124,7 @@
 															</label>
 															<div class="col-sm-9">
 																<select id="hod_dept_id" name="hod_dept_id"
-																	class="form-control">
+																	class="" multiple>
 																	<c:forEach items="${deptList}" var="dept">
 																		<c:choose>
 																			<c:when test="${hod.deptId==dept.deptId}">
@@ -518,6 +518,14 @@
 		replace(/\n +/, "\n"); // Removes spaces after newlines
 		return;
 	}
+    
+    $("#hod_dept_id").select2({
+        allowClear: true
+    }).on('select2-open', function() {
+        // Adding Custom Scrollbar
+        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+    });
+
 </script>
 
 </body>

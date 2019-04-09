@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -770,13 +772,6 @@ public class MasterController {
 				institute.setExVar2(exVar);
 
 				institute.setInstituteAdd(request.getParameter("inst_add"));
-				
-				institute.setVillage(request.getParameter("village"));
-				institute.setTaluka(request.getParameter("taluka"));
-				institute.setDistrict(request.getParameter("district"));
-				institute.setState(request.getParameter("state"));
-				institute.setPincode(request.getParameter("pin"));
-				
 				institute.setInstituteId(instId);
 				institute.setInstituteName(request.getParameter("inst_name"));
 
@@ -806,6 +801,12 @@ public class MasterController {
 
 				institute.setPresidenContact(request.getParameter("pres_contact"));
 				institute.setPresidentEmail(request.getParameter("pres_email"));
+				
+				institute.setVillage(request.getParameter("village"));
+				institute.setTaluka(request.getParameter("taluka"));
+				institute.setDistrict(request.getParameter("district"));
+				institute.setState(request.getParameter("state"));
+				institute.setPincode(request.getParameter("pin"));
 
 				System.out.println(institute);
 
@@ -830,13 +831,6 @@ public class MasterController {
 				institute.setContactNo(request.getParameter("princ_contact"));
 				institute.setEmail(request.getParameter("princ_email"));
 				institute.setInstituteAdd(request.getParameter("inst_add"));
-				
-				institute.setVillage(request.getParameter("village"));
-				institute.setTaluka(request.getParameter("taluka"));
-				institute.setDistrict(request.getParameter("district"));
-				institute.setState(request.getParameter("state"));
-				institute.setPincode(request.getParameter("pin"));
-				
 				institute.setInstituteName(request.getParameter("inst_name"));
 
 				int isReg = Integer.parseInt(request.getParameter("is_registration"));
@@ -858,6 +852,13 @@ public class MasterController {
 
 				institute.setPresidenContact(request.getParameter("pres_contact"));
 				institute.setPresidentEmail(request.getParameter("pres_email"));
+				
+				
+				institute.setVillage(request.getParameter("village"));
+				institute.setTaluka(request.getParameter("taluka"));
+				institute.setDistrict(request.getParameter("district"));
+				institute.setState(request.getParameter("state"));
+				institute.setPincode(request.getParameter("pin"));
 
 				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 						Institute.class);
@@ -1238,7 +1239,7 @@ public class MasterController {
 
 					Hod hod = new Hod();
 
-					String deptName = request.getParameter("dept_name");
+					// String deptName = request.getParameter("dept_name");
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
 
@@ -1247,10 +1248,21 @@ public class MasterController {
 					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 					String curDate = dateFormatStr.format(new Date());
-
 					hod.setContactNo(request.getParameter("hod_mob"));
 					hod.setDelStatus(1);
-					hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+
+					String[] deptIds = request.getParameterValues("hod_dept_id");
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < deptIds.length; i++) {
+						sb = sb.append(deptIds[i] + ",");
+
+					}
+					String deptIdList = sb.toString();
+					deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+					System.err.println("deptIdList " + deptIdList);
+					hod.setDeptId(deptIdList);
+
 					hod.setEditBy(0);
 					hod.setEmail(request.getParameter("hod_email"));
 					hod.setExInt1(1);
@@ -1285,7 +1297,20 @@ public class MasterController {
 					String curDate = dateFormatStr.format(new Date());
 
 					hod.setContactNo(request.getParameter("hod_mob"));
-					hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+					// hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+
+					String[] deptIds = request.getParameterValues("hod_dept_id");
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < deptIds.length; i++) {
+						sb = sb.append(deptIds[i] + ",");
+
+					}
+					String deptIdList = sb.toString();
+					deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+					System.err.println("deptIdList " + deptIdList);
+					hod.setDeptId(deptIdList);
+
 					hod.setEditBy(userObj.getUserId());// session
 					hod.setEmail(request.getParameter("hod_email"));
 
@@ -1359,6 +1384,10 @@ public class MasterController {
 
 				model.addObject("quolfList", quolfList);
 
+				List<Integer> deptIds = Stream.of(editHod.getDeptId().split(",")).map(Integer::parseInt)
+						.collect(Collectors.toList());
+				
+				model.addObject("deptIds", deptIds);
 			}
 
 		} catch (Exception e) {
@@ -1757,7 +1786,19 @@ public class MasterController {
 
 				hod.setContactNo(request.getParameter("hod_mob"));
 				hod.setDelStatus(1);
-				hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+				// hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+				String[] deptIds = request.getParameterValues("hod_dept_id");
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < deptIds.length; i++) {
+					sb = sb.append(deptIds[i] + ",");
+
+				}
+				String deptIdList = sb.toString();
+				deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+				System.err.println("deptIdList " + deptIdList);
+				hod.setDeptId(deptIdList);
+
 				hod.setEditBy(0);
 				hod.setEmail(request.getParameter("hod_email"));
 				hod.setExInt1(1);
@@ -1792,7 +1833,7 @@ public class MasterController {
 					info = rest.postForObject(Constants.url + "/blockPreviousHodRecord", map, Info.class);
 
 					System.out.println("block previous record" + info.toString());
-//
+					//
 				}
 
 			}
@@ -1810,8 +1851,7 @@ public class MasterController {
 		return redirect;
 
 	}
-	
-	
+
 	/*****************************************************************************************************/
 	@RequestMapping(value = "/viewInstitutes/{instId}", method = RequestMethod.GET)
 	public ModelAndView viewInstitutes(HttpServletRequest request, HttpServletResponse response,
@@ -1821,25 +1861,28 @@ public class MasterController {
 		String a = null;
 		try {
 			HttpSession session = request.getSession();
-			/*List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "1", "0", "0", "0", newModuleList);
+			/*
+			 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+			 * session.getAttribute("newModuleList"); Info view =
+			 * AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute",
+			 * "1", "0", "0", "0", newModuleList);
+			 * 
+			 * if (view.isError() == true) {
+			 * 
+			 * model = new ModelAndView("accessDenied");
+			 * 
+			 * } else {
+			 */
 
-			if (view.isError() == true) {
-
-				model = new ModelAndView("accessDenied");
-
-			} else {*/
-			
 			model = new ModelAndView("showInstitute");
-			//int instituteId = Integer.parseInt(request.getParameter("instId"));
+			// int instituteId = Integer.parseInt(request.getParameter("instId"));
 			System.out.println("id are" + instId);
-			
+
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("instId", instId);
-						
-			Institute showInst = rest.postForObject(Constants.url + "/showInstituteData", map,
-					Institute.class);
-			
+
+			Institute showInst = rest.postForObject(Constants.url + "/showInstituteData", map, Institute.class);
+
 			model.addObject("showInst", showInst);
 			/*
 			 * Info delete = AccessControll.checkAccess("showPendingInstitute",
@@ -1849,46 +1892,45 @@ public class MasterController {
 			 * 
 			 * }
 			 */
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/deleteInst/{instId}", method = RequestMethod.GET)
 	public String deleteInstitutes(@PathVariable("instId") int instId, HttpServletRequest request) {
-		
+
 		String a = null;
 		try {
-		HttpSession session = request.getSession();
-	List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "0", "0", "1", newModuleList);
-		
-		if (view.isError() == true) {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showPendingInstitute", "showPendingInstitute", "0", "0", "0", "1",
+					newModuleList);
 
-			a = "redirect:/accessDenied";
+			if (view.isError() == true) {
 
-		} else {
+				a = "redirect:/accessDenied";
 
-			Info inf = new Info();
-			System.out.println("Id:" + instId);
+			} else {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("instId", instId);
-			Info inst = rest.postForObject(Constants.url + "/deleteInstituteById", map, Info.class);
+				Info inf = new Info();
+				System.out.println("Id:" + instId);
 
-			a = "redirect:/showPendingInstitute";
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instId", instId);
+				Info inst = rest.postForObject(Constants.url + "/deleteInstituteById", map, Info.class);
+
+				a = "redirect:/showPendingInstitute";
 
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return a;
 
 	}
-	
 
 }

@@ -5,7 +5,7 @@ public class GetHod {
 	private int hodId;
 	private int instituteId;
 
-	private int deptId;
+	private String deptId;
 	
  	
  	private String hodName;
@@ -31,11 +31,11 @@ public class GetHod {
 		this.instituteId = instituteId;
 	}
 
-	public int getDeptId() {
+	public String getDeptId() {
 		return deptId;
 	}
 
-	public void setDeptId(int deptId) {
+	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
 
