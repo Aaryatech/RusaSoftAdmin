@@ -222,7 +222,7 @@
 															</div>
 														</div>
 
-														<div class="form-group">
+														<%-- <div class="form-group">
 															<label class="control-label col-sm-4" for="page_order"
 														> State Treasury Code <span
 																class="text-danger">*</span>
@@ -248,7 +248,7 @@
 																	placeholder="Rusa ID No." >
 							<span class="error_form text-danger" id="error_rusa" style="display:none;" >Please enter Rusa ID</span>
 															</div>
-														</div>
+														</div> --%>
 
 
 
@@ -278,10 +278,10 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
+<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showInstituteInfoList"><button
+<a href="${pageContext.request.contextPath}/showInstituteInfoList"><button id="sub2"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -388,7 +388,7 @@
                 				} else {
                 					$("#error_curr").hide()
                 				}
-            				if(!$("#treasury_code").val() || !numbersOnlyNotZero($("#treasury_code").val())){
+            				/* if(!$("#treasury_code").val() || !numbersOnlyNotZero($("#treasury_code").val())){
             		            
                 				isError=true;
                 				
@@ -406,7 +406,7 @@
                 					//return fregister_useralse;
                 				} else {
                 					$("#error_rusa").hide()
-                				}
+                				} */
             				
 
 							if (!isError) {

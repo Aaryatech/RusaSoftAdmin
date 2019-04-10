@@ -1656,8 +1656,8 @@ public class LibraryController {
 				int no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
 				int no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));
 				int no_currAdmitted_Student = Integer.parseInt(request.getParameter("no_currAdmitted_Student"));
-				String treasury_code = request.getParameter("treasury_code");
-				String rusa_idNo = request.getParameter("rusa_idNo");
+				String treasury_code = "NA"; //request.getParameter("treasury_code");
+				String rusa_idNo = "NA"; //request.getParameter("rusa_idNo");
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
@@ -1723,10 +1723,9 @@ public class LibraryController {
 				}
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
+				if (isView == 0)
 					a = "redirect:/showInstituteInfoList";
-				else
-					a = "redirect:/showFillInstituteInfo";
+				
 			}
 
 		} catch (Exception e) {

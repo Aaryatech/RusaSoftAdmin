@@ -345,9 +345,9 @@
 												</div>
 
 
-												<div class="form-group">
+												<div class="form-group" id="iom">
 
-													<label class="control-label col-sm-2" for="instituteOfMoU">Institute of MoU
+													<label class="control-label col-sm-2" for="instituteOfMoU">Institute
 														of MoU <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
@@ -609,12 +609,13 @@
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
+					document.getElementById("abc").style = "display:none"
 				//	document.getElementById("otherCourse").setAttribute("required","true");
 
 			} else {
 				document.getElementById("abc").style = "display:none"
 				//	document.getElementById("otherCourse").removeAttribute("required");
-
+					document.getElementById("iom").style = "visible";
 			}
 
 		}
@@ -629,6 +630,7 @@
 				//alert("In If " +x);
 				document.getElementById("abc").style = "visible";
 				document.getElementById("otherCourse").setAttribute("required","true");
+				document.getElementById("iom").style = "display:none"  
 			}else{ 
 		document.getElementById("abc").style = "display:none"                         
 			}

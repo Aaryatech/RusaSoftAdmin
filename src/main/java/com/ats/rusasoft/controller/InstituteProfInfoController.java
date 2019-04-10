@@ -408,7 +408,7 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
-				model.addObject("title", "Institute's Functional MoU List");
+				model.addObject("title", "Functional MoU with Agency Institution List");
 
 				int acYearId = (int) session.getAttribute("acYearId");
 				int inst_id = (int) session.getAttribute("instituteId");
@@ -484,7 +484,7 @@ public class InstituteProfInfoController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
-				model.addObject("title", "Add Institute's Functional MoU");
+				model.addObject("title", "Add Functional MoU with Agency Institution");
 				InstituteFunctionalMOU editInst = new InstituteFunctionalMOU();
 
 				model.addObject("editInst", editInst);
@@ -680,7 +680,7 @@ public class InstituteProfInfoController {
 				int edit_mou_id = Integer.parseInt(request.getParameter("edit_mou_id"));
 				System.out.println("edit_mou_id id is" + edit_mou_id);
 
-				model.addObject("title", " Edit Institute's Functional MoU0");
+				model.addObject("title", " Edit Functional MoU with Agency Institution");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("mouId", edit_mou_id);
 
