@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.FacultyConsultancy;
+import com.ats.rusasoft.model.GetFacultyConsultancy;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
@@ -72,9 +73,15 @@ public class FacultyConsultancyController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("yearId", acYearId);
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				FacultyConsultancy[] arry = restTemplate.postForObject(
-						Constants.url + "getFacultyConsultancyListByFacultyId", map, FacultyConsultancy[].class);
-				List<FacultyConsultancy> list = new ArrayList<FacultyConsultancy>(Arrays.asList(arry));
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+
+				GetFacultyConsultancy[] arry = restTemplate.postForObject(
+						Constants.url + "getConListByFacultyIdAndtype", map, GetFacultyConsultancy[].class);
+				List<GetFacultyConsultancy> list = new ArrayList<GetFacultyConsultancy>(Arrays.asList(arry));
 				model.addObject("list", list);
 
 			} else {

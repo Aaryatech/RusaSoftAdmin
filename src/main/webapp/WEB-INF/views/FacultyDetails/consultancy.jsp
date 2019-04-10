@@ -86,14 +86,16 @@
 							<div class="actions panel_actions pull-right">
 
 								<c:if test="${isAdd==1}">
-								<%-- 	<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
+									<%-- 	<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
 											type="button" class="btn btn-success">Add</button></a> --%>
-											
-											
-											
-	  <a title="Add"
-											href="${pageContext.request.contextPath}/showAddConsultancy"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+
+
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddConsultancy"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
 								</c:if>
 
 
@@ -127,6 +129,8 @@
 													<tr>
 														<th>Sr No</th>
 														<th>Nature of Consultancy</th>
+														<th>Faculty Name</th>
+														<th>Department</th>
 														<th>Sponsoring Industry</th>
 														<th>Consultancy Amount</th>
 														<th>Consultancy Period</th>
@@ -139,11 +143,11 @@
 													<c:forEach items="${list}" var="list" varStatus="count">
 														<tr>
 
-															<td style="text-align: center; ">${count.index+1}</td>
+															<td style="text-align: center;">${count.index+1}</td>
 															<td>${list.consNature}</td>
 															<td>${list.consSponsor}</td>
-															<td style="text-align: right; ">${list.consAmount}</td>
-															<td style="text-align: right; ">${list.consPeriod}</td>
+															<td style="text-align: right;">${list.consAmount}</td>
+															<td style="text-align: right;">${list.consPeriod}</td>
 															<td><c:set value="-" var="isCompleted"></c:set> <c:choose>
 																	<c:when test="${list.isConsCompleted==1}">
 																		<c:set value="Yes" var="isCompleted"></c:set>
@@ -154,7 +158,8 @@
 																</c:choose>${isCompleted}</td>
 
 
-															<td style="text-align: center; "><c:if test="${isEdit==1}">
+															<td style="text-align: center;"><c:if
+																	test="${isEdit==1}">
 																	<a
 																		href="${pageContext.request.contextPath}/editConsultancy/${list.consId}"><span
 																		class="glyphicon glyphicon-edit" title="Edit"

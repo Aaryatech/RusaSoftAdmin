@@ -30,6 +30,7 @@ import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.FacultyAward;
 import com.ats.rusasoft.model.FacultyOutreach;
 import com.ats.rusasoft.model.FacultyPatent;
+import com.ats.rusasoft.model.GetFacultyPatent;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LoginResponse;
@@ -65,12 +66,20 @@ public class FacultyPatentController {
 
 				model = new ModelAndView("FacultyDetails/patentDetailList");
 
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				FacultyPatent[] arry = rest.postForObject(Constants.url + "/getPatentListByFacultyId", map,
-						FacultyPatent[].class);
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
 
-				List<FacultyPatent> facultyPatentList = new ArrayList<>(Arrays.asList(arry));
+				GetFacultyPatent[] arry = rest.postForObject(Constants.url + "/getPatentListByFacultyIdAndtype", map,
+						GetFacultyPatent[].class);
+
+				List<GetFacultyPatent> facultyPatentList = new ArrayList<>(Arrays.asList(arry));
 
 				for (int i = 0; i < facultyPatentList.size(); i++) {
 
@@ -320,12 +329,12 @@ public class FacultyPatentController {
 		try {
 
 			model = new ModelAndView("FacultyDetails/awardDetails");
-			
+
 			FacultyAward award = new FacultyAward();
 			model.addObject("award", award);
-			
+
 			model.addObject("title", "Add Faculty Received Award - Recognition Details");
-			
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showAwardDetails at Library Contr" + e.getMessage());
@@ -472,7 +481,7 @@ public class FacultyPatentController {
 					faculty.setYearId(acYearId);
 					faculty.setAwardAuthority(agency);
 					faculty.setExInt1(awrdRecog);
-					if(awrdRecog == 1) {
+					if (awrdRecog == 1) {
 						faculty.setExVar1(request.getParameter("incentive"));
 					}
 					faculty.setAwardDate(DateConvertor.convertToYMD(date));
@@ -482,7 +491,7 @@ public class FacultyPatentController {
 						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
 						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
 					}
-					
+
 					faculty.setMakerUserId(userId);
 					faculty.setMakerEnterDatetime(curDateTime);
 
@@ -498,7 +507,7 @@ public class FacultyPatentController {
 					faculty.setYearId(acYearId);
 					faculty.setAwardAuthority(agency);
 					faculty.setExInt1(awrdRecog);
-					if(awrdRecog == 1) {
+					if (awrdRecog == 1) {
 						faculty.setExVar1(request.getParameter("incentive"));
 					}
 					faculty.setAwardDate(DateConvertor.convertToYMD(date));
