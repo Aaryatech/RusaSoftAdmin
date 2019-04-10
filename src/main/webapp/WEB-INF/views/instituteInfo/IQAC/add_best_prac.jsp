@@ -97,23 +97,24 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteBestPract"
-										method="post" name="form_sample_2" id="form_sample_2"
-										>
+										method="post" name="form_sample_2" id="form_sample_2">
 
 
 
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="participant">Name of Best Practices
-												<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="participant">Name
+												of Best Practice <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="bestPrac"
 													autocomplete="off" name="bestPrac" onchange="trim(this)"
-													placeholder="Name of Best Practices"
-													value="${editInst.practicesName}" >
-	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Name of Best Practices</span>	
+													placeholder="Name of Best Practice"
+													value="${editInst.practicesName}"> <span
+													class="error_form text-danger" id="error_name"
+													style="display: none;">Please Enter Name of Best
+													Practice</span>
 
 											</div>
 										</div>
@@ -121,16 +122,18 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="benificiary">Name of Best Beneficiaries
-												<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="benificiary">Name
+												of Best Student/Staff/Both <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="benificiary"
 													autocomplete="off" name="benificiary" onchange="trim(this)"
-													placeholder="Name of Best Beneficiaries"
-													value="${editInst.practicesBeneficiary}" >
-			<span class="error_form text-danger" id="error_bef" style="display:none;" >Please Enter Name of Best Beneficiaries</span>	
-		
+													placeholder="Name of Best Student/Staff/Both"
+													value="${editInst.practicesBeneficiary}"> <span
+													class="error_form text-danger" id="error_bef"
+													style="display: none;">Please Enter Name of Best
+													Student/Staff/Both</span>
+
 											</div>
 										</div>
 
@@ -145,34 +148,41 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													autocomplete="off" id="practices_effective_from" placeholder="dd-mm-yyyy"
-													name="practices_effective_from" value="${date}"
-													>
-													
-<span class="error_form text-danger" id="error_eff" style="display:none;" >Please Select Effective From</span>	
+													autocomplete="off" id="practices_effective_from"
+													placeholder="dd-mm-yyyy" name="practices_effective_from"
+													value="${date}"> <span
+													class="error_form text-danger" id="error_eff"
+													style="display: none;">Please Select Effective From</span>
 
 											</div>
 										</div>
 
-										 <input type="hidden" id="prac_id" name="prac_id" value="${editInst.practicesId}">
-                                      	<input type="hidden" id="is_view" name="is_view" value="0">
-                                             	
-                                             	
-												<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+										<input type="hidden" id="prac_id" name="prac_id"
+											value="${editInst.practicesId}"> <input type="hidden"
+											id="is_view" name="is_view" value="0">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showBestPractice"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
+
+
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showBestPractice"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 									</form>
-<p class="desc text-danger fontsize11">Notice : * Fields
+									<p class="desc text-danger fontsize11">Notice : * Fields
 										are Mandatory.</p>
-									
+
 								</div>
 							</div>
 						</div>
@@ -194,104 +204,90 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script>
-           
-         
-            
-            	$(document).ready(function($){
-          //  alert("hii....");
-            		$("#form_sample_2").submit(function(e) {
-            			 var isError=false;
-            			 var errMsg="";
-            				
-            			 if(!$("#bestPrac").val()){
-        					 
-             				isError=true;
-             				
-             				
-             				$("#bestPrac").addClass("has-error")
-             				$("#error_name").show()
-             					//return false;
-             				} else {
-             					$("#error_name").hide()
-             				}
-            			 
-            			 if(!$("#benificiary").val()){
-        					 
-              				isError=true;
-              				
-              				
-              				$("#benificiary").addClass("has-error")
-              				$("#error_bef").show()
-              					//return false;
-              				} else {
-              					$("#error_bef").hide()
-              				}
-            			 
-            			 if(!$("#practices_effective_from").val()){
-        					 
-               				isError=true;
-               				
-               				
-               				$("#practices_effective_from").addClass("has-error")
-               				$("#error_eff").show()
-               					//return false;
-               				} else {
-               					$("#error_eff").hide()
-               				}
-             			 
-             			 
+	<script>
+		$(document).ready(function($) {
+			//  alert("hii....");
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
 
-							if (!isError) {
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									return  true;
-									 document.getElementById("sub1").disabled=true;
-           						  document.getElementById("sub2").disabled=true;
-								}
-							}
-            
-            			  
-            						 
-            					   return false;
-            				} );
-            	});
-			//
-			
-			    
-          
-        </script>
+				if (!$("#bestPrac").val()) {
 
-<script type="text/javascript">
-function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+					isError = true;
 
-		form.action=("insertLibrarian");
-		var x =confirm();
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-	
-var wasSubmitted = false;    
-function checkBeforeSubmit(){
-  if(!wasSubmitted) {
-	  var x=confirm("Do you really want to submit the form?");
-	  if(x==true){
-    wasSubmitted = true;
-	  document.getElementById("sub1").disabled=true;
-	  document.getElementById("sub2").disabled=true;
+					$("#bestPrac").addClass("has-error")
+					$("#error_name").show()
+					//return false;
+				} else {
+					$("#error_name").hide()
+				}
 
-    return wasSubmitted;
-	  }
-  }
-  return false;
-}    
+				if (!$("#benificiary").val()) {
+
+					isError = true;
+
+					$("#benificiary").addClass("has-error")
+					$("#error_bef").show()
+					//return false;
+				} else {
+					$("#error_bef").hide()
+				}
+
+				if (!$("#practices_effective_from").val()) {
+
+					isError = true;
+
+					$("#practices_effective_from").addClass("has-error")
+					$("#error_eff").show()
+					//return false;
+				} else {
+					$("#error_eff").hide()
+				}
+
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						return true;
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+					}
+				}
+
+				return false;
+			});
+		});
+		//
 	</script>
-	
+
+	<script type="text/javascript">
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+			/* var form=document.getElementById("form_sample_2");
+			form.setAttribute("method", "post");
+
+			form.action=("insertLibrarian");
+			var x =confirm();
+			if(x==true)
+			form.submit(); */
+
+		}
+
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
+
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+	</script>
+
 
 
 

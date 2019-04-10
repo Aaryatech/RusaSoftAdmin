@@ -86,8 +86,8 @@
 							<div class="actions panel_actions pull-right">
 								<%-- <a href="${pageContext.request.contextPath}/showAMC"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
-										
-										
+
+
 
 							</div>
 
@@ -99,8 +99,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteAMC"
-										method="post" name="form_sample_2" id="form_sample_2"
-										>
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<div class="form-group">
 
@@ -110,9 +109,10 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_title"
 													autocomplete="off" name="amc_title" onchange="trim(this)"
-													placeholder="Title of Maintenance" value="${editInst.amcTitle}"
-													>
-	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Title </span>	
+													placeholder="Title of Maintenance"
+													value="${editInst.amcTitle}"> <span
+													class="error_form text-danger" id="error_name"
+													style="display: none;">Please Enter Title </span>
 
 											</div>
 										</div>
@@ -126,8 +126,10 @@
 													onkeypress="return allowOnlyNumber(event)"
 													id="amc_expenditure" name="amc_expenditure"
 													placeholder="AMC Expenditure" autocomplete="off"
-													value="${editInst.amcExpenditure}" >
-	<span class="error_form text-danger" id="error_exp" style="display:none;" >Please Enter AMC Expenditure  </span>	
+													value="${editInst.amcExpenditure}"> <span
+													class="error_form text-danger" id="error_exp"
+													style="display: none;">Please Enter AMC Expenditure
+												</span>
 
 											</div>
 										</div>
@@ -140,47 +142,57 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_company"
-													name="amc_company" placeholder="Name of Company"onchange="trim(this)" 
-													autocomplete="off" value="${editInst.amcCompany}" >
-	<span class="error_form text-danger" id="error_comp" style="display:none;" >Please Enter Company Name </span>	
+													name="amc_company" placeholder="Name of Company"
+													onchange="trim(this)" autocomplete="off"
+													value="${editInst.amcCompany}"> <span
+													class="error_form text-danger" id="error_comp"
+													style="display: none;">Please Enter Company Name </span>
 
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="amc_remark">AMC
-												Remark<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="amc_remark">
+												Scope of AMC<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="amc_remark"
-													name="amc_remark" placeholder="AMC Remark" onchange="trim(this)"
-													autocomplete="off" value="${editInst.amcRemarks}" >
-	<span class="error_form text-danger" id="error_amc" style="display:none;" >Please Enter Remark </span>	
+													name="amc_remark" placeholder="Scope of AMC"
+													onchange="trim(this)" autocomplete="off"
+													value="${editInst.amcRemarks}"> <span
+													class="error_form text-danger" id="error_amc"
+													style="display: none;">Please Enter Scope of AMC </span>
 
 											</div>
 										</div>
 
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
-											<input type="hidden" id="amc_id" name="amc_id" value="${editInst.amcId}">
-											
-											
-											  <div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+										<input type="hidden" id="amc_id" name="amc_id"
+											value="${editInst.amcId}">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showAMC"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
+
+
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/showAMC"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 									</form>
-<p class="desc text-danger fontsize11">Notice : * Fields
+									<p class="desc text-danger fontsize11">Notice : * Fields
 										are Mandatory.</p>
-									
+
 								</div>
 							</div>
 						</div>
@@ -201,8 +213,8 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
+
+
 	<script>
            
              function numbersOnlyNotZero(id_number) {
@@ -300,7 +312,7 @@
 			    
           
         </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 function submit_f(view){
 		document.getElementById("is_view").value=view;//create this 
 		/* var form=document.getElementById("form_sample_2");
@@ -336,10 +348,10 @@ function checkBeforeSubmit(){
 	}
 }    
 	</script>
-	
-	
-	
-	
+
+
+
+
 
 
 	<script type="text/javascript">

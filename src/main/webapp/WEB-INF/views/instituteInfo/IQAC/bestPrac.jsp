@@ -54,17 +54,19 @@
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 
-								  <c:if test="${addAccess == 0}"> 
-								<%-- <a
+								<c:if test="${addAccess == 0}">
+									<%-- <a
 									href="${pageContext.request.contextPath}/showAddBestPractice"><button
 										type="button" class="btn btn-success">Add</button></a>  --%>
-										
-<a title="Add"
-											href="${pageContext.request.contextPath}/showAddBestPractice"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
-									</c:if>
 
-							
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddBestPractice"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
+
+
 
 							</div>
 
@@ -89,66 +91,73 @@
 
 
 
-											<table id="example-1" class="display dataTable" role="grid"
-												aria-describedby="example-4_info" style="width: 100%;">
-												<thead>
+										<table id="example-1" class="display dataTable" role="grid"
+											aria-describedby="example-4_info" style="width: 100%;">
+											<thead>
 
-													<tr>
-														<th class="check" style="text-align: center; width: 5%;"
-															><input type="checkbox" name="selAll"
-															id="selAll" onClick="selectedInst(this)" /> Select All</th>
-														
-												
+												<tr>
+													<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
+
+
 													<th width="10%">Sr No</th>
 													<th>Name</th>
-													<th>Beneficiary</th>
+													<th>Student/Staff/Both</th>
 													<th>Effective From</th>
 													<th>Action</th>
 
 												</tr>
-										
-
-												</thead>
 
 
+											</thead>
 
 
-												<tbody>
-													<c:forEach items="${pracList}" var="pracList"
-														varStatus="count">
-														<tr>
-															<td style="text-align: center; "><input type="checkbox" class="chk" name="pracIds"
-																id="pracIds${count.index+1}" value="${pracList.practicesId}" /></td>
-															<td style="text-align: center; ">${count.index+1}</td>
-															<td>${pracList.practicesName}</td>
-															<td>${pracList.practicesBeneficiary}</td>
-															<td style="text-align:center;">${pracList.practicesEffectiveFrom}</td>
-														
-															<td style="text-align: center;">
-																  <c:if test="${editAccess == 0}">  <a
-																href="#" onclick="showEditColLinkage(${pracList.practicesId})"><span
-																	class="glyphicon glyphicon-edit"  title="Edit" data-original-title="Edit"
+
+
+											<tbody>
+												<c:forEach items="${pracList}" var="pracList"
+													varStatus="count">
+													<tr>
+														<td style="text-align: center;"><input
+															type="checkbox" class="chk" name="pracIds"
+															id="pracIds${count.index+1}"
+															value="${pracList.practicesId}" /></td>
+														<td style="text-align: center;">${count.index+1}</td>
+														<td>${pracList.practicesName}</td>
+														<td>${pracList.practicesBeneficiary}</td>
+														<td style="text-align: center;">${pracList.practicesEffectiveFrom}</td>
+
+														<td style="text-align: center;"><c:if
+																test="${editAccess == 0}">
+																<a href="#"
+																	onclick="showEditColLinkage(${pracList.practicesId})"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-original-title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-																</c:if>   <c:if test="${deleteAccess == 0}">
+															</c:if> <c:if test="${deleteAccess == 0}">
 																&nbsp;&nbsp;&nbsp;&nbsp; <a
-																href="${pageContext.request.contextPath}/deleteBestPrac/${pracList.practicesId}"
-																onClick="return confirm('Are you sure want to delete this record');"
-																rel="tooltip" data-color-class="danger" title="Delete" data-original-title="Delete"
-																data-animate=" animated fadeIn " data-toggle="tooltip"
-																data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a> 	</c:if>
-															</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-									
+																	href="${pageContext.request.contextPath}/deleteBestPrac/${pracList.practicesId}"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-original-title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
+																	class="glyphicon glyphicon-remove"></span></a>
+															</c:if></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+
 										<div class="col-lg-1">
-  <c:if test="${deleteAccess==0}">
-											<button class="btn btn-primary" 
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
+											<c:if test="${deleteAccess==0}">
+												<button class="btn btn-primary" id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+												</button>
+											</c:if>
 											<input type="hidden" id="edit_prac_id" name="edit_prac_id"
 												value="0">
 
@@ -255,7 +264,7 @@
 		}
 
 	</script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	function hideText() {
 		//alert("hii");
 		var qualType = document.getElementById("MOU_agency").value

@@ -85,13 +85,15 @@
 
 							<div class="actions panel_actions pull-right">
 
-							<%-- 	<a href="${pageContext.request.contextPath}/showResearchDetails"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showResearchDetails"><button
 										type="button" class="btn btn-success">Add</button></a>
  --%>
- 
- 	  <a title="Add"
-											href="${pageContext.request.contextPath}/showResearchDetails"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showResearchDetails"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 							</div>
 
 						</header>
@@ -106,17 +108,10 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-
-
-
-
-
 										<!-- <label class="control-label col-sm-3" for="smallheading">Educational
 															Qualifications : <span class="text-danger">*</span>
 														</label> -->
 										<div class="col-xs-12">
-
-
 
 
 											<table id="example-1"
@@ -124,8 +119,10 @@
 												<thead>
 													<tr>
 														<th>Sr No</th>
-														<th>Name of Project</th>
-														<th>Year of Project Sanction</th>
+														<th>Project Name</th>
+														<th>Faculty Name</th>
+														<th>Department</th>
+														<th>Project Sanction Year</th>
 														<th>Sponsoring Authority</th>
 														<th>Total Amount</th>
 														<th>Amount Received</th>
@@ -141,6 +138,12 @@
 
 															<td style="text-align: left"><c:out
 																	value="${journal.projName}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${journal.facultyFirstName}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${journal.deptName}" /></td>
 
 
 

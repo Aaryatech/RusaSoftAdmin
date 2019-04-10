@@ -85,12 +85,14 @@
 
 							<div class="actions panel_actions pull-right">
 
-							<%-- 	<a href="${pageContext.request.contextPath}/showJournalPub"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showJournalPub"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-										
-										 <a title="Add"
-											href="${pageContext.request.contextPath}/showJournalPub"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showJournalPub"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 
 							</div>
 
@@ -122,7 +124,10 @@
 												<thead>
 													<tr>
 														<th>Sr No</th>
-														<th>Name of Journal</th>
+														<th>Journal Name</th>
+														<th>Faculty Name</th>
+														<th>Department</th>
+
 														<th>Publication Year</th>
 														<th>Issue</th>
 														<th>Volume</th>
@@ -139,6 +144,12 @@
 
 															<td style="text-align: left"><c:out
 																	value="${journal.journalName}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${journal.facultyFirstName}" /></td>
+
+															<td style="text-align: left"><c:out
+																	value="${journal.deptName}" /></td>
 
 
 

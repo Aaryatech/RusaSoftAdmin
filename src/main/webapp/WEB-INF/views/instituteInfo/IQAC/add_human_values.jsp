@@ -158,12 +158,12 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="participant">No.
-												of Participants<span class="text-danger">*</span>
+												of Beneficiaries<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
 													autocomplete="off" min="0" name="participant"
-													placeholder="No. of Participants"
+													placeholder="No. of Beneficiaries"
 													value="${editValue.activityPcount}"> <span
 													class="error_form text-danger" id="error_participant"
 													style="display: none;">Please enter No of
@@ -174,16 +174,21 @@
 											value="${editValue.valueId}"> <input type="hidden"
 											id="is_view" name="is_view" value="0">
 										<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showHumanValues"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
-										
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/showHumanValues"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
+
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields

@@ -29,6 +29,9 @@ public class GetJournal {
 	private String exVar1;
 	private String exVar2;
 
+	private String deptName;
+	private String facultyFirstName;
+
 	public int getJournalId() {
 		return journalId;
 	}
@@ -181,6 +184,22 @@ public class GetJournal {
 		this.exVar2 = exVar2;
 	}
 
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getFacultyFirstName() {
+		return facultyFirstName;
+	}
+
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
+	}
+
 	@Override
 	public String toString() {
 		return "GetJournal [journalId=" + journalId + ", facultyId=" + facultyId + ", yearId=" + yearId
@@ -189,7 +208,8 @@ public class GetJournal {
 				+ journalPgFrom + ", journalPgTo=" + journalPgTo + ", journalStandard=" + journalStandard
 				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
 				+ ", makerEnterDatetime=" + makerEnterDatetime + ", exInt1=" + exInt1 + ", exInt2=" + exInt2
-				+ ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + "]";
+				+ ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", deptName=" + deptName + ", facultyFirstName="
+				+ facultyFirstName + "]";
 	}
 
 }

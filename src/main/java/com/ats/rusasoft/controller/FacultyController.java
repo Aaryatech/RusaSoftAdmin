@@ -202,8 +202,13 @@ public class FacultyController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
 
-				List<GetJournal> jouList = rest.postForObject(Constants.url + "/getJournalListByFacultyId", map,
+				List<GetJournal> jouList = rest.postForObject(Constants.url + "/getJournalListByFacultyIdAndtype", map,
 						List.class);
 
 				System.out.println("jouList" + jouList);
@@ -472,9 +477,14 @@ public class FacultyController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
 
-				List<GetResearchProject> jouList = rest.postForObject(Constants.url + "/getProjectListByFacultyId", map,
-						List.class);
+				List<GetResearchProject> jouList = rest
+						.postForObject(Constants.url + "/getProjectListByFacultyIdAndtype", map, List.class);
 
 				System.out.println("jouList" + jouList);
 

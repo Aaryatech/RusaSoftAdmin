@@ -104,9 +104,11 @@ legend.scheduler-border {
 							<div class="actions panel_actions pull-right">
 								<%-- <a href="${pageContext.request.contextPath}/showAddHumanValues"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-			  <a title="Add"
-											href="${pageContext.request.contextPath}/showAddHumanValues"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showAddHumanValues"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 							</div>
 
 						</header>
@@ -144,7 +146,7 @@ legend.scheduler-border {
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Title of Program/Activity</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
-														<th rowspan="2">No. of Participants</th>
+														<th rowspan="2">No. of Beneficiaries</th>
 														<th rowspan="2">Action</th>
 													</tr>
 													<tr>
@@ -325,7 +327,7 @@ legend.scheduler-border {
 			</div>
 		</div>
 	</div>
-	
+
 
 
 
