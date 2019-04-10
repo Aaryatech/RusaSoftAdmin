@@ -593,7 +593,7 @@ public class IqacController {
 				staff.setFacultyId(Integer.parseInt(request.getParameter("faculty_id")));
 		
 				staff.setInstituteId(instituteId);
-				staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
+				//staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
 				staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
 				staff.setFacultyMiddelName("NA");
 				staff.setFacultyLastName("NA");
