@@ -1,20 +1,16 @@
 package com.ats.rusasoft.faculty.model;
 
-
-
-
 public class GetFacultyOutreach {
-	
-	
-	
-    private int outreachId;
+
+	private int outreachId;
 	private String typeName;
-	
+
 	private String outreachDate;
-	
+
 	private String outreachLevel;
-	
+
 	private String outreachName;
+
 	public int getOutreachId() {
 		return outreachId;
 	}
@@ -23,7 +19,6 @@ public class GetFacultyOutreach {
 		this.outreachId = outreachId;
 	}
 
-	
 	public String getTypeName() {
 		return typeName;
 	}
@@ -61,12 +56,5 @@ public class GetFacultyOutreach {
 		return "GetFacultyOutreach [outreachId=" + outreachId + ", typeName=" + typeName + ", outreachDate="
 				+ outreachDate + ", outreachLevel=" + outreachLevel + ", outreachName=" + outreachName + "]";
 	}
-
-	
-	
-	
-	
-	
-	
 
 }

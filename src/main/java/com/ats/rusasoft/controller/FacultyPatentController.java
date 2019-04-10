@@ -25,11 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.GetFacultyOutrea;
 import com.ats.rusasoft.faculty.model.GetFacultyOutreach;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.FacultyAward;
 import com.ats.rusasoft.model.FacultyOutreach;
 import com.ats.rusasoft.model.FacultyPatent;
+import com.ats.rusasoft.model.GetFacultyAward;
 import com.ats.rusasoft.model.GetFacultyPatent;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Librarian;
@@ -81,14 +83,17 @@ public class FacultyPatentController {
 
 				List<GetFacultyPatent> facultyPatentList = new ArrayList<>(Arrays.asList(arry));
 
-				for (int i = 0; i < facultyPatentList.size(); i++) {
-
-					facultyPatentList.get(i).setPatentFilingDate(
-							DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentFilingDate()));
-					facultyPatentList.get(i)
-							.setPatentPubDate(DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentPubDate()));
-
-				}
+				/*
+				 * for (int i = 0; i < facultyPatentList.size(); i++) {
+				 * 
+				 * facultyPatentList.get(i).setPatentFilingDate(
+				 * DateConvertor.convertToDMY(facultyPatentList.get(i).getPatentFilingDate()));
+				 * facultyPatentList.get(i)
+				 * .setPatentPubDate(DateConvertor.convertToDMY(facultyPatentList.get(i).
+				 * getPatentPubDate()));
+				 * 
+				 * }
+				 */
 
 				System.out.println("faculty Patent List :" + facultyPatentList);
 
@@ -367,19 +372,29 @@ public class FacultyPatentController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/awardDetailsList");
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				FacultyAward[] arr = rest.postForObject(Constants.url + "/getAwardListByFacultyId", map,
-						FacultyAward[].class);
-				List<FacultyAward> facultyAwardList = new ArrayList<FacultyAward>(Arrays.asList(arr));
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				GetFacultyAward[] arr = rest.postForObject(Constants.url + "/getAwardListByFacultyIdAndtype", map,
+						GetFacultyAward[].class);
+				List<GetFacultyAward> facultyAwardList = new ArrayList<GetFacultyAward>(Arrays.asList(arr));
 
-				for (int i = 0; i < facultyAwardList.size(); i++) {
-
-					facultyAwardList.get(i)
-							.setAwardDate(DateConvertor.convertToDMY(facultyAwardList.get(i).getAwardDate()));
-					facultyAwardList.get(i).setAwardValidityFrom(facultyAwardList.get(i).getAwardValidityFrom());
-					facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).getAwardValidityTo());
-				}
+				/*
+				 * for (int i = 0; i < facultyAwardList.size(); i++) {
+				 * 
+				 * facultyAwardList.get(i)
+				 * .setAwardDate(DateConvertor.convertToDMY(facultyAwardList.get(i).getAwardDate
+				 * ())); facultyAwardList.get(i).setAwardValidityFrom(facultyAwardList.get(i).
+				 * getAwardValidityFrom());
+				 * facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).
+				 * getAwardValidityTo()); }
+				 */
 				System.out.println("faculty Patent List :" + facultyAwardList);
 
 				model.addObject("title", "Faculty Received Award - Recognition Details List");
@@ -641,21 +656,20 @@ public class FacultyPatentController {
 
 				model.addObject("title", "Faculty Attended - Out Reach Activity List");
 
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				map.add("instituteId", session.getAttribute("instituteId"));
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
 
-				/*
-				 * Quolification[] quolArray = restTemplate.postForObject(Constants.url +
-				 * "getQuolificationList", map, Quolification[].class); List<Quolification>
-				 * quolfList = new ArrayList<>(Arrays.asList(quolArray));
-				 * 
-				 */
+				GetFacultyOutrea[] facultyOutreachListArray = rest.postForObject(
+						Constants.url + "getOutReachListByFacultyIdAndtype", map, GetFacultyOutrea[].class);
 
-				GetFacultyOutreach[] facultyOutreachListArray = rest
-						.postForObject(Constants.url + "getOutReachListByFacultyId", map, GetFacultyOutreach[].class);
-
-				List<GetFacultyOutreach> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
+				List<GetFacultyOutrea> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
 
 				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());
 

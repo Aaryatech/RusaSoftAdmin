@@ -85,10 +85,12 @@
 
 							<div class="actions panel_actions pull-right">
 
-								
- <a title="Add"
-											href="${pageContext.request.contextPath}/showPatentDetails"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showPatentDetails"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 
 							</div>
 
@@ -114,69 +116,80 @@
 										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
+										<div>
 
-													<div class="col-xs-12">
-
-
-														<div class="col-xs-12">
+											<div class="col-xs-12">
 
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th>Sr No</th>
+												<div class="col-xs-12">
 
-																		<th>Patent No.</th>
-																		<th>Patent Title</th>
-																		<th>Patent Filling Date</th>
-																		<th>Name of Guide</th>
-																		<th>Date of Publication</th>
-																		<th>Action</th>
-																	</tr>
-																</thead>
- 						<tbody>
-                 		     <c:forEach items="${facultyPatentList}" var="petentList" varStatus="count"> 
-									<tr>
-									<%-- <td><input type="checkbox" class="chk" name="iqacIds"
+
+													<table id="example-1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th>Sr No</th>
+
+																<th>Patent No.</th>
+																<th>Patent Title</th>
+																<th>Faculty Name</th>
+																<th>Department</th>
+																<th>Patent Filling Date</th>
+																<th>Name of Guide</th>
+																<th>Date of Publication</th>
+																<th>Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach items="${facultyPatentList}" var="petentList"
+																varStatus="count">
+																<tr>
+																	<%-- <td><input type="checkbox" class="chk" name="iqacIds"
 															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
-											<td style="text-align: center">${count.index+1}</td>
-											
-											<td style="text-align: left"><c:out
-														value="${petentList.patentFileNo}" /></td>
-														
-											<td style="text-align: left"><c:out
-														value="${petentList.patentTitle}" /></td>
-											
-											<td style="text-align: center"><c:out
-														value="${petentList.patentFilingDate}" /></td>
-											
-											<td style="text-align: left"><c:out
-														value="${petentList.patentGuideName}" /></td>
-														
-															
-											<td style="text-align: center"><c:out
-														value="${petentList.patentPubDate}" /></td>
-												
-											<td align="center">
-											 <c:if test="${editAccess == 0}">  <a
-												href="${pageContext.request.contextPath}/editPatent/${petentList.patentId}" title="Edit" 
-												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp; &nbsp; &nbsp;</c:if> 
-												
-											 <c:if test="${deleteAccess == 0}"> 	
-												<a	href="${pageContext.request.contextPath}/deleteFacultyPatent/${petentList.patentId}"
-													onClick="return confirm('Are you sure want to delete this record');"
-													rel="tooltip" data-color-class="danger" title="Delete"
-													data-animate=" animated fadeIn " data-toggle="tooltip"
-													data-original-title="Delete  record"><span
-													class="glyphicon glyphicon-remove"></span></a>
-												
-												</c:if>
-												
-											
-												<%-- <a
+																	<td style="text-align: center">${count.index+1}</td>
+
+																	<td style="text-align: left"><c:out
+																			value="${petentList.patentFileNo}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${petentList.patentTitle}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${petentList.facultyFirstName}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${petentList.deptName}" /></td>
+
+																	<td style="text-align: center"><c:out
+																			value="${petentList.patentFilingDate}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${petentList.patentGuideName}" /></td>
+
+
+																	<td style="text-align: center"><c:out
+																			value="${petentList.patentPubDate}" /></td>
+
+																	<td align="center"><c:if test="${editAccess == 0}">
+																			<a
+																				href="${pageContext.request.contextPath}/editPatent/${petentList.patentId}"
+																				title="Edit" rel="tooltip" data-color-class="detail"
+																				data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Edit IQAC"><span
+																				class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp; &nbsp; &nbsp;</c:if>
+
+																		<c:if test="${deleteAccess == 0}">
+																			<a
+																				href="${pageContext.request.contextPath}/deleteFacultyPatent/${petentList.patentId}"
+																				onClick="return confirm('Are you sure want to delete this record');"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a>
+
+																		</c:if> <%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-list"></span></a>
@@ -190,31 +203,27 @@
 												<a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-												class="glyphicon glyphicon-edit"></span></a> --%>
-												
-												
-												
-												</td>
-											
-											
-											
-											
-											</tr>
-								 </c:forEach>   
-                </tbody>
+												class="glyphicon glyphicon-edit"></span></a> --%></td>
 
 
-															</table>
-
-														</div>
-
-													</div>
 
 
-													<div class="clearfix"></div>
+																</tr>
+															</c:forEach>
+														</tbody>
+
+
+													</table>
 
 												</div>
-<!-- 
+
+											</div>
+
+
+											<div class="clearfix"></div>
+
+										</div>
+										<!-- 
 											</div>
 										</div> -->
 									</form>

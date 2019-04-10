@@ -84,12 +84,14 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								 <c:if test="${addAccess == 0}">  
-								<%-- <a href="${pageContext.request.contextPath}/showOrganized"><button
+								<c:if test="${addAccess == 0}">
+									<%-- <a href="${pageContext.request.contextPath}/showOrganized"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-						  <a title="Add"
-								href="${pageContext.request.contextPath}/showOrganized"><button
-								type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showOrganized"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
 								</c:if>
 							</div>
 
@@ -101,96 +103,104 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/delOrganizedDetails/0"
-										method="get" 
-										name="form_sample_2" id="form_sample_2">
-
-										
-
-												<div>
-
-													<div class="col-xs-12">
+										method="get" name="form_sample_2" id="form_sample_2">
 
 
-														<div class="col-xs-12">
+
+										<div>
+
+											<div class="col-xs-12">
 
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																 	<th class="check" style="text-align: center; width: 5%;"><input
-																		type="checkbox" name="selAll" id="selAll"
-																		onClick="selectedInst(this)" /> Select All</th>
-																		<th>Sr No</th>
-
-																		<th>Course Name</th>
-																		<th>Name of Activity</th>
-																		<th>Level</th>
-																		<th>Date</th>
-																		<th>No. of Participants</th>
-																		<th>Funded By</th>
-																		<th>Amount Sanctioned</th>
-																		<th>Amount Utilized</th>
-
-																		<th>Action</th>
-																	</tr>
-																</thead>
-																
-																	<tbody>
-												<c:forEach items="${facActList}" var="facAct"
-													varStatus="count">
-													<tr>
-														 <td><input type="checkbox" class="chk"
-															name="activityId" id="activityIds${count.index+1}"
-															value="${facAct.activityId}" /></td> 
-														<td style="text-align: center; ">${count.index+1}</td>
-														<td>${facAct.typeName}</td>
-														<td>${facAct.activityName}</td>
-														<td>${facAct.activityLevel}</td>
-														<td style="text-align: center; ">${facAct.activityDate}</td>
-														<td style="text-align: right; ">${facAct.activityParticipants}</td>
-														<td>${facAct.activityFundedBy}</td>
-														<td style="text-align: right; ">${facAct.activityAmountSanctioned}</td>
-														<td style="text-align: right; ">${facAct.activityAmountUtilised}</td>
-														<td style="text-align: center; "> <c:if test="${editAccess==0}"> 
-																<a 
-																	href="${pageContext.request.contextPath}/editFacultyActivity/${facAct.activityId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;
-															 </c:if><c:if test="${deleteAccess==0}"> 
-																<a
-																	href="${pageContext.request.contextPath}/deleteFacultyActivity/${facAct.activityId}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-														 </c:if> </td>
-													</tr>
-												</c:forEach>
-
-											</tbody>
-
-															</table>
-																
-																
-										<c:if test="${deleteAccess==0}">
-											<button class="btn btn-primary" 
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
-										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
-											value="0"> 
-															
-														</div>
-
-													</div>
+												<div class="col-xs-12">
 
 
-													<div class="clearfix"></div>
+													<table id="example-1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th class="check" style="text-align: center; width: 5%;"><input
+																	type="checkbox" name="selAll" id="selAll"
+																	onClick="selectedInst(this)" /> Select All</th>
+																<th>Sr No</th>
+
+																<th>Course Name</th>
+																<th>Name of Activity</th>
+																<th>Faculty Name</th>
+																<th>Department</th>
+																<th>Level</th>
+																<th>Date</th>
+																<th>No. of Participants</th>
+																<th>Funded By</th>
+																<th>Amount Sanctioned</th>
+																<th>Amount Utilized</th>
+
+																<th>Action</th>
+															</tr>
+														</thead>
+
+														<tbody>
+															<c:forEach items="${facActList}" var="facAct"
+																varStatus="count">
+																<tr>
+																	<td><input type="checkbox" class="chk"
+																		name="activityId" id="activityIds${count.index+1}"
+																		value="${facAct.activityId}" /></td>
+																	<td style="text-align: center;">${count.index+1}</td>
+																	<td>${facAct.typeName}</td>
+																	<td>${facAct.activityName}</td>
+																	<td>${facAct.facultyFirstName}</td>
+																	<td>${facAct.deptName}</td>
+																	<td>${facAct.activityLevel}</td>
+																	<td style="text-align: center;">${facAct.activityDate}</td>
+																	<td style="text-align: right;">${facAct.activityParticipants}</td>
+																	<td>${facAct.activityFundedBy}</td>
+																	<td style="text-align: right;">${facAct.activityAmountSanctioned}</td>
+																	<td style="text-align: right;">${facAct.activityAmountUtilised}</td>
+																	<td style="text-align: center;"><c:if
+																			test="${editAccess==0}">
+																			<a
+																				href="${pageContext.request.contextPath}/editFacultyActivity/${facAct.activityId}"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;
+															 </c:if> <c:if test="${deleteAccess==0}">
+																			<a
+																				href="${pageContext.request.contextPath}/deleteFacultyActivity/${facAct.activityId}"
+																				onClick="return confirm('Are you sure want to delete this record');"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a>
+																		</c:if></td>
+																</tr>
+															</c:forEach>
+
+														</tbody>
+
+													</table>
+
+
+													<c:if test="${deleteAccess==0}">
+														<button class="btn btn-primary" id="deleteId"
+															onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+															style="align-content: center; width: 113px; margin-left: 40px;">
+															<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+														</button>
+													</c:if>
+													<input type="hidden" id="edit_accOff_id"
+														name="edit_accOff_id" value="0">
 
 												</div>
 
-											
+											</div>
+
+
+											<div class="clearfix"></div>
+
+										</div>
+
+
 									</form>
 								</div>
 
@@ -214,20 +224,18 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script>
+	<script>
+		function selectedInst(source) {
 
-function selectedInst(source) {
+			checkboxes = document.getElementsByName('activityId');
 
-	checkboxes = document.getElementsByName('activityId');
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
+			}
 
-	}
-
-}
-
-</script>
+		}
+	</script>
 
 	<script type="text/javascript">
 		function getData() {

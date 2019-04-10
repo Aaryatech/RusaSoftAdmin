@@ -85,11 +85,13 @@
 
 							<div class="actions panel_actions pull-right">
 
-							<%-- 	<a href="${pageContext.request.contextPath}/showAwardDetails"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showAwardDetails"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
- <a title="Add"
-											href="${pageContext.request.contextPath}/showAwardDetails"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showAwardDetails"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 							</div>
 
 						</header>
@@ -110,77 +112,83 @@
 											</a></li>
 
 										</ul> -->
-<!-- 
+										<!-- 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
+										<div>
 
-													<div class="col-xs-12">
-
-
-														<div class="col-xs-12">
+											<div class="col-xs-12">
 
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																		<th>Sr No</th>
-
-																		<th>Name of Award/Recognition</th>
-																		<th>Awarding Agency</th>
-																		<th>Nature of Award/Recognition</th>
-																		<th>Date</th>
-
-																		<th>Action</th>
-																	</tr>
-																</thead>
+												<div class="col-xs-12">
 
 
-																<tbody>
-																	<c:forEach items="${facultyAwardList}" var="awardList"
-																		varStatus="count">
-																		<tr>
-																			<%-- <td><input type="checkbox" class="chk" name="iqacIds"
+													<table id="example-1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th>Sr No</th>
+
+																<th>Name of Award/Recognition</th>
+																<th>Faculty Name</th>
+																<th>Department</th>
+																<th>Awarding Agency</th>
+																<th>Nature of Award/Recognition</th>
+																<th>Date</th>
+
+																<th>Action</th>
+															</tr>
+														</thead>
+
+
+														<tbody>
+															<c:forEach items="${facultyAwardList}" var="awardList"
+																varStatus="count">
+																<tr>
+																	<%-- <td><input type="checkbox" class="chk" name="iqacIds"
 															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
-																			<td style="text-align: center">${count.index+1}</td>
+																	<td style="text-align: center">${count.index+1}</td>
 
-																			<td style="text-align: left"><c:out
-																					value="${awardList.awardName}" /></td>
+																	<td style="text-align: left"><c:out
+																			value="${awardList.awardName}" /></td>
 
-																			<td style="text-align: left"><c:out
-																					value="${awardList.awardAuthority}" /></td>
+																	<td style="text-align: left"><c:out
+																			value="${awardList.facultyFirstName}" /></td>
 
-																			<td style="text-align: left"><c:out
-																					value="${awardList.awardNature}" /></td>
+																	<td style="text-align: left"><c:out
+																			value="${awardList.deptName}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${awardList.awardAuthority}" /></td>
+
+																	<td style="text-align: left"><c:out
+																			value="${awardList.awardNature}" /></td>
 
 
 
-																			<td style="text-align: center"><c:out
-																					value="${awardList.awardDate}" /></td>
+																	<td style="text-align: center"><c:out
+																			value="${awardList.awardDate}" /></td>
 
-																			<td align="center"><c:if
-																					test="${editAccess == 0}">
-																					<a
-																						href="${pageContext.request.contextPath}/editAward/${awardList.awardId}"
-																						title="Edit" rel="tooltip"
-																						data-color-class="detail"
-																						data-animate=" animated fadeIn "
-																						data-toggle="tooltip"
-																						data-original-title="Edit"><span
-																						class="glyphicon glyphicon-edit"></span></a> </c:if> &nbsp; &nbsp; &nbsp; &nbsp;<c:if
-																					test="${deleteAccess == 0}">
-																					<a
-																						href="${pageContext.request.contextPath}/deleteFacultyAward/${awardList.awardId}"
-																						onClick="return confirm('Are you sure want to delete this record');"
-																						rel="tooltip" data-color-class="danger"
-																						title="Delete" data-animate=" animated fadeIn "
-																						data-toggle="tooltip"
-																						data-original-title="Delete  record"><span
-																						class="glyphicon glyphicon-remove"></span></a>
+																	<td align="center"><c:if test="${editAccess == 0}">
+																			<a
+																				href="${pageContext.request.contextPath}/editAward/${awardList.awardId}"
+																				title="Edit" rel="tooltip" data-color-class="detail"
+																				data-animate=" animated fadeIn "
+																				data-toggle="tooltip" data-original-title="Edit"><span
+																				class="glyphicon glyphicon-edit"></span></a>
+																		</c:if> &nbsp; &nbsp; &nbsp; &nbsp;<c:if
+																			test="${deleteAccess == 0}">
+																			<a
+																				href="${pageContext.request.contextPath}/deleteFacultyAward/${awardList.awardId}"
+																				onClick="return confirm('Are you sure want to delete this record');"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a>
 
-																				</c:if> <%-- <a
+																		</c:if> <%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-list"></span></a>
@@ -199,22 +207,22 @@
 
 
 
-																		</tr>
-																	</c:forEach>
-																</tbody>
+																</tr>
+															</c:forEach>
+														</tbody>
 
-															</table>
-
-														</div>
-
-													</div>
-
-
-													<div class="clearfix"></div>
+													</table>
 
 												</div>
 
-											<!-- </div>
+											</div>
+
+
+											<div class="clearfix"></div>
+
+										</div>
+
+										<!-- </div>
 										</div> -->
 									</form>
 								</div>
