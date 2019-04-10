@@ -3,8 +3,8 @@ package com.ats.rusasoft.commons;
 
 public class Constants {
 	
-	public static final String url="http://localhost:8094/";
-	//public static final String url="http://132.148.148.215:8080/bakerywebapi/";
+	public static final String url="http://localhost:8096/";
+	//public static final String url="http://ats.aaryatechindia.in:6435/atssoftwebapi/";
 	public static final String SPCAKE_IMAGE_URL = "http://132.148.148.215:8080/uploadspune/MSPCAKE/";
 	public static final String FR_IMAGE_URL = "http://132.148.148.215:8080/uploadspune/FR/";
 
@@ -132,3 +132,17 @@ public class Constants {
 		public static final int LOGIS_BILL_PDF_TYPE = 8;
 		public static final String LOGIS_BILL_URL = "http://132.148.143.124:8080/uploads/MSPCAKE/";*/
 }
+
+
+
+
+
+
+
+
+
+/*
+ * spring.datasource.url=jdbc:mysql://132.148.143.124:3306/example_rusa_soft_db
+ * spring.datasource.username=example_rusasoft
+ * spring.datasource.password=Aaryatech@1cr
+ */
