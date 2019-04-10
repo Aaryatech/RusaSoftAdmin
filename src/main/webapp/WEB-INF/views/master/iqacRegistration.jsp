@@ -123,6 +123,71 @@
 												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please select designation</span>
 											</div>
 										</div>
+										
+											<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">
+																Department<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="dept_id" name="dept_id"
+																	class=""  multiple>
+																	<c:forEach items="${deptList}" var="dept">
+																		<c:choose>
+																			<c:when test="${hod.deptId==dept.deptId}">
+																				<option selected value="${dept.deptId}">${dept.deptName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${dept.deptId}">${dept.deptName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+															<option value="0">NA</option>
+																	
+
+																</select>
+																<span
+															class="error_form text-danger" id="dept_id_field"
+															style="display: none;">Please select department
+															name</span>
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="status">
+																Qualification<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="quolif" name="quolif"
+																	class="form-control">
+																	<c:forEach items="${quolfList}" var="quolf">
+																		<c:choose>
+																			<c:when test="${hod.highestQualificationId==quolf.qualificationId}">
+																				<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+
+																				<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+																</select>
+																<span
+															class="error_form text-danger" id="quolf_field"
+															style="display: none;">Please select
+															highest qualification</span>
+															</div>
+														</div>
+														
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Joining
@@ -176,6 +241,19 @@
 											</div>
 
 										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Roles
+												 <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+										<input type="checkbox" name="isAccOff" value="1">Account Officer
+										<input type="checkbox" name="isHod" value="1">HOD
+										<input type="checkbox" name="isDean" value="1">Dean
+										<input type="checkbox" name="isLib" value="1">Librarian
+										
+										
+</div>
+</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -188,11 +266,7 @@
 												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 										</div>
-
-
 										<div class="clearfix"></div>
-
-
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
@@ -291,18 +365,26 @@ function trim(el) {
                 					$("#error_formfield3").hide()
                 				}
             				
-            				/* if(!$("#contactNo").val()){
-             					 
+            				if (!$("#dept_id").val()) {
+								isError = true;
+
+								$("#dept_id").addClass(
+										"has-error")
+								$("#dept_id_field")
+										.show()
+							} else {
+								$("#dept_id_field")
+										.hide()
+							}
+            				
+            				 if(!$("#quolif").val()){
                 				isError=true;
-                				errMsg += '<li>Please enter a valid name.</li>';
-                				
-                				$("#contactNo").addClass("has-error")
-                				$("#error_formfield4").show()
+                				$("#quolif").addClass("has-error")
+                				$("#quolf_field").show()
                 					//return false;
                 				} else {
-                					$("#error_formfield3").hide()
+                					$("#quolf_field").hide()
                 				}
-            			   */
             				if(!$("#contactNo").val() || !validateMobile($("#contactNo").val())){
             
             				isError=true;
@@ -445,17 +527,11 @@ function trim(el) {
 	<script type="text/javascript">
 		function showIsReg() {
 			//alert("Hi");
-			var x = $
-			{
-				accOff.officerId
-			}
+			var x = ${accOff.officerId}
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = $
-				{
-					accOff.realivingDate
-				}
+				var isRel = ${accOff.realivingDate}
 				;
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
@@ -671,6 +747,13 @@ function trim(el) {
 			}
 			return false;
 		}
+		
+		  $("#dept_id").select2({
+		        allowClear: true
+		    }).on('select2-open', function() {
+		        // Adding Custom Scrollbar
+		        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+		    });
 	</script>
 
 
