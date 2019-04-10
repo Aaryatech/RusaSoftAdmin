@@ -102,7 +102,14 @@
 
 
 															<div class="col-sm-4">
-															<c:choose>
+														
+															Yes <input type="radio" name="phdGuide" id="phdGuide" onclick="checkPhdGuide(this.value)"
+															value="1"  ${phd.isPhdGuide == 1 ? 'checked' : '' }>
+															
+															No<input type="radio" name="phdGuide" id="phdGuide" value="0" onclick="checkPhdGuide(this.value)"
+															${phd.isPhdGuide == 0 ? 'checked' : '' } >
+													
+														<%-- 	<c:choose>
 																	<c:when test="${phd.isPhdGuide == 1}">
 															
 																Yes <input type="radio" name="phdGuide" id="phdGuide"
@@ -117,11 +124,11 @@
 																	</c:when>
 																	
 																	</c:choose>
-															</div>
+ --%>															</div>
 														</div>
 
 														
-
+												<div class="form-group" id="ihide" style="display: none;">
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Name
 																of Ph.D. Scholar <span class="text-danger">*</span>
@@ -288,7 +295,7 @@
 
 
 														</div>
-
+													</div>
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
 															<button type="submit" id="sub_button" class="btn btn-primary" 
@@ -463,6 +470,23 @@
 			}
 		</script>
 		<script type="text/javascript">
+		function checkPhdGuide(phdguid) {
+			
+
+			if (phdguid == 1) {
+				
+				document.getElementById("ihide").style = "visible"
+				
+
+			} else if (phdguid == 0) {
+				document.getElementById("ihide").style = "display:none"
+				
+			}
+
+		}
+		
+		
+		
 			function check(qualType) {
 				
 
@@ -555,6 +579,14 @@
 					document.getElementById("abc").style.display = "block";
 				} else{
 					document.getElementById("abc").style.display = "none";
+				} 
+				
+				var isPhdGuid = $("input[name=phdGuide]:checked").val();
+				
+				if(isPhdGuid == 1){
+					document.getElementById("ihide").style.display = "block";
+				} else{
+					document.getElementById("ihide").style.display = "none";
 				} 
 			}
 			

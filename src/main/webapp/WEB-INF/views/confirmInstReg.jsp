@@ -561,35 +561,51 @@ table.blueTable thead th:first-child {
 						</tfoot>
 						<tbody>
 							<tr>
-								<td>Institute Name: ${editInst.instituteName}</td>
-								<td>AISHE Code: ${editInst.aisheCode}</td>
+								<td>Institute Name : ${editInst.instituteName}</td>
+								<td>AISHE Code : ${editInst.aisheCode}</td>
 							</tr>
 							<tr>
-								<td>Institute Address:${editInst.instituteAdd}</td>
-								<td>Is Registered For 2F/12B:<c:if
-										test="${editInst.isRegistration==1}">Yes</c:if> <c:if
-										test="${editInst.isRegistration==0}">No</c:if>
-								</td>
+								<td>Institute Address : ${editInst.instituteAdd}</td>
+								<td>Village : ${editInst.village}</td>
+							</tr>
+							
+							<tr>
+								<td>Taluka : ${editInst.taluka}</td>
+								<td>District : ${editInst.district}</td>
+								
 							</tr>
 							<tr>
-								<td>Registration Date: ${editInst.regDate}</td>
-								<td>Trust/Society Name:${editInst.trustName}</td>
+								<td>State : ${editInst.state}</td>
+								<td>Pincode : ${editInst.pincode}</td>
+								
+							</tr>
+							
+							<tr>
+								<td>Registration Date : ${editInst.regDate}</td>
+								<td>Trust/Society Name :${editInst.trustName}</td>
 							</tr>
 							<tr>
-								<td>Trust/Society Address:${editInst.trustAdd}</td>
-								<td>Contact No:${editInst.trustContactNo}</td>
+								<td>Trust/Society Address : ${editInst.trustAdd}</td>
+								<td>Contact No : ${editInst.trustContactNo}</td>
 							</tr>
 							<tr>
-								<td>Chairman/President Name:${editInst.presidentName}</td>
-								<td>Contact No:${editInst.presidenContact}</td>
+								<td>Chairman/President Name : ${editInst.presidentName}</td>
+								<td>Contact No : ${editInst.presidenContact}</td>
 							</tr>
 							<tr>
-								<td>Email ID:${editInst.presidentEmail}</td>
-								<td>Principal Name:${editInst.principalName}</td>
+								<td>Email ID :  ${editInst.presidentEmail}</td>
+								<td>Principal Name : ${editInst.principalName}</td>
 							</tr>
 							<tr>
-								<td>Contact No:${editInst.contactNo}</td>
-								<td>Email ID:${editInst.email}</td>
+								<td>Contact No : ${editInst.contactNo}</td>
+								<td>Email ID : ${editInst.email}</td>
+							</tr>
+							<tr>
+								 <td>
+								 	Is Registered For 2F/12B:
+								 	<c:if test="${editInst.isRegistration==1}">Yes</c:if>
+								  	<c:if test="${editInst.isRegistration==0}">No	</c:if>
+								</td> 
 							</tr>
 						</tbody>
 

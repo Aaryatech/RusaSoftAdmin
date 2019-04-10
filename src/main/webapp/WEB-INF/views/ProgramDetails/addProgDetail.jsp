@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitAddProgram"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 
 
@@ -138,7 +137,8 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="monthDuration"
 													value="${editProgram.monthDuration}" name="monthDuration"
-													placeholder="Duration(in months)" pattern="\d*" required>
+													placeholder="Duration(in months)" pattern="\d*">
+													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter duration.</span>
 											</div>
 										</div>
 
@@ -149,7 +149,8 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="nameOfProgram"
 													value="${editProgram.nameOfProgram}" name="nameOfProgram"
-													placeholder="Name of Program " required>
+													placeholder="Name of Program ">
+													<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span>
 											</div>
 										</div>
 
@@ -160,19 +161,21 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control " id="intake"
 													value="${editProgram.sanctionalIntake}" name="intake"
-													placeholder=" Sanctioned Intake" required pattern="\d*">
+													placeholder=" Sanctioned Intake"  pattern="\d*">
+											<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter sanctioned intake.</span>
 											</div>
 										</div>
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="date">Date/Year
+											<label class="control-label col-sm-2" for="date">Date
 												of Introduction <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker" id="date"
 													value="${editProgram.dateOfIntroduction}" name="date"
-													placeholder="Date/Year of Introduction" required>
+													placeholder="Date/Year of Introduction">
+											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter date of introduction.</span>
 											</div>
 										</div>
 										<c:set var="findOther" value="0"></c:set>
@@ -348,6 +351,93 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
+	function trim(el) {
+		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+		replace(/\n +/, "\n"); // Removes spaces after newlines
+		return;
+	}
+	
+               
+            	$(document).ready(function($){  nameOfProgram  
+            		
+            		$("#form_sample_2").submit(function(e) {
+            		
+            			var isError=false;
+            			 var errMsg="";
+            				
+           				if(!$("#monthDuration").val()){
+            					 
+            				isError=true;
+            				
+            				
+            				$("#monthDuration").addClass("has-error")
+            				$("#error_formfield1").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield1").hide()
+            				}
+            				
+            				            				
+            				if(!$("#nameOfProgram").val()){
+             					 
+                				isError=true;
+                			
+                				
+                				$("#nameOfProgram").addClass("has-error")
+                				$("#error_formfield2").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield2").hide()
+                				}
+            				 
+            				
+            				
+            				if(!$("#intake").val()){
+             					 
+                				isError=true;
+                			
+                				
+                				$("#intake").addClass("has-error")
+                				$("#error_formfield3").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield3").hide()
+                				}
+            				
+            				if(!$("#date").val()){
+             					 
+                				isError=true;
+                			
+                				
+                				$("#date").addClass("has-error")
+                				$("#error_formfield4").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield4").hide()
+                				}
+            				
+								
+								
+            				
+			            	 if (!isError) {
+			            		 
+								var x = confirm("Do you really want to submit the form?");
+								if (x == true) {
+									
+									document.getElementById("sub1").disabled = true;
+									document.getElementById("sub2").disabled = true;
+									return  true;
+								}
+							}
+            					   return false;
+            			});
+        });
+
+</script>
+	
 	<script type="text/javascript">
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
@@ -386,13 +476,24 @@
 		}
 	</script>
 
+<script type="text/javascript">
+$(function () {
+	 
+    $('.datepicker').datepicker({
+		autoclose: true,
+        format: "dd-mm-yyyy",
+        changeYear:true,
+        changeMonth:true
 
+	});
+});
+</script>
 
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
 
 
 

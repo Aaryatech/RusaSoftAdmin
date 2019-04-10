@@ -1083,7 +1083,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/studList");
 
-				model.addObject("title", "Special Student Registration List");
+				model.addObject("title", "Specific Student Information List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				System.out.println("Student list inst id::::" + inst_id);
@@ -1155,7 +1155,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/studReg");
 
-				model.addObject("title", "Add Special Student Registration");
+				model.addObject("title", "Add Specific Student Information");
 
 				Student editStudent = new Student();
 				model.addObject("editStudent", editStudent);
@@ -1332,7 +1332,7 @@ public class LibraryController {
 				int student_id = Integer.parseInt(request.getParameter("edit_stud_id"));
 				System.out.println("Student id is" + student_id);
 
-				model.addObject("title", " Edit Special Student Registration");
+				model.addObject("title", " Edit Specific Student Information");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				map.add("studId", student_id);

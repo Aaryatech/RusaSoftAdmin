@@ -195,14 +195,14 @@
 															
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="page_order">ID No.
-																 <span class="text-danger">*</span>
+																 <span class="text-danger"></span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" 
 																	maxlength="10" class="form-control" id="id_number" 
 																	value="${editStudent.idNo}"  
-																	name="id_number" placeholder="ID Number" >
-													<span class="error_form text-danger" id="error_Id" style="display:none;" >Please Enter ID Properly</span>
+																	name="id_number" placeholder="ID Number     (Optional)" >
+													<!-- <span class="error_form text-danger" id="error_Id" style="display:none;" >Please Enter ID Properly</span> -->
 															</div>
 														</div>
 
@@ -221,7 +221,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">Email ID(Official)
+															<label class="control-label col-sm-2" for="page_order">Email ID
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
@@ -315,7 +315,7 @@ function trim(el) {
             
              }
              
-             function numbersOnlyNotZero(id_number) {
+           /*   function numbersOnlyNotZero(id_number) {
 
                  
                  var mob = /^[1-9][0-9]+$/;
@@ -329,7 +329,7 @@ function trim(el) {
                  }
                  return true;
              }
-
+ */
 
 
              
@@ -392,7 +392,7 @@ function trim(el) {
                 				}
             				
 
-            				if(!$("#id_number").val() || !numbersOnlyNotZero($("#id_number").val())){
+            			/* 	if(!$("#id_number").val() || !numbersOnlyNotZero($("#id_number").val())){
             
             				isError=true;
             				errMsg += '<li>Please enter a valid email address.</li>';
@@ -401,7 +401,7 @@ function trim(el) {
             					//return fregister_useralse;
             				} else {
             					$("#error_Id").hide()
-            				}
+            				} */
             				
 
 							if($("#stud_branch").val()== -1 ){

@@ -118,12 +118,12 @@
 
 													<div class="col-xs-12">
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
+															<label class="control-label col-sm-2" for="page_name">Director KRC/ Librarian
 																Name<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
 																<input type="text" class="form-control" id="librarian_name" value="${editInst.librarianName}"
-																	name="librarian_name" placeholder="Librarian Name"   onchange="trim(this)"
+																	name="librarian_name" placeholder="Director KRC/ Librarian Name"   onchange="trim(this)"
 																	>
 												 <span class="error_form text-danger" id="error_name" style="display:none;" >Please enter Librarian Name</span>
 															</div>
@@ -138,11 +138,12 @@
 																No <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-10">
-													<input type="text"  
+													<input type="text"  maxlength="10"
 																	 class="form-control" id="lib_con_num" 	value="${editInst.contactNo}"
-																	 name="lib_con_num" placeholder="Mobile No" onchange="checkUnique(this.value,1)" >
-											 <span class="error_form text-danger" id="error_contact" style="display:none;" >
-											 Please Enter Contact Number</span>
+																	onkeypress='return restrictAlphabets(event)' name="lib_con_num"
+																	 placeholder="Mobile No" onchange="checkUnique(this.value,1)" >
+												 <span class="error_form text-danger" id="error_contact" style="display:none;" >
+												 Please Enter Contact Number</span>
 																	 
 															</div>
 														</div>
@@ -193,8 +194,8 @@
 																Date <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="lib_joiningDate" 	value="${jdate}"
-																	name="lib_joiningDate" placeholder=" " >
+																<input type="text" class="form-control datepicker" id="lib_joiningDate"  value="${jdate}"
+																	name="lib_joiningDate" placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'>
 																		<span class="error_form text-danger" id="error_jDate" style="display:none;" >Please Select Qualification</span>
 															</div>
 														</div>
@@ -227,7 +228,7 @@
 															</label>
 															<div class="col-sm-3">
 																<input type="text" class="form-control datepicker" id="relieving_date" 	value="${ldate}"
-																	name="relieving_date"  >
+																	name="relieving_date" onkeypress='return restrictAlphabets(event)' placeholder="dd/mm/yyyy" >
 													<span class="error_form text-danger" id="error_rDate" style="display:none;" >Please Select Relieving Date</span>
 																	
 															</div>
@@ -571,7 +572,20 @@ function checkUnique(inputValue,valueType){
 
 </script>
 
-
+<script type="text/javascript">
+/*code: 48-57 Numbers
+8  - Backspace,
+35 - home key, 36 - End key
+37-40: Arrow keys, 46 - Delete key*/
+function restrictAlphabets(e) {
+	var x = e.which || e.keycode;
+	if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+			|| x == 46)
+		return true;
+	else
+		return false;
+}
+	</script>
 
 
 	<!-- END CONTAINER -->
