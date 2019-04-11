@@ -44,6 +44,16 @@ public class Staff {
 	private int isDean;
 	private int isLibrarian;
 	private int isStudent;
+	
+	private int isEnrolled;
+
+	public int getIsEnrolled() {
+		return isEnrolled;
+	}
+
+	public void setIsEnrolled(int isEnrolled) {
+		this.isEnrolled = isEnrolled;
+	}
 
 	public String getRoleIds() {
 		return roleIds;
@@ -347,7 +357,7 @@ public class Staff {
 				+ ", extraint1=" + extraint1 + ", extravarchar1=" + extravarchar1 + ", roleIds=" + roleIds
 				+ ", password=" + password + ", type=" + type + ", isPrincipal=" + isPrincipal + ", isIqac=" + isIqac
 				+ ", isHod=" + isHod + ", isFaculty=" + isFaculty + ", isAccOff=" + isAccOff + ", isDean=" + isDean
-				+ ", isLibrarian=" + isLibrarian + ", isStudent=" + isStudent + "]";
+				+ ", isLibrarian=" + isLibrarian + ", isStudent=" + isStudent + ", isEnrolled=" + isEnrolled + "]";
 	}
 
 }

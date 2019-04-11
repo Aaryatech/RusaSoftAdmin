@@ -272,13 +272,13 @@ public class HomeController {
 				LoginResponse userObj = restTemplate.postForObject(Constants.url+"login",map,LoginResponse.class);
 				System.out.println("JSON Response Objet " + userObj.toString());
 				String loginResponseMessage="";
-
+				
 				
 				if (userObj!=null) {
 					
-					int a=userObj.getExInt1();
+					int a=userObj.getStaff().getIsEnrolled();
 					System.out.println("is enroll is "+a);
-					 if(a==0) {
+					 if(a==1) {
 						 mav = new ModelAndView("welcome");
 					}
 					 else {
@@ -722,6 +722,9 @@ public class HomeController {
 				
 			}
 			else {
+				
+				//Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
+
 				model = new ModelAndView("login");
 				//  c= "redirect:/showVerifyOTP";
 			
