@@ -116,11 +116,59 @@
 														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter dean name</span>
 													</div>
 												</div>
+												
+												<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">Designation
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="designation" name="designation"
+													class="form-control" onchange="showForm()">
 
+													<c:forEach items="${desigList}" var="makeList">
+														<c:choose>
+															<c:when
+																test="${makeList.designationId == miqc.desgntnId}">
+																<option value="${makeList.designationId}"
+																	selected="selected">${makeList.designationName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${makeList.designationId}">${makeList.designationName}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
 
+												</select>
+												
+											</div>
+										</div>
 
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Department
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="depart" name="depart"
+															class="form-control" >
+																<c:forEach items="${deptList}" var="dept">
+																<c:choose>
+																			<c:when test="${hod.deptId==dept.deptId}">
+																				<option selected value="${dept.deptId}">${dept.deptName}</option>
 
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${dept.deptId}">${dept.deptName}</option>
 
+																			</c:otherwise>
+
+																		</c:choose>
+
+															</c:forEach>
+															<option value="0">NA</option>
+														</select>
+													</div>
+												</div>
+												
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>
@@ -158,7 +206,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<select id="hod_quolf" name="hod_quolf"
+														<select id="hod_quolf" name="quolif"
 															class="form-control" >
 															<c:forEach items="${quolfList}" var="quolf">
 																<c:choose>

@@ -70,7 +70,6 @@
 												<th> Name</th>
 												<th>Qualification</th>
 												<th>Joining Date</th>
-												<th>Relieving Date</th>
 												<th>Contact No</th>
 												<th>Email</th>
 												<th width="10%">Action</th>
@@ -87,16 +86,14 @@
 												<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: left"><c:out
-														value="${deanList.deanName}" /></td>
+														value="${deanList.facultyFirstName}" /></td>
 											
 											<td style="text-align: left"><c:out
 														value="${deanList.qualificationName}" /></td>
 										
 											<td style="text-align: center"><c:out
 														value="${deanList.joiningDate}" /></td>
-														
-											<td style="text-align: center"><c:out
-														value="${deanList.realivingDate}" /></td>
+										
 														
 											<td style="text-align: center"><c:out
 														value="${deanList.contactNo}" /></td>
@@ -106,12 +103,12 @@
 													
 													<td align="center">
 													<c:if test="${editAccess == 0}"><a
-														href="${pageContext.request.contextPath}/editDean/${deanList.deanId}"><span
+														href="${pageContext.request.contextPath}/editDean/${deanList.facultyId}"><span
 															class="glyphicon glyphicon-edit" title="Edit"
 															data-animate=" animated fadeIn " rel="tooltip"></span></a></c:if> &nbsp;&nbsp;&nbsp;&nbsp;
 															
 														<c:if test="${deleteAccess == 0}"><a
-														href="${pageContext.request.contextPath}/deleteDean/${deanList.deanId}"
+														href="${pageContext.request.contextPath}/deleteDean/${deanList.facultyId}"
 														onClick="return confirm('Are you sure want to delete this record');"
 														rel="tooltip" data-color-class="danger" title="Delete"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
