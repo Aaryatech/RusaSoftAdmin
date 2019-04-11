@@ -27,6 +27,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.faculty.model.GetJournal;
+import com.ats.rusasoft.faculty.model.GetSWOC;
 import com.ats.rusasoft.faculty.model.GetSubject;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.faculty.model.ResearchProject;
@@ -607,11 +608,18 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/subDetails");
 				model.addObject("title", "Faculty's Teaching Subject Details List");
-				int yearId = (int) session.getAttribute("acYearId");
+
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
-				map.add("yearId", yearId);
-				List<GetSubject> subList = rest.postForObject(Constants.url + "/getAllSubjectList", map, List.class);
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				List<GetSubject> subList = rest.postForObject(Constants.url + "/getSubjectListByFacultyIdAndtype", map,
+						List.class);
 
 				System.out.println("subList" + subList);
 
@@ -1213,6 +1221,98 @@ public class FacultyController {
 				map.add("swocType", 4);
 				arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
 				List<SWOC> challengelist = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("challengelist", challengelist);
+
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/showSWOCList", method = RequestMethod.GET)
+	public ModelAndView showSWOCList(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info add = AccessControll.checkAccess("showSWOC", "showSWOC", "1", "0", "0", "0", newModuleList);
+
+			if (add.isError() == false) {
+
+				model = new ModelAndView("FacultyDetails/swocList");
+
+				model.addObject("title", "Faculty's SWOC Analysis");
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("type", 1);
+				map.add("yearId", acYearId);
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				GetSWOC[] arry = rest.postForObject(Constants.url + "/getSwocListByFacultyIdAndtype", map,
+						GetSWOC[].class);
+				List<GetSWOC> swocList = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("strengthList", swocList);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("type", 2);
+				map.add("yearId", acYearId);
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				arry = rest.postForObject(Constants.url + "/getSwocListByFacultyIdAndtype", map, GetSWOC[].class);
+				List<GetSWOC> weakNessList = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("weakNessList", weakNessList);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("type", 3);
+				map.add("yearId", acYearId);
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				arry = rest.postForObject(Constants.url + "/getSwocListByFacultyIdAndtype", map, GetSWOC[].class);
+				List<GetSWOC> oppList = new ArrayList<>(Arrays.asList(arry));
+				model.addObject("oppList", oppList);
+
+				map = new LinkedMultiValueMap<>();
+
+				map.add("type", 4);
+				map.add("yearId", acYearId);
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				arry = rest.postForObject(Constants.url + "/getSwocListByFacultyIdAndtype", map, GetSWOC[].class);
+				List<GetSWOC> challengelist = new ArrayList<>(Arrays.asList(arry));
 				model.addObject("challengelist", challengelist);
 
 			} else {

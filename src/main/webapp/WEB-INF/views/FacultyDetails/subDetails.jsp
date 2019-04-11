@@ -84,13 +84,15 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/showAddSubDetails"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showAddSubDetails"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-										
-										
-					 <a title="Add"
-											href="${pageContext.request.contextPath}/showAddSubDetails"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showAddSubDetails"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 
 							</div>
 
@@ -116,6 +118,8 @@
 													<th>Sr No</th>
 													<th>Subject Code</th>
 													<th>Subject Name</th>
+													<th>Faculty Name</th>
+													<th>Department</th>
 													<th>Program</th>
 													<th>Semester</th>
 													<th>% of Result</th>
@@ -134,12 +138,11 @@
 														<td style="text-align: left"><c:out
 																value="${subject.subCode}" /></td>
 
-
-
-
-
 														<td style="text-align: left"><c:out
 																value="${subject.subName}" /></td>
+
+														<td style="text-align: left;">${subject.facultyFirstName}</td>
+														<td style="text-align: left;">${subject.deptName}</td>
 
 														<td style="text-align: left"><c:out
 																value="${subject.nameOfProgram}" /></td>

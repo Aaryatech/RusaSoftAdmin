@@ -29,6 +29,8 @@ public class GetSubject {
 	private String exVar2;
 
 	private String nameOfProgram;
+	private String deptName;
+	private String facultyFirstName;
 
 	public int getSubId() {
 		return subId;
@@ -198,6 +200,22 @@ public class GetSubject {
 		this.nameOfProgram = nameOfProgram;
 	}
 
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getFacultyFirstName() {
+		return facultyFirstName;
+	}
+
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
+	}
+
 	@Override
 	public String toString() {
 		return "GetSubject [subId=" + subId + ", facultyId=" + facultyId + ", yearId=" + yearId + ", progId=" + progId
@@ -206,7 +224,7 @@ public class GetSubject {
 				+ ", subStuPassed=" + subStuPassed + ", delStatus=" + delStatus + ", isActive=" + isActive
 				+ ", makerUserId=" + makerUserId + ", makerEnterDatetime=" + makerEnterDatetime + ", exInt1=" + exInt1
 				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", nameOfProgram="
-				+ nameOfProgram + "]";
+				+ nameOfProgram + ", deptName=" + deptName + ", facultyFirstName=" + facultyFirstName + "]";
 	}
 
 }

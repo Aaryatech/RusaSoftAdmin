@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.GetFacultyPhdGuide;
 import com.ats.rusasoft.faculty.model.PhdGuidList;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.FacultyActivity;
@@ -1976,18 +1977,23 @@ public class FacultyModuleController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-				int yId = (int) session.getAttribute("acYearId");
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-				map.add("facId", facId.getRegPrimaryKey());
-				map.add("yrId", yId);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 				model = new ModelAndView("FacultyDetails/phdGuideList");
+				int acYearId = (Integer) session.getAttribute("acYearId");
 
-				PhdGuidList[] phdArr = rest.postForObject(Constants.url + "/getAllPhdGuid", map, PhdGuidList[].class);
-				List<PhdGuidList> phdList = new ArrayList<>(Arrays.asList(phdArr));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("yearId", acYearId);
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+
+				GetFacultyPhdGuide[] phdArr = rest.postForObject(Constants.url + "/getPhdGuideListByFacultyIdAndtype",
+						map, GetFacultyPhdGuide[].class);
+				List<GetFacultyPhdGuide> phdList = new ArrayList<>(Arrays.asList(phdArr));
 				System.out.println("List:" + phdList);
 				model.addObject("phdList", phdList);
 				model.addObject("title", "Ph.D. Guidance List");

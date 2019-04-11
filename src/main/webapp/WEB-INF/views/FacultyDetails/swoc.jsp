@@ -87,13 +87,7 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								<%-- a
-								href="${pageContext.request.contextPath}/publicationList"><button
-								type="button" class="btn btn-info">Back</button></a> --%>
-								<!-- <a
-								class="box_toggle fa fa-chevron-down"></a></div> -->
-							</div>
+							<div class="actions panel_actions pull-right"></div>
 
 						</header>
 
@@ -144,10 +138,12 @@
 
 													<div class="col-sm-4">
 
-														
-															
-															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+
+														<button type="submit" id="sub_button"
+															class="btn btn-primary" onclick="saveSWOCList(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 
@@ -157,7 +153,8 @@
 														style="width: 50px; height: 50px;">
 												</div>
 
-												<div class="row">s
+												<div class="row">
+													s
 
 
 													<div class="col-xs-12">
@@ -179,7 +176,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td style="text-align: center; ">${count.index+1}</td>
+																			<td style="text-align: center;">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 
@@ -221,9 +218,11 @@
 													</div>
 													<div class="col-sm-4">
 
-													
-															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(2)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+														<button type="submit" id="sub_button"
+															class="btn btn-primary" onclick="saveSWOCList(2)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 												<div align="center" id="loader1" style="display: none;">
@@ -253,7 +252,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td style="text-align: center; ">${count.index+1}</td>
+																			<td style="text-align: center;">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 																			<td align="center"><a href="#"
@@ -295,9 +294,11 @@
 
 													<div class="col-sm-4">
 
-													
-															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(3)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+														<button type="submit" id="sub_button"
+															class="btn btn-primary" onclick="saveSWOCList(3)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 
@@ -323,7 +324,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td style="text-align: center; ">${count.index+1}</td>
+																			<td style="text-align: center;">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 																			<td align="center"><a href="#"
@@ -362,11 +363,13 @@
 
 												<div class="col-sm-4">
 
-													
-															<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="saveSWOCList(4)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-													</div>
-											
+
+													<button type="submit" id="sub_button"
+														class="btn btn-primary" onclick="saveSWOCList(4)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+												</div>
+
 
 
 
@@ -391,7 +394,7 @@
 																		varStatus="count">
 																		<tr>
 
-																			<td style="text-align: center; ">${count.index+1}</td>
+																			<td style="text-align: center;">${count.index+1}</td>
 																			<td>${list.swocText}</td>
 
 																			<td align="center"><a href="#"
