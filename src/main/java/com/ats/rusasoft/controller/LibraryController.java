@@ -28,6 +28,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
+import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.GetInstituteInfo;
 import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.GetLib;
@@ -41,8 +42,10 @@ import com.ats.rusasoft.model.LibraryInfo;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.RareBook;
+import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.Student;
-import com.ats.rusasoft.model.accessright.ModuleJson; 
+import com.ats.rusasoft.model.accessright.AssignRoleDetailList;
+import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
@@ -50,73 +53,71 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 public class LibraryController {
 
 	RestTemplate rest = new RestTemplate();
-	
+
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 	String curDateTime = dateFormat.format(cal.getTime());
-	
+
 	DateFormat datfmt = new SimpleDateFormat("yyyy-MM-dd");
 	String simpleDate = datfmt.format(cal.getTime());
-	
-	String redirect= null;
-	
-	MultiValueMap<String , Object> map = null;
-	
+
+	String redirect = null;
+
+	MultiValueMap<String, Object> map = null;
+
 	@RequestMapping(value = "/showLibraryBasicInfo", method = RequestMethod.GET)
 	public ModelAndView showLibraryBasicInfo(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libBasicInfoList");
 		try {
 			HttpSession session = request.getSession();
-			
-			
-			  List<ModuleJson> newModuleList = (List<ModuleJson>)
-			  session.getAttribute("newModuleList"); Info view = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "1", "0", "0", "0", newModuleList);
-			  
-			  if (view.isError() == true) {
-			  
-			  model = new ModelAndView("accessDenied");
-			  
-			  } else {
-			 
-			
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
 
-			model.addObject("title", "Library Basic Information List");
-			
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", instituteId);
-			
-			
-			LibraryInfo[] libInfoArr =  rest.postForObject(Constants.url+"/libBasicInfoList", map, LibraryInfo[].class);
-			List<LibraryInfo> libInfoList = new ArrayList<>(Arrays.asList(libInfoArr));
-			
-			model.addObject("libInfoList", libInfoList);
-			Info add = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
-					newModuleList);
-			Info edit = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "1", "0",
-					newModuleList);
-			Info delete = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "0", "1",
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "1", "0", "0", "0",
 					newModuleList);
 
-			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
-				model.addObject("addAccess", 0);
+			if (view.isError() == true) {
 
-			}
-			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
-				model.addObject("editAccess", 0);
-			}
-			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
-				model.addObject("deleteAccess", 0);
+				model = new ModelAndView("accessDenied");
 
+			} else {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+
+				model.addObject("title", "Library Basic Information List");
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", instituteId);
+
+				LibraryInfo[] libInfoArr = rest.postForObject(Constants.url + "/libBasicInfoList", map,
+						LibraryInfo[].class);
+				List<LibraryInfo> libInfoList = new ArrayList<>(Arrays.asList(libInfoArr));
+
+				model.addObject("libInfoList", libInfoList);
+				Info add = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0",
+						"0", newModuleList);
+				Info edit = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "1",
+						"0", newModuleList);
+				Info delete = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "0",
+						"1", newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
 			}
-		}
-			
-	
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -126,24 +127,23 @@ public class LibraryController {
 		return model;
 
 	}
-	
-		
+
 	@RequestMapping(value = "/libraryBasicInfo", method = RequestMethod.GET)
 	public ModelAndView showStudMentor(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("libraryBasicInfo", "showLibraryBasicInfo", "0", "1", "0", "0",
 					newModuleList);
 
 			if (view.isError() == true) {
-				
+
 				model = new ModelAndView("accessDenied");
 
 			} else {
-			
+
 				LibraryInfo libInfo = new LibraryInfo();
 				model.addObject("libInfo", libInfo);
 				model.addObject("title", "Add Library Basic Information");
@@ -157,19 +157,20 @@ public class LibraryController {
 		return model;
 
 	}
+
 	@RequestMapping(value = "/insertLibInfo", method = RequestMethod.POST)
-	public String  insertLibBasicInfo(HttpServletRequest request, HttpServletResponse response) {
+	public String insertLibBasicInfo(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession();
 
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
-			
+
 			LibraryInfo libInfo = new LibraryInfo();
-			
+
 			libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
 			libInfo.setInstituteId(instituteId);
-			libInfo.setIsLibAutomated(0);//Integer.parseInt(request.getParameter("isUsingSoft"))
+			libInfo.setIsLibAutomated(0);// Integer.parseInt(request.getParameter("isUsingSoft"))
 			libInfo.setSoftName(request.getParameter("swName"));
 			libInfo.setSoftVersion(request.getParameter("version"));
 			libInfo.setUsersOfLms(Integer.parseInt(request.getParameter("userLms")));
@@ -179,94 +180,98 @@ public class LibraryController {
 			libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
 			libInfo.setAvgTeacher(Float.parseFloat(request.getParameter("avgTeacher")));
 			libInfo.setAvgStudent(Float.parseFloat(request.getParameter("avgStud")));
-			
-			 libInfo.setAddBy(userId); 
-			 libInfo.setAddDatetime(curDateTime);
-			 libInfo.setEditBy(userId);
-			 libInfo.setEditDatetime(curDateTime); 
-			 libInfo.setIsPlanning(0);
-			 libInfo.setDateOfPlanningEstablishment(simpleDate);
-			 libInfo.setIsAdministration(0);
-			 libInfo.setDateOfAdministrationEstablishment(simpleDate); 
-			 libInfo.setIsFinanceAcc(0);
-			 libInfo.setDateOfFinanceEstablishment(simpleDate);
-			 libInfo.setIsStudentAdmition(0);
-			 libInfo.setDateOfStudentEstablishment(simpleDate);
-			 libInfo.setIsExamination(0);
-			 libInfo.setDateOfExaminationEstablishment(simpleDate);
-			 
+
+			libInfo.setAddBy(userId);
+			libInfo.setAddDatetime(curDateTime);
+			libInfo.setEditBy(userId);
+			libInfo.setEditDatetime(curDateTime);
+			libInfo.setIsPlanning(0);
+			libInfo.setDateOfPlanningEstablishment(simpleDate);
+			libInfo.setIsAdministration(0);
+			libInfo.setDateOfAdministrationEstablishment(simpleDate);
+			libInfo.setIsFinanceAcc(0);
+			libInfo.setDateOfFinanceEstablishment(simpleDate);
+			libInfo.setIsStudentAdmition(0);
+			libInfo.setDateOfStudentEstablishment(simpleDate);
+			libInfo.setIsExamination(0);
+			libInfo.setDateOfExaminationEstablishment(simpleDate);
+
 			libInfo.setDelStatus(1);
 			libInfo.setExInt1(0);
 			libInfo.setExVar1("NA");
-			
-			LibraryInfo saveLib = rest.postForObject(Constants.url+"/insertlibBasicInfo", libInfo, LibraryInfo.class);
+
+			LibraryInfo saveLib = rest.postForObject(Constants.url + "/insertlibBasicInfo", libInfo, LibraryInfo.class);
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
 				redirect = "redirect:/showLibraryBasicInfo";
 			else
 				redirect = "redirect:/libraryBasicInfo";
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
-		
+
 		return redirect;
 
 	}
-	
+
 	@RequestMapping(value = "/editLibInfo/{libInfoId}", method = RequestMethod.GET)
-	public ModelAndView editLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request, HttpServletResponse response) {
-		
+	public ModelAndView editLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("editLibInfo/{libInfoId}", "showLibraryBasicInfo", "0", "0", "1", "0",
-						newModuleList);
+			Info view = AccessControll.checkAccess("editLibInfo/{libInfoId}", "showLibraryBasicInfo", "0", "0", "1",
+					"0", newModuleList);
 
-				if (view.isError() == true) {
-					
-					model = new ModelAndView("accessDenied");
+			if (view.isError() == true) {
 
-				} else {
-		map = new LinkedMultiValueMap<>();
-		map.add("libInfoId", libInfoId);
-		
-		LibraryInfo libInfo = rest.postForObject(Constants.url+"/editlibBasicInfoById", map, LibraryInfo.class);
-		model.addObject("libInfo", libInfo);
-		
-		model.addObject("title", "Edit Library Basic Information");
-		}
-	} catch (Exception e) {
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				map = new LinkedMultiValueMap<>();
+				map.add("libInfoId", libInfoId);
+
+				LibraryInfo libInfo = rest.postForObject(Constants.url + "/editlibBasicInfoById", map,
+						LibraryInfo.class);
+				model.addObject("libInfo", libInfo);
+
+				model.addObject("title", "Edit Library Basic Information");
+			}
+		} catch (Exception e) {
 
 			e.printStackTrace();
 
 		}
 
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/deleteLibInfo/{libInfoId}", method = RequestMethod.GET)
-	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request, HttpServletResponse response) {
-		
+	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("deleteLibInfo/{libInfoId}", "showLibraryBasicInfo", "0", "0", "0", "1",
-						newModuleList);
+			Info view = AccessControll.checkAccess("deleteLibInfo/{libInfoId}", "showLibraryBasicInfo", "0", "0", "0",
+					"1", newModuleList);
 
-				if (view.isError() == true) {
-					
-					model = new ModelAndView("accessDenied");
+			if (view.isError() == true) {
 
-				} else {
-			map = new LinkedMultiValueMap<>();
-			map.add("libInfoId", libInfoId);
-			
-			LibraryInfo libInfo = rest.postForObject(Constants.url+"/deletelibBasicInfoById", map, LibraryInfo.class);
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				map = new LinkedMultiValueMap<>();
+				map.add("libInfoId", libInfoId);
+
+				LibraryInfo libInfo = rest.postForObject(Constants.url + "/deletelibBasicInfoById", map,
+						LibraryInfo.class);
 			}
 		} catch (Exception e) {
 
@@ -276,7 +281,6 @@ public class LibraryController {
 		return "redirect:/showLibraryBasicInfo";
 
 	}
-	
 
 	@RequestMapping(value = "/delSlectedLibInfo/{libId}", method = RequestMethod.GET)
 	public String deletSelectedStaff(HttpServletRequest request, HttpServletResponse response,
@@ -285,8 +289,8 @@ public class LibraryController {
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedLibInfo/{libId}", "showLibraryBasicInfo", "0", "0",
-				"0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedLibInfo/{libId}", "showLibraryBasicInfo", "0", "0", "0", "1",
+				newModuleList);
 
 		try {
 			if (view.isError() == true) {
@@ -295,8 +299,7 @@ public class LibraryController {
 
 			}
 
-			else {	
-
+			else {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				if (libId == 0) {
@@ -325,39 +328,37 @@ public class LibraryController {
 
 				a = "redirect:/showLibraryBasicInfo";
 
-			
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return a;
-		
-	}
 
+		return a;
+
+	}
 
 	@RequestMapping(value = "/rareBookInformation", method = RequestMethod.GET)
 	public ModelAndView rareBookInformation(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/rareBookInformation");
-		
+
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookInfo", "0", "1", "0", "0",
-						newModuleList);
+			Info view = AccessControll.checkAccess("rareBookInformation", "showRareBookInfo", "0", "1", "0", "0",
+					newModuleList);
 
-				if (view.isError() == true) {
-					
-					model = new ModelAndView("accessDenied");
+			if (view.isError() == true) {
 
-				} 
+				model = new ModelAndView("accessDenied");
+
+			}
 
 			else {
 				RareBook rareBook = new RareBook();
 
 				model.addObject("title", "Add Rare Book Information");
-				model.addObject("rareBook",rareBook);
+				model.addObject("rareBook", rareBook);
 			}
 		} catch (Exception e) {
 
@@ -371,75 +372,78 @@ public class LibraryController {
 
 	@RequestMapping(value = "/showRareBookInfo", method = RequestMethod.GET)
 	public ModelAndView showRareBookInformation(HttpServletRequest request, HttpServletResponse response) {
-		
-		ModelAndView model =  null;
-	try {
+
+		ModelAndView model = null;
+		try {
 			model = new ModelAndView("library/showRareBookInfo");
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "1", "0", "0", "0", newModuleList);
-		
-				if (view.isError() == true) {
-		
-					model = new ModelAndView("accessDenied");
-		
-				} else {
+			Info view = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "1", "0", "0", "0",
+					newModuleList);
 
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			map = new LinkedMultiValueMap<>();
-			
-			map.add("instituteId", instituteId);
-					
-			RareBook[]  rrbook = rest.postForObject(Constants.url+"/showRareBooksInfo", map, RareBook[].class);
-			List<RareBook> rareBokList = new ArrayList<>(Arrays.asList(rrbook));
-			
-			model.addObject("rareBokList",rareBokList);
-			model.addObject("title","Rare Book Information List");
+			if (view.isError() == true) {
 
-			  Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo","0", "1", "0", "0", newModuleList);
-			  Info edit = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "1", "0", newModuleList);
-			  Info delete = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "0", "1", newModuleList);
-			  
-			  if (add.isError() == false) { 
-				  System.out.println(" add   Accessable ");
-				  model.addObject("addAccess", 0);
-			  
-			  } if (edit.isError() == false)
-			  { 
-				  System.out.println(" edit   Accessable ");
-				  model.addObject("editAccess", 0);
-			  } 
-			  if (delete.isError() == false) {
-			  System.out.println(" delete   Accessable ");
-			  model.addObject("deleteAccess", 0);
-			  
-			  }
-			  
-		}
-			 
-		
-		}catch(Exception e) {
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				map = new LinkedMultiValueMap<>();
+
+				map.add("instituteId", instituteId);
+
+				RareBook[] rrbook = rest.postForObject(Constants.url + "/showRareBooksInfo", map, RareBook[].class);
+				List<RareBook> rareBokList = new ArrayList<>(Arrays.asList(rrbook));
+
+				model.addObject("rareBokList", rareBokList);
+				model.addObject("title", "Rare Book Information List");
+
+				Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/insertRareBookInfo", method = RequestMethod.POST)
 	public String saveRareBookInformation(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		try {
 			HttpSession session = request.getSession();
 			int insId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
-			int acadYear = (int)session.getAttribute("acYearId");
+			int acadYear = (int) session.getAttribute("acYearId");
 			RareBook rareBook = new RareBook();
-			
+
 			rareBook.setRareBookInfoId(Integer.parseInt(request.getParameter("bookId")));
 			rareBook.setInstituteId(insId);
-			rareBook.setYearId(acadYear);  //Academic Year
+			rareBook.setYearId(acadYear); // Academic Year
 			rareBook.setUserId(userId);
 			rareBook.setRareBookname(request.getParameter("bookName"));
 			rareBook.setPublisher(request.getParameter("publisher"));
@@ -449,15 +453,15 @@ public class LibraryController {
 			rareBook.setDelStatus(1);
 			rareBook.setExInt1(0);
 			rareBook.setExVar1("NA");
-			
-			RareBook saveBook = rest.postForObject(Constants.url+"/saveRareBook", rareBook, RareBook.class);
+
+			RareBook saveBook = rest.postForObject(Constants.url + "/saveRareBook", rareBook, RareBook.class);
 			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if(isView==1) {
-				redirect="redirect:/showRareBookInfo";
-			}else {
-				redirect="redirect:/rareBookInformation";
+			if (isView == 1) {
+				redirect = "redirect:/showRareBookInfo";
+			} else {
+				redirect = "redirect:/rareBookInformation";
 			}
-			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -465,33 +469,33 @@ public class LibraryController {
 		}
 
 		return redirect;
-		
+
 	}
 
-	
 	@RequestMapping(value = "/editRareBookInfo/{bookId}", method = RequestMethod.GET)
-	public ModelAndView editRareBookInfo(@PathVariable("bookId") int bookId,  HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView editRareBookInfo(@PathVariable("bookId") int bookId, HttpServletRequest request,
+			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("library/rareBookInformation");
 		try {
-			
+
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("editRareBookInfo/{bookId}", "showRareBookInfo", "0", "0", "1", "0",
-						newModuleList);
+			Info view = AccessControll.checkAccess("editRareBookInfo/{bookId}", "showRareBookInfo", "0", "0", "1", "0",
+					newModuleList);
 
-				if (view.isError() == true) {
-					
-					model = new ModelAndView("accessDenied");
-				} 
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+			}
 
 			else {
-			map = new LinkedMultiValueMap<>();
-			map.add("bookId", bookId);
-			
-			RareBook editBook = rest.postForObject(Constants.url+"/getRareBookById", map, RareBook.class);
-			model.addObject("rareBook", editBook);
-			
-			model.addObject("title", "Edit Rare Book Information");
+				map = new LinkedMultiValueMap<>();
+				map.add("bookId", bookId);
+
+				RareBook editBook = rest.postForObject(Constants.url + "/getRareBookById", map, RareBook.class);
+				model.addObject("rareBook", editBook);
+
+				model.addObject("title", "Edit Rare Book Information");
 			}
 		} catch (Exception e) {
 
@@ -499,18 +503,20 @@ public class LibraryController {
 
 		}
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/deleteRareBookInfo/{bookId}", method = RequestMethod.GET)
-	public String deleteRareBookInfo(@PathVariable("bookId") int bookId,  HttpServletRequest request, HttpServletResponse response) {
-	
+	public String deleteRareBookInfo(@PathVariable("bookId") int bookId, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		try {
 			String a = null;
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("deleteRareBookInfo/{bookId}", "showRareBookInfo", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("deleteRareBookInfo/{bookId}", "showRareBookInfo", "0", "0", "0",
+					"1", newModuleList);
 
 			if (view.isError() == true)
 
@@ -521,10 +527,10 @@ public class LibraryController {
 			}
 
 			else {
-			map = new LinkedMultiValueMap<>();
-			map.add("bookId", bookId);
-			
-			RareBook editBook = rest.postForObject(Constants.url+"/deleteRareBookById", map, RareBook.class);
+				map = new LinkedMultiValueMap<>();
+				map.add("bookId", bookId);
+
+				RareBook editBook = rest.postForObject(Constants.url + "/deleteRareBookById", map, RareBook.class);
 			}
 		} catch (Exception e) {
 
@@ -532,9 +538,9 @@ public class LibraryController {
 
 		}
 		return "redirect:/showRareBookInfo";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/delSlectedRareBook/{rareBookId}", method = RequestMethod.GET)
 	public String delSlectedRareBook(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int rareBookId) {
@@ -542,8 +548,8 @@ public class LibraryController {
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedRareBook/{rareBookId}", "showRareBookInfo", "0", "0",
-				"0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedRareBook/{rareBookId}", "showRareBookInfo", "0", "0", "0",
+				"1", newModuleList);
 
 		try {
 			if (view.isError() == true) {
@@ -552,8 +558,7 @@ public class LibraryController {
 
 			}
 
-			else {	
-
+			else {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				if (rareBookId == 0) {
@@ -582,16 +587,15 @@ public class LibraryController {
 
 				a = "redirect:/showRareBookInfo";
 
-			
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return a;
-		
+
 	}
-	
+
 	@RequestMapping(value = "/showEShodhSindhu", method = RequestMethod.GET)
 	public ModelAndView showEShodhSindhu(HttpServletRequest request, HttpServletResponse response) {
 
@@ -718,16 +722,7 @@ public class LibraryController {
 				System.out.println("lib list is" + libtList.toString());
 
 				model.addObject("libtList", libtList);
-				/*try {
-					for (int i = 0; i < libtList.size(); i++) {
-						libtList.get(i).setJoiningDate(DateConvertor.convertToDMY(libtList.get(i).getJoiningDate()));
-						libtList.get(i)
-								.setRealivingDate(DateConvertor.convertToDMY(libtList.get(i).getRealivingDate()));
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-*/
+
 				Info add = AccessControll.checkAccess("showLibList", "showLibList", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "1", "0", newModuleList);
 				Info delete = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "0", "1",
@@ -766,13 +761,11 @@ public class LibraryController {
 	public ModelAndView showRegLib(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		RestTemplate restTemplate = new RestTemplate();
 
 		HttpSession session = request.getSession();
-
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
 		try {
-
 			Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "1", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
@@ -780,14 +773,27 @@ public class LibraryController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-
 				model = new ModelAndView("master/libReg");
 
 				model.addObject("title", "Add Librarian Registration");
-				Librarian editInst = new Librarian();
 
-				RestTemplate restTemplate = new RestTemplate();
+				Designation[] designArr = restTemplate.getForObject(Constants.url + "/getAllDesignations",
+						Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = restTemplate.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+
 				map.add("type", 1);
 				Quolification[] quolArray = restTemplate.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);
@@ -795,12 +801,11 @@ public class LibraryController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
-				model.addObject("editInst", editInst);
-			}
 
+			}
 		} catch (Exception e) {
 
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+			System.err.println("exception In showRegLib at Library Contr" + e.getMessage());
 
 			e.printStackTrace();
 
@@ -810,143 +815,303 @@ public class LibraryController {
 
 	}
 
-	// insertHod
 	@RequestMapping(value = "/insertLibrarian", method = RequestMethod.POST)
 	public String insertLibrarian(HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession();
-		String a = null;
 		try {
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("insertLibrarian", "showLibList", "0", "1", "0", "0", newModuleList);
+			HttpSession session = request.getSession();
 
-			if (view.isError() == true)
+			int instituteId = (int) session.getAttribute("instituteId");
 
-			{
+			int userId = (int) session.getAttribute("userId");
 
-				a = "redirect:/accessDenied";
+			int libId = Integer.parseInt(request.getParameter("lib_id"));
+
+			int isLib = 0;
+
+			try {
+				isLib = Integer.parseInt(request.getParameter("isLib"));
+			} catch (Exception e) {
+				isLib = 0;
+			}
+			String roleNameList = null;
+
+			roleNameList = Constants.HOD_Role + "," + Constants.Faculty_Role;
+
+			if (isLib == 1) {
+				roleNameList = roleNameList + "," + Constants.Librarian_Role;
 
 			}
 
-			else {
-				System.err.println("in insert insertLibrarian");
-				ModelAndView model = null;
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-				int inst_id = (int) session.getAttribute("instituteId");
-				int maker_id = (int) session.getAttribute("userId");
+			map.add("roleNameList", roleNameList);
+			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+					AssignRoleDetailList[].class);
+			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
 
-				Librarian lib = new Librarian();
-				RestTemplate restTemplate = new RestTemplate();
+			String roleIds = new String();
+			for (int i = 0; i < roleIdsList.size(); i++) {
+				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+			}
+			System.err.println("roleIds " + roleIds);
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			int designation = 0;
 
-				int librarianId = Integer.parseInt(request.getParameter("librarian_id"));
-				System.out.println("librarian_id" + "librarian_id");
+			String libName = request.getParameter("libName");
+			System.out.println("Data:" + libName);
+			designation = Integer.parseInt(request.getParameter("designation"));
+			String dateOfJoin = request.getParameter("dateOfJoin");
+			String contact = request.getParameter("contactNo");
+			String email = request.getParameter("email");
 
-				String librarian_name = request.getParameter("librarian_name");
-				String lib_con_num = request.getParameter("lib_con_num");
+			String[] deptIds = request.getParameterValues("dept_id");
+			StringBuilder sb = new StringBuilder();
 
-				int conf_type = Integer.parseInt(request.getParameter("conf_type"));
-
-				String librarian_email = request.getParameter("librarian_email");
-
-				int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
-
-				String lib_joiningDate = request.getParameter("lib_joiningDate");
-				System.out.println("lib_joiningDate:"+lib_joiningDate);
-				String relieving_date = request.getParameter("relieving_date");
-
-				System.err.println("librarian id  " + librarianId);
-				if (librarianId == 0) {
-
-					System.out.println("inst id is" + inst_id);
-
-					lib.setLibrarianName(librarian_name);
-					lib.setContactNo(lib_con_num);
-					lib.setEmail(librarian_email);
-					lib.setQualificationId(lib_quolf);
-					if (conf_type == 1) {
-						lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
-					} else {
-						lib.setRealivingDate(null);
-
-					}
-					lib.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
-					lib.setMakerUserId(maker_id);
-
-					lib.setInstituteId(inst_id);
-					lib.setDelStatus(1);
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1("NA");
-					lib.setExVar2("NA");
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					lib.setMakerEnterDatetime(curDateTime);
-
-					Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian", lib, Librarian.class);
-
-				} else {
-					System.out.println("in edit");
-					System.out.println("in edit");
-
-					map.add("libId", librarianId); // getInstitute Hod hod =
-					Librarian lib1 = rest.postForObject(Constants.url + "getLibrarianByLibId", map, Librarian.class);
-
-					lib1.setLibrarianName(librarian_name);
-					lib1.setContactNo(lib_con_num);
-					lib1.setEmail(librarian_email);
-					lib1.setQualificationId(lib_quolf);
-					lib1.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
-					lib1.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
-					lib1.setMakerUserId(maker_id);
-
-					lib1.setInstituteId(inst_id);
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					lib1.setMakerEnterDatetime(curDateTime);
-
-					Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian", lib1, Librarian.class);
-
-				}
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					a = "redirect:/showLibList";
-
-				else
-					a = "redirect:/showRegLib";
+			for (int i = 0; i < deptIds.length; i++) {
+				sb = sb.append(deptIds[i] + ",");
 
 			}
+			String deptIdList = sb.toString();
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
 
-		}
+			Staff staff = new Staff();
 
-		catch (Exception e) {
-			System.err.println("Exce in save lib  " + e.getMessage());
+			staff.setContactNo(contact);
+			staff.setCurrentDesignationId(designation);
+			staff.setDeptId(deptIdList);
+			staff.setEmail(email);
+			staff.setFacultyFirstName(libName);
+			staff.setFacultyId(libId);
+			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setHightestQualificationYear(null);
+			staff.setIsAccOff(0);
+			staff.setIsDean(0);
+			staff.setIsFaculty(1);
+			staff.setIsHod(0);
+			staff.setIsIqac(0);
+			staff.setIsLibrarian(1);
+			staff.setIsPrincipal(0);
+
+			staff.setIsStudent(0);
+			staff.setIsWorking(1);
+			staff.setJoiningDate(dateOfJoin);
+			staff.setLastUpdatedDatetime(curDateTime);
+			staff.setMakerEnterDatetime(curDateTime);
+
+			staff.setPassword("");
+			staff.setRealivingDate(null);
+			staff.setRoleIds(roleIds);
+			staff.setTeachingTo(0);
+			staff.setType(7);
+
+			staff.setInstituteId(instituteId);
+			staff.setJoiningDate(dateOfJoin);
+			staff.setContactNo(contact);
+			staff.setEmail(email);
+			staff.setDelStatus(1);
+			staff.setIsActive(1);
+			staff.setMakerUserId(userId);
+			staff.setMakerEnterDatetime(curDateTime);
+			staff.setCheckerUserId(0);
+			staff.setCheckerDatetime(curDateTime);
+			staff.setLastUpdatedDatetime(curDateTime);
+
+			staff.setExtravarchar1("NA");
+			Staff Library = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/showLibList";
+			else
+				redirect = "redirect:/showRegLib";
+		} catch (Exception e) {
+
+			System.err.println("exception In showRegLib at Library Contr" + e.getMessage());
 			e.printStackTrace();
-		}
 
-		return a;
+		}
+		return redirect;
 
 	}
 
+	/*
+	 * @RequestMapping(value = "/showRegLib", method = RequestMethod.GET) public
+	 * ModelAndView showRegLib1(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = null;
+	 * 
+	 * HttpSession session = request.getSession();
+	 * 
+	 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+	 * session.getAttribute("newModuleList");
+	 * 
+	 * try {
+	 * 
+	 * Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "1",
+	 * "0", "0", newModuleList);
+	 * 
+	 * if (view.isError() == true) {
+	 * 
+	 * model = new ModelAndView("accessDenied");
+	 * 
+	 * } else {
+	 * 
+	 * model = new ModelAndView("master/libReg");
+	 * 
+	 * model.addObject("title", "Add Librarian Registration"); Librarian editInst =
+	 * new Librarian();
+	 * 
+	 * RestTemplate restTemplate = new RestTemplate(); MultiValueMap<String, Object>
+	 * map = new LinkedMultiValueMap<String, Object>(); map.add("type", 1);
+	 * Quolification[] quolArray = restTemplate.postForObject(Constants.url +
+	 * "getQuolificationList", map, Quolification[].class); List<Quolification>
+	 * quolfList = new ArrayList<>(Arrays.asList(quolArray));
+	 * System.err.println("quolfList " + quolfList.toString());
+	 * 
+	 * model.addObject("quolfList", quolfList); model.addObject("editInst",
+	 * editInst); }
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showStaffList at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
+	// insertHod
+	/*
+	 * @RequestMapping(value = "/insertLibrarian", method = RequestMethod.POST)
+	 * public String insertLibrarian1(HttpServletRequest request,
+	 * HttpServletResponse response) {
+	 * 
+	 * HttpSession session = request.getSession(); String a = null; try {
+	 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+	 * session.getAttribute("newModuleList");
+	 * 
+	 * Info view = AccessControll.checkAccess("insertLibrarian", "showLibList", "0",
+	 * "1", "0", "0", newModuleList);
+	 * 
+	 * if (view.isError() == true)
+	 * 
+	 * {
+	 * 
+	 * a = "redirect:/accessDenied";
+	 * 
+	 * }
+	 * 
+	 * else { System.err.println("in insert insertLibrarian"); ModelAndView model =
+	 * null;
+	 * 
+	 * int inst_id = (int) session.getAttribute("instituteId"); int maker_id = (int)
+	 * session.getAttribute("userId");
+	 * 
+	 * Librarian lib = new Librarian(); RestTemplate restTemplate = new
+	 * RestTemplate();
+	 * 
+	 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
+	 * Object>();
+	 * 
+	 * int librarianId = Integer.parseInt(request.getParameter("librarian_id"));
+	 * System.out.println("librarian_id" + "librarian_id");
+	 * 
+	 * String librarian_name = request.getParameter("librarian_name"); String
+	 * lib_con_num = request.getParameter("lib_con_num");
+	 * 
+	 * int conf_type = Integer.parseInt(request.getParameter("conf_type"));
+	 * 
+	 * String librarian_email = request.getParameter("librarian_email");
+	 * 
+	 * int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
+	 * 
+	 * String lib_joiningDate = request.getParameter("lib_joiningDate");
+	 * System.out.println("lib_joiningDate:" + lib_joiningDate); String
+	 * relieving_date = request.getParameter("relieving_date");
+	 * 
+	 * System.err.println("librarian id  " + librarianId); if (librarianId == 0) {
+	 * 
+	 * System.out.println("inst id is" + inst_id);
+	 * 
+	 * lib.setLibrarianName(librarian_name); lib.setContactNo(lib_con_num);
+	 * lib.setEmail(librarian_email); lib.setQualificationId(lib_quolf); if
+	 * (conf_type == 1) {
+	 * lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date)); } else {
+	 * lib.setRealivingDate(null);
+	 * 
+	 * } lib.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
+	 * lib.setMakerUserId(maker_id);
+	 * 
+	 * lib.setInstituteId(inst_id); lib.setDelStatus(1); lib.setExInt1(1);
+	 * lib.setExInt2(1); lib.setExVar1("NA"); lib.setExVar2("NA");
+	 * 
+	 * DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
+	 * cal = Calendar.getInstance();
+	 * 
+	 * String curDateTime = dateFormat.format(cal.getTime());
+	 * 
+	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+	 * 
+	 * String curDate = dateFormatStr.format(new Date());
+	 * 
+	 * lib.setMakerEnterDatetime(curDateTime);
+	 * 
+	 * Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian", lib,
+	 * Librarian.class);
+	 * 
+	 * } else { System.out.println("in edit"); System.out.println("in edit");
+	 * 
+	 * map.add("libId", librarianId); // getInstitute Hod hod = Librarian lib1 =
+	 * rest.postForObject(Constants.url + "getLibrarianByLibId", map,
+	 * Librarian.class);
+	 * 
+	 * lib1.setLibrarianName(librarian_name); lib1.setContactNo(lib_con_num);
+	 * lib1.setEmail(librarian_email); lib1.setQualificationId(lib_quolf);
+	 * lib1.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
+	 * lib1.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
+	 * lib1.setMakerUserId(maker_id);
+	 * 
+	 * lib1.setInstituteId(inst_id);
+	 * 
+	 * DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
+	 * cal = Calendar.getInstance();
+	 * 
+	 * String curDateTime = dateFormat.format(cal.getTime());
+	 * 
+	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+	 * 
+	 * String curDate = dateFormatStr.format(new Date());
+	 * 
+	 * lib1.setMakerEnterDatetime(curDateTime);
+	 * 
+	 * Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian",
+	 * lib1, Librarian.class);
+	 * 
+	 * }
+	 * 
+	 * int isView = Integer.parseInt(request.getParameter("is_view")); if (isView ==
+	 * 1) a = "redirect:/showLibList";
+	 * 
+	 * else a = "redirect:/showRegLib";
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * catch (Exception e) { System.err.println("Exce in save lib  " +
+	 * e.getMessage()); e.printStackTrace(); }
+	 * 
+	 * return a;
+	 * 
+	 * }
+	 */
 	@RequestMapping(value = "/showEditLibrarian", method = RequestMethod.POST)
 	public ModelAndView showEditLibrarian(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
@@ -1404,7 +1569,7 @@ public class LibraryController {
 						sb = sb.append(studIds[i] + ",");
 
 					}
-				
+
 					String studIdList = sb.toString();
 					studIdList = studIdList.substring(0, studIdList.length() - 1);
 					System.out.println("stud id list" + studIdList);
@@ -1656,8 +1821,8 @@ public class LibraryController {
 				int no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
 				int no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));
 				int no_currAdmitted_Student = Integer.parseInt(request.getParameter("no_currAdmitted_Student"));
-				String treasury_code = "NA"; //request.getParameter("treasury_code");
-				String rusa_idNo = "NA"; //request.getParameter("rusa_idNo");
+				String treasury_code = "NA"; // request.getParameter("treasury_code");
+				String rusa_idNo = "NA"; // request.getParameter("rusa_idNo");
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
@@ -1725,7 +1890,7 @@ public class LibraryController {
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 0)
 					a = "redirect:/showInstituteInfoList";
-				
+
 			}
 
 		} catch (Exception e) {

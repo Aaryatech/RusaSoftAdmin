@@ -33,6 +33,7 @@ import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.AccOfficer;
 import com.ats.rusasoft.model.Dept;
+import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.GetAccOfficer;
 import com.ats.rusasoft.model.GetInstituteList;
 import com.ats.rusasoft.model.Hod;
@@ -40,12 +41,18 @@ import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.Staff;
+import com.ats.rusasoft.model.accessright.AssignRoleDetailList;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
 @Scope("session")
 public class MasterController {
 	RestTemplate rest = new RestTemplate();
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Calendar cal = Calendar.getInstance();
+	String curDateTime = dateFormat.format(cal.getTime());
+	String redirect = null;
 
 	@RequestMapping(value = "/checkUniqueField", method = RequestMethod.GET)
 	public @ResponseBody Info checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
@@ -287,38 +294,220 @@ public class MasterController {
 	/////////////////////////// ****faculty
 	/////////////////////////// details****//////////////////////////////////
 
+	/*
+	 * @RequestMapping(value = "/showRegAcc", method = RequestMethod.GET) public
+	 * ModelAndView showRefAcc(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("master/accReg");
+	 * 
+	 * model.addObject("title", "Account Officer Registration");
+	 * 
+	 * AccOfficer accOff = new AccOfficer();
+	 * 
+	 * model.addObject("accOff", accOff); MultiValueMap<String, Object> map = new
+	 * LinkedMultiValueMap<String, Object>();
+	 * 
+	 * map.add("type", 1); Quolification[] quolArray =
+	 * rest.postForObject(Constants.url + "getQuolificationList", map,
+	 * Quolification[].class); List<Quolification> quolfList = new
+	 * ArrayList<>(Arrays.asList(quolArray)); System.err.println("quolfList " +
+	 * quolfList.toString());
+	 * 
+	 * model.addObject("quolfList", quolfList);
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showStaffList at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 	@RequestMapping(value = "/showRegAcc", method = RequestMethod.GET)
-	public ModelAndView showRefAcc(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView showRegAcc(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
+			Info view = AccessControll.checkAccess("hodRegistration", "hodList", "0", "1", "0", "0", newModuleList);
 
-			model = new ModelAndView("master/accReg");
+			if (view.isError() == true) {
 
-			model.addObject("title", "Account Officer Registration");
+				model = new ModelAndView("accessDenied");
 
-			AccOfficer accOff = new AccOfficer();
+			} else {
+				model = new ModelAndView("master/accReg");
 
-			model.addObject("accOff", accOff);
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				model.addObject("title", "Account Officer Registration");
 
-			map.add("type", 1);
-			Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
-					Quolification[].class);
-			List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
-			System.err.println("quolfList " + quolfList.toString());
+				Designation[] designArr = restTemplate.getForObject(Constants.url + "/getAllDesignations",
+						Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
 
-			model.addObject("quolfList", quolfList);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = restTemplate.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("type", 1);
+				Quolification[] quolArray = restTemplate.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+
+				model.addObject("quolfList", quolfList);
+
+			}
 		} catch (Exception e) {
 
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+			System.err.println("exception In showRegAcc at Masters Contr" + e.getMessage());
 
 			e.printStackTrace();
 
 		}
 
 		return model;
+
+	}
+
+	@RequestMapping(value = "/insertAccOff", method = RequestMethod.POST)
+	public String insertAccOff(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int instituteId = (int) session.getAttribute("instituteId");
+
+			int userId = (int) session.getAttribute("userId");
+
+			int accId = Integer.parseInt(request.getParameter("acc_id"));
+
+			int isAccOff = 0;
+
+			try {
+				isAccOff = Integer.parseInt(request.getParameter("isAccOff"));
+			} catch (Exception e) {
+				isAccOff = 0;
+			}
+
+			String roleNameList = null;
+
+			roleNameList = Constants.Account_Officer_Role + "," + Constants.Faculty_Role;
+
+			if (isAccOff == 1) {
+				roleNameList = roleNameList + "," + Constants.Account_Officer_Role;
+			}
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("roleNameList", roleNameList);
+			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+					AssignRoleDetailList[].class);
+			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+			String roleIds = new String();
+			for (int i = 0; i < roleIdsList.size(); i++) {
+				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+			}
+			System.err.println("roleIds " + roleIds);
+
+			int designation = 0;
+
+			System.out.println("Data:" + accId);
+			String accName = request.getParameter("accName");
+			System.out.println("Data:" + accName);
+			designation = Integer.parseInt(request.getParameter("designation"));
+			String dateOfJoin = request.getParameter("dateOfJoin");
+			String contact = request.getParameter("contactNo");
+			String email = request.getParameter("email");
+
+			String[] deptIds = request.getParameterValues("dept_id");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < deptIds.length; i++) {
+				sb = sb.append(deptIds[i] + ",");
+
+			}
+			String deptIdList = sb.toString();
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+
+			Staff staff = new Staff();
+
+			staff.setContactNo(contact);
+			staff.setCurrentDesignationId(designation);
+			staff.setDeptId(deptIdList);
+			staff.setEmail(email);
+			staff.setFacultyFirstName(accName);
+			staff.setFacultyId(accId);
+			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setHightestQualificationYear(null);
+			staff.setIsAccOff(isAccOff);
+			staff.setIsDean(0);
+			staff.setIsFaculty(1);
+			staff.setIsHod(1);
+			staff.setIsIqac(0);
+			staff.setIsLibrarian(0);
+			staff.setIsPrincipal(0);
+
+			staff.setIsStudent(0);
+			staff.setIsWorking(1);
+			staff.setJoiningDate(dateOfJoin);
+			staff.setLastUpdatedDatetime(curDateTime);
+			staff.setMakerEnterDatetime(curDateTime);
+
+			staff.setPassword("");
+			staff.setRealivingDate(null);
+			staff.setRoleIds(roleIds);
+			staff.setTeachingTo(0);
+			staff.setType(3);
+
+			staff.setInstituteId(instituteId);
+			staff.setJoiningDate(dateOfJoin);
+			staff.setContactNo(contact);
+			staff.setEmail(email);
+			staff.setDelStatus(1);
+			staff.setIsActive(1);
+			staff.setMakerUserId(userId);
+			staff.setMakerEnterDatetime(curDateTime);
+			staff.setCheckerUserId(0);
+			staff.setCheckerDatetime(curDateTime);
+			staff.setLastUpdatedDatetime(curDateTime);
+
+			staff.setExtravarchar1("NA");
+			Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/showAccList";
+			else
+				redirect = "redirect:/showRegAcc";
+		} catch (Exception e) {
+
+			System.err.println("exception In showRegAcc at Masters Contr" + e.getMessage());
+			e.printStackTrace();
+
+		}
+		return redirect;
 
 	}
 
@@ -801,7 +990,7 @@ public class MasterController {
 
 				institute.setPresidenContact(request.getParameter("pres_contact"));
 				institute.setPresidentEmail(request.getParameter("pres_email"));
-				
+
 				institute.setVillage(request.getParameter("village"));
 				institute.setTaluka(request.getParameter("taluka"));
 				institute.setDistrict(request.getParameter("district"));
@@ -852,8 +1041,7 @@ public class MasterController {
 
 				institute.setPresidenContact(request.getParameter("pres_contact"));
 				institute.setPresidentEmail(request.getParameter("pres_email"));
-				
-				
+
 				institute.setVillage(request.getParameter("village"));
 				institute.setTaluka(request.getParameter("taluka"));
 				institute.setDistrict(request.getParameter("district"));
@@ -1211,133 +1399,113 @@ public class MasterController {
 
 	// Hod
 	// insertHod
-	@RequestMapping(value = "/insertHod", method = RequestMethod.POST)
-	public String insertHod(HttpServletRequest request, HttpServletResponse response) {
-		System.err.println("in insert insertHod");
-		ModelAndView model = null;
-		String redirect = null;
-		try {
-
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int hodId = Integer.parseInt(request.getParameter("hod_id"));
-			HttpSession session = request.getSession();
-
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			System.err.println("hodId id  " + hodId);
-
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-			Info addAccess = AccessControll.checkAccess("insertHod", "hodList", "0", "1", "0", "0", newModuleList);
-			if (addAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-
-				if (hodId == 0) {
-
-					Hod hod = new Hod();
-
-					// String deptName = request.getParameter("dept_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-					hod.setContactNo(request.getParameter("hod_mob"));
-					hod.setDelStatus(1);
-
-					String[] deptIds = request.getParameterValues("hod_dept_id");
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < deptIds.length; i++) {
-						sb = sb.append(deptIds[i] + ",");
-
-					}
-					String deptIdList = sb.toString();
-					deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
-					System.err.println("deptIdList " + deptIdList);
-					hod.setDeptId(deptIdList);
-
-					hod.setEditBy(0);
-					hod.setEmail(request.getParameter("hod_email"));
-					hod.setExInt1(1);
-					hod.setExInt2(2);
-					hod.setExVar1("NA");
-					hod.setExVar2("NA");
-					hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
-					hod.setHodId(hodId);
-					hod.setHodName(request.getParameter("hod_name"));
-					hod.setInstituteId(userObj.getGetData().getUserInstituteId());
-					hod.setIsActive(1);
-					hod.setIsEnrollSystem(0);
-					hod.setMakerDate(curDateTime);
-					hod.setMakerId(userObj.getUserId());
-					hod.setUpdateDatetime(curDateTime);
-
-					Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
-
-				} else {
-
-					map.add("hodId", hodId);
-					// getInstitute
-					Hod hod = rest.postForObject(Constants.url + "getHod", map, Hod.class);
-					String deptName = request.getParameter("dept_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					hod.setContactNo(request.getParameter("hod_mob"));
-					// hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
-
-					String[] deptIds = request.getParameterValues("hod_dept_id");
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < deptIds.length; i++) {
-						sb = sb.append(deptIds[i] + ",");
-
-					}
-					String deptIdList = sb.toString();
-					deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
-					System.err.println("deptIdList " + deptIdList);
-					hod.setDeptId(deptIdList);
-
-					hod.setEditBy(userObj.getUserId());// session
-					hod.setEmail(request.getParameter("hod_email"));
-
-					hod.setHighestQualificationId(Integer.parseInt(request.getParameter("hod_quolf")));
-					hod.setHodName(request.getParameter("hod_name"));
-					hod.setInstituteId(userObj.getGetData().getUserInstituteId());// from sess
-					hod.setUpdateDatetime(curDateTime);
-
-					Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
-
-				}
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/hodList";
-				else
-					redirect = "redirect:/hodRegistration";
-			}
-		} catch (Exception e) {
-			System.err.println("Exce in save dept  " + e.getMessage());
-			e.printStackTrace();
-		}
-
-		return redirect;
-
-	}
-
+	/*
+	 * @RequestMapping(value = "/insertHod", method = RequestMethod.POST) public
+	 * String insertHod(HttpServletRequest request, HttpServletResponse response) {
+	 * System.err.println("in insert insertHod"); ModelAndView model = null; String
+	 * redirect = null; try {
+	 * 
+	 * RestTemplate restTemplate = new RestTemplate();
+	 * 
+	 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
+	 * Object>();
+	 * 
+	 * int hodId = Integer.parseInt(request.getParameter("hod_id")); HttpSession
+	 * session = request.getSession();
+	 * 
+	 * LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+	 * System.err.println("hodId id  " + hodId);
+	 * 
+	 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+	 * session.getAttribute("newModuleList");
+	 * 
+	 * Info addAccess = AccessControll.checkAccess("insertHod", "hodList", "0", "1",
+	 * "0", "0", newModuleList); if (addAccess.isError() == true) { redirect =
+	 * "redirect:/accessDenied"; } else {
+	 * 
+	 * if (hodId == 0) {
+	 * 
+	 * Hod hod = new Hod();
+	 * 
+	 * // String deptName = request.getParameter("dept_name"); DateFormat dateFormat
+	 * = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar cal =
+	 * Calendar.getInstance();
+	 * 
+	 * String curDateTime = dateFormat.format(cal.getTime());
+	 * 
+	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+	 * 
+	 * String curDate = dateFormatStr.format(new Date());
+	 * hod.setContactNo(request.getParameter("hod_mob")); hod.setDelStatus(1);
+	 * 
+	 * String[] deptIds = request.getParameterValues("hod_dept_id"); StringBuilder
+	 * sb = new StringBuilder();
+	 * 
+	 * for (int i = 0; i < deptIds.length; i++) { sb = sb.append(deptIds[i] + ",");
+	 * 
+	 * } String deptIdList = sb.toString(); deptIdList = deptIdList.substring(0,
+	 * deptIdList.length() - 1); System.err.println("deptIdList " + deptIdList);
+	 * hod.setDeptId(deptIdList);
+	 * 
+	 * hod.setEditBy(0); hod.setEmail(request.getParameter("hod_email"));
+	 * hod.setExInt1(1); hod.setExInt2(2); hod.setExVar1("NA"); hod.setExVar2("NA");
+	 * hod.setHighestQualificationId(Integer.parseInt(request.getParameter(
+	 * "hod_quolf"))); hod.setHodId(hodId);
+	 * hod.setHodName(request.getParameter("hod_name"));
+	 * hod.setInstituteId(userObj.getGetData().getUserInstituteId());
+	 * hod.setIsActive(1); hod.setIsEnrollSystem(0); hod.setMakerDate(curDateTime);
+	 * hod.setMakerId(userObj.getUserId()); hod.setUpdateDatetime(curDateTime);
+	 * 
+	 * Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+	 * 
+	 * } else {
+	 * 
+	 * map.add("hodId", hodId); // getInstitute Hod hod =
+	 * rest.postForObject(Constants.url + "getHod", map, Hod.class); String deptName
+	 * = request.getParameter("dept_name"); DateFormat dateFormat = new
+	 * SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar cal =
+	 * Calendar.getInstance();
+	 * 
+	 * String curDateTime = dateFormat.format(cal.getTime());
+	 * 
+	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+	 * 
+	 * String curDate = dateFormatStr.format(new Date());
+	 * 
+	 * hod.setContactNo(request.getParameter("hod_mob")); //
+	 * hod.setDeptId(Integer.parseInt(request.getParameter("hod_dept_id")));
+	 * 
+	 * String[] deptIds = request.getParameterValues("hod_dept_id"); StringBuilder
+	 * sb = new StringBuilder();
+	 * 
+	 * for (int i = 0; i < deptIds.length; i++) { sb = sb.append(deptIds[i] + ",");
+	 * 
+	 * } String deptIdList = sb.toString(); deptIdList = deptIdList.substring(0,
+	 * deptIdList.length() - 1); System.err.println("deptIdList " + deptIdList);
+	 * hod.setDeptId(deptIdList);
+	 * 
+	 * hod.setEditBy(userObj.getUserId());// session
+	 * hod.setEmail(request.getParameter("hod_email"));
+	 * 
+	 * hod.setHighestQualificationId(Integer.parseInt(request.getParameter(
+	 * "hod_quolf"))); hod.setHodName(request.getParameter("hod_name"));
+	 * hod.setInstituteId(userObj.getGetData().getUserInstituteId());// from sess
+	 * hod.setUpdateDatetime(curDateTime);
+	 * 
+	 * Hod editInst = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
+	 * 
+	 * }
+	 * 
+	 * int isView = Integer.parseInt(request.getParameter("is_view")); if (isView ==
+	 * 1) redirect = "redirect:/hodList"; else redirect =
+	 * "redirect:/hodRegistration"; } } catch (Exception e) {
+	 * System.err.println("Exce in save dept  " + e.getMessage());
+	 * e.printStackTrace(); }
+	 * 
+	 * return redirect;
+	 * 
+	 * }
+	 */
 	// showEditHod
 	@RequestMapping(value = "/showEditHod", method = RequestMethod.POST)
 	public ModelAndView showEditHod(HttpServletRequest request, HttpServletResponse response) {
@@ -1386,7 +1554,7 @@ public class MasterController {
 
 				List<Integer> deptIds = Stream.of(editHod.getDeptId().split(",")).map(Integer::parseInt)
 						.collect(Collectors.toList());
-				
+
 				model.addObject("deptIds", deptIds);
 			}
 
@@ -1462,120 +1630,112 @@ public class MasterController {
 	// Hod */
 
 	// Acc Officer
-	@RequestMapping(value = "/insertAccOff", method = RequestMethod.POST)
-
-	public String insertAccOff(HttpServletRequest request, HttpServletResponse response) {
-		System.err.println("in insert insertAccOff");
-		ModelAndView model = null;
-
-		String redirect = null;
-		try {
-
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int officerId = Integer.parseInt(request.getParameter("acc_off_id"));
-			HttpSession session = request.getSession();
-
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			System.err.println("officerId id  " + officerId);
-
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-			Info addAccess = AccessControll.checkAccess("insertAccOff", "showAccList", "0", "1", "0", "0",
-					newModuleList);
-			if (addAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (officerId == 0) {
-
-					Hod hod = new Hod();
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					AccOfficer acOff = new AccOfficer();
-
-					acOff.setAccOfficerName(request.getParameter("acc_off_name"));
-					acOff.setContactNo(request.getParameter("acc_off_mob"));
-					acOff.setDelStatus(1);
-					acOff.setEmail(request.getParameter("acc_off_email"));
-					acOff.setExInt1(1);
-					acOff.setExVar1("Na");
-					acOff.setInstituteId(userObj.getGetData().getUserInstituteId());
-					acOff.setIsActive(1);
-					acOff.setJoiningDate(DateConvertor.convertToYMD(request.getParameter("acc_off_joinDate")));
-					acOff.setMakerEnterDatetime(curDateTime);
-					acOff.setMakerUserId(userObj.getUserId());
-					acOff.setOfficerId(officerId);
-					acOff.setQualificationId(Integer.parseInt(request.getParameter("acc_quolf")));
-					int isReg = Integer.parseInt(request.getParameter("is_registration"));
-
-					if (isReg == 0) {
-						acOff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
-
-					} else {
-						acOff.setRealivingDate(null);
-					}
-
-					AccOfficer editInst = rest.postForObject(Constants.url + "saveAccOfficer", acOff, AccOfficer.class);
-
-				} else {
-
-					map.add("accOffId", officerId);
-					AccOfficer acOff = rest.postForObject(Constants.url + "getAccOfficer", map, AccOfficer.class);
-					String deptName = request.getParameter("dept_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					acOff.setAccOfficerName(request.getParameter("acc_off_name"));
-					acOff.setContactNo(request.getParameter("acc_off_mob"));
-					acOff.setEmail(request.getParameter("acc_off_email"));
-					acOff.setInstituteId(userObj.getGetData().getUserInstituteId());
-					acOff.setJoiningDate(DateConvertor.convertToYMD(request.getParameter("acc_off_joinDate")));
-					acOff.setOfficerId(officerId);
-					acOff.setQualificationId(Integer.parseInt(request.getParameter("acc_quolf")));
-					int isReg = Integer.parseInt(request.getParameter("is_registration"));
-
-					if (isReg == 0) {
-						acOff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter("acc_off_relDate")));
-
-					} else {
-						acOff.setRealivingDate(null);
-					}
-
-					AccOfficer editInst = rest.postForObject(Constants.url + "saveAccOfficer", acOff, AccOfficer.class);
-
-				}
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showAccList";
-				else
-					redirect = "redirect:/showRegAcc";
-
-			}
-
-		} catch (Exception e) {
-			System.err.println("Exce in save dept  " + e.getMessage());
-			e.printStackTrace();
-		}
-
-		return redirect;
-
-	}
+	/*
+	 * @RequestMapping(value = "/insertAccOff", method = RequestMethod.POST)
+	 * 
+	 * public String insertAccOff(HttpServletRequest request, HttpServletResponse
+	 * response) { System.err.println("in insert insertAccOff"); ModelAndView model
+	 * = null;
+	 * 
+	 * String redirect = null; try {
+	 * 
+	 * RestTemplate restTemplate = new RestTemplate();
+	 * 
+	 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
+	 * Object>();
+	 * 
+	 * int officerId = Integer.parseInt(request.getParameter("acc_off_id"));
+	 * HttpSession session = request.getSession();
+	 * 
+	 * LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+	 * System.err.println("officerId id  " + officerId);
+	 * 
+	 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+	 * session.getAttribute("newModuleList");
+	 * 
+	 * Info addAccess = AccessControll.checkAccess("insertAccOff", "showAccList",
+	 * "0", "1", "0", "0", newModuleList); if (addAccess.isError() == true) {
+	 * redirect = "redirect:/accessDenied"; } else { if (officerId == 0) {
+	 * 
+	 * Hod hod = new Hod();
+	 * 
+	 * DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
+	 * cal = Calendar.getInstance();
+	 * 
+	 * String curDateTime = dateFormat.format(cal.getTime());
+	 * 
+	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+	 * 
+	 * String curDate = dateFormatStr.format(new Date());
+	 * 
+	 * AccOfficer acOff = new AccOfficer();
+	 * 
+	 * acOff.setAccOfficerName(request.getParameter("acc_off_name"));
+	 * acOff.setContactNo(request.getParameter("acc_off_mob"));
+	 * acOff.setDelStatus(1); acOff.setEmail(request.getParameter("acc_off_email"));
+	 * acOff.setExInt1(1); acOff.setExVar1("Na");
+	 * acOff.setInstituteId(userObj.getGetData().getUserInstituteId());
+	 * acOff.setIsActive(1);
+	 * acOff.setJoiningDate(DateConvertor.convertToYMD(request.getParameter(
+	 * "acc_off_joinDate"))); acOff.setMakerEnterDatetime(curDateTime);
+	 * acOff.setMakerUserId(userObj.getUserId()); acOff.setOfficerId(officerId);
+	 * acOff.setQualificationId(Integer.parseInt(request.getParameter("acc_quolf")))
+	 * ; int isReg = Integer.parseInt(request.getParameter("is_registration"));
+	 * 
+	 * if (isReg == 0) {
+	 * acOff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter(
+	 * "acc_off_relDate")));
+	 * 
+	 * } else { acOff.setRealivingDate(null); }
+	 * 
+	 * AccOfficer editInst = rest.postForObject(Constants.url + "saveAccOfficer",
+	 * acOff, AccOfficer.class);
+	 * 
+	 * } else {
+	 * 
+	 * map.add("accOffId", officerId); AccOfficer acOff =
+	 * rest.postForObject(Constants.url + "getAccOfficer", map, AccOfficer.class);
+	 * String deptName = request.getParameter("dept_name"); DateFormat dateFormat =
+	 * new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar cal =
+	 * Calendar.getInstance();
+	 * 
+	 * String curDateTime = dateFormat.format(cal.getTime());
+	 * 
+	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+	 * 
+	 * String curDate = dateFormatStr.format(new Date());
+	 * 
+	 * acOff.setAccOfficerName(request.getParameter("acc_off_name"));
+	 * acOff.setContactNo(request.getParameter("acc_off_mob"));
+	 * acOff.setEmail(request.getParameter("acc_off_email"));
+	 * acOff.setInstituteId(userObj.getGetData().getUserInstituteId());
+	 * acOff.setJoiningDate(DateConvertor.convertToYMD(request.getParameter(
+	 * "acc_off_joinDate"))); acOff.setOfficerId(officerId);
+	 * acOff.setQualificationId(Integer.parseInt(request.getParameter("acc_quolf")))
+	 * ; int isReg = Integer.parseInt(request.getParameter("is_registration"));
+	 * 
+	 * if (isReg == 0) {
+	 * acOff.setRealivingDate(DateConvertor.convertToYMD(request.getParameter(
+	 * "acc_off_relDate")));
+	 * 
+	 * } else { acOff.setRealivingDate(null); }
+	 * 
+	 * AccOfficer editInst = rest.postForObject(Constants.url + "saveAccOfficer",
+	 * acOff, AccOfficer.class);
+	 * 
+	 * } int isView = Integer.parseInt(request.getParameter("is_view")); if (isView
+	 * == 1) redirect = "redirect:/showAccList"; else redirect =
+	 * "redirect:/showRegAcc";
+	 * 
+	 * }
+	 * 
+	 * } catch (Exception e) { System.err.println("Exce in save dept  " +
+	 * e.getMessage()); e.printStackTrace(); }
+	 * 
+	 * return redirect;
+	 * 
+	 * }
+	 */
 
 	// showEditaccOff
 	@RequestMapping(value = "/showEditaccOff", method = RequestMethod.POST)

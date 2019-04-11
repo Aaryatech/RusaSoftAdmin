@@ -43,9 +43,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
-<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
-
+<body class=" ">
+	<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -60,39 +59,19 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
 
-				<!-- 	<div class="col-xs-12">
-					<div class="page-title">
-
-						<div class="pull-left">
-							PAGE HEADING TAG - START
-							<h1 class="title">HOD Registration</h1>
-							PAGE HEADING TAG - END
-						</div>
-
-
-					</div>
-				</div> -->
-
 
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-
-
-
 
 				<div class="col-lg-12">
 					<section class="box ">
 
 						<header class="panel_header">
-
 							<h2 class="title pull-left">${title}</h2>
-							<br />
-<!-- 							<h3 class="title pull-left">Institute Name:abc</h3>
- -->
 
 							<div class="actions panel_actions pull-right">
-
-								
+								<%-- <a href="${pageContext.request.contextPath}/showIqacList"><button
+										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
 						</header>
@@ -101,303 +80,612 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									
-
-										<!-- <ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Register HOD
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home"> -->
-<form class="form-horizontal"
+									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertHod"
-										method="post" name="form_sample_2" id="form_sample_2">
-													<div class="row">
-													<div class="col-md-12">
+										method="post" name="formidhere" id="formidhere">
 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_name">
-																Department<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<select id="hod_dept_id" name="hod_dept_id"
-																	class="" multiple>
-																	<c:forEach items="${deptList}" var="dept">
-																		<c:choose>
-																			<c:when test="${hod.deptId==dept.deptId}">
-																				<option selected value="${dept.deptId}">${dept.deptName}</option>
+										<input type="hidden" id="hod_id" name="hod_id" value="0">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_name">
+												Name<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="hodName"
+													onchange="trim(this)" autocomplete="off"
+													value="${hod.iqacName}" name="hodName"
+													placeholder="HOD Name"> <span
+													class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter HOD name</span>
+											</div>
+										</div>
 
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${dept.deptId}">${dept.deptName}</option>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">Designation
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="designation" name="designation"
+													class="form-control" onchange="showForm()">
 
-																			</c:otherwise>
+													<c:forEach items="${desigList}" var="makeList">
+														<c:choose>
+															<c:when test="${makeList.designationId == hod.desgntnId}">
+																<option value="${makeList.designationId}"
+																	selected="selected">${makeList.designationName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${makeList.designationId}">${makeList.designationName}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
 
-																		</c:choose>
+												</select> <span class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please select designation</span>
+											</div>
+										</div>
 
-																	</c:forEach>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_name">
+												Department<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="dept_id" name="dept_id" class="" multiple>
+													<c:forEach items="${deptList}" var="dept">
+														<c:choose>
+															<c:when test="${hod.deptId==dept.deptId}">
+																<option selected value="${dept.deptId}">${dept.deptName}</option>
 
-																</select>
-																<span
-															class="error_form text-danger" id="hod_dept_id_field"
-															style="display: none;">Please select department
-															name</span>
-															</div>
-														</div>
+															</c:when>
+															<c:otherwise>
+																<option value="${dept.deptId}">${dept.deptName}</option>
 
+															</c:otherwise>
 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="page_name">HOD
-																Name<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" class="form-control" id="hod_name" onchange="trim(this)" maxlength="100"
-																	value="${hod.hodName}" name="hod_name"
-																	placeholder="Head of Department Name">
-																	<span
-															class="error_form text-danger" id="hod_name_field"
-															style="display: none;">Please enter hod
-															name</span>
-															</div>
-														</div>
+														</c:choose>
 
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="status">Highest
-																Qualification<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<select id="hod_quolf" name="hod_quolf"
-																	class="form-control">
-																	<c:forEach items="${quolfList}" var="quolf">
-																		<c:choose>
-																			<c:when test="${hod.highestQualificationId==quolf.qualificationId}">
-																				<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:when>
-																			<c:otherwise>
-
-																				<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-
-																</select>
-																<span
-															class="error_form text-danger" id="hod_quolf_field"
-															style="display: none;">Please select
-															highest qualification</span>
-															</div>
-														</div>
-
-														
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="smallheading">Contact
-																No.<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text" maxlength="10" class="form-control" id="hod_mob" value="${hod.contactNo}"
-																	name="hod_mob"  oninput="checkUnique(this.value,1)"
-																	placeholder="Mobile Number">
-																	<span
-															class="error_form text-danger" id="hod_mob_field"
-															style="display: none;">Please enter hod mobile no</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="hod_email">Email
-																ID(Official) : <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-9">
-																<input type="text"  maxlength="50" class="form-control" id="hod_email"  oninput="checkUnique(this.value,2)"
-																	name="hod_email" placeholder="abc@xyz.com" value="${hod.email}"
-																	onchange="trim(this)">
-																	<span
-															class="error_form text-danger" id="hod_email_field"
-															style="display: none;">Please enter hod email id</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<div class="col-sm-offset-3 col-sm-9">
-															
-															
-															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/hodList"><button type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+													</c:forEach>
+													<option value="0">NA</option>
 
 
-															<%-- 	<input type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)" value="Save">
-																<a href="${pageContext.request.contextPath}/hodList"><button
-										type="button" id="sub2" class="btn btn-info">Cancel</button></a> --%>
-																<!-- <input type="submit" style="display: none"  id="sub2" class="btn btn-primary" onclick="submit_f(0)" value="Save &
-																		Next"> -->
-																<%-- <a href="${pageContext.request.contextPath}/hodList"><button
-																		type="button" class="btn btn-primary">S</button></a> --%>
-															</div>
-														</div>
-
-													</div>
-													<input type="hidden" id="hod_id" name="hod_id" value="${hod.hodId}">
-													<input type="hidden" id="is_view" name="is_view" value="0">
-													
-													
+												</select> <span class="error_form text-danger" id="dept_id_field"
+													style="display: none;">Please select department name</span>
+											</div>
+										</div>
 
 
-													<div class="clearfix"></div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="status">
+												Qualification<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="quolif" name="quolif" class="form-control">
+													<c:forEach items="${quolfList}" var="quolf">
+														<c:choose>
+															<c:when
+																test="${hod.highestQualificationId==quolf.qualificationId}">
+																<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
-												</div>
-</form>
-	<p class="desc text-danger fontsize11">Notice : * Fields
-										are mandatory.</p>
+															</c:when>
+															<c:otherwise>
+
+																<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+															</c:otherwise>
+
+														</c:choose>
+
+													</c:forEach>
+
+												</select> <span class="error_form text-danger" id="quolf_field"
+													style="display: none;">Please select highest
+													qualification</span>
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">Joining
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control datepicker"
+													id="dateOfJoin" onchange="trim(this)"
+													onkeypress='return restrictAlphabets(event)'
+													value="${miqc.joiningDate}" name="dateOfJoin"
+													autocomplete="off" placeholder="dd/mm/yyyy"> <span
+													class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please select joining date</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">Contact
+												No. <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="contactNo"
+													onchange="checkUnique(this.value,1)" onchange="trim(this)"
+													name="contactNo"
+													onkeypress='return restrictAlphabets(event)'
+													autocomplete="off" maxlength="10"
+													title="Phone number with 7-9 and remaing 9 digit with 0-9"
+													placeholder="Mobile Number" value="${miqc.contactNo}">
+												<span class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter contact no</span>
+
+												<p class="desc text-danger fontsize11">Note: OTP will be
+													sent on this mobile number for verification</p>
 
 											</div>
-											
+										</div>
+
+
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Email
+												ID(Official) <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="email" class="form-control" id="email"
+													autocomplete="off" onchange="checkUnique(this.value,2)"
+													onchange="trim(this)" name="email"
+													placeholder="abc@xyz.com" value="${miqc.email}"> <span
+													class="error_form text-danger" id="error_formfield5"
+													style="display: none;">Please enter email id</span>
+												<p class="desc font-italic fontsize11">Note:
+													Verification mail will be sent on this Email id</p>
+
+											</div>
 
 										</div>
-									
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Roles
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="checkbox" name="isDean" value="1">Dean
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/showIqacList"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+												<!-- <button type="reset" class="btn btn-default">Reset</button> -->
+												<input type="hidden" id="is_view" name="is_view" value="0">
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
-								</section>
-
 							</div>
-							</section>
-							</section>
 						</div>
-						
-<!-- 
+
+
 					</section>
-
 				</div>
- -->
 
-				<!-- MAIN CONTENT AREA ENDS -->
-		<!-- 	</section>
-		</section> -->
-		<!-- END CONTENT -->
+			</section>
+		</section>
 
+	</div>
+	<!-- MAIN CONTENT AREA ENDS -->
 
-
-	<!-- </div> -->
-	<!-- END CONTAINER -->
-	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
+	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script>
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+
 		function validateEmail(email) {
+
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
 			if (eml.test($.trim(email)) == false) {
+
 				return false;
+
 			}
+
 			return true;
+
 		}
 		function validateMobile(mobile) {
 			var mob = /^[1-9]{1}[0-9]{9}$/;
+
 			if (mob.test($.trim(mobile)) == false) {
+
+				//alert("Please enter a valid email address .");
 				return false;
+
 			}
 			return true;
+
 		}
 		$(document)
 				.ready(
 						function($) {
 
-							$("#form_sample_2")
+							$("#formidhere")
 									.submit(
 											function(e) {
 												var isError = false;
 												var errMsg = "";
 
-												if (!$("#hod_dept_id").val()) {
-													isError = true;
+												if (!$("#hodName").val()) {
 
-													$("#hod_dept_id").addClass(
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#hodName").addClass(
 															"has-error")
-													$("#hod_dept_id_field")
+													$("#error_formfield1")
 															.show()
+													//return false;
 												} else {
-													$("#hod_dept_id_field")
+													$("#error_formfield1")
 															.hide()
 												}
 
-												if (!$("#hod_name").val()) {
-													isError = true;
+												if (!$("#designation").val()) {
 
-													$("#hod_name").addClass(
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#designation").addClass(
 															"has-error")
-													$("#hod_name_field")
+													$("#error_formfield2")
 															.show()
+													//return false;
 												} else {
-													$("#hod_name_field")
+													$("#error_formfield2")
 															.hide()
 												}
 
-												if (!$("#hod_quolf").val()) {
-													isError = true;
+												if (!$("#dateOfJoin").val()) {
 
-													$("#hod_quolf").addClass(
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#dateOfJoin").addClass(
 															"has-error")
-													$("#hod_quolf_field").show()
+													$("#error_formfield3")
+															.show()
+													//return false;
 												} else {
-													$("#hod_quolf_field").hide()
+													$("#error_formfield3")
+															.hide()
 												}
 
-												if (!$("#hod_mob").val()
+												if (!$("#dept_id").val()) {
+													isError = true;
+
+													$("#dept_id").addClass(
+															"has-error")
+													$("#dept_id_field").show()
+												} else {
+													$("#dept_id_field").hide()
+												}
+
+												if (!$("#quolif").val()) {
+													isError = true;
+													$("#quolif").addClass(
+															"has-error")
+													$("#quolf_field").show()
+													//return false;
+												} else {
+													$("#quolf_field").hide()
+												}
+												if (!$("#contactNo").val()
 														|| !validateMobile($(
-																"#hod_mob")
+																"#contactNo")
 																.val())) {
+
 													isError = true;
-													$("#hod_mob")
-															.addClass(
-																	"has-error")
-													$("#hod_mob_field")
-															.show()
+													errMsg += '<li>Please enter a valid email address.</li>';
+													errMsg_alert = 'Please enter a valid mobile number.';
+													$("#error_formfield4")
+															.html(errMsg_alert);
+													$("#error_formfield4")
+															.show();
+													//alert();
+													//return false;
 												} else {
-													$("#hod_mob_field")
+													$("#error_formfield4")
+															.html(
+																	"Please enter mobile")
+													$("#error_formfield4")
+															.hide()
+												}
+												if (!$("#email").val()
+														|| !validateEmail($(
+																"#email").val())) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid email address.</li>';
+													errMsg_alert += 'Please enter a valid email address. \n';
+													$("#error_formfield5")
+															.show()
+													//return fregister_useralse;
+												} else {
+													$("#error_formfield5")
 															.hide()
 												}
 
-												if (!$("#hod_email").val()
-														|| !validateEmail($(
-																"#hod_email")
-																.val())) {
-													isError = true;
-													$("#hod_email").addClass(
-															"has-error")
-													$("#hod_email_field")
-															.show()
-												} else {
-													$("#hod_email_field")
-															.hide()
-												}
-												
 												if (!isError) {
+
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
-														document.getElementById("sub1").disabled = true;
-														document.getElementById("sub2").disabled = true;
-														return  true;
-													}	
+
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
 												}
 												return false;
 											});
 						});
 	</script>
-	
+
 	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
+
+		/* function showForm() {
+			//document.getElementById("abc").style = "display:none"
+				var qualType=document.getElementById("qualification").value
+			//alert("qualType::"+qualType);
+				
+				if (qualType == 5) {
+
+					document.getElementById("abc").style = "visible"
+					
+						
+				} 
+				else{
+					document.getElementById("abc").style = "display:none"
+				}
+			
+			} */
+		/* function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+				
+			
+			} */
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
+
+	<script type="text/javascript">
+		function showDiv(value) {
+
+			if (value == 0) {
+				//alert(value);
+				document.getElementById("abc").style.display = "block";
+			} else {
+				//alert(value);
+				document.getElementById("abc").style.display = "none";
+			}
+		}
+
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+
+		}
+	</script>
+	<script type="text/javascript">
+		function setDate(value) {
+			//alert("Value " +value)
+			if (value == 1) {
+				//alert(value)
+				document.getElementById("acc_off_relDate").removeAttribute(
+						"required");
+				document.getElementById("abc").style.display = "none";
+
+				//alert(value)
+			} else {
+				//alert(value)
+				document.getElementById("acc_off_relDate").setAttribute(
+						"required", "true");
+				document.getElementById("abc").style.display = "block";
+
+				//alert(value)
+
+			}
+
+		}
+	</script>
+	<script type="text/javascript">
+		function showIsReg() {
+			//alert("Hi");
+			var x = $
+			{
+				accOff.officerId
+			}
+
+			if (x > 0) {
+				//alert("Hi 1")
+				var isRel = $
+				{
+					accOff.realivingDate
+				}
+				;
+				//alert("Is Reg " +isReg);
+				if (isRel == null) {
+					//alert("Hi 2")
+					document.getElementById("abc").style.display = "none";
+
+				} else {
+					//alert("Hi es")
+					document.getElementById("abc").style.display = "block";
+
+				}
+
+			}
+
+		}
+	</script>
+	<script type="text/javascript">
+		function checkUnique(inputValue, valueType) {
+
+			document.getElementById("sub1").disabled = false;
+			document.getElementById("sub2").disabled = false;
+
+			//alert(inputValue+" "+valueType);
+
+			var primaryKey = $
+			{
+				miqc.iqacId
+			}
+			;
+			//alert("Primary key"+primaryKey);
+			var isEdit = 0;
+			if (primaryKey > 0) {
+				isEdit = 1;
+			}
+			//alert("Is Edit " +isEdit);
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+				$
+						.getJSON(
+								'${chkFields}',
+								{
+
+									inputValue : inputValue,
+									valueType : valueType,
+									primaryKey : primaryKey,
+									isEdit : isEdit,
+									tableId : 1,
+
+									ajax : 'true',
+
+								},
+								function(data) {
+
+									//alert("Data  " +JSON.stringify(data));
+									if (data.error == true) {
+										if (valueType == 2) {
+											document.getElementById("email").value = "";
+											alert("This email id already exist in system please enter unique");
+										} else {
+											document
+													.getElementById("contactNo").value = "";
+
+											alert("This contact no  already exist in system please enter unique");
+										}
+									}
+								});
+		}
+
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+			/* var form=document.getElementById("form_sample_2");
+			form.setAttribute("method", "post");
+
+			form.action=("insertHod");
+			var x =confirm("Do you really want to submit the form?");
+			if(x==true)
+			form.submit(); */
+
+		}
+
+		/* function showForm() {
+			//document.getElementById("abc").style = "display:none"
+				var qualType=document.getElementById("qualification").value
+			//alert("qualType::"+qualType);
+				
+				if (qualType == 5) {
+
+					document.getElementById("abc").style = "visible"
+					
+						
+				} 
+				else{
+					document.getElementById("abc").style = "display:none"
+				}
+			
+			} */
+		/* function hideText() {
+			//alert("hii");
+			document.getElementById("abc").style = "display:none"
+				
+			
+			} */
+	</script>
+	<!-- <script type="text/javascript">
+	
 	
 	function checkUnique(inputValue,valueType){
     	//alert(inputValue);
+    				document.getElementById("sub1").disabled=false;
+					document.getElementById("sub2").disabled=false;
     	
-    	var primaryKey=${hod.hodId};
+    	var primaryKey=${accOff.officerId};
     	//alert("Primary key"+primaryKey);
     	var isEdit=0;
     	if(primaryKey>0){
@@ -437,7 +725,7 @@
     		valueType  : valueType,
     		primaryKey : primaryKey,
     		isEdit     : isEdit,
-    		tableId : 2,
+    		tableId : 5,
 
 			ajax : 'true',
 
@@ -446,87 +734,61 @@
 		//	alert("Data  " +JSON.stringify(data));
 			if(data.error==true){
 				if(valueType==2){
-					document.getElementById("hod_email").value="";
+					document.getElementById("acc_off_email").value="";
 
 				alert("This email id already exist in system please enter unique");
+				
+					document.getElementById("sub1").disabled=true;
+					document.getElementById("sub2").disabled=true;
+				
 				}
 				else{
-					document.getElementById("hod_mob").value="";
+					document.getElementById("acc_off_mob").value="";
 
 					alert("This contact no  already exist in system please enter unique");
+					
+					document.getElementById("sub1").disabled=true;
+					document.getElementById("sub2").disabled=true;
+					
 				}
 			}
 		});
     }
 	
-	function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
-
-		form.action=("insertHod");
-		var x =confirm("Do you really want to submit the form?");
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-	
-	/* function showForm() {
-		//document.getElementById("abc").style = "display:none"
-			var qualType=document.getElementById("qualification").value
-		//alert("qualType::"+qualType);
-			
-			if (qualType == 5) {
-
-				document.getElementById("abc").style = "visible"
-				
-					
-			} 
-			else{
-				document.getElementById("abc").style = "display:none"
-			}
-		
-		} */
-	/* function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		} */
-		
 	</script>
-	 <script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
+ -->
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-    
-    function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}
-    
-    $("#hod_dept_id").select2({
-        allowClear: true
-    }).on('select2-open', function() {
-        // Adding Custom Scrollbar
-        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-    });
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
 
-</script>
+		$("#dept_id").select2({
+			allowClear : true
+		}).on(
+				'select2-open',
+				function() {
+					// Adding Custom Scrollbar
+					$(this).data('select2').results.addClass('overflow-hidden')
+							.perfectScrollbar();
+				});
+	</script>
+
+
+
+
+
+
 
 </body>
 </html>
