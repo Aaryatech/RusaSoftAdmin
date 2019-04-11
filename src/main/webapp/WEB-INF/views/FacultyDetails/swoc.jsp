@@ -154,7 +154,7 @@
 												</div>
 
 												<div class="row">
-													s
+
 
 
 													<div class="col-xs-12">

@@ -1187,7 +1187,7 @@ public class FacultyController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info add = AccessControll.checkAccess("showSWOC", "showSWOC", "1", "0", "0", "0", newModuleList);
+			Info add = AccessControll.checkAccess("showSWOC", "showSWOCList", "1", "0", "0", "0", newModuleList);
 
 			if (add.isError() == false) {
 
@@ -1250,7 +1250,7 @@ public class FacultyController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info add = AccessControll.checkAccess("showSWOC", "showSWOC", "1", "0", "0", "0", newModuleList);
+			Info add = AccessControll.checkAccess("showSWOCList", "showSWOCList", "1", "0", "0", "0", newModuleList);
 
 			if (add.isError() == false) {
 
@@ -1321,7 +1321,7 @@ public class FacultyController {
 
 		} catch (Exception e) {
 
-			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
+			System.err.println("exception In showSWOCList at Faculty Contr" + e.getMessage());
 
 			e.printStackTrace();
 
