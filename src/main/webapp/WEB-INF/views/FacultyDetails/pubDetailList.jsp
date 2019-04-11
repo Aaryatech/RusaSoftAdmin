@@ -136,6 +136,8 @@
 																		type="checkbox" name="selAll" id="selAll"
 																		onClick="selectedInst(this)" /> Select All</th> 
 																	<th>Sr No</th>
+																	<th>Faculty Name</th>
+																	<th>Department Name</th>
 																	<th>Conference Title</th>
 																	<th>Conference Type</th>
 																	<th>Date</th>
@@ -154,6 +156,8 @@
 															name="confId" id="confIds${count.index+1}"
 															value="${facCon.confId}" /></td> 
 														<td style="text-align: center; ">${count.index+1}</td>
+														<td>${facCon.facultyFirstName}</td>
+														<td>${facCon.deptName}</td>
 														<td>${facCon.confName}</td>
 														<td>${facCon.confType}</td>
 														<td style="text-align: center; ">${facCon.confDate}</td>

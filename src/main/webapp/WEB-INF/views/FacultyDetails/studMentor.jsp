@@ -105,7 +105,8 @@
 																type="checkbox" name="selAll" id="selAll"
 																onClick="selectedInst(this)" /> Select All</th> 
 																<th>Sr No</th>
-																<th>Academic Year</th>
+																<th>Faculty name</th>
+																<th>Department</th>
 																<th>No. of Students</th>
 																<th width="10%">Action</th>
 															</tr>
@@ -119,8 +120,12 @@
 												<td style="text-align: center">${count.index+1}</td>
 											
 											<td style="text-align: center"><c:out
-														value="${studL.academicYear}" /></td>
-											
+														value="${studL.facultyFirstName}" /></td>
+														
+											<td style="text-align: center"><c:out
+														value="${studL.deptName}" /></td>
+														
+										
 											<td style="text-align: right"><c:out
 														value="${studL.menStuCount}" /></td>
 										

@@ -119,6 +119,8 @@
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th> 
 																		<th>Sr No</th>
+																		<th>Faculty Name</th>
+																		<th>Department Name</th>
 																		<th>Level</th>
 																		<th>Name</th>
 																		<th>University</th>
@@ -134,6 +136,8 @@
 															name="facContId" id="facContIds${count.index+1}"
 															value="${contribtn.conId}" /></td> 
 														<td style="text-align: center; ">${count.index+1}</td>
+														<td>${contribtn.facultyFirstName}</td>
+														<td>${contribtn.deptName}</td>
 														<td>${contribtn.conLevel}</td>
 														<td>${contribtn.conName}</td>
 														<td>${contribtn.conUniversity}</td>

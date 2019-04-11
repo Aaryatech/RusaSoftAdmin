@@ -121,6 +121,8 @@
 																		type="checkbox" name="selAll" id="selAll"
 																		onClick="selectedInst(this)" /> Select All</th> 
 																		<th>Sr No</th>
+																		<th>Faculty Name</th>
+																		<th>Department Name</th>
 																		<th>Title of Book</th>
 																		<th>Edition</th>
 																		<th>Name of Author</th>
@@ -137,6 +139,8 @@
 															name="bookId" id="bookIds${count.index+1}"
 															value="${bList.bookId}" /></td> 
 														<td style="text-align: center; ">${count.index+1}</td>
+														<td>${bList.facultyFirstName}</td>
+														<td>${bList.deptName}</td>
 														<td>${bList.bookTitle}</td>
 														<td>${bList.bookEdition}</td>
 														<td>${bList.bookAuthor}</td>

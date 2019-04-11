@@ -3,8 +3,12 @@ package com.ats.rusasoft.model;
 public class StudMentorList {
 	private int menId;
 	private int yearId;
+	private int facultyId;
+	private String facultyFirstName;
+	private String deptName;
+	
 	private int menStuCount;
-	private String academicYear;
+	//private String academicYear;
 	public int getMenId() {
 		return menId;
 	}
@@ -23,17 +27,36 @@ public class StudMentorList {
 	public void setMenStuCount(int menStuCount) {
 		this.menStuCount = menStuCount;
 	}
-	public String getAcademicYear() {
-		return academicYear;
+	/*
+	 * public String getAcademicYear() { return academicYear; } public void
+	 * setAcademicYear(String academicYear) { this.academicYear = academicYear; }
+	 */
+	
+	public int getFacultyId() {
+		return facultyId;
 	}
-	public void setAcademicYear(String academicYear) {
-		this.academicYear = academicYear;
+	public void setFacultyId(int facultyId) {
+		this.facultyId = facultyId;
+	}
+	public String getFacultyFirstName() {
+		return facultyFirstName;
+	}
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 	@Override
 	public String toString() {
-		return "StudMentorList [menId=" + menId + ", yearId=" + yearId + ", menStuCount=" + menStuCount
-				+ ", academicYear=" + academicYear + "]";
+		return "StudMentorList [menId=" + menId + ", yearId=" + yearId + ", facultyId=" + facultyId
+				+ ", facultyFirstName=" + facultyFirstName + ", deptName=" + deptName + ", menStuCount=" + menStuCount
+				+ "]";
 	}
+	
 	
 }
  	

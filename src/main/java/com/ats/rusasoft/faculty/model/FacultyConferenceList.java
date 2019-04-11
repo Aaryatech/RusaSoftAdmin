@@ -1,13 +1,13 @@
-package com.ats.rusasoft.model;
+package com.ats.rusasoft.faculty.model;
 
-public class FacultyConference {
+public class FacultyConferenceList {
+
 	
 	private int confId;
 	private int facultyId;
 	private int yearId;
-	/*
-	 * private String facultyFirstName; private String deptName;
-	 */
+	private String facultyFirstName;
+	private String deptName;
 	private String confName;
 	private String confType;
 	private String confDate;
@@ -40,12 +40,18 @@ public class FacultyConference {
 		this.yearId = yearId;
 	}
 	
-	/*
-	 * public String getFacultyFirstName() { return facultyFirstName; } public void
-	 * setFacultyFirstName(String facultyFirstName) { this.facultyFirstName =
-	 * facultyFirstName; } public String getDeptName() { return deptName; } public
-	 * void setDeptName(String deptName) { this.deptName = deptName; }
-	 */
+	public String getFacultyFirstName() {
+		return facultyFirstName;
+	}
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 	public String getConfName() {
 		return confName;
 	}
@@ -120,13 +126,15 @@ public class FacultyConference {
 	}
 	@Override
 	public String toString() {
-		return "FacultyConference [confId=" + confId + ", facultyId=" + facultyId + ", yearId=" + yearId + ", confName="
-				+ confName + ", confType=" + confType + ", confDate=" + confDate + ", confVenue=" + confVenue
-				+ ", confFundFrom=" + confFundFrom + ", confFundAmt=" + confFundAmt + ", delStatus=" + delStatus
-				+ ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerEnterDatetime="
-				+ makerEnterDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + "]";
+		return "FacultyConference [confId=" + confId + ", facultyId=" + facultyId + ", yearId=" + yearId
+				+ ", facultyFirstName=" + facultyFirstName + ", deptName=" + deptName + ", confName=" + confName
+				+ ", confType=" + confType + ", confDate=" + confDate + ", confVenue=" + confVenue + ", confFundFrom="
+				+ confFundFrom + ", confFundAmt=" + confFundAmt + ", delStatus=" + delStatus + ", isActive=" + isActive
+				+ ", makerUserId=" + makerUserId + ", makerEnterDatetime=" + makerEnterDatetime + ", exInt1=" + exInt1
+				+ ", exVar1=" + exVar1 + "]";
 	}
 	
 	
-	
+
+
 }

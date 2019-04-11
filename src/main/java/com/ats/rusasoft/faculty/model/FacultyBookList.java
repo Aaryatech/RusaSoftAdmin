@@ -1,9 +1,13 @@
-package com.ats.rusasoft.model;
+package com.ats.rusasoft.faculty.model;
 
-public class FacultyBook {
+public class FacultyBookList {
+	
+	
 	private int bookId; 
 	private int	facultyId;
 	private int	yearId;
+	private String deptName;
+	private String facultyFirstName;
 	private String bookTitle;
 	private String bookEdition;
 	private String bookAuthor;
@@ -16,23 +20,14 @@ public class FacultyBook {
 	private int delStatus;
 	private int isActive;
 	private int makerUserId;
-	private int exInt1;
-	private String exVar1;
 	private String makerEnterDatetime;
 	
-	public int getExInt1() {
-		return exInt1;
+	public String getMakerEnterDatetime() {
+		return makerEnterDatetime;
 	}
-	public void setExInt1(int exInt1) {
-		this.exInt1 = exInt1;
+	public void setMakerEnterDatetime(String makerEnterDatetime) {
+		this.makerEnterDatetime = makerEnterDatetime;
 	}
-	public String getExVar1() {
-		return exVar1;
-	}
-	public void setExVar1(String exVar1) {
-		this.exVar1 = exVar1;
-	}
-	
 	public int getBookId() {
 		return bookId;
 	}
@@ -50,6 +45,18 @@ public class FacultyBook {
 	}
 	public void setYearId(int yearId) {
 		this.yearId = yearId;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	public String getFacultyFirstName() {
+		return facultyFirstName;
+	}
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
 	}
 	public String getBookTitle() {
 		return bookTitle;
@@ -123,21 +130,15 @@ public class FacultyBook {
 	public void setMakerUserId(int makerUserId) {
 		this.makerUserId = makerUserId;
 	}
-	public String getMakerEnterDatetime() {
-		return makerEnterDatetime;
-	}
-	public void setMakerEnterDatetime(String makerEnterDatetime) {
-		this.makerEnterDatetime = makerEnterDatetime;
-	}
 	@Override
 	public String toString() {
-		return "FacultyBook [bookId=" + bookId + ", facultyId=" + facultyId + ", yearId=" + yearId + ", bookTitle="
-				+ bookTitle + ", bookEdition=" + bookEdition + ", bookAuthor=" + bookAuthor + ", bookCoauther1="
-				+ bookCoauther1 + ", bookCoauther2=" + bookCoauther2 + ", bookCoauther3=" + bookCoauther3
-				+ ", bookPublisher=" + bookPublisher + ", bookIsbn=" + bookIsbn + ", bookPubYear=" + bookPubYear
-				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
-				+ ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + ", makerEnterDatetime=" + makerEnterDatetime + "]";
+		return "FacultyBookList [bookId=" + bookId + ", facultyId=" + facultyId + ", yearId=" + yearId + ", deptName="
+				+ deptName + ", facultyFirstName=" + facultyFirstName + ", bookTitle=" + bookTitle + ", bookEdition="
+				+ bookEdition + ", bookAuthor=" + bookAuthor + ", bookCoauther1=" + bookCoauther1 + ", bookCoauther2="
+				+ bookCoauther2 + ", bookCoauther3=" + bookCoauther3 + ", bookPublisher=" + bookPublisher
+				+ ", bookIsbn=" + bookIsbn + ", bookPubYear=" + bookPubYear + ", delStatus=" + delStatus + ", isActive="
+				+ isActive + ", makerUserId=" + makerUserId + ", makerEnterDatetime=" + makerEnterDatetime + "]";
 	}
-
+	
+	
 }
-		

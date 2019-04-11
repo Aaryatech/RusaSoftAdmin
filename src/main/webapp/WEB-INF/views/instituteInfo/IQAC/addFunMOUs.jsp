@@ -131,7 +131,7 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="functionalMOU">Functional MoU with Agency
+													<label class="control-label col-sm-2" for="functionalMOU">Functional MoU with Institution
 													 <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
