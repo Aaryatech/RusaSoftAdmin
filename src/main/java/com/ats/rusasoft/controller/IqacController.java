@@ -36,6 +36,7 @@ import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.IqacList;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
+import com.ats.rusasoft.model.NewDeanList;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.StaffList;
@@ -1051,7 +1052,19 @@ public class IqacController {
 				model = new ModelAndView("master/deanReg");
 
 				map = new LinkedMultiValueMap<String, Object>();
+			
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
 
+				model.addObject("deptList", deptList);
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
 				map.add("type", 1);
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);
@@ -1077,64 +1090,227 @@ public class IqacController {
 
 	@RequestMapping(value = "/insertNewDean", method = RequestMethod.POST)
 	public String addNewDean(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+
 
 		try {
 
 			HttpSession session = request.getSession();
-
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int instituteId = (int) session.getAttribute("instituteId");
+
 			int userId = (int) session.getAttribute("userId");
-			String deanName = request.getParameter("dean_name");
-			String contactNo = request.getParameter("contact_no");
-			String email = request.getParameter("email");
-			int qualificaton = Integer.parseInt(request.getParameter("hod_quolf"));
-			String joinDate = request.getParameter("join_date");
-			int isReg = Integer.parseInt(request.getParameter("is_registration"));
 
-			Dean dean = new Dean();
+			// System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+"
+			// "+instituteId+" "+userObj.getGetData().getUserInstituteId());
+			int deanId = Integer.parseInt(request.getParameter("dean_id"));
 
-			dean.setDeanId(Integer.parseInt(request.getParameter("dean_id")));
-			dean.setDeanName(deanName);
-			dean.setInstituteId(instituteId);
-			dean.setContactNo(contactNo);
-			dean.setEmail(email);
-			dean.setQualificationId(qualificaton);
-			dean.setJoiningDate(joinDate);
-
-			if (isReg == 0) {
-				dean.setRealivingDate(request.getParameter("acc_off_relDate"));
-
-			} else {
-				dean.setRealivingDate(null);
+			int isAccOff = 0, isHod = 0, isDean = 0, isStaff = 0, isLib = 0;
+			try {
+				isAccOff = Integer.parseInt(request.getParameter("isAccOff"));
+			} catch (Exception e) {
+				isAccOff = 0;
 			}
-			dean.setMakerUserId(userId);
-			dean.setDelStatus(1);
+			try {
+				isHod = Integer.parseInt(request.getParameter("isHod"));
+			} catch (Exception e) {
+				isHod = 0;
+			}
+			try {
+				isDean = Integer.parseInt(request.getParameter("isDean"));
+			} catch (Exception e) {
+				isDean = 0;
+			}
+			try {
+				isStaff = Integer.parseInt(request.getParameter("isStaff"));
+			} catch (Exception e) {
+				isStaff = 0;
+			}
+			try {
+				isLib = Integer.parseInt(request.getParameter("isLib"));
+			} catch (Exception e) {
+				isLib = 0;
+			}
+			String roleNameList = null;
 
-			dean.setMakerEnterDatetime(curDateTime);
+			roleNameList = Constants.Dean_Role + "," + Constants.Faculty_Role;
 
-			dean.setExtraint1(6);
-			dean.setExtravarchar1("NA");
+			/*
+			 * if (isAccOff == 1) { roleNameList = roleNameList + "," +
+			 * Constants.Account_Officer_Role; } if (isHod == 1) { roleNameList =
+			 * roleNameList + "," + Constants.HOD_Role; } if (isDean == 1) { roleNameList =
+			 * roleNameList + "," + Constants.Dean_Role; } if (isLib == 1) { roleNameList =
+			 * roleNameList + "," + Constants.Librarian_Role;
+			 * 
+			 * }
+			 */
 
-			Dean deanSave = rest.postForObject(Constants.url + "/saveNewDean", dean, Dean.class);
+			System.err.println("isAccOff" + isAccOff);
+			System.err.println("isHod" + isHod);
+			System.err.println("isDean" + isDean);
+			System.err.println("isLib" + isLib);
+
+			// write web service to get Role Ids..
+			// dvd
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("roleNameList", roleNameList);
+			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+					AssignRoleDetailList[].class);
+			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+			String roleIds = new String();
+			for (int i = 0; i < roleIdsList.size(); i++) {
+				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+			}
+			System.err.println("roleIds " + roleIds);
+
+			int designation = 0;
+
+			System.out.println("Data:" + deanId);  
+			String deanName = request.getParameter("dean_name");
+			System.out.println("Data:" + deanName);
+			designation = Integer.parseInt(request.getParameter("designation"));
+			String dateOfJoin = request.getParameter("join_date");
+			String dateOfRel = request.getParameter("acc_off_relDate");
+			String contact = request.getParameter("contact_no");
+			String email = request.getParameter("email");
+
+			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// + contact + " " + email);
+			// MIqac miqac = new MIqac();
+			/*
+			 * if (iqacId == 0) { miqac.setIqacId(0);
+			 * 
+			 * } else { miqac.setIqacId(iqacId); }
+			 */
+
+			String[] deptIds = request.getParameterValues("depart");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < deptIds.length; i++) {
+				sb = sb.append(deptIds[i] + ",");
+
+			}
+			String deptIdList = sb.toString();
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+
+			Staff staff = new Staff();
+
+			staff.setContactNo(contact);
+			staff.setCurrentDesignationId(designation);
+			staff.setDeptId(deptIdList);
+			staff.setEmail(email);
+			staff.setFacultyFirstName(deanName);
+			staff.setFacultyId(deanId);
+			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setHightestQualificationYear(null);
+			staff.setIsAccOff(0);
+			staff.setIsDean(1);
+			staff.setIsFaculty(1);
+			staff.setIsHod(isHod);
+			staff.setIsIqac(0);
+			staff.setIsLibrarian(isLib);
+			staff.setIsPrincipal(0);
+
+			staff.setIsStudent(0);
+			staff.setIsWorking(1);
+			staff.setJoiningDate(dateOfJoin);
+			staff.setLastUpdatedDatetime(curDateTime);
+			staff.setMakerEnterDatetime(curDateTime);
+
+			staff.setPassword("");
+			staff.setRealivingDate(dateOfRel);
+			staff.setRoleIds(roleIds);
+			staff.setTeachingTo(0);
+			staff.setType(2);
+
+			staff.setInstituteId(instituteId);
+			staff.setJoiningDate(dateOfJoin);
+			staff.setContactNo(contact);
+			staff.setEmail(email);
+			staff.setDelStatus(1);
+			staff.setIsActive(1);
+			staff.setMakerUserId(userId);
+			staff.setMakerEnterDatetime(curDateTime);
+			staff.setCheckerUserId(0);
+			staff.setCheckerDatetime(curDateTime);
+			staff.setLastUpdatedDatetime(curDateTime);
+			staff.setType(2);
+
+			staff.setExtravarchar1("NA");
+			Staff iqac = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
-				redirect = "redirect:/showDeanList";
+				redirect = "redirect:/showIqacList";
 			else
-				redirect = "redirect:/showRegDean";
+				redirect = "redirect:/iqacRegistration";
 		} catch (Exception e) {
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
 
 		}
 		return redirect;
 
-	}
+	
+		
+		
+		
+		
+		/*
+		 * 
+		 * try {
+		 * 
+		 * HttpSession session = request.getSession();
+		 * 
+		 * int instituteId = (int) session.getAttribute("instituteId"); int userId =
+		 * (int) session.getAttribute("userId"); String deanName =
+		 * request.getParameter("dean_name"); String contactNo =
+		 * request.getParameter("contact_no"); String email =
+		 * request.getParameter("email"); int qualificaton =
+		 * Integer.parseInt(request.getParameter("hod_quolf")); String joinDate =
+		 * request.getParameter("join_date"); int isReg =
+		 * Integer.parseInt(request.getParameter("is_registration"));
+		 * 
+		 * Dean dean = new Dean();
+		 * 
+		 * dean.setDeanId(Integer.parseInt(request.getParameter("dean_id")));
+		 * dean.setDeanName(deanName); dean.setInstituteId(instituteId);
+		 * dean.setContactNo(contactNo); dean.setEmail(email);
+		 * dean.setQualificationId(qualificaton); dean.setJoiningDate(joinDate);
+		 * 
+		 * if (isReg == 0) {
+		 * dean.setRealivingDate(request.getParameter("acc_off_relDate"));
+		 * 
+		 * } else { dean.setRealivingDate(null); } dean.setMakerUserId(userId);
+		 * dean.setDelStatus(1);
+		 * 
+		 * dean.setMakerEnterDatetime(curDateTime);
+		 * 
+		 * dean.setExtraint1(6); dean.setExtravarchar1("NA");
+		 * 
+		 * Dean deanSave = rest.postForObject(Constants.url + "/saveNewDean", dean,
+		 * Dean.class); int isView = Integer.parseInt(request.getParameter("is_view"));
+		 * if (isView == 1) redirect = "redirect:/showDeanList"; else redirect =
+		 * "redirect:/showRegDean"; } catch (Exception e) {
+		 * System.err.println("exception In showStaffList at Master Contr" +
+		 * e.getMessage()); e.printStackTrace();
+		 * 
+		 * } return redirect;
+		 * 
+		 */}
 
 	@RequestMapping(value = "/showDeanList", method = RequestMethod.GET)
 	public ModelAndView showDeanList(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
@@ -1148,9 +1324,20 @@ public class IqacController {
 				model = new ModelAndView("master/deanList");
 
 				model.addObject("title", "Dean R & D List");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				map.add("isDean", userObj.getStaff().getIsDean());
 
-				DeansList[] deans = rest.getForObject(Constants.url + "/getListDean", DeansList[].class);
-				List<DeansList> deanList = new ArrayList<>(Arrays.asList(deans));
+				NewDeanList[] deans = rest.postForObject(Constants.url + "/getListDean",map, NewDeanList[].class);
+				List<NewDeanList> deanList = new ArrayList<>(Arrays.asList(deans));
 				System.out.println("Dean List:" + deanList);
 
 				model.addObject("deanList", deanList);
