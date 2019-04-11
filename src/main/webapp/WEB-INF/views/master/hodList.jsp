@@ -48,15 +48,7 @@
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style=''>
 
-				<!--   <div class='col-xs-12'>
-        <div class="page-title">
 
-            <div class="pull-left">
-                PAGE HEADING TAG - START<h1 class="title">HOD List</h1>PAGE HEADING TAG - END                            </div>
-			 
-                                
-        </div>
-    </div> -->
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -69,11 +61,10 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
 									<a href="${pageContext.request.contextPath}/hodRegistration"><button
-											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
 								</c:if>
-							
-								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                    <a class="box_close fa fa-times"></a> -->
 
 							</div>
 
@@ -117,28 +108,33 @@
 											<tbody>
 												<c:forEach items="${hodList}" var="hod" varStatus="count">
 													<tr>
-														<td align="center"><input type="checkbox" class="chk" name="hodIds"
-															id="hodIds${count.index+1}" value="${hod.hodId}" /></td>
+														<td align="center"><input type="checkbox" class="chk"
+															name="hodIds" id="hodIds${count.index+1}"
+															value="${hod.facultyId}" /></td>
 														<td align="center">${count.index+1}</td>
-														<td align="left">${hod.hodName}</td>
+														<td align="left">${hod.facultyFirstName}</td>
 														<td align="left">${hod.deptName}</td>
 														<td align="center">${hod.contactNo}</td>
 														<td align="left">${hod.email}</td>
 
 														<td align="center"><a
-															href="${pageContext.request.contextPath}/changeHod/${hod.hodId}"
+															href="${pageContext.request.contextPath}/changeHod/${hod.facultyId}"
 															title="Change HOD" rel="tooltip"
 															data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															<c:if test="${editAccess==0}">
-																<a onclick="showEditHod(${hod.hodId})" href="#"><span
-																	class="glyphicon glyphicon-edit" title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+
+																<a
+																	href="${pageContext.request.contextPath}/showEditHod/${hod.facultyId}"
+																	rel="tooltip" data-color-class="danger" title="Edit"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"><span
+																	class="glyphicon glyphicon-edit"></span></a>
+
 															</c:if>&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${deleteAccess==0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteHod/${hod.hodId}"
+																	href="${pageContext.request.contextPath}/deleteHod/${hod.facultyId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -152,46 +148,24 @@
 										</table>
 										<c:if test="${deleteAccess==0}">
 
-											<!-- <input type="submit" class="btn btn-primary" value="Delete"
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"> -->
-												
-												
-										<div class="form-group">
+											<div class="form-group">
 
-											<div class="col-sm-5">
-											<div class="col-sm-1">
-
+												<div class="col-sm-5">
+													<div class="col-sm-1">
+														<button type="submit" title="delete checked records"
+															id="deleteId" class="btn btn-primary"
+															onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}">
+															<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+														</button>
 
 
-															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+													</div>
 
-												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
-													id="deleteId"
-													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-													style="align-content: left;">
-													<i class="fa fa-trash"
-														style="font-size: 25px; background-color: black"></i>
-												</button> --></div>
-												<!-- <div class="col-sm-4">
-													<h5 style="text-align: left;">Delete Records</h5>
-												</div> -->
+												</div>
 											</div>
-
-
-											
-
-										</div>
-												
-												
-												
 										</c:if>
-
 										<input type="hidden" id="edit_hod_id" name="edit_hod_id"
 											value="0">
-
-
 
 									</div>
 								</div>
@@ -200,63 +174,49 @@
 					</section>
 				</div>
 
-
-
-
-
-
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
 		<!-- END CONTENT -->
-
-
-
-
-
 	</div>
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
-function clearSessionAttribute() {
-	 
-	 
+		function clearSessionAttribute() {
 
-	$.getJSON('${clearSessionAttribute}', {
-  
-		ajax : 'true',
+			$.getJSON('${clearSessionAttribute}', {
 
-	}, function(data) { 
-		 
-	
-	});
+				ajax : 'true',
 
-}
+			}, function(data) {
 
-function selectedInst(source) {
+			});
 
-	checkboxes = document.getElementsByName('hodIds');
+		}
 
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
+		function selectedInst(source) {
 
-	}
+			checkboxes = document.getElementsByName('hodIds');
 
-}
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
+			}
 
-function showEditHod(hodId){
-	document.getElementById("edit_hod_id").value=hodId;//create this 
-	var form=document.getElementById("insListForm");
-    form.setAttribute("method", "post");
+		}
 
-	form.action=("showEditHod");
-	form.submit();
-	
-}
- </script>
+		function showEditHod(hodId) {
+			document.getElementById("edit_hod_id").value = hodId;//create this 
+			var form = document.getElementById("insListForm");
+			form.setAttribute("method", "post");
+
+			form.action = ("showEditHod");
+			form.submit();
+
+		}
+	</script>
 
 
 </body>

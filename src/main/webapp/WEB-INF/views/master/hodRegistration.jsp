@@ -84,7 +84,8 @@
 										action="${pageContext.request.contextPath}/insertHod"
 										method="post" name="formidhere" id="formidhere">
 
-										<input type="hidden" id="hod_id" name="hod_id" value="0">
+										<input type="hidden" id="hod_id" name="hod_id"
+											value="${editHod.facultyId}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>
@@ -92,7 +93,7 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="hodName"
 													onchange="trim(this)" autocomplete="off"
-													value="${hod.iqacName}" name="hodName"
+													value="${editHod.facultyFirstName}" name="hodName"
 													placeholder="HOD Name"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter HOD name</span>
@@ -109,7 +110,8 @@
 
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
-															<c:when test="${makeList.designationId == hod.desgntnId}">
+															<c:when
+																test="${makeList.designationId == editHod.currentDesignationId}">
 																<option value="${makeList.designationId}"
 																	selected="selected">${makeList.designationName}</option>
 															</c:when>
@@ -132,7 +134,7 @@
 												<select id="dept_id" name="dept_id" class="" multiple>
 													<c:forEach items="${deptList}" var="dept">
 														<c:choose>
-															<c:when test="${hod.deptId==dept.deptId}">
+															<c:when test="${dept.deptId==editHod.deptId}">
 																<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 															</c:when>
@@ -162,7 +164,7 @@
 													<c:forEach items="${quolfList}" var="quolf">
 														<c:choose>
 															<c:when
-																test="${hod.highestQualificationId==quolf.qualificationId}">
+																test="${editHod.highestQualification==quolf.qualificationId}">
 																<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
 															</c:when>
@@ -191,7 +193,7 @@
 												<input type="text" class="form-control datepicker"
 													id="dateOfJoin" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
-													value="${miqc.joiningDate}" name="dateOfJoin"
+													value="${editHod.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd/mm/yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
@@ -209,7 +211,7 @@
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
-													placeholder="Mobile Number" value="${miqc.contactNo}">
+													placeholder="Mobile Number" value="${editHod.contactNo}">
 												<span class="error_form text-danger" id="error_formfield4"
 													style="display: none;">Please enter contact no</span>
 
@@ -228,8 +230,8 @@
 												<input type="email" class="form-control" id="email"
 													autocomplete="off" onchange="checkUnique(this.value,2)"
 													onchange="trim(this)" name="email"
-													placeholder="abc@xyz.com" value="${miqc.email}"> <span
-													class="error_form text-danger" id="error_formfield5"
+													placeholder="abc@xyz.com" value="${editHod.email}">
+												<span class="error_form text-danger" id="error_formfield5"
 													style="display: none;">Please enter email id</span>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>

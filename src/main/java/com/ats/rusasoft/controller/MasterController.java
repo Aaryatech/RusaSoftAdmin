@@ -1507,7 +1507,7 @@ public class MasterController {
 	 * }
 	 */
 	// showEditHod
-	@RequestMapping(value = "/showEditHod", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/showEditHod", method = RequestMethod.POST)
 	public ModelAndView showEditHod(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
 
@@ -1566,9 +1566,9 @@ public class MasterController {
 		return model;
 
 	}
-
+*/
 	// deleteHod
-	@RequestMapping(value = "/deleteHod/{hodId}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/deleteHod/{hodId}", method = RequestMethod.GET)
 	public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int hodId) {
 		String redirect = null;
 		try {
@@ -1621,7 +1621,7 @@ public class MasterController {
 		return redirect;
 
 	}
-
+*/
 	// Hod*/
 
 	// Acc Officer

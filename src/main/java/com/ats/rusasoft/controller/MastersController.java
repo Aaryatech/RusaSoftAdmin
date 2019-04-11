@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.GetHod;
@@ -30,6 +35,7 @@ import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.MIqac;
+import com.ats.rusasoft.model.NewDeanList;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.accessright.AssignRoleDetailList;
@@ -158,8 +164,6 @@ public class MastersController {
 
 			int userId = (int) session.getAttribute("userId");
 
-			// System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+"
-			// "+instituteId+" "+userObj.getGetData().getUserInstituteId());
 			int hodId = Integer.parseInt(request.getParameter("hod_id"));
 
 			int isDean = 0;
@@ -291,10 +295,10 @@ public class MastersController {
 				model.addObject("title", "HOD Registration List");
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map.add("instId", userObj.getGetData().getUserInstituteId());
-				GetHod[] hodArray = restTemplate.postForObject(Constants.url + "getHodListByInstId", map,
-						GetHod[].class);
-				List<GetHod> hodList = new ArrayList<>(Arrays.asList(hodArray));
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				NewDeanList[] hodArray = restTemplate.postForObject(Constants.url + "getNewHodList", map,
+						NewDeanList[].class);
+				List<NewDeanList> hodList = new ArrayList<>(Arrays.asList(hodArray));
 				// System.err.println("hodList " + hodList.toString());
 
 				model.addObject("hodList", hodList);
@@ -327,6 +331,122 @@ public class MastersController {
 		}
 
 		return model;
+
+	}
+
+	@RequestMapping(value = "/showEditHod/{facultyId}", method = RequestMethod.GET)
+	public ModelAndView showEditHod(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("hodRegistration", "hodList", "0", "0", "1", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("master/hodRegistration");
+				model.addObject("title", "Edit HOD Registration");
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("type", 1);
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+
+				model.addObject("quolfList", quolfList);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("id", facultyId);
+
+				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				System.out.println("facultyId:" + facultyId);
+
+				model.addObject("editHod", editHod);
+
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editJournal at Iqac Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/deleteHod/{facultyId}", method = RequestMethod.GET)
+	public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int facultyId) {
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("deleteHod/{hodId}", "hodList", "0", "0", "0", "1",
+					newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (facultyId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("hodIds");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String hodIdList = sb.toString();
+					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
+
+					map.add("staffIdList", hodIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("staffIdList", facultyId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
+
+				redirect = "redirect:/hodList";
+			}
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteHod at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect;
 
 	}
 
