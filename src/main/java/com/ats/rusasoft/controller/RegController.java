@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -71,7 +70,7 @@ public class RegController {
 				institute.setExInt1(exInt);
 				institute.setExInt2(exInt);
 				institute.setExVar1(exVar);
-				institute.setExVar2(exVar);
+				institute.setExVar2(exVar);	
 
 				institute.setInstituteAdd(request.getParameter("inst_add"));
 				institute.setInstituteId(instId);

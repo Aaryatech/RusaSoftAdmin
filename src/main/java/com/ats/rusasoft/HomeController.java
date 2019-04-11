@@ -8,9 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -339,7 +343,7 @@ public class HomeController {
 					map.add("typeId", typeId);
 					
 					 
-					 map =new LinkedMultiValueMap<String, Object>(); 
+					/* map =new LinkedMultiValueMap<String, Object>(); 
 					map.add("userId", userId);
 					System.out.println("Before web service");
 					try {
@@ -348,8 +352,8 @@ public class HomeController {
 					ResponseEntity<List<ModuleJson>> responseEntity = restTemplate.exchange(Constants.url + "getRoleJson",
 							HttpMethod.POST, new HttpEntity<>(map), typeRef);
 					
-					 List<ModuleJson> newModuleList = responseEntity.getBody(); 
-						session.setAttribute("newModuleList", newModuleList); 
+					 List<ModuleJson> newModuleList = responseEntity.getBody(); */
+						//session.setAttribute("newModuleList", newModuleList); 
 						 map =new LinkedMultiValueMap<String, Object>(); 
 						 map.add("type", userObj.getUserType());
 						
@@ -368,16 +372,109 @@ public class HomeController {
 						AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
 						session.setAttribute("acYearValue", acYear.getAcademicYear());
 						
-					 map = new LinkedMultiValueMap<String, Object>();
+					    map = new LinkedMultiValueMap<String, Object>();
 						map.add("instituteId", userObj.getGetData().getUserInstituteId());
 						// getInstitute
 						Institute instituteInfo = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
 						session.setAttribute("instituteInfo", instituteInfo);
+						//List<Integer> roleIdList=new ArrayList<>();
+						
+						
+						List<Integer> roleIdList = Stream.of(userObj.getStaff().getRoleIds().split(",")).map(Integer::parseInt)
+								.collect(Collectors.toList());
+						
+						//roleIdList.add(13);
+						//roleIdList.add(1);
+						//roleIdList.add(14);
+						Collections.sort(roleIdList);
+						
+						LinkedHashMap<Integer, List<ModuleJson>> moduleHashMap = new LinkedHashMap<Integer, List<ModuleJson>>();
+
+						
+
+						String time1 = dateFormat.format(cal.getTime());
+						
+						for(int i=0;i<roleIdList.size();i++) {
+							
+						   map =new LinkedMultiValueMap<String, Object>(); 
+							map.add("roleId", roleIdList.get(i));
+							System.out.println("/getRoleJsonByRoleId param:  roleId  " +roleIdList.get(i));
+							try {
+							 ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
+							 };
+							ResponseEntity<List<ModuleJson>> responseEntity = restTemplate.exchange(Constants.url + "getRoleJsonByRoleId",
+									HttpMethod.POST, new HttpEntity<>(map), typeRef);
+							
+							 List<ModuleJson> newModuleList = responseEntity.getBody();
+							 
+							 moduleHashMap.put(i, newModuleList);
+							
 					}
 					catch (Exception e) {
 						e.printStackTrace();
 					}
-				} 
+				}//end of for roleIdList;
+						
+						
+					
+						
+						 List<ModuleJson> newModuleList =moduleHashMap.get(0);
+						 
+						for(int i=1;i<moduleHashMap.size();i++) {
+							
+							List<ModuleJson> list =moduleHashMap.get(i);
+							
+							 for(int j=0;j<list.size();j++) {
+								 
+								 int findModuleId=0;
+								 
+								 for(int k=0;k<newModuleList.size();k++) {
+									 
+									 if(newModuleList.get(k).getModuleId()==list.get(j).getModuleId()) {
+										 
+										 
+										 for(int m=0;m<list.get(j).getSubModuleJsonList().size();m++) {
+											 
+											 int findSubModId=0;
+											 
+											 for(int l=0;l<newModuleList.get(k).getSubModuleJsonList().size();l++) {
+												 
+												 if(newModuleList.get(k).getSubModuleJsonList().get(l).getSubModuleId()==
+														 list.get(j).getSubModuleJsonList().get(m).getSubModuleId()) {
+													 findSubModId=1;
+													 break;
+												 }
+											 }
+											 
+											 if(findSubModId==0) {
+												 
+												 newModuleList.get(k).getSubModuleJsonList().add(list.get(j).getSubModuleJsonList().get(m));
+											 }
+										 }
+										  
+										 findModuleId=1;
+										 break;
+									 }
+										 
+								 }
+								 
+								 if(findModuleId==0) {
+									 
+									 newModuleList.add(list.get(j));
+									 
+								 }
+								   
+							 }
+							 
+							 
+						}
+						
+						String time2 = dateFormat.format(cal.getTime().getTime());
+						
+
+
+						session.setAttribute("newModuleList", newModuleList); 
+				}
 
 			}
 		} catch (Exception e) {
