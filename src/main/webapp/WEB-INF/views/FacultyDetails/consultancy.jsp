@@ -145,6 +145,8 @@
 
 															<td style="text-align: center;">${count.index+1}</td>
 															<td>${list.consNature}</td>
+															<td style="text-align: left;">${list.facultyFirstName}</td>
+															<td style="text-align: left;">${list.deptName}</td>
 															<td>${list.consSponsor}</td>
 															<td style="text-align: right;">${list.consAmount}</td>
 															<td style="text-align: right;">${list.consPeriod}</td>
