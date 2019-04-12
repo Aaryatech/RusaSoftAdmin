@@ -765,6 +765,69 @@ public class IqacController {
 			String contactNo = request.getParameter("contact_no");
 			String email = request.getParameter("email");
 			
+			int isAccOff = 0, isHod = 0, isDean = 0, isStaff = 0, isLib = 0;
+			try {
+				isAccOff = Integer.parseInt(request.getParameter("isAccOff"));
+			} catch (Exception e) {
+				isAccOff = 0;
+			}
+			try {
+				isHod = Integer.parseInt(request.getParameter("isHod"));
+			} catch (Exception e) {
+				isHod = 0;
+			}
+			try {
+				isDean = Integer.parseInt(request.getParameter("isDean"));
+			} catch (Exception e) {
+				isDean = 0;
+			}
+			try {
+				isStaff = Integer.parseInt(request.getParameter("isStaff"));
+			} catch (Exception e) {
+				isStaff = 0;
+			}
+			try {
+				isLib = Integer.parseInt(request.getParameter("isLib"));
+			} catch (Exception e) {
+				isLib = 0;
+			}
+			String roleNameList = null;
+
+			roleNameList = Constants.IQAC_Role + "," + Constants.Faculty_Role;
+
+			if (isAccOff == 1) {
+				roleNameList = roleNameList + "," + Constants.Account_Officer_Role;
+			}
+			if (isHod == 1) {
+				roleNameList = roleNameList + "," + Constants.HOD_Role;
+			}
+			if (isDean == 1) {
+				roleNameList = roleNameList + "," + Constants.Dean_Role;
+			}
+			if (isLib == 1) {
+				roleNameList = roleNameList + "," + Constants.Librarian_Role;
+
+			}
+
+			System.err.println("isAccOff" + isAccOff);
+			System.err.println("isHod" + isHod);
+			System.err.println("isDean" + isDean);
+			System.err.println("isLib" + isLib);
+
+			// write web service to get Role Ids..
+			// dvd
+
+			
+
+			map.add("roleNameList", roleNameList);
+			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+					AssignRoleDetailList[].class);
+			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+			String roleIds = new String();
+			for (int i = 0; i < roleIdsList.size(); i++) {
+				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+			}
 
 			String[] deptIds = request.getParameterValues("dept");
 			StringBuilder sb = new StringBuilder();
@@ -773,6 +836,7 @@ public class IqacController {
 				sb = sb.append(deptIds[i] + ",");
 
 			}
+			
 			String deptIdList = sb.toString();
 			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
 			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
@@ -782,16 +846,53 @@ public class IqacController {
 
 			staff.setFacultyId(Integer.parseInt(request.getParameter("faculty_id")));
 
-			staff.setInstituteId(instituteId);
-			staff.setDeptId(deptIdList);
-			staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
-			staff.setFacultyMiddelName("NA");
-			staff.setFacultyLastName("NA");
-			staff.setHighestQualification(highestQualification);
-			staff.setHightestQualificationYear(yrofHighestQualification);
-			staff.setCurrentDesignationId(designation);
-			staff.setJoiningDate(joinDate);
-			staff.setIsWorking(isReg);
+				/*
+				 * staff.setInstituteId(instituteId); staff.setDeptId(deptIdList);
+				 * staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
+				 * staff.setFacultyMiddelName("NA"); staff.setFacultyLastName("NA");
+				 * staff.setHighestQualification(highestQualification);
+				 * staff.setHightestQualificationYear(yrofHighestQualification);
+				 * staff.setCurrentDesignationId(designation); staff.setJoiningDate(joinDate);
+				 * staff.setIsWorking(isReg);
+				 */staff.setContactNo(contactNo);
+					staff.setCurrentDesignationId(designation);
+					staff.setDeptId(deptIdList);
+					staff.setEmail(email);
+					staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
+					staff.setHighestQualification(highestQualification);
+					staff.setHightestQualificationYear(yrofHighestQualification);
+					staff.setIsAccOff(isAccOff);
+					staff.setIsDean(isDean);
+					staff.setIsFaculty(1);
+					staff.setIsHod(isHod);
+					staff.setIsIqac(1);
+					staff.setIsLibrarian(isLib);
+					staff.setIsPrincipal(0);
+
+					staff.setIsStudent(0);
+					staff.setIsWorking(1);
+					staff.setJoiningDate(joinDate);
+					staff.setLastUpdatedDatetime(curDateTime);
+					staff.setMakerEnterDatetime(curDateTime);
+
+					staff.setPassword("");
+					staff.setIsWorking(isReg);
+					staff.setRealivingDate(null);
+					staff.setRoleIds(roleIds);
+					staff.setTeachingTo(0);
+					staff.setType(2);
+
+					staff.setInstituteId(instituteId);
+					staff.setDelStatus(1);
+					staff.setIsActive(1);
+					staff.setMakerUserId(userId);
+					staff.setMakerEnterDatetime(curDateTime);
+					staff.setCheckerUserId(0);
+					staff.setCheckerDatetime(curDateTime);
+					staff.setLastUpdatedDatetime(curDateTime);
+					staff.setType(2);
+
+					staff.setExtravarchar1("NA");
 			if (isReg == 0) {
 				staff.setRealivingDate((request.getParameter("acc_off_relDate")));
 
