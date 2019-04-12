@@ -377,6 +377,7 @@ public class AccessRightController {
 						subModuleJson.setSubModulName(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModulName());
 						subModuleJson.setSubModuleDesc(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModuleDesc());
 						subModuleJson.setSubModuleMapping(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getSubModuleMapping());
+						subModuleJson.setOrderBy(accessRightModule.get(i).getAccessRightSubModuleList().get(j).getOrderBy());
 						
 						try {
 						int add = Integer.parseInt(request.getParameter(accessRightModule.get(i).getAccessRightSubModuleList().get(j).
@@ -415,6 +416,7 @@ public class AccessRightController {
 					moduleJson.setModuleId(accessRightModule.get(i).getModuleId());
 					moduleJson.setModuleName(accessRightModule.get(i).getModuleName());
 					moduleJson.setModuleDesc(accessRightModule.get(i).getModuleDesc());
+					moduleJson.setOrderBy(accessRightModule.get(i).getOrderBy());
 					moduleJson.setSubModuleJsonList(subModuleJsonList);
 					moduleJsonList.add(moduleJson);
 				}

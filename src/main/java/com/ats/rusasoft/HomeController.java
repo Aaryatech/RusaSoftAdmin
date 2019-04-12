@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,6 +42,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.UserLogin;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.ats.rusasoft.model.accessright.SubModuleJson;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
@@ -471,7 +473,27 @@ public class HomeController {
 						
 						String time2 = dateFormat.format(cal.getTime().getTime());
 						
+						for(int i=0; i < newModuleList.size() ; i++) {
+							
+							Collections.sort(newModuleList.get(i).getSubModuleJsonList(), new Comparator<SubModuleJson>() {
+								  public int compare(SubModuleJson c1, SubModuleJson c2) {
+								    if (c1.getOrderBy() > c2.getOrderBy()) return 1;
+								    if (c1.getOrderBy() < c2.getOrderBy()) return -1;
+								    return 0;
+								  }});
+							
+						} 
 
+						 Collections.sort(newModuleList, new Comparator<ModuleJson>() {
+							  public int compare(ModuleJson c1, ModuleJson c2) {
+							    if (c1.getOrderBy() > c2.getOrderBy()) return 1;
+							    if (c1.getOrderBy() < c2.getOrderBy()) return -1;
+							    return 0;
+							  }});
+						
+						 
+						//System.out.println(newModuleList);
+						 
 
 						session.setAttribute("newModuleList", newModuleList); 
 				}

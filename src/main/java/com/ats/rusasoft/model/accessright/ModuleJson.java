@@ -11,6 +11,8 @@ public class ModuleJson {
 	 
 	String moduleDesc;
 	
+	private int orderBy;
+	
 	List<SubModuleJson> subModuleJsonList;
 
 	public int getModuleId() {
@@ -45,10 +47,18 @@ public class ModuleJson {
 		this.subModuleJsonList = subModuleJsonList;
 	}
 
+	public int getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(int orderBy) {
+		this.orderBy = orderBy;
+	}
+
 	@Override
 	public String toString() {
 		return "ModuleJson [moduleId=" + moduleId + ", moduleName=" + moduleName + ", moduleDesc=" + moduleDesc
-				+ ", subModuleJsonList=" + subModuleJsonList + "]";
+				+ ", orderBy=" + orderBy + ", subModuleJsonList=" + subModuleJsonList + "]";
 	}
 	
 	

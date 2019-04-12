@@ -14,7 +14,7 @@ public class SubModuleJson {
 	 
 	String subModuleDesc;
 	
-	 
+	private int orderBy;
 	private int type;
 	 
 	private String view;
@@ -105,12 +105,20 @@ public class SubModuleJson {
 		this.deleteRejectApprove = deleteRejectApprove;
 	}
 
+	public int getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(int orderBy) {
+		this.orderBy = orderBy;
+	}
+
 	@Override
 	public String toString() {
 		return "SubModuleJson [subModuleId=" + subModuleId + ", moduleId=" + moduleId + ", subModulName=" + subModulName
-				+ ", subModuleMapping=" + subModuleMapping + ", subModuleDesc=" + subModuleDesc + ", type=" + type
-				+ ", view=" + view + ", addApproveConfig=" + addApproveConfig + ", editReject=" + editReject
-				+ ", deleteRejectApprove=" + deleteRejectApprove + "]";
+				+ ", subModuleMapping=" + subModuleMapping + ", subModuleDesc=" + subModuleDesc + ", orderBy=" + orderBy
+				+ ", type=" + type + ", view=" + view + ", addApproveConfig=" + addApproveConfig + ", editReject="
+				+ editReject + ", deleteRejectApprove=" + deleteRejectApprove + "]";
 	}
 	
 	
