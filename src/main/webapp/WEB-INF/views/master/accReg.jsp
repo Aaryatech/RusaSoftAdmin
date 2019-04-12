@@ -85,6 +85,8 @@
 										method="post" name="formidhere" id="formidhere">
 
 										<input type="hidden" id="acc_id" name="acc_id" value="0">
+										<input type="hidden" id="addEdit" name="addEdit"
+											value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>

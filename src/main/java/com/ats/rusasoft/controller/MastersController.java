@@ -139,6 +139,7 @@ public class MastersController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
+				model.addObject("addEdit", "0");
 
 			}
 		} catch (Exception e) {
@@ -164,8 +165,6 @@ public class MastersController {
 
 			int userId = (int) session.getAttribute("userId");
 
-			int hodId = Integer.parseInt(request.getParameter("hod_id"));
-
 			int isDean = 0;
 
 			try {
@@ -180,6 +179,13 @@ public class MastersController {
 
 			if (isDean == 1) {
 				roleNameList = roleNameList + "," + Constants.Dean_Role;
+			}
+
+			int hodId = 0;
+			try {
+				hodId = Integer.parseInt(request.getParameter("hod_id"));
+			} catch (Exception e) {
+				hodId = 0;
 			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -214,51 +220,73 @@ public class MastersController {
 			}
 			String deptIdList = sb.toString();
 			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
 
-			Staff staff = new Staff();
+			if (addEdit == 0) {
+				Staff staff = new Staff();
 
-			staff.setContactNo(contact);
-			staff.setCurrentDesignationId(designation);
-			staff.setDeptId(deptIdList);
-			staff.setEmail(email);
-			staff.setFacultyFirstName(hodName);
-			staff.setFacultyId(hodId);
-			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-			staff.setHightestQualificationYear(null);
-			staff.setIsAccOff(0);
-			staff.setIsDean(isDean);
-			staff.setIsFaculty(1);
-			staff.setIsHod(1);
-			staff.setIsIqac(0);
-			staff.setIsLibrarian(0);
-			staff.setIsPrincipal(0);
+				staff.setContactNo(contact);
+				staff.setCurrentDesignationId(designation);
+				staff.setDeptId(deptIdList);
+				staff.setEmail(email);
+				staff.setFacultyFirstName(hodName);
+				staff.setFacultyId(hodId);
+				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				staff.setHightestQualificationYear(null);
+				staff.setIsAccOff(0);
+				staff.setIsDean(isDean);
+				staff.setIsFaculty(1);
+				staff.setIsHod(1);
+				staff.setIsIqac(0);
+				staff.setIsLibrarian(0);
+				staff.setIsPrincipal(0);
 
-			staff.setIsStudent(0);
-			staff.setIsWorking(1);
-			staff.setJoiningDate(dateOfJoin);
-			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setMakerEnterDatetime(curDateTime);
+				staff.setIsStudent(0);
+				staff.setIsWorking(1);
+				staff.setJoiningDate(dateOfJoin);
+				staff.setLastUpdatedDatetime(curDateTime);
+				staff.setMakerEnterDatetime(curDateTime);
 
-			staff.setPassword("");
-			staff.setRealivingDate(null);
-			staff.setRoleIds(roleIds);
-			staff.setTeachingTo(0);
-			staff.setType(3);
+				staff.setPassword("");
+				staff.setRealivingDate(null);
+				staff.setRoleIds(roleIds);
+				staff.setTeachingTo(0);
+				staff.setType(3);
 
-			staff.setInstituteId(instituteId);
-			staff.setJoiningDate(dateOfJoin);
-			staff.setContactNo(contact);
-			staff.setEmail(email);
-			staff.setDelStatus(1);
-			staff.setIsActive(1);
-			staff.setMakerUserId(userId);
-			staff.setMakerEnterDatetime(curDateTime);
-			staff.setCheckerUserId(0);
-			staff.setCheckerDatetime(curDateTime);
-			staff.setLastUpdatedDatetime(curDateTime);
+				staff.setInstituteId(instituteId);
+				staff.setJoiningDate(dateOfJoin);
+				staff.setContactNo(contact);
+				staff.setEmail(email);
+				staff.setDelStatus(1);
+				staff.setIsActive(1);
+				staff.setMakerUserId(userId);
+				staff.setMakerEnterDatetime(curDateTime);
+				staff.setCheckerUserId(0);
+				staff.setCheckerDatetime(curDateTime);
+				staff.setLastUpdatedDatetime(curDateTime);
 
-			staff.setExtravarchar1("NA");
-			Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+				staff.setExtravarchar1("NA");
+				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+			} else {
+
+				map = new LinkedMultiValueMap<>();
+				map.add("id", hodId);
+
+				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				editHod.setFacultyFirstName(hodName);
+				editHod.setDeptId(deptIdList);
+				editHod.setEmail(email);
+				editHod.setFacultyId(hodId);
+				editHod.setContactNo(contact);
+				editHod.setCurrentDesignationId(designation);
+				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editHod.setJoiningDate(dateOfJoin);
+				editHod.setIsHod(1);
+				editHod.setIsDean(1);
+
+				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
+
+			}
 
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
@@ -384,6 +412,7 @@ public class MastersController {
 				System.out.println("facultyId:" + facultyId);
 
 				model.addObject("editHod", editHod);
+				model.addObject("addEdit", "1");
 
 			}
 		} catch (Exception e) {
