@@ -51,8 +51,10 @@
 							<h2 class="title pull-left">Account Officer List</h2>
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
-												<a href="${pageContext.request.contextPath}/showRegAcc"><button
-											type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+									<a href="${pageContext.request.contextPath}/showRegAcc"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
 								</c:if>
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -88,6 +90,7 @@
 														onClick="selectedInst(this)" /> Select All</th>
 													<th>Sr No</th>
 													<th>Name</th>
+													<th>Department</th>
 													<th>Qualification</th>
 
 													<th>Joining Date</th>
@@ -103,22 +106,23 @@
 													<tr>
 														<td align="center"><input type="checkbox" class="chk"
 															name="accOffIds" id="accOffIds${count.index+1}"
-															value="${accOff.officerId}" /></td>
+															value="${accOff.facultyId}" /></td>
 														<td align="center">${count.index+1}</td>
-														<td>${accOff.accOfficerName}</td>
+														<td>${accOff.facultyFirstName}</td>
+														<td>${accOff.deptName}</td>
 														<td>${accOff.qualificationName}</td>
 														<td align="center">${accOff.joiningDate}</td>
 														<td align="center">${accOff.contactNo}</td>
 														<td>${accOff.email}</td>
 														<td align="center"><c:if test="${editAccess==0}">
-																<a onclick="showEditaccOff(${accOff.officerId})"
+																<a
+																	href="${pageContext.request.contextPath}/showEditaccOff/${accOff.facultyId}"
 																	href="#"><span class="glyphicon glyphicon-edit"
 																	title="Edit" data-animate=" animated fadeIn "
 																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if>
-															<c:if test="${deleteAccess==0}">
+															</c:if> <c:if test="${deleteAccess==0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteaccOff/${accOff.officerId}"
+																	href="${pageContext.request.contextPath}/deleteaccOff/${accOff.facultyId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -131,7 +135,11 @@
 											</tbody>
 										</table>
 										<c:if test="${deleteAccess==0}">
-									<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+											<button type="submit" title="delete checked records"
+												id="deleteId" class="btn btn-primary"
+												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}">
+												<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+											</button>
 
 										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
@@ -166,43 +174,39 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
-function clearSessionAttribute() {
-	 
-	 
+		function clearSessionAttribute() {
 
-	$.getJSON('${clearSessionAttribute}', {
-  
-		ajax : 'true',
+			$.getJSON('${clearSessionAttribute}', {
 
-	}, function(data) { 
-		 
-	
-	});
+				ajax : 'true',
 
-}
+			}, function(data) {
 
-function selectedInst(source) {
+			});
 
-	checkboxes = document.getElementsByName('accOffIds');
+		}
 
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
+		function selectedInst(source) {
 
-	}
+			checkboxes = document.getElementsByName('accOffIds');
 
-}
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
+			}
 
-function showEditaccOff(accOffId){
-	document.getElementById("edit_accOff_id").value=accOffId;//create this 
-	var form=document.getElementById("insListForm");
-    form.setAttribute("method", "post");
+		}
 
-	form.action=("showEditaccOff");
-	form.submit();
-	
-}
- </script>
+		function showEditaccOff(accOffId) {
+			document.getElementById("edit_accOff_id").value = accOffId;//create this 
+			var form = document.getElementById("insListForm");
+			form.setAttribute("method", "post");
+
+			form.action = ("showEditaccOff");
+			form.submit();
+
+		}
+	</script>
 
 
 </body>

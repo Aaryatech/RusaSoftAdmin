@@ -828,8 +828,13 @@ public class LibraryController {
 			int instituteId = (int) session.getAttribute("instituteId");
 
 			int userId = (int) session.getAttribute("userId");
+			int libId = 0;
 
-			int libId = Integer.parseInt(request.getParameter("lib_id"));
+			try {
+				libId = Integer.parseInt(request.getParameter("lib_id"));
+			} catch (Exception e) {
+				libId = 0;
+			}
 
 			int isLib = 0;
 
@@ -840,7 +845,7 @@ public class LibraryController {
 			}
 			String roleNameList = null;
 
-			roleNameList = Constants.HOD_Role + "," + Constants.Faculty_Role;
+			roleNameList = Constants.Librarian_Role + "," + Constants.Faculty_Role;
 
 			if (isLib == 1) {
 				roleNameList = roleNameList + "," + Constants.Librarian_Role;
@@ -1038,7 +1043,7 @@ public class LibraryController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("showRegLib", "hodList", "0", "0", "0", "1",
+			Info deleteAccess = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "0", "1",
 					newModuleList);
 			if (deleteAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
