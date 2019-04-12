@@ -946,6 +946,7 @@ public class LibraryController {
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsLibrarian(1);
+				editHod.setType(7);
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 
@@ -1018,8 +1019,6 @@ public class LibraryController {
 
 				model.addObject("editFaculty", editFaculty);
 				model.addObject("addEdit", "1");
-
-				 
 
 				List<Integer> deptIdList = Stream.of(editFaculty.getDeptId().split(",")).map(Integer::parseInt)
 						.collect(Collectors.toList());

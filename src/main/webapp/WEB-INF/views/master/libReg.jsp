@@ -44,7 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
-	<c:url value="/chkFields" var="chkFields"></c:url>
+	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -599,25 +599,12 @@
 
 		}
 	</script>
+
 	<script type="text/javascript">
 		function checkUnique(inputValue, valueType) {
+			//alert("hi");
 
-			document.getElementById("sub1").disabled = false;
 			document.getElementById("sub2").disabled = false;
-
-			//alert(inputValue+" "+valueType);
-
-			var primaryKey = $
-			{
-				miqc.iqacId
-			}
-			;
-			//alert("Primary key"+primaryKey);
-			var isEdit = 0;
-			if (primaryKey > 0) {
-				isEdit = 1;
-			}
-			//alert("Is Edit " +isEdit);
 
 			var valid = false;
 			if (valueType == 1) {
@@ -631,7 +618,7 @@
 			} else if (valueType == 2) {
 				//alert("Its Email " );
 
-				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (inputValue.match(mailformat)) {
 					valid = true;
 					//alert("Valid Email Id");
@@ -641,71 +628,42 @@
 				}
 			}
 			if (valid == true)
+
 				$
 						.getJSON(
-								'${chkFields}',
+								'${getUserInfo}',
 								{
-
 									inputValue : inputValue,
 									valueType : valueType,
-									primaryKey : primaryKey,
-									isEdit : isEdit,
-									tableId : 1,
-
 									ajax : 'true',
 
 								},
 								function(data) {
+									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-									if (data.error == true) {
-										if (valueType == 2) {
-											document.getElementById("email").value = "";
-											alert("This email id already exist in system please enter unique");
-										} else {
-											document
-													.getElementById("contactNo").value = "";
 
-											alert("This contact no  already exist in system please enter unique");
-										}
+									if (valueType == 2) {
+
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("libName").value = data.facultyFirstName;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("lib_id").value = data.facultyId;
+
+										//alert("This email id already exist in system please enter unique");
+									} else {
+										document.getElementById("libName").value = data.facultyFirstName;
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("lib_id").value = data.facultyId;
+
+										//alert("This contact no  already exist in system please enter unique");
+
 									}
 								});
 		}
-
-		function submit_f(view) {
-			document.getElementById("is_view").value = view;//create this 
-			/* var form=document.getElementById("form_sample_2");
-			form.setAttribute("method", "post");
-
-			form.action=("insertHod");
-			var x =confirm("Do you really want to submit the form?");
-			if(x==true)
-			form.submit(); */
-
-		}
-
-		/* function showForm() {
-			//document.getElementById("abc").style = "display:none"
-				var qualType=document.getElementById("qualification").value
-			//alert("qualType::"+qualType);
-				
-				if (qualType == 5) {
-
-					document.getElementById("abc").style = "visible"
-					
-						
-				} 
-				else{
-					document.getElementById("abc").style = "display:none"
-				}
-			
-			} */
-		/* function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-				
-			
-			} */
 	</script>
 
 	<script type="text/javascript">

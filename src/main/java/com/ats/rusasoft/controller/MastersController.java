@@ -283,6 +283,7 @@ public class MastersController {
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsHod(1);
 				editHod.setIsDean(1);
+				editHod.setType(3);
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 

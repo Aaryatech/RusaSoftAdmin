@@ -451,7 +451,7 @@ public class MasterController {
 				staff.setRealivingDate(null);
 				staff.setRoleIds(roleIds);
 				staff.setTeachingTo(0);
-				staff.setType(3);
+				staff.setType(5);
 
 				staff.setInstituteId(instituteId);
 				staff.setJoiningDate(dateOfJoin);
@@ -483,6 +483,7 @@ public class MasterController {
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsAccOff(1);
+				editHod.setType(5);
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 

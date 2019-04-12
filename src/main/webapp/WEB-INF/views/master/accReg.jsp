@@ -44,7 +44,8 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
-	<c:url value="/chkFields" var="chkFields"></c:url>
+	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
+
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -810,6 +811,72 @@
 					$(this).data('select2').results.addClass('overflow-hidden')
 							.perfectScrollbar();
 				});
+	</script>
+
+	<script type="text/javascript">
+		function checkUnique(inputValue, valueType) {
+			//alert("hi");
+
+			document.getElementById("sub2").disabled = false;
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+
+				$
+						.getJSON(
+								'${getUserInfo}',
+								{
+									inputValue : inputValue,
+									valueType : valueType,
+									ajax : 'true',
+
+								},
+								function(data) {
+									//alert("data" + data);
+
+									//alert("Data  " +JSON.stringify(data));
+
+									if (valueType == 2) {
+
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("accName").value = data.facultyFirstName;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("acc_id").value = data.facultyId;
+
+										//alert("This email id already exist in system please enter unique");
+									} else {
+										document.getElementById("accName").value = data.facultyFirstName;
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("acc_id").value = data.facultyId;
+
+										//alert("This contact no  already exist in system please enter unique");
+
+									}
+								});
+		}
 	</script>
 
 

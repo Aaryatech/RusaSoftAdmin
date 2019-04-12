@@ -19,6 +19,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -243,7 +244,7 @@ public class PrincipalController {
 				staff.setRealivingDate(null);
 				staff.setRoleIds(roleIds);
 				staff.setTeachingTo(0);
-				staff.setType(3);
+				staff.setType(1);
 
 				staff.setInstituteId(instituteId);
 				staff.setJoiningDate(dateOfJoin);
@@ -280,6 +281,7 @@ public class PrincipalController {
 				editHod.setIsLibrarian(isLib);
 				editHod.setIsPrincipal(1);
 				editHod.setIsDean(isDean);
+				editHod.setType(1);
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 
@@ -297,6 +299,40 @@ public class PrincipalController {
 
 		}
 		return redirect;
+
+	}
+
+	// getUserInfoByContcAndEmail
+
+	@RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+	public @ResponseBody Staff getUserInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		Staff staff = new Staff();
+
+		try {
+			HttpSession session = request.getSession();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String inputValue = request.getParameter("inputValue");
+			int valueType = Integer.parseInt(request.getParameter("valueType"));
+			int instituteId = (int) session.getAttribute("instituteId");
+
+			System.out.println("Values:" + inputValue + " " + valueType + " ");
+
+			map.add("inputValue", inputValue);
+			map.add("checkValue", valueType);
+			map.add("instId", instituteId);
+
+			staff = rest.postForObject(Constants.url + "getUserInfoByContcAndEmail", map, Staff.class);
+			System.err.println("Info Response  " + staff.toString());
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return staff;
 
 	}
 
