@@ -234,7 +234,6 @@
 												</div>
 
 
-
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Joining
 														Date <span class="text-danger">*</span>
@@ -558,7 +557,7 @@ $(function () {
 	 
 
 	function setDate(value){
-		//alert("Value " +value)
+	//alert("Value " +hi);
 		if(value==1){
 		//alert(value)
 		//document.getElementById("acc_off_relDate").removeAttribute("required");
