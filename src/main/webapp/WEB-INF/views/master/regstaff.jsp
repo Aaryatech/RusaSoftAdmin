@@ -108,6 +108,9 @@
 
 										<input type="hidden" id="faculty_id" name="faculty_id"
 											value="${staff.facultyId}">
+										
+										<input type="hidden"
+											id="addEdit" name="addEdit" value="${addEdit}">
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">Faculty

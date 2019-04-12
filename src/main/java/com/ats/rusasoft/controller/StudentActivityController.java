@@ -689,7 +689,7 @@ public class StudentActivityController {
 				}
 
 				program.setNameOfProgram(nameOfProgram);
-				program.setDateOfIntroduction(DateConvertor.convertToYMD(date));
+				program.setDateOfIntroduction(date);
 				program.setSanctionalIntake(intake);
 				program.setProgramType(programType);
 				program.setMonthDuration(monthDuration);

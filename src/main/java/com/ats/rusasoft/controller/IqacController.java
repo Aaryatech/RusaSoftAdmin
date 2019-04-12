@@ -721,7 +721,8 @@ public class IqacController {
 
 				Staff staff = new Staff();
 				model.addObject("staff", staff);
-
+				
+				model.addObject("addEdit", "0");
 				model.addObject("title", "Register Faculty");
 			}
 		} catch (Exception e) {
@@ -741,7 +742,7 @@ public class IqacController {
 
 		try {
 			ModelAndView model = new ModelAndView("master/addFaculty");
-
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
@@ -752,6 +753,7 @@ public class IqacController {
 			int userId = (int) session.getAttribute("userId");
 			// model.addObject("title", "Add Department");
 
+			int facId = Integer.parseInt(request.getParameter("faculty_id"));
 			int highestQualification = Integer.parseInt(request.getParameter("hod_quolf"));
 
 			String yrofHighestQualification = request.getParameter("yr_highest_qualification_acqrd");
@@ -762,13 +764,26 @@ public class IqacController {
 			int teachTo = Integer.parseInt(request.getParameter("teachTo"));
 			String contactNo = request.getParameter("contact_no");
 			String email = request.getParameter("email");
+			
 
+			String[] deptIds = request.getParameterValues("dept");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < deptIds.length; i++) {
+				sb = sb.append(deptIds[i] + ",");
+
+			}
+			String deptIdList = sb.toString();
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
+
+			if (addEdit == 0) {
 			Staff staff = new Staff();
 
 			staff.setFacultyId(Integer.parseInt(request.getParameter("faculty_id")));
 
 			staff.setInstituteId(instituteId);
-			// staff.setDeptId(Integer.parseInt(request.getParameter("dept")));
+			staff.setDeptId(deptIdList);
 			staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
 			staff.setFacultyMiddelName("NA");
 			staff.setFacultyLastName("NA");
@@ -795,13 +810,34 @@ public class IqacController {
 			staff.setLastUpdatedDatetime(curDateTime);
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime(curDateTime);
-			staff.setExtraint1(4);
+			staff.setType(4);
+			staff.setIsFaculty(1);
+			staff.setExtraint1(0);
 			staff.setExtravarchar1("NA");
 
 			System.out.println("Staff:" + staff.toString());
 
 			Staff stf = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+			}
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("id", facId);
 
+				Staff editStaff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				editStaff.setFacultyFirstName(request.getParameter("faculty_first_name"));
+				editStaff.setDeptId(deptIdList);
+				editStaff.setEmail(email);
+				editStaff.setFacultyId(facId);
+				editStaff.setContactNo(contactNo);
+				editStaff.setCurrentDesignationId(designation);
+				editStaff.setHightestQualificationYear(yrofHighestQualification);
+				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("hod_quolf")));
+				editStaff.setJoiningDate(joinDate);
+				editStaff.setRealivingDate((request.getParameter("acc_off_relDate")));
+		
+				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editStaff, Staff.class);
+
+			}
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
 				redirect = "redirect:/showStaffList";
@@ -823,6 +859,7 @@ public class IqacController {
 		ModelAndView model = null;
 
 		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
@@ -837,9 +874,25 @@ public class IqacController {
 				model = new ModelAndView("master/staffList");
 
 				model.addObject("title", "Faculty List");
-				int facId = (int) session.getAttribute("instituteId");
+				//int facId = (int) session.getAttribute("instituteId");
+				int user = userObj.getUserId();
+				System.err.println("User="+user);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("facId", facId);
+
+				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+				System.out.println("User="+userObj.getStaff().getIsHod());
+				int yId = (int) session.getAttribute("acYearId");
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isFaculty", userObj.getStaff().getIsFaculty());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				map.add("user", user);
+
+				//map.add("facId", facId);
 
 				StaffList[] staff = rest.postForObject(Constants.url + "/getListStaff", map, StaffList[].class);
 				List<StaffList> staffList = new ArrayList<>(Arrays.asList(staff));
@@ -976,6 +1029,7 @@ public class IqacController {
 				System.out.println("staff" + staff);
 
 				model.addObject("title", "Edit Faculty");
+				model.addObject("addEdit", "1");
 				model.addObject("staff", staff);
 			}
 		} catch (Exception e) {
