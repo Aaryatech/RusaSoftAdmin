@@ -40,7 +40,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="showIsReg()">
+<body class=" " onload="setDate(${dean.isWorking})">
 	<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -100,7 +100,7 @@
 										<div>
 
 											<input type="hidden" class="form-control" id="dean_id"
-												name="dean_id" value="${dean.deanId}">
+												name="dean_id" value="${dean.facultyId}">
 
 											<div class="col-xs-12">
 
@@ -112,7 +112,7 @@
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="dean_name"
 															name="dean_name" placeholder="Dean R&D Name" onchange="trim(this)"
-															autocomplete="off" value="${dean.deanName}">
+															autocomplete="off" value="${dean.facultyFirstName}">
 														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter dean name</span>
 													</div>
 												</div>
@@ -128,7 +128,7 @@
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
 															<c:when
-																test="${makeList.designationId == miqc.desgntnId}">
+																test="${makeList.designationId == dean.currentDesignationId}">
 																<option value="${makeList.designationId}"
 																	selected="selected">${makeList.designationName}</option>
 															</c:when>
@@ -152,7 +152,7 @@
 															class="form-control" >
 																<c:forEach items="${deptList}" var="dept">
 																<c:choose>
-																			<c:when test="${hod.deptId==dept.deptId}">
+																			<c:when test="${hod.deptId==dean.deptId}">
 																				<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 																			</c:when>
@@ -211,7 +211,7 @@
 															<c:forEach items="${quolfList}" var="quolf">
 																<c:choose>
 																	<c:when
-																		test="${dean.qualificationId==quolf.qualificationId}">
+																		test="${dean.highestQualification==quolf.qualificationId}">
 																		<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
 																	</c:when>
@@ -248,8 +248,16 @@
 														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-2">
-														<c:choose>
-															<c:when test="${dean.deanId==0}">
+														
+														<input type="radio" id="is_registration1" ${dean.isWorking==1 ? 'checked' : ''}
+																			name="is_registration" value="1" checked
+																			onclick="setDate(this.value)">Yes
+																
+														<input type="radio" id="is_registration2" ${dean.isWorking==0 ? 'checked' : ''}
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No
+														<%-- <c:choose>
+															<c:when test="${dean.facultyId==0}">
 
 																<input type="radio" id="is_registration1"
 																	name="is_registration" value="1" checked
@@ -289,7 +297,7 @@
 
 
 														</c:choose>
-
+ --%>
 													</div>
 												</div>
 
@@ -307,6 +315,15 @@
 															<span class="error_form text-danger" id="error_acc_off_relDate" style="display:none;" >Please enter relieving date</span>
 													</div>
 												</div>
+												
+												<div class="form-group">
+											<label class="control-label col-sm-2" for="smallheading">Roles
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="checkbox" name="isHod" value="1">   HOD
+											</div>
+										</div>
 
 											</div>
 
@@ -513,7 +530,7 @@ $(function () {
 });
 
 	function showDiv(value) {
-
+	alert(value);
 		if (value == 0) {
 			//alert(value);
 			document.getElementById("abc").style.display = "block";
@@ -541,7 +558,7 @@ $(function () {
 		if(value==1){
 		//alert(value)
 		//document.getElementById("acc_off_relDate").removeAttribute("required");
-		document.getElementById("abc").style.display = "none";
+		document.getElementById("abc").style = "display:none"
 
 		//alert(value)
 		}else{
@@ -716,6 +733,8 @@ $(function () {
 				document.getElementById("abc").style.display = "block";
 				
 			}
+		 
+		 
 	}
 </script>
 

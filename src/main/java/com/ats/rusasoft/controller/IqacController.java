@@ -1070,7 +1070,7 @@ public class IqacController {
 						Quolification[].class);
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				System.err.println("quolfList " + quolfList.toString());
-				Dean dean = new Dean();
+				Staff dean = new Staff();
 				model.addObject("dean", dean);
 
 				model.addObject("quolfList", quolfList);
@@ -1136,15 +1136,27 @@ public class IqacController {
 
 			roleNameList = Constants.Dean_Role + "," + Constants.Faculty_Role;
 
-			/*
-			 * if (isAccOff == 1) { roleNameList = roleNameList + "," +
-			 * Constants.Account_Officer_Role; } if (isHod == 1) { roleNameList =
-			 * roleNameList + "," + Constants.HOD_Role; } if (isDean == 1) { roleNameList =
-			 * roleNameList + "," + Constants.Dean_Role; } if (isLib == 1) { roleNameList =
-			 * roleNameList + "," + Constants.Librarian_Role;
-			 * 
-			 * }
-			 */
+			
+			 /* if (isAccOff == 1) 
+			  	{ 
+				  roleNameList = roleNameList + "," +  Constants.Account_Officer_Role;
+				}*/
+			 
+			  if (isHod == 1) 
+			  	{ 
+				  roleNameList = roleNameList + "," + Constants.HOD_Role; 
+				} 
+			
+			 /* if (isDean == 1)
+			  	{
+				  roleNameList = roleNameList + "," + Constants.Dean_Role; } 
+			
+			  if (isLib == 1) 
+			  {
+				  roleNameList = roleNameList + "," + Constants.Librarian_Role;
+			 
+			  }*/
+			 
 
 			System.err.println("isAccOff" + isAccOff);
 			System.err.println("isHod" + isHod);
@@ -1245,9 +1257,8 @@ public class IqacController {
 
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
-				redirect = "redirect:/showIqacList";
-			else
-				redirect = "redirect:/iqacRegistration";
+				redirect = "redirect:/showDeanList";
+			
 		} catch (Exception e) {
 
 			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
@@ -1398,7 +1409,20 @@ public class IqacController {
 
 				model = new ModelAndView("master/deanReg");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList edt:" + deptList.toString());
+				model.addObject("deptList", deptList);
 
+				model.addObject("deptList", deptList);
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
 				map.add("type", 1);
 
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
@@ -1409,10 +1433,10 @@ public class IqacController {
 				model.addObject("quolfList", quolfList);
 
 				map.add("id", deanId);
-				Dean dean = rest.postForObject(Constants.url + "/getDeanById", map, Dean.class);
-				System.out.println("dean" + dean);
+				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				System.out.println("staff:" + staff);
 
-				model.addObject("dean", dean);
+				model.addObject("dean", staff);
 				model.addObject("title", "Edit Dean");
 			}
 		} catch (Exception e) {
@@ -1446,7 +1470,7 @@ public class IqacController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", deanId);
-				Info dean = rest.postForObject(Constants.url + "/deleteDeanById", map, Info.class);
+				Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
 				a = "redirect:/showDeanList";
 			}
 		} catch (Exception e) {
