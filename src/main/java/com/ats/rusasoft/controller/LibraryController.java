@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1017,8 +1019,12 @@ public class LibraryController {
 				model.addObject("editFaculty", editFaculty);
 				model.addObject("addEdit", "1");
 
-				model.addObject("jdate", DateConvertor.convertToDMY(editFaculty.getJoiningDate()));
-				model.addObject("ldate", DateConvertor.convertToDMY(editFaculty.getRealivingDate()));
+				 
+
+				List<Integer> deptIdList = Stream.of(editFaculty.getDeptId().split(",")).map(Integer::parseInt)
+						.collect(Collectors.toList());
+
+				model.addObject("deptIdList", deptIdList);
 
 			}
 		} catch (Exception e) {
@@ -1867,125 +1873,4 @@ public class LibraryController {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/showPatentDetails", method = RequestMethod.GET)
-	 * public ModelAndView showPatentDetails(HttpServletRequest request,
-	 * HttpServletResponse response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("FacultyDetails/patentDetails");
-	 * 
-	 * model.addObject("title", "Patent Details Form");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showFacultyDetails at Master Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 */
-
-	/*
-	 * @RequestMapping(value = "/showPatentDetailsList", method = RequestMethod.GET)
-	 * public ModelAndView showPatentDetailsList(HttpServletRequest request,
-	 * HttpServletResponse response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("FacultyDetails/patentDetailList");
-	 * 
-	 * model.addObject("title", "Patent Details List");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showPatentDetailsList at Library Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 */
-
-	/*
-	 * @RequestMapping(value = "/showAwardDetails", method = RequestMethod.GET)
-	 * public ModelAndView showAwardDetails(HttpServletRequest request,
-	 * HttpServletResponse response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("FacultyDetails/awardDetails");
-	 * 
-	 * model.addObject("title", "Award Details Form");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showAwardDetails at Library Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = "/showAwardDetailsList", method = RequestMethod.GET)
-	 * public ModelAndView showAwardDetailsList(HttpServletRequest request,
-	 * HttpServletResponse response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("FacultyDetails/awardDetailsList");
-	 * 
-	 * model.addObject("title", "Award Details List");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showAwardDetailsList at Library Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = "/showOutReachDetailsList", method =
-	 * RequestMethod.GET) public ModelAndView
-	 * showOutReachDetailsList(HttpServletRequest request, HttpServletResponse
-	 * response) {
-	 * 
-	 * ModelAndView model = null; try {
-	 * 
-	 * model = new ModelAndView("FacultyDetails/outReachList");
-	 * 
-	 * model.addObject("title", "Out Reach Activity List");
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showOutReachDetailsList at Library Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 * 
-	 */}
+}

@@ -134,6 +134,28 @@
 											<div class="col-sm-10">
 												<select id="dept_id" name="dept_id" class="" multiple>
 													<c:forEach items="${deptList}" var="dept">
+														<c:set var="flag" value="0"></c:set>
+														<c:forEach items="${deptIdList}" var="selFr"
+															varStatus="count2">
+															<c:choose>
+																<c:when test="${selFr==dept.deptId}">
+																	<option selected value="${dept.deptId}"><c:out
+																			value="${dept.deptName}" /></option>
+																	<c:set var="flag" value="1"></c:set>
+																</c:when>
+																<c:otherwise>
+
+																</c:otherwise>
+															</c:choose>
+														</c:forEach>
+														<c:choose>
+															<c:when test="${flag==0}">
+																<option value="${dept.deptId}"><c:out
+																		value="${dept.deptName}" /></option>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+													<%-- <c:forEach items="${deptList}" var="dept">
 														<c:choose>
 															<c:when test="${dept.deptId==editHod.deptId}">
 																<option selected value="${dept.deptId}">${dept.deptName}</option>
@@ -146,7 +168,7 @@
 
 														</c:choose>
 
-													</c:forEach>
+													</c:forEach> --%>
 													<option value="0">NA</option>
 
 

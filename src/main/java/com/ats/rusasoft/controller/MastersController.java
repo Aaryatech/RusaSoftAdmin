@@ -413,6 +413,10 @@ public class MastersController {
 
 				model.addObject("editHod", editHod);
 				model.addObject("addEdit", "1");
+				List<Integer> deptIdList = Stream.of(editHod.getDeptId().split(",")).map(Integer::parseInt)
+						.collect(Collectors.toList());
+
+				model.addObject("deptIdList", deptIdList);
 
 			}
 		} catch (Exception e) {
