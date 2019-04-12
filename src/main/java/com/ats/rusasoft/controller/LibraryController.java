@@ -40,6 +40,7 @@ import com.ats.rusasoft.model.InstituteInfo;
 import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LibraryInfo;
 import com.ats.rusasoft.model.LoginResponse;
+import com.ats.rusasoft.model.NewDeanList;
 import com.ats.rusasoft.model.Quolification;
 import com.ats.rusasoft.model.RareBook;
 import com.ats.rusasoft.model.Staff;
@@ -714,10 +715,11 @@ public class LibraryController {
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("instId", inst_id);
+				map.add("instituteId", inst_id);
 
-				GetLib[] instArray = rest.postForObject(Constants.url + "getAllLibByInstituteId", map, GetLib[].class);
-				List<GetLib> libtList = new ArrayList<>(Arrays.asList(instArray));
+				NewDeanList[] instArray = rest.postForObject(Constants.url + "getNewLibraryList", map,
+						NewDeanList[].class);
+				List<NewDeanList> libtList = new ArrayList<>(Arrays.asList(instArray));
 
 				System.out.println("lib list is" + libtList.toString());
 
@@ -801,6 +803,7 @@ public class LibraryController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
+				model.addObject("addEdit", "0");
 
 			}
 		} catch (Exception e) {
@@ -875,51 +878,71 @@ public class LibraryController {
 			}
 			String deptIdList = sb.toString();
 			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
+			if (addEdit == 0) {
+				Staff staff = new Staff();
 
-			Staff staff = new Staff();
+				staff.setContactNo(contact);
+				staff.setCurrentDesignationId(designation);
+				staff.setDeptId(deptIdList);
+				staff.setEmail(email);
+				staff.setFacultyFirstName(libName);
+				staff.setFacultyId(libId);
+				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				staff.setHightestQualificationYear(null);
+				staff.setIsAccOff(0);
+				staff.setIsDean(0);
+				staff.setIsFaculty(1);
+				staff.setIsHod(0);
+				staff.setIsIqac(0);
+				staff.setIsLibrarian(1);
+				staff.setIsPrincipal(0);
 
-			staff.setContactNo(contact);
-			staff.setCurrentDesignationId(designation);
-			staff.setDeptId(deptIdList);
-			staff.setEmail(email);
-			staff.setFacultyFirstName(libName);
-			staff.setFacultyId(libId);
-			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-			staff.setHightestQualificationYear(null);
-			staff.setIsAccOff(0);
-			staff.setIsDean(0);
-			staff.setIsFaculty(1);
-			staff.setIsHod(0);
-			staff.setIsIqac(0);
-			staff.setIsLibrarian(1);
-			staff.setIsPrincipal(0);
+				staff.setIsStudent(0);
+				staff.setIsWorking(1);
+				staff.setJoiningDate(dateOfJoin);
+				staff.setLastUpdatedDatetime(curDateTime);
+				staff.setMakerEnterDatetime(curDateTime);
 
-			staff.setIsStudent(0);
-			staff.setIsWorking(1);
-			staff.setJoiningDate(dateOfJoin);
-			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setMakerEnterDatetime(curDateTime);
+				staff.setPassword("");
+				staff.setRealivingDate(null);
+				staff.setRoleIds(roleIds);
+				staff.setTeachingTo(0);
+				staff.setType(7);
 
-			staff.setPassword("");
-			staff.setRealivingDate(null);
-			staff.setRoleIds(roleIds);
-			staff.setTeachingTo(0);
-			staff.setType(7);
+				staff.setInstituteId(instituteId);
+				staff.setJoiningDate(dateOfJoin);
+				staff.setContactNo(contact);
+				staff.setEmail(email);
+				staff.setDelStatus(1);
+				staff.setIsActive(1);
+				staff.setMakerUserId(userId);
+				staff.setMakerEnterDatetime(curDateTime);
+				staff.setCheckerUserId(0);
+				staff.setCheckerDatetime(curDateTime);
+				staff.setLastUpdatedDatetime(curDateTime);
 
-			staff.setInstituteId(instituteId);
-			staff.setJoiningDate(dateOfJoin);
-			staff.setContactNo(contact);
-			staff.setEmail(email);
-			staff.setDelStatus(1);
-			staff.setIsActive(1);
-			staff.setMakerUserId(userId);
-			staff.setMakerEnterDatetime(curDateTime);
-			staff.setCheckerUserId(0);
-			staff.setCheckerDatetime(curDateTime);
-			staff.setLastUpdatedDatetime(curDateTime);
+				staff.setExtravarchar1("NA");
+				Staff Library = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+			} else {
 
-			staff.setExtravarchar1("NA");
-			Staff Library = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+				map = new LinkedMultiValueMap<>();
+				map.add("id", libId);
+
+				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				editHod.setFacultyFirstName(libName);
+				editHod.setDeptId(deptIdList);
+				editHod.setEmail(email);
+				editHod.setFacultyId(libId);
+				editHod.setContactNo(contact);
+				editHod.setCurrentDesignationId(designation);
+				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editHod.setJoiningDate(dateOfJoin);
+				editHod.setIsLibrarian(1);
+
+				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
+
+			}
 
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)
@@ -936,193 +959,15 @@ public class LibraryController {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/showRegLib", method = RequestMethod.GET) public
-	 * ModelAndView showRegLib1(HttpServletRequest request, HttpServletResponse
-	 * response) {
-	 * 
-	 * ModelAndView model = null;
-	 * 
-	 * HttpSession session = request.getSession();
-	 * 
-	 * List<ModuleJson> newModuleList = (List<ModuleJson>)
-	 * session.getAttribute("newModuleList");
-	 * 
-	 * try {
-	 * 
-	 * Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "1",
-	 * "0", "0", newModuleList);
-	 * 
-	 * if (view.isError() == true) {
-	 * 
-	 * model = new ModelAndView("accessDenied");
-	 * 
-	 * } else {
-	 * 
-	 * model = new ModelAndView("master/libReg");
-	 * 
-	 * model.addObject("title", "Add Librarian Registration"); Librarian editInst =
-	 * new Librarian();
-	 * 
-	 * RestTemplate restTemplate = new RestTemplate(); MultiValueMap<String, Object>
-	 * map = new LinkedMultiValueMap<String, Object>(); map.add("type", 1);
-	 * Quolification[] quolArray = restTemplate.postForObject(Constants.url +
-	 * "getQuolificationList", map, Quolification[].class); List<Quolification>
-	 * quolfList = new ArrayList<>(Arrays.asList(quolArray));
-	 * System.err.println("quolfList " + quolfList.toString());
-	 * 
-	 * model.addObject("quolfList", quolfList); model.addObject("editInst",
-	 * editInst); }
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * System.err.println("exception In showStaffList at Master Contr" +
-	 * e.getMessage());
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * }
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 */
-	// insertHod
-	/*
-	 * @RequestMapping(value = "/insertLibrarian", method = RequestMethod.POST)
-	 * public String insertLibrarian1(HttpServletRequest request,
-	 * HttpServletResponse response) {
-	 * 
-	 * HttpSession session = request.getSession(); String a = null; try {
-	 * List<ModuleJson> newModuleList = (List<ModuleJson>)
-	 * session.getAttribute("newModuleList");
-	 * 
-	 * Info view = AccessControll.checkAccess("insertLibrarian", "showLibList", "0",
-	 * "1", "0", "0", newModuleList);
-	 * 
-	 * if (view.isError() == true)
-	 * 
-	 * {
-	 * 
-	 * a = "redirect:/accessDenied";
-	 * 
-	 * }
-	 * 
-	 * else { System.err.println("in insert insertLibrarian"); ModelAndView model =
-	 * null;
-	 * 
-	 * int inst_id = (int) session.getAttribute("instituteId"); int maker_id = (int)
-	 * session.getAttribute("userId");
-	 * 
-	 * Librarian lib = new Librarian(); RestTemplate restTemplate = new
-	 * RestTemplate();
-	 * 
-	 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
-	 * Object>();
-	 * 
-	 * int librarianId = Integer.parseInt(request.getParameter("librarian_id"));
-	 * System.out.println("librarian_id" + "librarian_id");
-	 * 
-	 * String librarian_name = request.getParameter("librarian_name"); String
-	 * lib_con_num = request.getParameter("lib_con_num");
-	 * 
-	 * int conf_type = Integer.parseInt(request.getParameter("conf_type"));
-	 * 
-	 * String librarian_email = request.getParameter("librarian_email");
-	 * 
-	 * int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
-	 * 
-	 * String lib_joiningDate = request.getParameter("lib_joiningDate");
-	 * System.out.println("lib_joiningDate:" + lib_joiningDate); String
-	 * relieving_date = request.getParameter("relieving_date");
-	 * 
-	 * System.err.println("librarian id  " + librarianId); if (librarianId == 0) {
-	 * 
-	 * System.out.println("inst id is" + inst_id);
-	 * 
-	 * lib.setLibrarianName(librarian_name); lib.setContactNo(lib_con_num);
-	 * lib.setEmail(librarian_email); lib.setQualificationId(lib_quolf); if
-	 * (conf_type == 1) {
-	 * lib.setRealivingDate(DateConvertor.convertToYMD(relieving_date)); } else {
-	 * lib.setRealivingDate(null);
-	 * 
-	 * } lib.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
-	 * lib.setMakerUserId(maker_id);
-	 * 
-	 * lib.setInstituteId(inst_id); lib.setDelStatus(1); lib.setExInt1(1);
-	 * lib.setExInt2(1); lib.setExVar1("NA"); lib.setExVar2("NA");
-	 * 
-	 * DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
-	 * cal = Calendar.getInstance();
-	 * 
-	 * String curDateTime = dateFormat.format(cal.getTime());
-	 * 
-	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-	 * 
-	 * String curDate = dateFormatStr.format(new Date());
-	 * 
-	 * lib.setMakerEnterDatetime(curDateTime);
-	 * 
-	 * Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian", lib,
-	 * Librarian.class);
-	 * 
-	 * } else { System.out.println("in edit"); System.out.println("in edit");
-	 * 
-	 * map.add("libId", librarianId); // getInstitute Hod hod = Librarian lib1 =
-	 * rest.postForObject(Constants.url + "getLibrarianByLibId", map,
-	 * Librarian.class);
-	 * 
-	 * lib1.setLibrarianName(librarian_name); lib1.setContactNo(lib_con_num);
-	 * lib1.setEmail(librarian_email); lib1.setQualificationId(lib_quolf);
-	 * lib1.setRealivingDate(DateConvertor.convertToYMD(relieving_date));
-	 * lib1.setJoiningDate(DateConvertor.convertToYMD(lib_joiningDate));
-	 * lib1.setMakerUserId(maker_id);
-	 * 
-	 * lib1.setInstituteId(inst_id);
-	 * 
-	 * DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); Calendar
-	 * cal = Calendar.getInstance();
-	 * 
-	 * String curDateTime = dateFormat.format(cal.getTime());
-	 * 
-	 * DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-	 * 
-	 * String curDate = dateFormatStr.format(new Date());
-	 * 
-	 * lib1.setMakerEnterDatetime(curDateTime);
-	 * 
-	 * Librarian editInst = rest.postForObject(Constants.url + "saveLibrarian",
-	 * lib1, Librarian.class);
-	 * 
-	 * }
-	 * 
-	 * int isView = Integer.parseInt(request.getParameter("is_view")); if (isView ==
-	 * 1) a = "redirect:/showLibList";
-	 * 
-	 * else a = "redirect:/showRegLib";
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * catch (Exception e) { System.err.println("Exce in save lib  " +
-	 * e.getMessage()); e.printStackTrace(); }
-	 * 
-	 * return a;
-	 * 
-	 * }
-	 */
-	@RequestMapping(value = "/showEditLibrarian", method = RequestMethod.POST)
-	public ModelAndView showEditLibrarian(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/showEditLibrarian/{facultyId}", method = RequestMethod.GET)
+	public ModelAndView showEditLibrarian(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
+
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
-
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
-
-			Info view = AccessControll.checkAccess("showEditLibrarian", "showLibList", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1132,96 +977,108 @@ public class LibraryController {
 
 				model = new ModelAndView("master/libReg");
 
-				int libId = Integer.parseInt(request.getParameter("edit_lib_id"));
-				System.out.println("librarian id is" + libId);
+				model.addObject("title", "Edit Librarian Registration");
 
-				model.addObject("title", " Edit Librarian  Registration");
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("libId", libId);
 
-				Librarian editInst = rest.postForObject(Constants.url + "getLibrarianByLibId", map, Librarian.class);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
 
-				System.out.println("librarian is" + editInst.toString());
-				model.addObject("editInst", editInst);
-				model.addObject("libId", libId);
+				model.addObject("deptList", deptList);
 
-				RestTemplate restTemplate = new RestTemplate();
 				map = new LinkedMultiValueMap<String, Object>();
+
 				map.add("type", 1);
-				Quolification[] quolArray = restTemplate.postForObject(Constants.url + "getQuolificationList", map,
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
 
-				model.addObject("jdate", DateConvertor.convertToDMY(editInst.getJoiningDate()));
-				model.addObject("ldate", DateConvertor.convertToDMY(editInst.getRealivingDate()));
+				map = new LinkedMultiValueMap<>();
+				map.add("id", facultyId);
+
+				Staff editFaculty = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				System.out.println("facultyId:" + facultyId);
+
+				model.addObject("editFaculty", editFaculty);
+				model.addObject("addEdit", "1");
+
+				model.addObject("jdate", DateConvertor.convertToDMY(editFaculty.getJoiningDate()));
+				model.addObject("ldate", DateConvertor.convertToDMY(editFaculty.getRealivingDate()));
+
 			}
-
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+
+			System.err.println("exception In editFaculty at Library Contr" + e.getMessage());
+
 			e.printStackTrace();
+
 		}
-
 		return model;
-
 	}
 
-	@RequestMapping(value = "/deleteLibrarians/{libId}", method = RequestMethod.GET)
-	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int libId) {
-		HttpSession session = request.getSession();
-		String a = null;
-
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-		Info view = AccessControll.checkAccess("deleteLibrarians/{libId}", "showLibList", "0", "0", "0", "1",
-				newModuleList);
+	@RequestMapping(value = "/deleteLibrarians/{facultyId}", method = RequestMethod.GET)
+	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int facultyId) {
+		String redirect = null;
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			}
+			HttpSession session = request.getSession();
 
-			else {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (libId == 0) {
+			Info deleteAccess = AccessControll.checkAccess("showRegLib", "hodList", "0", "0", "0", "1",
+					newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (facultyId == 0) {
 
 					System.err.println("Multiple records delete ");
-					String[] libIds = request.getParameterValues("libIds");
-					System.out.println("id are" + libIds);
+					String[] instIds = request.getParameterValues("hodIds");
+					System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
-					for (int i = 0; i < libIds.length; i++) {
-						sb = sb.append(libIds[i] + ",");
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
 
 					}
-					String libIdList = sb.toString();
-					libIdList = libIdList.substring(0, libIdList.length() - 1);
+					String hodIdList = sb.toString();
+					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
 
-					map.add("libIdList", libIdList);
+					map.add("staffIdList", hodIdList);
 				} else {
 
 					System.err.println("Single Record delete ");
-					map.add("libIdList", libId);
+					map.add("staffIdList", facultyId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteLibrarians", map, Info.class);
+				Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
 
-				a = "redirect:/showLibList";
+				redirect = "redirect:/showLibList";
 			}
-
 		} catch (Exception e) {
 
-			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+			System.err.println(" Exception In deleteLibrarians at Library Contr " + e.getMessage());
 
 			e.printStackTrace();
 
 		}
-		return a;
+
+		return redirect;
+
 	}
 
 	/////////////////////////////// ****Student************///////////////////

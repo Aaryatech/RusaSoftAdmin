@@ -84,7 +84,11 @@
 										action="${pageContext.request.contextPath}/insertLibrarian"
 										method="post" name="formidhere" id="formidhere">
 
-										<input type="hidden" id="lib_id" name="lib_id" value="0">
+
+
+										<input type="hidden" id="lib_id" name="lib_id"
+											value="${editFaculty.facultyId}"> <input
+											type="hidden" id="addEdit" name="addEdit" value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Director KRC/ Librarian Name<span class="text-danger">*</span>
@@ -92,7 +96,7 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="libName"
 													onchange="trim(this)" autocomplete="off"
-													value="${hod.iqacName}" name="libName"
+													value="${editFaculty.facultyFirstName}" name="libName"
 													placeholder="Director KRC/ Librarian Name"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter Librarian name</span>
@@ -109,7 +113,8 @@
 
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
-															<c:when test="${makeList.designationId == hod.desgntnId}">
+															<c:when
+																test="${makeList.designationId == editFaculty.currentDesignationId}">
 																<option value="${makeList.designationId}"
 																	selected="selected">${makeList.designationName}</option>
 															</c:when>
@@ -132,7 +137,7 @@
 												<select id="dept_id" name="dept_id" class="" multiple>
 													<c:forEach items="${deptList}" var="dept">
 														<c:choose>
-															<c:when test="${hod.deptId==dept.deptId}">
+															<c:when test="${editFaculty.deptId==dept.deptId}">
 																<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 															</c:when>
@@ -162,7 +167,7 @@
 													<c:forEach items="${quolfList}" var="quolf">
 														<c:choose>
 															<c:when
-																test="${hod.highestQualificationId==quolf.qualificationId}">
+																test="${editFaculty.highestQualification==quolf.qualificationId}">
 																<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
 															</c:when>
@@ -191,7 +196,7 @@
 												<input type="text" class="form-control datepicker"
 													id="dateOfJoin" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
-													value="${miqc.joiningDate}" name="dateOfJoin"
+													value="${editFaculty.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd/mm/yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
@@ -209,8 +214,9 @@
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
-													placeholder="Mobile Number" value="${miqc.contactNo}">
-												<span class="error_form text-danger" id="error_formfield4"
+													placeholder="Mobile Number"
+													value="${editFaculty.contactNo}"> <span
+													class="error_form text-danger" id="error_formfield4"
 													style="display: none;">Please enter contact no</span>
 
 												<p class="desc text-danger fontsize11">Note: OTP will be
@@ -228,8 +234,8 @@
 												<input type="email" class="form-control" id="email"
 													autocomplete="off" onchange="checkUnique(this.value,2)"
 													onchange="trim(this)" name="email"
-													placeholder="abc@xyz.com" value="${miqc.email}"> <span
-													class="error_form text-danger" id="error_formfield5"
+													placeholder="abc@xyz.com" value="${editFaculty.email}">
+												<span class="error_form text-danger" id="error_formfield5"
 													style="display: none;">Please enter email id</span>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>
@@ -254,7 +260,7 @@
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
 
-												<a href="${pageContext.request.contextPath}/showIqacList"><button
+												<a href="${pageContext.request.contextPath}/showLibList"><button
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
