@@ -113,9 +113,9 @@ public class ProgramDetailModuleController {
 
 	}
 
-	@RequestMapping(value = "/showpoPso", method = RequestMethod.GET)
-	public ModelAndView showpoPso(HttpServletRequest request, HttpServletResponse response) {
-
+	@RequestMapping(value = "/showpoPso/{programId}", method = RequestMethod.GET)
+	public ModelAndView showpoPso(@PathVariable int programId, HttpServletRequest request, HttpServletResponse response) {
+System.err.println("HELLO " +programId);
 		ModelAndView model = null;
 		
 		HttpSession session = request.getSession();
@@ -140,7 +140,7 @@ public class ProgramDetailModuleController {
 			 */
             map = new LinkedMultiValueMap<>();
 			
-			map.add("programId", 2);
+			map.add("programId", programId);
 			GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
 			System.out.println("Program:"+progDetail);
 			model.addObject("progDetail", progDetail);

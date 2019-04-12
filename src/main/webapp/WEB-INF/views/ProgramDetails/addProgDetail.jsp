@@ -135,7 +135,7 @@
 												Duration(in months)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="monthDuration"
+												<input type="text" class="form-control" id="monthDuration" autoc
 													value="${editProgram.monthDuration}" name="monthDuration"
 													placeholder="Duration(in months)" pattern="\d*">
 													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter duration.</span>
@@ -174,7 +174,7 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker" id="date"
 													value="${editProgram.dateOfIntroduction}" name="date"
-													placeholder="Date/Year of Introduction">
+													placeholder="Date of Introduction">
 											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter date of introduction.</span>
 											</div>
 										</div>

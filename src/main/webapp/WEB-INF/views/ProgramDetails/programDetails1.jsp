@@ -81,7 +81,7 @@
 													<th>Name of Program</th>
 													<th>Duration Months</th>
 													<th>Sanctioned Intake</th>
-													<th>Date/Year of Introduction</th>
+													<th>Date of Introduction</th>
 													<th>Approved by</th>
 													<th>Action</th>
 												</tr>
@@ -106,7 +106,7 @@
 																data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;
 														</c:if> <c:if test="${isAdd==1}">
-															<a href="${pageContext.request.contextPath}/showpoPso"
+															<a href="${pageContext.request.contextPath}/showpoPso/${list.programId}"
 																title="PO/PSO Mapping" rel="tooltip"
 																data-color-class="detail"
 																data-animate=" animated fadeIn " data-toggle="tooltip"
