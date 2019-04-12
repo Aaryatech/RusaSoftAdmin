@@ -85,14 +85,16 @@
 										method="post" name="formidhere" id="formidhere">
 									
 										<input type="hidden" id="iqac_id" name="iqac_id"
-											value="${miqc.iqacId}">
+											value="${miqc.facultyId}">
+											<input type="hidden"
+											id="addEdit" name="addEdit" value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="iqacName" onchange="trim(this)"	autocomplete="off" 
-												value="${miqc.iqacName}" name="iqacName"													
+												value="${miqc.facultyFirstName}" name="iqacName"													
 													placeholder="Internal Quality Assurance Cell (IQAC)">
 												<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter IQAC name</span>
 											</div>
@@ -109,7 +111,7 @@
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
 															<c:when
-																test="${makeList.designationId == miqc.desgntnId}">
+																test="${makeList.designationId == miqc.currentDesignationId}">
 																<option value="${makeList.designationId}"
 																	selected="selected">${makeList.designationName}</option>
 															</c:when>
@@ -130,10 +132,10 @@
 															</label>
 															<div class="col-sm-10">
 																<select id="dept_id" name="dept_id"
-																	class=""  multiple>
+																	class="" >
 																	<c:forEach items="${deptList}" var="dept">
 																		<c:choose>
-																			<c:when test="${hod.deptId==dept.deptId}">
+																			<c:when test="${miqc.deptId==dept.deptId}">
 																				<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 																			</c:when>
@@ -246,10 +248,10 @@
 												 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-										<input type="checkbox" name="isAccOff" value="1">Account Officer
-										<input type="checkbox" name="isHod" value="1">HOD
-										<input type="checkbox" name="isDean" value="1">Dean
-										<input type="checkbox" name="isLib" value="1">Librarian
+										<input type="checkbox" name="isAccOff" value="1" ${miqc.isAccOff==1 ? 'checked' : '' }>Account Officer
+										<input type="checkbox" name="isHod" value="1" ${miqc.isHod==1 ? 'checked' : '' }>HOD
+										<input type="checkbox" name="isDean" value="1" ${miqc.isDean==1 ? 'checked' : '' }>Dean
+										<input type="checkbox" name="isLib" value="1" ${miqc.isLibrarian==1 ? 'checked' : '' }>Librarian
 										
 										
 </div>

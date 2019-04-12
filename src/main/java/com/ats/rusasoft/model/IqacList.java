@@ -2,23 +2,23 @@ package com.ats.rusasoft.model;
 
 public class IqacList {
 
-	private int iqacId;
-	private String iqacName;
+	private int facultyId;
+	private String facultyFirstName;
 	private String joiningDate;
 	private String contactNo;
 	private String email;
 	private String designationName;
-	public int getIqacId() {
-		return iqacId;
+	public int getFacultyId() {
+		return facultyId;
 	}
-	public void setIqacId(int iqacId) {
-		this.iqacId = iqacId;
+	public void setFacultyId(int facultyId) {
+		this.facultyId = facultyId;
 	}
-	public String getIqacName() {
-		return iqacName;
+	public String getFacultyFirstName() {
+		return facultyFirstName;
 	}
-	public void setIqacName(String iqacName) {
-		this.iqacName = iqacName;
+	public void setFacultyFirstName(String facultyFirstName) {
+		this.facultyFirstName = facultyFirstName;
 	}
 	public String getJoiningDate() {
 		return joiningDate;
@@ -46,11 +46,10 @@ public class IqacList {
 	}
 	@Override
 	public String toString() {
-		return "IqacList [iqacId=" + iqacId + ", iqacName=" + iqacName + ", joiningDate=" + joiningDate + ", contactNo="
-				+ contactNo + ", email=" + email + ", designationName=" + designationName + "]";
+		return "IqacList [facultyId=" + facultyId + ", facultyFirstName=" + facultyFirstName + ", joiningDate="
+				+ joiningDate + ", contactNo=" + contactNo + ", email=" + email + ", designationName=" + designationName
+				+ "]";
 	}
 	
 	
-	
-
 }

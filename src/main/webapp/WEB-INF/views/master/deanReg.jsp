@@ -40,7 +40,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="setDate(${dean.isWorking})">
+<body class=" " onload="setDate(${dean.facultyId})">
 	<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -96,11 +96,15 @@
 										action="${pageContext.request.contextPath}/insertNewDean"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-
+	
+	
 										<div>
 
 											<input type="hidden" class="form-control" id="dean_id"
 												name="dean_id" value="${dean.facultyId}">
+												
+												<input type="hidden"
+											id="addEdit" name="addEdit" value="${addEdit}">
 
 											<div class="col-xs-12">
 
@@ -249,11 +253,11 @@
 													</label>
 													<div class="col-sm-2">
 														
-														<input type="radio" id="is_registration1" ${dean.isWorking==1 ? 'checked' : ''}
-																			name="is_registration" value="1" checked
+														<input type="radio" id="is_registration1" ${dean.facultyId==0 ? 'checked' : ''}
+																			name="is_registration" value="1" 
 																			onclick="setDate(this.value)">Yes
 																
-														<input type="radio" id="is_registration2" ${dean.isWorking==0 ? 'checked' : ''}
+														<input type="radio" id="is_registration2" ${dean.facultyId>0 ? 'checked' : ''}
 																			name="is_registration" value="0"
 																			onclick="setDate(this.value)">No
 														<%-- <c:choose>
@@ -321,7 +325,7 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="checkbox" name="isHod" value="1">   HOD
+												<input type="checkbox" name="isHod" value="1" ${dean.isHod==1 ? 'checked' : ''} >   HOD
 											</div>
 										</div>
 
