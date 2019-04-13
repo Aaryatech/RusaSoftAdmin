@@ -100,7 +100,7 @@
 										action="${pageContext.request.contextPath}/insertInstQuaInitiative"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-										
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="qualityInitId">
@@ -120,10 +120,10 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
-												</select>
-												<span class="error_form text-danger" id="qualityInitId_field"
-															style="display: none;">Please select quality initiative name</span>
-												
+												</select> <span class="error_form text-danger"
+													id="qualityInitId_field" style="display: none;">Please
+													select quality initiative name</span>
+
 
 											</div>
 										</div>
@@ -133,14 +133,17 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="9" onkeypress='return restrictAlphabets(event)'
-													class="form-control" id="no_of_participant"
-													autocomplete="off" name="no_of_participant"
+												<input type="number" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
+													onchange="trim(this)" class="form-control"
+													id="no_of_participant" min="0" autocomplete="off"
+													name="no_of_participant"
 													placeholder="Enter  No. of Participants"
-													value="${editQuality.qualityPcount}">
-													<span class="error_form text-danger" id="no_of_participant_field"
-															style="display: none;">Please enter no of participants</span>
-													
+													value="${editQuality.qualityPcount}"> <span
+													class="error_form text-danger" id="no_of_participant_field"
+													style="display: none;">Please enter no of
+													participants</span>
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -151,10 +154,10 @@
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
 													id="fromDate" name="fromDate" readonly="readonly"
-													value="${editQuality.qualityFromdt}">
-													<span class="error_form text-danger" id="fromDate_field"
-															style="display: none;">Please select from date</span>
-													
+													value="${editQuality.qualityFromdt}"> <span
+													class="error_form text-danger" id="fromDate_field"
+													style="display: none;">Please select from date</span>
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -166,20 +169,24 @@
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
 													placeholder="Select To Date" readonly="readonly"
-													value="${editQuality.qualityTodt}">
-													<span class="error_form text-danger" id="toDate_field"
-															style="display: none;">Please select to date</span>
-													
+													value="${editQuality.qualityTodt}"> <span
+													class="error_form text-danger" id="toDate_field"
+													style="display: none;">Please select to date</span>
+
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-												<a href="${pageContext.request.contextPath}/showInternalQualityInitiative"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-												
-												<input type="hidden" name="is_view" id="is_view" value="0">
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+												<a
+													href="${pageContext.request.contextPath}/showInternalQualityInitiative"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a> <input type="hidden" name="is_view" id="is_view" value="0">
 
 												<input type="hidden" id="qualityId" name="qualityId"
 													value="${editQuality.qualityId}">
@@ -189,7 +196,7 @@
 											<div class="clearfix"></div>
 										</div>
 									</form>
-										<p class="desc text-danger fontsize11">Notice : * Fields
+									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
 								</div>
 
@@ -272,20 +279,28 @@
 												}
 
 
-												if (!$("#no_of_participant").val()
-														|| !validateNo($(
+												if ($("#no_of_participant")
+														.val() == 0
+														|| !$(
 																"#no_of_participant")
-																.val())) {
+																.val()) {
+
 													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
 													$("#no_of_participant")
 															.addClass(
 																	"has-error")
-		 											$("#no_of_participant_field")
+													$(
+															"#no_of_participant_field")
 															.show()
+													//return false;
 												} else {
-													$("#no_of_participant_field")
+													$(
+															"#no_of_participant_field")
 															.hide()
 												}
+
 
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
@@ -437,8 +452,8 @@
 	    return true;
 	}
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){
@@ -455,7 +470,7 @@
       return false;
     }    
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

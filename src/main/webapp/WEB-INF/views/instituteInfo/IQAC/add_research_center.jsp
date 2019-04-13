@@ -136,11 +136,13 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
-													id="rc_guide_count" min="0" name="rc_guide_count"
-													placeholder="No. of Guides" autocomplete="off"
-													value="${editValue.rcGuideCount}"> <span
-													class="error_form text-danger" id="error_rc_guide_count"
-													style="display: none;">Please enter No. of Guides</span>
+													onkeypress='return restrictAlphabets(event)'
+													onchange="trim(this)" id="rc_guide_count" min="1"
+													name="rc_guide_count" placeholder="No. of Guides"
+													autocomplete="off" value="${editValue.rcGuideCount}">
+												<span class="error_form text-danger"
+													id="error_rc_guide_count" style="display: none;">Please
+													enter No. of Guides</span>
 											</div>
 										</div>
 
@@ -151,11 +153,13 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
-													id="rc_student_count" min="0" name="rc_student_count"
-													placeholder="No. of Students" autocomplete="off"
-													value="${editValue.rcStudentCount}"> <span
-													class="error_form text-danger" id="error_rc_student_count"
-													style="display: none;">Please enter No. of Students</span>
+													onkeypress='return restrictAlphabets(event)'
+													onchange="trim(this)" id="rc_student_count" min="1"
+													name="rc_student_count" placeholder="No. of Students"
+													autocomplete="off" value="${editValue.rcStudentCount}">
+												<span class="error_form text-danger"
+													id="error_rc_student_count" style="display: none;">Please
+													enter No. of Students</span>
 											</div>
 										</div>
 
@@ -167,7 +171,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													id="fromDate" name="fromDate"
+													id="fromDate" name="fromDate" placeholder="dd/mm/yyyy"
 													value="${editValue.rcValidityFromdt}" autocomplete="off">
 												<span class="error_form text-danger" id="error_fromDate"
 													style="display: none;">Please enter From date</span>
@@ -183,6 +187,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
+													placeholder="dd/mm/yyyy"
 													value="${editValue.rcValidityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
 													style="display: none;">Please enter to date</span>
@@ -193,16 +198,22 @@
 											value="${editValue.rcId}"> <input type="hidden"
 											id="is_view" name="is_view" value="0">
 
-									<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showResearchCenter"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showResearchCenter"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
@@ -346,45 +357,52 @@
 												}
 												
 												
-												
-												
-												if (!$("#rc_guide_count").val()
-														|| !numbersOnlyNotZero($(
+												if ($("#rc_guide_count")
+														.val() == 0
+														|| !$(
 																"#rc_guide_count")
-																.val())) {
+																.val()) {
 
 													isError = true;
-													errMsg += '<li>Please enter No. of guides</li>';
+													errMsg += '<li>Please enter a valid name.</li>';
 
-													$("#rc_guide_count").addClass(
-															"has-error")
-													$("#error_rc_guide_count")
+													$("#rc_guide_count")
+															.addClass(
+																	"has-error")
+													$(
+															"#error_rc_guide_count")
 															.show()
-
+													//return false;
 												} else {
-													$("#error_rc_guide_count")
+													$(
+															"#error_rc_guide_count")
 															.hide()
 												}
 												
 												
-												if (!$("#rc_student_count").val()
-														|| !numbersOnlyNotZero($(
+												
+												if ($("#rc_student_count")
+														.val() == 0
+														|| !$(
 																"#rc_student_count")
-																.val())) {
+																.val()) {
 
 													isError = true;
-													errMsg += '<li>Please enter No. of guides</li>';
+													errMsg += '<li>Please enter a valid name.</li>';
 
-													$("#rc_student_count").addClass(
-															"has-error")
-													$("#error_rc_student_count")
+													$("#rc_student_count")
+															.addClass(
+																	"has-error")
+													$(
+															"#error_rc_student_count")
 															.show()
-
+													//return false;
 												} else {
-													$("#error_rc_student_count")
+													$(
+															"#error_rc_student_count")
 															.hide()
-												}
-  
+												} 
+											 
 											 
 												if (!$("#fromDate").val()) {
 
@@ -432,7 +450,20 @@
 						});
 	</script>
 
-
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
 </body>
 </html>

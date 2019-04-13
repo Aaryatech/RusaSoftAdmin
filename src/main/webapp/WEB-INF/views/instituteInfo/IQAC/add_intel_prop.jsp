@@ -94,11 +94,10 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPropIntelRight"
-										method="post" 
-										name="form_sample_2" id="form_sample_2">
-										
-									<input type="hidden" id="intel_id"  name="intel_id"
-														placeholder="" value="${intelProp.conId}">
+										method="post" name="form_sample_2" id="form_sample_2">
+
+										<input type="hidden" id="intel_id" name="intel_id"
+											placeholder="" value="${intelProp.conId}">
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="initiativeName">
@@ -107,10 +106,12 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="ipr_title"
-													 name="ipr_title" autocomplete="off" onchange="trim(this)"
+													name="ipr_title" autocomplete="off" onchange="trim(this)"
 													placeholder="Title of IPR-Industry-Academic Initiative  "
-													value="${intelProp.conName}">
-													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of IPR-Industry-Academic Initiative Practice.</span>
+													value="${intelProp.conName}"> <span
+													class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter title of
+													IPR-Industry-Academic Initiative Practice.</span>
 											</div>
 										</div>
 
@@ -123,10 +124,13 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" placeholder="From Date"
-													autocomplete="off" id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
+												<input type="text" class="form-control datepicker"
+													placeholder="From Date" autocomplete="off" id="fromDate"
+													name="fromDate"
+													onkeypress='return restrictAlphabets(event)'
 													value="${intelProp.conFromdt}" onchange="trim(this)">
-												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter from date.</span>
+												<span class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please enter from date.</span>
 											</div>
 										</div>
 
@@ -136,11 +140,16 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" onchange="trim(this)" placeholder="To Date"
-													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
-													value="${intelProp.conTodt}">
-													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter to date.</span>
-													<span class="error_form text-danger" id="error_formfield0" style="display:none;" >to date must be greater than from date.</span>
+												<input type="text" class="form-control datepicker"
+													onchange="trim(this)" placeholder="To Date"
+													autocomplete="off" id="toDate" name="toDate"
+													onkeypress='return restrictAlphabets(event)'
+													value="${intelProp.conTodt}"> <span
+													class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter to date.</span> <span
+													class="error_form text-danger" id="error_formfield0"
+													style="display: none;">to date must be greater than
+													from date.</span>
 											</div>
 										</div>
 
@@ -151,23 +160,30 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="participant" maxlength="7"
-													autocomplete="off" name="participant" onchange="trim(this)"
-													onkeypress="return allowOnlyNumber(event)"  onkeypress='return restrictAlphabets(event)'
-													placeholder="No. of Participants" value="${intelProp.conPcount}">
-													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of participants and value must be greater than 0.</span>
+												<input type="number" class="form-control" id="participant"
+													maxlength="7" autocomplete="off" name="participant"
+													onchange="trim(this)" min="0"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="No. of Participants"
+													value="${intelProp.conPcount}"> <span
+													class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter No. of
+													participants and value must be greater than 0.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
-												<button type="submit" id="sub_button" class="btn btn-primary" 
-														onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-																	
-												<a href="${pageContext.request.contextPath}/showIntellectualProperty"><button
-													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
 
-												<input type="hidden" id="is_view" name="is_view" value="0">	
+												<a
+													href="${pageContext.request.contextPath}/showIntellectualProperty"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 
 										</div>
@@ -195,8 +211,8 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -429,7 +445,7 @@
 	}
 	</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key
