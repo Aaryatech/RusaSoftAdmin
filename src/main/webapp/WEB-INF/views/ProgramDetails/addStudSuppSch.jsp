@@ -190,8 +190,7 @@
 															class="form-control" onchange="showExtraField()">
 														
 															<c:choose>
-																<c:when test="${stud.schemeName  eq 'Capability Enhancement'}}">
-
+															<c:when test="${stud.schemeName  eq 'Capability Enhancement'}">
 															<option value="-1">Select</option>
 															<option selected value="Capability Enhancement">Capability	Enhancement</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
@@ -200,8 +199,7 @@
 															<option value="7">Any Other</option>
 															</c:when>
 															
-															<c:when test="${stud.schemeName  eq 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)'}}">
-
+															<c:when test="${stud.schemeName  eq 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)'}">
 															<option value="-1">Select</option>
 														    <option value="Capability Enhancement">Capability Enhancement</option>
 															<option selected value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
@@ -210,8 +208,7 @@
 															<option value="7">Any Other</option>
 															</c:when>
 															
-															<c:when test="${stud.schemeName  eq 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)'}}">
-
+															<c:when test="${stud.schemeName  eq 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)'}">
 															<option value="-1">Select</option>
 															<option value="Capability Enhancement">Capability	Enhancement</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
@@ -220,7 +217,7 @@
 															<option value="7">Any Other</option>
 															</c:when>
 															
-															<c:when test="${stud.schemeName  eq 'Vocational Education Training'}}">
+															<c:when test="${stud.schemeName  eq 'Vocational Education Training'}">
 															<option value="-1">Select</option>
 															<option value="Capability Enhancement">Capability Enhancement</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
@@ -228,8 +225,8 @@
 															<option selected value="Vocational Education Training">Vocational Education Training</option>
 															<option value="7">Any Other</option>
 															</c:when>
+														
 															<c:otherwise>
-
 															<option value="-1">Select</option>
 															<option selected value="Capability Enhancement">Capability Enhancement</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
@@ -237,9 +234,6 @@
 															<option value="Vocational Education Training">Vocational Education Training</option>
 															<option selected value="7">Any Other</option>
 														</c:otherwise>
-														
-														
-														
 														
 														</c:choose>
 														
@@ -295,7 +289,7 @@
 														<input type="text" class="form-control datepicker"
 															id="yearofIntro" placeholder="dd-MM-YYYY"
 															 autocomplete="off" value="${stud.implementationYear}" name="yearofIntro">
-															<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date.  </span>
+															<span class="error_form text-danger" id="error_date" style="display:none;" >Please enter date of implementation .  </span>
 
 													</div>
 												</div>
@@ -566,9 +560,20 @@ if (!$("#yearofIntro").val()){
 		}
 
 		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
+			var x = ${stud.sprtSchmId};
+			//alert("hii"+x);
+			var qualType = document.getElementById("schemeName").value;
+			//alert("qualType::"+qualType);
 
+			if (x == 7) {
+
+				document.getElementById("abc").style = "visible"
+				//document.getElementById("anotherScheme").setAttribute("required","true");
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+			//	document.getElementById("abc").style = "display:none"
 		}
 	</script>
 	<script type="text/javascript">
