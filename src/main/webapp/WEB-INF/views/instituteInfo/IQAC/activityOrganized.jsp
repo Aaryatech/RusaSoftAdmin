@@ -169,7 +169,7 @@
 												<c:if test="${deleteAccess==0}">
 													<button class="btn btn-primary" id="deleteId"
 														onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-														style="align-content: center; width: 113px; margin-left: 40px;">
+														style="align-content: center; width: 113px; margin-left: 40px; margin-top: 10px;">
 														<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
 													</button>
 												</c:if>

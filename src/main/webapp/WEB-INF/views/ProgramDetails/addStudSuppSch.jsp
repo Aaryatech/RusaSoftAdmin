@@ -107,6 +107,79 @@
 
 												<input type="hidden" name="stud_suprt_schm"
 													value="${stud.sprtSchmId}">
+													
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Level
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="approveValue1" name="level"
+															class="form-control">
+															<option value="-1">Select</option>
+															<c:choose>
+																<c:when test="${stud.level eq 'International'}">
+																	<option selected value="International">International</option>
+																	<option value="State">State</option>
+																	<option value="Regional">Regional</option>
+																</c:when>
+
+																<c:when test="${stud.level eq 'State'}">
+																	<option value="International">International</option>
+																	<option selected value="State">State</option>
+																	<option value="Regional">Regional</option>
+																</c:when>
+
+																<c:when test="${stud.level eq 'Regional'}">
+																	<option value="International">International</option>
+																	<option value="State">State</option>
+																	<option selected value="Regional">Regional</option>
+																</c:when>
+
+																<c:otherwise>
+																	<option value="International">International</option>
+																	<option value="State">State</option>
+																	<option value="Regional">Regional</option>
+																</c:otherwise>
+															</c:choose>
+														</select> <span class="error_form text-danger" id="error_level"
+															style="display: none;">Please Select Level.</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Type
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="approveValue" name="type" class="form-control">
+															<option value="-1">Select</option>
+																<option  value="Govt." ${stud.type == 'Govt.' ? 'selected' : '' }>Govt.</option>
+																<option  value="Non Govt." ${stud.type == 'Non Govt.' ? 'selected' : '' }>Non Govt.</option>
+															<%-- <c:choose>
+																<c:when test="${stud.type eq 'Govt.'}">
+																	<option selected value="Govt">Govt.</option>
+																	<option value="Non Govt.">Non Govt.</option>
+
+																</c:when>
+																<c:when test="${stud.type eq 'Non Govt.'}">
+																	<option value="Govt">Govt.</option>
+																	<option selected value="Non Govt.">Non Govt.</option>
+
+																</c:when>
+																<c:otherwise>
+																	<option value="Govt">Govt.</option>
+																	<option value="Non Govt.">Non Govt.</option>
+																</c:otherwise>
+
+															</c:choose> --%>
+														</select> <span class="error_form text-danger" id="error_type"
+															style="display: none;">Please Select Type.</span>
+
+
+													</div>
+												</div>
+												
+												
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Scheme
@@ -195,100 +268,7 @@
 													</div>
 												</div>
 
-
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="status">Level
-														<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<select id="approveValue1" name="level"
-															class="form-control">
-															<option value="-1">Select</option>
-															<c:choose>
-																<c:when test="${stud.level eq 'International'}">
-																	<option selected value="International">International</option>
-																	<option value="State">State</option>
-																	<option value="Regional">Regional</option>
-																</c:when>
-
-																<c:when test="${stud.level eq 'State'}">
-																	<option value="International">International</option>
-																	<option selected value="State">State</option>
-																	<option value="Regional">Regional</option>
-																</c:when>
-
-																<c:when test="${stud.level eq 'Regional'}">
-																	<option value="International">International</option>
-																	<option value="State">State</option>
-																	<option selected value="Regional">Regional</option>
-																</c:when>
-
-																<c:otherwise>
-																	<option value="International">International</option>
-																	<option value="State">State</option>
-																	<option value="Regional">Regional</option>
-																</c:otherwise>
-															</c:choose>
-														</select> <span class="error_form text-danger" id="error_level"
-															style="display: none;">Please Select Level.</span>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="status">Type
-														<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<select id="approveValue" name="type" class="form-control">
-															<option value="-1">Select</option>
-																<option  value="Govt." ${stud.type == 'Govt.' ? 'selected' : '' }>Govt.</option>
-																<option  value="Non Govt." ${stud.type == 'Non Govt.' ? 'selected' : '' }>Non Govt.</option>
-															<%-- <c:choose>
-																<c:when test="${stud.type eq 'Govt.'}">
-																	<option selected value="Govt">Govt.</option>
-																	<option value="Non Govt.">Non Govt.</option>
-
-																</c:when>
-																<c:when test="${stud.type eq 'Non Govt.'}">
-																	<option value="Govt">Govt.</option>
-																	<option selected value="Non Govt.">Non Govt.</option>
-
-																</c:when>
-																<c:otherwise>
-																	<option value="Govt">Govt.</option>
-																	<option value="Non Govt.">Non Govt.</option>
-																</c:otherwise>
-
-															</c:choose> --%>
-														</select> <span class="error_form text-danger" id="error_type"
-															style="display: none;">Please Select Type.</span>
-
-
-													</div>
-												</div>
-
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="page_name">
-														No. of Students Benefited <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="text"  class="form-control"
-															id="studBenifit" value="${stud.noStudentBenifited}"
-															name="studBenifit" placeholder="Students Benifited"
-															autocomplete="off"> <span
-															class="error_form text-danger" id="error_part"
-															style="display: none;">Please Enter No. of
-															Students Benefited and value should be gerater than 0.</span>
-													</div>
-												</div>
-
-
-
-
-
-												<div class="form-group">
+											<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">
 														Name of Support Agency <span class="text-danger">*</span>
 													</label>
@@ -319,6 +299,29 @@
 
 													</div>
 												</div>
+												
+												
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_name">
+														No. of Students Benefited <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text"  class="form-control"
+															id="studBenifit" value="${stud.noStudentBenifited}"
+															name="studBenifit" placeholder="Students Benifited"
+															autocomplete="off"> <span
+															class="error_form text-danger" id="error_part"
+															style="display: none;">Please Enter No. of
+															Students Benefited and value should be gerater than 0.</span>
+													</div>
+												</div>
+
+
+
+
+
+												
 
 											</div>
 

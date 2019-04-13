@@ -95,8 +95,7 @@
 										action="${pageContext.request.contextPath}/delSelGenderEqty/0"
 										method="get" name="form_sample_2" id="form_sample_2">
 
-										<div class="col-xs-12">
-											<div id="example-4_wrapper"
+										<div id="example-4_wrapper"
 												class="dataTables_wrapper form-inline">
 
 												<table id="example-4" class="display dataTable" role="grid"
@@ -166,7 +165,7 @@
 												<input type="hidden" id="edit_accOff_id"
 													name="edit_accOff_id" value="0">
 											</div>
-										</div>
+										
 									</form>
 								</div>
 

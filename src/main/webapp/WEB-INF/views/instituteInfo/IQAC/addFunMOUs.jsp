@@ -524,15 +524,19 @@
 					$("#error_benfmou").hide()
 				}
 
-				if (!$("#instituteOfMoU").val()) {
-
-					isError = true;
-
-					$("#instituteOfMoU").addClass("has-error")
-					$("#error_inst").show()
-					//return false;
-				} else {
-					$("#error_inst").hide()
+				var x = ${editInst.mouInstitute};
+				if(${editInst.mouInstitute==null}){
+					alert($("#instituteOfMoU").val());
+					if (!$("#instituteOfMoU").val()) {
+	
+						isError = true;
+	
+						$("#instituteOfMoU").addClass("has-error")
+						$("#error_inst").show()
+						//return false;
+					} else {
+						$("#error_inst").hide()
+					}
 				}
 
 				if (!isError) {

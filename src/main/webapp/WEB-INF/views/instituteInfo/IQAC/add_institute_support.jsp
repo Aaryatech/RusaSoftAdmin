@@ -103,13 +103,13 @@
 											<div class="form-group">
 
 												<label class="control-label col-sm-3" for="studBenifited">Name
-													of Schemes <span class="text-danger">*</span>
+													of Scheme <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control"
 														onchange="trim(this)" id="inst_scheme_name"
 														autocomplete="off" onchange="return trim(this)"
-														name="inst_scheme_name" placeholder="Name of Schemes"
+														name="inst_scheme_name" placeholder="Name of Scheme"
 														value="${instSpprt.instSchemeName}"> <span
 														class="error_form text-danger" id="error_formfield1"
 														style="display: none;">Please enter name of
