@@ -226,6 +226,76 @@
 										</div>
 
 										<div class="form-group">
+											<label class="control-label col-sm-2" for="jouStd">Is
+												Currently Working <span class="text-danger">*</span>
+											</label>
+
+											<c:choose>
+												<c:when test="${editFaculty.isWorking==0}">
+													<div class="col-md-2">
+
+														<input type="radio" name="isWorking" id="isWorking"
+															value="0" onchange="chengeDate(this.value)" checked>No
+
+													</div>
+
+													<div class="col-md-2">
+														<input type="radio" name="isWorking"
+															onchange="chengeDate(this.value)" value="1"> Yes
+													</div>
+												</c:when>
+												<c:when test="${editFaculty.isWorking==1}">
+													<div class="col-md-2">
+
+														<input type="radio" name="isWorking" id="isWorking"
+															onchange="chengeDate(this.value)" value="0">No
+
+													</div>
+
+													<div class="col-md-2">
+														<input type="radio" name="isWorking"
+															onchange="chengeDate(this.value)" value="1" checked>
+														Yes
+													</div>
+												</c:when>
+												<c:otherwise>
+
+													<div class="col-md-2">
+
+														<input type="radio" name="isWorking" id="isWorking"
+															onchange="chengeDate(this.value)" value="0">No
+
+													</div>
+
+													<div class="col-md-2">
+														<input type="radio" name="isWorking" value="1" checked
+															onchange="chengeDate(this.value)"> Yes
+													</div>
+
+
+												</c:otherwise>
+											</c:choose>
+
+										</div>
+
+										<div class="form-group" id="realivingDate"
+											style="display: none">
+											<label class="control-label col-sm-2" for="page_order">Relieving
+												Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control datepicker"
+													id="acc_off_relDate"
+													onkeypress='return restrictAlphabets(event)'
+													autocomplete="off" name="acc_off_relDate"
+													placeholder="Relieving Date"
+													value="${editFaculty.realivingDate}"> <span
+													class="error_form text-danger" id="error_acc_off_relDate"
+													style="display: none;">Please enter relieving date</span>
+											</div>
+										</div>
+
+										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact
 												No. <span class="text-danger">*</span>
 											</label>
@@ -856,26 +926,36 @@
 
 									//alert("Data  " +JSON.stringify(data));
 
-									if (valueType == 2) {
+									document.getElementById("email").value = data.email;
+									document.getElementById("contactNo").value = data.contactNo;
+									document.getElementById("accName").value = data.facultyFirstName;
+									document.getElementById("dateOfJoin").value = data.joiningDate;
+									document.getElementById("acc_off_relDate").value = data.realivingDate;
+									document.getElementById("acc_id").value = data.facultyId;
 
-										document.getElementById("email").value = data.email;
-										document.getElementById("contactNo").value = data.contactNo;
-										document.getElementById("accName").value = data.facultyFirstName;
-										document.getElementById("dateOfJoin").value = data.joiningDate;
-										document.getElementById("acc_id").value = data.facultyId;
+									document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+									$("#designation").trigger("chosen:updated");
+									var temp = new Array();
 
-										//alert("This email id already exist in system please enter unique");
-									} else {
-										document.getElementById("accName").value = data.facultyFirstName;
-										document.getElementById("email").value = data.email;
-										document.getElementById("contactNo").value = data.contactNo;
-										document.getElementById("dateOfJoin").value = data.joiningDate;
-										document.getElementById("acc_id").value = data.facultyId;
+									temp = (data.deptId).split(",");
+									//alert(temp);
+									$("#dept_id").val(temp);
+									$("#dept_id").trigger("chosen:updated");
 
-										//alert("This contact no  already exist in system please enter unique");
-
-									}
 								});
+		}
+	</script>
+
+
+	<script>
+		function chengeDate(temp) {
+			if (temp == 1) {
+				document.getElementById("realivingDate").style = "display:none"
+			} else {
+				document.getElementById("realivingDate").style = "visible"
+
+			}
+
 		}
 	</script>
 

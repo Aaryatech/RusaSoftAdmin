@@ -906,13 +906,13 @@ public class LibraryController {
 				staff.setIsPrincipal(0);
 
 				staff.setIsStudent(0);
-				staff.setIsWorking(1);
+				staff.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
 				staff.setJoiningDate(dateOfJoin);
 				staff.setLastUpdatedDatetime(curDateTime);
 				staff.setMakerEnterDatetime(curDateTime);
 
 				staff.setPassword("");
-				staff.setRealivingDate(null);
+
 				staff.setRoleIds(roleIds);
 				staff.setTeachingTo(0);
 				staff.setType(7);
@@ -930,6 +930,12 @@ public class LibraryController {
 				staff.setLastUpdatedDatetime(curDateTime);
 
 				staff.setExtravarchar1("NA");
+				try {
+					staff.setRealivingDate(request.getParameter("acc_off_relDate"));
+
+				} catch (Exception e) {
+					staff.setRealivingDate(null);
+				}
 				Staff Library = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 			} else {
 
@@ -947,6 +953,13 @@ public class LibraryController {
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsLibrarian(1);
 				editHod.setType(7);
+				editHod.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
+				try {
+					editHod.setRealivingDate(request.getParameter("acc_off_relDate"));
+
+				} catch (Exception e) {
+					editHod.setRealivingDate(null);
+				}
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 

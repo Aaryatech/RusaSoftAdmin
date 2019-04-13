@@ -436,13 +436,13 @@ public class MasterController {
 				staff.setIsAccOff(1);
 				staff.setIsDean(0);
 				staff.setIsFaculty(1);
-				staff.setIsHod(1);
+				staff.setIsHod(0);
 				staff.setIsIqac(0);
 				staff.setIsLibrarian(0);
 				staff.setIsPrincipal(0);
 
 				staff.setIsStudent(0);
-				staff.setIsWorking(1);
+				staff.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
 				staff.setJoiningDate(dateOfJoin);
 				staff.setLastUpdatedDatetime(curDateTime);
 				staff.setMakerEnterDatetime(curDateTime);
@@ -466,6 +466,12 @@ public class MasterController {
 				staff.setLastUpdatedDatetime(curDateTime);
 
 				staff.setExtravarchar1("NA");
+				try {
+					staff.setRealivingDate(request.getParameter("acc_off_relDate"));
+
+				} catch (Exception e) {
+					staff.setRealivingDate(null);
+				}
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 
 			} else {
@@ -484,6 +490,14 @@ public class MasterController {
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsAccOff(1);
 				editHod.setType(5);
+				editHod.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
+
+				try {
+					editHod.setRealivingDate(request.getParameter("acc_off_relDate"));
+
+				} catch (Exception e) {
+					editHod.setRealivingDate(null);
+				}
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 

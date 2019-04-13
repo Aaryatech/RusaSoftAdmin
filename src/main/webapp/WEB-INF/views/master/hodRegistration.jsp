@@ -746,25 +746,21 @@
 
 									//alert("Data  " +JSON.stringify(data));
 
-									if (valueType == 2) {
+									document.getElementById("email").value = data.email;
+									document.getElementById("contactNo").value = data.contactNo;
+									document.getElementById("hodName").value = data.facultyFirstName;
+									document.getElementById("dateOfJoin").value = data.joiningDate;
+									document.getElementById("hod_id").value = data.facultyId;
 
-										document.getElementById("email").value = data.email;
-										document.getElementById("contactNo").value = data.contactNo;
-										document.getElementById("hodName").value = data.facultyFirstName;
-										document.getElementById("dateOfJoin").value = data.joiningDate;
-										document.getElementById("hod_id").value = data.facultyId;
+									document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+									$("#designation").trigger("chosen:updated");
+									var temp = new Array();
 
-										//alert("This email id already exist in system please enter unique");
-									} else {
-										document.getElementById("hodName").value = data.facultyFirstName;
-										document.getElementById("email").value = data.email;
-										document.getElementById("contactNo").value = data.contactNo;
-										document.getElementById("dateOfJoin").value = data.joiningDate;
-										document.getElementById("hod_id").value = data.facultyId;
+									temp = (data.deptId).split(",");
+									//alert(temp);
+									$("#dept_id").val(temp);
+									$("#dept_id").trigger("chosen:updated");
 
-										//alert("This contact no  already exist in system please enter unique");
-
-									}
 								});
 		}
 	</script>

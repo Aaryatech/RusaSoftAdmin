@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
 	<c:url value="/chkFields" var="chkFields"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -62,7 +63,7 @@
 
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
-				
+
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -80,23 +81,24 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal" 
+									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/iqacNewRegistration"
 										method="post" name="formidhere" id="formidhere">
-									
+
 										<input type="hidden" id="iqac_id" name="iqac_id"
-											value="${miqc.facultyId}">
-											<input type="hidden"
+											value="${miqc.facultyId}"> <input type="hidden"
 											id="addEdit" name="addEdit" value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="iqacName" onchange="trim(this)"	autocomplete="off" 
-												value="${miqc.facultyFirstName}" name="iqacName"													
+												<input type="text" class="form-control" id="iqacName"
+													onchange="trim(this)" autocomplete="off"
+													value="${miqc.facultyFirstName}" name="iqacName"
 													placeholder="Internal Quality Assurance Cell (IQAC)">
-												<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter IQAC name</span>
+												<span class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter IQAC name</span>
 											</div>
 										</div>
 
@@ -121,37 +123,36 @@
 														</c:choose>
 													</c:forEach>
 
-												</select>
-												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please select designation</span>
+												</select> <span class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please select designation</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
-													<label class="control-label col-sm-2" for="status">Department
-														<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-10">
-														<select id="dept_id" name="dept_id"
-															class="form-control" >
-																<c:forEach items="${deptList}" var="dept">
-																<c:choose>
-																			<c:when test="${miqc.deptId==dept.deptId}">
-																				<option selected value="${dept.deptId}">${dept.deptName}</option>
+											<label class="control-label col-sm-2" for="status">Department
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="dept_id" name="dept_id" class="form-control">
+													<c:forEach items="${deptList}" var="dept">
+														<c:choose>
+															<c:when test="${miqc.deptId==dept.deptId}">
+																<option selected value="${dept.deptId}">${dept.deptName}</option>
 
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${dept.deptId}">${dept.deptName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${dept.deptId}">${dept.deptName}</option>
 
-																			</c:otherwise>
+															</c:otherwise>
 
-																		</c:choose>
+														</c:choose>
 
-															</c:forEach>
-															<option value="0">NA</option>
-														</select>
-													</div>
-												</div>
-											<%-- <div class="form-group">
+													</c:forEach>
+													<option value="0">NA</option>
+												</select>
+											</div>
+										</div>
+										<%-- <div class="form-group">
 															<label class="control-label col-sm-2" for="page_name">
 																Department<span class="text-danger">*</span>
 															</label>
@@ -182,39 +183,37 @@
 															name</span>
 															</div>
 														</div> --%>
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="status">
-																Qualification<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="quolif" name="quolif"
-																	class="form-control">
-																	<c:forEach items="${quolfList}" var="quolf">
-																		<c:choose>
-																			<c:when test="${hod.highestQualificationId==quolf.qualificationId}">
-																				<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
-																			</c:when>
-																			<c:otherwise>
 
-																				<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="status">
+												Qualification<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="quolif" name="quolif" class="form-control">
+													<c:forEach items="${quolfList}" var="quolf">
+														<c:choose>
+															<c:when
+																test="${hod.highestQualificationId==quolf.qualificationId}">
+																<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
-																			</c:otherwise>
+															</c:when>
+															<c:otherwise>
 
-																		</c:choose>
+																<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
-																	</c:forEach>
+															</c:otherwise>
 
-																</select>
-																<span
-															class="error_form text-danger" id="quolf_field"
-															style="display: none;">Please select
-															highest qualification</span>
-															</div>
-														</div>
-														
+														</c:choose>
+
+													</c:forEach>
+
+												</select> <span class="error_form text-danger" id="quolf_field"
+													style="display: none;">Please select highest
+													qualification</span>
+											</div>
+										</div>
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Joining
@@ -225,8 +224,9 @@
 													id="dateOfJoin" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${miqc.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd/mm/yyyy">
-													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please select joining date</span>
+													autocomplete="off" placeholder="dd/mm/yyyy"> <span
+													class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please select joining date</span>
 											</div>
 										</div>
 
@@ -237,17 +237,17 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
 													onchange="checkUnique(this.value,1)" onchange="trim(this)"
-													name="contactNo" 
+													name="contactNo"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
 													placeholder="Mobile Number" value="${miqc.contactNo}">
-													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter
-													 contact no</span>
-											
+												<span class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter contact no</span>
+
 												<p class="desc text-danger fontsize11">Note: OTP will be
 													sent on this mobile number for verification</p>
-													
+
 											</div>
 										</div>
 
@@ -260,35 +260,44 @@
 												<input type="email" class="form-control" id="email"
 													autocomplete="off" onchange="checkUnique(this.value,2)"
 													onchange="trim(this)" name="email"
-													placeholder="abc@xyz.com" value="${miqc.email}">
-												<span class="error_form text-danger" id="error_formfield5" style="display: none;">Please enter  email id</span>
+													placeholder="abc@xyz.com" value="${miqc.email}"> <span
+													class="error_form text-danger" id="error_formfield5"
+													style="display: none;">Please enter email id</span>
 												<p class="desc font-italic fontsize11">Note:
 													Verification mail will be sent on this Email id</p>
-											
+
 											</div>
 
 										</div>
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Roles
-												 <span class="text-danger">*</span>
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-										<input type="checkbox" name="isAccOff" value="1" ${miqc.isAccOff==1 ? 'checked' : '' }>Account Officer
-										<input type="checkbox" name="isHod" value="1" ${miqc.isHod==1 ? 'checked' : '' }>HOD
-										<input type="checkbox" name="isDean" value="1" ${miqc.isDean==1 ? 'checked' : '' }>Dean
-										<input type="checkbox" name="isLib" value="1" ${miqc.isLibrarian==1 ? 'checked' : '' }>Librarian
-										
-										
-</div>
-</div>
+												<input type="checkbox" name="isAccOff" value="1"
+													${miqc.isAccOff==1 ? 'checked' : '' }>Account
+												Officer <input type="checkbox" name="isHod" value="1"
+													${miqc.isHod==1 ? 'checked' : '' }>HOD <input
+													type="checkbox" name="isDean" value="1"
+													${miqc.isDean==1 ? 'checked' : '' }>Dean <input
+													type="checkbox" name="isLib" value="1"
+													${miqc.isLibrarian==1 ? 'checked' : '' }>Librarian
+
+
+											</div>
+										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub1" class="btn btn-primary" 
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-											
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
 												<a href="${pageContext.request.contextPath}/showIqacList"><button
-													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
 												<!-- <button type="reset" class="btn btn-default">Reset</button> -->
 												<input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
@@ -312,145 +321,167 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script>
-function trim(el) {
-	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-	replace(/\n +/, "\n"); // Removes spaces after newlines
-	return;
-}
+	<script>
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 
-             function validateEmail(email) {
-            
-            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-            
-            	if (eml.test($.trim(email)) == false) {
-            
-            
-            	return false;
-            
-            	}
-            
-            	return true;
-            
-            }
-             function validateMobile(mobile) {
-            		var mob = /^[1-9]{1}[0-9]{9}$/;
-            
-            
-            		if (mob.test($.trim(mobile)) == false) {
-            
-            		//alert("Please enter a valid email address .");
-            		return false;
-            
-            		}
-            		return true;
-            
-             } 
-            	$(document).ready(function($){
-            		
-            		$("#formidhere").submit(function(e) {
-            			 var isError=false;
-            			 var errMsg="";
-            				
-           
-            				if(!$("#iqacName").val()){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#iqacName").addClass("has-error")
-            				$("#error_formfield1").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield1").hide()
-            				}
-            				
-            				if(!$("#designation").val()){
-           					 
-                				isError=true;
-                				errMsg += '<li>Please enter a valid name.</li>';
-                				
-                				$("#designation").addClass("has-error")
-                				$("#error_formfield2").show()
-                					//return false;
-                				} else {
-                					$("#error_formfield2").hide()
-                				}
-            				
-            				if(!$("#dateOfJoin").val()){
-              					 
-                				isError=true;
-                				errMsg += '<li>Please enter a valid name.</li>';
-                				
-                				$("#dateOfJoin").addClass("has-error")
-                				$("#error_formfield3").show()
-                					//return false;
-                				} else {
-                					$("#error_formfield3").hide()
-                				}
-            				
-            				if (!$("#dept_id").val()) {
-								isError = true;
+		function validateEmail(email) {
 
-								$("#dept_id").addClass(
-										"has-error")
-								$("#dept_id_field")
-										.show()
-							} else {
-								$("#dept_id_field")
-										.hide()
-							}
-            				
-            				 if(!$("#quolif").val()){
-                				isError=true;
-                				$("#quolif").addClass("has-error")
-                				$("#quolf_field").show()
-                					//return false;
-                				} else {
-                					$("#quolf_field").hide()
-                				}
-            				if(!$("#contactNo").val() || !validateMobile($("#contactNo").val())){
-            
-            				isError=true;
-            				errMsg += '<li>Please enter a valid email address.</li>';
-            				errMsg_alert = 'Please enter a valid mobile number.';
-            				$("#error_formfield4").html(errMsg_alert);
-            				$("#error_formfield4").show();
-            				//alert();
-            					//return false;
-            				} else {
-            					$("#error_formfield4").html("Please enter mobile")
-            					$("#error_formfield4").hide()
-            				} 
-            				 if(!$("#email").val() || !validateEmail($("#email").val())){
-            
-            				isError=true;
-            				errMsg += '<li>Please enter a valid email address.</li>';
-            				errMsg_alert += 'Please enter a valid email address. \n';
-            				$("#error_formfield5").show()
-            					//return fregister_useralse;
-            				} else {
-            					$("#error_formfield5").hide()
-            				} 
-            
-			            	 if (!isError) {
-			            		 
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									
-									document.getElementById("sub1").disabled = true;
-									document.getElementById("sub2").disabled = true;
-									return  true;
-								}
-							}
-            					   return false;
-            			} );
-            });
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-</script>
+			if (eml.test($.trim(email)) == false) {
+
+				return false;
+
+			}
+
+			return true;
+
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+
+			if (mob.test($.trim(mobile)) == false) {
+
+				//alert("Please enter a valid email address .");
+				return false;
+
+			}
+			return true;
+
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#formidhere")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#iqacName").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#iqacName").addClass(
+															"has-error")
+													$("#error_formfield1")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield1")
+															.hide()
+												}
+
+												if (!$("#designation").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#designation").addClass(
+															"has-error")
+													$("#error_formfield2")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield2")
+															.hide()
+												}
+
+												if (!$("#dateOfJoin").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#dateOfJoin").addClass(
+															"has-error")
+													$("#error_formfield3")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield3")
+															.hide()
+												}
+
+												if (!$("#dept_id").val()) {
+													isError = true;
+
+													$("#dept_id").addClass(
+															"has-error")
+													$("#dept_id_field").show()
+												} else {
+													$("#dept_id_field").hide()
+												}
+
+												if (!$("#quolif").val()) {
+													isError = true;
+													$("#quolif").addClass(
+															"has-error")
+													$("#quolf_field").show()
+													//return false;
+												} else {
+													$("#quolf_field").hide()
+												}
+												if (!$("#contactNo").val()
+														|| !validateMobile($(
+																"#contactNo")
+																.val())) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid email address.</li>';
+													errMsg_alert = 'Please enter a valid mobile number.';
+													$("#error_formfield4")
+															.html(errMsg_alert);
+													$("#error_formfield4")
+															.show();
+													//alert();
+													//return false;
+												} else {
+													$("#error_formfield4")
+															.html(
+																	"Please enter mobile")
+													$("#error_formfield4")
+															.hide()
+												}
+												if (!$("#email").val()
+														|| !validateEmail($(
+																"#email").val())) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid email address.</li>';
+													errMsg_alert += 'Please enter a valid email address. \n';
+													$("#error_formfield5")
+															.show()
+													//return fregister_useralse;
+												} else {
+													$("#error_formfield5")
+															.hide()
+												}
+
+												if (!isError) {
+
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
+	</script>
 
 	<script type="text/javascript">
 		/*code: 48-57 Numbers
@@ -465,8 +496,6 @@ function trim(el) {
 			else
 				return false;
 		}
-	
-		 
 	</script>
 
 	<script type="text/javascript">
@@ -503,13 +532,13 @@ function trim(el) {
 				
 			
 			} */
-			
-			function trim(el) {
-				el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-				replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-				replace(/\n +/, "\n"); // Removes spaces after newlines
-				return;
-			}
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 	</script>
 
 	<script type="text/javascript">
@@ -554,11 +583,17 @@ function trim(el) {
 	<script type="text/javascript">
 		function showIsReg() {
 			//alert("Hi");
-			var x = ${accOff.officerId}
+			var x = $
+			{
+				accOff.officerId
+			}
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = ${accOff.realivingDate}
+				var isRel = $
+				{
+					accOff.realivingDate
+				}
 				;
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
@@ -577,19 +612,9 @@ function trim(el) {
 	</script>
 	<script type="text/javascript">
 		function checkUnique(inputValue, valueType) {
-			
-			document.getElementById("sub1").disabled = false;
+			//alert("hi");
+
 			document.getElementById("sub2").disabled = false;
-
-			//alert(inputValue+" "+valueType);
-
-			var primaryKey = ${miqc.iqacId};
-			//alert("Primary key"+primaryKey);
-			var isEdit = 0;
-			if (primaryKey > 0) {
-				isEdit = 1;
-			}
-			//alert("Is Edit " +isEdit);
 
 			var valid = false;
 			if (valueType == 1) {
@@ -603,7 +628,7 @@ function trim(el) {
 			} else if (valueType == 2) {
 				//alert("Its Email " );
 
-				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (inputValue.match(mailformat)) {
 					valid = true;
 					//alert("Valid Email Id");
@@ -613,152 +638,42 @@ function trim(el) {
 				}
 			}
 			if (valid == true)
+
 				$
 						.getJSON(
-								'${chkFields}',
+								'${getUserInfo}',
 								{
-
 									inputValue : inputValue,
 									valueType : valueType,
-									primaryKey : primaryKey,
-									isEdit : isEdit,
-									tableId : 1,
-
 									ajax : 'true',
 
 								},
 								function(data) {
+									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-									if (data.error == true) {
-										if (valueType == 2) {
-											document.getElementById("email").value = "";
-											alert("This email id already exist in system please enter unique");
-										} else {
-											document
-													.getElementById("contactNo").value = "";
 
-											alert("This contact no  already exist in system please enter unique");
-										}
-									}
+									 
+
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("iqacName").value = data.facultyFirstName;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("iqac_id").value = data.facultyId;
+										
+										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+										$("#designation").trigger("chosen:updated");
+										var temp = new Array();
+
+										temp = (data.deptId).split(",");
+										//alert(temp);
+										$("#dept_id").val(temp);
+										$("#dept_id").trigger("chosen:updated");
+
+									 
 								});
 		}
-
-		function submit_f(view) {
-			document.getElementById("is_view").value = view;//create this 
-			/* var form=document.getElementById("form_sample_2");
-			form.setAttribute("method", "post");
-
-			form.action=("insertHod");
-			var x =confirm("Do you really want to submit the form?");
-			if(x==true)
-			form.submit(); */
-
-		}
-
-		/* function showForm() {
-			//document.getElementById("abc").style = "display:none"
-				var qualType=document.getElementById("qualification").value
-			//alert("qualType::"+qualType);
-				
-				if (qualType == 5) {
-
-					document.getElementById("abc").style = "visible"
-					
-						
-				} 
-				else{
-					document.getElementById("abc").style = "display:none"
-				}
-			
-			} */
-		/* function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-				
-			
-			} */
 	</script>
-	<!-- <script type="text/javascript">
-	
-	
-	function checkUnique(inputValue,valueType){
-    	//alert(inputValue);
-    				document.getElementById("sub1").disabled=false;
-					document.getElementById("sub2").disabled=false;
-    	
-    	var primaryKey=${accOff.officerId};
-    	//alert("Primary key"+primaryKey);
-    	var isEdit=0;
-    	if(primaryKey>0){
-    		isEdit=1;
-    	}
-    	//alert("Is Edit " +isEdit);
-    	
-    	var valid=false;
-    	if(valueType==1){
-    		//alert("Its Mob no");
-    		if(inputValue.length==10){
-    			valid=true;
-    			//alert("Len 10")
-    		}else{
-    			//alert("Not 10");
-    		}
-    	}
-    	else if(valueType==2){
-    		//alert("Its Email " );
-    		
-    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    		if(inputValue.match(mailformat))
-    		{
-    			valid=true;
-    			//alert("Valid Email Id");
-    		}
-    		else
-    		{
-    			valid=false;
-    			//alert("InValid Email Id");
-    		}
-    	}
-    	if(valid==true)
-    	$.getJSON('${checkUniqueField}', {
-    		
-    		inputValue : inputValue,
-    		valueType  : valueType,
-    		primaryKey : primaryKey,
-    		isEdit     : isEdit,
-    		tableId : 5,
-
-			ajax : 'true',
-
-		}, function(data) {
-			
-		//	alert("Data  " +JSON.stringify(data));
-			if(data.error==true){
-				if(valueType==2){
-					document.getElementById("acc_off_email").value="";
-
-				alert("This email id already exist in system please enter unique");
-				
-					document.getElementById("sub1").disabled=true;
-					document.getElementById("sub2").disabled=true;
-				
-				}
-				else{
-					document.getElementById("acc_off_mob").value="";
-
-					alert("This contact no  already exist in system please enter unique");
-					
-					document.getElementById("sub1").disabled=true;
-					document.getElementById("sub2").disabled=true;
-					
-				}
-			}
-		});
-    }
-	
-	</script>
- -->
 	<script type="text/javascript">
 		var wasSubmitted = false;
 		function checkBeforeSubmit() {
@@ -774,18 +689,21 @@ function trim(el) {
 			}
 			return false;
 		}
-		
-		  $("#dept_id").select2({
-		        allowClear: true
-		    }).on('select2-open', function() {
-		        // Adding Custom Scrollbar
-		        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-		    });
+
+		$("#dept_id").select2({
+			allowClear : true
+		}).on(
+				'select2-open',
+				function() {
+					// Adding Custom Scrollbar
+					$(this).data('select2').results.addClass('overflow-hidden')
+							.perfectScrollbar();
+				});
 	</script>
 
 
 
-	
+
 
 
 

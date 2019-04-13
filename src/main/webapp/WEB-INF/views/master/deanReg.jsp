@@ -41,7 +41,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" " onload="setDate(${dean.facultyId})">
-	<c:url value="/chkFields" var="chkFields"></c:url>
+	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -96,15 +96,13 @@
 										action="${pageContext.request.contextPath}/insertNewDean"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-	
-	
+
+
 										<div>
 
 											<input type="hidden" class="form-control" id="dean_id"
-												name="dean_id" value="${dean.facultyId}">
-												
-												<input type="hidden"
-											id="addEdit" name="addEdit" value="${addEdit}">
+												name="dean_id" value="${dean.facultyId}"> <input
+												type="hidden" id="addEdit" name="addEdit" value="${addEdit}">
 
 											<div class="col-xs-12">
 
@@ -115,76 +113,78 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="dean_name"
-															name="dean_name" placeholder="Dean R&D Name" onchange="trim(this)"
-															autocomplete="off" value="${dean.facultyFirstName}">
-														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter dean name</span>
+															name="dean_name" placeholder="Dean R&D Name"
+															onchange="trim(this)" autocomplete="off"
+															value="${dean.facultyFirstName}"> <span
+															class="error_form text-danger" id="error_formfield1"
+															style="display: none;">Please enter dean name</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-											<label class="control-label col-sm-2" for="page_order">Designation
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-10">
-												<select id="designation" name="designation"
-													class="form-control" onchange="showForm()">
+													<label class="control-label col-sm-2" for="page_order">Designation
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="designation" name="designation"
+															class="form-control" onchange="showForm()">
 
-													<c:forEach items="${desigList}" var="makeList">
-														<c:choose>
-															<c:when
-																test="${makeList.designationId == dean.currentDesignationId}">
-																<option value="${makeList.designationId}"
-																	selected="selected">${makeList.designationName}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${makeList.designationId}">${makeList.designationName}</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
+															<c:forEach items="${desigList}" var="makeList">
+																<c:choose>
+																	<c:when
+																		test="${makeList.designationId == dean.currentDesignationId}">
+																		<option value="${makeList.designationId}"
+																			selected="selected">${makeList.designationName}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${makeList.designationId}">${makeList.designationName}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
 
-												</select>
-												
-											</div>
-										</div>
+														</select>
+
+													</div>
+												</div>
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Department
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<select id="depart" name="depart"
-															class="form-control" >
-																<c:forEach items="${deptList}" var="dept">
+														<select id="depart" name="depart" class="form-control">
+															<c:forEach items="${deptList}" var="dept">
 																<c:choose>
-																			<c:when test="${hod.deptId==dean.deptId}">
-																				<option selected value="${dept.deptId}">${dept.deptName}</option>
+																	<c:when test="${hod.deptId==dean.deptId}">
+																		<option selected value="${dept.deptId}">${dept.deptName}</option>
 
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${dept.deptId}">${dept.deptName}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${dept.deptId}">${dept.deptName}</option>
 
-																			</c:otherwise>
+																	</c:otherwise>
 
-																		</c:choose>
+																</c:choose>
 
 															</c:forEach>
 															<option value="0">NA</option>
 														</select>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" 
-															maxlength="10" class="form-control" id="contact_no"
-															onchange="checkUnique(this.value,1)" name="contact_no"
-															placeholder="Mobile No"  autocomplete="off"
-															value="${dean.contactNo}"  onchange="trim(this)"
-															onkeypress='return restrictAlphabets(event)'>
-														<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter dean name</span>
+														<input type="text" maxlength="10" class="form-control"
+															id="contact_no" onchange="checkUnique(this.value,1)"
+															name="contact_no" placeholder="Mobile No"
+															autocomplete="off" value="${dean.contactNo}"
+															onchange="trim(this)"
+															onkeypress='return restrictAlphabets(event)'> <span
+															class="error_form text-danger" id="error_formfield2"
+															style="display: none;">Please enter dean name</span>
 														<p class="desc text-danger fontsize11">Note: OTP will
 															be sent on this mobile number for verification</p>
 													</div>
@@ -197,9 +197,10 @@
 													<div class="col-sm-10">
 														<input type="email" class="form-control" id="email"
 															onchange="checkUnique(this.value,2)"
-															 onchange="trim(this)" name="email" autocomplete="off"
+															onchange="trim(this)" name="email" autocomplete="off"
 															placeholder="abc@xyz.com" value="${dean.email}">
-															<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter email</span>
+														<span class="error_form text-danger" id="error_formfield3"
+															style="display: none;">Please enter email</span>
 														<p class="desc font-italic fontsize11">Note:
 															Verification mail will be sent on this Email id</p>
 													</div>
@@ -210,8 +211,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<select id="hod_quolf" name="quolif"
-															class="form-control" >
+														<select id="hod_quolf" name="quolif" class="form-control">
 															<c:forEach items="${quolfList}" var="quolf">
 																<c:choose>
 																	<c:when
@@ -242,23 +242,25 @@
 														<input type="text" class="form-control datepicker"
 															id="join_date" autocomplete="off" onchange="trim(this)"
 															onkeypress='return restrictAlphabets(event)'
-															name="join_date" placeholder="dd/mm/yyyy" 
-															value="${dean.joiningDate}">
-															<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter joining date</span>
+															name="join_date" placeholder="dd/mm/yyyy"
+															value="${dean.joiningDate}"> <span
+															class="error_form text-danger" id="error_formfield4"
+															style="display: none;">Please enter joining date</span>
 													</div>
 													<label class="control-label col-sm-3" for="planning"
 														style="text-align: left;">Is Currently Working<span
 														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-2">
-														
-														<input type="radio" id="is_registration1" ${dean.facultyId==0 ? 'checked' : ''}
-																			name="is_registration" value="1" 
-																			onclick="setDate(this.value)">Yes
-																
-														<input type="radio" id="is_registration2" ${dean.facultyId>0 ? 'checked' : ''}
-																			name="is_registration" value="0"
-																			onclick="setDate(this.value)">No
+
+														<input type="radio" id="is_registration1"
+															${dean.facultyId==0 ? 'checked' : ''}
+															name="is_registration" value="1"
+															onclick="setDate(this.value)">Yes <input
+															type="radio" id="is_registration2"
+															${dean.facultyId>0 ? 'checked' : ''}
+															name="is_registration" value="0"
+															onclick="setDate(this.value)">No
 														<%-- <c:choose>
 															<c:when test="${dean.facultyId==0}">
 
@@ -313,20 +315,23 @@
 														<input type="text" class="form-control datepicker"
 															id="acc_off_relDate"
 															onkeypress='return restrictAlphabets(event)'
-															 autocomplete="off"	name="acc_off_relDate" placeholder="Relieving Date"
-															value="${dean.realivingDate}">
-															<span class="error_form text-danger" id="error_acc_off_relDate" style="display:none;" >Please enter relieving date</span>
+															autocomplete="off" name="acc_off_relDate"
+															placeholder="Relieving Date"
+															value="${dean.realivingDate}"> <span
+															class="error_form text-danger" id="error_acc_off_relDate"
+															style="display: none;">Please enter relieving date</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-											<label class="control-label col-sm-2" for="smallheading">Roles
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-10">
-												<input type="checkbox" name="isHod" value="1" ${dean.isHod==1 ? 'checked' : ''} >   HOD
-											</div>
-										</div>
+													<label class="control-label col-sm-2" for="smallheading">Roles
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="checkbox" name="isHod" value="1"
+															${dean.isHod==1 ? 'checked' : ''}> HOD
+													</div>
+												</div>
 
 											</div>
 
@@ -335,13 +340,17 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button" class="btn btn-primary" 
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-													
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
 												<a href="${pageContext.request.contextPath}/showDeanList"><button
-													id="sub2"	type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
 											</div>
-										
+
 										</div>
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
@@ -363,9 +372,9 @@
 		</section>
 
 	</div>
-	
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
 	<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -520,7 +529,7 @@
     }    
 </script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function () {
 	 
     $('.datepicker').datepicker({
@@ -576,114 +585,67 @@ $(function () {
 	
 	</script>
 	<script type="text/javascript">
+		function checkUnique(inputValue, valueType) {
+			//alert("hi");
 
-	function checkUnique(inputValue,valueType){
-		document.getElementById("sub1").disabled=false;
-		document.getElementById("sub2").disabled=false;
+			document.getElementById("sub2").disabled = false;
 
-		
-		//alert(inputValue+" "+valueType);
-    	
-    	var primaryKey=${dean.deanId};
-    	//alert("Primary key"+primaryKey);
-    	var isEdit=0;
-    	if(primaryKey>0){
-    		isEdit=1;
-    	}
-    	//alert("Is Edit " +isEdit);
-    	
-    	var valid=false;
-    	if(valueType==1){
-    		//alert("Its Mob no");
-    		if(inputValue.length==10){
-    			valid=true;
-    			//alert("Len 10")
-    		}else{
-    			//alert("Not 10");
-    		}
-    	}
-    	else if(valueType==2){
-    		//alert("Its Email " );
-    		
-    		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    		if(inputValue.match(mailformat))
-    		{
-    			valid=true;
-    			//alert("Valid Email Id");
-    		}
-    		else
-    		{
-    			valid=false;
-    			//alert("InValid Email Id");
-    		}
-    	}
-    	if(valid==true)
-    	$.getJSON('${chkFields}', {
-    		
-    		inputValue : inputValue,
-    		valueType  : valueType,
-    		primaryKey : primaryKey,
-    		isEdit     : isEdit,
-    		tableId : 3,
-
-			ajax : 'true',
-
-		}, function(data) {
-			
-		//alert("Data  " +JSON.stringify(data));
-			if(data.error==true){
-				if(valueType==2){
-					document.getElementById("email").value="";
-				alert("This email id already exist in system please enter unique");
-				
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
 				}
-				else{
-					document.getElementById("contact_no").value="";
-					alert("This contact no  already exist in system please enter unique");
-					
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
 				}
 			}
-		});
-    }
-	
-	function submit_f(view){
-		document.getElementById("is_view").value=view;//create this 
-		/* var form=document.getElementById("form_sample_2");
-	    form.setAttribute("method", "post");
+			if (valid == true)
 
-		form.action=("insertHod");
-		var x =confirm("Do you really want to submit the form?");
-		if(x==true)
-		form.submit(); */
-		
-	}
-	
-	
-	/* function showForm() {
-		//document.getElementById("abc").style = "display:none"
-			var qualType=document.getElementById("qualification").value
-		//alert("qualType::"+qualType);
-			
-			if (qualType == 5) {
+				$
+						.getJSON(
+								'${getUserInfo}',
+								{
+									inputValue : inputValue,
+									valueType : valueType,
+									ajax : 'true',
 
-				document.getElementById("abc").style = "visible"
-				
-					
-			} 
-			else{
-				document.getElementById("abc").style = "display:none"
-			}
-		
-		} */
-	/* function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		} */
-		
+								},
+								function(data) {
+									//alert("data" + data);
+
+									//alert("Data  " +JSON.stringify(data));
+
+								 
+
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("dean_name").value = data.facultyFirstName;
+										document.getElementById("join_date").value = data.joiningDate;
+										document.getElementById("dean_id").value = data.facultyId;
+
+										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+										$("#designation").trigger("chosen:updated");
+										var temp = new Array();
+
+										temp = (data.deptId).split(",");
+										//alert(temp);
+										$("#dept_id").val(temp);
+										$("#dept_id").trigger("chosen:updated");
+								});
+		}
 	</script>
-
 	<script>
 		
 	$("#contactNo").on("keypress keyup blur",function (event) {

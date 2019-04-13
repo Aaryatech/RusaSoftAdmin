@@ -3,34 +3,35 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
- 
+
 <!DOCTYPE html>
 <html class=" ">
-    <head>
-      
-       <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-        <!-- CORE CSS TEMPLATE - END -->
+<head>
+
+<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+<!-- CORE CSS TEMPLATE - END -->
 <c:url var="clearSessionAttribute" value="/clearSessionAttribute" />
-    </head>
-    <!-- END HEAD -->
+</head>
+<!-- END HEAD -->
 
-    <!-- BEGIN BODY -->
-    <body class=" " onload="clearSessionAttribute()"><!-- START TOPBAR -->
+<!-- BEGIN BODY -->
+<body class=" " onload="clearSessionAttribute()">
+	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
-<!-- END TOPBAR -->
-<!-- START CONTAINER -->
-<div class="page-container row-fluid container-fluid">
+	<!-- END TOPBAR -->
+	<!-- START CONTAINER -->
+	<div class="page-container row-fluid container-fluid">
 
-    <!-- SIDEBAR - START -->
+		<!-- SIDEBAR - START -->
 
-<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include>
-<!--  SIDEBAR - END -->
-    <!-- START CONTENT -->
- <!-- START CONTENT -->
-<section id="main-content" class=" ">
-    <section class="wrapper main-wrapper row" style=''>
+		<jsp:include page="/WEB-INF/views/include/left.jsp"></jsp:include>
+		<!--  SIDEBAR - END -->
+		<!-- START CONTENT -->
+		<!-- START CONTENT -->
+		<section id="main-content" class=" ">
+			<section class="wrapper main-wrapper row" style=''>
 
- <!--    <div class='col-xs-12'>
+				<!--    <div class='col-xs-12'>
         <div class="page-title">
 
             <div class="pull-left">
@@ -39,99 +40,108 @@
                                 
         </div>
     </div> -->
-    <div class="clearfix"></div>
-    <!-- MAIN CONTENT AREA STARTS -->
- 
-	 
-     
-<div class="col-lg-12">
-    <section class="box "> 
-       
-         <header class="panel_header">
-                <h2 class="title pull-left">IQAC List</h2>
-                <div class="actions panel_actions pull-right">
-                  <c:if test="${addAccess == 0}"> 
-               		  <a href="${pageContext.request.contextPath}/iqacRegistration"><button type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
-                 </c:if>
-                	
-                </div>
-              </header> 
-              
-              
-            <div class="content-body">    <div class="row">
-            <c:if test="${sessionScope.successMsg!=null}">
-            <div class="col-lg-12">
-    		          <div class="alert alert-success alert-dismissible fade in">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <strong>Success : </strong> ${sessionScope.successMsg}</div>
-        	                                       </div> 
-            </c:if>
-            
-        <div class="col-xs-12">
+				<div class="clearfix"></div>
+				<!-- MAIN CONTENT AREA STARTS -->
 
 
-            <table id="example-1" class="table table-striped dt-responsive display">
-                <thead>
-                    <tr>
-                    <!-- <th class="check" style="text-align: center; width: 5%;"><input
+
+				<div class="col-lg-12">
+					<section class="box ">
+
+						<header class="panel_header">
+							<h2 class="title pull-left">IQAC List</h2>
+							<div class="actions panel_actions pull-right">
+								<c:if test="${addAccess == 0}">
+									<a href="${pageContext.request.contextPath}/iqacRegistration"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
+
+							</div>
+						</header>
+
+
+						<div class="content-body">
+							<div class="row">
+								<c:if test="${sessionScope.successMsg!=null}">
+									<div class="col-lg-12">
+										<div class="alert alert-success alert-dismissible fade in">
+											<button type="button" class="close" data-dismiss="alert"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+											<strong>Success : </strong> ${sessionScope.successMsg}
+										</div>
+									</div>
+								</c:if>
+
+								<div class="col-xs-12">
+
+
+									<table id="example-1"
+										class="table table-striped dt-responsive display">
+										<thead>
+											<tr>
+												<!-- <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th> -->
-                   		<th width="5%">Sr No</th>
-                        <th>IQAC Name</th> 
-                        <th>Designation</th> 
-                         <th>Date of Joining</th> 
-                        <th>Contact No.</th> 
-                          <th>Email ID</th> 
-                        <th width="20%">Action</th> 
-                    </tr>
-                </thead>
+												<th width="5%">Sr No</th>
+												<th>IQAC Name</th>
+												<th>Designation</th>
+												<th>Date of Joining</th>
+												<th>Contact No.</th>
+												<th>Email ID</th>
+												<th width="10%">Action</th>
+											</tr>
+										</thead>
 
-                <tbody>
-                      <c:forEach items="${QList}" var="QList" varStatus="count"> 
-									<tr>
-									<%-- <td><input type="checkbox" class="chk" name="iqacIds"
+										<tbody>
+											<c:forEach items="${QList}" var="QList" varStatus="count">
+												<tr>
+													<%-- <td><input type="checkbox" class="chk" name="iqacIds"
 															id="iqacIds${count.index+1}" value="${QList.iqacId}" /></td> --%>
-											<td style="text-align: center">${count.index+1}</td>
-											
-											<td style="text-align: left"><c:out
-														value="${QList.facultyFirstName}" /></td>
-														
-											<td style="text-align: left"><c:out
-														value="${QList.designationName}" /></td>
-											
-											<td style="text-align: center"><c:out
-														value="${QList.joiningDate}" /></td>
-											
-											<td style="text-align: center"><c:out
-														value="${QList.contactNo}" /></td>
-														
-															
-											<td style="text-align: left"><c:out
-														value="${QList.email}" /></td>
-												
-											<td align="center">
-											 <c:if test="${editAccess == 0}">  <a
-												href="${pageContext.request.contextPath}/editIqac/${QList.facultyId}" title="Edit" 
-												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-edit"></span></a> </c:if> 
-												&nbsp;&nbsp;&nbsp;&nbsp;
-												
-											 <c:if test="${deleteAccess == 0}"> 	
-												<a	href="${pageContext.request.contextPath}/deleteIqac/${QList.facultyId}"
-													onClick="return confirm('Are you sure want to delete this record');"
-													rel="tooltip" data-color-class="danger" title="Delete"
-													data-animate=" animated fadeIn " data-toggle="tooltip"
-													data-original-title="Delete  record"><span
-													class="glyphicon glyphicon-remove"></span></a>
-												
-												</c:if>
-												&nbsp;&nbsp;&nbsp;&nbsp;
-												 <a
-												href="${pageContext.request.contextPath}/editIqac" title="Change IQAC" 
-												rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Edit IQAC"><span
-												class="glyphicon glyphicon-list"></span></a>
-											
-												<%-- <a
+													<td style="text-align: center">${count.index+1}</td>
+
+													<td style="text-align: left"><c:out
+															value="${QList.facultyFirstName}" /></td>
+
+													<td style="text-align: left"><c:out
+															value="${QList.designationName}" /></td>
+
+													<td style="text-align: center"><c:out
+															value="${QList.joiningDate}" /></td>
+
+													<td style="text-align: center"><c:out
+															value="${QList.contactNo}" /></td>
+
+
+													<td style="text-align: left"><c:out
+															value="${QList.email}" /></td>
+
+													<td align="center"><c:if test="${editAccess == 0}">
+															<a
+																href="${pageContext.request.contextPath}/editIqac/${QList.facultyId}"
+																title="Edit" rel="tooltip" data-color-class="detail"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Edit IQAC"><span
+																class="glyphicon glyphicon-edit"></span></a>
+														</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <c:if
+															test="${deleteAccess == 0}">
+															<a
+																href="${pageContext.request.contextPath}/deleteIqac/${QList.facultyId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																rel="tooltip" data-color-class="danger" title="Delete"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Delete  record"><span
+																class="glyphicon glyphicon-remove"></span></a>
+
+														</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <a
+														href="${pageContext.request.contextPath}/editIqac"
+														title="Change IQAC" rel="tooltip"
+														data-color-class="detail" data-animate=" animated fadeIn "
+														data-toggle="tooltip" data-original-title="Edit IQAC"><span
+															class="glyphicon glyphicon-list"></span></a> <%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-list"></span></a>
@@ -145,54 +155,52 @@
 												<a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
-								editIqac				class="glyphicon glyphicon-edit"></span></a> --%>
-												
-												
-												
-												</td>
-											
-											
-											
-											
-											</tr>
-								 </c:forEach>   
-                </tbody>
-            </table>
-	<%-- 	<c:if test="${deleteAccess==0}">
+								editIqac				class="glyphicon glyphicon-edit"></span></a> --%></td>
+
+
+
+
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<%-- 	<c:if test="${deleteAccess==0}">
 			<input type="submit" class="btn btn-primary" value="Delete"
 					id="deleteId"
 					onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 					style="align-content: center; width: 113px; margin-left: 40px;">
 	 </c:if> --%>
-			<input type="hidden" id="edit_accOff_id" name="edit_accOff_id" value="0">
+									<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
+										value="0">
 
 
 
-        </div>
-    </div>
-    </div>
-        </section></div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
 
 
 
- 
 
 
-<!-- MAIN CONTENT AREA ENDS -->
-    </section>
-    </section>
-    <!-- END CONTENT -->
-     
 
-     
+				<!-- MAIN CONTENT AREA ENDS -->
+			</section>
+		</section>
+		<!-- END CONTENT -->
 
 
-     </div>
-    <!-- END CONTAINER -->
-<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-   <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-   <script>
+
+
+	</div>
+	<!-- END CONTAINER -->
+	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
 		function clearSessionAttribute() {
 
 			$.getJSON('${clearSessionAttribute}', {
@@ -215,31 +223,28 @@
 			}
 
 		}
-		function showEditLibrarian(instId){
-			document.getElementById("edit_lib_id").value=instId;//create this 
-			var form=document.getElementById("libListForm");
-		    form.setAttribute("method", "post");
+		function showEditLibrarian(instId) {
+			document.getElementById("edit_lib_id").value = instId;//create this 
+			var form = document.getElementById("libListForm");
+			form.setAttribute("method", "post");
 
-			form.action=("showEditLibrarian");
+			form.action = ("showEditLibrarian");
 			form.submit();
-			
+
 		}
 	</script>
-   <script>
-function clearSessionAttribute() {
-	 
-	 
+	<script>
+		function clearSessionAttribute() {
 
-	$.getJSON('${clearSessionAttribute}', {
-  
-		ajax : 'true',
+			$.getJSON('${clearSessionAttribute}', {
 
-	}, function(data) { 
-		 
-	
-	});
+				ajax : 'true',
 
-}
- </script>
+			}, function(data) {
+
+			});
+
+		}
+	</script>
 </body>
 </html>
