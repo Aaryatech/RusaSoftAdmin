@@ -583,10 +583,7 @@
 	<script type="text/javascript">
 		function showIsReg() {
 			//alert("Hi");
-			var x = $
-			{
-				accOff.officerId
-			}
+			var x = ${accOff.officerId}
 
 			if (x > 0) {
 				//alert("Hi 1")

@@ -80,7 +80,7 @@
 				<li class="profile"><a href="#" data-toggle="dropdown"
 					class="toggle"> <img
 						src="${pageContext.request.contextPath}/resources/assets/images/avatar.png"
-						alt="user-image" class="img-circle img-inline"> <span>${sessionScope.userObj.getData.subUserName}
+						alt="user-image" class="img-circle img-inline"> <span>${sessionScope.userObj.staff.facultyFirstName}
 							<i class="fa fa-angle-down"></i>
 					</span>
 				</a>

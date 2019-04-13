@@ -830,8 +830,8 @@ a:hover, a:focus {
     position: relative;
 }
 #main-menu-wrapper li ul.sub-menu li {position: relative;}
-#main-menu-wrapper li ul.sub-menu li a::after{content: ""; display: block; position: absolute; top: 0; bottom: 0; left: 10px; width: 0; border-left: 1px dashed rgba(156,161,169,0.5);}
-#main-menu-wrapper li ul.sub-menu li a::before{content: ""; display: block; position: absolute; width: 9px; left: 11px; top: 20px; border-top: 1px dashed rgba(156,161,169,0.5);}
+#main-menu-wrapper li ul.sub-menu li a::after{content: ""; display: block; position: absolute; top: 0; bottom: 0; left: 25px; width: 0; border-left: 1px dashed rgba(156,161,169,0.5);}
+#main-menu-wrapper li ul.sub-menu li a::before{content: ""; display: block; position: absolute; width: 9px; left: 27px; top: 20px; border-top: 1px dashed rgba(156,161,169,0.5);}
 #main-menu-wrapper li a {
     display: block;
     line-height: 42px;
@@ -852,7 +852,7 @@ a:hover, a:focus {
 #main-menu-wrapper li .sub-menu a {
     color: rgba(174, 178, 183, 1.0);
     margin-bottom: 1px;
-    /*padding-left: 55px;*/ padding:10px 0 10px 25px; line-height:20px; 
+    /*padding-left: 55px;*/ padding:10px 0 10px 40px; line-height:20px; 
     border-left: 4px solid transparent; 
 }
 #main-menu-wrapper li.open .sub-menu a.active, #main-menu-wrapper li.open .sub-menu a:hover, #main-menu-wrapper li .sub-menu a:hover {
@@ -8245,7 +8245,7 @@ Institute Master : <i class="fa fa-university" aria-hidden="true"></i>
 User Registration : <i class="fa fa-key" aria-hidden="true"></i>
 Institute Profile Module : <i class="fa fa-user" aria-hidden="true"></i>
 Program Detail Module : <i class="fa fa-tasks" aria-hidden="true"></i>
-Faculty Details : <i class="fa fa-user-circle" aria-hidden="true"></i>
+Faculty Details : <i class="fa fa-user-circle" aria-hidden="true"></i>	
 Back Button Icon : <i class="fa fa-chevron-left" aria-hidden="true"></i>
 Add Button Icons : <i class="fa fa-plus" aria-hidden="true"></i>
 Save Button Icon : <i class="fa fa-chevron-down" aria-hidden="true"></i>

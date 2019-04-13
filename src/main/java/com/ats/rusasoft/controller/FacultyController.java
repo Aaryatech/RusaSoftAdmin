@@ -222,6 +222,7 @@ public class FacultyController {
 						newModuleList);
 				Info delete = AccessControll.checkAccess("showJournalPubList", "showJournalPubList", "0", "0", "0", "1",
 						newModuleList);
+System.err.println("Addd" +add);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");

@@ -254,14 +254,7 @@ public class HomeController {
 
 				mav = new ModelAndView("login");
 				mav.addObject("msg","Enter  Login Credentials");
-				MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
-
-				map =new LinkedMultiValueMap<String, Object>(); 
-				 map.add("type", 1);
 				
-				AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
-				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-				mav.addObject("acaYearList", acaYearList);
 				
 				
 			} else {
@@ -282,6 +275,17 @@ public class HomeController {
 					System.out.println("is enroll is "+a);
 					 if(a==1) {
 						 mav = new ModelAndView("welcome");
+						 
+						 map =new LinkedMultiValueMap<String, Object>();
+
+							map =new LinkedMultiValueMap<String, Object>(); 
+							 map.add("type", 1);
+							
+							AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+							List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+							//mav.addObject("acaYearList", acaYearList);
+							session.setAttribute("acaYearList", acaYearList);
+
 					}
 					 else {
 						 mav = new ModelAndView("changePassword");
@@ -363,7 +367,7 @@ public class HomeController {
 						List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
 						System.err.println("acaYearList " + acaYearList.toString());
 
-						session.setAttribute("acaYearList", acaYearList);
+						//session.setAttribute("acaYearList", acaYearList);
 						
 						session.setAttribute("acYearId", loginAcYearId);
 						System.err.println("Session date year Id " +session.getAttribute("acYearId"));
