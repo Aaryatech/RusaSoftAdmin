@@ -77,13 +77,17 @@
 										<a
 											href="${pageContext.request.contextPath}/showAddProfDevelopment"
 											data-toggle="modal"><button type="submit"
-												class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+												class="btn btn-success">
+												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+											</button></a>
 									</c:if>
 									<c:if test="${trainnig_type==2}">
 										<a
 											href="${pageContext.request.contextPath}/showAddAdminDevelopment"
 											data-toggle="modal"><button type="submit"
-												class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+												class="btn btn-success">
+												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+											</button></a>
 									</c:if>
 								</c:if>
 								<%-- <a
@@ -96,7 +100,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deleteInstTraining/0/${training_type}"
+										action="${pageContext.request.contextPath}/deleteInstTraining/0/${trainnig_type}"
 										method="get" name="form_sample_2" id="form_sample_2">
 										<div id="example-4_wrapper"
 											class="dataTables_wrapper form-inline">
@@ -104,9 +108,10 @@
 												aria-describedby="example-4_info" style="width: 100%;">
 												<thead>
 													<tr>
-														<th rowspan="2" class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														<th rowspan="2" class="check"
+															style="text-align: center; width: 5%;"><input
+															type="checkbox" name="selAll" id="selAll"
+															onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Title of Program</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
@@ -121,9 +126,10 @@
 													<c:forEach items="${instTrainList}" var="instTrain"
 														varStatus="count">
 														<tr>
-															 <td><input type="checkbox" class="chk"
-															name="trainingId" id="trainingIds${count.index+1}"
-															value="${instTrain.trainingId}" /></td> 
+															<td align="center"><input type="checkbox"
+																class="chk" name="trainingId"
+																id="trainingIds${count.index+1}"
+																value="${instTrain.trainingId}" /></td>
 															<td align="center">${count.index+1}</td>
 															<td align="left">${instTrain.trainingTitle}</td>
 															<td align="center">${instTrain.trainingFromdt}</td>
@@ -134,8 +140,7 @@
 																		href="#"><span class="glyphicon glyphicon-edit"
 																		title="Edit" data-animate=" animated fadeIn "
 																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if>
-																<c:if test="${deleteAccess==0}">
+															</c:if> <c:if test="${deleteAccess==0}">
 																	<a
 																		href="${pageContext.request.contextPath}/deleteInstTraining/${instTrain.trainingId}/${instTrain.trainingType}"
 																		onClick="return confirm('Are you sure want to delete this record');"
@@ -150,77 +155,89 @@
 											</table>
 											<c:if test="${deleteAccess==0}">
 												<c:if test="${trainnig_type==1}">
-											<!-- <input type="submit" class="btn btn-primary" value="Delete"
+													<!-- <input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;"> -->
-												
-												
-										<div class="form-group">
-
-											<div class="col-sm-5">
-											<div class="col-sm-1">
 
 
+													<div class="form-group">
 
-															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+														<div class="col-sm-5">
+															<div class="col-sm-1">
 
-												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
+
+
+																<button type="submit" title="delete checked records"
+																	id="deleteId" class="btn btn-primary"
+																	onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}">
+																	<i class="${sessionScope.deleteIcon}"
+																		aria-hidden="true"></i>&nbsp;&nbsp;Delete
+																</button>
+
+																<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
 													id="deleteId"
 													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 													style="align-content: left;">
 													<i class="fa fa-trash"
 														style="font-size: 25px; background-color: black"></i>
-												</button> --></div>
-												<!-- <div class="col-sm-4">
+												</button> -->
+															</div>
+															<!-- <div class="col-sm-4">
 													<h5 style="text-align: left;">Delete Records</h5>
 												</div> -->
-											</div>
+														</div>
 
 
-											
 
-										</div>
-												
-											</c:if>	
-											
+
+													</div>
+
+												</c:if>
+
 												<c:if test="${trainnig_type==2}">
-											<!-- <input type="submit" class="btn btn-primary" value="Delete"
+													<!-- <input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;"> -->
-												
-												
-										<div class="form-group">
-
-											<div class="col-sm-5">
-											<div class="col-sm-1">
 
 
+													<div class="form-group">
 
-															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+														<div class="col-sm-5">
+															<div class="col-sm-1">
 
-												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
+
+
+																<button type="submit" title="delete checked records"
+																	id="deleteId" class="btn btn-primary"
+																	onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}">
+																	<i class="${sessionScope.deleteIcon}"
+																		aria-hidden="true"></i>&nbsp;&nbsp;Delete
+																</button>
+
+																<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
 													id="deleteId"
 													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 													style="align-content: left;">
 													<i class="fa fa-trash"
 														style="font-size: 25px; background-color: black"></i>
-												</button> --></div>
-												<!-- <div class="col-sm-4">
+												</button> -->
+															</div>
+															<!-- <div class="col-sm-4">
 													<h5 style="text-align: left;">Delete Records</h5>
 												</div> -->
-											</div>
+														</div>
 
 
-											
 
-										</div>
-												
-											</c:if>	
-												
-										</c:if>
-											
+
+													</div>
+
+												</c:if>
+
+											</c:if>
+
 										</div>
 										<input type="hidden" id="trainnig_type" name="trainnig_type"
 											value="${trainnig_type}"> <input type="hidden"
@@ -357,7 +374,7 @@ function showEditInstTrain(trainId){
 }
 
 </script>
-<script>
+	<script>
 function selectedInst(source) {
 
 	checkboxes = document.getElementsByName('trainingId');

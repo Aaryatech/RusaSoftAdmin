@@ -68,7 +68,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				
+
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -90,8 +90,8 @@
 										action="${pageContext.request.contextPath}/insertGenderEqualityPrgData"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-										<input type="hidden"  id="gender_eqlity _id" name="gender_eqlity _id" 
-												 value="${gndrEqual.gprogId}">
+										<input type="hidden" id="gender_eqlity _id"
+											name="gender_eqlity _id" value="${gndrEqual.gprogId}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="title">Title
 												of Programme <span class="text-danger">*</span>
@@ -99,8 +99,11 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="title"
 													autocomplete="off" name="title" onchange="trim(this)"
-													placeholder="Title of Program" value="${gndrEqual.gprogName}">
-													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of Program.</span>
+													placeholder="Title of Program"
+													value="${gndrEqual.gprogName}"> <span
+													class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter title of
+													Program.</span>
 											</div>
 										</div>
 
@@ -110,10 +113,11 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" onkeypress='return restrictAlphabets(event)'
-												onchange="trim(this)" autocomplete="off" id="fromDate" name="fromDate" placeholder="From Date"
-													value="${gndrEqual.gprogFromdt}">
-													<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter from date.</span>
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="fromDate" name="fromDate"
+													placeholder="dd/mm/yyyy" value="${gndrEqual.gprogFromdt}">
+												<span class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please enter from date.</span>
 
 											</div>
 										</div>
@@ -124,12 +128,14 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" 
-												onkeypress='return restrictAlphabets(event)' onchange="trim(this)"
-													autocomplete="off" id="toDate" name="toDate" placeholder="To Date"
-													value="${gndrEqual.gprogTodt}">
-													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter to date.</span>
-													<span class="error_form text-danger" id="error_formfield0" style="display:none;" >to date must be greater than from date.</span>
+												<input type="text" class="form-control datepicker"
+													autocomplete="off" id="toDate" name="toDate"
+													placeholder="dd/mm/yyyy" value="${gndrEqual.gprogTodt}">
+												<span class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter to date.</span> <span
+													class="error_form text-danger" id="error_formfield0"
+													style="display: none;">to date must be greater than
+													from date.</span>
 											</div>
 										</div>
 
@@ -140,22 +146,29 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text"  class="form-control" id="participant"
-													autocomplete="off" name="participant" maxlength="7"
-													onkeypress='return restrictAlphabets(event)' onchange="trim(this)"
-													placeholder="No. of Participants" value="${gndrEqual.gprogPcount}">
-													<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of participants and value must be greater than 0.</span>
+												<input type="number" class="form-control" id="participant"
+													min="1" autocomplete="off" name="participant" maxlength="7"
+													onkeypress='return restrictAlphabets(event)'
+													onchange="trim(this)" placeholder="No. of Participants"
+													value="${gndrEqual.gprogPcount}"> <span
+													class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter No. of
+													participants and value must be greater than 0.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button" class="btn btn-primary" 
-																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-												
-												<a href="${pageContext.request.contextPath}/showGenderEquity"><button
-													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-												<input type="hidden" id="is_view" name="is_view" value="0">
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showGenderEquity"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 										</div>
 
@@ -213,8 +226,8 @@
 			</div>
 		</div>
 	</div>
-	
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>	
+
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -436,7 +449,7 @@
 	}
 	</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key
@@ -451,7 +464,7 @@
 			}
 		</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){
       if(!wasSubmitted) {

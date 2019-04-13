@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a
+								<%-- 	<a
 									href="${pageContext.request.contextPath}/showStudAttendActivity"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
@@ -282,7 +282,7 @@
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
 															id="date" value="${editProgramActivity.date}"
-															placeholder="Date" name="date" required
+															placeholder="dd/mm/yyyy" name="date" required
 															autocomplete="off">
 													</div>
 												</div>
@@ -404,17 +404,23 @@
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<input type="hidden" id="isOther" name="isOther"
 											value="${chooseOther}">
-											
+
 										<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showStudAttendActivity"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showStudAttendActivity"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 
 										<div class="clearfix"></div>
@@ -446,12 +452,25 @@
 	<script type="text/javascript" src="./javascript.js"></script>
 	<script
 		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
 		}
+	</script>
+
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepicker').datepicker({
+				autoclose : true,
+				format : "dd-mm-yyyy",
+				changeYear : true,
+				changeMonth : true
+
+			});
+		});
 	</script>
 
 	<script type="text/javascript">

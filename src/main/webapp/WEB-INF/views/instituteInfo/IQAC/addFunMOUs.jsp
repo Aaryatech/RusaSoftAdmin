@@ -290,18 +290,18 @@
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And Staff</option> -->
 
-													<option value="-1">Select</option>
+
 
 													<c:choose>
 														<c:when test="${'Students'== editInst.mouBeneficiary}">
-															<option value="-1">Select</option>
+
 															<option selected value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And
 																Staff</option>
 														</c:when>
 														<c:when test="${'Staff'==editInst.mouBeneficiary}">
-															<option value="-1">Select</option>
+
 															<option value="Students">Students</option>
 															<option selected value="Staff">Staff</option>
 															<option value="Students And Staff">Students And
@@ -310,7 +310,7 @@
 
 														<c:when
 															test="${'Students And Staff'==editInst.mouBeneficiary}">
-															<option value="-1">Select</option>
+
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option selected value="Staff">Students And
@@ -320,7 +320,7 @@
 
 
 														<c:otherwise>
-															<option selected value="-1">Select</option>
+
 															<option value="Students">Students</option>
 															<option value="Staff">Staff</option>
 															<option value="Students And Staff">Students And
@@ -451,119 +451,102 @@
 			return true;
 		}
 
-		$(document)
-				.ready(
-						function($) {
-							//  alert("hii....");
-							$("#form_sample_2")
-									.submit(
-											function(e) {
-												var isError = false;
-												var errMsg = "";
+		$(document).ready(function($) {
+			//  alert("hii....");
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
 
-												if (!$("#title").val()) {
+				if (!$("#title").val()) {
 
-													isError = true;
+					isError = true;
 
-													$("#title").addClass(
-															"has-error")
-													$("#error_name").show()
-													//return false;
-												} else {
-													$("#error_name").hide()
-												}
+					$("#title").addClass("has-error")
+					$("#error_name").show()
+					//return false;
+				} else {
+					$("#error_name").hide()
+				}
 
-												if ($("#MOU_agency").val() == -1) {
+				if ($("#MOU_agency").val() == -1) {
 
-													isError = true;
+					isError = true;
 
-													$("#error_mou").show()
-													//return fregister_useralse;
-												} else {
-													$("#error_mou").hide()
-												}
+					$("#error_mou").show()
+					//return fregister_useralse;
+				} else {
+					$("#error_mou").hide()
+				}
 
-												if ($("#MOU_agency").val() == 7) {
-													if (!$("#otherCourse")
-															.val()) {
+				if ($("#MOU_agency").val() == 7) {
+					if (!$("#otherCourse").val()) {
 
-														isError = true;
+						isError = true;
 
-														$("#otherCourse")
-																.addClass(
-																		"has-error")
-														$("#error_other")
-																.show()
-														//return false;
-													} else {
-														$("#error_other")
-																.hide()
-													}
+						$("#otherCourse").addClass("has-error")
+						$("#error_other").show()
+						//return false;
+					} else {
+						$("#error_other").hide()
+					}
 
-												}
+				}
 
-												if (!$("#fromDate").val()) {
+				if (!$("#fromDate").val()) {
 
-													isError = true;
+					isError = true;
 
-													$("#fromDate").addClass(
-															"has-error")
-													$("#error_fdate").show()
-													//return false;
-												} else {
-													$("#error_fdate").hide()
-												}
+					$("#fromDate").addClass("has-error")
+					$("#error_fdate").show()
+					//return false;
+				} else {
+					$("#error_fdate").hide()
+				}
 
-												if (!$("#toDate").val()) {
+				if (!$("#toDate").val()) {
 
-													isError = true;
+					isError = true;
 
-													$("#toDate").addClass(
-															"has-error")
-													$("#error_tdate").show()
-													//return false;
-												} else {
-													$("#error_tdate").hide()
-												}
+					$("#toDate").addClass("has-error")
+					$("#error_tdate").show()
+					//return false;
+				} else {
+					$("#error_tdate").hide()
+				}
 
-												if ($("#beneficiaryMOU").val() == -1) {
+				if ($("#beneficiaryMOU").val() == -1) {
 
-													isError = true;
+					isError = true;
 
-													$("#error_benf").show()
-													//return fregister_useralse;
-												} else {
-													$("#error_benfmou").hide()
-												}
- 
+					$("#error_benf").show()
+					//return fregister_useralse;
+				} else {
+					$("#error_benfmou").hide()
+				}
 
-												if (!$("#instituteOfMoU").val()) {
+				if (!$("#instituteOfMoU").val()) {
 
-													isError = true;
+					isError = true;
 
-													$("#instituteOfMoU")
-															.addClass(
-																	"has-error")
-													$("#error_inst").show()
-													//return false;
-												} else {
-													$("#error_inst").hide()
-												}
+					$("#instituteOfMoU").addClass("has-error")
+					$("#error_inst").show()
+					//return false;
+				} else {
+					$("#error_inst").hide()
+				}
 
-												if (!isError) {
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														return true;
-														document
-																.getElementById("sub1").disabled = true;
-														document
-																.getElementById("sub2").disabled = true;
-													}
-												}
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						return true;
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+					}
+				}
 
-												return false;
-											});
-						});
+				return false;
+			});
+		});
 		//
 	</script>
 

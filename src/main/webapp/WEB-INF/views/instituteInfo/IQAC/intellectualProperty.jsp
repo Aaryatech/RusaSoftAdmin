@@ -68,7 +68,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				
+
 				<div class="col-lg-12">
 					<section class="box ">
 
@@ -79,12 +79,13 @@
 								<!-- <a href="#myModal1" data-toggle="modal"><button
 										type="submit" class="btn btn-info">Add</button></a> -->
 								<c:if test="${addAccess == 0}">
-								<a
-									href="${pageContext.request.contextPath}/showAddIntellectualProperty"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
-										</c:if>
-								
+									<a
+										href="${pageContext.request.contextPath}/showAddIntellectualProperty"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
+
 							</div>
 
 						</header>
@@ -107,66 +108,71 @@
 												<thead>
 
 													<tr>
-													<th rowspan="2" class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														<th rowspan="2" class="check"
+															style="text-align: center; width: 5%;"><input
+															type="checkbox" name="selAll" id="selAll"
+															onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Initiative Title</th>
 														<!-- <th rowspan="2">From Date</th>
 														<th rowspan="2">To Date</th> -->
-														 <th style="text-align: center;" colspan="2">Duration</th>
+														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Participants</th>
 														<th rowspan="2">Action</th>
 
 													</tr>
-													 <tr>
+													<tr>
 
 														<th>From Date</th>
 														<th>To Date</th>
-													 </tr>
+													</tr>
 
 												</thead>
-													
-												<tbody>
-												<c:forEach items="${intelRightsList}" var="rightsList"
-													varStatus="count">
-													<tr>
-														 <td><input type="checkbox" class="chk"
-															name="intel_rightId" id="intel_rightIds${count.index+1}"
-															value="${rightsList.conId}" /></td> 
-														<td align="center">${count.index+1}</td>
-														<td>${rightsList.conName}</td>
-														<td align="center">${rightsList.conFromdt}</td>
-														<td align="center">${rightsList.conTodt}</td>
-														<td align="right">${rightsList.conPcount}</td>
-														
-														<td align="center"><c:if test="${editAccess==0}"> 
-																<a 
-																	href="${pageContext.request.contextPath}/editIntelPropRight/${rightsList.conId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-													 </c:if><c:if test="${deleteAccess==0}"> 
-																<a
-																	href="${pageContext.request.contextPath}/deleteIntelPropRight/${rightsList.conId}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-															</c:if></td>
-													</tr>
-												</c:forEach>
 
-											</tbody>
+												<tbody>
+													<c:forEach items="${intelRightsList}" var="rightsList"
+														varStatus="count">
+														<tr>
+															<td align="center"><input type="checkbox"
+																class="chk" name="intel_rightId"
+																id="intel_rightIds${count.index+1}"
+																value="${rightsList.conId}" /></td>
+															<td align="center">${count.index+1}</td>
+															<td>${rightsList.conName}</td>
+															<td align="center">${rightsList.conFromdt}</td>
+															<td align="center">${rightsList.conTodt}</td>
+															<td align="right">${rightsList.conPcount}</td>
+
+															<td align="center"><c:if test="${editAccess==0}">
+																	<a
+																		href="${pageContext.request.contextPath}/editIntelPropRight/${rightsList.conId}"><span
+																		class="glyphicon glyphicon-edit" title="Edit"
+																		data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+													 </c:if>
+																<c:if test="${deleteAccess==0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteIntelPropRight/${rightsList.conId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
+														</tr>
+													</c:forEach>
+
+												</tbody>
 
 											</table>
 											<c:if test="${deleteAccess==0}">
-												<button class="btn btn-primary"
-												id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;">
-												<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button> 
+												<button class="btn btn-primary" id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+												</button>
 											</c:if>
-											<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
-											value="0"> 
+											<input type="hidden" id="edit_accOff_id"
+												name="edit_accOff_id" value="0">
 
 										</div>
 
@@ -193,21 +199,20 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-<script>
-function selectedInst(source) {
 
-	checkboxes = document.getElementsByName('intel_rightId');
+	<script>
+		function selectedInst(source) {
 
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
+			checkboxes = document.getElementsByName('intel_rightId');
 
-	}
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
-}
-</script>	
-<script type="text/javascript">
+			}
 
+		}
+	</script>
+	<script type="text/javascript">
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);

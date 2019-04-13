@@ -85,9 +85,12 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess==0}">
-								<a
-									href="${pageContext.request.contextPath}/showAddInternalQualityInitiative"><button
-										type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a></c:if>
+									<a
+										href="${pageContext.request.contextPath}/showAddInternalQualityInitiative"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 							</div>
 
 						</header>
@@ -98,8 +101,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/deleteInstiQuality/0"
-										method="get"
-										name="form_sample_2" id="form_sample_2">
+										method="get" name="form_sample_2" id="form_sample_2">
 
 
 
@@ -111,9 +113,10 @@
 												<thead>
 
 													<tr>
-													<th rowspan="2" class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														<th rowspan="2" class="check"
+															style="text-align: center; width: 5%;"><input
+															type="checkbox" name="selAll" id="selAll"
+															onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Name of Quality Initiative</th>
 														<th style="text-align: center;" colspan="2">Date of
@@ -131,80 +134,84 @@
 
 												</thead>
 												<tbody>
-												
-												<c:forEach items="${instQualList}" var="insQuality"
-													varStatus="count">
-													<tr>
-														 <td><input type="checkbox" class="chk"
-															name="qualityId" id="qualityIds${count.index+1}"
-															value="${insQuality.qualityId}" /></td> 
-														<td align="center">${count.index+1}</td>
-														<td>${insQuality.qualityInitiativeName}</td>
-														<td align="center">${insQuality.qualityFromdt}</td>
-														<td align="center">${insQuality.qualityTodt}</td>
-														<td align="right">${insQuality.qualityPcount}</td>
-														<td align="center"><c:if test="${editAccess==0}">
-																<a onclick="showEdit(${insQuality.qualityId})"
-																	href="#"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if><c:if test="${deleteAccess==0}">
-																<a
-																	href="${pageContext.request.contextPath}/deleteInstiQuality/${insQuality.qualityId}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-															</c:if></td>
-													</tr>
-												</c:forEach>
+
+													<c:forEach items="${instQualList}" var="insQuality"
+														varStatus="count">
+														<tr>
+															<td align="center"><input type="checkbox"
+																class="chk" name="qualityId"
+																id="qualityIds${count.index+1}"
+																value="${insQuality.qualityId}" /></td>
+															<td align="center">${count.index+1}</td>
+															<td>${insQuality.qualityInitiativeName}</td>
+															<td align="center">${insQuality.qualityFromdt}</td>
+															<td align="center">${insQuality.qualityTodt}</td>
+															<td align="right">${insQuality.qualityPcount}</td>
+															<td align="center"><c:if test="${editAccess==0}">
+																	<a onclick="showEdit(${insQuality.qualityId})" href="#"><span
+																		class="glyphicon glyphicon-edit" title="Edit"
+																		data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															</c:if> <c:if test="${deleteAccess==0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteInstiQuality/${insQuality.qualityId}"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
+														</tr>
+													</c:forEach>
 
 												</tbody>
 											</table>
 											<c:if test="${deleteAccess==0}">
 
-											<!-- <input type="submit" class="btn btn-primary" value="Delete"
+												<!-- <input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
 												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 												style="align-content: center; width: 113px; margin-left: 40px;"> -->
-												
-												
-										<div class="form-group">
-
-											<div class="col-sm-5">
-											<div class="col-sm-1">
 
 
+												<div class="form-group">
 
-															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+													<div class="col-sm-5">
+														<div class="col-sm-1">
 
-												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
+
+
+															<button type="submit" title="delete checked records"
+																id="deleteId" class="btn btn-primary"
+																onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}">
+																<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+															</button>
+
+															<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
 													id="deleteId"
 													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 													style="align-content: left;">
 													<i class="fa fa-trash"
 														style="font-size: 25px; background-color: black"></i>
-												</button> --></div>
-												<!-- <div class="col-sm-4">
+												</button> -->
+														</div>
+														<!-- <div class="col-sm-4">
 													<h5 style="text-align: left;">Delete Records</h5>
 												</div> -->
-											</div>
+													</div>
 
 
-											
+
+
+												</div>
+
+
+
+											</c:if>
 
 										</div>
-												
-												
-												
-										</c:if>
-		
-										</div>
-										<input type="hidden"
-													id="qualityId" name="qualityId"
-													value="0">
-										
-	
+										<input type="hidden" id="qualityId" name="qualityId" value="0">
+
+
 										<div class="clearfix"></div>
 
 									</form>
@@ -401,7 +408,7 @@
 		}
 	</script>
  --%>
-<script type="text/javascript">
+	<script type="text/javascript">
 function selectedInst(source) {
 
 	checkboxes = document.getElementsByName('qualityId');
