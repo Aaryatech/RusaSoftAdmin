@@ -793,7 +793,7 @@ public class IqacController {
 			}
 			String roleNameList = null;
 
-			roleNameList = Constants.IQAC_Role + "," + Constants.Faculty_Role;
+			roleNameList = Constants.Faculty_Role;
 
 			if (isAccOff == 1) {
 				roleNameList = roleNameList + "," + Constants.Account_Officer_Role;
@@ -865,8 +865,8 @@ public class IqacController {
 					staff.setIsDean(isDean);
 					staff.setIsFaculty(1);
 					staff.setIsHod(isHod);
-					staff.setIsIqac(1);
-					staff.setIsLibrarian(isLib);
+					staff.setIsIqac(0);
+					staff.setIsLibrarian(0);
 					staff.setIsPrincipal(0);
 
 					staff.setIsStudent(0);
@@ -890,7 +890,7 @@ public class IqacController {
 					staff.setCheckerUserId(0);
 					staff.setCheckerDatetime(curDateTime);
 					staff.setLastUpdatedDatetime(curDateTime);
-					staff.setType(2);
+					//staff.setType(2);
 
 					staff.setExtravarchar1("NA");
 			if (isReg == 0) {

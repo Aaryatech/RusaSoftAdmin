@@ -252,7 +252,7 @@
 												var isError = false;
 												var errMsg = "";
 												var x=$("#total_stud").val();
-												if ($("#total_stud").val() <= 0) {
+												if ($("#total_stud").val() < 0) {
 													isError = true;
 
 													$("#total_stud").addClass(

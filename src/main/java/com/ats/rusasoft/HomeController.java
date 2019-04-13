@@ -448,6 +448,19 @@ public class HomeController {
 												 if(newModuleList.get(k).getSubModuleJsonList().get(l).getSubModuleId()==
 														 list.get(j).getSubModuleJsonList().get(m).getSubModuleId()) {
 													 findSubModId=1;
+													 
+													 if(newModuleList.get(k).getSubModuleJsonList().get(l).getAddApproveConfig().equals("0")) {
+														 newModuleList.get(k).getSubModuleJsonList().get(l).setAddApproveConfig(list.get(j).getSubModuleJsonList().get(m).getAddApproveConfig());
+													 }
+													 
+													 if(newModuleList.get(k).getSubModuleJsonList().get(l).getEditReject().equals("0")) {
+														 newModuleList.get(k).getSubModuleJsonList().get(l).setEditReject(list.get(j).getSubModuleJsonList().get(m).getEditReject());
+													 }
+													 
+													 if(newModuleList.get(k).getSubModuleJsonList().get(l).getDeleteRejectApprove().equals("0")) {
+														 newModuleList.get(k).getSubModuleJsonList().get(l).setDeleteRejectApprove(list.get(j).getSubModuleJsonList().get(m).getDeleteRejectApprove());
+													 }
+													  
 													 break;
 												 }
 											 }
