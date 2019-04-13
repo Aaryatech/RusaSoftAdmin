@@ -69,6 +69,7 @@
 							method="get" id="libListForm" 	onsubmit="return checkBeforeSubmit()">
 							<div class="content-body">
 
+<input type="hidden" id="prgId" name="prgId" value="${prgId}">
 
 
 

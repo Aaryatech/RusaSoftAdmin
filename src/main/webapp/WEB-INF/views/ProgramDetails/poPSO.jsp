@@ -140,7 +140,7 @@
 												
 														
 													<td> 
-												     	<a href="${pageContext.request.contextPath}/showMapPOPSO/${poList.poId}" title="Map PSO"
+												     	<a href="${pageContext.request.contextPath}/showMapPOPSO/${poList.poId}/${progDetail.programId}" title="Map PSO"
 											            rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												         class="glyphicon glyphicon-list"></span></a>
 											       </td>

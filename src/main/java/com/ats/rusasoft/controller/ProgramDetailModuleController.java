@@ -123,7 +123,7 @@ System.err.println("HELLO " +programId);
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
-			Info view = AccessControll.checkAccess("showpoPso", "showpoPso", "1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showpoPso", "showProgramList", "1", "0", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -150,7 +150,7 @@ System.err.println("HELLO " +programId);
 			
 			 map = new LinkedMultiValueMap<>();
 				
-			map.add("programId", 2);
+			map.add("programId", programId);
 				
 
 				ProgramOutcome[] instArray = rest.postForObject(Constants.url + "getProgramOutcomeListByProgramId", map,
@@ -178,8 +178,8 @@ System.err.println("HELLO " +programId);
 	}
 	
 	
-	@RequestMapping(value = "/showMapPOPSO/{poId}", method = RequestMethod.GET)
-	public ModelAndView showMapPOPSO(HttpServletRequest request, HttpServletResponse response,@PathVariable("poId") int poId) {
+	@RequestMapping(value = "/showMapPOPSO/{poId}/{programId}", method = RequestMethod.GET)
+	public ModelAndView showMapPOPSO(@PathVariable("poId") int poId,@PathVariable("programId") int programId, HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
@@ -190,7 +190,7 @@ System.err.println("HELLO " +programId);
 			
 			 map = new LinkedMultiValueMap<>();
 				
-				map.add("programId", 2);
+				map.add("programId", programId);
 				GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
 				System.out.println("Program:"+progDetail);
 				model.addObject("progDetail", progDetail);
@@ -206,13 +206,13 @@ System.err.println("HELLO " +programId);
 				
 				
 				
-				map.add("programId", 2);
+				map.add("programId", programId);
 				
 				ProgramSpeceficOutcome[] instArray = rest.postForObject(Constants.url + "getProgramSpecificOutcomeList", map,
 						ProgramSpeceficOutcome[].class);
 				List<ProgramSpeceficOutcome> psoList = new ArrayList<>(Arrays.asList(instArray));
 				
-			
+				model.addObject("prgId",programId);
 				model.addObject("psoDetail", psoList);
 				
 				
@@ -221,12 +221,15 @@ System.err.println("HELLO " +programId);
 				//String[] psoIdsarray = psoIds.split(",",4);
 				
 				// String[] values = psoIds.split(",");
-				 
+				 try {
 				 List<String> items = Arrays.asList(psoIds.split(","));
 				System.out.println("psoIdsarray is after ::::"+items);
-				
+				 
 				model.addObject("items",items);
 				
+				 }catch(Exception e) {
+					 
+				 }
 				
 
 		} catch (Exception e) {
@@ -248,7 +251,8 @@ System.err.println("HELLO " +programId);
 		String a = null;
 
 		String poId1 = request.getParameter("poId1");
-		System.out.println("po id "+poId1);
+		int prgId = Integer.parseInt(request.getParameter("prgId"));
+		System.out.println("po id "+poId1+" "+prgId);
 
 		String satValue = request.getParameter("satValue");
 		System.out.println("po satValue "+satValue);
@@ -271,16 +275,17 @@ System.err.println("HELLO " +programId);
 					String psoIdList = sb.toString();
 					psoIdList = psoIdList.substring(0, psoIdList.length() - 1);
 					System.out.println("pso id list"+psoIdList);
-				
+					
+					
+					
 					map.add("psoIdList", psoIdList);
 					map.add("poId", poId1);
 					map.add("satValue", satValue);
 					
 					
-			
 
 				Info errMsg = rest.postForObject(Constants.url + "updatePoMapping", map, Info.class);
-				a = "redirect:/showpoPso";
+				a = "redirect:/showpoPso/"+prgId;
 		
 	}
 		catch (Exception e) {
