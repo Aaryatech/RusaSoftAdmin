@@ -56,7 +56,7 @@ public class StudAdminController {
 
 				model = new ModelAndView("ProgramDetails/addStudCatwise");
 
-				model.addObject("title", "Add Student  Categorywise");
+				model.addObject("title", "Add Student Category Wise");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
 

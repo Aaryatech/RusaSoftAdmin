@@ -452,7 +452,7 @@ System.err.println("HELLO " +programId);
 			stud.setType(request.getParameter("type"));
 			stud.setNoStudentBenifited(Integer.parseInt(request.getParameter("studBenifit")));
 			stud.setSupportAgencyName(request.getParameter("supportAgency"));
-			stud.setImplementationYear(DateConvertor.convertToYMD(request.getParameter("yearofIntro")));
+			stud.setImplementationYear(request.getParameter("yearofIntro"));
 			stud.setDelStatus(1);
 			stud.setIsActive(1);
 			stud.setAddDate(curDateTime);

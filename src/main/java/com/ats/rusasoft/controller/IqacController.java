@@ -880,7 +880,7 @@ public class IqacController {
 					staff.setRealivingDate(null);
 					staff.setRoleIds(roleIds);
 					staff.setTeachingTo(0);
-					staff.setType(2);
+					staff.setType(4);
 
 					staff.setInstituteId(instituteId);
 					staff.setDelStatus(1);
@@ -1444,7 +1444,7 @@ public class IqacController {
 			staff.setRealivingDate(dateOfRel);
 			staff.setRoleIds(roleIds);
 			staff.setTeachingTo(0);
-			staff.setType(2);
+			staff.setType(6);
 
 			staff.setInstituteId(instituteId);
 			staff.setJoiningDate(dateOfJoin);
