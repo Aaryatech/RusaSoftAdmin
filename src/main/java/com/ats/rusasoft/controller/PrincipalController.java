@@ -160,7 +160,7 @@ public class PrincipalController {
 			}
 			String roleNameList = null;
 
-			roleNameList = Constants.IQAC_Role + "," + Constants.Faculty_Role;
+			roleNameList = Constants.Princ_Role + "," + Constants.Faculty_Role;
 
 			if (isAccOff == 1) {
 				roleNameList = roleNameList + "," + Constants.Account_Officer_Role;
