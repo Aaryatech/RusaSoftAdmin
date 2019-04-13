@@ -350,23 +350,7 @@
 													$("#error_toDate").hide()
 												}
 
-												if (!$("#participant").val()
-														|| !numbersOnlyNotZero($(
-																"#participant")
-																.val())) {
-
-													isError = true;
-													errMsg += '<li>Please enter No. of Students Passed.</li>';
-
-													$("#participant").addClass(
-															"has-error")
-													$("#error_participant")
-															.show()
-
-												} else {
-													$("#error_participant")
-															.hide()
-												}
+												 
  
 
 												if (!isError) {

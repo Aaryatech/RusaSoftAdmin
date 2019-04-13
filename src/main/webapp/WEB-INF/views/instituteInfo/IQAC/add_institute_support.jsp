@@ -93,25 +93,27 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteSupport"
-										method="post" 
-										name="form_sample_2" id="form_sample_2" >
+										method="post" name="form_sample_2" id="form_sample_2">
 
-										
+
 										<div id="abc">
-												<input type="hidden" id="inst_scheme_id"  name="inst_scheme_id"
-														placeholder="" value="${instSpprt.instSchemeId}">
+											<input type="hidden" id="inst_scheme_id"
+												name="inst_scheme_id" placeholder=""
+												value="${instSpprt.instSchemeId}">
 											<div class="form-group">
 
 												<label class="control-label col-sm-3" for="studBenifited">Name
 													of Schemes <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" onchange="trim(this)"
-														id="inst_scheme_name" autocomplete="off"
-														onchange="return trim(this)" name="inst_scheme_name"
-														placeholder="Name of Schemes" value="${instSpprt.instSchemeName}">
-														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name
-													of schemes.</span>	
+													<input type="text" class="form-control"
+														onchange="trim(this)" id="inst_scheme_name"
+														autocomplete="off" onchange="return trim(this)"
+														name="inst_scheme_name" placeholder="Name of Schemes"
+														value="${instSpprt.instSchemeName}"> <span
+														class="error_form text-danger" id="error_formfield1"
+														style="display: none;">Please enter name of
+														schemes.</span>
 												</div>
 											</div>
 
@@ -125,13 +127,16 @@
 													Benefited <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" autocomplete="off"
-														id="inst_students_benefited" onchange="trim(this)"
-														name="inst_students_benefited" onkeypress="return allowOnlyNumber(event)" 
-														placeholder="No. of Students Benefited" maxlength="7"														
-														value="${instSpprt.instStudentsBenefited}">
-														<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No. of students
-															benefited and value must be greater than 0.</span>	
+													<input type="number" class="form-control"
+														autocomplete="off" id="inst_students_benefited"
+														onchange="trim(this)" min="0"
+														name="inst_students_benefited"
+														onkeypress='return restrictAlphabets(event)'
+														placeholder="No. of Students Benefited" maxlength="7"
+														value="${instSpprt.instStudentsBenefited}"> <span
+														class="error_form text-danger" id="error_formfield2"
+														style="display: none;">Please enter No. of students
+														benefited and value must be greater than 0.</span>
 												</div>
 											</div>
 
@@ -144,22 +149,29 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="inst_schme_offeredby" name="inst_schme_offeredby"
-														placeholder="Scheme/Support offered	By" onchange="trim(this)"
-														value="${instSpprt.instSchmeOfferedby}" >
-														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter scheme/support offered
-													by.</span>	
+														placeholder="Scheme / Support offered By"
+														onchange="trim(this)"
+														value="${instSpprt.instSchmeOfferedby}"> <span
+														class="error_form text-danger" id="error_formfield3"
+														style="display: none;">Please enter scheme/support
+														offered by.</span>
 												</div>
 											</div>
 
 
 											<div class="form-group">
 												<div class="col-sm-offset-3 col-sm-10">
-														<button type="submit" id="sub_button" class="btn btn-primary" 
-																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-																	
-														<a href="${pageContext.request.contextPath}/showInstituteSupport"><button
-																	id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-																<input type="hidden" id="is_view" name="is_view" value="0">
+													<button type="submit" id="sub_button"
+														class="btn btn-primary" onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+
+													<a
+														href="${pageContext.request.contextPath}/showInstituteSupport"><button
+															id="sub2" type="button" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a> <input type="hidden" id="is_view" name="is_view"
+														value="0">
 												</div>
 											</div>
 										</div>
@@ -193,8 +205,8 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -307,7 +319,7 @@
 		}
 	</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	function allowOnlyNumber(evt){
 		
 		var charCode = (evt.which) ? evt.which : event.keyCode
@@ -365,7 +377,7 @@
 			return;
 		}
 	</script>
-<script type="text/javascript">
+	<script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key
@@ -396,6 +408,19 @@
       return false;
     }    
 </script>
-
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 </body>
 </html>

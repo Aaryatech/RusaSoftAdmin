@@ -847,7 +847,7 @@ public class LibraryController {
 			}
 			String roleNameList = null;
 
-			roleNameList = Constants.Librarian_Role;
+			roleNameList = Constants.Librarian_Role ;
 
 			if (isLib == 1) {
 				roleNameList = roleNameList + "," + Constants.Librarian_Role;

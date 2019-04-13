@@ -105,31 +105,30 @@
 											<div class="tab-pane fade in active" id="home"> --%>
 
 										<div class="form-group">
-										<input type="hidden"  id="activityId" name="activityId" 
-												 value="${instAct.instActivityId}">
-												 
-											<label class="control-label col-sm-2" for="activityType">Type
+											<input type="hidden" id="activityId" name="activityId"
+												value="${instAct.instActivityId}"> <label
+												class="control-label col-sm-2" for="activityType">Type
 												of Activity <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-											
+
 												<select id="activityType" name="activityType"
 													class="form-control" required>
-												<c:choose>
-													<c:when test="${instAct.instActivityType eq 'Sports'}">
-													<option selected value="Sports">Sports</option>
-													<option value="Cultural">Cultural</option>
-													</c:when>
-													<c:when test="${instAct.instActivityType eq 'Cultural'}">
-													<option  value="Sports">Sports</option>
-													<option selected value="Cultural">Cultural</option>
-													</c:when>
-													<c:otherwise>
-													<option value="Sports">Sports</option>
-													<option value="Cultural">Cultural</option>
-													</c:otherwise>
-													
-												</c:choose>	
+													<c:choose>
+														<c:when test="${instAct.instActivityType eq 'Sports'}">
+															<option selected value="Sports">Sports</option>
+															<option value="Cultural">Cultural</option>
+														</c:when>
+														<c:when test="${instAct.instActivityType eq 'Cultural'}">
+															<option value="Sports">Sports</option>
+															<option selected value="Cultural">Cultural</option>
+														</c:when>
+														<c:otherwise>
+															<option value="Sports">Sports</option>
+															<option value="Cultural">Cultural</option>
+														</c:otherwise>
+
+													</c:choose>
 
 												</select>
 											</div>
@@ -142,33 +141,34 @@
 											<div class="col-sm-6">
 												<select id="activityLevel" name="activityLevel"
 													class="form-control" required>
-													
-											<c:choose>
-													<c:when test="${instAct.instActivityLevel eq 'State'}">
-													<option selected value="State">State</option>
-													<option value="National">National</option>
-													<option value="International">International</option>
-												</c:when>
-												
-												<c:when test="${instAct.instActivityLevel eq 'National'}">
-													<option value="State">State</option>
-													<option selected value="National">National</option>
-													<option value="International">International</option>
-												</c:when>
-												
-												<c:when test="${instAct.instActivityLevel eq 'International'}">
-													<option value="State">State</option>
-													<option value="National">National</option>
-													<option selected value="International">International</option>
-												</c:when>
-												
-												<c:otherwise>
-													<option value="State">State</option>
-													<option value="National">National</option>
-													<option value="International">International</option>
-												</c:otherwise>
-												
-											</c:choose>
+
+													<c:choose>
+														<c:when test="${instAct.instActivityLevel eq 'State'}">
+															<option selected value="State">State</option>
+															<option value="National">National</option>
+															<option value="International">International</option>
+														</c:when>
+
+														<c:when test="${instAct.instActivityLevel eq 'National'}">
+															<option value="State">State</option>
+															<option selected value="National">National</option>
+															<option value="International">International</option>
+														</c:when>
+
+														<c:when
+															test="${instAct.instActivityLevel eq 'International'}">
+															<option value="State">State</option>
+															<option value="National">National</option>
+															<option selected value="International">International</option>
+														</c:when>
+
+														<c:otherwise>
+															<option value="State">State</option>
+															<option value="National">National</option>
+															<option value="International">International</option>
+														</c:otherwise>
+
+													</c:choose>
 												</select>
 											</div>
 										</div>
@@ -180,9 +180,12 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="activityName"
-													name="activityName" placeholder="Name of Activity" onchange="trim(this)"
-													autocomplete="off" value="${instAct.instActivityName}">
-													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of activity.</span>
+													name="activityName" placeholder="Name of Activity"
+													onchange="trim(this)" autocomplete="off"
+													value="${instAct.instActivityName}"> <span
+													class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter name of
+													activity.</span>
 											</div>
 										</div>
 
@@ -194,10 +197,13 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" onchange="trim(this)" placeholder="From Date"
-													autocomplete="off" id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
-													value="${instAct.instActivityFromdt}">
-												<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter from date.</span>
+												<input type="text" class="form-control datepicker"
+													onchange="trim(this)" placeholder="From Date"
+													autocomplete="off" id="fromDate" name="fromDate"
+													onkeypress='return restrictAlphabets(event)'
+													value="${instAct.instActivityFromdt}"> <span
+													class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please enter from date.</span>
 											</div>
 										</div>
 
@@ -207,11 +213,16 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" onchange="trim(this)" placeholder="To Date"
-													autocomplete="off" id="toDate" name="toDate" onkeypress='return restrictAlphabets(event)'
-													value="${instAct.instActivityTodt}">
-													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter to date.</span>
-													<span class="error_form text-danger" id="error_formfield0" style="display:none;" >to date must be greater than from date.</span>
+												<input type="text" class="form-control datepicker"
+													onchange="trim(this)" placeholder="To Date"
+													autocomplete="off" id="toDate" name="toDate"
+													onkeypress='return restrictAlphabets(event)'
+													value="${instAct.instActivityTodt}"> <span
+													class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter to date.</span> <span
+													class="error_form text-danger" id="error_formfield0"
+													style="display: none;">to date must be greater than
+													from date.</span>
 											</div>
 										</div>
 
@@ -224,11 +235,15 @@
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control" maxlength="7"
-													id="inst_activity_participation" autocomplete="off" onchange="trim(this)"
-													name="inst_activity_participation" onkeypress='return restrictAlphabets(event)'
-													placeholder="No.of Participants" value="${instAct.instActivityParticipation}">
-												<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of participants and value must be greater than 0.</span>
+												<input type="number" class="form-control" maxlength="7"
+													min="0" id="inst_activity_participation" autocomplete="off"
+													onchange="trim(this)" name="inst_activity_participation"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="No.of Participants"
+													value="${instAct.instActivityParticipation}"> <span
+													class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter No. of
+													participants and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -237,12 +252,16 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button" class="btn btn-primary" 
-															onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-												
-												<a href="${pageContext.request.contextPath}/showActivityOrganized"><button
-													id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-												<input type="hidden" id="is_view" name="is_view" value="0">
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showActivityOrganized"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
 											</div>
 										</div>
 
@@ -271,112 +290,108 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script>
-	function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}
-	
-            
-            	$(document).ready(function($){
-            		
-            		$("#form_sample_2").submit(function(e) {
-            		//	alert("hi");
-            			var isError=false;
-            			 var errMsg="";
-            			
-            			
-            			 if(!$("#activityName").val()){
-        					 
-             				isError=true;
-             				errMsg += '<li>Please enter a valid name.</li>';
-             				
-             				$("#activityName").addClass("has-error")
-             				$("#error_formfield1").show()
-             					//return false;
-             				} else {
-             					$("#error_formfield1").hide()
-             				} 
-           				
-           				if(!$("#fromDate").val()){
-       					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#fromDate").addClass("has-error")
-            				$("#error_formfield2").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield2").hide()
-            				} 
-           				
-           				if(!$("#toDate").val()){
-       					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#toDate").addClass("has-error")
-            				$("#error_formfield3").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield3").hide()
-            				} 
-           				if($("#inst_activity_participation").val()==0){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#fromDate").addClass("has-error")
-            				$("#error_formfield4").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield4").hide()
-            				} 
-           				
-           			 	if($("#fromDate").val() > $("#toDate").val()){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#toDate").addClass("has-error")
-            				$("#error_formfield0").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield0").hide()
-            				} 
-           				
-           				/* if(!$("#").val()){
-        					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#").addClass("has-error")
-            				$("#error_formfield6").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield6").hide()
-            				} */
-           			
-            				
-			            	 if (!isError) {
-			            		 
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									
-									document.getElementById("sub_button").disabled = true;
-									document.getElementById("sub2").disabled = true;
-									return  true;
-								}
-							}
-            					   return false;
-            			});
-        });
 
-</script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+
+		$(document).ready(function($) {
+
+			$("#form_sample_2").submit(function(e) {
+				//	alert("hi");
+				var isError = false;
+				var errMsg = "";
+
+				if (!$("#activityName").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#activityName").addClass("has-error")
+					$("#error_formfield1").show()
+					//return false;
+				} else {
+					$("#error_formfield1").hide()
+				}
+
+				if (!$("#fromDate").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#fromDate").addClass("has-error")
+					$("#error_formfield2").show()
+					//return false;
+				} else {
+					$("#error_formfield2").hide()
+				}
+
+				if (!$("#toDate").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#toDate").addClass("has-error")
+					$("#error_formfield3").show()
+					//return false;
+				} else {
+					$("#error_formfield3").hide()
+				}
+				if ($("#inst_activity_participation").val() == 0) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#fromDate").addClass("has-error")
+					$("#error_formfield4").show()
+					//return false;
+				} else {
+					$("#error_formfield4").hide()
+				}
+
+				if ($("#fromDate").val() > $("#toDate").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#toDate").addClass("has-error")
+					$("#error_formfield0").show()
+					//return false;
+				} else {
+					$("#error_formfield0").hide()
+				}
+
+				/* if(!$("#").val()){
+				 
+				isError=true;
+				errMsg += '<li>Please enter a valid name.</li>';
+				
+				$("#").addClass("has-error")
+				$("#error_formfield6").show()
+					//return false;
+				} else {
+					$("#error_formfield6").hide()
+				} */
+
+				if (!isError) {
+
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+
+						document.getElementById("sub_button").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
+	</script>
 
 	<script type="text/javascript">
 		function getData() {
@@ -401,7 +416,7 @@
 			document.getElementById("index").value = i + 1;
 		}
 	</script>
-/showActivityOrganized
+	/showActivityOrganized
 
 	<script type="text/javascript">
 		$(function() {
@@ -414,52 +429,52 @@
 
 			});
 		});
-		
-		function submit_f(view){
-			document.getElementById("is_view").value=view;//create this 
+
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
 			/* var form=document.getElementById("form_sample_2");
-		    form.setAttribute("method", "post");
+			form.setAttribute("method", "post");
 
 			form.action=("insertHod");
 			var x =confirm("Do you really want to submit the form?");
 			if(x==true)
 			form.submit(); */
-			
+
 		}
 	</script>
 
 
-<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-		</script>
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 	<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-</script>
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+	</script>
 
 
 

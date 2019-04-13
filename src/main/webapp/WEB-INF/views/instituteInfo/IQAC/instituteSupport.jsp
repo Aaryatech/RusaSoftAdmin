@@ -188,14 +188,14 @@
 											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-10">
 
-													<button type="button" class="btn btn-primary" onclick="exportToExcel();"  id="expExcel" 
+													<!-- <button type="button" class="btn btn-primary" onclick="exportToExcel();"  id="expExcel" 
 														style="align-content: center; width: 200px; margin-left: 80px; background-color: #03A9F4;">
 														Export To Excel</button>
 									
 													<button type="button" class="btn btn-primary"
 														onclick="genPdf()" id="PDFButton"
 														style="align-content: center; width: 100px; margin-left: 80px; background-color: #03A9F4;">
-														PDF</button>
+														PDF</button> -->
 												</div>
 											</div>
 											

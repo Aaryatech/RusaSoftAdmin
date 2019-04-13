@@ -76,9 +76,11 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
-								<a
-									href="${pageContext.request.contextPath}/showAddActivityOrganized"><button
-										type="submit" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button> </a>
+									<a
+										href="${pageContext.request.contextPath}/showAddActivityOrganized"><button
+											type="submit" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button> </a>
 								</c:if>
 							</div>
 
@@ -90,13 +92,12 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/delOrgActivities/0"
-										method="get"
-										name="form_sample_2" id="form_sample_2">
+										method="get" name="form_sample_2" id="form_sample_2">
 
 
 										<div class="col-xs-12">
 											<h5 class="title pull-left">
-												Sports/Cultural Activity/Competition <Strong>Orgnaized</Strong>
+												Sports/Cultural Activity/Competition <Strong>Organized</Strong>
 												at Institute
 
 											</h5>
@@ -108,9 +109,9 @@
 													aria-describedby="example-4_info" style="width: 100%;">
 													<thead>
 														<tr>
-														<th class="check" style="text-align: center; width: 5%;"><input
-														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+															<th class="check" style="text-align: center; width: 5%;"><input
+																type="checkbox" name="selAll" id="selAll"
+																onClick="selectedInst(this)" /> Select All</th>
 															<th rowspan="2">Sr No</th>
 															<th rowspan="2">Type of Activity</th>
 															<th rowspan="2">Level of Activity</th>
@@ -128,48 +129,53 @@
 														</tr> -->
 													</thead>
 													<tbody>
-												<c:forEach items="${instActList}" var="activList"
-													varStatus="count">
-													<tr>
-													 <td><input type="checkbox" class="chk"
-															name="activityId" id="activityId${count.index+1}"
-															value="${activList.instActivityId}" /></td> 
-														<td align="center">${count.index+1}</td>
-														<td>${activList.instActivityType}</td>
-														<td>${activList.instActivityLevel}</td>
-														<td>${activList.instActivityName}</td>
-														<td  align="center">${activList.instActivityFromdt}</td>
-														<td  align="center">${activList.instActivityTodt}</td>
-														<td style="text-align: right; ">${activList.instActivityParticipation}</td>
-														
-														<td align="center"> <c:if test="${editAccess==0}"> 
-																<a 
-																	href="${pageContext.request.contextPath}/editActivity/${activList.instActivityId}">
-																	<span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-														 </c:if><c:if test="${deleteAccess==0}">
-																<a
-																	href="${pageContext.request.contextPath}/deleteActivity/${activList.instActivityId}"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-															</c:if></td>
-													</tr>
-												</c:forEach>
+														<c:forEach items="${instActList}" var="activList"
+															varStatus="count">
+															<tr>
+																<td align="center"><input type="checkbox"
+																	class="chk" name="activityId"
+																	id="activityId${count.index+1}"
+																	value="${activList.instActivityId}" /></td>
+																<td align="center">${count.index+1}</td>
+																<td>${activList.instActivityType}</td>
+																<td>${activList.instActivityLevel}</td>
+																<td>${activList.instActivityName}</td>
+																<td align="center">${activList.instActivityFromdt}</td>
+																<td align="center">${activList.instActivityTodt}</td>
+																<td style="text-align: right;">${activList.instActivityParticipation}</td>
 
-											</tbody>
+																<td align="center"><c:if test="${editAccess==0}">
+																		<a
+																			href="${pageContext.request.contextPath}/editActivity/${activList.instActivityId}">
+																			<span class="glyphicon glyphicon-edit" title="Edit"
+																			data-animate=" animated fadeIn " rel="tooltip"></span>
+																		</a>&nbsp;&nbsp;&nbsp;&nbsp;
+														 </c:if> <c:if test="${deleteAccess==0}">
+																		<a
+																			href="${pageContext.request.contextPath}/deleteActivity/${activList.instActivityId}"
+																			onClick="return confirm('Are you sure want to delete this record');"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																			class="glyphicon glyphicon-remove"></span></a>
+																	</c:if></td>
+															</tr>
+														</c:forEach>
+
+													</tbody>
 												</table>
+												<div class="form-group"></div>
 												<c:if test="${deleteAccess==0}">
-													<button class="btn btn-primary"
-													id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-													style="align-content: center; width: 113px; margin-left: 40px;">
-													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button> 
-											</c:if>
-											<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
-											value="0"> 
-												
+													<button class="btn btn-primary" id="deleteId"
+														onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+														style="align-content: center; width: 113px; margin-left: 40px;">
+														<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+													</button>
+												</c:if>
+												<input type="hidden" id="edit_accOff_id"
+													name="edit_accOff_id" value="0">
+
 
 											</div>
 										</div>
@@ -194,18 +200,18 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript">
-function selectedInst(source) {
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		function selectedInst(source) {
 
-	checkboxes = document.getElementsByName('activityId');
+			checkboxes = document.getElementsByName('activityId');
 
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
 
-	}
+			}
 
-}
+		}
 
 		function getData() {
 			//alert("hii");
@@ -228,7 +234,7 @@ function selectedInst(source) {
 					.draw();
 			document.getElementById("index").value = i + 1;
 		}
-</script>
+	</script>
 
 
 
