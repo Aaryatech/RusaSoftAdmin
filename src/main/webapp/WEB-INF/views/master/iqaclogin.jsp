@@ -84,7 +84,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a
+								<%-- 	<a
 									href="${pageContext.request.contextPath}/showInstituteInfoList"><button
 										type="button" class="btn btn-info">Back</button></a>  --%>
 							</div>
@@ -97,9 +97,9 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteInfo"
-										method="post"  name="form_sample_2" novalidate="novalidate"
+										method="post" name="form_sample_2" novalidate="novalidate"
 										id="form_sample_2">
-<!-- 
+										<!-- 
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Information
@@ -108,193 +108,178 @@
 
 										</ul>
  -->
-									<!-- 	<div class="tab-content">
+										<!-- 	<div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
+										<div>
 
 
 
-													<div class="col-xs-12">
+											<div class="col-xs-12">
 
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_name"
-															>Year <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<select id="academic_year" name="academic_year"
-																	class="form-control" required>
-																	<%-- <c:forEach items="${acaYearList}" var="acaYear">
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_name">Year
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<select id="academic_year" name="academic_year"
+															class="form-control" required>
+															<%-- <c:forEach items="${acaYearList}" var="acaYear">
 																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
 																	
 																	</c:forEach> --%>
-<option value="-1">Select</option>
-																	<c:forEach items="${acaYearList}" var="acaYearList">
-																		<c:choose>
-																			<c:when
-																				test="${acaYearList.yearId==editInstInfo.yearId}">
-																				<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+															<option value="-1">Select</option>
+															<c:forEach items="${acaYearList}" var="acaYearList">
+																<c:choose>
+																	<c:when
+																		test="${acaYearList.yearId==editInstInfo.yearId}">
+																		<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
 
-																			</c:otherwise>
+																	</c:otherwise>
 
-																		</c:choose>
+																</c:choose>
 
-																	</c:forEach>
+															</c:forEach>
 
-																</select>
-<span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Year</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_name"
-																>No. of Full Time Faculty
-																<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<input type="text" class="form-control"
-																	id="no_fullTime_Faculty"
-																	value="${editInstInfo.noOfFulltimeFaculty}"
-																	name="no_fullTime_Faculty"
-																	placeholder="No. of Full Time Faculty in Institute"
-																	>
-																	
-										<span class="error_form text-danger" id="error_full" style="display:none;" >Please enter No. of Full Time Faculty</span>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order"
-														>No. of Full Time 	Nonteaching Faculty
-															<span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<input type="text"  class="form-control"
-																	id="no_nonTeaching_faculty"
-																	value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
-																	name="no_nonTeaching_faculty"
-																	placeholder="No. of Full Time Nonteaching Including Office Staff"
-																	>
-						<span class="error_form text-danger" id="error_non" style="display:none;" >Please enter No. of Full Time 	Nonteaching Faculty</span>
-															</div>
-														</div>
-
-
-
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order"
-															>No. of Support Staff <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<input type="text"  class="form-control"
-																	id="no_suppStaff"
-																	value="${editInstInfo.noSupportStaff}"
-																	name="no_suppStaff" placeholder="No. of Support Staff"
-																	>
-							<span class="error_form text-danger" id="error_supp" style="display:none;" >Please enter No. of Support Staff</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order"
-																>No. of current
-																admitted student <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<input type="text"  class="form-control"
-																	id="no_currAdmitted_Student"
-																	value="${editInstInfo.noCurrentAdmitedStnt}"
-																	name="no_currAdmitted_Student"
-																	placeholder="No. of current admitted student" >
-																	
-												<span class="error_form text-danger" id="error_curr" style="display:none;" >Please enter admitted student</span>
-															</div>
-														</div>
-
-														<%-- <div class="form-group">
-															<label class="control-label col-sm-4" for="page_order"
-														> State Treasury Code <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<input type="text" class="form-control"
-																	id="treasury_code" value="${editInstInfo.treasuryCode}"
-																	name="treasury_code" placeholder="State Treasury Code"
-																	>
-																	
-							<span class="error_form text-danger" id="error_code" style="display:none;" >Please enter State Treasury Code</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-4" for="page_order"
-															> RUSA ID No. <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-8">
-																<input type="text" class="form-control" id="rusa_idNo"
-																	value="${editInstInfo.rusaIdNo}" name="rusa_idNo"
-																	placeholder="Rusa ID No." >
-							<span class="error_form text-danger" id="error_rusa" style="display:none;" >Please enter Rusa ID</span>
-															</div>
-														</div> --%>
-
-
-
+														</select> <span class="error_form text-danger" id="error_year"
+															style="display: none;">Please Select Year</span>
 													</div>
-
 												</div>
 
-												<c:choose>
-													<c:when test="${editInstInfo.infoDetailId!=0}">
-														<input type="hidden" id="inst_info_id" name="inst_info_id"
-															value="${editInstInfo.infoDetailId}">
-													</c:when>
-													<c:otherwise>
-														<input type="hidden" id="inst_info_id"  name="inst_info_id"
-															value="0">
-													</c:otherwise>
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_name">No.
+														of Full Time Faculty <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" min="0"
+															id="no_fullTime_Faculty"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)"
+															value="${editInstInfo.noOfFulltimeFaculty}"
+															name="no_fullTime_Faculty"
+															placeholder="No. of Full Time Faculty in Institute">
 
-												</c:choose>
-
-
-
-
-
-												<input type="hidden" id="is_view" name="is_view" value="0">
-
-													<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
-
-
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showInstituteInfoList"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+														<span class="error_form text-danger" id="error_full"
+															style="display: none;">Please enter No. of Full
+															Time Faculty</span>
+													</div>
 												</div>
 
 
 
-												<div class="clearfix"></div>
-<!-- 
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_order">No.
+														of Full Time Nonteaching Faculty <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" min="0"
+															id="no_nonTeaching_faculty"
+															value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
+															name="no_nonTeaching_faculty"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)"
+															placeholder="No. of Full Time Nonteaching Including Office Staff">
+														<span class="error_form text-danger" id="error_non"
+															style="display: none;">Please enter No. of Full
+															Time Nonteaching Faculty</span>
+													</div>
+												</div>
+
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_order">No.
+														of Support Staff <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" min="0"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)" id="no_suppStaff"
+															value="${editInstInfo.noSupportStaff}"
+															name="no_suppStaff" placeholder="No. of Support Staff">
+														<span class="error_form text-danger" id="error_supp"
+															style="display: none;">Please enter No. of Support
+															Staff</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_order">No.
+														of current admitted student <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" min="0"
+															id="no_currAdmitted_Student"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)"
+															value="${editInstInfo.noCurrentAdmitedStnt}"
+															name="no_currAdmitted_Student"
+															placeholder="No. of current admitted student"> <span
+															class="error_form text-danger" id="error_curr"
+															style="display: none;">Please enter admitted
+															student</span>
+													</div>
+												</div>
+
+
+
+
+
+											</div>
+
+										</div>
+
+										<c:choose>
+											<c:when test="${editInstInfo.infoDetailId!=0}">
+												<input type="hidden" id="inst_info_id" name="inst_info_id"
+													value="${editInstInfo.infoDetailId}">
+											</c:when>
+											<c:otherwise>
+												<input type="hidden" id="inst_info_id" name="inst_info_id"
+													value="0">
+											</c:otherwise>
+
+										</c:choose>
+
+
+
+
+
+										<input type="hidden" id="is_view" name="is_view" value="0">
+
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
+
+
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showInstituteInfoList"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
+
+
+
+										<div class="clearfix"></div>
+										<!-- 
 											</div>
 
 										</div> -->
 
 									</form>
-									   <p class="desc text-danger fontsize11">Notice : * Fields
+									<p class="desc text-danger fontsize11">Notice : * Fields
 										are Mandatory.</p>
 								</div>
 
@@ -313,121 +298,127 @@
 
 	<!-- END CONTENT -->
 	<script>
-           
-             function numbersOnlyNotZero(id_number) {
+		function numbersOnlyNotZero(id_number) {
 
-                 
-                 var mob = /^[1-9][0-9]+$/;
+			var mob = /^[1-9][0-9]+$/;
 
+			if (mob.test($.trim(id_number)) == false) {
 
-                 if (mob.test($.trim(id_number)) == false) {
+				//alert("Please enter a valid email address .");
+				return false;
 
-                     //alert("Please enter a valid email address .");
-                     return false;
+			}
+			return true;
+		}
 
-                 }
-                 return true;
-             }
+		$(document)
+				.ready(
+						function($) {
+							//  alert("hii....");
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
 
+												if ($("#academic_year").val() == -1) {
 
+													isError = true;
 
-             
-            
-            	$(document).ready(function($){
-          //  alert("hii....");
-            		$("#form_sample_2").submit(function(e) {
-            			 var isError=false;
-            			 var errMsg="";
-            				
-            				
-            				if($("#academic_year").val()== -1 ){
-            		            
-                				isError=true;
-                				
-                				$("#error_year").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_year").hide()
-                				}
-            				
+													$("#error_year").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_year").hide()
+												}
 
-            				if(!$("#no_fullTime_Faculty").val() || !numbersOnlyNotZero($("#no_fullTime_Faculty").val())){
-            
-            				isError=true;
-            				
-            				$("#error_full").show()
-            					//return fregister_useralse;
-            				} else {
-            					$("#error_full").hide()
-            				}
-            				
-            				if(!$("#no_nonTeaching_faculty").val() || !numbersOnlyNotZero($("#no_nonTeaching_faculty").val())){
-            		            
-                				isError=true;
-                				
-                				$("#error_non").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_non").hide()
-                				}
-            				if(!$("#no_suppStaff").val() || !numbersOnlyNotZero($("#no_suppStaff").val())){
-            		            
-                				isError=true;
-                				
-                				$("#error_supp").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_supp").hide()
-                				}
-            				if(!$("#no_currAdmitted_Student").val() || !numbersOnlyNotZero($("#no_currAdmitted_Student").val())){
-            		            
-                				isError=true;
-                				
-                				$("#error_curr").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_curr").hide()
-                				}
-            				/* if(!$("#treasury_code").val() || !numbersOnlyNotZero($("#treasury_code").val())){
-            		            
-                				isError=true;
-                				
-                				$("#error_code").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_code").hide()
-                				}
-            				
-							if(!$("#rusa_idNo").val() || !numbersOnlyNotZero($("#rusa_idNo").val())){
-            		            
-                				isError=true;
-                				
-                				$("#error_rusa").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_rusa").hide()
-                				} */
-            				
+												if ($("#no_fullTime_Faculty")
+														.val() == 0
+														|| !$(
+																"#no_fullTime_Faculty")
+																.val()) {
 
-							if (!isError) {
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									return  true;
-									 document.getElementById("sub1").disabled=true;
-           						  document.getElementById("sub2").disabled=true;
-								}
-							}
-            
-            			  
-            						 
-            					   return false;
-            				} );
-            	});
-			//
-			
-			    
-          
-        </script>
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#no_fullTime_Faculty")
+															.addClass(
+																	"has-error")
+													$("#error_full").show()
+													//return false;
+												} else {
+													$("#error_full").hide()
+												}
+
+												if ($("#no_nonTeaching_faculty")
+														.val() == 0
+														|| !$(
+																"#no_nonTeaching_faculty")
+																.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#no_nonTeaching_faculty")
+															.addClass(
+																	"has-error")
+													$("#error_non").show()
+													//return false;
+												} else {
+													$("#error_non").hide()
+												}
+
+												if ($("#no_suppStaff").val() == 0
+														|| !$("#no_suppStaff")
+																.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#no_suppStaff")
+															.addClass(
+																	"has-error")
+													$("#error_supp").show()
+													//return false;
+												} else {
+													$("#error_supp").hide()
+												}
+
+												if ($(
+														"#no_currAdmitted_Student")
+														.val() == 0
+														|| !$(
+																"#no_currAdmitted_Student")
+																.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$(
+															"#no_currAdmitted_Student")
+															.addClass(
+																	"has-error")
+													$("#error_curr").show()
+													//return false;
+												} else {
+													$("#error_curr").hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														return true;
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+													}
+												}
+
+												return false;
+											});
+						});
+		//
+	</script>
 
 	<script>
 		function clearSessionAttribute() {
@@ -467,31 +458,52 @@
 			confirm('Do you really want to submit the form?');
 			document.getElementById("submitButton").disabled = true;
 		}
-		
-		
 
 		/* 
 		onsubmit="return confirm('Do you really want to submit the form?');" */
 	</script>
 
 
- <script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-    	  document.getElementById("sub1").disabled=true;
-    	  document.getElementById("sub2").disabled=true;
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					document.getElementById("sub2").disabled = true;
 
-        return wasSubmitted;
-    	  }
-      }
-      return false;
-    }    
-</script>
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+	</script>
 
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
+	<script type="text/javascript">
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 
 
 	<!-- END CONTAINER -->
