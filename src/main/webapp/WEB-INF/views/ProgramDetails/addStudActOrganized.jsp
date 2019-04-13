@@ -98,8 +98,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitOrgnizedActivity"
-										method="post" name="submitAcitivity" id="submitAcitivity"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<!-- 	<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -282,8 +281,12 @@
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
 															id="date" value="${editProgramActivity.date}"
-															placeholder="dd/mm/yyyy" name="date" required
+															placeholder="Date" name="date" onkeypress='return restrictAlphabets(event)'
 															autocomplete="off">
+															<span
+														class="error_form text-danger" id="error_formfield1"
+														style="display: none;">Please enter date.</span>
+													
 													</div>
 												</div>
 
@@ -293,9 +296,13 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control datepickeryear"
+														<input type="text" class="form-control datepickeryear" onkeypress='return restrictAlphabets(event)'
 															id="year" value="${editProgramActivity.year}" name="year"
-															placeholder="Year" required autocomplete="off">
+															placeholder="Year"  autocomplete="off">
+															<span
+														class="error_form text-danger" id="error_formfield2"
+														style="display: none;">Please enter year.</span>
+												
 													</div>
 												</div>
 
@@ -307,8 +314,12 @@
 													<div class="col-sm-10">
 														<input type="text" maxlength="30" class="form-control"
 															id="branch" value="${editProgramActivity.branch}"
-															name="branch" placeholder="Branch" required
-															onchange="return trim(this)">
+															name="branch" placeholder="Branch" 
+															onchange="return trim(this)" autocomplete="off">
+															<span
+														class="error_form text-danger" id="error_formfield3"
+														style="display: none;">Please enter branch.</span>
+													
 													</div>
 												</div>
 
@@ -321,7 +332,10 @@
 															value="${editProgramActivity.participatedStudent}"
 															name="noStudent"
 															placeholder="No. of Students Participated" pattern="\d*"
-															required maxlength="6">
+															maxlength="6" autocomplete="off">
+																<span
+														class="error_form text-danger" id="error_formfield4"
+														style="display: none;">Please enter No. of student Participated.</span>
 													</div>
 												</div>
 
@@ -404,24 +418,18 @@
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<input type="hidden" id="isOther" name="isOther"
 											value="${chooseOther}">
-
-
+											
+											
 										<div class="form-group">
-											<div class="col-sm-offset-3 col-sm-9">
+													<div class="col-sm-offset-3 col-sm-9">
 
 
-												<button type="submit" id="sub_button"
-													class="btn btn-primary" onclick="submit_f(1)">
-													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
-												</button>
-
-												<a
-													href="${pageContext.request.contextPath}/showStudOrgnizedActivity"><button
-														type="button" class="btn btn-primary">
-														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
-													</button></a>
-											</div>
-										</div>
+<button type="submit" id="sub_button" class="btn btn-primary"
+													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														
+<a href="${pageContext.request.contextPath}/showStudOrgnizedActivity"><button
+										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+												</div>
 
 
 										<div class="clearfix"></div>
@@ -453,6 +461,8 @@
 	<script type="text/javascript" src="./javascript.js"></script>
 	<script
 		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
+	
+	
 	<script type="text/javascript">
 		$(function() {
 
@@ -464,18 +474,27 @@
 
 			});
 		});
+
+		$(function() {
+
+			$('.datepickeryear').datepicker({
+				autoclose : true,
+				minViewMode : 2,
+				format : 'yyyy'
+
+			});
+		});
 	</script>
-
-
-
+	
 
 	<script type="text/javascript">
-		function submit_f(view) {
-			//	alert(view);
-			document.getElementById("is_view").value = view;
+	
+	function submit_f(view) {
+	//	alert(view);
+		document.getElementById("is_view").value = view;
 
-		}
-
+	}
+	
 		function showExtraField() {
 			//alert("hii");
 			//document.getElementById("abc").style = "display:none"
@@ -506,15 +525,6 @@
 		}
 	</script>
 	<script type="text/javascript">
-		$(function() {
-
-			$('.datepickeryear').datepicker({
-				autoclose : true,
-				minViewMode : 2,
-				format : 'yyyy'
-
-			});
-		});
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -538,6 +548,150 @@
 		}
 	</script>
 
+<script>
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+
+		function validateEmail(email) {
+
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+			if (eml.test($.trim(email)) == false) {
+
+				return false;
+
+			}
+
+			return true;
+
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+
+			if (mob.test($.trim(mobile)) == false) {
+
+				//alert("Please enter a valid email address .");
+				return false;
+
+			}
+			return true;
+
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#date")
+														.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#date")
+															.addClass(
+																	"has-error")
+													$("#error_formfield1")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield1")
+															.hide()
+												}
+
+												if (!$("#year").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#year").addClass(
+															"has-error")
+													$("#error_formfield2")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield2")
+															.hide()
+												}
+
+												 
+												if (!$(
+														"#branch")
+														.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$(
+															"#branch")
+															.addClass(
+																	"has-error")
+													$("#error_formfield3")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield3")
+															.hide()
+												}
+
+												if (!$(
+												"#noStudent")
+												.val()) {
+
+											isError = true;
+											errMsg += '<li>Please enter a valid name.</li>';
+
+											$(
+													"#noStudent")
+													.addClass(
+															"has-error")
+											$("#error_formfield4")
+													.show()
+											//return false;
+										} else {
+											$("#error_formfield4")
+													.hide()
+										}
+												if (!isError) {
+
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+
+														document
+																.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
+	</script>
+<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 
 	<!-- END CONTAINER -->

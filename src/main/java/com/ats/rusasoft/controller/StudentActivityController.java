@@ -180,7 +180,7 @@ public class StudentActivityController {
 					programActivity.setStudentActivityId(activityId);
 				}
 
-				programActivity.setDate(DateConvertor.convertToYMD(date));
+				programActivity.setDate(date);
 				programActivity.setYear(year);
 				programActivity.setParticipatedStudent(noStudent);
 				programActivity.setBranch(branch);
@@ -431,7 +431,7 @@ public class StudentActivityController {
 					programActivity.setStudentActivityId(activityId);
 				}
 
-				programActivity.setDate(DateConvertor.convertToYMD(date));
+				programActivity.setDate(date);
 				programActivity.setYear(year);
 				programActivity.setParticipatedStudent(noStudent);
 				programActivity.setBranch(branch);

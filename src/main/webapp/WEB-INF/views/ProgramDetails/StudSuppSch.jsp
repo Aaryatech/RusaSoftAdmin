@@ -84,12 +84,12 @@
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th> -->
 													<th style="text-align: center;">Sr.No.</th>
-													<th style="text-align: center;">Scheme</th>
 													<th style="text-align: center;">Level</th>
 													<th style="text-align: center;">Type</th>
-													<th>Benefited Students</th>
-													<th style="text-align: center;">Implementation Date/Year</th>
+													<th style="text-align: center;">Scheme</th>
 													<th style="text-align: center;">Support Agency</th>
+													<th style="text-align: center;">Date Of Implementation</th>
+													<th>Benefited Students</th>
 													<th style="text-align: center;">Actions</th>
 												</tr>
 
@@ -102,13 +102,12 @@
 															id="studentSchmIds${count.index+1}"
 															value="${stud.sprtSchmId}" /></td> --%>
 														<td style="text-align: center;">${count.index+1}</td>
-														<td>${stud.schemeName}</td>
 														<td style="text-align: left;">${stud.level}</td>
 														<td style="text-align: left;">${stud.type}</td>
-														<td style="text-align: right;">${stud.noStudentBenifited}</td>
-														<td style="text-align: center;">${stud.academicYear}</td>
+														<td>${stud.schemeName}</td>
 														<td>${stud.supportAgencyName}</td>
-
+														<td style="text-align: center;">${stud.academicYear}</td>
+														<td style="text-align: right;">${stud.noStudentBenifited}</td>
 														<td>
 															<%-- <c:if test="${editAccess==0}"> --%> <a
 															href="${pageContext.request.contextPath}/editStudSchm/${stud.sprtSchmId}"><span

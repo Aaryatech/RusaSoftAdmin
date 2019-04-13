@@ -70,8 +70,8 @@
 											<thead>
 												<tr>
 													<th>Sr.No.</th>
-													<th>Employer Name</th>
 													<th>Program Name</th>
+													<th>Employer Name</th>
 													<th>Students Placed</th>
 													<th>Employer Address</th>
 													<th>Contact Details</th>
@@ -84,8 +84,9 @@
 													varStatus="count">
 													<tr>
 														<td align="center">${count.index+1}</td>
-														<td align="left">${trainPlace.empyrName}</td>
 														<td align="left">${trainPlace.progTypeName}-${trainPlace.programName}</td>
+														<td align="left">${trainPlace.empyrName}</td>
+														
 														<td align="right">${trainPlace.noStudentPlaced}</td>
 														<td align="left">${trainPlace.empyrAdd}</td>
 														<td align="left">${trainPlace.contactDetail}</td>

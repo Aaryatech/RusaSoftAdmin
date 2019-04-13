@@ -351,7 +351,7 @@ public class AlumniTrainingController {
 	@RequestMapping(value = "/deleteAlum/{alumniId}", method = RequestMethod.GET)
 	public String deleteInstitutes(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int alumniId) {
-		String redirect = null;
+		String a = null;
 		try {
 
 			HttpSession session = request.getSession();
@@ -388,9 +388,9 @@ public class AlumniTrainingController {
 
 				Info errMsg = restTemplate.postForObject(Constants.url + "deleteAlumni", map, Info.class);
 
-				redirect = "recirect:/showAlumini";
+				a = "redirect:/showAlumini";
 			} else {
-				redirect = "recirect:/accessDenied";
+				a = "redirect:/accessDenied";
 			}
 		} catch (Exception e) {
 
@@ -400,7 +400,7 @@ public class AlumniTrainingController {
 
 		}
 
-		return redirect;
+		return a;
 
 	}
 

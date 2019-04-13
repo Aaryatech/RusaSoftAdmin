@@ -115,22 +115,65 @@
 													<div class="col-sm-6">
 														<select id="schemeName" name="schemeName"
 															class="form-control" onchange="showExtraField()">
+														
+															<c:choose>
+																<c:when test="${stud.schemeName  eq 'Capability Enhancement'}}">
+
 															<option value="-1">Select</option>
-															<option value="Capability Enhancement">Capability
-																Enhancement</option>
-															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)">Competitive
-																Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option
-																value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT
-													etc)">Higher
-																Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option value="Vocational Education Training">Vocational
-																Education Training</option>
+															<option selected value="Capability Enhancement">Capability	Enhancement</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training">Vocational Education Training</option>
 															<option value="7">Any Other</option>
+															</c:when>
+															
+															<c:when test="${stud.schemeName  eq 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)'}}">
 
+															<option value="-1">Select</option>
+														    <option value="Capability Enhancement">Capability Enhancement</option>
+															<option selected value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training">Vocational Education Training</option>
+															<option value="7">Any Other</option>
+															</c:when>
+															
+															<c:when test="${stud.schemeName  eq 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)'}}">
 
+															<option value="-1">Select</option>
+															<option value="Capability Enhancement">Capability	Enhancement</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option	selected value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training">Vocational Education Training</option>
+															<option value="7">Any Other</option>
+															</c:when>
+															
+															<c:when test="${stud.schemeName  eq 'Vocational Education Training'}}">
+															<option value="-1">Select</option>
+															<option value="Capability Enhancement">Capability Enhancement</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option selected value="Vocational Education Training">Vocational Education Training</option>
+															<option value="7">Any Other</option>
+															</c:when>
+															<c:otherwise>
+
+															<option value="-1">Select</option>
+															<option selected value="Capability Enhancement">Capability Enhancement</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training">Vocational Education Training</option>
+															<option selected value="7">Any Other</option>
+														</c:otherwise>
+														
+														
+														
+														
+														</c:choose>
+														
+														
+									
 														</select> <span class="error_form text-danger" id="error_scheme"
-															style="display: none;">Please Select Scheme</span>
+															style="display: none;">Please Select Scheme.</span>
 
 
 													</div>
@@ -148,7 +191,7 @@
 															name="anotherScheme" placeholder="Another Scheme"
 															onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_oth"
-															style="display: none;">Please Enter Other Scheme</span>
+															style="display: none;">Please Enter Other Scheme.</span>
 													</div>
 												</div>
 
@@ -187,7 +230,7 @@
 																</c:otherwise>
 															</c:choose>
 														</select> <span class="error_form text-danger" id="error_level"
-															style="display: none;">Please Select Level</span>
+															style="display: none;">Please Select Level.</span>
 													</div>
 												</div>
 
@@ -198,7 +241,9 @@
 													<div class="col-sm-6">
 														<select id="approveValue" name="type" class="form-control">
 															<option value="-1">Select</option>
-															<c:choose>
+																<option  value="Govt." ${stud.type == 'Govt.' ? 'selected' : '' }>Govt.</option>
+																<option  value="Non Govt." ${stud.type == 'Non Govt.' ? 'selected' : '' }>Non Govt.</option>
+															<%-- <c:choose>
 																<c:when test="${stud.type eq 'Govt.'}">
 																	<option selected value="Govt">Govt.</option>
 																	<option value="Non Govt.">Non Govt.</option>
@@ -214,9 +259,9 @@
 																	<option value="Non Govt.">Non Govt.</option>
 																</c:otherwise>
 
-															</c:choose>
+															</c:choose> --%>
 														</select> <span class="error_form text-danger" id="error_type"
-															style="display: none;">Please Select Type</span>
+															style="display: none;">Please Select Type.</span>
 
 
 													</div>
@@ -235,7 +280,7 @@
 															autocomplete="off"> <span
 															class="error_form text-danger" id="error_part"
 															style="display: none;">Please Enter No. of
-															Students Benefited</span>
+															Students Benefited and value should be gerater than 0.</span>
 													</div>
 												</div>
 
@@ -254,7 +299,7 @@
 															> <span
 															class="error_form text-danger" id="error_agency"
 															style="display: none;">Please Enter Name of
-															Support Agency </span>
+															Support Agency. </span>
 
 													</div>
 												</div>
@@ -263,14 +308,14 @@
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="page_order">Date/Year
-														of Introduction <span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="page_order">Date
+														of Implementation <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
 															id="yearofIntro" placeholder="dd-MM-YYYY"
-															 autocomplete="off" value="${yDate}" name="yearofIntro">
-															<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date  </span>
+															 autocomplete="off" value="${stud.implementationYear}" name="yearofIntro">
+															<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date.  </span>
 
 													</div>
 												</div>
@@ -303,7 +348,7 @@
 										</div>
  -->
 									</form>
-									<p class="desc text-danger fontsize11">Notice : * Field are
+									<p class="desc text-danger fontsize11">Notice : * Fields are
 										Mandatory.</p>
 								</div>
 
@@ -355,7 +400,7 @@
 												var errMsg = "";
 
 if (!$("#yearofIntro").val()){
-						        					 alert("Hi")
+						        					 //alert("Hi")
 						              				isError=true;
 						              				
 						              				
