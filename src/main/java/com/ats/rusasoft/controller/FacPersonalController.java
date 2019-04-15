@@ -136,7 +136,7 @@ public class FacPersonalController {
 
 	}
 
-	@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.POST)
+	@RequestMapping(value = "/addPersonalDetails", method = RequestMethod.GET)
 	public ModelAndView addPersonalDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
@@ -157,15 +157,15 @@ public class FacPersonalController {
 
 			if (temp == 1) {
 
-				access = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "1", "0", "0",
+				access = AccessControll.checkAccess("addPersonalDetails", "addPersonalDetails", "0", "1", "0", "0",
 						newModuleList);
 			} else {
 
-				access = AccessControll.checkAccess("showPersonalDetails", "showPersonalDetails", "0", "0", "1", "0",
+				access = AccessControll.checkAccess("addPersonalDetails", "addPersonalDetails", "0", "0", "1", "0",
 						newModuleList);
 
 			}
-			System.err.println("showPersonalDetails " + access.toString());
+			System.err.println("addPersonalDetails " + access.toString());
 			if (access.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
@@ -181,7 +181,7 @@ public class FacPersonalController {
 
 				model = new ModelAndView("FacultyDetails/personalDetail");
 
-				model.addObject("title", title);
+				model.addObject("title", "Add Faculty Personal Details");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -206,22 +206,9 @@ public class FacPersonalController {
 						List.class);
 				model.addObject("desigList", designationList);
 				map = new LinkedMultiValueMap<>();
-				map.add("id", facultyId);
+				map.add("id", userObj.getStaff().getFacultyId());
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				System.out.println("staff" + staff);
-				/*
-				 * DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); Calendar startCalendar =
-				 * new GregorianCalendar();
-				 * startCalendar.setTime(df.parse(staff.getJoiningDate())); Calendar endCalendar
-				 * = new GregorianCalendar(); endCalendar.setTime(new Date());
-				 * 
-				 * int diffYear = endCalendar.get(Calendar.YEAR) -
-				 * startCalendar.get(Calendar.YEAR); int diffMonth = diffYear * 12 +
-				 * endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
-				 * 
-				 * System.err.println("diffMonth " + diffMonth); System.err.println("diffYear "
-				 * + diffYear);
-				 */
 
 				if (temp == 1) {
 					model.addObject("temp", temp);
@@ -230,8 +217,9 @@ public class FacPersonalController {
 				}
 
 				model.addObject("staff", staff);
+
 				map = new LinkedMultiValueMap<>();
-				map.add("facultyId", facultyId);
+				map.add("facultyId", userObj.getStaff().getFacultyId());
 				FacultyPersonalDetail facPerDetail = rest.postForObject(Constants.url + "/getFacultyPersonalDetail",
 						map, FacultyPersonalDetail.class);
 				try {
@@ -315,9 +303,9 @@ public class FacPersonalController {
 
 				// int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (temp == 1)
-					redirect = "redirect:/showStaffList";
+					redirect = "redirect:/addPersonalDetails";
 				else
-					redirect = "redirect:/showPersonalDetails";
+					redirect = "redirect:/addPersonalDetails";
 			}
 
 		} catch (Exception e) {
@@ -388,55 +376,63 @@ public class FacPersonalController {
 		return model;
 	}
 
-	@RequestMapping(value = "/showAddMphillDetails", method = RequestMethod.POST)
+	@RequestMapping(value = "/showAddMphillDetails", method = RequestMethod.GET)
 	public ModelAndView showAddMphillDetails(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		try {
 			String title = request.getParameter("title");
 			int temp1 = 0;
-			model = new ModelAndView("FacultyDetails/mPhillDetail");
-			model.addObject("title", title);
-
-			int facultyId = 0;
-			try {
-				facultyId = Integer.parseInt(request.getParameter("add_fac_detail_id"));
-			} catch (Exception e) {
-				facultyId = 0;
-			}
-			try {
-
-				temp1 = Integer.parseInt(request.getParameter("temp1"));
-			} catch (Exception e) {
-				temp1 = 0;
-			}
-			if (temp1 == 1) {
-				model.addObject("temp1", temp1);
-			} else {
-				model.addObject("temp1", 0);
-			}
 
 			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			// model.addObject("title", "Personal Details Form");
+			Info viewAccess = AccessControll.checkAccess("showAddMphillDetails", "showAddMphillDetails", "1", "0", "0",
+					"0", newModuleList);
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			if (viewAccess.isError() == false) {
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			// map.add("instId", userObj.getGetData().getUserInstituteId());
+				model = new ModelAndView("FacultyDetails/mPhillDetail");
+				model.addObject("title", "Add Faculty M.Phil./Ph.D. Details");
 
-			map = new LinkedMultiValueMap<>();
-			map.add("facultyId", facultyId);
-			FacultyPhdDetails facPhdDetail = rest.postForObject(Constants.url + "/getFacultyPhdDetail", map,
-					FacultyPhdDetails.class);
-			try {
-				facPhdDetail.setPhdRecognitionDt(DateConvertor.convertToDMY(facPhdDetail.getPhdRecognitionDt()));
-				facPhdDetail.setPhdValidDt(DateConvertor.convertToDMY(facPhdDetail.getPhdValidDt()));
-			} catch (Exception e) {
-				// TODO: handle exception
+				int facultyId = 0;
+				try {
+					facultyId = Integer.parseInt(request.getParameter("add_fac_detail_id"));
+				} catch (Exception e) {
+					facultyId = 0;
+				}
+				try {
+
+					temp1 = Integer.parseInt(request.getParameter("temp1"));
+				} catch (Exception e) {
+					temp1 = 0;
+				}
+				if (temp1 == 1) {
+					model.addObject("temp1", temp1);
+				} else {
+					model.addObject("temp1", 0);
+				}
+
+				// model.addObject("title", "Personal Details Form");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				// map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getStaff().getFacultyId());
+				FacultyPhdDetails facPhdDetail = rest.postForObject(Constants.url + "/getFacultyPhdDetail", map,
+						FacultyPhdDetails.class);
+				try {
+					facPhdDetail.setPhdRecognitionDt(DateConvertor.convertToDMY(facPhdDetail.getPhdRecognitionDt()));
+					facPhdDetail.setPhdValidDt(DateConvertor.convertToDMY(facPhdDetail.getPhdValidDt()));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				model.addObject("facPhdDetail", facPhdDetail);
+
 			}
-			model.addObject("facPhdDetail", facPhdDetail);
-
 		} catch (Exception e) {
 			System.err.println("exception In showAddMphillDetails at Master Contr" + e.getMessage());
 			e.printStackTrace();
@@ -516,9 +512,9 @@ public class FacPersonalController {
 				// int isView = Integer.parseInt(request.getParameter("is_view"));
 
 				if (temp1 == 1)
-					redirect = "redirect:/showStaffList";
+					redirect = "redirect:/showAddMphillDetails";
 				else
-					redirect = "redirect:/showMphillDetails";
+					redirect = "redirect:/showAddMphillDetails";
 				// if (isView == 1)
 				// redirect = "redirect:/showMphillDetails";
 				// else
@@ -681,6 +677,8 @@ public class FacPersonalController {
 		ModelAndView model = null;
 		String redirect = null;
 		try {
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -695,18 +693,15 @@ public class FacPersonalController {
 
 			System.err.println("fac_aca_id id  " + facAcadId);
 
-			HttpSession session = request.getSession();
-
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = AccessControll.checkAccess("insertFacAcademic", "showAcademicDetails", "0", "1", "0", "0",
+			Info editAccess = AccessControll.checkAccess("insertFacAcademic", "showEditFacAcademic", "0", "1", "0", "0",
 					newModuleList);
 			// editAccess.setError(false);
 
 			if (editAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 				FacultyAcademic facAcademic = new FacultyAcademic();
 
@@ -731,7 +726,7 @@ public class FacPersonalController {
 
 				facAcademic.setfAcaId(facAcadId);
 
-				facAcademic.setFacultyId(Integer.parseInt(request.getParameter("fac_id")));
+				facAcademic.setFacultyId(userObj.getStaff().getFacultyId());
 				facAcademic.setfClass(request.getParameter("fClass"));
 				facAcademic.setfPassingYear(request.getParameter("fPassingYear"));
 				facAcademic.setfQualificationId(Integer.parseInt(request.getParameter("fQualificationId")));
@@ -744,20 +739,13 @@ public class FacPersonalController {
 
 				FacultyAcademic facAcadeRes = restTemplate.postForObject(Constants.url + "saveFacultyAcademic",
 						facAcademic, FacultyAcademic.class);
-				int temp2 = Integer.parseInt(request.getParameter("temp2"));
-				if (temp2 == 1)
-					redirect = "redirect:/showStaffList";
-				else
-					redirect = "redirect:/showAcademicDetails";
-				//
-				// if (isView == 1)
-				// redirect = "redirect:/showAcademicDetails";
-				// else
-				// = "redirect:/showAddAcademicDetails";
+
+				redirect = "redirect:/showEditFacAcademic";
+
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in save saveFacultyPhdDetails  " + e.getMessage());
+			System.err.println("Exce in save showEditFacAcademic  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -767,9 +755,8 @@ public class FacPersonalController {
 
 	// editFacAcademic
 
-	@RequestMapping(value = "/showEditFacAcademic/{fAcaId}/{temp2}", method = RequestMethod.GET)
-	public ModelAndView showEditInstitute(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int fAcaId, @PathVariable int temp2) {
+	@RequestMapping(value = "/showEditFacAcademic", method = RequestMethod.GET)
+	public ModelAndView showEditFacAcademic(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
 
 		try {
@@ -777,31 +764,42 @@ public class FacPersonalController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = AccessControll.checkAccess("showEditFacAcademic", "showAcademicDetails", "0", "0", "1",
+			Info editAccess = AccessControll.checkAccess("showEditFacAcademic", "showEditFacAcademic", "0", "0", "1",
 					"0", newModuleList);
 			// editAccess.setError(false); // remove this.
 			if (editAccess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
 
-				// model = new ModelAndView("FacultyDetails/academicDetails");
 				model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
 				model.addObject("title", "Edit Faculty Academic Details");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("fAcaId", fAcaId);
+				/*
+				 * map.add("fAcaId", fAcaId); // getInstitute FacultyAcademic editFacAcad =
+				 * rest.postForObject(Constants.url + "getFacAcademic", map,
+				 * FacultyAcademic.class); try { //
+				 * editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate())); }
+				 * catch (Exception e) { System.err.
+				 * println("Exce in show Edit showEditFacAcademic /showEditFacAcademic"); }
+				 */
+				// getFacAcademicByFacId
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("facultyId", userObj.getStaff().getFacultyId());
 				// getInstitute
-				FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademic", map,
+				FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademicByFacId", map,
 						FacultyAcademic.class);
 				try {
 					// editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
 				} catch (Exception e) {
 					System.err.println("Exce in show Edit showEditFacAcademic /showEditFacAcademic");
 				}
+
 				model.addObject("editFacAcad", editFacAcad);
-				model.addObject("fAcaId", fAcaId);
-				model.addObject("temp2", temp2);
 
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("type", 1);
@@ -813,7 +811,7 @@ public class FacPersonalController {
 
 				model.addObject("quolfList", quolfList);
 
-				model.addObject("facultyId", editFacAcad.getFacultyId());
+				// model.addObject("facultyId", editFacAcad.getFacultyId());
 
 			}
 		} catch (Exception e) {
