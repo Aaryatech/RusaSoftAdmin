@@ -37,6 +37,7 @@ import com.ats.rusasoft.model.FacultyBook;
 import com.ats.rusasoft.model.FacultyConference;
 import com.ats.rusasoft.model.FacultyContribution;
 import com.ats.rusasoft.model.FacultyPhdGuide;
+import com.ats.rusasoft.model.GetFacultyActivity;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.OrganizedList;
@@ -526,19 +527,24 @@ public class FacultyModuleController {
 
 			} else {
 
-				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-				int yId = (int) session.getAttribute("acYearId");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				model = new ModelAndView("FacultyDetails/organizedList");
 
+				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-				map.add("yrId", yId);
-				map.add("facId", facId.getRegPrimaryKey());
-				OrganizedList[] faccAcArr = rest.postForObject(Constants.url + "/getAllActivityById", map,
-						OrganizedList[].class);
-				List<OrganizedList> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				GetFacultyActivity[] faccAcArr = rest.postForObject(
+						Constants.url + "/getFacultyActivityListByFacultyIdAndtype", map, GetFacultyActivity[].class);
+				List<GetFacultyActivity> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
 				model.addObject("facActList", facActList);
 
 				model.addObject("title", "Faculty Organized - Out Reach Activity List");
