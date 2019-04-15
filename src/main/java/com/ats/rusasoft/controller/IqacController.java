@@ -379,6 +379,9 @@ public class IqacController {
 
 				model.addObject("QList", qacList);
 				model.addObject("title", "IQAC List");
+				
+				model.addObject("listMapping", "showIqacList");
+
 
 				Info add = AccessControll.checkAccess("showIqacList", "showIqacList", "0", "1", "0", "0",
 						newModuleList);

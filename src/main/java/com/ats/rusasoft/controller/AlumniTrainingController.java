@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -38,7 +39,52 @@ import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
+@Scope("session")
 public class AlumniTrainingController {
+	
+	@RequestMapping(value = "/blockUser", method = RequestMethod.POST)
+	public String blockUser(HttpServletRequest request, HttpServletResponse response) {
+
+		String redirect=null;
+		try {
+
+			int userId=Integer.parseInt(request.getParameter("userId"));
+			String listMapping=request.getParameter("listMapping");
+			
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info blockAccess = AccessControll.checkAccess("blockUser", listMapping, "0", "0", "0", "1",
+					newModuleList);
+			
+			if(blockAccess.isError()==false) {
+
+				
+				map.add("userId",userId);
+
+				Info errMsg = restTemplate.postForObject(Constants.url + "blockUser", map, Info.class);
+
+				redirect="redirect:/"+listMapping;
+				
+			} else {
+
+				redirect = "redirect:/accessDenied";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In blockUser at AlumniTrainingController Contr " + e.getMessage());
+			e.printStackTrace();
+
+		}
+
+		return redirect;
+
+	}
 
 	@RequestMapping(value = "/showAlumini", method = RequestMethod.GET)
 	public ModelAndView showAlumini(HttpServletRequest request, HttpServletResponse response) {
