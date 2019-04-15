@@ -1155,7 +1155,7 @@ public class FacultyModuleController {
 				stud.setYearId(yId);
 				stud.setDelStatus(1);
 				stud.setIsActive(1);
-				stud.setMakerUserId(facId.getGetData().getUserInstituteId());
+				stud.setMakerUserId(facId.getUserId());
 				stud.setMakerEnterDatetime(curDateTime);
 				stud.setExInt1(0);
 				stud.setExVar1("NA");
