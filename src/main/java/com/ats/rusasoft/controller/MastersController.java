@@ -331,6 +331,7 @@ public class MastersController {
 				// System.err.println("hodList " + hodList.toString());
 
 				model.addObject("hodList", hodList);
+				model.addObject("listMapping", "hodList");
 
 				Info addAccess = AccessControll.checkAccess("hodList", "hodList", "0", "1", "0", "0", newModuleList);
 

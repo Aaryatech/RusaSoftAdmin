@@ -128,6 +128,16 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
+																	
+																	 &nbsp;&nbsp;
+																<a
+																href="#" onclick="blockUser(${accOff.facultyId})"
+																onClick="return confirm('Are you sure want to block this user');"
+																rel="tooltip" data-color-class="danger" title="Block user"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Block user"><span
+																class="glyphicon glyphicon-ban-circle"></span></a>
+																		
 															</c:if></td>
 													</tr>
 												</c:forEach>
@@ -144,7 +154,12 @@
 										</c:if>
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
+	
+										<input type="hidden" id="listMapping" name="listMapping"
+												value="${listMapping}">
 
+											<input type="hidden" id="userId" name="userId"
+													value="0">
 
 
 									</div>
@@ -203,6 +218,16 @@
 			form.setAttribute("method", "post");
 
 			form.action = ("showEditaccOff");
+			form.submit();
+
+		}
+		
+		function blockUser(userId) {
+			document.getElementById("userId").value = userId;//create this 
+			var form = document.getElementById("insListForm");
+			form.setAttribute("method", "post");
+
+			form.action = ("blockUser");
 			form.submit();
 
 		}

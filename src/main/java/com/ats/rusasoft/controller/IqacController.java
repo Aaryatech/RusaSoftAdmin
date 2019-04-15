@@ -1003,6 +1003,7 @@ public class IqacController {
 				System.out.println("Staff List:" + staffList);
 
 				model.addObject("staffList", staffList);
+				model.addObject("listMapping", "showStaffList");
 
 				List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
 
@@ -1268,6 +1269,7 @@ public class IqacController {
 				System.err.println("deptList " + deptList.toString());
 
 				model.addObject("deptList", deptList);
+				
 
 				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
@@ -1581,6 +1583,7 @@ public class IqacController {
 				System.out.println("Dean List:" + deanList);
 
 				model.addObject("deanList", deanList);
+				model.addObject("listMapping", "showDeanList");
 
 				Info add = AccessControll.checkAccess("showDeanList", "showDeanList", "0", "1", "0", "0",
 						newModuleList);
@@ -1646,7 +1649,6 @@ public class IqacController {
 				System.err.println("deptList edt:" + deptList.toString());
 				model.addObject("deptList", deptList);
 
-				model.addObject("deptList", deptList);
 
 				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));

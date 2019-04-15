@@ -186,11 +186,17 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Block"><span
 																	class="glyphicon glyphicon-remove"></span></a>
+																	
+																	&nbsp;&nbsp;
+																<a
+																href="#" onclick="blockUser(${staffList.facultyId})"
+																onClick="return confirm('Are you sure want to block this user');"
+																rel="tooltip" data-color-class="danger" title="Block user"
+																data-animate=" animated fadeIn " data-toggle="tooltip"
+																data-original-title="Block user"><span
+																class="glyphicon glyphicon-ban-circle"></span></a>
 															</c:if>
 														</td>
-
-
-
 
 													</tr>
 												</c:forEach>
@@ -219,6 +225,12 @@
 										</c:if>
 										<input type="hidden" id="edit_link_id" name="edit_link_id"
 											value="0">
+											
+											<input type="hidden" id="listMapping" name="listMapping"
+												value="${listMapping}">
+
+											<input type="hidden" id="userId" name="userId"
+													value="0">
 									</form>
 
 								</div>
@@ -266,6 +278,16 @@
 		}
 	</script>
 	<script>
+	function blockUser(userId) {
+		document.getElementById("userId").value = userId;//create this 
+		var form = document.getElementById("form_sample_2");
+		form.setAttribute("method", "post");
+
+		form.action = ("blockUser");
+		form.submit();
+
+	}
+	
 		function clearSessionAttribute() {
 
 			$.getJSON('${clearSessionAttribute}', {

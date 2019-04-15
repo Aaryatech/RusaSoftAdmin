@@ -542,6 +542,7 @@ public class MasterController {
 				System.err.println("accOffList " + accOffList.toString());
 
 				model.addObject("accOffList", accOffList);
+				model.addObject("listMapping", "showAccList");
 
 				model.addObject("title", "Account Officer Registration List");
 

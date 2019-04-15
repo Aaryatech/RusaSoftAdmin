@@ -145,11 +145,25 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
+																	
+																&nbsp;&nbsp;
+																	<a
+																	href="#" onclick="blockUser(${institute.facultyId})"
+																	onClick="return confirm('Are you sure want to block this user');"
+																	rel="tooltip" data-color-class="danger" title="Block user"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Block user"><span
+																	class="glyphicon glyphicon-ban-circle"></span></a>
 															</c:if></td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
+										<input type="hidden" id="listMapping" name="listMapping"
+												value="${listMapping}">
+
+											<input type="hidden" id="userId" name="userId"
+													value="0">
 										<div class="col-lg-1"></div>
 
 									</div>
@@ -207,6 +221,16 @@
 			form.setAttribute("method", "post");
 
 			form.action = ("showEditLibrarian");
+			form.submit();
+
+		}
+		
+		function blockUser(userId) {
+			document.getElementById("userId").value = userId;//create this 
+			var form = document.getElementById("libListForm");
+			form.setAttribute("method", "post");
+
+			form.action = ("blockUser");
 			form.submit();
 
 		}

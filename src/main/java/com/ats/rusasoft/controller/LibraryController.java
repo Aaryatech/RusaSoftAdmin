@@ -726,6 +726,7 @@ public class LibraryController {
 				System.out.println("lib list is" + libtList.toString());
 
 				model.addObject("libtList", libtList);
+				model.addObject("listMapping", "showLibList");
 
 				Info add = AccessControll.checkAccess("showLibList", "showLibList", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showLibList", "showLibList", "0", "0", "1", "0", newModuleList);

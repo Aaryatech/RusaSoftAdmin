@@ -58,7 +58,7 @@
 
 								<div class="col-xs-12">
 
-
+								<form id="deanListForm">
 									<table id="example-1"
 										class="table table-striped dt-responsive display">
 										<thead>
@@ -113,12 +113,23 @@
 														rel="tooltip" data-color-class="danger" title="Delete"
 														data-animate=" animated fadeIn " data-toggle="tooltip"
 														data-original-title="Delete  record"><span
-															class="glyphicon glyphicon-remove"></span></a></c:if></td>
+															class="glyphicon glyphicon-remove"></span></a>
+													
+														 &nbsp;&nbsp;
+														<a
+														href="#" onclick="blockUser(${deanList.facultyId})"
+														onClick="return confirm('Are you sure want to block this user');"
+														rel="tooltip" data-color-class="danger" title="Block user"
+														data-animate=" animated fadeIn " data-toggle="tooltip"
+														data-original-title="Block user"><span
+														class="glyphicon glyphicon-ban-circle"></span></a>
+													</c:if></td>
 												</tr>
 											</c:forEach> 
 											
 										</tbody>
 									</table>
+									
 									<%-- <c:if test="${deleteAccess==0}">
 											<input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
@@ -128,8 +139,12 @@
 										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
 											value="0">
  --%>
+											<input type="hidden" id="listMapping" name="listMapping"
+												value="${listMapping}">
 
-
+											<input type="hidden" id="userId" name="userId"
+													value="0">
+</form>
 								</div>
 							</div>
 						</div>
@@ -156,6 +171,16 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
+	function showEditLibrarian(instId){
+		document.getElementById("edit_lib_id").value=instId;//create this 
+		var form=document.getElementById("libListForm");
+	    form.setAttribute("method", "post");
+
+		form.action=("showEditLibrarian");
+		form.submit();
+		
+	}
+	
 		function clearSessionAttribute() {
 
 			$.getJSON('${clearSessionAttribute}', {
@@ -178,14 +203,14 @@
 			}
 
 		}
-		function showEditLibrarian(instId){
-			document.getElementById("edit_lib_id").value=instId;//create this 
-			var form=document.getElementById("libListForm");
-		    form.setAttribute("method", "post");
+		function blockUser(userId) {
+			document.getElementById("userId").value = userId;//create this 
+			var form = document.getElementById("deanListForm");
+			form.setAttribute("method", "post");
 
-			form.action=("showEditLibrarian");
+			form.action = ("blockUser");
 			form.submit();
-			
+
 		}
 	</script>
 	<script>
