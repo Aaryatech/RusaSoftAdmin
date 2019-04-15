@@ -87,8 +87,8 @@
 								<%-- <a
 									href="${pageContext.request.contextPath}/showOutReachDetailsList"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
-										
-										
+
+
 							</div>
 
 						</header>
@@ -99,9 +99,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertOutReachActivity"
-										method="post" 
-										name="form_sample_2" id="form_sample_2"
-									>
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -109,21 +107,21 @@
 											</a></li>
 
 										</ul> -->
-<!-- 
+										<!-- 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
+										<div>
 
-													<div class="col-sm-12"></div>
+											<div class="col-sm-12"></div>
 
 
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="status">
-														Outreach Type <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<!-- <select id="act_attended" onchange="showForm()"
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="status">
+													Outreach Type <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<!-- <select id="act_attended" onchange="showForm()"
 																name="act_attended" class="form-control" required>
 																<option value="STTP">STTP</option>
 																<option value="Seminar">Seminar</option>
@@ -134,152 +132,167 @@
 																<option value="6">Any Other</option>
 
 															</select> -->
-															<select id="activity_type" name="activity_type" class="form-control" >
-															
-																	<option value="-1">Select</option>	
-																		<c:forEach items="${facultyOutreachTypeList}" var="outtype">
-																		<c:choose>
-																			<c:when test="${outtype.typeId==editInst.outreachType}">
-																			<option  selected value="${outtype.typeId}">${outtype.typeName}</option>
+													<select id="activity_type" name="activity_type"
+														class="form-control">
+
+														<option value="-1">Select</option>
+														<c:forEach items="${facultyOutreachTypeList}"
+															var="outtype">
+															<c:choose>
+																<c:when test="${outtype.typeId==editInst.outreachType}">
+																	<option selected value="${outtype.typeId}">${outtype.typeName}</option>
 
 
-																			</c:when>
-																			<c:otherwise>
-																			<option value="${outtype.typeId}">${outtype.typeName}</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${outtype.typeId}">${outtype.typeName}</option>
 
 
-																			</c:otherwise>
+																</c:otherwise>
 
-																		</c:choose>
+															</c:choose>
 
-																	</c:forEach>
-																</select>
-	<span class="error_form text-danger" id="error_type" style="display:none;" >Please Select Outreach Type  </span>
-														</div>
-															</div>
-													
- 
-
-													</div>
-
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="smallheading">Outreach Name
-															<!-- Name of Activity  --><span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="act_name" onchange="trim(this)"
-																name="act_name" placeholder="Name of Activity" value="${editInst.outreachName}"
-																>
-	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Outreach Name  </span>
-														</div>
-
-													</div>
+														</c:forEach>
+													</select> <span class="error_form text-danger" id="error_type"
+														style="display: none;">Please Select Outreach Type
+													</span>
+												</div>
+											</div>
 
 
 
-													<div class="form-group">
+										</div>
 
-														<label class="control-label col-sm-2" for="status">Outreach Level
-															 <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<select id="act_level" name="act_level"
-																class="form-control" required>
-																<!-- <option value="International">International</option>
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="smallheading">Outreach
+												Name <!-- Name of Activity  --> <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="act_name"
+													onchange="trim(this)" name="act_name"
+													placeholder="Name of Activity"
+													value="${editInst.outreachName}"> <span
+													class="error_form text-danger" id="error_name"
+													style="display: none;">Please Enter Outreach Name </span>
+											</div>
+
+										</div>
+
+
+
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="status">Outreach
+												Level <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="act_level" name="act_level" class="form-control"
+													required>
+													<!-- <option value="International">International</option>
 																<option value="National">National</option>
 																<option value="State">State</option>
 																<option value="Regional">Regional</option> -->
-																<option value="-1">Select</option>	
-																<c:choose>
-																			<c:when test="${'International'==editInst.outreachLevel}">
-																			
-																<option  selected value="International">International</option>
-																<option value="National">National</option>
-																<option value="State">State</option>
-																<option value="Regional">Regional</option>
+													<option value="-1">Select</option>
+													<c:choose>
+														<c:when test="${'International'==editInst.outreachLevel}">
 
-																			</c:when>
-																			<c:when test="${'National'==editInst.outreachLevel}">
-																			
-																<option   value="International">International</option>
-																<option selected value="National">National</option>
-																<option value="State">State</option>
-																<option value="Regional">Regional</option>
+															<option selected value="International">International</option>
+															<option value="National">National</option>
+															<option value="State">State</option>
+															<option value="Regional">Regional</option>
 
-																			</c:when>
-																			
-																			<c:when test="${'State'==editInst.outreachLevel}">
-																			
-																<option   value="International">International</option>
-																<option  value="National">National</option>
-																<option selected value="State">State</option>
-																<option value="Regional">Regional</option>
+														</c:when>
+														<c:when test="${'National'==editInst.outreachLevel}">
 
-																			</c:when>
-																			
-																			<c:when test="${'Regional'==editInst.outreachLevel}">
-																			
-																<option   value="International">International</option>
-																<option  value="National">National</option>
-																<option value="State">State</option>
-																<option  selected value="Regional">Regional</option>
+															<option value="International">International</option>
+															<option selected value="National">National</option>
+															<option value="State">State</option>
+															<option value="Regional">Regional</option>
 
-																			</c:when>
-																			
-																	<c:otherwise>
-																<option value="International">International</option>
-																<option value="National">National</option>
-																<option value="State">State</option>
-																<option value="Regional">Regional</option>
+														</c:when>
 
+														<c:when test="${'State'==editInst.outreachLevel}">
 
-																			</c:otherwise>
+															<option value="International">International</option>
+															<option value="National">National</option>
+															<option selected value="State">State</option>
+															<option value="Regional">Regional</option>
 
-																		</c:choose>
+														</c:when>
+
+														<c:when test="${'Regional'==editInst.outreachLevel}">
+
+															<option value="International">International</option>
+															<option value="National">National</option>
+															<option value="State">State</option>
+															<option selected value="Regional">Regional</option>
+
+														</c:when>
+
+														<c:otherwise>
+															<option value="International">International</option>
+															<option value="National">National</option>
+															<option value="State">State</option>
+															<option value="Regional">Regional</option>
 
 
-															</select>
-															
-<span class="error_form text-danger" id="error_level" style="display:none;" >Please Select Outreach Level  </span>
-														</div>
-													</div>
+														</c:otherwise>
 
-												<div class="form-group">
-															<label class="control-label col-sm-2" for="page_order">
-																Outreach Date <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="text" class="form-control datepicker" id="act_date" value="${date}"
-																	name="act_date" placeholder="dd/MM/yyyy " >
-	<span class="error_form text-danger" id="error_date" style="display:none;" >Please Select Outreach Date  </span>
-															</div>
-														</div>
-														
-														
-											 <input type="hidden" id="outreach_id"  name="outreach_id"   value="${editInst.outreachId}">
-                                             	<input type="hidden" id="is_view" name="is_view" value="0">
-												
-												
-													<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+													</c:choose>
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showOutReachDetailsList"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												</select> <span class="error_form text-danger" id="error_level"
+													style="display: none;">Please Select Outreach Level
+												</span>
+											</div>
+										</div>
 
-													<div class="clearfix"></div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="page_order">
+												Outreach Date <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control datepicker"
+													id="act_date" value="${date}" name="act_date"
+													placeholder="dd/MM/yyyy "> <span
+													class="error_form text-danger" id="error_date"
+													style="display: none;">Please Select Outreach Date </span>
+											</div>
+										</div>
 
-												<!-- </div> -->
+
+										<input type="hidden" id="outreach_id" name="outreach_id"
+											value="${editInst.outreachId}"> <input type="hidden"
+											id="is_view" name="is_view" value="0">
+
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+
+
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showOutReachDetailsList"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
+
+										<div class="clearfix"></div>
+
+										<!-- </div> -->
 
 										<!-- 	</div> -->
-									
+
 									</form>
-										<p class="desc text-danger fontsize11">Notice : * Field are  Mandatory.</p>
+									<p class="desc text-danger fontsize11">Notice : * Field are
+										Mandatory.</p>
 								</div>
 
 							</div>
@@ -301,115 +314,90 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script>
-	
-	
-	function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}  
-	
-           
-             function numbersOnlyNotZero(id_number) {
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 
-                 
-                 var mob = /^[1-9][0-9]+$/;
+		function numbersOnlyNotZero(id_number) {
 
+			var mob = /^[1-9][0-9]+$/;
 
-                 if (mob.test($.trim(id_number)) == false) {
+			if (mob.test($.trim(id_number)) == false) {
 
-                     //alert("Please enter a valid email address .");
-                     return false;
+				//alert("Please enter a valid email address .");
+				return false;
 
-                 }
-                 return true;
-             }
+			}
+			return true;
+		}
 
+		$(document).ready(function($) {
+			//  alert("hii....");
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
 
+				if (!$("#act_name").val()) {
 
-             
-            
-            	$(document).ready(function($){
-          //  alert("hii....");
-            		$("#form_sample_2").submit(function(e) {
-            			 var isError=false;
-            			 var errMsg="";
-            				
-            			 if(!$("#act_name").val()){
-        					 
-             				isError=true;
-             				
-             				
-             				$("#act_name").addClass("has-error")
-             				$("#error_name").show()
-             					//return false;
-             				} else {
-             					$("#error_name").hide()
-             				}
-            			 
-            			 if($("#activity_type").val()== -1 ){
-         		            
-             				isError=true;
-             				
-             				$("#error_type").show()
-             					//return fregister_useralse;
-             				} else {
-             					$("#error_type").hide()
-             				}
+					isError = true;
 
-         				if($("#act_level").val()== -1 ){
-         		            
-             				isError=true;
-             				
-             				$("#error_level").show()
-             					//return fregister_useralse;
-             				} else {
-             					$("#error_level").hide()
-             				}
-         				
-         				
-            			 
-            			 
-            			
-            			 if(!$("#act_date").val()){
-        					 
-              				isError=true;
-              				
-              				
-              				$("#act_date").addClass("has-error")
-              				$("#error_date").show()
-              					//return false;
-              				} else {
-              					$("#error_date").hide()
-              				}
-            			 
-            			
-            				
+					$("#act_name").addClass("has-error")
+					$("#error_name").show()
+					//return false;
+				} else {
+					$("#error_name").hide()
+				}
 
-            				
+				if ($("#activity_type").val() == -1) {
 
-							if (!isError) {
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									return  true;
-									 document.getElementById("sub1").disabled=true;
-           						  document.getElementById("sub2").disabled=true;
-								}
-							}
-            
-            			  
-            						 
-            					   return false;
-            				} );
-            	});
-			//
-			
-			    
-          
-        </script>
+					isError = true;
+
+					$("#error_type").show()
+					//return fregister_useralse;
+				} else {
+					$("#error_type").hide()
+				}
+
+				if ($("#act_level").val() == -1) {
+
+					isError = true;
+
+					$("#error_level").show()
+					//return fregister_useralse;
+				} else {
+					$("#error_level").hide()
+				}
+
+				if (!$("#act_date").val()) {
+
+					isError = true;
+
+					$("#act_date").addClass("has-error")
+					$("#error_date").show()
+					//return false;
+				} else {
+					$("#error_date").hide()
+				}
+
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						return true;
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+					}
+				}
+
+				return false;
+			});
+		});
+		//
+	</script>
 	<script type="text/javascript">
 		function showForm() {
 			//document.getElementById("abc").style = "display:none"
@@ -430,19 +418,18 @@
 			document.getElementById("abc").style = "display:none"
 
 		} */
-		
-		function submit_f(view){
-			document.getElementById("is_view").value=view;//create this 
+
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
 			/* var form=document.getElementById("form_sample_2");
-		    form.setAttribute("method", "post");
+			form.setAttribute("method", "post");
 
 			form.action=("insertLibrarian");
 			var x =confirm();
 			if(x==true)
 			form.submit(); */
-			
+
 		}
-		
 	</script>
 	<script type="text/javascript">
 		$(function() {

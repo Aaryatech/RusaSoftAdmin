@@ -111,91 +111,98 @@
 										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
-													<h5 class="title pull-left">
-														<strong>Patent Details</strong>
-													</h5>
-													<div class="col-sm-12"></div>
+										<div>
 
-													<input type="hidden" id="patent_id" name="patentId"
-														value="${patent.patentId}">
+											<div class="col-sm-12"></div>
 
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="patentNo">Patent
-															File No. <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="patentNo" autocomplete="off"
-																name="patentNo" value="${patent.patentFileNo}" placeholder="Patent Number" onchange="trim(this)"
-																required>
-														</div>
-													</div>
+											<input type="hidden" id="patent_id" name="patentId"
+												value="${patent.patentId}">
 
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="parent_title">Patent
-															Title <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="parent_title" autocomplete="off"
-																name="parentTitle" placeholder="Patent Title" value="${patent.patentTitle}" onchange="trim(this)"
-																required>
-														</div>
-													</div>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="patentNo">Patent
+													File No. <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="patentNo"
+														autocomplete="off" name="patentNo"
+														value="${patent.patentFileNo}" placeholder="Patent Number"
+														onchange="trim(this)" required>
+												</div>
+											</div>
 
-													<div class="form-group">
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="parent_title">Patent
+													Title <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="parent_title"
+														autocomplete="off" name="parentTitle"
+														placeholder="Patent Title" value="${patent.patentTitle}"
+														onchange="trim(this)" required>
+												</div>
+											</div>
 
-														<label class="control-label col-sm-2" for="filling_date">Patent
-															Filing Date <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" autocomplete="off"
-																id="filling_date" name="fillingDate"
-																placeholder="Patent Filing Date" value="${patent.patentFilingDate}" required>
-														</div>
+											<div class="form-group">
 
-													</div>
-
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="guide_name">Name
-															of Co-assistant/Guide 
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="guide_name" autocomplete="off"
-																name="guideName"
-																placeholder="Name of Co-assistant/Guide" value="${patent.patentGuideName}"
-																onchange="trim(this)" >
-														</div>
-													</div>
-													<input type="hidden" id="is_view" name="is_view" value="0">
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="pub_date">Date
-															of Publication <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" autocomplete="off"
-																placeholder="Date of Publication" id="pub_date"
-																name="pubDate" value="${patent.patentPubDate}" required>
-														</div>
-
-													</div>
-
-													    	<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
-
-
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showPatentDetailsList"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+												<label class="control-label col-sm-2" for="filling_date">Patent
+													Filing Date <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control datepicker"
+														autocomplete="off" id="filling_date" name="fillingDate"
+														placeholder="Patent Filing Date"
+														value="${patent.patentFilingDate}" required>
 												</div>
 
-													<div class="clearfix"></div>
+											</div>
 
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="guide_name">Name
+													of Co-assistant/Guide </label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="guide_name"
+														autocomplete="off" name="guideName"
+														placeholder="Name of Co-assistant/Guide"
+														value="${patent.patentGuideName}" onchange="trim(this)">
+												</div>
+											</div>
+											<input type="hidden" id="is_view" name="is_view" value="0">
+											<div class="form-group">
+
+												<label class="control-label col-sm-2" for="pub_date">Date
+													of Publication <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control datepicker"
+														autocomplete="off" placeholder="Date of Publication"
+														id="pub_date" name="pubDate"
+														value="${patent.patentPubDate}" required>
 												</div>
 
-											<!-- </div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+
+
+													<button type="submit" id="sub_button"
+														class="btn btn-primary" onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+
+													<a
+														href="${pageContext.request.contextPath}/showPatentDetailsList"><button
+															type="button" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a>
+												</div>
+											</div>
+
+											<div class="clearfix"></div>
+
+										</div>
+
+										<!-- </div>
 										</div> -->
 									</form>
 								</div>
@@ -233,34 +240,33 @@
 		});
 	</script>
 	<script type="text/javascript">
-function submit_f(view){
-	//alert(view);
-		document.getElementById("is_view").value=view; 
-		
-	}
- 
-</script>
+		function submit_f(view) {
+			//alert(view);
+			document.getElementById("is_view").value = view;
 
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-          var x=confirm("Do you really want to submit the form?");
-          if(x==true){
-        wasSubmitted = true;
-          document.getElementById("svebtn").disabled=true;
-          document.getElementById("svebtnnext").disabled=true;
-        return wasSubmitted;
-          }
-      }
-      return false;
-    } 
-    function trim(el) {
-        el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-        replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-        replace(/\n +/, "\n"); // Removes spaces after newlines
-        return;
-    }
-</script>
+		}
+	</script>
+
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("svebtn").disabled = true;
+					document.getElementById("svebtnnext").disabled = true;
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+	</script>
 </body>
 </html>

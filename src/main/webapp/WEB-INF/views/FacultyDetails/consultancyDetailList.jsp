@@ -87,8 +87,8 @@
 
 								<%-- <a href="${pageContext.request.contextPath}/showConsultancyList"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
-										
-		
+
+
 
 							</div>
 
@@ -103,140 +103,127 @@
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-										<ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Consultancy
-											</a></li>
-
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="home">
-
-												<!-- <div class="form-group">
-													<label class="control-label col-sm-2" for="smallheading">
-														Consultancy <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-2">
-														Yes <input type="radio" name="consultancy"
-															onclick="setConsultancy(this.value)" id="consultancy"
-															checked value="0"> No<input
-															onclick="setConsultancy(this.value)" type="radio"
-															name="consultancy" id="consultancy" value="1">
-													</div>
-												</div> -->
-												<div id="abc">
 
 
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="nature">Nature
-															of Consultancy <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="nature"
-																placeholder="Nature of Consultancy" name="nature"
-																placeholder="" value="${editConsultancy.consNature}"
-																required>
-
-														</div>
-													</div>
-
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="sponser">Sponsoring
-															Agency/Industry <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="sponser"
-																placeholder="Sponsoring Agency/Industry" name="sponser"
-																placeholder="" value="${editConsultancy.consSponsor}"
-																required>
-															<!-- </div> -->
-														</div>
-													</div>
-
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="amount">Amount
-															of Consultancy <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="number" min="0" class="form-control" id="amount"
-																placeholder="Amount of Consultancy" name="amount"
-																placeholder="" value="${editConsultancy.consAmount}"
-																required>
-																
-<!-- 															  <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy">  
- -->																
-															<!-- </div> -->
-														</div>
-													</div>
-													<div class="form-group">
-
-														<label class="control-label col-sm-2" for="conPeriod">Consultancy
-															Period<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="number" min="0" class="form-control" id="conPeriod"
-																placeholder="Consultancy Period" name="conPeriod"
-																placeholder="" value="${editConsultancy.consPeriod}"
-																required>
-														</div>
-
-													</div>
-
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="projComp">Project
-															Completed<span class="text-danger">*</span>
-														</label>
-
-														<div class="col-sm-2">
-
-															<c:choose>
-																<c:when test="${editConsultancy.isConsCompleted==0}">
-															Yes <input type="radio" name="projComp" id="projComp"
-																		 value="1"> No<input type="radio"
-																		name="projComp" id="projComp" value="0" checked>
-																</c:when>
-																<c:otherwise>
-															Yes <input type="radio" name="projComp" id="projComp"
-																		checked value="1"> No<input type="radio"
-																		name="projComp" id="projComp" value="0">
-																</c:otherwise>
-															</c:choose>
-
-														</div>
-													</div>
-
-													<input type="hidden" id="is_view" name="is_view" value="0">
-													<c:choose>
-														<c:when test="${editConsultancy.consId>0}">
-															<input type="hidden" id="consId" name="consId"
-																value="${editConsultancy.consId}">
-														</c:when>
-														<c:otherwise>
-															<input type="hidden" id="consId" name="consId" value="0">
-														</c:otherwise>
-													</c:choose>
-													<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showConsultancyList"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+										<div id="abc">
 
-													<div class="clearfix"></div>
+
+											<div class="form-group">
+
+												<label class="control-label col-sm-2" for="nature">Nature
+													of Consultancy <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="nature"
+														placeholder="Nature of Consultancy" name="nature"
+														placeholder="" value="${editConsultancy.consNature}"
+														required>
 
 												</div>
+											</div>
 
+											<div class="form-group">
+
+												<label class="control-label col-sm-2" for="sponser">Sponsoring
+													Agency/Industry <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="sponser"
+														placeholder="Sponsoring Agency/Industry" name="sponser"
+														placeholder="" value="${editConsultancy.consSponsor}"
+														required>
+													<!-- </div> -->
+												</div>
+											</div>
+
+											<div class="form-group">
+
+												<label class="control-label col-sm-2" for="amount">Amount
+													of Consultancy <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="number" min="0" class="form-control"
+														id="amount" placeholder="Amount of Consultancy"
+														name="amount" placeholder=""
+														value="${editConsultancy.consAmount}" required>
+
+													<!-- 															  <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy">  
+ -->
+													<!-- </div> -->
+												</div>
+											</div>
+											<div class="form-group">
+
+												<label class="control-label col-sm-2" for="conPeriod">Consultancy
+													Period<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="number" min="0" class="form-control"
+														id="conPeriod" placeholder="Consultancy Period"
+														name="conPeriod" placeholder=""
+														value="${editConsultancy.consPeriod}" required>
+												</div>
 
 											</div>
+
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="projComp">Project
+													Completed<span class="text-danger">*</span>
+												</label>
+
+												<div class="col-sm-2">
+
+													<c:choose>
+														<c:when test="${editConsultancy.isConsCompleted==0}">
+															Yes <input type="radio" name="projComp" id="projComp"
+																value="1"> No<input type="radio" name="projComp"
+																id="projComp" value="0" checked>
+														</c:when>
+														<c:otherwise>
+															Yes <input type="radio" name="projComp" id="projComp"
+																checked value="1"> No<input type="radio"
+																name="projComp" id="projComp" value="0">
+														</c:otherwise>
+													</c:choose>
+
+												</div>
+											</div>
+
+											<input type="hidden" id="is_view" name="is_view" value="0">
+											<c:choose>
+												<c:when test="${editConsultancy.consId>0}">
+													<input type="hidden" id="consId" name="consId"
+														value="${editConsultancy.consId}">
+												</c:when>
+												<c:otherwise>
+													<input type="hidden" id="consId" name="consId" value="0">
+												</c:otherwise>
+											</c:choose>
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+
+
+													<button type="submit" id="sub_button"
+														class="btn btn-primary" onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+
+													<a
+														href="${pageContext.request.contextPath}/showConsultancyList"><button
+															type="button" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a>
+												</div>
+											</div>
+
+											<div class="clearfix"></div>
+
 										</div>
+
+
+
 									</form>
 								</div>
 
@@ -303,17 +290,17 @@
 
 		}
 	</script>
- <script type="text/javascript">
-        $(function () {
-		 
-            $('.datepickeryear').datepicker({
-				autoclose: true,
-				 minViewMode: 2,
-		         format: 'yyyy'
+	<script type="text/javascript">
+		$(function() {
+
+			$('.datepickeryear').datepicker({
+				autoclose : true,
+				minViewMode : 2,
+				format : 'yyyy'
 
 			});
-        });
-    </script> 
+		});
+	</script>
 	<script type="text/javascript">
 		function getData() {
 			//alert("hii");

@@ -88,7 +88,6 @@ public class PrincipalController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
-				model.addObject("addEdit", "0");
 
 				map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getStaff().getFacultyId());
@@ -97,12 +96,23 @@ public class PrincipalController {
 						Staff.class);
 
 				model.addObject("editFaculty", editFaculty);
-				model.addObject("addEdit", "1");
+				if (editFaculty == null) {
+					model.addObject("addEdit", "0");
 
-				List<Integer> deptIdList = Stream.of(editFaculty.getDeptId().split(",")).map(Integer::parseInt)
-						.collect(Collectors.toList());
+				} else {
+					model.addObject("addEdit", "1");
+				}
+				try {
 
-				model.addObject("deptIdList", deptIdList);
+					List<Integer> deptIdList = Stream.of(editFaculty.getDeptId().split(",")).map(Integer::parseInt)
+							.collect(Collectors.toList());
+
+					model.addObject("deptIdList", deptIdList);
+				}
+
+				catch (Exception e) {
+					// TODO: handle exception
+				}
 
 			}
 		} catch (Exception e) {
@@ -325,7 +335,6 @@ public class PrincipalController {
 			map.add("instId", instituteId);
 
 			staff = rest.postForObject(Constants.url + "getUserInfoByContcAndEmail", map, Staff.class);
-			System.err.println("Info Response  " + staff.toString());
 
 		} catch (Exception e) {
 			System.err.println("Exce in checkUniqueField  " + e.getMessage());
