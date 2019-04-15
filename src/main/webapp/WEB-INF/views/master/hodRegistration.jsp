@@ -139,8 +139,7 @@
 															varStatus="count2">
 															<c:choose>
 																<c:when test="${selFr==dept.deptId}">
-																	<option selected value="${dept.deptId}"><c:out
-																			value="${dept.deptName}" /></option>
+																	<option selected value="${dept.deptId}"><c:out value="${dept.deptName}" /></option>
 																	<c:set var="flag" value="1"></c:set>
 																</c:when>
 																<c:otherwise>
@@ -732,8 +731,7 @@
 			}
 			if (valid == true)
 
-				$
-						.getJSON(
+				$.getJSON(
 								'${getUserInfo}',
 								{
 									inputValue : inputValue,
@@ -752,14 +750,20 @@
 									document.getElementById("dateOfJoin").value = data.joiningDate;
 									document.getElementById("hod_id").value = data.facultyId;
 
-									document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+									//Sachin
+									
+									//single select
+									document.getElementById("designation").value=data.currentDesignationId;
 									$("#designation").trigger("chosen:updated");
-									var temp = new Array();
+									//single select
+									document.getElementById("quolif").value=data.highestQualification;
+									$("#quolif").trigger("chosen:updated");
+									//multiple select
+								 	var temp = new Array();
+								 	temp = (data.deptId).split(",");
+									  $('#dept_id').val(temp);
+									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 
-									temp = (data.deptId).split(",");
-									//alert(temp);
-									$("#dept_id").val(temp);
-									$("#dept_id").trigger("chosen:updated");
 
 								});
 		}
