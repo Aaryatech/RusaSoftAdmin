@@ -172,39 +172,7 @@
 													</div>
 												</div>
 
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="page_order">Contact
-														No <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-10">
-														<input type="text" maxlength="10" class="form-control"
-															id="contact_no" onchange="checkUnique(this.value,1)"
-															name="contact_no" placeholder="Mobile No"
-															autocomplete="off" value="${dean.contactNo}"
-															onchange="trim(this)"
-															onkeypress='return restrictAlphabets(event)'> <span
-															class="error_form text-danger" id="error_formfield2"
-															style="display: none;">Please enter dean name</span>
-														<p class="desc text-danger fontsize11">Note: OTP will
-															be sent on this mobile number for verification</p>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-2" for="page_order">Email
-														ID(Official) <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-10">
-														<input type="email" class="form-control" id="email"
-															onchange="checkUnique(this.value,2)"
-															onchange="trim(this)" name="email" autocomplete="off"
-															placeholder="abc@xyz.com" value="${dean.email}">
-														<span class="error_form text-danger" id="error_formfield3"
-															style="display: none;">Please enter email</span>
-														<p class="desc font-italic fontsize11">Note:
-															Verification mail will be sent on this Email id</p>
-													</div>
-												</div>
+												
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Qualification
@@ -306,7 +274,39 @@
 													</div>
 												</div>
 
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Contact
+														No <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" maxlength="10" class="form-control"
+															id="contact_no" onchange="checkUnique(this.value,1)"
+															name="contact_no" placeholder="Mobile No"
+															autocomplete="off" value="${dean.contactNo}"
+															onchange="trim(this)"
+															onkeypress='return restrictAlphabets(event)'> <span
+															class="error_form text-danger" id="error_formfield2"
+															style="display: none;">Please enter dean name</span>
+														<p class="desc text-danger fontsize11">Note: OTP will
+															be sent on this mobile number for verification</p>
+													</div>
+												</div>
 
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="page_order">Email
+														ID(Official) <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<input type="email" class="form-control" id="email"
+															onchange="checkUnique(this.value,2)"
+															onchange="trim(this)" name="email" autocomplete="off"
+															placeholder="abc@xyz.com" value="${dean.email}">
+														<span class="error_form text-danger" id="error_formfield3"
+															style="display: none;">Please enter email</span>
+														<p class="desc font-italic fontsize11">Note:
+															Verification mail will be sent on this Email id</p>
+													</div>
+												</div>
 												<div class="form-group" id="abc" style="display: none">
 													<label class="control-label col-sm-2" for="page_order">Relieving
 														Date <span class="text-danger">*</span>
@@ -329,8 +329,7 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="checkbox" name="isHod" value="1"
-															${dean.isHod==1 ? 'checked' : ''}> HOD
-													</div>
+															${dean.isDean==1 ? 'checked' : ''}>&nbsp;&nbsp;&nbsp;Dean</div>
 												</div>
 
 											</div>
@@ -625,24 +624,40 @@ $(function () {
 								function(data) {
 									//alert("data" + data);
 
-									//alert("Data  " +JSON.stringify(data));
+								//	alert("Data  " +JSON.stringify(data));
 
 								 
 
 										document.getElementById("email").value = data.email;
-										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("contact_no").value = data.contactNo;
 										document.getElementById("dean_name").value = data.facultyFirstName;
 										document.getElementById("join_date").value = data.joiningDate;
 										document.getElementById("dean_id").value = data.facultyId;
+										document.getElementById("acc_off_relDate").value = data.realivingDate;
 
-										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+										/* document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
 										$("#designation").trigger("chosen:updated");
 										var temp = new Array();
 
 										temp = (data.deptId).split(",");
 										//alert(temp);
 										$("#dept_id").val(temp);
-										$("#dept_id").trigger("chosen:updated");
+										$("#dept_id").trigger("chosen:updated"); */
+										
+										//Mahendra
+										//single select
+										document.getElementById("designation").value=data.currentDesignationId;
+										$("#designation").trigger("chosen:updated");
+										//single select
+										document.getElementById("quolif").value=data.highestQualification;
+										$("#quolif").trigger("chosen:updated");
+										//multiple select
+									 	var temp = new Array();
+									 	temp = (data.deptId).split(",");
+										  $('#dept_id').val(temp);
+										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
+
+
 								});
 		}
 	</script>

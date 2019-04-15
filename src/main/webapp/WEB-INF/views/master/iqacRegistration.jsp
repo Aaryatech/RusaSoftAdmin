@@ -658,6 +658,7 @@
 										document.getElementById("dateOfJoin").value = data.joiningDate;
 										document.getElementById("iqac_id").value = data.facultyId;
 										
+										/* 
 										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
 										$("#designation").trigger("chosen:updated");
 										var temp = new Array();
@@ -666,6 +667,18 @@
 										//alert(temp);
 										$("#dept_id").val(temp);
 										$("#dept_id").trigger("chosen:updated");
+ */
+ 										//Mahendra
+										document.getElementById("designation").value=data.currentDesignationId;
+										$("#designation").trigger("chosen:updated");
+										//single select
+										document.getElementById("quolif").value=data.highestQualification;
+										$("#quolif").trigger("chosen:updated");
+										//multiple select
+									 	var temp = new Array();
+									 	temp = (data.deptId).split(",");
+										  $('#dept_id').val(temp);
+										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 
 									 
 								});

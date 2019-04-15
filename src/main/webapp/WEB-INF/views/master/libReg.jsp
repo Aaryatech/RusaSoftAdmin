@@ -343,7 +343,7 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="checkbox" name="isLib" value="1">Librarian
+												<input type="checkbox" name="isLib" value="1" ${editFaculty.isLibrarian==1 ? 'checked' : ''}>Librarian
 
 											</div>
 										</div>
@@ -721,14 +721,30 @@
 									document.getElementById("dateOfJoin").value = data.joiningDate;
 									document.getElementById("acc_off_relDate").value = data.realivingDate;
 									document.getElementById("lib_id").value = data.facultyId;
-									document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+									
+									/* document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
 									$("#designation").trigger("chosen:updated");
 									var temp = new Array();
 
 									temp = (data.deptId).split(",");
 									//alert(temp);
 									$("#dept_id").val(temp);
-									$("#dept_id").trigger("chosen:updated");
+									$("#dept_id").trigger("chosen:updated"); */
+									
+									//Mahendra
+									//single select
+									document.getElementById("designation").value=data.currentDesignationId;
+									$("#designation").trigger("chosen:updated");
+									//single select
+									document.getElementById("quolif").value=data.highestQualification;
+									$("#quolif").trigger("chosen:updated");
+									//multiple select
+								 	var temp = new Array();
+								 	temp = (data.deptId).split(",");
+									  $('#dept_id').val(temp);
+									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
+
+
 
 								});
 		}

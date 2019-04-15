@@ -266,7 +266,7 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="checkbox" name="isDean" value="1">Dean
+												<input type="checkbox" name="isDean" value="1" ${editHod.isHod==1 ? 'checked' : ''}>&nbsp;&nbsp;&nbsp;HOD
 											</div>
 										</div>
 
