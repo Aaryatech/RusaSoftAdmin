@@ -87,11 +87,13 @@
 								<%-- <a
 									href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-										
-										
-	  <a title="Add"
-											href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+
+								<a title="Add"
+									href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 							</div>
 
 						</header>
@@ -126,9 +128,9 @@
 																value="${dist.distName}" /></td>
 
 
-														<td style="text-align: right"><c:out
+														<td style="text-align: center"><c:out
 																value="${dist.distApplicableFrom}" /></td>
-																
+
 														<td style="text-align: left"><c:out
 																value="${dist.distBeneficiary}" /></td>
 

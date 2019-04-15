@@ -300,97 +300,128 @@
 			return;
 		}
 
-		$(document).ready(function($) {
+		$(document)
+				.ready(
+						function($) {
 
-			$("#form_sample_2").submit(function(e) {
-				//	alert("hi");
-				var isError = false;
-				var errMsg = "";
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												//	alert("hi");
+												var isError = false;
+												var errMsg = "";
 
-				if (!$("#activityName").val()) {
+												if (!$("#activityName").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#activityName").addClass("has-error")
-					$("#error_formfield1").show()
-					//return false;
-				} else {
-					$("#error_formfield1").hide()
-				}
+													$("#activityName")
+															.addClass(
+																	"has-error")
+													$("#error_formfield1")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield1")
+															.hide()
+												}
 
-				if (!$("#fromDate").val()) {
+												if (!$("#fromDate").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#fromDate").addClass("has-error")
-					$("#error_formfield2").show()
-					//return false;
-				} else {
-					$("#error_formfield2").hide()
-				}
+													$("#fromDate").addClass(
+															"has-error")
+													$("#error_formfield2")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield2")
+															.hide()
+												}
 
-				if (!$("#toDate").val()) {
+												if (!$("#toDate").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#toDate").addClass("has-error")
-					$("#error_formfield3").show()
-					//return false;
-				} else {
-					$("#error_formfield3").hide()
-				}
-				if ($("#inst_activity_participation").val() == 0) {
+													$("#toDate").addClass(
+															"has-error")
+													$("#error_formfield3")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield3")
+															.hide()
+												}
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+												if ($("#fromDate").val() > $(
+														"#toDate").val()) {
 
-					$("#fromDate").addClass("has-error")
-					$("#error_formfield4").show()
-					//return false;
-				} else {
-					$("#error_formfield4").hide()
-				}
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-				if ($("#fromDate").val() > $("#toDate").val()) {
+													$("#toDate").addClass(
+															"has-error")
+													$("#error_formfield0")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield0")
+															.hide()
+												}
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+												if ($(
+														"#inst_activity_participation")
+														.val() == 0
+														|| !$(
+																"#inst_activity_participation")
+																.val()) {
 
-					$("#toDate").addClass("has-error")
-					$("#error_formfield0").show()
-					//return false;
-				} else {
-					$("#error_formfield0").hide()
-				}
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-				/* if(!$("#").val()){
-				 
-				isError=true;
-				errMsg += '<li>Please enter a valid name.</li>';
-				
-				$("#").addClass("has-error")
-				$("#error_formfield6").show()
-					//return false;
-				} else {
-					$("#error_formfield6").hide()
-				} */
+													$(
+															"#inst_activity_participation")
+															.addClass(
+																	"has-error")
+													$("#error_formfield4")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield4")
+															.hide()
+												}
 
-				if (!isError) {
+												/* if(!$("#").val()){
+												 
+												isError=true;
+												errMsg += '<li>Please enter a valid name.</li>';
+												
+												$("#").addClass("has-error")
+												$("#error_formfield6").show()
+													//return false;
+												} else {
+													$("#error_formfield6").hide()
+												} */
 
-					var x = confirm("Do you really want to submit the form?");
-					if (x == true) {
+												if (!isError) {
 
-						document.getElementById("sub_button").disabled = true;
-						document.getElementById("sub2").disabled = true;
-						return true;
-					}
-				}
-				return false;
-			});
-		});
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+
+														document
+																.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
 	</script>
 
 	<script type="text/javascript">

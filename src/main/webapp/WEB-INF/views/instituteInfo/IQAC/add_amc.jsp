@@ -122,12 +122,12 @@
 												Expenditure<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control"
-													onkeypress="return allowOnlyNumber(event)"
-													id="amc_expenditure" name="amc_expenditure"
-													placeholder="AMC Expenditure" autocomplete="off"
-													value="${editInst.amcExpenditure}"> <span
-													class="error_form text-danger" id="error_exp"
+												<input type="number" class="form-control" min="0"
+													onchange="return trim(this)" id="amc_expenditure"
+													onkeypress='return restrictAlphabets(event)'
+													name="amc_expenditure" placeholder="AMC Expenditure"
+													autocomplete="off" value="${editInst.amcExpenditure}">
+												<span class="error_form text-danger" id="error_exp"
 													style="display: none;">Please Enter AMC Expenditure
 												</span>
 
@@ -255,17 +255,17 @@
              				}
             			 
             			 
-            			 if(!$("#amc_expenditure").val() || !numbersOnlyNotZero($("#amc_expenditure").val())){
-            		            
-             				isError=true;
-             				
-             				$("#error_exp").show()
-             					//return fregister_useralse;
-             				} else {
-             					$("#error_exp").hide()
-             				}
-             				
-             			
+            				if($("#amc_expenditure").val()==0 || !$("#amc_expenditure").val()){
+              					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#amc_expenditure").addClass("has-error")
+                				$("#error_exp").show()
+                					//return false;
+                				} else {
+                					$("#error_exp").hide()
+                				}  
             			 if(!$("#amc_company").val()){
         					 
               				isError=true;
@@ -340,15 +340,23 @@ function checkBeforeSubmit(){
   }
   return false;
   
-  function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}
-}    
+   
 	</script>
 
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 
 
@@ -392,32 +400,6 @@ function checkBeforeSubmit(){
 			document.getElementById("is_view").value = view;
 
 		}
-	</script>
-
-
-
-	<script type="text/javascript">
-	function allowOnlyNumber(evt){
-		
-		var charCode = (evt.which) ? evt.which : event.keyCode
-	    if (charCode == 46){
-	        var inputValue = $("#floor").val();
-	        var count = (inputValue.match(/'.'/g) || []).length;
-	        
-	        if(count<1){
-	            if (inputValue.indexOf('.') < 1){
-	                return true;
-	            }
-	            return false;
-	        }else{
-	            return false;
-	        }
-	    }
-	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
-	        return false;
-	    }
-	    return true;
-	}
 	</script>
 
 </body>

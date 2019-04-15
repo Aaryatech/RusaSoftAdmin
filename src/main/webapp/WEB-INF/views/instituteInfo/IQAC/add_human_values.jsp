@@ -163,7 +163,8 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
 													autocomplete="off" min="0" name="participant"
-													placeholder="No. of Beneficiaries"
+													placeholder="No. of Beneficiaries" onchange="trim(this)"
+													onkeypress='return restrictAlphabets(event)'
 													value="${editValue.activityPcount}"> <span
 													class="error_form text-danger" id="error_participant"
 													style="display: none;">Please enter No of
@@ -260,29 +261,19 @@
 		}
 	</script>
 	<script type="text/javascript">
-	function allowOnlyNumber(evt){
-		
-		var charCode = (evt.which) ? evt.which : event.keyCode
-	    if (charCode == 46){
-	        var inputValue = $("#floor").val();
-	        var count = (inputValue.match(/'.'/g) || []).length;
-	        
-	        if(count<1){
-	            if (inputValue.indexOf('.') < 1){
-	                return true;
-	            }
-	            return false;
-	        }else{
-	            return false;
-	        }
-	    }
-	    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)){
-	        return false;
-	    }
-	    return true;
-	}
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
 	</script>
-
 
 	<script>
 		function numbersOnlyNotZero(value) {
@@ -311,18 +302,15 @@
 											function(e) {
 												var isError = false;
 												var errMsg = "";
-												
-										 	if ($("#title12").val() == -1) {
+
+												if ($("#title12").val() == -1) {
 
 													isError = true;
-													  
+
 													$("#error_year").show()
 												} else {
 													$("#error_year").hide()
-												} 
-												
-
-											 
+												}
 
 												if (!$("#fromDate").val()) {
 
@@ -336,7 +324,7 @@
 												} else {
 													$("#error_fromDate").hide()
 												}
-												
+
 												if (!$("#toDate").val()) {
 
 													isError = true;
@@ -349,9 +337,6 @@
 												} else {
 													$("#error_toDate").hide()
 												}
-
-												 
- 
 
 												if (!isError) {
 

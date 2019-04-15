@@ -392,8 +392,7 @@
 													$("#error_part").show()
 													//return false;
 												} else {
-													$("#error_formfield2")
-															.hide()
+													$("#error_part").hide()
 												}
 
 												if (!isError) {

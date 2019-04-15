@@ -107,9 +107,9 @@
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control"
-														onchange="trim(this)" id="inst_scheme_name"
-														autocomplete="off" onchange="return trim(this)"
-														name="inst_scheme_name" placeholder="Name of Scheme"
+														id="inst_scheme_name" autocomplete="off"
+														onchange="return trim(this)" name="inst_scheme_name"
+														placeholder="Name of Scheme"
 														value="${instSpprt.instSchemeName}"> <span
 														class="error_form text-danger" id="error_formfield1"
 														style="display: none;">Please enter name of
@@ -377,20 +377,7 @@
 			return;
 		}
 	</script>
-	<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-		</script>
+
 
 	<script type="text/javascript">
   var wasSubmitted = false;    
