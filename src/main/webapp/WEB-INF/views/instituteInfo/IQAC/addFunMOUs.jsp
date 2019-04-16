@@ -215,7 +215,7 @@
 															<option value="Industries">Industries</option>
 															<option value="Corporate Houses">Corporate
 																Houses</option>
-															<option selected value="7">Any other Institute
+															<option value="7">Any other Institute
 																of International/National/State Importance</option>
 														</c:otherwise>
 													</c:choose>
@@ -229,7 +229,7 @@
 										<div class="form-group" id="abc" style="display: none">
 
 											<label class="control-label col-sm-2" for="page_name">Other
-												Course </label>
+												Course<span class="text-danger">*</span> </label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="otherCourse"
 													autocomplete="off" name="otherCourse" onchange="trim(this)"
@@ -296,25 +296,25 @@
 														<c:when test="${'Students'== editInst.mouBeneficiary}">
 
 															<option selected value="Students">Students</option>
-															<option value="Staff">Staff</option>
-															<option value="Students And Staff">Students And
+															<option value="Facility">Facility</option>
+															<option value="Students And Facility">Students And
 																Staff</option>
 														</c:when>
-														<c:when test="${'Staff'==editInst.mouBeneficiary}">
+														<c:when test="${'Facility'==editInst.mouBeneficiary}">
 
 															<option value="Students">Students</option>
-															<option selected value="Staff">Staff</option>
+															<option selected value="Facility">Facility</option>
 															<option value="Students And Staff">Students And
-																Staff</option>
+																Facility</option>
 														</c:when>
 
 														<c:when
-															test="${'Students And Staff'==editInst.mouBeneficiary}">
+															test="${'Students And Facility'==editInst.mouBeneficiary}">
 
 															<option value="Students">Students</option>
-															<option value="Staff">Staff</option>
-															<option selected value="Staff">Students And
-																Staff</option>
+															<option value="Facility">Facility</option>
+															<option selected value="Facility">Students And
+																Facility</option>
 
 														</c:when>
 
@@ -339,8 +339,8 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="beneficiaryMOU">No.
-												of Beneficiary Participants <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="beneficiaryMOU">No. of Participants
+												/Beneficiary <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" min="1" class="form-control"
@@ -350,23 +350,6 @@
 													class="error_form text-danger" id="error_part"
 													style="display: none;">Please Enter No. of
 													Beneficiary Participants</span>
-
-											</div>
-										</div>
-
-
-										<div class="form-group" id="iom">
-
-											<label class="control-label col-sm-2" for="instituteOfMoU">Institute
-												of MoU <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="instituteOfMoU"
-													autocomplete="off" onchange="trim(this)"
-													name="instituteOfMoU" placeholder="Institute of MoU"
-													value="${editInst.mouInstitute}"> <span
-													class="error_form text-danger" id="error_inst"
-													style="display: none;">Please Institute of MoU</span>
 
 											</div>
 										</div>
@@ -523,21 +506,7 @@
 				} else {
 					$("#error_benfmou").hide()
 				}
-
-				var x = ${editInst.mouInstitute};
-				if(${editInst.mouInstitute==null}){
-					alert($("#instituteOfMoU").val());
-					if (!$("#instituteOfMoU").val()) {
 	
-						isError = true;
-	
-						$("#instituteOfMoU").addClass("has-error")
-						$("#error_inst").show()
-						//return false;
-					} else {
-						$("#error_inst").hide()
-					}
-				}
 
 				if (!isError) {
 					var x = confirm("Do you really want to submit the form?");
@@ -574,30 +543,19 @@
 		}
 	</script>
 
-	<!-- 	<script type="text/javascript">
-		
+	 	<script type="text/javascript">
 		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("functionalMOU").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-	
-	</script> -->
-
-	<script type="text/javascript">
-		function showForm() {
+			
+			
+			//alert("qualType");
+			var selectedValue = document.getElementById("MOU_agency").value;
+			//alert("qualType::"+selectedValue);
+			document.getElementById("abc").style.display = (selectedValue == 7) ? "inline" : "none";
+			
+			
 			//alert("hii");
 			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("MOU_agency").value
+			/* var qualType = document.getElementById("MOU_agency").value
 			//alert("qualType::"+qualType);
 
 			if (qualType == 7) {
@@ -609,25 +567,31 @@
 			} else {
 				document.getElementById("abc").style = "display:none"
 				//	document.getElementById("otherCourse").removeAttribute("required");
-				document.getElementById("iom").style = "visible";
+				
 			}
 
-		}
+ */		}
 	</script>
 	<script type="text/javascript">
 		function hideText() {
-			//alert("hii");
-			var qualType = document.getElementById("MOU_agency").value
-			//alert("x " +qualType);
-			if (qualType == 7) {
-				//alert("In If " +x);
+			
+			
+			var qualType = document.getElementById("otherCourse").value
+			alert("x " +qualType);
+			document.getElementById("abc").style.display = (qualType.length==0 || qualType=="NA") ? "none" : "inline";
+			document.getElementById("abc").style.display = (qualType == "NA") ? "none" : "";
+			
+			//document.getElementById("MOU_agency").selectedIndex = (qualType.length==0) ? 0 : '';
+				
+			
+			/* if (typeof qualType !== 'undefined' || qualType !== null) {
+				alert("In If " +x);
 				document.getElementById("abc").style = "visible";
-				document.getElementById("otherCourse").setAttribute("required",
-						"true");
-				document.getElementById("iom").style = "display:none"
+				document.getElementById("otherCourse").setAttribute("required",	"true");
+				
 			} else {
 				document.getElementById("abc").style = "display:none"
-			}
+			} */
 
 		}
 	</script>

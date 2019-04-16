@@ -190,6 +190,7 @@
 															class="form-control" onchange="showExtraField()">
 															<option value="-1">Select</option>
 															<option value="Capability Enhancement" ${stud.schemeName == 'Capability Enhancement' ? 'selected' : ''} >Capability	Enhancement</option>
+															<option value="Career Counseling" ${stud.schemeName == 'Career Counseling' ? 'selected' : ''} >Career Counseling</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" ${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''} >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
 															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)" ${stud.schemeName  == 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)' ? 'selected' : ''}>Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
 															<option value="Vocational Education Training" ${stud.schemeName  == 'Vocational Education Training' ? 'selected' : ''}>Vocational Education Training</option>

@@ -203,13 +203,13 @@
 												
 													<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">
-														Package Offered<span class="text-danger">*</span>
+														Package Offered<span class="text-danger"></span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" min="0" maxlength="50" class="form-control"
 															id="package_offered" value="${trainPlace.pakageOfferd}"
 															name="package_offered"
-															placeholder="Package Offered by Employer to Students"
+															placeholder="Package Offered by Employer to Students    (Optional)"
 															><span class="error_form text-danger" id="package_offered_field"
 															style="display: none;">Please enter package amount offered to students</span>
 													</div>
@@ -382,7 +382,7 @@
 									$("#sup_agency_name_field")
 											.hide()
 								}
-												if (!$("#package_offered").val())
+												/* if (!$("#package_offered").val())
 												{
 									isError = true;
 									$("#package_offered").addClass(
@@ -392,7 +392,7 @@
 								} else {
 									$("#package_offered_field")
 											.hide()
-								}
+								} */
 												
 												 
 												

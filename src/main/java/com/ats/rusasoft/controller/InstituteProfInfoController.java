@@ -536,19 +536,12 @@ public class InstituteProfInfoController {
 
 				System.out.println("mou_id" + mou_id);
 
-				/* String functionalMOU=null; */
-				/*
-				 * if((Integer.parseInt(request.getParameter(functionalMOU))) == 7) {
-				 * functionalMOU = request.getParameter("otherCourse"); } else {
-				 */
-
-				/* } */
 				String MOU_agency = request.getParameter("MOU_agency");
 				String c = null;
 				if (MOU_agency.equals("7")) {
 					c = request.getParameter("otherCourse");
-				} else {
-					c = request.getParameter("MOU_agency");
+				}else {
+					c = "NA";
 				}
 
 				String title = request.getParameter("title");
@@ -558,7 +551,7 @@ public class InstituteProfInfoController {
 				String beneficiaryMOU = request.getParameter("beneficiaryMOU");
 
 				String beneficiaryMOUNo = request.getParameter("beneficiaryMOUNo");
-				String instituteOfMoU = request.getParameter("instituteOfMoU");
+				String instituteOfMoU = "NA";
 
 				if (mou_id == 0) {
 
@@ -595,6 +588,7 @@ public class InstituteProfInfoController {
 					String curDate = dateFormatStr.format(new Date());
 
 					lib.setMakerDatetime(curDateTime);
+					System.out.println("Dt:"+lib.toString());
 
 					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib,
 							InstituteFunctionalMOU.class);

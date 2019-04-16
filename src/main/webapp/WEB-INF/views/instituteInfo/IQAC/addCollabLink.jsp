@@ -199,26 +199,26 @@
 														<c:when test="${'Students'== editInst.linkBeneficiary}">
 
 															<option selected value="Students">Students</option>
-															<option value="Staff">Staff</option>
-															<option value="Students And Staff">Students And
-																Staff</option>
+															<option value="Faculty">Faculty</option>
+															<option value="Students And Faculty">Students And
+																Faculty</option>
 														</c:when>
-														<c:when test="${'Staff'==editInst.linkBeneficiary}">
+														<c:when test="${'Faculty'==editInst.linkBeneficiary}">
 
 															<option value="Students">Students</option>
-															<option selected value="Staff">Staff</option>
-															<option value="Students And Staff">Students And
-																Staff</option>
+															<option selected value="Faculty">Faculty</option>
+															<option value="Students And Faculty">Students And
+																Faculty</option>
 														</c:when>
 
 														<c:when
-															test="${'Students And Staff'==editInst.linkBeneficiary}">
+															test="${'Students And Faculty'==editInst.linkBeneficiary}">
 
 
 															<option value="Students">Students</option>
-															<option value="Staff">Staff</option>
-															<option selected value="Staff">Students And
-																Staff</option>
+															<option value="Faculty">Faculty</option>
+															<option selected value="Faculty">Students And
+																Faculty</option>
 
 														</c:when>
 
@@ -226,9 +226,9 @@
 														<c:otherwise>
 
 															<option value="Students">Students</option>
-															<option value="Staff">Staff</option>
-															<option value="Students And Staff">Students And
-																Staff</option>
+															<option value="Faculty">Faculty</option>
+															<option value="Students And Faculty">Students And
+																Faculty</option>
 
 														</c:otherwise>
 

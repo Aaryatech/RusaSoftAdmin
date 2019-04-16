@@ -148,9 +148,12 @@
 														Vision<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control" onchange="trim(this)"
 															id="inst_vision_text" name="inst_vision_text"
-															placeholder="Institute Vision" autocomplete="off" required>
+															placeholder="Institute Vision" autocomplete="off" >
+															<span
+					class="error_form text-danger" id="vision_error_field"
+					style="display: none;">Please enter institute vision</span>
 													</div>
 
 													<div class="col-sm-4">
@@ -425,8 +428,32 @@
 				});
 
 			} else {
-				alert("Enter Institute Vission ");
-				 document.getElementById("inst_vision_text").value="";
+				//alert("Enter Institute Vission ");
+				 //document.getElementById("inst_vision_text").value="";
+				 var isError = false;
+				var errMsg = "";
+				 if (!$("#inst_vision_text").val()) {
+					isError = true;
+
+					$("#inst_vision_text").addClass(
+							"has-error")
+					$("#vision_error_field")
+							.show()
+				} else {
+					$("#vision_error_field")
+							.hide()
+				}
+				 
+				 if (!isError) {
+						var x = confirm("Do you really want to submit the form?");
+						if (x == true) {
+							document.getElementById("sub1").disabled = true;
+							document.getElementById("sub2").disabled = true;
+							return  true;
+						}	
+					}
+				 
+				
 			}
 
 		}

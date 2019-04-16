@@ -192,8 +192,8 @@
 														<c:when test="${editProgram.programId>0}">
 
 															<c:choose>
-																<c:when test="${editProgram.approvedBy eq 'BOS/AC'}">
-																	<option value="BOS/AC" selected>BOS/AC</option>
+																<c:when test="${editProgram.approvedBy eq 'BOS/AC/University'}">
+																	<option value="BOS/AC/University" selected>BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -203,7 +203,7 @@
 																	<option value="7">Any Other</option>
 																</c:when>
 																<c:when test="${editProgram.approvedBy eq 'Industry'}">
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry" selected>Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -213,7 +213,7 @@
 																	<option value="7">Any Other</option>
 																</c:when>
 																<c:when test="${editProgram.approvedBy eq 'AICTE'}">
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE" selected>AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -223,7 +223,7 @@
 																	<option value="7">Any Other</option>
 																</c:when>
 																<c:when test="${editProgram.approvedBy eq 'NCTE'}">
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE" selected>NCTE</option>
@@ -233,7 +233,7 @@
 																	<option value="7">Any Other</option>
 																</c:when>
 																<c:when test="${editProgram.approvedBy eq 'MCI'}">
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -243,7 +243,7 @@
 																	<option value="7">Any Other</option>
 																</c:when>
 																<c:when test="${editProgram.approvedBy eq 'DCI'}">
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -253,7 +253,7 @@
 																	<option value="7">Any Other</option>
 																</c:when>
 																<c:when test="${editProgram.approvedBy eq 'PCI'}">
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -264,7 +264,7 @@
 																</c:when>
 																<c:otherwise>
 
-																	<option value="BOS/AC">BOS/AC</option>
+																	<option value="BOS/AC/University">BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
 																	<option value="NCTE">NCTE</option>
@@ -279,7 +279,7 @@
 															</c:choose>
 														</c:when>
 														<c:otherwise>
-															<option value="BOS/AC">BOS/AC</option>
+															<option value="BOS/AC/University">BOS/AC/University</option>
 															<option value="Industry">Industry</option>
 															<option value="AICTE">AICTE</option>
 															<option value="NCTE">NCTE</option>

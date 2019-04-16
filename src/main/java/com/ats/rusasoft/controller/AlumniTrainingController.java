@@ -618,7 +618,12 @@ public class AlumniTrainingController {
 					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					trainPlace.setPakageOfferd(request.getParameter("package_offered"));
+					String packge = request.getParameter("package_offered");
+					if(packge==null) {
+					trainPlace.setPakageOfferd("NA");
+					}else {
+						trainPlace.setPakageOfferd(packge);
+					}
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));

@@ -566,7 +566,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/programDetails1");
-				model.addObject("title", " Program List");
+				model.addObject("title", " Program Details");
 
 				Info add = AccessControll.checkAccess("showProgramList", "showProgramList", "0", "1", "0", "0",
 						newModuleList);
