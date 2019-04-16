@@ -41,9 +41,6 @@
 .image-preview-input-title {
 	margin-left: 2px;
 }
-
-
-
 </style>
 
 
@@ -89,26 +86,29 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								
-										<c:if test="${addAccess==0}">
+
+								<c:if test="${addAccess==0}">
 									<%-- <a href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
 											type="button" class="btn btn-success">Add</button></a> --%>
-											
-		 <a title="Add"
-											href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>									
+
+									<a title="Add"
+										href="${pageContext.request.contextPath}/budgetAddOnLibraryBooks"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
 
 								</c:if>
 							</div>
 
 						</header>
 
-				<form action="${pageContext.request.contextPath}/deleteLibBookBudget/0"
+						<form
+							action="${pageContext.request.contextPath}/deleteLibBookBudget/0"
 							method="get" id="libListForm">
-						<div class="content-body">
-							<div class="row">
-								<div class="col-md-12">
-									
+							<div class="content-body">
+								<div class="row">
+									<div class="col-md-12">
+
 
 
 
@@ -120,38 +120,46 @@
 														type="checkbox" name="selAll" id="selAll"
 														onClick="selectedInst(this)" /> Select All</th>
 													<th width="10%">Sr No</th>
-<!-- 													
- -->												<th style="text-align: right;">Expenditures on purchase of Books</th>
-													<th style="text-align: right;">Expenditures on purchase of Journals</th>
-													<th style="text-align: right;">Expenditures on e-Journals</th>
-													<th style="text-align: right;">Expenditures on e-Resources</th>
-											<th style="text-align: center; ">Action</th>
-													
+
+
+													<th>Financial Year</th>
+													<th style="text-align: right;">Expenditures on
+														purchase of Books</th>
+													<th style="text-align: right;">Expenditures on
+														purchase of Journals</th>
+													<th style="text-align: right;">Expenditures on
+														e-Journals</th>
+													<th style="text-align: right;">Expenditures on
+														e-Resources</th>
+													<th style="text-align: center;">Action</th>
+
 												</tr>
 											</thead>
 
 
-<tbody>
-											<c:forEach items="${budgetList}" var="budget"
+											<tbody>
+												<c:forEach items="${budgetList}" var="budget"
 													varStatus="count">
 													<tr>
-													
-													<td style="text-align: center; "><input type="checkbox" class="chk"
-															name="bookIds" id="bookIds${count.index+1}"
+
+														<td style="text-align: center;"><input
+															type="checkbox" class="chk" name="bookIds"
+															id="bookIds${count.index+1}"
 															value="${budget.libraryBookBudgetId}" /></td>
-														
+
 														<td align="center">${count.index+1}</td>
+														<td style="text-align: center;">${budget.finYear}</td>
 														<td style="text-align: right;">${budget.expenditureOnBookPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnJournalsPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnEjournalsPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnEresourcesPurchase}</td>
 														<td align="center"><c:if test="${editAccess==0}">
-																<a onclick="showEditBookBudget(${budget.libraryBookBudgetId})"
+																<a
+																	onclick="showEditBookBudget(${budget.libraryBookBudgetId})"
 																	href="#"><span class="glyphicon glyphicon-edit"
 																	title="Edit" data-animate=" animated fadeIn "
 																	rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if>
-															<c:if test="${deleteAccess==0}">
+															</c:if> <c:if test="${deleteAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteLibBookBudget/${budget.libraryBookBudgetId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
@@ -162,20 +170,22 @@
 															</c:if></td>
 													</tr>
 												</c:forEach>
-											
+
 											</tbody>
 										</table>
-										
-										
+
+
 										<div class="form-group">
 
-<c:if test="${deleteAccess==0}">
-											<button class="btn btn-primary" 
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
-										
-										
+											<c:if test="${deleteAccess==0}">
+												<button class="btn btn-primary" id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+												</button>
+											</c:if>
+
+
 											<!-- <div class="col-sm-5">
 											<div class="col-sm-1">
 
@@ -192,17 +202,18 @@
 											</div> -->
 
 
-											<input type="hidden" id="libBookId" name="libBookId" value="0">
-										
+											<input type="hidden" id="libBookId" name="libBookId"
+												value="0">
+
 
 										</div>
-									
-								
-								</div>
 
+
+									</div>
+
+								</div>
 							</div>
-						</div>
-							</form>
+						</form>
 
 					</section>
 				</div>
@@ -223,7 +234,7 @@
 
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		function showEditBookBudget(libBudgetId){
 			///alert(libBudgetId);
 			document.getElementById("libBookId").value=libBudgetId;//create this 
