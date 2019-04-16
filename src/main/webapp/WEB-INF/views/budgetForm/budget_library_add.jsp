@@ -44,7 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
-<c:url value="/getBudgetDataByFinYearId"  var="getBudgetDataByFinYearId"></c:url>
+	<c:url value="/getBudgetDataByFinYearId" var="getBudgetDataByFinYearId"></c:url>
 
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -110,19 +110,18 @@
 													class="form-control" onchange="setBudget(this.value)">
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
-														<c:when test="${finYear.finYearId==budget.finYearId}">
-													<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
-														</c:when>
-														<c:otherwise>
-														<option value="${finYear.finYearId}">${finYear.finYear}</option>
-														</c:otherwise>
-													</c:choose>
+															<c:when test="${finYear.finYearId==budget.finYearId}">
+																<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:otherwise>
+														</c:choose>
 													</c:forEach>
-													
 
-												</select>
-												<span class="error_form text-danger" id="fin_year_id_field"
-															style="display: none;">Please select financial year</span>
+
+												</select> <span class="error_form text-danger" id="fin_year_id_field"
+													style="display: none;">Please select financial year</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -132,11 +131,13 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onchange="trim(this)" autocomplete="off"
-													id="lib_budget_title" name="lib_budget_title" maxlength="100"
-													placeholder="Title of Budget" value="${budget.libBudgetTitle}">
-													<span class="error_form text-danger" id="lib_budget_title_field"
-															style="display: none;">Please enter budget title</span>
+												<input type="text" class="form-control"
+													onchange="trim(this)" autocomplete="off"
+													id="lib_budget_title" name="lib_budget_title"
+													maxlength="100" placeholder="Title of Budget"
+													value="${budget.libBudgetTitle}"> <span
+													class="error_form text-danger" id="lib_budget_title_field"
+													style="display: none;">Please enter budget title</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -145,14 +146,16 @@
 												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="0" max="100000000"  onkeypress="return allowOnlyNumber(this)" onchange="trim(this)" class="form-control"
-													id="budget_allocated" name="budget_allocated" maxlength="9"
+												<input type="number" min="0" max="100000000"
+													onchange="trim(this)" autocomplete="off" maxlength="9"
+													autocomplete="off" class="form-control"
+													id="budget_allocated" name="budget_allocated"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Allocated Amount in Rupees"
-													value="${budget.budgetAllocated}">
-													
-													<span class="error_form text-danger" id="budget_allocated_field"
-															style="display: none;">Please enter allocated budget amount</span>
-													
+													value="${budget.budgetAllocated}"> <span
+													class="error_form text-danger" id="budget_allocated_field"
+													style="display: none;">Please enter allocated budget
+													amount</span>
 											</div>
 										</div>
 
@@ -162,31 +165,41 @@
 												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="0"  max="100000000" class="form-control" id="budget_utilized" maxlength="9"
-													name="budget_utilized" onchange="trim(this)"  onkeypress="return allowOnlyNumber(this)"
+												<input type="number" min="0" max="100000000"
+													class="form-control" id="budget_utilized" maxlength="9"
+													name="budget_utilized" onchange="trim(this)"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Utilized Amount in Rupees"
-													value="${budget.budgetUtilized}">
-													<span class="error_form text-danger" id="budget_utilized_field"
-															style="display: none;">Please enter utilized budget amount</span>
-															<span class="error_form text-danger" id="budget_utilized_field2"
-															style="display: none;">Please enter budget utilized  amount less than or equal to allocated amount</span>
+													value="${budget.budgetUtilized}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="budget_utilized_field2" style="display: none;">Please
+													enter budget utilized amount less than or equal to
+													allocated amount</span>
 											</div>
 										</div>
-	<input type="hidden" id="is_view" name="is_view" value="0">
-												<input type="hidden" id="libBudgetId" name="libBudgetId" value="${budget.libBudgetId}">
-										
-										
-										
-											<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+										<input type="hidden" id="is_view" name="is_view" value="0">
+										<input type="hidden" id="libBudgetId" name="libBudgetId"
+											value="${budget.libBudgetId}">
 
 
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
+
+
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/budgetOnLibrary"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 										<div class="clearfix"></div>
 
@@ -214,9 +227,9 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
-		<script>
+
+
+	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -275,9 +288,10 @@
 
 
 												if (!$("#budget_allocated").val()
-														|| !validateNo($(
+														|| !validateZeroNo($(
 																"#budget_allocated")
 																.val())) {
+													
 													isError = true;
 													$("#budget_allocated")
 															.addClass(
@@ -288,7 +302,6 @@
 													$("#budget_allocated_field")
 															.hide()
 												}
-
 												
 												if (!$("#budget_utilized").val()
 														|| !validateZeroNo($(
@@ -330,7 +343,7 @@
 											});
 						});
 	</script>
-	
+
 
 	<script type="text/javascript">
 	var wasSubmitted = false;
@@ -439,6 +452,21 @@
 		 }
 	</script>
 
+
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 
 

@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a
+								<%-- 	<a
 									href="${pageContext.request.contextPath}/budgetOnAcadamicSupportFacilities"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
@@ -98,7 +98,13 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertAcademicBudget"
-										method="post" name="formidhere" id="formidhere">
+										method="post" name="form_sample_2" id="form_sample_2">
+
+										<input type="hidden" id="academicBudgetId"
+											name="academicBudgetId"
+											value="${editBudget.academicBudgetId}"> <input
+											type="hidden" id="is_view" name="is_view" value="0">
+
 
 
 										<div class="form-group">
@@ -109,7 +115,6 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													onchange="setBudget(this.value)" class="form-control">
-													<option value="-1">Select</option>
 
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
@@ -145,53 +150,61 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget
-												Allocated Amount <span class="text-danger">*</span>
+												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control"
+												<input type="number" min="0" max="100000000"
+													onchange="trim(this)" autocomplete="off" maxlength="9"
+													autocomplete="off" class="form-control"
 													id="budget_allocated" name="budget_allocated"
-													autocomplete="off" min="0"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Allocated Amount in Rupees"
-													value="${editBudget.budgetUtilized}"> <span
-													class="error_form text-danger" id="error_budget_allocated"
-													style="display: none;">Please enter Budget Allocated
-													Amount </span>
+													value="${editBudget.budgetAllocated}"> <span
+													class="error_form text-danger" id="budget_allocated_field"
+													style="display: none;">Please enter allocated budget
+													amount</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized Amount<span class="text-danger">*</span>
+												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
-													id="budget_utilized" name="budget_utilized"
-													autocomplete="off" min="0"
+													id="budget_utilized" onchange="trim(this)"
+													name="budget_utilized" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Utilized Amount in Rupees"
-													value="${editBudget.budgetAllocated}"> <span
-													class="error_form text-danger" id="error_budget_utilized"
-													style="display: none;">Please enter Budget Utilized
-													Amount </span>
+													value="${editBudget.budgetUtilized}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="budget_utilized_field2" style="display: none;">Please
+													enter budget utilized amount less than or equal to
+													allocated amount</span>
 											</div>
 										</div>
-										<input type="hidden" id="academicBudgetId"
-											name="academicBudgetId"
-											value="${editBudget.academicBudgetId}"> <input
-											type="hidden" id="is_view" name="is_view" value="0">
-											
-											
+
+
 										<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/budgetOnAcadamicSupportFacilities"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
 
+												<a
+													href="${pageContext.request.contextPath}/budgetOnAcadamicSupportFacilities"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 
 
@@ -330,87 +343,132 @@
 			 
 		 }
 	</script>
-
-
 	<script>
-	   
-            	$(document).ready(function($){
-            	 
-            		$("#formidhere").submit(function(e) {
-            			 var isError=false;
-            			 var errMsg="";
-            			 
-            			 if ($("#fin_year_id").val() == -1) {
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
 
-								isError = true;
-								errMsg += '<li>Please Select Finacial Year</li>';
-								errMsg_alert += 'Please Select Finacial Year \n';
-								$("#error_year").show()
-								//return fregister_useralse;
-							} else {
-								$("#error_year").hide()
-							}
-            				
-           
-            				if(!$("#infra_budget_title").val()){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter title.</li>';
-            				
-            				$("#infra_budget_title").addClass("has-error")
-            				$("#error_infra_budget_title").show()
-            					 
-            				} else {
-            					$("#error_infra_budget_title").hide()
-            				}
-            				
-            				
-            				if(!$("#budget_allocated").val() || !numbersOnlyNotZero($("#budget_allocated").val())){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid Budget Allocated.</li>';
-            				
-            				$("#budget_allocated").addClass("has-error")
-            				$("#error_budget_allocated").show()
-            					 
-            				} else {
-            					$("#error_budget_allocated").hide()
-            				}
-            				
-            				 
-            				
-            				
-            				if(!$("#budget_utilized").val() || !numbersOnlyNotZero($("#budget_utilized").val())){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter Budget Utilized Amount.</li>';
-            				
-            				$("#budget_utilized").addClass("has-error")
-            				$("#error_budget_utilized").show()
-            					 
-            				} else {
-            					$("#error_budget_utilized").hide()
-            				}
-            				
-            				
-            				 
-             
-            				if(!isError) {
-            					
-            					var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									document.getElementById("sub_button").disabled = true;
-									document.getElementById("sub_button_next").disabled = true;
-									return  true;
-								
-								}
-            					 		  
-            					   } 
-            					   return false;
-            				} );
-            	});
-		  
-        </script>
+		function validateZeroNo(mobile) {
+			var mob = /^[0-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if (!$("#fin_year_id").val()) {
+													isError = true;
+
+													$("#fin_year_id").addClass(
+															"has-error")
+													$("#fin_year_id_field")
+															.show()
+												} else {
+													$("#fin_year_id_field")
+															.hide()
+												}
+
+												if (!$("#infra_budget_title")
+														.val()) {
+													isError = true;
+
+													$("#infra_budget_title")
+															.addClass(
+																	"has-error")
+													$(
+															"#error_infra_budget_title")
+															.show()
+												} else {
+													$(
+															"#error_infra_budget_title")
+															.hide()
+												}
+
+												if (!$("#budget_allocated")
+														.val()
+														|| !validateZeroNo($(
+																"#budget_allocated")
+																.val())) {
+
+													isError = true;
+													$("#budget_allocated")
+															.addClass(
+																	"has-error")
+													$("#budget_allocated_field")
+															.show()
+												} else {
+													$("#budget_allocated_field")
+															.hide()
+												}
+
+												if (!$("#budget_utilized")
+														.val()
+														|| !validateZeroNo($(
+																"#budget_utilized")
+																.val())) {
+
+													isError = true;
+													$("#budget_utilized")
+															.addClass(
+																	"has-error")
+													$("#budget_utilized_field")
+															.show()
+												} else {
+													$("#budget_utilized_field")
+															.hide()
+												}
+												if (parseInt($(
+														"#budget_utilized")
+														.val()) > parseInt($(
+														"#budget_allocated")
+														.val())) {
+													isError = true;
+													$("#budget_utilized")
+															.addClass(
+																	"has-error")
+													$("#budget_utilized_field2")
+															.show()
+												} else {
+													$("#budget_utilized_field2")
+															.hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+
+														return true;
+													}
+												}
+												return false;
+											});
+						});
+	</script>
+
 	<script type="text/javascript">
 	 
 	 function numbersOnlyNotZero(value) {
@@ -427,6 +485,20 @@
 	        }
 	        return true;
 	    }
+	</script>
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
 	</script>
 
 

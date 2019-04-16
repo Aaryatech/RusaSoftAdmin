@@ -45,7 +45,7 @@
 <!-- BEGIN BODY -->
 <body class=" ">
 
-<c:url value="/getBudgetDataByFinYearId"  var="getBudgetDataByFinYearId"></c:url>
+	<c:url value="/getBudgetDataByFinYearId" var="getBudgetDataByFinYearId"></c:url>
 
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -121,54 +121,67 @@
 														</c:choose>
 													</c:forEach>
 
-												</select>
-												<span class="error_form text-danger" id="fin_year_id_field"
-															style="display: none;">Please select financial year</span>
+												</select> <span class="error_form text-danger" id="fin_year_id_field"
+													style="display: none;">Please select financial year</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="allocatedAmt">
-												Budget Allocated<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="allocatedAmt">Budget
+												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number"  min="0" max="100000000" maxlength="9" class="form-control"
-													onkeypress="return allowOnlyNumber(this)" 
+												<input type="number" min="0" max="100000000"
+													onchange="trim(this)" autocomplete="off" maxlength="9"
+													autocomplete="off" class="form-control"
 													id="budget_allocated" name="budget_allocated"
-													placeholder="Total Budget Allocated Amount in Rupees"
-													value="${budget.budgetAllocated}" autocomplete="off"
-													><span class="error_form text-danger" id="budget_allocated_field"
-															style="display: none;">Please enter allocated budget amount</span>
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Budget Allocated Amount in Rupees"
+													value="${budget.budgetAllocated}"> <span
+													class="error_form text-danger" id="budget_allocated_field"
+													style="display: none;">Please enter allocated budget
+													amount</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="utilizedAmt">
-												Budget Utilized<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="utilizedAmt">Budget
+												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number"  min="0" max="100000000"  class="form-control" maxlength="9"
-													id="budget_utilized" name="budget_utilized"
-													onkeypress="return allowOnlyNumber(this)"
-													placeholder="Total Budget Utilized Amount in Rupees"
-													value="${budget.budgetUtilized}" autocomplete="off"
-													><span class="error_form text-danger" id="budget_utilized_field"
-															style="display: none;">Please enter utilized budget amount</span>
-															<span class="error_form text-danger" id="budget_utilized_field2"
-															style="display: none;">Please enter budget utilized  amount less than or equal to allocated amount</span>
+												<input type="number" class="form-control"
+													id="budget_utilized" onchange="trim(this)"
+													name="budget_utilized" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Budget Utilized Amount in Rupees"
+													value="${budget.budgetUtilized}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="budget_utilized_field2" style="display: none;">Please
+													enter budget utilized amount less than or equal to
+													allocated amount</span>
 											</div>
 										</div>
+
+
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-												<a href="${pageContext.request.contextPath}/budgetOnGreenInitiativesAndWasteMngmnt"><button id="sub2"
-												type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-												<input type="hidden" id="is_view" name="is_view" value="0">
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/budgetOnGreenInitiativesAndWasteMngmnt"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
 												<input type="hidden" id="wasteMngtBudgetId"
 													name="wasteMngtBudgetId"
 													value="${budget.wasteMngtBudgetId}">
@@ -200,7 +213,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -249,7 +262,7 @@
 												
 												
 												if (!$("#budget_allocated").val()
-														|| !validateNo($(
+														|| !validateZeroNo($(
 																"#budget_allocated")
 																.val())) {
 													isError = true;

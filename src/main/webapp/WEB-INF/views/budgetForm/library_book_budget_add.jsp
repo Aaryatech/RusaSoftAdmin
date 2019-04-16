@@ -85,7 +85,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
@@ -97,8 +97,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibBookBudget"
-										method="post" name="form_sample_2" id="form_sample_2"
-									>
+										method="post" name="form_sample_2" id="form_sample_2">
 
 
 										<div class="form-group">
@@ -108,9 +107,8 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
-													class="form-control" onchange="setBudget(this.value)"
-													>
-													<option value="-1">Select</option>
+													class="form-control" onchange="setBudget(this.value)">
+
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
 															<c:when test="${finYear.finYearId==budget.finYearId}">
@@ -121,9 +119,9 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
-												</select>
-					<span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Year</span>
-												
+												</select> <span class="error_form text-danger" id="error_year"
+													style="display: none;">Please Select Year</span>
+
 											</div>
 										</div>
 
@@ -131,18 +129,21 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2"
-												for="infra_budget_title">Expenditures on purchase of Books
-												 <span class="text-danger">*</span>
+												for="infra_budget_title">Expenditures on purchase of
+												Books <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" 
-													id="expenditure_on_book_purchase" autocomplete="off"
+												<input type="number" class="form-control" min="0"
+													onchange="trim(this)" id="expenditure_on_book_purchase"
+													autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
 													name="expenditure_on_book_purchase"
 													value="${budget.expenditureOnBookPurchase}"
-												
-													placeholder="Expenditures on purchase of Books" >
-		<span class="error_form text-danger" id="error_pbook" style="display:none;" >Please Enter Expenditures on purchase of Books</span>
-							
+													placeholder="Expenditures on purchase of Books"> <span
+													class="error_form text-danger" id="error_pbook"
+													style="display: none;">Please Enter Expenditures on
+													purchase of Books</span>
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -152,13 +153,16 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" 
-													id="expenditure_on_journals_purchase" autocomplete="off"
+												<input type="number" class="form-control" min="0"
+													onchange="trim(this)" id="expenditure_on_journals_purchase"
+													autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
 													name="expenditure_on_journals_purchase"
-													
 													placeholder="Expenditures on purchase of Journals"
-													value="${budget.expenditureOnJournalsPurchase}" >
-	<span class="error_form text-danger" id="error_pjournal" style="display:none;" >Please Enter Expenditures on purchase of Journals</span>
+													value="${budget.expenditureOnJournalsPurchase}"> <span
+													class="error_form text-danger" id="error_pjournal"
+													style="display: none;">Please Enter Expenditures on
+													purchase of Journals</span>
 											</div>
 										</div>
 
@@ -168,13 +172,16 @@
 												Expenditures on e-Journals<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" 
+												<input type="number" class="form-control" min="0"
+													onchange="trim(this)"
 													id="expenditure_on_ejournals_purchase" autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
 													name="expenditure_on_ejournals_purchase"
 													placeholder="Expenditures on e-Journals"
-												
-													value="${budget.expenditureOnEjournalsPurchase}" >
-	<span class="error_form text-danger" id="error_ejournal" style="display:none;" >Please Enter Expenditures on e-Journals</span>
+													value="${budget.expenditureOnEjournalsPurchase}"> <span
+													class="error_form text-danger" id="error_ejournal"
+													style="display: none;">Please Enter Expenditures on
+													e-Journals</span>
 
 											</div>
 										</div>
@@ -186,29 +193,39 @@
 												Expenditures on e-Resources<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" 
+												<input type="number" class="form-control" min="0"
+													onchange="trim(this)"
 													id="expenditure_on_eresources_purchase"
 													name="expenditure_on_eresources_purchase"
 													autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Expenditures on e-Resources"
-													value="${budget.expenditureOnEresourcesPurchase}" >
-<span class="error_form text-danger" id="error_eresources" style="display:none;" >Please Enter Expenditures on e-Resources</span>
+													value="${budget.expenditureOnEresourcesPurchase}">
+												<span class="error_form text-danger" id="error_eresources"
+													style="display: none;">Please Enter Expenditures on
+													e-Resources</span>
 
 											</div>
 										</div>
-												<input type="hidden" id="budget_id" name="budget_id">
+										<input type="hidden" id="budget_id" name="budget_id">
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
-											<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/budgetOnLibraryBooks"><button
+														type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 
 
@@ -241,8 +258,8 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
+
+
 	<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -264,13 +281,19 @@
                  }
                  return true;
              }
-
+             function validateZeroNo(mobile) {
+     			var mob = /^[0-9]{1}[0-9]{0,9}$/;
+     			if (mob.test($.trim(mobile)) == false) {
+     				return false;
+     			}
+     			return true;
+     		}
 
 
              
             
             	$(document).ready(function($){
-          //  alert("hii....");
+          		//  alert("hii....");
             		$("#form_sample_2").submit(function(e) {
             			 var isError=false;
             			 var errMsg="";
@@ -285,49 +308,86 @@
                 					$("#error_year").hide()
                 				}
             				
+            				
+            				if (!$("#expenditure_on_book_purchase").val()
+									|| !validateZeroNo($(
+											"#expenditure_on_book_purchase")
+											.val())) {
+								
+								isError = true;
+								$("#expenditure_on_book_purchase")
+										.addClass(
+												"has-error")
+									$("#error_pbook")
+										.show()
+							} else {
+								$("#error_pbook")
+										.hide()
+							}
+            				
+            				
+            				if (!$("#expenditure_on_journals_purchase").val()
+									|| !validateZeroNo($(
+											"#expenditure_on_journals_purchase")
+											.val())) {
+								
+								isError = true;
+								$("#expenditure_on_journals_purchase")
+										.addClass(
+												"has-error")
+									$("#error_pjournal")
+										.show()
+							} else {
+								$("#error_pjournal")
+										.hide()
+							}
+            				
+            				
+            				if (!$("#expenditure_on_ejournals_purchase").val()
+									|| !validateZeroNo($(
+											"#expenditure_on_ejournals_purchase")
+											.val())) {
+								
+								isError = true;
+								$("#expenditure_on_ejournals_purchase")
+										.addClass(
+												"has-error")
+									$("#error_ejournal")
+										.show()
+							} else {
+								$("#error_ejournal")
+										.hide()
+							}
+            				
+            				
+            				if (!$("#expenditure_on_eresources_purchase").val()
+									|| !validateZeroNo($(
+											"#expenditure_on_eresources_purchase")
+											.val())) {
+								
+								isError = true;
+								$("#expenditure_on_eresources_purchase")
+										.addClass(
+												"has-error")
+									$("#error_eresources")
+										.show()
+							} else {
+								$("#error_eresources")
+										.hide()
+							}
 
-            				if(!$("#expenditure_on_book_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_book_purchase").val())){
-            
-             				
-            				$("#error_pbook").show()
-            					//return fregister_useralse;
-            				} else {
-            					$("#error_pbook").hide()
-            				}
+
             				
-            				if(!$("#expenditure_on_journals_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_journals_purchase").val())){
-            		            
-                 				
-                				$("#error_pjournal").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_pjournal").hide()
-                				}
-            				if(!$("#expenditure_on_ejournals_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_ejournals_purchase").val())){
-            		            
-                 				
-                				$("#error_ejournal").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_ejournal").hide()
-                				}
-            				if(!$("#expenditure_on_eresources_purchase").val() || !numbersOnlyNotZero($("#expenditure_on_eresources_purchase").val())){
-            		            
-                				isError=true;
-                				
-                				$("#error_eresources").show()
-                					//return fregister_useralse;
-                				} else {
-                					$("#error_eresources").hide()
-                				}
-            				
+
+            			  
+            				 
 
 							if (!isError) {
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									return  true;
 									 document.getElementById("sub1").disabled=true;
-           						  document.getElementById("sub2").disabled=true;
+           						 	  
 								}
 							}
             
@@ -342,31 +402,7 @@
           
         </script>
 
-	<script type="text/javascript">
-	var wasSubmitted = false;
-	function checkBeforeSubmit() {
-		if (!wasSubmitted) {
-			var x = confirm("
-													Do you really want to submit the form?");
-			if (x==
-													true) {
-				wasSubmitted=true;
-													document.getElementById("sub1").disabled=true;
-													document.getElementById("sub2").disabled=true; return
-													wasSubmitted;
-			}
-		}
-		return false;
-	}
 
-		function
-													trim(el) {
-			el.value=el.value.replace(/(^\s*)|(\s*$)/gi,
-													""). // removes leading and trailing spaces
-													replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with
-													one space replace(/\n +/, "\n"); // Removes spaces afternewlinesreturn;
-		}
-	</script>
 
 	<script type="text/javascript">
 		function submit_f(view) {
@@ -451,5 +487,21 @@
 			 
 		 }
 	</script>
+
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
 </body>
 </html>

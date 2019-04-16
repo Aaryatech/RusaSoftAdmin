@@ -10,9 +10,9 @@ public class Names {
 	public static String budget_library_add = "Add Budget on Library Facility";
 	public static String budget_library_list = "Budget on Library Facility List";
 
-	public static String budget_physical_list = "Budget on Library Physical Facility List";
-	public static String budget_physical_add = "Add Budget on Library Physical Facility";
-	public static String budget_physical_edit = "Edit Budget on Library Physical Facility";
+	public static String budget_physical_list = "Budget on Physical Facility List";
+	public static String budget_physical_add = "Add Budget on Physical Facility";
+	public static String budget_physical_edit = "Edit Budget on Physical Facility";
 
 	public static String budget_academic_facilities_list = "Budget on Academic Support Facilities List";
 	public static String budget_academic_facilities_add = "Add Budget on Academic Support Facilities";

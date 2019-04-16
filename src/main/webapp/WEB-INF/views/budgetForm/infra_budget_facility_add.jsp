@@ -45,7 +45,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
-<c:url value="/getBudgetDataByFinYearId"  var="getBudgetDataByFinYearId"></c:url>
+	<c:url value="/getBudgetDataByFinYearId" var="getBudgetDataByFinYearId"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -84,7 +84,7 @@
 
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
-<%-- 
+							<%-- 
 							<div class="actions panel_actions pull-right">
 								<a
 									href="${pageContext.request.contextPath}/budgetInfrastructureFacility"><button
@@ -100,7 +100,7 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInfraBudget"
 										method="post" name="form_sample_2" id="form_sample_2">
-										
+
 
 										<div class="form-group">
 
@@ -110,21 +110,20 @@
 											<div class="col-sm-6">
 												<select id="fin_year_id" name="fin_year_id"
 													class="form-control" onchange="setBudget(this.value)">
-												
+
 													<c:forEach items="${finYearList}" var="finYear">
 														<c:choose>
-														<c:when test="${finYear.finYearId==budget.finYearId}">
-													<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
-														</c:when>
-														<c:otherwise>
-														<option value="${finYear.finYearId}">${finYear.finYear}</option>
-														</c:otherwise>
-													</c:choose>
+															<c:when test="${finYear.finYearId==budget.finYearId}">
+																<option selected value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${finYear.finYearId}">${finYear.finYear}</option>
+															</c:otherwise>
+														</c:choose>
 													</c:forEach>
 
-												</select>
-												<span class="error_form text-danger" id="fin_year_id_field"
-															style="display: none;">Please select financial year</span>
+												</select> <span class="error_form text-danger" id="fin_year_id_field"
+													style="display: none;">Please select financial year</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -134,11 +133,14 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onchange="trim(this)" maxlength="100" autocomplete="off"
-													id="infra_budget_title" name="infra_budget_title" value="${budget.infraBudgetTitle}"
-													placeholder="Title of Infrastructure Budget">
-													<span class="error_form text-danger" id="infra_budget_title_field"
-															style="display: none;">Please enter budget title</span>
+												<input type="text" class="form-control"
+													onchange="trim(this)" maxlength="100" autocomplete="off"
+													id="infra_budget_title" name="infra_budget_title"
+													value="${budget.infraBudgetTitle}"
+													placeholder="Title of Infrastructure Budget"> <span
+													class="error_form text-danger"
+													id="infra_budget_title_field" style="display: none;">Please
+													enter budget title</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -147,12 +149,16 @@
 												Allocated<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number"  min="0" max="100000000" autocomplete="off" maxlength="9" autocomplete="off"  onkeypress="return allowOnlyNumber(this)" class="form-control"
-													id="budget_allocated"  name="budget_allocated"
+												<input type="number" min="0" max="100000000"
+													onchange="trim(this)" autocomplete="off" maxlength="9"
+													autocomplete="off" class="form-control"
+													id="budget_allocated" name="budget_allocated"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Allocated Amount in Rupees"
-													value="${budget.budgetAllocated}">
-													<span class="error_form text-danger" id="budget_allocated_field"
-															style="display: none;">Please enter allocated budget amount</span>
+													value="${budget.budgetAllocated}"> <span
+													class="error_form text-danger" id="budget_allocated_field"
+													style="display: none;">Please enter allocated budget
+													amount</span>
 											</div>
 										</div>
 
@@ -162,25 +168,36 @@
 												Utilized<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" id="budget_utilized" onchange="trim(this)"
-													name="budget_utilized" min="0" max="100000000" autocomplete="off" maxlength="9" onkeypress="return allowOnlyNumber(this)"
+												<input type="number" class="form-control"
+													id="budget_utilized" onchange="trim(this)"
+													name="budget_utilized" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Utilized Amount in Rupees"
-													value="${budget.budgetUtilized}">
-													<span class="error_form text-danger" id="budget_utilized_field"
-															style="display: none;">Please enter utilized budget amount</span>
-															<span class="error_form text-danger" id="budget_utilized_field2"
-															style="display: none;">Please enter budget utilized  amount less than or equal to allocated amount</span>
+													value="${budget.budgetUtilized}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="budget_utilized_field2" style="display: none;">Please
+													enter budget utilized amount less than or equal to
+													allocated amount</span>
 											</div>
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-											<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-											<a href="${pageContext.request.contextPath}/budgetInfrastructureFacility"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-												
-												<input type="hidden" id="is_view" name="is_view" value="0">
-												<input type="hidden" id="infraBudgetId" name="infraBudgetId" value="${budget.infraBudgetId}">
-												
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+												<a
+													href="${pageContext.request.contextPath}/budgetInfrastructureFacility"><button
+														type="button" id="sub2" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" id="infraBudgetId" name="infraBudgetId"
+													value="${budget.infraBudgetId}">
+
 											</div>
 										</div>
 
@@ -276,10 +293,14 @@
 												
 
 
+												 
+												
+												
 												if (!$("#budget_allocated").val()
-														|| !validateNo($(
+														|| !validateZeroNo($(
 																"#budget_allocated")
 																.val())) {
+													
 													isError = true;
 													$("#budget_allocated")
 															.addClass(
@@ -378,8 +399,8 @@
 			});
 		});
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
 	function allowOnlyNumber(evt){
 		
@@ -444,6 +465,24 @@
 		 
 	 }
 	</script>
+
+
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
+
 
 
 
