@@ -119,7 +119,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="amc_expenditure">AMC
-												Expenditure<span class="text-danger">*</span>
+												Expenditure (Rs.)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" min="0"

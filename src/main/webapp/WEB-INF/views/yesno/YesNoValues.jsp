@@ -71,8 +71,8 @@ table, th, td {
 								<c:if test="${isAdd==1}">
 									<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
 											type="button" class="btn btn-info">Add</button></a>
-											
-											
+
+
 								</c:if>
 
 
@@ -270,7 +270,9 @@ table, th, td {
 														<td><strong>Others</strong></td>
 														<td></td>
 														<td><a data-toggle="modal" href="#myModal">
-																<button type="button" class="btn btn-info"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>Add</button>
+																<button type="button" class="btn btn-info">
+																	<i class="${sessionScope.addIcon}" aria-hidden="true"></i>Add
+																</button>
 														</a></td>
 														<td></td>
 													</tr>
@@ -284,15 +286,20 @@ table, th, td {
 															<tr class="act_tr">
 																<td>&nbsp;&nbsp;&nbsp;&nbsp;${instituteYesNoList.yesnoDynamicTitle}</td>
 																<td></td>
-																<td><input type="radio" id="dynamicprevyesno${instituteYesNoList.instYesnoId}"
-																	name="dynamicprevyesno${instituteYesNoList.instYesnoId}" value="1"
-																	onchange="otherpreviousvissibledive(${instituteYesNoList.instYesnoId},1)" checked>
-																	YES <input type="radio" id="dynamicprevyesno${instituteYesNoList.instYesnoId}"
-																	name="dynamicprevyesno${instituteYesNoList.instYesnoId}" value="0"
+																<td><input type="radio"
+																	id="dynamicprevyesno${instituteYesNoList.instYesnoId}"
+																	name="dynamicprevyesno${instituteYesNoList.instYesnoId}"
+																	value="1"
+																	onchange="otherpreviousvissibledive(${instituteYesNoList.instYesnoId},1)"
+																	checked> YES <input type="radio"
+																	id="dynamicprevyesno${instituteYesNoList.instYesnoId}"
+																	name="dynamicprevyesno${instituteYesNoList.instYesnoId}"
+																	value="0"
 																	onchange="otherpreviousvissibledive(${instituteYesNoList.instYesnoId},0)">
 																	NO</td>
 
-																<td><div id="otherprevresps${instituteYesNoList.instYesnoId}">
+																<td><div
+																		id="otherprevresps${instituteYesNoList.instYesnoId}">
 																		<div class="col-sm-3">Enter Value</div>
 																		<div class="col-sm-5">
 																			<input type="text" maxlength="50"
@@ -301,7 +308,7 @@ table, th, td {
 																				name="dynamicprevyesnovalue${instituteYesNoList.instYesnoId}"
 																				placeholder="Enter value"
 																				value="${instituteYesNoList.instYesnoResponse}">
-														 				</div>
+																		</div>
 																	</div></td>
 															</tr>
 
@@ -315,8 +322,7 @@ table, th, td {
 											</table>
 										</div>
 
-										<input type="hidden" id="srindex" name="srindex"
-											value="0">
+										<input type="hidden" id="srindex" name="srindex" value="0">
 										<!-- </div>
 
 
@@ -325,9 +331,11 @@ table, th, td {
 										<div class="form-group">
 											<div class="col-sm-offset-6 col-sm-6">
 												<!-- <input type="submit" class="btn btn-primary" value="Submit"> -->
-												
-												<button type="submit" id="sub_button" class="btn btn-primary"
-													><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+												<button type="submit" id="sub_button"
+													class="btn btn-primary">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
 												<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
 											</div>
 										</div>

@@ -62,6 +62,7 @@ public class BudgetController {
 				model = new ModelAndView("budgetForm/library_book_budget_list");
 
 				model.addObject("title", Names.library_book_budget_list);
+				model.addObject("budRupees", Names.Rupees);
 
 				Info addAccess = AccessControll.checkAccess("budgetOnLibraryBooks", "budgetOnLibraryBooks", "0", "1",
 						"0", "0", newModuleList);
@@ -131,7 +132,7 @@ public class BudgetController {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 				model.addObject("title", Names.library_book_budget_add);
-
+				model.addObject("budRupees", Names.Rupees);
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
 						FinancialYear[].class);
 				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
@@ -184,7 +185,7 @@ public class BudgetController {
 				model = new ModelAndView("budgetForm/library_book_budget_add");
 
 				model.addObject("title", Names.lib_budget_edit);
-
+				model.addObject("budRupees", Names.Rupees);
 				int libBookBudgetId = Integer.parseInt(request.getParameter("libBookId"));
 
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
@@ -216,18 +217,17 @@ public class BudgetController {
 
 	}
 
-	
-
 	@RequestMapping(value = "/deleteLibBookBudget/{bookBudgetId}", method = RequestMethod.GET)
-	public String deleteStudents(HttpServletRequest request, HttpServletResponse response, @PathVariable int bookBudgetId) {
+	public String deleteStudents(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int bookBudgetId) {
 
 		HttpSession session = request.getSession();
 		String a = null;
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteLibBookBudget/{libBookBudgetId}", "budgetOnLibraryBooks", "0", "0", "0", "1",
-				newModuleList);
+		Info view = AccessControll.checkAccess("deleteLibBookBudget/{libBookBudgetId}", "budgetOnLibraryBooks", "0",
+				"0", "0", "1", newModuleList);
 		try {
 			if (view.isError() == true) {
 
@@ -236,8 +236,7 @@ public class BudgetController {
 			}
 
 			else {
-				
-				
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				if (bookBudgetId == 0) {
 
@@ -251,7 +250,7 @@ public class BudgetController {
 						sb = sb.append(bookIds[i] + ",");
 
 					}
-				
+
 					String bookIdList = sb.toString();
 					bookIdList = bookIdList.substring(0, bookIdList.length() - 1);
 					System.out.println("stud id list" + bookIdList);
@@ -259,13 +258,13 @@ public class BudgetController {
 					map.add("libBookBudgetIdList", bookIdList);
 				} else {
 
-					System.err.println("Single Record delete id  "+bookBudgetId);
+					System.err.println("Single Record delete id  " + bookBudgetId);
 					map.add("libBookBudgetIdList", bookBudgetId);
 				}
 
 				Info errMsg = rest.postForObject(Constants.url + "deleteLibBookBudget", map, Info.class);
 				a = "redirect:/budgetOnLibraryBooks";
-			
+
 			}
 		} catch (Exception e) {
 
@@ -278,6 +277,7 @@ public class BudgetController {
 		return a;
 
 	}
+
 	@RequestMapping(value = "/insertLibBookBudget", method = RequestMethod.POST)
 	public String insertLibBookBudget(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertPhyFacilityBudget");

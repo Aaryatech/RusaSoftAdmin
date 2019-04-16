@@ -150,7 +150,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget
-												Allocated<span class="text-danger">*</span>
+												Allocated ${budRupees}<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" min="0" max="100000000"
@@ -169,7 +169,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized<span class="text-danger">*</span>
+												Utilized ${budRupees}<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"

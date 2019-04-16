@@ -9,13 +9,13 @@
 <html class=" ">
 <head>
 <c:url value="/addGender" var="addGender"></c:url>
-<c:url value="/deleteGender" var="deleteGender"></c:url> 
+<c:url value="/deleteGender" var="deleteGender"></c:url>
 
 <c:url value="/addEnvironmant" var="addEnvironmant"></c:url>
-<c:url value="/deleteEnvironmant" var="deleteEnvironmant"></c:url> 
+<c:url value="/deleteEnvironmant" var="deleteEnvironmant"></c:url>
 
 <c:url value="/addHumanValues" var="addHumanValues"></c:url>
-<c:url value="/deleteHumanValues" var="deleteHumanValues"></c:url>  
+<c:url value="/deleteHumanValues" var="deleteHumanValues"></c:url>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
@@ -140,8 +140,7 @@
 										<div class="tab-pane fade in active " id="Vision">
 
 											<!-- 	<form action="" method="post">		 -->
-											<form class="form-horizontal"
-												action=#" method="post"
+											<form class="form-horizontal" action=# " method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
@@ -231,7 +230,7 @@
 
 																<tr>
 																	<th width="10%">Sr No</th>
-																	<th>Value</th>
+																	<th>Title</th>
 																	<th width="10%">Action</th>
 
 																</tr>
@@ -269,8 +268,7 @@
 										<!-- 	Mission -->
 										<div class="tab-pane fade in " id="Mission">
 
-											<form class="form-horizontal"
-												action="#" method="post"
+											<form class="form-horizontal" action="#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
@@ -358,7 +356,7 @@
 
 																<tr>
 																	<th width="10%">Sr No</th>
-																	<th>Value</th>
+																	<th>Title</th>
 																	<th width="10%">Action</th>
 
 																</tr>
@@ -403,7 +401,8 @@
 												<c:if test="${instituteYesNoTab3List.size()==0}">
 													<div class="row">
 														<label class="col-sm-2 text-left" for="efficientyesno">
-															Human value and Professioinal Ethics <span class="text-danger">*</span>
+															Human value and Professioinal Ethics <span
+															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 															<input type="radio" name="efficientyesno" value="1"
@@ -484,7 +483,7 @@
 
 																<tr>
 																	<th width="10%">Sr No</th>
-																	<th>Value</th>
+																	<th>Title</th>
 																	<th width="10%">Action</th>
 
 																</tr>
@@ -1022,7 +1021,7 @@
 		 
 		 
 	</script>
-	
+
 	<script type="text/javascript">
 		function addEfficient() {
  
@@ -1154,7 +1153,7 @@
 
 	}
 	</script>
-<script type="text/javascript"> 
+	<script type="text/javascript"> 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

@@ -24,4 +24,6 @@ public class Names {
 
 	public static String library_book_budget_add = "Add Budget on Library Book";
 	public static String library_book_budget_list = "Budget on Library Book List";
+
+	public static String Rupees = "(Lakh)";
 }

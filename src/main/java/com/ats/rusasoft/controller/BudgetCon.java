@@ -66,6 +66,7 @@ public class BudgetCon {
 				model = new ModelAndView("budgetForm/budget_phy_facility_list");
 
 				model.addObject("title", Names.budget_physical_list);
+				model.addObject("budRupees", Names.Rupees);
 
 				Info addAccess = AccessControll.checkAccess("budgetPhysicalFacility", "budgetPhysicalFacility", "0",
 						"1", "0", "0", newModuleList);
@@ -134,6 +135,7 @@ public class BudgetCon {
 			} else {
 
 				model.addObject("title", Names.budget_physical_add);
+				model.addObject("budRupees", Names.Rupees);
 
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
 						FinancialYear[].class);
@@ -377,6 +379,7 @@ public class BudgetCon {
 				List<GetAcademicBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
 
 				model.addObject("budgetList", budgetList);
+				model.addObject("budRupees", Names.Rupees);
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -431,6 +434,7 @@ public class BudgetCon {
 						AcademicBudget.class);
 
 				model.addObject("editBudget", budget);
+				model.addObject("budRupees", Names.Rupees);
 
 			}
 		} catch (Exception e) {

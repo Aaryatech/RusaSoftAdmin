@@ -102,7 +102,7 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="fin_year_id">Financial
+											<label class="control-label col-sm-3" for="fin_year_id">Financial
 												Year<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
@@ -128,9 +128,9 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2"
+											<label class="control-label col-sm-3"
 												for="infra_budget_title">Expenditures on purchase of
-												Books <span class="text-danger">*</span>
+												Books ${budRupees}<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" min="0"
@@ -148,8 +148,8 @@
 										</div>
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="allocatedAmt">
-												Expenditures on purchase of Journals <span
+											<label class="control-label col-sm-3" for="allocatedAmt">
+												Expenditures on purchase of Journals ${budRupees} <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
@@ -168,8 +168,9 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="utilizedAmt">
-												Expenditures on e-Journals<span class="text-danger">*</span>
+											<label class="control-label col-sm-3" for="utilizedAmt">
+												Expenditures on e-Journals ${budRupees}<span
+												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" min="0"
@@ -189,8 +190,9 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="utilizedAmt">
-												Expenditures on e-Resources<span class="text-danger">*</span>
+											<label class="control-label col-sm-3" for="utilizedAmt">
+												Expenditures on e-Resources ${budRupees}<span
+												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" min="0"

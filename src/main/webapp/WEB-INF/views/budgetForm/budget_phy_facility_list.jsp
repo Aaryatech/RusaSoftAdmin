@@ -82,10 +82,12 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								
- <a title="Add"
-											href="${pageContext.request.contextPath}/budgetAddPhysicalFacility"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+								<a title="Add"
+									href="${pageContext.request.contextPath}/budgetAddPhysicalFacility"><button
+										type="button" class="btn btn-success">
+										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+									</button></a>
 							</div>
 						</header>
 
@@ -106,8 +108,8 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="40%">Title of Physical Facilities</th>
-													<th>Budget Allocated Amount</th>
-													<th>Budget Utilized Amount</th>
+													<th>Allocated Amount ${budRupees}</th>
+													<th>Utilized Amount ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>

@@ -124,13 +124,13 @@
 
 													<th>Financial Year</th>
 													<th style="text-align: right;">Expenditures on
-														purchase of Books</th>
+														purchase of Books ${budRupees}</th>
 													<th style="text-align: right;">Expenditures on
-														purchase of Journals</th>
+														purchase of Journals ${budRupees}</th>
 													<th style="text-align: right;">Expenditures on
-														e-Journals</th>
+														e-Journals ${budRupees}</th>
 													<th style="text-align: right;">Expenditures on
-														e-Resources</th>
+														e-Resources ${budRupees}</th>
 													<th style="text-align: center;">Action</th>
 
 												</tr>

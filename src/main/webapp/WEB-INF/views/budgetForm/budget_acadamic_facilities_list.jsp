@@ -117,8 +117,8 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="40%">Title of Academic Support Activity</th>
-													<th>Budget Allocated Amount</th>
-													<th>Budget Utilized Amount</th>
+													<th>Allocated Amount ${budRupees}</th>
+													<th>Utilized Amount ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>

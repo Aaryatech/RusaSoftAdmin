@@ -116,13 +116,13 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="rc_faculty_name">Faculty
+											<label class="control-label col-sm-2" for="rc_faculty_name">
 												Name <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_faculty_name"
 													autocomplete="off" name="rc_faculty_name"
-													onchange="return trim(this)" placeholder="Faculty Name"
+													onchange="return trim(this)" placeholder="Name"
 													value="${editValue.rcFacultyName}"> <span
 													class="error_form text-danger" id="error_rc_faculty_name"
 													style="display: none;">Please enter Faculty Name</span>
@@ -132,17 +132,17 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="rc_guide_count">No.
-												of Guides<span class="text-danger">*</span>
+												of Guides(In Subject)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="rc_guide_count" min="1"
-													name="rc_guide_count" placeholder="No. of Guides"
-													autocomplete="off" value="${editValue.rcGuideCount}">
-												<span class="error_form text-danger"
-													id="error_rc_guide_count" style="display: none;">Please
-													enter No. of Guides</span>
+													name="rc_guide_count"
+													placeholder="No. of Guides(In Subject)" autocomplete="off"
+													value="${editValue.rcGuideCount}"> <span
+													class="error_form text-danger" id="error_rc_guide_count"
+													style="display: none;">Please enter No. of Guides</span>
 											</div>
 										</div>
 

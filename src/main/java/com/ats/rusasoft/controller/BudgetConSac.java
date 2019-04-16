@@ -60,7 +60,7 @@ public class BudgetConSac {
 				model = new ModelAndView("budgetForm/infra_budget_facility_list");
 
 				model.addObject("title", Names.infra_budget_list);
-
+				model.addObject("budRupees", Names.Rupees);
 				Info addAccess = AccessControll.checkAccess("budgetInfrastructureFacility",
 						"budgetInfrastructureFacility", "0", "1", "0", "0", newModuleList);
 
@@ -90,6 +90,7 @@ public class BudgetConSac {
 				List<GetInfraStructureBudget> budgetList = new ArrayList<>(Arrays.asList(resArray));
 
 				model.addObject("budgetList", budgetList);
+				model.addObject("budRupees", Names.Rupees);
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -120,7 +121,7 @@ public class BudgetConSac {
 				// Infra Budget
 				HttpSession session = request.getSession();
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				
+
 				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
 				map.add("curFinYear", finYearId);
 
@@ -135,7 +136,7 @@ public class BudgetConSac {
 
 				HttpSession session = request.getSession();
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				
+
 				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
 				map.add("curFinYear", finYearId);
 
@@ -149,7 +150,7 @@ public class BudgetConSac {
 
 				HttpSession session = request.getSession();
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				
+
 				map.add("instId", (int) userObj.getGetData().getUserInstituteId());
 				map.add("curFinYear", finYearId);
 
@@ -162,8 +163,8 @@ public class BudgetConSac {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exe in getBudgetDataByFinYearId @BudgeConSac  " +e.getMessage());
-			
+			System.err.println("Exe in getBudgetDataByFinYearId @BudgeConSac  " + e.getMessage());
+
 			e.printStackTrace();
 
 		}
@@ -194,6 +195,7 @@ public class BudgetConSac {
 			} else {
 
 				model.addObject("title", Names.infra_budget_add);
+				model.addObject("budRupees", Names.Rupees);
 
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
 						FinancialYear[].class);
@@ -344,6 +346,7 @@ public class BudgetConSac {
 			} else {
 				model = new ModelAndView("budgetForm/infra_budget_facility_add");
 				model.addObject("title", Names.infra_budget_edit);
+				model.addObject("budRupees", Names.Rupees);
 
 				int infraBudgetId = Integer.parseInt(request.getParameter("infraBudgetId"));
 
@@ -451,6 +454,7 @@ public class BudgetConSac {
 																			// ModelAndView("budgetForm/infra_budget_facility_list");
 
 				model.addObject("title", Names.budget_library_list);
+				model.addObject("budRupees", Names.Rupees);
 
 				Info addAccess = AccessControll.checkAccess("budgetOnLibrary", "budgetOnLibrary", "0", "1", "0", "0",
 						newModuleList);
@@ -522,6 +526,7 @@ public class BudgetConSac {
 				model = new ModelAndView("budgetForm/budget_library_add");
 
 				model.addObject("title", Names.budget_library_add);
+				model.addObject("budRupees", Names.Rupees);
 
 				// model.addObject("title", Names.infra_budget_add);
 
@@ -674,7 +679,7 @@ public class BudgetConSac {
 				model = new ModelAndView("budgetForm/budget_library_add");
 
 				model.addObject("title", Names.lib_budget_edit);
-
+				model.addObject("budRupees", Names.Rupees);
 				int libBudgetId = Integer.parseInt(request.getParameter("libBudgetId"));
 
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
@@ -784,7 +789,7 @@ public class BudgetConSac {
 				model = new ModelAndView("budgetForm/waste_management _budget_list");
 
 				model.addObject("title", Names.waste_management_budget_list);
-
+				model.addObject("budRupees", Names.Rupees);
 				Info addAccess = AccessControll.checkAccess("budgetOnGreenInitiativesAndWasteMngmnt",
 						"budgetOnGreenInitiativesAndWasteMngmnt", "0", "1", "0", "0", newModuleList);
 
@@ -854,7 +859,7 @@ public class BudgetConSac {
 
 				model = new ModelAndView("budgetForm/waste_management_budget_add");
 				model.addObject("title", Names.waste_management_budget_add);
-
+				model.addObject("budRupees", Names.Rupees);
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
 						FinancialYear[].class);
 				List<FinancialYear> finYearList = new ArrayList<>(Arrays.asList(resArray));
@@ -1003,7 +1008,7 @@ public class BudgetConSac {
 			} else {
 				model = new ModelAndView("budgetForm/waste_management_budget_add");
 				model.addObject("title", Names.waste_management_budget_edit);
-
+				model.addObject("budRupees", Names.Rupees);
 				int wasteMngtBudgetId = Integer.parseInt(request.getParameter("wasteMngtBudgetId"));
 
 				FinancialYear[] resArray = rest.getForObject(Constants.url + "/getFinancialYearList",
