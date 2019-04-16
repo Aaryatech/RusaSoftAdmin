@@ -1505,10 +1505,12 @@ public class LibraryController {
 				model.addObject("title", "Institute Details List");
 
 				int inst_id = (int) session.getAttribute("instituteId");
-				System.out.println("Student list inst id::::" + inst_id);
+				int acad_year = (int) session.getAttribute("acYearId");
+				System.out.println("Student list inst id and year::::" + inst_id+" "+acad_year);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", inst_id);
+				map.add("acadmicYear", acad_year);
 
 				GetInstituteInfo[] instArray = rest.postForObject(Constants.url + "getAllInstituteInfoByInstituteId",
 						map, GetInstituteInfo[].class);
@@ -1684,7 +1686,7 @@ public class LibraryController {
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int maker_id = (int) session.getAttribute("userId");
-
+				int academic_year = (int) session.getAttribute("acYearId");
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -1697,7 +1699,7 @@ public class LibraryController {
 					e.printStackTrace();
 				}
 
-				int academic_year = Integer.parseInt(request.getParameter("academic_year"));
+				//int academic_year = Integer.parseInt(request.getParameter("academic_year"));
 				int no_fullTime_Faculty = Integer.parseInt(request.getParameter("no_fullTime_Faculty"));
 				int no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
 				int no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));

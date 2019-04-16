@@ -119,17 +119,17 @@
 
 
 
-												<div class="form-group">
+												<%-- <div class="form-group">
 													<label class="control-label col-sm-4" for="page_name">Year
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
 														<select id="academic_year" name="academic_year"
 															class="form-control" required>
-															<%-- <c:forEach items="${acaYearList}" var="acaYear">
+															<c:forEach items="${acaYearList}" var="acaYear">
 																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
 																	
-																	</c:forEach> --%>
+																	</c:forEach>
 															<option value="-1">Select</option>
 															<c:forEach items="${acaYearList}" var="acaYearList">
 																<c:choose>
@@ -150,7 +150,7 @@
 														</select> <span class="error_form text-danger" id="error_year"
 															style="display: none;">Please Select Year</span>
 													</div>
-												</div>
+												</div> --%>
 
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_name">No.
