@@ -15,6 +15,7 @@ public class AccessRightModule {
 	 
 	private int delStatus;
 	
+	String iconDiv;
  
 	private int orderBy;
 	 
@@ -68,11 +69,19 @@ public class AccessRightModule {
 		this.orderBy = orderBy;
 	}
 
+	public String getIconDiv() {
+		return iconDiv;
+	}
+
+	public void setIconDiv(String iconDiv) {
+		this.iconDiv = iconDiv;
+	}
+
 	@Override
 	public String toString() {
 		return "AccessRightModule [moduleId=" + moduleId + ", moduleName=" + moduleName + ", moduleDesc=" + moduleDesc
-				+ ", delStatus=" + delStatus + ", orderBy=" + orderBy + ", accessRightSubModuleList="
-				+ accessRightSubModuleList + "]";
+				+ ", delStatus=" + delStatus + ", iconDiv=" + iconDiv + ", orderBy=" + orderBy
+				+ ", accessRightSubModuleList=" + accessRightSubModuleList + "]";
 	}
 
 	 

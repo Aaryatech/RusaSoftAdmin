@@ -13,6 +13,8 @@ public class ModuleJson {
 	
 	private int orderBy;
 	
+	String iconDiv;
+	
 	List<SubModuleJson> subModuleJsonList;
 
 	public int getModuleId() {
@@ -55,10 +57,18 @@ public class ModuleJson {
 		this.orderBy = orderBy;
 	}
 
+	public String getIconDiv() {
+		return iconDiv;
+	}
+
+	public void setIconDiv(String iconDiv) {
+		this.iconDiv = iconDiv;
+	}
+
 	@Override
 	public String toString() {
 		return "ModuleJson [moduleId=" + moduleId + ", moduleName=" + moduleName + ", moduleDesc=" + moduleDesc
-				+ ", orderBy=" + orderBy + ", subModuleJsonList=" + subModuleJsonList + "]";
+				+ ", orderBy=" + orderBy + ", iconDiv=" + iconDiv + ", subModuleJsonList=" + subModuleJsonList + "]";
 	}
 	
 	

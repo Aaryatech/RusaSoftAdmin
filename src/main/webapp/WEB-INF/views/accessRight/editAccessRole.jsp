@@ -160,7 +160,7 @@
 																				class="select_all"
 																				onclick="checkSubmodule(${allModuleList.moduleId})"
 																				value="0"></td>
-																			<td colspan="5"><b><c:out
+																			<td colspan="5">${allModuleList.iconDiv} &nbsp; <b><c:out
 																						value="${allModuleList.moduleName}" /></b></td>
 																		</tr>
 

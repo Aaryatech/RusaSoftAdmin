@@ -417,6 +417,7 @@ public class AccessRightController {
 					moduleJson.setModuleName(accessRightModule.get(i).getModuleName());
 					moduleJson.setModuleDesc(accessRightModule.get(i).getModuleDesc());
 					moduleJson.setOrderBy(accessRightModule.get(i).getOrderBy());
+					moduleJson.setIconDiv(accessRightModule.get(i).getIconDiv());
 					moduleJson.setSubModuleJsonList(subModuleJsonList);
 					moduleJsonList.add(moduleJson);
 				}

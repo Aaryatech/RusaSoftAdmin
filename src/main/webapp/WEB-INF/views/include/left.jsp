@@ -44,7 +44,7 @@
 							<li class="">
 						</c:otherwise>
 					</c:choose>
-					<a href="javascript:;"> <i class="fa fa fa-columns"></i> <span
+					<a href="javascript:;"> ${allModuleList.iconDiv}<span
 						class="title">${allModuleList.moduleName}</span> <c:choose>
 							<c:when
 								test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
@@ -79,56 +79,7 @@
 					</ul>
 					</li>
 				</c:forEach>
-				
-				<c:forEach items="${sessionScope.newModuleList}" var="allModuleList"
-					varStatus="count">
-
-					<c:choose>
-						<c:when
-							test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
-							<li class="open">
-						</c:when>
-						<c:otherwise>
-							<li class="">
-						</c:otherwise>
-					</c:choose>
-					<a href="javascript:;"> <i class="fa fa fa-columns"></i> <span
-						class="title">${allModuleList.moduleName}</span> <c:choose>
-							<c:when
-								test="${sessionScope.sessionModuleId==allModuleList.moduleId}">
-								<span class="arrow open"></span>
-							</c:when>
-							<c:otherwise>
-								<span class="arrow "></span>
-							</c:otherwise>
-						</c:choose>
-
-					</a>
-					<ul class="sub-menu">
-						<c:forEach items="${allModuleList.subModuleJsonList}"
-							var="allSubModuleList">
-							<li><c:choose>
-									<c:when
-										test="${sessionScope.sessionSubModuleId==allSubModuleList.subModuleId}">
-										<a class="active"
-											href="${pageContext.request.contextPath}/${allSubModuleList.subModuleMapping}"
-											onclick="selectSubMod(${allSubModuleList.subModuleId},${allSubModuleList.moduleId})">
-											${allSubModuleList.subModulName}</a>
-									</c:when>
-									<c:otherwise>
-										<a class=""
-											href="${pageContext.request.contextPath}/${allSubModuleList.subModuleMapping}"
-											onclick="selectSubMod(${allSubModuleList.subModuleId},${allSubModuleList.moduleId})">
-											${allSubModuleList.subModulName}</a>
-									</c:otherwise>
-								</c:choose></li>
-						</c:forEach>
-
-					</ul>
-					</li>
-				</c:forEach>
-
-
+				 
 				<%-- <li class=""><a href="javascript:;"> <i
 						class="fa fa-columns"></i> <span class="title">User
 							Registration</span> <span class="arrow "></span>
