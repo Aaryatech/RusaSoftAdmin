@@ -114,7 +114,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="dev_Prog_title">
-												Title<span class="text-danger">*</span>
+												Title of Training Program<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" maxlength="200" class="form-control"

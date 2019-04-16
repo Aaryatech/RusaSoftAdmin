@@ -153,7 +153,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
-													id="fromDate" name="fromDate" readonly="readonly"
+													id="fromDate" name="fromDate"
 													value="${editQuality.qualityFromdt}"> <span
 													class="error_form text-danger" id="fromDate_field"
 													style="display: none;">Please select from date</span>
@@ -168,7 +168,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													placeholder="Select To Date" readonly="readonly"
+													placeholder="Select To Date"
 													value="${editQuality.qualityTodt}"> <span
 													class="error_form text-danger" id="toDate_field"
 													style="display: none;">Please select to date</span>

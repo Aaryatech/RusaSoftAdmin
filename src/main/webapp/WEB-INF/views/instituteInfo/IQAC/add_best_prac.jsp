@@ -123,12 +123,12 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="benificiary">Name
-												of Best Student/Staff/Both <span class="text-danger">*</span>
+												of Beneficiaries <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="benificiary"
 													autocomplete="off" name="benificiary" onchange="trim(this)"
-													placeholder="Name of Best Student/Staff/Both"
+													placeholder="Name of Beneficiaries  "
 													value="${editInst.practicesBeneficiary}"> <span
 													class="error_form text-danger" id="error_bef"
 													style="display: none;">Please Enter Name of Best

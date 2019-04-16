@@ -113,7 +113,8 @@
 															type="checkbox" name="selAll" id="selAll"
 															onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
-														<th rowspan="2">Title of Program</th>
+
+														<th rowspan="2">Title of Training Program</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Total Participants</th>
 														<th rowspan="2">Action</th>
