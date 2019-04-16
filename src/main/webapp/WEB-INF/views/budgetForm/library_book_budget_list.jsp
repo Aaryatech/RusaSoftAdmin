@@ -116,9 +116,9 @@
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
-													<th class="check" style="text-align: center; width: 5%;"><input
+													<!-- <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
 													<th width="10%">Sr No</th>
 
 
@@ -142,10 +142,10 @@
 													varStatus="count">
 													<tr>
 
-														<td style="text-align: center;"><input
+														<%-- <td style="text-align: center;"><input
 															type="checkbox" class="chk" name="bookIds"
 															id="bookIds${count.index+1}"
-															value="${budget.libraryBookBudgetId}" /></td>
+															value="${budget.libraryBookBudgetId}" /></td> --%>
 
 														<td align="center">${count.index+1}</td>
 														<td style="text-align: center;">${budget.finYear}</td>
@@ -178,11 +178,11 @@
 										<div class="form-group">
 
 											<c:if test="${deleteAccess==0}">
-												<button class="btn btn-primary" id="deleteId"
+												<%-- <button class="btn btn-primary" id="deleteId"
 													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
 													style="align-content: center; width: 113px; margin-left: 40px;">
 													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
-												</button>
+												</button> --%>
 											</c:if>
 
 

@@ -104,9 +104,9 @@
 											class="table table-striped dt-responsive display">
 											<thead>
 												<tr>
-												<th class="check" style="text-align: center; width: 5%;"><input
+												<!-- <th class="check" style="text-align: center; width: 5%;"><input
 														type="checkbox" name="selAll" id="selAll"
-														onClick="selectedInst(this)" /> Select All</th>
+														onClick="selectedInst(this)" /> Select All</th> -->
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th>Budget Allocated</th>
@@ -120,9 +120,9 @@
 											<c:forEach items="${budgetList}" var="budget"
 													varStatus="count">
 													<tr>
-														 <td align="center"><input type="checkbox" class="chk"
+													<%-- 	 <td align="center"><input type="checkbox" class="chk"
 															name="wasteMngtBudgetId" id="wasteMngtBudgetIds${count.index+1}"
-															value="${budget.wasteMngtBudgetId}" /></td> 
+															value="${budget.wasteMngtBudgetId}" /></td>  --%>
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
 														
@@ -164,7 +164,7 @@
 
 
 
-															<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button>
+											<%-- 				<button type="submit" title="delete checked records" id="deleteId" class="btn btn-primary" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button> --%>
 
 												<!-- <button type="submit" title="Delete Multiple Records" class="btn1"
 													id="deleteId"
