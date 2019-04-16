@@ -98,8 +98,8 @@
 												<div id="divshow">
 													<div class="form-group">
 														<label class="control-label col-sm-3" for="swName"
-															style="text-align: left;">Name of Software<span
-															class="text-danger">*</span>
+															style="text-align: left;">Name of Library
+															Software<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-9">
 															<input type="text" class="form-control" id="swName"
