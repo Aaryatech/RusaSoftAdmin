@@ -328,7 +328,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="checkbox" name="isHod" value="1"
+														<input type="checkbox" name="isDean" value="1"
 															${dean.isDean==1 ? 'checked' : ''}>&nbsp;&nbsp;&nbsp;Dean</div>
 												</div>
 

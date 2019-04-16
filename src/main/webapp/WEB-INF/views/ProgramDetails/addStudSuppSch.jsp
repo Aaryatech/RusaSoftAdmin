@@ -188,8 +188,13 @@
 													<div class="col-sm-6">
 														<select id="schemeName" name="schemeName"
 															class="form-control" onchange="showExtraField()">
-														
-															<c:choose>
+															<option value="-1">Select</option>
+															<option value="Capability Enhancement" ${stud.schemeName == 'Capability Enhancement' ? 'selected' : ''} >Capability	Enhancement</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" ${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''} >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)" ${stud.schemeName  == 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)' ? 'selected' : ''}>Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training" ${stud.schemeName  == 'Vocational Education Training' ? 'selected' : ''}>Vocational Education Training</option>
+															<option value="7">Any Other</option>
+															<%-- <c:choose>
 															<c:when test="${stud.schemeName  eq 'Capability Enhancement'}">
 															<option value="-1">Select</option>
 															<option selected value="Capability Enhancement">Capability	Enhancement</option>
@@ -235,7 +240,7 @@
 															<option selected value="7">Any Other</option>
 														</c:otherwise>
 														
-														</c:choose>
+														</c:choose> --%>
 														
 														
 									

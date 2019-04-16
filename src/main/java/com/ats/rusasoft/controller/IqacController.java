@@ -303,7 +303,7 @@ public class IqacController {
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime(curDateTime);
 			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setType(2);
+			
 
 			staff.setExtravarchar1("NA");
 			
@@ -325,6 +325,13 @@ public class IqacController {
 				editIqac.setIsDean(isDean);
 				editIqac.setIsHod(isHod);
 				editIqac.setIsLibrarian(isLib);
+				editIqac.setRoleIds(roleIds);
+				editIqac.setMakerUserId(userId);
+				editIqac.setMakerEnterDatetime(curDateTime);
+				editIqac.setCheckerUserId(0);
+				editIqac.setCheckerDatetime(curDateTime);
+				editIqac.setLastUpdatedDatetime(curDateTime);
+				editIqac.setType(2);
 				Staff editIqc = rest.postForObject(Constants.url + "/addNewStaff", editIqac, Staff.class);
 
 			}
@@ -893,7 +900,7 @@ public class IqacController {
 					staff.setCheckerUserId(0);
 					staff.setCheckerDatetime(curDateTime);
 					staff.setLastUpdatedDatetime(curDateTime);
-					//staff.setType(2);
+				
 
 					staff.setExtravarchar1("NA");
 			if (isReg == 0) {
@@ -915,6 +922,7 @@ public class IqacController {
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime(curDateTime);
 			staff.setType(4);
+			staff.setRoleIds(roleIds);
 			staff.setIsFaculty(1);
 			staff.setExtraint1(0);
 			staff.setExtravarchar1("NA");
@@ -938,6 +946,17 @@ public class IqacController {
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("hod_quolf")));
 				editStaff.setJoiningDate(joinDate);
 				editStaff.setRealivingDate((request.getParameter("acc_off_relDate")));
+				editStaff.setMakerUserId(userId);
+				editStaff.setMakerEnterDatetime(curDateTime);
+				editStaff.setEditUserId(0);
+				editStaff.setLastUpdatedDatetime(curDateTime);
+				editStaff.setCheckerUserId(0);
+				editStaff.setCheckerDatetime(curDateTime);
+				editStaff.setType(4);
+				editStaff.setRoleIds(roleIds);
+				editStaff.setIsFaculty(1);
+				editStaff.setExtraint1(0);
+				editStaff.setExtravarchar1("NA");
 		
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editStaff, Staff.class);
 
@@ -1462,8 +1481,7 @@ public class IqacController {
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime(curDateTime);
 			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setType(2);
-
+			
 			staff.setExtravarchar1("NA");
 			Staff newDean = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 			}
@@ -1482,7 +1500,13 @@ public class IqacController {
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setIsHod(isHod);
-				editStaff.setIsDean(1);
+				editStaff.setRoleIds(roleIds);
+				editStaff.setType(6);
+				editStaff.setMakerUserId(userId);
+				editStaff.setMakerEnterDatetime(curDateTime);
+				editStaff.setCheckerUserId(0);
+				editStaff.setCheckerDatetime(curDateTime);
+				editStaff.setLastUpdatedDatetime(curDateTime);
 
 				Staff editDean = rest.postForObject(Constants.url + "/addNewStaff", editStaff, Staff.class);
 			}
