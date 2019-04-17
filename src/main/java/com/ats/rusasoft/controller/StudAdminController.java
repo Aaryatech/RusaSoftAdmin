@@ -17,20 +17,24 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.model.Program;
 import com.ats.rusasoft.master.model.prodetail.Cast;
 import com.ats.rusasoft.master.model.prodetail.GetStudAdmCatwise;
 import com.ats.rusasoft.master.model.prodetail.GetStudAdmLocwise;
 import com.ats.rusasoft.master.model.prodetail.Location;
 import com.ats.rusasoft.master.model.prodetail.NameIdBean;
+import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.master.model.prodetail.StudAdmCatwise;
 import com.ats.rusasoft.master.model.prodetail.StudAdmLocwise;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
+import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
@@ -78,6 +82,11 @@ public class StudAdminController {
 						GetStudAdmCatwise[].class);
 				List<GetStudAdmCatwise> studAdmCastList = new ArrayList<>(Arrays.asList(castArray));
 				System.err.println("studAdmCastList " + studAdmCastList.toString());
+
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				model.addObject("progTypeList", progTypeList);
 
 				if (studAdmCastList.size() > 0) {
 
@@ -414,6 +423,8 @@ public class StudAdminController {
 				int yearId = (int) session.getAttribute("acYearId");
 
 				int isEdit = Integer.parseInt(request.getParameter("isEdit"));
+
+				int programTypeId = Integer.parseInt(request.getParameter("programTypeId"));
 				if (isEdit == 0) {
 
 					List<StudAdmCatwise> studListCatwise = new ArrayList<>();
@@ -433,7 +444,7 @@ public class StudAdminController {
 						studAdmCat.setCatTotStudent(studAdmCat.getFemaleStudent() + studAdmCat.getMaleStudent()
 								+ studAdmCat.getTransStudent());
 
-						studAdmCat.setProgramId(1);
+						studAdmCat.setProgramId(programTypeId);
 
 						studAdmCat.setStudentCatId(0);
 
@@ -524,7 +535,7 @@ public class StudAdminController {
 						studAdmCat.setCatTotStudent(studAdmCat.getFemaleStudent() + studAdmCat.getMaleStudent()
 								+ studAdmCat.getTransStudent());
 
-						studAdmCat.setProgramId(1);
+						studAdmCat.setProgramId(programTypeId);
 
 						studAdmCat.setStudentCatId(studAdmList.get(i).getStudentCatId());
 
@@ -770,6 +781,34 @@ public class StudAdminController {
 		}
 
 		return redirect;
+
+	}
+
+	@RequestMapping(value = "/getProgramTypeByProgram", method = RequestMethod.GET)
+	public @ResponseBody List<Program> getProgramTypeByProgram(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		List<Program> list = new ArrayList<>();
+
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int programType = Integer.parseInt(request.getParameter("programType"));
+			map.add("programTypeId", programType);
+			Program[] program = restTemplate.postForObject(Constants.url + "/getProgramByProgramTypeId", map,
+					Program[].class);
+			list = new ArrayList<Program>(Arrays.asList(program));
+
+		} catch (Exception e) {
+			System.err.println("Exce in getProgramTypeByProgram  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return list;
 
 	}
 

@@ -50,6 +50,10 @@
 <!-- BEGIN BODY -->
 <body class=" " onload="calculateSum()()">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+
+	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
+
+
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -100,7 +104,7 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									
+
 
 									<!-- <ul class="nav nav-tabs">
 										<li class="active"><a href="#home" data-toggle="tab">
@@ -114,34 +118,73 @@
 										<div class="tab-pane fade in active" id="home"> -->
 
 
-											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/insertStudAdmCatwise"
-												method="post" name="form_sample_2" id="form_sample_2"
-											>
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/insertStudAdmCatwise"
+										method="post" name="form_sample_2" id="form_sample_2">
 
-												<div class="row">
-													<div class="col-md-12">
-														<table class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="30%">Category</th>
-																	<th width="60%" style="text-align: center;" colspan="3">No.
-																		of Students</th>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="programType">Program
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-4">
+												<select id="programType" name="programType"
+													class="form-control" onchange="getProgramTypeByProgram()"
+													required>
+													<c:forEach items="${progTypeList}" var="progTypeList">
+														<c:choose>
+															<c:when
+																test="${progTypeList.programId==editProgram.programType}">
+																<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${progTypeList.programId}">${progTypeList.programName}</option>
 
-																</tr>
-																<tr>
-																	<th width="10%"></th>
-																	<th width="30%"></th>
-																	<th width="20%">Male</th>
-																	<th width="20%">Female</th>
-																	<th width="20%">Transgender</th>
+															</c:otherwise>
+
+														</c:choose>
+
+													</c:forEach>
+												</select>
 
 
-																</tr>
-															</thead>
-															<tbody>
-																<c:choose>
+											</div>
+
+											<label class="control-label col-sm-2" for="programTypeId">Program
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-4">
+												<select id="programTypeId" name="programTypeId"
+													class="form-control" required>
+
+												</select>
+
+
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-12">
+												<table class="table table-striped dt-responsive display">
+													<thead>
+														<tr>
+															<th width="10%">Sr No</th>
+															<th width="30%">Category</th>
+															<th width="60%" style="text-align: center;" colspan="3">No.
+																of Students</th>
+
+														</tr>
+														<tr>
+															<th width="10%"></th>
+															<th width="30%"></th>
+															<th width="20%">Male</th>
+															<th width="20%">Female</th>
+															<th width="20%">Transgender</th>
+
+
+														</tr>
+													</thead>
+													<tbody>
+														<c:choose>
 															<c:when test="${isEdit==0}">
 																<c:forEach items="${castList}" var="cast"
 																	varStatus="count">
@@ -149,75 +192,86 @@
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="cast_m${cast.castId}"
-																			name="cast_m${cast.castId}" value="0"   required></td>
-																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="cast_f${cast.castId}"
-																			name="cast_f${cast.castId}" value="0" required></td>
-																		<td><input type="number" min="0" max="99999"  onkeyup="calculateSum()"
-																			class="txt" id="cast_t${cast.castId}"
-																			name="cast_t${cast.castId}" value="0" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="cast_m${cast.castId}" name="cast_m${cast.castId}"
+																			value="0" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="cast_f${cast.castId}" name="cast_f${cast.castId}"
+																			value="0" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="cast_t${cast.castId}" name="cast_t${cast.castId}"
+																			value="0" required></td>
 																	</tr>
 																</c:forEach>
-																</c:when>
-																<c:otherwise>
-																
+															</c:when>
+															<c:otherwise>
+
 																<c:forEach items="${studAdmCastList}" var="cast"
 																	varStatus="count">
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
 
-																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="cast_m${cast.studentCatId}"
-																			name="cast_m${cast.studentCatId}" value="${cast.maleStudent}" required></td>
-																		<td><input type="number" min="0" max="99999"  onkeyup="calculateSum()"
-																			class="txt" id="cast_f${cast.studentCatId}"
-																			name="cast_f${cast.studentCatId}"  value="${cast.femaleStudent}" required></td>
-																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="cast_t${cast.studentCatId}"
-																			name="cast_t${cast.studentCatId}" value="${cast.transStudent}" required></td>
-																			
-																			
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="cast_m${cast.studentCatId}"
+																			name="cast_m${cast.studentCatId}"
+																			value="${cast.maleStudent}" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="cast_f${cast.studentCatId}"
+																			name="cast_f${cast.studentCatId}"
+																			value="${cast.femaleStudent}" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="cast_t${cast.studentCatId}"
+																			name="cast_t${cast.studentCatId}"
+																			value="${cast.transStudent}" required></td>
+
+
 																	</tr>
 																</c:forEach>
-																</c:otherwise>
-																</c:choose>
-															</tbody>
-														</table>
-													</div>
+															</c:otherwise>
+														</c:choose>
+													</tbody>
+												</table>
+											</div>
 
-													<input type="hidden" id="isEdit" name="isEdit"
-														value="${isEdit}"> <input type="hidden" id="is_view"
-														name="is_view" value="0">
+											<input type="hidden" id="isEdit" name="isEdit"
+												value="${isEdit}"> <input type="hidden" id="is_view"
+												name="is_view" value="0">
 
-													<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-															<a href="${pageContext.request.contextPath}/showStudAddmit"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-																
-														
-															
-															<label class="control-label" for="fPassingYear"><b>Total Students</b><span class="text-danger"></span>
-														</label>
-															<input
-																type="text"   style="color:black; border-radius: 15px; align-items: center;" readonly placeholder="Total Student" id="total_stud"
-																>
-																<span
-															class="error_form text-danger" id="total_stud_count_field"
-															style="display: none;">All fields can not be 0</span>
-																
-														</div>
-													</div>
-
-													<div class="clearfix"></div>
-
-
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+													<button type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+													<a href="${pageContext.request.contextPath}/showStudAddmit"><button
+															type="button" id="sub2" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a> <label class="control-label" for="fPassingYear"><b>Total
+															Students</b><span class="text-danger"></span> </label> <input
+														type="text"
+														style="color: black; border-radius: 15px; align-items: center;"
+														readonly placeholder="Total Student" id="total_stud">
+													<span class="error_form text-danger"
+														id="total_stud_count_field" style="display: none;">All
+														fields can not be 0</span>
 
 												</div>
-											</form>
-										<!-- </div>
+											</div>
+
+											<div class="clearfix"></div>
+
+
+
+										</div>
+									</form>
+									<!-- </div>
 
 									</div>
  -->
@@ -235,10 +289,10 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-	
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	
+
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -254,42 +308,32 @@
 			}
 			return true;
 		}
-		$(document)
-				.ready(
-						function($) {
+		$(document).ready(function($) {
 
-							$("#form_sample_2")
-									.submit(
-											function(e) {
-												var isError = false;
-												var errMsg = "";
-												var x=$("#total_stud").val();
-												if ($("#total_stud").val() < 0) {
-													isError = true;
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
+				var x = $("#total_stud").val();
+				if ($("#total_stud").val() < 0) {
+					isError = true;
 
-													$("#total_stud").addClass(
-															"has-error")
-													$("#total_stud_count_field")
-															.show()
-												} else {
-													$("#total_stud_count_field")
-															.hide()
-												}
+					$("#total_stud").addClass("has-error")
+					$("#total_stud_count_field").show()
+				} else {
+					$("#total_stud_count_field").hide()
+				}
 
-												
-												 
-												
-												if (!isError) {
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														document.getElementById("sub1").disabled = true;
-														document.getElementById("sub2").disabled = true;
-														return  true;
-													}	
-												}
-												return false;
-											});
-						});
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
 	</script>
 	<script type="text/javascript">
 		function checkUnique(inputValue, valueType) {
@@ -404,37 +448,80 @@
 			return false;
 		}
 		function submit_f(view) {
-			
+
 			document.getElementById("is_view").value = view;//create this 
 		}
 	</script>
 
-	
+
 	<script type="text/javascript">
+		$(document).ready(function() {
 
-$(document).ready(function(){
+			$(".txt").each(function() {
+				$(this).keyup(function() {
+					calculateSum();
 
-	$(".txt").each(function() {
-		$(this).keyup(function(){
-			calculateSum();
+				});
+			});
+
 		});
-	});
 
-});
+		function calculateSum() {
+			var sum = 0;
+			$(".txt").each(function() {
 
-function calculateSum() {
-	var sum = 0;
-	$(".txt").each(function() {
+				if (!isNaN(this.value) && this.value.length != 0) {
+					sum += parseFloat(this.value);
+				}
+				getProgramTypeByProgram();
 
-		if(!isNaN(this.value) && this.value.length!=0) {
-			sum += parseFloat(this.value);
+			});
+			document.getElementById("total_stud").value = sum;
 		}
+	</script>
 
-	});
-	document.getElementById("total_stud").value=sum;
-}
 
-    </script>
+
+	<script type="text/javascript">
+		function getProgramTypeByProgram() {
+
+			var programType = document.getElementById("programType").value;
+			//alert("programType" + programType);
+
+			var valid = true;
+
+			if (programType == null || programType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getProgramTypeByProgram}', {
+					programType : programType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(data);
+					var html;
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+
+						html += '<option value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+
+					}
+					html += '</option>';
+
+					$('#programTypeId').html(html);
+					$("#programTypeId").trigger("chosen:updated");
+
+				});
+			}//end of if
+
+		}
+	</script>
 
 
 	<!-- END CONTAINER -->
