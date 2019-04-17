@@ -89,10 +89,14 @@
 
 	<div class="container-fluid">
 		<div class="login-wrapper row">
+			
+			<div class="logn_logo"></div>
 			<div id="login" class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
+				
+				
 				<h1 class="login_head">
 					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
-					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Account Login 
+					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Institute Login 
 				</h1>
 
 				<form name="loginform" 
@@ -126,11 +130,10 @@
 <!-- 			 <span class="error_form text-danger" id="error_pass" style="display:none;" >Please Enter Password</span>
  -->							
 					</p>
-
-					<p>
+			
+					 <p>
 						<select
-							id="ac_year_login" name="ac_year_login" class="form-control">
-							<option value="-1">Select Academic Year</option>
+							id="ac_year_login" name="ac_year_login" class="form-control">							
 							<c:forEach items="${acaYearList}" var="acYear">
 								<option value="${acYear.yearId}">${acYear.academicYear}</option>
 
@@ -164,7 +167,10 @@
 						Access of this System is an Offence</b> </label>
 
 			</div>
-		</div>
+			
+			
+			
+			</div>
 	</div>
 
 
