@@ -212,6 +212,8 @@
 																</select>
 
 															</c:when>
+															
+															
 															<c:otherwise>
 																<select id="activityName" name="activityName"
 																	class="form-control" onchange="showExtraField()"
@@ -289,9 +291,9 @@
 														style="display: none;">Please enter date.</span>
 													</div>
 												</div>
+<%-- value="${editProgramActivity.year}" --%>
 
-
-												<div class="form-group">
+												<%-- <div class="form-group">
 													<label class="control-label col-sm-2" for="year">Year
 														<span class="text-danger">*</span>
 													</label>
@@ -303,7 +305,31 @@
 														class="error_form text-danger" id="error_formfield2"
 														style="display: none;">Please enter year.</span>
 													</div>
-												</div>
+												</div> --%>
+												
+											<div class="form-group">
+													<label class="control-label col-sm-2" for="year">Year
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="year" name="year" class="form-control">
+																
+							<option  ${editProgramActivity.year == 'First Year'  ? 'Selected': '' }>First Year</option>
+							<option  ${editProgramActivity.year == 'Second Year' ? 'Selected': '' }>Second Year</option>
+							<option  ${editProgramActivity.year == 'Third Year'  ? 'Selected': '' }>Third Year</option>
+							<option  ${editProgramActivity.year == 'Fourth Year' ? 'Selected': '' }>Fourth Year</option>
+							<option  ${editProgramActivity.year == 'Fifth Year'  ? 'Selected': '' }>Fifth Year</option>
+																
+																
+														</select>
+														<span class="error_form text-danger" id="prog_type_field"
+															style="display: none;">Please select program type</span>
+													</div>
+												</div>									
+												
+												
+												
+												
 
 
 												<div class="form-group">
