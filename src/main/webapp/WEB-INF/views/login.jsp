@@ -131,7 +131,7 @@
  -->							
 					</p>
 			
-					 <p>
+					 <%-- <p>
 						<select
 							id="ac_year_login" name="ac_year_login" class="form-control">							
 							<c:forEach items="${acaYearList}" var="acYear">
@@ -142,6 +142,11 @@
 						</select>
 						 <span class="error_form text-danger" id="error_aca_year" style="display:none;" >Please Select Academic Year</span>
 					</p>
+					
+					 --%>
+					
+					
+					
 					<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
                 </p>

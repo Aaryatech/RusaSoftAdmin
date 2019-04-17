@@ -232,8 +232,8 @@ public class HomeController {
 		}
 		int loginAcYearId=0;
 		if(acYearId==0) {
-			System.err.println(" IN if Firt time acYearId ==0");
-		 loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
+			System.err.println(" IN if First time acYearId ==0");
+		// loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
 		}else {
 			System.err.println("In Else its reload call  ");
 			loginAcYearId=acYearId;
@@ -276,8 +276,7 @@ public class HomeController {
 					 if(a==1) {
 						 mav = new ModelAndView("welcome");
 						 
-						 map =new LinkedMultiValueMap<String, Object>();
-
+						
 							map =new LinkedMultiValueMap<String, Object>(); 
 							 map.add("type", 1);
 							
@@ -366,17 +365,36 @@ public class HomeController {
 						AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
 						List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
 						System.err.println("acaYearList " + acaYearList.toString());
+						
+						
+						
+						
 
 						//session.setAttribute("acaYearList", acaYearList);
+						//ac yadded in sesion 
 						
-						session.setAttribute("acYearId", loginAcYearId);
+					
+						map =new LinkedMultiValueMap<String, Object>(); 
+						 map.add("isCurrent", 1);
+						 System.err.println("Map  " +map.toString());
+						AcademicYear acYear1=new AcademicYear();
+						
+						acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map, AcademicYear.class);
+						System.err.println("acYear current  " +acYear1.toString());
+						
+						
+						session.setAttribute("acYearId", acYear1.getYearId());
+						session.setAttribute("acYearValue",acYear1.getAcademicYear());
 						System.err.println("Session date year Id " +session.getAttribute("acYearId"));
 
 						//getAcademicYearByYearId
-						 map =new LinkedMultiValueMap<String, Object>(); 
-						 map.add("yearId", loginAcYearId);
-						AcademicYear acYear = restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map, AcademicYear.class);
-						session.setAttribute("acYearValue", acYear.getAcademicYear());
+					/*
+					 * map =new LinkedMultiValueMap<String, Object>(); map.add("yearId",
+					 * loginAcYearId); AcademicYear acYear =
+					 * restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map,
+					 * AcademicYear.class); session.setAttribute("acYearValue",
+					 * acYear.getAcademicYear());
+					 */
 						
 					    map = new LinkedMultiValueMap<String, Object>();
 						map.add("instituteId", userObj.getGetData().getUserInstituteId());
