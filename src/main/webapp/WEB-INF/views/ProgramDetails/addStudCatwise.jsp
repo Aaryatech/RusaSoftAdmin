@@ -150,7 +150,7 @@
 											</div>
 
 											<label class="control-label col-sm-2" for="programTypeId">Program
-												<span class="text-danger">*</span>
+												Type <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-4">
 												<select id="programTypeId" name="programTypeId"
