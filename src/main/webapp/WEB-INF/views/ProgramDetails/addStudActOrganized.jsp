@@ -316,12 +316,12 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="branch">Branch
-														<span class="text-danger">*</span>
+														(Discipline)<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<input type="text" maxlength="30" class="form-control"
 															id="branch" value="${editProgramActivity.branch}"
-															name="branch" placeholder="Branch" 
+															name="branch" placeholder="Branch(Discipline)" 
 															onchange="return trim(this)" autocomplete="off">
 															<span
 														class="error_form text-danger" id="error_formfield3"

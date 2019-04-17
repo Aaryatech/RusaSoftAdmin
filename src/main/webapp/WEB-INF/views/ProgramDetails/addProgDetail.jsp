@@ -104,7 +104,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="programType">Program
-												Type <span class="text-danger">*</span>
+												 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="programType" name="programType"
@@ -144,7 +144,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="nameOfProgram">
-												Name of Program <span class="text-danger">*</span>
+												Type of Program <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="nameOfProgram"
