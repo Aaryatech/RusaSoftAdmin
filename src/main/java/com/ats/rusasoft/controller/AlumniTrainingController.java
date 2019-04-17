@@ -575,6 +575,8 @@ public class AlumniTrainingController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			int placeId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+			String packge = "-";
+			String suuppAgnc= "NA";
 			try {
 				placeId = Integer.parseInt(request.getParameter("place_id"));
 			} catch (Exception e) {
@@ -603,6 +605,7 @@ public class AlumniTrainingController {
 			} else {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				if (placeId == 0) {
+					
 					TrainPlacement trainPlace = new TrainPlacement();
 
 					String almName = request.getParameter("alum_name");
@@ -618,17 +621,23 @@ public class AlumniTrainingController {
 					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					String packge = request.getParameter("package_offered");
+					packge = request.getParameter("package_offered");
 					if(packge==null) {
-					trainPlace.setPakageOfferd("NA");
+						trainPlace.setPakageOfferd(packge);
 					}else {
 						trainPlace.setPakageOfferd(packge);
 					}
+					
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-					trainPlace.setSupportAgencyName(request.getParameter("sup_agency_name"));
-
+					
+					suuppAgnc = request.getParameter("sup_agency_name");
+					if(suuppAgnc==null) {
+						trainPlace.setSupportAgencyName(suuppAgnc);
+					}else {
+						trainPlace.setSupportAgencyName(suuppAgnc);
+					}
 					trainPlace.setDelStatus(1);
 
 					int exInt1 = 0;
@@ -644,6 +653,8 @@ public class AlumniTrainingController {
 					trainPlace.setMakerDatetime(curDateTime);
 					int yearId = (int) session.getAttribute("acYearId");
 					trainPlace.setYearId(yearId);
+					
+					System.out.println("Placements:"+trainPlace.toString());
 
 					TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
 							trainPlace, TrainPlacement.class);
@@ -665,11 +676,21 @@ public class AlumniTrainingController {
 					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					trainPlace.setPakageOfferd(request.getParameter("package_offered"));
+					packge = request.getParameter("package_offered");
+					if(packge==null) {
+						trainPlace.setPakageOfferd(packge);
+					}else {
+						trainPlace.setPakageOfferd(packge);
+					}
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-					trainPlace.setSupportAgencyName(request.getParameter("sup_agency_name"));
+					suuppAgnc = request.getParameter("sup_agency_name");
+					if(suuppAgnc==null) {
+						trainPlace.setSupportAgencyName(suuppAgnc);
+					}else {
+						trainPlace.setSupportAgencyName(suuppAgnc);
+					}
 
 					trainPlace.setDelStatus(1);
 

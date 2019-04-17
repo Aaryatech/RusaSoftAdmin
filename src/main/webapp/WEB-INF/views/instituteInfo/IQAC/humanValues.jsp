@@ -163,7 +163,7 @@ legend.scheduler-border {
 														<tr>
 
 															<td style="text-align: center">${count.index+1}</td>
-															<c:forEach items="${distlist}" var="dist">
+															<%-- <c:forEach items="${distlist}" var="dist">
 
 																<c:choose>
 																	<c:when test="${value.activityName==dist.valMastId}">
@@ -173,7 +173,11 @@ legend.scheduler-border {
 																</c:choose>
 
 															</c:forEach>
-
+ --%>
+ 															
+															<td style="text-align: center"><c:out
+																	value="${value.activityName}" /></td>
+																	
 															<td style="text-align: center"><c:out
 																	value="${value.activityFromdt}" /></td>
 															<td style="text-align: center"><c:out

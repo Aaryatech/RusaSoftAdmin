@@ -75,7 +75,7 @@
 													<th>Students Placed</th>
 													<th>Employer Address</th>
 													<th>Contact Details</th>
-													<th>Package Offered</th>
+													<!-- <th>Package Offered</th> -->
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -90,7 +90,7 @@
 														<td align="right">${trainPlace.noStudentPlaced}</td>
 														<td align="left">${trainPlace.empyrAdd}</td>
 														<td align="left">${trainPlace.contactDetail}</td>
-														<td align="right">${trainPlace.pakageOfferd}</td>
+														<%-- <td align="right">${trainPlace.pakageOfferd}</td> --%>
 
 														<td align="center"><c:if test="${editAccess==0}">
 																<a href="#"

@@ -195,7 +195,7 @@
 														<input type="text" class="form-control"
 															id="contact_detail" value="${trainPlace.contactDetail}"
 															name="contact_detail" onchange="trim(this)" maxlength="10"
-															placeholder="Employer Contact Information">
+															placeholder="Employer Contact Information" onkeypress='return restrictAlphabets(event)'>
 															<span class="error_form text-danger" id="contact_detail_field"
 															style="display: none;">Please enter employer contact detail</span>
 													</div>
@@ -218,7 +218,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">
-														Support Agency Name<span class="text-danger">*</span>
+														Support Agency Name<span class="text-danger"></span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
@@ -371,7 +371,7 @@
 															.hide()
 												}
 												
-												if (!$("#sup_agency_name").val())
+												/* if (!$("#sup_agency_name").val())
 												{
 									isError = true;
 									$("#sup_agency_name").addClass(
@@ -381,7 +381,7 @@
 								} else {
 									$("#sup_agency_name_field")
 											.hide()
-								}
+								} */
 												/* if (!$("#package_offered").val())
 												{
 									isError = true;
@@ -546,7 +546,20 @@
 			return;
 		}
 	</script>
-
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
 
 	<!-- END CONTAINER -->

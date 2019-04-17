@@ -328,11 +328,13 @@ public class QualityInitiativeController {
 		try {
 
 			model.addObject("title", "Add Institute Internal Quality Initiatives");
-
+			InstituteQuality editQuality = new InstituteQuality();
+			model.addObject("editQuality", editQuality);
+			
 			QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",
 					QualityInitiative[].class);
 			List<QualityInitiative> qualInintList = new ArrayList<>(Arrays.asList(instArray));
-
+			
 			model.addObject("qualInintList", qualInintList);
 
 		} catch (Exception e) {
@@ -390,8 +392,14 @@ public class QualityInitiativeController {
 
 				instQuality.setQualityFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
 				instQuality.setQualityTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
-				instQuality.setQualityPcount(Integer.parseInt(request.getParameter("no_of_participant")));
-
+				int participant = 0 ;
+				participant = Integer.parseInt(request.getParameter("no_of_participant"));
+				System.out.println("DATA="+participant);
+				if(participant == 0 ) {
+				instQuality.setQualityPcount(0);
+				}else {
+					instQuality.setQualityPcount(participant);
+				}
 				instQuality.setQualityId(qualityId);
 				instQuality.setQualityInitiativeId(Integer.parseInt(request.getParameter("qualityInitId")));
 

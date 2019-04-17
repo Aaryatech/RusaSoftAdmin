@@ -101,10 +101,19 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="finantialYear">Initiative
-												<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="finantialYear">Title Of
+											Programme<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
+												<input type="text" class="form-control" placeholder="Title Of Programme"
+													autocomplete="off" id="ttlProgm" name="ttlProgm"
+													value="${editValue.activityName}"> <span
+													class="error_form text-danger" id="error_ttlProgm"
+													style="display: none;">Please enter title of programme</span>
+
+											</div>
+											
+											<%-- <div class="col-sm-6">
 												<select id="title12" name="title" class="form-control">
 													<option value="-1">Select</option>
 													<c:forEach items="${distlist}" var="dist">
@@ -122,7 +131,7 @@
 
 												</select> <span class="error_form text-danger" id="error_year"
 													style="display: none;">Please Select </span>
-											</div>
+											</div> --%>
 										</div>
 
 										<div class="form-group">
@@ -135,7 +144,7 @@
 													autocomplete="off" id="fromDate" name="fromDate"
 													value="${editValue.activityFromdt}"> <span
 													class="error_form text-danger" id="error_fromDate"
-													style="display: none;">Please enter From date</span>
+													style="display: none;">Please enter from date</span>
 
 											</div>
 										</div>
@@ -158,12 +167,12 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="participant">No.
-												of Beneficiaries<span class="text-danger">*</span>
+												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
 													autocomplete="off" min="0" name="participant"
-													placeholder="No. of Beneficiaries" onchange="trim(this)"
+													placeholder="No. of Participants" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editValue.activityPcount}"> <span
 													class="error_form text-danger" id="error_participant"
@@ -183,7 +192,7 @@
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
 
-												<a href="${pageContext.request.contextPath}/showHumanValues"><button
+												<a href="${pageContext.request.contextPath}/showHumanValues"><button id="sub_button_cancel"
 														type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
@@ -215,10 +224,6 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
-
-
-
 
 
 	<script type="text/javascript">
@@ -303,13 +308,17 @@
 												var isError = false;
 												var errMsg = "";
 
-												if ($("#title12").val() == -1) {
+												if (!$("#ttlProgm").val()) {
 
 													isError = true;
+													errMsg += '<li>Please enter a Subject name.</li>';
 
-													$("#error_year").show()
+													$("#ttlProgm").addClass(
+															"has-error")
+													$("#error_ttlProgm").show()
+
 												} else {
-													$("#error_year").hide()
+													$("#error_ttlProgm").hide()
 												}
 
 												if (!$("#fromDate").val()) {
@@ -337,6 +346,19 @@
 												} else {
 													$("#error_toDate").hide()
 												}
+												
+												if (!$("#participant").val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a Subject name.</li>';
+
+													$("#participant").addClass(
+															"has-error")
+													$("#error_participant").show()
+
+												} else {
+													$("#error_participant").hide()
+												}
 
 												if (!isError) {
 
@@ -345,7 +367,7 @@
 														document
 																.getElementById("sub_button").disabled = true;
 														document
-																.getElementById("sub_button_next").disabled = true;
+																.getElementById("sub_button_cancel").disabled = true;
 														return true;
 
 													}

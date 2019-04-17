@@ -130,10 +130,10 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="no_of_participant">No.
-												of Participants <span class="text-danger">*</span>
+												of Participant <span class="text-danger"></span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" maxlength="9"
+												<input type="text" maxlength="9"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" class="form-control"
 													id="no_of_participant" min="0" autocomplete="off"
@@ -279,7 +279,7 @@
 												}
 
 
-												if ($("#no_of_participant")
+												/* if ($("#no_of_participant")
 														.val() == 0
 														|| !$(
 																"#no_of_participant")
@@ -299,7 +299,7 @@
 													$(
 															"#no_of_participant_field")
 															.hide()
-												}
+												} */
 
 
 												if (!isError) {

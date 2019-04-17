@@ -303,7 +303,7 @@ public class InstituteDistController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/humanValues");
-				model.addObject("title", "Human Values-Professional Ethics List");
+				model.addObject("title", "Initiative To Engage And Contribute to Locale Communinty List");
 
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
@@ -378,7 +378,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_human_values");
 
-				model.addObject("title", "Add Human Values-Professional Ethics");
+				model.addObject("title", "Add Initiative To Engage And Contribute to Locale Communinty");
 
 				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
 				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));
@@ -427,7 +427,7 @@ public class InstituteDistController {
 
 				String fromDate = request.getParameter("fromDate");
 				String toDate = request.getParameter("toDate");
-				String activityName = request.getParameter("title");
+				String activityName = request.getParameter("ttlProgm");
 				int instituteId = (int) session.getAttribute("instituteId");
 				int userId = (int) session.getAttribute("userId");
 				int yearId = (int) session.getAttribute("acYearId");
@@ -497,7 +497,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_human_values");
 
-				model.addObject("title", "Edit Human Values-Professional Ethics");
+				model.addObject("title", "Edit Initiative To Engage And Contribute to Locale Communinty");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("valueId", valueId);
