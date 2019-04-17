@@ -132,7 +132,7 @@ public class LibraryController {
 	}
 
 	@RequestMapping(value = "/libraryBasicInfo", method = RequestMethod.GET)
-	public ModelAndView showStudMentor(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView libraryBasicInfo(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
@@ -200,8 +200,8 @@ public class LibraryController {
 			libInfo.setDateOfExaminationEstablishment(simpleDate);
 
 			libInfo.setDelStatus(1);
-			libInfo.setExInt1(0);
-			libInfo.setExVar1("NA");
+			libInfo.setExInt1(Integer.parseInt(request.getParameter("noOfBooks")));
+			libInfo.setExVar1(request.getParameter("noOfVolumns"));
 
 			LibraryInfo saveLib = rest.postForObject(Constants.url + "/insertlibBasicInfo", libInfo, LibraryInfo.class);
 			int isView = Integer.parseInt(request.getParameter("is_view"));
@@ -848,7 +848,7 @@ public class LibraryController {
 			}
 			String roleNameList = null;
 
-			roleNameList = Constants.Librarian_Role ;
+			roleNameList = Constants.Librarian_Role;
 
 			if (isLib == 1) {
 				roleNameList = roleNameList + "," + Constants.Librarian_Role;
@@ -1506,7 +1506,7 @@ public class LibraryController {
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int acad_year = (int) session.getAttribute("acYearId");
-				System.out.println("Student list inst id and year::::" + inst_id+" "+acad_year);
+				System.out.println("Student list inst id and year::::" + inst_id + " " + acad_year);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", inst_id);
@@ -1699,7 +1699,7 @@ public class LibraryController {
 					e.printStackTrace();
 				}
 
-				//int academic_year = Integer.parseInt(request.getParameter("academic_year"));
+				// int academic_year = Integer.parseInt(request.getParameter("academic_year"));
 				int no_fullTime_Faculty = Integer.parseInt(request.getParameter("no_fullTime_Faculty"));
 				int no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
 				int no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));

@@ -128,22 +128,6 @@
 														</div>
 													</div>
 
-													<div class="form-group">
-														<label class="control-label col-sm-3" for="version"
-															style="text-align: left;">Total Number of LMS
-															Users <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-9">
-															<input type="number" class="form-control" id="userLms"
-																min="0" name="userLms" placeholder="" maxlength="7"
-																onkeypress='return restrictAlphabets(event)'
-																value="${libInfo.usersOfLms}" onchange="trim(this)"
-																autocomplete="off"> <span
-																class="error_form text-danger" id="error_formfield3"
-																style="display: none;">Please enter total number
-																of users of LMS and value must be greater than 0.</span>
-														</div>
-													</div>
 
 
 													<div class="form-group">
@@ -163,6 +147,24 @@
 																purchase/automation Lib. </span>
 														</div>
 													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="version"
+															style="text-align: left;">Total Number of LMS
+															Users <span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-9">
+															<input type="number" class="form-control" id="userLms"
+																min="0" name="userLms" placeholder="" maxlength="7"
+																onkeypress='return restrictAlphabets(event)'
+																value="${libInfo.usersOfLms}" onchange="trim(this)"
+																autocomplete="off"> <span
+																class="error_form text-danger" id="error_formfield3"
+																style="display: none;">Please enter total number
+																of users of LMS and value must be greater than 0.</span>
+														</div>
+													</div>
+
 
 
 													<div class="form-group">
@@ -363,202 +365,48 @@
 												</div>
 
 
-												<!--  <h4>e-Content Facilities</h4>
-															
-														 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;"> Media Center Available  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="mediacenter" name="mediacenter"
-																	value="1" checked>Yes <input type="radio"
-																	id="mediacenter" name="mediacenter" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment</div>
-															<div class="col-sm-3">
 
-																<input type="text" class="form-control datepicker" id="yearMediacenter"
-																	name="yearMediacenter" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off"
-																	  onkeypress='return restrictAlphabets(event)' required>
-
-															</div>
-														</div>
-														 -->
-
-												<!-- <div class="form-group">
-															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;"> Recording Facility Available <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="recordingFacility" name="recordingFacility"
-																	value="1" checked>Yes <input type="radio"
-																	id="recordingFacility" name="recordingFacility" value="0" pattern="^(?!\s*$).+" autocomplete="off"  required>No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearRecordingFacility"
-																	name="yearRecordingFacility" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off"
-																	onkeypress='return restrictAlphabets(event)'  required>
-
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="lectuteCap"
-																style="text-align: left;"> Lecture Capturing System  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="lectuteCap" name="lectuteCap"
-																	value="1" checked>Yes <input type="radio"
-																	id="lectuteCap" name="lectuteCap" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearLectuteCap"
-																	name="yearLectuteCap" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off"
-																	onkeypress='return restrictAlphabets(event)'  required>
-
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="mediacenter"
-																style="text-align: left;"> Any other e-Content Development Facility 
-(Please Specify) 
-  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="eContentFacility" name="eContentFacility"
-																	value="1" checked>Yes <input type="radio"
-																	id="eContentFacility" name="eContentFacility" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearEContentFacility"
-																	name="yearEContentFacility" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
-																	onkeypress='return restrictAlphabets(event)' required>
-
-															</div>
-														</div> -->
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="noOfComp"
+														style="text-align: left;"> Total No. of Books
+														available in Library<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" id="noOfBooks"
+															name="noOfBooks" min="0"
+															placeholder="Total No. of Books available in Library"
+															value="${libInfo.exInt1}" maxlength="4"
+															onchange="trim(this)" autocomplete="off"
+															onkeypress='return restrictAlphabets(event)'> <span
+															class="error_form text-danger" id="error_formfield9"
+															style="display: none;">Please enter Total No. of
+															Books available in Library.</span>
+													</div>
+												</div>
 
 
-												<!--   <h4>e-Governance Facilities</h4>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="planning"
-																style="text-align: left;">Planning	  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="planning" name="planning"
-																	value="1" checked>Yes <input type="radio"
-																	id="planning" name="planning" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearPlanning"
-																	name="yearPlanning" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
-																	onkeypress='return restrictAlphabets(event)' required>
-
-															</div>
-														</div>
-														
-														
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="recordingFacility"
-																style="text-align: left;"> Administration  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="administration" name="administration"
-																	value="1" checked>Yes <input type="radio"
-																	id="recordingFacility" name="recordingFacility" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearAdministration"
-																	name="yearAdministration" placeholder="Membership Details" 
-																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
-																	onkeypress='return restrictAlphabets(event)' required>
-
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="lectuteCap"
-																style="text-align: left;">Finance & Accounts  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="finance" name="finance"
-																	value="1" checked>Yes <input type="radio"
-																	id="lectuteCap" name="lectuteCap" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearFinance"
-																	name="yearFinance" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off" 
-																	onkeypress='return restrictAlphabets(event)' required>
-
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="studAddmission"
-																style="text-align: left;"> Student Admission & Support 
-  <span
-																class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="studAddmission" name="studAddmission"
-																	value="1" checked>Yes <input type="radio"
-																	id="studAddmission" name="studAddmission" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
-
-																<input type="text" class="form-control datepicker" id="yearStudAddmission"
-																	name="yearStudAddmission" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off"  
-																	onkeypress='return restrictAlphabets(event)' required>
-
-															</div>
-														</div>
 
 
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="examinations"
-																style="text-align: left;"> Examinations  
- 																 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-3">
-																<input type="radio" id="examinations" name="examinations"
-																	value="1" checked>Yes <input type="radio"
-																	id="eContentFacility" name="eContentFacility" value="0">No
-															</div>
-															<div class="col-sm-2">Year of Establishment </div>
-															<div class="col-sm-3">
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="noOfVolumns"
+														style="text-align: left;"> Total No. of Volumns
+														available in Library<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" id="noOfVolumns"
+															name="noOfVolumns" min="0"
+															placeholder="Total No. of Volumns available in Library"
+															value="${libInfo.exVar1}" maxlength="4"
+															onchange="trim(this)" autocomplete="off"
+															onkeypress='return restrictAlphabets(event)'> <span
+															class="error_form text-danger" id="error_formfield10"
+															style="display: none;">Total No. of Volumns
+															available in Library</span>
+													</div>
+												</div>
 
-																<input type="text" class="form-control datepicker" id="yearExaminations"
-																	name="yearExaminations" placeholder="Membership Details"
-																	value="" pattern="^(?!\s*$).+" autocomplete="off"
-																	onkeypress='return restrictAlphabets(event)'  required>
 
-															</div>
-														</div> -->
+
 
 
 
@@ -718,6 +566,30 @@
 					//return false;
 				} else {
 					$("#error_formfield8").hide()
+				}
+
+				if ($("#noOfBooks").val() == 0) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#noOfBooks").addClass("has-error")
+					$("#error_formfield9").show()
+					//return false;
+				} else {
+					$("#error_formfield9").hide()
+				}
+
+				if ($("#noOfVolumns").val() == 0) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#noOfVolumns").addClass("has-error")
+					$("#error_formfield10").show()
+					//return false;
+				} else {
+					$("#error_formfield10").hide()
 				}
 
 				if (!isError) {
