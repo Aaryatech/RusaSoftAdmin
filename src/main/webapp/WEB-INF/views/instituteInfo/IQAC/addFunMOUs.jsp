@@ -577,7 +577,7 @@
 			
 			
 			var qualType = document.getElementById("otherCourse").value
-			alert("x " +qualType);
+			//alert("x " +qualType);
 			document.getElementById("abc").style.display = (qualType.length==0 || qualType=="NA") ? "none" : "inline";
 			document.getElementById("abc").style.display = (qualType == "NA") ? "none" : "";
 			

@@ -192,7 +192,7 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control"
 																	id="transperentspeficytext"
-																	name="transperentspeficytext"
+																	name="transperentspeficytext" value="${editInstyn.instYesnoResponse}"
 																	placeholder="Please Specify Here" onchange="trim(this)">
 															</div>
 
@@ -247,6 +247,14 @@
 																			onclick="deleteTranspernt(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a>
+																				&nbsp;&nbsp;&nbsp;&nbsp;	
+																			<a href="editTranspernt/${list.instYesnoId}"
+																			
+																			rel="tooltip" data-color-class="danger"
+																			title="Edit" data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Delete  record"><span
 																				class="glyphicon glyphicon-remove"></span></a></td>

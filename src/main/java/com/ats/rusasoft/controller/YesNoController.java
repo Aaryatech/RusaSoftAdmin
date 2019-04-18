@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -326,6 +327,30 @@ public class YesNoController {
 
 		return instituteYesNoTab1List;
 
+	}
+	
+	@RequestMapping(value = "/editTranspernt/{instYesnoId}", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView editTranspernt(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable("instYesnoId") int instYesnoId) {
+		ModelAndView model = new ModelAndView("yesno/fixedYesNoSecond");
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		int acYearId = (Integer) session.getAttribute("acYearId");
+		//int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+		System.out.println("Id:"+instYesnoId);
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("id", instYesnoId);	
+		
+		
+		map.add("instituteId", userObj.getGetData().getUserInstituteId());
+		map.add("yearId", acYearId);
+		map.add("secCode", "tab1");
+		InstituteYesNo editInstyn = restTemplate.postForObject(
+				Constants.url + "/getInstituteYesNoById", map, InstituteYesNo.class);
+		System.out.println("res="+editInstyn.toString());
+		model.addObject("editInstyn", editInstyn);	
+		return model;
+		
 	}
 
 	@RequestMapping(value = "/deleteTranspernt", method = RequestMethod.GET)

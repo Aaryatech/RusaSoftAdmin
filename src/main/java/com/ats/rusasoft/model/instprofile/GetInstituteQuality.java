@@ -13,7 +13,15 @@ public class GetInstituteQuality {
 	private int qualityPcount;
 	
 	private String qualityInitiativeName;
+	private String exVar1;
+	
+	public String getExVar1() {
+		return exVar1;
+	}
 
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
+	}
 	public int getQualityId() {
 		return qualityId;
 	}

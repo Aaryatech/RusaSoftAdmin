@@ -412,7 +412,7 @@ public class QualityInitiativeController {
 				instQuality.setIsActive(1);
 				instQuality.setExInt1(1);
 				instQuality.setExInt2(1);
-				instQuality.setExVar1("NA");
+				instQuality.setExVar1(request.getParameter("qltyInitiative"));
 				instQuality.setExVar2("NA");
 
 				instQuality.setMakerDatetime(curDateTime);
@@ -468,7 +468,7 @@ public class QualityInitiativeController {
 
 				GetInstituteQuality editInstQuality = rest.postForObject(Constants.url + "getInstituteQualityById", map,
 						GetInstituteQuality.class);
-
+				System.err.println("List"+editInstQuality);
 				model.addObject("editQuality", editInstQuality);
 
 				QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",

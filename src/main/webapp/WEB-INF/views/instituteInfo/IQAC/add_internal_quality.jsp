@@ -107,8 +107,9 @@
 												Quality Initiative<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="qualityInitId" name="qualityInitId"
+												<select id="qualityInitId" name="qualityInitId" onchange="showForm()"
 													class="form-control" title="Select Quality Initiative">
+													<option value="">Select</option>
 													<c:forEach items="${qualInintList}" var="quInit">
 														<c:choose>
 															<c:when
@@ -120,12 +121,28 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
+												<option value="${-1}">Any other quality based certification</option>
+													
 												</select> <span class="error_form text-danger"
 													id="qualityInitId_field" style="display: none;">Please
 													select quality initiative name</span>
 
 
 											</div>
+										</div>
+										
+										<div class="form-group" id="abc" style="display: none">
+
+											<label class="control-label col-sm-2" for="page_name">Name of 
+												Quality Initiative<span class="text-danger">*</span> </label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="qltyInitiative"
+													autocomplete="off" name="qltyInitiative" onchange="trim(this)"
+													placeholder="" value="${editQuality.exVar1}"> <span
+													class="error_form text-danger" id="error_other"
+													style="display: none;">Please Enter Other Course</span>
+											</div>
+
 										</div>
 
 										<div class="form-group">
@@ -413,6 +430,34 @@
 
 			});
 		});
+		
+		function hideText() {
+			//alert("hii");
+			var qualType = document.getElementById("qltyInitiative").value
+			alert("hii"+qualType);
+			document.getElementById("abc").style.display = (qualType==null) ? "none" : "inline";
+	
+			
+				
+		}
+		
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var value = document.getElementById("qualityInitId").value
+			var editValue = value;
+			alert("qualType::"+value);
+
+			document.getElementById("abc").style.display = (value == editValue) ? "inline" : "none";
+			
+			/* if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
+			} else {
+				document.getElementById("abc").style = "display:none"
+			} */
+
+		}
 	</script>
 	<script type="text/javascript">
 
