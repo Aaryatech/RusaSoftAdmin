@@ -117,7 +117,7 @@
 													<th style="text-align: center;">Name</th>
 													<th style="text-align: center;">Department</th>
 													<th style="text-align: center;">Id Number</th>
-													<th style="text-align: center;">Academic Year</th>
+													<th style="text-align: center;">Year</th>
 													<th style="text-align: center;">Contact No</th>
 													<th style="text-align: center;">Email</th>
 													<th style="text-align: center; width: 10%">Action</th>

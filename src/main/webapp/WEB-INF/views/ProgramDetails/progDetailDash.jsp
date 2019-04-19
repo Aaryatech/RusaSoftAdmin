@@ -120,7 +120,7 @@
 										<label class="control-label col-sm-2" for="status">
 											Program Name:</label> <label class="control-label col-sm-10"
 											for="status"><strong>
-												${programDetail.nameOfProgram} </strong></label>
+												${programDetail.programName} - ${programDetail.nameOfProgram} </strong></label>
 									</div>
 
 									<div class="form-group">

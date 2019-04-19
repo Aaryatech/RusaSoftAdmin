@@ -251,13 +251,13 @@
 																			data-original-title="Delete  record"><span
 																				class="glyphicon glyphicon-remove"></span></a>
 																				&nbsp;&nbsp;&nbsp;&nbsp;	
-																			<a href="editTranspernt/${list.instYesnoId}"
+																			<%-- <a href="editTranspernt/${list.instYesnoId}"
 																			
 																			rel="tooltip" data-color-class="danger"
 																			title="Edit" data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Delete  record"><span
-																				class="glyphicon glyphicon-remove"></span></a></td>
+																				class="glyphicon glyphicon-remove"></span></a></td> --%>
 																	</tr>
 																</c:forEach>
 															</tbody>

@@ -133,30 +133,18 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">
-													Year  <span class="text-danger">*</span>
+													Year <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<select id="academic_year" name="academic_year" class="form-control" >
-																<%-- <c:forEach items="${acaYearList}" var="acaYear">
-																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
-																	
-																	</c:forEach> --%>
-																		<option value="-1">Select</option>
-																		<c:forEach items="${acaYearList}" var="acaYearList">
-																		<c:choose>
-																			<c:when test="${acaYearList.yearId==editStudent.acadamicYear}">
-																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-
+												<select id="academic_year" name="academic_year" class="form-control">
+																
+														<option value="First Year" ${editStudent.acadamicYear eq 'First Year' ? 'selected' : '' }>First Year</option>
+														<option value="Second Year" ${editStudent.acadamicYear eq 'Second Year' ? 'selected' : '' }>Second Year</option>
+														<option value="Third Year" ${editStudent.acadamicYear eq 'Third Year' ? 'selected' : '' }>Third Year</option>
+														<option value="Fourth Year" ${editStudent.acadamicYear eq 'Fourth Year' ? 'selected' : '' }>Fourth Year</option>
+														<option value="Fifth Year" ${editStudent.acadamicYear eq 'Fifth Year' ? 'selected' : '' }>Fifth Year</option>
+														
+													
 													</select>
 													 <span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Academic Year</span>
                                        </div>

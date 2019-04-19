@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" " onload="hideText()">
+	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -109,7 +110,7 @@
 													</label>
 													<div class="col-sm-9">
 														<select id="prog_type" name="prog_type"
-															class="form-control">
+															class="form-control" onchange="getProgramTypeByProgram()">
 
 															<c:forEach items="${progTypeList}" var="progType">
 																<c:choose>
@@ -133,9 +134,15 @@
 														Type of Program<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" id="prog_name"
+
+													<select id="prog_name" name="prog_name"
+													class="form-control" required>
+
+												</select>
+													
+														<%-- <input type="text" class="form-control" id="prog_name"
 															value="${trainPlace.programName}" onchange="trim(this)" name="prog_name"
-															placeholder="Name of Program" maxlength="100">
+															placeholder="Name of Program" maxlength="100"> --%>
 															<span class="error_form text-danger" id="prog_name_field"
 															style="display: none;">Please enter program name</span>
 													</div>
@@ -272,7 +279,97 @@
 	<!-- END CONTENT -->
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<!-- <script type="text/javascript">
+		function getProgramTypeByProgram() {
 
+			var programType = document.getElementById("prog_type").value;
+			alert("programType" + programType);
+
+			var valid = true;
+
+			if (programType == null || programType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getProgramTypeByProgram}', {
+					programType : programType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					alert(data);
+					var x=${trainPlace.programName};
+					var html;
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+					if(x == data[i].programId){
+						
+						html += '<option selected value="' + data[i].programId + '">'
+						+ data[i].nameOfProgram + '</option>';
+						}
+							
+					
+					html += '<option value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+
+					}
+					html += '</option>';
+
+					$('#prog_name').html(html);
+					$("#prog_name").trigger("chosen:updated");
+
+				});
+			}//end of if
+
+		}if(x == data[i].programId){
+							html += '<option selected value="' + data[i].programId + '">'
+							+ data[i].nameOfProgram + '</option>';
+						}
+	</script> -->
+	<script type="text/javascript">
+		function getProgramTypeByProgram() {
+
+			var programType = document.getElementById("prog_type").value;
+			//alert("programType" + programType);
+			
+			var valid = true;
+
+			if (programType == null || programType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getProgramTypeByProgram}', {
+					programType : programType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(data);
+				
+					var html;
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+
+						html += '<option value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+
+					}
+					html += '</option>';
+
+					$('#prog_name').html(html);
+					$("#prog_name").trigger("chosen:updated");
+
+				});
+			}//end of if
+
+		}
+	</script>
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -512,8 +609,9 @@
 
 		function hideText() {
 			//alert("hii");
+			getProgramTypeByProgram();
 			document.getElementById("abc").style = "display:none"
-
+				
 		}
 	</script>
 	<script type="text/javascript">

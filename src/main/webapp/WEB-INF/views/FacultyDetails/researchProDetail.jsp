@@ -44,6 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+<c:url value="/getDateValidation" var="getDateValidation"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -289,6 +290,10 @@
 													autocomplete="off" value="${editProject.projFrdt}">
 												<span class="error_form text-danger" id="error_fromDate"
 													style="display: none;">Please enter from date </span>
+													
+												<span
+													class="error_form text-danger" id="error_fromToDate"
+													style="display: none;">From Date must be smaller than To Date </span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -300,11 +305,15 @@
 
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													onchange="checkDate()" id="toDate" name="toDate"
+												 id="toDate" name="toDate"
 													placeholder="To Date" autocomplete="off"
 													value="${editProject.projTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
 													style="display: none;">Please enter to Date </span>
+													
+													<span
+													class="error_form text-danger" id="error_toToDate"
+													style="display: none;">To Date must be greater than From Date </span>
 											</div>
 
 
@@ -318,7 +327,7 @@
 <button type="submit" id="sub_button" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showResearchDetailsList"><button
+<a href="${pageContext.request.contextPath}/showResearchDetailsList"><button id="sub_button_cancel"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 									</form>
@@ -402,36 +411,48 @@ function submit_f(view){
         }
         return true;
     }
- 
-</script>
-	<!-- <script>
-		function checkDate() {
- 
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-	 
-			if (  fromDate > toDate  ) {
-				alert("From Date Should be Small");
-				document.getElementById("toDate").value="";
- 
-			} 
+	</script>
 
-			 
-
-		}
-	</script> -->
 	<script type="text/javascript">
-        $(function () {
-		 
-            $('.datepickeryear').datepicker({
-				autoclose: true,
-				minViewMode: 2,
-		         format: 'yyyy'
+    $(function () {
+	 
+        $('.datepickeryear').datepicker({
+			autoclose: true,
+			minViewMode: 2,
+	         format: 'yyyy'
 
-			});
-        });
-    </script>
+		});
+    });
+</script>
 
+	 <script>
+		function checkDate1(fromDate,toDate) {
+			var res=false;
+			var valid = true;
+			if (valid == true)
+				$
+						.getJSON(
+								'${getDateValidation}',
+								{
+									fromDate : fromDate,
+									toDate : toDate,
+									ajax : 'true',
+
+								},
+								function(data) {
+									res=data.isError;
+									alert("Data  " +JSON.stringify(data));
+									if (data==0) {
+										res=0;
+											//alert("To Date must be greate than to date");
+									} else{
+										res=1;
+									}
+								});
+			return res;
+		}
+
+	</script> 
 
 
 	<script>
@@ -442,6 +463,48 @@ function submit_f(view){
             			 var isError=false;
             			 var errMsg="";
             				
+            			 var from_date = document.getElementById("fromDate").value;
+         				var to_date = document.getElementById("toDate").value;
+         				var x=0;
+         				
+         				
+         		        var fromdate = from_date.split('-');
+         		        from_date = new Date();
+         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+         		        var todate = to_date.split('-');
+         		        to_date = new Date();
+         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+         		        if (from_date > to_date ) 
+         		        {
+         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+							$("#error_fromToDate").show();
+    					 	$("#error_toToDate").show();
+         		            return false;
+         		           
+         		        }else {
+         					$("#error_fromToDate").hide();
+         					$("#error_toToDate").hide();
+         				}
+         				
+         				
+         				/* x=checkDate1(fromDate,toDate);
+         				if(x==0){
+        					 alert("Hi x==0")
+             				isError=true;
+             				$("#fromDate").addClass("has-error")
+             				$("#toDate").addClass("has-error")
+             				$("#error_fromToDate").show();
+     					 	$("#error_toToDate").show();
+         				}
+             				else {
+             					$("#error_fromToDate").hide();
+             					$("#error_toToDate").hide();
+             				}
+         				if(x==1){
+         					alert("Hi x===1")
+         					$("#error_fromToDate").hide();
+         					$("#error_toToDate").hide();
+         				} */
            
             				if(!$("#projName").val()){
             					 
@@ -493,7 +556,6 @@ function submit_f(view){
                 				} else {
                 					$("#error_PIName").hide()
                 				}
-            				
             				
             				
             				
@@ -555,13 +617,15 @@ function submit_f(view){
             				
             				
             				
-            				if(!$("#fromDate").val()){
+            				 if(!$("#fromDate").val()){
            					 
                 				isError=true;
                 				errMsg += '<li>Please enter FromDate.</li>';
                 				
                 				$("#fromDate").addClass("has-error")
                 				$("#error_fromDate").show()
+                				$("#error_fromToDate").hide();
+            					$("#error_toToDate").hide();
                 					 
                 				} else {
                 					$("#error_fromDate").hide()
@@ -575,6 +639,8 @@ function submit_f(view){
                 				
                 				$("#toDate").addClass("has-error")
                 				$("#error_toDate").show()
+                				$("#error_fromToDate").hide();
+            					$("#error_toToDate").hide();
                 					 
                 				} else {
                 					$("#error_toDate").hide()
@@ -586,7 +652,7 @@ function submit_f(view){
             					var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
 									document.getElementById("sub_button").disabled = true;
-									document.getElementById("sub_button_next").disabled = true;
+									document.getElementById("sub_button_cancel").disabled = true;
 									return  true;
 								
 								}
@@ -597,6 +663,77 @@ function submit_f(view){
             	});
 		  
         </script>
+<!-- 	function checkUnique(inputValue, valueType) {
+			//alert(inputValue);
 
+			var primaryKey = $
+			{
+				editInst.librarianId
+			}
+			;
+			//alert("Primary key"+primaryKey);
+			var isEdit = 0;
+			if (primaryKey > 0) {
+				isEdit = 1;
+			}
+			//alert("Is Edit " +isEdit);
+
+			var valid = false;
+			if (valueType == 1) {
+				//alert("Its Mob no");
+				if (inputValue.length == 10) {
+					valid = true;
+					//alert("Len 10")
+				} else {
+					//alert("Not 10");
+				}
+			} else if (valueType == 2) {
+				//alert("Its Email " );
+
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (inputValue.match(mailformat)) {
+					valid = true;
+					//alert("Valid Email Id");
+				} else {
+					valid = false;
+					//alert("InValid Email Id");
+				}
+			}
+			if (valid == true)
+				$
+						.getJSON(
+								'${checkUniqueField}',
+								{
+
+									inputValue : inputValue,
+									valueType : valueType,
+									primaryKey : primaryKey,
+									isEdit : isEdit,
+									tableId : 4,
+
+									ajax : 'true',
+
+								},
+								function(data) {
+
+									//	alert("Data  " +JSON.stringify(data));
+									if (data.error == true) {
+										if (valueType == 2) {
+
+											alert("This email id already exist in system please enter unique");
+											$('#librarian_email').val('');
+											//document.getElementById("stud_contact_no").value=" ";
+
+										} else {
+
+											alert("This contact no  already exist in system please enter unique");
+											$('#lib_con_num').val('');
+											//document.getElementById("student_email").value=" ";
+										}
+									}
+								});
+		}
+	</script>
+ -->
 </body>
 </html>
