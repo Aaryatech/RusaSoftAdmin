@@ -76,7 +76,7 @@
 										<thead>
 											<tr>
 												<th>Sr No</th>
-												<th>Location Name</th>
+												<th>Program</th>
 												<th>Male Students</th>
 												<th>Female Students</th>
 												<th>Transgender Students</th>
@@ -89,11 +89,11 @@
 												varStatus="count">
 												<tr>
 													<td align="center">${count.index+1}</td>
-													<td align="left">${studAdm.locationName}</td>
+													<td align="left">${studAdm.progName}-${studAdm.progType}</td>
 													<td align="right">${studAdm.maleStudent}</td>
 													<td align="right">${studAdm.femaleStudent}</td>
 													<td align="right">${studAdm.transStudent}</td>
-													<td align="right">${studAdm.maleStudent+studAdm.femaleStudent+studAdm.transStudent}</td>
+													<td align="right">${studAdm.totStudent}</td>
 
 													<%-- <td align="center">
 														<c:if test="${editAccess==0}"> <a href="#"

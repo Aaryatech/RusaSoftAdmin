@@ -26,7 +26,9 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.master.model.Program;
 import com.ats.rusasoft.master.model.prodetail.Cast;
 import com.ats.rusasoft.master.model.prodetail.GetStudAdmCatwise;
+import com.ats.rusasoft.master.model.prodetail.GetStudAdmCatwiseGrpByProg;
 import com.ats.rusasoft.master.model.prodetail.GetStudAdmLocwise;
+import com.ats.rusasoft.master.model.prodetail.GetStudAdmLocwiseGrpByProg;
 import com.ats.rusasoft.master.model.prodetail.Location;
 import com.ats.rusasoft.master.model.prodetail.NameIdBean;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
@@ -88,15 +90,16 @@ public class StudAdminController {
 				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
 				model.addObject("progTypeList", progTypeList);
 
-				if (studAdmCastList.size() > 0) {
+				/*if (studAdmCastList.size() > 0) {
 
 					model.addObject("isEdit", 1);
 				} else {
 
 					model.addObject("isEdit", 0);
-				}
+				}*/
 				//
 
+				model.addObject("isEdit", 0);
 				List<NameIdBean> newCastIds = new ArrayList<NameIdBean>();
 
 				for (int i = 0; i < castList.size(); i++) {
@@ -196,9 +199,9 @@ public class StudAdminController {
 				int yearId = (int) session.getAttribute("acYearId");
 				map.add("yearId", yearId);
 
-				GetStudAdmLocwise[] locArray = restTemplate.postForObject(Constants.url + "getStudAdmLocwiseList", map,
-						GetStudAdmLocwise[].class);
-				List<GetStudAdmLocwise> locAdmList = new ArrayList<>(Arrays.asList(locArray));
+				GetStudAdmLocwiseGrpByProg[] locArray = restTemplate.postForObject(Constants.url + "getStudAdmLocwiseGrpByProgType", map,
+						GetStudAdmLocwiseGrpByProg[].class);
+				List<GetStudAdmLocwiseGrpByProg> locAdmList = new ArrayList<>(Arrays.asList(locArray));
 				System.err.println("locAdmList " + locAdmList.toString());
 
 				model.addObject("locAdmList", locAdmList);
@@ -263,9 +266,9 @@ public class StudAdminController {
 				int yearId = (int) session.getAttribute("acYearId");
 				map.add("yearId", yearId);
 
-				GetStudAdmCatwise[] catsArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseList", map,
-						GetStudAdmCatwise[].class);
-				List<GetStudAdmCatwise> studAdmList = new ArrayList<>(Arrays.asList(catsArray));
+				GetStudAdmCatwiseGrpByProg[] catsArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseGrpByProgType", map,
+						GetStudAdmCatwiseGrpByProg[].class);
+				List<GetStudAdmCatwiseGrpByProg> studAdmList = new ArrayList<>(Arrays.asList(catsArray));
 				System.err.println("studAdmCastList " + studAdmList.toString());
 
 				model.addObject("studAdmCastList", studAdmList);
@@ -319,10 +322,11 @@ public class StudAdminController {
 				int yearId = (int) session.getAttribute("acYearId");
 				map.add("yearId", yearId);
 
-				GetStudAdmLocwise[] locAdmStudArray = restTemplate
-						.postForObject(Constants.url + "getStudAdmLocwiseList", map, GetStudAdmLocwise[].class);
-				List<GetStudAdmLocwise> locAdmList = new ArrayList<>(Arrays.asList(locAdmStudArray));
+				GetStudAdmLocwise[] catsArray = restTemplate.postForObject(Constants.url + "getStudAdmLocwiseList", map,
+						GetStudAdmLocwise[].class);
+				List<GetStudAdmLocwise> locAdmList = new ArrayList<>(Arrays.asList(catsArray));
 				System.err.println("locAdmList " + locAdmList.toString());
+				
 
 				if (locAdmList.size() > 0) {
 
@@ -331,6 +335,8 @@ public class StudAdminController {
 					model.addObject("isEdit", 0);
 
 				}
+				
+				model.addObject("isEdit", 0);
 
 				List<NameIdBean> newLocIds = new ArrayList<NameIdBean>();
 
@@ -367,6 +373,13 @@ public class StudAdminController {
 				}
 
 				model.addObject("locAdmList", locAdmList);
+				
+				
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				model.addObject("progTypeList", progTypeList);
+
 			}
 		} catch (Exception e) {
 
@@ -476,8 +489,8 @@ public class StudAdminController {
 
 					map.add("instId", userObj.getGetData().getUserInstituteId());
 					map.add("yearId", yearId);
-
-					GetStudAdmCatwise[] castArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseList",
+					map.add("progType", programTypeId);
+					GetStudAdmCatwise[] castArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseByProgType",
 							map, GetStudAdmCatwise[].class);
 					List<GetStudAdmCatwise> studAdmList = new ArrayList<>(Arrays.asList(castArray));
 					System.err.println("studAdmCastList " + studAdmList.toString());
@@ -526,11 +539,11 @@ public class StudAdminController {
 						studAdmCat.setCastId(studAdmList.get(i).getCastId());
 
 						studAdmCat.setFemaleStudent(Integer
-								.parseInt(request.getParameter("cast_f" + studAdmList.get(i).getStudentCatId())));
+								.parseInt(request.getParameter("cast_f" + studAdmList.get(i).getCastId())));
 						studAdmCat.setMaleStudent(Integer
-								.parseInt(request.getParameter("cast_m" + studAdmList.get(i).getStudentCatId())));
+								.parseInt(request.getParameter("cast_m" + studAdmList.get(i).getCastId())));
 						studAdmCat.setTransStudent(Integer
-								.parseInt(request.getParameter("cast_t" + studAdmList.get(i).getStudentCatId())));
+								.parseInt(request.getParameter("cast_t" + studAdmList.get(i).getCastId())));
 						// studAdmCat.setCatTotStudent(Integer.parseInt(request.getParameter("cast_tot_stud"+castList.get(i).getCastId())));
 						studAdmCat.setCatTotStudent(studAdmCat.getFemaleStudent() + studAdmCat.getMaleStudent()
 								+ studAdmCat.getTransStudent());
@@ -604,6 +617,9 @@ public class StudAdminController {
 			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
 											// "0",
 			// newModuleList);
+			
+			int programTypeId = Integer.parseInt(request.getParameter("programTypeId"));
+
 			editAccess.setError(false);
 			int isEdit = Integer.parseInt(request.getParameter("isEdit"));
 			if (editAccess.isError() == true) {
@@ -643,7 +659,7 @@ public class StudAdminController {
 						studAdmLoc.setLocTotStudent(studAdmLoc.getFemaleStudent() + studAdmLoc.getMaleStudent()
 								+ studAdmLoc.getTransStudent());
 
-						studAdmLoc.setProgramId(1);
+						studAdmLoc.setProgramId(programTypeId);
 
 						studAdmLoc.setStudentLocId(0);
 
@@ -680,8 +696,11 @@ public class StudAdminController {
 
 					map.add("yearId", yearId);
 
+					
+					map.add("progType", programTypeId);
+					
 					GetStudAdmLocwise[] locAdmStudArray = restTemplate
-							.postForObject(Constants.url + "getStudAdmLocwiseList", map, GetStudAdmLocwise[].class);
+							.postForObject(Constants.url + "getStudAdmLocwiseByProgType", map, GetStudAdmLocwise[].class);
 					List<GetStudAdmLocwise> locAdmList = new ArrayList<>(Arrays.asList(locAdmStudArray));
 					System.err.println("locAdmList " + locAdmList.toString());
 
@@ -732,16 +751,16 @@ public class StudAdminController {
 						studAdmLoc.setLocationId(locAdmList.get(i).getLocationId());
 
 						studAdmLoc.setFemaleStudent(
-								Integer.parseInt(request.getParameter("loc_f" + locAdmList.get(i).getStudentLocId())));
+								Integer.parseInt(request.getParameter("loc_f" + locAdmList.get(i).getLocationId())));
 						studAdmLoc.setMaleStudent(
-								Integer.parseInt(request.getParameter("loc_m" + locAdmList.get(i).getStudentLocId())));
+								Integer.parseInt(request.getParameter("loc_m" + locAdmList.get(i).getLocationId())));
 						studAdmLoc.setTransStudent(
-								Integer.parseInt(request.getParameter("loc_t" + locAdmList.get(i).getStudentLocId())));
+								Integer.parseInt(request.getParameter("loc_t" + locAdmList.get(i).getLocationId())));
 						// studAdmCat.setCatTotStudent(Integer.parseInt(request.getParameter("cast_tot_stud"+castList.get(i).getCastId())));
 						studAdmLoc.setLocTotStudent(studAdmLoc.getFemaleStudent() + studAdmLoc.getMaleStudent()
 								+ studAdmLoc.getTransStudent());
 
-						studAdmLoc.setProgramId(1);
+						studAdmLoc.setProgramId(programTypeId);
 
 						studAdmLoc.setStudentLocId(locAdmList.get(i).getStudentLocId());
 
@@ -811,5 +830,181 @@ public class StudAdminController {
 		return list;
 
 	}
+	
+	@RequestMapping(value = { "/getStudAdmCatwiseByProgType" }, method = RequestMethod.GET)
+	public @ResponseBody List<GetStudAdmCatwise> getStudAdmCatwiseByProgType(HttpServletRequest request,
+			HttpServletResponse response) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		HttpSession session = request.getSession();
 
+		int programType = Integer.parseInt(request.getParameter("programType"));
+		map.add("progType", programType);
+		
+		
+		RestTemplate restTemplate = new RestTemplate();
+
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		map.add("instId", userObj.getGetData().getUserInstituteId());
+
+		int yearId = (int) session.getAttribute("acYearId");
+		map.add("yearId", yearId);
+
+		GetStudAdmCatwise[] catsArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseByProgType", map,
+				GetStudAdmCatwise[].class);
+		List<GetStudAdmCatwise> studAdmList = new ArrayList<>(Arrays.asList(catsArray));
+		System.err.println("studAdmCastList " + studAdmList.toString());
+		
+		return studAdmList;
+		
+		
+	}
+
+	//showEditStudAdmCatWise
+	
+	@RequestMapping(value = "/showEditStudAdmCatWise", method = RequestMethod.POST)
+	public ModelAndView showEditStudAdmCatWise(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info addAccess = AccessControll.checkAccess("showEditStudAdmCatWise", "showStudAddmit", "0", "0", "1", "0",
+					newModuleList);
+			if (addAccess.isError() == true) {
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("ProgramDetails/addStudCatwise");
+
+				model.addObject("title", "Edit Student Category Wise");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				RestTemplate restTemplate = new RestTemplate();
+
+				Cast[] catsArray = restTemplate.getForObject(Constants.url + "getAllCastCategory", Cast[].class);
+				List<Cast> castList = new ArrayList<>(Arrays.asList(catsArray));
+				System.err.println("castList " + castList.toString());
+
+				model.addObject("castList", castList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				int yearId = (int) session.getAttribute("acYearId");
+				map.add("yearId", yearId);
+				int programType = Integer.parseInt(request.getParameter("progId"));
+				map.add("progType", programType);
+				GetStudAdmCatwise[] castArray = restTemplate.postForObject(Constants.url + "getStudAdmCatwiseByProgType", map,
+						GetStudAdmCatwise[].class);
+				List<GetStudAdmCatwise> studAdmCastList = new ArrayList<>(Arrays.asList(castArray));
+				System.err.println("studAdmCastList " + studAdmCastList.toString());
+
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				model.addObject("progTypeList", progTypeList);
+
+				/*if (studAdmCastList.size() > 0) {
+
+					model.addObject("isEdit", 1);
+				} else {
+
+					model.addObject("isEdit", 0);
+				}*/
+				//
+
+				model.addObject("isEdit", 0);
+				List<NameIdBean> newCastIds = new ArrayList<NameIdBean>();
+
+				for (int i = 0; i < castList.size(); i++) {
+
+					int isNew = 1;
+
+					for (int j = 0; j < studAdmCastList.size(); j++) {
+
+						if (castList.get(i).getCastId() == studAdmCastList.get(j).getCastId()) {
+							isNew = 0;
+						}
+					}
+
+					if (isNew == 1) {
+
+						NameIdBean bean = new NameIdBean();
+
+						bean.setId(castList.get(i).getCastId());
+						bean.setName(castList.get(i).getCastName());
+						newCastIds.add(bean);
+
+					}
+				}
+
+				for (int i = 0; i < newCastIds.size(); i++) {
+
+					GetStudAdmCatwise newCastObj = new GetStudAdmCatwise();
+
+					newCastObj.setCastId(newCastIds.get(i).getId());
+					newCastObj.setCastName(newCastIds.get(i).getName());
+
+					studAdmCastList.add(newCastObj);
+				}
+
+				//
+				model.addObject("studAdmCastList", studAdmCastList);
+				model.addObject("progType", request.getParameter("progType"));
+				model.addObject("progName", request.getParameter("progName"));
+				model.addObject("isEdit", 1);
+				model.addObject("programType", programType);
+				
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showAddStudAdmitCatWise at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	//Location wise
+	
+	//
+	
+	
+	@RequestMapping(value = { "/getStudAdmLocwiseByProgType" }, method = RequestMethod.GET)
+	public @ResponseBody List<GetStudAdmLocwise> getStudAdmLocwiseByProgType(HttpServletRequest request,
+			HttpServletResponse response) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		HttpSession session = request.getSession();
+
+		int programType = Integer.parseInt(request.getParameter("programType"));
+		
+		
+		
+		RestTemplate restTemplate = new RestTemplate();
+
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		map.add("instId", userObj.getGetData().getUserInstituteId());
+
+		int yearId = (int) session.getAttribute("acYearId");
+		map.add("yearId", yearId);
+		map.add("progType", programType);
+		GetStudAdmLocwise[] catsArray = restTemplate.postForObject(Constants.url + "getStudAdmLocwiseByProgType", map,
+				GetStudAdmLocwise[].class);
+		List<GetStudAdmLocwise> studAdmList = new ArrayList<>(Arrays.asList(catsArray));
+		System.err.println("getStudAdmLocwiseByProgType " + studAdmList.toString());
+		
+		return studAdmList;
+		
+		
+	}
+	
+	
 }

@@ -69,17 +69,22 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-xs-12">
+								<form id="studAdmForm" method="post">
+								<input type="hidden" id="progId" name="progId" value="0">
+								<input type="hidden" id="progName" name="progName" value="0"> 
+								<input type="hidden" id="progType" name="progType" value="0"> 
+								 
 									<table class="table table-striped dt-responsive display"
 										id="example-1">
 										<thead>
 											<tr>
 												<th>Sr No</th>
-												<th>Category</th>
+												<th>Program</th>
 												<th>Male Students</th>
 												<th>Female Students</th>
 												<th>Transgender Students</th>
 												<th>Total Students</th>
-												<!-- <th >Action</th> -->
+												<!-- <th>Action</th>  -->
 											</tr>
 										</thead>
 										<tbody>
@@ -87,16 +92,15 @@
 												varStatus="count">
 												<tr>
 													<td align="center">${count.index+1}</td>
-													<td align="left">${studAdm.castName}</td>
+													<td align="left">${studAdm.progName}-${studAdm.progType}</td>
 													<td align="right">${studAdm.maleStudent}</td>
 													<td align="right">${studAdm.femaleStudent}</td>
 													<td align="right">${studAdm.transStudent}</td>
-													<td align="right">${studAdm.maleStudent+studAdm.femaleStudent+studAdm.transStudent}</td>
-													
+													<td align="right">${studAdm.totStudent}</td>
 
 													<%-- <td align="center">
 													<c:if test="${editAccess==0}"> <a href="#"
-													onclick="showEditAlum(${studAdm.studentCatId})"><span
+													onclick="showEdit(${studAdm.programId},'${studAdm.progName}','${studAdm.progType}')"><span
 														class="glyphicon glyphicon-edit" title="Edit"
 														data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 													<c:if test="${deleteAccess==0}"> <a
@@ -119,7 +123,9 @@
 															<button type="reset" class="btn btn-default">Reset</button>
 														</div>
 													</div> -->
+													</form>
 								</div>
+								
 
 							</div>
 						</div>
@@ -239,6 +245,20 @@
 
 			});
 
+		}
+		
+		function showEdit(progId,progName,progType){
+			
+			document.getElementById("progId").value=progId;
+			document.getElementById("progName").value=progName;
+			document.getElementById("progType").value=progType;
+
+			var form=document.getElementById("studAdmForm");
+		    form.setAttribute("method", "post");
+
+			form.action=("showEditStudAdmCatWise");
+			form.submit();
+			
 		}
 	</script>
 </body>

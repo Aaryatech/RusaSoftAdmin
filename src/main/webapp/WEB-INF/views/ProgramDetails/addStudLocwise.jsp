@@ -42,8 +42,12 @@
 </style>
 
 <!-- BEGIN BODY -->
-<body class=" " onload="calculateSum()">
+<body class=" " onload="getProgramTypeByProgram()()">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+	
+	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
+	<c:url value="/getStudAdmLocwiseByProgType" var="getStudAdmLocwiseByProgType"></c:url>
+	
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -110,6 +114,55 @@
 											<form class="form-horizontal"
 												action="${pageContext.request.contextPath}/insertStudAdmLocwise"
 												method="post" name="form_sample_2" id="form_sample_2">
+												
+												<c:if test="${isEdit==0}">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="programType">Program
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-4">
+											
+												<select id="programType" name="programType"
+													class="form-control" onchange="getProgramTypeByProgram()"
+													required>
+													<c:forEach items="${progTypeList}" var="progTypeList">
+														<c:choose>
+															<c:when
+																test="${progTypeList.programId==editProgram.programType}">
+																<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${progTypeList.programId}">${progTypeList.programName}</option>
+
+															</c:otherwise>
+
+														</c:choose>
+
+													</c:forEach>
+												</select>
+
+
+											</div>
+
+											<label class="control-label col-sm-2" for="programTypeId">Program
+												Type <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-4">
+											
+												<select id="programTypeId" name="programTypeId"
+													class="form-control" onchange="getStudAdmByProgType()" required>
+
+												</select>
+
+
+											</div>
+										</div>
+										</c:if>
+										<c:if test="${isEdit==1}">
+										<div align="center">Program :<b>${progName}-${progType}</b></div>
+										<input type="hidden" id="programTypeId" name="programTypeId" value="${programType}">
+										</c:if>
+												
 
 												<div class="row">
 													<div class="col-md-12">
@@ -225,6 +278,103 @@
 	<!-- END CONTENT -->
 	
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+		function getProgramTypeByProgram() {
+			var isEdit=${isEdit};
+			if(isEdit==1){
+			calculateSum();
+			}
+			var programType = document.getElementById("programType").value;
+			//alert("programType" + programType);
+
+			var valid = true;
+
+			if (programType == null || programType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getProgramTypeByProgram}', {
+					programType : programType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(data);
+					var html;
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+
+						html += '<option value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+
+					}
+					html += '</option>';
+
+					$('#programTypeId').html(html);
+					$("#programTypeId").trigger("chosen:updated");
+					getStudAdmByProgType();
+				});
+			}//end of if
+			
+		}
+		
+		function getStudAdmByProgType(){
+			var total=0;
+
+			var progType = document.getElementById("programTypeId").value;
+			//alert("programType" + programType);
+		  // alert("progType "+progType);
+
+			var valid = true;
+
+			if (progType == null || progType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getStudAdmLocwiseByProgType}', {
+					programType : progType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(JSON.stringify(data));
+					document.getElementById("isEdit").value="0";
+					if(data.length>0){
+						//alert("not null");
+
+					for(var i=0;i<data.length;i++){
+						//alert("I "+i)
+						//alert("+data[i].studentLocId" +data[i].locationId);
+						document.getElementById("loc_m"+data[i].locationId).value=data[i].maleStudent;
+						document.getElementById("loc_f"+data[i].locationId).value=data[i].femaleStudent;
+						document.getElementById("loc_t"+data[i].locationId).value=data[i].transStudent;
+						total=total + parseInt(data[i].locTotStudent);
+						document.getElementById("isEdit").value="1";
+					}
+					}else{
+						//alert("null");
+						$(".txt").each(function() {
+							this.value="0";
+
+						});
+					}
+					document.getElementById("total_stud").value=total;
+
+					
+				});
+
+			}//end of if
+			
+		}
+	</script>
+	
 	
 	
 	<script>

@@ -48,10 +48,12 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="calculateSum()()">
+<body class=" " onload="getProgramTypeByProgram()">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 
 	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
+	<c:url value="/getStudAdmCatwiseByProgType" var="getStudAdmCatwiseByProgType"></c:url>
+	
 
 
 	<!-- START TOPBAR -->
@@ -121,12 +123,13 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertStudAdmCatwise"
 										method="post" name="form_sample_2" id="form_sample_2">
-
+										<c:if test="${isEdit==0}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="programType">Program
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-4">
+											
 												<select id="programType" name="programType"
 													class="form-control" onchange="getProgramTypeByProgram()"
 													required>
@@ -153,15 +156,20 @@
 												Type <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-4">
+											
 												<select id="programTypeId" name="programTypeId"
-													class="form-control" required>
+													class="form-control" onchange="getStudAdmByProgType()" required>
 
 												</select>
 
 
 											</div>
 										</div>
-
+										</c:if>
+										<c:if test="${isEdit==1}">
+										<div align="center">Program :<b>${progName}-${progType}</b></div>
+										<input type="hidden" id="programTypeId" name="programTypeId" value="${programType}">
+</c:if>
 										<div class="row">
 											<div class="col-md-12">
 												<table class="table table-striped dt-responsive display">
@@ -247,7 +255,7 @@
 											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-10">
 													<button type="submit" id="sub1" class="btn btn-primary"
-														onclick="submit_f(1)">
+														onclick="submit_f(0)">
 														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 													</button>
 													<a href="${pageContext.request.contextPath}/showStudAddmit"><button
@@ -309,7 +317,7 @@
 			return true;
 		}
 		$(document).ready(function($) {
-
+			
 			$("#form_sample_2").submit(function(e) {
 				var isError = false;
 				var errMsg = "";
@@ -473,7 +481,7 @@
 				if (!isNaN(this.value) && this.value.length != 0) {
 					sum += parseFloat(this.value);
 				}
-				getProgramTypeByProgram();
+				//getProgramTypeByProgram();
 
 			});
 			document.getElementById("total_stud").value = sum;
@@ -484,7 +492,10 @@
 
 	<script type="text/javascript">
 		function getProgramTypeByProgram() {
-
+			var isEdit=${isEdit};
+			if(isEdit==1){
+			calculateSum();
+			}
 			var programType = document.getElementById("programType").value;
 			//alert("programType" + programType);
 
@@ -516,10 +527,61 @@
 
 					$('#programTypeId').html(html);
 					$("#programTypeId").trigger("chosen:updated");
-
+					getStudAdmByProgType();
 				});
 			}//end of if
+			
+		}
+		
+		function getStudAdmByProgType(){
+			var total=0;
 
+			var progType = document.getElementById("programTypeId").value;
+			//alert("programType" + programType);
+		//	alert("progType "+progType);
+
+			var valid = true;
+
+			if (progType == null || progType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getStudAdmCatwiseByProgType}', {
+					programType : progType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(JSON.stringify(data));
+					document.getElementById("isEdit").value="0";
+					if(data.length>0){
+						//alert("not null");
+
+					for(var i=0;i<data.length;i++){
+						
+						document.getElementById("cast_m"+data[i].castId).value=data[i].maleStudent;
+						document.getElementById("cast_f"+data[i].castId).value=data[i].femaleStudent;
+						document.getElementById("cast_t"+data[i].castId).value=data[i].transStudent;
+						total=total + parseInt(data[i].catTotStudent);
+						document.getElementById("isEdit").value="1";
+					}
+					}else{
+						//alert("null");
+						$(".txt").each(function() {
+							this.value="0";
+
+						});
+					}
+					document.getElementById("total_stud").value=total;
+
+					
+				});
+
+			}//end of if
+			
 		}
 	</script>
 
