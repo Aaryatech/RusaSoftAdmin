@@ -110,6 +110,15 @@
 												<select id="qualityInitId" name="qualityInitId" onchange="showForm()"
 													class="form-control" title="Select Quality Initiative">
 													<option value="">Select</option>
+													<c:choose>
+													<c:when test="${editQuality.qualityInitiativeId==0}">
+														<option selected value="0">Any other quality based certification</option>
+														<c:forEach items="${qualInintList}" var="quInit">
+																<option  value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
+													</c:forEach>
+													</c:when>
+													<c:otherwise>
+													
 													<c:forEach items="${qualInintList}" var="quInit">
 														<c:choose>
 															<c:when
@@ -121,7 +130,12 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
-												<option value="${-1}">Any other quality based certification</option>
+													<option  value="0">Any other quality based certification</option>
+													
+													</c:otherwise>
+													
+													</c:choose>
+													
 													
 												</select> <span class="error_form text-danger"
 													id="qualityInitId_field" style="display: none;">Please
@@ -432,11 +446,18 @@
 		});
 		
 		function hideText() {
+			var value = document.getElementById("qualityInitId").value
 			//alert("hii");
-			var qualType = document.getElementById("qltyInitiative").value
+			/* var qualType = document.getElementById("qltyInitiative").value
 			alert("hii"+qualType);
-			document.getElementById("abc").style.display = (qualType==null) ? "none" : "inline";
-	
+			document.getElementById("abc").style.display = (qualType==null) ? "none" : "inline"; */
+	if(value==0){
+		document.getElementById("abc").style = "visible"
+		
+	}else{
+		document.getElementById("abc").style = "display:none"
+
+	}
 			
 				
 		}
@@ -445,17 +466,17 @@
 			//document.getElementById("abc").style = "display:none"
 			var value = document.getElementById("qualityInitId").value
 			var editValue = value;
-			alert("qualType::"+value);
+			//alert("qualType::"+value);
 
-			document.getElementById("abc").style.display = (value == editValue) ? "inline" : "none";
+			//document.getElementById("abc").style.display = (value == editValue) ? "inline" : "none";
 			
-			/* if (qualType == 7) {
-
+			if (value == 0) {
+				//alert("called");
 				document.getElementById("abc").style = "visible"
 
 			} else {
 				document.getElementById("abc").style = "display:none"
-			} */
+			} 
 
 		}
 	</script>

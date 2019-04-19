@@ -188,13 +188,13 @@
 													<div class="col-sm-6">
 														<select id="schemeName" name="schemeName"
 															class="form-control" onchange="showExtraField()">
-															<option value="-1">Select</option>
+															<option value="">Select</option>
 															<option value="Capability Enhancement" ${stud.schemeName == 'Capability Enhancement' ? 'selected' : ''} >Capability	Enhancement</option>
 															<option value="Career Counseling" ${stud.schemeName == 'Career Counseling' ? 'selected' : ''} >Career Counseling</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" ${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''} >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
 															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)" ${stud.schemeName  == 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)' ? 'selected' : ''}>Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
 															<option value="Vocational Education Training" ${stud.schemeName  == 'Vocational Education Training' ? 'selected' : ''}>Vocational Education Training</option>
-															<option value="7">Any Other</option>
+															<option value="7" ${stud.extraInt1  == 7 ? 'selected' : ''}>Any Other</option>
 															<%-- <c:choose>
 															<c:when test="${stud.schemeName  eq 'Capability Enhancement'}">
 															<option value="-1">Select</option>
@@ -254,13 +254,13 @@
 
 
 
-												<div class="form-group" id="abc">
+												<div class="form-group" id="abc" style="display: none">
 													<label class="control-label col-sm-2" for="page_order">
 														Another Scheme Name <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
 														<input type="text" autocomplete="off" class="form-control"
-															id="anotherScheme" value="${stud.schemeName}"
+															id="anotherScheme" value="${stud.extraVarchar1}"
 															name="anotherScheme" placeholder="Another Scheme"
 															onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_oth"
@@ -274,7 +274,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="supportAgency" onchange="trim(this)"
-															value="${stud.supportAgencyName}" autocomplete="off"
+															value="${stud.supportAgencyName}" autocomplete="off" onfocus="this.value=''"
 															name="supportAgency" placeholder="Support Agency"
 															> <span
 															class="error_form text-danger" id="error_agency"
@@ -293,7 +293,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="yearofIntro" placeholder="dd-MM-YYYY"
+															id="yearofIntro" placeholder="dd-MM-YYYY" onkeypress='return restrictAlphabets(event)'
 															 autocomplete="off" value="${stud.implementationYear}" name="yearofIntro">
 															<span class="error_form text-danger" id="error_date" style="display:none;" >Please enter date of implementation .  </span>
 
@@ -310,7 +310,7 @@
 														<input type="text"  class="form-control"
 															id="studBenifit" value="${stud.noStudentBenifited}"
 															name="studBenifit" placeholder="Students Benifited"
-															autocomplete="off"> <span
+															autocomplete="off" onkeypress='return restrictAlphabets(event)'> <span
 															class="error_form text-danger" id="error_part"
 															style="display: none;">Please Enter No. of
 															Students Benefited and value should be gerater than 0.</span>
@@ -505,6 +505,20 @@ if (!$("#yearofIntro").val()){
 						});
 		//
 	</script>
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -566,12 +580,12 @@ if (!$("#yearofIntro").val()){
 		}
 
 		function hideText() {
-			var x = ${stud.sprtSchmId};
+		
 			//alert("hii"+x);
 			var qualType = document.getElementById("schemeName").value;
 			//alert("qualType::"+qualType);
 
-			if (x == 7) {
+			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible"
 				//document.getElementById("anotherScheme").setAttribute("required","true");

@@ -107,7 +107,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" maxlength="100" onchange="trim(this)"
-															class="form-control" id="inst_name"
+															class="form-control" id="inst_name" autocomplete="off"
 															value="${editInst.instituteName}" name="inst_name"
 															placeholder="Complete Name of Institute"> <span
 															class="error_form text-danger" id="inst_name_field"
@@ -122,7 +122,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" maxlength="50" onchange="trim(this)"
-															class="form-control" id="aishe_code"
+															class="form-control" id="aishe_code" autocomplete="off"
 															value="${editInst.aisheCode}" name="aishe_code"
 															placeholder="All India Survey On Higher Education code">
 														<span class="error_form text-danger" id="aishe_code_field"
@@ -140,7 +140,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="inst_add"
+															class="form-control" id="inst_add" autocomplete="off"
 															value="${editInst.instituteAdd}" name="inst_add"
 															placeholder="Complete Institute Address"> <span
 															class="error_form text-danger" id="inst_add_field"
@@ -156,7 +156,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="village"
+															class="form-control" id="village" autocomplete="off"
 															value="${editInst.village}" name="village"
 															placeholder="Village">
 															<span
@@ -171,7 +171,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="taluka"
+															class="form-control" id="taluka" autocomplete="off"
 															value="${editInst.taluka}" name="taluka"
 															placeholder="Taluka">
 															<span
@@ -188,7 +188,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="district"
+															class="form-control" id="district" autocomplete="off"
 															value="${editInst.district}" name="district"
 															placeholder="District">
 															<span
@@ -203,7 +203,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="state"
+															class="form-control" id="state" autocomplete="off"
 															value="${editInst.state}" name="state"
 															placeholder="State">
 															<span
@@ -219,7 +219,7 @@
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="6"
 															class="form-control" id="pin" onkeypress='return restrictAlphabets(event)'
-															value="${editInst.pincode}" name="pin"
+															value="${editInst.pincode}" name="pin" autocomplete="off"
 															placeholder="Pin Code of 6 digit">
 															<span
 															class="error_form text-danger" id="inst_pin_field"
@@ -291,8 +291,8 @@
 
 													<div class="col-sm-7">
 														<input type="text" class="form-control datepicker"
-															autocomplete="off" id="reg_date"
-															value="${editInst.regDate}" name="reg_date"
+															autocomplete="off" id="reg_date" onkeypress='return restrictAlphabets(event)'
+															value="${editInst.regDate}" name="reg_date" autocomplete="off"
 															placeholder="Date of Registration"> <span
 															class="error_form text-danger" id="reg_date_field"
 															style="display: none;">Please select date of
@@ -307,7 +307,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="100"
-															class="form-control" id="trusty_name"
+															class="form-control" id="trusty_name" autocomplete="off"
 															value="${editInst.trustName}" name="trusty_name"
 															placeholder="Trust/Society Name"> <span
 															class="error_form text-danger" id="trusty_name_field"
@@ -323,7 +323,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="trusty_add"
+															class="form-control" id="trusty_add" autocomplete="off"
 															value="${editInst.trustAdd}" name="trusty_add"
 															placeholder="Trust/Society Address" value=""> <span
 															class="error_form text-danger" id="trusty_add_field"
@@ -337,9 +337,9 @@
 														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" value="${editInst.trustContactNo}"
+														<input type="text" value="${editInst.trustContactNo}" onkeypress='return restrictAlphabets(event)'
 															onchange="trim(this)" maxlength="15" class="form-control"
-															id="trusty_con_no" name="trusty_con_no"
+															id="trusty_con_no" name="trusty_con_no" autocomplete="off"
 															placeholder="Trust/Society Official Contact No">
 														<span class="error_form text-danger"
 															id="trusty_con_no_field" style="display: none;">Please
@@ -353,7 +353,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="pres_name"
+															class="form-control" id="pres_name" autocomplete="off"
 															value="${editInst.presidentName}" name="pres_name"
 															placeholder="Name of Chairman/President(Board of Governance)">
 														<span class="error_form text-danger" id="pres_name_field"
@@ -369,7 +369,7 @@
 													<div class="col-sm-7">
 														<input type="text" value="${editInst.presidenContact}"
 															maxlength="15" class="form-control" id="pres_contact"
-															name="pres_contact"
+															name="pres_contact" autocomplete="off" onkeypress='return restrictAlphabets(event)'
 															placeholder="Chairman/President Contact No"> <span
 															class="error_form text-danger" id="pres_contact_field"
 															style="display: none;">Please enter
@@ -384,7 +384,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)"
-															class="form-control" id="pres_email"
+															class="form-control" id="pres_email" autocomplete="off"
 															value="${editInst.presidentEmail}" name="pres_email"
 															placeholder="Chairman/President Email Id">
 														<span class="error_form text-danger" id="pres_email_field"
@@ -403,7 +403,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" maxlength="100" onchange="trim(this)"
-															class="form-control" id="princ_name"
+															class="form-control" id="princ_name" autocomplete="off"
 															value="${editInst.principalName}" name="princ_name"
 															placeholder="Name of Principal"> <span
 															class="error_form text-danger" id="princ_name_field"
@@ -420,8 +420,8 @@
 													<div class="col-sm-7">
 														<input type="text" 
 															maxlength="10" class="form-control" id="princ_contact"
-															value="${editInst.contactNo}" name="princ_contact"
-															placeholder="Principal Mobile No"
+															value="${editInst.contactNo}" name="princ_contact" autocomplete="off"
+															placeholder="Principal Mobile No" onkeypress='return restrictAlphabets(event)'
 															oninput="checkUnique(this.value,1)"> <span
 															class="error_form text-danger" id="princ_contact_field"
 															style="display: none;">Please enter principal
@@ -440,7 +440,7 @@
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)"
 															class="form-control" id="princ_email"
-															value="${editInst.email}"
+															value="${editInst.email}" autocomplete="off"
 															oninput="checkUnique(this.value,2)" name="princ_email"
 															placeholder=" Principal Email Id (Official)"> <span
 															class="error_form text-danger" id="princ_email_field"
@@ -674,6 +674,59 @@
 													$("#inst_add_field").hide()
 												}
 
+												         
+												if (!$("#village").val()) {
+													isError = true;
+
+													$("#village").addClass(
+															"has-error")
+													$("#inst_vilg_field").show()
+												} else {
+													$("#inst_vilg_field").hide()
+												}
+												  
+												if (!$("#taluka").val()) {
+													isError = true;
+
+													$("#taluka").addClass(
+															"has-error")
+													$("#inst_taluka_field").show()
+												} else {
+													$("#inst_taluka_field").hide()
+												}
+												
+												if (!$("#district").val()) {
+													isError = true;
+
+													$("#district").addClass(
+															"has-error")
+													$("#inst_dist_field").show()
+												} else {
+													$("#inst_dist_field").hide()
+												}
+												
+												
+												if (!$("#state").val()) {
+													isError = true;
+
+													$("#state").addClass(
+															"has-error")
+													$("#inst_stat_field").show()
+												} else {
+													$("#inst_stat_field").hide()
+												}
+												
+												
+												if (!$("#pin").val()) {
+													isError = true;
+
+													$("#pin").addClass(
+															"has-error")
+													$("#inst_pin_field").show()
+												} else {
+													$("#inst_pin_field").hide()
+												}
+												
 												if (!$("#is_registration")
 														.val()) {
 													isError = true;
@@ -829,6 +882,20 @@
 											});
 						});
 	</script>
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 	<script type="text/javascript">
 	jQuery('.numbersOnly').keyup(function () { 
         this.value = this.value.replace(/[^0-9\.]/g,'');

@@ -104,7 +104,7 @@
 														<td style="text-align: center;">${count.index+1}</td>
 														<td style="text-align: left;">${stud.level}</td>
 														<td style="text-align: left;">${stud.type}</td>
-														<td>${stud.schemeName}</td>
+														<td>${stud.schemeName eq 'NA' ? stud.extraVarchar1 : stud.schemeName}</td>
 														<td>${stud.supportAgencyName}</td>
 														<td style="text-align: center;">${stud.academicYear}</td>
 														<td style="text-align: right;">${stud.noStudentBenifited}</td>

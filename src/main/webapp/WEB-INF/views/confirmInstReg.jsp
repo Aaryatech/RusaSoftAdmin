@@ -582,11 +582,19 @@ table.blueTable thead th:first-child {
 							
 							<tr>
 								<td>Registration Date : ${editInst.regDate}</td>
-								<td>Trust/Society Name :${editInst.trustName}</td>
+								 <td>
+								 	Is Registered For 2F/12B:
+								 	<c:if test="${editInst.isRegistration==1}">Yes</c:if>
+								  	<c:if test="${editInst.isRegistration==0}">No	</c:if>
+								</td> 
+								
 							</tr>
 							<tr>
-								<td>Trust/Society Address : ${editInst.trustAdd}</td>
-								<td>Contact No : ${editInst.trustContactNo}</td>
+								<td>Trust/Society Name :${editInst.trustName}</td>
+								<td>Trust/Society Address : ${editInst.trustAdd}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									Contact No : ${editInst.trustContactNo}
+								</td>
+								<%-- <td>Contact No : ${editInst.trustContactNo}</td> --%>
 							</tr>
 							<tr>
 								<td>Chairman/President Name : ${editInst.presidentName}</td>
@@ -601,11 +609,11 @@ table.blueTable thead th:first-child {
 								<td>Email ID : ${editInst.email}</td>
 							</tr>
 							<tr>
-								 <td>
+								<%--  <td>
 								 	Is Registered For 2F/12B:
 								 	<c:if test="${editInst.isRegistration==1}">Yes</c:if>
 								  	<c:if test="${editInst.isRegistration==0}">No	</c:if>
-								</td> 
+								</td>  --%>
 							</tr>
 						</tbody>
 

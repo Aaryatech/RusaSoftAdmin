@@ -13,7 +13,14 @@ public class StudentSchemeList {
 	private String type;
 	private int noStudentBenifited;
 	private String supportAgencyName;
+	private String extraVarchar1;
 	
+	public String getExtraVarchar1() {
+		return extraVarchar1;
+	}
+	public void setExtraVarchar1(String extraVarchar1) {
+		this.extraVarchar1 = extraVarchar1;
+	}
 	public int getSprtSchmId() {
 		return sprtSchmId;
 	}
@@ -56,13 +63,13 @@ public class StudentSchemeList {
 	public void setSupportAgencyName(String supportAgencyName) {
 		this.supportAgencyName = supportAgencyName;
 	}
-	
 	@Override
 	public String toString() {
 		return "StudentSchemeList [sprtSchmId=" + sprtSchmId + ", academicYear=" + academicYear + ", schemeName="
 				+ schemeName + ", level=" + level + ", type=" + type + ", noStudentBenifited=" + noStudentBenifited
-				+ ", supportAgencyName=" + supportAgencyName + "]";
+				+ ", supportAgencyName=" + supportAgencyName + ", extraVarchar1=" + extraVarchar1 + "]";
 	}
+	
 	
 	
 }

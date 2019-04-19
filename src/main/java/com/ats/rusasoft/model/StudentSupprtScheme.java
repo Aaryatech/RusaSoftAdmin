@@ -15,7 +15,7 @@ public class StudentSupprtScheme {
 	private int isActive;
 	private String addDate;
 	private int makerUserId;
-	private int extraInt1; //programme Id
+	private int extraInt1; 
 	private int extraInt2;
 	private String extraVarchar1;
 	private String extraVarchar2;

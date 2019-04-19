@@ -303,7 +303,7 @@ public class InstituteDistController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/humanValues");
-				model.addObject("title", "Initiative To Engage And Contribute to Locale Communinty List");
+				model.addObject("title", "Initiative To Engage And Contribute to Local Community List");
 
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
@@ -378,7 +378,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_human_values");
 
-				model.addObject("title", "Add Initiative To Engage And Contribute to Locale Communinty");
+				model.addObject("title", "Add Initiative To Engage And Contribute to Local Community");
 
 				ValuesMaster[] distArray = rest.getForObject(Constants.url + "/getAllValuesList", ValuesMaster[].class);
 				List<ValuesMaster> distlist = new ArrayList<>(Arrays.asList(distArray));

@@ -105,7 +105,7 @@
 											
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Program
-														Type<span class="text-danger">*</span>
+														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<select id="prog_type" name="prog_type"
@@ -130,7 +130,7 @@
 												
 													<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">
-														Name of Program<span class="text-danger">*</span>
+														Type of Program<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" id="prog_name"

@@ -144,7 +144,7 @@ legend.scheduler-border {
 
 													<tr>
 														<th rowspan="2">Sr No</th>
-														<th rowspan="2">Title of Program/Activity</th>
+														<th rowspan="2">Title of Programme</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">No. of Beneficiaries</th>
 														<th rowspan="2">Action</th>

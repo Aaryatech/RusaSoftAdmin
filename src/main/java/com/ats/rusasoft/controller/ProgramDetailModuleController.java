@@ -28,6 +28,7 @@ import com.ats.rusasoft.master.model.prodetail.StudentSchemeList;
 import com.ats.rusasoft.model.GetProgram;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Info;
+import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.ProgramOutcome;
 import com.ats.rusasoft.model.ProgramSpeceficOutcome;
 import com.ats.rusasoft.model.StudentSupprtScheme;
@@ -439,6 +440,9 @@ System.err.println("HELLO " +programId);
 		
 		StudentSupprtScheme stud = new StudentSupprtScheme();
 		HttpSession session = request.getSession();
+
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		
 		int instituteId =(int)session.getAttribute("instituteId");
 		int yearId = (int)session.getAttribute("acYearId");
 		try {
@@ -449,10 +453,17 @@ System.err.println("HELLO " +programId);
 			stud.setInstituteId(instituteId);
 			stud.setYearId(yearId);
 			String scheme = request.getParameter("schemeName"); 
-			if(scheme.equals("7")) {
-			stud.setSchemeName(request.getParameter("anotherScheme"));}
-			else {
-			stud.setSchemeName(scheme);}
+			if(scheme.contentEquals("7")) {
+				stud.setSchemeName("NA");
+				stud.setExtraVarchar1(request.getParameter("anotherScheme"));
+				stud.setExtraInt1(7);
+				}else {
+					stud.setSchemeName(scheme);
+					stud.setExtraVarchar1("NA");
+					stud.setExtraInt1(0);
+				}
+			
+			
 			stud.setLevel(request.getParameter("level"));
 			stud.setType(request.getParameter("type"));
 			stud.setNoStudentBenifited(Integer.parseInt(request.getParameter("studBenifit")));
@@ -461,10 +472,10 @@ System.err.println("HELLO " +programId);
 			stud.setDelStatus(1);
 			stud.setIsActive(1);
 			stud.setAddDate(curDateTime);
-			stud.setMakerUserId(0);
-			stud.setExtraInt1(1);//Programe Id
+			stud.setMakerUserId(userObj.getUserId());
+			
 			stud.setExtraInt2(0);
-			stud.setExtraVarchar1("NA");
+			
 			stud.setExtraVarchar2("NA");
 			System.out.println("Student:"+stud.toString());
 			
