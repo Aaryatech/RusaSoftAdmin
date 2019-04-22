@@ -44,7 +44,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
-<c:url value="/getDateValidation" var="getDateValidation"></c:url>
+<%-- <c:url value="/getDateValidation" var="getDateValidation"></c:url> --%>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->

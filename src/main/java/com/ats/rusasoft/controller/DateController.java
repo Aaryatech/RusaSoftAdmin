@@ -22,22 +22,23 @@ public class DateController {
 	
 	
 	@RequestMapping(value = "/getDateValidation", method = RequestMethod.GET)
-	public @ResponseBody Info  getDateValidation(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Object  getDateValidation(HttpServletRequest request, HttpServletResponse response) {
 		Info info=new Info();
-		ModelAndView model=new ModelAndView("login");
+		int x=0;
+		//ModelAndView model=new ModelAndView("login");
 		try {
-			String fromDate ="01-02-2019"; //new String(),
-			String toDate ="02-02-2019";// new String();
+			String fromDate =null;//"01-02-2019"; //new String(),
+			String toDate =null;//"02-02-2019";// new String();
 			try {
 			 fromDate=request.getParameter("fromDate");
 			}catch (Exception e) {
-				fromDate="03-02-2019";
+				//fromDate="03-02-2019";
 			}
 			
 			try {
 				 toDate=request.getParameter("toDate");
 				}catch (Exception e) {
-					toDate="02-02-2019";
+					//toDate="02-02-2019";
 				}
 			System.err.println("from"+fromDate + "to " +toDate);
 			DateFormat dateFor=new SimpleDateFormat("dd-MM-yyyy");
@@ -48,10 +49,12 @@ public class DateController {
 			
 			if(fd.before(td)) {
 				System.err.println("1");
+				x=1;
 				info.setError(false);
 			}else {
 				System.err.println("2");
 				info.setError(true);
+				x=0;
 			}
 			System.err.println("info " +info.toString());
 			
@@ -63,6 +66,6 @@ public class DateController {
 			e.printStackTrace();
 			info.setError(true);
 		}
-		return info;
+		return x;
 	}
 }

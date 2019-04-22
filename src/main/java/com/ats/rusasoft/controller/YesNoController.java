@@ -344,11 +344,12 @@ public class YesNoController {
 		
 		map.add("instituteId", userObj.getGetData().getUserInstituteId());
 		map.add("yearId", acYearId);
-		map.add("secCode", "tab1");
+		//map.add("secCode", "tab1");
 		InstituteYesNo editInstyn = restTemplate.postForObject(
 				Constants.url + "/getInstituteYesNoById", map, InstituteYesNo.class);
 		System.out.println("res="+editInstyn.toString());
-		model.addObject("editInstyn", editInstyn);	
+		
+		model.addObject("editYN", editInstyn);
 		return model;
 		
 	}
