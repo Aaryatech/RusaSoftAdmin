@@ -139,7 +139,7 @@
 													onkeypress='return restrictAlphabets(event)'
 													name="expenditure_on_book_purchase"
 													value="${budget.expenditureOnBookPurchase}"
-													placeholder="Expenditures on purchase of Books"> <span
+													placeholder="Expenditures on purchase of Books ${budRupees}"> <span
 													class="error_form text-danger" id="error_pbook"
 													style="display: none;">Please Enter Expenditures on
 													purchase of Books</span>
@@ -158,7 +158,7 @@
 													autocomplete="off"
 													onkeypress='return restrictAlphabets(event)'
 													name="expenditure_on_journals_purchase"
-													placeholder="Expenditures on purchase of Journals"
+													placeholder="Expenditures on purchase of Journals ${budRupees}"
 													value="${budget.expenditureOnJournalsPurchase}"> <span
 													class="error_form text-danger" id="error_pjournal"
 													style="display: none;">Please Enter Expenditures on
@@ -178,7 +178,7 @@
 													id="expenditure_on_ejournals_purchase" autocomplete="off"
 													onkeypress='return restrictAlphabets(event)'
 													name="expenditure_on_ejournals_purchase"
-													placeholder="Expenditures on e-Journals"
+													placeholder="Expenditures on e-Journals ${budRupees}"
 													value="${budget.expenditureOnEjournalsPurchase}"> <span
 													class="error_form text-danger" id="error_ejournal"
 													style="display: none;">Please Enter Expenditures on
@@ -201,7 +201,7 @@
 													name="expenditure_on_eresources_purchase"
 													autocomplete="off"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Expenditures on e-Resources"
+													placeholder="Expenditures on e-Resources ${budRupees}"
 													value="${budget.expenditureOnEresourcesPurchase}">
 												<span class="error_form text-danger" id="error_eresources"
 													style="display: none;">Please Enter Expenditures on

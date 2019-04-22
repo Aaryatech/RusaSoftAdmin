@@ -253,6 +253,10 @@
 													name="fromDate" value="${fdate}"> <span
 													class="error_form text-danger" id="error_fdate"
 													style="display: none;">Please Enter From Date</span>
+													
+													<span
+													class="error_form text-danger" id="error_fromToDate"
+													style="display: none;">From Date must be smaller than To Date </span>
 
 											</div>
 										</div>
@@ -268,6 +272,10 @@
 													placeholder="dd/mm/yyyy" value="${tdate}"> <span
 													class="error_form text-danger" id="error_tdate"
 													style="display: none;">Please Enter To Date</span>
+													
+													<span
+													class="error_form text-danger" id="error_toToDate"
+													style="display: none;">To Date must be greater than From Date </span>
 
 											</div>
 										</div>
@@ -483,7 +491,7 @@
 					$("#error_fdate").show()
 					//return false;
 				} else {
-					$("#error_fdate").hide()
+					$("#error_fdate").hide();
 				}
 
 				if (!$("#toDate").val()) {
@@ -494,8 +502,34 @@
 					$("#error_tdate").show()
 					//return false;
 				} else {
-					$("#error_tdate").hide()
+					$("#error_tdate").hide();
 				}
+				
+				var from_date = document.getElementById("fromDate").value;
+ 				var to_date = document.getElementById("toDate").value;
+ 				var x=0;
+ 				
+ 				
+ 		        var fromdate = from_date.split('-');
+ 		        from_date = new Date();
+ 		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+ 		        var todate = to_date.split('-');
+ 		        to_date = new Date();
+ 		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+ 		        if (from_date > to_date ) 
+ 		        {
+ 		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+					$("#error_fromToDate").show();
+				 	$("#error_toToDate").show();
+				 	$("#error_fdate").hide();
+				 	$("#error_tdate").hide();
+ 		            return false;
+ 		           
+ 		        }else {
+ 					$("#error_fromToDate").hide();
+ 					$("#error_toToDate").hide();
+ 				}
+ 				
 
 				if ($("#beneficiaryMOU").val() == -1) {
 

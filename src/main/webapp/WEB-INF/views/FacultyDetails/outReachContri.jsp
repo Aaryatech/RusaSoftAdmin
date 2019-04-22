@@ -182,6 +182,7 @@
 														<div class="col-sm-6">
 															<input type="text" class="form-control datepicker" id="from_date" onkeypress='return restrictAlphabets(event)'
 																 onchange="trim(this)" name="from_date" placeholder="From" value="${facContri.conFrom}" autocomplete="off">
+														<span class="error_form text-danger" id="error_fromToDate"	style="display: none;">From Date must be smaller than To Date </span>
 														<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter from date.</span>
 														</div>
 													</div>
@@ -195,6 +196,8 @@
 															<input type="text" class="form-control datepicker" id="to_date" name="to_date" autocomplete="off"
 																placeholder="To" value="${facContri.conTo}"  onchange="trim(this)"
 																onkeypress='return restrictAlphabets(event)'>
+																
+															<span class="error_form text-danger" id="error_toToDate" style="display: none;">To Date must be greater than From Date </span>
 															<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter to date.</span>
 														</div>
 
@@ -359,14 +362,38 @@
             				} else {
             					$("#error_formfield2").hide()
             				}  
-            				
+           				
+            			
+	           			var from_date = document.getElementById("from_date").value;
+	      				var to_date = document.getElementById("to_date").value;
+	      				
+	      				var fromdate = from_date.split('-');
+         		        from_date = new Date();
+         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+         		        var todate = to_date.split('-');
+         		        to_date = new Date();
+         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+         		        if (from_date > to_date ) 
+         		        {
+         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+							$("#error_fromToDate").show();
+    					 	$("#error_toToDate").show();
+    					 	$("#error_formfield3").hide()
+    					 	$("#error_formfield4").hide()
+         		            return false;
+         		           
+         		        }else {
+         					$("#error_fromToDate").hide();
+         					$("#error_toToDate").hide();
+         				}
+         				
             				
            				if(!$("#from_date").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#conf_date").addClass("has-error")
+            				$("#from_date").addClass("has-error")
             				$("#error_formfield3").show()
             					//return false;
             				} else {
@@ -378,7 +405,7 @@
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#conf_date").addClass("has-error")
+            				$("#to_date").addClass("has-error")
             				$("#error_formfield4").show()
             					//return false;
             				} else {
@@ -402,20 +429,6 @@
         });
 
 </script>
-<script>
-function dateValidator(){
-	var fromDate = document.getElementById("from_date").value;
-	var toDate = document.getElementById("to_date").value;
-	//var valid = true;
-	//alert(view);
-	if (fromDate > toDate) {
-		document.getElementById("to_date").value="";
-		alert("from date greater than todate ");
-		
-	}
-}
-
-</script>	
 	
 	
 <script type="text/javascript">
