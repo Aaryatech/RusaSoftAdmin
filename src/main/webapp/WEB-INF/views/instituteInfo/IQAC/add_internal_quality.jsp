@@ -188,6 +188,10 @@
 													value="${editQuality.qualityFromdt}"> <span
 													class="error_form text-danger" id="fromDate_field"
 													style="display: none;">Please select from date</span>
+													
+													<span
+													class="error_form text-danger" id="error_fromToDate"
+													style="display: none;">From Date must be smaller than To Date </span>
 
 											</div>
 										</div>
@@ -203,6 +207,10 @@
 													value="${editQuality.qualityTodt}"> <span
 													class="error_form text-danger" id="toDate_field"
 													style="display: none;">Please select to date</span>
+													
+												<span
+													class="error_form text-danger" id="error_toToDate"
+													style="display: none;">To Date must be greater than From Date </span>
 
 											</div>
 										</div>
@@ -288,15 +296,39 @@
 															.hide()
 												}
 												
+												 var from_date = document.getElementById("fromDate").value;
+							         				var to_date = document.getElementById("toDate").value;
+							         				var x=0;
+							         				
+							         				
+							         		        var fromdate = from_date.split('-');
+							         		        from_date = new Date();
+							         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+							         		        var todate = to_date.split('-');
+							         		        to_date = new Date();
+							         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+							         		        if (from_date > to_date ) 
+							         		        {
+							         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+														$("#error_fromToDate").show();
+							    					 	$("#error_toToDate").show();
+							    					 	$("#fromDate_field").hide();
+							    					 	$("#toDate_field").hide();
+							         		            return false;
+							         		           
+							         		        }else {
+							         					$("#error_fromToDate").hide();
+							         					$("#error_toToDate").hide();
+							         				}
 												
 												if (!$("#fromDate").val()) {
 													isError = true;
 
 													$("#fromDate").addClass(
 															"has-error")
-													$("#fromDate_field").show()
+													$("#fromDate_field").show();
 												} else {
-													$("#fromDate_field").hide()
+													$("#fromDate_field").hide();
 												}
 												
 												if (!$("#toDate").val()) {
@@ -304,9 +336,9 @@
 
 													$("#toDate").addClass(
 															"has-error")
-													$("#toDate_field").show()
+													$("#toDate_field").show();
 												} else {
-													$("#toDate_field").hide()
+													$("#toDate_field").hide();
 												}
 
 

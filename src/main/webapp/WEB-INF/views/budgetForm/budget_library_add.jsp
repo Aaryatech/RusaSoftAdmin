@@ -151,7 +151,7 @@
 													autocomplete="off" class="form-control"
 													id="budget_allocated" name="budget_allocated"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Allocated Amount in Rupees"
+													placeholder="Budget Allocated Amount in ${budRupees}"
 													value="${budget.budgetAllocated}"> <span
 													class="error_form text-danger" id="budget_allocated_field"
 													style="display: none;">Please enter allocated budget
@@ -169,7 +169,7 @@
 													class="form-control" id="budget_utilized" maxlength="9"
 													name="budget_utilized" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Utilized Amount in Rupees"
+													placeholder="Budget Utilized Amount in ${budRupees}"
 													value="${budget.budgetUtilized}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget

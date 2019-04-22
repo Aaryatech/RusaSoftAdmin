@@ -463,7 +463,7 @@ function submit_f(view){
             			 var isError=false;
             			 var errMsg="";
             				
-            			 var from_date = document.getElementById("fromDate").value;
+            			var from_date = document.getElementById("fromDate").value;
          				var to_date = document.getElementById("toDate").value;
          				var x=0;
          				
@@ -479,6 +479,8 @@ function submit_f(view){
          		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
 							$("#error_fromToDate").show();
     					 	$("#error_toToDate").show();
+    					 	$("#error_fromDate").hide();
+    					 	$("#error_toDate").hide();
          		            return false;
          		           
          		        }else {
@@ -515,7 +517,7 @@ function submit_f(view){
             				$("#error_projName").show()
             					 
             				} else {
-            					$("#error_projName").hide()
+            					$("#error_projName").hide();
             				}
             				
             				
@@ -525,10 +527,10 @@ function submit_f(view){
             				errMsg += '<li>Please enter Year of Transction.</li>';
             				
             				$("#yearOfPS").addClass("has-error")
-            				$("#error_yearOfPS").show()
+            				$("#error_yearOfPS").show();
             					 
             				} else {
-            					$("#error_yearOfPS").hide()
+            					$("#error_yearOfPS").hide();
             				}
             				
             				
@@ -538,10 +540,10 @@ function submit_f(view){
                 				errMsg += '<li>Please enter Sponsoring Authority.</li>';
                 				
                 				$("#spoAuth").addClass("has-error")
-                				$("#error_spoAuth").show()
+                				$("#error_spoAuth").show();
                 					 
                 				} else {
-                					$("#error_spoAuth").hide()
+                					$("#error_spoAuth").hide();
                 				}
             				
             				
@@ -551,10 +553,10 @@ function submit_f(view){
                 				errMsg += '<li>Please enter Principal Investigator.</li>';
                 				
                 				$("#PIName").addClass("has-error")
-                				$("#error_PIName").show()
+                				$("#error_PIName").show();
                 					 
                 				} else {
-                					$("#error_PIName").hide()
+                					$("#error_PIName").hide();
                 				}
             				
             				
@@ -566,10 +568,10 @@ function submit_f(view){
                 				errMsg += '<li>Please enter Department.</li>';
                 				
                 				$("#deptName").addClass("has-error")
-                				$("#error_deptName").show()
+                				$("#error_deptName").show();
                 					 
                 				} else {
-                					$("#error_deptName").hide()
+                					$("#error_deptName").hide();
                 				}
             				
             				
@@ -580,10 +582,10 @@ function submit_f(view){
                 				errMsg += '<li>Please enter Grant</li>';
                 				
                 				$("#grant").addClass("has-error")
-                				$("#error_grant").show()
+                				$("#error_grant").show();
                 					 
                 				} else {
-                					$("#error_grant").hide()
+                					$("#error_grant").hide();
                 				}
             				
             				//error_spoAuth
@@ -594,10 +596,10 @@ function submit_f(view){
             				errMsg += '<li>Please enter Total Amount</li>';
             				
             				$("#totalAmt").addClass("has-error")
-            				$("#error_totalAmt").show()
+            				$("#error_totalAmt").show();
             					 
             				} else {
-            					$("#error_totalAmt").hide()
+            					$("#error_totalAmt").hide();
             				}
             				
             				
@@ -607,10 +609,10 @@ function submit_f(view){
             				errMsg += '<li>Please enter Amount Received.</li>';
             				
             				$("#amtRec").addClass("has-error")
-            				$("#error_amtRec").show()
+            				$("#error_amtRec").show();
             					 
             				} else {
-            					$("#error_amtRec").hide()
+            					$("#error_amtRec").hide();
             				}
             				
             				//error_fromDate
@@ -623,12 +625,10 @@ function submit_f(view){
                 				errMsg += '<li>Please enter FromDate.</li>';
                 				
                 				$("#fromDate").addClass("has-error")
-                				$("#error_fromDate").show()
-                				$("#error_fromToDate").hide();
-            					$("#error_toToDate").hide();
+                				$("#error_fromDate").show();
                 					 
                 				} else {
-                					$("#error_fromDate").hide()
+                					$("#error_fromDate").hide();
                 				}
                 				
             				
@@ -638,12 +638,11 @@ function submit_f(view){
                 				errMsg += '<li>Please enter to Date.</li>';
                 				
                 				$("#toDate").addClass("has-error")
-                				$("#error_toDate").show()
-                				$("#error_fromToDate").hide();
-            					$("#error_toToDate").hide();
+                				$("#error_toDate").show();
+                				
                 					 
                 				} else {
-                					$("#error_toDate").hide()
+                					$("#error_toDate").hide();
                 				}
                 				
             			 

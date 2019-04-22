@@ -239,6 +239,7 @@
 																			autocomplete="off" placeholder="dd/mm/yyyy"
 																			id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
 																			value="${award.awardValidityFrom}">
+																			<span  class="error_form text-danger" id="error_fromToDate"	style="display: none;">From Date must be smaller than To Date </span>
 																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter from date.</span>
 																	</div>
 																</div>
@@ -252,6 +253,7 @@
 																			autocomplete="off" id="toDate" name="toDate"
 																			placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
 																			value="${award.awardValidityTo}">
+																				<span class="error_form text-danger" id="error_toToDate" style="display: none;">To Date must be greater than From Date </span>
 																			<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter to date.</span>
 																	</div>
 
@@ -272,6 +274,7 @@
 																			autocomplete="off" placeholder="dd/mm/yyyy"
 																			id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
 																			value="${award.awardValidityFrom}">
+																				<span  class="error_form text-danger" id="error_fromToDate"	style="display: none;">From Date must be smaller than To Date </span>
 																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter from date.</span>
 																	</div>
 																</div>
@@ -285,6 +288,7 @@
 																			autocomplete="off" id="toDate" name="toDate"
 																			placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
 																			value="${award.awardValidityTo}">
+																			<span class="error_form text-danger" id="error_toToDate" style="display: none;">To Date must be greater than From Date </span>
 																			<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter to date.</span>
 																	</div>
 
@@ -398,6 +402,32 @@
               				} else {
               					$("#error_formfield5").hide()
               				}
+            			 
+            			 var from_date = document.getElementById("fromDate").value;
+          				var to_date = document.getElementById("toDate").value;
+          				var x=0;
+          				
+          				
+          		        var fromdate = from_date.split('-');
+          		        from_date = new Date();
+          		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+          		        var todate = to_date.split('-');
+          		        to_date = new Date();
+          		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+          		        if (from_date > to_date ) 
+          		        {
+          		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+ 							$("#error_fromToDate").show();
+     					 	$("#error_toToDate").show();
+     					 	$("#error_fromDate").hide()
+     					 	$("#error_toDate").hide()
+          		            return false;
+          		           
+          		        }else {
+          					$("#error_fromToDate").hide();
+          					$("#error_toToDate").hide();
+          				}
+          				
             			 
             			 var radioFrom = $("input[name='validity']:checked"). val();
        					//alert(radioValue);

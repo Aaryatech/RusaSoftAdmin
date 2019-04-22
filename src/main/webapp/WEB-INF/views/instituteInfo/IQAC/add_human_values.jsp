@@ -140,11 +140,15 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy"
 													autocomplete="off" id="fromDate" name="fromDate"
 													value="${editValue.activityFromdt}"> <span
 													class="error_form text-danger" id="error_fromDate"
 													style="display: none;">Please enter from date</span>
+													
+												<span
+													class="error_form text-danger" id="error_fromToDate"
+													style="display: none;">From Date must be smaller than To Date </span>
 
 											</div>
 										</div>
@@ -155,11 +159,15 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy"
 													autocomplete="off" id="toDate" name="toDate"
 													value="${editValue.activityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
 													style="display: none;">Please enter to date</span>
+													
+												<span
+													class="error_form text-danger" id="error_toToDate"
+													style="display: none;">To Date must be greater than From Date </span>
 											</div>
 										</div>
 
@@ -315,10 +323,10 @@
 
 													$("#ttlProgm").addClass(
 															"has-error")
-													$("#error_ttlProgm").show()
+													$("#error_ttlProgm").show();
 
 												} else {
-													$("#error_ttlProgm").hide()
+													$("#error_ttlProgm").hide();
 												}
 
 												if (!$("#fromDate").val()) {
@@ -328,10 +336,10 @@
 
 													$("#fromDate").addClass(
 															"has-error")
-													$("#error_fromDate").show()
+													$("#error_fromDate").show();
 
 												} else {
-													$("#error_fromDate").hide()
+													$("#error_fromDate").hide();
 												}
 
 												if (!$("#toDate").val()) {
@@ -341,10 +349,10 @@
 
 													$("#toDate").addClass(
 															"has-error")
-													$("#error_toDate").show()
+													$("#error_toDate").show();
 
 												} else {
-													$("#error_toDate").hide()
+													$("#error_toDate").hide();
 												}
 												
 												if (!$("#participant").val()) {
@@ -354,11 +362,36 @@
 
 													$("#participant").addClass(
 															"has-error")
-													$("#error_participant").show()
+													$("#error_participant").show();
 
 												} else {
-													$("#error_participant").hide()
+													$("#error_participant").hide();
 												}
+												
+												var from_date = document.getElementById("fromDate").value;
+						         				var to_date = document.getElementById("toDate").value;
+						         				var x=0;
+						         				
+						         				
+						         		        var fromdate = from_date.split('-');
+						         		        from_date = new Date();
+						         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+						         		        var todate = to_date.split('-');
+						         		        to_date = new Date();
+						         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+						         		        if (from_date > to_date ) 
+						         		        {
+						         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+													$("#error_fromToDate").show();
+						    					 	$("#error_toToDate").show();
+						    					 	$("#error_fromDate").hide();
+						    					 	$("#error_toDate").hide();
+						         		            return false;
+						         		           
+						         		        }else {
+						         					$("#error_fromToDate").hide();
+						         					$("#error_toToDate").hide();
+						         				}
 
 												if (!isError) {
 

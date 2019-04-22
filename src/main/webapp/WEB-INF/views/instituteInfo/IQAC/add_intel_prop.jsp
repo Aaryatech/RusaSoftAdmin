@@ -131,6 +131,10 @@
 													value="${intelProp.conFromdt}" onchange="trim(this)">
 												<span class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter from date.</span>
+												
+												<span
+													class="error_form text-danger" id="error_fromToDate"
+													style="display: none;">From Date must be smaller than To Date </span>
 											</div>
 										</div>
 
@@ -146,10 +150,15 @@
 													onkeypress='return restrictAlphabets(event)'
 													value="${intelProp.conTodt}"> <span
 													class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter to date.</span> <span
+													style="display: none;">Please enter to date.</span> 
+													<span
 													class="error_form text-danger" id="error_formfield0"
 													style="display: none;">to date must be greater than
 													from date.</span>
+													
+													<span
+													class="error_form text-danger" id="error_toToDate"
+													style="display: none;">To Date must be greater than From Date </span>
 											</div>
 										</div>
 
@@ -235,10 +244,10 @@
              				errMsg += '<li>Please enter a valid name.</li>';
              				
              				$("#ipr_title").addClass("has-error")
-             				$("#error_formfield1").show()
+             				$("#error_formfield1").show();
              					//return false;
              				} else {
-             					$("#error_formfield1").hide()
+             					$("#error_formfield1").hide();
              				} 
            				
            				if(!$("#fromDate").val()){
@@ -247,10 +256,10 @@
             				errMsg += '<li>Please enter a valid name.</li>';
             				
             				$("#fromDate").addClass("has-error")
-            				$("#error_formfield2").show()
+            				$("#error_formfield2").show();
             					//return false;
             				} else {
-            					$("#error_formfield2").hide()
+            					$("#error_formfield2").hide();
             				} 
            				
            				if(!$("#toDate").val()){
@@ -259,7 +268,7 @@
             				errMsg += '<li>Please enter a valid name.</li>';
             				
             				$("#toDate").addClass("has-error")
-            				$("#error_formfield3").show()
+            				$("#error_formfield3").show();
             					//return false;
             				} else {
             					$("#error_formfield3").hide()
@@ -270,23 +279,34 @@
             				errMsg += '<li>Please enter a valid name.</li>';
             				
             				$("#participant").addClass("has-error")
-            				$("#error_formfield4").show()
+            				$("#error_formfield4").show();
             					//return false;
             				} else {
-            					$("#error_formfield4").hide()
+            					$("#error_formfield4").hide();
             				} 
            				
-           			 	if($("#fromDate").val() > $("#toDate").val()){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#toDate").addClass("has-error")
-            				$("#error_formfield0").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield0").hide()
-            				} 
+           			 	var from_date = document.getElementById("fromDate").value;
+      					var to_date = document.getElementById("toDate").value;
+      					
+	      		        var fromdate = from_date.split('-');
+	      		        from_date = new Date();
+	      		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+	      		        var todate = to_date.split('-');
+	      		        to_date = new Date();
+	      		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+	      		        if (from_date > to_date ) 
+	      		        {
+	      		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+								$("#error_fromToDate").show();
+	 					 	$("#error_toToDate").show();
+	 					 	$("#error_formfield1").hide();
+	 					 	$("#error_formfield3").hide();
+	      		            return false;
+	      		           
+	      		        }else {
+	      					$("#error_fromToDate").hide();
+	      					$("#error_toToDate").hide();
+	      				}
            				
            				/* if(!$("#").val()){
         					 

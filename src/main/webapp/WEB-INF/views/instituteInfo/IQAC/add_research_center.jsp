@@ -175,6 +175,10 @@
 													value="${editValue.rcValidityFromdt}" autocomplete="off">
 												<span class="error_form text-danger" id="error_fromDate"
 													style="display: none;">Please enter From date</span>
+													
+												<span
+													class="error_form text-danger" id="error_fromToDate"
+													style="display: none;">From Date must be smaller than To Date </span>
 
 											</div>
 										</div>
@@ -191,6 +195,10 @@
 													value="${editValue.rcValidityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
 													style="display: none;">Please enter to date</span>
+													
+													<span
+													class="error_form text-danger" id="error_toToDate"
+													style="display: none;">To Date must be greater than From Date </span>
 											</div>
 										</div>
 
@@ -334,10 +342,10 @@
 
 													$("#rc_subject_name").addClass(
 															"has-error")
-													$("#error_rc_subject_name").show()
+													$("#error_rc_subject_name").show();
 
 												} else {
-													$("#error_rc_subject_name").hide()
+													$("#error_rc_subject_name").hide();
 												}
 
 												
@@ -350,10 +358,10 @@
 
 													$("#rc_faculty_name").addClass(
 															"has-error")
-													$("#error_rc_faculty_name").show()
+													$("#error_rc_faculty_name").show();
 
 												} else {
-													$("#error_rc_faculty_name").hide()
+													$("#error_rc_faculty_name").hide();
 												}
 												
 												
@@ -371,12 +379,12 @@
 																	"has-error")
 													$(
 															"#error_rc_guide_count")
-															.show()
+															.show();
 													//return false;
 												} else {
 													$(
 															"#error_rc_guide_count")
-															.hide()
+															.hide();
 												}
 												
 												
@@ -395,12 +403,12 @@
 																	"has-error")
 													$(
 															"#error_rc_student_count")
-															.show()
+															.show();
 													//return false;
 												} else {
 													$(
 															"#error_rc_student_count")
-															.hide()
+															.hide();
 												} 
 											 
 											 
@@ -411,10 +419,10 @@
 
 													$("#fromDate").addClass(
 															"has-error")
-													$("#error_fromDate").show()
+													$("#error_fromDate").show();
 
 												} else {
-													$("#error_fromDate").hide()
+													$("#error_fromDate").hide();
 												}
 												
 												if (!$("#toDate").val()) {
@@ -424,13 +432,36 @@
 
 													$("#toDate").addClass(
 															"has-error")
-													$("#error_toDate").show()
+													$("#error_toDate").show();
 
 												} else {
-													$("#error_toDate").hide()
+													$("#error_toDate").hide();
 												}
 
-												
+												var from_date = document.getElementById("fromDate").value;
+						         				var to_date = document.getElementById("toDate").value;
+						         				var x=0;
+						         				
+						         				
+						         		        var fromdate = from_date.split('-');
+						         		        from_date = new Date();
+						         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+						         		        var todate = to_date.split('-');
+						         		        to_date = new Date();
+						         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+						         		        if (from_date > to_date ) 
+						         		        {
+						         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+													$("#error_fromToDate").show();
+						    					 	$("#error_toToDate").show();
+						    					 	$("#error_fromDate").hide();
+						    					 	$("#error_toDate").hide();
+						         		            return false;
+						         		           
+						         		        }else {
+						         					$("#error_fromToDate").hide();
+						         					$("#error_toToDate").hide();
+						         				}
 
 												if (!isError) {
 
