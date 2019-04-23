@@ -39,6 +39,7 @@ import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
 import com.ats.rusasoft.model.InstituteInfo;
+import com.ats.rusasoft.model.LibBookPurchase;
 import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LibraryInfo;
 import com.ats.rusasoft.model.LoginResponse;
@@ -598,6 +599,275 @@ public class LibraryController {
 		return a;
 
 	}
+/*****************************************************************************************************************************/	
+
+	@RequestMapping(value = "/showlibBookPurchased", method = RequestMethod.GET)
+	public ModelAndView showlibBookPurchased(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			model = new ModelAndView("library/libBookPurchasedList");
+			HttpSession session = request.getSession();
+			
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showlibBookPurchased", "showlibBookPurchased", "1", "0", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				map = new LinkedMultiValueMap<>();
+
+				map.add("instituteId", instituteId);
+				map.add("acadYear", acadYear);
+
+				LibBookPurchase[] libbookarr = rest.postForObject(Constants.url + "/showPurchsaeBooksList", map, LibBookPurchase[].class);
+				List<LibBookPurchase> libraryBooks = new ArrayList<>(Arrays.asList(libbookarr));
+
+				model.addObject("bookList", libraryBooks);
+				model.addObject("title", "Library Books Purchased List");
+
+				Info add = AccessControll.checkAccess("showlibBookPurchased", "showlibBookPurchased", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showlibBookPurchased", "showlibBookPurchased", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showlibBookPurchased", "showlibBookPurchased", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/libBookPurchase", method = RequestMethod.GET)
+	public ModelAndView libBookPurchase(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("library/libBookPurchase");
+
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("libBookPurchase", "showlibBookPurchased", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			}
+
+			else {
+				LibBookPurchase libBook = new LibBookPurchase();
+
+				model.addObject("title", "Add Library Book Purchase");
+				model.addObject("lib", libBook);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/insertLibBook", method = RequestMethod.POST)
+	public String insertLibBook(HttpServletRequest request, HttpServletResponse response) {
+		
+		//try {
+			int id = 0;
+			
+			HttpSession session = request.getSession();
+			int insId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int acadYear = (int) session.getAttribute("acYearId");
+			id = Integer.parseInt(request.getParameter("bookId"));
+			LibBookPurchase lib = new LibBookPurchase();
+			
+			lib.setBookPurchaseId(id);
+			lib.setInstituteId(insId);
+			lib.setAcademicYrid(acadYear);
+			lib.setUserId(userId);
+			
+			lib.setNoOfBooks(Integer.parseInt(request.getParameter("noOfBookPrchs")));
+			lib.setCostOfBooks(Integer.parseInt(request.getParameter("costOfBook")));
+			
+			lib.setNoOfJournal(Integer.parseInt(request.getParameter("noOfJournal")));
+			lib.setCostOfJournal(Integer.parseInt(request.getParameter("costOfJournal")));
+			
+			lib.setNoOfEjournal(Integer.parseInt(request.getParameter("noOfEJournal")));
+			lib.setCostOfEjournal(Integer.parseInt(request.getParameter("costOfEJournal")));
+			
+			lib.setDelStatus(1);
+			lib.setExVar1("NA");
+			lib.setExInt1(0);
+			System.out.println(lib.toString());
+			
+			LibBookPurchase libBook = rest.postForObject(Constants.url+"/newLibBookPurchase", lib, LibBookPurchase.class);
+			
+		/*}catch(Exception e){
+			e.printStackTrace();
+			System.out.println();
+		}*/
+		return "redirect:/showlibBookPurchased";
+	}
+	
+	
+	
+	@RequestMapping(value = "/editLibBook/{bookId}", method = RequestMethod.GET)
+	public ModelAndView editLibBook(@PathVariable("bookId") int bookId, HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView model = new ModelAndView("library/libBookPurchase");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("editLibBook/{bookId}", "showlibBookPurchased", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("bookId", bookId);
+
+				LibBookPurchase editBookInfo = rest.postForObject(Constants.url + "/getLibBookById", map, LibBookPurchase.class);
+				model.addObject("lib", editBookInfo);
+
+				model.addObject("title", "Edit Library Book Purchase");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/deleteLibBook/{bookId}", method = RequestMethod.GET)
+	public String deleteLibBookInfo(@PathVariable("bookId") int bookId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			String a = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("deleteLibBook/{bookId}", "showlibBookPurchased", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("bookId", bookId);
+
+				LibBookPurchase editBook = rest.postForObject(Constants.url + "/deleteLibBookById", map, LibBookPurchase.class);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return "redirect:/showlibBookPurchased";
+
+	}
+	
+	@RequestMapping(value = "/delSlectedPurchasedLibBooks/{libBookId}", method = RequestMethod.GET)
+	public String delSlectedPurchasedLibBooks(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int libBookId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedPurchasedLibBooks/{libBookId}", "showlibBookPurchased", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (libBookId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] libBookIds = request.getParameterValues("libBookId");
+					System.out.println("id are" + libBookIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < libBookIds.length; i++) {
+						sb = sb.append(libBookIds[i] + ",");
+
+					}
+					String libBookIdList = sb.toString();
+					libBookIdList = libBookIdList.substring(0, libBookIdList.length() - 1);
+
+					map.add("libBookIdList", libBookIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("libBookIdList", libBookId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelPurchasedBooks", map, Info.class);
+
+				a = "redirect:/showlibBookPurchased";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+	
+/**************************************************************************************************************************************/	
+	
 
 	@RequestMapping(value = "/showEShodhSindhu", method = RequestMethod.GET)
 	public ModelAndView showEShodhSindhu(HttpServletRequest request, HttpServletResponse response) {

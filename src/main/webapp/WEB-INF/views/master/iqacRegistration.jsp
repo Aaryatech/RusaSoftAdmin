@@ -108,7 +108,7 @@
 											</label>
 											<div class="col-sm-10">
 												<select id="designation" name="designation"
-													class="form-control" onchange="showForm()">
+													class="form-control">
 
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
@@ -152,38 +152,7 @@
 												</select>
 											</div>
 										</div>
-										<%-- <div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-																Department<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="dept_id" name="dept_id"
-																	class="" >
-																	<c:forEach items="${deptList}" var="dept">
-																		<c:choose>
-																			<c:when test="${miqc.deptId==dept.deptId}">
-																				<option selected value="${dept.deptId}">${dept.deptName}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${dept.deptId}">${dept.deptName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-															<option value="0">NA</option>
-																	
-
-																</select>
-																<span
-															class="error_form text-danger" id="dept_id_field"
-															style="display: none;">Please select department
-															name</span>
-															</div>
-														</div> --%>
-
+										
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">
@@ -563,15 +532,13 @@
 			//alert("Value " +value)
 			if (value == 1) {
 				//alert(value)
-				document.getElementById("acc_off_relDate").removeAttribute(
-						"required");
+				document.getElementById("acc_off_relDate").removeAttribute("required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				document.getElementById("acc_off_relDate").setAttribute(
-						"required", "true");
+				document.getElementById("acc_off_relDate").setAttribute("required", "true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -587,11 +554,7 @@
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = $
-				{
-					accOff.realivingDate
-				}
-				;
+				var isRel = ${accOff.realivingDate};
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
 					//alert("Hi 2")
