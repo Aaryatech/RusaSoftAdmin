@@ -325,7 +325,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">Select
-												Program <span class="text-danger">*</span>
+												Program Type<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<select id="programId" name="programId" class="form-control">

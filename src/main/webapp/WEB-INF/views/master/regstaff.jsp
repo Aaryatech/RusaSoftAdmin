@@ -182,8 +182,8 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="year"
-												style="text-align: left;"> Year of highest
-												Qualification Acquired<span class="text-danger">*</span>
+												style="text-align: left;">
+												Qualification Year<span class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-10">
@@ -730,7 +730,7 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-
+if(data.facultyId>0){
 									document.getElementById("email").value = data.email;
 									document.getElementById("contactNo").value = data.contactNo;
 									document.getElementById("dateOfJoin").value = data.joiningDate;
@@ -747,6 +747,9 @@
 									//alert(temp);
 									$("#dept").val(temp);
 									$("#dept").trigger("chosen:updated");
+}else{
+	
+}
 
 								});
 		}

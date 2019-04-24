@@ -261,14 +261,14 @@
 											</div>
 
 										</div>
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Roles
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<input type="checkbox" name="isDean" value="1" ${editHod.isHod==1 ? 'checked' : ''}>&nbsp;&nbsp;&nbsp;HOD
 											</div>
-										</div>
+										</div> --%>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -488,7 +488,8 @@
 				autoclose : true,
 				format : "dd-mm-yyyy",
 				changeYear : true,
-				changeMonth : true
+				changeMonth : true,
+
 
 			});
 		});
@@ -743,7 +744,7 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-
+	if(data.facultyId>0){
 									document.getElementById("email").value = data.email;
 									document.getElementById("contactNo").value = data.contactNo;
 									document.getElementById("hodName").value = data.facultyFirstName;
@@ -763,6 +764,9 @@
 								 	temp = (data.deptId).split(",");
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
+	}else{
+		
+	}
 
 
 								});

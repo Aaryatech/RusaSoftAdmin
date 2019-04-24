@@ -449,7 +449,7 @@
 													$("#budget_utilized_field")
 															.hide()
 												}
-												if (parseInt($(
+												/* if (parseInt($(
 														"#budget_utilized")
 														.val()) > parseInt($(
 														"#budget_allocated")
@@ -463,7 +463,7 @@
 												} else {
 													$("#budget_utilized_field2")
 															.hide()
-												}
+												} */
 
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");

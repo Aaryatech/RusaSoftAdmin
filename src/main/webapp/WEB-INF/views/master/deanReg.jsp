@@ -40,7 +40,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="setDate(${dean.facultyId})">
+<body onload="setDate1(1)">
 	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -221,14 +221,55 @@
 													</label>
 													<div class="col-sm-2">
 
-														<input type="radio" id="is_registration1"
-															${dean.facultyId==0 ? 'checked' : ''}
+														<%-- <input type="radio" id="is_registration1"
+															${dean.isWorking==1 ? 'checked' : ''}
 															name="is_registration" value="1"
 															onclick="setDate(this.value)">Yes <input
 															type="radio" id="is_registration2"
-															${dean.facultyId>0 ? 'checked' : ''}
+															${dean.isWorking<1 ? 'checked' : ''}
 															name="is_registration" value="0"
 															onclick="setDate(this.value)">No
+															 --%>
+															<c:choose>
+															<c:when test="${dean.facultyId>0}">
+															<c:choose>
+															<c:when test="${dean.isWorking==1}">
+															<input type="radio" id="is_registration"
+														checked
+															name="is_registration" value="1"
+															onclick="setDate(this.value)">Yes<input
+															type="radio" id="is_registration"
+															name="is_registration" value="0"
+															onclick="setDate(this.value)">No
+															</c:when>
+															<c:otherwise>
+															<input type="radio" id="is_registration"
+															name="is_registration" value="1"
+															onclick="setDate(this.value)">Yes<input
+															type="radio" checked id="is_registration"
+															name="is_registration" value="0"
+															onclick="setDate(this.value)">No
+															</c:otherwise>
+															</c:choose>
+															</c:when>
+															
+															
+															<c:otherwise>
+															
+															<input type="radio" id="is_registration"
+														 checked
+															name="is_registration" value="1"
+															onclick="setDate(this.value)">Yes<input
+															type="radio" id="is_registration"
+															name="is_registration" value="0"
+															onclick="setDate(this.value)">No
+															
+															</c:otherwise>
+															
+															
+															</c:choose>
+															
+															
 														<%-- <c:choose>
 															<c:when test="${dean.facultyId==0}">
 
@@ -273,7 +314,21 @@
  --%>
 													</div>
 												</div>
-
+<div class="form-group" id="abc" style="display: none">
+													<label class="control-label col-sm-2" for="page_order">Relieving
+														Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-3">
+														<input type="text" class="form-control datepicker"
+															id="acc_off_relDate"
+															onkeypress='return restrictAlphabets(event)'
+															autocomplete="off" name="acc_off_relDate"
+															placeholder="Relieving Date"
+															value="${dean.realivingDate}"> <span
+															class="error_form text-danger" id="error_acc_off_relDate"
+															style="display: none;">Please enter relieving date</span>
+													</div>
+												</div>
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>
@@ -307,30 +362,16 @@
 															Verification mail will be sent on this Email id</p>
 													</div>
 												</div>
-												<div class="form-group" id="abc" style="display: none">
-													<label class="control-label col-sm-2" for="page_order">Relieving
-														Date <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-3">
-														<input type="text" class="form-control datepicker"
-															id="acc_off_relDate"
-															onkeypress='return restrictAlphabets(event)'
-															autocomplete="off" name="acc_off_relDate"
-															placeholder="Relieving Date"
-															value="${dean.realivingDate}"> <span
-															class="error_form text-danger" id="error_acc_off_relDate"
-															style="display: none;">Please enter relieving date</span>
-													</div>
-												</div>
+												
 
-												<div class="form-group">
+												<%-- <div class="form-group">
 													<label class="control-label col-sm-2" for="smallheading">Roles
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<input type="checkbox" name="isDean" value="1"
 															${dean.isDean==1 ? 'checked' : ''}>&nbsp;&nbsp;&nbsp;Dean</div>
-												</div>
+												</div> --%>
 
 											</div>
 
@@ -541,7 +582,7 @@ $(function () {
 });
 
 	function showDiv(value) {
-	alert(value);
+	//alert(value);
 		if (value == 0) {
 			//alert(value);
 			document.getElementById("abc").style.display = "block";
@@ -564,9 +605,15 @@ $(function () {
 	<script type="text/javascript">
 	 
 
-	function setDate(value){
-	//alert("Value " +hi);
-		if(value==1){
+	function setDate1(value){
+	//alert("Value " +value);
+	var x=0;
+	x=${dean.facultyId}
+	if(x>0){
+	var isWork=0;
+	isWork=${dean.isWorking}
+	if(isWork==1){
+		
 		//alert(value)
 		//document.getElementById("acc_off_relDate").removeAttribute("required");
 		document.getElementById("abc").style = "display:none"
@@ -579,8 +626,33 @@ $(function () {
 
 			//alert(value)
 		}
+	}
 		
 	}
+	
+	</script>
+	<script type="text/javascript">
+	
+	function setDate(value){
+		//alert("Value " +value);
+	
+		if(value==1){
+			
+			//alert(value)
+			//document.getElementById("acc_off_relDate").removeAttribute("required");
+			document.getElementById("abc").style = "display:none"
+
+			//alert(value)
+			}else{
+				//alert(value)
+				//document.getElementById("acc_off_relDate").setAttribute("required","true");
+				document.getElementById("abc").style.display = "block";
+
+				//alert(value)
+			}
+		}
+			
+	
 	
 	</script>
 	<script type="text/javascript">
@@ -626,7 +698,7 @@ $(function () {
 
 								//	alert("Data  " +JSON.stringify(data));
 
-								 
+								 if(data.facultyId>0){
 
 										document.getElementById("email").value = data.email;
 										document.getElementById("contact_no").value = data.contactNo;
@@ -656,7 +728,9 @@ $(function () {
 									 	temp = (data.deptId).split(",");
 										  $('#dept_id').val(temp);
 										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
-
+								 }else{
+									 
+								 }
 
 								});
 		}
@@ -684,7 +758,7 @@ $(function () {
 	
 	function showIsReg(){
 		//alert("Hi");
-		var x=${dean.deanId};
+		var x=${dean.facultyId};
 	
 		if(x>0){
 			//alert("Hi 1")

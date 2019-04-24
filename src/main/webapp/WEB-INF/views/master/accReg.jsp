@@ -335,7 +335,7 @@
 											</div>
 
 										</div>
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Roles
 												<span class="text-danger">*</span>
 											</label>
@@ -343,7 +343,7 @@
 												<input type="checkbox" name="isAccOff" value="1" ${editFaculty.isAccOff==1 ? 'checked' : ''}>Account
 												Officer
 											</div>
-										</div>
+										</div> --%>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -922,10 +922,9 @@
 
 								},
 								function(data) {
-									//alert("data" + data);
-
-									//alert("Data  " +JSON.stringify(data));
-
+									
+									if(data.facultyId>0){
+									//alert("Data not null");
 									document.getElementById("email").value = data.email;
 									document.getElementById("contactNo").value = data.contactNo;
 									document.getElementById("accName").value = data.facultyFirstName;
@@ -933,15 +932,6 @@
 									document.getElementById("acc_off_relDate").value = data.realivingDate;
 									document.getElementById("acc_id").value = data.facultyId;
 
-									/* document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
-									$("#designation").trigger("chosen:updated");
-									var temp = new Array();
-
-									temp = (data.deptId).split(",");
-									//alert(temp);
-									$("#dept_id").val(temp);
-									$("#dept_id").trigger("chosen:updated"); */
-									
 									//Mahendra
 									//single select
 									document.getElementById("designation").value=data.currentDesignationId;
@@ -949,13 +939,13 @@
 									//single select
 									document.getElementById("quolif").value=data.highestQualification;
 									$("#quolif").trigger("chosen:updated");
+									
 									//multiple select
 								 	var temp = new Array();
 								 	temp = (data.deptId).split(",");
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
-
-
+									}
 
 								});
 		}

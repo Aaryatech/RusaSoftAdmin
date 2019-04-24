@@ -222,7 +222,7 @@ public class FacultyController {
 						newModuleList);
 				Info delete = AccessControll.checkAccess("showJournalPubList", "showJournalPubList", "0", "0", "0", "1",
 						newModuleList);
-System.err.println("Addd" +add);
+				System.err.println("Addd" + add);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -675,7 +675,12 @@ System.err.println("Addd" +add);
 
 			if (add.isError() == false) {
 
-				Program[] program = rest.getForObject(Constants.url + "/getAllProgramList", Program[].class);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("instId", userObj.getStaff().getInstituteId());
+
+				Program[] program = rest.postForObject(Constants.url + "/getAllProgramList", map, Program[].class);
 				List<Program> proList = new ArrayList<Program>(Arrays.asList(program));
 
 				model = new ModelAndView("FacultyDetails/addSubDetail");
@@ -805,15 +810,19 @@ System.err.println("Addd" +add);
 				model = new ModelAndView("accessDenied");
 
 			} else {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				Program[] program = rest.getForObject(Constants.url + "/getAllProgramList", Program[].class);
+				map.add("instId", userObj.getStaff().getInstituteId());
+
+				Program[] program = rest.postForObject(Constants.url + "/getAllProgramList", map, Program[].class);
 				List<Program> proList = new ArrayList<Program>(Arrays.asList(program));
 
 				model = new ModelAndView("FacultyDetails/addSubDetail");
 
 				model.addObject("title", "Edit Faculty's Teaching Subject Details");
 				model.addObject("proList", proList);
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map = new LinkedMultiValueMap<>();
 				map.add("subId", subId);
 
 				Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
@@ -867,9 +876,15 @@ System.err.println("Addd" +add);
 			model.addObject("title", "Faculty CO PO");
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("programId", 2);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("subId", subId);
+
+			Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("programId", editSubject.getProgId());
 			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);

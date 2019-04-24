@@ -124,7 +124,7 @@ public class MastersController {
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
-				Dept[] instArray = restTemplate.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				Dept[] instArray = restTemplate.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList " + deptList.toString());
 
@@ -391,7 +391,7 @@ public class MastersController {
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
-				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				Dept[] instArray = rest.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList " + deptList.toString());
 

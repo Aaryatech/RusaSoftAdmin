@@ -186,12 +186,7 @@ public class PrincipalController {
 
 			}
 
-			roleNameList = Constants.Account_Officer_Role + "," + Constants.Faculty_Role;
-
-			if (isAccOff == 1) {
-				roleNameList = roleNameList + "," + Constants.Account_Officer_Role;
-			}
-
+			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("roleNameList", roleNameList);

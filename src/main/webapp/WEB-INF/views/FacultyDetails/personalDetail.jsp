@@ -273,7 +273,7 @@
 												of Birth<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" data-end-date="-6750d" data-format="dd-mm-yyyy"
 													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
 													value="${facPerDetail.fDob}"> <span
 													class="error_form text-danger" id="f_dob_field"
@@ -605,7 +605,7 @@
 		document.getElementById("is_view").value = view;//create this 
 
 	}
-    $(function () {
+   /*  $(function () {
 		 
         $('.datepicker').datepicker({
 			autoclose: true,
@@ -614,7 +614,7 @@
             changeMonth:true,
            
 		});
-    });
+    }); */
     function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

@@ -108,7 +108,7 @@
 											</label>
 											<div class="col-sm-10">
 												<select id="designation" name="designation"
-													class="form-control">
+													onchange="showForm()">
 
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
@@ -133,18 +133,19 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<select id="dept_id" name="dept_id" class="form-control">
+												<select id="dept_id" name="dept_id">
 													<c:forEach items="${deptList}" var="dept">
+														
 														<c:choose>
+														
 															<c:when test="${miqc.deptId==dept.deptId}">
 																<option selected value="${dept.deptId}">${dept.deptName}</option>
-
 															</c:when>
+															
 															<c:otherwise>
 																<option value="${dept.deptId}">${dept.deptName}</option>
-
 															</c:otherwise>
-
+															
 														</c:choose>
 
 													</c:forEach>
@@ -152,18 +153,49 @@
 												</select>
 											</div>
 										</div>
-										
+										<%-- <div class="form-group">
+															<label class="control-label col-sm-2" for="page_name">
+																Department<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<select id="dept_id" name="dept_id"
+																	class="" >
+																	<c:forEach items="${deptList}" var="dept">
+																		<c:choose>
+																			<c:when test="${miqc.deptId==dept.deptId}">
+																				<option selected value="${dept.deptId}">${dept.deptName}</option>
+
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${dept.deptId}">${dept.deptName}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+															<option value="0">NA</option>
+																	
+
+																</select>
+																<span
+															class="error_form text-danger" id="dept_id_field"
+															style="display: none;">Please select department
+															name</span>
+															</div>
+														</div> --%>
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">
 												Qualification<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<select id="quolif" name="quolif" class="form-control">
+												<select id="quolif" name="quolif">
 													<c:forEach items="${quolfList}" var="quolf">
 														<c:choose>
 															<c:when
-																test="${hod.highestQualificationId==quolf.qualificationId}">
+																test="${miqc.highestQualification==quolf.qualificationId}">
 																<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
 
 															</c:when>
@@ -532,13 +564,15 @@
 			//alert("Value " +value)
 			if (value == 1) {
 				//alert(value)
-				document.getElementById("acc_off_relDate").removeAttribute("required");
+				document.getElementById("acc_off_relDate").removeAttribute(
+						"required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				document.getElementById("acc_off_relDate").setAttribute("required", "true");
+				document.getElementById("acc_off_relDate").setAttribute(
+						"required", "true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -554,7 +588,11 @@
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = ${accOff.realivingDate};
+				var isRel = $
+				{
+					accOff.realivingDate
+				}
+				;
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
 					//alert("Hi 2")
@@ -613,7 +651,7 @@
 
 									//alert("Data  " +JSON.stringify(data));
 
-									 
+									 if(data.facultyId>0){
 
 										document.getElementById("email").value = data.email;
 										document.getElementById("contactNo").value = data.contactNo;
@@ -642,6 +680,9 @@
 									 	temp = (data.deptId).split(",");
 										  $('#dept_id').val(temp);
 										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
+									 }else{
+										 
+									 }
 
 									 
 								});
@@ -672,6 +713,30 @@
 					$(this).data('select2').results.addClass('overflow-hidden')
 							.perfectScrollbar();
 				});
+		
+		$("#designation").select2({
+			allowClear : true
+		}).on(
+				'select2-open',
+				function() {
+					// Adding Custom Scrollbar
+					$(this).data('select2').results.addClass('overflow-hidden')
+							.perfectScrollbar();
+				});
+		
+
+		$("#quolif").select2({
+			allowClear : true
+		}).on(
+				'select2-open',
+				function() {
+					// Adding Custom Scrollbar
+					$(this).data('select2').results.addClass('overflow-hidden')
+							.perfectScrollbar();
+				});
+		
+		
+		
 	</script>
 
 

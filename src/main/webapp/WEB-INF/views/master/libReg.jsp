@@ -233,27 +233,27 @@
 
 											<c:choose>
 												<c:when test="${editFaculty.isWorking==0}">
-													<div class="col-md-2">
+													<div class="col-md-1">
 
 														<input type="radio" name="isWorking" id="isWorking"
 															value="0" onchange="chengeDate(this.value)" checked>No
 
 													</div>
 
-													<div class="col-md-2">
+													<div class="col-md-1">
 														<input type="radio" name="isWorking"
 															onchange="chengeDate(this.value)" value="1"> Yes
 													</div>
 												</c:when>
 												<c:when test="${editFaculty.isWorking==1}">
-													<div class="col-md-2">
+													<div class="col-md-1">
 
 														<input type="radio" name="isWorking" id="isWorking"
 															onchange="chengeDate(this.value)" value="0">No
 
 													</div>
 
-													<div class="col-md-2">
+													<div class="col-md-1">
 														<input type="radio" name="isWorking"
 															onchange="chengeDate(this.value)" value="1" checked>
 														Yes
@@ -261,14 +261,14 @@
 												</c:when>
 												<c:otherwise>
 
-													<div class="col-md-2">
+													<div class="col-md-1">
 
 														<input type="radio" name="isWorking" id="isWorking"
 															onchange="chengeDate(this.value)" value="0">No
 
 													</div>
 
-													<div class="col-md-2">
+													<div class="col-md-1">
 														<input type="radio" name="isWorking" value="1" checked
 															onchange="chengeDate(this.value)"> Yes
 													</div>
@@ -338,7 +338,7 @@
 											</div>
 
 										</div>
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Roles
 												<span class="text-danger">*</span>
 											</label>
@@ -346,7 +346,7 @@
 												<input type="checkbox" name="isLib" value="1" ${editFaculty.isLibrarian==1 ? 'checked' : ''}>Librarian
 
 											</div>
-										</div>
+										</div> --%>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -714,7 +714,7 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-
+if(data.facultyId>0){
 									document.getElementById("email").value = data.email;
 									document.getElementById("contactNo").value = data.contactNo;
 									document.getElementById("libName").value = data.facultyFirstName;
@@ -743,6 +743,9 @@
 								 	temp = (data.deptId).split(",");
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
+}else{
+	
+}
 
 
 

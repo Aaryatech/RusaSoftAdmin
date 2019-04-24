@@ -703,8 +703,8 @@ public class IqacController {
 				// HttpSession session = request.getSession();
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map.add("instId", userObj.getGetData().getUserInstituteId());
-				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				map.add("deptIds", userObj.getStaff().getDeptId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getDeptListDeptIdIn", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList " + deptList.toString());
 
@@ -1502,6 +1502,8 @@ public class IqacController {
 				editStaff.setIsHod(isHod);
 				editStaff.setRoleIds(roleIds);
 				editStaff.setType(6);
+				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
+
 				editStaff.setMakerUserId(userId);
 				editStaff.setMakerEnterDatetime(curDateTime);
 				editStaff.setCheckerUserId(0);

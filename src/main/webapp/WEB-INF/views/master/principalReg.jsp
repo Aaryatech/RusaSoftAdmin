@@ -211,11 +211,11 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker"
+												<input type="text" class="form-control datepicker" data-format="dd-mm-yyyy"
 													id="dateOfJoin" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editFaculty.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd/mm/yyyy"> <span
+													autocomplete="off" placeholder="dd-mm-yyyy"  data-end-date="+0d"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
 											</div>
@@ -266,10 +266,9 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="checkbox" name="isAccOff" value="1">Account
-												Officer <input type="checkbox" name="isHod" value="1">HOD
-												<input type="checkbox" name="isDean" value="1">Dean
-												<input type="checkbox" name="isLib" value="1">Librarian
+												<input type="checkbox" name="isAccOff" ${editFaculty.isAccOff==1 ? 'checked' : ''} value="1">Account
+												Officer <input type="checkbox" ${editFaculty.isHod==1 ? 'checked' : ''} name="isHod" value="1">HOD
+												<input type="checkbox" name="isDean" ${editFaculty.isDean==1 ? 'checked' : ''} value="1">Dean
 
 
 											</div>
@@ -311,7 +310,7 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
+ 
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -488,16 +487,16 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
-			$('.datepicker').datepicker({
+			   $('.datepicker_doj').datepicker({
 				autoclose : true,
 				format : "dd-mm-yyyy",
 				changeYear : true,
-				changeMonth : true
-
-			});
-		});
+				changeMonth : true,
+				 
+			});   
+		}); */
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -548,18 +547,12 @@
 	</script>
 	<script type="text/javascript">
 		function showIsReg() {
-			//alert("Hi");
-			var x = $
-			{
-				accOff.officerId
-			}
+		/* 	//alert("Hi");
+			var x = 11;//${accOff.officerId}
 
 			if (x > 0) {
 				//alert("Hi 1")
-				var isRel = $
-				{
-					accOff.realivingDate
-				}
+				var isRel = ${accOff.realivingDate}
 				;
 				//alert("Is Reg " +isReg);
 				if (isRel == null) {
@@ -573,7 +566,7 @@
 				}
 
 			}
-
+ */
 		}
 	</script>
 	<script type="text/javascript">
@@ -619,7 +612,7 @@
 
 									//alert("Data  " +JSON.stringify(data));
 
-								 
+								 if(data.facultyId>0){
 
 										document.getElementById("email").value = data.email;
 										document.getElementById("contactNo").value = data.contactNo;
@@ -635,6 +628,9 @@
 										//alert(temp);
 										$("#dept_id").val(temp);
 										$("#dept_id").trigger("chosen:updated");
+								 }else{
+									 
+								 }
 								});
 		}
 	</script>

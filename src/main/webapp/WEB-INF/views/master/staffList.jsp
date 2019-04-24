@@ -156,7 +156,7 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Edit"><span
 																	class="glyphicon glyphicon-edit"></span></a>
-																<a onclick="showAddDetail(${staffList.facultyId},1)"
+																<%-- <a onclick="showAddDetail(${staffList.facultyId},1)"
 																	href="#"><span class="glyphicon glyphicon-user"
 																	title="Personal Detail"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
@@ -167,7 +167,7 @@
 																<a onclick="showAddDetail(${staffList.facultyId},3)"
 																	href="#"><span class="glyphicon glyphicon-book"
 																	title="Academic Detail"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																	data-animate=" animated fadeIn " rel="tooltip"></span></a> --%>
 
 
 
