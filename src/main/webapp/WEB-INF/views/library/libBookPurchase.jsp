@@ -115,7 +115,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="costOfBook"
-												style="text-align: left;">Cost Of Book<span
+												style="text-align: left;">Cost of Book<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
@@ -153,7 +153,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="costOfBook"
-												style="text-align: left;">Cost Of Journal<span
+												style="text-align: left;">Cost of Journal<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
@@ -191,7 +191,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="costOfBook"
-												style="text-align: left;">Cost Of EJournal<span
+												style="text-align: left;">Cost of E-Journal<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">

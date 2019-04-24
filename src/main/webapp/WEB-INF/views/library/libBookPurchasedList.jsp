@@ -78,11 +78,11 @@
 							type="checkbox" name="selAll" id="selAll"
 								onClick="selectedInst(this)" /> Select All</th>
                    		<th width="5%">Sr No</th>
-                        <th>No. Of Books Purchase</th> 
-                        <th>Cost Of Books</th> 
-                         <th>No. Of Journal</th> 
+                        <th>No. of Books Purchase</th> 
+                        <th>Cost of Books</th> 
+                         <th>No. of Journal</th> 
                         <th>Cost of Journal</th> 
-                        <th>No. Of E-Journal</th> 
+                        <th>No. of E-Journal</th> 
                         <th>Cost of E-Journal</th> 
                                                 
                         <th width="20%">Action</th> 
