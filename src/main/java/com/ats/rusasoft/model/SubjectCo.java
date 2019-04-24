@@ -7,9 +7,9 @@ public class SubjectCo {
 	private int subId; 
 	private int facultyId; 
 	private String coName; 
-	private String coPoMap; 
-	private String coPoSatisfyingValue; 
-	private String coPsoMap; 
+	private String coPoMap; //if empty say no
+	private String coPoSatisfyingValue; // def -
+	private String coPsoMap; //if empty say no
 	private String coPsoSatisfyingValue; 
 	private int delStatus; 
 	private int isActive; 

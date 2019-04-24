@@ -53,10 +53,10 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								 
-								 <a href="${pageContext.request.contextPath}/showSubDetailsList"><button
-										type="button" class="btn btn-info">Back</button></a>  
-								<a class="box_toggle fa fa-chevron-down"></a> 
+
+								<a href="${pageContext.request.contextPath}/showSubDetailsList"><button
+										type="button" class="btn btn-info">Back</button></a> <a
+									class="box_toggle fa fa-chevron-down"></a>
 							</div>
 
 						</header>
@@ -119,8 +119,7 @@
 															value="${editSubjectCo.coId}">
 													</c:when>
 													<c:otherwise>
-													<input type="hidden" id="coId" name="coId"
-															value="0">
+														<input type="hidden" id="coId" name="coId" value="0">
 													</c:otherwise>
 												</c:choose>
 											</div>
@@ -137,12 +136,22 @@
 												<tr>
 													<th width="10%">Sr No</th>
 
-													<th>CO</th>
+													<th>Course Outcome</th>
 
 													<!-- <th>Is Mapped(Yes/No)</th> -->
 													<!-- <th>Satisfying Value</th> -->
+													<th width="10%" style="text-align: center;">Is PO
+														Mapped</th>
+													<th width="10%" style="text-align: center;">PO Satisfying Value</th>
+													<th width="10%" style="text-align: center;">Is PSO
+														Mapped</th>
+													<th width="10%" style="text-align: center;">PSO
+														Satisfying Value</th>
+
+													
 													<th width="10%" style="text-align: center;">PO Mapping</th>
-													<th width="10%" style="text-align: center;">PSO Mapping</th>
+													<th width="10%" style="text-align: center;">PSO
+														Mapping</th>
 													<th width="10%" style="text-align: center;">Action</th>
 												</tr>
 
@@ -150,14 +159,69 @@
 
 											<tbody>
 
-												<c:forEach items="${subjectCoList}" var="subjectCoList" varStatus="count">
+												<c:forEach items="${subjectCoList}" var="subjectCoList"
+													varStatus="count">
 													<tr>
 
-														<td style="text-align: center; ">${count.index+1}</td>
+														<td style="text-align: center;">${count.index+1}</td>
 
 														<td><c:out value="${subjectCoList.coName}" /></td>
-
-
+														
+														<c:if test="${not empty subjectCoList.coPoMap}">
+														<td><c:out value="Yes" /></td>
+														</c:if>
+															<c:if test="${empty subjectCoList.coPoMap}">
+														<td><c:out value="No" /></td>
+														</c:if>
+														
+														<c:set var="coPoSatisfyingValue" value=""></c:set>
+														
+														<c:choose>
+														<c:when test="${subjectCoList.coPoSatisfyingValue =='0'}">
+														<c:set var="coPoSatisfyingValue" value="1"></c:set>
+														</c:when>
+															<c:when test="${subjectCoList.coPoSatisfyingValue =='1'}">
+														<c:set var="coPoSatisfyingValue" value="2"></c:set>
+														</c:when>
+															<c:when test="${subjectCoList.coPoSatisfyingValue =='2'}">
+														<c:set var="coPoSatisfyingValue" value="3"></c:set>
+														</c:when>
+														<c:otherwise>
+														<c:set var="coPoSatisfyingValue" value="-"></c:set>
+														</c:otherwise>
+														</c:choose>
+														<td><c:out value="${coPoSatisfyingValue}" /></td>
+														
+														<c:if test="${not empty subjectCoList.coPsoMap}">
+														<td><c:out value="Yes" /></td>
+														</c:if>
+															<c:if test="${empty subjectCoList.coPsoMap}">
+														<td><c:out value="No" /></td>
+														</c:if>
+														
+														<c:set var="coPsoSatisfyingValue" value=""></c:set>
+														<c:choose>
+														
+														<c:when test="${subjectCoList.coPsoSatisfyingValue =='0'}">
+														<c:set var="coPsoSatisfyingValue" value="1"></c:set>
+														</c:when>
+														
+														<c:when test="${subjectCoList.coPsoSatisfyingValue =='1'}">
+														<c:set var="coPsoSatisfyingValue" value="2"></c:set>
+														</c:when>
+														
+														<c:when test="${subjectCoList.coPsoSatisfyingValue =='2'}">
+														<c:set var="coPsoSatisfyingValue" value="3"></c:set>
+														</c:when>
+														
+														<c:otherwise>
+														<c:set var="coPsoSatisfyingValue" value="-"></c:set>
+														</c:otherwise>
+														
+														</c:choose>
+														<td><c:out value="${coPsoSatisfyingValue}" /></td>
+														
+														
 														<%-- 
 
 

@@ -353,11 +353,11 @@
 													onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
-												<a
+												<%-- <a
 													href="${pageContext.request.contextPath}/showPersonalDetails"><button
 														type="button" id="sub2" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
-													</button></a>
+													</button></a> --%>
 											</div>
 											<input type="hidden" id="staff_id" name="staff_id"
 												value="${staff.facultyId}"> <input type="hidden"

@@ -235,8 +235,8 @@
 
 														<div class="col-sm-offset-2 col-sm-10">
 															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showAcademicDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-														</div>
+<%-- 														<a href="${pageContext.request.contextPath}/showAcademicDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+ --%>														</div>
 
 														<input type="hidden" id="fac_aca_id" name="fac_aca_id"
 															value="${editFacAcad.fAcaId}"> <input

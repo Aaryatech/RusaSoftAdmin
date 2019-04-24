@@ -773,7 +773,7 @@ public class FacPersonalController {
 
 				model = new ModelAndView("FacultyDetails/addAcademicDetails");
 
-				model.addObject("title", "Edit Faculty Academic Details");
+				model.addObject("title", "Add Faculty Academic Details");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				/*

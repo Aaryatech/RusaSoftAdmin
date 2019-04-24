@@ -116,14 +116,12 @@
 											<thead>
 												<tr>
 													<th>Sr No</th>
-													<th>Subject Code</th>
-													<th>Subject Name</th>
-													<th>Faculty Name</th>
-													<th>Department</th>
-													<th>Program</th>
 													<th>Semester</th>
+													<th>Subject CN</th>
+													<th>Subject Type</th>
+													<th>Faculty ND</th>
+													<th>Program</th>
 													<th>% of Result</th>
-													<th>Add CO</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -135,33 +133,51 @@
 
 														<td style="text-align: center">${count.index+1}</td>
 
+														<td style="text-align: center"><c:out
+																value="${subject.subSem}" /></td>
+																
+																
+																
 														<td style="text-align: left"><c:out
-																value="${subject.subCode}" /></td>
+																value="${subject.subCode}-${subject.subName}" /></td>
 
+
+<c:set var="subType"></c:set>
+<c:choose>
+<c:when test="${subject.subType==0}">
+<c:set var="subType" value="Regular"></c:set>
+</c:when>
+<c:when test="${subject.subType==1}">
+<c:set var="subType" value="Elective"></c:set>
+</c:when>
+<c:when test="${subject.subType==2}">
+<c:set var="subType" value="Other"></c:set>
+</c:when>
+</c:choose>
 														<td style="text-align: left"><c:out
-																value="${subject.subName}" /></td>
+																value="${subType}" /></td>
 
-														<td style="text-align: left;">${subject.facultyFirstName}</td>
-														<td style="text-align: left;">${subject.deptName}</td>
+
+														<td style="text-align: left;">${subject.facultyFirstName}-${subject.deptName}</td>
 
 														<td style="text-align: left"><c:out
 																value="${subject.nameOfProgram}" /></td>
 
-														<td style="text-align: center"><c:out
-																value="${subject.subSem}" /></td>
+
 
 														<td style="text-align: right"><c:out
 																value="${subject.subPassPer}" /></td>
 
 
 
-														<td align="center"><a
-															href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
-															title="Add CO" rel="tooltip" data-color-class="detail"
-															data-animate=" animated fadeIn " data-toggle="tooltip"
-															data-original-title="Block"><span
-																class="glyphicon glyphicon-list"></span></a></td>
 														<td align="center"><c:if test="${editAccess == 0}">
+
+																<a
+																	href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
+																	title="Add CO" rel="tooltip" data-color-class="detail"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Block"><span
+																	class="glyphicon glyphicon-list"></span></a>
 																<a
 																	href="${pageContext.request.contextPath}/editSubject/${subject.subId}"
 																	title="Edit" rel="tooltip" data-color-class="detail"
