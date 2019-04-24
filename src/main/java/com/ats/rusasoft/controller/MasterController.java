@@ -125,7 +125,6 @@ public class MasterController {
 			e.printStackTrace();
 
 		}
-		
 
 		return model;
 	}
