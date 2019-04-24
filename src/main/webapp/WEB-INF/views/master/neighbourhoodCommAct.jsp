@@ -133,7 +133,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_student" onchange="trim(this)"
-																	name="no_student" placeholder="No. of Student"
+																	name="no_student" placeholder="No. of Student" onkeypress='return restrictAlphabets(event)'
 																	value="${neighbourCommAct.noOfStud}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No.of student and value must be greater than 0.</span>
 															</div>
@@ -146,7 +146,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="ttl_student" onchange="trim(this)"
-																	name="ttl_student" placeholder="Total No. of Student"
+																	name="ttl_student" placeholder="Total No. of Student" onkeypress='return restrictAlphabets(event)'
 																	value="${neighbourCommAct.totalFaculty}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter total student and value must be greater than 0.</span>
 															</div>
@@ -158,7 +158,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)"
-																	name="no_faculty" placeholder="No. of Faculty"
+																	name="no_faculty" placeholder="No. of Faculty" onkeypress='return restrictAlphabets(event)'
 																	value="${neighbourCommAct.noOfFaculty}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of faculty and value must be greater than 0.</span>
 															</div>
@@ -170,7 +170,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="ttl_faculty" onchange="trim(this)"
-												name="ttl_faculty" placeholder="Total No. of Faculty"
+												name="ttl_faculty" placeholder="Total No. of Faculty" onkeypress='return restrictAlphabets(event)'
 																	value="${neighbourCommAct.totalFaculty}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter total faculty and value must be greater than 0.</span>
 															</div>
