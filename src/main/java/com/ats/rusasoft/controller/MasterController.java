@@ -127,7 +127,6 @@ public class MasterController {
 		}
 
 		return model;
-
 	}
 
 	@RequestMapping(value = "/showIqacAfterLogin", method = RequestMethod.GET)
