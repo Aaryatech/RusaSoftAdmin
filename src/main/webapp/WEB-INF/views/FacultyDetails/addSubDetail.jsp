@@ -333,10 +333,10 @@
 													<c:forEach items="${proList}" var="program">
 														<c:choose>
 															<c:when test="${editSubject.progId==program.programId}">
-																<option value="${program.programId}" selected>${program.nameOfProgram}</option>
+																<option value="${program.programId}" selected>${program.programName}-${program.nameOfProgram}</option>
 															</c:when>
 															<c:otherwise>
-																<option value="${program.programId}">${program.nameOfProgram}</option>
+																<option value="${program.programId}">${program.programName}-${program.nameOfProgram}</option>
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>

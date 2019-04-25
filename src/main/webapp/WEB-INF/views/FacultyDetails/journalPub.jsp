@@ -475,7 +475,7 @@ function submit_f(view){
             				}
             				
             				
-            				if(!$("#journalPgFrom").val() || !numbersOnlyNotZero($("#journalPgFrom").val())){
+            				if(!$("#journalPgFrom").val() || !($("#journalPgFrom").val()>0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter Journal Page From .</li>';
@@ -487,21 +487,35 @@ function submit_f(view){
             					$("#error_journalPgFrom").hide()
             				}
             				
+            				if(!$("#journalPgTo").val() || !($("#journalPgTo").val()>0)){
+           					 
+                				isError=true;
+                				
+                				$("#journalPgTo").addClass("has-error")
+                				$("#error_journalPgTo").show()
+                					 
+                				} else {
+                					$("#error_journalPgTo").hide()
+                				}
             				
+            			
+            				var fr=$("#journalPgFrom").val();
+            				var to=$("#journalPgTo").val()
+            				//alert("fr" +fr + "to " +to);
             				
-            				if(!$("#journalPgTo").val() || !numbersOnlyNotZero($("#journalPgTo").val())){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter Journal Page To.</li>';
+            				if(parseInt(fr)> parseInt(to) || !$("#journalPgTo").val() || !($("#journalPgTo").val()>0) || !$("#journalPgFrom").val() || !($("#journalPgFrom").val()>0) ){
+            					//alert(">")
+            					$("#journalPgFrom").addClass("has-error")
+                				$("#error_journalPgFrom").show();
+                					$("#journalPgTo").addClass("has-error")
+                				$("#error_journalPgTo").show();
+                					 
+                				} else {
+                					$("#error_journalPgFrom").hide();
+                					$("#error_journalPgTo").hide()
+                				}
             				
-            				$("#journalPgTo").addClass("has-error")
-            				$("#error_journalPgTo").show()
-            					 
-            				} else {
-            					$("#error_journalPgTo").hide()
-            				}
-             
-            				if(!isError) {
+           				if(!isError) {
             					
             					var x = confirm("Do you really want to submit the form?");
 								if (x == true) {

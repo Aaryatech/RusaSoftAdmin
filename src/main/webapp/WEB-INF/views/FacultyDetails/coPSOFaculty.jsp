@@ -69,30 +69,52 @@
 									method="post" name="submitProgramMission"
 									id="submitProgramMission"
 									onsubmit="return confirm('Do you really want to add CO?');">
-									<div class="col-xs-12">
+									<div class="col-sm-12">
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">
-												Program Name:</label>
-											<div class="col-sm-6" for="status">
-												<strong> ${programDetail.nameOfProgram} </strong>
-											</div>
+											<label class="col-sm-5" for="status">
+												Program Name:&nbsp;&nbsp;<strong>${programDetail.programName}-${programDetail.nameOfProgram}</strong></label>
+											
+										<!-- </div>
+
+										<div class="form-group"> -->
+											<label class="col-sm-2" for="status">
+												Duration:&nbsp;&nbsp;<strong>${programDetail.monthDuration}</strong></label>
+											
+										<!-- </div>
+										<div class="form-group"> -->
+											<label class="col-sm-3" for="status">
+												Sanctioned Intake:&nbsp;&nbsp;<strong>${programDetail.sanctionalIntake}</strong></label>
+
 										</div>
-
+										
+										
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">
-												Duration:</label>
-											<div class="col-sm-6" for="status">
-												<strong>${programDetail.monthDuration}</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">
-												Sanctioned Intake:</label>
-											<div class="col-sm-6" for="status">
-												<strong>${programDetail.sanctionalIntake}</strong>
-											</div>
+											<label class="col-sm-5" for="status">
+												Subject Name:&nbsp;&nbsp;<strong>${subject.subCode}-${subject.subName}</strong></label>
+											
+										<!-- </div>
 
+										<div class="form-group"> -->
+											<label class="col-sm-2" for="status">
+												Semister:&nbsp;&nbsp;<strong>${subject.subSem}</strong></label>
+											
+										<!-- </div>
+										<div class="form-group"> -->
+											<label class="col-sm-3" for="status">
+											<c:set var="subType"></c:set>
+<c:choose>
+<c:when test="${subject.subType==0}">
+<c:set var="subType" value="Regular"></c:set>
+</c:when>
+<c:when test="${subject.subType==1}">
+<c:set var="subType" value="Elective"></c:set>
+</c:when>
+<c:when test="${subject.subType==2}">
+<c:set var="subType" value="Other"></c:set>
+</c:when>
+</c:choose>
+												Subject Type:&nbsp;&nbsp;<strong>${subType}</strong></label>
 
 										</div>
 										<div class="form-group"></div>

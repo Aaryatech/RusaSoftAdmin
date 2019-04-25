@@ -134,7 +134,7 @@
 																	<td style="text-align: left;">${phdList.facultyFirstName}</td>
 																	<td style="text-align: left;">${phdList.deptName}</td>
 																	<td>${phdList.phdScholarName}</td>
-																	<td align="center">${phdList.phdRegYear}</td>
+																	<td align="center">${phdList.academicYear}</td>
 																	<td>${phdList.phdTopic}</td>
 
 																	<td align="center"><c:if test="${editAccess==0}">

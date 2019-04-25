@@ -1417,7 +1417,7 @@ public class FacultyModuleController {
 				System.out.println("BookList:" + bookList);
 				model.addObject("bookList", bookList);
 
-				model.addObject("title", "Faculty's Published Journal Details");
+				model.addObject("title", "Faculty's Published Book Details");
 
 				Info add = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "1", "0", "0",
 						newModuleList);
@@ -1523,7 +1523,7 @@ public class FacultyModuleController {
 				FacultyBook pubBook = rest.postForObject(Constants.url + "/getPubBookById", map, FacultyBook.class);
 				model.addObject("book", pubBook);
 
-				model.addObject("title", "Edit Faculty's Published Journal Details");
+				model.addObject("title", "Edit Faculty's Published Book Details");
 			}
 		} catch (Exception e) {
 

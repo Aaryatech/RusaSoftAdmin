@@ -117,11 +117,11 @@
 												<tr>
 													<th>Sr No</th>
 													<th>Semester</th>
-													<th>Subject CN</th>
+													<th>Subject</th>
 													<th>Subject Type</th>
-													<th>Faculty ND</th>
+													<th>Faculty</th>
 													<th>Program</th>
-													<th>% of Result</th>
+													<th>Result %</th>
 													<th>Action</th>
 												</tr>
 											</thead>

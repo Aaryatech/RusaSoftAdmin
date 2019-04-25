@@ -98,7 +98,7 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Program
-														Type<span class="text-danger">*</span>
+														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<!--  fetch it from m_prog_type -->

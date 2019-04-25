@@ -191,6 +191,7 @@ public class HomeController {
 			String password=request.getParameter("newPassword");
 			
 			/*String password="harsha";*/
+			
 			System.out.println("parameters are:::"+userId+password);
 			MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
 			map.add("password",password);
@@ -453,9 +454,12 @@ public class HomeController {
 								 int findModuleId=0;
 								 
 								 for(int k=0;k<newModuleList.size();k++) {
+									 System.err.println("mod Id " +newModuleList.get(k).getModuleId());
 									 
 									 if(newModuleList.get(k).getModuleId()==list.get(j).getModuleId()) {
-										 
+										 if(newModuleList.get(k).getModuleId()==4) {
+											 System.err.println("mod Id 4 sub modules " +newModuleList.get(k).getSubModuleJsonList().toString());
+										 }
 										 
 										 for(int m=0;m<list.get(j).getSubModuleJsonList().size();m++) {
 											 
@@ -782,16 +786,19 @@ public class HomeController {
 				
 				//Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
 
-				model = new ModelAndView("login");
+				//model = new ModelAndView("login");
+				model = new ModelAndView("changePassword");
+				
+				
 				//  c= "redirect:/showVerifyOTP";
-			
+	/*		BG
 
 				map =new LinkedMultiValueMap<String, Object>(); 
 				 map.add("type", 1);
 			model.addObject("msg","Password Sent on Your Phone Number");
 			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
 			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-			model.addObject("acaYearList", acaYearList);
+			model.addObject("acaYearList", acaYearList);*/
 			}
 			
 

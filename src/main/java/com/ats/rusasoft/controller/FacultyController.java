@@ -882,12 +882,14 @@ public class FacultyController {
 			map.add("subId", subId);
 
 			Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
+			model.addObject("subject", editSubject);
 
 			map = new LinkedMultiValueMap<>();
 			map.add("programId", editSubject.getProgId());
 			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);
+			
 
 			map = new LinkedMultiValueMap<>();
 			map.add("subId", subId);
@@ -989,7 +991,16 @@ public class FacultyController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("programId", 2);
+			
+			
+			map.add("subId", subId);
+
+			Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
+			model.addObject("subject", editSubject);
+			
+			map = new LinkedMultiValueMap<>();
+
+			map.add("programId", editSubject.getProgId());
 			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);
@@ -1004,6 +1015,8 @@ public class FacultyController {
 			map = new LinkedMultiValueMap<>();
 			map.add("coId", coId);
 			SubjectCo editSubjectCo = rest.postForObject(Constants.url + "/getSubjectCoBySubId", map, SubjectCo.class);
+			
+			
 
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);
