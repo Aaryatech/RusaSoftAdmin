@@ -41,7 +41,7 @@
 
 <!-- BEGIN BODY -->
 <!-- onload="check(${phd.isPhdAwarded})" onload="checkCoGuide(${phd.isCoGuide})" -->
-<body onload="showIsReg()">
+<body onload="showIsReg(${tExtAct.exInt1})">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -103,9 +103,18 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="activity_id" name="activity_id" class="form-control" onclick="checkPhdGuide(this.value)">
-													<c:forEach items="${mExtList}" var="extList">
+													<c:choose>
+													<c:when test="${tExtAct.exInt1==1}">
+														<option selected value="0">Any Other</option>
+														<c:forEach items="${mExtList}" var="extList">
+																<option value="${extList.extensionActivityId}">${extList.activityTitle}</option>
+													</c:forEach>
+													</c:when>
+													<c:otherwise>
 													
-													 <c:choose>
+													
+													<c:forEach items="${mExtList}" var="extList">
+														 <c:choose>
 															<c:when test="${extList.extensionActivityId==tExtAct.extensionActivityId}">
 																<option selected value="${extList.extensionActivityId}">${extList.activityTitle}</option>
 
@@ -118,7 +127,11 @@
 														</c:choose> 
 
 													</c:forEach>
+													
+													
 														<option value="0">Any Other</option>
+														</c:otherwise>
+														</c:choose>
 												</select>
 											</div>
 										</div>
@@ -224,7 +237,7 @@
 		</section>
 		<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- <!-- <script>
+ <script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -320,7 +333,7 @@
             			});
         });
 
-</script>   -->
+</script>   
 <script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
@@ -374,7 +387,7 @@
 		<script type="text/javascript">
 		function checkPhdGuide(activity) {
 			
-
+//alert(activity);
 			if (activity == 0) {
 				
 				document.getElementById("ihide").style = "visible"
@@ -387,9 +400,10 @@
 
 		}
 		
-		function showIsReg(){
-				
-				var isActivity = $("input[name=isActivity]:checked").val();
+		function showIsReg(act){
+			
+				//alert(act);
+				var isActivity = act; //$("input[name=isActivity]:checked").val();
 				
 				if(isActivity == 1){
 					document.getElementById("ihide").style.display = "block";

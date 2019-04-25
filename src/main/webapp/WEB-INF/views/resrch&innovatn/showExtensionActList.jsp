@@ -129,7 +129,7 @@
 																		name="exActId" id="exActIds${count.index+1}"
 																		value="${extActList.instExtensionActId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>
-																	<td>${extActList.tActivityTitle eq 'NA' ? extActList.activityTitle : extActList.tActivityTitle}</td>
+																	<td>${extActList.tActivityTitle}</td>
 																	<td>${extActList.noOfStudParticipated}</td>
 																	<td>${extActList.noOfStudInInst}</td>
 																	<td>${extActList.noOfFacultyParticipated}</td>
