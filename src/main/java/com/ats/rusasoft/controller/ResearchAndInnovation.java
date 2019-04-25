@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.model.EContentDevFacility;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.InstResearchDevMous;
 import com.ats.rusasoft.model.LibBookPurchase;
@@ -31,6 +32,7 @@ import com.ats.rusasoft.model.MExtActList;
 import com.ats.rusasoft.model.MExtensionActivity;
 import com.ats.rusasoft.model.ResearchDevMou;
 import com.ats.rusasoft.model.TExtensionActivity;
+import com.ats.rusasoft.model.TFacultyStudLinkage;
 import com.ats.rusasoft.model.TNeighbourhoodCommActivities;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
@@ -617,6 +619,550 @@ public class ResearchAndInnovation {
 		return a;
 
 	}
+	
+	
+	/********************************************************************************************************/
+	@RequestMapping(value = "/showStudFacultyLinkage", method = RequestMethod.GET)
+	public ModelAndView showResearchAndInnovationForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int acadYear = (int) session.getAttribute("acYearId");
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showStudFacultyLinkage", "showStudFacultyLinkage", "1", "0", "0", "0",
+				newModuleList);
+
+		if (view.isError() == true) {
+
+			model = new ModelAndView("accessDenied");
+
+		} else {
+			model = new ModelAndView("master/showStudFacLinkg");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instituteId", instituteId);
+			
+			TFacultyStudLinkage[] studFacLinkArr =  rest.postForObject(Constants.url+"/showStudFacLinks", map, TFacultyStudLinkage[].class);
+			List<TFacultyStudLinkage> linkageList = new ArrayList<>(Arrays.asList(studFacLinkArr));
+			System.out.println("Links="+linkageList);
+			
+			model.addObject("linkageList", linkageList);
+			model.addObject("title", "Student Faculty Linkage");
+
+			Info add = AccessControll.checkAccess("showStudFacultyLinkage", "showStudFacultyLinkage", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showStudFacultyLinkage", "showStudFacultyLinkage", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showStudFacultyLinkage", "showStudFacultyLinkage", "0", "0", "0",
+					"1", newModuleList);
+
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+
+		}
+		} catch (Exception e) {
+
+			System.err.println("exception In showResearchAndInnovationForm at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addStudFacLinkage", method = RequestMethod.GET)
+	public ModelAndView addStudFacLinkage(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		EContentDevFacility eCont = new EContentDevFacility();
+		try {
+			Info view = AccessControll.checkAccess("addStudFacLinkage", "showStudFacultyLinkage", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				TFacultyStudLinkage linkage = new TFacultyStudLinkage();
+				  
+				model = new ModelAndView("master/addstudFacLinkg");
+					model.addObject("linkage", linkage);
+					model.addObject("title", "Add Faculty Student Linkage");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In addEContentDev at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	@RequestMapping(value = "/insertStudFacultylinkg", method = RequestMethod.POST)
+	public String insertStudFacultylinkg(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int acadYear = (int) session.getAttribute("acYearId");
+		TFacultyStudLinkage linkage = new TFacultyStudLinkage();
+		
+		linkage.setFacultyStudLinkageId(Integer.parseInt(request.getParameter("fac_stud_link_id")));
+		linkage.setInstId(instituteId);
+		linkage.setAcYearId(acadYear);
+		linkage.setLinkageTitle(request.getParameter("link_title"));
+		linkage.setPartneringInstitute(request.getParameter("part_inst"));
+		linkage.setIndustryName(request.getParameter("insustry_name"));
+		linkage.setIndustryFromYear(request.getParameter("indust_year"));
+		linkage.setResearchLabName(request.getParameter("resrch_lab_name"));
+		linkage.setLabFromYear(request.getParameter("resrch_lab_year"));
+		linkage.setDurationFrom(request.getParameter("from_date"));
+		linkage.setDurationTo(request.getParameter("to_date"));
+		linkage.setNatureOfLinkage(request.getParameter("naturelinkage"));
+		linkage.setNoStudentParticipated(Integer.parseInt(request.getParameter("participate")) );
+		linkage.setDelStatus(1);
+		linkage.setIsActive(1);
+		linkage.setMakerUserId(userId);
+		linkage.setMaker_datetime(curDateTime);
+		linkage.setExInt1(0);
+		linkage.setExInt2(0);
+		linkage.setExVar1("NA");
+		linkage.setExVar2("NA");
+		
+		System.out.println(linkage.toString());
+		
+		TFacultyStudLinkage addLinkage = rest.postForObject(Constants.url+"/newstudFacLink", linkage, TFacultyStudLinkage.class);
+		
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			
+		}
+		return "redirect:/showStudFacultyLinkage";
+		
+	}
+	
+	@RequestMapping(value = "/editLinkage/{linkId}", method = RequestMethod.GET)
+	public ModelAndView editLinkage(@PathVariable("linkId") int linkId, HttpServletRequest request) {
+
+		// System.out.println("Id:" + iqacId);
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			Info view = AccessControll.checkAccess("editLinkage/{linkId}", "showStudFacultyLinkage", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				map.add("linkId", linkId);
+				model = new ModelAndView("master/addstudFacLinkg");
+				model.addObject("title", "Edit Faculty Student Linkage");
+				TFacultyStudLinkage  linkage = rest.postForObject(Constants.url+"/getStudFacLinksById", map, TFacultyStudLinkage.class);
+				model.addObject("linkage", linkage);
+			}
+		}catch(Exception e) {
+			
+		}
+		return model;
+	}
+	
+	@RequestMapping(value = "/deleteLinkage/{linkId}", method = RequestMethod.GET)
+	public String  deleteLinkage(@PathVariable("linkId") int linkId, HttpServletRequest request) {
+		
+		String a = null;
+		try {
+			
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			Info view = AccessControll.checkAccess("deleteLinkage/{linkId}", "showStudFacultyLinkage", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("linkId", linkId);
+
+				TFacultyStudLinkage delLink = rest.postForObject(Constants.url + "/deleteLinkById", map, TFacultyStudLinkage.class);
+				a="redirect:/showStudFacultyLinkage";
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return a;
+		
+	}
+
+	
+	@RequestMapping(value = "/deleteSelStudFacLinks/{linkageId}", method = RequestMethod.GET)
+	public String deleteSelStudFacLinks(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int linkageId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteSelStudFacLinks/{contentId}", "showStudFacultyLinkage", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (linkageId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] linkageIds = request.getParameterValues("linkageId");
+					System.out.println("id are" + linkageIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < linkageIds.length; i++) {
+						sb = sb.append(linkageIds[i] + ",");
+
+					}
+					String linkageIdsList = sb.toString();
+					linkageIdsList = linkageIdsList.substring(0, linkageIdsList.length() - 1);
+
+					map.add("linkageIdsList", linkageIdsList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("linkageIdsList", linkageId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelLinks", map, Info.class);
+
+				a = "redirect:/showStudFacultyLinkage";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+	
+
+	/**********************************************Neighbourhood ********************************************/
+	
+	@RequestMapping(value = "/showNeighbourhoodCommActivities", method = RequestMethod.GET)
+	public ModelAndView showNeighbourhoodCommActivities(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int acadYear = (int) session.getAttribute("acYearId");
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showNeighbourhoodCommActivities", "showNeighbourhoodCommActivities", "1", "0", "0", "0",
+				newModuleList);
+
+		if (view.isError() == true) {
+
+			model = new ModelAndView("accessDenied");
+
+		} else {
+			model = new ModelAndView("master/neighbourhoodCommActList");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instituteId", instituteId);
+			
+			TNeighbourhoodCommActivities[] neighbourArr =  rest.postForObject(Constants.url+"/showNeighbourCommActivities", map, TNeighbourhoodCommActivities[].class);
+			List<TNeighbourhoodCommActivities> neighbrCommActList = new ArrayList<>(Arrays.asList(neighbourArr));
+			System.out.println("Links="+neighbrCommActList);
+			
+			model.addObject("neighbrCommActList", neighbrCommActList);
+			model.addObject("title", "Neighbourhood Community Activity");
+
+			Info add = AccessControll.checkAccess("showNeighbourhoodCommActivities", "showNeighbourhoodCommActivities", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showNeighbourhoodCommActivities", "showNeighbourhoodCommActivities", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showNeighbourhoodCommActivities", "showNeighbourhoodCommActivities", "0", "0", "0",
+					"1", newModuleList);
+
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+
+		}
+		} catch (Exception e) {
+
+			System.err.println("exception In showNeighbourhoodCommActivities at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/newNeighbourhoodCommAct", method = RequestMethod.GET)
+	public ModelAndView newNeighbourhoodCommAct(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		TNeighbourhoodCommActivities neighbourCommAct = new TNeighbourhoodCommActivities();
+		try {
+			Info view = AccessControll.checkAccess("newNeighbourhoodCommAct", "showNeighbourhoodCommActivities", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				  
+					model = new ModelAndView("master/neighbourhoodCommAct");
+					model.addObject("neighbourCommAct", neighbourCommAct);
+					model.addObject("title", "Add Neighbourhood Community Activity");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In addEContentDev at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertneighbrhdCommActvity", method = RequestMethod.POST)
+	public String insertneighbrhdCommActvity(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+				HttpSession session = request.getSession();
+				
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				
+				TNeighbourhoodCommActivities neighbourCommAct = new TNeighbourhoodCommActivities();
+				
+				neighbourCommAct.setInstNeighbourhoodCommActId(Integer.parseInt(request.getParameter("neghbh_comm_act_id")));
+				neighbourCommAct.setInstId(instituteId);
+				neighbourCommAct.setActivityName(request.getParameter("activity_name"));
+				neighbourCommAct.setNoOfStud(Integer.parseInt(request.getParameter("no_student")));
+				neighbourCommAct.setTotalStudent(Integer.parseInt(request.getParameter("ttl_student")));
+				neighbourCommAct.setNoOfFaculty(Integer.parseInt(request.getParameter("no_faculty")));
+				neighbourCommAct.setTotalFaculty(Integer.parseInt(request.getParameter("ttl_faculty")));
+				neighbourCommAct.setAssociationWith(request.getParameter("association"));
+				neighbourCommAct.setAcYearId(acadYear);
+				neighbourCommAct.setDelStatus(1);
+				neighbourCommAct.setIsActive(1);
+				neighbourCommAct.setMakerUserId(userId);
+				neighbourCommAct.setMakerDatetime(curDateTime);
+				neighbourCommAct.setExInt1(Integer.parseInt(request.getParameter("isActivity")));
+				neighbourCommAct.setExInt2(0);
+				neighbourCommAct.setExVar1("NA");
+				neighbourCommAct.setExVar2("NA");
+				
+				System.out.println(neighbourCommAct.toString());
+				
+				TNeighbourhoodCommActivities commAct = rest.postForObject(Constants.url+"/saveNeighbourhoodCommAct", 
+				neighbourCommAct, TNeighbourhoodCommActivities.class);
+				
+				
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/showNeighbourhoodCommActivities";
+	
+	}
+	
+	
+	@RequestMapping(value = "/editNeighbCommActivity/{neighbCommActId}", method = RequestMethod.GET)
+	public ModelAndView editNeighbCommActivity(@PathVariable("neighbCommActId") int neighbCommActId, HttpServletRequest request) {
+
+		// System.out.println("Id:" + iqacId);
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			Info view = AccessControll.checkAccess("editNeighbCommActivity/{neighbCommActId}", "showNeighbourhoodCommActivities", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				map.add("neighbCommActId", neighbCommActId);
+				model = new ModelAndView("master/neighbourhoodCommAct");
+				model.addObject("title", "Edit Neighbourhood Community Activity");
+				TNeighbourhoodCommActivities  neighbourCommAct = rest.postForObject(Constants.url+"/getneighbCommActivityById", map, TNeighbourhoodCommActivities.class);
+				model.addObject("neighbourCommAct", neighbourCommAct);
+			}
+		}catch(Exception e) {
+			
+		}
+		return model;
+	}
+	
+	@RequestMapping(value = "/deleteNeighbCommActivity/{neighbCommActId}", method = RequestMethod.GET)
+	public String  deleteNeighbCommActivity(@PathVariable("neighbCommActId") int neighbCommActId, HttpServletRequest request) {
+		
+		String a = null;
+		try {
+			
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			Info view = AccessControll.checkAccess("deleteNeighbCommActivity/{neighbCommActId}", "showNeighbourhoodCommActivities", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("neighbCommActId", neighbCommActId);
+
+				TNeighbourhoodCommActivities delNeighbourCommAct = rest.postForObject(Constants.url + "/deleteneghCommActivityId", map, TNeighbourhoodCommActivities.class);
+				a="redirect:/showNeighbourhoodCommActivities";
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return a;
+		
+	}
+	
+	@RequestMapping(value = "/deleteSelNeghbCommActivities/{actId}", method = RequestMethod.GET)
+	public String deleteSelNeghbCommActivities(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int actId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteSelNeghbCommActivities/{actId}", "showNeighbourhoodCommActivities", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (actId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] actIds = request.getParameterValues("actId");
+					System.out.println("id are" + actIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < actIds.length; i++) {
+						sb = sb.append(actIds[i] + ",");
+
+					}
+					String actIdList = sb.toString();
+					actIdList = actIdList.substring(0, actIdList.length() - 1);
+
+					map.add("actIdList", actIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("actIdList", actId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelAcitivities", map, Info.class);
+
+				a = "redirect:/showNeighbourhoodCommActivities";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+	
+	
+	/**********************************Neighbourhood ********************************************/
+	
+	
 	
 	
 }
