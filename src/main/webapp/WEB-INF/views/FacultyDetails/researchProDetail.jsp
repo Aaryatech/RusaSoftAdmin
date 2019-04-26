@@ -590,7 +590,7 @@ function submit_f(view){
             				
             				//error_spoAuth
             				
-            				if(!$("#totalAmt").val() || !numbersOnlyNotZero($("#totalAmt").val())){
+            				if(!$("#totalAmt").val() || !($("#totalAmt").val()>0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter Total Amount</li>';
@@ -603,7 +603,7 @@ function submit_f(view){
             				}
             				
             				
-            				if(!$("#amtRec").val() || !numbersOnlyNotZero($("#amtRec").val())){
+            				if(!$("#amtRec").val() || !($("#amtRec").val()>0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter Amount Received.</li>';

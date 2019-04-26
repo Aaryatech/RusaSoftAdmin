@@ -657,7 +657,7 @@
             					$("#error_subName").hide()
             				}
             				
-            				if(!$("#noStudApp").val() || !numbersOnlyNotZero($("#noStudApp").val())){
+            				if(!$("#noStudApp").val() || !($("#noStudApp").val()>0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter No. of Students Passed.</li>';
@@ -670,7 +670,7 @@
             				}
             				
             				
-            				if(!$("#pass").val() || !numbersOnlyNotZero($("#pass").val())){
+            				if(!$("#pass").val() || !($("#pass").val()>=0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter No. of Students Passed.</li>';

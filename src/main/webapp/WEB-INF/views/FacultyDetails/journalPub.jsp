@@ -461,8 +461,8 @@ function submit_f(view){
             				} else {
             					$("#error_issue").hide()
             				}
-            				
-            				if(!$("#volume").val() || !numbersOnlyNotZero($("#volume").val())){
+            					
+            				if(!$("#volume").val() || !($("#volume").val()>0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter Volume.</li>';
@@ -504,7 +504,7 @@ function submit_f(view){
             				//alert("fr" +fr + "to " +to);
             				
             				if(parseInt(fr)> parseInt(to) || !$("#journalPgTo").val() || !($("#journalPgTo").val()>0) || !$("#journalPgFrom").val() || !($("#journalPgFrom").val()>0) ){
-            					//alert(">")
+            					isError=true;
             					$("#journalPgFrom").addClass("has-error")
                 				$("#error_journalPgFrom").show();
                 					$("#journalPgTo").addClass("has-error")
