@@ -291,6 +291,9 @@ public class YesNoController {
 
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
 
+int transId=Integer.parseInt(request.getParameter("transId"));
+			
+			if(transId==0) {
 			InstituteYesNo instituteYesNo = new InstituteYesNo();
 			instituteYesNo.setDelStatus(1);
 			instituteYesNo.setIsActive(1);
@@ -306,6 +309,17 @@ public class YesNoController {
 			System.out.println(instituteYesNo);
 			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 					InstituteYesNo.class);
+			}
+			else {
+				System.err.println("In else Its Edit Call "+transperentspeficytext);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("id", transId);
+				map.add("yesNoResponse", transperentspeficytext);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -327,6 +341,30 @@ public class YesNoController {
 
 		return instituteYesNoTab1List;
 
+	}
+	
+	//editTranspernt Ajax sachin for edit data show
+	@RequestMapping(value = "/editTranspernt", method = RequestMethod.GET)
+	public @ResponseBody InstituteYesNo editTransperntAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView model = new ModelAndView("yesno/fixedYesNoSecond");
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		int acYearId = (Integer) session.getAttribute("acYearId");
+		//int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("id", Integer.parseInt(request.getParameter("instYesnoId")));	
+		
+		map.add("instituteId", userObj.getGetData().getUserInstituteId());
+		map.add("yearId", acYearId);
+		//map.add("secCode", "tab1");
+		InstituteYesNo editInstyn = restTemplate.postForObject(
+				Constants.url + "/getInstituteYesNoById", map, InstituteYesNo.class);
+		System.out.println("res="+editInstyn.toString());
+		
+		model.addObject("editYN", editInstyn);
+		return editInstyn;
+		
 	}
 	
 	@RequestMapping(value = "/editTranspernt/{instYesnoId}", method = RequestMethod.GET)
@@ -407,6 +445,9 @@ public class YesNoController {
 
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
 
+int timeBoundId=Integer.parseInt(request.getParameter("timeBoundId"));
+			
+			if(timeBoundId==0) {
 			InstituteYesNo instituteYesNo = new InstituteYesNo();
 			instituteYesNo.setDelStatus(1);
 			instituteYesNo.setIsActive(1);
@@ -422,6 +463,17 @@ public class YesNoController {
 			System.out.println(instituteYesNo);
 			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 					InstituteYesNo.class);
+			}
+			else {
+				System.err.println("In else Its Edit Call "+transperentspeficytext);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("id", timeBoundId);
+				map.add("yesNoResponse", transperentspeficytext);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -497,6 +549,10 @@ public class YesNoController {
 
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
 
+
+int efficientId=Integer.parseInt(request.getParameter("efficientId"));
+			
+			if(efficientId==0) {
 			InstituteYesNo instituteYesNo = new InstituteYesNo();
 			instituteYesNo.setDelStatus(1);
 			instituteYesNo.setIsActive(1);
@@ -512,7 +568,17 @@ public class YesNoController {
 			System.out.println(instituteYesNo);
 			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 					InstituteYesNo.class);
+			}
+			else {
+				System.err.println("In else Its Edit Call "+transperentspeficytext);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
+				map.add("id", efficientId);
+				map.add("yesNoResponse", transperentspeficytext);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+			}
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 			map = new LinkedMultiValueMap<>();
@@ -1300,6 +1366,10 @@ public class YesNoController {
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
+			
+			int transId=Integer.parseInt(request.getParameter("transId"));
+			
+			if(transId==0) {
 
 			InstituteYesNo instituteYesNo = new InstituteYesNo();
 			instituteYesNo.setDelStatus(1);
@@ -1316,6 +1386,17 @@ public class YesNoController {
 			System.out.println(instituteYesNo);
 			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 					InstituteYesNo.class);
+			}
+			else {
+				System.err.println("In else Its Edit Call "+transperentspeficytext);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("id", transId);
+				map.add("yesNoResponse", transperentspeficytext);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -1389,6 +1470,10 @@ public class YesNoController {
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
+			
+			int timeBoundId=Integer.parseInt(request.getParameter("timeBoundId"));
+			
+			if(timeBoundId==0) {
 
 			InstituteYesNo instituteYesNo = new InstituteYesNo();
 			instituteYesNo.setDelStatus(1);
@@ -1405,6 +1490,18 @@ public class YesNoController {
 			System.out.println(instituteYesNo);
 			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 					InstituteYesNo.class);
+			}else {
+				System.err.println("Edit time bound " +timeBoundId);
+				System.err.println("In else Its Edit Call "+transperentspeficytext);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("id", timeBoundId);
+				map.add("yesNoResponse", transperentspeficytext);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -1479,7 +1576,9 @@ public class YesNoController {
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
-
+			int efficientId=Integer.parseInt(request.getParameter("efficientId"));
+			
+			if(efficientId==0) {
 			InstituteYesNo instituteYesNo = new InstituteYesNo();
 			instituteYesNo.setDelStatus(1);
 			instituteYesNo.setIsActive(1);
@@ -1495,6 +1594,17 @@ public class YesNoController {
 			System.out.println(instituteYesNo);
 			InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 					InstituteYesNo.class);
+			}else {
+				
+				System.err.println("In else Its Edit Call "+transperentspeficytext);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("id", efficientId);
+				map.add("yesNoResponse", transperentspeficytext);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 

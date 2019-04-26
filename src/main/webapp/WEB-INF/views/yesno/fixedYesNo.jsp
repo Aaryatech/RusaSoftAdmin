@@ -10,12 +10,16 @@
 <head>
 <c:url value="/addTransperent" var="addTransperent"></c:url>
 <c:url value="/deleteTranspernt" var="deleteTranspernt"></c:url> 
+<c:url value="/editTranspernt" var="editTranspernt"></c:url>
 
 <c:url value="/addTimeboundAddDive" var="addTimeboundAddDive"></c:url>
 <c:url value="/deleteTimebound" var="deleteTimebound"></c:url> 
+<c:url value="/editTranspernt" var="editTimebound"></c:url>
 
 <c:url value="/addEfficient" var="addEfficient"></c:url>
-<c:url value="/deleteEfficient" var="deleteEfficient"></c:url>  
+<c:url value="/deleteEfficient" var="deleteEfficient"></c:url>
+<c:url value="/editTranspernt" var="editEfficient"></c:url>
+  
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
@@ -179,6 +183,8 @@
 
 																<input type="button" class="btn btn-info"
 																	onclick="addTransperent()" value="Add">
+<input type="hidden" id="transId" name="transId" value="0">
+																	
 															</div>
 														</div>
 													</c:when>
@@ -201,6 +207,8 @@
 
 																<input type="button" class="btn btn-info"
 																	onclick="addTransperent()" value="Add">
+<input type="hidden" id="transId" name="transId" value="0">
+																	
 															</div>
 														</div>
 													</c:otherwise>
@@ -244,7 +252,13 @@
 
 																		<td>${count.index+1}</td>
 																		<td>${list.instYesnoResponse}</td>
-																		<td><a href="#"
+																		<td><a href="#" onclick="editTranspernt(${list.instYesnoId})"
+																			
+																			rel="tooltip" data-color-class="danger"
+																			title="Edit" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Edit  record"><span
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
 																			onclick="deleteTranspernt(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -307,6 +321,8 @@
 
 																<input type="button" class="btn btn-info"
 																	onclick="addTimeboundAddDive()" value="Add">
+														<input type="hidden" id="timeBoundId" name="timeBoundId" value="0">
+																	
 															</div>
 														</div>
 													</c:when>
@@ -328,6 +344,8 @@
 
 																<input type="button" class="btn btn-info"
 																	onclick="addTimeboundAddDive()" value="Add">
+															<input type="hidden" id="timeBoundId" name="timeBoundId" value="0">
+																	
 															</div>
 														</div>
 													</c:otherwise>
@@ -372,6 +390,12 @@
 																		<td align="center">${count.index+1}</td>
 																		<td>${list.instYesnoResponse}</td>
 																		<td align="center"><a href="#"
+																			onclick="editTimebound(${list.instYesnoId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Edit" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Edit  record"><span
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
 																			onclick="deleteTimebound(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -433,6 +457,7 @@
 
 																<input type="button" class="btn btn-info"
 																	onclick="addEfficient()" value="Add">
+																	<input type="hidden" id="efficientId" name="efficientId" value="0">
 															</div>
 														</div>
 													</c:when>
@@ -454,6 +479,7 @@
 
 																<input type="button" class="btn btn-info"
 																	onclick="addEfficient()" value="Add">
+																	<input type="hidden" id="efficientId" name="efficientId" value="0">
 															</div>
 														</div>
 													</c:otherwise>
@@ -498,6 +524,12 @@
 																		<td>${count.index+1}</td>
 																		<td>${list.instYesnoResponse}</td>
 																		<td><a href="#"
+																			onclick="editEfficient(${list.instYesnoId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Edit" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Edit  record"><span
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
 																			onclick="deleteEfficient(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -831,6 +863,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		function addTransperent() {
+			transId=document.getElementById("transId").value
 
 			var transperentspeficytext = document.getElementById("transperentspeficytext").value; 
 			 
@@ -845,6 +878,7 @@
 
 				{
 					transperentspeficytext : transperentspeficytext, 
+					transId : transId,
 					ajax : 'true'
 
 				}, function(data) {
@@ -854,14 +888,16 @@
 					$("#loader1").hide();
 					  
 					//var dataTable = $('#example-1').DataTable();
-					 
+					  document.getElementById("transId").value="0";
 					for(var i=0 ; i<data.length ;i++){
 						
 						 
-						 var acButton = '<a href="#" onclick="deleteTranspernt('+data[i].instYesnoId+')"'+
+						 
+						 var acButton='<a href="#" onclick="editTranspernt('+data[i].instYesnoId+')"'+
+							' rel="tooltip" data-color-class="danger" title="Edit" data-animate=" animated fadeIn " data-toggle="tooltip"'
+							+'data-original-title="Delete  record"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteTranspernt('+data[i].instYesnoId+')"'+
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
-						 
 						/*  dataTable.row.add(
 								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
 								.draw(); */  
@@ -881,6 +917,24 @@
 
 		}
 		
+function editTranspernt(instYesnoId){
+			
+			
+			$.getJSON('${editTranspernt}',
+
+					{
+						instYesnoId : instYesnoId,  
+						ajax : 'true'
+
+					}, function(data) {
+						//alert(JSON.stringify(data));
+						document.getElementById("transperentspeficytext").value=data.instYesnoResponse; 
+						document.getElementById("transId").value=data.instYesnoId; 
+						
+					});
+			
+		}
+		
 		function deleteTranspernt(instYesnoId) {
  
 				//$('#example-1 td').remove();
@@ -898,11 +952,14 @@
 					$('#table1 td').remove();
 					
 					//var dataTable = $('#example-1').DataTable();
-					
+			 document.getElementById("transId").value="0";
+
 					for(var i=0 ; i<data.length ;i++){
-						
 						 
-						 var acButton = '<a href="#" onclick="deleteTranspernt('+data[i].instYesnoId+')"'+
+						 
+						 var acButton='<a href="#" onclick="editTranspernt('+data[i].instYesnoId+')"'+
+							' rel="tooltip" data-color-class="danger" title="Edit" data-animate=" animated fadeIn " data-toggle="tooltip"'
+							+'data-original-title="Delete  record"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteTranspernt('+data[i].instYesnoId+')"'+
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
@@ -926,7 +983,7 @@
 
 	<script type="text/javascript">
 		function addTimeboundAddDive() {
- 
+			var timeBoundId=document.getElementById("timeBoundId").value;
 
 			var transperentspeficytext = document.getElementById("timeboundspeficytext").value; 
 			 
@@ -941,6 +998,7 @@
 
 				{
 					transperentspeficytext : transperentspeficytext, 
+					timeBoundId : timeBoundId,
 					ajax : 'true'
 
 				}, function(data) {
@@ -951,10 +1009,14 @@
 					$("#loader2").hide();
 					  
 					//var dataTable = $('#example-1').DataTable();
-					 
+					document.getElementById("timeBoundId").value="0";
+
 					for(var i=0 ; i<data.length ;i++){
 						 
-						 var acButton = '<a href="#" onclick="deleteTimebound('+data[i].instYesnoId+')"'+
+						 
+						 var acButton = '<a href="#" onclick="editTimebound('+data[i].instYesnoId+')"'+
+							' rel="tooltip" data-color-class="danger" title="Edit" data-animate=" animated fadeIn " data-toggle="tooltip"'
+							+'data-original-title="Edit  record"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteTimebound('+data[i].instYesnoId+')"'+
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
@@ -978,6 +1040,23 @@
 
 		}
 		
+function editTimebound(instYesnoId){
+			
+			$.getJSON('${editTimebound}',
+
+					{
+						instYesnoId : instYesnoId,  
+						ajax : 'true'
+
+					}, function(data) {
+						//alert(JSON.stringify(data));
+						document.getElementById("timeboundspeficytext").value=data.instYesnoResponse; 
+						document.getElementById("timeBoundId").value=data.instYesnoId; 
+						
+					});
+			
+		}
+		
 		function deleteTimebound(instYesnoId) {
 			 
 			//$('#example-1 td').remove();
@@ -996,12 +1075,17 @@
 				
 				//var dataTable = $('#example-1').DataTable();
 				
-				for(var i=0 ; i<data.length ;i++){
-					
-					 
-					 var acButton = '<a href="#" onclick="deleteTimebound('+data[i].instYesnoId+')"'+
-					' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
-					+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+				document.getElementById("timeBoundId").value="0";
+
+					for(var i=0 ; i<data.length ;i++){
+						 
+						 
+						 var acButton = '<a href="#" onclick="editTimebound('+data[i].instYesnoId+')"'+
+							' rel="tooltip" data-color-class="danger" title="Edit" data-animate=" animated fadeIn " data-toggle="tooltip"'
+							+'data-original-title="Edit  record"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteTimebound('+data[i].instYesnoId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
 					 
 					/*  dataTable.row.add(
 							[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
@@ -1025,7 +1109,7 @@
 	
 	<script type="text/javascript">
 		function addEfficient() {
- 
+			var efficientId=document.getElementById("efficientId").value;
 
 			var transperentspeficytext = document.getElementById("efficientspeficytext").value; 
 			 
@@ -1040,6 +1124,8 @@
 
 				{
 					transperentspeficytext : transperentspeficytext, 
+					efficientId : efficientId,
+
 					ajax : 'true'
 
 				}, function(data) {
@@ -1050,10 +1136,13 @@
 					$("#loader3").hide();
 					  
 					//var dataTable = $('#example-1').DataTable();
-					 
+					 document.getElementById("efficientId").value="0";
+
 					for(var i=0 ; i<data.length ;i++){
-						 
-						 var acButton = '<a href="#" onclick="deleteEfficient('+data[i].instYesnoId+')"'+
+						
+						 var acButton = '<a href="#" onclick="editEfficient('+data[i].instYesnoId+')"'+
+							' rel="tooltip" data-color-class="danger" title="Edit" data-animate=" animated fadeIn " data-toggle="tooltip"'
+							+'data-original-title="Delete  record"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteEfficient('+data[i].instYesnoId+')"'+
 						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
 						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
 						 
@@ -1077,6 +1166,23 @@
 
 		}
 		
+function editEfficient(instYesnoId){
+			
+			$.getJSON('${editEfficient}',
+
+					{
+						instYesnoId : instYesnoId,  
+						ajax : 'true'
+
+					}, function(data) {
+						//alert(JSON.stringify(data));
+						document.getElementById("efficientspeficytext").value=data.instYesnoResponse; 
+						document.getElementById("efficientId").value=data.instYesnoId; 
+						
+					});
+			
+		}
+		
 		function deleteEfficient(instYesnoId) {
 			 
 			//$('#example-1 td').remove();
@@ -1093,15 +1199,16 @@
 				$("#loader3").hide();
 				$('#table3 td').remove();
 				
-				//var dataTable = $('#example-1').DataTable();
-				
-				for(var i=0 ; i<data.length ;i++){
-					
-					 
-					 var acButton = '<a href="#" onclick="deleteEfficient('+data[i].instYesnoId+')"'+
-					' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
-					+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
-					 
+				 document.getElementById("efficientId").value="0";
+
+					for(var i=0 ; i<data.length ;i++){
+						
+						 var acButton = '<a href="#" onclick="editEfficient('+data[i].instYesnoId+')"'+
+							' rel="tooltip" data-color-class="danger" title="Edit" data-animate=" animated fadeIn " data-toggle="tooltip"'
+							+'data-original-title="Delete  record"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteEfficient('+data[i].instYesnoId+')"'+
+						' rel="tooltip" data-color-class="danger" title="Delete" data-animate=" animated fadeIn " data-toggle="tooltip"'
+						+'data-original-title="Delete  record"><span class="glyphicon glyphicon-remove"></span></a>'
+						 
 					/*  dataTable.row.add(
 							[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
 							.draw(); */  
