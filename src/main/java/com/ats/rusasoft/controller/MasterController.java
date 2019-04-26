@@ -270,27 +270,31 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/showInfrastructureForm", method = RequestMethod.GET)
-	public ModelAndView showInfrastructureForm(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = null;
-		try {
-
-			model = new ModelAndView("master/infrastructure");
-
-			model.addObject("title", "Infrastructure Form");
-
-		} catch (Exception e) {
-
-			System.err.println("exception In showInfrastructureForm at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
-		}
-
-		return model;
-
-	}
+	/*
+	 * @RequestMapping(value = "/showInfrastructureForm", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * showInfrastructureForm(HttpServletRequest request, HttpServletResponse
+	 * response) {
+	 * 
+	 * ModelAndView model = null; try {
+	 * 
+	 * model = new ModelAndView("master/infrastructure");
+	 * 
+	 * model.addObject("title", "Infrastructure Form");
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.err.println("exception In showInfrastructureForm at Master Contr" +
+	 * e.getMessage());
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * return model;
+	 * 
+	 * }
+	 */
 
 	/////////////////////////// ****faculty
 	/////////////////////////// details****//////////////////////////////////

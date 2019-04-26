@@ -103,31 +103,28 @@
 
 											</h5>
 											<div class="col-xs-12"></div>
-											<div id="example-4_wrapper"
+											<div id="22"
 												class="dataTables_wrapper form-inline">
 
-												<table id="example-4" class="display dataTable" role="grid"
-													aria-describedby="example-4_info" style="width: 100%;">
+												<table id="example-1" class="table table-striped dt-responsive display">
+
 													<thead>
 														<tr>
 															<th class="check" style="text-align: center; width: 5%;"><input
 																type="checkbox" name="selAll" id="selAll"
 																onClick="selectedInst(this)" /> Select All</th>
-															<th rowspan="2">Sr No</th>
-															<th rowspan="2">Type of Activity</th>
-															<th rowspan="2">Level of Activity</th>
-															<th rowspan="2">Name of Activity</th>
+															<th>Sr No</th>
+															<th>Type of Activity</th>
+															<th>Level of Activity</th>
+															<th >Name of Activity</th>
 															<th>From Date</th>
 															<th>To Date</th>
-															<!-- <th style="text-align: center;" colspan="2">Duration</th> -->
-															<th rowspan="2">Total Participants</th>
-															<th rowspan="2">Action</th>
+															 
+															<th>Total Participants</th>
+															<th>Action</th>
 
 														</tr>
-														<!-- <tr>
-															<th>From Date</th>
-															<th>To Date</th>
-														</tr> -->
+														 
 													</thead>
 													<tbody>
 														<c:forEach items="${instActList}" var="activList"
@@ -166,7 +163,7 @@
 
 													</tbody>
 												</table>
-												<div class="form-group"></div>
+												 
 												<c:if test="${deleteAccess==0}">
 													<button class="btn btn-primary" id="deleteId"
 														onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
@@ -214,7 +211,7 @@
 
 		}
 
-		function getData() {
+		function getData111() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);
 			var activityName = document.getElementById("activityName").value;

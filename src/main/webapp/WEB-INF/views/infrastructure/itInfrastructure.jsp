@@ -91,7 +91,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/inserteContentFacilities"
+										action="${pageContext.request.contextPath}/inserteItInfrastructure"
 										method="post" name="form_sample_2" id="form_sample_2">
 
 										<%-- <ul class="nav nav-tabs">
@@ -103,64 +103,71 @@
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> --%>
-
+										<input type="hidden" id="infraId" name="infraId"
+												value="${itInfra.instItInfraInfoId}">
+	
 										<div class="form-group">
-											<input type="hidden" id="econtentId" name="econtentId"
-												value="${content.instEContentDevFacilityId}">
-												
-										 <label
-												class="control-label col-sm-2" for="activityType">E-Content
-												Development Facility <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="activityName">No. of 
+												 Computers<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-
-												<select id="e_contentType" name="e_contentType"
-													class="form-control">
-													
-															<option ${content.eContentDevFacility eq 'Media Center' ? 'selected' : ''} value="Media Center" >Media Center</option>
-															<option ${content.eContentDevFacility eq 'Recording Facility' ? 'selected' : ''} value="Recording Facility" >Recording Facility</option>
-										 					<option ${content.eContentDevFacility eq 'Lecture Capturing' ? 'selected' : ''} value="Lecture Capturing" >Lecture Capturing</option>
-
-												</select>
+												<input type="text" class="form-control" id="no_comp"
+													name="no_comp" placeholder="No. of Computers"
+													onchange="trim(this)" autocomplete="off"
+													value="${itInfra.noOfComputers}"> <span
+													class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter No. of computers.</span>
 											</div>
 										</div>
 										
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="activityName">Name of The E-Content
-												 <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="activityName">Date
+												 of Purchase<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="e_contentName"
-													name="e_contentName" placeholder="Name of E-Content Development Facilities"
+												<input type="text" class="form-control datepicker" id="purchase_date"
+													name="purchase_date" placeholder="dd/mm/yyyy"
 													onchange="trim(this)" autocomplete="off"
-													value="${content.nameEcontentDevFacility}"> <span
+													value="${itInfra.purchaseDate}"> <span
 													class="error_form text-danger" id="error_formfield1"
-													style="display: none;">Please enter name of e-content development facilities.</span>
+													style="display: none;">Please enter date of purchase.</span>
 											</div>
 										</div>
 										
 										<div class="form-group">
 											<label class="control-label col-sm-2"
-												for="inst_activity_participation">Video Link <span class="text-danger">*</span>
+												for="inst_activity_participation">Purchase 
+											Amount<span class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control"  id="video_link"
-													 autocomplete="off"
-													onchange="trim(this)" name="video_link"
-													placeholder="Link To Videos Of The Media Center And
-												Recording Facility"
-													value="${content.videoLink}"> <span
+												<input type="text" class="form-control"  id="purchase_amt"
+													 autocomplete="off"	onchange="trim(this)" name="purchase_amt"
+													placeholder="Amount of Purchase (in Rupees)"
+													value="${itInfra.purchaseAmt}"> <span
 													class="error_form text-danger" id="error_formfield2"
-													style="display: none;">Please enter link of video of the media center and recording facility.</span>
+													style="display: none;">Please enter amount of purchase.</span>
 											</div>
 										</div>
+										
+									<div class="form-group">
+											<label class="control-label col-sm-2" for="inst_activity_participation">No. of Student 
+											Utilizing<span class="text-danger">*</span>
+											</label>
 
-
-
-
+											<div class="col-sm-6">
+												<input type="text" class="form-control"  id="stud_util"
+													 autocomplete="off"	onchange="trim(this)" name="stud_util"
+													placeholder="No. of Student Utilizing"
+													value="${itInfra.noOfStudUtilizing}"> <span
+													class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please enter No. of student utilizing.</span>
+											</div>
+										</div>
+										
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<button type="submit" id="sub_button"
@@ -169,7 +176,7 @@
 												</button>
 
 												<a
-													href="${pageContext.request.contextPath}/econtentDevelopment"><button
+													href="${pageContext.request.contextPath}/showItInfrastructure"><button
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
@@ -203,7 +210,7 @@
 
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- <script>
+ <!-- <script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -271,7 +278,7 @@
 												return false;
 											});
 						});
-	</script> 
+	</script>  -->
 
 	<script type="text/javascript">
 		function getData() {
@@ -354,6 +361,17 @@
 			}
 			return false;
 		}
+		
+		$(function () {
+			 
+		    $('.datepicker').datepicker({
+				autoclose: true,
+		        format: "dd-mm-yyyy",
+		        changeYear:true,
+		        changeMonth:true
+
+			});
+		});
 	</script>
 
 

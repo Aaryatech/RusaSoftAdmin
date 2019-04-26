@@ -631,7 +631,7 @@ public class LibraryController {
 				List<LibBookPurchase> libraryBooks = new ArrayList<>(Arrays.asList(libbookarr));
 
 				model.addObject("bookList", libraryBooks);
-				model.addObject("title", "Library Books Purchased List");
+				model.addObject("title", "Library Purchase Information List");
 
 				Info add = AccessControll.checkAccess("showlibBookPurchased", "showlibBookPurchased", "0", "1", "0", "0",
 						newModuleList);
@@ -685,7 +685,7 @@ public class LibraryController {
 			else {
 				LibBookPurchase libBook = new LibBookPurchase();
 
-				model.addObject("title", "Add Library Book Purchase");
+				model.addObject("title", "Add Library Purchase Information");
 				model.addObject("lib", libBook);
 			}
 		} catch (Exception e) {
@@ -764,7 +764,7 @@ public class LibraryController {
 				LibBookPurchase editBookInfo = rest.postForObject(Constants.url + "/getLibBookById", map, LibBookPurchase.class);
 				model.addObject("lib", editBookInfo);
 
-				model.addObject("title", "Edit Library Book Purchase");
+				model.addObject("title", "Edit Library Purchase Information");
 			}
 		} catch (Exception e) {
 
