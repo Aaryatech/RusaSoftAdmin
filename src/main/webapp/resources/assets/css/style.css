@@ -98,7 +98,7 @@ Mobile Menu Settings - Since 3.1
 html {
     font-size: 100%;
     height: 100%;
-    background-color: #eeeeee;
+    background-color:#FFF  /*#eeeeee*/;
 }
 
 html.boxed{
@@ -474,6 +474,8 @@ a:hover, a:focus {
 }
 
 
+
+
 /*------- Drop Down ----------*/
 
 .page-topbar .quick-area .info-menu li .dropdown-menu {
@@ -778,7 +780,7 @@ a:hover, a:focus {
 
 .page-sidebar {
     height: auto;
-    width: 260px;
+    width:320px /*260px*/;
     position: fixed;
     padding: 0px;
     background-color: #ffffff;
@@ -891,12 +893,15 @@ a:hover, a:focus {
 #main-menu-wrapper li a i {
     display: inline-block;
     width: 45px;
-    height: 34px;
-    line-height: 34px;
+    height: 40px;
+    line-height: 40px; padding:5px 0;
     text-align: center;
     top: 0px;
-    position: relative;
+    position: relative; float: left;
 }
+
+#main-menu-wrapper li a span.title{float: left; width: 80%; /*line-height: 22px;*/}
+
 #main-menu-wrapper li a .arrow:before {
     float: right;
     margin-top: 1px;
@@ -5030,7 +5035,7 @@ code {
     z-index: 99;
 }
 #main-content {
-    margin-left: 260px;
+    margin-left: 320px /*260px*/;
     display: block;
 }
 #main-content.hor_menu {
@@ -8244,7 +8249,7 @@ table.dataTable.display tbody tr:first-child td {
 
 /*DESIGNER NEW CSS START HERE*/
 .pull-left{position:relative;}
-#login{background: #FFF; padding: 20px; border-radius: 5px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+#login{position:absolute; top:100px; background: #FFF; padding: 20px; border-radius: 5px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);}
 #ac_year_login.form-control{background:#FFF; height: 51px; border-radius: 3px; font-size: 16px; border-bottom: 1px solid #e1e1e1; padding: 10px 0; text-indent: 10px;}
