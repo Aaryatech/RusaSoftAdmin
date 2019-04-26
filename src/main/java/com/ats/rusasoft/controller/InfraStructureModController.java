@@ -36,6 +36,7 @@ import com.ats.rusasoft.model.infra.InfraAreaName;
 import com.ats.rusasoft.model.infra.InfraAreaType;
 import com.ats.rusasoft.model.infra.InstInfraAreaInfo;
 import com.ats.rusasoft.model.infra.ItInfrastructure;
+import com.ats.rusasoft.model.infra.TInstInternetInfo;
 
 @Controller
 @Scope("session")
@@ -766,7 +767,7 @@ public class InfraStructureModController {
 	}
 	
 	@RequestMapping(value = "/delSlectedItInfrastructureInfo/{infraId}", method = RequestMethod.GET)
-	public String infraId(HttpServletRequest request, HttpServletResponse response,
+	public String delSlectedItInfrastructureInfo(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int infraId) {
 		HttpSession session = request.getSession();
 		String a = null;
@@ -824,6 +825,265 @@ public class InfraStructureModController {
 		return a;
 	}
 
+/**************************************Internet Connection**********************************/
+	@RequestMapping(value = "/showAllInternetConnectionInfo", method = RequestMethod.GET)
+	public ModelAndView showAllInternetConnectionInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			model = new ModelAndView("infrastructure/intrernetConnectnList");
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "1", "0", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+				map.add("instituteId", instituteId);
+				//map.add("acadYear", acadYear);
+
+				
+				TInstInternetInfo[] interConnectnarr = rest.postForObject(Constants.url +"/showAllInternetConnection", map, TInstInternetInfo[].class);
+				  List<TInstInternetInfo> connList = new ArrayList<>(Arrays.asList(interConnectnarr));
+				  System.err.println("It="+connList);
+				  model.addObject("connList", connList);
+				 
+				model.addObject("title", "Internet Connection List");
+
+				Info add = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "0", "0",
+						"1", newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addInternetConnectnInfo", method = RequestMethod.GET)
+	public ModelAndView addInternetConnectnInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		TInstInternetInfo interConnec = new TInstInternetInfo();
+		try {
+			Info view = AccessControll.checkAccess("addInternetConnectnInfo", "showAllInternetConnectionInfo", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				  
+					model = new ModelAndView("infrastructure/internetConnectn");
+					model.addObject("interConnec", interConnec);
+					model.addObject("title", "Add Internet Connection");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showItInfrastructure" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/inserteInternetConnecInfo", method = RequestMethod.POST)
+	public String inserteInternetConnecInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			
+			TInstInternetInfo internet = new TInstInternetInfo();
+			
+			internet.setInstInternetInfoId(Integer.parseInt(request.getParameter("internetId")));
+			internet.setInstId(instituteId);
+			internet.setNoOfCompWithInternetAccess(Integer.parseInt(request.getParameter("internet_access")));
+			internet.setLeasedLineBandwidth(request.getParameter("bandwidth"));
+			internet.setLanConfSpeed(request.getParameter("lan_conf"));
+			internet.setIspName(request.getParameter("isp_name"));
+			internet.setPurchaseDate(request.getParameter("purchase_date"));
+			internet.setDelStatus(1);
+			internet.setIsActive(1);
+			internet.setMakerUserId(userId);
+			internet.setMakerDatetime(curDateTime);
+			internet.setExInt1(0);
+			internet.setExInt2(0);
+			internet.setExVar1("NA");
+			internet.setExVar2("NA");
+			
+			TInstInternetInfo interCon = rest.postForObject(Constants.url+"/saveNewInternetConnectionInfo", internet, TInstInternetInfo.class);
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/showAllInternetConnectionInfo";
+	}	
+	
+	@RequestMapping(value = "/editLanConnectionDetails/{connectionId}", method = RequestMethod.GET)
+	public ModelAndView editLanConnectionDetails(HttpServletRequest request, HttpServletResponse response, @PathVariable int connectionId) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		
+		try {
+			Info view = AccessControll.checkAccess("editLanConnectionDetails/{connectionId}", "showAllInternetConnectionInfo", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				
+				map.add("connectionId", connectionId);
+				TInstInternetInfo interConnec = rest.postForObject(Constants.url+"/getConnectionInfoById", map, TInstInternetInfo.class);  
+				  
+					model = new ModelAndView("infrastructure/internetConnectn");
+					model.addObject("interConnec", interConnec);
+					model.addObject("title", "Edit Internet Connection");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editLanConnectionDetails" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteLanConnectionDetails/{connectionId}", method = RequestMethod.GET)
+	public String deleteLanConnectionDetails(@PathVariable("connectionId") int connectionId, HttpServletRequest request) {
+		String value = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("deleteLanConnectionDetails/{connectionId}", "showAllInternetConnectionInfo", "0", "0", "0", "1",
+				newModuleList);
+		if (view.isError() == true) {
+
+			value = "redirect:/accessDenied";
+
+		} else {
+			
+			System.out.println("Id:" + connectionId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("connectionId", connectionId);
+			Info itInfra = rest.postForObject(Constants.url + "/deletetLanConectionById", map, Info.class);
+			
+			value = "redirect:/showAllInternetConnectionInfo";
+			
+		}
+		return value;
+
+	}
+	
+	@RequestMapping(value = "/delSlectedLanCompInfo/{lanInfoId}", method = RequestMethod.GET)
+	public String delSlectedLanCompInfo(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int lanInfoId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedItInfrastructureInfo/{infraId}", "showAllInternetConnectionInfo",
+				"0", "0", "0", "1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (lanInfoId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] lanInfoIds = request.getParameterValues("lanInfoId");
+					System.out.println("id are" + lanInfoIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < lanInfoIds.length; i++) {
+						sb = sb.append(lanInfoIds[i] + ",");
+
+					}
+					String lanInfoIdslList = sb.toString();
+					lanInfoIdslList = lanInfoIdslList.substring(0, lanInfoIdslList.length() - 1);
+
+					map.add("lanInfoIdslList", lanInfoIdslList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("lanInfoIdslList", lanInfoId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "delSelLanConnection", map, Info.class);
+
+				a = "redirect:/showAllInternetConnectionInfo";
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In delSlectedLanCompInfo" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
 
 
 }

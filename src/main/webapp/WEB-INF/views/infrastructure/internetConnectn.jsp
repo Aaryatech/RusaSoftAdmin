@@ -91,7 +91,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/inserteItInfrastructure"
+										action="${pageContext.request.contextPath}/inserteInternetConnecInfo"
 										method="post" name="form_sample_2" id="form_sample_2">
 
 										<%-- <ul class="nav nav-tabs">
@@ -103,25 +103,73 @@
 
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> --%>
-										<input type="hidden" id="infraId" name="infraId"
-												value="${itInfra.instItInfraInfoId}">
+										<input type="hidden" id="internetId" name="internetId"
+												value="${interConnec.instInternetInfoId}">
 	
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="activityName">No. of 
-												 Computers<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="activityName">Computers with
+												  Internet Access<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="no_comp"
-													name="no_comp" placeholder="No. of Computers" onkeypress='return restrictAlphabets(event)'
+												<input type="text" class="form-control" id="internet_access"
+													name="internet_access" placeholder="No. of Computers with Internet Access" onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" autocomplete="off"
-													value="${itInfra.noOfComputers}"> <span
+													value="${interConnec.noOfCompWithInternetAccess}"> <span
 													class="error_form text-danger" id="error_formfield1"
-													style="display: none;">Please enter No. of computers.</span>
+													style="display: none;">Please enter No. of computers with internet access and 
+													value must be greater than 0.</span>
 											</div>
 										</div>
 										
 
+										
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2"
+												for="inst_activity_participation">Leased Line
+											 Bandwidth <span class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control"  id="bandwidth"
+													 autocomplete="off"	onchange="trim(this)" name="bandwidth"
+													placeholder="Leased Line Bandwidth"
+													value="${interConnec.leasedLineBandwidth}"> <span
+													class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please enter leased line bandwidth.</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="inst_activity_participation">LAN Configuration  
+											Speed<span class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control"  id="lan_conf"
+													 autocomplete="off"	onchange="trim(this)" name="lan_conf"
+													placeholder="LAN Configuration Speed" 
+													value="${interConnec.lanConfSpeed}"> <span
+													class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter lan configuration speed.</span>
+											</div>
+										</div>
+										
+									<div class="form-group">
+											<label class="control-label col-sm-2" for="inst_activity_participation">ISP  
+											Name<span class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control"  id="isp_name"
+													 autocomplete="off"	onchange="trim(this)" name="isp_name"
+													placeholder="ISP (Internet Service Provider) Name" 
+													value="${interConnec.ispName}"> <span
+													class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter ISP name.</span>
+											</div>
+										</div>
+										
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="activityName">Date
@@ -131,46 +179,15 @@
 												<input type="text" class="form-control datepicker" id="purchase_date"
 													name="purchase_date" placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" autocomplete="off"
-													value="${itInfra.purchaseDate}"> <span
-													class="error_form text-danger" id="error_formfield2"
+													value="${interConnec.purchaseDate}"> <span
+													class="error_form text-danger" id="error_formfield5"
 													style="display: none;">Please enter date of purchase.</span>
 											</div>
 										</div>
 										
 										<div class="form-group">
-											<label class="control-label col-sm-2"
-												for="inst_activity_participation">Purchase 
-											Amount<span class="text-danger">*</span>
-											</label>
-
-											<div class="col-sm-6">
-												<input type="text" class="form-control"  id="purchase_amt"
-													 autocomplete="off"	onchange="trim(this)" name="purchase_amt"
-													placeholder="Amount of Purchase (in Rupees)" onkeypress='return restrictAlphabets(event)'
-													value="${itInfra.purchaseAmt}"> <span
-													class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter amount of purchase.</span>
-											</div>
-										</div>
-										
-									<div class="form-group">
-											<label class="control-label col-sm-2" for="inst_activity_participation">No. of Student 
-											Utilizing<span class="text-danger">*</span>
-											</label>
-
-											<div class="col-sm-6">
-												<input type="text" class="form-control"  id="stud_util"
-													 autocomplete="off"	onchange="trim(this)" name="stud_util"
-													placeholder="No. of Student Utilizing" onkeypress='return restrictAlphabets(event)'
-													value="${itInfra.noOfStudUtilizing}"> <span
-													class="error_form text-danger" id="error_formfield4"
-													style="display: none;">Please enter No. of student utilizing.</span>
-											</div>
-										</div>
-										
-										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button"
+												<button type="submit" id="sub1"
 													class="btn btn-primary" onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
@@ -217,6 +234,16 @@
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
 		}
+		
+		$(document).ready(function(){
+			
+			  $('#internet_access').bind("cut copy paste",function(e) {
+			
+			      e.preventDefault();
+			
+			  });
+			
+			});
 
 		$(document)
 				.ready(
@@ -228,12 +255,12 @@
 												//	alert("hi");
 												var isError = false;
 												var errMsg = "";   				
-												   
-												if (!$("#no_comp").val()) {
+														 				  
+												if ($("#internet_access").val() == 0 || !$("#internet_access").val()) {
 
 													isError = true;
 													
-													$("#no_comp")
+													$("#internet_access")
 															.addClass(
 																	"has-error")
 													$("#error_formfield1")
@@ -244,46 +271,61 @@
 															.hide()
 												}
 
+												if (!$("#bandwidth").val()) {
+
+													isError = true;
+													
+													$("#bandwidth").addClass(
+															"has-error")
+													$("#error_formfield2")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield2")
+															.hide()
+												}
+												
+												if (!$("#lan_conf").val()) {
+
+													isError = true;
+													
+													$("#lan_conf").addClass(
+															"has-error")
+													$("#error_formfield3")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield3")
+															.hide()
+												}
+												
+												if (!$("#isp_name").val()) {
+
+													isError = true;
+													
+
+													$("#isp_name").addClass(
+															"has-error")
+													$("#error_formfield4")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield4")
+															.hide()
+												}
+												
 												if (!$("#purchase_date").val()) {
 
 													isError = true;
 													
+
 													$("#purchase_date").addClass(
 															"has-error")
-													$("#error_formfield2")
+													$("#error_formfield5")
 															.show()
 													//return false;
 												} else {
-													$("#error_formfield2")
-															.hide()
-												}
-												
-												if (!$("#purchase_amt").val()) {
-
-													isError = true;
-													
-													$("#purchase_amt").addClass(
-															"has-error")
-													$("#error_formfield3")
-															.show()
-													//return false;
-												} else {
-													$("#error_formfield3")
-															.hide()
-												}
-												
-												if (!$("#stud_util").val()) {
-
-													isError = true;
-													
-
-													$("#stud_util").addClass(
-															"has-error")
-													$("#error_formfield4")
-															.show()
-													//return false;
-												} else {
-													$("#error_formfield4")
+													$("#error_formfield5")
 															.hide()
 												}
 												
@@ -304,7 +346,7 @@
 												return false;
 											});
 						});
-	</script> 
+	</script>  -->
 
 	<script type="text/javascript">
 		function getData() {
