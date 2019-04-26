@@ -19,7 +19,6 @@ public class GetStudentDetail {
 	
 	private String email;
 	
-	private String instituteName;
 	
 	private String deptName;
 	
@@ -81,13 +80,6 @@ public class GetStudentDetail {
 		this.email = email;
 	}
 
-	public String getInstituteName() {
-		return instituteName;
-	}
-
-	public void setInstituteName(String instituteName) {
-		this.instituteName = instituteName;
-	}
 
 	public String getDeptName() {
 		return deptName;
@@ -107,15 +99,9 @@ public class GetStudentDetail {
 
 	@Override
 	public String toString() {
-		return "getStudentDetail [studentId=" + studentId + ", instituteId=" + instituteId + ", deptId=" + deptId
+		return "GetStudentDetail [studentId=" + studentId + ", instituteId=" + instituteId + ", deptId=" + deptId
 				+ ", studentName=" + studentName + ", idNo=" + idNo + ", contactNo=" + contactNo + ", email=" + email
-				+ ", instituteName=" + instituteName + ", deptName=" + deptName + ", academicYear=" + academicYear
-				+ ", getStudentId()=" + getStudentId() + ", getInstituteId()=" + getInstituteId() + ", getDeptId()="
-				+ getDeptId() + ", getStudentName()=" + getStudentName() + ", getIdNo()=" + getIdNo()
-				+ ", getContactNo()=" + getContactNo() + ", getEmail()=" + getEmail() + ", getInstituteName()="
-				+ getInstituteName() + ", getDeptName()=" + getDeptName() + ", getAcademicYear()=" + getAcademicYear()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ ", deptName=" + deptName + ", academicYear=" + academicYear + "]";
 	}
 
 	

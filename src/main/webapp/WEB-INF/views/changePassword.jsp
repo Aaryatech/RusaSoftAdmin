@@ -82,7 +82,7 @@
 										action="${pageContext.request.contextPath}/changePassForm"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to Change the Password?');">
-
+<input type="hidden" id="uid" name="uid" value="${userId}">
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Change Password

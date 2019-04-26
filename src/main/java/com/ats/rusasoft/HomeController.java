@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
+import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.UserLogin;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.accessright.SubModuleJson;
@@ -186,8 +188,14 @@ public class HomeController {
 		/*ModelAndView model = null;*/
 		try {
 			HttpSession session = request.getSession();
-			
-			int userId=(int) session.getAttribute("userId");
+			int userId=0;
+			try {
+			userId=(int) session.getAttribute("userId");
+			}catch (Exception e) {
+				userId=Integer.parseInt(request.getParameter("uid"));
+				System.err.println("In Catch " +userId);
+				//e.printStackTrace();
+			}
 			String password=request.getParameter("newPassword");
 			
 			/*String password="harsha";*/
@@ -759,7 +767,7 @@ public class HomeController {
 	@RequestMapping(value = "/OTPVerification", method = RequestMethod.POST)
 	public ModelAndView OTPVerification(HttpServletRequest request, HttpServletResponse response) {
 
-		System.err.println("Hiii  checkValue  " );
+		System.err.println("Hiii  OTPVerification  " );
 		Info info = new Info();
 		ModelAndView model = null;
 
@@ -771,12 +779,13 @@ public class HomeController {
 			
 			map.add("otp", otp);
 		
-			info = rest.postForObject(Constants.url + "VerifyOTP", map, Info.class);
-			System.err.println("Info Response  " + info.toString());
+			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map,Staff.class);
+			/*System.err.println("hashRes Response  " + hashRes.toString());
 			
-			
+			Staff staff=hashRes.get(1);
+			System.err.println("hashRes Response  " + hashRes.get(1));*/
 
-			if(info.isError()==true){
+			if(staff==null){
 				model = new ModelAndView("verifyOTP");
 				 //c="redirect:/showforgotPassForm";
 				model.addObject("msg","Incorrect OTP");
@@ -785,9 +794,11 @@ public class HomeController {
 			else {
 				
 				//Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
-
+System.err.println("Staff" +staff);
 				//model = new ModelAndView("login");
 				model = new ModelAndView("changePassword");
+				model.addObject("userId",staff.getFacultyId());
+				
 				
 				
 				//  c= "redirect:/showVerifyOTP";
