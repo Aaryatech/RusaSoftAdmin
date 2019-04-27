@@ -87,9 +87,9 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<%-- <a
-									href="${pageContext.request.contextPath}/showIntellectualProperty"><button
-										type="button" class="btn btn-info">Back</button></a> --%>
+								<c:if test="${addAccess == 0}"> 
+								<a href="${pageContext.request.contextPath}/showAddInstInfraAreawise"><button
+										type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a></c:if>
 
 							</div>
 
@@ -99,7 +99,7 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<form class="form-horizontal"
+									<%-- <form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstInfraArea"
 										method="post" name="form_sample_2" id="form_sample_2">
 
@@ -115,9 +115,9 @@
 													<c:forEach items="${areaTypeList}" var="areaTypes">
 														<c:choose>
 															<c:when
-																test="${areaTypes.infraAreaTypeId == editArea.infraAreaTypeId}">
-																<option value="${areaTypes.infraAreaTypeId}"
-																	selected="selected">${areaTypes.areaTypeName}</option>
+																test="${areaTypes.designationId == editFaculty.currentDesignationId}">
+																<option value="${makeList.designationId}"
+																	selected="selected">${makeList.designationName}</option>
 															</c:when>
 															<c:otherwise>
 														<option value="${areaTypes.infraAreaTypeId}">${areaTypes.areaTypeName}</option>
@@ -138,7 +138,7 @@
 												<select id="area_name" name="area_name" class="form-control"
 													onchange="showDiv()">
 
-													<%-- <c:forEach items="${areaTypeList}" var="areaTypes">
+													<c:forEach items="${areaTypeList}" var="areaTypes">
 														<c:choose>
 															<c:when
 																test="${areaTypes.designationId == editFaculty.currentDesignationId}">
@@ -149,7 +149,7 @@
 																<option value="${areaTypes.infraAreaTypeId}">${areaTypes.areaTypeName}</option>
 															</c:otherwise>
 														</c:choose>
-													</c:forEach> --%>
+													</c:forEach>
 
 												</select> <span class="error_form text-danger" id="area_name_field"
 													style="display: none;">Please select Area Type</span>
@@ -209,10 +209,6 @@
 													onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
-												<a href="${pageContext.request.contextPath}/showInstInfraAreawise"><button
-														id="sub2" type="button" class="btn btn-primary">
-														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
-													</button></a>
 												<!-- <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
@@ -224,12 +220,13 @@
 											name="instInfraAreaId" value="0"> <input
 											type="hidden" id="is_view" name="is_view" value="0">
 									</form>
+ --%>
 
-
-						<%-- 			<div class="form-group">
+									<div class="form-group">
 										<form
 											action="${pageContext.request.contextPath}/deleteQualiInit/0"
 											method="get" id="insListForm">
+											<input type="hidden" value="0" id="instInfraAreaId" name="instInfraAreaId">
 
 											<table class="table table-striped dt-responsive display"
 												id="example-1">
@@ -299,7 +296,7 @@
 											</c:if>
 											
 										</form>
-									</div> --%>
+									</div>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
 
@@ -320,6 +317,21 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+	
+	function showEdit(instInfraAreaId){
+		
+		document.getElementById("instInfraAreaId").value=instInfraAreaId;//create this 
+		var form=document.getElementById("insListForm");
+	    form.setAttribute("method", "post");
+
+		form.action=("showEditInstInfraArea");
+		form.submit();
+		
+	}
+	
+	</script>
 
 
 	<script>
@@ -460,8 +472,6 @@
 
 		}
 		
-		
-		
 		function resetId(){
 		 document.getElementById("qual_inti_id").value=0;
 		}
@@ -484,6 +494,7 @@
     }    
 </script>
 
+
 	<script type="text/javascript">
         function showAreaName(){
             //alert("Item Id ")
@@ -499,11 +510,6 @@
 
                 function(data) {
                     var html;
-                    var p=-1;
-                    var q="Select Area Name";
-                    html += '<option value="'+p+'">'
-                    +q+'</option>';
-                    html += '</option>';
                     var len = data.length;
                     for (var i = 0; i < len; i++) {
 
@@ -522,17 +528,12 @@
                     $("#area_name").trigger("chosen:updated");
                   
                 });
-              
             }//end of if
-            //$('#area_name').trigger('change');
-           // $("#area_name").change(showDiv) ;
+
         }
         
         function showDiv(){
-        	 
             var areaId = document.getElementById("area_name").value;
-            //alert(areaId);
-            if(areaId>=0){
 			if(areaId==0){
 				$("#area_name_div")
 				.show()
@@ -562,11 +563,7 @@
                 });
 				//
 			}
-            }
         }
-        
-        
-        //$("#area_name").change(showDiv) ;
     </script>
 
 

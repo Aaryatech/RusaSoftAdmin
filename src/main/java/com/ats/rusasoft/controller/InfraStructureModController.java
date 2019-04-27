@@ -48,9 +48,9 @@ public class InfraStructureModController {
 		ModelAndView model = null;
 		try {
 
-			model = new ModelAndView("infra/add_inst_infra_area");
+			model = new ModelAndView("infra/list_inst_infra_area");
 
-			model.addObject("title", "Add Institute Infrastructure Detail Area wise");
+			model.addObject("title", "List Institute Infrastructure Detail Area wise");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -61,7 +61,7 @@ public class InfraStructureModController {
 			Info viewAccess = AccessControll.checkAccess("showInstInfraAreawise", "showInstInfraAreawise", "1", "0",
 					"0", "0", newModuleList);
 
-			if (viewAccess.isError() == true) {
+			if (viewAccess.isError() == false) {
 
 				Info addAccess = AccessControll.checkAccess("showInstInfraAreawise", "showInstInfraAreawise", "0", "1",
 						"0", "0", newModuleList);
@@ -111,6 +111,64 @@ public class InfraStructureModController {
 		} catch (Exception e) {
 
 			System.err.println("exception In showInstInfraAreawise at InfraStructure Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	
+	@RequestMapping(value = "/showAddInstInfraAreawise", method = RequestMethod.GET)
+	public ModelAndView showAddInstInfraAreawise(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("infra/add_inst_infra_area");
+
+			model.addObject("title", "Add Institute Infrastructure Detail Area wise");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info addAccess = AccessControll.checkAccess("showAddInstInfraAreawise", "showInstInfraAreawise", "0", "1",
+					"0", "0", newModuleList);
+
+
+			if (addAccess.isError() == false) {
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				InfraAreaType[] areaTypeArray = restTemplate.getForObject(Constants.url + "getInfraAreaTypeList",
+						InfraAreaType[].class);
+				
+				List<InfraAreaType> areaTypeList = new ArrayList<>(Arrays.asList(areaTypeArray));
+				
+				model.addObject("areaTypeList", areaTypeList);
+
+				/*GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url + "getInstInfraAreaInfoByInstId", map,
+						GetInstInfraAreaInfo[].class);
+				
+				List<GetInstInfraAreaInfo> instInfraAreaList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("instInfraAreaList", instInfraAreaList);
+*/
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showAddInstInfraAreawise at InfraStructure Contr" + e.getMessage());
 
 			e.printStackTrace();
 
@@ -252,10 +310,10 @@ public class InfraStructureModController {
 		InstInfraAreaInfo resArray=new InstInfraAreaInfo();
 		try {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("areaId", request.getParameter("areaId"));
 			map.add("instId", userObj.getGetData().getUserInstituteId());
@@ -271,6 +329,80 @@ public class InfraStructureModController {
 		return resArray;
 
 	}
+	
+	//showEditInstInfraArea
+	@RequestMapping(value = "/showEditInstInfraArea", method = RequestMethod.POST)
+	public ModelAndView showEditInstInfraArea(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("infra/add_inst_infra_area");
+
+			model.addObject("title", "Edit Institute Infrastructure Detail Area wise");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info editAccess = AccessControll.checkAccess("showEditInstInfraArea", "showInstInfraAreawise", "0", "0",
+					"1", "0", newModuleList);
+
+			InstInfraAreaInfo editArea=new InstInfraAreaInfo();
+
+			if (editAccess.isError() == false) {
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				InfraAreaType[] areaTypeArray = restTemplate.getForObject(Constants.url + "getInfraAreaTypeList",
+						InfraAreaType[].class);
+				
+				List<InfraAreaType> areaTypeList = new ArrayList<>(Arrays.asList(areaTypeArray));
+				
+				model.addObject("areaTypeList", areaTypeList);
+				
+				map = new LinkedMultiValueMap<String, Object>();
+				
+				int instInfraAreaId=Integer.parseInt(request.getParameter("instInfraAreaId"));
+				System.err.println("Area Id " +instInfraAreaId);
+				
+				map.add("instInfraAreaId", instInfraAreaId);
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				
+				 editArea = restTemplate
+						.postForObject(Constants.url + "findByDelStatusAndIsActiveAndInstIdAndInstInfraAreaId", map, InstInfraAreaInfo.class);
+				
+				 model.addObject("editArea", editArea);
+				 System.err.println("editArea" +editArea.toString());
+				 
+				/*GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url + "getInstInfraAreaInfoByInstId", map,
+						GetInstInfraAreaInfo[].class);
+				
+				List<GetInstInfraAreaInfo> instInfraAreaList = new ArrayList<>(Arrays.asList(resArray));
+
+				model.addObject("instInfraAreaList", instInfraAreaList);
+*/
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showAddInstInfraAreawise at InfraStructure Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
 	
 
 	/********************************** Infrastructure *******************************************/
