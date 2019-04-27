@@ -1556,10 +1556,10 @@ jQuery(function($) {
             /*--- start ---*/
 
             $("#example-1").dataTable({
-                responsive: true,
+                responsive: false,
                 aLengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
+                    [100, 250, 500, 1000, -1],
+                    [100, 250, 500, 1000, "All"]
                 ]
             });
 
