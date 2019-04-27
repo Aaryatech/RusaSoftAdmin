@@ -44,7 +44,8 @@ public class Staff {
 	private int isDean;
 	private int isLibrarian;
 	private int isStudent;
-	
+	private int isTpo;
+	private int isExtActOff;
 	private int isEnrolled;
 
 	public int getIsEnrolled() {
@@ -342,6 +343,22 @@ public class Staff {
 	public void setExtravarchar1(String extravarchar1) {
 		this.extravarchar1 = extravarchar1;
 	}
+	
+	public int getIsTpo() {
+		return isTpo;
+	}
+
+	public void setIsTpo(int isTpo) {
+		this.isTpo = isTpo;
+	}
+
+	public int getIsExtActOff() {
+		return isExtActOff;
+	}
+
+	public void setIsExtActOff(int isExtActOff) {
+		this.isExtActOff = isExtActOff;
+	}
 
 	@Override
 	public String toString() {
@@ -357,7 +374,11 @@ public class Staff {
 				+ ", extraint1=" + extraint1 + ", extravarchar1=" + extravarchar1 + ", roleIds=" + roleIds
 				+ ", password=" + password + ", type=" + type + ", isPrincipal=" + isPrincipal + ", isIqac=" + isIqac
 				+ ", isHod=" + isHod + ", isFaculty=" + isFaculty + ", isAccOff=" + isAccOff + ", isDean=" + isDean
-				+ ", isLibrarian=" + isLibrarian + ", isStudent=" + isStudent + ", isEnrolled=" + isEnrolled + "]";
+				+ ", isLibrarian=" + isLibrarian + ", isStudent=" + isStudent + ", isTpo=" + isTpo + ", isExtActOff="
+				+ isExtActOff + ", isEnrolled=" + isEnrolled + "]";
 	}
 
+	
+
+	
 }

@@ -3,7 +3,7 @@ package com.ats.rusasoft.commons;
 
 public class Constants {
 	
-	public static final String url="http://localhost:8096/";
+	public static final String url="http://localhost:8095/";
 	//public static final String url="http://ats.aaryatechindia.in:6435/atssoftwebapi/";
 	public static final String SPCAKE_IMAGE_URL = "http://132.148.148.215:8080/uploadspune/MSPCAKE/";
 	public static final String FR_IMAGE_URL = "http://132.148.148.215:8080/uploadspune/FR/";
@@ -70,6 +70,20 @@ public class Constants {
 	public static final String CUST_CHOICE_PHOTO_CAKE_FOLDER = "http://132.148.148.215:8080/uploadspune/CUSTCHOICEPHOTOCAKE/";
 	public static final int LOGIS_BILL_PDF_TYPE = 8;
 	public static final String LOGIS_BILL_URL = "http://132.148.148.215:8080/uploadspune/MSPCAKE/";
+
+	
+	
+	public static String Princ_Role = "Principal";
+    public static String IQAC_Role = "IQAC";
+    public static String HOD_Role = "HOD";
+    public static String Faculty_Role = "Faculty";
+    public static  String Account_Officer_Role="Account Officer";
+    public static String Dean_Role = "Dean";
+    public static String Librarian_Role = "Librarian";
+    public static String Student_Role = "Student";
+    public static String TPO_Role = "TPO";
+    public static String EAO_Role = "Extension Activity Officer";
+    public static String Rusa_Role = "Rusa";
 	
 /*	//public static final String url="http://132.148.143.124:8080/webapi/";
 		public static final String url="http://localhost:8098/";
@@ -132,13 +146,6 @@ public class Constants {
 		public static final int LOGIS_BILL_PDF_TYPE = 8;
 		public static final String LOGIS_BILL_URL = "http://132.148.143.124:8080/uploads/MSPCAKE/";*/
 }
-
-
-
-
-
-
-
 
 
 /*

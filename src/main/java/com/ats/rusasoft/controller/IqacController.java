@@ -1737,5 +1737,817 @@ public class IqacController {
 		return a;
 
 	}
+	
+	/***********************************Training & Placement Officer**************************************/
+	@RequestMapping(value = "/showTrainingAndPlacementOfficer", method = RequestMethod.GET)
+	public ModelAndView showTrainingAndPlacementOfficer(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("showTrainingAndPlacementOfficer", "showTrainingAndPlacementOfficer", "1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("master/traningPlacementOfficerList");
+
+				model.addObject("title", "Traning & Placement Officer List");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				map.add("isDean", userObj.getStaff().getIsDean());
+				map.add("isTpo", userObj.getStaff().getIsTpo());
+
+				NewDeanList[] deans = rest.postForObject(Constants.url + "/getTraningOfficerList",map, NewDeanList[].class);
+				List<NewDeanList> trainOfficrList = new ArrayList<>(Arrays.asList(deans));
+				System.out.println("Training Officer List:" + trainOfficrList);
+
+				model.addObject("trainOfficrList", trainOfficrList);
+				model.addObject("listMapping", "showTrainingAndPlacementOfficer");
+
+				Info add = AccessControll.checkAccess("showTrainingAndPlacementOfficer", "showTrainingAndPlacementOfficer", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showTrainingAndPlacementOfficer", "showTrainingAndPlacementOfficer", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showTrainingAndPlacementOfficer", "showTrainingAndPlacementOfficer", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
+	
+	@RequestMapping(value = "/newTrainingAndPlacementOfficer", method = RequestMethod.GET)
+	public ModelAndView newTrainingAndPlacementOfficer(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		MultiValueMap<String, Object> map = null;
+		try {
+			Info view = AccessControll.checkAccess("newTrainingAndPlacementOfficer", "showTrainingAndPlacementOfficer", "0", "1", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("master/training&placementOfficer");
+
+				map = new LinkedMultiValueMap<String, Object>();
+			
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+				
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
+				map.add("type", 1);
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+				Staff trnPlaceOff = new Staff();
+				model.addObject("trnPlaceOff", trnPlaceOff);
+
+				model.addObject("quolfList", quolfList);
+				model.addObject("addEdit", "0");
+				model.addObject("title", "Add Traning & Placement Officer");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertTrainingandPlacementOff", method = RequestMethod.POST)
+	public String insertTrainingandPlacementOff(HttpServletRequest request, HttpServletResponse response) {
+	
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int instituteId = (int) session.getAttribute("instituteId");
+
+			int userId = (int) session.getAttribute("userId");
+
+			int officerId = Integer.parseInt(request.getParameter("pacementOfficerId"));
+
+			int isAccOff = 0, isHod = 0, isDean = 0, isStaff = 0, isLib = 0;
+			try {
+				isAccOff = Integer.parseInt(request.getParameter("isAccOff"));
+			} catch (Exception e) {
+				isAccOff = 0;
+			}
+			try {
+				isHod = Integer.parseInt(request.getParameter("isHod"));
+			} catch (Exception e) {
+				isHod = 0;
+			}
+			try {
+				isDean = Integer.parseInt(request.getParameter("isDean"));
+			} catch (Exception e) {
+				isDean = 0;
+			}
+			try {
+				isStaff = Integer.parseInt(request.getParameter("isStaff"));
+			} catch (Exception e) {
+				isStaff = 0;
+			}
+			try {
+				isLib = Integer.parseInt(request.getParameter("isLib"));
+			} catch (Exception e) {
+				isLib = 0;
+			}
+			String roleNameList = null;
+
+			roleNameList = Constants.TPO_Role + "," + Constants.Faculty_Role;
+
+			
+			  if (isAccOff == 1) 
+			  	{ 
+				  roleNameList = roleNameList + "," +  Constants.Account_Officer_Role;
+				}
+			 
+			  if (isHod == 1) 
+			  	{ 
+				  roleNameList = roleNameList + "," + Constants.HOD_Role; 
+				} 
+			
+			 if (isDean == 1)
+			  	{
+				  roleNameList = roleNameList + "," + Constants.Dean_Role; } 
+			
+			  if (isLib == 1) 
+			  {
+				  roleNameList = roleNameList + "," + Constants.Librarian_Role;
+			 
+			  }
+			 
+
+			System.err.println("isAccOff" + isAccOff);
+			System.err.println("isHod" + isHod);
+			System.err.println("isDean" + isDean);
+			System.err.println("isLib" + isLib);
+
+			// write web service to get Role Ids..
+			// dvd
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("roleNameList", roleNameList);
+			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+					AssignRoleDetailList[].class);
+			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+			String roleIds = new String();
+			for (int i = 0; i < roleIdsList.size(); i++) {
+				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+			}
+			System.err.println("roleIds " + roleIds);
+
+			int designation = 0;
+
+			System.out.println("Data:" + officerId);  
+			String pacementOfficerName = request.getParameter("pacementOfficerName");
+			System.out.println("Data:" + pacementOfficerName);
+			designation = Integer.parseInt(request.getParameter("designation"));
+			String dateOfJoin = request.getParameter("join_date");
+			String dateOfRel = request.getParameter("acc_off_relDate");
+			String contact = request.getParameter("contact_no");
+			String email = request.getParameter("email");
+
+			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// + contact + " " + email);
+			// MIqac miqac = new MIqac();
+			/*
+			 * if (iqacId == 0) { miqac.setIqacId(0);
+			 * 
+			 * } else { miqac.setIqacId(iqacId); }
+			 */
+
+			String[] deptIds = request.getParameterValues("depart");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < deptIds.length; i++) {
+				sb = sb.append(deptIds[i] + ",");
+
+			}
+			String deptIdList = sb.toString();
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
+			if (addEdit == 0) {
+			Staff staff = new Staff();
+
+			staff.setContactNo(contact);
+			staff.setCurrentDesignationId(designation);
+			staff.setDeptId(deptIdList);
+			staff.setEmail(email);
+			staff.setFacultyFirstName(pacementOfficerName);
+			staff.setFacultyId(officerId);
+			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setHightestQualificationYear(null);
+			staff.setIsAccOff(0);
+			staff.setIsDean(0);
+			staff.setIsFaculty(1);
+			staff.setIsHod(0);
+			staff.setIsIqac(0);
+			staff.setIsLibrarian(0);
+			staff.setIsPrincipal(0);
+			staff.setIsTpo(1);
+			staff.setIsExtActOff(0);
+
+			staff.setIsStudent(0);
+			staff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
+			staff.setLastUpdatedDatetime(curDateTime);
+			staff.setMakerEnterDatetime(curDateTime);
+
+			staff.setPassword("");
+			staff.setJoiningDate(dateOfJoin);
+			staff.setRealivingDate(dateOfRel);
+			staff.setRoleIds(roleIds);
+			staff.setTeachingTo(0);
+			staff.setType(7);
+
+			staff.setInstituteId(instituteId);
+			staff.setContactNo(contact);
+			staff.setEmail(email);
+			staff.setDelStatus(1);
+			staff.setIsActive(1);
+			staff.setMakerUserId(userId);
+			staff.setMakerEnterDatetime(curDateTime);
+			staff.setCheckerUserId(0);
+			staff.setCheckerDatetime(curDateTime);
+			staff.setLastUpdatedDatetime(curDateTime);
+			
+			
+			staff.setExtravarchar1("NA");
+			Staff newDean = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+			}
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("id", officerId);
+
+				Staff editStaff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				
+				editStaff.setFacultyFirstName(pacementOfficerName);
+				editStaff.setDeptId(deptIdList);
+				editStaff.setEmail(email);
+				editStaff.setFacultyId(officerId);
+				editStaff.setContactNo(contact);
+				editStaff.setCurrentDesignationId(designation);
+				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editStaff.setJoiningDate(dateOfJoin);
+				editStaff.setRealivingDate(dateOfRel);
+				editStaff.setRoleIds(roleIds);
+				editStaff.setType(7);
+				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
+
+				editStaff.setMakerUserId(userId);
+				editStaff.setMakerEnterDatetime(curDateTime);
+				editStaff.setCheckerUserId(0);
+				editStaff.setCheckerDatetime(curDateTime);
+				editStaff.setLastUpdatedDatetime(curDateTime);
+
+				Staff editDean = rest.postForObject(Constants.url + "/addNewStaff", editStaff, Staff.class);
+			}
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/showTrainingAndPlacementOfficer";
+			
+		} catch (Exception e) {
+
+			System.err.println("exception In Traning & Placement Officer Registration at showIqacList Contr" + e.getMessage());
+			e.printStackTrace();
+
+		}
+		return redirect;
+
+	}	
+	
+	@RequestMapping(value = "/editTpo/{tpoId}", method = RequestMethod.GET)
+	public ModelAndView editTpo(@PathVariable("tpoId") int tpoId, HttpServletRequest request) {
+
+		System.out.println("Id:" + tpoId);
+
+		ModelAndView model = null;
+
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("editTpo/{tpoId}", "showTrainingAndPlacementOfficer", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("master/training&placementOfficer");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList edt:" + deptList.toString());
+				model.addObject("deptList", deptList);
+
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
+				map.add("type", 1);
+
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+
+				model.addObject("quolfList", quolfList);
+
+				map.add("id", tpoId);
+				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				System.out.println("staff:" + staff);
+
+				model.addObject("trnPlaceOff", staff);
+				model.addObject("addEdit", "1");
+				model.addObject("title", "Edit Traning & Placement Officer");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+
+	}
+	@RequestMapping(value = "/deleteTpo/{tpoId}", method = RequestMethod.GET)
+	public String deleteTpo(@PathVariable("tpoId") int tpoId, HttpServletRequest request) {
+		String a = null;
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("deleteDean/{tpoId}", "showTrainingAndPlacementOfficer", "0", "0", "0", "1",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			} else {
+
+				Info inf = new Info();
+				System.out.println("Id:" + tpoId);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", tpoId);
+				Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+				a = "redirect:/showTrainingAndPlacementOfficer";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return a;
+
+	}	
+	
+/****************************Extension Activity*******************************/	
+	@RequestMapping(value = "/showExternalActivities", method = RequestMethod.GET)
+	public ModelAndView showExternalActivities(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("showExternalActivities", "showExternalActivities", "1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("master/showExtensionActivityOfficerList");
+
+				model.addObject("title", "Extension Activity Officer List");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+				map.add("isDean", userObj.getStaff().getIsDean());
+				map.add("isExactActOff", userObj.getStaff().getIsExtActOff());
+
+				NewDeanList[] expActListarr = rest.postForObject(Constants.url + "/getExtActList",map, NewDeanList[].class);
+				List<NewDeanList> expActList = new ArrayList<>(Arrays.asList(expActListarr));
+				System.out.println("Extension Activity Officer List:" + expActList);
+
+				model.addObject("expActList", expActList);
+				model.addObject("listMapping", "showExternalActivities");
+
+				Info add = AccessControll.checkAccess("showExternalActivities", "showExternalActivities", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showExternalActivities", "showExternalActivities", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showExternalActivities", "showExternalActivities", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
+	
+	@RequestMapping(value = "/newExternalActivitiesOfficer", method = RequestMethod.GET)
+	public ModelAndView newExternalActivitiesOfficer(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		MultiValueMap<String, Object> map = null;
+		try {
+			Info view = AccessControll.checkAccess("newExternalActivitiesOfficer", "showExternalActivities", "0", "1", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("master/extensionActOfficer");
+
+				map = new LinkedMultiValueMap<String, Object>();
+			
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
+				
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
+				map.add("type", 1);
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+				Staff extActOff = new Staff();
+				model.addObject("extActOff", extActOff);
+
+				model.addObject("quolfList", quolfList);
+				model.addObject("addEdit", "0");
+				model.addObject("title", "Add Extension Activity Officer");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In newExternalActivitiesOfficer" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+
+	@RequestMapping(value = "/extActOfficerName", method = RequestMethod.POST)
+	public String extActOfficerName(HttpServletRequest request, HttpServletResponse response) {
+	
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int instituteId = (int) session.getAttribute("instituteId");
+
+			int userId = (int) session.getAttribute("userId");
+
+			int extActOfficerId = Integer.parseInt(request.getParameter("extActOfficerId"));
+
+			
+			String roleNameList = null;
+
+			roleNameList = Constants.EAO_Role + "," + Constants.Faculty_Role;
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("roleNameList", roleNameList);
+			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+					AssignRoleDetailList[].class);
+			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+			String roleIds = new String();
+			for (int i = 0; i < roleIdsList.size(); i++) {
+				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+			}
+			System.err.println("roleIds " + roleIds);
+
+			int designation = 0;
+
+			System.out.println("Data:" + extActOfficerId);  
+			String extActOfficerName = request.getParameter("extActOfficerName");
+			System.out.println("Data:" + extActOfficerName);
+			designation = Integer.parseInt(request.getParameter("designation"));
+			String dateOfJoin = request.getParameter("join_date");
+			String dateOfRel = request.getParameter("acc_off_relDate");
+			String contact = request.getParameter("contact_no");
+			String email = request.getParameter("email");
+
+			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// + contact + " " + email);
+			// MIqac miqac = new MIqac();
+			/*
+			 * if (iqacId == 0) { miqac.setIqacId(0);
+			 * 
+			 * } else { miqac.setIqacId(iqacId); }
+			 */
+
+			String[] deptIds = request.getParameterValues("depart");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < deptIds.length; i++) {
+				sb = sb.append(deptIds[i] + ",");
+
+			}
+			String deptIdList = sb.toString();
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
+			if (addEdit == 0) {
+			Staff staff = new Staff();
+
+			staff.setContactNo(contact);
+			staff.setCurrentDesignationId(designation);
+			staff.setDeptId(deptIdList);
+			staff.setEmail(email);
+			staff.setFacultyFirstName(extActOfficerName);
+			staff.setFacultyId(extActOfficerId);
+			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setHightestQualificationYear(null);
+			staff.setIsAccOff(0);
+			staff.setIsDean(0);
+			staff.setIsFaculty(1);
+			staff.setIsHod(0);
+			staff.setIsIqac(0);
+			staff.setIsLibrarian(0);
+			staff.setIsPrincipal(0);
+			staff.setIsTpo(0);
+			staff.setIsExtActOff(1);
+
+			staff.setIsStudent(0);
+			staff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
+			staff.setJoiningDate(dateOfJoin);
+			staff.setLastUpdatedDatetime(curDateTime);
+			staff.setMakerEnterDatetime(curDateTime);
+
+			staff.setPassword("");
+			staff.setRealivingDate(dateOfRel);
+			staff.setRoleIds(roleIds);
+			staff.setTeachingTo(0);
+			staff.setType(8);
+
+			staff.setInstituteId(instituteId);
+			staff.setContactNo(contact);
+			staff.setEmail(email);
+			staff.setDelStatus(1);
+			staff.setIsActive(1);
+			staff.setMakerUserId(userId);
+			staff.setMakerEnterDatetime(curDateTime);
+			staff.setCheckerUserId(0);
+			staff.setCheckerDatetime(curDateTime);
+			staff.setLastUpdatedDatetime(curDateTime);
+			
+			
+			staff.setExtravarchar1("NA");
+			Staff newDean = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+			}
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("id", extActOfficerId);
+
+				Staff editStaff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				
+				editStaff.setFacultyFirstName(extActOfficerName);
+				editStaff.setDeptId(deptIdList);
+				editStaff.setEmail(email);
+				editStaff.setFacultyId(extActOfficerId);
+				editStaff.setContactNo(contact);
+				editStaff.setCurrentDesignationId(designation);
+				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editStaff.setJoiningDate(dateOfJoin);
+				editStaff.setRealivingDate(dateOfRel);
+				editStaff.setRoleIds(roleIds);
+				editStaff.setType(8);
+				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
+
+				editStaff.setMakerUserId(userId);
+				editStaff.setMakerEnterDatetime(curDateTime);
+				editStaff.setCheckerUserId(0);
+				editStaff.setCheckerDatetime(curDateTime);
+				editStaff.setLastUpdatedDatetime(curDateTime);
+
+				Staff editDean = rest.postForObject(Constants.url + "/addNewStaff", editStaff, Staff.class);
+			}
+			int isView = Integer.parseInt(request.getParameter("is_view"));
+			if (isView == 1)
+				redirect = "redirect:/showExternalActivities";
+			
+		} catch (Exception e) {
+
+			System.err.println("exception In Traning & Placement Officer Registration at showIqacList Contr" + e.getMessage());
+			e.printStackTrace();
+
+		}
+		return redirect;
+
+	}	
+	
+	@RequestMapping(value = "/editExtActOff/{extOffId}", method = RequestMethod.GET)
+	public ModelAndView editExtActOff(@PathVariable("extOffId") int extOffId, HttpServletRequest request) {
+
+		System.out.println("Id:" + extOffId);
+
+		ModelAndView model = null;
+
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		try {
+			Info view = AccessControll.checkAccess("editExtActOff/{tpoId}", "showExternalActivities", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				model = new ModelAndView("master/extensionActOfficer");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList edt:" + deptList.toString());
+				model.addObject("deptList", deptList);
+
+
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
+				map.add("type", 1);
+
+				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
+						Quolification[].class);
+				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("quolfList " + quolfList.toString());
+
+				model.addObject("quolfList", quolfList);
+
+				map.add("id", extOffId);
+				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+				System.out.println("staffExt:" + staff);
+
+				model.addObject("extActOff", staff);
+				model.addObject("addEdit", "1");
+				model.addObject("title", "Edit Extension Activity Officer");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return model;
+
+	}
+	@RequestMapping(value = "/deleteExtAxtOff/{extOffId}", method = RequestMethod.GET)
+	public String deleteExtAxtOff(@PathVariable("extOffId") int extOffId, HttpServletRequest request) {
+		String a = null;
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("deleteExtAxtOff/{extOffId}", "showExternalActivities", "0", "0", "0", "1",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			} else {
+
+				Info inf = new Info();
+				System.out.println("Id:" + extOffId);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", extOffId);
+				Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+				a = "redirect:/showExternalActivities";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return a;
+
+	}	
 
 }
