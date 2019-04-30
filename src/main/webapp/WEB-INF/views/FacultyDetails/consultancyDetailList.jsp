@@ -100,8 +100,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitFacultyConsultancy"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return confirm('Do you really want to submit the form?');">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 
 
@@ -116,10 +115,12 @@
 													of Consultancy <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" id="nature"
+													<input type="text" class="form-control" id="nature" autocomplete="off"
 														placeholder="Nature of Consultancy" name="nature"
-														placeholder="" value="${editConsultancy.consNature}"
-														required>
+														value="${editConsultancy.consNature}" onchange="trim(this)">
+												<span
+													class="error_form text-danger" id="error_field1"
+													style="display: none;">Please enter nature of consultancy. </span>
 
 												</div>
 											</div>
@@ -130,10 +131,12 @@
 													Agency/Industry <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" id="sponser"
+													<input type="text" class="form-control" id="sponser" autocomplete="off"
 														placeholder="Sponsoring Agency/Industry" name="sponser"
-														placeholder="" value="${editConsultancy.consSponsor}"
-														required>
+														value="${editConsultancy.consSponsor}" onchange="trim(this)">
+														<span
+													class="error_form text-danger" id="error_field2"
+													style="display: none;">Please enter sponsoring agency industry.</span>
 													<!-- </div> -->
 												</div>
 											</div>
@@ -144,14 +147,12 @@
 													of Consultancy <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="number" min="0" class="form-control"
-														id="amount" placeholder="Amount of Consultancy"
-														name="amount" placeholder=""
-														value="${editConsultancy.consAmount}" required>
-
-													<!-- 															  <input type="text" class="form-control datepickeryear" data-min-view-mode="years" data-start-view="2" data-format="yyyy">  
- -->
-													<!-- </div> -->
+													<input type="text" class="form-control" autocomplete="off"
+														id="amount" placeholder="Amount of Consultancy" onkeypress='return restrictAlphabets(event)'
+														name="amount" value="${editConsultancy.consAmount}" onchange="trim(this)">
+											<span
+													class="error_form text-danger" id="error_field3"
+													style="display: none;">Please enter amount of consultancy and value must be greater than 0. </span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -160,10 +161,12 @@
 													Period<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="number" min="0" class="form-control"
+													<input type="text" class="form-control" autocomplete="off"
 														id="conPeriod" placeholder="Consultancy Period"
-														name="conPeriod" placeholder=""
-														value="${editConsultancy.consPeriod}" required>
+														name="conPeriod" value="${editConsultancy.consPeriod}" onchange="trim(this)">
+												<span
+													class="error_form text-danger" id="error_field4"
+													style="display: none;">Please enter consultancy period. </span>
 												</div>
 
 											</div>
@@ -205,14 +208,14 @@
 												<div class="col-sm-offset-2 col-sm-10">
 
 
-													<button type="submit" id="sub_button"
+													<button type="submit" id="sub1"
 														class="btn btn-primary" onclick="submit_f(1)">
 														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 													</button>
 
 													<a
 														href="${pageContext.request.contextPath}/showConsultancyList"><button
-															type="button" class="btn btn-primary">
+															type="button" id="sub2" class="btn btn-primary">
 															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 														</button></a>
 												</div>
@@ -264,7 +267,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-6" for="page_name">Academic
 							Year</label> <select id="academicYear" name="qualType"
-							class="form-control" onchange="showForm()" required>
+							class="form-control" onchange="showForm()" >
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
@@ -281,6 +284,92 @@
 		</div>
 	</div>
 
+<script>
+
+function trim(el) {
+	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	replace(/\n +/, "\n"); // Removes spaces after newlines
+	return;
+}
+
+		function validateEmail(email) {
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (eml.test($.trim(email)) == false) {
+				return false;
+			}
+			return true;
+		}
+		function validateNo(mobile) {
+			var mob = /^[1-9]{1}[0-9]{0,9}$/;
+			if (mob.test($.trim(mobile)) == false) {
+				return false;
+			}
+			return true;
+		}
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+												if (!$("#nature").val()) { amount
+													isError = true;
+
+													$("#nature").addClass(
+															"has-error")
+													$("#error_field1").show();
+												} else {
+													$("#error_field1").hide();
+												}
+												   
+												if (!$("#sponser").val()) {
+													isError = true;
+
+													$("#sponser").addClass(
+															"has-error")
+													$("#error_field2").show();
+												} else {
+													$("#error_field2").hide();
+												}
+
+												if ($("#amount").val()<=0 || !$("#amount").val()) {
+													isError = true;
+
+													$("#amount").addClass(
+															"has-error")
+													$("#error_field3").show();
+												} else {
+													$("#error_field3").hide();
+												}
+												if (!$("#conPeriod").val()) {
+													isError = true;
+
+													$("#conPeriod").addClass(
+															"has-error")
+													$("#error_field4").show();
+												} else {
+													$("#error_field4").hide();
+												}
+												
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
+	</script>
 
 
 	<script type="text/javascript">
@@ -346,9 +435,20 @@
 
 		}
 	</script>
-
-
-
+<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 </body>
 </html>

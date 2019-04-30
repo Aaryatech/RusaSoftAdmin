@@ -125,7 +125,7 @@
 															<c:forEach items="${mExtActList}" var="extActList"
 																varStatus="count">
 																<tr>
-																	<td><input type="checkbox" class="chk"
+																	<td align="center"><input type="checkbox" class="chk"
 																		name="exActId" id="exActIds${count.index+1}"
 																		value="${extActList.instExtensionActId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>

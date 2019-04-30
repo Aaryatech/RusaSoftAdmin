@@ -98,8 +98,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertPatentDetail"
-										method="post" name="form_sample_2" id="form_sample_2"
-										onsubmit="return checkBeforeSubmit();">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -126,7 +125,10 @@
 													<input type="text" class="form-control" id="patentNo"
 														autocomplete="off" name="patentNo"
 														value="${patent.patentFileNo}" placeholder="Patent Number"
-														onchange="trim(this)" required>
+														onchange="trim(this)">
+														<span
+													class="error_form text-danger" id="error_field1"
+													style="display: none;">Please enter patent file No. </span>
 												</div>
 											</div>
 
@@ -138,7 +140,10 @@
 													<input type="text" class="form-control" id="parent_title"
 														autocomplete="off" name="parentTitle"
 														placeholder="Patent Title" value="${patent.patentTitle}"
-														onchange="trim(this)" required>
+														onchange="trim(this)">
+													<span
+													class="error_form text-danger" id="error_field2"
+													style="display: none;">Please enter patent title. </span>
 												</div>
 											</div>
 
@@ -148,22 +153,28 @@
 													Filing Date <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control datepicker"
+													<input type="text" class="form-control datepicker" onchange="trim(this)"
 														autocomplete="off" id="filling_date" name="fillingDate"
-														placeholder="Patent Filing Date"
-														value="${patent.patentFilingDate}" required>
+														placeholder="Patent Filing Date" onkeypress='return restrictAlphabets(event)'
+														value="${patent.patentFilingDate}">
+													<span
+													class="error_form text-danger" id="error_field3"
+													style="display: none;">Please enter patent filing date. </span>
 												</div>
 
 											</div>
 
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="guide_name">Name
-													of Co-assistant/Guide </label>
+													of Co-Assistant/Guide </label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="guide_name"
-														autocomplete="off" name="guideName"
-														placeholder="Name of Co-assistant/Guide"
-														value="${patent.patentGuideName}" onchange="trim(this)">
+														autocomplete="off" name="guideName" onchange="trim(this)"
+														placeholder="Name of Co-Assistant/Guide"
+														value="${patent.patentGuideName}">
+													<span
+													class="error_form text-danger" id="error_field4"
+													style="display: none;">Please enter co-assistant/guide name. </span>
 												</div>
 											</div>
 											<input type="hidden" id="is_view" name="is_view" value="0">
@@ -173,10 +184,13 @@
 													of Publication <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control datepicker"
+													<input type="text" class="form-control datepicker" onkeypress='return restrictAlphabets(event)'
 														autocomplete="off" placeholder="Date of Publication"
-														id="pub_date" name="pubDate"
-														value="${patent.patentPubDate}" required>
+														id="pub_date" name="pubDate" onchange="trim(this)"
+														value="${patent.patentPubDate}">
+													<span
+													class="error_form text-danger" id="error_field5"
+													style="display: none;">Please enter date of publication. </span>
 												</div>
 
 											</div>
@@ -185,13 +199,13 @@
 												<div class="col-sm-offset-2 col-sm-10">
 
 
-													<button type="submit" id="sub_button"
+													<button type="submit" id="sub1"
 														class="btn btn-primary" onclick="submit_f(1)">
 														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 													</button>
 
 													<a
-														href="${pageContext.request.contextPath}/showPatentDetailsList"><button
+														href="${pageContext.request.contextPath}/showPatentDetailsList"><button id="sub2"
 															type="button" class="btn btn-primary">
 															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 														</button></a>
@@ -226,6 +240,89 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+	<script>
+
+function trim(el) {
+	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+	replace(/\n +/, "\n"); // Removes spaces after newlines
+	return;
+}
+
+		$(document)
+				.ready(
+						function($) {
+
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+												if (!$("#patentNo").val()) { 			
+													isError = true;
+
+													$("#patentNo").addClass(
+															"has-error")
+													$("#error_field1").show();
+												} else {
+													$("#error_field1").hide();
+												}
+												   
+												if (!$("#parent_title").val()) {
+													isError = true;
+
+													$("#parent_title").addClass(
+															"has-error")
+													$("#error_field2").show();
+												} else {
+													$("#error_field2").hide();
+												}
+
+												if (!$("#filling_date").val()) {
+													isError = true;
+
+													$("#filling_date").addClass(
+															"has-error")
+													$("#error_field3").show();
+												} else {
+													$("#error_field3").hide();
+												}
+												if (!$("#guide_name").val()) {
+													isError = true;
+
+													$("#guide_name").addClass(
+															"has-error")
+													$("#error_field4").show();
+												} else {
+													$("#error_field4").hide();
+												}
+												
+												if (!$("#pub_date").val()) {
+													isError = true;
+
+													$("#pub_date").addClass(
+															"has-error")
+													$("#error_field5").show();
+												} else {
+													$("#error_field5").hide();
+												}
+												
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
+	</script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -261,11 +358,20 @@
 			}
 			return false;
 		}
-		function trim(el) {
-			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-			replace(/\n +/, "\n"); // Removes spaces after newlines
-			return;
+		
+	</script>
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
 		}
 	</script>
 </body>

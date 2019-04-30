@@ -126,7 +126,7 @@
 															<c:forEach items="${neighbrCommActList}" var="neighbourList"
 																varStatus="count">
 																<tr>
-																	<td><input type="checkbox" class="chk"
+																	<td align="center"><input type="checkbox" class="chk" 
 																		name="actId" id="actIds${count.index+1}"
 																		value="${neighbourList.instNeighbourhoodCommActId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>

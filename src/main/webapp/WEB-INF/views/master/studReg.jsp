@@ -57,7 +57,7 @@
 		<!--  SIDEBAR - END -->
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
-			<section class="wrapper main-wrapper row" style="">
+			<section class="wrapper main-wrapper row">
 
 				<%-- <div class="col-xs-12">
 					<div class="page-title">
@@ -150,9 +150,6 @@
                                        </div>
 										</div>		
 													
-													
-													
-													
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">
 													Department  <span class="text-danger">*</span>
@@ -233,10 +230,10 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
+<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showStudList"><button
+<a href="${pageContext.request.contextPath}/showStudList"><button id="sub2"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -303,24 +300,7 @@ function trim(el) {
             
              }
              
-           /*   function numbersOnlyNotZero(id_number) {
-
-                 
-                 var mob = /^[1-9][0-9]+$/;
-
-
-                 if (mob.test($.trim(id_number)) == false) {
-
-                     //alert("Please enter a valid email address .");
-                     return false;
-
-                 }
-                 return true;
-             }
- */
-
-
-             
+           
             
             	$(document).ready(function($){
             //	alert("hii....");
@@ -359,8 +339,7 @@ function trim(el) {
             				if(!$("#student_email").val() || !validateEmail($("#student_email").val())){
             
             				isError=true;
-            				errMsg += '<li>Please enter a valid email address.</li>';
-            				errMsg_alert += 'Please enter a valid email address. \n';
+            			
             				$("#error_email").show()
             					//return fregister_useralse;
             				} else {
@@ -371,8 +350,7 @@ function trim(el) {
             				if($("#academic_year").val()== -1 ){
             		            
                 				isError=true;
-                				errMsg += '<li>Please Select Academic Year</li>';
-                				errMsg_alert += 'Please Select Academic Year \n';
+                				
                 				$("#error_year").show()
                 					//return fregister_useralse;
                 				} else {
@@ -380,23 +358,11 @@ function trim(el) {
                 				}
             				
 
-            			/* 	if(!$("#id_number").val() || !numbersOnlyNotZero($("#id_number").val())){
-            
-            				isError=true;
-            				errMsg += '<li>Please enter a valid email address.</li>';
-            				errMsg_alert += 'Please enter a valid email address. \n';
-            				$("#error_Id").show()
-            					//return fregister_useralse;
-            				} else {
-            					$("#error_Id").hide()
-            				} */
-            				
 
 							if($("#stud_branch").val()== -1 ){
             		            
                 				isError=true;
-                				errMsg += '<li>Please Select Branch </li>';
-                				errMsg_alert += 'Please Select Branch \n';
+                				
                 				$("#error_dept").show()
                 					//return fregister_useralse;
                 				} else {
@@ -407,9 +373,10 @@ function trim(el) {
 							if (!isError) {
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
-									return  true;
+									
 									 document.getElementById("sub1").disabled=true;
-           						  document.getElementById("sub2").disabled=true;
+           						 	 document.getElementById("sub2").disabled=true;
+           							 return  true;
 								}
 							}
             
@@ -418,10 +385,8 @@ function trim(el) {
             					   return false;
             				} );
             	});
-			//
-			
-			    
-          
+		
+		 
         </script>
 
 <script type="text/javascript">

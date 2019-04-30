@@ -144,7 +144,7 @@
 													</div>
 													
 												<div class="form-group">
-														<label class="control-label col-sm-2" for="year"> Industry From
+														<label class="control-label col-sm-2" for="year"> Industry 
 														 Year<span class="text-danger">*</span>
 														</label>
 
@@ -152,7 +152,7 @@
 														<input type="text" class="form-control datepickeryear"
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy"
-															placeholder="Industry From Year"
+															placeholder="Industry Year"
 															id="indust_year"
 															value="${linkage.industryFromYear}"
 															name="indust_year" autocomplete="off"
@@ -395,7 +395,7 @@
                 					$("#error_formfield6").hide();
                 				}
             			
-               				if($("#participate").val()==0 || !$("#participate").val()){   
+               				if($("#participate").val() <=0 || !$("#participate").val()){   
             					 
                 				isError=true;
                 				

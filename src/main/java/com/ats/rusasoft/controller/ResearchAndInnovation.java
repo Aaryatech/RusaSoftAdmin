@@ -650,7 +650,7 @@ public class ResearchAndInnovation {
 			System.out.println("Links="+linkageList);
 			
 			model.addObject("linkageList", linkageList);
-			model.addObject("title", "Student Faculty Linkage");
+			model.addObject("title", "Faculty/Student Linkages");
 
 			Info add = AccessControll.checkAccess("showStudFacultyLinkage", "showStudFacultyLinkage", "0", "1", "0", "0",
 					newModuleList);
@@ -707,7 +707,7 @@ public class ResearchAndInnovation {
 				  
 				model = new ModelAndView("master/addstudFacLinkg");
 					model.addObject("linkage", linkage);
-					model.addObject("title", "Add Faculty Student Linkage");
+					model.addObject("title", "Add Faculty/Student Linkages");
 			}
 		} catch (Exception e) {
 
@@ -787,7 +787,7 @@ public class ResearchAndInnovation {
 				
 				map.add("linkId", linkId);
 				model = new ModelAndView("master/addstudFacLinkg");
-				model.addObject("title", "Edit Faculty Student Linkage");
+				model.addObject("title", "Edit Faculty/Student Linkages");
 				TFacultyStudLinkage  linkage = rest.postForObject(Constants.url+"/getStudFacLinksById", map, TFacultyStudLinkage.class);
 				model.addObject("linkage", linkage);
 			}

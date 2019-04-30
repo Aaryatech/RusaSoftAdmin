@@ -128,7 +128,7 @@
 														</div>
 														
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. Of
+															<label class="control-label col-sm-2" for="smallheading">No. of
 																Student <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
@@ -153,7 +153,7 @@
 														</div>
 
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. Of
+															<label class="control-label col-sm-2" for="smallheading">No. of
 																Faculty <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
@@ -183,8 +183,8 @@
 															
 														<div class="col-sm-6">
 															<select id="association" name="association" class="form-control">
-																<option value="Govt" ${neighbourCommAct.associationWith eq 'Govt' ? 'selected' : ''}>Govt.</option>
-																<option value="Non Govt" ${neighbourCommAct.associationWith eq 'Non Govt' ? 'selected' : ''}>Non Govt.</option>
+																<option value="Government Organization" ${neighbourCommAct.associationWith eq 'Government Organization' ? 'selected' : ''}>Government Organization</option>
+																<option value="Non Government Organization" ${neighbourCommAct.associationWith eq 'Non Government Organization' ? 'selected' : ''}>Non Government Organization</option>
 																<option value="Industry" ${neighbourCommAct.associationWith eq 'Industry' ? 'selected' : ''}>Industry</option>
 																<option value="Any Other" ${neighbourCommAct.associationWith eq 'Any Other' ? 'selected' : ''}>Any Other</option>
 														</select>
@@ -259,7 +259,7 @@
      						}
      				
      						 
-           				if($("#no_student").val() == 0 || !$("#no_student").val()){
+           				if($("#no_student").val() <= 0 || !$("#no_student").val()){
         					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -272,7 +272,7 @@
             				}  
             				
             				
-           				if($("#ttl_student").val() == 0 || !$("#ttl_student").val()){
+           				if($("#ttl_student").val() <= 0 || !$("#ttl_student").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -286,7 +286,7 @@
            				
            						
            				
-           				if($("#no_faculty").val() == 0 || !$("#no_faculty").val()){
+           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -298,7 +298,7 @@
             					$("#error_formfield4").hide()
             				}
            				
-           				if($("#ttl_faculty").val() == 0 || !$("#ttl_faculty").val()){
+           				if($("#ttl_faculty").val() <= 0 || !$("#ttl_faculty").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';

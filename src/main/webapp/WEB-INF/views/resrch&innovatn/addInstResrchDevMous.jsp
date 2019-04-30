@@ -158,7 +158,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="org_name" onchange="trim(this)"
-																	name="org_name" placeholder="No. of Student Participated"
+																	name="org_name" placeholder="Organization Name"
 																	value="${tMous.orgName}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name organization.</span>
 															</div>
@@ -357,7 +357,7 @@
             					$("#error_formfield4").hide()
             				}
            				
-           				if($("#no_stud").val() == 0 || !$("#no_stud").val()){
+           				if($("#no_stud").val() <= 0 || !$("#no_stud").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -369,7 +369,7 @@
             					$("#error_formfield5").hide()
             				}
            				
-           				if($("#no_faculty").val() == 0 || !$("#no_faculty").val()){
+           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
         					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';

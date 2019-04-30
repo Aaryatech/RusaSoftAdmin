@@ -282,7 +282,7 @@
 				var isError = false;
 				var errMsg = "";
 
-				if ($("#noOfBookPrchs").val() == 0 || !$("#noOfBookPrchs").val()) {
+				if ($("#noOfBookPrchs").val() <= 0 || !$("#noOfBookPrchs").val()) {
 					isError = true;
 					$("#noOfBookPrchs").addClass("has-error")
 					$("#error_formfield1").show()
@@ -290,7 +290,7 @@
 					$("#error_formfield1").hide()
 				}
 
-				if ($("#costOfBook").val() == 0 || !$("#costOfBook").val()) {
+				if ($("#costOfBook").val() <= 0 || !$("#costOfBook").val()) {
 					isError = true;
 					$("#costOfBook").addClass("has-error")
 					$("#error_formfield2").show()
@@ -300,7 +300,7 @@
 				}
 				 
 				
-				if ($("#noOfJournal").val() == 0 || !$("#noOfJournal").val()) {
+				if ($("#noOfJournal").val() <= 0 || !$("#noOfJournal").val()) {
 					isError = true;
 					$("#noOfJournal").addClass("has-error")
 					$("#error_formfield3").show()
@@ -309,7 +309,7 @@
 					$("#error_formfield3").hide()
 				}
 
-				if ($("#costOfJournal").val() == 0 || !$("#costOfJournal").val()) {
+				if ($("#costOfJournal").val() <= 0 || !$("#costOfJournal").val()) {
 					isError = true;					
 					$("#costOfJournal").addClass("has-error")
 					
@@ -320,7 +320,7 @@
 				}
 
 				
-				if ($("#noOfEJournal").val() == 0 || !$("#noOfEJournal").val()) {
+				if ($("#noOfEJournal").val() <= 0 || !$("#noOfEJournal").val()) {
 					isError = true;
 					$("#noOfEJournal").addClass("has-error")
 					$("#error_formfield5").show()
@@ -329,7 +329,7 @@
 					$("#error_formfield5").hide()
 				}
 
-				if ($("#costOfEJournal").val() == 0 || !$("#costOfEJournal").val()) {
+				if ($("#costOfEJournal").val() <= 0 || !$("#costOfEJournal").val()) {
 					isError = true;
 					$("#costOfEJournal").addClass("has-error")
 					

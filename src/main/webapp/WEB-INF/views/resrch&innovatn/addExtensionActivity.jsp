@@ -269,7 +269,7 @@
       					}
      				
      						 
-           				if($("#no_student_part").val() == 0 || !$("#no_student_part").val()){
+           				if($("#no_student_part").val() <= 0 || !$("#no_student_part").val()){
         					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -282,7 +282,7 @@
             				}  
             				
             				
-           				if($("#no_faculty").val() == 0 || !$("#no_faculty").val()){
+           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -296,7 +296,7 @@
            				
            						
            				
-           				if($("#no_faculty").val() == 0 || !$("#no_faculty").val()){
+           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -308,7 +308,7 @@
             					$("#error_formfield4").hide()
             				}
            				
-           				if($("#faculty_in_inst").val() == 0 || !$("#faculty_in_inst").val()){
+           				if($("#faculty_in_inst").val() <= 0 || !$("#faculty_in_inst").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';

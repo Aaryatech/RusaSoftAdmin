@@ -135,7 +135,7 @@
 													<c:forEach items="${rsrchMouList}" var="mouList"
 														varStatus="count">
 														<tr>
-															<td style="text-align: center;"><input
+															<td style="text-align: center;" align="center"><input
 																type="checkbox" class="chk" name="mouIds"
 																id="mouIds${count.index+1}" value="${mouList.instReasearchDevMouId}" /></td>
 															<td style="text-align: center;">${count.index+1}</td>

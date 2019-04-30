@@ -138,7 +138,7 @@
 																<c:forEach items="${linkageList}" var="links"
 													varStatus="count">
 													<tr>
-														 <td><input type="checkbox" class="chk"
+														 <td align="center"><input type="checkbox" class="chk"
 															name="linkageId" id="linkageIds${count.index+1}"
 															value="${links.facultyStudLinkageId}" /></td> 
 														<td style="text-align: center; ">${count.index+1}</td>

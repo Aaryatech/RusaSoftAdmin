@@ -124,7 +124,7 @@
 													value="${trainning.trainingTitle}"> <span
 													class="error_form text-danger" id="dev_Prog_title_field"
 													style="display: none;">Please enter training program
-													title</span>
+													title.</span>
 											</div>
 										</div>
 
@@ -133,7 +133,7 @@
 												of Participants <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" maxlength="9" class="form-control"
+												<input type="text" maxlength="9" class="form-control"
 													min="0" id="no_of_participant" autocomplete="off"
 													name="no_of_participant" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
@@ -141,7 +141,7 @@
 													value="${trainning.trainingPcount}"> <span
 													class="error_form text-danger" id="no_of_participant_field"
 													style="display: none;">Please enter no of
-													participants</span>
+													participants and value must be greater than 0.</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -154,11 +154,11 @@
 													onkeypress='return restrictAlphabets(event)' id="fromDate"
 													name="fromDate" value="${trainning.trainingFromdt}">
 												<span class="error_form text-danger" id="fromDate_field"
-													style="display: none;">Please select from date</span>
+													style="display: none;">Please select from date.</span>
 													
 												<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">From Date must be smaller than To Date. </span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -177,7 +177,7 @@
 													
 													<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">To Date must be greater than From Date. </span>
 											</div>
 										</div>
 
@@ -329,7 +329,7 @@
 						         				
 
 												if ($("#no_of_participant")
-														.val() == 0
+														.val() <= 0
 														|| !$(
 																"#no_of_participant")
 																.val()) {

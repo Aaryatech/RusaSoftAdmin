@@ -803,6 +803,26 @@
 										}
 									}
 								});
+			document.getElementById("inst_name").value = "";
+			document.getElementById("inst_name").value = "";
+			document.getElementById("aishe_code").value = "";
+			document.getElementById("inst_add").value = "";
+			document.getElementById("is_registration").value = "";
+			document.getElementById("reg_date").value = "";
+			document.getElementById("trusty_name").value = "";
+			document.getElementById("trusty_add").value = "";
+			document.getElementById("trusty_con_no").value = "";
+			document.getElementById("pres_name").value = "";
+			document.getElementById("pres_contact").value = "";
+			document.getElementById("pres_email").value = "";
+			document.getElementById("princ_name").value = "";
+			document.getElementById("princ_contact").value = "";
+			document.getElementById("princ_email").value = ""; 			
+			document.getElementById("village").value = "";
+			document.getElementById("taluka").value = "";
+			document.getElementById("district").value = "";
+			document.getElementById("state").value = "";
+			document.getElementById("pin").value = "";
 		}
 	</script>
 
