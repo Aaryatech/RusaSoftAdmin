@@ -121,7 +121,7 @@ input {
 													onchange="trim(this)" autocomplete="off"
 													value="${itInfra.noOfComputers}"> <span
 													class="error_form text-danger" id="error_formfield1"
-													style="display: none;">Please enter No. of computers.</span>
+													style="display: none;">Please enter No. of computers and value must be greater than 0.</span>
 											</div>
 										</div>
 										
@@ -153,7 +153,7 @@ input {
 													placeholder="Amount of Purchase (in Rupees)" onkeypress='return restrictAlphabets(event)'
 													value="${itInfra.purchaseAmt}"> <span
 													class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter amount of purchase.</span>
+													style="display: none;">Please enter amount of purchase and value must be greater than 0.</span>
 											</div>
 										</div>
 										
@@ -168,13 +168,13 @@ input {
 													placeholder="No. of Student Utilizing" onkeypress='return restrictAlphabets(event)'
 													value="${itInfra.noOfStudUtilizing}"> <span
 													class="error_form text-danger" id="error_formfield4"
-													style="display: none;">Please enter No. of student utilizing.</span>
+													style="display: none;">Please enter No. of student utilizing and value must be greater than 0.</span>
 											</div>
 										</div>
 										
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button"
+												<button type="submit" id="sub1"
 													class="btn btn-primary" onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>

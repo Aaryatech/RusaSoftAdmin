@@ -90,7 +90,7 @@
                 <tbody>
                       <c:forEach items="${connList}" var="connection" varStatus="count"> 
 									<tr>
-									 <td><input type="checkbox" class="chk" name="lanInfoId"
+									 <td align="center"><input type="checkbox" class="chk" name="lanInfoId"
 											id="lanInfoIdIds${count.index+1}" value="${connection.instInternetInfoId}" /></td> 
 											<td style="text-align: center">${count.index+1}</td>
 											

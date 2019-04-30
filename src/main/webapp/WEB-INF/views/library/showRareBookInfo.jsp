@@ -91,7 +91,7 @@
                 <tbody>
                       <c:forEach items="${rareBokList}" var="bookList" varStatus="count"> 
 									<tr>
-									 <td><input type="checkbox" class="chk" name="rareBookId"
+									 <td align="center"><input type="checkbox" class="chk" name="rareBookId"
 											id="rareBookIds${count.index+1}" value="${bookList.rareBookInfoId}" /></td> 
 											<td style="text-align: center">${count.index+1}</td>
 											

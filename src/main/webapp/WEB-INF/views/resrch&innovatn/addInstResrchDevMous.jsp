@@ -99,7 +99,7 @@
 														
 													<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Select  Research Development
-												MOU: <span class="text-danger">*</span>
+												MOU<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<select id="activity_id" name="activity_id" class="form-control" onclick="checkPhdGuide(this.value)">
@@ -110,23 +110,22 @@
 																<option value="${mouList.researchDevMouId}">${mouList.mouTitle}</option>
 													</c:forEach>
 													</c:when>
+													
 													<c:otherwise>
-													
-													
-													<c:forEach items="${mouList}" var="mouList">
-														 <c:choose>
-															<c:when test="${mouList.researchDevMouId==tMous.instReasearchDevMouId}">
-																<option selected value="${mouList.researchDevMouId}">${mouList.mouTitle}</option>
-
-															</c:when>
-															<c:otherwise> 
-																<option value="${mouList.researchDevMouId}">${mouList.mouTitle}</option>
-
-															 </c:otherwise>
-
-														</c:choose> 
-
-													</c:forEach>
+														<c:forEach items="${mouList}" var="mouList">
+															 <c:choose>
+																<c:when test="${mouList.researchDevMouId==tMous.researchDevMouId}">
+																	<option selected value="${mouList.researchDevMouId}">${mouList.mouTitle}</option>
+	
+																</c:when>
+																<c:otherwise> 
+																	<option value="${mouList.researchDevMouId}">${mouList.mouTitle}</option>
+	
+																 </c:otherwise>
+	
+															</c:choose> 
+	
+														</c:forEach>
 													
 													
 														<option value="0">Any Other</option>

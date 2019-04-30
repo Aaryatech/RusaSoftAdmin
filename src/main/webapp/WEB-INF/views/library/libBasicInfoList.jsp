@@ -94,7 +94,7 @@
 												<c:forEach items="${libInfoList}" var="libList"
 													varStatus="count">
 													<tr>
-														<td><input type="checkbox" class="chk" name="libId"
+														<td align="center"><input type="checkbox" class="chk" name="libId"
 															id="libIds${count.index+1}" value="${libList.libInfoId}" /></td>
 														<td style="text-align: center">${count.index+1}</td>
 

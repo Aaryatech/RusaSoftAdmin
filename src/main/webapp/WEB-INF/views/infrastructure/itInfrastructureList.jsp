@@ -90,7 +90,7 @@
                 <tbody>
                       <c:forEach items="${infraList}" var="infra" varStatus="count"> 
 									<tr>
-									 <td><input type="checkbox" class="chk" name="itInfraId"
+									 <td align="center"><input type="checkbox" class="chk" name="itInfraId"
 											id="itInfraIds${count.index+1}" value="${infra.instItInfraInfoId}" /></td> 
 											<td style="text-align: center">${count.index+1}</td>
 											

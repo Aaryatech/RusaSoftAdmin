@@ -91,7 +91,7 @@
                 <tbody>
                       <c:forEach items="${contentList}" var="content" varStatus="count"> 
 									<tr>
-									 <td><input type="checkbox" class="chk" name="econtent"
+									 <td align="center"><input type="checkbox" class="chk" name="econtent"
 											id="econtents${count.index+1}" value="${content.instEContentDevFacilityId}" /></td> 
 											<td style="text-align: center">${count.index+1}</td>
 											
