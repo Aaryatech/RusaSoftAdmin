@@ -224,7 +224,7 @@
 
 									<div class="form-group">
 										<form
-											action="${pageContext.request.contextPath}/deleteQualiInit/0"
+											action="${pageContext.request.contextPath}/deleteInfraArea/0"
 											method="get" id="insListForm">
 											<input type="hidden" value="0" id="instInfraAreaId" name="instInfraAreaId">
 
@@ -269,7 +269,7 @@
 																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															</c:if> <c:if test="${deleteAccess==0}">
 																	<a
-																		href="${pageContext.request.contextPath}/deleteQualiInit/${instInfraArea.instInfraAreaId}"
+																		href="${pageContext.request.contextPath}/deleteInfraArea/${instInfraArea.instInfraAreaId}"
 																		onClick="return confirm('Are you sure want to delete this record');"
 																		rel="tooltip" data-color-class="danger" title="Delete"
 																		data-animate=" animated fadeIn " data-toggle="tooltip"

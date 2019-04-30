@@ -152,7 +152,7 @@
 													</c:forEach> --%>
 
 												</select> <span class="error_form text-danger" id="area_name_field"
-													style="display: none;">Please select Area Type</span>
+													style="display: none;">Please select area name</span>
 											</div>
 										</div>
 
@@ -164,7 +164,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="200"
 													onchange="trim(this)" id="other_area" name="other_area"
-													autocomplete="off" placeholder="Enter Area Location">
+													autocomplete="off" placeholder="Enter Area Location" value="${editArea.areaName}">
 												<span class="error_form text-danger" id="other_area_field"
 													style="display: none;">Please enter other area name</span>
 
@@ -179,7 +179,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="200"
 													onchange="trim(this)" id="loc_of_area" name="loc_of_area"
-													autocomplete="off" placeholder="Enter Area Location">
+													autocomplete="off" placeholder="Enter Area Location" value="${editArea.areaLoc}">
 												<span class="error_form text-danger" id="loc_of_area_field"
 													style="display: none;">Please enter location of area</span>
 
@@ -193,9 +193,9 @@
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" maxlength="200"
+												<input type="text" class="form-control" maxlength="10"
 													onchange="trim(this)" id="area_in_sqm" name="area_in_sqm"
-													autocomplete="off" placeholder="Enter Area In Square Meter">
+													autocomplete="off" placeholder="Enter Area In Square Meter" value="${editArea.areaSqMtr}">
 												<span class="error_form text-danger" id="area_in_sqm_field"
 													style="display: none;">Please enter area in square
 													meter</span>
@@ -221,7 +221,9 @@
 											</div>
 										</div>
 										<input type="hidden" id="instInfraAreaId"
-											name="instInfraAreaId" value="0"> <input
+											name="instInfraAreaId" value="${editArea.instInfraAreaId}"> 
+											<input type="hidden" id="temp"
+											name="temp" value="${editArea.infraAreaId}"> <input
 											type="hidden" id="is_view" name="is_view" value="0">
 									</form>
 
@@ -323,6 +325,11 @@
 
 
 	<script>
+	
+	$('#area_in_sqm').on('input', function() {
+		  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -371,6 +378,7 @@
 												
 												
 												
+												
 												if (!$("#loc_of_area").val()) {
 													isError = true;
 													$("#loc_of_area").addClass(
@@ -411,6 +419,16 @@
 													}
 												}
 
+												if(areaId==-1){
+													isError = true;
+													$("#area_name").addClass(
+															"has-error")
+													$("#area_name_field")
+															.show()
+												} else {
+													$("#area_name_field")
+															.hide()
+												}
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
@@ -504,11 +522,21 @@
                     html += '<option value="'+p+'">'
                     +q+'</option>';
                     html += '</option>';
+                    
+                    var temp="0";
+                    temp=document.getElementById("temp").value;
+                    //alert("temp");
                     var len = data.length;
-                    for (var i = 0; i < len; i++) {
+                    for (var i = 0; i < len; i++) {	
+                    	
+                    	if(temp==data[i].infraAreaId){
+                    		 html += '<option selected value="' + data[i].infraAreaId + '">'
+                             + data[i].infraAreaName + '</option>';
+                    	}else{
 
                         html += '<option value="' + data[i].infraAreaId + '">'
                                 + data[i].infraAreaName + '</option>';
+                    	}
 
                     }
                     
@@ -524,39 +552,37 @@
                 });
               
             }//end of if
-            //$('#area_name').trigger('change');
-           // $("#area_name").change(showDiv) ;
         }
         
         function showDiv(){
-        	 
+        	document.getElementById("area_in_sqm").value="";
+        	document.getElementById("loc_of_area").value="";
+        	document.getElementById("instInfraAreaId").value="0";
+        	
             var areaId = document.getElementById("area_name").value;
-            //alert(areaId);
             if(areaId>=0){
 			if(areaId==0){
-				$("#area_name_div")
-				.show()
+				$("#area_name_div").show();
 				document.getElementById("instInfraAreaId").value="0";
 				document.getElementById("area_in_sqm").value="";
             	document.getElementById("loc_of_area").value="";
 			}else{
-				$("#area_name_div")
-				.hide()
+				$("#area_name_div").hide()
                 $.getJSON('${findByDelStatusAndIsActiveAndInstIdAndInfraAreaId}', {
                 	areaId : areaId,
                     ajax : 'true',
                 },
-
+ 
                 function(data) {
-                	
-                	if(!data==""){
+                	//alert(data);
+                	if(data.instInfraAreaId>0){
+                		//alert("Null not")
                 	document.getElementById("area_in_sqm").value=data.areaSqMtr;
                 	document.getElementById("loc_of_area").value=data.areaLoc;
                 	document.getElementById("instInfraAreaId").value=data.instInfraAreaId;
                 	}else{
-                		document.getElementById("area_in_sqm").value="";
-                    	document.getElementById("loc_of_area").value="";
-                    	document.getElementById("instInfraAreaId").value="0";
+                		
+                		
                 	}
                 	
                 });

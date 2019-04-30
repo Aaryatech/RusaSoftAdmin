@@ -402,7 +402,62 @@ public class InfraStructureModController {
 
 	}
 	
+	//deleteInfraArea
 	
+	
+	@RequestMapping(value = "/deleteInfraArea/{instInfraAreaId}", method = RequestMethod.GET)
+	public String deleteaccOff(HttpServletRequest request, HttpServletResponse response, @PathVariable int instInfraAreaId) {
+		String redirect = null;
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("deleteInfraArea", "showInstInfraAreawise", "0", "0", "0", "1",
+					newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (instInfraAreaId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("accOffIds");
+					System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String hodIdList = sb.toString();
+					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
+
+					map.add("instInfraAreaIdList", hodIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("instInfraAreaIdList", instInfraAreaId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteInstInfraArea", map, Info.class);
+
+				redirect = "redirect:/showInstInfraAreawise";
+			}
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteInstInfraArea at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect;
+
+	}
 	
 
 	/********************************** Infrastructure *******************************************/
