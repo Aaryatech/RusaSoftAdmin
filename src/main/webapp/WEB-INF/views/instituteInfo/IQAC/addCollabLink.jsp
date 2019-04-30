@@ -13,7 +13,6 @@
 <!-- CORE CSS TEMPLATE - END -->
 </head>
 <!-- END HEAD -->
-
 <style>
 .image-preview-input {
 	position: relative;
