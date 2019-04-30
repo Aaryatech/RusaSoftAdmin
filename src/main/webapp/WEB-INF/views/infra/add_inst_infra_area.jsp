@@ -523,16 +523,19 @@
                     +q+'</option>';
                     html += '</option>';
                     
-                    var temp="0";
+                    var temp=0;
                     temp=document.getElementById("temp").value;
-                    //alert("temp");
+                   // alert("temp");
                     var len = data.length;
                     for (var i = 0; i < len; i++) {	
                     	
                     	if(temp==data[i].infraAreaId){
                     		 html += '<option selected value="' + data[i].infraAreaId + '">'
                              + data[i].infraAreaName + '</option>';
-                    	}else{
+                    	}
+                    		
+                    		else{
+                    
 
                         html += '<option value="' + data[i].infraAreaId + '">'
                                 + data[i].infraAreaName + '</option>';
@@ -540,11 +543,25 @@
 
                     }
                     
-                    var x=0;
-                    var y="Any Other";
-                    html += '<option value="'+x+'">'
-                    +y+'</option>';
-                    html += '</option>';
+                                      
+                    if(temp==0){
+                    	//alert("If temp==0");
+                    	  var x=0;
+                          var y="Any Other";
+                          html += '<option selected value="'+x+'">'
+                          +y+'</option>';
+                          html += '</option>';
+                          //document.getElementById("other_area").show();
+          				$("#area_name_div").show();
+
+                         
+                    }else{
+                    	  var x=0;
+                          var y="Any Other";
+                          html += '<option value="'+x+'">'
+                          +y+'</option>';
+                          html += '</option>';
+                    }
 
                     $('#area_name').html(html);
                     $("#area_name").trigger("chosen:updated");

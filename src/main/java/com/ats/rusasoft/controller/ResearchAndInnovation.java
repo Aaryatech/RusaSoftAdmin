@@ -73,7 +73,7 @@ public class ResearchAndInnovation {
 						
 			MExtActList[] neighbourArr =  rest.postForObject(Constants.url+"/getAllExtActivities", map, MExtActList[].class);
 			List<MExtActList> mExtActList = new ArrayList<>(Arrays.asList(neighbourArr));
-			System.out.println("Lists="+mExtActList);
+			//System.out.println("Lists="+mExtActList);
 			
 			model.addObject("mExtActList", mExtActList);
 			model.addObject("title", "Extension Activity");
