@@ -73,11 +73,11 @@
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
-				<div class="col-lg-12"></div>
-
+				<div class="row"> 
 
 
 				<div class="col-lg-12">
+				
 					<section class="box ">
 
 						<header class="panel_header">
@@ -107,21 +107,21 @@
 
 
 
-										<div>
+									 
 
-											<div class="col-xs-12">
+											<div class="row">
 
 
 												<div class="col-xs-12">
 
+<div class="table-responsive1">
+													                            <table id="example-organisedlist"  class="table table-bordered">
 
-													<table id="example-1"
-														class="table table-striped dt-responsive display">
 														<thead>
 															<tr>
-																<th class="check" style="text-align: center; width: 5%;"><input
+																<th class="check"  ><input
 																	type="checkbox" name="selAll" id="selAll"
-																	onClick="selectedInst(this)" /> Select All</th>
+																	onClick="selectedInst(this)" title="Select All" alt="Select All" /> </th>
 																<th>Sr No</th>
 
 																<th>Course Name</th>
@@ -162,7 +162,7 @@
 																			<a
 																				href="${pageContext.request.contextPath}/editFacultyActivity/${facAct.activityId}"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
-																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a><br>  
 															 </c:if> <c:if test="${deleteAccess==0}">
 																			<a
 																				href="${pageContext.request.contextPath}/deleteFacultyActivity/${facAct.activityId}"
@@ -179,7 +179,7 @@
 														</tbody>
 
 													</table>
-
+				</div>
 
 													<c:if test="${deleteAccess==0}">
 														<button class="btn btn-primary" id="deleteId"
@@ -198,7 +198,7 @@
 
 											<div class="clearfix"></div>
 
-										</div>
+									 
 
 
 									</form>
@@ -210,7 +210,7 @@
 					</section>
 				</div>
 
-
+</div>
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
@@ -235,6 +235,14 @@
 			}
 
 		}
+		
+		  $("#example-organisedlist").dataTable({
+              responsive: false,
+              aLengthMenu: [
+                  [100, 250, 500, 1000, -1],
+                  [100, 250, 500, 1000, "All"]
+              ]
+          });
 	</script>
 
 	<script type="text/javascript">

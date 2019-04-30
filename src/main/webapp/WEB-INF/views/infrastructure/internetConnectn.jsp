@@ -235,7 +235,7 @@
 			return;
 		}
 		
-		$(document).ready(function(){
+		/* $(document).ready(function(){
 			
 			  $('#internet_access').bind("cut copy paste",function(e) {
 			
@@ -243,7 +243,7 @@
 			
 			  });
 			
-			});
+			}); */
 
 		$(document)
 				.ready(
@@ -256,7 +256,7 @@
 												var isError = false;
 												var errMsg = "";   				
 														 				  
-												if ($("#internet_access").val() == 0 || !$("#internet_access").val()) {
+												if ($("#internet_access").val() <= 0 || !$("#internet_access").val()) {
 
 													isError = true;
 													

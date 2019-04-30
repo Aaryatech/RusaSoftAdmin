@@ -35,6 +35,10 @@
 .image-preview-input-title {
 	margin-left: 2px;
 }
+
+input {
+  hyphens: none;
+}
 </style>
 
 
@@ -229,7 +233,7 @@
 												var isError = false;
 												var errMsg = "";   				
 												   
-												if (!$("#no_comp").val()) {
+												if ($("#no_comp").val() <= 0 || !$("#no_comp").val()) {
 
 													isError = true;
 													
@@ -258,7 +262,7 @@
 															.hide()
 												}
 												
-												if (!$("#purchase_amt").val()) {
+												if ($("#purchase_amt").val() <= 0 || !$("#purchase_amt").val()) {
 
 													isError = true;
 													
@@ -272,7 +276,7 @@
 															.hide()
 												}
 												
-												if (!$("#stud_util").val()) {
+												if ($("#stud_util").val() <= 0 || !$("#stud_util").val()) {
 
 													isError = true;
 													
