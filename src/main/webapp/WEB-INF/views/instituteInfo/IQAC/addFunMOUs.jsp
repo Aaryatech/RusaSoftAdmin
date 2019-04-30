@@ -125,7 +125,7 @@
 													placeholder="Title of MoU" value="${editInst.mouTitle}">
 
 												<span class="error_form text-danger" id="error_name"
-													style="display: none;">Please Enter Title of MoU </span>
+													style="display: none;">Please Enter Title of MoU. </span>
 											</div>
 										</div>
 
@@ -221,7 +221,7 @@
 													</c:choose>
 												</select> <span class="error_form text-danger" id="error_mou"
 													style="display: none;">Please Select Functional MoU
-													with Agency</span>
+													with Agency.</span>
 											</div>
 										</div>
 
@@ -235,7 +235,7 @@
 													autocomplete="off" name="otherCourse" onchange="trim(this)"
 													placeholder="" value="${editInst.mouAgency}"> <span
 													class="error_form text-danger" id="error_other"
-													style="display: none;">Please Enter Other Course</span>
+													style="display: none;">Please Enter Other Course.</span>
 											</div>
 
 										</div>
@@ -252,11 +252,11 @@
 													placeholder="dd/mm/yyyy" autocomplete="off" id="fromDate"
 													name="fromDate" value="${fdate}"> <span
 													class="error_form text-danger" id="error_fdate"
-													style="display: none;">Please Enter From Date</span>
+													style="display: none;">Please Enter From Date.</span>
 													
 													<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">From Date must be smaller than To Date. </span>
 
 											</div>
 										</div>
@@ -271,11 +271,11 @@
 													autocomplete="off" id="toDate" name="toDate"
 													placeholder="dd/mm/yyyy" value="${tdate}"> <span
 													class="error_form text-danger" id="error_tdate"
-													style="display: none;">Please Enter To Date</span>
+													style="display: none;">Please Enter To Date.</span>
 													
 													<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">To Date must be greater than From Date. </span>
 
 											</div>
 										</div>
@@ -340,7 +340,7 @@
 
 												</select> <span class="error_form text-danger" id="error_benfmou"
 													style="display: none;">Please Select Beneficiary of
-													MoU</span>
+													MoU.</span>
 
 											</div>
 										</div>
@@ -351,13 +351,14 @@
 												/Beneficiary <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="1" class="form-control"
+												<input type="text" min="1" class="form-control"
 													id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 													placeholder="No. of Beneficiary Participants "
+													onkeypress='return restrictAlphabets(event)'
 													value="${editInst.mouBeneficiaryNos}"> <span
-													class="error_form text-danger" id="error_part"
+													class="error_form text-danger" id="error_benif"
 													style="display: none;">Please Enter No. of
-													Beneficiary Participants</span>
+													beneficiary participants and value must be greater than 0.</span>
 
 											</div>
 										</div>
@@ -540,6 +541,16 @@
 				} else {
 					$("#error_benfmou").hide()
 				}
+				
+				if ($("#beneficiaryMOUNo").val() <= 0 || !$("#beneficiaryMOUNo").val()) {
+
+					isError = true;
+
+					$("#error_benif").show()
+					//return fregister_useralse;
+				} else {
+					$("#error_benif").hide()
+				}
 	
 
 				if (!isError) {
@@ -661,8 +672,20 @@
 		}
 	</script>
 
-
-
+<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 
 
 </body>

@@ -239,7 +239,7 @@
 											</label>
 
 											<div class="col-sm-6">
-												<input type="number" class="form-control" maxlength="7"
+												<input type="text" class="form-control" maxlength="7"
 													min="0" id="inst_activity_participation" autocomplete="off"
 													onchange="trim(this)" name="inst_activity_participation"
 													onkeypress='return restrictAlphabets(event)'
@@ -365,7 +365,7 @@
 
 												if ($(
 														"#inst_activity_participation")
-														.val() == 0
+														.val() <= 0
 														|| !$(
 																"#inst_activity_participation")
 																.val()) {

@@ -246,7 +246,7 @@
 												of Participants / Beneficiary<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" min="0" class="form-control"
+												<input type="text" class="form-control"
 													autocomplete="off" id="totalParticipants"
 													onkeypress='return restrictAlphabets(event)'
 													name="totalParticipants" onchange="return trim(this)"
@@ -254,7 +254,7 @@
 													value="${editInst.linkBeneficiaryNos}"> <span
 													class="error_form text-danger" id="error_part"
 													style="display: none;">Please enter No. of
-													Participants </span>
+													participants and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -378,7 +378,7 @@
 												}
 
 												if ($("#totalParticipants")
-														.val() == 0
+														.val() <= 0
 														|| !$(
 																"#totalParticipants")
 																.val()) {

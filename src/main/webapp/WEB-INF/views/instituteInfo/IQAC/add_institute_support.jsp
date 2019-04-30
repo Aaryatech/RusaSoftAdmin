@@ -127,9 +127,9 @@
 													Benefited <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="number" class="form-control"
+													<input type="text" class="form-control"
 														autocomplete="off" id="inst_students_benefited"
-														onchange="trim(this)" min="0"
+														onchange="trim(this)"
 														name="inst_students_benefited"
 														onkeypress='return restrictAlphabets(event)'
 														placeholder="No. of Students Benefited" maxlength="7"
@@ -235,7 +235,7 @@
              					$("#error_formfield1").hide()
              				} 
            				
-           				if($("#inst_students_benefited").val()==0 || !$("#inst_students_benefited").val()){
+           				if($("#inst_students_benefited").val()<=0 || !$("#inst_students_benefited").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';

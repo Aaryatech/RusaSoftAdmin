@@ -166,8 +166,8 @@
 															placeholder="No. of Full Time Faculty in Institute">
 
 														<span class="error_form text-danger" id="error_full"
-															style="display: none;">Please enter No. of Full
-															Time Faculty</span>
+															style="display: none;">Please enter No. of full
+															time faculty and value must be greater than 0.</span>
 													</div>
 												</div>
 
@@ -175,7 +175,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_order">No.
-														of Full Time Nonteaching Faculty <span class="text-danger">*</span>
+														of Full Time Non-Teaching Faculty <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
 														<input type="number" class="form-control" min="0"
@@ -186,8 +186,8 @@
 															onchange="trim(this)"
 															placeholder="No. of Full Time Nonteaching Including Office Staff">
 														<span class="error_form text-danger" id="error_non"
-															style="display: none;">Please enter No. of Full
-															Time Nonteaching Faculty</span>
+															style="display: none;">Please enter No. of full
+															time non-teaching faculty and value must be greater than 0.</span>
 													</div>
 												</div>
 
@@ -204,8 +204,8 @@
 															value="${editInstInfo.noSupportStaff}"
 															name="no_suppStaff" placeholder="No. of Support Staff">
 														<span class="error_form text-danger" id="error_supp"
-															style="display: none;">Please enter No. of Support
-															Staff</span>
+															style="display: none;">Please enter No. of support
+															staff and value must be greater than 0.</span>
 													</div>
 												</div>
 
@@ -223,7 +223,7 @@
 															placeholder="No. of current admitted student"> <span
 															class="error_form text-danger" id="error_curr"
 															style="display: none;">Please enter admitted
-															student</span>
+															student and value must be greater than 0.</span>
 													</div>
 												</div>
 
@@ -332,7 +332,7 @@
 												}
 
 												if ($("#no_fullTime_Faculty")
-														.val() == 0
+														.val() <= 0
 														|| !$(
 																"#no_fullTime_Faculty")
 																.val()) {
@@ -350,7 +350,7 @@
 												}
 
 												if ($("#no_nonTeaching_faculty")
-														.val() == 0
+														.val() <= 0
 														|| !$(
 																"#no_nonTeaching_faculty")
 																.val()) {
@@ -367,7 +367,7 @@
 													$("#error_non").hide()
 												}
 
-												if ($("#no_suppStaff").val() == 0
+												if ($("#no_suppStaff").val() <= 0
 														|| !$("#no_suppStaff")
 																.val()) {
 
@@ -385,7 +385,7 @@
 
 												if ($(
 														"#no_currAdmitted_Student")
-														.val() == 0
+														.val() <= 0
 														|| !$(
 																"#no_currAdmitted_Student")
 																.val()) {
