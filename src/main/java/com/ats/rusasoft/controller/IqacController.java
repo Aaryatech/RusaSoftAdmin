@@ -1118,8 +1118,8 @@ public class IqacController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map.add("instId", userObj.getGetData().getUserInstituteId());
-				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
+				map.add("deptIds", userObj.getStaff().getDeptId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getDeptListDeptIdIn", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList edt:" + deptList.toString());
 				model.addObject("deptList", deptList);

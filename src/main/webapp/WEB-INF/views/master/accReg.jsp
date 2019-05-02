@@ -110,7 +110,7 @@
 											<div class="col-sm-10">
 												<select id="designation" name="designation"
 													class="form-control" onchange="showForm()">
-
+														
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
 															<c:when
@@ -135,6 +135,7 @@
 											</label>
 											<div class="col-sm-10">
 												<select id="dept_id" name="dept_id" class="" multiple>
+												<option>Select Department</option>
 													<c:forEach items="${deptList}" var="dept">
 														<c:set var="flag" value="0"></c:set>
 														<c:forEach items="${deptIdList}" var="selFr"
@@ -669,7 +670,7 @@
 		}
 	</script>
 	<script type="text/javascript">
-		function checkUnique(inputValue, valueType) {
+		/* function checkUnique(inputValue, valueType) {
 
 			document.getElementById("sub1").disabled = false;
 			document.getElementById("sub2").disabled = false;
@@ -740,7 +741,7 @@
 									}
 								});
 		}
-
+ */
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
 			/* var form=document.getElementById("form_sample_2");
@@ -931,6 +932,7 @@
 									document.getElementById("dateOfJoin").value = data.joiningDate;
 									document.getElementById("acc_off_relDate").value = data.realivingDate;
 									document.getElementById("acc_id").value = data.facultyId;
+									
 
 									//Mahendra
 									//single select
@@ -945,6 +947,16 @@
 								 	temp = (data.deptId).split(",");
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
+									}else{
+										document.getElementById("email").value = "";
+										//document.getElementById("contactNo").value = "";
+										document.getElementById("accName").value = "";
+										document.getElementById("dateOfJoin").value = "";
+										document.getElementById("acc_off_relDate").value = "";
+										document.getElementById("acc_id").value = 0;
+										document.getElementById("dept_id").value = 0;
+										document.getElementById("quolif").value = 0;
+										document.getElementById("designation").value = 0;
 									}
 
 								});

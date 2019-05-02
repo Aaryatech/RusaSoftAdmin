@@ -744,7 +744,7 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-	if(data.facultyId>0){
+								if(data.facultyId>0){
 									document.getElementById("email").value = data.email;
 									document.getElementById("contactNo").value = data.contactNo;
 									document.getElementById("hodName").value = data.facultyFirstName;
@@ -764,17 +764,18 @@
 								 	temp = (data.deptId).split(",");
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
-	}else{
-		
-	}
+									}else{
+										document.getElementById("email").value = "";
+										document.getElementById("contactNo").value = "";
+										document.getElementById("hodName").value = "";
+										document.getElementById("dateOfJoin").value = "";
+										document.getElementById("hod_id").value = "";
+									}
 
 
 								});
-		}
+				}
 	</script>
-
-
-
 
 </body>
 </html>

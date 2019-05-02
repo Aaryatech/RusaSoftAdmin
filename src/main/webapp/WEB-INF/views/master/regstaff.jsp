@@ -730,15 +730,20 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-if(data.facultyId>0){
-									document.getElementById("email").value = data.email;
-									document.getElementById("contactNo").value = data.contactNo;
-									document.getElementById("dateOfJoin").value = data.joiningDate;
-									document.getElementById("relDate").value = data.realivingDate;
-									document.getElementById("faculty_id").value = data.facultyId;
-									document
-											.getElementById("faculty_first_name").value = data.facultyFirstName;
-
+									if(data.facultyId>0){
+										document.getElementById("faculty_id").value = data.facultyId;
+										document.getElementById("faculty_first_name").value = data.facultyFirstName;
+										document.getElementById("yr_highest_qualification_acqrd").value = data.hightestQualificationYear;
+										
+										
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("relDate").value = data.realivingDate;
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										
+									/* document.getElementById("hod_quolf").value=data.highestQualification;
+									$("#hod_quolf").trigger("chosen:updated");
+										
 									document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
 									$("#designation").trigger("chosen:updated");
 									var temp = new Array();
@@ -746,8 +751,28 @@ if(data.facultyId>0){
 									temp = (data.deptId).split(",");
 									//alert(temp);
 									$("#dept").val(temp);
-									$("#dept").trigger("chosen:updated");
+									$("#dept").trigger("chosen:updated"); */
+								
+									document.getElementById("designation").value=data.currentDesignationId;
+									$("#designation").trigger("chosen:updated");
+									//single select
+									document.getElementById("hod_quolf").value=data.highestQualification;
+									$("#hod_quolf").trigger("chosen:updated");
+									//multiple select
+								 	var temp = new Array();
+								 	temp = (data.deptId).split(",");
+									  $('#dept').val(temp);
+									  $('#dept').trigger('change'); // Notify any JS components that the value changed
 }else{
+	document.getElementById("faculty_id").value = 0;
+	document.getElementById("faculty_first_name").value = "";
+	document.getElementById("yr_highest_qualification_acqrd").value = "";
+	document.getElementById("dateOfJoin").value = "";
+	document.getElementById("email").value = "";
+	document.getElementById("contactNo").value = "";
+	document.getElementById("dept").value = 0;
+	document.getElementById("hod_quolf").value = 0;
+	document.getElementById("designation").value = 0;
 	
 }
 

@@ -744,6 +744,15 @@ if(data.facultyId>0){
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 }else{
+	document.getElementById("email").value = "";
+	//document.getElementById("contactNo").value = "";
+	document.getElementById("libName").value = "";
+	document.getElementById("dateOfJoin").value = "";
+	document.getElementById("acc_off_relDate").value = "";
+	document.getElementById("lib_id").value = 0;
+	document.getElementById("dept_id").value = 0;
+	document.getElementById("quolif").value = 0;
+	document.getElementById("designation").value = 0;
 	
 }
 

@@ -729,7 +729,14 @@ $(function () {
 										  $('#dept_id').val(temp);
 										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 								 }else{
-									 
+										document.getElementById("email").value = "";
+									//	document.getElementById("contact_no").value = "";
+										document.getElementById("dean_name").value = "";
+										document.getElementById("join_date").value = "";
+										document.getElementById("dept_id").value = 0;
+										document.getElementById("quolif").value = 0;
+										document.getElementById("designation").value = 0;
+										document.getElementById("acc_off_relDate").value = "";
 								 }
 
 								});
