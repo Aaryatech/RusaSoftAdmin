@@ -791,15 +791,18 @@ public class FacPersonalController {
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("facultyId", userObj.getStaff().getFacultyId());
 				// getInstitute
-				FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademicByFacId", map,
-						FacultyAcademic.class);
+			
 				try {
+					
+					FacultyAcademic editFacAcad = rest.postForObject(Constants.url + "getFacAcademicByFacId", map,
+							FacultyAcademic.class);
+					model.addObject("editFacAcad", editFacAcad);
+
 					// editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
 				} catch (Exception e) {
 					System.err.println("Exce in show Edit showEditFacAcademic /showEditFacAcademic");
 				}
 
-				model.addObject("editFacAcad", editFacAcad);
 
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("type", 1);

@@ -124,8 +124,8 @@
 														<th>Department</th>
 														<th>Project Sanction Year</th>
 														<th>Sponsoring Authority</th>
-														<th>Total Amount</th>
-														<th>Amount Received</th>
+														<th>Grant Sanctioned</th>
+														<th>Grant Received</th>
 														<th>Action</th>
 													</tr>
 												</thead>
@@ -154,7 +154,7 @@
 																	value="${journal.projSponsor}" /></td>
 
 															<td style="text-align: right"><c:out
-																	value="${journal.projTotalAmt}" /></td>
+																	value="${journal.projGrant}" /></td>
 
 															<td style="text-align: right"><c:out
 																	value="${journal.projAmtRec}" /></td>

@@ -144,7 +144,7 @@
 											<div class="form-group">
 
 												<label class="control-label col-sm-2" for="amount">Amount
-													of Consultancy <span class="text-danger">*</span>
+													of Consultancy (Rs.) <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"

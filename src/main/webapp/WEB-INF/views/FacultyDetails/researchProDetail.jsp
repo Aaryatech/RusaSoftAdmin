@@ -224,19 +224,19 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="smallheading">Grant
+											<label class="control-label col-sm-2" for="smallheading">Grant Sanctioned(Rs.) 
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="grant"
-													name="grant" placeholder="Grant" autocomplete="off"
+													name="grant" placeholder="Grant Sanctioned in Rs." autocomplete="off"
 													value="${editProject.projGrant}"> <span
 													class="error_form text-danger" id="error_grant"
-													style="display: none;">Please enter Grant</span>
+													style="display: none;">Please enter Grant Sanctioned</span>
 
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group" style="display: none">
 
 											<label class="control-label col-sm-2" for="page_order">Total
 												Amount <span class="text-danger">*</span>
@@ -256,16 +256,21 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="page_order">
-												Amount Received <span class="text-danger">*</span>
+												Grant Received(Rs.)<span class="text-danger">*</span>
 											</label>
 
 
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="amtRec"
-													min="0" name="amtRec" placeholder="Amount Received"
+													min="0" name="amtRec" placeholder="Grant Received in Rs."
 													autocomplete="off" value="${editProject.projAmtRec}">
 												<span class="error_form text-danger" id="error_amtRec"
-													style="display: none;">Please enter Amount Received</span>
+													style="display: none;">Please enter Grant Received</span>
+													
+													<span class="error_form text-danger" id="error_amtRec_amt"
+													style="display: none;">Grant received amount can not be greater than sanctioned</span>
+													
+													
 											</div>
 
 
@@ -590,7 +595,7 @@ function submit_f(view){
             				
             				//error_spoAuth
             				
-            				if(!$("#totalAmt").val() || !($("#totalAmt").val()>0)){
+            				/* if(!$("#totalAmt").val() || !($("#totalAmt").val()>0)){
             					 
             				isError=true;
             				errMsg += '<li>Please enter Total Amount</li>';
@@ -600,7 +605,7 @@ function submit_f(view){
             					 
             				} else {
             					$("#error_totalAmt").hide();
-            				}
+            				} */
             				
             				
             				if(!$("#amtRec").val() || !($("#amtRec").val()>0)){
@@ -617,7 +622,20 @@ function submit_f(view){
             				
             				//error_fromDate
             				
+            				var grantSac=0;
+            				var grantRec=0;
+            				grantRec=$("#amtRec").val();
+            				grantSac=$("#grant").val();
+            			//	alert("grantRec " +grantRec);
+            				//alert("grantSac " +grantSac);
             				
+            				if(parseInt(grantRec)>parseInt(grantSac)){
+            					$("#amtRec").addClass("has-error")
+                				$("#error_amtRec_amt").show();
+            				}else{
+            					$("#error_amtRec_amt").hide();
+            				}
+            			
             				
             				 if(!$("#fromDate").val()){
            					 

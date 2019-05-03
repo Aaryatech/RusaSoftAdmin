@@ -212,7 +212,7 @@
 														Weakness <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" maxlength="10" class="form-control"
+														<input type="text" maxlength="200" class="form-control"
 															id="swocTextWeak" name="swocTextWeak"
 															placeholder="Weakness" required>
 													</div>

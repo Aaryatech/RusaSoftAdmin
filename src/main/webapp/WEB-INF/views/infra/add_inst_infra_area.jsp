@@ -584,8 +584,8 @@
 				document.getElementById("area_in_sqm").value="";
             	document.getElementById("loc_of_area").value="";
 			}else{
-				$("#area_name_div").hide()
-                $.getJSON('${findByDelStatusAndIsActiveAndInstIdAndInfraAreaId}', {
+				$("#area_name_div").hide();
+                /* $.getJSON('${findByDelStatusAndIsActiveAndInstIdAndInfraAreaId}', {
                 	areaId : areaId,
                     ajax : 'true',
                 },
@@ -602,7 +602,7 @@
                 		
                 	}
                 	
-                });
+                }); */
 				//
 			}
             }

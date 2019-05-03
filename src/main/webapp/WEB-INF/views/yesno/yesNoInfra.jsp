@@ -88,6 +88,7 @@
 											action="${pageContext.request.contextPath}/submitYesNo"
 											method="post" name="form_sample_2" id="form_sample_2"
 											onsubmit="return confirm('Do you really want to submit the form?');">
+										<input type="hidden" id="selectYestNoInfra" name="selectYestNoInfra" value="1">
 	
 											<!-- <ul class="nav nav-tabs">
 												<li class="active"><a href="#home" data-toggle="tab">
@@ -331,11 +332,12 @@
 											<div class="form-group">
 												<div class="col-sm-offset-6 col-sm-6">
 													<!-- <input type="submit" class="btn btn-primary" value="Submit"> -->
+	<c:if test="${addAccess==0}">
 	
 													<button type="submit" id="sub_button"
 														class="btn btn-primary">
 														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
-													</button>
+													</button></c:if>
 													<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
 												</div>
 											</div>
@@ -452,7 +454,7 @@
 					var acButton = '<input type="radio" name="dynamicyesno'+srindex+'" value="1" onchange="othervissibledive('+srindex+',1)" checked>'+
 					'YES <input type="radio" id="dynamicyesno'+srindex+'" name="dynamicyesno'+srindex+'" value="0" onchange="othervissibledive('+srindex+',0)"> NO'
 					
-					var div = '<div id="otherresps'+srindex+'"> <div class="col-sm-3">Enter Value</div> <div class="col-sm-5"> <input type="text" maxlength="50"'+
+					var div = '<div id="otherresps'+srindex+'"> <div class="col-sm-3">Enter Value</div> <div class="col-sm-5"> <input type="number" maxlength="50"'+
 					' class="form-control" id="dynamicyesnovalue'+srindex+'" name="dynamicyesnovalue'+srindex+'" placeholder="Enter value" > </div> </div>'
 					
 					
