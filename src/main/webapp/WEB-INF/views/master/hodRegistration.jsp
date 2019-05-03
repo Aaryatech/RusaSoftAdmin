@@ -765,11 +765,11 @@
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 									}else{
-										document.getElementById("email").value = "";
+								/* 		document.getElementById("email").value = "";
 										document.getElementById("contactNo").value = "";
 										document.getElementById("hodName").value = "";
 										document.getElementById("dateOfJoin").value = "";
-										document.getElementById("hod_id").value = "";
+										document.getElementById("hod_id").value = ""; */
 									}
 
 

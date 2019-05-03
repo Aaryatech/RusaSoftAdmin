@@ -93,7 +93,7 @@
 												<input type="text" class="form-control" id="facultyName"
 													onchange="trim(this)" autocomplete="off"
 													value="${editFaculty.facultyFirstName}" name="facultyName"
-													placeholder="Pricipal Name"> <span
+													placeholder="Principal Name"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter Principal name</span>
 											</div>

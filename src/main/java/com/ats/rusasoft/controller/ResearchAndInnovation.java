@@ -360,7 +360,7 @@ public class ResearchAndInnovation {
 			System.out.println("Lists="+rsrchMouList);
 			
 			model.addObject("rsrchMouList", rsrchMouList);
-			model.addObject("title", "Institute Research Development MOUs");
+			model.addObject("title", "Institute Research Development MoUs");
 
 			Info add = AccessControll.checkAccess("showInstResrchDevMous", "showInstResrchDevMous", "0", "1", "0", "0",
 					newModuleList);
@@ -422,7 +422,7 @@ public class ResearchAndInnovation {
 					model.addObject("mouList", mouList);
 					
 					model.addObject("tMous", tMous);
-					model.addObject("title", "Add Institute Research Development MOUs");
+					model.addObject("title", "Add Institute Research Development MoUs");
 			}
 		} catch (Exception e) {
 
@@ -519,7 +519,7 @@ public class ResearchAndInnovation {
 				System.out.println("List="+mouList);
 				model.addObject("mouList", mouList);
 
-				model.addObject("title", "Edit Institute Research Development MOUs");
+				model.addObject("title", "Edit Institute Research Development MoUs");
 			}
 		} catch (Exception e) {
 

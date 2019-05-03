@@ -683,14 +683,14 @@
 										  $('#dept_id').val(temp);
 										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 									 }else{
-											document.getElementById("email").value = "";
+											/* document.getElementById("email").value = "";
 											document.getElementById("contactNo").value = "";
 											document.getElementById("iqacName").value = "";
 											document.getElementById("dateOfJoin").value = ""; 
 											document.getElementById("dept_id").value = 0;
 											document.getElementById("quolif").value = 0;
 											document.getElementById("designation").value = 0;
-											document.getElementById("iqac_id").value = 0;     
+											document.getElementById("iqac_id").value = 0;    */  
 									 }
 
 									 

@@ -654,7 +654,7 @@ public class FacultyPatentController {
 
 				model = new ModelAndView("FacultyDetails/outReachList");
 
-				model.addObject("title", "Faculty Attended - Out Reach Activity");
+				model.addObject("title", "Attended - Out Reach Activity");
 
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -727,7 +727,7 @@ public class FacultyPatentController {
 
 			model = new ModelAndView("FacultyDetails/outReach");
 
-			model.addObject("title", "Add Faculty Attended - Out Reach Activity");
+			model.addObject("title", "Add Attended - Out Reach Activity");
 
 			FacultyOutreach editInst = new FacultyOutreach();
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -947,7 +947,7 @@ public class FacultyPatentController {
 				int edit_outreach_id = Integer.parseInt(request.getParameter("e_outreach_id"));
 				System.err.println("edit_outreach_id id is" + edit_outreach_id);
 
-				model.addObject("title", "Edit Faculty Attended - Out Reach Activity");
+				model.addObject("title", "Edit Attended - Out Reach Activity");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("outreachId", edit_outreach_id);
 

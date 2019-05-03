@@ -496,7 +496,7 @@ public class FacultyModuleController {
 				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 
 				model.addObject("activity", facAct);
-				model.addObject("title", "Add Faculty Organized - Out Reach Activity");
+				model.addObject("title", "Add Organized - Out Reach Activity");
 			}
 
 		} catch (Exception e) {
@@ -547,7 +547,7 @@ public class FacultyModuleController {
 				List<GetFacultyActivity> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
 				model.addObject("facActList", facActList);
 
-				model.addObject("title", "Faculty Organized - Out Reach Activity");
+				model.addObject("title", "Organized - Out Reach Activity");
 				Info add = AccessControll.checkAccess("showOrganizedList", "showOrganizedList", "0", "1", "0", "0",
 						newModuleList);
 				Info edit = AccessControll.checkAccess("showOrganizedList", "showOrganizedList", "0", "0", "1", "0",
@@ -644,7 +644,7 @@ public class FacultyModuleController {
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				model = new ModelAndView("FacultyDetails/organized");
-				model.addObject("title", "Edit Faculty Organized - Out Reach Activity");
+				model.addObject("title", "Edit Organized - Out Reach Activity");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -1697,7 +1697,7 @@ public class FacultyModuleController {
 
 				model = new ModelAndView("FacultyDetails/outReachContri");
 
-				model.addObject("title", "Add Faculty's Contribution in Out Reach Activity");
+				model.addObject("title", "Add Contribution - Out Reach Activity");
 				model.addObject("facContri", facCon);
 			}
 		} catch (Exception e) {
@@ -1795,7 +1795,7 @@ public class FacultyModuleController {
 				List<FacultiContributionList> faccList = new ArrayList<>(Arrays.asList(faccArr));
 
 				model.addObject("ContriList", faccList);
-				model.addObject("title", "Faculty's Contribution in Out Reach Activity");
+				model.addObject("title", "Contribution - Out Reach Activity");
 				Info add = AccessControll.checkAccess("showOutReachContriList", "showOutReachContriList", "0", "1", "0",
 						"0", newModuleList);
 				Info edit = AccessControll.checkAccess("showOutReachContriList", "showOutReachContriList", "0", "0",
@@ -1854,7 +1854,7 @@ public class FacultyModuleController {
 				FacultyContribution fcondata = rest.postForObject(Constants.url + "/getOutReachContriById", map,
 						FacultyContribution.class);
 				model.addObject("facContri", fcondata);
-				model.addObject("title", "Edit Faculty's Contribution in Out Reach Activity");
+				model.addObject("title", "Edit Contribution - Out Reach Activity");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

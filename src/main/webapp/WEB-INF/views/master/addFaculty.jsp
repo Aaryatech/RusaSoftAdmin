@@ -108,7 +108,7 @@
 												<div class="col-sm-9">
 													<input type="text"  class="form-control" id="dept_name"
 														maxlength="80" onchange="trim(this)" name="dept_name"
-														placeholder="Deptartment Name" value="${dept.deptName}">
+														placeholder="Department Name" value="${dept.deptName}">
 			 											<span class="error_form text-danger" id="dept_name_field"
 															style="display: none;">Please enter department name</span>
 												</div>

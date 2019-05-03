@@ -764,7 +764,7 @@
 									  $('#dept').val(temp);
 									  $('#dept').trigger('change'); // Notify any JS components that the value changed
 }else{
-	document.getElementById("faculty_id").value = 0;
+	/* document.getElementById("faculty_id").value = 0;
 	document.getElementById("faculty_first_name").value = "";
 	document.getElementById("yr_highest_qualification_acqrd").value = "";
 	document.getElementById("dateOfJoin").value = "";
@@ -772,7 +772,7 @@
 	document.getElementById("contactNo").value = "";
 	document.getElementById("dept").value = 0;
 	document.getElementById("hod_quolf").value = 0;
-	document.getElementById("designation").value = 0;
+	document.getElementById("designation").value = 0; */
 	
 }
 

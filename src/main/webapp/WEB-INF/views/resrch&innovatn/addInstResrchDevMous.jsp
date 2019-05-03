@@ -99,7 +99,7 @@
 														
 													<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Select  Research Development
-												MOU<span class="text-danger">*</span>
+												MoU<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<select id="activity_id" name="activity_id" class="form-control" onclick="checkPhdGuide(this.value)">
@@ -139,7 +139,7 @@
 														
 												<div class="form-group" id="ihide" style="display: none;">
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">MOU
+															<label class="control-label col-sm-2" for="smallheading">MoU
 																Title<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
@@ -168,14 +168,14 @@
 														<div class="form-group">
 											<label class="control-label col-sm-2" for="year"
 												style="text-align: left;">
-												MOU Signed Year<span class="text-danger">*</span>
+												MoU Signed Year<span class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepickeryear"
 													data-min-view-mode="years" data-start-view="2"
 													data-format="yyyy"
-													placeholder="Year of MOU Signed"
+													placeholder="Year of MoU Signed"
 													id="mou_signed_year"
 													value="${tMous.mouSignedYear}"
 													name="mou_signed_year" autocomplete="off"
@@ -214,12 +214,12 @@
 														</div>
 														
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading"> MOU Activities 
-															MOU <span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="smallheading"> MoU Activities 
+															<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="mou_avtivity" onchange="trim(this)"
-																		name="mou_avtivity" placeholder="MOU Activity" 
+																		name="mou_avtivity" placeholder="MoU Activity" 
 																	value="${tMous.activitiesMou}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter mou activity.</span>
 															</div>

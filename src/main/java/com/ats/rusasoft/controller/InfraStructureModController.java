@@ -50,7 +50,7 @@ public class InfraStructureModController {
 
 			model = new ModelAndView("infra/list_inst_infra_area");
 
-			model.addObject("title", "Institute Infrastructure Detail Area wise");
+			model.addObject("title", "Institute Infrastructure Detail");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -130,7 +130,7 @@ public class InfraStructureModController {
 
 			model = new ModelAndView("infra/add_inst_infra_area");
 
-			model.addObject("title", "Add Institute Infrastructure Detail Area wise");
+			model.addObject("title", "Add Institute Infrastructure Detail");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -330,7 +330,7 @@ public class InfraStructureModController {
 
 	}
 	
-	//showEditInstInfraArea
+	
 	@RequestMapping(value = "/showEditInstInfraArea", method = RequestMethod.POST)
 	public ModelAndView showEditInstInfraArea(HttpServletRequest request, HttpServletResponse response) {
 
@@ -339,7 +339,7 @@ public class InfraStructureModController {
 
 			model = new ModelAndView("infra/add_inst_infra_area");
 
-			model.addObject("title", "Edit Institute Infrastructure Detail Area wise");
+			model.addObject("title", "Edit Institute Infrastructure Detail");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
