@@ -321,7 +321,7 @@ public class MastersController {
 
 			if (viewAccess.isError() == false) {
 				model = new ModelAndView("master/hodList");
-				model.addObject("title", "HOD Registration List");
+				model.addObject("title", "HOD Registration");
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());

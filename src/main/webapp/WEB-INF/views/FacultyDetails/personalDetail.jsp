@@ -112,7 +112,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_name">
-												Name<span class="text-danger">*</span>
+												Name(Full)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" readonly class="form-control"
@@ -353,11 +353,11 @@
 													onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
-												<%-- <a
-													href="${pageContext.request.contextPath}/showPersonalDetails"><button
+												<a
+													href="${pageContext.request.contextPath}/showEditFacAcademic"><button
 														type="button" id="sub2" class="btn btn-primary">
-														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
-													</button></a> --%>
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next
+													</button></a> 
 											</div>
 											<input type="hidden" id="staff_id" name="staff_id"
 												value="${staff.facultyId}"> <input type="hidden"

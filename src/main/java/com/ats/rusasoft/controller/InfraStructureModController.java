@@ -50,7 +50,7 @@ public class InfraStructureModController {
 
 			model = new ModelAndView("infra/list_inst_infra_area");
 
-			model.addObject("title", "List Institute Infrastructure Detail Area wise");
+			model.addObject("title", "Institute Infrastructure Detail Area wise");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -554,7 +554,7 @@ public class InfraStructureModController {
 				List<EContentDevFacility> contentList = new ArrayList<>(Arrays.asList(econtentarr));
 				System.err.println("eCont="+contentList);
 				model.addObject("contentList", contentList);
-				model.addObject("title", "E-Content Development List");
+				model.addObject("title", "E-Content Development");
 
 				Info add = AccessControll.checkAccess("econtentDevelopment", "econtentDevelopment", "0", "1", "0", "0",
 						newModuleList);
@@ -784,7 +784,7 @@ public class InfraStructureModController {
 				List<ItInfrastructure> infraList = new ArrayList<>(Arrays.asList(infraStructarr));
 				System.err.println("It="+infraList);
 				model.addObject("infraList", infraList);
-				model.addObject("title", "It Infrastructure List");
+				model.addObject("title", "It Infrastructure");
 
 				Info add = AccessControll.checkAccess("showItInfrastructure", "showItInfrastructure", "0", "1", "0", "0",
 						newModuleList);
@@ -1045,7 +1045,7 @@ public class InfraStructureModController {
 				  System.err.println("It="+connList);
 				  model.addObject("connList", connList);
 				 
-				model.addObject("title", "Internet Connection List");
+				model.addObject("title", "Internet Connection");
 
 				Info add = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "1", "0", "0",
 						newModuleList);

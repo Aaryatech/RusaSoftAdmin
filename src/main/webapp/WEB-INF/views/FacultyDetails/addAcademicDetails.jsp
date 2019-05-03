@@ -116,7 +116,7 @@
 
 													<div class="form-group">
 														<label class="control-label col-sm-2"
-															for="fQualificationId"> Qualification<span
+															for="fQualificationId">Highest Qualification<span
 															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
@@ -197,7 +197,7 @@
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="fUniversity">University
+														<label class="control-label col-sm-2" for="fUniversity">University/Board
 															<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
@@ -235,8 +235,8 @@
 
 														<div class="col-sm-offset-2 col-sm-10">
 															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-<%-- 														<a href="${pageContext.request.contextPath}/showAcademicDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
- --%>														</div>
+ 														<a href="${pageContext.request.contextPath}/showAddMphillDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next</button></a>
+ 															</div>
 
 														<input type="hidden" id="fac_aca_id" name="fac_aca_id"
 															value="${editFacAcad.fAcaId}"> <input

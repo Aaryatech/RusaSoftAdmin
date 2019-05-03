@@ -982,7 +982,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/libList");
 
-				model.addObject("title", "Librarian Registration List");
+				model.addObject("title", "Librarian Registration");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 
@@ -1399,7 +1399,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/studList");
 
-				model.addObject("title", "Specific Student Information List");
+				model.addObject("title", "Specific Student Information");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				System.out.println("Student list inst id::::" + inst_id);

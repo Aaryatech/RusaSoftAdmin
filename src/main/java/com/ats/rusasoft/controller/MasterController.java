@@ -544,7 +544,7 @@ public class MasterController {
 				model.addObject("accOffList", accOffList);
 				model.addObject("listMapping", "showAccList");
 
-				model.addObject("title", "Account Officer Registration List");
+				model.addObject("title", "Account Officer Registration");
 
 				Info addAccess = AccessControll.checkAccess("showAccList", "showAccList", "0", "1", "0", "0",
 						newModuleList);

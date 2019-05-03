@@ -547,7 +547,7 @@ public class FacultyModuleController {
 				List<GetFacultyActivity> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
 				model.addObject("facActList", facActList);
 
-				model.addObject("title", "Faculty Organized - Out Reach Activity List");
+				model.addObject("title", "Faculty Organized - Out Reach Activity");
 				Info add = AccessControll.checkAccess("showOrganizedList", "showOrganizedList", "0", "1", "0", "0",
 						newModuleList);
 				Info edit = AccessControll.checkAccess("showOrganizedList", "showOrganizedList", "0", "0", "1", "0",
@@ -1795,7 +1795,7 @@ public class FacultyModuleController {
 				List<FacultiContributionList> faccList = new ArrayList<>(Arrays.asList(faccArr));
 
 				model.addObject("ContriList", faccList);
-				model.addObject("title", "Faculty's Contribution in Out Reach Activity List");
+				model.addObject("title", "Faculty's Contribution in Out Reach Activity");
 				Info add = AccessControll.checkAccess("showOutReachContriList", "showOutReachContriList", "0", "1", "0",
 						"0", newModuleList);
 				Info edit = AccessControll.checkAccess("showOutReachContriList", "showOutReachContriList", "0", "0",
@@ -2033,7 +2033,7 @@ public class FacultyModuleController {
 				List<GetFacultyPhdGuide> phdList = new ArrayList<>(Arrays.asList(phdArr));
 				System.out.println("List:" + phdList);
 				model.addObject("phdList", phdList);
-				model.addObject("title", "Ph.D. Guidance List");
+				model.addObject("title", "Ph.D. Guidance");
 				Info add = AccessControll.checkAccess("showPhdGuideList", "showPhdGuideList", "0", "1", "0", "0",
 						newModuleList);
 				Info edit = AccessControll.checkAccess("showPhdGuideList", "showPhdGuideList", "0", "0", "1", "0",

@@ -50,7 +50,7 @@ public class FacultyConsultancyController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("FacultyDetails/consultancy");
-				model.addObject("title", "Faculty Consultancy Work Details List");
+				model.addObject("title", "Faculty Consultancy Work Details");
 
 				Info add = AccessControll.checkAccess("showConsultancyList", "showConsultancyList", "0", "1", "0", "0",
 						newModuleList);

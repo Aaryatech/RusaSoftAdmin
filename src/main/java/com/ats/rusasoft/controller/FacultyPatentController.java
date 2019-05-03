@@ -97,7 +97,7 @@ public class FacultyPatentController {
 
 				System.out.println("faculty Patent List :" + facultyPatentList);
 
-				model.addObject("title", "Faculty's Patent Work Details List");
+				model.addObject("title", "Faculty's Patent Work Details");
 
 				model.addObject("facultyPatentList", facultyPatentList);
 				Info add = AccessControll.checkAccess("showPatentDetailsList", "showPatentDetailsList", "0", "1", "0",
@@ -397,7 +397,7 @@ public class FacultyPatentController {
 				 */
 				System.out.println("faculty Patent List :" + facultyAwardList);
 
-				model.addObject("title", "Faculty Received Award - Recognition Details List");
+				model.addObject("title", "Faculty Received Award - Recognition Details");
 
 				model.addObject("facultyAwardList", facultyAwardList);
 
@@ -654,7 +654,7 @@ public class FacultyPatentController {
 
 				model = new ModelAndView("FacultyDetails/outReachList");
 
-				model.addObject("title", "Faculty Attended - Out Reach Activity List");
+				model.addObject("title", "Faculty Attended - Out Reach Activity");
 
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();

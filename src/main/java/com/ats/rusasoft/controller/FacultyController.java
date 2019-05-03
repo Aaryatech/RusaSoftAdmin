@@ -198,7 +198,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/journalPubList");
 
-				model.addObject("title", "Faculty's Published Journal Details List");
+				model.addObject("title", "Faculty's Published Journal Details");
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -474,7 +474,7 @@ public class FacultyController {
 
 				model = new ModelAndView("FacultyDetails/researchProjectList");
 
-				model.addObject("title", "Faculty's Research Project Details List");
+				model.addObject("title", "Faculty's Research Project Details");
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -608,7 +608,7 @@ public class FacultyController {
 			} else {
 
 				model = new ModelAndView("FacultyDetails/subDetails");
-				model.addObject("title", "Faculty's Teaching Subject Details List");
+				model.addObject("title", "Faculty's Teaching Subject Details");
 
 				int yId = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();

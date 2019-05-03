@@ -385,7 +385,7 @@ public class IqacController {
 				// System.out.println("IQACLIST" + userObj.getStaff().getIsPrincipal());
 
 				model.addObject("QList", qacList);
-				model.addObject("title", "IQAC List");
+				model.addObject("title", "IQAC Registration");
 				
 				model.addObject("listMapping", "showIqacList");
 
@@ -996,7 +996,7 @@ public class IqacController {
 
 				model = new ModelAndView("master/staffList");
 
-				model.addObject("title", "Faculty List");
+				model.addObject("title", "Faculty Registration");
 				//int facId = (int) session.getAttribute("instituteId");
 				int user = userObj.getUserId();
 				System.err.println("User="+user);
@@ -1591,7 +1591,7 @@ public class IqacController {
 			} else {
 				model = new ModelAndView("master/deanList");
 
-				model.addObject("title", "Dean R & D List");
+				model.addObject("title", "Dean Registration ");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 				int yId = (int) session.getAttribute("acYearId");
@@ -1758,7 +1758,7 @@ public class IqacController {
 			} else {
 				model = new ModelAndView("master/traningPlacementOfficerList");
 
-				model.addObject("title", "Traning & Placement Officer List");
+				model.addObject("title", "Traning & Placement Officer");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 				int yId = (int) session.getAttribute("acYearId");
@@ -2191,7 +2191,7 @@ public class IqacController {
 			} else {
 				model = new ModelAndView("master/showExtensionActivityOfficerList");
 
-				model.addObject("title", "Extension Activity Officer List");
+				model.addObject("title", "Extension Activity Officer");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 				int yId = (int) session.getAttribute("acYearId");
