@@ -181,7 +181,7 @@ public class MasterController {
 
 				model = new ModelAndView("master/instituteList");
 
-				model.addObject("title", "Verified Institute List");
+				model.addObject("title", "Verified Institute");
 
 				Institute editInst = new Institute();
 

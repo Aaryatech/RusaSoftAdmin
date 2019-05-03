@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,6 +36,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -848,5 +850,230 @@ System.err.println("Staff" +staff);
 	 * 
 	 * }
 	 */
+	
+	@RequestMapping(value = "/changeMobNoForm/{id}", method = RequestMethod.GET)
+	public ModelAndView changeMobNo(@PathVariable("id") int id ,HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		try {
+
+			model = new ModelAndView("changeMobNo");
+			System.out.println("Id Found"+id);
+			model.addObject("title","Change Contact No.");
+			map.add("id", id);
+			Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+			System.out.println("staff" + staff.getContactNo());
+			model.addObject("mobNo",staff.getContactNo());
+			
+		} catch (Exception e) {
+
+			System.err.println("exception In changeMobNoForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/getOTPByNo", method = RequestMethod.POST)
+	public ModelAndView getOTPByNo(HttpServletRequest request, HttpServletResponse response) {
+		String c=null;
+		System.err.println("Hiii  checkValue  " );
+		Info info = new Info();
+		ModelAndView model = null;
+		
+
+
+		try {
+			//model = new ModelAndView("forgotPassword");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String contact = request.getParameter("Oldcontact");
+			System.err.println("Info inputValue  " + contact);
+			
+			map.add("contact", contact);
+		
+			info = rest.postForObject(Constants.url + "changeContctNo", map, Info.class);
+			System.err.println("Info Response  " + info.toString());
+			
+			
+			if(info.isError()==true){
+				model = new ModelAndView("forgotPassword");
+				 //c="redirect:/showforgotPassForm";
+				model.addObject("msg","Invalid User Name");
+				
+			}
+			else {
+				model = new ModelAndView("verifyOTP");
+				//  c= "redirect:/showVerifyOTP";
+				model.addObject("username",info.getMsg());
+				model.addObject("flag",1);
+				
+			}
+			
+			
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/OTPVerificationByContact", method = RequestMethod.POST)
+	public ModelAndView OTPVerificationByContact(HttpServletRequest request, HttpServletResponse response) {
+
+		System.err.println("Hiii  OTPVerification  " );
+		Info info = new Info();
+		ModelAndView model = null;
+
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String otp = request.getParameter("otp");
+			
+			map.add("otp", otp);
+		
+			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map,Staff.class);
+			/*System.err.println("hashRes Response  " + hashRes.toString());
+			
+			Staff staff=hashRes.get(1);
+			System.err.println("hashRes Response  " + hashRes.get(1));*/
+
+			if(staff==null){
+				model = new ModelAndView("verifyOTP");
+				 //c="redirect:/showforgotPassForm";
+				model.addObject("msg","Incorrect OTP");
+				
+			}
+			else {
+				
+				//Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
+				System.err.println("Staff" +staff);
+				//model = new ModelAndView("login");
+				model = new ModelAndView("changeMobNo");
+				model.addObject("userId",staff.getFacultyId());
+				model.addObject("flag",1);
+				
+				
+				
+				//  c= "redirect:/showVerifyOTP";
+	/*		BG
+
+				map =new LinkedMultiValueMap<String, Object>(); 
+				 map.add("type", 1);
+			model.addObject("msg","Password Sent on Your Phone Number");
+			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			model.addObject("acaYearList", acaYearList);*/
+			}
+			
+
+		} catch (Exception e) {
+			System.err.println("Exce in checkUniqueField  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}//
+	
+	  HashMap<Integer,String> hm=null; 
+	@RequestMapping(value = "/updateContctNo", method = RequestMethod.POST)
+	public ModelAndView updateContctNo(HttpServletRequest request, HttpServletResponse response) {
+
+		System.err.println("Hiii  Update No.  " );
+		Info info = new Info();
+		ModelAndView model = null;
+
+		try {
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int id = userObj.getStaff().getFacultyId();
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			String no = request.getParameter("newContact");
+			hm=new HashMap<Integer,String>(); 
+			hm.put(id, no);
+			map.add("no", no);
+			map.add("id", id);
+			System.out.println("Data=="+hm);
+			
+			String dtr = rest.postForObject(Constants.url + "sndOTPOnNewNo", map,String.class);
+		
+		//	Staff staff = rest.postForObject(Constants.url + "updateMyNo", map,Staff.class);
+			
+
+			if(dtr!=null){
+				model = new ModelAndView("verifyOTP");
+				model.addObject("msg","Enter OTP");
+				model.addObject("flag",2);
+				
+				
+			}
+			else {
+				
+			
+				//System.err.println("Staff" +staff);
+				model = new ModelAndView("login");
+				//model.addObject("msg","Contact No Sucessfully Updated");
+				
+				
+			
+			}
+			
+
+		} catch (Exception e) {
+			System.err.println("Exce in updateContctNo  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/newNoVerifiedUpdate", method = RequestMethod.POST)
+	public ModelAndView newNoVerifiedUpdate(HttpServletRequest request, HttpServletResponse response) {
+
+		System.err.println("Hiii  Update No.  " );
+		Info info = new Info();
+		ModelAndView model = null;
+		Staff staff=null;
+		try {
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int id = userObj.getStaff().getFacultyId();
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+					  for(Map.Entry m:hm.entrySet()){  
+							System.out.println("Data=="+ m.getValue()+"//"+m.getKey());
+
+					map.add("no", m.getValue());
+				  map.add("id", m.getKey());
+		
+		
+			 staff = rest.postForObject(Constants.url + "updateMyNo", map,Staff.class);
+			  }
+			if(staff!=null) {
+				model = new ModelAndView("login");
+				model.addObject("msg","Your Contact No Update Sucessfully");
+			}else {
+				model = new ModelAndView("login");
+				model.addObject("msg","Please Try Again!");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return model;
+	}
+		
 	
 }

@@ -93,6 +93,9 @@
 						<li class="last"><a href="${pageContext.request.contextPath}/logout"> <i
 								class="fa fa-lock"></i> Logout
 						</a></li>
+						<li class="last"><a href="${pageContext.request.contextPath}/changeMobNoForm/${sessionScope.userObj.getStaff().getFacultyId()}"> <i
+								class="fa fa-lock"></i> Change<br> Mobile No.
+						</a></li>
 					</ul></li>
 
 

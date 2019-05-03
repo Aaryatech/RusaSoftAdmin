@@ -97,7 +97,97 @@
 				<h1>
 					<a href="#" title="Login Page" tabindex="-1">RUSA</a>
 				</h1>
+<c:choose>
+<c:when test="${flag==1}">
+		<form name="loginform" id="loginform"
+					action="${pageContext.request.contextPath}/OTPVerificationByContact"
+					method="post">
 
+					<c:choose>
+						<c:when test="${msg!=null}">
+							<div class="alert alert-error alert-dismissible fade in">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<strong>${msg}</strong>
+							</div>
+						</c:when>
+					</c:choose>
+
+					<p >
+						<label for="user_pass">OTPS<br /> <input type="password"
+							name="otp" id="otp" class="input" value=""
+							placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
+					</p>
+					
+					
+						<input type="hidden" id="username" name="username" value="${username}">
+					<!--  <p class="forgetmenot">
+                    <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
+                </p>
+ -->
+
+
+					<p class="submit">
+						<input type="submit" name="wp-submit" id="wp-submit"
+							class="btn btn-accent btn-block" value="Submit" />
+ <input
+							type="button" class="btn btn-accent btn-block"
+							onclick="reGenOtp()" value="Re Generate OTP" />
+					</p>
+					
+					
+					
+				</form>
+
+</c:when>
+
+<c:when test="${flag==2}">
+		<form name="loginform" id="loginform"
+					action="${pageContext.request.contextPath}/newNoVerifiedUpdate"
+					method="post">
+
+					<c:choose>
+						<c:when test="${msg!=null}">
+							<div class="alert alert-error alert-dismissible fade in">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<strong>${msg}</strong>
+							</div>
+						</c:when>
+					</c:choose>
+
+					<p >
+						<label for="user_pass">OTPS<br /> <input type="password"
+							name="otp" id="otp" class="input" value=""
+							placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
+					</p>
+					
+					
+						<input type="hidden" id="username" name="username" value="${username}">
+					<!--  <p class="forgetmenot">
+                    <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
+                </p>
+ -->
+
+
+					<p class="submit">
+						<input type="submit" name="wp-submit" id="wp-submit"
+							class="btn btn-accent btn-block" value="Submit" />
+ <input
+							type="button" class="btn btn-accent btn-block"
+							onclick="reGenOtp()" value="Re Generate OTP" />
+					</p>
+					
+					
+					
+				</form>
+
+</c:when>
+<c:otherwise>
 				<form name="loginform" id="loginform"
 					action="${pageContext.request.contextPath}/OTPVerification"
 					method="post">
@@ -139,6 +229,8 @@
 					
 					
 				</form>
+				</c:otherwise>
+				</c:choose>
 
 				<!--   <p id="nav">
                 <a class="pull-left" href="#" title="Password Lost and Found">Forgot password?</a>
