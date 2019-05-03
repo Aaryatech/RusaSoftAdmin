@@ -304,6 +304,7 @@
 							<option  ${editProgramActivity.year == 'Third Year'  ? 'Selected': '' }>Third Year</option>
 							<option  ${editProgramActivity.year == 'Fourth Year' ? 'Selected': '' }>Fourth Year</option>
 							<option  ${editProgramActivity.year == 'Fifth Year'  ? 'Selected': '' }>Fifth Year</option>
+							<option  ${editProgramActivity.year == 'All'  ? 'Selected': '' }>All</option>
 																
 																
 														</select>

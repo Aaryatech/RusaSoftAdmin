@@ -96,8 +96,7 @@
              						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
         	                     </div> 
         	                     <%session=request.getSession();
-        	                     String  sess = (String)request.getAttribute("successMsg");
-        	                     session.removeAttribute(sess);
+        	                     session.removeAttribute("successMsg");
         	                     %>
             			</c:if>
 

@@ -42,8 +42,8 @@
 </style>
 
 
-<!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<!-- BEGIN BODY --><!-- onload="hideText()" -->
+<body class=" " onload="showIsReg(${alumni.exInt2})">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -142,9 +142,11 @@
 													</label>
 													<div class="col-sm-9">
 														<select id="contr_type" name="contr_type"
-															class="form-control">
-
-															<c:choose>
+															class="form-control" onclick="checkPhdGuide(this.value)">
+															
+																	<option value="1" ${alumni.contributionType==1 ? 'Selected' : ''}>Financial</option>
+																	<option value="0" ${alumni.contributionType==0 ? 'Selected' : ''}>Non Financial</option>
+															<%-- <c:choose>
 																<c:when test="${alumni.contributionType==1}">
 																	<option selected value="1">Financial</option>
 																	<option value="0">Non Financial</option>
@@ -157,7 +159,7 @@
 																	<option value="1">Financial</option>
 																	<option value="0">Non Financial</option>
 																</c:otherwise>
-															</c:choose>
+															</c:choose> --%>
 
 														</select>
 														<span class="error_form text-danger" id="contr_type_field"
@@ -166,6 +168,20 @@
 
 													</div>
 												</div>
+												
+												<div class="form-group" id="ihide" style="display: none;">
+														<div class="form-group">
+															<label class="control-label col-sm-3" for="smallheading">Amount
+																(Rs)<span class="text-danger">*</span>
+															</label>
+															<div  class="col-sm-9">
+																<input type="text" class="form-control" id="alumini_amt" onchange="trim(this)"
+																	name="alumini_amt" placeholder="Amount"
+																	value="${alumni.exInt1}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter amount.</span>
+															</div>
+														</div>
+													</div>
 
 
 
@@ -330,6 +346,37 @@
 
 	<!-- END CONTENT -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		function checkPhdGuide(activity) {
+			
+//alert(activity);
+			if (activity == 1) {
+				
+				document.getElementById("ihide").style = "visible"
+				
+
+			} else  {
+				document.getElementById("ihide").style = "display:none"
+				
+			}
+
+		}
+		
+		function showIsReg(act){
+			
+				//alert(act);
+				hideText();
+				var isActivity = act; //$("input[name=isActivity]:checked").val();
+				
+				if(isActivity == 1){
+					document.getElementById("ihide").style.display = "block";
+				} else{
+					document.getElementById("ihide").style.display = "none";
+				} 
+				
+			}
+			
+		</script>
 	
 	
 		<script>
@@ -356,6 +403,18 @@
 											function(e) {
 												var isError = false;
 												var errMsg = "";
+												
+												if ($("#alumini_amt").val()<=0 || !$("#alumini_amt").val()) {
+													isError = true;
+
+													$("#alumini_amt").addClass(
+															"has-error")
+													$("#error_formfield0")
+															.show()
+												} else {
+													$("#error_formfield0")
+															.hide()
+												}
 
 												if (!$("#alum_name").val()) {
 													isError = true;

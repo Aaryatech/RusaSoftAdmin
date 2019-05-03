@@ -61,7 +61,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/studActivity");
-				model.addObject("title", "Student Organized Activities Details List");
+				model.addObject("title", "Student Activity Organized List");
 				Info add = AccessControll.checkAccess("showStudOrgnizedActivity", "showStudOrgnizedActivity", "0", "1",
 						"0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showStudOrgnizedActivity", "showStudOrgnizedActivity", "0", "0",
@@ -120,7 +120,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/addStudActOrganized");
-				model.addObject("title", "Add Student Organized Activities Details");
+				model.addObject("title", "Add Student Activity Organized");
 
 			} else {
 
@@ -234,7 +234,7 @@ public class StudentActivityController {
 
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				model = new ModelAndView("ProgramDetails/addStudActOrganized");
-				model.addObject("title", "Edit Student Organized Activities Details");
+				model.addObject("title", "Edit Student Activity Organized");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("activityId", activityId);
 				map.add("yearId", acYearId);
@@ -311,7 +311,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/studActivityAttend");
-				model.addObject("title", "Student Attended Activities Details List");
+				model.addObject("title", "Student Activity Attended List");
 
 				Info add = AccessControll.checkAccess("showStudAttendActivity", "showStudAttendActivity", "0", "1", "0",
 						"0", newModuleList);
@@ -371,7 +371,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/addStudActAttend");
-				model.addObject("title", "Add Student Attended Activities Details");
+				model.addObject("title", "Add Student Activity Attended");
 
 			} else {
 
@@ -486,7 +486,7 @@ public class StudentActivityController {
 
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				model = new ModelAndView("ProgramDetails/addStudActAttend");
-				model.addObject("title", "Edit Student Attended Activities Details");
+				model.addObject("title", "Edit Student Activity Attended");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("activityId", activityId);
 				map.add("yearId", acYearId);

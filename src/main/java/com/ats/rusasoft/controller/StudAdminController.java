@@ -62,7 +62,7 @@ public class StudAdminController {
 
 				model = new ModelAndView("ProgramDetails/addStudCatwise");
 
-				model.addObject("title", "Add Student Category Wise");
+				model.addObject("title", "Add Student Enrolled Category Wise");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
 
@@ -188,7 +188,7 @@ public class StudAdminController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Student Admitted Territory wise");
+				model.addObject("title", "Student Enrolled Territory wise");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
@@ -255,7 +255,7 @@ public class StudAdminController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Student Admitted Category Wise");
+				model.addObject("title", "Student Enrolled Category Wise");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
@@ -305,7 +305,7 @@ public class StudAdminController {
 
 				model = new ModelAndView("ProgramDetails/addStudLocwise");
 
-				model.addObject("title", "Add Student Territory wise  ");
+				model.addObject("title", "Add Student Enrolled Territory wise  ");
 
 				RestTemplate restTemplate = new RestTemplate();
 				Location[] locArray = restTemplate.getForObject(Constants.url + "getAllLocation", Location[].class);

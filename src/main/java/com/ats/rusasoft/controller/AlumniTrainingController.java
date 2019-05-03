@@ -200,6 +200,7 @@ public class AlumniTrainingController {
 		System.err.println("in insert insertAlumni");
 		ModelAndView model = null;
 		String redirect = null;
+		int amount = 0;
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
@@ -254,9 +255,15 @@ public class AlumniTrainingController {
 					alumni.setAlumniDetailId(alumniId);
 
 					alumni.setAlumniName(almName);
-					int exInt1 = 0;
-					alumni.setExInt1(exInt1);
-					alumni.setExInt2(exInt1);
+					
+					amount = Integer.parseInt(request.getParameter("alumini_amt"));
+					if(amount>0) {
+					alumni.setExInt1(amount);
+					alumni.setExInt2(1);
+					}else {
+					alumni.setExInt1(amount);
+					alumni.setExInt2(0);
+					}
 					String exVar1 = "NA";
 					alumni.setExVar1(exVar1);
 					alumni.setExVar2(exVar1);

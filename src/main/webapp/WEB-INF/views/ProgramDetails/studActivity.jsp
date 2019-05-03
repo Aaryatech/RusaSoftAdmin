@@ -98,7 +98,7 @@
 													<td style="text-align: center; ">${count.index+1}</td>
 													<td>${list.activityName}</td>
 													<td style="text-align: center; ">${list.date}</td>
-													<td style="text-align: center; ">${list.yearName}</td>
+													<td style="text-align: center; ">${list.year}</td>
 													<td>${list.branch}</td>
 													<td style="text-align: center; ">${list.participatedStudent}</td>
 													<td>${list.level}</td>
