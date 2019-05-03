@@ -302,6 +302,12 @@ public class FacPersonalController {
 						Constants.url + "saveFacultyPersonalDetail", facPersDetail, FacultyPersonalDetail.class);
 
 				// int isView = Integer.parseInt(request.getParameter("is_view"));
+				if(facPerDetail!=null) {
+					session.setAttribute("successMsg", "New Record Added Sucessfully");
+				}
+				else {
+					session.setAttribute("successMsg", "Record Not Added");
+				}
 				if (temp == 1)
 					redirect = "redirect:/addPersonalDetails";
 				else
@@ -510,7 +516,13 @@ public class FacPersonalController {
 				// }
 
 				// int isView = Integer.parseInt(request.getParameter("is_view"));
-
+				if(facPerDetail!=null) {
+					session.setAttribute("successMsg", "New Record Added Sucessfully");
+				}
+				else {
+					session.setAttribute("successMsg", "Record Not Added");
+				}
+				
 				if (temp1 == 1)
 					redirect = "redirect:/showAddMphillDetails";
 				else
@@ -739,7 +751,13 @@ public class FacPersonalController {
 
 				FacultyAcademic facAcadeRes = restTemplate.postForObject(Constants.url + "saveFacultyAcademic",
 						facAcademic, FacultyAcademic.class);
-
+				
+				if(facAcadeRes!=null) {
+					session.setAttribute("successMsg", "New Record Added Sucessfully");
+				}
+				else {
+					session.setAttribute("successMsg", "Record Not Added");
+				}
 				redirect = "redirect:/showEditFacAcademic";
 
 			}
