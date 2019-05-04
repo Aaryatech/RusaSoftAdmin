@@ -121,8 +121,8 @@
 																		<th rowspan="2">Sr No</th>
 																		<th rowspan="2">Linkage Title</th>
 																		<th rowspan="2">Partnering Institute</th>
-																		<th rowspan="2">Name Of Industry</th>
-																		<th rowspan="2">Name Of Research Lab</th>
+																		<th rowspan="2">Year Of Establishment</th>
+																		<!-- <th rowspan="2">Name Of Research Lab</th> -->
 																		<th style="text-align: center;" colspan="2">Duration</th>
 																		<th rowspan="2">Nature Of Linkage</th>
 																		<th rowspan="2">Participants</th>
@@ -144,8 +144,8 @@
 														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${links.linkageTitle}</td>
 														<td>${links.partneringInstitute}</td>
-														<td>${links.industryName}</td>
-														<td>${links.researchLabName}</td>
+														<td>${links.labFromYear}</td>
+														<%-- <td>${links.researchLabName}</td> --%>
 														<td  style="text-align: center">${links.durationFrom}</td>
 														<td  style="text-align: center">${links.durationTo}</td>
 														<td>${links.natureOfLinkage}</td>

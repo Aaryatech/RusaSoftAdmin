@@ -450,14 +450,14 @@ public class LibraryController {
 			rareBook.setYearId(acadYear); // Academic Year
 			rareBook.setUserId(userId);
 			rareBook.setRareBookname(request.getParameter("bookName"));
+			rareBook.setExVar1(request.getParameter("authorName"));
 			rareBook.setPublisher(request.getParameter("publisher"));
 			rareBook.setBookCopies(Integer.parseInt(request.getParameter("noOfBook")));
 			rareBook.setCostOfBook(Integer.parseInt(request.getParameter("costOfBook")));
 			rareBook.setPublicationYear(request.getParameter("year"));
 			rareBook.setDelStatus(1);
 			rareBook.setExInt1(0);
-			rareBook.setExVar1("NA");
-
+			
 			RareBook saveBook = rest.postForObject(Constants.url + "/saveRareBook", rareBook, RareBook.class);
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1) {

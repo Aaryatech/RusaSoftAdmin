@@ -79,6 +79,7 @@
 								onClick="selectedInst(this)" /> Select All</th>
                    		<th width="5%">Sr No</th>
                         <th>Book Name</th> 
+                        <th>Author Name</th> 
                         <th>Publisher</th> 
                         <th>No. Of Copies</th> 
                         <th>Price</th> 
@@ -98,6 +99,9 @@
 											<td style="text-align: left"><c:out
 														value="${bookList.rareBookname}" /></td>
 														
+											<td style="text-align: left"><c:out
+														value="${bookList.exVar1}" /></td>
+										
 											<td style="text-align: left"><c:out
 														value="${bookList.publisher}" /></td>
 											

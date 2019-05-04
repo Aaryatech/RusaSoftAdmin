@@ -133,12 +133,33 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="e_contentName"
-													name="e_contentName" placeholder="Name of E-Content Development Facilities"
+													name="e_contentName" placeholder="Name of E-Content Development"
 													onchange="trim(this)" autocomplete="off"
 													value="${content.nameEcontentDevFacility}"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter name of e-content development facilities.</span>
 											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="year"
+												style="text-align: left;">Establishment Year<span
+												class="text-danger">*</span>
+											</label>
+											
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepickeryear"
+													data-min-view-mode="years" data-start-view="2"
+													data-format="yyyy" placeholder="Year of Establishment"
+													id="year" value="${content.exVar1}" name="year"
+													autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
+													onchange="trim(this)"> <span
+													class="error_form text-danger" id="error_year"
+													style="display: none;">Please enter year of
+													establishment.</span>
+											</div>
+
 										</div>
 										
 										<div class="form-group">
@@ -252,7 +273,21 @@
 													$("#error_formfield2")
 															.hide()
 												}
+												
+												if (!$("#year").val()) {
 
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#year").addClass(
+															"has-error")
+													$("#error_year")
+															.show()
+													//return false;
+												} else {
+													$("#error_year")
+															.hide()
+												}
 											
 						         				
 
@@ -299,6 +334,16 @@
 	/showActivityOrganized
 
 	<script type="text/javascript">
+	$(function() {
+
+		$('.datepickeryear').datepicker({
+			autoclose : true,
+			minViewMode : 2,
+			format : 'yyyy'
+
+		});
+	});
+	
 		$(function() {
 
 			$('.datepicker').datepicker({

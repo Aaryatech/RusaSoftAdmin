@@ -109,6 +109,23 @@
 													book.</span>
 											</div>
 										</div>
+										
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="authorName"
+												style="text-align: left;">Name of author<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" autocomplete="off" class="form-control"
+													id="authorName" name="authorName" onchange="trim(this)"
+													placeholder="Name of Author"
+													value="${rareBook.exVar1}"> <span
+													class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter name of author.</span>
+											</div>
+										</div>
+										
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="publisher"

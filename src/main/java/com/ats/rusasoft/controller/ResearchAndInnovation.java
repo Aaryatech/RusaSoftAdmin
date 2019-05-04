@@ -735,9 +735,9 @@ public class ResearchAndInnovation {
 		linkage.setAcYearId(acadYear);
 		linkage.setLinkageTitle(request.getParameter("link_title"));
 		linkage.setPartneringInstitute(request.getParameter("part_inst"));
-		linkage.setIndustryName(request.getParameter("insustry_name"));
-		linkage.setIndustryFromYear(request.getParameter("indust_year"));
-		linkage.setResearchLabName(request.getParameter("resrch_lab_name"));
+		linkage.setIndustryName("NA");
+		linkage.setIndustryFromYear("NA");
+		linkage.setResearchLabName("NA");
 		linkage.setLabFromYear(request.getParameter("resrch_lab_year"));
 		linkage.setDurationFrom(request.getParameter("from_date"));
 		linkage.setDurationTo(request.getParameter("to_date"));

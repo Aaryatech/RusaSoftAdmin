@@ -117,19 +117,25 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="control-label col-sm-2" for="smallheading">Partnering 
-															Institute<span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="smallheading">Partnering  
+															Agency<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="part_inst" autocomplete="off" onchange="trim(this)"
-															name="part_inst" placeholder="Name of Partnering Institute" value="${linkage.partneringInstitute}">
+														<select name="part_inst" id="part_inst" class="form-control">
+														<option value="Partnering Institute" ${linkage.partneringInstitute eq 'Partnering Institute' ? 'Selected' : ''}>Partnering Institute</option>
+														<option value="Partnering Research Lab" ${linkage.partneringInstitute eq 'Partnering Research Lab' ? 'Selected' : ''}>Partnering Research Lab</option>
+														<option value="Partnering Industry" ${linkage.partneringInstitute eq 'Partnering Industry' ? 'Selected' : ''}>Partnering Industry</option>
+														</select>
+														
+															<%-- <input type="text" class="form-control" id="part_inst" autocomplete="off" onchange="trim(this)"
+															name="part_inst" placeholder="Name of Partnering Institute" value="${linkage.partneringInstitute}"> --%>
 														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of partnering institute.</span>
 														</div>
 
 
 													</div>
 
-													<div class="form-group">
+													<%-- <div class="form-group">
 
 														<label class="control-label col-sm-2" for="smallheading">Industry 
 															Name<span class="text-danger">*</span>
@@ -176,10 +182,10 @@
 																<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter research lab.</span>
 														</div>
 
-											</div>
+											</div>--%>
 											
 											<div class="form-group">
-														<label class="control-label col-sm-2" for="year"> Research Lab 
+														<label class="control-label col-sm-2" for="year">Establishment
 														Year<span class="text-danger">*</span>
 														</label>
 
@@ -187,18 +193,18 @@
 														<input type="text" class="form-control datepickeryear"
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy"
-															placeholder="Research Lab Year"
+															placeholder="Year of Establishment"
 															id="resrch_lab_year"
 															value="${linkage.labFromYear}"
 															name="resrch_lab_year" autocomplete="off"
 															onkeypress='return restrictAlphabets(event)'
 															onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_formfield5"
-															style="display: none;">Please enter research lab year.</span>
+															style="display: none;">Please enter year of establishment.</span>
 													</div>
 
 											</div>
-
+ 
 													<div class="form-group">
 
 
@@ -337,7 +343,7 @@
             				} else {
             					$("#error_formfield1").hide();
             				}
-           				if(!$("#insustry_name").val()){ 
+           				/* if(!$("#insustry_name").val()){ 
         					 
             				isError=true;
             				
@@ -347,11 +353,11 @@
             					//return false;
             				} else {
             					$("#error_formfield2").hide();
-            				}   
+            				}    */
            				
             				
             				
-               				if(!$("#indust_year").val()){
+               				/* if(!$("#indust_year").val()){
                 					 
                 				isError=true;
                 				
@@ -360,9 +366,9 @@
                 					//return false;
                 				} else {
                 					$("#error_formfield3").hide();
-                				}
+                				} */
                				
-               				if(!$("#resrch_lab_name").val()){  
+               				/* if(!$("#resrch_lab_name").val()){  
            					 
                 				isError=true;
                 				
@@ -371,7 +377,7 @@
                 					//return false;
                 				} else {
                 					$("#error_formfield4").hide();
-                				}
+                				} */
                				
                				if(!$("#resrch_lab_year").val()){  
               					 

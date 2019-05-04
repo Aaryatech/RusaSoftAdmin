@@ -612,7 +612,7 @@ public class InfraStructureModController {
 			eCont.setExInt1(0);
 			eCont.setExInt2(0);
 			eCont.setExInt2(0);
-			eCont.setExVar1("NA");
+			eCont.setExVar1(request.getParameter("year"));
 			eCont.setExVar2("NA");
 			//System.out.println(eCont.toString());
 			EContentDevFacility contents = rest.postForObject(Constants.url + "/saveEcontentDevFacilities", eCont,

@@ -80,6 +80,7 @@
                    		<th width="5%">Sr No</th>
                         <th>E-Content Development Facility</th> 
                         <th>Name of The E-Content Development Facilities</th> 
+                         <th>Establishment Year</th> 
                          <th>Link To Videos Of The Media Center And
 							Recording Facility</th> 
                         
@@ -101,7 +102,8 @@
 											<td style="text-align: left"><c:out
 														value="${content.nameEcontentDevFacility}" /></td>
 											
-											
+											<td style="text-align: left"><c:out
+														value="${content.exVar1}" /></td>
 											
 											<td style="text-align: right"><c:out
 														value="${content.videoLink}" /></td>
