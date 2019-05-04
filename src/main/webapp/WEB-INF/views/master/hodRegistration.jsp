@@ -178,7 +178,7 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">
+											<label class="control-label col-sm-2" for="status">Highest
 												Qualification<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">

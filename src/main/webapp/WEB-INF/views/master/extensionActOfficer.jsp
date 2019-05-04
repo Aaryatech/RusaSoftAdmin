@@ -175,7 +175,7 @@
 												
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="status">Qualification
+													<label class="control-label col-sm-2" for="status">Highest Qualification
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
@@ -210,7 +210,7 @@
 														<input type="text" class="form-control datepicker"
 															id="join_date" autocomplete="off" onchange="trim(this)"
 															onkeypress='return restrictAlphabets(event)'
-															name="join_date" placeholder="dd/mm/yyyy"
+															name="join_date" placeholder="dd-mm-yyyy"
 															value="${extActOff.joiningDate}"> <span
 															class="error_form text-danger" id="error_formfield4"
 															style="display: none;">Please enter joining date</span>
@@ -220,55 +220,7 @@
 														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-2">
-
-														<%-- <input type="radio" id="is_registration1"
-															${dean.isWorking==1 ? 'checked' : ''}
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes <input
-															type="radio" id="is_registration2"
-															${dean.isWorking<1 ? 'checked' : ''}
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
-															 --%>
-															<%-- <c:choose>
-															<c:when test="${trnPlaceOff.facultyId>0}">
-															<c:choose>
-															<c:when test="${trnPlaceOff.isWorking==1}">
-															<input type="radio" id="is_registration"
-														checked
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes<input
-															type="radio" id="is_registration"
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
-															</c:when>
-															<c:otherwise>
-															<input type="radio" id="is_registration"
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes<input
-															type="radio" checked id="is_registration"
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
-															</c:otherwise>
-															</c:choose>
-															</c:when>
-															
-															
-															<c:otherwise>
-															
-															<input type="radio" id="is_registration"
-														 checked
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes<input
-															type="radio" id="is_registration"
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
-															
-															</c:otherwise>
-															
-															
-															</c:choose> --%>
-															
+	
 															<input type="radio" id="is_registration"
 															 ${extActOff.isWorking == 0 ? 'checked' : ''}
 															name="is_registration" value="0"
@@ -290,7 +242,7 @@
 															id="acc_off_relDate"
 															onkeypress='return restrictAlphabets(event)'
 															autocomplete="off" name="acc_off_relDate"
-															placeholder="Relieving Date"
+															placeholder="dd-mm-yyyy"
 															value="${extActOff.realivingDate}"> <span
 															class="error_form text-danger" id="error_acc_off_relDate"
 															style="display: none;">Please enter relieving date</span>
@@ -477,7 +429,7 @@
                 					$("#error_formfield4").hide()
                 				}
             				 
-            				if ( $("#is_registration2").is(":checked")) {
+            				if ( $("#is_registration").is(":checked")) {
             					if(!$("#acc_off_relDate").val()){
             					isError=true;
                 				errMsg += '<li>Please enter a valid name.</li>';

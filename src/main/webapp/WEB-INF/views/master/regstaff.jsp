@@ -128,7 +128,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Department
-												: <span class="text-danger">*</span>
+											 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="dept" name="dept" class="form-control">
@@ -154,8 +154,8 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">Qualification
-												: <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="status">Highest Qualification
+											<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="hod_quolf" name="hod_quolf" class="form-control">

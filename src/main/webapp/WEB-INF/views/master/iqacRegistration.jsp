@@ -153,42 +153,11 @@
 												</select>
 											</div>
 										</div>
-										<%-- <div class="form-group">
-															<label class="control-label col-sm-2" for="page_name">
-																Department<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-10">
-																<select id="dept_id" name="dept_id"
-																	class="" >
-																	<c:forEach items="${deptList}" var="dept">
-																		<c:choose>
-																			<c:when test="${miqc.deptId==dept.deptId}">
-																				<option selected value="${dept.deptId}">${dept.deptName}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${dept.deptId}">${dept.deptName}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-															<option value="0">NA</option>
-																	
-
-																</select>
-																<span
-															class="error_form text-danger" id="dept_id_field"
-															style="display: none;">Please select department
-															name</span>
-															</div>
-														</div> --%>
-
+									
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">
-												Qualification<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="status">Highest
+												Qualification <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="quolif" name="quolif">
