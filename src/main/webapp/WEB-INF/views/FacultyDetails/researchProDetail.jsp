@@ -145,7 +145,7 @@
 
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="spoAuth"
-													name="spoAuth" placeholder="Sponsoring Authority"
+													name="spoAuth" placeholder=" Sponsoring Authority including Goverment/Non Govt"
 													autocomplete="off" value="${editProject.projSponsor}">
 												<span class="error_form text-danger" id="error_spoAuth"
 													style="display: none;">Please enter Sponsoring

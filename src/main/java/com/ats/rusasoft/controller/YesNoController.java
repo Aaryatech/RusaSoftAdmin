@@ -70,7 +70,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "E - FACILITIES DETAILS");
+			model.addObject("title", "E-Governance");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE1");
@@ -150,7 +150,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "FACILITIES  IN Library");
+			model.addObject("title", "FACILITIES IN Library");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE6");

@@ -124,6 +124,8 @@
 												<thead>
 													<tr>
 														<th>Sr No</th>
+														<th>Title of Paper</th>
+														<th>Co-Author</th>
 														<th>Journal Name</th>
 														<th>Faculty Name</th>
 														<th>Department</th>
@@ -141,7 +143,13 @@
 														<tr>
 
 															<td style="text-align: center">${count.index+1}</td>
-
+															
+															<td style="text-align: left"><c:out
+																	value="${journal.exVar1}" /></td>
+															
+															<td style="text-align: left"><c:out
+																	value="${journal.exVar2}" /></td>
+																	
 															<td style="text-align: left"><c:out
 																	value="${journal.journalName}" /></td>
 

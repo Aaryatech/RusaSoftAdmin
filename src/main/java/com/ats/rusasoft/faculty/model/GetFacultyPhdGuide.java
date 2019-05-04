@@ -10,6 +10,7 @@ public class GetFacultyPhdGuide {
 	private String coGuideName;
 	private String phdScholarName;
 	private int phdRegYear;
+	private String university;
 	private String phdTopic;
 	private int isPhdAwarded;
 	private int phdAwardedYear;
@@ -26,7 +27,13 @@ public class GetFacultyPhdGuide {
 	private String academicYear;
 	
 	
-	
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
+	}
 
 	public String getAcademicYear() {
 		return academicYear;
@@ -192,11 +199,13 @@ public class GetFacultyPhdGuide {
 	public String toString() {
 		return "GetFacultyPhdGuide [phdId=" + phdId + ", facultyId=" + facultyId + ", yearId=" + yearId
 				+ ", isPhdGuide=" + isPhdGuide + ", isCoGuide=" + isCoGuide + ", coGuideName=" + coGuideName
-				+ ", phdScholarName=" + phdScholarName + ", phdRegYear=" + phdRegYear + ", phdTopic=" + phdTopic
-				+ ", isPhdAwarded=" + isPhdAwarded + ", phdAwardedYear=" + phdAwardedYear + ", delStatus=" + delStatus
-				+ ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerEnterDatetime="
-				+ makerEnterDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + ", deptName=" + deptName
-				+ ", facultyFirstName=" + facultyFirstName + ", academicYear=" + academicYear + "]";
+				+ ", phdScholarName=" + phdScholarName + ", phdRegYear=" + phdRegYear + ", university=" + university
+				+ ", phdTopic=" + phdTopic + ", isPhdAwarded=" + isPhdAwarded + ", phdAwardedYear=" + phdAwardedYear
+				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
+				+ ", makerEnterDatetime=" + makerEnterDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1
+				+ ", deptName=" + deptName + ", facultyFirstName=" + facultyFirstName + ", academicYear=" + academicYear
+				+ "]";
 	}
 
+	
 }

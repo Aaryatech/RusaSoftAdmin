@@ -2095,6 +2095,7 @@ public class FacultyModuleController {
 			phd.setPhdScholarName(request.getParameter("phd_scholar"));
 			phd.setPhdRegYear(request.getParameter("phd_year_reg"));
 			phd.setPhdTopic(request.getParameter("phd_topic"));
+			phd.setUniversity(request.getParameter("university"));
 			phd.setIsPhdAwarded(Integer.parseInt(request.getParameter("awarded")));
 
 			phd.setDelStatus(1);

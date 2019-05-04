@@ -136,8 +136,8 @@ public class FacultyController {
 				journal.setDelStatus(1);
 				journal.setExInt1(1);
 				journal.setExInt2(1);
-				journal.setExVar1("NA");
-				journal.setExVar2("NA");
+				journal.setExVar1(request.getParameter("paperTitle"));
+				journal.setExVar2(request.getParameter("coAuthor"));
 				journal.setFacultyId(userObj.getGetData().getUserDetailId());
 				int yearId = (int) session.getAttribute("acYearId");
 				journal.setYearId(yearId);

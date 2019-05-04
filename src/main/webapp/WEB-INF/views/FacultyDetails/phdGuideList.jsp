@@ -113,6 +113,7 @@
 																	type="checkbox" name="selAll" id="selAll"
 																	onClick="selectedInst(this)" /> Select All</th>
 																<th>Sr No</th>
+																<th>University</th>
 																<th>Name of Co-Guide</th>
 																<th>Faculty Name</th>
 																<th>Department</th>
@@ -130,6 +131,7 @@
 																		name="phdId" id="phdIds${count.index+1}"
 																		value="${phdList.phdId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>
+																	<td>${phdList.university}</td>
 																	<td>${phdList.coGuideName}</td>
 																	<td style="text-align: left;">${phdList.facultyFirstName}</td>
 																	<td style="text-align: left;">${phdList.deptName}</td>

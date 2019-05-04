@@ -109,26 +109,25 @@
 															No<input type="radio" name="phdGuide" id="phdGuide" value="0" onclick="checkPhdGuide(this.value)"
 															${phd.isPhdGuide == 0 ? 'checked' : '' } >
 													
-														<%-- 	<c:choose>
-																	<c:when test="${phd.isPhdGuide == 1}">
-															
-																Yes <input type="radio" name="phdGuide" id="phdGuide"
-																	checked value="1"> No<input type="radio"
-																	name="phdGuide" id="phdGuide" value="0">
-																	</c:when>
-																	<c:when test="${phd.isPhdGuide == 0}">
-															
-																Yes <input type="radio" name="phdGuide" id="phdGuide"
-																	 value="1"> No<input type="radio" checked
-																	name="phdGuide" id="phdGuide" value="0">
-																	</c:when>
-																	
-																	</c:choose>
- --%>															</div>
+																													</div>
 														</div>
 
 														
 												<div class="form-group" id="ihide" style="display: none;">
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">University
+																 <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="university" onchange="trim(this)"
+																	name="university" placeholder="University"
+																	value="${phd.university}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_field_univrsity" style="display:none;" >Please enter university.</span>
+															</div>
+														</div>
+														
+														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Name
 																of Ph.D. Scholar <span class="text-danger">*</span>
@@ -362,6 +361,18 @@
      							$("#error_formfield1").hide()
      						}
      					}
+     					
+     					if(!$("#university").val()){
+       					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#university").addClass("has-error")
+            				$("#error_field_univrsity").show()
+            					//return false;
+            				} else {
+            					$("#error_field_univrsity").hide()
+            				}  
             			
      					/* if ( $("#is_registration1").is(":checked")) {
         					$("#error_acc_off_relDate").hide()
@@ -371,7 +382,7 @@
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#conf_date").addClass("has-error")
+            				$("#phd_scholar").addClass("has-error")
             				$("#error_formfield2").show()
             					//return false;
             				} else {

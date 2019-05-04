@@ -99,6 +99,31 @@
 										method="post" name="formidhere" id="formidhere">
 
 
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="paperTitle">Title
+												of Paper <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="paperTitle"
+													name="paperTitle" placeholder="Title of Paper"
+													value="${editJournal.exVar1}" autocomplete="off">
+												<span class="error_form text-danger" id="error_ttlPaper"
+													style="display: none;">Please enter title of paper</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="coAuthor">Co-
+												Author<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="coAuthor"
+													name="coAuthor" placeholder="Name of Co-Author"
+													value="${editJournal.exVar2}" autocomplete="off">
+												<span class="error_form text-danger" id="error_coAuthor"
+													style="display: none;">Please enter name of co-author</span>
+											</div>
+										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="jouStd">Journal
@@ -220,6 +245,9 @@
 													value="${editJournal.journalYear}" autocomplete="off"
 													placeholder="Year of Publication" name="journalYear"
 													id="journalYear" data-format="yyyy">
+													<span
+													class="error_form text-danger" id="error_year_pub"
+													style="display: none;">Please enter year of publication</span>
 
 											</div>
 
@@ -294,7 +322,7 @@
 <button type="submit" id="sub_button" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showJournalPubList"><button
+<a href="${pageContext.request.contextPath}/showJournalPubList"><button id="sub_button_next"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -436,7 +464,30 @@ function submit_f(view){
             			 var isError=false;
             			 var errMsg="";
             				
-           
+            			 if(!$("#paperTitle").val()){
+        					 
+              				isError=true;
+              				errMsg += '<li>Please enter a valid name.</li>';
+              				
+              				$("#paperTitle").addClass("has-error")
+              				$("#error_ttlPaper").show()
+              					 
+              				} else {
+              					$("#error_ttlPaper").hide()
+              				}
+            			  
+            			 if(!$("#coAuthor").val()){
+        					 
+               				isError=true;
+               				errMsg += '<li>Please enter a valid name.</li>';
+               				
+               				$("#coAuthor").addClass("has-error")
+               				$("#error_coAuthor").show()
+               					 
+               				} else {
+               					$("#error_coAuthor").hide()
+               				}
+            			 
             				if(!$("#journalName").val()){
             					 
             				isError=true;
@@ -448,6 +499,18 @@ function submit_f(view){
             				} else {
             					$("#error_jName").hide()
             				}
+               				
+               				if(!$("#journalYear").val()){
+           					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#journalYear").addClass("has-error")
+                				$("#error_year_pub").show()
+                					 
+                				} else {
+                					$("#error_year_pub").hide()
+                				}
             				
             				
             				if(!$("#issue").val()){

@@ -112,7 +112,7 @@
 																</label>
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="book_title" onchange="trim(this)" autocomplete="off"
-																		name="book_title" placeholder="Title of Book" value="${book.bookTitle }">
+																		name="book_title" placeholder="Title of Book,Chapter in edited Volume/proceeding" value="${book.bookTitle }">
 																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter title of book.</span>
 																</div>
 
