@@ -165,7 +165,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="year"
-												style="text-align: left;"> Year of Publication <span
+												style="text-align: left;"> Publication Year<span
 												class="text-danger">*</span>
 											</label>
 											<%-- <div class="col-sm-9">
@@ -177,7 +177,7 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control datepickeryear"
 													data-min-view-mode="years" data-start-view="2"
-													data-format="yyyy" placeholder="Year Of Published"
+													data-format="yyyy" placeholder="Year of Publication"
 													id="year" value="${rareBook.publicationYear}" name="year"
 													autocomplete="off"
 													onkeypress='return restrictAlphabets(event)'

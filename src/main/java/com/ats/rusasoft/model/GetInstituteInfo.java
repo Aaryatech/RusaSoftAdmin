@@ -24,6 +24,7 @@ public class GetInstituteInfo {
     private String  treasuryCode; 
   	
 	private String rusaIdNo;
+	private int exInt1;
 
 	public int getInfoDetailId() {
 		return infoDetailId;
@@ -97,6 +98,13 @@ public class GetInstituteInfo {
 	public void setNoOfFulltimeFaculty(int noOfFulltimeFaculty) {
 		this.noOfFulltimeFaculty = noOfFulltimeFaculty;
 	}
+	public int getExInt1() {
+		return exInt1;
+	}
+
+	public void setExInt1(int exInt1) {
+		this.exInt1 = exInt1;
+	}
 
 	@Override
 	public String toString() {
@@ -104,14 +112,9 @@ public class GetInstituteInfo {
 				+ ", noOfFulltimeFaculty=" + noOfFulltimeFaculty + ", noNonteachingIncludingOfficeStaff="
 				+ noNonteachingIncludingOfficeStaff + ", noSupportStaff=" + noSupportStaff + ", noCurrentAdmitedStnt="
 				+ noCurrentAdmitedStnt + ", academicYear=" + academicYear + ", treasuryCode=" + treasuryCode
-				+ ", rusaIdNo=" + rusaIdNo + ", getInfoDetailId()=" + getInfoDetailId() + ", getInstituteId()="
-				+ getInstituteId() + ", getNoNonteachingIncludingOfficeStaff()="
-				+ getNoNonteachingIncludingOfficeStaff() + ", getNoSupportStaff()=" + getNoSupportStaff()
-				+ ", getNoCurrentAdmitedStnt()=" + getNoCurrentAdmitedStnt() + ", getAcademicYear()="
-				+ getAcademicYear() + ", getTreasuryCode()=" + getTreasuryCode() + ", getRusaIdNo()=" + getRusaIdNo()
-				+ ", getNoOfFulltimeFaculty()=" + getNoOfFulltimeFaculty() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", rusaIdNo=" + rusaIdNo + ", exInt1=" + exInt1 + "]";
 	}
+
 
 	
 	

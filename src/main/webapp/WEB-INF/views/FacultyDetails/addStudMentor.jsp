@@ -90,7 +90,7 @@
 									<input type="hidden" id="menId" name="menId" value="${stud.menId}">
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="page_name">No
+											<label class="control-label col-sm-2" for="page_name">No.
 												of Students <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">

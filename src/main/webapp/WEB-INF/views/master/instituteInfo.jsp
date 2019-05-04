@@ -90,7 +90,8 @@
                    		<th  style="text-align: center; width:10%">Sr No</th>
                         <th>Academic Year</th> 
                         <th>Faculty</th> 
-                        <th>Nonteaching Including Office Staff</th> 
+                        <th>Post Sanction</th> 
+                        <th>Non-Teaching Including Office Staff</th> 
                         <th>Support Staff </th> 
                        <th> Current admitted student</th>
                         <th width="10%">Action</th> 
@@ -108,6 +109,7 @@
 															<td style="text-align: center">${count.index+1}</td>
 														<td  style="text-align: center;" >${inst.academicYear}</td>
 														<td style="text-align: right; ">${inst.noOfFulltimeFaculty}</td>
+														<td style="text-align: right; ">${inst.exInt1}</td>
 														<td style="text-align: right; ">${inst.noNonteachingIncludingOfficeStaff}</td>
 														<td style="text-align: right; ">${inst.noSupportStaff}</td>
 														<td style="text-align: right; ">${inst.noCurrentAdmitedStnt}</td>

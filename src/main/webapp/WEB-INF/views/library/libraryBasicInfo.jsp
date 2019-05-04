@@ -389,13 +389,13 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="noOfVolumns"
-														style="text-align: left;"> Total No. of Volumns
+														style="text-align: left;"> Total No. of Volumes
 														available in Library<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
 														<input type="number" class="form-control" id="noOfVolumns"
 															name="noOfVolumns" min="0"
-															placeholder="Total No. of Volumns available in Library"
+															placeholder="Total No. of Volumes available in Library"
 															value="${libInfo.exVar1}" maxlength="4"
 															onchange="trim(this)" autocomplete="off"
 															onkeypress='return restrictAlphabets(event)'> <span

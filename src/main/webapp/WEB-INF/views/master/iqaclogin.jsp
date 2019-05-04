@@ -170,6 +170,25 @@
 															time faculty and value must be greater than 0.</span>
 													</div>
 												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_name">No.
+													of Sanctioned Post <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" min="0"
+															id="no_sanction_post"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)"
+															value="${editInstInfo.exInt1}"
+															name="no_sanction_post"
+															placeholder="No. of Full Time Faculty in Institute">
+
+														<span class="error_form text-danger" id="error_sanc"
+															style="display: none;">Please enter No. of post
+															sanction and value must be greater than 0.</span>
+													</div>
+												</div>
 
 
 
@@ -330,6 +349,26 @@
 												} else {
 													$("#error_year").hide()
 												}
+												
+												if ($("#no_sanction_post")
+														.val() <= 0
+														|| !$(
+																"#no_sanction_post")
+																.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#no_sanction_post")
+															.addClass(
+																	"has-error")
+													$("#error_sanc").show()
+													//return false;
+												} else {
+													$("#error_sanc").hide()
+												}
+												
+												
 
 												if ($("#no_fullTime_Faculty")
 														.val() <= 0
