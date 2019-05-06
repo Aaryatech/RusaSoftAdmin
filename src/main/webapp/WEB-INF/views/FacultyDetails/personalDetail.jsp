@@ -143,7 +143,7 @@
 													value="${facPerDetail.fAddress}"> <span
 													class="error_form text-danger" id="fac_address_field"
 													style="display: none;">Please enter permanent
-													address</span>
+													address.</span>
 											</div>
 										</div>
 
@@ -175,7 +175,7 @@
 												</c:choose>
 												<span class="error_form text-danger" id="is_add_same_field"
 													style="display: none;">Please select
-													permanent/correspondence address same or not</span>
+													permanent/correspondence address same or not.</span>
 
 											</div>
 										</div>
@@ -191,7 +191,7 @@
 													placeholder="Correspondence Address"> <span
 													class="error_form text-danger" id="fac_address2_field"
 													style="display: none;">Please enter correspondence
-													address</span>
+													address.</span>
 											</div>
 										</div>
 
@@ -252,7 +252,21 @@
 													placeholder="Consecutive 12 digit Aadhar No"
 													value="${facPerDetail.fAadhar}"> <span
 													class="error_form text-danger" id="f_aadhar_field"
-													style="display: none;">Please enter aadhaar no</span>
+													style="display: none;">Please enter aadhaar No.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_aadhar">PAN
+												No<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" maxlength="12" class="form-control"
+													id="f_aadhar" name="f_aadhar"
+													placeholder="Consecutive 12 digit PAN No"
+													value="${facPerDetail.fAadhar}"> <span
+													class="error_form text-danger" id="f_aadhar_field"
+													style="display: none;">Please enter PAN No.</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -287,7 +301,7 @@
 													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
 													value="${facPerDetail.fDob}"> <span
 													class="error_form text-danger" id="f_dob_field"
-													style="display: none;">Please select date of birth</span>
+													style="display: none;">Please select date of birth.</span>
 
 											</div>
 										</div>
@@ -314,7 +328,7 @@
 													value="${facPerDetail.fPastExp}"> <span
 													class="error_form text-danger" id="f_prevExp_field"
 													style="display: none;">Please enter previous
-													experience</span>
+													experience.</span>
 
 											</div>
 										</div>
@@ -352,7 +366,7 @@
 
 												</c:choose>
 												<span class="error_form text-danger" id="f_gender_field"
-													style="display: none;">Please select gender</span>
+													style="display: none;">Please select gender.</span>
 
 											</div>
 										</div>

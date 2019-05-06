@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.model.AwrdRecgAgnstExtActivity;
 import com.ats.rusasoft.model.EContentDevFacility;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.InstResearchDevMous;
@@ -1160,9 +1161,271 @@ public class ResearchAndInnovation {
 	}
 	
 	
-	/**********************************Neighbourhood ********************************************/
+	/**************************************Award Recognition  against Extension Activity****************************************/
+	
+	@RequestMapping(value = "/awrdRecogAgnstExtAct", method = RequestMethod.GET)
+	public ModelAndView awrdRecogAgnstExtAct(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int acadYear = (int) session.getAttribute("acYearId");
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("awrdRecogAgnstExtAct", "awrdRecogAgnstExtAct", "1", "0", "0", "0",
+				newModuleList);
+
+		if (view.isError() == true) {
+
+			model = new ModelAndView("accessDenied");
+
+		} else {
+			model = new ModelAndView("resrch&innovatn/showAwardRecogAgnstExtActivity");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instituteId", instituteId);
+			
+			AwrdRecgAgnstExtActivity[] awrdRecgArr =  rest.postForObject(Constants.url+"/showAwrdRecgExtAct", map, AwrdRecgAgnstExtActivity[].class);
+			List<AwrdRecgAgnstExtActivity> awrdRecg = new ArrayList<>(Arrays.asList(awrdRecgArr));
+			System.out.println("Links="+awrdRecg);
+			
+			model.addObject("awrdRecg", awrdRecg);
+			model.addObject("title", "Award Recognition  against Extension Activity");
+
+			Info add = AccessControll.checkAccess("awrdRecogAgnstExtAct", "awrdRecogAgnstExtAct", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("awrdRecogAgnstExtAct", "awrdRecogAgnstExtAct", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("awrdRecogAgnstExtAct", "awrdRecogAgnstExtAct", "0", "0", "0",
+					"1", newModuleList);
+
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+
+		}
+		} catch (Exception e) {
+
+			System.err.println("exception In awrdRecogAgnstExtAct at Rssrch&Innovat" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/newAwrdRecgAgnstExtAct", method = RequestMethod.GET)
+	public ModelAndView newAwrdRecgAgnstExtAct(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		AwrdRecgAgnstExtActivity araea = new AwrdRecgAgnstExtActivity();
+		try {
+			Info view = AccessControll.checkAccess("newAwrdRecgAgnstExtAct", "awrdRecogAgnstExtAct", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				  
+					model = new ModelAndView("resrch&innovatn/awardRecogAgnstExtActivity");
+					model.addObject("araea", araea);
+					model.addObject("title", "Add Award Recognition against Extension Activity");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In newAwrdRecgAgnstExtAct at Resrch&Innovat Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 	
 	
 	
+	@RequestMapping(value = "/insertawrdRecgAgnstExtAxt", method = RequestMethod.POST)
+	public String insertawrdRecgAgnstExtAxt(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+				HttpSession session = request.getSession();
+				
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				
+				AwrdRecgAgnstExtActivity araea = new AwrdRecgAgnstExtActivity();
+				
+				araea.setAwrdRecgAgnstExtActId(Integer.parseInt(request.getParameter("award_recg_id")));
+				araea.setActName(request.getParameter("name_act"));
+				araea.setAwardRecogName(request.getParameter("name_awrd_recg"));
+				araea.setNameAwardingBody(request.getParameter("name_awrd_body"));
+				araea.setAwardYear(request.getParameter("awrd_year"));
+				araea.setInstId(instituteId);
+				araea.setAcYearId(acadYear);
+				araea.setDelStatus(1);
+				araea.setIsActive(1);
+				araea.setMakerUserId(userId);
+				araea.setMakerDatetime(curDateTime);
+				araea.setExInt1(0);
+				araea.setExInt2(0);
+				araea.setExVar1("NA");
+				araea.setExVar2("NA");
+			
+				System.out.println(araea.toString());
+				
+				AwrdRecgAgnstExtActivity awrd = rest.postForObject(Constants.url+"/saveAwrdRecgAgnstExtAct",araea,AwrdRecgAgnstExtActivity.class);
+				
+				
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/awrdRecogAgnstExtAct";
+	
+	}
+	
+	@RequestMapping(value = "/editAwrdRecg/{awrdRecgid}", method = RequestMethod.GET)
+	public ModelAndView editAwrdRecg(@PathVariable("awrdRecgid") int awrdRecgid, HttpServletRequest request) {
+
+		// System.out.println("Id:" + iqacId);
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			Info view = AccessControll.checkAccess("editAwrdRecg/{awrdRecgid}", "awrdRecogAgnstExtAct", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				map.add("awrdRecgid", awrdRecgid);
+				model = new ModelAndView("resrch&innovatn/awardRecogAgnstExtActivity");
+				model.addObject("title", "Edit Award Recognition against Extension Activity");
+				AwrdRecgAgnstExtActivity  awrdAct = rest.postForObject(Constants.url+"/getAwrdRecgAgnstExtActById", map, AwrdRecgAgnstExtActivity.class);
+				model.addObject("araea", awrdAct);
+			}
+		}catch(Exception e) {
+			
+		}
+		return model;
+	}
+	
+	@RequestMapping(value = "/deleteAwrdRecg/{awrdRecgid}", method = RequestMethod.GET)
+	public String  deleteAwrdRecg(@PathVariable("awrdRecgid") int awrdRecgid, HttpServletRequest request) {
+		
+		String a = null;
+		try {
+			
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			Info view = AccessControll.checkAccess("deleteAwrdRecg/{awrdRecgid}", "awrdRecogAgnstExtAct", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("awrdRecgid", awrdRecgid);
+
+				AwrdRecgAgnstExtActivity delNeighbourCommAct = rest.postForObject(Constants.url + "/deleteAwrdRecgAgnstExtActById", map, AwrdRecgAgnstExtActivity.class);
+				a="redirect:/awrdRecogAgnstExtAct";
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return a;
+		
+	}
+	
+	@RequestMapping(value = "/deleteSelAwrdRecgExtAct/{exActId}", method = RequestMethod.GET)
+	public String deleteSelAwrdRecgExtAct(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int exActId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteSelAwrdRecgExtAct/{exActId}", "awrdRecogAgnstExtAct", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (exActId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] exActIds = request.getParameterValues("exActId");
+					System.out.println("id are" + exActIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < exActIds.length; i++) {
+						sb = sb.append(exActIds[i] + ",");
+
+					}
+					String exActIdList = sb.toString();
+					exActIdList = exActIdList.substring(0, exActIdList.length() - 1);
+
+					map.add("exActIdList", exActIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("exActIdList", exActId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelAwardRecgExtAct", map, Info.class);
+
+				a = "redirect:/awrdRecogAgnstExtAct";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
 	
 }
