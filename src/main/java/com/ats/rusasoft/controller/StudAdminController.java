@@ -973,9 +973,6 @@ public class StudAdminController {
 
 	}
 	
-	//Location wise
-	
-	//
 	
 	
 	@RequestMapping(value = { "/getStudAdmLocwiseByProgType" }, method = RequestMethod.GET)
@@ -1005,6 +1002,8 @@ public class StudAdminController {
 		
 		
 	}
+	
+	
 	
 	
 }

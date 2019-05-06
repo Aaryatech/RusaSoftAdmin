@@ -31,12 +31,16 @@ import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
+import com.ats.rusasoft.model.MExtensionActivity;
 import com.ats.rusasoft.model.ProgramActivity;
 import com.ats.rusasoft.model.ProgramDetailSaveResponse;
 import com.ats.rusasoft.model.ProgramEducationObjective;
 import com.ats.rusasoft.model.ProgramOutcome;
 import com.ats.rusasoft.model.ProgramVision;
 import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.StudPerformFinalYr;
+import com.ats.rusasoft.model.StudPerformFinalYrList;
+import com.ats.rusasoft.model.TExtensionActivity;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 
 @Controller
@@ -1477,5 +1481,322 @@ public class StudentActivityController {
 		return programSpeceficOutcome;
 
 	}
+	
+	
+	/*********************************Student Performance in final year********************************/
+
+	@RequestMapping(value = "/getProgramTypeByProgramId", method = RequestMethod.GET)
+	public @ResponseBody List<Program> getProgramTypeByProgram(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		List<Program> list = new ArrayList<>();
+
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int programType = Integer.parseInt(request.getParameter("programType"));
+			map.add("programTypeId", programType);
+			Program[] program = restTemplate.postForObject(Constants.url + "/getProgramByProgramTypeId", map,
+					Program[].class);
+			list = new ArrayList<Program>(Arrays.asList(program));
+
+		} catch (Exception e) {
+			System.err.println("Exce in getProgramTypeByProgram  " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return list;
+
+	}
+	
+	@RequestMapping(value = "/showStudPerformInFinlYr", method = RequestMethod.GET)
+	public ModelAndView showStudPerformInFinlYr(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "1", "0", "0", "0",
+					newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+
+				model = new ModelAndView("ProgramDetails/studentPerformanceList");
+				model.addObject("title", "Student Performance in Final Year");
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				Program[] program = restTemplate.postForObject(Constants.url + "/getProgramList", map, Program[].class);
+				List<Program> list = new ArrayList<Program>(Arrays.asList(program));
+				model.addObject("list", list);
+				
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				StudPerformFinalYrList[] passedStudArr = restTemplate.postForObject(Constants.url + "getstudPassingPer",map,
+						StudPerformFinalYrList[].class);
+				List<StudPerformFinalYrList> passedStudList = new ArrayList<>(Arrays.asList(passedStudArr));
+				
+				model.addObject("passedStudList", passedStudList);
+
+				Info add = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					model.addObject("isAdd", 1);
+				}
+				if (edit.isError() == false) {
+					model.addObject("isEdit", 1);
+				}
+				if (delete.isError() == false) {
+					model.addObject("isDelete", 1);
+				}
+				
+				
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showStudPerformInFinlYr at StudAct Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	
+	@RequestMapping(value = "/addStudPerfromancInFinalYear", method = RequestMethod.GET)
+	public ModelAndView addStudPerfromancInFinalYear(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("addStudPerfromancInFinalYear", "showStudPerformInFinlYr", "0", "1", "0", "0",
+					newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+				model = new ModelAndView("ProgramDetails/addstudPerform");
+				model.addObject("title", " Add Student Performance in Final Year ");
+				StudPerformFinalYr studPer = new StudPerformFinalYr();
+
+				
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				model.addObject("progTypeList", progTypeList);
+				model.addObject("studPer", studPer);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In addStudPerfromancInFinalYear at Student Activity" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	@RequestMapping(value = "/insertStudPerformInFinalYr", method = RequestMethod.POST)
+	public String insertStudPerformInFinalYr(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+		
+			StudPerformFinalYr studPer = new StudPerformFinalYr();
+			int appear = Integer.parseInt(request.getParameter("stud_appeared"));
+			int passed = Integer.parseInt(request.getParameter("stud_passed"));
+			double passingper = Double.parseDouble(request.getParameter("stud_pass_per"));
+			studPer.setStudPerformId(Integer.parseInt(request.getParameter("stud_perform_id")));
+			studPer.setProgName(Integer.parseInt(request.getParameter("programType")));
+			studPer.setProgType(Integer.parseInt(request.getParameter("programTypeId")));
+			studPer.setNoStudAppear(appear);
+			studPer.setNoStudPass(passed);
+			studPer.setPassingPer(passingper);
+			studPer.setDelStatus(1);
+			studPer.setIsActive(1);
+			studPer.setInstId(userObj.getGetData().getUserInstituteId());
+			studPer.setMakerUserId(userObj.getUserId());
+			studPer.setMakingTime(sf.format(date));
+			studPer.setExInt1(0);
+			studPer.setExInt2(0);
+			studPer.setExVar1("NA");
+			studPer.setExVar2("NA");
+			System.out.println(studPer.toString());
+			
+			StudPerformFinalYr saveStudPerform = restTemplate.postForObject(Constants.url+"/addStudPerformFinalYear", studPer, StudPerformFinalYr.class);
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		
+		return "redirect:/showStudPerformInFinlYr";
+		
+	}
+
+	@RequestMapping(value = "/editStudPerform/{studperId}", method = RequestMethod.GET)
+	public ModelAndView editStudPerform(@PathVariable("studperId") int studperId, HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView model = null;
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("editStudPerform/{studperId}", "showStudPerformInFinlYr", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+			else {
+				model = new ModelAndView("ProgramDetails/addstudPerform");
+				model.addObject("title", " Edit Student Performance in Final Year ");
+				
+				map.add("studperId", studperId);
+				StudPerformFinalYr studPer = restTemplate.postForObject(Constants.url + "getStudPerformanceById",map,
+						StudPerformFinalYr.class);
+				model.addObject("studPer", studPer);
+				
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				model.addObject("progTypeList", progTypeList);
+				
+				
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteStudPerform/{studperId}", method = RequestMethod.GET)
+	public String deleteTExtActivity(@PathVariable("studperId") int studperId, HttpServletRequest request,
+			HttpServletResponse response) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+			String a = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteStudPerform/{studperId}", "showStudPerformInFinlYr", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("studperId", studperId);
+
+				StudPerformFinalYr delAct = restTemplate.postForObject(Constants.url + "/deleteStudPerformanceById", map, StudPerformFinalYr.class);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return "redirect:/showStudPerformInFinlYr";
+
+	}
+	
+	@RequestMapping(value = "/deleteSeldata/{studInfo}", method = RequestMethod.GET)
+	public String deleteSeldata(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int studInfo) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteSelExtsnActivities/{exActId}", "showStudPerformInFinlYr", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (studInfo == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] studInfos = request.getParameterValues("studInfo");
+					System.out.println("id are" + studInfo);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < studInfos.length; i++) {
+						sb = sb.append(studInfos[i] + ",");
+
+					}
+					String studInfoList = sb.toString();
+					studInfoList = studInfoList.substring(0, studInfoList.length() - 1);
+
+					map.add("studInfoList", studInfoList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("studInfoList", studInfo);
+				}
+
+				Info errMsg = restTemplate.postForObject(Constants.url + "deleteSelStudperformnc", map, Info.class);
+
+				a = "redirect:/showStudPerformInFinlYr";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+	
 
 }

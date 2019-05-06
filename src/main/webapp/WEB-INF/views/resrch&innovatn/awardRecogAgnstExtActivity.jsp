@@ -105,7 +105,8 @@
 																<input type="text" class="form-control" id="name_act" onchange="trim(this)"
 																	name="name_act" placeholder="Name of Activity" 
 																	value="${araea.actName}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No.of student participated and value must be greater than 0.</span>
+																	<span class="error_form text-danger" id="error_formfield1" style="display:none;" >
+																	Please enter name of activity.</span>
 															</div>
 														</div>
 
@@ -118,7 +119,8 @@
 																<input type="text" class="form-control" id="name_awrd_recg" onchange="trim(this)"
 																	name="name_awrd_recg" placeholder="Name of Award/Recognition" 
 																	value="${araea.awardRecogName}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of student in institute and value must be greater than 0.</span>
+																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >
+																	Please enter name of award/recognition.</span>
 															</div>
 														</div>
 
@@ -130,7 +132,8 @@
 																<input type="text" class="form-control" id="name_awrd_body" onchange="trim(this)"
 																	name="name_awrd_body" placeholder="Name of Awarding body" 
 																	value="${araea.nameAwardingBody}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of faculty participated and value must be greater than 0.</span>
+																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >
+																	Please enter name of awarding body .</span>
 															</div>
 														</div>
 
@@ -148,8 +151,8 @@
 																		name="awrd_year" autocomplete="off"
 																		onkeypress='return restrictAlphabets(event)'
 																		onchange="trim(this)"> <span
-																		class="error_form text-danger" id="error_formfield0"
-																		style="display: none;">Please enter year of highest
+																		class="error_form text-danger" id="error_formfield4"
+																		style="display: none;">Please enter year of award
 																		qualification.</span>
 																</div>
 														</div>
@@ -190,7 +193,7 @@
 		</section>
 		<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<!--  <script>
+ <script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -209,68 +212,57 @@
      					
             			 var radioValue = $("#activity_id").val(); /* $("input[name='activity_id']:checked"). val(); */
       					//alert(radioValue);
-      					if(radioValue==0){
-     						if (!$("#activity_name").val()) {
-     							isError = true;
-
-     							$("#activity_name").addClass(
-     									"has-error")
-     							$("#error_formfield1").show()
-     						} else {
-     							$("#error_formfield1").hide()
-     						}
-      					}
-     				
-     						 
-           				if($("#no_student_part").val() <= 0 || !$("#no_student_part").val()){
+      					
+            			 	    	
+           				if(!$("#name_act").val()){
         					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#no_student").addClass("has-error")
-            				$("#error_formfield2").show()
+            				$("#name_act").addClass("has-error")
+            				$("#error_formfield1").show()
             					//return false;
             				} else {
-            					$("#error_formfield2").hide()
+            					$("#error_formfield1").hide()
             				}  
             				
             				
-           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
+           				if(!$("#name_awrd_recg").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#ttl_student").addClass("has-error")
+            				$("#name_awrd_recg").addClass("has-error")
+            				$("#error_formfield2").show()
+            					//return false;
+            				} else {
+            					$("#error_formfield2").hide()
+            				}
+           				
+           						
+           				
+           				if(!$("#name_awrd_body").val()){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#name_awrd_body").addClass("has-error")
             				$("#error_formfield3").show()
             					//return false;
             				} else {
             					$("#error_formfield3").hide()
             				}
            				
-           						
-           				
-           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
+           				if(!$("#awrd_year").val()){
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#no_faculty").addClass("has-error")
+            				$("#awrd_year").addClass("has-error")
             				$("#error_formfield4").show()
             					//return false;
             				} else {
             					$("#error_formfield4").hide()
-            				}
-           				
-           				if($("#faculty_in_inst").val() <= 0 || !$("#faculty_in_inst").val()){
-         					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#ttl_faculty").addClass("has-error")
-            				$("#error_formfield5").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield5").hide()
             				}
 			            	 if (!isError) {
 			            		 
@@ -286,7 +278,7 @@
             			});
         });
 
-</script>    -->
+</script>   
 <script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
