@@ -231,7 +231,7 @@ public class BudgetCon {
 				budget.setPhysicalFacilityBudgetTitle(request.getParameter("infra_budget_title"));
 
 				int exInt1 = 0;
-				budget.setExInt1(exInt1);
+				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				budget.setExInt2(exInt1);
 				String exVar1 = "NA";
 				budget.setExVar1(exVar1);

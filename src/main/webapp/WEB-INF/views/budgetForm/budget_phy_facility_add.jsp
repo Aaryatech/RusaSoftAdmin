@@ -125,7 +125,7 @@
 													</c:forEach>
 
 												</select> <span class="error_form text-danger" id="error_year"
-													style="display: none;">Please Select Financial Year</span>
+													style="display: none;">Please Select Financial Year.</span>
 											</div>
 										</div>
 
@@ -143,7 +143,7 @@
 													placeholder="Title of Physical Facility"> <span
 													class="error_form text-danger"
 													id="error_infra_budget_title" style="display: none;">Please
-													enter budget title</span>
+													enter budget title.</span>
 											</div>
 										</div>
 										<%-- <div class="form-group">
@@ -177,7 +177,7 @@
 													value="${editBudget.budgetAllocated}"> <span
 													class="error_form text-danger" id="budget_allocated_field"
 													style="display: none;">Please enter allocated budget
-													amount</span>
+													amount.</span>
 											</div>
 										</div>
 
@@ -199,7 +199,28 @@
 													amount</span> <span class="error_form text-danger"
 													id="budget_utilized_field2" style="display: none;">Please
 													enter budget utilized amount less than or equal to
-													allocated amount</span>
+													allocated amount.</span>
+											</div>
+										</div>
+										
+											<div class="form-group">
+
+											<label class="control-label col-sm-2" for="utilizedAmt">Total Expenditure 
+												for Physical Facility ${budRupees}<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control"
+													id="ttl_exp" onchange="trim(this)"
+													name="ttl_exp" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Total Expenditure  for Physical Facility in ${budRupees}"
+													value="${editBudget.exInt1}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="ttl_exp_field" style="display: none;">Please
+													enter total expenditure for physical facility and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -449,7 +470,27 @@
 													$("#budget_utilized_field")
 															.hide()
 												}
-												/* if (parseInt($(
+												
+												if ($("#ttl_exp")
+														.val()<=0
+														|| !validateZeroNo($(
+																"#ttl_exp")
+																.val())) {
+
+													isError = true;
+													$("#ttl_exp")
+															.addClass(
+																	"has-error")
+													$("#ttl_exp_field")
+															.show()
+												} else {
+													$("#ttl_exp_field")
+															.hide()
+												}
+												
+												
+												/* 
+												if (parseInt($(
 														"#budget_utilized")
 														.val()) > parseInt($(
 														"#budget_allocated")

@@ -110,6 +110,7 @@
 													<th width="40%">Title of Physical Facilities</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
+													<th>Total Expenditure for Physical Facility ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -126,6 +127,7 @@
 														<td>${budget.physicalFacilityBudgetTitle}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
+														<td align="right">${budget.exInt1}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/editPhysicalBudget/${budget.physicalFacilityBudgetId}"><span

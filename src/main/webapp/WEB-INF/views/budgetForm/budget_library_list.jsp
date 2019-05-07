@@ -112,9 +112,11 @@
 														onClick="selectedInst(this)" /> Select All</th> -->
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
-													<th width="40%">Title</th>
+													<th width="28%">Title</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
+													<th>Budget Allocated for Knowledge Resource Center(Library)
+													 ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -130,6 +132,7 @@
 														<td>${budget.libBudgetTitle}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
+														<td align="right">${budget.exInt1}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEdit(${budget.libBudgetId})" href="#"><span
 																	class="glyphicon glyphicon-edit" title="Edit"

@@ -7,8 +7,8 @@ public class Names {
 	public static String infra_budget_add = "Add Budget : Infrastructure Facility";
 	public static String infra_budget_list = "Budget : Infrastructure Facility List";
 
-	public static String budget_library_add = "Add Budget : Facility";
-	public static String budget_library_list = "Budget : Facility List";
+	public static String budget_library_add = "Add Budget : Knowledge Resource Center(Library)";
+	public static String budget_library_list = "Budget : Knowledge Resource Center(Library)";
 
 	public static String budget_physical_list = "Budget : Physical Facility List";
 	public static String budget_physical_add = "Add Budget : Physical Facility";

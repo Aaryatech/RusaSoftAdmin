@@ -15,7 +15,15 @@ public class GetLibraryBudget {
 	
 	private String academicYear;
 	private String finYear ;
+	private int exInt1;
 	
+	
+	public int getExInt1() {
+		return exInt1;
+	}
+	public void setExInt1(int exInt1) {
+		this.exInt1 = exInt1;
+	}
 	public int getLibBudgetId() {
 		return libBudgetId;
 	}
@@ -70,13 +78,13 @@ public class GetLibraryBudget {
 	public void setFinYear(String finYear) {
 		this.finYear = finYear;
 	}
-	
 	@Override
 	public String toString() {
 		return "GetLibraryBudget [libBudgetId=" + libBudgetId + ", finYearId=" + finYearId + ", acYearId=" + acYearId
 				+ ", instituteId=" + instituteId + ", libBudgetTitle=" + libBudgetTitle + ", budgetAllocated="
 				+ budgetAllocated + ", budgetUtilized=" + budgetUtilized + ", academicYear=" + academicYear
-				+ ", finYear=" + finYear + "]";
+				+ ", finYear=" + finYear + ", exInt1=" + exInt1 + "]";
 	}
+	
 
 }

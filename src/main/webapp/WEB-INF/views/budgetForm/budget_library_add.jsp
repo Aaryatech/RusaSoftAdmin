@@ -151,7 +151,7 @@
 													autocomplete="off" class="form-control"
 													id="budget_allocated" name="budget_allocated"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Allocated Amount in ${budRupees}"
+													placeholder="Budget Allocated for Knowledge Resource Center in ${budRupees}"
 													value="${budget.budgetAllocated}"> <span
 													class="error_form text-danger" id="budget_allocated_field"
 													style="display: none;">Please enter allocated budget
@@ -169,7 +169,7 @@
 													class="form-control" id="budget_utilized" maxlength="9"
 													name="budget_utilized" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Utilized Amount in ${budRupees}"
+													placeholder="Budget Utilized for Knowledge Resource Center in ${budRupees}"
 													value="${budget.budgetUtilized}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget
@@ -177,6 +177,27 @@
 													id="budget_utilized_field2" style="display: none;">Please
 													enter budget utilized amount less than or equal to
 													allocated amount</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="utilizedAmt">Total Expenditure 
+												for Knowledge Resource Center ${budRupees}<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" min="0" max="100000000"
+													class="form-control" id="ttl_exp" maxlength="9"
+													name="ttl_exp" onchange="trim(this)"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Total Expenditure for Knowledge Resource Center ${budRupees}"
+													value="${budget.budgetUtilized}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="ttl_exp_field" style="display: none;">Please
+													enter total expenditure for knowledge resource center(library)
+													and value must be greater than 0.</span>
 											</div>
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
@@ -317,6 +338,15 @@
 												} else {
 													$("#budget_utilized_field")
 															.hide()
+												}
+												if ($("#ttl_exp").val()<=0 || !$("#ttl_exp").val()) {
+													isError = true;
+
+													$("#ttl_exp").addClass(
+															"has-error")
+													$("#ttl_exp_field").show()
+												} else {
+													$("#ttl_exp_field").hide()
 												}
 												/* if(parseInt($("#budget_utilized").val())>parseInt($("#budget_allocated").val())){
 													isError = true;

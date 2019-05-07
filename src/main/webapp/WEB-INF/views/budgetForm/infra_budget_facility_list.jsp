@@ -115,6 +115,7 @@
 													<th width="40%">Title</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
+													<th>Total Expenditure for Infrastructure ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -131,6 +132,7 @@
 														<td>${budget.infraBudgetTitle}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
+														<td align="right">${budget.exInt1}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEdit(${budget.infraBudgetId})" href="#"><span
 																	class="glyphicon glyphicon-edit" title="Edit"

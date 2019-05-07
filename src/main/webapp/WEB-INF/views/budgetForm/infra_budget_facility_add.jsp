@@ -123,7 +123,7 @@
 													</c:forEach>
 
 												</select> <span class="error_form text-danger" id="fin_year_id_field"
-													style="display: none;">Please select financial year</span>
+													style="display: none;">Please select financial year.</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -140,13 +140,13 @@
 													placeholder="Title of Infrastructure Budget"> <span
 													class="error_form text-danger"
 													id="infra_budget_title_field" style="display: none;">Please
-													enter budget title</span>
+													enter budget title.</span>
 											</div>
 										</div>
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget
-												Allocated ${budRupees}<span class="text-danger">*</span>
+												Allocated for Infrastructure ${budRupees}<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" min="0" max="100000000"
@@ -154,18 +154,18 @@
 													autocomplete="off" class="form-control"
 													id="budget_allocated" name="budget_allocated"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Allocated Amount in ${budRupees}"
+													placeholder="Budget Allocated for Infrastructure in ${budRupees}"
 													value="${budget.budgetAllocated}"> <span
 													class="error_form text-danger" id="budget_allocated_field"
 													style="display: none;">Please enter allocated budget
-													amount</span>
+													amount.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized ${budRupees}<span class="text-danger">*</span>
+												Utilized for Infrastructure ${budRupees}<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
@@ -173,14 +173,35 @@
 													name="budget_utilized" min="0" max="100000000"
 													autocomplete="off" maxlength="9"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Utilized Amount in ${budRupees}"
+													placeholder="Budget Utilized for Infrastructure in ${budRupees}"
 													value="${budget.budgetUtilized}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget
 													amount</span> <span class="error_form text-danger"
 													id="budget_utilized_field2" style="display: none;">Please
 													enter budget utilized amount less than or equal to
-													allocated amount</span>
+													allocated amount.</span>
+											</div>
+										</div>
+										
+											<div class="form-group">
+
+											<label class="control-label col-sm-2" for="utilizedAmt">Total Expenditure 
+												for Infrastructure ${budRupees}<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control"
+													id="ttl_expd" onchange="trim(this)"
+													name="ttl_expd" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Total Budget Allocated excluding Salary for Infrastructure in ${budRupees}"
+													value="${budget.exInt1}"> <span
+													class="error_form text-danger" id="budget_utilized_field"
+													style="display: none;">Please enter utilized budget
+													amount</span> <span class="error_form text-danger"
+													id="ttl_exp_field" style="display: none;">Please
+													enter total expenditure for infrastructure and value must be greater than 0.</span>
 											</div>
 										</div>
 										<input type="hidden" id="is_view" name="is_view" value="0">
@@ -292,6 +313,15 @@
 												}
 												
 
+												if ($("#ttl_expd").val()<=0 || !$("#ttl_expd").val()) {
+													isError = true;
+
+													$("#ttl_expd").addClass(
+															"has-error")
+													$("#ttl_exp_field").show()
+												} else {
+													$("#ttl_exp_field").hide()
+												}
 
 												 
 												
