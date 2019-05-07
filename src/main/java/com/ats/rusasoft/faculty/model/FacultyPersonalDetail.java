@@ -10,6 +10,7 @@ public class FacultyPersonalDetail {
 	private String fPhone;
 	private String fResident;
 	private String fAadhar;
+	private String fPan;
 	private String fDob;
 	private float fPastExp;
 	private int fGender;
@@ -59,6 +60,12 @@ public class FacultyPersonalDetail {
 	public void setfAadhar(String fAadhar) {
 		this.fAadhar = fAadhar;
 	}
+	public String getfPan() {
+		return fPan;
+	}
+	public void setfPan(String fPan) {
+		this.fPan = fPan;
+	}
 	public String getfDob() {
 		return fDob;
 	}
@@ -94,8 +101,9 @@ public class FacultyPersonalDetail {
 	public String toString() {
 		return "FacultyPersonalDetail [facultyId=" + facultyId + ", fAddress=" + fAddress + ", isAddSame=" + isAddSame
 				+ ", fAddress2=" + fAddress2 + ", fPhone=" + fPhone + ", fResident=" + fResident + ", fAadhar="
-				+ fAadhar + ", fDob=" + fDob + ", fPastExp=" + fPastExp + ", fGender=" + fGender + ", makerPersUserId="
-				+ makerPersUserId + ", makerPersDatetime=" + makerPersDatetime + "]";
+				+ fAadhar + ", fPan=" + fPan + ", fDob=" + fDob + ", fPastExp=" + fPastExp + ", fGender=" + fGender
+				+ ", makerPersUserId=" + makerPersUserId + ", makerPersDatetime=" + makerPersDatetime + "]";
 	}
+	
 	
 }

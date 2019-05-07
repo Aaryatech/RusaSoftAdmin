@@ -286,6 +286,7 @@ public class FacPersonalController {
 
 				facPersDetail.setfAadhar(request.getParameter("f_aadhar"));
 				facPersDetail.setFacultyId(staffId);
+				facPersDetail.setfPan(request.getParameter("f_pan"));
 				facPersDetail.setfAddress(request.getParameter("fac_address"));
 				facPersDetail.setfAddress2(request.getParameter("fac_address2"));
 				facPersDetail.setfDob(DateConvertor.convertToYMD(request.getParameter("f_dob")));

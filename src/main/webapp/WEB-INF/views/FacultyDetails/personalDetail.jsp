@@ -262,7 +262,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" maxlength="12" class="form-control"
-													id="f_aadhar" name="f_aadhar"
+													id="f_pan" name="f_pan"
 													placeholder="Consecutive 12 digit PAN No"
 													value="${facPerDetail.fAadhar}"> <span
 													class="error_form text-danger" id="f_aadhar_field"
