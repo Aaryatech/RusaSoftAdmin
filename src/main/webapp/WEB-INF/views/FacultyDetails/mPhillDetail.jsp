@@ -243,8 +243,8 @@
 													<div class="form-group">
 														<div class="col-sm-offset-3 col-sm-10">
 															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-<%-- 														<a href="${pageContext.request.contextPath}/showMphillDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
- --%>														</div>
+														<a href="${pageContext.request.contextPath}/addPersonalDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next</button></a>
+ 													</div>
 														<input type="hidden" id="staff_id" name="staff_id"
 														value="${facPhdDetail.facultyId}"> <input
 														type="hidden" id="is_view" name="is_view" value="0">

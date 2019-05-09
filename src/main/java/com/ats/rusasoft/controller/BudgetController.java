@@ -356,7 +356,7 @@ public class BudgetController {
 				lib.setInstituteId(inst_id);
 				lib.setDelStatus(1);
 				lib.setIsActive(1);
-				lib.setExInt1(1);
+				lib.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				lib.setExInt2(1);
 				lib.setExVar1("NA");
 				lib.setExVar2("NA");

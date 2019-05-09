@@ -496,7 +496,7 @@ public class FacultyModuleController {
 				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 
 				model.addObject("activity", facAct);
-				model.addObject("title", "Add Organized - Out Reach Activity");
+				model.addObject("title", "Add Organized Activity");
 			}
 
 		} catch (Exception e) {
@@ -547,7 +547,7 @@ public class FacultyModuleController {
 				List<GetFacultyActivity> facActList = new ArrayList<>(Arrays.asList(faccAcArr));
 				model.addObject("facActList", facActList);
 
-				model.addObject("title", "Organized - Out Reach Activity");
+				model.addObject("title", "Organized Activity");
 				Info add = AccessControll.checkAccess("showOrganizedList", "showOrganizedList", "0", "1", "0", "0",
 						newModuleList);
 				Info edit = AccessControll.checkAccess("showOrganizedList", "showOrganizedList", "0", "0", "1", "0",
@@ -644,7 +644,7 @@ public class FacultyModuleController {
 				int inst_id = (int) session.getAttribute("instituteId");
 
 				model = new ModelAndView("FacultyDetails/organized");
-				model.addObject("title", "Edit Organized - Out Reach Activity");
+				model.addObject("title", "Edit Organized Activity");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 

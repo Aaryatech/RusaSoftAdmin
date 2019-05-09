@@ -112,10 +112,23 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Full Name of Alumni" id="alum_name"
+															placeholder="Full Name of Alumni" id="alum_name" autocomplete="off"
 															value="${alumni.alumniName}" name="alum_name">
 															<span class="error_form text-danger" id="alum_name_field"
 															style="display: none;">Please enter name of alumni</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">Current Position/
+														 Designation<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" onchange="trim(this)"
+															placeholder="Current Position/Designation" id="designation"
+															value="${alumni.exVar1}" name="designation" autocomplete="off">
+															<span class="error_form text-danger" id="designation_field"
+															style="display: none;">Please enter current position/designation</span>
 													</div>
 												</div>
 
@@ -146,20 +159,7 @@
 															
 																	<option value="1" ${alumni.contributionType==1 ? 'Selected' : ''}>Financial</option>
 																	<option value="0" ${alumni.contributionType==0 ? 'Selected' : ''}>Non Financial</option>
-															<%-- <c:choose>
-																<c:when test="${alumni.contributionType==1}">
-																	<option selected value="1">Financial</option>
-																	<option value="0">Non Financial</option>
-																</c:when>
-																<c:when test="${alumni.contributionType==0}">
-																	<option value="1">Financial</option>
-																	<option selected value="0">Non Financial</option>
-																</c:when>
-																<c:otherwise>
-																	<option value="1">Financial</option>
-																	<option value="0">Non Financial</option>
-																</c:otherwise>
-															</c:choose> --%>
+															
 
 														</select>
 														<span class="error_form text-danger" id="contr_type_field"
@@ -176,7 +176,7 @@
 															</label>
 															<div  class="col-sm-9">
 																<input type="text" class="form-control" id="alumini_amt" onchange="trim(this)"
-																	name="alumini_amt" placeholder="Amount"
+																	name="alumini_amt" placeholder="Amount" onfocus="this.value=''"	
 																	value="${alumni.exInt1}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter amount.</span>
 															</div>
@@ -300,7 +300,7 @@
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" class="form-control" id="other_benif"
 															value="${alumni.benefitTo}" name="other_benif"
-															placeholder="Other Beneficiary">
+															placeholder="Other Beneficiary" autocomplete="off">
 															<span class="error_form text-danger" id="other_benif_field"
 															style="display: none;">Please enter name of other beneficiary</span>
 													</div>
@@ -416,6 +416,18 @@
 														$("#error_formfield0")
 																.hide()
 													}
+												}designation
+												
+												if (!$("#designation").val()) {
+													isError = true;
+
+													$("#designation").addClass(
+															"has-error")
+													$("#designation_field")
+															.show()
+												} else {
+													$("#designation_field")
+															.hide()
 												}
 
 												if (!$("#alum_name").val()) {

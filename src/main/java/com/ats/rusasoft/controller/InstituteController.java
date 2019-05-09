@@ -36,6 +36,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.ExportToExcel;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.GenderEqalityPrg;
+import com.ats.rusasoft.model.GovtScholarships;
 import com.ats.rusasoft.model.IctEnabledFacilities;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.InstituteActivity;
@@ -86,7 +87,7 @@ public class InstituteController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
-				model.addObject("title", "Financial Support Scheme List");
+				model.addObject("title", "Other (Besides Government) Financial Support Scheme List");
 				model.addObject("title1",
 						"Institute Support Financially by Awarding Scholarship/Freeships like schemes other than Government Schemes ");
 
@@ -197,7 +198,7 @@ public class InstituteController {
 				model.addObject("acaYearList", acaYearList);
 
 				model.addObject("instSpprt", instSpprt);
-				model.addObject("title", "Add Financial Support Scheme");
+				model.addObject("title", "Add Other (Besides Government) Financial Support Scheme");
 			}
 		} catch (Exception e) {
 
@@ -284,7 +285,7 @@ public class InstituteController {
 						InstituteSupport.class);
 				model.addObject("instSpprt", suprtSchm);
 
-				model.addObject("title", "Edit Financial Support Scheme");
+				model.addObject("title", "Edit Other (Besides Government) Financial Support Scheme");
 
 			}
 		} catch (Exception e) {
@@ -1628,4 +1629,270 @@ public class InstituteController {
 		}
 		return a;
 	}
+	
+	/********************************Goverment Scholarship***************************************/
+
+	@RequestMapping(value = "/showGovernmentScholarships", method = RequestMethod.GET)
+	public ModelAndView showGovernmentScholarships(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/gvtScholarshiopList");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "1", "0", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int yId = (int) session.getAttribute("acYearId");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instituteId", instituteId);
+				map.add("yId", yId);
+
+				GovtScholarships[] govtSchrArr = rest.postForObject(Constants.url + "/getAllGovtScholrSch", map,
+						GovtScholarships[].class);
+				List<GovtScholarships> govtSchrList = new ArrayList<>(Arrays.asList(govtSchrArr));
+				model.addObject("govtSchrList", govtSchrList);
+
+				model.addObject("title", "Government Scholarships");
+				Info add = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0", "1", "0", "0",
+						newModuleList);
+				Info edit = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0", "0", "1", "0",
+						newModuleList);
+				Info delete = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0", "0", "0", "1",
+						newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addGvtScholarship", method = RequestMethod.GET)
+	public ModelAndView addGvtScholarship(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addGovermentScholarship");
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("addGvtScholarship", "showGovernmentScholarships", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				GovtScholarships govtScholr = new GovtScholarships();
+
+				model.addObject("title", "Add Government Scholarships");
+				model.addObject("govtScholr", govtScholr);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertGoveScheme", method = RequestMethod.POST)
+	public String insertGoveScheme(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+
+		int instituteId = (int) session.getAttribute("instituteId");
+		int userId = (int) session.getAttribute("userId");
+		int yId = (int) session.getAttribute("acYearId");
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String curDateTime = dateFormat.format(cal.getTime());
+
+		try {
+			GovtScholarships govt = new GovtScholarships();
+			
+			govt.setGovtScholarId(Integer.parseInt(request.getParameter("govt_scholr_id")));
+			govt.setNameOfScheme(request.getParameter("name_scheme"));
+			govt.setNoOfStudBenftd(Integer.parseInt(request.getParameter("stud_bnfted")));
+			govt.setSchmOffrdBy(request.getParameter("schm_ofrd"));
+			govt.setInstId(instituteId);
+			govt.setAcYearId(yId);
+			govt.setDelStatus(1);
+			govt.setIsActive(1);
+			govt.setMakerUserId(userId);
+			govt.setMakerEntrDatetime(curDateTime);
+			govt.setExInt1(0);
+			govt.setExInt2(0);
+			govt.setExVar1("NA");
+			govt.setExVar2("NA");
+			System.out.println(govt.toString());
+			
+			GovtScholarships ictEnb = rest.postForObject(Constants.url+"/saveGovtScheme", govt, GovtScholarships.class);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/showGovernmentScholarships";
+
+	}
+	
+	@RequestMapping(value = "/editGovtScholrSchm/{schmId}", method = RequestMethod.GET)
+	public ModelAndView editGovtScholrSchm(@PathVariable("schmId") int schmId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addGovermentScholarship");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editGovtScholrSchm/{schmId}", "showGovernmentScholarships", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				GovtScholarships gendrEqualityt = new GovtScholarships();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("schmId", schmId);
+
+				GovtScholarships govtScholr = rest.postForObject(Constants.url + "/editGovtScholrScghmById", map,
+						GovtScholarships.class);
+				model.addObject("govtScholr", govtScholr);
+
+				model.addObject("title", "Edit Government Scholarships");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteGovtScholrSchm/{schmId}", method = RequestMethod.GET)
+	public String deleteGovtScholrSchm(@PathVariable("schmId") int schmId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteGovtScholrSchm/{schmId}", "showGovernmentScholarships", "0", "0",
+					"0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("schmId", schmId);
+
+				GovtScholarships delIct = rest.postForObject(Constants.url + "/delGovtScholrSchmById", map,
+						GovtScholarships.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showGovernmentScholarships";
+	}
+	
+	@RequestMapping(value = "/deleteSelGovtScholarSchemes/{suppSchmid}", method = RequestMethod.GET)
+	public String deleteSelGovtScholarSchemes(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int suppSchmid) {
+
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("deleteSelGovtScholarSchemes/{exActId}", "showGovernmentScholarships", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (suppSchmid == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] govtSchmIds = request.getParameterValues("suppSchmid");
+					System.out.println("id are" + govtSchmIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < govtSchmIds.length; i++) {
+						sb = sb.append(govtSchmIds[i] + ",");
+
+					}
+					String schmIdList = sb.toString();
+					schmIdList = schmIdList.substring(0, schmIdList.length() - 1);
+
+					map.add("schmIdList", schmIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("schmIdList", suppSchmid);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelGovtSchm", map, Info.class);
+
+				a = "redirect:/showGovernmentScholarships";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteSelGovtScholarSchemes at Institute Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
+
 }

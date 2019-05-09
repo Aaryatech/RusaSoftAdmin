@@ -12,6 +12,7 @@ public class GetLibraryBookBudget {
 	private int finYearId;
 	private int acYearId;
 	private int instituteId;
+	private int exInt1;
 
 	private int expenditureOnBookPurchase;
 	private int expenditureOnJournalsPurchase;
@@ -21,6 +22,13 @@ public class GetLibraryBookBudget {
 	private String academicYear;
 	private String finYear;
 	
+	
+	public int getExInt1() {
+		return exInt1;
+	}
+	public void setExInt1(int exInt1) {
+		this.exInt1 = exInt1;
+	}
 	public int getLibraryBookBudgetId() {
 		return libraryBookBudgetId;
 	}

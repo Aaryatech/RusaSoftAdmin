@@ -131,6 +131,9 @@
 														e-Journals ${budRupees}</th>
 													<th style="text-align: right;">Expenditures on
 														e-Resources ${budRupees}</th>
+														
+													<th style="text-align: right;">Expenditures for
+													Library Book ${budRupees}</th>
 													<th style="text-align: center;">Action</th>
 
 												</tr>
@@ -153,6 +156,7 @@
 														<td style="text-align: right;">${budget.expenditureOnJournalsPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnEjournalsPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnEresourcesPurchase}</td>
+														<td style="text-align: right;">${budget.exInt1}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a
 																	onclick="showEditBookBudget(${budget.libraryBookBudgetId})"

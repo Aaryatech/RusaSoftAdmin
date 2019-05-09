@@ -142,7 +142,7 @@
 													placeholder="Expenditures on purchase of Books ${budRupees}"> <span
 													class="error_form text-danger" id="error_pbook"
 													style="display: none;">Please Enter Expenditures on
-													purchase of Books</span>
+													purchase of Books.</span>
 
 											</div>
 										</div>
@@ -162,7 +162,7 @@
 													value="${budget.expenditureOnJournalsPurchase}"> <span
 													class="error_form text-danger" id="error_pjournal"
 													style="display: none;">Please Enter Expenditures on
-													purchase of Journals</span>
+													purchase of Journals.</span>
 											</div>
 										</div>
 
@@ -182,7 +182,7 @@
 													value="${budget.expenditureOnEjournalsPurchase}"> <span
 													class="error_form text-danger" id="error_ejournal"
 													style="display: none;">Please Enter Expenditures on
-													e-Journals</span>
+													e-Journals.</span>
 
 											</div>
 										</div>
@@ -205,11 +205,32 @@
 													value="${budget.expenditureOnEresourcesPurchase}">
 												<span class="error_form text-danger" id="error_eresources"
 													style="display: none;">Please Enter Expenditures on
-													e-Resources</span>
+													e-Resources.</span>
 
 											</div>
 										</div>
-										<input type="hidden" id="budget_id" name="budget_id">
+										
+										<div class="form-group">
+
+											<label class="control-label col-sm-3" for="utilizedAmt">Total Expenditure
+												for Library Book ${budRupees}<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control" min="0"
+													onchange="trim(this)"
+													id="ttl_exp" name="ttl_exp"
+													autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Expenditures on e-Resources ${budRupees}"
+													value="${budget.exInt1}">
+												<span class="error_form text-danger" id="ttl_exp_field"
+													style="display: none;">Please enter total expenditures for
+													library book and value must be greater than 0.</span>
+
+											</div>
+										</div>
+										<input type="hidden" id="budget_id" value="${budget.libraryBookBudgetId}" name="budget_id">
 
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
@@ -379,7 +400,19 @@
 							}
 
 
-            				
+            				if ($("#ttl_exp").val()<=0
+									|| !$("#ttl_exp").val()) {
+								
+								isError = true;
+								$("#ttl_exp")
+										.addClass(
+												"has-error")
+									$("#ttl_exp_field")
+										.show()
+							} else {
+								$("#ttl_exp_field")
+										.hide()
+							}
 
             			  
             				 

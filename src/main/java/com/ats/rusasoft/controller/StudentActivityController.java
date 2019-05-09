@@ -315,7 +315,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/studActivityAttend");
-				model.addObject("title", "Student Activity Attended List");
+				model.addObject("title", "Student Participated Activity List");
 
 				Info add = AccessControll.checkAccess("showStudAttendActivity", "showStudAttendActivity", "0", "1", "0",
 						"0", newModuleList);
@@ -375,7 +375,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/addStudActAttend");
-				model.addObject("title", "Add Student Activity Attended");
+				model.addObject("title", "Add Student Participated Activity");
 
 			} else {
 
@@ -490,7 +490,7 @@ public class StudentActivityController {
 
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				model = new ModelAndView("ProgramDetails/addStudActAttend");
-				model.addObject("title", "Edit Student Activity Attended");
+				model.addObject("title", "Edit Student Participated Activity");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("activityId", activityId);
 				map.add("yearId", acYearId);

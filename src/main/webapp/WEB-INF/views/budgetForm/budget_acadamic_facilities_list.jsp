@@ -119,6 +119,7 @@
 													<th width="40%">Title of Academic Support Activity</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
+													<th>Total Expenditure for Academic Support Facilities ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -139,6 +140,7 @@
 														<td>${budget.academicBudgetTitle}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
+														<td align="right">${budget.exInt1}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/editAcademicBudget/${budget.academicBudgetId}"><span

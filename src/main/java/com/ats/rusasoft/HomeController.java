@@ -352,6 +352,7 @@ public class HomeController {
 					session.setAttribute("addIcon", "fa fa-plus-square-o");
 					session.setAttribute("saveIcon", "fa fa-floppy-o");
 					session.setAttribute("cancelIcon", "fa fa-backward");
+					session.setAttribute("forwardIcon", "fa fa-forward");
 					session.setAttribute("deleteIcon", "fa fa-times");
 				 
 					map =new LinkedMultiValueMap<String, Object>();

@@ -380,7 +380,7 @@
 												<a
 													href="${pageContext.request.contextPath}/showEditFacAcademic"><button
 														type="button" id="sub2" class="btn btn-primary">
-														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next
+														<i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next
 													</button></a> 
 											</div>
 											<input type="hidden" id="staff_id" name="staff_id"

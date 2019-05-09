@@ -113,6 +113,8 @@
 													<th>Financial Year</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
+													<th>Total Expenditure for Green Initiatives 
+													& Waste Management ${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -130,6 +132,7 @@
 
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
+														<td align="right">${budget.exInt1}</td>
 														<td align="center"><c:if test="${editAccess==0}">
 																<a onclick="showEdit(${budget.wasteMngtBudgetId})"
 																	href="#"><span class="glyphicon glyphicon-edit"

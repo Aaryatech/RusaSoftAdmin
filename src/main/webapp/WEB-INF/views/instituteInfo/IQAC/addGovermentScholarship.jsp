@@ -87,90 +87,54 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertIctEnblFac"
+										action="${pageContext.request.contextPath}/insertGoveScheme"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-										<input type="hidden" id="ict_id"
-											name="ict_id" value="${ictEnbFac.ictEnbFacId}">
+										<input type="hidden" id="govt_scholr_id"
+											name="govt_scholr_id" value="${govtScholr.govtScholarId}">
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="title">No of 
-												Classrooms<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="title">Name of 
+												Scheme<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="classroom" onfocus="this.value=''"
-													autocomplete="off" name="classroom" onchange="trim(this)"
-													placeholder="Title of Program" onkeypress='return restrictAlphabets(event)'
-													value="${ictEnbFac.noOfClassroom}"> <span
+												<input type="text" class="form-control" id="name_scheme" 
+													autocomplete="off" name="name_scheme" onchange="trim(this)"
+													placeholder="Name of Scheme"
+													value="${govtScholr.nameOfScheme}"> <span
 													class="error_form text-danger" id="error_formfield1"
-													style="display: none;">Please enter No. of classrooms
-													 and value must be greater than 0.</span>
+													style="display: none;">Please enter name of scheme.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="lcd">No. of 
-												Classrooms with LCD<span class="text-danger">*</span>
+												Students Benefited<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onfocus="this.value=''"
-													autocomplete="off" id="lcd" name="lcd" onkeypress='return restrictAlphabets(event)'
-													placeholder="No. of Classrooms with LCD" value="${ictEnbFac.noClassromLcd}">
+													autocomplete="off" id="stud_bnfted" name="stud_bnfted" onkeypress='return restrictAlphabets(event)'
+													placeholder="No. of Students Benefited " value="${govtScholr.noOfStudBenftd}">
 												<span class="error_form text-danger" id="error_formfield2"
-													style="display: none;">Please enter No. of classrooms with LCD
-													and value must be greater than 0.</span>
+													style="display: none;">Please enter No. student benefited and value must be greater than 0.</span>
 
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="toDate">No. of 
-												Classrooms with Wifi/LAN<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="toDate">Scheme/
+												Support offered By<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onfocus="this.value=''"
-													autocomplete="off" id="wifi" name="wifi" onkeypress='return restrictAlphabets(event)'
-													placeholder="No. of Classrooms with Wifi/LAN" value="${ictEnbFac.noClassroomWifi}">
+												<input type="text" class="form-control" 
+													autocomplete="off" id="schm_ofrd" name="schm_ofrd"
+													placeholder="Scheme/Support offered By" value="${govtScholr.schmOffrdBy}">
 												<span class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter No. of classrooms with wifi/LAN 
-													and value must be greater than 0..</span> 
+													style="display: none;">Please enter scheme/support offered by.</span> 
 											</div>
 										</div>
 
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No. of 
-												Seminar Halls<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="seminar_hall"
-													autocomplete="off" name="seminar_hall" maxlength="7" onkeypress='return restrictAlphabets(event)'
-													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
-													onchange="trim(this)" placeholder="No. of Seminar Halls"
-													value="${ictEnbFac.seminarHall}"> <span
-													class="error_form text-danger" id="error_formfield4"
-													style="display: none;">Please enter No. of seminar halls
-													and value must be greater than 0.</span>
-											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No of Seminar
-												 Halls with ICT <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="ict_seminar"
-													autocomplete="off" name="ict_seminar" maxlength="7" onkeypress='return restrictAlphabets(event)'
-													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
-													onchange="trim(this)" placeholder="No. of Seminar Halls with ICT "
-													value="${ictEnbFac.ictSeminarHall}"> <span
-													class="error_form text-danger" id="error_formfield5"
-													style="display: none;">Please enter No. of seminar halls
-													with ICT and value must be greater than 0.</span>
-											</div>
-										</div>
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -180,7 +144,7 @@
 												</button>
 
 												<a
-													href="${pageContext.request.contextPath}/showICTEnblFaclities"><button
+													href="${pageContext.request.contextPath}/showGovernmentScholarships"><button
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
@@ -260,70 +224,45 @@
             			 var errMsg="";
             			   			
             			
-            			 if($("#classroom").val()<=0 || !$("#classroom").val()){
+            			 if(!$("#name_scheme").val()){
         					 
              				isError=true;
              				errMsg += '<li>Please enter a valid name.</li>';
              				
-             				$("#classroom").addClass("has-error")
+             				$("#name_scheme").addClass("has-error")
              				$("#error_formfield1").show()
              					//return false;
              				} else {
              					$("#error_formfield1").hide()
              				} 
            				
-           				if($("#lcd").val()<=0 || !$("#lcd").val()){
+           				
+           				
+           				if($("#stud_bnfted").val()<=0 || !$("#stud_bnfted").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#lcd").addClass("has-error")
-            				$("#error_formfield2").show();
+            				$("#stud_bnfted").addClass("has-error")
+            				$("#error_formfield2").show()
             					//return false;
             				} else {
             					$("#error_formfield2").hide();
             				} 
            				
-           				if($("#wifi").val()<=0 || !$("#wifi").val()){
-       					 
+           				
+           				if(!$("#schm_ofrd").val()){
+          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#wifi").addClass("has-error")
+            				$("#schm_ofrd").addClass("has-error")
             				$("#error_formfield3").show()
             					//return false;
             				} else {
-            					$("#error_formfield3").hide();
+            					$("#error_formfield3").hide()
             				} 
            				
-           				
-           			
-           				
-           				if($("#seminar_hall").val()==0  || !$("#seminar_hall").val()){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#seminar_hall").addClass("has-error")
-            				$("#error_formfield4").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield4").hide()
-            				} 
-           				
-           			 	if($("#ict_seminar").val()<=0 ||  !$("#ict_seminar").val()){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#ict_seminar").addClass("has-error")
-            				$("#error_formfield5").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield5").hide()
-            				} 
-           			
-            				
 			            	 if (!isError) {
 			            		 
 								var x = confirm("Do you really want to submit the form?");

@@ -59,8 +59,8 @@
 											type="submit" class="btn btn-success">Add</button></a> --%>
 											
 											
-	  <a title="Add"
-											href="${pageContext.request.contextPath}/showAddAlumini"><button
+	 					 <a title="Add"
+											href="${pageContext.request.contextPath}/addAlumniAssociationActivity"><button
 												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
 								</c:if>
 
@@ -68,7 +68,7 @@
 							</div>
 
 						</header>
-						<form action="${pageContext.request.contextPath}/deleteAlum/0"
+						<form action="${pageContext.request.contextPath}/deleteSelectedAlum/0"
 							method="get" id="insListForm">
 							<div class="content-body">
 								<div class="row">
@@ -80,13 +80,18 @@
 											id="example-1">
 											<thead>
 												<tr>
+												<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
 													<th>Sr.No.</th>
-													<th>Name of Alumni</th>
-													<th>Position/Designation</th>
-													<th>Passing Year</th>
-													<th>Nature of Contribution</th>
-													<th>Year of Contribution</th>
-													<th>Benefit To</th>
+													<th>Alumni Meeting Agenda</th>
+													<th>Date of Meeting</th>
+													<th>Name of Alumni Association</th>
+													<th>Alumni Registration No.</th>
+													<th>Date of Alumni Registration</th>
+													<th>No. of Alumni Register</th>
+													<th>No. of Member Attended</th>
+													<th>Total No. of Alumni Enrolled</th>
 													<th>Action</th>
 												</tr>
 
@@ -94,28 +99,25 @@
 											<tbody>
 												<c:forEach items="${alumList}" var="alum" varStatus="count">
 													<tr>
+													<td align="center"><input type="checkbox" class="chk" name="alumni"
+														id="alumnis${count.index+1}" value="${alum.almAssocActId}"/></td> 
 														<td align="center">${count.index+1}</td>
-														<td align="left">${alum.alumniName}</td>
-														<td align="left">${alum.exVar1}</td>
-														<td align="center">${alum.passingYear}</td>
-														<c:if test="${alum.contributionType==1}">
-															<td align="left">Financial</td>
-														</c:if>
-														<c:if test="${alum.contributionType==0}">
-															<td align="left">Non Financial</td>
-														</c:if>
-
-														<td align="center">${alum.contributionYear}</td>
-														<td align="left">${alum.benefitTo}</td>
+														<td align="left">${alum.alumniMeetngAgnda}</td>
+														<td align="center">${alum.dateOfMeeting}</td>
+														<td align="center">${alum.nameAlumniAssoc}</td>
+														<td align="center">${alum.alumniRegNo}</td>
+														<td align="center">${alum.dateAlumniReg}</td>
+														<td align="center">${alum.noAlumniReg}</td>	
+														<td align="center">${alum.noMemberAttended}</td>
+														<td align="left">${alum.ttlNoAlumniEnrolled}</td>
 
 														<td align="center"><c:if test="${editAccess==0}">
-																<a href="#"
-																	onclick="showEditAlum(${alum.alumniDetailId})"><span
+																<a href="${pageContext.request.contextPath}/editAlumAlumniAssocAct/${alum.almAssocActId}"><span
 																	class="glyphicon glyphicon-edit" title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp; </c:if>
 															<c:if test="${deleteAccess==0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteAlum/${alum.alumniDetailId}"
+																	href="${pageContext.request.contextPath}/deleteAlumniAssocAct/${alum.almAssocActId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -129,6 +131,13 @@
 											</tbody>
 
 										</table>
+										<c:if test="${deleteAccess==0}">
+														<button class="btn btn-primary" id="deleteId"
+															onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+															style="align-content: center; width: 113px; margin-left: 40px;">
+															<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+														</button>
+													</c:if>
 									</div>
 									<input type="hidden" id="edit_alum_id" name="edit_alum_id"
 										value="0">
@@ -146,80 +155,20 @@
 		<!-- END CONTENT -->
 
 	</div>
-
-	<script type="text/javascript">
-	function getData() {
-	//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-		var name=document.getElementById("name").value
-		var academicYear=document.getElementById("academicYear").value
-		var year=document.getElementById("passYear").value
-		var nature=document.getElementById("nature").value
-		var year1=document.getElementById("year1").value
-		
-		
-		var package1=document.getElementById("level").value
-		
-		var otherScheme=document.getElementById("otherScheme").value
-		//alert(stud);
-		var temp;
-		if (package1 == 7) {
-
-			temp=otherScheme;
-			//alert(temp);
-		} 
-		else{
-			temp=package1;
-		}
-		
-		
-		//alert(stud);
-		
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-					name,
-					year,
-					nature,
-					year1,
-					temp
-					
-						 ])
-		.draw();
-		
-		
-		document.getElementById("index").value = i + 1;
-	}
-	
-	function showForm() {
-		//document.getElementById("abc").style = "display:none"
-			var qualType=document.getElementById("level").value
-			//alert("qualType::"+qualType);
-			
-			if (qualType == 7) {
-				document.getElementById("abc").style = "visible"
-			} 
-			else{
-				document.getElementById("abc").style = "display:none"
-			}
-		}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-
-	</script>
-	<!-- END CONTAINER -->
-	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+ <script>
+
+   function selectedInst(source) {
+
+		checkboxes = document.getElementsByName('alumni');
+
+		for (var i = 0, n = checkboxes.length; i < n; i++) {
+			checkboxes[i].checked = source.checked;
+
+		}
+
+	}
+   </script>
 	<script>
 		function clearSessionAttribute() {
 
@@ -232,19 +181,6 @@
 			});
 
 		}
-		
-		function showEditAlum(almId){
-			document.getElementById("edit_alum_id").value=almId;//create this 
-			var form=document.getElementById("insListForm");
-		    form.setAttribute("method", "post");
-
-			form.action=("showEditAlum");
-			form.submit();
-			
-		}
-		
-
-		
 	</script>
 	
 </body>

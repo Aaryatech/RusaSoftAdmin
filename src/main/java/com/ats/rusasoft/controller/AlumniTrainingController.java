@@ -19,12 +19,14 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.model.prodetail.AlumniAssocAct;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
 import com.ats.rusasoft.master.model.prodetail.Cast;
 import com.ats.rusasoft.master.model.prodetail.GetAlumni;
@@ -34,6 +36,7 @@ import com.ats.rusasoft.master.model.prodetail.HigherEducDetail;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.master.model.prodetail.TrainPlacement;
 import com.ats.rusasoft.model.Dept;
+import com.ats.rusasoft.model.GovtScholarships;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
@@ -41,6 +44,7 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 @Controller
 @Scope("session")
 public class AlumniTrainingController {
+	RestTemplate rest = new RestTemplate();
 	
 	@RequestMapping(value = "/blockUser", method = RequestMethod.POST)
 	public String blockUser(HttpServletRequest request, HttpServletResponse response) {
@@ -94,7 +98,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/alumini");
 
-			model.addObject("title", "Alumni Contribution Activities Details");
+			model.addObject("title", "Alumni Contribution Activity");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -173,7 +177,7 @@ public class AlumniTrainingController {
 
 				model = new ModelAndView("ProgramDetails/addAluminiDetails");
 
-				model.addObject("title", "Add Alumni Contribution Activities Details");
+				model.addObject("title", "Add Alumni Contribution Activity");
 				AlumniDetail alumni = new AlumniDetail();
 				model.addObject("alumni", alumni);
 			} else {
@@ -265,7 +269,7 @@ public class AlumniTrainingController {
 					alumni.setExInt2(0);
 					}
 					String exVar1 = "NA";
-					alumni.setExVar1(exVar1);
+					alumni.setExVar1(request.getParameter("designation"));
 					alumni.setExVar2(exVar1);
 					alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
 					alumni.setIsActive(1);
@@ -285,7 +289,7 @@ public class AlumniTrainingController {
 					alumni.setProgramId(1);
 					int yearId = (int) session.getAttribute("acYearId");
 					alumni.setYearId(yearId);
-
+System.out.println(alumni.toString());
 					AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
 							AlumniDetail.class);
 
@@ -321,7 +325,7 @@ public class AlumniTrainingController {
 						alumni.setBenefitTo(request.getParameter("benif_to"));
 
 					}
-
+					alumni.setExVar1(request.getParameter("designation"));
 					alumni.setContributionType(Integer.parseInt(request.getParameter("contr_type")));
 					alumni.setContributionYear(request.getParameter("contr_year"));
 					alumni.setMakerDatetime(curDateTime);
@@ -373,7 +377,7 @@ public class AlumniTrainingController {
 
 				model = new ModelAndView("ProgramDetails/addAluminiDetails");
 
-				model.addObject("title", "Edit Alumni Contribution Activities Details");
+				model.addObject("title", "Edit Alumni Contribution Activity");
 
 				int alumniId = Integer.parseInt(request.getParameter("edit_alum_id"));
 
@@ -1206,5 +1210,294 @@ public class AlumniTrainingController {
 		return redirect;
 
 	}
+	
+	
+	
+	/***************************************Alumni Association Activity**********************************/
+	
+	@RequestMapping(value = "/showAlumniAssociationActivity", method = RequestMethod.GET)
+	public ModelAndView showAlumniAssociationActivity(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/almniAssoActList");
+
+			model.addObject("title", "Alumni Association Activity");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "1", "0", "0", "0",
+					newModuleList);
+
+			if (viewAccess.isError() == false) {
+
+				Info addAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "1", "0", "0",
+						newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "0", "1", "0",
+						newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "0", "0", "1",
+						newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false)
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				System.err.println("sess " + userObj.getGetData().getUserInstituteId()+"  "+session.getAttribute("acYearId"));
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yId", session.getAttribute("acYearId"));
+				
+
+				AlumniAssocAct[] almArray = rest.postForObject(Constants.url + "getAlumniAssocActivitiesList", map,
+						AlumniAssocAct[].class);
+				List<AlumniAssocAct> alumList = new ArrayList<>(Arrays.asList(almArray));
+				System.err.println("alumList " + alumList.toString());
+
+				model.addObject("alumList", alumList);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showAlumniAssociationActivity at AlumniTrain Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addAlumniAssociationActivity", method = RequestMethod.GET)
+	public ModelAndView addAlumniAssociationActivity(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info addAccess = AccessControll.checkAccess("addAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "1", "0", "0",
+					newModuleList);
+			if (addAccess.isError() == false) {
+
+				model = new ModelAndView("ProgramDetails/addAlmniAssocAct");
+
+				model.addObject("title", "Add Alumni Association Activity");
+				AlumniAssocAct alumni = new AlumniAssocAct();
+				model.addObject("alumni", alumni);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In addAlumniAssociationActivity at AlmniTrain Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}//insertAlumniAssocAct
+	
+	@RequestMapping(value = "/insertAlumniAssocAct", method = RequestMethod.POST)
+	public String insertAlumniAssocAct(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
+			
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String curDateTime = dateFormat.format(cal.getTime());
+			
+			
+			AlumniAssocAct alumni = new AlumniAssocAct();
+			alumni.setAlmAssocActId(Integer.parseInt(request.getParameter("alumni_assoc_act_id")));
+			alumni.setAlumniMeetngAgnda(request.getParameter("alum_meet_agnd"));
+			alumni.setDateOfMeeting(request.getParameter("date_meet"));
+			alumni.setNameAlumniAssoc(request.getParameter("name_alumini_assoc"));
+			alumni.setAlumniRegNo(Integer.parseInt(request.getParameter("almni_reg_no")));
+			alumni.setDateAlumniReg(request.getParameter("date_of_almni_reg"));
+			alumni.setNoAlumniReg(Integer.parseInt(request.getParameter("registred_almni_no")));
+			alumni.setNoMemberAttended(Integer.parseInt(request.getParameter("no_member_attnd")));
+			alumni.setTtlNoAlumniEnrolled(Integer.parseInt(request.getParameter("ttl_no_almni_enrolled")));
+			alumni.setInstId(instituteId);
+			alumni.setAcYearId(yId);
+			alumni.setDelStatus(1);
+			alumni.setIsActive(1);
+			alumni.setMakerUserId(userId);
+			alumni.setMakerEnterDatetime(curDateTime);
+			alumni.setExInt1(0);
+			alumni.setExInt2(0);
+			alumni.setExVar1("NA");
+			alumni.setExVar2("NA");
+			
+			AlumniAssocAct almAct = rest.postForObject(Constants.url+"/saveAlumniAssoAct", alumni, AlumniAssocAct.class);
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		
+		return "redirect:/showAlumniAssociationActivity";
+		
+	}
+	
+	@RequestMapping(value = "/editAlumAlumniAssocAct/{almniActivityId}", method = RequestMethod.GET)
+	public ModelAndView editAlumAlumniAssocAct(@PathVariable("almniActivityId") int almniActivityId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("ProgramDetails/addAlmniAssocAct");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editAlumAlumniAssocAct/{almniActivityId}", "showAlumniAssociationActivity", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("almniActivityId", almniActivityId);
+
+				AlumniAssocAct alumni = rest.postForObject(Constants.url + "/editAlumniAssocActivityById", map,
+						AlumniAssocAct.class);
+				model.addObject("alumni", alumni);
+
+				model.addObject("title", "Edit Alumni Association Activity");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteAlumniAssocAct/{almniActivityId}", method = RequestMethod.GET)
+	public String deleteAlumniAssocAct(@PathVariable("almniActivityId") int almniActivityId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteAlumniAssocAct/{almniActivityId}", "showAlumniAssociationActivity", "0", "0",
+					"0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("almniActivityId", almniActivityId);
+
+				AlumniAssocAct delIct = rest.postForObject(Constants.url + "/delAlumniAssocActivityById", map,
+						AlumniAssocAct.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showAlumniAssociationActivity";
+	}
+	
+	@RequestMapping(value = "/deleteSelectedAlum/{alumni}", method = RequestMethod.GET)
+	public String deleteSelectedAlum(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int alumni) {
+
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteSelectedAlum/{alumni}", "showAlumniAssociationActivity", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (alumni == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] alumnis = request.getParameterValues("alumni");
+					System.out.println("id are" + alumnis);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < alumnis.length; i++) {
+						sb = sb.append(alumnis[i] + ",");
+
+					}
+					String alumniList = sb.toString();
+					alumniList = alumniList.substring(0, alumniList.length() - 1);
+
+					map.add("alumniList", alumniList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("alumniList", alumni);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelAlumni", map, Info.class);
+
+				a = "redirect:/showAlumniAssociationActivity";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In deleteSelectedAlum at Institute Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
+
 
 }

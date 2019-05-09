@@ -187,6 +187,25 @@
 													allocated amount</span>
 											</div>
 										</div>
+										
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="utilizedAmt">Total
+												Expenditure for Academic Support Facilities ${budRupees}<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control"
+													id="ttl_exp" onchange="trim(this)"
+													name="ttl_exp" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Total Expenditure for Academic Support Facilities in ${budRupees}"
+													value="${editBudget.exInt1}"> <span
+													class="error_form text-danger" id="ttl_exp_field"
+													style="display: none;">Please enter total expenditure for academic
+													support facilities and value must be greater than 0.</span> 
+											</div>
+										</div>
 
 
 										<div class="form-group">
@@ -435,6 +454,19 @@
 															.show()
 												} else {
 													$("#budget_utilized_field")
+															.hide()
+												}
+												
+												if ($("#ttl_exp").val()<=0 || !$("#ttl_exp").val()) {
+
+													isError = true;
+													$("#ttl_exp")
+															.addClass(
+																	"has-error")
+													$("#ttl_exp_field")
+															.show()
+												} else {
+													$("#ttl_exp_field")
 															.hide()
 												}
 												/* if (parseInt($(

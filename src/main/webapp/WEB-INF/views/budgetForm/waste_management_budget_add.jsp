@@ -122,7 +122,7 @@
 													</c:forEach>
 
 												</select> <span class="error_form text-danger" id="fin_year_id_field"
-													style="display: none;">Please select financial year</span>
+													style="display: none;">Please select financial year.</span>
 											</div>
 										</div>
 
@@ -141,7 +141,7 @@
 													value="${budget.budgetAllocated}"> <span
 													class="error_form text-danger" id="budget_allocated_field"
 													style="display: none;">Please enter allocated budget
-													amount</span>
+													amount.</span>
 											</div>
 										</div>
 
@@ -160,10 +160,29 @@
 													value="${budget.budgetUtilized}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget
-													amount</span> <span class="error_form text-danger"
+													amount.</span> <span class="error_form text-danger"
 													id="budget_utilized_field2" style="display: none;">Please
 													enter budget utilized amount less than or equal to
-													allocated amount</span>
+													allocated amount.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+
+											<label class="control-label col-sm-2" for="utilizedAmt">Total Expenditure
+												for Green Initiatives & Waste Mgnt. ${budRupees}<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control"
+													id="ttl_exp" onchange="trim(this)"
+													name="ttl_exp" min="0" max="100000000"
+													autocomplete="off" maxlength="9"
+													onkeypress='return restrictAlphabets(event)'
+													placeholder="Total Expenditure for Green Initiatives & Waste Mgnt. in ${budRupees}"
+													value="${budget.exInt1}"> <span
+													class="error_form text-danger" id="ttl_exp_field"
+													style="display: none;">Please enter total expenditure for green initiative &
+													waste management and value must be greater than 0.</span> 
 											</div>
 										</div>
 
@@ -290,6 +309,20 @@
 															.show()
 												} else {
 													$("#budget_utilized_field")
+															.hide()
+												}
+												
+												if ($("#ttl_exp").val()<=0
+														|| !$("#ttl_exp").val()) {
+													
+													isError = true;
+													$("#ttl_exp")
+															.addClass(
+																	"has-error")
+		 											$("#ttl_exp_field")
+															.show()
+												} else {
+													$("#ttl_exp_field")
 															.hide()
 												}
 												/* if(parseInt($("#budget_utilized").val()) > parseInt($("#budget_allocated").val())){

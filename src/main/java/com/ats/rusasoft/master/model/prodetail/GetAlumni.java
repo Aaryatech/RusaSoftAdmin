@@ -15,6 +15,16 @@ public class GetAlumni {
 	private String contributionYear;
 
 	private String benefitTo;
+	private String exVar1;
+	
+
+	public String getExVar1() {
+		return exVar1;
+	}
+
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
+	}
 
 	public int getAlumniDetailId() {
 		return alumniDetailId;
@@ -76,8 +86,10 @@ public class GetAlumni {
 	public String toString() {
 		return "GetAlumni [alumniDetailId=" + alumniDetailId + ", instituteId=" + instituteId + ", alumniName="
 				+ alumniName + ", passingYear=" + passingYear + ", contributionType=" + contributionType
-				+ ", contributionYear=" + contributionYear + ", benefitTo=" + benefitTo + "]";
+				+ ", contributionYear=" + contributionYear + ", benefitTo=" + benefitTo + ", exVar1=" + exVar1 + "]";
 	}
+
+	
 	
 
 }
