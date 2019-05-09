@@ -1,8 +1,10 @@
 package com.ats.rusasoft.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +30,7 @@ import com.ats.rusasoft.master.ProgramMission;
 import com.ats.rusasoft.master.ProgramSpeceficOutcome;
 import com.ats.rusasoft.master.model.Program;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
+import com.ats.rusasoft.master.model.prodetail.StudQualifyingExam;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
@@ -1798,5 +1801,269 @@ public class StudentActivityController {
 
 	}
 	
+/*************************************Students Qualifying Exam Details*************************************/
+	
+	
+	@RequestMapping(value = "/showStudentsQualifyingExamDetails", method = RequestMethod.GET)
+	public ModelAndView showStudentsQualifyingExamDetails(HttpServletRequest request, HttpServletResponse response) {
 
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "1", "0", "0",
+					"0", newModuleList);
+
+			System.out.println(view);
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			if (view.isError() == false) {
+
+				model = new ModelAndView("ProgramDetails/studQualifyExamDtl");
+				model.addObject("title", "Students Qualifying Exam Details");
+
+				Info add = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "0", "1", "0",
+						"0", newModuleList);
+				Info edit = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "0", "0",
+						"1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "0", "0",
+						"0", "1", newModuleList);
+
+				if (add.isError() == false) {
+					model.addObject("isAdd", 1);
+				}
+				if (edit.isError() == false) {
+					model.addObject("isEdit", 1);
+				}
+				if (delete.isError() == false) {
+					model.addObject("isDelete", 1);
+				}
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				RestTemplate restTemplate = new RestTemplate();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("yearId", acYearId);
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				StudQualifyingExam[] studQlifExamArr = restTemplate
+						.postForObject(Constants.url + "getStudQualifiedExamList", map, StudQualifyingExam[].class);
+				List<StudQualifyingExam> studQlifExamList = new ArrayList<StudQualifyingExam>(Arrays.asList(studQlifExamArr));
+				model.addObject("studQlifExamList", studQlifExamList);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	@RequestMapping(value = "/addStudQualifyExmDtl", method = RequestMethod.GET)
+	public ModelAndView addStudQualifyExmDtl(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("addStudQualifyExmDtl", "showStudentsQualifyingExamDetails", "0", "1",
+					"0", "0", newModuleList);
+
+			System.out.println(view);
+
+			if (view.isError() == false) {
+				StudQualifyingExam studQlifyExam = new StudQualifyingExam();
+				model = new ModelAndView("ProgramDetails/addStudQualifyExamDetail");
+				model.addObject("title", "Add Students Qualifying Exam Details");
+				model.addObject("studQlifyExam", studQlifyExam);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertStudQualifyExamDtl", method = RequestMethod.POST)
+	public String insertStudQualifyExamDtl(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			
+			HttpSession session = request.getSession();
+
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
+
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
+			
+			StudQualifyingExam stud = new StudQualifyingExam();
+			
+			stud.setStudExmId(Integer.parseInt(request.getParameter("studExmId")));
+			stud.setNameQualifExam(request.getParameter("qualify_exam"));
+			stud.setLevelExam(request.getParameter("exam_level"));
+			stud.setNoStudAppeared(Integer.parseInt(request.getParameter("no_stud_appear")));
+			stud.setNoStudQualified(Integer.parseInt(request.getParameter("no_stud_qualify")));
+			stud.setInstId(instituteId);
+			stud.setAcYearId(yId);
+			stud.setDelStatus(1);
+			stud.setIsActive(1);
+			stud.setMakerUserId(userId);
+			stud.setMakerEnterDatetime(curDateTime);
+			stud.setExInt1(0);
+			stud.setExInt2(0);
+			stud.setExVar1("NA");
+			stud.setExVar2("NA");
+			//System.out.println(stud.toString());
+			StudQualifyingExam addStudQalifyExam = restTemplate.postForObject(Constants.url+"/saveStudQualifyExam", stud, StudQualifyingExam.class);
+		
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/showStudentsQualifyingExamDetails";
+	}
+	
+	@RequestMapping(value = "/editStudQualifyExam/{studExmId}", method = RequestMethod.GET)
+	public ModelAndView editStudQualifyExam(@PathVariable("studExmId") int studExmId, HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView model = null;
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("/editStudQualifyExam/{studExmId}", "showStudentsQualifyingExamDetails", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+			else {
+				
+				model = new ModelAndView("ProgramDetails/addStudQualifyExamDetail");
+				model.addObject("title", "Edit Students Qualifying Exam Details");
+				
+				map.add("studExmId", studExmId);
+				StudQualifyingExam studQlifyExam = restTemplate.postForObject(Constants.url + "getStudQulifExmById",map,
+						StudQualifyingExam.class);
+				model.addObject("studQlifyExam", studQlifyExam);
+				
+				
+				
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteStudQualifyExam/{studExmId}", method = RequestMethod.GET)
+	public String deleteStudQualifyExam(@PathVariable("studExmId") int studExmId, HttpServletRequest request,
+			HttpServletResponse response) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+			String a = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteStudQualifyExam/{studExmId}", "showStudentsQualifyingExamDetails", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("studExmId", studExmId);
+
+				StudQualifyingExam delAct = restTemplate.postForObject(Constants.url + "/deleteStudQulifExmByById", map, StudQualifyingExam.class);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return "redirect:/showStudentsQualifyingExamDetails";
+
+	}
+
+	@RequestMapping(value = "/delSlectedStudQlifExmDtl/{studQlfExmId}", method = RequestMethod.GET)
+	public String delSlectedStudQlifExmDtl(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int studQlfExmId) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedStudQlifExmDtl/{studQlfExmId}", "showStudentsQualifyingExamDetails", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (studQlfExmId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] studQlfExmIds = request.getParameterValues("studQlfExmId");
+					System.out.println("id are" + studQlfExmId);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < studQlfExmIds.length; i++) {
+						sb = sb.append(studQlfExmIds[i] + ",");
+
+					}
+					String studQlfExmIdList = sb.toString();
+					studQlfExmIdList = studQlfExmIdList.substring(0, studQlfExmIdList.length() - 1);
+
+					map.add("studQlfExmIdList", studQlfExmIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("studQlfExmIdList", studQlfExmId);
+				}
+
+				Info errMsg = restTemplate.postForObject(Constants.url + "deleteSelStudQulifiedExm", map, Info.class);
+
+				a = "redirect:/showStudentsQualifyingExamDetails";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+	
+	
 }

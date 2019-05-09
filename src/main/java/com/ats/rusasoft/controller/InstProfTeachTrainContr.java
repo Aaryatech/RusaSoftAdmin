@@ -58,7 +58,7 @@ public class InstProfTeachTrainContr {
 				model = new ModelAndView("instituteInfo/IQAC/profDevelpment");
 				// model.addObject("title", "Training Teaching List");
 
-				model.addObject("title", "Teaching Staff - Training Activities List");
+				model.addObject("title", "Professional Development (Teachers) Training");
 
 				Info addAccess = AccessControll.checkAccess("showProfDevelopment", "showProfDevelopment", "0", "1", "0",
 						"0", newModuleList);
@@ -122,7 +122,7 @@ public class InstProfTeachTrainContr {
 
 			if (addAccess.isError() == false) {
 
-				model.addObject("title", "Add Teaching Staff - Training Activities");
+				model.addObject("title", "Add Professional Development (Teachers) Training");
 
 				model.addObject("trainnig_type", 1);
 			}
@@ -260,7 +260,7 @@ public class InstProfTeachTrainContr {
 				// model = new ModelAndView("instituteInfo/IQAC/administrativeDevlop");
 				// model.addObject("title", "Training Non-Teaching List");
 
-				model.addObject("title", "Non Teaching (Admin) Staff - Training Activities List");
+				model.addObject("title", "Administrative Development(Non-Teaching) Training");
 
 				Info addAccess = AccessControll.checkAccess("showAdminDevelopment", "showAdminDevelopment", "0", "1",
 						"0", "0", newModuleList);
@@ -329,7 +329,7 @@ public class InstProfTeachTrainContr {
 
 			if (addAccess.isError() == false) {
 				model = new ModelAndView("instituteInfo/IQAC/add_prof_dev");
-				model.addObject("title", " Add Non Teaching (Admin) Staff - Training Activities");
+				model.addObject("title", " Add Administrative Development(Non-Teaching) Training");
 				model.addObject("trainnig_type", 2);
 
 			} else {
@@ -359,9 +359,9 @@ public class InstProfTeachTrainContr {
 			int trainingId = Integer.parseInt(request.getParameter("training_id"));
 
 			if (trainnig_type == 2) {
-				model.addObject("title", "Edit Non Teaching (Admin) Staff - Training Activities List");
+				model.addObject("title", "Edit Administrative Development(Non-Teaching) Training");
 			} else {
-				model.addObject("title", "Edit Teaching Staff - Training Activities List");
+				model.addObject("title", "Edit Professional Development (Teachers) Training");
 			}
 			model.addObject("trainnig_type", trainnig_type);
 

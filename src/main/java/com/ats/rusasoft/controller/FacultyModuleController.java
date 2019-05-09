@@ -29,8 +29,10 @@ import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.faculty.model.FacultiContributionList;
 import com.ats.rusasoft.faculty.model.FacultyBookList;
 import com.ats.rusasoft.faculty.model.FacultyConferenceList;
+import com.ats.rusasoft.faculty.model.FacultyEmpowerment;
 import com.ats.rusasoft.faculty.model.GetFacultyPhdGuide;
 import com.ats.rusasoft.faculty.model.PhdGuidList;
+import com.ats.rusasoft.master.model.prodetail.StudQualifyingExam;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.FacultyActivity;
 import com.ats.rusasoft.model.FacultyBook;
@@ -1697,7 +1699,7 @@ public class FacultyModuleController {
 
 				model = new ModelAndView("FacultyDetails/outReachContri");
 
-				model.addObject("title", "Add Contribution - Out Reach Activity");
+				model.addObject("title", "Add Faculty Out Reach Contribution");
 				model.addObject("facContri", facCon);
 			}
 		} catch (Exception e) {
@@ -1795,7 +1797,7 @@ public class FacultyModuleController {
 				List<FacultiContributionList> faccList = new ArrayList<>(Arrays.asList(faccArr));
 
 				model.addObject("ContriList", faccList);
-				model.addObject("title", "Contribution - Out Reach Activity");
+				model.addObject("title", "Faculty Out Reach Contribution");
 				Info add = AccessControll.checkAccess("showOutReachContriList", "showOutReachContriList", "0", "1", "0",
 						"0", newModuleList);
 				Info edit = AccessControll.checkAccess("showOutReachContriList", "showOutReachContriList", "0", "0",
@@ -1854,7 +1856,7 @@ public class FacultyModuleController {
 				FacultyContribution fcondata = rest.postForObject(Constants.url + "/getOutReachContriById", map,
 						FacultyContribution.class);
 				model.addObject("facContri", fcondata);
-				model.addObject("title", "Edit Contribution - Out Reach Activity");
+				model.addObject("title", "Edit Faculty Out Reach Contribution");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2251,4 +2253,207 @@ public class FacultyModuleController {
 		return a;
 	}
 
+	/*************************************** Faculty Empowerment************************************/
+	@RequestMapping(value = "/showFacultyEmpowerment", method = RequestMethod.GET)
+	public ModelAndView showFacultyEmpowerment(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showFacultyEmpowerment", "showFacultyEmpowerment", "1", "0", "0",
+					"0", newModuleList);
+
+			System.out.println(view);
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+			if (view.isError() == false) {
+
+				model = new ModelAndView("FacultyDetails/facultyEmpowrList");
+				model.addObject("title", "Faculty Empowerment");
+
+				Info add = AccessControll.checkAccess("showFacultyEmpowerment", "showFacultyEmpowerment", "0", "1", "0",
+						"0", newModuleList);
+				Info edit = AccessControll.checkAccess("showFacultyEmpowerment", "showFacultyEmpowerment", "0", "0",
+						"1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showFacultyEmpowerment", "showFacultyEmpowerment", "0", "0",
+						"0", "1", newModuleList);
+
+				if (add.isError() == false) {
+					model.addObject("isAdd", 1);
+				}
+				if (edit.isError() == false) {
+					model.addObject("isEdit", 1);
+				}
+				if (delete.isError() == false) {
+					model.addObject("isDelete", 1);
+				}
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				RestTemplate restTemplate = new RestTemplate();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("yearId", acYearId);
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				FacultyEmpowerment[] facEmpowrArr = restTemplate
+						.postForObject(Constants.url + "getFacEmpowerList", map, FacultyEmpowerment[].class);
+				List<FacultyEmpowerment> facEmpowrList = new ArrayList<FacultyEmpowerment>(Arrays.asList(facEmpowrArr));
+				model.addObject("facEmpowrList", facEmpowrList);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/addFacultyEmpower", method = RequestMethod.GET)
+	public ModelAndView addFacultyEmpower(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		MultiValueMap<String, Object> map = null;
+		try {
+
+			System.out.println("Hello");
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("addFacultyEmpower", "showFacultyEmpowerment", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				FacultyEmpowerment facultyEmpowr = new FacultyEmpowerment();
+				model = new ModelAndView("FacultyDetails/addFacultyEmpowrment");
+
+				model.addObject("title", "Add Faculty Empowerment");
+				model.addObject("facultyEmpowr", facultyEmpowr);
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showFacultyEmpowerment at Faculty Module Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertFacEmpower", method = RequestMethod.POST)
+	public String insertFacEmpower(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int yId = (int) session.getAttribute("acYearId");
+			int userId = (int) session.getAttribute("userId");
+			
+			FacultyEmpowerment fac = new FacultyEmpowerment();
+			
+			fac.setFacultyEmpwrmntId(Integer.parseInt(request.getParameter("fac_empwr_id")));
+			fac.setNameOfAcitvity(request.getParameter("actvity_name"));
+			fac.setTitle(request.getParameter("title"));
+			fac.setFinancialSupport(Integer.parseInt(request.getParameter("financial_suprt")));
+			fac.setAmt_recvd_from(request.getParameter("amt_rcvd_frm"));
+			fac.setFromDate(request.getParameter("fromDate"));
+			fac.setToDate(request.getParameter("toDate"));
+			fac.setInstId(userObj.getStaff().getInstituteId());
+			fac.setAcYearId(yId);
+			fac.setDelStatus(1);
+			fac.setIsActive(1);
+			fac.setMakerEnterDatetime(curDateTime);
+			fac.setMakerUserId(userId);
+			fac.setExInt1(0);
+			fac.setExInt2(0);
+			fac.setExVar1("NA");
+			fac.setExVar2("NA");
+			
+			FacultyEmpowerment saveFacEmpwr = rest.postForObject(Constants.url+"/saveFacultyEmpowerment", fac, FacultyEmpowerment.class);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/showFacultyEmpowerment";
+	}
+
+	@RequestMapping(value = "/editFacultyEmpower/{facEmpwrId}", method = RequestMethod.GET)
+	public ModelAndView editFacultyEmpower(@PathVariable("facEmpwrId") int facEmpwrId, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		ModelAndView model = null;
+
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("editFacultyEmpower/{facEmpwrId}", "showFacultyEmpowerment", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("FacultyDetails/addFacultyEmpowrment");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				
+				map.add("facEmpwrId", facEmpwrId);
+				FacultyEmpowerment facultyEmpowr = rest.postForObject(Constants.url + "/getFacultyEmpowerById", map,
+						FacultyEmpowerment.class);
+				model.addObject("facultyEmpowr", facultyEmpowr);
+				model.addObject("title", "Edit Faculty Empowerment");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteFacultyEmpower/{facEmpwrId}", method = RequestMethod.GET)
+	public String deleteFacultyEmpower(@PathVariable("facEmpwrId") int facEmpwrId, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			ModelAndView model = null;
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("deleteFacultyEmpower/{facEmpwrId}", "showFacultyEmpowerment", "0", "0", "0", "1",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("facEmpwrId", facEmpwrId);
+
+				FacultyEmpowerment delFac = rest.postForObject(Constants.url + "/deleteFacultyEmpowerById", map,
+						FacultyEmpowerment.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/showFacultyEmpowerment";
+
+	}
+	
 }
