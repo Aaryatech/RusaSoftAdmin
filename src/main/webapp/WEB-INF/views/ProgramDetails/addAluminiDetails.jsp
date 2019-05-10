@@ -172,12 +172,12 @@
 												<div class="form-group" id="ihide" style="display: none;">
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="smallheading">Amount
-																(Rs)<span class="text-danger">*</span>
+																(Rs.)<span class="text-danger">*</span>
 															</label>
 															<div  class="col-sm-9">
 																<input type="text" class="form-control" id="alumini_amt" onchange="trim(this)"
 																	name="alumini_amt" placeholder="Amount" onfocus="this.value=''"	
-																	value="${alumni.exInt1}" autocomplete="off">
+																	value="${alumni.exInt1}" autocomplete="off"  onkeypress='return restrictAlphabets(event)'>
 																	<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter amount.</span>
 															</div>
 														</div>
@@ -715,7 +715,20 @@
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
+<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 
 
 

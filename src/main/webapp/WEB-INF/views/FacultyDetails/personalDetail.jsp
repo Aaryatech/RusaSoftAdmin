@@ -146,6 +146,113 @@
 													address.</span>
 											</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">Village
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="district" name="village"
+													placeholder="Village"
+													value="${facPerDetail.fVillage}"> <span
+													class="error_form text-danger" id="fac_village_field"
+													style="display: none;">Please enter village.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">District
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="district" name="district"
+													placeholder="District"
+													value="${facPerDetail.fDistrict}"> <span
+													class="error_form text-danger" id="fac_district_field"
+													style="display: none;">Please enter district.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">Taluka
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="taluka" name="taluka"
+													placeholder="Taluka"
+													value="${facPerDetail.fTaluka}"> <span
+													class="error_form text-danger" id="fac_taluka_field"
+													style="display: none;">Please enter taluka.</span>
+											</div>
+										</div>
+									
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">City
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="city" name="city"
+													placeholder="City"
+													value="${facPerDetail.fCity}"> <span
+													class="error_form text-danger" id="fac_city_field"
+													style="display: none;">Please enter city.</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">State
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="state" name="state"
+													placeholder="State"
+													value="${facPerDetail.fState}"> <span
+													class="error_form text-danger" id="fac_state_field"
+													style="display: none;">Please enter state.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">Pin Code
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="pincode" name="pincode"
+													placeholder="Pin Code"
+													value="${facPerDetail.fPincode}"> <span
+													class="error_form text-danger" id="fac_pincodc_field"
+													style="display: none;">Please enter proper pin code.</span>
+											</div>
+										</div>
+										
+										<div class="form-group" >
+											
+											<label class="control-label col-sm-3" for="is_add_same">Is
+												 Same(State) <span
+												class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-3">
+												
+													Yes <input type="radio" ${facPerDetail.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same"	 value="1"> 
+													No<input type="radio" ${facPerDetail.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+
+													
+												<span class="error_form text-danger" id="is_state_same_field"
+													style="display: none;">Please select
+													permanent/correspondence address same or not.</span>
+
+											</div>
+										</div>
+										
+										
+										
 
 										<div class="form-group">
 											<div class="col-sm-1"></div>
@@ -469,11 +576,70 @@
 													} else {
 														$("#fac_address2_field").hide()
 													}
+												} 	
+												
+												if (!$("#village").val()) {
+													isError = true;
+
+													$("#village").addClass(
+															"has-error")
+													$("#fac_village_field").show()
+												} else {
+													$("#fac_village_field").hide()
 												}
 												
+												/*****/
 												
+												if (!$("#district").val()) {
+													isError = true;
 
-													
+													$("#district").addClass(
+															"has-error")
+													$("#fac_district_field").show()
+												} else {
+													$("#fac_district_field").hide()
+												}
+												
+												if (!$("#taluka").val()) {
+													isError = true;
+
+													$("#taluka").addClass(
+															"has-error")
+													$("#fac_taluka_field").show()
+												} else {
+													$("#fac_taluka_field").hide()
+												}
+												
+												if (!$("#city").val()) {
+													isError = true;
+
+													$("#city").addClass(
+															"has-error")
+													$("#fac_city_field").show()
+												} else {
+													$("#fac_city_field").hide()
+												}
+												
+												if (!$("#state").val()) {
+													isError = true;
+
+													$("#state").addClass(
+															"has-error")
+													$("#fac_state_field").show()
+												} else {
+													$("#fac_state_field").hide()
+												}
+												
+												if (!$("#pincode").val()) {
+													isError = true;
+
+													$("#pincode").addClass(
+															"has-error")
+													$("#fac_pincode_field").show()
+												} else {
+													$("#fac_pincode_field").hide()
+												}
+																									
 													if (!$("#f_aadhar").val()
 															|| !validateAadhaar($(
 																	"#f_aadhar")

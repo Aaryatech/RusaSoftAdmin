@@ -289,6 +289,13 @@ public class FacPersonalController {
 				facPersDetail.setfPan(request.getParameter("f_pan"));
 				facPersDetail.setfAddress(request.getParameter("fac_address"));
 				facPersDetail.setfAddress2(request.getParameter("fac_address2"));
+				facPersDetail.setfVillage(request.getParameter("village"));
+				facPersDetail.setfDistrict(request.getParameter("district"));
+				facPersDetail.setfTaluka(request.getParameter("taluka"));
+				facPersDetail.setfCity(request.getParameter("city"));
+				facPersDetail.setfState(request.getParameter("state"));
+				facPersDetail.setfPincode(request.getParameter("pincode"));
+				facPersDetail.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				facPersDetail.setfDob(DateConvertor.convertToYMD(request.getParameter("f_dob")));
 				facPersDetail.setfPastExp(Float.parseFloat(request.getParameter("f_prevExp")));
 				facPersDetail.setfPhone(request.getParameter("f_phone"));

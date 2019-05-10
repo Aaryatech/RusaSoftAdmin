@@ -5,6 +5,15 @@ public class FacultyPersonalDetail {
 	private int facultyId;
 	
 	private String fAddress;
+	private String fVillage;
+	private String fDistrict;
+	private String fTaluka;
+	private String fCity;
+	private String fState;
+	private String fPincode;
+	private int isSame;
+	
+	
 	private int isAddSame;
 	private String fAddress2;
 	private String fPhone;
@@ -97,13 +106,58 @@ public class FacultyPersonalDetail {
 	public void setfGender(int fGender) {
 		this.fGender = fGender;
 	}
+	
+	
+	public String getfVillage() {
+		return fVillage;
+	}
+	public void setfVillage(String fVillage) {
+		this.fVillage = fVillage;
+	}
+	public String getfDistrict() {
+		return fDistrict;
+	}
+	public void setfDistrict(String fDistrict) {
+		this.fDistrict = fDistrict;
+	}
+	public String getfTaluka() {
+		return fTaluka;
+	}
+	public void setfTaluka(String fTaluka) {
+		this.fTaluka = fTaluka;
+	}
+	public String getfCity() {
+		return fCity;
+	}
+	public void setfCity(String fCity) {
+		this.fCity = fCity;
+	}
+	public String getfState() {
+		return fState;
+	}
+	public void setfState(String fState) {
+		this.fState = fState;
+	}
+	public String getfPincode() {
+		return fPincode;
+	}
+	public void setfPincode(String fPincode) {
+		this.fPincode = fPincode;
+	}
+	public int getIsSame() {
+		return isSame;
+	}
+	public void setIsSame(int isSame) {
+		this.isSame = isSame;
+	}
 	@Override
 	public String toString() {
-		return "FacultyPersonalDetail [facultyId=" + facultyId + ", fAddress=" + fAddress + ", isAddSame=" + isAddSame
-				+ ", fAddress2=" + fAddress2 + ", fPhone=" + fPhone + ", fResident=" + fResident + ", fAadhar="
-				+ fAadhar + ", fPan=" + fPan + ", fDob=" + fDob + ", fPastExp=" + fPastExp + ", fGender=" + fGender
-				+ ", makerPersUserId=" + makerPersUserId + ", makerPersDatetime=" + makerPersDatetime + "]";
+		return "FacultyPersonalDetail [facultyId=" + facultyId + ", fAddress=" + fAddress + ", fVillage=" + fVillage
+				+ ", fDistrict=" + fDistrict + ", fTaluka=" + fTaluka + ", fCity=" + fCity + ", fState=" + fState
+				+ ", fPincode=" + fPincode + ", isSame=" + isSame + ", isAddSame=" + isAddSame + ", fAddress2="
+				+ fAddress2 + ", fPhone=" + fPhone + ", fResident=" + fResident + ", fAadhar=" + fAadhar + ", fPan="
+				+ fPan + ", fDob=" + fDob + ", fPastExp=" + fPastExp + ", fGender=" + fGender + ", makerPersUserId="
+				+ makerPersUserId + ", makerPersDatetime=" + makerPersDatetime + "]";
 	}
-	
 	
 }
