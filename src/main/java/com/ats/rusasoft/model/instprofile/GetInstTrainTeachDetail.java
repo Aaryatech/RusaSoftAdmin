@@ -12,8 +12,17 @@ public class GetInstTrainTeachDetail {
 
 	private String trainingFromdt;
 	private String trainingTodt;
-
+	private String exVar1;
 	private int trainingPcount;
+
+	
+	public String getExVar1() {
+		return exVar1;
+	}
+
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
+	}
 
 	public int getTrainingId() {
 		return trainingId;
@@ -75,7 +84,7 @@ public class GetInstTrainTeachDetail {
 	public String toString() {
 		return "GetInstTrainTeachDetail [trainingId=" + trainingId + ", yearId=" + yearId + ", trainingType="
 				+ trainingType + ", trainingTitle=" + trainingTitle + ", trainingFromdt=" + trainingFromdt
-				+ ", trainingTodt=" + trainingTodt + ", trainingPcount=" + trainingPcount + "]";
+				+ ", trainingTodt=" + trainingTodt + ", exVar1=" + exVar1 + ", trainingPcount=" + trainingPcount + "]";
 	}
-	
+
 }

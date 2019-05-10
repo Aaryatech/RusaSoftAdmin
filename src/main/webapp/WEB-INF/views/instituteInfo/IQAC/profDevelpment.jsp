@@ -115,6 +115,7 @@
 														<th rowspan="2">Sr No</th>
 
 														<th rowspan="2">Title of Training Program</th>
+														<th rowspan="2"> Financial Support/ Sponsors</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Total Participants</th>
 														<th rowspan="2">Action</th>
@@ -133,6 +134,7 @@
 																value="${instTrain.trainingId}" /></td>
 															<td align="center">${count.index+1}</td>
 															<td align="left">${instTrain.trainingTitle}</td>
+															<td align="left">${instTrain.exVar1}</td>
 															<td align="center">${instTrain.trainingFromdt}</td>
 															<td align="center">${instTrain.trainingTodt}</td>
 															<td align="right">${instTrain.trainingPcount}</td>

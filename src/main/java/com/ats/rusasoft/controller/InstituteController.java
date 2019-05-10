@@ -44,6 +44,8 @@ import com.ats.rusasoft.model.InstituteSupport;
 import com.ats.rusasoft.model.IntelPrpoRight;
 import com.ats.rusasoft.model.StaffList;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.ats.rusasoft.model.instprofile.ActCndctPrmtngUnivrslVal;
+import com.ats.rusasoft.model.instprofile.SpecificLocalAdvntgDisadvntg;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -1363,7 +1365,9 @@ public class InstituteController {
 		return a;
 	}
 
-	/*********************************ICT Enabled Facilities*************************************/
+	/*********************************
+	 * ICT Enabled Facilities
+	 *************************************/
 	@RequestMapping(value = "/showICTEnblFaclities", method = RequestMethod.GET)
 	public ModelAndView showICTEnblFaclities(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1386,10 +1390,10 @@ public class InstituteController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("instituteId", instituteId);
-			//	map.add("yId", yId);
+				// map.add("yId", yId);
 
-				IctEnabledFacilities[] ictEnbFacArr = rest.postForObject(Constants.url + "/getAllIctEnabledFacilities", map,
-						IctEnabledFacilities[].class);
+				IctEnabledFacilities[] ictEnbFacArr = rest.postForObject(Constants.url + "/getAllIctEnabledFacilities",
+						map, IctEnabledFacilities[].class);
 				List<IctEnabledFacilities> ictEnbFacList = new ArrayList<>(Arrays.asList(ictEnbFacArr));
 				model.addObject("ictEnbFacList", ictEnbFacList);
 
@@ -1490,8 +1494,9 @@ public class InstituteController {
 			ictEnbFac.setExVar1("NA");
 			ictEnbFac.setExVar2("NA");
 			System.out.println(ictEnbFac.toString());
-			
-			IctEnabledFacilities ictEnb = rest.postForObject(Constants.url+"/saveIctEnabledFacility", ictEnbFac, IctEnabledFacilities.class);
+
+			IctEnabledFacilities ictEnb = rest.postForObject(Constants.url + "/saveIctEnabledFacility", ictEnbFac,
+					IctEnabledFacilities.class);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1500,7 +1505,7 @@ public class InstituteController {
 		return "redirect:/showICTEnblFaclities";
 
 	}
-	
+
 	@RequestMapping(value = "/editIct/{ictId}", method = RequestMethod.GET)
 	public ModelAndView editIct(@PathVariable("ictId") int ictId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1541,7 +1546,7 @@ public class InstituteController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteIct/{ictId}", method = RequestMethod.GET)
 	public String deleteIct(@PathVariable("ictId") int ictId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1551,8 +1556,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteIct/{ictId}", "showICTEnblFaclities", "0", "0",
-					"0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteIct/{ictId}", "showICTEnblFaclities", "0", "0", "0", "1",
+					newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1571,7 +1576,7 @@ public class InstituteController {
 
 		return "redirect:/showICTEnblFaclities";
 	}
-	
+
 	@RequestMapping(value = "/deleteSelICtEnbFacilities/{exActId}", method = RequestMethod.GET)
 	public String deleteSelICtEnbFacilities(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int exActId) {
@@ -1581,8 +1586,8 @@ public class InstituteController {
 		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("deleteSelICtEnbFacilities/{exActId}", "showICTEnblFaclities", "0", "0", "0",
-					"1", newModuleList);
+			Info view = AccessControll.checkAccess("deleteSelICtEnbFacilities/{exActId}", "showICTEnblFaclities", "0",
+					"0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1629,8 +1634,10 @@ public class InstituteController {
 		}
 		return a;
 	}
-	
-	/********************************Goverment Scholarship***************************************/
+
+	/********************************
+	 * Goverment Scholarship
+	 ***************************************/
 
 	@RequestMapping(value = "/showGovernmentScholarships", method = RequestMethod.GET)
 	public ModelAndView showGovernmentScholarships(HttpServletRequest request, HttpServletResponse response) {
@@ -1640,8 +1647,8 @@ public class InstituteController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "1", "0", "0", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "1", "0",
+					"0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1662,12 +1669,12 @@ public class InstituteController {
 				model.addObject("govtSchrList", govtSchrList);
 
 				model.addObject("title", "Government Scholarships");
-				Info add = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0", "0", "1", "0",
-						newModuleList);
-				Info delete = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0", "0", "0", "1",
-						newModuleList);
+				Info add = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0",
+						"1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0",
+						"0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships",
+						"0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					System.out.println(" add   Accessable ");
@@ -1693,7 +1700,7 @@ public class InstituteController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addGvtScholarship", method = RequestMethod.GET)
 	public ModelAndView addGvtScholarship(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1702,8 +1709,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("addGvtScholarship", "showGovernmentScholarships", "0", "1", "0", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("addGvtScholarship", "showGovernmentScholarships", "0", "1", "0",
+					"0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1724,7 +1731,7 @@ public class InstituteController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertGoveScheme", method = RequestMethod.POST)
 	public String insertGoveScheme(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -1739,7 +1746,7 @@ public class InstituteController {
 
 		try {
 			GovtScholarships govt = new GovtScholarships();
-			
+
 			govt.setGovtScholarId(Integer.parseInt(request.getParameter("govt_scholr_id")));
 			govt.setNameOfScheme(request.getParameter("name_scheme"));
 			govt.setNoOfStudBenftd(Integer.parseInt(request.getParameter("stud_bnfted")));
@@ -1755,8 +1762,9 @@ public class InstituteController {
 			govt.setExVar1("NA");
 			govt.setExVar2("NA");
 			System.out.println(govt.toString());
-			
-			GovtScholarships ictEnb = rest.postForObject(Constants.url+"/saveGovtScheme", govt, GovtScholarships.class);
+
+			GovtScholarships ictEnb = rest.postForObject(Constants.url + "/saveGovtScheme", govt,
+					GovtScholarships.class);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1765,7 +1773,7 @@ public class InstituteController {
 		return "redirect:/showGovernmentScholarships";
 
 	}
-	
+
 	@RequestMapping(value = "/editGovtScholrSchm/{schmId}", method = RequestMethod.GET)
 	public ModelAndView editGovtScholrSchm(@PathVariable("schmId") int schmId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1776,8 +1784,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("editGovtScholrSchm/{schmId}", "showGovernmentScholarships", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editGovtScholrSchm/{schmId}", "showGovernmentScholarships", "0",
+					"0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1806,7 +1814,7 @@ public class InstituteController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteGovtScholrSchm/{schmId}", method = RequestMethod.GET)
 	public String deleteGovtScholrSchm(@PathVariable("schmId") int schmId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1816,8 +1824,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteGovtScholrSchm/{schmId}", "showGovernmentScholarships", "0", "0",
-					"0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteGovtScholrSchm/{schmId}", "showGovernmentScholarships", "0",
+					"0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1836,7 +1844,7 @@ public class InstituteController {
 
 		return "redirect:/showGovernmentScholarships";
 	}
-	
+
 	@RequestMapping(value = "/deleteSelGovtScholarSchemes/{suppSchmid}", method = RequestMethod.GET)
 	public String deleteSelGovtScholarSchemes(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int suppSchmid) {
@@ -1846,8 +1854,8 @@ public class InstituteController {
 		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("deleteSelGovtScholarSchemes/{exActId}", "showGovernmentScholarships", "0", "0", "0",
-					"1", newModuleList);
+			Info view = AccessControll.checkAccess("deleteSelGovtScholarSchemes/{exActId}",
+					"showGovernmentScholarships", "0", "0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1895,4 +1903,535 @@ public class InstituteController {
 		return a;
 	}
 
+	/********************************
+	 * Activities Conducted for Promoting Universal Values
+	 ******************************/
+	@RequestMapping(value = "/showActCondctPromotUnivrslValus", method = RequestMethod.GET)
+	public ModelAndView showActCondctPromotUnivrslValus(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showActCondctPromotUnivrslValus", "showActCondctPromotUnivrslValus",
+					"1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/actCondctPromtUnivrslVal");
+				
+				int instituteId = (int) session.getAttribute("instituteId");
+				int yId = (int) session.getAttribute("acYearId");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instituteId", instituteId);
+				map.add("yId", yId);
+				
+				ActCndctPrmtngUnivrslVal[] actCndctPrgArr = rest.postForObject(Constants.url + "/getAllActivitiesCondctPromtUnivrsalValue", map,
+						ActCndctPrmtngUnivrslVal[].class);
+				List<ActCndctPrmtngUnivrslVal> actCndctPrgList = new ArrayList<>(Arrays.asList(actCndctPrgArr));
+				
+				model.addObject("actCndctPrgList", actCndctPrgList);
+
+				model.addObject("title", " Activities Conducted for Promoting Universal Values");
+				
+				Info add = AccessControll.checkAccess("showActCondctPromotUnivrslValus",
+						"showActCondctPromotUnivrslValus", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showActCondctPromotUnivrslValus",
+						"showActCondctPromotUnivrslValus", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showActCondctPromotUnivrslValus",
+						"showActCondctPromotUnivrslValus", "0", "0", "0", "1", newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/addActCndctPromtUnivrslVal", method = RequestMethod.GET)
+	public ModelAndView addActCndctPromtUnivrslVal(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("addActCndctPromtUnivrslVal", "showActCondctPromotUnivrslValus", "0",
+					"1", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/addCndctUnivrslPrmtVal");
+				ActCndctPrmtngUnivrslVal actCndct = new ActCndctPrmtngUnivrslVal();
+				model.addObject("actCndct", actCndct);
+
+				model.addObject("title", "Add  Activities Conducted for Promoting Universal Values");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/insertActConduct", method = RequestMethod.POST)
+	public String insertActConduct(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+
+		int instituteId = (int) session.getAttribute("instituteId");
+		int userId = (int) session.getAttribute("userId");
+		int yId = (int) session.getAttribute("acYearId");
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String curDateTime = dateFormat.format(cal.getTime());
+		ActCndctPrmtngUnivrslVal actCndct = new ActCndctPrmtngUnivrslVal();
+
+		actCndct.setActCndctId(Integer.parseInt(request.getParameter("activityId")));
+		actCndct.setTtleProgrmAct(request.getParameter("prg_title"));
+		actCndct.setFromDate(request.getParameter("fromDate"));
+		actCndct.setToDate(request.getParameter("toDate"));
+		actCndct.setNoOfParticipant(Integer.parseInt(request.getParameter("no_participant")));
+		actCndct.setInstId(instituteId);
+		actCndct.setAcYearId(yId);
+		actCndct.setDelStatus(1);
+		actCndct.setIsActive(1);
+		actCndct.setMakerUserId(userId);
+		actCndct.setMakerDatetime(curDateTime);
+		actCndct.setExInt1(0);
+		actCndct.setExInt2(0);
+		actCndct.setExVar1("NA");
+		actCndct.setExVar2("NA");
+		
+		ActCndctPrmtngUnivrslVal saveAct = rest.postForObject(Constants.url+"/saveActivityConductPromtUniVal", actCndct, ActCndctPrmtngUnivrslVal.class);
+		
+		try {
+
+		} catch (Exception e) {
+
+		}
+		return "redirect:/showActCondctPromotUnivrslValus";
+	}
+	
+	@RequestMapping(value = "/editActCndctPromtUnivrsalValu/{actId}", method = RequestMethod.GET)
+	public ModelAndView editActCndctPromtUnivrsalValu(@PathVariable("actId") int actId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addCndctUnivrslPrmtVal");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editActCndctPromtUnivrsalValu/{actId}", "showActCondctPromotUnivrslValus", "0",
+					"0", "1", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				System.out.println(actId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("actId", actId);
+
+				ActCndctPrmtngUnivrslVal actCndct = rest.postForObject(Constants.url + "/editActivityCndtPrmtUnivrslValById", map,
+						ActCndctPrmtngUnivrslVal.class);
+				model.addObject("actCndct", actCndct);
+
+				model.addObject("title", "Edit Activities Conducted for Promoting Universal Values");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+	}
+	
+	@RequestMapping(value = "/deleteActCndctPromtUnivrsalValu/{actId}", method = RequestMethod.GET)
+	public String deleteActCndctPromtUnivrsalValu(@PathVariable("actId") int actId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteActCndctPromtUnivrsalValu/{actId}", "showActCondctPromotUnivrslValus", "0",
+					"0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("actId", actId);
+
+				ActCndctPrmtngUnivrslVal delAct = rest.postForObject(Constants.url + "/delActCndctPrmtUniValById", map,
+						ActCndctPrmtngUnivrslVal.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showActCondctPromotUnivrslValus";
+	}
+
+	@RequestMapping(value = "/delActivitiesCndctPrmotUnvrslVal/{activityId}", method = RequestMethod.GET)
+	public String delActivitiesCndctPrmotUnvrslVal(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int activityId) {
+
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("delActivitiesCndctPrmotUnvrslVal/{exActId}",
+					"showActCondctPromotUnivrslValus", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (activityId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] activityIds = request.getParameterValues("activityId");
+					System.out.println("id are" + activityIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < activityIds.length; i++) {
+						sb = sb.append(activityIds[i] + ",");
+
+					}
+					String activityIdlist = sb.toString();
+					activityIdlist = activityIdlist.substring(0, activityIdlist.length() - 1);
+
+					map.add("activityIdlist", activityIdlist);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("activityIdlist", activityId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelActivity", map, Info.class);
+
+				a = "redirect:/showActCondctPromotUnivrslValus";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In delActivitiesCndctPrmotUnvrslVal at Institute Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
+	
+	/********************************
+	 *  Specific Initiatives for Local Advantages & Disadvantages
+	 ******************************/
+	@RequestMapping(value = "/showSpecficInitiativeforLocAdvDisadv", method = RequestMethod.GET)
+	public ModelAndView showSpecficInitiativeforLocAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv", "showSpecficInitiativeforLocAdvDisadv",
+					"1", "0", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/showSpecficInitveLocAdvDisadv");
+				
+				int instituteId = (int) session.getAttribute("instituteId");
+				int yId = (int) session.getAttribute("acYearId");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instituteId", instituteId);
+				map.add("yId", yId);
+				
+				SpecificLocalAdvntgDisadvntg[] inItArr = rest.postForObject(Constants.url + "/getAllInitiativeAdvntgDisadvntg", map,
+						SpecificLocalAdvntgDisadvntg[].class);
+				List<SpecificLocalAdvntgDisadvntg> inItList = new ArrayList<>(Arrays.asList(inItArr));
+				
+				model.addObject("inItList", inItList);
+
+				model.addObject("title", "Specific Initiatives for Local Advantages & Disadvantages");
+				
+				Info add = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv",
+						"showSpecficInitiativeforLocAdvDisadv", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv",
+						"showSpecficInitiativeforLocAdvDisadv", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv",
+						"showSpecficInitiativeforLocAdvDisadv", "0", "0", "0", "1", newModuleList);
+
+				if (add.isError() == false) {
+					System.out.println(" add   Accessable ");
+					model.addObject("addAccess", 0);
+
+				}
+				if (edit.isError() == false) {
+					System.out.println(" edit   Accessable ");
+					model.addObject("editAccess", 0);
+				}
+				if (delete.isError() == false) {
+					System.out.println(" delete   Accessable ");
+					model.addObject("deleteAccess", 0);
+
+				}
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addSpecificInitiveLocAdvDisadv", method = RequestMethod.GET)
+	public ModelAndView addSpecificInitiveLocAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("addSpecificInitiveLocAdvDisadv", "showSpecficInitiativeforLocAdvDisadv", "0",
+					"1", "0", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				model = new ModelAndView("instituteInfo/IQAC/addSpecficInitveLocAdvDisadv");
+				SpecificLocalAdvntgDisadvntg specifyInit = new SpecificLocalAdvntgDisadvntg();
+
+				model.addObject("specifyInit", specifyInit);
+
+				model.addObject("title", "Add Specific Initiatives for Local Advantages & Disadvantages");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertInitiativeAdvDisadv", method = RequestMethod.POST)
+	public String insertInitiativeAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+
+		int instituteId = (int) session.getAttribute("instituteId");
+		int userId = (int) session.getAttribute("userId");
+		int yId = (int) session.getAttribute("acYearId");
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String curDateTime = dateFormat.format(cal.getTime());
+		
+		SpecificLocalAdvntgDisadvntg specify = new SpecificLocalAdvntgDisadvntg();
+
+		specify.setSpciAdvId(Integer.parseInt(request.getParameter("initiative_id")));
+		specify.setNameOfInitiatives(request.getParameter("name_inititatives"));
+		specify.setIssueAddress(request.getParameter("issue_address"));
+		specify.setFromDate(request.getParameter("fromDate"));
+		specify.setToDate(request.getParameter("toDate"));
+		specify.setNoStudPart(Integer.parseInt(request.getParameter("no_stud_participate")));
+		specify.setInstId(instituteId);
+		specify.setAcYearId(yId);
+		specify.setDelStatus(1);
+		specify.setIsActive(1);
+		specify.setMakerUserId(userId);
+		specify.setMakerDatetime(curDateTime);
+		specify.setExInt1(0);
+		specify.setExInt2(0);
+		specify.setExVar1("NA");
+		specify.setExVar2("NA");
+		
+		SpecificLocalAdvntgDisadvntg saveInit = rest.postForObject(Constants.url+"/saveInitiativeAdvDisadv", specify, SpecificLocalAdvntgDisadvntg.class);
+		
+		try {
+
+		} catch (Exception e) {
+
+		}
+		return "redirect:/showSpecficInitiativeforLocAdvDisadv";
+	}
+	
+	
+	@RequestMapping(value = "/editInitiative/{inItId}", method = RequestMethod.GET)
+	public ModelAndView editInitiative(@PathVariable("inItId") int inItId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instituteInfo/IQAC/addSpecficInitveLocAdvDisadv");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editInitiative/{inItId}", "showSpecficInitiativeforLocAdvDisadv", "0",
+					"0", "1", "0", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				System.out.println(inItId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("inItId", inItId);
+
+				SpecificLocalAdvntgDisadvntg specifyInit = rest.postForObject(Constants.url + "/editInitiativeById", map,
+						SpecificLocalAdvntgDisadvntg.class);
+				model.addObject("specifyInit", specifyInit);
+
+				model.addObject("title", "Edit Specific Initiatives for Local Advantages & Disadvantages");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+	}
+	
+	@RequestMapping(value = "/deleteInitiative/{inItId}", method = RequestMethod.GET)
+	public String deleteInitiative(@PathVariable("inItId") int inItId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteInitiative/{inItId}", "showSpecficInitiativeforLocAdvDisadv", "0",
+					"0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("inItId", inItId);
+
+				ActCndctPrmtngUnivrslVal delAct = rest.postForObject(Constants.url + "/delInitiativeAdvDisadvById", map,
+						ActCndctPrmtngUnivrslVal.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showSpecficInitiativeforLocAdvDisadv";
+	}
+	
+	@RequestMapping(value = "/delSelcInitiativesAdvDisadv/{initAdvId}", method = RequestMethod.GET)
+	public String delSelcInitiativesAdvDisadv(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int initAdvId) {
+
+		HttpSession session = request.getSession();
+		String a = null;
+		try {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("delActivitiesCndctPrmotUnvrslVal/{exActId}",
+					"showActCondctPromotUnivrslValus", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (initAdvId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] initAdvIds = request.getParameterValues("initAdvId");
+					System.out.println("id are" + initAdvIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < initAdvIds.length; i++) {
+						sb = sb.append(initAdvIds[i] + ",");
+
+					}
+					String initAdvIdList = sb.toString();
+					initAdvIdList = initAdvIdList.substring(0, initAdvIdList.length() - 1);
+
+					map.add("initAdvIdList", initAdvIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("initAdvIdList", initAdvId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelInitives", map, Info.class);
+
+				a = "redirect:/showSpecficInitiativeforLocAdvDisadv";
+			}
+
+		} catch (Exception e) {
+
+			System.err.println(" Exception In delSelcInitiativesAdvDisadv at Institute Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
 }

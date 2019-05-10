@@ -127,6 +127,22 @@
 													title.</span>
 											</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="dev_Prog_title"> Financial
+												 Support/ Sponsors<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" maxlength="200" class="form-control"
+													id="fianance_support" name="fianance_support"
+													autocomplete="off" onchange="trim(this)"
+													placeholder=" Financial Support/ Sponsors"
+													value="${trainning.exVar1}"> <span
+													class="error_form text-danger" id="finance_errField"
+													style="display: none;">Please enter financial support
+													/sponsors.</span>
+											</div>
+										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="no_of_participant">No.
@@ -137,7 +153,7 @@
 													min="0" id="no_of_participant" autocomplete="off"
 													name="no_of_participant" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Enter No. of Participants"
+													placeholder="Enter No. of Participants" 
 													value="${trainning.trainingPcount}"> <span
 													class="error_form text-danger" id="no_of_participant_field"
 													style="display: none;">Please enter no of
@@ -279,6 +295,19 @@
 															.show()
 												} else {
 													$("#dev_Prog_title_field")
+															.hide();
+												}
+												
+												if (!$("#fianance_support").val()) {		
+													isError = true;
+
+													$("#fianance_support")
+															.addClass(
+																	"has-error")
+													$("#finance_errField")
+															.show()
+												} else {
+													$("#finance_errField")
 															.hide();
 												}
 

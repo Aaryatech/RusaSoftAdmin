@@ -207,7 +207,7 @@ public class InstProfTeachTrainContr {
 				instTrain.setIsActive(1);
 				instTrain.setExInt1(0);
 				instTrain.setExInt2(0);
-				instTrain.setExVar1("NA");
+				instTrain.setExVar1(request.getParameter("fianance_support"));
 				instTrain.setExVar2("NA");
 
 				instTrain.setMakerDatetime(curDateTime);
