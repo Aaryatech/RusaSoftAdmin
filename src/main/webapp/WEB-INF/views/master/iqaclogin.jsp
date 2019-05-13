@@ -182,7 +182,7 @@
 															onchange="trim(this)"
 															value="${editInstInfo.exInt1}"
 															name="no_sanction_post"
-															placeholder="No. of Full Time Faculty in Institute">
+															placeholder="No. of Sanctioned Post">
 
 														<span class="error_form text-danger" id="error_sanc"
 															style="display: none;">Please enter No. of post
@@ -203,7 +203,7 @@
 															name="no_nonTeaching_faculty"
 															onkeypress='return restrictAlphabets(event)'
 															onchange="trim(this)"
-															placeholder="No. of Full Time Nonteaching Including Office Staff">
+															placeholder=" No. of Full Time Non-Teaching Faculty">
 														<span class="error_form text-danger" id="error_non"
 															style="display: none;">Please enter No. of full
 															time non-teaching faculty and value must be greater than 0.</span>

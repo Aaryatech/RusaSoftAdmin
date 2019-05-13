@@ -394,7 +394,8 @@ public class FacultyController {
 
 				// int grant = Integer.parseInt(request.getParameter("grant"));
 
-				float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
+				//float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
+				float totalAmt = 00;
 				float amtRec = Float.parseFloat(request.getParameter("amtRec"));
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 

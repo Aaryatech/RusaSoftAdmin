@@ -236,7 +236,7 @@
 
 											</div>
 										</div>
-										<div class="form-group" style="display: none">
+										<%-- <div class="form-group" style="display: none">
 
 											<label class="control-label col-sm-2" for="page_order">Total
 												Amount <span class="text-danger">*</span>
@@ -250,7 +250,7 @@
 												<span class="error_form text-danger" id="error_totalAmt"
 													style="display: none;">Please enter total Amount </span>
 											</div>
-										</div>
+										</div> --%>
 
 
 										<div class="form-group">
@@ -261,7 +261,7 @@
 
 
 											<div class="col-sm-6">
-												<input type="number" class="form-control" id="amtRec"
+												<input type="number" class="form-control" id="amtRec" onblur="compare()"
 													min="0" name="amtRec" placeholder="Grant Received in Rs."
 													autocomplete="off" value="${editProject.projAmtRec}">
 												<span class="error_form text-danger" id="error_amtRec"
@@ -462,9 +462,16 @@ function submit_f(view){
 
 	<script>
 	   
+	function compare(){
+		
+	}
+	
             	$(document).ready(function($){
             	 
             		$("#formidhere").submit(function(e) {
+            			
+            			
+            		
             			 var isError=false;
             			 var errMsg="";
             				
@@ -622,20 +629,21 @@ function submit_f(view){
             				
             				//error_fromDate
             				
-            				var grantSac=0;
+            				/* var grantSac=0;
             				var grantRec=0;
             				grantRec=$("#amtRec").val();
             				grantSac=$("#grant").val();
-            			//	alert("grantRec " +grantRec);
-            				//alert("grantSac " +grantSac);
+            				alert("grantRec " +grantRec);
+            				alert("grantSac " +grantSac);
             				
-            				if(parseInt(grantRec)>parseInt(grantSac)){
+            				if(grantRec<=grantSac){
             					$("#amtRec").addClass("has-error")
                 				$("#error_amtRec_amt").show();
             				}else{
             					$("#error_amtRec_amt").hide();
-            				}
+            				} */
             			
+            				
             				
             				 if(!$("#fromDate").val()){
            					 
@@ -662,7 +670,21 @@ function submit_f(view){
                 				} else {
                 					$("#error_toDate").hide();
                 				}
-                				
+            				var a = document.getElementById('amtRec').value;
+              			 			 a = parseFloat(a);
+              			 	
+              				var b = document.getElementById('grant').value;
+              						  b = parseFloat(b);
+              			
+              			  if(a > b) {
+              				isError=true;
+              				  $("#amtRec").addClass("has-error")
+              					$("#error_amtRec_amt").show();
+              				
+              				  } else{
+              					  $("#error_amtRec_amt").hide();
+              					  	
+              				  }
             			 
             				if(!isError) {
             					

@@ -240,14 +240,14 @@
 
 														<div class="form-group">
 
-															<label class="control-label col-sm-2" for="smallheading">Amount(Rs)
+															<label class="control-label col-sm-2" for="smallheading">Amount(Rs.)
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" min="0" class="form-control"
-																	id="conf_amt" autocomplete="off"
+																	id="conf_amt" autocomplete="off" onfocus="this.value=''"
 																	onkeypress='return restrictAlphabets(event)'
-																	name="conf_amt" placeholder="Amount"
+																	name="conf_amt" placeholder="Amount(Rs.)"
 																	value="${facConf.confFundAmt}" onchange="trim(this)">
 																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount and value must be greater than 0.</span>
 															</div>

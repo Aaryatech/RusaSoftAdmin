@@ -117,7 +117,7 @@
 														<th rowspan="2">Organization Name</th>
 														<th rowspan="2">Year of MoU Signed</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
-														<th rowspan="2"> Activity of MOU</th>
+														<th rowspan="2"> Activity of MoU</th>
 
 														<th rowspan="2">No. of Student Benefited</th>
 														<th rowspan="2">No. of Faculty Benefited</th>

@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -212,7 +211,7 @@
 														</label>
 														<div class="col-sm-6">
 															<input type="text" maxlength="200" onchange="trim(this)" class="form-control" id="fUniversity" 
-																name="fUniversity" placeholder="Enter University Name"
+																name="fUniversity" placeholder="Enter University/Board Name"
 																value="${editFacAcad.fUniversity}">
 																<span class="error_form text-danger" id="fUniversity_field"
 															style="display: none;">Please enter university name</span>

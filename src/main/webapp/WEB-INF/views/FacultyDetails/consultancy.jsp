@@ -132,7 +132,7 @@
 														<th>Faculty Name</th>
 														<th>Department</th>
 														<th>Sponsoring Industry</th>
-														<th>Consultancy Amount</th>
+														<th>Consultancy Amount(Rs.)</th>
 														<th>Consultancy Period</th>
 														<th>Project Completed</th>
 														<th>Action</th>

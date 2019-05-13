@@ -176,7 +176,7 @@
 															</label>
 															<div  class="col-sm-9">
 																<input type="text" class="form-control" id="alumini_amt" onchange="trim(this)"
-																	name="alumini_amt" placeholder="Amount" onfocus="this.value=''"	
+																	name="alumini_amt" placeholder="Amount (Rs.)" onfocus="this.value=''"	
 																	value="${alumni.exInt1}" autocomplete="off"  onkeypress='return restrictAlphabets(event)'>
 																	<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter amount.</span>
 															</div>

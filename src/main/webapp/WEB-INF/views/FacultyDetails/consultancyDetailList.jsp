@@ -144,11 +144,11 @@
 											<div class="form-group">
 
 												<label class="control-label col-sm-2" for="amount">Amount
-													of Consultancy (Rs.) <span class="text-danger">*</span>
+													of Consultancy in Rs. <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
-														id="amount" placeholder="Amount of Consultancy" onkeypress='return restrictAlphabets(event)'
+														id="amount" placeholder="Amount of Consultancy in Rs." onkeypress='return restrictAlphabets(event)'
 														name="amount" value="${editConsultancy.consAmount}" onchange="trim(this)">
 											<span
 													class="error_form text-danger" id="error_field3"

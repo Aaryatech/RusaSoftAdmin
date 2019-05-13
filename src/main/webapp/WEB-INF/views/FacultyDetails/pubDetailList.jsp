@@ -143,7 +143,7 @@
 																	<th>Date</th>
 																	<th>Venue</th>
 																	<th>Funding From</th>
-																	<th>Amount</th>
+																	<th>Amount(Rs.)</th>
 																	<th>Action</th>	
 																	</tr>
 																</thead>
