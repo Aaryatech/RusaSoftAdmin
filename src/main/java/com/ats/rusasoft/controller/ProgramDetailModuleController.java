@@ -189,13 +189,17 @@ System.err.println("HELLO " +programId);
 
 			model.addObject("title", "PO-PSO Mapping List");
 			
-			 map = new LinkedMultiValueMap<>();
+			
+			    map = new LinkedMultiValueMap<>();
 				
 				map.add("programId", programId);
 				GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
 				System.out.println("Program:"+progDetail);
 				model.addObject("progDetail", progDetail);
 				
+				
+				map = new LinkedMultiValueMap<>();
+
 				map.add("poId", poId);
 				ProgramOutcome poDetail = rest.postForObject(Constants.url+"/getProgramOutcomeByPOId", map, ProgramOutcome.class);
 				System.out.println("Program:"+poDetail);
@@ -203,9 +207,7 @@ System.err.println("HELLO " +programId);
 				model.addObject("poId1", poDetail.getPoId());
 				System.out.println("po id iss"+poDetail.getPoId());
 				
-				
-				
-				
+				map = new LinkedMultiValueMap<>();
 				
 				map.add("programId", programId);
 				

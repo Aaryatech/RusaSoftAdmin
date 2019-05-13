@@ -124,7 +124,7 @@ public class PdfReportsController {
 			e.printStackTrace();
 		}
 		
-		String header = "Faculty List";
+		String header = "";
 
 		String title = "                 ";
 
