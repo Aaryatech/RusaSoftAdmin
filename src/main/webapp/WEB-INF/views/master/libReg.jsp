@@ -296,6 +296,31 @@
 											</div>
 										</div>
 
+											<div class="form-group">
+											
+											<label class="control-label col-sm-2" for="is_add_same">Is
+												 Same(State) <span
+												class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-3">
+												
+													<c:if test="${editFaculty.facultyId>0}">
+													Yes <input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+													<c:if test="${editFaculty.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	 value="1"> 
+													No<input type="radio"  name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+												<span class="error_form text-danger" id="is_state_same_field"
+													style="display: none;">Please select
+													permanent/correspondence address same or not.</span>
+
+											</div>
+										</div>
 
 
 										<div class="form-group">

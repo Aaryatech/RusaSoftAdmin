@@ -1077,6 +1077,8 @@ public class LibraryController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
+				Staff editFaculty = new Staff();
+				model.addObject("editFaculty", editFaculty);
 
 			}
 		} catch (Exception e) {
@@ -1167,6 +1169,7 @@ public class LibraryController {
 				staff.setFacultyFirstName(libName);
 				staff.setFacultyId(libId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				staff.setHightestQualificationYear(null);
 				staff.setIsAccOff(0);
 				staff.setIsDean(0);
@@ -1221,6 +1224,7 @@ public class LibraryController {
 				editHod.setContactNo(contact);
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsLibrarian(1);
 				editHod.setType(7);

@@ -47,6 +47,8 @@ public class Staff {
 	private int isTpo;
 	private int isExtActOff;
 	private int isEnrolled;
+	
+	private int isSame;
 
 	public int getIsEnrolled() {
 		return isEnrolled;
@@ -360,6 +362,16 @@ public class Staff {
 		this.isExtActOff = isExtActOff;
 	}
 
+	
+
+	public int getIsSame() {
+		return isSame;
+	}
+
+	public void setIsSame(int isSame) {
+		this.isSame = isSame;
+	}
+
 	@Override
 	public String toString() {
 		return "Staff [facultyId=" + facultyId + ", instituteId=" + instituteId + ", deptId=" + deptId
@@ -375,10 +387,8 @@ public class Staff {
 				+ ", password=" + password + ", type=" + type + ", isPrincipal=" + isPrincipal + ", isIqac=" + isIqac
 				+ ", isHod=" + isHod + ", isFaculty=" + isFaculty + ", isAccOff=" + isAccOff + ", isDean=" + isDean
 				+ ", isLibrarian=" + isLibrarian + ", isStudent=" + isStudent + ", isTpo=" + isTpo + ", isExtActOff="
-				+ isExtActOff + ", isEnrolled=" + isEnrolled + "]";
+				+ isExtActOff + ", isEnrolled=" + isEnrolled + ", isSame=" + isSame + "]";
 	}
-
-	
 
 	
 }

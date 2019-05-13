@@ -155,7 +155,7 @@
 														<select id="depart" name="depart" class="form-control">
 															<c:forEach items="${deptList}" var="dept">
 																<c:choose>
-																	<c:when test="${hod.deptId==dean.deptId}">
+																	<c:when test="${dept.deptId==dean.deptId}">
 																		<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 																	</c:when>
@@ -314,7 +314,7 @@
  --%>
 													</div>
 												</div>
-<div class="form-group" id="abc" style="display: none">
+												<div class="form-group" id="abc" style="display: none">
 													<label class="control-label col-sm-2" for="page_order">Relieving
 														Date <span class="text-danger">*</span>
 													</label>
@@ -329,6 +329,33 @@
 															style="display: none;">Please enter relieving date</span>
 													</div>
 												</div>
+												
+												<div class="form-group">
+											
+											<label class="control-label col-sm-2" for="is_add_same">Is
+												 Same(State) <span
+												class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-3">
+												
+													<c:if test="${dean.facultyId>0}">
+													Yes <input type="radio" ${dean.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio" ${dean.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+													<c:if test="${dean.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	 value="1"> 
+													No<input type="radio"  name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+												<span class="error_form text-danger" id="is_state_same_field"
+													style="display: none;">Please select
+													permanent/correspondence address same or not.</span>
+
+											</div>	
+										</div>
+												
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>

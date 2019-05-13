@@ -155,7 +155,7 @@
 														<select id="depart" name="depart" class="form-control">
 															<c:forEach items="${deptList}" var="dept">
 																<c:choose>
-																	<c:when test="${hod.deptId==trnPlaceOff.deptId}">
+																	<c:when test="${dept.deptId==trnPlaceOff.deptId}">
 																		<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 																	</c:when>
@@ -296,6 +296,28 @@
 															style="display: none;">Please enter relieving date</span>
 													</div>
 												</div>
+												
+													<div class="form-group">
+											
+											<label class="control-label col-sm-2" for="is_add_same">Is
+												 Same(State) <span
+												class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-3">
+												
+													<c:if test="${trnPlaceOff.facultyId>0}">
+													Yes <input type="radio" ${trnPlaceOff.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio" ${trnPlaceOff.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+													<c:if test="${trnPlaceOff.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	 value="1"> 
+													No<input type="radio"  name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+											</div>
+										</div>
+										
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>

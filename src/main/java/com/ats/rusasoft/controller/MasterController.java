@@ -344,6 +344,8 @@ public class MasterController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
+				Staff editFaculty =new Staff();
+				model.addObject("editFaculty", editFaculty);
 
 			}
 		} catch (Exception e) {
@@ -432,6 +434,7 @@ public class MasterController {
 				staff.setFacultyFirstName(accName);
 				staff.setFacultyId(accId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				staff.setHightestQualificationYear(null);
 				staff.setIsAccOff(1);
 				staff.setIsDean(0);
@@ -487,6 +490,7 @@ public class MasterController {
 				editHod.setContactNo(contact);
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsAccOff(1);
 				editHod.setType(5);

@@ -155,7 +155,7 @@
 														<select id="depart" name="depart" class="form-control">
 															<c:forEach items="${deptList}" var="dept">
 																<c:choose>
-																	<c:when test="${hod.deptId==extActOff.deptId}">
+																	<c:when test="${dept.deptId==extActOff.deptId}">
 																		<option selected value="${dept.deptId}">${dept.deptName}</option>
 
 																	</c:when>
@@ -248,6 +248,33 @@
 															style="display: none;">Please enter relieving date</span>
 													</div>
 												</div>
+												
+												
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="is_add_same">Is
+												 Same(State) <span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												
+													<c:if test="${extActOff.facultyId>0}">
+													Yes <input type="radio" ${extActOff.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio" ${extActOff.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+													<c:if test="${extActOff.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	 value="1"> 
+													No<input type="radio"  name="is_state_same" id="is_state_same" value="0">
+													</c:if>
+													
+												<span class="error_form text-danger" id="is_state_same_field"
+													style="display: none;">Please select
+													permanent/correspondence address same or not.</span>
+
+											</div>
+										</div>
+												
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>
@@ -429,7 +456,7 @@
                 					$("#error_formfield4").hide()
                 				}
             				 
-            				if ( $("#is_registration").is(":checked")) {
+            				if ( $("#is_registration").val()==1) {
             					if(!$("#acc_off_relDate").val()){
             					isError=true;
                 				errMsg += '<li>Please enter a valid name.</li>';
@@ -441,6 +468,7 @@
                 					$("#error_acc_off_relDate").hide()
                 				}
             		          }
+            				
             				if ( $("#is_registration1").is(":checked")) {
             					$("#error_acc_off_relDate").hide()
             				}

@@ -281,10 +281,10 @@
 													<label class="control-label col-sm-2" for="date">Date
 														<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-3">
+													<div class="col-sm-10">
 														<input type="text" class="form-control datepicker"
 															id="date" value="${editProgramActivity.date}"
-															placeholder="Date" name="date"  onkeypress='return restrictAlphabets(event)'
+															placeholder="dd-mm-yyyy" name="date"  onkeypress='return restrictAlphabets(event)'
 															autocomplete="off">
 															<span
 														class="error_form text-danger" id="error_formfield1"

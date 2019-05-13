@@ -153,7 +153,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
-													class="form-control" id="district" name="village"
+													class="form-control" id="village" name="village"
 													placeholder="Village"
 													value="${facPerDetail.fVillage}"> <span
 													class="error_form text-danger" id="fac_village_field"

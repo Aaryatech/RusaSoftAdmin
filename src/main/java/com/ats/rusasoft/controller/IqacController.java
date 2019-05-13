@@ -293,6 +293,7 @@ public class IqacController {
 			staff.setType(2);
 
 			staff.setInstituteId(instituteId);
+			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 			staff.setJoiningDate(dateOfJoin);
 			staff.setContactNo(contact);
 			staff.setEmail(email);
@@ -320,6 +321,7 @@ public class IqacController {
 				editIqac.setContactNo(contact);
 				editIqac.setCurrentDesignationId(designation);
 				editIqac.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editIqac.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editIqac.setJoiningDate(dateOfJoin);
 				editIqac.setIsAccOff(isAccOff);
 				editIqac.setIsDean(isDean);
@@ -871,6 +873,7 @@ public class IqacController {
 					staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
 					staff.setHighestQualification(highestQualification);
 					staff.setHightestQualificationYear(yrofHighestQualification);
+					staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 					staff.setIsAccOff(isAccOff);
 					staff.setIsDean(isDean);
 					staff.setIsFaculty(1);
@@ -944,6 +947,7 @@ public class IqacController {
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHightestQualificationYear(yrofHighestQualification);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("hod_quolf")));
+				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editStaff.setJoiningDate(joinDate);
 				editStaff.setRealivingDate((request.getParameter("acc_off_relDate")));
 				editStaff.setMakerUserId(userId);
@@ -1450,6 +1454,8 @@ public class IqacController {
 			staff.setFacultyId(deanId);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			staff.setHightestQualificationYear(null);
+			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+
 			staff.setIsAccOff(0);
 			staff.setIsDean(1);
 			staff.setIsFaculty(1);
@@ -1499,6 +1505,8 @@ public class IqacController {
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editStaff.setJoiningDate(dateOfJoin);
+				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+
 				editStaff.setIsHod(isHod);
 				editStaff.setRoleIds(roleIds);
 				editStaff.setType(6);
@@ -2000,6 +2008,7 @@ public class IqacController {
 			staff.setFacultyFirstName(pacementOfficerName);
 			staff.setFacultyId(officerId);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 			staff.setHightestQualificationYear(null);
 			staff.setIsAccOff(0);
 			staff.setIsDean(0);
@@ -2051,6 +2060,7 @@ public class IqacController {
 				editStaff.setContactNo(contact);
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setRealivingDate(dateOfRel);
 				editStaff.setRoleIds(roleIds);
@@ -2379,6 +2389,7 @@ public class IqacController {
 			staff.setFacultyFirstName(extActOfficerName);
 			staff.setFacultyId(extActOfficerId);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 			staff.setHightestQualificationYear(null);
 			staff.setIsAccOff(0);
 			staff.setIsDean(0);
@@ -2430,6 +2441,7 @@ public class IqacController {
 				editStaff.setContactNo(contact);
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setRealivingDate(dateOfRel);
 				editStaff.setRoleIds(roleIds);

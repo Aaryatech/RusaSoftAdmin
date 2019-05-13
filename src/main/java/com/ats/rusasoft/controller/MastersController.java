@@ -140,6 +140,9 @@ public class MastersController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
+				
+				Staff editHod = new Staff();
+				model.addObject("editHod", editHod);
 
 			}
 		} catch (Exception e) {
@@ -232,6 +235,7 @@ public class MastersController {
 				staff.setFacultyFirstName(hodName);
 				staff.setFacultyId(hodId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				staff.setHightestQualificationYear(null);
 				staff.setIsAccOff(0);
 				staff.setIsDean(isDean);
@@ -280,6 +284,7 @@ public class MastersController {
 				editHod.setContactNo(contact);
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsHod(1);
 				editHod.setIsDean(1);
@@ -391,6 +396,7 @@ public class MastersController {
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
+			
 				Dept[] instArray = rest.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList " + deptList.toString());
@@ -411,7 +417,7 @@ public class MastersController {
 				map.add("id", facultyId);
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("facultyId:" + facultyId);
+				System.out.println("facultyId:" + facultyId+" "+editHod);
 
 				model.addObject("editHod", editHod);
 				model.addObject("addEdit", "1");
