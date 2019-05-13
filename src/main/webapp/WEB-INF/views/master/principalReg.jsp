@@ -220,6 +220,30 @@
 													style="display: none;">Please select joining date</span>
 											</div>
 										</div>
+										
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="is_add_same">Is 
+												 Same(State) <span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-3">
+												<c:choose>
+												<c:when test="${editFaculty.facultyId>0}">
+													Yes <input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+													
+													</c:when>
+													
+													<c:otherwise>
+													Yes <input checked type="radio" name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio" name="is_state_same" id="is_state_same" value="0">
+													</c:otherwise>
+													
+													</c:choose>
+													
+												</div>
+										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact

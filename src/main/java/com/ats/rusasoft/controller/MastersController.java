@@ -429,7 +429,7 @@ public class MastersController {
 			}
 		} catch (Exception e) {
 
-			System.err.println("exception In editJournal at Iqac Contr" + e.getMessage());
+			System.err.println("exception In showEditHod at Mastr Contr" + e.getMessage());
 
 			e.printStackTrace();
 
