@@ -220,15 +220,15 @@
 
 															<div class="form-group">
 
-																<label class="control-label col-sm-2" for="page_order">ISBN
-																	No <span class="text-danger">*</span>
+																<label class="control-label col-sm-2" for="page_order">ISSN/ISBN
+																	No. <span class="text-danger">*</span>
 																</label>
 
 
 																<div class="col-sm-6">
 																	<input type="text" class="form-control" id="isbn" onchange="trim(this)" autocomplete="off"
-																	 name="isbn" placeholder="ISBN No" value="${book.bookIsbn }">
-																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter ISBN
+																	 name="isbn" placeholder="ISSN/ISBN No." value="${book.bookIsbn }">
+																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter ISSN/ISBN
 																	No. </span>
 																</div>
 

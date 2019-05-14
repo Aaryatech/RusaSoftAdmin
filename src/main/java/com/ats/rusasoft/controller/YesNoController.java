@@ -988,7 +988,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Gender Sensitivity Display");
+			model.addObject("title", "Gender Sensitivity Facility");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("pageCode", "PAGE3");

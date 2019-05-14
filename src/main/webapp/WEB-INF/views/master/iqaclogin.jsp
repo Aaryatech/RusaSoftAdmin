@@ -230,7 +230,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_order">No.
-														of current admitted student <span class="text-danger">*</span>
+														of Current Admitted Students <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
 														<input type="number" class="form-control" min="0"
@@ -239,10 +239,10 @@
 															onchange="trim(this)"
 															value="${editInstInfo.noCurrentAdmitedStnt}"
 															name="no_currAdmitted_Student"
-															placeholder="No. of current admitted student"> <span
+															placeholder="No. of Current Admitted Students"> <span
 															class="error_form text-danger" id="error_curr"
 															style="display: none;">Please enter admitted
-															student and value must be greater than 0.</span>
+															students and value must be greater than 0.</span>
 													</div>
 												</div>
 

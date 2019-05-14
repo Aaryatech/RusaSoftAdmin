@@ -115,17 +115,7 @@
 														
 												<div class="form-group" id="ihide" style="display: none;">
 														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">University
-																 <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="university" onchange="trim(this)"
-																	name="university" placeholder="University"
-																	value="${phd.university}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_field_univrsity" style="display:none;" >Please enter university.</span>
-															</div>
-														</div>
+														
 														
 														
 														<div class="form-group">
@@ -137,6 +127,18 @@
 																	name="phd_scholar" placeholder="Name of Ph.D Scholar"
 																	value="${phd.phdScholarName}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name of Ph.D. scholar.</span>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">University
+																 <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="university" onchange="trim(this)"
+																	name="university" placeholder="University"
+																	value="${phd.university}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_field_univrsity" style="display:none;" >Please enter university.</span>
 															</div>
 														</div>
 														

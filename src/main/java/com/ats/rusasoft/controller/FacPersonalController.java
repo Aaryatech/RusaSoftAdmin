@@ -292,7 +292,7 @@ public class FacPersonalController {
 				facPersDetail.setfVillage(request.getParameter("village"));
 				facPersDetail.setfDistrict(request.getParameter("district"));
 				facPersDetail.setfTaluka(request.getParameter("taluka"));
-				facPersDetail.setfCity(request.getParameter("city"));
+				facPersDetail.setfCity("NA");//request.getParameter("city")
 				facPersDetail.setfState(request.getParameter("state"));
 				facPersDetail.setfPincode(request.getParameter("pincode"));
 				facPersDetail.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not

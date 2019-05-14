@@ -228,7 +228,7 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="grant"
+												<input type="number" class="form-control" id="grant" min="0"
 													name="grant" placeholder="Grant Sanctioned in Rs." autocomplete="off"
 													value="${editProject.projGrant}"> <span
 													class="error_form text-danger" id="error_grant"

@@ -152,8 +152,8 @@
 												Students Appeared<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="stud_appeared"
-													value="${studPer.noStudAppear}" name="stud_appeared"
+												<input type="text" class="form-control" id="stud_appeared"  onblur="getPercent()"
+													value="${studPer.noStudAppear}" name="stud_appeared" onkeypress='return restrictAlphabets(event)'
 													placeholder="No of Students Appeared in Final Year Exam ">
 													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >
 													Please enter No of students appeared in final year exam and value must be greater than 0.</span>
@@ -166,10 +166,13 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="stud_passed"
-													value="${studPer.noStudPass}" name="stud_passed"
+													value="${studPer.noStudPass}" name="stud_passed" onkeypress='return restrictAlphabets(event)'
 													placeholder="No of Students Passed in Final Year Exam"  pattern="\d*" onblur="getPercent()">
 											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >
 											Please enter No of students passed in final year exam and value must be greater than 0.</span>
+											
+											<span class="error_form text-danger" id="error_formfield5" style="display:none;" >
+											No. of students passed in final exam cannot be exceed than No. of students appeared.</span>
 											</div>
 										</div>
 
@@ -227,6 +230,23 @@
 		return;
 	}
 	
+	var passPer = 0;
+	function getPercent(){
+		
+		var appear = parseFloat($("#stud_appeared").val());
+		var passed = parseFloat($("#stud_passed").val());
+		
+		
+		if(appear >= passed){
+		 passPer = (passed*100)/appear;
+		}
+		else{
+			passPer = 0;
+		}
+		
+		document.getElementById("stud_pass_per").value=passPer;
+	}
+	
                
             	$(document).ready(function($){  						  
             		
@@ -234,11 +254,23 @@
             		
             			var isError=false;
             			 var errMsg="";
+            			 
+            				if(passPer == 0){
+           					 
+                				isError=true;
+                				
+                				$("#stud_passed").addClass("has-error")
+                				$("#error_formfield5").show()
+                				
+                				} else {
+                					$("#error_formfield5").hide()
+                				}
+            			 
+            			 
             				
            				if(!$("#programTypeId").val()){
             					 
             				isError=true;
-            				
             				
             				$("#programTypeId").addClass("has-error")
             				$("#error_formfield1").show()
@@ -251,7 +283,6 @@
             				if(!$("#programTypeId").val()){
              					 
                 				isError=true;
-                			
                 				
                 				$("#programTypeId").addClass("has-error")
                 				$("#error_formfield2").show()
@@ -262,7 +293,7 @@
             				 
             				
             				
-            				if($("#stud_appeared").val()<=0 || !$("#stud_appeared").val()){
+            				if($("#stud_appeared").val() <=0 || !$("#stud_appeared").val()){
              					 
                 				isError=true;
                 			
@@ -274,7 +305,7 @@
                 					$("#error_formfield3").hide()
                 				}
             				
-            				if($("#stud_pass_per").val()<=0 || !$("#stud_pass_per").val()){
+            				if($("#stud_passed").val()<=0 || !$("#stud_passed").val()){
              					 
                 				isError=true;
                 			
@@ -286,8 +317,7 @@
                 					$("#error_formfield4").hide()
                 				}
             				
-								
-								
+            				
             				
 			            	 if (!isError) {
 			            		 
@@ -312,17 +342,6 @@
 	</script>
 
 	<script type="text/javascript">
-	
-	function getPercent(){
-		
-		var appear = $("#stud_appeared").val();
-		var passed = $("#stud_passed").val();
-		var passPer = (passed*100)/appear;
-		//alert(passPer);
-		document.getElementById("stud_pass_per").value=passPer;
-		
-	}
-	
 	
 		function showExtraField() {
 
@@ -410,6 +429,22 @@ $(function () {
 		
 		
 	</script>
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
+	
 	
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->

@@ -162,6 +162,20 @@
 										</div>
 										
 										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_address">Taluka
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" onchange="trim(this)" maxlength="200"
+													class="form-control" id="taluka" name="taluka"
+													placeholder="Taluka"
+													value="${facPerDetail.fTaluka}"> <span
+													class="error_form text-danger" id="fac_taluka_field"
+													style="display: none;">Please enter taluka.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">District
 												<span class="text-danger">*</span>
 											</label>
@@ -175,22 +189,10 @@
 											</div>
 										</div>
 										
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="fac_address">Taluka
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" onchange="trim(this)" maxlength="200"
-													class="form-control" id="taluka" name="taluka"
-													placeholder="Taluka"
-													value="${facPerDetail.fTaluka}"> <span
-													class="error_form text-danger" id="fac_taluka_field"
-													style="display: none;">Please enter taluka.</span>
-											</div>
-										</div>
+										
 									
 										
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">City
 												<span class="text-danger">*</span>
 											</label>
@@ -202,7 +204,7 @@
 													class="error_form text-danger" id="fac_city_field"
 													style="display: none;">Please enter city.</span>
 											</div>
-										</div>
+										</div> --%>
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">State
 												<span class="text-danger">*</span>
@@ -610,7 +612,7 @@
 													$("#fac_taluka_field").hide()
 												}
 												
-												if (!$("#city").val()) {
+												/* if (!$("#city").val()) {
 													isError = true;
 
 													$("#city").addClass(
@@ -618,7 +620,7 @@
 													$("#fac_city_field").show()
 												} else {
 													$("#fac_city_field").hide()
-												}
+												} */
 												
 												if (!$("#state").val()) {
 													isError = true;

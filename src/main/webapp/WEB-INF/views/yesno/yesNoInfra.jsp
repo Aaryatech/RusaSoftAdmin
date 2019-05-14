@@ -268,7 +268,7 @@
 														</c:forEach>
 	
 														<tr>
-															<td><strong>Others</strong></td>
+															
 															<td></td>
 															<td><a data-toggle="modal" href="#myModal">
 																	<button type="button" class="btn btn-info">

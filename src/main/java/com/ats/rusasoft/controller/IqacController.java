@@ -1308,7 +1308,7 @@ public class IqacController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
-				model.addObject("title", "Dean  Registration");
+				model.addObject("title", "Add Dean R & D");
 			}
 		} catch (Exception e) {
 
@@ -1599,7 +1599,7 @@ public class IqacController {
 			} else {
 				model = new ModelAndView("master/deanList");
 
-				model.addObject("title", "Dean Registration ");
+				model.addObject("title", "Dean R & D Registration ");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 				int yId = (int) session.getAttribute("acYearId");
@@ -1703,7 +1703,7 @@ public class IqacController {
 
 				model.addObject("dean", staff);
 				model.addObject("addEdit", "1");
-				model.addObject("title", "Edit Dean");
+				model.addObject("title", "Edit Dean R & D");
 			}
 		} catch (Exception e) {
 

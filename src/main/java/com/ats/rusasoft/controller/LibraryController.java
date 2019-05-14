@@ -982,7 +982,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/libList");
 
-				model.addObject("title", "Librarian Registration");
+				model.addObject("title", " Director Resource Center Registration");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 
@@ -1050,7 +1050,7 @@ public class LibraryController {
 			} else {
 				model = new ModelAndView("master/libReg");
 
-				model.addObject("title", "Add Librarian Registration");
+				model.addObject("title", "Add  Director Resource Center");
 
 				Designation[] designArr = restTemplate.getForObject(Constants.url + "/getAllDesignations",
 						Designation[].class);
@@ -1273,7 +1273,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/libReg");
 
-				model.addObject("title", "Edit Librarian Registration");
+				model.addObject("title", "Edit  Director Resource Center");
 
 				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));

@@ -130,7 +130,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Tille" id="title"
+															placeholder=" Enter Tille" id="title"
 															value="${facultyEmpowr.title}" name="title" autocomplete="off">
 															<span class="error_form text-danger" id="title_errfield"
 															style="display: none;">Please enter title.</span>
@@ -138,7 +138,7 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="status">Financial Support
+													<label class="control-label col-sm-3" for="status">Financial 
 														Support <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
@@ -158,7 +158,7 @@
 															</label>
 															<div  class="col-sm-9">
 																<select id="amt_rcvd_frm" name="amt_rcvd_frm" class="form-control">
-																	<option value="NA" ${facultyEmpowr.amt_recvd_from eq 'NA'? 'Selected' : ''}>NA</option>
+																	<!-- <option > Financial Support </option> -->
 																	<option value="Institute" ${facultyEmpowr.amt_recvd_from eq 'Institute'? 'Selected' : ''}>Institute</option>
 																	<option value="Individual" ${facultyEmpowr.amt_recvd_from eq'Individual'? 'Selected' : ''}>Individual</option>
 																	<option value="Government" ${facultyEmpowr.amt_recvd_from eq 'Government'? 'Selected' : ''}>Government</option>

@@ -2366,11 +2366,17 @@ public class FacultyModuleController {
 			
 			FacultyEmpowerment fac = new FacultyEmpowerment();
 			
+			int fs = Integer.parseInt(request.getParameter("financial_suprt"));
+			
 			fac.setFacultyEmpwrmntId(Integer.parseInt(request.getParameter("fac_empwr_id")));
 			fac.setNameOfAcitvity(request.getParameter("actvity_name"));
 			fac.setTitle(request.getParameter("title"));
-			fac.setFinancialSupport(Integer.parseInt(request.getParameter("financial_suprt")));
+			fac.setFinancialSupport(fs);
+			if(fs == 0) {
+			fac.setAmt_recvd_from("NA");
+			}else {
 			fac.setAmt_recvd_from(request.getParameter("amt_rcvd_frm"));
+			}
 			fac.setFromDate(request.getParameter("fromDate"));
 			fac.setToDate(request.getParameter("toDate"));
 			fac.setInstId(userObj.getStaff().getInstituteId());

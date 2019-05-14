@@ -157,7 +157,7 @@
 														Appeared<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" id="no_stud_appear"
+														<input type="text" class="form-control" id="no_stud_appear" onblur="cal()"
 															value="${studQlifyExam.noStudAppeared}" onfocus="this.value=''"
 															placeholder="No. of Students Appeared" name="no_stud_appear"
 															onkeypress='return restrictAlphabets(event)'
@@ -173,13 +173,16 @@
 														Qualified<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" maxlength="30" class="form-control"
+														<input type="text" maxlength="30" class="form-control" onblur="cal()"
 															id="no_stud_qualify" value="${studQlifyExam.noStudQualified}"
 															name="no_stud_qualify" placeholder="No. of Students Qualified" 
 															onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
 															onchange="return trim(this)" autocomplete="off">
 													<span class="error_form text-danger" id="studQualify_errfield"
 															style="display: none;">Please enter No. student qualified and value must be greater than 0.</span>
+															
+													<span class="error_form text-danger" id="studQualify_errfield0"
+															style="display: none;">No. students qualified cannot exceed No. of students appeared.</span>
 													</div>
 												</div>
 
@@ -364,6 +367,18 @@
 			return true;
 
 		}
+		var res = 0;
+		function cal(){
+			var appear = parseFloat($("#no_stud_appear").val());
+			var qualify = parseFloat($("#no_stud_qualify").val());
+			
+			if(appear < qualify){
+				res = 0;
+			}else{
+				res = 1;
+			}
+		}
+		
 		$(document)
 				.ready(
 						function($) {
@@ -407,7 +422,20 @@
 													$("#studQualify_errfield")
 															.hide()
 												}		
+	
+												if (res == 0) {
 
+													isError = true;
+													
+													$("#no_stud_qualify").addClass(
+															"has-error")
+													$("#studQualify_errfield0")
+															.show()
+													//return false;
+												} else {
+													$("#studQualify_errfield0")
+															.hide()
+												}		
 												 
 												
 												if (!isError) {

@@ -173,7 +173,7 @@
 													name="budget_utilized" min="0" max="100000000"
 													autocomplete="off" maxlength="9"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Budget Utilized for Infrastructure in ${budRupees}"
+													placeholder="Budget Utilized on Infrastructure in ${budRupees}"
 													value="${budget.budgetUtilized}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget
@@ -195,7 +195,7 @@
 													name="ttl_expd" min="0" max="100000000"
 													autocomplete="off" maxlength="9"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="Total Budget Allocated excluding Salary for Infrastructure in ${budRupees}"
+													placeholder=" Budget Allocated for Infrastructure in ${budRupees}"
 													value="${budget.exInt1}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget

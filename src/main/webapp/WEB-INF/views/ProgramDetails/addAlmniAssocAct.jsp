@@ -128,7 +128,7 @@
 														<input type="text" class="form-control datepicker"
 															 placeholder="dd-mm-yyyy" autocomplete="off"
 															id="date_meet" value="${alumni.dateOfMeeting}"
-															name="date_meet" autocomplete="off">
+															name="date_meet" autocomplete="off" onkeypress='return restrictAlphabets(event)'>
 															<span class="error_form text-danger" id="date_meet_errfield"
 															style="display: none;">Please enter date of meeting</span>
 													</div>
@@ -158,7 +158,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''"
+															class="form-control" onfocus="this.value=''" onkeypress='return restrictAlphabets(event)'
 															placeholder="Alumni Registration No" id="almni_reg_no"
 															value="${alumni.alumniRegNo}" name="almni_reg_no"
 															><span class="error_form text-danger" id="almni_reg_no_errfield"
@@ -174,7 +174,7 @@
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" class="form-control datepicker" id="date_of_almni_reg"
 															value="${alumni.dateAlumniReg}" name="date_of_almni_reg" autocomplete="off"
-															placeholder="dd-mm-yyyy">
+															placeholder="dd-mm-yyyy" onkeypress='return restrictAlphabets(event)'>
 															<span class="error_form text-danger" id="date_of_almni_reg_errfield"
 															style="display: none;">Please enter date of alumni registration</span>
 													</div>
@@ -188,7 +188,7 @@
 														<input type="text" autocomplete="off"
 															class="form-control" onfocus="this.value=''"
 															placeholder="No. of Alumni Register" id="registred_almni_no"
-															value="${alumni.noAlumniReg}" name="registred_almni_no"
+															value="${alumni.noAlumniReg}" name="registred_almni_no" onkeypress='return restrictAlphabets(event)'
 															><span class="error_form text-danger" id="registred_almni_no_err_field"
 															style="display: none;">Please enter No. of alumni register 
 															and value must be greater than 0.</span>
@@ -201,7 +201,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''"
+															class="form-control" onfocus="this.value=''" onkeypress='return restrictAlphabets(event)'
 															placeholder="No. of Member Attended" id="no_member_attnd"
 															value="${alumni.noMemberAttended}" name="no_member_attnd"
 															><span class="error_form text-danger" id="no_member_attnd_errfield"
@@ -216,7 +216,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''"
+															class="form-control" onfocus="this.value=''" onkeypress='return restrictAlphabets(event)'
 															placeholder="No. of Member Attended" id="ttl_no_almni_enrolled"
 															value="${alumni.ttlNoAlumniEnrolled}" name="ttl_no_almni_enrolled">
 															<span class="error_form text-danger" id="ttl_no_almni_enrolled_errfield"
@@ -265,6 +265,22 @@
 	<!-- END CONTENT -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
+	
+	<script type="text/javascript">
+	
 		function checkPhdGuide(activity) {
 			
 //alert(activity);

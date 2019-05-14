@@ -93,13 +93,13 @@
 										<input type="hidden" id="ict_id"
 											name="ict_id" value="${ictEnbFac.ictEnbFacId}">
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="title">No of 
+											<label class="control-label col-sm-2" for="title">No. of 
 												Classrooms<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="classroom" onfocus="this.value=''"
 													autocomplete="off" name="classroom" onchange="trim(this)"
-													placeholder="Title of Program" onkeypress='return restrictAlphabets(event)'
+													placeholder="No. of Classrooms" onkeypress='return restrictAlphabets(event)'
 													value="${ictEnbFac.noOfClassroom}"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter No. of classrooms
@@ -157,7 +157,7 @@
 										</div>
 										
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="participant">No of Seminar
+											<label class="control-label col-sm-2" for="participant">No. of Seminar
 												 Halls with ICT <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
