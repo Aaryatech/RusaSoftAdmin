@@ -751,7 +751,7 @@ public class FacultyController {
 				sub.setDelStatus(1);
 				sub.setExInt1(1);
 				sub.setExInt2(1);
-				sub.setExVar1("NA");
+				sub.setExVar1(request.getParameter("yearInplmtn"));
 				sub.setExVar2("NA");
 				sub.setFacultyId(userObj.getGetData().getUserDetailId());
 				int yearId = (int) session.getAttribute("acYearId");

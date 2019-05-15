@@ -124,8 +124,8 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" min="0"
 													onchange="return trim(this)" id="amc_expenditure"
-													onkeypress='return restrictAlphabets(event)'
-													name="amc_expenditure" placeholder="AMC Expenditure"
+													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
+													name="amc_expenditure" placeholder="AMC Expenditure(Rs.)"
 													autocomplete="off" value="${editInst.amcExpenditure}">
 												<span class="error_form text-danger" id="error_exp"
 													style="display: none;">Please Enter AMC Expenditure
@@ -177,13 +177,13 @@
 											<div class="col-sm-offset-3 col-sm-9">
 
 
-												<button type="submit" id="sub_button"
+												<button type="submit" id="sub1"
 													class="btn btn-primary" onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
 
 												<a href="${pageContext.request.contextPath}/showAMC"><button
-														type="button" class="btn btn-primary">
+														type="button" class="btn btn-primary" id="sub2">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
 											</div>
@@ -296,9 +296,10 @@
 							if (!isError) {
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {
-									return  true;
+									
 									 document.getElementById("sub1").disabled=true;
-           						  document.getElementById("sub2").disabled=true;
+           						 	 document.getElementById("sub2").disabled=true;
+           							return  true;
 								}
 							}
             
@@ -344,6 +345,13 @@ function checkBeforeSubmit(){
 	</script>
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

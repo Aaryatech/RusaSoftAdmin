@@ -121,6 +121,7 @@
 													<th>Subject Type</th>
 													<th>Faculty</th>
 													<th>Program</th>
+													<th> Year of Implementation </th>
 													<th>Result %</th>
 													<th>Action</th>
 												</tr>
@@ -162,6 +163,9 @@
 
 														<td style="text-align: left"><c:out
 																value="${subject.nameOfProgram}" /></td>
+														
+														<td style="text-align: left"><c:out
+																value="${subject.exVar1}" /></td>
 
 
 

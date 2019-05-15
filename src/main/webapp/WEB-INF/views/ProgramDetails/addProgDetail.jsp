@@ -153,6 +153,18 @@
 													<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span>
 											</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="nameOfProgram">Program
+												  Code<span class="text-danger"></span>
+											</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="programCode"
+													value="${editProgram.nameOfProgram}" name="programCode"
+													placeholder="Program Code (optional)">
+													<!-- <span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span> -->
+											</div>
+										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="intake">Sanctioned
@@ -326,10 +338,10 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
+<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showProgramList"><button
+<a href="${pageContext.request.contextPath}/showProgramList"><button id="sub2"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 

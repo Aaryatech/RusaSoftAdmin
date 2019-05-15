@@ -79,6 +79,7 @@
 												<tr>
 													<th>Sr No</th>
 													<th>Program Type</th>
+													<th>Program Code</th>
 													<th>Duration Months</th>
 													<th>Sanctioned Intake</th>
 													<th>Date of Introduction</th>
@@ -92,6 +93,7 @@
 
 													<td style="text-align: center; ">${count.index+1}</td>
 													<td>${list.programName} - ${list.nameOfProgram}</td>
+													<td style="text-align: right; ">${list.exInt1}</td>
 													<td style="text-align: right; ">${list.monthDuration}</td>
 													<td style="text-align: right; ">${list.sanctionalIntake}</td>
 													<td style="text-align: center; ">${list.dateOfIntroduction}</td>

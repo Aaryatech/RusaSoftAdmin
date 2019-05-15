@@ -26,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.model.NewCourseInfo;
+import com.ats.rusasoft.master.model.NewCourseInfoList;
 import com.ats.rusasoft.master.model.prodetail.AlumniAssocAct;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
 import com.ats.rusasoft.master.model.prodetail.Cast;
@@ -35,6 +37,7 @@ import com.ats.rusasoft.master.model.prodetail.GetTrainPlace;
 import com.ats.rusasoft.master.model.prodetail.HigherEducDetail;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.master.model.prodetail.TrainPlacement;
+import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GovtScholarships;
 import com.ats.rusasoft.model.Info;
@@ -45,35 +48,32 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 @Scope("session")
 public class AlumniTrainingController {
 	RestTemplate rest = new RestTemplate();
-	
+
 	@RequestMapping(value = "/blockUser", method = RequestMethod.POST)
 	public String blockUser(HttpServletRequest request, HttpServletResponse response) {
 
-		String redirect=null;
+		String redirect = null;
 		try {
 
-			int userId=Integer.parseInt(request.getParameter("userId"));
-			String listMapping=request.getParameter("listMapping");
-			
-			
+			int userId = Integer.parseInt(request.getParameter("userId"));
+			String listMapping = request.getParameter("listMapping");
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info blockAccess = AccessControll.checkAccess("blockUser", listMapping, "0", "0", "0", "1",
-					newModuleList);
-			
-			if(blockAccess.isError()==false) {
+			Info blockAccess = AccessControll.checkAccess("blockUser", listMapping, "0", "0", "0", "1", newModuleList);
 
-				
-				map.add("userId",userId);
+			if (blockAccess.isError() == false) {
+
+				map.add("userId", userId);
 
 				Info errMsg = restTemplate.postForObject(Constants.url + "blockUser", map, Info.class);
 
-				redirect="redirect:/"+listMapping;
-				
+				redirect = "redirect:/" + listMapping;
+
 			} else {
 
 				redirect = "redirect:/accessDenied";
@@ -259,14 +259,14 @@ public class AlumniTrainingController {
 					alumni.setAlumniDetailId(alumniId);
 
 					alumni.setAlumniName(almName);
-					
+
 					amount = Integer.parseInt(request.getParameter("alumini_amt"));
-					if(amount>0) {
-					alumni.setExInt1(amount);
-					alumni.setExInt2(1);
-					}else {
-					alumni.setExInt1(amount);
-					alumni.setExInt2(0);
+					if (amount > 0) {
+						alumni.setExInt1(amount);
+						alumni.setExInt2(1);
+					} else {
+						alumni.setExInt1(amount);
+						alumni.setExInt2(0);
 					}
 					String exVar1 = "NA";
 					alumni.setExVar1(request.getParameter("designation"));
@@ -289,7 +289,7 @@ public class AlumniTrainingController {
 					alumni.setProgramId(1);
 					int yearId = (int) session.getAttribute("acYearId");
 					alumni.setYearId(yearId);
-System.out.println(alumni.toString());
+					System.out.println(alumni.toString());
 					AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
 							AlumniDetail.class);
 
@@ -587,7 +587,7 @@ System.out.println(alumni.toString());
 
 			int placeId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
 			String packge = "-";
-			String suuppAgnc= "NA";
+			String suuppAgnc = "NA";
 			try {
 				placeId = Integer.parseInt(request.getParameter("place_id"));
 			} catch (Exception e) {
@@ -616,7 +616,7 @@ System.out.println(alumni.toString());
 			} else {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				if (placeId == 0) {
-					
+
 					TrainPlacement trainPlace = new TrainPlacement();
 
 					String almName = request.getParameter("alum_name");
@@ -633,20 +633,20 @@ System.out.println(alumni.toString());
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
 					packge = request.getParameter("package_offered");
-					if(packge==null) {
+					if (packge == null) {
 						trainPlace.setPakageOfferd(packge);
-					}else {
+					} else {
 						trainPlace.setPakageOfferd(packge);
 					}
-					
+
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-					
+
 					suuppAgnc = request.getParameter("sup_agency_name");
-					if(suuppAgnc==null) {
+					if (suuppAgnc == null) {
 						trainPlace.setSupportAgencyName(suuppAgnc);
-					}else {
+					} else {
 						trainPlace.setSupportAgencyName(suuppAgnc);
 					}
 					trainPlace.setDelStatus(1);
@@ -664,8 +664,8 @@ System.out.println(alumni.toString());
 					trainPlace.setMakerDatetime(curDateTime);
 					int yearId = (int) session.getAttribute("acYearId");
 					trainPlace.setYearId(yearId);
-					
-					System.out.println("Placements:"+trainPlace.toString());
+
+					System.out.println("Placements:" + trainPlace.toString());
 
 					TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
 							trainPlace, TrainPlacement.class);
@@ -688,18 +688,18 @@ System.out.println(alumni.toString());
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
 					packge = request.getParameter("package_offered");
-					if(packge==null) {
+					if (packge == null) {
 						trainPlace.setPakageOfferd(packge);
-					}else {
+					} else {
 						trainPlace.setPakageOfferd(packge);
 					}
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
 					suuppAgnc = request.getParameter("sup_agency_name");
-					if(suuppAgnc==null) {
+					if (suuppAgnc == null) {
 						trainPlace.setSupportAgencyName(suuppAgnc);
-					}else {
+					} else {
 						trainPlace.setSupportAgencyName(suuppAgnc);
 					}
 
@@ -1210,11 +1210,11 @@ System.out.println(alumni.toString());
 		return redirect;
 
 	}
-	
-	
-	
-	/***************************************Alumni Association Activity**********************************/
-	
+
+	/***************************************
+	 * Alumni Association Activity
+	 **********************************/
+
 	@RequestMapping(value = "/showAlumniAssociationActivity", method = RequestMethod.GET)
 	public ModelAndView showAlumniAssociationActivity(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1226,24 +1226,24 @@ System.out.println(alumni.toString());
 			model.addObject("title", "Alumni Association Activity");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			
+
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info viewAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "1", "0", "0", "0",
-					newModuleList);
+			Info viewAccess = AccessControll.checkAccess("showAlumniAssociationActivity",
+					"showAlumniAssociationActivity", "1", "0", "0", "0", newModuleList);
 
 			if (viewAccess.isError() == false) {
 
-				Info addAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "1", "0", "0",
-						newModuleList);
+				Info addAccess = AccessControll.checkAccess("showAlumniAssociationActivity",
+						"showAlumniAssociationActivity", "0", "1", "0", "0", newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "0", "1", "0",
-						newModuleList);
+				Info editAccess = AccessControll.checkAccess("showAlumniAssociationActivity",
+						"showAlumniAssociationActivity", "0", "0", "1", "0", newModuleList);
 
-				Info deleteAccess = AccessControll.checkAccess("showAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "0", "0", "1",
-						newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("showAlumniAssociationActivity",
+						"showAlumniAssociationActivity", "0", "0", "0", "1", newModuleList);
 
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
@@ -1255,12 +1255,11 @@ System.out.println(alumni.toString());
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				System.err.println("sess " + userObj.getGetData().getUserInstituteId()+"  "+session.getAttribute("acYearId"));
+				System.err.println(
+						"sess " + userObj.getGetData().getUserInstituteId() + "  " + session.getAttribute("acYearId"));
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());
 				map.add("yId", session.getAttribute("acYearId"));
-				
 
 				AlumniAssocAct[] almArray = rest.postForObject(Constants.url + "getAlumniAssocActivitiesList", map,
 						AlumniAssocAct[].class);
@@ -1285,7 +1284,7 @@ System.out.println(alumni.toString());
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addAlumniAssociationActivity", method = RequestMethod.GET)
 	public ModelAndView addAlumniAssociationActivity(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1296,8 +1295,8 @@ System.out.println(alumni.toString());
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info addAccess = AccessControll.checkAccess("addAlumniAssociationActivity", "showAlumniAssociationActivity", "0", "1", "0", "0",
-					newModuleList);
+			Info addAccess = AccessControll.checkAccess("addAlumniAssociationActivity", "showAlumniAssociationActivity",
+					"0", "1", "0", "0", newModuleList);
 			if (addAccess.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/addAlmniAssocAct");
@@ -1320,24 +1319,23 @@ System.out.println(alumni.toString());
 
 		return model;
 
-	}//insertAlumniAssocAct
-	
+	}// insertAlumniAssocAct
+
 	@RequestMapping(value = "/insertAlumniAssocAct", method = RequestMethod.POST)
 	public String insertAlumniAssocAct(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		try {
 			HttpSession session = request.getSession();
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
 			int yId = (int) session.getAttribute("acYearId");
-			
+
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 
 			String curDateTime = dateFormat.format(cal.getTime());
-			
-			
+
 			AlumniAssocAct alumni = new AlumniAssocAct();
 			alumni.setAlmAssocActId(Integer.parseInt(request.getParameter("alumni_assoc_act_id")));
 			alumni.setAlumniMeetngAgnda(request.getParameter("alum_meet_agnd"));
@@ -1358,23 +1356,22 @@ System.out.println(alumni.toString());
 			alumni.setExInt2(0);
 			alumni.setExVar1("NA");
 			alumni.setExVar2("NA");
-			
-			AlumniAssocAct almAct = rest.postForObject(Constants.url+"/saveAlumniAssoAct", alumni, AlumniAssocAct.class);
-			
-			
-		}catch(Exception e) {
+
+			AlumniAssocAct almAct = rest.postForObject(Constants.url + "/saveAlumniAssoAct", alumni,
+					AlumniAssocAct.class);
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
-		
+
 		return "redirect:/showAlumniAssociationActivity";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/editAlumAlumniAssocAct/{almniActivityId}", method = RequestMethod.GET)
-	public ModelAndView editAlumAlumniAssocAct(@PathVariable("almniActivityId") int almniActivityId, HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView editAlumAlumniAssocAct(@PathVariable("almniActivityId") int almniActivityId,
+			HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("ProgramDetails/addAlmniAssocAct");
 		try {
@@ -1382,8 +1379,8 @@ System.out.println(alumni.toString());
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("editAlumAlumniAssocAct/{almniActivityId}", "showAlumniAssociationActivity", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editAlumAlumniAssocAct/{almniActivityId}",
+					"showAlumniAssociationActivity", "0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1410,7 +1407,7 @@ System.out.println(alumni.toString());
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteAlumniAssocAct/{almniActivityId}", method = RequestMethod.GET)
 	public String deleteAlumniAssocAct(@PathVariable("almniActivityId") int almniActivityId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1420,8 +1417,8 @@ System.out.println(alumni.toString());
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteAlumniAssocAct/{almniActivityId}", "showAlumniAssociationActivity", "0", "0",
-					"0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteAlumniAssocAct/{almniActivityId}",
+					"showAlumniAssociationActivity", "0", "0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1440,7 +1437,7 @@ System.out.println(alumni.toString());
 
 		return "redirect:/showAlumniAssociationActivity";
 	}
-	
+
 	@RequestMapping(value = "/deleteSelectedAlum/{alumni}", method = RequestMethod.GET)
 	public String deleteSelectedAlum(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int alumni) {
@@ -1450,8 +1447,8 @@ System.out.println(alumni.toString());
 		try {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteSelectedAlum/{alumni}", "showAlumniAssociationActivity", "0", "0", "0",
-					"1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteSelectedAlum/{alumni}", "showAlumniAssociationActivity", "0",
+					"0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1497,6 +1494,262 @@ System.out.println(alumni.toString());
 
 		}
 		return a;
+	}
+
+	/*********************************
+	 * New Course Information
+	 *********************************/
+
+	@RequestMapping(value = "/showNewCourseInfo", method = RequestMethod.GET)
+	public ModelAndView showNewCourseInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showNewCourseInfo", "showNewCourseInfo", "1", "0", "0", "0",
+					newModuleList);
+
+			if (viewAccess.isError() == false) {
+				model = new ModelAndView("ProgramDetails/showNewCourscInfo");
+
+				Info addAccess = AccessControll.checkAccess("showNewCourseInfo", "showNewCourseInfo", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showNewCourseInfo", "showNewCourseInfo", "0", "0", "1",
+						"0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showNewCourseInfo", "showNewCourseInfo", "0", "0", "0",
+						"1", newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false)
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+				model.addObject("title", "New Courses Information List");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				RestTemplate restTemplate = new RestTemplate();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map.add("yearId", session.getAttribute("acYearId"));
+				System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " "
+						+ session.getAttribute("acYearId"));
+
+				NewCourseInfoList[] courseArr = restTemplate.postForObject(Constants.url + "getAllNewCourseList", map,
+						NewCourseInfoList[].class);
+				List<NewCourseInfoList> courseList = new ArrayList<>(Arrays.asList(courseArr));
+				System.err.println("courseArr " + courseList.toString());
+
+				model.addObject("courseList", courseList);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In New Course Information at Alumni Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/addNewCourseInfo", method = RequestMethod.GET)
+	public ModelAndView addNewCourseInfo(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		RestTemplate restTemplate = new RestTemplate();
+		MultiValueMap<String, Object> map = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info access = null;
+
+			access = AccessControll.checkAccess("addNewCourseInfo", "showNewCourseInfo", "0", "1", "0", "0",
+					newModuleList);
+			if (access.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+
+				model = new ModelAndView("ProgramDetails/addNewCourseInfo");
+
+				model.addObject("title", "Add New Course Information");
+
+				NewCourseInfo newCourse = new NewCourseInfo();
+				model.addObject("newCourse", newCourse);
+
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				System.err.println("progTypeList " + progTypeList.toString());
+
+				model.addObject("progTypeList", progTypeList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+				AcademicYear[] quolArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
+						AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("acaYearList " + acaYearList.toString());
+
+				model.addObject("acaYearList", acaYearList);
+			}
+
+		} catch (Exception e) {
+			System.err.println("exception In showNewCourseInfo at AlumTrain Contr" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "/insertNewCourseInfo", method = RequestMethod.POST)
+	public String insertNewCourseInfo(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String curDateTime = dateFormat.format(cal.getTime());
+
+			NewCourseInfo course = new NewCourseInfo();
+
+			course.setCourseId(Integer.parseInt(request.getParameter("course_id")));
+			course.setProgName(Integer.parseInt(request.getParameter("prog_name")));
+			course.setProgType(Integer.parseInt(request.getParameter("prog_type")));
+			course.setApplicableYear(request.getParameter("applicabl_year"));
+			course.setCourseName(request.getParameter("courseName"));
+			course.setCourseCode(Integer.parseInt(request.getParameter("courseCode")));
+			course.setIntroduceFrom(request.getParameter("acadYear"));
+			course.setDocument(request.getParameter("document"));
+			course.setDelStatus(1);
+			course.setIsActive(1);
+			course.setMakerUserId(userId);
+			course.setMakerDatetime(curDateTime);
+			course.setInstId(instituteId);
+			course.setExInt1(0);
+			course.setExInt2(0);
+			course.setExVar1("NA");
+			course.setExVar2("NA");
+			System.out.println("Course=" + course.toString());
+
+			NewCourseInfo saveCourse = rest.postForObject(Constants.url + "/saveNewCourseInfo", course,
+					NewCourseInfo.class);
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/showNewCourseInfo";
+
+	}
+
+	@RequestMapping(value = "/editCourseInfo/{courseId}", method = RequestMethod.GET)
+	public ModelAndView editCourseInfo(@PathVariable("courseId") int courseId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("ProgramDetails/addNewCourseInfo");
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editCourseInfo/{courseId}", "showNewCourseInfo", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				MultiValueMap<String, Object> map = null;
+
+				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType", ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				System.err.println("progTypeList " + progTypeList.toString());
+
+				model.addObject("progTypeList", progTypeList);
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("type", 1);
+				AcademicYear[] quolArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
+						AcademicYear[].class);
+				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+				System.err.println("acaYearList " + acaYearList.toString());
+
+				model.addObject("acaYearList", acaYearList);
+
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("courseId", courseId);
+				NewCourseInfo newCourse = rest.postForObject(Constants.url + "/getByCourseId", map,
+						NewCourseInfo.class);
+				model.addObject("newCourse", newCourse);
+
+				model.addObject("title", "Edit New Course Information");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteCourseInfo/{courseId}", method = RequestMethod.GET)
+	public String deleteCourseInfo(@PathVariable("courseId") int courseId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteCourseInfo/{courseId}",
+					"showNewCourseInfo", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("courseId", courseId);
+
+				NewCourseInfo delCourseId = rest.postForObject(Constants.url + "/delCourseById", map,
+						NewCourseInfo.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showNewCourseInfo";
 	}
 
 

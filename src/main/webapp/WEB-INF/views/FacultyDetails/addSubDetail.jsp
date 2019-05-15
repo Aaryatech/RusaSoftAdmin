@@ -350,7 +350,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="isCbse">Is
-												CBSE<span class="text-danger">*</span>
+												CBCS<span class="text-danger">*</span>
 											</label>
 
 
@@ -402,6 +402,28 @@
 															id="isCbse" value="1">
 													</div> -->
 										</div>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="year"
+												style="text-align: left;"> Year of 
+												Implementation <span class="text-danger">*</span>
+											</label>
+
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepickeryear"
+													data-min-view-mode="years" data-start-view="2"
+													data-format="yyyy"
+													placeholder="Year of Implementation "
+													id="yearInplmtn"
+													value="${editSubject.exVar1}"
+													name="yearInplmtn" autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
+													onchange="trim(this)"> <span
+													class="error_form text-danger" id="yearImplmnt_errfield"
+													style="display: none;">Please enter year of implementation.</span>
+											</div>
+
+										</div>
+										
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="noStudApp">No.
@@ -457,7 +479,7 @@
 <button type="submit" id="sub_button" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showSubDetailsList"><button
+<a href="${pageContext.request.contextPath}/showSubDetailsList"><button id="sub_button_next"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -492,7 +514,19 @@
 
 
 	<script type="text/javascript">
-		 
+
+	/*code: 48-57 Numbers
+	  8  - Backspace,
+	  35 - home key, 36 - End key
+	  37-40: Arrow keys, 46 - Delete key*/
+	function restrictAlphabets(e){
+		var x=e.which||e.keycode;
+		if((x>=48 && x<=57) || x==8 ||
+			(x>=35 && x<=40)|| x==46)
+			return true;
+		else
+			return false;
+	}
 
 		function calResult() {
 			var noStudApp = parseFloat(document.getElementById("noStudApp").value);
@@ -585,6 +619,16 @@
 	        }
 	        return true;
 	    }
+	 
+	 $(function() {
+
+			$('.datepickeryear').datepicker({
+				autoclose : true,
+				minViewMode : 2,
+				format : 'yyyy'
+
+			});
+		});
 	</script>
 
 
@@ -682,9 +726,18 @@
             					$("#error_pass").hide()
             				}
             				
+            				if(!$("#yearInplmtn").val()){
+           					 
+                				isError=true;
+                			
+                				$("#yearInplmtn").addClass("has-error")
+                				$("#yearImplmnt_errfield").show()
+                					 
+                				} else {
+                					$("#yearImplmnt_errfield").hide()
+                				}
             				
-            				
-            			 
+            						
             				if(!isError) {
             					
             					var x = confirm("Do you really want to submit the form?");
