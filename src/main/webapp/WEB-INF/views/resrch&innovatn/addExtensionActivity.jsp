@@ -153,11 +153,11 @@
 													</div>
 														
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. Of
+															<label class="control-label col-sm-2" for="smallheading">No. of
 																Student Participated<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="no_student_part" onchange="trim(this)"
+																<input type="text" class="form-control" id="no_student_part" onchange="trim(this)" onFocus="clearDefault(this)"
 																	name="no_student_part" placeholder="No. of Student Participated" onkeypress='return restrictAlphabets(event)'
 																	value="${tExtAct.noOfStudParticipated}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No.of student participated and value must be greater than 0.</span>
@@ -170,7 +170,7 @@
 																Student in Institute <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="student_in_institute" onchange="trim(this)"
+																<input type="text" class="form-control" id="student_in_institute" onchange="trim(this)" onFocus="clearDefault(this)"
 																	name="student_in_institute" placeholder="No. of Student in Institute" onkeypress='return restrictAlphabets(event)'
 																	value="${tExtAct.noOfStudInInst}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of student in institute and value must be greater than 0.</span>
@@ -182,7 +182,7 @@
 																Faculty Participated <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)"
+																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)" onFocus="clearDefault(this)"
 																	name="no_faculty" placeholder="No. of Faculty Participated" onkeypress='return restrictAlphabets(event)'
 																	value="${tExtAct.noOfFacultyParticipated}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of faculty participated and value must be greater than 0.</span>
@@ -194,7 +194,7 @@
 																Faculty in Institute <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="faculty_in_inst" onchange="trim(this)"
+																<input type="text" class="form-control" id="faculty_in_inst" onchange="trim(this)" onFocus="clearDefault(this)"
 																		name="faculty_in_inst" placeholder="No. of Faculty in Institute" onkeypress='return restrictAlphabets(event)'
 																	value="${tExtAct.noOfFacultyInInst}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of faculty in institute and value must be greater than 0.</span>
@@ -371,6 +371,13 @@
     
 </script>
 <script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key

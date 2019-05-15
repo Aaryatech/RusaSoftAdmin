@@ -230,7 +230,7 @@
 															Student Benefited<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="no_stud" onchange="trim(this)"
+																<input type="text" class="form-control" id="no_stud" onchange="trim(this)" onFocus="clearDefault(this)"
 																		name="no_stud" placeholder="No. of Student Benefited" onkeypress='return restrictAlphabets(event)'
 																	value="${tMous.noOfStudBenif}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of student benefited and value must be greater than 0.</span>
@@ -242,7 +242,7 @@
 															Staff Benefited <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)"
+																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)"onFocus="clearDefault(this)"
 																		name="no_faculty" placeholder="No. of Faculty Benefited" onkeypress='return restrictAlphabets(event)'
 																	value="${tMous.noOfStaffBenif}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter No. of faculty benefited and value must be greater than 0.</span>
@@ -489,6 +489,12 @@
     
 </script>
 <script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key

@@ -156,7 +156,7 @@
 														<div class="col-sm-9">
 															<input type="number" class="form-control" id="userLms"
 																min="0" name="userLms" placeholder="" maxlength="7"
-																onkeypress='return restrictAlphabets(event)'
+																onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
 																value="${libInfo.usersOfLms}" onchange="trim(this)"
 																autocomplete="off"> <span
 																class="error_form text-danger" id="error_formfield3"
@@ -175,7 +175,7 @@
 														<div class="col-sm-9">
 															<input type="number" class="form-control" id="noOfComp"
 																name="noOfComp" min="0"
-																onkeypress='return restrictAlphabets(event)'
+																onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
 																placeholder="" value="${libInfo.noCompLan}"
 																maxlength="7" onchange="trim(this)" autocomplete="off">
 															<span class="error_form text-danger"
@@ -338,7 +338,7 @@
 														<input type="number" class="form-control" id="avgTeacher"
 															maxlength="4" name="avgTeacher" placeholder=""
 															value="${libInfo.avgTeacher}" onchange="trim(this)"
-															autocomplete="off" min="0"
+															autocomplete="off" min="0" onFocus="clearDefault(this)"
 															onkeypress='return restrictAlphabets(event)'> <span
 															class="error_form text-danger" id="error_formfield7"
 															style="display: none;">Please enter Avg. No.of
@@ -353,7 +353,7 @@
 													</label>
 													<div class="col-sm-8">
 														<input type="number" class="form-control" id="avgStud"
-															name="avgStud" min="0"
+															name="avgStud" min="0" onFocus="clearDefault(this)"
 															placeholder="Avg. No. of Student Using Library resources per day"
 															value="${libInfo.avgTeacher}" maxlength="4"
 															onchange="trim(this)" autocomplete="off"
@@ -373,7 +373,7 @@
 													</label>
 													<div class="col-sm-8">
 														<input type="number" class="form-control" id="noOfBooks"
-															name="noOfBooks" min="0"
+															name="noOfBooks" min="0" onFocus="clearDefault(this)"
 															placeholder="Total No. of Books available in Library"
 															value="${libInfo.exInt1}" maxlength="4"
 															onchange="trim(this)" autocomplete="off"
@@ -394,7 +394,7 @@
 													</label>
 													<div class="col-sm-8">
 														<input type="number" class="form-control" id="noOfVolumns"
-															name="noOfVolumns" min="0"
+															name="noOfVolumns" min="0" onFocus="clearDefault(this)"
 															placeholder="Total No. of Volumes available in Library"
 															value="${libInfo.exVar1}" maxlength="4"
 															onchange="trim(this)" autocomplete="off"
@@ -626,6 +626,13 @@
 		}
 	</script>
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+	
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

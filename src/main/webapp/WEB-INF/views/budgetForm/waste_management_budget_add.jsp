@@ -154,7 +154,7 @@
 												<input type="number" class="form-control"
 													id="budget_utilized" onchange="trim(this)"
 													name="budget_utilized" min="0" max="100000000"
-													autocomplete="off" maxlength="9"
+													autocomplete="off" maxlength="9"  onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Utilized Amount in ${budRupees}"
 													value="${budget.budgetUtilized}"> <span
@@ -174,7 +174,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
-													id="ttl_exp" onchange="trim(this)"
+													id="ttl_exp" onchange="trim(this)"  onFocus="clearDefault(this)"
 													name="ttl_exp" min="0" max="100000000"
 													autocomplete="off" maxlength="9"
 													onkeypress='return restrictAlphabets(event)'
@@ -420,6 +420,13 @@
 	</script>
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+	
 	 function onlyNumeric(evt){
 		 alert(evt);
 		 var valid=true;

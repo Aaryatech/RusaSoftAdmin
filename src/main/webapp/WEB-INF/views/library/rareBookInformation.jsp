@@ -150,7 +150,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="number" min="0" class="form-control"
-													onchange="trim(this)"
+													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfBook"
 													name="noOfBook" onchange="trim(this)" maxlength="7"
 													placeholder="No of Copies for Book" autocomplete="off"
@@ -171,7 +171,7 @@
 												<input type="number" min="0" class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfBook" name="costOfBook"
-													autocomplete="off" maxlength="7"
+													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost Of Rare Book" onchange="trim(this)"
 													value="${rareBook.costOfBook}"> <span
 													class="error_form text-danger" id="error_formfield4"
@@ -365,6 +365,13 @@
 	</script>
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+		
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

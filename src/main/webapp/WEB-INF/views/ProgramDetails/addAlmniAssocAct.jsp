@@ -143,7 +143,7 @@
 															<div  class="col-sm-9">
 																<input type="text" class="form-control" id="name_alumini_assoc" onchange="trim(this)"
 																	name="name_alumini_assoc" placeholder="Name of Alumni Association" autocomplete="off"
-																	value="${alumni.nameAlumniAssoc}" autocomplete="off">
+																	value="${alumni.nameAlumniAssoc}" autocomplete="off" onFocus="clearDefault(this)">
 																	<span class="error_form text-danger" id="name_alumini_assoc_errfield" style="display:none;" >
 																	Please enter name of alumni association.</span>
 															</div>
@@ -158,7 +158,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''" onkeypress='return restrictAlphabets(event)'
+															class="form-control" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'
 															placeholder="Alumni Registration No" id="almni_reg_no"
 															value="${alumni.alumniRegNo}" name="almni_reg_no"
 															><span class="error_form text-danger" id="almni_reg_no_errfield"
@@ -186,7 +186,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''"
+															class="form-control" onFocus="clearDefault(this)"
 															placeholder="No. of Alumni Register" id="registred_almni_no"
 															value="${alumni.noAlumniReg}" name="registred_almni_no" onkeypress='return restrictAlphabets(event)'
 															><span class="error_form text-danger" id="registred_almni_no_err_field"
@@ -201,7 +201,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''" onkeypress='return restrictAlphabets(event)'
+															class="form-control" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'
 															placeholder="No. of Member Attended" id="no_member_attnd"
 															value="${alumni.noMemberAttended}" name="no_member_attnd"
 															><span class="error_form text-danger" id="no_member_attnd_errfield"
@@ -216,7 +216,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onfocus="this.value=''" onkeypress='return restrictAlphabets(event)'
+															class="form-control" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'
 															placeholder="No. of Member Attended" id="ttl_no_almni_enrolled"
 															value="${alumni.ttlNoAlumniEnrolled}" name="ttl_no_almni_enrolled">
 															<span class="error_form text-danger" id="ttl_no_almni_enrolled_errfield"
@@ -264,7 +264,14 @@
 
 	<!-- END CONTENT -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	<script type="text/javascript">
+<script type="text/javascript">
+	function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key

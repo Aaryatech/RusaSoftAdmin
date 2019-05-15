@@ -353,7 +353,7 @@
 												<input type="text" min="1" class="form-control"
 													id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 													placeholder="No. of Beneficiary Participants "
-													onkeypress='return restrictAlphabets(event)'
+													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
 													value="${editInst.mouBeneficiaryNos}"> <span
 													class="error_form text-danger" id="error_benif"
 													style="display: none;">Please Enter No. of
@@ -672,6 +672,13 @@
 	</script>
 
 <script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

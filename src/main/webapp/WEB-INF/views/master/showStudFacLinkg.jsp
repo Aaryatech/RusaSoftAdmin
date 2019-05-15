@@ -120,7 +120,7 @@
 																			onClick="selectedInst(this)" /> Select All</th>
 																		<th rowspan="2">Sr No</th>
 																		<th rowspan="2">Linkage Title</th>
-																		<th rowspan="2">Partnering Institute</th>
+																		<th rowspan="2">Partnering Agency</th>
 																		<th rowspan="2">Year Of Establishment</th>
 																		<!-- <th rowspan="2">Name Of Research Lab</th> -->
 																		<th style="text-align: center;" colspan="2">Duration</th>

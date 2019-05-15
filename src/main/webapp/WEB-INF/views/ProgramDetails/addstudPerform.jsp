@@ -152,7 +152,7 @@
 												Students Appeared<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="stud_appeared"  onblur="getPercent()"
+												<input type="text" class="form-control" id="stud_appeared"  onblur="getPercent()" onFocus="clearDefault(this)"
 													value="${studPer.noStudAppear}" name="stud_appeared" onkeypress='return restrictAlphabets(event)'
 													placeholder="No of Students Appeared in Final Year Exam ">
 													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >
@@ -165,7 +165,7 @@
 												Students Passed <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="stud_passed"
+												<input type="text" class="form-control" id="stud_passed" onFocus="clearDefault(this)"
 													value="${studPer.noStudPass}" name="stud_passed" onkeypress='return restrictAlphabets(event)'
 													placeholder="No of Students Passed in Final Year Exam"  pattern="\d*" onblur="getPercent()">
 											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >
@@ -221,8 +221,18 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+</script>
+	
 	
 <script>
+
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

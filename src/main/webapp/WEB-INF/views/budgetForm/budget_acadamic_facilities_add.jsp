@@ -175,7 +175,7 @@
 												<input type="number" class="form-control"
 													id="budget_utilized" onchange="trim(this)"
 													name="budget_utilized" min="0" max="100000000"
-													autocomplete="off" maxlength="9"
+													autocomplete="off" maxlength="9"  onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)'
 													placeholder="Budget Utilized Amount in ${budRupees}"
 													value="${editBudget.budgetUtilized}"> <span
@@ -197,7 +197,7 @@
 												<input type="number" class="form-control"
 													id="ttl_exp" onchange="trim(this)"
 													name="ttl_exp" min="0" max="100000000"
-													autocomplete="off" maxlength="9"
+													autocomplete="off" maxlength="9" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)'
 													placeholder="Total Expenditure for Academic Support Facilities in ${budRupees}"
 													value="${editBudget.exInt1}"> <span
@@ -219,7 +219,7 @@
 
 												<a
 													href="${pageContext.request.contextPath}/budgetOnAcadamicSupportFacilities"><button
-														type="button" class="btn btn-primary">
+														type="button" class="btn btn-primary" id="sub2">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
 											</div>
@@ -519,6 +519,13 @@
 	    }
 	</script>
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+	
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

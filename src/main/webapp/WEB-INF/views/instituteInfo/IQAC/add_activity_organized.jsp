@@ -242,16 +242,13 @@
 													min="0" id="inst_activity_participation" autocomplete="off"
 													onchange="trim(this)" name="inst_activity_participation"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder="No.of Participants"
+													placeholder="No.of Participants" onFocus="clearDefault(this)"
 													value="${instAct.instActivityParticipation}"> <span
 													class="error_form text-danger" id="error_formfield4"
 													style="display: none;">Please enter No. of
 													participants and value must be greater than 0.</span>
 											</div>
 										</div>
-
-
-
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -491,6 +488,13 @@
 
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

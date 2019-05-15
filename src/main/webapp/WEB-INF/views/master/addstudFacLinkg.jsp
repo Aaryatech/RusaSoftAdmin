@@ -129,7 +129,7 @@
 														
 															<%-- <input type="text" class="form-control" id="part_inst" autocomplete="off" onchange="trim(this)"
 															name="part_inst" placeholder="Name of Partnering Institute" value="${linkage.partneringInstitute}"> --%>
-														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of partnering institute.</span>
+														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of partnering agency.</span>
 														</div>
 
 
@@ -237,13 +237,13 @@
 													
 													<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">Nature Of 
+														<label class="control-label col-sm-2" for="smallheading">Nature of 
 															Linkage<span class="text-danger">*</span>
 														</label>
 
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="naturelinkage" autocomplete="off"  onchange="trim(this)"
-																name="naturelinkage" placeholder="Nature Of Linkage" value="${linkage.natureOfLinkage}">
+																name="naturelinkage" placeholder="Nature of Linkage" value="${linkage.natureOfLinkage}">
 																<span class="error_form text-danger" id="error_formfield6" style="display:none;">Please enter nature of linkage.</span>
 														</div>
 
@@ -251,14 +251,14 @@
 											
 											<div class="form-group">
 
-														<label class="control-label col-sm-2" for="smallheading">No. Of
-															Student Participated<span class="text-danger">*</span>
+														<label class="control-label col-sm-2" for="smallheading">No. of
+															Students Participated<span class="text-danger">*</span>
 														</label>
 
 														<div class="col-sm-6">
 															<input type="text" class="form-control" id="participate" autocomplete="off"  onchange="trim(this)" onkeypress='return restrictAlphabets(event)'
-																name="participate" placeholder="Name of Research Lab" value="${linkage.noStudentParticipated}">
-																<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter No. of participate and value must be greater than 0.</span>
+																name="participate" placeholder="No. of Students Participated" value="${linkage.noStudentParticipated}" onFocus="clearDefault(this)">
+																<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter No. students of participate and value must be greater than 0.</span>
 														</div>
 
 											</div>
@@ -528,6 +528,13 @@
       
 </script>
 <script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key

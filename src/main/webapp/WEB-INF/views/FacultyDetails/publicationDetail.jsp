@@ -244,8 +244,8 @@
 																<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" min="0" class="form-control"
-																	id="conf_amt" autocomplete="off" onfocus="this.value=''"
+																<input type="text" min="0" class="form-control" 
+																	id="conf_amt" autocomplete="off" onFocus="clearDefault(this)"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_amt" placeholder="Amount(Rs.)"
 																	value="${facConf.confFundAmt}" onchange="trim(this)">
@@ -467,18 +467,25 @@
 
 
 	<script type="text/javascript">
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
-	</script>
+	function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 </body>
 </html>

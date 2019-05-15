@@ -116,7 +116,7 @@ input {
 												 Computers<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="no_comp"
+												<input type="text" class="form-control" id="no_comp" onFocus="clearDefault(this)"
 													name="no_comp" placeholder="No. of Computers" onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" autocomplete="off"
 													value="${itInfra.noOfComputers}"> <span
@@ -148,7 +148,7 @@ input {
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control"  id="purchase_amt"
+												<input type="text" class="form-control"  id="purchase_amt" onFocus="clearDefault(this)"
 													 autocomplete="off"	onchange="trim(this)" name="purchase_amt"
 													placeholder="Amount of Purchase (in Rupees)" onkeypress='return restrictAlphabets(event)'
 													value="${itInfra.purchaseAmt}"> <span
@@ -163,7 +163,7 @@ input {
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control"  id="stud_util"
+												<input type="text" class="form-control"  id="stud_util" onFocus="clearDefault(this)"
 													 autocomplete="off"	onchange="trim(this)" name="stud_util"
 													placeholder="No. of Student Utilizing" onkeypress='return restrictAlphabets(event)'
 													value="${itInfra.noOfStudUtilizing}"> <span
@@ -362,6 +362,13 @@ input {
 
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
+	
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

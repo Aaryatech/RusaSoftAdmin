@@ -127,7 +127,7 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control"
 														autocomplete="off" id="inst_students_benefited"
-														onchange="trim(this)"
+														onchange="trim(this)" onFocus="clearDefault(this)"
 														name="inst_students_benefited"
 														onkeypress='return restrictAlphabets(event)'
 														placeholder="No. of Students Benefited" maxlength="7"
@@ -394,6 +394,12 @@
     }    
 </script>
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

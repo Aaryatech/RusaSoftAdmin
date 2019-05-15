@@ -158,7 +158,7 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="no_stud_appear" onblur="cal()"
-															value="${studQlifyExam.noStudAppeared}" onfocus="this.value=''"
+															value="${studQlifyExam.noStudAppeared}" onFocus="clearDefault(this)"
 															placeholder="No. of Students Appeared" name="no_stud_appear"
 															onkeypress='return restrictAlphabets(event)'
 															autocomplete="off"> <span
@@ -174,9 +174,9 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" maxlength="30" class="form-control" onblur="cal()"
-															id="no_stud_qualify" value="${studQlifyExam.noStudQualified}"
+															id="no_stud_qualify" value="${studQlifyExam.noStudQualified}" 
 															name="no_stud_qualify" placeholder="No. of Students Qualified" 
-															onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
+															onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
 															onchange="return trim(this)" autocomplete="off">
 													<span class="error_form text-danger" id="studQualify_errfield"
 															style="display: none;">Please enter No. student qualified and value must be greater than 0.</span>
@@ -233,6 +233,14 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
+	<script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+</script>
 	<script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="./javascript.js"></script>

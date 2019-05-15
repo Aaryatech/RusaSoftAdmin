@@ -338,7 +338,7 @@
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="noStudent"
 															value="${editProgramActivity.participatedStudent}"
-															name="noStudent"
+															name="noStudent" onkeypress='return restrictAlphabets(event)'
 															placeholder="No. of Students Participated" pattern="\d*"
 															maxlength="6" autocomplete="off">
 																<span

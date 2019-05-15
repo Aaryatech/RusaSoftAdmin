@@ -354,7 +354,7 @@
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="noStudent"
 															value="${editProgramActivity.participatedStudent}"
-															name="noStudent"
+															name="noStudent" onkeypress='return restrictAlphabets(event)'
 															placeholder="No. of Students Attended" pattern="\d*"
 															 maxlength="6" autocomplete="off">
 															<span
@@ -478,6 +478,29 @@
 	<script type="text/javascript" src="./javascript.js"></script>
 	<script
 		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
+		
+		<script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue==0)
+	{
+		a.value=""
+	}
+	};
+</script>
+	<script type="text/javascript">
+			/*code: 48-57 Numbers
+			  8  - Backspace,
+			  35 - home key, 36 - End key
+			  37-40: Arrow keys, 46 - Delete key*/
+			function restrictAlphabets(e){
+				var x=e.which||e.keycode;
+				if((x>=48 && x<=57) || x==8 ||
+					(x>=35 && x<=40)|| x==46)
+					return true;
+				else
+					return false;
+			}
+		</script>
 		
 		<script type="text/javascript">
 		$(function() {

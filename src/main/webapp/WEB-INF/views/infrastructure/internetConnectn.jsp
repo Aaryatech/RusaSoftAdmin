@@ -114,7 +114,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="internet_access"
 													name="internet_access" placeholder="No. of Computers with Internet Access" onkeypress='return restrictAlphabets(event)'
-													onchange="trim(this)" autocomplete="off"
+													onchange="trim(this)" autocomplete="off" onFocus="clearDefault(this)"
 													value="${interConnec.noOfCompWithInternetAccess}"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter No. of computers with internet access and 
@@ -400,6 +400,12 @@
 
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

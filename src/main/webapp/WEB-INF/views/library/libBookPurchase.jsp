@@ -101,7 +101,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
-													onchange="trim(this)"
+													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfBookPrchs"
 													name="noOfBookPrchs" onchange="trim(this)" maxlength="7"
 													placeholder="No of Copies for Book" autocomplete="off"
@@ -122,7 +122,7 @@
 												<input type="text"  class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfBook" name="costOfBook"
-													autocomplete="off" maxlength="7"
+													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost Of Rare Book" onchange="trim(this)"
 													value="${lib.costOfBooks}"> <span
 													class="error_form text-danger" id="error_formfield2"
@@ -139,7 +139,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
-													onchange="trim(this)"
+													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfJournal"
 													name="noOfJournal" onchange="trim(this)" maxlength="7"
 													placeholder="No of Copies for Journal" autocomplete="off"
@@ -160,7 +160,7 @@
 												<input type="text" class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfJournal" name="costOfJournal"
-													autocomplete="off" maxlength="7"
+													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost Of Journal" onchange="trim(this)"
 													value="${lib.costOfJournal}"> <span
 													class="error_form text-danger" id="error_formfield4"
@@ -177,7 +177,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
-													onchange="trim(this)"
+													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfEJournal"
 													name="noOfEJournal" onchange="trim(this)" maxlength="7"
 													placeholder="No of E-Journal" autocomplete="off"
@@ -198,7 +198,7 @@
 												<input type="text" class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfEJournal" name="costOfEJournal"
-													autocomplete="off" maxlength="7"
+													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost Of E-Journal" onchange="trim(this)"
 													value="${lib.costOfEjournal}"> <span
 													class="error_form text-danger" id="error_formfield6"
@@ -364,9 +364,15 @@
 				return false;
 			});
 		});
-	</script> -->
+	</script> 
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

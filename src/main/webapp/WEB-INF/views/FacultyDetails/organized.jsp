@@ -237,11 +237,11 @@
 															id="activity_part"
 															onkeypress='return restrictAlphabets(event)' min="0"
 															name="activity_part" placeholder="No of Participants"
-															value="${activity.activityParticipants}"
+															value="${activity.activityParticipants}" onFocus="clearDefault(this)"
 															autocomplete="off" onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_formfield3"
 															style="display: none;">Please enter No. of
-															participants.</span>
+															participants and value must be greater than 0.</span>
 													</div>
 												</div>
 
@@ -271,7 +271,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="0" class="form-control"
-															id="amt_sanc"
+															id="amt_sanc" onFocus="clearDefault(this)"
 															onkeypress='return restrictAlphabets(event)'
 															name="amt_sanc" placeholder="Amount Sanctioned"
 															value="${activity.activityAmountSanctioned}"
@@ -291,7 +291,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="0" class="form-control"
-															id="amt_utilise"
+															id="amt_utilise" onFocus="clearDefault(this)"
 															onkeypress='return restrictAlphabets(event)'
 															name="amt_utilise" placeholder="Amount Utilized"
 															value="${activity.activityAmountUtilised}"
@@ -357,7 +357,14 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
+<script type="text/javascript">
+function clearDefault(a){
+	if(a.defaultValue == 0)
+	{
+		a.value="";
+	}
+	};
+</script>
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -421,7 +428,7 @@
 					$("#error_formfield2").hide()
 				}
 
-				if (!$("#activity_part").val()) {
+				if ($("#activity_part").val() == 0 || !$("#activity_part").val()) {
 
 					isError = true;
 					errMsg += '<li>Please enter a valid name.</li>';
