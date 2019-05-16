@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="getProgramTypeByProgram()">
 	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
@@ -97,29 +97,27 @@
 								<div class="col-md-12">
 
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertNewCourseInfo"
+										action="${pageContext.request.contextPath}/insertFieldProject"
 										method="post" name="form_sample_2" id="form_sample_2">
 										
 										<div class="row">
-											<div class="col-md-12">
-											
+											<div class="col-md-12">											
 											
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Program
-														Name<span class="text-danger">*</span>
+														Name<span class="text-danger">*</span>${fieldProject.programName}
 													</label>
 													<div class="col-sm-9">
-														<select id="prog_type" name="prog_type"
+														<select id="prog_name" name="prog_name"
 															class="form-control" onchange="getProgramTypeByProgram()">
 
-															<c:forEach items="${progTypeList}" var="progType">
+															<c:forEach items="${progTypeList}" var="progName">
 																<c:choose>
-																	<c:when
-																		test="${newCourse.progType==progType.programId}">
-																		<option selected value="${progType.programId}">${progType.programName}</option>
+																	<c:when	test="${progName.programId==fieldProject.programName}">
+																		<option selected value="${progName.programId}">${progName.programName}</option>	
 																	</c:when>
 																	<c:otherwise>
-																		<option value="${progType.programId}">${progType.programName}</option>
+																		<option value="${progName.programId}">${progName.programName}</option>
 																	</c:otherwise>
 																</c:choose>
 															</c:forEach>
@@ -135,7 +133,7 @@
 													</label>
 													<div class="col-sm-9">
 
-													<select id="prog_name" name="prog_name"
+													<select id="prog_type" name="prog_type"
 													class="form-control" required>
 												</select>													
 													<!-- <span class="error_form text-danger" id="prog_name_field"
@@ -145,107 +143,64 @@
 
 												
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="status">Applicable
-													Year <span class="text-danger">*</span>
-												</label>
-												<div class="col-sm-9">
-												<select id="applicabl_year" name="applicabl_year" class="form-control">
-																
-														<option value="First Year" ${newCourse.applicableYear eq 'First Year' ? 'selected' : '' }>First Year</option>
-														<option value="Second Year" ${newCourse.applicableYear eq 'Second Year' ? 'selected' : '' }>Second Year</option>
-														<option value="Third Year" ${newCourse.applicableYear eq 'Third Year' ? 'selected' : '' }>Third Year</option>
-														<option value="Fourth Year" ${newCourse.applicableYear eq 'Fourth Year' ? 'selected' : '' }>Fourth Year</option>
-														<option value="Fifth Year" ${newCourse.applicableYear eq 'Fifth Year' ? 'selected' : '' }>Fifth Year</option>
-														
-													
-													</select>
-													<!--  <span class="error_form text-danger" id="error_year" style="display:none;" >Please Select Academic Year</span> -->
-                                       </div>
-										</div>	
-
-												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Name of the 
-														New Course<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Provision for Undertaking 
+													Field Projects/Internship<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)" id="courseName"
-															value="${newCourse.courseName}" name="courseName"
-															placeholder="Name of the New Course" maxlength="100">
+														<input type="text" class="form-control" onchange="trim(this)" id="pro_undertake"
+															value="${fieldProject.provisionForUndertaking}" name="pro_undertake" autocomplete="off"
+															placeholder="Provision for Undertaking Field Projects/Internship" maxlength="100">
 															<span class="error_form text-danger" id="course_name_field"
-															style="display: none;">Please enter name of the new course.</span>
+															style="display: none;">Please enter provision for undertaking field projects/internship.</span>
 													</div>
 												</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">Course
+													<label class="control-label col-sm-3" for="page_order">No. of Students Undertaking Field Projects/Internship
 														 Code<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onFocus="clearDefault(this)"
-															id="courseCode" value="${newCourse.courseCode}"
-															name="courseCode" onchange="trim(this)" maxlength="10"
-															placeholder="Course Code" onkeypress='return restrictAlphabets(event)'>
+															id="no_stud_undertake" value="${fieldProject.noOfStudUndertaking}"
+															name="no_stud_undertake" onchange="trim(this)" maxlength="10" autocomplete="off"
+															placeholder="No. of Students Undertaking Field Projects/Internship" onkeypress='return restrictAlphabets(event)'>
 															<span class="error_form text-danger" id="course_code_field"
-															style="display: none;">Please enter course code.</span>
+															style="display: none;">Please enter No. of students undertaking field projects/internship.</span>
 													</div>
 												</div>
 												
-													<div class="form-group">
-
-															<label class="control-label col-sm-3" for="smallheading">Introduced
-																From <span class="text-danger">*</span>
-															</label>
-														<div class="col-sm-9">
-														<select id="acadYear" name="acadYear" class="form-control">
-																																	
-															<c:forEach items="${acaYearList}" var="acaYearList">
-																		<c:choose>
-																			<c:when test="${acaYearList.yearId==newCourse.introduceFrom}">
-																			<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																			</c:when>
-																			<c:otherwise>
-																				<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																			</c:otherwise>
-
-																		</c:choose>
-
-																	</c:forEach>
-
-													</select>
-                                      				 </div>
-
-														</div>
+													
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">Link of Relevant 
+													<label class="control-label col-sm-3" for="page_order">Link to the Relevant 
 														Documents<span class="text-danger"></span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
 															id="document" onchange="trim(this)"
-															value="${newCourse.document}"
-															name="document" maxlength="100"
+															value="${fieldProject.document}"
+															name="document" maxlength="100" autocomplete="off"
 															placeholder="Link of Relevant Document">
 															<span class="error_form text-danger" id="document_field"
 															style="display: none;">Please enter link of relevant documents.</span>
 													</div>
 												</div>
 
-										<input type="hidden" id="progTypeId" name="progTypeId"
-													value="${newCourse.progName}">
+
 
 												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
 														<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showNewCourseInfo"><button id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+														<a href="${pageContext.request.contextPath}/showFieldProjectIntern"><button id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 													</div>
 												</div>
-												<input type="hidden" id="course_id" name="course_id"
-													value="${newCourse.courseId}"> <input
+												<input type="hidden" id="field_id" name="field_id"
+													value="${fieldProject.fieldProjectInternId}">
+													
+													<input type="hidden" id="progTypeId" name="progTypeId"
+													value="${fieldProject.programType}"> <input
 													type="hidden" id="is_view" name="is_view" value="0">
 
 											</div>
@@ -281,16 +236,15 @@
 	<script type="text/javascript">
 		function getProgramTypeByProgram() {
 
-			var programType = document.getElementById("prog_type").value;
-			var progTypeId=document.getElementById("progTypeId").value;
+			var programType = document.getElementById("prog_name").value;
 			//alert("programType" + programType);
-			
+			var progTypeId=document.getElementById("progTypeId").value;
 			var valid = true;
 
 			if (programType == null || programType == "") {
 				valid = false;
 				alert("Please Select Program");
-			}
+			} 
 
 			if (valid == true) {
 
@@ -305,18 +259,19 @@
 					var html;
 					var len = data.length;
 					for (var i = 0; i < len; i++) {
-						if(progTypeId==data[i].programId){
-							html += '<option  selected value="' + data[i].programId + '">'
-								+ data[i].nameOfProgram + '</option>';
-							}else{
+					if(progTypeId==data[i].programId){
+					html += '<option  selected value="' + data[i].programId + '">'
+						+ data[i].nameOfProgram + '</option>';
+					}else{
 						html += '<option value="' + data[i].programId + '">'
 								+ data[i].nameOfProgram + '</option>';
-							}
+					}
+
 					}
 					html += '</option>';
 
-					$('#prog_name').html(html);
-					$("#prog_name").trigger("chosen:updated");
+					$('#prog_type').html(html);
+					$("#prog_type").trigger("chosen:updated");
 
 				});
 			}//end of if
@@ -324,6 +279,8 @@
 		}
 	</script>
 	<script>
+	var l = ${progTypeList};
+	alert(l);
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -348,10 +305,10 @@
 												var isError = false;
 												var errMsg = "";
 
-												if (!$("#courseName").val()) {
+												if (!$("#pro_undertake").val()) {
 													isError = true;
 
-													$("#courseName").addClass(
+													$("#pro_undertake").addClass(
 															"has-error")
 													$("#course_name_field")
 															.show()
@@ -360,9 +317,9 @@
 															.hide()
 												}
 
-												if (($("#courseCode").val()<=0 || !$("#courseCode").val())) {
+												if (($("#no_stud_undertake").val()<=0 || !$("#no_stud_undertake").val())) {
 													isError = true;
-													$("#courseCode")
+													$("#no_stud_undertake")
 															.addClass(
 																	"has-error")
 													$("#course_code_field")
@@ -481,51 +438,7 @@
 	</script>
 
 	<script type="text/javascript">
-		function showExtraField() {
-			//alert("hii");
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("approveValue").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-
-		function hideText() {
-			//alert("hii");
-			getProgramTypeByProgram();
-			document.getElementById("abc").style = "display:none"
-				
-		}
-	</script>
-	<script type="text/javascript">
-		function submit_f(view) {
-			document.getElementById("is_view").value = view;//create this 
-
-		}
-	</script>
-
-	<script type="text/javascript">
-		var wasSubmitted = false;
-		function checkBeforeSubmit() {
-			if (!wasSubmitted) {
-				var x = confirm("Do you really want to submit the form?");
-				if (x == true) {
-					wasSubmitted = true;
-					document.getElementById("sub1").disabled = true;
-					document.getElementById("sub2").disabled = true;
-
-					return wasSubmitted;
-				}
-			}
-			return false;
-		}
+		
 		
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces

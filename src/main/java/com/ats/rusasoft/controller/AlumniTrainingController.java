@@ -31,12 +31,15 @@ import com.ats.rusasoft.master.model.NewCourseInfoList;
 import com.ats.rusasoft.master.model.prodetail.AlumniAssocAct;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
 import com.ats.rusasoft.master.model.prodetail.Cast;
+import com.ats.rusasoft.master.model.prodetail.FieldProjectsIntern;
+import com.ats.rusasoft.master.model.prodetail.FieldProjectsInternList;
 import com.ats.rusasoft.master.model.prodetail.GetAlumni;
 import com.ats.rusasoft.master.model.prodetail.GetHigherEduDetail;
 import com.ats.rusasoft.master.model.prodetail.GetTrainPlace;
 import com.ats.rusasoft.master.model.prodetail.HigherEducDetail;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.master.model.prodetail.TrainPlacement;
+import com.ats.rusasoft.master.model.prodetail.ValueAddedCourses;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.GovtScholarships;
@@ -1708,6 +1711,7 @@ public class AlumniTrainingController {
 				map.add("courseId", courseId);
 				NewCourseInfo newCourse = rest.postForObject(Constants.url + "/getByCourseId", map,
 						NewCourseInfo.class);
+				System.err.println("Course " + newCourse.toString());
 				model.addObject("newCourse", newCourse);
 
 				model.addObject("title", "Edit New Course Information");
@@ -1751,6 +1755,469 @@ public class AlumniTrainingController {
 
 		return "redirect:/showNewCourseInfo";
 	}
+	
+	/*************************************Value Added Courses************************************/
+	@RequestMapping(value = "/showValueAddedCourses", method = RequestMethod.GET)
+	public ModelAndView showVlaueAddedCourses(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/showValueAddedCourses");
+
+			model.addObject("title", "Value Added Courses");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "1", "0", "0", "0",
+					newModuleList);
+
+			if (viewAccess.isError() == false) {
+
+				Info addAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "1", "0", "0",
+						newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "0", "1", "0",
+						newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "0", "0", "1",
+						newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false)
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+				// GetAlumni
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map.add("yearId", session.getAttribute("acYearId"));
+
+				ValueAddedCourses[] courseArray = restTemplate.postForObject(Constants.url + "getValueAddedCurseList", map,
+						ValueAddedCourses[].class);
+				List<ValueAddedCourses> courseList = new ArrayList<>(Arrays.asList(courseArray));
+				// System.err.println("alumList " + alumList.toString());
+
+				model.addObject("crsList", courseList);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showAlumini at Alumini Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addValAddCourse", method = RequestMethod.GET)
+	public ModelAndView addValAddCourse(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info addAccess = AccessControll.checkAccess("addValAddCourse", "showValueAddedCourses", "0", "1", "0", "0",
+					newModuleList);
+			if (addAccess.isError() == false) {
+
+				model = new ModelAndView("ProgramDetails/newValueAddCourse");
+
+				model.addObject("title", "Add Value Added Courses");
+				ValueAddedCourses value = new ValueAddedCourses();
+				model.addObject("value", value);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In addValAddCourse at Alumini Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/insertValueAddedCourse", method = RequestMethod.POST)
+	public String insertValueAddedCourse(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String curDateTime = dateFormat.format(cal.getTime());
+
+			ValueAddedCourses course = new ValueAddedCourses();
+
+			course.setValueAddedCourseId(Integer.parseInt(request.getParameter("alumni_id")));
+			course.setValueAddedCourseName(request.getParameter("course_name"));
+			course.setCourseCode(request.getParameter("course_code"));
+			course.setYearOfOffering(request.getParameter("year_of_offering"));
+			course.setNoOfTimesOffer(Integer.parseInt(request.getParameter("no_times_offer")));
+			course.setYearOfDiscontinuation(request.getParameter("year_of_discontinue"));
+			course.setNoOfStudentsEnrolled(Integer.parseInt(request.getParameter("no_student_enrolled")));
+			course.setNoOfStudentsCompletedCourse(Integer.parseInt(request.getParameter("no_student_completed_course")));
+			course.setDelStatus(1);
+			course.setIsActive(1);
+			course.setAcademicYearId(yId);
+			course.setMakerUserId(userId);
+			course.setMakerEnterDatetime(curDateTime);
+			course.setInstId(instituteId);
+			course.setExInt1(0);
+			course.setExInt2(0);
+			course.setExVar1("NA");
+			course.setExVar2("NA");
+			System.out.println("Course=" + course.toString());
+
+			ValueAddedCourses saveValAddCourse = rest.postForObject(Constants.url + "/saveValueAddedCourse", course,
+					ValueAddedCourses.class);
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/showValueAddedCourses";
+
+	}
 
 
+	@RequestMapping(value = "/editCourse/{courseId}", method = RequestMethod.GET)
+	public ModelAndView editCourse(@PathVariable("courseId") int courseId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("ProgramDetails/newValueAddCourse");
+
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editCourse/{courseId}", "showValueAddedCourses", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				MultiValueMap<String, Object> map = null;
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("courseId", courseId);
+				ValueAddedCourses value = rest.postForObject(Constants.url + "/getValueAddedCourseById", map,
+						ValueAddedCourses.class);
+				model.addObject("value", value);
+
+				model.addObject("title", "Edit Value Added Courses");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteCourse/{courseId}", method = RequestMethod.GET)
+	public String deleteCourse(@PathVariable("courseId") int courseId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteCourse/{courseId}",
+					"showValueAddedCourses", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("courseId", courseId);
+
+				NewCourseInfo delCourseId = rest.postForObject(Constants.url + "/deleteValueAddedCourse", map,
+						NewCourseInfo.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showValueAddedCourses";
+	}
+	
+	/*************************************Field Projects/Internships************************************/
+	
+	@RequestMapping(value = "/showFieldProjectIntern", method = RequestMethod.GET)
+	public ModelAndView showFieldProjectIntern(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("ProgramDetails/showFieldProjectInternship");
+
+			model.addObject("title", "Field Projects/Internships");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "1", "0", "0", "0",
+					newModuleList);
+
+			if (viewAccess.isError() == false) {
+
+				Info addAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0", "1", "0", "0",
+						newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0", "0", "1", "0",
+						newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0", "0", "0", "1",
+						newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false)
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+				
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map.add("yearId", session.getAttribute("acYearId"));
+
+				FieldProjectsInternList[] fieldArray = restTemplate.postForObject(Constants.url + "getProjectInternFieldList", map,
+						FieldProjectsInternList[].class);
+				List<FieldProjectsInternList> fieldList = new ArrayList<>(Arrays.asList(fieldArray));
+				// System.err.println("alumList " + alumList.toString());
+
+				model.addObject("fieldList", fieldList);
+
+			} else {
+
+				model = new ModelAndView("accessDenied");
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showFieldProjectIntern at Alumini Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addFieldProject", method = RequestMethod.GET)
+	public ModelAndView addFieldProject(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		RestTemplate restTemplate = new RestTemplate();
+		MultiValueMap<String, Object> map = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info access = null;
+
+			access = AccessControll.checkAccess("addNewCourseInfo", "showFieldProjectIntern", "0", "1", "0", "0",
+					newModuleList);
+			if (access.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+
+				model = new ModelAndView("ProgramDetails/addFieldProjctIntern");
+
+				model.addObject("title", "Add New Course Information");
+
+				FieldProjectsIntern fieldProject = new FieldProjectsIntern();
+				model.addObject("fieldProject", fieldProject);
+
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				System.err.println("progTypeList " + progTypeList.toString());
+
+				model.addObject("progTypeList", progTypeList);
+
+			}
+
+		} catch (Exception e) {
+			System.err.println("exception In showNewCourseInfo at AlumTrain Contr" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertFieldProject", method = RequestMethod.POST)
+	public String insertFieldProject(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String curDateTime = dateFormat.format(cal.getTime());
+
+			FieldProjectsIntern field = new FieldProjectsIntern();
+
+			field.setFieldProjectInternId(Integer.parseInt(request.getParameter("field_id")));
+			field.setProgramName(Integer.parseInt(request.getParameter("prog_name")));
+			field.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
+			field.setProvisionForUndertaking(request.getParameter("pro_undertake"));
+			field.setNoOfStudUndertaking(Integer.parseInt(request.getParameter("no_stud_undertake")));
+			field.setDocument(request.getParameter("document"));
+			field.setDelStatus(1);
+			field.setIsActive(1);
+			field.setAcYearId(yId);
+			field.setMakerUserId(userId);
+			field.setMakerEnterDatetime(curDateTime);
+			field.setInstId(instituteId);
+			field.setExInt1(0);
+			field.setExInt2(0);
+			field.setExVar1("NA");
+			field.setExVar2("NA");
+			System.out.println("field=" + field.toString());
+
+			FieldProjectsIntern saveValAddCourse = rest.postForObject(Constants.url + "/saveFieldProjectsIntern", field,
+					FieldProjectsIntern.class);
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/showFieldProjectIntern";
+
+	}
+	
+	@RequestMapping(value = "/editProjectintern/{fieldId}", method = RequestMethod.GET)
+	public ModelAndView editProjectintern(@PathVariable("fieldId") int fieldId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("ProgramDetails/addFieldProjctIntern");
+
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editProjectintern/{fieldId}", "showFieldProjectIntern", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				MultiValueMap<String, Object> map = null;
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("fieldId", fieldId);
+				FieldProjectsIntern fieldProject = rest.postForObject(Constants.url + "/getFieldProjectInternById", map,
+						FieldProjectsIntern.class);
+				System.err.println("Project " + fieldProject.toString());
+				
+				model.addObject("fieldProject", fieldProject);
+				
+				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				System.err.println("Prg List " + progTypeList.toString());
+				model.addObject("progTypeList", progTypeList);
+				
+				model.addObject("title", "Edit New Course Information");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteProjectintern/{fieldId}", method = RequestMethod.GET)
+	public String deleteProjectintern(@PathVariable("fieldId") int fieldId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteProjectintern/{fieldId}",
+					"showFieldProjectIntern", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("fieldId", fieldId);
+
+				FieldProjectsIntern delFeildId = rest.postForObject(Constants.url + "/deleteFieldProjectById", map,
+						FieldProjectsIntern.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showFieldProjectIntern";
+	}
 }
