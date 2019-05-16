@@ -20,6 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
@@ -30,7 +36,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
-import com.ats.rusasoft.model.StaffList;
+import com.ats.rusasoft.commons.ExportToExcel;
 import com.ats.rusasoft.model.reports.NoOfPrograms;
 import com.ats.rusasoft.util.ItextPageEvent;
 import com.itextpdf.text.BaseColor;
@@ -58,7 +64,6 @@ public class ReportController {
 
 	MultiValueMap<String, Object> map = null;
 
-	
 	@RequestMapping(value = "/showReports", method = RequestMethod.GET)
 	public ModelAndView showReports(HttpServletRequest request, HttpServletResponse response) {
 
@@ -67,7 +72,6 @@ public class ReportController {
 
 			model = new ModelAndView("report/report_dashboard");
 
-			
 		} catch (Exception e) {
 
 			System.err.println("Exce in showReports " + e.getMessage());
@@ -77,7 +81,7 @@ public class ReportController {
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/showProgReport", method = RequestMethod.POST)
 	public void showProgReport(HttpServletRequest request, HttpServletResponse response) {
 
@@ -98,7 +102,7 @@ public class ReportController {
 			List<NoOfPrograms> progList = new ArrayList<>(Arrays.asList(resArray));
 
 			model.addObject("list", progList);
-			
+
 			BufferedOutputStream outStream = null;
 			System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
@@ -112,33 +116,30 @@ public class ReportController {
 			PdfWriter writer = null;
 
 			FileOutputStream out = new FileOutputStream(FILE_PATH);
-			try
-			{
+			try {
 				writer = PdfWriter.getInstance(document, out);
 			} catch (DocumentException e) {
 
 				e.printStackTrace();
 			}
-			
+
 			String header = "";
 			String title = "                 ";
 
 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
 			String repDate = DF2.format(new Date());
 
-
-			ItextPageEvent event = new ItextPageEvent(header, title,"" );
+			ItextPageEvent event = new ItextPageEvent(header, title, "");
 
 			writer.setPageEvent(event);
-
 
 			PdfPTable table = new PdfPTable(6);
 			table.setHeaderRows(1);
 
 			try {
 				table.setWidthPercentage(100);
-				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f});
-				
+				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
+
 				Font headFont = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
 				Font headFont1 = new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
 				headFont1.setColor(BaseColor.WHITE);
@@ -147,99 +148,94 @@ public class ReportController {
 				PdfPCell hcell = new PdfPCell();
 				hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 
-				
 				hcell = new PdfPCell(new Phrase("Sr.No.", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);			
+				hcell.setBackgroundColor(Constants.baseColorHeader);
 
 				table.addCell(hcell);
 
 				hcell = new PdfPCell(new Phrase("Name of Program", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);			
+				hcell.setBackgroundColor(Constants.baseColorHeader);
 
 				table.addCell(hcell);
-				
+
 				hcell = new PdfPCell(new Phrase("Level", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);			
-				
+				hcell.setBackgroundColor(Constants.baseColorHeader);
+
 				table.addCell(hcell);
-				
+
 				hcell = new PdfPCell(new Phrase("Duration (Months)", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);			
-				
+				hcell.setBackgroundColor(Constants.baseColorHeader);
+
 				table.addCell(hcell);
-				
+
 				hcell = new PdfPCell(new Phrase("Introduction Year", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);			
-				
+				hcell.setBackgroundColor(Constants.baseColorHeader);
+
 				table.addCell(hcell);
-				
+
 				hcell = new PdfPCell(new Phrase("Approved By", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);			
-				
+				hcell.setBackgroundColor(Constants.baseColorHeader);
+
 				table.addCell(hcell);
-				
+
 				int index = 0;
-				for (int a=0;a<10;a++) {
-				for (int i=0;i<progList.size();i++) {
-					System.err.println("I  " +i);
-					NoOfPrograms prog=progList.get(i);
+				for (int a = 0; a < 10; a++) {
+					for (int i = 0; i < progList.size(); i++) {
+						System.err.println("I  " + i);
+						NoOfPrograms prog = progList.get(i);
 
-					index++;
-					PdfPCell cell;
-					cell = new PdfPCell(new Phrase(String.valueOf(index), headFont));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					
-					table.addCell(cell);
+						index++;
+						PdfPCell cell;
+						cell = new PdfPCell(new Phrase(String.valueOf(index), headFont));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-					cell = new PdfPCell(new Phrase("" + prog.getNameOfProgram(), headFont));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-					
-					table.addCell(cell);
+						table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + prog.getLevelOfProgram(), headFont));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-					
-					
-					table.addCell(cell);
-					
-					cell = new PdfPCell(new Phrase("" + prog.getMonthDuration(), headFont));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					
-					
-					table.addCell(cell);
+						cell = new PdfPCell(new Phrase("" + prog.getNameOfProgram(), headFont));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
-					cell = new PdfPCell(new Phrase("" + prog.getYearOfIntrod(), headFont));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					
-					
-					table.addCell(cell);
-					
-					cell = new PdfPCell(new Phrase("" + prog.getApprovedBy(), headFont));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-					
-					
-					table.addCell(cell);
-					
+						table.addCell(cell);
+
+						cell = new PdfPCell(new Phrase("" + prog.getLevelOfProgram(), headFont));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+						table.addCell(cell);
+
+						cell = new PdfPCell(new Phrase("" + prog.getMonthDuration(), headFont));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+						table.addCell(cell);
+
+						cell = new PdfPCell(new Phrase("" + prog.getYearOfIntrod(), headFont));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+						table.addCell(cell);
+
+						cell = new PdfPCell(new Phrase("" + prog.getApprovedBy(), headFont));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+						table.addCell(cell);
+
+					}
 				}
-				}
-			
+
 				document.open();
 				Paragraph name = new Paragraph("No of Certificate/Diploma Programs", f);
 				name.setAlignment(Element.ALIGN_CENTER);
 				document.add(name);
-				document.add(new Paragraph("Institute "+progList.get(0).getInstituteName()));
+				document.add(new Paragraph("Institute " + progList.get(0).getInstituteName()));
 				/*
 				 * Paragraph company = new Paragraph("Customer Wise Report\n", f);
 				 * company.setAlignment(Element.ALIGN_CENTER); document.add(company);
@@ -255,31 +251,91 @@ public class ReportController {
 				System.out.println("Page no " + totalPages);
 
 				document.close();
+				int p = Integer.parseInt(request.getParameter("p"));
+				System.err.println("p " + p);
+				
+				if (p == 1) {
 
-				if (file != null) {
+					if (file != null) {
 
-					String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+						String mimeType = URLConnection.guessContentTypeFromName(file.getName());
 
-					if (mimeType == null) {
+						if (mimeType == null) {
 
-						mimeType = "application/pdf";
+							mimeType = "application/pdf";
 
+						}
+
+						response.setContentType(mimeType);
+
+						response.addHeader("content-disposition",
+								String.format("inline; filename=\"%s\"", file.getName()));
+
+						response.setContentLength((int) file.length());
+
+						InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+						try {
+							FileCopyUtils.copy(inputStream, response.getOutputStream());
+						} catch (IOException e) {
+							System.out.println("Excep in Opening a Pdf File");
+							e.printStackTrace();
+						}
 					}
+				}else {
+					
+					List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
 
-					response.setContentType(mimeType);
+					ExportToExcel expoExcel = new ExportToExcel();
+					List<String> rowData = new ArrayList<String>();
 
-					response.addHeader("content-disposition", String.format("inline; filename=\"%s\"", file.getName()));
+					rowData.add("Sr. No");
+					rowData.add("Name of Program");
+					rowData.add("Level");
+					rowData.add("Duration (Months)");
+					rowData.add("Introduction Year");
+					rowData.add("Approved By");
 
-					response.setContentLength((int) file.length());
+					expoExcel.setRowData(rowData);
+					exportToExcelList.add(expoExcel);
+					int cnt = 1;
+				/*	for (int i = 0; i < instSuprtlist.size(); i++) {
+						expoExcel = new ExportToExcel();
+						rowData = new ArrayList<String>();
+						cnt = cnt + i;
 
-					InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+						rowData.add("" + (i + 1));
 
+						rowData.add("" + instSuprtlist.get(i).getInstSchemeName());
+						rowData.add("" + instSuprtlist.get(i).getInstStudentsBenefited());
+						rowData.add("" + instSuprtlist.get(i).getInstSchmeOfferedby());
+
+						expoExcel.setRowData(rowData);
+						exportToExcelList.add(expoExcel);
+
+					}*/
+
+					XSSFWorkbook wb = null;
 					try {
-						FileCopyUtils.copy(inputStream, response.getOutputStream());
-					} catch (IOException e) {
-						System.out.println("Excep in Opening a Pdf File");
-						e.printStackTrace();
+
+						System.out.println("Excel List :" + exportToExcelList.toString());
+
+						String excelName = (String) session.getAttribute("excelName");
+						wb = createWorkbook(exportToExcelList);
+
+						response.setContentType("application/vnd.ms-excel");
+						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						response.setHeader("Content-disposition", "attachment; filename=" + excelName + "-" + date + ".xlsx");
+						wb.write(response.getOutputStream());
+
+					} catch (IOException ioe) {
+						throw new RuntimeException("Error writing spreadsheet to output stream");
+					} finally {
+						if (wb != null) {
+							wb.close();
+						}
 					}
+
 				}
 
 			} catch (DocumentException ex) {
@@ -297,6 +353,44 @@ public class ReportController {
 
 		}
 
-		
 	}
+	
+	private XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList) throws IOException {
+		XSSFWorkbook wb = new XSSFWorkbook();
+		XSSFSheet sheet = wb.createSheet("Sheet1");
+
+		/*
+		 * writeHeaders(wb, sheet); writeHeaders(wb, sheet); writeHeaders(wb, sheet);
+		 */
+
+		for (int rowIndex = 0; rowIndex < exportToExcelList.size(); rowIndex++) {
+			XSSFRow row = sheet.createRow(rowIndex);
+			for (int j = 0; j < exportToExcelList.get(rowIndex).getRowData().size(); j++) {
+
+				XSSFCell cell = row.createCell(j);
+
+				cell.setCellValue(exportToExcelList.get(rowIndex).getRowData().get(j));
+
+			}
+			if (rowIndex == 0)
+				row.setRowStyle(createHeaderStyle(wb));
+		}
+		return wb;
+	}
+	
+	private XSSFCellStyle createHeaderStyle(XSSFWorkbook workbook) {
+		XSSFCellStyle style = workbook.createCellStyle();
+		style.setWrapText(true);
+		style.setFillForegroundColor(new XSSFColor(new java.awt.Color(53, 119, 192)));
+
+		org.apache.poi.ss.usermodel.Font font = workbook.createFont();
+		font.setFontName("Arial");
+		font.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+		font.setBold(true);
+		// font.setColor(HSSFColor.WHITE.index);
+		style.setFont(font);
+
+		return style;
+	}
+
 }
