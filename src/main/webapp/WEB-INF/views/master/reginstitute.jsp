@@ -177,14 +177,14 @@
 												</div>
 												
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Taluka
+													<label class="control-label col-sm-3" for="page_order"> Taluka/City
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="taluka"
 															value="${editInst.taluka}" name="taluka"
-															placeholder="Taluka">
+															placeholder="Taluka/City">
 															<span
 															class="error_form text-danger" id="inst_taluka_field"
 															style="display: none;">Please enter taluka</span>

@@ -31,6 +31,8 @@ import com.ats.rusasoft.master.model.NewCourseInfoList;
 import com.ats.rusasoft.master.model.prodetail.AlumniAssocAct;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
 import com.ats.rusasoft.master.model.prodetail.Cast;
+import com.ats.rusasoft.master.model.prodetail.DifrentlyAbledStud;
+import com.ats.rusasoft.master.model.prodetail.DifrentlyAbledStudList;
 import com.ats.rusasoft.master.model.prodetail.FieldProjectsIntern;
 import com.ats.rusasoft.master.model.prodetail.FieldProjectsInternList;
 import com.ats.rusasoft.master.model.prodetail.GetAlumni;
@@ -2068,7 +2070,7 @@ public class AlumniTrainingController {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info access = null;
 
-			access = AccessControll.checkAccess("addNewCourseInfo", "showFieldProjectIntern", "0", "1", "0", "0",
+			access = AccessControll.checkAccess("addFieldProject", "showFieldProjectIntern", "0", "1", "0", "0",
 					newModuleList);
 			if (access.isError() == true) {
 				model = new ModelAndView("accessDenied");
@@ -2220,4 +2222,245 @@ public class AlumniTrainingController {
 
 		return "redirect:/showFieldProjectIntern";
 	}
+	
+	/******************************Differently Abled_Student*******************************/
+
+	@RequestMapping(value = "/showDifferentlyAbledStudent", method = RequestMethod.GET)
+	public ModelAndView showDifferentlyAbledStudent(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info viewAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "1", "0", "0", "0",
+					newModuleList);
+
+			if (viewAccess.isError() == false) {
+				model = new ModelAndView("ProgramDetails/showDifrntlyDisbldStud");
+
+				Info addAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "0", "1", "0",
+						"0", newModuleList);
+
+				Info editAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "0", "0", "1",
+						"0", newModuleList);
+
+				Info deleteAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "0", "0", "0",
+						"1", newModuleList);
+
+				model.addObject("viewAccess", viewAccess);
+				if (addAccess.isError() == false)
+					model.addObject("addAccess", 0);
+
+				if (editAccess.isError() == false)
+					model.addObject("editAccess", 0);
+
+				if (deleteAccess.isError() == false)
+					model.addObject("deleteAccess", 0);
+
+				model.addObject("title", "Differently Abled Students(Divyangjan)");
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				RestTemplate restTemplate = new RestTemplate();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map.add("yearId", session.getAttribute("acYearId"));
+				System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " "
+						+ session.getAttribute("acYearId"));
+
+				DifrentlyAbledStudList[] difStudArr = restTemplate.postForObject(Constants.url + "getAllDifferentlyDisableStudentsList", map,
+						DifrentlyAbledStudList[].class);
+				List<DifrentlyAbledStudList> difStudList = new ArrayList<>(Arrays.asList(difStudArr));
+				System.out.println("difStudList " + difStudList.toString());
+
+				model.addObject("difStudList", difStudList);
+			} else {
+
+				model = new ModelAndView("accessDenied");
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showDifferentlyAbledStudent at Alumni Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addNewDifAbldStudent", method = RequestMethod.GET)
+	public ModelAndView addNewDifAbldStudent(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		RestTemplate restTemplate = new RestTemplate();
+		MultiValueMap<String, Object> map = null;
+		try {
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info access = null;
+
+			access = AccessControll.checkAccess("addNewDifAbldStudent", "showNewCourseInfo", "0", "1", "0", "0",
+					newModuleList);
+			if (access.isError() == true) {
+				model = new ModelAndView("accessDenied");
+			} else {
+
+				model = new ModelAndView("ProgramDetails/addDifAbldStud");
+
+				model.addObject("title", "Add Differently Abled Students(Divyangjan)");
+
+				DifrentlyAbledStud difDisStud = new DifrentlyAbledStud();
+				model.addObject("difDisStud", difDisStud);
+
+				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				System.err.println("progTypeList " + progTypeList.toString());
+
+				model.addObject("progTypeList", progTypeList);
+
+			}
+
+		} catch (Exception e) {
+			System.err.println("exception In addNewDifAbldStudent at AlumTrain Contr" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/insertDifrnDisStudent", method = RequestMethod.POST)
+	public String insertDifrnDisStudent(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
+
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String curDateTime = dateFormat.format(cal.getTime());
+
+			DifrentlyAbledStud stud = new DifrentlyAbledStud();
+
+			stud.setDifAbleStudId(Integer.parseInt(request.getParameter("studDifDisId")));
+			stud.setNameOfStud(request.getParameter("studentName"));
+			stud.setGender(Integer.parseInt(request.getParameter("gender")));
+			stud.setUdidCardNo(request.getParameter("udid"));
+			stud.setTypeOfDisability(request.getParameter("disablityType"));
+			stud.setPercntOfDisability(Integer.parseInt(request.getParameter("disablity")));
+			stud.setYearOfEnrollement(request.getParameter("enrolledYear"));
+			stud.setProgramId(Integer.parseInt(request.getParameter("prog_name")));
+			stud.setProgTypeId(Integer.parseInt(request.getParameter("prog_type")));
+			stud.setDelStatus(1);
+			stud.setIsActive(1);
+			stud.setAcadYearId(yId);
+			stud.setMakerUserId(userId);
+			stud.setMakerEnterDatetime(curDateTime);
+			stud.setInstId(instituteId);
+			stud.setExInt1(0);
+			stud.setExInt2(0);
+			stud.setExVar1("NA");
+			stud.setExVar2("NA");
+			System.out.println("stud=" + stud.toString());
+
+			DifrentlyAbledStud saveValAddCourse = rest.postForObject(Constants.url + "/saveDifferentlyDisabledStudent", stud,
+					DifrentlyAbledStud.class);
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/showDifferentlyAbledStudent";
+
+	}
+	
+
+	@RequestMapping(value = "/editDisableStudInfo/{studId}", method = RequestMethod.GET)
+	public ModelAndView editDisableStudInfo(@PathVariable("studId") int studId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("ProgramDetails/addDifAbldStud");		
+		try {
+
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("editDisableStudInfo/{studId}", "showDifferentlyAbledStudent", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+
+				MultiValueMap<String, Object> map = null;
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("studId", studId);
+				DifrentlyAbledStud difDisStud = rest.postForObject(Constants.url + "/getDifferntDisabelStudentById", map,
+						DifrentlyAbledStud.class);
+				model.addObject("difDisStud", difDisStud);
+
+				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType",
+						ProgramType[].class);
+				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+				System.err.println("progTypeList " + progTypeList.toString());
+
+				model.addObject("progTypeList", progTypeList);
+				
+				model.addObject("title", "Edit Differently Abled Students(Divyangjan)");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/deleteDisableStudInfo/{studId}", method = RequestMethod.GET)
+	public String deleteDisableStudInfo(@PathVariable("studId") int studId, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("/deleteDisableStudInfo/{studId}",
+					"showDifferentlyAbledStudent", "0", "0", "0", "1", newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("studId", studId);
+
+				DifrentlyAbledStud delStudId = rest.postForObject(Constants.url + "/deleteDifDisStudById", map,
+						DifrentlyAbledStud.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showDifferentlyAbledStudent";
+	}
+	
 }

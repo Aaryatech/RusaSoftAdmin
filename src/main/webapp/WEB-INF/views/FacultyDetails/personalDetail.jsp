@@ -162,13 +162,13 @@
 										</div>
 										
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="fac_address">Taluka
+											<label class="control-label col-sm-3" for="fac_address">Taluka/City
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
 													class="form-control" id="taluka" name="taluka"
-													placeholder="Taluka"
+													placeholder="Taluka/City"
 													value="${facPerDetail.fTaluka}"> <span
 													class="error_form text-danger" id="fac_taluka_field"
 													style="display: none;">Please enter taluka.</span>
@@ -235,8 +235,8 @@
 										
 										<div class="form-group" >
 											
-											<label class="control-label col-sm-3" for="is_add_same">Is
-												 Same(State) <span
+											<label class="control-label col-sm-3" for="is_add_same">Belongs to
+												 Same State <span
 												class="text-danger">*</span>
 											</label>
 
