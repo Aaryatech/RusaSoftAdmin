@@ -132,7 +132,7 @@ public class PdfReportsController {
 		String repDate = DF2.format(new Date());
 
 
-		ItextPageEvent event = new ItextPageEvent(header, title, repDate);
+		ItextPageEvent event = new ItextPageEvent(header, title, repDate,"");
 
 		writer.setPageEvent(event);
 

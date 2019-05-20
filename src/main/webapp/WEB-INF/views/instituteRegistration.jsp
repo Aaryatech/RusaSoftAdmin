@@ -741,9 +741,13 @@
 															.hide()
 												}
 
-												var x = $("#is_registration")
-														.val();
-												if (parseInt(x) == 1)
+												//var x = $("#is_registration")
+														//.val();
+												
+												var x=$('input[name=is_registration]:checked').val();
+
+												//alert("x " +x);
+												if (parseInt(x) == 1){
 													if (!$("#reg_date").val()) {
 														isError = true;
 
@@ -756,6 +760,7 @@
 														$("#reg_date_field")
 																.hide()
 													}
+												}
 
 												if (!$("#trusty_name").val()) {
 													isError = true;
@@ -923,14 +928,14 @@
 			//alert("Value " +value)
 			if (value == 0) {
 				//alert(value)
-				//document.getElementById("reg_date").removeAttribute("required");
+				document.getElementById("reg_date").removeAttribute("required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				//document.getElementById("reg_date").setAttribute("required",
-				//"true");
+				document.getElementById("reg_date").setAttribute("required",
+				"true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -954,13 +959,13 @@
 				if (isReg == 0) {
 
 					document.getElementById("abc").style.display = "none";
-					//document.getElementById("reg_date").removeAttribute(
-							//"required");
+					document.getElementById("reg_date").removeAttribute(
+							"required");
 				//document.getElementById("reg_date").value = da;
 
 				} else {
 					document.getElementById("abc").style.display = "block";
-					reg_date
+					//reg_date
 					//document.getElementById("reg_date").value = da;
 
 				}

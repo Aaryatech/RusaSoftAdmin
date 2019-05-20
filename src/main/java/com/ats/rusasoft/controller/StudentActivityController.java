@@ -1504,6 +1504,8 @@ public class StudentActivityController {
 
 			int programType = Integer.parseInt(request.getParameter("programType"));
 			map.add("programTypeId", programType);
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+
 			Program[] program = restTemplate.postForObject(Constants.url + "/getProgramByProgramTypeId", map,
 					Program[].class);
 			list = new ArrayList<Program>(Arrays.asList(program));

@@ -45,6 +45,8 @@
 <!-- BEGIN BODY -->
 <body class=" ">
 	<!-- START TOPBAR -->
+		<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
+	
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
 	<!-- START CONTAINER -->
@@ -80,9 +82,64 @@
 							</div>
 						</header>
 						<div class="content-body">
+						
+							<div class="row" style="padding-bottom: 0px;">
+							
+							<div class="form-group">
+													<label class="control-label col-sm-1" for="status">Academic Year
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-sm-2">
+														<select id="ac_year" name="ac_year"
+															class="form-control">
+
+															<c:forEach items="${acaYearList}" var="acYear">
+															<option value="${acYear.yearId}">${acYear.academicYear}</option>
+															</c:forEach>
+															
+														</select>
+														<span class="error_form text-danger" id="prog_type_field"
+															style="display: none;">Please select program type</span>
+													</div>
+												
+													<label class="control-label col-sm-1" for="status">Program
+														<span class="text-danger"></span>
+													</label>
+													<div class="col-sm-3">
+														<select id="prog_type" name="prog_type"
+															class="form-control" onchange="getProgramTypeByProgram()">
+
+															<c:forEach items="${progTypeList}" var="progType">
+															<option value="${progType.programId}">${progType.programName}</option>
+															</c:forEach>
+															
+														</select>
+														<span class="error_form text-danger" id="prog_type_field"
+															style="display: none;">Please select program type</span>
+													</div>
+												
+													<label class="control-label col-sm-1" for="page_order">
+														Program Type<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-3">
+
+													<select id="prog_name" name="prog_name"
+													class="form-control" required>
+
+												</select>
+													
+														<%-- <input type="text" class="form-control" id="prog_name"
+															value="${trainPlace.programName}" onchange="trim(this)" name="prog_name"
+															placeholder="Name of Program" maxlength="100"> --%>
+															<span class="error_form text-danger" id="prog_name_field"
+															style="display: none;">Please enter program name</span>
+													</div>
+												</div>
+							</div>
+							<br/>
 							<div class="row" style="padding-bottom: 0px;">
 								<div class="col-lg-12">
-								<form id="reportForm" >
+								<form id="reportForm">
 
 									<div class="panel-group primary" id="accordion-2"
 										role="tablist" aria-multiselectable="true">
@@ -102,10 +159,10 @@
 													<div class="col-lg-10">1] No. of Certificate/Diploma
 														Programs</div>
 													<div class="col-lg-2">
-														<a href="#" onclick="hi()"><i
+														<a href="#" onclick="getProgReport(0)"><i
 															class="fa fa-file-excel-o" style="color: green;"
 															aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-															href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+															href="#" onclick="getProgReport(1)"><i class="fa fa-file-pdf-o"
 															style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 													</div>
 												</div>
@@ -113,10 +170,10 @@
 													<div class="col-lg-10">2] Percentage(%) of
 														Participation in various University Bodies</div>
 													<div class="col-lg-2">
-														<a href="#" onclick="hi()"><i
+														<a href="#" onclick="getReport2(0)"><i
 															class="fa fa-file-excel-o" style="color: green;"
 															aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-															href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+															href="#" onclick="getReport2(1)"><i class="fa fa-file-pdf-o"
 															style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 													</div>
 												</div>
@@ -235,8 +292,7 @@
 											</div>
 										</div>
 									</div>
-									<input type="hidden" id="p" value="0">
-									
+									<input type="hidden" id="p" name="p" value="0">
 									</form>
 								</div>
 							</div>
@@ -265,6 +321,60 @@
 			form.action = ("${pageContext.request.contextPath}/showProgReport/");
 
 			form.submit();
+		}
+		
+		function getReport2(prm){
+			if(prm==1){
+				document.getElementById("p").value="1";
+			}
+			var form = document.getElementById("reportForm");
+
+			form.setAttribute("target", "_blank");
+			form.setAttribute("method", "post");
+
+			form.action = ("${pageContext.request.contextPath}/showFacPartiVarBodies/");
+
+			form.submit();
+		}
+	</script>
+	
+		<script type="text/javascript">
+		function getProgramTypeByProgram() {
+
+			var programType = document.getElementById("prog_type").value;
+			//alert("programType" + programType);
+			
+			var valid = true;
+
+			/* if (programType == null || programType == "") {
+				valid = false;
+				alert("Please Select Program");
+			} */
+
+			
+				$.getJSON('${getProgramTypeByProgram}', {
+					programType : programType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(data);
+				
+					var html;
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+
+						html += '<option value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+
+					}
+					html += '</option>';
+
+					$('#prog_name').html(html);
+					$("#prog_name").trigger("chosen:updated");
+
+				});
+			//alert("Hi")
 		}
 	</script>
 

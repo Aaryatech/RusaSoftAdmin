@@ -806,7 +806,7 @@ public class StudAdminController {
 	@RequestMapping(value = "/getProgramTypeByProgram", method = RequestMethod.GET)
 	public @ResponseBody List<Program> getProgramTypeByProgram(HttpServletRequest request,
 			HttpServletResponse response) {
-
+System.err.println("Mahendra");
 		List<Program> list = new ArrayList<>();
 
 		try {
@@ -818,9 +818,12 @@ public class StudAdminController {
 
 			int programType = Integer.parseInt(request.getParameter("programType"));
 			map.add("programTypeId", programType);
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+
 			Program[] program = restTemplate.postForObject(Constants.url + "/getProgramByProgramTypeId", map,
 					Program[].class);
 			list = new ArrayList<Program>(Arrays.asList(program));
+			System.err.println("Mahendra list " +list.toString());
 
 		} catch (Exception e) {
 			System.err.println("Exce in getProgramTypeByProgram  " + e.getMessage());
