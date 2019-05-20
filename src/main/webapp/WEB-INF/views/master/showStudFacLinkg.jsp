@@ -120,12 +120,13 @@
 																			onClick="selectedInst(this)" /> Select All</th>
 																		<th rowspan="2">Sr No</th>
 																		<th rowspan="2">Linkage Title</th>
-																		<th rowspan="2">Partnering Agency</th>
+																		<th rowspan="2">Partnering Body</th>
 																		<th rowspan="2">Year Of Establishment</th>
 																		<!-- <th rowspan="2">Name Of Research Lab</th> -->
 																		<th style="text-align: center;" colspan="2">Duration</th>
 																		<th rowspan="2">Nature Of Linkage</th>
-																		<th rowspan="2">Participants</th>
+																		<th rowspan="2">No Students Participate</th>
+																		<th rowspan="2">No Faculties Participate</th>
 																		<th rowspan="2">Action</th>
 
 																	</tr>
@@ -150,6 +151,7 @@
 														<td  style="text-align: center">${links.durationTo}</td>
 														<td>${links.natureOfLinkage}</td>
 														<td>${links.noStudentParticipated}</td>
+														<td>${links.exInt1}</td>
 														
 														<td align="center"><c:if test="${editAccess==0}"> 
 																<a href="${pageContext.request.contextPath}/editLinkage/${links.facultyStudLinkageId}"><span class="glyphicon glyphicon-edit"  title="Edit"

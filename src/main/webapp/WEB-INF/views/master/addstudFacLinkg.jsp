@@ -118,7 +118,7 @@
 													
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="smallheading">Partnering  
-															Agency<span class="text-danger">*</span>
+															Body<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
 														<select name="part_inst" id="part_inst" class="form-control">
@@ -129,7 +129,7 @@
 														
 															<%-- <input type="text" class="form-control" id="part_inst" autocomplete="off" onchange="trim(this)"
 															name="part_inst" placeholder="Name of Partnering Institute" value="${linkage.partneringInstitute}"> --%>
-														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of partnering agency.</span>
+														<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of partnering body.</span>
 														</div>
 
 
@@ -259,6 +259,20 @@
 															<input type="text" class="form-control" id="participate" autocomplete="off"  onchange="trim(this)" onkeypress='return restrictAlphabets(event)'
 																name="participate" placeholder="No. of Students Participated" value="${linkage.noStudentParticipated}" onFocus="clearDefault(this)">
 																<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter No. students of participate and value must be greater than 0.</span>
+														</div>
+
+											</div>
+											
+											<div class="form-group">
+
+														<label class="control-label col-sm-2" for="smallheading">No. of
+															Faculty Participated<span class="text-danger">*</span>
+														</label>
+
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="faculty" autocomplete="off"  onchange="trim(this)" onkeypress='return restrictAlphabets(event)'
+																name="faculty" placeholder="No. of Faculty Participated" value="${linkage.noStudentParticipated}" onFocus="clearDefault(this)">
+																<span class="error_form text-danger" id="error_formfield8" style="display:none;" >Please enter No. faculties of participate and value must be greater than 0.</span>
 														</div>
 
 											</div>
@@ -410,6 +424,17 @@
                 					//return false;
                 				} else {
                 					$("#error_formfield7").hide();  
+                				}
+               				
+               				if($("#faculty").val() <=0 || !$("#faculty").val()){   
+           					 
+                				isError=true;
+                				
+                				$("#faculty").addClass("has-error")
+                				$("#error_formfield8").show();
+                					//return false;
+                				} else {
+                					$("#error_formfield8").hide();  
                 				}
                 				
 	           			var from_date = document.getElementById("from_date").value;

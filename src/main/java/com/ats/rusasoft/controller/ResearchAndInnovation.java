@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.model.PlagiarismCodeEthics;
 import com.ats.rusasoft.model.AwrdRecgAgnstExtActivity;
 import com.ats.rusasoft.model.EContentDevFacility;
 import com.ats.rusasoft.model.Info;
@@ -748,7 +749,7 @@ public class ResearchAndInnovation {
 		linkage.setIsActive(1);
 		linkage.setMakerUserId(userId);
 		linkage.setMaker_datetime(curDateTime);
-		linkage.setExInt1(0);
+		linkage.setExInt1(Integer.parseInt(request.getParameter("faculty")) );
 		linkage.setExInt2(0);
 		linkage.setExVar1("NA");
 		linkage.setExVar2("NA");
@@ -1234,7 +1235,7 @@ public class ResearchAndInnovation {
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		AwrdRecgAgnstExtActivity araea = new AwrdRecgAgnstExtActivity();
+		AwrdRecgAgnstExtActivity soft = new AwrdRecgAgnstExtActivity();
 		try {
 			Info view = AccessControll.checkAccess("newAwrdRecgAgnstExtAct", "awrdRecogAgnstExtAct", "0", "1", "0", "0",
 					newModuleList);
@@ -1247,7 +1248,7 @@ public class ResearchAndInnovation {
 				
 				  
 					model = new ModelAndView("resrch&innovatn/awardRecogAgnstExtActivity");
-					model.addObject("araea", araea);
+					model.addObject("soft", soft);
 					model.addObject("title", "Add Award Recognition against Extension Activity");
 			}
 		} catch (Exception e) {
@@ -1260,9 +1261,7 @@ public class ResearchAndInnovation {
 
 		return model;
 
-	}
-	
-	
+	}	
 	
 	@RequestMapping(value = "/insertawrdRecgAgnstExtAxt", method = RequestMethod.POST)
 	public String insertawrdRecgAgnstExtAxt(HttpServletRequest request, HttpServletResponse response) {
@@ -1274,27 +1273,27 @@ public class ResearchAndInnovation {
 				int userId = (int) session.getAttribute("userId");
 				int acadYear = (int) session.getAttribute("acYearId");
 				
-				AwrdRecgAgnstExtActivity araea = new AwrdRecgAgnstExtActivity();
+				AwrdRecgAgnstExtActivity soft = new AwrdRecgAgnstExtActivity();
 				
-				araea.setAwrdRecgAgnstExtActId(Integer.parseInt(request.getParameter("award_recg_id")));
-				araea.setActName(request.getParameter("name_act"));
-				araea.setAwardRecogName(request.getParameter("name_awrd_recg"));
-				araea.setNameAwardingBody(request.getParameter("name_awrd_body"));
-				araea.setAwardYear(request.getParameter("awrd_year"));
-				araea.setInstId(instituteId);
-				araea.setAcYearId(acadYear);
-				araea.setDelStatus(1);
-				araea.setIsActive(1);
-				araea.setMakerUserId(userId);
-				araea.setMakerDatetime(curDateTime);
-				araea.setExInt1(0);
-				araea.setExInt2(0);
-				araea.setExVar1("NA");
-				araea.setExVar2("NA");
+				soft.setAwrdRecgAgnstExtActId(Integer.parseInt(request.getParameter("award_recg_id")));
+				soft.setActName(request.getParameter("name_act"));
+				soft.setAwardRecogName(request.getParameter("name_awrd_recg"));
+				soft.setNameAwardingBody(request.getParameter("name_awrd_body"));
+				soft.setAwardYear(request.getParameter("awrd_year"));
+				soft.setInstId(instituteId);
+				soft.setAcYearId(acadYear);
+				soft.setDelStatus(1);
+				soft.setIsActive(1);
+				soft.setMakerUserId(userId);
+				soft.setMakerDatetime(curDateTime);
+				soft.setExInt1(0);
+				soft.setExInt2(0);
+				soft.setExVar1("NA");
+				soft.setExVar2("NA");
 			
-				System.out.println(araea.toString());
+				System.out.println(soft.toString());
 				
-				AwrdRecgAgnstExtActivity awrd = rest.postForObject(Constants.url+"/saveAwrdRecgAgnstExtAct",araea,AwrdRecgAgnstExtActivity.class);
+				AwrdRecgAgnstExtActivity awrd = rest.postForObject(Constants.url+"/saveAwrdRecgAgnstExtAct",soft,AwrdRecgAgnstExtActivity.class);
 				
 				
 		}catch(Exception e) {
@@ -1329,7 +1328,7 @@ public class ResearchAndInnovation {
 				model = new ModelAndView("resrch&innovatn/awardRecogAgnstExtActivity");
 				model.addObject("title", "Edit Award Recognition against Extension Activity");
 				AwrdRecgAgnstExtActivity  awrdAct = rest.postForObject(Constants.url+"/getAwrdRecgAgnstExtActById", map, AwrdRecgAgnstExtActivity.class);
-				model.addObject("araea", awrdAct);
+				model.addObject("soft", awrdAct);
 			}
 		}catch(Exception e) {
 			
@@ -1418,6 +1417,271 @@ public class ResearchAndInnovation {
 				Info errMsg = rest.postForObject(Constants.url + "deleteSelAwardRecgExtAct", map, Info.class);
 
 				a = "redirect:/awrdRecogAgnstExtAct";
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+
+	}
+	
+	/***************************Plagiarism & Code of Ethics****************************/
+	
+	@RequestMapping(value = "/showPlagiarismCodeEthics", method = RequestMethod.GET)
+	public ModelAndView showPlagiarismCodeEthics(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+			HttpSession session = request.getSession();
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int acadYear = (int) session.getAttribute("acYearId");
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showPlagiarismCodeEthics", "showPlagiarismCodeEthics", "1", "0", "0", "0",
+				newModuleList);
+
+		if (view.isError() == true) {
+
+			model = new ModelAndView("accessDenied");
+
+		} else {
+			model = new ModelAndView("resrch&innovatn/showPlagirsmDetactSoftwr");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instituteId", instituteId);
+			
+			PlagiarismCodeEthics[] plagArr =  rest.postForObject(Constants.url+"/getAllPlagiarismEcthcCodList", map, PlagiarismCodeEthics[].class);
+			List<PlagiarismCodeEthics> plagrismList = new ArrayList<>(Arrays.asList(plagArr));
+			System.out.println("Links="+plagrismList);
+			
+			model.addObject("plagrismList", plagrismList);
+			model.addObject("title", "Plagiarism & Code of Ethics");
+
+			Info add = AccessControll.checkAccess("showPlagiarismCodeEthics", "showPlagiarismCodeEthics", "0", "1", "0", "0",
+					newModuleList);
+			Info edit = AccessControll.checkAccess("showPlagiarismCodeEthics", "showPlagiarismCodeEthics", "0", "0", "1", "0",
+					newModuleList);
+			Info delete = AccessControll.checkAccess("showPlagiarismCodeEthics", "showPlagiarismCodeEthics", "0", "0", "0",
+					"1", newModuleList);
+
+			if (add.isError() == false) {
+				System.out.println(" add   Accessable ");
+				model.addObject("addAccess", 0);
+
+			}
+			if (edit.isError() == false) {
+				System.out.println(" edit   Accessable ");
+				model.addObject("editAccess", 0);
+			}
+			if (delete.isError() == false) {
+				System.out.println(" delete   Accessable ");
+				model.addObject("deleteAccess", 0);
+
+			}
+
+		}
+		} catch (Exception e) {
+
+			System.err.println("exception In Plagiarism & Code of Ethics at Rssrch&Innovat" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+	}
+	
+	@RequestMapping(value = "/addPlagirsmDetactSoftwr", method = RequestMethod.GET)
+	public ModelAndView addPlagirsmDetactSoftwr(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		PlagiarismCodeEthics plagrsm = new PlagiarismCodeEthics();
+		try {
+			Info view = AccessControll.checkAccess("addPlagirsmDetactSoftwr", "showPlagiarismCodeEthics", "0", "1", "0", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				  
+					model = new ModelAndView("resrch&innovatn/addPlagrsmEthicsCode");
+					model.addObject("plagrsm", plagrsm);
+					model.addObject("title", "Add Plagiarism & Code of Ethics");
+			}
+		} catch (Exception e) {
+
+			System.err.println("exception In showPlagiarismCodeEthics at Resrch&Innovat Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}	
+	
+	@RequestMapping(value = "/insertPlagCodeEthic", method = RequestMethod.POST)
+	public String insertPlagCodeEthic(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+				HttpSession session = request.getSession();
+				
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				
+				PlagiarismCodeEthics soft = new PlagiarismCodeEthics();
+				
+				soft.setPlagCodeEthcId(Integer.parseInt(request.getParameter("soft_id")));
+				soft.setIsSoftwrAvabl(Integer.parseInt(request.getParameter("is_soft_avalbl")));
+				soft.setNameOfSoftwr(request.getParameter("software_name"));
+				soft.setMechDetectPlag(request.getParameter("mechnism"));
+				soft.setUrlLink(request.getParameter("url"));
+				soft.setInstId(instituteId);
+				soft.setAcYearId(acadYear);
+				soft.setDelStatus(1);
+				soft.setIsActive(1);
+				soft.setMakerUserId(userId);
+				soft.setMakerDatetime(curDateTime);
+				soft.setExInt1(0);
+				soft.setExInt2(0);
+				soft.setExVar1("NA");
+				soft.setExVar2("NA");
+			
+				System.out.println(soft.toString());
+				
+				PlagiarismCodeEthics awrd = rest.postForObject(Constants.url+"/savePlagCodeEthic",soft,PlagiarismCodeEthics.class);
+				
+				
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/showPlagiarismCodeEthics";
+	
+	}
+	
+	
+	@RequestMapping(value = "/editPlagrismEthicsCode/{plagId}", method = RequestMethod.GET)
+	public ModelAndView editPlagrismEthicsCode(@PathVariable("plagId") int plagId, HttpServletRequest request) {
+
+		// System.out.println("Id:" + iqacId);
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			Info view = AccessControll.checkAccess("editPlagrismEthicsCode/{plagId}", "showPlagiarismCodeEthics", "0", "0", "1", "0",
+					newModuleList);
+
+			if (view.isError() == true) {
+
+				model = new ModelAndView("accessDenied");
+
+			} else {
+				
+				map.add("plagId", plagId);
+				model = new ModelAndView("resrch&innovatn/addPlagrsmEthicsCode");
+				model.addObject("title", "Edit Plagiarism & Code of Ethics");
+				PlagiarismCodeEthics  plagrsm = rest.postForObject(Constants.url+"/getPlagrismEthicsCodeById", map, PlagiarismCodeEthics.class);
+				model.addObject("plagrsm", plagrsm);
+			}
+		}catch(Exception e) {
+			
+		}
+		return model;
+	}
+	
+	@RequestMapping(value = "/deletePlagrismEthicsCode/{plagId}", method = RequestMethod.GET)
+	public String  deletePlagrismEthicsCode(@PathVariable("plagId") int plagId, HttpServletRequest request) {
+		
+		String a = null;
+		try {
+			
+			HttpSession session = request.getSession();
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			Info view = AccessControll.checkAccess("deletePlagrismEthicsCode/{plagId}", "showPlagiarismCodeEthics", "0", "0", "0",
+					"1", newModuleList);
+
+			if (view.isError() == true)
+
+			{
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+				map = new LinkedMultiValueMap<>();
+				map.add("plagId", plagId);
+
+				PlagiarismCodeEthics delPlagrismDetectSoft = rest.postForObject(Constants.url + "/deletePlagiarismCodeEthicsById", map, PlagiarismCodeEthics.class);
+				a="redirect:/showPlagiarismCodeEthics";
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return a;
+		
+	}
+	
+	@RequestMapping(value = "/deleteSelPlagiarismCodeEthics/{plagIds}", method = RequestMethod.GET)
+	public String deleteSelPlagiarismCodeEthics(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int plagIds) {
+		HttpSession session = request.getSession();
+		String a = null;
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("deleteSelPlagiarismCodeEthics/{plagIds}", "showPlagiarismCodeEthics", "0", "0", "0",
+				"1", newModuleList);
+
+		try {
+			if (view.isError() == true) {
+
+				a = "redirect:/accessDenied";
+
+			}
+
+			else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				if (plagIds == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] plagEthCodId = request.getParameterValues("plagIds");
+					System.out.println("id are" + plagIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < plagEthCodId.length; i++) {
+						sb = sb.append(plagEthCodId[i] + ",");
+
+					}
+					String plagIdList = sb.toString();
+					plagIdList = plagIdList.substring(0, plagIdList.length() - 1);
+
+					map.add("plagIdList", plagIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("plagIdList", plagIds);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteSelPlagrismEithcsCode", map, Info.class);
+
+				a = "redirect:/showPlagiarismCodeEthics";
 
 			}
 		} catch (Exception e) {

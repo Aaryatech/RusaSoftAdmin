@@ -776,7 +776,7 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/collaborationLinkages");
-				model.addObject("title", "Institute's Collaboration and Linkages List");
+				model.addObject("title", "Collaboration and Linkages");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int acYearId = (int) session.getAttribute("acYearId");
@@ -845,7 +845,7 @@ public class InstituteProfInfoController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
-				model.addObject("title", "Add Institute's Collaboration and Linkages");
+				model.addObject("title", "Add Collaboration and Linkages");
 				InstituteLinkage editInst = new InstituteLinkage();
 
 				model.addObject("editInst", editInst);
@@ -896,7 +896,7 @@ public class InstituteProfInfoController {
 				int edit_link_id = Integer.parseInt(request.getParameter("edit_link_id"));
 				System.out.println("edit_mou_id id is" + edit_link_id);
 
-				model.addObject("title", " Edit Institute's Collaboration and Linkages ");
+				model.addObject("title", " Edit Collaboration and Linkages ");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("linkId", edit_link_id);
 

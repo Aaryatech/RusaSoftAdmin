@@ -135,7 +135,7 @@
 
 															</div>
 
-															<div class="form-group">
+															<%-- <div class="form-group">
 
 																<label class="control-label col-sm-2" for="page_order">Name
 																	of Author<span class="text-danger">*</span>
@@ -147,10 +147,10 @@
 																		name="author" placeholder="Name of Authors/Co-Authors "
 																		value="${book.bookAuthor }">
 																		<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter name of author.</span>
-																</div>
+																</div> 
 
 
-															</div>
+															</div>--%>
 
 															<div class="form-group">
 
@@ -392,7 +392,7 @@
             				}
             				
             				
-           				if(!$("#author").val()){
+           				/* if(!$("#author").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -402,7 +402,7 @@
             					//return false;
             				} else {
             					$("#error_formfield3").hide()
-            				}
+            				} */
            				
            				if(!$("#publisher").val()){
           					 

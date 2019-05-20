@@ -72,14 +72,14 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
-								<%-- <c:if test="${addAccess==0}"> --%>
+								 <c:if test="${isAdd==1}"> 
 										<a
 											href="${pageContext.request.contextPath}/addFacultyEmpower"
 											data-toggle="modal"><button type="submit"
 												class="btn btn-success">
 												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 											</button></a>
-									<%-- </c:if> --%>
+									 </c:if> 
 								<%-- <a
 									href="${pageContext.request.contextPath}/publicationList"><button
 										type="button" class="btn btn-info">Back</button></a> <a
@@ -130,12 +130,12 @@
 															<td align="center">${facEmpwr.fromDate}</td>
 															<td align="center">${facEmpwr.toDate}</td>
 														
-															<td align="center"><%-- <c:if test="${editAccess==0}"> --%>
+															<td align="center"><c:if test="${isEdit==1}">
 																	<a href="editFacultyEmpower/${facEmpwr.facultyEmpwrmntId}"><span class="glyphicon glyphicon-edit"
 																		title="Edit" data-animate=" animated fadeIn "
 																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															<%-- </c:if> 
-															<c:if test="${deleteAccess==0}"> --%>
+														</c:if> 
+															<c:if test="${isDelete==1}"> 
 																	<a
 																		href="${pageContext.request.contextPath}/deleteFacultyEmpower/${facEmpwr.facultyEmpwrmntId}"
 																		onClick="return confirm('Are you sure want to delete this record');"
@@ -143,12 +143,12 @@
 																		data-animate=" animated fadeIn " data-toggle="tooltip"
 																		data-original-title="Delete  record"><span
 																		class="glyphicon glyphicon-remove"></span></a>
-																<%-- </c:if> --%></td>
+																</c:if></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
-											<%-- <c:if test="${deleteAccess==0}">
+											<c:if test="${isDelete==1}">
 												
 												 <input type="submit" class="btn btn-primary" value="Delete"
 												id="deleteId"
@@ -158,7 +158,7 @@
 
 													
 
-												</c:if> --%>
+												</c:if> 
 												</div>
 
 									</form>

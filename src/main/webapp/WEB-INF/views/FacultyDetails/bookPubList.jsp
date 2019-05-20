@@ -125,7 +125,7 @@
 																		<th>Department Name</th>
 																		<th>Title of Book</th>
 																		<th>Edition</th>
-																		<th>Name of Author</th>
+																		<!-- <th>Name of Author</th> -->
 																		<th>Name of Publication/Publisher</th>
 																		<th>Action</th>	
 																	</tr>
@@ -143,7 +143,7 @@
 														<td>${bList.deptName}</td>
 														<td>${bList.bookTitle}</td>
 														<td>${bList.bookEdition}</td>
-														<td>${bList.bookAuthor}</td>
+														<%-- <td>${bList.bookAuthor}</td> --%>
 														<td>${bList.bookPublisher}</td>
 														
 														<td align="center"> <c:if test="${editAccess==0}"> 

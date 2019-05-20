@@ -81,7 +81,7 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
-									<a href="${pageContext.request.contextPath}/showPhdGuide"><button
+									<a href="${pageContext.request.contextPath}/addPlagirsmDetactSoftwr"><button
 											type="button" class="btn btn-success">
 											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 										</button></a>
@@ -95,7 +95,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deletePhdGuidenceDetail/0"
+										action="${pageContext.request.contextPath}/deleteSelPlagiarismCodeEthics/0"
 										method="get" name="form_sample_2" id="form_sample_2">
 										<div>
 
@@ -113,40 +113,33 @@
 																	type="checkbox" name="selAll" id="selAll"
 																	onClick="selectedInst(this)" /> Select All</th>
 																<th>Sr No</th>
-																<th>University</th>
-																<th>Name of Co-Guide</th>
-																<th>Faculty Name</th>
-																<th>Department</th>
-																<th>Name of Ph.D-scholar</th>
-																<th>Year</th>
-																<th>Title of Thesis</th>
+																<th>Name of Software</th>
+																<th>Mechanism for Detecting Plagiarism</th>
+																<th>URL Link For Plagiarism Detection</th>
 																<th>Action</th>
 															</tr>
 														</thead>
 														<tbody>
-															<c:forEach items="${phdList}" var="phdList"
-																varStatus="count">
+															<c:forEach items="${plagrismList}" var="plgList"
+														varStatus="count">
 																<tr>
-																	<td><input type="checkbox" class="chk"
-																		name="phdId" id="phdIds${count.index+1}"
-																		value="${phdList.phdId}" /></td>
+																	<td align="center"><input type="checkbox" class="chk"
+																		name="plagIds" id="plagIds${count.index+1}"
+																		value="${plgList.plagCodeEthcId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>
-																	<td>${phdList.university}</td>
-																	<td>${phdList.coGuideName}</td>
-																	<td style="text-align: left;">${phdList.facultyFirstName}</td>
-																	<td style="text-align: left;">${phdList.deptName}</td>
-																	<td>${phdList.phdScholarName}</td>
-																	<td align="center">${phdList.academicYear}</td>
-																	<td>${phdList.phdTopic}</td>
-
+																	
+																	<td>${plgList.nameOfSoftwr}</td>
+																	<td>${plgList.mechDetectPlag}</td>
+																	<td>${plgList.urlLink}</td>
 																	<td align="center"><c:if test="${editAccess==0}">
 																			<a
-																				href="${pageContext.request.contextPath}/editPhdGuide/${phdList.phdId}"><span
+																				href="${pageContext.request.contextPath}/editPlagrismEthicsCode/${plgList.plagCodeEthcId}"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-														 </c:if> <c:if test="${deleteAccess==0}">
+																			 </c:if>
+																			<c:if test="${deleteAccess==0}">
 																			<a
-																				href="${pageContext.request.contextPath}/deletePhdGuide/${phdList.phdId}"
+																				href="${pageContext.request.contextPath}/deletePlagrismEthicsCode/${plgList.plagCodeEthcId}"
 																				onClick="return confirm('Are you sure want to delete this record');"
 																				rel="tooltip" data-color-class="danger"
 																				title="Delete" data-animate=" animated fadeIn "
@@ -202,14 +195,10 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-
-
-
-
 	<script type="text/javascript">
 		function selectedInst(source) {
 
-			checkboxes = document.getElementsByName('phdId');
+			checkboxes = document.getElementsByName('plagIds');
 
 			for (var i = 0, n = checkboxes.length; i < n; i++) {
 				checkboxes[i].checked = source.checked;
@@ -218,38 +207,8 @@
 
 		}
 
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-			var nature = document.getElementById("nature").value
-			var sponser = document.getElementById("sponser").value
-			//alert(qualName);
-			var amount = document.getElementById("amount").value
-			var academicYear = document.getElementById("academicYear").value
-			var conPeriod = document.getElementById("conPeriod").value
-			var consultancy = document.getElementById("consultancy").value
-			var temp;
-			if (consultancy == 1) {
-				temp = "Yes";
-			} else {
-				temp = "No";
-			}
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, nature, sponser, amount, conPeriod,
-							temp
-
-					]).draw();
-
-			document.getElementById("index").value = i + 1;
-
-		}
+	
 	</script>
-
-
 
 </body>
 </html>
-
-

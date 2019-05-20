@@ -192,14 +192,13 @@
 
 														<div class="form-group">
 
-															<label class="control-label col-sm-2" for="smallheading">Topic 
+															<label class="control-label col-sm-2" for="smallheading">Title  
 																of Thesis <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<textarea id="phd_topic" name="phd_topic" onchange="trim(this)"
 																	class="form-control" style="width: 100%;">${phd.phdTopic}</textarea>
-																<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter topic/
-																area of research.</span>
+																<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter title of thesis.</span>
 															</div>
 														</div>
 

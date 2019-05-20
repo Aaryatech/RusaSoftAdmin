@@ -1367,7 +1367,7 @@ public class FacultyModuleController {
 				model = new ModelAndView("FacultyDetails/bookPub");
 
 				model.addObject("book", facBook);
-				model.addObject("title", "Add Faculty's Published Journal Details");
+				model.addObject("title", "Add Book/Chapter/Paper Publication");
 			}
 		} catch (Exception e) {
 
@@ -1419,7 +1419,7 @@ public class FacultyModuleController {
 				System.out.println("BookList:" + bookList);
 				model.addObject("bookList", bookList);
 
-				model.addObject("title", "Faculty's Published Book Details");
+				model.addObject("title", "Book/Chapter/Paper Publication ");
 
 				Info add = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "1", "0", "0",
 						newModuleList);
@@ -1477,7 +1477,7 @@ public class FacultyModuleController {
 			facBook.setYearId(yId);
 			facBook.setBookTitle(request.getParameter("book_title"));
 			facBook.setBookEdition(request.getParameter("book_edition"));
-			facBook.setBookAuthor(request.getParameter("author"));
+			facBook.setBookAuthor("NA");//(request.getParameter("author"));
 			facBook.setBookCoauther1(request.getParameter("co_author1"));
 			facBook.setBookCoauther2(request.getParameter("co_author2"));
 			facBook.setBookCoauther3(request.getParameter("co_author3"));
@@ -1525,7 +1525,7 @@ public class FacultyModuleController {
 				FacultyBook pubBook = rest.postForObject(Constants.url + "/getPubBookById", map, FacultyBook.class);
 				model.addObject("book", pubBook);
 
-				model.addObject("title", "Edit Faculty's Published Book Details");
+				model.addObject("title", "Edit Book/Chapter/Paper Publication");
 			}
 		} catch (Exception e) {
 
