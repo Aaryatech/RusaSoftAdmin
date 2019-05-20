@@ -127,7 +127,8 @@ public class ReportController {
 			BufferedOutputStream outStream = null;
 			System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
-			document.setMargins(50, 45, 50, 60);
+			//50, 45, 50, 60
+			document.setMargins(Constants.marginLeft, Constants.marginRight, Constants.marginTop, Constants.marginBottom);
 			document.setMarginMirroring(false);
 
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -165,13 +166,12 @@ public class ReportController {
 				table.setWidthPercentage(100);
 				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
 
-				Font headFont = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
-				Font headFont1 = new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
-				headFont1.setColor(BaseColor.WHITE);
-				Font f = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLUE);
-
+				Font headFont =  Constants.headFont;//new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
+				Font headFont1 = Constants.headFont1; //new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
+				headFont1.setColor(Constants.headFont1BaseColor);
+				
 				PdfPCell hcell = new PdfPCell();
-				hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+				hcell.setBackgroundColor(Constants.baseColorHeader);
 
 				hcell = new PdfPCell(new Phrase("Sr.No.", headFont1));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -257,11 +257,13 @@ public class ReportController {
 				}
 
 				document.open();
-				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
+				Font hf = new Font(FontFamily.TIMES_ROMAN, 14.0f, Font.UNDERLINE, BaseColor.BLACK);
 
 				Paragraph name = new Paragraph(reportName, hf);
-				name.setAlignment(Element.ALIGN_LEFT);
+				name.setAlignment(Element.ALIGN_CENTER);
 				document.add(name);
+				document.add(new Paragraph("\n"));
+				document.add(new Paragraph("Academic Year : 2019-20"));
 				//document.add(new Paragraph("Institute " + progList.get(0).getInstituteName()));
 				/*
 				 * Paragraph company = new Paragraph("Customer Wise Report\n", f);

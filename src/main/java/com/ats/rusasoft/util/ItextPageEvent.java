@@ -41,15 +41,37 @@ public class ItextPageEvent extends PdfPageEventHelper {
 
 	@Override
 	public void onStartPage(PdfWriter writer, Document document) {
-		/*try {
-			//document.add(new Paragraph("\n"));
+		//ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_RIGHT, new Phrase("Hello"), 30, 800, 0);
+		
+		PdfContentByte pdfContByte=writer.getDirectContent();
+		try {
+			pdfContByte.setFontAndSize(BaseFont.createFont(), 10);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		//ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(""+StrHeader), 30, 800, 0);
-		//ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(""+footerText), 550, 800,
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//ColumnText.showTextAligned(writer.getDirectContent().setFontAndSize(BaseColor.LIGHT_GRAY, 10), Element.ALIGN_RIGHT, new Phrase(""+footerText), 550, 800,
+				
 				//0);
+		Phrase p=new Phrase();
+		//p.setFont(Font.FontStyle.OBLIQUE);
+		
+		FontSelector selector = new FontSelector();
+		Font f1 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
+		f1.setColor(BaseColor.LIGHT_GRAY);
+		//Font f2 = FontFactory.getFont("MSung-Light",
+		     //   "UniCNS-UCS2-H", BaseFont.NOT_EMBEDDED);
+		//f2.setColor(BaseColor.RED);
+		selector.addFont(f1);
+		//selector.addFont(f2);
+		Phrase ph = selector.process(footerText);
+	ColumnText.showTextAligned(pdfContByte, Element.ALIGN_RIGHT, ph, 550, 800,
+				
+				0);
+	
 	}
 
 	@Override
@@ -127,12 +149,12 @@ public class ItextPageEvent extends PdfPageEventHelper {
 			totalPageCount.setBorderColor(BaseColor.LIGHT_GRAY);
 			footer.addCell(totalPageCount);
 
-			footer.addCell(new Phrase("" + footerText, new Font(Font.FontFamily.HELVETICA, 8, Font.ITALIC)));
+			footer.addCell(new Phrase("" , new Font(Font.FontFamily.HELVETICA, 8, Font.ITALIC)));
 
 			// write page
 			PdfContentByte canvas = writer.getDirectContent();
 			canvas.beginMarkedContentSequence(PdfName.ARTIFACT);
-			footer.writeSelectedRows(0, -1, 34, 20, canvas);
+			footer.writeSelectedRows(0, -1, 32, 20, canvas);
 
 			canvas.endMarkedContentSequence();
 		} catch (DocumentException de) {
