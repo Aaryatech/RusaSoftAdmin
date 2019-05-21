@@ -14,13 +14,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Header;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -124,15 +134,11 @@ public class ReportController {
 
 			model.addObject("list", progList);
 
-			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+		
 			Document document = new Document(PageSize.A4);
 			//50, 45, 50, 60
 			document.setMargins(Constants.marginLeft, Constants.marginRight, Constants.marginTop, Constants.marginBottom);
 			document.setMarginMirroring(false);
-
-			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
 
 			String FILE_PATH = Constants.REPORT_SAVE;
 			File file = new File(FILE_PATH);
@@ -151,12 +157,10 @@ public class ReportController {
 			String title = "                 ";
 
 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
-			String repDate = DF2.format(new Date());
 
 			ItextPageEvent event = new ItextPageEvent(header, title, "",progList.get(0).getInstituteName());
 
 			writer.setPageEvent(event);
-			//writer.add(new Paragraph("Curricular Aspects"));
 
 			PdfPTable table = new PdfPTable(6);
 
@@ -166,88 +170,89 @@ public class ReportController {
 				table.setWidthPercentage(100);
 				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
 
-				Font headFont =  Constants.headFont;//new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
-				Font headFont1 = Constants.headFont1; //new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
-				headFont1.setColor(Constants.headFont1BaseColor);
+				Font headFontData =  Constants.headFontData;//new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
+				Font tableHeaderFont = Constants.tableHeaderFont; //new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
+				tableHeaderFont.setColor(Constants.tableHeaderFontBaseColor);
 				
 				PdfPCell hcell = new PdfPCell();
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
-				hcell = new PdfPCell(new Phrase("Sr.No.", headFont1));
+				hcell = new PdfPCell(new Phrase("Sr.No.", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Name of Program", headFont1));
+				hcell = new PdfPCell(new Phrase("Name of Program", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+				
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("Level", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Level", headFont1));
+				hcell = new PdfPCell(new Phrase("Duration (Months)", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Duration (Months)", headFont1));
+				hcell = new PdfPCell(new Phrase("Introduction Year", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Introduction Year", headFont1));
+				hcell = new PdfPCell(new Phrase("Approved By", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
-
-				table.addCell(hcell);
-
-				hcell = new PdfPCell(new Phrase("Approved By", headFont1));
-				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
 				int index = 0;
 				for (int a = 0; a < 10; a++) {
 					for (int i = 0; i < progList.size(); i++) {
-						System.err.println("I  " + i);
+						//System.err.println("I  " + i);
 						NoOfPrograms prog = progList.get(i);
 
 						index++;
 						PdfPCell cell;
-						cell = new PdfPCell(new Phrase(String.valueOf(index), headFont));
+						cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getNameOfProgram(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getNameOfProgram(), headFontData));
+						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+						//cell.setPaddingLeft(10);
+
+						table.addCell(cell);
+
+						cell = new PdfPCell(new Phrase(""+prog.getLevelOfProgram(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getLevelOfProgram(), headFont));
-						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-
-						table.addCell(cell);
-
-						cell = new PdfPCell(new Phrase("" + prog.getMonthDuration(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getMonthDuration(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getYearOfIntrod(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getYearOfIntrod(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getApprovedBy(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getApprovedBy(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -257,9 +262,9 @@ public class ReportController {
 				}
 
 				document.open();
-				Font hf = new Font(FontFamily.TIMES_ROMAN, 14.0f, Font.UNDERLINE, BaseColor.BLACK);
+				Font reportNameFont = new Font(FontFamily.TIMES_ROMAN, 14.0f, Font.UNDERLINE, BaseColor.BLACK);
 
-				Paragraph name = new Paragraph(reportName, hf);
+				Paragraph name = new Paragraph(reportName, reportNameFont);
 				name.setAlignment(Element.ALIGN_CENTER);
 				document.add(name);
 				document.add(new Paragraph("\n"));
@@ -327,7 +332,9 @@ public class ReportController {
 
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
-					int cnt = 1;
+				
+					for (int a = 0; a < 10; a++) {
+						int cnt = 1;
 					for (int i = 0; i < progList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
@@ -346,6 +353,7 @@ public class ReportController {
 						exportToExcelList.add(expoExcel);
 
 					}
+					}
 
 					XSSFWorkbook wb = null;
 					try {
@@ -353,8 +361,8 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						//String excelName = (String) session.getAttribute("excelName");
-						wb = createWorkbook(exportToExcelList);
-
+						wb = createWorkbook(exportToExcelList,progList.get(0).getInstituteName(),reportName);
+                       autoSizeColumns(wb, 2);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 						response.setHeader("Content-disposition", "attachment; filename=" +reportName + "-" + date + ".xlsx");
@@ -387,34 +395,97 @@ public class ReportController {
 
 	}
 	
-	private XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList) throws IOException {
+	private XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName) throws IOException {
 		XSSFWorkbook wb = new XSSFWorkbook();
 		XSSFSheet sheet = wb.createSheet("Sheet1");
-        Header header = sheet.getHeader();  
+        sheet.createFreezePane(0, 3);
+        CellStyle style=wb.createCellStyle();
+	    style.setAlignment(CellStyle.ALIGN_CENTER);
 
-		header.setCenter("Center Header");  
-        header.setLeft  ("Left Header");  
-
+	        Row titleRow = sheet.createRow(0);
+	        titleRow.setHeightInPoints(20);
+	        titleRow.setRowStyle(style);
+	        Cell titleCell = titleRow.createCell(0);
+	        
+	        //titleCell.setCellValue("Report");
+	        titleCell.setCellValue(instName);
+	        
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$L$1"));
+	        
+	        Row titleRow2 = sheet.createRow(1);
+	        titleRow2.setHeightInPoints(20);
+	        titleRow2.setRowStyle(style);
+	        Cell titleCell2 = titleRow2.createCell(0);
+	        
+	        //titleCell2.setCellValue("Sub ");
+	        titleCell2.setCellValue(reportName);
+	        
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$L$2"));
        
 		/*
 		 * writeHeaders(wb, sheet); writeHeaders(wb, sheet); writeHeaders(wb, sheet);
 		 */
 
 		for (int rowIndex = 0; rowIndex < exportToExcelList.size(); rowIndex++) {
-			XSSFRow row = sheet.createRow(rowIndex);
+			XSSFRow row = sheet.createRow(rowIndex+2);
 			for (int j = 0; j < exportToExcelList.get(rowIndex).getRowData().size(); j++) {
 
 				XSSFCell cell = row.createCell(j);
 
 				cell.setCellValue(exportToExcelList.get(rowIndex).getRowData().get(j));
-
+				if ((rowIndex+2) == 2)
+		            cell.setCellStyle(createHeaderStyleNew(wb));  
 			}
-			if (rowIndex == 0)
-				row.setRowStyle(createHeaderStyle(wb));
+			//if (rowIndex == 0)
+				//row.setRowStyle(createHeaderStyle(wb));
 		}
 		return wb;
 	}
-	
+	 public void autoSizeColumns(Workbook workbook,int index) {
+	        int numberOfSheets = workbook.getNumberOfSheets();
+	        for (int i = 0; i < numberOfSheets; i++) {
+	            Sheet sheet = workbook.getSheetAt(i);
+	            if (sheet.getPhysicalNumberOfRows() > 0) {
+	                Row row = sheet.getRow(index);
+	                row.setHeight((short)700);
+
+	                Iterator<Cell> cellIterator = row.cellIterator();
+	                while (cellIterator.hasNext()) {
+	                    Cell cell = cellIterator.next();
+	                    int columnIndex = cell.getColumnIndex();
+	                    sheet.autoSizeColumn(columnIndex);
+	                }
+	            }
+	        }
+	    }
+	  private XSSFCellStyle createHeaderStyleNew(XSSFWorkbook workbook) {
+	        XSSFCellStyle style = workbook.createCellStyle();
+	        style.setWrapText(true);
+	        style.setFillForegroundColor(new XSSFColor(new java.awt.Color(247, 161, 103)));
+
+	        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style.setAlignment(CellStyle.ALIGN_CENTER);
+	        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+
+	        style.setBorderRight(CellStyle.BORDER_THIN);
+	        style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+	        style.setBorderBottom(CellStyle.BORDER_THIN);
+	        style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+	        style.setBorderLeft(CellStyle.BORDER_THIN);
+	        style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+	        style.setBorderTop(CellStyle.BORDER_THIN);
+	        style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+	        style.setDataFormat(1);
+	       
+	        org.apache.poi.ss.usermodel.Font font =workbook.createFont();
+	        font.setFontName("Arial");
+	        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font.setBold(true);
+	        font.setColor(HSSFColor.WHITE.index);
+	        style.setFont(font);
+	 
+	        return style;
+	    }
 	private XSSFCellStyle createHeaderStyle(XSSFWorkbook workbook) {
 		XSSFCellStyle style = workbook.createCellStyle();
 		style.setWrapText(true);
@@ -496,89 +567,87 @@ public class ReportController {
 			try {
 				table.setWidthPercentage(100);
 				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
-
-				Font headFont = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
-				Font headFont1 = new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
-				headFont1.setColor(BaseColor.WHITE);
-				Font f = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLUE);
+				Font headFontData =  Constants.headFontData;//new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
+				Font tableHeaderFont = Constants.tableHeaderFont; //new Font(FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
+				tableHeaderFont.setColor(Constants.tableHeaderFontBaseColor);
 
 				PdfPCell hcell = new PdfPCell();
 				hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 
-				hcell = new PdfPCell(new Phrase("Sr.No.", headFont1));
+				hcell = new PdfPCell(new Phrase("Sr.No.", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Academic Year", headFont1));
+				hcell = new PdfPCell(new Phrase("Academic Year", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Faculty Name", headFont1));
+				hcell = new PdfPCell(new Phrase("Faculty Name", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Member of", headFont1));
+				hcell = new PdfPCell(new Phrase("Member of", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("University", headFont1));
+				hcell = new PdfPCell(new Phrase("University", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Validity", headFont1));
+				hcell = new PdfPCell(new Phrase("Validity", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorHeader);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
 				int index = 0;
 					for (int i = 0; i < progList.size(); i++) {
-						System.err.println("I  " + i);
+						//System.err.println("I  " + i);
 						FacParticipationInBodies prog = progList.get(i);
 
 						index++;
 						PdfPCell cell;
-						cell = new PdfPCell(new Phrase(String.valueOf(index), headFont));
+						cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getAcademicYear(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getAcademicYear(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getFacultyFirstName(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase(""+prog.getConLevel()+"-" + prog.getConName(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getConLevel()+"-" + prog.getConName(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getConUniversity(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getConUniversity(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 						table.addCell(cell);
 
-						cell = new PdfPCell(new Phrase("" + prog.getConTo(), headFont));
+						cell = new PdfPCell(new Phrase(""+prog.getConTo(), headFontData));
 						cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 						cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -682,8 +751,8 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						//String excelName = (String) session.getAttribute("excelName");
-						wb = createWorkbook(exportToExcelList);
-
+						wb = createWorkbook(exportToExcelList,progList.get(0).getInstituteName(),reportName);
+						autoSizeColumns(wb, 0);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 						response.setHeader("Content-disposition", "attachment; filename=" +reportName + "-" + date + ".xlsx");

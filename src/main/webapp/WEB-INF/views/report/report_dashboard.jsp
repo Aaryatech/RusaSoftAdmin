@@ -309,6 +309,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script type="text/javascript">
+//use this function for all reports just get mapping form action name dynamically as like of prm from every report pdf,excel function	
 		function getProgReport(prm) {
 			if(prm==1){
 				document.getElementById("p").value="1";
@@ -321,6 +322,7 @@
 			form.action = ("${pageContext.request.contextPath}/showProgReport/");
 
 			form.submit();
+			document.getElementById("p").value="0";
 		}
 		
 		function getReport2(prm){

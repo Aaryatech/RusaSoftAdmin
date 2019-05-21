@@ -103,7 +103,7 @@ public class ItextPageEvent extends PdfPageEventHelper {
 			// text.addElement(new Phrase("\n "+strTitle +" Institute : "+strDate, new
 			// Font(Font.FontFamily.HELVETICA, 9, Font.BOLD, BaseColor.BLACK)));
 			text.addElement(new Phrase("\n        " + strTitle,
-					new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD, BaseColor.BLACK)));
+					new Font(Font.FontFamily.HELVETICA, 8, Font.BOLD, BaseColor.LIGHT_GRAY)));
 			// PdfPCell text2 = new PdfPCell();
 			// text2.addElement(new Phrase("\n "+strTitle , new
 			// Font(Font.FontFamily.HELVETICA, 9, Font.BOLD, BaseColor.BLACK)));
