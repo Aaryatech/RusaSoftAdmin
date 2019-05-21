@@ -1,5 +1,7 @@
 package com.ats.rusasoft.model;
 
+import java.util.Date;
+
 public class IntelPrpoRight {
 
 	private int conId;
@@ -15,6 +17,22 @@ public class IntelPrpoRight {
 	private String makerDatetime;
 	private int exInt1;
 	private String exVar1;
+	private String reportLink;
+	private String establishDate;
+	
+	
+	public String getReportLink() {
+		return reportLink;
+	}
+	public void setReportLink(String reportLink) {
+		this.reportLink = reportLink;
+	}
+	public String getEstablishDate() {
+		return establishDate;
+	}
+	public void setEstablishDate(String establishDate) {
+		this.establishDate = establishDate;
+	}
 	public int getConId() {
 		return conId;
 	}
@@ -98,8 +116,8 @@ public class IntelPrpoRight {
 		return "IntelPrpoRight [conId=" + conId + ", instituteId=" + instituteId + ", yearId=" + yearId + ", conName="
 				+ conName + ", conFromdt=" + conFromdt + ", conTodt=" + conTodt + ", conPcount=" + conPcount
 				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
-				+ ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + "]";
+				+ ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + ", reportLink="
+				+ reportLink + ", establishDate=" + establishDate + "]";
 	}
-
 	
 }
