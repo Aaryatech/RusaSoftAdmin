@@ -414,7 +414,9 @@ public class StudentActivityController {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				Date maleDate = new Date();
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
+				String stud = "NA";
+				String awrd = "NA";
+				String adhar = "NA";
 				String activityName = request.getParameter("activityName");
 				String date = request.getParameter("date");
 				String year = request.getParameter("year");
@@ -450,7 +452,28 @@ public class StudentActivityController {
 				programActivity.setYearId(acYearId);
 				programActivity.setType(1);
 				programActivity.setIsActive(1);
-
+				
+				 stud = request.getParameter("stud_name");
+				if(stud!=null) {
+					programActivity.setExVar1(stud);
+				}else {
+					programActivity.setExVar1(stud);
+				}
+			
+				 awrd = request.getParameter("name_award");
+				if(awrd!=null) {
+					programActivity.setExVar2(awrd);
+				}else {
+					programActivity.setExVar2(awrd);
+				}
+				
+				 adhar = request.getParameter("adhar_no");
+				if(adhar!=null) {				
+				programActivity.setAadharNo(adhar);
+				}else {
+					programActivity.setAadharNo(adhar);
+				}
+				
 				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
 						programActivity, ProgramActivity.class);
 				if (is_view == 1) {
@@ -474,7 +497,6 @@ public class StudentActivityController {
 		return returnString;
 
 	}
-
 	@RequestMapping(value = "/editStudentAttendActivity/{activityId}", method = RequestMethod.GET)
 	public ModelAndView editStudentAttendActivity(@PathVariable("activityId") int activityId,
 			HttpServletRequest request, HttpServletResponse response) {

@@ -27,11 +27,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.faculty.model.FacultyEmpowerment;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.GetStudentDetail;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.IqacBasicInfo;
-import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LinkageMaster;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Quolification;
@@ -41,6 +41,7 @@ import com.ats.rusasoft.model.instprofile.InstituteAMC;
 import com.ats.rusasoft.model.instprofile.InstituteBestPractices;
 import com.ats.rusasoft.model.instprofile.InstituteFunctionalMOU;
 import com.ats.rusasoft.model.instprofile.InstituteLinkage;
+import com.ats.rusasoft.model.instprofile.RedressedStudGrievance;
 
 @Controller
 @Scope("session")
@@ -137,7 +138,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			System.err.println("Exce in showEditredInforarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -173,7 +174,7 @@ public class InstituteProfInfoController {
 				int inst_id = (int) session.getAttribute("instituteId");
 				int maker_id = (int) session.getAttribute("userId");
 
-				IqacBasicInfo lib = new IqacBasicInfo();
+				IqacBasicInfo redInfo = new IqacBasicInfo();
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -196,24 +197,24 @@ public class InstituteProfInfoController {
 
 					System.out.println("inst id is" + inst_id);
 
-					lib.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
-					lib.setIqacAltEmail1(registered_email);
-					lib.setIqacAltEmail2(alt_email);
-					lib.setIqacAltFax(fax_no);
-					lib.setIqacAltMobile(alt_fac_contact);
-					lib.setIqacAltName(alt_faculty_name);
-					lib.setIqacAltPhone(phone_no);
-					lib.setIsActive(1);
+					redInfo.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
+					redInfo.setIqacAltEmail1(registered_email);
+					redInfo.setIqacAltEmail2(alt_email);
+					redInfo.setIqacAltFax(fax_no);
+					redInfo.setIqacAltMobile(alt_fac_contact);
+					redInfo.setIqacAltName(alt_faculty_name);
+					redInfo.setIqacAltPhone(phone_no);
+					redInfo.setIsActive(1);
 
-					lib.setMakerUserId(maker_id);
+					redInfo.setMakerUserId(maker_id);
 
-					lib.setInstituteId(inst_id);
-					lib.setDelStatus(1);
+					redInfo.setInstituteId(inst_id);
+					redInfo.setDelStatus(1);
 
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1(request.getParameter("designation"));	//designation
-					lib.setExVar2("NA");
+					redInfo.setExInt1(1);
+					redInfo.setExInt2(1);
+					redInfo.setExVar1(request.getParameter("designation"));	//designation
+					redInfo.setExVar2("NA");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -224,9 +225,9 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib.setMakerEnterDatetime(curDateTime);
+					redInfo.setMakerEnterDatetime(curDateTime);
 
-					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", lib,
+					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", redInfo,
 							IqacBasicInfo.class);
 
 				} else {
@@ -234,19 +235,19 @@ public class InstituteProfInfoController {
 
 					System.out.println("iqac_info_id" + iqac_info_id);
 					map.add("iqacInfoId", iqac_info_id); // getInstitute Hod hod =
-					IqacBasicInfo lib1 = rest.postForObject(Constants.url + "getIqacInfoByIqacInfoId", map,
+					IqacBasicInfo redInfo1 = rest.postForObject(Constants.url + "getIqacInfoByIqacInfoId", map,
 							IqacBasicInfo.class);
-					lib1.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
-					lib1.setIqacAltEmail1(registered_email);
-					lib1.setIqacAltEmail2(alt_email);
-					lib1.setIqacAltFax(fax_no);
-					lib1.setIqacAltMobile(alt_fac_contact);
-					lib1.setIqacAltName(alt_faculty_name);
-					lib1.setIqacAltPhone(phone_no);
-					lib1.setExVar1(request.getParameter("designation"));	//designation
-					lib.setMakerUserId(maker_id);
+					redInfo1.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
+					redInfo1.setIqacAltEmail1(registered_email);
+					redInfo1.setIqacAltEmail2(alt_email);
+					redInfo1.setIqacAltFax(fax_no);
+					redInfo1.setIqacAltMobile(alt_fac_contact);
+					redInfo1.setIqacAltName(alt_faculty_name);
+					redInfo1.setIqacAltPhone(phone_no);
+					redInfo1.setExVar1(request.getParameter("designation"));	//designation
+					redInfo.setMakerUserId(maker_id);
 
-					lib.setInstituteId(inst_id);
+					redInfo.setInstituteId(inst_id);
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -257,9 +258,9 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib1.setMakerEnterDatetime(curDateTime);
+					redInfo1.setMakerEnterDatetime(curDateTime);
 
-					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", lib1,
+					IqacBasicInfo editInst = rest.postForObject(Constants.url + "saveInstituteBasicInfo", redInfo1,
 							IqacBasicInfo.class);
 
 				}
@@ -268,7 +269,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in save lib  " + e.getMessage());
+			System.err.println("Exce in save redInfo  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -294,7 +295,7 @@ public class InstituteProfInfoController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(" showLibList Accessable ");
+				System.out.println(" showredInfoList Accessable ");
 
 				model = new ModelAndView("instituteInfo/IQAC/instProfList");
 
@@ -347,7 +348,7 @@ public class InstituteProfInfoController {
 	}
 
 	@RequestMapping(value = "/deleteInstProf/{iqacInfoId}", method = RequestMethod.GET)
-	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response,
+	public String deleteredInforarians(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int iqacInfoId) {
 		HttpSession session = request.getSession();
 		String a = null;
@@ -408,7 +409,7 @@ public class InstituteProfInfoController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/functionalMOUs");
-				model.addObject("title", "Institute's Functional MoU List");
+				model.addObject("title", "Institute's Functional MoU's (Academic)");
 
 				int acYearId = (int) session.getAttribute("acYearId");
 				int inst_id = (int) session.getAttribute("instituteId");
@@ -484,7 +485,7 @@ public class InstituteProfInfoController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
-				model.addObject("title", "Add Institute's Functional MoU");
+				model.addObject("title", "Add Institute's MoU's (Academic)");
 				InstituteFunctionalMOU editInst = new InstituteFunctionalMOU();
 
 				model.addObject("editInst", editInst);
@@ -528,7 +529,7 @@ public class InstituteProfInfoController {
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
 
-				InstituteFunctionalMOU lib = new InstituteFunctionalMOU();
+				InstituteFunctionalMOU redInfo = new InstituteFunctionalMOU();
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -557,26 +558,26 @@ public class InstituteProfInfoController {
 
 					System.out.println("inst id is" + inst_id);
 
-					lib.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
-					lib.setMouTodt(((DateConvertor.convertToYMD(toDate))));
-					lib.setMouBeneficiary(beneficiaryMOU);
-					lib.setMouTitle(title);
-					lib.setYearId(acYearId);
-					lib.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
-					lib.setMouInstitute(instituteOfMoU);
-					lib.setMouAgency(c);
+					redInfo.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
+					redInfo.setMouTodt(((DateConvertor.convertToYMD(toDate))));
+					redInfo.setMouBeneficiary(beneficiaryMOU);
+					redInfo.setMouTitle(title);
+					redInfo.setYearId(acYearId);
+					redInfo.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
+					redInfo.setMouInstitute(instituteOfMoU);
+					redInfo.setMouAgency(c);
 
-					lib.setIsActive(1);
+					redInfo.setIsActive(1);
 
-					lib.setMakerUserId(maker_id);
+					redInfo.setMakerUserId(maker_id);
 
-					lib.setInstituteId(inst_id);
-					lib.setDelStatus(1);
+					redInfo.setInstituteId(inst_id);
+					redInfo.setDelStatus(1);
 
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1("NA");
-					lib.setExVar2("NA");
+					redInfo.setExInt1(1);
+					redInfo.setExInt2(1);
+					redInfo.setExVar1("NA");
+					redInfo.setExVar2("NA");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -587,10 +588,10 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib.setMakerDatetime(curDateTime);
-					System.out.println("Dt:"+lib.toString());
+					redInfo.setMakerDatetime(curDateTime);
+					System.out.println("Dt:"+redInfo.toString());
 
-					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib,
+					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", redInfo,
 							InstituteFunctionalMOU.class);
 
 				} else {
@@ -600,21 +601,21 @@ public class InstituteProfInfoController {
 					System.out.println("mou_id" + mou_id);
 					map.add("mouId", mou_id);
 					// getInstitute Hod hod =
-					InstituteFunctionalMOU lib1 = rest.postForObject(Constants.url + "getMOUByMouId", map,
+					InstituteFunctionalMOU redInfo1 = rest.postForObject(Constants.url + "getMOUByMouId", map,
 							InstituteFunctionalMOU.class);
 
-					lib1.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
-					lib1.setMouTodt(((DateConvertor.convertToYMD(toDate))));
-					lib1.setMouBeneficiary(beneficiaryMOU);
-					lib1.setMouTitle(title);
-					lib1.setYearId(acYearId);
-					lib1.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
-					lib1.setMouInstitute(instituteOfMoU);
-					lib1.setMouAgency(c);
+					redInfo1.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
+					redInfo1.setMouTodt(((DateConvertor.convertToYMD(toDate))));
+					redInfo1.setMouBeneficiary(beneficiaryMOU);
+					redInfo1.setMouTitle(title);
+					redInfo1.setYearId(acYearId);
+					redInfo1.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
+					redInfo1.setMouInstitute(instituteOfMoU);
+					redInfo1.setMouAgency(c);
 
-					lib1.setMakerUserId(maker_id);
+					redInfo1.setMakerUserId(maker_id);
 
-					lib1.setInstituteId(inst_id);
+					redInfo1.setInstituteId(inst_id);
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -625,9 +626,9 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib1.setMakerDatetime(curDateTime);
+					redInfo1.setMakerDatetime(curDateTime);
 
-					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", lib1,
+					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", redInfo1,
 							InstituteFunctionalMOU.class);
 
 				}
@@ -643,7 +644,7 @@ public class InstituteProfInfoController {
 		}
 
 		catch (Exception e) {
-			System.err.println("Exce in save lib  " + e.getMessage());
+			System.err.println("Exce in save redInfo  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -674,7 +675,7 @@ public class InstituteProfInfoController {
 				int edit_mou_id = Integer.parseInt(request.getParameter("edit_mou_id"));
 				System.out.println("edit_mou_id id is" + edit_mou_id);
 
-				model.addObject("title", " Edit Institute's Functional MoU");
+				model.addObject("title", " Edit Institute's Functional MoU's (Academic)");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("mouId", edit_mou_id);
 
@@ -689,7 +690,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			System.err.println("Exce in showEditredInforarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -920,7 +921,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			System.err.println("Exce in showEditredInforarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -956,7 +957,7 @@ public class InstituteProfInfoController {
 				int maker_id = (int) session.getAttribute("userId");
 				int acYearId = (int) session.getAttribute("acYearId");
 
-				InstituteLinkage lib = new InstituteLinkage();
+				InstituteLinkage redInfo = new InstituteLinkage();
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -976,22 +977,22 @@ public class InstituteProfInfoController {
 
 					System.out.println("inst id is" + inst_id);
 
-					lib.setLinkAgency(col_agency);
-					lib.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
-					lib.setLinkBeneficiary(beneficiaryMOU);
-					lib.setLinknameId(Integer.parseInt(colName));
-					lib.setLinkNature(linkageNature);
+					redInfo.setLinkAgency(col_agency);
+					redInfo.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
+					redInfo.setLinkBeneficiary(beneficiaryMOU);
+					redInfo.setLinknameId(Integer.parseInt(colName));
+					redInfo.setLinkNature(linkageNature);
 
-					lib.setMakerUserId(maker_id);
-					lib.setInstituteId(inst_id);
-					lib.setYearId(acYearId);
+					redInfo.setMakerUserId(maker_id);
+					redInfo.setInstituteId(inst_id);
+					redInfo.setYearId(acYearId);
 
-					lib.setDelStatus(1);
-					lib.setIsActive(1);
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1("NA");
-					lib.setExVar2("NA");
+					redInfo.setDelStatus(1);
+					redInfo.setIsActive(1);
+					redInfo.setExInt1(1);
+					redInfo.setExInt2(1);
+					redInfo.setExVar1("NA");
+					redInfo.setExVar2("NA");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -1002,9 +1003,9 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib.setMakerDatetime(curDateTime);
+					redInfo.setMakerDatetime(curDateTime);
 
-					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", lib,
+					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", redInfo,
 							InstituteLinkage.class);
 
 				} else {
@@ -1014,20 +1015,20 @@ public class InstituteProfInfoController {
 					System.out.println("link_id" + link_id);
 					map.add("linkId", link_id);
 
-					InstituteLinkage lib1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
+					InstituteLinkage redInfo1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
 							InstituteLinkage.class);
 
-					lib1.setLinkAgency(col_agency);
-					lib1.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
-					lib1.setLinkBeneficiary(beneficiaryMOU);
-					lib1.setLinknameId(Integer.parseInt(colName));
-					lib1.setLinkNature(linkageNature);
+					redInfo1.setLinkAgency(col_agency);
+					redInfo1.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
+					redInfo1.setLinkBeneficiary(beneficiaryMOU);
+					redInfo1.setLinknameId(Integer.parseInt(colName));
+					redInfo1.setLinkNature(linkageNature);
 
-					lib1.setYearId(acYearId);
+					redInfo1.setYearId(acYearId);
 
-					lib1.setMakerUserId(maker_id);
+					redInfo1.setMakerUserId(maker_id);
 
-					lib1.setInstituteId(inst_id);
+					redInfo1.setInstituteId(inst_id);
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -1038,9 +1039,9 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib1.setMakerDatetime(curDateTime);
+					redInfo1.setMakerDatetime(curDateTime);
 
-					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", lib1,
+					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", redInfo1,
 							InstituteLinkage.class);
 
 				}
@@ -1057,7 +1058,7 @@ public class InstituteProfInfoController {
 		}
 
 		catch (Exception e) {
-			System.err.println("Exce in save lib  " + e.getMessage());
+			System.err.println("Exce in save redInfo  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -1364,7 +1365,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			System.err.println("Exce in showEditredInforarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -1568,7 +1569,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			System.err.println("Exce in showEditredInforarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -1660,25 +1661,25 @@ public class InstituteProfInfoController {
 				String amcTitle = request.getParameter("amc_title");
 				int amc_id = Integer.parseInt(request.getParameter("amc_id"));
 
-				InstituteAMC lib = new InstituteAMC();
+				InstituteAMC redInfo = new InstituteAMC();
 
 				if (amc_id == 0) {
 
-					lib.setAmcCompany(amcCompany);
-					lib.setAmcExpenditure(amcExpenditure);
-					lib.setAmcRemarks(amcRemarks);
-					lib.setAmcTitle(amcTitle);
+					redInfo.setAmcCompany(amcCompany);
+					redInfo.setAmcExpenditure(amcExpenditure);
+					redInfo.setAmcRemarks(amcRemarks);
+					redInfo.setAmcTitle(amcTitle);
 
-					lib.setMakerUserId(maker_id);
-					lib.setInstituteId(inst_id);
-					lib.setYearId(acYearId);
+					redInfo.setMakerUserId(maker_id);
+					redInfo.setInstituteId(inst_id);
+					redInfo.setYearId(acYearId);
 
-					lib.setDelStatus(1);
-					lib.setIsActive(1);
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1("NA");
-					lib.setExVar2("NA");
+					redInfo.setDelStatus(1);
+					redInfo.setIsActive(1);
+					redInfo.setExInt1(1);
+					redInfo.setExInt2(1);
+					redInfo.setExVar1("NA");
+					redInfo.setExVar2("NA");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -1689,9 +1690,9 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib.setMakerDatetime(curDateTime);
+					redInfo.setMakerDatetime(curDateTime);
 
-					InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", lib,
+					InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", redInfo,
 							InstituteAMC.class);
 
 					System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
@@ -1704,19 +1705,19 @@ public class InstituteProfInfoController {
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					map.add("amcId", amc_id);
 
-					InstituteAMC lib1 = rest.postForObject(Constants.url + "getInstAMCByAmcId", map,
+					InstituteAMC redInfo1 = rest.postForObject(Constants.url + "getInstAMCByAmcId", map,
 							InstituteAMC.class);
 
-					lib1.setAmcCompany(amcCompany);
-					lib1.setAmcExpenditure(amcExpenditure);
-					lib1.setAmcRemarks(amcRemarks);
-					lib1.setAmcTitle(amcTitle);
+					redInfo1.setAmcCompany(amcCompany);
+					redInfo1.setAmcExpenditure(amcExpenditure);
+					redInfo1.setAmcRemarks(amcRemarks);
+					redInfo1.setAmcTitle(amcTitle);
 
-					lib1.setMakerUserId(maker_id);
-					lib1.setInstituteId(inst_id);
-					lib1.setYearId(acYearId);
+					redInfo1.setMakerUserId(maker_id);
+					redInfo1.setInstituteId(inst_id);
+					redInfo1.setYearId(acYearId);
 
-					InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", lib1,
+					InstituteAMC linkMasterInsertRes = rest.postForObject(Constants.url + "saveInstituteAMC", redInfo1,
 							InstituteAMC.class);
 
 				}
@@ -1887,24 +1888,24 @@ public class InstituteProfInfoController {
 				String practices_name = request.getParameter("bestPrac");
 				int prac_id = Integer.parseInt(request.getParameter("prac_id"));
 
-				InstituteBestPractices lib = new InstituteBestPractices();
+				InstituteBestPractices redInfo = new InstituteBestPractices();
 
 				if (prac_id == 0) {
 
-					lib.setPracticesBeneficiary(practices_beneficiary);
-					lib.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
-					lib.setPracticesName(practices_name);
+					redInfo.setPracticesBeneficiary(practices_beneficiary);
+					redInfo.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
+					redInfo.setPracticesName(practices_name);
 
-					lib.setMakerUserId(maker_id);
-					lib.setInstituteId(inst_id);
-					lib.setYearId(acYearId);
+					redInfo.setMakerUserId(maker_id);
+					redInfo.setInstituteId(inst_id);
+					redInfo.setYearId(acYearId);
 
-					lib.setDelStatus(1);
-					lib.setIsActive(1);
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1("NA");
-					lib.setExVar2("NA");
+					redInfo.setDelStatus(1);
+					redInfo.setIsActive(1);
+					redInfo.setExInt1(1);
+					redInfo.setExInt2(1);
+					redInfo.setExVar1("NA");
+					redInfo.setExVar2("NA");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -1915,10 +1916,10 @@ public class InstituteProfInfoController {
 
 					String curDate = dateFormatStr.format(new Date());
 
-					lib.setMakerDatetime(curDateTime);
+					redInfo.setMakerDatetime(curDateTime);
 
 					InstituteBestPractices linkMasterInsertRes = rest.postForObject(
-							Constants.url + "saveInstituteBestPractices", lib, InstituteBestPractices.class);
+							Constants.url + "saveInstituteBestPractices", redInfo, InstituteBestPractices.class);
 
 					System.err.println("linkMasterInsertRes " + linkMasterInsertRes.toString());
 
@@ -1930,19 +1931,19 @@ public class InstituteProfInfoController {
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					map.add("practicesId", prac_id);
 
-					InstituteBestPractices lib1 = rest.postForObject(Constants.url + "getInstBestPracByPracId", map,
+					InstituteBestPractices redInfo1 = rest.postForObject(Constants.url + "getInstBestPracByPracId", map,
 							InstituteBestPractices.class);
 
-					lib1.setPracticesBeneficiary(practices_beneficiary);
-					lib1.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
-					lib1.setPracticesName(practices_name);
+					redInfo1.setPracticesBeneficiary(practices_beneficiary);
+					redInfo1.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
+					redInfo1.setPracticesName(practices_name);
 
-					lib1.setMakerUserId(maker_id);
-					lib1.setInstituteId(inst_id);
-					lib1.setYearId(acYearId);
+					redInfo1.setMakerUserId(maker_id);
+					redInfo1.setInstituteId(inst_id);
+					redInfo1.setYearId(acYearId);
 
 					InstituteBestPractices linkMasterInsertRes = rest.postForObject(
-							Constants.url + "saveInstituteBestPractices", lib1, InstituteBestPractices.class);
+							Constants.url + "saveInstituteBestPractices", redInfo1, InstituteBestPractices.class);
 
 				}
 
@@ -2007,7 +2008,7 @@ public class InstituteProfInfoController {
 			}
 
 		} catch (Exception e) {
-			System.err.println("Exce in showEditLibrarian/{instId}  " + e.getMessage());
+			System.err.println("Exce in showEditredInforarian/{instId}  " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -2072,5 +2073,324 @@ public class InstituteProfInfoController {
 		}
 		return a;
 	}
+	/*********************************************Redressed Student Grievance********************************************/
 
+		@RequestMapping(value = "/showRedressdeStudGrievnce", method = RequestMethod.GET)
+		public ModelAndView showRedressdeStudGrievnce(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			try {
+
+				Info view = AccessControll.checkAccess("showRedressdeStudGrievnce", "showRedressdeStudGrievnce", "1", "0", "0", "0",
+						newModuleList);
+
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					model = new ModelAndView("instituteInfo/IQAC/showStudGrievanceList");
+
+					model.addObject("title", "Redressed of Student Grievances");
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+					int inst_id = (int) session.getAttribute("instituteId");
+					int acYearId = (int) session.getAttribute("acYearId");
+
+					map = new LinkedMultiValueMap<String, Object>();
+					map.add("instId", inst_id);
+					map.add("yearId", acYearId);
+					RedressedStudGrievance redressed = new RedressedStudGrievance();
+				
+					RedressedStudGrievance[] studGrievArray = rest.postForObject( Constants.url + "getAllStudGrievByInstituteIdAndAcademicYear", map, RedressedStudGrievance[].class);
+				  List<RedressedStudGrievance> studGrievlist = new ArrayList<>(Arrays.asList(studGrievArray));
+				 
+				 System.out.println("Stud Griev list="+studGrievlist);
+				 model.addObject("studGrievlist", studGrievlist);
+				 
+					Info add = AccessControll.checkAccess("showRedressdeStudGrievnce", "showRedressdeStudGrievnce", "0", "1", "0", "0",
+							newModuleList);
+					Info edit = AccessControll.checkAccess("showRedressdeStudGrievnce", "showRedressdeStudGrievnce", "0", "0", "1", "0",
+							newModuleList);
+					Info delete = AccessControll.checkAccess("showRedressdeStudGrievnce", "showRedressdeStudGrievnce", "0", "0", "0", "1",
+							newModuleList);
+
+					if (add.isError() == false) {
+						System.out.println(" add   Accessable ");
+						model.addObject("addAccess", 0);
+
+					}
+					if (edit.isError() == false) {
+						System.out.println(" edit   Accessable ");
+						model.addObject("editAccess", 0);
+					}
+					if (delete.isError() == false) {
+						System.out.println(" delete   Accessable ");
+						model.addObject("deleteAccess", 0);
+
+					}
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+		}
+		
+		@RequestMapping(value = "/addRedressdeStudGrievnceInfo", method = RequestMethod.GET)
+		public ModelAndView addRedressdeStudGrievnce(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			try {
+
+				Info view = AccessControll.checkAccess("addRedressdeStudGrievnceInfo", "showRedressdeStudGrievnce", "0", "1", "0", "0",
+						newModuleList);
+
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+
+					model = new ModelAndView("instituteInfo/IQAC/addRedressedStudGrievnce");
+
+					model.addObject("title", "Add Redressed of Student Grievances");
+					RedressedStudGrievance redressed = new RedressedStudGrievance();
+					model.addObject("redressed", redressed);
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+		
+		@RequestMapping(value = "/insertStudGrievance", method = RequestMethod.POST)
+		public String insertStudGrievance(HttpServletRequest request, HttpServletResponse response) {
+			String returnString = new String();
+			try {
+
+				HttpSession session = request.getSession();
+				List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("insertStudGrievance", "showRedressdeStudGrievnce", "0", "1", "0", "0",
+						newModuleList);
+
+				System.out.println(view);
+
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+					System.err.println("Inside insertJournal method");
+
+					int inst_id = (int) session.getAttribute("instituteId");
+
+					int maker_id = (int) session.getAttribute("userId");
+					int acYearId = (int) session.getAttribute("acYearId");
+
+					
+
+				
+					RedressedStudGrievance redInfo = new RedressedStudGrievance();
+
+					
+
+						redInfo.setRedrsStudGrvncId(Integer.parseInt(request.getParameter("stud_griev_id")));
+						redInfo.setStudGrievnce(request.getParameter("stud_griev"));
+						redInfo.setIsTransparent(Integer.parseInt(request.getParameter("isTrans")));
+						redInfo.setNoTrnsprntGrievnceAppeld(Integer.parseInt(request.getParameter("trans_grivnc")));
+						redInfo.setNoTrnsprntRedrsed(Integer.parseInt(request.getParameter("trans_redressed")));
+						redInfo.setIsTimeBound(Integer.parseInt(request.getParameter("isTime")));
+						redInfo.setNoTimeGrievnceAppeld(Integer.parseInt(request.getParameter("time_griev")));
+						redInfo.setNoTimeRedrsed(Integer.parseInt(request.getParameter("time_redress")));
+						redInfo.setIsEfficient(Integer.parseInt(request.getParameter("isEfcint")));
+						redInfo.setNoEfficntGrievnceAppeld(Integer.parseInt(request.getParameter("effGriev")));
+						redInfo.setNoEfficntRedrsed(Integer.parseInt(request.getParameter("eff_redress")));
+						redInfo.setInstId(inst_id);
+						redInfo.setAcadYearId(acYearId);
+						redInfo.setMakerEnterDatetime(curDateTime);
+						redInfo.setMakerUserId(maker_id);
+						redInfo.setDelStatus(1);
+						redInfo.setIsActive(1);
+						redInfo.setExInt1(0);
+						redInfo.setExInt2(0);
+						redInfo.setExVar1("NA");
+						redInfo.setExVar2("NA");
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						RedressedStudGrievance studGrivInfo = rest.postForObject(
+								Constants.url + "saveStudGrievance", redInfo, RedressedStudGrievance.class);
+
+						System.err.println("Student Grievance " + studGrivInfo.toString());
+						
+						returnString="redirect:/showRedressdeStudGrievnce";
+					
+				} else {
+
+					returnString = "redirect:/accessDenied";
+
+				}
+			}
+
+			catch (Exception e) {
+				System.err.println("EXCE in insertStudGrievance " + e.getMessage());
+				e.printStackTrace();
+
+			}
+			return returnString;
+
+		}
+		
+		@RequestMapping(value = "/editStudGrievance/{studGrievancId}", method = RequestMethod.GET)
+		public ModelAndView editStudGrievance(HttpServletRequest request, HttpServletResponse response,@PathVariable("studGrievancId") int studGrievancId) {
+
+			ModelAndView model = null;
+
+			HttpSession session = request.getSession();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			try {
+
+				Info view = AccessControll.checkAccess("editStudGrievance/{studGrievancId}", "showRedressdeStudGrievnce", "0", "0", "1", "0",
+						newModuleList);
+
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+
+					model = new ModelAndView("instituteInfo/IQAC/addRedressedStudGrievnce");
+
+					model.addObject("title", "Edit Redressed of Student Grievances");
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					
+					map.add("studGrievancId", studGrievancId);
+					RedressedStudGrievance redressed = rest.postForObject(Constants.url+"/getStudGrievanceById", map, RedressedStudGrievance.class);
+					System.out.println(redressed);
+					model.addObject("redressed", redressed);
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+
+			return model;
+
+		}
+		
+		@RequestMapping(value = "/deleteStudGrievance/{studGrievancId}", method = RequestMethod.GET)
+		public String deleteStudGrievance(@PathVariable("studGrievancId") int studGrievancId, HttpServletRequest request,
+				HttpServletResponse response) {
+			try {
+				ModelAndView model = null;
+
+				HttpSession session = request.getSession();
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteStudGrievance/{studGrievancId}", "showRedressdeStudGrievnce", "0", "0", "0", "1",
+						newModuleList);
+
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("studGrievancId", studGrievancId);
+
+					RedressedStudGrievance delStud = rest.postForObject(Constants.url + "/deleteStudGrievanceById", map,
+							RedressedStudGrievance.class);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:/showRedressdeStudGrievnce";
+
+		}
+		
+		@RequestMapping(value = "/deleteSelStudGrievance/{grievanceId}", method = RequestMethod.GET)
+		public String deleteSelStudGrievance(HttpServletRequest request, HttpServletResponse response, @PathVariable int grievanceId) {
+			HttpSession session = request.getSession();
+			String a = null;
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info view = AccessControll.checkAccess("deleteBestPrac/{pracId}", "showBestPractice", "0", "0", "0", "1",
+					newModuleList);
+
+			try {
+				if (view.isError() == true) {
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (grievanceId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] grievanceIds = request.getParameterValues("grievanceId");
+						System.out.println("id are" + "amcIds");
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < grievanceIds.length; i++) {
+							sb = sb.append(grievanceIds[i] + ",");
+
+						}
+						String grievanceIdList = sb.toString();
+						grievanceIdList = grievanceIdList.substring(0, grievanceIdList.length() - 1);
+
+						map.add("grievanceIdList", grievanceIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("grievanceIdList", grievanceId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteStudentGrievance", map, Info.class);
+
+					a = "redirect:/showRedressdeStudGrievnce";
+
+				}
+
+			} catch (Exception e) {
+
+				System.err.println(" Exception In deleteSelStudGrievance at Master Contr " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+			return a;
+		}
 }

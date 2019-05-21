@@ -173,15 +173,15 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="loc_of_area">Location
-												Of Area <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="loc_of_area">Name of Room
+												/Room No. <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="200"
 													onchange="trim(this)" id="loc_of_area" name="loc_of_area"
-													autocomplete="off" placeholder="Enter Area Location" value="${editArea.areaLoc}">
+													autocomplete="off" placeholder="Name of Room/ Room No." value="${editArea.areaLoc}">
 												<span class="error_form text-danger" id="loc_of_area_field"
-													style="display: none;">Please enter location of area</span>
+													style="display: none;">Please enter name of room/ room No.</span>
 
 											</div>
 										</div>
@@ -213,12 +213,7 @@
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
-												<!-- <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next"> -->
-
-											</div>
+												</div>
 										</div>
 										<input type="hidden" id="instInfraAreaId"
 											name="instInfraAreaId" value="${editArea.instInfraAreaId}"> 
@@ -226,82 +221,6 @@
 											name="temp" value="${editArea.infraAreaId}"> <input
 											type="hidden" id="is_view" name="is_view" value="0">
 									</form>
-
-
-						<%-- 			<div class="form-group">
-										<form
-											action="${pageContext.request.contextPath}/deleteQualiInit/0"
-											method="get" id="insListForm">
-
-											<table class="table table-striped dt-responsive display"
-												id="example-1">
-												<thead>
-
-													<tr>
-														<th class="check" style="text-align: center; width: 5%;"><input
-															type="checkbox" name="selAll" id="selAll"
-															onClick="selectedInst(this)" /> Select All</th>
-														<th>Sr No</th>
-														<th>Area Type</th>
-														<th>Area Name</th>
-														<th>Area Location</th>
-														<th>Area In Sq. M.</th>
-														<th>Action</th>
-
-													</tr>
-
-												</thead>
-												<tbody>
-													<c:forEach items="${instInfraAreaList}" var="instInfraArea"
-														varStatus="count">
-														<tr>
-															<td align="center"><input type="checkbox"
-																class="chk" name="accOffIds"
-																id="accOffIds${count.index+1}"
-																value="${instInfraArea.instInfraAreaId}" /></td>
-															<td align="center">${count.index+1}</td>
-															<td>${instInfraArea.areaTypeName}</td>
-															<td>${instInfraArea.areaName}</td>
-
-															<td>${instInfraArea.areaLoc}</td>
-
-															<td>${instInfraArea.areaSqMtr}</td>
-
-															<td align="center"><c:if test="${editAccess==0}">
-																	<a onclick="showEdit(${instInfraArea.instInfraAreaId})"
-																		href="#"><span class="glyphicon glyphicon-edit"
-																		title="Edit" data-animate=" animated fadeIn "
-																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															</c:if> <c:if test="${deleteAccess==0}">
-																	<a
-																		href="${pageContext.request.contextPath}/deleteQualiInit/${instInfraArea.instInfraAreaId}"
-																		onClick="return confirm('Are you sure want to delete this record');"
-																		rel="tooltip" data-color-class="danger" title="Delete"
-																		data-animate=" animated fadeIn " data-toggle="tooltip"
-																		data-original-title="Delete  record"><span
-																		class="glyphicon glyphicon-remove"></span></a>
-																</c:if></td>
-
-
-														</tr>
-
-													</c:forEach>
-
-
-												</tbody>
-											</table>
-
-											<c:if test="${deleteAccess==0}">
-												<button type="submit" class="btn btn-primary" value="Delete"
-													id="deleteId"
-													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-													style="align-content: center; width: 113px; margin-left: 40px;">
-													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
-												</button>
-											</c:if>
-											
-										</form>
-									</div> --%>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
 

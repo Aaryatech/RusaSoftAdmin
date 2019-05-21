@@ -22,7 +22,15 @@ public class ProgramActivity {
 	private String exVar2; 
 	private int type;
 	private String yearName;
+	private String aadharNo;
 	
+	
+	public String getAadharNo() {
+		return aadharNo;
+	}
+	public void setAadharNo(String aadharNo) {
+		this.aadharNo = aadharNo;
+	}
 	public int getStudentActivityId() {
 		return studentActivityId;
 	}
@@ -150,9 +158,7 @@ public class ProgramActivity {
 				+ date + ", year=" + year + ", branch=" + branch + ", participatedStudent=" + participatedStudent
 				+ ", level=" + level + ", isActive=" + isActive + ", delStatus=" + delStatus + ", addDate=" + addDate
 				+ ", makerUserId=" + makerUserId + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1
-				+ ", exVar2=" + exVar2 + ", type=" + type + ", yearName=" + yearName + "]";
+				+ ", exVar2=" + exVar2 + ", type=" + type + ", yearName=" + yearName + ", aadharNo=" + aadharNo + "]";
 	}
 	
-	
-
 }

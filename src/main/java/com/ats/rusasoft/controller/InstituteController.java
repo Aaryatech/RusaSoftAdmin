@@ -943,6 +943,8 @@ public class InstituteController {
 			intelProp.setInstituteId(instituteId);
 			intelProp.setYearId(yId);
 			intelProp.setConName(request.getParameter("ipr_title"));
+			intelProp.setReportLink(request.getParameter("reports_link"));
+			intelProp.setEstablishDate(request.getParameter("estb_date"));
 			intelProp.setConFromdt(request.getParameter("fromDate"));
 			intelProp.setConTodt(request.getParameter("toDate"));
 			intelProp.setConPcount(Integer.parseInt(request.getParameter("participant")));
@@ -953,7 +955,7 @@ public class InstituteController {
 			intelProp.setExInt1(0);
 			intelProp.setExVar1("NA");
 
-			IntelPrpoRight saveIntelPropRght = rest.postForObject(Constants.url + "/andNewIntelPropRight", intelProp,
+			IntelPrpoRight saveIntelPropRght = rest.postForObject(Constants.url + "addNewIntelPropRight", intelProp,
 					IntelPrpoRight.class);
 			int isView = Integer.parseInt(request.getParameter("is_view"));
 			if (isView == 1)

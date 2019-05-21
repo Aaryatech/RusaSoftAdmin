@@ -114,8 +114,8 @@
 															onClick="selectedInst(this)" /> Select All</th>
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Initiative Title</th>
-														<!-- <th rowspan="2">From Date</th>
-														<th rowspan="2">To Date</th> -->
+														<th rowspan="2">Link to the Activity Reports on the Website</th>
+														<th rowspan="2">IPR Establishment Date</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
 														<th rowspan="2">Participants</th>
 														<th rowspan="2">Action</th>
@@ -139,6 +139,8 @@
 																value="${rightsList.conId}" /></td>
 															<td align="center">${count.index+1}</td>
 															<td>${rightsList.conName}</td>
+															<td>${rightsList.reportLink}</td>
+															<td>${rightsList.establishDate}</td>
 															<td align="center">${rightsList.conFromdt}</td>
 															<td align="center">${rightsList.conTodt}</td>
 															<td align="right">${rightsList.conPcount}</td>

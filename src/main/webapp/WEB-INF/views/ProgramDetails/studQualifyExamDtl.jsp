@@ -92,7 +92,7 @@
 													<td align="center"><input type="checkbox" class="chk" name="studQlfExmId"
 															id="studQlfExmIds${count.index+1}" value="${list.studExmId}" /></td>
 													<td style="text-align: center">${count.index+1}</td>
-													<td>${list.nameQualifExam}</td>
+													<td>${list.nameQualifExam eq '1' ? list.exVar1 : list.nameQualifExam}</td>
 													<td >${list.levelExam}</td>
 													<td>${list.noStudAppeared}</td>
 													<td >${list.noStudQualified}</td>

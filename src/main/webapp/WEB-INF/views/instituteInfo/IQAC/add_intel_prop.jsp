@@ -114,6 +114,37 @@
 													IPR-Industry-Academic Initiative Practice.</span>
 											</div>
 										</div>
+										
+											<div class="form-group">
+												<label class="control-label col-sm-3" for="reportLink">
+													Link to the Activity Reports on the Website<span
+													class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="reports_link"
+														name="reports_link" autocomplete="off" onchange="trim(this)"
+														placeholder="Link to the Activity Reports on the Website"
+														value="${intelProp.reportLink}"> <span
+														class="error_form text-danger" id="error_linkfield"
+														style="display: none;">Please enter
+														link to the activity reports on the website.</span>
+												</div>
+										</div>
+										
+											<div class="form-group">
+											<label class="control-label col-sm-3" for="establishedDate">
+												IPR Establishment Date<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker" id="estb_date"
+													name="estb_date" autocomplete="off" onchange="trim(this)"
+													placeholder="IPR Establishment Date" onkeypress='return restrictAlphabets(event)'
+													value="${intelProp.establishDate}"> <span
+													class="error_form text-danger" id="error_estbDate"
+													style="display: none;">Please enter IPR establishment date.</span>
+											</div>
+										</div>
 
 
 
@@ -171,7 +202,7 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
 													maxlength="7" autocomplete="off" name="participant"
-													onchange="trim(this)" min="0"
+													onchange="trim(this)" min="0" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)'
 													placeholder="No. of Participants"
 													value="${intelProp.conPcount}"> <span
@@ -307,18 +338,29 @@
 	      					$("#error_fromToDate").hide();
 	      					$("#error_toToDate").hide();
 	      				}
-           				
-           				/* if(!$("#").val()){
+	      		     
+           				if(!$("#reports_link").val()){
         					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#").addClass("has-error")
-            				$("#error_formfield6").show()
+            				$("#reports_link").addClass("has-error")
+            				$("#error_linkfield").show()
             					//return false;
             				} else {
-            					$("#error_formfield6").hide()
-            				} */
+            					$("#error_linkfield").hide()
+            				} 
+	      		      
+	      		    if(!$("#estb_date").val()){
+   					 
+        				isError=true;
+        				       				
+        				$("#estb_date").addClass("has-error")
+        				$("#error_estbDate").show()
+        					//return false;
+        				} else {
+        					$("#error_estbDate").hide()
+        				} 
            			
             				
 			            	 if (!isError) {
@@ -478,6 +520,13 @@
 				else
 					return false;
 			}
+	
+			function clearDefault(a){
+				if(a.defaultValue==0)
+				{
+					a.value=""
+				}
+				};
 		</script>
 
 	<script type="text/javascript">

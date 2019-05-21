@@ -112,10 +112,11 @@
 													<option value="">Select</option>
 													<c:choose>
 													<c:when test="${editQuality.qualityInitiativeId==0}">
-														<option selected value="0">Any other quality based certification</option>
+														
 														<c:forEach items="${qualInintList}" var="quInit">
 																<option  value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
 													</c:forEach>
+													<option selected value="0">Any other quality based certification</option>
 													</c:when>
 													<c:otherwise>
 													
@@ -164,7 +165,7 @@
 												of Participant <span class="text-danger"></span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="9"
+												<input type="text" maxlength="9" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" class="form-control"
 													id="no_of_participant" min="0" autocomplete="off"
@@ -569,6 +570,12 @@
     }    
 </script>
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

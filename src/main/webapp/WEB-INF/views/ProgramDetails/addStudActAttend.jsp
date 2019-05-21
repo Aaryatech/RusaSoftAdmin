@@ -371,8 +371,13 @@
 													</label>
 													<div class="col-sm-10">
 														<select id="level" name="level" class="form-control"
-															onchange="showExtraField()" >
-															<c:choose>
+															onchange="showTextField()" >
+															<option value="">Select Level</option>
+															<option value="International" ${editProgramActivity.level eq 'International' ? 'selected' : ''}>International</option>
+															<option value="National" ${editProgramActivity.level eq 'National' ? 'selected' : ''}>National</option>
+															<option value="Regional" ${editProgramActivity.level eq 'Regional' ? 'selected' : ''}>Regional</option>
+															<option value="State" ${editProgramActivity.level eq 'State' ? 'selected' : ''}>State</option>
+															<%-- <c:choose>
 																<c:when
 																	test="${editProgramActivity.level eq 'International'}">
 																	<option value="International" selected>International</option>
@@ -406,15 +411,57 @@
 																	<option value="Regional">Regional</option>
 																	<option value="State">State</option>
 																</c:otherwise>
-															</c:choose>
+															</c:choose> --%>
 
 
 
 														</select>
 
-
+										<span class="error_form text-danger" id="error_level"
+														style="display: none;">Please select level.</span>
 													</div>
 												</div>
+												
+												<div class="form-group" id="txtHid" style="display: none;">
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="otherActivityName"> Name of Student <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" maxlength="50" class="form-control"	id="stud_name"	value="${editProgramActivity.exVar1}"
+																	name="stud_name" placeholder="Name of Student" onchange="return trim(this)">
+															
+															<span class="error_form text-danger" id="error_studName"
+																		style="display: none;">Please enter name of student.</span>
+															</div>
+													</div>
+													
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="otherActivityName"> Aadhaar No./ Student ID No. <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" maxlength="12" class="form-control"	id="adhar_no"	value="${editProgramActivity.exVar2}"
+																	name="adhar_no" placeholder="Aadhaar No./ Student ID No." onchange="return trim(this)">
+															
+															<span class="error_form text-danger" id="error_aadhaarNo"
+																			style="display: none;">Please Aadhaar No./ Student ID No.</span>
+															</div>
+													</div>
+													
+													<div class="form-group">
+															<label class="control-label col-sm-2" for="otherActivityName"> Name of Award/Medal <span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-10">
+																<input type="text" maxlength="50" class="form-control"	id="name_award"	value="${editProgramActivity.aadharNo}"
+																	name="name_award" placeholder="Name of Award/Medal" onchange="return trim(this)">
+															
+															<span class="error_form text-danger" id="error_madel"
+																		style="display: none;">Please enter name of award/medal.</span>
+															</div>
+													</div>
+											</div>
 
 											</div>
 
@@ -444,7 +491,7 @@
 <button type="submit" id="sub_button" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showStudAttendActivity"><button
+<a href="${pageContext.request.contextPath}/showStudAttendActivity"><button id="sub2"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -534,6 +581,20 @@ function clearDefault(a){
 	</script>
 
 	<script type="text/javascript">
+	function showTextField(){
+		
+		var field = document.getElementById("level").value
+		
+		if(field == 'International' || field == 'National'){
+			
+		document.getElementById("txtHid").style = "visible";
+	
+	} else {
+		document.getElementById("txtHid").style = "display:none";
+		
+	}
+	}
+	
 		function showExtraField() {
 			//alert("hii");
 			//document.getElementById("abc").style = "display:none"
@@ -553,6 +614,7 @@ function clearDefault(a){
 		}
 
 		function hideText() {
+			showTextField();
 			var isOther = document.getElementById("isOther").value;
 
 			if (isOther == 1) {
@@ -711,6 +773,93 @@ function clearDefault(a){
 											$("#error_formfield4")
 													.hide()
 										}
+												
+												
+												if (!$(
+												"#level")
+												.val()) {
+
+											isError = true;
+											errMsg += '<li>Please enter a valid name.</li>';
+
+											$(
+													"#level")
+													.addClass(
+															"has-error")
+											$("#error_level")
+													.show()
+											//return false;
+										} else {
+											$("#error_level")
+													.hide()
+										}
+												
+										var lvl = document.getElementById("level").value
+									
+										if(lvl == 'International' || lvl == 'National'){
+											if (!$(
+											"#stud_name")
+											.val()) {
+
+										isError = true;
+										
+
+										$(
+												"#stud_name")
+												.addClass(
+														"has-error")
+										$("#error_studName")
+												.show()
+										//return false;
+									} else {
+										$("#error_studName")
+												.hide()
+									}
+											
+											
+											if (!$(
+											"#adhar_no")
+											.val()) {
+
+										isError = true;
+										
+
+										$(
+												"#adhar_no")
+												.addClass(
+														"has-error")
+										$("#error_aadhaarNo")
+												.show()
+										//return false;
+									} else {
+										$("#error_aadhaarNo")
+												.hide()
+									}
+										
+											
+											
+											if (!$(
+											"#name_award")
+											.val()) {
+
+										isError = true;
+										
+
+										$(
+												"#name_award")
+												.addClass(
+														"has-error")
+										$("#error_madel")
+												.show()
+										//return false;
+									} else {
+										$("#error_madel")
+												.hide()
+									}
+											
+											
+										}
+												
 												if (!isError) {
 
 													var x = confirm("Do you really want to submit the form?");
