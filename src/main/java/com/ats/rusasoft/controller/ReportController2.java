@@ -1,4 +1,4 @@
-package com.ats.rusasoft.controller;
+/*package com.ats.rusasoft.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -34,7 +34,6 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -68,7 +67,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Controller
-public class ReportController {
+public class ReportController2 {
 
 	RestTemplate rest = new RestTemplate();
 
@@ -263,7 +262,7 @@ public class ReportController {
 				}
 
 				document.open();
-				Font reportNameFont =Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f, Font.UNDERLINE, BaseColor.BLACK);
+				Font reportNameFont = new Font(FontFamily.TIMES_ROMAN, 14.0f, Font.UNDERLINE, BaseColor.BLACK);
 
 				Paragraph name = new Paragraph(reportName, reportNameFont);
 				name.setAlignment(Element.ALIGN_CENTER);
@@ -271,11 +270,11 @@ public class ReportController {
 				document.add(new Paragraph("\n"));
 				document.add(new Paragraph("Academic Year : 2019-20"));
 				//document.add(new Paragraph("Institute " + progList.get(0).getInstituteName()));
-				/*
+				
 				 * Paragraph company = new Paragraph("Customer Wise Report\n", f);
 				 * company.setAlignment(Element.ALIGN_CENTER); document.add(company);
 				 * document.add(new Paragraph(" "));
-				 */
+				 
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("\n"));
@@ -360,10 +359,9 @@ public class ReportController {
 					try {
 
 						System.out.println("Excel List :" + exportToExcelList.toString());
-String rep=progList.get(0).getInstituteName();
-System.err.println("rep  " +rep);
+
 						//String excelName = (String) session.getAttribute("excelName");
-						wb = createWorkbook(exportToExcelList,rep,reportName);
+						wb = createWorkbook(exportToExcelList,progList.get(0).getInstituteName(),reportName);
                        autoSizeColumns(wb, 2);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -400,9 +398,9 @@ System.err.println("rep  " +rep);
 	private XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName) throws IOException {
 		XSSFWorkbook wb = new XSSFWorkbook();
 		XSSFSheet sheet = wb.createSheet("Sheet1");
-        sheet.createFreezePane(0, 3);
+        sheet.createFreezePane(0, 2);
         CellStyle style=wb.createCellStyle();
-	    style.setAlignment(CellStyle.ALIGN_RIGHT);
+	    style.setAlignment(CellStyle.ALIGN_CENTER);
 
 	        Row titleRow = sheet.createRow(0);
 	        titleRow.setHeightInPoints(20);
@@ -414,38 +412,31 @@ System.err.println("rep  " +rep);
 	        
 	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$F$1"));
 	        
-	        
-	       /* Row titleRow3 = sheet.createRow(0);
-	        titleRow3.setHeightInPoints(20);
-	        titleRow3.setRowStyle(style);
-	        Cell titleCell3 = titleRow3.createCell(0);
-	        titleCell3.setCellValue("Academic Year :2018-2019 ");//Need Dynamic
-	        */
-	        //titleCell.setCellValue("Report");
-	        //titleCell3.setCellValue(instName);
-	        
-	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$F$2"));
-	       
-	        CellStyle style2=wb.createCellStyle();
-		    style2.setAlignment(CellStyle.ALIGN_CENTER);
 	        Row titleRow2 = sheet.createRow(1);
 	        titleRow2.setHeightInPoints(20);
-	        titleRow2.setRowStyle(style2);
-	        
-	        XSSFFont font=wb.createFont();
-	       
-	        
+	        titleRow2.setRowStyle(style);
 	        Cell titleCell2 = titleRow2.createCell(0);
 	        
 	        //titleCell2.setCellValue("Sub ");
 	        titleCell2.setCellValue(reportName);
 	        
-	        
 	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$F$2"));
+	        
+	        
+	        
+	        Row titleRow3 = sheet.createRow(2);
+	        titleRow3.setHeightInPoints(20);
+	        titleRow3.setRowStyle(style);
+	        Cell titleCell3 = titleRow3.createCell(0);
+	        
+	        //titleCell2.setCellValue("Sub ");
+	        titleCell3.setCellValue("Academic Year : 2019-2020 " );
+	        
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$3:$L$3"));
        
-		/*
+		
 		 * writeHeaders(wb, sheet); writeHeaders(wb, sheet); writeHeaders(wb, sheet);
-		 */
+		 
 
 		for (int rowIndex = 0; rowIndex < exportToExcelList.size(); rowIndex++) {
 			XSSFRow row = sheet.createRow(rowIndex+2);
@@ -499,7 +490,7 @@ System.err.println("rep  " +rep);
 	        style.setDataFormat(1);
 	       
 	        org.apache.poi.ss.usermodel.Font font =workbook.createFont();
-	        font.setFontName("Times New Roman");
+	        font.setFontName("Arial");
 	        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 	        font.setBold(true);
 	        font.setColor(HSSFColor.WHITE.index);
@@ -507,6 +498,20 @@ System.err.println("rep  " +rep);
 	 
 	        return style;
 	    }
+	private XSSFCellStyle createHeaderStyle(XSSFWorkbook workbook) {
+		XSSFCellStyle style = workbook.createCellStyle();
+		style.setWrapText(true);
+		style.setFillForegroundColor(new XSSFColor(new java.awt.Color(53, 119, 192)));
+
+		org.apache.poi.ss.usermodel.Font font = workbook.createFont();
+		font.setFontName("Arial");
+		font.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+		font.setBold(true);
+		// font.setColor(HSSFColor.WHITE.index);
+		style.setFont(font);
+
+		return style;
+	}
 	
 	
 	@RequestMapping(value = "/showFacPartiVarBodies", method = RequestMethod.POST)
@@ -669,11 +674,11 @@ System.err.println("rep  " +rep);
 				name.setAlignment(Element.ALIGN_LEFT);
 				document.add(name);
 				//document.add(new Paragraph("Institute " + progList.get(0).getInstituteName()));
-				/*
+				
 				 * Paragraph company = new Paragraph("Customer Wise Report\n", f);
 				 * company.setAlignment(Element.ALIGN_CENTER); document.add(company);
 				 * document.add(new Paragraph(" "));
-				 */
+				 
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("For Academic Year : 2018-19"));
@@ -793,3 +798,4 @@ System.err.println("rep  " +rep);
 	}
 
 }
+*/
