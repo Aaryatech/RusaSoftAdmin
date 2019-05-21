@@ -2387,7 +2387,7 @@ public class FacultyModuleController {
 			fac.setMakerUserId(userId);
 			fac.setExInt1(0);
 			fac.setExInt2(0);
-			fac.setExVar1("NA");
+			fac.setExVar1(request.getParameter("amount"));
 			fac.setExVar2("NA");
 			
 			FacultyEmpowerment saveFacEmpwr = rest.postForObject(Constants.url+"/saveFacultyEmpowerment", fac, FacultyEmpowerment.class);

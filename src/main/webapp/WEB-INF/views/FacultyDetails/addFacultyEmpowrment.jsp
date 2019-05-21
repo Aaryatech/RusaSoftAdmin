@@ -168,6 +168,19 @@
 															</select>
 															</div>
 														</div>
+														
+														<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">Amount(Rs.)
+														 <span class="text-danger"></span>
+													</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" onchange="trim(this)"
+															placeholder=" Amount(Rs.)" id="amount"
+															value="${facultyEmpowr.exVar1}" name="amount" autocomplete="off">
+															<span class="error_form text-danger" id="amt_errfield"
+															style="display: none;">Please enter Amount(Rs.).</span>
+													</div>
+												</div>
 													</div>
 
 

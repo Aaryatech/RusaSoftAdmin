@@ -154,10 +154,10 @@ table, th, td {
 
 																			<td>
 
-																				<div id="resps${yesNoMasterList.yesnoId}">
-																					<div class="col-sm-3">
+																				<div id="resps${yesNoMasterList.yesnoId}" class="row">
+																					<div class="col-sm-8" style="float:left">
 																						${yesNoMasterList.yesnoResponseTitle}</div>
-																					<div class="col-sm-5">
+																					<div class="col-sm-4" style="float:right">
 																						<c:choose>
 																							<c:when
 																								test="${yesNoMasterList.yesnoResponseType==0}">
@@ -220,11 +220,11 @@ table, th, td {
 																			onchange="vissibledive(${yesNoMasterList.yesnoId},0)"
 																			checked> NO</td>
 
-																		<td><div id="resps${yesNoMasterList.yesnoId}"
-																				style="display: none;">
-																				<div class="col-sm-3">
+																		<td><div class="row" id="resps${yesNoMasterList.yesnoId}"
+																				style="display: none;" >
+																				<div class="col-sm-3" style="float:left">
 																					${yesNoMasterList.yesnoResponseTitle}</div>
-																				<div class="col-sm-5">
+																				<div class="col-sm-9 text-right" style="float:right">
 																					<c:choose>
 																						<c:when
 																							test="${yesNoMasterList.yesnoResponseType==0}">

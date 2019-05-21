@@ -119,7 +119,7 @@
 													
 															<option ${content.eContentDevFacility eq 'Media Center' ? 'selected' : ''} value="Media Center" >Media Center</option>
 															<option ${content.eContentDevFacility eq 'Recording Facility' ? 'selected' : ''} value="Recording Facility" >Recording Facility</option>
-										 					<option ${content.eContentDevFacility eq 'Lecture Capturing' ? 'selected' : ''} value="Lecture Capturing" >Lecture Capturing</option>
+										 					<option ${content.eContentDevFacility eq 'Lecture Capturing System' ? 'selected' : ''} value="Lecture Capturing System" >Lecture Capturing System</option>
 
 												</select>
 											</div>

@@ -108,6 +108,7 @@
 														<!-- <th rowspan="2">Financial Support</th> -->
 														<th rowspan="2">Amount Received From</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
+														<th rowspan="2">Amount(Rs.)</th>
 														<th rowspan="2">Action</th>
 													</tr>
 													<tr>
@@ -129,7 +130,7 @@
 															<td align="left">${facEmpwr.amt_recvd_from}</td>
 															<td align="center">${facEmpwr.fromDate}</td>
 															<td align="center">${facEmpwr.toDate}</td>
-														
+															<td align="left">${facEmpwr.exVar1}</td>
 															<td align="center"><c:if test="${isEdit==1}">
 																	<a href="editFacultyEmpower/${facEmpwr.facultyEmpwrmntId}"><span class="glyphicon glyphicon-edit"
 																		title="Edit" data-animate=" animated fadeIn "

@@ -194,57 +194,14 @@
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" ${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''} >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
 															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)" ${stud.schemeName  == 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)' ? 'selected' : ''}>Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
 															<option value="Vocational Education Training" ${stud.schemeName  == 'Vocational Education Training' ? 'selected' : ''}>Vocational Education Training</option>
+															<option value="Soft Skill Development" ${stud.schemeName  == 'Soft Skill Development' ? 'selected' : ''}>Soft Skill Development</option>
+															<option value="Language Lab" ${stud.schemeName  == 'Language Lab' ? 'selected' : ''}>Language Lab</option>
+															<option value="Remedial Coaching" ${stud.schemeName  == 'Remedial Coaching' ? 'selected' : ''}>Remedial Coaching</option>
+															<option value="Bridge Courses" ${stud.schemeName  == 'Bridge Courses' ? 'selected' : ''}>Bridge Courses</option>
+															<option value="Yoga and Meditation" ${stud.schemeName  == 'Yoga and Meditation' ? 'selected' : ''}>Yoga and Meditation</option>
+															<option value="Personal Counselling" ${stud.schemeName  == 'Personal Counselling' ? 'selected' : ''}>Personal Counselling</option>
 															<option value="7" ${stud.extraInt1  == 7 ? 'selected' : ''}>Any Other</option>
-															<%-- <c:choose>
-															<c:when test="${stud.schemeName  eq 'Capability Enhancement'}">
-															<option value="-1">Select</option>
-															<option selected value="Capability Enhancement">Capability	Enhancement</option>
-															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option value="Vocational Education Training">Vocational Education Training</option>
-															<option value="7">Any Other</option>
-															</c:when>
 															
-															<c:when test="${stud.schemeName  eq 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)'}">
-															<option value="-1">Select</option>
-														    <option value="Capability Enhancement">Capability Enhancement</option>
-															<option selected value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option value="Vocational Education Training">Vocational Education Training</option>
-															<option value="7">Any Other</option>
-															</c:when>
-															
-															<c:when test="${stud.schemeName  eq 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)'}">
-															<option value="-1">Select</option>
-															<option value="Capability Enhancement">Capability	Enhancement</option>
-															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option	selected value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option value="Vocational Education Training">Vocational Education Training</option>
-															<option value="7">Any Other</option>
-															</c:when>
-															
-															<c:when test="${stud.schemeName  eq 'Vocational Education Training'}">
-															<option value="-1">Select</option>
-															<option value="Capability Enhancement">Capability Enhancement</option>
-															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option selected value="Vocational Education Training">Vocational Education Training</option>
-															<option value="7">Any Other</option>
-															</c:when>
-														
-															<c:otherwise>
-															<option value="-1">Select</option>
-															<option selected value="Capability Enhancement">Capability Enhancement</option>
-															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)">Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option value="Vocational Education Training">Vocational Education Training</option>
-															<option selected value="7">Any Other</option>
-														</c:otherwise>
-														
-														</c:choose> --%>
-														
-														
-									
 														</select> <span class="error_form text-danger" id="error_scheme"
 															style="display: none;">Please Select Scheme.</span>
 
@@ -309,11 +266,11 @@
 													<div class="col-sm-6">
 														<input type="text"  class="form-control"
 															id="studBenifit" value="${stud.noStudentBenifited}"
-															name="studBenifit" placeholder="Students Benifited"
+															name="studBenifit" placeholder="Students Benifited" onFocus="clearDefault(this)"
 															autocomplete="off" onkeypress='return restrictAlphabets(event)'> <span
 															class="error_form text-danger" id="error_part"
 															style="display: none;">Please Enter No. of
-															Students Benefited and value should be gerater than 0.</span>
+															Students Benefited and value should be greater than 0.</span>
 													</div>
 												</div>
 
@@ -518,6 +475,14 @@ if (!$("#yearofIntro").val()){
 				else
 					return false;
 			}
+	
+			function clearDefault(a){
+				if(a.defaultValue==0)
+				{
+					a.value=""
+				}
+				};
+
 		</script>
 
 	<script type="text/javascript">

@@ -134,25 +134,25 @@
 
 													</c:forEach>
 												</select> <span class="error_form text-danger" id="error_name"
-													style="display: none;">Please Select Collaboration /
-													Linkage Name</span>
+													style="display: none;">Please select collaboration /
+													linkage name.</span>
 
 											</div>
 										</div>
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="agency">Collaboration
-												Linkage with Agency <span class="text-danger">*</span>
+												Linkage with Body <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="col_agency"
 													name="col_agency" autocomplete="off"
 													onchange="return trim(this)"
-													placeholder="Collaboration Linkage with Agency"
+													placeholder="Collaboration Linkage with Body"
 													value="${editInst.linkAgency}"> <span
 													class="error_form text-danger" id="error_agency"
-													style="display: none;">Please enter Collaboration
-													Linkage with Agency</span>
+													style="display: none;">Please enter collaboration
+													linkage with body.</span>
 											</div>
 										</div>
 
@@ -171,8 +171,8 @@
 													placeholder="Nature of Linkage Collaboration"
 													value="${editInst.linkNature}"> <span
 													class="error_form text-danger" id="error_nature"
-													style="display: none;">Please enter Nature of
-													Linkage Collaboration</span>
+													style="display: none;">Please enter nature of
+												linkage collaboration.</span>
 											</div>
 										</div>
 
@@ -234,8 +234,8 @@
 													</c:choose>
 
 												</select> <span class="error_form text-danger" id="error_benf"
-													style="display: none;">Please select Beneficiary of
-													MoU</span>
+													style="display: none;">Please select beneficiary of
+													collaboration/linkage.</span>
 											</div>
 										</div>
 

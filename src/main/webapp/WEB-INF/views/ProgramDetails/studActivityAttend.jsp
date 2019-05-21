@@ -83,6 +83,9 @@
 												<th>Branch</th>
 												<th>No. of Students Attended</th>
 												<th>Level of Activity</th>
+												<th>Name of Student</th>
+												 <th>Aadhaar No./ Student ID No.</th>
+												<th>Name of Award/Medal</th>
 												<th>Action</th>
 											</tr>
 
@@ -98,6 +101,9 @@
 													<td>${list.branch}</td>
 													<td style="text-align: right; ">${list.participatedStudent}</td>
 													<td>${list.level}</td>
+												<td>${list.aadharNo}</td>
+													<td>${list.exVar1}</td>
+													<td>${list.exVar2}</td>
 
 													<td style="text-align: center; "><c:if test="${isEdit==1}">
 															<a

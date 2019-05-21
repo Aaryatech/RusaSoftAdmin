@@ -125,18 +125,35 @@
 														of Qualifying Exam <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<select id="qualify_exam" name="qualify_exam" class="form-control" >
+														<select id="qualify_exam" name="qualify_exam" class="form-control" onchange="otherExam(this.value)">
 															<option value="NET" ${studQlifyExam.nameQualifExam eq 'NET' ? 'selected' : ''}>NET</option>
 															<option value="SLET" ${studQlifyExam.nameQualifExam eq 'SLET' ? 'selected' : ''}>SLET</option>
 															<option value="GATE" ${studQlifyExam.nameQualifExam eq 'GATE' ? 'selected' : ''}>GATE</option>
 															<option value="GMAT" ${studQlifyExam.nameQualifExam eq 'GMAT' ? 'selected' : ''}>GMAT</option>
 															<option value="CAT" ${studQlifyExam.nameQualifExam eq 'CAT' ? 'selected' : ''}>CAT</option>
 															<option value="GRE" ${studQlifyExam.nameQualifExam eq 'GRE' ? 'selected' : ''}>GRE</option>
+															<option value="JAM" ${studQlifyExam.nameQualifExam eq 'JAM' ? 'selected' : ''}>JAM</option>
+															<option value="IELET" ${studQlifyExam.nameQualifExam eq 'IELET' ? 'selected' : ''}>IELET</option>
 															<option value="TOEFL" ${studQlifyExam.nameQualifExam eq 'TOEFL' ? 'selected' : ''}>TOEFL</option>
 															<option value="Civil Services" ${studQlifyExam.nameQualifExam eq 'Civil Services' ? 'selected' : ''}>Civil Services</option>
 															<option value="State Government Exams" ${studQlifyExam.nameQualifExam eq 'State Government Exams' ? 'selected' : ''}>State Government Exams</option>
+															<option value="1" ${studQlifyExam.nameQualifExam eq '1' ? 'selected' : ''}>Other Equivalent Examination</option>
 														</select>
 													</div>
+												</div>
+												
+												<div class="form-group" id="ihide" style="display: none;">
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="page_name"> Other Equivalent  
+														 Examination<span class="text-danger"></span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" placeholder="Other Equivalent Examination" autocomplete="off" id="other_eaxm"
+													name="other_eaxm" value="${studQlifyExam.exVar1}">
+													 <span class="error_form text-danger" id="error_other_exam"	style="display: none;">Please enter other equivalent examination.</span>
+													 
+													</div>
+												</div>
 												</div>
 
 												<div class="form-group">
@@ -234,6 +251,22 @@
 
 	<!-- END CONTENT -->
 	<script type="text/javascript">
+
+	function otherExam(activity) {
+		
+		//alert(activity);
+					if (activity == 1) {
+						
+						document.getElementById("ihide").style = "visible"
+						
+
+					} else  {
+						document.getElementById("ihide").style = "display:none"
+						
+					}
+
+				}
+	
 function clearDefault(a){
 	if(a.defaultValue==0)
 	{
@@ -298,12 +331,12 @@ function clearDefault(a){
 		}
 
 		function hideText() {
-			var isOther = document.getElementById("isOther").value;
+			var isOther = document.getElementById("qualify_exam").value;
 
 			if (isOther == 1) {
-				document.getElementById("abc").style = "visible";
+				document.getElementById("ihide").style = "visible";
 			} else {
-				document.getElementById("abc").style = "display:none"
+				document.getElementById("ihide").style = "display:none"
 			}
 
 		}
