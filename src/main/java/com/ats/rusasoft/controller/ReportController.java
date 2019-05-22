@@ -48,6 +48,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
  
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.ExceUtil;
 import com.ats.rusasoft.commons.ExportToExcel;
 import com.ats.rusasoft.master.model.prodetail.ProgramType;
 import com.ats.rusasoft.model.AcademicYear;
@@ -363,8 +364,8 @@ public class ReportController {
 String rep=progList.get(0).getInstituteName();
 System.err.println("rep  " +rep);
 						//String excelName = (String) session.getAttribute("excelName");
-						wb = createWorkbook(exportToExcelList,rep,reportName);
-                       autoSizeColumns(wb, 2);
+						wb = ExceUtil.createWorkbook(exportToExcelList,rep,reportName,"");
+						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 						response.setHeader("Content-disposition", "attachment; filename=" +reportName + "-" + date + ".xlsx");
@@ -397,7 +398,7 @@ System.err.println("rep  " +rep);
 
 	}
 	
-	private XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName) throws IOException {
+	/*private XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName) throws IOException {
 		XSSFWorkbook wb = new XSSFWorkbook();
 		XSSFSheet sheet = wb.createSheet("Sheet1");
         sheet.createFreezePane(0, 3);
@@ -415,12 +416,12 @@ System.err.println("rep  " +rep);
 	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$F$1"));
 	        
 	        
-	       /* Row titleRow3 = sheet.createRow(0);
+	        Row titleRow3 = sheet.createRow(0);
 	        titleRow3.setHeightInPoints(20);
 	        titleRow3.setRowStyle(style);
 	        Cell titleCell3 = titleRow3.createCell(0);
 	        titleCell3.setCellValue("Academic Year :2018-2019 ");//Need Dynamic
-	        */
+	        
 	        //titleCell.setCellValue("Report");
 	        //titleCell3.setCellValue(instName);
 	        
@@ -443,9 +444,9 @@ System.err.println("rep  " +rep);
 	        
 	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$F$2"));
        
-		/*
+		
 		 * writeHeaders(wb, sheet); writeHeaders(wb, sheet); writeHeaders(wb, sheet);
-		 */
+		 
 
 		for (int rowIndex = 0; rowIndex < exportToExcelList.size(); rowIndex++) {
 			XSSFRow row = sheet.createRow(rowIndex+2);
@@ -506,7 +507,7 @@ System.err.println("rep  " +rep);
 	        style.setFont(font);
 	 
 	        return style;
-	    }
+	    }*/
 	
 	
 	@RequestMapping(value = "/showFacPartiVarBodies", method = RequestMethod.POST)
@@ -562,7 +563,7 @@ System.err.println("rep  " +rep);
 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
 			String repDate = DF2.format(new Date());
 
-			ItextPageEvent event = new ItextPageEvent(header, title, "",progList.get(0).getInstituteName());
+			ItextPageEvent event = new ItextPageEvent(header, title, "","Aaryatech");
 
 			writer.setPageEvent(event);
 			//writer.add(new Paragraph("Curricular Aspects"));
@@ -758,8 +759,8 @@ System.err.println("rep  " +rep);
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						//String excelName = (String) session.getAttribute("excelName");
-						wb = createWorkbook(exportToExcelList,progList.get(0).getInstituteName(),reportName);
-						autoSizeColumns(wb, 0);
+						wb = ExceUtil.createWorkbook(exportToExcelList,"Aaryatech",reportName,"Academic Year 2019-2020 ");
+						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 						response.setHeader("Content-disposition", "attachment; filename=" +reportName + "-" + date + ".xlsx");
