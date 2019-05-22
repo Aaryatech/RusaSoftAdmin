@@ -32,8 +32,10 @@ import com.ats.rusasoft.model.InstituteYesNo;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.ProgramActivity;
 import com.ats.rusasoft.model.SectionList;
+import com.ats.rusasoft.model.StakeholderFb;
 import com.ats.rusasoft.model.YesNoMaster;
 import com.ats.rusasoft.model.accessright.ModuleJson;
+import com.ats.rusasoft.model.instprofile.InstStakeholderFeedback;
 
 @Controller
 @Scope("session")
@@ -45,7 +47,7 @@ public class YesNoController {
 	List<YesNoMaster> yesNoMasterListPage3 = new ArrayList<>();
 	List<YesNoMaster> yesNoMasterListPage4 = new ArrayList<>();
 	List<YesNoMaster> yesNoMasterListPage5 = new ArrayList<>();
-
+	List<StakeholderFb> stfbList = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoList = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage2 = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoListPage3 = new ArrayList<>();
@@ -55,10 +57,12 @@ public class YesNoController {
 	List<InstituteYesNo> instituteYesNoTab1List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab2List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab3List = new ArrayList<>();
+	List<InstStakeholderFeedback> proofList = new ArrayList<>();
 
 	List<InstituteYesNo> instituteYesNoTab4List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab5List = new ArrayList<>();
 	List<InstituteYesNo> instituteYesNoTab6List = new ArrayList<>();
+	List<InstStakeholderFeedback> tempFb = new ArrayList<>();
 
 	@RequestMapping(value = "/selectYestNo", method = RequestMethod.GET)
 	public ModelAndView showAddStudAddmitLocWise(HttpServletRequest request, HttpServletResponse response) {
@@ -117,26 +121,25 @@ public class YesNoController {
 
 		ModelAndView model = null;
 		try {
-			
 
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info viewAccess = AccessControll.checkAccess("selectYestNoLib", "selectYestNoLib",
-					"1", "0", "0", "0", newModuleList);
+			Info viewAccess = AccessControll.checkAccess("selectYestNoLib", "selectYestNoLib", "1", "0", "0", "0",
+					newModuleList);
 
 			if (viewAccess.isError() == false) {
-				 model = new ModelAndView("yesno/yesNoLib");
+				model = new ModelAndView("yesno/yesNoLib");
 				model.addObject("title", Names.infra_budget_list);
 				model.addObject("budRupees", Names.Rupees);
-				Info addAccess = AccessControll.checkAccess("selectYestNoLib",
-						"selectYestNoLib", "0", "1", "0", "0", newModuleList);
+				Info addAccess = AccessControll.checkAccess("selectYestNoLib", "selectYestNoLib", "0", "1", "0", "0",
+						newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("selectYestNoLib",
-						"selectYestNoLib", "0", "0", "1", "0", newModuleList);
-				Info deleteAccess = AccessControll.checkAccess("selectYestNoLib",
-						"selectYestNoLib", "0", "0", "0", "1", newModuleList);
+				Info editAccess = AccessControll.checkAccess("selectYestNoLib", "selectYestNoLib", "0", "0", "1", "0",
+						newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("selectYestNoLib", "selectYestNoLib", "0", "0", "0", "1",
+						newModuleList);
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
 					model.addObject("addAccess", 0);
@@ -147,40 +150,40 @@ public class YesNoController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "FACILITIES IN Library");
+				model.addObject("title", "FACILITIES IN Library");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("pageCode", "PAGE6");
-			YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
-					YesNoMaster[].class);
-			yesNoMasterList = new ArrayList<>(Arrays.asList(yesNoMaster));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("pageCode", "PAGE6");
+				YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
+						YesNoMaster[].class);
+				yesNoMasterList = new ArrayList<>(Arrays.asList(yesNoMaster));
 
-			SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
-					SectionList[].class);
-			List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
+				SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
+						SectionList[].class);
+				List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("pageCode", "PAGE6");
-			InstituteYesNo[] instituteYesNo = restTemplate
-					.postForObject(Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
-			instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("pageCode", "PAGE6");
+				InstituteYesNo[] instituteYesNo = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
+				instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
 
-			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
-			 */
+				/*
+				 * System.out.println("yesNoMasterList " + yesNoMasterList);
+				 * System.out.println("sectionList " + sectionList);
+				 * System.out.println("instituteYesNoList " + instituteYesNoList);
+				 */
 
-			model.addObject("yesNoMasterList", yesNoMasterList);
-			model.addObject("sectionList", sectionList);
-			model.addObject("instituteYesNoList", instituteYesNoList);
-			}else {
-				 model = new ModelAndView("accessDenied");
+				model.addObject("yesNoMasterList", yesNoMasterList);
+				model.addObject("sectionList", sectionList);
+				model.addObject("instituteYesNoList", instituteYesNoList);
+			} else {
+				model = new ModelAndView("accessDenied");
 			}
 
 		} catch (Exception e) {
@@ -198,28 +201,27 @@ public class YesNoController {
 	@RequestMapping(value = "/selectYestNoInfra", method = RequestMethod.GET)
 	public ModelAndView selectYestNoInfra(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model =null;// new ModelAndView("yesno/yesNoInfra");
+		ModelAndView model = null;// new ModelAndView("yesno/yesNoInfra");
 		try {
 
 			HttpSession session = request.getSession();
-			
-			
+
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info viewAccess = AccessControll.checkAccess("selectYestNoInfra", "selectYestNoInfra",
-					"1", "0", "0", "0", newModuleList);
+			Info viewAccess = AccessControll.checkAccess("selectYestNoInfra", "selectYestNoInfra", "1", "0", "0", "0",
+					newModuleList);
 
 			if (viewAccess.isError() == false) {
 				model = new ModelAndView("yesno/yesNoInfra");
 				model.addObject("title", Names.infra_budget_list);
 				model.addObject("budRupees", Names.Rupees);
-				Info addAccess = AccessControll.checkAccess("selectYestNoInfra",
-						"selectYestNoInfra", "0", "1", "0", "0", newModuleList);
+				Info addAccess = AccessControll.checkAccess("selectYestNoInfra", "selectYestNoInfra", "0", "1", "0",
+						"0", newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("selectYestNoInfra",
-						"selectYestNoInfra", "0", "0", "1", "0", newModuleList);
-				Info deleteAccess = AccessControll.checkAccess("selectYestNoInfra",
-						"selectYestNoInfra", "0", "0", "0", "1", newModuleList);
+				Info editAccess = AccessControll.checkAccess("selectYestNoInfra", "selectYestNoInfra", "0", "0", "1",
+						"0", newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("selectYestNoInfra", "selectYestNoInfra", "0", "0", "0",
+						"1", newModuleList);
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
 					model.addObject("addAccess", 0);
@@ -229,39 +231,39 @@ public class YesNoController {
 
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
 
-			model.addObject("title", "Campus Infrastructure And Differently abled friendliness");
+				model.addObject("title", "Campus Infrastructure And Differently abled friendliness");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("pageCode", "PAGE7");
-			YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
-					YesNoMaster[].class);
-			yesNoMasterList = new ArrayList<>(Arrays.asList(yesNoMaster));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("pageCode", "PAGE7");
+				YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
+						YesNoMaster[].class);
+				yesNoMasterList = new ArrayList<>(Arrays.asList(yesNoMaster));
 
-			SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
-					SectionList[].class);
-			List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
+				SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
+						SectionList[].class);
+				List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("pageCode", "PAGE7");
-			InstituteYesNo[] instituteYesNo = restTemplate
-					.postForObject(Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
-			instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("pageCode", "PAGE7");
+				InstituteYesNo[] instituteYesNo = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
+				instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
 
-			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
-			 */
+				/*
+				 * System.out.println("yesNoMasterList " + yesNoMasterList);
+				 * System.out.println("sectionList " + sectionList);
+				 * System.out.println("instituteYesNoList " + instituteYesNoList);
+				 */
 
-			model.addObject("yesNoMasterList", yesNoMasterList);
-			model.addObject("sectionList", sectionList);
-			model.addObject("instituteYesNoList", instituteYesNoList);
-			}else {
+				model.addObject("yesNoMasterList", yesNoMasterList);
+				model.addObject("sectionList", sectionList);
+				model.addObject("instituteYesNoList", instituteYesNoList);
+			} else {
 				model = new ModelAndView("accessDenied");
 			}
 
@@ -584,6 +586,7 @@ public class YesNoController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("id", instYesnoId);
+System.err.println();
 
 			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
 
@@ -594,7 +597,8 @@ public class YesNoController {
 			InstituteYesNo[] ary = restTemplate.postForObject(
 					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
 			instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
-
+			
+		
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -822,37 +826,41 @@ public class YesNoController {
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-
 			model.addObject("title", "Stakeholder's Feedback Details");
 
+			StakeholderFb[] yesNoMaster = restTemplate.getForObject(Constants.url + "/getAllStakeHolderFb",
+					StakeholderFb[].class);
+			stfbList = new ArrayList<>(Arrays.asList(yesNoMaster));
+			model.addObject("stakeFblist", stfbList);
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("pageCode", "PAGE2");
-			YesNoMaster[] yesNoMaster = restTemplate.postForObject(Constants.url + "/getYesNoList", map,
-					YesNoMaster[].class);
-			yesNoMasterListPage2 = new ArrayList<>(Arrays.asList(yesNoMaster));
-
-			SectionList[] section = restTemplate.postForObject(Constants.url + "/getSectionListByPageCode", map,
-					SectionList[].class);
-			List<SectionList> sectionList = new ArrayList<>(Arrays.asList(section));
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("instId", userObj.getGetData().getUserInstituteId());
 			map.add("yearId", acYearId);
-			map.add("pageCode", "PAGE2");
-			InstituteYesNo[] instituteYesNo = restTemplate
-					.postForObject(Constants.url + "/getInstituteYesNoListByInstituteId", map, InstituteYesNo[].class);
-			instituteYesNoListPage2 = new ArrayList<>(Arrays.asList(instituteYesNo));
 
-			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
-			 */
+			InstStakeholderFeedback[] instituteYesNo = restTemplate
+					.postForObject(Constants.url + "/getAllStakeByInstituteId", map, InstStakeholderFeedback[].class);
+			tempFb = new ArrayList<>(Arrays.asList(instituteYesNo));
+			model.addObject("tempFb", tempFb);
+			
+			System.out.println("tempFb:::" + tempFb.toString());
+			try {
+			if(tempFb.size()>0) {
+				System.out.println("size gt 0");
+				model.addObject("isEdit",1);
+				
+			}
+			else {
+				System.out.println("is edit 0 in else part");
+				model.addObject("isEdit",0);
+			}
+			}
+			catch (Exception e) {
 
-			model.addObject("yesNoMasterList", yesNoMasterListPage2);
-			model.addObject("sectionList", sectionList);
-			model.addObject("instituteYesNoList", instituteYesNoListPage2);
+				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
+				e.printStackTrace();
+
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -865,111 +873,97 @@ public class YesNoController {
 
 	}
 
-	@RequestMapping(value = "/submitYesNoPageSecond", method = RequestMethod.POST)
-	public String submitYesNoPageSecond(HttpServletRequest request, HttpServletResponse response) {
-
+	@RequestMapping(value = "/insertInstStakeholder", method = RequestMethod.POST)
+	public String insertLeaveStructure(HttpServletRequest request, HttpServletResponse response) {
 		try {
-
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			int isEdit=0;
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			int count = Integer.parseInt(request.getParameter("srindex"));
-
-			List<InstituteYesNo> save = new ArrayList<>();
-
-			for (int i = 0; i < yesNoMasterListPage2.size(); i++) {
-
-				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterListPage2.get(i).getYesnoId()));
-				int find = 0;
-
-				for (int j = 0; j < instituteYesNoListPage2.size(); j++) {
-
-					if (instituteYesNoListPage2.get(j).getYesnoId() == yesNoMasterListPage2.get(i).getYesnoId()) {
-						find = 1;
-
-						if (value == 1) {
-							instituteYesNoListPage2.get(j).setMakerUserId(userObj.getUserId());
-							instituteYesNoListPage2.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage2.get(j).setInstYesnoResponse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage2.get(i).getYesnoId()));
-						} else {
-
-							instituteYesNoListPage2.get(j).setDelStatus(0);
-						}
-
-					}
-				}
-
-				if (find == 0 && value == 1) {
-
-					InstituteYesNo instituteYesNo = new InstituteYesNo();
-					instituteYesNo.setDelStatus(1);
-					instituteYesNo.setIsActive(1);
-					instituteYesNo.setMakerUserId(userObj.getUserId());
-					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-					instituteYesNo.setMakerDatetime(sf.format(date));
-					instituteYesNo.setYesnoPagecode(yesNoMasterListPage2.get(i).getYesnoPagecode());
-					instituteYesNo.setSectionCode(yesNoMasterListPage2.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(
-							request.getParameter("respnsevalue" + yesNoMasterListPage2.get(i).getYesnoId()));
-					instituteYesNo.setYearId(acYearId);
-					instituteYesNo.setYesnoId(yesNoMasterListPage2.get(i).getYesnoId());
-					instituteYesNoListPage2.add(instituteYesNo);
-				}
-
+			try {
+				 isEdit=Integer.parseInt(request.getParameter("isEdit"));
 			}
-
-			for (int j = 0; j < instituteYesNoListPage2.size(); j++) {
-
-				if (instituteYesNoListPage2.get(j).getYesnoId() == 0) {
-					int value = Integer.parseInt(
-							request.getParameter("dynamicprevyesno" + instituteYesNoListPage2.get(j).getInstYesnoId()));
-
-					if (value == 1) {
-						instituteYesNoListPage2.get(j).setMakerUserId(userObj.getUserId());
-						instituteYesNoListPage2.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage2.get(j).setInstYesnoResponse(request.getParameter(
-								"dynamicprevyesnovalue" + instituteYesNoListPage2.get(j).getInstYesnoId()));
-					} else {
-
-						instituteYesNoListPage2.get(j).setDelStatus(0);
-					}
+			catch(Exception e) {
+				isEdit=0;
+			}
+			
+			
+			System.out.println("isEdit:::" +isEdit );
+			
+			
+			InstStakeholderFeedback head = null;
+			proofList = new ArrayList<>();
+		
+			for (int i = 0; i < stfbList.size(); i++) {
+				head = new InstStakeholderFeedback();
+				if (Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())) == 1) {
+ 					System.out.println("yes " + i);
+ 					if(isEdit==1) {
+ 						head.setStakFbId(Integer.parseInt(request.getParameter("stakFbId" + tempFb.get(i).getStakFbId())));
+ 					} 
+ 					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
+					head.setFbFromId(stfbList.get(i).getFeedbackId());
+					head.setFbProcess(request.getParameter("fbProcess" + stfbList.get(i).getFeedbackId()));
+					head.setYrSem(Integer.parseInt(request.getParameter("quolif" + stfbList.get(i).getFeedbackId())));
+					head.setDelStatus(1);
+					head.setIsActive(1);
+					head.setMakerUserId(userObj.getUserId());
+					head.setMakerDatetime(sf.format(date));
+					head.setInstituteId(userObj.getGetData().getUserInstituteId());
+					head.setAcYearId(acYearId);
+					head.setExInt1(1);
+					head.setExInt2(1);
+					head.setExVar1("NA");
+					head.setExVar2("NA");
+					System.out.println("head in yes:::" + head.toString());
+					
 				}
 
-			}
-
-			if (count != 0) {
-				for (int j = 1; j <= count; j++) {
-
-					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
-
-					if (value == 1) {
-						InstituteYesNo instituteYesNo = new InstituteYesNo();
-						instituteYesNo.setDelStatus(1);
-						instituteYesNo.setIsActive(1);
-						instituteYesNo.setMakerUserId(userObj.getUserId());
-						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-						instituteYesNo.setMakerDatetime(sf.format(date));
-						instituteYesNo.setYesnoPagecode("PAGE2");
-						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
-						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
-						instituteYesNo.setYearId(acYearId);
-						instituteYesNoListPage2.add(instituteYesNo);
-					}
+				else {
+					if(isEdit==1) {
+ 						head.setStakFbId(Integer.parseInt(request.getParameter("stakFbId" + tempFb.get(i).getStakFbId())));
+ 					} 
+					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
+					System.out.println("no " + i);
+					head.setFbFromId(stfbList.get(i).getFeedbackId());
+					head.setFbProcess("NA");
+					head.setYrSem(0);
+					head.setDelStatus(1);
+					head.setIsActive(1);
+					head.setMakerUserId(userObj.getUserId());
+					head.setMakerDatetime(sf.format(date));
+					head.setInstituteId(userObj.getGetData().getUserInstituteId());
+					head.setAcYearId(acYearId);
+					head.setExInt1(1);
+					head.setExInt2(1);
+					head.setExVar1("NA");
+					head.setExVar2("NA");
+					System.err.println("head in no:::" + head.toString());
 				}
-
+				proofList.add(head);
 			}
-			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
-					instituteYesNoListPage2, InstituteYesNo[].class);
+			 
+			
+			System.out.println("proofList is :::" + proofList.toString());
+			InstStakeholderFeedback[] instituteYesNo = restTemplate
+					.postForObject(Constants.url + "/saveInstStakeholder", proofList, InstStakeholderFeedback[].class);
+			if (instituteYesNo != null) {
+				session.setAttribute("successMsg", "Record Inserted Successfully");
+			} else {
+				session.setAttribute("errorMsg", "Failed to Insert Record");
+			}
+			
+			
 
-		} catch (Exception e) {
+			
 
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+		} catch (
 
+		Exception e) {
+
+			System.err.println("Exce In submitInsertLeaveStructure method  " + e.getMessage());
 			e.printStackTrace();
 
 		}

@@ -64,7 +64,7 @@ table, th, td {
 					<section class="box ">
 
 						<header class="panel_header">
-							<h2 class="title pull-left">${title}</h2>
+							<h2 class="title pull-left">${title}-${isEdit}</h2>
 
 							<div class="actions panel_actions pull-right">
 
@@ -83,251 +83,203 @@ table, th, td {
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/submitYesNoPageSecond"
+										action="${pageContext.request.contextPath}/insertInstStakeholder"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-
-										<!-- <ul class="nav nav-tabs">
-											<li class="active"><a href="#home" data-toggle="tab">
-													<i class="fa fa-home"></i> Consultancy
-											</a></li>
-
-										</ul> -->
-
-										<!-- 	<div class="tab-content">
-											<div class="tab-pane fade in active" id="home"> -->
-										<!-- class="table table-bordered" -->
 										<div class="table-responsive">
 											<table id="table1" style="width: 100%; padding-bottom: 50px;">
 												<thead>
 													<tr>
-														<th width="40%"></th>
-														<th></th>
-														<th></th>
+														<th width="20%"></th>
+														<th width="10%"></th>
+														<th width="30%"></th>
 														<th width="40%"></th>
 													</tr>
 												</thead>
 
 												<tbody>
-													<c:forEach items="${sectionList}" var="sectionList">
 
-														<tr>
+													<c:choose>
+														<c:when test="${isEdit == 1}">
+															<c:forEach items="${tempFb}" var="tempFb">
 
+																<tr class="act_tr">
+																	<td>&nbsp;&nbsp;&nbsp;&nbsp;${tempFb.exVar1}</td>
 
-															<td><strong>${sectionList.yesnoSecname}</strong></td>
-															<td></td>
-															<td></td>
-															<td></td>
-														</tr>
+																	<td><c:choose>
+																			<c:when test="${tempFb.fbYesno==0}">
+																				<input type="radio" name="yesNo${tempFb.fbFromId}"
+																					value="1" id="yesNo${tempFb.fbFromId}"
+																					onchange="vissibledive(${tempFb.fbFromId},1)"> YES <input
+																					type="radio" id="yesNo${tempFb.fbFromId}"
+																					name="yesNo${tempFb.fbFromId}" value="0"
+																					onchange="vissibledive(${tempFb.fbFromId},0)"
+																					checked>
+																		NO
+																		</c:when>
+																			<c:otherwise>
 
-														<c:forEach items="${yesNoMasterList}"
-															var="yesNoMasterList">
+																				<input type="radio" name="yesNo${tempFb.fbFromId}"
+																					value="1" id="yesNo${tempFb.fbFromId}"
+																					onchange="vissibledive(${tempFb.fbFromId},1)"
+																					checked> YES <input type="radio"
+																					id="yesNo${tempFb.fbFromId}"
+																					name="yesNo${tempFb.fbFromId}" value="0"
+																					onchange="vissibledive(${tempFb.fbFromId},0)">
+																		NO
+																	 
+																	</c:otherwise>
+																		</c:choose></td>
 
-															<c:if
-																test="${yesNoMasterList.yesnoSeccode==sectionList.yesnoSeccode}">
-
-																<c:set var="find" value="0"></c:set>
-
-
-																<c:forEach items="${instituteYesNoList}"
-																	var="instituteYesNoList">
-
-																	<c:if
-																		test="${yesNoMasterList.yesnoSeccode==instituteYesNoList.sectionCode && yesNoMasterList.yesnoId==instituteYesNoList.yesnoId}">
-																		<c:set var="find" value="1"></c:set>
-																		<tr class="act_tr">
-																			<td>&nbsp;&nbsp;&nbsp;&nbsp;${yesNoMasterList.yesnoTitle}</td>
-																			<td></td>
-																			<td><input type="radio"
-																				name="yesNo${yesNoMasterList.yesnoId}" value="1"
-																				onchange="vissibledive(${yesNoMasterList.yesnoId},1)"
-																				checked> YES <input type="radio"
-																				id="yesNo${yesNoMasterList.yesnoId}"
-																				name="yesNo${yesNoMasterList.yesnoId}" value="0"
-																				onchange="vissibledive(${yesNoMasterList.yesnoId},0)">
-																				NO</td>
-
-																			<td>
-
-																				<div id="resps${yesNoMasterList.yesnoId}">
-																					<div class="col-sm-3">
-																						${yesNoMasterList.yesnoResponseTitle}</div>
-																					<div class="col-sm-5">
-																						<c:choose>
-																							<c:when
-																								test="${yesNoMasterList.yesnoResponseType==0}">
-																								<input type="text" maxlength="50"
-																									class="form-control"
-																									id="respnsevalue${yesNoMasterList.yesnoId}"
-																									name="respnsevalue${yesNoMasterList.yesnoId}"
-																									placeholder="Enter value"
-																									value="${instituteYesNoList.instYesnoResponse}">
-																							</c:when>
-																							<c:when
-																								test="${yesNoMasterList.yesnoResponseType==1}">
-																								<select
-																									id="respnsevalue${yesNoMasterList.yesnoId}"
-																									name="respnsevalue${yesNoMasterList.yesnoId}"
-																									class="form-control choosen">
-
-																									<c:forEach items="${yesNoMasterList.jsonArray}"
-																										var="jsonArray">
-																										<c:choose>
-																											<c:when
-																												test="${instituteYesNoList.instYesnoResponse==jsonArray}">
-																												<option value="${jsonArray}" selected>${jsonArray}</option>
-																											</c:when>
-																											<c:otherwise>
-																												<option value="${jsonArray}">${jsonArray}</option>
-																											</c:otherwise>
-																										</c:choose>
-
-																									</c:forEach>
-																								</select>
-																							</c:when>
-																							<c:otherwise>
-																								<input type="hidden"
-																									id="respnsevalue${yesNoMasterList.yesnoId}"
-																									name="respnsevalue${yesNoMasterList.yesnoId}"
-																									value="${instituteYesNoList.instYesnoResponse}">
-																							</c:otherwise>
-
-																						</c:choose>
-																					</div>
-																				</div>
-																			</td>
-																		</tr>
-																	</c:if>
-
-																</c:forEach>
-
-																<c:if test="${find==0}">
-
-																	<tr class="act_tr">
-																		<td>&nbsp;&nbsp;&nbsp;&nbsp;${yesNoMasterList.yesnoTitle}</td>
-																		<td></td>
-																		<td><input type="radio"
-																			name="yesNo${yesNoMasterList.yesnoId}"
-																			onchange="vissibledive(${yesNoMasterList.yesnoId},1)"
-																			value="1"> YES <input type="radio"
-																			id="yesNo${yesNoMasterList.yesnoId}"
-																			name="yesNo${yesNoMasterList.yesnoId}" value="0"
-																			onchange="vissibledive(${yesNoMasterList.yesnoId},0)"
-																			checked> NO</td>
-
-																		<td><div id="resps${yesNoMasterList.yesnoId}"
-																				style="display: none;">
-																				<div class="col-sm-3">
-																					${yesNoMasterList.yesnoResponseTitle}</div>
+																	<td>
+																		<div id="otherprevresps${tempFb.fbFromId}">
+																			<div class="form-group">
+																				<label class="control-label col-sm-3" for="status">Select
+																					Year <span class="text-danger">*</span>
+																				</label>
 																				<div class="col-sm-5">
-																					<c:choose>
-																						<c:when
-																							test="${yesNoMasterList.yesnoResponseType==0}">
-																							<input type="text" maxlength="50"
-																								class="form-control"
-																								id="respnsevalue${yesNoMasterList.yesnoId}"
-																								name="respnsevalue${yesNoMasterList.yesnoId}"
-																								placeholder="Enter value">
-																						</c:when>
-																						<c:when
-																							test="${yesNoMasterList.yesnoResponseType==1}">
-																							<select
-																								id="respnsevalue${yesNoMasterList.yesnoId}"
-																								name="respnsevalue${yesNoMasterList.yesnoId}"
-																								class="form-control">
-																								<c:forEach items="${yesNoMasterList.jsonArray}"
-																									var="jsonArray">
-																									<option value="${jsonArray}">${jsonArray}</option>
-																								</c:forEach>
-																							</select>
-																						</c:when>
-																						<c:otherwise>
-																							<input type="hidden"
-																								id="respnsevalue${yesNoMasterList.yesnoId}"
-																								name="respnsevalue${yesNoMasterList.yesnoId}"
-																								value="-">
-																						</c:otherwise>
+																					<select id="hod_quolf"
+																						name="quolif${tempFb.fbFromId}"
+																						class="form-control">
+																						<option ${tempFb.yrSem == '1'  ? 'Selected': '' }
+																							value="1">Yearwise</option>
+																						<option ${tempFb.yrSem == '2' ? 'Selected': '' }
+																							value="2">Semwise</option>
 
-																					</c:choose>
-
+																					</select>
 																				</div>
-																			</div></td>
-																	</tr>
-
-																</c:if>
-
-
-															</c:if>
-														</c:forEach>
-
-
-
-													</c:forEach>
-
-													<%-- <tr>
-														<td><strong>Others</strong></td>
-														<td></td>
-														<td><a data-toggle="modal" href="#myModal">
-																<button type="button" class="btn btn-info">Add</button>
-														</a></td>
-														<td></td>
-													</tr>
-
-													<c:set var="sr" value="0"></c:set>
-													<c:forEach items="${instituteYesNoList}"
-														var="instituteYesNoList" varStatus="count">
-														<c:if test="${instituteYesNoList.yesnoId==0}">
-															<c:set var="sr" value="${count.index}"></c:set>
-
-															<tr class="act_tr">
-																<td>&nbsp;&nbsp;&nbsp;&nbsp;${instituteYesNoList.yesnoDynamicTitle}</td>
-																<td></td>
-																<td><input type="radio" id="dynamicprevyesno${instituteYesNoList.instYesnoId}"
-																	name="dynamicprevyesno${instituteYesNoList.instYesnoId}" value="1"
-																	onchange="otherpreviousvissibledive(${instituteYesNoList.instYesnoId},1)" checked>
-																	YES <input type="radio" id="dynamicprevyesno${instituteYesNoList.instYesnoId}"
-																	name="dynamicprevyesno${instituteYesNoList.instYesnoId}" value="0"
-																	onchange="otherpreviousvissibledive(${instituteYesNoList.instYesnoId},0)">
-																	NO</td>
-
-																<td><div id="otherprevresps${instituteYesNoList.instYesnoId}">
-																		<div class="col-sm-3">Enter Value</div>
-																		<div class="col-sm-5">
-																			<input type="text" maxlength="50"
-																				class="form-control"
-																				id="dynamicprevyesnovalue${instituteYesNoList.instYesnoId}"
-																				name="dynamicprevyesnovalue${instituteYesNoList.instYesnoId}"
-																				placeholder="Enter value"
-																				value="${instituteYesNoList.instYesnoResponse}">
+																			</div>
 																		</div>
-																	</div></td>
-															</tr>
+																	</td>
+																	<td>
+																		<div id="resps${tempFb.fbFromId}">
+																			<div class="form-group">
+																				<label class="control-label col-sm-5" for="status">Select
+																					Feedback Process <span class="text-danger">*</span>
+																				</label>
+																				<div class="col-sm-7">
+																					<select id="hod_quolf"
+																						name="fbProcess${tempFb.fbFromId}"
+																						class="form-control">
+
+																						<option ${tempFb.fbProcess eq 'A'  ? 'Selected': '' }
+																							value="1">Feedback Collected,analyzed
+																							and action taken and feedback available on
+																							websites</option>
+																						<option ${tempFb.fbProcess eq 'B' ? 'Selected': '' }
+																							value="2">Collected,analyzed and action
+																							has been taken</option>
+																						<option ${tempFb.fbProcess eq 'C'  ? 'Selected': '' }
+																							value="1">Feedback Collected and
+																							analyzed</option>
+																						<option ${tempFb.fbProcess eq 'D' ? 'Selected': '' }
+																							value="2">Feedback Collected</option>
+ 
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																	</td>
 
 
+																</tr>
+																
+																<input type="hidden" name="fbFromId"
+																	value="${tempFb.fbFromId}">
+																	
+																<input type="hidden" name="stakFbId${tempFb.fbFromId}"
+																	value="${tempFb.stakFbId}">
+																	
+																	<input type="hidden" name="isEdit"
+																	value="${isEdit}">
+															</c:forEach>
 
-														</c:if>
-													</c:forEach> --%>
+														</c:when>
+														<c:otherwise>
+														 
+															<c:forEach items="${stakeFblist}" var="stakeFblist">
+
+																<tr class="act_tr">
+																	<td>&nbsp;&nbsp;&nbsp;&nbsp;${stakeFblist.feedbackFrom}</td>
+
+																	<td><input type="radio"
+																		name="yesNo${stakeFblist.feedbackId}" value="1"
+																		id="yesNo${stakeFblist.feedbackId}"
+																		onchange="vissibledive(${stakeFblist.feedbackId},1)"
+																		checked> YES <input type="radio"
+																		id="yesNo${stakeFblist.feedbackId}"
+																		name="yesNo${stakeFblist.feedbackId}" value="0"
+																		onchange="vissibledive(${stakeFblist.feedbackId},0)">
+																		NO</td>
+
+																	<td>
+																		<div id="otherprevresps${stakeFblist.feedbackId}">
+																			<div class="form-group">
+																				<label class="control-label col-sm-3" for="status">Select
+																					Year <span class="text-danger">*</span>
+																				</label>
+																				<div class="col-sm-5">
+																					<select id="hod_quolf"
+																						name="quolif${stakeFblist.feedbackId}"
+																						class="form-control">
+																						<option value="1">Yearwise</option>
+																						<option value="2">Semwise</option>
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																	</td>
+																	<td>
+																		<div id="resps${stakeFblist.feedbackId}">
+																			<div class="form-group">
+																				<label class="control-label col-sm-5" for="status">Select
+																					Feedback Process <span class="text-danger">*</span>
+																				</label>
+																				<div class="col-sm-7">
+																					<select id="hod_quolf"
+																						name="fbProcess${stakeFblist.feedbackId}"
+																						class="form-control">
+																						<option value="A">Feedback
+																							Collected,analyzed and action taken and feedback
+																							available on websites</option>
+																						<option value="B">Feedback
+																							Collected,analyzed and action has been taken</option>
+																						<option value="C">Feedback Collected and
+																							analyzed</option>
+																						<option value="D">Feedback Collected</option>
+																					</select>
+																				</div>
+																			</div>
+																		</div>
+																	</td>
+
+
+																</tr>
+																<input type="hidden" name="fbId"
+																	value="${stakeFblist.feedbackId}">
+															</c:forEach>
+ 														</c:otherwise>
+													</c:choose>
+
 
 												</tbody>
 
 											</table>
 										</div>
 
-										<input type="hidden" id="srindex" name="srindex"
-											value="0">
-										<!-- </div>
-
-
-										</div> -->
+										<!-- 										<input type="hidden" id="srindex" name="srindex" value="0">
+ -->
 										<br>
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-											<!-- 	<input type="submit" class="btn btn-primary" value="Submit"> -->
-					<button type="submit" id="sub_button" class="btn btn-primary"
-													><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>				
-												
-												
-												
+												<!-- 	<input type="submit" class="btn btn-primary" value="Submit"> -->
+												<button type="submit" id="sub_button"
+													class="btn btn-primary">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+
+
 											</div>
 										</div>
 									</form>
@@ -348,39 +300,7 @@ table, th, td {
 
 
 	</div>
-
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
-		class="modal fade" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
-					<h4 class="modal-title">Others</h4>
-				</div>
-				<div class="modal-body">
-					<%-- <form role="form"
-						action="${pageContext.request.contextPath}/showModuleForm"
-						method="get"> --%>
-
-
-					<div class="form-group">
-
-						<label class="control-label col-sm-6" for="othertitle">Title</label>
-						<!-- <div class="col-sm-3"> -->
-						<input type="text" class="form-control" id="othertitle"
-							name="othertitle" placeholder="Title">
-						<!-- </div> -->
-					</div>
-
-
-					<button type="button" class="btn btn-primary"
-						onclick="addDynamicYesNo()">ADD</button>
-					<!-- 	</form> -->
-				</div>
-			</div>
-		</div>
-	</div>
+ 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
@@ -389,74 +309,85 @@ table, th, td {
 
 
 	<script type="text/javascript">
-		function vissibledive(yesnoId,value) {
-			 
-			if(value==1){
-				
-				document.getElementById("resps"+yesnoId).style = "visible";
-				
-			}else{
-				document.getElementById("resps"+yesnoId).style = "display:none";
+		function vissibledive(yesnoId, value) {
+			alert("hiii...");
+
+			if (value == 1) {
+
+				document.getElementById("resps" + yesnoId).style = "visible";
+				document.getElementById("otherprevresps" + yesnoId).style = "visible";
+
+
+			} else {
+				document.getElementById("resps" + yesnoId).style = "display:none";
+				document.getElementById("otherprevresps" + yesnoId).style = "display:none";
 			}
 
 		}
 	</script>
 
 	<script type="text/javascript">
-		function othervissibledive(yesnoId,value) {
-			 
-			if(value==1){
-				
-				document.getElementById("otherresps"+yesnoId).style = "visible";
-				
-			}else{
-				document.getElementById("otherresps"+yesnoId).style = "display:none";
+		function othervissibledive(yesnoId, value) {
+
+			if (value == 1) {
+
+				document.getElementById("otherresps" + yesnoId).style = "visible";
+
+			} else {
+				document.getElementById("otherresps" + yesnoId).style = "display:none";
 			}
 
 		}
-		function otherpreviousvissibledive(yesnoId,value) {
-			 
-			if(value==1){
-				
-				document.getElementById("otherprevresps"+yesnoId).style = "visible";
-				
-			}else{
-				document.getElementById("otherprevresps"+yesnoId).style = "display:none";
+		function otherpreviousvissibledive(yesnoId, value) {
+
+			if (value == 1) {
+
+				document.getElementById("otherprevresps" + yesnoId).style = "visible";
+
+			} else {
+				document.getElementById("otherprevresps" + yesnoId).style = "display:none";
 			}
 
 		}
 	</script>
 	<script type="text/javascript">
 		function addDynamicYesNo() {
-			 
-			var othertitle = document.getElementById("othertitle").value; 
+
+			var othertitle = document.getElementById("othertitle").value;
 			var srindex = parseInt(document.getElementById("srindex").value);
-			
-			if(othertitle=="" || othertitle==null){
-				
+
+			if (othertitle == "" || othertitle == null) {
+
 				alert("Enter Title");
-				
-			}else{
-				
-				srindex=srindex+1;
-				
-				var acButton = '<input type="radio" name="dynamicyesno'+srindex+'" value="1" onchange="othervissibledive('+srindex+',1)" checked>'+
-				'YES <input type="radio" id="dynamicyesno'+srindex+'" name="dynamicyesno'+srindex+'" value="0" onchange="othervissibledive('+srindex+',0)"> NO'
-				
+
+			} else {
+
+				srindex = srindex + 1;
+
+				var acButton = '<input type="radio" name="dynamicyesno'
+						+ srindex + '" value="1" onchange="othervissibledive('
+						+ srindex + ',1)" checked>'
+						+ 'YES <input type="radio" id="dynamicyesno' + srindex
+						+ '" name="dynamicyesno' + srindex
+						+ '" value="0" onchange="othervissibledive(' + srindex
+						+ ',0)"> NO'
+
 				var div = '<div id="otherresps'+srindex+'"> <div class="col-sm-3">Enter Value</div> <div class="col-sm-5"> <input type="text" maxlength="50"'+
 				' class="form-control" id="dynamicyesnovalue'+srindex+'" name="dynamicyesnovalue'+srindex+'" placeholder="Enter value" > </div> </div>'
-				
-				
-				var tr = $('<tr class="act_tr" ></tr>'); 
-			  	tr.append($('<td  ></td>').html('&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" id="otherTitleName'+srindex+'" name="otherTitleName'+srindex+'" value="'+othertitle+'">'+othertitle));
-			  	tr.append($('<td  ></td>').html(''));
-			  	tr.append($('<td  ></td>').html(acButton)); 
-			  	tr.append($('<td   ></td>').html(div)); 
-				$('#table1 tbody').append(tr); 
-				
-				 document.getElementById("srindex").value= srindex;
+
+				var tr = $('<tr class="act_tr" ></tr>');
+				tr
+						.append($('<td  ></td>')
+								.html(
+										'&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" id="otherTitleName'+srindex+'" name="otherTitleName'+srindex+'" value="'+othertitle+'">'
+												+ othertitle));
+				tr.append($('<td  ></td>').html(''));
+				tr.append($('<td  ></td>').html(acButton));
+				tr.append($('<td   ></td>').html(div));
+				$('#table1 tbody').append(tr);
+
+				document.getElementById("srindex").value = srindex;
 			}
-			
 
 		}
 	</script>
