@@ -159,8 +159,16 @@ public class ReportController {
 			String title = "                 ";
 
 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
+String headingName=null;
+			try {
+				headingName=progList.get(0).getInstituteName();
+			}
+			catch (Exception e) {
 
-			ItextPageEvent event = new ItextPageEvent(header, title, "",progList.get(0).getInstituteName());
+				headingName="-"; 
+
+			}
+			ItextPageEvent event = new ItextPageEvent(header, title, "",headingName);
 
 			writer.setPageEvent(event);
 
@@ -519,7 +527,9 @@ System.err.println("rep  " +rep);
 		try {
 
 			model = new ModelAndView("report/prog_report1");
-
+			
+			String ac_year = request.getParameter("ac_year");
+ 			String temp_ac_year = request.getParameter("temp_ac_year");
 			HttpSession session = request.getSession();
 
 			int instituteId = (int) session.getAttribute("instituteId");
@@ -527,13 +537,16 @@ System.err.println("rep  " +rep);
 
 			map.add("instId", instituteId);
 			
-			map.add("acYearList", "4");
+			map.add("acYearList", ac_year);
 			
 			FacParticipationInBodies[] resArray = rest.postForObject(Constants.url + "getFacParticipationInBodies", map,
 					FacParticipationInBodies[].class);
 			List<FacParticipationInBodies> progList = new ArrayList<>(Arrays.asList(resArray));
 
 			model.addObject("list", progList);
+			
+			
+			
 
 			BufferedOutputStream outStream = null;
 			System.out.println("Inside Pdf showCustomerwisePdf");
@@ -563,7 +576,17 @@ System.err.println("rep  " +rep);
 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
 			String repDate = DF2.format(new Date());
 
-			ItextPageEvent event = new ItextPageEvent(header, title, "","Aaryatech");
+			String headingName=null;
+			try {
+				headingName=progList.get(0).getInstituteName();
+			}
+			catch (Exception e) {
+
+				headingName="-"; 
+
+			}
+			ItextPageEvent event = new ItextPageEvent(header, title, "",headingName);
+
 
 			writer.setPageEvent(event);
 			//writer.add(new Paragraph("Curricular Aspects"));
@@ -677,7 +700,7 @@ System.err.println("rep  " +rep);
 				 */
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
-				document.add(new Paragraph("For Academic Year : 2018-19"));
+				document.add(new Paragraph("For Academic Year :"+ temp_ac_year+""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 
@@ -759,7 +782,7 @@ System.err.println("rep  " +rep);
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						//String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList,"Aaryatech",reportName,"Academic Year 2019-2020 ");
+						wb = ExceUtil.createWorkbook(exportToExcelList,headingName,reportName,"Academic Year :"+temp_ac_year+" ");
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());

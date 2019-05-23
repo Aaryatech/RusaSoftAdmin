@@ -130,80 +130,83 @@ table, th, td {
 																	 
 																	</c:otherwise>
 																		</c:choose></td>
-																 
-																		<td>
-																			<div id="otherprevresps${tempFb.fbFromId}">
-																				<div class="form-group">
-																					<label class="control-label col-sm-3" for="status">Select
-																						Year <span class="text-danger">*</span>
-																					</label>
-																					<div class="col-sm-5">
-																						<select id="hod_quolf"
-																							name="quolif${tempFb.fbFromId}"
-																							class="form-control">
-																							<option ${tempFb.yrSem == '1'  ? 'Selected': '' }
-																								value="1">Yearwise</option>
-																							<option ${tempFb.yrSem == '2' ? 'Selected': '' }
-																								value="2">Semwise</option>
-																								<c:if test="${tempFb.fbYesno==0}">
-																								<option selected
-																								value="0">NA</option>
-																								</c:if>
 
-																						</select>
-																					</div>
+																	<td>
+																		<div id="otherprevresps${tempFb.fbFromId}">
+																			<div class="form-group">
+																				<label class="control-label col-sm-3" for="status">Select
+																					Year <span class="text-danger">*</span>
+																				</label>
+																				<div class="col-sm-5">
+																					<select id="hod_quolf"
+																						name="quolif${tempFb.fbFromId}"
+																						class="form-control">
+																						<option ${tempFb.yrSem == '1'  ? 'Selected': '' }
+																							value="1">Yearwise</option>
+																						<option ${tempFb.yrSem == '2' ? 'Selected': '' }
+																							value="2">Semwise</option>
+																						<c:if test="${tempFb.fbYesno==0}">
+																							<option selected value="0">NA</option>
+																						</c:if>
+
+																					</select>
 																				</div>
 																			</div>
-																		</td>
-																		<td>
-																			<div id="resps${tempFb.fbFromId}">
-																				<div class="form-group">
-																					<label class="control-label col-sm-5" for="status">Select
-																						Feedback Process <span class="text-danger">*</span>
-																					</label>
-																					<div class="col-sm-7">
-																						<select id="hod_quolf"
-																							name="fbProcess${tempFb.fbFromId}"
-																							class="form-control">
+																		</div>
+																	</td>
+																	<td>
+																		<div id="resps${tempFb.fbFromId}">
+																			<div class="form-group">
+																				<label class="control-label col-sm-5" for="status">Select
+																					Feedback Process <span class="text-danger">*</span>
+																				</label>
+																				<div class="col-sm-7">
+																					<select id="hod_quolf"
+																						name="fbProcess${tempFb.fbFromId}"
+																						class="form-control">
 
-																							<option
-																								${tempFb.fbProcess eq 'A'  ? 'Selected': '' }
-																								value="A">Feedback Collected,analyzed
-																								and action taken and feedback available on
-																								websites</option>
-																							<option
-																								${tempFb.fbProcess eq 'B' ? 'Selected': '' }
-																								value="B">Collected,analyzed and action
-																								has been taken</option>
-																							<option
-																								${tempFb.fbProcess eq 'C'  ? 'Selected': '' }
-																								value="C">Feedback Collected and
-																								analyzed</option>
-																							<option
-																								${tempFb.fbProcess eq 'D' ? 'Selected': '' }
-																								value="D">Feedback Collected</option>
-																								
-																									<c:if test="${tempFb.fbYesno==0}">
-																								<option selected
-																								value="0">NA</option>
-																								</c:if>
+																						<option
+																							${tempFb.fbProcess eq 'A'  ? 'Selected': '' }
+																							value="A">Feedback Collected,analyzed
+																							and action taken and feedback available on
+																							websites</option>
+																						<option
+																							${tempFb.fbProcess eq 'B' ? 'Selected': '' }
+																							value="B">Collected,analyzed and action
+																							has been taken</option>
+																						<option
+																							${tempFb.fbProcess eq 'C'  ? 'Selected': '' }
+																							value="C">Feedback Collected and
+																							analyzed</option>
+																						<option
+																							${tempFb.fbProcess eq 'D' ? 'Selected': '' }
+																							value="D">Feedback Collected</option>
 
-																						</select>
-																					</div>
+																						<c:if test="${tempFb.fbYesno==0}">
+																							<option selected value="0">NA</option>
+																						</c:if>
+
+																					</select>
 																				</div>
 																			</div>
-																		</td>
-																 
+																		</div>
+																	</td>
+
 
 																</tr>
+																<c:if test="${isEdit==0}">
 
-																<input type="hidden" name="fbFromId"
-																	value="${tempFb.fbFromId}">
+																	<input type="hidden" name="fbFromId"
+																		value="${tempFb.fbFromId}">
 
-																<input type="hidden" name="stakFbId${tempFb.fbFromId}"
-																	value="${tempFb.stakFbId}">
+																	<input type="hidden" name="stakFbId${tempFb.fbFromId}"
+																		value="${tempFb.stakFbId}">
 
-																<input type="hidden" name="isEdit" value="${isEdit}">
+																	<input type="hidden" name="isEdit" value="${isEdit}">
+
+
+																</c:if>
+
 															</c:forEach>
 
 														</c:when>

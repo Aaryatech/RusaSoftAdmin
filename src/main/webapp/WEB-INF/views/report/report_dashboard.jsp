@@ -82,6 +82,9 @@
 							</div>
 						</header>
 						<div class="content-body">
+						
+						<form id="reportForm">
+						
 
 							<div class="row" style="padding-bottom: 0px;">
 
@@ -95,7 +98,7 @@
 											<c:forEach items="${acaYearList}" var="acYear">
 												<option value="${acYear.yearId}">${acYear.academicYear}</option>
 											</c:forEach>
-
+											<option value="-5">Last Five Years</option>
 										</select> <span class="error_form text-danger" id="prog_type_field"
 											style="display: none;">Please select program type</span>
 									</div>
@@ -136,8 +139,7 @@
 							<br />
 							<div class="row" style="padding-bottom: 0px;">
 								<div class="col-lg-12">
-									<form id="reportForm">
-
+									
 										<div class="panel-group primary" id="accordion-2"
 											role="tablist" aria-multiselectable="true">
 
@@ -158,10 +160,10 @@
 														<div class="col-lg-10">1] No. of Certificate/Diploma
 															Programs</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,showProgReport)"><i
+															<a href="#" onclick="getProgReport(0,'showProgReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,)"><i
+																href="#" onclick="getProgReport(1,'showProgReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -170,10 +172,12 @@
 														<div class="col-lg-10">2] Percentage(%) of
 															Participation in various University Bodies</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getReport2(0)"><i
+															<a href="#"
+																onclick="getProgReport(0,'showFacPartiVarBodies')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getReport2(1)"><i
+																href="#"
+																onclick="getProgReport(1,'showFacPartiVarBodies')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -417,7 +421,7 @@
 											</div>
 
 											<!-- Criteria 2 Ends-->
-											
+
 											<!-- Criteria 3  -->
 											<div class="panel panel-default">
 												<div class="panel-heading" role="tab" id="headingOne3">
@@ -453,7 +457,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">3] Teacher Research Paper/Journal Information</div>
+														<div class="col-lg-10">3] Teacher Research
+															Paper/Journal Information</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -463,7 +468,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4] Teacher Research Paper/Journal Ratio</div>
+														<div class="col-lg-10">4] Teacher Research
+															Paper/Journal Ratio</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -483,7 +489,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">6]No. of Full Time Teachers in the Institute as Research Guide</div>
+														<div class="col-lg-10">6]No. of Full Time Teachers
+															in the Institute as Research Guide</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -493,7 +500,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] No of Research Project per Teacher</div>
+														<div class="col-lg-10">7] No of Research Project per
+															Teacher</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -503,7 +511,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">8] Intellectual Property Rights and Industry Institute Initiatives</div>
+														<div class="col-lg-10">8] Intellectual Property
+															Rights and Industry Institute Initiatives</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -513,7 +522,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">9] Plagarism and Code of Ethics</div>
+														<div class="col-lg-10">9] Plagarism and Code of
+															Ethics</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -523,7 +533,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">10] Ph. D. Awarded Information</div>
+														<div class="col-lg-10">10] Ph. D. Awarded
+															Information</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -533,7 +544,9 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">11] Book and Chapter Publication by Teachers and Papers in Conference Proceedings</div>
+														<div class="col-lg-10">11] Book and Chapter
+															Publication by Teachers and Papers in Conference
+															Proceedings</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -543,7 +556,9 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">12] No Book and Chapter Publication by Teachers and Papers in Conference Proceedings</div>
+														<div class="col-lg-10">12] No Book and Chapter
+															Publication by Teachers and Papers in Conference
+															Proceedings</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -553,7 +568,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">13] Award/Recognition for Extension Activity</div>
+														<div class="col-lg-10">13] Award/Recognition for
+															Extension Activity</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -563,7 +579,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">14] No of Student/Teachers Participation in Extension Activity</div>
+														<div class="col-lg-10">14] No of Student/Teachers
+															Participation in Extension Activity</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -592,7 +609,7 @@
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-														<div class="panel-body">
+													<div class="panel-body">
 														<div class="col-lg-10">17] Functional MoU's R&D</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
@@ -620,8 +637,7 @@
 												<div id="collapseOne-4" class="panel-collapse collapse "
 													role="tabpanel" aria-labelledby="headingOne4">
 													<div class="panel-body">
-														<div class="col-lg-10">1]ICT Enabled Facilities
-															 </div>
+														<div class="col-lg-10">1]ICT Enabled Facilities</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -631,7 +647,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">2]Budget on Infrastructure augmentation</div>
+														<div class="col-lg-10">2]Budget on Infrastructure
+															augmentation</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -642,7 +659,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">3] Library Automation and ILMS Information</div>
+														<div class="col-lg-10">3] Library Automation and
+															ILMS Information</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -653,7 +671,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4] Rare Book – manuscripts – special report</div>
+														<div class="col-lg-10">4] Rare Book – manuscripts –
+															special report</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -664,7 +683,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Availability of Special Facilities in Library</div>
+														<div class="col-lg-10">5] Availability of Special
+															Facilities in Library</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -675,7 +695,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">6] Expenditure on Purchase of Books and Journals</div>
+														<div class="col-lg-10">6] Expenditure on Purchase of
+															Books and Journals</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -686,7 +707,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] No of Students and Teachers using Library Per Day</div>
+														<div class="col-lg-10">7] No of Students and
+															Teachers using Library Per Day</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -708,7 +730,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">9] Internet connection Information</div>
+														<div class="col-lg-10">9] Internet connection
+															Information</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -719,7 +742,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">10] E-Content Development Facilities</div>
+														<div class="col-lg-10">10] E-Content Development
+															Facilities</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -730,7 +754,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">11] Expenditure on Physical & Academic Support Facilities</div>
+														<div class="col-lg-10">11] Expenditure on Physical &
+															Academic Support Facilities</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -742,9 +767,9 @@
 													</div>
 												</div>
 											</div>
-								<!-- Criteria 4 Ends-->			
-									<!-- Criteria 5  -->			
-								
+											<!-- Criteria 4 Ends-->
+											<!-- Criteria 5  -->
+
 											<div class="panel panel-default">
 												<div class="panel-heading" role="tab" id="headingOne5">
 													<h4 class="panel-title">
@@ -757,8 +782,8 @@
 												</div>
 												<div id="collapseOne-5" class="panel-collapse collapse "
 													role="tabpanel" aria-labelledby="headingOne5">
-													
-													
+
+
 													<div class="panel-body">
 														<div class="col-lg-10">1] Govt Scholership Scheme</div>
 														<div class="col-lg-2">
@@ -770,7 +795,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">2] Institutional Financial Support besides Govt</div>
+														<div class="col-lg-10">2] Institutional Financial
+															Support besides Govt</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -781,7 +807,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">3] Capability Enhancement & Development Schemes </div>
+														<div class="col-lg-10">3] Capability Enhancement &
+															Development Schemes</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -792,7 +819,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4] Students Benifited from VET</div>
+														<div class="col-lg-10">4] Students Benifited from
+															VET</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -803,7 +831,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Redressal of Stud Grievances</div>
+														<div class="col-lg-10">5] Redressal of Stud
+															Grievances</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -814,7 +843,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">6] EStudents Outstanding Performance (Sport and Cultural)</div>
+														<div class="col-lg-10">6] EStudents Outstanding
+															Performance (Sport and Cultural)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -825,7 +855,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] Organization of Sports & Cultural Activities - Competitions</div>
+														<div class="col-lg-10">7] Organization of Sports &
+															Cultural Activities - Competitions</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -836,7 +867,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">8] Avg % of Placement:  (Last Five Years)</div>
+														<div class="col-lg-10">8] Avg % of Placement: (Last
+															Five Years)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -847,7 +879,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">9] % of Students Progression ( Higher Education ): (Current YearData)</div>
+														<div class="col-lg-10">9] % of Students Progression
+															( Higher Education ): (Current YearData)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -858,7 +891,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">10] Students qualifying State/National/Internationa Exams  per year</div>
+														<div class="col-lg-10">10] Students qualifying
+															State/National/Internationa Exams per year</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -869,7 +903,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">11] Alumni Engagement </div>
+														<div class="col-lg-10">11] Alumni Engagement</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -879,21 +913,23 @@
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-													
-														<div class="panel-body">
-														<div class="col-lg-10">12] List of Distinguished Alumni </div>
-														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
-																class="fa fa-file-excel-o" style="color: green;"
-																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
-																class="fa fa-file-pdf-o" style="color: red;"
-																aria-hidden="true"></i>&nbsp;PDF</a>
-														</div>
-													</div>
-													
+
 													<div class="panel-body">
-														<div class="col-lg-10">13] Alumni Association Meeting Details </div>
+														<div class="col-lg-10">12] List of Distinguished
+															Alumni</div>
+														<div class="col-lg-2">
+															<a href="#" onclick="getProgReport(0)"><i
+																class="fa fa-file-excel-o" style="color: green;"
+																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																href="#" onclick="getProgReport(1)"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
+														</div>
+													</div>
+
+													<div class="panel-body">
+														<div class="col-lg-10">13] Alumni Association
+															Meeting Details</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -904,10 +940,10 @@
 														</div>
 													</div>
 												</div>
-											</div>											
-							<!-- Criteria 5 Ends-->		
-							<!-- Criteria 6  -->			
-								
+											</div>
+											<!-- Criteria 5 Ends-->
+											<!-- Criteria 6  -->
+
 											<div class="panel panel-default">
 												<div class="panel-heading" role="tab" id="headingOne6">
 													<h4 class="panel-title">
@@ -920,10 +956,11 @@
 												</div>
 												<div id="collapseOne-6" class="panel-collapse collapse "
 													role="tabpanel" aria-labelledby="headingOne6">
-													
-													
+
+
 													<div class="panel-body">
-														<div class="col-lg-10">1] Institutional Vision & Mission </div>
+														<div class="col-lg-10">1] Institutional Vision &
+															Mission</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -933,7 +970,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">2] E-Governance & Areas of Operation</div>
+														<div class="col-lg-10">2] E-Governance & Areas of
+															Operation</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -944,7 +982,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">3] Financial support to Professional membership/Conference/Workshop </div>
+														<div class="col-lg-10">3] Financial support to
+															Professional membership/Conference/Workshop</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -955,7 +994,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4] No of Faculty Financial support to Professional membership/Conference/Workshop</div>
+														<div class="col-lg-10">4] No of Faculty Financial
+															support to Professional membership/Conference/Workshop</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -966,7 +1006,9 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Average No of Training programmes organized for Teachers and non teaching staff (Professional Development, Administrative))</div>
+														<div class="col-lg-10">5] Average No of Training
+															programmes organized for Teachers and non teaching staff
+															(Professional Development, Administrative))</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -977,7 +1019,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">6] Training programmes organized for Teachers (Professional Development,)</div>
+														<div class="col-lg-10">6] Training programmes
+															organized for Teachers (Professional Development,)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -988,7 +1031,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] Training programmes organized for Non Teaching (Administrative)</div>
+														<div class="col-lg-10">7] Training programmes
+															organized for Non Teaching (Administrative)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -999,7 +1043,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">8] Avg % of Training Program attended by Teachers</div>
+														<div class="col-lg-10">8] Avg % of Training Program
+															attended by Teachers</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1010,7 +1055,9 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">9] Funds/Grants Received from Non-Government Organisation, Individuals, Other Agencies (in Cr.)</div>
+														<div class="col-lg-10">9] Funds/Grants Received from
+															Non-Government Organisation, Individuals, Other Agencies
+															(in Cr.)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1021,7 +1068,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">10] Quality Initiative by IQAC</div>
+														<div class="col-lg-10">10] Quality Initiative by
+															IQAC</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1032,7 +1080,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">11] Quality Assurance Initiatives </div>
+														<div class="col-lg-10">11] Quality Assurance
+															Initiatives</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1042,14 +1091,14 @@
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-													
-													 
+
+
 												</div>
-											</div>											
-							<!-- Criteria 6 Ends-->		
-							
-							<!-- Criteria 7 -->			
-								
+											</div>
+											<!-- Criteria 6 Ends-->
+
+											<!-- Criteria 7 -->
+
 											<div class="panel panel-default">
 												<div class="panel-heading" role="tab" id="headingOne7">
 													<h4 class="panel-title">
@@ -1062,10 +1111,11 @@
 												</div>
 												<div id="collapseOne-7" class="panel-collapse collapse "
 													role="tabpanel" aria-labelledby="headingOne7">
-													
-													
+
+
 													<div class="panel-body">
-														<div class="col-lg-10">1] Gender Equality Programmes </div>
+														<div class="col-lg-10">1] Gender Equality Programmes
+														</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1075,7 +1125,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">2] No of Gender Equality Program</div>
+														<div class="col-lg-10">2] No of Gender Equality
+															Program</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1086,7 +1137,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">3] Gender sensitivity in Providing Facility </div>
+														<div class="col-lg-10">3] Gender sensitivity in
+															Providing Facility</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1097,7 +1149,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4] Alternative Energy Initiative ( Current Data )</div>
+														<div class="col-lg-10">4] Alternative Energy
+															Initiative ( Current Data )</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1108,7 +1161,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Power Requirement met through LED Bulbs for Lighting</div>
+														<div class="col-lg-10">5] Power Requirement met
+															through LED Bulbs for Lighting</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1119,7 +1173,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">6] Expenditure on Green Initiatives & Waste Management</div>
+														<div class="col-lg-10">6] Expenditure on Green
+															Initiatives & Waste Management</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1130,7 +1185,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] Initiative to Address Locational Advantages & Disadvantages</div>
+														<div class="col-lg-10">7] Initiative to Address
+															Locational Advantages & Disadvantages</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1141,7 +1197,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">8] No of Initiative to Address Locational Advantages & Disadvantages</div>
+														<div class="col-lg-10">8] No of Initiative to
+															Address Locational Advantages & Disadvantages</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1152,7 +1209,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">9] Initiative to Engage & Contribute Local Community</div>
+														<div class="col-lg-10">9] Initiative to Engage &
+															Contribute Local Community</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1163,7 +1221,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">10] Human Values & Professional Ethics</div>
+														<div class="col-lg-10">10] Human Values &
+															Professional Ethics</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1174,7 +1233,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">11] Promotion of Universal Values</div>
+														<div class="col-lg-10">11] Promotion of Universal
+															Values</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1185,7 +1245,8 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">12] No of Promotion of Universal Values</div>
+														<div class="col-lg-10">12] No of Promotion of
+															Universal Values</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -1195,17 +1256,19 @@
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-													
-													 
+
+
 												</div>
-											</div>											
-							<!-- Criteria 7 Ends-->			
-											
+											</div>
+											<!-- Criteria 7 Ends-->
+
 										</div>
 										<input type="hidden" id="p" name="p" value="0">
-									</form>
+										<input type="hidden" id="temp_ac_year" name="temp_ac_year" value="0">
+									
 								</div>
 							</div>
+							</form>
 						</div>
 					</section>
 				</div>
@@ -1220,22 +1283,25 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		//use this function for all reports just get mapping form action name dynamically as like of prm from every report pdf,excel function	
-		function getProgReport(prm,mapping) {
+		function getProgReport(prm, mapping) {
 			if (prm == 1) {
 				document.getElementById("p").value = "1";
 			}
+			var el = document.getElementById('ac_year');
+			var text = el.options[el.selectedIndex].innerHTML;
+			document.getElementById("temp_ac_year").value = text;
 			var form = document.getElementById("reportForm");
 
 			form.setAttribute("target", "_blank");
 			form.setAttribute("method", "post");
 
-			form.action = ("${pageContext.request.contextPath}/showProgReport/");
+			form.action = ("${pageContext.request.contextPath}/"+mapping+"/");
 
 			form.submit();
 			document.getElementById("p").value = "0";
 		}
 
-		function getReport2(prm) {
+		/* function getReport2(prm) {
 			if (prm == 1) {
 				document.getElementById("p").value = "1";
 			}
@@ -1247,7 +1313,7 @@
 			form.action = ("${pageContext.request.contextPath}/showFacPartiVarBodies/");
 
 			form.submit();
-		}
+		} */
 	</script>
 
 	<script type="text/javascript">
