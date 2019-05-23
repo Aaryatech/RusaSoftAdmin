@@ -103,6 +103,8 @@
 															type="checkbox" name="selAll" id="selAll"
 															onClick="selectedInst(this)" /> Select All</th> -->
 														<th rowspan="2">Sr No</th>
+														<th rowspan="2">Faculty Name</th>
+														<th rowspan="2">Department</th>
 														<th rowspan="2">Name of Activity</th>
 														<th rowspan="2">Title</th>
 														<!-- <th rowspan="2">Financial Support</th> -->
@@ -124,13 +126,15 @@
 																id="trainingIds${count.index+1}"
 																value="${facEmpwr.facultyEmpwrmntId}" /></td> --%>
 															<td align="center">${count.index+1}</td>
+															<td align="left">${facEmpwr.facultyName}</td>
+															<td align="left">${facEmpwr.department}</td>
 															<td align="left">${facEmpwr.nameOfAcitvity}</td>
 															<td align="left">${facEmpwr.title}</td>
 															<%-- <td align="left">${facEmpwr.financialSupport}</td> --%>
 															<td align="left">${facEmpwr.amt_recvd_from}</td>
 															<td align="center">${facEmpwr.fromDate}</td>
 															<td align="center">${facEmpwr.toDate}</td>
-															<td align="left">${facEmpwr.exVar1}</td>
+															<td align="left">${facEmpwr.amount}</td>
 															<td align="center"><c:if test="${isEdit==1}">
 																	<a href="editFacultyEmpower/${facEmpwr.facultyEmpwrmntId}"><span class="glyphicon glyphicon-edit"
 																		title="Edit" data-animate=" animated fadeIn "

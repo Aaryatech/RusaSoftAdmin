@@ -30,6 +30,7 @@ import com.ats.rusasoft.faculty.model.FacultiContributionList;
 import com.ats.rusasoft.faculty.model.FacultyBookList;
 import com.ats.rusasoft.faculty.model.FacultyConferenceList;
 import com.ats.rusasoft.faculty.model.FacultyEmpowerment;
+import com.ats.rusasoft.faculty.model.GetFacultyEmpwrList;
 import com.ats.rusasoft.faculty.model.GetFacultyPhdGuide;
 import com.ats.rusasoft.faculty.model.PhdGuidList;
 import com.ats.rusasoft.master.model.prodetail.StudQualifyingExam;
@@ -2292,11 +2293,25 @@ public class FacultyModuleController {
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				RestTemplate restTemplate = new RestTemplate();
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("yearId", acYearId);
-				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				FacultyEmpowerment[] facEmpowrArr = restTemplate
+				
+				int yId = (int) session.getAttribute("acYearId");
+				
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("yearId", yId);
+				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+				map.add("isHod", userObj.getStaff().getIsHod());
+				map.add("isIQAC", userObj.getStaff().getIsIqac());
+				map.add("deptIdList", userObj.getStaff().getDeptId());
+				map.add("instituteId", userObj.getStaff().getInstituteId());
+
+				
+			/*	FacultyEmpowerment[] facEmpowrArr = restTemplate
 						.postForObject(Constants.url + "getFacEmpowerList", map, FacultyEmpowerment[].class);
-				List<FacultyEmpowerment> facEmpowrList = new ArrayList<FacultyEmpowerment>(Arrays.asList(facEmpowrArr));
+				List<FacultyEmpowerment> facEmpowrList = new ArrayList<FacultyEmpowerment>(Arrays.asList(facEmpowrArr));*/
+				GetFacultyEmpwrList[] facEmpowrArr = restTemplate
+						.postForObject(Constants.url + "getFacEmpowerList", map, GetFacultyEmpwrList[].class);
+				List<GetFacultyEmpwrList> facEmpowrList = new ArrayList<GetFacultyEmpwrList>(Arrays.asList(facEmpowrArr));
+				System.out.println("List="+facEmpowrList);
 				model.addObject("facEmpowrList", facEmpowrList);
 
 			} else {
@@ -2374,8 +2389,10 @@ public class FacultyModuleController {
 			fac.setFinancialSupport(fs);
 			if(fs == 0) {
 			fac.setAmt_recvd_from("NA");
+			fac.setExVar1("0");
 			}else {
 			fac.setAmt_recvd_from(request.getParameter("amt_rcvd_frm"));
+			fac.setExVar1(request.getParameter("amount"));
 			}
 			fac.setFromDate(request.getParameter("fromDate"));
 			fac.setToDate(request.getParameter("toDate"));
@@ -2385,9 +2402,9 @@ public class FacultyModuleController {
 			fac.setIsActive(1);
 			fac.setMakerEnterDatetime(curDateTime);
 			fac.setMakerUserId(userId);
-			fac.setExInt1(0);
+			fac.setExInt1(userObj.getGetData().getUserDetailId());
 			fac.setExInt2(0);
-			fac.setExVar1(request.getParameter("amount"));
+			
 			fac.setExVar2("NA");
 			
 			FacultyEmpowerment saveFacEmpwr = rest.postForObject(Constants.url+"/saveFacultyEmpowerment", fac, FacultyEmpowerment.class);
