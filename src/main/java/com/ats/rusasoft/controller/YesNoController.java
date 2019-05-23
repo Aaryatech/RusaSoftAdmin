@@ -819,7 +819,7 @@ public class YesNoController {
 	@RequestMapping(value = "/selectYestNoPageSecond", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageSecond(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("yesno/YesNoValues2");
+		ModelAndView model = new ModelAndView("yesno/stakeHolderFeedback");
 		try {
 
 			HttpSession session = request.getSession();
