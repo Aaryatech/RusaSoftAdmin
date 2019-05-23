@@ -64,7 +64,7 @@ table, th, td {
 					<section class="box ">
 
 						<header class="panel_header">
-							<h2 class="title pull-left">${title}-${isEdit}</h2>
+							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
 
@@ -163,17 +163,17 @@ table, th, td {
 																						class="form-control">
 
 																						<option ${tempFb.fbProcess eq 'A'  ? 'Selected': '' }
-																							value="1">Feedback Collected,analyzed
+																							value="A">Feedback Collected,analyzed
 																							and action taken and feedback available on
 																							websites</option>
 																						<option ${tempFb.fbProcess eq 'B' ? 'Selected': '' }
-																							value="2">Collected,analyzed and action
+																							value="B">Collected,analyzed and action
 																							has been taken</option>
 																						<option ${tempFb.fbProcess eq 'C'  ? 'Selected': '' }
-																							value="1">Feedback Collected and
+																							value="C">Feedback Collected and
 																							analyzed</option>
 																						<option ${tempFb.fbProcess eq 'D' ? 'Selected': '' }
-																							value="2">Feedback Collected</option>
+																							value="D">Feedback Collected</option>
  
 																					</select>
 																				</div>

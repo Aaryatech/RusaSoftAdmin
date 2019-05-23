@@ -158,10 +158,10 @@
 														<div class="col-lg-10">1] No. of Certificate/Diploma
 															Programs</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,showProgReport)"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,)"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -1220,7 +1220,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		//use this function for all reports just get mapping form action name dynamically as like of prm from every report pdf,excel function	
-		function getProgReport(prm) {
+		function getProgReport(prm,mapping) {
 			if (prm == 1) {
 				document.getElementById("p").value = "1";
 			}

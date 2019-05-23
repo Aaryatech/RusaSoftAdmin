@@ -586,7 +586,7 @@ public class YesNoController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("id", instYesnoId);
-System.err.println();
+			System.err.println();
 
 			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
 
@@ -597,8 +597,7 @@ System.err.println();
 			InstituteYesNo[] ary = restTemplate.postForObject(
 					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
 			instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
-			
-		
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -841,20 +840,18 @@ System.err.println();
 					.postForObject(Constants.url + "/getAllStakeByInstituteId", map, InstStakeholderFeedback[].class);
 			tempFb = new ArrayList<>(Arrays.asList(instituteYesNo));
 			model.addObject("tempFb", tempFb);
-			
+
 			System.out.println("tempFb:::" + tempFb.toString());
 			try {
-			if(tempFb.size()>0) {
-				System.out.println("size gt 0");
-				model.addObject("isEdit",1);
-				
-			}
-			else {
-				System.out.println("is edit 0 in else part");
-				model.addObject("isEdit",0);
-			}
-			}
-			catch (Exception e) {
+				if (tempFb.size() > 0) {
+					System.out.println("size gt 0");
+					model.addObject("isEdit", 1);
+
+				} else {
+					System.out.println("is edit 0 in else part");
+					model.addObject("isEdit", 0);
+				}
+			} catch (Exception e) {
 
 				System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
@@ -901,8 +898,14 @@ System.err.println();
 				if (Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())) == 1) {
  					System.out.println("yes " + i);
  					if(isEdit==1) {
- 						head.setStakFbId(Integer.parseInt(request.getParameter("stakFbId" + tempFb.get(i).getStakFbId())));
- 					} 
+ 						for (int j = 0; j < tempFb.size(); j++) {
+ 							if(tempFb.get(j).getFbFromId()== stfbList.get(i).getFeedbackId()) {
+ 						
+ 						head.setStakFbId(tempFb.get(j).getStakFbId());
+ 							break;
+ 							}
+ 							} 
+ 					}
  					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
 					head.setFbFromId(stfbList.get(i).getFeedbackId());
 					head.setFbProcess(request.getParameter("fbProcess" + stfbList.get(i).getFeedbackId()));
@@ -923,8 +926,14 @@ System.err.println();
 
 				else {
 					if(isEdit==1) {
- 						head.setStakFbId(Integer.parseInt(request.getParameter("stakFbId" + tempFb.get(i).getStakFbId())));
- 					} 
+ 						for (int j = 0; j < tempFb.size(); j++) {
+ 							if(tempFb.get(j).getFbFromId()== stfbList.get(i).getFeedbackId()) {
+ 						
+ 						head.setStakFbId(tempFb.get(j).getStakFbId());
+ 							break;
+ 							}
+ 							} 
+ 					}
 					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
 					System.out.println("no " + i);
 					head.setFbFromId(stfbList.get(i).getFeedbackId());
