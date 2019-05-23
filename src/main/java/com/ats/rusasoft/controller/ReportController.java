@@ -335,7 +335,7 @@ public class ReportController {
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
 				
-					for (int a = 0; a < 10; a++) {
+					
 						int cnt = 1;
 					for (int i = 0; i < progList.size(); i++) {
 						expoExcel = new ExportToExcel();
@@ -355,7 +355,7 @@ public class ReportController {
 						exportToExcelList.add(expoExcel);
 
 					}
-					}
+				
 
 					XSSFWorkbook wb = null;
 					try {
