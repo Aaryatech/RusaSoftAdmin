@@ -271,7 +271,7 @@ public class QualityInitiativeController {
 			if (viewAccess.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/internalQuality");
-				model.addObject("title", "Institute Internal Quality Initiatives List");
+				model.addObject("title", "Institute Internal Quality Initiatives");
 
 				Info addAccess = AccessControll.checkAccess("showInternalQualityInitiative",
 						"showInternalQualityInitiative", "0", "1", "0", "0", newModuleList);

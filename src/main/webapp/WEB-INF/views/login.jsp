@@ -147,10 +147,12 @@
 					
 					
 					
-					<!--  <p class="forgetmenot">
-                    <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
+					 <p class="forgetmenot">
+                    <label class="icheck-label form-label" for="rememberme">
+                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show Password</span>
+                    </label>
                 </p>
- -->
+
 
 
 					<p class="submit">
@@ -247,7 +249,20 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	function viewPassword() {
+		var pass1 = document.getElementById("userpassword");
 	
+
+		if (pass1.type == "password") {
+			pass1.type = "text";
+			
+		} else {
+			pass1.type = "password";
+			
+		}
+	}
+	</script>
 	
 	
 	<script>

@@ -187,6 +187,8 @@
 															<th width="20%">Male</th>
 															<th width="20%">Female</th>
 															<th width="20%">Transgender</th>
+															<th width="20%">No. of Seats Available</th>
+															
 
 
 														</tr>
@@ -212,6 +214,10 @@
 																			onkeyup="calculateSum()" class="txt"
 																			id="cast_t${cast.castId}" name="cast_t${cast.castId}"
 																			value="0" required></td>
+																		<td><input type="number" min="0" max="99999"
+																		onkeyup="seatCount()" class="sit"
+																			id="seats${cast.castId}" name="seats${cast.castId}"
+																			value="0" required></td>
 																	</tr>
 																</c:forEach>
 															</c:when>
@@ -220,7 +226,7 @@
 																<c:forEach items="${studAdmCastList}" var="cast"
 																	varStatus="count">
 																	<tr>
-																		<td>${count.index+1 }</td>
+																		<td>${count.index+1 }R</td>
 																		<td>${cast.castName}</td>
 
 																		<td><input type="number" min="0" max="99999"
@@ -238,6 +244,11 @@
 																			id="cast_t${cast.studentCatId}"
 																			name="cast_t${cast.studentCatId}"
 																			value="${cast.transStudent}" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			id="seats${cast.studentCatId}"
+																			onkeyup="seatCount()" class="sit"
+																			name="seats${cast.studentCatId}"
+																			value="${cast.seats}" required></td>
 
 
 																	</tr>
@@ -266,8 +277,15 @@
 														type="text"
 														style="color: black; border-radius: 15px; align-items: center;"
 														readonly placeholder="Total Student" id="total_stud">
+														
+														
+														 <label class="control-label" for="fPassingYear"><b>Total
+															Seats</b><span class="text-danger"></span> </label> <input
+														type="text"
+														style="color: black; border-radius: 15px; align-items: center;"
+														readonly placeholder="Total Seats" id="total_seat">
 													<span class="error_form text-danger"
-														id="total_stud_count_field" style="display: none;">All
+														id="total_seat_count_field" style="display: none;">All
 														fields can not be 0</span>
 
 												</div>
@@ -329,6 +347,15 @@
 					$("#total_stud_count_field").show()
 				} else {
 					$("#total_stud_count_field").hide()
+				}
+				
+				if ($("#total_seat").val() < 0) {
+					isError = true;
+
+					$("#total_seat").addClass("has-error")
+					$("#total_seat_count_field").show()
+				} else {
+					$("#total_seat_count_field").hide()
 				}
 
 				if (!isError) {
@@ -486,6 +513,31 @@
 			});
 			document.getElementById("total_stud").value = sum;
 		}
+		
+		
+		$(document).ready(function() {
+
+			$(".sit").each(function() {
+				$(this).keyup(function() {
+					seatCount();
+
+				});
+			});
+
+		});
+		
+		function seatCount() {
+			var sum = 0;
+			$(".sit").each(function() {
+
+				if (!isNaN(this.value) && this.value.length != 0) {
+					sum += parseFloat(this.value);
+				}
+				//getProgramTypeByProgram();
+
+			});
+			document.getElementById("total_seat").value = sum;
+		}
 	</script>
 
 
@@ -494,7 +546,9 @@
 		function getProgramTypeByProgram() {
 			var isEdit=${isEdit};
 			if(isEdit==1){
-			calculateSum();
+				seatCount();
+				calculateSum();
+			
 			}
 			var programType = document.getElementById("programType").value;
 			//alert("programType" + programType);
@@ -535,6 +589,7 @@
 		
 		function getStudAdmByProgType(){
 			var total=0;
+			var ttlSeat=0;
 
 			var progType = document.getElementById("programTypeId").value;
 			//alert("programType" + programType);
@@ -561,11 +616,13 @@
 						//alert("not null");
 
 					for(var i=0;i<data.length;i++){
-						
+						alert(JSON.stringify(data[i]));
 						document.getElementById("cast_m"+data[i].castId).value=data[i].maleStudent;
 						document.getElementById("cast_f"+data[i].castId).value=data[i].femaleStudent;
 						document.getElementById("cast_t"+data[i].castId).value=data[i].transStudent;
+						document.getElementById("seats"+data[i].castId).value=data[i].seats;
 						total=total + parseInt(data[i].catTotStudent);
+						ttlSeat=ttlSeat+parseInt(data[i].seats);
 						document.getElementById("isEdit").value="1";
 					}
 					}else{
@@ -575,6 +632,7 @@
 
 						});
 					}
+					document.getElementById("total_seat").value=ttlSeat;
 					document.getElementById("total_stud").value=total;
 
 					

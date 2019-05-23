@@ -84,6 +84,7 @@
 												<th>Female Students</th>
 												<th>Transgender Students</th>
 												<th>Total Students</th>
+												<th>Total Seats</th>
 												<!-- <th>Action</th>  -->
 											</tr>
 										</thead>
@@ -97,6 +98,7 @@
 													<td align="right">${studAdm.femaleStudent}</td>
 													<td align="right">${studAdm.transStudent}</td>
 													<td align="right">${studAdm.totStudent}</td>
+													<td align="right">${studAdm.exInt1}</td>
 
 													<%-- <td align="center">
 													<c:if test="${editAccess==0}"> <a href="#"

@@ -89,7 +89,7 @@ public class LibraryController {
 				int instituteId = (int) session.getAttribute("instituteId");
 				int userId = (int) session.getAttribute("userId");
 
-				model.addObject("title", "Library Basic Information List");
+				model.addObject("title", "Library Basic Information");
 
 				map = new LinkedMultiValueMap<>();
 				map.add("instituteId", instituteId);
@@ -402,7 +402,7 @@ public class LibraryController {
 				List<RareBook> rareBokList = new ArrayList<>(Arrays.asList(rrbook));
 
 				model.addObject("rareBokList", rareBokList);
-				model.addObject("title", "Rare Book Information List");
+				model.addObject("title", "Rare Book Information");
 
 				Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "1", "0", "0",
 						newModuleList);
@@ -631,7 +631,7 @@ public class LibraryController {
 				List<LibBookPurchase> libraryBooks = new ArrayList<>(Arrays.asList(libbookarr));
 
 				model.addObject("bookList", libraryBooks);
-				model.addObject("title", "Library Purchase Information List");
+				model.addObject("title", "Library Purchase Information");
 
 				Info add = AccessControll.checkAccess("showlibBookPurchased", "showlibBookPurchased", "0", "1", "0", "0",
 						newModuleList);
@@ -1776,7 +1776,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/instituteInfo");
 
-				model.addObject("title", "Institute Details List");
+				model.addObject("title", "Institute Information");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int acad_year = (int) session.getAttribute("acYearId");
@@ -1850,7 +1850,7 @@ public class LibraryController {
 
 				model = new ModelAndView("master/iqaclogin");
 
-				model.addObject("title", "Add Institute Details");
+				model.addObject("title", "Add Institute Information");
 
 				InstituteInfo editInst = new InstituteInfo();
 

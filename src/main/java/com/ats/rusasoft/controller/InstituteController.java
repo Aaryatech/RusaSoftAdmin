@@ -89,7 +89,7 @@ public class InstituteController {
 			} else {
 
 				model = new ModelAndView("instituteInfo/IQAC/instituteSupport");
-				model.addObject("title", "Other (Besides Government) Financial Support Scheme List");
+				model.addObject("title", "Other (Besides Government) Financial Support Scheme");
 				model.addObject("title1",
 						"Institute Support Financially by Awarding Scholarship/Freeships like schemes other than Government Schemes ");
 
@@ -586,7 +586,7 @@ public class InstituteController {
 				model = new ModelAndView("instituteInfo/IQAC/activityOrganized");
 				model.addObject("instActList", activityList);
 
-				model.addObject("title", "Institute Organized Activities List");
+				model.addObject("title", "Institute Organized Activities");
 				Info add = AccessControll.checkAccess("showActivityOrganized", "showActivityOrganized", "0", "1", "0",
 						"0", newModuleList);
 				Info edit = AccessControll.checkAccess("showActivityOrganized", "showActivityOrganized", "0", "0", "1",

@@ -1450,7 +1450,7 @@ public class InstituteProfInfoController {
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/amc");
 
-				model.addObject("title", "AMC Details List");
+				model.addObject("title", "Annual Maintenance(AMC)");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -1518,7 +1518,7 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_amc");
 
-				model.addObject("title", "Add AMC Details");
+				model.addObject("title", "Add Annual Maintenance(AMC)");
 
 				InstituteAMC editInst = new InstituteAMC();
 				model.addObject("editInst", editInst);
@@ -1557,7 +1557,7 @@ public class InstituteProfInfoController {
 				int edit_amc_id = Integer.parseInt(request.getParameter("edit_amc_id"));
 				System.out.println("edit_amc_id id is" + edit_amc_id);
 
-				model.addObject("title", " Edit AMC Details");
+				model.addObject("title", " Edit Annual Maintenance(AMC)");
 
 				map.add("amcId", edit_amc_id);
 
@@ -1767,7 +1767,7 @@ public class InstituteProfInfoController {
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/bestPrac");
 
-				model.addObject("title", "Best Practices Details");
+				model.addObject("title", "Best Practices");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -1845,7 +1845,7 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_best_prac");
 
-				model.addObject("title", "Add Best Practices Details");
+				model.addObject("title", "Add Best Practices");
 				InstituteBestPractices editInst = new InstituteBestPractices();
 				model.addObject("editInst", editInst);
 			}
@@ -1994,7 +1994,7 @@ public class InstituteProfInfoController {
 				int edit_prac_id = Integer.parseInt(request.getParameter("edit_prac_id"));
 				System.out.println("edit_prac_id id is" + edit_prac_id);
 
-				model.addObject("title", " Edit Best Practices Details");
+				model.addObject("title", " Edit Best Practices");
 
 				map.add("practicesId", edit_prac_id);
 

@@ -62,7 +62,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/instDistinctive");
 
-				model.addObject("title", "Institutional Distinctiveness List");
+				model.addObject("title", "Institutional Distinctiveness");
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
 
@@ -303,7 +303,7 @@ public class InstituteDistController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/humanValues");
-				model.addObject("title", "Initiative To Engage And Contribute to Local Community List");
+				model.addObject("title", "Initiative To Engage And Contribute to Local Community");
 
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
@@ -561,7 +561,7 @@ public class InstituteDistController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("instituteInfo/IQAC/list_research_center");
-				model.addObject("title", "Research Center Details");
+				model.addObject("title", "Research Center");
 
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
@@ -629,7 +629,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_research_center");
 
-				model.addObject("title", "Add Research Center Details");
+				model.addObject("title", "Add Research Center");
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -747,7 +747,7 @@ public class InstituteDistController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_research_center");
 
-				model.addObject("title", "Edit Research Center Details");
+				model.addObject("title", "Edit Research Center");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("rcId", rcId);

@@ -453,6 +453,11 @@ public class StudAdminController {
 								Integer.parseInt(request.getParameter("cast_m" + castList.get(i).getCastId())));
 						studAdmCat.setTransStudent(
 								Integer.parseInt(request.getParameter("cast_t" + castList.get(i).getCastId())));
+						
+						studAdmCat.setExInt1(
+								Integer.parseInt(request.getParameter("seats" + castList.get(i).getCastId())));
+						
+						
 						// studAdmCat.setCatTotStudent(Integer.parseInt(request.getParameter("cast_tot_stud"+castList.get(i).getCastId())));
 						studAdmCat.setCatTotStudent(studAdmCat.getFemaleStudent() + studAdmCat.getMaleStudent()
 								+ studAdmCat.getTransStudent());
@@ -461,7 +466,7 @@ public class StudAdminController {
 
 						studAdmCat.setStudentCatId(0);
 
-						studAdmCat.setExInt1(exInt1);
+						
 						studAdmCat.setExInt2(exInt1);
 						studAdmCat.setExVar1(exVar1);
 						studAdmCat.setExVar2(exVar1);
@@ -529,9 +534,10 @@ public class StudAdminController {
 
 						studAdmList.add(newCastObj);
 					}
-					//
+					
 
 					List<StudAdmCatwise> studListCatwise = new ArrayList<>();
+					System.err.println("studAdmCastList before for  " + studAdmList.toString());
 
 					for (int i = 0; i < studAdmList.size(); i++) {
 						StudAdmCatwise studAdmCat = new StudAdmCatwise();
@@ -544,6 +550,10 @@ public class StudAdminController {
 								.parseInt(request.getParameter("cast_m" + studAdmList.get(i).getCastId())));
 						studAdmCat.setTransStudent(Integer
 								.parseInt(request.getParameter("cast_t" + studAdmList.get(i).getCastId())));
+						studAdmCat.setExInt1(
+								Integer.parseInt(request.getParameter("seats" + studAdmList.get(i).getCastId())));
+						System.out.println("CatGor=>"+studAdmCat.toString());
+						
 						// studAdmCat.setCatTotStudent(Integer.parseInt(request.getParameter("cast_tot_stud"+castList.get(i).getCastId())));
 						studAdmCat.setCatTotStudent(studAdmCat.getFemaleStudent() + studAdmCat.getMaleStudent()
 								+ studAdmCat.getTransStudent());
@@ -552,7 +562,7 @@ public class StudAdminController {
 
 						studAdmCat.setStudentCatId(studAdmList.get(i).getStudentCatId());
 
-						studAdmCat.setExInt1(exInt1);
+						
 						studAdmCat.setExInt2(exInt1);
 						studAdmCat.setExVar1(exVar1);
 						studAdmCat.setExVar2(exVar1);

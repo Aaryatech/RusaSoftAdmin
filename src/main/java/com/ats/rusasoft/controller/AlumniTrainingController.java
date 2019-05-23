@@ -502,7 +502,7 @@ public class AlumniTrainingController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Student Placement Details List");
+				model.addObject("title", "Student Placement Details");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
@@ -868,7 +868,7 @@ public class AlumniTrainingController {
 
 			model = new ModelAndView("ProgramDetails/highEdu");
 
-			model.addObject("title", "Progression to Higher Education Details List");
+			model.addObject("title", "Progression to Higher Education Details");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
@@ -1539,7 +1539,7 @@ public class AlumniTrainingController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "New Courses Information List");
+				model.addObject("title", "New Courses Information");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();

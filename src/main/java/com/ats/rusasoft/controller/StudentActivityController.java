@@ -68,7 +68,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/studActivity");
-				model.addObject("title", "Student Activity Organized List");
+				model.addObject("title", "Student Activity Organized");
 				Info add = AccessControll.checkAccess("showStudOrgnizedActivity", "showStudOrgnizedActivity", "0", "1",
 						"0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showStudOrgnizedActivity", "showStudOrgnizedActivity", "0", "0",
@@ -318,7 +318,7 @@ public class StudentActivityController {
 			if (view.isError() == false) {
 
 				model = new ModelAndView("ProgramDetails/studActivityAttend");
-				model.addObject("title", "Student Participated Activity List");
+				model.addObject("title", "Student Participated Activity");
 
 				Info add = AccessControll.checkAccess("showStudAttendActivity", "showStudAttendActivity", "0", "1", "0",
 						"0", newModuleList);
