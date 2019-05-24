@@ -108,18 +108,15 @@
 																onClick="selectedInst(this)" /> Select All</th>
 															<th rowspan="2">Sr No</th>
 															<th rowspan="2">Title of Program</th>
-															<!-- <th style="text-align: center;" colspan="2">Date of
-																Conduction</th> -->
-															<th>From Date</th>
-															<th>To Date</th>
+															<th style="text-align: center;" colspan="2">Duration</th>
 															<th rowspan="2">No. of Participants</th>
 															<th rowspan="2">Action</th>
 														</tr>
-														<!-- <tr>
+													 <tr>
 															<th>From Date</th>
 															<th>To Date</th>
 
-														</tr> -->
+														</tr>
 													</thead>
 													<tbody>
 														<c:forEach items="${gndrList}" var="gndrList"

@@ -156,7 +156,7 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
 													min="1" autocomplete="off" name="participant" maxlength="7"
-													onkeypress='return restrictAlphabets(event)'
+													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
 													onchange="trim(this)" placeholder="No. of Participants"
 													value="${gndrEqual.gprogPcount}"> <span
 													class="error_form text-danger" id="error_formfield4"
@@ -485,6 +485,12 @@
 	</script>
 
 	<script type="text/javascript">
+	function clearDefault(a){
+		if(a.defaultValue==0)
+		{
+			a.value=""
+		}
+		};
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key

@@ -101,7 +101,7 @@ public class MastersController {
 
 		ModelAndView model = null;
 		RestTemplate restTemplate = new RestTemplate();
-
+		MultiValueMap<String, Object> map = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
@@ -114,13 +114,15 @@ public class MastersController {
 			} else {
 				model = new ModelAndView("master/hodRegistration");
 				model.addObject("title", "HOD Registration");
-
-				Designation[] designArr = restTemplate.getForObject(Constants.url + "/getAllDesignations",
+				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("desgList", Constants.facHOD);
+				Designation[] designArr = restTemplate.postForObject(Constants.url + "/getAllDesignations", map,
 						Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map = new LinkedMultiValueMap<String, Object>();
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
@@ -374,6 +376,7 @@ public class MastersController {
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
+		MultiValueMap<String, Object> map = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 		try {
@@ -388,13 +391,15 @@ public class MastersController {
 				model = new ModelAndView("master/hodRegistration");
 				model.addObject("title", "Edit HOD Registration");
 
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<String, Object>();				
+				map.add("desgList", Constants.facHOD);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
+				
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 			
 				Dept[] instArray = rest.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
@@ -404,7 +409,6 @@ public class MastersController {
 				model.addObject("deptList", deptList);
 
 				map = new LinkedMultiValueMap<String, Object>();
-
 				map.add("type", 1);
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);

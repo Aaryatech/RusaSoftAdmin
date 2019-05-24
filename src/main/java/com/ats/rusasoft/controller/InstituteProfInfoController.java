@@ -299,7 +299,7 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("instituteInfo/IQAC/instProfList");
 
-				model.addObject("title", "Alternate IQAC Details List");
+				model.addObject("title", "Alternate IQAC Details");
 
 				int inst_id = (int) session.getAttribute("instituteId");
 

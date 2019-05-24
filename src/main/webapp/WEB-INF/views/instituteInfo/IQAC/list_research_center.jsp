@@ -124,8 +124,8 @@
 														<th rowspan="2">Subject Name</th>
 														<th rowspan="2">Faculty Name</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
-														<th rowspan="2">No. of Guides</th>
-														<th rowspan="2">No. of Students</th>
+														<th rowspan="2">No. of Affiliated Guides</th>
+														<th rowspan="2">No. of Students Registered</th>
 														<th rowspan="2">Action</th>
 
 													</tr>

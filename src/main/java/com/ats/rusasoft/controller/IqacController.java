@@ -712,10 +712,15 @@ public class IqacController {
 
 				model.addObject("deptList", deptList);
 
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<>();
+				
+				map.add("desgList", Constants.facFaculty);
+				
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map,  Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
+				map = new LinkedMultiValueMap<>();
 				map.add("type", 1);
 
 				Quolification[] quolArray = rest.postForObject(Constants.url + "/getQuolificationList", map,
@@ -1104,7 +1109,7 @@ public class IqacController {
 	public ModelAndView editFaculity(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
 
 		System.out.println("Id:" + facultyId);
-
+		MultiValueMap<String, Object> map = null;
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -1119,24 +1124,26 @@ public class IqacController {
 			} else {
 
 				model = new ModelAndView("master/regstaff");
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				
+				map = new LinkedMultiValueMap<>();
 				map.add("deptIds", userObj.getStaff().getDeptId());
 				Dept[] instArray = rest.postForObject(Constants.url + "getDeptListDeptIdIn", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList edt:" + deptList.toString());
 				model.addObject("deptList", deptList);
 
-				map.add("id", facultyId);
+				map = new LinkedMultiValueMap<>();
 				map.add("type", 1);
-
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				System.err.println("quolfList " + quolfList.toString());
 				model.addObject("quolfList", quolfList);
 
+				map = new LinkedMultiValueMap<>();
 				map.add("type0", 0);
 				Quolification[] teachTo = rest.postForObject(Constants.url + "/getQuolificationListToTeach", map,
 						Quolification[].class);
@@ -1144,15 +1151,19 @@ public class IqacController {
 				System.err.println("teachList " + teachingList);
 				model.addObject("teachingList", teachingList);
 
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<>();
+				map.add("desgList", Constants.facFaculty);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
-				AcademicYear[] acadYrArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
+				
+				/*AcademicYear[] acadYrArray = rest.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
 						AcademicYear[].class);
 				List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(acadYrArray));
-				model.addObject("acaYearList", acaYearList);
+				model.addObject("acaYearList", acaYearList);*/
 
+				map.add("id", facultyId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				System.out.println("staff" + staff);
 
@@ -1294,10 +1305,13 @@ public class IqacController {
 				model.addObject("deptList", deptList);
 				
 
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("desgList", Constants.facDean);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("type", 1);
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);
@@ -1659,7 +1673,7 @@ public class IqacController {
 		System.out.println("Id:" + deanId);
 
 		ModelAndView model = null;
-
+		MultiValueMap<String, Object> map = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -1674,20 +1688,22 @@ public class IqacController {
 			} else {
 
 				model = new ModelAndView("master/deanReg");
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				
+				 			
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map = new LinkedMultiValueMap<>();
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList edt:" + deptList.toString());
 				model.addObject("deptList", deptList);
 
-
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("desgList", Constants.facDean);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations",map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
+				map = new LinkedMultiValueMap<>();
 				map.add("type", 1);
 
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
@@ -1696,7 +1712,8 @@ public class IqacController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
-
+			
+				map = new LinkedMultiValueMap<>();
 				map.add("id", deanId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				System.out.println("staff:" + staff);
@@ -1707,7 +1724,7 @@ public class IqacController {
 			}
 		} catch (Exception e) {
 
-			System.err.println("exception In editIqac at Iqac Contr" + e.getMessage());
+			System.err.println("exception In editDean at Iqac Contr" + e.getMessage());
 
 			e.printStackTrace();
 
@@ -1853,8 +1870,10 @@ public class IqacController {
 
 				model.addObject("deptList", deptList);
 				
-
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("desgList", Constants.facTrainPlace);
+				
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map,  Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
@@ -2095,7 +2114,7 @@ public class IqacController {
 		System.out.println("Id:" + tpoId);
 
 		ModelAndView model = null;
-
+		MultiValueMap<String, Object> map = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -2109,30 +2128,35 @@ public class IqacController {
 
 			} else {
 
-				model = new ModelAndView("master/training&placementOfficer");
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				model = new ModelAndView("master/training&placementOfficer");				
 				
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				
+				map = new LinkedMultiValueMap<>();
 				map.add("instId", userObj.getGetData().getUserInstituteId());
+				
 				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList edt:" + deptList.toString());
 				model.addObject("deptList", deptList);
 
-
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("desgList", Constants.facTrainPlace);
+				
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
+				map = new LinkedMultiValueMap<>();
 				map.add("type", 1);
-
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
 						Quolification[].class);
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
-
+				
+				map = new LinkedMultiValueMap<>();
 				map.add("id", tpoId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				System.out.println("staff:" + staff);
@@ -2288,8 +2312,10 @@ public class IqacController {
 
 				model.addObject("deptList", deptList);
 				
-
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<String, Object>();
+				
+				map.add("desgList", Constants.facExternlAct);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
@@ -2491,20 +2517,25 @@ public class IqacController {
 			} else {
 
 				model = new ModelAndView("master/extensionActOfficer");
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				MultiValueMap<String, Object> map = null;
 				
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map = new LinkedMultiValueMap<>();
 				map.add("instId", userObj.getGetData().getUserInstituteId());
+				
 				Dept[] instArray = rest.postForObject(Constants.url + "getAllDeptList", map, Dept[].class);
 				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
 				System.err.println("deptList edt:" + deptList.toString());
 				model.addObject("deptList", deptList);
 
-
-				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignations", Designation[].class);
+				map = new LinkedMultiValueMap<>();
+				map.add("desgList", Constants.facExternlAct);
+				
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
+				map = new LinkedMultiValueMap<>();
 				map.add("type", 1);
 
 				Quolification[] quolArray = rest.postForObject(Constants.url + "getQuolificationList", map,
@@ -2513,7 +2544,7 @@ public class IqacController {
 				System.err.println("quolfList " + quolfList.toString());
 
 				model.addObject("quolfList", quolfList);
-
+				map = new LinkedMultiValueMap<>();
 				map.add("id", extOffId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				System.out.println("staffExt:" + staff);

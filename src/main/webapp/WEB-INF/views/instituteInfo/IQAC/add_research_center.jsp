@@ -110,56 +110,56 @@
 													placeholder="Subject Name" onchange="return trim(this)"
 													value="${editValue.rcSubjectName}"> <span
 													class="error_form text-danger" id="error_rc_subject_name"
-													style="display: none;">Please enter Subject Name</span>
+													style="display: none;">Please enter subject name.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="rc_faculty_name">
+											<label class="control-label col-sm-2" for="rc_faculty_name">Faculty
 												Name <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="rc_faculty_name"
 													autocomplete="off" name="rc_faculty_name"
-													onchange="return trim(this)" placeholder="Name"
+													onchange="return trim(this)" placeholder="Faculty Name"
 													value="${editValue.rcFacultyName}"> <span
 													class="error_form text-danger" id="error_rc_faculty_name"
-													style="display: none;">Please enter Faculty Name</span>
+													style="display: none;">Please enter faculty name.</span>
 											</div>
 
 										</div>
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="rc_guide_count">No.
-												of Guides(In Subject)<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="rc_guide_count">No. of Affiliated 
+												Guides<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="rc_guide_count" min="1"
 													name="rc_guide_count"
-													placeholder="No. of Guides(In Subject)" autocomplete="off"
+													placeholder="No. of Affiliated Guides" autocomplete="off"
 													value="${editValue.rcGuideCount}"> <span
 													class="error_form text-danger" id="error_rc_guide_count"
-													style="display: none;">Please enter No. of Guides</span>
+													style="display: none;">Please enter of affiliated  guides.</span>
 											</div>
 										</div>
 
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="participant">No.
-												of Students<span class="text-danger">*</span>
+												Students Registered<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="rc_student_count" min="1"
-													name="rc_student_count" placeholder="No. of Students"
+													name="rc_student_count" placeholder="No. of Students Registered"
 													autocomplete="off" value="${editValue.rcStudentCount}">
 												<span class="error_form text-danger"
 													id="error_rc_student_count" style="display: none;">Please
-													enter No. of Students</span>
+													enter No. of students registered.</span>
 											</div>
 										</div>
 
@@ -174,11 +174,11 @@
 													id="fromDate" name="fromDate" placeholder="dd/mm/yyyy"
 													value="${editValue.rcValidityFromdt}" autocomplete="off">
 												<span class="error_form text-danger" id="error_fromDate"
-													style="display: none;">Please enter From date</span>
+													style="display: none;">Please enter From date.</span>
 													
 												<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">from Date must be smaller than to date.</span>
 
 											</div>
 										</div>
@@ -194,11 +194,11 @@
 													placeholder="dd/mm/yyyy"
 													value="${editValue.rcValidityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
-													style="display: none;">Please enter to date</span>
+													style="display: none;">Please enter to date.</span>
 													
 													<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">to date must be greater than from date.</span>
 											</div>
 										</div>
 

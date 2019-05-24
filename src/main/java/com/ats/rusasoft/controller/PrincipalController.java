@@ -48,7 +48,8 @@ public class PrincipalController {
 
 		ModelAndView model = null;
 		RestTemplate restTemplate = new RestTemplate();
-
+		MultiValueMap<String, Object> map = null;
+		
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		try {
@@ -63,13 +64,16 @@ public class PrincipalController {
 				model = new ModelAndView("master/principalReg");
 
 				model.addObject("title", "Principal Registration");
-
-				Designation[] designArr = restTemplate.getForObject(Constants.url + "/getAllDesignations",
+				map = new LinkedMultiValueMap<String, Object>();
+				
+				map.add("desgList", Constants.facPrincipal);
+				
+				Designation[] designArr = restTemplate.postForObject(Constants.url + "/getAllDesignations", map,
 						Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map = new LinkedMultiValueMap<String, Object>();
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());

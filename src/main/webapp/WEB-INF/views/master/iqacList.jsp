@@ -144,12 +144,13 @@
 																data-original-title="Block user"><span
 																class="glyphicon glyphicon-ban-circle"></span></a>
 
-														</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <a
+														</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <%-- <a
 														href="${pageContext.request.contextPath}/editIqac"
 														title="Change IQAC" rel="tooltip"
 														data-color-class="detail" data-animate=" animated fadeIn "
 														data-toggle="tooltip" data-original-title="Edit IQAC"><span
-															class="glyphicon glyphicon-list"></span></a> <%-- <a
+															class="glyphicon glyphicon-list"></span></a> --%>
+										 <%-- <a
 											href="${pageContext.request.contextPath}/showFacultyDetails" title="Add Librarian"
 											 rel="tooltip" data-color-class = "detail" data-animate=" animated fadeIn " data-toggle="tooltip" data-original-title="Block"><span
 												class="glyphicon glyphicon-list"></span></a>
