@@ -287,23 +287,23 @@
 													<div class="panel-body">
 														<div class="col-lg-10">1] Average % of Students from
 															other States/Countries – Yearwise</div>
-														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+														<a href="#" onclick="getProgReport(0,'showAvgStudYearwiseReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
-														</div>
+																href="#" onclick="getProgReport(1,'showAvgStudYearwiseReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 													</div>
-													<div class="panel-body">
+													<div class="panel-body"><!-- Done -->
 														<div class="col-lg-10">2] Average Enrollment
 															Percentage</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showAvgEnrollPrcntReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#" onclick="getProgReport(1,'showAvgEnrollPrcntReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
@@ -320,43 +320,45 @@
 													<div class="panel-body">
 														<div class="col-lg-10">4]Student Teacher Ratio</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showStudTeachrRatio')"><i
+															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showStudTeachrRatio')"><i class="fa fa-file-pdf-o"
+																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Differently abled Students
+														<div class="col-lg-10">5] Differently abled students
 															(Divyanjan)</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showDifferentlyAbledStud')"><i
+															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showDifferentlyAbledStud')"><i class="fa fa-file-pdf-o"
+																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">6] Teachers Using ICT</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showTeachersUsingIctReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#" onclick="getProgReport(1,'showTeachersUsingIctReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">7] Total no. of Mentors No.
 															of Students Assigned</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+																<a href="#" onclick="getProgReport(0,'showNoOfMentorsAssignedStudentReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#" onclick="getProgReport(1,'showNoOfMentorsAssignedStudentReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
