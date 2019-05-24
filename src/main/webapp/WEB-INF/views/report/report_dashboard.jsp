@@ -320,10 +320,10 @@
 													<div class="panel-body">
 														<div class="col-lg-10">4]Student Teacher Ratio</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showStudTeachrRatio')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showStudTeachrRatio')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -331,10 +331,10 @@
 														<div class="col-lg-10">5] Differently abled students
 															(Divyanjan)</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showDifferentlyAbledStud')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showDifferentlyAbledStud')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
