@@ -201,9 +201,17 @@ public class FacPersonalController {
 				List<Quolification> quolfList = new ArrayList<>(Arrays.asList(quolArray));
 
 				model.addObject("quolfList", quolfList);
-
-				List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
-						List.class);
+				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("desgList", Constants.facFaculty);
+				
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
+				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
+				model.addObject("desigList", designationList);
+				
+				
+				/*List<Designation> designationList = rest.getForObject(Constants.url + "/getAllDesignations",
+						List.class);*/
 				model.addObject("desigList", designationList);
 				map = new LinkedMultiValueMap<>();
 				map.add("id", userObj.getStaff().getFacultyId());
