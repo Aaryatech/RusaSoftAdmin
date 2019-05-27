@@ -307,13 +307,13 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">3] Admissions feeds against
-															reservation category</div>
+														<div class="col-lg-10">3] Admissions Feeds Against
+															Reservation Category</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showAdmisionAgnstResrvCat')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showAdmisionAgnstResrvCat')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -387,10 +387,10 @@
 														<div class="col-lg-10">10] Teaching Experience of
 															Full Time Teachers (Current Year Data)</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showTeachingExpOfFillTimFac')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showTeachingExpOfFillTimFac')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -413,6 +413,17 @@
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+														</div>
+													</div>
+													
+													<div class="panel-body">
+														<div class="col-lg-10">13] Full Time Faculty Available With Ph.D.s</div>
+														<div class="col-lg-2">
+															<a href="#" onclick="getProgReport(0,'showFulTimFacAvalblePhd')"><i
+																class="fa fa-file-excel-o" style="color: green;"
+																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																href="#" onclick="getProgReport(1,'showFulTimFacAvalblePhd')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
