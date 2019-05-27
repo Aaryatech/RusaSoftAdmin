@@ -1657,6 +1657,7 @@ public class StudentActivityController {
 		
 		try {
 			HttpSession session = request.getSession();
+			int yId = (int) session.getAttribute("acYearId");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
@@ -1676,7 +1677,7 @@ public class StudentActivityController {
 			studPer.setInstId(userObj.getGetData().getUserInstituteId());
 			studPer.setMakerUserId(userObj.getUserId());
 			studPer.setMakingTime(sf.format(date));
-			studPer.setExInt1(0);
+			studPer.setExInt1(yId);
 			studPer.setExInt2(0);
 			studPer.setExVar1("NA");
 			studPer.setExVar2("NA");
