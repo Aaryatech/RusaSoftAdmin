@@ -135,7 +135,28 @@
 											style="display: none;">Please enter program name</span>
 									</div>
 								</div>
+								
+								
 							</div>
+								<div class="row" style="padding-bottom: 0px;">
+							<div class="form-group">
+									<label class="control-label col-sm-1" for="catId">Category
+										  <span class="text-danger"></span>
+									</label>
+									<div class="col-sm-2">
+										<select id="catId" name="catId" class="form-control">
+
+											<c:forEach items="${castList}" var="castList">
+												<option value="${castList.castId}">${castList.castName}</option>
+											</c:forEach>
+										 
+										</select> <span class="error_form text-danger" id="error_catId"
+											style="display: none;">Please select Category</span>
+									</div>
+
+								 
+									</div>
+									</div>
 							<br />
 							<div class="row" style="padding-bottom: 0px;">
 								<div class="col-lg-12">
@@ -310,11 +331,12 @@
 														<div class="col-lg-10">3] Admissions Feeds Against
 															Reservation Category</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showAdmisionAgnstResrvCat')"><i
+															<a href="#" onclick="getProgReport(0,'showAdmissionsAgainstCatReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showAdmisionAgnstResrvCat')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#" onclick="getProgReport(1,'showAdmissionsAgainstCatReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
@@ -398,10 +420,10 @@
 														<div class="col-lg-10">11] Students Performance &
 															Learning Outcomes</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showStudPerformanceOutconmeReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showStudPerformanceOutconmeReport')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -674,10 +696,10 @@
 														<div class="col-lg-10">3] Library Automation and
 															ILMS Information</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showLibLMSInfoReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showLibLMSInfoReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -686,10 +708,10 @@
 														<div class="col-lg-10">4] Rare Book – manuscripts –
 															special report</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showRareBookManuscriptReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showRareBookManuscriptReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -698,10 +720,10 @@
 														<div class="col-lg-10">5] Availability of Special
 															Facilities in Library</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+														<a href="#" onclick="getProgReport(0,'showLibSpecFacilitiesReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showLibSpecFacilitiesReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
