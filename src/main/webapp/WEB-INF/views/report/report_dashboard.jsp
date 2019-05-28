@@ -154,6 +154,23 @@
 											style="display: none;">Please select Category</span>
 									</div>
 
+								
+									<label class="control-label col-sm-1" for="catId">E-Content												
+										Development Facility  <span class="text-danger"></span>
+									</label>
+									<div class="col-sm-3">
+										<select id="e_contentType" name="e_contentType"
+													class="form-control">
+													
+															<option value="Media Center" >Media Center</option>
+															<option value="Recording Facility" >Recording Facility</option>
+										 					<option value="Lecture Capturing System" >Lecture Capturing System</option>
+
+												</select>
+									</div>
+
+								 
+									
 								 
 									</div>
 									</div>
@@ -754,10 +771,10 @@
 													<div class="panel-body">
 														<div class="col-lg-10">8] Student-Computer Ratio</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showStudentCompterRatio')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showStudentCompterRatio')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -778,10 +795,10 @@
 														<div class="col-lg-10">10] E-Content Development
 															Facilities</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showEContntDevFac')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showEContntDevFac')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
