@@ -121,7 +121,7 @@
 
 
 												</select> <span class="error_form text-danger" id="fin_year_id_field"
-													style="display: none;">Please select financial year</span>
+													style="display: none;">Please select financial year.</span>
 											</div>
 										</div>
 										<div class="form-group">

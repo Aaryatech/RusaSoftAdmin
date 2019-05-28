@@ -165,7 +165,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="utilizedAmt">Budget
-												Utilized for Infrastructure ${budRupees}<span class="text-danger">*</span>
+												Utilized on Infrastructure ${budRupees}<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control"
@@ -195,7 +195,7 @@
 													name="ttl_expd" min="0" max="100000000"
 													autocomplete="off" maxlength="9"
 													onkeypress='return restrictAlphabets(event)'
-													placeholder=" Budget Allocated for Infrastructure in ${budRupees}"
+													placeholder=" Total Expenditure of Institute excluding Salary in ${budRupees}"
 													value="${budget.exInt1}"> <span
 													class="error_form text-danger" id="budget_utilized_field"
 													style="display: none;">Please enter utilized budget

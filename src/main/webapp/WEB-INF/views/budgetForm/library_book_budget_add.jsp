@@ -120,7 +120,7 @@
 														</c:choose>
 													</c:forEach>
 												</select> <span class="error_form text-danger" id="error_year"
-													style="display: none;">Please Select Year</span>
+													style="display: none;">Please select year.</span>
 
 											</div>
 										</div>
