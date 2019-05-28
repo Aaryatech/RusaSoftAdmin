@@ -9,6 +9,15 @@ public class StudPrfrmInFinlYr {
 	private String nameOfProgram;
 	private String programName;
 	private String instituteName;
+	private String acadYear;
+	
+	
+	public String getAcadYear() {
+		return acadYear;
+	}
+	public void setAcadYear(String acadYear) {
+		this.acadYear = acadYear;
+	}
 	public int getStudPerformId() {
 		return studPerformId;
 	}
@@ -56,7 +65,7 @@ public class StudPrfrmInFinlYr {
 	public String toString() {
 		return "StudPrfrmInFinlYr [studPerformId=" + studPerformId + ", noStudAppear=" + noStudAppear + ", noStudPass="
 				+ noStudPass + ", passingPer=" + passingPer + ", nameOfProgram=" + nameOfProgram + ", programName="
-				+ programName + ", instituteName=" + instituteName + "]";
+				+ programName + ", instituteName=" + instituteName + ", acadYear=" + acadYear + "]";
 	}
 	
 	
