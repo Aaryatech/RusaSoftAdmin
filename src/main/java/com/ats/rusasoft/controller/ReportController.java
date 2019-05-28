@@ -1115,13 +1115,13 @@ public class ReportController {
 	@RequestMapping(value = "/showAvgStudYearwiseReport", method = RequestMethod.POST)
 	public void showAvgStudYearwiseReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation :  ";
+		String reportName = "Teaching -Learing and Evaluation : Average % of Students from other States/ Countries – Yearwise  ";
 
 		ModelAndView model = null;
 		try {
 
 			model = new ModelAndView("report/prog_report1");
-
+			
 			String ac_year = request.getParameter("ac_year");
 			String temp_ac_year = request.getParameter("temp_ac_year");
 			HttpSession session = request.getSession();
@@ -1131,7 +1131,7 @@ public class ReportController {
 
 			map.add("instId", instituteId);
 
-			map.add("acYearList", ac_year);
+			map.add("acYearList", "-5");
 
 			GetAvgStudYearwise[] resArray = rest.postForObject(Constants.url + "getAvgStudYearwiseLocWise", map,
 					GetAvgStudYearwise[].class);
@@ -1183,7 +1183,8 @@ public class ReportController {
 			PdfPTable table = new PdfPTable(7);
 
 			table.setHeaderRows(1);
-
+			double f1=0;double f3=0;double f2=0;double f4=0;double f5=0;
+			double s1=0;double s3=0;double s2=0;double s4=0;double s5=0;
 			try {
 				table.setWidthPercentage(100);
 				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
@@ -1237,6 +1238,7 @@ public class ReportController {
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
+			 
 
 				int index = 0;
 				for (int i = 0; i < progList.size(); i++) {
@@ -1259,7 +1261,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud1(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -1277,17 +1279,117 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud4(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud5(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
+ 
+					f1=f1+prog.getAcYearAdmiStud1();
+					f2=f2+prog.getAcYearAdmiStud2();
+					f3=f3+prog.getAcYearAdmiStud3();
+					f4=f4+prog.getAcYearAdmiStud4();
+					f5=f5+prog.getAcYearAdmiStud5();
+					s1=prog.getTotStud1();
+					s2=prog.getTotStud2();
+					s3=prog.getTotStud3();
+					s4=prog.getTotStud4();
+					s5=prog.getTotStud5();
 
+					
 				}
+				
+				System.err.println("f1 is "+f1);
+				System.err.println("s1 is "+s1);
+	String r1=null;String r2=null;String r3=null;String r4=null;String r5=null;	
+	  DecimalFormat decimalFormat = new DecimalFormat("0.00"); 
+
+	if(s1!=0) {
+		r1=decimalFormat.format((f1/s1)*100);
+	}else {
+		r1="0";
+	}
+	if(s2!=0) {
+		r2=decimalFormat.format((f2/s2)*100);
+	}else {
+		r2="0";
+	}
+	if(s3!=0) {
+		r3=decimalFormat.format((f3/s3)*100);
+	}else {
+		r3="0";
+	}
+	if(s4!=0) {
+		r4=decimalFormat.format((f4/s4)*100);
+	}else {
+		r4="0";
+	}
+	if(s5!=0) {
+		r5=decimalFormat.format((f5/s5)*100);
+	}else {
+		r5="0";
+	}
+				
+	PdfPCell cell1;
+					cell1 = new PdfPCell(new Phrase(String.valueOf(index+1), headFontData));
+				  cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				  
+				  table.addCell(cell1);
+				  
+				  cell1 = new PdfPCell(new Phrase("" +"%Year", headFontData));
+				  cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+				  
+				  table.addCell(cell1);
+				  
+				  cell1 = new PdfPCell(new Phrase("" +r1 ,
+				  headFontData)); cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				  
+				  table.addCell(cell1);
+				  
+				  cell1 = new PdfPCell(new Phrase("" +r2 ,
+				  headFontData)); cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				  
+				  table.addCell(cell1);
+				  
+				  cell1 = new PdfPCell(new Phrase("" + r3 ,
+				  headFontData)); cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				  
+				  table.addCell(cell1);
+				  
+				  cell1 = new PdfPCell(new Phrase("" + r4 ,
+				  headFontData)); cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				  
+				  table.addCell(cell1);
+				  
+				  cell1 = new PdfPCell(new Phrase("" + r5,
+				  headFontData)); cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				  cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				  
+				  table.addCell(cell1);
+				 
+				 
+				double a = 0;
+				double c = 0;
+				for (int i = 0; i < progList.size(); i++) {
+					a = a + progList.get(i).getAcYearAdmiStud1() + progList.get(i).getAcYearAdmiStud2()
+							+ progList.get(i).getAcYearAdmiStud3() + progList.get(i).getAcYearAdmiStud4()
+							+ progList.get(i).getAcYearAdmiStud5();
+					c = c + progList.get(i).getTotStud1() + progList.get(i).getTotStud2()
+							+ progList.get(i).getTotStud3() + progList.get(i).getTotStud4()
+							+ progList.get(i).getTotStud5();
+				}
+				
+				double n=Double.parseDouble(r1)+Double.parseDouble(r2)+Double.parseDouble(r4)+Double.parseDouble(r5)+Double.parseDouble(r3);
 
 				document.open();
 				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
@@ -1300,6 +1402,13 @@ public class ReportController {
 				document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
+				document.add(
+						new Paragraph("Total No. of Students from other state and countries :" + a + ""));
+				document.add(new Paragraph("\n"));
+				document.add(new Paragraph("Total No. of Students Enrolled :" + c + ""));
+
+				document.add(new Paragraph("\n"));
+				document.add(new Paragraph("Average % :" + decimalFormat.format(n/5) + ""));
 
 				int totalPages = writer.getPageNumber();
 
@@ -2747,7 +2856,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "Academic Year :-");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, " ");
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -3030,7 +3139,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "Academic Year :-");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, " ");
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -3489,21 +3598,21 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAvgStudent(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAvgTeacher(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 					n1 = ((prog.getAvgStudent() + prog.getAvgTeacher())
 							/ (prog.getNoOfFullTimeFaculty() + prog.getNoOfCurrentAdmitedStnt())) * 100;
-					
+
 					cell = new PdfPCell(new Phrase("" + decimalFormat.format(n1), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -3522,9 +3631,9 @@ public class ReportController {
 				document.add(table);
 				document.add(new Paragraph("\n"));
 				double n = 0.0;
-				
+
 				for (int i = 0; i < progList.size(); i++) {
-					document.add(new Paragraph("For Academic Year :" + progList.get(i).getAcademicYear()+ ""));
+					document.add(new Paragraph("For Academic Year :" + progList.get(i).getAcademicYear() + ""));
 					document.add(new Paragraph(
 							"Total No. of Faculty in the Institute:" + progList.get(i).getNoOfFullTimeFaculty() + ""));
 					document.add(new Paragraph("Total No. of Students on roll in the Institute :"
@@ -3593,13 +3702,14 @@ public class ReportController {
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
 						n = ((progList.get(i).getAvgStudent() + progList.get(i).getAvgTeacher())
-								/ (progList.get(i).getNoOfFullTimeFaculty() + progList.get(i).getNoOfCurrentAdmitedStnt()))
+								/ (progList.get(i).getNoOfFullTimeFaculty()
+										+ progList.get(i).getNoOfCurrentAdmitedStnt()))
 								* 100;
 						rowData.add("" + (i + 1));
 						rowData.add("" + progList.get(i).getAcademicYear());
 						rowData.add("" + progList.get(i).getAvgStudent());
 						rowData.add("" + progList.get(i).getAvgTeacher());
-						rowData.add("" +decimalFormat.format(n) );
+						rowData.add("" + decimalFormat.format(n));
 
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
