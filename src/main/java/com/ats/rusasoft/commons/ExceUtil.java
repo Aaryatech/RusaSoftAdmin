@@ -25,10 +25,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExceUtil {
 	
 	public static int incCellValue=4;
+	//public static XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName,String filterValue,String reportSummary,Character endChar) throws IOException {
 	public static XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName,String filterValue,String reportSummary,Character endChar) throws IOException {
+		 
 		XSSFWorkbook wb = new XSSFWorkbook();
 		XSSFSheet sheet = wb.createSheet("Sheet1");
-       System.err.println();
+       System.err.println("instName"+instName);
 		sheet.createFreezePane(0, 4);
 		//Character endChar='H';
 			CellStyle style=wb.createCellStyle();
@@ -42,7 +44,7 @@ public class ExceUtil {
 	        Cell titleCell = titleRow.createCell(0);
 	        titleCell.setCellValue(instName);
 	        titleCell.setCellStyle(style);
-	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$"+endChar+"+$1"));
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$"+endChar+"$1"));
 	        
 	       
 	        CellStyle style2=wb.createCellStyle();
