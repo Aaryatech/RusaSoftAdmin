@@ -1710,14 +1710,14 @@ public class RusaReportsController {
 			//map.add("acYear", ac_year);
 			map.add("instId", instituteId);
 
-			FulTimFacultyWithPhd[] resArray = rest.getForObject(Constants.url + "/getFulTimFacAvalblePhd",
+			FulTimFacultyWithPhd[] resArray = rest.postForObject(Constants.url + "/getFulTimFacAvalblePhd",map,
 					FulTimFacultyWithPhd[].class);
 			List<FulTimFacultyWithPhd> facList = new ArrayList<>(Arrays.asList(resArray));
 
 			model.addObject("list", facList);
 
 			Document document = new Document(PageSize.A4);
-			// 50, 45, 50, 60
+			
 			document.setMargins(Constants.marginLeft, Constants.marginRight, Constants.marginTop,
 					Constants.marginBottom);
 			document.setMarginMirroring(false);
