@@ -24,13 +24,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExceUtil {
 	
-	
-	public static XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName,String filterValue) throws IOException {
+	public static int incCellValue=4;
+	public static XSSFWorkbook createWorkbook(List<ExportToExcel> exportToExcelList,String instName,String reportName,String filterValue,String reportSummary,Character endChar) throws IOException {
 		XSSFWorkbook wb = new XSSFWorkbook();
 		XSSFSheet sheet = wb.createSheet("Sheet1");
        System.err.println();
 		sheet.createFreezePane(0, 4);
-       
+		//Character endChar='H';
 			CellStyle style=wb.createCellStyle();
 			style.setAlignment(CellStyle.ALIGN_RIGHT);
 			style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
@@ -42,7 +42,7 @@ public class ExceUtil {
 	        Cell titleCell = titleRow.createCell(0);
 	        titleCell.setCellValue(instName);
 	        titleCell.setCellStyle(style);
-	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$F$1"));
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$"+endChar+"+$1"));
 	        
 	       
 	        CellStyle style2=wb.createCellStyle();
@@ -67,7 +67,7 @@ public class ExceUtil {
 	        
 	        titleCell2.setCellValue(reportName);
 	        
-	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$F$2"));
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$"+endChar+"$2"));
 	       
 	        CellStyle style3=wb.createCellStyle();
 		    style3.setAlignment(CellStyle.ALIGN_LEFT);
@@ -81,10 +81,11 @@ public class ExceUtil {
 	        titleCell3.setCellStyle(style3);
 	        titleCell3.setCellValue(""+filterValue);//Need Dynamic
 	        
-	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$3:$F$3"));
+	        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$3:$"+endChar+"$3"));
 	       
      
-
+         System.err.println("Excel size  " +exportToExcelList.size());
+         
 		for (int rowIndex = 0; rowIndex < exportToExcelList.size(); rowIndex++) {
 			XSSFRow row = sheet.createRow(rowIndex+3);
 			for (int j = 0; j < exportToExcelList.get(rowIndex).getRowData().size(); j++) {
@@ -97,6 +98,21 @@ public class ExceUtil {
 			}
 			
 		}
+		    
+		    int cellNum=exportToExcelList.size()+incCellValue;
+		    Sheet sh = wb.getSheetAt(0);
+	     //   Row r = sh.k(sh.getPhysicalNumberOfRows());
+		    Row titleRow4 = sheet.createRow(sh.getPhysicalNumberOfRows());
+	        titleRow4.setHeightInPoints(20);
+	        titleRow4.setRowStyle(style2);
+	        
+	        Cell titleCell4 = titleRow4.createCell(0);
+	        titleCell4.setCellStyle(style2);
+	        titleCell4.setCellValue(reportSummary);//Need Dynamic
+	      
+	        String s= "$A$"+cellNum+":$"+endChar+"$"+cellNum;
+	        sheet.addMergedRegion(CellRangeAddress.valueOf(s));
+	       
 		return wb;
 	}
 	public static void autoSizeColumns(Workbook workbook,int index) {
