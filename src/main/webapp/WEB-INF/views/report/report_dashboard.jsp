@@ -82,102 +82,104 @@
 							</div>
 						</header>
 						<div class="content-body">
-						
-						<form id="reportForm">
-						
 
-							<div class="row" style="padding-bottom: 0px;">
+							<form id="reportForm">
 
-								<div class="form-group">
-									<label class="control-label col-sm-1" for="status">Academic
-										Year <span class="text-danger"></span>
-									</label>
-									<div class="col-sm-2">
-										<select id="ac_year" name="ac_year" class="form-control">
 
-											<c:forEach items="${acaYearList}" var="acYear">
-												<option value="${acYear.yearId}">${acYear.academicYear}</option>
-											</c:forEach>
-											<option value="-5">Last Five Years</option>
-										</select> <span class="error_form text-danger" id="prog_type_field"
-											style="display: none;">Please select program type</span>
-									</div>
+								<div class="row" style="padding-bottom: 0px;">
 
-									<label class="control-label col-sm-1" for="status">Program
-										<span class="text-danger"></span>
-									</label>
-									<div class="col-sm-3">
-										<select id="prog_type" name="prog_type" class="form-control"
-											onchange="getProgramTypeByProgram()">
+									<div class="form-group">
+										<label class="control-label col-sm-1" for="status">Academic
+											Year <span class="text-danger"></span>
+										</label>
+										<div class="col-sm-2">
+											<select id="ac_year" name="ac_year" class="form-control">
 
-											<c:forEach items="${progTypeList}" var="progType">
-												<option value="${progType.programId}">${progType.programName}</option>
-											</c:forEach>
+												<c:forEach items="${acaYearList}" var="acYear">
+													<option value="${acYear.yearId}">${acYear.academicYear}</option>
+												</c:forEach>
+												<option value="-5">Last Five Years</option>
+											</select> <span class="error_form text-danger" id="prog_type_field"
+												style="display: none;">Please select program type</span>
+										</div>
 
-										</select> <span class="error_form text-danger" id="prog_type_field"
-											style="display: none;">Please select program type</span>
-									</div>
+										<label class="control-label col-sm-1" for="status">Program
+											<span class="text-danger"></span>
+										</label>
+										<div class="col-sm-3">
+											<select id="prog_type" name="prog_type" class="form-control"
+												onchange="getProgramTypeByProgram()">
 
-									<label class="control-label col-sm-1" for="page_order">
-										Program Type<span class="text-danger">*</span>
-									</label>
-									<div class="col-sm-3">
+												<c:forEach items="${progTypeList}" var="progType">
+													<option value="${progType.programId}">${progType.programName}</option>
+												</c:forEach>
 
-										<select id="prog_name" name="prog_name" class="form-control"
-											required>
+											</select> <span class="error_form text-danger" id="prog_type_field"
+												style="display: none;">Please select program type</span>
+										</div>
 
-										</select>
+										<label class="control-label col-sm-1" for="page_order">
+											Program Type<span class="text-danger">*</span>
+										</label>
+										<div class="col-sm-3">
 
-										<%-- <input type="text" class="form-control" id="prog_name"
+											<select id="prog_name" name="prog_name" class="form-control"
+												required>
+
+											</select>
+
+											<%-- <input type="text" class="form-control" id="prog_name"
 															value="${trainPlace.programName}" onchange="trim(this)" name="prog_name"
 															placeholder="Name of Program" maxlength="100"> --%>
-										<span class="error_form text-danger" id="prog_name_field"
-											style="display: none;">Please enter program name</span>
+											<span class="error_form text-danger" id="prog_name_field"
+												style="display: none;">Please enter program name</span>
+										</div>
+									</div>
+
+
+								</div>
+								<div class="row" style="padding-bottom: 0px;">
+									<div class="form-group">
+										<label class="control-label col-sm-1" for="catId">Category
+											<span class="text-danger"></span>
+										</label>
+										<div class="col-sm-2">
+											<select id="catId" name="catId" class="form-control">
+
+												<c:forEach items="${castList}" var="castList">
+													<option value="${castList.castId}">${castList.castName}</option>
+												</c:forEach>
+
+											</select> <span class="error_form text-danger" id="error_catId"
+												style="display: none;">Please select Category</span>
+										</div>
+
+
+										<label class="control-label col-sm-1" for="catId">E-Content
+											Development Facility <span class="text-danger"></span>
+										</label>
+										<div class="col-sm-3">
+											<select id="e_contentType" name="e_contentType"
+												class="form-control">
+
+												<option value="Media Center">Media Center</option>
+												<option value="Recording Facility">Recording
+													Facility</option>
+												<option value="Lecture Capturing System">Lecture
+													Capturing System</option>
+
+											</select>
+										</div>
+
+
+
+
 									</div>
 								</div>
-								
-								
-							</div>
+								<br />
 								<div class="row" style="padding-bottom: 0px;">
-							<div class="form-group">
-									<label class="control-label col-sm-1" for="catId">Category
-										  <span class="text-danger"></span>
-									</label>
-									<div class="col-sm-2">
-										<select id="catId" name="catId" class="form-control">
+									<div class="col-lg-12">
 
-											<c:forEach items="${castList}" var="castList">
-												<option value="${castList.castId}">${castList.castName}</option>
-											</c:forEach>
-										 
-										</select> <span class="error_form text-danger" id="error_catId"
-											style="display: none;">Please select Category</span>
-									</div>
-
-								
-									<label class="control-label col-sm-1" for="catId">E-Content												
-										Development Facility  <span class="text-danger"></span>
-									</label>
-									<div class="col-sm-3">
-										<select id="e_contentType" name="e_contentType"
-													class="form-control">
-													
-															<option value="Media Center" >Media Center</option>
-															<option value="Recording Facility" >Recording Facility</option>
-										 					<option value="Lecture Capturing System" >Lecture Capturing System</option>
-
-												</select>
-									</div>
-
-								 
-									
-								 
-									</div>
-									</div>
-							<br />
-							<div class="row" style="padding-bottom: 0px;">
-								<div class="col-lg-12">
-									
 										<div class="panel-group primary" id="accordion-2"
 											role="tablist" aria-multiselectable="true">
 
@@ -325,21 +327,26 @@
 													<div class="panel-body">
 														<div class="col-lg-10">1] Average % of Students from
 															other States/Countries – Yearwise</div>
-														<a href="#" onclick="getProgReport(0,'showAvgStudYearwiseReport')"><i
-																class="fa fa-file-excel-o" style="color: green;"
-																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showAvgStudYearwiseReport')"><i
-																class="fa fa-file-pdf-o" style="color: red;"
-																aria-hidden="true"></i>&nbsp;PDF</a>
+														<a href="#"
+															onclick="getProgReport(0,'showAvgStudYearwiseReport')"><i
+															class="fa fa-file-excel-o" style="color: green;"
+															aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+															href="#"
+															onclick="getProgReport(1,'showAvgStudYearwiseReport')"><i
+															class="fa fa-file-pdf-o" style="color: red;"
+															aria-hidden="true"></i>&nbsp;PDF</a>
 													</div>
-													<div class="panel-body"><!-- Done -->
+													<div class="panel-body">
+														<!-- Done -->
 														<div class="col-lg-10">2] Average Enrollment
 															Percentage</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showAvgEnrollPrcntReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showAvgEnrollPrcntReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showAvgEnrollPrcntReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showAvgEnrollPrcntReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -348,10 +355,12 @@
 														<div class="col-lg-10">3] Admissions Feeds Against
 															Reservation Category</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showAdmissionsAgainstCatReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showAdmissionsAgainstCatReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showAdmissionsAgainstCatReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showAdmissionsAgainstCatReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -359,31 +368,39 @@
 													<div class="panel-body">
 														<div class="col-lg-10">4]Student Teacher Ratio</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showStudTeachrRatio')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showStudTeachrRatio')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showStudTeachrRatio')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showStudTeachrRatio')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">5] Differently Abled students
 															(Divyanjan)</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showDifferentlyAbledStud')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showDifferentlyAbledStud')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showDifferentlyAbledStud')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showDifferentlyAbledStud')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">6] Teachers Using ICT</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showTeachersUsingIctReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showTeachersUsingIctReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showTeachersUsingIctReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showTeachersUsingIctReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -392,10 +409,12 @@
 														<div class="col-lg-10">7] Total no. of Mentors No.
 															of Students Assigned</div>
 														<div class="col-lg-2">
-																<a href="#" onclick="getProgReport(0,'showNoOfMentorsAssignedStudentReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showNoOfMentorsAssignedStudentReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showNoOfMentorsAssignedStudentReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showNoOfMentorsAssignedStudentReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -404,21 +423,28 @@
 														<div class="col-lg-10">8] Faculty Available Against
 															Sanctioned Post</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showFacultyAgnstSanctionpost')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showFacultyAgnstSanctionpost')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showFacultyAgnstSanctionpost')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showFacultyAgnstSanctionpost')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">9]Full Time Faculty From other States Against Sanctioned Post</div>
+														<div class="col-lg-10">9]Full Time Faculty From
+															other States Against Sanctioned Post</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showFacultyAgnstSanctionPostOthrState')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showFacultyAgnstSanctionPostOthrState')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showFacultyAgnstSanctionPostOthrState')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showFacultyAgnstSanctionPostOthrState')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 
@@ -426,43 +452,57 @@
 														<div class="col-lg-10">10] Teaching Experience of
 															Full Time Teachers (Current Year Data)</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showTeachingExpOfFillTimFac')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showTeachingExpOfFillTimFac')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showTeachingExpOfFillTimFac')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showTeachingExpOfFillTimFac')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">11] Students Performance &
 															Learning Outcomes</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showStudPerformanceOutconmeReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showStudPerformanceOutconmeReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showStudPerformanceOutconmeReport')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showStudPerformanceOutconmeReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">12] Students Performance in Final Year</div>
+														<div class="col-lg-10">12] Students Performance in
+															Final Year</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showStudPerformInFinalYear')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showStudPerformInFinalYear')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showStudPerformInFinalYear')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showStudPerformInFinalYear')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-													
+
 													<div class="panel-body">
-														<div class="col-lg-10">13] Full Time Faculty Available With Ph.D.s</div>
+														<div class="col-lg-10">13] Full Time Faculty
+															Available With Ph.D.s</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showFulTimFacAvalblePhd')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showFulTimFacAvalblePhd')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showFulTimFacAvalblePhd')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showFulTimFacAvalblePhd')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 
@@ -689,21 +729,26 @@
 													<div class="panel-body">
 														<div class="col-lg-10">1]ICT Enabled Facilities</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showICTEnbldFaclties')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showICTEnbldFaclties')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showICTEnbldFaclties')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showICTEnbldFaclties')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
-															<div class="col-lg-10">2] Budget on Infrastructure
-																Augmentation</div>
+														<div class="col-lg-10">2] Budget on Infrastructure
+															Augmentation</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showBudgetInfraAugmentn')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showBudgetInfraAugmentn')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showBudgetInfraAugmentn')"><i
+																href="#"
+																onclick="getProgReport(1,'showBudgetInfraAugmentn')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -712,10 +757,12 @@
 														<div class="col-lg-10">3] Library Automation and
 															ILMS Information</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showLibLMSInfoReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showLibLMSInfoReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showLibLMSInfoReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showLibLMSInfoReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -724,10 +771,12 @@
 														<div class="col-lg-10">4] Rare Book – manuscripts –
 															special report</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showRareBookManuscriptReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showRareBookManuscriptReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showRareBookManuscriptReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showRareBookManuscriptReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -736,22 +785,26 @@
 														<div class="col-lg-10">5] Availability of Special
 															Facilities in Library</div>
 														<div class="col-lg-2">
-														<a href="#" onclick="getProgReport(0,'showLibSpecFacilitiesReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showLibSpecFacilitiesReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showLibSpecFacilitiesReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showLibSpecFacilitiesReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-												<div class="panel-body">
+													<div class="panel-body">
 														<div class="col-lg-10">6] Expenditure on Purchase of
 															Books and Journals</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showExpenditureOnPrchaseBooksJournal')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showExpenditureOnPrchaseBooksJournal')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showExpenditureOnPrchaseBooksJournal')"><i
+																href="#"
+																onclick="getProgReport(1,'showExpenditureOnPrchaseBooksJournal')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -760,10 +813,12 @@
 														<div class="col-lg-10">7] No of Students and
 															Teachers using Library Per Day</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showTeacherStudUsingLibReport')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showTeacherStudUsingLibReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showTeacherStudUsingLibReport')"><i
+																href="#"
+																onclick="getProgReport(1,'showTeacherStudUsingLibReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -771,10 +826,12 @@
 													<div class="panel-body">
 														<div class="col-lg-10">8] Student-Computer Ratio</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showStudentCompterRatio')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showStudentCompterRatio')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showStudentCompterRatio')"><i
+																href="#"
+																onclick="getProgReport(1,'showStudentCompterRatio')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -783,10 +840,12 @@
 														<div class="col-lg-10">9] Internet Connection
 															Information</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showInternetConnInfo')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showInternetConnInfo')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showInternetConnInfo')"><i
+																href="#"
+																onclick="getProgReport(1,'showInternetConnInfo')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -795,7 +854,8 @@
 														<div class="col-lg-10">10] E-Content Development
 															Facilities</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showEContntDevFac')"><i
+															<a href="#"
+																onclick="getProgReport(0,'showEContntDevFac')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 																href="#" onclick="getProgReport(1,'showEContntDevFac')"><i
@@ -1313,11 +1373,12 @@
 											<!-- Criteria 7 Ends-->
 
 										</div>
-										<input type="hidden" id="p" name="p" value="0">
-										<input type="hidden" id="temp_ac_year" name="temp_ac_year" value="0">
-									
+										<input type="hidden" id="p" name="p" value="0"> <input
+											type="hidden" id="temp_ac_year" name="temp_ac_year" value="0">
+										<input type="hidden" id="temp_cat" name="temp_cat"
+											value="0"> 
+									</div>
 								</div>
-							</div>
 							</form>
 						</div>
 					</section>
@@ -1340,12 +1401,17 @@
 			var el = document.getElementById('ac_year');
 			var text = el.options[el.selectedIndex].innerHTML;
 			document.getElementById("temp_ac_year").value = text;
+
+			var ell = document.getElementById('catId');
+			var text = ell.options[ell.selectedIndex].innerHTML;
+			document.getElementById("temp_cat").value = text;
+
 			var form = document.getElementById("reportForm");
 
 			form.setAttribute("target", "_blank");
 			form.setAttribute("method", "post");
 
-			form.action = ("${pageContext.request.contextPath}/"+mapping+"/");
+			form.action = ("${pageContext.request.contextPath}/" + mapping + "/");
 
 			form.submit();
 			document.getElementById("p").value = "0";

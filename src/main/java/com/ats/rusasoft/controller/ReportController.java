@@ -1505,13 +1505,33 @@ public class ReportController {
 
 					}
 
+					expoExcel = new ExportToExcel();
+					rowData = new ArrayList<String>();
+
+					rowData.add("" + 3);
+
+					rowData.add("" + "% Per Year");
+					rowData.add("" + r1);
+					rowData.add("" + r2);
+					rowData.add("" + r3);
+					rowData.add("" + r4);
+					rowData.add("" + r5);
+
+					expoExcel.setRowData(rowData);
+					exportToExcelList.add(expoExcel);
 					XSSFWorkbook wb = null;
 					try {
+
+						String leaveSum = "Total No. of Students from other State and Countries : " + a + "";
+						String leaveSum1 = "Total No. of Students Enrolled : " + c + "";
+						String leaveSum2 = "Average % : " + decimalFormat.format(n / 5) + "";
+
+						String reportSummary = leaveSum + "" + leaveSum1 + "" + leaveSum2;
 
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year :" + temp_ac_year + " ");
+								"Academic Year:" + temp_ac_year + " ", reportSummary, 'G');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -1800,7 +1820,7 @@ public class ReportController {
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year :" + temp_ac_year + " ");
+								"Academic Year:" + temp_ac_year + " ", "", 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -2077,7 +2097,7 @@ public class ReportController {
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year :" + temp_ac_year + " ");
+								"Academic Year:" + temp_ac_year + " ", "", 'D');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -2325,8 +2345,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Program Name :" + progList.get(0).getProgramName() + " ");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "  ", "", 'C');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -2374,6 +2393,7 @@ public class ReportController {
 			String ac_year = request.getParameter("ac_year");
 			int catId = Integer.parseInt(request.getParameter("catId"));
 			String temp_ac_year = request.getParameter("temp_ac_year");
+			String temp_cat = request.getParameter("temp_cat");
 			HttpSession session = request.getSession();
 
 			int instituteId = (int) session.getAttribute("instituteId");
@@ -2475,7 +2495,7 @@ public class ReportController {
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
-
+				double rslt = 0.0;
 				int index = 0;
 				for (int i = 0; i < progList.size(); i++) {
 					// System.err.println("I " + i);
@@ -2515,7 +2535,7 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
-
+					rslt = rslt + Double.parseDouble(tempprcnt);
 				}
 
 				document.open();
@@ -2526,10 +2546,11 @@ public class ReportController {
 				document.add(name);
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
-				document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
+				document.add(new Paragraph("  Academic Year :" + temp_ac_year + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
-
+				document.add(new Paragraph("\n"));
+				document.add(new Paragraph("Average%:" + rslt / 5 + ""));
 				int totalPages = writer.getPageNumber();
 
 				System.out.println("Page no " + totalPages);
@@ -2605,10 +2626,15 @@ public class ReportController {
 					try {
 
 						System.out.println("Excel List :" + exportToExcelList.toString());
+						String leaveSum = "Academic Year: " + temp_ac_year + "";
+						String leaveSum1 = ",Category: " + temp_cat + "";
+
+						String reportSummary = leaveSum + "" + leaveSum1;
+						double reportSummary1 = rslt / 5;
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year :" + temp_ac_year + " ");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, reportSummary,
+								"Average%:" + String.valueOf(reportSummary1), 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -2878,7 +2904,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, " ");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "", "", 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -3161,7 +3187,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, " ");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "", "", 'F');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -3445,8 +3471,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year :" + temp_ac_year + " ");
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "", "", 'D');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -3660,10 +3685,16 @@ public class ReportController {
 							"Total No. of Faculty in the Institute:" + progList.get(i).getNoOfFullTimeFaculty() + ""));
 					document.add(new Paragraph("Total No. of Students on roll in the Institute :"
 							+ progList.get(i).getNoOfCurrentAdmitedStnt() + ""));
+					if (progList.get(i).getNoOfFullTimeFaculty() == 0
+							&& progList.get(i).getNoOfCurrentAdmitedStnt() == 0) {
+						n = 0;
+					} else {
 
-					n = ((progList.get(i).getAvgStudent() + progList.get(i).getAvgTeacher())
-							/ (progList.get(i).getNoOfFullTimeFaculty() + progList.get(i).getNoOfCurrentAdmitedStnt()))
-							* 100;
+						n = ((progList.get(i).getAvgStudent() + progList.get(i).getAvgTeacher())
+								/ (progList.get(i).getNoOfFullTimeFaculty()
+										+ progList.get(i).getNoOfCurrentAdmitedStnt()))
+								* 100;
+					}
 					document.add(new Paragraph("Library Usages Per Day:" + decimalFormat.format(n) + ""));
 				}
 				int totalPages = writer.getPageNumber();
@@ -3717,16 +3748,24 @@ public class ReportController {
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
 					int cnt = 1;
-					double temp = 0.0;
+
 					for (int i = 0; i < progList.size(); i++) {
 
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
-						n = ((progList.get(i).getAvgStudent() + progList.get(i).getAvgTeacher())
-								/ (progList.get(i).getNoOfFullTimeFaculty()
-										+ progList.get(i).getNoOfCurrentAdmitedStnt()))
-								* 100;
+
+						if (progList.get(i).getNoOfFullTimeFaculty() == 0
+								&& progList.get(i).getNoOfCurrentAdmitedStnt() == 0) {
+							n = 0;
+						} else {
+
+							n = ((progList.get(i).getAvgStudent() + progList.get(i).getAvgTeacher())
+									/ (progList.get(i).getNoOfFullTimeFaculty()
+											+ progList.get(i).getNoOfCurrentAdmitedStnt()))
+									* 100;
+						}
+
 						rowData.add("" + (i + 1));
 						rowData.add("" + progList.get(i).getAcademicYear());
 						rowData.add("" + progList.get(i).getAvgStudent());
@@ -3737,6 +3776,34 @@ public class ReportController {
 						exportToExcelList.add(expoExcel);
 
 					}
+					for (int i = 0; i < progList.size(); i++) {
+
+						expoExcel = new ExportToExcel();
+						rowData = new ArrayList<String>();
+						cnt = cnt + i;
+
+						if (progList.get(i).getNoOfFullTimeFaculty() == 0
+								&& progList.get(i).getNoOfCurrentAdmitedStnt() == 0) {
+							n = 0;
+						} else {
+
+							n = ((progList.get(i).getAvgStudent() + progList.get(i).getAvgTeacher())
+									/ (progList.get(i).getNoOfFullTimeFaculty()
+											+ progList.get(i).getNoOfCurrentAdmitedStnt()))
+									* 100;
+						}
+
+						rowData.add("");
+						rowData.add("For Academic Year: " + progList.get(i).getAcademicYear());
+						rowData.add(
+								"Total No. of Faculty in the Institute: " + progList.get(i).getNoOfFullTimeFaculty());
+						rowData.add("Total No. of Students on roll in the Institute: "
+								+ progList.get(i).getNoOfCurrentAdmitedStnt());
+						rowData.add("Library Usages Per Day: " + decimalFormat.format(n));
+
+						expoExcel.setRowData(rowData);
+						exportToExcelList.add(expoExcel);
+					}
 
 					XSSFWorkbook wb = null;
 					try {
@@ -3744,8 +3811,9 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
+
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year :" + temp_ac_year + " ");
+								"Academic Year :" + temp_ac_year, "", 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
