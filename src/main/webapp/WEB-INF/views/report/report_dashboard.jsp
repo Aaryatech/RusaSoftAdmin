@@ -1377,6 +1377,9 @@
 											type="hidden" id="temp_ac_year" name="temp_ac_year" value="0">
 										<input type="hidden" id="temp_cat" name="temp_cat"
 											value="0"> 
+											<input type="hidden" id="temp_prog_name" name="temp_prog_name"
+											value="0"> 
+											
 									</div>
 								</div>
 							</form>
@@ -1405,7 +1408,14 @@
 			var ell = document.getElementById('catId');
 			var text = ell.options[ell.selectedIndex].innerHTML;
 			document.getElementById("temp_cat").value = text;
-
+			  
+			if ($("#prog_name option").length > 0) {
+			  
+				var elm = document.getElementById('prog_name');
+				var text = elm.options[elm.selectedIndex].innerHTML;
+				document.getElementById("temp_prog_name").value = text;
+			}  
+		 
 			var form = document.getElementById("reportForm");
 
 			form.setAttribute("target", "_blank");

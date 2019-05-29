@@ -273,7 +273,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getMonthDuration(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -655,7 +655,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcademicYear(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -952,19 +952,19 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcademicYear(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getTotalSanctIntake(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getNoCurrentAdmitedStnt(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -976,7 +976,7 @@ public class ReportController {
 							+ "prog.getTotalSanctIntake()" + prog.getTotalSanctIntake());
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 					rslt = rslt + Double.parseDouble(tempprcnt);
@@ -1281,31 +1281,31 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud1(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud2(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud3(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud4(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcYearAdmiStud5(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -1372,31 +1372,31 @@ public class ReportController {
 
 				cell1 = new PdfPCell(new Phrase("" + r1, headFontData));
 				cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 				table.addCell(cell1);
 
 				cell1 = new PdfPCell(new Phrase("" + r2, headFontData));
 				cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 				table.addCell(cell1);
 
 				cell1 = new PdfPCell(new Phrase("" + r3, headFontData));
 				cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 				table.addCell(cell1);
 
 				cell1 = new PdfPCell(new Phrase("" + r4, headFontData));
 				cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 				table.addCell(cell1);
 
 				cell1 = new PdfPCell(new Phrase("" + r5, headFontData));
 				cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 				table.addCell(cell1);
 
@@ -1695,19 +1695,19 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcademicYear(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getTechersUsingIct(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getTotalFaculty(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 					DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -1715,7 +1715,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -1978,23 +1978,27 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getTotalFacMentor(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getTotalStudMentoring(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat
-							.format(prog.getTotalFacMentor() / prog.getTotalStudMentoring() * 100);
-
+					String tempprcnt=null;
+					if( prog.getTotalFacMentor()==0.0) {
+						 tempprcnt="0";
+					}else {
+						  tempprcnt = decimalFormat
+								.format( prog.getTotalStudMentoring() /prog.getTotalFacMentor() * 100);
+					}
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -2081,8 +2085,14 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getTotalStudMentoring());
 
 						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat.format(
-								progList.get(i).getTotalStudMentoring() / progList.get(i).getTotalFacMentor() * 100);
+						String tempprcnt =null;
+						if (progList.get(i).getTotalFacMentor()==0.0) {
+							 tempprcnt="0";
+						}else {
+							  tempprcnt = decimalFormat.format(
+									progList.get(i).getTotalStudMentoring() / progList.get(i).getTotalFacMentor() * 100);
+						}
+						
 						rowData.add("" + tempprcnt);
 
 						expoExcel.setRowData(rowData);
@@ -2144,17 +2154,16 @@ public class ReportController {
 
 			String ac_year = request.getParameter("ac_year");
 			// String temp_ac_year = request.getParameter("temp_ac_year");
-			int programId = Integer.parseInt(request.getParameter("programId"));
+			int programId = Integer.parseInt(request.getParameter("prog_name"));
+			int programType = Integer.parseInt(request.getParameter("prog_name"));
 			HttpSession session = request.getSession();
-
+			String temp_prog_name = request.getParameter("temp_prog_name");
 			int instituteId = (int) session.getAttribute("instituteId");
 			map = new LinkedMultiValueMap<>();
 
 			map.add("instId", instituteId);
-
-			map.add("programId", programId);
-
-			StudentPerformanceOutcome[] resArray = rest.postForObject(Constants.url + "getStudPerformancePo", map,
+ 			map.add("programId", programId);
+ 			StudentPerformanceOutcome[] resArray = rest.postForObject(Constants.url + "getStudPerformancePo", map,
 					StudentPerformanceOutcome[].class);
 			List<StudentPerformanceOutcome> progList = new ArrayList<>(Arrays.asList(resArray));
 
@@ -2271,6 +2280,7 @@ public class ReportController {
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("Program Name :" + progList.get(0).getProgramName() + ""));
+				document.add(new Paragraph("Program Type :" + temp_prog_name + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 
@@ -2343,9 +2353,14 @@ public class ReportController {
 					try {
 
 						System.out.println("Excel List :" + exportToExcelList.toString());
+						
+						String leaveSum = "Program: " +   progList.get(0).getProgramName()  + "";
+						String leaveSum1 = ",Program Type: " + temp_prog_name + "";
 
+						String reportSummary = leaveSum + "" + leaveSum1;
+					 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "  ", "", 'C');
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, reportSummary, "", 'C');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -2511,19 +2526,19 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcademicYear(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getCatTotStudent(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getSeatsAvaailable(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -2532,7 +2547,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 					rslt = rslt + Double.parseDouble(tempprcnt);
@@ -2812,7 +2827,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getUsersOfLms(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -3088,7 +3103,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getBookCopies(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -3639,19 +3654,19 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getAcademicYear(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAvgStudent(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getAvgTeacher(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 					n1 = ((prog.getAvgStudent() + prog.getAvgTeacher())
@@ -3659,7 +3674,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + decimalFormat.format(n1), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
