@@ -1083,10 +1083,10 @@
 														<div class="col-lg-10">2] E-Governance & Areas of
 															Operation</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+																<a href="#" onclick="getProgReport(0,'showEGovernanceOptReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showEGovernanceOptReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -1120,10 +1120,10 @@
 															programmes organized for Teachers and non teaching staff
 															(Professional Development, Administrative))</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showTrainProgForTeachStaffReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showTrainProgForTeachStaffReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
