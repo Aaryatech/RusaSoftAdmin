@@ -1182,10 +1182,10 @@
 														<div class="col-lg-10">10] Quality Initiative by
 															IQAC</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showQualInitiativeReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showQualInitiativeReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -1194,10 +1194,10 @@
 														<div class="col-lg-10">11] Quality Assurance
 															Initiatives</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showQualInitiativeAssuranceReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showQualInitiativeAssuranceReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -1228,21 +1228,22 @@
 														<div class="col-lg-10">1] Gender Equality Programmes
 														</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showGenderEquityReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#" onclick="getProgReport(1,'showGenderEquityReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">2] No of Gender Equality
 															Program</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showNoOfGenderEquityReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showNoOfGenderEquityReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
