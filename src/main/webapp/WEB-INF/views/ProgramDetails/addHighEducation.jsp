@@ -192,7 +192,7 @@
 			return true;
 		}
 		function validateNo(mobile) {
-	        var mob = /^[1-9][0-9]+$/;
+	        var mob = /^[1-9]+$/;
 			if (mob.test($.trim(mobile)) == false) {
 				return false;
 			}
