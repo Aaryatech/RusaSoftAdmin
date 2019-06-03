@@ -9,7 +9,7 @@
 			<!-- USER INFO - START -->
 			<div class="profile-info row">
 				<div class="profile-image col-xs-4">
-					<a href="ui-profile.html"> <img alt=""
+					<a href="#"> <img alt=""
 						src="../data/profile/profile.jpg"
 						class="img-responsive img-circle">
 					</a>

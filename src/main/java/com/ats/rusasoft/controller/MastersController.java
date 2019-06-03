@@ -114,23 +114,13 @@ public class MastersController {
 			} else {
 				model = new ModelAndView("master/hodRegistration");
 				model.addObject("title", "HOD Registration");
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("desgList", Constants.facHOD);
 				Designation[] designArr = restTemplate.postForObject(Constants.url + "/getAllDesignations", map,
 						Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
-
-				map = new LinkedMultiValueMap<String, Object>();
-
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map.add("instId", userObj.getGetData().getUserInstituteId());
-				Dept[] instArray = restTemplate.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
-				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
-				System.err.println("deptList " + deptList.toString());
-
-				model.addObject("deptList", deptList);
 
 				map = new LinkedMultiValueMap<String, Object>();
 
@@ -142,9 +132,19 @@ public class MastersController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
-				
+
 				Staff editHod = new Staff();
 				model.addObject("editHod", editHod);
+
+				map = new LinkedMultiValueMap<String, Object>();
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				Dept[] instArray = restTemplate.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+				System.err.println("deptList " + deptList.toString());
+
+				model.addObject("deptList", deptList);
 
 			}
 		} catch (Exception e) {
@@ -237,7 +237,8 @@ public class MastersController {
 				staff.setFacultyFirstName(hodName);
 				staff.setFacultyId(hodId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same"))); // check state whether current
+																							// or not
 				staff.setHightestQualificationYear(null);
 				staff.setIsAccOff(0);
 				staff.setIsDean(isDean);
@@ -286,7 +287,8 @@ public class MastersController {
 				editHod.setContactNo(contact);
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same"))); // check state whether
+																							// current or not
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsHod(1);
 				editHod.setIsDean(1);
@@ -391,22 +393,12 @@ public class MastersController {
 				model = new ModelAndView("master/hodRegistration");
 				model.addObject("title", "Edit HOD Registration");
 
-				map = new LinkedMultiValueMap<String, Object>();				
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("desgList", Constants.facHOD);
-				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map,
+						Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
-
-				
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map = new LinkedMultiValueMap<String, Object>();
-				map.add("instId", userObj.getGetData().getUserInstituteId());
-			
-				Dept[] instArray = rest.postForObject(Constants.url + "getDeptForHodReg", map, Dept[].class);
-				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
-				System.err.println("deptList " + deptList.toString());
-
-				model.addObject("deptList", deptList);
 
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("type", 1);
@@ -421,14 +413,24 @@ public class MastersController {
 				map.add("id", facultyId);
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("facultyId:" + facultyId+" "+editHod);
+				System.out.println("deptIdList 1:" + editHod.getDeptId());
 
 				model.addObject("editHod", editHod);
 				model.addObject("addEdit", "1");
+				System.err.println("deptIdList before " + editHod.getDeptId());
 				List<Integer> deptIdList = Stream.of(editHod.getDeptId().split(",")).map(Integer::parseInt)
 						.collect(Collectors.toList());
-
+				System.err.println("deptIdList after " + deptIdList.toString());
 				model.addObject("deptIdList", deptIdList);
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+				map.add("deptIdList", editHod.getDeptId());
+				Dept[] instArray = rest.postForObject(Constants.url + "getDeptForHodRegForEdit", map, Dept[].class);
+				List<Dept> deptList = new ArrayList<>(Arrays.asList(instArray));
+
+				model.addObject("deptList", deptList);
 
 			}
 		} catch (Exception e) {

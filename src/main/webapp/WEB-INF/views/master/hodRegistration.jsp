@@ -127,7 +127,9 @@
 											</div>
 										</div>
 
-										<div class="form-group">
+										
+
+<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Department<span class="text-danger">*</span>
 											</label>
@@ -135,10 +137,10 @@
 												<select id="dept_id" name="dept_id" class="" multiple>
 													<c:forEach items="${deptList}" var="dept">
 														<c:set var="flag" value="0"></c:set>
-														<c:forEach items="${deptIdList}" var="selFr"
-															varStatus="count2">
+														<c:forEach items="${deptIdList}" var="selDept"
+															 >
 															<c:choose>
-																<c:when test="${selFr==dept.deptId}">
+																<c:when test="${selDept==dept.deptId}">
 																	<option selected value="${dept.deptId}"><c:out value="${dept.deptName}" /></option>
 																	<c:set var="flag" value="1"></c:set>
 																</c:when>
@@ -154,27 +156,15 @@
 															</c:when>
 														</c:choose>
 													</c:forEach>
-													<%-- <c:forEach items="${deptList}" var="dept">
-														<c:choose>
-															<c:when test="${dept.deptId==editHod.deptId}">
-																<option selected value="${dept.deptId}">${dept.deptName}</option>
-
-															</c:when>
-															<c:otherwise>
-																<option value="${dept.deptId}">${dept.deptName}</option>
-
-															</c:otherwise>
-
-														</c:choose>
-
-													</c:forEach> --%>
+												 
 													<option value="0">NA</option>
 
 
 												</select> <span class="error_form text-danger" id="dept_id_field"
-													style="display: none;">Please select department name</span>
+													style="display: none;">Please select Department name</span>
 											</div>
 										</div>
+
 
 
 										<div class="form-group">
@@ -221,28 +211,33 @@
 													style="display: none;">Please select joining date</span>
 											</div>
 										</div>
-										
-										
+
+
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="is_add_same">Is
-												 Same(State) <span
-												class="text-danger">*</span>
+												Same(State) <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												
-													<c:if test="${editHod.facultyId>0}">
-													Yes <input type="radio" ${editHod.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
-													No<input type="radio" ${editHod.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
-													</c:if>
-													
-													<c:if test="${editHod.facultyId==0}">
-													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	 value="1"> 
-													No<input type="radio"  name="is_state_same" id="is_state_same" value="0">
-													</c:if>
-													
-												<span class="error_form text-danger" id="is_state_same_field"
-													style="display: none;">Please select
-													permanent/correspondence address same or not.</span>
+
+												<c:if test="${editHod.facultyId>0}">
+													Yes <input type="radio"
+														${editHod.isSame == 1 ? 'checked' : ''}
+														name="is_state_same" id="is_state_same" value="1"> 
+													No<input type="radio"
+														${editHod.isSame == 0 ? 'checked' : ''}
+														name="is_state_same" id="is_state_same" value="0">
+												</c:if>
+
+												<c:if test="${editHod.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same"
+														id="is_state_same" value="1"> 
+													No<input type="radio" name="is_state_same"
+														id="is_state_same" value="0">
+												</c:if>
+
+												<span class="error_form text-danger"
+													id="is_state_same_field" style="display: none;">Please
+													select permanent/correspondence address same or not.</span>
 
 											</div>
 										</div>
@@ -515,7 +510,6 @@
 				changeYear : true,
 				changeMonth : true,
 
-
 			});
 		});
 
@@ -757,7 +751,8 @@
 			}
 			if (valid == true)
 
-				$.getJSON(
+				$
+						.getJSON(
 								'${getUserInfo}',
 								{
 									inputValue : inputValue,
@@ -769,37 +764,37 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-								if(data.facultyId>0){
-									document.getElementById("email").value = data.email;
-									document.getElementById("contactNo").value = data.contactNo;
-									document.getElementById("hodName").value = data.facultyFirstName;
-									document.getElementById("dateOfJoin").value = data.joiningDate;
-									document.getElementById("hod_id").value = data.facultyId;
+									if (data.facultyId > 0) {
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("hodName").value = data.facultyFirstName;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document.getElementById("hod_id").value = data.facultyId;
 
-									//Sachin
-									
-									//single select
-									document.getElementById("designation").value=data.currentDesignationId;
-									$("#designation").trigger("chosen:updated");
-									//single select
-									document.getElementById("quolif").value=data.highestQualification;
-									$("#quolif").trigger("chosen:updated");
-									//multiple select
-								 	var temp = new Array();
-								 	temp = (data.deptId).split(",");
-									  $('#dept_id').val(temp);
-									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
-									}else{
-								/* 		document.getElementById("email").value = "";
-										document.getElementById("contactNo").value = "";
-										document.getElementById("hodName").value = "";
-										document.getElementById("dateOfJoin").value = "";
-										document.getElementById("hod_id").value = ""; */
+										//Sachin
+
+										//single select
+										document.getElementById("designation").value = data.currentDesignationId;
+										$("#designation").trigger(
+												"chosen:updated");
+										//single select
+										document.getElementById("quolif").value = data.highestQualification;
+										$("#quolif").trigger("chosen:updated");
+										//multiple select
+										var temp = new Array();
+										temp = (data.deptId).split(",");
+										$('#dept_id').val(temp);
+										$('#dept_id').trigger('change'); // Notify any JS components that the value changed
+									} else {
+										/* 		document.getElementById("email").value = "";
+												document.getElementById("contactNo").value = "";
+												document.getElementById("hodName").value = "";
+												document.getElementById("dateOfJoin").value = "";
+												document.getElementById("hod_id").value = ""; */
 									}
 
-
 								});
-				}
+		}
 	</script>
 
 </body>
