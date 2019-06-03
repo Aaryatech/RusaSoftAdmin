@@ -96,7 +96,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="noOfBook"
-												style="text-align: left;">No. of Book Purchase <span
+												style="text-align: left;">No. of Books Purchase <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
@@ -104,18 +104,18 @@
 													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfBookPrchs"
 													name="noOfBookPrchs" onchange="trim(this)" maxlength="7"
-													placeholder="No of Copies for Book" autocomplete="off"
+													placeholder="No of Copies for Books" autocomplete="off"
 													value="${lib.noOfBooks}"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter No. of copies
-													and value must be greater than 0.</span>
+													books and value must be greater than 0.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="costOfBook"
-												style="text-align: left;">Cost of Book<span
+												style="text-align: left;">Cost of Books<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
@@ -123,11 +123,11 @@
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfBook" name="costOfBook"
 													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
-													placeholder="Cost Of Rare Book" onchange="trim(this)"
+													placeholder="Cost of Books" onchange="trim(this)"
 													value="${lib.costOfBooks}"> <span
 													class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter cost of rare
-													book and value must be greater than 0.</span>
+													books and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -142,18 +142,18 @@
 													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfJournal"
 													name="noOfJournal" onchange="trim(this)" maxlength="7"
-													placeholder="No of Copies for Journal" autocomplete="off"
+													placeholder="No of Copies for Journals" autocomplete="off"
 													value="${lib.noOfJournal}"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter No. of copies
-													and value must be greater than 0.</span>
+													journals and value must be greater than 0.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="costOfBook"
-												style="text-align: left;">Cost of Journal<span
+												style="text-align: left;">Cost of Journals<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
@@ -161,18 +161,18 @@
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfJournal" name="costOfJournal"
 													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
-													placeholder="Cost Of Journal" onchange="trim(this)"
+													placeholder="Cost of Journals" onchange="trim(this)"
 													value="${lib.costOfJournal}"> <span
 													class="error_form text-danger" id="error_formfield4"
 													style="display: none;">Please enter cost of rare
-													book and value must be greater than 0.</span>
+													journals and value must be greater than 0.</span>
 											</div>
 										</div>
 										
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="noOfBook"
-												style="text-align: left;">No. of E-Journal <span
+												style="text-align: left;">No. of E-Journals <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
@@ -180,11 +180,11 @@
 													onchange="trim(this)" onFocus="clearDefault(this)"
 													onkeypress='return restrictAlphabets(event)' id="noOfEJournal"
 													name="noOfEJournal" onchange="trim(this)" maxlength="7"
-													placeholder="No of E-Journal" autocomplete="off"
+													placeholder="No of E-Journals" autocomplete="off"
 													value="${lib.noOfEjournal}"> <span
 													class="error_form text-danger" id="error_formfield5"
 													style="display: none;">Please enter No. of copies
-													and value must be greater than 0.</span>
+													e-journals and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -199,11 +199,11 @@
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfEJournal" name="costOfEJournal"
 													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
-													placeholder="Cost Of E-Journal" onchange="trim(this)"
+													placeholder="Cost of E-Journal" onchange="trim(this)"
 													value="${lib.costOfEjournal}"> <span
 													class="error_form text-danger" id="error_formfield6"
 													style="display: none;">Please enter cost of rare
-													book and value must be greater than 0.</span>
+													e-journals and value must be greater than 0.</span>
 											</div>
 										</div>
 

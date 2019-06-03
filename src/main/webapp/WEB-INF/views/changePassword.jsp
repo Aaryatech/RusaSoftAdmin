@@ -102,7 +102,7 @@
 														</label>
 														<div class="col-sm-10">
 															<input type="password" class="form-control"
-																id="newPassword" name="newPassword"
+																id="newPassword" name="newPassword" maxlength="10"
 																placeholder="Enter New Password" onkeyup="trim(this)"
 																required>
 														</div>
@@ -114,7 +114,7 @@
 														</label>
 														<div class="col-sm-10">
 															<input type="password" class="form-control"
-																id="conPassword" name="conPassword"
+																id="conPassword" name="conPassword" maxlength="10"
 																placeholder="Enter Confirm Password"
 																onkeyup="trim(this)" required>
 														</div>

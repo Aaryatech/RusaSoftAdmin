@@ -117,13 +117,15 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-10">
-												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+												<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)">
+												<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 												<!-- <input
 													type="submit" class="btn btn-primary" onclick="submit_f(0)"
 													value="Save &
 																		Next"> -->
 												<button type="reset" onclick="resetId()" id="sub2"
-													class="btn btn-default">Reset</button>
+													class="btn btn-primary">
+													<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button>
 											</div>
 										</div>
 										<input type="hidden" id="qual_inti_id" name="qual_inti_id"

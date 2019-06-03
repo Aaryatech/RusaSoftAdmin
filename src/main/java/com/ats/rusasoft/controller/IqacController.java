@@ -387,8 +387,8 @@ public class IqacController {
 				
 				
 
-				List<IqacList> qacList = rest.postForObject(Constants.url + "/getAllIqac", map, List.class);
-
+				IqacList[] iqacArr = rest.postForObject(Constants.url + "/getAllIqac", map, IqacList[].class);
+				List<IqacList> qacList = new ArrayList<>(Arrays.asList( iqacArr));
 				// System.out.println("IQACLIST" + userObj.getStaff().getIsPrincipal());
 
 				model.addObject("QList", qacList);

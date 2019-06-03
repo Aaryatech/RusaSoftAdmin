@@ -207,7 +207,7 @@
 												</button>
 
 												<a
-													href="${pageContext.request.contextPath}/showActCondctPromotUnivrslValus"><button
+													href="${pageContext.request.contextPath}/showSpecficInitiativeforLocAdvDisadv"><button
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">

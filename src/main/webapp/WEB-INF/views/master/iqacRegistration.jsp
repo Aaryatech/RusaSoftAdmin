@@ -265,7 +265,7 @@
 										</div>
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Roles
-												<span class="text-danger">*</span>
+												<span class="text-danger"></span>
 											</label>
 											<div class="col-sm-10">
 												<input type="checkbox" name="isAccOff" value="1"

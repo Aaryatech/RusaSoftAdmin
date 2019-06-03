@@ -616,7 +616,7 @@
 						//alert("not null");
 
 					for(var i=0;i<data.length;i++){
-						alert(JSON.stringify(data[i]));
+						//alert(JSON.stringify(data[i]));
 						document.getElementById("cast_m"+data[i].castId).value=data[i].maleStudent;
 						document.getElementById("cast_f"+data[i].castId).value=data[i].femaleStudent;
 						document.getElementById("cast_t"+data[i].castId).value=data[i].transStudent;

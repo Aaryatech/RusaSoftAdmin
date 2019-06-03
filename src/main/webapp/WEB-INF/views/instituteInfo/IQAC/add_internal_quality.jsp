@@ -153,9 +153,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="qltyInitiative"
 													autocomplete="off" name="qltyInitiative" onchange="trim(this)"
-													placeholder="" value="${editQuality.exVar1}"> <span
+													placeholder="Name of Quality Initiative" value="${editQuality.exVar1}"> <span
 													class="error_form text-danger" id="error_other"
-													style="display: none;">Please Enter Other Course</span>
+													style="display: none;">Please enter name of quality initiative.</span>
 											</div>
 
 										</div>
@@ -174,7 +174,7 @@
 													value="${editQuality.qualityPcount}"> <span
 													class="error_form text-danger" id="no_of_participant_field"
 													style="display: none;">Please enter no of
-													participants</span>
+													participants.</span>
 
 											</div>
 										</div>
@@ -188,11 +188,11 @@
 													id="fromDate" name="fromDate"
 													value="${editQuality.qualityFromdt}"> <span
 													class="error_form text-danger" id="fromDate_field"
-													style="display: none;">Please select from date</span>
+													style="display: none;">Please select from date.</span>
 													
 													<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">from date must be smaller than to date.</span>
 
 											</div>
 										</div>
@@ -207,11 +207,11 @@
 													placeholder="Select To Date"
 													value="${editQuality.qualityTodt}"> <span
 													class="error_form text-danger" id="toDate_field"
-													style="display: none;">Please select to date</span>
+													style="display: none;">Please select to date.</span>
 													
 												<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">to date must be greater than from date.</span>
 
 											</div>
 										</div>
