@@ -325,7 +325,7 @@ table, th, td {
 
 	<script type="text/javascript">
 		function vissibledive(yesnoId, value) {
-			alert("hiii...");
+			//alert("hiii...");
 
 			if (value == 1) {
 
