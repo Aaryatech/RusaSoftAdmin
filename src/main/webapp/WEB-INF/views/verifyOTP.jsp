@@ -116,7 +116,7 @@
 					</c:choose>
 
 					<p >
-						<label for="user_pass">OTPS<br /> <input type="password"
+						<label for="user_pass">OTP<br /> <input type="text"
 							name="otp" id="otp" class="input" value=""
 							placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
 					</p>

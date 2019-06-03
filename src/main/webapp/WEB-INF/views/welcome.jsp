@@ -76,35 +76,35 @@
 			<div class="dashboard_list">
 				<div class="col-md-3">
 					<div class="dash_one">
-						<h2 class="desig_nm">Designation Name</h2>
+						<h2 class="desig_nm">Students Admitted</h2>
 						<span class="count_num">200</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
-						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
-					</div>
+<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="dash_one">
-						<h2 class="desig_nm">Designation Name</h2>
+						<h2 class="desig_nm">No of Books</h2>
 						<span class="count_num">200</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
-						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
-					</div>
+<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="dash_one">
-						<h2 class="desig_nm">Designation Name</h2>
+						<h2 class="desig_nm">Total Faculty</h2>
 						<span class="count_num">200</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
-						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
-					</div>
+<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="dash_one">
-						<h2 class="desig_nm">Designation Name</h2>
+						<h2 class="desig_nm">Total Awards</h2>
 						<span class="count_num">200</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
-						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
-					</div>
+<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->					</div>
 				</div>
 				
 				
@@ -116,7 +116,7 @@
           <!-- AREA CHART -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Area Chart</h3>
+              <h3 class="box-title">Students Admitted</h3>
 
               <!-- <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -134,7 +134,7 @@
           <!-- DONUT CHART -->
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Donut Chart</h3>
+              <h3 class="box-title">No of Programs</h3>
 
               <!-- <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -155,7 +155,7 @@
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Line Chart</h3>
+              <h3 class="box-title">Result Analysis</h3>
 
               <!-- <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -173,7 +173,7 @@
           <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Bar Chart</h3>
+              <h3 class="box-title">Research Papaers</h3>
 
               <!-- <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -282,9 +282,9 @@
       resize: true,
       colors: ["#3c8dbc", "#f56954", "#00a65a"],
       data: [
-        {label: "Download Sales", value: 12},
-        {label: "In-Store Sales", value: 30},
-        {label: "Mail-Order Sales", value: 20}
+        {label: "UG", value: 12},
+        {label: "PG", value: 30},
+        {label: "Diploma", value: 20}
       ],
       hideHover: 'auto'
     });
