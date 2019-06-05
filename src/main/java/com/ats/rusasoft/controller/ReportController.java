@@ -11614,7 +11614,7 @@ public class ReportController {
 					
 					cell = new PdfPCell(new Phrase("" + prog.getNameQualifExam(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -11628,13 +11628,13 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getNoStudQualified(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase("" + prog.getPrcnt(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -11704,6 +11704,9 @@ public class ReportController {
 					rowData.add("Year of Implementation");
 					rowData.add("No. of Students Enrolled");
 					rowData.add("Name of Support Agency");
+					rowData.add("Per Year Avg %");
+					
+					
  
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
