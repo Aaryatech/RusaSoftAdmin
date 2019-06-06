@@ -10,6 +10,7 @@ public class GetAcademicBudget {
 	private int exInt1;
 
 	private String academicBudgetTitle;
+	private String exVar1;
 
 	private int budgetAllocated;
 	private int budgetUtilized;
@@ -24,6 +25,14 @@ public class GetAcademicBudget {
 
 	public void setExInt1(int exInt1) {
 		this.exInt1 = exInt1;
+	}
+
+	public String getExVar1() {
+		return exVar1;
+	}
+
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
 	}
 
 	public int getAcademicBudgetId() {
@@ -102,8 +111,9 @@ public class GetAcademicBudget {
 	public String toString() {
 		return "GetAcademicBudget [academicBudgetId=" + academicBudgetId + ", finYearId=" + finYearId + ", acYearId="
 				+ acYearId + ", instituteId=" + instituteId + ", exInt1=" + exInt1 + ", academicBudgetTitle="
-				+ academicBudgetTitle + ", budgetAllocated=" + budgetAllocated + ", budgetUtilized=" + budgetUtilized
-				+ ", academicYear=" + academicYear + ", finYear=" + finYear + "]";
+				+ academicBudgetTitle + ", exVar1=" + exVar1 + ", budgetAllocated=" + budgetAllocated
+				+ ", budgetUtilized=" + budgetUtilized + ", academicYear=" + academicYear + ", finYear=" + finYear
+				+ "]";
 	}
 
 }

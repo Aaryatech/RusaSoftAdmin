@@ -113,7 +113,7 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="40%">Title</th>
-													<th>Funding From</th>
+													<th>Source of Funding</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
 													<th>Total Expenditure for Infrastructure ${budRupees}</th>

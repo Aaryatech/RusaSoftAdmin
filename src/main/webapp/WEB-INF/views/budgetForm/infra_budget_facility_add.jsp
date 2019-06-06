@@ -148,8 +148,8 @@
 										
 											<div class="form-group">
 
-											<label class="control-label col-sm-2" for="fin_year_id">Funding
-												From<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="funding_from"> Source of 
+												Funding<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<select id="funding_from" name="funding_from"

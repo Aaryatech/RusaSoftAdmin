@@ -120,14 +120,14 @@
 									<ul class="nav nav-tabs">
 
 										<li class="active"><a href="#Vision" data-toggle="tab">
-												<i class="fa fa-home"></i> Vision
+												<i class="fa fa-home"></i> <span style="color: #008B8B; font-weight: 900;">Vision</span>
 										</a></li>
 										<li><a href="#Mission" data-toggle="tab"> <i
-												class="fa fa-home"></i> Mission
+												class="fa fa-home"></i><span style="color: #008080; font-weight: 900;">Mission</span>
 										</a></li>
 									</ul>
 
-									<div class="tab-content">
+									<div class="tab-content">	
 
 
 
@@ -148,12 +148,12 @@
 														Vision<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" onchange="trim(this)"
+														<textarea rows="4" cols="50" class="form-control" onchange="trim(this)"
 															id="inst_vision_text" name="inst_vision_text"
-															placeholder="Institute Vision" autocomplete="off" >
+															placeholder="Institute Vision" autocomplete="off" ></textarea>
 															<span
-					class="error_form text-danger" id="vision_error_field"
-					style="display: none;">Please enter institute vision</span>
+																class="error_form text-danger" id="vision_error_field"
+																style="display: none;">Please enter institute vision</span>
 													</div>
 
 													<div class="col-sm-4">
@@ -198,7 +198,7 @@
 															<thead>
 
 																<tr>
-																	<th width="10%">Sr No</th>
+																<!-- 	<th width="10%">Sr No</th> -->
 																	<th>Vision</th>
 
 																	<th width="10%">Action</th>
@@ -211,7 +211,7 @@
 																	varStatus="count">
 																	<tr>
 
-																		<td style="text-align: center; ">${count.index+1}</td>
+																		<%-- <td style="text-align: center; ">${count.index+1}</td> --%>
 																		<td>${list.instVisionText}</td>
 																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteVission(${list.instVisionId})"><span
@@ -256,9 +256,9 @@
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
+														<textarea rows="4" cols="" class="form-control"
 															id="inst_mission_text" name="inst_mission_text"
-															placeholder="Institute Mission " required autocomplete="off"> <input
+															placeholder="Institute Mission " required autocomplete="off"></textarea> <input
 															type="hidden"   id="instMissionId"
 															name="instMissionId" value="0">
 													</div>
@@ -298,7 +298,7 @@
 														<table class="table table-bordered" id="table2">
 															<thead>
 																<tr>
-																	<th width="10%">Sr No</th>
+																	<!-- <th width="10%">Sr No</th> -->
 																	<th>Mission</th>
 
 																	<th width="10%">Action</th>
@@ -311,7 +311,7 @@
 																	varStatus="count">
 																	<tr>
 
-																		<td style="text-align: center; ">${count.index+1}</td>
+																		<%-- <td style="text-align: center; ">${count.index+1}</td> --%>
 																		<td>${list.instMissionText}</td>
 																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteMission(${list.instMissionId})"><span
@@ -416,7 +416,7 @@
 								.draw(); */  
 						
 						var tr = $('<tr></tr>');
-						tr.append($('<td ></td>').html(i + 1));
+						/* tr.append($('<td ></td>').html(i + 1)); */
 					  	tr.append($('<td ></td>').html(data.institueVisionList[i].instVisionText)); 
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
@@ -488,7 +488,7 @@
 								[ i + 1, data.programVissionList[i].visionText, data.programVissionList[i].visionRemark, acButton ])
 								.draw(); */  
 						var tr = $('<tr></tr>');
-						tr.append($('<td ></td>').html(i + 1));
+						/* tr.append($('<td ></td>').html(i + 1)); */
 					  	tr.append($('<td ></td>').html(data.institueVisionList[i].instVisionText)); 
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
@@ -560,7 +560,7 @@
 								.draw(); */  
 						
 						var tr = $('<tr></tr>');
-						tr.append($('<td ></td>').html(i + 1));
+						/* tr.append($('<td ></td>').html(i + 1)); */
 					  	tr.append($('<td ></td>').html(data.institueMissionList[i].instMissionText)); 
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table2 tbody').append(tr); 
@@ -609,7 +609,7 @@
 							.draw(); */  
 					
 					var tr = $('<tr></tr>');
-					tr.append($('<td ></td>').html(i + 1));
+					/* tr.append($('<td ></td>').html(i + 1)); */
 				  	tr.append($('<td ></td>').html(data.institueMissionList[i].instMissionText)); 
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table2 tbody').append(tr); 

@@ -111,6 +111,7 @@
 														onClick="selectedInst(this)" /> Select All</th> -->
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
+													<th>Source of Funding</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
 													<th>Total Expenditure for Green Initiatives 
@@ -129,7 +130,7 @@
 															value="${budget.wasteMngtBudgetId}" /></td>  --%>
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
-
+														<td align="center">${budget.exVar1}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
 														<td align="right">${budget.exInt1}</td>

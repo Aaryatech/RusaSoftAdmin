@@ -123,6 +123,7 @@
 
 
 													<th>Financial Year</th>
+													<th>Source of Funding</th>
 													<th style="text-align: right;">Expenditures on
 														purchase of Books ${budRupees}</th>
 													<th style="text-align: right;">Expenditures on
@@ -152,6 +153,7 @@
 
 														<td align="center">${count.index+1}</td>
 														<td style="text-align: center;">${budget.finYear}</td>
+														<td style="text-align: center;">${budget.exVar1}</td>
 														<td style="text-align: right;">${budget.expenditureOnBookPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnJournalsPurchase}</td>
 														<td style="text-align: right;">${budget.expenditureOnEjournalsPurchase}</td>

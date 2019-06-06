@@ -10,6 +10,7 @@ public class GetWasteMngtBudget {
 	private int exInt1;
 	
 	private String wasteMngtBudgetTitle;
+	private String exVar1;
 	
 	private int budgetAllocated ;
 	private int budgetUtilized; 
@@ -24,6 +25,13 @@ public class GetWasteMngtBudget {
 	}
 	public void setExInt1(int exInt1) {
 		this.exInt1 = exInt1;
+	}
+	
+	public String getExVar1() {
+		return exVar1;
+	}
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
 	}
 	public int getWasteMngtBudgetId() {
 		return wasteMngtBudgetId;
@@ -83,8 +91,9 @@ public class GetWasteMngtBudget {
 	public String toString() {
 		return "GetWasteMngtBudget [wasteMngtBudgetId=" + wasteMngtBudgetId + ", finYearId=" + finYearId + ", acYearId="
 				+ acYearId + ", instituteId=" + instituteId + ", exInt1=" + exInt1 + ", wasteMngtBudgetTitle="
-				+ wasteMngtBudgetTitle + ", budgetAllocated=" + budgetAllocated + ", budgetUtilized=" + budgetUtilized
-				+ ", academicYear=" + academicYear + ", finYear=" + finYear + "]";
+				+ wasteMngtBudgetTitle + ", exVar1=" + exVar1 + ", budgetAllocated=" + budgetAllocated
+				+ ", budgetUtilized=" + budgetUtilized + ", academicYear=" + academicYear + ", finYear=" + finYear
+				+ "]";
 	}
-	
+
 }

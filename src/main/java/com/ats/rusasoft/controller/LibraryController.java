@@ -361,7 +361,7 @@ public class LibraryController {
 			else {
 				RareBook rareBook = new RareBook();
 
-				model.addObject("title", "Add Rare Book Information");
+				model.addObject("title", "Add Library Rare Book - Manuscript Information");
 				model.addObject("rareBook", rareBook);
 			}
 		} catch (Exception e) {
@@ -402,7 +402,7 @@ public class LibraryController {
 				List<RareBook> rareBokList = new ArrayList<>(Arrays.asList(rrbook));
 
 				model.addObject("rareBokList", rareBokList);
-				model.addObject("title", "Rare Book Information");
+				model.addObject("title", "Library Rare Book - Manuscript Information");
 
 				Info add = AccessControll.checkAccess("showRareBookInfo", "showRareBookInfo", "0", "1", "0", "0",
 						newModuleList);
@@ -499,7 +499,7 @@ public class LibraryController {
 				RareBook editBook = rest.postForObject(Constants.url + "/getRareBookById", map, RareBook.class);
 				model.addObject("rareBook", editBook);
 
-				model.addObject("title", "Edit Rare Book Information");
+				model.addObject("title", "Edit Library Rare Book - Manuscript Information");
 			}
 		} catch (Exception e) {
 

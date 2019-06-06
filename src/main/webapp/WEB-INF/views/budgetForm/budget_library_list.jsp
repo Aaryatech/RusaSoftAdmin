@@ -113,7 +113,7 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="28%">Title</th>
-													<th>Funding From</th>
+													<th>Source of Funding</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
 													<th>Budget Allocated for Knowledge Resource Center(Library)

@@ -234,7 +234,7 @@ public class BudgetCon {
 				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				budget.setExInt2(exInt1);
 				String exVar1 = "NA";
-				budget.setExVar1(exVar1);
+				budget.setExVar1(request.getParameter("funding_from"));
 				budget.setExVar2(exVar1);
 
 				budget.setIsActive(1);
@@ -332,7 +332,7 @@ public class BudgetCon {
 	@RequestMapping(value = "/budgetOnAcadamicSupportFacilities", method = RequestMethod.GET)
 	public ModelAndView budgetOnAcadamicSupportFacilities(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = null;// new ModelAndView("budgetForm/infra_budget_facility_list");
+		ModelAndView model = null;
 		try {
 
 			HttpSession session = request.getSession();
@@ -514,7 +514,7 @@ public class BudgetCon {
 				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				budget.setExInt2(exInt1);
 				String exVar1 = "NA";
-				budget.setExVar1(exVar1);
+				budget.setExVar1(request.getParameter("funding_from"));
 				budget.setExVar2(exVar1);
 
 				budget.setIsActive(1);

@@ -146,22 +146,20 @@
 													enter budget title.</span>
 											</div>
 										</div>
-										<%-- <div class="form-group">
+										<div class="form-group">
 
-											<label class="control-label col-sm-2"
-												for="infra_budget_title">Budget Physical Title <span
-												class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="fin_year_id">Source of 
+												Funding<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" autocomplete="off"
-													required id="infra_budget_title" name="infra_budget_title"
-													value="${editBudget.physicalFacilityBudgetTitle}"
-													placeholder="Title of Physical Facility"> <span
-													class="error_form text-danger"
-													id="error_infra_budget_title" style="display: none;">Please
-													enter Budget Physical Title </span>
+												<select id="funding_from" name="funding_from"
+													class="form-control">
+													<option value="Management" ${budget.exVar1 eq 'Management' ? 'selected' : ''}>Management</option>
+													<option value="Govt." ${budget.exVar1 eq 'Govt.' ? 'selected' : '' }>Govt.</option>
+													<option value="Rusa" ${budget.exVar1 eq 'Rusa' ? 'selected' : '' }>Rusa</option>
+												</select>
 											</div>
-										</div> --%>
+										</div>
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget

@@ -108,6 +108,7 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="40%">Title of Physical Facilities</th>
+													<th>Source of Funding</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
 													<th>Total Expenditure for Physical Facility ${budRupees}</th>
@@ -124,7 +125,8 @@
 															value="${accOff.officerId}" /></td> --%>
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
-														<td>${budget.physicalFacilityBudgetTitle}</td>
+														<td align="center">${budget.physicalFacilityBudgetTitle}</td>
+														<td align="center">${budget.exVar1}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
 														<td align="right">${budget.exInt1}</td>

@@ -14,6 +14,7 @@ public class GetPhysicalFacilityBudget {
 	private int budgetUtilized;
 
 	private String academicYear;
+	private String exVar1;
 	private String finYear;
 
 	
@@ -23,6 +24,14 @@ public class GetPhysicalFacilityBudget {
 
 	public void setExInt1(int exInt1) {
 		this.exInt1 = exInt1;
+	}
+
+	public String getExVar1() {
+		return exVar1;
+	}
+
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
 	}
 
 	public int getPhysicalFacilityBudgetId() {
@@ -103,9 +112,8 @@ public class GetPhysicalFacilityBudget {
 				+ finYearId + ", acYearId=" + acYearId + ", instituteId=" + instituteId + ", exInt1=" + exInt1
 				+ ", physicalFacilityBudgetTitle=" + physicalFacilityBudgetTitle + ", budgetAllocated="
 				+ budgetAllocated + ", budgetUtilized=" + budgetUtilized + ", academicYear=" + academicYear
-				+ ", finYear=" + finYear + "]";
+				+ ", exVar1=" + exVar1 + ", finYear=" + finYear + "]";
 	}
 
 	
-
 }

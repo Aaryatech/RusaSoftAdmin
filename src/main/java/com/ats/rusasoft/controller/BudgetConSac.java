@@ -960,7 +960,7 @@ public class BudgetConSac {
 				wasteAndGreenMngtBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				wasteAndGreenMngtBudget.setExInt2(exInt1);
 				String exVar1 = "NA";
-				wasteAndGreenMngtBudget.setExVar1(exVar1);
+				wasteAndGreenMngtBudget.setExVar1(request.getParameter("funding_from"));
 				wasteAndGreenMngtBudget.setExVar2(exVar1);
 
 				wasteAndGreenMngtBudget.setIsActive(1);
