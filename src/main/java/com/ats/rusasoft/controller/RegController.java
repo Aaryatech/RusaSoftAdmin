@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.master.InstituteMaster;
 import com.ats.rusasoft.master.model.prodetail.NameIdBean;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Institute;
@@ -34,6 +35,36 @@ public class RegController {
 	LinkedHashMap<String, String> otpKeyValue = new LinkedHashMap<String,String>();
 
 	RestTemplate rest = new RestTemplate();
+	
+	
+	
+	@RequestMapping(value = "/getInstituteMasterByAishe", method = RequestMethod.GET)
+	public @ResponseBody InstituteMaster  getInstituteMasterByAishe(HttpServletRequest request, HttpServletResponse response) {
+		
+		MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+		
+		InstituteMaster imaster=null;
+		
+		try {
+			
+		String aisheCode=request.getParameter("aishe_code");
+		
+		map =new LinkedMultiValueMap<String, Object>(); 
+		
+		map.add("aisheCode", aisheCode);
+			
+		  imaster = rest.postForObject(Constants.url + "getInstituteMasterByAishe", map,
+				 InstituteMaster.class);
+			
+		}catch (Exception e) {
+			System.err.println("Exce in imaster " +e.getMessage());
+			e.printStackTrace();
+		}
+			
+		return imaster;
+	
+	}
+	
 	
 	@RequestMapping(value = "/insertInstituteDemo", method = RequestMethod.POST)
 	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {

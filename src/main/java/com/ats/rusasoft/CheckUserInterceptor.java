@@ -24,7 +24,7 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
     	HttpSession session = request.getSession();
 
         String path = request.getRequestURI().substring(request.getContextPath().length());
-        System.out.println("path is: "+path);
+      //  System.out.println("path is: "+path);
       
 		if(path.startsWith("/pdf")) {
 			return true;
@@ -72,8 +72,10 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
         		 || request.getServletPath().equals("/forgotPas")
         		 || request.getServletPath().equals("/OTPVerificationByContact")
         		 || request.getServletPath().equals("/OTPVerification")
-        		 || request.getServletPath().equals("/changePassForm")){ //||request.getServletPath().equals("/logout")
-        	// System.out.println("Login request");// /changePassForm
+        		 || request.getServletPath().equals("/changePassForm")
+        		 || request.getServletPath().equals("/getInstituteMasterByAishe")
+        		 || request.getServletPath().equals("/checkUniqueField")){ //||request.getServletPath().equals("/logout")
+        	// System.out.println("Login request");// /checkUniqueField
              return true;
          }
          else 
