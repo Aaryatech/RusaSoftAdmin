@@ -604,10 +604,10 @@
 														<div class="col-lg-10">8] Intellectual Property
 															Rights and Industry Institute Initiatives</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showIntelPropRght')"><i
+															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showIntelPropRght')"><i class="fa fa-file-pdf-o"
+																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -661,10 +661,10 @@
 														<div class="col-lg-10">13] Award/Recognition for
 															Extension Activity</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showAwardRecog')"><i
+															<a href="#" onclick="hi()"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showAwardRecog')"><i class="fa fa-file-pdf-o"
+																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -709,18 +709,6 @@
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
-													
-													<div class="panel-body">
-														<div class="col-lg-10">18] No Award/Recognition for Extension Activity</div>
-														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showNoAwardRecogExtAct')"><i
-																class="fa fa-file-excel-o" style="color: green;"
-																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showNoAwardRecogExtAct')"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
-														</div>
-													</div>
-												</div>
 												</div>
 											</div>
 											<!-- Criteria 3 Ends-->
@@ -1067,10 +1055,10 @@
 														<div class="col-lg-10">13] Alumni Association
 															Meeting Details</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showAluminiAssoMeetingReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showAluminiAssoMeetingReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -1338,10 +1326,10 @@
 														<div class="col-lg-10">8] No of Initiative to
 															Address Locational Advantages & Disadvantages</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showNoInitivAddrsLoctnAdvDisadv')"><i
+															<a href="#" onclick="getProgReport(0)"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showNoInitivAddrsLoctnAdvDisadv'))"><i
+																href="#" onclick="getProgReport(1)"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -1362,10 +1350,10 @@
 														<div class="col-lg-10">10] Human Values &
 															Professional Ethics</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showHumanValProfEthicsReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showHumanValProfEthicsReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
