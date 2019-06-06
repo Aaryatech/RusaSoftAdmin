@@ -528,11 +528,14 @@
 													<div class="panel-body">
 														<div class="col-lg-10">1] No of Recognition/Awards</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#"
+																onclick="getProgReport(0,'showAwardRecognizationReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showAwardRecognizationReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
@@ -672,30 +675,33 @@
 														<div class="col-lg-10">14] No of Student/Teachers
 															Participation in Extension Activity</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#"
+																onclick="getProgReport(0,'showExtensionActivityReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
-																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
+																href="#"
+																onclick="getProgReport(1,'showExtensionActivityReport')"><i
+																class="fa fa-file-pdf-o" style="color: red;"
+																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">15] Linkages Information</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showNoOfLinkages')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showNoOfLinkages')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
 													<div class="panel-body">
 														<div class="col-lg-10">16] No of Linkages</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0,'showNoOfLinkages')"><i
+															<a href="#" onclick="getProgReport(0,'showNoOfStudTeachLinkageReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1,'showNoOfLinkages')"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showNoOfStudTeachLinkageReport')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
