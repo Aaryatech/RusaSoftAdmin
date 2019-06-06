@@ -155,6 +155,21 @@
 														offered by.</span>
 												</div>
 											</div>
+											
+											<div class="form-group">
+
+												<label class="control-label col-sm-3"
+													for="inst_schme_offeredby">Amount<span class="text-danger"></span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" autocomplete="off"
+														id="amount" name="amount" placeholder="Amount" 
+														onkeypress='return restrictAlphabets(event)'
+														onchange="trim(this)" onFocus="clearDefault(this)"
+														value="${instSpprt.exInt1}">
+												</div>
+											</div>
+											
 
 
 											<div class="form-group">

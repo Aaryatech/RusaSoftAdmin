@@ -113,6 +113,7 @@
 													<th width="10%">Sr No</th>
 													<th>Financial Year</th>
 													<th width="28%">Title</th>
+													<th>Funding From</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
 													<th>Budget Allocated for Knowledge Resource Center(Library)
@@ -129,7 +130,8 @@
 															value="${budget.libBudgetId}" /></td>  --%>
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
-														<td>${budget.libBudgetTitle}</td>
+														<td align="center">${budget.libBudgetTitle}</td>
+														<td align="center">${budget.exVar1}</td>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
 														<td align="right">${budget.exInt1}</td>

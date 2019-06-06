@@ -237,7 +237,7 @@ public class InstituteController {
 			instSpprt.setIsActive(1);
 			instSpprt.setMakerUserId(userId);
 			instSpprt.setMakerDatetime(curDateTime);
-			instSpprt.setExInt1(0);
+			instSpprt.setExInt1(Integer.parseInt(request.getParameter("amount")));
 			instSpprt.setExInt2(0);
 			instSpprt.setExVar1("NA");
 			instSpprt.setExVar2("NA");
@@ -1491,7 +1491,7 @@ public class InstituteController {
 			ictEnbFac.setIsActive(1);
 			ictEnbFac.setMakerUserId(userId);
 			ictEnbFac.setMakerEnterDatetime(curDateTime);
-			ictEnbFac.setExInt1(0);
+			ictEnbFac.setExInt1(Integer.parseInt(request.getParameter("lcd_led")));
 			ictEnbFac.setExInt2(0);
 			ictEnbFac.setExVar1("NA");
 			ictEnbFac.setExVar2("NA");
@@ -1759,7 +1759,7 @@ public class InstituteController {
 			govt.setIsActive(1);
 			govt.setMakerUserId(userId);
 			govt.setMakerEntrDatetime(curDateTime);
-			govt.setExInt1(0);
+			govt.setExInt1(Integer.parseInt(request.getParameter("amount")));
 			govt.setExInt2(0);
 			govt.setExVar1("NA");
 			govt.setExVar2("NA");

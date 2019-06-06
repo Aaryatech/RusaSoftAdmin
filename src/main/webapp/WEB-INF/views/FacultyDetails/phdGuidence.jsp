@@ -131,6 +131,32 @@
 														</div>
 														
 														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Aadhaar No.
+																of Ph.D. Scholar <span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="aadhar" onchange="trim(this)"
+																	name="aadhar" placeholder="Aadhaar No." maxlength="12"
+																	value="${phd.aadhaarNo}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_field_adhar" style="display:none;" >
+																	Please enter aadhaar No.</span>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="smallheading">Place of 
+																Work<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control" id="place_work" onchange="trim(this)"
+																	name="place_work" placeholder="Place of Work"
+																	value="${phd.placeOfWork}" autocomplete="off">
+																	<span class="error_form text-danger" id="error_field_place_work" style="display:none;" >
+																	Please enter place of work.</span>
+															</div>
+														</div>
+														
+														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">University
 																 <span class="text-danger">*</span>
 															</label>
@@ -415,8 +441,32 @@
             					$("#error_formfield0").hide()
             				}
            				
+           				if(!$("#aadhar").val()){
+         					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
             				
-			            	 if (!isError) {
+            				$("#aadhar").addClass("has-error")
+            				$("#error_field_adhar").show()
+            					//return false;
+            				} else {
+            					$("#error_field_adhar").hide()
+            				}
+           				
+           				if(!$("#place_work").val()){
+        					 
+            				isError=true;
+            				errMsg += '<li>Please enter a valid name.</li>';
+            				
+            				$("#place_work").addClass("has-error")
+            				$("#error_field_place_work").show()
+            					//return false;
+            				} else {
+            					$("#error_field_place_work").hide()
+            				}
+           				
+            				
+			            	 if (!isError) {  
 			            		 
 								var x = confirm("Do you really want to submit the form?");
 								if (x == true) {

@@ -1,5 +1,7 @@
 package com.ats.rusasoft.model.reports;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class FunctionalMou {
 
 	private int instReasearchDevMouId;
@@ -21,12 +23,14 @@ public class FunctionalMou {
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
 	}
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public String getDurFromdt() {
 		return durFromdt;
 	}
 	public void setDurFromdt(String durFromdt) {
 		this.durFromdt = durFromdt;
 	}
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public String getDurTodt() {
 		return durTodt;
 	}

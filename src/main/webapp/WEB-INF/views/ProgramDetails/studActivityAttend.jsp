@@ -78,6 +78,7 @@
 											<tr>
 												<th>Sr.No.</th>
 												<th>Name of Activity</th>
+												<th>Venue</th>
 												<th>Date</th>
 												<th>Year</th>
 												<th>Branch</th>
@@ -96,12 +97,13 @@
 
 													<td style="text-align: center; ">${count.index+1}</td>
 													<td>${list.activityName}</td>
+													<td>${list.venue}</td>
 													<td style="text-align: center; ">${list.date}</td>
 													<td style="text-align: center; ">${list.yearName}</td>
 													<td>${list.branch}</td>
 													<td style="text-align: right; ">${list.participatedStudent}</td>
 													<td>${list.level}</td>
-												<td>${list.aadharNo}</td>
+													<td>${list.aadharNo}</td>
 													<td>${list.exVar1}</td>
 													<td>${list.exVar2}</td>
 

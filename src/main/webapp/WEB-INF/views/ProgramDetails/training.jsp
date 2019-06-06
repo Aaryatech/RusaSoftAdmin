@@ -69,15 +69,21 @@
 											id="example-1">
 											<thead>
 												<tr>
-													<th>Sr.No.</th>
-													<th>Program Name</th>
-													<th>Employer Name</th>
-													<th>Students Placed</th>
-													<th>Employer Address</th>
-													<th>Contact Details</th>
-													<th>Package Offered</th>
-													<th>Action</th>
+													<th rowspan="2">Sr.No.</th>
+													<th rowspan="2">Program Name</th>
+													<th rowspan="2">Employer Name</th>
+													<th rowspan="2">Students Placed</th>
+													<th rowspan="2">Employer Address</th>
+													<th rowspan="2">Contact Details</th>
+													<th style="text-align: center;" colspan="2">Package Offered</th>
+													<th rowspan="2">Action</th>
 												</tr>
+												<tr>
+														<th>Min Package</th>
+														<th>Max Package</th>
+
+
+													</tr>
 											</thead>
 											<tbody>
 												<c:forEach items="${trainPlaceList}" var="trainPlace"
@@ -90,7 +96,9 @@
 														<td align="right">${trainPlace.noStudentPlaced}</td>
 														<td align="left">${trainPlace.empyrAdd}</td>
 														<td align="left">${trainPlace.contactDetail}</td>
-														<td align="right">${trainPlace.pakageOfferd}</td>
+														<%-- <td align="right">${trainPlace.pakageOfferd}</td> --%>
+														<td style="text-align: center;">${trainPlace.pakageOfferd}</td>
+														<td style="text-align: center;">${trainPlace.exVar1}</td>
 
 														<td align="center"><c:if test="${editAccess==0}">
 																<a href="#"

@@ -146,7 +146,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="seminar_hall"
-													autocomplete="off" name="seminar_hall" maxlength="7" onkeypress='return restrictAlphabets(event)'
+													autocomplete="off" name="seminar_hall" maxlength="7" 
 													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
 													onchange="trim(this)" placeholder="No. of Seminar Halls"
 													value="${ictEnbFac.seminarHall}"> <span
@@ -162,13 +162,29 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="ict_seminar"
-													autocomplete="off" name="ict_seminar" maxlength="7" onkeypress='return restrictAlphabets(event)'
+													autocomplete="off" name="ict_seminar" maxlength="7" 
 													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
 													onchange="trim(this)" placeholder="No. of Seminar Halls with ICT "
 													value="${ictEnbFac.ictSeminarHall}"> <span
 													class="error_form text-danger" id="error_formfield5"
 													style="display: none;">Please enter No. of seminar halls
 													with ICT and value must be greater than 0.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="participant">LCD/LED
+												 Projectors<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="lcd_led"
+													autocomplete="off" name="lcd_led" maxlength="7" onkeypress='return restrictAlphabets(event)'
+													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
+													onchange="trim(this)" placeholder="LCD/LED Projectors"
+													value="${ictEnbFac.exInt1}"> <span
+													class="error_form text-danger" id="error_formfield6"
+													style="display: none;">Please enter LCD/LED projectors
+													and value must be greater than 0.</span>
 											</div>
 										</div>
 
@@ -322,6 +338,18 @@
             				} else {
             					$("#error_formfield5").hide()
             				} 
+            				
+            				if($("#lcd_led").val()<=0 ||  !$("#lcd_led").val()){
+             					 
+                				isError=true;
+                				errMsg += '<li>Please enter a valid name.</li>';
+                				
+                				$("#lcd_led").addClass("has-error")
+                				$("#error_formfield6").show()
+                					//return false;
+                				} else {
+                					$("#error_formfield6").hide()
+                				} 
            			
             				
 			            	 if (!isError) {

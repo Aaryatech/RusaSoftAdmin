@@ -212,13 +212,22 @@
 													<label class="control-label col-sm-3" for="page_order">
 														Package Offered<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-9">
+													<div class="col-sm-3">
 														<input type="text" onchange="trim(this)" min="0" maxlength="50" class="form-control"
 															id="package_offered" value="${trainPlace.pakageOfferd}"
 															name="package_offered"
-															placeholder="Package Offered by Employer to Students"
+															placeholder="Min. Package"
 															><span class="error_form text-danger" id="package_offered_field"
-															style="display: none;">Please enter package amount offered to students</span>
+															style="display: none;">Please enter minimum package amount offered to students</span>
+													</div>
+													
+													<div class="col-sm-3" style="margin-left: 10%;">
+														<input type="text" onchange="trim(this)" min="0" maxlength="50" class="form-control"
+															id="max_package_offered" value="${trainPlace.exVar1}"
+															name="max_package_offered"
+															placeholder="Max. Package"
+															><span class="error_form text-danger" id="max_package_offered_field"
+															style="display: none;">Please enter maximum package amount offered to students</span>
 													</div>
 												</div>
 
@@ -481,17 +490,28 @@
 								} */
 												if (!$("#package_offered").val())
 												{
-									isError = true;
-									$("#package_offered").addClass(
-											"has-error")
-									$("#package_offered_field")
-											.show()
-								} else {
-									$("#package_offered_field")
-											.hide()
-								} 
+													isError = true;
+													$("#package_offered").addClass(
+															"has-error")
+													$("#package_offered_field")
+															.show()
+												} else {
+													$("#package_offered_field")
+															.hide()
+												} 
 												
-												 
+
+											if (!$("#max_package_offered").val())
+											{
+												isError = true;
+												$("#max_package_offered").addClass(
+														"has-error")
+												$("#max_package_offered_field")
+														.show()
+											} else {
+												$("#max_package_offered_field")
+														.hide()
+											} 			 
 												
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");

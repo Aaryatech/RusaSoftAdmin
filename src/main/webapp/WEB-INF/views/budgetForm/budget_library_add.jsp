@@ -140,6 +140,21 @@
 													style="display: none;">Please enter budget title</span>
 											</div>
 										</div>
+										
+											<div class="form-group">
+
+											<label class="control-label col-sm-2" for="fin_year_id">Funding
+												From<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="funding_from" name="funding_from"
+													class="form-control">
+													<option value="Management" ${budget.exVar1 eq 'Management' ? 'selected' : ''}>Management</option>
+													<option value="Govt." ${budget.exVar1 eq 'Govt.' ? 'selected' : '' }>Govt.</option>
+													<option value="Rusa" ${budget.exVar1 eq 'Rusa' ? 'selected' : '' }>Rusa</option>
+												</select>
+											</div>
+										</div>
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="allocatedAmt">Budget

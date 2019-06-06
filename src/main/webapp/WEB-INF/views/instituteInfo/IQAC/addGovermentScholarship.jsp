@@ -134,6 +134,18 @@
 													style="display: none;">Please enter scheme/support offered by.</span> 
 											</div>
 										</div>
+										
+											<div class="form-group">
+
+											<label class="control-label col-sm-2" for="lcd">Amount<span class="text-danger"></span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" onfocus="this.value=''"
+													autocomplete="off" id="amount" name="amount" onkeypress='return restrictAlphabets(event)'
+													placeholder="Amount" value="${govtScholr.exInt1}">
+												
+											</div>
+										</div>
 
 
 										<div class="form-group">

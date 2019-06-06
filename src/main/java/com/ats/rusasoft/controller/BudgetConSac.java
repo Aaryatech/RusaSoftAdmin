@@ -298,7 +298,7 @@ public class BudgetConSac {
 				infraBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_expd")));
 				infraBudget.setExInt2(exInt1);
 				String exVar1 = "NA";
-				infraBudget.setExVar1(exVar1);
+				infraBudget.setExVar1(request.getParameter("funding_from"));
 				infraBudget.setExVar2(exVar1);
 
 				infraBudget.setIsActive(1);
@@ -630,7 +630,7 @@ public class BudgetConSac {
 				libBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				libBudget.setExInt2(exInt1);
 				String exVar1 = "NA";
-				libBudget.setExVar1(exVar1);
+				libBudget.setExVar1(request.getParameter("funding_from"));
 				libBudget.setExVar2(exVar1);
 
 				libBudget.setIsActive(1);

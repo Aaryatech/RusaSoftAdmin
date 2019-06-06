@@ -250,7 +250,7 @@
 																<input type="text" maxlength="50" class="form-control"
 																	id="otherActivityName"
 																	value="${editProgramActivity.activityName}"
-																	name="otherActivityName"
+																	name="otherActivityName" onchange="return trim(this)"
 																	placeholder="Another Scheme Name"
 																	onchange="return trim(this)" required>
 															</div>
@@ -265,7 +265,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" maxlength="50" class="form-control"
-																	id="otherActivityName"
+																	id="otherActivityName" onchange="return trim(this)"
 																	value="${editProgramActivity.activityName}"
 																	name="otherActivityName"
 																	placeholder="Another Scheme Name"
@@ -282,7 +282,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control datepicker"
+														<input type="text" class="form-control datepicker" onchange="return trim(this)"
 															id="date" value="${editProgramActivity.date}"
 															placeholder="dd-mm-yyyy" name="date"  onkeypress='return restrictAlphabets(event)'
 															autocomplete="off">
@@ -291,21 +291,20 @@
 														style="display: none;">Please enter date.</span>
 													</div>
 												</div>
-<%-- value="${editProgramActivity.year}" --%>
 
-												<%-- <div class="form-group">
-													<label class="control-label col-sm-2" for="year">Year
+											<div class="form-group">
+													<label class="control-label col-sm-2" for="year">Venue
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control datepickeryear" onkeypress='return restrictAlphabets(event)'
-															id="year" value="${editProgramActivity.year}" name="year"
-															placeholder="Year" autocomplete="off">
+														<input type="text" class="form-control" onchange="return trim(this)"
+															id="venue" value="${editProgramActivity.venue}" name="venue"
+															placeholder="Venue" autocomplete="off">
 															<span
-														class="error_form text-danger" id="error_formfield2"
-														style="display: none;">Please enter year.</span>
+														class="error_form text-danger" id="error_formfield_venue"
+														style="display: none;">Please enter venue.</span>
 													</div>
-												</div> --%>
+												</div> 
 												
 											<div class="form-group">
 													<label class="control-label col-sm-2" for="year">Year
@@ -717,6 +716,22 @@ function clearDefault(a){
 													//return false;
 												} else {
 													$("#error_formfield1")
+															.hide()
+												}
+												if (!$("#venue")
+														.val()) {
+
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
+
+													$("#venue")
+															.addClass(
+																	"has-error")
+													$("#error_formfield_venue")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield_venue")
 															.hide()
 												}
 

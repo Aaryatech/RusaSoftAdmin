@@ -118,6 +118,7 @@
 																<th>No of Classrooms with Wifi/LAN</th>
 																<th>No of Seminar Halls</th>
 																<th>No of Seminar Halls with ICT</th>
+																<th>LCD/LED Projectors</th>
 																<th>Action</th>
 															</tr>
 														</thead>
@@ -134,6 +135,7 @@
 																	<td>${ictEnbFacList.noClassroomWifi}</td>
 																	<td>${ictEnbFacList.seminarHall}</td>
 																	<td>${ictEnbFacList.ictSeminarHall}</td>
+																	<td>${ictEnbFacList.exInt1}</td>
 																	<td align="center"><c:if test="${editAccess==0}">
 																			<a
 																				href="${pageContext.request.contextPath}/editIct/${ictEnbFacList.ictEnbFacId}"><span

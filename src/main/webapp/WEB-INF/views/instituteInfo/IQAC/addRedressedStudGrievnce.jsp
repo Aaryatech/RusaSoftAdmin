@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY --><!-- onload="showIsReg(${alumni.exInt1})" -->
-<body class=" " onload="showIsReg(${redressed.redrsStudGrvncId})">
+<body class=" " onload="showIsReg()">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -120,7 +120,8 @@
 															<option value="">Select</option>
 															<option value="Exam Grievances" ${redressed.studGrievnce == 'Exam Grievances' ? 'selected' : ''} >Exam Grievances</option>
 															<option value="Sexual Harassment" ${redressed.studGrievnce == 'Sexual Harassment' ? 'selected' : ''} >Sexual Harassment</option>
-															<option value=" Ragging Cases" ${redressed.studGrievnce  == ' Ragging Cases' ? 'selected' : ''} > Ragging Cases</option>
+															<option value="Ragging Cases" ${redressed.studGrievnce  == 'Ragging Cases' ? 'selected' : ''} >Ragging Cases</option>
+															<option value="Any Other" ${redressed.studGrievnce  == 'Any Other' ? 'selected' : ''} >Any Other</option>
 														</select>
 														<span class="error_form text-danger" id="stud_griev_errfield"
 															style="display: none;">Please select student grievances.</span>
@@ -362,13 +363,31 @@ function studGriev2(activity) {
 	
 	
 		
-		function showIsReg(act){
+		function showIsReg(){
 			
-				//alert(act);
+			var isTrans = ${redressed.isTransparent};
+				if(isTrans > 0 ){
+					document.getElementById("ihide0").style.display = "block";
+				}else{
+					document.getElementById("ihide0").style.display = "none";
+				}
 				
-				var isActivity = act; //$("input[name=isActivity]:checked").val();
+			var noTrans = ${redressed.noTrnsprntGrievnceAppeld}
+				if(noTrans > 0 ){
+					document.getElementById("ihide1").style.display = "block";
+				}else{
+					document.getElementById("ihide1").style.display = "none";
+				}
 				
-				if(isActivity > 0){
+			var isEffcnt= ${redressed.isEfficient}
+				if(isEffcnt > 0 ){
+					document.getElementById("ihide2").style.display = "block";
+				}else{
+					document.getElementById("ihide2").style.display = "none";
+				}
+				
+				
+				/* if(isActivity > 0 ){
 					document.getElementById("ihide0").style.display = "block";
 					document.getElementById("ihide1").style.display = "block";
 					document.getElementById("ihide2").style.display = "block";
@@ -377,7 +396,7 @@ function studGriev2(activity) {
 					document.getElementById("ihide0").style.display = "none";
 					document.getElementById("ihide1").style.display = "none";
 					document.getElementById("ihide2").style.display = "none";
-				} 
+				}  */
 				
 			}
 			

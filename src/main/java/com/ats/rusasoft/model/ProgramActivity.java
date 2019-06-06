@@ -6,6 +6,7 @@ public class ProgramActivity {
 	private int instituteId; 
 	private int yearId; 
 	private String activityName; 
+	private String venue;
 	private String otherCompitition; 
 	private String date; 
 	private String year; 
@@ -23,8 +24,13 @@ public class ProgramActivity {
 	private int type;
 	private String yearName;
 	private String aadharNo;
-	
-	
+		
+	public String getVenue() {
+		return venue;
+	}
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
 	public String getAadharNo() {
 		return aadharNo;
 	}
@@ -154,11 +160,12 @@ public class ProgramActivity {
 	@Override
 	public String toString() {
 		return "ProgramActivity [studentActivityId=" + studentActivityId + ", instituteId=" + instituteId + ", yearId="
-				+ yearId + ", activityName=" + activityName + ", otherCompitition=" + otherCompitition + ", date="
-				+ date + ", year=" + year + ", branch=" + branch + ", participatedStudent=" + participatedStudent
-				+ ", level=" + level + ", isActive=" + isActive + ", delStatus=" + delStatus + ", addDate=" + addDate
-				+ ", makerUserId=" + makerUserId + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1
-				+ ", exVar2=" + exVar2 + ", type=" + type + ", yearName=" + yearName + ", aadharNo=" + aadharNo + "]";
+				+ yearId + ", activityName=" + activityName + ", venue=" + venue + ", otherCompitition="
+				+ otherCompitition + ", date=" + date + ", year=" + year + ", branch=" + branch
+				+ ", participatedStudent=" + participatedStudent + ", level=" + level + ", isActive=" + isActive
+				+ ", delStatus=" + delStatus + ", addDate=" + addDate + ", makerUserId=" + makerUserId + ", exInt1="
+				+ exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", type=" + type
+				+ ", yearName=" + yearName + ", aadharNo=" + aadharNo + "]";
 	}
 	
 }

@@ -3,23 +3,29 @@ package com.ats.rusasoft.model.budget;
 public class GetInfraStructureBudget {
 
 	
-	private int infraBudgetId ;
+	private int infraBudgetId;
 	
 	private int finYearId;
 	private int acYearId;
 	private int instituteId;
 	
-	private String infraBudgetTitle ;
+	private String infraBudgetTitle;
 	
-	private int budgetAllocated ;
+	private int budgetAllocated;
 	private int budgetUtilized; 
 	
 	private String academicYear;
-	private String finYear ;
+	private String finYear;
 	private int exInt1;
+	private String exVar1;
 	
 	
-	
+	public String getExVar1() {
+		return exVar1;
+	}
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
+	}
 	public int getInfraBudgetId() {
 		return infraBudgetId;
 	}
@@ -86,8 +92,7 @@ public class GetInfraStructureBudget {
 		return "GetInfraStructureBudget [infraBudgetId=" + infraBudgetId + ", finYearId=" + finYearId + ", acYearId="
 				+ acYearId + ", instituteId=" + instituteId + ", infraBudgetTitle=" + infraBudgetTitle
 				+ ", budgetAllocated=" + budgetAllocated + ", budgetUtilized=" + budgetUtilized + ", academicYear="
-				+ academicYear + ", finYear=" + finYear + ", exInt1=" + exInt1 + "]";
+				+ academicYear + ", finYear=" + finYear + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + "]";
 	}
-	
-	
+
 }

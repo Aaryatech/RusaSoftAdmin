@@ -591,7 +591,8 @@ public class AlumniTrainingController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			int placeId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			String packge = "-";
+			String minPackge = "-";
+			String maxPackge = "-";
 			String suuppAgnc = "NA";
 			try {
 				placeId = Integer.parseInt(request.getParameter("place_id"));
@@ -637,12 +638,21 @@ public class AlumniTrainingController {
 					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					packge = request.getParameter("package_offered");
-					if (packge == null) {
-						trainPlace.setPakageOfferd(packge);
+					
+					minPackge = request.getParameter("package_offered");
+					maxPackge = request.getParameter("max_package_offered");
+					if (minPackge == null) {
+						trainPlace.setPakageOfferd(minPackge);
 					} else {
-						trainPlace.setPakageOfferd(packge);
+						trainPlace.setPakageOfferd(minPackge);
 					}
+					
+					if (maxPackge == null) {
+						trainPlace.setExVar1(maxPackge);
+					} else {
+						trainPlace.setExVar1(maxPackge);
+					}
+					
 
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
@@ -659,9 +669,7 @@ public class AlumniTrainingController {
 					int exInt1 = 0;
 					trainPlace.setExInt1(exInt1);
 					trainPlace.setExInt2(exInt1);
-					String exVar1 = "NA";
-					trainPlace.setExVar1(exVar1);
-					trainPlace.setExVar2(exVar1);
+					trainPlace.setExVar2("NA");
 					trainPlace.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
 					trainPlace.setIsActive(1);
 					trainPlace.setMakerUserId(userObj.getUserId());// get from Session
@@ -692,12 +700,21 @@ public class AlumniTrainingController {
 					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
 					trainPlace.setEmpyrName(request.getParameter("employer_name"));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					packge = request.getParameter("package_offered");
-					if (packge == null) {
-						trainPlace.setPakageOfferd(packge);
+					
+					minPackge = request.getParameter("package_offered");
+					maxPackge = request.getParameter("max_package_offered");
+					if (minPackge == null) {
+						trainPlace.setPakageOfferd(minPackge);
 					} else {
-						trainPlace.setPakageOfferd(packge);
+						trainPlace.setPakageOfferd(minPackge);
 					}
+					
+					if (maxPackge == null) {
+						trainPlace.setExVar1(maxPackge);
+					} else {
+						trainPlace.setExVar1(maxPackge);
+					}
+					
 					trainPlace.setPlacementId(placeId);
 					trainPlace.setProgramName(request.getParameter("prog_name"));
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
@@ -713,9 +730,7 @@ public class AlumniTrainingController {
 					int exInt1 = 0;
 					trainPlace.setExInt1(exInt1);
 					trainPlace.setExInt2(exInt1);
-					String exVar1 = "NA";
-					trainPlace.setExVar1(exVar1);
-					trainPlace.setExVar2(exVar1);
+					trainPlace.setExVar2("NA");
 					trainPlace.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
 					trainPlace.setIsActive(1);
 					trainPlace.setMakerUserId(userObj.getUserId());// get from Session

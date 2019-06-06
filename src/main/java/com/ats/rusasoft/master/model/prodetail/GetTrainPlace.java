@@ -6,7 +6,7 @@ public class GetTrainPlace {
 	private String empyrName;
 	private String programName;
 	private String progTypeName;
-	
+	private String exVar1;
 	private int noStudentPlaced ;
 	
 	private String empyrAdd ;
@@ -20,6 +20,13 @@ public class GetTrainPlace {
 	}
 	public String getEmpyrName() {
 		return empyrName;
+	}
+	
+	public String getExVar1() {
+		return exVar1;
+	}
+	public void setExVar1(String exVar1) {
+		this.exVar1 = exVar1;
 	}
 	public void setEmpyrName(String empyrName) {
 		this.empyrName = empyrName;
@@ -60,13 +67,13 @@ public class GetTrainPlace {
 	public void setPakageOfferd(String pakageOfferd) {
 		this.pakageOfferd = pakageOfferd;
 	}
-	
 	@Override
 	public String toString() {
 		return "GetTrainPlace [placementId=" + placementId + ", empyrName=" + empyrName + ", programName=" + programName
-				+ ", progTypeName=" + progTypeName + ", noStudentPlaced=" + noStudentPlaced + ", empyrAdd=" + empyrAdd
-				+ ", contactDetail=" + contactDetail + ", pakageOfferd=" + pakageOfferd + "]";
+				+ ", progTypeName=" + progTypeName + ", exVar1=" + exVar1 + ", noStudentPlaced=" + noStudentPlaced
+				+ ", empyrAdd=" + empyrAdd + ", contactDetail=" + contactDetail + ", pakageOfferd=" + pakageOfferd
+				+ "]";
 	}
 	
-	/*SELECT t_traning_placement.placement_id,t_traning_placement.empyr_name,m_program_type.program_name as prog_type_name, t_traning_placement.program_name,t_traning_placement.no_student_placed,t_traning_placement.empyr_add, t_traning_placement.contact_detail,t_traning_placement.pakage_offerd FROM t_traning_placement INNER JOIN m_program_type ON t_traning_placement.program_type=m_program_type.program_id WHERE t_traning_placement.year_id=1 AND t_traning_placement.institute_id=2 */
+	
 }

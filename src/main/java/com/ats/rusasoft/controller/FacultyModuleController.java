@@ -2096,6 +2096,8 @@ public class FacultyModuleController {
 			phd.setIsCoGuide(Integer.parseInt(request.getParameter("coGuide")));
 
 			phd.setPhdScholarName(request.getParameter("phd_scholar"));
+			phd.setAadhaarNo(request.getParameter("aadhar"));
+			phd.setPlaceOfWork(request.getParameter("place_work"));
 			phd.setPhdRegYear(request.getParameter("phd_year_reg"));
 			phd.setPhdTopic(request.getParameter("phd_topic"));
 			phd.setUniversity(request.getParameter("university"));

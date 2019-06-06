@@ -421,6 +421,7 @@ public class StudentActivityController {
 				String date = request.getParameter("date");
 				String year = request.getParameter("year");
 				String branch = request.getParameter("branch");
+				String venue = request.getParameter("venue");
 				int noStudent = Integer.parseInt(request.getParameter("noStudent"));
 				String level = request.getParameter("level");
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
@@ -452,6 +453,7 @@ public class StudentActivityController {
 				programActivity.setYearId(acYearId);
 				programActivity.setType(1);
 				programActivity.setIsActive(1);
+				programActivity.setVenue(venue);
 				
 				 stud = request.getParameter("stud_name");
 				if(stud!=null) {

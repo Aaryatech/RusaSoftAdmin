@@ -9,6 +9,8 @@ public class GetFacultyPhdGuide {
 	private int isCoGuide;
 	private String coGuideName;
 	private String phdScholarName;
+	private String aadhaarNo;
+	private String placeOfWork;
 	private int phdRegYear;
 	private String university;
 	private String phdTopic;
@@ -97,6 +99,22 @@ public class GetFacultyPhdGuide {
 
 	public void setPhdScholarName(String phdScholarName) {
 		this.phdScholarName = phdScholarName;
+	}
+
+	public String getAadhaarNo() {
+		return aadhaarNo;
+	}
+
+	public void setAadhaarNo(String aadhaarNo) {
+		this.aadhaarNo = aadhaarNo;
+	}
+
+	public String getPlaceOfWork() {
+		return placeOfWork;
+	}
+
+	public void setPlaceOfWork(String placeOfWork) {
+		this.placeOfWork = placeOfWork;
 	}
 
 	public int getPhdRegYear() {
@@ -199,12 +217,12 @@ public class GetFacultyPhdGuide {
 	public String toString() {
 		return "GetFacultyPhdGuide [phdId=" + phdId + ", facultyId=" + facultyId + ", yearId=" + yearId
 				+ ", isPhdGuide=" + isPhdGuide + ", isCoGuide=" + isCoGuide + ", coGuideName=" + coGuideName
-				+ ", phdScholarName=" + phdScholarName + ", phdRegYear=" + phdRegYear + ", university=" + university
-				+ ", phdTopic=" + phdTopic + ", isPhdAwarded=" + isPhdAwarded + ", phdAwardedYear=" + phdAwardedYear
-				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
-				+ ", makerEnterDatetime=" + makerEnterDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1
-				+ ", deptName=" + deptName + ", facultyFirstName=" + facultyFirstName + ", academicYear=" + academicYear
-				+ "]";
+				+ ", phdScholarName=" + phdScholarName + ", aadhaarNo=" + aadhaarNo + ", placeOfWork=" + placeOfWork
+				+ ", phdRegYear=" + phdRegYear + ", university=" + university + ", phdTopic=" + phdTopic
+				+ ", isPhdAwarded=" + isPhdAwarded + ", phdAwardedYear=" + phdAwardedYear + ", delStatus=" + delStatus
+				+ ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerEnterDatetime="
+				+ makerEnterDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + ", deptName=" + deptName
+				+ ", facultyFirstName=" + facultyFirstName + ", academicYear=" + academicYear + "]";
 	}
 
 	
