@@ -13545,8 +13545,10 @@ public class ReportController {
 					// cell.setPaddingLeft(10);
 
 					table.addCell(cell);
+					
+					double y1= prog.getBookCount()+prog.getPaperCount();
 
-					cell = new PdfPCell(new Phrase("" + prog.getBookCount()+prog.getPaperCount(), headFontData));
+					cell = new PdfPCell(new Phrase("" +y1, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
@@ -13630,10 +13632,11 @@ public class ReportController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
+						double y1= progList.get(i).getBookCount()+ progList.get(i).getPaperCount();
 
 						rowData.add("" + (i + 1));
    						rowData.add("" + progList.get(i).getAcademicYear());
-						rowData.add("" + progList.get(i).getBookCount()+ progList.get(i).getPaperCount());
+						rowData.add("" + y1);
  
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
