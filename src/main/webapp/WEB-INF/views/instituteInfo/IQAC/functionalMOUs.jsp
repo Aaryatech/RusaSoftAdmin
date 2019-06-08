@@ -132,7 +132,7 @@
 															<td style="text-align: left;">${mouList.mouTitle}</td>
 															<td style="text-align: center;">${mouList.mouFromdt}</td>
 															<td style="text-align: center;">${mouList.mouTodt}</td>
-															<td>${mouList.mouInstitute}</td>
+																<td>${mouList.mouAgency}</td>
 															<td style="text-align: right;">${mouList.mouBeneficiaryNos}</td>
 
 
