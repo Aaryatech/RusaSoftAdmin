@@ -29,6 +29,8 @@
 <!-- BEGIN BODY -->
 <body onload="showIsReg()" class=" ">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
+	
+	<c:url value="/getInstituteMasterByAishe" var="getInstituteMasterByAishe"></c:url>
 	<!-- START TOPBAR -->
 	<!-- END TOPBAR -->
 	<!-- START CONTAINER -->
@@ -96,37 +98,38 @@
 											<div class="col-md-12">
 												<div class="col-sm-2"></div>
 
-												<p class="desc text-danger fontsize11">Notice : This
+												<p class="desc text-danger fontsize11">Notice : This 
 													form strictly need to be filled by Institutes coming under
 													RUSA Maharashtra Only. You can access RUSA portal only
 													after authorisation done by RUSA officials.</p>
 
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_name">AISHE
+														Code <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-7">
+														<input type="text" maxlength="7" onchange="trim(this)"
+															class="form-control" id="aishe_code" autocomplete="off"
+															value="${editInst.aisheCode}" name="aishe_code"
+															placeholder="All India Survey On Higher Education code">
+														<span class="error_form text-danger" id="aishe_code_field"
+															style="display: none;">Please enter AISHE code</span>
+
+													</div>
+												</div>
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">Institute
 														Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" maxlength="100" onchange="trim(this)"
+														<input type="text" maxlength="100" readonly onchange="trim(this)"
 															class="form-control" id="inst_name" autocomplete="off"
 															value="${editInst.instituteName}" name="inst_name"
 															placeholder="Complete Name of Institute"> <span
 															class="error_form text-danger" id="inst_name_field"
 															style="display: none;">Please enter institute
 															name</span>
-
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">AISHE
-														Code <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-7">
-														<input type="text" maxlength="50" onchange="trim(this)"
-															class="form-control" id="aishe_code" autocomplete="off"
-															value="${editInst.aisheCode}" name="aishe_code"
-															placeholder="All India Survey On Higher Education code">
-														<span class="error_form text-danger" id="aishe_code_field"
-															style="display: none;">Please enter AISHE code</span>
 
 													</div>
 												</div>
@@ -155,7 +158,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)" maxlength="200"
+														<input type="text" onchange="trim(this)"  maxlength="200"
 															class="form-control" id="village" autocomplete="off"
 															value="${editInst.village}" name="village"
 															placeholder="Village">
@@ -170,7 +173,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)" maxlength="200"
+														<input type="text" onchange="trim(this)"  maxlength="200"
 															class="form-control" id="taluka" autocomplete="off"
 															value="${editInst.taluka}" name="taluka"
 															placeholder="Taluka">
@@ -187,7 +190,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)" maxlength="200"
+														<input type="text" onchange="trim(this)" readonly maxlength="200"
 															class="form-control" id="district" autocomplete="off"
 															value="${editInst.district}" name="district"
 															placeholder="District">
@@ -202,7 +205,7 @@
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)" maxlength="200"
+														<input type="text" onchange="trim(this)" readonly maxlength="200"
 															class="form-control" id="state" autocomplete="off"
 															value="${editInst.state}" name="state"
 															placeholder="State">
@@ -603,6 +606,34 @@
 	</div> --%>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
+<script type="text/javascript">
+
+$('#aishe_code').on('input', function() {
+	var aishe_code=$('#aishe_code').val();
+	//alert(data.length);
+	document.getElementById("inst_name").value="";
+	document.getElementById("district").value="";
+	if(aishe_code.length==7){
+		//alert("7 ")
+		$
+		.getJSON(
+				'${getInstituteMasterByAishe}',
+				{
+					aishe_code : aishe_code,
+					ajax : 'true',
+
+				},
+				function(data) {
+					//alert(JSON.stringify(data));
+					document.getElementById("inst_name").value=data.instName;
+					document.getElementById("district").value=data.district;
+					document.getElementById("state").value="Maharashtra";
+					
+				});
+	}
+	
+	});
+</script>
 	<script>
 		
 		function validateEmail(email) {

@@ -100,25 +100,45 @@
 														<label class="control-label col-sm-2" for="page_name">
 															New Password <span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-10">
-															<input type="password" class="form-control"
-																id="newPassword" name="newPassword" maxlength="10"
-																placeholder="Enter New Password" onkeyup="trim(this)"
+														<div class="col-sm-3">
+															<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  class="form-control"
+																id="newPassword" name="newPassword" maxlength="14"
+																placeholder="Enter New Password" onkeyup="trim(this);"
 																required>
 														</div>
+														<!-- <span
+id="strength">Type Password: Must contain at least one number(0-9) and one uppercase(A-Z) and lowercase(a-z) letter, and at least 8 and maximum 14  characters </span> <span
+class="validation-invalid-label" id="error_password"
+style="display: none;">This field is required.</span>
+<input type="hidden" id="allowPass" name="allowPass" value="0"> -->
 													</div>
+													
+													
+														<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">
+															Password format
+														</label>
+														<div class="col-sm-3">
+															<span
+id="strength">Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and <b>at least 8</b> and <b>maximum 14  characters</b> </span> 
+														</div>
+													</div>
+													
 
+													
 													<div class="form-group">
 														<label class="control-label col-sm-2" for="page_name">
 															Confirm Password <span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-10">
+														<div class="col-sm-3">
 															<input type="password" class="form-control"
-																id="conPassword" name="conPassword" maxlength="10"
+																id="conPassword" name="conPassword" maxlength="14"
 																placeholder="Enter Confirm Password"
 																onkeyup="trim(this)" required>
 														</div>
 													</div>
+													
+													
 
 
 													<div class="form-group">
@@ -172,7 +192,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
-		function validatePassword() {
+		 function validatePassword() {
 			var pass = document.getElementById("newPassword").value;
 			var conpass = document.getElementById("conPassword").value;
 			// alert(pass+" "+conpass);
@@ -184,7 +204,7 @@
 				return false;
 			}
 		}
-
+ 
 		function viewPassword() {
 			var pass1 = document.getElementById("newPassword");
 			var pass2 = document.getElementById("conPassword");
@@ -204,7 +224,41 @@
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
 		}
+		
+		
 	</script>
+	
+	<script>
+function passwordChanged() {
+var strength = document.getElementById("strength");
+$("#error_password").hide();
+var strongRegex = new RegExp(
+"^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$",
+"g");
+var mediumRegex = new RegExp(
+"^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
+"g");
+var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+var pwd = document.getElementById("newPassword").value;
+
+if (pwd.length == 0) {
+document.getElementById("strength").innerHTML = "Type Password";
+document.getElementById("allowPass").value=0;
+} else if (false == enoughRegex.test(pwd)) {
+document.getElementById("strength").innerHTML = "More Characters";
+document.getElementById("allowPass").value=0;
+} else if (strongRegex.test(pwd)) {
+document.getElementById("strength").innerHTML = "<span style='color:green'>Strong!</span>";
+document.getElementById("allowPass").value=1;
+} else if (mediumRegex.test(pwd)) {
+document.getElementById("strength").innerHTML = "<span style='color:orange'>Medium!</span>";
+document.getElementById("allowPass").value=1;
+} else {
+document.getElementById("strength").innerHTML = "<span style='color:red'>Weak!</span>";
+document.getElementById("allowPass").value=0;
+}
+}
+</script>
 
 </body>
 </html>
