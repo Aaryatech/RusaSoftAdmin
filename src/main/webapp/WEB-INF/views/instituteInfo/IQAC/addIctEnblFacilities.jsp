@@ -497,7 +497,7 @@
 				else
 					return false;
 			}
-		</script>
+		</script> 
 
 	<script type="text/javascript">
   var wasSubmitted = false;    
