@@ -176,8 +176,8 @@ table, th, td {
 																							has been taken</option>
 																						<option
 																							${tempFb.fbProcess eq 'C'  ? 'Selected': '' }
-																							value="C">Feedback Collected and
-																							analyzed</option>
+																							value="C">Feedback Collected and analyzed
+																							</option>
 																						<option
 																							${tempFb.fbProcess eq 'D' ? 'Selected': '' }
 																							value="D">Feedback Collected</option>

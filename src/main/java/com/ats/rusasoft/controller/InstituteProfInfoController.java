@@ -565,7 +565,12 @@ public class InstituteProfInfoController {
 					redInfo.setYearId(acYearId);
 					redInfo.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					redInfo.setMouInstitute(instituteOfMoU);
+					if (MOU_agency.equals("7")) {
 					redInfo.setMouAgency(c);
+					}
+					else {
+						redInfo.setMouAgency(MOU_agency);
+					}
 
 					redInfo.setIsActive(1);
 
