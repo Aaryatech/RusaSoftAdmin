@@ -110,7 +110,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="lcd">No. of 
-												Classrooms with LCD<span class="text-danger">*</span>
+												Classrooms with LCD/LED Projector<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onfocus="this.value=''"
