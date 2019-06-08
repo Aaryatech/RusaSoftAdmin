@@ -55,6 +55,20 @@ public class RegController {
 			
 		  imaster = rest.postForObject(Constants.url + "getInstituteMasterByAishe", map,
 				 InstituteMaster.class);
+		  if(imaster==null) {
+			  System.err.println("Null IMASTER");
+			  imaster=new InstituteMaster();
+			  imaster.setMhInstId(-1);
+		  }
+		  
+		  String res = rest.postForObject(Constants.url + "checkAisheCodeDuplication", map,
+				  String.class);
+		  if(res.equals("unique")) {
+			  System.err.println("Unique");
+		  }else {
+			  System.err.println("Already Exists");
+			  imaster=new InstituteMaster();
+		  }
 			
 		}catch (Exception e) {
 			System.err.println("Exce in imaster " +e.getMessage());

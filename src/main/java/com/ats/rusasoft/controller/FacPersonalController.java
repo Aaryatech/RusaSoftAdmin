@@ -205,7 +205,7 @@ public class FacPersonalController {
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("desgList", Constants.facFaculty);
 				
-				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
+				Designation[] designArr = rest.getForObject(Constants.url + "/getAllDesignationsForList",  Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				

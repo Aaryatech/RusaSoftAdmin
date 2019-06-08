@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <body>
 	<c:url var="setSubModId" value="/setSubModId" />
 	<div class="page-sidebar pagescroll">
@@ -16,7 +17,10 @@
 				</div>
 				<div class="profile-details col-xs-8">
 					<h3>
-						<a href="#">${sessionScope.instituteInfo.instituteName}</a>
+					<c:set var="tempinstname" value="${sessionScope.instituteInfo.instituteName}"></c:set>
+										<c:set var="instName" value="${fn:substring(tempinstname,0,70)}"></c:set>
+					
+						<a href="#">${instName}</a>
 						<!-- Available statuses: online, idle, busy, away and offline -->
 						<span class="profile-status online"></span>
 					</h3>

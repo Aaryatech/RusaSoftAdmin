@@ -625,9 +625,20 @@ $('#aishe_code').on('input', function() {
 				},
 				function(data) {
 					//alert(JSON.stringify(data));
+					//alert("len " +data.length);
+					if(data.mhInstId==0){
+						//alert("Null Data ");
+						alert("Registration already done using this AISHE Code")
+					}
+					else 	if(data.mhInstId==-1){
+						alert("Please Enter valid AISHE Code");
+					}
+						
+					else{
 					document.getElementById("inst_name").value=data.instName;
 					document.getElementById("district").value=data.district;
 					document.getElementById("state").value="Maharashtra";
+					}
 					
 				});
 	}
