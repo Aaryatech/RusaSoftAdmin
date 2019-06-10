@@ -77,7 +77,7 @@
 				<div class="col-md-3">
 					<div class="dash_one">
 						<h2 class="desig_nm">Students Admitted</h2>
-						<span class="count_num">200</span>
+						<span class="count_num">2050</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
 <!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->					</div>
@@ -85,7 +85,7 @@
 				<div class="col-md-3">
 					<div class="dash_one">
 						<h2 class="desig_nm">No of Books</h2>
-						<span class="count_num">200</span>
+						<span class="count_num">890</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
 <!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->					</div>
@@ -93,7 +93,7 @@
 				<div class="col-md-3">
 					<div class="dash_one">
 						<h2 class="desig_nm">Total Faculty</h2>
-						<span class="count_num">200</span>
+						<span class="count_num">350</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
 <!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->					</div>
@@ -101,7 +101,7 @@
 				<div class="col-md-3">
 					<div class="dash_one">
 						<h2 class="desig_nm">Total Awards</h2>
-						<span class="count_num">200</span>
+						<span class="count_num">91</span>
 						<!--<a href="#" class="dash_button">Button</a>-->
 <!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->					</div>
@@ -173,7 +173,7 @@
           <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Research Papaers</h3>
+              <h3 class="box-title">Research Papers</h3>
 
               <!-- <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
