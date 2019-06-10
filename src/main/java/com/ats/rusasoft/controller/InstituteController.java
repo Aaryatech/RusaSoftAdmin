@@ -220,7 +220,8 @@ public class InstituteController {
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
 			int yId = (int) session.getAttribute("acYearId");
-
+			int amt = 0;
+						
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
@@ -237,7 +238,13 @@ public class InstituteController {
 			instSpprt.setIsActive(1);
 			instSpprt.setMakerUserId(userId);
 			instSpprt.setMakerDatetime(curDateTime);
-			instSpprt.setExInt1(Integer.parseInt(request.getParameter("amount")));
+			try {
+				amt =  Integer.parseInt(request.getParameter("amount"));
+			}catch(Exception e){
+				System.err.println(e.getMessage());
+				amt = 0;
+			}
+			instSpprt.setExInt1(amt);
 			instSpprt.setExInt2(0);
 			instSpprt.setExVar1("NA");
 			instSpprt.setExVar2("NA");

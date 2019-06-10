@@ -118,40 +118,6 @@
 											<div class="col-xs-12">
 
 
-
-												<%-- <div class="form-group">
-													<label class="control-label col-sm-4" for="page_name">Year
-														<span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-8">
-														<select id="academic_year" name="academic_year"
-															class="form-control" required>
-															<c:forEach items="${acaYearList}" var="acaYear">
-																		<option value="${acaYear.yearId}">${acaYear.academicYear}</option>
-																	
-																	</c:forEach>
-															<option value="-1">Select</option>
-															<c:forEach items="${acaYearList}" var="acaYearList">
-																<c:choose>
-																	<c:when
-																		test="${acaYearList.yearId==editInstInfo.yearId}">
-																		<option selected value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																	</c:when>
-																	<c:otherwise>
-																		<option value="${acaYearList.yearId}">${acaYearList.academicYear}</option>
-
-																	</c:otherwise>
-
-																</c:choose>
-
-															</c:forEach>
-
-														</select> <span class="error_form text-danger" id="error_year"
-															style="display: none;">Please Select Year</span>
-													</div>
-												</div> --%>
-
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_name">No.
 														of Full Time Faculty <span class="text-danger">*</span>
@@ -168,6 +134,22 @@
 														<span class="error_form text-danger" id="error_full"
 															style="display: none;">Please enter No. of full
 															time faculty and value must be greater than 0.</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_name">No.
+														of Clock Hour Basis Faculty <span class="text-danger"></span>
+													</label>
+													<div class="col-sm-8">
+														<input type="number" class="form-control" min="0"
+															id="no_clockhr_Faculty"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)"
+															value="${editInstInfo.exInt2}"
+															name="no_clockhr_Faculty"
+															placeholder="No. of of Clock Hour Basis Faculty">
+
 													</div>
 												</div>
 												

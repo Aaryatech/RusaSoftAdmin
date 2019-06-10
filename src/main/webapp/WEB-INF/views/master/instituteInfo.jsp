@@ -90,7 +90,7 @@
                    		<th  style="text-align: center; width:10%">Sr No</th>
                         <th>Academic Year</th> 
                         <th>Faculty</th> 
-                        <th>Post Sanction</th> 
+                        <th>Sanction Post</th> 
                         <th>Non-Teaching Including Office Staff</th> 
                         <th>Support Staff </th> 
                        <th> Current admitted student</th>

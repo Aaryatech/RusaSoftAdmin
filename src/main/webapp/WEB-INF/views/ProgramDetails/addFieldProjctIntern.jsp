@@ -105,7 +105,7 @@
 											
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Program
-														Name<span class="text-danger">*</span>${fieldProject.programName}
+														Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<select id="prog_name" name="prog_name"

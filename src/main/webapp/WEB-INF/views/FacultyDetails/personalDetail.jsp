@@ -366,14 +366,14 @@
 										</div>
 										
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_aadhar">PAN
+											<label class="control-label col-sm-3" for="fPan">PAN
 												No<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" maxlength="12" class="form-control"
 													id="f_pan" name="f_pan"
 													placeholder="Consecutive 12 digit PAN No"
-													value="${facPerDetail.fAadhar}"> <span
+													value="${facPerDetail.fPan}"> <span
 													class="error_form text-danger" id="f_aadhar_field"
 													style="display: none;">Please enter PAN No.</span>
 											</div>
@@ -486,11 +486,10 @@
 													onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
-												<a
-													href="${pageContext.request.contextPath}/showEditFacAcademic"><button
-														type="button" id="sub2" class="btn btn-primary">
+												<button
+														type="submit" id="sub2" class="btn btn-primary">
 														<i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next
-													</button></a> 
+													</button>
 											</div>
 											<input type="hidden" id="staff_id" name="staff_id"
 												value="${staff.facultyId}"> <input type="hidden"

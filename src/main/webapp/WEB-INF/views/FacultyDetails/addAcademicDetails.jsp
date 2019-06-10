@@ -244,7 +244,7 @@
 
 														<div class="col-sm-offset-2 col-sm-10">
 															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
- 														<a href="${pageContext.request.contextPath}/showAddMphillDetails"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next</button></a>
+ 														<button type="submit"  id="sub2" class="btn btn-primary"><i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next</button>
  															</div>
 
 														<input type="hidden" id="fac_aca_id" name="fac_aca_id"

@@ -2093,7 +2093,7 @@ public class AlumniTrainingController {
 
 				model = new ModelAndView("ProgramDetails/addFieldProjctIntern");
 
-				model.addObject("title", "Add New Course Information");
+				model.addObject("title", "Add Field Projects/Internships");
 
 				FieldProjectsIntern fieldProject = new FieldProjectsIntern();
 				model.addObject("fieldProject", fieldProject);
@@ -2196,7 +2196,7 @@ public class AlumniTrainingController {
 				System.err.println("Prg List " + progTypeList.toString());
 				model.addObject("progTypeList", progTypeList);
 				
-				model.addObject("title", "Edit New Course Information");
+				model.addObject("title", "Edit Field Projects/Internships");
 			}
 		} catch (Exception e) {
 

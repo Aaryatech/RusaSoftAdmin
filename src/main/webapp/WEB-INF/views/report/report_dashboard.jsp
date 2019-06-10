@@ -227,10 +227,10 @@
 														<div class="col-lg-10">3] Percentage(%) of New
 															Courses Introduced</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showPerNewCource')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showPerNewCource')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -239,10 +239,10 @@
 														<div class="col-lg-10">4] Percentage(%) of Programs
 															with CBCS/ Elective courses</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showPerProgCbseElecticwCourse')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showPerProgCbseElecticwCourse')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -278,10 +278,10 @@
 														<div class="col-lg-10">7] Fields Project/Internships
 														</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showFildeProjectInternReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showFildeProjectInternReport')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
@@ -580,10 +580,10 @@
 													<div class="panel-body">
 														<div class="col-lg-10">5] Research Project Grants</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showResrchProjectGrants')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showResrchProjectGrants')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -591,10 +591,10 @@
 														<div class="col-lg-10">6]No. of Full Time Teachers
 															in the Institute as Research Guide</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showFullTimeTechrInstResrchGuide')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showFullTimeTechrInstResrchGuide')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>
@@ -613,10 +613,10 @@
 														<div class="col-lg-10">8] Intellectual Property
 															Rights and Industry Institute Initiatives</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="hi()"><i
+															<a href="#" onclick="getProgReport(0,'showIntelPropRght')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="hi()"><i class="fa fa-file-pdf-o"
+																href="#" onclick="getProgReport(1,'showIntelPropRght')"><i class="fa fa-file-pdf-o"
 																style="color: red;" aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
 													</div>

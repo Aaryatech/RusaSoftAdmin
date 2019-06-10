@@ -1961,16 +1961,17 @@ public class LibraryController {
 				int inst_id = (int) session.getAttribute("instituteId");
 				int maker_id = (int) session.getAttribute("userId");
 				int academic_year = (int) session.getAttribute("acYearId");
-				RestTemplate restTemplate = new RestTemplate();
-
+				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				String inst_info_id = null;
-
+				int no_clock_hr_faculty = 0;
 				try {
 					inst_info_id = (request.getParameter("inst_info_id"));
+					no_clock_hr_faculty = Integer.parseInt(request.getParameter("no_clockhr_Faculty"));
 				} catch (Exception e) {
 					System.err.println("Exce in save innfo stitute I  " + e.getMessage());
 					e.printStackTrace();
+					no_clock_hr_faculty = 0;
 				}
 
 				// int academic_year = Integer.parseInt(request.getParameter("academic_year"));
@@ -2009,7 +2010,7 @@ public class LibraryController {
 					lib.setTreasuryCode(treasury_code);
 					lib.setDelStatus(1);
 					lib.setExInt1(Integer.parseInt(request.getParameter("no_sanction_post")));
-					lib.setExInt2(1);
+					lib.setExInt2(no_clock_hr_faculty);
 					lib.setExVar1("NA");
 					lib.setExVar2("NA");
 
@@ -2038,6 +2039,8 @@ public class LibraryController {
 					lib1.setAddDatetime(curDateTime);
 					lib1.setRusaIdNo(rusa_idNo);
 					lib1.setTreasuryCode(treasury_code);
+					lib1.setExInt1(Integer.parseInt(request.getParameter("no_sanction_post")));
+					lib1.setExInt2(no_clock_hr_faculty);
 
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib1,
 							InstituteInfo.class);
