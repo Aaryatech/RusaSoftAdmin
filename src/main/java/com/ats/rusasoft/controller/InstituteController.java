@@ -1759,7 +1759,13 @@ public class InstituteController {
 			govt.setIsActive(1);
 			govt.setMakerUserId(userId);
 			govt.setMakerEntrDatetime(curDateTime);
-			govt.setExInt1(Integer.parseInt(request.getParameter("amount")));
+			if(request.getParameter("amount").isEmpty()) {
+				
+				govt.setExInt1(0);
+			}else {
+				govt.setExInt1(Integer.parseInt(request.getParameter("amount")));
+
+			}
 			govt.setExInt2(0);
 			govt.setExVar1("NA");
 			govt.setExVar2("NA");

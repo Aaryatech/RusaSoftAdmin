@@ -153,21 +153,8 @@
 															</c:when>
 														</c:choose>
 													</c:forEach>
-													<%-- <c:forEach items="${deptList}" var="dept">
-														<c:choose>
-															<c:when test="${editFaculty.deptId==dept.deptId}">
-																<option selected value="${dept.deptId}">${dept.deptName}</option>
-
-															</c:when>
-															<c:otherwise>
-																<option value="${dept.deptId}">${dept.deptName}</option>
-
-															</c:otherwise>
-
-														</c:choose>
-
-													</c:forEach> --%>
-													<option value="0">NA</option>
+													 
+												 
 
 
 												</select> <span class="error_form text-danger" id="dept_id_field"
