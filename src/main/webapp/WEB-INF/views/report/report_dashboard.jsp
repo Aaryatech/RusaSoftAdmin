@@ -372,7 +372,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4]Student Teacher Ratio</div>
+														<div class="col-lg-10">4] Student Teacher Ratio</div>
 														<div class="col-lg-2">
 															<a href="#"
 																onclick="getProgReport(0,'showStudTeachrRatio')"><i

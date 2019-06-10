@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.ExportToExcel;
+import com.ats.rusasoft.commons.Names;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.GenderEqalityPrg;
 import com.ats.rusasoft.model.GovtScholarships;
@@ -1676,6 +1677,7 @@ public class InstituteController {
 						GovtScholarships[].class);
 				List<GovtScholarships> govtSchrList = new ArrayList<>(Arrays.asList(govtSchrArr));
 				model.addObject("govtSchrList", govtSchrList);
+				model.addObject("budRupees", Names.Rupees);
 
 				model.addObject("title", "Government Scholarships");
 				Info add = AccessControll.checkAccess("showGovernmentScholarships", "showGovernmentScholarships", "0",
@@ -1730,6 +1732,7 @@ public class InstituteController {
 
 				model.addObject("title", "Add Government Scholarships");
 				model.addObject("govtScholr", govtScholr);
+				model.addObject("budRupees", Names.Rupees);
 			}
 		} catch (Exception e) {
 

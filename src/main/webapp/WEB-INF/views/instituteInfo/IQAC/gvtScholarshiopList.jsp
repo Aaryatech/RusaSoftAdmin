@@ -116,6 +116,7 @@
 																<th>Name of Scheme</th>
 																<th>No. of Students Benefited </th>
 																<th>Scheme/Support offered By</th>
+																<th>Amount in ${budRupees}</th>
 																<th>Action</th>
 															</tr>
 														</thead>
@@ -130,6 +131,7 @@
 																	<td>${govtSchrList.nameOfScheme}</td>
 																	<td>${govtSchrList.noOfStudBenftd}</td>
 																	<td>${govtSchrList.schmOffrdBy}</td>
+																	<td>${govtSchrList.exInt1}</td>
 																	
 																	<td align="center"><c:if test="${editAccess==0}">
 																			<a

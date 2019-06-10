@@ -120,10 +120,10 @@
 									<ul class="nav nav-tabs">
 
 										<li class="active"><a href="#Vision" data-toggle="tab">
-												<i class="fa fa-home"></i> <span style="color: #008B8B; font-weight: 900;">Vision</span>
+												<i class="fa fa-home"></i> <span style="color: #1F85DE; font-weight: 900;">Vision</span>
 										</a></li>
 										<li><a href="#Mission" data-toggle="tab"> <i
-												class="fa fa-home"></i><span style="color: #008080; font-weight: 900;">Mission</span>
+												class="fa fa-home"></i><span style="color: #ee730a; font-weight: 900;">Mission</span>
 										</a></li>
 									</ul>
 
@@ -149,7 +149,7 @@
 													</label>
 													<div class="col-sm-6">
 														<textarea rows="4" cols="50" class="form-control" onchange="trim(this)"
-															id="inst_vision_text" name="inst_vision_text"
+															id="inst_vision_text" name="inst_vision_text" maxlength="500"
 															placeholder="Institute Vision" autocomplete="off" ></textarea>
 															<span
 																class="error_form text-danger" id="vision_error_field"

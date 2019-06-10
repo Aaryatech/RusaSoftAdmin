@@ -142,7 +142,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onfocus="this.value=''"
 													autocomplete="off" id="amount" name="amount" onkeypress='return restrictAlphabets(event)'
-													placeholder="Amount" value="${govtScholr.exInt1}">
+													placeholder="Amount in ${budRupees}" value="${govtScholr.exInt1}">
 												
 											</div>
 										</div>

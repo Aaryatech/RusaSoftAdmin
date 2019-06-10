@@ -570,7 +570,7 @@ public class BudgetCon {
 
 				AcademicBudget editBudget = rest.postForObject(Constants.url + "/getAcademicBudgetById", map,
 						AcademicBudget.class);
-				System.out.println("academicBudgetId:" + academicBudgetId);
+				System.out.println("academicBudget LIST:" + editBudget);
 				model.addObject("editBudget", editBudget);
 
 			}

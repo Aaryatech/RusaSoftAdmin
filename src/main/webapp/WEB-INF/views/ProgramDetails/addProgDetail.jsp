@@ -160,7 +160,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="programCode"
-													value="${editProgram.nameOfProgram}" name="programCode"
+													value="${editProgram.exVar1}" name="programCode"
 													placeholder="Program Code (optional)">
 													<!-- <span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span> -->
 											</div>

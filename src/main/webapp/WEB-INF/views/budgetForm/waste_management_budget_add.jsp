@@ -135,8 +135,8 @@
 												<select id="funding_from" name="funding_from"
 													class="form-control">
 													<option value="Management" ${budget.exVar1 eq 'Management' ? 'selected' : ''}>Management</option>
-													<option value="Govt." ${budget.exVar1 eq 'Govt.' ? 'selected' : '' }>Govt.</option>
-													<option value="Rusa" ${budget.exVar1 eq 'Rusa' ? 'selected' : '' }>Rusa</option>
+													<option value="RUSA" ${budget.exVar1 eq 'RUSA' ? 'selected' : '' }>RUSA</option>
+													<option value="Other Govt. Agency" ${budget.exVar1 eq 'Other Govt. Agency' ? 'selected' : '' }>Other Govt. Agency</option>
 												</select>
 											</div>
 										</div>

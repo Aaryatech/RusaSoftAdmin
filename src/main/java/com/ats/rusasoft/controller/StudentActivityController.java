@@ -729,8 +729,9 @@ public class StudentActivityController {
 				program.setMakerdatetime(sf.format(maleDate));
 				program.setMakerUserId(userObj.getUserId());
 				program.setIsActive(1);
-				program.setExInt1(Integer.parseInt(request.getParameter("programCode")));
-
+				program.setExInt1(0);
+				program.setExInt2(0);
+				program.setExVar1(request.getParameter("programCode"));
 				Program res = restTemplate.postForObject(Constants.url + "/saveProgram", program, Program.class);
 
 				if (is_view == 1) {
