@@ -10160,7 +10160,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("\n"));
 				document.add(table);
 				document.add(new Paragraph("\n"));
-				document.add(new Paragraph("Percentage(%) of Progremes with CBSE/Elective Courses : " + perProgmCourse));
+				document.add(new Paragraph("Percentage(%) of Programs with CBSE/Elective Courses : " + perProgmCourse));
 				int totalPages = writer.getPageNumber();
 
 				System.out.println("Page no " + totalPages);
@@ -10234,7 +10234,7 @@ public class RusaReportsController {
 						}
 						System.err.println("headingName  " + headingName);
 						// String excelName = (String) session.getAttribute("excelName");
-						String summry = "Percentage(%) of Progremes with CBSE/Elective Courses : "+String .valueOf(perProgmCourse);
+						String summry = "Percentage(%) of Programs with CBSE/Elective Courses : "+String .valueOf(perProgmCourse);
 						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"", summry,'E' );
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
@@ -10342,13 +10342,13 @@ public class RusaReportsController {
 			writer.setPageEvent(event);
 			// writer.add(new Paragraph("Curricular Aspects"));
 
-			PdfPTable table = new PdfPTable(5);
+			PdfPTable table = new PdfPTable(4);
 
 			table.setHeaderRows(1);
 
 			try {
 				table.setWidthPercentage(100);
-				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f});
+				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f});
 				Font headFontData = Constants.headFontData;// new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL,
 															// BaseColor.BLACK);
 				Font tableHeaderFont = Constants.tableHeaderFont; // new Font(FontFamily.HELVETICA, 12, Font.BOLD,
@@ -10364,13 +10364,15 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Program Name", tableHeaderFont));
-				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+				/*
+				 * hcell = new PdfPCell(new Phrase("Program Name", tableHeaderFont));
+				 * hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				 * hcell.setBackgroundColor(Constants.baseColorTableHeader);
+				 * 
+				 * table.addCell(hcell);
+				 */
 
-				table.addCell(hcell);
-
-				hcell = new PdfPCell(new Phrase("Provision for Undertaking Field Projects/Internship"));
+				hcell = new PdfPCell(new Phrase("Provision for Undertaking Field Projects/Internship", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
@@ -10403,15 +10405,17 @@ public class RusaReportsController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + intern.getProgramType(), headFontData));
-					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-
-					table.addCell(cell);
+					/*
+					 * cell = new PdfPCell(new Phrase("" + intern.getProgramType(), headFontData));
+					 * cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					 * cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					 * 
+					 * table.addCell(cell);
+					 */
 
 					cell = new PdfPCell(new Phrase("" + intern.getProvisionForUndertaking(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 					
@@ -10423,7 +10427,7 @@ public class RusaReportsController {
 					
 					cell = new PdfPCell(new Phrase("" + intern.getDocument(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 					
@@ -10446,11 +10450,12 @@ public class RusaReportsController {
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
 				document.add(new Paragraph("\n"));
-				document.add(table);
-				
-				document.add(new Paragraph("\n"));
+			
 				document.add(new Paragraph("Program Type : "+progrm.getNameOfProgram() ));
 				document.add(new Paragraph("\n"));
+				document.add(table);
+				
+				
 
 				int totalPages = writer.getPageNumber();
 
@@ -10496,8 +10501,8 @@ public class RusaReportsController {
 					List<String> rowData = new ArrayList<String>();
 
 					rowData.add("Sr. No");
-					rowData.add("Program Name");
-					rowData.add("Type of Program");
+					/* rowData.add("Program Name"); */
+					/* rowData.add("Type of Program"); */
 					rowData.add("Provision for Undertaking Field Projects/Internship");
 					rowData.add("No. of Students Undertaking Field Projects/Internship Code");
 					rowData.add("Link to the Relevant Documents");
@@ -10514,9 +10519,8 @@ public class RusaReportsController {
 
 						rowData.add("" + (i + 1));
 
-						rowData.add("" + internList.get(i).getProgramType());
+						/* rowData.add("" + internList.get(i).getProgramType()); */
 						rowData.add("" + internList.get(i).getProvisionForUndertaking());
-						rowData.add("" + internList.get(i).getNoOfStudUndertaking());
 						rowData.add("" + internList.get(i).getNoOfStudUndertaking());
 						rowData.add("" + internList.get(i).getDocument());
 						

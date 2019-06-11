@@ -293,20 +293,20 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getNameOfProgram(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					// cell.setPaddingLeft(10);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getLevelOfProgram(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getMonthDuration(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -318,7 +318,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getApprovedBy(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -556,7 +556,7 @@ public class ReportController {
 	@RequestMapping(value = "/showFacPartiVarBodies", method = RequestMethod.POST)
 	public void showFacPartiVarBodies(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Curricular Aspects : Percentage(%) of Participation in variousUniversity Bodies";
+		String reportName = "Curricular Aspects : Percentage(%) of Participation in various University Bodies";
 
 		ModelAndView model = null;
 		try {
@@ -694,19 +694,19 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getConLevel() + "-" + prog.getConName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getConUniversity(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -14607,7 +14607,7 @@ public class ReportController {
 						} else {
 							avg = progList.get(i).getProgStudEnrolled() / progList.get(i).getTotalStud();
 						}
-						rowData.add("" + progList.get(i).getTotalStud());
+						rowData.add("" + avg);
 
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
@@ -14804,7 +14804,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getValueAddedCourseName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -15088,7 +15088,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getFeedbackFrom(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 					String n = null;
@@ -15100,22 +15100,22 @@ public class ReportController {
 					}
 					cell = new PdfPCell(new Phrase("" + n, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 					
 					String n1 = null;
 					if( prog.getFbProcess().equalsIgnoreCase("A")) {
-						n1="Feedback Collected,analyzed  and action taken and feedback available on Websites" ;
+						n1="Feedback Collected, analyzed  and action taken and feedback available on Websites";
 								 
 					}else if(prog.getFbProcess().equalsIgnoreCase("B")) {
-						n1="Collected,analyzed and action has been taken";  
+						n1="Collected, analyzed and action has been taken";  
  						
 					}else if(prog.getFbProcess().equalsIgnoreCase("C")) {
-						n1="Feedback Collected and analyzed" ;
+						n1="Feedback Collected and analyzed";
 						
 					}else if(prog.getFbProcess().equalsIgnoreCase("D")) {
-						n1="Feedback Collected" ;
+						n1="Feedback Collected";
 						
 					}else {
 						n1="-";
@@ -15123,7 +15123,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" +n1, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -15216,16 +15216,16 @@ public class ReportController {
 						rowData.add("" + n);
 						String n1 = null;
 						if(  progList.get(i).getFbProcess().equalsIgnoreCase("A")) {
-							n1="Feedback Collected,analyzed  and action taken and feedback available on Websites" ;
+							n1="Feedback Collected, analyzed  and action taken and feedback available on Websites";
 									 
 						}else if( progList.get(i).getFbProcess().equalsIgnoreCase("B")) {
-							n1="Collected,analyzed and action has been taken";  
+							n1="Collected, analyzed and action has been taken";  
 	 						
 						}else if( progList.get(i).getFbProcess().equalsIgnoreCase("C")) {
-							n1="Feedback Collected and analyzed" ;
+							n1="Feedback Collected and analyzed";
 							
 						}else if( progList.get(i).getFbProcess().equalsIgnoreCase("D")) {
-							n1="Feedback Collected" ;
+							n1="Feedback Collected";
 							
 						}else {
 							n1="-";
