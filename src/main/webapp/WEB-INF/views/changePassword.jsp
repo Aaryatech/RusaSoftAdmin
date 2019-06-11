@@ -101,13 +101,13 @@
 															New Password <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-3">
-															<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  class="form-control"
+															<input type="password" pattern="(?=^.{8,14}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"  class="form-control"
 																id="newPassword" name="newPassword" maxlength="14"
 																placeholder="Enter New Password" onkeyup="trim(this);"
 																required>
 														</div>
 														<!-- <span
-id="strength">Type Password: Must contain at least one number(0-9) and one uppercase(A-Z) and lowercase(a-z) letter, and at least 8 and maximum 14  characters </span> <span
+id="strength">Type Password: Must contain at least one number(0-9) and one uppercase(A-Z) and lowercase(a-z) letter and one special character, and at least 8 and maximum 14  characters </span> <span
 class="validation-invalid-label" id="error_password"
 style="display: none;">This field is required.</span>
 <input type="hidden" id="allowPass" name="allowPass" value="0"> -->
@@ -120,7 +120,7 @@ style="display: none;">This field is required.</span>
 														</label>
 														<div class="col-sm-3">
 															<span
-id="strength">Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and <b>at least 8</b> and <b>maximum 14  characters</b> </span> 
+id="strength">Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and <b>at least 8 and one special character</b> and <b>maximum 14  characters</b> </span> 
 														</div>
 													</div>
 													
@@ -233,7 +233,7 @@ function passwordChanged() {
 var strength = document.getElementById("strength");
 $("#error_password").hide();
 var strongRegex = new RegExp(
-"^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$",
+"^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])([$&+,:;=?@#|'<>.^*()%!-](?=.*\\W).*$",
 "g");
 var mediumRegex = new RegExp(
 "^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",

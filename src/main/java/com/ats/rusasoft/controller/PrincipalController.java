@@ -266,6 +266,7 @@ public class PrincipalController {
 				staff.setCheckerUserId(0);
 				staff.setCheckerDatetime(curDateTime);
 				staff.setLastUpdatedDatetime(curDateTime);
+				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));
 
 				staff.setExtravarchar1("NA");
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
@@ -291,6 +292,8 @@ public class PrincipalController {
 				editHod.setIsPrincipal(1);
 				editHod.setIsDean(isDean);
 				editHod.setType(1);
+				
+				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 

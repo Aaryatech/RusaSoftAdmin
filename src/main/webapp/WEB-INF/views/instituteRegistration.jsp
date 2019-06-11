@@ -111,7 +111,7 @@
 													<div class="col-sm-7">
 														<input type="text" maxlength="7" onchange="trim(this)"
 															class="form-control" id="aishe_code" autocomplete="off"
-															value="${editInst.aisheCode}" name="aishe_code"
+															 value="C-" name="aishe_code"
 															placeholder="All India Survey On Higher Education code">
 														<span class="error_form text-danger" id="aishe_code_field"
 															style="display: none;">Please enter AISHE code</span>
@@ -124,7 +124,7 @@
 													</label>
 													<div class="col-sm-7">
 														<input type="text" maxlength="100" readonly onchange="trim(this)"
-															class="form-control" id="inst_name" autocomplete="off"
+															class="form-		control" id="inst_name" autocomplete="off"
 															value="${editInst.instituteName}" name="inst_name"
 															placeholder="Complete Name of Institute"> <span
 															class="error_form text-danger" id="inst_name_field"

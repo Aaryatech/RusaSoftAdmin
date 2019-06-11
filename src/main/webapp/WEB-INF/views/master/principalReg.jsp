@@ -199,10 +199,10 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker" data-format="dd-mm-yyyy"
-													id="dateOfJoin" onchange="trim(this)"
+													id="dateOfJoin" data-end-date="0d" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editFaculty.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd-mm-yyyy"  data-end-date="+0d"> <span
+													autocomplete="off" placeholder="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
 											</div>
@@ -211,13 +211,13 @@
 										
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="is_add_same">Is 
-												 Same(State) <span
+												 Same (State)<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 												<c:choose>
 												<c:when test="${editFaculty.facultyId>0}">
-													Yes <input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
+													Yes<input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
 													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
 													
 													</c:when>
@@ -498,16 +498,17 @@
 	</script>
 
 	<script type="text/javascript">
-		/* $(function() {
+		  $(function() {
 
-			   $('.datepicker_doj').datepicker({
+			   $('.dateOfJoin').datepicker({
 				autoclose : true,
 				format : "dd-mm-yyyy",
 				changeYear : true,
 				changeMonth : true,
+				maxDate: '0', 
 				 
 			});   
-		}); */
+		}); 
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces

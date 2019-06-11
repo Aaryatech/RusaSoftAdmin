@@ -187,14 +187,14 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Joining
-												Date <span class="text-danger">*</span>
+												Date1 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker"
-													id="dateOfJoin" onchange="trim(this)"
+												<input type="text" class="form-control datepicker" data-end-date="0d"
+													id="dateOfJoin"  onchange="trim(this)" data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													value="${miqc.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd/mm/yyyy"> <span
+													autocomplete="off" placeholder="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
 											</div>
@@ -202,7 +202,7 @@
 										
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="is_add_same">Is
-												 Same(State) <span
+												 Same (State) <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
@@ -493,7 +493,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -502,7 +502,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		/* function showForm() {
 			//document.getElementById("abc").style = "display:none"

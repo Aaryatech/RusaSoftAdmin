@@ -1275,7 +1275,12 @@ public class ResearchAndInnovation {
 				
 				AwrdRecgAgnstExtActivity soft = new AwrdRecgAgnstExtActivity();
 				
+				try {
 				soft.setAwrdRecgAgnstExtActId(Integer.parseInt(request.getParameter("award_recg_id")));
+				}catch (Exception e) {
+					soft.setAwrdRecgAgnstExtActId(0);
+				}
+				
 				soft.setActName(request.getParameter("name_act"));
 				soft.setAwardRecogName(request.getParameter("name_awrd_recg"));
 				soft.setNameAwardingBody(request.getParameter("name_awrd_body"));

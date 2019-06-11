@@ -406,7 +406,7 @@
 												of Birth<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" data-end-date="-6750d" data-format="dd-mm-yyyy"
+												<input type="text" class="form-control datepickerr" data-end-date="-6750d"  data-format="dd-mm-yyyy"
 													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
 													value="${facPerDetail.fDob}"> <span
 													class="error_form text-danger" id="f_dob_field"
@@ -517,9 +517,20 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
+ 
 
 	<script>
+	$(function () {
+  	  
+        $('.datepickerr').datepicker({
+			autoclose: true,
+            format: "dd-mm-yyyy",
+            changeYear:true,
+            changeMonth:true, 
+          
+           
+		});
+    });  
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -796,23 +807,16 @@
 		document.getElementById("is_view").value = view;//create this 
 
 	}
-   /*  $(function () {
-		 
-        $('.datepicker').datepicker({
-			autoclose: true,
-            format: "dd-mm-yyyy",
-            changeYear:true,
-            changeMonth:true,
-           
-		});
-    }); */
+      
     function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
 		replace(/\n +/, "\n"); // Removes spaces after newlines
 		return;
 	}
+    
 </script>
+
 
 
 </body>
