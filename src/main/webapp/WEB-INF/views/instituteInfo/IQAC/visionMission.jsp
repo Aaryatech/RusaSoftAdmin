@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 
 
@@ -212,7 +213,11 @@
 																	<tr>
 
 																		<%-- <td style="text-align: center; ">${count.index+1}</td> --%>
-																		<td>${list.instVisionText}</td>
+																		
+																		<c:set var="tempVision" value="${list.instVisionText}"></c:set>
+										<c:set var="visionName" value="${fn:substring(tempVision,0,130)}"></c:set>
+					
+																		<td title="${list.instVisionText}" style="word-wrap:break-word; max-width: 200" >${list.instVisionText}</td>
 																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteVission(${list.instVisionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
@@ -256,7 +261,7 @@
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<textarea rows="4" cols="" class="form-control"
+														<textarea rows="4" cols="" class="form-control" maxlength="200"
 															id="inst_mission_text" name="inst_mission_text"
 															placeholder="Institute Mission " required autocomplete="off"></textarea> <input
 															type="hidden"   id="instMissionId"
@@ -312,7 +317,7 @@
 																	<tr>
 
 																		<%-- <td style="text-align: center; ">${count.index+1}</td> --%>
-																		<td>${list.instMissionText}</td>
+																		<td style="word-wrap:break-word; max-width: 200">${list.instMissionText}</td>
 																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteMission(${list.instMissionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
@@ -669,6 +674,9 @@
 				document.getElementById("abc").style = "display:none"
 			}
 
+		}
+		function showText(showValue){
+			//alert("fdhsg")
 		}
 	</script>
 
