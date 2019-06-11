@@ -8,6 +8,7 @@ public class GetInstituteList {
 	
 	private String principalName;
 	private String contactNo;
+	private String makerEnterDatetime;
 	private String email;
 	public int getInstituteId() {
 		return instituteId;
@@ -40,10 +41,17 @@ public class GetInstituteList {
 		this.email = email;
 	}
 	
+	public String getMakerEnterDatetime() {
+		return makerEnterDatetime;
+	}
+	public void setMakerEnterDatetime(String makerEnterDatetime) {
+		this.makerEnterDatetime = makerEnterDatetime;
+	}
 	@Override
 	public String toString() {
 		return "GetInstituteList [instituteId=" + instituteId + ", instituteName=" + instituteName + ", principalName="
-				+ principalName + ", contactNo=" + contactNo + ", email=" + email + "]";
+				+ principalName + ", contactNo=" + contactNo + ", makerEnterDatetime=" + makerEnterDatetime + ", email="
+				+ email + "]";
 	}
-
+	
 }

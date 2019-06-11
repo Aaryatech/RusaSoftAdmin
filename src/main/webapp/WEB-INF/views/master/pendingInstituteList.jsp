@@ -95,6 +95,7 @@
 												<th>Principal Name</th>
 												<th>Contact No</th>
 												<th>Email</th>
+												<th>Registered on</th>
 												<th width="10%">Action</th>
 											</tr>
 										</thead>
@@ -115,7 +116,7 @@
 													<td align="center">${institute.contactNo}</td>
 
 													<td>${institute.email}</td>
-
+													<td>${institute.makerEnterDatetime}</td>
 													<td align="center">
 													
 													
