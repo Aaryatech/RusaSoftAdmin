@@ -202,11 +202,11 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker"
-													id="dateOfJoin" onchange="trim(this)"
+												<input type="text" class="form-control datepicker" data-format="dd-mm-yyyy"
+													id="dateOfJoin" data-end-date="0d" onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editHod.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd/mm/yyyy"> <span
+													autocomplete="off" placeholder="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
 											</div>
@@ -502,7 +502,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -511,7 +511,7 @@
 				changeMonth : true,
 
 			});
-		});
+		}); */
 
 		/* function showForm() {
 			//document.getElementById("abc").style = "display:none"

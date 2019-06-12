@@ -187,7 +187,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Joining
-												Date1 <span class="text-danger">*</span>
+												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker" data-end-date="0d"

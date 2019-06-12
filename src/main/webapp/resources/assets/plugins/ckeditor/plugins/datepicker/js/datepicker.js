@@ -1133,7 +1133,7 @@
 	};
 
 	var defaults = $.fn.datepicker.defaults = {
-		autoclose: false,
+			
 		beforeShowDay: $.noop,
 		calendarWeeks: false,
 		clearBtn: false,
@@ -1144,13 +1144,15 @@
 		keyboardNavigation: true,
 		language: 'en',
 		minViewMode: 0,
-		orientation: "auto",
+		orientation: "top",
 		rtl: false,
 		startDate: -Infinity,
 		startView: 0,
 		todayBtn: false,
 		todayHighlight: false,
-		weekStart: 0
+		weekStart: 0,
+		autoclose: true
+		
 	};
 	var locale_opts = $.fn.datepicker.locale_opts = [
 		'format',
@@ -1166,7 +1168,8 @@
 			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 			today: "Today",
-			clear: "Clear"
+			clear: "Clear"	
+				
 		}
 	};
 

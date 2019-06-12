@@ -217,10 +217,10 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="dateOfJoin" onchange="trim(this)"
+													id="dateOfJoin" onchange="trim(this)" data-end-date="0d" data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editFaculty.joiningDate}" name="dateOfJoin"
-													autocomplete="off" placeholder="dd/mm/yyyy"> <span
+													autocomplete="off" placeholder="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please select joining date</span>
 											</div>
@@ -289,7 +289,7 @@
 													id="acc_off_relDate"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" name="acc_off_relDate"
-													placeholder="Relieving Date"
+													placeholder="Relieving Date" data-end-date="0d" data-format="dd-mm-yyyy"
 													value="${editFaculty.realivingDate}"> <span
 													class="error_form text-danger" id="error_acc_off_relDate"
 													style="display: none;">Please enter relieving date</span>
@@ -585,7 +585,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -594,7 +594,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		/* function showForm() {
 			//document.getElementById("abc").style = "display:none"

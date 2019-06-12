@@ -406,7 +406,7 @@
 												of Birth<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepickerr" data-end-date="-6750d"  data-format="dd-mm-yyyy"
+												<input type="text" class="form-control datepicker"  data-end-date="-7000d" data-format="dd-mm-yyyy"
 													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
 													value="${facPerDetail.fDob}"> <span
 													class="error_form text-danger" id="f_dob_field"
@@ -520,17 +520,25 @@
  
 
 	<script>
-	$(function () {
-  	  
+	
+	
+	/* $('#f_dob').datepicker()
+	.on('changeDate', function(ev){                 
+	    $('#f_dob').datepicker('hide');
+	}); */
+	/* $(function () {
+		var date = new Date();
+		 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         $('.datepickerr').datepicker({
 			autoclose: true,
+			maxDate: today,
             format: "dd-mm-yyyy",
             changeYear:true,
             changeMonth:true, 
           
            
 		});
-    });  
+    });   */
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {

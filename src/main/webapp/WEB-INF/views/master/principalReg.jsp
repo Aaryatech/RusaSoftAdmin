@@ -505,7 +505,7 @@
 				format : "dd-mm-yyyy",
 				changeYear : true,
 				changeMonth : true,
-				maxDate: '0', 
+				maxDate: "+1m +1w"
 				 
 			});   
 		}); 
