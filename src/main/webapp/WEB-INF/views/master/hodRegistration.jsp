@@ -129,7 +129,7 @@
 
 										
 
-<div class="form-group">
+										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Department<span class="text-danger">*</span>
 											</label>
@@ -214,8 +214,8 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="is_add_same">Is
-												Same(State) <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
+												Same State<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 

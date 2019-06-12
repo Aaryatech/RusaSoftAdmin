@@ -217,7 +217,7 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="dateOfJoin" onchange="trim(this)"
+													id="dateOfJoin" onchange="trim(this)" data-end-date="0d" data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editFaculty.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd/mm/yyyy"> <span
@@ -286,10 +286,10 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="acc_off_relDate"
+													id="acc_off_relDate" data-end-date="0d" data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" name="acc_off_relDate"
-													placeholder="Relieving Date"
+													placeholder="Relieving Date" 
 													value="${editFaculty.realivingDate}"> <span
 													class="error_form text-danger" id="error_acc_off_relDate"
 													style="display: none;">Please enter relieving date</span>
@@ -298,8 +298,8 @@
 										
 										<div class="form-group">
 											
-											<label class="control-label col-sm-2" for="is_add_same">Is
-												 Same(State) <span
+											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
+												 Same State<span
 												class="text-danger">*</span>
 											</label>
 
@@ -585,7 +585,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -594,7 +594,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		/* function showForm() {
 			//document.getElementById("abc").style = "display:none"
@@ -975,7 +975,7 @@
 									  $('#dept_id').val(temp);
 									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
 									}else{
-										document.getElementById("email").value = "";
+										//document.getElementById("email").value = "";
 										//document.getElementById("contactNo").value = "";
 										/* document.getElementById("accName").value = "";
 										document.getElementById("dateOfJoin").value = "";

@@ -73,7 +73,17 @@
 							<div class="actions panel_actions pull-right"></div>
 
 						</header>
-
+							<c:if test="${sessionScope.successMsg!=null}">
+           						 <div class="col-lg-12">
+    						          <div class="alert alert-success alert-dismissible fade in">
+            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
+        	                     </div> 
+        	                     <%session=request.getSession();
+        	                    
+        	                     session.removeAttribute("successMsg");
+        	                     %>
+            			</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -210,8 +220,8 @@
 										
 										
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="is_add_same">Is 
-												 Same (State)<span
+											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
+												 Same State<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">

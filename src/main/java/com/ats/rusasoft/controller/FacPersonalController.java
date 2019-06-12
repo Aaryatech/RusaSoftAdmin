@@ -319,10 +319,10 @@ public class FacPersonalController {
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if(facPerDetail!=null) {
-					session.setAttribute("successMsg", "New Record Added Sucessfully");
+					session.setAttribute("successMsg", "New Record Saved Sucessfully");
 				}
 				else {
-					session.setAttribute("successMsg", "Record Not Added");
+					session.setAttribute("successMsg", "Record Not Saved");
 				}
 				if (isView == 0)
 					redirect = "redirect:/showEditFacAcademic";

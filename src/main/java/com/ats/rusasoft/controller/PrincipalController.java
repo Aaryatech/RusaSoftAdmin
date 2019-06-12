@@ -270,6 +270,12 @@ public class PrincipalController {
 
 				staff.setExtravarchar1("NA");
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+				if(hod!=null) {
+					session.setAttribute("successMsg", "New Record Saved Sucessfully");
+				}
+				else {
+					session.setAttribute("successMsg", "Record Not Saved");
+				}
 
 			} else {
 
@@ -296,21 +302,23 @@ public class PrincipalController {
 				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
-
+				
+				if(hod!=null) {
+					session.setAttribute("successMsg", "New Record Updated Sucessfully");
+				}
+				else {
+					session.setAttribute("successMsg", "Record Not Updated");
+				}
 			}
 
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showRegPrincipal";
-			else
-				redirect = "redirect:/showRegPrincipal";
+			
 		} catch (Exception e) {
 
 			System.err.println("exception In showRegPrincipal at Principal Contr" + e.getMessage());
 			e.printStackTrace();
 
 		}
-		return redirect;
+		return "redirect:/showRegPrincipal";
 
 	}
 

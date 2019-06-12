@@ -110,8 +110,25 @@
 										type="button" class="btn btn-success">Back</button></a> --%>
 
 							</div>
-
+							
+							 <%-- <c:if test="${sessionScope.successMsg!=null}"> --%>
+           						 <div class="col-lg-12" id="sucess_msg" style="display: none;">
+    						          <div class="alert alert-success alert-dismissible fade in">
+            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+             						   <strong>Success : </strong>New Saved Added Sucessfully</div>
+        	                     </div> 
+        	                     
+        	                     <div class="col-lg-12" id="fail_msg" style="display: none;">
+    						          <div class="alert alert-success alert-dismissible fade in">
+            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+             						   <strong>Success : </strong> Record Not Saved</div>
+        	                     </div> 
+        	                   
+        	                   
+        	                   
+            			<%-- </c:if> --%>
 						</header>
+						
 
 						<div class="content-body">
 							<div class="row">
@@ -207,7 +224,7 @@
 																</tr>
 
 															</thead>
-															<tbody>
+														<tbody>
 																<c:forEach items="${institueVisionList}" var="list"
 																	varStatus="count">
 																	<tr>
@@ -301,7 +318,7 @@
 												<div class="col-xs-12">
 													<div class="table-responsive">
 														<table class="table table-bordered" id="table2">
-															<thead>
+														<thead>
 																<tr>
 																	<!-- <th width="10%">Sr No</th> -->
 																	<th>Mission</th>
@@ -404,6 +421,7 @@
 				 
 					$('#table1 td').remove();
 					$("#loader1").hide();
+					
 					document.getElementById("saveVision").disabled=false;
 					//var dataTable = $('#example-1').DataTable();
 					 
@@ -429,6 +447,12 @@
 					
 					document.getElementById("instVisionId").value=0; 
 					 document.getElementById("inst_vision_text").value="";
+					 
+					 if(data!=null){
+						 $("#sucess_msg").show();
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -575,6 +599,11 @@
 					 document.getElementById("inst_mission_text").value="";
 					 
 				});
+				 if(data!=null){
+					 $("#sucess_msg").show();
+				 }else{
+					 $("#fail_msg").show();
+				 }
 
 			} else {
 				alert("Enter Institute Mission ");

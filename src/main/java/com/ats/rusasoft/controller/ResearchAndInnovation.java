@@ -1235,7 +1235,7 @@ public class ResearchAndInnovation {
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		AwrdRecgAgnstExtActivity soft = new AwrdRecgAgnstExtActivity();
+		AwrdRecgAgnstExtActivity araea = new AwrdRecgAgnstExtActivity();
 		try {
 			Info view = AccessControll.checkAccess("newAwrdRecgAgnstExtAct", "awrdRecogAgnstExtAct", "0", "1", "0", "0",
 					newModuleList);
@@ -1248,7 +1248,7 @@ public class ResearchAndInnovation {
 				
 				  
 					model = new ModelAndView("resrch&innovatn/awardRecogAgnstExtActivity");
-					model.addObject("soft", soft);
+					model.addObject("araea", araea);
 					model.addObject("title", "Add Award Recognition against Extension Activity");
 			}
 		} catch (Exception e) {
@@ -1312,8 +1312,6 @@ public class ResearchAndInnovation {
 	@RequestMapping(value = "/editAwrdRecg/{awrdRecgid}", method = RequestMethod.GET)
 	public ModelAndView editAwrdRecg(@PathVariable("awrdRecgid") int awrdRecgid, HttpServletRequest request) {
 
-		// System.out.println("Id:" + iqacId);
-
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -1333,7 +1331,7 @@ public class ResearchAndInnovation {
 				model = new ModelAndView("resrch&innovatn/awardRecogAgnstExtActivity");
 				model.addObject("title", "Edit Award Recognition against Extension Activity");
 				AwrdRecgAgnstExtActivity  awrdAct = rest.postForObject(Constants.url+"/getAwrdRecgAgnstExtActById", map, AwrdRecgAgnstExtActivity.class);
-				model.addObject("soft", awrdAct);
+				model.addObject("araea", awrdAct);
 			}
 		}catch(Exception e) {
 			

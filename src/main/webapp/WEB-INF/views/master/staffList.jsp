@@ -66,7 +66,7 @@
 						</header>
 						<div class="content-body">
 							<div class="row">
-								<c:if test="${sessionScope.successMsg!=null}">
+								<%-- <c:if test="${sessionScope.successMsg!=null}">
 									<div class="col-lg-12">
 										<div class="alert alert-success alert-dismissible fade in">
 											<button type="button" class="close" data-dismiss="alert"
@@ -76,7 +76,7 @@
 											<strong>Success : </strong> ${sessionScope.successMsg}
 										</div>
 									</div>
-								</c:if>
+								</c:if> --%>
 
 								<div class="col-xs-12">
 									<form class="form-horizontal"

@@ -208,6 +208,7 @@
 													</label>
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
+															data-end-date="0d" data-format="dd-mm-yyyy"
 															id="join_date" autocomplete="off" onchange="trim(this)"
 															onkeypress='return restrictAlphabets(event)'
 															name="join_date" placeholder="dd/mm/yyyy"
@@ -287,6 +288,7 @@
 													</label>
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
+														data-end-date="0d" data-format="dd-mm-yyyy"
 															id="acc_off_relDate"
 															onkeypress='return restrictAlphabets(event)'
 															autocomplete="off" name="acc_off_relDate"
@@ -299,8 +301,8 @@
 												
 													<div class="form-group">
 											
-											<label class="control-label col-sm-2" for="is_add_same">Is
-												 Same(State) <span
+											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
+												 Same State <span
 												class="text-danger">*</span>
 											</label>
 
@@ -563,7 +565,7 @@
 </script>
 
 	<script type="text/javascript">
-$(function () {
+/* $(function () {
 	 
     $('.datepicker').datepicker({
 		autoclose: true,
@@ -572,7 +574,7 @@ $(function () {
         changeMonth:true
 
 	});
-});
+}); */
 
 	function showDiv(value) {
 	//alert(value);

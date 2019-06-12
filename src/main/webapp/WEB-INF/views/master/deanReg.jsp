@@ -207,9 +207,9 @@
 														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-3">
-														<input type="text" class="form-control datepicker"
+														<input type="text" class="form-control datepicker" data-end-date="0d"
 															id="join_date" autocomplete="off" onchange="trim(this)"
-															onkeypress='return restrictAlphabets(event)'
+															onkeypress='return restrictAlphabets(event)' data-format="dd-mm-yyyy"
 															name="join_date" placeholder="dd/mm/yyyy"
 															value="${dean.joiningDate}"> <span
 															class="error_form text-danger" id="error_formfield4"
@@ -320,7 +320,7 @@
 													</label>
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
-															id="acc_off_relDate"
+															id="acc_off_relDate" data-end-date="0d" data-format="dd-mm-yyyy"
 															onkeypress='return restrictAlphabets(event)'
 															autocomplete="off" name="acc_off_relDate"
 															placeholder="Relieving Date"
@@ -332,8 +332,8 @@
 												
 												<div class="form-group">
 											
-											<label class="control-label col-sm-2" for="is_add_same">Is
-												 Same(State) <span
+											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
+												 Same State<span
 												class="text-danger">*</span>
 											</label>
 
@@ -597,7 +597,7 @@
 </script>
 
 	<script type="text/javascript">
-$(function () {
+/* $(function () {
 	 
     $('.datepicker').datepicker({
 		autoclose: true,
@@ -606,7 +606,7 @@ $(function () {
         changeMonth:true
 
 	});
-});
+}); */
 
 	function showDiv(value) {
 	//alert(value);

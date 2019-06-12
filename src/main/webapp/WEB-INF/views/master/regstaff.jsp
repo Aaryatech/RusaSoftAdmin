@@ -264,7 +264,7 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="dateOfJoin"
+													id="dateOfJoin" data-end-date="0d" data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" name="join_date" autocomplete="off"
 													placeholder="dd/mm/yyyy" value="${staff.joiningDate}">
@@ -331,7 +331,7 @@
 												<div class="col-sm-3">
 													<input type="text" class="form-control datepicker"
 														id="relDate" value="${staff.realivingDate}"
-														onchange="trim(this)"
+														onchange="trim(this)" data-end-date="0d" data-format="dd-mm-yyyy"
 														onkeypress='return restrictAlphabets(event)'
 														name="acc_off_relDate" autocomplete="off"
 														placeholder="dd/mm/yyyy"> <span
@@ -671,7 +671,7 @@
 
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -680,7 +680,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		$(function() {
 
