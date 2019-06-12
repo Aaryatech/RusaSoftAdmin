@@ -115,7 +115,7 @@
 													<div class="col-sm-6">
 														<select id="approveValue1" name="level"
 															class="form-control">
-															<option value="-1">Select</option>
+															
 															<c:choose>
 																<c:when test="${stud.level eq 'International'}">
 																	<option selected value="International">International</option>
@@ -136,6 +136,7 @@
 																</c:when>
 
 																<c:otherwise>
+																<option selected disabled value="-1">Select</option>
 																	<option value="International">International</option>
 																	<option value="State">State</option>
 																	<option value="Regional">Regional</option>
@@ -152,7 +153,8 @@
 													</label>
 													<div class="col-sm-6">
 														<select id="approveValue" name="type" class="form-control">
-															<option value="-1">Select</option>
+															<option selected disabled value="-1">Select</option>
+
 																<option  value="Govt." ${stud.type == 'Govt.' ? 'selected' : '' }>Govt.</option>
 																<option  value="Non Govt." ${stud.type == 'Non Govt.' ? 'selected' : '' }>Non Govt.</option>
 															<%-- <c:choose>
@@ -188,7 +190,7 @@
 													<div class="col-sm-6">
 														<select id="schemeName" name="schemeName"
 															class="form-control" onchange="showExtraField()">
-															<option value="">Select</option>
+																<option selected disabled value="-1">Select</option>
 															<option value="Capability Enhancement" ${stud.schemeName == 'Capability Enhancement' ? 'selected' : ''} >Capability	Enhancement</option>
 															<option value="Career Counseling" ${stud.schemeName == 'Career Counseling' ? 'selected' : ''} >Career Counseling</option>
 															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" ${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''} >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
@@ -338,7 +340,7 @@
 	
 		function numbersOnlyNotZero(id_number) {
 
-			var mob = /^[1-9][0-9]+$/;
+			var mob = /^[1-9]+$/;
 
 			if (mob.test($.trim(id_number)) == false) {
 
@@ -372,7 +374,7 @@ if (!$("#yearofIntro").val()){
 						              				}
 											
 
-												if ($("#schemeName").val() == -1) {
+												if ($("#schemeName").val() == null|| $("#schemeName").val() == -1) {
 
 													isError = true;
 
@@ -382,7 +384,7 @@ if (!$("#yearofIntro").val()){
 													$("#error_scheme").hide()
 												}
 
-												if ($("#approveValue").val() == -1) {
+												if ($("#approveValue").val() == -1 || $("#approveValue").val() ==null) {
 
 													isError = true;
 
@@ -392,7 +394,7 @@ if (!$("#yearofIntro").val()){
 													$("#error_type").hide()
 												}
 
-												if ($("#approveValue1").val() == -1) {
+												if ($("#approveValue1").val() == -1 || $("#approveValue1").val() ==null) {
 
 													isError = true;
 

@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -165,7 +167,7 @@ public class HomeController {
 		try {
 
 			model = new ModelAndView("welcome");
-			Date date = new Date();
+			
 			// DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
 			// DateFormat.LONG, locale);
 
@@ -231,6 +233,7 @@ public class HomeController {
 
 	@RequestMapping("/loginProcess")
 	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse res) throws IOException {
+		Instant start = Instant.now();
 		ModelAndView mav = new ModelAndView("login");
 		HttpSession session = request.getSession();
 
@@ -301,6 +304,7 @@ public class HomeController {
 
 					String curDateTime = dateFormat.format(cal.getTime());
 
+					
 					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 					String curDate = dateFormatStr.format(new Date());
@@ -443,12 +447,12 @@ public class HomeController {
 							int findModuleId = 0;
 
 							for (int k = 0; k < newModuleList.size(); k++) {
-								System.err.println("mod Id " + newModuleList.get(k).getModuleId());
+								//System.err.println("mod Id " + newModuleList.get(k).getModuleId());
 
 								if (newModuleList.get(k).getModuleId() == list.get(j).getModuleId()) {
 									if (newModuleList.get(k).getModuleId() == 4) {
-										System.err.println("mod Id 4 sub modules "
-												+ newModuleList.get(k).getSubModuleJsonList().toString());
+										//System.err.println("mod Id 4 sub modules "
+												//+ newModuleList.get(k).getSubModuleJsonList().toString());
 									}
 
 									for (int m = 0; m < list.get(j).getSubModuleJsonList().size(); m++) {
@@ -557,6 +561,11 @@ public class HomeController {
 			mav.addObject("acaYearList", acaYearList);
 		}
 
+		
+		//your code
+		Instant end = Instant.now();
+		Duration timeElapsed = Duration.between(start, end);
+		System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
 		return mav;
 
 	}
