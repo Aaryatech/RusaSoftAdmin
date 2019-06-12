@@ -96,7 +96,7 @@
 										<div>
 											<div class="col-xs-12">
 												<div style="text: align center;">
-													<div class="form-group">
+													<div class="form-group" style="margin-bottom:1px">
 														<label class="control-label col-sm-2" for="page_name">
 															New Password <span class="text-danger">*</span>
 														</label>
@@ -116,11 +116,11 @@ style="display: none;">This field is required.</span>
 													
 														<div class="form-group">
 														<label class="control-label col-sm-2" for="page_name">
-															Password format
+															
 														</label>
 														<div class="col-sm-3">
 															<span
-id="strength">Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and <b>at least 8 and one special character</b> and <b>maximum 14  characters</b> </span> 
+id="strength" style="font-size: 10px;">(Password format: Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and <b>at least 8 and one special character</b> and <b>maximum 14  characters</b>) </span> 
 														</div>
 													</div>
 													
