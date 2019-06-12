@@ -376,7 +376,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Email
-														ID(Official) <span class="text-danger">*</span>
+														ID (Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<input type="email" class="form-control" id="email"

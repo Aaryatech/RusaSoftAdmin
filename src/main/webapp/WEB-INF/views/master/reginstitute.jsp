@@ -392,7 +392,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">Email
-														ID(Official) <span class="text-danger">*</span>
+														ID (Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="email" maxlength="50" onchange="trim(this)" 
@@ -446,7 +446,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">Email
-														ID(Official) <span class="text-danger">*</span>
+														ID (Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="email" maxlength="50" class="form-control" id="princ_email"
