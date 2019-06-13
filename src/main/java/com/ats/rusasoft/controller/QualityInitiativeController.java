@@ -159,6 +159,12 @@ public class QualityInitiativeController {
 				QualityInitiative qualInRes = rest.postForObject(Constants.url + "saveQualityInitiative", qualInit,
 						QualityInitiative.class);
 
+				if(qualInRes!=null) {
+					session.setAttribute("successMsg", "New Record Saved Sucessfully");
+				}
+				else {
+					session.setAttribute("successMsg", "Record Not Saved");
+				}
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
 					redirect = "redirect:/showAddQualityInitiative";

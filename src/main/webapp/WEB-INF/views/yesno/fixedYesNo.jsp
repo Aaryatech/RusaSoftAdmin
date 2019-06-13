@@ -9,17 +9,17 @@
 <html class=" ">
 <head>
 <c:url value="/addTransperent" var="addTransperent"></c:url>
-<c:url value="/deleteTranspernt" var="deleteTranspernt"></c:url> 
+<c:url value="/deleteTranspernt" var="deleteTranspernt"></c:url>
 <c:url value="/editTranspernt" var="editTranspernt"></c:url>
 
 <c:url value="/addTimeboundAddDive" var="addTimeboundAddDive"></c:url>
-<c:url value="/deleteTimebound" var="deleteTimebound"></c:url> 
+<c:url value="/deleteTimebound" var="deleteTimebound"></c:url>
 <c:url value="/editTranspernt" var="editTimebound"></c:url>
 
 <c:url value="/addEfficient" var="addEfficient"></c:url>
 <c:url value="/deleteEfficient" var="deleteEfficient"></c:url>
 <c:url value="/editTranspernt" var="editEfficient"></c:url>
-  
+
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
@@ -103,6 +103,34 @@
 
 							</div>
  --%>
+							<div class="col-lg-12" id="sucess_msg" style="display: none;">
+								<!-- onclick="location.reload();" -->
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" onclick="hideAlert()">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>${msg}</div>
+							</div>
+							<%-- <div class="col-lg-12" id="updt_msg" style="display: none;">
+								<!-- onclick="location.reload();" -->
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" onclick="hideAlert()">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>${updtMsg}</div>
+							</div> --%>
+							
+
+							<div class="col-lg-12" id="fail_msg" style="display: none;">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>${msg}</div>
+
+
+							</div>
 						</header>
 
 						<div class="content-body">
@@ -177,9 +205,9 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTransperent()" value="Add">
-<input type="hidden" id="transId" name="transId" value="0">
-																	
+																	onclick="addTransperent()" value="Add"> <input
+																	type="hidden" id="transId" name="transId" value="0">
+
 															</div>
 														</div>
 													</c:when>
@@ -201,9 +229,9 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTransperent()" value="Add">
-<input type="hidden" id="transId" name="transId" value="0">
-																	
+																	onclick="addTransperent()" value="Add"> <input
+																	type="hidden" id="transId" name="transId" value="0">
+
 															</div>
 														</div>
 													</c:otherwise>
@@ -247,13 +275,14 @@
 
 																		<td>${count.index+1}</td>
 																		<td>${list.instYesnoResponse}</td>
-																		<td><a href="#" onclick="editTranspernt(${list.instYesnoId})"
-																			
-																			rel="tooltip" data-color-class="danger"
-																			title="Edit" data-animate=" animated fadeIn "
+																		<td><a href="#"
+																			onclick="editTranspernt(${list.instYesnoId})"
+																			rel="tooltip" data-color-class="danger" title="Edit"
+																			data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Edit  record"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																			href="#"
 																			onclick="deleteTranspernt(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -315,9 +344,10 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTimeboundAddDive()" value="Add">
-														<input type="hidden" id="timeBoundId" name="timeBoundId" value="0">
-																	
+																	onclick="addTimeboundAddDive()" value="Add"> <input
+																	type="hidden" id="timeBoundId" name="timeBoundId"
+																	value="0">
+
 															</div>
 														</div>
 													</c:when>
@@ -338,9 +368,10 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTimeboundAddDive()" value="Add">
-															<input type="hidden" id="timeBoundId" name="timeBoundId" value="0">
-																	
+																	onclick="addTimeboundAddDive()" value="Add"> <input
+																	type="hidden" id="timeBoundId" name="timeBoundId"
+																	value="0">
+
 															</div>
 														</div>
 													</c:otherwise>
@@ -386,11 +417,12 @@
 																		<td>${list.instYesnoResponse}</td>
 																		<td align="center"><a href="#"
 																			onclick="editTimebound(${list.instYesnoId})"
-																			rel="tooltip" data-color-class="danger"
-																			title="Edit" data-animate=" animated fadeIn "
+																			rel="tooltip" data-color-class="danger" title="Edit"
+																			data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Edit  record"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																			href="#"
 																			onclick="deleteTimebound(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -451,8 +483,9 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addEfficient()" value="Add">
-																	<input type="hidden" id="efficientId" name="efficientId" value="0">
+																	onclick="addEfficient()" value="Add"> <input
+																	type="hidden" id="efficientId" name="efficientId"
+																	value="0">
 															</div>
 														</div>
 													</c:when>
@@ -473,8 +506,9 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addEfficient()" value="Add">
-																	<input type="hidden" id="efficientId" name="efficientId" value="0">
+																	onclick="addEfficient()" value="Add"> <input
+																	type="hidden" id="efficientId" name="efficientId"
+																	value="0">
 															</div>
 														</div>
 													</c:otherwise>
@@ -520,11 +554,12 @@
 																		<td>${list.instYesnoResponse}</td>
 																		<td><a href="#"
 																			onclick="editEfficient(${list.instYesnoId})"
-																			rel="tooltip" data-color-class="danger"
-																			title="Edit" data-animate=" animated fadeIn "
+																			rel="tooltip" data-color-class="danger" title="Edit"
+																			data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Edit  record"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																			href="#"
 																			onclick="deleteEfficient(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -859,7 +894,8 @@
 	<script type="text/javascript">
 		function addTransperent() {
 			transId=document.getElementById("transId").value
-
+			var id = document.getElementById("transId").value; 
+			
 			var transperentspeficytext = document.getElementById("transperentspeficytext").value; 
 			 
 			if (transperentspeficytext != "") {
@@ -903,6 +939,13 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
+					
+					 if(data!=null){
+						  $("#sucess_msg").show();
+						 						
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -929,7 +972,7 @@ function editTranspernt(instYesnoId){
 					});
 			
 		}
-		
+
 		function deleteTranspernt(instYesnoId) {
  
 				//$('#example-1 td').remove();
@@ -1025,6 +1068,12 @@ function editTranspernt(instYesnoId){
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table2 tbody').append(tr); 
 					}
+					
+					 if(data!=null){
+						 $("#sucess_msg").show();
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -1101,7 +1150,7 @@ function editTimebound(instYesnoId){
 		 
 		 
 	</script>
-	
+
 	<script type="text/javascript">
 		function addEfficient() {
 			var efficientId=document.getElementById("efficientId").value;
@@ -1151,6 +1200,12 @@ function editTimebound(instYesnoId){
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table3 tbody').append(tr); 
 					}
+					
+					 if(data!=null){
+						 $("#sucess_msg").show();
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -1255,6 +1310,11 @@ function editEfficient(instYesnoId){
 		}
 
 	}
+	
+	function hideAlert(){
+		$("#sucess_msg").hide();
+				
+			}
 	</script>
 
 

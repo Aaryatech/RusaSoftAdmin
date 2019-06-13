@@ -380,6 +380,12 @@ public class YesNoController {
 			}
 			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
 					instituteYesNoList, InstituteYesNo[].class);
+			if(instituteYesNo!=null) {
+				session.setAttribute("successMsg", "New Record Saved Sucessfully");
+			}
+			else {
+				session.setAttribute("successMsg", "Record Not Saved");
+			}
 			try {
 				selectYestNoLib = Integer.parseInt(request.getParameter("selectYestNoLib"));
 			} catch (Exception e) {
@@ -416,6 +422,8 @@ public class YesNoController {
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
 			model.addObject("title", "Examination Grievances & Redressal");
+			model.addObject("msg", Constants.sucess_msg);
+			model.addObject("updtMsg", Constants.updt_msg);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -981,6 +989,7 @@ public class YesNoController {
 
 	}
 
+
 	@RequestMapping(value = "/selectYestNoPageThird", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageThird(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1133,7 +1142,12 @@ public class YesNoController {
 			}
 			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
 					instituteYesNoListPage3, InstituteYesNo[].class);
-
+			if(instituteYesNo!=null) {
+				session.setAttribute("successMsg", "New Record Saved Sucessfully");
+			}
+			else {
+				session.setAttribute("successMsg", "Record Not Saved");
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -1299,6 +1313,13 @@ public class YesNoController {
 			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
 					instituteYesNoListPage4, InstituteYesNo[].class);
 
+			if(instituteYesNo!=null) {
+				session.setAttribute("successMsg", Constants.sucess_msg);
+			}
+			else {
+				session.setAttribute("successMsg", Constants.fail_msg);
+			}
+			
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());

@@ -129,7 +129,7 @@
  -->
 	<p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show Password</span>
+                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
                     </label>
                 </p>
 
@@ -178,7 +178,7 @@
  -->
 <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show Password</span>
+                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
                     </label>
                 </p>
 
@@ -226,7 +226,7 @@
  -->
 <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show Password</span>
+                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
                     </label>
                 </p>
 
