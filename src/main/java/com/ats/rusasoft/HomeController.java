@@ -234,6 +234,7 @@ public class HomeController {
 	@RequestMapping("/loginProcess")
 	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse res) throws IOException {
 		Instant start = Instant.now();
+		
 		ModelAndView mav = new ModelAndView("login");
 		HttpSession session = request.getSession();
 
@@ -247,20 +248,20 @@ public class HomeController {
 		}
 		int loginAcYearId = 0;
 		if (acYearId == 0) {
-			System.err.println(" IN if First time acYearId ==0");
+			//System.err.println(" IN if First time acYearId ==0");
 			// loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
 		} else {
-			System.err.println("In Else its reload call  ");
+			//System.err.println("In Else its reload call  ");
 			loginAcYearId = acYearId;
 		}
 
-		System.out.println("Credential are::::" + name + password);
+		//System.out.println("Credential are::::" + name + password);
 
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 
 		try {
-			System.out.println("Login Process " + name);
+			//System.out.println("Login Process " + name);
 
 			if (name.equalsIgnoreCase("") || password.equalsIgnoreCase("") || name == null || password == null) {
 
@@ -274,13 +275,13 @@ public class HomeController {
 				map.add("isBlock", 1);
 
 				LoginResponse userObj = restTemplate.postForObject(Constants.url + "login", map, LoginResponse.class);
-				System.out.println("JSON Response Objet " + userObj.toString());
+				//System.out.println("JSON Response Objet " + userObj.toString());
 				String loginResponseMessage = "";
 
 				if (userObj != null) {
 
 					int a = userObj.getStaff().getIsEnrolled();
-					System.out.println("is enroll is " + a);
+					//System.out.println("is enroll is " + a);
 					if (a == 1) {
 						mav = new ModelAndView("welcome");
 
@@ -297,7 +298,7 @@ public class HomeController {
 						mav = new ModelAndView("changePassword");
 					}
 
-					System.out.println("Login Successful");
+					//System.out.println("Login Successful");
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -376,16 +377,16 @@ public class HomeController {
 
 					map = new LinkedMultiValueMap<String, Object>();
 					map.add("isCurrent", 1);
-					System.err.println("Map  " + map.toString());
+					//System.err.println("Map  " + map.toString());
 					AcademicYear acYear1 = new AcademicYear();
 
 					acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
 							AcademicYear.class);
-					System.err.println("acYear current  " + acYear1.toString());
+					//System.err.println("acYear current  " + acYear1.toString());
 
 					session.setAttribute("acYearId", acYear1.getYearId());
 					session.setAttribute("acYearValue", acYear1.getAcademicYear());
-					System.err.println("Session date year Id " + session.getAttribute("acYearId"));
+					//System.err.println("Session date year Id " + session.getAttribute("acYearId"));
 
 					// getAcademicYearByYearId
 					/*
@@ -419,7 +420,7 @@ public class HomeController {
 
 						map = new LinkedMultiValueMap<String, Object>();
 						map.add("roleId", roleIdList.get(i));
-						System.out.println("/getRoleJsonByRoleId param:  roleId  " + roleIdList.get(i));
+						//System.out.println("/getRoleJsonByRoleId param:  roleId  " + roleIdList.get(i));
 						try {
 							ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
 							};
@@ -641,11 +642,11 @@ public class HomeController {
 	}
 
 	RestTemplate rest = new RestTemplate();
-
+	Instant start=null;
 	@RequestMapping(value = "/forgotPas", method = RequestMethod.POST)
 	public ModelAndView checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
 		String c = null;
-		System.err.println("Hiii  checkValue  ");
+		System.err.println("Hiii  checkValue in /forgotPas forgot password checkUserName  ");
 		Info info = new Info();
 		ModelAndView model = null;
 
@@ -670,7 +671,11 @@ public class HomeController {
 			} else {
 				model = new ModelAndView("verifyOTP");
 				// c= "redirect:/showVerifyOTP";
-				model.addObject("username", info.getMsg());
+				model.addObject("username", inputValue);
+			
+				 start = Instant.now();
+				
+				;
 			}
 
 		} catch (Exception e) {
@@ -682,7 +687,7 @@ public class HomeController {
 
 	}
 
-	@RequestMapping(value = "/reGenOtp1", method = RequestMethod.GET)
+	@RequestMapping(value = "/reGenOtp1", method = RequestMethod.POST)
 	public ModelAndView reGenOtp1(HttpServletRequest request, HttpServletResponse response) {
 		String c = null;
 		System.err.println("Hiii  checkValue  ");
@@ -691,6 +696,7 @@ public class HomeController {
 
 		try {
 			// model = new ModelAndView("forgotPassword");
+
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -711,14 +717,15 @@ public class HomeController {
 				model = new ModelAndView("verifyOTP");
 				// c= "redirect:/showVerifyOTP";
 				model.addObject("username", info.getMsg());
-				model.addObject("msg", "OTP Resent Plz check");
+				model.addObject("msg", "OTP Resent Please check");
+				start=Instant.now();
 			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in checkUniqueField  " + e.getMessage());
 			e.printStackTrace();
 		}
-
+		
 		return model;
 
 	}
@@ -757,7 +764,10 @@ public class HomeController {
 			String otp = request.getParameter("otp");
 
 			map.add("otp", otp);
-
+			Instant end = Instant.now();
+			Duration timeElapsed = Duration.between(start, end);
+			System.out.println("Time taken: OTPVerification "+ timeElapsed.toSeconds() +" seconds");
+			if(timeElapsed.toSeconds()<=120) {
 			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
 			/*
 			 * System.err.println("hashRes Response  " + hashRes.toString());
@@ -791,6 +801,12 @@ public class HomeController {
 				 * acaYearList = new ArrayList<>(Arrays.asList(quolArray));
 				 * model.addObject("acaYearList", acaYearList);
 				 */
+			}
+			}else {
+				model = new ModelAndView("verifyOTP");
+				// c="redirect:/showforgotPassForm";
+				model.addObject("msg", "Time out! Regenerate OTP");
+				
 			}
 
 		} catch (Exception e) {

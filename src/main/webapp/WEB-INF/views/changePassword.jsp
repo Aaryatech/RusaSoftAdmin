@@ -120,7 +120,7 @@ style="display: none;">This field is required.</span>
 														</label>
 														<div class="col-sm-3">
 															<span
-id="strength" style="font-size: 10px;">(Password format: Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and <b>at least 8 and one special character</b> and <b>maximum 14  characters</b>) </span> 
+id="strength" style="font-size: 10px;">(Password format: Must contain at least <b>one number(0-9)</b> and <b>one upper case(A-Z)</b> and <b> one lower case(a-z)</b> letter, and<b> one special character</b> and <b>at least 8 </b> and <b>maximum 14 </b>characters)</span> 
 														</div>
 													</div>
 													

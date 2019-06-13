@@ -165,7 +165,7 @@
 					</c:choose>
 
 					<p >
-						<label for="user_pass">OTPS<br /> <input type="password"
+						<label for="user_pass">OTP<br /> <input type="password"
 							name="otp" id="otp" class="input" value=""
 							placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
 					</p>
@@ -213,7 +213,7 @@
 					</c:choose>
 
 					<p >
-						<label for="user_pass">OTP<br /> <input type="password"
+						<label for="user_pass">OTP1<br /> <input type="password"
 							name="otp" id="otp" class="input" value=""
 							placeholder="Enter OTP Sent on Your Registered Number/Email" size="20" /></label>
 					</p>
@@ -227,6 +227,8 @@
 <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme">
                     	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
+                    	<br>
+                    	<span id="countdown" style="color: red; font-size: 10px;"></span>
                     </label>
                 </p>
 
@@ -360,6 +362,18 @@
 	
 	
 	<script type="text/javascript">
+	
+	var timeleft = 120;
+	var downloadTimer = setInterval(function(){
+	  document.getElementById("countdown").innerHTML = timeleft + " seconds remaining to expire sent OTP";
+	  timeleft -= 1;
+	  if(timeleft <= 0){
+	    clearInterval(downloadTimer);
+	    document.getElementById("countdown").innerHTML = "OTP Expired"
+	    	document.getElementById("wp-submit").disabled=true;	
+	  }
+	}, 1000);
+	
 	function viewPassword() {
 		var pass1 = document.getElementById("otp");
 	
@@ -377,8 +391,19 @@
 	<script type="text/javascript">
 	
 	function reGenOtp() {
-alert();
-		var username = document.getElementById("username").value;
+//alert("Hi");
+
+
+var form = document.getElementById("loginform");
+
+//form.setAttribute("target", "_blank");
+form.setAttribute("method", "post");
+
+form.action = ("reGenOtp1");
+
+form.submit();
+
+		/* var username = document.getElementById("username").value;
 		
 		$
 				.getJSON(
@@ -391,13 +416,14 @@ alert();
 						},
 						function(data) {
 
-								//alert("Data  " +JSON.stringify(data));
-							
+								alert("Data  " +JSON.stringify(data));
+						location.reload(true);
 							
 						});
-
+ */
 	}
 	
+
 	</script>
 	
 	<script>
@@ -405,7 +431,7 @@ alert();
 
 	function checkValue1() {
 var inputValue=document.getElementById("username").value;
-		alert("hiii"+inputValue);
+		//alert("hiii"+inputValue);
 		var valid = true;
 /* 
 		if (inputValue.length = !0) {
