@@ -153,7 +153,7 @@
 															class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker"
+															<input type="text" class="form-control datepicker" data-end-date="0d" data-format="dd-mm-yyyy" 
 																id="phdRecognitionDt" name="phdRecognitionDt" readonly
 																placeholder="Select Date of Recognition" value="${facPhdDetail.phdRecognitionDt}">
 																
@@ -167,7 +167,7 @@
 															up to <span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" id="phdValidDt" readonly
+															<input type="text" class="form-control datepicker" id="phdValidDt" readonly data-format="dd-mm-yyyy" 
 																name="phdValidDt" placeholder="Valid up to Date" value="${facPhdDetail.phdValidDt}">
 																<span class="error_form text-danger" id="phdValidDt_field"
 															style="display: none;">Please select date of validity</span>
@@ -520,7 +520,7 @@
 		document.getElementById("is_view").value = view;//create this 
 
 	}
-    $(function () {
+    /* $(function () {
 		 
         $('.datepicker').datepicker({
 			autoclose: true,
@@ -528,7 +528,7 @@
             changeYear:true,
             changeMonth:true
 		});
-    });
+    }); */
     
 </script>
 
