@@ -202,15 +202,15 @@
 														<input type="text" class="form-control"
 															id="contact_detail" value="${trainPlace.contactDetail}"
 															name="contact_detail" onchange="trim(this)" maxlength="10"
-															placeholder="Employer Contact Information" onkeypress='return restrictAlphabets(event)'>
+															placeholder="Employer Contact Information">
 															<span class="error_form text-danger" id="contact_detail_field"
 															style="display: none;">Please enter employer contact detail</span>
 													</div>
 												</div>
 												
 													<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">
-														Package Offered<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order"> Annual
+														Package Offered in ${figure}<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-3">
 														<input type="text" onchange="trim(this)" min="0" maxlength="50" class="form-control"

@@ -52,8 +52,9 @@
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 
 	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
-	<c:url value="/getStudAdmCatwiseByProgType" var="getStudAdmCatwiseByProgType"></c:url>
-	
+	<c:url value="/getStudAdmCatwiseByProgType"
+		var="getStudAdmCatwiseByProgType"></c:url>
+
 
 
 	<!-- START TOPBAR -->
@@ -124,52 +125,56 @@
 										action="${pageContext.request.contextPath}/insertStudAdmCatwise"
 										method="post" name="form_sample_2" id="form_sample_2">
 										<c:if test="${isEdit==0}">
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="programType">Program
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-4">
-											
-												<select id="programType" name="programType"
-													class="form-control" onchange="getProgramTypeByProgram()"
-													required>
-													<c:forEach items="${progTypeList}" var="progTypeList">
-														<c:choose>
-															<c:when
-																test="${progTypeList.programId==editProgram.programType}">
-																<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${progTypeList.programId}">${progTypeList.programName}</option>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="programType">Program
+													<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-4">
 
-															</c:otherwise>
+													<select id="programType" name="programType"
+														class="form-control" onchange="getProgramTypeByProgram()"
+														required>
+														<c:forEach items="${progTypeList}" var="progTypeList">
+															<c:choose>
+																<c:when
+																	test="${progTypeList.programId==editProgram.programType}">
+																	<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${progTypeList.programId}">${progTypeList.programName}</option>
 
-														</c:choose>
+																</c:otherwise>
 
-													</c:forEach>
-												</select>
+															</c:choose>
+
+														</c:forEach>
+													</select>
 
 
+												</div>
+
+												<label class="control-label col-sm-2" for="programTypeId">Program
+													Type <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-4">
+
+													<select id="programTypeId" name="programTypeId"
+														class="form-control" onchange="getStudAdmByProgType()"
+														required>
+
+													</select>
+
+
+												</div>
 											</div>
-
-											<label class="control-label col-sm-2" for="programTypeId">Program
-												Type <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-4">
-											
-												<select id="programTypeId" name="programTypeId"
-													class="form-control" onchange="getStudAdmByProgType()" required>
-
-												</select>
-
-
-											</div>
-										</div>
 										</c:if>
 										<c:if test="${isEdit==1}">
-										<div align="center">Program :<b>${progName}-${progType}</b></div>
-										<input type="hidden" id="programTypeId" name="programTypeId" value="${programType}">
-</c:if>
+											<div align="center">
+												Program :<b>${progName}-${progType}</b>
+											</div>
+											<input type="hidden" id="programTypeId" name="programTypeId"
+												value="${programType}">
+										</c:if>
 										<div class="row">
 											<div class="col-md-12">
 												<table class="table table-striped dt-responsive display">
@@ -177,19 +182,19 @@
 														<tr>
 															<th width="10%">Sr No</th>
 															<th width="30%">Category</th>
-																
+
 
 														</tr>
 														<tr>
-														
+
 															<th width="10%"></th>
 															<th width="30%"></th>
 															<th width="20%">No. of Seats Available</th>
 															<th width="20%">Male</th>
 															<th width="20%">Female</th>
 															<th width="20%">Transgender</th>
-															
-															
+
+
 
 
 														</tr>
@@ -202,25 +207,29 @@
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
-																		
+
 																		<td><input type="number" min="0" max="99999"
-																		onkeyup="seatCount()" class="sit" onblur="validateSeatCnt(${cast.castId})"
+																			onkeyup="seatCount()" class="sit"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			id="seats${cast.castId}" name="seats${cast.castId}"
 																			value="0" required></td>
 
 																		<td><input type="number" min="0" max="99999"
-																			onkeyup="calculateSum()" class="txt" onblur="validateSeatCnt(${cast.castId})"
+																			onkeyup="calculateSum()" class="txt"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			id="cast_m${cast.castId}" name="cast_m${cast.castId}"
 																			value="0" required></td>
 																		<td><input type="number" min="0" max="99999"
-																			onkeyup="calculateSum()" class="txt" onblur="validateSeatCnt(${cast.castId})"
+																			onkeyup="calculateSum()" class="txt"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			id="cast_f${cast.castId}" name="cast_f${cast.castId}"
 																			value="0" required></td>
 																		<td><input type="number" min="0" max="99999"
-																			onkeyup="calculateSum()" class="txt" onblur="validateSeatCnt(${cast.castId})"
+																			onkeyup="calculateSum()" class="txt"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			id="cast_t${cast.castId}" name="cast_t${cast.castId}"
 																			value="0" required></td>
-																		
+
 																	</tr>
 																</c:forEach>
 															</c:when>
@@ -234,20 +243,23 @@
 
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
-																			id="cast_m${cast.studentCatId}" onblur="validateSeatCnt(${cast.castId})"
+																			id="cast_m${cast.studentCatId}"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			name="cast_m${cast.studentCatId}"
 																			value="${cast.maleStudent}" required></td>
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
-																			id="cast_f${cast.studentCatId}" onblur="validateSeatCnt(${cast.castId})"
+																			id="cast_f${cast.studentCatId}"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			name="cast_f${cast.studentCatId}"
 																			value="${cast.femaleStudent}" required></td>
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
-																			id="cast_t${cast.studentCatId}" onblur="validateSeatCnt(${cast.castId})"
+																			id="cast_t${cast.studentCatId}"
+																			onchange="validateSeatCnt(${cast.castId})"
 																			name="cast_t${cast.studentCatId}"
 																			value="${cast.transStudent}" required></td>
-																		
+
 
 																	</tr>
 																</c:forEach>
@@ -275,9 +287,9 @@
 														type="text"
 														style="color: black; border-radius: 15px; align-items: center;"
 														readonly placeholder="Total Student" id="total_stud">
-														
-														
-														 <label class="control-label" for="fPassingYear"><b>Total
+
+
+													<label class="control-label" for="fPassingYear"><b>Total
 															Seats</b><span class="text-danger"></span> </label> <input
 														type="text"
 														style="color: black; border-radius: 15px; align-items: center;"
@@ -311,11 +323,11 @@
 
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
-
+	
 	<!-- END CONTENT -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script>
+	<script>
 function validateSeatCnt(castId){
 	
 	var male = $("#cast_m"+castId).val();
@@ -332,7 +344,10 @@ function validateSeatCnt(castId){
 	
 	if(seat<cal){
 		alert("No. of students enroled cannot be greater than seats available ");
-		document.getElementById("seats"+castId).value=0;
+		//document.getElementById("seats"+castId).value=0;
+		document.getElementById("cast_m"+castId).value=0;
+		document.getElementById("cast_f"+castId).value=0;
+		document.getElementById("cast_t"+castId).value=0;
 		
 	}
 }

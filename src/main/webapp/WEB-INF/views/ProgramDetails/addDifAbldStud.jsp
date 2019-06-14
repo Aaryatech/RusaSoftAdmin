@@ -107,7 +107,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)" id="studentName"
-															value="${difDisStud.nameOfStud}" name="studentName"
+															value="${difDisStud.nameOfStud}" name="studentName" autocomplete="off"
 															placeholder="Name of Student" maxlength="100">
 															<span class="error_form text-danger" id="stude_name_field"
 															style="display: none;">Please enter name of the student.</span>
@@ -138,7 +138,7 @@
 														<input type="text" class="form-control"
 															id="udid" onchange="trim(this)"
 															value="${difDisStud.udidCardNo}"
-															name="udid" maxlength="100"
+															name="udid" maxlength="100" autocomplete="off"
 															placeholder="Unique Disability ID (UDID)">
 															<span class="error_form text-danger" id="udid_errfield"
 															style="display: none;">Please enter unique disability ID (UDID).</span>
@@ -152,7 +152,7 @@
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
 															id="disablityType" onchange="trim(this)"
-															value="${difDisStud.typeOfDisability}"
+															value="${difDisStud.typeOfDisability}" autocomplete="off"
 															name="disablityType" maxlength="100"
 															placeholder="Type of Disability">
 															<span class="error_form text-danger" id="disablity_errfield"
@@ -166,7 +166,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
-															id="disablity" onchange="trim(this)"
+															id="disablity" onchange="trim(this)" autocomplete="off"
 															value="${difDisStud.percntOfDisability}" onFocus="clearDefault(this)" 
 															onkeypress='return restrictAlphabets(event)'
 															name="disablity" maxlength="100"

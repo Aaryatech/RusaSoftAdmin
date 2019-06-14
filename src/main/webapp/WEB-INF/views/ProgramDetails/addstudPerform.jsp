@@ -157,6 +157,8 @@
 													placeholder="No of Students Appeared in Final Year Exam ">
 													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >
 													Please enter No of students appeared in final year exam and value must be greater than 0.</span>
+													
+												
 											</div>
 										</div>
 
@@ -167,7 +169,7 @@
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="stud_passed" onFocus="clearDefault(this)"
 													value="${studPer.noStudPass}" name="stud_passed" onkeypress='return restrictAlphabets(event)'
-													placeholder="No of Students Passed in Final Year Exam"  pattern="\d*" onblur="getPercent()">
+													placeholder="No of Students Passed in Final Year Exam"  pattern="\d*" onchange="getPercent()">
 											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >
 											Please enter No of students passed in final year exam and value must be greater than 0.</span>
 											
@@ -189,6 +191,10 @@
 											Please enter date of introduction.</span> -->
 											</div>
 										</div>
+										
+											<input type="hidden" id="progTypeId" name="progTypeId"
+													value="${studPer.progType}"> <input
+													type="hidden" id="is_view" name="is_view" value="0">
 										
 									
 									<div class="form-group">
@@ -265,7 +271,7 @@ function clearDefault(a){
             			var isError=false;
             			 var errMsg="";
             			 
-            				if(passPer == 0){
+            				if($("#stud_appeared").val() < $("#stud_passed").val()){
            					 
                 				isError=true;
                 				
@@ -328,6 +334,7 @@ function clearDefault(a){
                 				}
             				
             				
+            				            				
             				
 			            	 if (!isError) {
 			            		 
@@ -401,6 +408,7 @@ $(function () {
 			
 			
 			var programType = document.getElementById("programType").value;
+			var progTypeId=document.getElementById("progTypeId").value;
 			//alert("programType" + programType);
 
 			var valid = true;
@@ -422,10 +430,13 @@ $(function () {
 					var html;
 					var len = data.length;
 					for (var i = 0; i < len; i++) {
-
+						if(progTypeId==data[i].programId){
+							html += '<option  selected value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+							}else{
 						html += '<option value="' + data[i].programId + '">'
 								+ data[i].nameOfProgram + '</option>';
-
+							}
 					}
 					html += '</option>';
 
