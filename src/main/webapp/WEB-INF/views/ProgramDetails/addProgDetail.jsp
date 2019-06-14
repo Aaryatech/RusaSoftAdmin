@@ -135,9 +135,9 @@
 												Duration (in months)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="monthDuration" autoc
+												<input type="text" class="form-control" id="monthDuration" autocomplete="off"
 													value="${editProgram.monthDuration}" name="monthDuration"
-													placeholder="Duration(in months)" pattern="\d*">
+													placeholder="Duration (in months)" pattern="\d*">
 													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter duration.</span>
 											</div>
 										</div>
