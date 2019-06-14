@@ -383,7 +383,7 @@
 													<div class="col-sm-10">
 														<select id="level" name="level" class="form-control"
 															onchange="showTextField()" >
-															<option value="">Select Level</option>
+															<option disabled value="">Select Level</option>
 															<option value="International" ${editProgramActivity.level eq 'International' ? 'selected' : ''}>International</option>
 															<option value="National" ${editProgramActivity.level eq 'National' ? 'selected' : ''}>National</option>
 															<option value="Regional" ${editProgramActivity.level eq 'Regional' ? 'selected' : ''}>Regional</option>
@@ -440,7 +440,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" maxlength="50" class="form-control"	id="stud_name"	value="${editProgramActivity.exVar1}"
-																	name="stud_name" placeholder="Name of Student" onchange="return trim(this)">
+																	name="stud_name" placeholder="Name of Student" onchange="return trim(this)" autocomplete="off">
 															
 															<span class="error_form text-danger" id="error_studName"
 																		style="display: none;">Please enter name of student.</span>
@@ -453,7 +453,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" maxlength="12" class="form-control"	id="adhar_no"	value="${editProgramActivity.exVar2}"
-																	name="adhar_no" placeholder="Aadhaar No./ Student ID No." onchange="return trim(this)">
+																	name="adhar_no" placeholder="Aadhaar No./ Student ID No." onchange="return trim(this)" autocomplete="off">
 															
 															<span class="error_form text-danger" id="error_aadhaarNo"
 																			style="display: none;">Please Aadhaar No./ Student ID No.</span>
@@ -466,7 +466,7 @@
 															</label>
 															<div class="col-sm-10">
 																<input type="text" maxlength="50" class="form-control"	id="name_award"	value="${editProgramActivity.aadharNo}"
-																	name="name_award" placeholder="Name of Award/Medal" onchange="return trim(this)">
+																	name="name_award" placeholder="Name of Award/Medal" onchange="return trim(this)" autocomplete="off">
 															
 															<span class="error_form text-danger" id="error_madel"
 																		style="display: none;">Please enter name of award/medal.</span>

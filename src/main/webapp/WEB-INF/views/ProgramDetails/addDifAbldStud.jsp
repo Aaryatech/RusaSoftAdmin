@@ -213,8 +213,7 @@
 											</div>
 												
 													<div class="form-group">
-											<label class="control-label col-sm-3 for="year"
-												style="text-align: left;">Year of
+											<label class="control-label col-sm-3" for="year">Year of										
 												Enrollment <span class="text-danger">*</span>
 											</label>
 
