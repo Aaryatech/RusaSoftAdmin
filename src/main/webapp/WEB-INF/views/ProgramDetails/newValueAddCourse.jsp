@@ -348,7 +348,7 @@
 												} else {
 													$("#student_course_completed_field").hide()
 												}
-
+ 
 												//new 
 												var x=$("#no_student_completed_course").val();
 												var y=$("#no_student_enrolled").val();
