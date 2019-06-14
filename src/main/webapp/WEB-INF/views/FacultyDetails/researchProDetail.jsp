@@ -224,7 +224,7 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="smallheading">Grant Sanctioned(Rs.) 
+											<label class="control-label col-sm-2" for="smallheading">Grant Sanctioned (Rs.) 
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
@@ -256,7 +256,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="page_order">
-												Grant Received(Rs.)<span class="text-danger">*</span>
+												Grant Received (Rs.)<span class="text-danger">*</span>
 											</label>
 
 

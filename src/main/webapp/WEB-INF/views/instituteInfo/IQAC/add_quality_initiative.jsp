@@ -90,15 +90,15 @@
 
 						</header>
 						
-							 <c:if test="${sessionScope.successMsg!=null}">
+							<c:if test="${sessionScope.msg!=null}">
            						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" onclick="removSess()" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
+    						          <div class="alert alert-success alert-dismissible fade in" style="=display: none;">
+            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+             						   <strong>Success : </strong> ${msg}</div>
         	                     </div> 
         	                     <%session=request.getSession();
         	                    
-        	                     session.removeAttribute("successMsg");
+        	                     session.removeAttribute("msg");
         	                     %>
             			</c:if>
 

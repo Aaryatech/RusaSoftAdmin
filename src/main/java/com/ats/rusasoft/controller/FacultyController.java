@@ -1252,6 +1252,8 @@ public class FacultyController {
 				arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
 				List<SWOC> challengelist = new ArrayList<>(Arrays.asList(arry));
 				model.addObject("challengelist", challengelist);
+				model.addObject("msg", Constants.sucess_msg);
+				model.addObject("failMsg", Constants.fail_msg);
 
 			} else {
 				model = new ModelAndView("accessDenied");

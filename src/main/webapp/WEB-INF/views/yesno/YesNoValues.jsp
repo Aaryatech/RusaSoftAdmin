@@ -79,7 +79,7 @@
 								</div>
 
 							</header>
-						 <c:if test="${sessionScope.successMsg!=null}">
+						 	<c:if test="${sessionScope.successMsg!=null}">
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>

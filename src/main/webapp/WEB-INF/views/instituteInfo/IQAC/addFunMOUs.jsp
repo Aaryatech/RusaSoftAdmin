@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="showForm()()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -135,7 +135,7 @@
 											<div class="col-sm-6">
 												<select id="MOU_agency" name="MOU_agency"
 													onchange="showForm()" class="form-control">
-													<option value="-1">Select</option>
+												
 
 													<c:choose>
 													
@@ -207,7 +207,7 @@
 														</c:when>
 
 														<c:otherwise>
-
+	<option selected disabled value="-1">Select</option>
 															<option value="IIT">IIT</option>
 															<option value="NIT">NIT</option>
 															<option value="IIIT">IIIT</option>
@@ -215,7 +215,7 @@
 															<option value="Industries">Industries</option>
 															<option value="Corporate Houses">Corporate
 																Houses</option>
-															<option value="7">Any other Institute
+															<option selected value="7">Any other Institute
 																of International/National/State Importance</option>
 														</c:otherwise>
 													</c:choose>
@@ -460,7 +460,7 @@
 					$("#error_name").hide()
 				}
 
-				if ($("#MOU_agency").val() == -1) {
+				if ($("#MOU_agency").val() == -1 || $("#MOU_agency").val() == null) {
 
 					isError = true;
 
@@ -595,6 +595,9 @@
 			//alert("qualType");
 			var selectedValue = document.getElementById("MOU_agency").value;
 			//alert("qualType::"+selectedValue);
+		
+			
+			
 			document.getElementById("abc").style.display = (selectedValue == 7) ? "inline" : "none";
 			
 			
@@ -618,13 +621,20 @@
  */		}
 	</script>
 	<script type="text/javascript">
-		function hideText() {
+		function hideText1() {
 			
 			
-			var qualType = document.getElementById("otherCourse").value
+			var qualType = document.getElementById("otherCourse").value;
 			//alert("x " +qualType);
-			document.getElementById("abc").style.display = (qualType.length==0 || qualType=="NA") ? "none" : "inline";
-			document.getElementById("abc").style.display = (qualType == "NA") ? "none" : "";
+			if(qualType == null){
+				$("#abc").hide();
+			///	document.getElementById("abc").style.display="none";
+			}else{
+				$("#abc").show();
+				//document.getElementById("abc").style.display="inline";
+			}
+		//	document.getElementById("abc").style.display = (qualType.length==0 || qualType==null) ? "none" : "inline";
+			//document.getElementById("abc").style.display = (qualType == "NA") ? "none" : "";
 			
 			//document.getElementById("MOU_agency").selectedIndex = (qualType.length==0) ? 0 : '';
 				

@@ -103,6 +103,9 @@ public class YesNoController {
 			model.addObject("yesNoMasterList", yesNoMasterList);
 			model.addObject("sectionList", sectionList);
 			model.addObject("instituteYesNoList", instituteYesNoList);
+			
+			model.addObject("msg", Constants.sucess_msg);
+			model.addObject("msg", Constants.fail_msg);
 
 		} catch (Exception e) {
 
@@ -182,6 +185,8 @@ public class YesNoController {
 				model.addObject("yesNoMasterList", yesNoMasterList);
 				model.addObject("sectionList", sectionList);
 				model.addObject("instituteYesNoList", instituteYesNoList);
+				model.addObject("msg", Constants.sucess_msg);
+				model.addObject("failMsg", Constants.fail_msg);
 			} else {
 				model = new ModelAndView("accessDenied");
 			}
@@ -381,10 +386,10 @@ public class YesNoController {
 			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
 					instituteYesNoList, InstituteYesNo[].class);
 			if(instituteYesNo!=null) {
-				session.setAttribute("successMsg", "New Record Saved Sucessfully");
+				session.setAttribute("msg", Constants.sucess_msg);
 			}
 			else {
-				session.setAttribute("successMsg", "Record Not Saved");
+				session.setAttribute("msg", Constants.fail_msg);
 			}
 			try {
 				selectYestNoLib = Integer.parseInt(request.getParameter("selectYestNoLib"));
@@ -1485,6 +1490,13 @@ public class YesNoController {
 			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
 					instituteYesNoListPage5, InstituteYesNo[].class);
 
+			if(instituteYesNo!=null) {
+				session.setAttribute("successMsg", "New Record Saved Sucessfully");
+			}
+			else {
+				session.setAttribute("successMsg", "Record Not Saved");
+			}
+			
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -1538,6 +1550,8 @@ public class YesNoController {
 			model.addObject("instituteYesNoTab1List", instituteYesNoTab4List);
 			model.addObject("instituteYesNoTab2List", instituteYesNoTab5List);
 			model.addObject("instituteYesNoTab3List", instituteYesNoTab6List);
+			model.addObject("msg", Constants.sucess_msg);
+			model.addObject("failMsg", Constants.fail_msg);
 
 		} catch (Exception e) {
 

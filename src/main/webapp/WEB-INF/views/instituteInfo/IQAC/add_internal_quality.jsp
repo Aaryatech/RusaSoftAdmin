@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()">
+<body class=" " onload="showForm()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -109,18 +109,20 @@
 											<div class="col-sm-6">
 												<select id="qualityInitId" name="qualityInitId" onchange="showForm()"
 													class="form-control" title="Select Quality Initiative">
-													<option value="">Select</option>
 													<c:choose>
 													<c:when test="${editQuality.qualityInitiativeId==0}">
+																																								<option selected disabled value="-1">Select</option>
 														
 														<c:forEach items="${qualInintList}" var="quInit">
 																<option  value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
 													</c:forEach>
 													<option selected value="0">Any other quality based certification</option>
+													
 													</c:when>
 													<c:otherwise>
 													
 													<c:forEach items="${qualInintList}" var="quInit">
+													
 														<c:choose>
 															<c:when
 																test="${quInit.qualityInitiativeId==editQuality.qualityInitiativeId}">
@@ -131,6 +133,8 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
+													<option disabled value="-1">Select</option>
+													
 													<option  value="0">Any other quality based certification</option>
 													
 													</c:otherwise>
@@ -285,7 +289,7 @@
 												var isError = false;
 												var errMsg = "";
 
-												if (!$("#qualityInitId").val()) {
+												if ($("#qualityInitId").val() == null || $("#qualityInitId").val()==-1) {
 													isError = true;
 
 													$("#qualityInitId").addClass(

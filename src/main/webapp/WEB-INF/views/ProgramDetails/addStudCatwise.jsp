@@ -177,17 +177,18 @@
 														<tr>
 															<th width="10%">Sr No</th>
 															<th width="30%">Category</th>
-															<th width="60%" style="text-align: center;" colspan="3">No.
-																of Students</th>
+																
 
 														</tr>
 														<tr>
+														
 															<th width="10%"></th>
 															<th width="30%"></th>
+															<th width="20%">No. of Seats Available</th>
 															<th width="20%">Male</th>
 															<th width="20%">Female</th>
 															<th width="20%">Transgender</th>
-															<th width="20%">No. of Seats Available</th>
+															
 															
 
 
@@ -201,23 +202,25 @@
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${cast.castName}</td>
+																		
+																		<td><input type="number" min="0" max="99999"
+																		onkeyup="seatCount()" class="sit" onblur="validateSeatCnt(${cast.castId})"
+																			id="seats${cast.castId}" name="seats${cast.castId}"
+																			value="0" required></td>
 
 																		<td><input type="number" min="0" max="99999"
-																			onkeyup="calculateSum()" class="txt"
+																			onkeyup="calculateSum()" class="txt" onblur="validateSeatCnt(${cast.castId})"
 																			id="cast_m${cast.castId}" name="cast_m${cast.castId}"
 																			value="0" required></td>
 																		<td><input type="number" min="0" max="99999"
-																			onkeyup="calculateSum()" class="txt"
+																			onkeyup="calculateSum()" class="txt" onblur="validateSeatCnt(${cast.castId})"
 																			id="cast_f${cast.castId}" name="cast_f${cast.castId}"
 																			value="0" required></td>
 																		<td><input type="number" min="0" max="99999"
-																			onkeyup="calculateSum()" class="txt"
+																			onkeyup="calculateSum()" class="txt" onblur="validateSeatCnt(${cast.castId})"
 																			id="cast_t${cast.castId}" name="cast_t${cast.castId}"
 																			value="0" required></td>
-																		<td><input type="number" min="0" max="99999"
-																		onkeyup="seatCount()" class="sit"
-																			id="seats${cast.castId}" name="seats${cast.castId}"
-																			value="0" required></td>
+																		
 																	</tr>
 																</c:forEach>
 															</c:when>
@@ -231,25 +234,20 @@
 
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
-																			id="cast_m${cast.studentCatId}"
+																			id="cast_m${cast.studentCatId}" onblur="validateSeatCnt(${cast.castId})"
 																			name="cast_m${cast.studentCatId}"
 																			value="${cast.maleStudent}" required></td>
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
-																			id="cast_f${cast.studentCatId}"
+																			id="cast_f${cast.studentCatId}" onblur="validateSeatCnt(${cast.castId})"
 																			name="cast_f${cast.studentCatId}"
 																			value="${cast.femaleStudent}" required></td>
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
-																			id="cast_t${cast.studentCatId}"
+																			id="cast_t${cast.studentCatId}" onblur="validateSeatCnt(${cast.castId})"
 																			name="cast_t${cast.studentCatId}"
 																			value="${cast.transStudent}" required></td>
-																		<td><input type="number" min="0" max="99999"
-																			id="seats${cast.studentCatId}"
-																			onkeyup="seatCount()" class="sit"
-																			name="seats${cast.studentCatId}"
-																			value="${cast.seats}" required></td>
-
+																		
 
 																	</tr>
 																</c:forEach>
@@ -317,7 +315,28 @@
 	<!-- END CONTENT -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
+<script>
+function validateSeatCnt(castId){
+	
+	var male = $("#cast_m"+castId).val();
+	var female = $("#cast_f"+castId).val();
+	var tgendr = $("#cast_t"+castId).val();
+	
+	var seat = $("#seats"+castId).val();
+	
+	//alert("seat "+seat);
+	
+	var cal = parseInt(male)+parseInt(female)+parseInt(tgendr);   
+	
+	//alert("values "+cal);
+	
+	if(seat<cal){
+		alert("No. of students enroled cannot be greater than seats available ");
+		document.getElementById("seats"+castId).value=0;
+		
+	}
+}
+</script>
 
 	<script>
 		function validateEmail(email) {
@@ -485,6 +504,7 @@
 		function submit_f(view) {
 
 			document.getElementById("is_view").value = view;//create this 
+			
 		}
 	</script>
 

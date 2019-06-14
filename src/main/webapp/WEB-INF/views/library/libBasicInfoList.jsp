@@ -85,7 +85,7 @@
 													<th>Computer in LAN</th>
 													<!-- <th>Bandwidth for Access E-Resource</th> -->
 													<th>Books Count</th>
-													<th>Volumes Student</th>
+													<th>Volumes Count</th>
 													<th>Action</th>
 												</tr>
 											</thead>

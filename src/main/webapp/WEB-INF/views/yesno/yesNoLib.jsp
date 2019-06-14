@@ -79,7 +79,17 @@ table, th, td {
 							</div>
 
 						</header>
-
+						 <c:if test="${sessionScope.msg!=null}">
+           						 <div class="col-lg-12">
+    						          <div class="alert alert-success alert-dismissible fade in">
+            							    <button type="button" class="close" data-dismiss="alert" style="=display: none;"  aria-label="Close"><span aria-hidden="true">×</span></button>
+             						   <strong>Success : </strong> ${msg}</div>
+        	                     </div> 
+        	                     <%session=request.getSession();
+        	                    
+        	                     session.removeAttribute("msg");
+        	                     %>
+            			</c:if>
 
 						<div class="content-body">
 							<div class="row">

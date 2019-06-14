@@ -766,8 +766,8 @@ public class HomeController {
 			map.add("otp", otp);
 			Instant end = Instant.now();
 			Duration timeElapsed = Duration.between(start, end);
-			System.out.println("Time taken: OTPVerification "+ timeElapsed.toSeconds() +" seconds");
-			if(timeElapsed.toSeconds()<=120) {
+			System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
+			if(timeElapsed.toMinutes()<=2) {
 			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
 			/*
 			 * System.err.println("hashRes Response  " + hashRes.toString());

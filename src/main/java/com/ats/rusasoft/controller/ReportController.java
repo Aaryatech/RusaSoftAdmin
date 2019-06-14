@@ -230,13 +230,13 @@ public class ReportController {
 
 			try {
 				table.setWidthPercentage(100);
-				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
-
+				//table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f });
+				table.setTotalWidth(document.getPageSize().getWidth()-80);
 				Font headFontData = Constants.headFontData;// new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL,
 															// BaseColor.BLACK);
 				Font tableHeaderFont = Constants.tableHeaderFont; // new Font(FontFamily.HELVETICA, 12, Font.BOLD,
 																	// BaseColor.BLACK);
-				tableHeaderFont.setColor(Constants.tableHeaderFontBaseColor);
+				tableHeaderFont.setColor( Constants.tableHeaderFontBaseColor);
 
 				PdfPCell hcell = new PdfPCell();
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);

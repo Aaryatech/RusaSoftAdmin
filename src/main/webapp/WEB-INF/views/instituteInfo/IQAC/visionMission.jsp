@@ -115,13 +115,13 @@
            						 <div class="col-lg-12" id="sucess_msg" style="display: none;">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong>New Saved Added Sucessfully</div>
+             						   <strong>Success : </strong>${msgSucss}</div>
         	                     </div> 
         	                     
         	                     <div class="col-lg-12" id="fail_msg" style="display: none;">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> Record Not Saved</div>
+             						   <strong>Fail : </strong>${msgFail}</div>
         	                     </div> 
         	                   
         	                   
@@ -598,12 +598,14 @@
 					document.getElementById("instMissionId").value=0; 
 					 document.getElementById("inst_mission_text").value="";
 					 
+					 if(data!=null){
+						 $("#sucess_msg").show();
+					 }else{
+						 $("#fail_msg").show();
+					 }
+					 
 				});
-				 if(data!=null){
-					 $("#sucess_msg").show();
-				 }else{
-					 $("#fail_msg").show();
-				 }
+				 
 
 			} else {
 				alert("Enter Institute Mission ");

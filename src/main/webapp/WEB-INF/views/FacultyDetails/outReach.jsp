@@ -135,7 +135,7 @@
 													<select id="activity_type" name="activity_type"
 														class="form-control">
 
-														<option value="-1">Select</option>
+														<option disabled  value="-1">Select</option>
 														<c:forEach items="${facultyOutreachTypeList}"
 															var="outtype">
 															<c:choose>
@@ -189,11 +189,8 @@
 											<div class="col-sm-6">
 												<select id="act_level" name="act_level" class="form-control"
 													required>
-													<!-- <option value="International">International</option>
-																<option value="National">National</option>
-																<option value="State">State</option>
-																<option value="Regional">Regional</option> -->
-													<option value="-1">Select</option>
+													
+													<option disabled value="-1">Select</option>
 													<c:choose>
 														<c:when test="${'International'==editInst.outreachLevel}">
 

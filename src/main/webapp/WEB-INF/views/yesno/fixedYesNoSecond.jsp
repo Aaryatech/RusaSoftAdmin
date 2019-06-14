@@ -105,6 +105,27 @@
 
 							</div>
  --%>
+ 
+ 						<div class="col-lg-12" id="sucess_msg" style="display: none;">
+								<!-- onclick="location.reload();" -->
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" onclick="hideAlert()">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>${msg}</div>
+							</div>
+							
+							<div class="col-lg-12" id="fail_msg" style="display: none;">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>${failMsg}</div>
+
+
+							</div>
+							
 						</header>
 
 						<div class="content-body">
@@ -910,6 +931,13 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
+					
+					 if(data!=null){
+						  $("#sucess_msg").show();
+						 						
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -1029,6 +1057,13 @@
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table2 tbody').append(tr); 
 					}
+					
+					 if(data!=null){
+						  $("#sucess_msg").show();
+						 						
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -1152,6 +1187,13 @@
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table3 tbody').append(tr); 
 					}
+					
+					 if(data!=null){
+						  $("#sucess_msg").show();
+						 						
+					 } else{
+						 $("#fail_msg").show();
+					 }
 					 
 				});
 
@@ -1262,6 +1304,11 @@
 	}
 	</script>
 	<script type="text/javascript"> 
+
+	function hideAlert(){
+		$("#sucess_msg").hide();
+		$("#fail_msg").hide();
+	}
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

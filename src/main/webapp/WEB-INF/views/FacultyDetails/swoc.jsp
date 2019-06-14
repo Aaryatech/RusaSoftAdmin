@@ -88,6 +88,27 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right"></div>
+							
+						<div class="col-lg-12" id="sucess_msg" style="display: none;">
+								<!-- onclick="location.reload();" -->
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" onclick="hideAlert()">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>${msg}</div>
+							</div>
+									
+									
+									<div class="col-lg-12" id="fail_msg" style="display: none;">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Fail : </strong>${failMsg}</div>
+
+
+							</div>
 
 						</header>
 
@@ -124,8 +145,6 @@
 											<div class="tab-pane fade in active " id="strength">
 
 												<div class="row">
-
-
 
 													<label class="col-sm-2 text-left" for="hh">
 														Strength <span class="text-danger">*</span>
@@ -225,7 +244,7 @@
 														</button>
 													</div>
 												</div>
-												<div align="center" id="loader1" style="display: none;">
+											<div align="center" id="loader1" style="display: none;">
 													<img
 														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
 														style="width: 50px; height: 50px;">
@@ -550,6 +569,13 @@
 										tr.append($('<td  ></td>').html(
 												acButton));
 										$('#table1 tbody').append(tr);
+										
+										if(data!=null){
+											 $("#sucess_msg").show();
+										 } else{
+											 $("#fail_msg").show();
+										 }
+										
 													}else if(data[i].swocType==2){
 
 														var tr = $('<tr></tr>');
@@ -561,6 +587,13 @@
 														tr.append($('<td  ></td>').html(
 																acButton));
 														$('#table2 tbody').append(tr);
+														
+														if(data!=null){
+															 $("#sucess_msg").show();
+														 } else{
+															 $("#fail_msg").show();
+														 }
+														
 																	}
 													else if(data[i].swocType==3){
 
@@ -573,7 +606,14 @@
 														tr.append($('<td  ></td>').html(
 																acButton));
 														$('#table3 tbody').append(tr);
-																	}
+													
+														if(data!=null){
+															 $("#sucess_msg").show();
+														 } else{
+															 $("#fail_msg").show();
+														 }
+													
+													}
 													else if(data[i].swocType==4){
 
 											var tr = $('<tr></tr>');
@@ -585,7 +625,14 @@
 											tr.append($('<td  ></td>').html(
 													acButton));
 											$('#table4 tbody').append(tr);
-														}
+														
+											if(data!=null){
+												 $("#sucess_msg").show();
+											 } else{
+												 $("#fail_msg").show();
+											 }
+													
+													}
 									}
 									document.getElementById("swocId").value = 0;
 									document.getElementById("swocText").value = "";
@@ -665,6 +712,8 @@
 								tr.append($('<td  ></td>').html(
 										acButton));
 								$('#table1 tbody').append(tr);
+								
+								
 											}else if(data[i].swocType==2){
 
 												var tr = $('<tr></tr>');
@@ -749,6 +798,11 @@
 
 			});
 
+		}
+		
+		function hideAlert(){
+			$("#sucess_msg").hide();
+			$("#fail_msg").hide();
 		}
 	</script>
 

@@ -108,15 +108,15 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">Name of Value Added 
-														Courses(More than 30 hrs)<span class="text-danger">*</span>
+														Courses (More than 30 hrs)<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Name of Value Added Courses(More than 30 hrs)" 
+															placeholder="Name of Value Added Courses (More than 30 hrs)" 
 															id="course_name" autocomplete="off"
 															value="${value.valueAddedCourseName}" name="course_name">
 															<span class="error_form text-danger" id="course_name_field"
-															style="display: none;">Please enter name of value added courses(More than 30 hrs)</span>
+															style="display: none;">Please enter name of value added courses (More than 30 hrs)</span>
 													</div>
 												</div>
 												
@@ -152,14 +152,14 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">No. of Times 
-														 Offer(In Same Year) <span class="text-danger">*</span>
+														 Offer (In Same Year) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="number" class="form-control" onchange="trim(this)" onFocus="clearDefault(this)"
-															placeholder="No.of Times Offer(In Same Year)" id="no_times_offer"
+															placeholder="No.of Times Offer (In Same Year)" id="no_times_offer"
 															value="${value.noOfTimesOffer}" name="no_times_offer" autocomplete="off">
 															<span class="error_form text-danger" id="time_offer_field"
-															style="display: none;">Please enter No. of times offer(In Same Year)</span>
+															style="display: none;">Please enter No. of times offer (In Same Year)</span>
 													</div>
 												</div>
 												

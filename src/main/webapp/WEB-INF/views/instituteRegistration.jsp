@@ -1094,6 +1094,7 @@ $('#aishe_code').on('input', function() {
 									}
 								});
 		}
+			
 	</script>
 
 	<script type="text/javascript">

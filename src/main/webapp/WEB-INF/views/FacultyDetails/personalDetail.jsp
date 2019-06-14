@@ -92,7 +92,7 @@
 						 <c:if test="${sessionScope.successMsg!=null}">
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" onclick="removSess()" aria-label="Close"><span aria-hidden="true">×</span></button>
+            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
              						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
         	                     </div> 
         	                     <%session=request.getSession();
@@ -122,12 +122,12 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_name">
-												Name(Full)<span class="text-danger">*</span>
+												Name (Full)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" readonly class="form-control"
 													id="fac_name" name="fac_name"
-													placeholder="Last Name Middle First Name"
+													placeholder="Last Name    Middle Name    First Name"
 													value="${staff.facultyFirstName}" required>
 											</div>
 										</div>
@@ -823,12 +823,6 @@
 		return;
 	}
     
-</script>
-
-<script type="text/javascript">
-function removSess(){
-	localStorage.clear();
-}
 </script>
 
 </body>

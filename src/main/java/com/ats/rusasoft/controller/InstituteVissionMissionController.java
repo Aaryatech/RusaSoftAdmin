@@ -50,6 +50,8 @@ public class InstituteVissionMissionController {
 			
 			InstitueMission[] institueMission = rest.postForObject(Constants.url + "/getInsituteMissionList", map, InstitueMission[].class);
 			model.addObject("institueMissionList", institueMission);
+			model.addObject("msgSucss", Constants.sucess_msg);
+			model.addObject("msgFail", Constants.fail_msg);
 
 		} catch (Exception e) {
 

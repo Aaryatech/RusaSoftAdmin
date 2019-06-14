@@ -127,10 +127,9 @@
 										aria-label="Close">
 										<span aria-hidden="true">×</span>
 									</button>
-									<strong>Success : </strong>${msg}</div>
-
-
+									<strong>Fail : </strong>${msg}</div>
 							</div>
+							
 						</header>
 
 						<div class="content-body">
@@ -1313,8 +1312,10 @@ function editEfficient(instYesnoId){
 	
 	function hideAlert(){
 		$("#sucess_msg").hide();
-				
-			}
+		$("#fail_msg").hide();
+	}
+	
+	
 	</script>
 
 

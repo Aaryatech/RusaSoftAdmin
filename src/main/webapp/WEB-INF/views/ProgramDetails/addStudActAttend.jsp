@@ -338,7 +338,7 @@
 													<div class="col-sm-10">
 														<input type="text" maxlength="30" class="form-control"
 															id="branch" value="${editProgramActivity.branch}"
-															name="branch" placeholder="Branch(Discipline)"
+															name="branch" placeholder="Branch (Discipline)"
 															onchange="return trim(this)" autocomplete="off">
 															<span
 														class="error_form text-danger" id="error_formfield3"

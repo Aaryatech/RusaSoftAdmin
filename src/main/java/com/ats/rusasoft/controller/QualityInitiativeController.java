@@ -160,10 +160,10 @@ public class QualityInitiativeController {
 						QualityInitiative.class);
 
 				if(qualInRes!=null) {
-					session.setAttribute("successMsg", "New Record Saved Sucessfully");
+					session.setAttribute("msg", Constants.sucess_msg);
 				}
 				else {
-					session.setAttribute("successMsg", "Record Not Saved");
+					session.setAttribute("msg", Constants.fail_msg);
 				}
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)

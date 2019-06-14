@@ -142,8 +142,7 @@
 										</div>
 										
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="year"
-												style="text-align: left;">Establishment Year<span
+											<label class="control-label col-sm-2" for="year">Establishment Year<span
 												class="text-danger">*</span>
 											</label>
 											
