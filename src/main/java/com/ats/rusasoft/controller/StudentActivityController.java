@@ -173,8 +173,10 @@ public class StudentActivityController {
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				int activityId = Integer.parseInt(request.getParameter("activityId"));
-
+				
+			
 				ProgramActivity programActivity = new ProgramActivity();
+				
 				if (activityName.equals("7")) {
 					String otherActivityName = request.getParameter("otherActivityName");
 					programActivity.setActivityName(otherActivityName);
@@ -199,7 +201,10 @@ public class StudentActivityController {
 				programActivity.setYearId(acYearId);
 				programActivity.setIsActive(1);
 				programActivity.setType(0);
+				programActivity.setRawActivityName(request.getParameter("actvtName"));
+				
 				System.out.println(programActivity);
+				
 				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
 						programActivity, ProgramActivity.class);
 				if (is_view == 1) {
@@ -427,7 +432,7 @@ public class StudentActivityController {
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				int activityId = Integer.parseInt(request.getParameter("activityId"));
-
+				String actName = request.getParameter("activity_name");
 				ProgramActivity programActivity = new ProgramActivity();
 				if (activityName.equals("7")) {
 					String otherActivityName = request.getParameter("otherActivityName");
@@ -454,7 +459,7 @@ public class StudentActivityController {
 				programActivity.setType(1);
 				programActivity.setIsActive(1);
 				programActivity.setVenue(venue);
-				
+				programActivity.setRawActivityName(actName);
 				 stud = request.getParameter("stud_name");
 				if(stud!=null) {
 					programActivity.setExVar1(stud);

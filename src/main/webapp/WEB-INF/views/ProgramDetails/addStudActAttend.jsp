@@ -275,7 +275,19 @@
 													</c:otherwise>
 												</c:choose>
 
-
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="branch">Name
+														of Activity<span class="text-danger"></span>
+													</label>
+													<div class="col-sm-10">
+														<input type="text" maxlength="200" class="form-control"
+															id="activity_name" value="${editProgramActivity.rawActivityName}"
+															name="activity_name" placeholder="Name of Activity" 
+															onchange="return trim(this)" autocomplete="off">
+															
+													
+													</div>
+												</div>
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="date">Date

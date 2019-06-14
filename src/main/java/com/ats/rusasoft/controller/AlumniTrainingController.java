@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.Names;
 import com.ats.rusasoft.master.model.NewCourseInfo;
 import com.ats.rusasoft.master.model.NewCourseInfoList;
 import com.ats.rusasoft.master.model.prodetail.AlumniAssocAct;
@@ -559,6 +560,8 @@ public class AlumniTrainingController {
 				model = new ModelAndView("ProgramDetails/addStudTraining");
 
 				model.addObject("title", "Add Student Placement Details");
+				model.addObject("figure", Names.Rupees);
+				
 
 				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 						ProgramType[].class);
@@ -2274,7 +2277,7 @@ public class AlumniTrainingController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				model.addObject("title", "Differently Abled Students(Divyangjan)");
+				model.addObject("title", "Differently Abled Students (Divyangjan)");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				RestTemplate restTemplate = new RestTemplate();
@@ -2331,7 +2334,7 @@ public class AlumniTrainingController {
 
 				model = new ModelAndView("ProgramDetails/addDifAbldStud");
 
-				model.addObject("title", "Add Differently Abled Students(Divyangjan)");
+				model.addObject("title", "Add Differently Abled Students (Divyangjan)");
 
 				DifrentlyAbledStud difDisStud = new DifrentlyAbledStud();
 				model.addObject("difDisStud", difDisStud);
@@ -2436,7 +2439,7 @@ public class AlumniTrainingController {
 
 				model.addObject("progTypeList", progTypeList);
 				
-				model.addObject("title", "Edit Differently Abled Students(Divyangjan)");
+				model.addObject("title", "Edit Differently Abled Students (Divyangjan)");
 			}
 		} catch (Exception e) {
 

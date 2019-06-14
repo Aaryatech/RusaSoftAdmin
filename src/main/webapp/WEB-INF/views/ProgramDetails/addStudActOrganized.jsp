@@ -278,8 +278,8 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" maxlength="200" class="form-control"
-															id="activity_name" value="${editProgramActivity.rawActivityName}"
-															name="activity_name" placeholder="Name of Activity" 
+															id="actvtName" value="${editProgramActivity.rawActivityName}"
+															name="actvtName" placeholder="Name of Activity" 
 															onchange="return trim(this)" autocomplete="off">
 															
 													

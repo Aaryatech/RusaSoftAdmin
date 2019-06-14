@@ -271,7 +271,7 @@ function clearDefault(a){
             			var isError=false;
             			 var errMsg="";
             			 
-            				if($("#stud_appeared").val() < $("#stud_passed").val()){
+            				if($("#stud_appeared").val() >= $("#stud_passed").val()){
            					 
                 				isError=true;
                 				

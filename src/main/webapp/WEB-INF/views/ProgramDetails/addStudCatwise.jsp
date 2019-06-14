@@ -282,18 +282,25 @@
 													<a href="${pageContext.request.contextPath}/showStudAddmit"><button
 															type="button" id="sub2" class="btn btn-primary">
 															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
-														</button></a> <label class="control-label" for="fPassingYear"><b>Total
-															Students</b><span class="text-danger"></span> </label> <input
-														type="text"
-														style="color: black; border-radius: 15px; align-items: center;"
-														readonly placeholder="Total Student" id="total_stud">
-
+														</button></a> 
+														
+													
 
 													<label class="control-label" for="fPassingYear"><b>Total
 															Seats</b><span class="text-danger"></span> </label> <input
 														type="text"
 														style="color: black; border-radius: 15px; align-items: center;"
 														readonly placeholder="Total Seats" id="total_seat">
+														
+														
+													<label class="control-label" for="fPassingYear"><b>Total
+															Students</b><span class="text-danger"></span> </label> <input
+														type="text"
+														style="color: black; border-radius: 15px; align-items: center;"
+														readonly placeholder="Total Student" id="total_stud">
+														
+														
+														
 													<span class="error_form text-danger"
 														id="total_seat_count_field" style="display: none;">All
 														fields can not be 0</span>
@@ -349,7 +356,9 @@ function validateSeatCnt(castId){
 		document.getElementById("cast_f"+castId).value=0;
 		document.getElementById("cast_t"+castId).value=0;
 		
+		
 	}
+	calculateSum();
 }
 </script>
 

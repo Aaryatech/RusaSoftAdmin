@@ -24,7 +24,14 @@ public class ProgramActivity {
 	private int type;
 	private String yearName;
 	private String aadharNo;
+	private String rawActivityName;	
 		
+	public String getRawActivityName() {
+		return rawActivityName;
+	}
+	public void setRawActivityName(String rawActivityName) {
+		this.rawActivityName = rawActivityName;
+	}
 	public String getVenue() {
 		return venue;
 	}
@@ -165,7 +172,7 @@ public class ProgramActivity {
 				+ ", participatedStudent=" + participatedStudent + ", level=" + level + ", isActive=" + isActive
 				+ ", delStatus=" + delStatus + ", addDate=" + addDate + ", makerUserId=" + makerUserId + ", exInt1="
 				+ exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", type=" + type
-				+ ", yearName=" + yearName + ", aadharNo=" + aadharNo + "]";
+				+ ", yearName=" + yearName + ", aadharNo=" + aadharNo + ", rawActivityName=" + rawActivityName + "]";
 	}
-	
+		
 }
