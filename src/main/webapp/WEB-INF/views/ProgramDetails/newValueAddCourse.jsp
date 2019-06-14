@@ -205,6 +205,9 @@
 															value="${value.noOfStudentsCompletedCourse}" name="no_student_completed_course" autocomplete="off">
 															<span class="error_form text-danger" id="student_course_completed_field"
 															style="display: none;">Please enter No. of students completed course</span>
+															
+															<span class="error_form text-danger" id="batch"
+															style="display: none;">No. of students completed course can not be greater than no of appeared students</span>
 													</div>
 												</div>
 
@@ -345,6 +348,20 @@
 												} else {
 													$("#student_course_completed_field").hide()
 												}
+
+												//new 
+												var x=$("#no_student_completed_course").val();
+												var y=$("#no_student_enrolled").val();
+												if (parseInt(x)>parseInt(y)) {	
+													isError = true;
+
+													$("#no_student_completed_course").addClass(
+															"has-error")
+													$("#batch").show()
+												} else {
+													$("#batch").hide()
+												}
+
 
 
 												
