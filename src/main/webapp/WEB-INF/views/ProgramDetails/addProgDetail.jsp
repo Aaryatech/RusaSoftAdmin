@@ -184,7 +184,7 @@
 												of Introduction <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker" id="date"
+												<input type="text" class="form-control datepicker"  data-end-date="0d" data-format="dd-mm-yyyy" id="date"
 													value="${editProgram.dateOfIntroduction}" name="date"
 													placeholder="Date of Introduction">
 											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter date of introduction.</span>
@@ -489,7 +489,7 @@
 	</script>
 
 <script type="text/javascript">
-$(function () {
+/* $(function () {
 	 
     $('.datepicker').datepicker({
 		autoclose: true,
@@ -498,7 +498,7 @@ $(function () {
         changeMonth:true
 
 	});
-});
+}); */
 </script>
 
 
