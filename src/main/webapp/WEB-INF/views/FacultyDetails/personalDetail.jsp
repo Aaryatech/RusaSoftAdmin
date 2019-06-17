@@ -560,24 +560,7 @@
 			}
 			return true;
 		}
-		function validatePan(pan) {
-			if (Obj == null) Obj = window.event.srcElement;
-	        if (Obj.value != "") {
-	            ObjVal = Obj.value;
-	            var panPat = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-	            var code = /([C,P,H,F,A,T,B,L,J,G])/;
-	            var code_chk = ObjVal.substring(3,4);
-	            if (ObjVal.search(panPat) == -1) {
-	                alert("Invalid Pan No");
-	                Obj.focus();
-	                return false;
-	            }
-	            if (code.test(code_chk) == false) {
-	                alert("Invaild PAN Card No.");
-	                return false;
-	            }
-	        }
-		}
+		
 		$(document)
 				.ready(
 						function($) {
