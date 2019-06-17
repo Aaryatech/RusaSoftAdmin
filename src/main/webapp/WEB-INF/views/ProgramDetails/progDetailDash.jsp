@@ -188,9 +188,9 @@
 														Vision<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
+														<textarea  class="form-control"  maxlength="500"
 															id="programVission" name="programVission"
-															placeholder="Program Vision" required>
+															placeholder="Program Vision" required></textarea>
 													</div>
 												</div>
 
@@ -246,7 +246,7 @@
 																	<tr>
 
 																		<td>${count.index+1}</td>
-																		<td>${list.visionText}</td>
+																		<td style="word-wrap:break-word; max-width: 200;">${list.visionText}</td>
 																		<td>${list.visionRemark}</td>
 																		<td><a href="#"
 																			onclick="editProgramVission(${list.visionId})"><span
@@ -291,9 +291,9 @@
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
+														<textarea class="form-control" maxlength="500"
 															id="programMission" name="programMission"
-															placeholder="Program Mission " required>
+															placeholder="Program Mission " required></textarea>
 													</div>
 												</div>
 
@@ -432,9 +432,9 @@
 														for="peoText"> PEO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="peoText"
+														<textarea class="form-control" id="peoText" maxlength="500"
 															name="peoText" placeholder="Program Education Objective"
-															required>
+															required></textarea>
 													</div>
 												</div>
 
@@ -570,8 +570,8 @@
 														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="poText"
-															name="poText" placeholder="Program Outcome Text" required>
+														<textarea class="form-control" id="poText" maxlength="500"
+															name="poText" placeholder="Program Outcome Text" required></textarea>
 													</div>
 												</div>
 
@@ -706,9 +706,9 @@
 														PSO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" maxlength="200" class="form-control" id="psoText"
+														<textarea maxlength="500" class="form-control" id="psoText"
 															name="psoText" placeholder="Program Specific Outcome"
-															required>
+															required></textarea>
 													</div>
 												</div>
 
@@ -1479,7 +1479,7 @@
 				});
 
 			} else {
-				alert("Enter Specefic Program Outcome ");
+				alert("Enter Specific Program Outcome ");
 			}
 
 		}

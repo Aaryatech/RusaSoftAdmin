@@ -247,21 +247,27 @@ function clearDefault(a){
 	}
 	
 	var passPer = 0;
+	var appear = 0;
+	var passed = 0.0;
 	function getPercent(){
+	//	alert("Hello");
+		appear = $("#stud_appeared").val();
+		passed = $("#stud_passed").val();
 		
-		var appear = parseFloat($("#stud_appeared").val());
-		var passed = parseFloat($("#stud_passed").val());
 		
-		
-		if(appear >= passed){
-		 passPer = (passed*100)/appear;
+		if(parseInt(appear) >= parseInt(passed)){
+			//alert("In If");
+			passPer = (parseFloat(passed)*100)/parseFloat(appear);
 		}
 		else{
+			//alert("In else");
 			passPer = 0;
 		}
 		
-		document.getElementById("stud_pass_per").value=passPer;
+		document.getElementById("stud_pass_per").value=passPer.toFixed(2);
+
 	}
+		
 	
                
             	$(document).ready(function($){  						  
@@ -271,7 +277,7 @@ function clearDefault(a){
             			var isError=false;
             			 var errMsg="";
             			 
-            				if($("#stud_appeared").val() >= $("#stud_passed").val()){
+            				if(parseInt(passed) > parseInt(appear)){
            					 
                 				isError=true;
                 				
