@@ -370,9 +370,9 @@
 												No<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="10" class="form-control"
-													id="f_pan" name="f_pan"  style="text-transform: uppercase;"
-													placeholder="Consecutive 10 digit PAN No"
+												<input type="text" maxlength="12" class="form-control"
+													id="f_pan" name="f_pan" 
+													placeholder="Consecutive 12 digit PAN No"
 													value="${facPerDetail.fPan}"> <span
 													class="error_form text-danger" id="f_pan_field"
 													style="display: none;">Please enter PAN No.</span>
@@ -560,16 +560,24 @@
 			}
 			return true;
 		}
-		
 		function validatePan(pan) {
-			alert("HI");
-			var pnReg = [A-Za-z]{5}\d{4}[A-Za-z]{1};
-			if (pnReg.test($.trim(pan)) == false) {
-				return false;
-			}
-			return true;
+			if (Obj == null) Obj = window.event.srcElement;
+	        if (Obj.value != "") {
+	            ObjVal = Obj.value;
+	            var panPat = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+	            var code = /([C,P,H,F,A,T,B,L,J,G])/;
+	            var code_chk = ObjVal.substring(3,4);
+	            if (ObjVal.search(panPat) == -1) {
+	                alert("Invalid Pan No");
+	                Obj.focus();
+	                return false;
+	            }
+	            if (code.test(code_chk) == false) {
+	                alert("Invaild PAN Card No.");
+	                return false;
+	            }
+	        }
 		}
-		
 		$(document)
 				.ready(
 						function($) {
@@ -685,9 +693,8 @@
 															.hide()
 												}
 													
-													
-													if (!$("#f_pan").val() || !validatePan($("#f_pan").val())) {
-													isError = true;
+													if (!$("#f_pan").val()) {
+														isError = true;
 
 														$("#f_pan").addClass(
 																"has-error")
