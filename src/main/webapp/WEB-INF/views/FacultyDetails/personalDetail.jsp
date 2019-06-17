@@ -370,9 +370,9 @@
 												No<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="12" class="form-control"
-													id="f_pan" name="f_pan" 
-													placeholder="Consecutive 12 digit PAN No"
+												<input type="text" maxlength="10" class="form-control"
+													id="f_pan" name="f_pan"
+													placeholder="Consecutive 10 characters PAN No (In UPPER CASE)"
 													value="${facPerDetail.fPan}"> <span
 													class="error_form text-danger" id="f_pan_field"
 													style="display: none;">Please enter PAN No.</span>
@@ -561,6 +561,15 @@
 			return true;
 		}
 		
+		function validatePAN(pan) {
+			 var regex1=/^[A-Z]{5}\d{4}[A-Z]{1}$/;
+			if (regex1.test($.trim(pan)) == false) {
+				return false;
+			}
+			return true;
+		}
+		
+		
 		$(document)
 				.ready(
 						function($) {
@@ -675,8 +684,10 @@
 													$("#f_aadhar_field")
 															.hide()
 												}
-													
-													if (!$("#f_pan").val()) {
+													  
+													if (!$("#f_pan").val()	|| !validatePAN($(
+													"#f_pan")
+													.val())) {
 														isError = true;
 
 														$("#f_pan").addClass(
