@@ -206,7 +206,7 @@
 													</div>
 
 													<div class="col-sm-4">
-		<button type="submit" id="sub_button" class="btn btn-primary"
+		<button type="button" id="sub_button" class="btn btn-primary"
 													onclick="saveProgramVission()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
@@ -311,7 +311,7 @@
 													<div class="col-sm-4">
 
 														
-				<button type="submit" id="sub_button" class="btn btn-primary"
+				<button type="button" id="sub_button" class="btn btn-primary"
 													onclick="saveProgramMission()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
@@ -453,7 +453,7 @@
 
 													
 															
-															<button type="submit" id="sub_button" class="btn btn-primary"
+															<button type="button" id="sub_button" class="btn btn-primary"
 													 onclick="saveProgramPeo()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
@@ -588,7 +588,7 @@
 													<div class="col-sm-4">
 
 														
-																<button type="submit" id="sub_button" class="btn btn-primary"
+																<button type="button" id="sub_button" class="btn btn-primary"
 													onclick="saveProgramPo()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												</div>
@@ -727,7 +727,7 @@
 
 														
 															
-																<button type="submit" id="sub_button" class="btn btn-primary"
+																<button type="button" id="sub_button" class="btn btn-primary"
 													onclick="saveProgramPso()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 													</div>
 												
