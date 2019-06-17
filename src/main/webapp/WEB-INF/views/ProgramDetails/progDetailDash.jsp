@@ -705,8 +705,8 @@
 													<label class="col-sm-2 text-left" for="psoText">
 														PSO<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-6">
-														<input type="text" class="form-control" id="psoText"
+													<div class="col-sm-10">
+														<input type="text" maxlength="200" class="form-control" id="psoText"
 															name="psoText" placeholder="Program Specific Outcome"
 															required>
 													</div>
