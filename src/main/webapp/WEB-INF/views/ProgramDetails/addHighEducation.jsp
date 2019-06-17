@@ -192,7 +192,7 @@
 			return true;
 		}
 		function validateNo(mobile) {
-	        var mob = /^[1-9]+$/;
+	        var mob = /^[0-9]+$/;
 			if (mob.test($.trim(mobile)) == false) {
 				return false;
 			}
@@ -235,7 +235,7 @@
 												if (!$("#no_of_student").val()
 														|| !validateNo($(
 																"#no_of_student")
-																.val())) {
+																.val())|| $("#no_of_student").val()<1) {
 													isError = true;
 													$("#no_of_student")
 															.addClass(
