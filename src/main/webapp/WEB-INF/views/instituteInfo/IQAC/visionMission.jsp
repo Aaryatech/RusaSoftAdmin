@@ -320,7 +320,7 @@
 														<table class="table table-bordered" id="table2">
 														<thead>
 																<tr>
-																	<!-- <th width="10%">Sr No</th> -->
+																	<th width="10%">Sr No</th>
 																	<th>Mission</th>
 
 																	<th width="10%">Action</th>
@@ -333,7 +333,7 @@
 																	varStatus="count">
 																	<tr>
 
-																		<%-- <td style="text-align: center; ">${count.index+1}</td> --%>
+																		<td style="text-align: center; ">${count.index+1}</td>
 																		<td style="word-wrap:break-word; max-width: 200">${list.instMissionText}</td>
 																		<td style="text-align: center; "><a href="#"
 																			onclick="editInstituteMission(${list.instMissionId})"><span
@@ -440,7 +440,7 @@
 						
 						var tr = $('<tr></tr>');
 						/* tr.append($('<td ></td>').html(i + 1)); */
-					  	tr.append($('<td ></td>').html(data.institueVisionList[i].instVisionText)); 
+					  	tr.append($('<td style="word-wrap:break-word; max-width: 200" ></td>').html(data.institueVisionList[i].instVisionText)); 
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
@@ -518,7 +518,7 @@
 								.draw(); */  
 						var tr = $('<tr></tr>');
 						/* tr.append($('<td ></td>').html(i + 1)); */
-					  	tr.append($('<td ></td>').html(data.institueVisionList[i].instVisionText)); 
+					  	tr.append($('<td style="word-wrap:break-word; max-width: 200" ></td>').html(data.institueVisionList[i].instVisionText)); 
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
@@ -589,8 +589,8 @@
 								.draw(); */  
 						
 						var tr = $('<tr></tr>');
-						/* tr.append($('<td ></td>').html(i + 1)); */
-					  	tr.append($('<td ></td>').html(data.institueMissionList[i].instMissionText)); 
+						tr.append($('<td ></td>').html(i + 1));
+					  	tr.append($('<td style="word-wrap:break-word; max-width: 200" ></td>').html(data.institueMissionList[i].instMissionText)); 
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table2 tbody').append(tr); 
 					}
@@ -645,8 +645,8 @@
 							.draw(); */  
 					
 					var tr = $('<tr></tr>');
-					/* tr.append($('<td ></td>').html(i + 1)); */
-				  	tr.append($('<td ></td>').html(data.institueMissionList[i].instMissionText)); 
+					 tr.append($('<td ></td>').html(i + 1)); 
+				  	tr.append($('<td style="word-wrap:break-word; max-width: 200" ></td>').html(data.institueMissionList[i].instMissionText)); 
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table2 tbody').append(tr); 
 				}
