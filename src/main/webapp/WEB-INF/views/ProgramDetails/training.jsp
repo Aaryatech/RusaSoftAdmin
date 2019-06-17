@@ -75,7 +75,7 @@
 													<th rowspan="2">Students Placed</th>
 													<th rowspan="2">Employer Address</th>
 													<th rowspan="2">Contact Details</th>
-													<th style="text-align: center;" colspan="2">Package Offered</th>
+													<th style="text-align: center;" colspan="2">Package Offered in ${figure}</th>
 													<th rowspan="2">Action</th>
 												</tr>
 												<tr>

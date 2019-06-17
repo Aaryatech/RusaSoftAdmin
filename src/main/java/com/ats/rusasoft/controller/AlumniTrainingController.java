@@ -521,6 +521,7 @@ public class AlumniTrainingController {
 				System.err.println("trainPlaceList " + trainPlaceList.toString());
 
 				model.addObject("trainPlaceList", trainPlaceList);
+				model.addObject("figure", Names.Rupees);
 			} else {
 
 				model = new ModelAndView("accessDenied");

@@ -257,8 +257,8 @@
 										
 
 										<div class="form-group">
-											<div class="col-sm-1"></div>
-											<label class="control-label col-sm-6" for="is_add_same">Is
+											
+											<label class="control-label col-sm-3" for="is_add_same">Is
 												Permanent and Correspondence Address Same <span
 												class="text-danger">*</span>
 											</label>
@@ -293,7 +293,7 @@
 											<label class="control-label col-sm-3" for="fac_address2">Correspondence
 												Address <span class="text-danger">*</span>
 											</label>
-											<div class="col-sm-9">
+											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
 													class="form-control" id="fac_address2"
 													value="${facPerDetail.fAddress2}" name="fac_address2"
@@ -370,11 +370,11 @@
 												No<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="12" class="form-control"
-													id="f_pan" name="f_pan"
-													placeholder="Consecutive 12 digit PAN No"
+												<input type="text" maxlength="10" class="form-control"
+													id="f_pan" name="f_pan"  style="text-transform: uppercase;"
+													placeholder="Consecutive 10 digit PAN No"
 													value="${facPerDetail.fPan}"> <span
-													class="error_form text-danger" id="f_aadhar_field"
+													class="error_form text-danger" id="f_pan_field"
 													style="display: none;">Please enter PAN No.</span>
 											</div>
 										</div>
@@ -560,6 +560,16 @@
 			}
 			return true;
 		}
+		
+		function validatePan(pan) {
+			alert("HI");
+			var pnReg = [A-Za-z]{5}\d{4}[A-Za-z]{1};
+			if (pnReg.test($.trim(pan)) == false) {
+				return false;
+			}
+			return true;
+		}
+		
 		$(document)
 				.ready(
 						function($) {
@@ -630,15 +640,15 @@
 													$("#fac_taluka_field").hide()
 												}
 												
-												/* if (!$("#city").val()) {
+												 /* if (!$("#city").val()) {
 													isError = true;
 
 													$("#city").addClass(
 															"has-error")
-													$("#fac_city_field").show()
+													$("#fac_pincodc_field").show()
 												} else {
-													$("#fac_city_field").hide()
-												} */
+													$("#fac_pincodc_field").hide()
+												}  */
 												
 												if (!$("#state").val()) {
 													isError = true;
@@ -655,9 +665,9 @@
 
 													$("#pincode").addClass(
 															"has-error")
-													$("#fac_pincode_field").show()
+													$("#fac_pincodc_field").show()
 												} else {
-													$("#fac_pincode_field").hide()
+													$("#fac_pincodc_field").hide()
 												}
 																									
 													if (!$("#f_aadhar").val()
@@ -674,6 +684,17 @@
 													$("#f_aadhar_field")
 															.hide()
 												}
+													
+													
+													if (!$("#f_pan").val() || !validatePan($("#f_pan").val())) {
+													isError = true;
+
+														$("#f_pan").addClass(
+																"has-error")
+														$("#f_pan_field").show()
+													} else {
+														$("#f_pan_field").hide()
+													}
 
 												if (!$("#f_dob").val()) {
 													isError = true;
