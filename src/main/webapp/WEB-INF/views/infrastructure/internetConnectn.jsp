@@ -161,7 +161,7 @@
 											</label>
 
 											<div class="col-sm-6">
-												<input type="text" class="form-control"  id="isp_name"
+												<input type="text" class="form-control"  id="isp_name" maxlength="150"
 													 autocomplete="off"	onchange="trim(this)" name="isp_name"
 													placeholder="ISP (Internet Service Provider) Name" 
 													value="${interConnec.ispName}"> <span
@@ -177,7 +177,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" id="purchase_date"
-													name="purchase_date" placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
+													name="purchase_date" placeholder="dd-mm-yyyy" data-format="dd-mm-yyyy"
+													data-end-date="0d" onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" autocomplete="off"
 													value="${interConnec.purchaseDate}"> <span
 													class="error_form text-danger" id="error_formfield5"
@@ -374,7 +375,7 @@
 	/showActivityOrganized
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -383,7 +384,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
@@ -436,7 +437,7 @@
 			return false;
 		}
 		
-		$(function () {
+		/* $(function () {
 			 
 		    $('.datepicker').datepicker({
 				autoclose: true,
@@ -445,7 +446,7 @@
 		        changeMonth:true
 
 			});
-		});
+		}); */
 	</script>
 
 

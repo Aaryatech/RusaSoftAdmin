@@ -373,7 +373,7 @@ public class YesNoController {
 						instituteYesNo.setMakerUserId(userObj.getUserId());
 						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
 						instituteYesNo.setMakerDatetime(sf.format(date));
-						instituteYesNo.setYesnoPagecode("PAGE1");
+						instituteYesNo.setYesnoPagecode("PAGE7");//Sachin changed from PAGE1 to PAGE7 on 18 July2019 Akshay Said to do
 						instituteYesNo.setSectionCode("other");
 						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
 						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));

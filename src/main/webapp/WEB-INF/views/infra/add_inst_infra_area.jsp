@@ -173,15 +173,15 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="loc_of_area">Name of Room
+											<label class="control-label col-sm-2" for="loc_of_area">Location of Room
 												/Room No. <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="200"
 													onchange="trim(this)" id="loc_of_area" name="loc_of_area"
-													autocomplete="off" placeholder="Name of Room/ Room No." value="${editArea.areaLoc}">
+													autocomplete="off" placeholder="Location of Room/ Room No." value="${editArea.areaLoc}">
 												<span class="error_form text-danger" id="loc_of_area_field"
-													style="display: none;">Please enter name of room/ room No.</span>
+													style="display: none;">Please enter location of room/ room No.</span>
 
 											</div>
 										</div>
@@ -438,13 +438,13 @@
                     var html;
                     var p=-1;
                     var q="Select Area Name";
-                    html += '<option value="'+p+'">'
+                    html += '<option disabled value="'+p+'">'
                     +q+'</option>';
                     html += '</option>';
                     
                     var temp=0;
                     temp=document.getElementById("temp").value;
-                   // alert("temp");
+                    //alert("temp");
                     var len = data.length;
                     for (var i = 0; i < len; i++) {	
                     	
@@ -475,11 +475,12 @@
 
                          
                     }else{
-                    	  var x=0;
+                    	  /* var x=0;
                           var y="Any Other";
                           html += '<option value="'+x+'">'
                           +y+'</option>';
-                          html += '</option>';
+                          html += '</option>'; */
+                          
                     }
 
                     $('#area_name').html(html);

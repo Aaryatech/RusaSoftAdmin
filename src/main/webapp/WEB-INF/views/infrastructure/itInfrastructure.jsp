@@ -133,7 +133,8 @@ input {
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" id="purchase_date"
-													name="purchase_date" placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
+													name="purchase_date" placeholder="dd-mm-yyyy"  data-format="dd-mm-yyyy"
+													data-end-date="0d" onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" autocomplete="off"
 													value="${itInfra.purchaseDate}"> <span
 													class="error_form text-danger" id="error_formfield2"
@@ -336,7 +337,7 @@ input {
 	/showActivityOrganized
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -345,7 +346,7 @@ input {
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
@@ -399,7 +400,7 @@ input {
 			return false;
 		}
 		
-		$(function () {
+		/* $(function () {
 			 
 		    $('.datepicker').datepicker({
 				autoclose: true,
@@ -408,7 +409,7 @@ input {
 		        changeMonth:true
 
 			});
-		});
+		}); */
 	</script>
 
 

@@ -239,7 +239,7 @@
 														<th>Sr No</th>
 														<th>Area Type</th>
 														<th>Area Name</th>
-														<th>Name of Room/Room No.</th>
+														<th>Location of Room/Room No.</th>
 														<th>Area In Sq. M.</th>
 														<th>Action</th>
 
