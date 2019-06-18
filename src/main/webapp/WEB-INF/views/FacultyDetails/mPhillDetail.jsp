@@ -146,7 +146,7 @@
 														</div>
 													</div>
 
-
+	<div id="form_input">
 													<div class="form-group">
 														<label class="control-label col-sm-3"
 															for="phdRecognitionDt">Date of Recognition<span
@@ -238,6 +238,7 @@
 															style="display: none;">Please select use of ICT</span>
 
 														</div>
+													</div>
 													</div>
 
 													<div class="form-group">
@@ -402,6 +403,15 @@
 												return false;
 											});
 						});
+		
+		$("input[name='isPhdGuide']").change(function(){
+			var radioValue = $("input[name='isPhdGuide']:checked"). val();
+			if(radioValue==0){
+				document.getElementById("form_input").style.display="none";
+			}else{
+				document.getElementById("form_input").style.display="block";
+			}
+		});
 	</script>
 
 	<%-- <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
