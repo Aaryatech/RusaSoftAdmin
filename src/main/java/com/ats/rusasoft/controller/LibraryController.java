@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
-import com.ats.rusasoft.master.model.prodetail.MAcademicYr;
+
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
