@@ -145,7 +145,7 @@ input {
 										<div class="form-group">
 											<label class="control-label col-sm-2"
 												for="inst_activity_participation">Purchase 
-											Amount<span class="text-danger">*</span>
+											Amount in Rupees<span class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-6">

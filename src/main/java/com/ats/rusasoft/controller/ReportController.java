@@ -2730,9 +2730,12 @@ public class ReportController {
 			HttpSession session = request.getSession();
 
 			int instituteId = (int) session.getAttribute("instituteId");
+			String ac_year = request.getParameter("ac_year");
+			String temp_ac_year = request.getParameter("temp_ac_year");
 			map = new LinkedMultiValueMap<>();
 
 			map.add("instId", instituteId);
+			map.add("acadYear", ac_year);			// on 18-06-2019 Mahendra
 
 			LibAutoLMSInfo[] resArray = rest.postForObject(Constants.url + "getLibLMSInfo", map,
 					LibAutoLMSInfo[].class);
@@ -2874,7 +2877,7 @@ public class ReportController {
 				document.add(name);
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
-				// document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
+				document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 
@@ -2952,7 +2955,7 @@ public class ReportController {
 						System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "", "", 'E');
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "For Academic Year :" + temp_ac_year, "", 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());

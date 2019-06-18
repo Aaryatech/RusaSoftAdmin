@@ -4226,11 +4226,13 @@ public class RusaReportsController {
 
 			HttpSession session = request.getSession();
 
-			// String ac_year = request.getParameter("ac_year");
+			String ac_year = request.getParameter("ac_year");
 			int instituteId = (int) session.getAttribute("instituteId");
+			String temp_ac_year = request.getParameter("temp_ac_year");
 
 			map = new LinkedMultiValueMap<>();
 			map.add("instId", instituteId);
+			map.add("ac_year", ac_year);
 
 			IntrnetConnInfo[] resArray = rest.postForObject(Constants.url + "/getInternetConnInfo", map,
 					IntrnetConnInfo[].class);
@@ -4355,6 +4357,8 @@ public class RusaReportsController {
 				 */
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
+				
+				document.add(new Paragraph("Academic Year :" + temp_ac_year + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 
@@ -4445,7 +4449,7 @@ public class RusaReportsController {
 						}
 						System.err.println("headingName  " + headingName);
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"", "",'C');
+						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"Academic Year :" + temp_ac_year, "",'C');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());

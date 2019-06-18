@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.master.model.prodetail.MAcademicYr;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
@@ -147,8 +148,22 @@ public class LibraryController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-
-				LibraryInfo libInfo = new LibraryInfo();
+				LibraryInfo libInfo = null;
+				int instituteId = (int) session.getAttribute("instituteId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				int lastYear = 0;
+								
+				//	LibraryInfo libInfo = new LibraryInfo();
+				
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", instituteId);
+				map.add("acadYear", acadYear);
+								
+				 libInfo = rest.postForObject(Constants.url + "/getlibBasicInfo", map, LibraryInfo.class);
+				 System.out.println("libInfo="+libInfo);
+				
+				
+				
 				model.addObject("libInfo", libInfo);
 				model.addObject("title", "Add Library Basic Information");
 			}
@@ -169,10 +184,26 @@ public class LibraryController {
 
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
-
+			int acadYear = (int) session.getAttribute("acYearId");
+			
 			LibraryInfo libInfo = new LibraryInfo();
 
-			libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
+			
+			try {
+				libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
+			}catch(Exception e) {
+				libInfo.setLibInfoId(0);
+				System.err.println(e.getMessage());
+				
+			}
+			try {
+				libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
+			}catch(Exception e) {
+				libInfo.setIsEresourceRemotly(0);
+				System.err.println(e.getMessage());
+				
+			}
+			
 			libInfo.setInstituteId(instituteId);
 			libInfo.setIsLibAutomated(0);// Integer.parseInt(request.getParameter("isUsingSoft"))
 			libInfo.setSoftName(request.getParameter("swName"));
@@ -181,7 +212,7 @@ public class LibraryController {
 			libInfo.setDateOfPurchaseAutomation(request.getParameter("purchaseDate"));
 			libInfo.setNoCompLan(Integer.parseInt(request.getParameter("noOfComp")));
 			libInfo.setBandwidthForAccessingEresources(request.getParameter("bandwidth"));
-			libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
+			
 			libInfo.setAvgTeacher(Float.parseFloat(request.getParameter("avgTeacher")));
 			libInfo.setAvgStudent(Float.parseFloat(request.getParameter("avgStud")));
 
@@ -199,6 +230,7 @@ public class LibraryController {
 			libInfo.setDateOfStudentEstablishment(simpleDate);
 			libInfo.setIsExamination(0);
 			libInfo.setDateOfExaminationEstablishment(simpleDate);
+			libInfo.setAcYearId(acadYear);
 
 			libInfo.setDelStatus(1);
 			libInfo.setExInt1(Integer.parseInt(request.getParameter("noOfBooks")));

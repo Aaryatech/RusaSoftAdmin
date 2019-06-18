@@ -221,6 +221,11 @@
 																		value="1">Yes <input type="radio"
 																		id="usingremot" name="usingremot" checked value="0">No
 																</c:when>
+																<c:otherwise>
+																<input checked type="radio" id="usingremot" name="usingremot"
+																		value="1">Yes <input type="radio"
+																		id="usingremot" name="usingremot" checked value="0">No
+																</c:otherwise>
 															</c:choose>
 														</div>
 													</div>
