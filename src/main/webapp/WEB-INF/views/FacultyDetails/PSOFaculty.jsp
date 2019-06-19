@@ -79,7 +79,7 @@
 
 							<div class="form-group">
 								<label class="control-label col-sm-2" for="status">
-									Duration:</label> <strong>${programDetail.monthDuration}</strong>
+									Duration In (Months):</label> <strong>${programDetail.monthDuration}</strong>
 								<%-- <div class="col-sm-6" for="status">
 												<strong>${programDetail.monthDuration}</strong>
 											</div> --%>

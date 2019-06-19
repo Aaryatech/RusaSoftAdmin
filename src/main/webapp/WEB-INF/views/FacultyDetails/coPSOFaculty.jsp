@@ -122,12 +122,12 @@
 									<div class="col-xs-12">
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="coName">CO
+											<label class="control-label col-sm-2" for="coName">Course Outcome (CO)
 												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id=coName
-													name="coName" placeholder="CO NAME"
+												<input type="text" class="form-control" id=coName maxlength="200"
+													name="coName" placeholder=" Enter Course Outcome  (CO) "
 													value="${editSubjectCo.coName}" value="" required>
 											</div>
 											<div class="col-sm-4">
@@ -254,14 +254,14 @@
   --%>
 														<td style="text-align: center;"><a
 															href="${pageContext.request.contextPath}/mapPoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
-															title="Map PO" rel="tooltip" data-color-class="detail"
+															title="Map Program Outcome (PO)" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a></td>
 
 														<td style="text-align: center;"><a
 															href="${pageContext.request.contextPath}/mapPsoCo?coId=${subjectCoList.coId}&subId=${subId}&programId=${programDetail.programId}"
-															title="Map PSO" rel="tooltip" data-color-class="detail"
+															title="Map Program Specific Outcome (PSO)" rel="tooltip" data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
 																class="glyphicon glyphicon-list"></span></a></td>

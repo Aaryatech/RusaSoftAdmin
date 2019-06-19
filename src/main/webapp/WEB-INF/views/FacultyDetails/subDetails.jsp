@@ -178,16 +178,16 @@
 
 																<a
 																	href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
-																	title="Add CO" rel="tooltip" data-color-class="detail"
+																	title="Add Course Outcome (CO)" rel="tooltip" data-color-class="detail"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Block"><span
-																	class="glyphicon glyphicon-list"></span></a>
+																	class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;
 																<a
 																	href="${pageContext.request.contextPath}/editSubject/${subject.subId}"
 																	title="Edit" rel="tooltip" data-color-class="detail"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Edit  "><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
 															</c:if> <c:if test="${deleteAccess == 0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteSubject/${subject.subId}"

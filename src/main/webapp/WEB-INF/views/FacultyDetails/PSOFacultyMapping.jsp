@@ -79,7 +79,7 @@
 
 							<div class="form-group">
 								<label class="control-label col-sm-2" for="status">
-									Duration:</label> <strong>${programDetail.monthDuration}</strong>
+									Duration In (Months):</label> <strong>${programDetail.monthDuration}</strong>
 								<%-- <div class="col-sm-6" for="status">
 												<strong>${programDetail.monthDuration}</strong>
 											</div> --%>
@@ -115,7 +115,7 @@
 													<tr>
 														<th>Sr No <!-- <input type="checkbox" id="checkAll"
 															onClick="toggle(this)" /> --><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /></th>
-														<th>Program Specific Outcomes (PsO as per Accreditation Manual)</th>
+														<th>Program Specific Outcomes (PSO as per Accreditation Manual)</th>
 													</tr>
 
 												</thead>

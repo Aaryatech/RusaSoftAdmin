@@ -1126,7 +1126,7 @@ public class FacultyController {
 		ModelAndView model = new ModelAndView("FacultyDetails/PSOFacultyMapping");
 		try {
 
-			model.addObject("title", "CO PSO Mapping");
+			model.addObject("title", "Course Outcome (CO) And Program Specific Outcome (PSO) Mapping");
 			int coId = Integer.parseInt(request.getParameter("coId"));
 			int subId = Integer.parseInt(request.getParameter("subId"));
 			int programId = Integer.parseInt(request.getParameter("programId"));

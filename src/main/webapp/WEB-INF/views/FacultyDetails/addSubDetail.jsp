@@ -306,7 +306,7 @@
 
 												<select id="subType" name="subType" class="form-control"
 													onchange="showForm()">
-													<option value="-1">Select</option>
+													<option selected disabled value="-1">Select</option>
 													<c:choose>
 														<c:when test="${editSubject.subType==0}">
 
@@ -340,7 +340,7 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="programId" name="programId" class="form-control">
-													<option value="-1">Select</option>
+													<option selected disabled value="-1">Select</option>
 													<c:forEach items="${proList}" var="program">
 														<c:choose>
 															<c:when test="${editSubject.progId==program.programId}">
@@ -352,7 +352,7 @@
 														</c:choose>
 													</c:forEach>
 												</select> <span class="error_form text-danger" id="error_programId"
-													style="display: none;">Please Select </span>
+													style="display: none;">Please Select Program Type</span>
 											</div>
 										</div>
 
