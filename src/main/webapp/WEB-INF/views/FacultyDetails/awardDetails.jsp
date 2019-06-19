@@ -231,8 +231,8 @@
 
 
 																	<label class="control-label col-sm-2"  
-																		for="fromDate">From <span
-																		class="text-danger"></span>
+																		for="fromDate">From<span
+																		class="text-danger">*</span>
 																	</label>
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
@@ -246,7 +246,7 @@
 
 																<div class="form-group">
 																	<label class="control-label col-sm-2" 
-																		for="toDate">To <span class="text-danger"></span>
+																		for="toDate">To <span class="text-danger">*</span>
 																	</label>
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
@@ -266,8 +266,8 @@
 
 
 																	<label class="control-label col-sm-2" 
-																		for="fromDate">From <span
-																		class="text-danger"></span>
+																		for="fromDate">From 
+																		<span class="text-danger">*</span>
 																	</label>
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
@@ -281,7 +281,8 @@
 
 																<div class="form-group">
 																	<label class="control-label col-sm-2"
-																		for="toDate">To <span class="text-danger"></span>
+																		for="toDate">To
+																		<span class="text-danger">*</span>
 																	</label>
 																	<div class="col-sm-6">
 																		<input type="text" class="form-control datepicker"
@@ -355,7 +356,7 @@
             				
             			
             			 if(!$("#name").val()){
-        					             				
+            				 isError=true;   				
              				$("#name").addClass("has-error")
              				$("#error_formfield1").show()
              					//return false;
@@ -363,7 +364,7 @@
              					$("#error_formfield1").hide()
              				}
             			 if(!$("#agency").val()){
-	             				
+            				 isError=true;
               				$("#agency").addClass("has-error")
               				$("#error_formfield2").show()
               					//return false;
@@ -372,7 +373,7 @@
               				}
             			 
             			 if(!$("#nature").val()){
-	             				
+            				 isError=true;
               				$("#nature").addClass("has-error")
               				$("#error_formfield3").show()
               					//return false;
@@ -395,7 +396,7 @@
       					}
             			 
             			 if(!$("#date").val()){
-	             				
+            				 isError=true;
               				$("#date").addClass("has-error")
               				$("#error_formfield5").show()
               					//return false;

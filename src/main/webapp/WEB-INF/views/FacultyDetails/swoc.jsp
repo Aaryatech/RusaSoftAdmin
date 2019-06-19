@@ -88,7 +88,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right"></div>
-							
+					<%-- 		
 						<div class="col-lg-12" id="sucess_msg" style="display: none;">
 								<!-- onclick="location.reload();" -->
 								<div class="alert alert-success alert-dismissible fade in">
@@ -108,7 +108,7 @@
 									<strong>Fail : </strong>${failMsg}</div>
 
 
-							</div>
+							</div> --%>
 
 						</header>
 
@@ -244,7 +244,7 @@
 														</button>
 													</div>
 												</div>
-											<div align="center" id="loader1" style="display: none;">
+											<div align="center" id="loader2" style="display: none;">
 													<img
 														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
 														style="width: 50px; height: 50px;">
@@ -298,6 +298,11 @@
 
 											<div class="tab-pane " id="oppt">
 
+	<div align="center" id="loader3" style="display: none;">
+													<img
+														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+														style="width: 50px; height: 50px;">
+												</div>
 
 
 
@@ -390,6 +395,11 @@
 												</div>
 
 
+	<div align="center" id="loader4" style="display: none;">
+													<img
+														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+														style="width: 50px; height: 50px;">
+												</div>
 
 
 												<div class="row">
@@ -503,6 +513,9 @@
 				 
 				
 				$("#loader1").show();
+				$("#loader2").show();
+				$("#loader3").show();
+				$("#loader4").show();
 				$
 						.getJSON(
 								'${saveSWOC}',
@@ -540,7 +553,9 @@
 								}
 
 									$("#loader1").hide();
-
+									$("#loader2").hide();
+									$("#loader3").hide();
+									$("#loader4").hide();
 									//var dataTable = $('#example-1').DataTable();
 
 									for (var i = 0; i < data.length; i++) {
@@ -577,7 +592,7 @@
 										 }
 										
 													}else if(data[i].swocType==2){
-
+													
 														var tr = $('<tr></tr>');
 														tr.append($('<td ></td>').html(i + 1));
 
@@ -590,6 +605,7 @@
 														
 														if(data!=null){
 															 $("#sucess_msg").show();
+															 
 														 } else{
 															 $("#fail_msg").show();
 														 }

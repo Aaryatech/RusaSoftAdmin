@@ -137,7 +137,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
-												Department<span class="text-danger">*</span>
+												Department<span class="text-danger"></span>
 											</label>
 											<div class="col-sm-10">
 												<select id="dept_id" name="dept_id" class="" multiple>
@@ -420,7 +420,7 @@
 															.hide()
 												}
 
-												if (!$("#dept_id").val()) {
+												/* if (!$("#dept_id").val()) {
 													isError = true;
 
 													$("#dept_id").addClass(
@@ -428,7 +428,7 @@
 													$("#dept_id_field").show()
 												} else {
 													$("#dept_id_field").hide()
-												}
+												} */
 
 												if (!$("#quolif").val()) {
 													isError = true;

@@ -121,7 +121,7 @@
 																		<th>Sr No</th>
 																		<th>Faculty Name</th>
 																		<th>Department Name</th>
-																		<th>Level</th>
+																		<th>Level/Contribution</th>
 																		<th>Name</th>
 																		<th>University</th>
 																		<th>From Date</th>
@@ -134,11 +134,16 @@
 													<tr>
 														 <td><input type="checkbox" class="chk"
 															name="facContId" id="facContIds${count.index+1}"
-															value="${contribtn.conId}" /></td> 
+															value="${contribtn.conId}"></td> 
 														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${contribtn.facultyFirstName}</td>
-														<td>${contribtn.deptName}</td>
-														<td>${contribtn.conLevel}</td>
+														<td>${contribtn.deptName}</td>														
+														<td>${contribtn.conLevel}-
+														${contribtn.conExamSetting==1 ? 'Examination Paper Setting' : 
+														contribtn.conAsEvaluation==1 ? 'Answer Sheet Evaluation' : 
+														contribtn.conAsModeration==1 ?  'Answer Sheet Moderation' : ''}</td>
+														 
+														 
 														<td>${contribtn.conName}</td>
 														<td>${contribtn.conUniversity}</td>
 														<td  style="text-align: center">${contribtn.conFrom}</td>

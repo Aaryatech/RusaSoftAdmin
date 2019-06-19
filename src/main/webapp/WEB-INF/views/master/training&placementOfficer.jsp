@@ -113,11 +113,11 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="pacementOfficerName"
-															name="pacementOfficerName" placeholder="Traning & Placement Officer Name"
+															name="pacementOfficerName" placeholder="Training & Placement Officer Name"
 															onchange="trim(this)" autocomplete="off"
 															value="${trnPlaceOff.facultyFirstName}"> <span
 															class="error_form text-danger" id="error_formfield1"
-															style="display: none;">Please enter training & placement  officer name</span>
+															style="display: none;">Please enter training & placement  officer name.</span>
 													</div>
 												</div>
 
@@ -214,7 +214,7 @@
 															name="join_date" placeholder="dd/mm/yyyy"
 															value="${trnPlaceOff.joiningDate}"> <span
 															class="error_form text-danger" id="error_formfield4"
-															style="display: none;">Please enter joining date</span>
+															style="display: none;">Please enter joining date.</span>
 													</div>
 													<label class="control-label col-sm-3" for="planning"
 														style="text-align: left;">Is Currently Working<span
@@ -295,7 +295,7 @@
 															placeholder="Relieving Date"
 															value="${trnPlaceOff.realivingDate}"> <span
 															class="error_form text-danger" id="error_acc_off_relDate"
-															style="display: none;">Please enter relieving date</span>
+															style="display: none;">Please enter relieving date.</span>
 													</div>
 												</div>
 												
@@ -348,7 +348,7 @@
 															onchange="trim(this)" name="email" autocomplete="off"
 															placeholder="abc@xyz.com" value="${trnPlaceOff.email}">
 														<span class="error_form text-danger" id="error_formfield3"
-															style="display: none;">Please enter email</span>
+															style="display: none;">Please enter email.</span>
 														<p class="desc font-italic fontsize11">Note:
 															Verification mail will be sent on this Email id</p>
 													</div>

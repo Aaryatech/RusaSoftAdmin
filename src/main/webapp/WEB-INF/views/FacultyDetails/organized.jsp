@@ -216,10 +216,10 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="activity_date"
+															id="activity_date" data-end-date="0d" data-format="dd-mm-yyyy"
 															onkeypress='return restrictAlphabets(event)'
 															value="${activity.activityDate}" name="activity_date"
-															autocomplete="off" placeholder="dd/mm/yyyy"
+															autocomplete="off" placeholder="dd-mm-yyyy"
 															onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_formfield2"
 															style="display: none;">Please enter date of
@@ -528,7 +528,7 @@ function clearDefault(a){
 			return false;
 		}
 
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -537,7 +537,7 @@ function clearDefault(a){
 				changeMonth : true
 
 			});
-		});
+		}); */
 	</script>
 
 	<script type="text/javascript">

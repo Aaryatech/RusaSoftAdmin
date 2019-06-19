@@ -252,6 +252,7 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
 													id="act_date" value="${date}" name="act_date"
+													data-end-date="0d" data-format="dd-mm-yyyy"
 													placeholder="dd/MM/yyyy "> <span
 													class="error_form text-danger" id="error_date"
 													style="display: none;">Please Select Outreach Date </span>
@@ -428,7 +429,7 @@
 
 		}
 	</script>
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		$(function() {
 
 			$('.datepicker').datepicker({
@@ -439,7 +440,7 @@
 
 			});
 		});
-	</script>
+	</script> -->
 
 </body>
 </html>

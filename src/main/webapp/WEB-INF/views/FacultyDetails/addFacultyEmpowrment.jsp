@@ -191,7 +191,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepicker"
-													placeholder="dd-mm-yyyy" autocomplete="off" id="fromDate"
+													placeholder="dd-mm-yyyy" data-format="dd-mm-yyyy" data-end-date="0d" autocomplete="off" id="fromDate"
 													name="fromDate" value="${facultyEmpowr.fromDate}"> <span
 													class="error_form text-danger" id="error_fdate"
 													style="display: none;">Please Enter From Date.</span>
@@ -210,7 +210,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" name="toDate"
+													autocomplete="off" id="toDate" data-format="dd-mm-yyyy" name="toDate"
 													placeholder="dd-mm-yyyy" value="${facultyEmpowr.toDate}"> <span
 													class="error_form text-danger" id="error_tdate"
 													style="display: none;">Please Enter To Date.</span>
@@ -479,7 +479,7 @@
 			document.getElementById("is_view").value = view;//create this 
 
 		}
-
+/* 
 		$(function() {
 
 			$('.datepicker').datepicker({
@@ -489,7 +489,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 	</script>
 	
 	

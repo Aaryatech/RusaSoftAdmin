@@ -213,23 +213,30 @@ public class PrincipalController {
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
 			String email = request.getParameter("email");
+			String deptIds= null;
 
-			String[] deptIds = request.getParameterValues("dept_id");
-			StringBuilder sb = new StringBuilder();
+			 deptIds = request.getParameter("dept_id");
+		
+			/*StringBuilder sb = new StringBuilder();
 
 			for (int i = 0; i < deptIds.length; i++) {
 				sb = sb.append(deptIds[i] + ",");
 
 			}
 			String deptIdList = sb.toString();
-			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);*/
+			
 			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
 			if (addEdit == 0) {
 				Staff staff = new Staff();
 
 				staff.setContactNo(contact);
 				staff.setCurrentDesignationId(designation);
-				staff.setDeptId(deptIdList);
+				if(deptIds!=null) {
+				staff.setDeptId(deptIds);
+				}else {
+					staff.setDeptId("0");
+				}
 				staff.setEmail(email);
 				staff.setFacultyFirstName(facultyName);
 				staff.setFacultyId(facultyId);
@@ -284,7 +291,11 @@ public class PrincipalController {
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				editHod.setFacultyFirstName(facultyName);
-				editHod.setDeptId(deptIdList);
+				if(deptIds!=null) {
+					editHod.setDeptId(deptIds);
+					}else {
+						editHod.setDeptId("0");
+					}
 				editHod.setEmail(email);
 				editHod.setFacultyId(facultyId);
 				editHod.setContactNo(contact);

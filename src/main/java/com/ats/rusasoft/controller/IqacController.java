@@ -1796,7 +1796,7 @@ public class IqacController {
 			} else {
 				model = new ModelAndView("master/traningPlacementOfficerList");
 
-				model.addObject("title", "Traning & Placement Officer");
+				model.addObject("title", "Training & Placement Officer");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
 				int yId = (int) session.getAttribute("acYearId");
@@ -1900,7 +1900,7 @@ public class IqacController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
-				model.addObject("title", "Add Traning & Placement Officer");
+				model.addObject("title", "Add Training & Placement Officer");
 			}
 		} catch (Exception e) {
 
@@ -2113,7 +2113,7 @@ public class IqacController {
 			
 		} catch (Exception e) {
 
-			System.err.println("exception In Traning & Placement Officer Registration at showIqacList Contr" + e.getMessage());
+			System.err.println("exception In Training & Placement Officer Registration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
 
 		}
@@ -2176,7 +2176,7 @@ public class IqacController {
 
 				model.addObject("trnPlaceOff", staff);
 				model.addObject("addEdit", "1");
-				model.addObject("title", "Edit Traning & Placement Officer");
+				model.addObject("title", "Edit Training & Placement Officer");
 			}
 		} catch (Exception e) {
 

@@ -172,9 +172,9 @@
 														autocomplete="off" name="guideName" onchange="trim(this)"
 														placeholder="Name of Co-Assistant/Guide"
 														value="${patent.patentGuideName}">
-													<span
+													<!-- <span
 													class="error_form text-danger" id="error_field4"
-													style="display: none;">Please enter co-assistant/guide name. </span>
+													style="display: none;">Please enter co-assistant/guide name. </span> -->
 												</div>
 											</div>
 											<input type="hidden" id="is_view" name="is_view" value="0">
@@ -288,7 +288,7 @@ function trim(el) {
 												} else {
 													$("#error_field3").hide();
 												}
-												if (!$("#guide_name").val()) {
+											/* 	if (!$("#guide_name").val()) {
 													isError = true;
 
 													$("#guide_name").addClass(
@@ -296,7 +296,7 @@ function trim(el) {
 													$("#error_field4").show();
 												} else {
 													$("#error_field4").hide();
-												}
+												} */
 												
 												if (!$("#pub_date").val()) {
 													isError = true;
