@@ -94,22 +94,22 @@ public class PdfReportsController {
 		HttpSession session = request.getSession();
 		
 		int facId = (int)session.getAttribute("instituteId");
-		System.out.println("Id:"+facId);
+		//System.out.println("Id:"+facId);
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("facId", facId);
 		
 		StaffList[] staff = rest.postForObject(Constants.url+"/getListStaff",map,  StaffList[].class);
 		List<StaffList> staffList = new ArrayList<>(Arrays.asList(staff));
-		System.out.println("Staff List:"+staffList);
+		//System.out.println("Staff List:"+staffList);
 		
 		BufferedOutputStream outStream = null;
-		System.out.println("Inside Pdf showCustomerwisePdf");
+		//System.out.println("Inside Pdf showCustomerwisePdf");
 		Document document = new Document(PageSize.A4);
 
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 
-		System.out.println("time in Gen Bill PDF ==" + dateFormat.format(cal.getTime()));
+		//System.out.println("time in Gen Bill PDF ==" + dateFormat.format(cal.getTime()));
 		String FILE_PATH = Constants.REPORT_SAVE;
 		File file = new File(FILE_PATH);
 
@@ -141,7 +141,7 @@ public class PdfReportsController {
 
 		PdfPTable table = new PdfPTable(7);
 		try {
-			System.out.println("Inside PDF Table try");
+			//System.out.println("Inside PDF Table try");
 			table.setWidthPercentage(100);
 			table.setWidths(new float[] { 2.4f, 3.4f, 3.2f, 3.2f, 3.2f, 3.2f, 4.2f});
 			
@@ -274,7 +274,7 @@ public class PdfReportsController {
 
 			int totalPages = writer.getPageNumber();
 
-			System.out.println("Page no " + totalPages);
+			//System.out.println("Page no " + totalPages);
 
 			document.close();
 
@@ -299,14 +299,14 @@ public class PdfReportsController {
 				try {
 					FileCopyUtils.copy(inputStream, response.getOutputStream());
 				} catch (IOException e) {
-					System.out.println("Excep in Opening a Pdf File");
+					//System.out.println("Excep in Opening a Pdf File");
 					e.printStackTrace();
 				}
 			}
 
 		} catch (DocumentException ex) {
 
-			System.out.println("Pdf Generation Error: " + ex.getMessage());
+			//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 			ex.printStackTrace();
 
@@ -318,19 +318,19 @@ public class PdfReportsController {
 	 * @RequestMapping(value = "/pdf", method = RequestMethod.GET) public void
 	 * showPDF(HttpServletRequest request, HttpServletResponse response) {
 	 * 
-	 * String url = request.getParameter("url"); System.out.println("URL " + url);
+	 * String url = request.getParameter("url"); //System.out.println("URL " + url);
 	 * 
 	 * File f = new File("/home/maddy/ats-12/bill.pdf"); // File f = new File(
 	 * "/home/aaryate1/exhibition.aaryatechindia.in/tomcat-8.0.18/webapps/ujwal/bill.pdf"
 	 * );
 	 * 
 	 * 
-	 * System.out.println("I am here " + f.toString()); try {
+	 * //System.out.println("I am here " + f.toString()); try {
 	 * runConverter(Constants.ReportURL + url, f, request, response);
-	 * System.out.println("Come on lets get "); } catch (IOException e) { // TODO
+	 * //System.out.println("Come on lets get "); } catch (IOException e) { // TODO
 	 * Auto-generated catch block
 	 * 
-	 * System.out.println("Pdf conversion exception " + e.getMessage()); }
+	 * //System.out.println("Pdf conversion exception " + e.getMessage()); }
 	 * 
 	 * // get absolute path of the application ServletContext context =
 	 * request.getSession().getServletContext(); String appPath =
@@ -345,7 +345,7 @@ public class PdfReportsController {
 	 * Auto-generated catch block e.printStackTrace(); } try { // get MIME type of
 	 * the file String mimeType = context.getMimeType(fullPath); if (mimeType ==
 	 * null) { // set to binary type if MIME mapping not found mimeType =
-	 * "application/pdf"; } System.out.println("MIME type: " + mimeType);
+	 * "application/pdf"; } //System.out.println("MIME type: " + mimeType);
 	 * 
 	 * String headerKey = "Content-Disposition";
 	 * 
@@ -376,7 +376,7 @@ public class PdfReportsController {
 	 * 
 	 * if (urlstring.length() > 0) { if (!urlstring.startsWith("http://") &&
 	 * !urlstring.startsWith("file:")) { urlstring = "http://" + urlstring; }
-	 * System.out.println("PDF URL " + urlstring); java.io.FileOutputStream fos =
+	 * //System.out.println("PDF URL " + urlstring); java.io.FileOutputStream fos =
 	 * new java.io.FileOutputStream(output);
 	 * 
 	 * PD4ML pd4ml = new PD4ML(); //pd4ml.enableSmartTableBreaks(true);
@@ -392,10 +392,10 @@ public class PdfReportsController {
 	 * 
 	 * pd4ml.setPageFooter(footer);
 	 * 
-	 * } catch (Exception e) { System.out.println("Pdf conversion method excep " +
+	 * } catch (Exception e) { //System.out.println("Pdf conversion method excep " +
 	 * e.getMessage()); } try { pd4ml.setPageSize(landscapeValue ?
 	 * pd4ml.changePageOrientation(format) : format); } catch (Exception e) {
-	 * System.out.println("Pdf conversion ethod excep " + e.getMessage()); }
+	 * //System.out.println("Pdf conversion ethod excep " + e.getMessage()); }
 	 * 
 	 * if (unitsValue.equals("mm")) { pd4ml.setPageInsetsMM(new Insets(topValue,
 	 * leftValue, bottomValue, rightValue)); } else { pd4ml.setPageInsets(new

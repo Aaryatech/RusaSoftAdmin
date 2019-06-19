@@ -143,7 +143,7 @@ System.err.println("HELLO " +programId);
 			
 			map.add("programId", programId);
 			GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
-			System.out.println("Program:"+progDetail);
+			//System.out.println("Program:"+progDetail);
 			model.addObject("progDetail", progDetail);
 		
 			//model.addObject("title", "Edit Student Support Scheme");
@@ -158,7 +158,7 @@ System.err.println("HELLO " +programId);
 						ProgramOutcome[].class);
 				List<ProgramOutcome> poList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("po list is" + poList.toString());
+				//System.out.println("po list is" + poList.toString());
 			
 			
 				model.addObject("poList", poList);
@@ -194,7 +194,7 @@ System.err.println("HELLO " +programId);
 				
 				map.add("programId", programId);
 				GetProgram progDetail = rest.postForObject(Constants.url+"/getProgramByProgId", map, GetProgram.class);
-				System.out.println("Program:"+progDetail);
+				//System.out.println("Program:"+progDetail);
 				model.addObject("progDetail", progDetail);
 				
 				
@@ -202,10 +202,10 @@ System.err.println("HELLO " +programId);
 
 				map.add("poId", poId);
 				ProgramOutcome poDetail = rest.postForObject(Constants.url+"/getProgramOutcomeByPOId", map, ProgramOutcome.class);
-				System.out.println("Program:"+poDetail);
+				//System.out.println("Program:"+poDetail);
 				model.addObject("poDetail", poDetail);
 				model.addObject("poId1", poDetail.getPoId());
-				System.out.println("po id iss"+poDetail.getPoId());
+				//System.out.println("po id iss"+poDetail.getPoId());
 				
 				map = new LinkedMultiValueMap<>();
 				
@@ -220,13 +220,13 @@ System.err.println("HELLO " +programId);
 				
 				
 				String psoIds=poDetail.getPsoMapId();
-				System.out.println("poDetail detail::::"+poDetail.toString());
+				//System.out.println("poDetail detail::::"+poDetail.toString());
 				//String[] psoIdsarray = psoIds.split(",",4);
 				
 				// String[] values = psoIds.split(",");
 				 try {
 				 List<String> items = Arrays.asList(psoIds.split(","));
-				System.out.println("psoIdsarray is after ::::"+items);
+				//System.out.println("psoIdsarray is after ::::"+items);
 				 
 				model.addObject("items",items);
 				
@@ -255,10 +255,10 @@ System.err.println("HELLO " +programId);
 
 		String poId1 = request.getParameter("poId1");
 		int prgId = Integer.parseInt(request.getParameter("prgId"));
-		System.out.println("po id "+poId1+" "+prgId);
+		//System.out.println("po id "+poId1+" "+prgId);
 
 		String satValue = request.getParameter("satValue");
-		System.out.println("po satValue "+satValue);
+		//System.out.println("po satValue "+satValue);
 	
 		try {
 			
@@ -267,7 +267,7 @@ System.err.println("HELLO " +programId);
 
 					System.err.println("Multiple records delete ");
 					String[] psoId = request.getParameterValues("psoIds");
-					System.out.println("id are" + psoId);
+					//System.out.println("id are" + psoId);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -277,7 +277,7 @@ System.err.println("HELLO " +programId);
 					}
 					String psoIdList = sb.toString();
 					psoIdList = psoIdList.substring(0, psoIdList.length() - 1);
-					System.out.println("pso id list"+psoIdList);
+					//System.out.println("pso id list"+psoIdList);
 					
 					
 					
@@ -479,7 +479,7 @@ System.err.println("HELLO " +programId);
 			stud.setExtraInt2(0);
 			
 			stud.setExtraVarchar2("NA");
-			System.out.println("Student:"+stud.toString());
+			//System.out.println("Student:"+stud.toString());
 			
 			StudentSupprtScheme studScheme = rest.postForObject(Constants.url+"/saveStudentSupprtScheme", stud, StudentSupprtScheme.class);
 			
@@ -520,11 +520,11 @@ System.err.println("HELLO " +programId);
 			map.add("instId",instituteId);
 		
 		//List<StudentSupprtScheme> studSchmList = rest.postForObject(Constants.url+"/getAllStudentSchemes", map,List.class);
-		//System.out.println("Student sch List:"+studSchmList.get(0).getImplementationYear());
+		////System.out.println("Student sch List:"+studSchmList.get(0).getImplementationYear());
 			StudentSchemeList[] instArray = rest.postForObject(Constants.url + "getAllStudentSchemes", map,
 					StudentSchemeList[].class);
 			List<StudentSchemeList> studSchmList = new ArrayList<>(Arrays.asList(instArray));
-			System.out.println("Student sch List:"+studSchmList.toString());
+			//System.out.println("Student sch List:"+studSchmList.toString());
 			
 			
 			model = new ModelAndView("ProgramDetails/StudSuppSch");
@@ -552,13 +552,13 @@ System.err.println("HELLO " +programId);
 			@PathVariable("stdSchmId") int stdSchmId) {
 
 		ModelAndView model = null;
-		try {System.out.println("id:"+stdSchmId);
+		try {//System.out.println("id:"+stdSchmId);
 			
 			map = new LinkedMultiValueMap<>();
 			
 			map.add("id", stdSchmId);
 			StudentSupprtScheme studSchm = rest.postForObject(Constants.url+"/getStudentSchemesById", map, StudentSupprtScheme.class);
-			System.out.println("Student:"+studSchm);
+			//System.out.println("Student:"+studSchm);
 			
 			
 	
@@ -590,13 +590,13 @@ System.err.println("HELLO " +programId);
 	 * @PathVariable("stdSchmId") int stdSchmId) {
 	 * 
 	 * 
-	 * try {System.out.println("id:"+stdSchmId);
+	 * try {//System.out.println("id:"+stdSchmId);
 	 * 
 	 * map = new LinkedMultiValueMap<>();
 	 * 
 	 * map.add("id", stdSchmId); StudentSupprtScheme studSchm =
 	 * rest.postForObject(Constants.url+"/deleteStudentSchemesById", map,
-	 * StudentSupprtScheme.class); System.out.println("Student:"+studSchm);
+	 * StudentSupprtScheme.class); //System.out.println("Student:"+studSchm);
 	 * 
 	 * } catch (Exception e) {
 	 * 
@@ -639,7 +639,7 @@ System.err.println("HELLO " +programId);
 
 					System.err.println("Multiple records delete ");
 					String[] studentSchmIds = request.getParameterValues("studentSchmIds");
-					System.out.println("id are" + studentSchmIds);
+					//System.out.println("id are" + studentSchmIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -649,7 +649,7 @@ System.err.println("HELLO " +programId);
 					}
 					String studIdList = sb.toString();
 					studIdList = studIdList.substring(0, studIdList.length() - 1);
-					System.out.println("stud id list"+studIdList);
+					//System.out.println("stud id list"+studIdList);
 
 					map.add("id", studIdList);
 				} else {

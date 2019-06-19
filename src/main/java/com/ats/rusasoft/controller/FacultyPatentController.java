@@ -95,7 +95,7 @@ public class FacultyPatentController {
 				 * }
 				 */
 
-				System.out.println("faculty Patent List :" + facultyPatentList);
+				//System.out.println("faculty Patent List :" + facultyPatentList);
 
 				model.addObject("title", "Faculty's Patent Work Details");
 
@@ -108,16 +108,16 @@ public class FacultyPatentController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -192,9 +192,9 @@ public class FacultyPatentController {
 
 				}
 
-				System.out.println("patentId:" + patentId);
+				//System.out.println("patentId:" + patentId);
 				String patentNo = request.getParameter("patentNo");
-				System.out.println("patentNo:" + patentNo);
+				//System.out.println("patentNo:" + patentNo);
 				String parentTitle = request.getParameter("parentTitle");
 				String fillingDate = request.getParameter("fillingDate");
 				String guideName = request.getParameter("guideName");
@@ -266,7 +266,7 @@ public class FacultyPatentController {
 	@RequestMapping(value = "/editPatent/{patentId}", method = RequestMethod.GET)
 	public ModelAndView editPatent(@PathVariable("patentId") int patentId, HttpServletRequest request) {
 
-		System.out.println("Id:" + patentId);
+		//System.out.println("Id:" + patentId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -288,7 +288,7 @@ public class FacultyPatentController {
 				model.addObject("title", "Edit Faculty's Patent Work Details");
 				FacultyPatent patent = rest.postForObject(Constants.url + "/getFacultyPatent", map,
 						FacultyPatent.class);
-				// System.out.println("patent"+patent);
+				// //System.out.println("patent"+patent);
 				patent.setPatentFilingDate(DateConvertor.convertToDMY(patent.getPatentFilingDate()));
 				patent.setPatentPubDate(DateConvertor.convertToDMY(patent.getPatentPubDate()));
 				model.addObject("patent", patent);
@@ -315,7 +315,7 @@ public class FacultyPatentController {
 			a = "redirect:/accessDenied";
 		} else {
 			Info inf = new Info();
-			System.out.println("patentId:" + patentId);
+			//System.out.println("patentId:" + patentId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("patentId", patentId);
@@ -395,7 +395,7 @@ public class FacultyPatentController {
 				 * facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).
 				 * getAwardValidityTo()); }
 				 */
-				System.out.println("faculty Patent List :" + facultyAwardList);
+				//System.out.println("faculty Patent List :" + facultyAwardList);
 
 				model.addObject("title", "Faculty Received Award - Recognition Details");
 
@@ -409,16 +409,16 @@ public class FacultyPatentController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -463,7 +463,7 @@ public class FacultyPatentController {
 
 				}
 
-				System.out.println("awardId:" + awardId);
+				//System.out.println("awardId:" + awardId);
 
 				String name = request.getParameter("name");
 				String agency = request.getParameter("agency");
@@ -565,7 +565,7 @@ public class FacultyPatentController {
 	@RequestMapping(value = "/editAward/{awardId}", method = RequestMethod.GET)
 	public ModelAndView editAward(@PathVariable("awardId") int awardId, HttpServletRequest request) {
 
-		System.out.println("Id:" + awardId);
+		//System.out.println("Id:" + awardId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -589,7 +589,7 @@ public class FacultyPatentController {
 
 				FacultyAward award = rest.postForObject(Constants.url + "/getFacultyAwardById", map,
 						FacultyAward.class);
-				// System.out.println("award"+award);
+				// //System.out.println("award"+award);
 
 				award.setAwardDate(DateConvertor.convertToDMY(award.getAwardDate()));
 				if (award.getAwardValidity() == 0) {
@@ -621,7 +621,7 @@ public class FacultyPatentController {
 			a = "redirect:/accessDenied";
 		} else {
 			Info inf = new Info();
-			System.out.println("awardId:" + awardId);
+			//System.out.println("awardId:" + awardId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("awardId", awardId);
@@ -671,7 +671,7 @@ public class FacultyPatentController {
 
 				List<GetFacultyOutrea> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
 
-				System.out.println("faculty outreach  List :" + facultyOutreachList.toString());
+				//System.out.println("faculty outreach  List :" + facultyOutreachList.toString());
 
 				for (int i = 0; i < facultyOutreachList.size(); i++) {
 					facultyOutreachList.get(i)
@@ -689,16 +689,16 @@ public class FacultyPatentController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -735,7 +735,7 @@ public class FacultyPatentController {
 			map.add("instituteId", inst_id);
 			List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList", map,
 					List.class);
-			System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
+			//System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
 
 			model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 			model.addObject("editInst", editInst);
@@ -786,7 +786,7 @@ public class FacultyPatentController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				int outreach_id = Integer.parseInt(request.getParameter("outreach_id"));
-				System.out.println("librarian_id" + "librarian_id");
+				//System.out.println("librarian_id" + "librarian_id");
 
 				String act_name = request.getParameter("act_name");
 
@@ -799,7 +799,7 @@ public class FacultyPatentController {
 				System.err.println("outreach_id id  " + outreach_id);
 				if (outreach_id == 0) {
 
-					System.out.println("inst id is" + inst_id);
+					//System.out.println("inst id is" + inst_id);
 
 					lib.setFacultyId(faculty_id);
 					lib.setIsActive(1);
@@ -833,7 +833,7 @@ public class FacultyPatentController {
 							FacultyOutreach.class);
 
 				} else {
-					System.out.println("in edit");
+					//System.out.println("in edit");
 
 					map.add("outreachId", outreach_id); // getInstitute Hod hod =
 					FacultyOutreach lib1 = rest.postForObject(Constants.url + "getFacultyOutReach", map,
@@ -967,7 +967,7 @@ public class FacultyPatentController {
 						map, List.class);
 
 				model.addObject("date", DateConvertor.convertToDMY(editInst.getOutreachDate()));
-				System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
+				//System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
 
 				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 			}

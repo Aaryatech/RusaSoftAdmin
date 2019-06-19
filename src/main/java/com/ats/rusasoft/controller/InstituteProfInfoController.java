@@ -86,7 +86,7 @@ public class InstituteProfInfoController {
 				model.addObject("desigList", designationList);
 				
 				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
-				System.out.println(instRes.toString());
+				//System.out.println(instRes.toString());
 
 			}
 
@@ -133,7 +133,7 @@ public class InstituteProfInfoController {
 				model.addObject("desigList", designationList);
 				
 				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
-				System.out.println(instRes.toString());
+				//System.out.println(instRes.toString());
 
 			}
 
@@ -180,7 +180,7 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				String iqac_info_id = request.getParameter("iqac_info_id");
 
-				System.out.println("iqac_info_id" + "iqac_info_id");
+				//System.out.println("iqac_info_id" + "iqac_info_id");
 
 				String alt_faculty_name = request.getParameter("alt_faculty_name");
 				String alt_fac_contact = request.getParameter("alt_fac_contact");
@@ -195,7 +195,7 @@ public class InstituteProfInfoController {
 
 				if (iqac_info_id.isEmpty() == true) {
 
-					System.out.println("inst id is" + inst_id);
+					//System.out.println("inst id is" + inst_id);
 
 					redInfo.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
 					redInfo.setIqacAltEmail1(registered_email);
@@ -231,9 +231,9 @@ public class InstituteProfInfoController {
 							IqacBasicInfo.class);
 
 				} else {
-					System.out.println("in edit");
+					//System.out.println("in edit");
 
-					System.out.println("iqac_info_id" + iqac_info_id);
+					//System.out.println("iqac_info_id" + iqac_info_id);
 					map.add("iqacInfoId", iqac_info_id); // getInstitute Hod hod =
 					IqacBasicInfo redInfo1 = rest.postForObject(Constants.url + "getIqacInfoByIqacInfoId", map,
 							IqacBasicInfo.class);
@@ -295,7 +295,7 @@ public class InstituteProfInfoController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(" showredInfoList Accessable ");
+				//System.out.println(" showredInfoList Accessable ");
 
 				model = new ModelAndView("instituteInfo/IQAC/instProfList");
 
@@ -309,7 +309,7 @@ public class InstituteProfInfoController {
 						IqacBasicInfo.class);
 				model.addObject("instProfRes", instRes);
 				model.addObject("date", DateConvertor.convertToDMY(instRes.getEstabilishmentDate()));
-				System.out.println(instRes.toString());
+				//System.out.println(instRes.toString());
 
 				Info add = AccessControll.checkAccess("showInstProfList", "showInstProfList", "0", "1", "0", "0",
 						newModuleList);
@@ -319,16 +319,16 @@ public class InstituteProfInfoController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -422,7 +422,7 @@ public class InstituteProfInfoController {
 						InstituteFunctionalMOU[].class);
 				List<InstituteFunctionalMOU> mouList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("InstituteFunctionalMOU list is" + mouList.toString());
+				//System.out.println("InstituteFunctionalMOU list is" + mouList.toString());
 
 				for (int i = 0; i < mouList.size(); i++) {
 					mouList.get(i).setMouFromdt(DateConvertor.convertToDMY(mouList.get(i).getMouFromdt()));
@@ -439,16 +439,16 @@ public class InstituteProfInfoController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -535,7 +535,7 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				int mou_id = Integer.parseInt(request.getParameter("mou_id"));
 
-				System.out.println("mou_id" + mou_id);
+				//System.out.println("mou_id" + mou_id);
 
 				String MOU_agency = request.getParameter("MOU_agency");
 				String c = null;
@@ -556,7 +556,7 @@ public class InstituteProfInfoController {
 
 				if (mou_id == 0) {
 
-					System.out.println("inst id is" + inst_id);
+					//System.out.println("inst id is" + inst_id);
 
 					redInfo.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
 					redInfo.setMouTodt(((DateConvertor.convertToYMD(toDate))));
@@ -594,16 +594,16 @@ public class InstituteProfInfoController {
 					String curDate = dateFormatStr.format(new Date());
 
 					redInfo.setMakerDatetime(curDateTime);
-					System.out.println("Dt:"+redInfo.toString());
+					//System.out.println("Dt:"+redInfo.toString());
 
 					InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "saveInstituteMOU", redInfo,
 							InstituteFunctionalMOU.class);
 
 				} else {
 
-					System.out.println("in edit");
+					//System.out.println("in edit");
 
-					System.out.println("mou_id" + mou_id);
+					//System.out.println("mou_id" + mou_id);
 					map.add("mouId", mou_id);
 					// getInstitute Hod hod =
 					InstituteFunctionalMOU redInfo1 = rest.postForObject(Constants.url + "getMOUByMouId", map,
@@ -678,7 +678,7 @@ public class InstituteProfInfoController {
 				model = new ModelAndView("instituteInfo/IQAC/addFunMOUs");
 
 				int edit_mou_id = Integer.parseInt(request.getParameter("edit_mou_id"));
-				System.out.println("edit_mou_id id is" + edit_mou_id);
+				//System.out.println("edit_mou_id id is" + edit_mou_id);
 
 				model.addObject("title", " Edit Institute's Functional MoU's (Academic)");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -686,7 +686,7 @@ public class InstituteProfInfoController {
 
 				InstituteFunctionalMOU editInst = rest.postForObject(Constants.url + "getMOUByMouId", map,
 						InstituteFunctionalMOU.class);
-				System.out.println("InstituteFunctionalMOU is" + editInst.toString());
+				//System.out.println("InstituteFunctionalMOU is" + editInst.toString());
 				model.addObject("editInst", editInst);
 
 				model.addObject("fdate", DateConvertor.convertToDMY(editInst.getMouFromdt()));
@@ -727,7 +727,7 @@ public class InstituteProfInfoController {
 
 					System.err.println("Multiple records delete ");
 					String[] mouIds = request.getParameterValues("mouIds");
-					System.out.println("id are" + mouIds);
+					//System.out.println("id are" + mouIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -794,7 +794,7 @@ public class InstituteProfInfoController {
 						map, GetInstituteLinkage[].class);
 				List<GetInstituteLinkage> linkageList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("colList list is" + linkageList.toString());
+				//System.out.println("colList list is" + linkageList.toString());
 				model.addObject("linkageList", linkageList);
 
 				Info add = AccessControll.checkAccess("showCollaborationLinkages", "showCollaborationLinkages", "0",
@@ -805,16 +805,16 @@ public class InstituteProfInfoController {
 						"0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -865,7 +865,7 @@ public class InstituteProfInfoController {
 						map, LinkageMaster[].class);
 				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("colList list is" + coltList.toString());
+				//System.out.println("colList list is" + coltList.toString());
 				model.addObject("colList", coltList);
 			}
 
@@ -900,7 +900,7 @@ public class InstituteProfInfoController {
 				model = new ModelAndView("instituteInfo/IQAC/addCollabLink");
 
 				int edit_link_id = Integer.parseInt(request.getParameter("edit_link_id"));
-				System.out.println("edit_mou_id id is" + edit_link_id);
+				//System.out.println("edit_mou_id id is" + edit_link_id);
 
 				model.addObject("title", " Edit Collaboration and Linkages ");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -908,7 +908,7 @@ public class InstituteProfInfoController {
 
 				InstituteLinkage editInst = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
 						InstituteLinkage.class);
-				System.out.println("InstituteFunctionalMOU is" + editInst.toString());
+				//System.out.println("InstituteFunctionalMOU is" + editInst.toString());
 				model.addObject("editInst", editInst);
 
 				int inst_id = (int) session.getAttribute("instituteId");
@@ -920,7 +920,7 @@ public class InstituteProfInfoController {
 						map, LinkageMaster[].class);
 				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("colList list is" + coltList.toString());
+				//System.out.println("colList list is" + coltList.toString());
 				model.addObject("colList", coltList);
 
 			}
@@ -968,7 +968,7 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				int link_id = Integer.parseInt(request.getParameter("link_id"));
 
-				System.out.println("link_id" + link_id);
+				//System.out.println("link_id" + link_id);
 
 				String colName = request.getParameter("colName");
 
@@ -980,7 +980,7 @@ public class InstituteProfInfoController {
 
 				if (link_id == 0) {
 
-					System.out.println("inst id is" + inst_id);
+					//System.out.println("inst id is" + inst_id);
 
 					redInfo.setLinkAgency(col_agency);
 					redInfo.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
@@ -1015,9 +1015,9 @@ public class InstituteProfInfoController {
 
 				} else {
 
-					System.out.println("in edit InstituteLinkage");
+					//System.out.println("in edit InstituteLinkage");
 
-					System.out.println("link_id" + link_id);
+					//System.out.println("link_id" + link_id);
 					map.add("linkId", link_id);
 
 					InstituteLinkage redInfo1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
@@ -1096,7 +1096,7 @@ public class InstituteProfInfoController {
 
 					System.err.println("Multiple records delete ");
 					String[] linkIds = request.getParameterValues("linkIds");
-					System.out.println("id are" + linkIds);
+					//System.out.println("id are" + linkIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1163,7 +1163,7 @@ public class InstituteProfInfoController {
 						map, LinkageMaster[].class);
 				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("colList list is" + coltList.toString());
+				//System.out.println("colList list is" + coltList.toString());
 				model.addObject("colList", coltList);
 
 				LinkageMaster editInst = new LinkageMaster();
@@ -1177,16 +1177,16 @@ public class InstituteProfInfoController {
 						"showMasterCollaborationLinkages", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1212,7 +1212,7 @@ public class InstituteProfInfoController {
 			Info view = AccessControll.checkAccess("insertLinkageMaster", "showMasterCollaborationLinkages", "0", "1",
 					"0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -1259,9 +1259,9 @@ public class InstituteProfInfoController {
 
 				} else {
 
-					System.out.println("in edit InstituteLinkage");
+					//System.out.println("in edit InstituteLinkage");
 
-					System.out.println("linkage_id" + linkage_id);
+					//System.out.println("linkage_id" + linkage_id);
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					map.add("linknameId", linkage_id);
 
@@ -1328,13 +1328,13 @@ public class InstituteProfInfoController {
 						map, LinkageMaster[].class);
 				List<LinkageMaster> coltList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("colList list is" + coltList.toString());
+				//System.out.println("colList list is" + coltList.toString());
 				model.addObject("colList", coltList);
 
 				////////////////
 
 				int edit_linkage_id = Integer.parseInt(request.getParameter("edit_linkage_id"));
-				System.out.println("edit_link_id id is" + edit_linkage_id);
+				//System.out.println("edit_link_id id is" + edit_linkage_id);
 
 				model.addObject("title", " Edit Linkage Masters  ");
 
@@ -1353,16 +1353,16 @@ public class InstituteProfInfoController {
 						"showMasterCollaborationLinkages", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1402,7 +1402,7 @@ public class InstituteProfInfoController {
 
 					System.err.println("Multiple records delete ");
 					String[] linknameIds = request.getParameterValues("linknameIds");
-					System.out.println("id are" + "linknameIds");
+					//System.out.println("id are" + "linknameIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1470,7 +1470,7 @@ public class InstituteProfInfoController {
 						InstituteAMC[].class);
 				List<InstituteAMC> amcList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("amcList list is" + amcList.toString());
+				//System.out.println("amcList list is" + amcList.toString());
 				model.addObject("amcList", amcList);
 
 				Info add = AccessControll.checkAccess("showAMC", "showAMC", "0", "1", "0", "0", newModuleList);
@@ -1478,16 +1478,16 @@ public class InstituteProfInfoController {
 				Info delete = AccessControll.checkAccess("showAMC", "showAMC", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1560,7 +1560,7 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				int edit_amc_id = Integer.parseInt(request.getParameter("edit_amc_id"));
-				System.out.println("edit_amc_id id is" + edit_amc_id);
+				//System.out.println("edit_amc_id id is" + edit_amc_id);
 
 				model.addObject("title", " Edit Annual Maintenance(AMC)");
 
@@ -1605,7 +1605,7 @@ public class InstituteProfInfoController {
 
 					System.err.println("Multiple records delete ");
 					String[] amcIds = request.getParameterValues("amcIds");
-					System.out.println("id are" + "amcIds");
+					//System.out.println("id are" + "amcIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1648,7 +1648,7 @@ public class InstituteProfInfoController {
 			List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("insertInstituteAMC", "showAMC", "0", "1", "0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -1704,9 +1704,9 @@ public class InstituteProfInfoController {
 
 				} else {
 
-					System.out.println("in edit InstituteLinkage");
+					//System.out.println("in edit InstituteLinkage");
 
-					System.out.println("amc_id" + amc_id);
+					//System.out.println("amc_id" + amc_id);
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					map.add("amcId", amc_id);
 
@@ -1787,7 +1787,7 @@ public class InstituteProfInfoController {
 						Constants.url + "getAllInstBestPracticesByInstituteId", map, InstituteBestPractices[].class);
 				List<InstituteBestPractices> pracList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("pracList list is" + pracList.toString());
+				//System.out.println("pracList list is" + pracList.toString());
 				model.addObject("pracList", pracList);
 				for (int i = 0; i < pracList.size(); i++) {
 					pracList.get(i).setPracticesEffectiveFrom(
@@ -1803,16 +1803,16 @@ public class InstituteProfInfoController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1875,7 +1875,7 @@ public class InstituteProfInfoController {
 			Info view = AccessControll.checkAccess("insertInstituteBestPract", "showBestPractice", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -1930,9 +1930,9 @@ public class InstituteProfInfoController {
 
 				} else {
 
-					System.out.println("in edit InstituteLinkage");
+					//System.out.println("in edit InstituteLinkage");
 
-					System.out.println("prac_id" + prac_id);
+					//System.out.println("prac_id" + prac_id);
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					map.add("practicesId", prac_id);
 
@@ -1997,7 +1997,7 @@ public class InstituteProfInfoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				int edit_prac_id = Integer.parseInt(request.getParameter("edit_prac_id"));
-				System.out.println("edit_prac_id id is" + edit_prac_id);
+				//System.out.println("edit_prac_id id is" + edit_prac_id);
 
 				model.addObject("title", " Edit Best Practices");
 
@@ -2045,7 +2045,7 @@ public class InstituteProfInfoController {
 
 					System.err.println("Multiple records delete ");
 					String[] pracIds = request.getParameterValues("pracIds");
-					System.out.println("id are" + "amcIds");
+					//System.out.println("id are" + "amcIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -2115,7 +2115,7 @@ public class InstituteProfInfoController {
 					RedressedStudGrievance[] studGrievArray = rest.postForObject( Constants.url + "getAllStudGrievByInstituteIdAndAcademicYear", map, RedressedStudGrievance[].class);
 				  List<RedressedStudGrievance> studGrievlist = new ArrayList<>(Arrays.asList(studGrievArray));
 				 
-				 System.out.println("Stud Griev list="+studGrievlist);
+				 //System.out.println("Stud Griev list="+studGrievlist);
 				 model.addObject("studGrievlist", studGrievlist);
 				 
 					Info add = AccessControll.checkAccess("showRedressdeStudGrievnce", "showRedressdeStudGrievnce", "0", "1", "0", "0",
@@ -2126,16 +2126,16 @@ public class InstituteProfInfoController {
 							newModuleList);
 
 					if (add.isError() == false) {
-						System.out.println(" add   Accessable ");
+						//System.out.println(" add   Accessable ");
 						model.addObject("addAccess", 0);
 
 					}
 					if (edit.isError() == false) {
-						System.out.println(" edit   Accessable ");
+						//System.out.println(" edit   Accessable ");
 						model.addObject("editAccess", 0);
 					}
 					if (delete.isError() == false) {
-						System.out.println(" delete   Accessable ");
+						//System.out.println(" delete   Accessable ");
 						model.addObject("deleteAccess", 0);
 
 					}
@@ -2197,7 +2197,7 @@ public class InstituteProfInfoController {
 				Info view = AccessControll.checkAccess("insertStudGrievance", "showRedressdeStudGrievnce", "0", "1", "0", "0",
 						newModuleList);
 
-				System.out.println(view);
+				//System.out.println(view);
 
 				if (view.isError() == false) {
 					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -2297,7 +2297,7 @@ public class InstituteProfInfoController {
 					
 					map.add("studGrievancId", studGrievancId);
 					RedressedStudGrievance redressed = rest.postForObject(Constants.url+"/getStudGrievanceById", map, RedressedStudGrievance.class);
-					System.out.println(redressed);
+					//System.out.println(redressed);
 					model.addObject("redressed", redressed);
 				}
 
@@ -2365,7 +2365,7 @@ public class InstituteProfInfoController {
 
 						System.err.println("Multiple records delete ");
 						String[] grievanceIds = request.getParameterValues("grievanceId");
-						System.out.println("id are" + "amcIds");
+						//System.out.println("id are" + "amcIds");
 
 						StringBuilder sb = new StringBuilder();
 

@@ -148,16 +148,16 @@ public class InstituteController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -352,7 +352,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("instSchId");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -406,13 +406,13 @@ public class InstituteController {
 			List<InstituteSupport> instSuprtlist = new ArrayList<>(Arrays.asList(instSuprtArr));
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 
-			System.out.println("time in Gen Bill PDF ==" + dateFormat.format(cal.getTime()));
+			//System.out.println("time in Gen Bill PDF ==" + dateFormat.format(cal.getTime()));
 			String FILE_PATH = Constants.REPORT_SAVE;
 			File file = new File(FILE_PATH);
 
@@ -428,7 +428,7 @@ public class InstituteController {
 
 			PdfPTable table = new PdfPTable(4);
 			try {
-				System.out.println("Inside PDF Table try");
+				//System.out.println("Inside PDF Table try");
 				table.setWidthPercentage(100);
 				table.setWidths(new float[] { 2.4f, 3.4f, 3.2f, 3.2f });
 				Font headFont = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
@@ -516,7 +516,7 @@ public class InstituteController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 
@@ -541,14 +541,14 @@ public class InstituteController {
 					try {
 						FileCopyUtils.copy(inputStream, response.getOutputStream());
 					} catch (IOException e) {
-						System.out.println("Excep in Opening a Pdf File");
+						//System.out.println("Excep in Opening a Pdf File");
 						e.printStackTrace();
 					}
 				}
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -603,16 +603,16 @@ public class InstituteController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -690,7 +690,7 @@ public class InstituteController {
 			instAct.setExInt2(0);
 			instAct.setExVar1("NA");
 			instAct.setExVar2("NA");
-			System.out.println(instAct.toString());
+			//System.out.println(instAct.toString());
 			InstituteActivity saveinstActvt = rest.postForObject(Constants.url + "/addNewInstituteActity", instAct,
 					InstituteActivity.class);
 
@@ -799,7 +799,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] activityIds = request.getParameterValues("activityId");
-					System.out.println("id are" + activityIds);
+					//System.out.println("id are" + activityIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -875,16 +875,16 @@ public class InstituteController {
 						"0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1071,7 +1071,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] rightIds = request.getParameterValues("intel_rightId");
-					System.out.println("id are" + rightIds);
+					//System.out.println("id are" + rightIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1145,16 +1145,16 @@ public class InstituteController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1342,7 +1342,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] gndreqtyIds = request.getParameterValues("gndreqtyId");
-					System.out.println("id are" + gndreqtyIds);
+					//System.out.println("id are" + gndreqtyIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1416,16 +1416,16 @@ public class InstituteController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1503,13 +1503,13 @@ public class InstituteController {
 			ictEnbFac.setExInt2(0);
 			ictEnbFac.setExVar1("NA");
 			ictEnbFac.setExVar2("NA");
-			System.out.println(ictEnbFac.toString());
+			//System.out.println(ictEnbFac.toString());
 
 			IctEnabledFacilities ictEnb = rest.postForObject(Constants.url + "/saveIctEnabledFacility", ictEnbFac,
 					IctEnabledFacilities.class);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showICTEnblFaclities";
@@ -1612,7 +1612,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] ictIds = request.getParameterValues("exActId");
-					System.out.println("id are" + ictIds);
+					//System.out.println("id are" + ictIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1688,16 +1688,16 @@ public class InstituteController {
 						"0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1779,13 +1779,13 @@ public class InstituteController {
 			govt.setExInt2(0);
 			govt.setExVar1("NA");
 			govt.setExVar2("NA");
-			System.out.println(govt.toString());
+			//System.out.println(govt.toString());
 
 			GovtScholarships ictEnb = rest.postForObject(Constants.url + "/saveGovtScheme", govt,
 					GovtScholarships.class);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showGovernmentScholarships";
@@ -1888,7 +1888,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] govtSchmIds = request.getParameterValues("suppSchmid");
-					System.out.println("id are" + govtSchmIds);
+					//System.out.println("id are" + govtSchmIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1965,16 +1965,16 @@ public class InstituteController {
 						"showActCondctPromotUnivrslValus", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2077,7 +2077,7 @@ public class InstituteController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(actId);
+				//System.out.println(actId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("actId", actId);
@@ -2152,7 +2152,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] activityIds = request.getParameterValues("activityId");
-					System.out.println("id are" + activityIds);
+					//System.out.println("id are" + activityIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -2229,16 +2229,16 @@ public class InstituteController {
 						"showSpecficInitiativeforLocAdvDisadv", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2345,7 +2345,7 @@ public class InstituteController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(inItId);
+				//System.out.println(inItId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("inItId", inItId);
@@ -2420,7 +2420,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] initAdvIds = request.getParameterValues("initAdvId");
-					System.out.println("id are" + initAdvIds);
+					//System.out.println("id are" + initAdvIds);
 
 					StringBuilder sb = new StringBuilder();
 

@@ -295,7 +295,7 @@ public class AlumniTrainingController {
 					alumni.setProgramId(1);
 					int yearId = (int) session.getAttribute("acYearId");
 					alumni.setYearId(yearId);
-					System.out.println(alumni.toString());
+				//	//System.out.println(alumni.toString());
 					AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
 							AlumniDetail.class);
 
@@ -431,7 +431,7 @@ public class AlumniTrainingController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("instIds");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -682,7 +682,7 @@ public class AlumniTrainingController {
 					int yearId = (int) session.getAttribute("acYearId");
 					trainPlace.setYearId(yearId);
 
-					System.out.println("Placements:" + trainPlace.toString());
+					//System.out.println("Placements:" + trainPlace.toString());
 
 					TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
 							trainPlace, TrainPlacement.class);
@@ -847,7 +847,7 @@ public class AlumniTrainingController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("placementId");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1199,7 +1199,7 @@ public class AlumniTrainingController {
 
 					// System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("educationDetailId");
-					// System.out.println("id are" + instIds);
+					// //System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1385,7 +1385,7 @@ public class AlumniTrainingController {
 					AlumniAssocAct.class);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -1487,7 +1487,7 @@ public class AlumniTrainingController {
 
 					System.err.println("Multiple records delete ");
 					String[] alumnis = request.getParameterValues("alumni");
-					System.out.println("id are" + alumnis);
+					//System.out.println("id are" + alumnis);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1567,8 +1567,7 @@ public class AlumniTrainingController {
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
 				map.add("yearId", session.getAttribute("acYearId"));
-				System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " "
-						+ session.getAttribute("acYearId"));
+				//System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " " + session.getAttribute("acYearId"));
 
 				NewCourseInfoList[] courseArr = restTemplate.postForObject(Constants.url + "getAllNewCourseList", map,
 						NewCourseInfoList[].class);
@@ -1679,7 +1678,7 @@ public class AlumniTrainingController {
 			course.setExInt2(0);
 			course.setExVar1("NA");
 			course.setExVar2("NA");
-			System.out.println("Course=" + course.toString());
+			//System.out.println("Course=" + course.toString());
 
 			NewCourseInfo saveCourse = rest.postForObject(Constants.url + "/saveNewCourseInfo", course,
 					NewCourseInfo.class);
@@ -1920,7 +1919,7 @@ public class AlumniTrainingController {
 			course.setExInt2(0);
 			course.setExVar1("NA");
 			course.setExVar2("NA");
-			System.out.println("Course=" + course.toString());
+			//System.out.println("Course=" + course.toString());
 
 			ValueAddedCourses saveValAddCourse = rest.postForObject(Constants.url + "/saveValueAddedCourse", course,
 					ValueAddedCourses.class);
@@ -2152,7 +2151,7 @@ public class AlumniTrainingController {
 			field.setExInt2(0);
 			field.setExVar1("NA");
 			field.setExVar2("NA");
-			System.out.println("field=" + field.toString());
+			//System.out.println("field=" + field.toString());
 
 			FieldProjectsIntern saveValAddCourse = rest.postForObject(Constants.url + "/saveFieldProjectsIntern", field,
 					FieldProjectsIntern.class);
@@ -2287,13 +2286,13 @@ public class AlumniTrainingController {
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
 				map.add("yearId", session.getAttribute("acYearId"));
-				System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " "
-						+ session.getAttribute("acYearId"));
+				//System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " "
+					//	+ session.getAttribute("acYearId"));
 
 				DifrentlyAbledStudList[] difStudArr = restTemplate.postForObject(Constants.url + "getAllDifferentlyDisableStudentsList", map,
 						DifrentlyAbledStudList[].class);
 				List<DifrentlyAbledStudList> difStudList = new ArrayList<>(Arrays.asList(difStudArr));
-				System.out.println("difStudList " + difStudList.toString());
+				//System.out.println("difStudList " + difStudList.toString());
 
 				model.addObject("difStudList", difStudList);
 			} else {
@@ -2393,7 +2392,7 @@ public class AlumniTrainingController {
 			stud.setExInt2(0);
 			stud.setExVar1("NA");
 			stud.setExVar2("NA");
-			System.out.println("stud=" + stud.toString());
+			//System.out.println("stud=" + stud.toString());
 
 			DifrentlyAbledStud saveValAddCourse = rest.postForObject(Constants.url + "/saveDifferentlyDisabledStudent", stud,
 					DifrentlyAbledStud.class);

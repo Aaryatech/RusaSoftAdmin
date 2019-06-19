@@ -75,7 +75,7 @@ public class ResearchAndInnovation {
 						
 			MExtActList[] neighbourArr =  rest.postForObject(Constants.url+"/getAllExtActivities", map, MExtActList[].class);
 			List<MExtActList> mExtActList = new ArrayList<>(Arrays.asList(neighbourArr));
-			//System.out.println("Lists="+mExtActList);
+			////System.out.println("Lists="+mExtActList);
 			
 			model.addObject("mExtActList", mExtActList);
 			model.addObject("title", "Extension Activity");
@@ -88,16 +88,16 @@ public class ResearchAndInnovation {
 					"1", newModuleList);
 
 			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
+				//System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}
 			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
+				//System.out.println(" edit   Accessable ");
 				model.addObject("editAccess", 0);
 			}
 			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
+				//System.out.println(" delete   Accessable ");
 				model.addObject("deleteAccess", 0);
 
 			}
@@ -136,7 +136,7 @@ public class ResearchAndInnovation {
 					model = new ModelAndView("resrch&innovatn/addExtensionActivity");
 					MExtensionActivity[] mExtArr = rest.getForObject(Constants.url+"/getAllExtensionActivities", MExtensionActivity[].class);
 					List<MExtensionActivity> mExtList = new ArrayList<>(Arrays.asList(mExtArr));
-					System.out.println("List="+mExtList);
+					//System.out.println("List="+mExtList);
 					model.addObject("mExtList", mExtList);
 					
 					model.addObject("tExtAct", tExtAct);
@@ -189,13 +189,13 @@ public class ResearchAndInnovation {
 			tExtAct.setExVar1("NA");
 			tExtAct.setExInt2(0);
 			tExtAct.setExVar2("NA");
-			System.out.println(tExtAct.toString());
+			//System.out.println(tExtAct.toString());
 			
 			TExtensionActivity saveExtActivity = rest.postForObject(Constants.url+"/saveExtActivity", tExtAct, TExtensionActivity.class);
 			
 			
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -229,7 +229,7 @@ public class ResearchAndInnovation {
 				
 				MExtensionActivity[] mExtArr = rest.getForObject(Constants.url+"/getAllExtensionActivities", MExtensionActivity[].class);
 				List<MExtensionActivity> mExtList = new ArrayList<>(Arrays.asList(mExtArr));
-				System.out.println("List="+mExtList);
+				//System.out.println("List="+mExtList);
 				model.addObject("mExtList", mExtList);
 
 				model.addObject("title", "Edit Extension Activity");
@@ -302,7 +302,7 @@ public class ResearchAndInnovation {
 
 					System.err.println("Multiple records delete ");
 					String[] exActIds = request.getParameterValues("exActId");
-					System.out.println("id are" + exActIds);
+					//System.out.println("id are" + exActIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -354,12 +354,12 @@ public class ResearchAndInnovation {
 		} else {
 			model = new ModelAndView("resrch&innovatn/showInstResrchDevMous");
 			map = new LinkedMultiValueMap<String, Object>();
-			System.out.println("Inst="+instituteId);
+			//System.out.println("Inst="+instituteId);
 			map.add("instituteId", instituteId);
 						
 			InstResearchDevMous[] rsrchMouArr =  rest.postForObject(Constants.url+"/getAllRsrchDevMous", map, InstResearchDevMous[].class);
 			List<InstResearchDevMous> rsrchMouList = new ArrayList<>(Arrays.asList(rsrchMouArr));
-			System.out.println("Lists="+rsrchMouList);
+			//System.out.println("Lists="+rsrchMouList);
 			
 			model.addObject("rsrchMouList", rsrchMouList);
 			model.addObject("title", "Institute Research Development MoUs");
@@ -372,16 +372,16 @@ public class ResearchAndInnovation {
 					"1", newModuleList);
 
 			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
+				//System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}
 			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
+				//System.out.println(" edit   Accessable ");
 				model.addObject("editAccess", 0);
 			}
 			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
+				//System.out.println(" delete   Accessable ");
 				model.addObject("deleteAccess", 0);
 
 			}
@@ -420,7 +420,7 @@ public class ResearchAndInnovation {
 					model = new ModelAndView("resrch&innovatn/addInstResrchDevMous");
 					ResearchDevMou[] mouArr = rest.getForObject(Constants.url+"/getAllRsrchDevMous", ResearchDevMou[].class);
 					List<ResearchDevMou> mouList = new ArrayList<>(Arrays.asList(mouArr));
-					System.out.println("List="+mouList);
+					//System.out.println("List="+mouList);
 					model.addObject("mouList", mouList);
 					
 					model.addObject("tMous", tMous);
@@ -476,13 +476,13 @@ public class ResearchAndInnovation {
 			tMous.setExInt2(0);
 			tMous.setExVar1("NA");
 			tMous.setExVar2("NA");
-			System.out.println(tMous.toString());
+			//System.out.println(tMous.toString());
 		
 			InstResearchDevMous mou = rest.postForObject(Constants.url+"/savResrchDevMou", tMous, InstResearchDevMous.class);
 				
 			
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -518,7 +518,7 @@ public class ResearchAndInnovation {
 				
 				ResearchDevMou[] mouArr = rest.getForObject(Constants.url+"/getAllRsrchDevMous", ResearchDevMou[].class);
 				List<ResearchDevMou> mouList = new ArrayList<>(Arrays.asList(mouArr));
-				System.out.println("List="+mouList);
+				//System.out.println("List="+mouList);
 				model.addObject("mouList", mouList);
 
 				model.addObject("title", "Edit Institute Research Development MoUs");
@@ -591,7 +591,7 @@ public class ResearchAndInnovation {
 
 					System.err.println("Multiple records delete ");
 					String[] mouRsrchDevIds = request.getParameterValues("mouIds");
-					System.out.println("id are" + mouRsrchDevIds);
+					//System.out.println("id are" + mouRsrchDevIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -649,7 +649,7 @@ public class ResearchAndInnovation {
 			
 			TFacultyStudLinkage[] studFacLinkArr =  rest.postForObject(Constants.url+"/showStudFacLinks", map, TFacultyStudLinkage[].class);
 			List<TFacultyStudLinkage> linkageList = new ArrayList<>(Arrays.asList(studFacLinkArr));
-			System.out.println("Links="+linkageList);
+			//System.out.println("Links="+linkageList);
 			
 			model.addObject("linkageList", linkageList);
 			model.addObject("title", "Faculty/Student Linkages");
@@ -662,16 +662,16 @@ public class ResearchAndInnovation {
 					"1", newModuleList);
 
 			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
+				//System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}
 			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
+				//System.out.println(" edit   Accessable ");
 				model.addObject("editAccess", 0);
 			}
 			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
+				//System.out.println(" delete   Accessable ");
 				model.addObject("deleteAccess", 0);
 
 			}
@@ -754,12 +754,12 @@ public class ResearchAndInnovation {
 		linkage.setExVar1("NA");
 		linkage.setExVar2("NA");
 		
-		System.out.println(linkage.toString());
+		//System.out.println(linkage.toString());
 		
 		TFacultyStudLinkage addLinkage = rest.postForObject(Constants.url+"/newstudFacLink", linkage, TFacultyStudLinkage.class);
 		
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 			
 		}
@@ -770,7 +770,7 @@ public class ResearchAndInnovation {
 	@RequestMapping(value = "/editLinkage/{linkId}", method = RequestMethod.GET)
 	public ModelAndView editLinkage(@PathVariable("linkId") int linkId, HttpServletRequest request) {
 
-		// System.out.println("Id:" + iqacId);
+		// //System.out.println("Id:" + iqacId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -860,7 +860,7 @@ public class ResearchAndInnovation {
 
 					System.err.println("Multiple records delete ");
 					String[] linkageIds = request.getParameterValues("linkageId");
-					System.out.println("id are" + linkageIds);
+					//System.out.println("id are" + linkageIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -919,7 +919,7 @@ public class ResearchAndInnovation {
 			
 			TNeighbourhoodCommActivities[] neighbourArr =  rest.postForObject(Constants.url+"/showNeighbourCommActivities", map, TNeighbourhoodCommActivities[].class);
 			List<TNeighbourhoodCommActivities> neighbrCommActList = new ArrayList<>(Arrays.asList(neighbourArr));
-			System.out.println("Links="+neighbrCommActList);
+			//System.out.println("Links="+neighbrCommActList);
 			
 			model.addObject("neighbrCommActList", neighbrCommActList);
 			model.addObject("title", "Neighbourhood Community Activity");
@@ -932,16 +932,16 @@ public class ResearchAndInnovation {
 					"1", newModuleList);
 
 			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
+				//System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}
 			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
+				//System.out.println(" edit   Accessable ");
 				model.addObject("editAccess", 0);
 			}
 			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
+				//System.out.println(" delete   Accessable ");
 				model.addObject("deleteAccess", 0);
 
 			}
@@ -1023,14 +1023,14 @@ public class ResearchAndInnovation {
 				neighbourCommAct.setExVar1("NA");
 				neighbourCommAct.setExVar2("NA");
 				
-				System.out.println(neighbourCommAct.toString());
+				//System.out.println(neighbourCommAct.toString());
 				
 				TNeighbourhoodCommActivities commAct = rest.postForObject(Constants.url+"/saveNeighbourhoodCommAct", 
 				neighbourCommAct, TNeighbourhoodCommActivities.class);
 				
 				
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showNeighbourhoodCommActivities";
@@ -1041,7 +1041,7 @@ public class ResearchAndInnovation {
 	@RequestMapping(value = "/editNeighbCommActivity/{neighbCommActId}", method = RequestMethod.GET)
 	public ModelAndView editNeighbCommActivity(@PathVariable("neighbCommActId") int neighbCommActId, HttpServletRequest request) {
 
-		// System.out.println("Id:" + iqacId);
+		// //System.out.println("Id:" + iqacId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -1130,7 +1130,7 @@ public class ResearchAndInnovation {
 
 					System.err.println("Multiple records delete ");
 					String[] actIds = request.getParameterValues("actId");
-					System.out.println("id are" + actIds);
+					//System.out.println("id are" + actIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1189,7 +1189,7 @@ public class ResearchAndInnovation {
 			
 			AwrdRecgAgnstExtActivity[] awrdRecgArr =  rest.postForObject(Constants.url+"/showAwrdRecgExtAct", map, AwrdRecgAgnstExtActivity[].class);
 			List<AwrdRecgAgnstExtActivity> awrdRecg = new ArrayList<>(Arrays.asList(awrdRecgArr));
-			System.out.println("Links="+awrdRecg);
+			//System.out.println("Links="+awrdRecg);
 			
 			model.addObject("awrdRecg", awrdRecg);
 			model.addObject("title", "Award Recognition  against Extension Activity");
@@ -1202,16 +1202,16 @@ public class ResearchAndInnovation {
 					"1", newModuleList);
 
 			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
+				//System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}
 			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
+				//System.out.println(" edit   Accessable ");
 				model.addObject("editAccess", 0);
 			}
 			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
+				//System.out.println(" delete   Accessable ");
 				model.addObject("deleteAccess", 0);
 
 			}
@@ -1296,13 +1296,13 @@ public class ResearchAndInnovation {
 				soft.setExVar1("NA");
 				soft.setExVar2("NA");
 			
-				System.out.println(soft.toString());
+				//System.out.println(soft.toString());
 				
 				AwrdRecgAgnstExtActivity awrd = rest.postForObject(Constants.url+"/saveAwrdRecgAgnstExtAct",soft,AwrdRecgAgnstExtActivity.class);
 				
 				
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/awrdRecogAgnstExtAct";
@@ -1399,7 +1399,7 @@ public class ResearchAndInnovation {
 
 					System.err.println("Multiple records delete ");
 					String[] exActIds = request.getParameterValues("exActId");
-					System.out.println("id are" + exActIds);
+					//System.out.println("id are" + exActIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1457,7 +1457,7 @@ public class ResearchAndInnovation {
 			
 			PlagiarismCodeEthics[] plagArr =  rest.postForObject(Constants.url+"/getAllPlagiarismEcthcCodList", map, PlagiarismCodeEthics[].class);
 			List<PlagiarismCodeEthics> plagrismList = new ArrayList<>(Arrays.asList(plagArr));
-			System.out.println("Links="+plagrismList);
+			//System.out.println("Links="+plagrismList);
 			
 			model.addObject("plagrismList", plagrismList);
 			model.addObject("title", "Plagiarism & Code of Ethics");
@@ -1470,16 +1470,16 @@ public class ResearchAndInnovation {
 					"1", newModuleList);
 
 			if (add.isError() == false) {
-				System.out.println(" add   Accessable ");
+				//System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}
 			if (edit.isError() == false) {
-				System.out.println(" edit   Accessable ");
+				//System.out.println(" edit   Accessable ");
 				model.addObject("editAccess", 0);
 			}
 			if (delete.isError() == false) {
-				System.out.println(" delete   Accessable ");
+				//System.out.println(" delete   Accessable ");
 				model.addObject("deleteAccess", 0);
 
 			}
@@ -1558,13 +1558,13 @@ public class ResearchAndInnovation {
 				soft.setExVar1("NA");
 				soft.setExVar2("NA");
 			
-				System.out.println(soft.toString());
+				//System.out.println(soft.toString());
 				
 				PlagiarismCodeEthics awrd = rest.postForObject(Constants.url+"/savePlagCodeEthic",soft,PlagiarismCodeEthics.class);
 				
 				
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showPlagiarismCodeEthics";
@@ -1575,7 +1575,7 @@ public class ResearchAndInnovation {
 	@RequestMapping(value = "/editPlagrismEthicsCode/{plagId}", method = RequestMethod.GET)
 	public ModelAndView editPlagrismEthicsCode(@PathVariable("plagId") int plagId, HttpServletRequest request) {
 
-		// System.out.println("Id:" + iqacId);
+		// //System.out.println("Id:" + iqacId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -1664,7 +1664,7 @@ public class ResearchAndInnovation {
 
 					System.err.println("Multiple records delete ");
 					String[] plagEthCodId = request.getParameterValues("plagIds");
-					System.out.println("id are" + plagIds);
+					//System.out.println("id are" + plagIds);
 
 					StringBuilder sb = new StringBuilder();
 

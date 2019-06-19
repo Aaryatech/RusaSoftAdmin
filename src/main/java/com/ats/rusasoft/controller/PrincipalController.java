@@ -206,9 +206,9 @@ public class PrincipalController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + facultyId);
+			//System.out.println("Data:" + facultyId);
 			String facultyName = request.getParameter("facultyName");
-			System.out.println("facultyName:" + facultyName);
+			//System.out.println("facultyName:" + facultyName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
@@ -338,7 +338,7 @@ public class PrincipalController {
 			int valueType = Integer.parseInt(request.getParameter("valueType"));
 			int instituteId = (int) session.getAttribute("instituteId");
 
-			System.out.println("Values:" + inputValue + " " + valueType + " ");
+			//System.out.println("Values:" + inputValue + " " + valueType + " ");
 
 			map.add("inputValue", inputValue);
 			map.add("checkValue", valueType);

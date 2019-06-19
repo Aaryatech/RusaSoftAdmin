@@ -85,16 +85,16 @@ public class InstituteDistController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -160,7 +160,7 @@ public class InstituteDistController {
 			Info view = AccessControll.checkAccess("showAddProgDistinctive", "showProgDistinctive", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -251,7 +251,7 @@ public class InstituteDistController {
 
 				Disctinctveness editDist = rest.postForObject(Constants.url + "/getDistByDistId", map,
 						Disctinctveness.class);
-				System.out.println("distId:" + distId);
+				//System.out.println("distId:" + distId);
 
 				model.addObject("editDist", editDist);
 
@@ -332,16 +332,16 @@ public class InstituteDistController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -411,7 +411,7 @@ public class InstituteDistController {
 			Info view = AccessControll.checkAccess("showAddHumanValues", "showHumanValues", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -504,7 +504,7 @@ public class InstituteDistController {
 
 				HumanValues editValue = rest.postForObject(Constants.url + "/getHumanValuesByValueId", map,
 						HumanValues.class);
-				System.out.println("valueId:" + valueId);
+				//System.out.println("valueId:" + valueId);
 
 				model.addObject("editValue", editValue);
 
@@ -583,16 +583,16 @@ public class InstituteDistController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -657,7 +657,7 @@ public class InstituteDistController {
 			Info view = AccessControll.checkAccess("showAddResearchCenter", "showResearchCenter", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -754,7 +754,7 @@ public class InstituteDistController {
 
 				ResearchCenter editValue = rest.postForObject(Constants.url + "/getResearchCenterByRcId", map,
 						ResearchCenter.class);
-				System.out.println("rcId:" + rcId);
+				//System.out.println("rcId:" + rcId);
 
 				model.addObject("editValue", editValue);
 
@@ -840,7 +840,7 @@ public class InstituteDistController {
 			Info view = AccessControll.checkAccess("showValuesMaster", "showValuesMaster", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -915,7 +915,7 @@ public class InstituteDistController {
 
 				ValuesMaster editValue = rest.postForObject(Constants.url + "/getValuesMasterByValId", map,
 						ValuesMaster.class);
-				System.out.println("valMastId:" + valMastId);
+				//System.out.println("valMastId:" + valMastId);
 
 				model.addObject("editValue", editValue);
 

@@ -108,16 +108,16 @@ public class LibraryController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -160,7 +160,7 @@ public class LibraryController {
 				map.add("acadYear", acadYear);
 								
 				 libInfo = rest.postForObject(Constants.url + "/getlibBasicInfo", map, LibraryInfo.class);
-				 System.out.println("libInfo="+libInfo);
+				 //System.out.println("libInfo="+libInfo);
 				
 				
 				
@@ -342,7 +342,7 @@ public class LibraryController {
 
 					System.err.println("Multiple records delete ");
 					String[] libIds = request.getParameterValues("libId");
-					System.out.println("id are" + libIds);
+					//System.out.println("id are" + libIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -444,16 +444,16 @@ public class LibraryController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -601,7 +601,7 @@ public class LibraryController {
 
 					System.err.println("Multiple records delete ");
 					String[] rareBookIds = request.getParameterValues("rareBookId");
-					System.out.println("id are" + rareBookIds);
+					//System.out.println("id are" + rareBookIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -673,16 +673,16 @@ public class LibraryController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -760,13 +760,13 @@ public class LibraryController {
 			lib.setDelStatus(1);
 			lib.setExVar1("NA");
 			lib.setExInt1(0);
-			System.out.println(lib.toString());
+			//System.out.println(lib.toString());
 			
 			LibBookPurchase libBook = rest.postForObject(Constants.url+"/newLibBookPurchase", lib, LibBookPurchase.class);
 			
 		/*}catch(Exception e){
 			e.printStackTrace();
-			System.out.println();
+			//System.out.println();
 		}*/
 		return "redirect:/showlibBookPurchased";
 	}
@@ -867,7 +867,7 @@ public class LibraryController {
 
 					System.err.println("Multiple records delete ");
 					String[] libBookIds = request.getParameterValues("libBookId");
-					System.out.println("id are" + libBookIds);
+					//System.out.println("id are" + libBookIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1010,7 +1010,7 @@ public class LibraryController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(" showLibList Accessable ");
+				//System.out.println(" showLibList Accessable ");
 
 				model = new ModelAndView("master/libList");
 
@@ -1025,7 +1025,7 @@ public class LibraryController {
 						NewDeanList[].class);
 				List<NewDeanList> libtList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("lib list is" + libtList.toString());
+				//System.out.println("lib list is" + libtList.toString());
 
 				model.addObject("libtList", libtList);
 				model.addObject("listMapping", "showLibList");
@@ -1036,16 +1036,16 @@ public class LibraryController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1178,7 +1178,7 @@ public class LibraryController {
 			int designation = 0;
 
 			String libName = request.getParameter("libName");
-			System.out.println("Data:" + libName);
+			//System.out.println("Data:" + libName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
@@ -1335,7 +1335,7 @@ public class LibraryController {
 				map.add("id", facultyId);
 
 				Staff editFaculty = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("facultyId:" + facultyId);
+				//System.out.println("facultyId:" + facultyId);
 
 				model.addObject("editFaculty", editFaculty);
 				model.addObject("addEdit", "1");
@@ -1377,7 +1377,7 @@ public class LibraryController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("hodIds");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1431,14 +1431,14 @@ public class LibraryController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(" showStudList Accessable ");
+				//System.out.println(" showStudList Accessable ");
 
 				model = new ModelAndView("master/studList");
 
 				model.addObject("title", "Specific Student Information");
 
 				int inst_id = (int) session.getAttribute("instituteId");
-				System.out.println("Student list inst id::::" + inst_id);
+				//System.out.println("Student list inst id::::" + inst_id);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", inst_id);
@@ -1447,7 +1447,7 @@ public class LibraryController {
 						GetStudentDetail[].class);
 				List<GetStudentDetail> StudList = new ArrayList<>(Arrays.asList(instArray));
 
-				System.out.println("Student list is" + StudList.toString());
+				//System.out.println("Student list is" + StudList.toString());
 
 				model.addObject("StudList", StudList);
 
@@ -1459,16 +1459,16 @@ public class LibraryController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1579,7 +1579,7 @@ public class LibraryController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				int student_id = Integer.parseInt(request.getParameter("student_id"));
-				System.out.println("student_id" + "student_id");
+				//System.out.println("student_id" + "student_id");
 
 				String student_name = request.getParameter("student_name");
 				String academic_year = request.getParameter("academic_year");
@@ -1602,7 +1602,7 @@ public class LibraryController {
 
 				if (student_id == 0) {
 
-					System.out.println("inst id is" + inst_id);
+					//System.out.println("inst id is" + inst_id);
 
 					lib.setStudentName(student_name);
 					lib.setAcadamicYear(academic_year);
@@ -1625,7 +1625,7 @@ public class LibraryController {
 
 				} else {
 
-					System.out.println("in edit");
+					//System.out.println("in edit");
 
 					map.add("studId", student_id);
 					Student lib1 = rest.postForObject(Constants.url + "getStudentByStudentId", map, Student.class);
@@ -1682,14 +1682,14 @@ public class LibraryController {
 				model = new ModelAndView("master/studReg");
 
 				int student_id = Integer.parseInt(request.getParameter("edit_stud_id"));
-				System.out.println("Student id is" + student_id);
+				//System.out.println("Student id is" + student_id);
 
 				model.addObject("title", " Edit Specific Student Information");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				map.add("studId", student_id);
 				Student editStudent = rest.postForObject(Constants.url + "getStudentByStudentId", map, Student.class);
-				System.out.println("librarian is" + editStudent.toString());
+				//System.out.println("librarian is" + editStudent.toString());
 
 				model.addObject("editStudent", editStudent);
 				model.addObject("student_id", student_id);
@@ -1748,7 +1748,7 @@ public class LibraryController {
 
 					System.err.println("Multiple records delete ");
 					String[] studIds = request.getParameterValues("studIds");
-					System.out.println("id are" + studIds);
+					//System.out.println("id are" + studIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1759,7 +1759,7 @@ public class LibraryController {
 
 					String studIdList = sb.toString();
 					studIdList = studIdList.substring(0, studIdList.length() - 1);
-					System.out.println("stud id list" + studIdList);
+					//System.out.println("stud id list" + studIdList);
 
 					map.add("studIdList", studIdList);
 				} else {
@@ -1804,7 +1804,7 @@ public class LibraryController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				System.out.println(" showStudList Accessable ");
+				//System.out.println(" showStudList Accessable ");
 
 				model = new ModelAndView("master/instituteInfo");
 
@@ -1812,7 +1812,7 @@ public class LibraryController {
 
 				int inst_id = (int) session.getAttribute("instituteId");
 				int acad_year = (int) session.getAttribute("acYearId");
-				System.out.println("Student list inst id and year::::" + inst_id + " " + acad_year);
+				//System.out.println("Student list inst id and year::::" + inst_id + " " + acad_year);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", inst_id);
@@ -1833,16 +1833,16 @@ public class LibraryController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1932,7 +1932,7 @@ public class LibraryController {
 				model = new ModelAndView("master/iqaclogin");
 
 				int edit_inst_id = Integer.parseInt(request.getParameter("edit_inst_id"));
-				System.out.println("Student id is" + edit_inst_id);
+				//System.out.println("Student id is" + edit_inst_id);
 
 				model.addObject("title", " Edit Institute Information  ");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -1940,7 +1940,7 @@ public class LibraryController {
 				map.add("infoDetailId", edit_inst_id);
 				InstituteInfo editInst = rest.postForObject(Constants.url + "getInstituteInfoByInfoDetailId", map,
 						InstituteInfo.class);
-				System.out.println("editInst is" + editInst.toString());
+				//System.out.println("editInst is" + editInst.toString());
 
 				model.addObject("editInstInfo", editInst);
 				model.addObject("student_id", edit_inst_id);
@@ -2025,7 +2025,7 @@ public class LibraryController {
 
 				if (inst_info_id.isEmpty() == true) {
 
-					System.out.println("inst id is" + inst_id);
+					//System.out.println("inst id is" + inst_id);
 					InstituteInfo lib = new InstituteInfo();
 
 					lib.setYearId(academic_year);
@@ -2051,9 +2051,9 @@ public class LibraryController {
 
 				} else {
 
-					System.out.println("in edit InstituteInfo");
+					//System.out.println("in edit InstituteInfo");
 
-					System.out.println("inst_info_id" + inst_info_id);
+					//System.out.println("inst_info_id" + inst_info_id);
 
 					map.add("infoDetailId", inst_info_id);
 					InstituteInfo lib1 = rest.postForObject(Constants.url + "getInstituteInfoByInfoDetailId", map,
@@ -2118,7 +2118,7 @@ public class LibraryController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("instIds");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 

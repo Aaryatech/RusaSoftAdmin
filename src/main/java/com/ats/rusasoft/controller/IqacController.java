@@ -70,8 +70,8 @@ public class IqacController {
 			int isEdit = Integer.parseInt(request.getParameter("isEdit"));
 			int tableId = Integer.parseInt(request.getParameter("tableId"));
 
-			System.out.println(
-					"Values:" + inputValue + " " + valueType + " " + primaryKey + " " + isEdit + " " + tableId);
+			//System.out.println(
+				//	"Values:" + inputValue + " " + valueType + " " + primaryKey + " " + isEdit + " " + tableId);
 
 			map.add("inputValue", inputValue);
 			map.add("valueType", valueType);
@@ -167,7 +167,7 @@ public class IqacController {
 
 			int userId = (int) session.getAttribute("userId");
 
-			// System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+"
+			// //System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+"
 			// "+instituteId+" "+userObj.getGetData().getUserInstituteId());
 			int iqacId = Integer.parseInt(request.getParameter("iqac_id"));
 
@@ -238,15 +238,15 @@ public class IqacController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + iqacId);
+			//System.out.println("Data:" + iqacId);
 			String iqacName = request.getParameter("iqacName");
-			System.out.println("Data:" + iqacName);
+			//System.out.println("Data:" + iqacName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
 			String email = request.getParameter("email");
 
-			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
 			// + contact + " " + email);
 			// MIqac miqac = new MIqac();
 			/*
@@ -378,7 +378,7 @@ public class IqacController {
 				 */
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				System.out.println("Princi" + userObj.getStaff().getIsPrincipal());
+				//System.out.println("Princi" + userObj.getStaff().getIsPrincipal());
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				
 				map.add("instituteId", userObj.getStaff().getInstituteId());
@@ -389,7 +389,7 @@ public class IqacController {
 
 				IqacList[] iqacArr = rest.postForObject(Constants.url + "/getAllIqac", map, IqacList[].class);
 				List<IqacList> qacList = new ArrayList<>(Arrays.asList( iqacArr));
-				// System.out.println("IQACLIST" + userObj.getStaff().getIsPrincipal());
+				// //System.out.println("IQACLIST" + userObj.getStaff().getIsPrincipal());
 
 				model.addObject("QList", qacList);
 				model.addObject("title", "IQAC Registration");
@@ -405,16 +405,16 @@ public class IqacController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					// System.out.println(" add Accessable ");
+					// //System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					// System.out.println(" edit Accessable ");
+					// //System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					// System.out.println(" delete Accessable ");
+					// //System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -434,7 +434,7 @@ public class IqacController {
 	@RequestMapping(value = "/editIqac/{iqacId}", method = RequestMethod.GET)
 	public ModelAndView editIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request) {
 
-		// System.out.println("Id:" + iqacId);
+		// //System.out.println("Id:" + iqacId);
 		MultiValueMap<String, Object> map = null;
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -514,7 +514,7 @@ public class IqacController {
 
 			} else {
 				Info inf = new Info();
-				// System.out.println("Id:" + iqacId);
+				// //System.out.println("Id:" + iqacId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", iqacId);
@@ -627,7 +627,7 @@ public class IqacController {
 			String contact = request.getParameter("contactNo");
 			String email = request.getParameter("email");
 
-			System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " " + contact + " " + email);
+			//System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " " + contact + " " + email);
 			MIqac miqac = new MIqac();
 			if (iqacId == 0) {
 				miqac.setIqacId(0);
@@ -947,7 +947,7 @@ public class IqacController {
 			staff.setExtraint1(0);
 			staff.setExtravarchar1("NA");
 
-			System.out.println("Staff:" + staff.toString());
+			//System.out.println("Staff:" + staff.toString());
 
 			Staff stf = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 			}
@@ -1024,7 +1024,7 @@ public class IqacController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-				System.out.println("User="+userObj.getStaff().getIsHod());
+				//System.out.println("User="+userObj.getStaff().getIsHod());
 				int yId = (int) session.getAttribute("acYearId");
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("yearId", yId);
@@ -1040,7 +1040,7 @@ public class IqacController {
 
 				StaffList[] staff = rest.postForObject(Constants.url + "/getListStaff", map, StaffList[].class);
 				List<StaffList> staffList = new ArrayList<>(Arrays.asList(staff));
-				System.out.println("Staff List:" + staffList);
+				//System.out.println("Staff List:" + staffList);
 
 				model.addObject("staffList", staffList);
 				model.addObject("listMapping", "showStaffList");
@@ -1090,16 +1090,16 @@ public class IqacController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1120,7 +1120,7 @@ public class IqacController {
 	@RequestMapping(value = "/editFaculity/{facultyId}", method = RequestMethod.GET)
 	public ModelAndView editFaculity(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
 
-		System.out.println("Id:" + facultyId);
+		//System.out.println("Id:" + facultyId);
 		MultiValueMap<String, Object> map = null;
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -1178,7 +1178,7 @@ public class IqacController {
 
 				map.add("id", facultyId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("staff" + staff);
+				//System.out.println("staff" + staff);
 
 				model.addObject("title", "Edit Faculty");
 				model.addObject("addEdit", "1");
@@ -1212,7 +1212,7 @@ public class IqacController {
 			} else {
 
 				Info inf = new Info();
-				System.out.println("Id:" + facultyId);
+				//System.out.println("Id:" + facultyId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", facultyId);
@@ -1252,7 +1252,7 @@ public class IqacController {
 
 					System.err.println("Multiple records delete ");
 					String[] staffIds = request.getParameterValues("staffIds");
-					System.out.println("id are" + staffIds);
+					//System.out.println("id are" + staffIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1363,7 +1363,7 @@ public class IqacController {
 
 			int userId = (int) session.getAttribute("userId");
 
-			// System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+"
+			// //System.out.println("IdSS:" + userObj.getUserId()+" "+userId+" / "+"
 			// "+instituteId+" "+userObj.getGetData().getUserInstituteId());
 			int deanId = Integer.parseInt(request.getParameter("dean_id"));
 
@@ -1442,16 +1442,16 @@ public class IqacController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + deanId);  
+			//System.out.println("Data:" + deanId);  
 			String deanName = request.getParameter("dean_name");
-			System.out.println("Data:" + deanName);
+			//System.out.println("Data:" + deanName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("join_date");
 			String dateOfRel = request.getParameter("acc_off_relDate");
 			String contact = request.getParameter("contact_no");
 			String email = request.getParameter("email");
 
-			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
 			// + contact + " " + email);
 			// MIqac miqac = new MIqac();
 			/*
@@ -1641,7 +1641,7 @@ public class IqacController {
 
 				NewDeanList[] deans = rest.postForObject(Constants.url + "/getListDean",map, NewDeanList[].class);
 				List<NewDeanList> deanList = new ArrayList<>(Arrays.asList(deans));
-				System.out.println("Dean List:" + deanList);
+				//System.out.println("Dean List:" + deanList);
 
 				model.addObject("deanList", deanList);
 				model.addObject("listMapping", "showDeanList");
@@ -1654,16 +1654,16 @@ public class IqacController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1683,7 +1683,7 @@ public class IqacController {
 	@RequestMapping(value = "/editDean/{deanId}", method = RequestMethod.GET)
 	public ModelAndView editDean(@PathVariable("deanId") int deanId, HttpServletRequest request) {
 
-		System.out.println("Id:" + deanId);
+		//System.out.println("Id:" + deanId);
 
 		ModelAndView model = null;
 		MultiValueMap<String, Object> map = null;
@@ -1729,7 +1729,7 @@ public class IqacController {
 				map = new LinkedMultiValueMap<>();
 				map.add("id", deanId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("staff:" + staff);
+				//System.out.println("staff:" + staff);
 
 				model.addObject("dean", staff);
 				model.addObject("addEdit", "1");
@@ -1762,7 +1762,7 @@ public class IqacController {
 			} else {
 
 				Info inf = new Info();
-				System.out.println("Id:" + deanId);
+				//System.out.println("Id:" + deanId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", deanId);
@@ -1812,7 +1812,7 @@ public class IqacController {
 
 				NewDeanList[] deans = rest.postForObject(Constants.url + "/getTraningOfficerList",map, NewDeanList[].class);
 				List<NewDeanList> trainOfficrList = new ArrayList<>(Arrays.asList(deans));
-				System.out.println("Training Officer List:" + trainOfficrList);
+				//System.out.println("Training Officer List:" + trainOfficrList);
 
 				model.addObject("trainOfficrList", trainOfficrList);
 				model.addObject("listMapping", "showTrainingAndPlacementOfficer");
@@ -1825,16 +1825,16 @@ public class IqacController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2002,16 +2002,16 @@ public class IqacController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + officerId);  
+			//System.out.println("Data:" + officerId);  
 			String pacementOfficerName = request.getParameter("pacementOfficerName");
-			System.out.println("Data:" + pacementOfficerName);
+			//System.out.println("Data:" + pacementOfficerName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("join_date");
 			String dateOfRel = request.getParameter("acc_off_relDate");
 			String contact = request.getParameter("contact_no");
 			String email = request.getParameter("email");
 
-			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
 			// + contact + " " + email);
 			// MIqac miqac = new MIqac();
 			/*
@@ -2124,7 +2124,7 @@ public class IqacController {
 	@RequestMapping(value = "/editTpo/{tpoId}", method = RequestMethod.GET)
 	public ModelAndView editTpo(@PathVariable("tpoId") int tpoId, HttpServletRequest request) {
 
-		System.out.println("Id:" + tpoId);
+		//System.out.println("Id:" + tpoId);
 
 		ModelAndView model = null;
 		MultiValueMap<String, Object> map = null;
@@ -2172,7 +2172,7 @@ public class IqacController {
 				map = new LinkedMultiValueMap<>();
 				map.add("id", tpoId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("staff:" + staff);
+				//System.out.println("staff:" + staff);
 
 				model.addObject("trnPlaceOff", staff);
 				model.addObject("addEdit", "1");
@@ -2204,7 +2204,7 @@ public class IqacController {
 			} else {
 
 				Info inf = new Info();
-				System.out.println("Id:" + tpoId);
+				//System.out.println("Id:" + tpoId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", tpoId);
@@ -2254,7 +2254,7 @@ public class IqacController {
 
 				NewDeanList[] expActListarr = rest.postForObject(Constants.url + "/getExtActList",map, NewDeanList[].class);
 				List<NewDeanList> expActList = new ArrayList<>(Arrays.asList(expActListarr));
-				System.out.println("Extension Activity Officer List:" + expActList);
+				//System.out.println("Extension Activity Officer List:" + expActList);
 
 				model.addObject("expActList", expActList);
 				model.addObject("listMapping", "showExternalActivities");
@@ -2267,16 +2267,16 @@ public class IqacController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2390,16 +2390,16 @@ public class IqacController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + extActOfficerId);  
+			//System.out.println("Data:" + extActOfficerId);  
 			String extActOfficerName = request.getParameter("extActOfficerName");
-			System.out.println("Data:" + extActOfficerName);
+			//System.out.println("Data:" + extActOfficerName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("join_date");
 			String dateOfRel = request.getParameter("acc_off_relDate");
 			String contact = request.getParameter("contact_no");
 			String email = request.getParameter("email");
 
-			// System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
+			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
 			// + contact + " " + email);
 			// MIqac miqac = new MIqac();
 			/*
@@ -2512,7 +2512,7 @@ public class IqacController {
 	@RequestMapping(value = "/editExtActOff/{extOffId}", method = RequestMethod.GET)
 	public ModelAndView editExtActOff(@PathVariable("extOffId") int extOffId, HttpServletRequest request) {
 
-		System.out.println("Id:" + extOffId);
+		//System.out.println("Id:" + extOffId);
 
 		ModelAndView model = null;
 
@@ -2560,7 +2560,7 @@ public class IqacController {
 				map = new LinkedMultiValueMap<>();
 				map.add("id", extOffId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("staffExt:" + staff);
+				//System.out.println("staffExt:" + staff);
 
 				model.addObject("extActOff", staff);
 				model.addObject("addEdit", "1");
@@ -2592,7 +2592,7 @@ public class IqacController {
 			} else {
 
 				Info inf = new Info();
-				System.out.println("Id:" + extOffId);
+				//System.out.println("Id:" + extOffId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("id", extOffId);

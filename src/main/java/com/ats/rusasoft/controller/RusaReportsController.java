@@ -105,7 +105,7 @@ public class RusaReportsController {
 
 			String ac_year = request.getParameter("ac_year");
 			String temp_ac_year = request.getParameter("temp_ac_year");
-			System.out.println("Filter------"+temp_ac_year);
+			//System.out.println("Filter------"+temp_ac_year);
 			int instituteId = (int) session.getAttribute("instituteId");
 
 			map = new LinkedMultiValueMap<>();
@@ -282,7 +282,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -312,7 +312,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -358,7 +358,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = ratioList.get(0).getInstituteName();
@@ -389,7 +389,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -597,7 +597,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -627,7 +627,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -673,7 +673,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = postList.get(0).getInstituteName();
@@ -704,7 +704,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -911,7 +911,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -941,7 +941,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -986,7 +986,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = studList.get(0).getInstituteName();
@@ -1017,7 +1017,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -1224,7 +1224,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -1254,7 +1254,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -1303,7 +1303,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = facList.get(0).getInstituteName();
@@ -1334,7 +1334,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -1535,11 +1535,11 @@ public class RusaReportsController {
 					table.addCell(cell);
 
 				}
-				System.out.println("Faculty Count-----" + index);
-				System.out.println("Exp Count----" + expCount);
+				//System.out.println("Faculty Count-----" + index);
+				//System.out.println("Exp Count----" + expCount);
 
 				float teachingExp = expCount / index;
-				System.out.println("Teaching Experience----" + teachingExp);
+				//System.out.println("Teaching Experience----" + teachingExp);
 
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
@@ -1567,7 +1567,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -1597,7 +1597,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -1640,13 +1640,13 @@ public class RusaReportsController {
 						exportToExcelList.add(expoExcel);
 
 					}
-					System.out.println("Count" + cnt);
+					//System.out.println("Count" + cnt);
 					float teachExp = expCnt / cnt;
-					System.out.println("Teaching Exo=" + teachExp);
+					//System.out.println("Teaching Exo=" + teachExp);
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = facList.get(0).getInstituteName();
@@ -1677,7 +1677,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -1856,7 +1856,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -1886,7 +1886,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -1927,7 +1927,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = facList.get(0).getInstituteName();
@@ -1958,7 +1958,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -2164,12 +2164,12 @@ public class RusaReportsController {
 	 * 
 	 * DateFormat DF = new SimpleDateFormat("dd-MM-yyyy"); document.add(new
 	 * Paragraph("\n")); document.add(table); document.add(new Paragraph("\n"));
-	 * System.out.println("Count-----"+ttlAdmPer); document.add(new
+	 * //System.out.println("Count-----"+ttlAdmPer); document.add(new
 	 * Paragraph("Average %: "+ttlAdmPer/5));
 	 * 
 	 * int totalPages = writer.getPageNumber();
 	 * 
-	 * System.out.println("Page no " + totalPages);
+	 * //System.out.println("Page no " + totalPages);
 	 * 
 	 * document.close(); int p = Integer.parseInt(request.getParameter("p"));
 	 * System.err.println("p " + p);
@@ -2196,7 +2196,7 @@ public class RusaReportsController {
 	 * InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
 	 * 
 	 * try { FileCopyUtils.copy(inputStream, response.getOutputStream()); } catch
-	 * (IOException e) { System.out.println("Excep in Opening a Pdf File");
+	 * (IOException e) { //System.out.println("Excep in Opening a Pdf File");
 	 * e.printStackTrace(); } } } else {
 	 * 
 	 * List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
@@ -2230,7 +2230,7 @@ public class RusaReportsController {
 	 * 
 	 * } XSSFWorkbook wb = null; try {
 	 * 
-	 * System.out.println("Excel List :" + exportToExcelList.toString()); String rep
+	 * //System.out.println("Excel List :" + exportToExcelList.toString()); String rep
 	 * = null; try { rep = facList.get(0).getInstituteName(); } catch (Exception e)
 	 * {
 	 * 
@@ -2253,7 +2253,7 @@ public class RusaReportsController {
 	 * 
 	 * } catch (DocumentException ex) {
 	 * 
-	 * System.out.println("Pdf Generation Error: " + ex.getMessage());
+	 * //System.out.println("Pdf Generation Error: " + ex.getMessage());
 	 * 
 	 * ex.printStackTrace();
 	 * 
@@ -2470,7 +2470,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -2500,7 +2500,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -2546,7 +2546,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = studList.get(0).getInstituteName();
@@ -2577,7 +2577,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -2766,7 +2766,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -2796,7 +2796,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -2838,7 +2838,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = ictFacList.get(0).getInstituteName();
@@ -2869,7 +2869,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -3090,7 +3090,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("Average Annual Expenditure in Last 5-Years : " + avgAnulExpd / 5));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -3120,7 +3120,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -3172,11 +3172,11 @@ public class RusaReportsController {
 						exportToExcelList.add(expoExcel);
 
 					}
-					System.out.println("AVG Budget = " + avgBgtPer);
+					//System.out.println("AVG Budget = " + avgBgtPer);
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = bookList.get(0).getInstituteName();
@@ -3209,7 +3209,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -3424,12 +3424,12 @@ public class RusaReportsController {
 				document.add(table);
 
 				document.add(new Paragraph("\n"));
-				System.out.println("Ttl Bugt %-----" + ttlBugtPer);
-				System.out.println("Avg Bugt %-----" + avgPerOnBugt);
+				//System.out.println("Ttl Bugt %-----" + ttlBugtPer);
+				//System.out.println("Avg Bugt %-----" + avgPerOnBugt);
 				document.add(new Paragraph("Average % of Budget on Infrastructure Augmentation : " + avgPerOnBugt));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -3459,7 +3459,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -3515,11 +3515,11 @@ public class RusaReportsController {
 						exportToExcelList.add(expoExcel);
 
 					}
-					System.out.println("AVG Budget = " + avgBgtPer);
+					//System.out.println("AVG Budget = " + avgBgtPer);
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = budgetList.get(0).getInstituteName();
@@ -3551,7 +3551,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -3770,7 +3770,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -3800,7 +3800,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -3852,7 +3852,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = studCompList.get(0).getInstituteName();
@@ -3883,7 +3883,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4091,7 +4091,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4121,7 +4121,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4167,7 +4167,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = eContList.get(0).getInstituteName();
@@ -4199,7 +4199,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4364,7 +4364,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4394,7 +4394,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4438,7 +4438,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = intrntInfoList.get(0).getInstituteName();
@@ -4469,7 +4469,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4656,7 +4656,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4686,7 +4686,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4733,7 +4733,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = expndList.get(0).getInstituteName();
@@ -4764,7 +4764,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4979,12 +4979,12 @@ public class RusaReportsController {
 				document.add(table);
 
 				document.add(new Paragraph("\n"));
-				System.out.println("Ttl Bugt %-----" + ttlBugtPer);
-				System.out.println("Avg Bugt %-----" + avgPerOnBugt);
+				//System.out.println("Ttl Bugt %-----" + ttlBugtPer);
+				//System.out.println("Avg Bugt %-----" + avgPerOnBugt);
 				document.add(new Paragraph("Average % of Green Initiatives & Waste Management : " + avgPerOnBugt));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5014,7 +5014,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5070,11 +5070,11 @@ public class RusaReportsController {
 						exportToExcelList.add(expoExcel);
 
 					}
-					System.out.println("AVG Budget = " + avgBgtPer);
+					//System.out.println("AVG Budget = " + avgBgtPer);
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = expndGrnList.get(0).getInstituteName();
@@ -5106,7 +5106,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -5279,7 +5279,7 @@ public class RusaReportsController {
 				
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5309,7 +5309,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5349,7 +5349,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = initivAdrsLocAdvDisadvList.get(0).getInstituteName();
@@ -5381,7 +5381,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -5537,7 +5537,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5567,7 +5567,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5607,7 +5607,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = initiativeList.get(0).getInstituteName();
@@ -5638,7 +5638,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -5793,7 +5793,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5823,7 +5823,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5863,7 +5863,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = initiativeList.get(0).getInstituteName();
@@ -5894,7 +5894,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6074,7 +6074,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6104,7 +6104,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6147,7 +6147,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = linkgList.get(0).getInstituteName();
@@ -6178,7 +6178,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6358,7 +6358,7 @@ public class RusaReportsController {
 	 * 
 	 * int totalPages = writer.getPageNumber();
 	 * 
-	 * System.out.println("Page no " + totalPages);
+	 * //System.out.println("Page no " + totalPages);
 	 * 
 	 * document.close(); int p = Integer.parseInt(request.getParameter("p"));
 	 * System.err.println("p " + p);
@@ -6385,7 +6385,7 @@ public class RusaReportsController {
 	 * InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
 	 * 
 	 * try { FileCopyUtils.copy(inputStream, response.getOutputStream()); } catch
-	 * (IOException e) { System.out.println("Excep in Opening a Pdf File");
+	 * (IOException e) { //System.out.println("Excep in Opening a Pdf File");
 	 * e.printStackTrace(); } } } else {
 	 * 
 	 * List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
@@ -6419,7 +6419,7 @@ public class RusaReportsController {
 	 * 
 	 * XSSFWorkbook wb = null; try {
 	 * 
-	 * System.out.println("Excel List :" + exportToExcelList.toString()); String rep
+	 * //System.out.println("Excel List :" + exportToExcelList.toString()); String rep
 	 * = null; try { rep = mouList.get(0).getInstituteName(); } catch (Exception e)
 	 * {
 	 * 
@@ -6443,7 +6443,7 @@ public class RusaReportsController {
 	 * 
 	 * } catch (DocumentException ex) {
 	 * 
-	 * System.out.println("Pdf Generation Error: " + ex.getMessage());
+	 * //System.out.println("Pdf Generation Error: " + ex.getMessage());
 	 * 
 	 * ex.printStackTrace();
 	 * 
@@ -6639,7 +6639,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6669,7 +6669,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6712,7 +6712,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = mouList.get(0).getInstituteName();
@@ -6743,7 +6743,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6911,7 +6911,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6941,7 +6941,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6982,7 +6982,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = awrdList.get(0).getInstituteName();
@@ -7013,7 +7013,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7179,7 +7179,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -7209,7 +7209,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -7246,7 +7246,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -7274,7 +7274,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7476,7 +7476,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -7506,7 +7506,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -7549,7 +7549,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -7577,7 +7577,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7809,14 +7809,14 @@ public class RusaReportsController {
 					table.addCell(cell);
 				}
 				
-				System.out.println("Add="+ttlStudPlaced);
-				System.out.println("VVV"+ttlstudPassed+" / "+ttlstudPassed);
+				//System.out.println("Add="+ttlStudPlaced);
+				//System.out.println("VVV"+ttlstudPassed+" / "+ttlstudPassed);
 				
 				perPlacmntPreYr = (ttlStudPlaced/ttlstudPassed)*100;
-				System.out.println("perPlacmntPreYr "+perPlacmntPreYr);
+				//System.out.println("perPlacmntPreYr "+perPlacmntPreYr);
 				AvgPlcmntFiveYr = perPlacmntPreYr/5;
 				
-				System.out.println("AVG %="+perPlacmntPreYr+" "+AvgPlcmntFiveYr);
+				//System.out.println("AVG %="+perPlacmntPreYr+" "+AvgPlcmntFiveYr);
 				
 				document.open();
 				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
@@ -7852,7 +7852,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -7882,7 +7882,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -7932,7 +7932,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -7968,7 +7968,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8005,7 +8005,7 @@ public class RusaReportsController {
 			StudProgression[] resArray = rest.postForObject(Constants.url + "/getStudProgression", map,
 					StudProgression[].class);
 			List<StudProgression> studProgList = new ArrayList<>(Arrays.asList(resArray));
-			System.out.println("List : "+studProgList);
+			//System.out.println("List : "+studProgList);
 			model.addObject("list", studProgList);
 
 			Document document = new Document(PageSize.A4);
@@ -8158,9 +8158,9 @@ public class RusaReportsController {
 					table.addCell(cell);*/
 
 				}
-				System.out.println("No Stud------------------="+noStud);
-				System.out.println("Stud Pass------------------="+studPass);
-				System.out.println("% Per------------------="+studProg);
+				//System.out.println("No Stud------------------="+noStud);
+				//System.out.println("Stud Pass------------------="+studPass);
+				//System.out.println("% Per------------------="+studProg);
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -8185,7 +8185,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("Students Progression % Per Year : " + studProg));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8215,7 +8215,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8260,7 +8260,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = studProgList.get(0).getInstituteName();
@@ -8292,7 +8292,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8506,7 +8506,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8536,7 +8536,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8581,7 +8581,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -8609,7 +8609,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8829,7 +8829,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8859,7 +8859,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8904,7 +8904,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -8932,7 +8932,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9095,12 +9095,12 @@ public class RusaReportsController {
 					
 				}
 				
-				System.out.println("Totl Teacher----------"+ttlTechr);
+				//System.out.println("Totl Teacher----------"+ttlTechr);
 				avgTech=ttlTechr/5;
-				System.out.println("Avg Last yr------------"+avgTech);
-				System.out.println("TTlNo Publication-----"+ttlPublcatn);
+				//System.out.println("Avg Last yr------------"+avgTech);
+				//System.out.println("TTlNo Publication-----"+ttlPublcatn);
 				resrchPprPerTechr = ttlPublcatn/avgTech;
-				System.out.println("Research Paper Per Teacher-------"+resrchPprPerTechr);
+				//System.out.println("Research Paper Per Teacher-------"+resrchPprPerTechr);
 				
 				document.open();
 				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
@@ -9130,7 +9130,7 @@ public class RusaReportsController {
 				
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9160,7 +9160,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -9199,7 +9199,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -9235,7 +9235,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9451,7 +9451,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9481,7 +9481,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -9528,7 +9528,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -9556,7 +9556,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9736,7 +9736,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9766,7 +9766,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -9805,7 +9805,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -9833,7 +9833,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9870,7 +9870,7 @@ public class RusaReportsController {
 			PerNewCource[] resArray = rest.postForObject(Constants.url + "/getPerNewCource", map,
 					PerNewCource[].class);
 			List<PerNewCource> lastFiveYrList= new ArrayList<>(Arrays.asList(resArray));
-			System.out.println("List : "+lastFiveYrList);
+			//System.out.println("List : "+lastFiveYrList);
 			model.addObject("list", lastFiveYrList);
 
 			Document document = new Document(PageSize.A4);
@@ -9933,9 +9933,9 @@ public class RusaReportsController {
 					
 				}
 				
-				System.out.println("No Course------------------="+noCourse);
-				System.out.println("Totla Course------------------="+ttlNoCourse);
-				System.out.println("% Per------------------="+perCourseIntro);
+				//System.out.println("No Course------------------="+noCourse);
+				//System.out.println("Totla Course------------------="+ttlNoCourse);
+				//System.out.println("% Per------------------="+perCourseIntro);
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -9954,7 +9954,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("Percentage(%) of New Courses Introduced : " + perCourseIntro));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9984,7 +9984,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10014,7 +10014,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = lastFiveYrList.get(0).getInstituteName();
@@ -10046,7 +10046,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -10083,7 +10083,7 @@ public class RusaReportsController {
 			PerProgCbseElectiveCourse[] resArray = rest.postForObject(Constants.url + "/getPerProgCbseElectiveCourse", map,
 					PerProgCbseElectiveCourse[].class);
 			List<PerProgCbseElectiveCourse> courseList= new ArrayList<>(Arrays.asList(resArray));
-			System.out.println("List : "+courseList);
+			//System.out.println("List : "+courseList);
 			model.addObject("list", courseList);
 
 			Document document = new Document(PageSize.A4);
@@ -10146,9 +10146,9 @@ public class RusaReportsController {
 					
 				}
 				
-				System.out.println("No Course------------------="+noProgm);
-				System.out.println("Totle Course Offered------------------="+ttlNoProgm);
-				System.out.println("% Per------------------="+perProgmCourse);
+				//System.out.println("No Course------------------="+noProgm);
+				//System.out.println("Totle Course Offered------------------="+ttlNoProgm);
+				//System.out.println("% Per------------------="+perProgmCourse);
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -10167,7 +10167,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("Percentage(%) of Programs with CBSE/Elective Courses : " + perProgmCourse));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -10197,7 +10197,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10227,7 +10227,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = courseList.get(0).getInstituteName();
@@ -10259,7 +10259,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -10463,7 +10463,7 @@ public class RusaReportsController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -10493,7 +10493,7 @@ public class RusaReportsController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10536,7 +10536,7 @@ public class RusaReportsController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -10564,7 +10564,7 @@ public class RusaReportsController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 

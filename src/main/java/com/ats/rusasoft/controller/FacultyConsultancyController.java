@@ -45,7 +45,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showConsultancyList", "showConsultancyList", "1", "0", "0", "0",
 					newModuleList);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -110,7 +110,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -146,7 +146,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -220,7 +220,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("deleteConsultancy", "showConsultancyList", "0", "0", "0", "1",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -258,7 +258,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "0", "1", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 

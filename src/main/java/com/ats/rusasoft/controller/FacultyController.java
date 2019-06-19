@@ -96,7 +96,7 @@ public class FacultyController {
 			Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -122,13 +122,13 @@ public class FacultyController {
 				String journalYear = request.getParameter("journalYear");
 				String journalType = request.getParameter("journalType");
 
-				System.out.println(journalName);
-				System.out.println(issue);
-				System.out.println(journalVolume);
-				System.out.println(journalPgFrom);
-				System.out.println(journalPgTo);
-				System.out.println(journalYear);
-				System.out.println(journalType);
+				//System.out.println(journalName);
+				//System.out.println(issue);
+				//System.out.println(journalVolume);
+				//System.out.println(journalPgFrom);
+				//System.out.println(journalPgTo);
+				//System.out.println(journalYear);
+				//System.out.println(journalType);
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 				int jouStd = Integer.parseInt(request.getParameter("jouStd"));
 
@@ -212,7 +212,7 @@ public class FacultyController {
 				List<GetJournal> jouList = rest.postForObject(Constants.url + "/getJournalListByFacultyIdAndtype", map,
 						List.class);
 
-				System.out.println("jouList" + jouList);
+				//System.out.println("jouList" + jouList);
 
 				model.addObject("jouList", jouList);
 
@@ -225,16 +225,16 @@ public class FacultyController {
 				System.err.println("Addd" + add);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -275,7 +275,7 @@ public class FacultyController {
 				map.add("journalId", journalId);
 
 				Journal editJournal = rest.postForObject(Constants.url + "/getJournalByJournalId", map, Journal.class);
-				System.out.println("journalId:" + journalId);
+				//System.out.println("journalId:" + journalId);
 
 				model.addObject("editJournal", editJournal);
 
@@ -304,7 +304,7 @@ public class FacultyController {
 
 		} else {
 			Info inf = new Info();
-			System.out.println("Id:" + journalId);
+			//System.out.println("Id:" + journalId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("jouIdList", journalId);
@@ -361,7 +361,7 @@ public class FacultyController {
 			Info view = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -399,7 +399,7 @@ public class FacultyController {
 				float amtRec = Float.parseFloat(request.getParameter("amtRec"));
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				System.out.println("----------" + is_view);
+				//System.out.println("----------" + is_view);
 				ResearchProject project = new ResearchProject();
 				project.setDelStatus(1);
 				project.setExInt1(1);
@@ -489,7 +489,7 @@ public class FacultyController {
 				List<GetResearchProject> jouList = rest
 						.postForObject(Constants.url + "/getProjectListByFacultyIdAndtype", map, List.class);
 
-				System.out.println("jouList" + jouList);
+				//System.out.println("jouList" + jouList);
 
 				model.addObject("jouList", jouList);
 
@@ -501,16 +501,16 @@ public class FacultyController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -552,7 +552,7 @@ public class FacultyController {
 
 				ResearchProject editProject = rest.postForObject(Constants.url + "/getProjectByProjId", map,
 						ResearchProject.class);
-				System.out.println("projId:" + projId);
+				//System.out.println("projId:" + projId);
 
 				model.addObject("editProject", editProject);
 
@@ -580,7 +580,7 @@ public class FacultyController {
 
 		} else {
 			Info inf = new Info();
-			System.out.println("Id:" + projectId);
+			//System.out.println("Id:" + projectId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("projIdList", projectId);
@@ -623,7 +623,7 @@ public class FacultyController {
 				List<GetSubject> subList = rest.postForObject(Constants.url + "/getSubjectListByFacultyIdAndtype", map,
 						List.class);
 
-				System.out.println("subList" + subList);
+				//System.out.println("subList" + subList);
 
 				model.addObject("subList", subList);
 
@@ -635,16 +635,16 @@ public class FacultyController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -715,7 +715,7 @@ public class FacultyController {
 			Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -827,7 +827,7 @@ public class FacultyController {
 				map.add("subId", subId);
 
 				Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
-				System.out.println("subId:" + subId);
+				//System.out.println("subId:" + subId);
 
 				model.addObject("editSubject", editSubject);
 
@@ -855,7 +855,7 @@ public class FacultyController {
 
 		} else {
 			Info inf = new Info();
-			System.out.println("Id:" + subId);
+			//System.out.println("Id:" + subId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("subIdList", subId);
@@ -967,7 +967,7 @@ public class FacultyController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("coId", coId);
 			Info info = rest.postForObject(Constants.url + "/deleteSubjectsCo", map, Info.class);
-			System.out.println(info);
+			//System.out.println(info);
 
 		} catch (Exception e) {
 
@@ -1094,7 +1094,7 @@ public class FacultyController {
 			try {
 				String[] ids = request.getParameterValues("poIds");
 				for (int i = 0; i < ids.length; i++) {
-					System.out.println(ids[i]);
+					//System.out.println(ids[i]);
 					poIds = poIds + "," + ids[i];
 				}
 				subjectCo.setCoPoMap(poIds.substring(1, poIds.length()));
@@ -1107,7 +1107,7 @@ public class FacultyController {
 			String satisfyingValue = request.getParameter("satisfyingValue");
 
 			subjectCo.setCoPoSatisfyingValue(satisfyingValue);
-			System.out.println("subjectCo " + subjectCo);
+			//System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
 
 		} catch (Exception e) {
@@ -1179,7 +1179,7 @@ public class FacultyController {
 				String[] ids = request.getParameterValues("psoIds");
 
 				for (int i = 0; i < ids.length; i++) {
-					System.out.println(ids[i]);
+					//System.out.println(ids[i]);
 					poIds = poIds + "," + ids[i];
 				}
 
@@ -1193,7 +1193,7 @@ public class FacultyController {
 			String satisfyingValue = request.getParameter("satisfyingValue");
 
 			subjectCo.setCoPsoSatisfyingValue(satisfyingValue);
-			System.out.println("subjectCo " + subjectCo);
+			//System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
 
 		} catch (Exception e) {
@@ -1396,7 +1396,7 @@ public class FacultyController {
 			swoc.setSwocId(swocId);
 
 			SWOC res = rest.postForObject(Constants.url + "/saveSWOC", swoc, SWOC.class);
-			System.out.println(res.toString());
+			//System.out.println(res.toString());
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -1404,7 +1404,7 @@ public class FacultyController {
 			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
 			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
 			swocList.addAll(list);
-			System.out.println("swocList" + swocList.toString());
+			//System.out.println("swocList" + swocList.toString());
 
 		} catch (
 
@@ -1428,13 +1428,13 @@ public class FacultyController {
 		try {
 
 			int swocId = Integer.parseInt(request.getParameter("swocId"));
-			System.out.println("swocId" + swocId);
+			//System.out.println("swocId" + swocId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("swocId", swocId);
 			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map, SWOC.class);
 
-			System.out.println("swocId" + swoc.toString());
+			//System.out.println("swocId" + swoc.toString());
 
 		} catch (Exception e) {
 
@@ -1462,13 +1462,13 @@ public class FacultyController {
 			map2.add("swocId", swocId);
 			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map2, SWOC.class);
 
-			System.out.println("swoc" + swoc.toString());
+			//System.out.println("swoc" + swoc.toString());
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("swocIdList", swocId);
 			info = rest.postForObject(Constants.url + "/deleteSwoc", map, Info.class);
-			System.out.println(swocId);
-			System.out.println(info.toString());
+			//System.out.println(swocId);
+			//System.out.println(info.toString());
 
 			map = new LinkedMultiValueMap<>();
 			map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -1476,7 +1476,7 @@ public class FacultyController {
 			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
 			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
 			swocList.addAll(list);
-			System.out.println("swocList" + swocList.toString());
+			//System.out.println("swocList" + swocList.toString());
 		} catch (Exception e) {
 
 			e.printStackTrace();

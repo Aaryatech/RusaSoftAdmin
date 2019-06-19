@@ -425,7 +425,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("accOffIds");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -564,16 +564,16 @@ public class InfraStructureModController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -614,11 +614,11 @@ public class InfraStructureModController {
 			eCont.setExInt2(0);
 			eCont.setExVar1(request.getParameter("year"));
 			eCont.setExVar2("NA");
-			//System.out.println(eCont.toString());
+			////System.out.println(eCont.toString());
 			EContentDevFacility contents = rest.postForObject(Constants.url + "/saveEcontentDevFacilities", eCont,
 					EContentDevFacility.class);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 
 		}
@@ -630,7 +630,7 @@ public class InfraStructureModController {
 	@RequestMapping(value = "/editEContent/{contentId}", method = RequestMethod.GET)
 	public ModelAndView editEContent(@PathVariable("contentId") int contentId, HttpServletRequest request) {
 
-		// System.out.println("Id:" + iqacId);
+		// //System.out.println("Id:" + iqacId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -719,7 +719,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] contentIds = request.getParameterValues("econtent");
-					System.out.println("id are" + contentIds);
+					//System.out.println("id are" + contentIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -794,16 +794,16 @@ public class InfraStructureModController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -877,7 +877,7 @@ public class InfraStructureModController {
 			infrastur.setExInt2(0);
 			infrastur.setExVar1("NA");
 			infrastur.setExVar2("NA");
-			System.out.println(infrastur.toString());
+			//System.out.println(infrastur.toString());
 			
 			ItInfrastructure infra =  rest.postForObject(Constants.url+"/saveItInfrastructureInfo", infrastur,ItInfrastructure.class);
 			
@@ -940,7 +940,7 @@ public class InfraStructureModController {
 
 		} else {
 			
-			System.out.println("Id:" + infraId);
+			//System.out.println("Id:" + infraId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("infraId", infraId);
@@ -978,7 +978,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] infraIds = request.getParameterValues("itInfraId");
-					System.out.println("id are" + infraIds);
+					//System.out.println("id are" + infraIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1055,16 +1055,16 @@ public class InfraStructureModController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1144,7 +1144,7 @@ public class InfraStructureModController {
 			
 			
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showAllInternetConnectionInfo";
@@ -1200,7 +1200,7 @@ public class InfraStructureModController {
 
 		} else {
 			
-			System.out.println("Id:" + connectionId);
+			//System.out.println("Id:" + connectionId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("connectionId", connectionId);
@@ -1238,7 +1238,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] lanInfoIds = request.getParameterValues("lanInfoId");
-					System.out.println("id are" + lanInfoIds);
+					//System.out.println("id are" + lanInfoIds);
 
 					StringBuilder sb = new StringBuilder();
 

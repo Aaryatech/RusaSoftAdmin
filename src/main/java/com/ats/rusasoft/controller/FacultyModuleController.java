@@ -151,7 +151,7 @@ public class FacultyModuleController {
 				FacultyConferenceList[] facCon = rest.postForObject(Constants.url + "/getfacultyConferenceByFacId", map,
 						FacultyConferenceList[].class);
 				List<FacultyConferenceList> facConfList = new ArrayList<>(Arrays.asList(facCon));
-				System.out.println("FacConfLIst:" + facConfList);
+				//System.out.println("FacConfLIst:" + facConfList);
 
 				model.addObject("facConList", facConfList);
 				model.addObject("title", "Faculty's Published Content Details");
@@ -165,16 +165,16 @@ public class FacultyModuleController {
 						"showAddPublicationDetailsList", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -201,7 +201,7 @@ public class FacultyModuleController {
 			Info view = AccessControll.checkAccess("showPublicationDetails", "showAddPublicationDetailsList", "0", "1",
 					"0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -243,11 +243,11 @@ public class FacultyModuleController {
 
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				System.out.println("Fac Conf:" + facConf.toString());
+				//System.out.println("Fac Conf:" + facConf.toString());
 
 				FacultyConference insFconf = rest.postForObject(Constants.url + "/insertNewFacConference", facConf,
 						FacultyConference.class);
-				System.out.println(insFconf.toString());
+				//System.out.println(insFconf.toString());
 
 				if (is_view == 1) {
 					returnString = "redirect:/showAddPublicationDetailsList";
@@ -357,7 +357,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] confIds = request.getParameterValues("confId");
-					System.out.println("id are" + confIds);
+					//System.out.println("id are" + confIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -559,16 +559,16 @@ public class FacultyModuleController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -723,7 +723,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] activityIds = request.getParameterValues("activityId");
-					System.out.println("id are" + "linknameIds");
+					//System.out.println("id are" + "linknameIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -929,7 +929,7 @@ public class FacultyModuleController {
 	 * 
 	 * ModelAndView model = null; try {
 	 * 
-	 * System.out.println("hii..."); model = new
+	 * //System.out.println("hii..."); model = new
 	 * ModelAndView("FacultyDetails/personalDetailList");
 	 * 
 	 * model.addObject("title", "Personal Details Form");
@@ -955,7 +955,7 @@ public class FacultyModuleController {
 	 * 
 	 * ModelAndView model = null; try {
 	 * 
-	 * System.out.println("hii..."); model = new
+	 * //System.out.println("hii..."); model = new
 	 * ModelAndView("FacultyDetails/personalDetail");
 	 * 
 	 * model.addObject("title", "Personal Details Form");
@@ -1077,16 +1077,16 @@ public class FacultyModuleController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1158,7 +1158,7 @@ public class FacultyModuleController {
 			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -1174,10 +1174,10 @@ public class FacultyModuleController {
 				stud.setExInt1(0);
 				stud.setExVar1("NA");
 
-				System.out.println("Mentor:" + stud.toString());
+				//System.out.println("Mentor:" + stud.toString());
 				StudentMentoring saveStud = rest.postForObject(Constants.url + "/insertStudentMentoringDetails", stud,
 						StudentMentoring.class);
-				System.out.println(saveStud.toString());
+				//System.out.println(saveStud.toString());
 
 				if (is_view == 1) {
 					returnString = "redirect:/showStudMentor";
@@ -1224,14 +1224,14 @@ public class FacultyModuleController {
 
 				model = new ModelAndView("FacultyDetails/addStudMentor");
 
-				System.out.println("MID:" + menId);
+				//System.out.println("MID:" + menId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("mId", menId);
 
 				StudentMentoring studMontr = rest.postForObject(Constants.url + "/editFacultyMentoringDetailsById", map,
 						StudentMentoring.class);
-				System.out.println("Data:" + studMontr);
+				//System.out.println("Data:" + studMontr);
 
 				model.addObject("title", "Edit Faculty Worked for Students Mentoring");
 
@@ -1265,14 +1265,14 @@ public class FacultyModuleController {
 			} else {
 				model = new ModelAndView("FacultyDetails/addStudMentor");
 				// int countid = Integer.parseInt(request.getParameter("menId"));
-				System.out.println("MID:" + menId);
+				//System.out.println("MID:" + menId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("mId", menId);
 
 				StudentMentoring studMontr = rest.postForObject(Constants.url + "/deleteFacultyMentoringDetailsById",
 						map, StudentMentoring.class);
-				System.out.println("Data:" + studMontr);
+				//System.out.println("Data:" + studMontr);
 
 				model.addObject("title", "Edit Monitoring Details");
 
@@ -1310,7 +1310,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] menIds = request.getParameterValues("menId");
-					System.out.println("id are" + menIds);
+					//System.out.println("id are" + menIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1417,30 +1417,30 @@ public class FacultyModuleController {
 				FacultyBookList[] booArr = rest.postForObject(Constants.url + "/getAllPublishedBooks", map,
 						FacultyBookList[].class);
 				List<FacultyBookList> bookList = new ArrayList<>(Arrays.asList(booArr));
-				System.out.println("BookList:" + bookList);
+				//System.out.println("BookList:" + bookList);
 				model.addObject("bookList", bookList);
 
 				model.addObject("title", "Book/Chapter/Paper Publication ");
 
 				Info add = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "1", "0", "0",
 						newModuleList);
-				System.out.println("res=" + add.toString());
+				//System.out.println("res=" + add.toString());
 				Info edit = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "0", "1", "0",
 						newModuleList);
 				Info delete = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "0", "0", "1",
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1594,7 +1594,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] bookIds = request.getParameterValues("bookId");
-					System.out.println("id are" + "bookIds");
+					//System.out.println("id are" + "bookIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1807,16 +1807,16 @@ public class FacultyModuleController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1836,7 +1836,7 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/editContribtn/{conId}", method = RequestMethod.GET)
 	public ModelAndView editContribtn(@PathVariable("conId") int conId, HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println("ID:" + conId);
+		//System.out.println("ID:" + conId);
 		ModelAndView model = null;
 		try {
 			HttpSession session = request.getSession();
@@ -1963,7 +1963,7 @@ public class FacultyModuleController {
 		MultiValueMap<String, Object> map = null;
 		try {
 
-			System.out.println("Hello");
+			//System.out.println("Hello");
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -2034,7 +2034,7 @@ public class FacultyModuleController {
 				GetFacultyPhdGuide[] phdArr = rest.postForObject(Constants.url + "/getPhdGuideListByFacultyIdAndtype",
 						map, GetFacultyPhdGuide[].class);
 				List<GetFacultyPhdGuide> phdList = new ArrayList<>(Arrays.asList(phdArr));
-				System.out.println("List:" + phdList);
+				//System.out.println("List:" + phdList);
 				model.addObject("phdList", phdList);
 				model.addObject("title", "Ph.D. Guidance");
 				Info add = AccessControll.checkAccess("showPhdGuideList", "showPhdGuideList", "0", "1", "0", "0",
@@ -2045,16 +2045,16 @@ public class FacultyModuleController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					System.out.println(" add   Accessable ");
+					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");
+					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2109,7 +2109,7 @@ public class FacultyModuleController {
 			phd.setMakerEnterDatetime(curDateTime);
 			phd.setExInt1(0);
 			phd.setExVar1(request.getParameter("phd_scholar_depart"));
-			System.out.println(phd.toString());
+			//System.out.println(phd.toString());
 
 			FacultyPhdGuide savePhd = rest.postForObject(Constants.url + "/insertPhdGuide", phd, FacultyPhdGuide.class);
 
@@ -2128,7 +2128,7 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/editPhdGuide/{phdId}", method = RequestMethod.GET)
 	public ModelAndView editPhdGuide(@PathVariable("phdId") int phdId, HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println("ID:" + phdId);
+		//System.out.println("ID:" + phdId);
 		ModelAndView model = null;
 
 		try {
@@ -2268,7 +2268,7 @@ public class FacultyModuleController {
 			Info view = AccessControll.checkAccess("showFacultyEmpowerment", "showFacultyEmpowerment", "1", "0", "0",
 					"0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == false) {
@@ -2313,7 +2313,7 @@ public class FacultyModuleController {
 				GetFacultyEmpwrList[] facEmpowrArr = restTemplate
 						.postForObject(Constants.url + "getFacEmpowerList", map, GetFacultyEmpwrList[].class);
 				List<GetFacultyEmpwrList> facEmpowrList = new ArrayList<GetFacultyEmpwrList>(Arrays.asList(facEmpowrArr));
-				System.out.println("List="+facEmpowrList);
+				//System.out.println("List="+facEmpowrList);
 				model.addObject("facEmpowrList", facEmpowrList);
 
 			} else {
@@ -2338,7 +2338,7 @@ public class FacultyModuleController {
 		MultiValueMap<String, Object> map = null;
 		try {
 
-			System.out.println("Hello");
+			//System.out.println("Hello");
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -2411,7 +2411,7 @@ public class FacultyModuleController {
 			
 			FacultyEmpowerment saveFacEmpwr = rest.postForObject(Constants.url+"/saveFacultyEmpowerment", fac, FacultyEmpowerment.class);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showFacultyEmpowerment";

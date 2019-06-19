@@ -91,9 +91,9 @@
 						</a></li> -->
 
 						
-					<%-- 	<li class="last"><a href="${pageContext.request.contextPath}/changeMobNoForm/${sessionScope.userObj.getStaff().getFacultyId()}"> <i
+				 	<li class="last"><a href="${pageContext.request.contextPath}/changeMobNoForm/${sessionScope.userObj.getStaff().getFacultyId()}"> <i
 								class="fa fa-lock"></i> Change Mobile No.
-						</a></li> --%>
+						</a></li> 
 						
 						<li class="last"><a href="${pageContext.request.contextPath}/logout"> <i
 								class="fa fa-lock"></i> Logout

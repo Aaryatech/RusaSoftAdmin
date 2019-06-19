@@ -63,7 +63,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showStudOrgnizedActivity", "showStudOrgnizedActivity", "1", "0",
 					"0", "0", newModuleList);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -122,7 +122,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
 					"1", "0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -156,7 +156,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
 					"1", "0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -203,7 +203,7 @@ public class StudentActivityController {
 				programActivity.setType(0);
 				programActivity.setRawActivityName(request.getParameter("actvtName"));
 				
-				System.out.println(programActivity);
+				//System.out.println(programActivity);
 				
 				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
 						programActivity, ProgramActivity.class);
@@ -240,7 +240,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("editStudentOrgnizedActivity", "showStudOrgnizedActivity", "0", "0",
 					"1", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -281,7 +281,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("deleteStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
 					"0", "0", "1", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -317,7 +317,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showStudAttendActivity", "showStudAttendActivity", "1", "0", "0",
 					"0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == false) {
@@ -378,7 +378,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddStudentAttendActivity", "showStudAttendActivity", "0", "1",
 					"0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -412,7 +412,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("submitAttendedActivity", "showStudAttendActivity", "0", "1", "0",
 					"0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -516,7 +516,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("editStudentAttendActivity", "showStudAttendActivity", "0", "0", "1",
 					"0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -557,7 +557,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("deleteStudentAttendActivity", "showStudAttendActivity", "0", "0",
 					"0", "1", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -597,7 +597,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showProgramList", "showProgramList", "1", "0", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -655,7 +655,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddProgram", "showProgramList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				model = new ModelAndView("ProgramDetails/addProgDetail");
@@ -694,7 +694,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("submitAddProgram", "showProgramList", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -770,7 +770,7 @@ public class StudentActivityController {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("editProgram", "showProgramList", "0", "0", "1", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -815,7 +815,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("deleteProgram", "showProgramList", "0", "0", "0", "1",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -1563,7 +1563,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "1", "0", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -1631,7 +1631,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("addStudPerfromancInFinalYear", "showStudPerformInFinlYr", "0", "1", "0", "0",
 					newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				model = new ModelAndView("ProgramDetails/addstudPerform");
@@ -1689,12 +1689,12 @@ public class StudentActivityController {
 			studPer.setExInt2(0);
 			studPer.setExVar1("NA");
 			studPer.setExVar2("NA");
-			System.out.println(studPer.toString());
+			//System.out.println(studPer.toString());
 			
 			StudPerformFinalYr saveStudPerform = restTemplate.postForObject(Constants.url+"/addStudPerformFinalYear", studPer, StudPerformFinalYr.class);
 			
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -1804,7 +1804,7 @@ public class StudentActivityController {
 
 					System.err.println("Multiple records delete ");
 					String[] studInfos = request.getParameterValues("studInfo");
-					System.out.println("id are" + studInfo);
+					//System.out.println("id are" + studInfo);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1849,7 +1849,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "1", "0", "0",
 					"0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == false) {
@@ -1908,7 +1908,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("addStudQualifyExmDtl", "showStudentsQualifyingExamDetails", "0", "1",
 					"0", "0", newModuleList);
 
-			System.out.println(view);
+			//System.out.println(view);
 
 			if (view.isError() == false) {
 				StudQualifyingExam studQlifyExam = new StudQualifyingExam();
@@ -1961,11 +1961,11 @@ public class StudentActivityController {
 			stud.setExInt2(0);
 			stud.setExVar1("NA");
 			stud.setExVar2("NA");
-			//System.out.println(stud.toString());
+			////System.out.println(stud.toString());
 			StudQualifyingExam addStudQalifyExam = restTemplate.postForObject(Constants.url+"/saveStudQualifyExam", stud, StudQualifyingExam.class);
 		
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 		return "redirect:/showStudentsQualifyingExamDetails";
 	}
@@ -2068,7 +2068,7 @@ public class StudentActivityController {
 
 					System.err.println("Multiple records delete ");
 					String[] studQlfExmIds = request.getParameterValues("studQlfExmId");
-					System.out.println("id are" + studQlfExmId);
+					//System.out.println("id are" + studQlfExmId);
 
 					StringBuilder sb = new StringBuilder();
 

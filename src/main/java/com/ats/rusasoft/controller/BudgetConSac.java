@@ -402,7 +402,7 @@ public class BudgetConSac {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("infraBudgetId");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -736,7 +736,7 @@ public class BudgetConSac {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("libBudgetId");
-					// System.out.println("id are" + instIds);
+					// //System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1062,7 +1062,7 @@ public class BudgetConSac {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("wasteMngtBudgetId");
-					// System.out.println("id are" + instIds);
+					// //System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 

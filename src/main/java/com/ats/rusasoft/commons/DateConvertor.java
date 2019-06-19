@@ -58,13 +58,13 @@ public class DateConvertor {
 
 				Date dmyDate = dmySDF.parse(date);
 				
-				System.out.println("converted util date commons "+dmyDate);
+				// System.out.println("converted util date commons "+dmyDate);
 
 				
 				
 
 				convertedDate=new java.sql.Date(dmyDate.getTime());
-				System.out.println("converted sql date commons "+convertedDate);
+				// System.out.println("converted sql date commons "+convertedDate);
 				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

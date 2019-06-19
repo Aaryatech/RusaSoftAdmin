@@ -155,7 +155,7 @@ public class RegController {
 				institute.setState(request.getParameter("state"));
 				institute.setPincode(request.getParameter("pin"));
 
-				System.out.println(institute);
+				//System.out.println(institute);
 
 				//Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 					//	Institute.class);
@@ -219,7 +219,7 @@ public class RegController {
 			model.addObject("otpk", otpKey);
 			model.addObject("otpNo", otpNo);
 			
-			//System.out.println(res);
+			////System.out.println(res);
 			}else {
 				System.err.println("in Else  its Back button Pressed " );
 				

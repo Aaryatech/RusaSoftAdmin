@@ -74,7 +74,7 @@ public class FacPersonalController {
 		ModelAndView model = null;
 		try {
 
-			System.out.println("hii...");
+			//System.out.println("hii...");
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -216,7 +216,7 @@ public class FacPersonalController {
 				map = new LinkedMultiValueMap<>();
 				map.add("id", userObj.getStaff().getFacultyId());
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("staff" + staff);
+				//System.out.println("staff" + staff);
 
 				if (temp == 1) {
 					model.addObject("temp", temp);
@@ -902,7 +902,7 @@ public class FacPersonalController {
 				}
 				model.addObject("facPhdDetail", facPhdDetail);
 
-				System.out.println("=====================" + facPhdDetail.toString());
+				//System.out.println("=====================" + facPhdDetail.toString());
 
 				map = new LinkedMultiValueMap<>();
 
@@ -929,7 +929,7 @@ public class FacPersonalController {
 				map = new LinkedMultiValueMap<>();
 				map.add("id", facultyId);
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("staff" + staff);
+				//System.out.println("staff" + staff);
 
 				model.addObject("staff", staff);
 				map = new LinkedMultiValueMap<>();

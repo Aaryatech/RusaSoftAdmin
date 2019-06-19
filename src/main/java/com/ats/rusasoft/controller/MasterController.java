@@ -409,9 +409,9 @@ public class MasterController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + accId);
+			////System.out.println("Data:" + accId);
 			String accName = request.getParameter("accName");
-			System.out.println("Data:" + accName);
+			////System.out.println("Data:" + accName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
@@ -635,7 +635,7 @@ public class MasterController {
 				map.add("id", facultyId);
 
 				Staff editFaculty = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("facultyId:" + facultyId);
+				////System.out.println("facultyId:" + facultyId);
 
 				model.addObject("editFaculty", editFaculty);
 				model.addObject("addEdit", "1");
@@ -676,7 +676,7 @@ public class MasterController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("accOffIds");
-					System.out.println("id are" + instIds);
+					////System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1136,7 +1136,7 @@ public class MasterController {
 				institute.setState(request.getParameter("state"));
 				institute.setPincode(request.getParameter("pin"));
 
-				System.out.println(institute);
+				////System.out.println(institute);
 
 				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 						Institute.class);
@@ -1219,7 +1219,7 @@ public class MasterController {
 
 				System.err.println("Multiple records delete ");
 				String[] instIds = request.getParameterValues("instIds");
-				System.out.println("id are" + instIds);
+				////System.out.println("id are" + instIds);
 
 				StringBuilder sb = new StringBuilder();
 
@@ -1277,7 +1277,7 @@ public class MasterController {
 
 					System.err.println("Multiple records approve ");
 					String[] instIds = request.getParameterValues("instIds");
-					System.out.println("id are" + instIds);
+					////System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0; i < instIds.length; i++) {
@@ -1499,7 +1499,7 @@ public class MasterController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("deptIds");
-					System.out.println("id are" + instIds);
+					////System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1555,7 +1555,7 @@ public class MasterController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("hodId", hodId);
 				editHod = rest.postForObject(Constants.url + "/getHod", map, Hod.class);
-				System.out.println("hodId:" + hodId);
+				////System.out.println("hodId:" + hodId);
 
 				model.addObject("hod", editHod);
 
@@ -1656,13 +1656,13 @@ public class MasterController {
 				Hod changeHod = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
 
 				if (changeHod != null) {
-					System.out.println(changeHod.toString());
-					System.out.println("In Null" + hodId);
+					////System.out.println(changeHod.toString());
+					////System.out.println("In Null" + hodId);
 					map = new LinkedMultiValueMap<String, Object>();
 					map.add("hodId", hodId);
 
 					Info info = rest.postForObject(Constants.url + "/updateHodStatus", map, Info.class);
-					System.out.println("info" + info.toString());
+					////System.out.println("info" + info.toString());
 
 					map = new LinkedMultiValueMap<String, Object>();
 					map.add("regPrimaryKey", hodId);
@@ -1670,7 +1670,7 @@ public class MasterController {
 
 					info = rest.postForObject(Constants.url + "/blockPreviousHodRecord", map, Info.class);
 
-					System.out.println("block previous record" + info.toString());
+					////System.out.println("block previous record" + info.toString());
 					//
 				}
 
@@ -1714,7 +1714,7 @@ public class MasterController {
 
 			model = new ModelAndView("showInstitute");
 			// int instituteId = Integer.parseInt(request.getParameter("instId"));
-			System.out.println("id are" + instId);
+			////System.out.println("id are" + instId);
 
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("instId", instId);
@@ -1755,7 +1755,7 @@ public class MasterController {
 			} else {
 
 				Info inf = new Info();
-				System.out.println("Id:" + instId);
+				////System.out.println("Id:" + instId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("instId", instId);

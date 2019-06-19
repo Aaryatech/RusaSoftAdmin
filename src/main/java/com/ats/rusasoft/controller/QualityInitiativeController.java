@@ -224,7 +224,7 @@ public class QualityInitiativeController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("accOffIds");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -400,7 +400,7 @@ public class QualityInitiativeController {
 				instQuality.setQualityTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
 				int participant = 0 ;
 				participant = Integer.parseInt(request.getParameter("no_of_participant"));
-				System.out.println("DATA="+participant);
+				//System.out.println("DATA="+participant);
 				if(participant == 0 ) {
 				instQuality.setQualityPcount(0);
 				}else {

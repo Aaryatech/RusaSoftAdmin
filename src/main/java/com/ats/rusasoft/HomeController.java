@@ -205,7 +205,7 @@ public class HomeController {
 
 			/* String password="harsha"; */
 
-			System.out.println("parameters are:::" + userId + password);
+		
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("password", password);
 			map.add("userId", userId);
@@ -214,7 +214,7 @@ public class HomeController {
 			// restTemplate.postForObject(Constants.url+"changePass",map,UserLogin.class);
 
 			Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
-			System.out.println(errMsg);
+		
 
 			session.invalidate();
 
@@ -255,13 +255,13 @@ public class HomeController {
 			loginAcYearId = acYearId;
 		}
 
-		//System.out.println("Credential are::::" + name + password);
+		
 
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 
 		try {
-			//System.out.println("Login Process " + name);
+		
 
 			if (name.equalsIgnoreCase("") || password.equalsIgnoreCase("") || name == null || password == null) {
 
@@ -275,13 +275,13 @@ public class HomeController {
 				map.add("isBlock", 1);
 
 				LoginResponse userObj = restTemplate.postForObject(Constants.url + "login", map, LoginResponse.class);
-				//System.out.println("JSON Response Objet " + userObj.toString());
+			
 				String loginResponseMessage = "";
 
 				if (userObj != null) {
 
 					int a = userObj.getStaff().getIsEnrolled();
-					//System.out.println("is enroll is " + a);
+					
 					if (a == 1) {
 						mav = new ModelAndView("welcome");
 
@@ -298,7 +298,7 @@ public class HomeController {
 						mav = new ModelAndView("changePassword");
 					}
 
-					//System.out.println("Login Successful");
+					
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
@@ -354,7 +354,7 @@ public class HomeController {
 
 					/*
 					 * map =new LinkedMultiValueMap<String, Object>(); map.add("userId", userId);
-					 * System.out.println("Before web service"); try {
+					 * // System.out.println("Before web service"); try {
 					 * ParameterizedTypeReference<List<ModuleJson>> typeRef = new
 					 * ParameterizedTypeReference<List<ModuleJson>>() { };
 					 * ResponseEntity<List<ModuleJson>> responseEntity =
@@ -420,7 +420,7 @@ public class HomeController {
 
 						map = new LinkedMultiValueMap<String, Object>();
 						map.add("roleId", roleIdList.get(i));
-						//System.out.println("/getRoleJsonByRoleId param:  roleId  " + roleIdList.get(i));
+				
 						try {
 							ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
 							};
@@ -540,7 +540,7 @@ public class HomeController {
 						}
 					});
 
-					// System.out.println(newModuleList);
+					
 
 					session.setAttribute("newModuleList", newModuleList);
 				}
@@ -566,7 +566,7 @@ public class HomeController {
 		//your code
 		Instant end = Instant.now();
 		Duration timeElapsed = Duration.between(start, end);
-		System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
+		// // System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
 		return mav;
 
 	}
@@ -576,7 +576,7 @@ public class HomeController {
 		int subModId = Integer.parseInt(request.getParameter("subModId"));
 		int modId = Integer.parseInt(request.getParameter("modId"));
 		/*
-		 * System.out.println("subModId " + subModId); System.out.println("modId " +
+		 * // System.out.println("subModId " + subModId); // System.out.println("modId " +
 		 * modId);
 		 */
 		HttpSession session = request.getSession();
@@ -587,7 +587,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
-		System.out.println("User Logout");
+		// System.out.println("User Logout");
 
 		session.invalidate();
 		return "redirect:/";
@@ -766,7 +766,7 @@ public class HomeController {
 			map.add("otp", otp);
 			Instant end = Instant.now();
 			Duration timeElapsed = Duration.between(start, end);
-			System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
+			// System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
 			if(timeElapsed.toMinutes()<=2) {
 			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
 			/*
@@ -854,11 +854,11 @@ public class HomeController {
 		try {
 
 			model = new ModelAndView("changeMobNo");
-			System.out.println("Id Found" + id);
+			// System.out.println("Id Found" + id);
 			model.addObject("title", "Change Contact No.");
 			map.add("id", id);
 			Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-			System.out.println("staff" + staff.getContactNo());
+			// System.out.println("staff" + staff.getContactNo());
 			model.addObject("mobNo", staff.getContactNo());
 
 		} catch (Exception e) {
@@ -995,7 +995,7 @@ public class HomeController {
 			hm.put(id, no);
 			map.add("no", no);
 			map.add("id", id);
-			System.out.println("Data==" + hm);
+			// System.out.println("Data==" + hm);
 
 			String dtr = rest.postForObject(Constants.url + "sndOTPOnNewNo", map, String.class);
 
@@ -1038,7 +1038,7 @@ public class HomeController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			for (Map.Entry m : hm.entrySet()) {
-				System.out.println("Data==" + m.getValue() + "//" + m.getKey());
+				// System.out.println("Data==" + m.getValue() + "//" + m.getKey());
 
 				map.add("no", m.getValue());
 				map.add("id", m.getKey());
@@ -1053,7 +1053,7 @@ public class HomeController {
 				model.addObject("msg", "Please Try Again!");
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return model;
@@ -1061,7 +1061,7 @@ public class HomeController {
 
 	@ExceptionHandler(LoginFailException.class)
 	public String redirectToLogin() {
-		System.out.println("HomeController Login Fail Excep:");
+		// System.out.println("HomeController Login Fail Excep:");
 
 		return "login";
 	}

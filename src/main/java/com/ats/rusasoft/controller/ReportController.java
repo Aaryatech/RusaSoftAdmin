@@ -347,7 +347,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -377,7 +377,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -420,7 +420,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -452,7 +452,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -581,7 +581,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -739,7 +739,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -769,7 +769,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -811,7 +811,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -839,7 +839,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -883,7 +883,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -1005,8 +1005,8 @@ public class ReportController {
 					String tempprcnt = decimalFormat
 							.format(prog.getNoCurrentAdmitedStnt() / prog.getTotalSanctIntake() * 100);
 
-					System.out.println("prog.getNoCurrentAdmitedStnt()" + prog.getNoCurrentAdmitedStnt()
-							+ "prog.getTotalSanctIntake()" + prog.getTotalSanctIntake());
+					//System.out.println("prog.getNoCurrentAdmitedStnt()" + prog.getNoCurrentAdmitedStnt()
+						//	+ "prog.getTotalSanctIntake()" + prog.getTotalSanctIntake());
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -1043,7 +1043,7 @@ public class ReportController {
 				document.add(new Paragraph("Avg% :" + n + ""));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -1073,7 +1073,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -1117,7 +1117,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String leaveSum = "Average% :" + n + "";
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -1142,7 +1142,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -1186,7 +1186,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -1467,7 +1467,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -1497,7 +1497,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -1561,7 +1561,7 @@ public class ReportController {
 
 						String reportSummary = leaveSum + "" + leaveSum1 + "" + leaveSum2;
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
 								"Academic Year:" + temp_ac_year + " ", reportSummary, 'G');
@@ -1584,7 +1584,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -1627,7 +1627,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -1775,7 +1775,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -1805,7 +1805,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -1849,7 +1849,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -1873,7 +1873,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -1916,7 +1916,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -2057,7 +2057,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -2087,7 +2087,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -2135,7 +2135,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -2159,7 +2159,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -2202,7 +2202,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -2318,7 +2318,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -2348,7 +2348,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -2384,7 +2384,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						String leaveSum = "Program: " + progList.get(0).getProgramName() + "";
 						String leaveSum1 = ",Program Type: " + temp_prog_name + "";
@@ -2413,7 +2413,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -2458,7 +2458,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -2601,7 +2601,7 @@ public class ReportController {
 				document.add(new Paragraph("Average%:" + rslt / 5 + ""));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -2631,7 +2631,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -2673,7 +2673,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String leaveSum = "Academic Year: " + temp_ac_year + "";
 						String leaveSum1 = ",Category: " + temp_cat + "";
 
@@ -2702,7 +2702,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -2744,7 +2744,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -2883,7 +2883,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -2913,7 +2913,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -2952,7 +2952,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "For Academic Year :" + temp_ac_year, "", 'E');
@@ -2975,7 +2975,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -3014,7 +3014,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -3165,7 +3165,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -3195,7 +3195,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -3235,7 +3235,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "", "", 'F');
@@ -3258,7 +3258,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -3301,7 +3301,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -3442,7 +3442,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -3472,7 +3472,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -3519,7 +3519,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, "", "", 'D');
@@ -3542,7 +3542,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -3583,10 +3583,10 @@ public class ReportController {
 			List<TeacherStudUsingLib> progList = new ArrayList<>(Arrays.asList(resArray));
 
 			model.addObject("list", progList);
-			System.out.println("size" + progList.size());
+			//System.out.println("size" + progList.size());
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -3750,7 +3750,7 @@ public class ReportController {
 				}
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -3780,7 +3780,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -3859,7 +3859,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 
@@ -3884,7 +3884,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4065,7 +4065,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4095,7 +4095,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4136,7 +4136,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -4168,7 +4168,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4335,7 +4335,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4365,7 +4365,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4403,7 +4403,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -4435,7 +4435,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4628,7 +4628,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4658,7 +4658,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4700,7 +4700,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -4732,7 +4732,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -4925,7 +4925,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -4955,7 +4955,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -4997,7 +4997,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -5029,7 +5029,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -5199,7 +5199,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5229,7 +5229,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5270,7 +5270,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -5302,7 +5302,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -5488,7 +5488,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5518,7 +5518,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5561,7 +5561,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -5594,7 +5594,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -5780,7 +5780,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -5810,7 +5810,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -5853,7 +5853,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -5886,7 +5886,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6060,7 +6060,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6090,7 +6090,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6124,7 +6124,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -6156,7 +6156,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6311,7 +6311,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6341,7 +6341,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6382,7 +6382,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -6413,7 +6413,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6590,7 +6590,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6620,7 +6620,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6661,7 +6661,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -6693,7 +6693,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -6870,7 +6870,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -6900,7 +6900,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -6941,7 +6941,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -6973,7 +6973,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7126,7 +7126,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -7156,7 +7156,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -7193,7 +7193,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -7225,7 +7225,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7397,7 +7397,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -7427,7 +7427,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -7470,7 +7470,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -7502,7 +7502,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7696,7 +7696,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -7726,7 +7726,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -7777,7 +7777,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -7809,7 +7809,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -7987,7 +7987,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8017,7 +8017,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8064,7 +8064,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -8096,7 +8096,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8139,7 +8139,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -8255,7 +8255,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8285,7 +8285,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8320,7 +8320,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -8348,7 +8348,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8391,7 +8391,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -8542,7 +8542,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8572,7 +8572,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8613,7 +8613,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -8641,7 +8641,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8684,7 +8684,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -8800,7 +8800,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -8830,7 +8830,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -8865,7 +8865,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -8893,7 +8893,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -8935,7 +8935,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -9084,7 +9084,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9114,7 +9114,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -9158,7 +9158,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -9182,7 +9182,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9225,7 +9225,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -9389,7 +9389,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9419,7 +9419,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -9466,7 +9466,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -9490,7 +9490,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9533,7 +9533,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -9692,7 +9692,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -9722,7 +9722,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -9770,7 +9770,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -9794,7 +9794,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -9837,7 +9837,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -9976,7 +9976,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -10006,7 +10006,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10045,7 +10045,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
 								"Academic Year:" + temp_ac_year + " ", "", 'E');
@@ -10069,7 +10069,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -10112,7 +10112,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -10232,7 +10232,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -10262,7 +10262,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10297,7 +10297,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
 								"Academic Year:" + temp_ac_year + " ",
@@ -10322,7 +10322,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -10502,7 +10502,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -10532,7 +10532,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10573,7 +10573,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -10605,7 +10605,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -10785,7 +10785,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -10815,7 +10815,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -10856,7 +10856,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -10888,7 +10888,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -11068,7 +11068,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -11098,7 +11098,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -11139,7 +11139,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -11171,7 +11171,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -11338,7 +11338,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -11368,7 +11368,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -11407,7 +11407,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -11439,7 +11439,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -11632,7 +11632,7 @@ public class ReportController {
 				document.add(new Paragraph("Avg%:" + x1 + ""));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -11662,7 +11662,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -11706,7 +11706,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -11738,7 +11738,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -11906,7 +11906,7 @@ public class ReportController {
 				document.add(new Paragraph("Avg%:" + x1 + ""));
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -11936,7 +11936,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -11974,7 +11974,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -12006,7 +12006,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -12050,7 +12050,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showCustomerwisePdf");
+			//System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -12184,7 +12184,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -12214,7 +12214,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -12260,7 +12260,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -12284,7 +12284,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -12474,7 +12474,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -12504,7 +12504,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -12549,7 +12549,7 @@ public class ReportController {
 					double x2 = result1 / 5;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -12589,7 +12589,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -12633,7 +12633,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -12747,7 +12747,7 @@ public class ReportController {
 				document.add(table);
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -12777,7 +12777,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -12812,7 +12812,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
@@ -12836,7 +12836,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -12999,7 +12999,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -13029,7 +13029,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -13071,7 +13071,7 @@ public class ReportController {
 					String a1 = decimalFormat.format(x2);
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -13106,7 +13106,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -13298,7 +13298,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -13328,7 +13328,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -13371,7 +13371,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -13403,7 +13403,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -13568,7 +13568,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -13598,7 +13598,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -13641,7 +13641,7 @@ public class ReportController {
 					String a1 = decimalFormat.format(x2);
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -13676,7 +13676,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -13893,7 +13893,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -13923,7 +13923,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -13970,7 +13970,7 @@ public class ReportController {
 
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -14003,7 +14003,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -14194,7 +14194,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -14224,7 +14224,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -14291,7 +14291,7 @@ public class ReportController {
 
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -14324,7 +14324,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -14369,7 +14369,7 @@ public class ReportController {
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
-			System.out.println("Inside Pdf showAvgStudYearwiseReport");
+			//System.out.println("Inside Pdf showAvgStudYearwiseReport");
 			Document document = new Document(PageSize.A4);
 			document.setMargins(50, 45, 50, 60);
 			document.setMarginMirroring(false);
@@ -14519,7 +14519,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -14549,7 +14549,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -14620,7 +14620,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 
 						String leaveSum = "Program: " + progList.get(0).getProgramName() + "";
 						String leaveSum1 = ",Program Type: " + temp_prog_name + "";
@@ -14650,7 +14650,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -14841,7 +14841,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -14871,7 +14871,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -14914,7 +14914,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -14946,7 +14946,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -15149,7 +15149,7 @@ public class ReportController {
 
 				int totalPages = writer.getPageNumber();
 
-				System.out.println("Page no " + totalPages);
+				//System.out.println("Page no " + totalPages);
 
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
@@ -15179,7 +15179,7 @@ public class ReportController {
 						try {
 							FileCopyUtils.copy(inputStream, response.getOutputStream());
 						} catch (IOException e) {
-							System.out.println("Excep in Opening a Pdf File");
+							//System.out.println("Excep in Opening a Pdf File");
 							e.printStackTrace();
 						}
 					}
@@ -15243,7 +15243,7 @@ public class ReportController {
 					XSSFWorkbook wb = null;
 					try {
 
-						System.out.println("Excel List :" + exportToExcelList.toString());
+						//System.out.println("Excel List :" + exportToExcelList.toString());
 						String rep = null;
 						try {
 							rep = progList.get(0).getInstituteName();
@@ -15275,7 +15275,7 @@ public class ReportController {
 
 			} catch (DocumentException ex) {
 
-				System.out.println("Pdf Generation Error: " + ex.getMessage());
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 

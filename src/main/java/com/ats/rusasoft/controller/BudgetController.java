@@ -242,7 +242,7 @@ public class BudgetController {
 
 					System.err.println("Multiple records delete ");
 					String[] bookIds = request.getParameterValues("bookIds");
-					System.out.println("id are" + bookIds);
+					//System.out.println("id are" + bookIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -253,7 +253,7 @@ public class BudgetController {
 
 					String bookIdList = sb.toString();
 					bookIdList = bookIdList.substring(0, bookIdList.length() - 1);
-					System.out.println("stud id list" + bookIdList);
+					//System.out.println("stud id list" + bookIdList);
 
 					map.add("libBookBudgetIdList", bookIdList);
 				} else {

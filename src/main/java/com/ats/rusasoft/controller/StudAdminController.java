@@ -552,7 +552,7 @@ public class StudAdminController {
 								.parseInt(request.getParameter("cast_t" + studAdmList.get(i).getCastId())));
 						studAdmCat.setExInt1(
 								Integer.parseInt(request.getParameter("seats" + studAdmList.get(i).getCastId())));
-						System.out.println("CatGor=>"+studAdmCat.toString());
+						//System.out.println("CatGor=>"+studAdmCat.toString());
 						
 						// studAdmCat.setCatTotStudent(Integer.parseInt(request.getParameter("cast_tot_stud"+castList.get(i).getCastId())));
 						studAdmCat.setCatTotStudent(studAdmCat.getFemaleStudent() + studAdmCat.getMaleStudent()

@@ -95,9 +95,9 @@ public class YesNoController {
 			instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
 
 			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
+			 * //System.out.println("yesNoMasterList " + yesNoMasterList);
+			 * //System.out.println("sectionList " + sectionList);
+			 * //System.out.println("instituteYesNoList " + instituteYesNoList);
 			 */
 
 			model.addObject("yesNoMasterList", yesNoMasterList);
@@ -177,9 +177,9 @@ public class YesNoController {
 				instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
 
 				/*
-				 * System.out.println("yesNoMasterList " + yesNoMasterList);
-				 * System.out.println("sectionList " + sectionList);
-				 * System.out.println("instituteYesNoList " + instituteYesNoList);
+				 * //System.out.println("yesNoMasterList " + yesNoMasterList);
+				 * //System.out.println("sectionList " + sectionList);
+				 * //System.out.println("instituteYesNoList " + instituteYesNoList);
 				 */
 
 				model.addObject("yesNoMasterList", yesNoMasterList);
@@ -260,9 +260,9 @@ public class YesNoController {
 				instituteYesNoList = new ArrayList<>(Arrays.asList(instituteYesNo));
 
 				/*
-				 * System.out.println("yesNoMasterList " + yesNoMasterList);
-				 * System.out.println("sectionList " + sectionList);
-				 * System.out.println("instituteYesNoList " + instituteYesNoList);
+				 * //System.out.println("yesNoMasterList " + yesNoMasterList);
+				 * //System.out.println("sectionList " + sectionList);
+				 * //System.out.println("instituteYesNoList " + instituteYesNoList);
 				 */
 
 				model.addObject("yesNoMasterList", yesNoMasterList);
@@ -500,7 +500,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("transpernt");
 				instituteYesNo.setYearId(acYearId);
 
-				System.out.println(instituteYesNo);
+				//System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -552,7 +552,7 @@ public class YesNoController {
 		// map.add("secCode", "tab1");
 		InstituteYesNo editInstyn = restTemplate.postForObject(Constants.url + "/getInstituteYesNoById", map,
 				InstituteYesNo.class);
-		System.out.println("res=" + editInstyn.toString());
+		//System.out.println("res=" + editInstyn.toString());
 
 		model.addObject("editYN", editInstyn);
 		return editInstyn;
@@ -567,7 +567,7 @@ public class YesNoController {
 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 		int acYearId = (Integer) session.getAttribute("acYearId");
 		// int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
-		System.out.println("Id:" + instYesnoId);
+		//System.out.println("Id:" + instYesnoId);
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("id", instYesnoId);
 
@@ -576,7 +576,7 @@ public class YesNoController {
 		// map.add("secCode", "tab1");
 		InstituteYesNo editInstyn = restTemplate.postForObject(Constants.url + "/getInstituteYesNoById", map,
 				InstituteYesNo.class);
-		System.out.println("res=" + editInstyn.toString());
+		//System.out.println("res=" + editInstyn.toString());
 
 		model.addObject("editYN", editInstyn);
 		return model;
@@ -652,7 +652,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Time bound");
 				instituteYesNo.setYearId(acYearId);
 
-				System.out.println(instituteYesNo);
+				//System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -755,7 +755,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Efficient");
 				instituteYesNo.setYearId(acYearId);
 
-				System.out.println(instituteYesNo);
+				//System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -854,14 +854,14 @@ public class YesNoController {
 			tempFb = new ArrayList<>(Arrays.asList(instituteYesNo));
 			model.addObject("tempFb", tempFb);
 
-			System.out.println("tempFb:::" + tempFb.toString());
+			//System.out.println("tempFb:::" + tempFb.toString());
 			try {
 				if (tempFb.size() > 0) {
-					System.out.println("size gt 0");
+					//System.out.println("size gt 0");
 					model.addObject("isEdit", 1);
 
 				} else {
-					System.out.println("is edit 0 in else part");
+					//System.out.println("is edit 0 in else part");
 					model.addObject("isEdit", 0);
 				}
 			} catch (Exception e) {
@@ -900,7 +900,7 @@ public class YesNoController {
 			}
 			
 			
-			System.out.println("isEdit:::" +isEdit );
+			//System.out.println("isEdit:::" +isEdit );
 			
 			
 			InstStakeholderFeedback head = null;
@@ -909,7 +909,7 @@ public class YesNoController {
 			for (int i = 0; i < stfbList.size(); i++) {
 				head = new InstStakeholderFeedback();
 				if (Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())) == 1) {
- 					System.out.println("yes " + i);
+ 					//System.out.println("yes " + i);
  					if(isEdit==1) {
  						for (int j = 0; j < tempFb.size(); j++) {
  							if(tempFb.get(j).getFbFromId()== stfbList.get(i).getFeedbackId()) {
@@ -933,7 +933,7 @@ public class YesNoController {
 					head.setExInt2(1);
 					head.setExVar1("NA");
 					head.setExVar2("NA");
-					System.out.println("head in yes:::" + head.toString());
+					//System.out.println("head in yes:::" + head.toString());
 					
 				}
 
@@ -948,7 +948,7 @@ public class YesNoController {
  							} 
  					}
 					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
-					System.out.println("no " + i);
+					//System.out.println("no " + i);
 					head.setFbFromId(stfbList.get(i).getFeedbackId());
 					head.setFbProcess("NA");
 					head.setYrSem(0);
@@ -968,7 +968,7 @@ public class YesNoController {
 			}
 			 
 			
-			System.out.println("proofList is :::" + proofList.toString());
+			//System.out.println("proofList is :::" + proofList.toString());
 			InstStakeholderFeedback[] instituteYesNo = restTemplate
 					.postForObject(Constants.url + "/saveInstStakeholder", proofList, InstStakeholderFeedback[].class);
 			if (instituteYesNo != null) {
@@ -1026,9 +1026,9 @@ public class YesNoController {
 			instituteYesNoListPage3 = new ArrayList<>(Arrays.asList(instituteYesNo));
 
 			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
+			 * //System.out.println("yesNoMasterList " + yesNoMasterList);
+			 * //System.out.println("sectionList " + sectionList);
+			 * //System.out.println("instituteYesNoList " + instituteYesNoList);
 			 */
 
 			model.addObject("yesNoMasterList", yesNoMasterListPage3);
@@ -1196,9 +1196,9 @@ public class YesNoController {
 			instituteYesNoListPage4 = new ArrayList<>(Arrays.asList(instituteYesNo));
 
 			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
+			 * //System.out.println("yesNoMasterList " + yesNoMasterList);
+			 * //System.out.println("sectionList " + sectionList);
+			 * //System.out.println("instituteYesNoList " + instituteYesNoList);
 			 */
 
 			model.addObject("yesNoMasterList", yesNoMasterListPage4);
@@ -1368,9 +1368,9 @@ public class YesNoController {
 			instituteYesNoListPage5 = new ArrayList<>(Arrays.asList(instituteYesNo));
 
 			/*
-			 * System.out.println("yesNoMasterList " + yesNoMasterList);
-			 * System.out.println("sectionList " + sectionList);
-			 * System.out.println("instituteYesNoList " + instituteYesNoList);
+			 * //System.out.println("yesNoMasterList " + yesNoMasterList);
+			 * //System.out.println("sectionList " + sectionList);
+			 * //System.out.println("instituteYesNoList " + instituteYesNoList);
 			 */
 
 			model.addObject("yesNoMasterList", yesNoMasterListPage5);
@@ -1594,7 +1594,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Gender");
 				instituteYesNo.setYearId(acYearId);
 
-				System.out.println(instituteYesNo);
+				//System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -1697,7 +1697,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Environment");
 				instituteYesNo.setYearId(acYearId);
 
-				System.out.println(instituteYesNo);
+				//System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -1800,7 +1800,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("HumanValues");
 				instituteYesNo.setYearId(acYearId);
 
-				System.out.println(instituteYesNo);
+				//System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {

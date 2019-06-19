@@ -208,9 +208,9 @@ public class MastersController {
 
 			int designation = 0;
 
-			System.out.println("Data:" + hodId);
+			//System.out.println("Data:" + hodId);
 			String hodName = request.getParameter("hodName");
-			System.out.println("Data:" + hodName);
+			//System.out.println("Data:" + hodName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
@@ -413,7 +413,7 @@ public class MastersController {
 				map.add("id", facultyId);
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				System.out.println("deptIdList 1:" + editHod.getDeptId());
+				//System.out.println("deptIdList 1:" + editHod.getDeptId());
 
 				model.addObject("editHod", editHod);
 				model.addObject("addEdit", "1");
@@ -463,7 +463,7 @@ public class MastersController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("hodIds");
-					System.out.println("id are" + instIds);
+					//System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -652,7 +652,7 @@ public class MastersController {
 
 				}
 				if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");
+					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}

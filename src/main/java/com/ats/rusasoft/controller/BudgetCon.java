@@ -290,7 +290,7 @@ public class BudgetCon {
 
 				PhysicalFacilityBudget editBudget = rest.postForObject(Constants.url + "/getphysicalFacilityBudgetById",
 						map, PhysicalFacilityBudget.class);
-				System.out.println("journalId:" + physicalFacilityBudgetId);
+				//System.out.println("journalId:" + physicalFacilityBudgetId);
 
 				model.addObject("editBudget", editBudget);
 
@@ -570,7 +570,7 @@ public class BudgetCon {
 
 				AcademicBudget editBudget = rest.postForObject(Constants.url + "/getAcademicBudgetById", map,
 						AcademicBudget.class);
-				System.out.println("academicBudget LIST:" + editBudget);
+				//System.out.println("academicBudget LIST:" + editBudget);
 				model.addObject("editBudget", editBudget);
 
 			}
