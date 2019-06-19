@@ -114,8 +114,8 @@
 
 					
 					<p>
-						<label for="old_no">Existed Contacted No.<span class="text-danger"></span><br />
-							<input type="text" name="Oldcontact" id="Oldcontact" onkeyup="trim(this)"
+						<label Style="text-color:red;" for="old_no">Existed Contact No.<br />
+							<input type="text" name="Oldcontact" id="Oldcontact" onkeyup="trim(this)" readonly
 							class="input" value="${mobNo}" placeholder="Existed Contact No." size="20" /></label>
 					</p>
 					
@@ -155,7 +155,7 @@
 
 					
 					<p>
-						<label for="new_no">New Contacted No.<span class="text-danger"></span><br />
+						<label for="new_no"  class="control-label col-sm-2" >New Contact No.<span class="text-danger"></span><br />
 							<input type="text" name="newContact" id="newContact" onkeyup="trim(this)"
 							class="input" value="${mobNo}" placeholder="New Contact No." size="20" /></label>
 					</p>

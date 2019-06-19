@@ -894,9 +894,9 @@ public class HomeController {
 			System.err.println("Info Response  " + info.toString());
 
 			if (info.isError() == true) {
-				model = new ModelAndView("forgotPassword");
+				model = new ModelAndView("changeMobNo");
 				// c="redirect:/showforgotPassForm";
-				model.addObject("msg", "Invalid User Name");
+				model.addObject("msg", "Invalid Mobile Number");
 
 			} else {
 				model = new ModelAndView("verifyOTP");
