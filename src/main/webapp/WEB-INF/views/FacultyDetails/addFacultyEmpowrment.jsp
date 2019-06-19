@@ -142,8 +142,8 @@
 														Support <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="radio" ${facultyEmpowr.financialSupport == 1 ? 'checked' : ''} name="financial_suprt" value="1" onclick="checkPhdGuide(1)">Yes<br>
-														<input type="radio" ${facultyEmpowr.financialSupport == 0 ? 'checked' : ''} name="financial_suprt" value="0" onclick="checkPhdGuide(0)">No<br>
+														<input type="radio" ${facultyEmpowr.financialSupport == 1 ? 'checked' : ''} name="financial_suprt" id="financial_suprt"  value="1" onclick="checkPhdGuide(1)">Yes<br>
+														<input type="radio" ${facultyEmpowr.financialSupport == 0 ? 'checked' : ''} name="financial_suprt"  id="financial_suprt" value="0" onclick="checkPhdGuide(0)">No<br>
 														<span class="error_form text-danger" id="financ_errfield"
 															style="display: none;">Please select financial support</span>
 
@@ -154,7 +154,7 @@
 												<div class="form-group" id="ihide" style="display: none;">
 														<div class="form-group">
 															<label class="control-label col-sm-3" for="smallheading">Amount 
-																Received From<span class="text-danger"></span>
+																Received From<span class="text-danger">*</span>
 															</label>
 															<div  class="col-sm-9">
 																<select id="amt_rcvd_frm" name="amt_rcvd_frm" class="form-control">
@@ -171,7 +171,7 @@
 														
 														<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">Amount(Rs.)
-														 <span class="text-danger"></span>
+														 <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
@@ -353,6 +353,10 @@
 													$("#error_tdate").hide();
 												}
 												
+												
+												
+												
+												
 												var from_date = document.getElementById("fromDate").value;
 								 				var to_date = document.getElementById("toDate").value;
 								 				
@@ -378,6 +382,28 @@
 
 												 
 												
+								 		       var radioValue = $("input[name='financial_suprt']:checked").val();
+								 		       alert(radioValue);
+								 		        
+								 		        if(radioValue==1){
+								 		        	
+								 		        	if (!$("#amount").val()) {
+														isError = true;
+
+														$("#amount").addClass(
+																"has-error")
+														$("#amt_errfield")
+																.show()
+														} else {
+															$("#amt_errfield")
+																	.hide()
+														}
+								 		        	 
+								 		        	
+								 		        }
+								 		        
+								 		      
+								 		        
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
