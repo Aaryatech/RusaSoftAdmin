@@ -117,13 +117,13 @@
 											<p class="desc font-italic fontsize11">Note:
 															Please Enter Correct Subject Code</p>
 										</div></div>
-
+ 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="Semester">Semester<span
 												class="text-danger">*</span></label>
 											<div class="col-sm-6">
 												<select id="sem" name="sem" class="form-control">
-													<option value="-1">Select</option>
+													<option disabled selected value="-1">Select</option>
 													
 							<option value="I" ${editSubject.subSem eq 'I' ? 'selected' : ''}>I</option>
 							<option value="II" ${editSubject.subSem eq 'II' ? 'selected' : ''}>II</option>
@@ -763,7 +763,12 @@
             					   return false;
             				} );
             	});
-		  
+            	 function trim(el) {
+            			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+            			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+            			replace(/\n +/, "\n"); // Removes spaces after newlines
+            			return;
+            		}
         </script>
 
 
