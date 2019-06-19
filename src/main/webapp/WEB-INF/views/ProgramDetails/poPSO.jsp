@@ -81,7 +81,7 @@
 									</div>
 										
 									<div class="form-group">
-									<label class="control-label col-sm-2" for="status"> Duration:</label>
+									<label class="control-label col-sm-2" for="status"> Duration In(months):</label>
 										<label class="control-label col-sm-10" for="status"><strong> ${progDetail.monthDuration}</strong></label>				
 									</div>
 									<div class="form-group">
