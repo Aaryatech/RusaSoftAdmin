@@ -383,11 +383,11 @@
 												 
 												
 								 		       var radioValue = $("input[name='financial_suprt']:checked").val();
-								 		       alert(radioValue);
+								 		       //alert(radioValue);
 								 		        
 								 		        if(radioValue==1){
 								 		        	
-								 		        	if (!$("#amount").val()) {
+								 		        	if (!$("#amount").val()  || $("#amount").val() <= 0) {
 														isError = true;
 
 														$("#amount").addClass(
