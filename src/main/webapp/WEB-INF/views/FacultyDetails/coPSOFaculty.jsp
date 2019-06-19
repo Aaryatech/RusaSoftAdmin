@@ -79,7 +79,7 @@
 
 										<div class="form-group"> -->
 											<label class="col-sm-2" for="status">
-												Duration:&nbsp;&nbsp;<strong>${programDetail.monthDuration}</strong></label>
+												Duration In (Months):&nbsp;&nbsp;<strong>${programDetail.monthDuration}</strong></label>
 											
 										<!-- </div>
 										<div class="form-group"> -->
@@ -97,7 +97,7 @@
 
 										<div class="form-group"> -->
 											<label class="col-sm-2" for="status">
-												Semister:&nbsp;&nbsp;<strong>${subject.subSem}</strong></label>
+												Semester:&nbsp;&nbsp;<strong>${subject.subSem}</strong></label>
 											
 										<!-- </div>
 										<div class="form-group"> -->

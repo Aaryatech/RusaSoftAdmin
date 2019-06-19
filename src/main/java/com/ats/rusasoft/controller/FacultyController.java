@@ -874,7 +874,7 @@ public class FacultyController {
 		try {
 			HttpSession session = request.getSession();
 			model = new ModelAndView("FacultyDetails/coPSOFaculty");
-			model.addObject("title", "Faculty CO PO");
+			model.addObject("title", "Faculty (CO) Course Outcome And (PO) Program Outcome");
 
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -1042,7 +1042,7 @@ public class FacultyController {
 		ModelAndView model = new ModelAndView("FacultyDetails/PSOFaculty");
 		try {
 
-			model.addObject("title", "CO PO Mapping");
+			model.addObject("title", "Course Outcome (CO) And Program Outcome (PO) Mapping");
 			int coId = Integer.parseInt(request.getParameter("coId"));
 			int subId = Integer.parseInt(request.getParameter("subId"));
 			int programId = Integer.parseInt(request.getParameter("programId"));

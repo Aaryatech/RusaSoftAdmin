@@ -124,9 +124,20 @@
 											<div class="col-sm-6">
 												<select id="sem" name="sem" class="form-control">
 													<option value="-1">Select</option>
+													
+							<option value="I" ${editSubject.subSem eq 'I' ? 'selected' : ''}>I</option>
+							<option value="II" ${editSubject.subSem eq 'II' ? 'selected' : ''}>II</option>
+							<option value="III" ${editSubject.subSem eq 'III' ? 'selected' : ''}>III</option>
+							<option value="IV" ${editSubject.subSem eq 'IV' ? 'selected' : ''}>IV</option>
+							<option value="V" ${editSubject.subSem eq 'V' ? 'selected' : ''}>V</option>
+							<option value="VI" ${editSubject.subSem eq 'VI' ? 'selected' : ''}>VI</option>
+							<option value="VII" ${editSubject.subSem eq '"VII"' ? 'selected' : ''}>VII</option>
+							<option value="VIII" ${editSubject.subSem eq 'VIII' ? 'selected' : ''}>VIII</option>
+							<option value="IX" ${editSubject.subSem eq 'IX' ? 'selected' : ''}>IX</option>
+							<option value="X" ${editSubject.subSem eq 'X' ? 'selected' : ''}>X</option>
 
-													<c:choose>
-														<c:when test="${editSubject.subSem==1}">
+													<%-- <c:choose>
+														<c:when test="">
 															<option value="1" Selected>1</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
@@ -261,7 +272,7 @@
 															<option value="10">10</option>
 														</c:otherwise>
 													</c:choose>
-
+ --%>
 
 												</select> <span class="error_form text-danger" id="error_sem"
 													style="display: none;">Please Select </span>
