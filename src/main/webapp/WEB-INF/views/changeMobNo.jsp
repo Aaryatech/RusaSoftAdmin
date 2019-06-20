@@ -118,21 +118,21 @@
 							<input type="text" name="Oldcontact" id="Oldcontact" onkeyup="trim(this)" readonly
 							class="input" value="${mobNo}" placeholder="Existed Contact No." size="20" /></label>
 					</p>
-					
-					 <!-- <p>
-						<label for="new_no">New Contacted No.<span class="text-danger">*</span><br />
-							<input type="password" name="conPassword" id="conPassword" class="input" onkeyup="trim(this)"
-							value="" size="20" placeholder="New Contacted No." /></label>
-					</p>  -->
-
-					
-				
+					 
 
 					<p class="submit">
 						<input type="submit" name="wp-submit" id="wp-submit"
 							class="btn btn-accent btn-block" value="Send OTP" />
 
 					</p>
+					
+					<br/>
+					<p class="submit">
+					<a href="${pageContext.request.contextPath}//showWelcomePage"><button
+														id="wp-submit" type="button" class="btn btn-accent btn-block" value="Send OTP">
+														 
+													</button></a>
+													</p>
 				</form>
 				</c:when>
 				<c:otherwise>

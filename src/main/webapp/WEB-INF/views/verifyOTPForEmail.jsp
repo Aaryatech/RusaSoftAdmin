@@ -86,7 +86,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" login_page">
-	<c:url value="/reGenOtp1" var="reGenOtp1"></c:url>
+	<c:url value="/reGenOtpForEmail" var="reGenOtpEmail"></c:url>
 
 	<c:url value="/checkValue" var="checkValue"></c:url>
 
@@ -97,153 +97,153 @@
 				<h1>
 					<a href="#" title="Login Page" tabindex="-1">RUSA</a>
 				</h1>
-<c:choose>
-<c:when test="${flag==1}">
-		<form name="loginform" id="loginform"
-					action="${pageContext.request.contextPath}/OTPVerificationByContact"
-					method="post">
+				<c:choose>
+					<c:when test="${flag==1}">
+						<form name="loginform" id="loginform"
+							action="${pageContext.request.contextPath}/OTPVerificationByEmail"
+							method="post">
 
-					<c:choose>
-						<c:when test="${msg!=null}">
-							<div class="alert alert-error alert-dismissible fade in">
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-								<strong>${msg}</strong>
-							</div>
-						</c:when>
-					</c:choose>
+							<c:choose>
+								<c:when test="${msg!=null}">
+									<div class="alert alert-error alert-dismissible fade in">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<strong>${msg}</strong>
+									</div>
+								</c:when>
+							</c:choose>
 
-					<p >
-						<label for="user_pass">OTP<br /> <input type="text"
-							name="otp" id="otp" class="input" value=""
-							placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
-					</p>
-					
-					
-						<input type="hidden" id="username" name="username" value="${username}">
-					<!--  <p class="forgetmenot">
+							<p>
+								<label for="user_pass">OTP<br /> <input type="text"
+									name="otp" id="otp" class="input" value=""
+									placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
+							</p>
+
+
+							<input type="hidden" id="username" name="username"
+								value="${username}">
+							<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
                 </p>
  -->
-	<p class="forgetmenot">
-                    <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
-                    </label>
-                </p>
+							<p class="forgetmenot">
+								<label class="icheck-label form-label" for="rememberme">
+									<input type="checkbox" onclick="viewPassword()"><span
+									style="color: black;">Show OTP</span>
+								</label>
+							</p>
 
-					<p class="submit">
-						<input type="submit" name="wp-submit" id="wp-submit"
-							class="btn btn-accent btn-block" value="Submit" />
- <input
-							type="button" class="btn btn-accent btn-block"
-							onclick="reGenOtp()" value="Re Generate OTP" />
-					</p>
-					
-					
-					
-				</form>
+							<p class="submit">
+								<input type="submit" name="wp-submit" id="wp-submit"
+									class="btn btn-accent btn-block" value="Submit" /> <input
+									type="button" class="btn btn-accent btn-block"
+									onclick="reGenOtp()" value="Re Generate OTP" />
+							</p>
 
-</c:when>
 
-<c:when test="${flag==2}">
-		<form name="loginform" id="loginform"
-					action="${pageContext.request.contextPath}/newNoVerifiedUpdate"
-					method="post">
 
-					<c:choose>
-						<c:when test="${msg!=null}">
-							<div class="alert alert-error alert-dismissible fade in">
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-								<strong>${msg}</strong>
-							</div>
-						</c:when>
-					</c:choose>
+						</form>
 
-					<p >
-						<label for="user_pass">OTP<br /> <input type="password"
-							name="otp" id="otp" class="input" value=""
-							placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
-					</p>
-					
-					
-						<input type="hidden" id="username" name="username" value="${username}">
-					<!--  <p class="forgetmenot">
+					</c:when>
+
+					<c:when test="${flag==2}">
+						<form name="loginform" id="loginform"
+							action="${pageContext.request.contextPath}/newEmailVerifiedUpdate"
+							method="post">
+
+							<c:choose>
+								<c:when test="${msg!=null}">
+									<div class="alert alert-error alert-dismissible fade in">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<strong>${msg}</strong>
+									</div>
+								</c:when>
+							</c:choose>
+
+							<p>
+								<label for="user_pass">OTP<br /> <input type="password"
+									name="otp" id="otp" class="input" value=""
+									placeholder="Enter OTP Send on Your Contact Number" size="20" /></label>
+							</p>
+
+
+							<input type="hidden" id="username" name="username"
+								value="${username}">
+
+							<p class="forgetmenot">
+								<label class="icheck-label form-label" for="rememberme">
+									<input type="checkbox" onclick="viewPassword()"><span
+									style="color: black;">Show OTP</span>
+								</label>
+							</p>
+
+							<p class="submit">
+								<input type="submit" name="wp-submit" id="wp-submit"
+									class="btn btn-accent btn-block" value="Submit" /> <input
+									type="button" class="btn btn-accent btn-block"
+									onclick="reGenOtp()" value="Re Generate OTP" />
+							</p>
+
+
+
+						</form>
+
+					</c:when>
+					<c:otherwise>
+						<form name="loginform" id="loginform"
+							action="${pageContext.request.contextPath}/OTPVerification"
+							method="post">
+
+							<c:choose>
+								<c:when test="${msg!=null}">
+									<div class="alert alert-error alert-dismissible fade in">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<strong>${msg}</strong>
+									</div>
+								</c:when>
+							</c:choose>
+
+							<p>
+								<label for="user_pass">OTP1<br /> <input
+									type="password" name="otp" id="otp" class="input" value=""
+									placeholder="Enter OTP Sent on Your Registered Number/Email"
+									size="20" /></label>
+							</p>
+
+
+							<input type="hidden" id="username" name="username"
+								value="${username}">
+							<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
                 </p>
  -->
-<p class="forgetmenot">
-                    <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
-                    </label>
-                </p>
+							<p class="forgetmenot">
+								<label class="icheck-label form-label" for="rememberme">
+									<input type="checkbox" onclick="viewPassword()"><span
+									style="color: black;">Show OTP</span> <br> <span
+									id="countdown" style="color: red; font-size: 10px;"></span>
+								</label>
+							</p>
 
-					<p class="submit">
-						<input type="submit" name="wp-submit" id="wp-submit"
-							class="btn btn-accent btn-block" value="Submit" />
- <input
-							type="button" class="btn btn-accent btn-block"
-							onclick="reGenOtp()" value="Re Generate OTP" />
-					</p>
-					
-					
-					
-				</form>
+							<p class="submit">
+								<input type="submit" name="wp-submit" id="wp-submit"
+									class="btn btn-accent btn-block" value="Submit" /> <input
+									type="button" class="btn btn-accent btn-block"
+									onclick="reGenOtpForEmail()" value="Re Generate OTP" />
+							</p>
 
-</c:when>
-<c:otherwise>
-				<form name="loginform" id="loginform"
-					action="${pageContext.request.contextPath}/OTPVerification"
-					method="post">
 
-					<c:choose>
-						<c:when test="${msg!=null}">
-							<div class="alert alert-error alert-dismissible fade in">
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-								<strong>${msg}</strong>
-							</div>
-						</c:when>
-					</c:choose>
 
-					<p >
-						<label for="user_pass">OTP1<br /> <input type="password"
-							name="otp" id="otp" class="input" value=""
-							placeholder="Enter OTP Sent on Your Registered Number/Email" size="20" /></label>
-					</p>
-					
-					
-						<input type="text" id="username" name="username" value="${username}">
-					<!--  <p class="forgetmenot">
-                    <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
-                </p>
- -->
-<p class="forgetmenot">
-                    <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
-                    	<br>
-                    	<span id="countdown" style="color: red; font-size: 10px;"></span>
-                    </label>
-                </p>
-
-					<p class="submit">
-						<input type="submit" name="wp-submit" id="wp-submit"
-							class="btn btn-accent btn-block" value="Submit" />
- <input
-							type="button" class="btn btn-accent btn-block"
-							onclick="reGenOtp()" value="Re Generate OTP" />
-					</p>
-					
-					
-					
-				</form>
-				</c:otherwise>
+						</form>
+					</c:otherwise>
 				</c:choose>
 
 				<!--   <p id="nav">
@@ -328,45 +328,7 @@
 		</div>
 	</div>
 	<!-- modal end -->
-	<script type="text/javascript">
-	
-	function reGenOtp() {
-//alert("Hi");
 
-
-var form = document.getElementById("loginform");
-
-//form.setAttribute("target", "_blank");
-form.setAttribute("method", "post");
-
-form.action = ("reGenOtp1");
-
-form.submit();
-
-		 var username = document.getElementById("username").value;
-		 alert(username);
-		
-		$
-				.getJSON(
-						'${reGenOtp1}',
-						{
-							username : username,
-						
-							ajax : 'true',
-
-						},
-						function(data) {
-
-								alert("Data  " +JSON.stringify(data));
-						location.reload(true);
-							
-						});
-
-	}
-	
-
-	</script>
-	
 
 	<script>
 		/* function showForm() {
@@ -395,77 +357,106 @@ form.submit();
 		 }
 		
 		 */
-
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
-	
-	var timeleft = 120;
-	var downloadTimer = setInterval(function(){
-	  document.getElementById("countdown").innerHTML = timeleft + " seconds remaining to expire sent OTP";
-	  timeleft -= 1;
-	  if(timeleft <= 0){
-	    clearInterval(downloadTimer);
-	    document.getElementById("countdown").innerHTML = "OTP Expired"
-	    	document.getElementById("wp-submit").disabled=true;	
-	  }
-	}, 1000);
-	
-	function viewPassword() {
-		var pass1 = document.getElementById("otp");
-	
+		var timeleft = 120;
+		var downloadTimer = setInterval(function() {
+			document.getElementById("countdown").innerHTML = timeleft
+					+ " seconds remaining to expire sent OTP";
+			timeleft -= 1;
+			if (timeleft <= 0) {
+				clearInterval(downloadTimer);
+				document.getElementById("countdown").innerHTML = "OTP Expired"
+				document.getElementById("wp-submit").disabled = true;
+			}
+		}, 1000);
 
-		if (pass1.type == "password") {
-			pass1.type = "text";
-			
-		} else {
-			pass1.type = "password";
-			
+		function viewPassword() {
+			var pass1 = document.getElementById("otp");
+
+			if (pass1.type == "password") {
+				pass1.type = "text";
+
+			} else {
+				pass1.type = "password";
+
+			}
 		}
-	}
 	</script>
-	
+
+	<script type="text/javascript">
+		function reGenOtpForEmail() {
+			//alert("Hi");
+
+			var form = document.getElementById("loginform");
+
+			//form.setAttribute("target", "_blank");
+			form.setAttribute("method", "post");
+
+			form.action = ("reGenOtpForEmail");
+
+			form.submit();
+			/* var username = document.getElementById("username").value;
+
+			 $
+			 .getJSON(
+			 '${reGenOtp1}',
+			 {
+			 username : username,
+			
+			 ajax : 'true',
+
+			 },
+			 function(data) {
+
+			 alert("Data  " +JSON.stringify(data));
+			 location.reload(true);
+			
+			 });
+			 */
+
+		}
+	</script>
 
 	<script>
-	
+		function checkValue1() {
+			var inputValue = document.getElementById("username").value;
+			//alert("hiii"+inputValue);
+			var valid = true;
+			/* 
+			 if (inputValue.length = !0) {
+			 valid = true;
+			 alert("Len 10")
+			 }
+			 */
+			if (valid == true)
+				$.getJSON('${checkValue}', {
 
-	function checkValue1() {
-var inputValue=document.getElementById("username").value;
-		//alert("hiii"+inputValue);
-		var valid = true;
-/* 
-		if (inputValue.length = !0) {
-			valid = true;
-		alert("Len 10")
+					inputValue : inputValue,
+
+					ajax : 'true',
+
+				}, function(data) {
+
+					//	alert("Data  " +JSON.stringify(data));
+					if (data.error == true) {
+
+						alert("This User Name Do Not Exist");
+						$('#username').val('');
+
+						document.getElementById("abc").style = "display:none"
+
+					} else {
+
+						alert("Verify OTP");
+						document.getElementById("abc").style = "visible"
+
+					}
+
+				});
 		}
-*/
-		if (valid == true)
-			$.getJSON('${checkValue}', {
-
-				inputValue : inputValue,
-
-				ajax : 'true',
-
-			}, function(data) {
-
-				//	alert("Data  " +JSON.stringify(data));
-				if (data.error == true) {
-					
-					alert("This User Name Do Not Exist");
-					$('#username').val('');
-
-					document.getElementById("abc").style = "display:none"
-
-				} else {
-
-					alert("Verify OTP");
-					document.getElementById("abc").style = "visible"
-
-				}
-
-			});
-	}
 	</script>
 </body>
 </html>
