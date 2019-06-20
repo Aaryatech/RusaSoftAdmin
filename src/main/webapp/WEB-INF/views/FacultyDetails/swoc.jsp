@@ -665,7 +665,9 @@
 		}
 
 		function deleteSwoc(swocId,swocType) {
-		//	alert("hii");
+			var x=confirm("Are you sure want to delete this record"); 
+			//alert(x);
+			if(x==true){
 		if(swocType==1)
 			{
 			$('#table1 td').remove();
@@ -674,17 +676,17 @@
 		else if(swocType==2)
 			{
 			$('#table2 td').remove();
-			$("#loader1").show();
+			$("#loader2").show();
 			}
 		else if(swocType==3)
 		{
 		$('#table3 td').remove();
-		$("#loader1").show();
+		$("#loader3").show();
 		}
 		else if(swocType==4)
 		{
 		$('#table4 td').remove();
-		$("#loader1").show();
+		$("#loader4").show();
 		}
 
 			$
@@ -701,6 +703,9 @@
 							function(data) {
 
 								$("#loader1").hide();
+								$("#loader2").hide();
+								$("#loader3").hide();
+								$("#loader4").hide();
 
 								//var dataTable = $('#example-1').DataTable();
 
@@ -772,12 +777,15 @@
 
 							});
 
+		}//End of Confirm x==true
 		}
 
 		function editSwoc(swocId) {
 			$("#loader1").show();
-			//alert("hii");
-			//alert(swocId);
+			$("#loader2").show();
+			$("#loader3").show();
+			$("#loader4").show();
+		
 			$.getJSON('${editSwoc}',
 
 			{
@@ -787,7 +795,10 @@
 			}, function(data) {
 				//alert(data);
 				$("#loader1").hide();
-				
+				$("#loader2").hide();
+				$("#loader3").hide();
+				$("#loader4").hide();
+			
 				
 				if(data.swocType==1)
 				{
