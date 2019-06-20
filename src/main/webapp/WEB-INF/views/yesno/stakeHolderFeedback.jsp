@@ -87,6 +87,8 @@ table, th, td {
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 										<div class="table-responsive">
+										<input type="hidden" name="isEdit" value="${isEdit}">
+										
 											<table id="table1" style="width: 100%; padding-bottom: 50px;">
 												<thead>
 													<tr>

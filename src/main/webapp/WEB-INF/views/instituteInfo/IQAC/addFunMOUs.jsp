@@ -121,7 +121,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="title"
 													autocomplete="off" name="title" onchange="trim(this)"
-													placeholder="Title of MoU" value="${editInst.mouTitle}">
+													placeholder="Title of MoU" maxlength="200" value="${editInst.mouTitle}">
 
 												<span class="error_form text-danger" id="error_name"
 													style="display: none;">Please Enter Title of MoU. </span>
@@ -201,6 +201,20 @@
 															<option value="University">University</option>
 															<option value="Industries">Industries</option>
 															<option selected value="Corporate Houses">Corporate
+																Houses</option>
+															<option value="7">Any other Institute of
+																International/National/State Importance</option>
+														</c:when>
+														
+														<c:when test="${editInst.mouAgency == null}">
+															<option selected disabled value="-1">Select</option>
+														
+															<option value="IIT">IIT</option>
+															<option value="NIT">NIT</option>
+															<option value="IIIT">IIIT</option>
+															<option value="University">University</option>
+															<option value="Industries">Industries</option>
+															<option  value="Corporate Houses">Corporate
 																Houses</option>
 															<option value="7">Any other Institute of
 																International/National/State Importance</option>
@@ -351,7 +365,7 @@
 												/Beneficiary <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" min="1" class="form-control"
+												<input type="text" min="1" maxlength="8" class="form-control"
 													id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 													placeholder="No. of Beneficiary Participants "
 													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
@@ -570,6 +584,9 @@
 
 
 	<script type="text/javascript">
+	$('#beneficiaryMOUNo').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
 		$(function() {
 			$('#submitForm').submit(
 					function() {
