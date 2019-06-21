@@ -356,7 +356,7 @@
 												No<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="12" class="form-control"
+												<input type="text" maxlength="15" class="form-control"
 													id="f_aadhar" name="f_aadhar"
 													placeholder="Consecutive 12 digit Aadhar No"
 													value="${facPerDetail.fAadhar}"> <span
@@ -554,7 +554,7 @@
 			return true;
 		}
 		function validateAadhaar(mobile) {
-			var mob = /^[0-9]{12}$/;
+			var mob = /^[0-9]{15}$/;
 			if (mob.test($.trim(mobile)) == false) {
 				return false;
 			}
@@ -568,8 +568,13 @@
 			}
 			return true;
 		}
+		$('#f_aadhar').on('keypress change blur oninput', function () {
+		    $(this).val(function (index, value) {
+		        return value.replace(/[^0-9]+/gi, '').replace(/(.{4})/g, '$1 ');
+		    });
+		});
 		
-		
+				
 		$(document)
 				.ready(
 						function($) {
@@ -670,10 +675,8 @@
 													$("#fac_pincodc_field").hide()
 												}
 																									
-													if (!$("#f_aadhar").val()
-															|| !validateAadhaar($(
-																	"#f_aadhar")
-																	.val())) {
+													if (!$("#f_aadhar").val() || $("#f_aadhar").val().length<15
+															) {
 													isError = true;
 
 													$("#f_aadhar").addClass(
