@@ -1987,7 +1987,7 @@ public class FacultyModuleController {
 				System.err.println("acaYearList " + acaYearList.toString());
 
 				model.addObject("acaYearList", acaYearList);
-				model.addObject("title", "Add Ph.D. Guideline");
+				model.addObject("title", "Add Ph.D. Guidance");
 				model.addObject("phd", phd);
 			}
 		} catch (Exception e) {

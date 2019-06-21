@@ -129,7 +129,6 @@
 														autocomplete="off" id="inst_students_benefited"
 														onchange="trim(this)" onFocus="clearDefault(this)"
 														name="inst_students_benefited"
-														onkeypress='return restrictAlphabets(event)'
 														placeholder="No. of Students Benefited" maxlength="7"
 														value="${instSpprt.instStudentsBenefited}"> <span
 														class="error_form text-danger" id="error_formfield2"
@@ -164,7 +163,6 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="amount" name="amount" placeholder="Amount" 
-														onkeypress='return restrictAlphabets(event)'
 														onchange="trim(this)" onFocus="clearDefault(this)"
 														value="${instSpprt.exInt1}">
 												</div>
@@ -415,18 +413,12 @@
 			a.value=""
 		}
 		};
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
+		  $('#inst_students_benefited').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		  $('#amount').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
 	</script>
 </body>
 </html>

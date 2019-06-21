@@ -112,8 +112,8 @@
 												Students Benefited<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onfocus="this.value=''"
-													autocomplete="off" id="stud_bnfted" name="stud_bnfted" onkeypress='return restrictAlphabets(event)'
+												<input type="text" class="form-control" onFocus="clearDefault(this)"
+													autocomplete="off" id="stud_bnfted" name="stud_bnfted" 
 													placeholder="No. of Students Benefited " value="${govtScholr.noOfStudBenftd}">
 												<span class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter No. student benefited and value must be greater than 0.</span>
@@ -140,8 +140,8 @@
 											<label class="control-label col-sm-2" for="lcd">Amount<span class="text-danger"></span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onfocus="this.value=''"
-													autocomplete="off" id="amount" name="amount" onkeypress='return restrictAlphabets(event)'
+												<input type="text" class="form-control" onFocus="clearDefault(this)"
+													autocomplete="off" id="amount" name="amount" maxlength="7"
 													placeholder="Amount in ${budRupees}" value="${govtScholr.exInt1}">
 												
 											</div>
@@ -408,18 +408,20 @@
 	</script>
 
 	<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
+			$('#stud_bnfted').on('input', function() {
+				  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+				});
+			
+			$('#amount').on('input', function() {
+				  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+				});
+			
+			function clearDefault(a){
+				if(a.defaultValue==0)
+				{
+					a.value=""
+				}
+				};
 		</script>
 
 	<script type="text/javascript">

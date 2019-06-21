@@ -109,7 +109,7 @@
 													autocomplete="off" id="ttlProgm" name="ttlProgm"
 													value="${editValue.activityName}"> <span
 													class="error_form text-danger" id="error_ttlProgm"
-													style="display: none;">Please enter title of programme</span>
+													style="display: none;">Please enter title of programme.</span>
 
 											</div>
 											
@@ -140,15 +140,15 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy"
+												<input type="text" class="form-control datepicker" placeholder="dd-mm-yyyy"
 													autocomplete="off" id="fromDate" name="fromDate"
 													value="${editValue.activityFromdt}"> <span
 													class="error_form text-danger" id="error_fromDate"
-													style="display: none;">Please enter from date</span>
+													style="display: none;">Please enter from date.</span>
 													
 												<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">from date must be smaller than to date.</span>
 
 											</div>
 										</div>
@@ -159,15 +159,15 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy"
+												<input type="text" class="form-control datepicker" placeholder="dd-mm-yyyy"
 													autocomplete="off" id="toDate" name="toDate"
 													value="${editValue.activityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
-													style="display: none;">Please enter to date</span>
+													style="display: none;">Please enter to date.</span>
 													
 												<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">to date must be greater than from date.</span>
 											</div>
 										</div>
 
@@ -181,11 +181,10 @@
 												<input type="number" class="form-control" id="participant"
 													autocomplete="off" min="0" name="participant"
 													placeholder="No. of Participants" onchange="trim(this)"
-													onkeypress='return restrictAlphabets(event)'
 													value="${editValue.activityPcount}"> <span
 													class="error_form text-danger" id="error_participant"
-													style="display: none;">Please enter No of
-													Participants</span>
+													style="display: none;">Please enter No. of
+													participants.</span>
 											</div>
 										</div>
 										<input type="hidden" id="valueId" name="valueId"
@@ -235,6 +234,18 @@
 
 
 	<script type="text/javascript">
+	  $('#fromDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	  
+	  $('#toDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	  
+	  $('#participant').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	  
 		$(function() {
 
 			$('.datepicker').datepicker({

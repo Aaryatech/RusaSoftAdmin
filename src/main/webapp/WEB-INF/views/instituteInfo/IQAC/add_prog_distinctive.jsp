@@ -111,7 +111,7 @@
 													placeholder="Title of Distinctiveness"
 													value="${editDist.distName}"> <span
 													class="error_form text-danger" id="error_title"
-													style="display: none;">Please enter Title</span>
+													style="display: none;">Please enter title.</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -120,26 +120,26 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" id="date"
-													name="date" autocomplete="off"
+													name="date" autocomplete="off" 	placeholder="dd-mm-yyyy"
 													value="${editDist.distApplicableFrom}"> <span
 													class="error_form text-danger" id="error_date"
-													style="display: none;">Please enter Date</span>
+													style="display: none;">Please enter date.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="befStake">Beneficiary
-												Stake Holders <span class="text-danger">*</span>
+												Stake Holder <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="befStake"
 													onchange="return trim(this)" maxlength="200"
-													name="befStake" placeholder="Beneficiary Stake Holders"
+													name="befStake" placeholder="Beneficiary Stake Holder"
 													autocomplete="off" value="${editDist.distBeneficiary}">
 												<span class="error_form text-danger" id="error_befStake"
-													style="display: none;">Please enter Beneficiary
-													Stake Holders</span>
+													style="display: none;">Please enter beneficiary
+													stake holder.</span>
 											</div>
 										</div>
 										<input type="hidden" id="distId" name="distId"
@@ -260,6 +260,10 @@
 			}
 			return true;
 		}
+		
+		  $('#date').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
 	</script>
 
 

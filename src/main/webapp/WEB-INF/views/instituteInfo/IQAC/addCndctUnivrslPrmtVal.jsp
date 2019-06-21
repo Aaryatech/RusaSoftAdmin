@@ -137,8 +137,7 @@
 												<input type="text" class="form-control datepicker"
 													onchange="trim(this)" placeholder="From Date"
 													autocomplete="off" id="fromDate" name="fromDate"
-													onkeypress='return restrictAlphabets(event)'
-													value="${actCndct.fromDate}"> <span
+													value="${actCndct.fromDate}" onFocus="clearDefault(this)"> <span
 													class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter from date.</span>
 													
@@ -157,8 +156,7 @@
 												<input type="text" class="form-control datepicker"
 													onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate"
-													onkeypress='return restrictAlphabets(event)'
-													value="${actCndct.toDate}"> <span
+													value="${actCndct.toDate}" onFocus="clearDefault(this)"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter to date.</span> 
 													<span
@@ -177,11 +175,10 @@
 
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="7"
-													 id="no_participant" autocomplete="off" onfocus="this.value=''"
+													 id="no_participant" autocomplete="off"
 													onchange="trim(this)" name="no_participant"
-													onkeypress='return restrictAlphabets(event)'
 													placeholder="No.of Participants"
-													value="${actCndct.noOfParticipant}"> <span
+													value="${actCndct.noOfParticipant}" onFocus="clearDefault(this)"> <span
 													class="error_form text-danger" id="participant_errfield"
 													style="display: none;">Please enter No. of
 													participants and value must be greater than 0.</span>
@@ -405,18 +402,24 @@
 
 
 	<script type="text/javascript">
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
+	 $('#fromDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 $('#toDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 $('#no_participant').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 function clearDefault(a){
+			if(a.defaultValue==0)
+			{
+				a.value=""
+			}
+		};	
 	</script>
 
 	<script type="text/javascript">

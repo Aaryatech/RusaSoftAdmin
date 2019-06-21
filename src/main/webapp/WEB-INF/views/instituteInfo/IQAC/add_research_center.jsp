@@ -135,10 +135,9 @@
 												Guides<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control"
-													onkeypress='return restrictAlphabets(event)'
-													onchange="trim(this)" id="rc_guide_count" min="1"
-													name="rc_guide_count"
+												<input type="text" class="form-control"
+													onchange="trim(this)" id="rc_guide_count" 
+													name="rc_guide_count" maxlength="8"
 													placeholder="No. of Affiliated Guides" autocomplete="off"
 													value="${editValue.rcGuideCount}"> <span
 													class="error_form text-danger" id="error_rc_guide_count"
@@ -152,9 +151,8 @@
 												Students Registered<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control"
-													onkeypress='return restrictAlphabets(event)'
-													onchange="trim(this)" id="rc_student_count" min="1"
+												<input type="text" class="form-control" maxlength="8"
+													onchange="trim(this)" id="rc_student_count" 
 													name="rc_student_count" placeholder="No. of Students Registered"
 													autocomplete="off" value="${editValue.rcStudentCount}">
 												<span class="error_form text-danger"
@@ -171,7 +169,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													id="fromDate" name="fromDate" placeholder="dd/mm/yyyy"
+													id="fromDate" name="fromDate" placeholder="dd-mm-yyyy"
 													value="${editValue.rcValidityFromdt}" autocomplete="off">
 												<span class="error_form text-danger" id="error_fromDate"
 													style="display: none;">Please enter From date.</span>
@@ -191,7 +189,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													placeholder="dd/mm/yyyy"
+													placeholder="dd-mm-yyyy"
 													value="${editValue.rcValidityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
 													style="display: none;">Please enter to date.</span>
@@ -253,6 +251,22 @@
 
 
 	<script type="text/javascript">
+	$('#rc_guide_count').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#rc_student_count').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#fromDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#toDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		$(function() {
 
 			$('.datepicker').datepicker({
@@ -480,21 +494,5 @@
 											});
 						});
 	</script>
-
-	<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-		</script>
-
 </body>
 </html>

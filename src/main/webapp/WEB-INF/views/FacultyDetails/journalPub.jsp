@@ -253,7 +253,7 @@
 
 										</div>
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="issue">Issue
+											<label class="control-label col-sm-2" for="issue">Issue Name/No.
 												<span class="text-danger">*</span>
 											</label>
 
@@ -261,9 +261,9 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="issue"
 													value="${editJournal.journalIssue}" autocomplete="off"
-													name="issue" placeholder="Issue"> <span
+													name="issue" placeholder="Issue Name/No."> <span
 													class="error_form text-danger" id="error_issue"
-													style="display: none;">Please enter Journal Issue</span>
+													style="display: none;">Please enter Journal Issue Name/No.</span>
 											</div>
 
 										</div>

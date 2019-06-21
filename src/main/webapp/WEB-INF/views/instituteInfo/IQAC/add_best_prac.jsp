@@ -150,7 +150,7 @@
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="practices_effective_from"
 													placeholder="dd-mm-yyyy" name="practices_effective_from"
-													value="${date}"> <span
+													value="${date}" data-end-date="0d" data-format="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_eff"
 													style="display: none;">Please Select Effective From</span>
 
@@ -294,7 +294,7 @@
 
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -303,7 +303,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 	</script>
 
 	<script type="text/javascript">

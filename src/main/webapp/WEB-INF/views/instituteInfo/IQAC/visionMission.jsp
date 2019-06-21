@@ -112,7 +112,7 @@
 							</div>
 							
 							 <%-- <c:if test="${sessionScope.successMsg!=null}"> --%>
-           						 <div class="col-lg-12" id="sucess_msg" style="display: none;">
+           						<%--  <div class="col-lg-12" id="sucess_msg" style="display: none;">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
              						   <strong>Success : </strong>${msgSucss}</div>
@@ -122,7 +122,7 @@
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
              						   <strong>Fail : </strong>${msgFail}</div>
-        	                     </div> 
+        	                     </div>  --%>
         	                   
         	                   
         	                   
@@ -176,10 +176,14 @@
 
 													<div class="col-sm-4">
 														<input type="hidden" class="form-control"
-															name="instVisionId" id="instVisionId" value="0"><input
+															name="instVisionId" id="instVisionId" value="0"><!-- <input
 															type="button" class="btn btn-info"
-															onclick="saveInstituteVission()" value="Add"
-															id="saveVision">
+															onclick="saveInstituteVission()" value="Save"
+															id="saveVision"> -->
+															
+																<button type="button" onclick="saveInstituteVission()"
+															class="btn btn-primary" id="saveVision"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save </button>
+															
 													</div>
 												</div>
 
@@ -286,8 +290,13 @@
 													</div>
 													<div class="col-sm-4">
 
-														<input type="button" onclick="saveInstituteMission()"
-															class="btn btn-info" value="Add" id="saveMission">
+														<button type="button" onclick="saveInstituteMission()"
+															class="btn btn-primary" id="saveMission"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save </button>
+															
+										<%-- 	<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="saveInstituteMission()"s
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button> --%>
 													</div>
 												</div>
 
@@ -490,8 +499,10 @@
 		function deleteInstituteVission(instVisionId) {
  
 				//$('#example-1 td').remove();
-				$("#loader1").show();
 				
+				var x=confirm("Are you sure want to delete this record")
+				if(x==true){
+					$("#loader1").show();
 				$.getJSON('${deleteInstituteVission}',
 
 				{
@@ -525,7 +536,7 @@
 					 
 				});
 
-			 
+				}
 
 		}
 		
@@ -616,6 +627,8 @@
 		function deleteInstituteMission(instMissionId) {
 			 
 			//$('#example-1 td').remove();
+				var x=confirm("Are you sure want to delete this record")
+				if(x==true){
 			$("#loader2").show();
 			
 			$.getJSON('${deleteInstituteMission}',
@@ -653,7 +666,7 @@
 				 
 			});
 
-		 
+				}
 
 	}
 		

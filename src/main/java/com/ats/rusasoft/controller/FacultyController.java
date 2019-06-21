@@ -380,7 +380,7 @@ public class FacultyController {
 				// String curDate = dateFormat.format(new Date());
 				String dateTime = dateFormat.format(now);
 
-				String deptName = request.getParameter("deptName");
+			//	String deptName = request.getParameter("deptName");
 				String PIName = request.getParameter("PIName");
 				String spoAuth = request.getParameter("spoAuth");
 				String yearOfPS = request.getParameter("yearOfPS");
@@ -417,7 +417,7 @@ public class FacultyController {
 				project.setProjGrant(grant);
 				project.setProjId(projId);
 
-				project.setProjInvDept(deptName);
+				project.setProjInvDept(null);
 				project.setProjInvDept2(deptCoName);
 				project.setProjTodt(DateConvertor.convertToYMD(toDate));
 				project.setProjYear(yearOfPS);

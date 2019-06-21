@@ -106,7 +106,7 @@
 							</div>
  --%>
  
- 						<div class="col-lg-12" id="sucess_msg" style="display: none;">
+ 						<%-- <div class="col-lg-12" id="sucess_msg" style="display: none;">
 								<!-- onclick="location.reload();" -->
 								<div class="alert alert-success alert-dismissible fade in">
 									<button type="button" class="close" onclick="hideAlert()">
@@ -124,7 +124,7 @@
 									<strong>Success : </strong>${failMsg}</div>
 
 
-							</div>
+							</div> --%>
 							
 						</header>
 

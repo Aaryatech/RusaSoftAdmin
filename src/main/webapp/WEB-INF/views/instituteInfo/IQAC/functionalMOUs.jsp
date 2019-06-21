@@ -132,7 +132,13 @@
 															<td style="text-align: left;">${mouList.mouTitle}</td>
 															<td style="text-align: center;">${mouList.mouFromdt}</td>
 															<td style="text-align: center;">${mouList.mouTodt}</td>
-																<td>${mouList.mouAgency}</td>
+															 <c:if test = "${mouList.mouAgency!='7'}">
+																 <td>${mouList.mouAgency}</td>
+															  </c:if>
+															  
+       														 <c:if test = "${mouList.mouAgency =='7'}">
+																<td>${mouList.mouInstitute}</td>
+														</c:if>
 															<td style="text-align: right;">${mouList.mouBeneficiaryNos}</td>
 
 

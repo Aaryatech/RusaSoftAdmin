@@ -155,22 +155,23 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Name
-												of Principal Investigator <span class="text-danger">*</span>
+												of Principal Investigator <span class="text-danger"></span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="PIName"
 													name="PIName" placeholder="Name of Principal Investigator"
-													autocomplete="off" value="${editProject.projInvName}"><span
+													autocomplete="off" value="${editProject.projInvName}">
+													<!-- <span
 													class="error_form text-danger" id="error_PIName"
 													style="display: none;">Please enter Name of
-													Principal Investigator Authority</span>
+													Principal Investigator Authority</span> -->
 
 											</div>
 
 										</div>
 
 
-										<div class="form-group">
+										<%-- <div class="form-group">
 
 											<label class="control-label col-sm-2" for="page_order">Department
 												Name <span class="text-danger">*</span>
@@ -190,7 +191,7 @@
 
 
 										</div>
-
+ --%>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Name
@@ -559,7 +560,7 @@ function submit_f(view){
                 				}
             				
             				
-            				if(!$("#PIName").val()){
+            				/* if(!$("#PIName").val()){
               					 
                 				isError=true;
                 				errMsg += '<li>Please enter Principal Investigator.</li>';
@@ -569,12 +570,12 @@ function submit_f(view){
                 					 
                 				} else {
                 					$("#error_PIName").hide();
-                				}
+                				} */
             				
             				
             				
             				
-            				if(!$("#deptName").val()){
+            				/* if(!$("#deptName").val()){
               					 
                 				isError=true;
                 				errMsg += '<li>Please enter Department.</li>';
@@ -584,7 +585,7 @@ function submit_f(view){
                 					 
                 				} else {
                 					$("#error_deptName").hide();
-                				}
+                				} */
             				
             				
             				

@@ -123,9 +123,8 @@
 														of Full Time Faculty <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
-														<input type="number" class="form-control" min="0"
-															id="no_fullTime_Faculty"
-															onkeypress='return restrictAlphabets(event)'
+														<input type="text" class="form-control" min="0"
+															id="no_fullTime_Faculty" maxlength="8"															
 															onchange="trim(this)"
 															value="${editInstInfo.noOfFulltimeFaculty}"
 															name="no_fullTime_Faculty"
@@ -142,9 +141,8 @@
 														of Clock Hour Basis Faculty <span class="text-danger"></span>
 													</label>
 													<div class="col-sm-8">
-														<input type="number" class="form-control" min="0"
-															id="no_clockhr_Faculty"
-															onkeypress='return restrictAlphabets(event)'
+														<input type="text" class="form-control" min="0"
+															id="no_clockhr_Faculty" maxlength="8"															
 															onchange="trim(this)"
 															value="${editInstInfo.exInt2}"
 															name="no_clockhr_Faculty"
@@ -158,10 +156,9 @@
 													of Sanctioned Post <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
-														<input type="number" class="form-control" min="0"
-															id="no_sanction_post"
-															onkeypress='return restrictAlphabets(event)'
-															onchange="trim(this)"
+														<input type="text" class="form-control" min="0"
+															id="no_sanction_post"															
+															onchange="trim(this)" maxlength="8"
 															value="${editInstInfo.exInt1}"
 															name="no_sanction_post"
 															placeholder="No. of Sanctioned Post">
@@ -179,11 +176,10 @@
 														of Full Time Non-Teaching Faculty <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
-														<input type="number" class="form-control" min="0"
+														<input type="text" class="form-control" min="0"
 															id="no_nonTeaching_faculty"
 															value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
-															name="no_nonTeaching_faculty"
-															onkeypress='return restrictAlphabets(event)'
+															name="no_nonTeaching_faculty" maxlength="8"															
 															onchange="trim(this)"
 															placeholder=" No. of Full Time Non-Teaching Faculty">
 														<span class="error_form text-danger" id="error_non"
@@ -199,10 +195,9 @@
 														of Support Staff <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
-														<input type="number" class="form-control" min="0"
-															onkeypress='return restrictAlphabets(event)'
+														<input type="text" class="form-control" min="0"															
 															onchange="trim(this)" id="no_suppStaff"
-															value="${editInstInfo.noSupportStaff}"
+															value="${editInstInfo.noSupportStaff}" maxlength="8"
 															name="no_suppStaff" placeholder="No. of Support Staff">
 														<span class="error_form text-danger" id="error_supp"
 															style="display: none;">Please enter No. of support
@@ -215,10 +210,9 @@
 														of Current Admitted Students <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
-														<input type="number" class="form-control" min="0"
-															id="no_currAdmitted_Student"
-															onkeypress='return restrictAlphabets(event)'
-															onchange="trim(this)"
+														<input type="text" class="form-control" min="0"
+															id="no_currAdmitted_Student"															
+															onchange="trim(this)" maxlength="8"
 															value="${editInstInfo.noCurrentAdmitedStnt}"
 															name="no_currAdmitted_Student"
 															placeholder="No. of Current Admitted Students"> <span
@@ -503,18 +497,11 @@
 	</script>
 
 	<script type="text/javascript">
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
+			  
+		  $('.form-control').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
 	</script>
 
 	<script type="text/javascript">

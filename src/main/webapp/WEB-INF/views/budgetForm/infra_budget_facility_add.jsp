@@ -156,7 +156,7 @@
 													class="form-control">
 													<option value="Management" ${budget.exVar1 eq 'Management' ? 'selected' : ''}>Management</option>
 													<option value="RUSA" ${budget.exVar1 eq 'RUSA' ? 'selected' : '' }>RUSA</option>
-													<option value="Other Govt. Agency" ${budget.exVar1 eq 'Other Govt. Agency' ? 'selected' : '' }>Other Govt. Agency</option>
+													<option value="Any Other Government Agency" ${budget.exVar1 eq 'Any Other Government Agency' ? 'selected' : '' }>Any Other Government Agency</option>
 												</select>
 											</div>
 										</div>

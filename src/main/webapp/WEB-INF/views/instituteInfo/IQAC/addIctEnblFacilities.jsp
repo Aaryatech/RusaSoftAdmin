@@ -97,9 +97,9 @@
 												Classrooms<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="classroom" onfocus="this.value=''"
+												<input type="text" class="form-control" id="classroom" onFocus="clearDefault(this)"
 													autocomplete="off" name="classroom" onchange="trim(this)"
-													placeholder="No. of Classrooms" onkeypress='return restrictAlphabets(event)'
+													placeholder="No. of Classrooms"  onFocus="clearDefault(this)"
 													value="${ictEnbFac.noOfClassroom}"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter No. of classrooms
@@ -113,8 +113,8 @@
 												Classrooms with LCD/LED Projector<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onfocus="this.value=''"
-													autocomplete="off" id="lcd" name="lcd" onkeypress='return restrictAlphabets(event)'
+												<input type="text" class="form-control" onFocus="clearDefault(this)"
+													autocomplete="off" id="lcd" name="lcd"
 													placeholder="No. of Classrooms with LCD" value="${ictEnbFac.noClassromLcd}">
 												<span class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter No. of classrooms with LCD
@@ -129,8 +129,8 @@
 												Classrooms with Wifi/LAN<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" onfocus="this.value=''"
-													autocomplete="off" id="wifi" name="wifi" onkeypress='return restrictAlphabets(event)'
+												<input type="text" class="form-control" onFocus="clearDefault(this)"
+													autocomplete="off" id="wifi" name="wifi" 
 													placeholder="No. of Classrooms with Wifi/LAN" value="${ictEnbFac.noClassroomWifi}">
 												<span class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter No. of classrooms with wifi/LAN 
@@ -147,7 +147,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="seminar_hall"
 													autocomplete="off" name="seminar_hall" maxlength="7" 
-													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
+												onFocus="clearDefault(this)"
 													onchange="trim(this)" placeholder="No. of Seminar Halls"
 													value="${ictEnbFac.seminarHall}"> <span
 													class="error_form text-danger" id="error_formfield4"
@@ -163,7 +163,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="ict_seminar"
 													autocomplete="off" name="ict_seminar" maxlength="7" 
-													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
+													onFocus="clearDefault(this)"
 													onchange="trim(this)" placeholder="No. of Seminar Halls with ICT "
 													value="${ictEnbFac.ictSeminarHall}"> <span
 													class="error_form text-danger" id="error_formfield5"
@@ -178,8 +178,8 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="lcd_led"
-													autocomplete="off" name="lcd_led" maxlength="7" onkeypress='return restrictAlphabets(event)'
-													onkeypress='return restrictAlphabets(event)' onfocus="this.value=''"
+													autocomplete="off" name="lcd_led" maxlength="7" 
+													onFocus="clearDefault(this)"
 													onchange="trim(this)" placeholder="LCD/LED Projectors"
 													value="${ictEnbFac.exInt1}"> <span
 													class="error_form text-danger" id="error_formfield6"
@@ -485,18 +485,17 @@
 	</script>
 
 	<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
+	  
+	  $('.form-control').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	  
+	  function clearDefault(a){
+			if(a.defaultValue==0)
+			{
+				a.value=""
 			}
+			};
 		</script> 
 
 	<script type="text/javascript">

@@ -103,7 +103,7 @@
 													value="${gndrEqual.gprogName}"> <span
 													class="error_form text-danger" id="error_formfield1"
 													style="display: none;">Please enter title of
-													Program.</span>
+													program.</span>
 											</div>
 										</div>
 
@@ -121,7 +121,7 @@
 													
 												<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">from date must be smaller than to date. </span>
 
 											</div>
 										</div>
@@ -143,7 +143,7 @@
 												
 													<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">to date must be greater than from date </span>
 											</div>
 										</div>
 
@@ -154,8 +154,8 @@
 												of Participants<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" id="participant"
-													min="1" autocomplete="off" name="participant" maxlength="7"
+												<input type="text" class="form-control" id="participant"
+													 autocomplete="off" name="participant" maxlength="7"
 													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
 													onchange="trim(this)" placeholder="No. of Participants"
 													value="${gndrEqual.gprogPcount}"> <span
@@ -237,6 +237,10 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
+	$('#participant').on('input', function() {
+		  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

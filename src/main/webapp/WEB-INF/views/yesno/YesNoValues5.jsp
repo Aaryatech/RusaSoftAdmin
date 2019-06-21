@@ -82,7 +82,7 @@ table, th, td {
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" onclick="removSess()" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
+             						   <strong>Success : </strong>Record Update Successfully.</div>
         	                     </div> 
         	                     <%session=request.getSession();
         	                    

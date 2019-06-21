@@ -198,6 +198,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													onchange="trim(this)" placeholder="From Date"
+													data-end-date="0d" data-format="dd-mm-yyyy"
 													autocomplete="off" id="fromDate" name="fromDate"
 													onkeypress='return restrictAlphabets(event)'
 													value="${instAct.instActivityFromdt}"> <span
@@ -206,7 +207,7 @@
 													
 													<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">from date must be smaller than to date </span>
 											</div>
 										</div>
 
@@ -217,6 +218,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
+													data-format="dd-mm-yyyy"
 													onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate"
 													onkeypress='return restrictAlphabets(event)'
@@ -462,7 +464,7 @@
 	/showActivityOrganized
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -472,7 +474,7 @@
 
 			});
 		});
-
+ */
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
 			/* var form=document.getElementById("form_sample_2");

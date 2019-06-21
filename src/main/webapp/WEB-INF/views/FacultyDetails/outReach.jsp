@@ -253,7 +253,7 @@
 												<input type="text" class="form-control datepicker"
 													id="act_date" value="${date}" name="act_date"
 													data-end-date="0d" data-format="dd-mm-yyyy"
-													placeholder="dd/MM/yyyy "> <span
+													placeholder="dd-mm-yyyy "> <span
 													class="error_form text-danger" id="error_date"
 													style="display: none;">Please Select Outreach Date </span>
 											</div>

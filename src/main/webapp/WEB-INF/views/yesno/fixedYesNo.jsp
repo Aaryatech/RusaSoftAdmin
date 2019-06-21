@@ -103,32 +103,24 @@
 
 							</div>
  --%>
-							<div class="col-lg-12" id="sucess_msg" style="display: none;">
+							<%-- <div class="col-lg-12" id="sucess_msg" style="display: none;">
 								<!-- onclick="location.reload();" -->
 								<div class="alert alert-success alert-dismissible fade in">
 									<button type="button" class="close" onclick="hideAlert()">
 										<span aria-hidden="true">×</span>
 									</button>
 									<strong>Success : </strong>${msg}</div>
-							</div>
-							<%-- <div class="col-lg-12" id="updt_msg" style="display: none;">
-								<!-- onclick="location.reload();" -->
-								<div class="alert alert-success alert-dismissible fade in">
-									<button type="button" class="close" onclick="hideAlert()">
-										<span aria-hidden="true">×</span>
-									</button>
-									<strong>Success : </strong>${updtMsg}</div>
 							</div> --%>
-							
+											
 
-							<div class="col-lg-12" id="fail_msg" style="display: none;">
+							<%-- <div class="col-lg-12" id="fail_msg" style="display: none;">
 								<div class="alert alert-success alert-dismissible fade in">
 									<button type="button" class="close" data-dismiss="alert"
 										aria-label="Close">
 										<span aria-hidden="true">×</span>
 									</button>
 									<strong>Fail : </strong>${msg}</div>
-							</div>
+							</div> --%>
 							
 						</header>
 

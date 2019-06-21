@@ -112,7 +112,7 @@
 													placeholder="Title of Maintenance"
 													value="${editInst.amcTitle}"> <span
 													class="error_form text-danger" id="error_name"
-													style="display: none;">Please Enter Title </span>
+													style="display: none;">Please enter title. </span>
 
 											</div>
 										</div>
@@ -122,13 +122,13 @@
 												Expenditure (Rs.)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="number" class="form-control" min="0"
+												<input type="text" class="form-control" 
 													onchange="return trim(this)" id="amc_expenditure"
-													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
+													 onFocus="clearDefault(this)"
 													name="amc_expenditure" placeholder="AMC Expenditure(Rs.)"
 													autocomplete="off" value="${editInst.amcExpenditure}">
 												<span class="error_form text-danger" id="error_exp"
-													style="display: none;">Please Enter AMC Expenditure
+													style="display: none;">Please enter AMC expenditure.
 												</span>
 
 											</div>
@@ -146,7 +146,7 @@
 													onchange="trim(this)" autocomplete="off"
 													value="${editInst.amcCompany}"> <span
 													class="error_form text-danger" id="error_comp"
-													style="display: none;">Please Enter Company Name </span>
+													style="display: none;">Please enter company name.</span>
 
 											</div>
 										</div>
@@ -162,7 +162,7 @@
 													onchange="trim(this)" autocomplete="off"
 													value="${editInst.amcRemarks}"> <span
 													class="error_form text-danger" id="error_amc"
-													style="display: none;">Please Enter Scope of AMC </span>
+													style="display: none;">Please enter scope of AMC. </span>
 
 											</div>
 										</div>
@@ -351,19 +351,9 @@ function checkBeforeSubmit(){
 			a.value=""
 		}
 		};
-
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
+		$('#amc_expenditure').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
 	</script>
 
 

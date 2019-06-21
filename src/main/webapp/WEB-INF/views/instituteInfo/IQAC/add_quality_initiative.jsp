@@ -90,7 +90,7 @@
 
 						</header>
 						
-							<c:if test="${sessionScope.msg!=null}">
+							<%-- <c:if test="${sessionScope.msg!=null}">
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in" style="=display: none;">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -100,7 +100,7 @@
         	                    
         	                     session.removeAttribute("msg");
         	                     %>
-            			</c:if>
+            			</c:if> --%>
 
 
 						<div class="content-body">
@@ -140,6 +140,13 @@
 													<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button>
 											</div>
 										</div>
+										
+										<div align="center" id="loader1" style="display: none;">
+													<img
+														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
+														style="width: 50px; height: 50px;">
+												</div>
+										
 										<input type="hidden" id="qual_inti_id" name="qual_inti_id"
 											value="0"> <input type="hidden" id="is_view"
 											name="is_view" value="0">
@@ -264,6 +271,7 @@
 												} else {
 													$("#quality_initiative_name_field")
 															.hide()
+															$("#loader1").show();
 												}
 
 												if (!isError) {

@@ -130,7 +130,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder=" Enter Tille" id="title"
+															placeholder=" Enter Title" id="title"
 															value="${facultyEmpowr.title}" name="title" autocomplete="off">
 															<span class="error_form text-danger" id="title_errfield"
 															style="display: none;">Please enter title.</span>
@@ -175,10 +175,10 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder=" Amount(Rs.)" id="amount"
+															placeholder=" Amount(Rs.)" id="amount" maxlength="8"
 															value="${facultyEmpowr.exVar1}" name="amount" autocomplete="off">
 															<span class="error_form text-danger" id="amt_errfield"
-															style="display: none;">Please enter Amount(Rs.).</span>
+															style="display: none;">Please enter Amount(Rs.)</span>
 													</div>
 												</div>
 													</div>
@@ -194,11 +194,11 @@
 													placeholder="dd-mm-yyyy" data-format="dd-mm-yyyy" data-end-date="0d" autocomplete="off" id="fromDate"
 													name="fromDate" value="${facultyEmpowr.fromDate}"> <span
 													class="error_form text-danger" id="error_fdate"
-													style="display: none;">Please Enter From Date.</span>
+													style="display: none;">Please enter from date.</span>
 													
 													<span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date. </span>
+													style="display: none;">from date must be smaller than to date. </span>
 													</div>
 												</div>
 
@@ -213,11 +213,11 @@
 													autocomplete="off" id="toDate" data-format="dd-mm-yyyy" name="toDate"
 													placeholder="dd-mm-yyyy" value="${facultyEmpowr.toDate}"> <span
 													class="error_form text-danger" id="error_tdate"
-													style="display: none;">Please Enter To Date.</span>
+													style="display: none;">Please enter to date.</span>
 													
 													<span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date. </span>
+													style="display: none;">To date must be greater than from date. </span>
 
 													</div>
 												</div>
@@ -294,6 +294,11 @@
 	
 	
 		<script>
+		$('#amount').on('input', function() {
+			  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
+		
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {

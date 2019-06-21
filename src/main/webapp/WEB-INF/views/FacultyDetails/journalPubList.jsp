@@ -131,7 +131,7 @@
 														<th>Department</th>
 
 														<th>Publication Year</th>
-														<th>Issue</th>
+														<th>Issue Name/No.</th>
 														<th>Volume</th>
 														<th>Action</th>
 													</tr>

@@ -91,13 +91,9 @@
 
 						</header>
 
-
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-
-
-
 
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertStudGrievance"
@@ -128,7 +124,7 @@
 													</div>
 												</div>
 												
-										<!-- // -->	<div class="form-group">
+											<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Transparent 
 														<span class="text-danger">*</span>
 													</label>
@@ -149,7 +145,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" placeholder="No. of Grievances Appealed" autocomplete="off" id="trans_grivnc"
-													name="trans_grivnc" value="${redressed.noTrnsprntGrievnceAppeld}" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'>
+													name="trans_grivnc" value="${redressed.noTrnsprntGrievnceAppeld}" onFocus="clearDefault(this)">
 													 <span class="error_form text-danger" id="error_trancGrievnc" style="display: none;">Please enter Transparent - No. of grievances.</span>
 													
 												</div>
@@ -161,7 +157,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" placeholder="No. of Redressed Appealed" autocomplete="off" id="trans_redressed"
-													name="trans_redressed" value="${redressed.noTrnsprntRedrsed}" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'> 
+													name="trans_redressed" value="${redressed.noTrnsprntRedrsed}" onFocus="clearDefault(this)"> 
 													<span class="error_form text-danger" id="error_transReAdress" style="display: none;">Please Enter Transparent - No. of redressed appealed.</span>
 													
 															</div>
@@ -177,7 +173,7 @@
 														<input type="radio" ${redressed.isTimeBound == 1 ? 'checked' : ''} name="isTime" value="1" onclick="studGriev1(1)">Yes<br>
 														<input type="radio" ${redressed.isTimeBound == 0 ? 'checked' : ''} name="isTime" value="0" onclick="studGriev1(0)">No<br>
 														<span class="error_form text-danger" id="isTime_errfield"
-															style="display: none;">Please select time bound</span>
+															style="display: none;">Please select time bound.</span>
 
 
 													</div>
@@ -202,15 +198,15 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" placeholder="No. of Redressed" autocomplete="off" id="time_redress"
-													name="time_redress" value="${redressed.noTimeRedrsed}" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'> 
+													name="time_redress" value="${redressed.noTimeRedrsed}" onFocus="clearDefault(this)"> 
 													<span class="error_form text-danger" id="error_timeRedres"	style="display: none;">Please Enter Time Bound - No. of redressed appealed.</span>
 													
 															</div>
 														</div>
-													</div><!-- // -->
+													</div>
 													
 													
-													<!-- // -->	<div class="form-group">
+													<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Efficient 
 														<span class="text-danger">*</span>
 													</label>
@@ -218,7 +214,7 @@
 														<input type="radio" ${redressed.isEfficient == 1 ? 'checked' : ''} name="isEfcint" value="1" onclick="studGriev2(1)">Yes<br>
 														<input type="radio" ${redressed.isEfficient == 0 ? 'checked' : ''} name="isEfcint" value="0" onclick="studGriev2(0)">No<br>
 														<span class="error_form text-danger" id="financ_errfield"
-															style="display: none;">Please select financial support</span>
+															style="display: none;">Please select financial support.</span>
 
 
 													</div>
@@ -231,7 +227,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control" placeholder="No. of Grievances Appealed" autocomplete="off" id="effGriev"
-													name="effGriev" value="${redressed.noEfficntGrievnceAppeld}" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'">
+													name="effGriev" value="${redressed.noEfficntGrievnceAppeld}" onFocus="clearDefault(this)">
 													 <span class="error_form text-danger" id="error_effecintGriev"	style="display: none;">Please enter Efficient - No. of grievances appealed.</span>
 													
 												</div>
@@ -296,19 +292,30 @@
 	}
 	};
 
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-		</script>
+	  $('#trans_grivnc').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	 $('#trans_redressed').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 $('#time_griev').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 $('#time_redress').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 $('#effGriev').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
+	 $('#eff_redress').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+</script>
 	<script type="text/javascript">
 	
 	
@@ -329,7 +336,7 @@
 	
 function studGriev1(activity) {
 		
-		//alert(activity);
+			//alert(activity);
 					if (activity == 1) {
 						
 						document.getElementById("ihide1").style = "visible"
@@ -372,14 +379,14 @@ function studGriev2(activity) {
 					document.getElementById("ihide0").style.display = "none";
 				}
 				
-			var noTrans = ${redressed.noTrnsprntGrievnceAppeld}
-				if(noTrans > 0 ){
+			var noTrans = ${redressed.isTimeBound};
+			if(noTrans > 0 ){
 					document.getElementById("ihide1").style.display = "block";
 				}else{
 					document.getElementById("ihide1").style.display = "none";
 				}
 				
-			var isEffcnt= ${redressed.isEfficient}
+			var isEffcnt= ${redressed.isEfficient};
 				if(isEffcnt > 0 ){
 					document.getElementById("ihide2").style.display = "block";
 				}else{
@@ -404,6 +411,7 @@ function studGriev2(activity) {
 	
 	
 		<script>
+	//	var radioValue = $("input[name='gender']:checked"). val();
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {

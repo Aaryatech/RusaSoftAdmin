@@ -144,49 +144,49 @@
 
 															<div class="col-sm-6">
 																<c:choose>
-																	<c:when test="${facConf.confType eq 'national'}">
+																	<c:when test="${facConf.confType eq 'National'}">
 																
 																	National <input type="radio" name="conf_type"
-																			id="conf_type" checked value="national">&nbsp;&nbsp;&nbsp; 
+																			id="conf_type" checked value="National">&nbsp;&nbsp;&nbsp; 
 																		
 																	International <input type="radio" name="conf_type"
-																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
+																			id="conf_type" value="International">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input type="radio" name="conf_type"
-																			id="conf_type" value="state">
+																			id="conf_type" value="State">
 																	</c:when>
-																	<c:when test="${facConf.confType eq 'international'}">
+																	<c:when test="${facConf.confType eq 'International'}">
 																
 																	National <input type="radio" name="conf_type"
-																			id="conf_type" value="national">&nbsp;&nbsp;&nbsp; 
+																			id="conf_type" value="National">&nbsp;&nbsp;&nbsp; 
 																		
 																	International <input type="radio" name="conf_type"
-																			id="conf_type" checked value="international">&nbsp;&nbsp;&nbsp;
+																			id="conf_type" checked value="International">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input type="radio" name="conf_type"
-																			id="conf_type" value="state">
+																			id="conf_type" value="State">
 																	</c:when>
-																	<c:when test="${facConf.confType eq 'state'}">
+																	<c:when test="${facConf.confType eq 'State'}">
 																
 																	National <input type="radio" name="conf_type"
-																			id="conf_type" value="national">&nbsp;&nbsp;&nbsp; 
+																			id="conf_type" value="National">&nbsp;&nbsp;&nbsp; 
 																		
 																	International <input type="radio" name="conf_type"
-																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
+																			id="conf_type" value="International">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input type="radio" name="conf_type"
-																			id="conf_type" checked value="state">
+																			id="conf_type" checked value="State">
 																	</c:when>
 
 																	<c:otherwise>
 																	National <input type="radio" name="conf_type"
-																			id="conf_type" checked value="national">&nbsp;&nbsp;&nbsp; 
+																			id="conf_type" checked value="National">&nbsp;&nbsp;&nbsp; 
 																		
 																	International <input type="radio" name="conf_type"
-																			id="conf_type" value="international">&nbsp;&nbsp;&nbsp;
+																			id="conf_type" value="International">&nbsp;&nbsp;&nbsp;
 																	 
 																	State <input type="radio" name="conf_type"
-																			id="conf_type" value="state">
+																			id="conf_type" value="State">
 																	</c:otherwise>
 																</c:choose>
 															</div>
@@ -202,8 +202,9 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker"
 																	id="conf_date" autocomplete="off"
+																	data-end-date="0d" data-format="dd-mm-yyyy"
 																	onkeypress='return restrictAlphabets(event)'
-																	name="conf_date" placeholder="dd/mm/yyyy"
+																	name="conf_date" placeholder="dd-mm-yyyy"
 																	value="${facConf.confDate}" onchange="trim(this)">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter valid date.</span>
 															</div>
@@ -445,7 +446,7 @@
 			return false;
 		}
 
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -454,7 +455,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 	</script>
 
 	<script type="text/javascript">

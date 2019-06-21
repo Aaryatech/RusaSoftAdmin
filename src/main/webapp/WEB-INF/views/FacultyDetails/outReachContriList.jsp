@@ -137,12 +137,21 @@
 															value="${contribtn.conId}"></td> 
 														<td style="text-align: center; ">${count.index+1}</td>
 														<td>${contribtn.facultyFirstName}</td>
-														<td>${contribtn.deptName}</td>														
-														<td>${contribtn.conLevel}-
-														${contribtn.conExamSetting==1 ? 'Examination Paper Setting' : 
-														contribtn.conAsEvaluation==1 ? 'Answer Sheet Evaluation' : 
-														contribtn.conAsModeration==1 ?  'Answer Sheet Moderation' : ''}</td>
-														 
+														<td>${contribtn.deptName}</td>	
+														
+														<c:set var="contribution" value="${contribtn.conLevel}"></c:set>
+														<c:if test="${contribtn.conExamSetting==1}">
+														<c:set var="contribution" value="${contribution} - Examination Paper Setting"></c:set>
+														</c:if>							
+														
+														<c:if test="${contribtn.conAsEvaluation==1}">
+														<c:set var="contribution" value="${contribution} - Answer Sheet Evaluation"></c:set>
+														</c:if>							
+														
+														<c:if test="${contribtn.conAsModeration==1}">
+														<c:set var="contribution" value="${contribution} - Answer Sheet Moderation"></c:set>
+														</c:if>													
+														<td>${contribution}</td>														 
 														 
 														<td>${contribtn.conName}</td>
 														<td>${contribtn.conUniversity}</td>

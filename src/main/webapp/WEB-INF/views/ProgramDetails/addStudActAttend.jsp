@@ -121,7 +121,7 @@
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="activityName">Name
+													<label class="control-label col-sm-2" for="activityName">Type
 														of Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">

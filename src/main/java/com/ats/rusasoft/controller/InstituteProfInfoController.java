@@ -538,13 +538,7 @@ public class InstituteProfInfoController {
 				//System.out.println("mou_id" + mou_id);
 
 				String MOU_agency = request.getParameter("MOU_agency");
-				String c = null;
-				if (MOU_agency.equals("7")) {
-					c = request.getParameter("otherCourse");
-				}else {
-					c = "NA";
-				}
-
+				
 				String title = request.getParameter("title");
 				String fromDate = request.getParameter("fromDate");
 				String toDate = request.getParameter("toDate");
@@ -552,7 +546,7 @@ public class InstituteProfInfoController {
 				String beneficiaryMOU = request.getParameter("beneficiaryMOU");
 
 				String beneficiaryMOUNo = request.getParameter("beneficiaryMOUNo");
-				String instituteOfMoU = "NA";
+				String instituteOfMoU = request.getParameter("otherCourse");
 
 				if (mou_id == 0) {
 
@@ -564,14 +558,8 @@ public class InstituteProfInfoController {
 					redInfo.setMouTitle(title);
 					redInfo.setYearId(acYearId);
 					redInfo.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
-					redInfo.setMouInstitute(instituteOfMoU);
-					if (MOU_agency.equals("7")) {
-					redInfo.setMouAgency(c);
-					}
-					else {
-						redInfo.setMouAgency(MOU_agency);
-					}
-
+					redInfo.setMouInstitute(instituteOfMoU);   // other
+					redInfo.setMouAgency(MOU_agency); //NIIT, IIT,IIT,University...7
 					redInfo.setIsActive(1);
 
 					redInfo.setMakerUserId(maker_id);
@@ -616,7 +604,7 @@ public class InstituteProfInfoController {
 					redInfo1.setYearId(acYearId);
 					redInfo1.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					redInfo1.setMouInstitute(instituteOfMoU);
-					redInfo1.setMouAgency(c);
+					redInfo1.setMouAgency(MOU_agency);
 
 					redInfo1.setMakerUserId(maker_id);
 

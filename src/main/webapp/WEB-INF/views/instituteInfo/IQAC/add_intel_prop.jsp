@@ -138,6 +138,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker" id="estb_date"
+													data-end-date="0d" data-format="dd-mm-yyyy"
 													name="estb_date" autocomplete="off" onchange="trim(this)"
 													placeholder="IPR Establishment Date" onkeypress='return restrictAlphabets(event)'
 													value="${intelProp.establishDate}"> <span
@@ -157,7 +158,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													placeholder="From Date" autocomplete="off" id="fromDate"
-													name="fromDate"
+													name="fromDate" data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													value="${intelProp.conFromdt}" onchange="trim(this)">
 												<span class="error_form text-danger" id="error_formfield2"
@@ -179,7 +180,7 @@
 													onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate"
 													onkeypress='return restrictAlphabets(event)'
-													value="${intelProp.conTodt}"> <span
+													value="${intelProp.conTodt}" data-format="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter to date.</span> 
 													<span
@@ -445,7 +446,7 @@
 
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -454,7 +455,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 	</script>
 
 	<script type="text/javascript">

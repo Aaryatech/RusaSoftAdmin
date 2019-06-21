@@ -189,6 +189,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
+													data-end-date="0d" data-format="dd-mm-yyyy"
 													id="fromDate" name="fromDate"
 													value="${editQuality.qualityFromdt}"> <span
 													class="error_form text-danger" id="fromDate_field"
@@ -208,7 +209,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													autocomplete="off" id="toDate" name="toDate"
-													placeholder="Select To Date"
+													placeholder="Select To Date" data-format="dd-mm-yyyy"
 													value="${editQuality.qualityTodt}"> <span
 													class="error_form text-danger" id="toDate_field"
 													style="display: none;">Please select to date.</span>
@@ -345,8 +346,22 @@
 												} else {
 													$("#toDate_field").hide();
 												}
-
-
+												
+												
+												var res = $("#qualityInitId").val();
+												if(res==0){
+													
+													if (!$("#qltyInitiative").val()) {
+														isError = true;
+	
+														$("#qltyInitiative").addClass(
+																"has-error")
+														$("#error_other").show();
+													} else {
+														$("#error_other").hide();
+													}
+												}
+												
 												/* if ($("#no_of_participant")
 														.val() == 0
 														|| !$(
@@ -471,7 +486,7 @@
  -->
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -480,7 +495,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 		
 		function hideText() {
 			var value = document.getElementById("qualityInitId").value

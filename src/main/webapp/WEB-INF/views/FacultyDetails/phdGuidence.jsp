@@ -144,15 +144,15 @@
 														</div>
 														
 														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Place of 
-																Work<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="smallheading">Place/Name of 
+																Research Center<span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="place_work" onchange="trim(this)"
-																	name="place_work" placeholder="Place of Work"
+																	name="place_work" placeholder="Place/Name of Research Center"
 																	value="${phd.placeOfWork}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_field_place_work" style="display:none;" >
-																	Please enter place of work.</span>
+																	Please enter place/name of research center.</span>
 															</div>
 														</div>
 														
