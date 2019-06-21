@@ -78,11 +78,11 @@ table, th, td {
 
 						</header>
 						
-						<c:if test="${sessionScope.successMsg!=null}">
+						 <c:if test="${sessionScope.successMsg!=null}">
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> Record Update Successfully.</div>
+             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
         	                     </div> 
         	                     <%session=request.getSession();
         	                    

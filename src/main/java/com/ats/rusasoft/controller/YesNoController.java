@@ -386,21 +386,25 @@ public class YesNoController {
 			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
 					instituteYesNoList, InstituteYesNo[].class);
 			if(instituteYesNo!=null) {
-				session.setAttribute("msg", Constants.sucess_msg);
+				session.setAttribute("successMsg", Constants.sucess_msg);
 			}
 			else {
-				session.setAttribute("msg", Constants.fail_msg);
+				session.setAttribute("successMsg", Constants.fail_msg);
 			}
 			try {
 				selectYestNoLib = Integer.parseInt(request.getParameter("selectYestNoLib"));
 			} catch (Exception e) {
 				selectYestNoLib = 0;
 			}
+			try {
 			selectYestNoInfra = Integer.parseInt(request.getParameter("selectYestNoInfra"));
+			}catch (Exception e) {
+				selectYestNoInfra = 0;
+
+			}
 
 		} catch (Exception e) {
 
-			selectYestNoInfra = 0;
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();

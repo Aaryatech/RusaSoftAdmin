@@ -1443,7 +1443,7 @@ public class InstituteProfInfoController {
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/amc");
 
-				model.addObject("title", "Annual Maintenance(AMC)");
+				model.addObject("title", "Annual Maintenance (AMC)");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -1511,7 +1511,7 @@ public class InstituteProfInfoController {
 
 				model = new ModelAndView("instituteInfo/IQAC/add_amc");
 
-				model.addObject("title", "Add Annual Maintenance(AMC)");
+				model.addObject("title", "Add Annual Maintenance (AMC)");
 
 				InstituteAMC editInst = new InstituteAMC();
 				model.addObject("editInst", editInst);
@@ -1550,7 +1550,7 @@ public class InstituteProfInfoController {
 				int edit_amc_id = Integer.parseInt(request.getParameter("edit_amc_id"));
 				//System.out.println("edit_amc_id id is" + edit_amc_id);
 
-				model.addObject("title", " Edit Annual Maintenance(AMC)");
+				model.addObject("title", " Edit Annual Maintenance (AMC)");
 
 				map.add("amcId", edit_amc_id);
 
