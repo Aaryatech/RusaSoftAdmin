@@ -1020,7 +1020,7 @@ public class ResearchAndInnovation {
 				neighbourCommAct.setMakerDatetime(curDateTime);
 				neighbourCommAct.setExInt1(Integer.parseInt(request.getParameter("isActivity")));
 				neighbourCommAct.setExInt2(0);
-				neighbourCommAct.setExVar1("NA");
+				neighbourCommAct.setExVar1(request.getParameter("otherSource"));
 				neighbourCommAct.setExVar2("NA");
 				
 				//System.out.println(neighbourCommAct.toString());

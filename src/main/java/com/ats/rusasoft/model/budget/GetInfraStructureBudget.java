@@ -18,6 +18,7 @@ public class GetInfraStructureBudget {
 	private String finYear;
 	private int exInt1;
 	private String exVar1;
+	private String exVar2;
 	
 	
 	public String getExVar1() {
@@ -25,6 +26,13 @@ public class GetInfraStructureBudget {
 	}
 	public void setExVar1(String exVar1) {
 		this.exVar1 = exVar1;
+	}
+	
+	public String getExVar2() {
+		return exVar2;
+	}
+	public void setExVar2(String exVar2) {
+		this.exVar2 = exVar2;
 	}
 	public int getInfraBudgetId() {
 		return infraBudgetId;
@@ -92,7 +100,9 @@ public class GetInfraStructureBudget {
 		return "GetInfraStructureBudget [infraBudgetId=" + infraBudgetId + ", finYearId=" + finYearId + ", acYearId="
 				+ acYearId + ", instituteId=" + instituteId + ", infraBudgetTitle=" + infraBudgetTitle
 				+ ", budgetAllocated=" + budgetAllocated + ", budgetUtilized=" + budgetUtilized + ", academicYear="
-				+ academicYear + ", finYear=" + finYear + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + "]";
+				+ academicYear + ", finYear=" + finYear + ", exInt1=" + exInt1 + ", exVar1=" + exVar1 + ", exVar2="
+				+ exVar2 + "]";
 	}
+
 
 }

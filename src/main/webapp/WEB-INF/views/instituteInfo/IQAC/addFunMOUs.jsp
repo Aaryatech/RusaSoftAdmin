@@ -358,7 +358,7 @@
 												<input type="text" min="1" class="form-control" maxlength="8"
 													id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 													placeholder="No. of Beneficiary Participants "
-													onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
+													onFocus="clearDefault(this)"
 													value="${editInst.mouBeneficiaryNos}"> <span
 													class="error_form text-danger" id="error_benif"
 													style="display: none;">Please Enter No. of
@@ -683,20 +683,7 @@ function clearDefault(a){
 		a.value=""
 	}
 	};
-
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
-	</script>
+</script>
 
 
 </body>

@@ -1,11 +1,6 @@
 package com.ats.rusasoft.model.budget;
 
-
-
-
-
 public class GetLibraryBookBudget {
-
 
 	private int libraryBookBudgetId;
 
@@ -13,7 +8,8 @@ public class GetLibraryBookBudget {
 	private int acYearId;
 	private int instituteId;
 	private int exInt1;
-	private String exVar1;;
+	private String exVar1;
+	private String exVar2;
 	private int expenditureOnBookPurchase;
 	private int expenditureOnJournalsPurchase;
 	private int expenditureOnEjournalsPurchase;
@@ -96,16 +92,22 @@ public class GetLibraryBookBudget {
 	public void setFinYear(String finYear) {
 		this.finYear = finYear;
 	}
+	public String getExVar2() {
+		return exVar2;
+	}
+	public void setExVar2(String exVar2) {
+		this.exVar2 = exVar2;
+	}
 	@Override
 	public String toString() {
 		return "GetLibraryBookBudget [libraryBookBudgetId=" + libraryBookBudgetId + ", finYearId=" + finYearId
 				+ ", acYearId=" + acYearId + ", instituteId=" + instituteId + ", exInt1=" + exInt1 + ", exVar1="
-				+ exVar1 + ", expenditureOnBookPurchase=" + expenditureOnBookPurchase
+				+ exVar1 + ", exVar2=" + exVar2 + ", expenditureOnBookPurchase=" + expenditureOnBookPurchase
 				+ ", expenditureOnJournalsPurchase=" + expenditureOnJournalsPurchase
 				+ ", expenditureOnEjournalsPurchase=" + expenditureOnEjournalsPurchase
 				+ ", expenditureOnEresourcesPurchase=" + expenditureOnEresourcesPurchase + ", academicYear="
 				+ academicYear + ", finYear=" + finYear + "]";
 	}
-	
+
 	
 }

@@ -183,8 +183,8 @@
 															value="${fieldProject.document}"
 															name="document" maxlength="100" autocomplete="off"
 															placeholder="Link of Relevant Document">
-															<span class="error_form text-danger" id="document_field"
-															style="display: none;">Please enter link of relevant documents.</span>
+															<!-- <span class="error_form text-danger" id="document_field"
+															style="display: none;">Please enter link of relevant documents.</span> -->
 													</div>
 												</div>
 
@@ -279,8 +279,10 @@
 		}
 	</script>
 	<script>
-	var l = ${progTypeList};
-	alert(l);
+	$('#no_stud_undertake').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -297,7 +299,7 @@
 		}
 		$(document)
 				.ready(
-						function($) {		// 			
+						function($) {				
 
 							$("#form_sample_2")
 									.submit(
@@ -329,7 +331,7 @@
 															.hide()
 												}
 
-												if (!$("#document").val()) {
+												/* if (!$("#document").val()) {
 													isError = true;
 
 													$("#document").addClass(
@@ -337,7 +339,7 @@
 													$("#document_field").show()
 												} else {
 													$("#document_field").hide()
-												}
+												} */
 												 
 												
 												if (!isError) {

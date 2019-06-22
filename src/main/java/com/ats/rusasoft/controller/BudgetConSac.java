@@ -156,6 +156,7 @@ public class BudgetConSac {
 
 				budget = rest.postForObject(Constants.url + "/getWasteMngtBudgetByFinYearId", map,
 						WasteMngtBudget.class);
+				System.err.println("Data------------"+budget);
 				if (budget == null) {
 					res = 0;
 					return res;
@@ -297,9 +298,9 @@ public class BudgetConSac {
 				int exInt1 = 0;
 				infraBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_expd")));
 				infraBudget.setExInt2(exInt1);
-				String exVar1 = "NA";
-				infraBudget.setExVar1(request.getParameter("funding_from"));
-				infraBudget.setExVar2(exVar1);
+				
+				infraBudget.setExVar1(request.getParameter("funding_from")); // Source of Funding
+				infraBudget.setExVar2(request.getParameter("otherSource"));	 // Other Source of Funding
 
 				infraBudget.setIsActive(1);
 				infraBudget.setDelStatus(1);
@@ -631,7 +632,7 @@ public class BudgetConSac {
 				libBudget.setExInt2(exInt1);
 				String exVar1 = "NA";
 				libBudget.setExVar1(request.getParameter("funding_from"));
-				libBudget.setExVar2(exVar1);
+				libBudget.setExVar2(request.getParameter("otherSource"));
 
 				libBudget.setIsActive(1);
 				libBudget.setDelStatus(1);
@@ -959,9 +960,9 @@ public class BudgetConSac {
 				int exInt1 = 0;
 				wasteAndGreenMngtBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				wasteAndGreenMngtBudget.setExInt2(exInt1);
-				String exVar1 = "NA";
+			
 				wasteAndGreenMngtBudget.setExVar1(request.getParameter("funding_from"));
-				wasteAndGreenMngtBudget.setExVar2(exVar1);
+				wasteAndGreenMngtBudget.setExVar2(request.getParameter("otherSource"));
 
 				wasteAndGreenMngtBudget.setIsActive(1);
 				wasteAndGreenMngtBudget.setDelStatus(1);

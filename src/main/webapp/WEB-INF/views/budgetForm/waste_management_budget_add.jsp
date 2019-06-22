@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body onload="showForm()">
 
 	<c:url value="/getBudgetDataByFinYearId" var="getBudgetDataByFinYearId"></c:url>
 
@@ -133,12 +133,26 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="funding_from" name="funding_from"
-													class="form-control">
+													class="form-control" onchange="showForm()">
 													<option value="Management" ${budget.exVar1 eq 'Management' ? 'selected' : ''}>Management</option>
 													<option value="RUSA" ${budget.exVar1 eq 'RUSA' ? 'selected' : '' }>RUSA</option>
-													<option value="Other Govt. Agency" ${budget.exVar1 eq 'Other Govt. Agency' ? 'selected' : '' }>Other Govt. Agency</option>
+													<option value="Any Other Government Agency" ${budget.exVar1 eq 'Any Other Government Agency' ? 'selected' : '' }>Any Other Government Agency</option>
 												</select>
 											</div>
+										</div>
+										
+											<div class="form-group" id="abc" style="display: none">
+
+											<label class="control-label col-sm-2" for="page_name">Other Source of 
+												Funding<span class="text-danger">*</span> </label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="otherSource"
+													autocomplete="off" name="otherSource" onchange="trim(this)"
+													placeholder="Name of Other Source Funding" value="${budget.exVar2}"> <span
+													class="error_form text-danger" id="error_other"
+													style="display: none;">Please enter other  source of funding.</span>
+											</div>
+
 										</div>
 
 										<div class="form-group">
@@ -216,6 +230,7 @@
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a> <input type="hidden" id="is_view" name="is_view" value="0">
+											
 												<input type="hidden" id="wasteMngtBudgetId"
 													name="wasteMngtBudgetId"
 													value="${budget.wasteMngtBudgetId}">
@@ -280,6 +295,19 @@
 											function(e) {
 												var isError = false;
 												var errMsg = "";
+												
+												var fundSource = $("#funding_from").val();
+												if(fundSource == 'Any Other Government Agency'){
+													if (!$("#otherSource").val()) {
+														isError = true;
+	
+														$("#otherSource").addClass(
+																"has-error")
+														$("#error_other").show()
+													} else {
+														$("#error_other").hide()
+													}													
+												}
 
 												if (!$("#fin_year_id").val()) {
 													isError = true;
@@ -296,9 +324,7 @@
 												
 												
 												if (!$("#budget_allocated").val()
-														|| !validateZeroNo($(
-																"#budget_allocated")
-																.val())) {
+														|| $("#budget_allocated").val()<=0) {
 													isError = true;
 													$("#budget_allocated")
 															.addClass(
@@ -311,10 +337,7 @@
 												}
 
 												
-												if (!$("#budget_utilized").val()
-														|| !validateZeroNo($(
-																"#budget_utilized")
-																.val())) {
+												if (!$("#budget_utilized").val() || $("#budget_utilized").val()<=0) {
 													
 													isError = true;
 													$("#budget_utilized")
@@ -473,16 +496,17 @@
 							if(data==0){
 								
 								//alert("zero ");
-								document.getElementById("budget_allocated").value=""
-								document.getElementById("budget_utilized").value=""
+								document.getElementById("budget_allocated").value="0"
+								document.getElementById("budget_utilized").value="0"
 								document.getElementById("wasteMngtBudgetId").value="0";
+								document.getElementById("ttl_exp").value="0";
 								
 							}else{
 								
-								 //  alert("Data Exists ");
-								
+								 // alert("Data Exists ");								
 									document.getElementById("budget_allocated").value=data.budgetAllocated;
 									document.getElementById("budget_utilized").value=data.budgetUtilized;
+									document.getElementById("ttl_exp").value=data.exInt1;
 									document.getElementById("wasteMngtBudgetId").value=data.wasteMngtBudgetId;
 								
 							}
@@ -494,6 +518,20 @@
 	</script>
 
 
-
+<script type="text/javascript">
+		function showForm() {
+			
+			var selectedValue = document.getElementById("funding_from").value;
+			//alert("qualType::"+selectedValue);
+		
+			if(selectedValue == 'Any Other Government Agency'){
+				document.getElementById("abc").style.display = "inline";
+			}
+			else{
+				document.getElementById("abc").style.display = "none";
+			}
+			
+		}
+	</script>
 </body>
 </html>

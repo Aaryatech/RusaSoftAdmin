@@ -44,7 +44,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body onload="showForm()">
 	<c:url value="/getBudgetDataByFinYearId" var="getBudgetDataByFinYearId"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -153,12 +153,26 @@
 											</label>
 											<div class="col-sm-6">
 												<select id="funding_from" name="funding_from"
-													class="form-control">
+													class="form-control" onchange="showForm()">
 													<option value="Management" ${budget.exVar1 eq 'Management' ? 'selected' : ''}>Management</option>
 													<option value="RUSA" ${budget.exVar1 eq 'RUSA' ? 'selected' : '' }>RUSA</option>
 													<option value="Any Other Government Agency" ${budget.exVar1 eq 'Any Other Government Agency' ? 'selected' : '' }>Any Other Government Agency</option>
 												</select>
 											</div>
+										</div>
+										
+										<div class="form-group" id="abc" style="display: none">
+
+											<label class="control-label col-sm-2" for="page_name">Other Source of 
+												Funding<span class="text-danger">*</span> </label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="otherSource"
+													autocomplete="off" name="otherSource" onchange="trim(this)"
+													placeholder="Name of Other Source Funding" value="${budget.exVar2}"> <span
+													class="error_form text-danger" id="error_other"
+													style="display: none;">Please enter other  source of funding.</span>
+											</div>
+
 										</div>
 										
 										<div class="form-group">
@@ -272,7 +286,21 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-
+<script type="text/javascript">
+		function showForm() {
+			
+			var selectedValue = document.getElementById("funding_from").value;
+			//alert("qualType::"+selectedValue);
+		
+			if(selectedValue == 'Any Other Government Agency'){
+				document.getElementById("abc").style.display = "inline";
+			}
+			else{
+				document.getElementById("abc").style.display = "none";
+			}
+			
+		}
+	</script>
 
 	<script>
 		function validateEmail(email) {
@@ -307,6 +335,19 @@
 												var isError = false;
 												var errMsg = "";
 
+												var fundSource = $("#funding_from").val();
+												if(fundSource == 'Any Other Government Agency'){
+													if (!$("#otherSource").val()) {
+														isError = true;
+	
+														$("#otherSource").addClass(
+																"has-error")
+														$("#error_other").show()
+													} else {
+														$("#error_other").hide()
+													}													
+												}
+												
 												if (!$("#fin_year_id").val()) {
 													isError = true;
 
@@ -340,8 +381,7 @@
 												} else {
 													$("#ttl_exp_field").hide()
 												}
-
-												 
+												
 												
 												
 												if (!$("#budget_allocated").val()
@@ -376,18 +416,7 @@
 													$("#budget_utilized_field")
 															.hide()
 												}
-												/* if(parseInt($("#budget_utilized").val())>parseInt($("#budget_allocated").val())){
-													isError = true;
-													$("#budget_utilized")
-													.addClass(
-															"has-error")
- 											$("#budget_utilized_field2")
-													.show()
-												}else{
-													$("#budget_utilized_field2")
-													.hide()
-												}
- */
+												
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {

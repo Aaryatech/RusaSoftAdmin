@@ -233,9 +233,9 @@ public class BudgetCon {
 				int exInt1 = 0;
 				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				budget.setExInt2(exInt1);
-				String exVar1 = "NA";
+				
 				budget.setExVar1(request.getParameter("funding_from"));
-				budget.setExVar2(exVar1);
+				budget.setExVar2(request.getParameter("otherSource"));
 
 				budget.setIsActive(1);
 				budget.setDelStatus(1);
@@ -513,9 +513,9 @@ public class BudgetCon {
 				int exInt1 = 0;
 				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
 				budget.setExInt2(exInt1);
-				String exVar1 = "NA";
+				
 				budget.setExVar1(request.getParameter("funding_from"));
-				budget.setExVar2(exVar1);
+				budget.setExVar2(request.getParameter("otherSource"));
 
 				budget.setIsActive(1);
 				budget.setDelStatus(1);

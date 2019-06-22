@@ -135,7 +135,16 @@
 																	<td>${neighbourList.totalStudent}</td>
 																	<td>${neighbourList.noOfFaculty}</td>
 																	<td>${neighbourList.totalFaculty}</td>
-																	<td>${neighbourList.associationWith}</td>
+																	
+																	<c:if test = "${neighbourList.associationWith!='Any Other'}">
+																	<td align="center">${neighbourList.associationWith}</td>
+																</c:if>
+																
+																<c:if test = "${neighbourList.associationWith=='Any Other'}">
+																			<td align="center">${neighbourList.exVar1}</td>
+																</c:if>
+																	
+																	<%-- <td>${neighbourList.associationWith}</td> --%>
 																	
 																	<td align="center"><c:if test="${editAccess==0}">
 																			<a

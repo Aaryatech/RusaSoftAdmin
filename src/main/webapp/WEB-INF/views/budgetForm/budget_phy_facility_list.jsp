@@ -126,7 +126,17 @@
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
 														<td align="center">${budget.physicalFacilityBudgetTitle}</td>
-														<td align="center">${budget.exVar1}</td>
+														
+														<c:if test = "${budget.exVar1!='Any Other Government Agency'}">
+																	<td align="center">${budget.exVar1}</td>
+														</c:if>
+														
+														<c:if test = "${budget.exVar1=='Any Other Government Agency'}">
+																	<td align="center">${budget.exVar2}</td>
+													</c:if>
+													<%-- 	<td align="center">${budget.exVar1}</td> --%>
+														
+														
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>
 														<td align="right">${budget.exInt1}</td>

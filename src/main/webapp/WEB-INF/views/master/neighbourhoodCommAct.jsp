@@ -133,7 +133,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_student" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="no_student" placeholder="No. of Student" onkeypress='return restrictAlphabets(event)'
+																	name="no_student" placeholder="No. of Student" 
 																	value="${neighbourCommAct.noOfStud}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No.of student and value must be greater than 0.</span>
 															</div>
@@ -146,7 +146,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="ttl_student" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="ttl_student" placeholder="Total No. of Student" onkeypress='return restrictAlphabets(event)'
+																	name="ttl_student" placeholder="Total No. of Student" 
 																	value="${neighbourCommAct.totalFaculty}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter total student and value must be greater than 0.</span>
 															</div>
@@ -158,7 +158,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="no_faculty" placeholder="No. of Faculty" onkeypress='return restrictAlphabets(event)'
+																	name="no_faculty" placeholder="No. of Faculty" 
 																	value="${neighbourCommAct.noOfFaculty}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of faculty and value must be greater than 0.</span>
 															</div>
@@ -170,7 +170,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="ttl_faculty" onchange="trim(this)" onFocus="clearDefault(this)"
-												name="ttl_faculty" placeholder="Total No. of Faculty" onkeypress='return restrictAlphabets(event)'
+																	name="ttl_faculty" placeholder="Total No. of Faculty"
 																	value="${neighbourCommAct.totalFaculty}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter total faculty and value must be greater than 0.</span>
 															</div>
@@ -182,7 +182,7 @@
 															</label>
 															
 														<div class="col-sm-6">
-															<select id="association" name="association" class="form-control">
+															<select id="association" name="association" class="form-control" onchange="showForm()">
 																<option value="Government Organization" ${neighbourCommAct.associationWith eq 'Government Organization' ? 'selected' : ''}>Government Organization</option>
 																<option value="Non Government Organization" ${neighbourCommAct.associationWith eq 'Non Government Organization' ? 'selected' : ''}>Non Government Organization</option>
 																<option value="Industry" ${neighbourCommAct.associationWith eq 'Industry' ? 'selected' : ''}>Industry</option>
@@ -192,7 +192,19 @@
 
 														</div>
 													
+													<div class="form-group" id="abc" style="display: none">
 
+														<label class="control-label col-sm-2" for="page_name">Other  
+															Associate<span class="text-danger">*</span> </label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control" id="otherSource"
+																autocomplete="off" name="otherSource" onchange="trim(this)"
+																placeholder="Name of Other Source Funding" value="${neighbourCommAct.exVar1}"> <span
+																class="error_form text-danger" id="error_other"
+																style="display: none;">Please enter other associate.</span>
+														</div>
+
+												</div>
 														
 													</div>
 														<div class="form-group">
@@ -232,6 +244,22 @@
 		<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script>
+$('#no_student').on('input', function() {
+	this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#ttl_student').on('input', function() {
+	this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#no_faculty').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#ttl_faculty').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -247,6 +275,18 @@
             			var isError=false;
             			 var errMsg="";
             				
+            			 var fundSource = $("#association").val();
+							if(fundSource == 'Any Other'){
+								if (!$("#otherSource").val()) {
+									isError = true;
+
+									$("#otherSource").addClass(
+											"has-error")
+									$("#error_other").show()
+								} else {
+									$("#error_other").hide()
+								}													
+							}
      					
      						if (!$("#activity_name").val()) {
      							isError = true;
@@ -325,6 +365,7 @@
 
 </script> 
 <script type="text/javascript">
+
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;
@@ -367,18 +408,7 @@ function clearDefault(a){
 		a.value=""
 	}
 	};
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
+			
 		</script>
 		<script type="text/javascript">
 		function checkPhdGuide(activity) {
@@ -405,9 +435,21 @@ function clearDefault(a){
 				} else{
 					document.getElementById("ihide").style.display = "none";
 				} 
-				
+				showForm();
+			}
+		function showForm() {
+			
+			var selectedValue = document.getElementById("association").value;
+			//alert("qualType::"+selectedValue);
+		
+			if(selectedValue == 'Any Other'){
+				document.getElementById("abc").style.display = "inline";
+			}
+			else{
+				document.getElementById("abc").style.display = "none";
 			}
 			
+		}
 		</script>
 
 	</div>
