@@ -136,7 +136,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="aadhar" onchange="trim(this)"
-																	name="aadhar" placeholder="Aadhaar No." maxlength="12"
+																	name="aadhar" placeholder="Aadhaar No." maxlength="15"
 																	value="${phd.aadhaarNo}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_field_adhar" style="display:none;" >
 																	Please enter aadhaar No.</span>
@@ -365,6 +365,11 @@
 		replace(/\n +/, "\n"); // Removes spaces after newlines
 		return;
 	}
+	$('#aadhar').on('keypress change blur oninput', function () {
+	    $(this).val(function (index, value) {
+	        return value.replace(/[^0-9]+/gi, '').replace(/(.{4})/g, '$1 ');
+	    });
+	});
 	
             
             	$(document).ready(function($){
@@ -441,7 +446,7 @@
             					$("#error_formfield0").hide()
             				}
            				
-           				if(!$("#aadhar").val()){
+           				if(!$("#aadhar").val()|| $("#aadhar").val().length<15) {
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
