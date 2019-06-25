@@ -158,7 +158,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_student_part" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="no_student_part" placeholder="No. of Student Participated" onkeypress='return restrictAlphabets(event)'
+																	name="no_student_part" placeholder="No. of Student Participated" maxlength="6"
 																	value="${tExtAct.noOfStudParticipated}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No.of student participated and value must be greater than 0.</span>
 															</div>
@@ -171,7 +171,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="student_in_institute" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="student_in_institute" placeholder="No. of Student in Institute" onkeypress='return restrictAlphabets(event)'
+																	name="student_in_institute" placeholder="No. of Student in Institute" maxlength="6"
 																	value="${tExtAct.noOfStudInInst}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of student in institute and value must be greater than 0.</span>
 															</div>
@@ -183,7 +183,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="no_faculty" placeholder="No. of Faculty Participated" onkeypress='return restrictAlphabets(event)'
+																	name="no_faculty" placeholder="No. of Faculty Participated" maxlength="6"
 																	value="${tExtAct.noOfFacultyParticipated}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of faculty participated and value must be greater than 0.</span>
 															</div>
@@ -195,7 +195,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="faculty_in_inst" onchange="trim(this)" onFocus="clearDefault(this)"
-																		name="faculty_in_inst" placeholder="No. of Faculty in Institute" onkeypress='return restrictAlphabets(event)'
+																		name="faculty_in_inst" placeholder="No. of Faculty in Institute" maxlength="6"
 																	value="${tExtAct.noOfFacultyInInst}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of faculty in institute and value must be greater than 0.</span>
 															</div>
@@ -282,12 +282,12 @@
             				}  
             				
             				
-           				if($("#no_faculty").val() <= 0 || !$("#no_faculty").val()){
+           				if($("#student_in_institute").val() <= 0 || !$("#student_in_institute").val()){
        					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
             				
-            				$("#ttl_student").addClass("has-error")
+            				$("#student_in_institute").addClass("has-error")
             				$("#error_formfield3").show()
             					//return false;
             				} else {
@@ -378,18 +378,21 @@ function clearDefault(a){
 	}
 	};
 
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
+	$('#no_student_part').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#no_faculty').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#faculty_in_inst').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#beneficiaryMOUNo').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
 		</script>
 		<script type="text/javascript">
 		function checkPhdGuide(activity) {

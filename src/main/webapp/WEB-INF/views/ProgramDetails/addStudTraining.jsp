@@ -339,6 +339,15 @@
 						}
 	</script> -->
 	<script type="text/javascript">
+	
+	$('#no_stud_placed').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#contact_detail').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function getProgramTypeByProgram() {
 
 			var programType = document.getElementById("prog_type").value;

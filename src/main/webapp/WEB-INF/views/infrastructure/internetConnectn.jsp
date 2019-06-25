@@ -113,7 +113,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="internet_access"
-													name="internet_access" placeholder="No. of Computers with Internet Access" onkeypress='return restrictAlphabets(event)'
+													name="internet_access" placeholder="No. of Computers with Internet Access" maxlength="6"
 													onchange="trim(this)" autocomplete="off" onFocus="clearDefault(this)"
 													value="${interConnec.noOfCompWithInternetAccess}"> <span
 													class="error_form text-danger" id="error_formfield1"
@@ -229,6 +229,11 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
   <script>
+  
+  $('#internet_access').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+  
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

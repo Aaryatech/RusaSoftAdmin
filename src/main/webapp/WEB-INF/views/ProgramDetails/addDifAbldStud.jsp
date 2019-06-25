@@ -138,7 +138,7 @@
 														<input type="text" class="form-control"
 															id="udid" onchange="trim(this)"
 															value="${difDisStud.udidCardNo}"
-															name="udid" maxlength="100" autocomplete="off"
+															name="udid" maxlength="18" autocomplete="off"
 															placeholder="Unique Disability ID (UDID)">
 															<span class="error_form text-danger" id="udid_errfield"
 															style="display: none;">Please enter unique disability ID (UDID).</span>
@@ -168,8 +168,7 @@
 														<input type="text" class="form-control"
 															id="disablity" onchange="trim(this)" autocomplete="off"
 															value="${difDisStud.percntOfDisability}" onFocus="clearDefault(this)" 
-															onkeypress='return restrictAlphabets(event)'
-															name="disablity" maxlength="100"
+															name="disablity" maxlength="3"
 															placeholder="% of Disability">
 															<span class="error_form text-danger" id="per_disablity_errfield"
 															style="display: none;">Please enter % of disability and value must be greater than 0.</span>
@@ -277,6 +276,11 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
+	
+	$('#disablity').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function getProgramTypeByProgram() {
 
 			var programType = document.getElementById("prog_name").value;

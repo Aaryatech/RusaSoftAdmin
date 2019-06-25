@@ -458,7 +458,7 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="pass" min="0"
 													autocomplete="off" placeholder="Passed"
-													onchange="calResult()" name="pass"
+													onchange="calResult()" name="pass" 
 													value="${editSubject.subStuPassed}"> <span
 													class="error_form text-danger" id="error_pass"
 													style="display: none;">Please enter No of Students
@@ -525,7 +525,15 @@
 
 
 	<script type="text/javascript">
+	$('#pass').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
 
+	$('#noStudApp').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+
+	
 	/*code: 48-57 Numbers
 	  8  - Backspace,
 	  35 - home key, 36 - End key

@@ -234,8 +234,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" class="form-control"
-															id="activity_part"
-															onkeypress='return restrictAlphabets(event)' min="0"
+															id="activity_part" maxlength="6"															
 															name="activity_part" placeholder="No of Participants"
 															value="${activity.activityParticipants}" onFocus="clearDefault(this)"
 															autocomplete="off" onchange="trim(this)"> <span
@@ -270,9 +269,8 @@
 														Sanctioned <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0" class="form-control"
+														<input type="number" min="0" class="form-control" maxlength="6"
 															id="amt_sanc" onFocus="clearDefault(this)"
-															onkeypress='return restrictAlphabets(event)'
 															name="amt_sanc" placeholder="Amount Sanctioned"
 															value="${activity.activityAmountSanctioned}"
 															autocomplete="off" onchange="trim(this)"> <span
@@ -291,8 +289,7 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="0" class="form-control"
-															id="amt_utilise" onFocus="clearDefault(this)"
-															onkeypress='return restrictAlphabets(event)'
+															id="amt_utilise" onFocus="clearDefault(this)" maxlength="6"
 															name="amt_utilise" placeholder="Amount Utilized"
 															value="${activity.activityAmountUtilised}"
 															onchange="trim(this)" autocomplete="off"> <span
@@ -364,6 +361,19 @@ function clearDefault(a){
 		a.value="";
 	}
 	};
+	
+	$('#activity_part').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#amt_sanc').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#amt_utilise').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 </script>
 	<script>
 		function trim(el) {

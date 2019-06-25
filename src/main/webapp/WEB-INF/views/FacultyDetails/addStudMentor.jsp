@@ -95,7 +95,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text"  onFocus="clearDefault(this)"
-													class="form-control"  onkeypress='return restrictAlphabets(event)' 
+													class="form-control"  
 													id="stud_no" name="stud_no" placeholder="No." maxlength="5"
 													value="${stud.menStuCount}">
 											<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter No. of student and value must be greater than 0.</span>
@@ -144,6 +144,10 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
+$('#stud_no').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+
 		function getData() {
 			//alert("hii");
 			var i = parseInt(document.getElementById("index").value);

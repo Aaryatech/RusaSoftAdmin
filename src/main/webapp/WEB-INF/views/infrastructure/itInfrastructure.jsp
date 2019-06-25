@@ -117,7 +117,7 @@ input {
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="no_comp" onFocus="clearDefault(this)"
-													name="no_comp" placeholder="No. of Computers" onkeypress='return restrictAlphabets(event)'
+													name="no_comp" placeholder="No. of Computers" maxlength="6"
 													onchange="trim(this)" autocomplete="off"
 													value="${itInfra.noOfComputers}"> <span
 													class="error_form text-danger" id="error_formfield1"
@@ -151,7 +151,7 @@ input {
 											<div class="col-sm-6">
 												<input type="text" class="form-control"  id="purchase_amt" onFocus="clearDefault(this)"
 													 autocomplete="off"	onchange="trim(this)" name="purchase_amt"
-													placeholder="Amount of Purchase (in Rupees)" onkeypress='return restrictAlphabets(event)'
+													placeholder="Amount of Purchase (in Rupees)" maxlength="6"
 													value="${itInfra.purchaseAmt}"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter amount of purchase and value must be greater than 0.</span>
@@ -166,7 +166,7 @@ input {
 											<div class="col-sm-6">
 												<input type="text" class="form-control"  id="stud_util" onFocus="clearDefault(this)"
 													 autocomplete="off"	onchange="trim(this)" name="stud_util"
-													placeholder="No. of Student Utilizing" onkeypress='return restrictAlphabets(event)'
+													placeholder="No. of Student Utilizing" maxlength="6"
 													value="${itInfra.noOfStudUtilizing}"> <span
 													class="error_form text-danger" id="error_formfield4"
 													style="display: none;">Please enter No. of student utilizing and value must be greater than 0.</span>
@@ -216,6 +216,19 @@ input {
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
   <script>
+  
+  $('#no_comp').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+  
+  $('#purchase_amt').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+  
+  $('#stud_util').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+  
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

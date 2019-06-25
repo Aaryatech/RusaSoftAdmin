@@ -102,7 +102,7 @@
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
 													onchange="trim(this)" onFocus="clearDefault(this)"
-													onkeypress='return restrictAlphabets(event)' id="noOfBookPrchs"
+													id="noOfBookPrchs"
 													name="noOfBookPrchs" onchange="trim(this)" maxlength="7"
 													placeholder="No of Copies for Books" autocomplete="off"
 													value="${lib.noOfBooks}"> <span
@@ -120,7 +120,6 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
-													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfBook" name="costOfBook"
 													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost of Books" onchange="trim(this)"
@@ -140,7 +139,7 @@
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
 													onchange="trim(this)" onFocus="clearDefault(this)"
-													onkeypress='return restrictAlphabets(event)' id="noOfJournal"
+													id="noOfJournal"
 													name="noOfJournal" onchange="trim(this)" maxlength="7"
 													placeholder="No of Copies for Journals" autocomplete="off"
 													value="${lib.noOfJournal}"> <span
@@ -158,7 +157,6 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control"
-													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfJournal" name="costOfJournal"
 													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost of Journals" onchange="trim(this)"
@@ -178,7 +176,7 @@
 											<div class="col-sm-10">
 												<input type="text"  class="form-control"
 													onchange="trim(this)" onFocus="clearDefault(this)"
-													onkeypress='return restrictAlphabets(event)' id="noOfEJournal"
+													 id="noOfEJournal"
 													name="noOfEJournal" onchange="trim(this)" maxlength="7"
 													placeholder="No of E-Journals" autocomplete="off"
 													value="${lib.noOfEjournal}"> <span
@@ -196,7 +194,6 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control"
-													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" id="costOfEJournal" name="costOfEJournal"
 													autocomplete="off" maxlength="7" onFocus="clearDefault(this)"
 													placeholder="Cost of E-Journal" onchange="trim(this)"
@@ -268,6 +265,11 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	 <script>
+	 
+	 $('.form-control').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

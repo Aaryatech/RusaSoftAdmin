@@ -254,6 +254,11 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
+	
+	$('#participant').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

@@ -171,27 +171,7 @@
 										</div>
 
 
-										<%-- <div class="form-group">
-
-											<label class="control-label col-sm-2" for="page_order">Department
-												Name <span class="text-danger">*</span>
-											</label>
-
-
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="deptName"
-													name="deptName" placeholder="Department Name"
-													autocomplete="off" value="${editProject.projInvDept}">
-												<span class="error_form text-danger" id="error_deptName"
-													style="display: none;">Please enter Name of
-													Department</span>
-
-											</div>
-
-
-
-										</div>
- --%>
+										
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Name
@@ -231,29 +211,13 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="grant" min="0"
 													name="grant" placeholder="Grant Sanctioned in Rs." autocomplete="off"
-													value="${editProject.projGrant}"> <span
+													value="${editProject.projGrant}" maxlength="6"> <span
 													class="error_form text-danger" id="error_grant"
 													style="display: none;">Please enter Grant Sanctioned</span>
 
 											</div>
 										</div>
-										<%-- <div class="form-group" style="display: none">
-
-											<label class="control-label col-sm-2" for="page_order">Total
-												Amount <span class="text-danger">*</span>
-											</label>
-
-
-											<div class="col-sm-6">
-												<input type="number" class="form-control" id="totalAmt"
-													name="totalAmt" placeholder="Total Amount" min="0"
-													autocomplete="off" value="${editProject.projTotalAmt}">
-												<span class="error_form text-danger" id="error_totalAmt"
-													style="display: none;">Please enter total Amount </span>
-											</div>
-										</div> --%>
-
-
+										
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="page_order">
@@ -264,7 +228,7 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="amtRec" onblur="compare()"
 													min="0" name="amtRec" placeholder="Grant Received in Rs."
-													autocomplete="off" value="${editProject.projAmtRec}">
+													autocomplete="off" value="${editProject.projAmtRec}" maxlength="6">
 												<span class="error_form text-danger" id="error_amtRec"
 													style="display: none;">Please enter Grant Received</span>
 													
@@ -420,6 +384,15 @@ function submit_f(view){
 	</script>
 
 	<script type="text/javascript">
+	
+	$('#grant').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#amtRec').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
     $(function () {
 	 
         $('.datepickeryear').datepicker({

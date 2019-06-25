@@ -442,7 +442,7 @@
 							}
 
 
-            				if ($("#ttl_exp").val()<=0
+            				if ($("#ttl_exp").val()=0
 									|| !$("#ttl_exp").val()) {
 								
 								isError = true;

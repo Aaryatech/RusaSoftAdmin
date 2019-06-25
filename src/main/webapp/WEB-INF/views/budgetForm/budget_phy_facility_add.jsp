@@ -512,7 +512,7 @@
 												}
 												
 												if ($("#ttl_exp")
-														.val()<=0
+														.val()=0
 														|| !validateZeroNo($(
 																"#ttl_exp")
 																.val())) {

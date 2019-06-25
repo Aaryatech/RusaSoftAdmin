@@ -269,7 +269,7 @@
 														<input type="text"  class="form-control"
 															id="studBenifit" value="${stud.noStudentBenifited}"
 															name="studBenifit" placeholder="Students Benifited" onFocus="clearDefault(this)"
-															autocomplete="off" onkeypress='return restrictAlphabets(event)'> <span
+															autocomplete="off"> <span
 															class="error_form text-danger" id="error_part"
 															style="display: none;">Please Enter No. of
 															Students Benefited and value should be greater than 0.</span>
@@ -331,6 +331,11 @@
 
 
 	<script>
+	
+	$('#studBenifit').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -421,10 +426,7 @@ if (!$("#yearofIntro").val()){
 
 												}
 
-												if (!$("#studBenifit").val()
-														|| !numbersOnlyNotZero($(
-																"#studBenifit")
-																.val())) {
+												if (!$("#studBenifit").val() || $("#studBenifit").val() <= 0) {
 
 													isError = true;
 

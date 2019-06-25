@@ -247,7 +247,6 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onFocus="clearDefault(this)"
 													autocomplete="off" id="totalParticipants"
-													onkeypress='return restrictAlphabets(event)'
 													name="totalParticipants" onchange="return trim(this)"
 													placeholder="No. of Participants / Beneficiary"
 													value="${editInst.linkBeneficiaryNos}"> <span
@@ -308,6 +307,11 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
+	
+	$('#totalParticipants').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function numbersOnlyNotZero(id_number) {
 
 			var mob = /^[1-9][0-9]+$/;

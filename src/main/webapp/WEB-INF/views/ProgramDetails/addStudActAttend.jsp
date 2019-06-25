@@ -388,45 +388,7 @@
 															<option value="National" ${editProgramActivity.level eq 'National' ? 'selected' : ''}>National</option>
 															<option value="Regional" ${editProgramActivity.level eq 'Regional' ? 'selected' : ''}>Regional</option>
 															<option value="State" ${editProgramActivity.level eq 'State' ? 'selected' : ''}>State</option>
-															<%-- <c:choose>
-																<c:when
-																	test="${editProgramActivity.level eq 'International'}">
-																	<option value="International" selected>International</option>
-																	<option value="National">National</option>
-																	<option value="Regional">Regional</option>
-																	<option value="State">State</option>
-																</c:when>
-																<c:when
-																	test="${editProgramActivity.level eq 'National'}">
-																	<option value="International">International</option>
-																	<option value="National" selected>National</option>
-																	<option value="Regional">Regional</option>
-																	<option value="State">State</option>
-																</c:when>
-																<c:when
-																	test="${editProgramActivity.level eq 'Regional'}">
-																	<option value="International">International</option>
-																	<option value="National">National</option>
-																	<option value="Regional" selected>Regional</option>
-																	<option value="State">State</option>
-																</c:when>
-																<c:when test="${editProgramActivity.level eq 'State'}">
-																	<option value="International">International</option>
-																	<option value="National">National</option>
-																	<option value="Regional">Regional</option>
-																	<option value="State" selected>State</option>
-																</c:when>
-																<c:otherwise>
-																	<option value="International">International</option>
-																	<option value="National">National</option>
-																	<option value="Regional">Regional</option>
-																	<option value="State">State</option>
-																</c:otherwise>
-															</c:choose> --%>
-
-
-
-														</select>
+													</select>
 
 										<span class="error_form text-danger" id="error_level"
 														style="display: none;">Please select level.</span>
@@ -538,6 +500,9 @@
 		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
 		
 		<script type="text/javascript">
+		$('#noStudent').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
 function clearDefault(a){
 	if(a.defaultValue==0)
 	{

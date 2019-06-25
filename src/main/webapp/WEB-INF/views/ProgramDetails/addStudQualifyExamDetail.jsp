@@ -177,8 +177,7 @@
 														<input type="text" class="form-control" id="no_stud_appear" onblur="cal()"
 															value="${studQlifyExam.noStudAppeared}" onFocus="clearDefault(this)"
 															placeholder="No. of Students Appeared" name="no_stud_appear"
-															onkeypress='return restrictAlphabets(event)'
-															autocomplete="off"> <span
+															autocomplete="off" maxlength="6"> <span
 															class="error_form text-danger" id="studAppear_errfield"
 															style="display: none;">Please enter No. of student appeared
 															and value must be greater than 0.</span>
@@ -193,7 +192,7 @@
 														<input type="text" maxlength="30" class="form-control" onblur="cal()"
 															id="no_stud_qualify" value="${studQlifyExam.noStudQualified}" 
 															name="no_stud_qualify" placeholder="No. of Students Qualified" 
-															onkeypress='return restrictAlphabets(event)' onFocus="clearDefault(this)"
+															 onFocus="clearDefault(this)" maxlength="6"
 															onchange="return trim(this)" autocomplete="off">
 													<span class="error_form text-danger" id="studQualify_errfield"
 															style="display: none;">Please enter No. student qualified and value must be greater than 0.</span>
@@ -250,8 +249,7 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-	<script type="text/javascript">
-
+	<script type="text/javascript">	
 	function otherExam(activity) {
 		
 		//alert(activity);
@@ -273,12 +271,20 @@ function clearDefault(a){
 		a.value=""
 	}
 	};
+	
+	$('#no_stud_appear').on('input', function() {
+		this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#no_stud_qualify').on('input', function() {
+		this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
 </script>
 	<script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="./javascript.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script>
+	<!-- <script
+		src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false"></script> -->
 
 	<script type="text/javascript">
 		$(function() {
@@ -306,7 +312,7 @@ function clearDefault(a){
 	<script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
-			document.getElementById("is_view").value = view;
+			//document.getElementById("is_view").value = view;
 
 		}
 	</script>

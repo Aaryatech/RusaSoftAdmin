@@ -200,7 +200,6 @@
 													onchange="trim(this)" placeholder="From Date"
 													data-end-date="0d" data-format="dd-mm-yyyy"
 													autocomplete="off" id="fromDate" name="fromDate"
-													onkeypress='return restrictAlphabets(event)'
 													value="${instAct.instActivityFromdt}"> <span
 													class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter from date.</span>
@@ -221,7 +220,6 @@
 													data-format="dd-mm-yyyy"
 													onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate"
-													onkeypress='return restrictAlphabets(event)'
 													value="${instAct.instActivityTodt}"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter to date.</span> 
@@ -243,7 +241,6 @@
 												<input type="text" class="form-control" maxlength="7"
 													min="0" id="inst_activity_participation" autocomplete="off"
 													onchange="trim(this)" name="inst_activity_participation"
-													onkeypress='return restrictAlphabets(event)'
 													placeholder="No.of Participants" onFocus="clearDefault(this)"
 													value="${instAct.instActivityParticipation}"> <span
 													class="error_form text-danger" id="error_formfield4"
@@ -295,6 +292,19 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
+	
+	$('#inst_activity_participation').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#toDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+
+	$('#fromDate').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -496,19 +506,6 @@
 			a.value=""
 		}
 		};
-
-		/*code: 48-57 Numbers
-		  8  - Backspace,
-		  35 - home key, 36 - End key
-		  37-40: Arrow keys, 46 - Delete key*/
-		function restrictAlphabets(e) {
-			var x = e.which || e.keycode;
-			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
-					|| x == 46)
-				return true;
-			else
-				return false;
-		}
 	</script>
 
 	<script type="text/javascript">

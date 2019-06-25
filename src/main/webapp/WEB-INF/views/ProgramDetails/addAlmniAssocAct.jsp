@@ -157,8 +157,8 @@
 														Registration No<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" autocomplete="off"
-															class="form-control" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'
+														<input type="text" autocomplete="off" maxlength="6"
+															class="form-control" onFocus="clearDefault(this)"
 															placeholder="Alumni Registration No" id="almni_reg_no"
 															value="${alumni.alumniRegNo}" name="almni_reg_no"
 															><span class="error_form text-danger" id="almni_reg_no_errfield"
@@ -174,7 +174,7 @@
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" class="form-control datepicker" id="date_of_almni_reg"
 															value="${alumni.dateAlumniReg}" name="date_of_almni_reg" autocomplete="off"
-															placeholder="dd-mm-yyyy" onkeypress='return restrictAlphabets(event)'>
+															placeholder="dd-mm-yyyy"  maxlength="6" onkeypress='return restrictAlphabets(event)'>
 															<span class="error_form text-danger" id="date_of_almni_reg_errfield"
 															style="display: none;">Please enter date of alumni registration</span>
 													</div>
@@ -188,7 +188,7 @@
 														<input type="text" autocomplete="off"
 															class="form-control" onFocus="clearDefault(this)"
 															placeholder="No. of Alumni Register" id="registred_almni_no"
-															value="${alumni.noAlumniReg}" name="registred_almni_no" onkeypress='return restrictAlphabets(event)'
+															value="${alumni.noAlumniReg}" name="registred_almni_no"  maxlength="6"
 															><span class="error_form text-danger" id="registred_almni_no_err_field"
 															style="display: none;">Please enter No. of alumni register 
 															and value must be greater than 0.</span>
@@ -201,7 +201,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'
+															class="form-control" onFocus="clearDefault(this)"  maxlength="6"
 															placeholder="No. of Member Attended" id="no_member_attnd"
 															value="${alumni.noMemberAttended}" name="no_member_attnd"
 															><span class="error_form text-danger" id="no_member_attnd_errfield"
@@ -216,7 +216,7 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" autocomplete="off"
-															class="form-control" onFocus="clearDefault(this)" onkeypress='return restrictAlphabets(event)'
+															class="form-control" onFocus="clearDefault(this)"  maxlength="6"
 															placeholder="No. of Member Attended" id="ttl_no_almni_enrolled"
 															value="${alumni.ttlNoAlumniEnrolled}" name="ttl_no_almni_enrolled">
 															<span class="error_form text-danger" id="ttl_no_almni_enrolled_errfield"
@@ -265,6 +265,24 @@
 	<!-- END CONTENT -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script type="text/javascript">
+
+$('#almni_reg_no').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#registred_almni_no').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#no_member_attnd').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#ttl_no_almni_enrolled').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+
+
 	function clearDefault(a){
 	if(a.defaultValue==0)
 	{

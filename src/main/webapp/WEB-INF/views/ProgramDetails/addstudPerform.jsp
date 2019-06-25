@@ -153,7 +153,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="stud_appeared"  onblur="getPercent()" onFocus="clearDefault(this)"
-													value="${studPer.noStudAppear}" name="stud_appeared" onkeypress='return restrictAlphabets(event)'
+													value="${studPer.noStudAppear}" name="stud_appeared"  maxlength="6"
 													placeholder="No of Students Appeared in Final Year Exam ">
 													<span class="error_form text-danger" id="error_formfield3" style="display:none;" >
 													Please enter No of students appeared in final year exam and value must be greater than 0.</span>
@@ -168,9 +168,9 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="stud_passed" onFocus="clearDefault(this)"
-													value="${studPer.noStudPass}" name="stud_passed" onkeypress='return restrictAlphabets(event)'
+													value="${studPer.noStudPass}" name="stud_passed" maxlength="6"
 													placeholder="No of Students Passed in Final Year Exam"  pattern="\d*" onchange="getPercent()">
-											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >
+											<span class="error_form text-danger" id="error_formfield4" style="display:none;">
 											Please enter No of students passed in final year exam and value must be greater than 0.</span>
 											
 											<span class="error_form text-danger" id="error_formfield5" style="display:none;" >
@@ -228,6 +228,16 @@
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
+	
+	$('#stud_appeared').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#stud_passed').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+
+	
 function clearDefault(a){
 	if(a.defaultValue==0)
 	{

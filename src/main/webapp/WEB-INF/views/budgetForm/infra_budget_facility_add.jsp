@@ -372,7 +372,7 @@
 												}
 												
 
-												if ($("#ttl_expd").val()<=0 || !$("#ttl_expd").val()) {
+												if ($("#ttl_expd").val()=0 || !$("#ttl_expd").val()) {
 													isError = true;
 
 													$("#ttl_expd").addClass(

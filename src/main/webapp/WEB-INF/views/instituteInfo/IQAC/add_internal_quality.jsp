@@ -170,7 +170,6 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" maxlength="9" onFocus="clearDefault(this)"
-													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)" class="form-control"
 													id="no_of_participant" min="0" autocomplete="off"
 													name="no_of_participant"
@@ -266,6 +265,11 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script>
+	
+	$('#no_of_participant').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -398,92 +402,6 @@
 											});
 						});
 	</script>
-
-
-	<!-- 	<div class="modal fade col-xs-12" id="myModal1" tabindex="-1"
-		role="dialog" aria-hidden="true">
-		<div class="modal-dialog" style="width: 65%">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Internal Quality Initiative</h4>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-					Link on Website for Activity Report
-
-					<div class="form-group" style="text-align: center;">
-
-						<button type="submit" class="btn btn-primary" onclick="getData()">Submit</button>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-					<input type="hidden" id="index" name="index" value="0">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		function getData() {
-			//alert("hii");
-			var i = parseInt(document.getElementById("index").value);
-
-			var academicYear = document.getElementById("academicYear").value;
-			var initiativeName = document.getElementById("initiativeName").value;
-			var conductionDate = document.getElementById("conductionDate").value;
-			var fromDate = document.getElementById("fromDate").value;
-			var toDate = document.getElementById("toDate").value;
-			var participant = document.getElementById("participant").value;
-			var otherQual = document.getElementById("otherQual").value;
-			//alert("noStud"+noStud);
-			var temp;
-			if (initiativeName == 7) {
-
-				temp = otherQual;
-				//alert(temp);
-			} else {
-				temp = initiativeName;
-			}
-
-			var dataTable = $('#example-1').DataTable();
-
-			dataTable.row.add(
-					[ i + 1, academicYear, temp, conductionDate, fromDate,
-							toDate, participant ]).draw();
-			document.getElementById("index").value = i + 1;
-		}
-
-		function showForm() {
-			//document.getElementById("abc").style = "display:none"
-			var qualType = document.getElementById("initiativeName").value
-			//alert("qualType::"+qualType);
-
-			if (qualType == 7) {
-
-				document.getElementById("abc").style = "visible"
-
-			} else {
-				document.getElementById("abc").style = "display:none"
-			}
-
-		}
-		function hideText() {
-			//alert("hii");
-			document.getElementById("abc").style = "display:none"
-
-		}
-	</script>
- -->
 
 	<script type="text/javascript">
 		/* $(function() {

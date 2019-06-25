@@ -256,7 +256,7 @@
 														</label>
 
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="participate" autocomplete="off"  onchange="trim(this)" onkeypress='return restrictAlphabets(event)'
+															<input type="text" class="form-control" id="participate" autocomplete="off"  onchange="trim(this)" maxlength="6"
 																name="participate" placeholder="No. of Students Participated" value="${linkage.noStudentParticipated}" onFocus="clearDefault(this)">
 																<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter No. students of participate and value must be greater than 0.</span>
 														</div>
@@ -270,8 +270,8 @@
 														</label>
 
 														<div class="col-sm-6">
-															<input type="text" class="form-control" id="faculty" autocomplete="off"  onchange="trim(this)" onkeypress='return restrictAlphabets(event)'
-																name="faculty" placeholder="No. of Faculty Participated" value="${linkage.noStudentParticipated}" onFocus="clearDefault(this)">
+															<input type="text" class="form-control" id="faculty" autocomplete="off"  onchange="trim(this)" maxlength="6"
+																name="faculty" placeholder="No. of Faculty Participated" value="${linkage.noStudentParticipated}" onFocus="clearDefault(this)"> 
 																<span class="error_form text-danger" id="error_formfield8" style="display:none;" >Please enter No. faculties of participate and value must be greater than 0.</span>
 														</div>
 
@@ -320,6 +320,15 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script>
+
+$('#participate').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+$('#faculty').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

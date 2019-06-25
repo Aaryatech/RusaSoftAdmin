@@ -247,7 +247,6 @@
 															<div class="col-sm-6">
 																<input type="text" min="0" class="form-control" 
 																	id="conf_amt" autocomplete="off" onFocus="clearDefault(this)"
-																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_amt" placeholder="Amount (Rs.)"
 																	value="${facConf.confFundAmt}" onchange="trim(this)">
 																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount and value must be greater than 0.</span>
@@ -305,6 +304,11 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 <script>
+
+$('#conf_amt').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

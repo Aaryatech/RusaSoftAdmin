@@ -151,7 +151,7 @@
 											<div class="col-sm-10">
 												<input type="number" min="0" class="form-control"
 													onchange="trim(this)" onFocus="clearDefault(this)"
-													onkeypress='return restrictAlphabets(event)' id="noOfBook"
+													id="noOfBook"
 													name="noOfBook" onchange="trim(this)" maxlength="7"
 													placeholder="No of Copies for Book" autocomplete="off"
 													value="${rareBook.bookCopies}"> <span
@@ -265,6 +265,15 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script>
+	
+	$('#noOfBook').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
+	$('#costOfBook').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

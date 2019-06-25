@@ -252,6 +252,18 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
 		<script>
+		$('#no_student_enrolled').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
+		$('#no_times_offer').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
+		$('#no_student_completed_course').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
 		function clearDefault(a){
 			if(a.defaultValue==0)
 			{

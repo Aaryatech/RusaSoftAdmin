@@ -231,7 +231,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_stud" onchange="trim(this)" onFocus="clearDefault(this)"
-																		name="no_stud" placeholder="No. of Student Benefited" onkeypress='return restrictAlphabets(event)'
+																		name="no_stud" placeholder="No. of Student Benefited"  maxlength="6"
 																	value="${tMous.noOfStudBenif}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of student benefited and value must be greater than 0.</span>
 															</div>
@@ -243,7 +243,7 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)"onFocus="clearDefault(this)"
-																		name="no_faculty" placeholder="No. of Faculty Benefited" onkeypress='return restrictAlphabets(event)'
+																		name="no_faculty" placeholder="No. of Faculty Benefited" maxlength="6"
 																	value="${tMous.noOfStaffBenif}" autocomplete="off">
 																	<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter No. of faculty benefited and value must be greater than 0.</span>
 															</div>
@@ -286,6 +286,15 @@
 		<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
  <script>
+ 
+ $('#no_stud').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+ 
+ $('#no_faculty').on('input', function() {
+	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+ 
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 

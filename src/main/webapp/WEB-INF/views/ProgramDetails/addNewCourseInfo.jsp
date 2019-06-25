@@ -186,7 +186,7 @@
 														<input type="text" class="form-control" onFocus="clearDefault(this)"
 															id="courseCode" value="${newCourse.courseCode}"
 															name="courseCode" onchange="trim(this)" maxlength="10"
-															placeholder="Course Code" onkeypress='return restrictAlphabets(event)'>
+															placeholder="Course Code">
 															<span class="error_form text-danger" id="course_code_field"
 															style="display: none;">Please enter course code.</span>
 													</div>
@@ -279,6 +279,11 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
+	
+	$('#courseCode').on('input', function() {
+		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	
 		function getProgramTypeByProgram() {
 
 			var programType = document.getElementById("prog_type").value;
