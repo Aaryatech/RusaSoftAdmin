@@ -15,6 +15,38 @@ public class GetInstituteQuality {
 	private String qualityInitiativeName;
 	private String exVar1;
 	
+	
+	private int isApplicable;
+	private int isApplied;
+	private int isCertiObt;
+	
+	
+		
+	
+	public int getIsApplicable() {
+		return isApplicable;
+	}
+
+	public void setIsApplicable(int isApplicable) {
+		this.isApplicable = isApplicable;
+	}
+
+	public int getIsApplied() {
+		return isApplied;
+	}
+
+	public void setIsApplied(int isApplied) {
+		this.isApplied = isApplied;
+	}
+
+	public int getIsCertiObt() {
+		return isCertiObt;
+	}
+
+	public void setIsCertiObt(int isCertiObt) {
+		this.isCertiObt = isCertiObt;
+	}
+
 	public String getExVar1() {
 		return exVar1;
 	}
@@ -74,7 +106,8 @@ public class GetInstituteQuality {
 	public String toString() {
 		return "GetInstituteQuality [qualityId=" + qualityId + ", qualityInitiativeId=" + qualityInitiativeId
 				+ ", qualityFromdt=" + qualityFromdt + ", qualityTodt=" + qualityTodt + ", qualityPcount="
-				+ qualityPcount + ", qualityInitiativeName=" + qualityInitiativeName + "]";
+				+ qualityPcount + ", qualityInitiativeName=" + qualityInitiativeName + ", exVar1=" + exVar1
+				+ ", isApplicable=" + isApplicable + ", isApplied=" + isApplied + ", isCertiObt=" + isCertiObt + "]";
 	} 
 
 }

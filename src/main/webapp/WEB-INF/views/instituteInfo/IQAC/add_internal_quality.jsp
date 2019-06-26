@@ -107,41 +107,44 @@
 												Quality Initiative<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="qualityInitId" name="qualityInitId" onchange="showForm()"
-													class="form-control" title="Select Quality Initiative">
+												<select id="qualityInitId" name="qualityInitId"
+													onchange="showForm()" class="form-control"
+													title="Select Quality Initiative">
+
 													<c:choose>
-													<c:when test="${editQuality.qualityInitiativeId==0}">
-																																								<option selected disabled value="-1">Select</option>
-														
-														<c:forEach items="${qualInintList}" var="quInit">
-																<option  value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
-													</c:forEach>
-													<option selected value="0">Any other quality based certification</option>
-													
-													</c:when>
-													<c:otherwise>
-													
-													<c:forEach items="${qualInintList}" var="quInit">
-													
-														<c:choose>
-															<c:when
-																test="${quInit.qualityInitiativeId==editQuality.qualityInitiativeId}">
-																<option selected value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
-															</c:when>
-															<c:otherwise>
+														<c:when test="${editQuality.qualityInitiativeId==0}">
+															<option selected disabled value="-1">Select</option>
+
+															<c:forEach items="${qualInintList}" var="quInit">
 																<option value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-													<option disabled value="-1">Select</option>
-													
-													<option  value="0">Any other quality based certification</option>
-													
-													</c:otherwise>
-													
+															</c:forEach>
+															<option selected value="0">Any other quality
+																based certification</option>
+
+														</c:when>
+														<c:otherwise>
+
+															<c:forEach items="${qualInintList}" var="quInit">
+
+																<c:choose>
+																	<c:when
+																		test="${quInit.qualityInitiativeId==editQuality.qualityInitiativeId}">
+																		<option selected value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${quInit.qualityInitiativeId}">${quInit.qualityInitiativeName}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+
+															<option value="0">Any other quality based
+																certification</option>
+
+														</c:otherwise>
+
 													</c:choose>
-													
-													
+
+
 												</select> <span class="error_form text-danger"
 													id="qualityInitId_field" style="display: none;">Please
 													select quality initiative name</span>
@@ -149,60 +152,126 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group" id="abc" style="display: none">
 
-											<label class="control-label col-sm-2" for="page_name">Name of 
-												Quality Initiative<span class="text-danger">*</span> </label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="qltyInitiative"
-													autocomplete="off" name="qltyInitiative" onchange="trim(this)"
-													placeholder="Name of Quality Initiative" value="${editQuality.exVar1}"> <span
-													class="error_form text-danger" id="error_other"
-													style="display: none;">Please enter name of quality initiative.</span>
-											</div>
-
-										</div>
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="no_of_participant">No.
-												of Participant <span class="text-danger"></span>
+											<label class="control-label col-sm-2" for="page_name">Name
+												of Quality Initiative<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" maxlength="9" onFocus="clearDefault(this)"
-													onchange="trim(this)" class="form-control"
-													id="no_of_participant" min="0" autocomplete="off"
-													name="no_of_participant"
-													placeholder="Enter  No. of Participants"
-													value="${editQuality.qualityPcount}"> <span
-													class="error_form text-danger" id="no_of_participant_field"
-													style="display: none;">Please enter no of
-													participants.</span>
+												<input type="text" class="form-control" id="qltyInitiative"
+													autocomplete="off" name="qltyInitiative"
+													onchange="trim(this)"
+													placeholder="Name of Quality Initiative"
+													value="${editQuality.exVar1}"> <span
+													class="error_form text-danger" id="error_other"
+													style="display: none;">Please enter name of quality
+													initiative.</span>
+											</div>
 
+										</div>
+
+
+
+										<div class="form-group" id="yesnodiv1" style="display: none">
+											<label class="control-label col-sm-2" for="planning">Applicable
+												? <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-2">
+												<c:choose>
+													<c:when test="${editQuality.isApplicable==1}">
+														<input type="radio" id="is_applicable"
+															name="is_applicable" value="1" checked
+															onclick="showNext(this.value,1)">Yes
+														<input type="radio" id="is_applicable"
+															name="is_applicable" value="0"
+															onclick="showNext(this.value,1)">No
+															</c:when>
+													<c:otherwise>
+														<input type="radio" id="is_applicable"
+															name="is_applicable" value="1"
+															onclick="showNext(this.value,1)">Yes
+														<input type="radio" id="is_applicable" checked
+															name="is_applicable" value="0"
+															onclick="showNext(this.value,1)">No
+																</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
+										
+										<div class="form-group" id="yesnodiv2" style="display: none">
+											<label class="control-label col-sm-2" for="planning">Applied
+												? <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-2">
+												<c:choose>
+													<c:when test="${editQuality.isApplied==1}">
+														<input type="radio" id="is_applied"
+															name="is_applied" value="1" checked
+															onclick="showNext(this.value,2)">Yes
+														<input type="radio" id="is_applied"
+															name="is_applied" value="0"
+															onclick="showNext(this.value,2)">No
+															</c:when>
+													<c:otherwise>
+														<input type="radio" id="is_applied"
+															name="is_applied" value="1"
+															onclick="showNext(this.value,2)">Yes
+														<input type="radio" id="is_applied" checked
+															name="is_applied" value="0"
+															onclick="showNext(this.value,2)">No
+																</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+										
+										
+										<div class="form-group" id="yesnodiv3" style="display: none">
+											<label class="control-label col-sm-2" for="planning">Obtained
+												?<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-2">
+												<c:choose>
+													<c:when test="${editQuality.isCertiObt==1}">
+														<input type="radio" id="certi_obt"
+															name="certi_obt" value="1" checked
+															onclick="showNext(this.value,3)">Yes
+														<input type="radio" id="certi_obt"
+															name="certi_obt" value="0"
+															onclick="showNext(this.value,3)">No
+															</c:when>
+													<c:otherwise>
+														<input type="radio" id="certi_obt"
+															name="certi_obt" value="1"
+															onclick="showNext(this.value,3)">Yes
+														<input type="radio" id="certi_obt" checked
+															name="certi_obt" value="0"
+															onclick="showNext(this.value,3)">No
+																</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+										
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="fromDate">From
+											<label class="control-label col-sm-2" id="certf_date" for="fromDate">From
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
 													placeholder="Select From Date" autocomplete="off"
-													data-end-date="0d" data-format="dd-mm-yyyy"
-													id="fromDate" name="fromDate"
-													value="${editQuality.qualityFromdt}"> <span
-													class="error_form text-danger" id="fromDate_field"
-													style="display: none;">Please select from date.</span>
-													
-													<span
+													data-end-date="0d" data-format="dd-mm-yyyy" id="fromDate"
+													name="fromDate" value="${editQuality.qualityFromdt}">
+												<span class="error_form text-danger" id="fromDate_field"
+													style="display: none;">Please select from date.</span> <span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">from date must be smaller than to date.</span>
+													style="display: none;">from date must be smaller
+													than to date.</span>
 
 											</div>
 										</div>
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="toDate">To
+											<label class="control-label col-sm-2" id="exp_date" for="toDate">To
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
@@ -211,11 +280,28 @@
 													placeholder="Select To Date" data-format="dd-mm-yyyy"
 													value="${editQuality.qualityTodt}"> <span
 													class="error_form text-danger" id="toDate_field"
-													style="display: none;">Please select to date.</span>
-													
-												<span
+													style="display: none;">Please select to date.</span> <span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">to date must be greater than from date.</span>
+													style="display: none;">to date must be greater than
+													from date.</span>
+
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="no_of_participant">No.
+												of Participant <span class="text-danger"></span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" maxlength="9"
+													onFocus="clearDefault(this)" onchange="trim(this)"
+													class="form-control" id="no_of_participant" min="0"
+													autocomplete="off" name="no_of_participant"
+													placeholder="Enter  No. of Participants"
+													value="${editQuality.qualityPcount}"> <span
+													class="error_form text-danger" id="no_of_participant_field"
+													style="display: none;">Please enter no of
+													participants.</span>
 
 											</div>
 										</div>
@@ -437,7 +523,7 @@
 			var value = document.getElementById("qualityInitId").value
 			var editValue = value;
 			//alert("qualType::"+value);
-
+//alert("He " +${settingList}[0])
 			//document.getElementById("abc").style.display = (value == editValue) ? "inline" : "none";
 			
 			if (value == 0) {
@@ -447,7 +533,161 @@
 			} else {
 				document.getElementById("abc").style = "display:none"
 			} 
+			
+			if(parseInt(value)==${settingList}[0] || parseInt(value)==${settingList}[1] || parseInt(value)==${settingList}[2] || parseInt(value)==${settingList}[3]){
 
+				document.getElementById("yesnodiv1").style = "visible";
+				
+				if(${isEdit}==1){
+					//alert("Hi edit " )
+					if(${editQuality.isApplicable==1}){
+						   document.getElementById("yesnodiv2").style = "visible"
+							//document.getElementById("yesnodiv3").style = "visible"
+					}else{
+						document.getElementById("yesnodiv2").style = "display:none";
+						document.getElementById("yesnodiv3").style = "display:none";
+					}
+					if(${editQuality.isApplied==1}){
+						document.getElementById("yesnodiv3").style = "visible"
+					}else{
+						document.getElementById("yesnodiv3").style = "display:none";
+					}
+					if(${editQuality.isCertiObt==1}){
+						
+						 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
+						 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
+						 $('#fromDate').attr('placeholder','Certificate Date');
+						 $('#toDate').attr('placeholder','Valid Upto Date');
+					}
+					
+				}
+			}else{
+				document.getElementById("yesnodiv1").style = "display:none";
+				document.getElementById("yesnodiv2").style = "display:none";
+				document.getElementById("yesnodiv3").style = "display:none";
+				//document.getElementById("certf_date").innerHTML = "From Date";
+				 //document.getElementById("exp_date").innerHTML = "To Date";
+				 $('#fromDate').attr('placeholder','From Date');
+				 $('#toDate').attr('placeholder','To Date');
+			}
+			/* if(${isEdit}==1){
+				//alert("Hi edit " )
+				if(${editQuality.isApplicable==1}){
+					   document.getElementById("yesnodiv2").style = "visible"
+						//document.getElementById("yesnodiv3").style = "visible"
+				}else{
+					document.getElementById("yesnodiv2").style = "display:none";
+					document.getElementById("yesnodiv3").style = "display:none";
+				}
+				if(${editQuality.isApplied==1}){
+					document.getElementById("yesnodiv3").style = "visible"
+				}else{
+					document.getElementById("yesnodiv3").style = "display:none";
+				}
+				if(${editQuality.isCertiObt==1}){
+					
+					 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
+					 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
+					 $('#fromDate').attr('placeholder','Certificate Date');
+					 $('#toDate').attr('placeholder','Valid Upto Date');
+				}
+				
+			} */
+		}
+		function showNext(yesno,divId) {
+			//alert(yesno);	alert(divId);
+			var x=0;
+			if(divId==1){
+			 x=$('input[name=is_applicable]:checked').val();
+			 if(x==1){
+				 document.getElementById("yesnodiv2").style = "visible"
+				}else{
+					document.getElementById("yesnodiv2").style = "display:none";
+					document.getElementById("yesnodiv3").style = "display:none";
+					document.getElementById("certf_date").innerHTML = "From Date <span class='text-danger'>*</span> ";
+					 document.getElementById("exp_date").innerHTML = "To Date <span class='text-danger'>*</span>";
+					 $('#fromDate').attr('placeholder','From Date');
+					 $('#toDate').attr('placeholder','To Date');
+					 $('#is_applied').prop('checked', false);
+					 $('#certi_obt').prop('checked', false);
+					// $('#certi_obt').prop('value', 0);
+					
+				}
+			}
+			
+			if(divId==2){
+				 x=$('input[name=is_applied]:checked').val();
+				 if(x==1){
+					 document.getElementById("yesnodiv3").style = "visible"
+					}else{
+						document.getElementById("yesnodiv3").style = "display:none";
+						document.getElementById("certf_date").innerHTML = "From Date <span class='text-danger'>*</span>";
+						 document.getElementById("exp_date").innerHTML = "To Date <span class='text-danger'>*</span>";
+						 $('#fromDate').attr('placeholder','From Date');
+						 $('#toDate').attr('placeholder','To Date');
+						 
+						 $('#certi_obt').prop('checked', false);
+						// $('#certi_obt').prop('value', 0);
+
+						//var value="0";
+						 //$("input[name=certi_obt][value=" + value + "]").attr('checked', 'checked');
+
+					}
+				}
+			if(divId==3){
+				 x=$('input[name=certi_obt]:checked').val();
+				 if(x==1){
+				 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
+				 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
+				 $('#fromDate').attr('placeholder','Certificate Date');
+				 $('#toDate').attr('placeholder','Valid Upto Date');
+
+				 }else{
+					 document.getElementById("certf_date").innerHTML = "From Date <span class='text-danger'>*</span>";
+					 document.getElementById("exp_date").innerHTML = "To Date <span class='text-danger'>*</span>";
+					 $('#fromDate').attr('placeholder','From Date');
+					 $('#toDate').attr('placeholder','To Date');
+					 $('#certi_obt').prop('checked', false);
+					// $('#certi_obt').prop('value', 0);
+
+					// $('input[name=certi_obt]').attr('checked',false);
+					// document.querySelector('input[name="certi_obt"]:checked').checked = false;
+				 }
+			}
+			//showData();
+		}
+		
+		
+		
+		function showData(){
+			var x=0;
+			 x=$('input[name=is_applicable]:checked').val();
+			 if(x==1){
+				//alert("Hi1")
+				 document.getElementById("yesnodiv2").style = "visible"
+			 }else{
+				 document.getElementById("yesnodiv2").style = "display:none";
+			 }
+			 var y=$('input[name=is_applied]:checked').val();
+			 if(y==1){
+				 //alert("Hi2")
+			 document.getElementById("yesnodiv3").style = "visible"
+			 }else{
+				 document.getElementById("yesnodiv3").style = "display:none";
+			 }
+			 var z=$('input[name=certi_obt]:checked').val();
+			 if(z==1){
+				 //alert("Hi3")
+				 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
+				 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
+				 $('#fromDate').attr('placeholder','Certificate Date');
+				 $('#toDate').attr('placeholder','Valid Upto Date'); 
+			 }else{
+				 document.getElementById("certf_date").innerHTML = "From Date <span class='text-danger'>*</span>";
+				 document.getElementById("exp_date").innerHTML = "To Date <span class='text-danger'>*</span>";
+				 $('#fromDate').attr('placeholder','From Date');
+				 $('#toDate').attr('placeholder','To Date');
+			 }
 		}
 	</script>
 	<script type="text/javascript">

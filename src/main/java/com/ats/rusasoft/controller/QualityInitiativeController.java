@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.master.SettingKeyValue;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
@@ -342,6 +345,19 @@ public class QualityInitiativeController {
 			List<QualityInitiative> qualInintList = new ArrayList<>(Arrays.asList(instArray));
 			
 			model.addObject("qualInintList", qualInintList);
+			
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			map.add("key", "QUALITYIDS");
+			SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+					SettingKeyValue.class);
+			System.err.println("settingValues " +settingValues.toString());
+
+List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
+.collect(Collectors.toList());
+model.addObject("settingList", settingList);
+model.addObject("isEdit", 0);
 
 		} catch (Exception e) {
 
@@ -399,7 +415,11 @@ public class QualityInitiativeController {
 				instQuality.setQualityFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
 				instQuality.setQualityTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
 				int participant = 0 ;
+				try {
 				participant = Integer.parseInt(request.getParameter("no_of_participant"));
+				}catch (Exception e) {
+					
+				}
 				//System.out.println("DATA="+participant);
 				if(participant == 0 ) {
 				instQuality.setQualityPcount(0);
@@ -423,9 +443,36 @@ public class QualityInitiativeController {
 
 				instQuality.setMakerDatetime(curDateTime);
 				instQuality.setMakerUserId(userObj.getUserId());
-
+				
+				int isApplicable=0;
+				int isApplied=0;
+				int isCertiObt=0;
+				
+				try {
+					isApplicable=Integer.parseInt(request.getParameter("is_applicable"));
+				}catch (Exception e) {
+					isApplicable=0;
+				}
+				
+				try {
+					isApplied=Integer.parseInt(request.getParameter("is_applied"));
+				}catch (Exception e) {
+					isApplied=0;
+				}
+				
+				try {
+					isCertiObt=Integer.parseInt(request.getParameter("certi_obt"));
+				}catch (Exception e) {
+					isCertiObt=0;
+				}
+				
+				instQuality.setIsApplicable(isApplicable);
+				instQuality.setIsApplied(isApplied);
+				instQuality.setIsCertiObt(isCertiObt);
+				
 				InstituteQuality insertQualRes = rest.postForObject(Constants.url + "saveInstituteQuality", instQuality,
 						InstituteQuality.class);
+				
 
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
@@ -482,6 +529,18 @@ public class QualityInitiativeController {
 				List<QualityInitiative> qualInintList = new ArrayList<>(Arrays.asList(instArray));
 
 				model.addObject("qualInintList", qualInintList);
+				
+				 map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("key", "QUALITYIDS");
+				SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+						SettingKeyValue.class);
+				System.err.println("settingValues " +settingValues.toString());
+
+	List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
+	.collect(Collectors.toList());
+	model.addObject("settingList", settingList);
+	model.addObject("isEdit", 1);
 
 			} else {
 				model = new ModelAndView("accessDenied");
