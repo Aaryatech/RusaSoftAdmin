@@ -34,6 +34,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.ExceUtil;
 import com.ats.rusasoft.commons.ExportToExcel;
 import com.ats.rusasoft.master.model.Program;
+import com.ats.rusasoft.model.instprofile.InstStakeholderFeedback;
 import com.ats.rusasoft.model.reports.AvgPerPlacement;
 import com.ats.rusasoft.model.reports.AwrdRecgAgnstExtActivityReport;
 import com.ats.rusasoft.model.reports.BudgetInfraAugmntn;
@@ -49,6 +50,7 @@ import com.ats.rusasoft.model.reports.FullTimeTechrInstResrchGuide;
 import com.ats.rusasoft.model.reports.FunctionalMou;
 import com.ats.rusasoft.model.reports.ICtEnbldFaclitiesReport;
 import com.ats.rusasoft.model.reports.InitivAddrsLoctnAdvDisadv;
+import com.ats.rusasoft.model.reports.InstStakeholderFeedbackReport;
 import com.ats.rusasoft.model.reports.IntelectulPropRightReport;
 import com.ats.rusasoft.model.reports.IntrnetConnInfo;
 import com.ats.rusasoft.model.reports.NoAwardRecogExtAct;
@@ -10578,5 +10580,348 @@ public class RusaReportsController {
 		}
 
 	}
+	
+	
+	@RequestMapping(value = "/showFBReceivedFrmStakeHolder", method = RequestMethod.POST)
+	public void showStakeHolderFBDetailsReport(HttpServletRequest request, HttpServletResponse response) {
+
+		String reportName = "Curricular Aspects :  Feedback Received from Stakeholders";
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("report/prog_report1");
+
+			String ac_year = request.getParameter("ac_year");
+			String temp_ac_year = request.getParameter("temp_ac_year");
+			int prog_name = Integer.parseInt(request.getParameter("prog_name"));
+			
+					
+			HttpSession session = request.getSession();
+
+			int instituteId = (int) session.getAttribute("instituteId");
+			map = new LinkedMultiValueMap<>();
+
+			map.add("instId", instituteId);
+			map.add("acYearList", ac_year);
+			
+			InstStakeholderFeedbackReport[] feedBackiStkHldrYesNo = 
+					rest.postForObject(Constants.url + "/getAllFeedBackFrmStackHldr", map, InstStakeholderFeedbackReport[].class);
+			List<InstStakeholderFeedbackReport> fbList = new ArrayList<>(Arrays.asList(feedBackiStkHldrYesNo));
+
+			
+
+			BufferedOutputStream outStream = null;
+			Document document = new Document(PageSize.A4);
+			document.setMargins(50, 45, 50, 60);
+			document.setMarginMirroring(false);
+
+			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+
+			String FILE_PATH = Constants.REPORT_SAVE;
+			File file = new File(FILE_PATH);
+
+			PdfWriter writer = null;
+
+			FileOutputStream out = new FileOutputStream(FILE_PATH);
+			try {
+				writer = PdfWriter.getInstance(document, out);
+			} catch (DocumentException e) {
+
+				e.printStackTrace();
+			}
+
+			String header = "";
+			String title = "                 ";
+
+			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
+			String repDate = DF2.format(new Date());
+
+			String headingName = null;
+			try {
+				headingName = fbList.get(0).getInstituteName();
+			} catch (Exception e) {
+
+				headingName = "-";
+
+			}
+			ItextPageEvent event = new ItextPageEvent(header, title, "", headingName);
+
+			writer.setPageEvent(event);
+			// writer.add(new Paragraph("Curricular Aspects"));
+
+			PdfPTable table = new PdfPTable(5);
+
+			table.setHeaderRows(1);
+
+			try {
+				table.setWidthPercentage(100);
+				table.setWidths(new float[] { 2.4f, 3.2f, 3.2f, 3.2f, 3.2f});
+				Font headFontData = Constants.headFontData;// new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL,
+															// BaseColor.BLACK);
+				Font tableHeaderFont = Constants.tableHeaderFont; // new Font(FontFamily.HELVETICA, 12, Font.BOLD,
+																	// BaseColor.BLACK);
+				tableHeaderFont.setColor(Constants.tableHeaderFontBaseColor);
+
+				PdfPCell hcell = new PdfPCell();
+				hcell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+				hcell = new PdfPCell(new Phrase("Sr.No.", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+				
+				hcell = new PdfPCell(new Phrase("Academic Year", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("Feedback From", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+				
+				hcell = new PdfPCell(new Phrase("Status", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+				
+				hcell = new PdfPCell(new Phrase("Action", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+				
+				int index = 0;
+				String res=null;
+				String fbProces="NA";
+				float perResrchGuide = 0;
+				
+				for (int i = 0; i < fbList.size(); i++) {
+					
+					InstStakeholderFeedbackReport fedBack = fbList.get(i);
+
+									
+					if(fedBack.getFbYesno()!=0) {
+						res="Yes";
+					}else {
+						res="No";
+					}
+					
+					System.err.println(" what  is " +fedBack.getFbProcess());
+					if(fedBack.getFbProcess().equals("A")) {
+						fbProces = "Feedback Collected,analyzed and action taken and feedback available on websites";
+					}
+					else
+					if(fedBack.getFbProcess().equals("B")) {
+						fbProces = "Collected,analyzed and action has been taken";				
+					}
+					else 
+					if(fedBack.getFbProcess().equals("C")) {
+						fbProces = "Feedback Collected and Analyzed";
+					}
+					else if(fedBack.getFbProcess().equals("D")) { 
+						fbProces = "Feedback Collected";
+					}
+					else	
+					if( fedBack.getFbProcess().equals("NA")) {
+						
+						fbProces = "NA";
+					}
+
+					
+					index++;
+					PdfPCell cell;
+					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+					table.addCell(cell);
+
+					cell = new PdfPCell(new Phrase("" + fedBack.getAcademicYear(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+					table.addCell(cell);
+					
+					cell = new PdfPCell(new Phrase("" + fedBack.getFeedbackFrom(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+					table.addCell(cell);
+					
+					cell = new PdfPCell(new Phrase("" + res, headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+					table.addCell(cell);
+					
+					cell = new PdfPCell(new Phrase("" + fbProces, headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+					table.addCell(cell);
+					
+	}
+
+				document.open();
+				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
+
+				Paragraph name = new Paragraph(reportName, hf);
+				name.setAlignment(Element.ALIGN_LEFT);
+				document.add(name);
+
+				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
+				document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
+				document.add(new Paragraph("\n"));
+				
+				document.add(table);
+			
+			
+				int totalPages = writer.getPageNumber();
+
+				//System.out.println("Page no " + totalPages);
+
+				document.close();
+				int p = Integer.parseInt(request.getParameter("p"));
+				System.err.println("p " + p);
+
+				if (p == 1) {
+
+					if (file != null) {
+
+						String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+
+						if (mimeType == null) {
+
+							mimeType = "application/pdf";
+
+						}
+
+						response.setContentType(mimeType);
+
+						response.addHeader("content-disposition",
+								String.format("inline; filename=\"%s\"", file.getName()));
+
+						response.setContentLength((int) file.length());
+
+						InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+						try {
+							FileCopyUtils.copy(inputStream, response.getOutputStream());
+						} catch (IOException e) {
+							//System.out.println("Excep in Opening a Pdf File");
+							e.printStackTrace();
+						}
+					}
+				} else {
+
+					List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+					ExportToExcel expoExcel = new ExportToExcel();
+					List<String> rowData = new ArrayList<String>();
+
+					rowData.add("Sr. No.");
+					rowData.add("Academic Year");
+					rowData.add("Feedback From");
+					rowData.add("Status");
+					rowData.add("Action");					
+
+					expoExcel.setRowData(rowData);
+					exportToExcelList.add(expoExcel);
+					int cnt = 1;
+					String yesNo = null;
+					String fedBkPrcs = null;
+					for (int i = 0; i < fbList.size(); i++) {
+						expoExcel = new ExportToExcel();
+						rowData = new ArrayList<String>();
+						cnt = cnt + i;
+
+						if(fbList.get(i).getFbYesno()!=0) {
+							yesNo="Yes";
+						}else {
+							yesNo="No";
+						}
+						
+						if(fbList.get(i).getFbProcess().equals("A")) {
+							fbProces = "Feedback Collected,analyzed and action taken and feedback available on websites";
+						}
+						
+						else if(fbList.get(i).getFbProcess().equals("B")) {
+							fbProces	= "Collected,analyzed and action has been taken";				
+						}
+						else if(fbList.get(i).getFbProcess().equals("C")) {
+							fbProces = "Feedback Collected and Analyzed";
+						}
+						else if(fbList.get(i).getFbProcess().equals("D")) { 
+							fbProces = "Feedback Collected";
+						}
+						else if(fbList.get(i).getFbProcess().equals("NA")) {							
+							fbProces = "NA";
+						}
+
+						
+						rowData.add("" + (i + 1));
+						rowData.add("" + fbList.get(i).getAcademicYear());						
+						rowData.add("" + fbList.get(i).getFeedbackFrom());
+						rowData.add("" + yesNo);
+						rowData.add("" + fbProces);
+						
+						expoExcel.setRowData(rowData);
+						exportToExcelList.add(expoExcel);
+
+					}
+
+					XSSFWorkbook wb = null;
+					try {
+
+						//System.out.println("Excel List :" + exportToExcelList.toString());
+
+						// String excelName = (String) session.getAttribute("excelName");
+						// wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
+						// "Academic Year :" + temp_ac_year + " ");
+						
+						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
+								"Academic Year:" + temp_ac_year, "", 'F');
+
+						ExceUtil.autoSizeColumns(wb, 3);
+						response.setContentType("application/vnd.ms-excel");
+						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						response.setHeader("Content-disposition",
+								"attachment; filename=" + reportName + "-" + date + ".xlsx");
+						wb.write(response.getOutputStream());
+
+					} catch (IOException ioe) {
+						throw new RuntimeException("Error writing spreadsheet to output stream");
+					} finally {
+						if (wb != null) {
+							wb.close();
+						}
+					}
+
+				}
+
+			} catch (DocumentException ex) {
+
+				//System.out.println("Pdf Generation Error: " + ex.getMessage());
+
+				ex.printStackTrace();
+
+			}
+
+		} catch (Exception e) {
+
+			System.err.println("Exce in showIntelPropRght " + e.getMessage());
+			e.printStackTrace();
+
+		}
+
+	}
+	
 }
 
