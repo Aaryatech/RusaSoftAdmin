@@ -221,7 +221,7 @@
 										
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 Same State<span
+												 MH State<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
@@ -241,6 +241,39 @@
 													
 												</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="state_id">State<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="state_id" name="state_id" class="form-control">
+													<c:forEach items="${sessionScope.stateList}" var="state">
+												<option value="${state.stateId}">${state.stateName}</option>
+													
+														<%-- <c:choose>
+															<c:when
+																test="${editFaculty.highestQualification==quolf.qualificationId}">
+																<option selected value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+															</c:when>
+															<c:otherwise>
+
+																<option value="${quolf.qualificationId}">${quolf.qualificationName}</option>
+
+															</c:otherwise>
+
+														</c:choose>
+ --%>
+ 
+ 
+													</c:forEach>
+
+												</select> <span class="error_form text-danger" id="quolf_field"
+													style="display: none;">Please select highest
+													qualification</span>
+											</div>
+										</div>
+										
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact

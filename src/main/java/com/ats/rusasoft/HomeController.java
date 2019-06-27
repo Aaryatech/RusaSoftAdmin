@@ -45,6 +45,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.master.State;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Staff;
 import com.ats.rusasoft.model.UserLogin;
@@ -370,7 +371,7 @@ public class HomeController {
 					AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId",
 							map, AcademicYear[].class);
 					List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-					System.err.println("acaYearList " + acaYearList.toString());
+					//System.err.println("acaYearList " + acaYearList.toString());
 
 					// session.setAttribute("acaYearList", acaYearList);
 					// ac yadded in sesion
@@ -543,6 +544,12 @@ public class HomeController {
 					
 
 					session.setAttribute("newModuleList", newModuleList);
+					
+					State[] stateArray = restTemplate.getForObject(Constants.url + "getStateList",
+							 State[].class);
+					List<State> stateList = new ArrayList<>(Arrays.asList(stateArray));
+					
+					session.setAttribute("stateList", stateList);
 				}
 
 			}
@@ -564,8 +571,8 @@ public class HomeController {
 
 		
 		//your code
-		Instant end = Instant.now();
-		Duration timeElapsed = Duration.between(start, end);
+		//Instant end = Instant.now();
+		//Duration timeElapsed = Duration.between(start, end);
 		// // System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
 		return mav;
 
