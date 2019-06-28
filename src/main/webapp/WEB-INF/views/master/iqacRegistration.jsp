@@ -199,17 +199,16 @@
 													style="display: none;">Please select joining date</span>
 											</div>
 										</div>
-										
-										<div class="form-group">
+ 										<div class="form-group">
 											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH  State ${editStateId } <span
+												 MH  State  <span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 											<c:choose>
-												<c:when test="${editFaculty.facultyId>0}">
-														Yes<input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-														No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
+												<c:when test="${miqc.facultyId>0}">
+														Yes<input type="radio" ${miqc.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
+														No<input type="radio" ${miqc.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
 													
 												</c:when>
 													<c:otherwise>
@@ -218,6 +217,8 @@
 													
 													</c:otherwise>
 											</c:choose>
+											
+											
 												<span class="error_form text-danger" id="is_state_same_field"
 													style="display: none;">Please select
 													permanent/correspondence address same or not.</span>

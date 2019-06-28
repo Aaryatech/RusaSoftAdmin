@@ -212,7 +212,7 @@
 											</div>
 										</div>
 
-
+ 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
 												MH State<span class="text-danger">*</span>
