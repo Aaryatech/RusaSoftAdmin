@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body class=" " onload="selcState()">
 	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
 
 	<!-- START TOPBAR -->
@@ -299,26 +299,54 @@
 										<div class="form-group">
 											
 											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 Same State<span
+												 MH State<span
 												class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-3">
 												
 													<c:if test="${editFaculty.facultyId>0}">
-													Yes <input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
-													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
+													Yes <input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
 													</c:if>
 													
 													<c:if test="${editFaculty.facultyId==0}">
-													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	 value="1"> 
-													No<input type="radio"  name="is_state_same" id="is_state_same" value="0">
+													Yes <input type="radio" checked name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio"  name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
 													</c:if>
 													
 												<span class="error_form text-danger" id="is_state_same_field"
 													style="display: none;">Please select
 													permanent/correspondence address same or not.</span>
 
+											</div>
+										</div>
+										
+										
+										
+										<div class="form-group" style="display: none;" id="state">
+										 
+											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-10">
+												<select id="state_id" name="state_id" class="form-control">
+												
+													 <c:forEach items="${sessionScope.stateList}" var="state">
+														<c:choose>
+														<c:when test="${editFaculty.facultyMiddelName == state.stateId}">
+															<option selected value="${state.stateId}">${state.stateName}</option>
+														</c:when>
+														
+														<c:otherwise>
+															<option value="${state.stateId}">${state.stateName}</option>
+														</c:otherwise>
+														</c:choose>
+													</c:forEach>
+ 
+ 	
+												</select> <span class="error_form text-danger" id="quolf_field"
+													style="display: none;">Please select highest
+													qualification</span>
 											</div>
 										</div>
 										
@@ -408,6 +436,21 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+<script type="text/javascript"> 
+ function selcState() {
+	// alert("Hi");
+	 var isSamState = $("input[name='is_state_same']:checked"). val();
+	// alert(isSamState);
+	 
+	 if(isSamState==0){
+		 document.getElementById("state").style.display = "block";
+	 }else{
+		 document.getElementById("state").style.display = "none";
+	 }
+}
+ 
+ </script>
 
 	<script>
 		function trim(el) {

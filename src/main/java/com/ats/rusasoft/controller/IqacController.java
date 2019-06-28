@@ -245,16 +245,9 @@ public class IqacController {
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
 			String email = request.getParameter("email");
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
 
-			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
-			// + contact + " " + email);
-			// MIqac miqac = new MIqac();
-			/*
-			 * if (iqacId == 0) { miqac.setIqacId(0);
-			 * 
-			 * } else { miqac.setIqacId(iqacId); }
-			 */
-
+		
 			String[] deptIds = request.getParameterValues("dept_id");
 			StringBuilder sb = new StringBuilder();
 
@@ -298,7 +291,13 @@ public class IqacController {
 			staff.setType(2);
 
 			staff.setInstituteId(instituteId);
-			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+			
+			staff.setIsSame(isState);
+			if(isState==1) {
+			staff.setFacultyMiddelName("0");		//inserted state id
+			}else {
+				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+			}
 			staff.setJoiningDate(dateOfJoin);
 			staff.setContactNo(contact);
 			staff.setEmail(email);
@@ -326,7 +325,12 @@ public class IqacController {
 				editIqac.setContactNo(contact);
 				editIqac.setCurrentDesignationId(designation);
 				editIqac.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				editIqac.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+				editIqac.setIsSame(isState);
+				if(isState==1) {
+					editIqac.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editIqac.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 				editIqac.setJoiningDate(dateOfJoin);
 				editIqac.setIsAccOff(isAccOff);
 				editIqac.setIsDean(isDean);
@@ -789,7 +793,7 @@ public class IqacController {
 			int designation = Integer.parseInt(request.getParameter("designation"));
 			String joinDate = request.getParameter("join_date");
 			int isReg = Integer.parseInt(request.getParameter("is_registration"));
-
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
 			int teachTo = Integer.parseInt(request.getParameter("teachTo"));
 			String contactNo = request.getParameter("contact_no");
 			String email = request.getParameter("email");
@@ -890,7 +894,12 @@ public class IqacController {
 					staff.setFacultyFirstName(request.getParameter("faculty_first_name"));
 					staff.setHighestQualification(highestQualification);
 					staff.setHightestQualificationYear(yrofHighestQualification);
-					staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+					staff.setIsSame(isState);
+					if(isState==1) {
+					staff.setFacultyMiddelName("0");		//inserted state id
+					}else {
+						staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+					}
 					staff.setIsAccOff(isAccOff);
 					staff.setIsDean(isDean);
 					staff.setIsFaculty(1);
@@ -946,6 +955,7 @@ public class IqacController {
 			staff.setIsFaculty(1);
 			staff.setExtraint1(0);
 			staff.setExtravarchar1("NA");
+			
 
 			//System.out.println("Staff:" + staff.toString());
 
@@ -964,7 +974,12 @@ public class IqacController {
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHightestQualificationYear(yrofHighestQualification);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("hod_quolf")));
-				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+				editStaff.setIsSame(isState);
+				if(isState==1) {
+					editStaff.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 				editStaff.setJoiningDate(joinDate);
 				editStaff.setRealivingDate((request.getParameter("acc_off_relDate")));
 				editStaff.setMakerUserId(userId);
@@ -1450,15 +1465,7 @@ public class IqacController {
 			String dateOfRel = request.getParameter("acc_off_relDate");
 			String contact = request.getParameter("contact_no");
 			String email = request.getParameter("email");
-
-			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
-			// + contact + " " + email);
-			// MIqac miqac = new MIqac();
-			/*
-			 * if (iqacId == 0) { miqac.setIqacId(0);
-			 * 
-			 * } else { miqac.setIqacId(iqacId); }
-			 */
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
 
 			String[] deptIds = request.getParameterValues("depart");
 			StringBuilder sb = new StringBuilder();
@@ -1481,8 +1488,12 @@ public class IqacController {
 			staff.setFacultyId(deanId);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			staff.setHightestQualificationYear(null);
-			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
-
+			staff.setIsSame(isState);
+			if(isState==1) {
+			staff.setFacultyMiddelName("0");		//inserted state id
+			}else {
+				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+			}
 			staff.setIsAccOff(0);
 			staff.setIsDean(1);
 			staff.setIsFaculty(1);
@@ -1532,7 +1543,13 @@ public class IqacController {
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editStaff.setJoiningDate(dateOfJoin);
-				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+			
+				editStaff.setIsSame(isState);
+				if(isState==1) {
+					editStaff.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 
 				editStaff.setIsHod(isHod);
 				editStaff.setRoleIds(roleIds);
@@ -2010,16 +2027,8 @@ public class IqacController {
 			String dateOfRel = request.getParameter("acc_off_relDate");
 			String contact = request.getParameter("contact_no");
 			String email = request.getParameter("email");
-
-			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
-			// + contact + " " + email);
-			// MIqac miqac = new MIqac();
-			/*
-			 * if (iqacId == 0) { miqac.setIqacId(0);
-			 * 
-			 * } else { miqac.setIqacId(iqacId); }
-			 */
-
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
+			
 			String[] deptIds = request.getParameterValues("depart");
 			StringBuilder sb = new StringBuilder();
 
@@ -2039,8 +2048,14 @@ public class IqacController {
 			staff.setEmail(email);
 			staff.setFacultyFirstName(pacementOfficerName);
 			staff.setFacultyId(officerId);
-			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+			
+			staff.setIsSame(isState);
+			if(isState==1) {
+			staff.setFacultyMiddelName("0");		//inserted state id
+			}else {
+				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+			}
+			
 			staff.setHightestQualificationYear(null);
 			staff.setIsAccOff(0);
 			staff.setIsDean(0);
@@ -2092,7 +2107,12 @@ public class IqacController {
 				editStaff.setContactNo(contact);
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+				editStaff.setIsSame(isState);
+				if(isState==1) {
+					editStaff.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setRealivingDate(dateOfRel);
 				editStaff.setRoleIds(roleIds);
@@ -2399,14 +2419,7 @@ public class IqacController {
 			String contact = request.getParameter("contact_no");
 			String email = request.getParameter("email");
 
-			// //System.out.println("Data:" + iqacId + " " + iqacName + " " + dateOfJoin + " "
-			// + contact + " " + email);
-			// MIqac miqac = new MIqac();
-			/*
-			 * if (iqacId == 0) { miqac.setIqacId(0);
-			 * 
-			 * } else { miqac.setIqacId(iqacId); }
-			 */
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
 
 			String[] deptIds = request.getParameterValues("depart");
 			StringBuilder sb = new StringBuilder();
@@ -2428,7 +2441,14 @@ public class IqacController {
 			staff.setFacultyFirstName(extActOfficerName);
 			staff.setFacultyId(extActOfficerId);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-			staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+			
+			staff.setIsSame(isState);
+			if(isState==1) {
+			staff.setFacultyMiddelName("0");		//inserted state id
+			}else {
+				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+			}
+			
 			staff.setHightestQualificationYear(null);
 			staff.setIsAccOff(0);
 			staff.setIsDean(0);
@@ -2480,7 +2500,13 @@ public class IqacController {
 				editStaff.setContactNo(contact);
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				editStaff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+			
+				editStaff.setIsSame(isState);
+				if(isState==1) {
+					editStaff.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setRealivingDate(dateOfRel);
 				editStaff.setRoleIds(roleIds);

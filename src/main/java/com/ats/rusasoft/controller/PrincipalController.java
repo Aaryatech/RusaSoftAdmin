@@ -213,6 +213,7 @@ public class PrincipalController {
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
 			String email = request.getParameter("email");
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
 			String deptIds= null;
 
 			 deptIds = request.getParameter("dept_id");
@@ -273,8 +274,14 @@ public class PrincipalController {
 				staff.setCheckerUserId(0);
 				staff.setCheckerDatetime(curDateTime);
 				staff.setLastUpdatedDatetime(curDateTime);
-				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));
-
+				
+				staff.setIsSame(isState);
+				if(isState==1) {
+				staff.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
+				
 				staff.setExtravarchar1("NA");
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
 				if(hod!=null) {
@@ -310,7 +317,12 @@ public class PrincipalController {
 				editHod.setIsDean(isDean);
 				editHod.setType(1);
 				
-				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));
+				editHod.setIsSame(isState);
+				if(isState==1) {
+					editHod.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editHod.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
 				

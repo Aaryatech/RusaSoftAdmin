@@ -1183,7 +1183,7 @@ public class LibraryController {
 			String dateOfJoin = request.getParameter("dateOfJoin");
 			String contact = request.getParameter("contactNo");
 			String email = request.getParameter("email");
-
+			int isState = Integer.parseInt(request.getParameter("is_state_same"));
 			String[] deptIds = request.getParameterValues("dept_id");
 			StringBuilder sb = new StringBuilder();
 
@@ -1204,7 +1204,14 @@ public class LibraryController {
 				staff.setFacultyFirstName(libName);
 				staff.setFacultyId(libId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				staff.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+				
+				staff.setIsSame(isState);
+				if(isState==1) {
+				staff.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
+				
 				staff.setHightestQualificationYear(null);
 				staff.setIsAccOff(0);
 				staff.setIsDean(0);
@@ -1259,7 +1266,13 @@ public class LibraryController {
 				editHod.setContactNo(contact);
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				editHod.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
+			
+				editHod.setIsSame(isState);
+				if(isState==1) {
+					editHod.setFacultyMiddelName("0");		//inserted state id
+				}else {
+					editHod.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				}
 				editHod.setJoiningDate(dateOfJoin);
 				editHod.setIsLibrarian(1);
 				editHod.setType(7);

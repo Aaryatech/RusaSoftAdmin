@@ -233,10 +233,9 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" id="supportAgency" onchange="trim(this)"
-															value="${stud.supportAgencyName}" autocomplete="off" onfocus="this.value=''"
-															name="supportAgency" placeholder="Support Agency"
-															> <span
-															class="error_form text-danger" id="error_agency"
+															value="${stud.supportAgencyName}" autocomplete="off" onFocus="clearDefault(this)" 
+															name="supportAgency" placeholder="Support Agency"> 
+														<span class="error_form text-danger" id="error_agency"
 															style="display: none;">Please Enter Name of
 															Support Agency. </span>
 

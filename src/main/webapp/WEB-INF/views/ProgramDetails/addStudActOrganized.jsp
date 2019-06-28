@@ -248,8 +248,11 @@
 																	id="otherActivityName"
 																	value="${editProgramActivity.activityName}"
 																	name="otherActivityName"
-																	placeholder="Another Scheme Name"
-																	onchange="return trim(this)" required>
+																	placeholder="Another Activity Name"
+																	onchange="return trim(this)">
+																	<span
+														class="error_form text-danger" id="error_otherfield"
+														style="display: none;">Please enter name of another activity.</span>
 															</div>
 														</div>
 
@@ -265,8 +268,11 @@
 																	id="otherActivityName"
 																	value="${editProgramActivity.activityName}"
 																	name="otherActivityName"
-																	placeholder="Another Scheme Name"
+																	placeholder="Another Activity Name"
 																	onchange="return trim(this)">
+																		<span
+														class="error_form text-danger" id="error_otherfield"
+														style="display: none;">Please enter name of another activity.</span>
 															</div>
 														</div>
 													</c:otherwise>
@@ -529,11 +535,11 @@
 			if (qualType == 7) {
 
 				document.getElementById("abc").style = "visible";
-				document.getElementById("otherActivityName").required = true;
+				//document.getElementById("otherActivityName").required = true;
 
 			} else {
 				document.getElementById("abc").style = "display:none";
-				document.getElementById("otherActivityName").required = false;
+			//	document.getElementById("otherActivityName").required = false;
 			}
 
 		}
@@ -616,6 +622,24 @@
 
 												var isError = false;
 												var errMsg = "";
+												
+												
+												if($("#activityName").val() == 7){
+													if (!$("#otherActivityName").val()) {
+
+														isError = true;
+														
+
+														$("#otherActivityName").addClass(
+																"has-error")
+														$("#error_otherfield")
+																.show()
+														//return false;
+													} else {
+														$("#error_otherfield")
+																.hide()
+													}
+												}
 
 												if (!$("#date")
 														.val()) {
