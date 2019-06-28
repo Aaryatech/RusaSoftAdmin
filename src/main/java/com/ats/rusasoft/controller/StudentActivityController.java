@@ -1566,17 +1566,24 @@ public class StudentActivityController {
 			//System.out.println(view);
 
 			if (view.isError() == false) {
-
+				MultiValueMap<String, Object> map = null;
+				
 				model = new ModelAndView("ProgramDetails/studentPerformanceList");
 				model.addObject("title", "Student Performance in Final Year");
 				
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				
 				Program[] program = restTemplate.postForObject(Constants.url + "/getProgramList", map, Program[].class);
 				List<Program> list = new ArrayList<Program>(Arrays.asList(program));
+				
 				model.addObject("list", list);
 				
+				
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", session.getAttribute("acYearId"));
+				
 				StudPerformFinalYrList[] passedStudArr = restTemplate.postForObject(Constants.url + "getstudPassingPer",map,
 						StudPerformFinalYrList[].class);
 				List<StudPerformFinalYrList> passedStudList = new ArrayList<>(Arrays.asList(passedStudArr));

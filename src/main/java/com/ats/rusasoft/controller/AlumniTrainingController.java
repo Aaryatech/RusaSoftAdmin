@@ -1323,10 +1323,23 @@ public class AlumniTrainingController {
 					"0", "1", "0", "0", newModuleList);
 			if (addAccess.isError() == false) {
 
+				
+				int instituteId = (int) session.getAttribute("instituteId");
+				int yId = (int) session.getAttribute("acYearId");
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				
+				map.add("instituteId", instituteId);
+				map.add("yId", yId);
+				
+				AlumniAssocAct alumni = rest.postForObject(Constants.url + "getAlumniAssocActByIds", map,
+						AlumniAssocAct.class);
+				
+				
 				model = new ModelAndView("ProgramDetails/addAlmniAssocAct");
 
 				model.addObject("title", "Add Alumni Association Activity");
-				AlumniAssocAct alumni = new AlumniAssocAct();
+				//AlumniAssocAct alumni = new AlumniAssocAct();
 				model.addObject("alumni", alumni);
 			} else {
 
