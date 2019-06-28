@@ -2019,7 +2019,7 @@ public class IqacController {
 
 			int designation = 0;
 
-			//System.out.println("Data:" + officerId);  
+			System.out.println("Data:" + request.getParameter("quolif"));  
 			String pacementOfficerName = request.getParameter("pacementOfficerName");
 			//System.out.println("Data:" + pacementOfficerName);
 			designation = Integer.parseInt(request.getParameter("designation"));
@@ -2089,7 +2089,7 @@ public class IqacController {
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime(curDateTime);
 			staff.setLastUpdatedDatetime(curDateTime);
-			
+			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			
 			staff.setExtravarchar1("NA");
 			Staff newDean = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
