@@ -222,7 +222,27 @@
 													</div>
 												</div>
 
-
+<div class="form-group">
+											<label class="control-label col-sm-4" for="is_add_same">Autonomous Status<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-8">
+												<c:choose>
+												<c:when test="${editInstInfo.infoDetailId>0}">
+													Yes<input type="radio" ${editInstInfo.autonStatus == 1 ? 'checked' : ''} name="auton_status" id="auton_status" value="1"> 
+													No<input type="radio" ${editInstInfo.autonStatus == 0 ? 'checked' : ''} name="auton_status" id="auton_status" value="0">
+													
+													</c:when>
+													
+													<c:otherwise>
+													Yes <input  type="radio" name="auton_status" id="auton_status" value="1"> 
+													No<input type="radio" checked name="auton_status" id="auton_status" value="0">
+													</c:otherwise>
+													
+													</c:choose>
+													
+												</div>
+										</div>
 
 
 

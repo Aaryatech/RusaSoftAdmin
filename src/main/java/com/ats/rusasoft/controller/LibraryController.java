@@ -2035,6 +2035,7 @@ public class LibraryController {
 				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 				String curDate = dateFormatStr.format(new Date());
+				int auton_status=Integer.parseInt(request.getParameter("auton_status"));
 
 				if (inst_info_id.isEmpty() == true) {
 
@@ -2058,7 +2059,7 @@ public class LibraryController {
 					lib.setExInt2(no_clock_hr_faculty);
 					lib.setExVar1("NA");
 					lib.setExVar2("NA");
-
+lib.setAutonStatus(auton_status);
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib,
 							InstituteInfo.class);
 
@@ -2086,6 +2087,7 @@ public class LibraryController {
 					lib1.setTreasuryCode(treasury_code);
 					lib1.setExInt1(Integer.parseInt(request.getParameter("no_sanction_post")));
 					lib1.setExInt2(no_clock_hr_faculty);
+					lib1.setAutonStatus(auton_status);
 
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib1,
 							InstituteInfo.class);

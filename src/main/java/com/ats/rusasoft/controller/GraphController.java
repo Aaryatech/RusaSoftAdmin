@@ -17,6 +17,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,21 +35,22 @@ public class GraphController {
 	String redirect = null;
 	RestTemplate restTemplate = new RestTemplate();
 
-	@RequestMapping(value = "/hodRegistration", method = RequestMethod.GET)
-	public ModelAndView hodRegistration(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/getGraph", method = RequestMethod.GET)
+	public @ResponseBody List<SancIntakeStudAdmittedGraph> getGraph(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
  		int instituteId = (int) session.getAttribute("instituteId");
 		ModelAndView model = null;
 		MultiValueMap<String, Object> map = null;
+		map=new LinkedMultiValueMap<String, Object>(); 
 		model = new ModelAndView("master/hodRegistration");
 		map.add("instId", instituteId);
 		SancIntakeStudAdmittedGraph[] quolArray = restTemplate.postForObject(Constants.url + "getGraph1", map,
 				SancIntakeStudAdmittedGraph[].class);
-		List<SancIntakeStudAdmittedGraph> quolfList = new ArrayList<>(Arrays.asList(quolArray));
-		System.err.println("quolfList " + quolfList.toString());
+		List<SancIntakeStudAdmittedGraph> sancIntakeAdmi = new ArrayList<>(Arrays.asList(quolArray));
+		System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
 
-		model.addObject("quolfList", quolfList);
+		model.addObject("sancIntakeAdmi", sancIntakeAdmi);
 		
-		return model;
+		return sancIntakeAdmi;
 	}
 }
