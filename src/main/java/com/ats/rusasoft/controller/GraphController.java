@@ -18,12 +18,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.client.RestTemplate; 
 
 import com.ats.rusasoft.commons.Constants;
-import com.ats.rusasoft.model.LoginResponse;
-import com.ats.rusasoft.model.Quolification;
+import com.ats.rusasoft.model.TotSancIntakeProgwise;
 import com.ats.rusasoft.model.graph.SancIntakeStudAdmittedGraph;
 
 @Controller
@@ -37,20 +35,58 @@ public class GraphController {
 
 	@RequestMapping(value = "/getGraph", method = RequestMethod.GET)
 	public @ResponseBody List<SancIntakeStudAdmittedGraph> getGraph(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
- 		int instituteId = (int) session.getAttribute("instituteId");
-		ModelAndView model = null;
-		MultiValueMap<String, Object> map = null;
-		map=new LinkedMultiValueMap<String, Object>(); 
-		model = new ModelAndView("master/hodRegistration");
-		map.add("instId", instituteId);
-		SancIntakeStudAdmittedGraph[] quolArray = restTemplate.postForObject(Constants.url + "getGraph1", map,
-				SancIntakeStudAdmittedGraph[].class);
-		List<SancIntakeStudAdmittedGraph> sancIntakeAdmi = new ArrayList<>(Arrays.asList(quolArray));
-		System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
-
-		model.addObject("sancIntakeAdmi", sancIntakeAdmi);
 		
+		
+		List<SancIntakeStudAdmittedGraph> sancIntakeAdmi = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession();
+	 		int instituteId = (int) session.getAttribute("instituteId");
+			 
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			 
+		 
+			map.add("instId", instituteId);
+			SancIntakeStudAdmittedGraph[] quolArray = restTemplate.postForObject(Constants.url + "getGraph1", map,
+					SancIntakeStudAdmittedGraph[].class);
+			sancIntakeAdmi = new ArrayList<>(Arrays.asList(quolArray));
+			//System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return sancIntakeAdmi;
+	}
+	
+	@RequestMapping(value = "/getTotSancIntakeProgramwiseGraph", method = RequestMethod.GET)
+	public @ResponseBody List<TotSancIntakeProgwise> getTotSancIntakeProgramwiseGraph(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<TotSancIntakeProgwise> sancIntakeAdmi = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession();
+	 		int instituteId = (int) session.getAttribute("instituteId");
+			 
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			 
+		 
+			map.add("instId", instituteId);
+			TotSancIntakeProgwise[] quolArray = restTemplate.postForObject(Constants.url + "/getTotSancIntakeProgramwiseGraph", map,
+					TotSancIntakeProgwise[].class);
+			sancIntakeAdmi = new ArrayList<>(Arrays.asList(quolArray));
+			
+			System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
 		return sancIntakeAdmi;
 	}
 }

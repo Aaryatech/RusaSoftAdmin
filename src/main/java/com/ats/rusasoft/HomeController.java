@@ -232,11 +232,31 @@ public class HomeController {
 
 	}
 
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView();
+		try {
+
+			model = new ModelAndView("welcome");
+
+		} catch (Exception e) {
+
+			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
 	@RequestMapping("/loginProcess")
-	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse res) throws IOException {
+	public String helloWorld(HttpServletRequest request, HttpServletResponse res, Model model) throws IOException {
 		Instant start = Instant.now();
 		
-		ModelAndView mav = new ModelAndView("login");
+		String mav =  "login" ;
 		HttpSession session = request.getSession();
 
 		String name = request.getParameter("username");
@@ -266,8 +286,8 @@ public class HomeController {
 
 			if (name.equalsIgnoreCase("") || password.equalsIgnoreCase("") || name == null || password == null) {
 
-				mav = new ModelAndView("login");
-				mav.addObject("msg", "Enter  Login Credentials");
+				mav = "login" ;
+				model.addAttribute("msg", "Enter  Login Credentials");
 
 			} else {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -284,7 +304,7 @@ public class HomeController {
 					int a = userObj.getStaff().getIsEnrolled();
 					
 					if (a == 1) {
-						mav = new ModelAndView("welcome");
+						mav =  "redirect:/dashboard" ;
 
 						map = new LinkedMultiValueMap<String, Object>();
 						map.add("type", 1);
@@ -296,7 +316,7 @@ public class HomeController {
 						session.setAttribute("acaYearList", acaYearList);
 
 					} else {
-						mav = new ModelAndView("changePassword");
+						mav =  "changePassword" ;
 					}
 
 					
@@ -556,8 +576,8 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			mav = new ModelAndView("login");
-			mav.addObject("msg", "Enter Valid  Login Credentials");
+			mav = "login" ;
+			model.addAttribute("msg", "Enter Valid  Login Credentials");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			map = new LinkedMultiValueMap<String, Object>();
@@ -566,7 +586,7 @@ public class HomeController {
 			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
 					AcademicYear[].class);
 			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-			mav.addObject("acaYearList", acaYearList);
+			model.addAttribute("acaYearList", acaYearList);
 		}
 
 		
