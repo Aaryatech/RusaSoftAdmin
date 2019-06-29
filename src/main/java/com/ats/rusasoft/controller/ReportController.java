@@ -297,20 +297,20 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getNameOfProgram(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					// cell.setPaddingLeft(10);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getLevelOfProgram(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getMonthDuration(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -322,7 +322,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getApprovedBy(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -654,19 +654,19 @@ public class ReportController {
 				table.addCell(hcell);
 
 				hcell = new PdfPCell(new Phrase("Faculty Name", tableHeaderFont));
-				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
 				hcell = new PdfPCell(new Phrase("Member of", tableHeaderFont));
-				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
 				hcell = new PdfPCell(new Phrase("University", tableHeaderFont));
-				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
@@ -14821,7 +14821,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getValueAddedCourseName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -15105,7 +15105,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getFeedbackFrom(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 					String n = null;
@@ -15117,7 +15117,7 @@ public class ReportController {
 					}
 					cell = new PdfPCell(new Phrase("" + n, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -15140,7 +15140,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + n1, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
