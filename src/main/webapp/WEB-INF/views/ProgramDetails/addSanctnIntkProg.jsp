@@ -139,7 +139,7 @@
 
 																	<tr>
 																		<td>${count.index+1 }</td>
-																		<td>${prog.nameOfProgram}</td>
+																		<td>${prog.exVar2} - ${prog.nameOfProgram}</td>
 																		<td><input type="number"  min="0" max="99999"
 																			class="txt" id='sancIntake${prog.programId}' onkeyup="calculateSum()"
 																			name='sancIntake${prog.programId}'  value="0" required></td>
@@ -178,7 +178,7 @@
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
 															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showStudAddmitLoc"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+														<a href="${pageContext.request.contextPath}/showSanctnIntkProg"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
 															<label style="margin: 0px 2% 0px 10%; ">Total Intakes</label><input
 																type="text" readonly placeholder="Total Student" id="total_stud">
 																<span

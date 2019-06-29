@@ -1124,7 +1124,7 @@ public class StudAdminController {
 				Program[] progTypes = restTemplate.postForObject(Constants.url + "getAllProgramTypeForSanctnIntake",map,
 						Program[].class);
 				List<Program> progList = new ArrayList<>(Arrays.asList(progTypes));
-				// System.err.println("Prog List-----------"+progList);
+				System.err.println("Prog List-----------"+progList);
 				model.addObject("progList", progList);
 				
 				if (intkList.isEmpty()) {

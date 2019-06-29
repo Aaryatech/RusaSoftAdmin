@@ -12,9 +12,7 @@ public class ProgSancIntake {
 	private int makerUserId; 
 	private String makerEnterDatetime;
 	private int exInt1; 
-	private String exVar1;
-	
-	
+	private String exVar1;	
 	
 	public int getProgSancIntakeId() {
 		return progSancIntakeId;

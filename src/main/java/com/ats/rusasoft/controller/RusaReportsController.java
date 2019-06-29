@@ -196,13 +196,6 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				/*
-				 * hcell = new PdfPCell(new Phrase("Institute Name", tableHeaderFont));
-				 * hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				 * hcell.setBackgroundColor(Constants.baseColorTableHeader);
-				 * 
-				 * table.addCell(hcell);
-				 */
 
 				hcell = new PdfPCell(new Phrase("STR of Year", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -228,34 +221,26 @@ public class RusaReportsController {
 
 					cell = new PdfPCell(new Phrase("" + ratio.getAcademicYear(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					// cell.setPaddingLeft(10);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + ratio.getNoOfFulltimeFaculty(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + ratio.getNoCurrentAdmitedStnt(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
-					/*
-					 * cell = new PdfPCell(new Phrase("" + ratio.getInstituteName(), headFontData));
-					 * cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					 * cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-					 * 
-					 * table.addCell(cell);
-					 */
-
 					cell = new PdfPCell(new Phrase("" + studTchrRato, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -329,7 +314,6 @@ public class RusaReportsController {
 					rowData.add("Academic Year");
 					rowData.add("Total No. of Full Time Faculty");
 					rowData.add("Total No. of Student Enrolled");
-					// rowData.add("Insttute Name");
 					rowData.add("STR of Year");
 
 					expoExcel.setRowData(rowData);
@@ -349,7 +333,6 @@ public class RusaReportsController {
 						rowData.add("" + ratioList.get(i).getAcademicYear());
 						rowData.add("" + ratioList.get(i).getNoOfFulltimeFaculty());
 						rowData.add("" + ratioList.get(i).getNoCurrentAdmitedStnt());
-						// rowData.add("" + ratioList.get(i).getInstituteName());
 						rowData.add("" + str);
 
 						expoExcel.setRowData(rowData);
@@ -1197,7 +1180,7 @@ public class RusaReportsController {
 
 					cell = new PdfPCell(new Phrase("" + facPer, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
