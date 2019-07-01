@@ -21,8 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate; 
 
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.TotSancIntakeProgwise;
+import com.ats.rusasoft.model.graph.GetTotStudentPassedAndAppearInFinYr;
+import com.ats.rusasoft.model.graph.ProgSanctnIntake;
+import com.ats.rusasoft.model.graph.ProgTypStudPlacedGraph;
 import com.ats.rusasoft.model.graph.SancIntakeStudAdmittedGraph;
+import com.ats.rusasoft.model.graph.StudSupprtSchemGraph; 
 
 @Controller
 @Scope("session")
@@ -80,7 +85,7 @@ public class GraphController {
 					TotSancIntakeProgwise[].class);
 			sancIntakeAdmi = new ArrayList<>(Arrays.asList(quolArray));
 			
-			System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
+			//System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -88,5 +93,118 @@ public class GraphController {
 		
  
 		return sancIntakeAdmi;
+	}
+	
+	@RequestMapping(value = "/getAllStudSupprtSchemGraph", method = RequestMethod.GET)
+	public @ResponseBody List<StudSupprtSchemGraph> getAllStudSupprtSchemGraph(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<StudSupprtSchemGraph> sancIntakeAdmi = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession();
+	 		int instituteId = (int) session.getAttribute("instituteId");
+			 
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			 
+		 
+			map.add("instId", instituteId);
+			StudSupprtSchemGraph[] quolArray = restTemplate.postForObject(Constants.url + "/getAllStudSupprtSchemGraph", map,
+					StudSupprtSchemGraph[].class);
+			sancIntakeAdmi = new ArrayList<>(Arrays.asList(quolArray));
+			
+			//System.err.println("SancIntakeStudAdmittedGraph GC " + sancIntakeAdmi.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return sancIntakeAdmi;
+	}
+	
+	@RequestMapping(value = "/getTotStudentPassedAndAppearInFinYrGraphForHod", method = RequestMethod.GET)
+	public @ResponseBody List<GetTotStudentPassedAndAppearInFinYr> getTotStudentPassedAndAppearInFinYrGraphForHod(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<GetTotStudentPassedAndAppearInFinYr> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession();
+	 		int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			 
+		 
+			map.add("instId", instituteId);
+			map.add("facultyId", userObj.getUserId());
+			GetTotStudentPassedAndAppearInFinYr[] quolArray = restTemplate.postForObject(Constants.url + "/getTotStudentPassedAndAppearInFinYrGraphForHod", map,
+					GetTotStudentPassedAndAppearInFinYr[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			//System.err.println("GetTotStudentPassedAndAppearInFinYr GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/sanctioinalIntakeandNostudentAdmitedproramwise", method = RequestMethod.GET)
+	public @ResponseBody List<ProgSanctnIntake> sanctioinalIntakeandNostudentAdmitedproramwise(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<ProgSanctnIntake> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			  
+			map.add("makerUserId", userObj.getUserId());
+			ProgSanctnIntake[] quolArray = restTemplate.postForObject(Constants.url + "/getAllProgSanctnIntakeGraph", map,
+					ProgSanctnIntake[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			//System.err.println("ProgSanctnIntake GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/getAllProgTypStudPlacedGraph", method = RequestMethod.GET)
+	public @ResponseBody List<ProgTypStudPlacedGraph> getAllProgTypStudPlacedGraph(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<ProgTypStudPlacedGraph> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			  
+			map.add("makerUserId", userObj.getUserId());
+			ProgTypStudPlacedGraph[] quolArray = restTemplate.postForObject(Constants.url + "/getAllProgTypStudPlacedGraph", map,
+					ProgTypStudPlacedGraph[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			System.err.println("ProgTypStudPlacedGraph GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
 	}
 }

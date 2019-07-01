@@ -52,6 +52,7 @@ import com.ats.rusasoft.model.UserLogin;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.accessright.SubModuleJson;
 import com.ats.rusasoft.model.AcademicYear;
+import com.ats.rusasoft.model.DashBoardCounts;
 import com.ats.rusasoft.model.GetUserDetail;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Institute;
@@ -175,7 +176,7 @@ public class HomeController {
 			// String formattedDate = dateFormat.format(date);
 
 			// model.addAttribute("serverTime", formattedDate);
-
+			model.addObject("title", "DASHBOARD");
 		} catch (Exception e) {
 
 			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
@@ -239,7 +240,26 @@ public class HomeController {
 		try {
 
 			model = new ModelAndView("welcome");
+			model.addObject("title", "DASHBOARD");
+			
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			int instituteId = (int) session.getAttribute("instituteId");
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("instId", instituteId);
+			map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
+			map.add("isIqac", userObj.getStaff().getIsIqac());
+			map.add("isHod", userObj.getStaff().getIsHod());
+			map.add("isFaculty", userObj.getStaff().getIsFaculty());
+			map.add("isLibrarian", userObj.getStaff().getIsLibrarian());
+			map.add("isAccOff", userObj.getStaff().getIsAccOff());
+			map.add("isDean", userObj.getStaff().getIsDean());
+			map.add("deptId", userObj.getStaff().getDeptId());
+			map.add("facultyId", userObj.getUserId());
 
+			DashBoardCounts dashBoardCounts = restTemplate.postForObject(Constants.url + "/getPrincipalDashCounts", map, DashBoardCounts.class);
+			model.addObject("dashBoardCounts", dashBoardCounts);
 		} catch (Exception e) {
 
 			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());

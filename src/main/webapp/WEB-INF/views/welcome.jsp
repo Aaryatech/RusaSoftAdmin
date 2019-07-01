@@ -8,8 +8,16 @@
 <html class=" ">
 <head>
 <c:url var="getGraph" value="/getGraph"></c:url>
+<c:url var="getTotStudentPassedAndAppearInFinYrGraphForHod"
+	value="/getTotStudentPassedAndAppearInFinYrGraphForHod"></c:url>
+<c:url var="getAllProgTypStudPlacedGraph"
+	value="/getAllProgTypStudPlacedGraph"></c:url>
+<c:url var="sanctioinalIntakeandNostudentAdmitedproramwise"
+	value="/sanctioinalIntakeandNostudentAdmitedproramwise"></c:url>
 <c:url var="getTotSancIntakeProgramwiseGraph"
 	value="/getTotSancIntakeProgramwiseGraph"></c:url>
+<c:url var="getAllStudSupprtSchemGraph"
+	value="/getAllStudSupprtSchemGraph"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 
@@ -40,7 +48,7 @@
 							<section class="content-header">
 								<h1>Dashboard</h1>
 
-								<div class="top_slt_bx">
+								<!-- <div class="top_slt_bx">
 									<div class="slt_one">
 										<div class="select-style">
 											<select>
@@ -61,7 +69,7 @@
 											</select>
 										</div>
 									</div>
-								</div>
+								</div> -->
 
 
 								<!-- <ol class="breadcrumb">
@@ -72,47 +80,274 @@
 
 							<!-- Main content -->
 							<section class="content">
-
 								<div class="row">
 									<div class="dashboard_list">
-										<div class="col-md-3">
-											<div class="dash_one">
-												<h2 class="desig_nm">Students Admitted</h2>
-												<span class="count_num">2050</span>
-												<!--<a href="#" class="dash_button">Button</a>-->
-												<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
- -->
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="dash_one">
-												<h2 class="desig_nm">No of Books</h2>
-												<span class="count_num">890</span>
-												<!--<a href="#" class="dash_button">Button</a>-->
-												<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
- -->
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="dash_one">
-												<h2 class="desig_nm">Total Faculty</h2>
-												<span class="count_num">350</span>
-												<!--<a href="#" class="dash_button">Button</a>-->
-												<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
- -->
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="dash_one">
-												<h2 class="desig_nm">Total Awards</h2>
-												<span class="count_num">91</span>
-												<!--<a href="#" class="dash_button">Button</a>-->
-												<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
- -->
-											</div>
-										</div>
+										<c:if
+											test="${sessionScope.userObj.staff.isPrincipal==1 || sessionScope.userObj.staff.isIqac==1}">
 
 
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Faculties</h2>
+													<span class="count_num">${dashBoardCounts.totalfaculties}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Faculties With PHD.</h2>
+													<span class="count_num">${dashBoardCounts.totalfacultieswithPHD}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Students</h2>
+													<span class="count_num">${dashBoardCounts.totalstudent}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Programs Available</h2>
+													<span class="count_num">${dashBoardCounts.noofprogram}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Student Teacher Ratio</h2>
+													<span class="count_num">${dashBoardCounts.ratio}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Research Publication</h2>
+													<span class="count_num">${dashBoardCounts.noOfreserchpub}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Book Publication</h2>
+													<span class="count_num">${dashBoardCounts.noofbookpub}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Current Financial Year Budget</h2>
+													<span class="count_num">${dashBoardCounts.currfinyearbudget}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+
+
+
+										</c:if>
+
+										<c:if test="${sessionScope.userObj.staff.isHod==1}">
+
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Programs Added by HOD</h2>
+													<span class="count_num">${dashBoardCounts.noofprogramForHOD}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Faculty Available</h2>
+													<span class="count_num">${dashBoardCounts.totalfacultiesforHOD}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Students Admitted</h2>
+													<span class="count_num">${dashBoardCounts.totalstudentForHOD}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+										</c:if>
+
+										<c:if test="${sessionScope.userObj.staff.isFaculty==1}">
+
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Research Project Title</h2>
+													<span class="count_num"> <c:choose>
+															<c:when
+																test="${not empty dashBoardCounts.researchprojecttitle}">
+																${dashBoardCounts.researchprojecttitle}
+															</c:when>
+															<c:otherwise>
+															-
+															</c:otherwise>
+														</c:choose>
+													</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Research Publication</h2>
+													<span class="count_num">${dashBoardCounts.noOfreserchpubforFaculty}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Book Publication</h2>
+													<span class="count_num">${dashBoardCounts.noofbookpubForFaculty}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Patents Filled</h2>
+													<span class="count_num">${dashBoardCounts.noofpatentsfilled}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+										</c:if>
+
+										<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">
+
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Library usage Per day Faculty</h2>
+													<span class="count_num">${dashBoardCounts.libraryusageperdayfaculty}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Library usage Per day Students</h2>
+													<span class="count_num">${dashBoardCounts.libraryusageperdaystudents}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of Books In Library</h2>
+													<span class="count_num">${dashBoardCounts.noofbooksinlibrary}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">LMS software Name</h2>
+													<span class="count_num">${dashBoardCounts.LMSsoftwarename}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">No of LMS software Users</h2>
+													<span class="count_num">${dashBoardCounts.noofLMSsoftwareusers}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+										</c:if>
+
+										<c:if test="${sessionScope.userObj.staff.isDean==1}">
+
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Research Projects</h2>
+													<span class="count_num">${dashBoardCounts.totalresearchprojects}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total No. of MoUs</h2>
+													<span class="count_num">${dashBoardCounts.totalnoofMOUs}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Total Linkages</h2>
+													<span class="count_num">${dashBoardCounts.totallinkages}</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+											<div class="col-md-3">
+												<div class="dash_one">
+													<h2 class="desig_nm">Funding From GOVT/Non GOVT</h2>
+													<span class="count_num">0</span>
+													<!--<a href="#" class="dash_button">Button</a>-->
+													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
+ -->
+												</div>
+											</div>
+
+										</c:if>
 									</div>
 								</div>
 								<input name="isPrincipal" id="isPrincipal"
@@ -185,6 +420,61 @@
 												<div class="box-body chart-responsive">
 													<div class="chart" id="intake_chart_byprogram"
 														style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+										<!-- end right boxes -->
+									</div>
+									<!-- /.row -->
+								</c:if>
+
+								<c:if test="${sessionScope.userObj.staff.isHod==1}">
+									<div class="row">
+
+										<!-- left boxes -->
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Total Sanctioned Intake and No
+														of Students Admitted Programwise</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="hodgraph1" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Total Students Passed And
+														Student Placed In Final Year</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="hodgraph3" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+
+										</div>
+										<!-- end left boxes -->
+
+										<!-- right boxes -->
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Total Students Passed And
+														Appeared for Final Year</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="hodgraph2" style="height: 300px;"></div>
 												</div>
 
 											</div>
@@ -364,10 +654,11 @@
 			  }); */
 			//BAR CHART
 			var isPrincipal = document.getElementById("isPrincipal").value;
-			  var isIqac = document.getElementById("isIqac").value;
+			var isIqac = document.getElementById("isIqac").value;
+			var isHod = document.getElementById("isHod").value;
 			//alert(isPrincipal);
 
-			if (isPrincipal == 1 || isIqac==1) {
+			if (isPrincipal == 1 || isIqac == 1) {
 
 				$.getJSON('${getGraph}',
 
@@ -428,6 +719,7 @@
 
 						};
 						var materialChart = new google.charts.Bar(chartDiv);
+						//var materialChart = new google.visualization.BarChart(chartDiv)
 
 						function selectHandler() {
 							var selectedItem = materialChart.getSelection()[0];
@@ -449,7 +741,21 @@
 									.convertOptions(materialOptions));
 
 						}
+						/* google.visualization.events.addListener(materialChart, 'ready', function () {
+						     throw new Error('Test Google Error');
+						   });
 
+						   // listen for error
+						   google.visualization.events.addListener(materialChart, 'error', function (err) {
+						     // check error
+						     console.log(err.id, err.message);
+
+						     // remove error
+						     google.visualization.errors.removeError(err.id);
+
+						     // remove all errors
+						     google.visualization.errors.removeAll(container);
+						   }); */
 						drawMaterialChart();
 
 					}
@@ -546,101 +852,446 @@
 					}
 					;
 				});
-				
-				if (isIqac==1) {
-					
-					$.getJSON('${getTotSancIntakeProgramwiseGraph}',
 
-							{
+				if (isIqac == 1) {
 
-								ajax : 'true'
+					$
+							.getJSON(
+									'${getAllStudSupprtSchemGraph}',
 
-							}, function(data) {
+									{
 
-								google.charts.load('current', {
-									'packages' : [ 'corechart', 'bar' ]
-								});
-								google.charts.setOnLoadCallback(drawStuff);
-								//alert(data);
-								function drawStuff() {
+										ajax : 'true'
 
-									var chartDiv = document
-											.getElementById('student_support_scheme');
-									//document.getElementById("bar-chart").style.border = "thin dotted red";
-									var dataTable = new google.visualization.DataTable();
+									},
+									function(data) {
 
-									dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+										google.charts.load('current', {
+											'packages' : [ 'corechart', 'bar' ]
+										});
+										google.charts
+												.setOnLoadCallback(drawStuff);
+										//alert(data);
+										function drawStuff() {
 
-									dataTable.addColumn('number', 'Sanctioned Intake');
-									dataTable.addColumn('number', 'Admitted Student');
-									$.each(data,
-											function(key, dt) {
+											var chartDiv = document
+													.getElementById('student_support_scheme');
+											//document.getElementById("bar-chart").style.border = "thin dotted red";
+											var dataTable = new google.visualization.DataTable();
 
-												var pName = dt.programName + "-"
-														+ dt.nameOfProgram;
+											dataTable.addColumn('string',
+													'academic year'); // Implicit domain column.
 
-												dataTable.addRows([
+											dataTable.addColumn('number',
+													'Total Student');
+											dataTable.addColumn('number',
+													'Benifited Student');
+											$
+													.each(
+															data,
+															function(key, dt) {
 
-												[ pName, dt.sancIntake, dt.totalAdmitted ]
+																/* var pName = dt.programName
+																		+ "-"
+																		+ dt.nameOfProgram; */
 
-												]);
+																dataTable
+																		.addRows([
 
-											})
+																		[
+																				dt.schemeName,
+																				dt.noCurrentAdmitedStnt,
+																				dt.noStudentBenifited ]
 
-									var materialOptions = {
-										legend : {
-											position : 'top'
-										},
-										colors : [ 'orange', 'blue' ],
-										hAxis : {
-											title : 'PROGRAM',
-											titleTextStyle : {
-												color : 'black'
-											},
-											count : -1,
-											viewWindowMode : 'pretty',
-											slantedText : true
-										},
-										vAxis : {
-											title : 'VALUE',
-											titleTextStyle : {
-												color : 'black'
-											},
-											count : -1,
-											format : '#'
-										},
+																		]);
 
-									};
-									var materialChart = new google.charts.Bar(chartDiv);
+															})
 
-									function selectHandler() {
-										var selectedItem = materialChart.getSelection()[0];
-										if (selectedItem) {
-											var topping = dataTable.getValue(
-													selectedItem.row, 0);
+											var materialOptions = {
+												legend : {
+													position : 'top'
+												},
+												colors : [ 'orange', 'blue' ],
+												hAxis : {
+													title : 'AGENCY NAME',
+													titleTextStyle : {
+														color : 'black'
+													},
+													count : -1,
+													viewWindowMode : 'pretty',
+													slantedText : true
+												},
+												vAxis : {
+													title : 'VALUE',
+													titleTextStyle : {
+														color : 'black'
+													},
+													count : -1,
+													format : '#'
+												},
 
-											i = selectedItem.row, 0;
-											itemSellBill(data[i].deptCode);
+											};
+											var materialChart = new google.charts.Bar(
+													chartDiv);
+
+											function selectHandler() {
+												var selectedItem = materialChart
+														.getSelection()[0];
+												if (selectedItem) {
+													var topping = dataTable
+															.getValue(
+																	selectedItem.row,
+																	0);
+
+													i = selectedItem.row, 0;
+													itemSellBill(data[i].deptCode);
+
+												}
+											}
+
+											function drawMaterialChart() {
+
+												google.visualization.events
+														.addListener(
+																materialChart,
+																'select',
+																selectHandler);
+												materialChart
+														.draw(
+																dataTable,
+																google.charts.Bar
+																		.convertOptions(materialOptions));
+
+											}
+
+											drawMaterialChart();
 
 										}
-									}
-
-									function drawMaterialChart() {
-
-										google.visualization.events.addListener(
-												materialChart, 'select', selectHandler);
-										materialChart.draw(dataTable, google.charts.Bar
-												.convertOptions(materialOptions));
-
-									}
-
-									drawMaterialChart();
-
-								}
-								;
-							}); 
+										;
+									});
 				}
 			}
+
+			if (isHod == 1) {
+
+				$.getJSON('${getTotStudentPassedAndAppearInFinYrGraphForHod}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					/*   google.charts.load('current', {
+						'packages' : [ 'corechart']
+					});
+					google.charts.setOnLoadCallback(drawStuff);
+					 
+					function drawStuff() {
+
+						var chartDiv = document.getElementById('hodgraph2');
+						 
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Student Passed');
+						dataTable.addColumn('number', 'Student Appeared');
+						$.each(data,
+								function(key, dt) {
+
+									var pName = dt.programName + "-"
+											+ dt.nameOfProgram;
+
+									dataTable.addRows([
+
+									[ pName, dt.noStudPass, dt.noStudAppear ]
+
+									]);
+
+								})
+
+						var materialOptions = {
+							legend : {
+								position : 'top'
+							},
+							colors : [ 'orange', 'blue' ],
+							hAxis : {
+								title : 'PROGRAM NAME',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								viewWindowMode : 'pretty',
+								slantedText : true,
+								slantedTextAngle: 60
+							},
+							vAxis : {
+								title : 'VALUE',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1, 
+								format : '#'
+							},
+
+						};
+						var materialChart = new google.charts.Bar(chartDiv);
+						 
+						function selectHandler() {
+							var selectedItem = materialChart.getSelection()[0];
+							if (selectedItem) {
+								var topping = dataTable.getValue(
+										selectedItem.row, 0);
+
+								i = selectedItem.row, 0;
+								itemSellBill(data[i].deptCode);
+
+							}
+						}
+
+						function drawMaterialChart() {
+
+							google.visualization.events.addListener(
+									materialChart, 'select', selectHandler);
+							materialChart.draw(dataTable, google.charts.Bar
+									.convertOptions(materialOptions));
+
+						}
+
+						drawMaterialChart();
+
+					}
+					; */  
+					
+					
+					 google.charts.load('current', {'packages':['corechart']});
+					google.charts.setOnLoadCallback(drawChart);
+
+					function drawChart() {
+					  
+					  var dataTable = new google.visualization.DataTable();
+					  
+					  dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Student Passed');
+						dataTable.addColumn('number', 'Student Appeared');
+						$.each(data,
+								function(key, dt) {
+
+									var pName = dt.programName + "-"
+											+ dt.nameOfProgram;
+
+									dataTable.addRows([
+
+									[ pName, dt.noStudPass, dt.noStudAppear ]
+
+									]);
+
+								})
+								/* slantedTextAngle: 60 */
+					   var options = {
+					     hAxis: {
+					       title: "Month",
+					       textPosition: 'out',
+					       slantedText: true  
+					    },
+					    vAxis: {
+					      title: 'Revenue',
+					      minValue: 0,
+					      viewWindow: { min: 0 },
+					      format: '0',
+					    }, 
+					    colors : [ 'orange', 'blue' ],
+					    theme: 'material'
+					  };
+					  var chart = new google.visualization.ColumnChart(document.getElementById('hodgraph2'));
+
+					  chart.draw(dataTable, options);
+					} 
+				});
+
+				$.getJSON('${sanctioinalIntakeandNostudentAdmitedproramwise}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart', 'bar' ]
+					});
+					google.charts.setOnLoadCallback(drawStuff);
+					//alert(data);
+					function drawStuff() {
+
+						var chartDiv = document.getElementById('hodgraph1');
+						//document.getElementById("bar-chart").style.border = "thin dotted red";
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Sanctioned Intake');
+						dataTable.addColumn('number', 'Admitted Student');
+						$.each(data, function(key, dt) {
+
+							/* var pName = dt.programName
+								+ "-"
+								+ dt.nameOfProgram;   */
+
+							dataTable.addRows([
+
+							[ dt.programName, dt.sancIntake, dt.totalAdmitted ]
+
+							]);
+
+						})
+
+						var materialOptions = {
+							legend : {
+								position : 'top'
+							},
+							colors : [ 'orange', 'blue' ],
+							hAxis : {
+								title : 'PROGRAM NAME',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								viewWindowMode : 'pretty',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								format : '#'
+							},
+
+						};
+						var materialChart = new google.charts.Bar(chartDiv);
+						//var materialChart = new google.visualization.BarChart(chartDiv);
+						function selectHandler() {
+							var selectedItem = materialChart.getSelection()[0];
+							if (selectedItem) {
+								var topping = dataTable.getValue(
+										selectedItem.row, 0);
+
+								i = selectedItem.row, 0;
+								itemSellBill(data[i].deptCode);
+
+							}
+						}
+
+						function drawMaterialChart() {
+
+							google.visualization.events.addListener(
+									materialChart, 'select', selectHandler);
+							materialChart.draw(dataTable, google.charts.Bar
+									.convertOptions(materialOptions));
+
+						}
+
+						drawMaterialChart();
+
+					}
+					;
+				});
+
+				$.getJSON('${getAllProgTypStudPlacedGraph}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart', 'bar' ]
+					});
+					google.charts.setOnLoadCallback(drawStuff);
+					//alert(data);
+					function drawStuff() {
+
+						var chartDiv = document.getElementById('hodgraph3');
+						//document.getElementById("bar-chart").style.border = "thin dotted red";
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Student Passed');
+						dataTable.addColumn('number', 'Student Placed');
+						$.each(data, function(key, dt) {
+
+							/* var pName = dt.programName
+								+ "-"
+								+ dt.nameOfProgram;   */
+
+							dataTable.addRows([
+
+							[ dt.programName, dt.noStudPass, dt.noStudentPlaced ]
+
+							]);
+
+						})
+
+						var materialOptions = {
+							legend : {
+								position : 'top'
+							},
+							colors : [ 'orange', 'blue' ],
+							hAxis : {
+								title : 'PROGRAM NAME',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								viewWindowMode : 'pretty',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								format : '#'
+							},
+
+						};
+						var materialChart = new google.charts.Bar(chartDiv);
+						//var materialChart = new google.visualization.BarChart(chartDiv);
+						function selectHandler() {
+							var selectedItem = materialChart.getSelection()[0];
+							if (selectedItem) {
+								var topping = dataTable.getValue(
+										selectedItem.row, 0);
+
+								i = selectedItem.row, 0;
+								itemSellBill(data[i].deptCode);
+
+							}
+						}
+
+						function drawMaterialChart() {
+
+							google.visualization.events.addListener(
+									materialChart, 'select', selectHandler);
+							materialChart.draw(dataTable, google.charts.Bar
+									.convertOptions(materialOptions));
+
+						}
+
+						drawMaterialChart();
+
+					}
+					;
+				});
+			}
+			 
 		});
 	</script>
 </body>
