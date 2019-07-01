@@ -20,7 +20,7 @@
 	value="/getAllStudSupprtSchemGraph"></c:url>
 <c:url var="getGraphForNoofTeacherStudUsingLib"
 	value="/getGraphForNoofTeacherStudUsingLib"></c:url>
-	<c:url var="getStudpassAppearedTaughByFacGraph"
+<c:url var="getStudpassAppearedTaughByFacGraph"
 	value="/getStudpassAppearedTaughByFacGraph"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
@@ -374,10 +374,10 @@
 									value="${sessionScope.userObj.staff.isTpo}" type="hidden">
 								<input name="isExtActOff" id="isExtActOff"
 									value="${sessionScope.userObj.staff.isExtActOff}" type="hidden">
+								<div class="row">
+									<c:if
+										test="${sessionScope.userObj.staff.isPrincipal==1 || sessionScope.userObj.staff.isIqac==1}">
 
-								<c:if
-									test="${sessionScope.userObj.staff.isPrincipal==1 || sessionScope.userObj.staff.isIqac==1}">
-									<div class="row">
 
 										<!-- left boxes -->
 										<div class="col-md-6">
@@ -393,23 +393,9 @@
 												</div>
 
 											</div>
-											<c:if test="${sessionScope.userObj.staff.isIqac==1}">
-												<div class="box box-primary">
-													<div class="box-header with-border">
-														<h3 class="box-title">Student Support Schemes</h3>
-
-													</div>
-													<div class="box-body chart-responsive">
-														<div class="chart" id="student_support_scheme"
-															style="height: 300px;"></div>
-													</div>
-
-												</div>
-
-											</c:if>
-
 
 										</div>
+ 
 										<!-- end left boxes -->
 
 										<!-- right boxes -->
@@ -429,13 +415,29 @@
 											</div>
 
 										</div>
-										<!-- end right boxes -->
-									</div>
-									<!-- /.row -->
-								</c:if>
+										
+										<c:if test="${sessionScope.userObj.staff.isIqac==1}">
+											<div class="col-md-6">
+												<div class="box box-primary">
+													<div class="box-header with-border">
+														<h3 class="box-title">Student Support Schemes</h3>
 
-								<c:if test="${sessionScope.userObj.staff.isHod==1}">
-									<div class="row">
+													</div>
+													<div class="box-body chart-responsive">
+														<div class="chart" id="student_support_scheme"
+															style="height: 300px;"></div>
+													</div>
+
+												</div>
+											</div>
+										</c:if>
+										<!-- end right boxes -->
+
+										<!-- /.row -->
+									</c:if>
+
+									<c:if test="${sessionScope.userObj.staff.isHod==1}">
+
 
 										<!-- left boxes -->
 										<div class="col-md-6">
@@ -452,6 +454,8 @@
 
 											</div>
 
+										</div>
+										<div class="col-md-6">
 											<div class="box box-primary">
 												<div class="box-header with-border">
 													<h3 class="box-title">Total Students Passed And
@@ -463,8 +467,6 @@
 												</div>
 
 											</div>
-
-
 										</div>
 										<!-- end left boxes -->
 
@@ -485,12 +487,12 @@
 
 										</div>
 										<!-- end right boxes -->
-									</div>
-									<!-- /.row -->
-								</c:if>
 
-								<c:if test="${sessionScope.userObj.staff.isFaculty==1}">
-									<div class="row">
+										<!-- /.row -->
+									</c:if>
+
+									<c:if test="${sessionScope.userObj.staff.isFaculty==1}">
+
 
 										<!-- left boxes -->
 										<div class="col-md-6">
@@ -502,8 +504,7 @@
 
 												</div>
 												<div class="box-body chart-responsive">
-													<div class="chart" id="facultyGraph"
-														style="height: 300px;"></div>
+													<div class="chart" id="facultyGraph" style="height: 300px;"></div>
 												</div>
 
 											</div>
@@ -511,12 +512,12 @@
 										</div>
 										<!-- end left boxes -->
 
-									</div>
-									<!-- /.row -->
-								</c:if>
 
-								<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">
-									<div class="row">
+										<!-- /.row -->
+									</c:if>
+
+									<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">
+
 
 										<!-- left boxes -->
 										<div class="col-md-6">
@@ -537,10 +538,10 @@
 										</div>
 										<!-- end left boxes -->
 
-									</div>
-									<!-- /.row -->
-								</c:if>
 
+										<!-- /.row -->
+									</c:if>
+								</div>
 								<!-- <div class="row">
 
 									left boxes
@@ -714,7 +715,7 @@
 			var isHod = document.getElementById("isHod").value;
 			var isLibrarian = document.getElementById("isLibrarian").value;
 			var isFaculty = document.getElementById("isFaculty").value;
-			
+
 			//alert(isPrincipal);
 
 			if (isPrincipal == 1 || isIqac == 1) {
@@ -1450,7 +1451,7 @@
 					;
 				});
 			}
-			
+
 			if (isFaculty == 1) {
 
 				$.getJSON('${getStudpassAppearedTaughByFacGraph}',
@@ -1468,8 +1469,7 @@
 					//alert(data);
 					function drawStuff() {
 
-						var chartDiv = document
-								.getElementById('facultyGraph');
+						var chartDiv = document.getElementById('facultyGraph');
 						//document.getElementById("bar-chart").style.border = "thin dotted red";
 						var dataTable = new google.visualization.DataTable();
 
