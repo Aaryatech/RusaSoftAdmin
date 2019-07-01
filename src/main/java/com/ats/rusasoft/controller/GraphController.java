@@ -27,7 +27,9 @@ import com.ats.rusasoft.model.graph.GetTotStudentPassedAndAppearInFinYr;
 import com.ats.rusasoft.model.graph.ProgSanctnIntake;
 import com.ats.rusasoft.model.graph.ProgTypStudPlacedGraph;
 import com.ats.rusasoft.model.graph.SancIntakeStudAdmittedGraph;
-import com.ats.rusasoft.model.graph.StudSupprtSchemGraph; 
+import com.ats.rusasoft.model.graph.StudSupprtSchemGraph;
+import com.ats.rusasoft.model.graph.StudpassApperaedTaughByFac;
+import com.ats.rusasoft.model.graph.TeacherStudUsingLibrary; 
 
 @Controller
 @Scope("session")
@@ -198,7 +200,63 @@ public class GraphController {
 					ProgTypStudPlacedGraph[].class);
 			list = new ArrayList<>(Arrays.asList(quolArray));
 			
-			System.err.println("ProgTypStudPlacedGraph GC " + list.toString());
+			//System.err.println("ProgTypStudPlacedGraph GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/getGraphForNoofTeacherStudUsingLib", method = RequestMethod.GET)
+	public @ResponseBody List<TeacherStudUsingLibrary> getGraphForNoofTeacherStudUsingLib(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<TeacherStudUsingLibrary> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+			int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			  
+			map.add("instId", instituteId);
+			TeacherStudUsingLibrary[] quolArray = restTemplate.postForObject(Constants.url + "/getGraphForNoofTeacherStudUsingLib", map,
+					TeacherStudUsingLibrary[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			//System.err.println("TeacherStudUsingLibrary GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/getStudpassAppearedTaughByFacGraph", method = RequestMethod.GET)
+	public @ResponseBody List<StudpassApperaedTaughByFac> getStudpassAppearedTaughByFacGraph(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<StudpassApperaedTaughByFac> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+			int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("facultyId", userObj.getUserId());
+			map.add("instId", instituteId);
+			StudpassApperaedTaughByFac[] quolArray = restTemplate.postForObject(Constants.url + "/getStudpassAppearedTaughByFacGraph", map,
+					StudpassApperaedTaughByFac[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			System.err.println("StudpassApperaedTaughByFac GC " + list.toString());
 			
 		}catch(Exception e) {
 			e.printStackTrace();

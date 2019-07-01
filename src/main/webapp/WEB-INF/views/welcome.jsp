@@ -18,6 +18,10 @@
 	value="/getTotSancIntakeProgramwiseGraph"></c:url>
 <c:url var="getAllStudSupprtSchemGraph"
 	value="/getAllStudSupprtSchemGraph"></c:url>
+<c:url var="getGraphForNoofTeacherStudUsingLib"
+	value="/getGraphForNoofTeacherStudUsingLib"></c:url>
+	<c:url var="getStudpassAppearedTaughByFacGraph"
+	value="/getStudpassAppearedTaughByFacGraph"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 
@@ -485,6 +489,58 @@
 									<!-- /.row -->
 								</c:if>
 
+								<c:if test="${sessionScope.userObj.staff.isFaculty==1}">
+									<div class="row">
+
+										<!-- left boxes -->
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Total Students Passed And
+														Student Appeared For Subjects Taughted by Faculty</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="facultyGraph"
+														style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+										<!-- end left boxes -->
+
+									</div>
+									<!-- /.row -->
+								</c:if>
+
+								<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">
+									<div class="row">
+
+										<!-- left boxes -->
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Total Students And Faculty using
+														Library Resources</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="librariangraph"
+														style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+										<!-- end left boxes -->
+
+									</div>
+									<!-- /.row -->
+								</c:if>
+
 								<!-- <div class="row">
 
 									left boxes
@@ -656,6 +712,9 @@
 			var isPrincipal = document.getElementById("isPrincipal").value;
 			var isIqac = document.getElementById("isIqac").value;
 			var isHod = document.getElementById("isHod").value;
+			var isLibrarian = document.getElementById("isLibrarian").value;
+			var isFaculty = document.getElementById("isFaculty").value;
+			
 			//alert(isPrincipal);
 
 			if (isPrincipal == 1 || isIqac == 1) {
@@ -1062,17 +1121,18 @@
 						drawMaterialChart();
 
 					}
-					; */  
-					
-					
-					 google.charts.load('current', {'packages':['corechart']});
+					; */
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
 					google.charts.setOnLoadCallback(drawChart);
 
 					function drawChart() {
-					  
-					  var dataTable = new google.visualization.DataTable();
-					  
-					  dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
 
 						dataTable.addColumn('number', 'Student Passed');
 						dataTable.addColumn('number', 'Student Appeared');
@@ -1089,26 +1149,29 @@
 									]);
 
 								})
-								/* slantedTextAngle: 60 */
-					   var options = {
-					     hAxis: {
-					       title: "Month",
-					       textPosition: 'out',
-					       slantedText: true  
-					    },
-					    vAxis: {
-					      title: 'Revenue',
-					      minValue: 0,
-					      viewWindow: { min: 0 },
-					      format: '0',
-					    }, 
-					    colors : [ 'orange', 'blue' ],
-					    theme: 'material'
-					  };
-					  var chart = new google.visualization.ColumnChart(document.getElementById('hodgraph2'));
+						/* slantedTextAngle: 60 */
+						var options = {
+							hAxis : {
+								title : "Month",
+								textPosition : 'out',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'Revenue',
+								minValue : 0,
+								viewWindow : {
+									min : 0
+								},
+								format : '0',
+							},
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
+						};
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('hodgraph2'));
 
-					  chart.draw(dataTable, options);
-					} 
+						chart.draw(dataTable, options);
+					}
 				});
 
 				$.getJSON('${sanctioinalIntakeandNostudentAdmitedproramwise}',
@@ -1230,11 +1293,13 @@
 								+ "-"
 								+ dt.nameOfProgram;   */
 
-							dataTable.addRows([
+							dataTable
+									.addRows([
 
-							[ dt.programName, dt.noStudPass, dt.noStudentPlaced ]
+									[ dt.programName, dt.noStudPass,
+											dt.noStudentPlaced ]
 
-							]);
+									]);
 
 						})
 
@@ -1291,7 +1356,195 @@
 					;
 				});
 			}
-			 
+
+			if (isLibrarian == 1) {
+
+				$.getJSON('${getGraphForNoofTeacherStudUsingLib}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart', 'bar' ]
+					});
+					google.charts.setOnLoadCallback(drawStuff);
+					//alert(data);
+					function drawStuff() {
+
+						var chartDiv = document
+								.getElementById('librariangraph');
+						//document.getElementById("bar-chart").style.border = "thin dotted red";
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'No. of Faculty');
+						dataTable.addColumn('number', 'No. of Student');
+						$.each(data, function(key, dt) {
+
+							/* var pName = dt.programName
+									+ "-"
+									+ dt.nameOfProgram; */
+
+							dataTable.addRows([
+
+							[ dt.acYear, dt.avgTeacher, dt.avgStudent ]
+
+							]);
+
+						})
+
+						var materialOptions = {
+							legend : {
+								position : 'top'
+							},
+							colors : [ 'orange', 'blue' ],
+							hAxis : {
+								title : 'AGENCY NAME',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								viewWindowMode : 'pretty',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								format : '#'
+							},
+
+						};
+						var materialChart = new google.charts.Bar(chartDiv);
+
+						function selectHandler() {
+							var selectedItem = materialChart.getSelection()[0];
+							if (selectedItem) {
+								var topping = dataTable.getValue(
+										selectedItem.row, 0);
+
+								i = selectedItem.row, 0;
+								itemSellBill(data[i].deptCode);
+
+							}
+						}
+
+						function drawMaterialChart() {
+
+							google.visualization.events.addListener(
+									materialChart, 'select', selectHandler);
+							materialChart.draw(dataTable, google.charts.Bar
+									.convertOptions(materialOptions));
+
+						}
+
+						drawMaterialChart();
+
+					}
+					;
+				});
+			}
+			
+			if (isFaculty == 1) {
+
+				$.getJSON('${getStudpassAppearedTaughByFacGraph}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart', 'bar' ]
+					});
+					google.charts.setOnLoadCallback(drawStuff);
+					//alert(data);
+					function drawStuff() {
+
+						var chartDiv = document
+								.getElementById('facultyGraph');
+						//document.getElementById("bar-chart").style.border = "thin dotted red";
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Students Passed');
+						dataTable.addColumn('number', 'Students Appeared');
+						$.each(data, function(key, dt) {
+
+							/* var pName = dt.programName
+									+ "-"
+									+ dt.nameOfProgram; */
+
+							dataTable.addRows([
+
+							[ dt.subName, dt.subStuPassed, dt.subStuAppear ]
+
+							]);
+
+						})
+
+						var materialOptions = {
+							legend : {
+								position : 'top'
+							},
+							colors : [ 'orange', 'blue' ],
+							hAxis : {
+								title : 'SUB NAME',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								viewWindowMode : 'pretty',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								titleTextStyle : {
+									color : 'black'
+								},
+								count : -1,
+								format : '#'
+							},
+
+						};
+						var materialChart = new google.charts.Bar(chartDiv);
+
+						function selectHandler() {
+							var selectedItem = materialChart.getSelection()[0];
+							if (selectedItem) {
+								var topping = dataTable.getValue(
+										selectedItem.row, 0);
+
+								i = selectedItem.row, 0;
+								itemSellBill(data[i].deptCode);
+
+							}
+						}
+
+						function drawMaterialChart() {
+
+							google.visualization.events.addListener(
+									materialChart, 'select', selectHandler);
+							materialChart.draw(dataTable, google.charts.Bar
+									.convertOptions(materialOptions));
+
+						}
+
+						drawMaterialChart();
+
+					}
+					;
+				});
+			}
+
 		});
 	</script>
 </body>
