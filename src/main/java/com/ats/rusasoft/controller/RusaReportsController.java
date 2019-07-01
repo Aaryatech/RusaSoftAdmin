@@ -10907,58 +10907,6 @@ public class RusaReportsController {
 
 		}
 
-	}
-	
-	/****************************************Graphs************************************/
-	
-	@RequestMapping(value = "/showStudSupprtSchemGraph", method = RequestMethod.POST)
-	public void showStudSupprtSchemGraph(HttpServletRequest request, HttpServletResponse response) {
-		
-		HttpSession session = request.getSession();
-		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-		int instituteId = (int) session.getAttribute("instituteId");
-		
-		ModelAndView model = null;
-		try {
-			MultiValueMap<String, Object> map = map = new LinkedMultiValueMap<>();
-
-			map.add("instId", instituteId);
-			
-			StudSupprtSchemGraph[]  studSchemArr = rest.postForObject(Constants.url+"/getAllStudSupprtSchemGraph", map, StudSupprtSchemGraph[].class);
-			List<StudSupprtSchemGraph> studSchemList = new ArrayList<>(Arrays.asList(studSchemArr));
-			System.out.println("Stud Scheme List-------"+studSchemList);
-			
-			
-		}catch (Exception e) {
-			e.getMessage();
-			// TODO: handle exception
-		}
-		
-	}
-	
-	@RequestMapping(value = "/showProgSanctnIntake", method = RequestMethod.POST)
-	public void showProgSanctnIntake(HttpServletRequest request, HttpServletResponse response) {
-		
-		HttpSession session = request.getSession();
-		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-		int instituteId = (int) session.getAttribute("instituteId");
-		
-		ModelAndView model = null;
-		try {
-			MultiValueMap<String, Object> map = map = new LinkedMultiValueMap<>();
-
-			map.add("instId", instituteId);
-			
-			ProgSanctnIntake[] showprgIntkArr = rest.postForObject(Constants.url+"/getAllProgSanctnIntakeGraph", map, ProgSanctnIntake[].class);
-			List<ProgSanctnIntake> showprgIntkList = new ArrayList<>(Arrays.asList(showprgIntkArr));
-			System.out.println("Prg Sacntn Intk List-------"+showprgIntkList);
-			
-			
-		}catch (Exception e) {
-			e.getMessage();
-			// TODO: handle exception
-		}
-		
-	}
+	}	
 }
 
