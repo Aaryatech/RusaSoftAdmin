@@ -34,6 +34,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.ExceUtil;
 import com.ats.rusasoft.commons.ExportToExcel;
 import com.ats.rusasoft.master.model.Program;
+import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.instprofile.InstStakeholderFeedback;
 import com.ats.rusasoft.model.reports.AvgPerPlacement;
 import com.ats.rusasoft.model.reports.AwrdRecgAgnstExtActivityReport;
@@ -58,10 +59,12 @@ import com.ats.rusasoft.model.reports.NoInitivAddrsLoctnAdvDisadv;
 import com.ats.rusasoft.model.reports.NoOfLinkages;
 import com.ats.rusasoft.model.reports.PerNewCource;
 import com.ats.rusasoft.model.reports.PerProgCbseElectiveCourse;
+import com.ats.rusasoft.model.reports.ProgSanctnIntake;
 import com.ats.rusasoft.model.reports.ResrchProjectGrants;
 import com.ats.rusasoft.model.reports.StudCompRatioReport;
 import com.ats.rusasoft.model.reports.StudPrfrmInFinlYr;
 import com.ats.rusasoft.model.reports.StudProgression;
+import com.ats.rusasoft.model.reports.StudSupprtSchemGraph;
 import com.ats.rusasoft.model.reports.StudTeachrRatio;
 import com.ats.rusasoft.model.reports.TeacExpFullTimFac;
 import com.ats.rusasoft.model.reports.TeacherAwardRecognitn;
@@ -10906,5 +10909,56 @@ public class RusaReportsController {
 
 	}
 	
+	/****************************************Graphs************************************/
+	
+	@RequestMapping(value = "/showStudSupprtSchemGraph", method = RequestMethod.POST)
+	public void showStudSupprtSchemGraph(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		int instituteId = (int) session.getAttribute("instituteId");
+		
+		ModelAndView model = null;
+		try {
+			MultiValueMap<String, Object> map = map = new LinkedMultiValueMap<>();
+
+			map.add("instId", instituteId);
+			
+			StudSupprtSchemGraph[]  studSchemArr = rest.postForObject(Constants.url+"/getAllStudSupprtSchemGraph", map, StudSupprtSchemGraph[].class);
+			List<StudSupprtSchemGraph> studSchemList = new ArrayList<>(Arrays.asList(studSchemArr));
+			System.out.println("Stud Scheme List-------"+studSchemList);
+			
+			
+		}catch (Exception e) {
+			e.getMessage();
+			// TODO: handle exception
+		}
+		
+	}
+	
+	@RequestMapping(value = "/showProgSanctnIntake", method = RequestMethod.POST)
+	public void showProgSanctnIntake(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+		int instituteId = (int) session.getAttribute("instituteId");
+		
+		ModelAndView model = null;
+		try {
+			MultiValueMap<String, Object> map = map = new LinkedMultiValueMap<>();
+
+			map.add("instId", instituteId);
+			
+			ProgSanctnIntake[] showprgIntkArr = rest.postForObject(Constants.url+"/getAllProgSanctnIntakeGraph", map, ProgSanctnIntake[].class);
+			List<ProgSanctnIntake> showprgIntkList = new ArrayList<>(Arrays.asList(showprgIntkArr));
+			System.out.println("Prg Sacntn Intk List-------"+showprgIntkList);
+			
+			
+		}catch (Exception e) {
+			e.getMessage();
+			// TODO: handle exception
+		}
+		
+	}
 }
 
