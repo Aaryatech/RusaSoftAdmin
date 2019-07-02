@@ -137,6 +137,7 @@
 														</label>
 														<div class="col-sm-9">
 															<input type="text" class="form-control datepicker"
+																data-format="dd-mm-yyyy" data-end-date="0d" 
 																id="purchaseDate" name="purchaseDate"
 																onkeypress='return restrictAlphabets(event)'
 																onchange="trim(this)" autocomplete="off"
@@ -643,7 +644,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -652,7 +653,7 @@
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		function submit_f(view) {
 			//alert(view);
