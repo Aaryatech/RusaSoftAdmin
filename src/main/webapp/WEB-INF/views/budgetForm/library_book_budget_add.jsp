@@ -154,7 +154,26 @@
 
 										</div>
 										
+									<div class="form-group">
 
+											<label class="control-label col-sm-3"
+												for="infra_budget_title">Sanctioned Budget for 
+												Books ${budRupees}<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="number" class="form-control" min="0"
+													onchange="trim(this)" id="sanctn_book_budgt"
+													autocomplete="off"
+													onkeypress='return restrictAlphabets(event)'
+													name="sanctn_book_budgt"
+													value="${budget.exInt2}"
+													placeholder="Sanctioned Budget for Books ${budRupees}"> <span
+													class="error_form text-danger" id="error_sanctn_budgt"
+													style="display: none;">Please Enter Sanctioned Budget for 
+													 Books.</span>
+
+											</div>
+										</div>
 
 										<div class="form-group">
 
@@ -390,6 +409,21 @@
 										.hide()
 							}
             				
+            				if (!$("#sanctn_book_budgt").val()
+									|| !validateZeroNo($(
+											"#sanctn_book_budgt")
+											.val())) {
+								
+								isError = true;
+								$("#sanctn_book_budgt")
+										.addClass(
+												"has-error")
+									$("#error_sanctn_budgt")
+										.show()
+							} else {
+								$("#error_sanctn_budgt")
+										.hide()
+							}
             				
             				if (!$("#expenditure_on_journals_purchase").val()
 									|| !validateZeroNo($(

@@ -238,9 +238,14 @@
 																<c:forEach items="${studAdmCastList}" var="cast"
 																	varStatus="count">
 																	<tr>
-																		<td>${count.index+1 }R</td>
+																		<td>${count.index+1}</td>
 																		<td>${cast.castName}</td>
 
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="seatCount()" class="sit"
+																			onchange="validateSeatCnt(${cast.castId})"
+																			id="seats${cast.castId}" name="seats${cast.castId}"
+																			value="${cast.seats}" required></td>
 																		<td><input type="number" min="0" max="99999"
 																			onkeyup="calculateSum()" class="txt"
 																			id="cast_m${cast.studentCatId}"
@@ -359,6 +364,7 @@ function validateSeatCnt(castId){
 		
 	}
 	calculateSum();
+	seatCount();
 }
 </script>
 
@@ -560,7 +566,6 @@ function validateSeatCnt(castId){
 		
 		
 		$(document).ready(function() {
-
 			$(".sit").each(function() {
 				$(this).keyup(function() {
 					seatCount();

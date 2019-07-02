@@ -357,7 +357,7 @@ public class BudgetController {
 				lib.setDelStatus(1);
 				lib.setIsActive(1);
 				lib.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
-				lib.setExInt2(1);
+				lib.setExInt2(Integer.parseInt(request.getParameter("sanctn_book_budgt")));
 				lib.setExVar1(request.getParameter("funding_from"));
 				lib.setExVar2(request.getParameter("otherSource"));
 

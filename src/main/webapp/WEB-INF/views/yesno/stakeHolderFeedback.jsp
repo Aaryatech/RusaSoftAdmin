@@ -77,7 +77,7 @@ table, th, td {
 							</div>
 
 						</header>
-<c:if test="${sessionScope.successMsg!=null}">
+						<c:if test="${sessionScope.successMsg!=null}">
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -146,9 +146,9 @@ table, th, td {
 																	<td>
 																		<div id="otherprevresps${tempFb.fbFromId}">
 																			<div class="form-group">
-																				<label class="control-label col-sm-3" for="status">Select
+																				<!-- <label class="control-label col-sm-3" for="status">Select
 																					Year <span class="text-danger">*</span>
-																				</label>
+																				</label> -->
 																				<div class="col-sm-5">
 																					<select id="hod_quolf"
 																						name="quolif${tempFb.fbFromId}"
@@ -242,9 +242,9 @@ table, th, td {
 																	<td>
 																		<div id="otherprevresps${stakeFblist.feedbackId}">
 																			<div class="form-group">
-																				<label class="control-label col-sm-3" for="status">Select
+																				<!-- <label class="control-label col-sm-3" for="status">Select
 																					Year <span class="text-danger">*</span>
-																				</label>
+																				</label> -->
 																				<div class="col-sm-5">
 																					<select id="hod_quolf"
 																						name="quolif${stakeFblist.feedbackId}"
