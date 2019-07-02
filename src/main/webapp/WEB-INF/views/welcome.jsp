@@ -727,16 +727,14 @@
 					ajax : 'true'
 
 				}, function(data) {
-
+  
 					google.charts.load('current', {
-						'packages' : [ 'corechart', 'bar' ]
+						'packages' : [ 'corechart' ]
 					});
-					google.charts.setOnLoadCallback(drawStuff);
-					//alert(data);
-					function drawStuff() {
+					google.charts.setOnLoadCallback(drawChart);
 
-						var chartDiv = document.getElementById('intake_chart');
-						//document.getElementById("bar-chart").style.border = "thin dotted red";
+					function drawChart() {
+
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
@@ -753,73 +751,29 @@
 							]);
 
 						})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
+						/* slantedTextAngle: 60 */
+						var options = {
 							hAxis : {
-								title : 'YEAR',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
+								title : "YEAR",
+								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
 								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								count : -1,
-								format : '#'
+								format : '0',
 							},
-
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
 						};
-						var materialChart = new google.charts.Bar(chartDiv);
-						//var materialChart = new google.visualization.BarChart(chartDiv)
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('intake_chart'));
 
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
-
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-						/* google.visualization.events.addListener(materialChart, 'ready', function () {
-						     throw new Error('Test Google Error');
-						   });
-
-						   // listen for error
-						   google.visualization.events.addListener(materialChart, 'error', function (err) {
-						     // check error
-						     console.log(err.id, err.message);
-
-						     // remove error
-						     google.visualization.errors.removeError(err.id);
-
-						     // remove all errors
-						     google.visualization.errors.removeAll(container);
-						   }); */
-						drawMaterialChart();
-
+						chart.draw(dataTable, options);
 					}
-					;
 				});
 
 				$.getJSON('${getTotSancIntakeProgramwiseGraph}',
@@ -829,17 +783,14 @@
 					ajax : 'true'
 
 				}, function(data) {
-
+  
 					google.charts.load('current', {
-						'packages' : [ 'corechart', 'bar' ]
+						'packages' : [ 'corechart' ]
 					});
-					google.charts.setOnLoadCallback(drawStuff);
-					//alert(data);
-					function drawStuff() {
+					google.charts.setOnLoadCallback(drawChart);
 
-						var chartDiv = document
-								.getElementById('intake_chart_byprogram');
-						//document.getElementById("bar-chart").style.border = "thin dotted red";
+					function drawChart() {
+
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
@@ -859,58 +810,30 @@
 									]);
 
 								})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
+								
+						/* slantedTextAngle: 60 */
+						var options = {
 							hAxis : {
-								title : 'PROGRAM',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
+								title : "PROGRAM",
+								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
 								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								count : -1,
-								format : '#'
+								format : '0',
 							},
-
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
 						};
-						var materialChart = new google.charts.Bar(chartDiv);
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('intake_chart_byprogram'));
 
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
-
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-
-						drawMaterialChart();
-
+						chart.draw(dataTable, options);
 					}
-					;
 				});
 
 				if (isIqac == 1) {
@@ -925,109 +848,60 @@
 
 									},
 									function(data) {
-
+ 
+										
 										google.charts.load('current', {
-											'packages' : [ 'corechart', 'bar' ]
+											'packages' : [ 'corechart' ]
 										});
-										google.charts
-												.setOnLoadCallback(drawStuff);
-										//alert(data);
-										function drawStuff() {
+										google.charts.setOnLoadCallback(drawChart);
 
-											var chartDiv = document
-													.getElementById('student_support_scheme');
-											//document.getElementById("bar-chart").style.border = "thin dotted red";
+										function drawChart() {
+
 											var dataTable = new google.visualization.DataTable();
 
-											dataTable.addColumn('string',
-													'academic year'); // Implicit domain column.
+											dataTable.addColumn('string', 'academic year'); // Implicit domain column.
 
-											dataTable.addColumn('number',
-													'Total Student');
-											dataTable.addColumn('number',
-													'Benifited Student');
-											$
-													.each(
-															data,
-															function(key, dt) {
+									dataTable.addColumn('number', 'Total Student');
+									dataTable.addColumn('number', 'Benifited Student');
+									$ .each( data,
+													function(key, dt) {
+ 
+														dataTable
+																.addRows([
 
-																/* var pName = dt.programName
-																		+ "-"
-																		+ dt.nameOfProgram; */
+																[
+																		dt.schemeName,
+																		dt.noCurrentAdmitedStnt,
+																		dt.noStudentBenifited ]
 
-																dataTable
-																		.addRows([
+																]);
 
-																		[
-																				dt.schemeName,
-																				dt.noCurrentAdmitedStnt,
-																				dt.noStudentBenifited ]
-
-																		]);
-
-															})
-
-											var materialOptions = {
-												legend : {
-													position : 'top'
-												},
-												colors : [ 'orange', 'blue' ],
+													})
+													
+											/* slantedTextAngle: 60 */
+											var options = {
 												hAxis : {
-													title : 'AGENCY NAME',
-													titleTextStyle : {
-														color : 'black'
-													},
-													count : -1,
-													viewWindowMode : 'pretty',
+													title : "SCHEME NAME",
+													textPosition : 'out',
 													slantedText : true
 												},
 												vAxis : {
 													title : 'VALUE',
-													titleTextStyle : {
-														color : 'black'
+													minValue : 0,
+													viewWindow : {
+														min : 0
 													},
-													count : -1,
-													format : '#'
+													format : '0',
 												},
-
+												colors : [ 'orange', 'blue' ],
+												theme : 'material'
 											};
-											var materialChart = new google.charts.Bar(
-													chartDiv);
+											var chart = new google.visualization.ColumnChart(
+													document.getElementById('student_support_scheme'));
 
-											function selectHandler() {
-												var selectedItem = materialChart
-														.getSelection()[0];
-												if (selectedItem) {
-													var topping = dataTable
-															.getValue(
-																	selectedItem.row,
-																	0);
-
-													i = selectedItem.row, 0;
-													itemSellBill(data[i].deptCode);
-
-												}
-											}
-
-											function drawMaterialChart() {
-
-												google.visualization.events
-														.addListener(
-																materialChart,
-																'select',
-																selectHandler);
-												materialChart
-														.draw(
-																dataTable,
-																google.charts.Bar
-																		.convertOptions(materialOptions));
-
-											}
-
-											drawMaterialChart();
-
+											chart.draw(dataTable, options);
 										}
-										;
+										
 									});
 				}
 			}
@@ -1041,89 +915,7 @@
 					ajax : 'true'
 
 				}, function(data) {
-
-					/*   google.charts.load('current', {
-						'packages' : [ 'corechart']
-					});
-					google.charts.setOnLoadCallback(drawStuff);
-					 
-					function drawStuff() {
-
-						var chartDiv = document.getElementById('hodgraph2');
-						 
-						var dataTable = new google.visualization.DataTable();
-
-						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
-
-						dataTable.addColumn('number', 'Student Passed');
-						dataTable.addColumn('number', 'Student Appeared');
-						$.each(data,
-								function(key, dt) {
-
-									var pName = dt.programName + "-"
-											+ dt.nameOfProgram;
-
-									dataTable.addRows([
-
-									[ pName, dt.noStudPass, dt.noStudAppear ]
-
-									]);
-
-								})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
-							hAxis : {
-								title : 'PROGRAM NAME',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
-								slantedText : true,
-								slantedTextAngle: 60
-							},
-							vAxis : {
-								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1, 
-								format : '#'
-							},
-
-						};
-						var materialChart = new google.charts.Bar(chartDiv);
-						 
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
-
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-
-						drawMaterialChart();
-
-					}
-					; */
-
+  
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -1153,12 +945,12 @@
 						/* slantedTextAngle: 60 */
 						var options = {
 							hAxis : {
-								title : "Month",
+								title : "PROGRAM NAME",
 								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
-								title : 'Revenue',
+								title : 'VALUE',
 								minValue : 0,
 								viewWindow : {
 									min : 0
@@ -1182,16 +974,14 @@
 					ajax : 'true'
 
 				}, function(data) {
-
+ 
 					google.charts.load('current', {
-						'packages' : [ 'corechart', 'bar' ]
+						'packages' : [ 'corechart' ]
 					});
-					google.charts.setOnLoadCallback(drawStuff);
-					//alert(data);
-					function drawStuff() {
+					google.charts.setOnLoadCallback(drawChart);
 
-						var chartDiv = document.getElementById('hodgraph1');
-						//document.getElementById("bar-chart").style.border = "thin dotted red";
+					function drawChart() {
+
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
@@ -1199,10 +989,7 @@
 						dataTable.addColumn('number', 'Sanctioned Intake');
 						dataTable.addColumn('number', 'Admitted Student');
 						$.each(data, function(key, dt) {
-
-							/* var pName = dt.programName
-								+ "-"
-								+ dt.nameOfProgram;   */
+ 
 
 							dataTable.addRows([
 
@@ -1211,58 +998,30 @@
 							]);
 
 						})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
+								
+						/* slantedTextAngle: 60 */
+						var options = {
 							hAxis : {
-								title : 'PROGRAM NAME',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
+								title : "PROGRAM NAME",
+								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
 								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								count : -1,
-								format : '#'
+								format : '0',
 							},
-
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
 						};
-						var materialChart = new google.charts.Bar(chartDiv);
-						//var materialChart = new google.visualization.BarChart(chartDiv);
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('hodgraph1'));
 
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-
-						drawMaterialChart();
-
+						chart.draw(dataTable, options);
 					}
-					;
 				});
 
 				$.getJSON('${getAllProgTypStudPlacedGraph}',
@@ -1273,15 +1032,15 @@
 
 				}, function(data) {
 
+					 
+					
 					google.charts.load('current', {
-						'packages' : [ 'corechart', 'bar' ]
+						'packages' : [ 'corechart' ]
 					});
-					google.charts.setOnLoadCallback(drawStuff);
-					//alert(data);
-					function drawStuff() {
+					google.charts.setOnLoadCallback(drawChart);
 
-						var chartDiv = document.getElementById('hodgraph3');
-						//document.getElementById("bar-chart").style.border = "thin dotted red";
+					function drawChart() {
+
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
@@ -1289,10 +1048,7 @@
 						dataTable.addColumn('number', 'Student Passed');
 						dataTable.addColumn('number', 'Student Placed');
 						$.each(data, function(key, dt) {
-
-							/* var pName = dt.programName
-								+ "-"
-								+ dt.nameOfProgram;   */
+ 
 
 							dataTable
 									.addRows([
@@ -1303,58 +1059,30 @@
 									]);
 
 						})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
+								
+						/* slantedTextAngle: 60 */
+						var options = {
 							hAxis : {
-								title : 'PROGRAM NAME',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
+								title : "PROGRAM NAME",
+								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
 								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								count : -1,
-								format : '#'
+								format : '0',
 							},
-
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
 						};
-						var materialChart = new google.charts.Bar(chartDiv);
-						//var materialChart = new google.visualization.BarChart(chartDiv);
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('hodgraph3'));
 
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-
-						drawMaterialChart();
-
+						chart.draw(dataTable, options);
 					}
-					;
 				});
 			}
 
@@ -1368,16 +1096,14 @@
 
 				}, function(data) {
 
+					  
 					google.charts.load('current', {
-						'packages' : [ 'corechart', 'bar' ]
+						'packages' : [ 'corechart' ]
 					});
-					google.charts.setOnLoadCallback(drawStuff);
-					//alert(data);
-					function drawStuff() {
+					google.charts.setOnLoadCallback(drawChart);
 
-						var chartDiv = document
-								.getElementById('librariangraph');
-						//document.getElementById("bar-chart").style.border = "thin dotted red";
+					function drawChart() {
+
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
@@ -1385,10 +1111,7 @@
 						dataTable.addColumn('number', 'No. of Faculty');
 						dataTable.addColumn('number', 'No. of Student');
 						$.each(data, function(key, dt) {
-
-							/* var pName = dt.programName
-									+ "-"
-									+ dt.nameOfProgram; */
+ 
 
 							dataTable.addRows([
 
@@ -1397,58 +1120,30 @@
 							]);
 
 						})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
+								
+						/* slantedTextAngle: 60 */
+						var options = {
 							hAxis : {
-								title : 'AGENCY NAME',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
+								title : "ACADEMIC YEAR",
+								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
 								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								count : -1,
-								format : '#'
+								format : '0',
 							},
-
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
 						};
-						var materialChart = new google.charts.Bar(chartDiv);
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('librariangraph'));
 
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
-
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-
-						drawMaterialChart();
-
+						chart.draw(dataTable, options);
 					}
-					;
 				});
 			}
 
@@ -1461,16 +1156,14 @@
 					ajax : 'true'
 
 				}, function(data) {
-
+ 
 					google.charts.load('current', {
-						'packages' : [ 'corechart', 'bar' ]
+						'packages' : [ 'corechart' ]
 					});
-					google.charts.setOnLoadCallback(drawStuff);
-					//alert(data);
-					function drawStuff() {
+					google.charts.setOnLoadCallback(drawChart);
 
-						var chartDiv = document.getElementById('facultyGraph');
-						//document.getElementById("bar-chart").style.border = "thin dotted red";
+					function drawChart() {
+
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
@@ -1478,10 +1171,7 @@
 						dataTable.addColumn('number', 'Students Passed');
 						dataTable.addColumn('number', 'Students Appeared');
 						$.each(data, function(key, dt) {
-
-							/* var pName = dt.programName
-									+ "-"
-									+ dt.nameOfProgram; */
+ 
 
 							dataTable.addRows([
 
@@ -1490,58 +1180,30 @@
 							]);
 
 						})
-
-						var materialOptions = {
-							legend : {
-								position : 'top'
-							},
-							colors : [ 'orange', 'blue' ],
+								
+						/* slantedTextAngle: 60 */
+						var options = {
 							hAxis : {
-								title : 'SUB NAME',
-								titleTextStyle : {
-									color : 'black'
-								},
-								count : -1,
-								viewWindowMode : 'pretty',
+								title : "SUB NAME",
+								textPosition : 'out',
 								slantedText : true
 							},
 							vAxis : {
 								title : 'VALUE',
-								titleTextStyle : {
-									color : 'black'
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								count : -1,
-								format : '#'
+								format : '0',
 							},
-
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
 						};
-						var materialChart = new google.charts.Bar(chartDiv);
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('facultyGraph'));
 
-						function selectHandler() {
-							var selectedItem = materialChart.getSelection()[0];
-							if (selectedItem) {
-								var topping = dataTable.getValue(
-										selectedItem.row, 0);
-
-								i = selectedItem.row, 0;
-								itemSellBill(data[i].deptCode);
-
-							}
-						}
-
-						function drawMaterialChart() {
-
-							google.visualization.events.addListener(
-									materialChart, 'select', selectHandler);
-							materialChart.draw(dataTable, google.charts.Bar
-									.convertOptions(materialOptions));
-
-						}
-
-						drawMaterialChart();
-
+						chart.draw(dataTable, options);
 					}
-					;
 				});
 			}
 

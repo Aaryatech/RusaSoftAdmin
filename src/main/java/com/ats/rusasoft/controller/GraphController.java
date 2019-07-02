@@ -256,7 +256,7 @@ public class GraphController {
 					StudpassApperaedTaughByFac[].class);
 			list = new ArrayList<>(Arrays.asList(quolArray));
 			
-			System.err.println("StudpassApperaedTaughByFac GC " + list.toString());
+			//System.err.println("StudpassApperaedTaughByFac GC " + list.toString());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
