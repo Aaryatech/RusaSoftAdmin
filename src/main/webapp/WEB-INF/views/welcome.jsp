@@ -213,7 +213,7 @@
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">Research Project Title</h2>
-													<span class="count_num"> <c:choose>
+													<span class="count_num" style="font-size: 19px;"> <c:choose>
 															<c:when
 																test="${not empty dashBoardCounts.researchprojecttitle}">
 																${dashBoardCounts.researchprojecttitle}
@@ -293,7 +293,7 @@
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">LMS software Name</h2>
-													<span class="count_num">${dashBoardCounts.LMSsoftwarename}</span>
+													<span class="count_num" style="font-size: 19px;">${dashBoardCounts.LMSsoftwarename}</span>
 													<!--<a href="#" class="dash_button">Button</a>-->
 													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->
@@ -346,7 +346,7 @@
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">Funding From GOVT/Non GOVT</h2>
-													<span class="count_num">0</span>
+													<span class="count_num">${dashBoardCounts.fundingfrom}</span>
 													<!--<a href="#" class="dash_button">Button</a>-->
 													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->
