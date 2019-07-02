@@ -22,6 +22,8 @@
 	value="/getGraphForNoofTeacherStudUsingLib"></c:url>
 <c:url var="getStudpassAppearedTaughByFacGraph"
 	value="/getStudpassAppearedTaughByFacGraph"></c:url>
+	<c:url var="getNoOfResearchPubGraphDean"
+	value="/getNoOfResearchPubGraphDean"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 
@@ -395,7 +397,7 @@
 											</div>
 
 										</div>
- 
+
 										<!-- end left boxes -->
 
 										<!-- right boxes -->
@@ -415,7 +417,7 @@
 											</div>
 
 										</div>
-										
+
 										<c:if test="${sessionScope.userObj.staff.isIqac==1}">
 											<div class="col-md-6">
 												<div class="box box-primary">
@@ -530,6 +532,32 @@
 												</div>
 												<div class="box-body chart-responsive">
 													<div class="chart" id="librariangraph"
+														style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+										<!-- end left boxes -->
+
+
+										<!-- /.row -->
+									</c:if>
+
+									<c:if test="${sessionScope.userObj.staff.isDean==1}">
+
+
+										<!-- left boxes -->
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Last Five Years :No of Research
+														Publications</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="deanGraph"
 														style="height: 300px;"></div>
 												</div>
 
@@ -715,7 +743,7 @@
 			var isHod = document.getElementById("isHod").value;
 			var isLibrarian = document.getElementById("isLibrarian").value;
 			var isFaculty = document.getElementById("isFaculty").value;
-
+			var isDean = document.getElementById("isDean").value;
 			//alert(isPrincipal);
 
 			if (isPrincipal == 1 || isIqac == 1) {
@@ -727,7 +755,7 @@
 					ajax : 'true'
 
 				}, function(data) {
-  
+
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -776,65 +804,72 @@
 					}
 				});
 
-				$.getJSON('${getTotSancIntakeProgramwiseGraph}',
+				$
+						.getJSON(
+								'${getTotSancIntakeProgramwiseGraph}',
 
-				{
+								{
 
-					ajax : 'true'
+									ajax : 'true'
 
-				}, function(data) {
-  
-					google.charts.load('current', {
-						'packages' : [ 'corechart' ]
-					});
-					google.charts.setOnLoadCallback(drawChart);
-
-					function drawChart() {
-
-						var dataTable = new google.visualization.DataTable();
-
-						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
-
-						dataTable.addColumn('number', 'Sanctioned Intake');
-						dataTable.addColumn('number', 'Admitted Student');
-						$.each(data,
-								function(key, dt) {
-
-									var pName = dt.programName + "-"
-											+ dt.nameOfProgram;
-
-									dataTable.addRows([
-
-									[ pName, dt.sancIntake, dt.totalAdmitted ]
-
-									]);
-
-								})
-								
-						/* slantedTextAngle: 60 */
-						var options = {
-							hAxis : {
-								title : "PROGRAM",
-								textPosition : 'out',
-								slantedText : true
-							},
-							vAxis : {
-								title : 'VALUE',
-								minValue : 0,
-								viewWindow : {
-									min : 0
 								},
-								format : '0',
-							},
-							colors : [ 'orange', 'blue' ],
-							theme : 'material'
-						};
-						var chart = new google.visualization.ColumnChart(
-								document.getElementById('intake_chart_byprogram'));
+								function(data) {
 
-						chart.draw(dataTable, options);
-					}
-				});
+									google.charts.load('current', {
+										'packages' : [ 'corechart' ]
+									});
+									google.charts.setOnLoadCallback(drawChart);
+
+									function drawChart() {
+
+										var dataTable = new google.visualization.DataTable();
+
+										dataTable.addColumn('string',
+												'academic year'); // Implicit domain column.
+
+										dataTable.addColumn('number',
+												'Sanctioned Intake');
+										dataTable.addColumn('number',
+												'Admitted Student');
+										$.each(data, function(key, dt) {
+
+											var pName = dt.programName + "-"
+													+ dt.nameOfProgram;
+
+											dataTable.addRows([
+
+											[ pName, dt.sancIntake,
+													dt.totalAdmitted ]
+
+											]);
+
+										})
+
+										/* slantedTextAngle: 60 */
+										var options = {
+											hAxis : {
+												title : "PROGRAM",
+												textPosition : 'out',
+												slantedText : true
+											},
+											vAxis : {
+												title : 'VALUE',
+												minValue : 0,
+												viewWindow : {
+													min : 0
+												},
+												format : '0',
+											},
+											colors : [ 'orange', 'blue' ],
+											theme : 'material'
+										};
+										var chart = new google.visualization.ColumnChart(
+												document
+														.getElementById('intake_chart_byprogram'));
+
+										chart.draw(dataTable, options);
+									}
+								});
 
 				if (isIqac == 1) {
 
@@ -848,36 +883,41 @@
 
 									},
 									function(data) {
- 
-										
+
 										google.charts.load('current', {
 											'packages' : [ 'corechart' ]
 										});
-										google.charts.setOnLoadCallback(drawChart);
+										google.charts
+												.setOnLoadCallback(drawChart);
 
 										function drawChart() {
 
 											var dataTable = new google.visualization.DataTable();
 
-											dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+											dataTable.addColumn('string',
+													'academic year'); // Implicit domain column.
 
-									dataTable.addColumn('number', 'Total Student');
-									dataTable.addColumn('number', 'Benifited Student');
-									$ .each( data,
-													function(key, dt) {
- 
-														dataTable
-																.addRows([
+											dataTable.addColumn('number',
+													'Total Student');
+											dataTable.addColumn('number',
+													'Benifited Student');
+											$
+													.each(
+															data,
+															function(key, dt) {
 
-																[
-																		dt.schemeName,
-																		dt.noCurrentAdmitedStnt,
-																		dt.noStudentBenifited ]
+																dataTable
+																		.addRows([
 
-																]);
+																		[
+																				dt.schemeName,
+																				dt.noCurrentAdmitedStnt,
+																				dt.noStudentBenifited ]
 
-													})
-													
+																		]);
+
+															})
+
 											/* slantedTextAngle: 60 */
 											var options = {
 												hAxis : {
@@ -897,11 +937,12 @@
 												theme : 'material'
 											};
 											var chart = new google.visualization.ColumnChart(
-													document.getElementById('student_support_scheme'));
+													document
+															.getElementById('student_support_scheme'));
 
 											chart.draw(dataTable, options);
 										}
-										
+
 									});
 				}
 			}
@@ -915,7 +956,7 @@
 					ajax : 'true'
 
 				}, function(data) {
-  
+
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -974,7 +1015,7 @@
 					ajax : 'true'
 
 				}, function(data) {
- 
+
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -989,7 +1030,6 @@
 						dataTable.addColumn('number', 'Sanctioned Intake');
 						dataTable.addColumn('number', 'Admitted Student');
 						$.each(data, function(key, dt) {
- 
 
 							dataTable.addRows([
 
@@ -998,7 +1038,7 @@
 							]);
 
 						})
-								
+
 						/* slantedTextAngle: 60 */
 						var options = {
 							hAxis : {
@@ -1032,8 +1072,6 @@
 
 				}, function(data) {
 
-					 
-					
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -1048,7 +1086,6 @@
 						dataTable.addColumn('number', 'Student Passed');
 						dataTable.addColumn('number', 'Student Placed');
 						$.each(data, function(key, dt) {
- 
 
 							dataTable
 									.addRows([
@@ -1059,7 +1096,7 @@
 									]);
 
 						})
-								
+
 						/* slantedTextAngle: 60 */
 						var options = {
 							hAxis : {
@@ -1096,7 +1133,6 @@
 
 				}, function(data) {
 
-					  
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -1111,7 +1147,6 @@
 						dataTable.addColumn('number', 'No. of Faculty');
 						dataTable.addColumn('number', 'No. of Student');
 						$.each(data, function(key, dt) {
- 
 
 							dataTable.addRows([
 
@@ -1120,7 +1155,7 @@
 							]);
 
 						})
-								
+
 						/* slantedTextAngle: 60 */
 						var options = {
 							hAxis : {
@@ -1156,7 +1191,7 @@
 					ajax : 'true'
 
 				}, function(data) {
- 
+
 					google.charts.load('current', {
 						'packages' : [ 'corechart' ]
 					});
@@ -1171,7 +1206,6 @@
 						dataTable.addColumn('number', 'Students Passed');
 						dataTable.addColumn('number', 'Students Appeared');
 						$.each(data, function(key, dt) {
- 
 
 							dataTable.addRows([
 
@@ -1180,7 +1214,7 @@
 							]);
 
 						})
-								
+
 						/* slantedTextAngle: 60 */
 						var options = {
 							hAxis : {
@@ -1205,6 +1239,78 @@
 						chart.draw(dataTable, options);
 					}
 				});
+			}
+			
+			if (isDean == 1) {
+
+				$
+						.getJSON(
+								'${getNoOfResearchPubGraphDean}',
+
+								{
+
+									ajax : 'true'
+
+								},
+								function(data) {
+
+									google.charts.load('current', {
+										'packages' : [ 'corechart' ]
+									});
+									google.charts
+											.setOnLoadCallback(drawChart);
+
+									function drawChart() {
+
+										var dataTable = new google.visualization.DataTable();
+
+										dataTable.addColumn('string',
+												'academic year'); // Implicit domain column.
+
+										dataTable.addColumn('number',
+												'No of Research Publications'); 
+										$
+												.each(
+														data,
+														function(key, dt) {
+
+															dataTable
+																	.addRows([
+
+																	[
+																			dt.academicYear,
+																			dt.noOfPublication ]
+
+																	]);
+
+														})
+
+										/* slantedTextAngle: 60 */
+										var options = {
+											hAxis : {
+												title : "ACADEMIC YEAR",
+												textPosition : 'out',
+												slantedText : true
+											},
+											vAxis : {
+												title : 'VALUE',
+												minValue : 0,
+												viewWindow : {
+													min : 0
+												},
+												format : '0',
+											},
+											colors : [ 'blue' ],
+											theme : 'material'
+										};
+										var chart = new google.visualization.ColumnChart(
+												document
+														.getElementById('deanGraph'));
+
+										chart.draw(dataTable, options);
+									}
+
+								});
 			}
 
 		});

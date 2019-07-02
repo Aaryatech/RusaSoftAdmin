@@ -24,6 +24,7 @@ import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.TotSancIntakeProgwise;
 import com.ats.rusasoft.model.graph.GetTotStudentPassedAndAppearInFinYr;
+import com.ats.rusasoft.model.graph.NoOfResearchPubGraphDean;
 import com.ats.rusasoft.model.graph.ProgSanctnIntake;
 import com.ats.rusasoft.model.graph.ProgTypStudPlacedGraph;
 import com.ats.rusasoft.model.graph.SancIntakeStudAdmittedGraph;
@@ -257,6 +258,33 @@ public class GraphController {
 			list = new ArrayList<>(Arrays.asList(quolArray));
 			
 			//System.err.println("StudpassApperaedTaughByFac GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/getNoOfResearchPubGraphDean", method = RequestMethod.GET)
+	public @ResponseBody List<NoOfResearchPubGraphDean> getNoOfResearchPubGraphDean(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<NoOfResearchPubGraphDean> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+			int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
+			map.add("instId", instituteId);
+			NoOfResearchPubGraphDean[] quolArray = restTemplate.postForObject(Constants.url + "/getNoOfResearchPubGraphDean", map,
+					NoOfResearchPubGraphDean[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			System.err.println("NoOfResearchPubGraphDean GC " + list.toString());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
