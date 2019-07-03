@@ -23,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.TotSancIntakeProgwise;
+import com.ats.rusasoft.model.graph.BudgetGraphDash;
+import com.ats.rusasoft.model.graph.BudgetResponse;
 import com.ats.rusasoft.model.graph.GetTotStudentPassedAndAppearInFinYr;
 import com.ats.rusasoft.model.graph.NoOfResearchPubGraphDean;
 import com.ats.rusasoft.model.graph.ProgSanctnIntake;
@@ -284,7 +286,7 @@ public class GraphController {
 					NoOfResearchPubGraphDean[].class);
 			list = new ArrayList<>(Arrays.asList(quolArray));
 			
-			System.err.println("NoOfResearchPubGraphDean GC " + list.toString());
+			//System.err.println("NoOfResearchPubGraphDean GC " + list.toString());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -292,5 +294,86 @@ public class GraphController {
 		
  
 		return list;
+	}
+	
+	@RequestMapping(value = "/getBudgetInfrastructureDetail", method = RequestMethod.GET)
+	public @ResponseBody List<BudgetGraphDash> getBudgetInfrastructureDetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<BudgetGraphDash> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+			int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
+			map.add("instId", instituteId);
+			BudgetGraphDash[] quolArray = restTemplate.postForObject(Constants.url + "/getBudgetInfrastructureDetail", map,
+					BudgetGraphDash[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			//System.err.println("BudgetGraphDash GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/getBudgetInfrastructureDetailCurr", method = RequestMethod.GET)
+	public @ResponseBody List<BudgetGraphDash> getBudgetInfrastructureDetailCurr(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		List<BudgetGraphDash> list = new ArrayList<>();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+			int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
+			map.add("instId", instituteId);
+			BudgetGraphDash[] quolArray = restTemplate.postForObject(Constants.url + "/getBudgetInfrastructureDetailCurr", map,
+					BudgetGraphDash[].class);
+			list = new ArrayList<>(Arrays.asList(quolArray));
+			
+			//System.err.println("BudgetGraphDash GC " + list.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return list;
+	}
+	
+	@RequestMapping(value = "/getAllBugetsGraph", method = RequestMethod.GET)
+	public @ResponseBody BudgetResponse getAllBugetsGraph(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		BudgetResponse budgetResponse = new BudgetResponse();
+		
+		try {
+			
+			HttpSession session = request.getSession(); 
+			int instituteId = (int) session.getAttribute("instituteId");
+	 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
+			map.add("instId", instituteId);
+			budgetResponse = restTemplate.postForObject(Constants.url + "/getAllBugetsGraph", map,
+					BudgetResponse.class);
+			 
+			
+			System.err.println("budgetResponse GC " + budgetResponse.getInfraRes());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+ 
+		return budgetResponse;
 	}
 }

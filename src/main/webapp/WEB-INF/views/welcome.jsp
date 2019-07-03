@@ -22,8 +22,13 @@
 	value="/getGraphForNoofTeacherStudUsingLib"></c:url>
 <c:url var="getStudpassAppearedTaughByFacGraph"
 	value="/getStudpassAppearedTaughByFacGraph"></c:url>
-	<c:url var="getNoOfResearchPubGraphDean"
+<c:url var="getNoOfResearchPubGraphDean"
 	value="/getNoOfResearchPubGraphDean"></c:url>
+<c:url var="getBudgetInfrastructureDetail"
+	value="/getBudgetInfrastructureDetail"></c:url>
+<c:url var="getBudgetInfrastructureDetailCurr"
+	value="/getBudgetInfrastructureDetailCurr"></c:url>
+<c:url var="getAllBugetsGraph" value="/getAllBugetsGraph"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
 
@@ -557,13 +562,118 @@
 
 												</div>
 												<div class="box-body chart-responsive">
-													<div class="chart" id="deanGraph"
-														style="height: 300px;"></div>
+													<div class="chart" id="deanGraph" style="height: 300px;"></div>
 												</div>
 
 											</div>
 
 										</div>
+										<!-- end left boxes -->
+
+
+										<!-- /.row -->
+									</c:if>
+
+									<c:if test="${sessionScope.userObj.staff.isAccOff==1}">
+
+
+										<!-- left boxes -->
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Consolidated Last Five Financial
+														Year Budget (All Budget Sources)</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="accgraph1" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Current Financial Year Budget
+														(All Budget Title)</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="accgraph2" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Infrastructure Budget: Last Five
+														Financial Year wise</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="accgraph3" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Library Budget: Last Five
+														Financial Year wise</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="accgraph4" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Academic Facilities Budget: Last
+														Five Financial Year wise</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="accgraph5" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="box box-primary">
+												<div class="box-header with-border">
+													<h3 class="box-title">Books Budget: Last Five
+														Financial Year wise</h3>
+
+												</div>
+												<div class="box-body chart-responsive">
+													<div class="chart" id="accgraph6" style="height: 300px;"></div>
+												</div>
+
+											</div>
+
+										</div>
+
 										<!-- end left boxes -->
 
 
@@ -744,6 +854,7 @@
 			var isLibrarian = document.getElementById("isLibrarian").value;
 			var isFaculty = document.getElementById("isFaculty").value;
 			var isDean = document.getElementById("isDean").value;
+			var isAccOff = document.getElementById("isAccOff").value;
 			//alert(isPrincipal);
 
 			if (isPrincipal == 1 || isIqac == 1) {
@@ -1240,77 +1351,320 @@
 					}
 				});
 			}
-			
+
 			if (isDean == 1) {
 
-				$
-						.getJSON(
-								'${getNoOfResearchPubGraphDean}',
+				$.getJSON('${getNoOfResearchPubGraphDean}',
 
-								{
+				{
 
-									ajax : 'true'
+					ajax : 'true'
 
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
+					google.charts.setOnLoadCallback(drawChart);
+
+					function drawChart() {
+
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number',
+								'No of Research Publications');
+						$.each(data, function(key, dt) {
+
+							dataTable.addRows([
+
+							[ dt.academicYear, dt.noOfPublication ]
+
+							]);
+
+						})
+
+						/* slantedTextAngle: 60 */
+						var options = {
+							hAxis : {
+								title : "ACADEMIC YEAR",
+								textPosition : 'out',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								minValue : 0,
+								viewWindow : {
+									min : 0
 								},
-								function(data) {
+								format : '0',
+							},
+							colors : [ 'blue' ],
+							theme : 'material'
+						};
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('deanGraph'));
 
-									google.charts.load('current', {
-										'packages' : [ 'corechart' ]
-									});
-									google.charts
-											.setOnLoadCallback(drawChart);
+						chart.draw(dataTable, options);
+					}
 
-									function drawChart() {
+				});
+			}
 
-										var dataTable = new google.visualization.DataTable();
+			if (isAccOff == 1) {
 
-										dataTable.addColumn('string',
-												'academic year'); // Implicit domain column.
+				$.getJSON('${getBudgetInfrastructureDetail}',
 
-										dataTable.addColumn('number',
-												'No of Research Publications'); 
-										$
-												.each(
-														data,
-														function(key, dt) {
+				{
 
-															dataTable
-																	.addRows([
+					ajax : 'true'
 
-																	[
-																			dt.academicYear,
-																			dt.noOfPublication ]
+				}, function(data) {
 
-																	]);
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
+					google.charts.setOnLoadCallback(drawChart);
 
-														})
+					function drawChart() {
 
-										/* slantedTextAngle: 60 */
-										var options = {
-											hAxis : {
-												title : "ACADEMIC YEAR",
-												textPosition : 'out',
-												slantedText : true
-											},
-											vAxis : {
-												title : 'VALUE',
-												minValue : 0,
-												viewWindow : {
-													min : 0
-												},
-												format : '0',
-											},
-											colors : [ 'blue' ],
-											theme : 'material'
-										};
-										var chart = new google.visualization.ColumnChart(
-												document
-														.getElementById('deanGraph'));
+						var dataTable = new google.visualization.DataTable();
 
-										chart.draw(dataTable, options);
-									}
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
 
-								});
+						dataTable.addColumn('number', 'Budget Allocated');
+						dataTable.addColumn('number', 'Budget Utilized');
+						$.each(data, function(key, dt) {
+
+							dataTable.addRows([
+
+							[ dt.budgetTitle, dt.allocAmt, dt.utilAmt ]
+
+							]);
+
+						})
+
+						/* slantedTextAngle: 60 */
+						var options = {
+							hAxis : {
+								title : "BUDGET TITLE",
+								textPosition : 'out',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								minValue : 0,
+								viewWindow : {
+									min : 0
+								},
+								format : '0',
+							},
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
+						};
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('accgraph1'));
+
+						chart.draw(dataTable, options);
+					}
+
+				});
+
+				$.getJSON('${getBudgetInfrastructureDetailCurr}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
+					google.charts.setOnLoadCallback(drawChart);
+
+					function drawChart() {
+
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Budget Allocated');
+						dataTable.addColumn('number', 'Budget Utilized');
+						$.each(data, function(key, dt) {
+
+							dataTable.addRows([
+
+							[ dt.budgetTitle, dt.allocAmt, dt.utilAmt ]
+
+							]);
+
+						})
+
+						/* slantedTextAngle: 60 */
+						var options = {
+							hAxis : {
+								title : "BUDGET TITLE",
+								textPosition : 'out',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								minValue : 0,
+								viewWindow : {
+									min : 0
+								},
+								format : '0',
+							},
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
+						};
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('accgraph2'));
+
+						chart.draw(dataTable, options);
+					}
+
+				});
+
+				$.getJSON('${getAllBugetsGraph}',
+
+				{
+
+					ajax : 'true'
+
+				}, function(data) {
+
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
+					google.charts.setOnLoadCallback(drawChart);
+
+					function drawChart() {
+
+						var dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Budget Allocated');
+						dataTable.addColumn('number', 'Budget Utilized');
+
+						$.each(data.infraRes, function(key, dt) {
+
+							dataTable
+									.addRows([
+
+									[ dt.finYear, dt.budgetAllocated,
+											dt.budgetUtilized ]
+
+									]);
+
+						})
+
+						/* slantedTextAngle: 60 */
+						var options = {
+							hAxis : {
+								title : "YEAR",
+								textPosition : 'out',
+								slantedText : true
+							},
+							vAxis : {
+								title : 'VALUE',
+								minValue : 0,
+								viewWindow : {
+									min : 0
+								},
+								format : '0',
+							},
+							colors : [ 'orange', 'blue' ],
+							theme : 'material'
+						};
+						var chart = new google.visualization.ColumnChart(
+								document.getElementById('accgraph3'));
+
+						chart.draw(dataTable, options);
+
+						//2nd graph
+
+						dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Budget Allocated');
+						dataTable.addColumn('number', 'Budget Utilized');
+
+						$.each(data.libRes, function(key, dt) {
+
+							dataTable
+									.addRows([
+
+									[ dt.finYear, dt.budgetAllocated,
+											dt.budgetUtilized ]
+
+									]);
+
+						})
+
+						chart = new google.visualization.ColumnChart(document
+								.getElementById('accgraph4'));
+
+						chart.draw(dataTable, options);
+						
+						//3rd graph
+
+						dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Budget Allocated');
+						dataTable.addColumn('number', 'Budget Utilized');
+
+						$.each(data.academicRes, function(key, dt) {
+
+							dataTable
+									.addRows([
+
+									[ dt.finYear, dt.budgetAllocated,
+											dt.budgetUtilized ]
+
+									]);
+
+						})
+
+						chart = new google.visualization.ColumnChart(document
+								.getElementById('accgraph5'));
+
+						chart.draw(dataTable, options);
+						
+						//4th graph
+
+						dataTable = new google.visualization.DataTable();
+
+						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
+
+						dataTable.addColumn('number', 'Budget Allocated');
+						dataTable.addColumn('number', 'Budget Utilized');
+
+						$.each(data.bookRes, function(key, dt) {
+
+							dataTable
+									.addRows([
+
+									[ dt.finYear, dt.budgetAllocated,
+											dt.budgetUtilized ]
+
+									]);
+
+						})
+
+						chart = new google.visualization.ColumnChart(document
+								.getElementById('accgraph6'));
+
+						chart.draw(dataTable, options);
+					}
+
+				});
 			}
 
 		});
