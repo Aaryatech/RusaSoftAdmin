@@ -615,7 +615,7 @@
 											<div class="box box-primary">
 												<div class="box-header with-border">
 													<h3 class="box-title">Infrastructure Budget: Last Five
-														Financial Year wise</h3>
+														Financial Year  </h3>
 
 												</div>
 												<div class="box-body chart-responsive">
@@ -631,7 +631,7 @@
 											<div class="box box-primary">
 												<div class="box-header with-border">
 													<h3 class="box-title">Library Budget: Last Five
-														Financial Year wise</h3>
+														Financial Year  </h3>
 
 												</div>
 												<div class="box-body chart-responsive">
@@ -647,7 +647,7 @@
 											<div class="box box-primary">
 												<div class="box-header with-border">
 													<h3 class="box-title">Academic Facilities Budget: Last
-														Five Financial Year wise</h3>
+														Five Financial Year  </h3>
 
 												</div>
 												<div class="box-body chart-responsive">
@@ -663,7 +663,7 @@
 											<div class="box box-primary">
 												<div class="box-header with-border">
 													<h3 class="box-title">Books Budget: Last Five
-														Financial Year wise</h3>
+														Financial Year  </h3>
 
 												</div>
 												<div class="box-body chart-responsive">
