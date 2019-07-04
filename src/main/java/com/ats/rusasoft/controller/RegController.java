@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -82,7 +83,10 @@ public class RegController {
 	
 	@RequestMapping(value = "/insertInstituteDemo", method = RequestMethod.POST)
 	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {
-
+		HttpSession session = request.getSession();
+		
+		
+		
 		ModelAndView model = new ModelAndView("confirmInstReg");
 		int instId = Integer.parseInt(request.getParameter("inst_id"));
 		String redirect = null;
@@ -91,8 +95,13 @@ public class RegController {
 			RestTemplate restTemplate = new RestTemplate();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int exInt = 0;
+			
+			map.add("isCurrent", 1);
+			AcademicYear acYear1  = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
+					AcademicYear.class);
+			int yearId = acYear1.getYearId();
+			
+			
 			String exVar = "";
 			if (instId == 0) {
 				Institute institute = new Institute();
@@ -112,8 +121,9 @@ public class RegController {
 				institute.setDelStatus(1);
 				institute.setEmail(request.getParameter("princ_email"));
 
-				institute.setExInt1(exInt);
-				institute.setExInt2(exInt);
+				institute.setExInt1(yearId);	//academic Year
+				institute.setExInt2(0);			//is_approved
+				
 				institute.setExVar1(exVar);
 				institute.setExVar2(exVar);	
 
@@ -155,7 +165,7 @@ public class RegController {
 				institute.setState(request.getParameter("state"));
 				institute.setPincode(request.getParameter("pin"));
 
-				//System.out.println(institute);
+				System.out.println("Data--------------"+institute.toString());
 
 				//Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 					//	Institute.class);

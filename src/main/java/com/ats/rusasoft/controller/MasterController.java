@@ -50,8 +50,6 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 @Scope("session")
 public class MasterController {
 	
-	
-	
 	RestTemplate rest = new RestTemplate();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
