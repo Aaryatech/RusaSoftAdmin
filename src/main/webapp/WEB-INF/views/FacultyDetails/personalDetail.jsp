@@ -131,6 +131,160 @@
 													value="${staff.facultyFirstName}" required>
 											</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_gender">Gender<span
+												class="text-danger">*</span>
+											</label>
+											<div class="col-sm-9">
+												<c:choose>
+													<c:when test="${facPerDetail.fGender==0}">
+													Male<input type="radio" checked name="f_gender"
+															id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+													Female<input type="radio" name="f_gender" id="f_gender"
+															value="1">&nbsp;&nbsp;&nbsp; 
+															Transgender<input type="radio" name="f_gender"
+															id="f_gender" value="2">
+													</c:when>
+
+													<c:when test="${facPerDetail.fGender==1}">
+													Male<input type="radio" name="f_gender" id="f_gender"
+															value="0">&nbsp;&nbsp;&nbsp;Female<input
+															type="radio" name="f_gender" id="f_gender" checked
+															value="1">&nbsp;&nbsp;&nbsp; 
+															Transgender<input type="radio" name="f_gender"
+															id="f_gender" value="2">
+													</c:when>
+													<c:otherwise>Male<input type="radio"
+															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
+													Female<input type="radio" name="f_gender" id="f_gender"
+															value="1">&nbsp;&nbsp;&nbsp; 
+															Transgender<input type="radio" checked name="f_gender"
+															id="f_gender" value="2">
+													</c:otherwise>
+
+												</c:choose>
+												<span class="error_form text-danger" id="f_gender_field"
+													style="display: none;">Please select gender.</span>
+
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_dob">Date
+												of Birth<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"  data-end-date="-7000d" data-format="dd-mm-yyyy"
+													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
+													value="${facPerDetail.fDob}"> <span
+													class="error_form text-danger" id="f_dob_field"
+													style="display: none;">Please select date of birth.</span>
+
+											</div>
+										</div>		
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_designation">
+												Designation <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="f_designation" name="f_designation"
+													class="form-control" disabled required>
+													<c:forEach items="${desigList}" var="des">
+														<c:choose>
+															<c:when
+																test="${staff.currentDesignationId==des.designationId}">
+																<option selected value="${des.designationId}">${des.designationName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${des.designationId}">${des.designationName}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</select>
+											</div>
+											<div class="col-sm-2"></div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_email">Email
+												ID<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" readonly class="form-control"
+													id="f_email" name="f_email" placeholder="abc@xyz.com"
+													value="${staff.email}">
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fac_mob">Mobile
+												No<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" readonly class="form-control"
+													id="fac_mob" name="fac_mob" pattern="^[1-9]{1}[0-9]{9}$"
+													maxlength="10"
+													title="Phone number with 7-9 and remaing 9 digit with 0-9"
+													placeholder="Mobile No" value="${staff.contactNo}">
+											</div>
+											<div class="col-sm-2"></div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_resident">Alternate Mobile
+												No.</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="f_resident"
+													onchange="trim(this)" name="f_resident" maxlength="15"
+													title="Phone number with 7-9 and remaing 9 digit with 0-9"
+													placeholder="Resident Phone No"
+													value="${facPerDetail.fResident}">
+											</div>
+											<div class="col-sm-2"></div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_phone">Phone
+												No.<span class="text-danger"></span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="f_phone"
+													onchange="trim(this)" name="f_phone" maxlength="15"
+													placeholder="Office Landline No"
+													value="${facPerDetail.fPhone}">
+
+											</div>
+										</div>	
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="f_aadhar">Aadhaar
+												No.<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" maxlength="15" class="form-control"
+													id="f_aadhar" name="f_aadhar"
+													placeholder="Consecutive 12 digit Aadhar No"
+													value="${facPerDetail.fAadhar}"> <span
+													class="error_form text-danger" id="f_aadhar_field"
+													style="display: none;">Please enter aadhaar No.</span>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="fPan">PAN
+												No<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" maxlength="10" class="form-control"
+													id="f_pan" name="f_pan"
+													placeholder="Consecutive 10 characters PAN No (In UPPER CASE)"
+													value="${facPerDetail.fPan}"> <span
+													class="error_form text-danger" id="f_pan_field"
+													style="display: none;">Please enter PAN No.</span>
+											</div>
+										</div>									
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">Address
@@ -205,7 +359,7 @@
 													style="display: none;">Please enter city.</span>
 											</div>
 										</div> --%>
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">State
 												<span class="text-danger">*</span>
 											</label>
@@ -216,6 +370,36 @@
 													value="${facPerDetail.fState}"> <span
 													class="error_form text-danger" id="fac_state_field"
 													style="display: none;">Please enter state.</span>
+											</div>
+										</div> --%>
+										
+										<div class="form-group">
+										 
+											<label class="control-label col-sm-3" for="state_id">State <span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="state_id" name="state_id" class="form-control" disabled>
+												
+													 <c:forEach items="${sessionScope.stateList}" var="state">
+														<c:choose>
+														<c:when test="${staff.facultyMiddelName == state.stateId}">
+															<option selected value="${state.stateId}">${state.stateName}</option>
+														</c:when>
+														
+															<c:when test="${staff.facultyMiddelName eq 21}">
+															<option selected option="">Maharashtra</option>
+														</c:when>
+														
+														<c:otherwise>
+															<option value="${state.stateId}">${state.stateName}</option>
+														</c:otherwise>
+														</c:choose>
+													</c:forEach>
+ 
+ 	
+												</select> <span class="error_form text-danger" id="quolf_field"
+													style="display: none;">Please select highest
+													qualification</span>
 											</div>
 										</div>
 										
@@ -233,7 +417,7 @@
 											</div>
 										</div>
 										
-										<div class="form-group" >
+									<%-- 	<div class="form-group" >
 											
 											<label class="control-label col-sm-3" for="is_add_same">Belongs to
 												 Same State <span
@@ -251,7 +435,7 @@
 													permanent/correspondence address same or not.</span>
 
 											</div>
-										</div>
+										</div> --%>
 										
 										
 										
@@ -304,117 +488,9 @@
 											</div>
 										</div>
 
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="fac_mob">Mobile
-												No<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" readonly class="form-control"
-													id="fac_mob" name="fac_mob" pattern="^[1-9]{1}[0-9]{9}$"
-													maxlength="10"
-													title="Phone number with 7-9 and remaing 9 digit with 0-9"
-													placeholder="Mobile No" value="${staff.contactNo}">
-											</div>
-											<div class="col-sm-2"></div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_phone">Phone
-												No<span class="text-danger"></span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="f_phone"
-													onchange="trim(this)" name="f_phone" maxlength="15"
-													placeholder="Office Landline No"
-													value="${facPerDetail.fPhone}">
-
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_resident">Resident
-												No</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" id="f_resident"
-													onchange="trim(this)" name="f_resident" maxlength="15"
-													title="Phone number with 7-9 and remaing 9 digit with 0-9"
-													placeholder="Resident Phone No"
-													value="${facPerDetail.fResident}">
-											</div>
-											<div class="col-sm-2"></div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_email">Email
-												ID<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" readonly class="form-control"
-													id="f_email" name="f_email" placeholder="abc@xyz.com"
-													value="${staff.email}">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_aadhar">Aadhar
-												No<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" maxlength="15" class="form-control"
-													id="f_aadhar" name="f_aadhar"
-													placeholder="Consecutive 12 digit Aadhar No"
-													value="${facPerDetail.fAadhar}"> <span
-													class="error_form text-danger" id="f_aadhar_field"
-													style="display: none;">Please enter aadhaar No.</span>
-											</div>
-										</div>
 										
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="fPan">PAN
-												No<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" maxlength="10" class="form-control"
-													id="f_pan" name="f_pan"
-													placeholder="Consecutive 10 characters PAN No (In UPPER CASE)"
-													value="${facPerDetail.fPan}"> <span
-													class="error_form text-danger" id="f_pan_field"
-													style="display: none;">Please enter PAN No.</span>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_designation">
-												Designation <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<select id="f_designation" name="f_designation"
-													class="form-control" disabled required>
-													<c:forEach items="${desigList}" var="des">
-														<c:choose>
-															<c:when
-																test="${staff.currentDesignationId==des.designationId}">
-																<option selected value="${des.designationId}">${des.designationName}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${des.designationId}">${des.designationName}</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div>
-											<div class="col-sm-2"></div>
-										</div>
-
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_dob">Date
-												of Birth<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"  data-end-date="-7000d" data-format="dd-mm-yyyy"
-													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
-													value="${facPerDetail.fDob}"> <span
-													class="error_form text-danger" id="f_dob_field"
-													style="display: none;">Please select date of birth.</span>
-
-											</div>
-										</div>
-
+										
+										
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_doj">Date
 												of Joining <span class="text-danger">*</span>
@@ -442,44 +518,7 @@
 											</div>
 										</div>
 
-										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_gender">Gender<span
-												class="text-danger">*</span>
-											</label>
-											<div class="col-sm-9">
-												<c:choose>
-													<c:when test="${facPerDetail.fGender==0}">
-													Male<input type="radio" checked name="f_gender"
-															id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
-													Female<input type="radio" name="f_gender" id="f_gender"
-															value="1">&nbsp;&nbsp;&nbsp; 
-															Transgender<input type="radio" name="f_gender"
-															id="f_gender" value="2">
-													</c:when>
-
-													<c:when test="${facPerDetail.fGender==1}">
-													Male<input type="radio" name="f_gender" id="f_gender"
-															value="0">&nbsp;&nbsp;&nbsp;Female<input
-															type="radio" name="f_gender" id="f_gender" checked
-															value="1">&nbsp;&nbsp;&nbsp; 
-															Transgender<input type="radio" name="f_gender"
-															id="f_gender" value="2">
-													</c:when>
-													<c:otherwise>Male<input type="radio"
-															name="f_gender" id="f_gender" value="0">&nbsp;&nbsp;&nbsp;
-													Female<input type="radio" name="f_gender" id="f_gender"
-															value="1">&nbsp;&nbsp;&nbsp; 
-															Transgender<input type="radio" checked name="f_gender"
-															id="f_gender" value="2">
-													</c:otherwise>
-
-												</c:choose>
-												<span class="error_form text-danger" id="f_gender_field"
-													style="display: none;">Please select gender.</span>
-
-											</div>
-										</div>
-
+										
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-9">
 												<button type="submit" id="sub1" class="btn btn-primary"

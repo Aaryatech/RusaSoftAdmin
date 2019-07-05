@@ -1207,7 +1207,7 @@ public class LibraryController {
 				
 				staff.setIsSame(isState);
 				if(isState==1) {
-				staff.setFacultyMiddelName("0");		//inserted state id
+				staff.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
@@ -1269,7 +1269,7 @@ public class LibraryController {
 			
 				editHod.setIsSame(isState);
 				if(isState==1) {
-					editHod.setFacultyMiddelName("0");		//inserted state id
+					editHod.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					editHod.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}

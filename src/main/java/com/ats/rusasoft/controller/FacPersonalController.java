@@ -216,7 +216,7 @@ public class FacPersonalController {
 				map = new LinkedMultiValueMap<>();
 				map.add("id", userObj.getStaff().getFacultyId());
 				Staff staff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				//System.out.println("staff" + staff);
+				System.out.println("staff" + staff);
 
 				if (temp == 1) {
 					model.addObject("temp", temp);

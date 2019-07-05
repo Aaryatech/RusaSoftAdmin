@@ -294,7 +294,7 @@ public class IqacController {
 			
 			staff.setIsSame(isState);
 			if(isState==1) {
-			staff.setFacultyMiddelName("0");		//inserted state id
+			staff.setFacultyMiddelName("21");		//inserted state id
 			}else {
 				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 			}
@@ -327,7 +327,7 @@ public class IqacController {
 				editIqac.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editIqac.setIsSame(isState);
 				if(isState==1) {
-					editIqac.setFacultyMiddelName("0");		//inserted state id
+					editIqac.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					editIqac.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
@@ -896,7 +896,7 @@ public class IqacController {
 					staff.setHightestQualificationYear(yrofHighestQualification);
 					staff.setIsSame(isState);
 					if(isState==1) {
-					staff.setFacultyMiddelName("0");		//inserted state id
+					staff.setFacultyMiddelName("21");		//inserted state id
 					}else {
 						staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 					}
@@ -976,7 +976,7 @@ public class IqacController {
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("hod_quolf")));
 				editStaff.setIsSame(isState);
 				if(isState==1) {
-					editStaff.setFacultyMiddelName("0");		//inserted state id
+					editStaff.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
@@ -989,7 +989,7 @@ public class IqacController {
 				editStaff.setCheckerUserId(0);
 				editStaff.setCheckerDatetime(curDateTime);
 				editStaff.setType(4);
-				editStaff.setRoleIds(roleIds);
+				//editStaff.setRoleIds(roleIds);
 				editStaff.setIsFaculty(1);
 				editStaff.setExtraint1(0);
 				editStaff.setExtravarchar1("NA");
@@ -1490,7 +1490,7 @@ public class IqacController {
 			staff.setHightestQualificationYear(null);
 			staff.setIsSame(isState);
 			if(isState==1) {
-			staff.setFacultyMiddelName("0");		//inserted state id
+			staff.setFacultyMiddelName("21");		//inserted state id
 			}else {
 				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 			}
@@ -1546,13 +1546,13 @@ public class IqacController {
 			
 				editStaff.setIsSame(isState);
 				if(isState==1) {
-					editStaff.setFacultyMiddelName("0");		//inserted state id
+					editStaff.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
 
 				editStaff.setIsHod(isHod);
-				editStaff.setRoleIds(roleIds);
+				//editStaff.setRoleIds(roleIds);
 				editStaff.setType(6);
 				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
 
@@ -2051,7 +2051,7 @@ public class IqacController {
 			
 			staff.setIsSame(isState);
 			if(isState==1) {
-			staff.setFacultyMiddelName("0");		//inserted state id
+			staff.setFacultyMiddelName("21");		//inserted state id
 			}else {
 				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 			}
@@ -2109,13 +2109,13 @@ public class IqacController {
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editStaff.setIsSame(isState);
 				if(isState==1) {
-					editStaff.setFacultyMiddelName("0");		//inserted state id
+					editStaff.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setRealivingDate(dateOfRel);
-				editStaff.setRoleIds(roleIds);
+				//editStaff.setRoleIds(roleIds);
 				editStaff.setType(7);
 				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
 
@@ -2444,7 +2444,7 @@ public class IqacController {
 			
 			staff.setIsSame(isState);
 			if(isState==1) {
-			staff.setFacultyMiddelName("0");		//inserted state id
+			staff.setFacultyMiddelName("21");		//inserted state id
 			}else {
 				staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 			}
@@ -2503,13 +2503,13 @@ public class IqacController {
 			
 				editStaff.setIsSame(isState);
 				if(isState==1) {
-					editStaff.setFacultyMiddelName("0");		//inserted state id
+					editStaff.setFacultyMiddelName("21");		//inserted state id
 				}else {
 					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
 				editStaff.setJoiningDate(dateOfJoin);
 				editStaff.setRealivingDate(dateOfRel);
-				editStaff.setRoleIds(roleIds);
+				//editStaff.setRoleIds(roleIds);
 				editStaff.setType(8);
 				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
 
