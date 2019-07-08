@@ -598,15 +598,17 @@ public class HomeController {
 
 			mav = "login" ;
 			model.addAttribute("msg", "Enter Valid  Login Credentials");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			map = new LinkedMultiValueMap<String, Object>();
-			map.add("type", 1);
-
-			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
-					AcademicYear[].class);
-			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-			model.addAttribute("acaYearList", acaYearList);
+			/*
+			 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
+			 * Object>();
+			 * 
+			 * map = new LinkedMultiValueMap<String, Object>(); map.add("type", 1);
+			 * 
+			 * AcademicYear[] quolArray = restTemplate.postForObject(Constants.url +
+			 * "getAcademicYearListByTypeId", map, AcademicYear[].class); List<AcademicYear>
+			 * acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+			 * model.addAttribute("acaYearList", acaYearList);
+			 */
 		}
 
 		
