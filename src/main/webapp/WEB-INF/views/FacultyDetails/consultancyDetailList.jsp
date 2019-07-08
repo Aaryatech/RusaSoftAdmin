@@ -98,6 +98,7 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
+								<p class="desc text-danger fontsize11">(If Involved.)</p>
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitFacultyConsultancy"
 										method="post" name="form_sample_2" id="form_sample_2">
@@ -224,10 +225,9 @@
 											<div class="clearfix"></div>
 
 										</div>
-
-
-
 									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
 								</div>
 
 							</div>

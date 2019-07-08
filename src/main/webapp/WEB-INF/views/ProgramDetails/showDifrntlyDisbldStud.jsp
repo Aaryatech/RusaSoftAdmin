@@ -87,7 +87,7 @@
 														<td align="center">${count.index+1}</td>
 														<td align="left">${studList.programName}-${studList.nameOfProgram}</td>
 														<td align="right">${studList.nameOfStud}</td>
-														<td align="left">${studList.gender==1 ? 'Male' : 'Female'}</td>
+														<td align="left">${studList.gender==1 ? 'Male' : studList.gender==0 ? 'Female' : studList.gender==2 ? 'Transgender' : ''}</td>
 														<td align="left">${studList.udidCardNo}</td>
 														<td align="right">${studList.typeOfDisability}</td>
 														<td align="right">${studList.percntOfDisability}</td>

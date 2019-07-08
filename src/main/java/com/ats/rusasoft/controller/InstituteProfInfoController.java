@@ -2088,7 +2088,7 @@ public class InstituteProfInfoController {
 				} else {
 					model = new ModelAndView("instituteInfo/IQAC/showStudGrievanceList");
 
-					model.addObject("title", "Redressed of Student Grievances");
+					model.addObject("title", "Redressal of Student Grievances");
 
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -2160,7 +2160,7 @@ public class InstituteProfInfoController {
 
 					model = new ModelAndView("instituteInfo/IQAC/addRedressedStudGrievnce");
 
-					model.addObject("title", "Add Redressed of Student Grievances");
+					model.addObject("title", "Add Redressal of Student Grievances");
 					RedressedStudGrievance redressed = new RedressedStudGrievance();
 					model.addObject("redressed", redressed);
 				}
@@ -2280,7 +2280,7 @@ public class InstituteProfInfoController {
 
 					model = new ModelAndView("instituteInfo/IQAC/addRedressedStudGrievnce");
 
-					model.addObject("title", "Edit Redressed of Student Grievances");
+					model.addObject("title", "Edit Redressal of Student Grievances");
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 					
 					map.add("studGrievancId", studGrievancId);

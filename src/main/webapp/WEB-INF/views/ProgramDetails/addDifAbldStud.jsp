@@ -122,7 +122,8 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="radio" ${difDisStud.gender == 1 ? 'checked' : ''} name="gender" value="1">Male &nbsp;&nbsp;&nbsp;&nbsp;
-														<input type="radio" ${difDisStud.gender == 0 ? 'checked' : ''} name="gender" value="0">Female
+														<input type="radio" ${difDisStud.gender == 0 ? 'checked' : ''} name="gender" value="0">Female &nbsp;&nbsp;&nbsp;&nbsp;
+														<input type="radio" ${difDisStud.gender == 2 ? 'checked' : ''} name="gender" value="2">Transgender
 														<!-- <span class="error_form text-danger" id="gender_errfield"
 															style="display: none;">Please select Gender</span> -->
 
