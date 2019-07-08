@@ -148,7 +148,7 @@ public class RegController {
 				institute.setPresidentName(request.getParameter("pres_name"));
 				institute.setPrincipalName(request.getParameter("princ_name"));
 				if (isReg == 1)
-					institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
+					institute.setRegDate(request.getParameter("reg_date"));
 				institute.setTrustAdd(request.getParameter("trusty_add"));
 
 				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
@@ -212,6 +212,7 @@ public class RegController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			String otp=getNumericOtp(6);
 			String otpKey=getIntegerKey(4);
+			System.err.println("OTP is " +otp);
 			
 			String msg=" OTP for  Insitute Registration is " +otp+ ". Do not share OTP with anyone. RUSA Maharashtra";
 		 
@@ -235,6 +236,9 @@ public class RegController {
 				
 				model = new ModelAndView("instituteRegistration");
 				Institute editInst=instHashMap.get(otpNo);
+				
+				model.addObject("isEdit", 1);
+				
 				try {
 				editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
 				}catch (Exception e) {
@@ -267,7 +271,10 @@ public class RegController {
 		if(enteredOtp.equals(storedOtp)) {
 			System.err.println("Otp Matched ");
 			
-			Institute info = rest.postForObject(Constants.url + "saveInstitute", instHashMap.get(otpNo),
+			Institute editInst=instHashMap.get(otpNo);
+			editInst.setRegDate(DateConvertor.convertToYMD(editInst.getRegDate()));
+			
+			Institute info = rest.postForObject(Constants.url + "saveInstitute", editInst,
 					Institute.class);
 			
 			model = new ModelAndView("login");

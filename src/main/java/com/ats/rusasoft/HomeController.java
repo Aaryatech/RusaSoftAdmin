@@ -129,7 +129,7 @@ public class HomeController {
 
 		} catch (Exception e) {
 
-			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+			System.err.println("exception In / at home Contr '/' mapping " + e.getMessage());
 
 			e.printStackTrace();
 
@@ -150,9 +150,10 @@ public class HomeController {
 			Institute editInst = new Institute();
 
 			model.addObject("editInst", editInst);
+			model.addObject("isEdit", 0);
 		} catch (Exception e) {
 
-			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+			System.err.println("exception In showInstituteRegistrationForm at home Contr" + e.getMessage());
 
 			e.printStackTrace();
 
@@ -179,7 +180,7 @@ public class HomeController {
 			model.addObject("title", "DASHBOARD");
 		} catch (Exception e) {
 
-			System.err.println("exception In showCMSForm at home Contr" + e.getMessage());
+			System.err.println("exception In showWelcomePage at home Contr" + e.getMessage());
 
 			e.printStackTrace();
 

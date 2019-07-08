@@ -111,7 +111,7 @@
 													<div class="col-sm-7">
 														<input type="text" maxlength="7" onchange="trim(this)"
 															class="form-control" id="aishe_code" autocomplete="off"
-															 value="C-" name="aishe_code"
+															   name="aishe_code" value="${editInst.aisheCode}"
 															placeholder="All India Survey On Higher Education code">
 														<span class="error_form text-danger" id="aishe_code_field"
 															style="display: none;">Please enter AISHE code</span>
@@ -237,7 +237,7 @@
 													</label>
 													<div class="col-sm-7">
 
-														<c:choose>
+														<%-- <c:choose>
 															<c:when test="${editInst.instituteId==0}">
 
 																<input type="radio" id="is_registration"
@@ -248,7 +248,7 @@
 																	onclick="setDate(this.value)">No
 															
 															</c:when>
-															<c:otherwise>
+															<c:otherwise> --%>
 
 																<c:choose>
 																	<c:when test="${editInst.isRegistration==1}">
@@ -274,10 +274,10 @@
 
 																</c:choose>
 
-															</c:otherwise>
+															<%-- </c:otherwise>
+ --%>
 
-
-														</c:choose>
+														<%-- </c:choose> --%>
 														<span class="error_form text-danger"
 															id="is_registration_field" style="display: none;">Please
 															select yes/no</span>
@@ -293,7 +293,7 @@
 
 
 													<div class="col-sm-7">
-														<input type="text" class="form-control datepicker"
+														<input type="text" class="form-control datepicker" data-end-date="0d" data-format="dd-mm-yyyy"
 															autocomplete="off" id="reg_date" onkeypress='return restrictAlphabets(event)'
 															value="${editInst.regDate}" name="reg_date" autocomplete="off"
 															placeholder="Date of Registration"> <span
@@ -970,14 +970,14 @@ $('#aishe_code').on('input', function() {
 			//alert("Value " +value)
 			if (value == 0) {
 				//alert(value)
-				document.getElementById("reg_date").removeAttribute("required");
+				//document.getElementById("reg_date").removeAttribute("required");
 				document.getElementById("abc").style.display = "none";
 
 				//alert(value)
 			} else {
 				//alert(value)
-				document.getElementById("reg_date").setAttribute("required",
-				"true");
+				//document.getElementById("reg_date").setAttribute("required",
+				//"true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -989,11 +989,11 @@ $('#aishe_code').on('input', function() {
 	</script>
 	<script>
 		function showIsReg() {
-
-			var x = ${editInst.instituteId};
-
-			if (parseInt(x) > 0) {
-				var da = ${editInst.regDate};
+//alert("Hi")
+			var x = ${isEdit};
+			//model.addObject("isEdit", 1);
+			if (parseInt(x) == 0) {
+				//var da = ${editInst.regDate};
 				
 				var isReg = ${editInst.isRegistration};
 				
@@ -1001,8 +1001,8 @@ $('#aishe_code').on('input', function() {
 				if (isReg == 0) {
 
 					document.getElementById("abc").style.display = "none";
-					document.getElementById("reg_date").removeAttribute(
-							"required");
+					//document.getElementById("reg_date").removeAttribute(
+						//	"required");
 				//document.getElementById("reg_date").value = da;
 
 				} else {
@@ -1012,8 +1012,25 @@ $('#aishe_code').on('input', function() {
 
 				}
 
-			}
+			}else{
+				
+var isReg = ${editInst.isRegistration};
+				//alert("Is Reg " +isReg);
+				if (isReg == 0) {
 
+					document.getElementById("abc").style.display = "none";
+					//document.getElementById("reg_date").removeAttribute(
+						//	"required");
+				//document.getElementById("reg_date").value = da;
+
+				} else {
+					document.getElementById("abc").style.display = "block";
+					//reg_date
+					//document.getElementById("reg_date").value = da;
+
+				}
+			}
+//alert("Hi");
 		}
 	</script>
 
@@ -1021,7 +1038,7 @@ $('#aishe_code').on('input', function() {
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -1029,7 +1046,7 @@ $('#aishe_code').on('input', function() {
 				changeYear : true,
 				changeMonth : true
 			});
-		});
+		}); */
 
 		function checkUnique(inputValue, valueType) {
 			var primaryKey = ${editInst.instituteId};
