@@ -71,7 +71,7 @@
 												<tr>
 													<th>Sr.No.</th>
 													<th>Program Name</th>
-													<th>Provisin for Undertaking Field Projects/Internships</th>
+													<th>Provision for Undertaking Field Projects/Internships</th>
 													<th>No. of Students Undertaking Field Projects/Internships</th>
 													<th>Link to the Relevant Documents</th>
 													<th>Action</th>

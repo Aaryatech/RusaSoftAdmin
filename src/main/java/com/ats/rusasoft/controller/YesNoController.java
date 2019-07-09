@@ -405,7 +405,7 @@ public class YesNoController {
 
 		} catch (Exception e) {
 
-			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
+			System.err.println("exception In submitYesNo at YesNo Contr" + e.getMessage());
 
 			e.printStackTrace();
 
