@@ -1078,9 +1078,9 @@
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
-
-						dataTable.addColumn('number', 'Student Passed');
 						dataTable.addColumn('number', 'Student Appeared');
+						dataTable.addColumn('number', 'Student Passed');
+						
 						$.each(data,
 								function(key, dt) {
 
@@ -1089,7 +1089,7 @@
 
 									dataTable.addRows([
 
-									[ pName, dt.noStudPass, dt.noStudAppear ]
+									[ pName, dt.noStudAppear, dt.noStudPass ]
 
 									]);
 
@@ -1254,14 +1254,14 @@
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
-
-						dataTable.addColumn('number', 'No. of Faculty');
 						dataTable.addColumn('number', 'No. of Student');
+						dataTable.addColumn('number', 'No. of Faculty');
+						
 						$.each(data, function(key, dt) {
 
 							dataTable.addRows([
 
-							[ dt.acYear, dt.avgTeacher, dt.avgStudent ]
+							[ dt.acYear, dt.avgStudent, dt.avgTeacher ]
 
 							]);
 
@@ -1313,14 +1313,14 @@
 						var dataTable = new google.visualization.DataTable();
 
 						dataTable.addColumn('string', 'academic year'); // Implicit domain column.
-
-						dataTable.addColumn('number', 'Students Passed');
 						dataTable.addColumn('number', 'Students Appeared');
+						dataTable.addColumn('number', 'Students Passed');
+						
 						$.each(data, function(key, dt) {
 
 							dataTable.addRows([
 
-							[ dt.subName, dt.subStuPassed, dt.subStuAppear ]
+							[ dt.subName, dt.subStuAppear, dt.subStuPassed ]
 
 							]);
 
