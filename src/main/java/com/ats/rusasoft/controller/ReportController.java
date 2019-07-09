@@ -1,6 +1,8 @@
 package com.ats.rusasoft.controller;
 
 import java.io.BufferedInputStream;
+
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -121,7 +123,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class ReportController {
 
 	RestTemplate rest = new RestTemplate();
-
+	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 	String curDateTime = dateFormat.format(cal.getTime());
@@ -1005,7 +1007,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
+				
 					String tempprcnt = decimalFormat
 							.format(prog.getNoCurrentAdmitedStnt() / prog.getTotalSanctIntake() * 100);
 
@@ -1045,7 +1047,7 @@ public class ReportController {
 				document.add(new Paragraph("Academic Year :" + temp_ac_year + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
-				document.add(new Paragraph("Avg% :" + n + ""));
+				document.add(new Paragraph("Avg% :" + decimalFormat.format(n) + ""));
 				int totalPages = writer.getPageNumber();
 
 				// System.out.println("Page no " + totalPages);
@@ -1103,8 +1105,7 @@ public class ReportController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat.format(progList.get(i).getNoCurrentAdmitedStnt()
+ 						String tempprcnt = decimalFormat.format(progList.get(i).getNoCurrentAdmitedStnt()
 								/ progList.get(i).getTotalSanctIntake() * 100);
 						rowData.add("" + (i + 1));
 
@@ -1367,8 +1368,7 @@ public class ReportController {
 				String r3 = null;
 				String r4 = null;
 				String r5 = null;
-				DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
+ 
 				if (s1 != 0) {
 					r1 = decimalFormat.format((f1 / s1) * 100);
 				} else {
@@ -1748,8 +1748,7 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat.format(prog.getTechersUsingIct() / prog.getTotalFaculty() * 100);
+ 					String tempprcnt = decimalFormat.format(prog.getTechersUsingIct() / prog.getTotalFaculty() * 100);
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -1841,8 +1840,7 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getTechersUsingIct());
 						rowData.add("" + progList.get(i).getTotalFaculty());
 
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat
+ 						String tempprcnt = decimalFormat
 								.format(progList.get(i).getTechersUsingIct() / progList.get(i).getTotalFaculty() * 100);
 						rowData.add("" + tempprcnt);
 
@@ -2026,8 +2024,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = null;
+ 					String tempprcnt = null;
 					if (prog.getTotalFacMentor() == 0.0) {
 						tempprcnt = "0";
 					} else {
@@ -2121,8 +2118,7 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getTotalFacMentor());
 						rowData.add("" + progList.get(i).getTotalStudMentoring());
 
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = null;
+ 						String tempprcnt = null;
 						if (progList.get(i).getTotalFacMentor() == 0.0) {
 							tempprcnt = "0";
 						} else {
@@ -2580,8 +2576,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat.format(prog.getCatTotStudent() / prog.getSeatsAvaailable() * 100);
+ 					String tempprcnt = decimalFormat.format(prog.getCatTotStudent() / prog.getSeatsAvaailable() * 100);
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2603,7 +2598,7 @@ public class ReportController {
 				document.add(new Paragraph("\n"));
 				document.add(table);
 				document.add(new Paragraph("\n"));
-				document.add(new Paragraph("Average%:" + rslt / 5 + ""));
+				document.add(new Paragraph("Average%:" +decimalFormat.format(rslt / 5 ) + ""));
 				int totalPages = writer.getPageNumber();
 
 				// System.out.println("Page no " + totalPages);
@@ -2665,8 +2660,7 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getCatTotStudent());
 						rowData.add("" + progList.get(i).getSeatsAvaailable());
 
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat.format(
+ 						String tempprcnt = decimalFormat.format(
 								progList.get(i).getCatTotStudent() / progList.get(i).getSeatsAvaailable() * 100);
 						rowData.add("" + tempprcnt);
 
@@ -3509,8 +3503,7 @@ public class ReportController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
+ 
 						rowData.add("" + (i + 1));
 
 						rowData.add("" + progList.get(i).getYesnoTitle());
@@ -3615,8 +3608,7 @@ public class ReportController {
 
 			String header = "";
 			String title = "                 ";
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
-			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
+ 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
 			String repDate = DF2.format(new Date());
 
 			String headingName = null;
@@ -5178,8 +5170,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat.format(prog.getNofFacSupport() / prog.getTotalFaculty() * 100);
+ 					String tempprcnt = decimalFormat.format(prog.getNofFacSupport() / prog.getTotalFaculty() * 100);
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -5259,8 +5250,7 @@ public class ReportController {
 					for (int i = 0; i < progList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat
+ 						String tempprcnt = decimalFormat
 								.format(progList.get(i).getNofFacSupport() / progList.get(i).getTotalFaculty() * 100);
 						cnt = cnt + i;
 						rowData.add("" + (i + 1));
@@ -5474,8 +5464,7 @@ public class ReportController {
 
 				}
 				System.err.println("temp bean ::" + progList.get(0).toString());
-				DecimalFormat decimalFormat = new DecimalFormat("0.00");
-				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
+ 				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
 
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
@@ -5561,8 +5550,7 @@ public class ReportController {
 						temp1 = temp1 + Double.parseDouble(progList.get(i).getTrainingPcount());
 
 					}
-					DecimalFormat decimalFormat1 = new DecimalFormat("0.00");
-					String tempprcnt1 = decimalFormat1.format((temp1 / progList.get(0).getTotCount()) * 100);
+ 					String tempprcnt1 = decimalFormat.format((temp1 / progList.get(0).getTotCount()) * 100);
 
 					XSSFWorkbook wb = null;
 					try {
@@ -5766,8 +5754,7 @@ public class ReportController {
 
 				}
 				System.err.println("temp bean ::" + progList.get(0).toString());
-				DecimalFormat decimalFormat = new DecimalFormat("0.00");
-				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
+ 				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
 
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
@@ -5853,8 +5840,7 @@ public class ReportController {
 						temp = temp + Double.parseDouble(progList.get(i).getTrainingPcount());
 
 					}
-					DecimalFormat decimalFormat1 = new DecimalFormat("0.00");
-					String tempprcnt1 = decimalFormat1.format((temp / progList.get(0).getTotCount()) * 100);
+ 					String tempprcnt1 = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
 
 					XSSFWorkbook wb = null;
 					try {
@@ -9057,8 +9043,7 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat
+ 					String tempprcnt = decimalFormat
 							.format(prog.getNoOfStudBenftd() / prog.getNoCurrentAdmitedStnt() * 100);
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
@@ -9151,8 +9136,7 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getNameOfScheme());
 						rowData.add("" + progList.get(i).getNoOfStudBenftd());
 
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat.format(
+ 						String tempprcnt = decimalFormat.format(
 								progList.get(i).getNoOfStudBenftd() / progList.get(i).getNoCurrentAdmitedStnt() * 100);
 						rowData.add("" + tempprcnt);
 
@@ -9360,8 +9344,7 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat
+ 					String tempprcnt = decimalFormat
 							.format(prog.getInstStudentsBenefited() / prog.getNoCurrentAdmitedStnt() * 100);
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
@@ -9459,8 +9442,7 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getInstSchmeOfferedby());
 						rowData.add("" + progList.get(i).getInstStudentsBenefited());
 
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat.format(progList.get(i).getInstStudentsBenefited()
+ 						String tempprcnt = decimalFormat.format(progList.get(i).getInstStudentsBenefited()
 								/ progList.get(i).getNoCurrentAdmitedStnt() * 100);
 						rowData.add("" + tempprcnt);
 
@@ -9668,8 +9650,7 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
-					DecimalFormat decimalFormat = new DecimalFormat("0.00");
-					String tempprcnt = decimalFormat
+ 					String tempprcnt = decimalFormat
 							.format(prog.getInstStudentsBenefited() / prog.getNoCurrentAdmitedStnt() * 100);
 
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
@@ -9762,8 +9743,7 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getInstSchmeOfferedby());
 						rowData.add("" + progList.get(i).getInstStudentsBenefited());
 
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-						String tempprcnt = decimalFormat.format(progList.get(i).getInstStudentsBenefited()
+ 						String tempprcnt = decimalFormat.format(progList.get(i).getInstStudentsBenefited()
 								/ progList.get(i).getNoCurrentAdmitedStnt() * 100);
 						rowData.add("" + tempprcnt);
 
@@ -10238,7 +10218,7 @@ public class ReportController {
 				document.add(new Paragraph(" Year  of Estabilishment : " + editFaculty.getEstYear()));
 				document.add(new Paragraph("\n"));
 				document.add(table);
-				document.add(new Paragraph("Alumini Contribution During Last Years : " + x1));
+				document.add(new Paragraph("Alumini Contribution During Last Years : " + decimalFormat.format(x1)));
 
 				int totalPages = writer.getPageNumber();
 
@@ -11643,7 +11623,7 @@ public class ReportController {
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("\n"));
 				document.add(table);
-				document.add(new Paragraph("Avg%:" + x1 + ""));
+				document.add(new Paragraph("Avg%:" + decimalFormat.format(x1)  + ""));
 				int totalPages = writer.getPageNumber();
 
 				// System.out.println("Page no " + totalPages);
@@ -11917,7 +11897,7 @@ public class ReportController {
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("\n"));
 				document.add(table);
-				document.add(new Paragraph("Avg%:" + x1 + ""));
+				//document.add(new Paragraph("Avg%:" + x1 + ""));
 				int totalPages = writer.getPageNumber();
 
 				// System.out.println("Page no " + totalPages);
@@ -12259,8 +12239,7 @@ public class ReportController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
-						DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
+ 
 						rowData.add("" + (i + 1));
 						rowData.add("" + progList.get(i).getAcademicYear());
 						rowData.add("" + progList.get(i).getYesnoTitle());
@@ -12877,8 +12856,7 @@ public class ReportController {
 			model = new ModelAndView("report/prog_report1");
 
 			HttpSession session = request.getSession();
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
-			int instituteId = (int) session.getAttribute("instituteId");
+ 			int instituteId = (int) session.getAttribute("instituteId");
 			map = new LinkedMultiValueMap<>();
 
 			map.add("instId", instituteId);
@@ -13444,8 +13422,7 @@ public class ReportController {
 			model = new ModelAndView("report/prog_report1");
 
 			HttpSession session = request.getSession();
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
-			int instituteId = (int) session.getAttribute("instituteId");
+ 			int instituteId = (int) session.getAttribute("instituteId");
 			map = new LinkedMultiValueMap<>();
 
 			map.add("instId", instituteId);
@@ -13717,8 +13694,7 @@ public class ReportController {
 			model = new ModelAndView("report/prog_report1");
 
 			HttpSession session = request.getSession();
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
-			int instituteId = (int) session.getAttribute("instituteId");
+ 			int instituteId = (int) session.getAttribute("instituteId");
 			map = new LinkedMultiValueMap<>();
 
 			map.add("instId", instituteId);
@@ -14044,8 +14020,7 @@ public class ReportController {
 			model = new ModelAndView("report/prog_report1");
 
 			HttpSession session = request.getSession();
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
-			int instituteId = (int) session.getAttribute("instituteId");
+ 			int instituteId = (int) session.getAttribute("instituteId");
 			map = new LinkedMultiValueMap<>();
 
 			map.add("instId", instituteId);
@@ -14360,8 +14335,7 @@ public class ReportController {
 
 		ModelAndView model = null;
 		try {
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
+ 
 			model = new ModelAndView("report/prog_report1");
 
 			String ac_year = request.getParameter("ac_year");
@@ -14507,7 +14481,7 @@ public class ReportController {
 						avg = prog.getProgStudEnrolled() / prog.getTotalStud();
 					}
 
-					cell = new PdfPCell(new Phrase("" + avg, headFontData));
+					cell = new PdfPCell(new Phrase("" + decimalFormat.format(avg), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
