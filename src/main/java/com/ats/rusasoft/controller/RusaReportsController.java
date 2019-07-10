@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,7 +94,10 @@ public class RusaReportsController {
 	Calendar cal = Calendar.getInstance();
 	String curDateTime = dateFormat.format(cal.getTime());
 	String redirect = null;
-
+	
+	DecimalFormat df = new DecimalFormat("0.00");
+   
+    
 	MultiValueMap<String, Object> map = null;
 
 	@RequestMapping(value = "/showStudTeachrRatio", method = RequestMethod.POST)
@@ -2875,7 +2879,7 @@ public class RusaReportsController {
 	@RequestMapping(value = "/showExpenditureOnPrchaseBooksJournal", method = RequestMethod.POST)
 	public void showExpenditureOnPrchaseBooksJournal(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Infrastructure and Learning Resources : Expenditure on Purchase of	Books and Journals";
+		String reportName = "Infrastructure and Learning Resources : Expenditure on Purchase of	 Books and Journals";
 
 		ModelAndView model = null;
 		try {
@@ -8087,9 +8091,9 @@ public class RusaReportsController {
 				table.addCell(hcell);*/
 
 				int index = 0;
-				float studPass = 0;
-				float noStud = 0;
-				float studProg = 0;
+				double studPass = 0;
+				double noStud = 0;
+				double studProg = 0;
 
 				for (int i = 0; i < studProgList.size(); i++) {
 					// System.err.println("I " + i);
@@ -8097,7 +8101,9 @@ public class RusaReportsController {
 					try {
 						studPass = stud.getNoStudPass();
 						noStud = stud.getNoStudent();
+						
 						studProg = (noStud/studPass)*100;
+						
 						//studProg = (stud.getNoStudent()/stud.getNoStudPass())*100;
 						
 						
@@ -8170,7 +8176,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("\n"));
 				document.add(table);
 				document.add(new Paragraph("\n"));
-				document.add(new Paragraph("Students Progression % Per Year : " + studProg));
+				document.add(new Paragraph("Students Progression % Per Year : " + df.format(studProg)));
 				int totalPages = writer.getPageNumber();
 
 				//System.out.println("Page no " + totalPages);
