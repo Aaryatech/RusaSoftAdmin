@@ -162,6 +162,27 @@ public class HomeController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/showChangePrincipalForm", method = RequestMethod.GET)
+	public ModelAndView showChangePrincipalForm(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		try {
+
+			model = new ModelAndView("showChangePrincipalForm");
+
+			 
+		} catch (Exception e) {
+
+			//System.err.println("exception In showInstituteRegistrationForm at home Contr" + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
 
 	@RequestMapping(value = "/showWelcomePage", method = RequestMethod.GET)
 	public ModelAndView showWelcomePage(HttpServletRequest request, HttpServletResponse response) {

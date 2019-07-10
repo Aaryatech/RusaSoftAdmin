@@ -80,6 +80,34 @@ public class RegController {
 	
 	}
 	
+	@RequestMapping(value = "/getInstituteMasterByAisheforPrincipal", method = RequestMethod.GET)
+	public @ResponseBody InstituteMaster  getInstituteMasterByAisheforPrincipal(HttpServletRequest request, HttpServletResponse response) {
+		
+		MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+		
+		InstituteMaster imaster=null;
+		
+		try {
+			
+		String aisheCode=request.getParameter("aishe_code");
+		
+		map =new LinkedMultiValueMap<String, Object>(); 
+		
+		map.add("aisheCode", aisheCode);
+			
+		  imaster = rest.postForObject(Constants.url + "getInstituteMasterByAishe", map,
+				 InstituteMaster.class);
+		   
+			
+		}catch (Exception e) {
+			System.err.println("Exce in imaster " +e.getMessage());
+			e.printStackTrace();
+		}
+			
+		return imaster;
+	
+	}
+	
 	
 	@RequestMapping(value = "/insertInstituteDemo", method = RequestMethod.POST)
 	public ModelAndView insertInstitute(HttpServletRequest request, HttpServletResponse response) {
