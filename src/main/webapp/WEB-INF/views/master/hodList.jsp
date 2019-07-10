@@ -117,13 +117,14 @@
 														<td align="center">${hod.contactNo}</td>
 														<td align="left">${hod.email}</td>
 
-														<td align="center"><a
+														<td align="center">
+														<%-- <a
 															href="${pageContext.request.contextPath}/changeHod/${hod.facultyId}"
 															title="Change HOD" rel="tooltip"
 															data-color-class="detail"
 															data-animate=" animated fadeIn " data-toggle="tooltip"
 															data-original-title="Block"><span
-																class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																class="glyphicon glyphicon-list"></span></a> --%>
 															<c:if test="${editAccess==0}">
 
 																<a
@@ -132,7 +133,8 @@
 																	data-animate=" animated fadeIn " data-toggle="tooltip"><span
 																	class="glyphicon glyphicon-edit"></span></a>
 
-															</c:if>&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${deleteAccess==0}">
+															</c:if>
+															&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${deleteAccess==0}">
 																<a
 																	href="${pageContext.request.contextPath}/deleteHod/${hod.facultyId}"
 																	onClick="return confirm('Are you sure want to delete this record');"
