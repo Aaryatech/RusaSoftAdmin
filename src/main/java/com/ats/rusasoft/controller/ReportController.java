@@ -6272,7 +6272,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getQualityInitiativeName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -6822,25 +6822,25 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getGprogName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getGprogFromdt(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getGprogTodt(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getpCount(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
 
@@ -7625,12 +7625,16 @@ public class ReportController {
 				String val = null;
 
 				for (int i = 0; i < progList.size(); i++) {
-					// System.err.println("I " + i);
+					
 
 					EGovernenceOperation prog = progList.get(i);
+					 System.err.println("I*** " + prog.getInstYesnoResponse());
 
+					
 					if (prog.getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
+						if(prog.getInstYesnoResponse()!=null || prog.getInstYesnoResponse()!=" ") {
 						temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+					}
 					}
 
 					index++;
