@@ -3665,14 +3665,6 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				/*
-				 * hcell = new PdfPCell(new Phrase("Institute Name", tableHeaderFont));
-				 * hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				 * hcell.setBackgroundColor(Constants.baseColorTableHeader);
-				 * 
-				 * table.addCell(hcell);
-				 */
-
 				hcell = new PdfPCell(new Phrase("% of Budget on Infrastructure Augmentation", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
@@ -3680,14 +3672,16 @@ public class RusaReportsController {
 				table.addCell(hcell);
 
 				int index = 0;
-				float studcompratio = 0;
+				double studcompratio = 0;
 
 				for (int i = 0; i < studCompList.size(); i++) {
 					// System.err.println("I " + i);
 					StudCompRatioReport stdCmpRatioList = studCompList.get(i);
 					try {
-						studcompratio = stdCmpRatioList.getNoOfComputers() / stdCmpRatioList.getNoOfStudUtilizing();
-
+						System.err.println("I------- " + stdCmpRatioList.getNoOfComputers()+"---------"+stdCmpRatioList.getNoOfStudUtilizing());
+						
+						studcompratio = stdCmpRatioList.getNoOfComputers()/stdCmpRatioList.getNoOfStudUtilizing();
+						System.err.println("Rtio------- " +studcompratio);
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
@@ -3731,7 +3725,7 @@ public class RusaReportsController {
 					 * table.addCell(cell);
 					 */
 
-					cell = new PdfPCell(new Phrase("" + studcompratio, headFontData));
+					cell = new PdfPCell(new Phrase("" + df.format(studcompratio), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -3817,12 +3811,12 @@ public class RusaReportsController {
 
 					int cnt = 1;
 
-					float ratio = 0;
+					double ratio = 0;
 					for (int i = 0; i < studCompList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						try {
-							ratio = studCompList.get(i).getNoOfComputers() / studCompList.get(i).getNoOfStudUtilizing();
+							ratio = studCompList.get(i).getNoOfComputers()/studCompList.get(i).getNoOfStudUtilizing();
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
@@ -3834,7 +3828,7 @@ public class RusaReportsController {
 						rowData.add("" + studCompList.get(i).getPurchaseDate());
 						rowData.add("" + studCompList.get(i).getPurchaseAmt());
 						rowData.add("" + studCompList.get(i).getNoOfStudUtilizing());
-						rowData.add("" + ratio);
+						rowData.add("" + df.format(ratio));
 
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
@@ -4067,8 +4061,13 @@ public class RusaReportsController {
 				document.add(new Paragraph("\n"));
 				// document.add(new Paragraph("Academic Year : 2019-20"));
 				document.add(new Paragraph("\n"));
+				try {
 				document.add(new Paragraph(eContList.get(0).geteContentDevFacility()));
-
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.getMessage();
+				}
+				
 				// document.add(new Paragraph("Institute " +
 				// ratioList.get(0).getInstituteName()));
 				/*
@@ -4296,7 +4295,7 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Bandwidth for Library Abd E-Resources", tableHeaderFont));
+				hcell = new PdfPCell(new Phrase("Bandwidth for Library Accessing E-Resources", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
@@ -4558,7 +4557,7 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("Financial Year)", tableHeaderFont));
+				hcell = new PdfPCell(new Phrase("Financial Year", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
@@ -5129,7 +5128,7 @@ public class RusaReportsController {
 			int instituteId = (int) session.getAttribute("instituteId");
 
 			map = new LinkedMultiValueMap<>();
-			map.add("acYearList", ac_year);
+			map.add("acYearId", ac_year);
 			map.add("instId", instituteId);
 
 			InitivAddrsLoctnAdvDisadv[] resArray = rest.postForObject(Constants.url + "/getInitivAddrsLoctnAdvDisadv", map,

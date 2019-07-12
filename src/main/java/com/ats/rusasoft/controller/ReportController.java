@@ -7957,14 +7957,14 @@ public class ReportController {
 
 				cell = new PdfPCell(new Phrase("" + temp_tot, headFontData));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 				table.addCell(cell);
 				val = String.valueOf(((temp_tot_led) / temp_tot) * 100);
 
 				cell = new PdfPCell(new Phrase("" + val, headFontData));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 				table.addCell(cell);
 
@@ -8501,7 +8501,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getTtleProgrmAct(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -8519,7 +8519,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getNoOfParticipant(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -8777,7 +8777,7 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getActCount(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
 
@@ -10622,7 +10622,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAttendedSportsCulturalReport", method = RequestMethod.POST)
 	public void showAttandedSportsCulturalReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:EStudents Outstanding Performance (Sport and Cultural) ";
+		String reportName = "Student Support and Progression : Students Outstanding Performance (Sport and Cultural) ";
 
 		ModelAndView model = null;
 		try {

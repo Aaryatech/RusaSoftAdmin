@@ -978,7 +978,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">6] EStudents Outstanding
+														<div class="col-lg-10">6] Students Outstanding
 															Performance (Sport and Cultural)</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0,'showAttendedSportsCulturalReport')"><i
@@ -1311,7 +1311,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Power Requirement met
+														<div class="col-lg-10">5] Power Requirement 
 															through LED Bulbs for Lighting</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0,'showPowerReqThroughLEDReport')"><i
@@ -1350,10 +1350,10 @@
 														<div class="col-lg-10">8] No of Initiative to
 															Address Locational Advantages & Disadvantages</div>
 														<div class="col-lg-2">
-															<a href="#" onclick="getProgReport(0)"><i
+															<a href="#" onclick="getProgReport(0,'showNoInitivAddrsLoctnAdvDisadv')"><i
 																class="fa fa-file-excel-o" style="color: green;"
 																aria-hidden="true"></i>&nbsp;Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-																href="#" onclick="getProgReport(1)"><i
+																href="#" onclick="getProgReport(1,'showNoInitivAddrsLoctnAdvDisadv')"><i
 																class="fa fa-file-pdf-o" style="color: red;"
 																aria-hidden="true"></i>&nbsp;PDF</a>
 														</div>
