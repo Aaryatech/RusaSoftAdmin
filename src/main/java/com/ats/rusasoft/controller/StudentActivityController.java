@@ -1651,6 +1651,16 @@ public class StudentActivityController {
 				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
 				model.addObject("progTypeList", progTypeList);
 				model.addObject("studPer", studPer);
+				
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", session.getAttribute("acYearId"));
+				
+				StudPerformFinalYr passedStud = restTemplate.postForObject(Constants.url + "getstudPassingPerByAcdYrId",map,
+				StudPerformFinalYr.class);			
+				
+				model.addObject("studPer", passedStud);
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -1681,7 +1691,15 @@ public class StudentActivityController {
 			int appear = Integer.parseInt(request.getParameter("stud_appeared"));
 			int passed = Integer.parseInt(request.getParameter("stud_passed"));
 			double passingper = Double.parseDouble(request.getParameter("stud_pass_per"));
-			studPer.setStudPerformId(Integer.parseInt(request.getParameter("stud_perform_id")));
+			int studPrfmId= 0;
+			try {
+			studPrfmId = Integer.parseInt(request.getParameter("stud_perform_id"));			
+			}catch(Exception e){
+				e.getMessage();
+				studPrfmId = 0;
+			}
+			studPer.setStudPerformId(studPrfmId);
+			
 			studPer.setProgName(Integer.parseInt(request.getParameter("programType")));
 			studPer.setProgType(Integer.parseInt(request.getParameter("programTypeId")));
 			studPer.setNoStudAppear(appear);
@@ -1692,7 +1710,7 @@ public class StudentActivityController {
 			studPer.setInstId(userObj.getGetData().getUserInstituteId());
 			studPer.setMakerUserId(userObj.getUserId());
 			studPer.setMakingTime(sf.format(date));
-			studPer.setExInt1(yId);
+			studPer.setExInt1(yId); // Academic Year
 			studPer.setExInt2(0);
 			studPer.setExVar1("NA");
 			studPer.setExVar2("NA");

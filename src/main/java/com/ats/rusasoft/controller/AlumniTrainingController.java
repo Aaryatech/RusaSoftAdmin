@@ -975,6 +975,20 @@ public class AlumniTrainingController {
 				// System.err.println("progTypeList " + progTypeList.toString());
 
 				model.addObject("progTypeList", progTypeList);
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instId", userObj.getGetData().getUserInstituteId());
+
+				map.add("yearId", session.getAttribute("acYearId"));
+
+				HigherEducDetail configuredhighEdu = restTemplate.postForObject(Constants.url + "getHigherEduDetailByAcdYr",
+						map, HigherEducDetail.class);
+		
+				 System.err.println("configuredhighEdu " + configuredhighEdu.toString());
+
+				model.addObject("highEduDet", configuredhighEdu);
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -1117,9 +1131,6 @@ public class AlumniTrainingController {
 
 	}
 
-	// showEditEduDetail
-
-	// edit_eduDet_id
 	@RequestMapping(value = "/showEditEduDetail", method = RequestMethod.POST)
 	public ModelAndView showEditEduDetail(HttpServletRequest request, HttpServletResponse response) {
 
