@@ -7236,7 +7236,7 @@ public class ReportController {
 	@RequestMapping(value = "/showGenderSensitivityFacReport", method = RequestMethod.POST)
 	public void showGenderSensitivityFacReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management:Gender sensitivity in Providing Facility\n" + "";
+		String reportName = "Institutional Values and Best Practices:Gender sensitivity in Providing Facility\n" + "";
 
 		ModelAndView model = null;
 		try {
@@ -7513,7 +7513,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAlternativeEnergyIniReport", method = RequestMethod.POST)
 	public void showAlternativeEnergyIniReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: Alternative Energy Initiative\n" + "";
+		String reportName = "Institutional Values and Best Practices: Alternative Energy Initiative\n" + "";
 
 		ModelAndView model = null;
 		try {
@@ -7632,7 +7632,7 @@ public class ReportController {
 
 					
 					if (prog.getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
-						if(prog.getInstYesnoResponse()!=null || prog.getInstYesnoResponse()!=" ") {
+						if(prog.getInstYesnoResponse()!=null || prog.getInstYesnoResponse()!=" " || prog.getInstYesnoResponse()!="NA" || prog.getInstYesnoResponse().isEmpty()==true) {
 						temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
 					}
 					}
@@ -7663,7 +7663,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					if (prog.getInstYesnoResponse().equals("-")) {
+					if (prog.getInstYesnoResponse().equals("-") || prog.getInstYesnoResponse().equals("NA")) {
 						val = "-";
 					} else {
 						val = String.valueOf((Double.parseDouble(prog.getInstYesnoResponse()) / temp_tot) * 100);

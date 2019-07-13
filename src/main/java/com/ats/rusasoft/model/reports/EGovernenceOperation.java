@@ -13,7 +13,7 @@ private String id;
 	
 	private String instituteName;
 	
-	private String yesnoDynamicTitle;
+ 
 	
 	private String instYesnoResponse;
 	
@@ -59,14 +59,7 @@ private String id;
 		this.instituteName = instituteName;
 	}
 
-	public String getYesnoDynamicTitle() {
-		return yesnoDynamicTitle;
-	}
-
-	public void setYesnoDynamicTitle(String yesnoDynamicTitle) {
-		this.yesnoDynamicTitle = yesnoDynamicTitle;
-	}
-
+	 
 	public String getInstYesnoResponse() {
 		return instYesnoResponse;
 	}
@@ -87,11 +80,9 @@ private String id;
 	@Override
 	public String toString() {
 		return "EGovernenceOperation [id=" + id + ", yesnoId=" + yesnoId + ", yesnoTitle=" + yesnoTitle
-				+ ", academicYear=" + academicYear + ", instituteName=" + instituteName + ", yesnoDynamicTitle="
-				+ yesnoDynamicTitle + ", instYesnoResponse=" + instYesnoResponse + ", yesnoValue=" + yesnoValue + "]";
+				+ ", academicYear=" + academicYear + ", instituteName=" + instituteName + ", instYesnoResponse="
+				+ instYesnoResponse + ", yesnoValue=" + yesnoValue + "]";
 	}
-
-	
  
 
 }
