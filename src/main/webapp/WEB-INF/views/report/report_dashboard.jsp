@@ -190,7 +190,7 @@
 														<a data-toggle="collapse" data-parent="#accordion-2"
 															href="#collapseOne-2" aria-expanded="true"
 															aria-controls="collapseOne-2"> <i class='fa fa-check'></i>
-															Criteria 1 : Curricular Aspects
+															Curricular Aspects
 														</a>
 													</h4>
 												</div>
@@ -323,7 +323,7 @@
 														<a class="collapsed" data-toggle="collapse"
 															data-parent="#accordion-2" href="#collapseTwo-2"
 															aria-expanded="false" aria-controls="collapseTwo-2">
-															<i class='fa fa-check'></i>Criteria 2 : Teaching,Learning
+															<i class='fa fa-check'></i>Teaching,Learning
 															and Evaluation
 														</a>
 													</h4>
@@ -525,7 +525,7 @@
 														<a data-toggle="collapse" data-parent="#accordion-2"
 															href="#collapseOne-3" aria-expanded="true"
 															aria-controls="collapseOne-3"> <i class='fa fa-check'></i>
-															Criteria 3 : Research, Innovation and Extension
+															Research, Innovation and Extension
 														</a>
 													</h4>
 												</div>
@@ -744,7 +744,7 @@
 														<a data-toggle="collapse" data-parent="#accordion-2"
 															href="#collapseOne-4" aria-expanded="true"
 															aria-controls="collapseOne-4"> <i class='fa fa-check'></i>
-															Criteria 4 : Infrastructure and Learning Resources
+															 Infrastructure and Learning Resources
 														</a>
 													</h4>
 												</div>
@@ -910,7 +910,7 @@
 														<a data-toggle="collapse" data-parent="#accordion-2"
 															href="#collapseOne-5" aria-expanded="true"
 															aria-controls="collapseOne-5"> <i class='fa fa-check'></i>
-															Criteria 5 : Student Support and Progression
+														Student Support and Progression
 														</a>
 													</h4>
 												</div>
@@ -1098,7 +1098,7 @@
 														<a data-toggle="collapse" data-parent="#accordion-2"
 															href="#collapseOne-6" aria-expanded="true"
 															aria-controls="collapseOne-6"> <i class='fa fa-check'></i>
-															Criteria 6 : Governance,Leadership and Management
+														Governance,Leadership and Management
 														</a>
 													</h4>
 												</div>
@@ -1254,7 +1254,7 @@
 														<a data-toggle="collapse" data-parent="#accordion-2"
 															href="#collapseOne-7" aria-expanded="true"
 															aria-controls="collapseOne-7"> <i class='fa fa-check'></i>
-															Criteria 7 : Institutional Values and Best Practices
+															 Institutional Values and Best Practices
 														</a>
 													</h4>
 												</div>
