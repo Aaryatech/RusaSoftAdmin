@@ -6256,7 +6256,7 @@ public class ReportController {
 
 				table.addCell(hcell);
 
-				String temp = null;
+			 
 				int index = 0;
 
 				for (int i = 0; i < progList.size(); i++) {
@@ -6275,13 +6275,8 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
-
-					if (prog.getqStatus() == 1) {
-						temp = "Yes";
-					} else {
-						temp = "No";
-					}
-					cell = new PdfPCell(new Phrase("" + temp, headFontData));
+ 
+					cell = new PdfPCell(new Phrase("" + prog.getqStatus(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -6357,15 +6352,11 @@ public class ReportController {
 					for (int i = 0; i < progList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
-						if (progList.get(i).getqStatus() == 1) {
-							stst = "Yes";
-						} else {
-							stst = "No";
-						}
+						 
 						cnt = cnt + i;
 						rowData.add("" + (i + 1));
 						rowData.add("" + progList.get(i).getQualityInitiativeName());
-						rowData.add("" + stst);
+						rowData.add("" + progList.get(i).getqStatus());
 
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
@@ -7628,6 +7619,7 @@ public class ReportController {
 					
 
 					EGovernenceOperation prog = progList.get(i);
+					 System.err.println("data  " + progList.toString());
 					 System.err.println("I*** " + prog.getInstYesnoResponse());
 
 					
@@ -7663,7 +7655,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					if (prog.getInstYesnoResponse().equals("-") || prog.getInstYesnoResponse().equals("NA")) {
+					if (prog.getInstYesnoResponse().equals("-") || prog.getInstYesnoResponse().equals("NA") || Integer.parseInt(prog.getInstYesnoResponse())==0 || temp_tot==0.0 ) {
 						val = "-";
 					} else {
 						val = String.valueOf((Double.parseDouble(prog.getInstYesnoResponse()) / temp_tot) * 100);
