@@ -164,23 +164,23 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/showChangePrincipalForm", method = RequestMethod.GET)
-	public ModelAndView showChangePrincipalForm(HttpServletRequest request, HttpServletResponse response) {
+	public String showChangePrincipalForm(HttpServletRequest request, HttpServletResponse response,Model model) {
 
-		ModelAndView model = null;
+		String mav = new String();
 		try {
 
-			model = new ModelAndView("showChangePrincipalForm");
+			mav =  "showChangePrincipalForm" ;
 
 			 
 		} catch (Exception e) {
 
 			//System.err.println("exception In showInstituteRegistrationForm at home Contr" + e.getMessage());
-
+			mav =  "redirect:/" ;
 			e.printStackTrace();
 
 		}
 
-		return model;
+		return mav;
 
 	}
 
