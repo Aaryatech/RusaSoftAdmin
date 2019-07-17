@@ -75,8 +75,8 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
         		 || request.getServletPath().equals("/changePassForm")
         		 || request.getServletPath().equals("/getInstituteMasterByAishe")
         		 || request.getServletPath().equals("/checkUniqueField")
-        		 || request.getServletPath().equals("/reGenOtp1") || request.getServletPath().equals("/showChangePrincipalForm") || request.getServletPath().equals("/getInstituteMasterByAisheforPrincipal")){ //||request.getServletPath().equals("/logout")
-        	// System.out.println("Login request");// /reGenOtp1
+        		 || request.getServletPath().equals("/reGenOtp1") || request.getServletPath().equals("/showOtpPageForChangePrinci") || request.getServletPath().equals("/verifyOtpAndChangePrincipal")   || request.getServletPath().equals("/insertChangePrinciple") || request.getServletPath().equals("/showChangePrincipalForm") || request.getServletPath().equals("/getInstituteMasterByAisheforPrincipal") || request.getServletPath().equals("/getInstituteMasterByAisheforPrincipalChange") || request.getServletPath().equals("/reGenOtpForChangePrincipal") ){ //||request.getServletPath().equals("/logout")
+        	// System.out.println("Login request");// /reGenOtp1 
              return true;
          }
          else 

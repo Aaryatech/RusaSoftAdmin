@@ -88,7 +88,8 @@
 <body class=" login_page" onload="hideText()">
 
 	<c:url value="/checkValue" var="checkValue"></c:url>
-	<c:url value="/reGenOtp" var="reGenOtp"></c:url>
+	<c:url value="/reGenOtpForChangePrincipal"
+		var="reGenOtpForChangePrincipal"></c:url>
 
 
 
@@ -102,7 +103,7 @@
 				</h1>
 
 				<form name="loginform" id="loginform"
-					action="${pageContext.request.contextPath}/verifyOtpAndRegisterInstitute"
+					action="${pageContext.request.contextPath}/verifyOtpAndChangePrincipal"
 					method="post">
 
 					<c:choose>
@@ -131,6 +132,7 @@
 							id="entered_otp" onchange="trim(this)" class="input" value=""
 							placeholder="Enter OTP Sent on Your Mobile No" /></label>
 					</p>
+					<span id="countdown" style="color: red; font-size: 10px;"></span>
 					<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
                 </p>
@@ -141,7 +143,7 @@
 
 						<input type="hidden" id="otpk" name="otpk" value="${otpk}">
 						<input type="hidden" id="otpNo" name="otpNo" value="${otpNo}">
-
+						
 						<span class="two_btn"><input type="submit" name="wp-submit"
 							id="wp-submit" class="btn btn-accent btn-block" value="Submit" />
 						</span> <span class="two_btn"><input type="button"
@@ -237,6 +239,30 @@
 
 
 	<script>
+		var timeleft = 120;
+		var downloadTimer = setInterval(function() {
+			document.getElementById("countdown").innerHTML = timeleft
+					+ " seconds remaining to expire sent OTP";
+			timeleft -= 1;
+			if (timeleft <= 0) {
+				clearInterval(downloadTimer);
+				document.getElementById("countdown").innerHTML = "OTP Expired"
+				//document.getElementById("wp-submit").disabled = true;
+			}
+		}, 1000);
+
+		function viewPassword() {
+			var pass1 = document.getElementById("otp");
+
+			if (pass1.type == "password") {
+				pass1.type = "text";
+
+			} else {
+				pass1.type = "password";
+
+			}
+		}
+
 		function showForm() {
 			//document.getElementById("abc").style = "display:none"
 			var qualType = document.getElementById("functionalMOU").value
@@ -306,16 +332,15 @@
 
 			var otpk = document.getElementById("otpk").value;
 			var otpNo = document.getElementById("otpNo").value;
-			var type=1;
-			$.getJSON('${reGenOtp}', {
+
+			$.getJSON('${reGenOtpForChangePrincipal}', {
 				otpk : otpk,
 				otp_no : otpNo,
-				type : type,
 				ajax : 'true',
 
 			}, function(data) {
 
-				//alert("Data  " +JSON.stringify(data));
+				location.reload(true);
 				document.getElementById("otpNo").value = bean.name;
 
 			});

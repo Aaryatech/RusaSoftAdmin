@@ -163,26 +163,7 @@ public class HomeController {
 
 	}
 	
-	@RequestMapping(value = "/showChangePrincipalForm", method = RequestMethod.GET)
-	public String showChangePrincipalForm(HttpServletRequest request, HttpServletResponse response,Model model) {
-
-		String mav = new String();
-		try {
-
-			mav =  "showChangePrincipalForm" ;
-
-			 
-		} catch (Exception e) {
-
-			//System.err.println("exception In showInstituteRegistrationForm at home Contr" + e.getMessage());
-			mav =  "redirect:/" ;
-			e.printStackTrace();
-
-		}
-
-		return mav;
-
-	}
+	
 
 	@RequestMapping(value = "/showWelcomePage", method = RequestMethod.GET)
 	public ModelAndView showWelcomePage(HttpServletRequest request, HttpServletResponse response) {
@@ -839,7 +820,7 @@ public class HomeController {
 			map.add("otp", otp);
 			Instant end = Instant.now();
 			Duration timeElapsed = Duration.between(start, end);
-			// System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
+			System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
 			if(timeElapsed.toMinutes()<=2) {
 			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
 			/*

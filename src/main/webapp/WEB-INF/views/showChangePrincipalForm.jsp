@@ -30,8 +30,8 @@
 <body onload="showIsReg()" class=" ">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 
-	<c:url value="/getInstituteMasterByAisheforPrincipal"
-		var="getInstituteMasterByAishe"></c:url>
+	<c:url value="/getInstituteMasterByAisheforPrincipalChange"
+		var="getInstituteMasterByAisheforPrincipalChange"></c:url>
 	<!-- START TOPBAR -->
 	<!-- END TOPBAR -->
 	<!-- START CONTAINER -->
@@ -43,7 +43,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
- 
+
 
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -67,9 +67,9 @@
 							<div class="row">
 								<div class="col-md-12">
 
- 
+
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertInstituteDemo"
+										action="${pageContext.request.contextPath}/insertChangePrinciple"
 										method="post" name="form_sample_2" id="form_sample_2">
 
 										<input type="hidden" id="inst_id" name="inst_id"
@@ -92,7 +92,7 @@
 													<div class="col-sm-7">
 														<input type="text" maxlength="7" onchange="trim(this)"
 															class="form-control" id="aishe_code" autocomplete="off"
-															name="aishe_code" value="${editInst.aisheCode}"
+															name="aishe_code" value="${aishe}"
 															placeholder="All India Survey On Higher Education code">
 														<span class="error_form text-danger" id="aishe_code_field"
 															style="display: none;">Please enter AISHE code</span>
@@ -106,13 +106,14 @@
 													<div class="col-sm-7">
 														<input type="text" readonly onchange="trim(this)"
 															class="form-control" id="inst_name" autocomplete="off"
-															value="${editInst.instituteName}" name="inst_name"
+															value="${instName}" name="inst_name"
 															placeholder="Complete Name of Institute"> <span
 															class="error_form text-danger" id="inst_name_field"
 															style="display: none;">Please enter institute name</span>
 
 													</div>
 												</div>
+												
 
 
 
@@ -123,7 +124,7 @@
 													<div class="col-sm-7">
 														<input type="text" maxlength="100" onchange="trim(this)"
 															class="form-control" id="princ_name" autocomplete="off"
-															value="${editInst.principalName}" name="princ_name"
+															value="${editInst.facultyFirstName}" name="princ_name"
 															placeholder="Name of Principal"> <span
 															class="error_form text-danger" id="princ_name_field"
 															style="display: none;">Please enter principal name</span>
@@ -170,7 +171,9 @@
 															Verification mail will be sent on this Email id</p>
 													</div>
 												</div>
+												<input type="text" name="instId" id="instId"	value="${editInst.instituteId}">
 
+												 
 
 												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-7">
@@ -208,29 +211,39 @@
 
 	<!-- END CONTENT -->
 
-	 
+
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
-		$('#aishe_code').on('input', function() {
-			var aishe_code = $('#aishe_code').val();
-			 
-			document.getElementById("inst_name").value = "";
-			//document.getElementById("district").value="";
-			if (aishe_code.length == 7) {
-				//alert("7 ")
-				$.getJSON('${getInstituteMasterByAishe}', {
-					aishe_code : aishe_code,
-					ajax : 'true',
+		$('#aishe_code')
+				.on(
+						'input',
+						function() {
+							var aishe_code = $('#aishe_code').val();
 
-				}, function(data) {
+							document.getElementById("inst_name").value = "";
 
-					document.getElementById("inst_name").value = data.instName;
+							if (aishe_code.length == 7) {
 
-				});
-			}
+								$
+										.getJSON(
+												'${getInstituteMasterByAisheforPrincipalChange}',
+												{
+													aishe_code : aishe_code,
+													ajax : 'true',
 
-		});
+												},
+												function(data) {
+
+													document
+															.getElementById("inst_name").value = data.instituteName;
+													document
+															.getElementById("instId").value = data.instituteId;
+
+												});
+							}
+
+						});
 	</script>
 	<script>
 		function validateEmail(email) {
@@ -291,7 +304,6 @@
 													$("#aishe_code_field")
 															.hide()
 												}
-     
 
 												if (!$("#princ_name").val()) {
 													isError = true;
@@ -477,7 +489,7 @@
 
 		function checkUnique(inputValue, valueType) {
 			var primaryKey = 0;
-			alert("Primary key"+primaryKey);
+			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {
 				isEdit = 1;
