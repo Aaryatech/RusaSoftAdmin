@@ -247,7 +247,7 @@
 			if (timeleft <= 0) {
 				clearInterval(downloadTimer);
 				document.getElementById("countdown").innerHTML = "OTP Expired"
-				//document.getElementById("wp-submit").disabled = true;
+				document.getElementById("wp-submit").disabled = true;
 			}
 		}, 1000);
 

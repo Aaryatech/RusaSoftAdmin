@@ -171,7 +171,7 @@
 															Verification mail will be sent on this Email id</p>
 													</div>
 												</div>
-												<input type="text" name="instId" id="instId"	value="${editInst.instituteId}">
+												<input type="hidden" name="instId" id="instId"	value="${editInst.instituteId}">
 
 												 
 

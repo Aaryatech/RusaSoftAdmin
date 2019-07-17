@@ -287,6 +287,7 @@ public class RegController {
 			String princ_contact = request.getParameter("princ_contact");
 			int instId = Integer.parseInt(request.getParameter("instId"));
 			String princ_email = request.getParameter("princ_email");
+			String roleId=Constants.Princ_Role;
 
 			Staff staff = new Staff();
 
@@ -314,7 +315,7 @@ public class RegController {
 
 			staff.setPassword("");
 			staff.setRealivingDate(null);
-			staff.setRoleIds("0");
+			staff.setRoleIds(roleId);
 			staff.setTeachingTo(0);
 			staff.setType(1);
 
