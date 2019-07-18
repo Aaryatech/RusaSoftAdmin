@@ -44,6 +44,7 @@ public class RegController {
 	LinkedHashMap<String, Staff> staffHashMap = new LinkedHashMap<String, Staff>();
 	RestTemplate rest = new RestTemplate();
 	Instant start=null;
+	public Instant pricipalOtpStart=null;
 
 	@RequestMapping(value = "/getInstituteMasterByAishe", method = RequestMethod.GET)
 	public @ResponseBody InstituteMaster getInstituteMasterByAishe(HttpServletRequest request,
@@ -365,11 +366,13 @@ public class RegController {
 
 			int isBack = Integer.parseInt(request.getParameter("is_back"));
 			String otpNo = request.getParameter("otp_no");
-			  start = Instant.now();
+			
 			if (isBack == 0) {
+				
 				System.err.println("in If.  Its Confirm Button Pressed");
 
 				model = new ModelAndView("ask_otp_chPrinci");
+				model.addObject("expFlag", 0);
 				RestTemplate restTemplate = new RestTemplate();
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -389,14 +392,16 @@ public class RegController {
 						String.class);
 				
 			
-			  System.err.println("in final submit time start  is "+start);
+			  System.err.println("in showOtpPageForChangePrinci  time start  is "+start);
 
 				otpKeyValue.put(otpKey, otp);
 
 				model.addObject("otpk", otpKey);
 				model.addObject("otpNo", otpNo);
+				  pricipalOtpStart = Instant.now();
+			 System.out.println();
+				System.err.println("in start submit time   is "+start);
 
-				//// System.out.println(res);
 			} else {
 				
 
@@ -433,11 +438,13 @@ public class RegController {
 				
 				Instant end = Instant.now();
 				System.err.println("in final submit time end  is "+end);
-				Duration timeElapsed = Duration.between(start, end);
+				System.err.println("start was " +start);
+
+				Duration timeElapsed = Duration.between(pricipalOtpStart, end);
 
 				Staff editInst = staffHashMap.get(otpNo);
-				System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
-				if(timeElapsed.toMinutes()<=2) {
+				System.out.println("Time taken: OTPVerification "+ timeElapsed.getSeconds() +" seconds");
+				if(timeElapsed.getSeconds()<=120) {
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editInst, Staff.class);
 				model = new ModelAndView("login");
 
@@ -447,6 +454,9 @@ public class RegController {
 					model = new ModelAndView("ask_otp_chPrinci");
 					model.addObject("otpk", otpk);
 					model.addObject("otpNo", otpNo);
+					model.addObject("expFlag", 1);
+					
+				 
 					model.addObject("msg", "Time out! Regenerate OTP");
 				}
 			  
@@ -455,7 +465,7 @@ public class RegController {
 
 				System.err.println("Otp not matched Please re enter");
 				model = new ModelAndView("ask_otp_chPrinci");
-
+				model.addObject("expFlag", 0);
 				model.addObject("otpk", otpk);
 				model.addObject("otpNo", otpNo);
 				model.addObject("msg", "OTP didnt matched. Please Re Enter");

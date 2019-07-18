@@ -725,7 +725,8 @@ public class HomeController {
 				model = new ModelAndView("verifyOTP");
 				// c= "redirect:/showVerifyOTP";
 				model.addObject("username", inputValue);
-			
+				model.addObject("expFlag", 0);
+				
 				 start = Instant.now();
 				
 				;
@@ -769,6 +770,7 @@ public class HomeController {
 
 			} else {
 				model = new ModelAndView("verifyOTP");
+				model.addObject("expFlag", 0);
 				// c= "redirect:/showVerifyOTP";
 				model.addObject("username", info.getMsg());
 				model.addObject("msg", "OTP Resent Please check");
@@ -832,6 +834,7 @@ public class HomeController {
 
 			if (staff == null) {
 				model = new ModelAndView("verifyOTP");
+				model.addObject("expFlag", 0);
 				// c="redirect:/showforgotPassForm";
 				model.addObject("msg", "Incorrect OTP");
 
@@ -859,6 +862,7 @@ public class HomeController {
 			}else {
 				model = new ModelAndView("verifyOTP");
 				// c="redirect:/showforgotPassForm";
+				model.addObject("expFlag", 1);
 				model.addObject("msg", "Time out! Regenerate OTP");
 				
 			}

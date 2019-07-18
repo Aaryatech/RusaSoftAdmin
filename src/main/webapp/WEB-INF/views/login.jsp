@@ -168,7 +168,12 @@
 					<a class="pull-right login_forgot" href="showInstituteRegistrationForm"
 						title="Sign Up">Institute Registration</a>
 				</p>
-				<br /> <br /> <label class="pull-left" for="page_name" style=" text-align: center;"><b
+				<br /> 
+				<p id="nav" >
+ 					<a class="pull-right login_forgot" href="showChangePrincipalForm"
+						title="Sign Up" style=" text-align: center;" >Change Principal</a>
+				</p>
+				<br /> <label class="pull-left" for="page_name" style=" text-align: center;"><b
 					style="color: red; font-family:'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600; text-transform: capitalize;">Warning :- </b> <b
 					style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 400; color: #333;  text-transform: capitalize;">Unauthorised
 						Access of this System is an Offence</b> </label>

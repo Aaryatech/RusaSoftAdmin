@@ -132,7 +132,10 @@
 							id="entered_otp" onchange="trim(this)" class="input" value=""
 							placeholder="Enter OTP Sent on Your Mobile No" /></label>
 					</p>
+					
+					<c:if test="${expFlag!=1}">
 					<span id="countdown" style="color: red; font-size: 10px;"></span>
+					</c:if>
 					<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
                 </p>

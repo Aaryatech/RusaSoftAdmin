@@ -228,7 +228,8 @@
                     <label class="icheck-label form-label" for="rememberme">
                     	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
                     	<br>
-                    	<span id="countdown" style="color: red; font-size: 10px;"></span>
+                    	<c:if test="${expFlag!=1}">
+                    	<span id="countdown" style="color: red; font-size: 10px;"></span></c:if>
                     </label>
                 </p>
 
