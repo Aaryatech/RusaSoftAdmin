@@ -78,13 +78,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="col-sm-2"></div>
-
-												<p class="desc text-danger fontsize11">Notice : This
-													form strictly need to be filled by Institutes coming under
-													RUSA Maharashtra Only. You can access RUSA portal only
-													after authorisation done by RUSA officials.</p>
-
-
+ 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">AISHE
 														Code <span class="text-danger">*</span>
