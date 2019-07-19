@@ -5391,7 +5391,7 @@ public class RusaReportsController {
 	@RequestMapping(value = "/showNoInitivAddrsLoctnAdvDisadv", method = RequestMethod.POST)
 	public void showNoInitivAddrsLoctnAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices : No of Initiative to Address Locational Advantages & Disadvantages";
+		String reportName = "Institutional Values and Best Practices : No. of Initiative to Address Locational Advantages & Disadvantages";
 
 		ModelAndView model = null;
 		try {
@@ -5903,7 +5903,7 @@ public class RusaReportsController {
 	@RequestMapping(value = "/showNoOfLinkages", method = RequestMethod.POST)
 	public void showNoOfLinkages(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName =  "Research, Innovation and Extension : No of Linkages";
+		String reportName =  "Research, Innovation and Extension : No. of Linkages";
 
 		ModelAndView model = null;
 		try {
@@ -7022,7 +7022,7 @@ public class RusaReportsController {
 	@RequestMapping(value = "/showNoAwardRecogExtAct", method = RequestMethod.POST)
 	public void showFacPartiVarBodies(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research, Innovation and Extension : No Award/Recognition for Extension Activity";
+		String reportName = "Research, Innovation and Extension : No. Award/Recognition for Extension Activity";
 
 		ModelAndView model = null;
 		try {
@@ -7586,7 +7586,7 @@ public class RusaReportsController {
 	@RequestMapping(value = "/showAvgPerPlacement", method = RequestMethod.POST)
 	public void showAvgPerPlacement(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression : Avg % of Placement: (Last Five Years)";
+		String reportName = "Student Support and Progression : Avg. % of Placement: (Last Five Years)";
 
 		ModelAndView model = null;
 		try {

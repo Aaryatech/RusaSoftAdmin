@@ -864,7 +864,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAvgEnrollPrcntReport", method = RequestMethod.POST)
 	public void showAvgEnrollPrcntReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Average Enrollment Percentage";
+		String reportName = "Teaching-Learing and Evaluation : Average Enrollment Percentage";
 		ModelAndView model = null;
 		try {
 
@@ -1165,7 +1165,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAvgStudYearwiseReport", method = RequestMethod.POST)
 	public void showAvgStudYearwiseReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Average % of Students from other States/ Countries – Yearwise  ";
+		String reportName = "Teaching -Learing and Evaluation : Average % of Students from other States/Countries – Yearwise  ";
 
 		ModelAndView model = null;
 		try {
@@ -1605,7 +1605,7 @@ public class ReportController {
 	@RequestMapping(value = "/showTeachersUsingIctReport", method = RequestMethod.POST)
 	public void showTeachersUsingIctReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Teachers Using ICT";
+		String reportName = "Teaching-Learing and Evaluation : Teachers Using ICT";
 
 		ModelAndView model = null;
 		try {
@@ -1892,7 +1892,7 @@ public class ReportController {
 	@RequestMapping(value = "/showNoOfMentorsAssignedStudentReport", method = RequestMethod.POST)
 	public void showNoOfMentorsAssignedStudentReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Total no. of Mentors\n" + "No. of Students Assigned";
+		String reportName = "Teaching-Learing and Evaluation : Total No. of Mentors, No. of Students Assigned";
 
 		ModelAndView model = null;
 		try {
@@ -2994,7 +2994,7 @@ public class ReportController {
 	@RequestMapping(value = "/showRareBookManuscriptReport", method = RequestMethod.POST)
 	public void showRareBookManuscriptReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Infrastructure and Learning Resources :Rare Book – manuscripts – special report";
+		String reportName = "Infrastructure and Learning Resources : Rare Book – manuscripts – special report";
 
 		ModelAndView model = null;
 		try {
@@ -3277,7 +3277,7 @@ public class ReportController {
 	@RequestMapping(value = "/showLibSpecFacilitiesReport", method = RequestMethod.POST)
 	public void showLibSpecFacilitiesReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Infrastructure and Learning Resources: Availability of Special Facilities in Library";
+		String reportName = "Infrastructure and Learning Resources : Availability of Special Facilities in Library";
 
 		ModelAndView model = null;
 		try {
@@ -3560,7 +3560,7 @@ public class ReportController {
 	@RequestMapping(value = "/showTeacherStudUsingLibReport", method = RequestMethod.POST)
 	public void showTeacherStudUsingLibReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Infrastructure and Learning Resources: No of Students and Teachers using Library Per Day";
+		String reportName = "Infrastructure and Learning Resources : No. of Students and Teachers using Library Per Day";
 
 		ModelAndView model = null;
 		try {
@@ -3901,7 +3901,7 @@ public class ReportController {
 	@RequestMapping(value = "/showTrainProgForTeachStaffReport", method = RequestMethod.POST)
 	public void showTrainProgForTeachStaffReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: Average No of Training programmes organized for Teachers and non teaching staff (Professional Development, Administrative)";
+		String reportName = "Governance,Leadership and Management : Average No. of Training programmes organized for Teachers and non teaching staff (Professional Development, Administrative)";
 
 		ModelAndView model = null;
 		try {
@@ -4185,7 +4185,7 @@ public class ReportController {
 	@RequestMapping(value = "/showEGovernanceOptReport", method = RequestMethod.POST)
 	public void showEGovernanceOptReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: E-Governance & Areas of Operation";
+		String reportName = "Governance,Leadership and Management : E-Governance & Areas of Operation";
 
 		ModelAndView model = null;
 		try {
@@ -4453,7 +4453,7 @@ public class ReportController {
 	@RequestMapping(value = "/showFinSuppReportForInst", method = RequestMethod.POST)
 	public void showFinSuppReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management:  Financial support to Professional membership/Conference/Workshop";
+		String reportName = "Governance,Leadership and Management : Financial Support to Professional Membership/Conference/Workshop";
 
 		ModelAndView model = null;
 		try {
@@ -4750,7 +4750,7 @@ public class ReportController {
 	@RequestMapping(value = "/showFinSuppReportForOther", method = RequestMethod.POST)
 	public void showFinSuppReportForOther(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management:Funds/Grants Received from Non-Government Organisation, Individuals, Other Agencies (in Cr.)";
+		String reportName = "Governance,Leadership and Management : Funds/Grants Received from Non-Government Organisation, Individuals, Other Agencies (in Cr.)";
 
 		ModelAndView model = null;
 		try {
@@ -5046,7 +5046,7 @@ public class ReportController {
 	@RequestMapping(value = "/showNoFacultyFinSuppReport", method = RequestMethod.POST)
 	public void showNoFacultyFinSuppReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: No of Faculty Financial support to Professional membership/Conference/Workshop ";
+		String reportName = "Governance,Leadership and Management : No. of Faculty Financial support to Professional Membership/Conference/Workshop ";
 
 		ModelAndView model = null;
 		try {
@@ -5317,7 +5317,7 @@ public class ReportController {
 	@RequestMapping(value = "/showTrainProgOrgnizedForTeachReport", method = RequestMethod.POST)
 	public void showTrainProgOrgnizedForTeachReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: Training programmes organized for Teachers (Professional Development) ";
+		String reportName = "Governance,Leadership and Management : Training programmes organized for Teachers (Professional Development) ";
 
 		ModelAndView model = null;
 		try {
@@ -5607,7 +5607,7 @@ public class ReportController {
 	@RequestMapping(value = "/showTrainAdministrativeReport", method = RequestMethod.POST)
 	public void showTrainAdministrativeReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: Training programmes organized for Teachers (Administrative Development) ";
+		String reportName = "Governance,Leadership and Management : Training programmes organized for Teachers (Administrative Development) ";
 
 		ModelAndView model = null;
 		try {
@@ -5897,7 +5897,7 @@ public class ReportController {
 	@RequestMapping(value = "/showVisionMissionReport", method = RequestMethod.POST)
 	public void showVisionMisiionReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: Institutional Vision & Mission";
+		String reportName = "Governance,Leadership and Management : Institutional Vision & Mission";
 
 		ModelAndView model = null;
 		try {
@@ -6167,7 +6167,7 @@ public class ReportController {
 	@RequestMapping(value = "/showQualInitiativeAssuranceReport", method = RequestMethod.POST)
 	public void showQualInitiativeAssuranceReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management:Quality Initiative Asssurance ";
+		String reportName = "Governance,Leadership and Management : Quality Initiative Asssurance ";
 
 		ModelAndView model = null;
 		try {

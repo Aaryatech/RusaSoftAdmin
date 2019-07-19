@@ -2059,7 +2059,7 @@ public class LibraryController {
 					lib.setExInt2(no_clock_hr_faculty);
 					lib.setExVar1("NA");
 					lib.setExVar2("NA");
-lib.setAutonStatus(auton_status);
+					lib.setAutonStatus(auton_status);
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib,
 							InstituteInfo.class);
 
