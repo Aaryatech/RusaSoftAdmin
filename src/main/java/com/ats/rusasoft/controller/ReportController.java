@@ -3901,7 +3901,7 @@ public class ReportController {
 	@RequestMapping(value = "/showTrainProgForTeachStaffReport", method = RequestMethod.POST)
 	public void showTrainProgForTeachStaffReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management : Average No. of Training programmes organized for Teachers and non teaching staff (Professional Development, Administrative)";
+		String reportName = "Governance,Leadership and Management : Average No. of Training Programmes Organized for Teachers and Non Teaching staff (Professional Development, Administrative)";
 
 		ModelAndView model = null;
 		try {
@@ -6167,7 +6167,7 @@ public class ReportController {
 	@RequestMapping(value = "/showQualInitiativeAssuranceReport", method = RequestMethod.POST)
 	public void showQualInitiativeAssuranceReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management : Quality Initiative Asssurance ";
+		String reportName = "Governance,Leadership and Management : Quality Asssurance Initiative";
 
 		ModelAndView model = null;
 		try {
