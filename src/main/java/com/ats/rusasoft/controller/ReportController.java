@@ -173,7 +173,7 @@ public class ReportController {
 	@RequestMapping(value = "/showProgReport", method = RequestMethod.POST)
 	public void showProgReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Curricular Aspects : No of Certificate/Diploma Programs";
+		String reportName = "Curricular Aspects : No. of Certificate/Diploma Programs";
 
 		ModelAndView model = null;
 		try {
@@ -1165,7 +1165,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAvgStudYearwiseReport", method = RequestMethod.POST)
 	public void showAvgStudYearwiseReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Average % of Students from other States/Countries – Yearwise  ";
+		String reportName = "Teaching-Learing and Evaluation : Average % of Students from other States/Countries – Yearwise";
 
 		ModelAndView model = null;
 		try {
@@ -2176,7 +2176,7 @@ public class ReportController {
 	@RequestMapping(value = "/showStudPerformanceOutconmeReport", method = RequestMethod.POST)
 	public void showStudPerformanceOutconmeReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Students Performance & Learning Outcomes";
+		String reportName = "Teaching-Learing and Evaluation : Students Performance & Learning Outcomes";
 
 		ModelAndView model = null;
 		try {
@@ -2433,7 +2433,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAdmissionsAgainstCatReport", method = RequestMethod.POST)
 	public void showAdmissionsAgainstCatReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Teaching -Learing and Evaluation : Admissions feeds against reservation category";
+		String reportName = "Teaching-Learing and Evaluation : Admissions feeds against reservation category";
 
 		ModelAndView model = null;
 		try {
@@ -7227,7 +7227,7 @@ public class ReportController {
 	@RequestMapping(value = "/showGenderSensitivityFacReport", method = RequestMethod.POST)
 	public void showGenderSensitivityFacReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices:Gender sensitivity in Providing Facility\n" + "";
+		String reportName = "Institutional Values and Best Practices : Gender sensitivity in Providing Facility\n" + "";
 
 		ModelAndView model = null;
 		try {
@@ -7504,7 +7504,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAlternativeEnergyIniReport", method = RequestMethod.POST)
 	public void showAlternativeEnergyIniReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices: Alternative Energy Initiative\n" + "";
+		String reportName = "Institutional Values and Best Practices : Alternative Energy Initiative\n" + "";
 
 		ModelAndView model = null;
 		try {
@@ -7816,7 +7816,7 @@ public class ReportController {
 	@RequestMapping(value = "/showPowerReqThroughLEDReport", method = RequestMethod.POST)
 	public void showPowerReqThroughLEDReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management: Power Requirement met through LED Bulbs for Lighting\n"
+		String reportName = "Governance,Leadership and Management : Power Requirement met through LED Bulbs for Lighting\n"
 				+ "";
 
 		ModelAndView model = null;
@@ -8103,7 +8103,7 @@ public class ReportController {
 	@RequestMapping(value = "/showIniLocalCommunityReport", method = RequestMethod.POST)
 	public void showIniLocalCommunityReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices :Initiative to Engage & Contribute Local Community";
+		String reportName = "Institutional Values and Best Practices : Initiative to Engage & Contribute Local Community";
 
 		ModelAndView model = null;
 		try {
@@ -8355,7 +8355,7 @@ public class ReportController {
 	@RequestMapping(value = "/showUniversalValProReport", method = RequestMethod.POST)
 	public void showUniversalValProReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices :Promotion of Universal Values";
+		String reportName = "Institutional Values and Best Practices : Promotion of Universal Values";
 
 		ModelAndView model = null;
 		try {
@@ -8648,7 +8648,7 @@ public class ReportController {
 	@RequestMapping(value = "/showNoOfUniversalReport", method = RequestMethod.POST)
 	public void showNoOfUniversalReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices :No of Promotion of Universal Values";
+		String reportName = "Institutional Values and Best Practices : No. of Promotion of Universal Values";
 
 		ModelAndView model = null;
 		try {
@@ -8900,7 +8900,7 @@ public class ReportController {
 	@RequestMapping(value = "/showGovtSchemeBenefitReport", method = RequestMethod.POST)
 	public void showGovtSchemeBenefitReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Govt Scholership Scheme";
+		String reportName = "Student Support and Progression : Govt Scholership Scheme";
 
 		ModelAndView model = null;
 		try {
@@ -9187,7 +9187,7 @@ public class ReportController {
 	@RequestMapping(value = "/showOtherThanGovtSchemeBenefitReport", method = RequestMethod.POST)
 	public void showOtherThanGovtSchemeBenefitReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Institutional Financial Support besides Govt";
+		String reportName = "Student Support and Progression : Institutional Financial Support besides Govt.";
 
 		ModelAndView model = null;
 		try {
@@ -9493,7 +9493,7 @@ public class ReportController {
 	@RequestMapping(value = "/showStudSupportSchemeReport", method = RequestMethod.POST)
 	public void showStudSupportSchemeReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Institutional Financial Support besides Govt";
+		String reportName = "Student Support and Progression : Institutional Financial Support besides Govt";
 
 		ModelAndView model = null;
 		try {
@@ -9795,7 +9795,7 @@ public class ReportController {
 	@RequestMapping(value = "/showDistinguishedAluminiReport", method = RequestMethod.POST)
 	public void showDistinguishedAluminiReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression :List of Distinguished Alumni";
+		String reportName = "Student Support and Progression : List of Distinguished Alumni";
 
 		ModelAndView model = null;
 		try {
@@ -10070,7 +10070,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAluminiEngagementReport", method = RequestMethod.POST)
 	public void showAluminiEngagementReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression :Alumni Engagement ";
+		String reportName = "Student Support and Progression : Alumni Engagement ";
 
 		ModelAndView model = null;
 		try {
@@ -10331,7 +10331,7 @@ public class ReportController {
 	@RequestMapping(value = "/showOrganizationSportsCulturalReport", method = RequestMethod.POST)
 	public void showOrganizationSportsCulturalReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Organization of Sports & Cultural Activities - Competitions(Organized)";
+		String reportName = "Student Support and Progression : Organization of Sports & Cultural Activities - Competitions(Organized)";
 
 		ModelAndView model = null;
 		try {
@@ -11180,7 +11180,7 @@ public class ReportController {
 	@RequestMapping(value = "/showVETReport", method = RequestMethod.POST)
 	public void showVETReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Students Benifited from VET ";
+		String reportName = "Student Support and Progression : Students Benifited from VET ";
 
 		ModelAndView model = null;
 		try {
@@ -11448,7 +11448,7 @@ public class ReportController {
 	@RequestMapping(value = "/showStudQualifyingExamReport", method = RequestMethod.POST)
 	public void showStudQualifyingExamReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Students qualifying State/National/Internationa Exams per year ";
+		String reportName = "Student Support and Progression : Students qualifying State/National/Internationa Exams per year ";
 
 		ModelAndView model = null;
 		try {
@@ -11747,7 +11747,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAluminiAssoMeetingReport", method = RequestMethod.POST)
 	public void showAluminiAssoMeetingReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression:Alumni Association Meeting Details";
+		String reportName = "Student Support and Progression : Alumni Association Meeting Details";
 
 		ModelAndView model = null;
 		try {
@@ -12015,7 +12015,7 @@ public class ReportController {
 	@RequestMapping(value = "/showHumanValProfEthicsReport", method = RequestMethod.POST)
 	public void showHumanValProfEthicsReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices: Human Values & Professional Ethics";
+		String reportName = "Institutional Values and Best Practices : Human Values & Professional Ethics";
 
 		ModelAndView model = null;
 		try {
@@ -12292,7 +12292,7 @@ public class ReportController {
 	@RequestMapping(value = "/showExtensionActivityReport", method = RequestMethod.POST)
 	public void showExtensionActivityReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension:No of Student/Teachers Participation in Extension Activity";
+		String reportName = "Research,Innovation and Extension : No of Student/Teachers Participation in Extension Activity";
 
 		ModelAndView model = null;
 		try {
@@ -12844,7 +12844,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAwardRecognizationReport", method = RequestMethod.POST)
 	public void showAwardRecognizationReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension:No of Recognition/Awards";
+		String reportName = "Research,Innovation and Extension : No of Recognition/Awards";
 
 		ModelAndView model = null;
 		try {
@@ -13113,7 +13113,7 @@ public class ReportController {
 	@RequestMapping(value = "/showBookPublicationReport", method = RequestMethod.POST)
 	public void showBookPublicationReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension: Book and Chapter Publication by Teachers and Papers in Conference Proceedings";
+		String reportName = "Research,Innovation and Extension : Book and Chapter Publication by Teachers and Papers in Conference Proceedings";
 
 		ModelAndView model = null;
 		try {
@@ -13410,7 +13410,7 @@ public class ReportController {
 	@RequestMapping(value = "/showNoOfBookPublicationReport", method = RequestMethod.POST)
 	public void showNoOfBookPublicationReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension:No Book and Chapter Publication by Teachers and Papers in Conference Proceedings";
+		String reportName = "Research,Innovation and Extension : No Book and Chapter Publication by Teachers and Papers in Conference Proceedings";
 
 		ModelAndView model = null;
 		try {
@@ -13682,7 +13682,7 @@ public class ReportController {
 	@RequestMapping(value = "/showPhdGuideDetailsReport", method = RequestMethod.POST)
 	public void showPhdGuideDetailsReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension:Ph. D. Awarded Information";
+		String reportName = "Research,Innovation and Extension : Ph.D Awarded Information";
 
 		ModelAndView model = null;
 		try {
@@ -14008,7 +14008,7 @@ public class ReportController {
 	@RequestMapping(value = "/showPlagarismCodeEthicsDetailsReport", method = RequestMethod.POST)
 	public void showPlagarismCodeEthicsDetailsReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension:Plagarism and Code of Ethics";
+		String reportName = "Research,Innovation and Extension : Plagarism and Code of Ethics";
 
 		ModelAndView model = null;
 		try {
@@ -14328,7 +14328,7 @@ public class ReportController {
 	@RequestMapping(value = "/showStudEnrooledForProgramReport", method = RequestMethod.POST)
 	public void showStudEnrooledForProgramReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Curriculam Aspects: Students Enrolled in Certi., Diploma or Add-On Programs";
+		String reportName = "Curriculam Aspects : Students Enrolled in Certi., Diploma or Add-On Programs";
 
 		ModelAndView model = null;
 		try {
@@ -14653,7 +14653,7 @@ public class ReportController {
 	@RequestMapping(value = "/showValueAddedCourseReport", method = RequestMethod.POST)
 	public void showValueAddedCourseReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Curricular Aspects :Value Added Courses";
+		String reportName = "Curricular Aspects : Value Added Courses";
 
 		ModelAndView model = null;
 		try {
@@ -14949,7 +14949,7 @@ public class ReportController {
 	@RequestMapping(value = "/showStakeHolderFBDetailsReport", method = RequestMethod.POST)
 	public void showStakeHolderFBDetailsReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Curricular Aspects: Feedback Processed";
+		String reportName = "Curricular Aspects : Feedback Processed";
 
 		ModelAndView model = null;
 		try {
@@ -15276,7 +15276,7 @@ public class ReportController {
 	@RequestMapping(value = "/showNoResearchProjPerReport", method = RequestMethod.POST)
 	public void showNoResearchProjPerReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Curricular Aspects: No of Research Project Per Teacher";
+		String reportName = "Curricular Aspects : No of Research Project Per Teacher";
 
 		ModelAndView model = null;
 		try {
@@ -15543,7 +15543,7 @@ public class ReportController {
 	@RequestMapping(value = "/showStudGrivienceReport", method = RequestMethod.POST)
 	public void showStudGrivienceReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Student Support and Progression :Alumni Engagement ";
+		String reportName = "Student Support and Progression : Alumni Engagement ";
 
 		ModelAndView model = null;
 		try {
