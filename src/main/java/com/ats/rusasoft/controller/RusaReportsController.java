@@ -4587,8 +4587,11 @@ public class RusaReportsController {
 				for (int i = 0; i < expndList.size(); i++) {
 					// System.err.println("I " + i);
 					ExpndturOnPhysclAcademicSupprt expd = expndList.get(i);
-
+					try {
 					expdPer = expd.getExpdOnPhyAcad()*100/expd.getTtlExpd();
+					}catch (Exception e) {
+						System.err.println("Dividr By Zero : "+e.getMessage());
+					}
 					index++;
 					PdfPCell cell;
 					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
@@ -10907,7 +10910,7 @@ public class RusaReportsController {
 
 		} catch (Exception e) {
 
-			System.err.println("Exce in showIntelPropRght " + e.getMessage());
+			System.err.println("Exce in showFBReceivedFrmStakeHolder " + e.getMessage());
 			e.printStackTrace();
 
 		}

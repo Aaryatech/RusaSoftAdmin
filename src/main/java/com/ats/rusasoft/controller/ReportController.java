@@ -699,19 +699,19 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getConLevel() + "-" + prog.getConName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getConUniversity(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -2291,13 +2291,13 @@ public class ReportController {
 
 					cell = new PdfPCell(new Phrase("" + prog.getSubName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
 					cell = new PdfPCell(new Phrase("" + prog.getCoName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
 
@@ -4582,8 +4582,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName() + " " + prog.getFacultyLastName(),
-							headFontData));
+					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					// cell.setPaddingLeft(10);
@@ -7930,7 +7929,12 @@ public class ReportController {
 						temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
 					}
 					if (prog.getYesnoTitle().equalsIgnoreCase("Power requirements of LED bulbs")) {
+						try {
 						temp_tot_led = Double.parseDouble(prog.getInstYesnoResponse());
+						}catch (Exception e) {
+							System.out.println("Typecasting Exception"+e.getMessage());
+							// TODO: handle exception
+						}
 					}
 				}
 				index++;
@@ -12292,7 +12296,7 @@ public class ReportController {
 	@RequestMapping(value = "/showExtensionActivityReport", method = RequestMethod.POST)
 	public void showExtensionActivityReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Research,Innovation and Extension : No of Student/Teachers Participation in Extension Activity";
+		String reportName = "Research,Innovation and Extension : No. of Student/Teachers Participation in Extension Activity";
 
 		ModelAndView model = null;
 		try {
@@ -13237,8 +13241,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName() + " " + prog.getFacultyLastName(),
-							headFontData));
+					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(),	headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
