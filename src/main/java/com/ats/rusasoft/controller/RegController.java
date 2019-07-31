@@ -40,7 +40,7 @@ import com.ats.rusasoft.model.accessright.AssignRoleDetailList;
 public class RegController {
 	LinkedHashMap<String, Institute> instHashMap = new LinkedHashMap<String, Institute>();
 	LinkedHashMap<String, String> otpKeyValue = new LinkedHashMap<String, String>();
-	LinkedHashMap<Integer, String> temp = new LinkedHashMap<Integer, String>();
+	LinkedHashMap<Integer, String> temp = new LinkedHashMap< >();
 	LinkedHashMap<String, Staff> staffHashMap = new LinkedHashMap<String, Staff>();
 	RestTemplate rest = new RestTemplate();
 	Instant start=null;
@@ -181,7 +181,9 @@ public class RegController {
 				institute.setExInt1(yearId); // academic Year
 				institute.setExInt2(0); // is_approved
 
-				institute.setExVar1(exVar);
+				//institute.setExVar1(exVar);
+				institute.setExVar1(request.getParameter("inst_type"));
+
 				institute.setExVar2(exVar);
 
 				institute.setInstituteAdd(request.getParameter("inst_add"));
@@ -221,7 +223,7 @@ public class RegController {
 				institute.setState(request.getParameter("state"));
 				institute.setPincode(request.getParameter("pin"));
 
-				System.out.println("Data--------------" + institute.toString());
+				System.out.println("Data institute --------------" + institute.toString());
 
 				// Institute info = restTemplate.postForObject(Constants.url + "saveInstitute",
 				// institute,
@@ -603,6 +605,7 @@ public class RegController {
 				System.err.println("Otp Matched ");
 
 				Institute editInst = instHashMap.get(otpNo);
+				if(editInst.getIsRegistration()==1)
 				editInst.setRegDate(DateConvertor.convertToYMD(editInst.getRegDate()));
 
 				Institute info = rest.postForObject(Constants.url + "saveInstitute", editInst, Institute.class);

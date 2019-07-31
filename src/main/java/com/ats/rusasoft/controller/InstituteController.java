@@ -202,6 +202,7 @@ public class InstituteController {
 
 				model.addObject("instSpprt", instSpprt);
 				model.addObject("title", "Add Other (Besides Government) Financial Support Scheme");
+				model.addObject("budRupees", Names.Rupees);
 			}
 		} catch (Exception e) {
 

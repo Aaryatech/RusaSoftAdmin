@@ -29,8 +29,9 @@
 <!-- BEGIN BODY -->
 <body onload="showIsReg()" class=" ">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
-	
-	<c:url value="/getInstituteMasterByAishe" var="getInstituteMasterByAishe"></c:url>
+
+	<c:url value="/getInstituteMasterByAishe"
+		var="getInstituteMasterByAishe"></c:url>
 	<!-- START TOPBAR -->
 	<!-- END TOPBAR -->
 	<!-- START CONTAINER -->
@@ -59,15 +60,18 @@
 				<!-- MAIN CONTENT AREA STARTS -->
 
 
-				
+
 
 				<div class="col-lg-12">
 					<section class="box ">
 
 						<header class="panel_header extra_head">
-							<h2 class="login_head"><i class="fa fa-key" aria-hidden="true"></i> INSTITUTE REGISTRATION </h2>
+							<h2 class="login_head">
+								<i class="fa fa-key" aria-hidden="true"></i> INSTITUTE
+								REGISTRATION
+							</h2>
 
-							
+
 						</header>
 
 
@@ -98,12 +102,12 @@
 											<div class="col-md-12">
 												<div class="col-sm-2"></div>
 
-												<p class="desc text-danger fontsize11">Notice : This 
+												<p class="desc text-danger fontsize11">Notice : This
 													form strictly need to be filled by Institutes coming under
 													RUSA Maharashtra Only. You can access RUSA portal only
 													after authorisation done by RUSA officials.</p>
 
-												
+
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">AISHE
 														Code <span class="text-danger">*</span>
@@ -111,7 +115,7 @@
 													<div class="col-sm-7">
 														<input type="text" maxlength="7" onchange="trim(this)"
 															class="form-control" id="aishe_code" autocomplete="off"
-															   name="aishe_code" value="${editInst.aisheCode}"
+															name="aishe_code" value="${editInst.aisheCode}"
 															placeholder="All India Survey On Higher Education code">
 														<span class="error_form text-danger" id="aishe_code_field"
 															style="display: none;">Please enter AISHE code</span>
@@ -123,13 +127,12 @@
 														Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text"   readonly onchange="trim(this)"
+														<input type="text" readonly onchange="trim(this)"
 															class="form-control" id="inst_name" autocomplete="off"
 															value="${editInst.instituteName}" name="inst_name"
 															placeholder="Complete Name of Institute"> <span
 															class="error_form text-danger" id="inst_name_field"
-															style="display: none;">Please enter institute
-															name</span>
+															style="display: none;">Please enter institute name</span>
 
 													</div>
 												</div>
@@ -154,80 +157,75 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Village
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														Village <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)"  maxlength="200"
+														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="village" autocomplete="off"
 															value="${editInst.village}" name="village"
-															placeholder="Village">
-															<span
+															placeholder="Village"> <span
 															class="error_form text-danger" id="inst_vilg_field"
 															style="display: none;">Please enter village</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Taluka
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														Taluka <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)"  maxlength="200"
+														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="taluka" autocomplete="off"
 															value="${editInst.taluka}" name="taluka"
-															placeholder="Taluka">
-															<span
+															placeholder="Taluka"> <span
 															class="error_form text-danger" id="inst_taluka_field"
 															style="display: none;">Please enter taluka</span>
 													</div>
 												</div>
-												
-												
-												
+
+
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> District
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														District <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)" readonly maxlength="200"
-															class="form-control" id="district" autocomplete="off"
-															value="${editInst.district}" name="district"
-															placeholder="District">
-															<span
+														<input type="text" onchange="trim(this)" readonly
+															maxlength="200" class="form-control" id="district"
+															autocomplete="off" value="${editInst.district}"
+															name="district" placeholder="District"> <span
 															class="error_form text-danger" id="inst_dist_field"
 															style="display: none;">Please enter district</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> State
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														State <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" onchange="trim(this)" readonly maxlength="200"
-															class="form-control" id="state" autocomplete="off"
-															value="${editInst.state}" name="state"
-															placeholder="State">
-															<span
+														<input type="text" onchange="trim(this)" readonly
+															maxlength="200" class="form-control" id="state"
+															autocomplete="off" value="${editInst.state}" name="state"
+															placeholder="State"> <span
 															class="error_form text-danger" id="inst_stat_field"
 															style="display: none;">Please enter state</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Pin Code
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														Pin Code <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
 														<input type="text" onchange="trim(this)" maxlength="6"
-															class="form-control" id="pin" onkeypress='return restrictAlphabets(event)'
+															class="form-control" id="pin"
+															onkeypress='return restrictAlphabets(event)'
 															value="${editInst.pincode}" name="pin" autocomplete="off"
-															placeholder="Pin Code of 6 digit">
-															<span
+															placeholder="Pin Code of 6 digit"> <span
 															class="error_form text-danger" id="inst_pin_field"
-															style="display: none;">Please enter pin
-															code</span>
+															style="display: none;">Please enter pin code</span>
 													</div>
 												</div>
 
@@ -250,31 +248,31 @@
 															</c:when>
 															<c:otherwise> --%>
 
-																<c:choose>
-																	<c:when test="${editInst.isRegistration==1}">
-																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1" checked
-																			onclick="setDate(this.value)">Yes
+														<c:choose>
+															<c:when test="${editInst.isRegistration==1}">
 																<input type="radio" id="is_registration"
-																			name="is_registration" value="0"
-																			onclick="setDate(this.value)">No
+																	name="is_registration" value="1" checked
+																	onclick="setDate(this.value)">Yes
+																<input type="radio" id="is_registration"
+																	name="is_registration" value="0"
+																	onclick="setDate(this.value)">No
 															
 																
 																</c:when>
-																	<c:otherwise>
-																		<input type="radio" id="is_registration"
-																			name="is_registration" value="1"
-																			onclick="setDate(this.value)">Yes
+															<c:otherwise>
+																<input type="radio" id="is_registration"
+																	name="is_registration" value="1"
+																	onclick="setDate(this.value)">Yes
 																<input type="radio" id="is_registration" checked
-																			name="is_registration" value="0"
-																			onclick="setDate(this.value)">No
+																	name="is_registration" value="0"
+																	onclick="setDate(this.value)">No
 															
 																
 																</c:otherwise>
 
-																</c:choose>
+														</c:choose>
 
-															<%-- </c:otherwise>
+														<%-- </c:otherwise>
  --%>
 
 														<%-- </c:choose> --%>
@@ -293,11 +291,13 @@
 
 
 													<div class="col-sm-7">
-														<input type="text" class="form-control datepicker" data-end-date="0d" data-format="dd-mm-yyyy"
-															autocomplete="off" id="reg_date" onkeypress='return restrictAlphabets(event)'
-															value="${editInst.regDate}" name="reg_date" autocomplete="off"
-															placeholder="Date of Registration"> <span
-															class="error_form text-danger" id="reg_date_field"
+														<input type="text" class="form-control datepicker"
+															data-end-date="0d" data-format="dd-mm-yyyy"
+															autocomplete="off" id="reg_date"
+															onkeypress='return restrictAlphabets(event)'
+															value="${editInst.regDate}" name="reg_date"
+															autocomplete="off" placeholder="Date of Registration">
+														<span class="error_form text-danger" id="reg_date_field"
 															style="display: none;">Please select date of
 															registration</span>
 
@@ -340,9 +340,11 @@
 														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" value="${editInst.trustContactNo}" onkeypress='return restrictAlphabets(event)'
+														<input type="text" value="${editInst.trustContactNo}"
+															onkeypress='return restrictAlphabets(event)'
 															onchange="trim(this)" maxlength="15" class="form-control"
-															id="trusty_con_no" name="trusty_con_no" autocomplete="off"
+															id="trusty_con_no" name="trusty_con_no"
+															autocomplete="off"
 															placeholder="Trust/Society Official Contact No">
 														<span class="error_form text-danger"
 															id="trusty_con_no_field" style="display: none;">Please
@@ -372,7 +374,8 @@
 													<div class="col-sm-7">
 														<input type="text" value="${editInst.presidenContact}"
 															maxlength="15" class="form-control" id="pres_contact"
-															name="pres_contact" autocomplete="off" onkeypress='return restrictAlphabets(event)'
+															name="pres_contact" autocomplete="off"
+															onkeypress='return restrictAlphabets(event)'
 															placeholder="Chairman/President Contact No"> <span
 															class="error_form text-danger" id="pres_contact_field"
 															style="display: none;">Please enter
@@ -389,8 +392,8 @@
 														<input type="text" onchange="trim(this)"
 															class="form-control" id="pres_email" autocomplete="off"
 															value="${editInst.presidentEmail}" name="pres_email"
-															placeholder="Chairman/President Email Id">
-														<span class="error_form text-danger" id="pres_email_field"
+															placeholder="Chairman/President Email Id"> <span
+															class="error_form text-danger" id="pres_email_field"
 															style="display: none;">Please enter
 															chairman/president email id</span>
 
@@ -410,8 +413,7 @@
 															value="${editInst.principalName}" name="princ_name"
 															placeholder="Name of Principal"> <span
 															class="error_form text-danger" id="princ_name_field"
-															style="display: none;">Please enter principal
-															name</span>
+															style="display: none;">Please enter principal name</span>
 
 													</div>
 												</div>
@@ -421,10 +423,11 @@
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="text" 
-															maxlength="10" class="form-control" id="princ_contact"
-															value="${editInst.contactNo}" name="princ_contact" autocomplete="off"
-															placeholder="Principal Mobile No" onkeypress='return restrictAlphabets(event)'
+														<input type="text" maxlength="10" class="form-control"
+															id="princ_contact" value="${editInst.contactNo}"
+															name="princ_contact" autocomplete="off"
+															placeholder="Principal Mobile No"
+															onkeypress='return restrictAlphabets(event)'
 															oninput="checkUnique(this.value,1)"> <span
 															class="error_form text-danger" id="princ_contact_field"
 															style="display: none;">Please enter principal
@@ -457,13 +460,26 @@
 
 
 												<div class="form-group">
+													<label class="control-label col-sm-3" for="inst_type">Institute
+														Type <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-7">
+														<input type="radio" id="inst_type" name="inst_type" ${editInst.exVar1==1 ? 'checked' : ''}
+															value="1"> Government &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+															id="inst_type" name="inst_type" value="2" ${editInst.exVar1==2 ? 'checked' : ''}> Aided &nbsp;&nbsp;&nbsp;&nbsp;
+															<input type="radio"
+															id="inst_type" name="inst_type" ${editInst.exVar1==3 ? 'checked' : ''} value="3"> Unaided
+													</div>
+												</div>
+												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-7">
 
 														<input type="submit" id="sub_button"
-															class="btn btn-primary" value="Save" />
-								<a href="${pageContext.request.contextPath}/">
-								<button type="button" class="btn btn-info">Cancel</button></a>
-							
+															class="btn btn-primary" value="Save" /> <a
+															href="${pageContext.request.contextPath}/">
+															<button type="button" class="btn btn-info">Cancel</button>
+														</a>
+
 													</div>
 												</div>
 
@@ -604,9 +620,9 @@
 			</div>
 		</div>
 	</div> --%>
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 $('#aishe_code').on('input', function() {
 	var aishe_code=$('#aishe_code').val();
@@ -628,10 +644,10 @@ $('#aishe_code').on('input', function() {
 					//alert("len " +data.length);
 					if(data.mhInstId==0){
 						//alert("Null Data ");
-						alert("Registration already done using this AISHE Code")
+						alert("Registration already done for this AISHE code")
 					}
 					else 	if(data.mhInstId==-1){
-						alert("Please Enter valid AISHE Code");
+						alert("Please enter valid AISHE code");
 					}
 						
 					else{
@@ -1100,13 +1116,13 @@ var isReg = ${editInst.isRegistration};
 											document
 													.getElementById("princ_email").value = "";
 
-											alert("This Email Id is Already Exist in Database. Please Login with Your Credential.");
+											alert("This Email Id  already exist in database. Please login with your credential.");
 
 										} else {
 											document
 													.getElementById("princ_contact").value = "";
 
-											alert("This Mobile No is Already Exist in Database. Please Login with Your Credential.");
+											alert("This Mobile No already exist in database. Please login with your credential.");
 										}
 									}
 								});
@@ -1135,7 +1151,7 @@ var isReg = ${editInst.isRegistration};
 		}
 	</script>
 
-	
+
 
 </body>
 </html>
