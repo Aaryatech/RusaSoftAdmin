@@ -118,7 +118,7 @@
 															name="aishe_code" value="${editInst.aisheCode}"
 															placeholder="All India Survey On Higher Education code">
 														<span class="error_form text-danger" id="aishe_code_field"
-															style="display: none;">Please enter AISHE code</span>
+															style="display: none;">AISHE code not available.</span>
 
 													</div>
 												</div>
@@ -132,7 +132,7 @@
 															value="${editInst.instituteName}" name="inst_name"
 															placeholder="Complete Name of Institute"> <span
 															class="error_form text-danger" id="inst_name_field"
-															style="display: none;">Please enter institute name</span>
+															style="display: none;">Please enter institute name.</span>
 
 													</div>
 												</div>
@@ -151,7 +151,7 @@
 															placeholder="Complete Institute Address"> <span
 															class="error_form text-danger" id="inst_add_field"
 															style="display: none;">Please enter institute
-															address</span>
+															address.</span>
 
 													</div>
 												</div>
@@ -166,7 +166,7 @@
 															value="${editInst.village}" name="village"
 															placeholder="Village"> <span
 															class="error_form text-danger" id="inst_vilg_field"
-															style="display: none;">Please enter village</span>
+															style="display: none;">Please enter village.</span>
 													</div>
 												</div>
 
@@ -180,7 +180,7 @@
 															value="${editInst.taluka}" name="taluka"
 															placeholder="Taluka"> <span
 															class="error_form text-danger" id="inst_taluka_field"
-															style="display: none;">Please enter taluka</span>
+															style="display: none;">Please enter taluka.</span>
 													</div>
 												</div>
 
@@ -196,7 +196,7 @@
 															autocomplete="off" value="${editInst.district}"
 															name="district" placeholder="District"> <span
 															class="error_form text-danger" id="inst_dist_field"
-															style="display: none;">Please enter district</span>
+															style="display: none;">Please enter district.</span>
 													</div>
 												</div>
 
@@ -210,7 +210,7 @@
 															autocomplete="off" value="${editInst.state}" name="state"
 															placeholder="State"> <span
 															class="error_form text-danger" id="inst_stat_field"
-															style="display: none;">Please enter state</span>
+															style="display: none;">Please enter state.</span>
 													</div>
 												</div>
 
@@ -225,7 +225,7 @@
 															value="${editInst.pincode}" name="pin" autocomplete="off"
 															placeholder="Pin Code of 6 digit"> <span
 															class="error_form text-danger" id="inst_pin_field"
-															style="display: none;">Please enter pin code</span>
+															style="display: none;">Please enter pin code.</span>
 													</div>
 												</div>
 
@@ -299,7 +299,7 @@
 															autocomplete="off" placeholder="Date of Registration">
 														<span class="error_form text-danger" id="reg_date_field"
 															style="display: none;">Please select date of
-															registration</span>
+															registration.</span>
 
 													</div>
 												</div>
@@ -315,7 +315,7 @@
 															placeholder="Trust/Society Name"> <span
 															class="error_form text-danger" id="trusty_name_field"
 															style="display: none;">Please enter trust/society
-															name</span>
+															name.</span>
 
 													</div>
 												</div>
@@ -331,7 +331,7 @@
 															placeholder="Trust/Society Address" value=""> <span
 															class="error_form text-danger" id="trusty_add_field"
 															style="display: none;">Please enter trust/society
-															address</span>
+															address.</span>
 													</div>
 												</div>
 
@@ -348,7 +348,7 @@
 															placeholder="Trust/Society Official Contact No">
 														<span class="error_form text-danger"
 															id="trusty_con_no_field" style="display: none;">Please
-															enter trust/society official contact no</span>
+															enter trust/society official contact No.</span>
 													</div>
 												</div>
 
@@ -363,7 +363,7 @@
 															placeholder="Name of Chairman/President(Board of Governance)">
 														<span class="error_form text-danger" id="pres_name_field"
 															style="display: none;">Please enter
-															chairman/president (board of governance) name</span>
+															chairman/president (board of governance) name.</span>
 													</div>
 												</div>
 
@@ -379,7 +379,7 @@
 															placeholder="Chairman/President Contact No"> <span
 															class="error_form text-danger" id="pres_contact_field"
 															style="display: none;">Please enter
-															chairman/president contact no</span>
+															chairman/president contact No.</span>
 
 													</div>
 												</div>
@@ -395,7 +395,7 @@
 															placeholder="Chairman/President Email Id"> <span
 															class="error_form text-danger" id="pres_email_field"
 															style="display: none;">Please enter
-															chairman/president email id</span>
+															chairman/president email Id.</span>
 
 													</div>
 												</div>
@@ -413,7 +413,7 @@
 															value="${editInst.principalName}" name="princ_name"
 															placeholder="Name of Principal"> <span
 															class="error_form text-danger" id="princ_name_field"
-															style="display: none;">Please enter principal name</span>
+															style="display: none;">Please enter principal name.</span>
 
 													</div>
 												</div>
@@ -431,10 +431,10 @@
 															oninput="checkUnique(this.value,1)"> <span
 															class="error_form text-danger" id="princ_contact_field"
 															style="display: none;">Please enter principal
-															mobile no</span>
+															mobile No.</span>
 
 														<p class="desc font-italic fontsize11">Note: OTP will
-															be sent on this mobile number for verification</p>
+															be sent on this mobile number for verification.</p>
 													</div>
 
 												</div>
@@ -451,10 +451,20 @@
 															placeholder=" Principal Email Id (Official)"> <span
 															class="error_form text-danger" id="princ_email_field"
 															style="display: none;">Please enter principal
-															email id</span>
+															email Id.</span>
 
 														<p class="desc font-italic fontsize11">Note:
-															Verification mail will be sent on this Email id</p>
+															Verification mail will be sent on this Email Id.</p>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="inst_type">Autonomy
+														 <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-7">
+														<input type="radio" id="autonomy" name="autonomy" ${editInst.exVar2==1 ? 'checked' : ''} value="1"> Yes &nbsp;&nbsp;&nbsp;&nbsp; 
+														<input type="radio"	id="autonomy" name="autonomy" value="2" ${editInst.exVar2==2 ? 'checked' : ''}> No 
 													</div>
 												</div>
 

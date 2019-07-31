@@ -132,14 +132,14 @@
 														
 														<div class="form-group">
 															<label class="control-label col-sm-2" for="smallheading">Aadhaar No.
-																of Ph.D. Scholar <span class="text-danger">*</span>
+																of Ph.D. Scholar <span class="text-danger"></span>
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="aadhar" onchange="trim(this)"
 																	name="aadhar" placeholder="Aadhaar No." maxlength="15"
 																	value="${phd.aadhaarNo}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_field_adhar" style="display:none;" >
-																	Please enter aadhaar No.</span>
+																<!-- 	<span class="error_form text-danger" id="error_field_adhar" style="display:none;" >
+																	Please enter aadhaar No.</span> -->
 															</div>
 														</div>
 														
@@ -446,7 +446,7 @@
             					$("#error_formfield0").hide()
             				}
            				
-           				if(!$("#aadhar").val()|| $("#aadhar").val().length<15) {
+           				/* if(!$("#aadhar").val()|| $("#aadhar").val().length<15) {
          					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -456,7 +456,7 @@
             					//return false;
             				} else {
             					$("#error_field_adhar").hide()
-            				}
+            				} */
            				
            				if(!$("#place_work").val()){
         					 

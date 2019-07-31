@@ -335,7 +335,7 @@ public class QualityInitiativeController {
 
 		ModelAndView model = new ModelAndView("instituteInfo/IQAC/add_internal_quality");
 		try {
-
+			MultiValueMap<String, Object> map;
 			model.addObject("title", "Add Institute Internal Quality Initiatives");
 			InstituteQuality editQuality = new InstituteQuality();
 			model.addObject("editQuality", editQuality);
@@ -347,17 +347,26 @@ public class QualityInitiativeController {
 			model.addObject("qualInintList", qualInintList);
 			
 			
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("key", "QUALITYIDS");
 			SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
 					SettingKeyValue.class);
 			System.err.println("settingValues " +settingValues.toString());
-
-List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
-.collect(Collectors.toList());
-model.addObject("settingList", settingList);
-model.addObject("isEdit", 0);
+			
+			List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
+			.collect(Collectors.toList());
+			model.addObject("settingList", settingList);
+			
+			map = new LinkedMultiValueMap<String, Object>();
+			
+			map.add("key", "NAACCYCLE");
+			SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+					SettingKeyValue.class);
+			System.err.println("CycleValues " +score.toString());
+			
+			model.addObject("cycleUpto", score.getIntValue());
+			model.addObject("isEdit", 0);
 
 		} catch (Exception e) {
 
@@ -436,10 +445,10 @@ model.addObject("isEdit", 0);
 
 				instQuality.setDelStatus(1);
 				instQuality.setIsActive(1);
-				instQuality.setExInt1(1);
+				instQuality.setExInt1(Integer.parseInt(request.getParameter("cycle")));	// Cycle
 				instQuality.setExInt2(1);
 				instQuality.setExVar1(request.getParameter("qltyInitiative"));
-				instQuality.setExVar2("NA");
+				instQuality.setExVar2(request.getParameter("naac_score")); //store NAAC Score
 
 				instQuality.setMakerDatetime(curDateTime);
 				instQuality.setMakerUserId(userObj.getUserId());
@@ -521,7 +530,7 @@ model.addObject("isEdit", 0);
 
 				GetInstituteQuality editInstQuality = rest.postForObject(Constants.url + "getInstituteQualityById", map,
 						GetInstituteQuality.class);
-				System.err.println("List"+editInstQuality);
+				
 				model.addObject("editQuality", editInstQuality);
 
 				QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",
@@ -536,11 +545,20 @@ model.addObject("isEdit", 0);
 				SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
 						SettingKeyValue.class);
 				System.err.println("settingValues " +settingValues.toString());
-
-	List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
-	.collect(Collectors.toList());
-	model.addObject("settingList", settingList);
-	model.addObject("isEdit", 1);
+			
+				List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
+				.collect(Collectors.toList());
+				model.addObject("settingList", settingList);
+				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("key", "NAACCYCLE");
+				SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+						SettingKeyValue.class);
+				System.err.println("CycleValues " +score.toString());
+				
+				model.addObject("cycleUpto", score.getIntValue());
+				
+				model.addObject("isEdit", 1);
 
 			} else {
 				model = new ModelAndView("accessDenied");

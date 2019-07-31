@@ -252,6 +252,53 @@
 											</div>
 										</div>
 										
+										<div id="yesnodiv4" style="display: none">
+										
+											<div class="form-group" >
+												<label class="control-label col-sm-2" for="planning">NAAC 
+													Score<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" onchange="trim(this)"
+														placeholder="NAAC Score" autocomplete="off" id="naac_score"
+														name="naac_score" value="${editQuality.exVar2}">
+													<span class="error_form text-danger" id="errfield_naac_score"
+														style="display: none;">Please enter NAAC Score.</span>
+												</div>
+											</div>
+											
+											<div class="form-group">
+											<label class="control-label col-sm-2" for="Cycle">
+												Cycle<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="cycle" name="cycle" class="form-control"
+													title="Cycle">
+													<c:forEach begin="1" end="${cycleUpto}" varStatus="count">
+														<c:choose>
+																	
+														
+															<c:when test="${editQuality.exInt1==count.index}">
+															
+															<option Selected value="${count.index}">${count.index}</option><br/>
+															
+															</c:when>
+														<c:otherwise>
+														
+															   <option value="${count.index}">${count.index}</option><br/>
+														</c:otherwise>
+													
+														</c:choose>
+															</c:forEach>
+												</select> <span class="error_form text-danger"
+													id="qualityInitId_field" style="display: none;">Please
+													select quality initiative name</span>
+
+
+											</div>
+										</div>
+										</div>
+										
 										<div class="form-group">
 											<label class="control-label col-sm-2" id="certf_date" for="fromDate">From
 												Date <span class="text-danger">*</span>
@@ -350,7 +397,10 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-	<script>
+	<script>naac_score
+	$('#naac_score').on('input', function() {
+		  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+		});
 	
 	$('#no_of_participant').on('input', function() {
 		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
@@ -450,6 +500,20 @@
 													} else {
 														$("#error_other").hide();
 													}
+												}
+												
+												var certi=$('input[name=certi_obt]:checked').val();												
+												if(certi==1){
+													if (!$("#naac_score").val()) {
+														isError = true;
+	
+														$("#naac_score").addClass(
+																"has-error")
+														$("#errfield_naac_score").show();
+													} else {
+														$("#errfield_naac_score").hide();
+													}
+													
 												}
 												
 												/* if ($("#no_of_participant")
@@ -553,7 +617,7 @@
 						document.getElementById("yesnodiv3").style = "display:none";
 					}
 					if(${editQuality.isCertiObt==1}){
-						
+						 document.getElementById("yesnodiv4").style = "visible";
 						 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
 						 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
 						 $('#fromDate').attr('placeholder','Certificate Date');
@@ -637,6 +701,7 @@
 			if(divId==3){
 				 x=$('input[name=certi_obt]:checked').val();
 				 if(x==1){
+				 document.getElementById("yesnodiv4").style = "visible";
 				 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
 				 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
 				 $('#fromDate').attr('placeholder','Certificate Date');

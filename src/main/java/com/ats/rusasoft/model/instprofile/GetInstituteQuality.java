@@ -13,7 +13,10 @@ public class GetInstituteQuality {
 	private int qualityPcount;
 	
 	private String qualityInitiativeName;
+	
+	private int exInt1;
 	private String exVar1;
+	private String exVar2;
 	
 	
 	private int isApplicable;
@@ -100,14 +103,32 @@ public class GetInstituteQuality {
 
 	public void setQualityInitiativeName(String qualityInitiativeName) {
 		this.qualityInitiativeName = qualityInitiativeName;
+	}	
+
+	public String getExVar2() {
+		return exVar2;
+	}
+
+	public void setExVar2(String exVar2) {
+		this.exVar2 = exVar2;
+	}
+
+	public int getExInt1() {
+		return exInt1;
+	}
+
+	public void setExInt1(int exInt1) {
+		this.exInt1 = exInt1;
 	}
 
 	@Override
 	public String toString() {
 		return "GetInstituteQuality [qualityId=" + qualityId + ", qualityInitiativeId=" + qualityInitiativeId
 				+ ", qualityFromdt=" + qualityFromdt + ", qualityTodt=" + qualityTodt + ", qualityPcount="
-				+ qualityPcount + ", qualityInitiativeName=" + qualityInitiativeName + ", exVar1=" + exVar1
-				+ ", isApplicable=" + isApplicable + ", isApplied=" + isApplied + ", isCertiObt=" + isCertiObt + "]";
-	} 
+				+ qualityPcount + ", qualityInitiativeName=" + qualityInitiativeName + ", exInt1=" + exInt1
+				+ ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", isApplicable=" + isApplicable + ", isApplied="
+				+ isApplied + ", isCertiObt=" + isCertiObt + "]";
+	}
 
+	
 }

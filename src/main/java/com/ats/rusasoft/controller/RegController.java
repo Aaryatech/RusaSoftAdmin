@@ -184,7 +184,7 @@ public class RegController {
 				//institute.setExVar1(exVar);
 				institute.setExVar1(request.getParameter("inst_type"));
 
-				institute.setExVar2(exVar);
+				institute.setExVar2(request.getParameter("autonomy"));
 
 				institute.setInstituteAdd(request.getParameter("inst_add"));
 				institute.setInstituteId(instId);
