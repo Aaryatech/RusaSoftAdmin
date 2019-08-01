@@ -463,8 +463,8 @@
 														 <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="radio" id="autonomy" name="autonomy" ${editInst.exVar2==1 ? 'checked' : ''} value="1"> Yes &nbsp;&nbsp;&nbsp;&nbsp; 
-														<input type="radio"	id="autonomy" name="autonomy" value="2" ${editInst.exVar2==2 ? 'checked' : ''}> No 
+														<input type="radio" id="autonomy" name="autonomy" value="1" ${editInst.exVar2==1 ? 'checked' : ''}> Yes &nbsp;&nbsp;&nbsp;&nbsp; 
+														<input type="radio"	id="autonomy" name="autonomy" value="0" ${editInst.exVar2==0 ? 'checked' : ''}> No 
 													</div>
 												</div>
 
@@ -1126,13 +1126,13 @@ var isReg = ${editInst.isRegistration};
 											document
 													.getElementById("princ_email").value = "";
 
-											alert("This Email Id  already exist in database. Please login with your credential.");
+											alert("This Email Id. Already Exist.");
 
 										} else {
 											document
 													.getElementById("princ_contact").value = "";
 
-											alert("This Mobile No already exist in database. Please login with your credential.");
+											alert("This Mobile No. Already Exist.");
 										}
 									}
 								});

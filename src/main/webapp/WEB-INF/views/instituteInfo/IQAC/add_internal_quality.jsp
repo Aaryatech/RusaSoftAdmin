@@ -299,6 +299,22 @@
 										</div>
 										</div>
 										
+										<div id="validity_div" style="display: none">
+										
+											<div class="form-group" >
+												<label class="control-label col-sm-2" for="planning">Validity 
+													<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" onchange="trim(this)"
+														placeholder="Validity" autocomplete="off" id="validity"
+														name="validity" value="${editQuality.autonomyValidity}">
+													<span class="error_form text-danger" id="errfield_validity"
+														style="display: none;">Please enter Validity.</span>
+												</div>
+											</div>
+										</div>
+										
 										<div class="form-group">
 											<label class="control-label col-sm-2" id="certf_date" for="fromDate">From
 												Date <span class="text-danger">*</span>
@@ -512,10 +528,24 @@
 														$("#errfield_naac_score").show();
 													} else {
 														$("#errfield_naac_score").hide();
-													}
-													
+													}													
 												}
 												
+												var value = document.getElementById("qualityInitId").value;
+												if(parseInt(value)==${validValue}){
+													//alert("I Am Here");
+													
+													if (!$("#validity").val()) {
+														isError = true;
+	
+														$("#validity").addClass(
+																"has-error")
+														$("#errfield_validity").show();
+													} else {
+														$("#errfield_validity").hide();
+													}												
+													
+												}
 												/* if ($("#no_of_participant")
 														.val() == 0
 														|| !$(
@@ -587,11 +617,12 @@
 			var value = document.getElementById("qualityInitId").value
 			var editValue = value;
 			//alert("qualType::"+value);
-//alert("He " +${settingList}[0])
-			//document.getElementById("abc").style.display = (value == editValue) ? "inline" : "none";
+			//alert("He " +${settingList}[4])
+		
+			
 			
 			if (value == 0) {
-				//alert("called");
+				
 				document.getElementById("abc").style = "visible"
 
 			} else {
@@ -600,9 +631,11 @@
 			
 			if(parseInt(value)==${settingList}[0] || parseInt(value)==${settingList}[1] || parseInt(value)==${settingList}[2] || parseInt(value)==${settingList}[3]){
 
-				document.getElementById("yesnodiv1").style = "visible";
+				document.getElementById("yesnodiv1").style = "visible";				
 				
 				if(${isEdit}==1){
+					
+					document.getElementById("validity_div").style = "visible";
 					//alert("Hi edit " )
 					if(${editQuality.isApplicable==1}){
 						   document.getElementById("yesnodiv2").style = "visible"
@@ -626,6 +659,7 @@
 					
 				}
 			}else{
+				
 				document.getElementById("yesnodiv1").style = "display:none";
 				document.getElementById("yesnodiv2").style = "display:none";
 				document.getElementById("yesnodiv3").style = "display:none";
@@ -657,6 +691,16 @@
 				}
 				
 			} */
+			
+			 if( parseInt(value)==${validValue}){
+					document.getElementById("validity_div").style = "visible";
+					if(${isEdit}==1){
+						document.getElementById("validity_div").style = "visible";
+					}
+				}else
+					{
+						document.getElementById("validity_div").style = "display:none";
+					} 
 		}
 		function showNext(yesno,divId) {
 			//alert(yesno);	alert(divId);

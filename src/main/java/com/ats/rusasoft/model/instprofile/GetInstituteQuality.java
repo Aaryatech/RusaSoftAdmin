@@ -22,10 +22,17 @@ public class GetInstituteQuality {
 	private int isApplicable;
 	private int isApplied;
 	private int isCertiObt;
+	private String autonomyValidity;	
+			
 	
-	
-		
-	
+	public String getAutonomyValidity() {
+		return autonomyValidity;
+	}
+
+	public void setAutonomyValidity(String autonomyValidity) {
+		this.autonomyValidity = autonomyValidity;
+	}
+
 	public int getIsApplicable() {
 		return isApplicable;
 	}
@@ -127,8 +134,7 @@ public class GetInstituteQuality {
 				+ ", qualityFromdt=" + qualityFromdt + ", qualityTodt=" + qualityTodt + ", qualityPcount="
 				+ qualityPcount + ", qualityInitiativeName=" + qualityInitiativeName + ", exInt1=" + exInt1
 				+ ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", isApplicable=" + isApplicable + ", isApplied="
-				+ isApplied + ", isCertiObt=" + isCertiObt + "]";
+				+ isApplied + ", isCertiObt=" + isCertiObt + ", autonomyValidity=" + autonomyValidity + "]";
 	}
-
-	
+		
 }

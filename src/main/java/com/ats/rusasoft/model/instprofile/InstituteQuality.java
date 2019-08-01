@@ -30,6 +30,7 @@ public class InstituteQuality {
 	private int isApplied;
 	private int isCertiObt;
 	
+	private String autonomyValidity;	
 	
 	
 	public int getIsApplicable() {
@@ -141,6 +142,12 @@ public class InstituteQuality {
 		this.exVar2 = exVar2;
 	}
 	
+	public String getAutonomyValidity() {
+		return autonomyValidity;
+	}
+	public void setAutonomyValidity(String autonomyValidity) {
+		this.autonomyValidity = autonomyValidity;
+	}
 	@Override
 	public String toString() {
 		return "InstituteQuality [qualityId=" + qualityId + ", instituteId=" + instituteId + ", yearId=" + yearId
@@ -148,7 +155,9 @@ public class InstituteQuality {
 				+ qualityTodt + ", qualityPcount=" + qualityPcount + ", delStatus=" + delStatus + ", isActive="
 				+ isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1
 				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", isApplicable=" + isApplicable
-				+ ", isApplied=" + isApplied + ", isCertiObt=" + isCertiObt + "]";
+				+ ", isApplied=" + isApplied + ", isCertiObt=" + isCertiObt + ", autonomyValidity=" + autonomyValidity
+				+ "]";
 	}
+	
 	
 }

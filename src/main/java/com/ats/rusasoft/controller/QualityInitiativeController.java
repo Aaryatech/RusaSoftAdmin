@@ -363,9 +363,18 @@ public class QualityInitiativeController {
 			map.add("key", "NAACCYCLE");
 			SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue",map,
 					SettingKeyValue.class);
-			System.err.println("CycleValues " +score.toString());
+			//System.err.println("CycleValues " +score.toString());
 			
 			model.addObject("cycleUpto", score.getIntValue());
+			
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("key", "AutoValidity");
+			SettingKeyValue validityValue = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+					SettingKeyValue.class);
+			System.err.println("Valid Values " +validityValue.getIntValue());
+			
+			model.addObject("validValue", validityValue.getIntValue());
+			
 			model.addObject("isEdit", 0);
 
 		} catch (Exception e) {
@@ -456,7 +465,7 @@ public class QualityInitiativeController {
 				int isApplicable=0;
 				int isApplied=0;
 				int isCertiObt=0;
-				
+								
 				try {
 					isApplicable=Integer.parseInt(request.getParameter("is_applicable"));
 				}catch (Exception e) {
@@ -479,6 +488,12 @@ public class QualityInitiativeController {
 				instQuality.setIsApplied(isApplied);
 				instQuality.setIsCertiObt(isCertiObt);
 				
+				String autoValidity = request.getParameter("validity");
+				if(autoValidity!=null) {
+					instQuality.setAutonomyValidity(autoValidity);
+				}else {
+				instQuality.setAutonomyValidity("NA");
+				}
 				InstituteQuality insertQualRes = rest.postForObject(Constants.url + "saveInstituteQuality", instQuality,
 						InstituteQuality.class);
 				
@@ -530,6 +545,7 @@ public class QualityInitiativeController {
 
 				GetInstituteQuality editInstQuality = rest.postForObject(Constants.url + "getInstituteQualityById", map,
 						GetInstituteQuality.class);
+				System.out.println("Inst Qulity="+editInstQuality);
 				
 				model.addObject("editQuality", editInstQuality);
 
@@ -544,7 +560,7 @@ public class QualityInitiativeController {
 				map.add("key", "QUALITYIDS");
 				SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
 						SettingKeyValue.class);
-				System.err.println("settingValues " +settingValues.toString());
+				//System.err.println("settingValues " +settingValues.toString());
 			
 				List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
 				.collect(Collectors.toList());
@@ -554,9 +570,17 @@ public class QualityInitiativeController {
 				map.add("key", "NAACCYCLE");
 				SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue",map,
 						SettingKeyValue.class);
-				System.err.println("CycleValues " +score.toString());
+				//System.err.println("CycleValues " +score.toString());
 				
 				model.addObject("cycleUpto", score.getIntValue());
+				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("key", "AutoValidity");
+				SettingKeyValue validityValue = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+						SettingKeyValue.class);
+				//System.err.println("Valid Values " +validityValue.getIntValue());
+				
+				model.addObject("validValue", validityValue.getIntValue());
 				
 				model.addObject("isEdit", 1);
 
