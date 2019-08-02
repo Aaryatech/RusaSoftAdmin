@@ -477,7 +477,7 @@ function checkUnique(inputValue,valueType){
 			if(valueType==2){
 			
 			
-			alert("This email id already exist in system please enter unique");
+			alert("This Email Id  is Already Exist.");
 			$('#student_email').val('');
 			//document.getElementById("stud_contact_no").value=" ";
 			
@@ -485,7 +485,7 @@ function checkUnique(inputValue,valueType){
 			else{
 				
 				
-				alert("This contact no  already exist in system please enter unique");
+				alert("This Contact No. is Already Exist.																																																																			");
 				$('#stud_contact_no').val('');
 				//document.getElementById("student_email").value=" ";
 			}
