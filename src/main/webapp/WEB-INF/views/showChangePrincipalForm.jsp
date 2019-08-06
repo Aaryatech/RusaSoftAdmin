@@ -76,8 +76,7 @@
 											value="${editInst.instituteId}">
 
 										<div class="row">
-											<div class="col-md-12">
-												<div class="col-sm-2"></div>
+											<div class="col-md-12">											
  
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">AISHE
