@@ -617,9 +617,7 @@
 			var value = document.getElementById("qualityInitId").value
 			var editValue = value;
 			//alert("qualType::"+value);
-			//alert("He " +${settingList}[4])
-		
-			
+			//alert("He " +${settingList}[4])		
 			
 			if (value == 0) {
 				
@@ -663,6 +661,8 @@
 				document.getElementById("yesnodiv1").style = "display:none";
 				document.getElementById("yesnodiv2").style = "display:none";
 				document.getElementById("yesnodiv3").style = "display:none";
+				$("input:radio").attr("checked", false);
+				 
 				//document.getElementById("certf_date").innerHTML = "From Date";
 				 //document.getElementById("exp_date").innerHTML = "To Date";
 				 $('#fromDate').attr('placeholder','From Date');
@@ -701,6 +701,15 @@
 					{
 						document.getElementById("validity_div").style = "display:none";
 					} 
+			
+			
+			if(value!=${settingList}[3]){
+				document.getElementById("yesnodiv4").style = "display:none";
+				 document.getElementById('naac_score').value = 0;
+			}else{
+				document.getElementById("yesnodiv4").style = "visible";
+			}
+			
 		}
 		function showNext(yesno,divId) {
 			//alert(yesno);	alert(divId);
@@ -744,8 +753,18 @@
 				}
 			if(divId==3){
 				 x=$('input[name=certi_obt]:checked').val();
+				 var qltyId = document.getElementById("qualityInitId").value;
+				 var naacKey= ${settingList}[3];
+				// alert("Qlt:"+qltyId+"  "+naacKey)
 				 if(x==1){
-				 document.getElementById("yesnodiv4").style = "visible";
+					 if(qltyId==naacKey){
+						 
+						 document.getElementById("yesnodiv4").style = "visible";
+					 }else{
+						 document.getElementById("yesnodiv4").style = "display:none";
+					 }
+						 
+				
 				 document.getElementById("certf_date").innerHTML = "Certificate Date <span class='text-danger'>*</span>";
 				 document.getElementById("exp_date").innerHTML = "Valid Upto <span class='text-danger'>*</span>";
 				 $('#fromDate').attr('placeholder','Certificate Date');
