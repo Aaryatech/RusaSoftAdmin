@@ -3,7 +3,7 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
- 
+
  
 <!DOCTYPE html>
 <html class=" ">
@@ -617,7 +617,7 @@
 			var value = document.getElementById("qualityInitId").value
 			var editValue = value;
 			//alert("qualType::"+value);
-			//alert("He " +${settingList}[4])		
+			//alert("He " +${settingList}[2])		
 			
 			if (value == 0) {
 				
@@ -703,7 +703,9 @@
 					} 
 			
 			
-			if(value!=${settingList}[3]){
+			if(value!=${settingList}[2])	/*  ${settingList}[2] = NAAC, Id=34, Stored in 't_setting_key_value' table(array fromat)*/
+			{
+				//alert("Call");
 				document.getElementById("yesnodiv4").style = "display:none";
 				 document.getElementById('naac_score').value = 0;
 			}else{
@@ -754,8 +756,8 @@
 			if(divId==3){
 				 x=$('input[name=certi_obt]:checked').val();
 				 var qltyId = document.getElementById("qualityInitId").value;
-				 var naacKey= ${settingList}[3];
-				// alert("Qlt:"+qltyId+"  "+naacKey)
+				 var naacKey= ${settingList}[2];
+				 //alert("Qlt:"+qltyId+"  "+naacKey)
 				 if(x==1){
 					 if(qltyId==naacKey){
 						 
@@ -881,8 +883,7 @@
 			{
 				a.value="";
 			}
-		}
-	
+		};	
 </script>
 
 

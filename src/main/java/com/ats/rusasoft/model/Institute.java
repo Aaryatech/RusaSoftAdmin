@@ -24,23 +24,7 @@ public class Institute {
 	private String trustContactNo;
 	private String presidentName;
 	private String presidenContact;
-	private String presidentEmail;
-	
-	public String getPresidenContact() {
-		return presidenContact;
-	}
-
-	public void setPresidenContact(String presidenContact) {
-		this.presidenContact = presidenContact;
-	}
-
-	public String getPresidentEmail() {
-		return presidentEmail;
-	}
-
-	public void setPresidentEmail(String presidentEmail) {
-		this.presidentEmail = presidentEmail;
-	}
+	private String presidentEmail;	
 
 	private String principalName;
 	private String contactNo;
@@ -60,11 +44,27 @@ public class Institute {
 	private String lastUpdatedDatetime;
 
 	// extra 4 columns
-	private int exInt1;
-	private int exInt2;
+	private int exInt1;	//Academic Year
+	private int exInt2;	// is_approved - Yes=1, No=0
 
-	private String exVar1;
-	private String exVar2;
+	private String exVar1;	//Institute Type Gov=1, Aided=2, Unaided=3
+	private String exVar2;	//Autonomy - Yes=1, No=0
+	
+	public String getPresidenContact() {
+		return presidenContact;
+	}
+
+	public void setPresidenContact(String presidenContact) {
+		this.presidenContact = presidenContact;
+	}
+
+	public String getPresidentEmail() {
+		return presidentEmail;
+	}
+
+	public void setPresidentEmail(String presidentEmail) {
+		this.presidentEmail = presidentEmail;
+	}
 
 	public int getInstituteId() {
 		return instituteId;

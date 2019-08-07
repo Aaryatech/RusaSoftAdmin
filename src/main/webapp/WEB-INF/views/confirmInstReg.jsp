@@ -609,11 +609,17 @@ table.blueTable thead th:first-child {
 								<td>Email ID : ${editInst.email}</td>
 							</tr>
 							<tr>
-								<%--  <td>
-								 	Is Registered For 2F/12B:
-								 	<c:if test="${editInst.isRegistration==1}">Yes</c:if>
-								  	<c:if test="${editInst.isRegistration==0}">No	</c:if>
-								</td>  --%>
+								  <td>
+								 	Autonomy :
+								 	<c:if test="${editInst.exVar2==1}">Yes</c:if>
+								  	<c:if test="${editInst.exVar2==0}">No</c:if>
+								</td>
+								
+								<td>Institute Type : 
+									<c:if test="${editInst.exVar1==1}">Government</c:if>
+									<c:if test="${editInst.exVar1==2}">Aided</c:if>
+									<c:if test="${editInst.exVar1==3}">Unaided</c:if>								
+								</td>
 							</tr>
 						</tbody>
 
