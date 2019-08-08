@@ -217,14 +217,14 @@
 <b>Faculty</b><div class="dashboard_list">
 											<div class="col-md-3">
 												<div class="dash_one">
-													<h2 class="desig_nm">Research Project Title</h2>
-													<span class="count_num" style="font-size: 19px;"> <c:choose>
+													<h2 class="desig_nm">No. of Research Project</h2>
+													<span class="count_num"> <c:choose>
 															<c:when
 																test="${not empty dashBoardCounts.researchprojecttitle}">
-																${dashBoardCounts.researchprojecttitle}
+																${dashBoardCounts.researchprojecttitle}	<!-- No. of Project Showed -->
 															</c:when>
 															<c:otherwise>
-															-
+															<!-- 0 -->
 															</c:otherwise>
 														</c:choose>
 													</span>

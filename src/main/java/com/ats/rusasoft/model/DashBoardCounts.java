@@ -32,7 +32,7 @@ public class DashBoardCounts {
 
 	// faculty
 
-	private String researchprojecttitle;
+	private String researchprojecttitle;	// No. Project Showed (Count)(current academic year wise)
 
 	private int noofpatentsfilled;
 

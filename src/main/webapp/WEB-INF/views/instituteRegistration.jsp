@@ -478,7 +478,7 @@
 															value="1"> Government &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
 															id="inst_type" name="inst_type" value="2" ${editInst.exVar1==2 ? 'checked' : ''}> Aided &nbsp;&nbsp;&nbsp;&nbsp;
 															<input type="radio"
-															id="inst_type" name="inst_type" ${editInst.exVar1==3 ? 'checked' : ''} value="3"> Unaided
+															id="inst_type" name="inst_type" ${editInst.exVar1==3 ? 'checked' : ''} value="3"> Non-Aided
 													</div>
 												</div>
 												<div class="form-group">

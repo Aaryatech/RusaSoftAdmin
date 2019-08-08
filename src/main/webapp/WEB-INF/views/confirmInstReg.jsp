@@ -618,7 +618,7 @@ table.blueTable thead th:first-child {
 								<td>Institute Type : 
 									<c:if test="${editInst.exVar1==1}">Government</c:if>
 									<c:if test="${editInst.exVar1==2}">Aided</c:if>
-									<c:if test="${editInst.exVar1==3}">Unaided</c:if>								
+									<c:if test="${editInst.exVar1==3}">Non-Aided</c:if>								
 								</td>
 							</tr>
 						</tbody>
