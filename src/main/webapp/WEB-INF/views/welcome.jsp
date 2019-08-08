@@ -92,7 +92,7 @@
 							<!-- Main content -->
 							<section class="content">
 								<div class="row">
-									<div class="dashboard_list">
+									<b>Principal & IQAC</b><div class="dashboard_list">
 										<c:if
 											test="${sessionScope.userObj.staff.isPrincipal==1 || sessionScope.userObj.staff.isIqac==1}">
 
@@ -176,11 +176,11 @@
 
 
 
-
 										</c:if>
+										</div>
 
 										<c:if test="${sessionScope.userObj.staff.isHod==1}">
-
+	<b>HOD</b><div class="dashboard_list">
 
 											<div class="col-md-3">
 												<div class="dash_one">
@@ -209,12 +209,12 @@
  -->
 												</div>
 											</div>
-
+</div>
 										</c:if>
 
 										<c:if test="${sessionScope.userObj.staff.isFaculty==1}">
 
-
+<b>Faculty</b><div class="dashboard_list">
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">Research Project Title</h2>
@@ -261,11 +261,12 @@
  -->
 												</div>
 											</div>
+											</div>
 
 										</c:if>
 
 										<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">
-
+<b>Librarian</b><div class="dashboard_list">
 
 											<div class="col-md-3">
 												<div class="dash_one">
@@ -314,12 +315,12 @@
  -->
 												</div>
 											</div>
-
+</div>
 										</c:if>
 
 										<c:if test="${sessionScope.userObj.staff.isDean==1}">
 
-
+	<b>Dean</b><div class="dashboard_list">
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">Total Research Projects</h2>
@@ -356,6 +357,7 @@
 													<!-- 						<p class="dash_note"><span>Note :</span> Some Note Write Here</p>
  -->
 												</div>
+											</div>
 											</div>
 
 										</c:if>
@@ -749,8 +751,7 @@
 
 							</section>
 							<!-- /.content -->
-						</div>
-
+						
 
 					</div>
 				</div>
