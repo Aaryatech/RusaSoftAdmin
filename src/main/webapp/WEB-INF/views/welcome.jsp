@@ -31,6 +31,14 @@
 <c:url var="getAllBugetsGraph" value="/getAllBugetsGraph"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <!-- CORE CSS TEMPLATE - END -->
+<style type="text/css">
+#faculty_type{
+font-size: 130%;
+font-weight: bold;
+text-decoration: underline;
+color: #075423;
+}
+</style>
 
 </head>
 <!-- END HEAD -->
@@ -92,7 +100,12 @@
 							<!-- Main content -->
 							<section class="content">
 								<div class="row">
-									<b>Principal & IQAC</b><div class="dashboard_list">
+								
+								<div class="row">								
+									<div class="col-md-12" align="center"><span id="faculty_type">Principal & IQAC</span></div>
+								</div>
+								
+									<div class="dashboard_list">
 										<c:if
 											test="${sessionScope.userObj.staff.isPrincipal==1 || sessionScope.userObj.staff.isIqac==1}">
 
@@ -180,7 +193,11 @@
 										</div>
 
 										<c:if test="${sessionScope.userObj.staff.isHod==1}">
-	<b>HOD</b><div class="dashboard_list">
+										<div class="row">								
+											<div class="col-md-12" align="center"><span id="faculty_type">HOD</span></div>
+										</div>
+										
+										<div class="dashboard_list">
 
 											<div class="col-md-3">
 												<div class="dash_one">
@@ -209,12 +226,15 @@
  -->
 												</div>
 											</div>
-</div>
+										</div>
 										</c:if>
 
 										<c:if test="${sessionScope.userObj.staff.isFaculty==1}">
-
-<b>Faculty</b><div class="dashboard_list">
+										<div class="row">								
+											<div class="col-md-12" align="center"><span id="faculty_type">Faculty</span></div>
+										</div>
+										
+										<div class="dashboard_list">
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">No. of Research Project</h2>
@@ -261,12 +281,15 @@
  -->
 												</div>
 											</div>
-											</div>
-
+										</div>
 										</c:if>
 
-										<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">
-<b>Librarian</b><div class="dashboard_list">
+										<c:if test="${sessionScope.userObj.staff.isLibrarian==1}">										
+										<div class="row">								
+											<div class="col-md-12" align="center"><span id="faculty_type">Librarian</span></div>
+										</div>
+										
+										<div class="dashboard_list">
 
 											<div class="col-md-3">
 												<div class="dash_one">
@@ -315,12 +338,15 @@
  -->
 												</div>
 											</div>
-</div>
+										</div>
 										</c:if>
 
 										<c:if test="${sessionScope.userObj.staff.isDean==1}">
-
-	<b>Dean</b><div class="dashboard_list">
+										<div class="row">								
+											<div class="col-md-12" align="center"><span id="faculty_type">Dean</span></div>
+										</div>
+										
+										<div class="dashboard_list">
 											<div class="col-md-3">
 												<div class="dash_one">
 													<h2 class="desig_nm">Total Research Projects</h2>
@@ -358,11 +384,10 @@
  -->
 												</div>
 											</div>
-											</div>
-
+										</div>
 										</c:if>
 									</div>
-								</div>
+								
 								<input name="isPrincipal" id="isPrincipal"
 									value="${sessionScope.userObj.staff.isPrincipal}" type="hidden">
 								<input name="isIqac" id="isIqac"
@@ -753,8 +778,8 @@
 							<!-- /.content -->
 						
 
-					</div>
-				</div>
+					
+				
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
@@ -762,8 +787,9 @@
 
 
 
-
-
+</div>
+</div>
+</div>
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
