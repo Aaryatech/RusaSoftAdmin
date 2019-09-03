@@ -88,12 +88,13 @@
 									href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
 
-
+								<c:if test="${addAccess == 0}">
 								<a title="Add"
 									href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
 										type="button" class="btn btn-success">
 										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 									</button></a>
+									</c:if>
 							</div>
 
 						</header>

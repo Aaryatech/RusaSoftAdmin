@@ -417,7 +417,7 @@
 											</div>
 										</div>
 										
-									<%-- 	<div class="form-group" >
+									 	<div class="form-group" style="display: none;">
 											
 											<label class="control-label col-sm-3" for="is_add_same">Belongs to
 												 Same State <span
@@ -426,7 +426,7 @@
 
 											<div class="col-sm-3">
 												
-													Yes <input type="radio" ${facPerDetail.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same"	 value="1"> 
+													Yes <input type="radio" ${facPerDetail.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
 													No<input type="radio" ${facPerDetail.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
 
 													
@@ -435,7 +435,7 @@
 													permanent/correspondence address same or not.</span>
 
 											</div>
-										</div> --%>
+										</div> 
 										
 										
 										
@@ -662,9 +662,8 @@
 													$("#fac_village_field").hide()
 												}
 												
-												/*****/
-												
-												if (!$("#district").val()) {
+																							
+												 if (!$("#district").val()) {
 													isError = true;
 
 													$("#district").addClass(
@@ -682,19 +681,10 @@
 													$("#fac_taluka_field").show()
 												} else {
 													$("#fac_taluka_field").hide()
-												}
+												} 
 												
-												 /* if (!$("#city").val()) {
-													isError = true;
-
-													$("#city").addClass(
-															"has-error")
-													$("#fac_pincodc_field").show()
-												} else {
-													$("#fac_pincodc_field").hide()
-												}  */
 												
-												if (!$("#state").val()) {
+												/* if (!$("#state").val()) {
 													isError = true;
 
 													$("#state").addClass(
@@ -702,7 +692,7 @@
 													$("#fac_state_field").show()
 												} else {
 													$("#fac_state_field").hide()
-												}
+												} */
 												
 												if (!$("#pincode").val()) {
 													isError = true;
@@ -772,7 +762,7 @@
 													$("#f_gender_field").show()
 												} else {
 													$("#f_gender_field").hide()
-												}
+												} 
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
