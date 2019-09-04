@@ -286,11 +286,11 @@ public class YesNoController {
 
 	@RequestMapping(value = "/submitYesNo", method = RequestMethod.POST)
 	public String submitYesNo(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
 		int selectYestNoLib = 0;
-		int selectYestNoInfra = 0;
+		int selectYestNoInfra = 0;	
 		try {
-
-			HttpSession session = request.getSession();
+			
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			Date date = new Date();
@@ -410,13 +410,18 @@ public class YesNoController {
 			e.printStackTrace();
 
 		}
-		if (selectYestNoLib == 1) {
-			return "redirect:/selectYestNoLib";
-		} else if (selectYestNoInfra == 1) {
-			return "redirect:/selectYestNoInfra";
-		} else {
-			return "redirect:/selectYestNo";
-		}
+			if (selectYestNoLib == 1) {
+				return "redirect:/selectYestNoLib";
+			}
+			else if (selectYestNoInfra == 1) {
+				session.setAttribute("successMsg", Constants.sucess_msg);
+				return "redirect:/selectYestNoInfra";
+				
+			}else {
+				session.setAttribute("successMsg", Constants.fail_msg);
+				return "redirect:/selectYestNo";
+				
+			}
 
 	}
 

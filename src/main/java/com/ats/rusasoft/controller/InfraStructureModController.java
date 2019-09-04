@@ -231,15 +231,15 @@ public class InfraStructureModController {
 			Info editAccess = null;
 			if (instInfraAreaId == 0) {
 
-				editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "1", "0", "0",
+				editAccess = AccessControll.checkAccess("insertInstInfraArea", "showInstInfraAreawise", "0", "1", "0", "0",
 						newModuleList);
 			} else {
 
-				editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "0", "1", "0",
+				editAccess = AccessControll.checkAccess("insertInstInfraArea", "showInstInfraAreawise", "0", "0", "1", "0",
 						newModuleList);
 			}
 
-			System.err.println("alumniId id  " + instInfraAreaId);
+			System.err.println("instInfraAreaId  " + instInfraAreaId);
 
 			// editAccess.setError(false);
 
