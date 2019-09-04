@@ -511,8 +511,8 @@
 															.hide()
 												}
 												
-												if ($("#ttl_exp")
-														.val()=0
+												if (!$("#ttl_exp")
+														.val()
 														|| !validateZeroNo($(
 																"#ttl_exp")
 																.val())) {

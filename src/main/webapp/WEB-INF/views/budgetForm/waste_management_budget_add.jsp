@@ -324,7 +324,9 @@
 												
 												
 												if (!$("#budget_allocated").val()
-														|| $("#budget_allocated").val()=0) {
+														|| !validateZeroNo($(
+														"#budget_allocated")
+														.val())) {
 													isError = true;
 													$("#budget_allocated")
 															.addClass(
@@ -337,7 +339,9 @@
 												}
 
 												
-												if (!$("#budget_utilized").val() || $("#budget_utilized").val()=0) {
+												if (!$("#budget_utilized").val() || !validateZeroNo($(
+												"#budget_utilized")
+												.val())) {
 													
 													isError = true;
 													$("#budget_utilized")
@@ -350,8 +354,10 @@
 															.hide()
 												}
 												
-												if ($("#ttl_exp").val()=0
-														|| !$("#ttl_exp").val()) {
+												if (!$("#ttl_exp").val()
+														|| !validateZeroNo($(
+														"#ttl_exp")
+														.val())) {
 													
 													isError = true;
 													$("#ttl_exp")

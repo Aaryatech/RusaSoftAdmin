@@ -229,13 +229,14 @@
 													onkeypress='return restrictAlphabets(event)'
 													placeholder=" Total Expenditure of Institute excluding Salary in ${budRupees}"
 													value="${budget.exInt1}"> <span
-													class="error_form text-danger" id="budget_utilized_field"
-													style="display: none;">Please enter utilized budget
+													class="error_form text-danger" id="ttl_expd_field"
+													style="display: none;">Please enter allocated budget
 													amount</span> <span class="error_form text-danger"
 													id="ttl_exp_field" style="display: none;">Please
 													enter total expenditure for infrastructure and value must be greater than 0.</span>
 											</div>
 										</div>
+										
 										<input type="hidden" id="is_view" name="is_view" value="0">
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
@@ -371,17 +372,23 @@
 													$("#infra_budget_title_field").hide()
 												}
 												
-
-												if ($("#ttl_expd").val()=0 || !$("#ttl_expd").val()) {
-													isError = true;
-
-													$("#ttl_expd").addClass(
-															"has-error")
-													$("#ttl_exp_field").show()
-												} else {
-													$("#ttl_exp_field").hide()
-												}
 												
+												if (!$("#ttl_expd").val()
+														|| !validateZeroNo($(
+																"#ttl_expd")
+																.val())) {
+													
+													isError = true;
+													$("#ttl_expd")
+															.addClass(
+																	"has-error")
+		 											$("#ttl_exp_field")
+															.show()
+												} else {
+													$("#ttl_exp_field")
+															.hide()
+												}
+
 												
 												
 												if (!$("#budget_allocated").val()
@@ -401,16 +408,13 @@
 												}
 
 												
-												if (!$("#budget_utilized").val()
-														|| !validateZeroNo($(
-																"#budget_utilized")
-																.val())) {
+												if (!$("#budget_utilized").val() || !validateZeroNo($("#budget_utilized").val())) {
 													
 													isError = true;
 													$("#budget_utilized")
 															.addClass(
 																	"has-error")
-		 											$("#budget_utilized_field")
+														$("#budget_utilized_field")
 															.show()
 												} else {
 													$("#budget_utilized_field")

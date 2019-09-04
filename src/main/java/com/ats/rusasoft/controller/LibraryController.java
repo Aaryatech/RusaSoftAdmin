@@ -1146,22 +1146,26 @@ public class LibraryController {
 				libId = 0;
 			}
 
-			int isLib = 0;
-
-			try {
-				isLib = Integer.parseInt(request.getParameter("isLib"));
-			} catch (Exception e) {
-				isLib = 0;
-			}
+			/*
+			 * int isLib = 0;
+			 * 
+			 * try { isLib = Integer.parseInt(request.getParameter("isLib")); } catch
+			 * (Exception e) { isLib = 0; }
+			 */
 			String roleNameList = null;
 
 			roleNameList = Constants.Librarian_Role;
 
-			if (isLib == 1) {
-				roleNameList = roleNameList + "," + Constants.Librarian_Role;
-
-			}
-
+			/*
+			 * if (isLib == 1) { roleNameList = roleNameList + "," +
+			 * Constants.Librarian_Role;
+			 * 
+			 * }
+			 */
+			
+			roleNameList = Constants.Faculty_Role + "," + Constants.Librarian_Role;
+			
+			System.out.println("Lib Name:"+roleNameList);
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("roleNameList", roleNameList);

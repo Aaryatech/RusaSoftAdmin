@@ -515,7 +515,9 @@
 															.hide()
 												}
 												
-												if ($("#ttl_exp").val()=0 || !$("#ttl_exp").val()) {
+												if (!$("#ttl_exp").val() || !validateZeroNo($(
+												"#ttl_exp")
+												.val())) {
 
 													isError = true;
 													$("#ttl_exp")

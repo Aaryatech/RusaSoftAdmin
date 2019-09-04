@@ -411,7 +411,9 @@ public class YesNoController {
 
 		}
 			if (selectYestNoLib == 1) {
+				session.setAttribute("successMsg", Constants.sucess_msg);
 				return "redirect:/selectYestNoLib";
+				
 			}
 			else if (selectYestNoInfra == 1) {
 				session.setAttribute("successMsg", Constants.sucess_msg);
