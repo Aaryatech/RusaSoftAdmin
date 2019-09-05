@@ -2456,7 +2456,7 @@ public class ReportController {
 			AdmissionsAgainstCategory[] resArray = rest.postForObject(Constants.url + "getAdmisssionsAgainstCat", map,
 					AdmissionsAgainstCategory[].class);
 			List<AdmissionsAgainstCategory> progList = new ArrayList<>(Arrays.asList(resArray));
-
+			System.out.println("showAvgStudYearwiseReport------"+progList);
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
@@ -14337,11 +14337,21 @@ public class ReportController {
 		try {
 
 			model = new ModelAndView("report/prog_report1");
+			
+			int programId = 0;
+			int programType = 0;
+			
+			try {
+				 programId = Integer.parseInt(request.getParameter("prog_name"));
+				 programType = Integer.parseInt(request.getParameter("prog_type"));
+			}catch (Exception e) {
+				e.getMessage();
+			}
+			
 
 			String ac_year = request.getParameter("ac_year");
 			String temp_ac_year = request.getParameter("temp_ac_year");
-			int programId = Integer.parseInt(request.getParameter("prog_name"));
-			int programType = Integer.parseInt(request.getParameter("prog_type"));
+			
 			HttpSession session = request.getSession();
 			String temp_prog_name = request.getParameter("temp_prog_name");
 			int instituteId = (int) session.getAttribute("instituteId");

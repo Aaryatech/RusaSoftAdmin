@@ -104,13 +104,13 @@
 
 
 										<div class="form-group">
-										<input type="hidden" name="stud_perform_id" name="stud_perform_id" value="${studPer.studPerformId}">
+										<input type="hidden" id="stud_perform_id" name="stud_perform_id" value="${studPer.studPerformId}">
 										
 											<label class="control-label col-sm-2" for="programType">Program
 												 <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<select id="programType" name="programType" onchange="getProgramTypeByProgram()"
+												<select id="programType" name="programType" onchange="getProgramType()"
 													class="form-control" required>
 													<c:forEach items="${progTypeList}" var="progTypeList">
 														<c:choose>
@@ -461,11 +461,56 @@ $(function () {
 					getStudAdmByProgType();
 				});
 			}//end of if
-			
 		}
 		
 		
+function getProgramType(){			
+			
+			var programType = document.getElementById("programType").value;
+			var progTypeId=document.getElementById("progTypeId").value;
+			alert("programType" + programType);
+
+			var valid = true;
+
+			if (programType == null || programType == "") {
+				valid = false;
+				alert("Please Select Program");
+			}
+
+			if (valid == true) {
+
+				$.getJSON('${getProgramTypeByProgramId}', {
+					programType : programType,
+					ajax : 'true',
+				},
+
+				function(data) {
+					//alert(data);
+					var html;
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+						if(progTypeId==data[i].programId){
+							html += '<option  selected value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+							}else{
+						html += '<option value="' + data[i].programId + '">'
+								+ data[i].nameOfProgram + '</option>';
+							}
+					}
+					html += '</option>';
+
+					$('#programTypeId').html(html);
+					$("#programTypeId").trigger("chosen:updated");
+					getStudAdmByProgType();
+				});
+			}//end of if
+			document.getElementById("stud_perform_id").value=0;
+			document.getElementById("stud_appeared").value=0;
+			document.getElementById("stud_passed").value=0;
+		}
 	</script>
+	
+	
 	<script type="text/javascript">
 		/*code: 48-57 Numbers
 		  8  - Backspace,
