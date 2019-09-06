@@ -136,144 +136,7 @@
 							<option value="IX" ${editSubject.subSem eq 'IX' ? 'selected' : ''}>IX</option>
 							<option value="X" ${editSubject.subSem eq 'X' ? 'selected' : ''}>X</option>
 
-													<%-- <c:choose>
-														<c:when test="">
-															<option value="1" Selected>1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-
-														<c:when test="${editSubject.subSem==2}">
-															<option value="1">1</option>
-															<option value="2" Selected>2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==3}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3" Selected>3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==4}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4" Selected>4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==5}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5" Selected>5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==6}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6" Selected>6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==7}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7" Selected>7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==8}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8" Selected>8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==9}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9" Selected>9</option>
-															<option value="10">10</option>
-														</c:when>
-														<c:when test="${editSubject.subSem==10}">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10" Selected>10</option>
-														</c:when>
-
-														<c:otherwise>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-															<option value="9">9</option>
-															<option value="10">10</option>
-														</c:otherwise>
-													</c:choose>
- --%>
-
+													
 												</select> <span class="error_form text-danger" id="error_sem"
 													style="display: none;">Please Select </span>
 											</div>
@@ -365,47 +228,22 @@
 											</label>
 
 
-											<c:choose>
-												<c:when test="${editSubject.subIsCbse==0}">
+											
+
 													<div class="col-md-2">
 
-														<input type="radio" name="isCbse" id="isCbse" value="0"
-															checked>Yes
+														<input type="radio" name="isCbse" id="isCbse" ${editSubject.subIsCbse==1 ? 'checked' : ''}
+															value="1">Yes
 
 													</div>
 
 													<div class="col-md-2">
-														<input type="radio" name="isCbse" value="1"> No
-													</div>
-												</c:when>
-												<c:when test="${editSubject.subIsCbse==1}">
-													<div class="col-md-2">
-
-														<input type="radio" name="isCbse" id="isCbse" value="0">Yes
-
-													</div>
-
-													<div class="col-md-2">
-														<input type="radio" name="isCbse" value="1" checked>
-														No
-													</div>
-												</c:when>
-												<c:otherwise>
-
-													<div class="col-md-2">
-
-														<input type="radio" name="isCbse" id="isCbse" checked
-															value="0">Yes
-
-													</div>
-
-													<div class="col-md-2">
-														<input type="radio" name="isCbse" value="1"> No
+														<input type="radio" name="isCbse" ${editSubject.subIsCbse==0 ? 'checked' : ''}
+														 value="0"> No
 													</div>
 
 
-												</c:otherwise>
-											</c:choose>
+												
 
 											<!-- <div class="col-sm-2">
 														Yes <input type="radio" name="isCbse" id="isCbse" checked

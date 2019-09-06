@@ -1146,8 +1146,10 @@ public class RusaReportsController {
 					// System.err.println("I " + i);
 					FacAgnstSanctnPostOthrState fac = facList.get(i);
 					try {
-						facPer = fac.getNoOfOtherStateFac() / fac.getSanctionedPost() * 100;
+						facPer = (fac.getNoOfOtherStateFac() / fac.getSanctionedPost()) * 100;
+						//System.out.println("Cal"+facPer);
 					} catch (Exception e) {
+						
 						System.err.println("Invalid Values---" + e.getMessage());
 					}
 					index++;
@@ -10107,7 +10109,11 @@ public class RusaReportsController {
 			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
 			String headingName = null;
 			try {
-				headingName = courseList.get(0).getInstituteName();
+				if(courseList.get(0).getInstituteName().equals(null)) {
+				headingName = courseList.get(1).getInstituteName();
+				}else {
+					headingName = courseList.get(0).getInstituteName();
+				}
 			} catch (Exception e) {
 
 				headingName = "-";

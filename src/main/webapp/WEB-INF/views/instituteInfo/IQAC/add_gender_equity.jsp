@@ -136,10 +136,10 @@
 													autocomplete="off" id="toDate" name="toDate"
 													placeholder="dd/mm/yyyy" value="${gndrEqual.gprogTodt}">
 												<span class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter to date.</span> <span
+													style="display: none;">Please enter to date.</span><!--  <span
 													class="error_form text-danger" id="error_formfield0"
 													style="display: none;">to date must be greater than
-													from date.</span>
+													from date.</span> -->
 												
 													<span
 													class="error_form text-danger" id="error_toToDate"
@@ -296,31 +296,30 @@
             				} 
            				
            				
-           			 var from_date = document.getElementById("fromDate").value;
-      				var to_date = document.getElementById("toDate").value;
-      				var x=0;
-      				
-      				
-      		        var fromdate = from_date.split('-');
-      		        from_date = new Date();
-      		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
-      		        var todate = to_date.split('-');
-      		        to_date = new Date();
-      		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
-      		        if (from_date > to_date ) 
-      		        {
-      		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
-						$("#error_fromToDate").show();
- 					 	$("#error_toToDate").show();
- 					 	$("#error_formfield2").hide();
- 					 	$("#error_formfield3").hide();
-      		            return false;
-      		           
-      		        }else {
-      					$("#error_fromToDate").hide();
-      					$("#error_toToDate").hide();
-      				}
-           				
+           				var from_date = document.getElementById("fromDate").value;
+         				var to_date = document.getElementById("toDate").value;
+         				var x=0;
+         				
+         				
+         		        var fromdate = from_date.split('-');
+         		        from_date = new Date();
+         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+         		        var todate = to_date.split('-');
+         		        to_date = new Date();
+         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+         		        if (from_date > to_date ) 
+         		        {
+         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+							$("#error_fromToDate").show();
+    					 	$("#error_toToDate").show();
+    					 	$("#fromDate_field").hide();
+    					 	$("#toDate_field").hide();
+         		            return false;
+         		           
+         		        }else {
+         					$("#error_fromToDate").hide();
+         					$("#error_toToDate").hide();
+         				}
            				if($("#participant").val()==0  || !$("#participant").val()){
           					 
             				isError=true;
@@ -333,7 +332,7 @@
             					$("#error_formfield4").hide()
             				} 
            				
-           			 	if($("#fromDate").val() > $("#toDate").val()){
+           			 	/* if($("#fromDate").val() > $("#toDate").val()){
           					 
             				isError=true;
             				errMsg += '<li>Please enter a valid name.</li>';
@@ -343,7 +342,7 @@
             					//return false;
             				} else {
             					$("#error_formfield0").hide()
-            				} 
+            				}  */
            				
            				/* if(!$("#").val()){
         					 

@@ -4769,7 +4769,7 @@ public class ReportController {
 			FinancialSuppToProfMem[] resArray = rest.postForObject(Constants.url + "getFinancialSuppToProfMemDetail",
 					map, FinancialSuppToProfMem[].class);
 			List<FinancialSuppToProfMem> progList = new ArrayList<>(Arrays.asList(resArray));
-
+			//System.out.println("Prg Ldtp-------"+progList);
 			model.addObject("list", progList);
 
 			Document document = new Document(PageSize.A4);
@@ -4878,8 +4878,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName() + " " + prog.getFacultyLastName(),
-							headFontData));
+					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(),	headFontData));		//prog.getFacultyFirstName() + " " + prog.getFacultyLastName()
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					// cell.setPaddingLeft(10);
@@ -5463,7 +5462,7 @@ public class ReportController {
 					temp = temp + Double.parseDouble(prog.getTrainingPcount());
 
 				}
-				System.err.println("temp bean ::" + progList.get(0).toString());
+				//System.err.println("temp bean ::" + progList.get(0).toString());
 				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
 
 				document.open();
@@ -7624,7 +7623,12 @@ public class ReportController {
 					
 					if (prog.getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
 						if(prog.getInstYesnoResponse()!=null || prog.getInstYesnoResponse()!=" " || prog.getInstYesnoResponse()!="NA" || prog.getInstYesnoResponse().isEmpty()==true) {
-						temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+						try{
+							temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+						}catch (Exception e) {
+							///temp_tot=0;
+							e.getMessage();
+						}
 					}
 					}
 
