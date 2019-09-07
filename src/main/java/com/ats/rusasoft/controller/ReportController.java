@@ -5335,7 +5335,7 @@ public class ReportController {
 
 			map.add("instId", instituteId);
 			map.add("acYearList", ac_year);
-			map.add("typeId", 0);
+			map.add("typeId", 2);
 
 			TrainProgOrgnizedForTeach[] resArray = rest.postForObject(Constants.url + "getTrainProgOrgnizedForTeach",
 					map, TrainProgOrgnizedForTeach[].class);
@@ -5468,8 +5468,13 @@ public class ReportController {
 
 				}
 				//System.err.println("temp bean ::" + progList.get(0).toString());
-				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
-
+				String tempprcnt = null;
+				try {
+					tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -5757,9 +5762,14 @@ public class ReportController {
 					temp = temp + Double.parseDouble(prog.getTrainingPcount());
 
 				}
-				System.err.println("temp bean ::" + progList.get(0).toString());
-				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
-
+				String tempprcnt = null;
+				///System.err.println("temp bean ::" + progList.get(0).toString());
+				try {
+				 tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
