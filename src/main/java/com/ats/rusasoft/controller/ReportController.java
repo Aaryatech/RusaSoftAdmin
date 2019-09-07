@@ -2584,7 +2584,12 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
+					try {
 					rslt = rslt + Double.parseDouble(tempprcnt);
+					}catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
 				}
 
 				document.open();
