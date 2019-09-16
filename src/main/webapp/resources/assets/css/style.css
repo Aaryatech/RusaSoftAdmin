@@ -1834,6 +1834,31 @@ ul.states li {
     border: 1px solid #4CAF50;
     background: #4CAF50;
     color: #ffffff;
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+    padding: 0px 0px 0px 0px;padding: 0px; 
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+    padding: 0px 0px 0px 0px;padding: 0px;  
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
 }
 .alert-info {
     border: 1px solid #03A9F4;

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -82,7 +82,7 @@
 						src="${pageContext.request.contextPath}/resources/assets/images/avatar.png"
 						alt="user-image" class="img-circle img-inline"> <span>${sessionScope.userObj.staff.facultyFirstName}
 							<i class="fa fa-angle-down"></i>
-					</span>
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</a>
 					<ul class="dropdown-menu profile animated fadeIn">
 
@@ -92,11 +92,11 @@
 
 						
 				 	<li class="last"><a href="${pageContext.request.contextPath}/changeMobNoForm/${sessionScope.userObj.getStaff().getFacultyId()}"> <i
-								class="fa fa-lock"></i> Change Mobile No.
+								class="fa fa-mobile"></i> Change Mobile No.
 						</a></li> 
 						
 							<li class="last"><a href="${pageContext.request.contextPath}/changeEmailIdForm/${sessionScope.userObj.getStaff().getFacultyId()}"> <i
-								class="fa fa-lock"></i> Change Email
+								class="fa fa-at"></i> Change Email
 						</a></li> 
 						
 						<li class="last"><a href="${pageContext.request.contextPath}/logout"> <i

@@ -1,5 +1,14 @@
 package com.ats.rusasoft.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -17,6 +26,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
@@ -39,9 +49,21 @@ import com.ats.rusasoft.model.accessright.AssignRoleDetailList;
 import com.ats.rusasoft.model.accessright.CreatedRoleList;
 import com.ats.rusasoft.model.accessright.ModuleJson;
 import com.ats.rusasoft.model.accessright.SubModuleJson;
+import com.ats.rusasoft.model.reports.NoOfPrograms;
+import com.ats.rusasoft.util.ItextPageEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 @Controller
 @Scope("session")
@@ -530,6 +552,225 @@ public class AccessRightController {
 			model.addObject("title", "Edit Access Role");
 			model.addObject("moduleJsonList", moduleJsonList);
 			isError = 0;
+			//PDf code
+			Document document = new Document(PageSize.A4);
+			// 50, 45, 50, 60
+			document.setMargins(Constants.marginLeft, Constants.marginRight, Constants.marginTop,
+					Constants.marginBottom);
+			document.setMarginMirroring(false);
+
+			String FILE_PATH = Constants.REPORT_SAVE;
+			File file = new File(FILE_PATH);
+
+			PdfWriter writer = null;
+
+			FileOutputStream out = new FileOutputStream(FILE_PATH);
+			try {
+				writer = PdfWriter.getInstance(document, out);
+			} catch (DocumentException e) {
+
+				e.printStackTrace();
+			}
+
+			String header = "";
+			String title = "                 ";
+
+			DateFormat DF2 = new SimpleDateFormat("dd-MM-yyyy");
+			String headingName = null;
+			try {
+				headingName = "Access Rights";
+			} catch (Exception e) {
+
+				headingName = "-";
+
+			}
+			ItextPageEvent event = new ItextPageEvent(header, title, "", headingName);
+
+			writer.setPageEvent(event);
+
+			PdfPTable table = new PdfPTable(7);
+
+			//table.setHeaderRows(1);
+
+			try {
+				table.setWidthPercentage(100);
+				 table.setWidths(new float[] { 0.8f, 1.2f, 1.6f, 0.4f, 0.4f, 0.4f,0.4f });
+				//table.setTotalWidth(document.getPageSize().getWidth() - 80);
+				Font headFontData = Constants.headFontData;// new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL,
+															// BaseColor.BLACK);
+				Font tableHeaderFont = Constants.tableHeaderFont; // new Font(FontFamily.HELVETICA, 12, Font.BOLD,
+																	// BaseColor.BLACK);
+				tableHeaderFont.setColor(Constants.tableHeaderFontBaseColor);
+
+				int num=0;
+				
+				PdfPCell hcell = null;
+						for (int j = 0; j < moduleJsonList.size(); j++) {
+							num++;// System.err.println("I " + i);
+							ModuleJson prog = moduleJsonList.get(j);
+							table.setHeaderRows(1);
+				hcell = new PdfPCell(new Phrase("No", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("Module Name", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("Sub Module", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("View", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("Add", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				hcell = new PdfPCell(new Phrase("Edit", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+				hcell = new PdfPCell(new Phrase("Delete", tableHeaderFont));
+				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				hcell.setBackgroundColor(Constants.baseColorTableHeader);
+
+				table.addCell(hcell);
+
+				int index = 0;
+
+				for (int i = 0; i < moduleJsonList.get(j).getSubModuleJsonList().size(); i++) {
+					// System.err.println("I " + i);
+					SubModuleJson sub = moduleJsonList.get(j).getSubModuleJsonList().get(i);
+
+					index++;
+					PdfPCell cell;
+					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+					table.addCell(cell);
+
+					cell = new PdfPCell(new Phrase(""+moduleJsonList.get(j).getModuleName() , headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					// cell.setPaddingLeft(10);
+
+					table.addCell(cell);
+					
+					cell = new PdfPCell(new Phrase("" + sub.getSubModulName(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					// cell.setPaddingLeft(10);
+
+					table.addCell(cell);
+					
+					cell = new PdfPCell(new Phrase("" + sub.getView(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+					// cell.setPaddingLeft(10);
+
+					table.addCell(cell);
+
+
+					cell = new PdfPCell(new Phrase("" + sub.getAddApproveConfig(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+					table.addCell(cell);
+
+					cell = new PdfPCell(new Phrase("" + sub.getEditReject(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+					table.addCell(cell);
+
+					cell = new PdfPCell(new Phrase("" + sub.getDeleteRejectApprove(), headFontData));
+					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+					table.addCell(cell);
+
+
+				}
+				
+						}
+
+				document.open();
+				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
+																// Font.UNDERLINE, BaseColor.BLACK);
+
+				Paragraph name = new Paragraph("Access Rights - Librarian", reportNameFont);
+				name.setAlignment(Element.ALIGN_CENTER);
+				document.add(name);
+				document.add(new Paragraph("\n"));
+				// document.add(new Paragraph("Institute " +
+				// progList.get(0).getInstituteName()));
+				/*
+				 * Paragraph company = new Paragraph("Customer Wise Report\n", f);
+				 * company.setAlignment(Element.ALIGN_CENTER); document.add(company);
+				 * document.add(new Paragraph(" "));
+				 */
+
+				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
+				document.add(new Paragraph("\n"));
+				document.add(table);
+
+				int totalPages = writer.getPageNumber();
+
+				// System.out.println("Page no " + totalPages);
+
+				document.close();
+				int p = Integer.parseInt(request.getParameter("p"));
+				System.err.println("p " + p);
+
+				if (p == 1) {
+
+					if (file != null) {
+
+						String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+
+						if (mimeType == null) {
+
+							mimeType = "application/pdf";
+
+						}
+
+						response.setContentType(mimeType);
+
+						response.addHeader("content-disposition",
+								String.format("inline; filename=\"%s\"", file.getName()));
+
+						response.setContentLength((int) file.length());
+
+						InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+						try {
+							FileCopyUtils.copy(inputStream, response.getOutputStream());
+						} catch (IOException e) {
+							// System.out.println("Excep in Opening a Pdf File");
+							e.printStackTrace();
+						}
+					}
+			
+				}
+			}catch (Exception e) {
+				System.err.println("PDF Exce" +e.getMessage());
+				e.printStackTrace();
+			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -639,7 +639,7 @@ $('#aishe_code').on('input', function() {
 	//alert(data.length);
 	document.getElementById("inst_name").value="";
 	document.getElementById("district").value="";
-	if(aishe_code.length==7){
+	if(aishe_code.length>5){
 		//alert("7 ")
 		$
 		.getJSON(
