@@ -230,8 +230,8 @@
 															value="${newCourse.document}"
 															name="document" maxlength="100"
 															placeholder="Link of Relevant Document">
-															<span class="error_form text-danger" id="document_field"
-															style="display: none;">Please enter link of relevant documents.</span>
+															<!-- <span class="error_form text-danger" id="document_field"
+															style="display: none;">Please enter link of relevant documents.</span> -->
 													</div>
 												</div>
 
@@ -377,7 +377,7 @@
 															.hide()
 												}
 
-												if (!$("#document").val()) {
+												/* if (!$("#document").val()) {
 													isError = true;
 
 													$("#document").addClass(
@@ -385,7 +385,7 @@
 													$("#document_field").show()
 												} else {
 													$("#document_field").hide()
-												}
+												} */
 												 
 												
 												if (!isError) {

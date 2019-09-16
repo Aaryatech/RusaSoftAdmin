@@ -3,7 +3,8 @@ package com.ats.rusasoft.model.reports;
  
 public class AdmissionsAgainstCategory {
 
-	 
+	private String id;
+	
 	private int castId;
 
 	private int studentCatId;
@@ -19,6 +20,15 @@ public class AdmissionsAgainstCategory {
 	private String instituteName;
 	
 	private int yearId;
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public int getCastId() {
 		return castId;
@@ -86,16 +96,9 @@ public class AdmissionsAgainstCategory {
 
 	@Override
 	public String toString() {
-		return "AdmissionsAgainstCategory [castId=" + castId + ", studentCatId=" + studentCatId + ", catTotStudent="
-				+ catTotStudent + ", seatsAvaailable=" + seatsAvaailable + ", castName=" + castName + ", academicYear="
-				+ academicYear + ", instituteName=" + instituteName + ", yearId=" + yearId + ", getCastId()="
-				+ getCastId() + ", getStudentCatId()=" + getStudentCatId() + ", getCatTotStudent()="
-				+ getCatTotStudent() + ", getSeatsAvaailable()=" + getSeatsAvaailable() + ", getCastName()="
-				+ getCastName() + ", getAcademicYear()=" + getAcademicYear() + ", getInstituteName()="
-				+ getInstituteName() + ", getYearId()=" + getYearId() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+		return "AdmissionsAgainstCategory [id=" + id + ", castId=" + castId + ", studentCatId=" + studentCatId
+				+ ", catTotStudent=" + catTotStudent + ", seatsAvaailable=" + seatsAvaailable + ", castName=" + castName
+				+ ", academicYear=" + academicYear + ", instituteName=" + instituteName + ", yearId=" + yearId + "]";
 	}
-	
-	
 
 }

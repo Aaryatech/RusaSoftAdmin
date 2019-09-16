@@ -2456,7 +2456,7 @@ public class ReportController {
 			AdmissionsAgainstCategory[] resArray = rest.postForObject(Constants.url + "getAdmisssionsAgainstCat", map,
 					AdmissionsAgainstCategory[].class);
 			List<AdmissionsAgainstCategory> progList = new ArrayList<>(Arrays.asList(resArray));
-
+			System.out.println("showAvgStudYearwiseReport------"+progList);
 			model.addObject("list", progList);
 
 			BufferedOutputStream outStream = null;
@@ -2584,7 +2584,12 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
+					try {
 					rslt = rslt + Double.parseDouble(tempprcnt);
+					}catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
 				}
 
 				document.open();
@@ -4769,7 +4774,7 @@ public class ReportController {
 			FinancialSuppToProfMem[] resArray = rest.postForObject(Constants.url + "getFinancialSuppToProfMemDetail",
 					map, FinancialSuppToProfMem[].class);
 			List<FinancialSuppToProfMem> progList = new ArrayList<>(Arrays.asList(resArray));
-
+			//System.out.println("Prg Ldtp-------"+progList);
 			model.addObject("list", progList);
 
 			Document document = new Document(PageSize.A4);
@@ -4878,8 +4883,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName() + " " + prog.getFacultyLastName(),
-							headFontData));
+					cell = new PdfPCell(new Phrase("" + prog.getFacultyFirstName(),	headFontData));		//prog.getFacultyFirstName() + " " + prog.getFacultyLastName()
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					// cell.setPaddingLeft(10);
@@ -5331,7 +5335,7 @@ public class ReportController {
 
 			map.add("instId", instituteId);
 			map.add("acYearList", ac_year);
-			map.add("typeId", 0);
+			map.add("typeId", 2);
 
 			TrainProgOrgnizedForTeach[] resArray = rest.postForObject(Constants.url + "getTrainProgOrgnizedForTeach",
 					map, TrainProgOrgnizedForTeach[].class);
@@ -5463,9 +5467,14 @@ public class ReportController {
 					temp = temp + Double.parseDouble(prog.getTrainingPcount());
 
 				}
-				System.err.println("temp bean ::" + progList.get(0).toString());
-				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
-
+				//System.err.println("temp bean ::" + progList.get(0).toString());
+				String tempprcnt = null;
+				try {
+					tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -5753,9 +5762,14 @@ public class ReportController {
 					temp = temp + Double.parseDouble(prog.getTrainingPcount());
 
 				}
-				System.err.println("temp bean ::" + progList.get(0).toString());
-				String tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
-
+				String tempprcnt = null;
+				///System.err.println("temp bean ::" + progList.get(0).toString());
+				try {
+				 tempprcnt = decimalFormat.format((temp / progList.get(0).getTotCount()) * 100);
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -7624,7 +7638,12 @@ public class ReportController {
 					
 					if (prog.getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
 						if(prog.getInstYesnoResponse()!=null || prog.getInstYesnoResponse()!=" " || prog.getInstYesnoResponse()!="NA" || prog.getInstYesnoResponse().isEmpty()==true) {
-						temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+						try{
+							temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+						}catch (Exception e) {
+							///temp_tot=0;
+							e.getMessage();
+						}
 					}
 					}
 
@@ -14337,11 +14356,21 @@ public class ReportController {
 		try {
 
 			model = new ModelAndView("report/prog_report1");
+			
+			int programId = 0;
+			int programType = 0;
+			
+			try {
+				 programId = Integer.parseInt(request.getParameter("prog_name"));
+				 programType = Integer.parseInt(request.getParameter("prog_type"));
+			}catch (Exception e) {
+				e.getMessage();
+			}
+			
 
 			String ac_year = request.getParameter("ac_year");
 			String temp_ac_year = request.getParameter("temp_ac_year");
-			int programId = Integer.parseInt(request.getParameter("prog_name"));
-			int programType = Integer.parseInt(request.getParameter("prog_type"));
+			
 			HttpSession session = request.getSession();
 			String temp_prog_name = request.getParameter("temp_prog_name");
 			int instituteId = (int) session.getAttribute("instituteId");
