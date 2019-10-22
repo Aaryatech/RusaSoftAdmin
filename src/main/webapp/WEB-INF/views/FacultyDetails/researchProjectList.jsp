@@ -88,12 +88,13 @@
 								<%-- 	<a href="${pageContext.request.contextPath}/showResearchDetails"><button
 										type="button" class="btn btn-success">Add</button></a>
  --%>
-
-								<a title="Add"
-									href="${pageContext.request.contextPath}/showResearchDetails"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
+								<c:if test="${isAdd==1}">
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showResearchDetails"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 							</div>
 
 						</header>

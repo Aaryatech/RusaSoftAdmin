@@ -87,12 +87,13 @@
 								<%-- 	<a href="${pageContext.request.contextPath}/showAddSubDetails"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
 
-
-								<a title="Add"
-									href="${pageContext.request.contextPath}/showAddSubDetails"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
+								<c:if test="${isAdd==1}">
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddSubDetails"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 
 							</div>
 
@@ -121,7 +122,7 @@
 													<th>Subject Type</th>
 													<th>Faculty</th>
 													<th>Program</th>
-													<th> Year of Implementation </th>
+													<th>Year of Implementation</th>
 													<th>Result %</th>
 													<th>Action</th>
 												</tr>
@@ -136,25 +137,25 @@
 
 														<td style="text-align: center"><c:out
 																value="${subject.subSem}" /></td>
-																
-																
-																
+
+
+
 														<td style="text-align: left"><c:out
 																value="${subject.subCode}-${subject.subName}" /></td>
 
 
-<c:set var="subType"></c:set>
-<c:choose>
-<c:when test="${subject.subType==0}">
-<c:set var="subType" value="Regular"></c:set>
-</c:when>
-<c:when test="${subject.subType==1}">
-<c:set var="subType" value="Elective"></c:set>
-</c:when>
-<c:when test="${subject.subType==2}">
-<c:set var="subType" value="Other"></c:set>
-</c:when>
-</c:choose>
+														<c:set var="subType"></c:set>
+														<c:choose>
+															<c:when test="${subject.subType==0}">
+																<c:set var="subType" value="Regular"></c:set>
+															</c:when>
+															<c:when test="${subject.subType==1}">
+																<c:set var="subType" value="Elective"></c:set>
+															</c:when>
+															<c:when test="${subject.subType==2}">
+																<c:set var="subType" value="Other"></c:set>
+															</c:when>
+														</c:choose>
 														<td style="text-align: left"><c:out
 																value="${subType}" /></td>
 
@@ -163,7 +164,7 @@
 
 														<td style="text-align: left"><c:out
 																value="${subject.nameOfProgram}" /></td>
-														
+
 														<td style="text-align: left"><c:out
 																value="${subject.exVar1}" /></td>
 
@@ -178,7 +179,8 @@
 
 																<a
 																	href="${pageContext.request.contextPath}/showAddCo/${subject.subId}"
-																	title="Add Course Outcome (CO)" rel="tooltip" data-color-class="detail"
+																	title="Add Course Outcome (CO)" rel="tooltip"
+																	data-color-class="detail"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
 																	data-original-title="Block"><span
 																	class="glyphicon glyphicon-list"></span></a>&nbsp;&nbsp;

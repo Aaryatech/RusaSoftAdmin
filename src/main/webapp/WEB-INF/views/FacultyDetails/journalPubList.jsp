@@ -87,12 +87,13 @@
 
 								<%-- 	<a href="${pageContext.request.contextPath}/showJournalPub"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-
-								<a title="Add"
-									href="${pageContext.request.contextPath}/showJournalPub"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
+								<c:if test="${isAdd==1}">
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showJournalPub"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 
 							</div>
 
@@ -143,13 +144,13 @@
 														<tr>
 
 															<td style="text-align: center">${count.index+1}</td>
-															
+
 															<td style="text-align: left"><c:out
 																	value="${journal.exVar1}" /></td>
-															
+
 															<td style="text-align: left"><c:out
 																	value="${journal.exVar2}" /></td>
-																	
+
 															<td style="text-align: left"><c:out
 																	value="${journal.journalName}" /></td>
 

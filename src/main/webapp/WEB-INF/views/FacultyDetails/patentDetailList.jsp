@@ -85,12 +85,13 @@
 
 							<div class="actions panel_actions pull-right">
 
-
-								<a title="Add"
-									href="${pageContext.request.contextPath}/showPatentDetails"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
+								<c:if test="${isAdd==1}">
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showPatentDetails"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 
 							</div>
 
