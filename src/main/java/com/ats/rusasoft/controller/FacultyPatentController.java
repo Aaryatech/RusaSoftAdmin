@@ -197,15 +197,9 @@ public class FacultyPatentController {
 				//System.out.println("patentNo:" + patentNo);
 				String parentTitle = request.getParameter("parentTitle");
 				String fillingDate=null;
-				try {
+				 
 					  fillingDate = request.getParameter("fillingDate");
-				}
-				catch(Exception e) {
-					fillingDate=null;
-					System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
-					e.printStackTrace();
-
-				}
+			  
 				
 				String guideName = request.getParameter("guideName");
 				String pubDate = request.getParameter("pubDate");

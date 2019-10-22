@@ -135,16 +135,25 @@
 											<div class="col-sm-6">
 												<select id="MOU_agency" name="MOU_agency"
 													onchange="showForm()" class="form-control">
-												
-															<option ${editInst.mouAgency eq 'IIT' ? 'selected' : ''} value="IIT">IIT</option>
-															<option ${editInst.mouAgency eq 'NIT' ? 'selected' : ''} value="NIT">NIT</option>
-															<option ${editInst.mouAgency eq 'IIIT' ? 'selected' : ''} value="IIIT">IIIT</option>
-															<option ${editInst.mouAgency eq 'University' ? 'selected' : ''} value="University">University</option>
-															<option ${editInst.mouAgency eq 'Industries' ? 'selected' : ''} value="Industries">Industries</option>
-															<option ${editInst.mouAgency eq 'Corporate Houses' ? 'selected Houses' : ''} value="Corporate Houses">Corporate
-																Houses</option>
-															<option ${editInst.mouAgency == '7' ? 'selected' : ''} value="7">Any other Institute of
-																International/National/State Importance</option>
+
+													<option ${editInst.mouAgency eq 'IIT' ? 'selected' : ''}
+														value="IIT">IIT</option>
+													<option ${editInst.mouAgency eq 'NIT' ? 'selected' : ''}
+														value="NIT">NIT</option>
+													<option ${editInst.mouAgency eq 'IIIT' ? 'selected' : ''}
+														value="IIIT">IIIT</option>
+													<option
+														${editInst.mouAgency eq 'University' ? 'selected' : ''}
+														value="University">University</option>
+													<option
+														${editInst.mouAgency eq 'Industries' ? 'selected' : ''}
+														value="Industries">Industries</option>
+													<option
+														${editInst.mouAgency eq 'Corporate Houses' ? 'selected Houses' : ''}
+														value="Corporate Houses">Corporate Houses</option>
+													<option ${editInst.mouAgency == '7' ? 'selected' : ''}
+														value="7">Any other Institute of
+														International/National/State Importance</option>
 													<%-- <c:choose>
 													
 														<c:when test="${'IIT'== editInst.mouAgency}">
@@ -236,8 +245,9 @@
 
 										<div class="form-group" id="abc" style="display: none">
 
-											<label class="control-label col-sm-2" for="page_name">Other
-												Course<span class="text-danger">*</span> </label>
+											<label class="control-label col-sm-2" for="page_name">
+												Courses as per MOU <span class="text-danger">*</span>
+											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="otherCourse"
 													autocomplete="off" name="otherCourse" onchange="trim(this)"
@@ -260,11 +270,10 @@
 													placeholder="dd/mm/yyyy" autocomplete="off" id="fromDate"
 													name="fromDate" value="${fdate}"> <span
 													class="error_form text-danger" id="error_fdate"
-													style="display: none;">Please Enter From Date.</span>
-													
-													<span
+													style="display: none;">Please Enter From Date.</span> <span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date. </span>
+													style="display: none;">From Date must be smaller
+													than To Date. </span>
 
 											</div>
 										</div>
@@ -279,11 +288,10 @@
 													autocomplete="off" id="toDate" name="toDate"
 													placeholder="dd/mm/yyyy" value="${tdate}"> <span
 													class="error_form text-danger" id="error_tdate"
-													style="display: none;">Please Enter To Date.</span>
-													
-													<span
+													style="display: none;">Please Enter To Date.</span> <span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date. </span>
+													style="display: none;">To Date must be greater than
+													From Date. </span>
 
 											</div>
 										</div>
@@ -313,13 +321,15 @@
 
 															<option selected value="Students">Students</option>
 															<option value="Faculty">Faculty</option>
-															<option value="Students And Facility">Students And Facility</option>
+															<option value="Students And Facility">Students
+																And Facility</option>
 														</c:when>
 														<c:when test="${'Faculty'==editInst.mouBeneficiary}">
 
 															<option value="Students">Students</option>
 															<option selected value="Faculty">Faculty</option>
-															<option value="Students And Faculty">Students And Faculty</option>
+															<option value="Students And Faculty">Students
+																And Faculty</option>
 														</c:when>
 
 														<c:when
@@ -327,7 +337,8 @@
 
 															<option value="Students">Students</option>
 															<option value="Faculty">Faculty</option>
-															<option selected value="Students And Faculty">Students And Faculty</option>
+															<option selected value="Students And Faculty">Students
+																And Faculty</option>
 
 														</c:when>
 
@@ -336,7 +347,8 @@
 
 															<option value="Students">Students</option>
 															<option value="Faculty">Faculty</option>
-															<option value="Students And Faculty">Students And Faculty</option>
+															<option value="Students And Faculty">Students
+																And Faculty</option>
 
 														</c:otherwise>
 
@@ -351,12 +363,12 @@
 
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" for="beneficiaryMOU">No. of Participants
-												/Beneficiary <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="beneficiaryMOU">No.
+												of Participants /Beneficiary <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" min="1" class="form-control" maxlength="8"
-													id="beneficiaryMOUNo" name="beneficiaryMOUNo"
+												<input type="text" min="1" class="form-control"
+													maxlength="8" id="beneficiaryMOUNo" name="beneficiaryMOUNo"
 													placeholder="No. of Beneficiary Participants "
 													onFocus="clearDefault(this)"
 													value="${editInst.mouBeneficiaryNos}"> <span
@@ -422,11 +434,13 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
-	
-	$('#beneficiaryMOUNo').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
+		$('#beneficiaryMOUNo').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
 		$(function() {
 
 			$('.datepicker').datepicker({
@@ -452,128 +466,154 @@
 			return true;
 		}
 
-		$(document).ready(function($) {
-			//  alert("hii....");
-			$("#form_sample_2").submit(function(e) {
-				var isError = false;
-				var errMsg = "";
+		$(document)
+				.ready(
+						function($) {
+							//  alert("hii....");
+							$("#form_sample_2")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
 
-				if (!$("#title").val()) {
+												if (!$("#title").val()) {
 
-					isError = true;
+													isError = true;
 
-					$("#title").addClass("has-error")
-					$("#error_name").show()
-					//return false;
-				} else {
-					$("#error_name").hide()
-				}
+													$("#title").addClass(
+															"has-error")
+													$("#error_name").show()
+													//return false;
+												} else {
+													$("#error_name").hide()
+												}
 
-				if ($("#MOU_agency").val() == -1 || $("#MOU_agency").val() == null) {
+												if ($("#MOU_agency").val() == -1
+														|| $("#MOU_agency")
+																.val() == null) {
 
-					isError = true;
+													isError = true;
 
-					$("#error_mou").show()
-					//return fregister_useralse;
-				} else {
-					$("#error_mou").hide()
-				}
+													$("#error_mou").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_mou").hide()
+												}
 
-				if ($("#MOU_agency").val() == 7) {
-					if (!$("#otherCourse").val()) {
+												if ($("#MOU_agency").val() == 7) {
+													if (!$("#otherCourse")
+															.val()) {
 
-						isError = true;
+														isError = true;
 
-						$("#otherCourse").addClass("has-error")
-						$("#error_other").show()
-						//return false;
-					} else {
-						$("#error_other").hide()
-					}
+														$("#otherCourse")
+																.addClass(
+																		"has-error")
+														$("#error_other")
+																.show()
+														//return false;
+													} else {
+														$("#error_other")
+																.hide()
+													}
 
-				}
+												}
 
-				if (!$("#fromDate").val()) {
+												if (!$("#fromDate").val()) {
 
-					isError = true;
+													isError = true;
 
-					$("#fromDate").addClass("has-error")
-					$("#error_fdate").show()
-					//return false;
-				} else {
-					$("#error_fdate").hide();
-				}
+													$("#fromDate").addClass(
+															"has-error")
+													$("#error_fdate").show()
+													//return false;
+												} else {
+													$("#error_fdate").hide();
+												}
 
-				if (!$("#toDate").val()) {
+												if (!$("#toDate").val()) {
 
-					isError = true;
+													isError = true;
 
-					$("#toDate").addClass("has-error")
-					$("#error_tdate").show()
-					//return false;
-				} else {
-					$("#error_tdate").hide();
-				}
-				
-				var from_date = document.getElementById("fromDate").value;
- 				var to_date = document.getElementById("toDate").value;
- 				var x=0;
- 				
- 				
- 		        var fromdate = from_date.split('-');
- 		        from_date = new Date();
- 		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
- 		        var todate = to_date.split('-');
- 		        to_date = new Date();
- 		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
- 		        if (from_date > to_date ) 
- 		        {
- 		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
-					$("#error_fromToDate").show();
-				 	$("#error_toToDate").show();
-				 	$("#error_fdate").hide();
-				 	$("#error_tdate").hide();
- 		            return false;
- 		           
- 		        }else {
- 					$("#error_fromToDate").hide();
- 					$("#error_toToDate").hide();
- 				}
- 				
+													$("#toDate").addClass(
+															"has-error")
+													$("#error_tdate").show()
+													//return false;
+												} else {
+													$("#error_tdate").hide();
+												}
 
-				if ($("#beneficiaryMOU").val() == -1) {
+												var from_date = document
+														.getElementById("fromDate").value;
+												var to_date = document
+														.getElementById("toDate").value;
+												var x = 0;
 
-					isError = true;
+												var fromdate = from_date
+														.split('-');
+												from_date = new Date();
+												from_date.setFullYear(
+														fromdate[2],
+														fromdate[1] - 1,
+														fromdate[0]);
+												var todate = to_date.split('-');
+												to_date = new Date();
+												to_date.setFullYear(todate[2],
+														todate[1] - 1,
+														todate[0]);
+												if (from_date > to_date) {
+													/// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+													$("#error_fromToDate")
+															.show();
+													$("#error_toToDate").show();
+													$("#error_fdate").hide();
+													$("#error_tdate").hide();
+													return false;
 
-					$("#error_benf").show()
-					//return fregister_useralse;
-				} else {
-					$("#error_benfmou").hide()
-				}
-				
-				if ($("#beneficiaryMOUNo").val() <= 0 || !$("#beneficiaryMOUNo").val()) {
+												} else {
+													$("#error_fromToDate")
+															.hide();
+													$("#error_toToDate").hide();
+												}
 
-					isError = true;
+												if ($("#beneficiaryMOU").val() == -1) {
 
-					$("#error_benif").show()
-					//return fregister_useralse;
-				} else {
-					$("#error_benif").hide()
-				}
-	
+													isError = true;
 
-				if (!isError) {
-					var x = confirm("Do you really want to submit the form?");
-					if (x == true) {
-						return true;
-						document.getElementById("sub1").disabled = true;
-						document.getElementById("sub2").disabled = true;
-					}
-				}
+													$("#error_benf").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_benfmou").hide()
+												}
 
-				return false;
-			});
-		});
+												if ($("#beneficiaryMOUNo")
+														.val() <= 0
+														|| !$(
+																"#beneficiaryMOUNo")
+																.val()) {
+
+													isError = true;
+
+													$("#error_benif").show()
+													//return fregister_useralse;
+												} else {
+													$("#error_benif").hide()
+												}
+
+												if (!isError) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+														return true;
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+													}
+												}
+
+												return false;
+											});
+						});
 		//
 	</script>
 
@@ -597,42 +637,38 @@
 		}
 	</script>
 
-	 	<script type="text/javascript">
+	<script type="text/javascript">
 		function showForm() {
-			
-			
+
 			//alert("qualType");
 			var selectedValue = document.getElementById("MOU_agency").value;
 			//alert("qualType::"+selectedValue);
-		
-			if(selectedValue == 7){
+
+			if (selectedValue == 7) {
 				document.getElementById("abc").style.display = "inline";
-			}
-			else{
+			} else {
 				document.getElementById("abc").style.display = "none";
 			}
-			
+
 		}
 	</script>
 	<script type="text/javascript">
 		function hideText1() {
-			
-			
+
 			var qualType = document.getElementById("otherCourse").value;
 			//alert("x " +qualType);
-			if(qualType == null){
+			if (qualType == null) {
 				$("#abc").hide();
-			///	document.getElementById("abc").style.display="none";
-			}else{
+				///	document.getElementById("abc").style.display="none";
+			} else {
 				$("#abc").show();
 				//document.getElementById("abc").style.display="inline";
 			}
-		//	document.getElementById("abc").style.display = (qualType.length==0 || qualType==null) ? "none" : "inline";
+			//	document.getElementById("abc").style.display = (qualType.length==0 || qualType==null) ? "none" : "inline";
 			//document.getElementById("abc").style.display = (qualType == "NA") ? "none" : "";
-			
+
 			//document.getElementById("MOU_agency").selectedIndex = (qualType.length==0) ? 0 : '';
-				
-			
+
 			/* if (typeof qualType !== 'undefined' || qualType !== null) {
 				alert("In If " +x);
 				document.getElementById("abc").style = "visible";
@@ -676,14 +712,13 @@
 		}
 	</script>
 
-<script type="text/javascript">
-function clearDefault(a){
-	if(a.defaultValue==0)
-	{
-		a.value=""
-	}
-	};
-</script>
+	<script type="text/javascript">
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
+			}
+		};
+	</script>
 
 
 </body>
