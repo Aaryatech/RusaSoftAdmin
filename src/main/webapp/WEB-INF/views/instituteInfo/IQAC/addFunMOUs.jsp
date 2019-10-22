@@ -138,6 +138,8 @@
 
 													<option ${editInst.mouAgency eq 'IIT' ? 'selected' : ''}
 														value="IIT">IIT</option>
+													<option ${editInst.mouAgency eq 'IIM' ? 'selected' : ''}
+														value="IIM">IIM</option>
 													<option ${editInst.mouAgency eq 'NIT' ? 'selected' : ''}
 														value="NIT">NIT</option>
 													<option ${editInst.mouAgency eq 'IIIT' ? 'selected' : ''}

@@ -137,12 +137,12 @@
 										
 											<div class="form-group">
 
-											<label class="control-label col-sm-2" for="amount">Amount in ${budRupees}<span class="text-danger"></span>
+											<label class="control-label col-sm-2" for="amount">Amount in (Rs.)<span class="text-danger"></span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onFocus="clearDefault(this)"
 													autocomplete="off" id="amount" name="amount" maxlength="8"
-													placeholder="Amount in ${budRupees}" value="${govtScholr.exInt1}">
+													placeholder="Amount in Rs." value="${govtScholr.exInt1}">
 												
 											</div>
 										</div>

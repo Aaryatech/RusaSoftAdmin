@@ -412,7 +412,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] Total no. of Mentors No.
+														<div class="col-lg-10">7] Total No. of Mentors No.
 															of Students Assigned</div>
 														<div class="col-lg-2">
 															<a href="#"
@@ -599,7 +599,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] No of Research Project per
+														<div class="col-lg-10">7] No. of Research Project per
 															Teacher</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0,'showNoResearchProjPerReport')"><i
@@ -664,7 +664,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">12] No Book and Chapter
+														<div class="col-lg-10">12] No. of Book and Chapter
 															Publication by Teachers and Papers in Conference
 															Proceedings</div>
 														<div class="col-lg-2">
@@ -714,7 +714,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">16] No of Linkages</div>
+														<div class="col-lg-10">16] No. of Linkages</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0,'showNoOfStudTeachLinkageReport')"><i
 																class="fa fa-file-excel-o" style="color: green;"
@@ -834,7 +834,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">7] No of Students and
+														<div class="col-lg-10">7] No. of Students and
 															Teachers using Library Per Day</div>
 														<div class="col-lg-2">
 															<a href="#"
@@ -1143,7 +1143,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">4] No of Faculty Financial
+														<div class="col-lg-10">4] No. of Faculty Financial
 															support to Professional membership/Conference/Workshop</div>
 														<div class="col-lg-2">
 														<a href="#" onclick="getProgReport(0,'showNoFacultyFinSuppReport')"><i
@@ -1155,7 +1155,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">5] Average No of Training
+														<div class="col-lg-10">5] Average No. of Training
 															programmes organized for Teachers and non teaching staff
 															(Professional Development, Administrative))</div>
 														<div class="col-lg-2">
@@ -1192,7 +1192,7 @@
 														</div>
 													</div>
 													<div class="panel-body">
-														<div class="col-lg-10">8] Avg % of Training Program
+														<div class="col-lg-10">8] Avg. % of Training Program
 															attended by Teachers</div>
 														<div class="col-lg-2">
 															<a href="#" onclick="getProgReport(0)"><i
