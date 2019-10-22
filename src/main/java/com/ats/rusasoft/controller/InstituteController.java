@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.ExportToExcel;
+import com.ats.rusasoft.commons.LakhConversion;
 import com.ats.rusasoft.commons.Names;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.GenderEqalityPrg;
@@ -240,15 +241,18 @@ public class InstituteController {
 			instSpprt.setIsActive(1);
 			instSpprt.setMakerUserId(userId);
 			instSpprt.setMakerDatetime(curDateTime);
+			String amt1=null;
 			try {
 				amt =  Integer.parseInt(request.getParameter("amount"));
+				amt1 =LakhConversion.convertToLakh(request.getParameter("amount"));
+				System.out.println("conv amt **"+amt1);
 			}catch(Exception e){
 				System.err.println(e.getMessage());
 				amt = 0;
 			}
-			instSpprt.setExInt1(amt);
+			instSpprt.setExInt1(0);
 			instSpprt.setExInt2(0);
-			instSpprt.setExVar1("NA");
+			instSpprt.setExVar1(amt1);
 			instSpprt.setExVar2("NA");
 
 			InstituteSupport saveInstSupprt = rest.postForObject(Constants.url + "/addInstSupprt", instSpprt,
@@ -294,6 +298,9 @@ public class InstituteController {
 
 				InstituteSupport suprtSchm = rest.postForObject(Constants.url + "/getSuprtSchemeBySchmId", map,
 						InstituteSupport.class);
+				float a =Float.parseFloat(suprtSchm.getExVar1())*100000;
+				suprtSchm.setExVar1(String.valueOf(a));
+				
 				model.addObject("instSpprt", suprtSchm);
 
 				model.addObject("title", "Edit Other (Besides Government) Financial Support Scheme");

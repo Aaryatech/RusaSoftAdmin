@@ -164,7 +164,7 @@
 													<input type="text" class="form-control" autocomplete="off"
 														id="amount" name="amount" placeholder="Amount in ${budRupees}" 
 														onchange="trim(this)" onFocus="clearDefault(this)"
-														value="${instSpprt.exInt1}">
+														value="${instSpprt.exVar1}">
 												</div>
 											</div>
 											

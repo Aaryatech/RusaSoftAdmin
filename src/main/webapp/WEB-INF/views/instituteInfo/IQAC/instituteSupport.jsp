@@ -138,7 +138,7 @@
 														<th>Name of Scheme</th>
 														<th>No. of Students Benefited</th>
 														<th>Scheme/Support offered By</th>
-														<th>Amount</th>
+														<th>Amount(in Lakh)</th>
 														<th>Action</th>
 													</tr>
 
@@ -156,7 +156,7 @@
 														<td>${schmList.instSchemeName}</td>
 														<td style="text-align: right; ">${schmList.instStudentsBenefited}</td>
 														<td>${schmList.instSchmeOfferedby}</td>
-															<td>${schmList.exInt1}</td>
+															<td>${schmList.exVar1}</td>
 														
 														<td align="center"><c:if test="${editAccess==0}"> 
 																<a 

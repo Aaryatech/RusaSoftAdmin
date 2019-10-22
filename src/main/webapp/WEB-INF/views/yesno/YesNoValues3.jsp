@@ -77,17 +77,22 @@ table, th, td {
 							</div>
 
 						</header>
- <c:if test="${sessionScope.successMsg!=null}">
-           						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
-        	                     </div> 
-        	                     <%session=request.getSession();
-        	                    
-        	                     session.removeAttribute("successMsg");
-        	                     %>
-            			</c:if>
+						<c:if test="${sessionScope.successMsg!=null}">
+							<div class="col-lg-12">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong> ${sessionScope.successMsg}
+								</div>
+							</div>
+							<%
+								session = request.getSession();
+
+									session.removeAttribute("successMsg");
+							%>
+						</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -323,8 +328,7 @@ table, th, td {
 											</table>
 										</div>
 
-										<input type="hidden" id="srindex" name="srindex"
-											value="0">
+										<input type="hidden" id="srindex" name="srindex" value="0">
 										<!-- </div>
 
 
@@ -333,10 +337,12 @@ table, th, td {
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
 												<!-- <input type="submit" class="btn btn-primary" value="Submit"> -->
-												
-												
-												<button type="submit" id="sub_button" class="btn btn-primary"
-													><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+
+												<button type="submit" id="sub_button"
+													class="btn btn-primary">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
 												<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
 											</div>
 										</div>
