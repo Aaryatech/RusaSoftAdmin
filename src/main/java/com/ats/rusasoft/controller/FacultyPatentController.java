@@ -196,7 +196,17 @@ public class FacultyPatentController {
 				String patentNo = request.getParameter("patentNo");
 				//System.out.println("patentNo:" + patentNo);
 				String parentTitle = request.getParameter("parentTitle");
-				String fillingDate = request.getParameter("fillingDate");
+				String fillingDate=null;
+				try {
+					  fillingDate = request.getParameter("fillingDate");
+				}
+				catch(Exception e) {
+					fillingDate=null;
+					System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+					e.printStackTrace();
+
+				}
+				
 				String guideName = request.getParameter("guideName");
 				String pubDate = request.getParameter("pubDate");
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
@@ -220,6 +230,7 @@ public class FacultyPatentController {
 				faculty.setYearId(acYearId);
 				faculty.setPatentFileNo(patentNo);
 				faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
+				
 				faculty.setPatentGuideName(guideName);
 				faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
 				faculty.setMakerUserId(userId);

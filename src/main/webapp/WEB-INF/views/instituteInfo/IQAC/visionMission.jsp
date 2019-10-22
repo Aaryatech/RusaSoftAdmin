@@ -282,7 +282,7 @@
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<textarea rows="4" cols="" class="form-control" maxlength="200"
+														<textarea rows="4" cols="" class="form-control" maxlength="500"
 															id="inst_mission_text" name="inst_mission_text"
 															placeholder="Institute Mission " required autocomplete="off"></textarea> <input
 															type="hidden"   id="instMissionId"

@@ -157,9 +157,9 @@
 														autocomplete="off" id="filling_date" name="fillingDate"
 														placeholder="Patent Filing Date" onkeypress='return restrictAlphabets(event)'
 														value="${patent.patentFilingDate}">
-													<span
+												<!-- 	<span
 													class="error_form text-danger" id="error_field3"
-													style="display: none;">Please enter patent filing date. </span>
+													style="display: none;">Please enter patent filing date. </span> -->
 												</div>
 
 											</div>
@@ -281,7 +281,7 @@ function trim(el) {
 													$("#error_field2").hide();
 												}
 
-												if (!$("#filling_date").val()) {
+												/* if (!$("#filling_date").val()) {
 													isError = true;
 
 													$("#filling_date").addClass(
@@ -289,7 +289,7 @@ function trim(el) {
 													$("#error_field3").show();
 												} else {
 													$("#error_field3").hide();
-												}
+												} */
 											/* 	if (!$("#guide_name").val()) {
 													isError = true;
 

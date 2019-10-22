@@ -146,12 +146,16 @@
 															<option selected value="State">State</option>
 															<option value="National">National</option>
 															<option value="International">International</option>
+															<option value="Local">Local</option>
+															<option value="University">University</option>
 														</c:when>
 
 														<c:when test="${instAct.instActivityLevel eq 'National'}">
 															<option value="State">State</option>
 															<option selected value="National">National</option>
 															<option value="International">International</option>
+															<option value="Local">Local</option>
+															<option value="University">University</option>
 														</c:when>
 
 														<c:when
@@ -159,12 +163,35 @@
 															<option value="State">State</option>
 															<option value="National">National</option>
 															<option selected value="International">International</option>
+															<option value="Local">Local</option>
+															<option value="University">University</option>
+														</c:when>
+
+
+														<c:when test="${instAct.instActivityLevel eq 'Local'}">
+															<option value="State">State</option>
+															<option value="National">National</option>
+															<option  value="International">International</option>
+															<option selected value="Local">Local</option>
+															<option value="University">University</option>
+														</c:when>
+
+
+														<c:when
+															test="${instAct.instActivityLevel eq 'University'}">
+															<option value="State">State</option>
+															<option value="National">National</option>
+															<option  value="International">International</option>
+															<option value="Local">Local</option>
+															<option selected value="University">University</option>
 														</c:when>
 
 														<c:otherwise>
 															<option value="State">State</option>
 															<option value="National">National</option>
 															<option value="International">International</option>
+															<option value="Local">Local</option>
+															<option value="University">University</option>
 														</c:otherwise>
 
 													</c:choose>
@@ -202,11 +229,10 @@
 													autocomplete="off" id="fromDate" name="fromDate"
 													value="${instAct.instActivityFromdt}"> <span
 													class="error_form text-danger" id="error_formfield2"
-													style="display: none;">Please enter from date.</span>
-													
-													<span
+													style="display: none;">Please enter from date.</span> <span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">from date must be smaller than to date </span>
+													style="display: none;">from date must be smaller
+													than to date </span>
 											</div>
 										</div>
 
@@ -217,15 +243,14 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
-													data-format="dd-mm-yyyy"
-													onchange="trim(this)" placeholder="To Date"
-													autocomplete="off" id="toDate" name="toDate"
-													value="${instAct.instActivityTodt}"> <span
-													class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter to date.</span> 
-													<span
+													data-format="dd-mm-yyyy" onchange="trim(this)"
+													placeholder="To Date" autocomplete="off" id="toDate"
+													name="toDate" value="${instAct.instActivityTodt}">
+												<span class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter to date.</span> <span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													style="display: none;">To Date must be greater than
+													From Date </span>
 											</div>
 										</div>
 
@@ -241,7 +266,8 @@
 												<input type="text" class="form-control" maxlength="7"
 													min="0" id="inst_activity_participation" autocomplete="off"
 													onchange="trim(this)" name="inst_activity_participation"
-													placeholder="No.of Participants" onFocus="clearDefault(this)"
+													placeholder="No.of Participants"
+													onFocus="clearDefault(this)"
 													value="${instAct.instActivityParticipation}"> <span
 													class="error_form text-danger" id="error_formfield4"
 													style="display: none;">Please enter No. of
@@ -292,19 +318,27 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
-	
-	$('#inst_activity_participation').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	$('#toDate').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
+		$('#inst_activity_participation').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
 
-	$('#fromDate').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
+		$('#toDate').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#fromDate').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -369,8 +403,6 @@
 															.hide()
 												}
 
-												
-
 												if ($(
 														"#inst_activity_participation")
 														.val() <= 0
@@ -404,32 +436,41 @@
 												} else {
 													$("#error_formfield6").hide()
 												} */
-												
-												var from_date = document.getElementById("fromDate").value;
-						         				var to_date = document.getElementById("toDate").value;
-						         				var x=0;
-						         				
-						         				
-						         		        var fromdate = from_date.split('-');
-						         		        from_date = new Date();
-						         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
-						         		        var todate = to_date.split('-');
-						         		        to_date = new Date();
-						         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
-						         		        if (from_date > to_date ) 
-						         		        {
-						         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
-													$("#error_fromToDate").show();
-						    					 	$("#error_toToDate").show();
-						    					 	$("#error_formfield2").hide();
-						    					 	$("#error_formfield3").hide();
-						         		            return false;
-						         		           
-						         		        }else {
-						         					$("#error_fromToDate").hide();
-						         					$("#error_toToDate").hide();
-						         				}
-						         				
+
+												var from_date = document
+														.getElementById("fromDate").value;
+												var to_date = document
+														.getElementById("toDate").value;
+												var x = 0;
+
+												var fromdate = from_date
+														.split('-');
+												from_date = new Date();
+												from_date.setFullYear(
+														fromdate[2],
+														fromdate[1] - 1,
+														fromdate[0]);
+												var todate = to_date.split('-');
+												to_date = new Date();
+												to_date.setFullYear(todate[2],
+														todate[1] - 1,
+														todate[0]);
+												if (from_date > to_date) {
+													/// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+													$("#error_fromToDate")
+															.show();
+													$("#error_toToDate").show();
+													$("#error_formfield2")
+															.hide();
+													$("#error_formfield3")
+															.hide();
+													return false;
+
+												} else {
+													$("#error_fromToDate")
+															.hide();
+													$("#error_toToDate").hide();
+												}
 
 												if (!isError) {
 
@@ -484,7 +525,7 @@
 
 			});
 		});
- */
+		 */
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
 			/* var form=document.getElementById("form_sample_2");
@@ -500,11 +541,10 @@
 
 
 	<script type="text/javascript">
-	function clearDefault(a){
-		if(a.defaultValue==0)
-		{
-			a.value=""
-		}
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
+			}
 		};
 	</script>
 
