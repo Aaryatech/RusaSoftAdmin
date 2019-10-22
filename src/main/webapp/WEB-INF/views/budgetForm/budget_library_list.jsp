@@ -84,11 +84,11 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-
+<c:if test="${isAdd==1}">
 								<a href="${pageContext.request.contextPath}/budgetAddOnLibrary"><button
 										type="button" class="btn btn-success">
 										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
+									</button></a></c:if>
 
 							</div>
 

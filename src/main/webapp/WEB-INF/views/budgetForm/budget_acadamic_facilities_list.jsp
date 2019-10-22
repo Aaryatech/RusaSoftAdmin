@@ -87,12 +87,13 @@
 								<%-- <a
 									href="${pageContext.request.contextPath}/budgetAddOnAcadamicSupportFacilities"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-
-								<a title="Add"
-									href="${pageContext.request.contextPath}/budgetAddOnAcadamicSupportFacilities"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
+								<c:if test="${isAdd==1}">
+									<a title="Add"
+										href="${pageContext.request.contextPath}/budgetAddOnAcadamicSupportFacilities"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+									</c:if>
 							</div>
 
 						</header>
@@ -120,7 +121,8 @@
 													<th>Source of Funding</th>
 													<th>Allocated Amount ${budRupees}</th>
 													<th>Utilized Amount ${budRupees}</th>
-													<th>Total Expenditure for Academic Support Facilities ${budRupees}</th>
+													<th>Total Expenditure for Academic Support Facilities
+														${budRupees}</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -139,15 +141,17 @@
 														<td align="center">${count.index+1}</td>
 														<td align="center">${budget.finYear}</td>
 														<td>${budget.academicBudgetTitle}</td>
-														
-														<c:if test = "${budget.exVar1!='Any Other Government Agency'}">
-																	<td align="center">${budget.exVar1}</td>
+
+														<c:if
+															test="${budget.exVar1!='Any Other Government Agency'}">
+															<td align="center">${budget.exVar1}</td>
 														</c:if>
-														
-														<c:if test = "${budget.exVar1=='Any Other Government Agency'}">
-																	<td align="center">${budget.exVar2}</td>
+
+														<c:if
+															test="${budget.exVar1=='Any Other Government Agency'}">
+															<td align="center">${budget.exVar2}</td>
 														</c:if>
-														
+
 														<%-- <td align="center">${budget.exVar1}</td> --%>
 														<td align="right">${budget.budgetAllocated}</td>
 														<td align="right">${budget.budgetUtilized}</td>

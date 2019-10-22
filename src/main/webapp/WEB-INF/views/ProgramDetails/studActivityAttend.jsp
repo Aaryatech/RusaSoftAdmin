@@ -56,11 +56,14 @@
 								<%-- <a
 									href="${pageContext.request.contextPath}/showAddStudentAttendActivity"><button
 										type="submit" class="btn btn-success">Add</button></a> --%>
-										
-										
-  <a title="Add"
-											href="${pageContext.request.contextPath}/showAddStudentAttendActivity"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
+
+								<c:if test="${isAdd==1}">
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddStudentAttendActivity"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 							</div>
 						</header>
 						<div class="content-body">
@@ -85,7 +88,7 @@
 												<th>No. of Students Attended</th>
 												<th>Level of Activity</th>
 												<th>Name of Student</th>
-												 <th>Aadhaar No./ Student ID No.</th>
+												<th>Aadhaar No./ Student ID No.</th>
 												<th>Name of Award/Medal</th>
 												<th>Action</th>
 											</tr>
@@ -95,19 +98,20 @@
 											<c:forEach items="${list}" var="list" varStatus="count">
 												<tr>
 
-													<td style="text-align: center; ">${count.index+1}</td>
+													<td style="text-align: center;">${count.index+1}</td>
 													<td>${list.activityName}</td>
 													<td>${list.venue}</td>
-													<td style="text-align: center; ">${list.date}</td>
-													<td style="text-align: center; ">${list.yearName}</td>
+													<td style="text-align: center;">${list.date}</td>
+													<td style="text-align: center;">${list.yearName}</td>
 													<td>${list.branch}</td>
-													<td style="text-align: right; ">${list.participatedStudent}</td>
+													<td style="text-align: right;">${list.participatedStudent}</td>
 													<td>${list.level}</td>
 													<td>${list.aadharNo}</td>
 													<td>${list.exVar1}</td>
 													<td>${list.exVar2}</td>
 
-													<td style="text-align: center; "><c:if test="${isEdit==1}">
+													<td style="text-align: center;"><c:if
+															test="${isEdit==1}">
 															<a
 																href="${pageContext.request.contextPath}/editStudentAttendActivity/${list.studentActivityId}"><span
 																class="glyphicon glyphicon-edit" title="Edit"
