@@ -84,9 +84,10 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
+								<c:if test="${addAccess == 0}"> 
 								<a
 									href="${pageContext.request.contextPath}/showAddAdminDevelopment"><button
-										type="button" class="btn btn-success">Add</button></a>
+										type="button" class="btn btn-success">Add</button></a></c:if>
 							</div>
 
 						</header>
