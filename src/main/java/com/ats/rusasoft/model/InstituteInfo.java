@@ -45,6 +45,19 @@ public class InstituteInfo {
 	
 	private int autonStatus;
 	
+	private int maleFulltimeFac;	
+	private int femaleFulltimeFac;
+	private int otherFulltimeFac;
+	private int maleClockhrFac;
+	private int femaleClockhrFac;
+	private int otherClockhrFac;
+	private int maleSancPost;
+	private int femaleSancPost;
+	private int otherSancPost;
+	private int maleNonTechFac;
+	private int femaleNonTechFac;
+	private int otherNonTechFac;
+	
 
 	public int getAutonStatus() {
 		return autonStatus;
@@ -199,6 +212,102 @@ public class InstituteInfo {
 		this.noOfFulltimeFaculty = noOfFulltimeFaculty;
 	}
 
+	public int getMaleFulltimeFac() {
+		return maleFulltimeFac;
+	}
+
+	public void setMaleFulltimeFac(int maleFulltimeFac) {
+		this.maleFulltimeFac = maleFulltimeFac;
+	}
+
+	public int getFemaleFulltimeFac() {
+		return femaleFulltimeFac;
+	}
+
+	public void setFemaleFulltimeFac(int femaleFulltimeFac) {
+		this.femaleFulltimeFac = femaleFulltimeFac;
+	}
+
+	public int getOtherFulltimeFac() {
+		return otherFulltimeFac;
+	}
+
+	public void setOtherFulltimeFac(int otherFulltimeFac) {
+		this.otherFulltimeFac = otherFulltimeFac;
+	}
+
+	public int getMaleClockhrFac() {
+		return maleClockhrFac;
+	}
+
+	public void setMaleClockhrFac(int maleClockhrFac) {
+		this.maleClockhrFac = maleClockhrFac;
+	}
+
+	public int getFemaleClockhrFac() {
+		return femaleClockhrFac;
+	}
+
+	public void setFemaleClockhrFac(int femaleClockhrFac) {
+		this.femaleClockhrFac = femaleClockhrFac;
+	}
+
+	public int getOtherClockhrFac() {
+		return otherClockhrFac;
+	}
+
+	public void setOtherClockhrFac(int otherClockhrFac) {
+		this.otherClockhrFac = otherClockhrFac;
+	}
+
+	public int getMaleSancPost() {
+		return maleSancPost;
+	}
+
+	public void setMaleSancPost(int maleSancPost) {
+		this.maleSancPost = maleSancPost;
+	}
+
+	public int getFemaleSancPost() {
+		return femaleSancPost;
+	}
+
+	public void setFemaleSancPost(int femaleSancPost) {
+		this.femaleSancPost = femaleSancPost;
+	}
+
+	public int getOtherSancPost() {
+		return otherSancPost;
+	}
+
+	public void setOtherSancPost(int otherSancPost) {
+		this.otherSancPost = otherSancPost;
+	}
+
+	public int getMaleNonTechFac() {
+		return maleNonTechFac;
+	}
+
+	public void setMaleNonTechFac(int maleNonTechFac) {
+		this.maleNonTechFac = maleNonTechFac;
+	}
+
+	public int getFemaleNonTechFac() {
+		return femaleNonTechFac;
+	}
+
+	public void setFemaleNonTechFac(int femaleNonTechFac) {
+		this.femaleNonTechFac = femaleNonTechFac;
+	}
+
+	public int getOtherNonTechFac() {
+		return otherNonTechFac;
+	}
+
+	public void setOtherNonTechFac(int otherNonTechFac) {
+		this.otherNonTechFac = otherNonTechFac;
+	}
+
 	@Override
 	public String toString() {
 		return "InstituteInfo [infoDetailId=" + infoDetailId + ", instituteId=" + instituteId + ", yearId=" + yearId
@@ -207,14 +316,13 @@ public class InstituteInfo {
 				+ noCurrentAdmitedStnt + ", treasuryCode=" + treasuryCode + ", rusaIdNo=" + rusaIdNo + ", addDatetime="
 				+ addDatetime + ", editDatetime=" + editDatetime + ", editBy=" + editBy + ", addBy=" + addBy
 				+ ", delStatus=" + delStatus + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1
-				+ ", exVar2=" + exVar2 + ", autonStatus=" + autonStatus + "]";
-	} 
-	
+				+ ", exVar2=" + exVar2 + ", autonStatus=" + autonStatus + ", maleFulltimeFac=" + maleFulltimeFac
+				+ ", femaleFulltimeFac=" + femaleFulltimeFac + ", otherFulltimeFac=" + otherFulltimeFac
+				+ ", maleClockhrFac=" + maleClockhrFac + ", femaleClockhrFac=" + femaleClockhrFac + ", otherClockhrFac="
+				+ otherClockhrFac + ", maleSancPost=" + maleSancPost + ", femaleSancPost=" + femaleSancPost
+				+ ", otherSancPost=" + otherSancPost + ", maleNonTechFac=" + maleNonTechFac + ", femaleNonTechFac="
+				+ femaleNonTechFac + ", otherNonTechFac=" + otherNonTechFac + "]";
+	}
 
-	
-
-	
-	
-	
 
 }
