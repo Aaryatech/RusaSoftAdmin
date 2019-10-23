@@ -142,7 +142,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" onFocus="clearDefault(this)"
 													autocomplete="off" id="amount" name="amount" maxlength="8"
-													placeholder="Amount in Rs." value="${govtScholr.exInt1}">
+													placeholder="Amount in Rs." value="${govtScholr.exVar1}">
 												
 											</div>
 										</div>

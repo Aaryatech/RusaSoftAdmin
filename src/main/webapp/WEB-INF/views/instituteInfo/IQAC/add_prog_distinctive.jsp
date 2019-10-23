@@ -130,7 +130,7 @@
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="befStake">Beneficiary
-												Stake Holder <span class="text-danger">*</span>
+												Stake Holder <span class="text-danger"></span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="befStake"
@@ -313,7 +313,7 @@
 											 
 												
 												
-												if (!$("#befStake").val()  ) {
+												/* if (!$("#befStake").val()  ) {
 
 													isError = true;
 													errMsg += '<li>Please enter No. of guides</li>';
@@ -326,7 +326,7 @@
 												} else {
 													$("#error_befStake")
 															.hide()
-												}
+												} */
   
 											  
 												

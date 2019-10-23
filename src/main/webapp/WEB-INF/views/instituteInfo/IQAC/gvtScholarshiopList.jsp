@@ -131,7 +131,7 @@
 																	<td>${govtSchrList.nameOfScheme}</td>
 																	<td>${govtSchrList.noOfStudBenftd}</td>
 																	<td>${govtSchrList.schmOffrdBy}</td>
-																	<td>${govtSchrList.exInt1}</td>
+																	<td>${govtSchrList.exVar1}</td>
 																	
 																	<td align="center"><c:if test="${editAccess==0}">
 																			<a

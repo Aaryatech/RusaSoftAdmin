@@ -1777,15 +1777,17 @@ public class InstituteController {
 			govt.setIsActive(1);
 			govt.setMakerUserId(userId);
 			govt.setMakerEntrDatetime(curDateTime);
-			if(request.getParameter("amount").isEmpty()) {
-				
+			govt.setExInt1(0);
+			govt.setExInt2(0);
+			
+			String amt = request.getParameter("amount");
+			if(amt=="" || amt==null) {
 				govt.setExInt1(0);
 			}else {
-				govt.setExInt1(Integer.parseInt(request.getParameter("amount")));
+				
+				govt.setExVar1(LakhConversion.convertToLakh(amt));
 
-			}
-			govt.setExInt2(0);
-			govt.setExVar1("NA");
+			}			
 			govt.setExVar2("NA");
 			//System.out.println(govt.toString());
 
