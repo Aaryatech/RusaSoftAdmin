@@ -81,7 +81,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
-									<a href="${pageContext.request.contextPath}/newExtensionActivity"><button
+									<a
+										href="${pageContext.request.contextPath}/newExtensionActivity"><button
 											type="button" class="btn btn-success">
 											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 										</button></a>
@@ -114,10 +115,13 @@
 																	onClick="selectedInst(this)" /> Select All</th>
 																<th>Sr No</th>
 																<th>Title of Activity</th>
+																<th>From Date</th>
+																<th>To Date</th>
 																<th>No. of Student Participated</th>
 																<th>No. of Student in Institute</th>
 																<th>No. of Faculty Participated</th>
 																<th>No. of Faculty in Institute</th>
+
 																<th>Action</th>
 															</tr>
 														</thead>
@@ -125,11 +129,14 @@
 															<c:forEach items="${mExtActList}" var="extActList"
 																varStatus="count">
 																<tr>
-																	<td align="center"><input type="checkbox" class="chk"
-																		name="exActId" id="exActIds${count.index+1}"
+																	<td align="center"><input type="checkbox"
+																		class="chk" name="exActId"
+																		id="exActIds${count.index+1}"
 																		value="${extActList.instExtensionActId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>
 																	<td>${extActList.tActivityTitle}</td>
+																	<td>${extActList.fromDate}</td>
+																	<td>${extActList.toDate}</td>
 																	<td>${extActList.noOfStudParticipated}</td>
 																	<td>${extActList.noOfStudInInst}</td>
 																	<td>${extActList.noOfFacultyParticipated}</td>
@@ -139,8 +146,7 @@
 																				href="${pageContext.request.contextPath}/editTExtActivity/${extActList.instExtensionActId}"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-																			 </c:if>
-																			<c:if test="${deleteAccess==0}">
+																			 </c:if> <c:if test="${deleteAccess==0}">
 																			<a
 																				href="${pageContext.request.contextPath}/deleteTExtActivity/${extActList.instExtensionActId}"
 																				onClick="return confirm('Are you sure want to delete this record');"
@@ -209,8 +215,6 @@
 			}
 
 		}
-
-	
 	</script>
 
 </body>

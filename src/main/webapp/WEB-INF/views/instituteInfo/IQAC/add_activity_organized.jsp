@@ -146,16 +146,14 @@
 															<option selected value="State">State</option>
 															<option value="National">National</option>
 															<option value="International">International</option>
-															<option value="Local">Local</option>
-															<option value="University">University</option>
+ 															<option value="University">University</option>
 														</c:when>
 
 														<c:when test="${instAct.instActivityLevel eq 'National'}">
 															<option value="State">State</option>
 															<option selected value="National">National</option>
 															<option value="International">International</option>
-															<option value="Local">Local</option>
-															<option value="University">University</option>
+ 															<option value="University">University</option>
 														</c:when>
 
 														<c:when
@@ -163,35 +161,22 @@
 															<option value="State">State</option>
 															<option value="National">National</option>
 															<option selected value="International">International</option>
-															<option value="Local">Local</option>
-															<option value="University">University</option>
+ 															<option value="University">University</option>
 														</c:when>
-
-
-														<c:when test="${instAct.instActivityLevel eq 'Local'}">
-															<option value="State">State</option>
-															<option value="National">National</option>
-															<option  value="International">International</option>
-															<option selected value="Local">Local</option>
-															<option value="University">University</option>
-														</c:when>
-
-
+ 
 														<c:when
 															test="${instAct.instActivityLevel eq 'University'}">
 															<option value="State">State</option>
 															<option value="National">National</option>
 															<option  value="International">International</option>
-															<option value="Local">Local</option>
-															<option selected value="University">University</option>
+ 															<option selected value="University">University</option>
 														</c:when>
 
 														<c:otherwise>
 															<option value="State">State</option>
 															<option value="National">National</option>
 															<option value="International">International</option>
-															<option value="Local">Local</option>
-															<option value="University">University</option>
+ 															<option value="University">University</option>
 														</c:otherwise>
 
 													</c:choose>

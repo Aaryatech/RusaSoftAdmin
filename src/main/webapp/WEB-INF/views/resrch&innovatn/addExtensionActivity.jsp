@@ -85,141 +85,205 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertExstensionActivity"
-										method="post"
-										name="form_sample_2" id="form_sample_2">
+										method="post" name="form_sample_2" id="form_sample_2">
 
 										<div>
 
 											<div class="col-xs-12">
 
-														
-														<input type="hidden" id="inst_extension_act_id" name="inst_extension_act_id"
-														 value="${tExtAct.instExtensionActId}">
-														
-														
-													<div class="form-group">
-											<label class="control-label col-sm-2" for="status">Select  
-												Activity: <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<select id="activity_id" name="activity_id" class="form-control" onclick="checkPhdGuide(this.value)">
-													<c:choose>
-													<c:when test="${tExtAct.exInt1==1}">
-														<option selected value="0">Any Other</option>
-														<c:forEach items="${mExtList}" var="extList">
-																<option value="${extList.extensionActivityId}">${extList.activityTitle}</option>
-													</c:forEach>
-													</c:when>
-													<c:otherwise>
-													
-													
-													<c:forEach items="${mExtList}" var="extList">
-														 <c:choose>
-															<c:when test="${extList.extensionActivityId==tExtAct.extensionActivityId}">
-																<option selected value="${extList.extensionActivityId}">${extList.activityTitle}</option>
 
-															</c:when>
-															<c:otherwise> 
-																<option value="${extList.extensionActivityId}">${extList.activityTitle}</option>
+												<input type="hidden" id="inst_extension_act_id"
+													name="inst_extension_act_id"
+													value="${tExtAct.instExtensionActId}">
 
-															 </c:otherwise>
 
-														</c:choose> 
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="status">Select
+														Activity: <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<select id="activity_id" name="activity_id"
+															class="form-control" onclick="checkPhdGuide(this.value)">
+															<c:choose>
+																<c:when test="${tExtAct.exInt1==1}">
+																	<option selected value="0">Any Other</option>
+																	<c:forEach items="${mExtList}" var="extList">
+																		<option value="${extList.extensionActivityId}">${extList.activityTitle}</option>
+																	</c:forEach>
+																</c:when>
+																<c:otherwise>
 
-													</c:forEach>
-													
-													
-														<option value="0">Any Other</option>
-														</c:otherwise>
-														</c:choose>
-												</select>
-											</div>
-										</div>
 
-													
-														
-												<div class="form-group" id="ihide" style="display: none;">
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Activity
-																Title<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="activity_name" onchange="trim(this)"
-																	name="activity_name" placeholder="Name of Activity"
-																	value="${tExtAct.tActivityTitle}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of activity.</span>
-															</div>
-														</div>
+																	<c:forEach items="${mExtList}" var="extList">
+																		<c:choose>
+																			<c:when
+																				test="${extList.extensionActivityId==tExtAct.extensionActivityId}">
+																				<option selected
+																					value="${extList.extensionActivityId}">${extList.activityTitle}</option>
+
+																			</c:when>
+																			<c:otherwise>
+																				<option value="${extList.extensionActivityId}">${extList.activityTitle}</option>
+
+																			</c:otherwise>
+
+																		</c:choose>
+
+																	</c:forEach>
+
+
+																	<option value="0">Any Other</option>
+																</c:otherwise>
+															</c:choose>
+														</select>
 													</div>
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. of
-																Student Participated<span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="no_student_part" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="no_student_part" placeholder="No. of Student Participated" maxlength="6"
-																	value="${tExtAct.noOfStudParticipated}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter No.of student participated and value must be greater than 0.</span>
-															</div>
-														</div>
-
-														
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. Of
-																Student in Institute <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="student_in_institute" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="student_in_institute" placeholder="No. of Student in Institute" maxlength="6"
-																	value="${tExtAct.noOfStudInInst}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter No. of student in institute and value must be greater than 0.</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. Of
-																Faculty Participated <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="no_faculty" onchange="trim(this)" onFocus="clearDefault(this)"
-																	name="no_faculty" placeholder="No. of Faculty Participated" maxlength="6"
-																	value="${tExtAct.noOfFacultyParticipated}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter No. of faculty participated and value must be greater than 0.</span>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">No. of
-																Faculty in Institute <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control" id="faculty_in_inst" onchange="trim(this)" onFocus="clearDefault(this)"
-																		name="faculty_in_inst" placeholder="No. of Faculty in Institute" maxlength="6"
-																	value="${tExtAct.noOfFacultyInInst}" autocomplete="off">
-																	<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter No. of faculty in institute and value must be greater than 0.</span>
-															</div>
-														</div>
-													
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" id="sub_button" class="btn btn-primary" 
-																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-															
-																<a href="${pageContext.request.contextPath}/showExtensionActivity"><button
-																   id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-															<input type="hidden" id="is_view" name="is_view" value="0">
-															</div>
-														</div>
-
-													</div>
-
-
-													<div class="clearfix"></div>
-
 												</div>
 
-											
+
+
+												<div class="form-group" id="ihide" style="display: none;">
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="smallheading">Activity
+															Title<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-6">
+															<input type="text" class="form-control"
+																id="activity_name" onchange="trim(this)"
+																name="activity_name" placeholder="Name of Activity"
+																value="${tExtAct.tActivityTitle}" autocomplete="off">
+															<span class="error_form text-danger"
+																id="error_formfield1" style="display: none;">Please
+																enter name of activity.</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">No.
+														of Student Participated<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control"
+															id="no_student_part" onchange="trim(this)"
+															onFocus="clearDefault(this)" name="no_student_part"
+															placeholder="No. of Student Participated" maxlength="6"
+															value="${tExtAct.noOfStudParticipated}"
+															autocomplete="off"> <span
+															class="error_form text-danger" id="error_formfield2"
+															style="display: none;">Please enter No.of student
+															participated and value must be greater than 0.</span>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">No.
+														Of Student in Institute <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control"
+															id="student_in_institute" onchange="trim(this)"
+															onFocus="clearDefault(this)" name="student_in_institute"
+															placeholder="No. of Student in Institute" maxlength="6"
+															value="${tExtAct.noOfStudInInst}" autocomplete="off">
+														<span class="error_form text-danger" id="error_formfield3"
+															style="display: none;">Please enter No. of
+															student in institute and value must be greater than 0.</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">No.
+														Of Faculty Participated <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="no_faculty"
+															onchange="trim(this)" onFocus="clearDefault(this)"
+															name="no_faculty"
+															placeholder="No. of Faculty Participated" maxlength="6"
+															value="${tExtAct.noOfFacultyParticipated}"
+															autocomplete="off"> <span
+															class="error_form text-danger" id="error_formfield4"
+															style="display: none;">Please enter No. of
+															faculty participated and value must be greater than 0.</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" for="smallheading">No.
+														of Faculty in Institute <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control"
+															id="faculty_in_inst" onchange="trim(this)"
+															onFocus="clearDefault(this)" name="faculty_in_inst"
+															placeholder="No. of Faculty in Institute" maxlength="6"
+															value="${tExtAct.noOfFacultyInInst}" autocomplete="off">
+														<span class="error_form text-danger" id="error_formfield5"
+															style="display: none;">Please enter No. of
+															faculty in institute and value must be greater than 0.</span>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-2" id="certf_date"
+														for="fromDate">From Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															placeholder="Select From Date" autocomplete="off"
+															data-end-date="0d" data-format="dd-mm-yyyy" id="fromDate"
+															name="fromDate" value="${tExtAct.fromDate}"> <span
+															class="error_form text-danger" id="fromDate_field"
+															style="display: none;">Please select from date.</span> <span
+															class="error_form text-danger" id="error_fromToDate"
+															style="display: none;">from date must be smaller
+															than to date.</span>
+
+													</div>
+												</div>
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" id="exp_date"
+														for="toDate">To Date <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															autocomplete="off" id="toDate" name="toDate"
+															placeholder="Select To Date" data-format="dd-mm-yyyy"
+															value="${tExtAct.toDate}"> <span
+															class="error_form text-danger" id="toDate_field"
+															style="display: none;">Please select to date.</span> <span
+															class="error_form text-danger" id="error_toToDate"
+															style="display: none;">to date must be greater
+															than from date.</span>
+
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-offset-2 col-sm-10">
+														<button type="submit" id="sub_button"
+															class="btn btn-primary" onclick="submit_f(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
+
+														<a
+															href="${pageContext.request.contextPath}/showExtensionActivity"><button
+																id="sub2" type="button" class="btn btn-primary">
+																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+															</button></a> <input type="hidden" id="is_view" name="is_view"
+															value="0">
+													</div>
+												</div>
+
+											</div>
+
+
+											<div class="clearfix"></div>
+
+										</div>
+
+
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
 										are mandatory.</p>
@@ -236,8 +300,8 @@
 			</section>
 		</section>
 		<!-- END CONTENT -->
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- <script>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -319,6 +383,53 @@
             				} else {
             					$("#error_formfield5").hide()
             				}
+           				
+           				var from_date = document.getElementById("fromDate").value;
+         				var to_date = document.getElementById("toDate").value;
+         				var x=0;
+         				
+         				
+         		        var fromdate = from_date.split('-');
+         		        from_date = new Date();
+         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
+         		        var todate = to_date.split('-');
+         		        to_date = new Date();
+         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
+         		        if (from_date > to_date ) 
+         		        {
+         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+							$("#error_fromToDate").show();
+    					 	$("#error_toToDate").show();
+    					 	$("#fromDate_field").hide();
+    					 	$("#toDate_field").hide();
+         		            return false;
+         		           
+         		        }else {
+         					$("#error_fromToDate").hide();
+         					$("#error_toToDate").hide();
+         				}
+					
+					if (!$("#fromDate").val()) {
+						isError = true;
+
+						$("#fromDate").addClass(
+								"has-error")
+						$("#fromDate_field").show();
+					} else {
+						$("#fromDate_field").hide();
+					}
+					
+					if (!$("#toDate").val()) {
+						isError = true;
+
+						$("#toDate").addClass(
+								"has-error")
+						$("#toDate_field").show();
+					} else {
+						$("#toDate_field").hide();
+					}
+					
+					
 			            	 if (!isError) {
 			            		 
 								var x = confirm("Do you really want to submit the form?");
@@ -333,16 +444,16 @@
             			});
         });
 
-</script>   
-<script type="text/javascript">
+</script>
+		<script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
 		}
 </script>
-	
-<script type="text/javascript">
+
+		<script type="text/javascript">
   var wasSubmitted = false;    
     function checkBeforeSubmit(){
       if(!wasSubmitted) {
@@ -370,7 +481,7 @@
     });
     
 </script>
-<script type="text/javascript">
+		<script type="text/javascript">
 function clearDefault(a){
 	if(a.defaultValue==0)
 	{

@@ -1,7 +1,8 @@
 package com.ats.rusasoft.model;
 
-public class TExtensionActivity {
+import java.sql.Date;
 
+public class TExtensionActivity {
 	private int instExtensionActId;
 	private int extensionActivityId;
 	private int instId;
@@ -19,6 +20,11 @@ public class TExtensionActivity {
 	private String exVar1;
 	private int exInt2;
 	private String exVar2;
+	
+	private String fromDate;
+	private String toDate;
+	
+	
 	public int getInstExtensionActId() {
 		return instExtensionActId;
 	}
@@ -123,6 +129,19 @@ public class TExtensionActivity {
 	public void setExVar2(String exVar2) {
 		this.exVar2 = exVar2;
 	}
+	 
+	public String getFromDate() {
+		return fromDate;
+	}
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+	public String getToDate() {
+		return toDate;
+	}
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
+	}
 	@Override
 	public String toString() {
 		return "TExtensionActivity [instExtensionActId=" + instExtensionActId + ", extensionActivityId="
@@ -131,8 +150,22 @@ public class TExtensionActivity {
 				+ noOfStudInInst + ", noOfFacultyParticipated=" + noOfFacultyParticipated + ", noOfFacultyInInst="
 				+ noOfFacultyInInst + ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId="
 				+ makerUserId + ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exVar1=" + exVar1
-				+ ", exInt2=" + exInt2 + ", exVar2=" + exVar2 + "]";
+				+ ", exInt2=" + exInt2 + ", exVar2=" + exVar2 + ", fromDate=" + fromDate + ", toDate=" + toDate
+				+ ", getInstExtensionActId()=" + getInstExtensionActId() + ", getExtensionActivityId()="
+				+ getExtensionActivityId() + ", getInstId()=" + getInstId() + ", getAcYearId()=" + getAcYearId()
+				+ ", gettActivityTitle()=" + gettActivityTitle() + ", getNoOfStudParticipated()="
+				+ getNoOfStudParticipated() + ", getNoOfStudInInst()=" + getNoOfStudInInst()
+				+ ", getNoOfFacultyParticipated()=" + getNoOfFacultyParticipated() + ", getNoOfFacultyInInst()="
+				+ getNoOfFacultyInInst() + ", getDelStatus()=" + getDelStatus() + ", getIsActive()=" + getIsActive()
+				+ ", getMakerUserId()=" + getMakerUserId() + ", getMakerDatetime()=" + getMakerDatetime()
+				+ ", getExInt1()=" + getExInt1() + ", getExVar1()=" + getExVar1() + ", getExInt2()=" + getExInt2()
+				+ ", getExVar2()=" + getExVar2() + ", getFromDate()=" + getFromDate() + ", getToDate()=" + getToDate()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
+	 
+	
+	
 	
 	
 }

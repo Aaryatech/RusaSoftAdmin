@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.master.model.PlagiarismCodeEthics;
 import com.ats.rusasoft.model.AwrdRecgAgnstExtActivity;
 import com.ats.rusasoft.model.EContentDevFacility;
@@ -189,6 +190,8 @@ public class ResearchAndInnovation {
 			tExtAct.setExVar1("NA");
 			tExtAct.setExInt2(0);
 			tExtAct.setExVar2("NA");
+			tExtAct.setFromDate(request.getParameter("fromDate"));
+			tExtAct.setToDate(request.getParameter("toDate"));
 			//System.out.println(tExtAct.toString());
 			
 			TExtensionActivity saveExtActivity = rest.postForObject(Constants.url+"/saveExtActivity", tExtAct, TExtensionActivity.class);
