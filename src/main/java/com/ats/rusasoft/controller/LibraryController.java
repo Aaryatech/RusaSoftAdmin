@@ -1912,7 +1912,7 @@ public class LibraryController {
 				System.err.println("acaYearList " + acaYearList.toString());
 
 				model.addObject("acaYearList", acaYearList);
-				// model.addObject("editInstInfo", editInst);
+				model.addObject("editInstInfo", editInst);
 			}
 
 		} catch (Exception e) {
@@ -2012,7 +2012,13 @@ public class LibraryController {
 				int academic_year = (int) session.getAttribute("acYearId");
 				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				String inst_info_id = null;
+			
+				int no_fullTime_Faculty = 0;
+				int no_nonTeaching_faculty = 0;
+				int no_suppStaff = 0;
+				int no_currAdmitted_Student = 0;
+
+				int inst_info_id = 0;
 				int no_clock_hr_faculty = 0;
 				int full_time_other = 0;
 				int clock_basis_other = 0;
@@ -2020,22 +2026,33 @@ public class LibraryController {
 				int non_teach__other = 0;
 				int male_clockhr_basis = 0;
 				int female_clockhr_basis = 0;
+				
 				try {
-					inst_info_id = (request.getParameter("inst_info_id"));
+					no_fullTime_Faculty = Integer.parseInt(request.getParameter("no_fullTime_Faculty"));
+					no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
+					no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));
+					no_currAdmitted_Student = Integer.parseInt(request.getParameter("no_currAdmitted_Student"));
+
+					inst_info_id = Integer.parseInt(request.getParameter("inst_info_id"));
 					no_clock_hr_faculty = Integer.parseInt(request.getParameter("no_clockhr_Faculty"));
-					
-					 full_time_other = Integer.parseInt(request.getParameter("other_full_time_fac"));
-					 clock_basis_other = Integer.parseInt(request.getParameter("other_full_clockhr"));
-					 sanctn_post_other = Integer.parseInt(request.getParameter("other_sanct_post"));
-					 non_teach__other = Integer.parseInt(request.getParameter("other_non_teach_fac"));
-					 
-					 male_clockhr_basis = Integer.parseInt(request.getParameter("male_clock_hr"));
-					 female_clockhr_basis = Integer.parseInt(request.getParameter("female_clock_hr"));
+
+					full_time_other = Integer.parseInt(request.getParameter("other_full_time_fac"));
+					clock_basis_other = Integer.parseInt(request.getParameter("other_full_clockhr"));
+					sanctn_post_other = Integer.parseInt(request.getParameter("other_sanct_post"));
+					non_teach__other = Integer.parseInt(request.getParameter("other_non_teach_fac"));
+
+					male_clockhr_basis = Integer.parseInt(request.getParameter("male_clock_hr"));
+					female_clockhr_basis = Integer.parseInt(request.getParameter("female_clock_hr"));
 					 
 				} catch (Exception e) {
 					System.err.println("Exce in save innfo stitute I  " + e.getMessage());
 					e.printStackTrace();
 					
+					no_fullTime_Faculty = 0;
+					no_nonTeaching_faculty = 0;
+					no_suppStaff = 0;
+					no_currAdmitted_Student = 0;
+
 					no_clock_hr_faculty = 0;
 					no_clock_hr_faculty = 0;
 					full_time_other = 0;
@@ -2047,10 +2064,7 @@ public class LibraryController {
 				}
 
 				// int academic_year = Integer.parseInt(request.getParameter("academic_year"));
-				int no_fullTime_Faculty = Integer.parseInt(request.getParameter("no_fullTime_Faculty"));
-				int no_nonTeaching_faculty = Integer.parseInt(request.getParameter("no_nonTeaching_faculty"));
-				int no_suppStaff = Integer.parseInt(request.getParameter("no_suppStaff"));
-				int no_currAdmitted_Student = Integer.parseInt(request.getParameter("no_currAdmitted_Student"));
+				
 				String treasury_code = "NA"; // request.getParameter("treasury_code");
 				String rusa_idNo = "NA"; // request.getParameter("rusa_idNo");
 
@@ -2062,9 +2076,10 @@ public class LibraryController {
 				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 				String curDate = dateFormatStr.format(new Date());
-				int auton_status=Integer.parseInt(request.getParameter("auton_status"));
+				int auton_status = Integer.parseInt(request.getParameter("auton_status"));
 
-				if (inst_info_id.isEmpty() == true) {
+				//if inst_info_id.isEmpty() == true
+				if (inst_info_id==0) {
 
 					InstituteInfo lib = new InstituteInfo();
 
@@ -2086,24 +2101,23 @@ public class LibraryController {
 					lib.setExVar1("NA");
 					lib.setExVar2("NA");
 					lib.setAutonStatus(auton_status);
-					
+
 					lib.setMaleFulltimeFac(Integer.parseInt(request.getParameter("male_full_time_fac")));
 					lib.setFemaleFulltimeFac(Integer.parseInt(request.getParameter("female_full_time_fac")));
 					lib.setOtherFulltimeFac(full_time_other);
-					
+
 					lib.setMaleClockhrFac(male_clockhr_basis);
 					lib.setFemaleClockhrFac(female_clockhr_basis);
 					lib.setOtherClockhrFac(clock_basis_other);
-					
+
 					lib.setMaleSancPost(Integer.parseInt(request.getParameter("male_sanct_post")));
 					lib.setFemaleSancPost(Integer.parseInt(request.getParameter("female_sanct_post")));
 					lib.setOtherSancPost(sanctn_post_other);
-					
+
 					lib.setMaleNonTechFac(Integer.parseInt(request.getParameter("male_non_teach_fac")));
 					lib.setFemaleNonTechFac(Integer.parseInt(request.getParameter("female_non_teach_fac")));
 					lib.setOtherNonTechFac(non_teach__other);
-					
-					
+
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib,
 							InstituteInfo.class);
 
@@ -2132,6 +2146,22 @@ public class LibraryController {
 					lib1.setExInt1(Integer.parseInt(request.getParameter("no_sanction_post")));
 					lib1.setExInt2(no_clock_hr_faculty);
 					lib1.setAutonStatus(auton_status);
+
+					lib1.setMaleFulltimeFac(Integer.parseInt(request.getParameter("male_full_time_fac")));
+					lib1.setFemaleFulltimeFac(Integer.parseInt(request.getParameter("female_full_time_fac")));
+					lib1.setOtherFulltimeFac(full_time_other);
+
+					lib1.setMaleClockhrFac(male_clockhr_basis);
+					lib1.setFemaleClockhrFac(female_clockhr_basis);
+					lib1.setOtherClockhrFac(clock_basis_other);
+
+					lib1.setMaleSancPost(Integer.parseInt(request.getParameter("male_sanct_post")));
+					lib1.setFemaleSancPost(Integer.parseInt(request.getParameter("female_sanct_post")));
+					lib1.setOtherSancPost(sanctn_post_other);
+
+					lib1.setMaleNonTechFac(Integer.parseInt(request.getParameter("male_non_teach_fac")));
+					lib1.setFemaleNonTechFac(Integer.parseInt(request.getParameter("female_non_teach_fac")));
+					lib1.setOtherNonTechFac(non_teach__other);
 
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib1,
 							InstituteInfo.class);

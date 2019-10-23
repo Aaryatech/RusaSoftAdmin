@@ -170,12 +170,9 @@
 
 											</select>
 										</div>
-
-
-
-
 									</div>
 								</div>
+								
 								<br />
 								<div class="row" style="padding-bottom: 0px;">
 									<div class="col-lg-12">

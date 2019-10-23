@@ -115,7 +115,61 @@
 
 
 
-											<div class="col-xs-12">
+											<div class="col-xs-12">												
+												
+												 <div class="row">												
+													<div class="form-group">
+														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" min="0"
+																id="male_full_time_fac" maxlength="8"															
+																 onchange="calFulTimeFac()"
+																value="${editInstInfo.maleFulltimeFac}"
+																name="male_full_time_fac"
+																placeholder="0">
+	
+															<span class="error_form text-danger" id="error_male_full"
+																style="display: none;">No. of male full
+																time faculty.</span>
+														</div>
+												
+														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" min="0"
+																id="female_full_time_fac" maxlength="8"															
+																 onchange="calFulTimeFac()"
+																value="${editInstInfo.femaleFulltimeFac}"
+																name="female_full_time_fac"
+																placeholder="0">
+	
+															<span class="error_form text-danger" id="error_female_full"
+																style="display: none;">No. of female full
+																time faculty.</span>
+														</div>
+														
+														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" min="0"
+																id="other_full_time_fac" maxlength="8"															
+																 onchange="calFulTimeFac()"
+																value="${editInstInfo.otherFulltimeFac}"
+																name="other_full_time_fac"
+																placeholder="0" style="width: 86%;">
+	
+															<span class="error_form text-danger" id="error_other_full"
+																style="display: none;">No. of other full
+																time faculty.</span>
+																
+															
+														</div>
+														<span class="error_form text-danger" id="cal_male_full"
+																style="display: none; padding-left: 35%;">Invalid division of full time faculty.</span>
+													</div>																										
+												</div> 
+												
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_name">No.
 														of Full Time Faculty <span class="text-danger">*</span>
@@ -134,62 +188,57 @@
 													</div>
 												</div>
 												
-												 <div class="row">												
-													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="text" class="form-control" min="0"
-																id="male_full_time_fac" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.maleFulltimeFac}"
-																name="male_full_time_fac"
-																placeholder="0">
-	
-															<span class="error_form text-danger" id="error_male_full"
-																style="display: none;">No. of male full
-																time faculty.</span>
-														</div>
-												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="text" class="form-control" min="0"
-																id="female_full_time_fac" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.femaleFulltimeFac}"
-																name="female_full_time_fac"
-																placeholder="0">
-	
-															<span class="error_form text-danger" id="error_female_full"
-																style="display: none;">No. of female full
-																time faculty.</span>
-														</div>
-														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="text" class="form-control" min="0"
-																id="other_full_time_fac" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.otherFulltimeFac}"
-																name="other_full_time_fac"
-																placeholder="0" style="width: 86%;">
-	
-															<span class="error_form text-danger" id="error_other_full"
-																style="display: none;">No. of other full
-																time faculty.</span>
-																
-															
-														</div>
-														<span class="error_form text-danger" id="cal_male_full"
-																style="display: none; padding-left: 35%;">Invalid division of full time faculty.</span>
-													</div>																										
-												</div> 
-												
 												
 												
 												<!-- ************************************************************** -->
+												
+												<div class="row">
+													<div class="form-group">
+														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger"></span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" min="0"
+																id="male_clock_hr" maxlength="8"															
+																 onchange="calFacClockHr()"
+																value="${editInstInfo.maleClockhrFac}"
+																name="male_clock_hr"
+																placeholder="0">
+	
+															<!-- <span class="error_form text-danger" id="error_male_clockhr"
+																style="display: none;">Male clock hour basis faculty.</span> -->
+														</div>
+												
+														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger"></span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" min="0"
+																id="female_clock_hr" maxlength="8"															
+																 onchange="calFacClockHr()"
+																value="${editInstInfo.femaleClockhrFac}"
+																name="female_clock_hr"
+																placeholder="0">
+	
+															<span class="error_form text-danger" id="error_female_clockhr"
+																style="display: none;">Female clock hour basis faculty.</span>
+														</div>
+														
+														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger"></span>
+														</label>
+														<div class="col-sm-2">
+															<input type="text" class="form-control" min="0"
+																id="other_full_clockhr" maxlength="8"															
+																 onchange="calFacClockHr()"
+																value="${editInstInfo.otherClockhrFac}"
+																name="other_full_clockhr"
+																placeholder="0" style="width: 86%;">
+	
+															<span class="error_form text-danger" id="error_other_clockhr"
+																style="display: none;">Other clock hour basis faculty.</span>
+														</div>
+														<span class="error_form text-danger" id="cal_clockhr_fac"
+																style="display: none; padding-left: 35%;">Invalid division clock hour basis faculty.</span>
+													</div>
+												</div>
 												
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_name">No.
@@ -206,55 +255,55 @@
 													</div>
 												</div>
 												
-												<div class="row">
+												<!-- ************************************************************* -->
+												
+												<div class="row">												
 													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger"></span>
+														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
 															<input type="text" class="form-control" min="0"
-																id="male_clock_hr" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.maleClockhrFac}"
-																name="male_clock_hr"
-																placeholder="10">
+																id="male_sanct_post" maxlength="8"															
+																onchange="calSanctnPost()"
+																value="${editInstInfo.maleSancPost}"
+																name="male_sanct_post"
+																placeholder="0">
 	
-															<!-- <span class="error_form text-danger" id="error_male_clockhr"
-																style="display: none;">Male clock hour basis faculty.</span> -->
+															<span class="error_form text-danger" id="error_male_sanct_post"
+																style="display: none;">Male sanction post.</span>
 														</div>
 												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger"></span>
+														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
 															<input type="text" class="form-control" min="0"
-																id="female_clock_hr" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.femaleClockhrFac}"
-																name="female_clock_hr"
-																placeholder="10">
+																id="female_sanct_post" maxlength="8"															
+																onchange="calSanctnPost()"
+																value="${editInstInfo.femaleSancPost}"
+																name="female_sanct_post"
+																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_female_clockhr"
-																style="display: none;">Female clock hour basis faculty.</span>
+															<span class="error_form text-danger" id="error_female_sanct_post"
+																style="display: none;">Female sanction post.</span>
 														</div>
 														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger"></span>
+														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
 														</label>
 														<div class="col-sm-2">
-															<input type="text" class="form-control" min="0"
-																id="other_full_clockhr" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.otherClockhrFac}"
-																name="other_full_clockhr"
-																placeholder="10" style="width: 86%;">
+															<input type="text" class="form-control oth" min="0"
+																id="other_sanct_post" maxlength="8"															
+																onchange="calSanctnPost()" 
+																value="${editInstInfo.otherSancPost}"
+																name="other_sanct_post"
+																placeholder="0" style="width: 86%;" >
 	
-															<span class="error_form text-danger" id="error_other_clockhr"
-																style="display: none;">Other clock hour basis faculty.</span>
+															<span class="error_form text-danger" id="error_other_sanct_post"
+																style="display: none;">Other sanction post.</span>
 														</div>
-														<span class="error_form text-danger" id="cal_clockhr_fac"
-																style="display: none; padding-left: 35%;">Invalid division clock hour basis faculty.</span>
-													</div>
-												</div>
-												
-												<!-- ************************************************************* -->
+														<span class="error_form text-danger" id="cal_fac_sanctn_post"
+																style="display: none; padding-left: 35%;">Invalid division of sanction post.</span>
+													</div>													
+												</div>  
 												
 												<div class="form-group">
 													<label class="control-label col-sm-4" for="page_name">No.
@@ -274,75 +323,8 @@
 													</div>
 												</div>
 												
-												<div class="row">												
-													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="text" class="form-control" min="0"
-																id="male_sanct_post" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.maleSancPost}"
-																name="male_sanct_post"
-																placeholder="10">
-	
-															<span class="error_form text-danger" id="error_male_sanct_post"
-																style="display: none;">Male sanction post.</span>
-														</div>
-												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="text" class="form-control" min="0"
-																id="female_sanct_post" maxlength="8"															
-																onchange="trim(this)"
-																value="${editInstInfo.femaleSancPost}"
-																name="female_sanct_post"
-																placeholder="10">
-	
-															<span class="error_form text-danger" id="error_female_sanct_post"
-																style="display: none;">Female sanction post.</span>
-														</div>
-														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="text" class="form-control oth" min="0"
-																id="other_sanct_post" maxlength="8"															
-																onchange="trim(this)" 
-																value="${editInstInfo.otherSancPost}"
-																name="other_sanct_post"
-																placeholder="10" style="width: 86%;" >
-	
-															<span class="error_form text-danger" id="error_other_sanct_post"
-																style="display: none;">Other sanction post.</span>
-														</div>
-														<span class="error_form text-danger" id="cal_fac_sanctn_post"
-																style="display: none; padding-left: 35%;">Invalid division of sanction post.</span>
-													</div>													
-												</div>  
-												
 												<!-- ************************************************************* -->
 
-
-
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_order">No.
-														of Full Time Non-Teaching Faculty <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-8">
-														<input type="text" class="form-control" min="0"
-															id="no_nonTeaching_faculty"
-															value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
-															name="no_nonTeaching_faculty" maxlength="8"															
-															onchange="trim(this)"
-															placeholder=" No. of Full Time Non-Teaching Faculty">
-														<span class="error_form text-danger" id="error_non"
-															style="display: none;">Please enter No. of full
-															time non-teaching faculty and value must be greater than 0.</span>
-													</div>
-												</div>
-												
 												<div class="row">												
 													<div class="form-group">
 														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
@@ -353,7 +335,7 @@
 																onchange="trim(this)"
 																value="${editInstInfo.maleNonTechFac}"
 																name="male_non_teach_fac"
-																placeholder="10">
+																placeholder="0">
 	
 															<span class="error_form text-danger" id="error_male_non_teach_fac"
 																style="display: none;">Male non-teaching faculty.</span>
@@ -364,10 +346,10 @@
 														<div class="col-sm-2">
 															<input type="text" class="form-control" min="0"
 																id="female_non_teach_fac" maxlength="8"															
-																onchange="trim(this)"
+																onchange="calNonTeachFac()"
 																value="${editInstInfo.femaleNonTechFac}"
 																name="female_non_teach_fac"
-																placeholder="10">
+																placeholder="0">
 	
 															<span class="error_form text-danger" id="error_female_non_teach_fac"
 																style="display: none;">Female non-teaching faculty.</span>
@@ -378,10 +360,10 @@
 														<div class="col-sm-2">
 															<input type="text" class="form-control" min="0"
 																id="other_non_teach_fac" maxlength="8"															
-																onchange="trim(this)"
+																onchange="calNonTeachFac()"
 																value="${editInstInfo.otherNonTechFac}"
 																name="other_non_teach_fac"
-																placeholder="10" style="width: 86%;">
+																placeholder="0" style="width: 86%;">
 	
 															<span class="error_form text-danger" id="error_other_non_teach_fac"
 																style="display: none;">Other non-teaching faculty.</span>
@@ -390,6 +372,23 @@
 																	style="display: none; padding-left: 35%;">Invalid division of non-teaching faculty.</span>
 													</div>													
 												</div> 
+												
+												<div class="form-group">
+													<label class="control-label col-sm-4" for="page_order">No.
+														of Full Time Non-Teaching Faculty <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" min="0"
+															id="no_nonTeaching_faculty"
+															value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
+															name="no_nonTeaching_faculty" maxlength="8"															
+															onchange="calNonTeachFac()"
+															placeholder=" No. of Full Time Non-Teaching Faculty">
+														<span class="error_form text-danger" id="error_non"
+															style="display: none;">Please enter No. of full
+															time non-teaching faculty and value must be greater than 0.</span>
+													</div>
+												</div>
 
 
 												<!-- ************************************************************* -->
@@ -516,6 +515,56 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<!-- END CONTENT -->
+	<script>
+	function calFulTimeFac(){
+		
+		var ttlFullFac = parseInt($("#no_fullTime_Faculty").val());		
+		var maleFull = parseInt($("#male_full_time_fac").val());												
+		var femaleFull = parseInt($("#female_full_time_fac").val());												
+		var otherFull = parseInt($("#other_full_time_fac").val());
+		
+		var ttl = maleFull+femaleFull+otherFull;
+
+		$("#no_fullTime_Faculty").val(ttl);
+		
+	}
+	
+	function calFacClockHr(){
+		var fac =  parseInt($("#no_clockhr_Faculty").val()); 		
+		var male = parseInt($("#male_clock_hr").val());
+		var female = parseInt($("#female_clock_hr").val());
+		var other = parseInt($("#other_full_clockhr").val());
+		
+		var ttl = male+female+other;
+		
+		$("#no_clockhr_Faculty").val(ttl);
+
+	}
+	
+	function calSanctnPost(){
+		var fac =  parseInt($("#no_sanction_post").val()); 		
+		var male = parseInt($("#male_sanct_post").val());
+		var female = parseInt($("#female_sanct_post").val());
+		var other = parseInt($("#other_sanct_post").val());
+		
+		var ttl = male+female+other;
+		
+		$("#no_sanction_post").val(ttl);
+	}
+	
+	function calNonTeachFac(){
+		var fac =  parseInt($("#no_nonTeaching_faculty").val()); 		
+		var male = parseInt($("#male_non_teach_fac").val());
+		var female = parseInt($("#female_non_teach_fac").val());
+		var other = parseInt($("#other_non_teach_fac").val());
+		
+		var ttl = male+female+other;
+		
+		$("#no_nonTeaching_faculty").val(ttl);
+		
+	}
+	</script>
+	
 	<script>
 		function numbersOnlyNotZero(id_number) {
 
@@ -659,7 +708,7 @@
 												} 
 
 												if ($("#male_full_time_fac")
-														.val() <= 0
+														.val() = 0
 														|| !$(
 																"#male_full_time_fac")
 																.val()) {
@@ -676,7 +725,7 @@
 												}
 												
 												if ($("#female_full_time_fac")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#female_full_time_fac")
 																.val()) {
@@ -720,7 +769,7 @@
 												}
 												
 												if ($("#male_clock_hr")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#male_clock_hr")
 																.val()) {
@@ -738,7 +787,7 @@
 												
 												
 												if ($("#female_clock_hr")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#female_clock_hr")
 																.val()) {
@@ -789,7 +838,7 @@
 												
 												
 												if ($("#male_sanct_post")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#male_sanct_post")
 																.val()) {
@@ -806,7 +855,7 @@
 												}
 												
 												if ($("#female_sanct_post")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#female_sanct_post")
 																.val()) {
@@ -851,7 +900,7 @@
 												}
 												
 												if ($("#male_non_teach_fac")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#male_non_teach_fac")
 																.val()) {
@@ -868,7 +917,7 @@
 												}
 												
 												if ($("#female_non_teach_fac")
-														.val() <= 0
+														.val() < 0
 														|| !$(
 																"#female_non_teach_fac")
 																.val()) {
