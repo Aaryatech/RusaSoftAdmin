@@ -440,7 +440,7 @@
 												to_date.setFullYear(todate[2],
 														todate[1] - 1,
 														todate[0]);
-												if (from_date > to_date) {
+												if (from_date >to_date) {
 													/// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
 													$("#error_fromToDate")
 															.show();
@@ -497,7 +497,6 @@
 			document.getElementById("index").value = i + 1;
 		}
 	</script>
-	/showActivityOrganized
 
 	<script type="text/javascript">
 		/* $(function() {

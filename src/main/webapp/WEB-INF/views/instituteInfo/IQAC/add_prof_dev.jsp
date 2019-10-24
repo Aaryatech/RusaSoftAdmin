@@ -346,7 +346,7 @@
 						         		        var todate = to_date.split('-');
 						         		        to_date = new Date();
 						         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
-						         		        if (from_date > to_date ) 
+						         		       if (to_date<from_date) //   if (from_date > to_date ) 
 						         		        {
 						         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
 													$("#error_fromToDate").show();

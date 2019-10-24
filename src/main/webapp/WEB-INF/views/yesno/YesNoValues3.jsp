@@ -175,7 +175,7 @@ table, th, td {
 																									class="form-control"
 																									id="respnsevalue${yesNoMasterList.yesnoId}"
 																									name="respnsevalue${yesNoMasterList.yesnoId}"
-																									placeholder="Enter value"
+																									placeholder="Title of Facility"
 																									value="${instituteYesNoList.instYesnoResponse}">
 																							</c:when>
 																							<c:when
@@ -242,7 +242,7 @@ table, th, td {
 																								class="form-control"
 																								id="respnsevalue${yesNoMasterList.yesnoId}"
 																								name="respnsevalue${yesNoMasterList.yesnoId}"
-																								placeholder="Enter value">
+																								placeholder="Title of Facility">
 																						</c:when>
 																						<c:when
 																							test="${yesNoMasterList.yesnoResponseType==1}">
@@ -459,8 +459,8 @@ table, th, td {
 				var acButton = '<input type="radio" name="dynamicyesno'+srindex+'" value="1" onchange="othervissibledive('+srindex+',1)" checked>'+
 				'YES <input type="radio" id="dynamicyesno'+srindex+'" name="dynamicyesno'+srindex+'" value="0" onchange="othervissibledive('+srindex+',0)"> NO'
 				
-				var div = '<div id="otherresps'+srindex+'"> <div class="col-sm-3">Enter Value</div> <div class="col-sm-5"> <input type="text" maxlength="50"'+
-				' class="form-control" id="dynamicyesnovalue'+srindex+'" name="dynamicyesnovalue'+srindex+'" placeholder="Enter value" > </div> </div>'
+				var div = '<div id="otherresps'+srindex+'"> <div class="col-sm-3">Enter Title of Facility</div> <div class="col-sm-5"> <input type="text" maxlength="50"'+
+				' class="form-control" id="dynamicyesnovalue'+srindex+'" name="dynamicyesnovalue'+srindex+'" placeholder="Title of Facility" > </div> </div>'
 				
 				
 				var tr = $('<tr class="act_tr" ></tr>'); 

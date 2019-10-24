@@ -384,14 +384,23 @@ public class RegController {
 
 				String msg = " OTP for Change Principal is " + otp + ". Do not share OTP with anyone. RUSA Maharashtra";
 
-				map.add("senderID", "RUSAMH");
-				map.add("user", "spdrusamah@gmail.com:Cyber@mva");
-				map.add("receipientno", otpNo.trim());
-				map.add("dcs", "0");
-				map.add("msgtxt", msg);
-				map.add("state", "4");
-				String res = restTemplate.postForObject("http://api.mVaayoo.com/mvaayooapi/MessageCompose", map,
-						String.class);
+				/*
+				 * map.add("senderID", "RUSAMH"); map.add("user",
+				 * "spdrusamah@gmail.com:Cyber@mva"); map.add("receipientno", otpNo.trim());
+				 * map.add("dcs", "0"); map.add("msgtxt", msg); map.add("state", "4"); String
+				 * res = restTemplate.postForObject(
+				 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
+				 */
+				
+				map.add("username", "rusamah-wb");
+				map.add("password", "Rus@@123456");
+				map.add("senderid", "MHRUSA");
+				map.add("mobileno", otpNo.trim());
+				map.add("content", msg); 
+				map.add("smsservicetype", "singlemsg"); 
+				String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
+				map, String.class);
+				
 				
 			
 			  System.err.println("in showOtpPageForChangePrinci  time start  is "+start);
@@ -450,7 +459,7 @@ public class RegController {
 				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editInst, Staff.class);
 				model = new ModelAndView("login");
 
-				model.addObject("msg", "Pricipal Changed Sucessfully");
+				model.addObject("msg", "Pricipal Change Requested Sucessfully");
 				}
 				else {
 					model = new ModelAndView("ask_otp_chPrinci");
@@ -503,14 +512,22 @@ public class RegController {
 
 			String msg = " OTP for  Change Principal is " + otp + " (test message)";
 
-			map.add("senderID", "RUSAMH");
-			map.add("user", "spdrusamah@gmail.com:Cyber@mva");
-			map.add("receipientno", otpNo.trim());
-			map.add("dcs", "0");
-			map.add("msgtxt", msg);
-			map.add("state", "4");
-			String res = restTemplate.postForObject("http://api.mVaayoo.com/mvaayooapi/MessageCompose", map,
-					String.class);
+			/*
+			 * map.add("senderID", "RUSAMH"); map.add("user",
+			 * "spdrusamah@gmail.com:Cyber@mva"); map.add("receipientno", otpNo.trim());
+			 * map.add("dcs", "0"); map.add("msgtxt", msg); map.add("state", "4"); String
+			 * res = restTemplate.postForObject(
+			 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
+			 */
+			
+			map.add("username", "rusamah-wb");
+			map.add("password", "Rus@@123456");
+			map.add("senderid", "MHRUSA");
+			map.add("mobileno", otpNo.trim());
+			map.add("content", msg); 
+			map.add("smsservicetype", "singlemsg"); 
+			String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
+			map, String.class);
 
 			bean.setName(otp);
 			otpKeyValue.put(otpKey, otp);
@@ -546,17 +563,26 @@ public class RegController {
 				String otpKey = getIntegerKey(4);
 				System.err.println("OTP is " + otp);
 
-				String msg = " OTP for  Insitute Registration is " + otp
+				String msg = " OTP for  Institute Registration is " + otp
 						+ ". Do not share OTP with anyone. RUSA Maharashtra";
 
-				map.add("senderID", "RUSAMH");
-				map.add("user", "spdrusamah@gmail.com:Cyber@mva");
-				map.add("receipientno", otpNo.trim());
-				map.add("dcs", "0");
-				map.add("msgtxt", msg);
-				map.add("state", "4");
-				String res = restTemplate.postForObject("http://api.mVaayoo.com/mvaayooapi/MessageCompose", map,
-						String.class);
+				/*
+				 * map.add("senderID", "RUSAMH"); map.add("user",
+				 * "spdrusamah@gmail.com:Cyber@mva"); map.add("receipientno", otpNo.trim());
+				 * map.add("dcs", "0"); map.add("msgtxt", msg); map.add("state", "4"); String
+				 * res = restTemplate.postForObject(
+				 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
+				 */
+				
+				
+				map.add("username", "rusamah-wb");
+				map.add("password", "Rus@@123456");
+				map.add("senderid", "MHRUSA");
+				map.add("mobileno", otpNo.trim());
+				map.add("content", msg); 
+				map.add("smsservicetype", "singlemsg"); 
+				String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
+				map, String.class);
 
 				otpKeyValue.put(otpKey, otp);
 
@@ -669,17 +695,25 @@ public class RegController {
 			String otp = getNumericOtp(6);
 			String otpKey = otpk;
 
-			String msg = " OTP for  Insitute Registration is " + otp + " (test message)";
+			String msg = " OTP for  Institute Registration is " + otp + " (test message)";
 
-			map.add("senderID", "RUSAMH");
-			map.add("user", "spdrusamah@gmail.com:Cyber@mva");
-			map.add("receipientno", otpNo.trim());
-			map.add("dcs", "0");
-			map.add("msgtxt", msg);
-			map.add("state", "4");
-			String res = restTemplate.postForObject("http://api.mVaayoo.com/mvaayooapi/MessageCompose", map,
-					String.class);
+			/*
+			 * map.add("senderID", "RUSAMH"); map.add("user",
+			 * "spdrusamah@gmail.com:Cyber@mva"); map.add("receipientno", otpNo.trim());
+			 * map.add("dcs", "0"); map.add("msgtxt", msg); map.add("state", "4"); String
+			 * res = restTemplate.postForObject(
+			 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
+			 */
 
+			map.add("username", "rusamah-wb");
+			map.add("password", "Rus@@123456");
+			map.add("senderid", "MHRUSA");
+			map.add("mobileno", otpNo.trim());
+			map.add("content", msg); 
+			map.add("smsservicetype", "singlemsg"); 
+			String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
+			map, String.class);
+			
 			bean.setName(otp);
 			otpKeyValue.put(otpKey, otp);
 
