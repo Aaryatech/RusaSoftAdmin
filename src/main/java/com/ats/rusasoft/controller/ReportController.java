@@ -7945,7 +7945,11 @@ public class ReportController {
 					EGovernenceOperation prog = progList.get(i);
 
 					if (prog.getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
-						temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+						try {
+							temp_tot = Double.parseDouble(prog.getInstYesnoResponse());
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 					if (prog.getYesnoTitle().equalsIgnoreCase("Power requirements of LED bulbs")) {
 						try {
@@ -9372,8 +9376,11 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
-					fin = fin + Double.parseDouble(tempprcnt);
-
+					try {
+						fin = fin + Double.parseDouble(tempprcnt);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 				double x1 = fin / 5;
 				document.open();

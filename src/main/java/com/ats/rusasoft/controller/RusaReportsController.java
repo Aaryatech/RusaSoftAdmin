@@ -216,8 +216,11 @@ public class RusaReportsController {
 				for (int i = 0; i < ratioList.size(); i++) {
 					// System.err.println("I " + i);
 					StudTeachrRatio ratio = ratioList.get(i);
-					studTchrRato = ratio.getNoCurrentAdmitedStnt() / ratio.getNoOfFulltimeFaculty();
-
+					try {
+							studTchrRato = ratio.getNoCurrentAdmitedStnt() / ratio.getNoOfFulltimeFaculty();
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
 					index++;
 					PdfPCell cell;
 					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
