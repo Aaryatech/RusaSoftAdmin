@@ -94,7 +94,7 @@
 
 						<div class="content-body">
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-lg-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteInfo"
 										method="post" name="form_sample_2" novalidate="novalidate"
@@ -115,13 +115,17 @@
 
 
 
-											<div class="col-xs-12">												
+											<div class="col-lg-12">												
 												
 												 <div class="row">												
 													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="page_name">No.
+														of Full Time Faculty :<span class="text-danger"></span>
 														</label>
-														<div class="col-sm-2">
+													
+														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="male_full_time_fac" maxlength="8"															
 																 onchange="calFulTimeFac()"
@@ -129,14 +133,14 @@
 																name="male_full_time_fac"
 																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_male_full"
-																style="display: none;">No. of male full
-																time faculty.</span>
+															<!-- <span class="error_form text-danger" id="error_male_full"
+																style="display: none; width: 20%;">No. of male full
+																time faculty.</span> -->
 														</div>
 												
 														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="female_full_time_fac" maxlength="8"															
 																 onchange="calFulTimeFac()"
@@ -144,59 +148,61 @@
 																name="female_full_time_fac"
 																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_female_full"
+															<!-- <span class="error_form text-danger" id="error_female_full"
 																style="display: none;">No. of female full
-																time faculty.</span>
+																time faculty.</span> -->
 														</div>
 														
 														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="other_full_time_fac" maxlength="8"															
-																 onchange="calFulTimeFac()"
+																onchange="calFulTimeFac()"
 																value="${editInstInfo.otherFulltimeFac}"
 																name="other_full_time_fac"
-																placeholder="0" style="width: 86%;">
+																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_other_full"
+															<!-- <span class="error_form text-danger" id="error_other_full"
 																style="display: none;">No. of other full
-																time faculty.</span>
-																
+																time faculty.</span>		 -->														
 															
 														</div>
-														<span class="error_form text-danger" id="cal_male_full"
-																style="display: none; padding-left: 35%;">Invalid division of full time faculty.</span>
-													</div>																										
-												</div> 
-												
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_name">No.
-														of Full Time Faculty <span class="text-danger">*</span>
+														
+													
+													<label class="control-label col-md-1" for="page_name">Total <span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-8">
+													<div class="col-sm-1">
 														<input type="text" class="form-control" min="0"
 															id="no_fullTime_Faculty" maxlength="8"															
-															onchange="trim(this)"
+															onchange="trim(this)" readonly="readonly"
 															value="${editInstInfo.noOfFulltimeFaculty}"
 															name="no_fullTime_Faculty"
-															placeholder="No. of Full Time Faculty in Institute">
+															placeholder="0">
 
-														<span class="error_form text-danger" id="error_full"
+													<!-- 	<span class="error_form text-danger" id="error_full"
 															style="display: none;">Please enter No. of full
-															time faculty and value must be greater than 0.</span>
+															time faculty and value must be greater than 0.</span> -->
 													</div>
-												</div>
-												
+													<span class="error_form text-danger col-sm-2" id="error_full"
+															style="display: none;">Please enter value or 0.</span>
+													
+													
+													</div>																										
+												</div> 
 												
 												
 												<!-- ************************************************************** -->
 												
 												<div class="row">
 													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger"></span>
+													<label class="control-label col-sm-2" for="page_name">No.
+														of Clock Hour Basis Faculty :<span class="text-danger"></span>
 														</label>
-														<div class="col-sm-2">
+													
+														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger"></span>
+														</label>
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="male_clock_hr" maxlength="8"															
 																 onchange="calFacClockHr()"
@@ -210,7 +216,7 @@
 												
 														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger"></span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="female_clock_hr" maxlength="8"															
 																 onchange="calFacClockHr()"
@@ -224,44 +230,47 @@
 														
 														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger"></span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="other_full_clockhr" maxlength="8"															
 																 onchange="calFacClockHr()"
 																value="${editInstInfo.otherClockhrFac}"
 																name="other_full_clockhr"
-																placeholder="0" style="width: 86%;">
+																placeholder="0">
 	
 															<span class="error_form text-danger" id="error_other_clockhr"
 																style="display: none;">Other clock hour basis faculty.</span>
 														</div>
-														<span class="error_form text-danger" id="cal_clockhr_fac"
-																style="display: none; padding-left: 35%;">Invalid division clock hour basis faculty.</span>
+														
+													
+													
+													<div class="form-group">
+													<label class="control-label col-md-1" for="page_name">Total<span class="text-danger"></span>
+													</label>
+														<div class="col-sm-1">
+															<input type="text" class="form-control" min="0"
+																id="no_clockhr_Faculty" maxlength="8"															
+																onchange="trim(this)" readonly="readonly"
+																value="${editInstInfo.exInt2}"
+																name="no_clockhr_Faculty"
+																placeholder="0">
+
+														</div>
 													</div>
 												</div>
-												
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_name">No.
-														of Clock Hour Basis Faculty <span class="text-danger"></span>
-													</label>
-													<div class="col-sm-8">
-														<input type="text" class="form-control" min="0"
-															id="no_clockhr_Faculty" maxlength="8"															
-															onchange="trim(this)"
-															value="${editInstInfo.exInt2}"
-															name="no_clockhr_Faculty"
-															placeholder="No. of of Clock Hour Basis Faculty">
-
-													</div>
 												</div>
 												
 												<!-- ************************************************************* -->
 												
 												<div class="row">												
 													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="page_name">No.
+													of Sanctioned Post : <span class="text-danger"></span>
 														</label>
-														<div class="col-sm-2">
+													
+														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="male_sanct_post" maxlength="8"															
 																onchange="calSanctnPost()"
@@ -269,13 +278,13 @@
 																name="male_sanct_post"
 																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_male_sanct_post"
-																style="display: none;">Male sanction post.</span>
+															<!-- <span class="error_form text-danger" id="error_male_sanct_post"
+																style="display: none;">Male sanction post.</span> -->
 														</div>
 												
 														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="female_sanct_post" maxlength="8"															
 																onchange="calSanctnPost()"
@@ -283,67 +292,72 @@
 																name="female_sanct_post"
 																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_female_sanct_post"
-																style="display: none;">Female sanction post.</span>
+															<!-- <span class="error_form text-danger" id="error_female_sanct_post"
+																style="display: none;">Female sanction post.</span> -->
 														</div>
 														
 														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control oth" min="0"
 																id="other_sanct_post" maxlength="8"															
 																onchange="calSanctnPost()" 
 																value="${editInstInfo.otherSancPost}"
 																name="other_sanct_post"
-																placeholder="0" style="width: 86%;" >
+																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_other_sanct_post"
-																style="display: none;">Other sanction post.</span>
+															<!-- <span class="error_form text-danger" id="error_other_sanct_post"
+																style="display: none;">Other sanction post.</span> -->
 														</div>
-														<span class="error_form text-danger" id="cal_fac_sanctn_post"
-																style="display: none; padding-left: 35%;">Invalid division of sanction post.</span>
-													</div>													
+																											
+													<div class="form-group">
+													<label class="control-label col-md-1" for="page_name">Total <span class="text-danger">*</span>
+													</label>
+														<div class="col-sm-1">
+															<input type="text" class="form-control" min="0"
+																id="no_sanction_post" readonly="readonly"															
+																onchange="trim(this)" maxlength="8"
+																value="${editInstInfo.exInt1}"
+																name="no_sanction_post"
+																placeholder="0">
+	
+															<!-- <span class="error_form text-danger" id="error_sanc"
+																style="display: none;">Please enter No. of post
+																sanction and value must be greater than 0.</span> -->
+														</div>
+														
+														<span class="error_form text-danger col-sm-2" id="error_sanc"
+																style="display: none;">Please enter value or 0.</span>
+													</div>
+												</div>													
 												</div>  
 												
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_name">No.
-													of Sanctioned Post <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-8">
-														<input type="text" class="form-control" min="0"
-															id="no_sanction_post"															
-															onchange="trim(this)" maxlength="8"
-															value="${editInstInfo.exInt1}"
-															name="no_sanction_post"
-															placeholder="No. of Sanctioned Post">
-
-														<span class="error_form text-danger" id="error_sanc"
-															style="display: none;">Please enter No. of post
-															sanction and value must be greater than 0.</span>
-													</div>
-												</div>
 												
 												<!-- ************************************************************* -->
 
 												<div class="row">												
 													<div class="form-group">
-														<label class="control-label col-sm-4" for="page_name">Male<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="page_name">No.
+														of Full Time Non-Teaching Faculty :<span class="text-danger"></span>
 														</label>
-														<div class="col-sm-2">
+													
+														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="male_non_teach_fac" maxlength="8"															
-																onchange="trim(this)"
+																onchange="calNonTeachFac()"
 																value="${editInstInfo.maleNonTechFac}"
 																name="male_non_teach_fac"
 																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_male_non_teach_fac"
-																style="display: none;">Male non-teaching faculty.</span>
+															<!-- <span class="error_form text-danger" id="error_male_non_teach_fac"
+																style="display: none;">Male non-teaching faculty.</span> -->
 														</div>
 												
 														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="female_non_teach_fac" maxlength="8"															
 																onchange="calNonTeachFac()"
@@ -351,50 +365,52 @@
 																name="female_non_teach_fac"
 																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_female_non_teach_fac"
-																style="display: none;">Female non-teaching faculty.</span>
+															<!-- <span class="error_form text-danger" id="error_female_non_teach_fac"
+																style="display: none;">Female non-teaching faculty.</span> -->
 														</div>
 														
 														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
 														</label>
-														<div class="col-sm-2">
+														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
 																id="other_non_teach_fac" maxlength="8"															
 																onchange="calNonTeachFac()"
 																value="${editInstInfo.otherNonTechFac}"
 																name="other_non_teach_fac"
-																placeholder="0" style="width: 86%;">
+																placeholder="0">
 	
-															<span class="error_form text-danger" id="error_other_non_teach_fac"
-																style="display: none;">Other non-teaching faculty.</span>
+															<!-- <span class="error_form text-danger" id="error_other_non_teach_fac"
+																style="display: none;">Other non-teaching faculty.</span> -->
 														</div>
-															<span class="error_form text-danger" id="error_cal_non_teach_fac"
-																	style="display: none; padding-left: 35%;">Invalid division of non-teaching faculty.</span>
-													</div>													
-												</div> 
-												
-												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_order">No.
-														of Full Time Non-Teaching Faculty <span class="text-danger">*</span>
+														
+													
+														<div class="form-group">
+													<label class="control-label col-sm-1" for="page_order">Total<span class="text-danger">*</span>
 													</label>
-													<div class="col-sm-8">
+													<div class="col-sm-1">
 														<input type="text" class="form-control" min="0"
-															id="no_nonTeaching_faculty"
+															id="no_nonTeaching_faculty" readonly="readonly"
 															value="${editInstInfo.noNonteachingIncludingOfficeStaff}"
 															name="no_nonTeaching_faculty" maxlength="8"															
 															onchange="calNonTeachFac()"
-															placeholder=" No. of Full Time Non-Teaching Faculty">
-														<span class="error_form text-danger" id="error_non"
+															placeholder=" 0">
+														<!-- <span class="error_form text-danger" id="error_non"
 															style="display: none;">Please enter No. of full
-															time non-teaching faculty and value must be greater than 0.</span>
+															time non-teaching faculty and value must be greater than 0.</span> -->
 													</div>
+													
+													<span class="error_form text-danger col-sm-2" id="error_non"
+																style="display: none;">Please enter value or 0.</span>
 												</div>
-
+													
+													</div>													
+												</div> 
+												
 
 												<!-- ************************************************************* -->
 												
 												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_order">No.
+													<label class="control-label col-md-2" for="page_order">No.
 														of Support Staff <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
@@ -409,7 +425,7 @@
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-4" for="page_order">No.
+													<label class="control-label col-md-2" for="page_order">No.
 														of Current Admitted Students <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-8">
@@ -426,7 +442,7 @@
 												</div>
 
 											<div class="form-group">
-											<label class="control-label col-sm-4" for="is_add_same">Autonomous Status<span
+											<label class="control-label col-md-2" for="is_add_same">Autonomous Status<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-8">
@@ -579,390 +595,8 @@
 			return true;
 		}
 
-		$(document)
-				.ready(
-						function($) {
-							//  alert("hii....");
-							$("#form_sample_2")
-									.submit(
-											function(e) {
-												var isError = false;
-												var errMsg = "";
-
-												if ($("#academic_year").val() == -1) {
-
-													isError = true;
-
-													$("#error_year").show()
-													//return fregister_useralse;
-												} else {
-													$("#error_year").hide()
-												}
-												
-												if ($("#no_sanction_post")
-														.val() <= 0
-														|| !$(
-																"#no_sanction_post")
-																.val()) {
-
-													isError = true;
-													errMsg += '<li>Please enter a valid name.</li>';
-
-													$("#no_sanction_post")
-															.addClass(
-																	"has-error")
-													$("#error_sanc").show()
-													//return false;
-												} else {
-													$("#error_sanc").hide()
-												}
-												
-												
-
-												if ($("#no_fullTime_Faculty")
-														.val() <= 0
-														|| !$(
-																"#no_fullTime_Faculty")
-																.val()) {
-
-													isError = true;
-													errMsg += '<li>Please enter a valid name.</li>';
-
-													$("#no_fullTime_Faculty")
-															.addClass(
-																	"has-error")
-													$("#error_full").show()
-													//return false;
-												} else {
-													$("#error_full").hide()
-												}
-												
-
-												if ($("#no_nonTeaching_faculty")
-														.val() <= 0
-														|| !$(
-																"#no_nonTeaching_faculty")
-																.val()) {
-
-													isError = true;
-													errMsg += '<li>Please enter a valid name.</li>';
-
-													$("#no_nonTeaching_faculty")
-															.addClass(
-																	"has-error")
-													$("#error_non").show()
-													//return false;
-												} else {
-													$("#error_non").hide()
-												}
-
-												if ($("#no_suppStaff").val() <= 0
-														|| !$("#no_suppStaff")
-																.val()) {
-
-													isError = true;
-													errMsg += '<li>Please enter a valid name.</li>';
-
-													$("#no_suppStaff")
-															.addClass(
-																	"has-error")
-													$("#error_supp").show()
-													//return false;
-												} else {
-													$("#error_supp").hide()
-												}
-
-												if ($(
-														"#no_currAdmitted_Student")
-														.val() <= 0
-														|| !$(
-																"#no_currAdmitted_Student")
-																.val()) {
-
-													isError = true;
-													errMsg += '<li>Please enter a valid name.</li>';
-
-													$(
-															"#no_currAdmitted_Student")
-															.addClass(
-																	"has-error")
-													$("#error_curr").show()
-													//return false;
-												} else {
-													$("#error_curr").hide()
-												}
-												
-												/* ************************************************************************ */
-												var ttlFullFac = parseInt($("#no_fullTime_Faculty").val());
-												
-												var maleFull = parseInt($("#male_full_time_fac").val());												
-												var femaleFull = parseInt($("#female_full_time_fac").val());												
-												var otherFull = parseInt($("#other_full_time_fac").val());
-												var ttl = maleFull+femaleFull+otherFull;												
-												 
-											 	if(ttl!=ttlFullFac){
-													isError = true;	
-													$("#cal_male_full").show()
-												}else{
-													$("#cal_male_full").hide()
-												} 
-
-												if ($("#male_full_time_fac")
-														.val() = 0
-														|| !$(
-																"#male_full_time_fac")
-																.val()) {
-
-													isError = true;													
-
-													$("#male_full_time_fac")
-															.addClass(
-																	"has-error")
-													$("#error_male_full").show()
-													//return false;
-												} else {
-													$("#error_male_full").hide()
-												}
-												
-												if ($("#female_full_time_fac")
-														.val() < 0
-														|| !$(
-																"#female_full_time_fac")
-																.val()) {
-
-													isError = true;													
-
-													$("#female_full_time_fac")
-															.addClass(
-																	"has-error")
-													$("#error_female_full").show()
-													//return false;
-												} else {
-													$("#error_female_full").hide()
-												}
-												
-												if (!$("#other_full_time_fac").val()) {
-
-													isError = true;													
-
-													$("#other_full_time_fac")
-															.addClass(
-																	"has-error")
-													$("#error_other_full").show()
-													//return false;
-												} else {
-													$("#error_other_full").hide()
-												}
-												
-												/* ************************************************************************ */
-												/* var fac =  parseInt($("#no_clockhr_Faculty").val()); 
-												
-												var male = parseInt($("#male_clock_hr").val());
-												var female = parseInt($("#female_clock_hr").val());
-												var other = parseInt($("#other_full_clockhr").val());
-												
-												var ttl = male+female+other;
-												if(fac!=ttl){
-													$("#cal_clockhr_fac").show()
-												}else{
-													$("#cal_clockhr_fac").hide()
-												}
-												
-												if ($("#male_clock_hr")
-														.val() < 0
-														|| !$(
-																"#male_clock_hr")
-																.val()) {
-
-													isError = true;													
-
-													$("#male_clock_hr")
-															.addClass(
-																	"has-error")
-													$("#error_male_clockhr").show()
-													//return false;
-												} else {
-													$("#error_male_clockhr").hide()
-												}
-												
-												
-												if ($("#female_clock_hr")
-														.val() < 0
-														|| !$(
-																"#female_clock_hr")
-																.val()) {
-
-													isError = true;													
-
-													$("#female_clock_hr")
-															.addClass(
-																	"has-error")
-													$("#error_female_clockhr").show()
-													//return false;
-												} else {
-													$("#error_female_clockhr").hide()
-												}
-												
-												
-												if ($("#other_full_clockhr")
-														.val() <= 0
-														|| !$(
-																"#other_full_clockhr")
-																.val()) {
-
-													isError = true;													
-
-													$("#other_full_clockhr")
-															.addClass(
-																	"has-error")
-													$("#error_other_clockhr").show()
-													//return false;
-												} else {
-													$("#error_other_clockhr").hide()
-												} */
-												
-												/* ************************************************************************ */
-												var fac =  parseInt($("#no_sanction_post").val()); 
-												
-												var male = parseInt($("#male_sanct_post").val());
-												var female = parseInt($("#female_sanct_post").val());
-												var other = parseInt($("#other_sanct_post").val());
-												
-												var ttl = male+female+other;
-												if(fac!=ttl){
-													isError = true;	
-													$("#cal_fac_sanctn_post").show()
-												}else{
-													$("#cal_fac_sanctn_post").hide()
-												}
-												
-												
-												if ($("#male_sanct_post")
-														.val() < 0
-														|| !$(
-																"#male_sanct_post")
-																.val()) {
-
-													isError = true;													
-
-													$("#male_sanct_post")
-															.addClass(
-																	"has-error")
-													$("#error_male_sanct_post").show()
-													//return false;
-												} else {
-													$("#error_male_sanct_post").hide()
-												}
-												
-												if ($("#female_sanct_post")
-														.val() < 0
-														|| !$(
-																"#female_sanct_post")
-																.val()) {
-
-													isError = true;													
-
-													$("#female_sanct_post")
-															.addClass(
-																	"has-error")
-													$("#error_female_sanct_post").show()
-													//return false;
-												} else {
-													$("#error_female_sanct_post").hide()
-												}
-												
-												if (!$("#other_sanct_post").val()) {
-
-													isError = true;													
-
-													$("#other_sanct_post")
-															.addClass(
-																	"has-error")
-													$("#error_other_sanct_post").show()
-													//return false;
-												} else {
-													$("#error_other_sanct_post").hide()
-												}
-												
-												/* ************************************************************************ */
-												var fac =  parseInt($("#no_nonTeaching_faculty").val()); 
-												
-												var male = parseInt($("#male_non_teach_fac").val());
-												var female = parseInt($("#female_non_teach_fac").val());
-												var other = parseInt($("#other_non_teach_fac").val());
-												
-												var ttl = male+female+other;
-												if(fac!=ttl){
-													isError = true;	
-													$("#error_cal_non_teach_fac").show()
-												}else{
-													$("#error_cal_non_teach_fac").hide()
-												}
-												
-												if ($("#male_non_teach_fac")
-														.val() < 0
-														|| !$(
-																"#male_non_teach_fac")
-																.val()) {
-
-													isError = true;													
-
-													$("#male_non_teach_fac")
-															.addClass(
-																	"has-error")
-													$("#error_male_non_teach_fac").show()
-													//return false;
-												} else {
-													$("#error_male_non_teach_fac").hide()
-												}
-												
-												if ($("#female_non_teach_fac")
-														.val() < 0
-														|| !$(
-																"#female_non_teach_fac")
-																.val()) {
-
-													isError = true;													
-
-													$("#female_non_teach_fac")
-															.addClass(
-																	"has-error")
-													$("#error_female_non_teach_fac").show()
-													//return false;
-												} else {
-													$("#error_female_non_teach_fac").hide()
-												}
-												
-												if (!$("#other_non_teach_fac").val()) {
-
-													isError = true;													
-
-													$("#other_non_teach_fac")
-															.addClass(
-																	"has-error")
-													$("#error_other_non_teach_fac").show()
-													//return false;
-												} else {
-													$("#error_other_non_teach_fac").hide()
-												}
-												
-												/* ************************************************************************ */
-												
-												if (!isError) {
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														return true;
-														document
-																.getElementById("sub1").disabled = true;
-														document
-																.getElementById("sub2").disabled = true;
-													}
-												}
-
-												return false;
-											});
-						});
-		//
+		
+		
 	</script>
 
 	<script>
@@ -1041,14 +675,328 @@
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
 		}
+		
+		$(document)
+		.ready(
+				function($) {
+					//  alert("hii....");
+					$("#form_sample_2")
+							.submit(
+									function(e) {
+										var isError = false;
+
+										if ($("#academic_year").val() == -1) {
+
+											isError = true;
+
+											$("#error_year").show()
+											
+										} else {
+											$("#error_year").hide()
+										}
+										
+										/* if (!$(
+										"#no_sanction_post")
+										.val() || $("#no_sanction_post")
+												.val() <= 0) {
+
+											isError = true;													
+
+											$("#no_sanction_post")
+													.addClass(
+															"has-error")
+											$("#error_sanc").show()
+											
+										} else {
+											$("#error_sanc").hide()
+										} */
+										
+										/* if ($("#no_fullTime_Faculty")
+												.val() <= 0
+												|| !$(
+														"#no_fullTime_Faculty")
+														.val()) {
+
+											isError = true;													
+
+											$("#no_fullTime_Faculty")
+													.addClass(
+															"has-error")
+											$("#error_full").show()
+											
+										} else {
+											$("#error_full").hide()
+										} */
+										
+
+										/* if ($("#no_nonTeaching_faculty")
+												.val() <= 0
+												|| !$(
+														"#no_nonTeaching_faculty")
+														.val()) {
+
+											isError = true;													
+
+											$("#no_nonTeaching_faculty")
+													.addClass(
+															"has-error")
+											$("#error_non").show()
+											//return false;
+										} else {
+											$("#error_non").hide()
+										}
+ */
+										if ($("#no_suppStaff").val() <= 0
+												|| !$("#no_suppStaff")
+														.val()) {
+
+											isError = true;													
+
+											$("#no_suppStaff")
+													.addClass(
+															"has-error")
+											$("#error_supp").show()
+											//return false;
+										} else {
+											$("#error_supp").hide()
+										}
+
+										 if ($(
+												"#no_currAdmitted_Student")
+												.val() <= 0
+												|| !$(
+														"#no_currAdmitted_Student")
+														.val()) {
+
+											isError = true;
+										
+
+											$(
+													"#no_currAdmitted_Student")
+													.addClass(
+															"has-error")
+											$("#error_curr").show()
+										} else {
+											$("#error_curr").hide()
+										} 
+								 /************************************************************/									 
+										 
+
+											if (!$("#male_full_time_fac").val()) {
+
+												isError = true;													
+
+												$("#no_fullTime_Faculty")
+														.addClass(
+																"has-error")
+												$("#error_full").show()
+											}
+											
+											
+											else if (!$("#female_full_time_fac").val()) {
+
+												isError = true;													
+
+												$("#no_fullTime_Faculty")
+														.addClass(
+																"has-error")
+												$("#error_full").show()
+												//return false;
+											} 
+											
+											else if (!$("#other_full_time_fac").val()) {
+
+												isError = true;													
+
+												$("#no_fullTime_Faculty")
+														.addClass(
+																"has-error")
+												$("#error_full").show()
+												//return false;
+											} else {
+												$("#error_full").hide()
+											} 
+											
+											/* ************************************************************************ */
+											/* var fac =  parseInt($("#no_clockhr_Faculty").val()); 
+											
+											var male = parseInt($("#male_clock_hr").val());
+											var female = parseInt($("#female_clock_hr").val());
+											var other = parseInt($("#other_full_clockhr").val());
+											
+											var ttl = male+female+other;
+											if(fac!=ttl){
+												$("#cal_clockhr_fac").show()
+											}else{
+												$("#cal_clockhr_fac").hide()
+											}
+											
+											if ($("#male_clock_hr")
+													.val() < 0
+													|| !$(
+															"#male_clock_hr")
+															.val()) {
+
+												isError = true;													
+
+												$("#male_clock_hr")
+														.addClass(
+																"has-error")
+												$("#error_male_clockhr").show()
+												//return false;
+											} else {
+												$("#error_male_clockhr").hide()
+											}
+											
+											
+											if ($("#female_clock_hr")
+													.val() < 0
+													|| !$(
+															"#female_clock_hr")
+															.val()) {
+
+												isError = true;													
+
+												$("#female_clock_hr")
+														.addClass(
+																"has-error")
+												$("#error_female_clockhr").show()
+												//return false;
+											} else {
+												$("#error_female_clockhr").hide()
+											}
+											
+											
+											if ($("#other_full_clockhr")
+													.val() <= 0
+													|| !$(
+															"#other_full_clockhr")
+															.val()) {
+
+												isError = true;													
+
+												$("#other_full_clockhr")
+														.addClass(
+																"has-error")
+												$("#error_other_clockhr").show()
+												//return false;
+											} else {
+												$("#error_other_clockhr").hide()
+											} */
+											
+											/* ************************************************************************ */
+										 	
+											
+											if ($("#male_sanct_post")
+													.val() < 0
+													|| !$(
+															"#male_sanct_post")
+															.val()) {
+
+												isError = true;													
+
+												$("#male_sanct_post")
+														.addClass(
+																"has-error")
+												$("#error_sanc").show()
+												//return false;
+											}
+											
+											else if ($("#female_sanct_post")
+													.val() < 0
+													|| !$(
+															"#female_sanct_post")
+															.val()) {
+
+												isError = true;													
+
+												$("#female_sanct_post")
+														.addClass(
+																"has-error")
+												$("#error_sanc").show()
+												//return false;
+											} 
+											
+											else if (!$("#other_sanct_post").val()) {
+
+												isError = true;													
+
+												$("#other_sanct_post")
+														.addClass(
+																"has-error")
+												$("#error_sanc").show()
+												//return false;
+											} else {
+												$("#error_sanc").hide()
+											} 
+											
+											/* ************************************************************************ */
+											
+											
+											if ($("#male_non_teach_fac")
+													.val() < 0
+													|| !$(
+															"#male_non_teach_fac")
+															.val()) {
+
+												isError = true;													
+
+												$("#male_non_teach_fac")
+														.addClass(
+																"has-error")
+												$("#error_non").show()
+												
+											} 
+											else if ($("#female_non_teach_fac")
+													.val() < 0
+													|| !$(
+															"#female_non_teach_fac")
+															.val()) {
+
+												isError = true;													
+
+												$("#female_non_teach_fac")
+														.addClass(
+																"has-error")
+												$("#error_non").show()
+												//return false;
+											} 
+											
+											else if (!$("#other_non_teach_fac").val()) {
+
+												isError = true;													
+
+												$("#other_non_teach_fac")
+														.addClass(
+																"has-error")
+												$("#error_non").show()
+												//return false;
+											} else {
+												$("#error_non").hide()
+											} 
+											
+											/* ************************************************************************ */
+											
+
+										if (!isError) {
+											var x = confirm("Do you really want to submit the form?");
+											if (x == true) {
+												return true;
+												document
+														.getElementById("sub1").disabled = true;
+												document
+														.getElementById("sub2").disabled = true;
+											}
+										}
+
+										return false;
+									});
+				});
 	</script>
 
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-
-
-
 
 </body>
 </html>
