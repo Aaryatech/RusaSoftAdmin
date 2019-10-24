@@ -43,7 +43,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" ">
+<body onload="setVal()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -562,8 +562,7 @@
 		var male = parseInt($("#male_sanct_post").val());
 		var female = parseInt($("#female_sanct_post").val());
 		var other = parseInt($("#other_sanct_post").val());
-		
-		var ttl = male+female+other;
+		var ttl =  male+female+other;
 		
 		$("#no_sanction_post").val(ttl);
 	}
@@ -578,6 +577,32 @@
 		
 		$("#no_nonTeaching_faculty").val(ttl);
 		
+	}
+	
+	function setVal(){
+		var id = $("#inst_info_id").val();
+	//	alert(id);
+		if(id==''){
+			$("#no_nonTeaching_faculty").val(0);
+			$("#other_non_teach_fac").val(0);
+			$("#male_non_teach_fac").val(0);
+			$("#female_non_teach_fac").val(0);
+			
+			$("#no_fullTime_Faculty").val(0);
+			$("#male_full_time_fac").val(0);
+			$("#female_full_time_fac").val(0);
+			$("#other_full_time_fac").val(0);
+			
+			$("#no_clockhr_Faculty").val(0);
+			$("#male_clock_hr").val(0);
+			$("#female_clock_hr").val(0);
+			$("#other_full_clockhr").val(0);
+			
+			$("#no_sanction_post").val(0);
+			$("#male_sanct_post").val(0);
+			$("#female_sanct_post").val(0);
+			$("#other_sanct_post").val(0);
+		}
 	}
 	</script>
 	
