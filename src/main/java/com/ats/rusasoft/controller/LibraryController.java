@@ -2079,9 +2079,9 @@ public class LibraryController {
 					lib.setFemaleSancPost(Integer.parseInt(request.getParameter("female_sanct_post")));
 					lib.setOtherSancPost(Integer.parseInt(request.getParameter("other_sanct_post")));
 
-					lib.setMaleNonTechFac(Integer.parseInt(request.getParameter("male_non_teach_fac")));
-					lib.setFemaleNonTechFac(Integer.parseInt(request.getParameter("female_non_teach_fac")));
-					lib.setOtherNonTechFac(Integer.parseInt(request.getParameter("other_non_teach_fac")));
+					lib.setMaleNonTeachFac(Integer.parseInt(request.getParameter("male_non_teach_fac")));
+					lib.setFemaleNonTeachFac(Integer.parseInt(request.getParameter("female_non_teach_fac")));
+					lib.setOtherNonTeachFac(Integer.parseInt(request.getParameter("other_non_teach_fac")));
 
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib,
 							InstituteInfo.class);
@@ -2124,9 +2124,9 @@ public class LibraryController {
 					lib1.setFemaleSancPost(Integer.parseInt(request.getParameter("female_sanct_post")));
 					lib1.setOtherSancPost(Integer.parseInt(request.getParameter("other_sanct_post")));
 
-					lib1.setMaleNonTechFac(Integer.parseInt(request.getParameter("male_non_teach_fac")));
-					lib1.setFemaleNonTechFac(Integer.parseInt(request.getParameter("female_non_teach_fac")));
-					lib1.setOtherNonTechFac(Integer.parseInt(request.getParameter("other_non_teach_fac")));
+					lib1.setMaleNonTeachFac(Integer.parseInt(request.getParameter("male_non_teach_fac")));
+					lib1.setFemaleNonTeachFac(Integer.parseInt(request.getParameter("female_non_teach_fac")));
+					lib1.setOtherNonTeachFac(Integer.parseInt(request.getParameter("other_non_teach_fac")));
 
 
 					InstituteInfo editInstInfo = rest.postForObject(Constants.url + "saveInstituteInfo", lib1,

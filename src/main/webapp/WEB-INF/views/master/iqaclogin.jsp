@@ -347,7 +347,7 @@
 															<input type="text" class="form-control" min="0"
 																id="male_non_teach_fac" maxlength="8"															
 																onchange="calNonTeachFac()"
-																value="${editInstInfo.maleNonTechFac}"
+																value="${editInstInfo.maleNonTeachFac}"
 																name="male_non_teach_fac"
 																placeholder="0">
 	
@@ -361,7 +361,7 @@
 															<input type="text" class="form-control" min="0"
 																id="female_non_teach_fac" maxlength="8"															
 																onchange="calNonTeachFac()"
-																value="${editInstInfo.femaleNonTechFac}"
+																value="${editInstInfo.femaleNonTeachFac}"
 																name="female_non_teach_fac"
 																placeholder="0">
 	
@@ -375,7 +375,7 @@
 															<input type="text" class="form-control" min="0"
 																id="other_non_teach_fac" maxlength="8"															
 																onchange="calNonTeachFac()"
-																value="${editInstInfo.otherNonTechFac}"
+																value="${editInstInfo.otherNonTeachFac}"
 																name="other_non_teach_fac"
 																placeholder="0">
 	

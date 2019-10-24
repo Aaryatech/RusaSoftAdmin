@@ -54,9 +54,9 @@ public class InstituteInfo {
 	private int maleSancPost;
 	private int femaleSancPost;
 	private int otherSancPost;
-	private int maleNonTechFac;
-	private int femaleNonTechFac;
-	private int otherNonTechFac;
+	private int maleNonTeachFac;
+	private int femaleNonTeachFac;
+	private int otherNonTeachFac;
 	
 
 	public int getAutonStatus() {
@@ -284,28 +284,28 @@ public class InstituteInfo {
 		this.otherSancPost = otherSancPost;
 	}
 
-	public int getMaleNonTechFac() {
-		return maleNonTechFac;
+	public int getMaleNonTeachFac() {
+		return maleNonTeachFac;
 	}
 
-	public void setMaleNonTechFac(int maleNonTechFac) {
-		this.maleNonTechFac = maleNonTechFac;
+	public void setMaleNonTeachFac(int maleNonTeachFac) {
+		this.maleNonTeachFac = maleNonTeachFac;
 	}
 
-	public int getFemaleNonTechFac() {
-		return femaleNonTechFac;
+	public int getFemaleNonTeachFac() {
+		return femaleNonTeachFac;
 	}
 
-	public void setFemaleNonTechFac(int femaleNonTechFac) {
-		this.femaleNonTechFac = femaleNonTechFac;
+	public void setFemaleNonTeachFac(int femaleNonTeachFac) {
+		this.femaleNonTeachFac = femaleNonTeachFac;
 	}
 
-	public int getOtherNonTechFac() {
-		return otherNonTechFac;
+	public int getOtherNonTeachFac() {
+		return otherNonTeachFac;
 	}
 
-	public void setOtherNonTechFac(int otherNonTechFac) {
-		this.otherNonTechFac = otherNonTechFac;
+	public void setOtherNonTeachFac(int otherNonTeachFac) {
+		this.otherNonTeachFac = otherNonTeachFac;
 	}
 
 	@Override
@@ -320,9 +320,9 @@ public class InstituteInfo {
 				+ ", femaleFulltimeFac=" + femaleFulltimeFac + ", otherFulltimeFac=" + otherFulltimeFac
 				+ ", maleClockhrFac=" + maleClockhrFac + ", femaleClockhrFac=" + femaleClockhrFac + ", otherClockhrFac="
 				+ otherClockhrFac + ", maleSancPost=" + maleSancPost + ", femaleSancPost=" + femaleSancPost
-				+ ", otherSancPost=" + otherSancPost + ", maleNonTechFac=" + maleNonTechFac + ", femaleNonTechFac="
-				+ femaleNonTechFac + ", otherNonTechFac=" + otherNonTechFac + "]";
+				+ ", otherSancPost=" + otherSancPost + ", maleNonTeachFac=" + maleNonTeachFac + ", femaleNonTeachFac="
+				+ femaleNonTeachFac + ", otherNonTeachFac=" + otherNonTeachFac + "]";
 	}
 
-
+	
 }
