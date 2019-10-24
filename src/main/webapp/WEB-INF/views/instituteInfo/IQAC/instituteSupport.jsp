@@ -138,7 +138,7 @@
 														<th>Name of Scheme</th>
 														<th>No. of Students Benefited</th>
 														<th>Scheme/Support offered By</th>
-														<th>Amount(in Lakh)</th>
+														<th>Amount (in Lakh)</th>
 														<th>Action</th>
 													</tr>
 

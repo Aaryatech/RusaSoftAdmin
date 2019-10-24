@@ -106,6 +106,11 @@ public class InstituteController {
 				InstituteSupport[] instSuprtArr = rest.postForObject(Constants.url + "/getSchemesByIds", map,
 						InstituteSupport[].class);
 				List<InstituteSupport> instSuprtlist = new ArrayList<>(Arrays.asList(instSuprtArr));
+				
+				for(int i=0;i<instSuprtlist.size();i++) {
+					instSuprtlist.get(i).setExVar1(LakhConversion.convertToLakh(instSuprtlist.get(i).getExVar1()));
+					
+				}
 
 				model.addObject("schemeList", instSuprtlist);
 
@@ -223,7 +228,7 @@ public class InstituteController {
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
 			int yId = (int) session.getAttribute("acYearId");
-			int amt = 0;
+			String amt =null;
 						
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
@@ -241,18 +246,17 @@ public class InstituteController {
 			instSpprt.setIsActive(1);
 			instSpprt.setMakerUserId(userId);
 			instSpprt.setMakerDatetime(curDateTime);
-			String amt1=null;
+			 
 			try {
-				amt =  Integer.parseInt(request.getParameter("amount"));
-				amt1 =LakhConversion.convertToLakh(request.getParameter("amount"));
-				System.out.println("conv amt **"+amt1);
-			}catch(Exception e){
+				amt =   request.getParameter("amount");
+				 
+ 			}catch(Exception e){
 				System.err.println(e.getMessage());
-				amt = 0;
+				amt = "0";
 			}
 			instSpprt.setExInt1(0);
 			instSpprt.setExInt2(0);
-			instSpprt.setExVar1(amt1);
+			instSpprt.setExVar1(amt);
 			instSpprt.setExVar2("NA");
 
 			InstituteSupport saveInstSupprt = rest.postForObject(Constants.url + "/addInstSupprt", instSpprt,
@@ -298,8 +302,8 @@ public class InstituteController {
 
 				InstituteSupport suprtSchm = rest.postForObject(Constants.url + "/getSuprtSchemeBySchmId", map,
 						InstituteSupport.class);
-				float a =Float.parseFloat(suprtSchm.getExVar1())*100000;
-				suprtSchm.setExVar1(String.valueOf(a));
+				 
+			 
 				
 				model.addObject("instSpprt", suprtSchm);
 
@@ -1684,7 +1688,15 @@ public class InstituteController {
 				GovtScholarships[] govtSchrArr = rest.postForObject(Constants.url + "/getAllGovtScholrSch", map,
 						GovtScholarships[].class);
 				List<GovtScholarships> govtSchrList = new ArrayList<>(Arrays.asList(govtSchrArr));
+				for(int i=0;i<govtSchrList.size();i++) {
+					govtSchrList.get(i).setExVar1(LakhConversion.convertToLakh(govtSchrList.get(i).getExVar1()));
+					
+				}
+				
 				model.addObject("govtSchrList", govtSchrList);
+				
+				
+				
 				model.addObject("budRupees", Names.Rupees);
 
 				model.addObject("title", "Government Scholarships");
@@ -1782,10 +1794,10 @@ public class InstituteController {
 			
 			String amt = request.getParameter("amount");
 			if(amt=="" || amt==null) {
-				govt.setExInt1(0);
+				govt.setExVar1("0");
 			}else {
 				
-				govt.setExVar1(LakhConversion.convertToLakh(amt));
+				govt.setExVar1(amt);
 
 			}			
 			govt.setExVar2("NA");

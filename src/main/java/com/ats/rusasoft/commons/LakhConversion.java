@@ -8,7 +8,7 @@ public class LakhConversion {
 
 		double convertedAmt = 0;
 		String a = null;
-		DecimalFormat decimalFormat = new DecimalFormat("0.0000");
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		try {
 
 			convertedAmt = Float.parseFloat(amt) / 100000;

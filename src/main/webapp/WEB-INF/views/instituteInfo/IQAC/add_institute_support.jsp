@@ -158,11 +158,11 @@
 											<div class="form-group">
 
 												<label class="control-label col-sm-3"
-													for="inst_schme_offeredby">Amount(Rs.)<span class="text-danger"></span>
+													for="inst_schme_offeredby">Amount (Rs.)<span class="text-danger"></span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
-														id="amount" name="amount" placeholder="Amount in ${budRupees}" 
+														id="amount" name="amount" placeholder="Amount in Rs." 
 														onchange="trim(this)" onFocus="clearDefault(this)"
 														value="${instSpprt.exVar1}">
 												</div>
