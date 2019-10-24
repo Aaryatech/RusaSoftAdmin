@@ -120,10 +120,10 @@
 												 <div class="row">												
 													<div class="form-group">
 													<label class="control-label col-sm-2" for="page_name">No.
-														of Full Time Faculty :<span class="text-danger"></span>
+														of Full Time Faculty :<span class="text-danger">*</span>
 														</label>
 													
-														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Male
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -138,7 +138,7 @@
 																time faculty.</span> -->
 														</div>
 												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Female
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -153,7 +153,7 @@
 																time faculty.</span> -->
 														</div>
 														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Other
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -170,7 +170,7 @@
 														</div>
 														
 													
-													<label class="control-label col-md-1" for="page_name">Total <span class="text-danger">*</span>
+													<label class="control-label col-md-1" for="page_name">Total
 													</label>
 													<div class="col-sm-1">
 														<input type="text" class="form-control" min="0"
@@ -197,10 +197,10 @@
 												<div class="row">
 													<div class="form-group">
 													<label class="control-label col-sm-2" for="page_name">No.
-														of Clock Hour Basis Faculty :<span class="text-danger"></span>
+														of Clock Hour Basis Faculty :
 														</label>
 													
-														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger"></span>
+														<label class="control-label col-sm-1" for="page_name">Male
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -214,7 +214,7 @@
 																style="display: none;">Male clock hour basis faculty.</span> -->
 														</div>
 												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger"></span>
+														<label class="control-label col-sm-1" for="page_name">Female
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -228,7 +228,7 @@
 																style="display: none;">Female clock hour basis faculty.</span>
 														</div>
 														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger"></span>
+														<label class="control-label col-sm-1" for="page_name">Other
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -245,7 +245,7 @@
 													
 													
 													<div class="form-group">
-													<label class="control-label col-md-1" for="page_name">Total<span class="text-danger"></span>
+													<label class="control-label col-md-1" for="page_name">Total
 													</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -265,10 +265,10 @@
 												<div class="row">												
 													<div class="form-group">
 													<label class="control-label col-sm-2" for="page_name">No.
-													of Sanctioned Post : <span class="text-danger"></span>
+													of Sanctioned Post : <span class="text-danger">*</span>
 														</label>
 													
-														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Male
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -282,7 +282,7 @@
 																style="display: none;">Male sanction post.</span> -->
 														</div>
 												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Female
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -296,7 +296,7 @@
 																style="display: none;">Female sanction post.</span> -->
 														</div>
 														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Other
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control oth" min="0"
@@ -311,7 +311,7 @@
 														</div>
 																											
 													<div class="form-group">
-													<label class="control-label col-md-1" for="page_name">Total <span class="text-danger">*</span>
+													<label class="control-label col-md-1" for="page_name">Total
 													</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -338,10 +338,10 @@
 												<div class="row">												
 													<div class="form-group">
 													<label class="control-label col-sm-2" for="page_name">No.
-														of Full Time Non-Teaching Faculty :<span class="text-danger"></span>
+														of Full Time Non-Teaching Faculty :<span class="text-danger">*</span>
 														</label>
 													
-														<label class="control-label col-sm-1" for="page_name">Male<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Male
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -355,7 +355,7 @@
 																style="display: none;">Male non-teaching faculty.</span> -->
 														</div>
 												
-														<label class="control-label col-sm-1" for="page_name">Female<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Female
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -369,7 +369,7 @@
 																style="display: none;">Female non-teaching faculty.</span> -->
 														</div>
 														
-														<label class="control-label col-sm-1" for="page_name">Other<span class="text-danger">*</span>
+														<label class="control-label col-sm-1" for="page_name">Other
 														</label>
 														<div class="col-sm-1">
 															<input type="text" class="form-control" min="0"
@@ -385,7 +385,7 @@
 														
 													
 														<div class="form-group">
-													<label class="control-label col-sm-1" for="page_order">Total<span class="text-danger">*</span>
+													<label class="control-label col-sm-1" for="page_order">Total
 													</label>
 													<div class="col-sm-1">
 														<input type="text" class="form-control" min="0"
