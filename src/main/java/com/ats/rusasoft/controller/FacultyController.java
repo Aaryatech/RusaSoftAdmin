@@ -502,16 +502,16 @@ public class FacultyController {
 
 				if (add.isError() == false) {
 					//System.out.println(" add   Accessable ");
-					model.addObject("addAccess", 0);
+					model.addObject("addAccess", 1);
 
 				}
 				if (edit.isError() == false) {
 					//System.out.println(" edit   Accessable ");
-					model.addObject("editAccess", 0);
+					model.addObject("editAccess", 1);
 				}
 				if (delete.isError() == false) {
 					//System.out.println(" delete   Accessable ");
-					model.addObject("deleteAccess", 0);
+					model.addObject("deleteAccess", 1);
 
 				}
 			}
@@ -634,16 +634,16 @@ public class FacultyController {
 				Info delete = AccessControll.checkAccess("showSubDetailsList", "showSubDetailsList", "0", "0", "0", "1",
 						newModuleList);
 
-				if (add.isError() == false) {
+				if (add.isError() == true) {
 					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
-				if (edit.isError() == false) {
+				if (edit.isError() == true) {
 					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
-				if (delete.isError() == false) {
+				if (delete.isError() == true) {
 					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 

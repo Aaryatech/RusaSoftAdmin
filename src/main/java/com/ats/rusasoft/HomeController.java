@@ -162,8 +162,6 @@ public class HomeController {
 		return model;
 
 	}
-	
-	
 
 	@RequestMapping(value = "/showWelcomePage", method = RequestMethod.GET)
 	public ModelAndView showWelcomePage(HttpServletRequest request, HttpServletResponse response) {
@@ -172,7 +170,7 @@ public class HomeController {
 		try {
 
 			model = new ModelAndView("welcome");
-			
+
 			// DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
 			// DateFormat.LONG, locale);
 
@@ -210,7 +208,6 @@ public class HomeController {
 
 			/* String password="harsha"; */
 
-		
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("password", password);
 			map.add("userId", userId);
@@ -219,7 +216,6 @@ public class HomeController {
 			// restTemplate.postForObject(Constants.url+"changePass",map,UserLogin.class);
 
 			Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map, Info.class);
-		
 
 			session.invalidate();
 
@@ -244,11 +240,11 @@ public class HomeController {
 
 			model = new ModelAndView("welcome");
 			model.addObject("title", "DASHBOARD");
-			
+
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int instituteId = (int) session.getAttribute("instituteId");
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("instId", instituteId);
 			map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
@@ -261,7 +257,8 @@ public class HomeController {
 			map.add("deptId", userObj.getStaff().getDeptId());
 			map.add("facultyId", userObj.getUserId());
 
-			DashBoardCounts dashBoardCounts = restTemplate.postForObject(Constants.url + "/getPrincipalDashCounts", map, DashBoardCounts.class);
+			DashBoardCounts dashBoardCounts = restTemplate.postForObject(Constants.url + "/getPrincipalDashCounts", map,
+					DashBoardCounts.class);
 			model.addObject("dashBoardCounts", dashBoardCounts);
 		} catch (Exception e) {
 
@@ -274,12 +271,12 @@ public class HomeController {
 		return model;
 
 	}
-	
+
 	@RequestMapping("/loginProcess")
 	public String helloWorld(HttpServletRequest request, HttpServletResponse res, Model model) throws IOException {
 		Instant start = Instant.now();
-		
-		String mav =  "login" ;
+
+		String mav = "login";
 		HttpSession session = request.getSession();
 
 		String name = request.getParameter("username");
@@ -292,24 +289,21 @@ public class HomeController {
 		}
 		int loginAcYearId = 0;
 		if (acYearId == 0) {
-			//System.err.println(" IN if First time acYearId ==0");
+			// System.err.println(" IN if First time acYearId ==0");
 			// loginAcYearId=Integer.parseInt(request.getParameter("ac_year_login"));
 		} else {
-			//System.err.println("In Else its reload call  ");
+			// System.err.println("In Else its reload call ");
 			loginAcYearId = acYearId;
 		}
-
-		
 
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 
 		try {
-		
 
 			if (name.equalsIgnoreCase("") || password.equalsIgnoreCase("") || name == null || password == null) {
 
-				mav = "login" ;
+				mav = "login";
 				model.addAttribute("msg", "Enter  Login Credentials");
 
 			} else {
@@ -319,15 +313,15 @@ public class HomeController {
 				map.add("isBlock", 1);
 
 				LoginResponse userObj = restTemplate.postForObject(Constants.url + "login", map, LoginResponse.class);
-			
+
 				String loginResponseMessage = "";
 
 				if (userObj != null) {
 
 					int a = userObj.getStaff().getIsEnrolled();
-					
+
 					if (a == 1) {
-						mav =  "redirect:/dashboard" ;
+						mav = "redirect:/dashboard";
 
 						map = new LinkedMultiValueMap<String, Object>();
 						map.add("type", 1);
@@ -339,17 +333,14 @@ public class HomeController {
 						session.setAttribute("acaYearList", acaYearList);
 
 					} else {
-						mav =  "changePassword" ;
+						mav = "changePassword";
 					}
-
-					
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
 
 					String curDateTime = dateFormat.format(cal.getTime());
 
-					
 					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
 					String curDate = dateFormatStr.format(new Date());
@@ -397,8 +388,8 @@ public class HomeController {
 					map.add("typeId", typeId);
 
 					/*
-					 * map =new LinkedMultiValueMap<String, Object>(); map.add("userId", userId);
-					 * // System.out.println("Before web service"); try {
+					 * map =new LinkedMultiValueMap<String, Object>(); map.add("userId", userId); //
+					 * System.out.println("Before web service"); try {
 					 * ParameterizedTypeReference<List<ModuleJson>> typeRef = new
 					 * ParameterizedTypeReference<List<ModuleJson>>() { };
 					 * ResponseEntity<List<ModuleJson>> responseEntity =
@@ -414,23 +405,24 @@ public class HomeController {
 					AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId",
 							map, AcademicYear[].class);
 					List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-					//System.err.println("acaYearList " + acaYearList.toString());
+					// System.err.println("acaYearList " + acaYearList.toString());
 
 					// session.setAttribute("acaYearList", acaYearList);
 					// ac yadded in sesion
 
 					map = new LinkedMultiValueMap<String, Object>();
 					map.add("isCurrent", 1);
-					//System.err.println("Map  " + map.toString());
+					// System.err.println("Map " + map.toString());
 					AcademicYear acYear1 = new AcademicYear();
 
 					acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
 							AcademicYear.class);
-					//System.err.println("acYear current  " + acYear1.toString());
+					// System.err.println("acYear current " + acYear1.toString());
 
 					session.setAttribute("acYearId", acYear1.getYearId());
 					session.setAttribute("acYearValue", acYear1.getAcademicYear());
-					//System.err.println("Session date year Id " + session.getAttribute("acYearId"));
+					// System.err.println("Session date year Id " +
+					// session.getAttribute("acYearId"));
 
 					// getAcademicYearByYearId
 					/*
@@ -464,7 +456,7 @@ public class HomeController {
 
 						map = new LinkedMultiValueMap<String, Object>();
 						map.add("roleId", roleIdList.get(i));
-				
+
 						try {
 							ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
 							};
@@ -492,12 +484,12 @@ public class HomeController {
 							int findModuleId = 0;
 
 							for (int k = 0; k < newModuleList.size(); k++) {
-								//System.err.println("mod Id " + newModuleList.get(k).getModuleId());
+								// System.err.println("mod Id " + newModuleList.get(k).getModuleId());
 
 								if (newModuleList.get(k).getModuleId() == list.get(j).getModuleId()) {
 									if (newModuleList.get(k).getModuleId() == 4) {
-										//System.err.println("mod Id 4 sub modules "
-												//+ newModuleList.get(k).getSubModuleJsonList().toString());
+										// System.err.println("mod Id 4 sub modules "
+										// + newModuleList.get(k).getSubModuleJsonList().toString());
 									}
 
 									for (int m = 0; m < list.get(j).getSubModuleJsonList().size(); m++) {
@@ -584,14 +576,11 @@ public class HomeController {
 						}
 					});
 
-					
-
 					session.setAttribute("newModuleList", newModuleList);
-					
-					State[] stateArray = restTemplate.getForObject(Constants.url + "getStateList",
-							 State[].class);
+
+					State[] stateArray = restTemplate.getForObject(Constants.url + "getStateList", State[].class);
 					List<State> stateList = new ArrayList<>(Arrays.asList(stateArray));
-					
+
 					session.setAttribute("stateList", stateList);
 				}
 
@@ -599,7 +588,7 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			mav = "login" ;
+			mav = "login";
 			model.addAttribute("msg", "Enter Valid  Login Credentials");
 			/*
 			 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
@@ -614,11 +603,11 @@ public class HomeController {
 			 */
 		}
 
-		
-		//your code
-		//Instant end = Instant.now();
-		//Duration timeElapsed = Duration.between(start, end);
-		// // System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
+		// your code
+		// Instant end = Instant.now();
+		// Duration timeElapsed = Duration.between(start, end);
+		// // System.out.println("Time taken: "+ timeElapsed.toMillis() +"
+		// milliseconds");
 		return mav;
 
 	}
@@ -628,8 +617,8 @@ public class HomeController {
 		int subModId = Integer.parseInt(request.getParameter("subModId"));
 		int modId = Integer.parseInt(request.getParameter("modId"));
 		/*
-		 * // System.out.println("subModId " + subModId); // System.out.println("modId " +
-		 * modId);
+		 * // System.out.println("subModId " + subModId); // System.out.println("modId "
+		 * + modId);
 		 */
 		HttpSession session = request.getSession();
 		session.setAttribute("sessionModuleId", modId);
@@ -694,7 +683,8 @@ public class HomeController {
 	}
 
 	RestTemplate rest = new RestTemplate();
-	Instant start=null;
+	Instant start = null;
+
 	@RequestMapping(value = "/forgotPas", method = RequestMethod.POST)
 	public ModelAndView checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
 		String c = null;
@@ -726,9 +716,9 @@ public class HomeController {
 				// c= "redirect:/showVerifyOTP";
 				model.addObject("username", inputValue);
 				model.addObject("expFlag", 0);
-				
-				 start = Instant.now();
-				
+
+				start = Instant.now();
+
 				;
 			}
 
@@ -750,7 +740,6 @@ public class HomeController {
 
 		try {
 			// model = new ModelAndView("forgotPassword");
-
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -774,14 +763,14 @@ public class HomeController {
 				// c= "redirect:/showVerifyOTP";
 				model.addObject("username", info.getMsg());
 				model.addObject("msg", "OTP Resent Please check");
-				start=Instant.now();
+				start = Instant.now();
 			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in checkUniqueField  " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		return model;
 
 	}
@@ -822,49 +811,49 @@ public class HomeController {
 			map.add("otp", otp);
 			Instant end = Instant.now();
 			Duration timeElapsed = Duration.between(start, end);
-			System.out.println("Time taken: OTPVerification "+ timeElapsed.toMinutes() +" minutes");
-			if(timeElapsed.toMinutes()<=2) {
-			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
-			/*
-			 * System.err.println("hashRes Response  " + hashRes.toString());
-			 * 
-			 * Staff staff=hashRes.get(1); System.err.println("hashRes Response  " +
-			 * hashRes.get(1));
-			 */
-
-			if (staff == null) {
-				model = new ModelAndView("verifyOTP");
-				model.addObject("expFlag", 0);
-				// c="redirect:/showforgotPassForm";
-				model.addObject("msg", "Incorrect OTP");
-
-			} else {
-
-				// Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map,
-				// Info.class);
-				System.err.println("Staff" + staff);
-				// model = new ModelAndView("login");
-				model = new ModelAndView("changePassword");
-				model.addObject("userId", staff.getFacultyId());
-
-				// c= "redirect:/showVerifyOTP";
+			System.out.println("Time taken: OTPVerification " + timeElapsed.toMinutes() + " minutes");
+			if (timeElapsed.toMinutes() <= 2) {
+				Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
 				/*
-				 * BG
+				 * System.err.println("hashRes Response  " + hashRes.toString());
 				 * 
-				 * map =new LinkedMultiValueMap<String, Object>(); map.add("type", 1);
-				 * model.addObject("msg","Password Sent on Your Phone Number"); AcademicYear[]
-				 * quolArray = restTemplate.postForObject(Constants.url +
-				 * "getAcademicYearListByTypeId", map, AcademicYear[].class); List<AcademicYear>
-				 * acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-				 * model.addObject("acaYearList", acaYearList);
+				 * Staff staff=hashRes.get(1); System.err.println("hashRes Response  " +
+				 * hashRes.get(1));
 				 */
-			}
-			}else {
+
+				if (staff == null) {
+					model = new ModelAndView("verifyOTP");
+					model.addObject("expFlag", 0);
+					// c="redirect:/showforgotPassForm";
+					model.addObject("msg", "Incorrect OTP");
+
+				} else {
+
+					// Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map,
+					// Info.class);
+					System.err.println("Staff" + staff);
+					// model = new ModelAndView("login");
+					model = new ModelAndView("changePassword");
+					model.addObject("userId", staff.getFacultyId());
+
+					// c= "redirect:/showVerifyOTP";
+					/*
+					 * BG
+					 * 
+					 * map =new LinkedMultiValueMap<String, Object>(); map.add("type", 1);
+					 * model.addObject("msg","Password Sent on Your Phone Number"); AcademicYear[]
+					 * quolArray = restTemplate.postForObject(Constants.url +
+					 * "getAcademicYearListByTypeId", map, AcademicYear[].class); List<AcademicYear>
+					 * acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+					 * model.addObject("acaYearList", acaYearList);
+					 */
+				}
+			} else {
 				model = new ModelAndView("verifyOTP");
 				// c="redirect:/showforgotPassForm";
 				model.addObject("expFlag", 1);
 				model.addObject("msg", "Time out! Regenerate OTP");
-				
+
 			}
 
 		} catch (Exception e) {
@@ -931,14 +920,14 @@ public class HomeController {
 
 	}
 
-	
-	
 	@RequestMapping(value = "/getOTPByNo", method = RequestMethod.POST)
 	public ModelAndView getOTPByNo(HttpServletRequest request, HttpServletResponse response) {
 		String c = null;
-		System.err.println("Hiii  checkValue  ");
+		System.err.println("Hiii  checkValue /getOTPByNo ");
 		Info info = new Info();
 		ModelAndView model = null;
+		HttpSession session = request.getSession();
+		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 		try {
 			// model = new ModelAndView("forgotPassword");
@@ -946,10 +935,12 @@ public class HomeController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			String contact = request.getParameter("Oldcontact");
-			System.err.println("Info inputValue  " + contact);
+			// System.err.println("Info inputValue " + contact);
 
 			map.add("contact", contact);
 
+			System.err.println("userId " + userObj.getUserId());	
+			map.add("facultyId", userObj.getUserId());
 			info = rest.postForObject(Constants.url + "changeContctNo", map, Info.class);
 			System.err.println("Info Response  " + info.toString());
 
@@ -974,8 +965,6 @@ public class HomeController {
 		return model;
 
 	}
-	
-	
 
 	@RequestMapping(value = "/OTPVerificationByContact", method = RequestMethod.POST)
 	public ModelAndView OTPVerificationByContact(HttpServletRequest request, HttpServletResponse response) {
@@ -1140,14 +1129,8 @@ public class HomeController {
 		return model;
 
 	}
-	
-	
-	
-	
-	
-	
-	//****************************otp for change email****************************
-	
+
+	// ****************************otp for change email****************************
 
 	@RequestMapping(value = "/changeEmailIdForm/{id}", method = RequestMethod.GET)
 	public ModelAndView changeEmailIdForm(@PathVariable("id") int id, HttpServletRequest request,
@@ -1176,8 +1159,7 @@ public class HomeController {
 		return model;
 
 	}
-	
-	 
+
 	@RequestMapping(value = "/getOTPByEmailId", method = RequestMethod.POST)
 	public ModelAndView getOTPByEmailId(HttpServletRequest request, HttpServletResponse response) {
 		String c = null;
@@ -1205,7 +1187,7 @@ public class HomeController {
 
 			} else {
 				model = new ModelAndView("verifyOTPForEmail");
- 				model.addObject("username", info.getMsg());
+				model.addObject("username", info.getMsg());
 				model.addObject("flag", 1);
 
 			}
@@ -1219,7 +1201,6 @@ public class HomeController {
 
 	}
 
-
 	@RequestMapping(value = "/reGenOtpEmail", method = RequestMethod.POST)
 	public ModelAndView reGenOtpEmail(HttpServletRequest request, HttpServletResponse response) {
 		String c = null;
@@ -1229,7 +1210,6 @@ public class HomeController {
 
 		try {
 			// model = new ModelAndView("forgotPassword");
-
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -1252,19 +1232,17 @@ public class HomeController {
 				// c= "redirect:/showVerifyOTP";
 				model.addObject("username", info.getMsg());
 				model.addObject("msg", "OTP Resent Please check");
-				start=Instant.now();
+				start = Instant.now();
 			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in checkUniqueField  " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		return model;
 
 	}
-	
-	
 
 	@RequestMapping(value = "/OTPVerificationByEmail", method = RequestMethod.POST)
 	public ModelAndView OTPVerificationByEmail(HttpServletRequest request, HttpServletResponse response) {
@@ -1282,21 +1260,18 @@ public class HomeController {
 			map.add("otp", otp);
 
 			Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
-		 
 
 			if (staff == null) {
 				model = new ModelAndView("verifyOTP");
- 				model.addObject("msg", "Incorrect OTP");
+				model.addObject("msg", "Incorrect OTP");
 
 			} else {
 
-				 
 				System.err.println("Staff" + staff);
- 				model = new ModelAndView("changeEmailId");
+				model = new ModelAndView("changeEmailId");
 				model.addObject("userId", staff.getFacultyId());
 				model.addObject("flag", 1);
 
-			 
 			}
 
 		} catch (Exception e) {
@@ -1307,8 +1282,7 @@ public class HomeController {
 		return model;
 
 	}//
-	
-	
+
 	HashMap<Integer, String> hm1 = null;
 
 	@RequestMapping(value = "/updateEmailId", method = RequestMethod.POST)
@@ -1329,7 +1303,6 @@ public class HomeController {
 			hm1.put(id, no);
 			map.add("emailId", no);
 			map.add("id", id);
-			 
 
 			String dtr = rest.postForObject(Constants.url + "sndOTPOnNewEmailId", map, String.class);
 
@@ -1357,8 +1330,7 @@ public class HomeController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/newEmailVerifiedUpdate", method = RequestMethod.POST)
 	public ModelAndView newEmailVerifiedUpdate(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1393,7 +1365,5 @@ public class HomeController {
 		}
 		return model;
 	}
- 
- 
 
 }

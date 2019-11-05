@@ -88,7 +88,8 @@
 								<%-- 	<a href="${pageContext.request.contextPath}/showResearchDetails"><button
 										type="button" class="btn btn-success">Add</button></a>
  --%>
-								<c:if test="${isAdd==1}">
+
+								<c:if test="${addAccess==1}">
 									<a title="Add"
 										href="${pageContext.request.contextPath}/showResearchDetails"><button
 											type="button" class="btn btn-success">

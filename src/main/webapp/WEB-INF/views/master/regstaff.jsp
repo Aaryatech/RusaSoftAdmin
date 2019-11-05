@@ -421,7 +421,7 @@
 												No <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" onchange="checkUnique(this.value,1)"
+												<input type="text"
 													onchange="trim(this)" maxlength="10" class="form-control"
 													id="contact_no"
 													onkeypress='return restrictAlphabets(event)'

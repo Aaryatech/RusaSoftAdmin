@@ -355,7 +355,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													onchange="checkUnique(this.value,1)" onchange="trim(this)"
+													onchange="trim(this)"
 													name="contactNo"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"

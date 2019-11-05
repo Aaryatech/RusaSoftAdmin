@@ -135,7 +135,7 @@
 															name="princ_contact" autocomplete="off"
 															placeholder="Principal Mobile No"
 															onkeypress='return restrictAlphabets(event)'
-															oninput="checkUnique(this.value,1)"> <span
+															> <span
 															class="error_form text-danger" id="princ_contact_field"
 															style="display: none;">Please enter principal
 															mobile no</span>

@@ -388,7 +388,7 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" maxlength="10" class="form-control"
-															id="contact_no" onchange="checkUnique(this.value,1)"
+															id="contact_no"
 															name="contact_no" placeholder="Mobile No"
 															autocomplete="off" value="${dean.contactNo}"
 															onchange="trim(this)"
