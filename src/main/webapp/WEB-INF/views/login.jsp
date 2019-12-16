@@ -80,24 +80,38 @@
 	href="${pageContext.request.contextPath}/resources/assets/css/responsive.css"
 	rel="stylesheet" type="text/css" />
 <!-- CORE CSS TEMPLATE - END -->
+<style type="text/css">
 
+ html {
+    font-size: 100%;
+    background-color: #f3e4e000 /*#eeeeee*/;
+}
+#login{position:absolute; top:10px; background: #FFF; padding: 20px; border-radius: 5px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);}
+</style>
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" login_page">
+<body class="login_page">
 
 	<div class="container-fluid">
 		<div class="login-wrapper row">
 			
-			<div class="logn_logo"></div>
+			<div class="logn_logo1">							
+			</div>
+							
+			
 			<div id="login" class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
-				
-				
-				<h1 class="login_head">
+				<img alt="" src="./resources/assets/images/RUSA-logo-2e.png" width="100%">
+				<h4 class="login_head">
 					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
+					
 					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Institute Login 
-				</h1>
+					
+					
+				</h4>
 
 				<form name="loginform" 
 					action="${pageContext.request.contextPath}/loginProcess"
@@ -169,14 +183,15 @@
 						title="Sign Up">Institute Registration</a>
 				</p>
 				<br /> 
+					<br /> 
 				<p id="nav" >
  					<a class="pull-right login_forgot" href="showChangePrincipalForm"
-						title="Sign Up" style=" text-align: center;" >Change Principal</a>
+						title="Change Principal" style=" text-align: center;" >Change Principal</a>
 				</p>
-				<br /> <label class="pull-left" for="page_name" style=" text-align: center;"><b
-					style="color: red; font-family:'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600; text-transform: capitalize;">Warning :- </b> <b
-					style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 400; color: #333;  text-transform: capitalize;">Unauthorised
-						Access of this System is an Offence</b> </label>
+				<br /> <label class="pull-left" for="page_name" style=" text-align: left;"><b
+					style="color: red; font-family:'Open Sans', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600;">Warning :- </b> <b
+					style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 400; color: #333;text-transform: none;">Unauthorised
+						access of this system is an offence</b> </label>
 
 			</div>
 			
