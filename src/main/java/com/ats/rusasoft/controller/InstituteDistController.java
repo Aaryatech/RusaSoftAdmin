@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -186,10 +187,10 @@ public class InstituteDistController {
 				Disctinctveness dist = new Disctinctveness();
 				dist.setDelStatus(1);
 				dist.setDistApplicableFrom(DateConvertor.convertToYMD(distApplicableFrom));
-				dist.setDistBeneficiary(distBeneficiary);
+				dist.setDistBeneficiary(XssEscapeUtils.jsoupParse(distBeneficiary));
 				dist.setDistId(distId);
 
-				dist.setDistName(distName);
+				dist.setDistName(XssEscapeUtils.jsoupParse(distName));
 				dist.setExInt1(1);
 				dist.setExInt2(1);
 				dist.setExVar1("NA");
@@ -449,7 +450,7 @@ public class InstituteDistController {
 				value.setExInt2(1);
 				value.setActivityFromdt(DateConvertor.convertToYMD(fromDate));
 				value.setActivityTodt(DateConvertor.convertToYMD(toDate));
-				value.setActivityName(activityName);
+				value.setActivityName(XssEscapeUtils.jsoupParse(activityName));
 				value.setActivityPcount(activityPcount);
 
 				HumanValues valueInsertRes = rest.postForObject(Constants.url + "saveHumanValues", value,

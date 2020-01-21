@@ -152,7 +152,6 @@
 												<input type="text" maxlength="9" class="form-control"
 													min="0" id="no_of_participant" autocomplete="off"
 													name="no_of_participant" onchange="trim(this)"
-													onkeypress='return restrictAlphabets(event)'
 													placeholder="Enter No. of Participants" 
 													value="${trainning.trainingPcount}"> <span
 													class="error_form text-danger" id="no_of_participant_field"
@@ -264,6 +263,29 @@
 	$('#no_of_participant').on('input', function() {
 		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
 		});
+	
+	$('#toDate').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+
+	$('#fromDate').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	
+	$('#no_of_participant').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+
+	
 	
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;

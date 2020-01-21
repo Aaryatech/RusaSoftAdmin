@@ -199,7 +199,7 @@
 																<input type="text" 
 																	maxlength="10" class="form-control" id="stud_contact_no"
 																	value="${editStudent.contactNo}" onchange="checkUnique(this.value,1)"
-																	name="stud_contact_no" placeholder="Mobile No" >
+																	name="stud_contact_no" placeholder="Mobile No" onkeypress='return restrictAlphabets(event)'>
 																	
 														 <span class="error_form text-danger" id="error_contact" style="display:none;" >Enter Contact Number</span>
 															</div>
@@ -263,7 +263,21 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<!-- END CONTENT -->
-<script>
+	
+<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	
 
 function trim(el) {
 	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces

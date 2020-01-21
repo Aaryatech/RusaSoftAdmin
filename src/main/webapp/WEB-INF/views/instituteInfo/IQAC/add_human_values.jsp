@@ -179,7 +179,7 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="participant"
-													autocomplete="off" min="0" name="participant"
+													autocomplete="off" min="0" name="participant" max="999999"
 													placeholder="No. of Participants" onchange="trim(this)"
 													value="${editValue.activityPcount}"> <span
 													class="error_form text-danger" id="error_participant"

@@ -1659,10 +1659,10 @@ public class InstituteProfInfoController {
 
 				if (amc_id == 0) {
 
-					redInfo.setAmcCompany(amcCompany);
+					redInfo.setAmcCompany(XssEscapeUtils.jsoupParse(amcCompany));
 					redInfo.setAmcExpenditure(amcExpenditure);
-					redInfo.setAmcRemarks(amcRemarks);
-					redInfo.setAmcTitle(amcTitle);
+					redInfo.setAmcRemarks(XssEscapeUtils.jsoupParse(amcRemarks));
+					redInfo.setAmcTitle(XssEscapeUtils.jsoupParse(amcTitle));
 
 					redInfo.setMakerUserId(maker_id);
 					redInfo.setInstituteId(inst_id);
@@ -1702,10 +1702,10 @@ public class InstituteProfInfoController {
 					InstituteAMC redInfo1 = rest.postForObject(Constants.url + "getInstAMCByAmcId", map,
 							InstituteAMC.class);
 
-					redInfo1.setAmcCompany(amcCompany);
+					redInfo1.setAmcCompany(XssEscapeUtils.jsoupParse(amcCompany));
 					redInfo1.setAmcExpenditure(amcExpenditure);
-					redInfo1.setAmcRemarks(amcRemarks);
-					redInfo1.setAmcTitle(amcTitle);
+					redInfo1.setAmcRemarks(XssEscapeUtils.jsoupParse(amcRemarks));
+					redInfo1.setAmcTitle(XssEscapeUtils.jsoupParse(amcTitle));
 
 					redInfo1.setMakerUserId(maker_id);
 					redInfo1.setInstituteId(inst_id);
@@ -1886,9 +1886,9 @@ public class InstituteProfInfoController {
 
 				if (prac_id == 0) {
 
-					redInfo.setPracticesBeneficiary(practices_beneficiary);
+					redInfo.setPracticesBeneficiary(XssEscapeUtils.jsoupParse(practices_beneficiary));
 					redInfo.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
-					redInfo.setPracticesName(practices_name);
+					redInfo.setPracticesName(XssEscapeUtils.jsoupParse(practices_name));
 
 					redInfo.setMakerUserId(maker_id);
 					redInfo.setInstituteId(inst_id);
@@ -1928,9 +1928,9 @@ public class InstituteProfInfoController {
 					InstituteBestPractices redInfo1 = rest.postForObject(Constants.url + "getInstBestPracByPracId", map,
 							InstituteBestPractices.class);
 
-					redInfo1.setPracticesBeneficiary(practices_beneficiary);
+					redInfo1.setPracticesBeneficiary(XssEscapeUtils.jsoupParse(practices_beneficiary));
 					redInfo1.setPracticesEffectiveFrom(DateConvertor.convertToYMD(practices_effective_from));
-					redInfo1.setPracticesName(practices_name);
+					redInfo1.setPracticesName(XssEscapeUtils.jsoupParse(practices_name));
 
 					redInfo1.setMakerUserId(maker_id);
 					redInfo1.setInstituteId(inst_id);

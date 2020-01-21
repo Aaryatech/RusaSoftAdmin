@@ -140,7 +140,7 @@
 												<input type="text" class="form-control datepicker" id="estb_date"
 													data-end-date="0d" data-format="dd-mm-yyyy"
 													name="estb_date" autocomplete="off" onchange="trim(this)"
-													placeholder="IPR Establishment Date" onkeypress='return restrictAlphabets(event)'
+													placeholder="IPR Establishment Date"
 													value="${intelProp.establishDate}"> <span
 													class="error_form text-danger" id="error_estbDate"
 													style="display: none;">Please enter IPR establishment date.</span>
@@ -159,7 +159,6 @@
 												<input type="text" class="form-control datepicker"
 													placeholder="From Date" autocomplete="off" id="fromDate"
 													name="fromDate" data-format="dd-mm-yyyy"
-													onkeypress='return restrictAlphabets(event)'
 													value="${intelProp.conFromdt}" onchange="trim(this)">
 												<span class="error_form text-danger" id="error_formfield2"
 													style="display: none;">Please enter from date.</span>
@@ -179,7 +178,6 @@
 												<input type="text" class="form-control datepicker"
 													onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate"
-													onkeypress='return restrictAlphabets(event)'
 													value="${intelProp.conTodt}" data-format="dd-mm-yyyy"> <span
 													class="error_form text-danger" id="error_formfield3"
 													style="display: none;">Please enter to date.</span> 
@@ -204,7 +202,6 @@
 												<input type="number" class="form-control" id="participant"
 													maxlength="7" autocomplete="off" name="participant"
 													onchange="trim(this)" min="0" onFocus="clearDefault(this)"
-													onkeypress='return restrictAlphabets(event)'
 													placeholder="No. of Participants"
 													value="${intelProp.conPcount}"> <span
 													class="error_form text-danger" id="error_formfield4"
@@ -258,6 +255,27 @@
 	$('#participant').on('input', function() {
 		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
 		});
+	
+	$('#toDate').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+
+	$('#fromDate').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	
+	$('#estb_date').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
 	
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces

@@ -205,6 +205,13 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script>
+	$('#practices_effective_from').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	
 		$(document).ready(function($) {
 			//  alert("hii....");
 			$("#form_sample_2").submit(function(e) {

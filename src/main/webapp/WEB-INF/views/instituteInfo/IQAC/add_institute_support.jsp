@@ -164,7 +164,7 @@
 													<input type="text" class="form-control" autocomplete="off"
 														id="amount" name="amount" placeholder="Amount in Rs." 
 														onchange="trim(this)" onFocus="clearDefault(this)"
-														value="${instSpprt.exVar1}">
+														value="${instSpprt.exVar1}" maxlength="8">
 												</div>
 											</div>
 											

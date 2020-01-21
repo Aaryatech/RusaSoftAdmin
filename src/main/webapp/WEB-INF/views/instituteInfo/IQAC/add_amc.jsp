@@ -124,7 +124,7 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" 
 													onchange="return trim(this)" id="amc_expenditure"
-													 onFocus="clearDefault(this)"
+													 onFocus="clearDefault(this)" maxlength="8"
 													name="amc_expenditure" placeholder="AMC Expenditure(Rs.)"
 													autocomplete="off" value="${editInst.amcExpenditure}">
 												<span class="error_form text-danger" id="error_exp"
