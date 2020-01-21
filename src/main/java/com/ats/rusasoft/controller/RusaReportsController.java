@@ -1560,7 +1560,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("\n"));
 				document.add(table);
 				document.add(new Paragraph("\n"));
-				document.add(new Paragraph("Teaching Experience : " + teachingExp));
+				document.add(new Paragraph("Teaching Experience : " + df.format(teachingExp)));
 
 				int totalPages = writer.getPageNumber();
 
