@@ -2,7 +2,9 @@ package com.ats.rusasoft;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.net.InetAddress;
+import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -307,9 +309,15 @@ public class HomeController {
 				model.addAttribute("msg", "Enter  Login Credentials");
 
 			} else {
+				
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] messageDigest = md.digest(password.getBytes());
+				BigInteger number = new BigInteger(1, messageDigest);
+				String hashtext = number.toString(16);
+				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("username", name);
-				map.add("password", password);
+				map.add("password", hashtext);
 				map.add("isBlock", 1);
 
 				LoginResponse userObj = restTemplate.postForObject(Constants.url + "login", map, LoginResponse.class);
