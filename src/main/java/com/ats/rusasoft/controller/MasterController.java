@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
@@ -1096,23 +1097,44 @@ public class MasterController {
 				String curDateTime = dateFormat.format(cal.getTime());
 
 				String aisheCode = request.getParameter("aishe_code");
-				institute.setAisheCode(aisheCode);
+				String pricplContact = request.getParameter("princ_contact");
+				String princplEmail = request.getParameter("princ_email");
+				String instAdd = request.getParameter("inst_add"); 
+				String instName = request.getParameter("inst_name");
+				
+				String prsidName = request.getParameter("pres_name");
+				String princplName = request.getParameter("princ_name");
+				String trustyAdd = request.getParameter("trusty_add");
+				String trustyCont = request.getParameter("trusty_con_no");
+				String trustyName = request.getParameter("trusty_name");
+				String presContact = request.getParameter("pres_contact");
+				String presEmail = request.getParameter("pres_email");
+				
+				String village = request.getParameter("village");
+				String taluka = request.getParameter("taluka");
+				String district = request.getParameter("district");
+				String state = request.getParameter("state");
+				String pin = request.getParameter("pin");
+				
+				String regDate = DateConvertor.convertToYMD(request.getParameter("reg_date"));
+				
+				institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
 
 				institute.setCheckerDatetime(curDateTime);
 				institute.setCheckerUserId(0);
 
-				institute.setContactNo(request.getParameter("princ_contact"));
+				institute.setContactNo(XssEscapeUtils.jsoupParse(pricplContact));
 				institute.setDelStatus(1);
-				institute.setEmail(request.getParameter("princ_email"));
+				institute.setEmail(XssEscapeUtils.jsoupParse(princplEmail));
 
 				institute.setExInt1(exInt);
 				institute.setExInt2(exInt);
 				institute.setExVar1(exVar);
 				institute.setExVar2(exVar);
 
-				institute.setInstituteAdd(request.getParameter("inst_add"));
+				institute.setInstituteAdd(XssEscapeUtils.jsoupParse(instAdd));
 				institute.setInstituteId(instId);
-				institute.setInstituteName(request.getParameter("inst_name"));
+				institute.setInstituteName(XssEscapeUtils.jsoupParse(instName));
 
 				institute.setIsActive(1);
 				institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her
@@ -1127,25 +1149,26 @@ public class MasterController {
 											// user who creates
 				// iqac
 				// and hod to student
-
-				institute.setPresidentName(request.getParameter("pres_name"));
-				institute.setPrincipalName(request.getParameter("princ_name"));
+				
+				institute.setPresidentName(XssEscapeUtils.jsoupParse(prsidName));
+				institute.setPrincipalName(XssEscapeUtils.jsoupParse(princplName));
 				if (isReg == 1)
-					institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
-				institute.setTrustAdd(request.getParameter("trusty_add"));
+					
+				institute.setRegDate(XssEscapeUtils.jsoupParse(regDate));
+				institute.setTrustAdd(XssEscapeUtils.jsoupParse(trustyAdd));
 
-				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
-				institute.setTrustName(request.getParameter("trusty_name"));
+				institute.setTrustContactNo(XssEscapeUtils.jsoupParse(trustyCont));
+				institute.setTrustName(XssEscapeUtils.jsoupParse(trustyName));
 				institute.setUserType(0);// for institute its 0
 
-				institute.setPresidenContact(request.getParameter("pres_contact"));
-				institute.setPresidentEmail(request.getParameter("pres_email"));
+				institute.setPresidenContact(XssEscapeUtils.jsoupParse(presContact));
+				institute.setPresidentEmail(XssEscapeUtils.jsoupParse(presEmail));
 
-				institute.setVillage(request.getParameter("village"));
-				institute.setTaluka(request.getParameter("taluka"));
-				institute.setDistrict(request.getParameter("district"));
-				institute.setState(request.getParameter("state"));
-				institute.setPincode(request.getParameter("pin"));
+				institute.setVillage(XssEscapeUtils.jsoupParse(village));
+				institute.setTaluka(XssEscapeUtils.jsoupParse(taluka));
+				institute.setDistrict(XssEscapeUtils.jsoupParse(district));
+				institute.setState(XssEscapeUtils.jsoupParse(state));
+				institute.setPincode(XssEscapeUtils.jsoupParse(pin));
 
 				////System.out.println(institute);
 
@@ -1397,7 +1420,7 @@ public class MasterController {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				if (deptId == 0) {
 					Dept dept = new Dept();
-					String deptName = request.getParameter("dept_name");
+					String deptName = XssEscapeUtils.jsoupParse(request.getParameter("dept_name"));
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Calendar cal = Calendar.getInstance();
 
@@ -1427,7 +1450,7 @@ public class MasterController {
 					map.add("deptId", deptId);
 					// getInstitute
 					Dept dept = rest.postForObject(Constants.url + "getDept", map, Dept.class);
-					String deptName = request.getParameter("dept_name");
+					String deptName = XssEscapeUtils.jsoupParse(request.getParameter("dept_name"));
 					dept.setDeptName(deptName);
 					dept.setMakerUserId(userObj.getUserId());// get from Session
 					Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.Dept;
@@ -231,15 +232,15 @@ public class PrincipalController {
 			if (addEdit == 0) {
 				Staff staff = new Staff();
 
-				staff.setContactNo(contact);
+				staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
 				staff.setCurrentDesignationId(designation);
 				if(deptIds!=null) {
 				staff.setDeptId(deptIds);
 				}else {
 					staff.setDeptId("0");
 				}
-				staff.setEmail(email);
-				staff.setFacultyFirstName(facultyName);
+				staff.setEmail(XssEscapeUtils.jsoupParse(email));
+				staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(facultyName));
 				staff.setFacultyId(facultyId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				staff.setHightestQualificationYear(null);
@@ -253,7 +254,7 @@ public class PrincipalController {
 
 				staff.setIsStudent(0);
 				staff.setIsWorking(1);
-				staff.setJoiningDate(dateOfJoin);
+				staff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
 				staff.setLastUpdatedDatetime(curDateTime);
 				staff.setMakerEnterDatetime(curDateTime);
 
@@ -264,9 +265,9 @@ public class PrincipalController {
 				staff.setType(1);
 
 				staff.setInstituteId(instituteId);
-				staff.setJoiningDate(dateOfJoin);
-				staff.setContactNo(contact);
-				staff.setEmail(email);
+				//staff.setJoiningDate(dateOfJoin);
+				//staff.setContactNo(contact);
+				//staff.setEmail(email);
 				staff.setDelStatus(1);
 				staff.setIsActive(1);
 				staff.setMakerUserId(userId);
@@ -297,18 +298,18 @@ public class PrincipalController {
 				map.add("id", facultyId);
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				editHod.setFacultyFirstName(facultyName);
+				editHod.setFacultyFirstName(XssEscapeUtils.jsoupParse(facultyName));
 				if(deptIds!=null) {
 					editHod.setDeptId(deptIds);
 					}else {
 						editHod.setDeptId("0");
 					}
-				editHod.setEmail(email);
+				editHod.setEmail(XssEscapeUtils.jsoupParse(email));
 				editHod.setFacultyId(facultyId);
-				editHod.setContactNo(contact);
+				editHod.setContactNo(XssEscapeUtils.jsoupParse(contact));
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				editHod.setJoiningDate(dateOfJoin);
+				editHod.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
 				editHod.setIsFaculty(1);
 				editHod.setIsHod(isHod);
 				editHod.setIsIqac(0);

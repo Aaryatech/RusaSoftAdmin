@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -1235,8 +1236,8 @@ public class InstituteProfInfoController {
 					linkMaster.setIsActive(1);
 					linkMaster.setLinknameId(linknameId);
 
-					linkMaster.setLinknameRemarks(linknameRemarks);
-					linkMaster.setLinknameText(linknameText);
+					linkMaster.setLinknameRemarks(XssEscapeUtils.jsoupParse(linknameRemarks));
+					linkMaster.setLinknameText(XssEscapeUtils.jsoupParse(linknameText));
 					linkMaster.setMakerDatetime(dateTime);
 					linkMaster.setMakerUserId(userObj.getUserId());
 
@@ -1256,8 +1257,8 @@ public class InstituteProfInfoController {
 					LinkageMaster linkMaster1 = rest.postForObject(Constants.url + "getInstLinkageMasterByLinkageId",
 							map, LinkageMaster.class);
 
-					linkMaster1.setLinknameRemarks(linknameRemarks);
-					linkMaster1.setLinknameText(linknameText);
+					linkMaster1.setLinknameRemarks(XssEscapeUtils.jsoupParse(linknameRemarks));
+					linkMaster1.setLinknameText(XssEscapeUtils.jsoupParse(linknameText));
 					linkMaster1.setMakerDatetime(dateTime);
 					linkMaster1.setMakerUserId(userObj.getUserId());
 
