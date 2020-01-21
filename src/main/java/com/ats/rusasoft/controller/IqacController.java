@@ -1973,10 +1973,10 @@ public class IqacController {
 			  }
 			 
 
-			System.err.println("isAccOff" + isAccOff);
+			/*System.err.println("isAccOff" + isAccOff);
 			System.err.println("isHod" + isHod);
 			System.err.println("isDean" + isDean);
-			System.err.println("isLib" + isLib);
+			System.err.println("isLib" + isLib);*/
 
 			// write web service to get Role Ids..
 			// dvd
@@ -1998,7 +1998,6 @@ public class IqacController {
 
 			System.out.println("Data:" + request.getParameter("quolif"));  
 			String pacementOfficerName = request.getParameter("pacementOfficerName");
-			//System.out.println("Data:" + pacementOfficerName);
 			designation = Integer.parseInt(request.getParameter("designation"));
 			String dateOfJoin = request.getParameter("join_date");
 			String dateOfRel = request.getParameter("acc_off_relDate");
@@ -2019,11 +2018,11 @@ public class IqacController {
 			if (addEdit == 0) {
 			Staff staff = new Staff();
 
-			staff.setContactNo(contact);
+			staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
 			staff.setCurrentDesignationId(designation);
 			staff.setDeptId(deptIdList);
-			staff.setEmail(email);
-			staff.setFacultyFirstName(pacementOfficerName);
+			staff.setEmail(XssEscapeUtils.jsoupParse(email));
+			staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(pacementOfficerName));
 			staff.setFacultyId(officerId);
 			
 			staff.setIsSame(isState);
@@ -2050,22 +2049,18 @@ public class IqacController {
 			staff.setMakerEnterDatetime(curDateTime);
 
 			staff.setPassword("");
-			staff.setJoiningDate(dateOfJoin);
-			staff.setRealivingDate(dateOfRel);
+			staff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
+			staff.setRealivingDate(XssEscapeUtils.jsoupParse(dateOfRel));
 			staff.setRoleIds(roleIds);
 			staff.setTeachingTo(0);
 			staff.setType(7);
 
 			staff.setInstituteId(instituteId);
-			staff.setContactNo(contact);
-			staff.setEmail(email);
 			staff.setDelStatus(1);
 			staff.setIsActive(1);
 			staff.setMakerUserId(userId);
-			staff.setMakerEnterDatetime(curDateTime);
 			staff.setCheckerUserId(0);
 			staff.setCheckerDatetime(curDateTime);
-			staff.setLastUpdatedDatetime(curDateTime);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			
 			staff.setExtravarchar1("NA");
@@ -2077,11 +2072,11 @@ public class IqacController {
 
 				Staff editStaff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				
-				editStaff.setFacultyFirstName(pacementOfficerName);
+				editStaff.setFacultyFirstName(XssEscapeUtils.jsoupParse(pacementOfficerName));
 				editStaff.setDeptId(deptIdList);
-				editStaff.setEmail(email);
+				editStaff.setEmail(XssEscapeUtils.jsoupParse(email));
 				editStaff.setFacultyId(officerId);
-				editStaff.setContactNo(contact);
+				editStaff.setContactNo(XssEscapeUtils.jsoupParse(contact));
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				editStaff.setIsSame(isState);
@@ -2090,8 +2085,8 @@ public class IqacController {
 				}else {
 					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
-				editStaff.setJoiningDate(dateOfJoin);
-				editStaff.setRealivingDate(dateOfRel);
+				editStaff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
+				editStaff.setRealivingDate(XssEscapeUtils.jsoupParse(dateOfRel));
 				//editStaff.setRoleIds(roleIds);
 				editStaff.setType(7);
 				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
@@ -2411,11 +2406,11 @@ public class IqacController {
 			if (addEdit == 0) {
 			Staff staff = new Staff();
 
-			staff.setContactNo(contact);
+			staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
 			staff.setCurrentDesignationId(designation);
 			staff.setDeptId(deptIdList);
-			staff.setEmail(email);
-			staff.setFacultyFirstName(extActOfficerName);
+			staff.setEmail(XssEscapeUtils.jsoupParse(email));
+			staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(extActOfficerName));
 			staff.setFacultyId(extActOfficerId);
 			staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			
@@ -2439,12 +2434,10 @@ public class IqacController {
 
 			staff.setIsStudent(0);
 			staff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));
-			staff.setJoiningDate(dateOfJoin);
-			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setMakerEnterDatetime(curDateTime);
+			staff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
 
 			staff.setPassword("");
-			staff.setRealivingDate(dateOfRel);
+			staff.setRealivingDate(XssEscapeUtils.jsoupParse(dateOfRel));
 			staff.setRoleIds(roleIds);
 			staff.setTeachingTo(0);
 			staff.setType(8);
@@ -2470,11 +2463,11 @@ public class IqacController {
 
 				Staff editStaff = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
 				
-				editStaff.setFacultyFirstName(extActOfficerName);
+				editStaff.setFacultyFirstName(XssEscapeUtils.jsoupParse(extActOfficerName));
 				editStaff.setDeptId(deptIdList);
-				editStaff.setEmail(email);
+				editStaff.setEmail(XssEscapeUtils.jsoupParse(email));
 				editStaff.setFacultyId(extActOfficerId);
-				editStaff.setContactNo(contact);
+				editStaff.setContactNo(XssEscapeUtils.jsoupParse(contact));
 				editStaff.setCurrentDesignationId(designation);
 				editStaff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			
@@ -2484,8 +2477,8 @@ public class IqacController {
 				}else {
 					editStaff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
-				editStaff.setJoiningDate(dateOfJoin);
-				editStaff.setRealivingDate(dateOfRel);
+				editStaff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
+				editStaff.setRealivingDate(XssEscapeUtils.jsoupParse(dateOfRel));
 				//editStaff.setRoleIds(roleIds);
 				editStaff.setType(8);
 				editStaff.setIsWorking(Integer.parseInt(request.getParameter("is_registration")));

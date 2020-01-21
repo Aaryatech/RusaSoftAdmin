@@ -1618,12 +1618,12 @@ public class LibraryController {
 
 					//System.out.println("inst id is" + inst_id);
 
-					lib.setStudentName(student_name);
+					lib.setStudentName(XssEscapeUtils.jsoupParse(student_name));
 					lib.setAcadamicYear(academic_year);
 					lib.setDeptId(stud_branch);
-					lib.setContactNo(stud_contact_no);
-					lib.setEmail(student_email);
-					lib.setIdNo(id_number);
+					lib.setContactNo(XssEscapeUtils.jsoupParse(stud_contact_no));
+					lib.setEmail(XssEscapeUtils.jsoupParse(student_email));
+					lib.setIdNo(XssEscapeUtils.jsoupParse(id_number));
 					lib.setMakerUserId(maker_id);
 
 					lib.setMakerEnterDatetime(curDateTime);
@@ -1644,12 +1644,12 @@ public class LibraryController {
 					map.add("studId", student_id);
 					Student lib1 = rest.postForObject(Constants.url + "getStudentByStudentId", map, Student.class);
 
-					lib1.setStudentName(student_name);
+					lib1.setStudentName(XssEscapeUtils.jsoupParse(student_name));
 					lib1.setAcadamicYear(academic_year);
 					lib1.setDeptId(stud_branch);
-					lib1.setContactNo(stud_contact_no);
-					lib1.setEmail(student_email);
-					lib1.setIdNo(id_number);
+					lib1.setContactNo(XssEscapeUtils.jsoupParse(stud_contact_no));
+					lib1.setEmail(XssEscapeUtils.jsoupParse(student_email));
+					lib1.setIdNo(XssEscapeUtils.jsoupParse(id_number));
 					lib1.setMakerUserId(maker_id);
 
 					lib1.setInstituteId(inst_id);
