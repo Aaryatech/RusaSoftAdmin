@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -1201,11 +1202,11 @@ public class LibraryController {
 			if (addEdit == 0) {
 				Staff staff = new Staff();
 
-				staff.setContactNo(contact);
+				staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
 				staff.setCurrentDesignationId(designation);
 				staff.setDeptId(deptIdList);
-				staff.setEmail(email);
-				staff.setFacultyFirstName(libName);
+				staff.setEmail(XssEscapeUtils.jsoupParse(email));
+				staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(libName));
 				staff.setFacultyId(libId);
 				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 				
@@ -1227,7 +1228,7 @@ public class LibraryController {
 
 				staff.setIsStudent(0);
 				staff.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
-				staff.setJoiningDate(dateOfJoin);
+				staff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
 				staff.setLastUpdatedDatetime(curDateTime);
 				staff.setMakerEnterDatetime(curDateTime);
 
@@ -1238,20 +1239,15 @@ public class LibraryController {
 				staff.setType(7);
 
 				staff.setInstituteId(instituteId);
-				staff.setJoiningDate(dateOfJoin);
-				staff.setContactNo(contact);
-				staff.setEmail(email);
 				staff.setDelStatus(1);
 				staff.setIsActive(1);
 				staff.setMakerUserId(userId);
-				staff.setMakerEnterDatetime(curDateTime);
 				staff.setCheckerUserId(0);
 				staff.setCheckerDatetime(curDateTime);
-				staff.setLastUpdatedDatetime(curDateTime);
-
 				staff.setExtravarchar1("NA");
 				try {
-					staff.setRealivingDate(request.getParameter("acc_off_relDate"));
+					String realivingDate = request.getParameter("acc_off_relDate");
+					staff.setRealivingDate(XssEscapeUtils.jsoupParse(realivingDate));
 
 				} catch (Exception e) {
 					staff.setRealivingDate(null);
@@ -1263,11 +1259,11 @@ public class LibraryController {
 				map.add("id", libId);
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				editHod.setFacultyFirstName(libName);
+				editHod.setFacultyFirstName(XssEscapeUtils.jsoupParse(libName));
 				editHod.setDeptId(deptIdList);
-				editHod.setEmail(email);
+				editHod.setEmail(XssEscapeUtils.jsoupParse(email));
 				editHod.setFacultyId(libId);
-				editHod.setContactNo(contact);
+				editHod.setContactNo(XssEscapeUtils.jsoupParse(contact));
 				editHod.setCurrentDesignationId(designation);
 				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
 			
@@ -1277,12 +1273,13 @@ public class LibraryController {
 				}else {
 					editHod.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
 				}
-				editHod.setJoiningDate(dateOfJoin);
+				editHod.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
 				editHod.setIsLibrarian(1);
 				editHod.setType(7);
 				editHod.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
 				try {
-					editHod.setRealivingDate(request.getParameter("acc_off_relDate"));
+					String realivingDate = request.getParameter("acc_off_relDate");
+					editHod.setRealivingDate(XssEscapeUtils.jsoupParse(realivingDate));
 
 				} catch (Exception e) {
 					editHod.setRealivingDate(null);
