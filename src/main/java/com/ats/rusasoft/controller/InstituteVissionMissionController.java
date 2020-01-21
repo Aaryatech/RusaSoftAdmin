@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.InstitueMission;
@@ -85,7 +86,7 @@ public class InstituteVissionMissionController {
 			institueVision.setInstVisionId(instituteVissionId);
 			institueVision.setDelStatus(1);
 			institueVision.setIsActive(1); 
-			institueVision.setInstVisionText(instVisionText);
+			institueVision.setInstVisionText(XssEscapeUtils.jsoupParse(instVisionText));
 			institueVision.setInstituteId(userObj.getGetData().getUserInstituteId());
 			institueVision.setMakerUserId(userObj.getUserId());
 			institueVision.setMakerdatetime(sf.format(date));
@@ -215,7 +216,7 @@ public class InstituteVissionMissionController {
 			institueMission.setInstMissionId(instMissionId);
 			institueMission.setDelStatus(1);
 			institueMission.setIsActive(1); 
-			institueMission.setInstMissionText(instMissionText);
+			institueMission.setInstMissionText(XssEscapeUtils.jsoupParse(instMissionText));
 			institueMission.setInstituteId(userObj.getGetData().getUserInstituteId());
 			institueMission.setMakerUserId(userObj.getUserId());
 			institueMission.setMakerdatetime(sf.format(date));

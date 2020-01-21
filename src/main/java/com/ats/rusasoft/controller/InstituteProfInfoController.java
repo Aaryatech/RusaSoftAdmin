@@ -556,7 +556,7 @@ public class InstituteProfInfoController {
 					redInfo.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
 					redInfo.setMouTodt(((DateConvertor.convertToYMD(toDate))));
 					redInfo.setMouBeneficiary(beneficiaryMOU);
-					redInfo.setMouTitle(title);
+					redInfo.setMouTitle(XssEscapeUtils.jsoupParse(title));
 					redInfo.setYearId(acYearId);
 					redInfo.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					redInfo.setMouInstitute(instituteOfMoU);   // other
@@ -601,7 +601,7 @@ public class InstituteProfInfoController {
 					redInfo1.setMouFromdt((DateConvertor.convertToYMD(fromDate)));
 					redInfo1.setMouTodt(((DateConvertor.convertToYMD(toDate))));
 					redInfo1.setMouBeneficiary(beneficiaryMOU);
-					redInfo1.setMouTitle(title);
+					redInfo1.setMouTitle(XssEscapeUtils.jsoupParse(title));
 					redInfo1.setYearId(acYearId);
 					redInfo1.setMouBeneficiaryNos(Integer.parseInt(beneficiaryMOUNo));
 					redInfo1.setMouInstitute(instituteOfMoU);

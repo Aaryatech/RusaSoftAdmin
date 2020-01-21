@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -456,7 +457,8 @@ public class QualityInitiativeController {
 				instQuality.setIsActive(1);
 				instQuality.setExInt1(Integer.parseInt(request.getParameter("cycle")));	// Cycle
 				instQuality.setExInt2(1);
-				instQuality.setExVar1(request.getParameter("qltyInitiative"));
+				String qltyInitiative = request.getParameter("qltyInitiative");
+				instQuality.setExVar1(XssEscapeUtils.jsoupParse(qltyInitiative));
 				instQuality.setExVar2(request.getParameter("naac_score")); //store NAAC Score
 
 				instQuality.setMakerDatetime(curDateTime);

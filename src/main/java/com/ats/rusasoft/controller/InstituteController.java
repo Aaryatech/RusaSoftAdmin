@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.ExportToExcel;
@@ -234,21 +235,24 @@ public class InstituteController {
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = dateFormat.format(cal.getTime());
 
+			String instSchemeName = request.getParameter("inst_scheme_name");
+			String instSchemeofferedBy = request.getParameter("inst_schme_offeredby");
+			
 			InstituteSupport instSpprt = new InstituteSupport();
 
 			instSpprt.setInstSchemeId(Integer.parseInt(request.getParameter("inst_scheme_id")));
 			instSpprt.setInstituteId(instituteId);
 			instSpprt.setYearId(yId);
-			instSpprt.setInstSchemeName(request.getParameter("inst_scheme_name"));
+			instSpprt.setInstSchemeName(XssEscapeUtils.jsoupParse(instSchemeName));
 			instSpprt.setInstStudentsBenefited(Integer.parseInt(request.getParameter("inst_students_benefited")));
-			instSpprt.setInstSchmeOfferedby(request.getParameter("inst_schme_offeredby"));
+			instSpprt.setInstSchmeOfferedby(XssEscapeUtils.jsoupParse(instSchemeofferedBy));
 			instSpprt.setDelStatus(1);
 			instSpprt.setIsActive(1);
 			instSpprt.setMakerUserId(userId);
 			instSpprt.setMakerDatetime(curDateTime);
 			 
 			try {
-				amt =   request.getParameter("amount");
+				amt =  request.getParameter("amount");
 				 
  			}catch(Exception e){
 				System.err.println(e.getMessage());
@@ -256,7 +260,7 @@ public class InstituteController {
 			}
 			instSpprt.setExInt1(0);
 			instSpprt.setExInt2(0);
-			instSpprt.setExVar1(amt);
+			instSpprt.setExVar1(XssEscapeUtils.jsoupParse(amt));
 			instSpprt.setExVar2("NA");
 
 			InstituteSupport saveInstSupprt = rest.postForObject(Constants.url + "/addInstSupprt", instSpprt,
@@ -690,7 +694,8 @@ public class InstituteController {
 			instAct.setYearId(yId);
 			instAct.setInstActivityType(request.getParameter("activityType"));
 			instAct.setInstActivityLevel(request.getParameter("activityLevel"));
-			instAct.setInstActivityName(request.getParameter("activityName"));
+			String activityName = request.getParameter("activityName");
+			instAct.setInstActivityName(XssEscapeUtils.jsoupParse(activityName));
 			instAct.setInstActivityFromdt(request.getParameter("fromDate"));
 			instAct.setInstActivityTodt(request.getParameter("toDate"));
 			instAct.setInstActivityParticipation(Integer.parseInt(request.getParameter("inst_activity_participation")));
@@ -958,12 +963,15 @@ public class InstituteController {
 			String curDateTime = dateFormat.format(cal.getTime());
 
 			IntelPrpoRight intelProp = new IntelPrpoRight();
+			
+			String  iprTitle = request.getParameter("ipr_title");
+			String reportLink = request.getParameter("reports_link");
 
 			intelProp.setConId(Integer.parseInt(request.getParameter("intel_id")));
 			intelProp.setInstituteId(instituteId);
 			intelProp.setYearId(yId);
-			intelProp.setConName(request.getParameter("ipr_title"));
-			intelProp.setReportLink(request.getParameter("reports_link"));
+			intelProp.setConName(XssEscapeUtils.jsoupParse(iprTitle));
+			intelProp.setReportLink(XssEscapeUtils.jsoupParse(reportLink));
 			intelProp.setEstablishDate(request.getParameter("estb_date"));
 			intelProp.setConFromdt(request.getParameter("fromDate"));
 			intelProp.setConTodt(request.getParameter("toDate"));
@@ -1228,11 +1236,13 @@ public class InstituteController {
 			String curDateTime = dateFormat.format(cal.getTime());
 
 			GenderEqalityPrg gendrEqualityt = new GenderEqalityPrg();
+			
+			String progTitle = request.getParameter("title");
 
 			gendrEqualityt.setGprogId(Integer.parseInt(request.getParameter("gender_eqlity _id")));
 			gendrEqualityt.setInstituteId(instituteId);
 			gendrEqualityt.setYearId(yId);
-			gendrEqualityt.setGprogName(request.getParameter("title"));
+			gendrEqualityt.setGprogName(XssEscapeUtils.jsoupParse(progTitle));
 			gendrEqualityt.setGprogFromdt(request.getParameter("fromDate"));
 			gendrEqualityt.setGprogTodt(request.getParameter("toDate"));
 			gendrEqualityt.setGprogPcount(Integer.parseInt(request.getParameter("participant")));

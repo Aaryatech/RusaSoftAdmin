@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -174,6 +175,8 @@ public class InstProfTeachTrainContr {
 				}
 
 				InstituteTraining instTrain = new InstituteTraining();
+				String title = request.getParameter("dev_Prog_title");
+				String financeSupport = request.getParameter("fianance_support");
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Calendar cal = Calendar.getInstance();
@@ -185,11 +188,9 @@ public class InstProfTeachTrainContr {
 				String curDate = dateFormatStr.format(new Date());
 
 				instTrain.setTrainingFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
-
 				instTrain.setTrainingId(trainingId);
 				instTrain.setTrainingPcount(Integer.parseInt(request.getParameter("no_of_participant")));
-				instTrain.setTrainingTitle(request.getParameter("dev_Prog_title"));
-
+				instTrain.setTrainingTitle(XssEscapeUtils.jsoupParse(title));
 				instTrain.setTrainingTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
 				instTrain.setTrainingType(trainigType);
 
@@ -207,7 +208,7 @@ public class InstProfTeachTrainContr {
 				instTrain.setIsActive(1);
 				instTrain.setExInt1(0);
 				instTrain.setExInt2(0);
-				instTrain.setExVar1(request.getParameter("fianance_support"));
+				instTrain.setExVar1(XssEscapeUtils.jsoupParse(financeSupport));//Finance Support
 				instTrain.setExVar2("NA");
 
 				instTrain.setMakerDatetime(curDateTime);
