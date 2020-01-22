@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.Names;
@@ -375,21 +376,25 @@ public class YesNoController {
 						instituteYesNo.setMakerDatetime(sf.format(date));
 						instituteYesNo.setYesnoPagecode("PAGE7");//Sachin changed from PAGE1 to PAGE7 on 18 July2019 Akshay Said to do
 						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
-						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
 						instituteYesNo.setYearId(acYearId);
 						instituteYesNoList.add(instituteYesNo);
 					}
 				}
 
 			}
-			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
-					instituteYesNoList, InstituteYesNo[].class);
+			List<InstituteYesNo> instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+					instituteYesNoList, List.class);
+			
+			System.out.println("instList-------"+instituteYesNo);
 			if(instituteYesNo!=null) {
-				session.setAttribute("successMsg", Constants.sucess_msg);
+				System.out.println("1");
+				session.setAttribute("sucesMsg", "Record Saved Successfully");
 			}
 			else {
-				session.setAttribute("successMsg", Constants.fail_msg);
+				System.out.println("2");
+				session.setAttribute("failMsg", "Record Failed to Save");
 			}
 			try {
 				selectYestNoLib = Integer.parseInt(request.getParameter("selectYestNoLib"));
@@ -507,7 +512,7 @@ public class YesNoController {
 				instituteYesNo.setMakerDatetime(sf.format(date));
 				instituteYesNo.setYesnoPagecode("tab1");
 				instituteYesNo.setSectionCode("tab1");
-				instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
 				instituteYesNo.setYesnoDynamicTitle("transpernt");
 				instituteYesNo.setYearId(acYearId);
 
@@ -519,7 +524,7 @@ public class YesNoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("id", transId);
-				map.add("yesNoResponse", transperentspeficytext);
+				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
 
 				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
 
@@ -659,7 +664,7 @@ public class YesNoController {
 				instituteYesNo.setMakerDatetime(sf.format(date));
 				instituteYesNo.setYesnoPagecode("tab2");
 				instituteYesNo.setSectionCode("tab2");
-				instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
 				instituteYesNo.setYesnoDynamicTitle("Time bound");
 				instituteYesNo.setYearId(acYearId);
 
@@ -671,7 +676,7 @@ public class YesNoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("id", timeBoundId);
-				map.add("yesNoResponse", transperentspeficytext);
+				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
 
 				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
 
@@ -762,7 +767,7 @@ public class YesNoController {
 				instituteYesNo.setMakerDatetime(sf.format(date));
 				instituteYesNo.setYesnoPagecode("tab3");
 				instituteYesNo.setSectionCode("tab3");
-				instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
 				instituteYesNo.setYesnoDynamicTitle("Efficient");
 				instituteYesNo.setYearId(acYearId);
 
@@ -774,7 +779,7 @@ public class YesNoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("id", efficientId);
-				map.add("yesNoResponse", transperentspeficytext);
+				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
 
 				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
 
@@ -1086,8 +1091,8 @@ public class YesNoController {
 						if (value == 1) {
 							instituteYesNoListPage3.get(j).setMakerUserId(userObj.getUserId());
 							instituteYesNoListPage3.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage3.get(j).setInstYesnoResponse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId()));
+							instituteYesNoListPage3.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+									request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId())));
 						} else {
 
 							instituteYesNoListPage3.get(j).setDelStatus(0);
@@ -1107,7 +1112,7 @@ public class YesNoController {
 					instituteYesNo.setYesnoPagecode(yesNoMasterListPage3.get(i).getYesnoPagecode());
 					instituteYesNo.setSectionCode(yesNoMasterListPage3.get(i).getYesnoSeccode());
 					instituteYesNo.setInstYesnoResponse(
-							request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId()));
+							XssEscapeUtils.jsoupParse(request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId())));
 					instituteYesNo.setYearId(acYearId);
 					instituteYesNo.setYesnoId(yesNoMasterListPage3.get(i).getYesnoId());
 					instituteYesNoListPage3.add(instituteYesNo);
@@ -1601,7 +1606,7 @@ public class YesNoController {
 				instituteYesNo.setMakerDatetime(sf.format(date));
 				instituteYesNo.setYesnoPagecode("tab4");
 				instituteYesNo.setSectionCode("tab4");
-				instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
 				instituteYesNo.setYesnoDynamicTitle("Gender");
 				instituteYesNo.setYearId(acYearId);
 

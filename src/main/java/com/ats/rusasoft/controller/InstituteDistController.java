@@ -693,8 +693,8 @@ public class InstituteDistController {
 				value.setMakerDatetime(dateTime);
 				value.setMakerUserId(userId);
 				value.setYearId(yearId);
-				value.setRcFacultyName(rcFacultyName);
-				value.setRcSubjectName(rcSubjectName);
+				value.setRcFacultyName(XssEscapeUtils.jsoupParse(rcFacultyName));
+				value.setRcSubjectName(XssEscapeUtils.jsoupParse(rcSubjectName));
 				value.setRcValidityTodt(DateConvertor.convertToYMD(toDate));
 				value.setRcValidityFromdt(DateConvertor.convertToYMD(fromDate));
 				value.setRcStudentCount(rcStudentCount);

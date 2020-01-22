@@ -79,17 +79,32 @@
 								</div>
 
 							</header>
-						 	<c:if test="${sessionScope.successMsg!=null}">
+						 	<c:if test="${sessionScope.sucesMsg!=null}">
            						 <div class="col-lg-12">
     						          <div class="alert alert-success alert-dismissible fade in">
             							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
+             						   <strong>Success : </strong> ${sessionScope.sucesMsg}</div>
         	                     </div> 
-        	                     <%session=request.getSession();
+        	                     
+        	                     <%-- <%session=request.getSession();
         	                    
         	                     session.removeAttribute("successMsg");
-        	                     %>
+        	                     %> --%>
             			</c:if>
+            			 <c:remove var="sucesMsg" scope="session" />
+            			
+            			<c:if test="${sessionScope.failMsg!=null}">
+           						 <div class="col-lg-12">
+    						          <div class="alert alert-danger alert-dismissible fade in">
+            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+             						   <strong>Fail : </strong> ${sessionScope.failMsg}</div>
+        	                     </div> 
+        	                     <%-- <%session=request.getSession();
+        	                    
+        	                     session.removeAttribute("failMsg");
+        	                     %> --%>
+            			</c:if>
+            			 <c:remove var="failMsg" scope="session" />
 	
 	
 							<div class="content-body">
