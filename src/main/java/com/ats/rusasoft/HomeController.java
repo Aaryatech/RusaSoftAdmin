@@ -211,7 +211,19 @@ public class HomeController {
 			/* String password="harsha"; */
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("password", password);
+			String hashtext = new String();
+			
+			try {
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] messageDigest = md.digest(password.getBytes());
+				BigInteger number = new BigInteger(1, messageDigest);
+				hashtext = number.toString(16);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			map.add("password", hashtext);
 			map.add("userId", userId);
 
 			// UserLogin userObj =

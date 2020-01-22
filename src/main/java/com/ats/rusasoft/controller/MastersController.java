@@ -510,9 +510,13 @@ public class MastersController {
 		ModelAndView model = new ModelAndView("master/addFaculty");
 		model.addObject("title", "Add Department");
 		try {
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("deptId", 0);
+
 
 			Dept dept = new Dept();
-
+		
 			model.addObject("dept", dept);
 
 		} catch (Exception e) {

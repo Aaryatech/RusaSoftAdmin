@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 
@@ -44,6 +47,7 @@
 
 <!-- BEGIN BODY -->
 <body class=" ">
+
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -86,7 +90,7 @@
 							<div class="actions panel_actions pull-right">
 								<a href="${pageContext.request.contextPath}/showDeptList"><button
 										type="button" class="btn btn-info">Back</button></a>
-										</div>
+							</div>
 
 						</header>
 
@@ -96,8 +100,18 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertDept"
-										method="post" name="form_sample_2" id="form_sample_2"
-									>
+										method="post" name="form_sample_2" id="form_sample_2">
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 										<div class="col-xs-12">
 
@@ -106,11 +120,11 @@
 													Name<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-9">
-													<input type="text"  class="form-control" id="dept_name"
+													<input type="text" class="form-control" id="dept_name"
 														maxlength="80" onchange="trim(this)" name="dept_name"
 														placeholder="Department Name" value="${dept.deptName}">
-			 											<span class="error_form text-danger" id="dept_name_field"
-															style="display: none;">Please enter department name</span>
+													<span class="error_form text-danger" id="dept_name_field"
+														style="display: none;">Please enter department name</span>
 												</div>
 
 												<input type="hidden" id="dept_id" name="dept_id"
@@ -120,10 +134,16 @@
 
 											<div class="form-group">
 												<div class="col-sm-offset-3 col-sm-9">
-													<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showDeptList"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-													<input type="hidden" id="is_view" name="is_view" value="0">
-													
+													<button type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+													<a href="${pageContext.request.contextPath}/showDeptList"><button
+															type="button" id="sub2" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a> <input type="hidden" id="is_view" name="is_view"
+														value="0">
+
 												</div>
 											</div>
 
@@ -154,7 +174,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -170,38 +190,31 @@
 			}
 			return true;
 		}
-		$(document)
-				.ready(
-						function($) {
+		$(document).ready(function($) {
 
-							$("#form_sample_2")
-									.submit(
-											function(e) {
-												var isError = false;
-												var errMsg = "";
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
 
-												if (!$("#dept_name").val()) {
-													isError = true;
+				if (!$("#dept_name").val()) {
+					isError = true;
 
-													$("#dept_name").addClass(
-															"has-error")
-													$("#dept_name_field")
-															.show()
-												} else {
-													$("#dept_name_field")
-															.hide()
-												}
-												if (!isError) {
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														document.getElementById("sub1").disabled = true;
-														document.getElementById("sub2").disabled = true;
-														return  true;
-													}	
-												}
-												return false;
-											});
-						});
+					$("#dept_name").addClass("has-error")
+					$("#dept_name_field").show()
+				} else {
+					$("#dept_name_field").hide()
+				}
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
 	</script>
 
 	<script type="text/javascript">
@@ -219,18 +232,17 @@
 			}
 			return false;
 		}
-		function submit_f(view){
-			document.getElementById("is_view").value=view;//create this 
-			
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+
 		}
-		
+
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
 			replace(/\n +/, "\n"); // Removes spaces after newlines
 			return;
 		}
-		
 	</script>
 </body>
 </html>

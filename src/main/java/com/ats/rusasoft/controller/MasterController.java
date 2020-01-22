@@ -1399,12 +1399,18 @@ public class MasterController {
 			RestTemplate restTemplate = new RestTemplate();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int deptId = Integer.parseInt(request.getParameter("dept_id"));
-			System.err.println("Dept id  " + deptId);
-
+			
 			HttpSession session = request.getSession();
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.equals(key)) {
+			
+			int deptId = Integer.parseInt(request.getParameter("dept_id"));
+			//System.err.println("Dept id  " + deptId);
 
+			
+			deptId=(int) session.getAttribute("deptId");
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info editAccess = AccessControll.checkAccess("insertDept", "showDeptList", "1", "0", "0", "0",
@@ -1459,6 +1465,10 @@ public class MasterController {
 				else
 					redirect = "redirect:/addFaculty";
 			}
+			}else {
+				
+				redirect = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in save dept  " + e.getMessage());
@@ -1489,7 +1499,8 @@ public class MasterController {
 				model = new ModelAndView("master/addFaculty");
 
 				int deptId = Integer.parseInt(request.getParameter("edit_dept_id"));
-
+				session.setAttribute("deptId", deptId);
+				
 				model.addObject("title", "Edit Department");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("deptId", deptId);
