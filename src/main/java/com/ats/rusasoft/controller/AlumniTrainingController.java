@@ -265,24 +265,24 @@ public class AlumniTrainingController {
 					alumni.setDelStatus(1);
 					alumni.setAlumniDetailId(alumniId);
 
-					alumni.setAlumniName(almName);
+					alumni.setAlumniName(XssEscapeUtils.jsoupParse(almName));
 
 					amount = Integer.parseInt(request.getParameter("alumini_amt"));
 					if (amount > 0) {
 						alumni.setExInt1(amount);
 						alumni.setExInt2(1);
 					} else {
-						alumni.setExInt1(amount);
+						alumni.setExInt1(0);
 						alumni.setExInt2(0);
 					}
 					String exVar1 = "NA";
-					alumni.setExVar1(request.getParameter("designation"));
+					alumni.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("designation")));
 					alumni.setExVar2(exVar1);
 					alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
 					alumni.setIsActive(1);
 					alumni.setMakerUserId(userObj.getUserId());// get from Session
 					if (request.getParameter("benif_to").equals("7")) {
-						alumni.setBenefitTo(request.getParameter("other_benif"));
+						alumni.setBenefitTo(XssEscapeUtils.jsoupParse(request.getParameter("other_benif")));
 
 					} else {
 						alumni.setBenefitTo(request.getParameter("benif_to"));
@@ -320,19 +320,19 @@ public class AlumniTrainingController {
 					alumni.setDelStatus(1);
 					alumni.setAlumniDetailId(alumniId);
 
-					alumni.setAlumniName(almName);
+					alumni.setAlumniName(XssEscapeUtils.jsoupParse(almName));
 					// alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from
 					// Session
 					// alumni.setIsActive(1);
 					alumni.setMakerUserId(userObj.getUserId());// get from Session
 					if (request.getParameter("benif_to").equals("7")) {
-						alumni.setBenefitTo(request.getParameter("other_benif"));
+						alumni.setBenefitTo(XssEscapeUtils.jsoupParse(request.getParameter("other_benif")));
 
 					} else {
 						alumni.setBenefitTo(request.getParameter("benif_to"));
 
 					}
-					alumni.setExVar1(request.getParameter("designation"));
+					alumni.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("designation")));
 					alumni.setContributionType(Integer.parseInt(request.getParameter("contr_type")));
 					alumni.setContributionYear(request.getParameter("contr_year"));
 					alumni.setMakerDatetime(curDateTime);

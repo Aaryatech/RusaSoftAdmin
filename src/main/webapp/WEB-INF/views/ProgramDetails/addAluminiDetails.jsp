@@ -347,6 +347,28 @@
 	<!-- END CONTENT -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
+	$('#year_of_pass').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	
+	$('#contr_year').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	
+	$('#alumini_amt').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	
+	
 		function checkPhdGuide(activity) {
 			
 //alert(activity);
