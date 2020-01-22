@@ -1790,9 +1790,9 @@ public class InstituteController {
 			GovtScholarships govt = new GovtScholarships();
 
 			govt.setGovtScholarId(Integer.parseInt(request.getParameter("govt_scholr_id")));
-			govt.setNameOfScheme(request.getParameter("name_scheme"));
+			govt.setNameOfScheme(XssEscapeUtils.jsoupParse(request.getParameter("name_scheme")));
 			govt.setNoOfStudBenftd(Integer.parseInt(request.getParameter("stud_bnfted")));
-			govt.setSchmOffrdBy(request.getParameter("schm_ofrd"));
+			govt.setSchmOffrdBy(XssEscapeUtils.jsoupParse(request.getParameter("schm_ofrd")));
 			govt.setInstId(instituteId);
 			govt.setAcYearId(yId);
 			govt.setDelStatus(1);
@@ -1807,7 +1807,7 @@ public class InstituteController {
 				govt.setExVar1("0");
 			}else {
 				
-				govt.setExVar1(amt);
+				govt.setExVar1(XssEscapeUtils.jsoupParse(amt));
 
 			}			
 			govt.setExVar2("NA");
@@ -2066,9 +2066,9 @@ public class InstituteController {
 		ActCndctPrmtngUnivrslVal actCndct = new ActCndctPrmtngUnivrslVal();
 
 		actCndct.setActCndctId(Integer.parseInt(request.getParameter("activityId")));
-		actCndct.setTtleProgrmAct(request.getParameter("prg_title"));
-		actCndct.setFromDate(request.getParameter("fromDate"));
-		actCndct.setToDate(request.getParameter("toDate"));
+		actCndct.setTtleProgrmAct(XssEscapeUtils.jsoupParse(request.getParameter("prg_title")));
+		actCndct.setFromDate(XssEscapeUtils.jsoupParse(request.getParameter("fromDate")));
+		actCndct.setToDate(XssEscapeUtils.jsoupParse(request.getParameter("toDate")));
 		actCndct.setNoOfParticipant(Integer.parseInt(request.getParameter("no_participant")));
 		actCndct.setInstId(instituteId);
 		actCndct.setAcYearId(yId);
@@ -2332,8 +2332,8 @@ public class InstituteController {
 		SpecificLocalAdvntgDisadvntg specify = new SpecificLocalAdvntgDisadvntg();
 
 		specify.setSpciAdvId(Integer.parseInt(request.getParameter("initiative_id")));
-		specify.setNameOfInitiatives(request.getParameter("name_inititatives"));
-		specify.setIssueAddress(request.getParameter("issue_address"));
+		specify.setNameOfInitiatives(XssEscapeUtils.jsoupParse(request.getParameter("name_inititatives")));
+		specify.setIssueAddress(XssEscapeUtils.jsoupParse(request.getParameter("issue_address")));
 		specify.setFromDate(request.getParameter("fromDate"));
 		specify.setToDate(request.getParameter("toDate"));
 		specify.setNoStudPart(Integer.parseInt(request.getParameter("no_stud_participate")));

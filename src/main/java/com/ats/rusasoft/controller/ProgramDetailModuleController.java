@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -457,7 +458,7 @@ System.err.println("HELLO " +programId);
 			String scheme = request.getParameter("schemeName"); 
 			if(scheme.contentEquals("7")) {
 				stud.setSchemeName("NA");
-				stud.setExtraVarchar1(request.getParameter("anotherScheme"));
+				stud.setExtraVarchar1(XssEscapeUtils.jsoupParse(request.getParameter("anotherScheme")));
 				stud.setExtraInt1(7);
 				}else {
 					stud.setSchemeName(scheme);
@@ -469,7 +470,7 @@ System.err.println("HELLO " +programId);
 			stud.setLevel(request.getParameter("level"));
 			stud.setType(request.getParameter("type"));
 			stud.setNoStudentBenifited(Integer.parseInt(request.getParameter("studBenifit")));
-			stud.setSupportAgencyName(request.getParameter("supportAgency"));
+			stud.setSupportAgencyName(XssEscapeUtils.jsoupParse(request.getParameter("supportAgency")));
 			stud.setImplementationYear(request.getParameter("yearofIntro"));
 			stud.setDelStatus(1);
 			stud.setIsActive(1);

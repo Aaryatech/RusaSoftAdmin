@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -179,7 +180,7 @@ public class StudentActivityController {
 				
 				if (activityName.equals("7")) {
 					String otherActivityName = request.getParameter("otherActivityName");
-					programActivity.setActivityName(otherActivityName);
+					programActivity.setActivityName(XssEscapeUtils.jsoupParse(otherActivityName));
 				} else {
 					programActivity.setActivityName(activityName);
 				}
@@ -192,7 +193,7 @@ public class StudentActivityController {
 				programActivity.setDate(date);
 				programActivity.setYear(year);
 				programActivity.setParticipatedStudent(noStudent);
-				programActivity.setBranch(branch);
+				programActivity.setBranch(XssEscapeUtils.jsoupParse(branch));
 				programActivity.setDelStatus(1);
 				programActivity.setInstituteId(userObj.getGetData().getUserInstituteId());
 				programActivity.setLevel(level);
@@ -201,7 +202,7 @@ public class StudentActivityController {
 				programActivity.setYearId(acYearId);
 				programActivity.setIsActive(1);
 				programActivity.setType(0);
-				programActivity.setRawActivityName(request.getParameter("actvtName"));
+				programActivity.setRawActivityName(XssEscapeUtils.jsoupParse(request.getParameter("actvtName")));
 				
 				//System.out.println(programActivity);
 				
@@ -436,7 +437,7 @@ public class StudentActivityController {
 				ProgramActivity programActivity = new ProgramActivity();
 				if (activityName.equals("7")) {
 					String otherActivityName = request.getParameter("otherActivityName");
-					programActivity.setActivityName(otherActivityName);
+					programActivity.setActivityName(XssEscapeUtils.jsoupParse(otherActivityName));
 				} else {
 					programActivity.setActivityName(activityName);
 				}
@@ -449,7 +450,7 @@ public class StudentActivityController {
 				programActivity.setDate(date);
 				programActivity.setYear(year);
 				programActivity.setParticipatedStudent(noStudent);
-				programActivity.setBranch(branch);
+				programActivity.setBranch(XssEscapeUtils.jsoupParse(branch));
 				programActivity.setDelStatus(1);
 				programActivity.setInstituteId(userObj.getGetData().getUserInstituteId());
 				programActivity.setLevel(level);
@@ -458,27 +459,27 @@ public class StudentActivityController {
 				programActivity.setYearId(acYearId);
 				programActivity.setType(1);
 				programActivity.setIsActive(1);
-				programActivity.setVenue(venue);
-				programActivity.setRawActivityName(actName);
+				programActivity.setVenue(XssEscapeUtils.jsoupParse(venue));
+				programActivity.setRawActivityName(XssEscapeUtils.jsoupParse(actName));
 				 stud = request.getParameter("stud_name");
 				if(stud!=null) {
-					programActivity.setExVar1(stud);
+					programActivity.setExVar1(XssEscapeUtils.jsoupParse(stud));
 				}else {
-					programActivity.setExVar1(stud);
+					programActivity.setExVar1(XssEscapeUtils.jsoupParse(stud));
 				}
 			
 				 awrd = request.getParameter("name_award");
 				if(awrd!=null) {
-					programActivity.setExVar2(awrd);
+					programActivity.setExVar2(XssEscapeUtils.jsoupParse(awrd));
 				}else {
-					programActivity.setExVar2(awrd);
+					programActivity.setExVar2(XssEscapeUtils.jsoupParse(awrd));
 				}
 				
 				 adhar = request.getParameter("adhar_no");
 				if(adhar!=null) {				
-				programActivity.setAadharNo(adhar);
+				programActivity.setAadharNo(XssEscapeUtils.jsoupParse(adhar));
 				}else {
-					programActivity.setAadharNo(adhar);
+					programActivity.setAadharNo(XssEscapeUtils.jsoupParse(adhar));
 				}
 				
 				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
@@ -709,12 +710,13 @@ public class StudentActivityController {
 				String approvedBy = request.getParameter("approvedBy");
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 				int programId = Integer.parseInt(request.getParameter("programId"));
+				String progCode = XssEscapeUtils.jsoupParse(request.getParameter("programCode"));
 
 				Program program = new Program();
 
 				if (approvedBy.equals("7")) {
 					String otherApprovedBy = request.getParameter("otherApprovedBy");
-					program.setApprovedBy(otherApprovedBy);
+					program.setApprovedBy(XssEscapeUtils.jsoupParse(otherApprovedBy));
 				} else {
 					program.setApprovedBy(approvedBy);
 				}
@@ -724,8 +726,8 @@ public class StudentActivityController {
 					program.setProgramId(programId);
 				}
 
-				program.setNameOfProgram(nameOfProgram);
-				program.setDateOfIntroduction(date);
+				program.setNameOfProgram(XssEscapeUtils.jsoupParse(nameOfProgram));
+				program.setDateOfIntroduction(XssEscapeUtils.jsoupParse(date));
 				program.setSanctionalIntake(intake);
 				program.setProgramType(programType);
 				program.setMonthDuration(monthDuration);
@@ -736,7 +738,7 @@ public class StudentActivityController {
 				program.setIsActive(1);
 				program.setExInt1(0);
 				program.setExInt2(0);
-				program.setExVar1(request.getParameter("programCode"));
+				program.setExVar1(progCode); //program code
 				Program res = restTemplate.postForObject(Constants.url + "/saveProgram", program, Program.class);
 
 				if (is_view == 1) {
@@ -919,8 +921,8 @@ public class StudentActivityController {
 			ProgramVision.setVisionId(programVissionId);
 			ProgramVision.setDelStatus(1);
 			ProgramVision.setIsActive(1);
-			ProgramVision.setVisionRemark(programVissionRemark);
-			ProgramVision.setVisionText(programVission);
+			ProgramVision.setVisionRemark(XssEscapeUtils.jsoupParse(programVissionRemark));
+			ProgramVision.setVisionText(XssEscapeUtils.jsoupParse(programVission));
 			ProgramVision.setInstituteId(userObj.getGetData().getUserInstituteId());
 			ProgramVision.setMakerUserId(userObj.getUserId());
 			ProgramVision.setMakerdatetime(sf.format(date));
@@ -1043,8 +1045,8 @@ public class StudentActivityController {
 			save.setMissionId(programMissionId);
 			save.setDelStatus(1);
 			save.setIsActive(1);
-			save.setMissionRemark(programMissionRemark);
-			save.setMissionText(programMission);
+			save.setMissionRemark(XssEscapeUtils.jsoupParse(programMissionRemark));
+			save.setMissionText(XssEscapeUtils.jsoupParse(programMission));
 			save.setInstituteId(userObj.getGetData().getUserInstituteId());
 			save.setMakerUserId(userObj.getUserId());
 			save.setMakerdatetime(sf.format(date));
@@ -1167,8 +1169,8 @@ public class StudentActivityController {
 			programEducationObjective.setPeoId(programPeoId);
 			programEducationObjective.setDelStatus(1);
 			programEducationObjective.setIsActive(1);
-			programEducationObjective.setPeoRemark(peoRemark);
-			programEducationObjective.setPeoText(peoText);
+			programEducationObjective.setPeoRemark(XssEscapeUtils.jsoupParse(peoRemark));
+			programEducationObjective.setPeoText(XssEscapeUtils.jsoupParse(peoText));
 			programEducationObjective.setInstituteId(userObj.getGetData().getUserInstituteId());
 			programEducationObjective.setMakerUserId(userObj.getUserId());
 			programEducationObjective.setMakerdatetime(sf.format(date));
@@ -1291,8 +1293,8 @@ public class StudentActivityController {
 			programOutcome.setPoId(poId);
 			programOutcome.setDelStatus(1);
 			programOutcome.setIsActive(1);
-			programOutcome.setPoRemark(poRemark);
-			programOutcome.setPoText(poText);
+			programOutcome.setPoRemark(XssEscapeUtils.jsoupParse(poRemark));
+			programOutcome.setPoText(XssEscapeUtils.jsoupParse(poText));
 			programOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
 			programOutcome.setMakerUserId(userObj.getUserId());
 			programOutcome.setMakerdatetime(sf.format(date));
@@ -1415,8 +1417,8 @@ public class StudentActivityController {
 			programSpeceficOutcome.setPsoId(psoId);
 			programSpeceficOutcome.setDelStatus(1);
 			programSpeceficOutcome.setIsActive(1);
-			programSpeceficOutcome.setPsoRemark(psoRemark);
-			programSpeceficOutcome.setPsoText(psoText);
+			programSpeceficOutcome.setPsoRemark(XssEscapeUtils.jsoupParse(psoRemark));
+			programSpeceficOutcome.setPsoText(XssEscapeUtils.jsoupParse(psoText));
 			programSpeceficOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
 			programSpeceficOutcome.setMakerUserId(userObj.getUserId());
 			programSpeceficOutcome.setMakerdatetime(sf.format(date));

@@ -275,12 +275,6 @@
 													</div>
 												</div>
 
-
-
-
-
-												
-
 											</div>
 
 										</div>
@@ -298,7 +292,7 @@
 <button type="submit" id="sub_button" class="btn btn-primary"
 													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showStudSupp"><button
+<a href="${pageContext.request.contextPath}/showStudSupp"><button id="sub1"
 										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
@@ -365,7 +359,7 @@
 												var isError = false;
 												var errMsg = "";
 
-if (!$("#yearofIntro").val()){
+												if (!$("#yearofIntro").val()){
 						        					 //alert("Hi")
 						              				isError=true;
 						              				
@@ -452,11 +446,12 @@ if (!$("#yearofIntro").val()){
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
-														return true;
+														
+														document
+																.getElementById("sub_button").disabled = true;
 														document
 																.getElementById("sub1").disabled = true;
-														document
-																.getElementById("sub2").disabled = true;
+														return true;
 													}
 												}
 

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.Names;
@@ -639,22 +640,22 @@ public class AlumniTrainingController {
 
 					trainPlace.setContactDetail(request.getParameter("contact_detail"));
 					trainPlace.setDelStatus(1);
-					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
-					trainPlace.setEmpyrName(request.getParameter("employer_name"));
+					trainPlace.setEmpyrAdd(XssEscapeUtils.jsoupParse(request.getParameter("employer_address")));
+					trainPlace.setEmpyrName(XssEscapeUtils.jsoupParse(request.getParameter("employer_name")));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
 					
 					minPackge = request.getParameter("package_offered");
 					maxPackge = request.getParameter("max_package_offered");
 					if (minPackge == null) {
-						trainPlace.setPakageOfferd(minPackge);
+						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
 					} else {
-						trainPlace.setPakageOfferd(minPackge);
+						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
 					}
 					
 					if (maxPackge == null) {
-						trainPlace.setExVar1(maxPackge);
+						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
 					} else {
-						trainPlace.setExVar1(maxPackge);
+						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
 					}
 					
 
@@ -664,9 +665,9 @@ public class AlumniTrainingController {
 
 					suuppAgnc = request.getParameter("sup_agency_name");
 					if (suuppAgnc == null) {
-						trainPlace.setSupportAgencyName(suuppAgnc);
+						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
 					} else {
-						trainPlace.setSupportAgencyName(suuppAgnc);
+						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
 					}
 					trainPlace.setDelStatus(1);
 
@@ -701,22 +702,22 @@ public class AlumniTrainingController {
 
 					trainPlace.setContactDetail(request.getParameter("contact_detail"));
 					trainPlace.setDelStatus(1);
-					trainPlace.setEmpyrAdd(request.getParameter("employer_address"));
-					trainPlace.setEmpyrName(request.getParameter("employer_name"));
+					trainPlace.setEmpyrAdd(XssEscapeUtils.jsoupParse(request.getParameter("employer_address")));
+					trainPlace.setEmpyrName(XssEscapeUtils.jsoupParse(request.getParameter("employer_name")));
 					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
 					
 					minPackge = request.getParameter("package_offered");
 					maxPackge = request.getParameter("max_package_offered");
 					if (minPackge == null) {
-						trainPlace.setPakageOfferd(minPackge);
+						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
 					} else {
-						trainPlace.setPakageOfferd(minPackge);
+						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
 					}
 					
 					if (maxPackge == null) {
-						trainPlace.setExVar1(maxPackge);
+						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
 					} else {
-						trainPlace.setExVar1(maxPackge);
+						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
 					}
 					
 					trainPlace.setPlacementId(placeId);
@@ -724,9 +725,9 @@ public class AlumniTrainingController {
 					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
 					suuppAgnc = request.getParameter("sup_agency_name");
 					if (suuppAgnc == null) {
-						trainPlace.setSupportAgencyName(suuppAgnc);
+						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
 					} else {
-						trainPlace.setSupportAgencyName(suuppAgnc);
+						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
 					}
 
 					trainPlace.setDelStatus(1);
@@ -1689,10 +1690,10 @@ public class AlumniTrainingController {
 			course.setProgName(Integer.parseInt(request.getParameter("prog_name")));
 			course.setProgType(Integer.parseInt(request.getParameter("prog_type")));
 			course.setApplicableYear(request.getParameter("applicabl_year"));
-			course.setCourseName(request.getParameter("courseName"));
+			course.setCourseName(XssEscapeUtils.jsoupParse(request.getParameter("courseName")));
 			course.setCourseCode(Integer.parseInt(request.getParameter("courseCode")));
 			course.setIntroduceFrom(request.getParameter("acadYear"));
-			course.setDocument(request.getParameter("document"));
+			course.setDocument(XssEscapeUtils.jsoupParse(request.getParameter("document")));
 			course.setDelStatus(1);
 			course.setIsActive(1);
 			course.setMakerUserId(userId);

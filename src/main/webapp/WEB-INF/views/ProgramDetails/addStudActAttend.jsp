@@ -503,6 +503,11 @@
 		$('#noStudent').on('input', function() {
 			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
 			});
+		
+		$('#date').on('input', function() {
+			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
 function clearDefault(a){
 	if(a.defaultValue==0)
 	{

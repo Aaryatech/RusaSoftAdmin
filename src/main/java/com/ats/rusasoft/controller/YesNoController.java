@@ -1618,7 +1618,7 @@ public class YesNoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("id", transId);
-				map.add("yesNoResponse", transperentspeficytext);
+				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
 
 				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
 
@@ -1709,7 +1709,7 @@ public class YesNoController {
 				instituteYesNo.setMakerDatetime(sf.format(date));
 				instituteYesNo.setYesnoPagecode("tab5");
 				instituteYesNo.setSectionCode("tab5");
-				instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
 				instituteYesNo.setYesnoDynamicTitle("Environment");
 				instituteYesNo.setYearId(acYearId);
 
@@ -1722,7 +1722,7 @@ public class YesNoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("id", timeBoundId);
-				map.add("yesNoResponse", transperentspeficytext);
+				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
 
 				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
 
@@ -1812,7 +1812,7 @@ public class YesNoController {
 				instituteYesNo.setMakerDatetime(sf.format(date));
 				instituteYesNo.setYesnoPagecode("tab6");
 				instituteYesNo.setSectionCode("tab6");
-				instituteYesNo.setInstYesnoResponse(transperentspeficytext);
+				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
 				instituteYesNo.setYesnoDynamicTitle("HumanValues");
 				instituteYesNo.setYearId(acYearId);
 
@@ -1825,7 +1825,7 @@ public class YesNoController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("id", efficientId);
-				map.add("yesNoResponse", transperentspeficytext);
+				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
 
 				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
 
