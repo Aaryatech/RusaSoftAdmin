@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -218,6 +219,7 @@ public class HomeController {
 				byte[] messageDigest = md.digest(password.getBytes());
 				BigInteger number = new BigInteger(1, messageDigest);
 				hashtext = number.toString(16);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -329,7 +331,7 @@ public class HomeController {
 					byte[] messageDigest = md.digest(password.getBytes());
 					BigInteger number = new BigInteger(1, messageDigest);
 					String hashtext = number.toString(16);
-
+					System.err.println("hashtext " +hashtext);
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					map.add("username", name);
 					map.add("password", hashtext);
@@ -617,6 +619,9 @@ public class HomeController {
 			} else {
 				mav = "login";
 				model.addAttribute("msg", "Invalid Text");
+				Random randChars = new Random();
+				String sImageCode = (Long.toString(Math.abs(randChars.nextLong()), 36)).substring(0, 6);
+				session.setAttribute("captcha_security", sImageCode); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

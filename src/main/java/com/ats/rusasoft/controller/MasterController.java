@@ -1404,7 +1404,7 @@ public class MasterController {
 			String token=request.getParameter("token");
 			String key=(String) session.getAttribute("generatedKey");
 			
-			if(token.equals(key)) {
+			if(token.trim().equals(key.trim())) {
 			
 			int deptId = Integer.parseInt(request.getParameter("dept_id"));
 			//System.err.println("Dept id  " + deptId);
@@ -1413,7 +1413,7 @@ public class MasterController {
 			deptId=(int) session.getAttribute("deptId");
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info editAccess = AccessControll.checkAccess("insertDept", "showDeptList", "1", "0", "0", "0",
+			Info editAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "0", "1", "0", "0",
 					newModuleList);
 
 			if (editAccess.isError() == true) {
@@ -1466,7 +1466,7 @@ public class MasterController {
 					redirect = "redirect:/addFaculty";
 			}
 			}else {
-				
+				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
 
