@@ -98,7 +98,7 @@
 								<div class="col-md-12">
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertIqacBasicInfo"
-										method="post" name="form_sample_2" id="form_sample_2"  novalidate="novalidate">
+										method="post" name="form_sample_2" id="form_sample_2"><!--   novalidate="novalidate" -->
 
 												<div>
 
@@ -244,15 +244,15 @@
 
 													</c:choose>
 
-<div class="form-group">
+												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}"  aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+												<button type="submit" id="sub_button" class="btn btn-primary"
+												onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
 														
-<a href="${pageContext.request.contextPath}/showInstProfList"><button
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+												<a href="${pageContext.request.contextPath}/showInstProfList"><button id="sub2"
+													type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
 												</div>
 
 
@@ -286,6 +286,26 @@
 
 	<!-- END CONTENT -->
 <script>
+$('#alt_fac_contact').on(
+		'input',
+		function() {
+			this.value = this.value.replace(/[^0-9]/g, '').replace(
+					/(\..*)\./g, '$1');
+		});
+		
+$('#phone_no').on(
+		'input',
+		function() {
+			this.value = this.value.replace(/[^0-9]/g, '').replace(
+					/(\..*)\./g, '$1');
+		});
+		
+$('#fax_no').on(
+		'input',
+		function() {
+			this.value = this.value.replace(/[^0-9]/g, '').replace(
+					/(\..*)\./g, '$1');
+		});
 
 function trim(el) {
 	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -463,30 +483,24 @@ function numbersOnlyNotZero(fax_no) {
                 				errMsg += '<li>Please enter a valid email address.</li>';
                 				errMsg_alert += 'Please enter a valid email address. \n';
                 				$("#error_fax_no").show()
-                					//return fregister_useralse;
                 				} else {
                 					$("#error_fax_no").hide()
                 				}
                 				
-            				
-            				
 
-            				if (!isError) {
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									return  true;
-									 document.getElementById("sub1").disabled=true;
-           						
-								}
-							}
-            
-            						 
+            				 if (!isError) {
+			            		 
+ 								var x = confirm("Do you really want to submit the form?");
+ 								if (x == true) {
+ 									
+ 									document.getElementById("sub_button").disabled = true;
+ 									document.getElementById("sub2").disabled = true;
+ 									return  true;
+ 								}
+ 							}
             					   return false;
             				} );
             	});
-			//
-			
-			    
           
         </script>
 

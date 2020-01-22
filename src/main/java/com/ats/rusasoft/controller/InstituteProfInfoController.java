@@ -82,7 +82,7 @@ public class InstituteProfInfoController {
 						IqacBasicInfo.class);
 				model.addObject("instRes", instRes);
 				
-				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignationsForList",Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
@@ -129,7 +129,7 @@ public class InstituteProfInfoController {
 						IqacBasicInfo.class);
 				model.addObject("instRes", instRes);
 				
-				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignations",Designation[].class);
+				Designation[] designArr= rest.getForObject(Constants.url + "/getAllDesignationsForList",Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 				
@@ -199,12 +199,12 @@ public class InstituteProfInfoController {
 					//System.out.println("inst id is" + inst_id);
 
 					redInfo.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
-					redInfo.setIqacAltEmail1(registered_email);
-					redInfo.setIqacAltEmail2(alt_email);
-					redInfo.setIqacAltFax(fax_no);
-					redInfo.setIqacAltMobile(alt_fac_contact);
-					redInfo.setIqacAltName(alt_faculty_name);
-					redInfo.setIqacAltPhone(phone_no);
+					redInfo.setIqacAltEmail1(XssEscapeUtils.jsoupParse(registered_email));
+					redInfo.setIqacAltEmail2(XssEscapeUtils.jsoupParse(alt_email));
+					redInfo.setIqacAltFax(XssEscapeUtils.jsoupParse(fax_no));
+					redInfo.setIqacAltMobile(XssEscapeUtils.jsoupParse(alt_fac_contact));
+					redInfo.setIqacAltName(XssEscapeUtils.jsoupParse(alt_faculty_name));
+					redInfo.setIqacAltPhone(XssEscapeUtils.jsoupParse(phone_no));
 					redInfo.setIsActive(1);
 
 					redInfo.setMakerUserId(maker_id);
@@ -239,12 +239,12 @@ public class InstituteProfInfoController {
 					IqacBasicInfo redInfo1 = rest.postForObject(Constants.url + "getIqacInfoByIqacInfoId", map,
 							IqacBasicInfo.class);
 					redInfo1.setEstabilishmentDate(DateConvertor.convertToYMD(estb_date));
-					redInfo1.setIqacAltEmail1(registered_email);
-					redInfo1.setIqacAltEmail2(alt_email);
-					redInfo1.setIqacAltFax(fax_no);
-					redInfo1.setIqacAltMobile(alt_fac_contact);
-					redInfo1.setIqacAltName(alt_faculty_name);
-					redInfo1.setIqacAltPhone(phone_no);
+					redInfo1.setIqacAltEmail1(XssEscapeUtils.jsoupParse(registered_email));
+					redInfo1.setIqacAltEmail2(XssEscapeUtils.jsoupParse(alt_email));
+					redInfo1.setIqacAltFax(XssEscapeUtils.jsoupParse(fax_no));
+					redInfo1.setIqacAltMobile(XssEscapeUtils.jsoupParse(alt_fac_contact));
+					redInfo1.setIqacAltName(XssEscapeUtils.jsoupParse(alt_faculty_name));
+					redInfo1.setIqacAltPhone(XssEscapeUtils.jsoupParse(phone_no));
 					redInfo1.setExVar1(request.getParameter("designation"));	//designation
 					redInfo.setMakerUserId(maker_id);
 

@@ -1261,8 +1261,8 @@ public class YesNoController {
 						if (value == 1) {
 							instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
 							instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage4.get(j).setInstYesnoResponse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId()));
+							instituteYesNoListPage4.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+									request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId())));
 						} else {
 
 							instituteYesNoListPage4.get(j).setDelStatus(0);
@@ -1281,8 +1281,8 @@ public class YesNoController {
 					instituteYesNo.setMakerDatetime(sf.format(date));
 					instituteYesNo.setYesnoPagecode(yesNoMasterListPage4.get(i).getYesnoPagecode());
 					instituteYesNo.setSectionCode(yesNoMasterListPage4.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(
-							request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId()));
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+							request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId())));
 					instituteYesNo.setYearId(acYearId);
 					instituteYesNo.setYesnoId(yesNoMasterListPage4.get(i).getYesnoId());
 					instituteYesNoListPage4.add(instituteYesNo);
@@ -1433,8 +1433,8 @@ public class YesNoController {
 						if (value == 1) {
 							instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
 							instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage5.get(j).setInstYesnoResponse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId()));
+							instituteYesNoListPage5.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+									request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId())));
 						} else {
 
 							instituteYesNoListPage5.get(j).setDelStatus(0);
@@ -1453,8 +1453,8 @@ public class YesNoController {
 					instituteYesNo.setMakerDatetime(sf.format(date));
 					instituteYesNo.setYesnoPagecode(yesNoMasterListPage5.get(i).getYesnoPagecode());
 					instituteYesNo.setSectionCode(yesNoMasterListPage5.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(
-							request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId()));
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+							request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId())));
 					instituteYesNo.setYearId(acYearId);
 					instituteYesNo.setYesnoId(yesNoMasterListPage5.get(i).getYesnoId());
 					instituteYesNoListPage5.add(instituteYesNo);
