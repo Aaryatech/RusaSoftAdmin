@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.model.FacultyConsultancy;
@@ -169,10 +170,10 @@ public class FacultyConsultancyController {
 					facultyConsultancy.setConsId(consId);
 				}
 
-				facultyConsultancy.setConsNature(nature);
-				facultyConsultancy.setConsSponsor(sponser);
-				facultyConsultancy.setConsAmount(amount);
-				facultyConsultancy.setConsPeriod(conPeriod);
+				facultyConsultancy.setConsNature(XssEscapeUtils.jsoupParse(nature));
+				facultyConsultancy.setConsSponsor(XssEscapeUtils.jsoupParse(sponser));
+				facultyConsultancy.setConsAmount((amount));
+				facultyConsultancy.setConsPeriod(XssEscapeUtils.jsoupParse(conPeriod));
 				facultyConsultancy.setIsConsCompleted(projComp);
 				facultyConsultancy.setFacultyId(userObj.getGetData().getUserDetailId());
 				facultyConsultancy.setMakerUserId(userObj.getUserId());

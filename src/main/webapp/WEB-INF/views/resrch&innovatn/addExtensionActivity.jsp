@@ -181,7 +181,7 @@
 														Of Student in Institute <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control"
+														<input type="number" class="form-control"
 															id="student_in_institute" onchange="trim(this)"
 															onFocus="clearDefault(this)" name="student_in_institute"
 															placeholder="No. of Student in Institute" maxlength="6"

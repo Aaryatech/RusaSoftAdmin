@@ -82,7 +82,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-								<c:if test="${isAdd==1}">
+								<c:if test="${addAccess==0}">
 									<a title="Add"
 										href="${pageContext.request.contextPath}/budgetAddPhysicalFacility"><button
 											type="button" class="btn btn-success">

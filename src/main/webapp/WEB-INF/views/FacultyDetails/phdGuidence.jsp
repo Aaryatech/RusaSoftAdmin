@@ -102,7 +102,7 @@
 
 
 															<div class="col-sm-4">
-														
+													
 															Yes <input type="radio" name="phdGuide" id="phdGuide" onclick="checkPhdGuide(this.value)"
 															value="1"  ${phd.isPhdGuide == 1 ? 'checked' : '' }>
 															

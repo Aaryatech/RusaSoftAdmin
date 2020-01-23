@@ -315,7 +315,7 @@ public class YesNoController {
 							instituteYesNoList.get(j).setMakerUserId(userObj.getUserId());
 							instituteYesNoList.get(j).setMakerDatetime(sf.format(date));
 							instituteYesNoList.get(j).setInstYesnoResponse(
-									request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId()));
+									XssEscapeUtils.jsoupParse(request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId())));
 						} else {
 
 							instituteYesNoList.get(j).setDelStatus(0);
@@ -335,7 +335,7 @@ public class YesNoController {
 					instituteYesNo.setYesnoPagecode(yesNoMasterList.get(i).getYesnoPagecode());
 					instituteYesNo.setSectionCode(yesNoMasterList.get(i).getYesnoSeccode());
 					instituteYesNo.setInstYesnoResponse(
-							request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId()));
+							XssEscapeUtils.jsoupParse(request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId())));
 					instituteYesNo.setYearId(acYearId);
 					instituteYesNo.setYesnoId(yesNoMasterList.get(i).getYesnoId());
 					instituteYesNoList.add(instituteYesNo);
@@ -1153,8 +1153,8 @@ public class YesNoController {
 						instituteYesNo.setMakerDatetime(sf.format(date));
 						instituteYesNo.setYesnoPagecode("PAGE3");
 						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
-						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
 						instituteYesNo.setYearId(acYearId);
 						instituteYesNoListPage3.add(instituteYesNo);
 					}
@@ -1323,8 +1323,8 @@ public class YesNoController {
 						instituteYesNo.setMakerDatetime(sf.format(date));
 						instituteYesNo.setYesnoPagecode("PAGE3");
 						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
-						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
 						instituteYesNo.setYearId(acYearId);
 						instituteYesNoListPage4.add(instituteYesNo);
 					}
@@ -1495,8 +1495,8 @@ public class YesNoController {
 						instituteYesNo.setMakerDatetime(sf.format(date));
 						instituteYesNo.setYesnoPagecode("PAGE3");
 						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(request.getParameter("dynamicyesnovalue" + j));
-						instituteYesNo.setYesnoDynamicTitle(request.getParameter("otherTitleName" + j));
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
 						instituteYesNo.setYearId(acYearId);
 						instituteYesNoListPage5.add(instituteYesNo);
 					}

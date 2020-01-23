@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -292,22 +293,22 @@ public class FacPersonalController {
 
 				String curDate = dateFormatStr.format(new Date());
 
-				facPersDetail.setfAadhar(request.getParameter("f_aadhar"));
+				facPersDetail.setfAadhar(XssEscapeUtils.jsoupParse(request.getParameter("f_aadhar")));
 				facPersDetail.setFacultyId(staffId);
-				facPersDetail.setfPan(request.getParameter("f_pan"));
-				facPersDetail.setfAddress(request.getParameter("fac_address"));
-				facPersDetail.setfAddress2(request.getParameter("fac_address2"));
-				facPersDetail.setfVillage(request.getParameter("village"));
-				facPersDetail.setfDistrict(request.getParameter("district"));
-				facPersDetail.setfTaluka(request.getParameter("taluka"));
+				facPersDetail.setfPan(XssEscapeUtils.jsoupParse(request.getParameter("f_pan")));
+				facPersDetail.setfAddress(XssEscapeUtils.jsoupParse(request.getParameter("fac_address")));
+				facPersDetail.setfAddress2(XssEscapeUtils.jsoupParse(request.getParameter("fac_address2")));
+				facPersDetail.setfVillage(XssEscapeUtils.jsoupParse(request.getParameter("village")));
+				facPersDetail.setfDistrict(XssEscapeUtils.jsoupParse(request.getParameter("district")));
+				facPersDetail.setfTaluka(XssEscapeUtils.jsoupParse(request.getParameter("taluka")));
 				facPersDetail.setfCity("NA");//request.getParameter("city")
 				facPersDetail.setfState(request.getParameter("state"));
-				facPersDetail.setfPincode(request.getParameter("pincode"));
+				facPersDetail.setfPincode(XssEscapeUtils.jsoupParse(request.getParameter("pincode")));
 				facPersDetail.setIsSame(Integer.parseInt(request.getParameter("is_state_same")));	//check state whether current or not
-				facPersDetail.setfDob(DateConvertor.convertToYMD(request.getParameter("f_dob")));
+				facPersDetail.setfDob(DateConvertor.convertToYMD(XssEscapeUtils.jsoupParse(request.getParameter("f_dob"))));
 				facPersDetail.setfPastExp(Float.parseFloat(request.getParameter("f_prevExp")));
-				facPersDetail.setfPhone(request.getParameter("f_phone"));
-				facPersDetail.setfResident(request.getParameter("f_resident"));
+				facPersDetail.setfPhone(XssEscapeUtils.jsoupParse(request.getParameter("f_phone")));
+				facPersDetail.setfResident(XssEscapeUtils.jsoupParse(request.getParameter("f_resident")));
 				facPersDetail.setIsAddSame(Integer.parseInt(request.getParameter("is_add_same")));
 				facPersDetail.setMakerPersDatetime(curDateTime);
 				facPersDetail.setMakerPersUserId(userObj.getUserId());
@@ -761,7 +762,7 @@ public class FacPersonalController {
 				facAcademic.setfClass(request.getParameter("fClass"));
 				facAcademic.setfPassingYear(request.getParameter("fPassingYear"));
 				facAcademic.setfQualificationId(Integer.parseInt(request.getParameter("fQualificationId")));
-				facAcademic.setfUniversity(request.getParameter("fUniversity"));
+				facAcademic.setfUniversity(XssEscapeUtils.jsoupParse(request.getParameter("fUniversity")));
 
 				facAcademic.setIsActive(1);
 

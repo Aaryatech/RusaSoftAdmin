@@ -107,7 +107,7 @@ public class LibraryController {
 						"0", newModuleList);
 				Info delete = AccessControll.checkAccess("showLibraryBasicInfo", "showLibraryBasicInfo", "0", "0", "0",
 						"1", newModuleList);
-
+System.err.println("add " +add.toString());
 				if (add.isError() == false) {
 					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
@@ -207,8 +207,8 @@ public class LibraryController {
 			
 			libInfo.setInstituteId(instituteId);
 			libInfo.setIsLibAutomated(0);// Integer.parseInt(request.getParameter("isUsingSoft"))
-			libInfo.setSoftName(request.getParameter("swName"));
-			libInfo.setSoftVersion(request.getParameter("version"));
+			libInfo.setSoftName(XssEscapeUtils.jsoupParse(request.getParameter("swName")));
+			libInfo.setSoftVersion(XssEscapeUtils.jsoupParse(request.getParameter("version")));
 			libInfo.setUsersOfLms(Integer.parseInt(request.getParameter("userLms")));
 			libInfo.setDateOfPurchaseAutomation(request.getParameter("purchaseDate"));
 			libInfo.setNoCompLan(Integer.parseInt(request.getParameter("noOfComp")));
@@ -482,9 +482,9 @@ public class LibraryController {
 			rareBook.setInstituteId(insId);
 			rareBook.setYearId(acadYear); // Academic Year
 			rareBook.setUserId(userId);
-			rareBook.setRareBookname(request.getParameter("bookName"));
-			rareBook.setExVar1(request.getParameter("authorName"));
-			rareBook.setPublisher(request.getParameter("publisher"));
+			rareBook.setRareBookname(XssEscapeUtils.jsoupParse(request.getParameter("bookName")));
+			rareBook.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("authorName")));
+			rareBook.setPublisher(XssEscapeUtils.jsoupParse(request.getParameter("publisher")));
 			rareBook.setBookCopies(Integer.parseInt(request.getParameter("noOfBook")));
 			rareBook.setCostOfBook(Integer.parseInt(request.getParameter("costOfBook")));
 			rareBook.setPublicationYear(request.getParameter("year"));

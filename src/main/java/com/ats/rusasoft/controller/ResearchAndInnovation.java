@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -465,11 +466,11 @@ public class ResearchAndInnovation {
 				tMous.setMouTitle("NA");
 				tMous.setExInt1(0);
 			}
-			tMous.setOrgName(request.getParameter("org_name"));
+			tMous.setOrgName(XssEscapeUtils.jsoupParse(request.getParameter("org_name")));
 			tMous.setMouSignedYear(request.getParameter("mou_signed_year"));
 			tMous.setDurFromdt(request.getParameter("from_date"));
 			tMous.setDurTodt(request.getParameter("to_date"));
-			tMous.setActivitiesMou(request.getParameter("mou_avtivity"));
+			tMous.setActivitiesMou(XssEscapeUtils.jsoupParse(request.getParameter("mou_avtivity")));
 			tMous.setNoOfStudBenif(Integer.parseInt(request.getParameter("no_stud")));
 			tMous.setNoOfStaffBenif(Integer.parseInt(request.getParameter("no_faculty")));
 			tMous.setDelStatus(1);
@@ -738,7 +739,7 @@ public class ResearchAndInnovation {
 		linkage.setFacultyStudLinkageId(Integer.parseInt(request.getParameter("fac_stud_link_id")));
 		linkage.setInstId(instituteId);
 		linkage.setAcYearId(acadYear);
-		linkage.setLinkageTitle(request.getParameter("link_title"));
+		linkage.setLinkageTitle(XssEscapeUtils.jsoupParse(request.getParameter("link_title")));
 		linkage.setPartneringInstitute(request.getParameter("part_inst"));
 		linkage.setIndustryName("NA");
 		linkage.setIndustryFromYear("NA");
@@ -746,7 +747,7 @@ public class ResearchAndInnovation {
 		linkage.setLabFromYear(request.getParameter("resrch_lab_year"));
 		linkage.setDurationFrom(request.getParameter("from_date"));
 		linkage.setDurationTo(request.getParameter("to_date"));
-		linkage.setNatureOfLinkage(request.getParameter("naturelinkage"));
+		linkage.setNatureOfLinkage(XssEscapeUtils.jsoupParse(request.getParameter("naturelinkage")));
 		linkage.setNoStudentParticipated(Integer.parseInt(request.getParameter("participate")) );
 		linkage.setDelStatus(1);
 		linkage.setIsActive(1);
@@ -1010,7 +1011,7 @@ public class ResearchAndInnovation {
 				
 				neighbourCommAct.setInstNeighbourhoodCommActId(Integer.parseInt(request.getParameter("neghbh_comm_act_id")));
 				neighbourCommAct.setInstId(instituteId);
-				neighbourCommAct.setActivityName(request.getParameter("activity_name"));
+				neighbourCommAct.setActivityName(XssEscapeUtils.jsoupParse(request.getParameter("activity_name")));
 				neighbourCommAct.setNoOfStud(Integer.parseInt(request.getParameter("no_student")));
 				neighbourCommAct.setTotalStudent(Integer.parseInt(request.getParameter("ttl_student")));
 				neighbourCommAct.setNoOfFaculty(Integer.parseInt(request.getParameter("no_faculty")));
@@ -1284,9 +1285,9 @@ public class ResearchAndInnovation {
 					soft.setAwrdRecgAgnstExtActId(0);
 				}
 				
-				soft.setActName(request.getParameter("name_act"));
-				soft.setAwardRecogName(request.getParameter("name_awrd_recg"));
-				soft.setNameAwardingBody(request.getParameter("name_awrd_body"));
+				soft.setActName(XssEscapeUtils.jsoupParse(request.getParameter("name_act")));
+				soft.setAwardRecogName(XssEscapeUtils.jsoupParse(request.getParameter("name_awrd_recg")));
+				soft.setNameAwardingBody(XssEscapeUtils.jsoupParse(request.getParameter("name_awrd_body")));
 				soft.setAwardYear(request.getParameter("awrd_year"));
 				soft.setInstId(instituteId);
 				soft.setAcYearId(acadYear);
@@ -1547,9 +1548,9 @@ public class ResearchAndInnovation {
 				
 				soft.setPlagCodeEthcId(Integer.parseInt(request.getParameter("soft_id")));
 				soft.setIsSoftwrAvabl(Integer.parseInt(request.getParameter("is_soft_avalbl")));
-				soft.setNameOfSoftwr(request.getParameter("software_name"));
-				soft.setMechDetectPlag(request.getParameter("mechnism"));
-				soft.setUrlLink(request.getParameter("url"));
+				soft.setNameOfSoftwr(XssEscapeUtils.jsoupParse(request.getParameter("software_name")));
+				soft.setMechDetectPlag(XssEscapeUtils.jsoupParse(request.getParameter("mechnism")));
+				soft.setUrlLink(XssEscapeUtils.jsoupParse(request.getParameter("url")));
 				soft.setInstId(instituteId);
 				soft.setAcYearId(acadYear);
 				soft.setDelStatus(1);

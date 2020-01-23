@@ -68,11 +68,10 @@
 	
 								<div class="actions panel_actions pull-right">
 	
-									<c:if test="${isAdd==1}">
+								<c:if test="${addAccess==0}">
 										<a href="${pageContext.request.contextPath}/showAddConsultancy"><button
 												type="button" class="btn btn-info">Add</button></a>
-	
-	
+	 
 									</c:if>
 	
 	

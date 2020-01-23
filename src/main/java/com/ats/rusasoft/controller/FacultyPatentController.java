@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -218,14 +219,13 @@ public class FacultyPatentController {
 
 				faculty.setPatentId(patentId);
 				faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-				faculty.setPatentTitle(parentTitle);
+				faculty.setPatentTitle(XssEscapeUtils.jsoupParse(parentTitle));
 				faculty.setDelStatus(1);
 				faculty.setIsActive(1);
 				faculty.setYearId(acYearId);
-				faculty.setPatentFileNo(patentNo);
+				faculty.setPatentFileNo(XssEscapeUtils.jsoupParse(patentNo));
 				faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
-				
-				faculty.setPatentGuideName(guideName);
+ 				faculty.setPatentGuideName(XssEscapeUtils.jsoupParse(guideName));
 				faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
 				faculty.setMakerUserId(userId);
 				faculty.setMakerEnterDatetime(curDateTime);
@@ -495,17 +495,17 @@ public class FacultyPatentController {
 
 					faculty.setAwardId(awardId);
 					faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-					faculty.setAwardName(name);
+					faculty.setAwardName(XssEscapeUtils.jsoupParse(name));
 					faculty.setDelStatus(1);
 					faculty.setIsActive(1);
 					faculty.setYearId(acYearId);
-					faculty.setAwardAuthority(agency);
+					faculty.setAwardAuthority(XssEscapeUtils.jsoupParse(agency));
 					faculty.setExInt1(awrdRecog);
 					if (awrdRecog == 1) {
 						faculty.setExVar1(request.getParameter("incentive"));
 					}
 					faculty.setAwardDate(DateConvertor.convertToYMD(date));
-					faculty.setAwardNature(nature);
+					faculty.setAwardNature(XssEscapeUtils.jsoupParse(nature));
 					faculty.setAwardValidity(validity);
 					if (validity == 0) {
 						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
@@ -809,7 +809,7 @@ public class FacultyPatentController {
 					lib.setFacultyId(faculty_id);
 					lib.setIsActive(1);
 					lib.setOutreachDate(DateConvertor.convertToYMD(act_date));
-					lib.setOutreachName(act_name);
+					lib.setOutreachName(XssEscapeUtils.jsoupParse(act_name));
 					lib.setOutreachType(activity_type);
 					lib.setOutreachLevel(act_level);
 					lib.setYearId(year_id);
@@ -847,7 +847,7 @@ public class FacultyPatentController {
 					lib1.setIsActive(1);
 
 					lib1.setOutreachDate(DateConvertor.convertToYMD(act_date));
-					lib1.setOutreachName(act_name);
+					lib1.setOutreachName(XssEscapeUtils.jsoupParse(act_name));
 					lib1.setOutreachType(activity_type);
 					lib1.setOutreachLevel(act_level);
 					lib1.setYearId(year_id);

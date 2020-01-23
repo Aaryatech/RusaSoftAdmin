@@ -13,7 +13,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " onload="clearSessionAttribute()">
+<body class=" " >
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -38,7 +38,7 @@
 					<section class="box ">
 
 						<header class="panel_header">
-							<h2 class="title pull-left">${title}</h2>
+							<h2 class="title pull-left">${title} ${addAccess}</h2>
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
 									<a href="${pageContext.request.contextPath}/libraryBasicInfo"><button

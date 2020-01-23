@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -116,7 +117,7 @@ public class BudgetCon {
 	@RequestMapping(value = "/budgetAddPhysicalFacility", method = RequestMethod.GET)
 	public ModelAndView budgetAddPhysicalFacility(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("budgetForm/budget_phy_facility_add");
+		ModelAndView model=null;
 		try {
 
 			HttpSession session = request.getSession();
@@ -134,6 +135,7 @@ public class BudgetCon {
 				model = new ModelAndView("accessDenied");
 			} else {
 
+				 model = new ModelAndView("budgetForm/budget_phy_facility_add");
 				model.addObject("title", Names.budget_physical_add);
 				model.addObject("budRupees", Names.Rupees);
 
@@ -228,7 +230,7 @@ public class BudgetCon {
 				budget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
 				budget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
 				budget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				budget.setPhysicalFacilityBudgetTitle(request.getParameter("infra_budget_title"));
+				budget.setPhysicalFacilityBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
 
 				int exInt1 = 0;
 				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
@@ -508,7 +510,7 @@ public class BudgetCon {
 				budget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
 				budget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
 				budget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				budget.setAcademicBudgetTitle(request.getParameter("infra_budget_title"));
+				budget.setAcademicBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
 
 				int exInt1 = 0;
 				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));

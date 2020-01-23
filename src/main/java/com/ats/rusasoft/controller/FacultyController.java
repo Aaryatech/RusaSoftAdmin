@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -136,15 +137,15 @@ public class FacultyController {
 				journal.setDelStatus(1);
 				journal.setExInt1(1);
 				journal.setExInt2(1);
-				journal.setExVar1(request.getParameter("paperTitle"));
-				journal.setExVar2(request.getParameter("coAuthor"));
+				journal.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("paperTitle")));
+				journal.setExVar2(XssEscapeUtils.jsoupParse(request.getParameter("coAuthor")));
 				journal.setFacultyId(userObj.getGetData().getUserDetailId());
 				int yearId = (int) session.getAttribute("acYearId");
 				journal.setYearId(yearId);
 				journal.setIsActive(1);
 				journal.setJournalId(journalId);
-				journal.setJournalIssue(issue);
-				journal.setJournalName(journalName);
+				journal.setJournalIssue(XssEscapeUtils.jsoupParse(issue));
+				journal.setJournalName(XssEscapeUtils.jsoupParse(journalName));
 				journal.setJournalPgFrom(journalPgFrom);
 				journal.setJournalPgTo(journalPgTo);
 				journal.setJournalVolume(journalVolume);
@@ -418,15 +419,15 @@ public class FacultyController {
 				project.setProjId(projId);
 
 				project.setProjInvDept(null);
-				project.setProjInvDept2(deptCoName);
+				project.setProjInvDept2(XssEscapeUtils.jsoupParse(deptCoName));
 				project.setProjTodt(DateConvertor.convertToYMD(toDate));
 				project.setProjYear(yearOfPS);
-				project.setProjInvName2(coPrincipalName);
-				project.setProjSponsor(spoAuth);
+				project.setProjInvName2(XssEscapeUtils.jsoupParse(coPrincipalName));
+				project.setProjSponsor(XssEscapeUtils.jsoupParse(spoAuth));
 				project.setProjTotalAmt(totalAmt);
 				project.setProjAmtRec(amtRec);
-				project.setProjName(projName);
-				project.setProjInvName(PIName);
+				project.setProjName(XssEscapeUtils.jsoupParse(projName));
+				project.setProjInvName(XssEscapeUtils.jsoupParse(PIName));
 
 				ResearchProject researchInsertRes = rest.postForObject(Constants.url + "saveReaserchProject", project,
 						ResearchProject.class);
@@ -634,16 +635,16 @@ public class FacultyController {
 				Info delete = AccessControll.checkAccess("showSubDetailsList", "showSubDetailsList", "0", "0", "0", "1",
 						newModuleList);
 
-				if (add.isError() == true) {
+				if (add.isError() == false) {
 					//System.out.println(" add   Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
-				if (edit.isError() == true) {
+				if (edit.isError() == false) {
 					//System.out.println(" edit   Accessable ");
 					model.addObject("editAccess", 0);
 				}
-				if (delete.isError() == true) {
+				if (delete.isError() == false) {
 					//System.out.println(" delete   Accessable ");
 					model.addObject("deleteAccess", 0);
 
@@ -761,9 +762,9 @@ public class FacultyController {
 				sub.setMakerEnterDatetime(dateTime);
 				sub.setMakerUserId(userObj.getUserId());
 				sub.setProgId(programId);
-				sub.setSubCode(subCode);
+				sub.setSubCode(XssEscapeUtils.jsoupParse(subCode));
 				sub.setSubIsCbse(isCbse);
-				sub.setSubName(subName);
+				sub.setSubName(XssEscapeUtils.jsoupParse(subName));
 				sub.setSubPassPer(rslt);
 				sub.setSubSem(sem);
 				sub.setSubStuAppear(noStudApp);
@@ -1389,7 +1390,7 @@ public class FacultyController {
 			swoc.setIsActive(1);
 			swoc.setMakerEnterDatetime(sf.format(date));
 			swoc.setMakerUserId(userObj.getUserId());
-			swoc.setSwocText(swocText);
+			swoc.setSwocText(XssEscapeUtils.jsoupParse(swocText));
 			swoc.setSwocType(swocType);
 			int yearId = (int) session.getAttribute("acYearId");
 			swoc.setYearId(yearId);

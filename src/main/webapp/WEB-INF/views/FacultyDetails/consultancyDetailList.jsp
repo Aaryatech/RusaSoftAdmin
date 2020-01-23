@@ -148,7 +148,7 @@
 													of Consultancy in Rs. <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" autocomplete="off"
+													<input type="number" class="form-control" autocomplete="off"
 														id="amount" placeholder="Amount of Consultancy in Rs." onkeypress='return restrictAlphabets(event)'
 														name="amount" value="${editConsultancy.consAmount}" onchange="trim(this)">
 											<span

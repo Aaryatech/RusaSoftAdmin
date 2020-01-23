@@ -1972,12 +1972,12 @@ public class StudentActivityController {
 			String curDateTime = dateFormat.format(cal.getTime());
 			
 			StudQualifyingExam stud = new StudQualifyingExam();
-			
+			//XssEscapeUtils.jsoupParse(iqacName)
 			stud.setStudExmId(Integer.parseInt(request.getParameter("studExmId")));
 			stud.setNameQualifExam(request.getParameter("qualify_exam"));
 			stud.setLevelExam(request.getParameter("exam_level"));
-			stud.setNoStudAppeared(Integer.parseInt(request.getParameter("no_stud_appear")));
-			stud.setNoStudQualified(Integer.parseInt(request.getParameter("no_stud_qualify")));
+			stud.setNoStudAppeared(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_appear"))));
+			stud.setNoStudQualified(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_qualify"))));
 			stud.setInstId(instituteId);
 			stud.setAcYearId(yId);
 			stud.setDelStatus(1);

@@ -1927,8 +1927,8 @@ public class AlumniTrainingController {
 			ValueAddedCourses course = new ValueAddedCourses();
 
 			course.setValueAddedCourseId(Integer.parseInt(request.getParameter("alumni_id")));
-			course.setValueAddedCourseName(request.getParameter("course_name"));
-			course.setCourseCode(request.getParameter("course_code"));
+			course.setValueAddedCourseName(XssEscapeUtils.jsoupParse(request.getParameter("course_name")));
+			course.setCourseCode(XssEscapeUtils.jsoupParse(request.getParameter("course_code")));
 			course.setYearOfOffering(request.getParameter("year_of_offering"));
 			course.setNoOfTimesOffer(Integer.parseInt(request.getParameter("no_times_offer")));
 			course.setYearOfDiscontinuation(request.getParameter("year_of_discontinue"));
@@ -2163,9 +2163,9 @@ public class AlumniTrainingController {
 			field.setFieldProjectInternId(Integer.parseInt(request.getParameter("field_id")));
 			field.setProgramName(Integer.parseInt(request.getParameter("prog_name")));
 			field.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-			field.setProvisionForUndertaking(request.getParameter("pro_undertake"));
-			field.setNoOfStudUndertaking(Integer.parseInt(request.getParameter("no_stud_undertake")));
-			field.setDocument(request.getParameter("document"));
+			field.setProvisionForUndertaking(XssEscapeUtils.jsoupParse(request.getParameter("pro_undertake")));
+			field.setNoOfStudUndertaking(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_undertake"))));
+			field.setDocument(XssEscapeUtils.jsoupParse(request.getParameter("document")));
 			field.setDelStatus(1);
 			field.setIsActive(1);
 			field.setAcYearId(yId);
@@ -2399,11 +2399,11 @@ public class AlumniTrainingController {
 			DifrentlyAbledStud stud = new DifrentlyAbledStud();
 
 			stud.setDifAbleStudId(Integer.parseInt(request.getParameter("studDifDisId")));
-			stud.setNameOfStud(request.getParameter("studentName"));
+			stud.setNameOfStud(XssEscapeUtils.jsoupParse(request.getParameter("studentName")));
 			stud.setGender(Integer.parseInt(request.getParameter("gender")));
-			stud.setUdidCardNo(request.getParameter("udid"));
-			stud.setTypeOfDisability(request.getParameter("disablityType"));
-			stud.setPercntOfDisability(Integer.parseInt(request.getParameter("disablity")));
+			stud.setUdidCardNo(XssEscapeUtils.jsoupParse(request.getParameter("udid")));
+			stud.setTypeOfDisability(XssEscapeUtils.jsoupParse(request.getParameter("disablityType")));
+			stud.setPercntOfDisability(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("disablity"))));
 			stud.setYearOfEnrollement(request.getParameter("enrolledYear"));
 			stud.setProgramId(Integer.parseInt(request.getParameter("prog_name")));
 			stud.setProgTypeId(Integer.parseInt(request.getParameter("prog_type")));

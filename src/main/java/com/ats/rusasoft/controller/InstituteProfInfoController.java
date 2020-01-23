@@ -971,11 +971,11 @@ public class InstituteProfInfoController {
 
 					//System.out.println("inst id is" + inst_id);
 
-					redInfo.setLinkAgency(col_agency);
-					redInfo.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
+					redInfo.setLinkAgency(XssEscapeUtils.jsoupParse(col_agency));
+					redInfo.setLinkBeneficiaryNos(Integer.parseInt(XssEscapeUtils.jsoupParse(totalParticipants)));
 					redInfo.setLinkBeneficiary(beneficiaryMOU);
-					redInfo.setLinknameId(Integer.parseInt(colName));
-					redInfo.setLinkNature(linkageNature);
+					redInfo.setLinknameId(Integer.parseInt(XssEscapeUtils.jsoupParse(colName)));
+					redInfo.setLinkNature(XssEscapeUtils.jsoupParse(linkageNature));
 
 					redInfo.setMakerUserId(maker_id);
 					redInfo.setInstituteId(inst_id);
@@ -1012,11 +1012,11 @@ public class InstituteProfInfoController {
 					InstituteLinkage redInfo1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
 							InstituteLinkage.class);
 
-					redInfo1.setLinkAgency(col_agency);
-					redInfo1.setLinkBeneficiaryNos(Integer.parseInt(totalParticipants));
+					redInfo1.setLinkAgency(XssEscapeUtils.jsoupParse(col_agency));
+					redInfo1.setLinkBeneficiaryNos(Integer.parseInt(XssEscapeUtils.jsoupParse(totalParticipants)));
 					redInfo1.setLinkBeneficiary(beneficiaryMOU);
-					redInfo1.setLinknameId(Integer.parseInt(colName));
-					redInfo1.setLinkNature(linkageNature);
+					redInfo1.setLinknameId(Integer.parseInt(XssEscapeUtils.jsoupParse(colName)));
+					redInfo1.setLinkNature(XssEscapeUtils.jsoupParse(linkageNature));
 
 					redInfo1.setYearId(acYearId);
 

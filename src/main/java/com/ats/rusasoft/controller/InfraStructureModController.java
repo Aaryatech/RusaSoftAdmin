@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
@@ -266,13 +267,13 @@ public class InfraStructureModController {
 					instInfraAreaInfo.setInstId(userObj.getGetData().getUserInstituteId());// get from Session
 					instInfraAreaInfo.setMakerUserId(userObj.getUserId());// get from Session
 					instInfraAreaInfo.setMakerDatetime(curDateTime);
-					instInfraAreaInfo.setAreaLoc(request.getParameter("loc_of_area"));
+					instInfraAreaInfo.setAreaLoc(XssEscapeUtils.jsoupParse(request.getParameter("loc_of_area")));
 					
 					int areaType=Integer.parseInt(request.getParameter("area_type")); 
-					int areaName=Integer.parseInt(request.getParameter("area_name")); 
+					int areaName=Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("area_name"))); 
 					
 					if(areaName==0) {
-						instInfraAreaInfo.setAreaName(request.getParameter("other_area"));
+						instInfraAreaInfo.setAreaName(XssEscapeUtils.jsoupParse(request.getParameter("other_area")));
 					}else {
 						instInfraAreaInfo.setAreaName(null);
 					}
@@ -603,8 +604,8 @@ public class InfraStructureModController {
 			eCont.setInstEContentDevFacilityId(Integer.parseInt(request.getParameter("econtentId")));
 			eCont.setInstId(instituteId);
 			eCont.seteContentDevFacility(request.getParameter("e_contentType"));
-			eCont.setNameEcontentDevFacility(request.getParameter("e_contentName"));
-			eCont.setVideoLink(request.getParameter("video_link"));
+			eCont.setNameEcontentDevFacility(XssEscapeUtils.jsoupParse(request.getParameter("e_contentName")));
+			eCont.setVideoLink(XssEscapeUtils.jsoupParse(request.getParameter("video_link")));
 			eCont.setDelStatus(1);
 			eCont.setIsActive(1);
 			eCont.setMakerUserId(userId);
@@ -1127,9 +1128,9 @@ public class InfraStructureModController {
 			internet.setInstInternetInfoId(Integer.parseInt(request.getParameter("internetId")));
 			internet.setInstId(instituteId);
 			internet.setNoOfCompWithInternetAccess(Integer.parseInt(request.getParameter("internet_access")));
-			internet.setLeasedLineBandwidth(request.getParameter("bandwidth"));
-			internet.setLanConfSpeed(request.getParameter("lan_conf"));
-			internet.setIspName(request.getParameter("isp_name"));
+			internet.setLeasedLineBandwidth(XssEscapeUtils.jsoupParse(request.getParameter("bandwidth")));
+			internet.setLanConfSpeed(XssEscapeUtils.jsoupParse(request.getParameter("lan_conf")));
+			internet.setIspName(XssEscapeUtils.jsoupParse(request.getParameter("isp_name")));
 			internet.setPurchaseDate(request.getParameter("purchase_date"));
 			internet.setDelStatus(1);
 			internet.setIsActive(1);

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.Names;
@@ -178,7 +179,7 @@ public class BudgetConSac {
 	@RequestMapping(value = "/budgetAddInfrastructureFacility", method = RequestMethod.GET)
 	public ModelAndView budgetAddInfrastructureFacility(HttpServletRequest request, HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("budgetForm/infra_budget_facility_add");
+		ModelAndView model=null;
 		try {
 
 			HttpSession session = request.getSession();
@@ -194,7 +195,7 @@ public class BudgetConSac {
 			if (aceess.isError() == true) {
 				model = new ModelAndView("accessDenied");
 			} else {
-
+				model = new ModelAndView("budgetForm/infra_budget_facility_add");
 				model.addObject("title", Names.infra_budget_add);
 				model.addObject("budRupees", Names.Rupees);
 
@@ -290,10 +291,10 @@ public class BudgetConSac {
 
 				infraBudget.setInfraBudgetId(infraBudgetId);
 
-				infraBudget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
-				infraBudget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
+				infraBudget.setBudgetAllocated(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("budget_allocated"))));
+				infraBudget.setBudgetUtilized(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("budget_utilized"))));
 				infraBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				infraBudget.setInfraBudgetTitle(request.getParameter("infra_budget_title"));
+				infraBudget.setInfraBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
 
 				int exInt1 = 0;
 				infraBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_expd")));
@@ -625,7 +626,7 @@ public class BudgetConSac {
 				libBudget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
 				libBudget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
 				libBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				libBudget.setLibBudgetTitle(request.getParameter("lib_budget_title"));
+				libBudget.setLibBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("lib_budget_title")));
 
 				int exInt1 = 0;
 				libBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));

@@ -85,7 +85,7 @@
 
 							<div class="actions panel_actions pull-right">
 
-								<c:if test="${isAdd==1}">
+								<c:if test="${addAccess==0}">
 									<a title="Add"
 										href="${pageContext.request.contextPath}/showPatentDetails"><button
 											type="button" class="btn btn-success">

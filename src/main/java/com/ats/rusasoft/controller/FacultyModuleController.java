@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
@@ -228,12 +229,12 @@ public class FacultyModuleController {
 				}
 				facConf.setFacultyId(userObj.getGetData().getUserDetailId());
 				facConf.setYearId(yId);
-				facConf.setConfName(request.getParameter("conf_name"));
+				facConf.setConfName(XssEscapeUtils.jsoupParse(request.getParameter("conf_name")));
 				facConf.setConfType(request.getParameter("conf_type"));
 				facConf.setConfDate(request.getParameter("conf_date"));
-				facConf.setConfVenue(request.getParameter("conf_venue"));
-				facConf.setConfFundFrom(request.getParameter("conf_fund"));
-				facConf.setConfFundAmt(Integer.parseInt(request.getParameter("conf_amt")));
+				facConf.setConfVenue(XssEscapeUtils.jsoupParse(request.getParameter("conf_venue")));
+				facConf.setConfFundFrom(XssEscapeUtils.jsoupParse(request.getParameter("conf_fund")));
+				facConf.setConfFundAmt(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("conf_amt"))));
 				facConf.setDelStatus(1);
 				facConf.setIsActive(1);
 				facConf.setMakerUserId(userId);
@@ -605,11 +606,11 @@ public class FacultyModuleController {
 			facAct.setFacultyId(userObj.getGetData().getUserDetailId());
 			facAct.setYearId(yId);
 			facAct.setActivityType(request.getParameter("activity_type"));
-			facAct.setActivityName(request.getParameter("activity_name"));
+			facAct.setActivityName(XssEscapeUtils.jsoupParse(request.getParameter("activity_name")));
 			facAct.setActivityLevel(request.getParameter("activity_level"));
 			facAct.setActivityDate(request.getParameter("activity_date"));
 			facAct.setActivityParticipants(request.getParameter("activity_part"));
-			facAct.setActivityFundedBy(request.getParameter("activity_found"));
+			facAct.setActivityFundedBy(XssEscapeUtils.jsoupParse(request.getParameter("activity_found")));
 			facAct.setActivityAmountSanctioned(Integer.parseInt(request.getParameter("amt_sanc")));
 			facAct.setActivityAmountUtilised(Integer.parseInt(request.getParameter("amt_utilise")));
 			facAct.setDelStatus(1);
@@ -1165,7 +1166,7 @@ public class FacultyModuleController {
 				int is_view = Integer.parseInt(request.getParameter("is_view"));
 				stud.setMenId(Integer.parseInt(request.getParameter("menId")));
 				stud.setFacultyId(facId.getGetData().getUserDetailId());
-				stud.setMenStuCount(Integer.parseInt(request.getParameter("stud_no")));
+				stud.setMenStuCount(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("stud_no"))));
 				stud.setYearId(yId);
 				stud.setDelStatus(1);
 				stud.setIsActive(1);
@@ -1476,14 +1477,14 @@ public class FacultyModuleController {
 
 			facBook.setFacultyId(userObj.getGetData().getUserDetailId());
 			facBook.setYearId(yId);
-			facBook.setBookTitle(request.getParameter("book_title"));
-			facBook.setBookEdition(request.getParameter("book_edition"));
+			facBook.setBookTitle(XssEscapeUtils.jsoupParse(request.getParameter("book_title")));
+			facBook.setBookEdition(XssEscapeUtils.jsoupParse(request.getParameter("book_edition")));
 			facBook.setBookAuthor("NA");//(request.getParameter("author"));
-			facBook.setBookCoauther1(request.getParameter("co_author1"));
-			facBook.setBookCoauther2(request.getParameter("co_author2"));
-			facBook.setBookCoauther3(request.getParameter("co_author3"));
-			facBook.setBookPublisher(request.getParameter("publisher"));
-			facBook.setBookIsbn(request.getParameter("isbn"));
+			facBook.setBookCoauther1(XssEscapeUtils.jsoupParse(request.getParameter("co_author1")));
+			facBook.setBookCoauther2(XssEscapeUtils.jsoupParse(request.getParameter("co_author2")));
+			facBook.setBookCoauther3(XssEscapeUtils.jsoupParse(request.getParameter("co_author3")));
+			facBook.setBookPublisher(XssEscapeUtils.jsoupParse(request.getParameter("publisher")));
+			facBook.setBookIsbn(XssEscapeUtils.jsoupParse(request.getParameter("isbn")));
 			facBook.setBookPubYear(request.getParameter("year_publication"));
 			facBook.setDelStatus(1);
 			facBook.setIsActive(1);
@@ -1736,8 +1737,8 @@ public class FacultyModuleController {
 			facCon.setFacultyId(userObj.getGetData().getUserDetailId());
 			facCon.setYearId(yId);
 			facCon.setConLevel(request.getParameter("level"));
-			facCon.setConName(request.getParameter("con_name"));
-			facCon.setConUniversity(request.getParameter("university"));
+			facCon.setConName(XssEscapeUtils.jsoupParse(request.getParameter("con_name")));
+			facCon.setConUniversity(XssEscapeUtils.jsoupParse(request.getParameter("university")));
 			facCon.setConFrom(request.getParameter("from_date"));
 			facCon.setConTo(request.getParameter("to_date"));
 			facCon.setConExamSetting(Integer.parseInt(request.getParameter("examSetting")));
@@ -2095,12 +2096,12 @@ public class FacultyModuleController {
 			phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
 			phd.setIsCoGuide(Integer.parseInt(request.getParameter("coGuide")));
 
-			phd.setPhdScholarName(request.getParameter("phd_scholar"));
-			phd.setAadhaarNo(request.getParameter("aadhar"));
-			phd.setPlaceOfWork(request.getParameter("place_work"));
+			phd.setPhdScholarName(XssEscapeUtils.jsoupParse(request.getParameter("phd_scholar")));
+			phd.setAadhaarNo(XssEscapeUtils.jsoupParse(request.getParameter("aadhar")));
+			phd.setPlaceOfWork(XssEscapeUtils.jsoupParse(request.getParameter("place_work")));
 			phd.setPhdRegYear(request.getParameter("phd_year_reg"));
-			phd.setPhdTopic(request.getParameter("phd_topic"));
-			phd.setUniversity(request.getParameter("university"));
+			phd.setPhdTopic(XssEscapeUtils.jsoupParse(request.getParameter("phd_topic")));
+			phd.setUniversity(XssEscapeUtils.jsoupParse(request.getParameter("university")));
 			phd.setIsPhdAwarded(Integer.parseInt(request.getParameter("awarded")));
 
 			phd.setDelStatus(1);
@@ -2108,7 +2109,7 @@ public class FacultyModuleController {
 			phd.setMakerUserId(userId);
 			phd.setMakerEnterDatetime(curDateTime);
 			phd.setExInt1(0);
-			phd.setExVar1(request.getParameter("phd_scholar_depart"));
+			phd.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("phd_scholar_depart")));
 			//System.out.println(phd.toString());
 
 			FacultyPhdGuide savePhd = rest.postForObject(Constants.url + "/insertPhdGuide", phd, FacultyPhdGuide.class);
@@ -2387,7 +2388,7 @@ public class FacultyModuleController {
 			
 			fac.setFacultyEmpwrmntId(Integer.parseInt(request.getParameter("fac_empwr_id")));
 			fac.setNameOfAcitvity(request.getParameter("actvity_name"));
-			fac.setTitle(request.getParameter("title"));
+			fac.setTitle(XssEscapeUtils.jsoupParse(request.getParameter("title")));
 			fac.setFinancialSupport(fs);
 			if(fs == 0) {
 			fac.setAmt_recvd_from("NA");

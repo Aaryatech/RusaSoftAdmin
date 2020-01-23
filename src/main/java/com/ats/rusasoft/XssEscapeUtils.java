@@ -1,6 +1,7 @@
 package com.ats.rusasoft;
 
 import org.jsoup.Jsoup;
+
 import org.jsoup.safety.Whitelist;
 
 /*<dependency>

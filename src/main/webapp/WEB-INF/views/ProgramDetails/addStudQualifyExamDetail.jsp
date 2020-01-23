@@ -114,46 +114,67 @@
 
 										<div>
 
-											
+
 
 											<div class="col-xs-12">
-											
-											<input type="hidden" id="studExmId" name="studExmId" value="${studQlifyExam.studExmId }">
+
+												<input type="hidden" id="studExmId" name="studExmId"
+													value="${studQlifyExam.studExmId }">
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="activityName">Name
 														of Qualifying Exam <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<select id="qualify_exam" name="qualify_exam" class="form-control" onchange="otherExam(this.value)">
-															<option value="NET" ${studQlifyExam.nameQualifExam eq 'NET' ? 'selected' : ''}>NET</option>
-															<option value="SLET" ${studQlifyExam.nameQualifExam eq 'SLET' ? 'selected' : ''}>SLET</option>
-															<option value="GATE" ${studQlifyExam.nameQualifExam eq 'GATE' ? 'selected' : ''}>GATE</option>
-															<option value="GMAT" ${studQlifyExam.nameQualifExam eq 'GMAT' ? 'selected' : ''}>GMAT</option>
-															<option value="CAT" ${studQlifyExam.nameQualifExam eq 'CAT' ? 'selected' : ''}>CAT</option>
-															<option value="GRE" ${studQlifyExam.nameQualifExam eq 'GRE' ? 'selected' : ''}>GRE</option>
-															<option value="JAM" ${studQlifyExam.nameQualifExam eq 'JAM' ? 'selected' : ''}>JAM</option>
-															<option value="IELET" ${studQlifyExam.nameQualifExam eq 'IELET' ? 'selected' : ''}>IELET</option>
-															<option value="TOEFL" ${studQlifyExam.nameQualifExam eq 'TOEFL' ? 'selected' : ''}>TOEFL</option>
-															<option value="Civil Services" ${studQlifyExam.nameQualifExam eq 'Civil Services' ? 'selected' : ''}>Civil Services</option>
-															<option value="State Government Exams" ${studQlifyExam.nameQualifExam eq 'State Government Exams' ? 'selected' : ''}>State Government Exams</option>
-															<option value="1" ${studQlifyExam.nameQualifExam eq '1' ? 'selected' : ''}>Other Equivalent Examination</option>
+														<select id="qualify_exam" name="qualify_exam"
+															class="form-control" onchange="otherExam(this.value)">
+															<option value="NET"
+																${studQlifyExam.nameQualifExam eq 'NET' ? 'selected' : ''}>NET</option>
+															<option value="SLET"
+																${studQlifyExam.nameQualifExam eq 'SLET' ? 'selected' : ''}>SLET</option>
+															<option value="GATE"
+																${studQlifyExam.nameQualifExam eq 'GATE' ? 'selected' : ''}>GATE</option>
+															<option value="GMAT"
+																${studQlifyExam.nameQualifExam eq 'GMAT' ? 'selected' : ''}>GMAT</option>
+															<option value="CAT"
+																${studQlifyExam.nameQualifExam eq 'CAT' ? 'selected' : ''}>CAT</option>
+															<option value="GRE"
+																${studQlifyExam.nameQualifExam eq 'GRE' ? 'selected' : ''}>GRE</option>
+															<option value="JAM"
+																${studQlifyExam.nameQualifExam eq 'JAM' ? 'selected' : ''}>JAM</option>
+															<option value="IELET"
+																${studQlifyExam.nameQualifExam eq 'IELET' ? 'selected' : ''}>IELET</option>
+															<option value="TOEFL"
+																${studQlifyExam.nameQualifExam eq 'TOEFL' ? 'selected' : ''}>TOEFL</option>
+															<option value="Civil Services"
+																${studQlifyExam.nameQualifExam eq 'Civil Services' ? 'selected' : ''}>Civil
+																Services</option>
+															<option value="State Government Exams"
+																${studQlifyExam.nameQualifExam eq 'State Government Exams' ? 'selected' : ''}>State
+																Government Exams</option>
+															<option value="1"
+																${studQlifyExam.nameQualifExam eq '1' ? 'selected' : ''}>Other
+																Equivalent Examination</option>
 														</select>
 													</div>
 												</div>
-												
+
 												<div class="form-group" id="ihide" style="display: none;">
-														<div class="form-group">
-															<label class="control-label col-sm-2" for="page_name"> Other Equivalent  
-														 Examination<span class="text-danger"></span>
-													</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" placeholder="Other Equivalent Examination" autocomplete="off" id="other_eaxm"
-													name="other_eaxm" value="${studQlifyExam.exVar1}">
-													 <span class="error_form text-danger" id="error_other_exam"	style="display: none;">Please enter other equivalent examination.</span>
-													 
+													<div class="form-group">
+														<label class="control-label col-sm-2" for="page_name">
+															Other Equivalent Examination<span class="text-danger"></span>
+														</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control"
+																placeholder="Other Equivalent Examination"
+																autocomplete="off" id="other_eaxm" name="other_eaxm"
+																value="${studQlifyExam.exVar1}"> <span
+																class="error_form text-danger" id="error_other_exam"
+																style="display: none;">Please enter other
+																equivalent examination.</span>
+
+														</div>
 													</div>
-												</div>
 												</div>
 
 												<div class="form-group">
@@ -161,44 +182,55 @@
 														of Exam <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<select id="exam_level" name="exam_level" class="form-control">
-															<option value="State" ${studQlifyExam.levelExam eq 'State' ? 'selected' : ''}>State</option>															
-															<option value="National" ${studQlifyExam.levelExam eq 'National' ? 'selected' : ''}>National</option>
-															<option value="International" ${studQlifyExam.levelExam eq 'International' ? 'selected' : ''}>International</option>
+														<select id="exam_level" name="exam_level"
+															class="form-control">
+															<option value="State"
+																${studQlifyExam.levelExam eq 'State' ? 'selected' : ''}>State</option>
+															<option value="National"
+																${studQlifyExam.levelExam eq 'National' ? 'selected' : ''}>National</option>
+															<option value="International"
+																${studQlifyExam.levelExam eq 'International' ? 'selected' : ''}>International</option>
 														</select>
 													</div>
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="no_stud_appear">No. of Students 
-														Appeared<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="no_stud_appear">No.
+														of Students Appeared<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" id="no_stud_appear" onblur="cal()"
-															value="${studQlifyExam.noStudAppeared}" onFocus="clearDefault(this)"
-															placeholder="No. of Students Appeared" name="no_stud_appear"
-															autocomplete="off" maxlength="6"> <span
-															class="error_form text-danger" id="studAppear_errfield"
-															style="display: none;">Please enter No. of student appeared
-															and value must be greater than 0.</span>
+														<input type="number" class="form-control"
+															id="no_stud_appear" onblur="cal()"
+															value="${studQlifyExam.noStudAppeared}"
+															onFocus="clearDefault(this)"
+															placeholder="No. of Students Appeared"
+															name="no_stud_appear" autocomplete="off" maxlength="6">
+														<span class="error_form text-danger"
+															id="studAppear_errfield" style="display: none;">Please
+															enter No. of student appeared and value must be greater
+															than 0.</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="no_stud_qualify">No. of Students 
-														Qualified<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="no_stud_qualify">No.
+														of Students Qualified<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" maxlength="30" class="form-control" onblur="cal()"
-															id="no_stud_qualify" value="${studQlifyExam.noStudQualified}" 
-															name="no_stud_qualify" placeholder="No. of Students Qualified" 
-															 onFocus="clearDefault(this)" maxlength="6"
+														<input type="number" maxlength="30" class="form-control"
+															onblur="cal()" id="no_stud_qualify"
+															value="${studQlifyExam.noStudQualified}"
+															name="no_stud_qualify"
+															placeholder="No. of Students Qualified"
+															onFocus="clearDefault(this)" maxlength="6"
 															onchange="return trim(this)" autocomplete="off">
-													<span class="error_form text-danger" id="studQualify_errfield"
-															style="display: none;">Please enter No. student qualified and value must be greater than 0.</span>
-															
-													<span class="error_form text-danger" id="studQualify_errfield0"
-															style="display: none;">No. students qualified cannot exceed No. of students appeared.</span>
+														<span class="error_form text-danger"
+															id="studQualify_errfield" style="display: none;">Please
+															enter No. student qualified and value must be greater
+															than 0.</span> <span class="error_form text-danger"
+															id="studQualify_errfield0" style="display: none;">No.
+															students qualified cannot exceed No. of students
+															appeared.</span>
 													</div>
 												</div>
 
@@ -249,37 +281,48 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-	<script type="text/javascript">	
-	function otherExam(activity) {
+	
+	
+	<script type="text/javascript">
+	
+	$('#no_stud_appear').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+
+	$('#no_stud_qualify').on(
+			'input',
+			function() {
+				this.value = this.value.replace(/[^0-9]/g, '').replace(
+						/(\..*)\./g, '$1');
+			});
+	</script>
+	<script type="text/javascript">
+	 
+		function otherExam(activity) {
+
+			//alert(activity);
+			if (activity == 1) {
+
+				document.getElementById("ihide").style = "visible"
+
+			} else {
+				document.getElementById("ihide").style = "display:none"
+
+			}
+
+		}
+
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
+			}
+		};
+
 		
-		//alert(activity);
-					if (activity == 1) {
-						
-						document.getElementById("ihide").style = "visible"
-						
-
-					} else  {
-						document.getElementById("ihide").style = "display:none"
-						
-					}
-
-				}
-	
-function clearDefault(a){
-	if(a.defaultValue==0)
-	{
-		a.value=""
-	}
-	};
-	
-	$('#no_stud_appear').on('input', function() {
-		this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	$('#no_stud_qualify').on('input', function() {
-		this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-</script>
+	</script>
 	<script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script type="text/javascript" src="./javascript.js"></script>
@@ -382,6 +425,7 @@ function clearDefault(a){
 	</script>
 
 	<script>
+		 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -415,17 +459,17 @@ function clearDefault(a){
 
 		}
 		var res = 0;
-		function cal(){
+		function cal() {
 			var appear = parseFloat($("#no_stud_appear").val());
 			var qualify = parseFloat($("#no_stud_qualify").val());
-			
-			if(appear < qualify){
+
+			if (appear < qualify) {
 				res = 0;
-			}else{
+			} else {
 				res = 1;
 			}
 		}
-		
+
 		$(document)
 				.ready(
 						function($) {
@@ -437,9 +481,9 @@ function clearDefault(a){
 												var isError = false;
 												var errMsg = "";
 
-												if ($("#no_stud_appear")
-														.val()<=0 || !$("#no_stud_appear")
-														.val()) {		
+												if ($("#no_stud_appear").val() <= 0
+														|| !$("#no_stud_appear")
+																.val()) {
 
 													isError = true;
 													errMsg += '<li>Please enter a valid name.</li>';
@@ -455,36 +499,40 @@ function clearDefault(a){
 															.hide()
 												}
 
-												if ($("#no_stud_qualify").val()<=0 || !$("#no_stud_qualify").val()) {
+												if ($("#no_stud_qualify").val() <= 0
+														|| !$(
+																"#no_stud_qualify")
+																.val()) {
 
 													isError = true;
 													errMsg += '<li>Please enter a valid name.</li>';
 
-													$("#no_stud_qualify").addClass(
-															"has-error")
+													$("#no_stud_qualify")
+															.addClass(
+																	"has-error")
 													$("#studQualify_errfield")
 															.show()
 													//return false;
 												} else {
 													$("#studQualify_errfield")
 															.hide()
-												}		
-	
+												}
+
 												if (res == 0) {
 
 													isError = true;
-													
-													$("#no_stud_qualify").addClass(
-															"has-error")
+
+													$("#no_stud_qualify")
+															.addClass(
+																	"has-error")
 													$("#studQualify_errfield0")
 															.show()
 													//return false;
 												} else {
 													$("#studQualify_errfield0")
 															.hide()
-												}		
-												 
-												
+												}
+
 												if (!isError) {
 
 													var x = confirm("Do you really want to submit the form?");

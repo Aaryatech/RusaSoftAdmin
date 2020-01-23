@@ -87,8 +87,7 @@
 								<%-- <a
 									href="${pageContext.request.contextPath}/budgetAddOnAcadamicSupportFacilities"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-								<c:if test="${isAdd==1}">
-									<a title="Add"
+	<c:if test="${addAccess==0}">									<a title="Add"
 										href="${pageContext.request.contextPath}/budgetAddOnAcadamicSupportFacilities"><button
 											type="button" class="btn btn-success">
 											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
