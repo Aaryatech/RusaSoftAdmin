@@ -874,39 +874,47 @@ public class InfraStructureModController {
 
 	@RequestMapping(value = "/inserteItInfrastructure", method = RequestMethod.POST)
 	public String inserteItInfrastructure(HttpServletRequest request, HttpServletResponse response) {
-
+		String redirect =null;
 		try {
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			ItInfrastructure infrastur = new ItInfrastructure();
+			if (token.trim().equals(key.trim())) {
 
-			infrastur.setInstItInfraInfoId(Integer.parseInt(request.getParameter("infraId")));
-			infrastur.setInstId(instituteId);
-			infrastur.setNoOfComputers(Integer.parseInt(request.getParameter("no_comp")));
-			infrastur.setPurchaseDate(request.getParameter("purchase_date"));
-			infrastur.setPurchaseAmt(Integer.parseInt(request.getParameter("purchase_amt")));
-			infrastur.setNoOfStudUtilizing(Integer.parseInt(request.getParameter("stud_util")));
-			infrastur.setDelStatus(1);
-			infrastur.setIsActive(1);
-			infrastur.setMakerUserId(userId);
-			infrastur.setMakerDatetime(curDateTime);
-			infrastur.setExInt1(0);
-			infrastur.setExInt2(0);
-			infrastur.setExVar1("NA");
-			infrastur.setExVar2("NA");
-			// System.out.println(infrastur.toString());
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
 
-			ItInfrastructure infra = rest.postForObject(Constants.url + "/saveItInfrastructureInfo", infrastur,
-					ItInfrastructure.class);
+				ItInfrastructure infrastur = new ItInfrastructure();
 
+				infrastur.setInstItInfraInfoId(Integer.parseInt(request.getParameter("infraId")));
+				infrastur.setInstId(instituteId);
+				infrastur.setNoOfComputers(Integer.parseInt(request.getParameter("no_comp")));
+				infrastur.setPurchaseDate(request.getParameter("purchase_date"));
+				infrastur.setPurchaseAmt(Integer.parseInt(request.getParameter("purchase_amt")));
+				infrastur.setNoOfStudUtilizing(Integer.parseInt(request.getParameter("stud_util")));
+				infrastur.setDelStatus(1);
+				infrastur.setIsActive(1);
+				infrastur.setMakerUserId(userId);
+				infrastur.setMakerDatetime(curDateTime);
+				infrastur.setExInt1(0);
+				infrastur.setExInt2(0);
+				infrastur.setExVar1("NA");
+				infrastur.setExVar2("NA");
+				// System.out.println(infrastur.toString());
+
+				ItInfrastructure infra = rest.postForObject(Constants.url + "/saveItInfrastructureInfo", infrastur,
+						ItInfrastructure.class);
+				redirect = "redirect:/showItInfrastructure";
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
 
 		}
-		return "redirect:/showItInfrastructure";
+		return redirect;
 	}
 
 	@RequestMapping(value = "/editItInfrastructInfo/{infraId}", method = RequestMethod.GET)
