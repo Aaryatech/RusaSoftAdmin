@@ -163,6 +163,11 @@ public class ResearchAndInnovation {
 	
 		try {
 			HttpSession session = request.getSession();
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
 			int acadYear = (int) session.getAttribute("acYearId");
@@ -197,14 +202,16 @@ public class ResearchAndInnovation {
 			//System.out.println(tExtAct.toString());
 			
 			TExtensionActivity saveExtActivity = rest.postForObject(Constants.url+"/saveExtActivity", tExtAct, TExtensionActivity.class);
-			
-			
+			redirect = "redirect:/showExtensionActivity";
+			}else {
+				redirect = "redirect:/accessDenied";
+			}
 		}catch(Exception e){
 			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
-		return "redirect:/showExtensionActivity";
+		return redirect;
 		
 	}
 	
@@ -446,54 +453,63 @@ public class ResearchAndInnovation {
 
 	@RequestMapping(value = "/insertResrchDevMou", method = RequestMethod.POST)
 	public String insertResrchDevMou(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		try {
 			HttpSession session = request.getSession();
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int acadYear = (int) session.getAttribute("acYearId");
-			
-			InstResearchDevMous tMous = new InstResearchDevMous();
-			
-			tMous.setInstReasearchDevMouId(Integer.parseInt(request.getParameter("inst_reasearch_dev_mouId")));
-			int mouId = Integer.parseInt(request.getParameter("activity_id"));
-			tMous.setResearchDevMouId(mouId);
-			tMous.setInstId(instituteId);
-			tMous.setAcYearId(acadYear);
-			if(mouId==0) {
-			tMous.setMouTitle(request.getParameter("mou_name"));
-			tMous.setExInt1(1);
-			}else {
-				tMous.setMouTitle("NA");
-				tMous.setExInt1(0);
-			}
-			tMous.setOrgName(XssEscapeUtils.jsoupParse(request.getParameter("org_name")));
-			tMous.setMouSignedYear(request.getParameter("mou_signed_year"));
-			tMous.setDurFromdt(request.getParameter("from_date"));
-			tMous.setDurTodt(request.getParameter("to_date"));
-			tMous.setActivitiesMou(XssEscapeUtils.jsoupParse(request.getParameter("mou_avtivity")));
-			tMous.setNoOfStudBenif(Integer.parseInt(request.getParameter("no_stud")));
-			tMous.setNoOfStaffBenif(Integer.parseInt(request.getParameter("no_faculty")));
-			tMous.setDelStatus(1);
-			tMous.setIsActive(1);
-			tMous.setMakerUserId(userId);
-			tMous.setMakerDatetime(curDateTime);
-			tMous.setExInt2(0);
-			tMous.setExVar1("NA");
-			tMous.setExVar2("NA");
-			//System.out.println(tMous.toString());
-		
-			InstResearchDevMous mou = rest.postForObject(Constants.url+"/savResrchDevMou", tMous, InstResearchDevMous.class);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
 				
-			
-		}catch(Exception e) {
-			//System.out.println(e.getMessage());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+
+				InstResearchDevMous tMous = new InstResearchDevMous();
+
+				tMous.setInstReasearchDevMouId(Integer.parseInt(request.getParameter("inst_reasearch_dev_mouId")));
+				int mouId = Integer.parseInt(request.getParameter("activity_id"));
+				tMous.setResearchDevMouId(mouId);
+				tMous.setInstId(instituteId);
+				tMous.setAcYearId(acadYear);
+				if (mouId == 0) {
+					tMous.setMouTitle(request.getParameter("mou_name"));
+					tMous.setExInt1(1);
+				} else {
+					tMous.setMouTitle("NA");
+					tMous.setExInt1(0);
+				}
+				tMous.setOrgName(XssEscapeUtils.jsoupParse(request.getParameter("org_name")));
+				tMous.setMouSignedYear(request.getParameter("mou_signed_year"));
+				tMous.setDurFromdt(request.getParameter("from_date"));
+				tMous.setDurTodt(request.getParameter("to_date"));
+				tMous.setActivitiesMou(XssEscapeUtils.jsoupParse(request.getParameter("mou_avtivity")));
+				tMous.setNoOfStudBenif(Integer.parseInt(request.getParameter("no_stud")));
+				tMous.setNoOfStaffBenif(Integer.parseInt(request.getParameter("no_faculty")));
+				tMous.setDelStatus(1);
+				tMous.setIsActive(1);
+				tMous.setMakerUserId(userId);
+				tMous.setMakerDatetime(curDateTime);
+				tMous.setExInt2(0);
+				tMous.setExVar1("NA");
+				tMous.setExVar2("NA");
+				// System.out.println(tMous.toString());
+
+				InstResearchDevMous mou = rest.postForObject(Constants.url + "/savResrchDevMou", tMous,
+						InstResearchDevMous.class);
+				if (mou != null) {
+					redirect = "redirect:/showInstResrchDevMous";
+				} else {
+					redirect = "redirect:/showInstResrchDevMous";
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
+			}
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
-		return "redirect:/showInstResrchDevMous";
-		
-		
+		return redirect;
 	}
 	
 	@RequestMapping(value = "/editRsrchMou/{mouRsrchDevId}", method = RequestMethod.GET)
@@ -731,45 +747,54 @@ public class ResearchAndInnovation {
 	public String insertStudFacultylinkg(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession();
-			
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int acadYear = (int) session.getAttribute("acYearId");
-		TFacultyStudLinkage linkage = new TFacultyStudLinkage();
-		
-		linkage.setFacultyStudLinkageId(Integer.parseInt(request.getParameter("fac_stud_link_id")));
-		linkage.setInstId(instituteId);
-		linkage.setAcYearId(acadYear);
-		linkage.setLinkageTitle(XssEscapeUtils.jsoupParse(request.getParameter("link_title")));
-		linkage.setPartneringInstitute(request.getParameter("part_inst"));
-		linkage.setIndustryName("NA");
-		linkage.setIndustryFromYear("NA");
-		linkage.setResearchLabName("NA");
-		linkage.setLabFromYear(request.getParameter("resrch_lab_year"));
-		linkage.setDurationFrom(request.getParameter("from_date"));
-		linkage.setDurationTo(request.getParameter("to_date"));
-		linkage.setNatureOfLinkage(XssEscapeUtils.jsoupParse(request.getParameter("naturelinkage")));
-		linkage.setNoStudentParticipated(Integer.parseInt(request.getParameter("participate")) );
-		linkage.setDelStatus(1);
-		linkage.setIsActive(1);
-		linkage.setMakerUserId(userId);
-		linkage.setMaker_datetime(curDateTime);
-		linkage.setExInt1(Integer.parseInt(request.getParameter("faculty")) );
-		linkage.setExInt2(0);
-		linkage.setExVar1("NA");
-		linkage.setExVar2("NA");
-		
-		//System.out.println(linkage.toString());
-		
-		TFacultyStudLinkage addLinkage = rest.postForObject(Constants.url+"/newstudFacLink", linkage, TFacultyStudLinkage.class);
-		
-		}catch(Exception e) {
-			//System.out.println(e.getMessage());
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				TFacultyStudLinkage linkage = new TFacultyStudLinkage();
+
+				linkage.setFacultyStudLinkageId(Integer.parseInt(request.getParameter("fac_stud_link_id")));
+				linkage.setInstId(instituteId);
+				linkage.setAcYearId(acadYear);
+				linkage.setLinkageTitle(XssEscapeUtils.jsoupParse(request.getParameter("link_title")));
+				linkage.setPartneringInstitute(request.getParameter("part_inst"));
+				linkage.setIndustryName("NA");
+				linkage.setIndustryFromYear("NA");
+				linkage.setResearchLabName("NA");
+				linkage.setLabFromYear(request.getParameter("resrch_lab_year"));
+				linkage.setDurationFrom(request.getParameter("from_date"));
+				linkage.setDurationTo(request.getParameter("to_date"));
+				linkage.setNatureOfLinkage(XssEscapeUtils.jsoupParse(request.getParameter("naturelinkage")));
+				linkage.setNoStudentParticipated(Integer.parseInt(request.getParameter("participate")));
+				linkage.setDelStatus(1);
+				linkage.setIsActive(1);
+				linkage.setMakerUserId(userId);
+				linkage.setMaker_datetime(curDateTime);
+				linkage.setExInt1(Integer.parseInt(request.getParameter("faculty")));
+				linkage.setExInt2(0);
+				linkage.setExVar1("NA");
+				linkage.setExVar2("NA");
+
+				// System.out.println(linkage.toString());
+
+				TFacultyStudLinkage addLinkage = rest.postForObject(Constants.url + "/newstudFacLink", linkage,
+						TFacultyStudLinkage.class);
+				redirect = "redirect:/showStudFacultyLinkage";
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
-			
+
 		}
 		return "redirect:/showStudFacultyLinkage";
-		
+
 	}
 	
 	@RequestMapping(value = "/editLinkage/{linkId}", method = RequestMethod.GET)
@@ -1002,7 +1027,11 @@ public class ResearchAndInnovation {
 	public String insertneighbrhdCommActvity(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-				HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 				
 				int instituteId = (int) session.getAttribute("instituteId");
 				int userId = (int) session.getAttribute("userId");
@@ -1032,13 +1061,18 @@ public class ResearchAndInnovation {
 				
 				TNeighbourhoodCommActivities commAct = rest.postForObject(Constants.url+"/saveNeighbourhoodCommAct", 
 				neighbourCommAct, TNeighbourhoodCommActivities.class);
-				
+
+				redirect = "redirect:/showNeighbourhoodCommActivities";
+			}else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
 				
 		}catch(Exception e) {
 			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:/showNeighbourhoodCommActivities";
+		return redirect;
 	
 	}
 	
@@ -1272,7 +1306,11 @@ public class ResearchAndInnovation {
 	public String insertawrdRecgAgnstExtAxt(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-				HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 				
 				int instituteId = (int) session.getAttribute("instituteId");
 				int userId = (int) session.getAttribute("userId");
@@ -1304,7 +1342,14 @@ public class ResearchAndInnovation {
 				//System.out.println(soft.toString());
 				
 				AwrdRecgAgnstExtActivity awrd = rest.postForObject(Constants.url+"/saveAwrdRecgAgnstExtAct",soft,AwrdRecgAgnstExtActivity.class);
-				
+				if(awrd!=null) {
+					redirect = "redirect:/awrdRecogAgnstExtAct";
+				}else {
+					redirect = "redirect:/awrdRecogAgnstExtAct";
+				}
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
 				
 		}catch(Exception e) {
 			//System.out.println(e.getMessage());
@@ -1539,14 +1584,19 @@ public class ResearchAndInnovation {
 	public String insertPlagCodeEthic(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-				HttpSession session = request.getSession();
-				
+
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
 				int instituteId = (int) session.getAttribute("instituteId");
 				int userId = (int) session.getAttribute("userId");
 				int acadYear = (int) session.getAttribute("acYearId");
-				
+
 				PlagiarismCodeEthics soft = new PlagiarismCodeEthics();
-				
+
 				soft.setPlagCodeEthcId(Integer.parseInt(request.getParameter("soft_id")));
 				soft.setIsSoftwrAvabl(Integer.parseInt(request.getParameter("is_soft_avalbl")));
 				soft.setNameOfSoftwr(XssEscapeUtils.jsoupParse(request.getParameter("software_name")));
@@ -1562,18 +1612,26 @@ public class ResearchAndInnovation {
 				soft.setExInt2(0);
 				soft.setExVar1("NA");
 				soft.setExVar2("NA");
-			
-				//System.out.println(soft.toString());
-				
-				PlagiarismCodeEthics awrd = rest.postForObject(Constants.url+"/savePlagCodeEthic",soft,PlagiarismCodeEthics.class);
-				
-				
-		}catch(Exception e) {
-			//System.out.println(e.getMessage());
+
+				// System.out.println(soft.toString());
+
+				PlagiarismCodeEthics awrd = rest.postForObject(Constants.url + "/savePlagCodeEthic", soft,
+						PlagiarismCodeEthics.class);
+				if (awrd != null) {
+					redirect = "redirect:/showPlagiarismCodeEthics";
+				} else {
+					redirect = "redirect:/showPlagiarismCodeEthics";
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
+			}
+
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:/showPlagiarismCodeEthics";
-	
+		return redirect;
+
 	}
 	
 	

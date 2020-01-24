@@ -109,7 +109,7 @@ public class LibraryController {
 						"1", newModuleList);
 				System.err.println("add " + add.toString());
 				if (add.isError() == false) {
-					// System.out.println(" add Accessable ");
+					System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}

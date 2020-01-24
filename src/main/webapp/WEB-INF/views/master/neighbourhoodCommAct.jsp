@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -87,7 +90,17 @@
 										action="${pageContext.request.contextPath}/insertneighbrhdCommActvity"
 										method="post"
 										name="form_sample_2" id="form_sample_2">
-
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+											<input type="hidden" value="<%out.println(hashtext);%>"
+													name="token" id="token">
 										<div>
 
 											<div class="col-xs-12">

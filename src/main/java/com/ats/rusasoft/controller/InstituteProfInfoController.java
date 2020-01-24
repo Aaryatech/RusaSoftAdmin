@@ -939,129 +939,136 @@ public class InstituteProfInfoController {
 		HttpSession session = request.getSession();
 		String a = null;
 		try {
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("insertColLinkages", "showCollaborationLinkages", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true)
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			{
+				Info view = AccessControll.checkAccess("insertColLinkages", "showCollaborationLinkages", "0", "1", "0",
+						"0", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true)
 
-			}
+				{
 
-			else {
-
-				System.err.println("in insert insertColLinkages");
-				ModelAndView model = null;
-
-				int inst_id = (int) session.getAttribute("instituteId");
-				int maker_id = (int) session.getAttribute("userId");
-				int acYearId = (int) session.getAttribute("acYearId");
-
-				InstituteLinkage redInfo = new InstituteLinkage();
-				RestTemplate restTemplate = new RestTemplate();
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				int link_id = Integer.parseInt(request.getParameter("link_id"));
-
-				// System.out.println("link_id" + link_id);
-
-				String colName = request.getParameter("colName");
-
-				String col_agency = request.getParameter("col_agency");
-				String linkageNature = request.getParameter("linkageNature");
-				String beneficiaryMOU = request.getParameter("beneficiaryMOU");
-
-				String totalParticipants = request.getParameter("totalParticipants");
-
-				if (link_id == 0) {
-
-					// System.out.println("inst id is" + inst_id);
-
-					redInfo.setLinkAgency(XssEscapeUtils.jsoupParse(col_agency));
-					redInfo.setLinkBeneficiaryNos(Integer.parseInt(XssEscapeUtils.jsoupParse(totalParticipants)));
-					redInfo.setLinkBeneficiary(beneficiaryMOU);
-					redInfo.setLinknameId(Integer.parseInt(XssEscapeUtils.jsoupParse(colName)));
-					redInfo.setLinkNature(XssEscapeUtils.jsoupParse(linkageNature));
-
-					redInfo.setMakerUserId(maker_id);
-					redInfo.setInstituteId(inst_id);
-					redInfo.setYearId(acYearId);
-
-					redInfo.setDelStatus(1);
-					redInfo.setIsActive(1);
-					redInfo.setExInt1(1);
-					redInfo.setExInt2(1);
-					redInfo.setExVar1("NA");
-					redInfo.setExVar2("NA");
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					redInfo.setMakerDatetime(curDateTime);
-
-					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", redInfo,
-							InstituteLinkage.class);
-
-				} else {
-
-					// System.out.println("in edit InstituteLinkage");
-
-					// System.out.println("link_id" + link_id);
-					map.add("linkId", link_id);
-
-					InstituteLinkage redInfo1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
-							InstituteLinkage.class);
-
-					redInfo1.setLinkAgency(XssEscapeUtils.jsoupParse(col_agency));
-					redInfo1.setLinkBeneficiaryNos(Integer.parseInt(XssEscapeUtils.jsoupParse(totalParticipants)));
-					redInfo1.setLinkBeneficiary(beneficiaryMOU);
-					redInfo1.setLinknameId(Integer.parseInt(XssEscapeUtils.jsoupParse(colName)));
-					redInfo1.setLinkNature(XssEscapeUtils.jsoupParse(linkageNature));
-
-					redInfo1.setYearId(acYearId);
-
-					redInfo1.setMakerUserId(maker_id);
-
-					redInfo1.setInstituteId(inst_id);
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					redInfo1.setMakerDatetime(curDateTime);
-
-					InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage", redInfo1,
-							InstituteLinkage.class);
+					a = "redirect:/accessDenied";
 
 				}
-				a = "redirect:/showCollaborationLinkages";
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
+				else {
+
+					System.err.println("in insert insertColLinkages");
+					ModelAndView model = null;
+
+					int inst_id = (int) session.getAttribute("instituteId");
+					int maker_id = (int) session.getAttribute("userId");
+					int acYearId = (int) session.getAttribute("acYearId");
+
+					InstituteLinkage redInfo = new InstituteLinkage();
+					RestTemplate restTemplate = new RestTemplate();
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					int link_id = Integer.parseInt(request.getParameter("link_id"));
+
+					// System.out.println("link_id" + link_id);
+
+					String colName = request.getParameter("colName");
+
+					String col_agency = request.getParameter("col_agency");
+					String linkageNature = request.getParameter("linkageNature");
+					String beneficiaryMOU = request.getParameter("beneficiaryMOU");
+
+					String totalParticipants = request.getParameter("totalParticipants");
+
+					if (link_id == 0) {
+
+						// System.out.println("inst id is" + inst_id);
+
+						redInfo.setLinkAgency(XssEscapeUtils.jsoupParse(col_agency));
+						redInfo.setLinkBeneficiaryNos(Integer.parseInt(XssEscapeUtils.jsoupParse(totalParticipants)));
+						redInfo.setLinkBeneficiary(beneficiaryMOU);
+						redInfo.setLinknameId(Integer.parseInt(XssEscapeUtils.jsoupParse(colName)));
+						redInfo.setLinkNature(XssEscapeUtils.jsoupParse(linkageNature));
+
+						redInfo.setMakerUserId(maker_id);
+						redInfo.setInstituteId(inst_id);
+						redInfo.setYearId(acYearId);
+
+						redInfo.setDelStatus(1);
+						redInfo.setIsActive(1);
+						redInfo.setExInt1(1);
+						redInfo.setExInt2(1);
+						redInfo.setExVar1("NA");
+						redInfo.setExVar2("NA");
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						redInfo.setMakerDatetime(curDateTime);
+
+						InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage",
+								redInfo, InstituteLinkage.class);
+
+					} else {
+
+						// System.out.println("in edit InstituteLinkage");
+
+						// System.out.println("link_id" + link_id);
+						map.add("linkId", link_id);
+
+						InstituteLinkage redInfo1 = rest.postForObject(Constants.url + "getInstLinkageByLinkId", map,
+								InstituteLinkage.class);
+
+						redInfo1.setLinkAgency(XssEscapeUtils.jsoupParse(col_agency));
+						redInfo1.setLinkBeneficiaryNos(Integer.parseInt(XssEscapeUtils.jsoupParse(totalParticipants)));
+						redInfo1.setLinkBeneficiary(beneficiaryMOU);
+						redInfo1.setLinknameId(Integer.parseInt(XssEscapeUtils.jsoupParse(colName)));
+						redInfo1.setLinkNature(XssEscapeUtils.jsoupParse(linkageNature));
+
+						redInfo1.setYearId(acYearId);
+
+						redInfo1.setMakerUserId(maker_id);
+
+						redInfo1.setInstituteId(inst_id);
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						redInfo1.setMakerDatetime(curDateTime);
+
+						InstituteLinkage editInst = rest.postForObject(Constants.url + "saveInstituteColLinkage",
+								redInfo1, InstituteLinkage.class);
+
+					}
 					a = "redirect:/showCollaborationLinkages";
 
-				else
-					a = "redirect:/showAddCollaborationLinkages";
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						a = "redirect:/showCollaborationLinkages";
 
+					else
+						a = "redirect:/showAddCollaborationLinkages";
+
+				}
+			} else {
+				System.err.println("in else");
+				a = "redirect:/accessDenied";
 			}
-		}
-
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Exce in save redInfo  " + e.getMessage());
 			e.printStackTrace();
 		}
