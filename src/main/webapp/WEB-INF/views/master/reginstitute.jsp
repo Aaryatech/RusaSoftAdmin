@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -84,9 +85,7 @@
 						<header class="panel_header">
 							<h2 class="title pull-left">${title}</h2>
 
-							<div class="actions panel_actions pull-right">
-								
-							</div>
+							<div class="actions panel_actions pull-right"></div>
 
 						</header>
 
@@ -99,11 +98,21 @@
 
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstitute"
-										method="post" name="form_sample_2" id="form_sample_2"
-										>
+										method="post" name="form_sample_2" id="form_sample_2">
 
-										<input type="hidden" id="inst_id" name="inst_id"
-											value="${editInst.instituteId}">
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="inst_id" name="inst_id" value="${editInst.instituteId}">
 
 										<div class="row">
 											<div class="col-md-12">
@@ -121,11 +130,9 @@
 														<input type="text" onchange="trim(this)"
 															class="form-control" id="inst_name" maxlength="100"
 															value="${editInst.instituteName}" name="inst_name"
-															placeholder="Institute Name" >
-															<span
+															placeholder="Institute Name"> <span
 															class="error_form text-danger" id="inst_name_field"
-															style="display: none;">Please enter institute
-															name</span>
+															style="display: none;">Please enter institute name</span>
 													</div>
 												</div>
 												<div class="form-group">
@@ -136,8 +143,8 @@
 														<input type="text" onchange="trim(this)" maxlength="15"
 															class="form-control" id="aishe_code"
 															value="${editInst.aisheCode}" name="aishe_code"
-															placeholder="AISHE Code">
-															<span class="error_form text-danger" id="aishe_code_field"
+															placeholder="AISHE Code"> <span
+															class="error_form text-danger" id="aishe_code_field"
 															style="display: none;">Please enter AISHE code</span>
 													</div>
 												</div>
@@ -153,89 +160,82 @@
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="inst_add"
 															value="${editInst.instituteAdd}" name="inst_add"
-															placeholder="Institute Address">
-															<span
+															placeholder="Institute Address"> <span
 															class="error_form text-danger" id="inst_add_field"
 															style="display: none;">Please enter institute
 															address</span>
 													</div>
 												</div>
-												
-													<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Village
-														<span class="text-danger">*</span>
+
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="page_order">
+														Village <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="village"
 															value="${editInst.village}" name="village"
-															placeholder="Village">
-															<span
+															placeholder="Village"> <span
 															class="error_form text-danger" id="inst_vilg_field"
 															style="display: none;">Please enter village</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Taluka/City
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														Taluka/City <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="taluka"
 															value="${editInst.taluka}" name="taluka"
-															placeholder="Taluka/City">
-															<span
+															placeholder="Taluka/City"> <span
 															class="error_form text-danger" id="inst_taluka_field"
 															style="display: none;">Please enter taluka</span>
 													</div>
 												</div>
-												
-												
-												
+
+
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> District
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														District <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="district"
 															value="${editInst.district}" name="district"
-															placeholder="District">
-															<span
+															placeholder="District"> <span
 															class="error_form text-danger" id="inst_dist_field"
 															style="display: none;">Please enter district</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> State
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														State <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" maxlength="200"
-															class="form-control" id="state"
-															value="${editInst.state}" name="state"
-															placeholder="State">
-															<span
+															class="form-control" id="state" value="${editInst.state}"
+															name="state" placeholder="State"> <span
 															class="error_form text-danger" id="inst_stat_field"
 															style="display: none;">Please enter state</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order"> Pin Code
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">
+														Pin Code <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" onchange="trim(this)" maxlength="6"
-															class="form-control" id="pin" onkeypress='return restrictAlphabets(event)'
+															class="form-control" id="pin"
+															onkeypress='return restrictAlphabets(event)'
 															value="${editInst.pincode}" name="pin"
-															placeholder="Pin Code of 6 digit">
-															<span
+															placeholder="Pin Code of 6 digit"> <span
 															class="error_form text-danger" id="inst_pin_field"
-															style="display: none;">Please enter pin
-															code</span>
+															style="display: none;">Please enter pin code</span>
 													</div>
 												</div>
 
@@ -301,10 +301,10 @@
 
 
 													<div class="col-sm-9">
-														<input type="text" class="form-control datepicker" autocomplete="off"
-															id="reg_date" value="${editInst.regDate}" name="reg_date"
-															placeholder="Date of Registration">
-															 <span
+														<input type="text" class="form-control datepicker"
+															autocomplete="off" id="reg_date"
+															value="${editInst.regDate}" name="reg_date"
+															placeholder="Date of Registration"> <span
 															class="error_form text-danger" id="reg_date_field"
 															style="display: none;">Please select date of
 															registration</span>
@@ -319,12 +319,11 @@
 														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="trusty_name"
 															value="${editInst.trustName}" name="trusty_name"
-															placeholder="Trust/Society Name">
-															<span
+															placeholder="Trust/Society Name"> <span
 															class="error_form text-danger" id="trusty_name_field"
 															style="display: none;">Please enter trust/society
 															name</span>
-															
+
 													</div>
 												</div>
 
@@ -336,8 +335,7 @@
 														<input type="text" onchange="trim(this)" maxlength="200"
 															class="form-control" id="trusty_add"
 															value="${editInst.trustAdd}" name="trusty_add"
-															placeholder="Trust/Society Address">
-															<span
+															placeholder="Trust/Society Address"> <span
 															class="error_form text-danger" id="trusty_add_field"
 															style="display: none;">Please enter trust/society
 															address</span>
@@ -351,10 +349,10 @@
 													<div class="col-sm-9">
 														<input type="text" value="${editInst.trustContactNo}"
 															maxlength="15" class="form-control" id="trusty_con_no"
-															name="trusty_con_no" placeholder="Official Contact No"
-															><span class="error_form text-danger"
-															id="trusty_con_no_field" style="display: none;">Please
-															enter trust/society official contact no</span>
+															name="trusty_con_no" placeholder="Official Contact No"><span
+															class="error_form text-danger" id="trusty_con_no_field"
+															style="display: none;">Please enter trust/society
+															official contact no</span>
 													</div>
 												</div>
 
@@ -366,9 +364,8 @@
 														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="pres_name"
 															value="${editInst.presidentName}" name="pres_name"
-															placeholder="Name of Chairman/President(Board of Governance)"
-															>
-															<span class="error_form text-danger" id="pres_name_field"
+															placeholder="Name of Chairman/President(Board of Governance)">
+														<span class="error_form text-danger" id="pres_name_field"
 															style="display: none;">Please enter
 															chairman/president (board of governance) name</span>
 													</div>
@@ -379,14 +376,13 @@
 														Contact No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" value="${editInst.presidenContact}" onchange="trim(this)"
-															maxlength="15" class="form-control" id="pres_contact"
-															name="pres_contact" placeholder="Chairman Contact No"
-															>
-															<span
-															class="error_form text-danger" id="pres_contact_field"
-															style="display: none;">Please enter
-															chairman/president contact no</span>
+														<input type="text" value="${editInst.presidenContact}"
+															onchange="trim(this)" maxlength="15" class="form-control"
+															id="pres_contact" name="pres_contact"
+															placeholder="Chairman Contact No">
+														<span class="error_form text-danger"
+															id="pres_contact_field" style="display: none;">Please
+															enter chairman/president contact no</span>
 													</div>
 												</div>
 
@@ -395,11 +391,11 @@
 														ID (Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="email" maxlength="50" onchange="trim(this)" 
+														<input type="email" maxlength="50" onchange="trim(this)"
 															class="form-control" id="pres_email"
 															value="${editInst.presidentEmail}" name="pres_email"
-															placeholder="abc@xyz.com" >
-															<span class="error_form text-danger" id="pres_email_field"
+															placeholder="abc@xyz.com"> <span
+															class="error_form text-danger" id="pres_email_field"
 															style="display: none;">Please enter
 															chairman/president email id</span>
 													</div>
@@ -416,11 +412,9 @@
 														<input type="text" onchange="trim(this)" maxlength="100"
 															class="form-control" id="princ_name"
 															value="${editInst.principalName}" name="princ_name"
-															placeholder="Name of Principal">
-															<span
+															placeholder="Name of Principal"> <span
 															class="error_form text-danger" id="princ_name_field"
-															style="display: none;">Please enter principal
-															name</span>
+															style="display: none;">Please enter principal name</span>
 													</div>
 												</div>
 
@@ -429,12 +423,10 @@
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" 
-															maxlength="10" class="form-control" id="princ_contact"
-															value="${editInst.contactNo}" name="princ_contact"
-															placeholder="Mobile No"
-															oninput="checkUnique(this.value,1)">
-															<span
+														<input type="text" maxlength="10" class="form-control"
+															id="princ_contact" value="${editInst.contactNo}"
+															name="princ_contact" placeholder="Mobile No"
+															oninput="checkUnique(this.value,1)"> <span
 															class="error_form text-danger" id="princ_contact_field"
 															style="display: none;">Please enter principal
 															mobile no</span>
@@ -449,11 +441,10 @@
 														ID (Official) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="email" maxlength="50" class="form-control" id="princ_email"
-															value="${editInst.email}"
+														<input type="email" maxlength="50" class="form-control"
+															id="princ_email" value="${editInst.email}"
 															oninput="checkUnique(this.value,2)" name="princ_email"
-															placeholder="abc@xyz.com" >
-															<span
+															placeholder="abc@xyz.com"> <span
 															class="error_form text-danger" id="princ_email_field"
 															style="display: none;">Please enter principal
 															email id</span>
@@ -464,11 +455,18 @@
 
 
 												<div class="form-group">
-<div class="col-sm-offset-3 col-sm-9">
+													<div class="col-sm-offset-3 col-sm-9">
 
-<button type="submit" id="sub_button" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-<a href="${pageContext.request.contextPath}/showInstituteList"><button type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													
-</div>
+														<button type="submit" id="sub_button"
+															class="btn btn-primary" onclick="submit_f(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
+														<a
+															href="${pageContext.request.contextPath}/showInstituteList"><button
+																type="button" class="btn btn-primary">
+																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+															</button></a>
+													</div>
 												</div>
 
 											</div>
@@ -632,7 +630,7 @@
 			} else {
 				//alert(value)
 				//document.getElementById("reg_date").setAttribute("required",
-						//"true");
+				//"true");
 				document.getElementById("abc").style.display = "block";
 
 				//alert(value)
@@ -700,12 +698,19 @@
 
 		function showIsReg() {
 
-			var x = ${editInst.instituteId}
+			var x = $
+			{
+				editInst.instituteId
+			}
 
 			if (x > 0) {
 
-				var isReg = ${editInst.isRegistration};
-				
+				var isReg = $
+				{
+					editInst.isRegistration
+				}
+				;
+
 				//alert("Is Reg " +isReg);
 				if (isReg == 0) {
 
@@ -740,8 +745,12 @@
 		function checkUnique(inputValue, valueType) {
 			//alert(inputValue);
 
-			var primaryKey = ${editInst.instituteId};
-			
+			var primaryKey = $
+			{
+				editInst.instituteId
+			}
+			;
+
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {
@@ -817,7 +826,7 @@
 			document.getElementById("pres_email").value = "";
 			document.getElementById("princ_name").value = "";
 			document.getElementById("princ_contact").value = "";
-			document.getElementById("princ_email").value = ""; 			
+			document.getElementById("princ_email").value = "";
 			document.getElementById("village").value = "";
 			document.getElementById("taluka").value = "";
 			document.getElementById("district").value = "";
@@ -847,7 +856,7 @@
 			return;
 		}
 	</script>
-	
+
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -906,52 +915,55 @@
 												} else {
 													$("#inst_add_field").hide()
 												}
-												
-												
+
 												if (!$("#village").val()) {
 													isError = true;
 
 													$("#village").addClass(
 															"has-error")
-													$("#inst_vilg_field").show()
+													$("#inst_vilg_field")
+															.show()
 												} else {
-													$("#inst_vilg_field").hide()
+													$("#inst_vilg_field")
+															.hide()
 												}
-												
-											
+
 												if (!$("#taluka").val()) {
 													isError = true;
 
 													$("#taluka").addClass(
 															"has-error")
-													$("#inst_taluka_field").show()
+													$("#inst_taluka_field")
+															.show()
 												} else {
-													$("#inst_taluka_field").hide()
+													$("#inst_taluka_field")
+															.hide()
 												}
-												
-												
+
 												if (!$("#district").val()) {
 													isError = true;
 
 													$("#district").addClass(
 															"has-error")
-													$("#inst_dist_field").show()
+													$("#inst_dist_field")
+															.show()
 												} else {
-													$("#inst_dist_field").hide()
+													$("#inst_dist_field")
+															.hide()
 												}
-												
-												
+
 												if (!$("#state").val()) {
 													isError = true;
 
 													$("#state").addClass(
 															"has-error")
-													$("#inst_stat_field").show()
+													$("#inst_stat_field")
+															.show()
 												} else {
-													$("#inst_stat_field").hide()
+													$("#inst_stat_field")
+															.hide()
 												}
-												
-												
+
 												if (!$("#pin").val()) {
 													isError = true;
 
@@ -1065,7 +1077,7 @@
 													$("#pres_email_field")
 															.hide()
 												}
-												
+
 												if (!$("#princ_name").val()) {
 													isError = true;
 													$("#princ_name").addClass(
@@ -1105,32 +1117,33 @@
 													$("#princ_email_field")
 															.hide()
 												}
-												
+
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
-														document.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub_button").disabled = true;
 
-														return  true;
-													}	
+														return true;
+													}
 												}
 												return false;
 											});
 						});
 	</script>
-<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-		</script>
+	<script type="text/javascript">
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 </body>
 </html>

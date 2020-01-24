@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -94,6 +99,18 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFacultyActivity"
 										method="post" name="form_sample_2" id="form_sample_2">
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 
 										<div>
@@ -216,7 +233,8 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="activity_date" data-end-date="0d" data-format="dd-mm-yyyy"
+															id="activity_date" data-end-date="0d"
+															data-format="dd-mm-yyyy"
 															onkeypress='return restrictAlphabets(event)'
 															value="${activity.activityDate}" name="activity_date"
 															autocomplete="off" placeholder="dd-mm-yyyy"
@@ -234,10 +252,11 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" class="form-control"
-															id="activity_part" maxlength="6"															
-															name="activity_part" placeholder="No of Participants"
-															value="${activity.activityParticipants}" onFocus="clearDefault(this)"
-															autocomplete="off" onchange="trim(this)"> <span
+															id="activity_part" maxlength="6" name="activity_part"
+															placeholder="No of Participants"
+															value="${activity.activityParticipants}"
+															onFocus="clearDefault(this)" autocomplete="off"
+															onchange="trim(this)"> <span
 															class="error_form text-danger" id="error_formfield3"
 															style="display: none;">Please enter No. of
 															participants and value must be greater than 0.</span>
@@ -269,8 +288,8 @@
 														Sanctioned <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="number" min="0" class="form-control" maxlength="6"
-															id="amt_sanc" onFocus="clearDefault(this)"
+														<input type="number" min="0" class="form-control"
+															maxlength="6" id="amt_sanc" onFocus="clearDefault(this)"
 															name="amt_sanc" placeholder="Amount Sanctioned"
 															value="${activity.activityAmountSanctioned}"
 															autocomplete="off" onchange="trim(this)"> <span
@@ -289,8 +308,9 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="number" min="0" class="form-control"
-															id="amt_utilise" onFocus="clearDefault(this)" maxlength="6"
-															name="amt_utilise" placeholder="Amount Utilized"
+															id="amt_utilise" onFocus="clearDefault(this)"
+															maxlength="6" name="amt_utilise"
+															placeholder="Amount Utilized"
 															value="${activity.activityAmountUtilised}"
 															onchange="trim(this)" autocomplete="off"> <span
 															class="error_form text-danger" id="error_formfield6"
@@ -354,27 +374,34 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript">
-function clearDefault(a){
-	if(a.defaultValue == 0)
-	{
-		a.value="";
-	}
-	};
-	
-	$('#activity_part').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	$('#amt_sanc').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	$('#amt_utilise').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-</script>
+	<script type="text/javascript">
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = "";
+			}
+		};
+
+		$('#activity_part').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#amt_sanc').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#amt_utilise').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+	</script>
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -408,111 +435,144 @@ function clearDefault(a){
 			return true;
 
 		}
-		$(document).ready(function($) {
+		$(document)
+				.ready(
+						function($) {
 
-			$("#form_sample_2").submit(function(e) {
+							$("#form_sample_2")
+									.submit(
+											function(e) {
 
-				var isError = false;
-				var errMsg = "";
+												var isError = false;
+												var errMsg = "";
 
-				if (!$("#activity_name").val()) {
+												if (!$("#activity_name").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#activity_name").addClass("has-error")
-					$("#error_formfield1").show()
-					//return false;
-				} else {
-					$("#error_formfield1").hide()
-				}
-				if (!$("#activity_date").val()) {
+													$("#activity_name")
+															.addClass(
+																	"has-error")
+													$("#error_formfield1")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield1")
+															.hide()
+												}
+												if (!$("#activity_date").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#activity_date").addClass("has-error")
-					$("#error_formfield2").show()
-					//return false;
-				} else {
-					$("#error_formfield2").hide()
-				}
+													$("#activity_date")
+															.addClass(
+																	"has-error")
+													$("#error_formfield2")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield2")
+															.hide()
+												}
 
-				if ($("#activity_part").val() == 0 || !$("#activity_part").val()) {
+												if ($("#activity_part").val() == 0
+														|| !$("#activity_part")
+																.val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#activity_part").addClass("has-error")
-					$("#error_formfield3").show()
-					//return false;
-				} else {
-					$("#error_formfield3").hide()
-				}
+													$("#activity_part")
+															.addClass(
+																	"has-error")
+													$("#error_formfield3")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield3")
+															.hide()
+												}
 
-				if (!$("#activity_found").val()) {
+												if (!$("#activity_found").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#activity_found").addClass("has-error")
-					$("#error_formfield4").show()
-					//return false;
-				} else {
-					$("#error_formfield4").hide()
-				}
+													$("#activity_found")
+															.addClass(
+																	"has-error")
+													$("#error_formfield4")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield4")
+															.hide()
+												}
 
-				if (!$("#amt_sanc").val()) {
+												if (!$("#amt_sanc").val()) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#amt_sanc").addClass("has-error")
-					$("#error_formfield5").show()
-					//return false;
-				} else {
-					$("#error_formfield5").hide()
-				}
+													$("#amt_sanc").addClass(
+															"has-error")
+													$("#error_formfield5")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield5")
+															.hide()
+												}
 
-				var utamt = parseFloat($("#amt_utilise").val());
-				var snamt = parseFloat($("#amt_sanc").val());
+												var utamt = parseFloat($(
+														"#amt_utilise").val());
+												var snamt = parseFloat($(
+														"#amt_sanc").val());
 
-				if (!$("#amt_utilise").val() || utamt > snamt) {
+												if (!$("#amt_utilise").val()
+														|| utamt > snamt) {
 
-					isError = true;
-					errMsg += '<li>Please enter a valid name.</li>';
+													isError = true;
+													errMsg += '<li>Please enter a valid name.</li>';
 
-					$("#amt_utilise").addClass("has-error")
-					$("#error_formfield6").show()
-					//return false;
-				} else {
-					$("#error_formfield6").hide()
-				}
+													$("#amt_utilise").addClass(
+															"has-error")
+													$("#error_formfield6")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield6")
+															.hide()
+												}
 
-				/* if(parseFloat($("#amt_utilise").val()) > parseFloat($("#amt_sanc").val())){
-				 
-				isError=true;
-				errMsg += '<li>Utilized amount is greater than sanctioned amount</li>';
-				
-				$("#amt_utilise").addClass("has-error")
-				$("#error_formfield6").show()
-					//return false;
-				} else {
-					$("#error_formfield6").hide()
-				} */
-				if (!isError) {
+												/* if(parseFloat($("#amt_utilise").val()) > parseFloat($("#amt_sanc").val())){
+												 
+												isError=true;
+												errMsg += '<li>Utilized amount is greater than sanctioned amount</li>';
+												
+												$("#amt_utilise").addClass("has-error")
+												$("#error_formfield6").show()
+													//return false;
+												} else {
+													$("#error_formfield6").hide()
+												} */
+												if (!isError) {
 
-					var x = confirm("Do you really want to submit the form?");
-					if (x == true) {
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
 
-						document.getElementById("sub1").disabled = true;
-						document.getElementById("sub2").disabled = true;
-						return true;
-					}
-				}
-				return false;
-			});
-		});
+														document
+																.getElementById("sub1").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
 	</script>
 	<script type="text/javascript">
 		function submit_f(view) {

@@ -142,8 +142,16 @@ public class FacultyConsultancyController {
 
 		try {
 
+			
+			
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String token = request.getParameter("token");
+						String key = (String) session.getAttribute("generatedKey");
+
+						if (token.trim().equals(key.trim())) {
+ 
+
+ 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "1", "0", "0",
 					newModuleList);
 
@@ -196,7 +204,11 @@ public class FacultyConsultancyController {
 				returnString = "redirect:/accessDenied";
 
 			}
-
+						}
+			else {
+			 
+							returnString = "redirect:/accessDenied";
+						}
 		} catch (Exception e) {
 
 			returnString = "redirect:/showConsultancyList";

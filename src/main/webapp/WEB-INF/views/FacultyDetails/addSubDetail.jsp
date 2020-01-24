@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -100,6 +102,18 @@
 										method="post" name="formidhere" id="formidhere">
 
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
 
 
 										<div class="form-group">
@@ -113,30 +127,41 @@
 													name="subCode" value="${editSubject.subCode}"> <span
 													class="error_form text-danger" id="error_subCode"
 													style="display: none;">Please enter Subject Code</span>
-											
-											<p class="desc font-italic fontsize11">Note:
-															Please Enter Correct Subject Code</p>
-										</div></div>
- 
+
+												<p class="desc font-italic fontsize11">Note: Please
+													Enter Correct Subject Code</p>
+											</div>
+										</div>
+
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="Semester">Semester<span
 												class="text-danger">*</span></label>
 											<div class="col-sm-6">
 												<select id="sem" name="sem" class="form-control">
 													<option disabled selected value="-1">Select</option>
-													
-							<option value="I" ${editSubject.subSem eq 'I' ? 'selected' : ''}>I</option>
-							<option value="II" ${editSubject.subSem eq 'II' ? 'selected' : ''}>II</option>
-							<option value="III" ${editSubject.subSem eq 'III' ? 'selected' : ''}>III</option>
-							<option value="IV" ${editSubject.subSem eq 'IV' ? 'selected' : ''}>IV</option>
-							<option value="V" ${editSubject.subSem eq 'V' ? 'selected' : ''}>V</option>
-							<option value="VI" ${editSubject.subSem eq 'VI' ? 'selected' : ''}>VI</option>
-							<option value="VII" ${editSubject.subSem eq '"VII"' ? 'selected' : ''}>VII</option>
-							<option value="VIII" ${editSubject.subSem eq 'VIII' ? 'selected' : ''}>VIII</option>
-							<option value="IX" ${editSubject.subSem eq 'IX' ? 'selected' : ''}>IX</option>
-							<option value="X" ${editSubject.subSem eq 'X' ? 'selected' : ''}>X</option>
 
-													
+													<option value="I"
+														${editSubject.subSem eq 'I' ? 'selected' : ''}>I</option>
+													<option value="II"
+														${editSubject.subSem eq 'II' ? 'selected' : ''}>II</option>
+													<option value="III"
+														${editSubject.subSem eq 'III' ? 'selected' : ''}>III</option>
+													<option value="IV"
+														${editSubject.subSem eq 'IV' ? 'selected' : ''}>IV</option>
+													<option value="V"
+														${editSubject.subSem eq 'V' ? 'selected' : ''}>V</option>
+													<option value="VI"
+														${editSubject.subSem eq 'VI' ? 'selected' : ''}>VI</option>
+													<option value="VII"
+														${editSubject.subSem eq '"VII"' ? 'selected' : ''}>VII</option>
+													<option value="VIII"
+														${editSubject.subSem eq 'VIII' ? 'selected' : ''}>VIII</option>
+													<option value="IX"
+														${editSubject.subSem eq 'IX' ? 'selected' : ''}>IX</option>
+													<option value="X"
+														${editSubject.subSem eq 'X' ? 'selected' : ''}>X</option>
+
+
 												</select> <span class="error_form text-danger" id="error_sem"
 													style="display: none;">Please Select </span>
 											</div>
@@ -154,8 +179,8 @@
 													name="subName" value="${editSubject.subName}"> <span
 													class="error_form text-danger" id="error_subName"
 													style="display: none;">Please enter Subject Name</span>
-													<p class="desc font-italic fontsize11">Note:
-															Please Enter Correct Subject Name</p>
+												<p class="desc font-italic fontsize11">Note: Please
+													Enter Correct Subject Name</p>
 											</div>
 										</div>
 
@@ -228,22 +253,23 @@
 											</label>
 
 
-											
-
-													<div class="col-md-2">
-
-														<input type="radio" name="isCbse" id="isCbse" ${editSubject.subIsCbse==1 ? 'checked' : ''}
-															value="1">Yes
-
-													</div>
-
-													<div class="col-md-2">
-														<input type="radio" name="isCbse" ${editSubject.subIsCbse==0 ? 'checked' : ''}
-														 value="0"> No
-													</div>
 
 
-												
+											<div class="col-md-2">
+
+												<input type="radio" name="isCbse" id="isCbse"
+													${editSubject.subIsCbse==1 ? 'checked' : ''} value="1">Yes
+
+											</div>
+
+											<div class="col-md-2">
+												<input type="radio" name="isCbse"
+													${editSubject.subIsCbse==0 ? 'checked' : ''} value="0">
+												No
+											</div>
+
+
+
 
 											<!-- <div class="col-sm-2">
 														Yes <input type="radio" name="isCbse" id="isCbse" checked
@@ -253,26 +279,25 @@
 										</div>
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="year"
-												style="text-align: left;"> Year of 
-												Implementation <span class="text-danger">*</span>
+												style="text-align: left;"> Year of Implementation <span
+												class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepickeryear"
 													data-min-view-mode="years" data-start-view="2"
-													data-format="yyyy"
-													placeholder="Year of Implementation "
-													id="yearInplmtn"
-													value="${editSubject.exVar1}"
+													data-format="yyyy" placeholder="Year of Implementation "
+													id="yearInplmtn" value="${editSubject.exVar1}"
 													name="yearInplmtn" autocomplete="off"
 													onkeypress='return restrictAlphabets(event)'
 													onchange="trim(this)"> <span
 													class="error_form text-danger" id="yearImplmnt_errfield"
-													style="display: none;">Please enter year of implementation.</span>
+													style="display: none;">Please enter year of
+													implementation.</span>
 											</div>
 
 										</div>
-										
+
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="noStudApp">No.
@@ -296,7 +321,7 @@
 											<div class="col-sm-6">
 												<input type="number" class="form-control" id="pass" min="0"
 													autocomplete="off" placeholder="Passed"
-													onchange="calResult()" name="pass" 
+													onchange="calResult()" name="pass"
 													value="${editSubject.subStuPassed}"> <span
 													class="error_form text-danger" id="error_pass"
 													style="display: none;">Please enter No of Students
@@ -322,15 +347,21 @@
 										</div>
 
 										<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showSubDetailsList"><button id="sub_button_next"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showSubDetailsList"><button
+														id="sub_button_next" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 
 										<div class="clearfix"></div>

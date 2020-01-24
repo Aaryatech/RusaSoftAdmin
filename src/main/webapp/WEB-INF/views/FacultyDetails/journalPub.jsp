@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -99,6 +101,18 @@
 										method="post" name="formidhere" id="formidhere">
 
 
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="paperTitle">Title
 												of Paper <span class="text-danger">*</span>
@@ -106,12 +120,12 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="paperTitle"
 													name="paperTitle" placeholder="Title of Paper"
-													value="${editJournal.exVar1}" autocomplete="off">
-												<span class="error_form text-danger" id="error_ttlPaper"
+													value="${editJournal.exVar1}" autocomplete="off"> <span
+													class="error_form text-danger" id="error_ttlPaper"
 													style="display: none;">Please enter title of paper</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="coAuthor">Co-
 												Author<span class="text-danger">*</span>
@@ -119,9 +133,10 @@
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="coAuthor"
 													name="coAuthor" placeholder="Name of Co-Author"
-													value="${editJournal.exVar2}" autocomplete="off">
-												<span class="error_form text-danger" id="error_coAuthor"
-													style="display: none;">Please enter name of co-author</span>
+													value="${editJournal.exVar2}" autocomplete="off"> <span
+													class="error_form text-danger" id="error_coAuthor"
+													style="display: none;">Please enter name of
+													co-author</span>
 											</div>
 										</div>
 
@@ -244,17 +259,17 @@
 													data-min-view-mode="years" data-start-view="2"
 													value="${editJournal.journalYear}" autocomplete="off"
 													placeholder="Year of Publication" name="journalYear"
-													id="journalYear" data-format="yyyy">
-													<span
+													id="journalYear" data-format="yyyy"> <span
 													class="error_form text-danger" id="error_year_pub"
-													style="display: none;">Please enter year of publication</span>
+													style="display: none;">Please enter year of
+													publication</span>
 
 											</div>
 
 										</div>
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="issue">Issue Name/No.
-												<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="issue">Issue
+												Name/No. <span class="text-danger">*</span>
 											</label>
 
 
@@ -263,7 +278,8 @@
 													value="${editJournal.journalIssue}" autocomplete="off"
 													name="issue" placeholder="Issue Name/No."> <span
 													class="error_form text-danger" id="error_issue"
-													style="display: none;">Please enter Journal Issue Name/No.</span>
+													style="display: none;">Please enter Journal Issue
+													Name/No.</span>
 											</div>
 
 										</div>
@@ -314,17 +330,23 @@
 													style="display: none;">Please enter Journal Page To</span>
 											</div>
 										</div>
-										
-											<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showJournalPubList"><button id="sub_button_next"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a
+													href="${pageContext.request.contextPath}/showJournalPubList"><button
+														id="sub_button_next" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 
 

@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -84,21 +88,26 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/showMphillDetails"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showMphillDetails"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
 						</header>
- 						<c:if test="${sessionScope.alert!=null}">
-           						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${alert}</div>
-        	                     </div> 
-        	                     <%session=request.getSession();
-        	                     session.removeAttribute("alert");
-        	                     %>
-            			</c:if>
+						<c:if test="${sessionScope.alert!=null}">
+							<div class="col-lg-12">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong> ${alert}
+								</div>
+							</div>
+							<%
+								session = request.getSession();
+									session.removeAttribute("alert");
+							%>
+						</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -112,154 +121,183 @@
 									</ul>
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="home"> -->
-											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/insertFacPhdDetail"
-												method="post" name="form_sample_2" id="form_sample_2">
-												
-												<div class="col-md-12"></div>
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/insertFacPhdDetail"
+										method="post" name="form_sample_2" id="form_sample_2">
 
-												<div class="col-xs-12">
-													<div class="form-group">
-														<label class="control-label col-sm-3" for="isPhdGuide">M.Phil./Ph.D. Guide<span
-															class="text-danger">*</span>
-														</label> 
-														<div class="col-sm-6">
 
-															<c:choose>
-																<c:when test="${facPhdDetail.isPhdGuide==0}">
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
+										<div class="col-md-12"></div>
+
+										<div class="col-xs-12">
+											<div class="form-group">
+												<label class="control-label col-sm-3" for="isPhdGuide">M.Phil./Ph.D.
+													Guide<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+
+													<c:choose>
+														<c:when test="${facPhdDetail.isPhdGuide==0}">
 															Yes <input type="radio" name="isPhdGuide" id="isPhdGuide"
-																		value="1"> No<input type="radio" checked
-																		name="isPhdGuide" id="isPhdGuide" value="0">
-																</c:when>
+																value="1"> No<input type="radio" checked
+																name="isPhdGuide" id="isPhdGuide" value="0">
+														</c:when>
 
-																<c:otherwise>
+														<c:otherwise>
 															Yes <input type="radio" checked name="isPhdGuide"
-																		id="isPhdGuide" value="1"> No<input
-																		type="radio" name="isPhdGuide" id="isPhdGuide"
-																		value="0">
-																</c:otherwise>
+																id="isPhdGuide" value="1"> No<input type="radio"
+																name="isPhdGuide" id="isPhdGuide" value="0">
+														</c:otherwise>
 
-															</c:choose>
-															<span class="error_form text-danger" id="isPhdGuide_field"
-															style="display: none;">Please select yes</span>
+													</c:choose>
+													<span class="error_form text-danger" id="isPhdGuide_field"
+														style="display: none;">Please select yes</span>
 
-														</div>
-													</div>
+												</div>
+											</div>
 
-	<div id="form_input">
-													<div class="form-group">
-														<label class="control-label col-sm-3"
-															for="phdRecognitionDt">Date of Recognition<span
-															class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" data-end-date="0d" data-format="dd-mm-yyyy" 
-																id="phdRecognitionDt" name="phdRecognitionDt" readonly
-																placeholder="Select Date of Recognition" value="${facPhdDetail.phdRecognitionDt}">
-																
-																<span class="error_form text-danger" id="phdRecognitionDt_field"
-															style="display: none;">Please select date of recognition</span>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="control-label col-sm-3" for="phdValidDt">Valid
-															up to <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker" id="phdValidDt" readonly data-format="dd-mm-yyyy" 
-																name="phdValidDt" placeholder="Valid up to Date" value="${facPhdDetail.phdValidDt}">
-																<span class="error_form text-danger" id="phdValidDt_field"
-															style="display: none;">Please select date of validity</span>
-																
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-sm-3" for="ii">No.
-															of Students Guided <span class="text-danger">*</span>
-
-														</label> <label class="control-label col-sm-1" for="phdStuPg">PG
-															<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="number" max="99999" min="0" class="form-control" id="phdStuPg"
-																name="phdStuPg" placeholder="PG"
-																value="${facPhdDetail.phdStuPg}" >
-																<span class="error_form text-danger" id="phdStuPg_field"
-															style="display: none;">Enter no of PG students</span>
-														</div>
-
-														<label style="white-space: nowrap;" class="control-label col-sm-1" for="phdStuMphill">M.Phil.
-															<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="number" max="99999" min="0" class="form-control" id="phdStuMphill"
-																name="phdStuMphill" placeholder="M.Phil."
-																value="${facPhdDetail.phdStuMphill}">
-																<span class="error_form text-danger" id="phdStuMphill_field"
-															style="display: none;">Enter no of M.Phil. students</span>
-														</div>
-														<label class="control-label col-sm-1" for="phdStuPhd">Ph.D.
-															<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-2">
-															<input type="number" max="99999" min="0" class="form-control" id="phdStuPhd"
-																name="phdStuPhd" placeholder="Ph.D"
-																value="${facPhdDetail.phdStuPhd}">
-																<span class="error_form text-danger" id="phdStuPhd_field"
-															style="display: none;">Enter number of Ph.D students</span>
-														</div>
-													</div>
-
-
-													<div class="form-group">
-
-														<label class="control-label col-sm-3" for="isIctUsed">Use
-															of ICT<br><span style="font-size:10px">(Information Communication Technology)</span> <span
-															class="text-danger">*</span>
-														</label>
-
-
-														<div class="col-sm-2">
-															<c:choose>
-																<c:when test="${facPhdDetail.isIctUsed==1}">
-															Yes <input type="radio" name="isIctUsed" id="isIctUsed"
-																		checked value="1"> No<input type="radio"
-																		name="isIctUsed" id="isIctUsed" value="0">
-																</c:when>
-																<c:otherwise>
-																Yes <input type="radio" name="isIctUsed" id="isIctUsed"
-																		value="1"> No<input type="radio"
-																		name="isIctUsed" id="isIctUsed" checked value="0">
-
-																</c:otherwise>
-															</c:choose>
-															<span class="error_form text-danger" id="isIctUsed_field"
-															style="display: none;">Please select use of ICT</span>
-
-														</div>
-													</div>
-													</div>
-
-													<div class="form-group">
-														<div class="col-sm-offset-3 col-sm-10">
-															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showEditFacAcademic"><button type="button"  id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
- 													</div>
-														<input type="hidden" id="staff_id" name="staff_id"
-														value="${facPhdDetail.facultyId}"> <input
-														type="hidden" id="is_view" name="is_view" value="0">
-														<input type="hidden" id="temp1"
-											name="temp1" value="${temp1}"> 
+											<div id="form_input">
+												<div class="form-group">
+													<label class="control-label col-sm-3"
+														for="phdRecognitionDt">Date of Recognition<span
+														class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															data-end-date="0d" data-format="dd-mm-yyyy"
+															id="phdRecognitionDt" name="phdRecognitionDt" readonly
+															placeholder="Select Date of Recognition"
+															value="${facPhdDetail.phdRecognitionDt}"> <span
+															class="error_form text-danger"
+															id="phdRecognitionDt_field" style="display: none;">Please
+															select date of recognition</span>
 													</div>
 												</div>
-												<div class="clearfix"></div>
-											</form>
-											<p class="desc text-danger fontsize11">Notice : * Fields
-										are mandatory.</p>
-										</div>
 
-									<!-- </div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="phdValidDt">Valid
+														up to <span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="text" class="form-control datepicker"
+															id="phdValidDt" readonly data-format="dd-mm-yyyy"
+															name="phdValidDt" placeholder="Valid up to Date"
+															value="${facPhdDetail.phdValidDt}"> <span
+															class="error_form text-danger" id="phdValidDt_field"
+															style="display: none;">Please select date of
+															validity</span>
+
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="ii">No.
+														of Students Guided <span class="text-danger">*</span>
+
+													</label> <label class="control-label col-sm-1" for="phdStuPg">PG
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-2">
+														<input type="number" max="99999" min="0"
+															class="form-control" id="phdStuPg" name="phdStuPg"
+															placeholder="PG" value="${facPhdDetail.phdStuPg}">
+														<span class="error_form text-danger" id="phdStuPg_field"
+															style="display: none;">Enter no of PG students</span>
+													</div>
+
+													<label style="white-space: nowrap;"
+														class="control-label col-sm-1" for="phdStuMphill">M.Phil.
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-2">
+														<input type="number" max="99999" min="0"
+															class="form-control" id="phdStuMphill"
+															name="phdStuMphill" placeholder="M.Phil."
+															value="${facPhdDetail.phdStuMphill}"> <span
+															class="error_form text-danger" id="phdStuMphill_field"
+															style="display: none;">Enter no of M.Phil.
+															students</span>
+													</div>
+													<label class="control-label col-sm-1" for="phdStuPhd">Ph.D.
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-2">
+														<input type="number" max="99999" min="0"
+															class="form-control" id="phdStuPhd" name="phdStuPhd"
+															placeholder="Ph.D" value="${facPhdDetail.phdStuPhd}">
+														<span class="error_form text-danger" id="phdStuPhd_field"
+															style="display: none;">Enter number of Ph.D
+															students</span>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+
+													<label class="control-label col-sm-3" for="isIctUsed">Use
+														of ICT<br>
+													<span style="font-size: 10px">(Information
+															Communication Technology)</span> <span class="text-danger">*</span>
+													</label>
+
+
+													<div class="col-sm-2">
+														<c:choose>
+															<c:when test="${facPhdDetail.isIctUsed==1}">
+															Yes <input type="radio" name="isIctUsed" id="isIctUsed"
+																	checked value="1"> No<input type="radio"
+																	name="isIctUsed" id="isIctUsed" value="0">
+															</c:when>
+															<c:otherwise>
+																Yes <input type="radio" name="isIctUsed" id="isIctUsed"
+																	value="1"> No<input type="radio"
+																	name="isIctUsed" id="isIctUsed" checked value="0">
+
+															</c:otherwise>
+														</c:choose>
+														<span class="error_form text-danger" id="isIctUsed_field"
+															style="display: none;">Please select use of ICT</span>
+
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-offset-3 col-sm-10">
+													<button type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+													<a
+														href="${pageContext.request.contextPath}/showEditFacAcademic"><button
+															type="button" id="sub2" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a>
+												</div>
+												<input type="hidden" id="staff_id" name="staff_id"
+													value="${facPhdDetail.facultyId}"> <input
+													type="hidden" id="is_view" name="is_view" value="0">
+												<input type="hidden" id="temp1" name="temp1"
+													value="${temp1}">
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</form>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p>
+								</div>
+
+								<!-- </div>
 								</div> -->
 							</div>
 						</div>
@@ -273,7 +311,7 @@
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -289,127 +327,98 @@
 			}
 			return true;
 		}
-		$(document)
-				.ready(
-						function($) {
-							//alert("Hi")
-							$("#form_sample_2")
-									.submit(
-											function(e) {
-												var isError = false;
-												var errMsg = "";
-												//alert("Hi")
-												
-												
-												var radioValue = $("input[name='isPhdGuide']:checked"). val();
-												//alert(radioValue);
-												if(radioValue==0){
-														isError = true;
+		$(document).ready(function($) {
+			//alert("Hi")
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
+				//alert("Hi")
 
-														$("#isPhdGuide").addClass(
-																"has-error")
-														$("#isPhdGuide_field").show()
-													} else {
-														$("#isPhdGuide_field").hide()
-													
-												}
+				var radioValue = $("input[name='isPhdGuide']:checked").val();
+				//alert(radioValue);
+				if (radioValue == 0) {
+					isError = true;
 
-												
+					$("#isPhdGuide").addClass("has-error")
+					$("#isPhdGuide_field").show()
+				} else {
+					$("#isPhdGuide_field").hide()
 
-												 if (!$("#phdRecognitionDt").val()) {
-													isError = true;
+				}
 
-													$("#phdRecognitionDt").addClass(
-															"has-error")
-													$("#phdRecognitionDt_field")
-															.show()
-												} else {
-													$("#phdRecognitionDt_field")
-															.hide()
-												}
+				if (!$("#phdRecognitionDt").val()) {
+					isError = true;
 
-												if (!$("#phdValidDt").val()) {
-													isError = true;
+					$("#phdRecognitionDt").addClass("has-error")
+					$("#phdRecognitionDt_field").show()
+				} else {
+					$("#phdRecognitionDt_field").hide()
+				}
 
-													$("#phdValidDt").addClass(
-															"has-error")
-													$("#phdValidDt_field")
-															.show()
-												} else {
-													$("#phdValidDt_field")
-															.hide()
-												}
+				if (!$("#phdValidDt").val()) {
+					isError = true;
 
-												
-												
-												if (!$("#phdStuPg").val()) {
-													isError = true;
+					$("#phdValidDt").addClass("has-error")
+					$("#phdValidDt_field").show()
+				} else {
+					$("#phdValidDt_field").hide()
+				}
 
-													$("#phdStuPg").addClass(
-															"has-error")
-													$("#phdStuPg_field")
-															.show()
-												} else {
-													$("#phdStuPg_field")
-															.hide()
-												}
+				if (!$("#phdStuPg").val()) {
+					isError = true;
 
-												if (!$("#phdStuMphill").val()) {
-													isError = true;
+					$("#phdStuPg").addClass("has-error")
+					$("#phdStuPg_field").show()
+				} else {
+					$("#phdStuPg_field").hide()
+				}
 
-													$("#phdStuMphill").addClass(
-															"has-error")
-													$("#phdStuMphill_field")
-															.show()
-												} else {
-													$("#phdStuMphill_field")
-															.hide()
-												}
+				if (!$("#phdStuMphill").val()) {
+					isError = true;
 
-										
-												if (!$("#phdStuPhd").val()) {
-													isError = true;
+					$("#phdStuMphill").addClass("has-error")
+					$("#phdStuMphill_field").show()
+				} else {
+					$("#phdStuMphill_field").hide()
+				}
 
-													$("#phdStuPhd").addClass(
-															"has-error")
-													$("#phdStuPhd_field")
-															.show()
-												} else {
-													$("#phdStuPhd_field")
-															.hide()
-												}
-												
-												if (!$("#isIctUsed").val()) {
-													isError = true;
+				if (!$("#phdStuPhd").val()) {
+					isError = true;
 
-													$("#isIctUsed").addClass(
-															"has-error")
-													$("#isIctUsed_field")
-															.show()
-												} else {
-													$("#isIctUsed_field")
-															.hide()
-												}
+					$("#phdStuPhd").addClass("has-error")
+					$("#phdStuPhd_field").show()
+				} else {
+					$("#phdStuPhd_field").hide()
+				}
 
-												if (!isError) {
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														document.getElementById("sub1").disabled = true;
-														document.getElementById("sub2").disabled = true;
+				if (!$("#isIctUsed").val()) {
+					isError = true;
 
-														return  true;
-													}	
-												}
-												return false;
-											});
-						});
-		
-		$("input[name='isPhdGuide']").change(function(){
-			var radioValue = $("input[name='isPhdGuide']:checked"). val();
-			if(radioValue==0){
-				document.getElementById("form_input").style.display="none";
-			}else{
-				document.getElementById("form_input").style.display="block";
+					$("#isIctUsed").addClass("has-error")
+					$("#isIctUsed_field").show()
+				} else {
+					$("#isIctUsed_field").hide()
+				}
+
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+
+						return true;
+					}
+				}
+				return false;
+			});
+		});
+
+		$("input[name='isPhdGuide']").change(function() {
+			var radioValue = $("input[name='isPhdGuide']:checked").val();
+			if (radioValue == 0) {
+				document.getElementById("form_input").style.display = "none";
+			} else {
+				document.getElementById("form_input").style.display = "block";
 			}
 		});
 	</script>
@@ -510,37 +519,36 @@
 
 		}
 	</script>
-	
-	
-	<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-    	  var x=confirm("Do you really want to submit the form?");
-    	  if(x==true){
-        wasSubmitted = true;
-        document.getElementById("sub1").disabled=true;
-  	  return wasSubmitted;
-    	  }
-      }
-      return false;
-    }   
-    
-    function submit_f(view) {
-		document.getElementById("is_view").value = view;//create this 
 
-	}
-    /* $(function () {
-		 
-        $('.datepicker').datepicker({
-			autoclose: true,
-            format: "dd-mm-yyyy",
-            changeYear:true,
-            changeMonth:true
-		});
-    }); */
-    
-</script>
+
+	<script type="text/javascript">
+		var wasSubmitted = false;
+		function checkBeforeSubmit() {
+			if (!wasSubmitted) {
+				var x = confirm("Do you really want to submit the form?");
+				if (x == true) {
+					wasSubmitted = true;
+					document.getElementById("sub1").disabled = true;
+					return wasSubmitted;
+				}
+			}
+			return false;
+		}
+
+		function submit_f(view) {
+			document.getElementById("is_view").value = view;//create this 
+
+		}
+		/* $(function () {
+			 
+		    $('.datepicker').datepicker({
+				autoclose: true,
+		        format: "dd-mm-yyyy",
+		        changeYear:true,
+		        changeMonth:true
+			});
+		}); */
+	</script>
 
 
 

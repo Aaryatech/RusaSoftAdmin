@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -98,13 +100,22 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-								<p class="desc text-danger fontsize11">(If Involved.)</p>
+									<p class="desc text-danger fontsize11">(If Involved.)</p>
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/submitFacultyConsultancy"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-
-
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 
 										<div id="abc">
@@ -116,12 +127,13 @@
 													of Consultancy <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" id="nature" autocomplete="off"
-														placeholder="Nature of Consultancy" name="nature"
-														value="${editConsultancy.consNature}" onchange="trim(this)">
-												<span
-													class="error_form text-danger" id="error_field1"
-													style="display: none;">Please enter nature of consultancy. </span>
+													<input type="text" class="form-control" id="nature"
+														autocomplete="off" placeholder="Nature of Consultancy"
+														name="nature" value="${editConsultancy.consNature}"
+														onchange="trim(this)"> <span
+														class="error_form text-danger" id="error_field1"
+														style="display: none;">Please enter nature of
+														consultancy. </span>
 
 												</div>
 											</div>
@@ -132,12 +144,14 @@
 													Agency/Industry <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" id="sponser" autocomplete="off"
+													<input type="text" class="form-control" id="sponser"
+														autocomplete="off"
 														placeholder="Sponsoring Agency/Industry" name="sponser"
-														value="${editConsultancy.consSponsor}" onchange="trim(this)">
-														<span
-													class="error_form text-danger" id="error_field2"
-													style="display: none;">Please enter sponsoring agency industry.</span>
+														value="${editConsultancy.consSponsor}"
+														onchange="trim(this)"> <span
+														class="error_form text-danger" id="error_field2"
+														style="display: none;">Please enter sponsoring
+														agency industry.</span>
 													<!-- </div> -->
 												</div>
 											</div>
@@ -148,12 +162,15 @@
 													of Consultancy in Rs. <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="number" class="form-control" autocomplete="off"
-														id="amount" placeholder="Amount of Consultancy in Rs." onkeypress='return restrictAlphabets(event)'
-														name="amount" value="${editConsultancy.consAmount}" onchange="trim(this)">
-											<span
-													class="error_form text-danger" id="error_field3"
-													style="display: none;">Please enter amount of consultancy and value must be greater than 0. </span>
+													<input type="number" class="form-control"
+														autocomplete="off" id="amount"
+														placeholder="Amount of Consultancy in Rs."
+														onkeypress='return restrictAlphabets(event)' name="amount"
+														value="${editConsultancy.consAmount}"
+														onchange="trim(this)"> <span
+														class="error_form text-danger" id="error_field3"
+														style="display: none;">Please enter amount of
+														consultancy and value must be greater than 0. </span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -164,10 +181,11 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
 														id="conPeriod" placeholder="Consultancy Period"
-														name="conPeriod" value="${editConsultancy.consPeriod}" onchange="trim(this)">
-												<span
-													class="error_form text-danger" id="error_field4"
-													style="display: none;">Please enter consultancy period. </span>
+														name="conPeriod" value="${editConsultancy.consPeriod}"
+														onchange="trim(this)"> <span
+														class="error_form text-danger" id="error_field4"
+														style="display: none;">Please enter consultancy
+														period. </span>
 												</div>
 
 											</div>
@@ -209,8 +227,8 @@
 												<div class="col-sm-offset-2 col-sm-10">
 
 
-													<button type="submit" id="sub1"
-														class="btn btn-primary" onclick="submit_f(1)">
+													<button type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)">
 														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 													</button>
 
@@ -267,7 +285,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-6" for="page_name">Academic
 							Year</label> <select id="academicYear" name="qualType"
-							class="form-control" onchange="showForm()" >
+							class="form-control" onchange="showForm()">
 							<option value="2018-2019">2018-2019</option>
 							<option value="2017-2018">2017-2018</option>
 							<option value="2016-2017">2016-2017</option>
@@ -284,14 +302,13 @@
 		</div>
 	</div>
 
-<script>
-
-function trim(el) {
-	el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-	replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-	replace(/\n +/, "\n"); // Removes spaces after newlines
-	return;
-}
+	<script>
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -307,68 +324,58 @@ function trim(el) {
 			}
 			return true;
 		}
-		$(document)
-				.ready(
-						function($) {
+		$(document).ready(function($) {
 
-							$("#form_sample_2")
-									.submit(
-											function(e) {
-												var isError = false;
-												var errMsg = "";
-												if (!$("#nature").val()) { amount
-													isError = true;
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
+				if (!$("#nature").val()) {
+					amount
+					isError = true;
 
-													$("#nature").addClass(
-															"has-error")
-													$("#error_field1").show();
-												} else {
-													$("#error_field1").hide();
-												}
-												   
-												if (!$("#sponser").val()) {
-													isError = true;
+					$("#nature").addClass("has-error")
+					$("#error_field1").show();
+				} else {
+					$("#error_field1").hide();
+				}
 
-													$("#sponser").addClass(
-															"has-error")
-													$("#error_field2").show();
-												} else {
-													$("#error_field2").hide();
-												}
+				if (!$("#sponser").val()) {
+					isError = true;
 
-												if ($("#amount").val()<=0 || !$("#amount").val()) {
-													isError = true;
+					$("#sponser").addClass("has-error")
+					$("#error_field2").show();
+				} else {
+					$("#error_field2").hide();
+				}
 
-													$("#amount").addClass(
-															"has-error")
-													$("#error_field3").show();
-												} else {
-													$("#error_field3").hide();
-												}
-												if (!$("#conPeriod").val()) {
-													isError = true;
+				if ($("#amount").val() <= 0 || !$("#amount").val()) {
+					isError = true;
 
-													$("#conPeriod").addClass(
-															"has-error")
-													$("#error_field4").show();
-												} else {
-													$("#error_field4").hide();
-												}
-												
+					$("#amount").addClass("has-error")
+					$("#error_field3").show();
+				} else {
+					$("#error_field3").hide();
+				}
+				if (!$("#conPeriod").val()) {
+					isError = true;
 
-												if (!isError) {
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														document
-																.getElementById("sub1").disabled = true;
-														document
-																.getElementById("sub2").disabled = true;
-														return true;
-													}
-												}
-												return false;
-											});
-						});
+					$("#conPeriod").addClass("has-error")
+					$("#error_field4").show();
+				} else {
+					$("#error_field4").hide();
+				}
+
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
 	</script>
 
 
@@ -435,7 +442,7 @@ function trim(el) {
 
 		}
 	</script>
-<script type="text/javascript">
+	<script type="text/javascript">
 		/*code: 48-57 Numbers
 		  8  - Backspace,
 		  35 - home key, 36 - End key

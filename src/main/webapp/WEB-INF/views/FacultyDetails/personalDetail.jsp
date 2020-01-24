@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -89,17 +91,22 @@
 							</div>
 
 						</header>
-						 <c:if test="${sessionScope.successMsg!=null}">
-           						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
-        	                     </div> 
-        	                     <%session=request.getSession();
-        	                    
-        	                     session.removeAttribute("successMsg");
-        	                     %>
-            			</c:if>
+						<c:if test="${sessionScope.successMsg!=null}">
+							<div class="col-lg-12">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong> ${sessionScope.successMsg}
+								</div>
+							</div>
+							<%
+								session = request.getSession();
+
+									session.removeAttribute("successMsg");
+							%>
+						</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -119,6 +126,18 @@
 										action="${pageContext.request.contextPath}/insertFacPersonalDetail"
 										method="post" name="form_sample_2" id="form_sample_2">
 										<div class="col-md-12"></div>
+ 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_name">
@@ -131,7 +150,7 @@
 													value="${staff.facultyFirstName}" required>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_gender">Gender<span
 												class="text-danger">*</span>
@@ -169,21 +188,22 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_dob">Date
 												of Birth<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker"  data-end-date="-7000d" data-format="dd-mm-yyyy"
-													id="f_dob" name="f_dob" placeholder="Enter Date Of Birth"
+												<input type="text" class="form-control datepicker"
+													data-end-date="-7000d" data-format="dd-mm-yyyy" id="f_dob"
+													name="f_dob" placeholder="Enter Date Of Birth"
 													value="${facPerDetail.fDob}"> <span
 													class="error_form text-danger" id="f_dob_field"
 													style="display: none;">Please select date of birth.</span>
 
 											</div>
-										</div>		
-										
+										</div>
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_designation">
 												Designation <span class="text-danger">*</span>
@@ -217,7 +237,7 @@
 													value="${staff.email}">
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_mob">Mobile
 												No<span class="text-danger">*</span>
@@ -231,10 +251,10 @@
 											</div>
 											<div class="col-sm-2"></div>
 										</div>
-										
+
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="f_resident">Alternate Mobile
-												No.</label>
+											<label class="control-label col-sm-3" for="f_resident">Alternate
+												Mobile No.</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" id="f_resident"
 													onchange="trim(this)" name="f_resident" maxlength="15"
@@ -244,7 +264,7 @@
 											</div>
 											<div class="col-sm-2"></div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_phone">Phone
 												No.<span class="text-danger"></span>
@@ -256,8 +276,8 @@
 													value="${facPerDetail.fPhone}">
 
 											</div>
-										</div>	
-										
+										</div>
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_aadhar">Aadhaar
 												No.<span class="text-danger">*</span>
@@ -271,7 +291,7 @@
 													style="display: none;">Please enter aadhaar No.</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fPan">PAN
 												No<span class="text-danger">*</span>
@@ -284,7 +304,7 @@
 													class="error_form text-danger" id="f_pan_field"
 													style="display: none;">Please enter PAN No.</span>
 											</div>
-										</div>									
+										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">Address
@@ -300,7 +320,7 @@
 													address.</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">Village
 												<span class="text-danger">*</span>
@@ -308,13 +328,12 @@
 											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
 													class="form-control" id="village" name="village"
-													placeholder="Village"
-													value="${facPerDetail.fVillage}"> <span
-													class="error_form text-danger" id="fac_village_field"
+													placeholder="Village" value="${facPerDetail.fVillage}">
+												<span class="error_form text-danger" id="fac_village_field"
 													style="display: none;">Please enter village.</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">Taluka/City
 												<span class="text-danger">*</span>
@@ -322,13 +341,12 @@
 											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
 													class="form-control" id="taluka" name="taluka"
-													placeholder="Taluka/City"
-													value="${facPerDetail.fTaluka}"> <span
-													class="error_form text-danger" id="fac_taluka_field"
+													placeholder="Taluka/City" value="${facPerDetail.fTaluka}">
+												<span class="error_form text-danger" id="fac_taluka_field"
 													style="display: none;">Please enter taluka.</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">District
 												<span class="text-danger">*</span>
@@ -336,16 +354,15 @@
 											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
 													class="form-control" id="district" name="district"
-													placeholder="District"
-													value="${facPerDetail.fDistrict}"> <span
-													class="error_form text-danger" id="fac_district_field"
+													placeholder="District" value="${facPerDetail.fDistrict}">
+												<span class="error_form text-danger" id="fac_district_field"
 													style="display: none;">Please enter district.</span>
 											</div>
 										</div>
-										
-										
-									
-										
+
+
+
+
 										<%-- <div class="form-group">
 											<label class="control-label col-sm-3" for="fac_address">City
 												<span class="text-danger">*</span>
@@ -372,76 +389,81 @@
 													style="display: none;">Please enter state.</span>
 											</div>
 										</div> --%>
-										
+
 										<div class="form-group">
-										 
-											<label class="control-label col-sm-3" for="state_id">State <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-3" for="state_id">State
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="state_id" name="state_id" class="form-control" disabled>
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
+												<select id="state_id" name="state_id" class="form-control"
+													disabled>
+
+													<c:forEach items="${sessionScope.stateList}" var="state">
 														<c:choose>
-														<c:when test="${staff.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
+															<c:when
+																test="${staff.facultyMiddelName == state.stateId}">
+																<option selected value="${state.stateId}">${state.stateName}</option>
+															</c:when>
+
 															<c:when test="${staff.facultyMiddelName eq 21}">
-															<option selected option="">Maharashtra</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
+																<option selected option="">Maharashtra</option>
+															</c:when>
+
+															<c:otherwise>
+																<option value="${state.stateId}">${state.stateName}</option>
+															</c:otherwise>
 														</c:choose>
 													</c:forEach>
- 
- 	
+
+
 												</select> <span class="error_form text-danger" id="quolf_field"
 													style="display: none;">Please select highest
 													qualification</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
-											<label class="control-label col-sm-3" for="fac_address">Pin Code
-												<span class="text-danger">*</span>
+											<label class="control-label col-sm-3" for="fac_address">Pin
+												Code <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" onchange="trim(this)" maxlength="200"
 													class="form-control" id="pincode" name="pincode"
-													placeholder="Pin Code"
-													value="${facPerDetail.fPincode}"> <span
-													class="error_form text-danger" id="fac_pincodc_field"
+													placeholder="Pin Code" value="${facPerDetail.fPincode}">
+												<span class="error_form text-danger" id="fac_pincodc_field"
 													style="display: none;">Please enter proper pin code.</span>
 											</div>
 										</div>
-										
-									 	<div class="form-group" style="display: none;">
-											
-											<label class="control-label col-sm-3" for="is_add_same">Belongs to
-												 Same State <span
-												class="text-danger">*</span>
+
+										<div class="form-group" style="display: none;">
+
+											<label class="control-label col-sm-3" for="is_add_same">Belongs
+												to Same State <span class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-3">
-												
-													Yes <input type="radio" ${facPerDetail.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1"> 
-													No<input type="radio" ${facPerDetail.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0">
 
-													
-												<span class="error_form text-danger" id="is_state_same_field"
-													style="display: none;">Please select
-													permanent/correspondence address same or not.</span>
+												Yes <input type="radio"
+													${facPerDetail.isSame == 1 ? 'checked' : ''}
+													name="is_state_same" id="is_state_same" value="1">
+												No<input type="radio"
+													${facPerDetail.isSame == 0 ? 'checked' : ''}
+													name="is_state_same" id="is_state_same" value="0">
+
+
+												<span class="error_form text-danger"
+													id="is_state_same_field" style="display: none;">Please
+													select permanent/correspondence address same or not.</span>
 
 											</div>
-										</div> 
-										
-										
-										
+										</div>
+
+
+
 
 										<div class="form-group">
-											
+
 											<label class="control-label col-sm-3" for="is_add_same">Is
 												Permanent and Correspondence Address Same <span
 												class="text-danger">*</span>
@@ -488,9 +510,9 @@
 											</div>
 										</div>
 
-										
-										
-										
+
+
+
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="f_doj">Date
 												of Joining <span class="text-danger">*</span>
@@ -518,17 +540,16 @@
 											</div>
 										</div>
 
-										
+
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-9">
 												<button type="submit" id="sub1" class="btn btn-primary"
 													onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
-												<button
-														type="submit" id="sub2" class="btn btn-primary">
-														<i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next
-													</button>
+												<button type="submit" id="sub2" class="btn btn-primary">
+													<i class="${sessionScope.forwardIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Next
+												</button>
 											</div>
 											<input type="hidden" id="staff_id" name="staff_id"
 												value="${staff.facultyId}"> <input type="hidden"
@@ -556,7 +577,7 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- 
+
 
 	<script>
 	

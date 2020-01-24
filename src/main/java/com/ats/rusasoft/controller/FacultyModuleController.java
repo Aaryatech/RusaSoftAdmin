@@ -152,7 +152,7 @@ public class FacultyModuleController {
 				FacultyConferenceList[] facCon = rest.postForObject(Constants.url + "/getfacultyConferenceByFacId", map,
 						FacultyConferenceList[].class);
 				List<FacultyConferenceList> facConfList = new ArrayList<>(Arrays.asList(facCon));
-				//System.out.println("FacConfLIst:" + facConfList);
+				// System.out.println("FacConfLIst:" + facConfList);
 
 				model.addObject("facConList", facConfList);
 				model.addObject("title", "Faculty's Published Content Details");
@@ -166,16 +166,16 @@ public class FacultyModuleController {
 						"showAddPublicationDetailsList", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -196,69 +196,80 @@ public class FacultyModuleController {
 	public String insertFacultyConf(HttpServletRequest request, HttpServletResponse response) {
 		String returnString = new String();
 		try {
-
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showPublicationDetails", "showAddPublicationDetailsList", "0", "1",
-					"0", "0", newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showPublicationDetails", "showAddPublicationDetailsList", "0",
+						"1", "0", "0", newModuleList);
 
-				System.err.println("Inside insertDist method");
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				String curDateTime = dateFormat.format(cal.getTime());
+				// System.out.println(view);
 
-				FacultyConference facConf = new FacultyConference();
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				int yId = (int) session.getAttribute("acYearId");
-				int userId = (int) session.getAttribute("userId");
-				int confId = 0;
-				try {
-					confId = Integer.parseInt(request.getParameter("conf_id"));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				if (confId == 0) {
-					facConf.setConfId(0);
+					System.err.println("Inside insertDist method");
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					FacultyConference facConf = new FacultyConference();
+
+					int yId = (int) session.getAttribute("acYearId");
+					int userId = (int) session.getAttribute("userId");
+					int confId = 0;
+					try {
+						confId = Integer.parseInt(request.getParameter("conf_id"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (confId == 0) {
+						facConf.setConfId(0);
+					} else {
+						facConf.setConfId(confId);
+					}
+					facConf.setFacultyId(userObj.getGetData().getUserDetailId());
+					facConf.setYearId(yId);
+					facConf.setConfName(XssEscapeUtils.jsoupParse(request.getParameter("conf_name")));
+					facConf.setConfType(request.getParameter("conf_type"));
+					facConf.setConfDate(request.getParameter("conf_date"));
+					facConf.setConfVenue(XssEscapeUtils.jsoupParse(request.getParameter("conf_venue")));
+					facConf.setConfFundFrom(XssEscapeUtils.jsoupParse(request.getParameter("conf_fund")));
+					facConf.setConfFundAmt(
+							Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("conf_amt"))));
+					facConf.setDelStatus(1);
+					facConf.setIsActive(1);
+					facConf.setMakerUserId(userId);
+					facConf.setMakerEnterDatetime(curDateTime);
+					facConf.setExInt1(0);
+					facConf.setExVar1("Na");
+
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+
+					// System.out.println("Fac Conf:" + facConf.toString());
+
+					FacultyConference insFconf = rest.postForObject(Constants.url + "/insertNewFacConference", facConf,
+							FacultyConference.class);
+					// System.out.println(insFconf.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showAddPublicationDetailsList";
+					} else {
+						returnString = "redirect:/showPublicationDetails";
+					}
 				} else {
-					facConf.setConfId(confId);
+
+					returnString = "redirect:/accessDenied";
+
 				}
-				facConf.setFacultyId(userObj.getGetData().getUserDetailId());
-				facConf.setYearId(yId);
-				facConf.setConfName(XssEscapeUtils.jsoupParse(request.getParameter("conf_name")));
-				facConf.setConfType(request.getParameter("conf_type"));
-				facConf.setConfDate(request.getParameter("conf_date"));
-				facConf.setConfVenue(XssEscapeUtils.jsoupParse(request.getParameter("conf_venue")));
-				facConf.setConfFundFrom(XssEscapeUtils.jsoupParse(request.getParameter("conf_fund")));
-				facConf.setConfFundAmt(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("conf_amt"))));
-				facConf.setDelStatus(1);
-				facConf.setIsActive(1);
-				facConf.setMakerUserId(userId);
-				facConf.setMakerEnterDatetime(curDateTime);
-				facConf.setExInt1(0);
-				facConf.setExVar1("Na");
+			}
 
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-
-				//System.out.println("Fac Conf:" + facConf.toString());
-
-				FacultyConference insFconf = rest.postForObject(Constants.url + "/insertNewFacConference", facConf,
-						FacultyConference.class);
-				//System.out.println(insFconf.toString());
-
-				if (is_view == 1) {
-					returnString = "redirect:/showAddPublicationDetailsList";
-				} else {
-					returnString = "redirect:/showPublicationDetails";
-				}
-			} else {
+			else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 
 		} catch (Exception e) {
@@ -358,7 +369,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] confIds = request.getParameterValues("confId");
-					//System.out.println("id are" + confIds);
+					// System.out.println("id are" + confIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -560,16 +571,16 @@ public class FacultyModuleController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -588,45 +599,56 @@ public class FacultyModuleController {
 
 	@RequestMapping(value = "/insertFacultyActivity", method = RequestMethod.POST)
 	public String insertFacultyActivity(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = null;
 		try {
 
-			FacultyActivity facAct = new FacultyActivity();
-
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int yId = (int) session.getAttribute("acYearId");
-			int userId = (int) session.getAttribute("userId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			facAct.setActivityId(Integer.parseInt(request.getParameter("activity_id")));
-			facAct.setFacultyId(userObj.getGetData().getUserDetailId());
-			facAct.setYearId(yId);
-			facAct.setActivityType(request.getParameter("activity_type"));
-			facAct.setActivityName(XssEscapeUtils.jsoupParse(request.getParameter("activity_name")));
-			facAct.setActivityLevel(request.getParameter("activity_level"));
-			facAct.setActivityDate(request.getParameter("activity_date"));
-			facAct.setActivityParticipants(request.getParameter("activity_part"));
-			facAct.setActivityFundedBy(XssEscapeUtils.jsoupParse(request.getParameter("activity_found")));
-			facAct.setActivityAmountSanctioned(Integer.parseInt(request.getParameter("amt_sanc")));
-			facAct.setActivityAmountUtilised(Integer.parseInt(request.getParameter("amt_utilise")));
-			facAct.setDelStatus(1);
-			facAct.setIsActive(1);
-			facAct.setMakerUserId(userId);
-			facAct.setMakerEnterDatetime(curDateTime);
-			facAct.setExInt1(0);
-			facAct.setExVar1("NA");
+			if (token.trim().equals(key.trim())) {
 
-			FacultyActivity facacc = rest.postForObject(Constants.url + "/insertFacultyActivity", facAct,
-					FacultyActivity.class);
+				FacultyActivity facAct = new FacultyActivity();
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				int userId = (int) session.getAttribute("userId");
+
+				facAct.setActivityId(Integer.parseInt(request.getParameter("activity_id")));
+				facAct.setFacultyId(userObj.getGetData().getUserDetailId());
+				facAct.setYearId(yId);
+				facAct.setActivityType(request.getParameter("activity_type"));
+				facAct.setActivityName(XssEscapeUtils.jsoupParse(request.getParameter("activity_name")));
+				facAct.setActivityLevel(request.getParameter("activity_level"));
+				facAct.setActivityDate(request.getParameter("activity_date"));
+				facAct.setActivityParticipants(request.getParameter("activity_part"));
+				facAct.setActivityFundedBy(XssEscapeUtils.jsoupParse(request.getParameter("activity_found")));
+				facAct.setActivityAmountSanctioned(Integer.parseInt(request.getParameter("amt_sanc")));
+				facAct.setActivityAmountUtilised(Integer.parseInt(request.getParameter("amt_utilise")));
+				facAct.setDelStatus(1);
+				facAct.setIsActive(1);
+				facAct.setMakerUserId(userId);
+				facAct.setMakerEnterDatetime(curDateTime);
+				facAct.setExInt1(0);
+				facAct.setExVar1("NA");
+
+				FacultyActivity facacc = rest.postForObject(Constants.url + "/insertFacultyActivity", facAct,
+						FacultyActivity.class);
+				returnString = "redirect:/showOrganizedList";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-		return "redirect:/showOrganizedList";
+		return returnString;
 
 	}
 
@@ -724,7 +746,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] activityIds = request.getParameterValues("activityId");
-					//System.out.println("id are" + "linknameIds");
+					// System.out.println("id are" + "linknameIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1078,16 +1100,16 @@ public class FacultyModuleController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1151,53 +1173,63 @@ public class FacultyModuleController {
 		StudentMentoring stud = new StudentMentoring();
 
 		HttpSession session = request.getSession();
-		LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
-		int yId = (int) session.getAttribute("acYearId");
-		int userId = (int) session.getAttribute("userId");
-		try {
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "1", "0", "0",
-					newModuleList);
+		String token = request.getParameter("token");
+		String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+		if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
+			LoginResponse facId = (LoginResponse) session.getAttribute("userObj");
+			int yId = (int) session.getAttribute("acYearId");
+			int userId = (int) session.getAttribute("userId");
+			try {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddStudMentor", "showStudMentor", "0", "1", "0", "0",
+						newModuleList);
 
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				stud.setMenId(Integer.parseInt(request.getParameter("menId")));
-				stud.setFacultyId(facId.getGetData().getUserDetailId());
-				stud.setMenStuCount(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("stud_no"))));
-				stud.setYearId(yId);
-				stud.setDelStatus(1);
-				stud.setIsActive(1);
-				stud.setMakerUserId(facId.getUserId());
-				stud.setMakerEnterDatetime(curDateTime);
-				stud.setExInt1(0);
-				stud.setExVar1("NA");
+				// System.out.println(view);
 
-				//System.out.println("Mentor:" + stud.toString());
-				StudentMentoring saveStud = rest.postForObject(Constants.url + "/insertStudentMentoringDetails", stud,
-						StudentMentoring.class);
-				//System.out.println(saveStud.toString());
+				if (view.isError() == false) {
 
-				if (is_view == 1) {
-					returnString = "redirect:/showStudMentor";
-				} else {
-					returnString = "redirect:/showAddStudMentor";
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					stud.setMenId(Integer.parseInt(request.getParameter("menId")));
+					stud.setFacultyId(facId.getGetData().getUserDetailId());
+					stud.setMenStuCount(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("stud_no"))));
+					stud.setYearId(yId);
+					stud.setDelStatus(1);
+					stud.setIsActive(1);
+					stud.setMakerUserId(facId.getUserId());
+					stud.setMakerEnterDatetime(curDateTime);
+					stud.setExInt1(0);
+					stud.setExVar1("NA");
+
+					// System.out.println("Mentor:" + stud.toString());
+					StudentMentoring saveStud = rest.postForObject(Constants.url + "/insertStudentMentoringDetails",
+							stud, StudentMentoring.class);
+					// System.out.println(saveStud.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showStudMentor";
+					} else {
+						returnString = "redirect:/showAddStudMentor";
+					}
 				}
+
+				else {
+
+					returnString = "redirect:/accessDenied";
+
+				}
+
+			} catch (Exception e) {
+
+				System.err.println("exception In showAddStudMentor at Master Contr" + e.getMessage());
+
+				e.printStackTrace();
+
 			}
+		} else {
 
-			else {
-
-				returnString = "redirect:/accessDenied";
-
-			}
-		} catch (Exception e) {
-
-			System.err.println("exception In showAddStudMentor at Master Contr" + e.getMessage());
-
-			e.printStackTrace();
-
+			returnString = "redirect:/accessDenied";
 		}
 
 		return returnString;
@@ -1225,14 +1257,14 @@ public class FacultyModuleController {
 
 				model = new ModelAndView("FacultyDetails/addStudMentor");
 
-				//System.out.println("MID:" + menId);
+				// System.out.println("MID:" + menId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("mId", menId);
 
 				StudentMentoring studMontr = rest.postForObject(Constants.url + "/editFacultyMentoringDetailsById", map,
 						StudentMentoring.class);
-				//System.out.println("Data:" + studMontr);
+				// System.out.println("Data:" + studMontr);
 
 				model.addObject("title", "Edit Faculty Worked for Students Mentoring");
 
@@ -1266,14 +1298,14 @@ public class FacultyModuleController {
 			} else {
 				model = new ModelAndView("FacultyDetails/addStudMentor");
 				// int countid = Integer.parseInt(request.getParameter("menId"));
-				//System.out.println("MID:" + menId);
+				// System.out.println("MID:" + menId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("mId", menId);
 
 				StudentMentoring studMontr = rest.postForObject(Constants.url + "/deleteFacultyMentoringDetailsById",
 						map, StudentMentoring.class);
-				//System.out.println("Data:" + studMontr);
+				// System.out.println("Data:" + studMontr);
 
 				model.addObject("title", "Edit Monitoring Details");
 
@@ -1311,7 +1343,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] menIds = request.getParameterValues("menId");
-					//System.out.println("id are" + menIds);
+					// System.out.println("id are" + menIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1418,30 +1450,30 @@ public class FacultyModuleController {
 				FacultyBookList[] booArr = rest.postForObject(Constants.url + "/getAllPublishedBooks", map,
 						FacultyBookList[].class);
 				List<FacultyBookList> bookList = new ArrayList<>(Arrays.asList(booArr));
-				//System.out.println("BookList:" + bookList);
+				// System.out.println("BookList:" + bookList);
 				model.addObject("bookList", bookList);
 
 				model.addObject("title", "Book/Chapter/Paper Publication ");
 
 				Info add = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "1", "0", "0",
 						newModuleList);
-				//System.out.println("res=" + add.toString());
+				// System.out.println("res=" + add.toString());
 				Info edit = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "0", "1", "0",
 						newModuleList);
 				Info delete = AccessControll.checkAccess("showBookPubList", "showBookPubList", "0", "0", "0", "1",
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1460,46 +1492,57 @@ public class FacultyModuleController {
 
 	@RequestMapping(value = "/insertFacultyBook", method = RequestMethod.POST)
 	public String insertFacultyBook(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = null;
 		try {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int yId = (int) session.getAttribute("acYearId");
-			int userId = (int) session.getAttribute("userId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			FacultyBook facBook = new FacultyBook();
+			if (token.trim().equals(key.trim())) {
 
-			facBook.setBookId(Integer.parseInt(request.getParameter("book_id")));
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			facBook.setFacultyId(userObj.getGetData().getUserDetailId());
-			facBook.setYearId(yId);
-			facBook.setBookTitle(XssEscapeUtils.jsoupParse(request.getParameter("book_title")));
-			facBook.setBookEdition(XssEscapeUtils.jsoupParse(request.getParameter("book_edition")));
-			facBook.setBookAuthor("NA");//(request.getParameter("author"));
-			facBook.setBookCoauther1(XssEscapeUtils.jsoupParse(request.getParameter("co_author1")));
-			facBook.setBookCoauther2(XssEscapeUtils.jsoupParse(request.getParameter("co_author2")));
-			facBook.setBookCoauther3(XssEscapeUtils.jsoupParse(request.getParameter("co_author3")));
-			facBook.setBookPublisher(XssEscapeUtils.jsoupParse(request.getParameter("publisher")));
-			facBook.setBookIsbn(XssEscapeUtils.jsoupParse(request.getParameter("isbn")));
-			facBook.setBookPubYear(request.getParameter("year_publication"));
-			facBook.setDelStatus(1);
-			facBook.setIsActive(1);
-			facBook.setMakerUserId(userId);
-			facBook.setMakerEnterDatetime(curDateTime);
-			facBook.setExInt1(0);
-			facBook.setExVar1("NA");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				int userId = (int) session.getAttribute("userId");
 
-			FacultyBook facpubbook = rest.postForObject(Constants.url + "/savefacultyPubBook", facBook,
-					FacultyBook.class);
+				FacultyBook facBook = new FacultyBook();
+
+				facBook.setBookId(Integer.parseInt(request.getParameter("book_id")));
+
+				facBook.setFacultyId(userObj.getGetData().getUserDetailId());
+				facBook.setYearId(yId);
+				facBook.setBookTitle(XssEscapeUtils.jsoupParse(request.getParameter("book_title")));
+				facBook.setBookEdition(XssEscapeUtils.jsoupParse(request.getParameter("book_edition")));
+				facBook.setBookAuthor("NA");// (request.getParameter("author"));
+				facBook.setBookCoauther1(XssEscapeUtils.jsoupParse(request.getParameter("co_author1")));
+				facBook.setBookCoauther2(XssEscapeUtils.jsoupParse(request.getParameter("co_author2")));
+				facBook.setBookCoauther3(XssEscapeUtils.jsoupParse(request.getParameter("co_author3")));
+				facBook.setBookPublisher(XssEscapeUtils.jsoupParse(request.getParameter("publisher")));
+				facBook.setBookIsbn(XssEscapeUtils.jsoupParse(request.getParameter("isbn")));
+				facBook.setBookPubYear(request.getParameter("year_publication"));
+				facBook.setDelStatus(1);
+				facBook.setIsActive(1);
+				facBook.setMakerUserId(userId);
+				facBook.setMakerEnterDatetime(curDateTime);
+				facBook.setExInt1(0);
+				facBook.setExVar1("NA");
+
+				FacultyBook facpubbook = rest.postForObject(Constants.url + "/savefacultyPubBook", facBook,
+						FacultyBook.class);
+				returnString = "redirect:/showBookPubList";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-		return "redirect:/showBookPubList";
+		return returnString;
 
 	}
 
@@ -1595,7 +1638,7 @@ public class FacultyModuleController {
 
 					System.err.println("Multiple records delete ");
 					String[] bookIds = request.getParameterValues("bookId");
-					//System.out.println("id are" + "bookIds");
+					// System.out.println("id are" + "bookIds");
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1718,47 +1761,56 @@ public class FacultyModuleController {
 
 	@RequestMapping(value = "/insertOutReachContri", method = RequestMethod.POST)
 	public String insertOutReachContri(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = null;
 		try {
 
-			FacultyContribution facCon = new FacultyContribution();
-
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int yId = (int) session.getAttribute("acYearId");
-			int userId = (int) session.getAttribute("userId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			facCon.setConId(Integer.parseInt(request.getParameter("fac_contriId")));
+			if (token.trim().equals(key.trim())) {
 
-			facCon.setFacultyId(userObj.getGetData().getUserDetailId());
-			facCon.setYearId(yId);
-			facCon.setConLevel(request.getParameter("level"));
-			facCon.setConName(XssEscapeUtils.jsoupParse(request.getParameter("con_name")));
-			facCon.setConUniversity(XssEscapeUtils.jsoupParse(request.getParameter("university")));
-			facCon.setConFrom(request.getParameter("from_date"));
-			facCon.setConTo(request.getParameter("to_date"));
-			facCon.setConExamSetting(Integer.parseInt(request.getParameter("examSetting")));
-			facCon.setConAsEvaluation(Integer.parseInt(request.getParameter("ansEvaluation")));
-			facCon.setConAsModeration(Integer.parseInt(request.getParameter("ansmod")));
-			facCon.setDelStatus(1);
-			facCon.setIsActive(1);
-			facCon.setMakerUserId(userId);
-			facCon.setMakerEnterDatetime(curDateTime);
-			facCon.setExtraInt1(0);
-			facCon.setExtraVar1("NA");
+				FacultyContribution facCon = new FacultyContribution();
 
-			FacultyContribution facContr = rest.postForObject(Constants.url + "/saveOutReachContri", facCon,
-					FacultyContribution.class);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
 
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				int userId = (int) session.getAttribute("userId");
+
+				facCon.setConId(Integer.parseInt(request.getParameter("fac_contriId")));
+
+				facCon.setFacultyId(userObj.getGetData().getUserDetailId());
+				facCon.setYearId(yId);
+				facCon.setConLevel(request.getParameter("level"));
+				facCon.setConName(XssEscapeUtils.jsoupParse(request.getParameter("con_name")));
+				facCon.setConUniversity(XssEscapeUtils.jsoupParse(request.getParameter("university")));
+				facCon.setConFrom(request.getParameter("from_date"));
+				facCon.setConTo(request.getParameter("to_date"));
+				facCon.setConExamSetting(Integer.parseInt(request.getParameter("examSetting")));
+				facCon.setConAsEvaluation(Integer.parseInt(request.getParameter("ansEvaluation")));
+				facCon.setConAsModeration(Integer.parseInt(request.getParameter("ansmod")));
+				facCon.setDelStatus(1);
+				facCon.setIsActive(1);
+				facCon.setMakerUserId(userId);
+				facCon.setMakerEnterDatetime(curDateTime);
+				facCon.setExtraInt1(0);
+				facCon.setExtraVar1("NA");
+
+				FacultyContribution facContr = rest.postForObject(Constants.url + "/saveOutReachContri", facCon,
+						FacultyContribution.class);
+				returnString = "redirect:/showOutReachContriList";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-		return "redirect:/showOutReachContriList";
+		return returnString;
 
 	}
 
@@ -1808,16 +1860,16 @@ public class FacultyModuleController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1837,7 +1889,7 @@ public class FacultyModuleController {
 	@RequestMapping(value = "/editContribtn/{conId}", method = RequestMethod.GET)
 	public ModelAndView editContribtn(@PathVariable("conId") int conId, HttpServletRequest request,
 			HttpServletResponse response) {
-		//System.out.println("ID:" + conId);
+		// System.out.println("ID:" + conId);
 		ModelAndView model = null;
 		try {
 			HttpSession session = request.getSession();
@@ -1964,7 +2016,7 @@ public class FacultyModuleController {
 		MultiValueMap<String, Object> map = null;
 		try {
 
-			//System.out.println("Hello");
+			// System.out.println("Hello");
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -2035,7 +2087,7 @@ public class FacultyModuleController {
 				GetFacultyPhdGuide[] phdArr = rest.postForObject(Constants.url + "/getPhdGuideListByFacultyIdAndtype",
 						map, GetFacultyPhdGuide[].class);
 				List<GetFacultyPhdGuide> phdList = new ArrayList<>(Arrays.asList(phdArr));
-				//System.out.println("List:" + phdList);
+				// System.out.println("List:" + phdList);
 				model.addObject("phdList", phdList);
 				model.addObject("title", "Ph.D. Guidance");
 				Info add = AccessControll.checkAccess("showPhdGuideList", "showPhdGuideList", "0", "1", "0", "0",
@@ -2046,16 +2098,16 @@ public class FacultyModuleController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2074,45 +2126,56 @@ public class FacultyModuleController {
 
 	@RequestMapping(value = "/insertPhdGuide", method = RequestMethod.POST)
 	public String insertPhdGuide(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = null;
 		try {
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int yId = (int) session.getAttribute("acYearId");
-			int userId = (int) session.getAttribute("userId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			FacultyPhdGuide phd = new FacultyPhdGuide();
+			if (token.trim().equals(key.trim())) {
 
-			phd.setPhdId(Integer.parseInt(request.getParameter("phdGiudeId")));
-			phd.setCoGuideName(request.getParameter("co_guide_name"));
-			phd.setPhdAwardedYear(Integer.parseInt(request.getParameter("phd_year_awarded")));
-			phd.setFacultyId(userObj.getGetData().getUserDetailId());
-			phd.setYearId(yId);
-			phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
-			phd.setIsCoGuide(Integer.parseInt(request.getParameter("coGuide")));
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			phd.setPhdScholarName(XssEscapeUtils.jsoupParse(request.getParameter("phd_scholar")));
-			phd.setAadhaarNo(XssEscapeUtils.jsoupParse(request.getParameter("aadhar")));
-			phd.setPlaceOfWork(XssEscapeUtils.jsoupParse(request.getParameter("place_work")));
-			phd.setPhdRegYear(request.getParameter("phd_year_reg"));
-			phd.setPhdTopic(XssEscapeUtils.jsoupParse(request.getParameter("phd_topic")));
-			phd.setUniversity(XssEscapeUtils.jsoupParse(request.getParameter("university")));
-			phd.setIsPhdAwarded(Integer.parseInt(request.getParameter("awarded")));
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				int userId = (int) session.getAttribute("userId");
 
-			phd.setDelStatus(1);
-			phd.setIsActive(1);
-			phd.setMakerUserId(userId);
-			phd.setMakerEnterDatetime(curDateTime);
-			phd.setExInt1(0);
-			phd.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("phd_scholar_depart")));
-			//System.out.println(phd.toString());
+				FacultyPhdGuide phd = new FacultyPhdGuide();
 
-			FacultyPhdGuide savePhd = rest.postForObject(Constants.url + "/insertPhdGuide", phd, FacultyPhdGuide.class);
+				phd.setPhdId(Integer.parseInt(request.getParameter("phdGiudeId")));
+				phd.setCoGuideName(request.getParameter("co_guide_name"));
+				phd.setPhdAwardedYear(Integer.parseInt(request.getParameter("phd_year_awarded")));
+				phd.setFacultyId(userObj.getGetData().getUserDetailId());
+				phd.setYearId(yId);
+				phd.setIsPhdGuide(Integer.parseInt(request.getParameter("phdGuide")));
+				phd.setIsCoGuide(Integer.parseInt(request.getParameter("coGuide")));
+
+				phd.setPhdScholarName(XssEscapeUtils.jsoupParse(request.getParameter("phd_scholar")));
+				phd.setAadhaarNo(XssEscapeUtils.jsoupParse(request.getParameter("aadhar")));
+				phd.setPlaceOfWork(XssEscapeUtils.jsoupParse(request.getParameter("place_work")));
+				phd.setPhdRegYear(request.getParameter("phd_year_reg"));
+				phd.setPhdTopic(XssEscapeUtils.jsoupParse(request.getParameter("phd_topic")));
+				phd.setUniversity(XssEscapeUtils.jsoupParse(request.getParameter("university")));
+				phd.setIsPhdAwarded(Integer.parseInt(request.getParameter("awarded")));
+
+				phd.setDelStatus(1);
+				phd.setIsActive(1);
+				phd.setMakerUserId(userId);
+				phd.setMakerEnterDatetime(curDateTime);
+				phd.setExInt1(0);
+				phd.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("phd_scholar_depart")));
+				// System.out.println(phd.toString());
+
+				FacultyPhdGuide savePhd = rest.postForObject(Constants.url + "/insertPhdGuide", phd,
+						FacultyPhdGuide.class);
+				returnString = "redirect:/showPhdGuideList";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 
@@ -2122,14 +2185,14 @@ public class FacultyModuleController {
 
 		}
 
-		return "redirect:/showPhdGuideList";
+		return returnString;
 
 	}
 
 	@RequestMapping(value = "/editPhdGuide/{phdId}", method = RequestMethod.GET)
 	public ModelAndView editPhdGuide(@PathVariable("phdId") int phdId, HttpServletRequest request,
 			HttpServletResponse response) {
-		//System.out.println("ID:" + phdId);
+		// System.out.println("ID:" + phdId);
 		ModelAndView model = null;
 
 		try {
@@ -2257,7 +2320,9 @@ public class FacultyModuleController {
 		return a;
 	}
 
-	/*************************************** Faculty Empowerment************************************/
+	/***************************************
+	 * Faculty Empowerment
+	 ************************************/
 	@RequestMapping(value = "/showFacultyEmpowerment", method = RequestMethod.GET)
 	public ModelAndView showFacultyEmpowerment(HttpServletRequest request, HttpServletResponse response) {
 
@@ -2269,7 +2334,7 @@ public class FacultyModuleController {
 			Info view = AccessControll.checkAccess("showFacultyEmpowerment", "showFacultyEmpowerment", "1", "0", "0",
 					"0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == false) {
@@ -2296,9 +2361,9 @@ public class FacultyModuleController {
 				int acYearId = (Integer) session.getAttribute("acYearId");
 				RestTemplate restTemplate = new RestTemplate();
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				
+
 				int yId = (int) session.getAttribute("acYearId");
-				
+
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("yearId", yId);
 				map.add("isPrincipal", userObj.getStaff().getIsPrincipal());
@@ -2307,14 +2372,17 @@ public class FacultyModuleController {
 				map.add("deptIdList", userObj.getStaff().getDeptId());
 				map.add("instituteId", userObj.getStaff().getInstituteId());
 
-				
-			/*	FacultyEmpowerment[] facEmpowrArr = restTemplate
-						.postForObject(Constants.url + "getFacEmpowerList", map, FacultyEmpowerment[].class);
-				List<FacultyEmpowerment> facEmpowrList = new ArrayList<FacultyEmpowerment>(Arrays.asList(facEmpowrArr));*/
-				GetFacultyEmpwrList[] facEmpowrArr = restTemplate
-						.postForObject(Constants.url + "getFacEmpowerList", map, GetFacultyEmpwrList[].class);
-				List<GetFacultyEmpwrList> facEmpowrList = new ArrayList<GetFacultyEmpwrList>(Arrays.asList(facEmpowrArr));
-				//System.out.println("List="+facEmpowrList);
+				/*
+				 * FacultyEmpowerment[] facEmpowrArr = restTemplate .postForObject(Constants.url
+				 * + "getFacEmpowerList", map, FacultyEmpowerment[].class);
+				 * List<FacultyEmpowerment> facEmpowrList = new
+				 * ArrayList<FacultyEmpowerment>(Arrays.asList(facEmpowrArr));
+				 */
+				GetFacultyEmpwrList[] facEmpowrArr = restTemplate.postForObject(Constants.url + "getFacEmpowerList",
+						map, GetFacultyEmpwrList[].class);
+				List<GetFacultyEmpwrList> facEmpowrList = new ArrayList<GetFacultyEmpwrList>(
+						Arrays.asList(facEmpowrArr));
+				// System.out.println("List="+facEmpowrList);
 				model.addObject("facEmpowrList", facEmpowrList);
 
 			} else {
@@ -2339,7 +2407,7 @@ public class FacultyModuleController {
 		MultiValueMap<String, Object> map = null;
 		try {
 
-			//System.out.println("Hello");
+			// System.out.println("Hello");
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -2368,67 +2436,78 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertFacEmpower", method = RequestMethod.POST)
 	public String insertFacEmpower(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = null;
 		try {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int yId = (int) session.getAttribute("acYearId");
-			int userId = (int) session.getAttribute("userId");
-			
-			FacultyEmpowerment fac = new FacultyEmpowerment();
-			
-			int fs = Integer.parseInt(request.getParameter("financial_suprt"));
-			
-			fac.setFacultyEmpwrmntId(Integer.parseInt(request.getParameter("fac_empwr_id")));
-			fac.setNameOfAcitvity(request.getParameter("actvity_name"));
-			fac.setTitle(XssEscapeUtils.jsoupParse(request.getParameter("title")));
-			fac.setFinancialSupport(fs);
-			if(fs == 0) {
-			fac.setAmt_recvd_from("NA");
-			fac.setExVar1("0");
-			}else {
-			fac.setAmt_recvd_from(request.getParameter("amt_rcvd_frm"));
-			fac.setExVar1(request.getParameter("amount"));
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int yId = (int) session.getAttribute("acYearId");
+				int userId = (int) session.getAttribute("userId");
+
+				FacultyEmpowerment fac = new FacultyEmpowerment();
+
+				int fs = Integer.parseInt(request.getParameter("financial_suprt"));
+
+				fac.setFacultyEmpwrmntId(Integer.parseInt(request.getParameter("fac_empwr_id")));
+				fac.setNameOfAcitvity(request.getParameter("actvity_name"));
+				fac.setTitle(XssEscapeUtils.jsoupParse(request.getParameter("title")));
+				fac.setFinancialSupport(fs);
+				if (fs == 0) {
+					fac.setAmt_recvd_from("NA");
+					fac.setExVar1("0");
+				} else {
+					fac.setAmt_recvd_from(request.getParameter("amt_rcvd_frm"));
+					fac.setExVar1(request.getParameter("amount"));
+				}
+				fac.setFromDate(request.getParameter("fromDate"));
+				fac.setToDate(request.getParameter("toDate"));
+				fac.setInstId(userObj.getStaff().getInstituteId());
+				fac.setAcYearId(yId);
+				fac.setDelStatus(1);
+				fac.setIsActive(1);
+				fac.setMakerEnterDatetime(curDateTime);
+				fac.setMakerUserId(userId);
+				fac.setExInt1(userObj.getGetData().getUserDetailId());
+				fac.setExInt2(0);
+
+				fac.setExVar2("NA");
+
+				FacultyEmpowerment saveFacEmpwr = rest.postForObject(Constants.url + "/saveFacultyEmpowerment", fac,
+						FacultyEmpowerment.class);
+				returnString = "redirect:/showFacultyEmpowerment";
+			} else {
+
+				returnString = "redirect:/accessDenied";
 			}
-			fac.setFromDate(request.getParameter("fromDate"));
-			fac.setToDate(request.getParameter("toDate"));
-			fac.setInstId(userObj.getStaff().getInstituteId());
-			fac.setAcYearId(yId);
-			fac.setDelStatus(1);
-			fac.setIsActive(1);
-			fac.setMakerEnterDatetime(curDateTime);
-			fac.setMakerUserId(userId);
-			fac.setExInt1(userObj.getGetData().getUserDetailId());
-			fac.setExInt2(0);
-			
-			fac.setExVar2("NA");
-			
-			FacultyEmpowerment saveFacEmpwr = rest.postForObject(Constants.url+"/saveFacultyEmpowerment", fac, FacultyEmpowerment.class);
-		}catch(Exception e) {
-			//System.out.println(e.getMessage());
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:/showFacultyEmpowerment";
+		return returnString;
 	}
 
 	@RequestMapping(value = "/editFacultyEmpower/{facEmpwrId}", method = RequestMethod.GET)
 	public ModelAndView editFacultyEmpower(@PathVariable("facEmpwrId") int facEmpwrId, HttpServletRequest request,
 			HttpServletResponse response) {
-		
+
 		ModelAndView model = null;
 
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("editFacultyEmpower/{facEmpwrId}", "showFacultyEmpowerment", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editFacultyEmpower/{facEmpwrId}", "showFacultyEmpowerment", "0",
+					"0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2438,7 +2517,7 @@ public class FacultyModuleController {
 				model = new ModelAndView("FacultyDetails/addFacultyEmpowrment");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				
+
 				map.add("facEmpwrId", facEmpwrId);
 				FacultyEmpowerment facultyEmpowr = rest.postForObject(Constants.url + "/getFacultyEmpowerById", map,
 						FacultyEmpowerment.class);
@@ -2451,7 +2530,7 @@ public class FacultyModuleController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteFacultyEmpower/{facEmpwrId}", method = RequestMethod.GET)
 	public String deleteFacultyEmpower(@PathVariable("facEmpwrId") int facEmpwrId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2460,8 +2539,8 @@ public class FacultyModuleController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteFacultyEmpower/{facEmpwrId}", "showFacultyEmpowerment", "0", "0", "0", "1",
-					newModuleList);
+			Info view = AccessControll.checkAccess("deleteFacultyEmpower/{facEmpwrId}", "showFacultyEmpowerment", "0",
+					"0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2481,5 +2560,5 @@ public class FacultyModuleController {
 		return "redirect:/showFacultyEmpowerment";
 
 	}
-	
+
 }

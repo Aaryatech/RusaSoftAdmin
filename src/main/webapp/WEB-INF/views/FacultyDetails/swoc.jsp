@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -88,7 +94,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right"></div>
-					<%-- 		
+							<%-- 		
 						<div class="col-lg-12" id="sucess_msg" style="display: none;">
 								<!-- onclick="location.reload();" -->
 								<div class="alert alert-success alert-dismissible fade in">
@@ -122,6 +128,17 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#strength" data-toggle="tab">
 													<i class="fa fa-home"></i> Strength
@@ -244,7 +261,7 @@
 														</button>
 													</div>
 												</div>
-											<div align="center" id="loader2" style="display: none;">
+												<div align="center" id="loader2" style="display: none;">
 													<img
 														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
 														style="width: 50px; height: 50px;">
@@ -298,7 +315,7 @@
 
 											<div class="tab-pane " id="oppt">
 
-	<div align="center" id="loader3" style="display: none;">
+												<div align="center" id="loader3" style="display: none;">
 													<img
 														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
 														style="width: 50px; height: 50px;">
@@ -395,7 +412,7 @@
 												</div>
 
 
-	<div align="center" id="loader4" style="display: none;">
+												<div align="center" id="loader4" style="display: none;">
 													<img
 														src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
 														style="width: 50px; height: 50px;">
@@ -504,6 +521,7 @@
 		//	var swocType = document.getElementById("swocType").value;
 			//var swocText = document.getElementById("swocText").value;
 			var swocId = document.getElementById("swocId").value;
+			var token = document.getElementById("token").value;
 			
 		 
 			
@@ -524,6 +542,7 @@
 									swocType : swocType,
 									swocText : swocText,
 									swocId : swocId,
+									token:token,
 
 									ajax : 'true'
 

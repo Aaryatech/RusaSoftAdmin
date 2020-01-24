@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -86,20 +93,32 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/addStudMentor"
 										method="post" name="formidhere" id="formidhere">
-									
-									<input type="hidden" id="menId" name="menId" value="${stud.menId}">
+ 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="menId" name="menId" value="${stud.menId}">
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="page_name">No.
 												of Students <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text"  onFocus="clearDefault(this)"
-													class="form-control"  
-													id="stud_no" name="stud_no" placeholder="No." maxlength="5"
-													value="${stud.menStuCount}">
-											<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter No. of student and value must be greater than 0.</span>
-											
+												<input type="text" onFocus="clearDefault(this)"
+													class="form-control" id="stud_no" name="stud_no"
+													placeholder="No." maxlength="5" value="${stud.menStuCount}">
+												<span class="error_form text-danger" id="error_formfield1"
+													style="display: none;">Please enter No. of student
+													and value must be greater than 0.</span>
+
 											</div>
 										</div>
 
@@ -107,12 +126,15 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub_button" class="btn btn-primary" 
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-											
-											<a href="${pageContext.request.contextPath}/showStudMentor"><button
-													id="sub2" type="button" class="btn btn-primary">
-													<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/showStudMentor"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
 											</div>
 										</div>
 										<div class="clearfix"></div>
@@ -137,16 +159,19 @@
 
 
 	</div>
-<!-- END CONTAINER -->
-<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+	<!-- END CONTAINER -->
+	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	
-<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script type="text/javascript">
-$('#stud_no').on('input', function() {
-	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-	});
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+	<script type="text/javascript">
+		$('#stud_no').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
 
 		function getData() {
 			//alert("hii");
@@ -164,27 +189,26 @@ $('#stud_no').on('input', function() {
 		}
 	</script>
 	<script type="text/javascript">
-	function clearDefault(a){
-	if(a.defaultValue==0)
-	{
-		a.value=""
-	}
-	};
-
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
 			}
-		</script>
-	
+		};
+
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
+
 	<script type="text/javascript">
 		var wasSubmitted = false;
 		function checkBeforeSubmit() {
@@ -221,51 +245,59 @@ $('#stud_no').on('input', function() {
 			else
 				return false;
 		}
-	
+
 		function onlyno(e) {
-			 alert(e)
+			alert(e)
 			var numbers = /^[1-9]+$/;
-		      if(e.test($.trim(numbers)) == false)
-		      {
-		      
-		      return false;
-		      } 
-			
-				return true;
+			if (e.test($.trim(numbers)) == false) {
+
+				return false;
+			}
+
+			return true;
 		}
-	
-		$(document).ready(function($){
-        	
-    		$("#formidhere").submit(function(e) {
-    			 var isError=false;
-    			 var errMsg="";
-    				
-    				if($("#stud_no").val()<=0 || !$("#stud_no").val()){
-    					 
-    					isError=true;
-    					 
-    					errMsg += '<li>Please enter value greater than 0  and less than 99999</li>';
-    				$("#stud_no").addClass("has-error")
-    				$("#error_formfield1").show()
-    					//return false;
-    				} else {
-    					$("#error_formfield1").hide()
-    				}
-    				
-    	
-    				 if (!isError) {
-	            		 
-							var x = confirm("Do you really want to submit the form?");
-							if (x == true) {
-								
-								document.getElementById("sub_button").disabled = true;
-								document.getElementById("sub2").disabled = true;
-								return  true;
-							}
-						}
-    					   return false;
-    				} );
-    	});
+
+		$(document)
+				.ready(
+						function($) {
+
+							$("#formidhere")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
+
+												if ($("#stud_no").val() <= 0
+														|| !$("#stud_no").val()) {
+
+													isError = true;
+
+													errMsg += '<li>Please enter value greater than 0  and less than 99999</li>';
+													$("#stud_no").addClass(
+															"has-error")
+													$("#error_formfield1")
+															.show()
+													//return false;
+												} else {
+													$("#error_formfield1")
+															.hide()
+												}
+
+												if (!isError) {
+
+													var x = confirm("Do you really want to submit the form?");
+													if (x == true) {
+
+														document
+																.getElementById("sub_button").disabled = true;
+														document
+																.getElementById("sub2").disabled = true;
+														return true;
+													}
+												}
+												return false;
+											});
+						});
 	</script>
 	<script type="text/javascript">
 		function submit_f(view) {

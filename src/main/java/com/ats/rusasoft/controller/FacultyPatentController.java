@@ -96,7 +96,7 @@ public class FacultyPatentController {
 				 * }
 				 */
 
-				//System.out.println("faculty Patent List :" + facultyPatentList);
+				// System.out.println("faculty Patent List :" + facultyPatentList);
 
 				model.addObject("title", "Faculty's Patent Work Details");
 
@@ -109,16 +109,16 @@ public class FacultyPatentController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -171,95 +171,103 @@ public class FacultyPatentController {
 		String returnString = new String();
 		try {
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "1", "0", "0",
-					newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				int userId = (int) session.getAttribute("userId");
-				int acYearId = (int) session.getAttribute("acYearId");
-				int patentId = 0;
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showPatentDetails", "showPatentDetailsList", "0", "1", "0", "0",
+						newModuleList);
 
-				try {
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					int userId = (int) session.getAttribute("userId");
+					int acYearId = (int) session.getAttribute("acYearId");
+					int patentId = 0;
 
-					patentId = Integer.parseInt(request.getParameter("patentId"));
+					try {
 
-				} catch (Exception e) {
-					patentId = 0;
-					System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
-					e.printStackTrace();
+						patentId = Integer.parseInt(request.getParameter("patentId"));
 
-				}
+					} catch (Exception e) {
+						patentId = 0;
+						System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+						e.printStackTrace();
 
-				//System.out.println("patentId:" + patentId);
-				String patentNo = request.getParameter("patentNo");
-				//System.out.println("patentNo:" + patentNo);
-				String parentTitle = request.getParameter("parentTitle");
-				String fillingDate=null;
-				 
-					  fillingDate = request.getParameter("fillingDate");
-			  
-				
-				String guideName = request.getParameter("guideName");
-				String pubDate = request.getParameter("pubDate");
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
+					}
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
+					// System.out.println("patentId:" + patentId);
+					String patentNo = request.getParameter("patentNo");
+					// System.out.println("patentNo:" + patentNo);
+					String parentTitle = request.getParameter("parentTitle");
+					String fillingDate = null;
 
-				String curDateTime = dateFormat.format(cal.getTime());
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+					fillingDate = request.getParameter("fillingDate");
 
-				String curDate = dateFormatStr.format(new Date());
+					String guideName = request.getParameter("guideName");
+					String pubDate = request.getParameter("pubDate");
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				FacultyPatent faculty = new FacultyPatent();
-				/* if (patentId == 0) { */
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
 
-				faculty.setPatentId(patentId);
-				faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-				faculty.setPatentTitle(XssEscapeUtils.jsoupParse(parentTitle));
-				faculty.setDelStatus(1);
-				faculty.setIsActive(1);
-				faculty.setYearId(acYearId);
-				faculty.setPatentFileNo(XssEscapeUtils.jsoupParse(patentNo));
-				faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
- 				faculty.setPatentGuideName(XssEscapeUtils.jsoupParse(guideName));
-				faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
-				faculty.setMakerUserId(userId);
-				faculty.setMakerEnterDatetime(curDateTime);
+					String curDateTime = dateFormat.format(cal.getTime());
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
-				FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty,
-						FacultyPatent.class);
+					String curDate = dateFormatStr.format(new Date());
 
-				/*
-				 * } else { //faculty.setPatentId(patentId);
-				 * faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-				 * faculty.setPatentTitle(parentTitle); faculty.setDelStatus(1);
-				 * faculty.setIsActive(1); faculty.setYearId(acYearId);
-				 * faculty.setPatentFileNo(patentNo);
-				 * faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
-				 * faculty.setPatentGuideName(guideName);
-				 * faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
-				 * faculty.setMakerUserId(userId); faculty.setMakerEnterDatetime(curDateTime);
-				 * 
-				 * FacultyPatent patent = rest.postForObject(Constants.url +
-				 * "/saveFacultyPatent", faculty, FacultyPatent.class);
-				 * 
-				 * }
-				 */
+					FacultyPatent faculty = new FacultyPatent();
+					/* if (patentId == 0) { */
 
-				if (is_view == 1) {
-					returnString = "redirect:/showPatentDetailsList";
+					faculty.setPatentId(patentId);
+					faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+					faculty.setPatentTitle(XssEscapeUtils.jsoupParse(parentTitle));
+					faculty.setDelStatus(1);
+					faculty.setIsActive(1);
+					faculty.setYearId(acYearId);
+					faculty.setPatentFileNo(XssEscapeUtils.jsoupParse(patentNo));
+					faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
+					faculty.setPatentGuideName(XssEscapeUtils.jsoupParse(guideName));
+					faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
+					faculty.setMakerUserId(userId);
+					faculty.setMakerEnterDatetime(curDateTime);
+
+					FacultyPatent patent = rest.postForObject(Constants.url + "/saveFacultyPatent", faculty,
+							FacultyPatent.class);
+
+					/*
+					 * } else { //faculty.setPatentId(patentId);
+					 * faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+					 * faculty.setPatentTitle(parentTitle); faculty.setDelStatus(1);
+					 * faculty.setIsActive(1); faculty.setYearId(acYearId);
+					 * faculty.setPatentFileNo(patentNo);
+					 * faculty.setPatentFilingDate(DateConvertor.convertToYMD(fillingDate));
+					 * faculty.setPatentGuideName(guideName);
+					 * faculty.setPatentPubDate(DateConvertor.convertToYMD(pubDate));
+					 * faculty.setMakerUserId(userId); faculty.setMakerEnterDatetime(curDateTime);
+					 * 
+					 * FacultyPatent patent = rest.postForObject(Constants.url +
+					 * "/saveFacultyPatent", faculty, FacultyPatent.class);
+					 * 
+					 * }
+					 */
+
+					if (is_view == 1) {
+						returnString = "redirect:/showPatentDetailsList";
+					} else {
+						returnString = "redirect:/showPatentDetails";
+					}
 				} else {
-					returnString = "redirect:/showPatentDetails";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
+
 		} catch (Exception e) {
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
@@ -271,7 +279,7 @@ public class FacultyPatentController {
 	@RequestMapping(value = "/editPatent/{patentId}", method = RequestMethod.GET)
 	public ModelAndView editPatent(@PathVariable("patentId") int patentId, HttpServletRequest request) {
 
-		//System.out.println("Id:" + patentId);
+		// System.out.println("Id:" + patentId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -320,7 +328,7 @@ public class FacultyPatentController {
 			a = "redirect:/accessDenied";
 		} else {
 			Info inf = new Info();
-			//System.out.println("patentId:" + patentId);
+			// System.out.println("patentId:" + patentId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("patentId", patentId);
@@ -400,7 +408,7 @@ public class FacultyPatentController {
 				 * facultyAwardList.get(i).setAwardValidityTo(facultyAwardList.get(i).
 				 * getAwardValidityTo()); }
 				 */
-				//System.out.println("faculty Patent List :" + facultyAwardList);
+				// System.out.println("faculty Patent List :" + facultyAwardList);
 
 				model.addObject("title", "Faculty Received Award - Recognition Details");
 
@@ -414,16 +422,16 @@ public class FacultyPatentController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -446,114 +454,122 @@ public class FacultyPatentController {
 		String returnString = new String();
 		try {
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("insertAwardDetail", "showAwardDetailsList", "0",
-					"1", "0", "0", newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				int userId = (int) session.getAttribute("userId");
-				int acYearId = (int) session.getAttribute("acYearId");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("insertAwardDetail", "showAwardDetailsList", "0", "1", "0", "0",
+						newModuleList);
 
-				int awardId = 0;
-				try {
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					int userId = (int) session.getAttribute("userId");
+					int acYearId = (int) session.getAttribute("acYearId");
 
-					awardId = Integer.parseInt(request.getParameter("awardId"));
+					int awardId = 0;
+					try {
 
-				} catch (Exception e) {
-					awardId = 0;
-					System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
-					e.printStackTrace();
+						awardId = Integer.parseInt(request.getParameter("awardId"));
 
-				}
+					} catch (Exception e) {
+						awardId = 0;
+						System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
+						e.printStackTrace();
 
-				//System.out.println("awardId:" + awardId);
-
-				String name = request.getParameter("name");
-				String agency = request.getParameter("agency");
-				String nature = request.getParameter("nature");
-				String date = request.getParameter("date");
-				int validity = Integer.parseInt(request.getParameter("validity"));
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int awrdRecog = Integer.parseInt(request.getParameter("award_recog"));
-
-				String fromDate = request.getParameter("fromDate");
-
-				String fromTo = request.getParameter("toDate");
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				String curDate = dateFormatStr.format(new Date());
-
-				FacultyAward faculty = new FacultyAward();
-				if (awardId == 0) {
-
-					faculty.setAwardId(awardId);
-					faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-					faculty.setAwardName(XssEscapeUtils.jsoupParse(name));
-					faculty.setDelStatus(1);
-					faculty.setIsActive(1);
-					faculty.setYearId(acYearId);
-					faculty.setAwardAuthority(XssEscapeUtils.jsoupParse(agency));
-					faculty.setExInt1(awrdRecog);
-					if (awrdRecog == 1) {
-						faculty.setExVar1(request.getParameter("incentive"));
-					}
-					faculty.setAwardDate(DateConvertor.convertToYMD(date));
-					faculty.setAwardNature(XssEscapeUtils.jsoupParse(nature));
-					faculty.setAwardValidity(validity);
-					if (validity == 0) {
-						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
-						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
 					}
 
-					faculty.setMakerUserId(userId);
-					faculty.setMakerEnterDatetime(curDateTime);
+					// System.out.println("awardId:" + awardId);
 
-					FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty,
-							FacultyAward.class);
+					String name = request.getParameter("name");
+					String agency = request.getParameter("agency");
+					String nature = request.getParameter("nature");
+					String date = request.getParameter("date");
+					int validity = Integer.parseInt(request.getParameter("validity"));
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int awrdRecog = Integer.parseInt(request.getParameter("award_recog"));
 
+					String fromDate = request.getParameter("fromDate");
+
+					String fromTo = request.getParameter("toDate");
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					FacultyAward faculty = new FacultyAward();
+					if (awardId == 0) {
+
+						faculty.setAwardId(awardId);
+						faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+						faculty.setAwardName(XssEscapeUtils.jsoupParse(name));
+						faculty.setDelStatus(1);
+						faculty.setIsActive(1);
+						faculty.setYearId(acYearId);
+						faculty.setAwardAuthority(XssEscapeUtils.jsoupParse(agency));
+						faculty.setExInt1(awrdRecog);
+						if (awrdRecog == 1) {
+							faculty.setExVar1(request.getParameter("incentive"));
+						}
+						faculty.setAwardDate(DateConvertor.convertToYMD(date));
+						faculty.setAwardNature(XssEscapeUtils.jsoupParse(nature));
+						faculty.setAwardValidity(validity);
+						if (validity == 0) {
+							faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
+							faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
+						}
+
+						faculty.setMakerUserId(userId);
+						faculty.setMakerEnterDatetime(curDateTime);
+
+						FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty,
+								FacultyAward.class);
+
+					} else {
+						faculty.setAwardId(awardId);
+						faculty.setFacultyId(userObj.getGetData().getUserDetailId());
+						faculty.setAwardName(name);
+						faculty.setDelStatus(1);
+						faculty.setIsActive(1);
+						faculty.setYearId(acYearId);
+						faculty.setAwardAuthority(agency);
+						faculty.setExInt1(awrdRecog);
+						if (awrdRecog == 1) {
+							faculty.setExVar1(request.getParameter("incentive"));
+						}
+						faculty.setAwardDate(DateConvertor.convertToYMD(date));
+						faculty.setAwardNature(nature);
+						faculty.setAwardValidity(validity);
+						if (validity == 0) {
+							faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
+							faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
+						}
+						faculty.setMakerUserId(userId);
+						faculty.setMakerEnterDatetime(curDateTime);
+
+						FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty,
+								FacultyAward.class);
+
+					}
+
+					if (is_view == 1) {
+						returnString = "redirect:/showAwardDetailsList";
+					} else {
+						returnString = "redirect:/showAwardDetails";
+					}
 				} else {
-					faculty.setAwardId(awardId);
-					faculty.setFacultyId(userObj.getGetData().getUserDetailId());
-					faculty.setAwardName(name);
-					faculty.setDelStatus(1);
-					faculty.setIsActive(1);
-					faculty.setYearId(acYearId);
-					faculty.setAwardAuthority(agency);
-					faculty.setExInt1(awrdRecog);
-					if (awrdRecog == 1) {
-						faculty.setExVar1(request.getParameter("incentive"));
-					}
-					faculty.setAwardDate(DateConvertor.convertToYMD(date));
-					faculty.setAwardNature(nature);
-					faculty.setAwardValidity(validity);
-					if (validity == 0) {
-						faculty.setAwardValidityFrom(DateConvertor.convertToYMD(fromDate));
-						faculty.setAwardValidityTo(DateConvertor.convertToYMD(fromTo));
-					}
-					faculty.setMakerUserId(userId);
-					faculty.setMakerEnterDatetime(curDateTime);
 
-					FacultyAward patent = rest.postForObject(Constants.url + "/saveFacultyAward", faculty,
-							FacultyAward.class);
+					returnString = "redirect:/accessDenied";
 
-				}
-
-				if (is_view == 1) {
-					returnString = "redirect:/showAwardDetailsList";
-				} else {
-					returnString = "redirect:/showAwardDetails";
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 
 		}
@@ -570,7 +586,7 @@ public class FacultyPatentController {
 	@RequestMapping(value = "/editAward/{awardId}", method = RequestMethod.GET)
 	public ModelAndView editAward(@PathVariable("awardId") int awardId, HttpServletRequest request) {
 
-		//System.out.println("Id:" + awardId);
+		// System.out.println("Id:" + awardId);
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -626,7 +642,7 @@ public class FacultyPatentController {
 			a = "redirect:/accessDenied";
 		} else {
 			Info inf = new Info();
-			//System.out.println("awardId:" + awardId);
+			// System.out.println("awardId:" + awardId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("awardId", awardId);
@@ -676,7 +692,8 @@ public class FacultyPatentController {
 
 				List<GetFacultyOutrea> facultyOutreachList = new ArrayList<>(Arrays.asList(facultyOutreachListArray));
 
-				//System.out.println("faculty outreach  List :" + facultyOutreachList.toString());
+				// System.out.println("faculty outreach List :" +
+				// facultyOutreachList.toString());
 
 				for (int i = 0; i < facultyOutreachList.size(); i++) {
 					facultyOutreachList.get(i)
@@ -694,16 +711,16 @@ public class FacultyPatentController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -740,7 +757,8 @@ public class FacultyPatentController {
 			map.add("instituteId", inst_id);
 			List<OutreachType> facultyOutreachTypeList = rest.postForObject(Constants.url + "/getOutReachTypeList", map,
 					List.class);
-			//System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
+			// System.out.println("facultyOutreachTypeListList :" +
+			// facultyOutreachTypeList.toString());
 
 			model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 			model.addObject("editInst", editInst);
@@ -763,120 +781,130 @@ public class FacultyPatentController {
 		HttpSession session = request.getSession();
 		String a = null;
 		try {
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			Info view = AccessControll.checkAccess("insertOutReachActivity", "showOutReachDetailsList", "0", "1", "0",
-					"0", newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true)
+			if (token.trim().equals(key.trim())) {
 
-			{
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				a = "redirect:/accessDenied";
+				Info view = AccessControll.checkAccess("insertOutReachActivity", "showOutReachDetailsList", "0", "1",
+						"0", "0", newModuleList);
 
-			}
+				if (view.isError() == true)
 
-			else {
-				System.err.println("in insert insertLibrarian");
-				ModelAndView model = null;
+				{
 
-				int inst_id = (int) session.getAttribute("instituteId");
-				int maker_id = (int) session.getAttribute("userId");
-				int year_id = (int) session.getAttribute("acYearId");
+					a = "redirect:/accessDenied";
 
-				FacultyOutreach lib = new FacultyOutreach();
-				RestTemplate restTemplate = new RestTemplate();
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-				int outreach_id = Integer.parseInt(request.getParameter("outreach_id"));
-				//System.out.println("librarian_id" + "librarian_id");
-
-				String act_name = request.getParameter("act_name");
-
-				String activity_type = request.getParameter("activity_type");
-
-				int faculty_id = userObj.getGetData().getUserDetailId();
-				String act_level = request.getParameter("act_level");
-				String act_date = request.getParameter("act_date");
-
-				System.err.println("outreach_id id  " + outreach_id);
-				if (outreach_id == 0) {
-
-					//System.out.println("inst id is" + inst_id);
-
-					lib.setFacultyId(faculty_id);
-					lib.setIsActive(1);
-					lib.setOutreachDate(DateConvertor.convertToYMD(act_date));
-					lib.setOutreachName(XssEscapeUtils.jsoupParse(act_name));
-					lib.setOutreachType(activity_type);
-					lib.setOutreachLevel(act_level);
-					lib.setYearId(year_id);
-
-					lib.setMakerUserId(maker_id);
-
-					lib.setInstituteId(inst_id);
-					lib.setDelStatus(1);
-					lib.setExInt1(1);
-					lib.setExInt2(1);
-					lib.setExVar1("NA");
-					lib.setExVar2("NA");
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					lib.setMakerEnterDatetime(curDateTime);
-
-					FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib,
-							FacultyOutreach.class);
-
-				} else {
-					//System.out.println("in edit");
-
-					map.add("outreachId", outreach_id); // getInstitute Hod hod =
-					FacultyOutreach lib1 = rest.postForObject(Constants.url + "getFacultyOutReach", map,
-							FacultyOutreach.class);
-					lib1.setFacultyId(faculty_id);
-					lib1.setIsActive(1);
-
-					lib1.setOutreachDate(DateConvertor.convertToYMD(act_date));
-					lib1.setOutreachName(XssEscapeUtils.jsoupParse(act_name));
-					lib1.setOutreachType(activity_type);
-					lib1.setOutreachLevel(act_level);
-					lib1.setYearId(year_id);
-
-					lib1.setMakerUserId(maker_id);
-
-					lib1.setInstituteId(inst_id);
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					lib1.setMakerEnterDatetime(curDateTime);
-					FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib1,
-							FacultyOutreach.class);
 				}
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					a = "redirect:/showOutReachDetailsList";
+				else {
+					System.err.println("in insert insertLibrarian");
+					ModelAndView model = null;
 
-				else
-					a = "redirect:/showOutReachDetails";
+					int inst_id = (int) session.getAttribute("instituteId");
+					int maker_id = (int) session.getAttribute("userId");
+					int year_id = (int) session.getAttribute("acYearId");
 
+					FacultyOutreach lib = new FacultyOutreach();
+					RestTemplate restTemplate = new RestTemplate();
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+					int outreach_id = Integer.parseInt(request.getParameter("outreach_id"));
+					// System.out.println("librarian_id" + "librarian_id");
+
+					String act_name = request.getParameter("act_name");
+
+					String activity_type = request.getParameter("activity_type");
+
+					int faculty_id = userObj.getGetData().getUserDetailId();
+					String act_level = request.getParameter("act_level");
+					String act_date = request.getParameter("act_date");
+
+					System.err.println("outreach_id id  " + outreach_id);
+					if (outreach_id == 0) {
+
+						// System.out.println("inst id is" + inst_id);
+
+						lib.setFacultyId(faculty_id);
+						lib.setIsActive(1);
+						lib.setOutreachDate(DateConvertor.convertToYMD(act_date));
+						lib.setOutreachName(XssEscapeUtils.jsoupParse(act_name));
+						lib.setOutreachType(activity_type);
+						lib.setOutreachLevel(act_level);
+						lib.setYearId(year_id);
+
+						lib.setMakerUserId(maker_id);
+
+						lib.setInstituteId(inst_id);
+						lib.setDelStatus(1);
+						lib.setExInt1(1);
+						lib.setExInt2(1);
+						lib.setExVar1("NA");
+						lib.setExVar2("NA");
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						lib.setMakerEnterDatetime(curDateTime);
+
+						FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib,
+								FacultyOutreach.class);
+
+					} else {
+						// System.out.println("in edit");
+
+						map.add("outreachId", outreach_id); // getInstitute Hod hod =
+						FacultyOutreach lib1 = rest.postForObject(Constants.url + "getFacultyOutReach", map,
+								FacultyOutreach.class);
+						lib1.setFacultyId(faculty_id);
+						lib1.setIsActive(1);
+
+						lib1.setOutreachDate(DateConvertor.convertToYMD(act_date));
+						lib1.setOutreachName(XssEscapeUtils.jsoupParse(act_name));
+						lib1.setOutreachType(activity_type);
+						lib1.setOutreachLevel(act_level);
+						lib1.setYearId(year_id);
+
+						lib1.setMakerUserId(maker_id);
+
+						lib1.setInstituteId(inst_id);
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						lib1.setMakerEnterDatetime(curDateTime);
+						FacultyOutreach editInst = rest.postForObject(Constants.url + "saveFacultyOutReach", lib1,
+								FacultyOutreach.class);
+					}
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						a = "redirect:/showOutReachDetailsList";
+
+					else
+						a = "redirect:/showOutReachDetails";
+
+				}
+			} else {
+
+				a = "redirect:/accessDenied";
 			}
 
 		}
@@ -972,7 +1000,8 @@ public class FacultyPatentController {
 						map, List.class);
 
 				model.addObject("date", DateConvertor.convertToDMY(editInst.getOutreachDate()));
-				//System.out.println("facultyOutreachTypeListList :" + facultyOutreachTypeList.toString());
+				// System.out.println("facultyOutreachTypeListList :" +
+				// facultyOutreachTypeList.toString());
 
 				model.addObject("facultyOutreachTypeList", facultyOutreachTypeList);
 			}

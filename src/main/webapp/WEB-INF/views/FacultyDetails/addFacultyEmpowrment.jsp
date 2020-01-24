@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -42,8 +44,10 @@
 </style>
 
 
-<!-- BEGIN BODY --><!-- onload="showIsReg(${alumni.exInt1})" -->
-<body class=" " onload="checkPhdGuide(${facultyEmpowr.financialSupport})">
+<!-- BEGIN BODY -->
+<!-- onload="showIsReg(${alumni.exInt1})" -->
+<body class=" "
+	onload="checkPhdGuide(${facultyEmpowr.financialSupport})">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -85,7 +89,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/showAlumini"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showAlumini"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
@@ -96,109 +100,145 @@
 							<div class="row">
 								<div class="col-md-12">
 
-
-
-
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertFacEmpower"
 										method="post" name="form_sample_2" id="form_sample_2">
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 										<div class="row">
 											<div class="col-md-12">
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="status">Name of
-														 Activity <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="status">Name
+														of Activity <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<select id="actvity_name" name="actvity_name" class="form-control">
-															
-																	<option value="Conference" ${facultyEmpowr.nameOfAcitvity eq 'Conference' ? 'Selected' : ''}>Conference</option>
-																	<option value="Workshop" ${facultyEmpowr.nameOfAcitvity eq 'Workshop' ? 'Selected' : ''}>Workshop</option>
-																	<option value="Professional Membership" ${facultyEmpowr.nameOfAcitvity eq 'Professional Membership' ? 'Selected' : ''}>Professional Membership</option>
-																	<option value="FDP" ${facultyEmpowr.nameOfAcitvity eq 'FDP' ? 'Selected' : ''}>FDP</option>
-																	<option value="STTP" ${facultyEmpowr.nameOfAcitvity eq 'STTP' ? 'Selected' : ''}>STTP</option>
-																	<option value="Seminar" ${facultyEmpowr.nameOfAcitvity eq 'Seminar' ? 'Selected' : ''}>Seminar</option>
-																	<option value="Refresher Course" ${facultyEmpowr.nameOfAcitvity eq 'Refresher Course' ? 'Selected' : ''}>Refresher Course</option>
+														<select id="actvity_name" name="actvity_name"
+															class="form-control">
+
+															<option value="Conference"
+																${facultyEmpowr.nameOfAcitvity eq 'Conference' ? 'Selected' : ''}>Conference</option>
+															<option value="Workshop"
+																${facultyEmpowr.nameOfAcitvity eq 'Workshop' ? 'Selected' : ''}>Workshop</option>
+															<option value="Professional Membership"
+																${facultyEmpowr.nameOfAcitvity eq 'Professional Membership' ? 'Selected' : ''}>Professional
+																Membership</option>
+															<option value="FDP"
+																${facultyEmpowr.nameOfAcitvity eq 'FDP' ? 'Selected' : ''}>FDP</option>
+															<option value="STTP"
+																${facultyEmpowr.nameOfAcitvity eq 'STTP' ? 'Selected' : ''}>STTP</option>
+															<option value="Seminar"
+																${facultyEmpowr.nameOfAcitvity eq 'Seminar' ? 'Selected' : ''}>Seminar</option>
+															<option value="Refresher Course"
+																${facultyEmpowr.nameOfAcitvity eq 'Refresher Course' ? 'Selected' : ''}>Refresher
+																Course</option>
 														</select>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_name">Title
-														 <span class="text-danger">*</span>
+														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder=" Enter Title" id="title"
-															value="${facultyEmpowr.title}" name="title" autocomplete="off">
-															<span class="error_form text-danger" id="title_errfield"
+														<input type="text" class="form-control"
+															onchange="trim(this)" placeholder=" Enter Title"
+															id="title" value="${facultyEmpowr.title}" name="title"
+															autocomplete="off"> <span
+															class="error_form text-danger" id="title_errfield"
 															style="display: none;">Please enter title.</span>
 													</div>
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="status">Financial 
+													<label class="control-label col-sm-3" for="status">Financial
 														Support <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="radio" ${facultyEmpowr.financialSupport == 1 ? 'checked' : ''} name="financial_suprt" id="financial_suprt"  value="1" onclick="checkPhdGuide(1)">Yes<br>
-														<input type="radio" ${facultyEmpowr.financialSupport == 0 ? 'checked' : ''} name="financial_suprt"  id="financial_suprt" value="0" onclick="checkPhdGuide(0)">No<br>
-														<span class="error_form text-danger" id="financ_errfield"
-															style="display: none;">Please select financial support</span>
+														<input type="radio"
+															${facultyEmpowr.financialSupport == 1 ? 'checked' : ''}
+															name="financial_suprt" id="financial_suprt" value="1"
+															onclick="checkPhdGuide(1)">Yes<br> <input
+															type="radio"
+															${facultyEmpowr.financialSupport == 0 ? 'checked' : ''}
+															name="financial_suprt" id="financial_suprt" value="0"
+															onclick="checkPhdGuide(0)">No<br> <span
+															class="error_form text-danger" id="financ_errfield"
+															style="display: none;">Please select financial
+															support</span>
 
 
 													</div>
 												</div>
-												
+
 												<div class="form-group" id="ihide" style="display: none;">
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="smallheading">Amount 
-																Received From<span class="text-danger">*</span>
-															</label>
-															<div  class="col-sm-9">
-																<select id="amt_rcvd_frm" name="amt_rcvd_frm" class="form-control">
-																	<!-- <option > Financial Support </option> -->
-																	<option value="Institute" ${facultyEmpowr.amt_recvd_from eq 'Institute'? 'Selected' : ''}>Institute</option>
-																	<option value="Individual" ${facultyEmpowr.amt_recvd_from eq'Individual'? 'Selected' : ''}>Individual</option>
-																	<option value="Government" ${facultyEmpowr.amt_recvd_from eq 'Government'? 'Selected' : ''}>Government</option>
-																	<option value="Non Government" ${facultyEmpowr.amt_recvd_from eq 'Non Government'? 'Selected' : ''}>Non Government</option>
-																	<option value="Philanthropers" ${facultyEmpowr.amt_recvd_from eq 'Philanthropers'? 'Selected' : ''}>Philanthropers</option>
-																	
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="smallheading">Amount
+															Received From<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-9">
+															<select id="amt_rcvd_frm" name="amt_rcvd_frm"
+																class="form-control">
+																<!-- <option > Financial Support </option> -->
+																<option value="Institute"
+																	${facultyEmpowr.amt_recvd_from eq 'Institute'? 'Selected' : ''}>Institute</option>
+																<option value="Individual"
+																	${facultyEmpowr.amt_recvd_from eq'Individual'? 'Selected' : ''}>Individual</option>
+																<option value="Government"
+																	${facultyEmpowr.amt_recvd_from eq 'Government'? 'Selected' : ''}>Government</option>
+																<option value="Non Government"
+																	${facultyEmpowr.amt_recvd_from eq 'Non Government'? 'Selected' : ''}>Non
+																	Government</option>
+																<option value="Philanthropers"
+																	${facultyEmpowr.amt_recvd_from eq 'Philanthropers'? 'Selected' : ''}>Philanthropers</option>
+
 															</select>
-															</div>
 														</div>
-														
-														<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Amount(Rs.)
-														 <span class="text-danger">*</span>
-													</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder=" Amount(Rs.)" id="amount" maxlength="8"
-															value="${facultyEmpowr.exVar1}" name="amount" autocomplete="off">
-															<span class="error_form text-danger" id="amt_errfield"
-															style="display: none;">Please enter Amount(Rs.)</span>
+													</div>
+
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="page_name">Amount(Rs.)
+															<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-9">
+															<input type="text" class="form-control"
+																onchange="trim(this)" placeholder=" Amount(Rs.)"
+																id="amount" maxlength="8"
+																value="${facultyEmpowr.exVar1}" name="amount"
+																autocomplete="off"> <span
+																class="error_form text-danger" id="amt_errfield"
+																style="display: none;">Please enter Amount(Rs.)</span>
+														</div>
 													</div>
 												</div>
-													</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name"> From
-														Date<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">
+														From Date<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepicker"
-													placeholder="dd-mm-yyyy" data-format="dd-mm-yyyy" data-end-date="0d" autocomplete="off" id="fromDate"
-													name="fromDate" value="${facultyEmpowr.fromDate}"> <span
-													class="error_form text-danger" id="error_fdate"
-													style="display: none;">Please enter from date.</span>
-													
-													<span
-													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">from date must be smaller than to date. </span>
+															placeholder="dd-mm-yyyy" data-format="dd-mm-yyyy"
+															data-end-date="0d" autocomplete="off" id="fromDate"
+															name="fromDate" value="${facultyEmpowr.fromDate}">
+														<span class="error_form text-danger" id="error_fdate"
+															style="display: none;">Please enter from date.</span> <span
+															class="error_form text-danger" id="error_fromToDate"
+															style="display: none;">from date must be smaller
+															than to date. </span>
 													</div>
 												</div>
 
@@ -210,14 +250,14 @@
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepicker"
-													autocomplete="off" id="toDate" data-format="dd-mm-yyyy" name="toDate"
-													placeholder="dd-mm-yyyy" value="${facultyEmpowr.toDate}"> <span
-													class="error_form text-danger" id="error_tdate"
-													style="display: none;">Please enter to date.</span>
-													
-													<span
-													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To date must be greater than from date. </span>
+															autocomplete="off" id="toDate" data-format="dd-mm-yyyy"
+															name="toDate" placeholder="dd-mm-yyyy"
+															value="${facultyEmpowr.toDate}"> <span
+															class="error_form text-danger" id="error_tdate"
+															style="display: none;">Please enter to date.</span> <span
+															class="error_form text-danger" id="error_toToDate"
+															style="display: none;">To date must be greater
+															than from date. </span>
 
 													</div>
 												</div>
@@ -226,16 +266,22 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showFacultyEmpowerment"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+														<button type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
+
+														<a
+															href="${pageContext.request.contextPath}/showFacultyEmpowerment"><button
+																id="sub2" type="button" class="btn btn-primary">
+																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+															</button></a>
+													</div>
 												</div>
 
 											</div>
 											<input type="hidden" id="fac_empwr_id" name="fac_empwr_id"
-												value="${facultyEmpowr.facultyEmpwrmntId}"> 
+												value="${facultyEmpowr.facultyEmpwrmntId}">
 
 										</div>
 									</form>
@@ -259,7 +305,7 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		function checkPhdGuide(activity) {
 			
@@ -291,9 +337,9 @@
 			}
 			
 		</script>
-	
-	
-		<script>
+
+
+	<script>
 		$('#amount').on('input', function() {
 			  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 			});
@@ -421,8 +467,8 @@
 											});
 						});
 	</script>
-	
-		
+
+
 
 	<script type="text/javascript">
 		function showExtraField() {
@@ -463,7 +509,7 @@
 
 		}
 	</script>
-	
+
 
 	<script type="text/javascript">
 		var wasSubmitted = false;
@@ -496,9 +542,9 @@
 			});
 		}); */
 	</script>
-	
-	
-	
+
+
+
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 

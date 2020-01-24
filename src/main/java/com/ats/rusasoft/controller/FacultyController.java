@@ -93,81 +93,91 @@ public class FacultyController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "1", "0", "0",
+						newModuleList);
 
-				System.err.println("Inside insertJournal method");
+				// System.out.println(view);
 
-				int journalId = 0;
-				try {
-					journalId = Integer.parseInt(request.getParameter("journalId"));
-				} catch (Exception e) {
-					journalId = 0;
-				}
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date now = new Date();
-				String curDate = dateFormat.format(new Date());
-				String dateTime = dateFormat.format(now);
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				String journalName = request.getParameter("journalName");
-				String issue = request.getParameter("issue");
-				String journalVolume = request.getParameter("volume");
-				String journalPgFrom = request.getParameter("journalPgFrom");
-				String journalPgTo = request.getParameter("journalPgTo");
-				String journalYear = request.getParameter("journalYear");
-				String journalType = request.getParameter("journalType");
+					System.err.println("Inside insertJournal method");
 
-				//System.out.println(journalName);
-				//System.out.println(issue);
-				//System.out.println(journalVolume);
-				//System.out.println(journalPgFrom);
-				//System.out.println(journalPgTo);
-				//System.out.println(journalYear);
-				//System.out.println(journalType);
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int jouStd = Integer.parseInt(request.getParameter("jouStd"));
+					int journalId = 0;
+					try {
+						journalId = Integer.parseInt(request.getParameter("journalId"));
+					} catch (Exception e) {
+						journalId = 0;
+					}
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date now = new Date();
+					String curDate = dateFormat.format(new Date());
+					String dateTime = dateFormat.format(now);
 
-				Journal journal = new Journal();
-				journal.setDelStatus(1);
-				journal.setExInt1(1);
-				journal.setExInt2(1);
-				journal.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("paperTitle")));
-				journal.setExVar2(XssEscapeUtils.jsoupParse(request.getParameter("coAuthor")));
-				journal.setFacultyId(userObj.getGetData().getUserDetailId());
-				int yearId = (int) session.getAttribute("acYearId");
-				journal.setYearId(yearId);
-				journal.setIsActive(1);
-				journal.setJournalId(journalId);
-				journal.setJournalIssue(XssEscapeUtils.jsoupParse(issue));
-				journal.setJournalName(XssEscapeUtils.jsoupParse(journalName));
-				journal.setJournalPgFrom(journalPgFrom);
-				journal.setJournalPgTo(journalPgTo);
-				journal.setJournalVolume(journalVolume);
-				journal.setJournalYear(journalYear);
-				journal.setMakerUserId(userObj.getUserId());
-				journal.setJournalStandard(jouStd);
-				journal.setJournalType(journalType);
-				journal.setMakerEnterDatetime(dateTime);
+					String journalName = request.getParameter("journalName");
+					String issue = request.getParameter("issue");
+					String journalVolume = request.getParameter("volume");
+					String journalPgFrom = request.getParameter("journalPgFrom");
+					String journalPgTo = request.getParameter("journalPgTo");
+					String journalYear = request.getParameter("journalYear");
+					String journalType = request.getParameter("journalType");
 
-				Journal journalInsertRes = rest.postForObject(Constants.url + "saveJournal", journal, Journal.class);
+					// System.out.println(journalName);
+					// System.out.println(issue);
+					// System.out.println(journalVolume);
+					// System.out.println(journalPgFrom);
+					// System.out.println(journalPgTo);
+					// System.out.println(journalYear);
+					// System.out.println(journalType);
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int jouStd = Integer.parseInt(request.getParameter("jouStd"));
 
-				System.err.println("journalInsertRes " + journalInsertRes.toString());
+					Journal journal = new Journal();
+					journal.setDelStatus(1);
+					journal.setExInt1(1);
+					journal.setExInt2(1);
+					journal.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("paperTitle")));
+					journal.setExVar2(XssEscapeUtils.jsoupParse(request.getParameter("coAuthor")));
+					journal.setFacultyId(userObj.getGetData().getUserDetailId());
+					int yearId = (int) session.getAttribute("acYearId");
+					journal.setYearId(yearId);
+					journal.setIsActive(1);
+					journal.setJournalId(journalId);
+					journal.setJournalIssue(XssEscapeUtils.jsoupParse(issue));
+					journal.setJournalName(XssEscapeUtils.jsoupParse(journalName));
+					journal.setJournalPgFrom(journalPgFrom);
+					journal.setJournalPgTo(journalPgTo);
+					journal.setJournalVolume(journalVolume);
+					journal.setJournalYear(journalYear);
+					journal.setMakerUserId(userObj.getUserId());
+					journal.setJournalStandard(jouStd);
+					journal.setJournalType(journalType);
+					journal.setMakerEnterDatetime(dateTime);
 
-				if (is_view == 1) {
-					returnString = "redirect:/showJournalPubList";
+					Journal journalInsertRes = rest.postForObject(Constants.url + "saveJournal", journal,
+							Journal.class);
+
+					System.err.println("journalInsertRes " + journalInsertRes.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showJournalPubList";
+					} else {
+						returnString = "redirect:/showJournalPub";
+					}
 				} else {
-					returnString = "redirect:/showJournalPub";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 		}
 
@@ -213,7 +223,7 @@ public class FacultyController {
 				List<GetJournal> jouList = rest.postForObject(Constants.url + "/getJournalListByFacultyIdAndtype", map,
 						List.class);
 
-				//System.out.println("jouList" + jouList);
+				// System.out.println("jouList" + jouList);
 
 				model.addObject("jouList", jouList);
 
@@ -226,16 +236,16 @@ public class FacultyController {
 				System.err.println("Addd" + add);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -276,7 +286,7 @@ public class FacultyController {
 				map.add("journalId", journalId);
 
 				Journal editJournal = rest.postForObject(Constants.url + "/getJournalByJournalId", map, Journal.class);
-				//System.out.println("journalId:" + journalId);
+				// System.out.println("journalId:" + journalId);
 
 				model.addObject("editJournal", editJournal);
 
@@ -305,7 +315,7 @@ public class FacultyController {
 
 		} else {
 			Info inf = new Info();
-			//System.out.println("Id:" + journalId);
+			// System.out.println("Id:" + journalId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("jouIdList", journalId);
@@ -358,92 +368,102 @@ public class FacultyController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "0", "1", "0",
+						"0", newModuleList);
 
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				// System.out.println(view);
 
-				System.err.println("Inside insertResearchProject method");
+				if (view.isError() == false) {
 
-				int projId = 0;
-				try {
-					projId = Integer.parseInt(request.getParameter("projId"));
-				} catch (Exception e) {
-					projId = 0;
-				}
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date now = new Date();
-				// String curDate = dateFormat.format(new Date());
-				String dateTime = dateFormat.format(now);
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			//	String deptName = request.getParameter("deptName");
-				String PIName = request.getParameter("PIName");
-				String spoAuth = request.getParameter("spoAuth");
-				String yearOfPS = request.getParameter("yearOfPS");
-				String projName = request.getParameter("projName");
-				String coPrincipalName = request.getParameter("coPrincipal");
-				String deptCoName = request.getParameter("deptCoName");
-				String fromDate = request.getParameter("fromDate");
-				String toDate = request.getParameter("toDate");
+					System.err.println("Inside insertResearchProject method");
 
-				String grant = request.getParameter("grant");
+					int projId = 0;
+					try {
+						projId = Integer.parseInt(request.getParameter("projId"));
+					} catch (Exception e) {
+						projId = 0;
+					}
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date now = new Date();
+					// String curDate = dateFormat.format(new Date());
+					String dateTime = dateFormat.format(now);
 
-				// int grant = Integer.parseInt(request.getParameter("grant"));
+					// String deptName = request.getParameter("deptName");
+					String PIName = request.getParameter("PIName");
+					String spoAuth = request.getParameter("spoAuth");
+					String yearOfPS = request.getParameter("yearOfPS");
+					String projName = request.getParameter("projName");
+					String coPrincipalName = request.getParameter("coPrincipal");
+					String deptCoName = request.getParameter("deptCoName");
+					String fromDate = request.getParameter("fromDate");
+					String toDate = request.getParameter("toDate");
 
-				//float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
-				float totalAmt = 00;
-				float amtRec = Float.parseFloat(request.getParameter("amtRec"));
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
+					String grant = request.getParameter("grant");
 
-				//System.out.println("----------" + is_view);
-				ResearchProject project = new ResearchProject();
-				project.setDelStatus(1);
-				project.setExInt1(1);
-				project.setExInt2(1);
-				project.setExVar1("NA");
-				project.setExVar2("NA");
-				project.setFacultyId(userObj.getGetData().getUserDetailId());
-				int yearId = (int) session.getAttribute("acYearId");
-				project.setYearId(yearId);
-				project.setIsActive(1);
-				project.setMakerEnterDatetime(dateTime);
-				project.setMakerUserId(userObj.getUserId());
+					// int grant = Integer.parseInt(request.getParameter("grant"));
 
-				project.setProjFrdt(DateConvertor.convertToYMD(fromDate));
-				project.setProjGrant(grant);
-				project.setProjId(projId);
+					// float totalAmt = Float.parseFloat(request.getParameter("totalAmt"));
+					float totalAmt = 00;
+					float amtRec = Float.parseFloat(request.getParameter("amtRec"));
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				project.setProjInvDept(null);
-				project.setProjInvDept2(XssEscapeUtils.jsoupParse(deptCoName));
-				project.setProjTodt(DateConvertor.convertToYMD(toDate));
-				project.setProjYear(yearOfPS);
-				project.setProjInvName2(XssEscapeUtils.jsoupParse(coPrincipalName));
-				project.setProjSponsor(XssEscapeUtils.jsoupParse(spoAuth));
-				project.setProjTotalAmt(totalAmt);
-				project.setProjAmtRec(amtRec);
-				project.setProjName(XssEscapeUtils.jsoupParse(projName));
-				project.setProjInvName(XssEscapeUtils.jsoupParse(PIName));
+					// System.out.println("----------" + is_view);
+					ResearchProject project = new ResearchProject();
+					project.setDelStatus(1);
+					project.setExInt1(1);
+					project.setExInt2(1);
+					project.setExVar1("NA");
+					project.setExVar2("NA");
+					project.setFacultyId(userObj.getGetData().getUserDetailId());
+					int yearId = (int) session.getAttribute("acYearId");
+					project.setYearId(yearId);
+					project.setIsActive(1);
+					project.setMakerEnterDatetime(dateTime);
+					project.setMakerUserId(userObj.getUserId());
 
-				ResearchProject researchInsertRes = rest.postForObject(Constants.url + "saveReaserchProject", project,
-						ResearchProject.class);
+					project.setProjFrdt(DateConvertor.convertToYMD(fromDate));
+					project.setProjGrant(grant);
+					project.setProjId(projId);
 
-				System.err.println("researchInsertRes " + researchInsertRes.toString());
+					project.setProjInvDept(null);
+					project.setProjInvDept2(XssEscapeUtils.jsoupParse(deptCoName));
+					project.setProjTodt(DateConvertor.convertToYMD(toDate));
+					project.setProjYear(yearOfPS);
+					project.setProjInvName2(XssEscapeUtils.jsoupParse(coPrincipalName));
+					project.setProjSponsor(XssEscapeUtils.jsoupParse(spoAuth));
+					project.setProjTotalAmt(totalAmt);
+					project.setProjAmtRec(amtRec);
+					project.setProjName(XssEscapeUtils.jsoupParse(projName));
+					project.setProjInvName(XssEscapeUtils.jsoupParse(PIName));
 
-				if (is_view == 1) {
-					returnString = "redirect:/showResearchDetailsList";
+					ResearchProject researchInsertRes = rest.postForObject(Constants.url + "saveReaserchProject",
+							project, ResearchProject.class);
+
+					System.err.println("researchInsertRes " + researchInsertRes.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showResearchDetailsList";
+					} else {
+						returnString = "redirect:/showResearchDetails";
+					}
 				} else {
-					returnString = "redirect:/showResearchDetails";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
+
 		}
 
 		catch (
@@ -490,7 +510,7 @@ public class FacultyController {
 				List<GetResearchProject> jouList = rest
 						.postForObject(Constants.url + "/getProjectListByFacultyIdAndtype", map, List.class);
 
-				//System.out.println("jouList" + jouList);
+				// System.out.println("jouList" + jouList);
 
 				model.addObject("jouList", jouList);
 
@@ -502,16 +522,16 @@ public class FacultyController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 1);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 1);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 1);
 
 				}
@@ -553,7 +573,7 @@ public class FacultyController {
 
 				ResearchProject editProject = rest.postForObject(Constants.url + "/getProjectByProjId", map,
 						ResearchProject.class);
-				//System.out.println("projId:" + projId);
+				// System.out.println("projId:" + projId);
 
 				model.addObject("editProject", editProject);
 
@@ -581,7 +601,7 @@ public class FacultyController {
 
 		} else {
 			Info inf = new Info();
-			//System.out.println("Id:" + projectId);
+			// System.out.println("Id:" + projectId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("projIdList", projectId);
@@ -624,7 +644,7 @@ public class FacultyController {
 				List<GetSubject> subList = rest.postForObject(Constants.url + "/getSubjectListByFacultyIdAndtype", map,
 						List.class);
 
-				//System.out.println("subList" + subList);
+				// System.out.println("subList" + subList);
 
 				model.addObject("subList", subList);
 
@@ -636,16 +656,16 @@ public class FacultyController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -712,78 +732,87 @@ public class FacultyController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "1", "0", "0",
+						newModuleList);
 
-				System.err.println("Inside insertSubject method");
+				// System.out.println(view);
 
-				int subId = 0;
-				try {
-					subId = Integer.parseInt(request.getParameter("subId"));
-				} catch (Exception e) {
-					subId = 0;
-				}
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date now = new Date();
-				String curDate = dateFormat.format(new Date());
-				String dateTime = dateFormat.format(now);
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				String subCode = request.getParameter("subCode");
-				String sem = request.getParameter("sem");
-				String subName = request.getParameter("subName");
-				String subType = request.getParameter("subType");
+					System.err.println("Inside insertSubject method");
 
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int programId = Integer.parseInt(request.getParameter("programId"));
-				int isCbse = Integer.parseInt(request.getParameter("isCbse"));
-				int noStudApp = Integer.parseInt(request.getParameter("noStudApp"));
-				int pass = Integer.parseInt(request.getParameter("pass"));
-				float rslt = Float.parseFloat(request.getParameter("rslt"));
+					int subId = 0;
+					try {
+						subId = Integer.parseInt(request.getParameter("subId"));
+					} catch (Exception e) {
+						subId = 0;
+					}
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date now = new Date();
+					String curDate = dateFormat.format(new Date());
+					String dateTime = dateFormat.format(now);
 
-				// pass
+					String subCode = request.getParameter("subCode");
+					String sem = request.getParameter("sem");
+					String subName = request.getParameter("subName");
+					String subType = request.getParameter("subType");
 
-				Subject sub = new Subject();
-				sub.setDelStatus(1);
-				sub.setExInt1(1);
-				sub.setExInt2(1);
-				sub.setExVar1(request.getParameter("yearInplmtn"));
-				sub.setExVar2("NA");
-				sub.setFacultyId(userObj.getGetData().getUserDetailId());
-				int yearId = (int) session.getAttribute("acYearId");
-				sub.setYearId(yearId);
-				sub.setIsActive(1);
-				sub.setSubId(subId);
-				sub.setMakerEnterDatetime(dateTime);
-				sub.setMakerUserId(userObj.getUserId());
-				sub.setProgId(programId);
-				sub.setSubCode(XssEscapeUtils.jsoupParse(subCode));
-				sub.setSubIsCbse(isCbse);
-				sub.setSubName(XssEscapeUtils.jsoupParse(subName));
-				sub.setSubPassPer(rslt);
-				sub.setSubSem(sem);
-				sub.setSubStuAppear(noStudApp);
-				sub.setSubStuPassed(pass);
-				sub.setSubType(subType);
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int programId = Integer.parseInt(request.getParameter("programId"));
+					int isCbse = Integer.parseInt(request.getParameter("isCbse"));
+					int noStudApp = Integer.parseInt(request.getParameter("noStudApp"));
+					int pass = Integer.parseInt(request.getParameter("pass"));
+					float rslt = Float.parseFloat(request.getParameter("rslt"));
 
-				Subject subInsertRes = rest.postForObject(Constants.url + "saveSubject", sub, Subject.class);
+					// pass
 
-				System.err.println("subInsertRes " + subInsertRes.toString());
+					Subject sub = new Subject();
+					sub.setDelStatus(1);
+					sub.setExInt1(1);
+					sub.setExInt2(1);
+					sub.setExVar1(request.getParameter("yearInplmtn"));
+					sub.setExVar2("NA");
+					sub.setFacultyId(userObj.getGetData().getUserDetailId());
+					int yearId = (int) session.getAttribute("acYearId");
+					sub.setYearId(yearId);
+					sub.setIsActive(1);
+					sub.setSubId(subId);
+					sub.setMakerEnterDatetime(dateTime);
+					sub.setMakerUserId(userObj.getUserId());
+					sub.setProgId(programId);
+					sub.setSubCode(XssEscapeUtils.jsoupParse(subCode));
+					sub.setSubIsCbse(isCbse);
+					sub.setSubName(XssEscapeUtils.jsoupParse(subName));
+					sub.setSubPassPer(rslt);
+					sub.setSubSem(sem);
+					sub.setSubStuAppear(noStudApp);
+					sub.setSubStuPassed(pass);
+					sub.setSubType(subType);
 
-				if (is_view == 1) {
-					returnString = "redirect:/showSubDetailsList";
+					Subject subInsertRes = rest.postForObject(Constants.url + "saveSubject", sub, Subject.class);
+
+					System.err.println("subInsertRes " + subInsertRes.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showSubDetailsList";
+					} else {
+						returnString = "redirect:/showAddSubDetails";
+					}
 				} else {
-					returnString = "redirect:/showAddSubDetails";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 		}
 
@@ -828,7 +857,7 @@ public class FacultyController {
 				map.add("subId", subId);
 
 				Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
-				//System.out.println("subId:" + subId);
+				// System.out.println("subId:" + subId);
 
 				model.addObject("editSubject", editSubject);
 
@@ -856,7 +885,7 @@ public class FacultyController {
 
 		} else {
 			Info inf = new Info();
-			//System.out.println("Id:" + subId);
+			// System.out.println("Id:" + subId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("subIdList", subId);
@@ -891,7 +920,6 @@ public class FacultyController {
 			Program programDetail = rest.postForObject(Constants.url + "/getProgramByProgramId", map, Program.class);
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);
-			
 
 			map = new LinkedMultiValueMap<>();
 			map.add("subId", subId);
@@ -968,7 +996,7 @@ public class FacultyController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("coId", coId);
 			Info info = rest.postForObject(Constants.url + "/deleteSubjectsCo", map, Info.class);
-			//System.out.println(info);
+			// System.out.println(info);
 
 		} catch (Exception e) {
 
@@ -993,13 +1021,12 @@ public class FacultyController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			
-			
+
 			map.add("subId", subId);
 
 			Subject editSubject = rest.postForObject(Constants.url + "/getSubjectBySubId", map, Subject.class);
 			model.addObject("subject", editSubject);
-			
+
 			map = new LinkedMultiValueMap<>();
 
 			map.add("programId", editSubject.getProgId());
@@ -1017,8 +1044,6 @@ public class FacultyController {
 			map = new LinkedMultiValueMap<>();
 			map.add("coId", coId);
 			SubjectCo editSubjectCo = rest.postForObject(Constants.url + "/getSubjectCoBySubId", map, SubjectCo.class);
-			
-			
 
 			model.addObject("programDetail", programDetail);
 			model.addObject("subId", subId);
@@ -1095,7 +1120,7 @@ public class FacultyController {
 			try {
 				String[] ids = request.getParameterValues("poIds");
 				for (int i = 0; i < ids.length; i++) {
-					//System.out.println(ids[i]);
+					// System.out.println(ids[i]);
 					poIds = poIds + "," + ids[i];
 				}
 				subjectCo.setCoPoMap(poIds.substring(1, poIds.length()));
@@ -1108,7 +1133,7 @@ public class FacultyController {
 			String satisfyingValue = request.getParameter("satisfyingValue");
 
 			subjectCo.setCoPoSatisfyingValue(satisfyingValue);
-			//System.out.println("subjectCo " + subjectCo);
+			// System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
 
 		} catch (Exception e) {
@@ -1180,7 +1205,7 @@ public class FacultyController {
 				String[] ids = request.getParameterValues("psoIds");
 
 				for (int i = 0; i < ids.length; i++) {
-					//System.out.println(ids[i]);
+					// System.out.println(ids[i]);
 					poIds = poIds + "," + ids[i];
 				}
 
@@ -1194,7 +1219,7 @@ public class FacultyController {
 			String satisfyingValue = request.getParameter("satisfyingValue");
 
 			subjectCo.setCoPsoSatisfyingValue(satisfyingValue);
-			//System.out.println("subjectCo " + subjectCo);
+			// System.out.println("subjectCo " + subjectCo);
 			SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
 
 		} catch (Exception e) {
@@ -1372,40 +1397,55 @@ public class FacultyController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			String swocText = request.getParameter("swocText");
 			int swocType = Integer.parseInt(request.getParameter("swocType"));
-			int swocId = Integer.parseInt(request.getParameter("swocId"));
 
-			swoc.setDelStatus(1);
-			swoc.setExInt1(1);
-			swoc.setExInt2(1);
-			swoc.setExVar2("NA");
-			swoc.setExVar1("NA");
-			swoc.setFacultyId(userObj.getGetData().getUserDetailId());
-			swoc.setIsActive(1);
-			swoc.setMakerEnterDatetime(sf.format(date));
-			swoc.setMakerUserId(userObj.getUserId());
-			swoc.setSwocText(XssEscapeUtils.jsoupParse(swocText));
-			swoc.setSwocType(swocType);
-			int yearId = (int) session.getAttribute("acYearId");
-			swoc.setYearId(yearId);
-			swoc.setSwocId(swocId);
+			if (token.trim().equals(key.trim())) {
 
-			SWOC res = rest.postForObject(Constants.url + "/saveSWOC", swoc, SWOC.class);
-			//System.out.println(res.toString());
+				Date date = new Date();
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("facultyId", userObj.getGetData().getUserDetailId());
-			map.add("swocType", swocType);
-			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
-			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
-			swocList.addAll(list);
-			//System.out.println("swocList" + swocList.toString());
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+				String swocText = request.getParameter("swocText");
+				int swocId = Integer.parseInt(request.getParameter("swocId"));
+
+				swoc.setDelStatus(1);
+				swoc.setExInt1(1);
+				swoc.setExInt2(1);
+				swoc.setExVar2("NA");
+				swoc.setExVar1("NA");
+				swoc.setFacultyId(userObj.getGetData().getUserDetailId());
+				swoc.setIsActive(1);
+				swoc.setMakerEnterDatetime(sf.format(date));
+				swoc.setMakerUserId(userObj.getUserId());
+				swoc.setSwocText(XssEscapeUtils.jsoupParse(swocText));
+				swoc.setSwocType(swocType);
+				int yearId = (int) session.getAttribute("acYearId");
+				swoc.setYearId(yearId);
+				swoc.setSwocId(swocId);
+
+				SWOC res = rest.postForObject(Constants.url + "/saveSWOC", swoc, SWOC.class);
+				// System.out.println(res.toString());
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", swocType);
+				SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
+				swocList.addAll(list);
+				// System.out.println("swocList" + swocList.toString());
+
+			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", swocType);
+				SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
+				swocList.addAll(list);
+			}
 
 		} catch (
 
@@ -1429,13 +1469,13 @@ public class FacultyController {
 		try {
 
 			int swocId = Integer.parseInt(request.getParameter("swocId"));
-			//System.out.println("swocId" + swocId);
+			// System.out.println("swocId" + swocId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("swocId", swocId);
 			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map, SWOC.class);
 
-			//System.out.println("swocId" + swoc.toString());
+			// System.out.println("swocId" + swoc.toString());
 
 		} catch (Exception e) {
 
@@ -1463,13 +1503,13 @@ public class FacultyController {
 			map2.add("swocId", swocId);
 			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map2, SWOC.class);
 
-			//System.out.println("swoc" + swoc.toString());
+			// System.out.println("swoc" + swoc.toString());
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("swocIdList", swocId);
 			info = rest.postForObject(Constants.url + "/deleteSwoc", map, Info.class);
-			//System.out.println(swocId);
-			//System.out.println(info.toString());
+			// System.out.println(swocId);
+			// System.out.println(info.toString());
 
 			map = new LinkedMultiValueMap<>();
 			map.add("facultyId", userObj.getGetData().getUserDetailId());
@@ -1477,7 +1517,7 @@ public class FacultyController {
 			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
 			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
 			swocList.addAll(list);
-			//System.out.println("swocList" + swocList.toString());
+			// System.out.println("swocList" + swocList.toString());
 		} catch (Exception e) {
 
 			e.printStackTrace();

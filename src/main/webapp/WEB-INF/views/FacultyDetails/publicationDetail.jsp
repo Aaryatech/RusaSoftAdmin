@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -95,6 +102,18 @@
 										action="${pageContext.request.contextPath}/insertFacultyConf"
 										method="post" name="form_sample_2" id="form_sample_2">
 
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<ul class="nav nav-tabs">
 											<!-- <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
@@ -129,8 +148,10 @@
 																<input type="text" class="form-control" id="conf_name"
 																	onchange="trim(this)" name="conf_name"
 																	placeholder="Title of Publication" autocomplete="off"
-																	value="${facConf.confName}" >
-																	<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter publication title.</span>
+																	value="${facConf.confName}"> <span
+																	class="error_form text-danger" id="error_formfield1"
+																	style="display: none;">Please enter publication
+																	title.</span>
 															</div>
 
 
@@ -201,12 +222,14 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control datepicker"
-																	id="conf_date" autocomplete="off"
-																	data-end-date="0d" data-format="dd-mm-yyyy"
+																	id="conf_date" autocomplete="off" data-end-date="0d"
+																	data-format="dd-mm-yyyy"
 																	onkeypress='return restrictAlphabets(event)'
 																	name="conf_date" placeholder="dd-mm-yyyy"
 																	value="${facConf.confDate}" onchange="trim(this)">
-																	<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter valid date.</span>
+																<span class="error_form text-danger"
+																	id="error_formfield2" style="display: none;">Please
+																	enter valid date.</span>
 															</div>
 														</div>
 
@@ -216,9 +239,11 @@
 															</label>
 															<div class="col-sm-6">
 																<input type="text" class="form-control" id="conf_venue"
-																	onchange="trim(this)" name="conf_venue" autocomplete="off"
-																	placeholder="Venue" value="${facConf.confVenue}">
-																	<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter venue.</span>
+																	onchange="trim(this)" name="conf_venue"
+																	autocomplete="off" placeholder="Venue"
+																	value="${facConf.confVenue}"> <span
+																	class="error_form text-danger" id="error_formfield3"
+																	style="display: none;">Please enter venue.</span>
 															</div>
 
 
@@ -234,22 +259,27 @@
 																<input type="text" class="form-control" id="conf_fund"
 																	onchange="trim(this)" name="conf_fund"
 																	placeholder="Funding from" autocomplete="off"
-																	value="${facConf.confFundFrom}">
-																	<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter funding from.</span>
+																	value="${facConf.confFundFrom}"> <span
+																	class="error_form text-danger" id="error_formfield4"
+																	style="display: none;">Please enter funding
+																	from.</span>
 															</div>
 														</div>
 
 														<div class="form-group">
 
-															<label class="control-label col-sm-2" for="smallheading">Amount (Rs.)
-																<span class="text-danger">*</span>
+															<label class="control-label col-sm-2" for="smallheading">Amount
+																(Rs.) <span class="text-danger">*</span>
 															</label>
 															<div class="col-sm-6">
-																<input type="text" min="0" class="form-control" 
-																	id="conf_amt" autocomplete="off" onFocus="clearDefault(this)"
-																	name="conf_amt" placeholder="Amount (Rs.)"
+																<input type="text" min="0" class="form-control"
+																	id="conf_amt" autocomplete="off"
+																	onFocus="clearDefault(this)" name="conf_amt"
+																	placeholder="Amount (Rs.)"
 																	value="${facConf.confFundAmt}" onchange="trim(this)">
-																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter amount and value must be greater than 0.</span>
+																<span class="error_form text-danger"
+																	id="error_formfield5" style="display: none;">Please
+																	enter amount and value must be greater than 0.</span>
 															</div>
 
 														</div>
@@ -260,12 +290,17 @@
 
 														<div class="form-group">
 															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" id="sub_button" class="btn btn-primary" 
-																	onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-																<a href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
-																id="sub2" type="button" class="btn btn-primary">
-																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+																<button type="submit" id="sub_button"
+																	class="btn btn-primary" onclick="submit_f(1)">
+																	<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+																</button>
+
+																<a
+																	href="${pageContext.request.contextPath}/showAddPublicationDetailsList"><button
+																		id="sub2" type="button" class="btn btn-primary">
+																		<i class="${sessionScope.cancelIcon}"
+																			aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+																	</button></a>
 															</div>
 														</div>
 
@@ -303,137 +338,135 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script>
+	<script>
+		$('#conf_amt').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
 
-$('#conf_amt').on('input', function() {
-	  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-	});
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
 
-	function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}
-	
-              function validateEmail(email) {
-            
-            	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-            
-            	if (eml.test($.trim(email)) == false) {
-            
-            
-            	return false;
-            
-            	}
-            
-            	return true;
-            
-            }
-             function validateMobile(mobile) {
-            		var mob = /^[1-9]{1}[0-9]{9}$/;
-            
-            
-            		if (mob.test($.trim(mobile)) == false) {
-            
-            		//alert("Please enter a valid email address .");
-            		return false;
-            
-            		}
-            		return true;
-            
-             }  
-            	$(document).ready(function($){
-            		
-            		$("#form_sample_2").submit(function(e) {
-            		
-            			var isError=false;
-            			 var errMsg="";
-            				
-           				if(!$("#conf_name").val()){
-            					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#conf_name").addClass("has-error")
-            				$("#error_formfield1").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield1").hide()
-            				}
-           				if(!$("#conf_date").val()){
-        					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#conf_date").addClass("has-error")
-            				$("#error_formfield2").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield2").hide()
-            				}
-            				
-            				
-           				if(!$("#conf_venue").val()){
-       					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#conf_date").addClass("has-error")
-            				$("#error_formfield3").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield3").hide()
-            				}
-           				
-           				if(!$("#conf_fund").val()){
-          					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#conf_date").addClass("has-error")
-            				$("#error_formfield4").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield4").hide()
-            				}
-           				
-           				if($("#conf_amt").val()==0 || !$("#conf_amt").val()){
-         					 
-            				isError=true;
-            				errMsg += '<li>Please enter a valid name.</li>';
-            				
-            				$("#conf_fund").addClass("has-error")
-            				$("#error_formfield5").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield5").hide()
-            				}
-            				
-			            	 if (!isError) {
-			            		 
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									
-									document.getElementById("sub_button").disabled = true;
-									document.getElementById("sub2").disabled = true;
-									return  true;
-								}
-							}
-            					   return false;
-            			});
-        });
+		function validateEmail(email) {
 
-</script>
-	
+			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+			if (eml.test($.trim(email)) == false) {
+
+				return false;
+
+			}
+
+			return true;
+
+		}
+		function validateMobile(mobile) {
+			var mob = /^[1-9]{1}[0-9]{9}$/;
+
+			if (mob.test($.trim(mobile)) == false) {
+
+				//alert("Please enter a valid email address .");
+				return false;
+
+			}
+			return true;
+
+		}
+		$(document).ready(function($) {
+
+			$("#form_sample_2").submit(function(e) {
+
+				var isError = false;
+				var errMsg = "";
+
+				if (!$("#conf_name").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#conf_name").addClass("has-error")
+					$("#error_formfield1").show()
+					//return false;
+				} else {
+					$("#error_formfield1").hide()
+				}
+				if (!$("#conf_date").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#conf_date").addClass("has-error")
+					$("#error_formfield2").show()
+					//return false;
+				} else {
+					$("#error_formfield2").hide()
+				}
+
+				if (!$("#conf_venue").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#conf_date").addClass("has-error")
+					$("#error_formfield3").show()
+					//return false;
+				} else {
+					$("#error_formfield3").hide()
+				}
+
+				if (!$("#conf_fund").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#conf_date").addClass("has-error")
+					$("#error_formfield4").show()
+					//return false;
+				} else {
+					$("#error_formfield4").hide()
+				}
+
+				if ($("#conf_amt").val() == 0 || !$("#conf_amt").val()) {
+
+					isError = true;
+					errMsg += '<li>Please enter a valid name.</li>';
+
+					$("#conf_fund").addClass("has-error")
+					$("#error_formfield5").show()
+					//return false;
+				} else {
+					$("#error_formfield5").hide()
+				}
+
+				if (!isError) {
+
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+
+						document.getElementById("sub_button").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
+	</script>
+
 	<script type="text/javascript">
 		function submit_f(view) {
 			//alert(view);
 			document.getElementById("is_view").value = view;
 
 		}
-</script>
-	
+	</script>
+
 	<script type="text/javascript">
 		var wasSubmitted = false;
 		function checkBeforeSubmit() {
@@ -472,25 +505,24 @@ $('#conf_amt').on('input', function() {
 
 
 	<script type="text/javascript">
-	function clearDefault(a){
-	if(a.defaultValue==0)
-	{
-		a.value=""
-	}
-	};
-
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
 			}
-		</script>
+		};
+
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
+	</script>
 </body>
 </html>

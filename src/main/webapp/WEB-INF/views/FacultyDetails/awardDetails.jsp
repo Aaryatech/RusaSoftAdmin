@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -99,6 +101,19 @@
 										action="${pageContext.request.contextPath}/insertAwardDetail"
 										method="post" name="form_sample_2" id="form_sample_2">
 
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
@@ -109,212 +124,244 @@
 										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
+										<div>
 
 
-													<input type="hidden" id="award_id" name="awardId"
-														value="${award.awardId}">
+											<input type="hidden" id="award_id" name="awardId"
+												value="${award.awardId}">
 
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="name">Name
-															of Award/Recognition <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="name"
-																autocomplete="off" name="name"
-																placeholder="Name of Award/Recognition"
-																value="${award.awardName}"  onchange="trim(this)">
-																<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter name of award/recognition.</span>
-														</div>
-													</div>
-													<div class="form-group">
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="name">Name
+													of Award/Recognition <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="name"
+														autocomplete="off" name="name"
+														placeholder="Name of Award/Recognition"
+														value="${award.awardName}" onchange="trim(this)">
+													<span class="error_form text-danger" id="error_formfield1"
+														style="display: none;">Please enter name of
+														award/recognition.</span>
+												</div>
+											</div>
+											<div class="form-group">
 
-														<label class="control-label col-sm-2" for="agency">Awarding
-															Agency/Authority <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="agency"
-																name="agency" placeholder="Awarding Agency"
-																autocomplete="off" value="${award.awardAuthority}" onchange="trim(this)">
-														<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter award agency.</span>
-														</div>
+												<label class="control-label col-sm-2" for="agency">Awarding
+													Agency/Authority <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="agency"
+														name="agency" placeholder="Awarding Agency"
+														autocomplete="off" value="${award.awardAuthority}"
+														onchange="trim(this)"> <span
+														class="error_form text-danger" id="error_formfield2"
+														style="display: none;">Please enter award agency.</span>
+												</div>
 
-													</div>
-
-
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="nature">Nature
-															of Award/Recognition <span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control" id="nature"
-																autocomplete="off" name="nature"
-																placeholder="Nature of Award/Recognition"
-																value="${award.awardNature}" onchange="trim(this)">
-																<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter nature of award/recognition.</span>
-														</div>
-													</div>
-													
-													<div class="form-group">
-															<label class="control-label col-sm-2" for="smallheading">Incentive against Award-Recognition
-																 <span class="text-danger">*</span>
-															</label>
+											</div>
 
 
-															<div class="col-sm-4">
-															Yes <input type="radio" name="award_recog" id="award_recog"  ${award.exInt1 == 1 ? 'checked' : ''} 
-																	 value="1" onclick="checkCoGuide(this.value)">
-																	
-																	 No<input type="radio" onclick="checkCoGuide(this.value)" ${award.exInt1 == 0 ? 'checked' : ''} 
-																	  name="award_recog" id="award_recog" value="0">
-															
-															</div>
-														</div>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="nature">Nature
+													of Award/Recognition <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="nature"
+														autocomplete="off" name="nature"
+														placeholder="Nature of Award/Recognition"
+														value="${award.awardNature}" onchange="trim(this)">
+													<span class="error_form text-danger" id="error_formfield3"
+														style="display: none;">Please enter nature of
+														award/recognition.</span>
+												</div>
+											</div>
 
-														<div class="form-group" id="instv_form" style="display: none;">
-
-															<label class="control-label col-sm-2"   for="smallheading">Name
-																of Incentive <span class="text-danger">*</span>
-															</label>
-															<div class="col-sm-6">
-																<input type="text" class="form-control " id="incentive" autocomplete="off"  onchange="trim(this)"	 
-																	name="incentive" placeholder="Name of Incentive" value="${award.exVar1}">
-																<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter name of incentive.</span>
-															</div>
-
-
-														</div>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="smallheading">Incentive
+													against Award-Recognition <span class="text-danger">*</span>
+												</label>
 
 
-													<div class="form-group">
+												<div class="col-sm-4">
+													Yes <input type="radio" name="award_recog" id="award_recog"
+														${award.exInt1 == 1 ? 'checked' : ''} value="1"
+														onclick="checkCoGuide(this.value)"> No<input
+														type="radio" onclick="checkCoGuide(this.value)"
+														${award.exInt1 == 0 ? 'checked' : ''} name="award_recog"
+														id="award_recog" value="0">
 
-														<label class="control-label col-sm-2" for="date">Date
-															<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<input type="text" class="form-control datepicker"
-																id="date" name="date" placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
-																autocomplete="off" value="${award.awardDate}">
-																<span class="error_form text-danger" id="error_formfield5" style="display:none;" >Please enter date.</span>
-														</div>
+												</div>
+											</div>
 
-													</div>
-													<div class="form-group">
-														<label class="control-label col-sm-2" for="validity">Validity
-															<span class="text-danger">*</span>
-														</label>
-														<div class="col-sm-6">
-															<c:choose>
-																<c:when test="${award.awardValidity==1}">
-														Duration <input type="radio" name="validity" id="validity"
-																		value="0" onclick="check1()">
-															Lifetime<input onclick="check()" type="radio"
-																		name="validity" id="validity" value="1" checked>
-																</c:when>
-																<c:otherwise>
-														Duration <input type="radio" name="validity" id="validity"
-																		checked value="0" onclick="check1()">
-															Lifetime<input onclick="check()" type="radio"
-																		name="validity" id="validity" value="1">
-																</c:otherwise>
-															</c:choose>
+											<div class="form-group" id="instv_form"
+												style="display: none;">
+
+												<label class="control-label col-sm-2" for="smallheading">Name
+													of Incentive <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control " id="incentive"
+														autocomplete="off" onchange="trim(this)" name="incentive"
+														placeholder="Name of Incentive" value="${award.exVar1}">
+													<span class="error_form text-danger" id="error_formfield4"
+														style="display: none;">Please enter name of
+														incentive.</span>
+												</div>
 
 
-														</div>
-													</div>
-													<input type="hidden" id="is_view" name="is_view" value="0">
+											</div>
 
+
+											<div class="form-group">
+
+												<label class="control-label col-sm-2" for="date">Date
+													<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control datepicker"
+														id="date" name="date" placeholder="dd/mm/yyyy"
+														onkeypress='return restrictAlphabets(event)'
+														autocomplete="off" value="${award.awardDate}"> <span
+														class="error_form text-danger" id="error_formfield5"
+														style="display: none;">Please enter date.</span>
+												</div>
+
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="validity">Validity
+													<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
 													<c:choose>
 														<c:when test="${award.awardValidity==1}">
-															<div id="abc" style="display: none;">
-																<div class="form-group">
-
-
-																	<label class="control-label col-sm-2"  
-																		for="fromDate">From<span
-																		class="text-danger">*</span>
-																	</label>
-																	<div class="col-sm-6">
-																		<input type="text" class="form-control datepicker"
-																			autocomplete="off" placeholder="dd/mm/yyyy"
-																			id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
-																			value="${award.awardValidityFrom}">
-																			<span  class="error_form text-danger" id="error_fromToDate"	style="display: none;">From Date must be smaller than To Date </span>
-																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter from date.</span>
-																	</div>
-																</div>
-
-																<div class="form-group">
-																	<label class="control-label col-sm-2" 
-																		for="toDate">To <span class="text-danger">*</span>
-																	</label>
-																	<div class="col-sm-6">
-																		<input type="text" class="form-control datepicker"
-																			autocomplete="off" id="toDate" name="toDate"
-																			placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
-																			value="${award.awardValidityTo}">
-																				<span class="error_form text-danger" id="error_toToDate" style="display: none;">To Date must be greater than From Date </span>
-																			<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter to date.</span>
-																	</div>
-
-																</div>
-															</div>
+														Duration <input type="radio" name="validity" id="validity"
+																value="0" onclick="check1()">
+															Lifetime<input onclick="check()" type="radio"
+																name="validity" id="validity" value="1" checked>
 														</c:when>
 														<c:otherwise>
-															<div id="abc">
-																<div class="form-group">
-
-
-																	<label class="control-label col-sm-2" 
-																		for="fromDate">From 
-																		<span class="text-danger">*</span>
-																	</label>
-																	<div class="col-sm-6">
-																		<input type="text" class="form-control datepicker"
-																			autocomplete="off" placeholder="dd/mm/yyyy"
-																			id="fromDate" name="fromDate" onkeypress='return restrictAlphabets(event)'
-																			value="${award.awardValidityFrom}">
-																				<span  class="error_form text-danger" id="error_fromToDate"	style="display: none;">From Date must be smaller than To Date </span>
-																			<span class="error_form text-danger" id="error_formfield6" style="display:none;" >Please enter from date.</span>
-																	</div>
-																</div>
-
-																<div class="form-group">
-																	<label class="control-label col-sm-2"
-																		for="toDate">To
-																		<span class="text-danger">*</span>
-																	</label>
-																	<div class="col-sm-6">
-																		<input type="text" class="form-control datepicker"
-																			autocomplete="off" id="toDate" name="toDate"
-																			placeholder="dd/mm/yyyy" onkeypress='return restrictAlphabets(event)'
-																			value="${award.awardValidityTo}">
-																			<span class="error_form text-danger" id="error_toToDate" style="display: none;">To Date must be greater than From Date </span>
-																			<span class="error_form text-danger" id="error_formfield7" style="display:none;" >Please enter to date.</span>
-																	</div>
-
-																</div>
-															</div>
-
+														Duration <input type="radio" name="validity" id="validity"
+																checked value="0" onclick="check1()">
+															Lifetime<input onclick="check()" type="radio"
+																name="validity" id="validity" value="1">
 														</c:otherwise>
 													</c:choose>
-	<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
 
-
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showAwardDetailsList"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
-
- 
-
-													<div class="clearfix"></div>
 
 												</div>
-											<!-- </div>
+											</div>
+											<input type="hidden" id="is_view" name="is_view" value="0">
+
+											<c:choose>
+												<c:when test="${award.awardValidity==1}">
+													<div id="abc" style="display: none;">
+														<div class="form-group">
+
+
+															<label class="control-label col-sm-2" for="fromDate">From<span
+																class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	autocomplete="off" placeholder="dd/mm/yyyy"
+																	id="fromDate" name="fromDate"
+																	onkeypress='return restrictAlphabets(event)'
+																	value="${award.awardValidityFrom}"> <span
+																	class="error_form text-danger" id="error_fromToDate"
+																	style="display: none;">From Date must be smaller
+																	than To Date </span> <span class="error_form text-danger"
+																	id="error_formfield6" style="display: none;">Please
+																	enter from date.</span>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="toDate">To
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	autocomplete="off" id="toDate" name="toDate"
+																	placeholder="dd/mm/yyyy"
+																	onkeypress='return restrictAlphabets(event)'
+																	value="${award.awardValidityTo}"> <span
+																	class="error_form text-danger" id="error_toToDate"
+																	style="display: none;">To Date must be greater
+																	than From Date </span> <span class="error_form text-danger"
+																	id="error_formfield7" style="display: none;">Please
+																	enter to date.</span>
+															</div>
+
+														</div>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div id="abc">
+														<div class="form-group">
+
+
+															<label class="control-label col-sm-2" for="fromDate">From
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	autocomplete="off" placeholder="dd/mm/yyyy"
+																	id="fromDate" name="fromDate"
+																	onkeypress='return restrictAlphabets(event)'
+																	value="${award.awardValidityFrom}"> <span
+																	class="error_form text-danger" id="error_fromToDate"
+																	style="display: none;">From Date must be smaller
+																	than To Date </span> <span class="error_form text-danger"
+																	id="error_formfield6" style="display: none;">Please
+																	enter from date.</span>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2" for="toDate">To
+																<span class="text-danger">*</span>
+															</label>
+															<div class="col-sm-6">
+																<input type="text" class="form-control datepicker"
+																	autocomplete="off" id="toDate" name="toDate"
+																	placeholder="dd/mm/yyyy"
+																	onkeypress='return restrictAlphabets(event)'
+																	value="${award.awardValidityTo}"> <span
+																	class="error_form text-danger" id="error_toToDate"
+																	style="display: none;">To Date must be greater
+																	than From Date </span> <span class="error_form text-danger"
+																	id="error_formfield7" style="display: none;">Please
+																	enter to date.</span>
+															</div>
+
+														</div>
+													</div>
+
+												</c:otherwise>
+											</c:choose>
+											<div class="form-group">
+												<div class="col-sm-offset-3 col-sm-9">
+
+
+													<button type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+
+													<a
+														href="${pageContext.request.contextPath}/showAwardDetailsList"><button
+															id="sub2" type="button" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a>
+												</div>
+											</div>
+
+
+
+											<div class="clearfix"></div>
+
+										</div>
+										<!-- </div>
 										</div> -->
 									</form>
 								</div>

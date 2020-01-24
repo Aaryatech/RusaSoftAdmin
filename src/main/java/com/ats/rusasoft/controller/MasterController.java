@@ -1075,170 +1075,180 @@ public class MasterController {
 		int instId = Integer.parseInt(request.getParameter("inst_id"));
 		String redirect = null;
 		try {
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			/*
-			 * HttpSession session = request.getSession();
-			 * 
-			 * List<ModuleJson> newModuleList = (List<ModuleJson>)
-			 * session.getAttribute("newModuleList");
-			 * 
-			 * Info editAccess = AccessControll.checkAccess("insertInstitute",
-			 * "showInstituteList", "1", "0", "0", "0", newModuleList);
-			 * 
-			 * if (editAccess.isError() == true) { model = new ModelAndView("accessDenied");
-			 * redirect = "redirect:/accessDenied"; } else {
-			 * 
-			 * LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			 */
-			RestTemplate restTemplate = new RestTemplate();
+			if (token.trim().equals(key.trim())) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				/*
+				 * HttpSession session = request.getSession();
+				 * 
+				 * List<ModuleJson> newModuleList = (List<ModuleJson>)
+				 * session.getAttribute("newModuleList");
+				 * 
+				 * Info editAccess = AccessControll.checkAccess("insertInstitute",
+				 * "showInstituteList", "1", "0", "0", "0", newModuleList);
+				 * 
+				 * if (editAccess.isError() == true) { model = new ModelAndView("accessDenied");
+				 * redirect = "redirect:/accessDenied"; } else {
+				 * 
+				 * LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				 */
+				RestTemplate restTemplate = new RestTemplate();
 
-			int exInt = 0;
-			String exVar = "";
-			if (instId == 0) {
-				Institute institute = new Institute();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
+				int exInt = 0;
+				String exVar = "";
+				if (instId == 0) {
+					Institute institute = new Institute();
 
-				String curDateTime = dateFormat.format(cal.getTime());
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
 
-				String aisheCode = request.getParameter("aishe_code");
-				String pricplContact = request.getParameter("princ_contact");
-				String princplEmail = request.getParameter("princ_email");
-				String instAdd = request.getParameter("inst_add");
-				String instName = request.getParameter("inst_name");
+					String curDateTime = dateFormat.format(cal.getTime());
 
-				String prsidName = request.getParameter("pres_name");
-				String princplName = request.getParameter("princ_name");
-				String trustyAdd = request.getParameter("trusty_add");
-				String trustyCont = request.getParameter("trusty_con_no");
-				String trustyName = request.getParameter("trusty_name");
-				String presContact = request.getParameter("pres_contact");
-				String presEmail = request.getParameter("pres_email");
+					String aisheCode = request.getParameter("aishe_code");
+					String pricplContact = request.getParameter("princ_contact");
+					String princplEmail = request.getParameter("princ_email");
+					String instAdd = request.getParameter("inst_add");
+					String instName = request.getParameter("inst_name");
 
-				String village = request.getParameter("village");
-				String taluka = request.getParameter("taluka");
-				String district = request.getParameter("district");
-				String state = request.getParameter("state");
-				String pin = request.getParameter("pin");
+					String prsidName = request.getParameter("pres_name");
+					String princplName = request.getParameter("princ_name");
+					String trustyAdd = request.getParameter("trusty_add");
+					String trustyCont = request.getParameter("trusty_con_no");
+					String trustyName = request.getParameter("trusty_name");
+					String presContact = request.getParameter("pres_contact");
+					String presEmail = request.getParameter("pres_email");
 
-				String regDate = DateConvertor.convertToYMD(request.getParameter("reg_date"));
+					String village = request.getParameter("village");
+					String taluka = request.getParameter("taluka");
+					String district = request.getParameter("district");
+					String state = request.getParameter("state");
+					String pin = request.getParameter("pin");
 
-				institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
+					String regDate = DateConvertor.convertToYMD(request.getParameter("reg_date"));
 
-				institute.setCheckerDatetime(curDateTime);
-				institute.setCheckerUserId(0);
+					institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
 
-				institute.setContactNo(XssEscapeUtils.jsoupParse(pricplContact));
-				institute.setDelStatus(1);
-				institute.setEmail(XssEscapeUtils.jsoupParse(princplEmail));
+					institute.setCheckerDatetime(curDateTime);
+					institute.setCheckerUserId(0);
 
-				institute.setExInt1(exInt);
-				institute.setExInt2(exInt);
-				institute.setExVar1(exVar);
-				institute.setExVar2(exVar);
+					institute.setContactNo(XssEscapeUtils.jsoupParse(pricplContact));
+					institute.setDelStatus(1);
+					institute.setEmail(XssEscapeUtils.jsoupParse(princplEmail));
 
-				institute.setInstituteAdd(XssEscapeUtils.jsoupParse(instAdd));
-				institute.setInstituteId(instId);
-				institute.setInstituteName(XssEscapeUtils.jsoupParse(instName));
+					institute.setExInt1(exInt);
+					institute.setExInt2(exInt);
+					institute.setExVar1(exVar);
+					institute.setExVar2(exVar);
 
-				institute.setIsActive(1);
-				institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her
-												// pass.
-												// Initially its zero
-				int isReg = Integer.parseInt(request.getParameter("is_registration"));
-				institute.setIsRegistration(isReg);
+					institute.setInstituteAdd(XssEscapeUtils.jsoupParse(instAdd));
+					institute.setInstituteId(instId);
+					institute.setInstituteName(XssEscapeUtils.jsoupParse(instName));
 
-				institute.setLastUpdatedDatetime(curDateTime);
-				institute.setMakerEnterDatetime(curDateTime);
-				institute.setMakerUserId(0);// user id who is creating this record for ex principal is
-											// user who creates
-				// iqac
-				// and hod to student
+					institute.setIsActive(1);
+					institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her
+													// pass.
+													// Initially its zero
+					int isReg = Integer.parseInt(request.getParameter("is_registration"));
+					institute.setIsRegistration(isReg);
 
-				institute.setPresidentName(XssEscapeUtils.jsoupParse(prsidName));
-				institute.setPrincipalName(XssEscapeUtils.jsoupParse(princplName));
-				if (isReg == 1)
+					institute.setLastUpdatedDatetime(curDateTime);
+					institute.setMakerEnterDatetime(curDateTime);
+					institute.setMakerUserId(0);// user id who is creating this record for ex principal is
+												// user who creates
+					// iqac
+					// and hod to student
 
-					institute.setRegDate(XssEscapeUtils.jsoupParse(regDate));
-				institute.setTrustAdd(XssEscapeUtils.jsoupParse(trustyAdd));
+					institute.setPresidentName(XssEscapeUtils.jsoupParse(prsidName));
+					institute.setPrincipalName(XssEscapeUtils.jsoupParse(princplName));
+					if (isReg == 1)
 
-				institute.setTrustContactNo(XssEscapeUtils.jsoupParse(trustyCont));
-				institute.setTrustName(XssEscapeUtils.jsoupParse(trustyName));
-				institute.setUserType(0);// for institute its 0
+						institute.setRegDate(XssEscapeUtils.jsoupParse(regDate));
+					institute.setTrustAdd(XssEscapeUtils.jsoupParse(trustyAdd));
 
-				institute.setPresidenContact(XssEscapeUtils.jsoupParse(presContact));
-				institute.setPresidentEmail(XssEscapeUtils.jsoupParse(presEmail));
+					institute.setTrustContactNo(XssEscapeUtils.jsoupParse(trustyCont));
+					institute.setTrustName(XssEscapeUtils.jsoupParse(trustyName));
+					institute.setUserType(0);// for institute its 0
 
-				institute.setVillage(XssEscapeUtils.jsoupParse(village));
-				institute.setTaluka(XssEscapeUtils.jsoupParse(taluka));
-				institute.setDistrict(XssEscapeUtils.jsoupParse(district));
-				institute.setState(XssEscapeUtils.jsoupParse(state));
-				institute.setPincode(XssEscapeUtils.jsoupParse(pin));
+					institute.setPresidenContact(XssEscapeUtils.jsoupParse(presContact));
+					institute.setPresidentEmail(XssEscapeUtils.jsoupParse(presEmail));
 
-				//// System.out.println(institute);
+					institute.setVillage(XssEscapeUtils.jsoupParse(village));
+					institute.setTaluka(XssEscapeUtils.jsoupParse(taluka));
+					institute.setDistrict(XssEscapeUtils.jsoupParse(district));
+					institute.setState(XssEscapeUtils.jsoupParse(state));
+					institute.setPincode(XssEscapeUtils.jsoupParse(pin));
 
-				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
-						Institute.class);
+					//// System.out.println(institute);
 
+					Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
+							Institute.class);
+
+				} else {
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					map = new LinkedMultiValueMap<String, Object>();
+					map.add("instituteId", instId);
+					// getInstitute
+					Institute institute = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
+
+					String aisheCode = request.getParameter("aishe_code");
+					institute.setAisheCode(aisheCode);
+
+					institute.setContactNo(request.getParameter("princ_contact"));
+					institute.setEmail(request.getParameter("princ_email"));
+					institute.setInstituteAdd(request.getParameter("inst_add"));
+					institute.setInstituteName(request.getParameter("inst_name"));
+
+					int isReg = Integer.parseInt(request.getParameter("is_registration"));
+					institute.setIsRegistration(isReg);
+
+					institute.setLastUpdatedDatetime(curDateTime);
+
+					institute.setPresidentName(request.getParameter("pres_name"));
+					institute.setPrincipalName(request.getParameter("princ_name"));
+					if (isReg == 1)
+						institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
+					else
+						institute.setRegDate(null);
+
+					institute.setTrustAdd(request.getParameter("trusty_add"));
+
+					institute.setTrustContactNo(request.getParameter("trusty_con_no"));
+					institute.setTrustName(request.getParameter("trusty_name"));
+
+					institute.setPresidenContact(request.getParameter("pres_contact"));
+					institute.setPresidentEmail(request.getParameter("pres_email"));
+
+					institute.setVillage(request.getParameter("village"));
+					institute.setTaluka(request.getParameter("taluka"));
+					institute.setDistrict(request.getParameter("district"));
+					institute.setState(request.getParameter("state"));
+					institute.setPincode(request.getParameter("pin"));
+
+					Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
+							Institute.class);
+				}
+				redirect = "redirect/showInstituteList";
+
+				if (instId == 0)
+					redirect = "redirect:/";
+				else
+					redirect = "redirect:/showInstituteList";
+				// }
 			} else {
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				map = new LinkedMultiValueMap<String, Object>();
-				map.add("instituteId", instId);
-				// getInstitute
-				Institute institute = rest.postForObject(Constants.url + "getInstitute", map, Institute.class);
-
-				String aisheCode = request.getParameter("aishe_code");
-				institute.setAisheCode(aisheCode);
-
-				institute.setContactNo(request.getParameter("princ_contact"));
-				institute.setEmail(request.getParameter("princ_email"));
-				institute.setInstituteAdd(request.getParameter("inst_add"));
-				institute.setInstituteName(request.getParameter("inst_name"));
-
-				int isReg = Integer.parseInt(request.getParameter("is_registration"));
-				institute.setIsRegistration(isReg);
-
-				institute.setLastUpdatedDatetime(curDateTime);
-
-				institute.setPresidentName(request.getParameter("pres_name"));
-				institute.setPrincipalName(request.getParameter("princ_name"));
-				if (isReg == 1)
-					institute.setRegDate(DateConvertor.convertToYMD(request.getParameter("reg_date")));
-				else
-					institute.setRegDate(null);
-
-				institute.setTrustAdd(request.getParameter("trusty_add"));
-
-				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
-				institute.setTrustName(request.getParameter("trusty_name"));
-
-				institute.setPresidenContact(request.getParameter("pres_contact"));
-				institute.setPresidentEmail(request.getParameter("pres_email"));
-
-				institute.setVillage(request.getParameter("village"));
-				institute.setTaluka(request.getParameter("taluka"));
-				institute.setDistrict(request.getParameter("district"));
-				institute.setState(request.getParameter("state"));
-				institute.setPincode(request.getParameter("pin"));
-
-				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
-						Institute.class);
+				redirect = "redirect:/accessDenied";
 			}
-			redirect = "redirect/showInstituteList";
 
-			if (instId == 0)
-				redirect = "redirect:/";
-			else
-				redirect = "redirect:/showInstituteList";
-			// }
 		} catch (Exception e) {
 
 			System.err.println(" Exception In saveInstitute at Master Contr " + e.getMessage());
