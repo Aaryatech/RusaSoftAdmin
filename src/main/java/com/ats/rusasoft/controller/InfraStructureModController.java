@@ -1144,10 +1144,14 @@ public class InfraStructureModController {
 
 	@RequestMapping(value = "/inserteInternetConnecInfo", method = RequestMethod.POST)
 	public String inserteInternetConnecInfo(HttpServletRequest request, HttpServletResponse response) {
-
+		String redirect =null;
 		try {
-
 			HttpSession session = request.getSession();
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
@@ -1172,12 +1176,20 @@ public class InfraStructureModController {
 
 			TInstInternetInfo interCon = rest.postForObject(Constants.url + "/saveNewInternetConnectionInfo", internet,
 					TInstInternetInfo.class);
+			
+			redirect = "redirect:/showAllInternetConnectionInfo";
+
+			}else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
+			
 
 		} catch (Exception e) {
 			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:/showAllInternetConnectionInfo";
+		return redirect;
 	}
 
 	@RequestMapping(value = "/editLanConnectionDetails/{connectionId}", method = RequestMethod.GET)
