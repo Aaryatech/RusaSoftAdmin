@@ -180,67 +180,77 @@ public class LibraryController {
 	public String insertLibBasicInfo(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int acadYear = (int) session.getAttribute("acYearId");
+			if (token.trim().equals(key.trim())) {
 
-			LibraryInfo libInfo = new LibraryInfo();
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
 
-			try {
-				libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
-			} catch (Exception e) {
-				libInfo.setLibInfoId(0);
-				System.err.println(e.getMessage());
+				LibraryInfo libInfo = new LibraryInfo();
 
+				try {
+					libInfo.setLibInfoId(Integer.parseInt(request.getParameter("libInfoId")));
+				} catch (Exception e) {
+					libInfo.setLibInfoId(0);
+					System.err.println(e.getMessage());
+
+				}
+				try {
+					libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
+				} catch (Exception e) {
+					libInfo.setIsEresourceRemotly(0);
+					System.err.println(e.getMessage());
+
+				}
+
+				libInfo.setInstituteId(instituteId);
+				libInfo.setIsLibAutomated(0);// Integer.parseInt(request.getParameter("isUsingSoft"))
+				libInfo.setSoftName(XssEscapeUtils.jsoupParse(request.getParameter("swName")));
+				libInfo.setSoftVersion(XssEscapeUtils.jsoupParse(request.getParameter("version")));
+				libInfo.setUsersOfLms(Integer.parseInt(request.getParameter("userLms")));
+				libInfo.setDateOfPurchaseAutomation(request.getParameter("purchaseDate"));
+				libInfo.setNoCompLan(Integer.parseInt(request.getParameter("noOfComp")));
+				libInfo.setBandwidthForAccessingEresources(request.getParameter("bandwidth"));
+
+				libInfo.setAvgTeacher(Float.parseFloat(request.getParameter("avgTeacher")));
+				libInfo.setAvgStudent(Float.parseFloat(request.getParameter("avgStud")));
+
+				libInfo.setAddBy(userId);
+				libInfo.setAddDatetime(curDateTime);
+				libInfo.setEditBy(userId);
+				libInfo.setEditDatetime(curDateTime);
+				libInfo.setIsPlanning(0);
+				libInfo.setDateOfPlanningEstablishment(simpleDate);
+				libInfo.setIsAdministration(0);
+				libInfo.setDateOfAdministrationEstablishment(simpleDate);
+				libInfo.setIsFinanceAcc(0);
+				libInfo.setDateOfFinanceEstablishment(simpleDate);
+				libInfo.setIsStudentAdmition(0);
+				libInfo.setDateOfStudentEstablishment(simpleDate);
+				libInfo.setIsExamination(0);
+				libInfo.setDateOfExaminationEstablishment(simpleDate);
+				libInfo.setAcYearId(acadYear);
+
+				libInfo.setDelStatus(1);
+				libInfo.setExInt1(Integer.parseInt(request.getParameter("noOfBooks")));
+				libInfo.setExVar1(request.getParameter("noOfVolumns"));
+
+				LibraryInfo saveLib = rest.postForObject(Constants.url + "/insertlibBasicInfo", libInfo,
+						LibraryInfo.class);
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1) {
+					redirect = "redirect:/showLibraryBasicInfo";
+				} else {
+					redirect = "redirect:/libraryBasicInfo";
+				}
+
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
 			}
-			try {
-				libInfo.setIsEresourceRemotly(Integer.parseInt(request.getParameter("usingremot")));
-			} catch (Exception e) {
-				libInfo.setIsEresourceRemotly(0);
-				System.err.println(e.getMessage());
-
-			}
-
-			libInfo.setInstituteId(instituteId);
-			libInfo.setIsLibAutomated(0);// Integer.parseInt(request.getParameter("isUsingSoft"))
-			libInfo.setSoftName(XssEscapeUtils.jsoupParse(request.getParameter("swName")));
-			libInfo.setSoftVersion(XssEscapeUtils.jsoupParse(request.getParameter("version")));
-			libInfo.setUsersOfLms(Integer.parseInt(request.getParameter("userLms")));
-			libInfo.setDateOfPurchaseAutomation(request.getParameter("purchaseDate"));
-			libInfo.setNoCompLan(Integer.parseInt(request.getParameter("noOfComp")));
-			libInfo.setBandwidthForAccessingEresources(request.getParameter("bandwidth"));
-
-			libInfo.setAvgTeacher(Float.parseFloat(request.getParameter("avgTeacher")));
-			libInfo.setAvgStudent(Float.parseFloat(request.getParameter("avgStud")));
-
-			libInfo.setAddBy(userId);
-			libInfo.setAddDatetime(curDateTime);
-			libInfo.setEditBy(userId);
-			libInfo.setEditDatetime(curDateTime);
-			libInfo.setIsPlanning(0);
-			libInfo.setDateOfPlanningEstablishment(simpleDate);
-			libInfo.setIsAdministration(0);
-			libInfo.setDateOfAdministrationEstablishment(simpleDate);
-			libInfo.setIsFinanceAcc(0);
-			libInfo.setDateOfFinanceEstablishment(simpleDate);
-			libInfo.setIsStudentAdmition(0);
-			libInfo.setDateOfStudentEstablishment(simpleDate);
-			libInfo.setIsExamination(0);
-			libInfo.setDateOfExaminationEstablishment(simpleDate);
-			libInfo.setAcYearId(acadYear);
-
-			libInfo.setDelStatus(1);
-			libInfo.setExInt1(Integer.parseInt(request.getParameter("noOfBooks")));
-			libInfo.setExVar1(request.getParameter("noOfVolumns"));
-
-			LibraryInfo saveLib = rest.postForObject(Constants.url + "/insertlibBasicInfo", libInfo, LibraryInfo.class);
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showLibraryBasicInfo";
-			else
-				redirect = "redirect:/libraryBasicInfo";
-
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -470,32 +480,40 @@ public class LibraryController {
 
 		try {
 			HttpSession session = request.getSession();
-			int insId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int acadYear = (int) session.getAttribute("acYearId");
-			RareBook rareBook = new RareBook();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			rareBook.setRareBookInfoId(Integer.parseInt(request.getParameter("bookId")));
-			rareBook.setInstituteId(insId);
-			rareBook.setYearId(acadYear); // Academic Year
-			rareBook.setUserId(userId);
-			rareBook.setRareBookname(XssEscapeUtils.jsoupParse(request.getParameter("bookName")));
-			rareBook.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("authorName")));
-			rareBook.setPublisher(XssEscapeUtils.jsoupParse(request.getParameter("publisher")));
-			rareBook.setBookCopies(Integer.parseInt(request.getParameter("noOfBook")));
-			rareBook.setCostOfBook(Integer.parseInt(request.getParameter("costOfBook")));
-			rareBook.setPublicationYear(request.getParameter("year"));
-			rareBook.setDelStatus(1);
-			rareBook.setExInt1(0);
+			if (token.trim().equals(key.trim())) {
 
-			RareBook saveBook = rest.postForObject(Constants.url + "/saveRareBook", rareBook, RareBook.class);
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1) {
-				redirect = "redirect:/showRareBookInfo";
+				int insId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				RareBook rareBook = new RareBook();
+
+				rareBook.setRareBookInfoId(Integer.parseInt(request.getParameter("bookId")));
+				rareBook.setInstituteId(insId);
+				rareBook.setYearId(acadYear); // Academic Year
+				rareBook.setUserId(userId);
+				rareBook.setRareBookname(XssEscapeUtils.jsoupParse(request.getParameter("bookName")));
+				rareBook.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("authorName")));
+				rareBook.setPublisher(XssEscapeUtils.jsoupParse(request.getParameter("publisher")));
+				rareBook.setBookCopies(Integer.parseInt(request.getParameter("noOfBook")));
+				rareBook.setCostOfBook(Integer.parseInt(request.getParameter("costOfBook")));
+				rareBook.setPublicationYear(request.getParameter("year"));
+				rareBook.setDelStatus(1);
+				rareBook.setExInt1(0);
+
+				RareBook saveBook = rest.postForObject(Constants.url + "/saveRareBook", rareBook, RareBook.class);
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1) {
+					redirect = "redirect:/showRareBookInfo";
+				} else {
+					redirect = "redirect:/rareBookInformation";
+				}
 			} else {
-				redirect = "redirect:/rareBookInformation";
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
 			}
-
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -732,41 +750,53 @@ public class LibraryController {
 	@RequestMapping(value = "/insertLibBook", method = RequestMethod.POST)
 	public String insertLibBook(HttpServletRequest request, HttpServletResponse response) {
 
-		// try {
-		int id = 0;
+		try {
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-		HttpSession session = request.getSession();
-		int insId = (int) session.getAttribute("instituteId");
-		int userId = (int) session.getAttribute("userId");
-		int acadYear = (int) session.getAttribute("acYearId");
-		id = Integer.parseInt(request.getParameter("bookId"));
-		LibBookPurchase lib = new LibBookPurchase();
+			if (token.trim().equals(key.trim())) {
+				int id = 0;
 
-		lib.setBookPurchaseId(id);
-		lib.setInstituteId(insId);
-		lib.setAcademicYrid(acadYear);
-		lib.setUserId(userId);
+				int insId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int acadYear = (int) session.getAttribute("acYearId");
+				id = Integer.parseInt(request.getParameter("bookId"));
+				LibBookPurchase lib = new LibBookPurchase();
 
-		lib.setNoOfBooks(Integer.parseInt(request.getParameter("noOfBookPrchs")));
-		lib.setCostOfBooks(Integer.parseInt(request.getParameter("costOfBook")));
+				lib.setBookPurchaseId(id);
+				lib.setInstituteId(insId);
+				lib.setAcademicYrid(acadYear);
+				lib.setUserId(userId);
 
-		lib.setNoOfJournal(Integer.parseInt(request.getParameter("noOfJournal")));
-		lib.setCostOfJournal(Integer.parseInt(request.getParameter("costOfJournal")));
+				lib.setNoOfBooks(Integer.parseInt(request.getParameter("noOfBookPrchs")));
+				lib.setCostOfBooks(Integer.parseInt(request.getParameter("costOfBook")));
 
-		lib.setNoOfEjournal(Integer.parseInt(request.getParameter("noOfEJournal")));
-		lib.setCostOfEjournal(Integer.parseInt(request.getParameter("costOfEJournal")));
+				lib.setNoOfJournal(Integer.parseInt(request.getParameter("noOfJournal")));
+				lib.setCostOfJournal(Integer.parseInt(request.getParameter("costOfJournal")));
 
-		lib.setDelStatus(1);
-		lib.setExVar1("NA");
-		lib.setExInt1(0);
-		// System.out.println(lib.toString());
+				lib.setNoOfEjournal(Integer.parseInt(request.getParameter("noOfEJournal")));
+				lib.setCostOfEjournal(Integer.parseInt(request.getParameter("costOfEJournal")));
 
-		LibBookPurchase libBook = rest.postForObject(Constants.url + "/newLibBookPurchase", lib, LibBookPurchase.class);
+				lib.setDelStatus(1);
+				lib.setExVar1("NA");
+				lib.setExInt1(0);
+				// System.out.println(lib.toString());
 
-		/*
-		 * }catch(Exception e){ e.printStackTrace(); //System.out.println(); }
-		 */
-		return "redirect:/showlibBookPurchased";
+				LibBookPurchase libBook = rest.postForObject(Constants.url + "/newLibBookPurchase", lib,
+						LibBookPurchase.class);
+
+				redirect = "redirect:/showlibBookPurchased";
+
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return redirect;
 	}
 
 	@RequestMapping(value = "/editLibBook/{bookId}", method = RequestMethod.GET)

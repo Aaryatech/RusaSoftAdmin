@@ -38,7 +38,7 @@
 					<section class="box ">
 
 						<header class="panel_header">
-							<h2 class="title pull-left">${title} ${addAccess}</h2>
+							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
 									<a href="${pageContext.request.contextPath}/libraryBasicInfo"><button
