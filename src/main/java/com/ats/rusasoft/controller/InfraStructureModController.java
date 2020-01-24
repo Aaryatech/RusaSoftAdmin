@@ -88,18 +88,18 @@ public class InfraStructureModController {
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
-				//map.add("yearId", session.getAttribute("acYearId"));
+				// map.add("yearId", session.getAttribute("acYearId"));
 
 				InfraAreaType[] areaTypeArray = restTemplate.getForObject(Constants.url + "getInfraAreaTypeList",
 						InfraAreaType[].class);
-				
+
 				List<InfraAreaType> areaTypeList = new ArrayList<>(Arrays.asList(areaTypeArray));
-				
+
 				model.addObject("areaTypeList", areaTypeList);
 
-				GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url + "getInstInfraAreaInfoByInstId", map,
-						GetInstInfraAreaInfo[].class);
-				
+				GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(
+						Constants.url + "getInstInfraAreaInfoByInstId", map, GetInstInfraAreaInfo[].class);
+
 				List<GetInstInfraAreaInfo> instInfraAreaList = new ArrayList<>(Arrays.asList(resArray));
 
 				model.addObject("instInfraAreaList", instInfraAreaList);
@@ -120,9 +120,7 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/showAddInstInfraAreawise", method = RequestMethod.GET)
 	public ModelAndView showAddInstInfraAreawise(HttpServletRequest request, HttpServletResponse response) {
 
@@ -142,7 +140,6 @@ public class InfraStructureModController {
 			Info addAccess = AccessControll.checkAccess("showAddInstInfraAreawise", "showInstInfraAreawise", "0", "1",
 					"0", "0", newModuleList);
 
-
 			if (addAccess.isError() == false) {
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -150,18 +147,20 @@ public class InfraStructureModController {
 
 				InfraAreaType[] areaTypeArray = restTemplate.getForObject(Constants.url + "getInfraAreaTypeList",
 						InfraAreaType[].class);
-				
+
 				List<InfraAreaType> areaTypeList = new ArrayList<>(Arrays.asList(areaTypeArray));
-				
+
 				model.addObject("areaTypeList", areaTypeList);
 
-				/*GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url + "getInstInfraAreaInfoByInstId", map,
-						GetInstInfraAreaInfo[].class);
-				
-				List<GetInstInfraAreaInfo> instInfraAreaList = new ArrayList<>(Arrays.asList(resArray));
-
-				model.addObject("instInfraAreaList", instInfraAreaList);
-*/
+				/*
+				 * GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url +
+				 * "getInstInfraAreaInfoByInstId", map, GetInstInfraAreaInfo[].class);
+				 * 
+				 * List<GetInstInfraAreaInfo> instInfraAreaList = new
+				 * ArrayList<>(Arrays.asList(resArray));
+				 * 
+				 * model.addObject("instInfraAreaList", instInfraAreaList);
+				 */
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -189,13 +188,13 @@ public class InfraStructureModController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			RestTemplate restTemplate = new RestTemplate();
-			
+
 			map.add("infraAreaTypeId", request.getParameter("infraAreaTypeId"));
 
 			InfraAreaName[] resArray = restTemplate
 					.postForObject(Constants.url + "getInfraAreaNameListByInfraAreaTypeId", map, InfraAreaName[].class);
 			areaList = new ArrayList<>(Arrays.asList(resArray));
-			
+
 		} catch (Exception e) {
 			System.err.println("Excep in /getInfraAreaNameListByInfraAreaTypeId " + e.getMessage());
 			e.printStackTrace();
@@ -204,50 +203,54 @@ public class InfraStructureModController {
 		return areaList;
 
 	}
-	
-	//insertInstInfraArea
-	
+
+	// insertInstInfraArea
+
 	@RequestMapping(value = "/insertInstInfraArea", method = RequestMethod.POST)
 	public String insertInstInfraArea(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertInstInfraArea");
 		ModelAndView model = null;
 		String redirect = null;
 		try {
-
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int instInfraAreaId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				instInfraAreaId = Integer.parseInt(request.getParameter("instInfraAreaId"));
-
-			} catch (Exception e) {
-				instInfraAreaId = 0;
-			}
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info editAccess = null;
-			if (instInfraAreaId == 0) {
+				RestTemplate restTemplate = new RestTemplate();
 
-				editAccess = AccessControll.checkAccess("insertInstInfraArea", "showInstInfraAreawise", "0", "1", "0", "0",
-						newModuleList);
-			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-				editAccess = AccessControll.checkAccess("insertInstInfraArea", "showInstInfraAreawise", "0", "0", "1", "0",
-						newModuleList);
-			}
+				int instInfraAreaId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				try {
+					instInfraAreaId = Integer.parseInt(request.getParameter("instInfraAreaId"));
 
-			System.err.println("instInfraAreaId  " + instInfraAreaId);
+				} catch (Exception e) {
+					instInfraAreaId = 0;
+				}
 
-			// editAccess.setError(false);
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			if (editAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Info editAccess = null;
+				if (instInfraAreaId == 0) {
+
+					editAccess = AccessControll.checkAccess("insertInstInfraArea", "showInstInfraAreawise", "0", "1",
+							"0", "0", newModuleList);
+				} else {
+
+					editAccess = AccessControll.checkAccess("insertInstInfraArea", "showInstInfraAreawise", "0", "0",
+							"1", "0", newModuleList);
+				}
+
+				System.err.println("instInfraAreaId  " + instInfraAreaId);
+
+				// editAccess.setError(false);
+
+				if (editAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 					InstInfraAreaInfo instInfraAreaInfo = new InstInfraAreaInfo();
 
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -268,30 +271,33 @@ public class InfraStructureModController {
 					instInfraAreaInfo.setMakerUserId(userObj.getUserId());// get from Session
 					instInfraAreaInfo.setMakerDatetime(curDateTime);
 					instInfraAreaInfo.setAreaLoc(XssEscapeUtils.jsoupParse(request.getParameter("loc_of_area")));
-					
-					int areaType=Integer.parseInt(request.getParameter("area_type")); 
-					int areaName=Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("area_name"))); 
-					
-					if(areaName==0) {
+
+					int areaType = Integer.parseInt(request.getParameter("area_type"));
+					int areaName = Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("area_name")));
+
+					if (areaName == 0) {
 						instInfraAreaInfo.setAreaName(XssEscapeUtils.jsoupParse(request.getParameter("other_area")));
-					}else {
+					} else {
 						instInfraAreaInfo.setAreaName(null);
 					}
-					
+
 					instInfraAreaInfo.setAreaSqMtr(request.getParameter("area_in_sqm"));
 					instInfraAreaInfo.setInfraAreaId(areaName);
 					instInfraAreaInfo.setInfraAreaTypeId(areaType);
 					instInfraAreaInfo.setInstInfraAreaId(instInfraAreaId);
-					
-					InstInfraAreaInfo instInfraAreawise = restTemplate.postForObject(Constants.url + "saveInstInfraAreaInfo", instInfraAreaInfo,
-							InstInfraAreaInfo.class);
-				
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showInstInfraAreawise";
-				else
-					redirect = "redirect:/showInstInfraAreawise";
+					InstInfraAreaInfo instInfraAreawise = restTemplate.postForObject(
+							Constants.url + "saveInstInfraAreaInfo", instInfraAreaInfo, InstInfraAreaInfo.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showInstInfraAreawise";
+					else
+						redirect = "redirect:/showInstInfraAreawise";
+				}
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
 			}
 
 		} catch (Exception e) {
@@ -299,16 +305,15 @@ public class InfraStructureModController {
 			e.printStackTrace();
 		}
 
-		return redirect;// "redirect:/showDeptList";
+		return redirect;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/findByDelStatusAndIsActiveAndInstIdAndInfraAreaId", method = RequestMethod.GET)
 	public @ResponseBody InstInfraAreaInfo findByDelStatusAndIsActiveAndInstIdAndInfraAreaId(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		InstInfraAreaInfo resArray=new InstInfraAreaInfo();
+		InstInfraAreaInfo resArray = new InstInfraAreaInfo();
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
@@ -318,10 +323,10 @@ public class InfraStructureModController {
 
 			map.add("areaId", request.getParameter("areaId"));
 			map.add("instId", userObj.getGetData().getUserInstituteId());
-			
-			 resArray = restTemplate
-					.postForObject(Constants.url + "findByDelStatusAndIsActiveAndInstIdAndInfraAreaId", map, InstInfraAreaInfo.class);
-			
+
+			resArray = restTemplate.postForObject(Constants.url + "findByDelStatusAndIsActiveAndInstIdAndInfraAreaId",
+					map, InstInfraAreaInfo.class);
+
 		} catch (Exception e) {
 			System.err.println("Excep in /getInfraAreaNameListByInfraAreaTypeId " + e.getMessage());
 			e.printStackTrace();
@@ -330,8 +335,7 @@ public class InfraStructureModController {
 		return resArray;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showEditInstInfraArea", method = RequestMethod.POST)
 	public ModelAndView showEditInstInfraArea(HttpServletRequest request, HttpServletResponse response) {
 
@@ -351,7 +355,7 @@ public class InfraStructureModController {
 			Info editAccess = AccessControll.checkAccess("showEditInstInfraArea", "showInstInfraAreawise", "0", "0",
 					"1", "0", newModuleList);
 
-			InstInfraAreaInfo editArea=new InstInfraAreaInfo();
+			InstInfraAreaInfo editArea = new InstInfraAreaInfo();
 
 			if (editAccess.isError() == false) {
 
@@ -360,32 +364,35 @@ public class InfraStructureModController {
 
 				InfraAreaType[] areaTypeArray = restTemplate.getForObject(Constants.url + "getInfraAreaTypeList",
 						InfraAreaType[].class);
-				
+
 				List<InfraAreaType> areaTypeList = new ArrayList<>(Arrays.asList(areaTypeArray));
-				
+
 				model.addObject("areaTypeList", areaTypeList);
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
-				
-				int instInfraAreaId=Integer.parseInt(request.getParameter("instInfraAreaId"));
-				System.err.println("Area Id " +instInfraAreaId);
-				
+
+				int instInfraAreaId = Integer.parseInt(request.getParameter("instInfraAreaId"));
+				System.err.println("Area Id " + instInfraAreaId);
+
 				map.add("instInfraAreaId", instInfraAreaId);
 				map.add("instId", userObj.getGetData().getUserInstituteId());
-				
-				 editArea = restTemplate
-						.postForObject(Constants.url + "findByDelStatusAndIsActiveAndInstIdAndInstInfraAreaId", map, InstInfraAreaInfo.class);
-				
-				 model.addObject("editArea", editArea);
-				 System.err.println("editArea" +editArea.toString());
-				 
-				/*GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url + "getInstInfraAreaInfoByInstId", map,
-						GetInstInfraAreaInfo[].class);
-				
-				List<GetInstInfraAreaInfo> instInfraAreaList = new ArrayList<>(Arrays.asList(resArray));
 
-				model.addObject("instInfraAreaList", instInfraAreaList);
-*/
+				editArea = restTemplate.postForObject(
+						Constants.url + "findByDelStatusAndIsActiveAndInstIdAndInstInfraAreaId", map,
+						InstInfraAreaInfo.class);
+
+				model.addObject("editArea", editArea);
+				System.err.println("editArea" + editArea.toString());
+
+				/*
+				 * GetInstInfraAreaInfo[] resArray = restTemplate.postForObject(Constants.url +
+				 * "getInstInfraAreaInfoByInstId", map, GetInstInfraAreaInfo[].class);
+				 * 
+				 * List<GetInstInfraAreaInfo> instInfraAreaList = new
+				 * ArrayList<>(Arrays.asList(resArray));
+				 * 
+				 * model.addObject("instInfraAreaList", instInfraAreaList);
+				 */
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -402,12 +409,12 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
-	//deleteInfraArea
-	
-	
+
+	// deleteInfraArea
+
 	@RequestMapping(value = "/deleteInfraArea/{instInfraAreaId}", method = RequestMethod.GET)
-	public String deleteaccOff(HttpServletRequest request, HttpServletResponse response, @PathVariable int instInfraAreaId) {
+	public String deleteaccOff(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int instInfraAreaId) {
 		String redirect = null;
 		try {
 
@@ -417,8 +424,8 @@ public class InfraStructureModController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("deleteInfraArea", "showInstInfraAreawise", "0", "0", "0", "1",
-					newModuleList);
+			Info deleteAccess = AccessControll.checkAccess("deleteInfraArea", "showInstInfraAreawise", "0", "0", "0",
+					"1", newModuleList);
 			if (deleteAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
@@ -426,7 +433,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("accOffIds");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -459,15 +466,16 @@ public class InfraStructureModController {
 		return redirect;
 
 	}
-	
 
-	/********************************** Infrastructure *******************************************/
+	/**********************************
+	 * Infrastructure
+	 *******************************************/
 	RestTemplate rest = new RestTemplate();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 
 	String curDateTime = dateFormat.format(cal.getTime());
-	
+
 	@RequestMapping(value = "/showInfrastructureForm", method = RequestMethod.GET)
 	public ModelAndView showInfrastructureForm(HttpServletRequest request, HttpServletResponse response) {
 
@@ -489,7 +497,7 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addEContentDev", method = RequestMethod.GET)
 	public ModelAndView addEContentDev(HttpServletRequest request, HttpServletResponse response) {
 
@@ -506,11 +514,10 @@ public class InfraStructureModController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				
-				  
-					model = new ModelAndView("infrastructure/econtentDev");
-					model.addObject("content", eCont);
-					model.addObject("title", "Add E-Content Development");
+
+				model = new ModelAndView("infrastructure/econtentDev");
+				model.addObject("content", eCont);
+				model.addObject("title", "Add E-Content Development");
 			}
 		} catch (Exception e) {
 
@@ -546,14 +553,14 @@ public class InfraStructureModController {
 				int userId = (int) session.getAttribute("userId");
 				int acadYear = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			
+
 				map.add("instituteId", instituteId);
 				map.add("acadYear", acadYear);
 
 				EContentDevFacility[] econtentarr = rest.postForObject(Constants.url + "/showEComtentDevFaclity", map,
 						EContentDevFacility[].class);
 				List<EContentDevFacility> contentList = new ArrayList<>(Arrays.asList(econtentarr));
-				System.err.println("eCont="+contentList);
+				System.err.println("eCont=" + contentList);
 				model.addObject("contentList", contentList);
 				model.addObject("title", "E-Content Development");
 
@@ -565,16 +572,16 @@ public class InfraStructureModController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -590,44 +597,55 @@ public class InfraStructureModController {
 
 	@RequestMapping(value = "/inserteContentFacilities", method = RequestMethod.POST)
 	public String inserteContentFacilities(HttpServletRequest request, HttpServletResponse response) {
-
+		String redirect = null;
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int instituteId = (int) session.getAttribute("instituteId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int userId = (int) session.getAttribute("userId");
+			if (token.trim().equals(key.trim())) {
 
-			EContentDevFacility eCont = new EContentDevFacility();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int instituteId = (int) session.getAttribute("instituteId");
 
-			eCont.setInstEContentDevFacilityId(Integer.parseInt(request.getParameter("econtentId")));
-			eCont.setInstId(instituteId);
-			eCont.seteContentDevFacility(request.getParameter("e_contentType"));
-			eCont.setNameEcontentDevFacility(XssEscapeUtils.jsoupParse(request.getParameter("e_contentName")));
-			eCont.setVideoLink(XssEscapeUtils.jsoupParse(request.getParameter("video_link")));
-			eCont.setDelStatus(1);
-			eCont.setIsActive(1);
-			eCont.setMakerUserId(userId);
-			eCont.setMakerDatetime(curDateTime);
-			eCont.setExInt1(0);
-			eCont.setExInt2(0);
-			eCont.setExInt2(0);
-			eCont.setExVar1(request.getParameter("year"));
-			eCont.setExVar2("NA");
-			////System.out.println(eCont.toString());
-			EContentDevFacility contents = rest.postForObject(Constants.url + "/saveEcontentDevFacilities", eCont,
-					EContentDevFacility.class);
+				int userId = (int) session.getAttribute("userId");
+
+				EContentDevFacility eCont = new EContentDevFacility();
+
+				eCont.setInstEContentDevFacilityId(Integer.parseInt(request.getParameter("econtentId")));
+				eCont.setInstId(instituteId);
+				eCont.seteContentDevFacility(request.getParameter("e_contentType"));
+				eCont.setNameEcontentDevFacility(XssEscapeUtils.jsoupParse(request.getParameter("e_contentName")));
+				eCont.setVideoLink(XssEscapeUtils.jsoupParse(request.getParameter("video_link")));
+				eCont.setDelStatus(1);
+				eCont.setIsActive(1);
+				eCont.setMakerUserId(userId);
+				eCont.setMakerDatetime(curDateTime);
+				eCont.setExInt1(0);
+				eCont.setExInt2(0);
+				eCont.setExInt2(0);
+				eCont.setExVar1(request.getParameter("year"));
+				eCont.setExVar2("NA");
+				//// System.out.println(eCont.toString());
+				EContentDevFacility contents = rest.postForObject(Constants.url + "/saveEcontentDevFacilities", eCont,
+						EContentDevFacility.class);
+				redirect = "redirect:/econtentDevelopment";
+
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 
 		}
 
-		return "redirect:/econtentDevelopment";
+		return redirect;
 
 	}
-	
+
 	@RequestMapping(value = "/editEContent/{contentId}", method = RequestMethod.GET)
 	public ModelAndView editEContent(@PathVariable("contentId") int contentId, HttpServletRequest request) {
 
@@ -647,25 +665,26 @@ public class InfraStructureModController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				
+
 				map.add("contentId", contentId);
 				model = new ModelAndView("infrastructure/econtentDev");
 				model.addObject("title", "Edit E-Content Development");
-				EContentDevFacility  econtDev = rest.postForObject(Constants.url+"/getEContentDevFecilityById", map, EContentDevFacility.class);
+				EContentDevFacility econtDev = rest.postForObject(Constants.url + "/getEContentDevFecilityById", map,
+						EContentDevFacility.class);
 				model.addObject("content", econtDev);
 			}
-		}catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/deleteEContent/{contentId}", method = RequestMethod.GET)
 	public String deleteEContent(@PathVariable("contentId") int contentId, HttpServletRequest request,
 			HttpServletResponse response) {
 		String a = null;
 		try {
-			
+
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -684,8 +703,9 @@ public class InfraStructureModController {
 				map = new LinkedMultiValueMap<>();
 				map.add("contentId", contentId);
 
-				EContentDevFacility delContent = rest.postForObject(Constants.url + "/deleteEContentById", map, EContentDevFacility.class);
-				a="redirect:/econtentDevelopment";
+				EContentDevFacility delContent = rest.postForObject(Constants.url + "/deleteEContentById", map,
+						EContentDevFacility.class);
+				a = "redirect:/econtentDevelopment";
 			}
 		} catch (Exception e) {
 
@@ -695,7 +715,7 @@ public class InfraStructureModController {
 		return a;
 
 	}
-	
+
 	@RequestMapping(value = "/delSlectedEContentDevFaclities/{econtent}", method = RequestMethod.GET)
 	public String delSlectedPurchasedLibBooks(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int econtent) {
@@ -703,8 +723,8 @@ public class InfraStructureModController {
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedEContentDevFaclities/{contentId}", "econtentDevelopment", "0", "0", "0",
-				"1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedEContentDevFaclities/{contentId}", "econtentDevelopment", "0",
+				"0", "0", "1", newModuleList);
 
 		try {
 			if (view.isError() == true) {
@@ -720,7 +740,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] contentIds = request.getParameterValues("econtent");
-					//System.out.println("id are" + contentIds);
+					// System.out.println("id are" + contentIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -750,10 +770,11 @@ public class InfraStructureModController {
 		return a;
 
 	}
-	
-	
-/***********************************It Infrastructure************************************/
-	
+
+	/***********************************
+	 * It Infrastructure
+	 ************************************/
+
 	@RequestMapping(value = "/showItInfrastructure", method = RequestMethod.GET)
 	public ModelAndView showItInfrastructure(HttpServletRequest request, HttpServletResponse response) {
 
@@ -776,35 +797,35 @@ public class InfraStructureModController {
 				int userId = (int) session.getAttribute("userId");
 				int acadYear = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			
+
 				map.add("instituteId", instituteId);
-				//map.add("acadYear", acadYear);
+				// map.add("acadYear", acadYear);
 
 				ItInfrastructure[] infraStructarr = rest.postForObject(Constants.url + "/showAllItInfrastructure", map,
 						ItInfrastructure[].class);
 				List<ItInfrastructure> infraList = new ArrayList<>(Arrays.asList(infraStructarr));
-				System.err.println("It="+infraList);
+				System.err.println("It=" + infraList);
 				model.addObject("infraList", infraList);
 				model.addObject("title", "It Infrastructure");
 
-				Info add = AccessControll.checkAccess("showItInfrastructure", "showItInfrastructure", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showItInfrastructure", "showItInfrastructure", "0", "0", "1", "0",
-						newModuleList);
+				Info add = AccessControll.checkAccess("showItInfrastructure", "showItInfrastructure", "0", "1", "0",
+						"0", newModuleList);
+				Info edit = AccessControll.checkAccess("showItInfrastructure", "showItInfrastructure", "0", "0", "1",
+						"0", newModuleList);
 				Info delete = AccessControll.checkAccess("showItInfrastructure", "showItInfrastructure", "0", "0", "0",
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -817,7 +838,7 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addItInfrstructureInfo", method = RequestMethod.GET)
 	public ModelAndView addItInfrstructureInfo(HttpServletRequest request, HttpServletResponse response) {
 
@@ -834,11 +855,10 @@ public class InfraStructureModController {
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				
-				  
-					model = new ModelAndView("infrastructure/itInfrastructure");
-					model.addObject("itInfra", itInfra);
-					model.addObject("title", "Add It Infrastructure");
+
+				model = new ModelAndView("infrastructure/itInfrastructure");
+				model.addObject("itInfra", itInfra);
+				model.addObject("title", "Add It Infrastructure");
 			}
 		} catch (Exception e) {
 
@@ -851,7 +871,7 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/inserteItInfrastructure", method = RequestMethod.POST)
 	public String inserteItInfrastructure(HttpServletRequest request, HttpServletResponse response) {
 
@@ -861,9 +881,9 @@ public class InfraStructureModController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
-			
+
 			ItInfrastructure infrastur = new ItInfrastructure();
-			
+
 			infrastur.setInstItInfraInfoId(Integer.parseInt(request.getParameter("infraId")));
 			infrastur.setInstId(instituteId);
 			infrastur.setNoOfComputers(Integer.parseInt(request.getParameter("no_comp")));
@@ -878,25 +898,25 @@ public class InfraStructureModController {
 			infrastur.setExInt2(0);
 			infrastur.setExVar1("NA");
 			infrastur.setExVar2("NA");
-			//System.out.println(infrastur.toString());
-			
-			ItInfrastructure infra =  rest.postForObject(Constants.url+"/saveItInfrastructureInfo", infrastur,ItInfrastructure.class);
-			
-		}catch(Exception e) {
-			
+			// System.out.println(infrastur.toString());
+
+			ItInfrastructure infra = rest.postForObject(Constants.url + "/saveItInfrastructureInfo", infrastur,
+					ItInfrastructure.class);
+
+		} catch (Exception e) {
+
 		}
 		return "redirect:/showItInfrastructure";
 	}
-		
-	
+
 	@RequestMapping(value = "/editItInfrastructInfo/{infraId}", method = RequestMethod.GET)
-	public ModelAndView editItInfrastructInfo(HttpServletRequest request,
-	HttpServletResponse response,@PathVariable int infraId) {
+	public ModelAndView editItInfrastructInfo(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int infraId) {
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-	
+
 		try {
 			Info view = AccessControll.checkAccess("addItInfrstructureInfo", "showItInfrastructure", "0", "1", "0", "0",
 					newModuleList);
@@ -908,12 +928,13 @@ public class InfraStructureModController {
 			} else {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("infraId", infraId);
-				  
-					model = new ModelAndView("infrastructure/itInfrastructure");
-					ItInfrastructure itInfra = rest.postForObject(Constants.url+"/getItInfraStructureById", map,ItInfrastructure.class);
-					model.addObject("itInfra", itInfra);
-					
-					model.addObject("title", "Edit It Infrastructure");
+
+				model = new ModelAndView("infrastructure/itInfrastructure");
+				ItInfrastructure itInfra = rest.postForObject(Constants.url + "/getItInfraStructureById", map,
+						ItInfrastructure.class);
+				model.addObject("itInfra", itInfra);
+
+				model.addObject("title", "Edit It Infrastructure");
 			}
 		} catch (Exception e) {
 
@@ -927,33 +948,32 @@ public class InfraStructureModController {
 
 	}
 
-	
 	@RequestMapping(value = "/deleteItInfrastructInfo/{infraId}", method = RequestMethod.GET)
 	public String deleteItInfrastructInfo(@PathVariable("infraId") int infraId, HttpServletRequest request) {
 		String value = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("deleteItInfrastructInfo/{infraId}", "showItInfrastructure", "0", "0", "0", "1",
-				newModuleList);
+		Info view = AccessControll.checkAccess("deleteItInfrastructInfo/{infraId}", "showItInfrastructure", "0", "0",
+				"0", "1", newModuleList);
 		if (view.isError() == true) {
 
 			value = "redirect:/accessDenied";
 
 		} else {
-			
-			//System.out.println("Id:" + infraId);
+
+			// System.out.println("Id:" + infraId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("infraId", infraId);
 			Info itInfra = rest.postForObject(Constants.url + "/deletetInfraById", map, Info.class);
-			
+
 			value = "redirect:/showItInfrastructure";
-			
+
 		}
 		return value;
 
 	}
-	
+
 	@RequestMapping(value = "/delSlectedItInfrastructureInfo/{infraId}", method = RequestMethod.GET)
 	public String delSlectedItInfrastructureInfo(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int infraId) {
@@ -979,7 +999,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] infraIds = request.getParameterValues("itInfraId");
-					//System.out.println("id are" + infraIds);
+					// System.out.println("id are" + infraIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1013,7 +1033,9 @@ public class InfraStructureModController {
 		return a;
 	}
 
-/**************************************Internet Connection**********************************/
+	/**************************************
+	 * Internet Connection
+	 **********************************/
 	@RequestMapping(value = "/showAllInternetConnectionInfo", method = RequestMethod.GET)
 	public ModelAndView showAllInternetConnectionInfo(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1023,8 +1045,8 @@ public class InfraStructureModController {
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "1", "0", "0", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo",
+					"1", "0", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1036,36 +1058,36 @@ public class InfraStructureModController {
 				int userId = (int) session.getAttribute("userId");
 				int acadYear = (int) session.getAttribute("acYearId");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			
-				map.add("instituteId", instituteId);
-				//map.add("acadYear", acadYear);
 
-				
-				TInstInternetInfo[] interConnectnarr = rest.postForObject(Constants.url +"/showAllInternetConnection", map, TInstInternetInfo[].class);
-				  List<TInstInternetInfo> connList = new ArrayList<>(Arrays.asList(interConnectnarr));
-				  System.err.println("It="+connList);
-				  model.addObject("connList", connList);
-				 
+				map.add("instituteId", instituteId);
+				// map.add("acadYear", acadYear);
+
+				TInstInternetInfo[] interConnectnarr = rest.postForObject(Constants.url + "/showAllInternetConnection",
+						map, TInstInternetInfo[].class);
+				List<TInstInternetInfo> connList = new ArrayList<>(Arrays.asList(interConnectnarr));
+				System.err.println("It=" + connList);
+				model.addObject("connList", connList);
+
 				model.addObject("title", "Internet Connection");
 
-				Info add = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "0", "1", "0",
-						newModuleList);
-				Info delete = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo", "0", "0", "0",
-						"1", newModuleList);
+				Info add = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo",
+						"0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showAllInternetConnectionInfo", "showAllInternetConnectionInfo",
+						"0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showAllInternetConnectionInfo",
+						"showAllInternetConnectionInfo", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1078,7 +1100,7 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addInternetConnectnInfo", method = RequestMethod.GET)
 	public ModelAndView addInternetConnectnInfo(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1087,19 +1109,18 @@ public class InfraStructureModController {
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		TInstInternetInfo interConnec = new TInstInternetInfo();
 		try {
-			Info view = AccessControll.checkAccess("addInternetConnectnInfo", "showAllInternetConnectionInfo", "0", "1", "0", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("addInternetConnectnInfo", "showAllInternetConnectionInfo", "0", "1",
+					"0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				
-				  
-					model = new ModelAndView("infrastructure/internetConnectn");
-					model.addObject("interConnec", interConnec);
-					model.addObject("title", "Add Internet Connection");
+
+				model = new ModelAndView("infrastructure/internetConnectn");
+				model.addObject("interConnec", interConnec);
+				model.addObject("title", "Add Internet Connection");
 			}
 		} catch (Exception e) {
 
@@ -1112,7 +1133,7 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/inserteInternetConnecInfo", method = RequestMethod.POST)
 	public String inserteInternetConnecInfo(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1122,9 +1143,9 @@ public class InfraStructureModController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int instituteId = (int) session.getAttribute("instituteId");
 			int userId = (int) session.getAttribute("userId");
-			
+
 			TInstInternetInfo internet = new TInstInternetInfo();
-			
+
 			internet.setInstInternetInfoId(Integer.parseInt(request.getParameter("internetId")));
 			internet.setInstId(instituteId);
 			internet.setNoOfCompWithInternetAccess(Integer.parseInt(request.getParameter("internet_access")));
@@ -1140,27 +1161,28 @@ public class InfraStructureModController {
 			internet.setExInt2(0);
 			internet.setExVar1("NA");
 			internet.setExVar2("NA");
-			
-			TInstInternetInfo interCon = rest.postForObject(Constants.url+"/saveNewInternetConnectionInfo", internet, TInstInternetInfo.class);
-			
-			
-		}catch(Exception e) {
-			//System.out.println(e.getMessage());
+
+			TInstInternetInfo interCon = rest.postForObject(Constants.url + "/saveNewInternetConnectionInfo", internet,
+					TInstInternetInfo.class);
+
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showAllInternetConnectionInfo";
-	}	
-	
+	}
+
 	@RequestMapping(value = "/editLanConnectionDetails/{connectionId}", method = RequestMethod.GET)
-	public ModelAndView editLanConnectionDetails(HttpServletRequest request, HttpServletResponse response, @PathVariable int connectionId) {
+	public ModelAndView editLanConnectionDetails(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int connectionId) {
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		
+
 		try {
-			Info view = AccessControll.checkAccess("editLanConnectionDetails/{connectionId}", "showAllInternetConnectionInfo", "0", "1", "0", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editLanConnectionDetails/{connectionId}",
+					"showAllInternetConnectionInfo", "0", "1", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1168,13 +1190,14 @@ public class InfraStructureModController {
 
 			} else {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				
+
 				map.add("connectionId", connectionId);
-				TInstInternetInfo interConnec = rest.postForObject(Constants.url+"/getConnectionInfoById", map, TInstInternetInfo.class);  
-				  
-					model = new ModelAndView("infrastructure/internetConnectn");
-					model.addObject("interConnec", interConnec);
-					model.addObject("title", "Edit Internet Connection");
+				TInstInternetInfo interConnec = rest.postForObject(Constants.url + "/getConnectionInfoById", map,
+						TInstInternetInfo.class);
+
+				model = new ModelAndView("infrastructure/internetConnectn");
+				model.addObject("interConnec", interConnec);
+				model.addObject("title", "Edit Internet Connection");
 			}
 		} catch (Exception e) {
 
@@ -1187,33 +1210,34 @@ public class InfraStructureModController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteLanConnectionDetails/{connectionId}", method = RequestMethod.GET)
-	public String deleteLanConnectionDetails(@PathVariable("connectionId") int connectionId, HttpServletRequest request) {
+	public String deleteLanConnectionDetails(@PathVariable("connectionId") int connectionId,
+			HttpServletRequest request) {
 		String value = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("deleteLanConnectionDetails/{connectionId}", "showAllInternetConnectionInfo", "0", "0", "0", "1",
-				newModuleList);
+		Info view = AccessControll.checkAccess("deleteLanConnectionDetails/{connectionId}",
+				"showAllInternetConnectionInfo", "0", "0", "0", "1", newModuleList);
 		if (view.isError() == true) {
 
 			value = "redirect:/accessDenied";
 
 		} else {
-			
-			//System.out.println("Id:" + connectionId);
+
+			// System.out.println("Id:" + connectionId);
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("connectionId", connectionId);
 			Info itInfra = rest.postForObject(Constants.url + "/deletetLanConectionById", map, Info.class);
-			
+
 			value = "redirect:/showAllInternetConnectionInfo";
-			
+
 		}
 		return value;
 
 	}
-	
+
 	@RequestMapping(value = "/delSlectedLanCompInfo/{lanInfoId}", method = RequestMethod.GET)
 	public String delSlectedLanCompInfo(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int lanInfoId) {
@@ -1222,8 +1246,8 @@ public class InfraStructureModController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedItInfrastructureInfo/{infraId}", "showAllInternetConnectionInfo",
-				"0", "0", "0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedItInfrastructureInfo/{infraId}",
+				"showAllInternetConnectionInfo", "0", "0", "0", "1", newModuleList);
 
 		try {
 			if (view.isError() == true) {
@@ -1239,7 +1263,7 @@ public class InfraStructureModController {
 
 					System.err.println("Multiple records delete ");
 					String[] lanInfoIds = request.getParameterValues("lanInfoId");
-					//System.out.println("id are" + lanInfoIds);
+					// System.out.println("id are" + lanInfoIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1272,6 +1296,5 @@ public class InfraStructureModController {
 		}
 		return a;
 	}
-
 
 }
