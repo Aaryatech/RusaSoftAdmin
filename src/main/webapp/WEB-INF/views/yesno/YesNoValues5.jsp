@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ 
+ <%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 
 
 
@@ -79,16 +84,21 @@ table, th, td {
 						</header>
 
 						<c:if test="${sessionScope.successMsg!=null}">
-           						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" onclick="removSess()" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong>Record Update Successfully.</div>
-        	                     </div> 
-        	                     <%session=request.getSession();
-        	                    
-        	                     session.removeAttribute("successMsg");
-        	                     %>
-            			</c:if>
+							<div class="col-lg-12">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										onclick="removSess()" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong>Record Update Successfully.
+								</div>
+							</div>
+							<%
+								session = request.getSession();
+
+									session.removeAttribute("successMsg");
+							%>
+						</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -97,6 +107,18 @@ table, th, td {
 										action="${pageContext.request.contextPath}/submitYesNoPageFifth"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
+ 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 										<!-- <ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -324,8 +346,7 @@ table, th, td {
 											</table>
 										</div>
 
-										<input type="hidden" id="srindex" name="srindex"
-											value="0">
+										<input type="hidden" id="srindex" name="srindex" value="0">
 										<!-- </div>
 
 
@@ -333,11 +354,14 @@ table, th, td {
 										<br>
 										<div class="form-group">
 											<div class="col-sm-offset-2 col-sm-10">
-<!-- 												<input type="submit" class="btn btn-primary" value="Submit">
- -->												<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
- 
- <button type="submit" id="sub_button" class="btn btn-primary"
-													><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+												<!-- 												<input type="submit" class="btn btn-primary" value="Submit">
+ -->
+												<!-- 	<button type="reset" class="btn btn-default">Reset</button> -->
+
+												<button type="submit" id="sub_button"
+													class="btn btn-primary">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
 											</div>
 										</div>
 									</form>

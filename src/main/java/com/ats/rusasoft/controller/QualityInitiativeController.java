@@ -163,10 +163,9 @@ public class QualityInitiativeController {
 				QualityInitiative qualInRes = rest.postForObject(Constants.url + "saveQualityInitiative", qualInit,
 						QualityInitiative.class);
 
-				if(qualInRes!=null) {
+				if (qualInRes != null) {
 					session.setAttribute("msg", Constants.sucess_msg);
-				}
-				else {
+				} else {
 					session.setAttribute("msg", Constants.fail_msg);
 				}
 				int isView = Integer.parseInt(request.getParameter("is_view"));
@@ -228,7 +227,7 @@ public class QualityInitiativeController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("accOffIds");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -340,42 +339,41 @@ public class QualityInitiativeController {
 			model.addObject("title", "Add Institute Internal Quality Initiatives");
 			InstituteQuality editQuality = new InstituteQuality();
 			model.addObject("editQuality", editQuality);
-			
+
 			QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",
 					QualityInitiative[].class);
 			List<QualityInitiative> qualInintList = new ArrayList<>(Arrays.asList(instArray));
-			
+
 			model.addObject("qualInintList", qualInintList);
-			
-			
+
 			map = new LinkedMultiValueMap<String, Object>();
 
 			map.add("key", "QUALITYIDS");
-			SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+			SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue", map,
 					SettingKeyValue.class);
-			System.err.println("settingValues " +settingValues.toString());
-			
+			System.err.println("settingValues " + settingValues.toString());
+
 			List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
-			.collect(Collectors.toList());
+					.collect(Collectors.toList());
 			model.addObject("settingList", settingList);
-			
+
 			map = new LinkedMultiValueMap<String, Object>();
-			
+
 			map.add("key", "NAACCYCLE");
-			SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+			SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue", map,
 					SettingKeyValue.class);
-			//System.err.println("CycleValues " +score.toString());
-			
+			// System.err.println("CycleValues " +score.toString());
+
 			model.addObject("cycleUpto", score.getIntValue());
-			
+
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("key", "AutoValidity");
-			SettingKeyValue validityValue = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+			SettingKeyValue validityValue = rest.postForObject(Constants.url + "getSettingKeyValue", map,
 					SettingKeyValue.class);
-			System.err.println("Valid Values " +validityValue.getIntValue());
-			
+			System.err.println("Valid Values " + validityValue.getIntValue());
+
 			model.addObject("validValue", validityValue.getIntValue());
-			
+
 			model.addObject("isEdit", 0);
 
 		} catch (Exception e) {
@@ -398,114 +396,124 @@ public class QualityInitiativeController {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			if (token.trim().equals(key.trim())) {
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				RestTemplate restTemplate = new RestTemplate();
 
-			Info addAccess = AccessControll.checkAccess("insertInstQuaInitiative", "showInternalQualityInitiative", "0",
-					"1", "0", "0", newModuleList);
-			if (addAccess.isError() == true) {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+ 
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info addAccess = AccessControll.checkAccess("insertInstQuaInitiative", "showInternalQualityInitiative",
+						"0", "1", "0", "0", newModuleList);
+				if (addAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					int qualityId = 0;
+					try {
+						qualityId = Integer.parseInt(request.getParameter("qualityId"));
+					} catch (Exception e) {
+						qualityId = 0;
+					}
+
+					InstituteQuality instQuality = new InstituteQuality();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					instQuality.setQualityFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
+					instQuality.setQualityTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
+					int participant = 0;
+					try {
+						participant = Integer.parseInt(request.getParameter("no_of_participant"));
+					} catch (Exception e) {
+
+					}
+					// System.out.println("DATA="+participant);
+					if (participant == 0) {
+						instQuality.setQualityPcount(0);
+					} else {
+						instQuality.setQualityPcount(participant);
+					}
+					instQuality.setQualityId(qualityId);
+					instQuality.setQualityInitiativeId(Integer.parseInt(request.getParameter("qualityInitId")));
+
+					int yearId = (int) session.getAttribute("acYearId");
+
+					instQuality.setYearId(yearId);
+					instQuality.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+					instQuality.setDelStatus(1);
+					instQuality.setIsActive(1);
+					instQuality.setExInt1(Integer.parseInt(request.getParameter("cycle"))); // Cycle
+					instQuality.setExInt2(1);
+					String qltyInitiative = request.getParameter("qltyInitiative");
+					instQuality.setExVar1(XssEscapeUtils.jsoupParse(qltyInitiative));
+					instQuality.setExVar2(request.getParameter("naac_score")); // store NAAC Score
+
+					instQuality.setMakerDatetime(curDateTime);
+					instQuality.setMakerUserId(userObj.getUserId());
+
+					int isApplicable = 0;
+					int isApplied = 0;
+					int isCertiObt = 0;
+
+					try {
+						isApplicable = Integer.parseInt(request.getParameter("is_applicable"));
+					} catch (Exception e) {
+						isApplicable = 0;
+					}
+
+					try {
+						isApplied = Integer.parseInt(request.getParameter("is_applied"));
+					} catch (Exception e) {
+						isApplied = 0;
+					}
+
+					try {
+						isCertiObt = Integer.parseInt(request.getParameter("certi_obt"));
+					} catch (Exception e) {
+						isCertiObt = 0;
+					}
+
+					instQuality.setIsApplicable(isApplicable);
+					instQuality.setIsApplied(isApplied);
+					instQuality.setIsCertiObt(isCertiObt);
+
+					String autoValidity = request.getParameter("validity");
+					if (autoValidity != null) {
+						instQuality.setAutonomyValidity(autoValidity);
+					} else {
+						instQuality.setAutonomyValidity("NA");
+					}
+					InstituteQuality insertQualRes = rest.postForObject(Constants.url + "saveInstituteQuality",
+							instQuality, InstituteQuality.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showInternalQualityInitiative";
+					else
+						redirect = "redirect:/showAddInternalQualityInitiative";
+
+				}
+			}
+
+			else {
+
 				redirect = "redirect:/accessDenied";
-			} else {
-				int qualityId = 0;
-				try {
-					qualityId = Integer.parseInt(request.getParameter("qualityId"));
-				} catch (Exception e) {
-					qualityId = 0;
-				}
-
-				InstituteQuality instQuality = new InstituteQuality();
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				String curDate = dateFormatStr.format(new Date());
-
-				instQuality.setQualityFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
-				instQuality.setQualityTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
-				int participant = 0 ;
-				try {
-				participant = Integer.parseInt(request.getParameter("no_of_participant"));
-				}catch (Exception e) {
-					
-				}
-				//System.out.println("DATA="+participant);
-				if(participant == 0 ) {
-				instQuality.setQualityPcount(0);
-				}else {
-					instQuality.setQualityPcount(participant);
-				}
-				instQuality.setQualityId(qualityId);
-				instQuality.setQualityInitiativeId(Integer.parseInt(request.getParameter("qualityInitId")));
-
-				int yearId = (int) session.getAttribute("acYearId");
-
-				instQuality.setYearId(yearId);
-				instQuality.setInstituteId(userObj.getGetData().getUserInstituteId());
-
-				instQuality.setDelStatus(1);
-				instQuality.setIsActive(1);
-				instQuality.setExInt1(Integer.parseInt(request.getParameter("cycle")));	// Cycle
-				instQuality.setExInt2(1);
-				String qltyInitiative = request.getParameter("qltyInitiative");
-				instQuality.setExVar1(XssEscapeUtils.jsoupParse(qltyInitiative));
-				instQuality.setExVar2(request.getParameter("naac_score")); //store NAAC Score
-
-				instQuality.setMakerDatetime(curDateTime);
-				instQuality.setMakerUserId(userObj.getUserId());
-				
-				int isApplicable=0;
-				int isApplied=0;
-				int isCertiObt=0;
-								
-				try {
-					isApplicable=Integer.parseInt(request.getParameter("is_applicable"));
-				}catch (Exception e) {
-					isApplicable=0;
-				}
-				
-				try {
-					isApplied=Integer.parseInt(request.getParameter("is_applied"));
-				}catch (Exception e) {
-					isApplied=0;
-				}
-				
-				try {
-					isCertiObt=Integer.parseInt(request.getParameter("certi_obt"));
-				}catch (Exception e) {
-					isCertiObt=0;
-				}
-				
-				instQuality.setIsApplicable(isApplicable);
-				instQuality.setIsApplied(isApplied);
-				instQuality.setIsCertiObt(isCertiObt);
-				
-				String autoValidity = request.getParameter("validity");
-				if(autoValidity!=null) {
-					instQuality.setAutonomyValidity(autoValidity);
-				}else {
-				instQuality.setAutonomyValidity("NA");
-				}
-				InstituteQuality insertQualRes = rest.postForObject(Constants.url + "saveInstituteQuality", instQuality,
-						InstituteQuality.class);
-				
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showInternalQualityInitiative";
-				else
-					redirect = "redirect:/showAddInternalQualityInitiative";
-
 			}
 		} catch (Exception e) {
 			System.err.println("Exce in save insertInstQuaInitiative  " + e.getMessage());
@@ -547,8 +555,8 @@ public class QualityInitiativeController {
 
 				GetInstituteQuality editInstQuality = rest.postForObject(Constants.url + "getInstituteQualityById", map,
 						GetInstituteQuality.class);
-				System.out.println("Inst Qulity="+editInstQuality);
-				
+				System.out.println("Inst Qulity=" + editInstQuality);
+
 				model.addObject("editQuality", editInstQuality);
 
 				QualityInitiative[] instArray = rest.getForObject(Constants.url + "getQualityInitiativeList",
@@ -556,34 +564,34 @@ public class QualityInitiativeController {
 				List<QualityInitiative> qualInintList = new ArrayList<>(Arrays.asList(instArray));
 
 				model.addObject("qualInintList", qualInintList);
-				
-				 map = new LinkedMultiValueMap<String, Object>();
+
+				map = new LinkedMultiValueMap<String, Object>();
 
 				map.add("key", "QUALITYIDS");
-				SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+				SettingKeyValue settingValues = rest.postForObject(Constants.url + "getSettingKeyValue", map,
 						SettingKeyValue.class);
-				//System.err.println("settingValues " +settingValues.toString());
-			
+				// System.err.println("settingValues " +settingValues.toString());
+
 				List<Integer> settingList = Stream.of(settingValues.getStringValue().split(",")).map(Integer::parseInt)
-				.collect(Collectors.toList());
+						.collect(Collectors.toList());
 				model.addObject("settingList", settingList);
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("key", "NAACCYCLE");
-				SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+				SettingKeyValue score = rest.postForObject(Constants.url + "getSettingKeyValue", map,
 						SettingKeyValue.class);
-				//System.err.println("CycleValues " +score.toString());
-				
+				// System.err.println("CycleValues " +score.toString());
+
 				model.addObject("cycleUpto", score.getIntValue());
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("key", "AutoValidity");
-				SettingKeyValue validityValue = rest.postForObject(Constants.url + "getSettingKeyValue",map,
+				SettingKeyValue validityValue = rest.postForObject(Constants.url + "getSettingKeyValue", map,
 						SettingKeyValue.class);
-				//System.err.println("Valid Values " +validityValue.getIntValue());
-				
+				// System.err.println("Valid Values " +validityValue.getIntValue());
+
 				model.addObject("validValue", validityValue.getIntValue());
-				
+
 				model.addObject("isEdit", 1);
 
 			} else {

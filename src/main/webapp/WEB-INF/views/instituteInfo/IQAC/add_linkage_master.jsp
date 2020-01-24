@@ -3,6 +3,10 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 <!DOCTYPE html>
@@ -100,23 +104,33 @@
 									<c:if test="${addAccess == 0}">
 										<form class="form-horizontal"
 											action="${pageContext.request.contextPath}/insertLinkageMaster"
-											method="post" name="form_sample_2" id="form_sample_2"
-										>
+											method="post" name="form_sample_2" id="form_sample_2">
 
+											<%
+												UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+											%>
+											<input type="hidden" value="<%out.println(hashtext);%>"
+												name="token" id="token">
 
 
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="linkname_text">Linkage Name 
-													<span class="text-danger">*</span>
+												<label class="control-label col-sm-2" for="linkname_text">Linkage
+													Name <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="linkname_text"
-														 name="linkname_text" autocomplete="off"
+														name="linkname_text" autocomplete="off"
 														placeholder="Linkage Name" onchange="trim(this)"
-														value="${editInst.linknameText}">
-														
-	<span class="error_form text-danger" id="error_name" style="display:none;" >Please Enter Linkage Name </span>	
-														
+														value="${editInst.linknameText}"> <span
+														class="error_form text-danger" id="error_name"
+														style="display: none;">Please Enter Linkage Name </span>
+
 												</div>
 											</div>
 
@@ -125,9 +139,10 @@
 													Linkage Remarks <span class="text-danger"></span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" onchange="trim(this)"
-														id="linkname_remarks" name="linkname_remarks"
-														autocomplete="off" placeholder="Linkage Remarks"
+													<input type="text" class="form-control"
+														onchange="trim(this)" id="linkname_remarks"
+														name="linkname_remarks" autocomplete="off"
+														placeholder="Linkage Remarks"
 														value="${editInst.linknameRemarks}">
 												</div>
 											</div>
@@ -135,15 +150,17 @@
 											<input type="hidden" id="linkage_id" name="linkage_id"
 												value="${editInst.linknameId}">
 
-										<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+											<div class="form-group">
+												<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-						</div>
+													<button type="submit" id="sub_button"
+														class="btn btn-primary" onclick="submit_f(1)">
+														<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+
 												</div>
+											</div>
 										</form>
 
 									</c:if>
@@ -162,7 +179,7 @@
 														<th class="check" style="text-align: center; width: 5%;"><input
 															type="checkbox" name="selAll" id="selAll"
 															onClick="selectedInst(this)" /> Select All</th>
-														<th >Sr No</th>
+														<th>Sr No</th>
 														<th>Linkage Name</th>
 														<th>Linkage Remarks</th>
 														<th>Action</th>
@@ -177,10 +194,11 @@
 													<c:forEach items="${colList}" var="colList"
 														varStatus="count">
 														<tr>
-															<td style="text-align: center; "><input type="checkbox" class="chk"
-																name="linknameIds" id="linknameIds${count.index+1}"
+															<td style="text-align: center;"><input
+																type="checkbox" class="chk" name="linknameIds"
+																id="linknameIds${count.index+1}"
 																value="${colList.linknameId}" /></td>
-															<td style="text-align: center; ">${count.index+1}</td>
+															<td style="text-align: center;">${count.index+1}</td>
 															<td>${colList.linknameText}</td>
 															<td>${colList.linknameRemarks}</td>
 
@@ -248,7 +266,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
-<script>
+	<script>
            
          
 

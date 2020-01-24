@@ -31,9 +31,9 @@ import com.ats.rusasoft.model.ProgramDetailSaveResponse;
 @Controller
 @Scope("session")
 public class InstituteVissionMissionController {
-	
+
 	RestTemplate rest = new RestTemplate();
-	
+
 	@RequestMapping(value = "/showVisionMission", method = RequestMethod.GET)
 	public ModelAndView showVisionMission(HttpServletRequest request, HttpServletResponse response) {
 
@@ -45,11 +45,13 @@ public class InstituteVissionMissionController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			 
-			InstitueVision[] institueVision = rest.postForObject(Constants.url + "/getInsituteVisionList", map, InstitueVision[].class);
+
+			InstitueVision[] institueVision = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
+					InstitueVision[].class);
 			model.addObject("institueVisionList", institueVision);
-			
-			InstitueMission[] institueMission = rest.postForObject(Constants.url + "/getInsituteMissionList", map, InstitueMission[].class);
+
+			InstitueMission[] institueMission = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
+					InstitueMission[].class);
 			model.addObject("institueMissionList", institueMission);
 			model.addObject("msgSucss", Constants.sucess_msg);
 			model.addObject("msgFail", Constants.fail_msg);
@@ -63,7 +65,7 @@ public class InstituteVissionMissionController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/saveInstituteVission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse saveProgramVission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -73,43 +75,56 @@ public class InstituteVissionMissionController {
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
 
-			String instVisionText = request.getParameter("instVisionText"); 
-			int instituteVissionId = Integer.parseInt(request.getParameter("instituteVissionId")); 
-			
-			InstitueVision institueVision = new InstitueVision();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			institueVision.setInstVisionId(instituteVissionId);
-			institueVision.setDelStatus(1);
-			institueVision.setIsActive(1); 
-			institueVision.setInstVisionText(XssEscapeUtils.jsoupParse(instVisionText));
-			institueVision.setInstituteId(userObj.getGetData().getUserInstituteId());
-			institueVision.setMakerUserId(userObj.getUserId());
-			institueVision.setMakerdatetime(sf.format(date));
-		 
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			InstitueVision res = rest.postForObject(Constants.url + "/saveInstituteVision", institueVision,
-					InstitueVision.class);
+				String instVisionText = request.getParameter("instVisionText");
+				int instituteVissionId = Integer.parseInt(request.getParameter("instituteVissionId"));
 
-			if (res == null) {
+				InstitueVision institueVision = new InstitueVision();
+
+				institueVision.setInstVisionId(instituteVissionId);
+				institueVision.setDelStatus(1);
+				institueVision.setIsActive(1);
+				institueVision.setInstVisionText(XssEscapeUtils.jsoupParse(instVisionText));
+				institueVision.setInstituteId(userObj.getGetData().getUserInstituteId());
+				institueVision.setMakerUserId(userObj.getUserId());
+				institueVision.setMakerdatetime(sf.format(date));
+
+				InstitueVision res = rest.postForObject(Constants.url + "/saveInstituteVision", institueVision,
+						InstitueVision.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("instituteId", userObj.getGetData().getUserInstituteId());
+					InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
+							InstitueVision[].class);
+					List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setInstitueVisionList(list);
+				}
+
+			}
+
+			else {
+
 				info.setError(true);
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
-			} else {
-				info.setError(false);
-				info.setMsg("saved");
-				programDetailSaveResponse.setInfo(info);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
-						InstitueVision[].class);
-				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setInstitueVisionList(list);
 			}
 
 		} catch (Exception e) {
@@ -124,7 +139,7 @@ public class InstituteVissionMissionController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteInstituteVission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteInstituteVission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -133,25 +148,21 @@ public class InstituteVissionMissionController {
 		Info info = new Info();
 		try {
 
-			 
-			 
 			int instVisionId = Integer.parseInt(request.getParameter("instVisionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("instVisionId", instVisionId);
-				info  = rest.postForObject(Constants.url + "/deleteInstiuteVision", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				HttpSession session = request.getSession();
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map = new LinkedMultiValueMap<>();
-				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
-						InstitueVision[].class);
-				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setInstitueVisionList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("instVisionId", instVisionId);
+			info = rest.postForObject(Constants.url + "/deleteInstiuteVision", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
+					InstitueVision[].class);
+			List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setInstitueVisionList(list);
 
 		} catch (Exception e) {
 
@@ -165,35 +176,31 @@ public class InstituteVissionMissionController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editInstituteVission", method = RequestMethod.GET)
-	public @ResponseBody InstitueVision editInstituteVission(HttpServletRequest request,
-			HttpServletResponse response) {
+	public @ResponseBody InstitueVision editInstituteVission(HttpServletRequest request, HttpServletResponse response) {
 
 		InstitueVision institueVision = new InstitueVision();
-	 
+
 		try {
 
-			  
 			int instVisionId = Integer.parseInt(request.getParameter("instVisionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("instVisionId", instVisionId);
-				institueVision  = rest.postForObject(Constants.url + "/getInstituteVisionByVisionId", map,
-						InstitueVision.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("instVisionId", instVisionId);
+			institueVision = rest.postForObject(Constants.url + "/getInstituteVisionByVisionId", map,
+					InstitueVision.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 
 		return institueVision;
 
 	}
-	
+
 	@RequestMapping(value = "/saveInstituteMission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse saveInstituteMission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -203,43 +210,55 @@ public class InstituteVissionMissionController {
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
 
-			String instMissionText = request.getParameter("instMissionText"); 
-			int instMissionId = Integer.parseInt(request.getParameter("instMissionId")); 
-			
-			InstitueMission institueMission = new InstitueMission();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			institueMission.setInstMissionId(instMissionId);
-			institueMission.setDelStatus(1);
-			institueMission.setIsActive(1); 
-			institueMission.setInstMissionText(XssEscapeUtils.jsoupParse(instMissionText));
-			institueMission.setInstituteId(userObj.getGetData().getUserInstituteId());
-			institueMission.setMakerUserId(userObj.getUserId());
-			institueMission.setMakerdatetime(sf.format(date));
-		 
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			InstitueMission res = rest.postForObject(Constants.url + "/saveInstituteMission", institueMission,
-					InstitueMission.class);
+				String instMissionText = request.getParameter("instMissionText");
+				int instMissionId = Integer.parseInt(request.getParameter("instMissionId"));
 
-			if (res == null) {
+				InstitueMission institueMission = new InstitueMission();
+
+				institueMission.setInstMissionId(instMissionId);
+				institueMission.setDelStatus(1);
+				institueMission.setIsActive(1);
+				institueMission.setInstMissionText(XssEscapeUtils.jsoupParse(instMissionText));
+				institueMission.setInstituteId(userObj.getGetData().getUserInstituteId());
+				institueMission.setMakerUserId(userObj.getUserId());
+				institueMission.setMakerdatetime(sf.format(date));
+
+				InstitueMission res = rest.postForObject(Constants.url + "/saveInstituteMission", institueMission,
+						InstitueMission.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("instituteId", userObj.getGetData().getUserInstituteId());
+					InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
+							InstitueMission[].class);
+					List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setInstitueMissionList(list);
+				}
+			}
+
+			else {
+
 				info.setError(true);
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
-			} else {
-				info.setError(false);
-				info.setMsg("saved");
-				programDetailSaveResponse.setInfo(info);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
-						InstitueMission[].class);
-				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setInstitueMissionList(list);
 			}
 
 		} catch (Exception e) {
@@ -254,7 +273,7 @@ public class InstituteVissionMissionController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteInstituteMission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteInstituteMission(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -263,24 +282,20 @@ public class InstituteVissionMissionController {
 		Info info = new Info();
 		try {
 
-			 
-			 
 			int instMissionId = Integer.parseInt(request.getParameter("instMissionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("instMissionId", instMissionId);
-				info  = rest.postForObject(Constants.url + "/deleteInstiuteMission", map,
-						Info.class);
-				programDetailSaveResponse.setInfo(info);
-				
-				HttpSession session = request.getSession();
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
-						InstitueMission[].class);
-				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
-				programDetailSaveResponse.setInstitueMissionList(list);
-			 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("instMissionId", instMissionId);
+			info = rest.postForObject(Constants.url + "/deleteInstiuteMission", map, Info.class);
+			programDetailSaveResponse.setInfo(info);
+
+			HttpSession session = request.getSession();
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
+					InstitueMission[].class);
+			List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+			programDetailSaveResponse.setInstitueMissionList(list);
 
 		} catch (Exception e) {
 
@@ -294,28 +309,25 @@ public class InstituteVissionMissionController {
 		return programDetailSaveResponse;
 
 	}
-	
+
 	@RequestMapping(value = "/editInstituteMission", method = RequestMethod.GET)
 	public @ResponseBody InstitueMission editInstituteMission(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		InstitueMission institueMission = new InstitueMission();
-	 
+
 		try {
 
-			  
 			int instMissionId = Integer.parseInt(request.getParameter("instMissionId"));
- 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>(); 
-				map.add("instMissionId", instMissionId);
-				institueMission  = rest.postForObject(Constants.url + "/getInstituteMissionByMissionId", map,
-						InstitueMission.class);
-				 
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("instMissionId", instMissionId);
+			institueMission = rest.postForObject(Constants.url + "/getInstituteMissionByMissionId", map,
+					InstitueMission.class);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			 
 
 		}
 

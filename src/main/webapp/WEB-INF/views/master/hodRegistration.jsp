@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+ 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 <!DOCTYPE html>
@@ -43,7 +47,8 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="selcState()">>
+<body class=" " onload="selcState()">
+	>
 	<c:url value="/getUserInfo" var="getUserInfo"></c:url>
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
@@ -84,9 +89,21 @@
 										action="${pageContext.request.contextPath}/insertHod"
 										method="post" name="formidhere" id="formidhere">
 
-										<input type="hidden" id="hod_id" name="hod_id"
-											value="${editHod.facultyId}"> <input type="hidden"
-											id="addEdit" name="addEdit" value="${addEdit}">
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="hod_id" name="hod_id" value="${editHod.facultyId}">
+										<input type="hidden" id="addEdit" name="addEdit"
+											value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>
@@ -127,7 +144,7 @@
 											</div>
 										</div>
 
-										
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
@@ -137,11 +154,11 @@
 												<select id="dept_id" name="dept_id" class="" multiple>
 													<c:forEach items="${deptList}" var="dept">
 														<c:set var="flag" value="0"></c:set>
-														<c:forEach items="${deptIdList}" var="selDept"
-															 >
+														<c:forEach items="${deptIdList}" var="selDept">
 															<c:choose>
 																<c:when test="${selDept==dept.deptId}">
-																	<option selected value="${dept.deptId}"><c:out value="${dept.deptName}" /></option>
+																	<option selected value="${dept.deptId}"><c:out
+																			value="${dept.deptName}" /></option>
 																	<c:set var="flag" value="1"></c:set>
 																</c:when>
 																<c:otherwise>
@@ -156,7 +173,7 @@
 															</c:when>
 														</c:choose>
 													</c:forEach>
-												 
+
 													<option value="0">NA</option>
 
 
@@ -202,8 +219,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker" data-format="dd-mm-yyyy"
-													id="dateOfJoin" data-end-date="0d" onchange="trim(this)"
+												<input type="text" class="form-control datepicker"
+													data-format="dd-mm-yyyy" id="dateOfJoin" data-end-date="0d"
+													onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editHod.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd-mm-yyyy"> <span
@@ -212,26 +230,28 @@
 											</div>
 										</div>
 
- 
+
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												MH State<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="is_add_same">Belongs
+												to MH State<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 
 												<c:if test="${editHod.facultyId>0}">
 													Yes <input type="radio"
 														${editHod.isSame == 1 ? 'checked' : ''}
-														name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
+														name="is_state_same" id="is_state_same" value="1"
+														onclick="selcState()"> 
 													No<input type="radio"
 														${editHod.isSame == 0 ? 'checked' : ''}
-														name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
+														name="is_state_same" id="is_state_same" value="0"
+														onclick="selcState()">
 												</c:if>
 
 												<c:if test="${editHod.facultyId==0}">
-													Yes <input checked type="radio"  name="is_state_same"
+													Yes <input checked type="radio" name="is_state_same"
 														id="is_state_same" value="1" onclick="selcState()"> 
-													No<input  type="radio" name="is_state_same"
+													No<input type="radio" name="is_state_same"
 														id="is_state_same" value="0" onclick="selcState()">
 												</c:if>
 
@@ -241,33 +261,35 @@
 
 											</div>
 										</div>
-										
-											
+
+
 										<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="state_id">State
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
+
+													<c:forEach items="${sessionScope.stateList}" var="state">
 														<c:choose>
-														<c:when test="${editHod.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
+															<c:when
+																test="${editHod.facultyMiddelName == state.stateId}">
+																<option selected value="${state.stateId}">${state.stateName}</option>
+															</c:when>
+
+															<c:otherwise>
+																<option value="${state.stateId}">${state.stateName}</option>
+															</c:otherwise>
 														</c:choose>
-													</c:forEach> 
- 	
+													</c:forEach>
+
 												</select> <span class="error_form text-danger" id="quolf_field"
 													style="display: none;">Please select highest
 													qualification</span>
 											</div>
 										</div>
-										
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact
@@ -275,8 +297,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													onchange="trim(this)"
-													name="contactNo"
+													onchange="trim(this)" name="contactNo"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -352,21 +373,20 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-	<script type="text/javascript"> 
- function selcState() {
-	
-	 var isSamState = $("input[name='is_state_same']:checked"). val();
-	 //alert(isSamState);
-	 
-	 if(isSamState==0){
-		 document.getElementById("state").style.display = "block";
-	 }else{
-		 document.getElementById("state").style.display = "none";
-	 }
-}
- 
- </script>
+
+	<script type="text/javascript">
+		function selcState() {
+
+			var isSamState = $("input[name='is_state_same']:checked").val();
+			//alert(isSamState);
+
+			if (isSamState == 0) {
+				document.getElementById("state").style.display = "block";
+			} else {
+				document.getElementById("state").style.display = "none";
+			}
+		}
+	</script>
 
 	<script>
 		function trim(el) {

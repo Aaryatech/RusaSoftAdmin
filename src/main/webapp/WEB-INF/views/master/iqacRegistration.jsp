@@ -3,10 +3,17 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 
 
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
@@ -85,9 +92,22 @@
 										action="${pageContext.request.contextPath}/iqacNewRegistration"
 										method="post" name="formidhere" id="formidhere">
 
-										<input type="hidden" id="iqac_id" name="iqac_id"
-											value="${miqc.facultyId}"> <input type="hidden"
-											id="addEdit" name="addEdit" value="${addEdit}">
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="iqac_id" name="iqac_id" value="${miqc.facultyId}">
+										<input type="hidden" id="addEdit" name="addEdit"
+											value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>
@@ -135,25 +155,25 @@
 											<div class="col-sm-10">
 												<select id="dept_id" name="dept_id">
 													<c:forEach items="${deptList}" var="dept">
-														
+
 														<c:choose>
-														
+
 															<c:when test="${miqc.deptId==dept.deptId}">
 																<option selected value="${dept.deptId}">${dept.deptName}</option>
 															</c:when>
-															
+
 															<c:otherwise>
 																<option value="${dept.deptId}">${dept.deptName}</option>
 															</c:otherwise>
-															
+
 														</c:choose>
 
 													</c:forEach>
-												
+
 												</select>
 											</div>
 										</div>
-									
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Highest
@@ -190,8 +210,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker" data-end-date="0d"
-													id="dateOfJoin"  onchange="trim(this)" data-format="dd-mm-yyyy"
+												<input type="text" class="form-control datepicker"
+													data-end-date="0d" id="dateOfJoin" onchange="trim(this)"
+													data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													value="${miqc.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd-mm-yyyy"> <span
@@ -199,54 +220,60 @@
 													style="display: none;">Please select joining date</span>
 											</div>
 										</div>
- 										<div class="form-group">
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH  State  <span
-												class="text-danger">*</span>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="is_add_same">Belongs
+												to MH State <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-											<c:choose>
-												<c:when test="${miqc.facultyId>0}">
-														Yes<input type="radio" ${miqc.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-														No<input type="radio" ${miqc.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													
-												</c:when>
+												<c:choose>
+													<c:when test="${miqc.facultyId>0}">
+														Yes<input type="radio"
+															${miqc.isSame == 1 ? 'checked' : ''} name="is_state_same"
+															id="is_state_same" value="1" onclick="selcState()"> 
+														No<input type="radio" ${miqc.isSame == 0 ? 'checked' : ''}
+															name="is_state_same" id="is_state_same" value="0"
+															onclick="selcState()">
+
+													</c:when>
 													<c:otherwise>
-														Yes <input checked type="radio" name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													
+														Yes <input checked type="radio" name="is_state_same"
+															id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" name="is_state_same"
+															id="is_state_same" value="0" onclick="selcState()">
+
 													</c:otherwise>
-											</c:choose>
-											
-											
-												<span class="error_form text-danger" id="is_state_same_field"
-													style="display: none;">Please select
-													permanent/correspondence address same or not.</span>
+												</c:choose>
+
+
+												<span class="error_form text-danger"
+													id="is_state_same_field" style="display: none;">Please
+													select permanent/correspondence address same or not.</span>
 
 											</div>
 										</div>
-										
-							
+
+
 										<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="state_id">State
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
+
+													<c:forEach items="${sessionScope.stateList}" var="state">
 														<c:choose>
-														<c:when test="${miqc.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
+															<c:when test="${miqc.facultyMiddelName == state.stateId}">
+																<option selected value="${state.stateId}">${state.stateName}</option>
+															</c:when>
+
+															<c:otherwise>
+																<option value="${state.stateId}">${state.stateName}</option>
+															</c:otherwise>
 														</c:choose>
 													</c:forEach>
- 
- 	
+
+
 												</select> <span class="error_form text-danger" id="quolf_field"
 													style="display: none;">Please select highest
 													qualification</span>
@@ -259,8 +286,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													onchange="trim(this)"
-													name="contactNo"
+													onchange="trim(this)" name="contactNo"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -345,20 +371,20 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- <script type="text/javascript"> 
- function selcState() {
-	// alert("Hi");
-	 var isSamState = $("input[name='is_state_same']:checked"). val();
-	// alert(isSamState);
-	 
-	 if(isSamState==0){
-		 document.getElementById("state").style.display = "block";
-	 }else{
-		 document.getElementById("state").style.display = "none";
-	 }
-}
-</script>
- 
+	<script type="text/javascript">
+		function selcState() {
+			// alert("Hi");
+			var isSamState = $("input[name='is_state_same']:checked").val();
+			// alert(isSamState);
+
+			if (isSamState == 0) {
+				document.getElementById("state").style.display = "block";
+			} else {
+				document.getElementById("state").style.display = "none";
+			}
+		}
+	</script>
+
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -619,7 +645,10 @@
 	<script type="text/javascript">
 		function showIsReg() {
 			//alert("Hi");
-			var x = ${accOff.officerId}
+			var x = $
+			{
+				accOff.officerId
+			}
 
 			if (x > 0) {
 				//alert("Hi 1")
@@ -645,8 +674,7 @@
 	</script>
 	<script type="text/javascript">
 		function checkUnique(inputValue, valueType) {
-			
-			
+
 			//alert("hi");
 
 			document.getElementById("sub2").disabled = false;
@@ -688,14 +716,14 @@
 
 									//alert("Data  " +JSON.stringify(data));
 
-									 if(data.facultyId>0){
+									if (data.facultyId > 0) {
 
 										document.getElementById("email").value = data.email;
 										document.getElementById("contactNo").value = data.contactNo;
 										document.getElementById("iqacName").value = data.facultyFirstName;
 										document.getElementById("dateOfJoin").value = data.joiningDate;
 										document.getElementById("iqac_id").value = data.facultyId;
-										
+
 										/* 
 										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
 										$("#designation").trigger("chosen:updated");
@@ -705,30 +733,30 @@
 										//alert(temp);
 										$("#dept_id").val(temp);
 										$("#dept_id").trigger("chosen:updated");
- */
- 										//Mahendra
-										document.getElementById("designation").value=data.currentDesignationId;
-										$("#designation").trigger("chosen:updated");
+										 */
+										//Mahendra
+										document.getElementById("designation").value = data.currentDesignationId;
+										$("#designation").trigger(
+												"chosen:updated");
 										//single select
-										document.getElementById("quolif").value=data.highestQualification;
+										document.getElementById("quolif").value = data.highestQualification;
 										$("#quolif").trigger("chosen:updated");
 										//multiple select
-									 	var temp = new Array();
-									 	temp = (data.deptId).split(",");
-										  $('#dept_id').val(temp);
-										  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
-									 }else{
-											/* document.getElementById("email").value = "";
-											document.getElementById("contactNo").value = "";
-											document.getElementById("iqacName").value = "";
-											document.getElementById("dateOfJoin").value = ""; 
-											document.getElementById("dept_id").value = 0;
-											document.getElementById("quolif").value = 0;
-											document.getElementById("designation").value = 0;
-											document.getElementById("iqac_id").value = 0;    */  
-									 }
+										var temp = new Array();
+										temp = (data.deptId).split(",");
+										$('#dept_id').val(temp);
+										$('#dept_id').trigger('change'); // Notify any JS components that the value changed
+									} else {
+										/* document.getElementById("email").value = "";
+										document.getElementById("contactNo").value = "";
+										document.getElementById("iqacName").value = "";
+										document.getElementById("dateOfJoin").value = ""; 
+										document.getElementById("dept_id").value = 0;
+										document.getElementById("quolif").value = 0;
+										document.getElementById("designation").value = 0;
+										document.getElementById("iqac_id").value = 0;    */
+									}
 
-									 
 								});
 		}
 	</script>
@@ -757,7 +785,7 @@
 					$(this).data('select2').results.addClass('overflow-hidden')
 							.perfectScrollbar();
 				});
-		
+
 		$("#designation").select2({
 			allowClear : true
 		}).on(
@@ -767,7 +795,6 @@
 					$(this).data('select2').results.addClass('overflow-hidden')
 							.perfectScrollbar();
 				});
-		
 
 		$("#quolif").select2({
 			allowClear : true
@@ -778,9 +805,6 @@
 					$(this).data('select2').results.addClass('overflow-hidden')
 							.perfectScrollbar();
 				});
-		
-		
-		
 	</script>
 
 

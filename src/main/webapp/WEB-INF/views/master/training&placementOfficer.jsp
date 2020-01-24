@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -97,11 +104,24 @@
 										method="post" name="form_sample_2" id="form_sample_2">
 
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
 
 										<div>
 
-											<input type="hidden" class="form-control" id="pacementOfficerId"
-												name="pacementOfficerId" value="${trnPlaceOff.facultyId}"> <input
+											<input type="hidden" class="form-control"
+												id="pacementOfficerId" name="pacementOfficerId"
+												value="${trnPlaceOff.facultyId}"> <input
 												type="hidden" id="addEdit" name="addEdit" value="${addEdit}">
 
 											<div class="col-xs-12">
@@ -112,12 +132,14 @@
 														Name<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" id="pacementOfficerName"
-															name="pacementOfficerName" placeholder="Training & Placement Officer Name"
+														<input type="text" class="form-control"
+															id="pacementOfficerName" name="pacementOfficerName"
+															placeholder="Training & Placement Officer Name"
 															onchange="trim(this)" autocomplete="off"
 															value="${trnPlaceOff.facultyFirstName}"> <span
 															class="error_form text-danger" id="error_formfield1"
-															style="display: none;">Please enter training & placement  officer name.</span>
+															style="display: none;">Please enter training &
+															placement officer name.</span>
 													</div>
 												</div>
 
@@ -172,11 +194,11 @@
 													</div>
 												</div>
 
-												
+
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="status">Highest Qualification
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="status">Highest
+														Qualification <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<select id="hod_quolf" name="quolif" class="form-control">
@@ -231,7 +253,7 @@
 															name="is_registration" value="0"
 															onclick="setDate(this.value)">No
 															 --%>
-															<%-- <c:choose>
+														<%-- <c:choose>
 															<c:when test="${trnPlaceOff.facultyId>0}">
 															<c:choose>
 															<c:when test="${trnPlaceOff.isWorking==1}">
@@ -269,95 +291,104 @@
 															
 															
 															</c:choose> --%>
-															
-															<input type="radio" id="is_registration"
-															 ${trnPlaceOff.isWorking == 0 ? 'checked' : ''}
+
+														<input type="radio" id="is_registration"
+															${trnPlaceOff.isWorking == 0 ? 'checked' : ''}
 															name="is_registration" value="0"
-															onclick="setDate(this.value)">Yes
-															
-															<input type="radio" id="is_registration"
+															onclick="setDate(this.value)">Yes <input
+															type="radio" id="is_registration"
 															${trnPlaceOff.isWorking == 1 ? 'checked' : ''}
 															name="is_registration" value="1"
 															onclick="setDate(this.value)">No
-													
+
 													</div>
 												</div>
-													<div class="form-group" id="abc" style="display: none">
+												<div class="form-group" id="abc" style="display: none">
 													<label class="control-label col-sm-2" for="page_order">Relieving
 														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
-														data-end-date="0d" data-format="dd-mm-yyyy"
+															data-end-date="0d" data-format="dd-mm-yyyy"
 															id="acc_off_relDate"
 															onkeypress='return restrictAlphabets(event)'
 															autocomplete="off" name="acc_off_relDate"
 															placeholder="Relieving Date"
 															value="${trnPlaceOff.realivingDate}"> <span
 															class="error_form text-danger" id="error_acc_off_relDate"
-															style="display: none;">Please enter relieving date.</span>
+															style="display: none;">Please enter relieving
+															date.</span>
 													</div>
 												</div>
-												
-										<div class="form-group">
-											
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH State <span
-												class="text-danger">*</span>
-											</label>
 
-											<div class="col-sm-3">
-												
-													<c:if test="${trnPlaceOff.facultyId>0}">
-													Yes <input type="radio" ${trnPlaceOff.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" ${trnPlaceOff.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-													<c:if test="${trnPlaceOff.facultyId==0}">
-													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	value="1" onclick="selcState()"> 
-													No<input type="radio"  name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-											</div>
-										</div>
-										
-										<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-10">
-												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
-														<c:choose>
-														<c:when test="${trnPlaceOff.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
-														</c:choose>
-													</c:forEach> 
- 	
-												</select> <span class="error_form text-danger" id="quolf_field"
-													style="display: none;">Please select highest
-													qualification</span>
-											</div>
-										</div>
-										
+												<div class="form-group">
+
+													<label class="control-label col-sm-2" for="is_add_same">Belongs
+														to MH State <span class="text-danger">*</span>
+													</label>
+
+													<div class="col-sm-3">
+
+														<c:if test="${trnPlaceOff.facultyId>0}">
+													Yes <input type="radio"
+																${trnPlaceOff.isSame == 1 ? 'checked' : ''}
+																name="is_state_same" id="is_state_same" value="1"
+																onclick="selcState()"> 
+													No<input type="radio"
+																${trnPlaceOff.isSame == 0 ? 'checked' : ''}
+																name="is_state_same" id="is_state_same" value="0"
+																onclick="selcState()">
+														</c:if>
+
+														<c:if test="${trnPlaceOff.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same"
+																id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" name="is_state_same"
+																id="is_state_same" value="0" onclick="selcState()">
+														</c:if>
+													</div>
+												</div>
+
+												<div class="form-group" style="display: none;" id="state">
+
+													<label class="control-label col-sm-2" for="state_id">State
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="state_id" name="state_id" class="form-control">
+
+															<c:forEach items="${sessionScope.stateList}" var="state">
+																<c:choose>
+																	<c:when
+																		test="${trnPlaceOff.facultyMiddelName == state.stateId}">
+																		<option selected value="${state.stateId}">${state.stateName}</option>
+																	</c:when>
+
+																	<c:otherwise>
+																		<option value="${state.stateId}">${state.stateName}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+
+														</select> <span class="error_form text-danger" id="quolf_field"
+															style="display: none;">Please select highest
+															qualification</span>
+													</div>
+												</div>
+
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<input type="text" maxlength="10" class="form-control"
-															id="contact_no"
-															name="contact_no" placeholder="Mobile No"
+															id="contact_no" name="contact_no" placeholder="Mobile No"
 															autocomplete="off" value="${trnPlaceOff.contactNo}"
 															onchange="trim(this)"
 															onkeypress='return restrictAlphabets(event)'> <span
 															class="error_form text-danger" id="error_formfield2"
-															style="display: none;">Please enter valid contact No.</span>
+															style="display: none;">Please enter valid contact
+															No.</span>
 														<p class="desc text-danger fontsize11">Note: OTP will
 															be sent on this mobile number for verification</p>
 													</div>
@@ -378,7 +409,7 @@
 															Verification mail will be sent on this Email id</p>
 													</div>
 												</div>
-												
+
 
 												<%-- <div class="form-group">
 											<label class="control-label col-sm-2" for="smallheading">Roles
@@ -405,7 +436,8 @@
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
 
-												<a href="${pageContext.request.contextPath}/showTrainingAndPlacementOfficer"><button
+												<a
+													href="${pageContext.request.contextPath}/showTrainingAndPlacementOfficer"><button
 														id="sub2" type="button" class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
@@ -434,7 +466,7 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-<script type="text/javascript"> 
+	<script type="text/javascript"> 
  function selcState() {
 	 var isSamState = $("input[name='is_state_same']:checked"). val();
 	// alert(isSamState);
@@ -447,8 +479,8 @@
 }
  
  </script>
- 
-<script>
+
+	<script>
 	function trim(el) {
 		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -569,7 +601,8 @@
             			});
         });
 
-</script> -->
+</script>
+	-->
 
 	<script type="text/javascript">
 			/*code: 48-57 Numbers

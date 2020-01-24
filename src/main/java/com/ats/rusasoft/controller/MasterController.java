@@ -50,7 +50,7 @@ import com.ats.rusasoft.model.accessright.ModuleJson;
 @Controller
 @Scope("session")
 public class MasterController {
-	
+
 	RestTemplate rest = new RestTemplate();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
@@ -328,7 +328,7 @@ public class MasterController {
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
-				 map = new LinkedMultiValueMap<String, Object>();
+				map = new LinkedMultiValueMap<String, Object>();
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
@@ -348,7 +348,7 @@ public class MasterController {
 
 				model.addObject("quolfList", quolfList);
 				model.addObject("addEdit", "0");
-				Staff editFaculty =new Staff();
+				Staff editFaculty = new Staff();
 				model.addObject("editFaculty", editFaculty);
 
 			}
@@ -370,159 +370,170 @@ public class MasterController {
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int instituteId = (int) session.getAttribute("instituteId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int userId = (int) session.getAttribute("userId");
+			if (token.trim().equals(key.trim())) {
 
-			int isAccOff = 0;
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int instituteId = (int) session.getAttribute("instituteId");
 
-			try {
-				isAccOff = Integer.parseInt(request.getParameter("isAccOff"));
-			} catch (Exception e) {
-				isAccOff = 0;
-			}
+				int userId = (int) session.getAttribute("userId");
 
-			int accId = 0;
+				int isAccOff = 0;
 
-			try {
-				accId = Integer.parseInt(request.getParameter("acc_id"));
-			} catch (Exception e) {
-				accId = 0;
-			}
-
-			String roleNameList = null;
-
-			roleNameList = Constants.Account_Officer_Role;
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			map.add("roleNameList", roleNameList);
-			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
-					AssignRoleDetailList[].class);
-			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
-
-			String roleIds = new String();
-			for (int i = 0; i < roleIdsList.size(); i++) {
-				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
-			}
-			System.err.println("roleIds " + roleIds);
-
-			int designation = 0;
-
-			////System.out.println("Data:" + accId);
-			String accName = request.getParameter("accName");
-			////System.out.println("Data:" + accName);
-			designation = Integer.parseInt(request.getParameter("designation"));
-			String dateOfJoin = request.getParameter("dateOfJoin");
-			String contact = request.getParameter("contactNo");
-			String email = request.getParameter("email");
-			int isState = Integer.parseInt(request.getParameter("is_state_same"));
-			String[] deptIds = request.getParameterValues("dept_id");
-			StringBuilder sb = new StringBuilder();
-
-			for (int i = 0; i < deptIds.length; i++) {
-				sb = sb.append(deptIds[i] + ",");
-
-			}
-			String deptIdList = sb.toString();
-			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
-			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
-			if (addEdit == 0) {
-				Staff staff = new Staff();
-
-				staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
-				staff.setCurrentDesignationId(designation);
-				staff.setDeptId(deptIdList);
-				staff.setEmail(XssEscapeUtils.jsoupParse(email));
-				staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(accName));
-				staff.setFacultyId(accId);
-				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				staff.setIsSame(isState);
-				if(isState==1) {
-				staff.setFacultyMiddelName("21");		//inserted state id
-				}else {
-					staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
-				}
-				staff.setHightestQualificationYear(null);
-				staff.setIsAccOff(1);
-				staff.setIsDean(0);
-				staff.setIsFaculty(1);
-				staff.setIsHod(0);
-				staff.setIsIqac(0);
-				staff.setIsLibrarian(0);
-				staff.setIsPrincipal(0);
-
-				staff.setIsStudent(0);
-				staff.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
-				staff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
-				staff.setLastUpdatedDatetime(curDateTime);
-				staff.setMakerEnterDatetime(curDateTime);
-
-				staff.setPassword("");
-				staff.setRoleIds(roleIds);
-				staff.setTeachingTo(0);
-				staff.setType(5);
-
-				staff.setInstituteId(instituteId);
-				staff.setDelStatus(1);
-				staff.setIsActive(1);
-				staff.setMakerUserId(userId);
-				staff.setCheckerUserId(0);
-				staff.setCheckerDatetime(curDateTime);
-
-				staff.setExtravarchar1("NA");
 				try {
-					String realivingDate = request.getParameter("acc_off_relDate");
-					staff.setRealivingDate(XssEscapeUtils.jsoupParse(realivingDate));
-
+					isAccOff = Integer.parseInt(request.getParameter("isAccOff"));
 				} catch (Exception e) {
-					staff.setRealivingDate(null);
+					isAccOff = 0;
 				}
-				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+
+				int accId = 0;
+
+				try {
+					accId = Integer.parseInt(request.getParameter("acc_id"));
+				} catch (Exception e) {
+					accId = 0;
+				}
+
+				String roleNameList = null;
+
+				roleNameList = Constants.Account_Officer_Role;
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("roleNameList", roleNameList);
+				AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+						AssignRoleDetailList[].class);
+				List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+				String roleIds = new String();
+				for (int i = 0; i < roleIdsList.size(); i++) {
+					roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+				}
+				System.err.println("roleIds " + roleIds);
+
+				int designation = 0;
+
+				//// System.out.println("Data:" + accId);
+				String accName = request.getParameter("accName");
+				//// System.out.println("Data:" + accName);
+				designation = Integer.parseInt(request.getParameter("designation"));
+				String dateOfJoin = request.getParameter("dateOfJoin");
+				String contact = request.getParameter("contactNo");
+				String email = request.getParameter("email");
+				int isState = Integer.parseInt(request.getParameter("is_state_same"));
+				String[] deptIds = request.getParameterValues("dept_id");
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < deptIds.length; i++) {
+					sb = sb.append(deptIds[i] + ",");
+
+				}
+				String deptIdList = sb.toString();
+				deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+				int addEdit = Integer.parseInt(request.getParameter("addEdit"));
+				if (addEdit == 0) {
+					Staff staff = new Staff();
+
+					staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
+					staff.setCurrentDesignationId(designation);
+					staff.setDeptId(deptIdList);
+					staff.setEmail(XssEscapeUtils.jsoupParse(email));
+					staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(accName));
+					staff.setFacultyId(accId);
+					staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+					staff.setIsSame(isState);
+					if (isState == 1) {
+						staff.setFacultyMiddelName("21"); // inserted state id
+					} else {
+						staff.setFacultyMiddelName(request.getParameter("state_id")); // inserted state id
+					}
+					staff.setHightestQualificationYear(null);
+					staff.setIsAccOff(1);
+					staff.setIsDean(0);
+					staff.setIsFaculty(1);
+					staff.setIsHod(0);
+					staff.setIsIqac(0);
+					staff.setIsLibrarian(0);
+					staff.setIsPrincipal(0);
+
+					staff.setIsStudent(0);
+					staff.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
+					staff.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
+					staff.setLastUpdatedDatetime(curDateTime);
+					staff.setMakerEnterDatetime(curDateTime);
+
+					staff.setPassword("");
+					staff.setRoleIds(roleIds);
+					staff.setTeachingTo(0);
+					staff.setType(5);
+
+					staff.setInstituteId(instituteId);
+					staff.setDelStatus(1);
+					staff.setIsActive(1);
+					staff.setMakerUserId(userId);
+					staff.setCheckerUserId(0);
+					staff.setCheckerDatetime(curDateTime);
+
+					staff.setExtravarchar1("NA");
+					try {
+						String realivingDate = request.getParameter("acc_off_relDate");
+						staff.setRealivingDate(XssEscapeUtils.jsoupParse(realivingDate));
+
+					} catch (Exception e) {
+						staff.setRealivingDate(null);
+					}
+					Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+
+				} else {
+
+					map = new LinkedMultiValueMap<>();
+					map.add("id", accId);
+
+					Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+					editHod.setFacultyFirstName(XssEscapeUtils.jsoupParse(accName));
+					editHod.setDeptId(deptIdList);
+					editHod.setEmail(XssEscapeUtils.jsoupParse(email));
+					editHod.setFacultyId(accId);
+					editHod.setContactNo(XssEscapeUtils.jsoupParse(contact));
+					editHod.setCurrentDesignationId(designation);
+					editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+
+					editHod.setIsSame(isState);
+					if (isState == 1) {
+						editHod.setFacultyMiddelName("21"); // inserted state id
+					} else {
+						editHod.setFacultyMiddelName(request.getParameter("state_id")); // inserted state id
+					}
+					editHod.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
+					editHod.setIsAccOff(1);
+					editHod.setType(5);
+					editHod.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
+
+					try {
+						String realivingDate = request.getParameter("acc_off_relDate");
+						editHod.setRealivingDate(XssEscapeUtils.jsoupParse(realivingDate));
+
+					} catch (Exception e) {
+						editHod.setRealivingDate(null);
+					}
+
+					Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
+
+				}
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showAccList";
+				else
+					redirect = "redirect:/showRegAcc";
 
 			} else {
-
-				map = new LinkedMultiValueMap<>();
-				map.add("id", accId);
-
-				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				editHod.setFacultyFirstName(XssEscapeUtils.jsoupParse(accName));
-				editHod.setDeptId(deptIdList);
-				editHod.setEmail(XssEscapeUtils.jsoupParse(email));
-				editHod.setFacultyId(accId);
-				editHod.setContactNo(XssEscapeUtils.jsoupParse(contact));
-				editHod.setCurrentDesignationId(designation);
-				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-			
-				editHod.setIsSame(isState);
-				if(isState==1) {
-					editHod.setFacultyMiddelName("21");		//inserted state id
-				}else {
-					editHod.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
-				}
-				editHod.setJoiningDate(XssEscapeUtils.jsoupParse(dateOfJoin));
-				editHod.setIsAccOff(1);
-				editHod.setType(5);
-				editHod.setIsWorking(Integer.parseInt(request.getParameter("isWorking")));
-
-				try {
-					String realivingDate = request.getParameter("acc_off_relDate");
-					editHod.setRealivingDate(XssEscapeUtils.jsoupParse(realivingDate));
-
-				} catch (Exception e) {
-					editHod.setRealivingDate(null);
-				}
-
-				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
-
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
 			}
 
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showAccList";
-			else
-				redirect = "redirect:/showRegAcc";
 		} catch (Exception e) {
 
 			System.err.println("exception In showRegAcc at Masters Contr" + e.getMessage());
@@ -613,10 +624,11 @@ public class MasterController {
 				model = new ModelAndView("master/accReg");
 
 				model.addObject("title", "Edit Account Officer Registration");
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("desgList", Constants.facAccountant);
-				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map, Designation[].class);
+				Designation[] designArr = rest.postForObject(Constants.url + "/getAllDesignations", map,
+						Designation[].class);
 				List<Designation> designationList = new ArrayList<>(Arrays.asList(designArr));
 				model.addObject("desigList", designationList);
 
@@ -643,7 +655,7 @@ public class MasterController {
 				map.add("id", facultyId);
 
 				Staff editFaculty = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				////System.out.println("facultyId:" + facultyId);
+				//// System.out.println("facultyId:" + facultyId);
 
 				model.addObject("editFaculty", editFaculty);
 				model.addObject("addEdit", "1");
@@ -684,7 +696,7 @@ public class MasterController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("accOffIds");
-					////System.out.println("id are" + instIds);
+					//// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1095,9 +1107,9 @@ public class MasterController {
 				String aisheCode = request.getParameter("aishe_code");
 				String pricplContact = request.getParameter("princ_contact");
 				String princplEmail = request.getParameter("princ_email");
-				String instAdd = request.getParameter("inst_add"); 
+				String instAdd = request.getParameter("inst_add");
 				String instName = request.getParameter("inst_name");
-				
+
 				String prsidName = request.getParameter("pres_name");
 				String princplName = request.getParameter("princ_name");
 				String trustyAdd = request.getParameter("trusty_add");
@@ -1105,15 +1117,15 @@ public class MasterController {
 				String trustyName = request.getParameter("trusty_name");
 				String presContact = request.getParameter("pres_contact");
 				String presEmail = request.getParameter("pres_email");
-				
+
 				String village = request.getParameter("village");
 				String taluka = request.getParameter("taluka");
 				String district = request.getParameter("district");
 				String state = request.getParameter("state");
 				String pin = request.getParameter("pin");
-				
+
 				String regDate = DateConvertor.convertToYMD(request.getParameter("reg_date"));
-				
+
 				institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
 
 				institute.setCheckerDatetime(curDateTime);
@@ -1145,12 +1157,12 @@ public class MasterController {
 											// user who creates
 				// iqac
 				// and hod to student
-				
+
 				institute.setPresidentName(XssEscapeUtils.jsoupParse(prsidName));
 				institute.setPrincipalName(XssEscapeUtils.jsoupParse(princplName));
 				if (isReg == 1)
-					
-				institute.setRegDate(XssEscapeUtils.jsoupParse(regDate));
+
+					institute.setRegDate(XssEscapeUtils.jsoupParse(regDate));
 				institute.setTrustAdd(XssEscapeUtils.jsoupParse(trustyAdd));
 
 				institute.setTrustContactNo(XssEscapeUtils.jsoupParse(trustyCont));
@@ -1166,7 +1178,7 @@ public class MasterController {
 				institute.setState(XssEscapeUtils.jsoupParse(state));
 				institute.setPincode(XssEscapeUtils.jsoupParse(pin));
 
-				////System.out.println(institute);
+				//// System.out.println(institute);
 
 				Institute info = restTemplate.postForObject(Constants.url + "saveInstitute", institute,
 						Institute.class);
@@ -1249,7 +1261,7 @@ public class MasterController {
 
 				System.err.println("Multiple records delete ");
 				String[] instIds = request.getParameterValues("instIds");
-				////System.out.println("id are" + instIds);
+				//// System.out.println("id are" + instIds);
 
 				StringBuilder sb = new StringBuilder();
 
@@ -1307,7 +1319,7 @@ public class MasterController {
 
 					System.err.println("Multiple records approve ");
 					String[] instIds = request.getParameterValues("instIds");
-					////System.out.println("id are" + instIds);
+					//// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 					for (int i = 0; i < instIds.length; i++) {
@@ -1399,73 +1411,72 @@ public class MasterController {
 			RestTemplate restTemplate = new RestTemplate();
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			
+
 			HttpSession session = request.getSession();
-			String token=request.getParameter("token");
-			String key=(String) session.getAttribute("generatedKey");
-			
-			if(token.trim().equals(key.trim())) {
-			
-			int deptId = Integer.parseInt(request.getParameter("dept_id"));
-			//System.err.println("Dept id  " + deptId);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			
-			deptId=(int) session.getAttribute("deptId");
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info editAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "0", "1", "0", "0",
-					newModuleList);
+				int deptId = Integer.parseInt(request.getParameter("dept_id"));
+				// System.err.println("Dept id " + deptId);
 
-			if (editAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				if (deptId == 0) {
-					Dept dept = new Dept();
-					String deptName = XssEscapeUtils.jsoupParse(request.getParameter("dept_name"));
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
+				deptId = (int) session.getAttribute("deptId");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-					String curDateTime = dateFormat.format(cal.getTime());
+				Info editAccess = AccessControll.checkAccess("showDeptList", "showDeptList", "0", "1", "0", "0",
+						newModuleList);
 
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					dept.setAddDate(curDate);
-					dept.setDelStatus(1);
-					dept.setDeptId(deptId);
-					dept.setDeptName(deptName);
-					int exInt1 = 0;
-					dept.setExInt1(exInt1);
-					dept.setExInt2(exInt1);
-					String exVar1 = "NA";
-					dept.setExVar1(exVar1);
-					dept.setExVar2(exVar1);
-					dept.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
-					dept.setIsActive(1);
-					dept.setMakerUserId(userObj.getUserId());// get from Session
-					Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
-
+				if (editAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					if (deptId == 0) {
+						Dept dept = new Dept();
+						String deptName = XssEscapeUtils.jsoupParse(request.getParameter("dept_name"));
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
 
-					map.add("deptId", deptId);
-					// getInstitute
-					Dept dept = rest.postForObject(Constants.url + "getDept", map, Dept.class);
-					String deptName = XssEscapeUtils.jsoupParse(request.getParameter("dept_name"));
-					dept.setDeptName(deptName);
-					dept.setMakerUserId(userObj.getUserId());// get from Session
-					Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
+						String curDateTime = dateFormat.format(cal.getTime());
 
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						dept.setAddDate(curDate);
+						dept.setDelStatus(1);
+						dept.setDeptId(deptId);
+						dept.setDeptName(deptName);
+						int exInt1 = 0;
+						dept.setExInt1(exInt1);
+						dept.setExInt2(exInt1);
+						String exVar1 = "NA";
+						dept.setExVar1(exVar1);
+						dept.setExVar2(exVar1);
+						dept.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
+						dept.setIsActive(1);
+						dept.setMakerUserId(userObj.getUserId());// get from Session
+						Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
+
+					} else {
+
+						map.add("deptId", deptId);
+						// getInstitute
+						Dept dept = rest.postForObject(Constants.url + "getDept", map, Dept.class);
+						String deptName = XssEscapeUtils.jsoupParse(request.getParameter("dept_name"));
+						dept.setDeptName(deptName);
+						dept.setMakerUserId(userObj.getUserId());// get from Session
+						Dept editInst = rest.postForObject(Constants.url + "saveDept", dept, Dept.class);
+
+					}
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showDeptList";
+					else
+						redirect = "redirect:/addFaculty";
 				}
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showDeptList";
-				else
-					redirect = "redirect:/addFaculty";
-			}
-			}else {
+			} else {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
@@ -1500,7 +1511,7 @@ public class MasterController {
 
 				int deptId = Integer.parseInt(request.getParameter("edit_dept_id"));
 				session.setAttribute("deptId", deptId);
-				
+
 				model.addObject("title", "Edit Department");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("deptId", deptId);
@@ -1540,7 +1551,7 @@ public class MasterController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("deptIds");
-					////System.out.println("id are" + instIds);
+					//// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1596,7 +1607,7 @@ public class MasterController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("hodId", hodId);
 				editHod = rest.postForObject(Constants.url + "/getHod", map, Hod.class);
-				////System.out.println("hodId:" + hodId);
+				//// System.out.println("hodId:" + hodId);
 
 				model.addObject("hod", editHod);
 
@@ -1697,13 +1708,13 @@ public class MasterController {
 				Hod changeHod = rest.postForObject(Constants.url + "saveHod", hod, Hod.class);
 
 				if (changeHod != null) {
-					////System.out.println(changeHod.toString());
-					////System.out.println("In Null" + hodId);
+					//// System.out.println(changeHod.toString());
+					//// System.out.println("In Null" + hodId);
 					map = new LinkedMultiValueMap<String, Object>();
 					map.add("hodId", hodId);
 
 					Info info = rest.postForObject(Constants.url + "/updateHodStatus", map, Info.class);
-					////System.out.println("info" + info.toString());
+					//// System.out.println("info" + info.toString());
 
 					map = new LinkedMultiValueMap<String, Object>();
 					map.add("regPrimaryKey", hodId);
@@ -1711,7 +1722,7 @@ public class MasterController {
 
 					info = rest.postForObject(Constants.url + "/blockPreviousHodRecord", map, Info.class);
 
-					////System.out.println("block previous record" + info.toString());
+					//// System.out.println("block previous record" + info.toString());
 					//
 				}
 
@@ -1755,7 +1766,7 @@ public class MasterController {
 
 			model = new ModelAndView("showInstitute");
 			// int instituteId = Integer.parseInt(request.getParameter("instId"));
-			////System.out.println("id are" + instId);
+			//// System.out.println("id are" + instId);
 
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("instId", instId);
@@ -1796,7 +1807,7 @@ public class MasterController {
 			} else {
 
 				Info inf = new Info();
-				////System.out.println("Id:" + instId);
+				//// System.out.println("Id:" + instId);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("instId", instId);

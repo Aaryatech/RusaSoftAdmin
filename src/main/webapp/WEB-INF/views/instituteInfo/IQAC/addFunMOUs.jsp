@@ -5,6 +5,13 @@
 
 
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -100,6 +107,17 @@
 										action="${pageContext.request.contextPath}/insertFunctionalMOU"
 										method="post" novalidate="novalidate" name="form_sample_2"
 										id="form_sample_2">
+ 										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 										<%-- 	<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
@@ -390,8 +408,8 @@
 											<div class="col-sm-offset-3 col-sm-9">
 
 
-												<button type="submit" id="sub1"
-													class="btn btn-primary" onclick="submit_f(1)">
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
 
@@ -442,7 +460,7 @@
 					this.value = this.value.replace(/[^0-9]/g, '').replace(
 							/(\..*)\./g, '$1');
 				});
-		
+
 		$('#toDate').on(
 				'input',
 				function() {

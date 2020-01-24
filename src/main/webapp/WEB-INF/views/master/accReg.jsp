@@ -3,6 +3,12 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 
 
 <!DOCTYPE html>
@@ -85,9 +91,22 @@
 										action="${pageContext.request.contextPath}/insertAccOff"
 										method="post" name="formidhere" id="formidhere">
 
-										<input type="hidden" id="acc_id" name="acc_id"
-											value="${editFaculty.facultyId}"> <input
-											type="hidden" id="addEdit" name="addEdit" value="${addEdit}">
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="acc_id" name="acc_id" value="${editFaculty.facultyId}">
+										<input type="hidden" id="addEdit" name="addEdit"
+											value="${addEdit}">
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">
 												Name<span class="text-danger">*</span>
@@ -110,7 +129,7 @@
 											<div class="col-sm-10">
 												<select id="designation" name="designation"
 													class="form-control" onchange="showForm()">
-														
+
 													<c:forEach items="${desigList}" var="makeList">
 														<c:choose>
 															<c:when
@@ -135,7 +154,7 @@
 											</label>
 											<div class="col-sm-10">
 												<select id="dept_id" name="dept_id" class="" multiple>
-												<option>Select Department</option>
+													<option>Select Department</option>
 													<c:forEach items="${deptList}" var="dept">
 														<c:set var="flag" value="0"></c:set>
 														<c:forEach items="${deptIdList}" var="selFr"
@@ -217,7 +236,8 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="dateOfJoin" onchange="trim(this)" data-end-date="0d" data-format="dd-mm-yyyy"
+													id="dateOfJoin" onchange="trim(this)" data-end-date="0d"
+													data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editFaculty.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd/mm/yyyy"> <span
@@ -286,70 +306,80 @@
 											</label>
 											<div class="col-sm-3">
 												<input type="text" class="form-control datepicker"
-													id="acc_off_relDate" data-end-date="0d" data-format="dd-mm-yyyy"
+													id="acc_off_relDate" data-end-date="0d"
+													data-format="dd-mm-yyyy"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" name="acc_off_relDate"
-													placeholder="Relieving Date" 
+													placeholder="Relieving Date"
 													value="${editFaculty.realivingDate}"> <span
 													class="error_form text-danger" id="error_acc_off_relDate"
 													style="display: none;">Please enter relieving date</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
-											
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH State<span
-												class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="is_add_same">Belongs
+												to MH State<span class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-3">
-												
-													<c:if test="${editFaculty.facultyId>0}">
-													Yes <input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-													<c:if test="${editFaculty.facultyId==0}">
-													Yes <input type="radio" checked name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio"  name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-												<span class="error_form text-danger" id="is_state_same_field"
-													style="display: none;">Please select
-													permanent/correspondence address same or not.</span>
+
+												<c:if test="${editFaculty.facultyId>0}">
+													Yes <input type="radio"
+														${editFaculty.isSame == 1 ? 'checked' : ''}
+														name="is_state_same" id="is_state_same" value="1"
+														onclick="selcState()"> 
+													No<input type="radio"
+														${editFaculty.isSame == 0 ? 'checked' : ''}
+														name="is_state_same" id="is_state_same" value="0"
+														onclick="selcState()">
+												</c:if>
+
+												<c:if test="${editFaculty.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same"
+														id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" name="is_state_same"
+														id="is_state_same" value="0" onclick="selcState()">
+												</c:if>
+
+												<span class="error_form text-danger"
+													id="is_state_same_field" style="display: none;">Please
+													select permanent/correspondence address same or not.</span>
 
 											</div>
 										</div>
-										
-										
-										
+
+
+
 										<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="state_id">State
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
+
+													<c:forEach items="${sessionScope.stateList}" var="state">
 														<c:choose>
-														<c:when test="${editFaculty.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
+															<c:when
+																test="${editFaculty.facultyMiddelName == state.stateId}">
+																<option selected value="${state.stateId}">${state.stateName}</option>
+															</c:when>
+
+															<c:otherwise>
+																<option value="${state.stateId}">${state.stateName}</option>
+															</c:otherwise>
 														</c:choose>
 													</c:forEach>
- 
- 	
+
+
 												</select> <span class="error_form text-danger" id="quolf_field"
 													style="display: none;">Please select highest
 													qualification</span>
 											</div>
 										</div>
-										
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact
@@ -357,8 +387,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													onchange="trim(this)"
-													name="contactNo"
+													onchange="trim(this)" name="contactNo"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -437,20 +466,19 @@
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script type="text/javascript"> 
- function selcState() {
-	// alert("Hi");
-	 var isSamState = $("input[name='is_state_same']:checked"). val();
-	// alert(isSamState);
-	 
-	 if(isSamState==0){
-		 document.getElementById("state").style.display = "block";
-	 }else{
-		 document.getElementById("state").style.display = "none";
-	 }
-}
- 
- </script>
+	<script type="text/javascript">
+		function selcState() {
+			// alert("Hi");
+			var isSamState = $("input[name='is_state_same']:checked").val();
+			// alert(isSamState);
+
+			if (isSamState == 0) {
+				document.getElementById("state").style.display = "block";
+			} else {
+				document.getElementById("state").style.display = "none";
+			}
+		}
+	</script>
 
 	<script>
 		function trim(el) {
@@ -811,7 +839,7 @@
 									}
 								});
 		}
- */
+		 */
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
 			/* var form=document.getElementById("form_sample_2");
@@ -993,31 +1021,32 @@
 
 								},
 								function(data) {
-									
-									if(data.facultyId>0){
-									//alert("Data not null");
-									document.getElementById("email").value = data.email;
-									document.getElementById("contactNo").value = data.contactNo;
-									document.getElementById("accName").value = data.facultyFirstName;
-									document.getElementById("dateOfJoin").value = data.joiningDate;
-									document.getElementById("acc_off_relDate").value = data.realivingDate;
-									document.getElementById("acc_id").value = data.facultyId;
-									
 
-									//Mahendra
-									//single select
-									document.getElementById("designation").value=data.currentDesignationId;
-									$("#designation").trigger("chosen:updated");
-									//single select
-									document.getElementById("quolif").value=data.highestQualification;
-									$("#quolif").trigger("chosen:updated");
-									
-									//multiple select
-								 	var temp = new Array();
-								 	temp = (data.deptId).split(",");
-									  $('#dept_id').val(temp);
-									  $('#dept_id').trigger('change'); // Notify any JS components that the value changed
-									}else{
+									if (data.facultyId > 0) {
+										//alert("Data not null");
+										document.getElementById("email").value = data.email;
+										document.getElementById("contactNo").value = data.contactNo;
+										document.getElementById("accName").value = data.facultyFirstName;
+										document.getElementById("dateOfJoin").value = data.joiningDate;
+										document
+												.getElementById("acc_off_relDate").value = data.realivingDate;
+										document.getElementById("acc_id").value = data.facultyId;
+
+										//Mahendra
+										//single select
+										document.getElementById("designation").value = data.currentDesignationId;
+										$("#designation").trigger(
+												"chosen:updated");
+										//single select
+										document.getElementById("quolif").value = data.highestQualification;
+										$("#quolif").trigger("chosen:updated");
+
+										//multiple select
+										var temp = new Array();
+										temp = (data.deptId).split(",");
+										$('#dept_id').val(temp);
+										$('#dept_id').trigger('change'); // Notify any JS components that the value changed
+									} else {
 										//document.getElementById("email").value = "";
 										//document.getElementById("contactNo").value = "";
 										/* document.getElementById("accName").value = "";

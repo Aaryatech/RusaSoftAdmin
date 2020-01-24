@@ -4,6 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -99,6 +106,19 @@
 										action="${pageContext.request.contextPath}/insertResearchCenter"
 										method="post" name="formidhere" id="formidhere">
 
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div class="form-group">
 
 											<label class="control-label col-sm-2" for="rc_subject_name">Subject
@@ -131,17 +151,18 @@
 										</div>
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="rc_guide_count">No. of Affiliated 
-												Guides<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="rc_guide_count">No.
+												of Affiliated Guides<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control"
-													onchange="trim(this)" id="rc_guide_count" 
+													onchange="trim(this)" id="rc_guide_count"
 													name="rc_guide_count" maxlength="8"
 													placeholder="No. of Affiliated Guides" autocomplete="off"
 													value="${editValue.rcGuideCount}"> <span
 													class="error_form text-danger" id="error_rc_guide_count"
-													style="display: none;">Please enter of affiliated  guides.</span>
+													style="display: none;">Please enter of affiliated
+													guides.</span>
 											</div>
 										</div>
 
@@ -152,12 +173,13 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control" maxlength="8"
-													onchange="trim(this)" id="rc_student_count" 
-													name="rc_student_count" placeholder="No. of Students Registered"
-													autocomplete="off" value="${editValue.rcStudentCount}">
-												<span class="error_form text-danger"
-													id="error_rc_student_count" style="display: none;">Please
-													enter No. of students registered.</span>
+													onchange="trim(this)" id="rc_student_count"
+													name="rc_student_count"
+													placeholder="No. of Students Registered" autocomplete="off"
+													value="${editValue.rcStudentCount}"> <span
+													class="error_form text-danger" id="error_rc_student_count"
+													style="display: none;">Please enter No. of students
+													registered.</span>
 											</div>
 										</div>
 
@@ -172,11 +194,10 @@
 													id="fromDate" name="fromDate" placeholder="dd-mm-yyyy"
 													value="${editValue.rcValidityFromdt}" autocomplete="off">
 												<span class="error_form text-danger" id="error_fromDate"
-													style="display: none;">Please enter From date.</span>
-													
-												<span
+													style="display: none;">Please enter From date.</span> <span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">from Date must be smaller than to date.</span>
+													style="display: none;">from Date must be smaller
+													than to date.</span>
 
 											</div>
 										</div>
@@ -192,11 +213,10 @@
 													placeholder="dd-mm-yyyy"
 													value="${editValue.rcValidityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
-													style="display: none;">Please enter to date.</span>
-													
-													<span
+													style="display: none;">Please enter to date.</span> <span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">to date must be greater than from date.</span>
+													style="display: none;">to date must be greater than
+													from date.</span>
 											</div>
 										</div>
 

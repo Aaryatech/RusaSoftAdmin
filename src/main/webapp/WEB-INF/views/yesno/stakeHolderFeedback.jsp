@@ -5,6 +5,13 @@
 
 
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -78,16 +85,21 @@ table, th, td {
 
 						</header>
 						<c:if test="${sessionScope.successMsg!=null}">
-           						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
-        	                     </div> 
-        	                     <%session=request.getSession();
-        	                    
-        	                     session.removeAttribute("successMsg");
-        	                     %>
-            			</c:if>
+							<div class="col-lg-12">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong> ${sessionScope.successMsg}
+								</div>
+							</div>
+							<%
+								session = request.getSession();
+
+									session.removeAttribute("successMsg");
+							%>
+						</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -96,9 +108,23 @@ table, th, td {
 										action="${pageContext.request.contextPath}/insertInstStakeholder"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
+
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div class="table-responsive">
-										<input type="hidden" name="isEdit" value="${isEdit}">
-										
+											<input type="hidden" name="isEdit" value="${isEdit}">
+
 											<table id="table1" style="width: 100%; padding-bottom: 50px;">
 												<thead>
 													<tr>
@@ -188,8 +214,8 @@ table, th, td {
 																							has been taken</option>
 																						<option
 																							${tempFb.fbProcess eq 'C'  ? 'Selected': '' }
-																							value="C">Feedback Collected and analyzed
-																							</option>
+																							value="C">Feedback Collected and
+																							analyzed</option>
 																						<option
 																							${tempFb.fbProcess eq 'D' ? 'Selected': '' }
 																							value="D">Feedback Collected</option>

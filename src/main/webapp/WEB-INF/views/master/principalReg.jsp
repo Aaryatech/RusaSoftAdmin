@@ -3,6 +3,12 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 <!DOCTYPE html>
@@ -73,17 +79,22 @@
 							<div class="actions panel_actions pull-right"></div>
 
 						</header>
-							<c:if test="${sessionScope.successMsg!=null}">
-           						 <div class="col-lg-12">
-    						          <div class="alert alert-success alert-dismissible fade in">
-            							    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-             						   <strong>Success : </strong> ${sessionScope.successMsg}</div>
-        	                     </div> 
-        	                     <%session=request.getSession();
-        	                    
-        	                     session.removeAttribute("successMsg");
-        	                     %>
-            			</c:if>
+						<c:if test="${sessionScope.successMsg!=null}">
+							<div class="col-lg-12">
+								<div class="alert alert-success alert-dismissible fade in">
+									<button type="button" class="close" data-dismiss="alert"
+										aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<strong>Success : </strong> ${sessionScope.successMsg}
+								</div>
+							</div>
+							<%
+								session = request.getSession();
+
+									session.removeAttribute("successMsg");
+							%>
+						</c:if>
 
 						<div class="content-body">
 							<div class="row">
@@ -92,7 +103,19 @@
 										action="${pageContext.request.contextPath}/insertPrincipal"
 										method="post" name="formidhere" id="formidhere">
 
-										<input type="hidden" id="facultyId" name="facultyId"
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="facultyId" name="facultyId"
 											value="${editFaculty.facultyId}"> <input
 											type="hidden" id="addEdit" name="addEdit" value="${addEdit}">
 										<div class="form-group">
@@ -163,8 +186,8 @@
 															</c:when>
 														</c:choose>
 													</c:forEach>
-													 
-												 
+
+
 
 
 												</select> <span class="error_form text-danger" id="dept_id_field"
@@ -208,8 +231,9 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker" data-format="dd-mm-yyyy"
-													id="dateOfJoin" data-end-date="0d" onchange="trim(this)"
+												<input type="text" class="form-control datepicker"
+													data-format="dd-mm-yyyy" id="dateOfJoin" data-end-date="0d"
+													onchange="trim(this)"
 													onkeypress='return restrictAlphabets(event)'
 													value="${editFaculty.joiningDate}" name="dateOfJoin"
 													autocomplete="off" placeholder="dd-mm-yyyy"> <span
@@ -217,56 +241,65 @@
 													style="display: none;">Please select joining date</span>
 											</div>
 										</div>
-										
-										
+
+
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH State<span
-												class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="is_add_same">Belongs
+												to MH State<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
 												<c:choose>
-												<c:when test="${editFaculty.facultyId>0}">
-													Yes<input type="radio" ${editFaculty.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" ${editFaculty.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													
+													<c:when test="${editFaculty.facultyId>0}">
+													Yes<input type="radio"
+															${editFaculty.isSame == 1 ? 'checked' : ''}
+															name="is_state_same" id="is_state_same" value="1"
+															onclick="selcState()"> 
+													No<input type="radio"
+															${editFaculty.isSame == 0 ? 'checked' : ''}
+															name="is_state_same" id="is_state_same" value="0"
+															onclick="selcState()">
+
 													</c:when>
-													
+
 													<c:otherwise>
-													Yes <input checked type="radio" name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
+													Yes <input checked type="radio" name="is_state_same"
+															id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" name="is_state_same"
+															id="is_state_same" value="0" onclick="selcState()">
 													</c:otherwise>
-													
-													</c:choose>
-													
-												</div>
+
+												</c:choose>
+
+											</div>
 										</div>
-										
+
 										<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="state_id">State
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
+
+													<c:forEach items="${sessionScope.stateList}" var="state">
 														<c:choose>
-														<c:when test="${editHod.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
+															<c:when
+																test="${editHod.facultyMiddelName == state.stateId}">
+																<option selected value="${state.stateId}">${state.stateName}</option>
+															</c:when>
+
+															<c:otherwise>
+																<option value="${state.stateId}">${state.stateName}</option>
+															</c:otherwise>
 														</c:choose>
-													</c:forEach> 
- 	
+													</c:forEach>
+
 												</select> <span class="error_form text-danger" id="quolf_field"
 													style="display: none;">Please select highest
 													qualification</span>
 											</div>
-										</div>								
-										
+										</div>
+
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact
@@ -274,8 +307,7 @@
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="contactNo"
-													 onchange="trim(this)"
-													name="contactNo"
+													onchange="trim(this)" name="contactNo"
 													onkeypress='return restrictAlphabets(event)'
 													autocomplete="off" maxlength="10"
 													title="Phone number with 7-9 and remaing 9 digit with 0-9"
@@ -313,9 +345,12 @@
 												<span class="text-danger"></span>
 											</label>
 											<div class="col-sm-10">
-												<input type="checkbox" name="isAccOff" ${editFaculty.isAccOff==1 ? 'checked' : ''} value="1">Account
-												Officer <input type="checkbox" ${editFaculty.isHod==1 ? 'checked' : ''} name="isHod" value="1">HOD
-												<input type="checkbox" name="isDean" ${editFaculty.isDean==1 ? 'checked' : ''} value="1">Dean
+												<input type="checkbox" name="isAccOff"
+													${editFaculty.isAccOff==1 ? 'checked' : ''} value="1">Account
+												Officer <input type="checkbox"
+													${editFaculty.isHod==1 ? 'checked' : ''} name="isHod"
+													value="1">HOD <input type="checkbox" name="isDean"
+													${editFaculty.isDean==1 ? 'checked' : ''} value="1">Dean
 
 
 											</div>
@@ -357,21 +392,20 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- 
- <script type="text/javascript"> 
- function selcState() {
-	 var isSamState = $("input[name='is_state_same']:checked"). val();
-	// alert(isSamState);
-	 
-	 if(isSamState==0){
-		 document.getElementById("state").style.display = "block";
-	 }else{
-		 document.getElementById("state").style.display = "none";
-	 }
-}
- 
- </script>
- 
+
+	<script type="text/javascript">
+		function selcState() {
+			var isSamState = $("input[name='is_state_same']:checked").val();
+			// alert(isSamState);
+
+			if (isSamState == 0) {
+				document.getElementById("state").style.display = "block";
+			} else {
+				document.getElementById("state").style.display = "none";
+			}
+		}
+	</script>
+
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -548,17 +582,17 @@
 	</script>
 
 	<script type="text/javascript">
-		  $(function() {
+		$(function() {
 
-			   $('.dateOfJoin').datepicker({
+			$('.dateOfJoin').datepicker({
 				autoclose : true,
 				format : "dd-mm-yyyy",
 				changeYear : true,
 				changeMonth : true,
-				maxDate: "+1m +1w"
-				 
-			});   
-		}); 
+				maxDate : "+1m +1w"
+
+			});
+		});
 
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -609,26 +643,26 @@
 	</script>
 	<script type="text/javascript">
 		function showIsReg() {
-		/* 	//alert("Hi");
-			var x = 11;//${accOff.officerId}
+			/* 	//alert("Hi");
+				var x = 11;//${accOff.officerId}
 
-			if (x > 0) {
-				//alert("Hi 1")
-				var isRel = ${accOff.realivingDate}
-				;
-				//alert("Is Reg " +isReg);
-				if (isRel == null) {
-					//alert("Hi 2")
-					document.getElementById("abc").style.display = "none";
+				if (x > 0) {
+					//alert("Hi 1")
+					var isRel = ${accOff.realivingDate}
+					;
+					//alert("Is Reg " +isReg);
+					if (isRel == null) {
+						//alert("Hi 2")
+						document.getElementById("abc").style.display = "none";
 
-				} else {
-					//alert("Hi es")
-					document.getElementById("abc").style.display = "block";
+					} else {
+						//alert("Hi es")
+						document.getElementById("abc").style.display = "block";
+
+					}
 
 				}
-
-			}
- */
+			 */
 		}
 	</script>
 	<script type="text/javascript">
@@ -674,7 +708,7 @@
 
 									//alert("Data  " +JSON.stringify(data));
 
-								 if(data.facultyId>0){
+									if (data.facultyId > 0) {
 
 										document.getElementById("email").value = data.email;
 										document.getElementById("contactNo").value = data.contactNo;
@@ -683,16 +717,17 @@
 										document.getElementById("facultyId").value = data.facultyId;
 
 										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
-										$("#designation").trigger("chosen:updated");
+										$("#designation").trigger(
+												"chosen:updated");
 										var temp = new Array();
 
 										temp = (data.deptId).split(",");
 										//alert(temp);
 										$("#dept_id").val(temp);
 										$("#dept_id").trigger("chosen:updated");
-								 }else{
-									 
-								 }
+									} else {
+
+									}
 								});
 		}
 	</script>

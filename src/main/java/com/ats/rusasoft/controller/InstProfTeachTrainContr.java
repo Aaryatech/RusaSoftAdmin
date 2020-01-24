@@ -149,87 +149,96 @@ public class InstProfTeachTrainContr {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			int trainigType = Integer.parseInt(request.getParameter("trainnig_type"));
-			System.err.println("tra type received " + trainigType);
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			if (token.trim().equals(key.trim())) {
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				RestTemplate restTemplate = new RestTemplate();
 
-			Info addAccess = AccessControll.checkAccess("insertTeachTraing", "showProfDevelopment", "0", "1", "0", "0",
-					newModuleList);
-			if (addAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				int trainigType = Integer.parseInt(request.getParameter("trainnig_type"));
+				System.err.println("tra type received " + trainigType);
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info addAccess = AccessControll.checkAccess("insertTeachTraing", "showProfDevelopment", "0", "1", "0",
+						"0", newModuleList);
+				if (addAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+
+					int trainingId = 0;
+
+					try {
+						trainingId = Integer.parseInt(request.getParameter("training_id"));
+					} catch (Exception e) {
+						trainingId = 0;
+					}
+
+					InstituteTraining instTrain = new InstituteTraining();
+					String title = request.getParameter("dev_Prog_title");
+					String financeSupport = request.getParameter("fianance_support");
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					instTrain.setTrainingFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
+					instTrain.setTrainingId(trainingId);
+					instTrain.setTrainingPcount(Integer.parseInt(request.getParameter("no_of_participant")));
+					instTrain.setTrainingTitle(XssEscapeUtils.jsoupParse(title));
+					instTrain.setTrainingTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
+					instTrain.setTrainingType(trainigType);
+
+					int yearId = (int) session.getAttribute("acYearId");
+
+					instTrain.setYearId(yearId);
+					instTrain.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+					/*
+					 * if(instTrain.getTrainingPcount()==0) { instTrain.setDelStatus(0); }else {
+					 * 
+					 * }
+					 */
+					instTrain.setDelStatus(1);
+					instTrain.setIsActive(1);
+					instTrain.setExInt1(0);
+					instTrain.setExInt2(0);
+					instTrain.setExVar1(XssEscapeUtils.jsoupParse(financeSupport));// Finance Support
+					instTrain.setExVar2("NA");
+
+					instTrain.setMakerDatetime(curDateTime);
+					instTrain.setMakerUserId(userObj.getUserId());
+
+					InstituteTraining instTrainning = rest.postForObject(Constants.url + "saveInstituteTraining",
+							instTrain, InstituteTraining.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (trainigType == 1) { // for pro
+						if (isView == 1)
+							redirect = "redirect:/showProfDevelopment";
+						else
+							redirect = "redirect:/showAddProfDevelopment";
+					} else { // for academic
+						if (isView == 1)
+							redirect = "redirect:/showAdminDevelopment";
+						else
+							redirect = "redirect:/showAddAdminDevelopment";
+					}
+
+				}
 			} else {
 
-				int trainingId = 0;
-
-				try {
-					trainingId = Integer.parseInt(request.getParameter("training_id"));
-				} catch (Exception e) {
-					trainingId = 0;
-				}
-
-				InstituteTraining instTrain = new InstituteTraining();
-				String title = request.getParameter("dev_Prog_title");
-				String financeSupport = request.getParameter("fianance_support");
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				String curDate = dateFormatStr.format(new Date());
-
-				instTrain.setTrainingFromdt(DateConvertor.convertToYMD(request.getParameter("fromDate")));
-				instTrain.setTrainingId(trainingId);
-				instTrain.setTrainingPcount(Integer.parseInt(request.getParameter("no_of_participant")));
-				instTrain.setTrainingTitle(XssEscapeUtils.jsoupParse(title));
-				instTrain.setTrainingTodt(DateConvertor.convertToYMD(request.getParameter("toDate")));
-				instTrain.setTrainingType(trainigType);
-
-				int yearId = (int) session.getAttribute("acYearId");
-
-				instTrain.setYearId(yearId);
-				instTrain.setInstituteId(userObj.getGetData().getUserInstituteId());
-
-				/*
-				 * if(instTrain.getTrainingPcount()==0) { instTrain.setDelStatus(0); }else {
-				 * 
-				 * }
-				 */
-				instTrain.setDelStatus(1);
-				instTrain.setIsActive(1);
-				instTrain.setExInt1(0);
-				instTrain.setExInt2(0);
-				instTrain.setExVar1(XssEscapeUtils.jsoupParse(financeSupport));//Finance Support
-				instTrain.setExVar2("NA");
-
-				instTrain.setMakerDatetime(curDateTime);
-				instTrain.setMakerUserId(userObj.getUserId());
-
-				InstituteTraining instTrainning = rest.postForObject(Constants.url + "saveInstituteTraining", instTrain,
-						InstituteTraining.class);
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (trainigType == 1) { // for pro
-					if (isView == 1)
-						redirect = "redirect:/showProfDevelopment";
-					else
-						redirect = "redirect:/showAddProfDevelopment";
-				} else { // for academic
-					if (isView == 1)
-						redirect = "redirect:/showAdminDevelopment";
-					else
-						redirect = "redirect:/showAddAdminDevelopment";
-				}
-
+				redirect = "redirect:/accessDenied";
 			}
 		} catch (Exception e) {
 			System.err.println("Exce in save insertTeachTraing  " + e.getMessage());
@@ -414,7 +423,7 @@ public class InstProfTeachTrainContr {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("trainingId");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 

@@ -107,10 +107,10 @@ public class InstituteController {
 				InstituteSupport[] instSuprtArr = rest.postForObject(Constants.url + "/getSchemesByIds", map,
 						InstituteSupport[].class);
 				List<InstituteSupport> instSuprtlist = new ArrayList<>(Arrays.asList(instSuprtArr));
-				
-				for(int i=0;i<instSuprtlist.size();i++) {
+
+				for (int i = 0; i < instSuprtlist.size(); i++) {
 					instSuprtlist.get(i).setExVar1(LakhConversion.convertToLakh(instSuprtlist.get(i).getExVar1()));
-					
+
 				}
 
 				model.addObject("schemeList", instSuprtlist);
@@ -155,16 +155,16 @@ public class InstituteController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -226,51 +226,61 @@ public class InstituteController {
 		try {
 			HttpSession session = request.getSession();
 
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
-			String amt =null;
-						
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			String instSchemeName = request.getParameter("inst_scheme_name");
-			String instSchemeofferedBy = request.getParameter("inst_schme_offeredby");
-			
-			InstituteSupport instSpprt = new InstituteSupport();
+			if (token.trim().equals(key.trim())) {
 
-			instSpprt.setInstSchemeId(Integer.parseInt(request.getParameter("inst_scheme_id")));
-			instSpprt.setInstituteId(instituteId);
-			instSpprt.setYearId(yId);
-			instSpprt.setInstSchemeName(XssEscapeUtils.jsoupParse(instSchemeName));
-			instSpprt.setInstStudentsBenefited(Integer.parseInt(request.getParameter("inst_students_benefited")));
-			instSpprt.setInstSchmeOfferedby(XssEscapeUtils.jsoupParse(instSchemeofferedBy));
-			instSpprt.setDelStatus(1);
-			instSpprt.setIsActive(1);
-			instSpprt.setMakerUserId(userId);
-			instSpprt.setMakerDatetime(curDateTime);
-			 
-			try {
-				amt =  request.getParameter("amount");
-				 
- 			}catch(Exception e){
-				System.err.println(e.getMessage());
-				amt = "0";
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
+				String amt = null;
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				String instSchemeName = request.getParameter("inst_scheme_name");
+				String instSchemeofferedBy = request.getParameter("inst_schme_offeredby");
+
+				InstituteSupport instSpprt = new InstituteSupport();
+
+				instSpprt.setInstSchemeId(Integer.parseInt(request.getParameter("inst_scheme_id")));
+				instSpprt.setInstituteId(instituteId);
+				instSpprt.setYearId(yId);
+				instSpprt.setInstSchemeName(XssEscapeUtils.jsoupParse(instSchemeName));
+				instSpprt.setInstStudentsBenefited(Integer.parseInt(request.getParameter("inst_students_benefited")));
+				instSpprt.setInstSchmeOfferedby(XssEscapeUtils.jsoupParse(instSchemeofferedBy));
+				instSpprt.setDelStatus(1);
+				instSpprt.setIsActive(1);
+				instSpprt.setMakerUserId(userId);
+				instSpprt.setMakerDatetime(curDateTime);
+
+				try {
+					amt = request.getParameter("amount");
+
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+					amt = "0";
+				}
+				instSpprt.setExInt1(0);
+				instSpprt.setExInt2(0);
+				instSpprt.setExVar1(XssEscapeUtils.jsoupParse(amt));
+				instSpprt.setExVar2("NA");
+
+				InstituteSupport saveInstSupprt = rest.postForObject(Constants.url + "/addInstSupprt", instSpprt,
+						InstituteSupport.class);
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showInstituteSupport";
+				else
+					redirect = "redirect:/showAddInstituteSupport";
+			} else {
+
+				redirect = "redirect:/accessDenied";
 			}
-			instSpprt.setExInt1(0);
-			instSpprt.setExInt2(0);
-			instSpprt.setExVar1(XssEscapeUtils.jsoupParse(amt));
-			instSpprt.setExVar2("NA");
 
-			InstituteSupport saveInstSupprt = rest.postForObject(Constants.url + "/addInstSupprt", instSpprt,
-					InstituteSupport.class);
-
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showInstituteSupport";
-			else
-				redirect = "redirect:/showAddInstituteSupport";
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -306,9 +316,7 @@ public class InstituteController {
 
 				InstituteSupport suprtSchm = rest.postForObject(Constants.url + "/getSuprtSchemeBySchmId", map,
 						InstituteSupport.class);
-				 
-			 
-				
+
 				model.addObject("instSpprt", suprtSchm);
 
 				model.addObject("title", "Edit Other (Besides Government) Financial Support Scheme");
@@ -368,7 +376,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("instSchId");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -422,13 +430,14 @@ public class InstituteController {
 			List<InstituteSupport> instSuprtlist = new ArrayList<>(Arrays.asList(instSuprtArr));
 
 			BufferedOutputStream outStream = null;
-			//System.out.println("Inside Pdf showCustomerwisePdf");
+			// System.out.println("Inside Pdf showCustomerwisePdf");
 			Document document = new Document(PageSize.A4);
 
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 
-			//System.out.println("time in Gen Bill PDF ==" + dateFormat.format(cal.getTime()));
+			// System.out.println("time in Gen Bill PDF ==" +
+			// dateFormat.format(cal.getTime()));
 			String FILE_PATH = Constants.REPORT_SAVE;
 			File file = new File(FILE_PATH);
 
@@ -444,7 +453,7 @@ public class InstituteController {
 
 			PdfPTable table = new PdfPTable(4);
 			try {
-				//System.out.println("Inside PDF Table try");
+				// System.out.println("Inside PDF Table try");
 				table.setWidthPercentage(100);
 				table.setWidths(new float[] { 2.4f, 3.4f, 3.2f, 3.2f });
 				Font headFont = new Font(FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
@@ -532,7 +541,7 @@ public class InstituteController {
 
 				int totalPages = writer.getPageNumber();
 
-				//System.out.println("Page no " + totalPages);
+				// System.out.println("Page no " + totalPages);
 
 				document.close();
 
@@ -557,14 +566,14 @@ public class InstituteController {
 					try {
 						FileCopyUtils.copy(inputStream, response.getOutputStream());
 					} catch (IOException e) {
-						//System.out.println("Excep in Opening a Pdf File");
+						// System.out.println("Excep in Opening a Pdf File");
 						e.printStackTrace();
 					}
 				}
 
 			} catch (DocumentException ex) {
 
-				//System.out.println("Pdf Generation Error: " + ex.getMessage());
+				// System.out.println("Pdf Generation Error: " + ex.getMessage());
 
 				ex.printStackTrace();
 
@@ -619,16 +628,16 @@ public class InstituteController {
 						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -678,44 +687,54 @@ public class InstituteController {
 	public String insertInstituteActivity(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			if (token.trim().equals(key.trim())) {
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			InstituteActivity instAct = new InstituteActivity();
-			instAct.setInstActivityId(Integer.parseInt(request.getParameter("activityId")));
-			instAct.setInstituteId(instituteId);
-			instAct.setYearId(yId);
-			instAct.setInstActivityType(request.getParameter("activityType"));
-			instAct.setInstActivityLevel(request.getParameter("activityLevel"));
-			String activityName = request.getParameter("activityName");
-			instAct.setInstActivityName(XssEscapeUtils.jsoupParse(activityName));
-			instAct.setInstActivityFromdt(request.getParameter("fromDate"));
-			instAct.setInstActivityTodt(request.getParameter("toDate"));
-			instAct.setInstActivityParticipation(Integer.parseInt(request.getParameter("inst_activity_participation")));
-			instAct.setDelStatus(1);
-			instAct.setIsActive(1);
-			instAct.setMakerUserId(userId);
-			instAct.setMakerDatetime(curDateTime);
-			instAct.setExInt1(0);
-			instAct.setExInt2(0);
-			instAct.setExVar1("NA");
-			instAct.setExVar2("NA");
-			//System.out.println(instAct.toString());
-			InstituteActivity saveinstActvt = rest.postForObject(Constants.url + "/addNewInstituteActity", instAct,
-					InstituteActivity.class);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showActivityOrganized";
-			else
-				redirect = "redirect:/showAddActivityOrganized";
+				InstituteActivity instAct = new InstituteActivity();
+				instAct.setInstActivityId(Integer.parseInt(request.getParameter("activityId")));
+				instAct.setInstituteId(instituteId);
+				instAct.setYearId(yId);
+				instAct.setInstActivityType(request.getParameter("activityType"));
+				instAct.setInstActivityLevel(request.getParameter("activityLevel"));
+				String activityName = request.getParameter("activityName");
+				instAct.setInstActivityName(XssEscapeUtils.jsoupParse(activityName));
+				instAct.setInstActivityFromdt(request.getParameter("fromDate"));
+				instAct.setInstActivityTodt(request.getParameter("toDate"));
+				instAct.setInstActivityParticipation(
+						Integer.parseInt(request.getParameter("inst_activity_participation")));
+				instAct.setDelStatus(1);
+				instAct.setIsActive(1);
+				instAct.setMakerUserId(userId);
+				instAct.setMakerDatetime(curDateTime);
+				instAct.setExInt1(0);
+				instAct.setExInt2(0);
+				instAct.setExVar1("NA");
+				instAct.setExVar2("NA");
+				// System.out.println(instAct.toString());
+				InstituteActivity saveinstActvt = rest.postForObject(Constants.url + "/addNewInstituteActity", instAct,
+						InstituteActivity.class);
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showActivityOrganized";
+				else
+					redirect = "redirect:/showAddActivityOrganized";
+			} else {
+
+				redirect = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 
@@ -816,7 +835,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] activityIds = request.getParameterValues("activityId");
-					//System.out.println("id are" + activityIds);
+					// System.out.println("id are" + activityIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -892,16 +911,16 @@ public class InstituteController {
 						"0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -953,43 +972,52 @@ public class InstituteController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			if (token.trim().equals(key.trim())) {
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			IntelPrpoRight intelProp = new IntelPrpoRight();
-			
-			String  iprTitle = request.getParameter("ipr_title");
-			String reportLink = request.getParameter("reports_link");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			intelProp.setConId(Integer.parseInt(request.getParameter("intel_id")));
-			intelProp.setInstituteId(instituteId);
-			intelProp.setYearId(yId);
-			intelProp.setConName(XssEscapeUtils.jsoupParse(iprTitle));
-			intelProp.setReportLink(XssEscapeUtils.jsoupParse(reportLink));
-			intelProp.setEstablishDate(request.getParameter("estb_date"));
-			intelProp.setConFromdt(request.getParameter("fromDate"));
-			intelProp.setConTodt(request.getParameter("toDate"));
-			intelProp.setConPcount(Integer.parseInt(request.getParameter("participant")));
-			intelProp.setDelStatus(1);
-			intelProp.setIsActive(1);
-			intelProp.setMakerUserId(userId);
-			intelProp.setMakerDatetime(curDateTime);
-			intelProp.setExInt1(0);
-			intelProp.setExVar1("NA");
+				IntelPrpoRight intelProp = new IntelPrpoRight();
 
-			IntelPrpoRight saveIntelPropRght = rest.postForObject(Constants.url + "addNewIntelPropRight", intelProp,
-					IntelPrpoRight.class);
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showIntellectualProperty";
-			else
-				redirect = "redirect:/showAddIntellectualProperty";
+				String iprTitle = request.getParameter("ipr_title");
+				String reportLink = request.getParameter("reports_link");
+
+				intelProp.setConId(Integer.parseInt(request.getParameter("intel_id")));
+				intelProp.setInstituteId(instituteId);
+				intelProp.setYearId(yId);
+				intelProp.setConName(XssEscapeUtils.jsoupParse(iprTitle));
+				intelProp.setReportLink(XssEscapeUtils.jsoupParse(reportLink));
+				intelProp.setEstablishDate(request.getParameter("estb_date"));
+				intelProp.setConFromdt(request.getParameter("fromDate"));
+				intelProp.setConTodt(request.getParameter("toDate"));
+				intelProp.setConPcount(Integer.parseInt(request.getParameter("participant")));
+				intelProp.setDelStatus(1);
+				intelProp.setIsActive(1);
+				intelProp.setMakerUserId(userId);
+				intelProp.setMakerDatetime(curDateTime);
+				intelProp.setExInt1(0);
+				intelProp.setExVar1("NA");
+
+				IntelPrpoRight saveIntelPropRght = rest.postForObject(Constants.url + "addNewIntelPropRight", intelProp,
+						IntelPrpoRight.class);
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showIntellectualProperty";
+				else
+					redirect = "redirect:/showAddIntellectualProperty";
+			} else {
+
+				redirect = "redirect:/accessDenied";
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1091,7 +1119,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] rightIds = request.getParameterValues("intel_rightId");
-					//System.out.println("id are" + rightIds);
+					// System.out.println("id are" + rightIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1165,16 +1193,16 @@ public class InstituteController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1226,41 +1254,51 @@ public class InstituteController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			if (token.trim().equals(key.trim())) {
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			GenderEqalityPrg gendrEqualityt = new GenderEqalityPrg();
-			
-			String progTitle = request.getParameter("title");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			gendrEqualityt.setGprogId(Integer.parseInt(request.getParameter("gender_eqlity _id")));
-			gendrEqualityt.setInstituteId(instituteId);
-			gendrEqualityt.setYearId(yId);
-			gendrEqualityt.setGprogName(XssEscapeUtils.jsoupParse(progTitle));
-			gendrEqualityt.setGprogFromdt(request.getParameter("fromDate"));
-			gendrEqualityt.setGprogTodt(request.getParameter("toDate"));
-			gendrEqualityt.setGprogPcount(Integer.parseInt(request.getParameter("participant")));
-			gendrEqualityt.setDelStatus(1);
-			gendrEqualityt.setIsActive(1);
-			gendrEqualityt.setMakerUserId(userId);
-			gendrEqualityt.setMakerDatetime(curDateTime);
-			gendrEqualityt.setExInt1(0);
-			gendrEqualityt.setExVar1("NA");
+				GenderEqalityPrg gendrEqualityt = new GenderEqalityPrg();
 
-			GenderEqalityPrg gProgEq = rest.postForObject(Constants.url + "/addGendrEqtyPrg", gendrEqualityt,
-					GenderEqalityPrg.class);
+				String progTitle = request.getParameter("title");
 
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/showGenderEquity";
-			else
-				redirect = "redirect:/showAddGenderEquity";
+				gendrEqualityt.setGprogId(Integer.parseInt(request.getParameter("gender_eqlity _id")));
+				gendrEqualityt.setInstituteId(instituteId);
+				gendrEqualityt.setYearId(yId);
+				gendrEqualityt.setGprogName(XssEscapeUtils.jsoupParse(progTitle));
+				gendrEqualityt.setGprogFromdt(request.getParameter("fromDate"));
+				gendrEqualityt.setGprogTodt(request.getParameter("toDate"));
+				gendrEqualityt.setGprogPcount(Integer.parseInt(request.getParameter("participant")));
+				gendrEqualityt.setDelStatus(1);
+				gendrEqualityt.setIsActive(1);
+				gendrEqualityt.setMakerUserId(userId);
+				gendrEqualityt.setMakerDatetime(curDateTime);
+				gendrEqualityt.setExInt1(0);
+				gendrEqualityt.setExVar1("NA");
+
+				GenderEqalityPrg gProgEq = rest.postForObject(Constants.url + "/addGendrEqtyPrg", gendrEqualityt,
+						GenderEqalityPrg.class);
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/showGenderEquity";
+				else
+					redirect = "redirect:/showAddGenderEquity";
+
+			} else {
+
+				redirect = "redirect:/accessDenied";
+			}
+
 		} catch (Exception E) {
 
 		}
@@ -1364,7 +1402,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] gndreqtyIds = request.getParameterValues("gndreqtyId");
-					//System.out.println("id are" + gndreqtyIds);
+					// System.out.println("id are" + gndreqtyIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1438,16 +1476,16 @@ public class InstituteController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1525,13 +1563,13 @@ public class InstituteController {
 			ictEnbFac.setExInt2(0);
 			ictEnbFac.setExVar1("NA");
 			ictEnbFac.setExVar2("NA");
-			//System.out.println(ictEnbFac.toString());
+			// System.out.println(ictEnbFac.toString());
 
 			IctEnabledFacilities ictEnb = rest.postForObject(Constants.url + "/saveIctEnabledFacility", ictEnbFac,
 					IctEnabledFacilities.class);
 
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showICTEnblFaclities";
@@ -1634,7 +1672,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] ictIds = request.getParameterValues("exActId");
-					//System.out.println("id are" + ictIds);
+					// System.out.println("id are" + ictIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1698,15 +1736,13 @@ public class InstituteController {
 				GovtScholarships[] govtSchrArr = rest.postForObject(Constants.url + "/getAllGovtScholrSch", map,
 						GovtScholarships[].class);
 				List<GovtScholarships> govtSchrList = new ArrayList<>(Arrays.asList(govtSchrArr));
-				for(int i=0;i<govtSchrList.size();i++) {
+				for (int i = 0; i < govtSchrList.size(); i++) {
 					govtSchrList.get(i).setExVar1(LakhConversion.convertToLakh(govtSchrList.get(i).getExVar1()));
-					
+
 				}
-				
+
 				model.addObject("govtSchrList", govtSchrList);
-				
-				
-				
+
 				model.addObject("budRupees", Names.Rupees);
 
 				model.addObject("title", "Government Scholarships");
@@ -1718,16 +1754,16 @@ public class InstituteController {
 						"0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -1801,23 +1837,23 @@ public class InstituteController {
 			govt.setMakerEntrDatetime(curDateTime);
 			govt.setExInt1(0);
 			govt.setExInt2(0);
-			
+
 			String amt = request.getParameter("amount");
-			if(amt=="" || amt==null) {
+			if (amt == "" || amt == null) {
 				govt.setExVar1("0");
-			}else {
-				
+			} else {
+
 				govt.setExVar1(XssEscapeUtils.jsoupParse(amt));
 
-			}			
+			}
 			govt.setExVar2("NA");
-			//System.out.println(govt.toString());
+			// System.out.println(govt.toString());
 
 			GovtScholarships ictEnb = rest.postForObject(Constants.url + "/saveGovtScheme", govt,
 					GovtScholarships.class);
 
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/showGovernmentScholarships";
@@ -1920,7 +1956,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] govtSchmIds = request.getParameterValues("suppSchmid");
-					//System.out.println("id are" + govtSchmIds);
+					// System.out.println("id are" + govtSchmIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1973,22 +2009,23 @@ public class InstituteController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/actCondctPromtUnivrslVal");
-				
+
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("instituteId", instituteId);
 				map.add("yId", yId);
-				
-				ActCndctPrmtngUnivrslVal[] actCndctPrgArr = rest.postForObject(Constants.url + "/getAllActivitiesCondctPromtUnivrsalValue", map,
+
+				ActCndctPrmtngUnivrslVal[] actCndctPrgArr = rest.postForObject(
+						Constants.url + "/getAllActivitiesCondctPromtUnivrsalValue", map,
 						ActCndctPrmtngUnivrslVal[].class);
 				List<ActCndctPrmtngUnivrslVal> actCndctPrgList = new ArrayList<>(Arrays.asList(actCndctPrgArr));
-				
+
 				model.addObject("actCndctPrgList", actCndctPrgList);
 
 				model.addObject("title", " Activities Conducted for Promoting Universal Values");
-				
+
 				Info add = AccessControll.checkAccess("showActCondctPromotUnivrslValus",
 						"showActCondctPromotUnivrslValus", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showActCondctPromotUnivrslValus",
@@ -1997,16 +2034,16 @@ public class InstituteController {
 						"showActCondctPromotUnivrslValus", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2055,42 +2092,45 @@ public class InstituteController {
 	@RequestMapping(value = "/insertActConduct", method = RequestMethod.POST)
 	public String insertActConduct(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
+		String token = request.getParameter("token");
+		String key = (String) session.getAttribute("generatedKey");
+		String returnString=null;
+		if (token.trim().equals(key.trim())) {
 
-		int instituteId = (int) session.getAttribute("instituteId");
-		int userId = (int) session.getAttribute("userId");
-		int yId = (int) session.getAttribute("acYearId");
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
-		ActCndctPrmtngUnivrslVal actCndct = new ActCndctPrmtngUnivrslVal();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
+			ActCndctPrmtngUnivrslVal actCndct = new ActCndctPrmtngUnivrslVal();
 
-		actCndct.setActCndctId(Integer.parseInt(request.getParameter("activityId")));
-		actCndct.setTtleProgrmAct(XssEscapeUtils.jsoupParse(request.getParameter("prg_title")));
-		actCndct.setFromDate(XssEscapeUtils.jsoupParse(request.getParameter("fromDate")));
-		actCndct.setToDate(XssEscapeUtils.jsoupParse(request.getParameter("toDate")));
-		actCndct.setNoOfParticipant(Integer.parseInt(request.getParameter("no_participant")));
-		actCndct.setInstId(instituteId);
-		actCndct.setAcYearId(yId);
-		actCndct.setDelStatus(1);
-		actCndct.setIsActive(1);
-		actCndct.setMakerUserId(userId);
-		actCndct.setMakerDatetime(curDateTime);
-		actCndct.setExInt1(0);
-		actCndct.setExInt2(0);
-		actCndct.setExVar1("NA");
-		actCndct.setExVar2("NA");
-		
-		ActCndctPrmtngUnivrslVal saveAct = rest.postForObject(Constants.url+"/saveActivityConductPromtUniVal", actCndct, ActCndctPrmtngUnivrslVal.class);
-		
-		try {
+			actCndct.setActCndctId(Integer.parseInt(request.getParameter("activityId")));
+			actCndct.setTtleProgrmAct(XssEscapeUtils.jsoupParse(request.getParameter("prg_title")));
+			actCndct.setFromDate(XssEscapeUtils.jsoupParse(request.getParameter("fromDate")));
+			actCndct.setToDate(XssEscapeUtils.jsoupParse(request.getParameter("toDate")));
+			actCndct.setNoOfParticipant(Integer.parseInt(request.getParameter("no_participant")));
+			actCndct.setInstId(instituteId);
+			actCndct.setAcYearId(yId);
+			actCndct.setDelStatus(1);
+			actCndct.setIsActive(1);
+			actCndct.setMakerUserId(userId);
+			actCndct.setMakerDatetime(curDateTime);
+			actCndct.setExInt1(0);
+			actCndct.setExInt2(0);
+			actCndct.setExVar1("NA");
+			actCndct.setExVar2("NA");
 
-		} catch (Exception e) {
-
+			ActCndctPrmtngUnivrslVal saveAct = rest.postForObject(Constants.url + "/saveActivityConductPromtUniVal",
+					actCndct, ActCndctPrmtngUnivrslVal.class);
+			returnString="redirect:/showActCondctPromotUnivrslValus";
+		} else {
+			returnString = "redirect:/accessDenied";
 		}
-		return "redirect:/showActCondctPromotUnivrslValus";
+		return returnString ;
 	}
-	
+
 	@RequestMapping(value = "/editActCndctPromtUnivrsalValu/{actId}", method = RequestMethod.GET)
 	public ModelAndView editActCndctPromtUnivrsalValu(@PathVariable("actId") int actId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2101,21 +2141,21 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("editActCndctPromtUnivrsalValu/{actId}", "showActCondctPromotUnivrslValus", "0",
-					"0", "1", "0", newModuleList);
+			Info view = AccessControll.checkAccess("editActCndctPromtUnivrsalValu/{actId}",
+					"showActCondctPromotUnivrslValus", "0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				//System.out.println(actId);
+				// System.out.println(actId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("actId", actId);
 
-				ActCndctPrmtngUnivrslVal actCndct = rest.postForObject(Constants.url + "/editActivityCndtPrmtUnivrslValById", map,
-						ActCndctPrmtngUnivrslVal.class);
+				ActCndctPrmtngUnivrslVal actCndct = rest.postForObject(
+						Constants.url + "/editActivityCndtPrmtUnivrslValById", map, ActCndctPrmtngUnivrslVal.class);
 				model.addObject("actCndct", actCndct);
 
 				model.addObject("title", "Edit Activities Conducted for Promoting Universal Values");
@@ -2128,7 +2168,7 @@ public class InstituteController {
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/deleteActCndctPromtUnivrsalValu/{actId}", method = RequestMethod.GET)
 	public String deleteActCndctPromtUnivrsalValu(@PathVariable("actId") int actId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2138,8 +2178,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteActCndctPromtUnivrsalValu/{actId}", "showActCondctPromotUnivrslValus", "0",
-					"0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteActCndctPromtUnivrsalValu/{actId}",
+					"showActCondctPromotUnivrslValus", "0", "0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2184,7 +2224,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] activityIds = request.getParameterValues("activityId");
-					//System.out.println("id are" + activityIds);
+					// System.out.println("id are" + activityIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -2216,9 +2256,9 @@ public class InstituteController {
 		}
 		return a;
 	}
-	
+
 	/********************************
-	 *  Specific Initiatives for Local Advantages & Disadvantages
+	 * Specific Initiatives for Local Advantages & Disadvantages
 	 ******************************/
 	@RequestMapping(value = "/showSpecficInitiativeforLocAdvDisadv", method = RequestMethod.GET)
 	public ModelAndView showSpecficInitiativeforLocAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
@@ -2228,8 +2268,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv", "showSpecficInitiativeforLocAdvDisadv",
-					"1", "0", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv",
+					"showSpecficInitiativeforLocAdvDisadv", "1", "0", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2237,22 +2277,22 @@ public class InstituteController {
 
 			} else {
 				model = new ModelAndView("instituteInfo/IQAC/showSpecficInitveLocAdvDisadv");
-				
+
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("instituteId", instituteId);
 				map.add("yId", yId);
-				
-				SpecificLocalAdvntgDisadvntg[] inItArr = rest.postForObject(Constants.url + "/getAllInitiativeAdvntgDisadvntg", map,
-						SpecificLocalAdvntgDisadvntg[].class);
+
+				SpecificLocalAdvntgDisadvntg[] inItArr = rest.postForObject(
+						Constants.url + "/getAllInitiativeAdvntgDisadvntg", map, SpecificLocalAdvntgDisadvntg[].class);
 				List<SpecificLocalAdvntgDisadvntg> inItList = new ArrayList<>(Arrays.asList(inItArr));
-				
+
 				model.addObject("inItList", inItList);
 
 				model.addObject("title", "Specific Initiatives for Local Advantages & Disadvantages");
-				
+
 				Info add = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv",
 						"showSpecficInitiativeforLocAdvDisadv", "0", "1", "0", "0", newModuleList);
 				Info edit = AccessControll.checkAccess("showSpecficInitiativeforLocAdvDisadv",
@@ -2261,16 +2301,16 @@ public class InstituteController {
 						"showSpecficInitiativeforLocAdvDisadv", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -2284,7 +2324,7 @@ public class InstituteController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addSpecificInitiveLocAdvDisadv", method = RequestMethod.GET)
 	public ModelAndView addSpecificInitiveLocAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
 
@@ -2292,8 +2332,8 @@ public class InstituteController {
 		try {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("addSpecificInitiveLocAdvDisadv", "showSpecficInitiativeforLocAdvDisadv", "0",
-					"1", "0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("addSpecificInitiveLocAdvDisadv",
+					"showSpecficInitiativeforLocAdvDisadv", "0", "1", "0", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2316,7 +2356,7 @@ public class InstituteController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertInitiativeAdvDisadv", method = RequestMethod.POST)
 	public String insertInitiativeAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -2328,7 +2368,7 @@ public class InstituteController {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String curDateTime = dateFormat.format(cal.getTime());
-		
+
 		SpecificLocalAdvntgDisadvntg specify = new SpecificLocalAdvntgDisadvntg();
 
 		specify.setSpciAdvId(Integer.parseInt(request.getParameter("initiative_id")));
@@ -2347,9 +2387,10 @@ public class InstituteController {
 		specify.setExInt2(0);
 		specify.setExVar1("NA");
 		specify.setExVar2("NA");
-		
-		SpecificLocalAdvntgDisadvntg saveInit = rest.postForObject(Constants.url+"/saveInitiativeAdvDisadv", specify, SpecificLocalAdvntgDisadvntg.class);
-		
+
+		SpecificLocalAdvntgDisadvntg saveInit = rest.postForObject(Constants.url + "/saveInitiativeAdvDisadv", specify,
+				SpecificLocalAdvntgDisadvntg.class);
+
 		try {
 
 		} catch (Exception e) {
@@ -2357,8 +2398,7 @@ public class InstituteController {
 		}
 		return "redirect:/showSpecficInitiativeforLocAdvDisadv";
 	}
-	
-	
+
 	@RequestMapping(value = "/editInitiative/{inItId}", method = RequestMethod.GET)
 	public ModelAndView editInitiative(@PathVariable("inItId") int inItId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2369,21 +2409,21 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("editInitiative/{inItId}", "showSpecficInitiativeforLocAdvDisadv", "0",
-					"0", "1", "0", newModuleList);
+			Info view = AccessControll.checkAccess("editInitiative/{inItId}", "showSpecficInitiativeforLocAdvDisadv",
+					"0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
 				model = new ModelAndView("accessDenied");
 
 			} else {
-				//System.out.println(inItId);
+				// System.out.println(inItId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("inItId", inItId);
 
-				SpecificLocalAdvntgDisadvntg specifyInit = rest.postForObject(Constants.url + "/editInitiativeById", map,
-						SpecificLocalAdvntgDisadvntg.class);
+				SpecificLocalAdvntgDisadvntg specifyInit = rest.postForObject(Constants.url + "/editInitiativeById",
+						map, SpecificLocalAdvntgDisadvntg.class);
 				model.addObject("specifyInit", specifyInit);
 
 				model.addObject("title", "Edit Specific Initiatives for Local Advantages & Disadvantages");
@@ -2396,7 +2436,7 @@ public class InstituteController {
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/deleteInitiative/{inItId}", method = RequestMethod.GET)
 	public String deleteInitiative(@PathVariable("inItId") int inItId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2406,8 +2446,8 @@ public class InstituteController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteInitiative/{inItId}", "showSpecficInitiativeforLocAdvDisadv", "0",
-					"0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteInitiative/{inItId}", "showSpecficInitiativeforLocAdvDisadv",
+					"0", "0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2426,7 +2466,7 @@ public class InstituteController {
 
 		return "redirect:/showSpecficInitiativeforLocAdvDisadv";
 	}
-	
+
 	@RequestMapping(value = "/delSelcInitiativesAdvDisadv/{initAdvId}", method = RequestMethod.GET)
 	public String delSelcInitiativesAdvDisadv(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int initAdvId) {
@@ -2452,7 +2492,7 @@ public class InstituteController {
 
 					System.err.println("Multiple records delete ");
 					String[] initAdvIds = request.getParameterValues("initAdvId");
-					//System.out.println("id are" + initAdvIds);
+					// System.out.println("id are" + initAdvIds);
 
 					StringBuilder sb = new StringBuilder();
 

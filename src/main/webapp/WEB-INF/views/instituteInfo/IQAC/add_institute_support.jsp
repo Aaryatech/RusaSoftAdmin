@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -95,6 +102,17 @@
 										action="${pageContext.request.contextPath}/insertInstituteSupport"
 										method="post" name="form_sample_2" id="form_sample_2">
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 										<div id="abc">
 											<input type="hidden" id="inst_scheme_id"
@@ -125,9 +143,9 @@
 													Benefited <span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control"
-														autocomplete="off" id="inst_students_benefited"
-														onchange="trim(this)" onFocus="clearDefault(this)"
+													<input type="text" class="form-control" autocomplete="off"
+														id="inst_students_benefited" onchange="trim(this)"
+														onFocus="clearDefault(this)"
 														name="inst_students_benefited"
 														placeholder="No. of Students Benefited" maxlength="7"
 														value="${instSpprt.instStudentsBenefited}"> <span
@@ -154,20 +172,21 @@
 														offered by.</span>
 												</div>
 											</div>
-											
+
 											<div class="form-group">
 
 												<label class="control-label col-sm-3"
-													for="inst_schme_offeredby">Amount (Rs.)<span class="text-danger"></span>
+													for="inst_schme_offeredby">Amount (Rs.)<span
+													class="text-danger"></span>
 												</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" autocomplete="off"
-														id="amount" name="amount" placeholder="Amount in Rs." 
+														id="amount" name="amount" placeholder="Amount in Rs."
 														onchange="trim(this)" onFocus="clearDefault(this)"
 														value="${instSpprt.exVar1}" maxlength="8">
 												</div>
 											</div>
-											
+
 
 
 											<div class="form-group">

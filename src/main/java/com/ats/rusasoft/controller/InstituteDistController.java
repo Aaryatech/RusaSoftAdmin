@@ -86,16 +86,16 @@ public class InstituteDistController {
 						"1", newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -157,65 +157,75 @@ public class InstituteDistController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddProgDistinctive", "showProgDistinctive", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddProgDistinctive", "showProgDistinctive", "0", "1", "0",
+						"0", newModuleList);
 
-				System.err.println("Inside insertDist method");
+				// System.out.println(view);
 
-				int distId = 0;
-				try {
-					distId = Integer.parseInt(request.getParameter("distId"));
-				} catch (Exception e) {
-					distId = 0;
-				}
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				String distApplicableFrom = request.getParameter("date");
-				String distBeneficiary = request.getParameter("befStake");
-				String distName = request.getParameter("title");
-				int instituteId = (int) session.getAttribute("instituteId");
-				int userId = (int) session.getAttribute("userId");
-				int yearId = (int) session.getAttribute("acYearId");
+					System.err.println("Inside insertDist method");
 
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int distId = 0;
+					try {
+						distId = Integer.parseInt(request.getParameter("distId"));
+					} catch (Exception e) {
+						distId = 0;
+					}
 
-				Disctinctveness dist = new Disctinctveness();
-				dist.setDelStatus(1);
-				dist.setDistApplicableFrom(DateConvertor.convertToYMD(distApplicableFrom));
-				dist.setDistBeneficiary(XssEscapeUtils.jsoupParse(distBeneficiary));
-				dist.setDistId(distId);
+					String distApplicableFrom = request.getParameter("date");
+					String distBeneficiary = request.getParameter("befStake");
+					String distName = request.getParameter("title");
+					int instituteId = (int) session.getAttribute("instituteId");
+					int userId = (int) session.getAttribute("userId");
+					int yearId = (int) session.getAttribute("acYearId");
 
-				dist.setDistName(XssEscapeUtils.jsoupParse(distName));
-				dist.setExInt1(1);
-				dist.setExInt2(1);
-				dist.setExVar1("NA");
-				dist.setExVar2("NA");
-				dist.setInstituteId(instituteId);
-				dist.setIsActive(1);
-				dist.setMakerDatetime(dateTime);
-				dist.setMakerUserId(userId);
-				dist.setYearId(yearId);
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				Disctinctveness distInsertRes = rest.postForObject(Constants.url + "saveDist", dist,
-						Disctinctveness.class);
+					Disctinctveness dist = new Disctinctveness();
+					dist.setDelStatus(1);
+					dist.setDistApplicableFrom(DateConvertor.convertToYMD(distApplicableFrom));
+					dist.setDistBeneficiary(XssEscapeUtils.jsoupParse(distBeneficiary));
+					dist.setDistId(distId);
 
-				System.err.println("distInsertRes " + distInsertRes.toString());
+					dist.setDistName(XssEscapeUtils.jsoupParse(distName));
+					dist.setExInt1(1);
+					dist.setExInt2(1);
+					dist.setExVar1("NA");
+					dist.setExVar2("NA");
+					dist.setInstituteId(instituteId);
+					dist.setIsActive(1);
+					dist.setMakerDatetime(dateTime);
+					dist.setMakerUserId(userId);
+					dist.setYearId(yearId);
 
-				if (is_view == 1) {
-					returnString = "redirect:/showProgDistinctive";
+					Disctinctveness distInsertRes = rest.postForObject(Constants.url + "saveDist", dist,
+							Disctinctveness.class);
+
+					System.err.println("distInsertRes " + distInsertRes.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showProgDistinctive";
+					} else {
+						returnString = "redirect:/showAddProgDistinctive";
+					}
 				} else {
-					returnString = "redirect:/showAddProgDistinctive";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
+
 		}
 
 		catch (Exception e) {
@@ -252,7 +262,7 @@ public class InstituteDistController {
 
 				Disctinctveness editDist = rest.postForObject(Constants.url + "/getDistByDistId", map,
 						Disctinctveness.class);
-				//System.out.println("distId:" + distId);
+				// System.out.println("distId:" + distId);
 
 				model.addObject("editDist", editDist);
 
@@ -333,16 +343,16 @@ public class InstituteDistController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -408,65 +418,74 @@ public class InstituteDistController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddHumanValues", "showHumanValues", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddHumanValues", "showHumanValues", "0", "1", "0", "0",
+						newModuleList);
 
-				System.err.println("Inside insertHumanValues method");
+				// System.out.println(view);
 
-				int valueId = 0;
-				try {
-					valueId = Integer.parseInt(request.getParameter("valueId"));
-				} catch (Exception e) {
-					valueId = 0;
-				}
-				int activityPcount = Integer.parseInt(request.getParameter("participant"));
+				if (view.isError() == false) {
 
-				String fromDate = request.getParameter("fromDate");
-				String toDate = request.getParameter("toDate");
-				String activityName = request.getParameter("ttlProgm");
-				int instituteId = (int) session.getAttribute("instituteId");
-				int userId = (int) session.getAttribute("userId");
-				int yearId = (int) session.getAttribute("acYearId");
+					System.err.println("Inside insertHumanValues method");
 
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int valueId = 0;
+					try {
+						valueId = Integer.parseInt(request.getParameter("valueId"));
+					} catch (Exception e) {
+						valueId = 0;
+					}
+					int activityPcount = Integer.parseInt(request.getParameter("participant"));
 
-				HumanValues value = new HumanValues();
-				value.setDelStatus(1);
-				value.setValueId(valueId);
-				value.setExVar1("NA");
-				value.setExVar2("NA");
-				value.setInstituteId(instituteId);
-				value.setIsActive(1);
-				value.setMakerDatetime(dateTime);
-				value.setMakerUserId(userId);
-				value.setYearId(yearId);
+					String fromDate = request.getParameter("fromDate");
+					String toDate = request.getParameter("toDate");
+					String activityName = request.getParameter("ttlProgm");
+					int instituteId = (int) session.getAttribute("instituteId");
+					int userId = (int) session.getAttribute("userId");
+					int yearId = (int) session.getAttribute("acYearId");
 
-				value.setExInt1(1);
-				value.setExInt2(1);
-				value.setActivityFromdt(DateConvertor.convertToYMD(fromDate));
-				value.setActivityTodt(DateConvertor.convertToYMD(toDate));
-				value.setActivityName(XssEscapeUtils.jsoupParse(activityName));
-				value.setActivityPcount(activityPcount);
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				HumanValues valueInsertRes = rest.postForObject(Constants.url + "saveHumanValues", value,
-						HumanValues.class);
+					HumanValues value = new HumanValues();
+					value.setDelStatus(1);
+					value.setValueId(valueId);
+					value.setExVar1("NA");
+					value.setExVar2("NA");
+					value.setInstituteId(instituteId);
+					value.setIsActive(1);
+					value.setMakerDatetime(dateTime);
+					value.setMakerUserId(userId);
+					value.setYearId(yearId);
 
-				System.err.println("valueInsertRes " + valueInsertRes.toString());
+					value.setExInt1(1);
+					value.setExInt2(1);
+					value.setActivityFromdt(DateConvertor.convertToYMD(fromDate));
+					value.setActivityTodt(DateConvertor.convertToYMD(toDate));
+					value.setActivityName(XssEscapeUtils.jsoupParse(activityName));
+					value.setActivityPcount(activityPcount);
 
-				if (is_view == 1) {
-					returnString = "redirect:/showHumanValues";
+					HumanValues valueInsertRes = rest.postForObject(Constants.url + "saveHumanValues", value,
+							HumanValues.class);
+
+					System.err.println("valueInsertRes " + valueInsertRes.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showHumanValues";
+					} else {
+						returnString = "redirect:/showAddHumanValues";
+					}
 				} else {
-					returnString = "redirect:/showAddHumanValues";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 		}
 
@@ -505,7 +524,7 @@ public class InstituteDistController {
 
 				HumanValues editValue = rest.postForObject(Constants.url + "/getHumanValuesByValueId", map,
 						HumanValues.class);
-				//System.out.println("valueId:" + valueId);
+				// System.out.println("valueId:" + valueId);
 
 				model.addObject("editValue", editValue);
 
@@ -584,16 +603,16 @@ public class InstituteDistController {
 						newModuleList);
 
 				if (add.isError() == false) {
-					//System.out.println(" add   Accessable ");
+					// System.out.println(" add Accessable ");
 					model.addObject("addAccess", 0);
 
 				}
 				if (edit.isError() == false) {
-					//System.out.println(" edit   Accessable ");
+					// System.out.println(" edit Accessable ");
 					model.addObject("editAccess", 0);
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}
@@ -654,69 +673,78 @@ public class InstituteDistController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddResearchCenter", "showResearchCenter", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddResearchCenter", "showResearchCenter", "0", "1", "0",
+						"0", newModuleList);
 
-				System.err.println("Inside insertResearchCenter method");
+				// System.out.println(view);
 
-				int rcId = 0;
-				try {
-					rcId = Integer.parseInt(request.getParameter("rcId"));
-				} catch (Exception e) {
-					rcId = 0;
-				}
-				int rcGuideCount = Integer.parseInt(request.getParameter("rc_guide_count"));
-				int rcStudentCount = Integer.parseInt(request.getParameter("rc_student_count"));
+				if (view.isError() == false) {
 
-				String fromDate = request.getParameter("fromDate");
-				String toDate = request.getParameter("toDate");
-				String rcSubjectName = request.getParameter("rc_subject_name");
-				String rcFacultyName = request.getParameter("rc_faculty_name");
-				int instituteId = (int) session.getAttribute("instituteId");
-				int userId = (int) session.getAttribute("userId");
-				int yearId = (int) session.getAttribute("acYearId");
+					System.err.println("Inside insertResearchCenter method");
 
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int rcId = 0;
+					try {
+						rcId = Integer.parseInt(request.getParameter("rcId"));
+					} catch (Exception e) {
+						rcId = 0;
+					}
+					int rcGuideCount = Integer.parseInt(request.getParameter("rc_guide_count"));
+					int rcStudentCount = Integer.parseInt(request.getParameter("rc_student_count"));
 
-				ResearchCenter value = new ResearchCenter();
-				value.setDelStatus(1);
-				value.setRcId(rcId);
-				value.setExVar1("NA");
-				value.setExVar2("NA");
-				value.setInstituteId(instituteId);
-				value.setIsActive(1);
-				value.setMakerDatetime(dateTime);
-				value.setMakerUserId(userId);
-				value.setYearId(yearId);
-				value.setRcFacultyName(XssEscapeUtils.jsoupParse(rcFacultyName));
-				value.setRcSubjectName(XssEscapeUtils.jsoupParse(rcSubjectName));
-				value.setRcValidityTodt(DateConvertor.convertToYMD(toDate));
-				value.setRcValidityFromdt(DateConvertor.convertToYMD(fromDate));
-				value.setRcStudentCount(rcStudentCount);
-				value.setRcGuideCount(rcGuideCount);
+					String fromDate = request.getParameter("fromDate");
+					String toDate = request.getParameter("toDate");
+					String rcSubjectName = request.getParameter("rc_subject_name");
+					String rcFacultyName = request.getParameter("rc_faculty_name");
+					int instituteId = (int) session.getAttribute("instituteId");
+					int userId = (int) session.getAttribute("userId");
+					int yearId = (int) session.getAttribute("acYearId");
 
-				value.setExInt1(1);
-				value.setExInt2(1);
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
 
-				ResearchCenter valueInsertRes = rest.postForObject(Constants.url + "saveReserachCenter", value,
-						ResearchCenter.class);
+					ResearchCenter value = new ResearchCenter();
+					value.setDelStatus(1);
+					value.setRcId(rcId);
+					value.setExVar1("NA");
+					value.setExVar2("NA");
+					value.setInstituteId(instituteId);
+					value.setIsActive(1);
+					value.setMakerDatetime(dateTime);
+					value.setMakerUserId(userId);
+					value.setYearId(yearId);
+					value.setRcFacultyName(XssEscapeUtils.jsoupParse(rcFacultyName));
+					value.setRcSubjectName(XssEscapeUtils.jsoupParse(rcSubjectName));
+					value.setRcValidityTodt(DateConvertor.convertToYMD(toDate));
+					value.setRcValidityFromdt(DateConvertor.convertToYMD(fromDate));
+					value.setRcStudentCount(rcStudentCount);
+					value.setRcGuideCount(rcGuideCount);
 
-				System.err.println("valueInsertRes " + valueInsertRes.toString());
+					value.setExInt1(1);
+					value.setExInt2(1);
 
-				if (is_view == 1) {
-					returnString = "redirect:/showResearchCenter";
+					ResearchCenter valueInsertRes = rest.postForObject(Constants.url + "saveReserachCenter", value,
+							ResearchCenter.class);
+
+					System.err.println("valueInsertRes " + valueInsertRes.toString());
+
+					if (is_view == 1) {
+						returnString = "redirect:/showResearchCenter";
+					} else {
+						returnString = "redirect:/showAddResearchCenter";
+					}
 				} else {
-					returnString = "redirect:/showAddResearchCenter";
+
+					returnString = "redirect:/accessDenied";
+
 				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 		}
 
@@ -755,7 +783,7 @@ public class InstituteDistController {
 
 				ResearchCenter editValue = rest.postForObject(Constants.url + "/getResearchCenterByRcId", map,
 						ResearchCenter.class);
-				//System.out.println("rcId:" + rcId);
+				// System.out.println("rcId:" + rcId);
 
 				model.addObject("editValue", editValue);
 
@@ -841,7 +869,7 @@ public class InstituteDistController {
 			Info view = AccessControll.checkAccess("showValuesMaster", "showValuesMaster", "0", "1", "0", "0",
 					newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -916,7 +944,7 @@ public class InstituteDistController {
 
 				ValuesMaster editValue = rest.postForObject(Constants.url + "/getValuesMasterByValId", map,
 						ValuesMaster.class);
-				//System.out.println("valMastId:" + valMastId);
+				// System.out.println("valMastId:" + valMastId);
 
 				model.addObject("editValue", editValue);
 

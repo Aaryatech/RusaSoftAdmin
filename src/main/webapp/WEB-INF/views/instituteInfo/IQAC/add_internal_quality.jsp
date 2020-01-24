@@ -4,7 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
- 
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -100,6 +108,18 @@
 										action="${pageContext.request.contextPath}/insertInstQuaInitiative"
 										method="post" name="form_sample_2" id="form_sample_2">
 
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 
 
 										<div class="form-group">
@@ -198,7 +218,7 @@
 												</c:choose>
 											</div>
 										</div>
-										
+
 										<div class="form-group" id="yesnodiv2" style="display: none">
 											<label class="control-label col-sm-2" for="planning">Applied
 												? <span class="text-danger">*</span>
@@ -206,17 +226,14 @@
 											<div class="col-sm-2">
 												<c:choose>
 													<c:when test="${editQuality.isApplied==1}">
-														<input type="radio" id="is_applied"
-															name="is_applied" value="1" checked
-															onclick="showNext(this.value,2)">Yes
-														<input type="radio" id="is_applied"
-															name="is_applied" value="0"
-															onclick="showNext(this.value,2)">No
+														<input type="radio" id="is_applied" name="is_applied"
+															value="1" checked onclick="showNext(this.value,2)">Yes
+														<input type="radio" id="is_applied" name="is_applied"
+															value="0" onclick="showNext(this.value,2)">No
 															</c:when>
 													<c:otherwise>
-														<input type="radio" id="is_applied"
-															name="is_applied" value="1"
-															onclick="showNext(this.value,2)">Yes
+														<input type="radio" id="is_applied" name="is_applied"
+															value="1" onclick="showNext(this.value,2)">Yes
 														<input type="radio" id="is_applied" checked
 															name="is_applied" value="0"
 															onclick="showNext(this.value,2)">No
@@ -224,8 +241,8 @@
 												</c:choose>
 											</div>
 										</div>
-										
-										
+
+
 										<div class="form-group" id="yesnodiv3" style="display: none">
 											<label class="control-label col-sm-2" for="planning">Obtained
 												?<span class="text-danger">*</span>
@@ -233,17 +250,14 @@
 											<div class="col-sm-2">
 												<c:choose>
 													<c:when test="${editQuality.isCertiObt==1}">
-														<input type="radio" id="certi_obt"
-															name="certi_obt" value="1" checked
-															onclick="showNext(this.value,3)">Yes
-														<input type="radio" id="certi_obt"
-															name="certi_obt" value="0"
-															onclick="showNext(this.value,3)">No
+														<input type="radio" id="certi_obt" name="certi_obt"
+															value="1" checked onclick="showNext(this.value,3)">Yes
+														<input type="radio" id="certi_obt" name="certi_obt"
+															value="0" onclick="showNext(this.value,3)">No
 															</c:when>
 													<c:otherwise>
-														<input type="radio" id="certi_obt"
-															name="certi_obt" value="1"
-															onclick="showNext(this.value,3)">Yes
+														<input type="radio" id="certi_obt" name="certi_obt"
+															value="1" onclick="showNext(this.value,3)">Yes
 														<input type="radio" id="certi_obt" checked
 															name="certi_obt" value="0"
 															onclick="showNext(this.value,3)">No
@@ -251,73 +265,77 @@
 												</c:choose>
 											</div>
 										</div>
-										
+
 										<div id="yesnodiv4" style="display: none">
-										
-											<div class="form-group" >
-												<label class="control-label col-sm-2" for="planning">NAAC 
+
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="planning">NAAC
 													Score<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" onchange="trim(this)"
-														placeholder="NAAC Score" autocomplete="off" id="naac_score"
-														name="naac_score" value="${editQuality.exVar2}">
-													<span class="error_form text-danger" id="errfield_naac_score"
+													<input type="text" class="form-control"
+														onchange="trim(this)" placeholder="NAAC Score"
+														autocomplete="off" id="naac_score" name="naac_score"
+														value="${editQuality.exVar2}"> <span
+														class="error_form text-danger" id="errfield_naac_score"
 														style="display: none;">Please enter NAAC Score.</span>
 												</div>
 											</div>
-											
+
 											<div class="form-group">
-											<label class="control-label col-sm-2" for="Cycle">
-												Cycle<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<select id="cycle" name="cycle" class="form-control"
-													title="Cycle">
-													<c:forEach begin="1" end="${cycleUpto}" varStatus="count">
-														<c:choose>
-																	
-														
-															<c:when test="${editQuality.exInt1==count.index}">
-															
-															<option Selected value="${count.index}">${count.index}</option><br/>
-															
-															</c:when>
-														<c:otherwise>
-														
-															   <option value="${count.index}">${count.index}</option><br/>
-														</c:otherwise>
-													
-														</c:choose>
-															</c:forEach>
-												</select> <span class="error_form text-danger"
-													id="qualityInitId_field" style="display: none;">Please
-													select quality initiative name</span>
+												<label class="control-label col-sm-2" for="Cycle">
+													Cycle<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-6">
+													<select id="cycle" name="cycle" class="form-control"
+														title="Cycle">
+														<c:forEach begin="1" end="${cycleUpto}" varStatus="count">
+															<c:choose>
 
 
+																<c:when test="${editQuality.exInt1==count.index}">
+
+																	<option Selected value="${count.index}">${count.index}</option>
+																	<br />
+
+																</c:when>
+																<c:otherwise>
+
+																	<option value="${count.index}">${count.index}</option>
+																	<br />
+																</c:otherwise>
+
+															</c:choose>
+														</c:forEach>
+													</select> <span class="error_form text-danger"
+														id="qualityInitId_field" style="display: none;">Please
+														select quality initiative name</span>
+
+
+												</div>
 											</div>
 										</div>
-										</div>
-										
+
 										<div id="validity_div" style="display: none">
-										
-											<div class="form-group" >
-												<label class="control-label col-sm-2" for="planning">Validity 
+
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="planning">Validity
 													<span class="text-danger">*</span>
 												</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control" onchange="trim(this)"
-														placeholder="Validity" autocomplete="off" id="validity"
-														name="validity" value="${editQuality.autonomyValidity}">
-													<span class="error_form text-danger" id="errfield_validity"
+													<input type="text" class="form-control"
+														onchange="trim(this)" placeholder="Validity"
+														autocomplete="off" id="validity" name="validity"
+														value="${editQuality.autonomyValidity}"> <span
+														class="error_form text-danger" id="errfield_validity"
 														style="display: none;">Please enter Validity.</span>
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
-											<label class="control-label col-sm-2" id="certf_date" for="fromDate">From
-												Date <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" id="certf_date"
+												for="fromDate">From Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
@@ -334,8 +352,8 @@
 										</div>
 										<div class="form-group">
 
-											<label class="control-label col-sm-2" id="exp_date" for="toDate">To
-												Date <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" id="exp_date"
+												for="toDate">To Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
 												<input type="text" class="form-control datepicker"
@@ -350,7 +368,7 @@
 
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="no_of_participant">No.
 												of Participant <span class="text-danger"></span>
@@ -891,7 +909,7 @@
     }    
 </script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	function clearDefault(a){
 		if(a.defaultValue==0)
 			{

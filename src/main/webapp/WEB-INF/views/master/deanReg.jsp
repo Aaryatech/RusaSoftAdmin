@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -98,6 +107,18 @@
 
 
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
 										<div>
 
 											<input type="hidden" class="form-control" id="dean_id"
@@ -172,11 +193,11 @@
 													</div>
 												</div>
 
-												
+
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" for="status">Highest Qualification
-														<span class="text-danger">*</span>
+													<label class="control-label col-sm-2" for="status">Highest
+														Qualification <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<select id="hod_quolf" name="quolif" class="form-control">
@@ -207,12 +228,13 @@
 														Date <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-3">
-														<input type="text" class="form-control datepicker" data-end-date="0d"
-															id="join_date" autocomplete="off" onchange="trim(this)"
-															onkeypress='return restrictAlphabets(event)' data-format="dd-mm-yyyy"
-															name="join_date" placeholder="dd/mm/yyyy"
-															value="${dean.joiningDate}"> <span
-															class="error_form text-danger" id="error_formfield4"
+														<input type="text" class="form-control datepicker"
+															data-end-date="0d" id="join_date" autocomplete="off"
+															onchange="trim(this)"
+															onkeypress='return restrictAlphabets(event)'
+															data-format="dd-mm-yyyy" name="join_date"
+															placeholder="dd/mm/yyyy" value="${dean.joiningDate}">
+														<span class="error_form text-danger" id="error_formfield4"
 															style="display: none;">Please enter joining date</span>
 													</div>
 													<label class="control-label col-sm-3" for="planning"
@@ -230,46 +252,44 @@
 															name="is_registration" value="0"
 															onclick="setDate(this.value)">No
 															 --%>
-															<c:choose>
+														<c:choose>
 															<c:when test="${dean.facultyId>0}">
-															<c:choose>
-															<c:when test="${dean.isWorking==1}">
-															<input type="radio" id="is_registration"
-														checked
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes<input
-															type="radio" id="is_registration"
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
+																<c:choose>
+																	<c:when test="${dean.isWorking==1}">
+																		<input type="radio" id="is_registration" checked
+																			name="is_registration" value="1"
+																			onclick="setDate(this.value)">Yes<input
+																			type="radio" id="is_registration"
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No
 															</c:when>
-															<c:otherwise>
-															<input type="radio" id="is_registration"
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes<input
-															type="radio" checked id="is_registration"
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
+																	<c:otherwise>
+																		<input type="radio" id="is_registration"
+																			name="is_registration" value="1"
+																			onclick="setDate(this.value)">Yes<input
+																			type="radio" checked id="is_registration"
+																			name="is_registration" value="0"
+																			onclick="setDate(this.value)">No
 															</c:otherwise>
-															</c:choose>
+																</c:choose>
 															</c:when>
-															
-															
+
+
 															<c:otherwise>
-															
-															<input type="radio" id="is_registration"
-														 checked
-															name="is_registration" value="1"
-															onclick="setDate(this.value)">Yes<input
-															type="radio" id="is_registration"
-															name="is_registration" value="0"
-															onclick="setDate(this.value)">No
+
+																<input type="radio" id="is_registration" checked
+																	name="is_registration" value="1"
+																	onclick="setDate(this.value)">Yes<input
+																	type="radio" id="is_registration"
+																	name="is_registration" value="0"
+																	onclick="setDate(this.value)">No
 															
 															</c:otherwise>
-															
-															
-															</c:choose>
-															
-															
+
+
+														</c:choose>
+
+
 														<%-- <c:choose>
 															<c:when test="${dean.facultyId==0}">
 
@@ -320,7 +340,8 @@
 													</label>
 													<div class="col-sm-3">
 														<input type="text" class="form-control datepicker"
-															id="acc_off_relDate" data-end-date="0d" data-format="dd-mm-yyyy"
+															id="acc_off_relDate" data-end-date="0d"
+															data-format="dd-mm-yyyy"
 															onkeypress='return restrictAlphabets(event)'
 															autocomplete="off" name="acc_off_relDate"
 															placeholder="Relieving Date"
@@ -329,67 +350,74 @@
 															style="display: none;">Please enter relieving date</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-											
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH State<span
-												class="text-danger">*</span>
-											</label>
 
-											<div class="col-sm-3">
-												
-													<c:if test="${dean.facultyId>0}">
-													Yes <input type="radio" ${dean.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" ${dean.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-													<c:if test="${dean.facultyId==0}">
-													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	value="1" onclick="selcState()"> 
-													No<input type="radio"  name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-												<span class="error_form text-danger" id="is_state_same_field"
-													style="display: none;">Please select
-													permanent/correspondence address same or not.</span>
+													<label class="control-label col-sm-2" for="is_add_same">Belongs
+														to MH State<span class="text-danger">*</span>
+													</label>
 
-											</div>	
-										</div>
-										
-											<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-10">
-												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
-														<c:choose>
-														<c:when test="${dean.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
-														</c:choose>
-													</c:forEach>
- 
- 	
-												</select> <span class="error_form text-danger" id="quolf_field"
-													style="display: none;">Please select highest
-													qualification</span>
-											</div>
-										</div>
-												
+													<div class="col-sm-3">
+
+														<c:if test="${dean.facultyId>0}">
+													Yes <input type="radio"
+																${dean.isSame == 1 ? 'checked' : ''}
+																name="is_state_same" id="is_state_same" value="1"
+																onclick="selcState()"> 
+													No<input type="radio" ${dean.isSame == 0 ? 'checked' : ''}
+																name="is_state_same" id="is_state_same" value="0"
+																onclick="selcState()">
+														</c:if>
+
+														<c:if test="${dean.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same"
+																id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" name="is_state_same"
+																id="is_state_same" value="0" onclick="selcState()">
+														</c:if>
+
+														<span class="error_form text-danger"
+															id="is_state_same_field" style="display: none;">Please
+															select permanent/correspondence address same or not.</span>
+
+													</div>
+												</div>
+
+												<div class="form-group" style="display: none;" id="state">
+
+													<label class="control-label col-sm-2" for="state_id">State
+														<span class="text-danger">*</span>
+													</label>
+													<div class="col-sm-10">
+														<select id="state_id" name="state_id" class="form-control">
+
+															<c:forEach items="${sessionScope.stateList}" var="state">
+																<c:choose>
+																	<c:when
+																		test="${dean.facultyMiddelName == state.stateId}">
+																		<option selected value="${state.stateId}">${state.stateName}</option>
+																	</c:when>
+
+																	<c:otherwise>
+																		<option value="${state.stateId}">${state.stateName}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+
+
+														</select> <span class="error_form text-danger" id="quolf_field"
+															style="display: none;">Please select highest
+															qualification</span>
+													</div>
+												</div>
+
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">Contact
 														No <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
 														<input type="text" maxlength="10" class="form-control"
-															id="contact_no"
-															name="contact_no" placeholder="Mobile No"
+															id="contact_no" name="contact_no" placeholder="Mobile No"
 															autocomplete="off" value="${dean.contactNo}"
 															onchange="trim(this)"
 															onkeypress='return restrictAlphabets(event)'> <span
@@ -415,7 +443,7 @@
 															Verification mail will be sent on this Email id</p>
 													</div>
 												</div>
-												
+
 
 												<%-- <div class="form-group">
 													<label class="control-label col-sm-2" for="smallheading">Roles
@@ -468,7 +496,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
-<script type="text/javascript"> 
+	<script type="text/javascript"> 
  function selcState() {
 	// alert("Hi");
 	 var isSamState = $("input[name='is_state_same']:checked"). val();

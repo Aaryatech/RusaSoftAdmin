@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -100,19 +106,33 @@
 										method="post" name="formidhere" id="formidhere">
 
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="finantialYear">Title Of
-											Programme<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="finantialYear">Title
+												Of Programme<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" placeholder="Title Of Programme"
-													autocomplete="off" id="ttlProgm" name="ttlProgm"
+												<input type="text" class="form-control"
+													placeholder="Title Of Programme" autocomplete="off"
+													id="ttlProgm" name="ttlProgm"
 													value="${editValue.activityName}"> <span
 													class="error_form text-danger" id="error_ttlProgm"
-													style="display: none;">Please enter title of programme.</span>
+													style="display: none;">Please enter title of
+													programme.</span>
 
 											</div>
-											
+
 											<%-- <div class="col-sm-6">
 												<select id="title12" name="title" class="form-control">
 													<option value="-1">Select</option>
@@ -140,15 +160,14 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" placeholder="dd-mm-yyyy"
-													autocomplete="off" id="fromDate" name="fromDate"
-													value="${editValue.activityFromdt}"> <span
-													class="error_form text-danger" id="error_fromDate"
-													style="display: none;">Please enter from date.</span>
-													
-												<span
+												<input type="text" class="form-control datepicker"
+													placeholder="dd-mm-yyyy" autocomplete="off" id="fromDate"
+													name="fromDate" value="${editValue.activityFromdt}">
+												<span class="error_form text-danger" id="error_fromDate"
+													style="display: none;">Please enter from date.</span> <span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">from date must be smaller than to date.</span>
+													style="display: none;">from date must be smaller
+													than to date.</span>
 
 											</div>
 										</div>
@@ -159,15 +178,14 @@
 												Date <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" placeholder="dd-mm-yyyy"
-													autocomplete="off" id="toDate" name="toDate"
-													value="${editValue.activityTodt}"> <span
+												<input type="text" class="form-control datepicker"
+													placeholder="dd-mm-yyyy" autocomplete="off" id="toDate"
+													name="toDate" value="${editValue.activityTodt}"> <span
 													class="error_form text-danger" id="error_toDate"
-													style="display: none;">Please enter to date.</span>
-													
-												<span
+													style="display: none;">Please enter to date.</span> <span
 													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">to date must be greater than from date.</span>
+													style="display: none;">to date must be greater than
+													from date.</span>
 											</div>
 										</div>
 
@@ -199,8 +217,9 @@
 													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
 												</button>
 
-												<a href="${pageContext.request.contextPath}/showHumanValues"><button id="sub_button_cancel"
-														type="button" class="btn btn-primary">
+												<a href="${pageContext.request.contextPath}/showHumanValues"><button
+														id="sub_button_cancel" type="button"
+														class="btn btn-primary">
 														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
 													</button></a>
 											</div>
@@ -234,18 +253,27 @@
 
 
 	<script type="text/javascript">
-	  $('#fromDate').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	  
-	  $('#toDate').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	  
-	  $('#participant').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	  
+		$('#fromDate').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#toDate').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#participant').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
 		$(function() {
 
 			$('.datepicker').datepicker({
@@ -365,7 +393,7 @@
 												} else {
 													$("#error_toDate").hide();
 												}
-												
+
 												if (!$("#participant").val()) {
 
 													isError = true;
@@ -373,36 +401,46 @@
 
 													$("#participant").addClass(
 															"has-error")
-													$("#error_participant").show();
+													$("#error_participant")
+															.show();
 
 												} else {
-													$("#error_participant").hide();
+													$("#error_participant")
+															.hide();
 												}
-												
-												var from_date = document.getElementById("fromDate").value;
-						         				var to_date = document.getElementById("toDate").value;
-						         				var x=0;
-						         				
-						         				
-						         		        var fromdate = from_date.split('-');
-						         		        from_date = new Date();
-						         		        from_date.setFullYear(fromdate[2],fromdate[1]-1,fromdate[0]);
-						         		        var todate = to_date.split('-');
-						         		        to_date = new Date();
-						         		        to_date.setFullYear(todate[2],todate[1]-1,todate[0]);
-						         		        if (from_date > to_date ) 
-						         		        {
-						         		           /// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
-													$("#error_fromToDate").show();
-						    					 	$("#error_toToDate").show();
-						    					 	$("#error_fromDate").hide();
-						    					 	$("#error_toDate").hide();
-						         		            return false;
-						         		           
-						         		        }else {
-						         					$("#error_fromToDate").hide();
-						         					$("#error_toToDate").hide();
-						         				}
+
+												var from_date = document
+														.getElementById("fromDate").value;
+												var to_date = document
+														.getElementById("toDate").value;
+												var x = 0;
+
+												var fromdate = from_date
+														.split('-');
+												from_date = new Date();
+												from_date.setFullYear(
+														fromdate[2],
+														fromdate[1] - 1,
+														fromdate[0]);
+												var todate = to_date.split('-');
+												to_date = new Date();
+												to_date.setFullYear(todate[2],
+														todate[1] - 1,
+														todate[0]);
+												if (from_date > to_date) {
+													/// alert("Invalid Date Range!\nStart Date cannot be after End Date!")
+													$("#error_fromToDate")
+															.show();
+													$("#error_toToDate").show();
+													$("#error_fromDate").hide();
+													$("#error_toDate").hide();
+													return false;
+
+												} else {
+													$("#error_fromToDate")
+															.hide();
+													$("#error_toToDate").hide();
+												}
 
 												if (!isError) {
 

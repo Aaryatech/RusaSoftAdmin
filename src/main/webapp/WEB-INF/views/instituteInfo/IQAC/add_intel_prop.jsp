@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -96,8 +105,21 @@
 										action="${pageContext.request.contextPath}/insertPropIntelRight"
 										method="post" name="form_sample_2" id="form_sample_2">
 
-										<input type="hidden" id="intel_id" name="intel_id"
-											placeholder="" value="${intelProp.conId}">
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="intel_id" name="intel_id" placeholder=""
+											value="${intelProp.conId}">
 
 										<div class="form-group">
 											<label class="control-label col-sm-3" for="initiativeName">
@@ -114,36 +136,37 @@
 													IPR-Industry-Academic Initiative Practice.</span>
 											</div>
 										</div>
-										
-											<div class="form-group">
-												<label class="control-label col-sm-3" for="reportLink">
-													Link to the Activity Reports on the Website<span
-													class="text-danger">*</span>
-												</label>
-												<div class="col-sm-6">
-													<input type="text" class="form-control" id="reports_link"
-														name="reports_link" autocomplete="off" onchange="trim(this)"
-														placeholder="Link to the Activity Reports on the Website"
-														value="${intelProp.reportLink}"> <span
-														class="error_form text-danger" id="error_linkfield"
-														style="display: none;">Please enter
-														link to the activity reports on the website.</span>
-												</div>
-										</div>
-										
-											<div class="form-group">
-											<label class="control-label col-sm-3" for="establishedDate">
-												IPR Establishment Date<span
+
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="reportLink">
+												Link to the Activity Reports on the Website<span
 												class="text-danger">*</span>
 											</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control datepicker" id="estb_date"
-													data-end-date="0d" data-format="dd-mm-yyyy"
+												<input type="text" class="form-control" id="reports_link"
+													name="reports_link" autocomplete="off"
+													onchange="trim(this)"
+													placeholder="Link to the Activity Reports on the Website"
+													value="${intelProp.reportLink}"> <span
+													class="error_form text-danger" id="error_linkfield"
+													style="display: none;">Please enter link to the
+													activity reports on the website.</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-3" for="establishedDate">
+												IPR Establishment Date<span class="text-danger">*</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control datepicker"
+													id="estb_date" data-end-date="0d" data-format="dd-mm-yyyy"
 													name="estb_date" autocomplete="off" onchange="trim(this)"
 													placeholder="IPR Establishment Date"
 													value="${intelProp.establishDate}"> <span
 													class="error_form text-danger" id="error_estbDate"
-													style="display: none;">Please enter IPR establishment date.</span>
+													style="display: none;">Please enter IPR
+													establishment date.</span>
 											</div>
 										</div>
 
@@ -161,11 +184,10 @@
 													name="fromDate" data-format="dd-mm-yyyy"
 													value="${intelProp.conFromdt}" onchange="trim(this)">
 												<span class="error_form text-danger" id="error_formfield2"
-													style="display: none;">Please enter from date.</span>
-												
-												<span
+													style="display: none;">Please enter from date.</span> <span
 													class="error_form text-danger" id="error_fromToDate"
-													style="display: none;">From Date must be smaller than To Date </span>
+													style="display: none;">From Date must be smaller
+													than To Date </span>
 											</div>
 										</div>
 
@@ -178,17 +200,14 @@
 												<input type="text" class="form-control datepicker"
 													onchange="trim(this)" placeholder="To Date"
 													autocomplete="off" id="toDate" name="toDate"
-													value="${intelProp.conTodt}" data-format="dd-mm-yyyy"> <span
-													class="error_form text-danger" id="error_formfield3"
-													style="display: none;">Please enter to date.</span> 
-													<span
+													value="${intelProp.conTodt}" data-format="dd-mm-yyyy">
+												<span class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter to date.</span> <span
 													class="error_form text-danger" id="error_formfield0"
 													style="display: none;">to date must be greater than
-													from date.</span>
-													
-													<span
-													class="error_form text-danger" id="error_toToDate"
-													style="display: none;">To Date must be greater than From Date </span>
+													from date.</span> <span class="error_form text-danger"
+													id="error_toToDate" style="display: none;">To Date
+													must be greater than From Date </span>
 											</div>
 										</div>
 

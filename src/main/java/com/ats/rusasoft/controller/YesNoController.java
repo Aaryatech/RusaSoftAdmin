@@ -104,7 +104,7 @@ public class YesNoController {
 			model.addObject("yesNoMasterList", yesNoMasterList);
 			model.addObject("sectionList", sectionList);
 			model.addObject("instituteYesNoList", instituteYesNoList);
-			
+
 			model.addObject("msg", Constants.sucess_msg);
 			model.addObject("msg", Constants.fail_msg);
 
@@ -289,125 +289,135 @@ public class YesNoController {
 	public String submitYesNo(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		int selectYestNoLib = 0;
-		int selectYestNoInfra = 0;	
+		int selectYestNoInfra = 0;
 		try {
-			
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int count = Integer.parseInt(request.getParameter("srindex"));
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<InstituteYesNo> save = new ArrayList<>();
+			if (token.trim().equals(key.trim())) {
 
-			for (int i = 0; i < yesNoMasterList.size(); i++) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterList.get(i).getYesnoId()));
-				int find = 0;
+				int count = Integer.parseInt(request.getParameter("srindex"));
 
-				for (int j = 0; j < instituteYesNoList.size(); j++) {
+				List<InstituteYesNo> save = new ArrayList<>();
 
-					if (instituteYesNoList.get(j).getYesnoId() == yesNoMasterList.get(i).getYesnoId()) {
-						find = 1;
+				for (int i = 0; i < yesNoMasterList.size(); i++) {
 
-						if (value == 1) {
-							instituteYesNoList.get(j).setMakerUserId(userObj.getUserId());
-							instituteYesNoList.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoList.get(j).setInstYesnoResponse(
-									XssEscapeUtils.jsoupParse(request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId())));
-						} else {
+					int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterList.get(i).getYesnoId()));
+					int find = 0;
 
-							instituteYesNoList.get(j).setDelStatus(0);
+					for (int j = 0; j < instituteYesNoList.size(); j++) {
+
+						if (instituteYesNoList.get(j).getYesnoId() == yesNoMasterList.get(i).getYesnoId()) {
+							find = 1;
+
+							if (value == 1) {
+								instituteYesNoList.get(j).setMakerUserId(userObj.getUserId());
+								instituteYesNoList.get(j).setMakerDatetime(sf.format(date));
+								instituteYesNoList.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+										request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId())));
+							} else {
+
+								instituteYesNoList.get(j).setDelStatus(0);
+							}
+
 						}
-
 					}
-				}
 
-				if (find == 0 && value == 1) {
+					if (find == 0 && value == 1) {
 
-					InstituteYesNo instituteYesNo = new InstituteYesNo();
-					instituteYesNo.setDelStatus(1);
-					instituteYesNo.setIsActive(1);
-					instituteYesNo.setMakerUserId(userObj.getUserId());
-					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-					instituteYesNo.setMakerDatetime(sf.format(date));
-					instituteYesNo.setYesnoPagecode(yesNoMasterList.get(i).getYesnoPagecode());
-					instituteYesNo.setSectionCode(yesNoMasterList.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(
-							XssEscapeUtils.jsoupParse(request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId())));
-					instituteYesNo.setYearId(acYearId);
-					instituteYesNo.setYesnoId(yesNoMasterList.get(i).getYesnoId());
-					instituteYesNoList.add(instituteYesNo);
-				}
-
-			}
-
-			for (int j = 0; j < instituteYesNoList.size(); j++) {
-
-				if (instituteYesNoList.get(j).getYesnoId() == 0) {
-					int value = Integer.parseInt(
-							request.getParameter("dynamicprevyesno" + instituteYesNoList.get(j).getInstYesnoId()));
-
-					if (value == 1) {
-						instituteYesNoList.get(j).setMakerUserId(userObj.getUserId());
-						instituteYesNoList.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoList.get(j).setInstYesnoResponse(request
-								.getParameter("dynamicprevyesnovalue" + instituteYesNoList.get(j).getInstYesnoId()));
-					} else {
-
-						instituteYesNoList.get(j).setDelStatus(0);
-					}
-				}
-
-			}
-
-			if (count != 0) {
-				for (int j = 1; j <= count; j++) {
-
-					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
-
-					if (value == 1) {
 						InstituteYesNo instituteYesNo = new InstituteYesNo();
 						instituteYesNo.setDelStatus(1);
 						instituteYesNo.setIsActive(1);
 						instituteYesNo.setMakerUserId(userObj.getUserId());
 						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
 						instituteYesNo.setMakerDatetime(sf.format(date));
-						instituteYesNo.setYesnoPagecode("PAGE7");//Sachin changed from PAGE1 to PAGE7 on 18 July2019 Akshay Said to do
-						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
-						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+						instituteYesNo.setYesnoPagecode(yesNoMasterList.get(i).getYesnoPagecode());
+						instituteYesNo.setSectionCode(yesNoMasterList.get(i).getYesnoSeccode());
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+								request.getParameter("respnsevalue" + yesNoMasterList.get(i).getYesnoId())));
 						instituteYesNo.setYearId(acYearId);
+						instituteYesNo.setYesnoId(yesNoMasterList.get(i).getYesnoId());
 						instituteYesNoList.add(instituteYesNo);
 					}
+
 				}
 
-			}
-			List<InstituteYesNo> instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
-					instituteYesNoList, List.class);
-			
-			System.out.println("instList-------"+instituteYesNo);
-			if(instituteYesNo!=null) {
-				System.out.println("1");
-				session.setAttribute("sucesMsg", "Record Saved Successfully");
-			}
-			else {
-				System.out.println("2");
-				session.setAttribute("failMsg", "Record Failed to Save");
-			}
-			try {
-				selectYestNoLib = Integer.parseInt(request.getParameter("selectYestNoLib"));
-			} catch (Exception e) {
-				selectYestNoLib = 0;
-			}
-			try {
-			selectYestNoInfra = Integer.parseInt(request.getParameter("selectYestNoInfra"));
-			}catch (Exception e) {
-				selectYestNoInfra = 0;
+				for (int j = 0; j < instituteYesNoList.size(); j++) {
 
-			}
+					if (instituteYesNoList.get(j).getYesnoId() == 0) {
+						int value = Integer.parseInt(
+								request.getParameter("dynamicprevyesno" + instituteYesNoList.get(j).getInstYesnoId()));
 
+						if (value == 1) {
+							instituteYesNoList.get(j).setMakerUserId(userObj.getUserId());
+							instituteYesNoList.get(j).setMakerDatetime(sf.format(date));
+							instituteYesNoList.get(j).setInstYesnoResponse(request.getParameter(
+									"dynamicprevyesnovalue" + instituteYesNoList.get(j).getInstYesnoId()));
+						} else {
+
+							instituteYesNoList.get(j).setDelStatus(0);
+						}
+					}
+
+				}
+
+				if (count != 0) {
+					for (int j = 1; j <= count; j++) {
+
+						int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
+
+						if (value == 1) {
+							InstituteYesNo instituteYesNo = new InstituteYesNo();
+							instituteYesNo.setDelStatus(1);
+							instituteYesNo.setIsActive(1);
+							instituteYesNo.setMakerUserId(userObj.getUserId());
+							instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+							instituteYesNo.setMakerDatetime(sf.format(date));
+							instituteYesNo.setYesnoPagecode("PAGE7");// Sachin changed from PAGE1 to PAGE7 on 18
+																		// July2019 Akshay Said to do
+							instituteYesNo.setSectionCode("other");
+							instituteYesNo.setInstYesnoResponse(
+									XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+							instituteYesNo.setYesnoDynamicTitle(
+									XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+							instituteYesNo.setYearId(acYearId);
+							instituteYesNoList.add(instituteYesNo);
+						}
+					}
+
+				}
+				List<InstituteYesNo> instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+						instituteYesNoList, List.class);
+
+				System.out.println("instList-------" + instituteYesNo);
+				if (instituteYesNo != null) {
+					System.out.println("1");
+					session.setAttribute("sucesMsg", "Record Saved Successfully");
+				} else {
+					System.out.println("2");
+					session.setAttribute("failMsg", "Record Failed to Save");
+				}
+				try {
+					selectYestNoLib = Integer.parseInt(request.getParameter("selectYestNoLib"));
+				} catch (Exception e) {
+					selectYestNoLib = 0;
+				}
+				try {
+					selectYestNoInfra = Integer.parseInt(request.getParameter("selectYestNoInfra"));
+				} catch (Exception e) {
+					selectYestNoInfra = 0;
+
+				}
+			} else {
+
+				return "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
 
 			System.err.println("exception In submitYesNo at YesNo Contr" + e.getMessage());
@@ -415,20 +425,19 @@ public class YesNoController {
 			e.printStackTrace();
 
 		}
-			if (selectYestNoLib == 1) {
-				session.setAttribute("successMsg", Constants.sucess_msg);
-				return "redirect:/selectYestNoLib";
-				
-			}
-			else if (selectYestNoInfra == 1) {
-				session.setAttribute("successMsg", Constants.sucess_msg);
-				return "redirect:/selectYestNoInfra";
-				
-			}else {
-				session.setAttribute("successMsg", Constants.fail_msg);
-				return "redirect:/selectYestNo";
-				
-			}
+		if (selectYestNoLib == 1) {
+			session.setAttribute("successMsg", Constants.sucess_msg);
+			return "redirect:/selectYestNoLib";
+
+		} else if (selectYestNoInfra == 1) {
+			session.setAttribute("successMsg", Constants.sucess_msg);
+			return "redirect:/selectYestNoInfra";
+
+		} else {
+			session.setAttribute("successMsg", Constants.fail_msg);
+			return "redirect:/selectYestNo";
+
+		}
 
 	}
 
@@ -516,7 +525,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("transpernt");
 				instituteYesNo.setYearId(acYearId);
 
-				//System.out.println(instituteYesNo);
+				// System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -568,7 +577,7 @@ public class YesNoController {
 		// map.add("secCode", "tab1");
 		InstituteYesNo editInstyn = restTemplate.postForObject(Constants.url + "/getInstituteYesNoById", map,
 				InstituteYesNo.class);
-		//System.out.println("res=" + editInstyn.toString());
+		// System.out.println("res=" + editInstyn.toString());
 
 		model.addObject("editYN", editInstyn);
 		return editInstyn;
@@ -583,7 +592,7 @@ public class YesNoController {
 		LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 		int acYearId = (Integer) session.getAttribute("acYearId");
 		// int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
-		//System.out.println("Id:" + instYesnoId);
+		// System.out.println("Id:" + instYesnoId);
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("id", instYesnoId);
 
@@ -592,7 +601,7 @@ public class YesNoController {
 		// map.add("secCode", "tab1");
 		InstituteYesNo editInstyn = restTemplate.postForObject(Constants.url + "/getInstituteYesNoById", map,
 				InstituteYesNo.class);
-		//System.out.println("res=" + editInstyn.toString());
+		// System.out.println("res=" + editInstyn.toString());
 
 		model.addObject("editYN", editInstyn);
 		return model;
@@ -668,7 +677,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Time bound");
 				instituteYesNo.setYearId(acYearId);
 
-				//System.out.println(instituteYesNo);
+				// System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -771,7 +780,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Efficient");
 				instituteYesNo.setYearId(acYearId);
 
-				//System.out.println(instituteYesNo);
+				// System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -870,14 +879,14 @@ public class YesNoController {
 			tempFb = new ArrayList<>(Arrays.asList(instituteYesNo));
 			model.addObject("tempFb", tempFb);
 
-			//System.out.println("tempFb:::" + tempFb.toString());
+			// System.out.println("tempFb:::" + tempFb.toString());
 			try {
 				if (tempFb.size() > 0) {
-					//System.out.println("size gt 0");
+					// System.out.println("size gt 0");
 					model.addObject("isEdit", 1);
 
 				} else {
-					//System.out.println("is edit 0 in else part");
+					// System.out.println("is edit 0 in else part");
 					model.addObject("isEdit", 0);
 				}
 			} catch (Exception e) {
@@ -901,101 +910,111 @@ public class YesNoController {
 
 	@RequestMapping(value = "/insertInstStakeholder", method = RequestMethod.POST)
 	public String insertLeaveStructure(HttpServletRequest request, HttpServletResponse response) {
+		String returnString = null;
 		try {
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-			int isEdit=0;
+
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
-			try {
-				 isEdit=Integer.parseInt(request.getParameter("isEdit"));
-			}
-			catch(Exception e) {
-				isEdit=0;
-			}
-			
-			
-			//System.out.println("isEdit:::" +isEdit );
-			
-			
-			InstStakeholderFeedback head = null;
-			proofList = new ArrayList<>();
-		
-			for (int i = 0; i < stfbList.size(); i++) {
-				head = new InstStakeholderFeedback();
-				if (Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())) == 1) {
- 					//System.out.println("yes " + i);
- 					if(isEdit==1) {
- 						for (int j = 0; j < tempFb.size(); j++) {
- 							if(tempFb.get(j).getFbFromId()== stfbList.get(i).getFeedbackId()) {
- 						
- 						head.setStakFbId(tempFb.get(j).getStakFbId());
- 							break;
- 							}
- 							} 
- 					}
- 					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
-					head.setFbFromId(stfbList.get(i).getFeedbackId());
-					head.setFbProcess(request.getParameter("fbProcess" + stfbList.get(i).getFeedbackId()));
-					head.setYrSem(Integer.parseInt(request.getParameter("quolif" + stfbList.get(i).getFeedbackId())));
-					head.setDelStatus(1);
-					head.setIsActive(1);
-					head.setMakerUserId(userObj.getUserId());
-					head.setMakerDatetime(sf.format(date));
-					head.setInstituteId(userObj.getGetData().getUserInstituteId());
-					head.setAcYearId(acYearId);
-					head.setExInt1(1);
-					head.setExInt2(1);
-					head.setExVar1("NA");
-					head.setExVar2("NA");
-					//System.out.println("head in yes:::" + head.toString());
-					
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+				int isEdit = 0;
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				try {
+					isEdit = Integer.parseInt(request.getParameter("isEdit"));
+				} catch (Exception e) {
+					isEdit = 0;
 				}
 
-				else {
-					if(isEdit==1) {
- 						for (int j = 0; j < tempFb.size(); j++) {
- 							if(tempFb.get(j).getFbFromId()== stfbList.get(i).getFeedbackId()) {
- 						
- 						head.setStakFbId(tempFb.get(j).getStakFbId());
- 							break;
- 							}
- 							} 
- 					}
-					head.setFbYesno(Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
-					//System.out.println("no " + i);
-					head.setFbFromId(stfbList.get(i).getFeedbackId());
-					head.setFbProcess("NA");
-					head.setYrSem(0);
-					head.setDelStatus(1);
-					head.setIsActive(1);
-					head.setMakerUserId(userObj.getUserId());
-					head.setMakerDatetime(sf.format(date));
-					head.setInstituteId(userObj.getGetData().getUserInstituteId());
-					head.setAcYearId(acYearId);
-					head.setExInt1(1);
-					head.setExInt2(1);
-					head.setExVar1("NA");
-					head.setExVar2("NA");
-					System.err.println("head in no:::" + head.toString());
-				}
-				proofList.add(head);
-			}
-			 
-			
-			//System.out.println("proofList is :::" + proofList.toString());
-			InstStakeholderFeedback[] instituteYesNo = restTemplate
-					.postForObject(Constants.url + "/saveInstStakeholder", proofList, InstStakeholderFeedback[].class);
-			if (instituteYesNo != null) {
-				session.setAttribute("successMsg", "Record Inserted Successfully");
-			} else {
-				session.setAttribute("errorMsg", "Failed to Insert Record");
-			}
-			
-			
+				// System.out.println("isEdit:::" +isEdit );
 
-			
+				InstStakeholderFeedback head = null;
+				proofList = new ArrayList<>();
+
+				for (int i = 0; i < stfbList.size(); i++) {
+					head = new InstStakeholderFeedback();
+					if (Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())) == 1) {
+						// System.out.println("yes " + i);
+						if (isEdit == 1) {
+							for (int j = 0; j < tempFb.size(); j++) {
+								if (tempFb.get(j).getFbFromId() == stfbList.get(i).getFeedbackId()) {
+
+									head.setStakFbId(tempFb.get(j).getStakFbId());
+									break;
+								}
+							}
+						}
+						head.setFbYesno(
+								Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
+						head.setFbFromId(stfbList.get(i).getFeedbackId());
+						head.setFbProcess(request.getParameter("fbProcess" + stfbList.get(i).getFeedbackId()));
+						head.setYrSem(
+								Integer.parseInt(request.getParameter("quolif" + stfbList.get(i).getFeedbackId())));
+						head.setDelStatus(1);
+						head.setIsActive(1);
+						head.setMakerUserId(userObj.getUserId());
+						head.setMakerDatetime(sf.format(date));
+						head.setInstituteId(userObj.getGetData().getUserInstituteId());
+						head.setAcYearId(acYearId);
+						head.setExInt1(1);
+						head.setExInt2(1);
+						head.setExVar1("NA");
+						head.setExVar2("NA");
+						// System.out.println("head in yes:::" + head.toString());
+
+					}
+
+					else {
+						if (isEdit == 1) {
+							for (int j = 0; j < tempFb.size(); j++) {
+								if (tempFb.get(j).getFbFromId() == stfbList.get(i).getFeedbackId()) {
+
+									head.setStakFbId(tempFb.get(j).getStakFbId());
+									break;
+								}
+							}
+						}
+						head.setFbYesno(
+								Integer.parseInt(request.getParameter("yesNo" + stfbList.get(i).getFeedbackId())));
+						// System.out.println("no " + i);
+						head.setFbFromId(stfbList.get(i).getFeedbackId());
+						head.setFbProcess("NA");
+						head.setYrSem(0);
+						head.setDelStatus(1);
+						head.setIsActive(1);
+						head.setMakerUserId(userObj.getUserId());
+						head.setMakerDatetime(sf.format(date));
+						head.setInstituteId(userObj.getGetData().getUserInstituteId());
+						head.setAcYearId(acYearId);
+						head.setExInt1(1);
+						head.setExInt2(1);
+						head.setExVar1("NA");
+						head.setExVar2("NA");
+						System.err.println("head in no:::" + head.toString());
+					}
+					proofList.add(head);
+				}
+
+				// System.out.println("proofList is :::" + proofList.toString());
+				InstStakeholderFeedback[] instituteYesNo = restTemplate.postForObject(
+						Constants.url + "/saveInstStakeholder", proofList, InstStakeholderFeedback[].class);
+				if (instituteYesNo != null) {
+					session.setAttribute("successMsg", "Record Inserted Successfully");
+				} else {
+					session.setAttribute("errorMsg", "Failed to Insert Record");
+				}
+
+				returnString = "redirect:/selectYestNoPageSecond";
+			}
+
+			else {
+
+				returnString = "redirect:/accessDenied";
+			}
 
 		} catch (
 
@@ -1006,10 +1025,9 @@ public class YesNoController {
 
 		}
 
-		return "redirect:/selectYestNoPageSecond";
+		return returnString;
 
 	}
-
 
 	@RequestMapping(value = "/selectYestNoPageThird", method = RequestMethod.GET)
 	public ModelAndView selectYestNoPageThird(HttpServletRequest request, HttpServletResponse response) {
@@ -1066,108 +1084,121 @@ public class YesNoController {
 	@RequestMapping(value = "/submitYesNoPageThird", method = RequestMethod.POST)
 	public String submitYesNoPageThird(HttpServletRequest request, HttpServletResponse response) {
 
+		String returnString = null;
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int count = Integer.parseInt(request.getParameter("srindex"));
+			if (token.trim().equals(key.trim())) {
 
-			List<InstituteYesNo> save = new ArrayList<>();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			for (int i = 0; i < yesNoMasterListPage3.size(); i++) {
+				int count = Integer.parseInt(request.getParameter("srindex"));
 
-				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterListPage3.get(i).getYesnoId()));
-				int find = 0;
+				List<InstituteYesNo> save = new ArrayList<>();
 
-				for (int j = 0; j < instituteYesNoListPage3.size(); j++) {
+				for (int i = 0; i < yesNoMasterListPage3.size(); i++) {
 
-					if (instituteYesNoListPage3.get(j).getYesnoId() == yesNoMasterListPage3.get(i).getYesnoId()) {
-						find = 1;
+					int value = Integer
+							.parseInt(request.getParameter("yesNo" + yesNoMasterListPage3.get(i).getYesnoId()));
+					int find = 0;
 
-						if (value == 1) {
-							instituteYesNoListPage3.get(j).setMakerUserId(userObj.getUserId());
-							instituteYesNoListPage3.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage3.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId())));
-						} else {
+					for (int j = 0; j < instituteYesNoListPage3.size(); j++) {
 
-							instituteYesNoListPage3.get(j).setDelStatus(0);
+						if (instituteYesNoListPage3.get(j).getYesnoId() == yesNoMasterListPage3.get(i).getYesnoId()) {
+							find = 1;
+
+							if (value == 1) {
+								instituteYesNoListPage3.get(j).setMakerUserId(userObj.getUserId());
+								instituteYesNoListPage3.get(j).setMakerDatetime(sf.format(date));
+								instituteYesNoListPage3.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(request
+										.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId())));
+							} else {
+
+								instituteYesNoListPage3.get(j).setDelStatus(0);
+							}
+
 						}
-
 					}
-				}
 
-				if (find == 0 && value == 1) {
+					if (find == 0 && value == 1) {
 
-					InstituteYesNo instituteYesNo = new InstituteYesNo();
-					instituteYesNo.setDelStatus(1);
-					instituteYesNo.setIsActive(1);
-					instituteYesNo.setMakerUserId(userObj.getUserId());
-					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-					instituteYesNo.setMakerDatetime(sf.format(date));
-					instituteYesNo.setYesnoPagecode(yesNoMasterListPage3.get(i).getYesnoPagecode());
-					instituteYesNo.setSectionCode(yesNoMasterListPage3.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(
-							XssEscapeUtils.jsoupParse(request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId())));
-					instituteYesNo.setYearId(acYearId);
-					instituteYesNo.setYesnoId(yesNoMasterListPage3.get(i).getYesnoId());
-					instituteYesNoListPage3.add(instituteYesNo);
-				}
-
-			}
-
-			for (int j = 0; j < instituteYesNoListPage3.size(); j++) {
-
-				if (instituteYesNoListPage3.get(j).getYesnoId() == 0) {
-					int value = Integer.parseInt(
-							request.getParameter("dynamicprevyesno" + instituteYesNoListPage3.get(j).getInstYesnoId()));
-
-					if (value == 1) {
-						instituteYesNoListPage3.get(j).setMakerUserId(userObj.getUserId());
-						instituteYesNoListPage3.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage3.get(j).setInstYesnoResponse(request.getParameter(
-								"dynamicprevyesnovalue" + instituteYesNoListPage3.get(j).getInstYesnoId()));
-					} else {
-
-						instituteYesNoListPage3.get(j).setDelStatus(0);
-					}
-				}
-
-			}
-
-			if (count != 0) {
-				for (int j = 1; j <= count; j++) {
-
-					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
-
-					if (value == 1) {
 						InstituteYesNo instituteYesNo = new InstituteYesNo();
 						instituteYesNo.setDelStatus(1);
 						instituteYesNo.setIsActive(1);
 						instituteYesNo.setMakerUserId(userObj.getUserId());
 						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
 						instituteYesNo.setMakerDatetime(sf.format(date));
-						instituteYesNo.setYesnoPagecode("PAGE3");
-						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
-						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+						instituteYesNo.setYesnoPagecode(yesNoMasterListPage3.get(i).getYesnoPagecode());
+						instituteYesNo.setSectionCode(yesNoMasterListPage3.get(i).getYesnoSeccode());
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+								request.getParameter("respnsevalue" + yesNoMasterListPage3.get(i).getYesnoId())));
 						instituteYesNo.setYearId(acYearId);
+						instituteYesNo.setYesnoId(yesNoMasterListPage3.get(i).getYesnoId());
 						instituteYesNoListPage3.add(instituteYesNo);
 					}
+
 				}
 
-			}
-			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
-					instituteYesNoListPage3, InstituteYesNo[].class);
-			if(instituteYesNo!=null) {
-				session.setAttribute("successMsg", "New Record Saved Sucessfully");
-			}
-			else {
-				session.setAttribute("successMsg", "Record Not Saved");
+				for (int j = 0; j < instituteYesNoListPage3.size(); j++) {
+
+					if (instituteYesNoListPage3.get(j).getYesnoId() == 0) {
+						int value = Integer.parseInt(request
+								.getParameter("dynamicprevyesno" + instituteYesNoListPage3.get(j).getInstYesnoId()));
+
+						if (value == 1) {
+							instituteYesNoListPage3.get(j).setMakerUserId(userObj.getUserId());
+							instituteYesNoListPage3.get(j).setMakerDatetime(sf.format(date));
+							instituteYesNoListPage3.get(j).setInstYesnoResponse(request.getParameter(
+									"dynamicprevyesnovalue" + instituteYesNoListPage3.get(j).getInstYesnoId()));
+						} else {
+
+							instituteYesNoListPage3.get(j).setDelStatus(0);
+						}
+					}
+
+				}
+
+				if (count != 0) {
+					for (int j = 1; j <= count; j++) {
+
+						int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
+
+						if (value == 1) {
+							InstituteYesNo instituteYesNo = new InstituteYesNo();
+							instituteYesNo.setDelStatus(1);
+							instituteYesNo.setIsActive(1);
+							instituteYesNo.setMakerUserId(userObj.getUserId());
+							instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+							instituteYesNo.setMakerDatetime(sf.format(date));
+							instituteYesNo.setYesnoPagecode("PAGE3");
+							instituteYesNo.setSectionCode("other");
+							instituteYesNo.setInstYesnoResponse(
+									XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+							instituteYesNo.setYesnoDynamicTitle(
+									XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+							instituteYesNo.setYearId(acYearId);
+							instituteYesNoListPage3.add(instituteYesNo);
+						}
+					}
+
+				}
+				InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+						instituteYesNoListPage3, InstituteYesNo[].class);
+				if (instituteYesNo != null) {
+					session.setAttribute("successMsg", "New Record Saved Sucessfully");
+				} else {
+					session.setAttribute("successMsg", "Record Not Saved");
+				}
+				returnString = "redirect:/selectYestNoPageThird";
+			} else {
+
+				returnString = "redirect:/accessDenied";
 			}
 		} catch (Exception e) {
 
@@ -1177,7 +1208,7 @@ public class YesNoController {
 
 		}
 
-		return "redirect:/selectYestNoPageThird";
+		return returnString;
 
 	}
 
@@ -1236,111 +1267,126 @@ public class YesNoController {
 	@RequestMapping(value = "/submitYesNoPageFourth", method = RequestMethod.POST)
 	public String submitYesNoPageFourth(HttpServletRequest request, HttpServletResponse response) {
 
+		String returnString = null;
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			int count = Integer.parseInt(request.getParameter("srindex"));
+			if (token.trim().equals(key.trim())) {
 
-			List<InstituteYesNo> save = new ArrayList<>();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			for (int i = 0; i < yesNoMasterListPage4.size(); i++) {
+				int count = Integer.parseInt(request.getParameter("srindex"));
 
-				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterListPage4.get(i).getYesnoId()));
-				int find = 0;
+				List<InstituteYesNo> save = new ArrayList<>();
 
-				for (int j = 0; j < instituteYesNoListPage4.size(); j++) {
+				for (int i = 0; i < yesNoMasterListPage4.size(); i++) {
 
-					if (instituteYesNoListPage4.get(j).getYesnoId() == yesNoMasterListPage4.get(i).getYesnoId()) {
-						find = 1;
+					int value = Integer
+							.parseInt(request.getParameter("yesNo" + yesNoMasterListPage4.get(i).getYesnoId()));
+					int find = 0;
 
-						if (value == 1) {
-							instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
-							instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage4.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId())));
-						} else {
+					for (int j = 0; j < instituteYesNoListPage4.size(); j++) {
 
-							instituteYesNoListPage4.get(j).setDelStatus(0);
+						if (instituteYesNoListPage4.get(j).getYesnoId() == yesNoMasterListPage4.get(i).getYesnoId()) {
+							find = 1;
+
+							if (value == 1) {
+								instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
+								instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
+								instituteYesNoListPage4.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(request
+										.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId())));
+							} else {
+
+								instituteYesNoListPage4.get(j).setDelStatus(0);
+							}
+
 						}
-
 					}
-				}
 
-				if (find == 0 && value == 1) {
+					if (find == 0 && value == 1) {
 
-					InstituteYesNo instituteYesNo = new InstituteYesNo();
-					instituteYesNo.setDelStatus(1);
-					instituteYesNo.setIsActive(1);
-					instituteYesNo.setMakerUserId(userObj.getUserId());
-					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-					instituteYesNo.setMakerDatetime(sf.format(date));
-					instituteYesNo.setYesnoPagecode(yesNoMasterListPage4.get(i).getYesnoPagecode());
-					instituteYesNo.setSectionCode(yesNoMasterListPage4.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
-							request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId())));
-					instituteYesNo.setYearId(acYearId);
-					instituteYesNo.setYesnoId(yesNoMasterListPage4.get(i).getYesnoId());
-					instituteYesNoListPage4.add(instituteYesNo);
-				}
-
-			}
-
-			for (int j = 0; j < instituteYesNoListPage4.size(); j++) {
-
-				if (instituteYesNoListPage4.get(j).getYesnoId() == 0) {
-					int value = Integer.parseInt(
-							request.getParameter("dynamicprevyesno" + instituteYesNoListPage4.get(j).getInstYesnoId()));
-
-					if (value == 1) {
-						instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
-						instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage4.get(j).setInstYesnoResponse(request.getParameter(
-								"dynamicprevyesnovalue" + instituteYesNoListPage4.get(j).getInstYesnoId()));
-					} else {
-
-						instituteYesNoListPage4.get(j).setDelStatus(0);
-					}
-				}
-
-			}
-
-			if (count != 0) {
-				for (int j = 1; j <= count; j++) {
-
-					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
-
-					if (value == 1) {
 						InstituteYesNo instituteYesNo = new InstituteYesNo();
 						instituteYesNo.setDelStatus(1);
 						instituteYesNo.setIsActive(1);
 						instituteYesNo.setMakerUserId(userObj.getUserId());
 						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
 						instituteYesNo.setMakerDatetime(sf.format(date));
-						instituteYesNo.setYesnoPagecode("PAGE3");
-						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
-						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+						instituteYesNo.setYesnoPagecode(yesNoMasterListPage4.get(i).getYesnoPagecode());
+						instituteYesNo.setSectionCode(yesNoMasterListPage4.get(i).getYesnoSeccode());
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+								request.getParameter("respnsevalue" + yesNoMasterListPage4.get(i).getYesnoId())));
 						instituteYesNo.setYearId(acYearId);
+						instituteYesNo.setYesnoId(yesNoMasterListPage4.get(i).getYesnoId());
 						instituteYesNoListPage4.add(instituteYesNo);
 					}
+
 				}
 
-			}
-			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
-					instituteYesNoListPage4, InstituteYesNo[].class);
+				for (int j = 0; j < instituteYesNoListPage4.size(); j++) {
 
-			if(instituteYesNo!=null) {
-				session.setAttribute("successMsg", Constants.sucess_msg);
+					if (instituteYesNoListPage4.get(j).getYesnoId() == 0) {
+						int value = Integer.parseInt(request
+								.getParameter("dynamicprevyesno" + instituteYesNoListPage4.get(j).getInstYesnoId()));
+
+						if (value == 1) {
+							instituteYesNoListPage4.get(j).setMakerUserId(userObj.getUserId());
+							instituteYesNoListPage4.get(j).setMakerDatetime(sf.format(date));
+							instituteYesNoListPage4.get(j).setInstYesnoResponse(request.getParameter(
+									"dynamicprevyesnovalue" + instituteYesNoListPage4.get(j).getInstYesnoId()));
+						} else {
+
+							instituteYesNoListPage4.get(j).setDelStatus(0);
+						}
+					}
+
+				}
+
+				if (count != 0) {
+					for (int j = 1; j <= count; j++) {
+
+						int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
+
+						if (value == 1) {
+							InstituteYesNo instituteYesNo = new InstituteYesNo();
+							instituteYesNo.setDelStatus(1);
+							instituteYesNo.setIsActive(1);
+							instituteYesNo.setMakerUserId(userObj.getUserId());
+							instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+							instituteYesNo.setMakerDatetime(sf.format(date));
+							instituteYesNo.setYesnoPagecode("PAGE3");
+							instituteYesNo.setSectionCode("other");
+							instituteYesNo.setInstYesnoResponse(
+									XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+							instituteYesNo.setYesnoDynamicTitle(
+									XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+							instituteYesNo.setYearId(acYearId);
+							instituteYesNoListPage4.add(instituteYesNo);
+						}
+					}
+
+				}
+				InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+						instituteYesNoListPage4, InstituteYesNo[].class);
+
+				if (instituteYesNo != null) {
+					session.setAttribute("successMsg", Constants.sucess_msg);
+				} else {
+					session.setAttribute("successMsg", Constants.fail_msg);
+				}
+
+				returnString = "redirect:/selectYestNoPageFourth";
+
+			} else {
+
+				returnString = "redirect:/accessDenied";
 			}
-			else {
-				session.setAttribute("successMsg", Constants.fail_msg);
-			}
-			
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -1349,7 +1395,7 @@ public class YesNoController {
 
 		}
 
-		return "redirect:/selectYestNoPageFourth";
+		return returnString;
 
 	}
 
@@ -1408,111 +1454,125 @@ public class YesNoController {
 	@RequestMapping(value = "/submitYesNoPageFifth", method = RequestMethod.POST)
 	public String submitYesNoPageFifth(HttpServletRequest request, HttpServletResponse response) {
 
+		String returnString=null;
+		HttpSession session = request.getSession();
+		String token = request.getParameter("token");
+		String key = (String) session.getAttribute("generatedKey");
+
 		try {
+			if (token.trim().equals(key.trim())) {
 
-			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int acYearId = (Integer) session.getAttribute("acYearId");
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int count = Integer.parseInt(request.getParameter("srindex"));
+				int count = Integer.parseInt(request.getParameter("srindex"));
 
-			List<InstituteYesNo> save = new ArrayList<>();
+				List<InstituteYesNo> save = new ArrayList<>();
 
-			for (int i = 0; i < yesNoMasterListPage5.size(); i++) {
+				for (int i = 0; i < yesNoMasterListPage5.size(); i++) {
 
-				int value = Integer.parseInt(request.getParameter("yesNo" + yesNoMasterListPage5.get(i).getYesnoId()));
-				int find = 0;
+					int value = Integer
+							.parseInt(request.getParameter("yesNo" + yesNoMasterListPage5.get(i).getYesnoId()));
+					int find = 0;
 
-				for (int j = 0; j < instituteYesNoListPage5.size(); j++) {
+					for (int j = 0; j < instituteYesNoListPage5.size(); j++) {
 
-					if (instituteYesNoListPage5.get(j).getYesnoId() == yesNoMasterListPage5.get(i).getYesnoId()) {
-						find = 1;
+						if (instituteYesNoListPage5.get(j).getYesnoId() == yesNoMasterListPage5.get(i).getYesnoId()) {
+							find = 1;
 
-						if (value == 1) {
-							instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
-							instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
-							instituteYesNoListPage5.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(
-									request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId())));
-						} else {
+							if (value == 1) {
+								instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
+								instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
+								instituteYesNoListPage5.get(j).setInstYesnoResponse(XssEscapeUtils.jsoupParse(request
+										.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId())));
+							} else {
 
-							instituteYesNoListPage5.get(j).setDelStatus(0);
+								instituteYesNoListPage5.get(j).setDelStatus(0);
+							}
+
 						}
-
 					}
-				}
 
-				if (find == 0 && value == 1) {
+					if (find == 0 && value == 1) {
 
-					InstituteYesNo instituteYesNo = new InstituteYesNo();
-					instituteYesNo.setDelStatus(1);
-					instituteYesNo.setIsActive(1);
-					instituteYesNo.setMakerUserId(userObj.getUserId());
-					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-					instituteYesNo.setMakerDatetime(sf.format(date));
-					instituteYesNo.setYesnoPagecode(yesNoMasterListPage5.get(i).getYesnoPagecode());
-					instituteYesNo.setSectionCode(yesNoMasterListPage5.get(i).getYesnoSeccode());
-					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
-							request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId())));
-					instituteYesNo.setYearId(acYearId);
-					instituteYesNo.setYesnoId(yesNoMasterListPage5.get(i).getYesnoId());
-					instituteYesNoListPage5.add(instituteYesNo);
-				}
-
-			}
-
-			for (int j = 0; j < instituteYesNoListPage5.size(); j++) {
-
-				if (instituteYesNoListPage5.get(j).getYesnoId() == 0) {
-					int value = Integer.parseInt(
-							request.getParameter("dynamicprevyesno" + instituteYesNoListPage5.get(j).getInstYesnoId()));
-
-					if (value == 1) {
-						instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
-						instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
-						instituteYesNoListPage5.get(j).setInstYesnoResponse(request.getParameter(
-								"dynamicprevyesnovalue" + instituteYesNoListPage5.get(j).getInstYesnoId()));
-					} else {
-
-						instituteYesNoListPage5.get(j).setDelStatus(0);
-					}
-				}
-
-			}
-
-			if (count != 0) {
-				for (int j = 1; j <= count; j++) {
-
-					int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
-
-					if (value == 1) {
 						InstituteYesNo instituteYesNo = new InstituteYesNo();
 						instituteYesNo.setDelStatus(1);
 						instituteYesNo.setIsActive(1);
 						instituteYesNo.setMakerUserId(userObj.getUserId());
 						instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
 						instituteYesNo.setMakerDatetime(sf.format(date));
-						instituteYesNo.setYesnoPagecode("PAGE3");
-						instituteYesNo.setSectionCode("other");
-						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
-						instituteYesNo.setYesnoDynamicTitle(XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+						instituteYesNo.setYesnoPagecode(yesNoMasterListPage5.get(i).getYesnoPagecode());
+						instituteYesNo.setSectionCode(yesNoMasterListPage5.get(i).getYesnoSeccode());
+						instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(
+								request.getParameter("respnsevalue" + yesNoMasterListPage5.get(i).getYesnoId())));
 						instituteYesNo.setYearId(acYearId);
+						instituteYesNo.setYesnoId(yesNoMasterListPage5.get(i).getYesnoId());
 						instituteYesNoListPage5.add(instituteYesNo);
 					}
+
 				}
 
-			}
-			InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
-					instituteYesNoListPage5, InstituteYesNo[].class);
+				for (int j = 0; j < instituteYesNoListPage5.size(); j++) {
 
-			if(instituteYesNo!=null) {
-				session.setAttribute("successMsg", "New Record Saved Sucessfully");
+					if (instituteYesNoListPage5.get(j).getYesnoId() == 0) {
+						int value = Integer.parseInt(request
+								.getParameter("dynamicprevyesno" + instituteYesNoListPage5.get(j).getInstYesnoId()));
+
+						if (value == 1) {
+							instituteYesNoListPage5.get(j).setMakerUserId(userObj.getUserId());
+							instituteYesNoListPage5.get(j).setMakerDatetime(sf.format(date));
+							instituteYesNoListPage5.get(j).setInstYesnoResponse(request.getParameter(
+									"dynamicprevyesnovalue" + instituteYesNoListPage5.get(j).getInstYesnoId()));
+						} else {
+
+							instituteYesNoListPage5.get(j).setDelStatus(0);
+						}
+					}
+
+				}
+
+				if (count != 0) {
+					for (int j = 1; j <= count; j++) {
+
+						int value = Integer.parseInt(request.getParameter("dynamicyesno" + j));
+
+						if (value == 1) {
+							InstituteYesNo instituteYesNo = new InstituteYesNo();
+							instituteYesNo.setDelStatus(1);
+							instituteYesNo.setIsActive(1);
+							instituteYesNo.setMakerUserId(userObj.getUserId());
+							instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+							instituteYesNo.setMakerDatetime(sf.format(date));
+							instituteYesNo.setYesnoPagecode("PAGE3");
+							instituteYesNo.setSectionCode("other");
+							instituteYesNo.setInstYesnoResponse(
+									XssEscapeUtils.jsoupParse(request.getParameter("dynamicyesnovalue" + j)));
+							instituteYesNo.setYesnoDynamicTitle(
+									XssEscapeUtils.jsoupParse(request.getParameter("otherTitleName" + j)));
+							instituteYesNo.setYearId(acYearId);
+							instituteYesNoListPage5.add(instituteYesNo);
+						}
+					}
+
+				}
+				InstituteYesNo[] instituteYesNo = restTemplate.postForObject(Constants.url + "/saveYesNo",
+						instituteYesNoListPage5, InstituteYesNo[].class);
+
+				if (instituteYesNo != null) {
+					session.setAttribute("successMsg", "New Record Saved Sucessfully");
+				} else {
+					session.setAttribute("successMsg", "Record Not Saved");
+				}
+				returnString="redirect:/selectYestNoPageFifth";
 			}
+
 			else {
-				session.setAttribute("successMsg", "Record Not Saved");
+
+				returnString = "redirect:/accessDenied";
 			}
-			
+
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -1521,7 +1581,7 @@ public class YesNoController {
 
 		}
 
-		return "redirect:/selectYestNoPageFifth";
+		return  returnString;
 
 	}
 
@@ -1610,7 +1670,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Gender");
 				instituteYesNo.setYearId(acYearId);
 
-				//System.out.println(instituteYesNo);
+				// System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -1713,7 +1773,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("Environment");
 				instituteYesNo.setYearId(acYearId);
 
-				//System.out.println(instituteYesNo);
+				// System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {
@@ -1816,7 +1876,7 @@ public class YesNoController {
 				instituteYesNo.setYesnoDynamicTitle("HumanValues");
 				instituteYesNo.setYearId(acYearId);
 
-				//System.out.println(instituteYesNo);
+				// System.out.println(instituteYesNo);
 				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
 						InstituteYesNo.class);
 			} else {

@@ -163,158 +163,168 @@ public class MastersController {
 	@RequestMapping(value = "/insertHod", method = RequestMethod.POST)
 	public String insertHod(HttpServletRequest request, HttpServletResponse response) {
 
-		try {
+		HttpSession session = request.getSession();
+		String token = request.getParameter("token");
+		String key = (String) session.getAttribute("generatedKey");
 
-			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			int instituteId = (int) session.getAttribute("instituteId");
-
-			int userId = (int) session.getAttribute("userId");
-
-			int isDean = 0;
+		if (token.trim().equals(key.trim())) {
 
 			try {
-				isDean = Integer.parseInt(request.getParameter("isDean"));
-			} catch (Exception e) {
-				isDean = 0;
-			}
 
-			String roleNameList = null;
+ 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				int instituteId = (int) session.getAttribute("instituteId");
 
-			roleNameList = Constants.HOD_Role + "," + Constants.Faculty_Role;
+				int userId = (int) session.getAttribute("userId");
 
-			if (isDean == 1) {
-				roleNameList = roleNameList + "," + Constants.Dean_Role;
-			}
+				int isDean = 0;
 
-			int hodId = 0;
-			try {
-				hodId = Integer.parseInt(request.getParameter("hod_id"));
-			} catch (Exception e) {
-				hodId = 0;
-			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			map.add("roleNameList", roleNameList);
-			AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
-					AssignRoleDetailList[].class);
-			List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
-
-			String roleIds = new String();
-			for (int i = 0; i < roleIdsList.size(); i++) {
-				roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
-			}
-			System.err.println("roleIds " + roleIds);
-
-			int designation = 0;
-
-			//System.out.println("Data:" + hodId);
-			String hodName = request.getParameter("hodName");
-			//System.out.println("Data:" + hodName);
-			designation = Integer.parseInt(request.getParameter("designation"));
-			String dateOfJoin = request.getParameter("dateOfJoin");
-			String contact = request.getParameter("contactNo");
-			String email = request.getParameter("email");
-			int isState = Integer.parseInt(request.getParameter("is_state_same"));
-			String[] deptIds = request.getParameterValues("dept_id");
-			StringBuilder sb = new StringBuilder();
-
-			for (int i = 0; i < deptIds.length; i++) {
-				sb = sb.append(deptIds[i] + ",");
-
-			}
-			String deptIdList = sb.toString();
-			deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
-			int addEdit = Integer.parseInt(request.getParameter("addEdit"));
-
-			if (addEdit == 0) {
-				Staff staff = new Staff();
-
-				staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
-				staff.setCurrentDesignationId(designation);
-				staff.setDeptId(deptIdList);
-				staff.setEmail(XssEscapeUtils.jsoupParse(email));
-				staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(hodName));
-				staff.setFacultyId(hodId);
-				staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				staff.setIsSame(isState);
-				if(isState==1) {
-				staff.setFacultyMiddelName("21");		//inserted state id
-				}else {
-					staff.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
-				}			
-				
-				staff.setHightestQualificationYear(null);
-				staff.setIsAccOff(0);
-				staff.setIsDean(isDean);
-				staff.setIsFaculty(1);
-				staff.setIsHod(1);
-				staff.setIsIqac(0);
-				staff.setIsLibrarian(0);
-				staff.setIsPrincipal(0);
-
-				staff.setIsStudent(0);
-				staff.setIsWorking(1);
-				staff.setJoiningDate(dateOfJoin);
-				staff.setLastUpdatedDatetime(curDateTime);
-				staff.setMakerEnterDatetime(curDateTime);
-
-				staff.setPassword("");
-				staff.setRealivingDate(null);
-				staff.setRoleIds(roleIds);
-				staff.setTeachingTo(0);
-				staff.setType(3);
-
-				staff.setInstituteId(instituteId);
-				staff.setJoiningDate(dateOfJoin);
-				staff.setDelStatus(1);
-				staff.setIsActive(1);
-				staff.setMakerUserId(userId);
-				staff.setCheckerUserId(0);
-				staff.setCheckerDatetime(curDateTime);
-
-				staff.setExtravarchar1("NA");
-				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
-			} else {
-
-				map = new LinkedMultiValueMap<>();
-				map.add("id", hodId);
-
-				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				editHod.setFacultyFirstName(XssEscapeUtils.jsoupParse(hodName));
-				editHod.setDeptId(deptIdList);
-				editHod.setEmail(XssEscapeUtils.jsoupParse(email));
-				editHod.setFacultyId(hodId);
-				editHod.setContactNo(XssEscapeUtils.jsoupParse(contact));
-				editHod.setCurrentDesignationId(designation);
-				editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
-				
-				editHod.setIsSame(isState);
-				if(isState==1) {
-					editHod.setFacultyMiddelName("21");		//inserted state id
-				}else {
-					editHod.setFacultyMiddelName(request.getParameter("state_id"));		//inserted state id
+				try {
+					isDean = Integer.parseInt(request.getParameter("isDean"));
+				} catch (Exception e) {
+					isDean = 0;
 				}
-				editHod.setJoiningDate(dateOfJoin);
-				editHod.setIsHod(1);
-				editHod.setIsDean(1);
-				editHod.setType(3);
 
-				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
+				String roleNameList = null;
+
+				roleNameList = Constants.HOD_Role + "," + Constants.Faculty_Role;
+
+				if (isDean == 1) {
+					roleNameList = roleNameList + "," + Constants.Dean_Role;
+				}
+
+				int hodId = 0;
+				try {
+					hodId = Integer.parseInt(request.getParameter("hod_id"));
+				} catch (Exception e) {
+					hodId = 0;
+				}
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+				map.add("roleNameList", roleNameList);
+				AssignRoleDetailList[] roleArray = rest.postForObject(Constants.url + "getRoleIdsByRoleNameList", map,
+						AssignRoleDetailList[].class);
+				List<AssignRoleDetailList> roleIdsList = new ArrayList<>(Arrays.asList(roleArray));
+
+				String roleIds = new String();
+				for (int i = 0; i < roleIdsList.size(); i++) {
+					roleIds = roleIdsList.get(i).getRoleId() + "," + roleIds;
+				}
+				System.err.println("roleIds " + roleIds);
+
+				int designation = 0;
+
+				// System.out.println("Data:" + hodId);
+				String hodName = request.getParameter("hodName");
+				// System.out.println("Data:" + hodName);
+				designation = Integer.parseInt(request.getParameter("designation"));
+				String dateOfJoin = request.getParameter("dateOfJoin");
+				String contact = request.getParameter("contactNo");
+				String email = request.getParameter("email");
+				int isState = Integer.parseInt(request.getParameter("is_state_same"));
+				String[] deptIds = request.getParameterValues("dept_id");
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < deptIds.length; i++) {
+					sb = sb.append(deptIds[i] + ",");
+
+				}
+				String deptIdList = sb.toString();
+				deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+				int addEdit = Integer.parseInt(request.getParameter("addEdit"));
+
+				if (addEdit == 0) {
+					Staff staff = new Staff();
+
+					staff.setContactNo(XssEscapeUtils.jsoupParse(contact));
+					staff.setCurrentDesignationId(designation);
+					staff.setDeptId(deptIdList);
+					staff.setEmail(XssEscapeUtils.jsoupParse(email));
+					staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(hodName));
+					staff.setFacultyId(hodId);
+					staff.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+					staff.setIsSame(isState);
+					if (isState == 1) {
+						staff.setFacultyMiddelName("21"); // inserted state id
+					} else {
+						staff.setFacultyMiddelName(request.getParameter("state_id")); // inserted state id
+					}
+
+					staff.setHightestQualificationYear(null);
+					staff.setIsAccOff(0);
+					staff.setIsDean(isDean);
+					staff.setIsFaculty(1);
+					staff.setIsHod(1);
+					staff.setIsIqac(0);
+					staff.setIsLibrarian(0);
+					staff.setIsPrincipal(0);
+
+					staff.setIsStudent(0);
+					staff.setIsWorking(1);
+					staff.setJoiningDate(dateOfJoin);
+					staff.setLastUpdatedDatetime(curDateTime);
+					staff.setMakerEnterDatetime(curDateTime);
+
+					staff.setPassword("");
+					staff.setRealivingDate(null);
+					staff.setRoleIds(roleIds);
+					staff.setTeachingTo(0);
+					staff.setType(3);
+
+					staff.setInstituteId(instituteId);
+					staff.setJoiningDate(dateOfJoin);
+					staff.setDelStatus(1);
+					staff.setIsActive(1);
+					staff.setMakerUserId(userId);
+					staff.setCheckerUserId(0);
+					staff.setCheckerDatetime(curDateTime);
+
+					staff.setExtravarchar1("NA");
+					Staff hod = rest.postForObject(Constants.url + "/addNewStaff", staff, Staff.class);
+				} else {
+
+					map = new LinkedMultiValueMap<>();
+					map.add("id", hodId);
+
+					Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
+					editHod.setFacultyFirstName(XssEscapeUtils.jsoupParse(hodName));
+					editHod.setDeptId(deptIdList);
+					editHod.setEmail(XssEscapeUtils.jsoupParse(email));
+					editHod.setFacultyId(hodId);
+					editHod.setContactNo(XssEscapeUtils.jsoupParse(contact));
+					editHod.setCurrentDesignationId(designation);
+					editHod.setHighestQualification(Integer.parseInt(request.getParameter("quolif")));
+
+					editHod.setIsSame(isState);
+					if (isState == 1) {
+						editHod.setFacultyMiddelName("21"); // inserted state id
+					} else {
+						editHod.setFacultyMiddelName(request.getParameter("state_id")); // inserted state id
+					}
+					editHod.setJoiningDate(dateOfJoin);
+					editHod.setIsHod(1);
+					editHod.setIsDean(1);
+					editHod.setType(3);
+
+					Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editHod, Staff.class);
+
+				}
+
+				int isView = Integer.parseInt(request.getParameter("is_view"));
+				if (isView == 1)
+					redirect = "redirect:/hodList";
+				else
+					redirect = "redirect:/hodRegistration";
+			} catch (Exception e) {
+
+				System.err.println("exception In hodRegistration at Masters Contr" + e.getMessage());
+				e.printStackTrace();
 
 			}
-
-			int isView = Integer.parseInt(request.getParameter("is_view"));
-			if (isView == 1)
-				redirect = "redirect:/hodList";
-			else
-				redirect = "redirect:/hodRegistration";
-		} catch (Exception e) {
-
-			System.err.println("exception In hodRegistration at Masters Contr" + e.getMessage());
-			e.printStackTrace();
-
+		}
+ 		else {
+			System.err.println("in else");
+			redirect = "redirect:/accessDenied";
 		}
 		return redirect;
 
@@ -420,7 +430,7 @@ public class MastersController {
 				map.add("id", facultyId);
 
 				Staff editHod = rest.postForObject(Constants.url + "/getStaffById", map, Staff.class);
-				//System.out.println("deptIdList 1:" + editHod.getDeptId());
+				// System.out.println("deptIdList 1:" + editHod.getDeptId());
 
 				model.addObject("editHod", editHod);
 				model.addObject("addEdit", "1");
@@ -470,7 +480,7 @@ public class MastersController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("hodIds");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -510,13 +520,12 @@ public class MastersController {
 		ModelAndView model = new ModelAndView("master/addFaculty");
 		model.addObject("title", "Add Department");
 		try {
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("deptId", 0);
 
-
 			Dept dept = new Dept();
-		
+
 			model.addObject("dept", dept);
 
 		} catch (Exception e) {
@@ -663,7 +672,7 @@ public class MastersController {
 
 				}
 				if (delete.isError() == false) {
-					//System.out.println(" delete   Accessable ");
+					// System.out.println(" delete Accessable ");
 					model.addObject("deleteAccess", 0);
 
 				}

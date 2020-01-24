@@ -89,8 +89,9 @@ public class ResearchAndInnovation {
 			Info delete = AccessControll.checkAccess("showExtensionActivity", "showExtensionActivity", "0", "0", "0",
 					"1", newModuleList);
 
+			
 			if (add.isError() == false) {
-				//System.out.println(" add   Accessable ");
+				System.out.println(" add   Accessable ");
 				model.addObject("addAccess", 0);
 
 			}

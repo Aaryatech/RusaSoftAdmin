@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -106,9 +115,20 @@
 
 
 
-										<input type="hidden" id="faculty_id" name="faculty_id"
-											value="${staff.facultyId}"> <input type="hidden"
-											id="addEdit" name="addEdit" value="${addEdit}">
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token"> <input type="hidden"
+											id="faculty_id" name="faculty_id" value="${staff.facultyId}">
+										<input type="hidden" id="addEdit" name="addEdit"
+											value="${addEdit}">
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_name">Faculty
@@ -128,7 +148,7 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="status">Department
-											 <span class="text-danger">*</span>
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="dept" name="dept" class="form-control">
@@ -154,8 +174,8 @@
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="status">Highest Qualification
-											<span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="status">Highest
+												Qualification <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="hod_quolf" name="hod_quolf" class="form-control">
@@ -182,8 +202,8 @@
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="year"
-												style="text-align: left;">
-												Qualification Year<span class="text-danger">*</span>
+												style="text-align: left;"> Qualification Year<span
+												class="text-danger">*</span>
 											</label>
 
 											<div class="col-sm-10">
@@ -331,7 +351,8 @@
 												<div class="col-sm-3">
 													<input type="text" class="form-control datepicker"
 														id="relDate" value="${staff.realivingDate}"
-														onchange="trim(this)" data-end-date="0d" data-format="dd-mm-yyyy"
+														onchange="trim(this)" data-end-date="0d"
+														data-format="dd-mm-yyyy"
 														onkeypress='return restrictAlphabets(event)'
 														name="acc_off_relDate" autocomplete="off"
 														placeholder="dd/mm/yyyy"> <span
@@ -368,62 +389,68 @@
 										</div>
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="is_add_same">Belongs to 
-												 MH State <span
-												class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="is_add_same">Belongs
+												to MH State <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-													<c:if test="${staff.facultyId>0}">
-													Yes <input type="radio" ${staff.isSame == 1 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="1" onclick="selcState()"> 
-													No<input type="radio" ${staff.isSame == 0 ? 'checked' : ''} name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-													<c:if test="${staff.facultyId==0}">
-													Yes <input type="radio" checked name="is_state_same" id="is_state_same"	value="1" onclick="selcState()"> 
-													No<input type="radio"  name="is_state_same" id="is_state_same" value="0" onclick="selcState()">
-													</c:if>
-													
-												<span class="error_form text-danger" id="is_state_same_field"
-													style="display: none;">Please select
-													permanent/correspondence address same or not.</span>
+												<c:if test="${staff.facultyId>0}">
+													Yes <input type="radio"
+														${staff.isSame == 1 ? 'checked' : ''} name="is_state_same"
+														id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" ${staff.isSame == 0 ? 'checked' : ''}
+														name="is_state_same" id="is_state_same" value="0"
+														onclick="selcState()">
+												</c:if>
+
+												<c:if test="${staff.facultyId==0}">
+													Yes <input type="radio" checked name="is_state_same"
+														id="is_state_same" value="1" onclick="selcState()"> 
+													No<input type="radio" name="is_state_same"
+														id="is_state_same" value="0" onclick="selcState()">
+												</c:if>
+
+												<span class="error_form text-danger"
+													id="is_state_same_field" style="display: none;">Please
+													select permanent/correspondence address same or not.</span>
 
 											</div>
 										</div>
-										
+
 										<div class="form-group" style="display: none;" id="state">
-										 
-											<label class="control-label col-sm-2" for="state_id">State <span class="text-danger">*</span>
+
+											<label class="control-label col-sm-2" for="state_id">State
+												<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="state_id" name="state_id" class="form-control">
-												
-													 <c:forEach items="${sessionScope.stateList}" var="state">
+
+													<c:forEach items="${sessionScope.stateList}" var="state">
 														<c:choose>
-														<c:when test="${staff.facultyMiddelName == state.stateId}">
-															<option selected value="${state.stateId}">${state.stateName}</option>
-														</c:when>
-														
-														<c:otherwise>
-															<option value="${state.stateId}">${state.stateName}</option>
-														</c:otherwise>
+															<c:when
+																test="${staff.facultyMiddelName == state.stateId}">
+																<option selected value="${state.stateId}">${state.stateName}</option>
+															</c:when>
+
+															<c:otherwise>
+																<option value="${state.stateId}">${state.stateName}</option>
+															</c:otherwise>
 														</c:choose>
 													</c:forEach>
- 
- 	
+
+
 												</select> <span class="error_form text-danger" id="quolf_field"
 													style="display: none;">Please select highest
 													qualification</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="page_order">Contact
 												No <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text"
-													onchange="trim(this)" maxlength="10" class="form-control"
-													id="contact_no"
+												<input type="text" onchange="trim(this)" maxlength="10"
+													class="form-control" id="contact_no"
 													onkeypress='return restrictAlphabets(event)'
 													name="contact_no" placeholder="Mobile Number"
 													value="${staff.contactNo}" autocomplete="off"> <span
@@ -491,21 +518,21 @@
 
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-<script type="text/javascript"> 
- function selcState() {
-	// alert("Hi");
-	 var isSamState = $("input[name='is_state_same']:checked"). val();
-	// alert(isSamState);
-	 
-	 if(isSamState==0){
-		 document.getElementById("state").style.display = "block";
-	 }else{
-		 document.getElementById("state").style.display = "none";
-	 }
-}
-</script>
-	
+
+	<script type="text/javascript">
+		function selcState() {
+			// alert("Hi");
+			var isSamState = $("input[name='is_state_same']:checked").val();
+			// alert(isSamState);
+
+			if (isSamState == 0) {
+				document.getElementById("state").style.display = "block";
+			} else {
+				document.getElementById("state").style.display = "none";
+			}
+		}
+	</script>
+
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -794,51 +821,54 @@
 									//alert("data" + data);
 
 									//alert("Data  " +JSON.stringify(data));
-									if(data.facultyId>0){
+									if (data.facultyId > 0) {
 										document.getElementById("faculty_id").value = data.facultyId;
-										document.getElementById("faculty_first_name").value = data.facultyFirstName;
-										document.getElementById("yr_highest_qualification_acqrd").value = data.hightestQualificationYear;
-										
-										
+										document
+												.getElementById("faculty_first_name").value = data.facultyFirstName;
+										document
+												.getElementById("yr_highest_qualification_acqrd").value = data.hightestQualificationYear;
+
 										document.getElementById("dateOfJoin").value = data.joiningDate;
 										document.getElementById("relDate").value = data.realivingDate;
 										document.getElementById("email").value = data.email;
 										document.getElementById("contactNo").value = data.contactNo;
-										
-									/* document.getElementById("hod_quolf").value=data.highestQualification;
-									$("#hod_quolf").trigger("chosen:updated");
-										
-									document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
-									$("#designation").trigger("chosen:updated");
-									var temp = new Array();
 
-									temp = (data.deptId).split(",");
-									//alert(temp);
-									$("#dept").val(temp);
-									$("#dept").trigger("chosen:updated"); */
-								
-									document.getElementById("designation").value=data.currentDesignationId;
-									$("#designation").trigger("chosen:updated");
-									//single select
-									document.getElementById("hod_quolf").value=data.highestQualification;
-									$("#hod_quolf").trigger("chosen:updated");
-									//multiple select
-								 	var temp = new Array();
-								 	temp = (data.deptId).split(",");
-									  $('#dept').val(temp);
-									  $('#dept').trigger('change'); // Notify any JS components that the value changed
-}else{
-	/* document.getElementById("faculty_id").value = 0;
-	document.getElementById("faculty_first_name").value = "";
-	document.getElementById("yr_highest_qualification_acqrd").value = "";
-	document.getElementById("dateOfJoin").value = "";
-	document.getElementById("email").value = "";
-	document.getElementById("contactNo").value = "";
-	document.getElementById("dept").value = 0;
-	document.getElementById("hod_quolf").value = 0;
-	document.getElementById("designation").value = 0; */
-	
-}
+										/* document.getElementById("hod_quolf").value=data.highestQualification;
+										$("#hod_quolf").trigger("chosen:updated");
+											
+										document.getElementById("designation").options.selectedIndex = data.currentDesignationId;
+										$("#designation").trigger("chosen:updated");
+										var temp = new Array();
+
+										temp = (data.deptId).split(",");
+										//alert(temp);
+										$("#dept").val(temp);
+										$("#dept").trigger("chosen:updated"); */
+
+										document.getElementById("designation").value = data.currentDesignationId;
+										$("#designation").trigger(
+												"chosen:updated");
+										//single select
+										document.getElementById("hod_quolf").value = data.highestQualification;
+										$("#hod_quolf").trigger(
+												"chosen:updated");
+										//multiple select
+										var temp = new Array();
+										temp = (data.deptId).split(",");
+										$('#dept').val(temp);
+										$('#dept').trigger('change'); // Notify any JS components that the value changed
+									} else {
+										/* document.getElementById("faculty_id").value = 0;
+										document.getElementById("faculty_first_name").value = "";
+										document.getElementById("yr_highest_qualification_acqrd").value = "";
+										document.getElementById("dateOfJoin").value = "";
+										document.getElementById("email").value = "";
+										document.getElementById("contactNo").value = "";
+										document.getElementById("dept").value = 0;
+										document.getElementById("hod_quolf").value = 0;
+										document.getElementById("designation").value = 0; */
+
+									}
 
 								});
 		}
