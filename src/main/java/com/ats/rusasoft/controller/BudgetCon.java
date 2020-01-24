@@ -175,81 +175,89 @@ public class BudgetCon {
 
 		String redirect = null;
 		try {
-
-			RestTemplate restTemplate = new RestTemplate();
-
-			map = new LinkedMultiValueMap<String, Object>();
-
-			int physicalFacilityBudgetId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				physicalFacilityBudgetId = Integer.parseInt(request.getParameter("physicalFacilityBudgetId"));
-			} catch (Exception e) {
-				physicalFacilityBudgetId = 0;
-			}
-
-			System.err.println("physicalFacilityBudgetId id  " + physicalFacilityBudgetId);
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info aceess = null;
+				RestTemplate restTemplate = new RestTemplate();
 
-			if (physicalFacilityBudgetId == 0) {
+				map = new LinkedMultiValueMap<String, Object>();
 
-				aceess = AccessControll.checkAccess("insertPhyFacilityBudget", "budgetPhysicalFacility", "0", "1", "0",
-						"0", newModuleList);
+				int physicalFacilityBudgetId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				try {
+					physicalFacilityBudgetId = Integer.parseInt(request.getParameter("physicalFacilityBudgetId"));
+				} catch (Exception e) {
+					physicalFacilityBudgetId = 0;
+				}
+
+				System.err.println("physicalFacilityBudgetId id  " + physicalFacilityBudgetId);
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info aceess = null;
+
+				if (physicalFacilityBudgetId == 0) {
+
+					aceess = AccessControll.checkAccess("insertPhyFacilityBudget", "budgetPhysicalFacility", "0", "1",
+							"0", "0", newModuleList);
+				} else {
+
+					aceess = AccessControll.checkAccess("insertPhyFacilityBudget", "budgetPhysicalFacility", "0", "0",
+							"1", "0", newModuleList);
+
+				}
+
+				if (aceess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+					PhysicalFacilityBudget budget = new PhysicalFacilityBudget();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					budget.setAcYearId((int) session.getAttribute("acYearId"));
+					budget.setAddBy(userObj.getUserId());
+					budget.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+					budget.setAddDatetime(curDateTime);
+
+					budget.setPhysicalFacilityBudgetId(physicalFacilityBudgetId);
+
+					budget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
+					budget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
+					budget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
+					budget.setPhysicalFacilityBudgetTitle(
+							XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
+
+					int exInt1 = 0;
+					budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
+					budget.setExInt2(exInt1);
+
+					budget.setExVar1(request.getParameter("funding_from"));
+					budget.setExVar2(request.getParameter("otherSource"));
+
+					budget.setIsActive(1);
+					budget.setDelStatus(1);
+
+					PhysicalFacilityBudget budgetRes = restTemplate.postForObject(
+							Constants.url + "savePhysicalFacilityBudget", budget, PhysicalFacilityBudget.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/budgetPhysicalFacility";
+					else
+						redirect = "redirect:/budgetAddPhysicalFacility";
+				}
 			} else {
-
-				aceess = AccessControll.checkAccess("insertPhyFacilityBudget", "budgetPhysicalFacility", "0", "0", "1",
-						"0", newModuleList);
-
-			}
-
-			if (aceess.isError() == true) {
+				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
-				PhysicalFacilityBudget budget = new PhysicalFacilityBudget();
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				budget.setAcYearId((int) session.getAttribute("acYearId"));
-				budget.setAddBy(userObj.getUserId());
-				budget.setInstituteId(userObj.getGetData().getUserInstituteId());
-
-				budget.setAddDatetime(curDateTime);
-
-				budget.setPhysicalFacilityBudgetId(physicalFacilityBudgetId);
-
-				budget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
-				budget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
-				budget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				budget.setPhysicalFacilityBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
-
-				int exInt1 = 0;
-				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
-				budget.setExInt2(exInt1);
-				
-				budget.setExVar1(request.getParameter("funding_from"));
-				budget.setExVar2(request.getParameter("otherSource"));
-
-				budget.setIsActive(1);
-				budget.setDelStatus(1);
-
-				PhysicalFacilityBudget budgetRes = restTemplate.postForObject(
-						Constants.url + "savePhysicalFacilityBudget", budget, PhysicalFacilityBudget.class);
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/budgetPhysicalFacility";
-				else
-					redirect = "redirect:/budgetAddPhysicalFacility";
 			}
 
 		} catch (Exception e) {

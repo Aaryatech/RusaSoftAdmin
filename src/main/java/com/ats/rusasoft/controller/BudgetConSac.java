@@ -230,7 +230,6 @@ public class BudgetConSac {
 
 	}
 
-	// insertInfraBudget
 
 	@RequestMapping(value = "/insertInfraBudget", method = RequestMethod.POST)
 	public String insertInfraBudget(HttpServletRequest request, HttpServletResponse response) {
@@ -239,81 +238,92 @@ public class BudgetConSac {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			map = new LinkedMultiValueMap<String, Object>();
-
-			int infraBudgetId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				infraBudgetId = Integer.parseInt(request.getParameter("infraBudgetId"));
-			} catch (Exception e) {
-				infraBudgetId = 0;
-			}
-
-			System.err.println("infraBudgetId id  " + infraBudgetId);
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info aceess = null;
+				RestTemplate restTemplate = new RestTemplate();
 
-			if (infraBudgetId == 0) {
+				map = new LinkedMultiValueMap<String, Object>();
 
-				aceess = AccessControll.checkAccess("insertInfraBudget", "budgetInfrastructureFacility", "0", "1", "0",
-						"0", newModuleList);
+				int infraBudgetId = 0;
+				try {
+					infraBudgetId = Integer.parseInt(request.getParameter("infraBudgetId"));
+				} catch (Exception e) {
+					infraBudgetId = 0;
+				}
+
+				//System.err.println("infraBudgetId id  " + infraBudgetId);
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info aceess = null;
+
+				if (infraBudgetId == 0) {
+
+					aceess = AccessControll.checkAccess("insertInfraBudget", "budgetInfrastructureFacility", "0", "1",
+							"0", "0", newModuleList);
+				} else {
+
+					aceess = AccessControll.checkAccess("insertInfraBudget", "budgetInfrastructureFacility", "0", "0",
+							"1", "0", newModuleList);
+
+				}
+				// aceess.setError(false);// comment this
+
+				if (aceess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+					InfraStructureBudget infraBudget = new InfraStructureBudget();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					infraBudget.setAcYearId((int) session.getAttribute("acYearId"));
+					infraBudget.setAddBy(userObj.getUserId());
+					infraBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+					infraBudget.setAddDatetime(curDateTime);
+
+					infraBudget.setInfraBudgetId(infraBudgetId);
+
+					infraBudget.setBudgetAllocated(
+							Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("budget_allocated"))));
+					infraBudget.setBudgetUtilized(
+							Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("budget_utilized"))));
+					infraBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
+					infraBudget
+							.setInfraBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
+
+					int exInt1 = 0;
+					infraBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_expd")));
+					infraBudget.setExInt2(exInt1);
+
+					infraBudget.setExVar1(request.getParameter("funding_from")); // Source of Funding
+					infraBudget.setExVar2(request.getParameter("otherSource")); // Other Source of Funding
+
+					infraBudget.setIsActive(1);
+					infraBudget.setDelStatus(1);
+
+					InfraStructureBudget infraBudgetRes = restTemplate.postForObject(
+							Constants.url + "saveInfraStructureBudget", infraBudget, InfraStructureBudget.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/budgetInfrastructureFacility";
+					else
+						redirect = "redirect:/budgetAddInfrastructureFacility";
+				}
 			} else {
-
-				aceess = AccessControll.checkAccess("insertInfraBudget", "budgetInfrastructureFacility", "0", "0", "1",
-						"0", newModuleList);
-
-			}
-			// aceess.setError(false);// comment this
-
-			if (aceess.isError() == true) {
+				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
-				InfraStructureBudget infraBudget = new InfraStructureBudget();
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				infraBudget.setAcYearId((int) session.getAttribute("acYearId"));
-				infraBudget.setAddBy(userObj.getUserId());
-				infraBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
-
-				infraBudget.setAddDatetime(curDateTime);
-
-				infraBudget.setInfraBudgetId(infraBudgetId);
-
-				infraBudget.setBudgetAllocated(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("budget_allocated"))));
-				infraBudget.setBudgetUtilized(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("budget_utilized"))));
-				infraBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				infraBudget.setInfraBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
-
-				int exInt1 = 0;
-				infraBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_expd")));
-				infraBudget.setExInt2(exInt1);
-				
-				infraBudget.setExVar1(request.getParameter("funding_from")); // Source of Funding
-				infraBudget.setExVar2(request.getParameter("otherSource"));	 // Other Source of Funding
-
-				infraBudget.setIsActive(1);
-				infraBudget.setDelStatus(1);
-
-				InfraStructureBudget infraBudgetRes = restTemplate.postForObject(
-						Constants.url + "saveInfraStructureBudget", infraBudget, InfraStructureBudget.class);
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/budgetInfrastructureFacility";
-				else
-					redirect = "redirect:/budgetAddInfrastructureFacility";
 			}
 
 		} catch (Exception e) {
@@ -321,7 +331,7 @@ public class BudgetConSac {
 			e.printStackTrace();
 		}
 
-		return redirect;// "redirect:/showDeptList";
+		return redirect;
 
 	}
 
@@ -570,6 +580,12 @@ public class BudgetConSac {
 		ModelAndView model = null;
 		String redirect = null;
 		try {
+			
+			HttpSession session = request.getSession();
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -583,8 +599,6 @@ public class BudgetConSac {
 			}
 
 			System.err.println("infraBudgetId id  " + libBudgetId);
-
-			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -647,17 +661,20 @@ public class BudgetConSac {
 				else
 					redirect = "redirect:/budgetAddOnLibrary";
 			}
+			
+			}else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 			System.err.println("Exce in save insertLibBudget  " + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return redirect;// "redirect:/showDeptList";
-
+		return redirect;
 	}
 
-	// showEditLibBudget
 
 	@RequestMapping(value = "/showEditLibBudget", method = RequestMethod.POST)
 	public ModelAndView showEditLibBudget(HttpServletRequest request, HttpServletResponse response) {
